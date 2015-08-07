@@ -26,16 +26,13 @@
 			
 	<mvc:annotation-driven />
 	
-	<bean name="beanFactory" class="com.hbgz.system.pub.util.BeanFactoryHelper"/>
+	<bean name="beanFactory" class="com.rise.pub.util.BeanFactoryHelper"/>
 			
 	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="defaultErrorView" value="error"/>
 		<property name="exceptionMappings">
 			<props>
-				<prop key="com.hbgz.system.pub.exception.ControllerException">error</prop>
-				<prop key="com.hbgz.system.pub.exception.ServiceException">error</prop>
-				<prop key="com.hbgz.system.pub.exception.DaoException">error</prop>
-            	<prop key="java.lang.Exception">error</prop>
+            	<prop key="java.lang.Exception">common/error</prop>
 			</props>
 		</property>
 	</bean>
@@ -76,7 +73,7 @@
 			<value>org.springframework.web.servlet.view.JstlView</value>
 		</property>
 		<property name="prefix">
-			<value>/view/</value>
+			<value>/</value>
 		</property>
 		<property name="suffix">
 			<value>.jsp</value>

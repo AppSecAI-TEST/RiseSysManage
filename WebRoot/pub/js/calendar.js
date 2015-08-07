@@ -160,7 +160,7 @@ Calendar.prototype.bindYear = function() {
 	var ys = this.form.yearSelect;
 	ys.length = 0;
 	//
-	this.endYear=2050;
+	this.endYear=2030;
 	for ( var i = this.beginYear; i <= this.endYear; i++) {
 		ys.options[ys.length] = new Option(i
 				+ Calendar.language["year"][this.language], i);
@@ -251,49 +251,6 @@ Calendar.prototype.bindData = function() {
 							this.innerHTML).format(calendar.date2StringPattern);
 				}
 				calendar.hide();
-				var creditValueType = document.getElementById("creditValueType");
-				if(creditValueType != null)
-				{
-					var sysDate = new Date().format("yyyy-MM-dd");
-					var effDate = $("#effDate").val();
-					var expDate = $("#expDate").val();
-					if(effDate!=""&&expDate=="")
-					{
-						var neweffDate=new Date(effDate.replace(/-/g,"/"));
-						var effDates =neweffDate.format("yyyy-MM-dd");	
-						if(effDates<sysDate)
-						{
-							$.dialog.alert('不能选择过去的时间!', function(){return true;}, api);
-							$("#effDate").val("");
-							return false;
-						}
-					}
-					else if(effDate==""&&expDate!="")
-					{
-						var newexpDate=new Date(expDate.replace(/-/g,"/"));
-						var expDates =newexpDate.format("yyyy-MM-dd");	
-						if(expDates<sysDate)
-						{
-							$.dialog.alert('不能选择过去的时间!', function(){return true;}, api);
-							$("#expDate").val("");
-							return false;
-						}
-					}
-					else
-					{
-						var neweffDate=new Date(effDate.replace(/-/g,"/"));
-						var effDates =neweffDate.format("yyyy-MM-dd");	
-						var newexpDate=new Date(expDate.replace(/-/g,"/"));
-						var expDates =newexpDate.format("yyyy-MM-dd");
-						if(expDates<effDates)
-						{
-							$.dialog.alert('失效时间不能小于生效时间!', function(){return true;}, api);
-							$("#effDate").val("");
-							$("#expDate").val("");
-							return false;
-						}	
-					}	
-				}	
 			}
 			tds[i].onmouseover = function() {
 				this.style.backgroundColor = calendar.colors["bg_out"];
@@ -427,7 +384,7 @@ Date.prototype.format = function(style) {
  * @return
  */
 function showDate(obj) {
-	beginYear = 1990;
+	beginYear = 1960;
 	new Calendar(beginYear, undefined, undefined, undefined, undefined,
 			undefined).show(obj);
 }

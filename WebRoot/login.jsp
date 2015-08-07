@@ -8,7 +8,7 @@
   	<head>
   		<link type="text/css" rel="stylesheet" href="<%=path%>/pub/css/pub.css"/>
   		<link type="text/css" rel="stylesheet" href="<%=path%>/pub/css/login.css"/>
-  		<script type="text/javascript" src="<%=path %>/pub/js/jquery-1.11.1.min.js"></script>
+  		<script type="text/javascript" src="<%=path %>/pub/js/jquery.min.js"></script>
     	<script type="text/javascript" src="<%=path %>/pub/js/public.js"></script>
     	<script type="text/javascript" src="<%=path %>/pub/js/bpopup.js"></script>
     	<script type="text/javascript" src="<%=path %>/js/login.js"></script>

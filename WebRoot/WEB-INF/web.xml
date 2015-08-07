@@ -19,23 +19,19 @@
   </filter>
   <listener>
     <listener-class>  
-            org.springframework.web.context.request.RequestContextListener  
-        </listener-class>
+        org.springframework.web.context.request.RequestContextListener  
+    </listener-class>
   </listener>
   <filter-mapping>
     <filter-name>SpringCharacterEncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  <mime-mapping>
-    <extension>htc</extension>
-    <mime-type>text/x-component</mime-type>
-  </mime-mapping>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
     <servlet-name>FileUploadServlet</servlet-name>
-    <servlet-class>com.hbgz.system.servlet.FileUploadServlet</servlet-class>
+    <servlet-class>com.rise.servlet.FileUploadServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FileUploadServlet</servlet-name>

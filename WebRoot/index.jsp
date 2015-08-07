@@ -3,19 +3,15 @@
 	String path = request.getContextPath();
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!doctype html>
 <html>
   	<head>
-  		<link type="text/css" rel="stylesheet" href="<%=path%>/pub/css/pub.css"/>
-  		<script type="text/javascript" src="<%=path %>/pub/js/jquery-1.11.1.min.js"></script>
-  		<script type="text/javascript" src="<%=path %>/pub/js/public.js"></script>
-    	<script type="text/javascript" src="<%=path %>/pub/js/bpopup.js"></script>
-  		<script type="text/javascript">
-  			top.window.location.href = "/sys/login.jsp";
-  		</script>
+  		<%@ include file="common/head.jsp" %>
   	</head>
   
   	<body>
-  		
+  		<p align="center">
+  			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="javascript:$.messager.alert('提示', '搞起!搞起!');">确定</a>
+  		</p>
   	</body>
 </html>
