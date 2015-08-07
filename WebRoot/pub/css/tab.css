@@ -1,0 +1,64 @@
+html
+{
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+.tabItem
+{
+	width:160px;
+	float:left;
+	height:598px;
+	background:#38B5E1;
+	border-top:2px solid #9DD6F1;
+	color:#fff;
+}
+
+.tabItemR
+{
+	width:740px;
+	height:598px;
+	margin:2px 0 0 0 0;
+	float:right;
+}
+#tabUl
+{
+	list-style:none;
+	margin:0;
+	padding:0;
+	width:100%;	
+}
+
+
+#tabUl li
+{
+	font-weight: 600;
+	font-size: 16px;
+	text-align: center;
+	position: relative;
+	font-family: "simsun";
+	height: 30px;
+	line-height: 30px;
+	cursor:pointer;
+}
+
+.blur
+{
+	background: #C2E8F5;
+	color: #2474AF;
+	border-left: 3px solid #2474AF;
+}
+
+#operatePage
+{
+	width:740px;
+	height:595px;
+	overflow:auto;
+	border:0;
+	margin:0;
+	padding:0;
+}

@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+body {
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+*{font-family:"Arial","微软雅黑","宋体";font-size:14px;}
+.select{margin-top: -63%; margin-left: -13%; display: none;}
+.ui-dialog-popup{background:#fff; box-shadow: 0 0 25px 5px #999; display: none; text-align:center; padding:0;}
+.button {background:url('../images/btn.png') 0 0 no-repeat; width:200px; height:35px; border: none; color:#FFF; cursor:pointer;}
+input.subtext{width:200px; height:20px; border:1px solid #c0c0c0;background:#fff;}
+input.subtext1{width:60px; height:20px; border:1px solid #c0c0c0;background:#fff;}
+.linkmore1{color: #4CD2FF;}
+.linkmore1:hover{color: #4AC5C3 !important;}
+.linkmore{color: blue;}
+.linkmore:hover{color: red !important;}
+
+.back_index{width: 120px; height: 35px; float: right; text-align: center; vertical-align: middle;}
+.linkmore2{color: #3EBFE4; height: 35px; line-height: 35px; cursor: pointer; font-family: "微软雅黑"; font-size: 16px;}
+.linkmore2:hover{color: #2F62FF !important;}

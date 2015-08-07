@@ -1,0 +1,517 @@
+html
+{
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: #fff;
+	font-family: "simhei";
+	margin: 0;
+	padding: 0;
+}
+
+table {
+	font-family: "simsun";
+	table-layout:fixed;  
+}
+
+td
+{
+	word-break:break-all;
+}
+
+.float_top{background:url(../images/menu1.png) 0 0 repeat-x; color: #35BFE4; width:100%; height:52px; line-height:52px;}
+.float_top_left {padding-left: 240px; font-weight: 700; font-size: 22px; width:50%; height: 52px; float: left;}
+.float_top_right {padding-right: 7%; width: 10%; height: 52px; font-size: 14px; float: right;}
+.float_top a {color: #3EBFE4; height: 52px; line-height: 52px; text-decoration:underline; cursor: pointer;}
+.float_top a:hover{color: #2F62FF !important;}
+
+.main_menu {
+	width:1000px;
+	margin:0 auto;
+	padding:0 0;
+}
+
+#float_left {
+	width: 250px;
+	float: left;
+	background: #38B5E1;
+	color: #fff;
+	min-height: 700px;
+}
+
+#float_right {
+	width: 740px;
+	float: right;
+	border: 1px solid #EBEBED;
+	min-height: 699px;
+}
+
+.menu_title {
+	font-size: 22px;
+	font-weight: 500;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	border-bottom: 2px solid #9DD6F1;
+	position:relative;
+}
+
+.menu_img
+{
+	position:absolute;
+	left:15px;
+	top:13px;
+}
+
+#tree_name
+{
+	font-size:22px;
+	padding:0;
+	margin:20px 5px;
+	cursor:pointer;
+}
+
+#menu_tree li {
+	list-style-type: none;
+	font-family: "simsun";
+}
+
+.node1 {
+	width: 100%;
+	font-size: 18px;
+	text-align: left;
+	color: #fff;
+	padding: 0;
+	margin: 0 0 20px 0;
+	/*border-bottom:2px solid #9DD6F1*/;
+}
+
+
+.node1 ul {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+
+.node11 {
+	display:none;
+	width: 100%;
+	font-size: 16px;
+	text-align: left;
+	color: #fff;
+	padding: 0;
+	margin: 10px 0;
+	/*border-bottom:2px solid #9DD6F1*/;
+}
+
+.node11 ul {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+
+
+.node2 {
+	font-size: 14px;
+	text-align: left;
+	color: #fff;
+	padding: 10px 0px 10px 70px;
+	cursor: pointer;
+	overflow:hidden;
+}
+
+.nodespan {
+	margin: 0 0 20px 14px;
+	cursor: pointer;
+}
+
+.nodespan1 {
+	margin: 20px 0 20px 65px;
+	cursor: pointer;
+}
+
+.node2:hover,.node2.hover {
+	background: #C2E8F5;
+	color: #2474AF;
+	border-left: 3px solid #2474AF;
+}
+
+.menuImg {
+	margin-left: 15px;
+}
+
+#menu_iframe {
+	border: none;
+	width: 100%;
+}
+
+.search_div {
+	margin: 20px;
+	boder: 0;
+	background: #EAF1F9;
+	padding: 20px;
+}
+
+input :focus {
+	outline: none;
+	border: #87C6F9 1px solid;
+	box-shadow: 0 0 8px rgba(103, 166, 217, 1);
+}
+
+.search_text {
+	width: 146px;
+}
+
+.search_select {
+	width: 150px;
+}
+
+.button {background: #38B5E1; width:70px; height:24px; border: none; color:#FFF; cursor:pointer;}
+
+.button1 {
+	background: #7FD490;
+	color: #fff;
+	text-align: center;
+	padding: 5px 25px;
+	cursor: pointer;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 18px;
+	max-width: 100px;
+	font-family: "simsun";
+	margin: 20px 5px;
+}
+
+.button2 {
+	background: #E8C988;
+	color: #fff;
+	text-align: center;
+	padding: 5px 25px;
+	cursor: pointer;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 18px;
+	max-width: 100px;
+	font-family: "simsun";
+	margin: 0px 10px;
+}
+
+.button3 {
+	background: #38B5E1;
+	color: #fff;
+	text-align: center;
+	padding: 5px 25px;
+	cursor: pointer;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 18px;
+	max-width: 100px;
+	font-family: "simsun";
+	margin: 0px 10px;
+}
+
+.button4 {
+	background: #91B5D9;
+	color: #fff;
+	text-align: center;
+	padding: 5px 25px;
+	cursor: pointer;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 18px;
+	max-width: 100px;
+	font-family: "simsun";
+	margin: 0px 10px;
+}
+
+
+
+.buttonDiv {
+	margin: 30px 0px;
+	text-align: center;
+}
+
+.maintable {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border: 1px solid #ccc;
+	height: auto;
+	font-size: 15px;
+	margin: 40px 20px;
+}
+
+.maintable td {
+	border: solid #ccc;
+	border-width: 0px 1px 1px 0px;
+	height: 23px;
+	text-align: center;
+}
+
+.topTr {
+	background: #F0F0F0;
+}
+
+.maintable a {
+	color: blue;
+	margin-right: 5px;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.maintable a:link,.maintable a:visited {
+	color: red;
+	text-decoration: none;
+}
+
+.maintable a:hover {
+	color: red;
+	text-decoration: none;
+}
+
+#popup_iframe,#popup_iframe2 {
+	display: none;
+	border:none;
+	border-radius: 5px;
+	box-shadow: 0 0 25px 5px #999;
+}
+
+#confirm
+{
+	display: none;
+	border: 0px solid transparent;
+	text-align:center;
+	background: #fff;
+	padding:0;
+	margin:0;
+	width:350px;
+	height:160px;
+}
+
+.confirmTitle {
+	background: #38B5E1;
+	font-weight: 600;
+	font-size: 20px;
+	text-align: center;
+	color: #fff;
+	position: relative;
+	font-family: "simsun";
+	height:40px;
+	line-height: 40px;
+	width: 100%;
+}
+
+.confirmContent
+{
+	margin:20px 40px;
+}
+.pageTitle {
+	background: #38B5E1;
+	font-weight: 600;
+	font-size: 20px;
+	text-align: center;
+	color: #fff;
+	position: relative;
+	font-family: "simsun";
+	height: 50px;
+	line-height: 50px;
+	width: 100%;
+	margin:0;
+	padding:0;
+}
+
+#closePage {
+	position: absolute;
+	right: 10px;
+	cursor: pointer;
+	top: 15px;
+}
+
+#loading {
+	background: #fff;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	box-shadow: 0 0 25px 5px #fff;
+	display: none;
+	text-align: center;
+	color: #fff;
+	font-weight: 700;
+	padding: 5px 10px 0 10px;
+}
+
+#message {
+	background: #fff;
+	border-radius: 3px;
+	box-shadow: 0 0 25px 5px #999;
+	display: none;
+	text-align: center;
+	padding: 0;
+	color: #000;
+	font-weight: 700;
+	padding: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.infoText {
+	width: 250px;
+	font-size: 16px;
+}
+
+.infoTextArea {
+	width: 248px;
+	font-size: 16px;
+}
+
+.infoSelect {
+	width: 254px;
+	font-size: 16px;
+}
+
+.infoFile {
+	width: 254px;
+	font-size: 16px;
+	position:relative;
+}
+
+.ability
+{
+	cursor:pointer;
+	background:#70CE82;
+	color:#fff;
+	font-size:15px;
+	padding:12px 15px;
+	font-family: "simsun";
+	margin-right:7px;
+	margin-top:5px;
+	width:90px;
+	height:15px;
+	border:none;
+	float:left;
+	display:block;/*内联对象需加*/
+	word-break:keep-all;/* 不换行 */
+	white-space:nowrap;/* 不换行 */
+	overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+	text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+
+.green_title
+{
+	background: url('../images/green_bg.png') repeat-x;
+	text-align:left;
+	margin:5px 20px;
+	padding-left:5px;
+	font-size:20px;
+	font-weight:600px;
+	height:44px;
+	line-height:44px;
+	border:1px solid transparent;
+	border-radius:5px;
+}
+
+.pink_title
+{
+	background: url('../images/pink_bg.png') repeat-x;
+	text-align:left;
+	margin:5px 20px;
+	padding-left:5px;
+	font-size:20px;
+	font-weight:600px;
+	height:44px;
+	line-height:44px;
+	border:1px solid transparent;
+	border-radius:5px;
+}
+
+.pink_title a
+{
+	float:right;
+	right:5px;
+	font-size:14px;
+	color:red;
+	cursor:pointer;
+	text-decoration:underline;
+}
+
+.page {background-color: #FFFFFF; /*line-height:38px;*/}
+.ctrl{left:5px; margin-right:10px; width:99%; height:28px;}
+.ctrl table{width:99%; height:30px;color:grey;}
+.prev a{width:100px; height:20px;text-decoration:none;color:grey;}
+.next a{width:100px; height:20px;text-decoration:none;color:grey;}
+#totalPage{color:#0099ff; margin:0 5px; font-weight:bold;}
+#gotoPage{width:50px; text-align:center; border:1px solid #ccc; margin:0 5px;}
+#goto
+{
+	border:none;
+	background: #38B5E1;
+	color: #fff;
+	text-align: center;
+	padding: 5px 20px;
+	cursor: pointer;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+	-webkit-border-radius:4px;
+	border-radius: 4px;
+	font-size: 16px;
+	max-width: 100px;
+	font-family: "simsun";
+	margin: 0px 10px;
+}
+.tagNode{cursor:pointer; padding:0 2px; font-weight:bold;}
+.linkmore{color : #0099ff;text-decoration : none;}
+.linkmore:hover{color : #ff0000 !important;}
+
+.fileTable
+{
+	border:0;
+	padding:0;
+	border-spacing:0;
+	border-collapse:0;
+}
+#choose
+{
+	margin-top:3px;
+	cursor:pointer;
+}
+
+.progress_div
+{
+	margin:10px 20px;
+	font-size:14px;
+}
+
+.progress_div span
+{
+	color:#0099ff;
+}
+
+.timeTd
+{
+	position:relative;
+}
+
+.timeImg
+{
+	position:absolute;
+	left:133px;
+	top:1px;
+}
+
+.complink
+{
+	text-decoration:underline;
+	cursor:pointer;
+	color:#0099ff;
+	margin-right:10px;
+}
+
+.complink:hover
+{
+	color:red;
+}

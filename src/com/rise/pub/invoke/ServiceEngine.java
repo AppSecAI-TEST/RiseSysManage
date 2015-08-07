@@ -1,0 +1,129 @@
+package com.rise.pub.invoke;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.namespace.QName;
+
+import net.sf.json.JSONObject;
+
+import org.apache.axis.client.Call;
+import org.apache.axis.client.Service;
+import org.apache.axis2.AxisFault;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import com.rise.pub.pubData.QryPropertiesConfig;
+import com.rise.pub.util.ObjectCensor;
+
+/**
+ * 调用WEB_SERVICE服务
+ * @author RHQ
+ *
+ */
+public class ServiceEngine
+{
+	//WEB_SERVICE 地址
+	private static String address="";
+	
+	public static String invokeService(String param) throws Exception 
+	{
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();    
+		param = modParam(param,request.getHeader("User-Agent"));
+		Service service = new Service();
+		Call call = null;
+		if(ObjectCensor.checkObjectIsNull(address))
+		{
+			address = QryPropertiesConfig.getPropertyById("ESE_SERVICE_URL");
+		}
+		try
+		{
+			call = (Call) service.createCall();
+			call.setTargetEndpointAddress(new java.net.URL(address));
+			call.setOperationName(new QName("http://access.hbgz.com","openService"));
+		
+			Object obj =  call.invoke(new Object[] { param });
+			if(obj!=null)
+			{
+				return obj.toString();
+			}
+		} catch (Exception se)
+		{
+			se.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static String invokeServiceByIp(String linkStr,String param) throws Exception 
+	{
+		Service service = new Service();
+		Call call = null;
+		call = (Call) service.createCall();
+		call.setTargetEndpointAddress(new java.net.URL(linkStr));
+		call.setOperationName(new QName("http://share.service.hbgz.com","singleSignService"));
+		Object obj =  call.invoke(new Object[] { param });
+		if(obj!=null)
+		{
+			return obj.toString();
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
+	/**
+	 * @author : tiankang
+	 * @param param
+	 * @param reqStr
+	 * @return
+	 */
+	private static String modParam(String param,String reqStr)
+	{
+		try
+		{
+			int pos = -1;
+			pos = reqStr.indexOf(")");
+			String[] posArr = reqStr.substring(0,pos).split(";");
+			if("U".equals(posArr[1].trim()))
+			{
+				JSONObject obj = JSONObject.fromObject(param);
+				obj.put("channelType", "PAD");
+				return obj.toString();
+			}
+			else
+			{
+				return param;
+			}
+		}
+		catch(Exception err)
+		{
+			return param;
+		}
+	}
+	
+	/**
+	 * 
+	 * @param args
+	 * @throws AxisFault
+	 */
+	public static void main(String[] args) throws AxisFault 
+	{
+		Service service = new Service();
+		Call call = null;
+		String address = "http://192.168.110.111:7001/aoe/services/ability?wsdl";
+		String json = "{appId:\"0000000000\",channelId:\"Q\",serviceType:\"BUS1002\",abilityId:\"BUS1001\",transactionId:\"BUS1001\",signCode:\"PC\",encryptType:\"0000000000\",params:{\"appDesc\": \"1000社区\",\"appId\": 10001,\"appName\": \"1000社区\",\"appProtocolDoc\": \"123\",\"appRate\": \"123\",\"appSafeLevel\": \"1\",\"busiDepartment\": \"1\",\"channelId\": \"1000\",\"depContNumber\": \"1\",\"depContPerson\": \"1\",\"encPriKey\": \"12345644\",\"encPubKey\": \"45674\",\"encryptType\": \"12332\",\"joinReason\": \"123\",\"modifyDate\": null,\"netType\": \"112\",\"operStaff\": \"123\",\"recordState\": \"00A\",\"signCode\": \"1233\",\"userId\": 0 },rtnDataFormatType:\"json\"}";
+		try
+		{
+			call = (Call) service.createCall();
+			call.setTargetEndpointAddress(new java.net.URL(address));
+			call.setOperationName(new QName("http://access.hbgz.com", "openService"));
+		
+			Object obj =  call.invoke(new Object[] { json });
+			System.out.println(obj);
+		} catch (Exception se)
+		{
+			se.printStackTrace();
+		}
+	}
+	
+}
+
