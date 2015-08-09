@@ -1,5 +1,8 @@
 package com.rise.pub.invoke;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.namespace.QName;
 
@@ -13,6 +16,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.rise.pub.pubData.QryPropertiesConfig;
 import com.rise.pub.util.ObjectCensor;
+import com.rise.pub.util.StringUtil;
 
 /**
  * 调用WEB_SERVICE服务
@@ -23,6 +27,23 @@ public class ServiceEngine
 {
 	//WEB_SERVICE 地址
 	private static String address="";
+	
+	private final static String url = "http://127.0.0.1:7001/sysEngine/invoke/commorder.do";
+	
+	public static String invokeHttp(String param) throws Exception
+	{
+		Map<String,String> params = new HashMap<String,String>();
+		params.put("param", param);
+		JSONObject object = JSONObject.fromObject(HttpUtil.http(url, params));
+		if("success".equals(StringUtil.getJSONObjectKeyVal(object, "executeType")))
+		{
+			return StringUtil.getJSONObjectKeyVal(object, "returnMsg");
+		}
+		else
+		{
+			return StringUtil.getJSONObjectKeyVal(object, "exceptionMsg");
+		}
+	}
 	
 	public static String invokeService(String param) throws Exception 
 	{
