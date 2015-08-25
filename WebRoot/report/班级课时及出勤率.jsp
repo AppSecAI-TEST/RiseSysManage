@@ -48,13 +48,13 @@
 	  				<tr>
 	  					<td>出勤率：</td>
 	  					<td>
-	  						<input class="easyui-text" id="attLowLimit" style="width:58px;">%至
-	  						<input class="easyui-text" id="attLimit" style="width:58px;">%
+	  						<input class="easyui-textbox" id="attLowLimit" style="width:58px;">%至
+	  						<input class="easyui-textbox" id="attLimit" style="width:58px;">%
 	  					</td>
 	  					<td>校服穿着率：</td>
 	  					<td>
-	  						<input class="easyui-text" id="dreLowLimit" style="width:58px;">%至
-	  						<input class="easyui-text" id="dreLimit" style="width:58px;">%
+	  						<input class="easyui-textbox" id="dreLowLimit" style="width:58px;">%至
+	  						<input class="easyui-textbox" id="dreLimit" style="width:58px;">%
 	  					</td>	
 	  					<td>上课日期：</td>
 	  					<td>

@@ -48,23 +48,23 @@
 	  				<tr>
 	  					<td>公开课满意度：</td>
 	  					<td>
-	  						<input class="easyui-text" id="publicLowLimit" style="width:58px;">%至
-	  						<input class="easyui-text" id="publicLimit" style="width:58px;">%
+	  						<input class="easyui-textbox" id="publicLowLimit" style="width:58px;">%至
+	  						<input class="easyui-textbox" id="publicLimit" style="width:58px;">%
 	  					</td>
 	  					<td>毕业典礼满意度：</td>
 	  					<td>
-	  						<input class="easyui-text" id="cereLowLimit" style="width:58px;">%至
-	  						<input class="easyui-text" id="cereLimit" style="width:58px;">%
+	  						<input class="easyui-textbox" id="cereLowLimit" style="width:58px;">%至
+	  						<input class="easyui-textbox" id="cereLimit" style="width:58px;">%
 	  					</td>
 	  					<td>电教完成率：</td>
 	  					<td>
-	  						<input class="easyui-text" id="teachLowLimit" style="width:58px;">%至
-	  						<input class="easyui-text" id="teachLimit" style="width:58px;">%
+	  						<input class="easyui-textbox" id="teachLowLimit" style="width:58px;">%至
+	  						<input class="easyui-textbox" id="teachLimit" style="width:58px;">%
 	  					</td>
 	  					<td>家长会满意度：</td>
 	  					<td>
-	  						<input class="easyui-text" id="meetLowLimit" style="width:58px;">%至
-	  						<input class="easyui-text" id="meetLimit" style="width:58px;">%
+	  						<input class="easyui-textbox" id="meetLowLimit" style="width:58px;">%至
+	  						<input class="easyui-textbox" id="meetLimit" style="width:58px;">%
 	  					</td>
 	  				</tr>	
 	  				<tr>		
