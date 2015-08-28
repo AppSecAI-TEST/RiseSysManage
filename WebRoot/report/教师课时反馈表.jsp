@@ -13,140 +13,90 @@
 		<script type="text/javascript" src="<%=path %>/pub/js/easyui/jquery.easyui.min.js"></script>
 		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
 		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
-		<script type="text/javascript" src="<%=path %>/js/applyClass.js"></script>
   	</head>
-  
   	<body>
-  		<div style="padding:5px 0;">
+  		<div style="padding:5px 10px;">
   			<form id="qryFm">
 	  			<table>
 	  				<tr>
-	  					<td>学校：</td>
+	  					<td>校区：</td>
 	  					<td>
 	  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;">
 	  							
 	  						</select>
 	  					</td>
-	  					<td>教室：</td>
+	  					<td>老师：</td>
 	  					<td>
-	  						<select class="easyui-combobox" name="roomId" id="roomId" style="width:150px;">
+	  						<input class="easyui-textbox" id="name" style="width:150px;">
+	  					</td>
+	  					<td>月份：</td>
+	  					<td>
+	  						<select class="easyui-combobox" name="month" id="month" style="width:150px;">
 	  							
 	  						</select>
 	  					</td>
-	  					<td>教师：</td>
+	  					<td>项目：</td>
 	  					<td>
-	  						<select class="easyui-combobox" name="teacherId" id="teacherId" style="width:150px;">
+	  						<select class="easyui-combobox" name="month" id="month" style="width:150px;">
 	  							
 	  						</select>
 	  					</td>
-	  					<td>时间段：</td>
-	  					<td>
-	  						<input class="easyui-timespinner" value="00:00" id="startTimeId" name="startTimeId" style="width:150px;">
+	  					<td>	
+	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" onclick="qryData()">查询</a>
 	  					</td>
-	  					<td>至</td>
 	  					<td>
-	  						<input class="easyui-timespinner" value="23:00" id="endTimeId" name="endTimeId" style="width:150px;">
-	  					</td>
-	  				</tr>
-	  				<tr>
-	  					<td>申请状态：</td>
-	  					<td>
-	  						<select class="easyui-combobox" name="applyState" id="applyState" style="width:150px;">
-	  							
-	  						</select>
-	  					</td>
-	  					<td>班级名称：</td>
-	  					<td>
-	  						<input class="easyui-textbox" style="width: 150px;" name="className" id="className">
-	  					</td>
-	  					<td>计划开班时间：</td>
-	  					<td>
-	  						<input class="easyui-datebox" data-options="sharedCalendar:'#cc'" style="width:150px;" id="startPlanDate" name="startPlanDate">
-	  					</td>
-	  					<td>至</td>
-	  					<td>
-	  						<input class="easyui-datebox" data-options="sharedCalendar:'#cc'" style="width:150px;" id="endPlanDate" name="endPlanDate">
-	  					</td>
-	  					<td colspan="2" style="text-align: right;">
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:150px" id="qryBtn">查询</a>
+	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" style="width:150px" id="qryBtn" onclick="exportData()">导出</a>
 	  					</td>
 	  				</tr>
 	  			</table>
   			</form>
-  			<div id="cc" class="easyui-calendar"></div>
-  			
-  			<div id="tb" style="padding: 2px 15px; height: auto">
-    			<a href="javascript:void(0)" id="addApply" class="easyui-linkbutton" iconCls="icon-add" plain="true">申请放班</a>
-    			<a href="javascript:void(0)" id="updateApply" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改放班</a>
-    			<a href="javascript:void(0)" id="deleteApply" class="easyui-linkbutton" iconCls="icon-remove" plain="true">取消放班</a>
-  			</div>
-  			
 			<div style="padding:5px 0;">
-				<table class="easyui-datagrid" title="查询结果" style="width:100%;height:250px" id="list_data">
+				<table class="easyui-datagrid" title="查询结果" style="width:100%;height:250px" id="list_data" fitColumns="true">
 					<thead>
 						<tr>
-							<th data-options="field:'schoolId',width:80,align:'center'">学校</th>
-							<th data-options="field:'roomId',width:100,align:'center'">教室</th>
-							<th data-options="field:'timeId',width:120,align:'center'">时间段</th>
-							<th data-options="field:'teacherId',width:100,align:'center'">教师</th>
-							<th data-options="field:'applyNameId',width:100,align:'center'">申请人</th>
-							<th data-options="field:'applyState',width:80,align:'center'">申请状态</th>
-							<th data-options="field:'applyDate',width:150,align:'center'">申请日期</th>
-							<th data-options="field:'className',width:100,align:'center'">班级名称</th>
-							<th data-options="field:'planDate',width:150,align:'center'">计划开班时间</th>
+							<th field="schoolId" align="center" width="9%" rowspan="2">校区</th>
+							<th field="chName" align="center" width="9%" rowspan="2">中文名</th>
+							<th field="enName" align="center" width="9%" rowspan="2">英文名</th>
+							<th field="project" align="center" width="9%" rowspan="2">项目</th>
+							<th field="date" align="center" width="62%" colspan="31">日期</th>
+							<th field="total" align="center" width="2%" rowspan="2">总计</th>
+						</tr>
+						<tr>
+							<th field="1" align="center" width="2%">1</th>
+							<th field="2" align="center" width="2%">2</th>
+							<th field="3" align="center" width="2%">3</th>
+							<th field="4" align="center" width="2%">4</th>
+							<th field="5" align="center" width="2%">5</th>
+							<th field="6" align="center" width="2%">6</th>
+							<th field="7" align="center" width="2%">7</th>
+							<th field="8" align="center" width="2%">8</th>
+							<th field="9" align="center" width="2%">9</th>
+							<th field="10" align="center" width="2%">10</th>
+							<th field="11" align="center" width="2%">11</th>
+							<th field="12" align="center" width="2%">12</th>
+							<th field="13" align="center" width="2%">13</th>
+							<th field="14" align="center" width="2%">14</th>
+							<th field="15" align="center" width="2%">15</th>
+							<th field="16" align="center" width="2%">16</th>
+							<th field="17" align="center" width="2%">17</th>
+							<th field="18" align="center" width="2%">18</th>
+							<th field="19" align="center" width="2%">19</th>
+							<th field="20" align="center" width="2%">20</th>
+							<th field="21" align="center" width="2%">21</th>
+							<th field="22" align="center" width="2%">22</th>
+							<th field="23" align="center" width="2%">23</th>
+							<th field="24" align="center" width="2%">24</th>
+							<th field="25" align="center" width="2%">25</th>
+							<th field="26" align="center" width="2%">26</th>
+							<th field="27" align="center" width="2%">27</th>
+							<th field="28" align="center" width="2%">28</th>
+							<th field="29" align="center" width="2%">29</th>
+							<th field="30" align="center" width="2%">30</th>
+							<th field="31" align="center" width="2%">31</th>
 						</tr>
 					</thead>
 				</table>
 			</div>
-  		</div>
-  		<div id="dlg" class="easyui-dialog" style="width: 580px; height: 350px; padding: 10px 20px" closed="true" data-options="modal:true" buttons="#dlgBtn">
-  			<form id="fm" method="post">
-  				<table style="width: 100%;" cellSpacing='0' cellPadding='5px'>
-  					<tr>
-  						<td style="text-align: right;width: 40%">学校：</td>
-  						<td>
-	  						<select class="easyui-combobox" style="width: 155px;" name="schoolId" id="schoolId" data-options="panelHeight:'auto'">
-	  						</select>
-  						</td>
-  					</tr>
-  					<tr>
-  						<td style="text-align: right;width: 40%">教室：</td>
-  						<td>
-	  						<select class="easyui-combobox" style="width: 155px;" name="roomId" id="roomId" data-options="panelHeight:'auto'">
-  							</select>
-  						</td>
-  					</tr>
-  					<tr>
-  						<td style="text-align: right;width: 40%">时间段：</td>
-  						<td>
-	  						<input class="easyui-timespinner" value="00:00" id="startTimeId" name="startTimeId" style="width:70px;">--<input class="easyui-timespinner" value="23:00" id="endTimeId" name="endTimeId" style="width:70px;">
-  						</td>
-  					</tr>
-  					<tr>
-  						<td style="text-align: right;width: 40%">教师：</td>
-  						<td>
-	  						<select class="easyui-combobox" style="width: 155px;" name="teacherId" id="teacherId" data-options="panelHeight:'auto'">
-  							</select>
-  						</td>
-  					</tr>
-  					<tr>
-  						<td style="text-align: right;width: 40%">班级名称：</td>
-  						<td>
-	  						<input class="easyui-textbox" style="width: 155px;" id="className" name="className">
-  						</td>
-  					</tr>
-  					<tr>
-  						<td style="text-align: right;width: 40%">计划开班时间：</td>
-  						<td>
-	  						<input class="easyui-datebox" data-options="sharedCalendar:'#cc'" style="width:155px;" id="planDate" name="planDate">
-  						</td>
-  					</tr>
-  				</table>
-  			</form>
-  		</div>
-  		<div id="dlgBtn">
-    		<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok">确认</a> 
-    		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
   		</div>
   	</body>
 </html>

@@ -45,15 +45,15 @@
 	  						<input class="easyui-textbox" id="lowLimit" style="width:62px;">至
 	  						<input class="easyui-textbox" id="Limit" style="width:62px;">
 	  					</td>
-	  					<td>是否已消耗完：</td>
+	  					<td>国际班课程：</td>
 	  					<td>
-	  						<select class="easyui-combobox" name="isFinish" id="isFinish" style="width:150px;">
+	  						<select class="easyui-combobox" name="intClass" id="intClass" style="width:150px;">
 	  							
 	  						</select>
 	  					</td>
-	  					<td>是否过期：</td>
+	  					<td>是否选国际班：</td>
 	  					<td>
-	  						<select class="easyui-combobox" name="isExp" id="isExp" style="width:150px;">
+	  						<select class="easyui-combobox" name="isInt" id="isInt" style="width:150px;">
 	  							
 	  						</select>
 	  					</td>
@@ -71,16 +71,21 @@
 				<table class="easyui-datagrid" title="查询结果" style="width:100%;height:250px" id="list_data" fitColumns="true">
 					<thead>
 						<tr>
-							<th field="schoolId" align="center" width="10%">校区</th>
+							<th field="schoolId" align="center" width="5%">校区</th>
 							<th field="name" align="center" width="5%">姓名</th>
 							<th field="contactNbr" align="center" width="10%">联系电话</th>
-							<th field="payClass" align="center" width="10%">缴费课程 </th>
+							<th field="intLesson" align="center" width="10%">国际班课程 </th>
+							<th field="class" align="center" width="5%">班级</th>
+							<th field="teacherA" align="center" width="5%">教师A</th>
+							<th field="teacherB" align="center" width="5%">教师B</th>
+							<th field="adviserA " align="center" width="5%">顾问A</th>
+							<th field="adviserB" align="center" width="5%">顾问B</th>
 							<th field="payTime" align="center" width="10%">缴费时间</th>
-							<th field="foreignFee" align="center" width="10%">赠外教课金额</th>
-							<th field="foreignNum" align="center" width="10%">赠外教课次数</th>
-							<th field="expendNum" align="center" width="10%">已消耗次数</th>
-							<th field="isExp" align="center" width="10%">是否过期</th>
-							<th field="expTime" align="center" width="15%">有效期截止时间</th>
+							<th field="payFee" align="center" width="10%">实缴费金额</th>
+							<th field="preferWay" align="center" width="5%">优惠方式</th>
+							<th field="isreturn" align="center" width="5%">是否退费</th>
+							<th field="isSelect" align="center" width="5%">是否选班</th>
+							<th field="intClass" align="center" width="5%">所选国际班</th>
 						</tr>
 					</thead>
 				</table>
