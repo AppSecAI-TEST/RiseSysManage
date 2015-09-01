@@ -17,7 +17,7 @@ input[type="file"],input[type="image"],input[type="submit"],input[type="reset"],
 /* 首页样式 */
 #toparea{background-color:#E4EEFF;background-image:linear-gradient(to bottom, #F2F5FF, #E4EEFF);background-repeat: repeat-x;border:0;padding:0;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFF2F5FF',endColorstr='#FFE4EEFF',GradientType=0)}
 #topmenu{display:inline;background:none;}
-#topmenu .logo{color:#777777;display:block;float:left;font-size:20px;text-decoration:none;cursor:default;font-weight: 200;padding:7px 17px 5px;text-shadow: 0 1px 0 #FFFFFF;}
+#topmenu .logo{color:#777777;display:block;float:left;font-size:20px;text-decoration:none;cursor:default;font-weight: 200;padding:7px 17px 5px;text-shadow: 0 1px 0 #FFFFFF;/*background-image:url(/sys/pub/images/u20.png);*/width:240px;height:49px;background-repeat:no-repeat;margin-left:10px;margin-top:10px;}
 #topmenu .nav{float:left;margin:0;padding:0;list-style:none}
 #topmenu .nav li{float:left;margin:0;padding:0}
 #topmenu .nav li a{color:#777777;padding:13px 15px;text-decoration:none;text-shadow:0 1px 0 #FFFFFF;display: block;}

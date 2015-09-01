@@ -2,64 +2,82 @@
 <%
 	String path = request.getContextPath();
 %>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<!-- 
+<title>瑞思教务管理系统 - 用户登录</title>
+ -->
+<%@ include file="/common/head.jsp" %>
+<style type="text/css">
+form{width:280px;height:120px;margin:30px auto 0;}
+form div label{float:left;display:block;width:65px;font-size:16px;padding-top:6px;}
+form div{margin:8px auto;}
+form div.input input{height:21px;padding:2px 3px;}
+form div.input img{cursor:pointer}
+#username,#password{width:200px;}
+#code{width:68px}
+</style>
+</head>
+<body>
+<div class="easyui-dialog" title="用户登录" style="width:380px;height:240px" data-options="closable:false,iconCls:'icons-lock-lock',buttons:[{text:'登录',iconCls:'icons-user-user_go',handler:login}]">
+	<form id='form' method="post">
+		<div class="input">
+			<label for="username">用户名:</label>  
+	        <input type="text" name="username" id="username" value="" />  
+		</div>
+		<div class="input">
+			<label for="password">密&nbsp;&nbsp;码:</label>  
+	        <input type="password" name="password" id="password" value="" />  
+		</div>
+		<div class="input">
+			<label for="code">验证码:</label>  
+	        <input type="text" name="code" id="code" size="4" />
+	        <span style="margin-left:10px"><img id="code_img" align="top" width="100" height="28" onclick="changeCode()" src="/sys/auth.do?method=getSecurityImage" title="点击切换验证码"></span> 
+		</div>
+	</form> 
+</div>
 
-<!doctype html>
-<html>
-  	<head>
-  		<link type="text/css" rel="stylesheet" href="<%=path%>/pub/css/pub.css"/>
-  		<link type="text/css" rel="stylesheet" href="<%=path%>/pub/css/login.css"/>
-  		<script type="text/javascript" src="<%=path %>/pub/js/jquery.min.js"></script>
-    	<script type="text/javascript" src="<%=path %>/pub/js/public.js"></script>
-    	<script type="text/javascript" src="<%=path %>/pub/js/bpopup.js"></script>
-    	<script type="text/javascript" src="<%=path %>/js/login.js"></script>
-  	</head>
-  
-  	<body style="background-image: url('pub/images/bg.jpg');">
-  		<div style="margin-top: 35%; margin-left: 15%; float: left;">
-	  		<img src="<%=path%>/pub/images/nlst.png" style="cursor:pointer;" onclick="view()">
-	  		<div id="left" class="select">
-	  			<img src="<%=path%>/pub/images/selected.png">
-	  		</div>
-	  	</div>
-	  	<div style="margin-top: 35%; margin-left: 30%; float: left;">
-	  		<img src="<%=path%>/pub/images/ptgl.png" style="cursor:pointer;" onclick="login()">
-	  		<div id="right" class="select">
-	  			<img src="<%=path%>/pub/images/selected.png">
-	  		</div>
-	  	</div>
-	  	<div class="ui-dialog-popup" id="loginPage" style="width: 500px; height: 400px;">
-    		<div style="text-align: center; margin-top: 50px;"><img src="<%=path %>/pub/images/login_title.png"/></div>
-    		<div style="margin-top: 20px;">
-    			<table width="95%" cellpadding="10">
-    				<tr>
-    					<td align="right" width="35%">账号:</td>
-    					<td align="left" colspan="2"><input type="text" id="userName" class="subtext" onkeydown="keyDown(1)"/></td>
-    				</tr>
-    				<tr>
-    					<td align="right">密码:</td>
-    					<td align="left" colspan="2"><input type="password" id="password" class="subtext" onkeydown="keyDown(2)"/></td>
-    				</tr>
-    				<tr>
-    					<td align="right">验证码:</td>
-    					<td align="left" colspan="2">
-    						<input type="text" id="securityCode" class="subtext1" onkeydown="keyDown(3)"/>&nbsp;&nbsp;<img id="codeImage" style="vertical-align: middle;" height="24px" width="60px">&nbsp;&nbsp;&nbsp;&nbsp;<a class="linkmore" href="javascript:void(0)" onclick="getSecurityCode()">换一张</a>
-    					</td>
-    				</tr>
-    				<tr>
-    					<td></td>
-    					<td align="left" colspan="2" style="vertical-align: middle;"><img src="<%=path %>/pub/images/unchoice.png" id="remember" style="position: relative; top: 3px;"/>&nbsp;<span>记住我的登录状态</span></td>
-    				</tr>
-    				<tr>
-    					<td></td>
-    					<td align="left" colspan="2"><input type="button" value="登录" class="button" onclick="realLogin()"/></td>
-    				</tr>
-    				<tr style="display: none;">
-    					<td></td>
-    					<td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="linkmore1" href="javascript:void(0)">忘记密码</a></td>
-    				</tr>
-    			</table>
-    		</div>
-    	</div>
-  	</body>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('input:text:first').focus();
+	$('form').keyup(function(event){
+		if(event.keyCode ==13){
+			login();
+		}
+	});
+})
+var changeCode = function(){
+	var that = document.getElementById('code_img');
+	that.src = that.src + '&' + Math.random();
+}
+var login = function(){
+	if(!$('#username').val()){
+		$.messager.alert('提示信息', '请填写用户名', 'error');
+		return false;
+	}
+	if(!$('#password').val()){
+		$.messager.alert('提示信息', '请填写密码', 'error');
+		return false;
+	}
+	if(!$('#code').val()){
+		$.messager.alert('提示信息', '请填写验证码', 'error');
+		return false;
+	}
+	/**
+	$.post('', $("form").serialize(), function(data){
+		if(!data.status){
+			$.messager.alert('提示信息', data.info, 'error');
+			changeCode();
+		}else{
+			$.messager.progress({text:'加载中，请稍候...'});
+			window.location.href = data.url;
+		}
+	},'json');**/
+	window.location.href = "/sys/auth.do?method=userCenter&username="+$('#username').val()+"&password="+$('#password').val()+"&code="+$('#code').val();
+}
+</script>
+</body>
 </html>
-

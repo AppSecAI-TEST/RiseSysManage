@@ -28,7 +28,7 @@ public class ServiceEngine
 	//WEB_SERVICE 地址
 	private static String address="";
 	
-	private final static String url = "http://127.0.0.1:7001/sysEngine/invoke/commorder.do";
+	private final static String url = "http://www.hbcnhls.com/micro/commorder.do";
 	
 	public static String invokeHttp(String param) throws Exception
 	{
@@ -126,23 +126,36 @@ public class ServiceEngine
 	 * @param args
 	 * @throws AxisFault
 	 */
-	public static void main(String[] args) throws AxisFault 
-	{
-		Service service = new Service();
-		Call call = null;
-		String address = "http://192.168.110.111:7001/aoe/services/ability?wsdl";
-		String json = "{appId:\"0000000000\",channelId:\"Q\",serviceType:\"BUS1002\",abilityId:\"BUS1001\",transactionId:\"BUS1001\",signCode:\"PC\",encryptType:\"0000000000\",params:{\"appDesc\": \"1000社区\",\"appId\": 10001,\"appName\": \"1000社区\",\"appProtocolDoc\": \"123\",\"appRate\": \"123\",\"appSafeLevel\": \"1\",\"busiDepartment\": \"1\",\"channelId\": \"1000\",\"depContNumber\": \"1\",\"depContPerson\": \"1\",\"encPriKey\": \"12345644\",\"encPubKey\": \"45674\",\"encryptType\": \"12332\",\"joinReason\": \"123\",\"modifyDate\": null,\"netType\": \"112\",\"operStaff\": \"123\",\"recordState\": \"00A\",\"signCode\": \"1233\",\"userId\": 0 },rtnDataFormatType:\"json\"}";
-		try
-		{
-			call = (Call) service.createCall();
-			call.setTargetEndpointAddress(new java.net.URL(address));
-			call.setOperationName(new QName("http://access.hbgz.com", "openService"));
-		
-			Object obj =  call.invoke(new Object[] { json });
-			System.out.println(obj);
-		} catch (Exception se)
-		{
-			se.printStackTrace();
+//	public static void main(String[] args) throws AxisFault 
+//	{
+//		Service service = new Service();
+//		Call call = null;
+//		String address = "http://192.168.110.111:7001/aoe/services/ability?wsdl";
+//		String json = "{appId:\"0000000000\",channelId:\"Q\",serviceType:\"BUS1002\",abilityId:\"BUS1001\",transactionId:\"BUS1001\",signCode:\"PC\",encryptType:\"0000000000\",params:{\"appDesc\": \"1000社区\",\"appId\": 10001,\"appName\": \"1000社区\",\"appProtocolDoc\": \"123\",\"appRate\": \"123\",\"appSafeLevel\": \"1\",\"busiDepartment\": \"1\",\"channelId\": \"1000\",\"depContNumber\": \"1\",\"depContPerson\": \"1\",\"encPriKey\": \"12345644\",\"encPubKey\": \"45674\",\"encryptType\": \"12332\",\"joinReason\": \"123\",\"modifyDate\": null,\"netType\": \"112\",\"operStaff\": \"123\",\"recordState\": \"00A\",\"signCode\": \"1233\",\"userId\": 0 },rtnDataFormatType:\"json\"}";
+//		try
+//		{
+//			call = (Call) service.createCall();
+//			call.setTargetEndpointAddress(new java.net.URL(address));
+//			call.setOperationName(new QName("http://access.hbgz.com", "openService"));
+//		
+//			Object obj =  call.invoke(new Object[] { json });
+//			System.out.println(obj);
+//		} catch (Exception se)
+//		{
+//			se.printStackTrace();
+//		}
+//	}
+	
+	public static void main(String[] args) {
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0011\",securityCode:\"0000000000\",params:{busAccount:\"hls1001\",busPassword:\"123123\"},rtnDataFormatType:\"user-defined\"}";
+		String param1 = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0021\",securityCode:\"0000000000\",params:{busDetailId:\"1001\",state:\"A\",pageNum:\"1\",pageSize:\"10\"},rtnDataFormatType:\"user-defined\"}";
+		String param2 = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0022\",securityCode:\"0000000000\",params:{busDetailId:\"1001\"},rtnDataFormatType:\"user-defined\"}";
+		String param3 = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0023\",securityCode:\"0000000000\",params:{orderId:\"E20150825101518100000156\",state:\"H\"},rtnDataFormatType:\"user-defined\"}";
+		try {
+			System.out.println(invokeHttp(param3));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	

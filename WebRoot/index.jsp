@@ -11,7 +11,7 @@
 		<style type="text/css">
 			#fm{
 				margin:0;
-				padding:10px 30px;
+				padding:10p.x 30px;
 			}
 			.ftitle{
 				font-size:14px;
