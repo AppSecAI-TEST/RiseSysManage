@@ -28,7 +28,7 @@ public class ServiceEngine
 	//WEB_SERVICE µÿ÷∑
 	private static String address="";
 	
-	private final static String url = "http://www.hbcnhls.com/micro/commorder.do";
+	private final static String url = "http://127.0.0.1:7001/sysEngine/invoke/commorder.do";
 	
 	public static String invokeHttp(String param) throws Exception
 	{

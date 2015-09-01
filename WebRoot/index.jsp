@@ -19,7 +19,7 @@
 				color:#666;
 				padding:5px 0;
 				margin-bottom:10px;
-				border-bottom:1px solid #ccc;
+				/**border-bottom:1px solid #ccc;**/
 			}
 			.fitem{
 				margin-bottom:5px;

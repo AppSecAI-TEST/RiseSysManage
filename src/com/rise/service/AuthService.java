@@ -43,7 +43,7 @@ public class AuthService {
 		{
 			JSONObject item = new JSONObject();
 			item.put("text", nameArr[i]);
-			item.put("url", "#");
+			item.put("url", "/sys/index.jsp");
 			itemArr.add(item);
 		}
 		obj.put("son", itemArr);
@@ -56,7 +56,7 @@ public class AuthService {
 		{
 			JSONObject item = new JSONObject();
 			item.put("text", nameArr[i]);
-			item.put("url", "#");
+			item.put("url", "/sys/index.jsp");
 			itemArr1.add(item);
 		}
 		obj1.put("son", itemArr1);
