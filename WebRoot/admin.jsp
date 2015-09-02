@@ -18,9 +18,10 @@
 			<c:redirect url="/login.jsp" />
 		</c:if>
 		<!-- 头部 -->
-		<div id="toparea" data-options="region:'north',border:false,height:125">
+		<div id="toparea" style="display:block;" data-options="region:'north',border:false,height:125">
 			<div id="topmenu" class="easyui-panel" data-options="fit:true,border:false">
 				<a class="logo"></a>
+				<!-- 
 				<ul class="nav">
 					<c:forEach items="${menuList}" var="node">
 						<li>
@@ -35,11 +36,12 @@
 						</li>
 					</c:forEach>
 				</ul>
+				 -->
 				<div class="nav-right">
 					<a href="javascript:logout();" class="easyui-linkbutton" data-options="plain:true,iconCls:'logout',size:'large',iconAlign:'top'">退出</a>
 			    </div>
 			</div>
-			<div class="panel-header panel-header-noborder top-toolbar" style="position:absolute;bottom:0px;border-top-width:1px;border-bottom-width:0px">
+			<div class="panel-header panel-header-noborder top-toolbar" style="position:absolute;bottom:0px;border-top-width:1px;border-bottom-width:0px;z-index:1">
 				<div id="infobar">
 		            <span style="background-position: left; padding-left: 25px;background-image:url(<%=path %>/pub/images/user_business_boss.png);background-repeat:no-repeat;">
 		            	您好 <b id="curname">${sessionScope.UserInfo.realName}</b>
@@ -49,42 +51,48 @@
 		</div>
 
 		<!-- 左侧菜单 -->
-		<div id="leftarea" data-options="iconCls:'icons-other-house',region:'west',title:'加载中...',split:true,width:320">
+		<div id="leftarea" data-options="iconCls:'icons-other-house',region:'west',title:'加载中...',split:true,width:200">
 			<div id="leftmenu" class="easyui-accordion" data-options="fit:true,border:false"></div>
 		</div>
 
 		<!-- 内容 -->
-		<div id="mainarea" data-options="region:'center'" style="padding: 0px; background: #E0ECFF;">
-			<a href="#" id="mb1" class="easyui-menubutton" data-options="menu:'#mm1'">教务管理</a>
-     		<a href="#" id="mb" class="easyui-menubutton" data-options="menu:'#mm'">销售管理</a>
-     		<a href="#" id="mb2" class="easyui-menubutton" data-options="menu:'#mm2'">报表管理</a>
-    		<a href="#" id="mb3" class="easyui-menubutton" data-options="menu:'#mm3'">系统管理</a>
-    		<div id="mm" style="width:150px;background: #EDF7FF">
-	           <div >客户管理</div>
-	           <div >客户跟踪</div>
-    		</div>
-     		<div id="mm1" style="width:150px;background: #EDF7FF">
-	           <div >学员管理</div>
-	           <div >班级管理</div>
-	           <div >异动管理</div>
-	           <div >教师管理</div>
-	           <div >资源管理</div>
-	           <div >教质管理</div>
+		<div id="mainarea" data-options="region:'center'" style="padding: 0px;background:#E0ECFF;min-width:800px">
+			<div class="easyui-layout" data-options="fit:true,border:false,plain:false">
+				<div data-options="region:'north',height:28" style="min-width:800px;background:#E0ECFF">
+					<a href="#" id="mb1" class="easyui-menubutton" data-options="menu:'#mm1'">教务管理</a>
+		     		<a href="#" id="mb" class="easyui-menubutton" data-options="menu:'#mm'">销售管理</a>
+		     		<a href="#" id="mb2" class="easyui-menubutton" data-options="menu:'#mm2'">报表管理</a>
+		    		<a href="#" id="mb3" class="easyui-menubutton" data-options="menu:'#mm3'">系统管理</a>
+		    		<div id="mm" style="width:150px;background: #EDF7FF">
+			           <div >客户管理</div>
+			           <div >客户跟踪</div>
+		    		</div>
+		     		<div id="mm1" style="width:150px;background: #EDF7FF">
+			           <div >学员管理</div>
+			           <div >班级管理</div>
+			           <div >异动管理</div>
+			           <div >教师管理</div>
+			           <div >资源管理</div>
+			           <div >教质管理</div>
+		     		</div>
+		     		<div id="mm2" style="width:150px;background: #EDF7FF">
+			           <div >教务报表</div>
+			           <div >销售报表</div>
+			           <div >财务报表</div>
+		     		</div>
+		     		<div id="mm3" style="width:150px;background: #EDF7FF">
+			           <div >用户管理</div>
+			           <div >角色管理</div>
+			           <div >配置管理</div>
+			           <div >日志管理</div>
+		     		</div>
+	     		</div>
+	     		<div data-options="region:'center'">
+					<div id="pagetabs" class="easyui-tabs" data-options="tabPosition:'top',fit:true,border:false,plain:false">
+						<div title="后台首页" href="main.jsp" data-options="cache:false"></div>
+					</div>
+	     		</div>
      		</div>
-     		<div id="mm2" style="width:150px;background: #EDF7FF">
-	           <div >教务报表</div>
-	           <div >销售报表</div>
-	           <div >财务报表</div>
-     		</div>
-     		<div id="mm3" style="width:150px;background: #EDF7FF">
-	           <div >用户管理</div>
-	           <div >角色管理</div>
-	           <div >配置管理</div>
-	           <div >日志管理</div>
-     		</div>	
-			<div id="pagetabs" class="easyui-tabs" data-options="tabPosition:'top',fit:true,border:false,plain:false">
-				<div title="后台首页" href="main.jsp" data-options="cache:false"></div>
-			</div>
 		</div>
 
 		<!-- 右键菜单 -->
@@ -102,7 +110,6 @@
 
 		<script type="text/javascript">
 			var gMenuArr = [];
-			var gClassObj = null;
 			$(function(){
 				getLeft(1, '导航菜单');
 				$(document).bind('contextmenu',function(e){
@@ -214,28 +221,24 @@
 			
 			function openUrl(url , title)
 			{
-				if(gClassObj != null)
-				{
-					var tabObj = $('#pagetabs').tabs('getTab',gClassObj);
-					$('#pagetabs').tabs('update',{
-						tab:tabObj,
-						options:{
-							title: title,
-							content : '<iframe name="'+title+' "src="'+url+'" width="100%" height="100%" frameborder="0" scrolling="auto" ></iframe>'
+				if($('#pagetabs').tabs('exists', title)){
+					$('#pagetabs').tabs('select', title);
+					var current_tab = $('#pagetabs').tabs('getSelected');
+					$('#pagetabs').tabs('update', {
+						tab:current_tab,
+						options : {
+							content : '<iframe name="'+title+' "src="'+url+'" width="100%" height="97%" frameborder="0" scrolling="auto" style="margin-bottom:10px"></iframe>'
 						}
 					});
-				}
-				else
-				{
+				}else{
 					$('#pagetabs').tabs('add',{
 						title: title,
 						//href: url,
 						closable: true,
 						cache: false,
-						content : '<iframe name="'+title+' "src="'+url+'" width="100%" height="100%" frameborder="0" scrolling="auto" ></iframe>'
+						content : '<iframe name="'+title+' "src="'+url+'" width="100%" height="97%" frameborder="0" scrolling="auto" style="margin-bottom:10px"></iframe>'
 					});
 				}
-				gClassObj = title;
 			}
 		</script>
 	</body>

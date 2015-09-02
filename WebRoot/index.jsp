@@ -19,7 +19,6 @@
 				color:#666;
 				padding:5px 0;
 				margin-bottom:10px;
-				/**border-bottom:1px solid #ccc;**/
 			}
 			.fitem{
 				margin-bottom:5px;
@@ -102,13 +101,13 @@
 		</script>
 	</head>
 	<body>
-		<table id="dg" title="例子" class="easyui-datagrid" width="100%" style="height:570px" url="<%=path %>/example/queryExample.do" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+		<table id="dg" title="例子" class="easyui-datagrid" width="100%" style="height:490px" url="<%=path %>/example/queryExample.do" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 			<thead>
 				<tr>
 					<th field="exampleName" width="25%">参数名称</th>
 					<th field="exampleValue" width="25%">参数值</th>
 					<th field="createDate" width="25%">创建时间</th>
-					<th field="stateDate" width="25%">状态时间</th>
+					<th field="stateDate" width="24%">状态时间</th>
 				</tr>
 			</thead>
 		</table>
