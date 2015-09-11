@@ -152,7 +152,7 @@ public class ServiceEngine
 		String param2 = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0022\",securityCode:\"0000000000\",params:{busDetailId:\"1001\"},rtnDataFormatType:\"user-defined\"}";
 		String param3 = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0023\",securityCode:\"0000000000\",params:{orderId:\"E20150825101518100000156\",state:\"H\"},rtnDataFormatType:\"user-defined\"}";
 		try {
-			System.out.println(invokeHttp(param3));
+			System.out.println(invokeHttp(param1));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

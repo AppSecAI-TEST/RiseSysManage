@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	String path = request.getContextPath();
 %>
@@ -14,8 +15,8 @@
 		<%@ include file="/common/formvalidator.jsp" %>
 	</head>
 	<body class="easyui-layout">
-		<c:if test="${empty sessionScope.UserInfo}">
-			<c:redirect url="/login.jsp" />
+		<c:if test="${empty sessionScope.StaffT}">
+			<c:redirect url="login.jsp" />
 		</c:if>
 		<!-- 头部 -->
 		<div id="toparea" style="display:block;" data-options="region:'north',border:false,height:125">
@@ -44,7 +45,7 @@
 			<div class="panel-header panel-header-noborder top-toolbar" style="position:absolute;bottom:0px;border-top-width:1px;border-bottom-width:0px;z-index:1">
 				<div id="infobar">
 		            <span style="background-position: left; padding-left: 25px;background-image:url(<%=path %>/pub/images/user_business_boss.png);background-repeat:no-repeat;">
-		            	您好 <b id="curname">${sessionScope.UserInfo.realName}</b>
+		            	您好 <b id="curname">${sessionScope.StaffT.staffName}</b>
 		            </span>
 		        </div>
 			</div>
@@ -59,33 +60,22 @@
 		<div id="mainarea" data-options="region:'center'" style="padding: 0px;background:#E0ECFF;min-width:800px">
 			<div class="easyui-layout" data-options="fit:true,border:false,plain:false">
 				<div data-options="region:'north',height:28" style="min-width:800px;background:#E0ECFF">
-					<a href="#" id="mb1" class="easyui-menubutton" data-options="menu:'#mm1'">教务管理</a>
-		     		<a href="#" id="mb" class="easyui-menubutton" data-options="menu:'#mm'">销售管理</a>
-		     		<a href="#" id="mb2" class="easyui-menubutton" data-options="menu:'#mm2'">报表管理</a>
-		    		<a href="#" id="mb3" class="easyui-menubutton" data-options="menu:'#mm3'">系统管理</a>
-		    		<div id="mm" style="width:150px;background: #EDF7FF">
-			           <div >客户管理</div>
-			           <div >客户跟踪</div>
-		    		</div>
-		     		<div id="mm1" style="width:150px;background: #EDF7FF">
-			           <div >学员管理</div>
-			           <div >班级管理</div>
-			           <div >异动管理</div>
-			           <div >教师管理</div>
-			           <div >资源管理</div>
-			           <div >教质管理</div>
-		     		</div>
-		     		<div id="mm2" style="width:150px;background: #EDF7FF">
-			           <div >教务报表</div>
-			           <div >销售报表</div>
-			           <div >财务报表</div>
-		     		</div>
-		     		<div id="mm3" style="width:150px;background: #EDF7FF">
-			           <div >用户管理</div>
-			           <div >角色管理</div>
-			           <div >配置管理</div>
-			           <div >日志管理</div>
-		     		</div>
+					<c:forEach items="${sessionScope.funcNodeInfo}" var="funcNodeTree" varStatus="i">
+						<a href="#" id="mb${i.count}" class="easyui-menubutton" data-options="menu:'#mm${i.count}'">${funcNodeTree.funcNodeObj.funcNodeName}</a>
+			     		<div id="mm${i.count}" style="width:150px;background:#EDF7FF">
+			     			<c:forEach items="${funcNodeTree.funcNodeList}" var="obj" varStatus="j">
+			     				<div id="${obj.funcNodeId}">${obj.funcNodeName}</div>
+			     			</c:forEach>
+			     		</div>
+			     		<script language="javascript">
+			     			var ddlMenu${i.count} = $('#mb${i.count}').menubutton({menu:'#mm${i.count}'}); 
+							$(ddlMenu${i.count}.menubutton('options').menu).menu({
+            					onClick: function (item){
+                					getLeft(item.id, '导航菜单');
+            					}
+							});
+			     		</script>
+					</c:forEach>
 	     		</div>
 	     		<div data-options="region:'center'">
 					<div id="pagetabs" class="easyui-tabs" data-options="tabPosition:'top',fit:true,border:false,plain:false">
@@ -111,7 +101,7 @@
 		<script type="text/javascript">
 			var gMenuArr = [];
 			$(function(){
-				getLeft(1, '导航菜单');
+				getLeft(${sessionScope.funcNodeInfo[0].funcNodeList[0].funcNodeId}, '导航菜单');
 				$(document).bind('contextmenu',function(e){
 					e.preventDefault();
 					$('#rightmenu').menu('show', {
@@ -121,7 +111,7 @@
 				});
 				$.messager.show({			
 					title:'登录提示',
-					msg:'您好！${sessionScope.UserInfo.realName} 欢迎回来！<br/>最后登录时间：${sessionScope.UserInfo.lastDate}<br/>最后登录IP：${sessionScope.UserInfo.userIp}',
+					msg:'您好！${sessionScope.StaffT.staffName} 欢迎回来！<br/>最后登录时间：<fmt:formatDate value="${sessionScope.StaffT.lastDate}" pattern="yyyy-MM-dd HH:mm:ss" /><br/>最后登录IP：${sessionScope.StaffT.remoteIp}',
 					timeout:5000,
 					showType:'slide'
 				});
@@ -152,7 +142,7 @@
 			
 			function getLeft(menuId, title, that){
 				var options = $('body').layout('panel', 'west').panel('options');
-				if(title == options.title) return false;
+				//if(title == options.title) return false;
 				if(gMenuArr[menuId-1] != null)
 				{
 					removeLeft();

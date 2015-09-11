@@ -7,8 +7,6 @@ a:focus,a:hover,a:active {outline: 0;}
 .messager-body{word-wrap: break-word;word-break: break-all;}
 .datagrid-row-selected a{color:#000} /* 解决列表选中部分a标签看不见问题 */
 .panel input,.panel form{font-size:12px} /* 表单中字体问题 */
-.panel-title{min-width:100px;}
-.panel-header{min-width:110px;}
 .window-mask{width:100% !important;height:100% !important;}
 
 /* 表单样式 */

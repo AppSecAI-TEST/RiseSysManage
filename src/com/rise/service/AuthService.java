@@ -1,67 +1,61 @@
 package com.rise.service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.rise.model.UserInfo;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rise.model.FuncNodeTree;
+import com.rise.model.StaffT;
+import com.rise.pub.base.JacksonJsonMapper;
+import com.rise.pub.invoke.ServiceEngine;
 
+/**
+ * @author LEO
+ * 登录信息验证与获取(子项目服务层)
+ */
 @Service
-public class AuthService {
+public class AuthService 
+{
 
+	//获取随机字符串
 	public String getSecurityCode()
 	{
 		int randNum = (int)(Math.random()*9000)+1000;
 		return String.valueOf(randNum%10000);
 	}
 	
-	public void userCenter(HttpSession session , ModelAndView model , String username , String password  , String code , String remoteIp)
+	public String userCenter(HttpSession session , String username , String password) throws Exception
 	{
-		UserInfo userInfo = new UserInfo();
-		userInfo.setUserName(username);
-		userInfo.setRealName("admin");
-		userInfo.setUserIp(remoteIp);
-		userInfo.setLastDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-		session.setAttribute("UserInfo", userInfo);
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2001\",securityCode:\"0000000000\",params:{userName:\""+username+"\",password:\""+password+"\"},rtnDataFormatType:\"user-defined\"}";
+		String result = ServiceEngine.invokeHttp(param);
+		String retVal = null;
+		try{
+			JSONObject json = JSONObject.fromObject(result);
+			ObjectMapper mapper = JacksonJsonMapper.getInstance();
+			JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, FuncNodeTree.class);
+			List funcNodeInfo = (List)mapper.readValue(json.getJSONArray("funcNodeInfo").toString(), javaType);
+			StaffT staffT = (StaffT)JSONObject.toBean(json.getJSONObject("staff"), StaffT.class);
+			session.setAttribute("StaffT", staffT);
+			session.setAttribute("funcNodeInfo", funcNodeInfo);
+			retVal = "success";
+		}catch(Exception err){
+			err.printStackTrace();
+			retVal = result;
+		}
+		return retVal;
 	}
 	
-	public String menuLeft(String menuId)
+	public String menuLeft(String menuId , StaffT staffT) throws Exception
 	{
-		JSONArray json = new JSONArray();
-		JSONObject obj = new JSONObject();
-		obj.put("name", "学员管理");
-		JSONArray itemArr = new JSONArray();
-		String[] nameArr = {"档案管理","课程管理","选班管理","转班管理 ","转校管理","休学管理","异常管理","退费管理","VIP学员管理","费用调整","确认收入管理"};
-		for(int i = 0,n = nameArr.length;i < n;i++)
-		{
-			JSONObject item = new JSONObject();
-			item.put("text", nameArr[i]);
-			item.put("url", "/sys/teacherManage/archivesManage.jsp");
-			itemArr.add(item);
-		}
-		obj.put("son", itemArr);
-		json.add(obj);
-		JSONObject obj1 = new JSONObject();
-		obj1.put("name", "系统设置");
-		JSONArray itemArr1 = new JSONArray();
-		String[] nameArr1 = {"档案管理","课程管理","选班管理","转班管理 ","转校管理","休学管理","异常管理","退费管理","VIP学员管理","费用调整","确认收入管理"};
-		for(int i = 0,n = nameArr.length;i < n;i++)
-		{
-			JSONObject item = new JSONObject();
-			item.put("text", nameArr[i]);
-			item.put("url", "/sys/student/studentList.jsp");
-			itemArr1.add(item);
-		}
-		obj1.put("son", itemArr1);
-		json.add(obj1);
-		return json.toString();
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2002\",securityCode:\"0000000000\",params:{menuId:\""+menuId+"\",staffId:\""+staffT.getStaffId()+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
 	}
 }
 

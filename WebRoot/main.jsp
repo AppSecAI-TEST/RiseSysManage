@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style type="text/css">
 #index_public_main .bar {border:1px solid #999999; background:#FFFFFF; height:5px; font-size:2px; width:89%; margin:2px 0 5px 0;padding:1px;overflow: hidden;}
 #index_public_main .bar_1 {border:1px dotted #999999; background:#FFFFFF; height:5px; font-size:2px; width:89%; margin:2px 0 5px 0;padding:1px;overflow: hidden;}
@@ -27,9 +28,9 @@
 						<div class="panel-title">我的个人信息</div>
 					</div>
 					<div class="panel-body" style="padding:8px;line-height:1.8">
-						您好，${sessionScope.UserInfo.realName}<br />
-						最后登录时间：${sessionScope.UserInfo.lastDate} <br />
-						最后登录IP： ${sessionScope.UserInfo.userIp}<br />
+						您好，${sessionScope.StaffT.staffName}<br />
+						最后登录时间：<fmt:formatDate value="${sessionScope.StaffT.lastDate}" pattern="yyyy-MM-dd HH:mm:ss" /><br />
+						最后登录IP： ${sessionScope.StaffT.remoteIp}<br />
 					</div>
 				</div>
 			</td>

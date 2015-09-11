@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String path = request.getContextPath();
 %>
@@ -21,6 +22,11 @@ form div.input img{cursor:pointer}
 </style>
 </head>
 <body>
+<c:if test="${!empty error}">
+	<script language="javascript">
+		$.messager.alert('提示', '${error}', 'error');
+	</script>
+</c:if>
 <div class="easyui-dialog" title="用户登录" style="width:380px;height:240px" data-options="closable:false,iconCls:'icons-lock-lock',buttons:[{text:'登录',iconCls:'icons-user-user_go',handler:login}]">
 	<form id='form' method="post">
 		<div class="input">
@@ -37,8 +43,6 @@ form div.input img{cursor:pointer}
 	        <span style="margin-left:10px"><img id="code_img" align="top" width="100" height="28" onclick="changeCode()" src="/sys/auth.do?method=getSecurityImage" title="点击切换验证码"></span> 
 		</div>
 	</form> 
-</div>
-
 </div>
 <script type="text/javascript">
 $(function(){
@@ -66,17 +70,17 @@ var login = function(){
 		$.messager.alert('提示信息', '请填写验证码', 'error');
 		return false;
 	}
-	/**
-	$.post('', $("form").serialize(), function(data){
-		if(!data.status){
-			$.messager.alert('提示信息', data.info, 'error');
+	$.messager.progress({text:'登录中，请稍候...'});
+	$.post('/sys/auth.do?method=authStaff', $("form").serialize(), function(data){
+		$.messager.progress('close');
+		if(data != "success"){
+			$.messager.alert('提示', data, 'error');
 			changeCode();
 		}else{
 			$.messager.progress({text:'加载中，请稍候...'});
-			window.location.href = data.url;
+			window.location.href = "/sys/admin.jsp";
 		}
-	},'json');**/
-	window.location.href = "/sys/auth.do?method=userCenter&username="+$('#username').val()+"&password="+$('#password').val()+"&code="+$('#code').val();
+	});
 }
 </script>
 </body>
