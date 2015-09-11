@@ -52,13 +52,44 @@ $(document).ready(function() {
     
     $("#setVip").click(function() {
     	if(validateIsSelect()) {
-    		
+    		var row = $('#list_data').datagrid('getSelected');
+    		var studentId = row.studentId;
+    		$.ajax({
+    			url: "/sys/student/setVip.do",
+    			data: "studentId=" + studentId,
+    			dataType: "json",
+    			async: false,
+    			beforeSend: function()
+    	    	{
+    	    		$.messager.progress({title : 'VIP学员设置', msg : '正在设置VIP学员，请稍等……'});
+    	    	},
+    	    	success: function (data) {
+    	    		$.messager.progress('close'); 
+    	    		var flag = data.flag
+    	            if(flag)
+    	            {
+    	            	$.messager.alert('提示', "VIP学员设置成功！");
+    	            	window.location.reload();
+    	            }
+    	            else
+    	            {
+    	            	$.messager.alert('提示', "VIP学员设置失败！");
+    	            }
+    	        } 
+    		});
     	}
     });
     
     $("#addVipRematk").click(function() {
     	if(validateIsSelect()) {
-    		window.location.href = "/sys/vip/addVipRemark.jsp";
+    		var row = $('#list_data').datagrid('getSelected');
+    		var vip = row.vip;
+    		if("Y" == vip) {
+    			var studentId = row.studentId;
+    			window.location.href = "/sys/vip/addVipRemark.jsp?studentId="+studentId;
+    		} else {
+    			$.messager.alert('提示', "您选择的学员不是VIP学员，请先将该学员设置为VIP学员或者选择一个VIP学员进行添加VIP维护信息！");
+    		}
     	}
     });
     
@@ -376,6 +407,36 @@ $(document).ready(function() {
     	            else
     	            {
     	            	$.messager.alert('提示', "添加活动信息失败！");
+    	            }
+    	        } 
+    		});
+    	}
+    });
+    
+    //VIP维护信息添加
+    $("#vipRemarkSubmit").click(function() {
+    	if($("#vipRemarkFm").form('validate')) {
+    		var obj = JSON.stringify($("#vipRemarkFm").serializeObject());
+    		$.ajax({
+    			url: "/sys/student/addVipRemark.do",
+    			data: "param=" + obj,
+    			dataType: "json",
+    			async: false,
+    			beforeSend: function()
+    	    	{
+    	    		$.messager.progress({title : 'VIP维护信息', msg : '正在添加VIP维护信息，请稍等……'});
+    	    	},
+    	    	success: function (data) {
+    	    		$.messager.progress('close'); 
+    	    		var flag = data.flag
+    	            if(flag)
+    	            {
+    	            	$.messager.alert('提示', "成功添加VIP维护信息！");
+    	            	window.location.reload();
+    	            }
+    	            else
+    	            {
+    	            	$.messager.alert('提示', "添加VIP维护信息失败！");
     	            }
     	        } 
     		});

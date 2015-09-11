@@ -68,7 +68,7 @@ public class StudentService
 
 	public String addVipRemark(String param) throws Exception
 	{
-		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0048\",securityCode:\"0000000000\",params:{param:{studentId:\"2\", staffId:\"1234\", remark:\"该学员系校方关系，设置VIP标识，2015年报名S1，原价20000元，减免学费5000元，实收15000元。\"}},rtnDataFormatType:\"user-defined\"}";
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0048\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
 
