@@ -212,7 +212,7 @@
 	      	<div style="margin-top: 50px;">
 	      		<div style="float: left;margin-left: 900px;">
 	      			<a href="javascript:void(0)" id="studentSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      			&nbsp;<a href="javascript:void(0)" id="addStudent" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;">返回</a>
+	      			&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;">返回</a>
 	      		</div>
 	      	</div>
   		</div>

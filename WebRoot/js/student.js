@@ -31,35 +31,44 @@ $(document).ready(function() {
     });
     
     $("#updateStudent").click(function() {
-    	window.location.href = "/sys/student/updateStudent.jsp";
+    	if(validateIsSelect()) {
+    		window.location.href = "/sys/student/updateStudent.jsp";
+    	}
     });
     
     $("#viewStudent").click(function() {
-    	window.location.href = "/sys/student/viewStudent.jsp";
+    	if(validateIsSelect()) {
+    		window.location.href = "/sys/student/viewStudent.jsp";
+    	}
     });
     
     $("#addActivity").click(function() {
-    	window.location.href = "/sys/student/addActivity.jsp";
+    	if(validateIsSelect()) {
+    		var row = $('#list_data').datagrid('getSelected');
+    		var studentId = row.studentId;
+    		window.location.href = "/sys/student/addActivity.jsp?studentId="+studentId;
+    	}
     });
     
     $("#setVip").click(function() {
-    	
+    	if(validateIsSelect()) {
+    		
+    	}
     });
     
     $("#addVipRematk").click(function() {
-    	var row = $('#list_data').datagrid('getSelected');
-    	if(row) {
+    	if(validateIsSelect()) {
     		window.location.href = "/sys/vip/addVipRemark.jsp";
     	}
     });
     
     $("#viewVip").click(function() {
-    	var row = $('#list_data').datagrid('getSelected');
-    	if(row) {
+    	if(validateIsSelect()) {
     		window.location.href = "/sys/vip/viewVipRemarkList.jsp";
     	}
     });
     
+    //招生顾问A的学校发生变化时执行的操作
     $('#advisterASchoolId').combobox({    
         onChange : function(n, o) {
         	$("#advisterIdA").combobox({
@@ -77,6 +86,7 @@ $(document).ready(function() {
         }  
     });
     
+    //招生顾问B的学校发生变化时执行的操作
     $('#advisterBSchoolId').combobox({    
         onChange : function(n, o) {
         	$("#advisterIdB").combobox({
@@ -94,6 +104,7 @@ $(document).ready(function() {
         }  
     });
     
+    //就读学校类型发生变化时执行的操作
     $("#schoolType").combobox({
     	onChange : function(n, o) {
     		$("#realSchoolId").combobox({
@@ -111,6 +122,7 @@ $(document).ready(function() {
     	}
     });
     
+    //点击“添加就读信息”按钮
     $("#addRealSchool").click(function() {
     	var realSchoolId = $('#realSchoolId').combobox('getValue');
     	if(realSchoolId != "" && realSchoolId != null && realSchoolId != undefined)
@@ -132,6 +144,7 @@ $(document).ready(function() {
     	}
     });
     
+    //点击联系人信息中的“添加”按钮
     $("#addContact").click(function() {
     	if($("#contactFm").form('validate'))
     	{
@@ -213,6 +226,7 @@ $(document).ready(function() {
     	}
     });
     
+    //学员验重
     $("#validate").click(function() {
     	var flag = false;
     	var identityType = $('#identityType').combobox('getValue');
@@ -268,6 +282,7 @@ $(document).ready(function() {
     	}
     });
     
+    //学员注册
     $("#studentSubmit").click(function() {
     	if(validateFlag)
     	{
@@ -316,7 +331,7 @@ $(document).ready(function() {
     		    	            }
     		    	            else
     		    	            {
-    		    	            	$.messager.alert('提示', "学员注册成功！");
+    		    	            	$.messager.alert('提示', "学员注册失败！");
     		    	            }
     		    	        } 
     		    		});
@@ -333,18 +348,65 @@ $(document).ready(function() {
     		$.messager.alert('提示', "请先对学员进行验重！");
     	}
     });
+    
+    //添加活动
+    $("#activitySubmit").click(function(){
+    	if($("#activityFm").form('validate')) {
+    		var obj = JSON.stringify($("#activityFm").serializeObject());
+    		var activityName = $("#title").combobox("getValue");
+    		obj = obj.substring(0, obj.length - 1);
+    		obj += ",\"activityName\":\""+activityName+"\"}";
+    		$.ajax({
+    			url: "/sys/student/addActivity.do",
+    			data: "param=" + obj,
+    			dataType: "json",
+    			async: false,
+    			beforeSend: function()
+    	    	{
+    	    		$.messager.progress({title : '活动信息', msg : '正在添加活动信息，请稍等……'});
+    	    	},
+    	    	success: function (data) {
+    	    		$.messager.progress('close'); 
+    	    		var flag = data.flag
+    	            if(flag)
+    	            {
+    	            	$.messager.alert('提示', "成功添加活动信息！");
+    	            	window.location.reload();
+    	            }
+    	            else
+    	            {
+    	            	$.messager.alert('提示', "添加活动信息失败！");
+    	            }
+    	        } 
+    		});
+    	}
+    });
 });
 
+//删除就读学校记录
 function deleteRealSchool(obj)
 {
 	$(obj).parent().parent().remove(); 
 	td = td - 1;
 }
 
+//删除联系人信息
 function deleteContact(obj)
 {
 	$(obj).parent().parent().remove(); 
 	contactTd = contactTd - 1;
+}
+
+function validateIsSelect()
+{
+	var flag = false;
+	var row = $('#list_data').datagrid('getSelected');
+	if(row) {
+		flag = true;
+	} else {
+		$.messager.alert('提示', "请先选择您要操作的学员！");
+	}
+	return flag;
 }
 
 function initDate()

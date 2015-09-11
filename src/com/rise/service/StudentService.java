@@ -56,7 +56,7 @@ public class StudentService
 
 	public String addActivity(String param) throws Exception 
 	{
-		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0046\",securityCode:\"0000000000\",params:{param:{studentId:\"2\",title:\"2015瑞思杯\",activityDate:\"2015-06-01\",award:\"活动小组第一名\",remark:\"2015瑞思杯\"}},rtnDataFormatType:\"user-defined\"}";
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0046\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
 
