@@ -17,3 +17,18 @@ function myparser(s) {
 		return new Date();
 	}
 }
+
+function formatItem(row) {
+	var s = '<span>' + row.codeName + '</span>';
+	return s;
+}
+
+function formatSchool(row) {
+	var s = '<span>' + row.schoolName + '</span>';
+	return s;
+}
+
+function formatStaff(row) {
+	var s = '<span>' + row.staffName + '</span>';
+	return s;
+}

@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+body {margin:10px; background-image:none; position:static; left:auto; width:1105px; margin-left:10px; margin-right:0; text-align:left;}
+#base {position:absolute; z-index:0;}
+#u0 {position:absolute; left:4px; top:2px; width:1101px; height:60px;}
+#u1 {position:absolute; left:2px; top:22px; width:1097px; visibility:hidden; word-wrap:break-word;}
+.maintable {border-collapse: collapse; border-spacing:0; border: 0px solid #ccc; height:auto;} 
+.maintable tr {height: 30px;}
+.maintable td {border-top: 0; border-right: 1px solid #ccc; border-bottom: 1px solid #ccc; border-left: 0; } 
+.maintable tr.lastrow td {border-bottom: 0;} 
+.maintable tr td.lastCol {border-right: 0; } 
+span {font-family: Arial,微软雅黑,宋体; font-size: 14px;}
+.linkmore{color : #0099FF; text-decoration : none; cursor:pointer;}
+.linkmore:hover{color : ED0000 !important;}
+.linkmore1{color : #000000;text-decoration : none;}
+.linkmore1:hover{color : #4AC5C3 !important;}
+.linkmore2{color : #ED6C44; text-decoration : none; cursor:pointer;}
+.linkmore2:hover{color : #000 !important;}
