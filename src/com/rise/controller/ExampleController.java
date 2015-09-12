@@ -5,10 +5,13 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.rise.pub.util.StringUtil;
 import com.rise.service.ExampleService;
 
 @Controller
@@ -44,7 +47,7 @@ public class ExampleController
 	}
 	
 	@RequestMapping(value = "/queryExample.do")
-	public void queryExample(HttpServletRequest request , HttpServletResponse response , String page , String rows)
+	public void queryExample(HttpServletRequest request , HttpServletResponse response , String page , String rows, String json)
 	{
 		PrintWriter out = null;
 		try
@@ -53,7 +56,12 @@ public class ExampleController
 			out = response.getWriter();
 			Integer pageNumInt = Integer.parseInt(page)-1;
 			Integer pageSizeInt = Integer.parseInt(rows);
-			String retVal = exampleService.queryExample(pageNumInt*pageSizeInt, pageSizeInt);
+			JSONObject obj = JSONObject.fromObject(json);
+			String paramName = StringUtil.getJSONObjectKeyVal(obj, "paramName");
+			String paramId = StringUtil.getJSONObjectKeyVal(obj, "paramId");
+			System.out.println(paramName+"----");
+			System.out.println(paramId+"========");
+			String retVal = exampleService.queryExample(pageNumInt*pageSizeInt, pageSizeInt,paramName,paramId);
 			out.write(retVal);
 		}
 		catch(Exception err)

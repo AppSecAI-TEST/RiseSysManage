@@ -20,9 +20,9 @@ public class ExampleService
 		return ServiceEngine.invokeHttp(param);
 	}
 	
-	public String queryExample(Integer start ,Integer rownum) throws Exception
+	public String queryExample(Integer start ,Integer rownum, String paramName, String paramId) throws Exception
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0013\",securityCode:\"0000000000\",params:{start:\""+start+"\",rownum:\""+rownum+"\"},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0013\",securityCode:\"0000000000\",params:{start:\""+start+"\",rownum:\""+rownum+"\",paramName:\""+paramName+"\",paramId:\""+paramId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 	
