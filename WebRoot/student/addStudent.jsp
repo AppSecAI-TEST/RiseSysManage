@@ -60,7 +60,7 @@
 	      						 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_T&codeType=IDENTITY_TYPE">
         						</select>
         						<input name="identityId" id="identityId" type="text" class="easyui-textbox" style="width: 200px; height: 28px;"/>
-	      						<a href="javascript:void(0)" id="validate" class="easyui-linkbutton" style="width: 80px; height: 28px;">验重</a>
+	      						<a href="javascript:void(0)" id="validate" class="easyui-linkbutton" style="width: 80px; height: 28px;" funcNodeId="1001">验重</a>
 	      					</td>
 	      				</tr>
 	      				<tr>
@@ -134,7 +134,7 @@
 	      						<select name="dutyAdvister" id="dutyAdvister" class="easyui-combobox" style="width: 150px; height: 28px;"
 	      						data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#dutyAdvister').combobox('setValue',data[0].staffId);}"
-	      						url="<%=path %>/pubData/qryStaffList.do?post=002&schoolId=1001">
+	      						url="<%=path %>/pubData/qryStaffList.do?post=002&schoolId=${sessionScope.StaffT.schoolId}">
         						</select>
 	      					</td>
 	      					<td align="right">
@@ -145,7 +145,7 @@
 	      						<select name="carer" id="carer" class="easyui-combobox" style="width: 150px; height: 28px;"
 								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#carer').combobox('setValue',data[0].staffId);}"
-	      						url="<%=path %>/pubData/qryStaffList.do?post=003&schoolId=1001">
+	      						url="<%=path %>/pubData/qryStaffList.do?post=003&schoolId=${sessionScope.StaffT.schoolId}">
         						</select>
 	      					</td>
 	      				</tr>

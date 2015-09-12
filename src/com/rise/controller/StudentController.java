@@ -107,15 +107,16 @@ public class StudentController
 	
 	//根据学员ID查询学员资料
 	@RequestMapping(value = "/qryStudentById.do")
-	public void qryStudentById(String studentId, HttpServletResponse response)
+	public void qryStudentById(String studentId, String funcNodeId, HttpServletResponse response)
 	{
 		log.error(studentId);
+		log.error(funcNodeId);
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = studentService.qryStudentById(studentId);
+			String retVal = studentService.qryStudentById(studentId, funcNodeId);
 			log.error(retVal);
 			out.write(retVal);
 		}

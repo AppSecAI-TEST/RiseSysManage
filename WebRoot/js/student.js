@@ -32,7 +32,17 @@ $(document).ready(function() {
     
     $("#updateStudent").click(function() {
     	if(validateSelect()) {
-    		window.location.href = "/sys/student/updateStudent.jsp";
+    		var row = $('#list_data').datagrid('getSelected');
+    		var studentId = row.studentId;
+    		var funcNodeId = $("#updateStudent").attr("funcNodeId");
+    		var dutyAdvister = row.dutyAdvister;
+    		var carer = row.carer;
+    		var advisterIdA = row.advisterIdA;
+    		var advisterIdB = row.advisterIdB;
+    		var identityType = row.identityType;
+    		var advisterASchoolId = row.advisterASchoolId;
+    		var advisterBSchoolId = row.advisterBSchoolId;
+    		window.location.href = "/sys/student/updateStudent.jsp?studentId="+studentId+"&funcNodeId="+funcNodeId+"&dutyAdvister="+dutyAdvister+"&carer="+carer+"&advisterIdA="+advisterIdA+"&advisterIdB="+advisterIdB+"&identityType="+identityType+"&advisterASchoolId="+advisterASchoolId+"&advisterBSchoolId="+advisterBSchoolId;
     	}
     });
     
@@ -178,7 +188,6 @@ $(document).ready(function() {
     		var schoolType = $('#schoolType').combobox('getValue');
     		var schoolTypeText = $('#schoolType').combobox('getText');
     		var realSchoolName = $('#realSchoolId').combobox('getText');
-    		var delTd = td + 1;
     		var content = "<tr><td align='right'><span>学校类型：</span></td><td><span>"+schoolTypeText+"</span></td>";
     		content += "<td align='right'><span>学校名称：</span></td><td><span>"+realSchoolName+"</span></td>";
     		content += "<input type='hidden' name='realSchools' schoolType='"+schoolType+"' realSchoolId='"+realSchoolId+"'/>";
@@ -230,7 +239,7 @@ $(document).ready(function() {
     				var contactIdentityTypeText = $('#contactIdentityType').combobox('getText');
     				var contactIdentityId = $("#contactIdentityId").textbox("getValue");
     				var phone = $("#phone").textbox("getValue");
-    				var content = "<tr><td align='center'><span>"+relationTypeText+"</span>";
+    				var content = "<tr><td align='center'><span>"+relationTypeText+"</span></td>";
     				content += "<td align='center'><span>"+contactName+"</span></td>";
     				content += "<td align='center'><span>"+job+"</span></td>";
     				content += "<td align='center'>";
@@ -245,9 +254,9 @@ $(document).ready(function() {
     					content += "<input type='checkbox'/>";
     				}
     				content += "</td>";
-    				content += "<td align='center'><span>"+contactIdentityTypeText+"："+contactIdentityId+"</span>";
-    				content += "<td align='center'><span>"+phone+"</span></td>";
-    				content += "<input type='hidden' name='contacts' relationType='"+relationType+"' job='"+job+"' used='"+contactUsed+"' contactName='"+contactName+"' identityType='"+contactIdentityType+"' identityId='"+contactIdentityId+"' phone='"+phone+"'/></td>"
+    				content += "<td align='center'><span>"+contactIdentityTypeText+"："+contactIdentityId+"</span></td>";
+    				content += "<td align='center'><span>"+phone+"</span>";
+    				content += "<input type='hidden' name='contacts' relationType='"+relationType+"' job='"+job+"' used='"+contactUsed+"' contactName='"+contactName+"' identityType='"+contactIdentityType+"' identityId='"+contactIdentityId+"' phone='"+phone+"'/></td>";
     				content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='deleteContact(this)'><span>删除</span></a></td></tr>";
     				$("#addContactTd tr:eq("+contactTd+")").after(content);
     				contactTd += 1;
@@ -299,6 +308,9 @@ $(document).ready(function() {
     	if(flag)
     	{
     		var obj = JSON.stringify($("#studentFm").serializeObject());
+    		obj = obj.substring(0, obj.length - 1);
+    		var funcNodeId = $("#validate").attr("funcNodeId");
+    		obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
     		$.ajax({
     			url: "/sys/student/validate.do",
     			data: "param=" + obj,
