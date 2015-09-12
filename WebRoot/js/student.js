@@ -31,22 +31,39 @@ $(document).ready(function() {
     });
     
     $("#updateStudent").click(function() {
-    	if(validateIsSelect()) {
+    	if(validateSelect()) {
     		window.location.href = "/sys/student/updateStudent.jsp";
     	}
     });
     
     $("#viewStudent").click(function() {
-    	if(validateIsSelect()) {
+    	if(validateSelect()) {
     		window.location.href = "/sys/student/viewStudent.jsp";
     	}
     });
     
     $("#addActivity").click(function() {
-    	if(validateIsSelect()) {
+    	if(validateSelect()) {
     		var row = $('#list_data').datagrid('getSelected');
     		var studentId = row.studentId;
     		window.location.href = "/sys/student/addActivity.jsp?studentId="+studentId;
+    	}
+    });
+    
+    $("#batchUpdate").click(function() {
+    	if(validate()) {
+    		$("#dlg").dialog('open').dialog('setTitle', '批量修改客户关怀和责任顾问');//设定表头  
+    		$('#batchUpdateFm').form('clear');//清空窗体数据  
+    		var data = $('#updateAdvisterId').combobox('getData');
+			$('#updateAdvisterId').combobox('setValue',data[0].staffId);
+			data = $('#updateCarer').combobox('getData');
+			$('#updateCarer').combobox('setValue',data[0].staffId);
+			$("#handlerId").val($("#staffId").val());
+    		var obj = $('#list_data').datagrid('getSelections');
+    		for(var i = 0, n = obj.length; i < n; i++)
+    		{
+    			$("#batch_update_data").datagrid('insertRow', {index: i, row: obj[i]});
+    		}
     	}
     });
     
@@ -442,6 +459,43 @@ $(document).ready(function() {
     		});
     	}
     });
+    
+    $("#batchUpdateSubmit").click(function() {
+    	var studentId = "";
+    	var obj = $('#list_data').datagrid('getSelections');
+    	for(var i = 0, n = obj.length; i < n; i++)
+    	{
+    		studentId += obj[i].studentId + ",";
+    	}
+    	studentId = studentId.substring(0, studentId.length - 1);
+    	$("#updateStudentId").val(studentId);
+    	var obj = JSON.stringify($("#batchUpdateFm").serializeObject());
+    	alert($("#handlerId").val());
+    	alert(obj);
+		$.ajax({
+			url: "/sys/student/batchUpdateAdvister.do",
+			data: "param=" + obj,
+			dataType: "json",
+			async: false,
+			beforeSend: function()
+	    	{
+	    		$.messager.progress({title : '批量修改', msg : '正在批量修改客户关怀和责任顾问，请稍等……'});
+	    	},
+	    	success: function (data) {
+	    		$.messager.progress('close'); 
+	    		var flag = data.flag
+	            if(flag)
+	            {
+	            	$.messager.alert('提示', "成功批量修改客户关怀和责任顾问！");
+	            	window.location.reload();
+	            }
+	            else
+	            {
+	            	$.messager.alert('提示', "批量修改客户关怀和责任顾问失败！");
+	            }
+	        } 
+		});
+    });
 });
 
 //删除就读学校记录
@@ -464,6 +518,35 @@ function validateIsSelect()
 	var row = $('#list_data').datagrid('getSelected');
 	if(row) {
 		flag = true;
+	} else {
+		$.messager.alert('提示', "请先选择您要操作的学员！");
+	}
+	return flag;
+}
+
+function validate()
+{
+	var flag = false;
+	var obj = $('#list_data').datagrid('getSelections');
+	if(obj.length > 0) {
+		flag = true;
+	}
+	else {
+		$.messager.alert('提示', "请先选择您要操作的学员！");
+	}
+	return flag;
+}
+
+function validateSelect()
+{
+	var flag = false;
+	var obj = $('#list_data').datagrid('getSelections');
+	if(obj.length > 0) {
+		if(obj.length > 1) {
+			$.messager.alert('提示', "只能选择一个学员进行操作！");
+		} else {
+			flag = true;
+		}
 	} else {
 		$.messager.alert('提示', "请先选择您要操作的学员！");
 	}

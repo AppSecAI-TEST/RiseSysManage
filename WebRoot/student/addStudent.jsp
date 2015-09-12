@@ -105,7 +105,7 @@
 	      						<select id="advisterASchoolId" class="easyui-combobox" style="width: 96px; height: 28px;"
 	      						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#advisterASchoolId').combobox('setValue',data[0].schoolId);}"
-	      						url="<%=path %>/pubData/qrySchoolList.do">
+	      						url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
         						</select>
         						<select name="advisterIdA" id="advisterIdA" class="easyui-combobox" style="width: 150px; height: 28px;">
         						</select>
@@ -118,7 +118,7 @@
 	      						<select id="advisterBSchoolId" class="easyui-combobox" style="width: 96px; height: 28px;"
 	      						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#advisterBSchoolId').combobox('setValue',data[0].schoolId);}"
-	      						url="<%=path %>/pubData/qrySchoolList.do">
+	      						url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
 	        					</select>
 	        					<select name="advisterIdB" id="advisterIdB" class="easyui-combobox" style="width: 150px; height: 28px;">
 	        					</select>
@@ -212,7 +212,7 @@
 	      	<div style="margin-top: 50px;">
 	      		<div style="float: left;margin-left: 900px;">
 	      			<a href="javascript:void(0)" id="studentSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      			&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;">返回</a>
+	      			&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
 	      		</div>
 	      	</div>
   		</div>

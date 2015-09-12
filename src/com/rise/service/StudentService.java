@@ -77,4 +77,10 @@ public class StudentService
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0049\",securityCode:\"0000000000\",params:{studentId:\""+studentId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
+
+	public String batchUpdateAdvister(String param) throws Exception 
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00410\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
 }

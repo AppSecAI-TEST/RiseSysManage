@@ -47,14 +47,14 @@ public class QryPubDataController
 	}
 	
 	@RequestMapping(value = "/qrySchoolList.do")
-	public void qrySchoolList(HttpServletResponse response)
+	public void qrySchoolList(String schoolId, HttpServletResponse response)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = qryPubDataService.qrySchoolList();
+			String retVal = qryPubDataService.qrySchoolList(schoolId);
 			log.error(retVal);
 			out.write(retVal);
 		}

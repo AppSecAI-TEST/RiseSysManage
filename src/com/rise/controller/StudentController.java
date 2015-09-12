@@ -266,4 +266,30 @@ public class StudentController
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/batchUpdateAdvister.do")
+	public void batchUpdateAdvister(String param, HttpServletResponse response)
+	{
+		log.error(param);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = studentService.batchUpdateAdvister(param);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }
