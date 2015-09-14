@@ -13,14 +13,13 @@
 		 -->
 		<%@ include file="/common/head.jsp" %>
 		<%@ include file="/common/formvalidator.jsp" %>
-		<link href="<%=path %>/pub/css/admin.css" rel="stylesheet" type="text/css"/>
 	</head>
 	<body class="easyui-layout">
 		<c:if test="${empty sessionScope.StaffT}">
 			<c:redirect url="login.jsp" />
 		</c:if>
 		<!-- 头部 -->
-		<div id="toparea" style="display:block;" data-options="region:'north',border:false,height:125">
+		<div id="toparea" style="display:block;" data-options="region:'north',border:false,height:95">
 			<div id="topmenu" class="easyui-panel" data-options="fit:true,border:false">
 				<a class="logo"></a>
 				<!-- 
@@ -101,6 +100,10 @@
 
 		<script type="text/javascript">
 			var gMenuArr = [];
+			var MenuInfo = function(menuId , menuData){
+				this.menuId = menuId;
+				this.menuData = menuData;
+			};
 			$(function(){
 				getLeft(${sessionScope.funcNodeInfo[0].funcNodeList[0].funcNodeId}, '导航菜单');
 				$(document).bind('contextmenu',function(e){
@@ -144,14 +147,15 @@
 			function getLeft(menuId, title, that){
 				var options = $('body').layout('panel', 'west').panel('options');
 				//if(title == options.title) return false;
-				if(gMenuArr[menuId-1] != null)
+				var menuObj = getMenuArr(menuId);
+				if(menuObj != null)
 				{
 					removeLeft();
 					$('body').layout('panel', 'west').panel({title: title});
 					var loading = '<div class="panel-loading">Loading...</div>';
 					$("#leftmenu").accordion("add", {content: loading});
 					removeLeft();
-					menuFunc(gMenuArr[menuId-1]);
+					menuFunc(menuObj);
 				}
 				else
 				{
@@ -169,7 +173,8 @@
 						dataType: "json",
 						success: function(data){
 							removeLeft();
-							gMenuArr.push(data);
+							var dataObj = new MenuInfo(menuId , data); 
+							gMenuArr.push(dataObj);
 							menuFunc(data)
 						}
 					});
@@ -180,6 +185,19 @@
 					})
 					$(that).addClass('focus');
 				}
+			}
+			
+			function getMenuArr(valId)
+			{
+				for(var i = 0,n = gMenuArr.length;i < n;i++)
+				{
+					var menuObj = gMenuArr[i];
+					if(parseInt(menuObj.menuId) == parseInt(valId))
+					{
+						return menuObj.menuData;
+					}
+				}
+				return null;
 			}
 			
 			function menuFunc(data)
