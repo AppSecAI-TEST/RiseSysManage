@@ -13,6 +13,7 @@
 		 -->
 		<%@ include file="/common/head.jsp" %>
 		<%@ include file="/common/formvalidator.jsp" %>
+		<link href="<%=path %>/pub/css/admin.css" rel="stylesheet" type="text/css"/>
 	</head>
 	<body class="easyui-layout">
 		<c:if test="${empty sessionScope.StaffT}">
@@ -42,7 +43,7 @@
 					<a href="javascript:logout();" class="easyui-linkbutton" data-options="plain:true,iconCls:'logout',size:'large',iconAlign:'top'">退出</a>
 			    </div>
 			</div>
-			<div class="panel-header panel-header-noborder top-toolbar" style="position:absolute;bottom:0px;border-top-width:1px;border-bottom-width:0px;z-index:1">
+			<div class="panel-header panel-header-noborder top-toolbar" style="position:absolute;bottom:0px;border-top-width:1px;border-bottom-width:0px;z-index:1;display:none;">
 				<div id="infobar">
 		            <span style="background-position: left; padding-left: 25px;background-image:url(<%=path %>/pub/images/user_business_boss.png);background-repeat:no-repeat;">
 		            	您好 <b id="curname">${sessionScope.StaffT.staffName}</b>
