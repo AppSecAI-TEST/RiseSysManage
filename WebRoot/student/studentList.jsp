@@ -21,14 +21,17 @@
       		</div>
 			<div class="easyui-panel" style="min-width:1101px;width:97%;padding:10px;">
 				<form id="qryFm">
+					<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
 					<table width="100%" cellspacing="2">
 						<tr>
 							<td align="right">
 								<span>所属校区：</span>
 							</td>
 							<td width="114px">
-								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;">
-	          					
+								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
+	      						 onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
+	      						url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
         						</select>
 							</td>
 							<td align="right">
@@ -36,7 +39,6 @@
 							</td>
 							<td width="114px">
 								<select id="name" name="name" class="easyui-combobox" style="width: 114px; height: 25px;">
-	          					
         						</select>
 							</td>
 							<td align="right">
@@ -63,24 +65,30 @@
 								<span>招生顾问：</span>
 							</td>
 							<td width="114px">
-								<select id="advisterId" name="advisterId" class="easyui-combobox" style="width: 114px; height: 25px;">
-	          					
+								<select id="advisterId" name="advisterId" class="easyui-combobox" style="width: 114px; height: 25px;"
+								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
+	      						 onLoadSuccess:function(data){$('#advisterId').combobox('setValue',data[0].staffId);}"
+	      						url="<%=path %>/pubData/qryStaffList.do?post=001&schoolId=${sessionScope.StaffT.schoolId}">
         						</select>
 							</td>
 							<td align="right">
 								<span>责任顾问：</span>
 							</td>
 							<td width="114px">
-								<select id="dutyAdvister" name="dutyAdvister" class="easyui-combobox" style="width: 114px; height: 25px;">
-	          					
+								<select id="dutyAdvister" name="dutyAdvister" class="easyui-combobox" style="width: 114px; height: 25px;"
+								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
+	      						 onLoadSuccess:function(data){$('#dutyAdvister').combobox('setValue',data[0].staffId);}"
+	      						url="<%=path %>/pubData/qryStaffList.do?post=002&schoolId=${sessionScope.StaffT.schoolId}">
         						</select>
 							</td>
 							<td align="right">
 								<span>客户关怀：</span>
 							</td>
 							<td width="114px">
-								<select id="carer" name="carer" class="easyui-combobox" style="width: 114px; height: 25px;">
-	          					
+								<select id="carer" name="carer" class="easyui-combobox" style="width: 114px; height: 25px;"
+								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
+	      						 onLoadSuccess:function(data){$('#carer').combobox('setValue',data[0].staffId);}"
+	      						url="<%=path %>/pubData/qryStaffList.do?post=003&schoolId=${sessionScope.StaffT.schoolId}">
         						</select>
 							</td>
 							<td align="right">
@@ -102,15 +110,15 @@
 			
 			<div id="toolbar" style="padding: 2px 15px; height: auto">
     			<a href="javascript:void(0)" id="addStudent" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">学员注册</a>
-    			<a href="javascript:void(0)" id="updateStudent" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">修改档案</a>
+    			<a href="javascript:void(0)" id="updateStudent" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;" funcNodeId="1002">修改档案</a>
     			<a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">浏览</a>
     			<a href="javascript:void(0)" id="addActivity" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">活动奖项</a>
-  				<a href="javascript:void(0)" id="addActivity" class="easyui-linkbutton" iconCls="icon-edit" style="width: 200px;">批量修改客户关怀和责任顾问</a>
+  				<a href="javascript:void(0)" id="batchUpdate" class="easyui-linkbutton" iconCls="icon-edit" style="width: 200px;">批量修改客户关怀和责任顾问</a>
   			</div>
   			
 			<div style="padding:5px 0;">
 				<table class="easyui-datagrid" title="查询结果" style="width:100%;height:250px" id="list_data" url="<%=path %>/student/qryStudentList.do?funcNodeId=1000"  
-					toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
+					toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 					<thead>
 						<tr>
 							<th data-options="field:'ck',checkbox:true"></th>
@@ -130,6 +138,56 @@
 					</thead>
 				</table>
 			</div>
+			
+			<div id="dlg" class="easyui-dialog" style="width: 900px; height: auto; padding: 10px 20px" closed="true" data-options="modal:true" buttons="#dlgBtn">
+	  			<form id="batchUpdateFm" method="post">
+	  				<input type="hidden" id="updateStudentId" name="updateStudentId"/>
+	  				<input type="hidden" id="handlerId" name="handlerId"/>
+	  				<h2 style="text-align: center;">客户关怀和责任顾问批量调整单</h1>
+	  				<table width="100%" cellspacing="2">
+	  					<tr>
+	  						<td width="15%">&nbsp;</td>
+	  						<td align="right" width="20%"><span>责任顾问统一调整：</span></td>
+	  						<td width="15%">
+	  							<select id="updateAdvisterId" name="updateAdvisterId" class="easyui-combobox" style="width: 114px; height: 25px;"
+								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
+	      						 onLoadSuccess:function(data){$('#updateAdvisterId').combobox('setValue',data[0].staffId);}"
+	      						url="<%=path %>/pubData/qryStaffList.do?post=002&schoolId=${sessionScope.StaffT.schoolId}">
+        						</select>
+	  						</td>
+	  						<td align="right" width="20%"><span>客户关怀统一调整：</span></td>
+	  						<td width="15%">
+	  							<select id="updateCarer" name="updateCarer" class="easyui-combobox" style="width: 114px; height: 25px;"
+								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
+	      						 onLoadSuccess:function(data){$('#updateCarer').combobox('setValue',data[0].staffId);}"
+	      						url="<%=path %>/pubData/qryStaffList.do?post=003&schoolId=${sessionScope.StaffT.schoolId}">
+        						</select>
+	  						</td>
+	  						<td width="15%">&nbsp;</td>
+	  					</tr>
+	  				</table>
+	  				
+	  				<div style="padding:5px 0;">
+						<table class="easyui-datagrid" style="width:100%;height:auto" id="batch_update_data">
+							<thead>
+								<tr>
+									<th data-options="field:'schoolName',width:80,align:'center'">所属校区</th>
+									<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
+									<th data-options="field:'sexVal',width:50,align:'center'">性别</th>
+									<th data-options="field:'phone',width:250,align:'center'">联系电话</th>
+									<th data-options="field:'createDate',width:100,align:'center'">建档时间</th>
+									<th data-options="field:'dutyAdvisterName',width:100,align:'center'">责任顾问</th>
+									<th data-options="field:'carerName',width:100,align:'center'">客户关怀</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+	  			</form>
+	  		</div>
+	  		<div id="dlgBtn">
+	    		<a href="javascript:void(0)" id="batchUpdateSubmit" class="easyui-linkbutton" iconCls="icon-ok">提交</a> 
+	    		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+	  		</div>
   		</div>
  	</body>
 </html>

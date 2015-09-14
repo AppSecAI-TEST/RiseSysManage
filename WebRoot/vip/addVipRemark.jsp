@@ -38,7 +38,7 @@
 	      	<div style="margin-top: 50px; margin-left: 800px;">
 	      		<a href="javascript:void(0)" id="vipRemarkSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
 	      		&nbsp;<a href="javascript:void(0)" id="vipRemarkReset" class="easyui-linkbutton" iconCls="icon-reload" style="width: 80px; height: 28px;" onclick="javascript:$('#vipRemarkFm').form('clear');">重置</a>
-	      		&nbsp;<a href="javascript:void(0)" id="vipRemarkBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;">返回</a>
+	      		&nbsp;<a href="javascript:void(0)" id="vipRemarkBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
 	      	</div>
       	</div>
   	</body>

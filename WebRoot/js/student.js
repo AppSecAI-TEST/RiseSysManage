@@ -31,22 +31,49 @@ $(document).ready(function() {
     });
     
     $("#updateStudent").click(function() {
-    	if(validateIsSelect()) {
-    		window.location.href = "/sys/student/updateStudent.jsp";
+    	if(validateSelect()) {
+    		var row = $('#list_data').datagrid('getSelected');
+    		var studentId = row.studentId;
+    		var funcNodeId = $("#updateStudent").attr("funcNodeId");
+    		var dutyAdvister = row.dutyAdvister;
+    		var carer = row.carer;
+    		var advisterIdA = row.advisterIdA;
+    		var advisterIdB = row.advisterIdB;
+    		var identityType = row.identityType;
+    		var advisterASchoolId = row.advisterASchoolId;
+    		var advisterBSchoolId = row.advisterBSchoolId;
+    		window.location.href = "/sys/student/updateStudent.jsp?studentId="+studentId+"&funcNodeId="+funcNodeId+"&dutyAdvister="+dutyAdvister+"&carer="+carer+"&advisterIdA="+advisterIdA+"&advisterIdB="+advisterIdB+"&identityType="+identityType+"&advisterASchoolId="+advisterASchoolId+"&advisterBSchoolId="+advisterBSchoolId;
     	}
     });
     
     $("#viewStudent").click(function() {
-    	if(validateIsSelect()) {
+    	if(validateSelect()) {
     		window.location.href = "/sys/student/viewStudent.jsp";
     	}
     });
     
     $("#addActivity").click(function() {
-    	if(validateIsSelect()) {
+    	if(validateSelect()) {
     		var row = $('#list_data').datagrid('getSelected');
     		var studentId = row.studentId;
     		window.location.href = "/sys/student/addActivity.jsp?studentId="+studentId;
+    	}
+    });
+    
+    $("#batchUpdate").click(function() {
+    	if(validate()) {
+    		$("#dlg").dialog('open').dialog('setTitle', '批量修改客户关怀和责任顾问');//设定表头  
+    		$('#batchUpdateFm').form('clear');//清空窗体数据  
+    		var data = $('#updateAdvisterId').combobox('getData');
+			$('#updateAdvisterId').combobox('setValue',data[0].staffId);
+			data = $('#updateCarer').combobox('getData');
+			$('#updateCarer').combobox('setValue',data[0].staffId);
+			$("#handlerId").val($("#staffId").val());
+    		var obj = $('#list_data').datagrid('getSelections');
+    		for(var i = 0, n = obj.length; i < n; i++)
+    		{
+    			$("#batch_update_data").datagrid('insertRow', {index: i, row: obj[i]});
+    		}
     	}
     });
     
@@ -161,7 +188,6 @@ $(document).ready(function() {
     		var schoolType = $('#schoolType').combobox('getValue');
     		var schoolTypeText = $('#schoolType').combobox('getText');
     		var realSchoolName = $('#realSchoolId').combobox('getText');
-    		var delTd = td + 1;
     		var content = "<tr><td align='right'><span>学校类型：</span></td><td><span>"+schoolTypeText+"</span></td>";
     		content += "<td align='right'><span>学校名称：</span></td><td><span>"+realSchoolName+"</span></td>";
     		content += "<input type='hidden' name='realSchools' schoolType='"+schoolType+"' realSchoolId='"+realSchoolId+"'/>";
@@ -213,7 +239,7 @@ $(document).ready(function() {
     				var contactIdentityTypeText = $('#contactIdentityType').combobox('getText');
     				var contactIdentityId = $("#contactIdentityId").textbox("getValue");
     				var phone = $("#phone").textbox("getValue");
-    				var content = "<tr><td align='center'><span>"+relationTypeText+"</span>";
+    				var content = "<tr><td align='center'><span>"+relationTypeText+"</span></td>";
     				content += "<td align='center'><span>"+contactName+"</span></td>";
     				content += "<td align='center'><span>"+job+"</span></td>";
     				content += "<td align='center'>";
@@ -228,9 +254,9 @@ $(document).ready(function() {
     					content += "<input type='checkbox'/>";
     				}
     				content += "</td>";
-    				content += "<td align='center'><span>"+contactIdentityTypeText+"："+contactIdentityId+"</span>";
-    				content += "<td align='center'><span>"+phone+"</span></td>";
-    				content += "<input type='hidden' name='contacts' relationType='"+relationType+"' job='"+job+"' used='"+contactUsed+"' contactName='"+contactName+"' identityType='"+contactIdentityType+"' identityId='"+contactIdentityId+"' phone='"+phone+"'/></td>"
+    				content += "<td align='center'><span>"+contactIdentityTypeText+"："+contactIdentityId+"</span></td>";
+    				content += "<td align='center'><span>"+phone+"</span>";
+    				content += "<input type='hidden' name='contacts' relationType='"+relationType+"' job='"+job+"' used='"+contactUsed+"' contactName='"+contactName+"' identityType='"+contactIdentityType+"' identityId='"+contactIdentityId+"' phone='"+phone+"'/></td>";
     				content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='deleteContact(this)'><span>删除</span></a></td></tr>";
     				$("#addContactTd tr:eq("+contactTd+")").after(content);
     				contactTd += 1;
@@ -282,6 +308,9 @@ $(document).ready(function() {
     	if(flag)
     	{
     		var obj = JSON.stringify($("#studentFm").serializeObject());
+    		obj = obj.substring(0, obj.length - 1);
+    		var funcNodeId = $("#validate").attr("funcNodeId");
+    		obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
     		$.ajax({
     			url: "/sys/student/validate.do",
     			data: "param=" + obj,
@@ -442,6 +471,43 @@ $(document).ready(function() {
     		});
     	}
     });
+    
+    $("#batchUpdateSubmit").click(function() {
+    	var studentId = "";
+    	var obj = $('#list_data').datagrid('getSelections');
+    	for(var i = 0, n = obj.length; i < n; i++)
+    	{
+    		studentId += obj[i].studentId + ",";
+    	}
+    	studentId = studentId.substring(0, studentId.length - 1);
+    	$("#updateStudentId").val(studentId);
+    	var obj = JSON.stringify($("#batchUpdateFm").serializeObject());
+    	alert($("#handlerId").val());
+    	alert(obj);
+		$.ajax({
+			url: "/sys/student/batchUpdateAdvister.do",
+			data: "param=" + obj,
+			dataType: "json",
+			async: false,
+			beforeSend: function()
+	    	{
+	    		$.messager.progress({title : '批量修改', msg : '正在批量修改客户关怀和责任顾问，请稍等……'});
+	    	},
+	    	success: function (data) {
+	    		$.messager.progress('close'); 
+	    		var flag = data.flag
+	            if(flag)
+	            {
+	            	$.messager.alert('提示', "成功批量修改客户关怀和责任顾问！");
+	            	window.location.reload();
+	            }
+	            else
+	            {
+	            	$.messager.alert('提示', "批量修改客户关怀和责任顾问失败！");
+	            }
+	        } 
+		});
+    });
 });
 
 //删除就读学校记录
@@ -464,6 +530,35 @@ function validateIsSelect()
 	var row = $('#list_data').datagrid('getSelected');
 	if(row) {
 		flag = true;
+	} else {
+		$.messager.alert('提示', "请先选择您要操作的学员！");
+	}
+	return flag;
+}
+
+function validate()
+{
+	var flag = false;
+	var obj = $('#list_data').datagrid('getSelections');
+	if(obj.length > 0) {
+		flag = true;
+	}
+	else {
+		$.messager.alert('提示', "请先选择您要操作的学员！");
+	}
+	return flag;
+}
+
+function validateSelect()
+{
+	var flag = false;
+	var obj = $('#list_data').datagrid('getSelections');
+	if(obj.length > 0) {
+		if(obj.length > 1) {
+			$.messager.alert('提示', "只能选择一个学员进行操作！");
+		} else {
+			flag = true;
+		}
 	} else {
 		$.messager.alert('提示', "请先选择您要操作的学员！");
 	}

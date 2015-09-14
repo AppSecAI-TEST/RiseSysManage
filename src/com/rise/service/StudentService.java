@@ -42,9 +42,9 @@ public class StudentService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
-	public String qryStudentById(String studentId) throws Exception 
+	public String qryStudentById(String studentId, String funcNodeId) throws Exception 
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0044\",securityCode:\"0000000000\",params:{studentId:\""+studentId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0044\",securityCode:\"0000000000\",params:{param:{studentId:\""+studentId+"\",funcNodeId:\""+funcNodeId+"\"}},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 
@@ -76,5 +76,11 @@ public class StudentService
 	{
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0049\",securityCode:\"0000000000\",params:{studentId:\""+studentId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
+	}
+
+	public String batchUpdateAdvister(String param) throws Exception 
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00410\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
 	}
 }

@@ -13,9 +13,9 @@ public class QryPubDataService
 		return ServiceEngine.invokeHttp(param);
 	}
 
-	public String qrySchoolList() throws Exception  
+	public String qrySchoolList(String schoolId) throws Exception  
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1011\",securityCode:\"0000000000\",params:{schoolId:\"\"},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1011\",securityCode:\"0000000000\",params:{schoolId:\""+schoolId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 
