@@ -9,7 +9,7 @@
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
 		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/css/style.css">
-		<script type="text/javascript" src="<%=path %>/js/student.js"></script>
+	 
 		<script type="text/javascript">
 			$(document).ready(function()
 				{
@@ -36,11 +36,10 @@
 	      			<table width="100%" cellpadding="5px" class="maintable" id="addStudentTd">
 	      				<tr>
 	      					<td width="13%" align="right">
-	      						<span style="color: red;">*</span>
 	      						<span>学员姓名：</span>
 	      					</td>
 	      					<td width="25%">
-	      						<input name="name" id="name" type="text" class="easyui-textbox validatebox" required="true" style="width: 200px; height: 28px;"/>
+	      						 <span>王小二</span>
 	      					</td>
 	      					<td width="13%" align="right">
 	      						<span style="color: red;">*</span>
@@ -61,20 +60,33 @@
 	      					<td align="right"><span>缴费时间：</span></td>
 	      					<td><input name="byName" id="byName" type="text" class="easyui-textbox" style="width: 200px; height: 28px;"/></td>
 	      					<td align="right"><span>课程类型：</span></td>
+	      					<td>	<span>常规课</span></td>
+      					</tr>
+	      				<tr>
+	      				  <td align="right"><span>备注</span></td>
+	      				  <td colspan="5"><input name="byName2" id="byName2" type="text" class="easyui-textbox" style="width: 200px; height: 28px;"/></td>
+      				  </tr>
+	      				<tr>
+	      				  <td align="right"><span>上传缴费单</span></td>
+	      				  <td>&nbsp;</td>
+	      				  <td><a href="javascript:void(0)" id="addActivity" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">浏览</a></td>
+	      				  <td>上传</td>
+	      				  <td><span>查看缴费单</span></td>
+	      				  <td>&nbsp;</td>
+      				  </tr>
+	      				<tr>
+	      					<td align="right"><span>关联课程</span></td>
+	      					<td> 
+      					    <input type="button" name="button" id="button" value="已有课程"></td>
+      					  <td><span>连报类型</span></td>
 	      					<td><select name="advisterBSchoolId" class="easyui-combobox" id="advisterBSchoolId" style="width: 96px; height: 28px;"
 	      						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#advisterBSchoolId').combobox('setValue',data[0].schoolId);}"
 	      						url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
-	      					  </select></td>
+      					    </select></td>
+	      					<td>&nbsp;</td>
+	      					<td>&nbsp;</td>
       					</tr>
-	      				<tr>
-	      					<td align="right">&nbsp;</td>
-	      					<td>&nbsp;</td>
-	      					<td align="right">&nbsp;</td>
-	      					<td>&nbsp;</td>
-	      					<td>&nbsp;</td>
-	      					<td>&nbsp;</td>
-	      				</tr>
 	      			</table>
 	      			<p>&nbsp;</p>
                 </form>
@@ -84,9 +96,9 @@
 	      <div class="easyui-panel" style="width:100%;height:auto;" title="常规课课程">
       	      <table width="100%" cellpadding="5px" class="maintable" id="addStudentTd2">
 	      	      <tr>
-	      	        <td align="right"><span style="color: red;">*</span> <span>阶段：</span></td>
+	      	        <td align="right"> <span>阶段：</span></td>
 	      	        <td>&nbsp;</td>
-	      	        <td align="right">*班级类型：</td>
+	      	        <td align="right"><span>班级类型：</span></td>
 	      	        <td> 2010-10-10 </td>
 	      	        <td align="right"><span>证件号码：</span></td>
 	      	        <td>1234567890</td>
@@ -94,37 +106,20 @@
 	      	      <tr>
 	      	        <td align="right"><DIV id="u170_state0" data-label="状态1">
 	      	          <DIV id="u170_state0_content">
-	      	            <DIV id="u171" jQuery17103354182867960753="173">
-	      	              <DIV id="u172" jQuery17103354182867960753="174">
-	      	                <p>业绩顾问A：</p>
-      	                  </DIV>
-      	                </DIV>
-      	              </DIV>
-	      	          </DIV></td>
+	      	            <span>业绩老师A：</span>
+      	                   </td>
 	      	        <td><select name="schoolType" class="easyui-combobox" id="schoolType2" style="width: 150px; height: 28px;"
 	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#schoolType').combobox('setValue',data[0].codeFlag);}"
 	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=REAL_SCHOOL_T&codeType=SCHOOL_TYPE" required="true" >
 	      	          </select></td>
-	      	        <td align="right"><span>业绩顾问：</span></td>
+	      	        <td align="right"><span>业绩老师B：</span></td>
 	      	        <td><select name="advisterBSchoolId2" class="easyui-combobox" id="advisterBSchoolId2" style="width: 96px; height: 28px;"
 	      						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#advisterBSchoolId').combobox('setValue',data[0].schoolId);}"
 	      						url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
 	      	          </select></td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-      	        </tr>
-	      	      <tr>
-	      	        <td align="right">备注</td>
-	      	        <td colspan="5">&nbsp;</td>
-      	        </tr>
-	      	      <tr>
-	      	        <td align="right">上传缴费单</td>
-	      	        <td>&nbsp;</td>
-	      	        <td align="right">&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
+	      	        <td  align="right"><span>缴费时间：</span></td>
 	      	        <td>&nbsp;</td>
       	        </tr>
       	      </table>
@@ -140,7 +135,7 @@
 	      						 onLoadSuccess:function(data){$('#schoolType').combobox('setValue',data[0].codeFlag);}"
 	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=REAL_SCHOOL_T&codeType=SCHOOL_TYPE" required="true" >
       	            </select></td>
-	      	        <td width="7%" align="right">赠品名称：</td>
+	      	        <td width="7%" align="right"><span>赠品名称：</span></td>
 	      	        <td width="29%"><table width="200" border="1">
    	                <tr>
 	      	              <td><select name="advisterBSchoolId5" class="easyui-combobox" id="advisterBSchoolId5" style="width: 96px; height: 28px;"
@@ -152,16 +147,16 @@
 	      	              <td><input name="name2" id="name2" type="text" class="easyui-textbox validatebox" required="true" style="width: 200px; height: 28px;"/></td>
       	                </tr>
       	              </table></td>
-	      	        <td width="6%" align="right">是否领用</td>
+	      	        <td width="6%" align="right"><span>是否领用</span></td>
 	      	        <td width="12%" align="right">
 	      	          <input type="radio" name="radio" id="radio" value="radio">
-	      	          <label for="radio">已领用</label>
+	      	          <label for="radio"><span>已领用</span></label>
 	      	          <input type="radio" name="radio" id="radio" value="radio">
-	      	          <label for="radio"> 未领用</label>
+	      	          <label for="radio"> <span>未领用</span></label>
       	           </td>
-	      	        <td width="6%">发放人</td>
+	      	        <td width="6%"><span>发放人</span></td>
 	      	        <td width="13%"><input name="name4" id="name4" type="text" class="easyui-textbox validatebox" required="true" style="width: 100px; height: 28px;"/></td>
-	      	        <td width="5%">添加</td>
+	      	        <td width="5%"><span>添加</span></td>
       	        </tr>
 	      	      <tr>
 	      	        <td align="right">&nbsp;</td>
@@ -181,23 +176,23 @@
       		<div class="easyui-panel" style="width:100%;height:auto;" title="赠课信息">
       	      <table width="100%" cellpadding="5px" class="maintable" id="addStudentTd2">
 	      	      <tr>
-	      	        <td colspan="2" align="right"><span style="color: red;">赠课名称</span><span>：</span></td>
+	      	        <td colspan="2" align="right"><span>赠课名称</span></td>
 	      	        <td width="16%" align="right"><select name="schoolType3" class="easyui-combobox" id="schoolType3" style="width: 150px; height: 28px;"
 	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#schoolType').combobox('setValue',data[0].codeFlag);}"
 	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=REAL_SCHOOL_T&codeType=SCHOOL_TYPE" required="true" >
       	            </select></td>
-	      	        <td width="11%" align="right">赠课细类：</td>
+	      	        <td width="11%" align="right"><span>赠课细类：</span></td>
 	      	        <td width="11%"><select name="advisterBSchoolId3" class="easyui-combobox" id="advisterBSchoolId3" style="width: 96px; height: 28px;"
 	      						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#advisterBSchoolId').combobox('setValue',data[0].schoolId);}"
 	      						url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
 	      	          </select></td>
 	      	        <td width="7%">&nbsp;</td>
-	      	        <td width="10%" align="right">课时量</td>
+	      	        <td width="10%" align="right"><span>课时量</span></td>
 	      	        <td width="11%"><input name="name4" id="name4" type="text" class="easyui-textbox validatebox" required="true" style="width: 100px; height: 28px;"/></td>
 	      	        <td width="10%">&nbsp;</td>
-	      	        <td width="7%">添加</td>
+	      	        <td width="7%"><span>添加</span></td>
       	        </tr>
       	      </table>
       	    
@@ -205,18 +200,18 @@
       	       <table width="100%" cellpadding="5px" class="maintable" id="addStudentTd2">
 	      	    
 	      	      <tr>
-	      	        <td width="6%" align="right">序号
+	      	        <td width="6%" align="right"><span>序号</span>
 &nbsp;</td>
-	      	        <td width="11%">赠课来源
+	      	        <td width="11%"><span>赠课来源</span>
 &nbsp;</td>
-	      	        <td align="right">增课名称</td>
-	      	        <td>赠送时间</td>
-	      	        <td>赠送课时量</td>
-	      	        <td>课程状态</td>
-	      	        <td>有效期开始时间</td>
-	      	        <td>失效期</td>
-	      	        <td>课程进度</td>
-	      	        <td>删除</td>
+	      	        <td ><span>增课名称</span></td>
+	      	        <td><span>赠送时间</span></td>
+	      	        <td><span>赠送课时量</span></td>
+	      	        <td><span>课程状态</span></td>
+	      	        <td><span>有效期开始时间</span></td>
+	      	        <td><span>失效期</span></td>
+	      	        <td><span>课程进度</span></td>
+	      	        <td><span>删除</span></td>
       	        </tr>
 	      	      <tr>
 	      	        <td align="right">&nbsp;</td>
@@ -235,70 +230,8 @@
 </div>
 <div style="height: 10px;"></div>
 
-  <div class="easyui-panel" style="min-width:100%;width:97%;padding:10px;" title="口碑信息">
-      	       <table width="100%" cellpadding="5px" class="maintable" id="addStudentTd2">
-	      	    
-	      	      <tr>
-	      	        <td width="6%" align="right">序号
-&nbsp;</td> 
-	      	        <td width="11%">赠课来源
-&nbsp;</td>
-	      	        <td align="right">增课名称</td>
-	      	        <td>赠送时间</td>
-	      	        <td>赠送课时量</td>
-	      	        <td>课程状态</td>
-	      	        <td>有效期开始时间</td>
-	      	        <td>失效期</td>
-	      	        <td>课程进度</td>
-	      	        <td>删除</td>
-      	        </tr>
-	      	      <tr>
-	      	        <td align="right">&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td align="right">&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-      	        </tr>
-      	        </table>
-      	        </div>
-      	        <div style="height: 10px;"></div>
-
-  <div class="easyui-panel" style="width:100%;height:auto;" title="缴费信息">
-      	       <table width="100%" cellpadding="5px" class="maintable" id="addStudentTd2">
-	      	    
-	      	      <tr>
-	      	        <td width="6%" align="right">序号
-&nbsp;</td>
-	      	        <td width="11%">赠课来源
-&nbsp;</td>
-	      	        <td align="right">增课名称</td>
-	      	        <td>赠送时间</td>
-	      	        <td>赠送课时量</td>
-	      	        <td>课程状态</td>
-	      	        <td>有效期开始时间</td>
-	      	        <td>失效期</td>
-	      	        <td>课程进度</td>
-	      	        <td>删除</td>
-      	        </tr>
-	      	      <tr>
-	      	        <td align="right">&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td align="right">&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-      	        </tr>
-      	        </table>
-      	        </div>
+  
+ 
 	      	<div style="margin-top: 50px;">
 	      		<div style="float: left;margin-left: 900px;">
 	      			<a href="javascript:void(0)" id="studentSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>

@@ -2,7 +2,7 @@
 body{margin:0; padding:0;background:none;font-size:13px;font-family:sans-serif;}
 #base {position:absolute; z-index:0;}
 .maintable {border-collapse: collapse; border-spacing:0; border: 0px solid #ccc; height:auto;} 
-.maintable tr {height: 30px;}
+.maintable tr {height: 25px;}
 .maintable td {border-top: 0; border-right: 1px solid #ccc; border-bottom: 1px solid #ccc; border-left: 0; } 
 .maintable tr.lastrow td {border-bottom: 0;} 
 .maintable tr td.lastCol {border-right: 0; } 
