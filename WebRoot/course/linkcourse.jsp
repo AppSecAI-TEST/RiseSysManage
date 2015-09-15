@@ -14,8 +14,10 @@
 			$(document).ready(function()
 				{
 				var height = $(document).height();
-				$("#leftFrame",top.document).css("height",height);
-				$("#nextFrame",top.document).css("height",height);
+				$("#frame1",top.document).css("height",height);
+			 	$("#frame2",top.document).css("height",height);
+		
+		
 				
 			})
 		</script>
@@ -29,69 +31,7 @@
         		</div>
       		</div>
       		
-	      	<div class="easyui-panel" style="width:100%;height:auto;" title="学员基础信息">
-	      		<form id="studentFm">
-	      			<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
-	      			<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
-	      			<table width="100%" cellpadding="5px" class="maintable" id="addStudentTd">
-	      				<tr>
-	      					<td width="13%" align="right">
-	      						<span>学员姓名：</span>
-	      					</td>
-	      					<td width="25%">
-	      						 <span>王小二</span>
-	      					</td>
-	      					<td width="13%" align="right">
-	      						<span style="color: red;">*</span>
-	      						<span>出生日期：</span>
-	      					</td>
-	      					<td width="15%">
-	      						2010-10-10
-	      					</td>
-	      					<td align="right"><span>证件号码：</span></td>
-	      					<td>1234567890</td>
-      					</tr>
-	      				<tr>
-	      					<td align="right">
-	      						<span style="color: red;">*</span>
-	      						<span>性别：</span>
-	      					</td>
-	      					<td><span>男</span></td>
-	      					<td align="right"><span>缴费时间：</span></td>
-	      					<td><input name="byName" id="byName" type="text" class="easyui-textbox" style="width: 200px; height: 28px;"/></td>
-	      					<td align="right"><span>课程类型：</span></td>
-	      					<td>	<span>常规课</span></td>
-      					</tr>
-	      				<tr>
-	      				  <td align="right"><span>备注</span></td>
-	      				  <td colspan="5"><input name="byName2" id="byName2" type="text" class="easyui-textbox" style="width: 200px; height: 28px;"/></td>
-      				  </tr>
-	      				<tr>
-	      				  <td align="right"><span>上传缴费单</span></td>
-	      				  <td>&nbsp;</td>
-	      				  <td><a href="javascript:void(0)" id="addActivity" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">浏览</a></td>
-	      				  <td>上传</td>
-	      				  <td><span>查看缴费单</span></td>
-	      				  <td>&nbsp;</td>
-      				  </tr>
-	      				<tr>
-	      					<td align="right"><span>关联课程</span></td>
-	      					<td> 
-      					    <input type="button" name="button" id="button" value="已有课程"></td>
-      					  <td><span>连报类型</span></td>
-	      					<td><select name="advisterBSchoolId" class="easyui-combobox" id="advisterBSchoolId" style="width: 96px; height: 28px;"
-	      						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-	      						 onLoadSuccess:function(data){$('#advisterBSchoolId').combobox('setValue',data[0].schoolId);}"
-	      						url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
-      					    </select></td>
-	      					<td>&nbsp;</td>
-	      					<td>&nbsp;</td>
-      					</tr>
-	      			</table>
-	      			<p>&nbsp;</p>
-                </form>
-      	     
-	      	</div>
+	      	
 	      		<div style="height: 10px;"></div>
 	      <div class="easyui-panel" style="width:100%;height:auto;" title="常规课课程">
       	      <table width="100%" cellpadding="5px" class="maintable" id="addStudentTd2">
@@ -120,7 +60,7 @@
 	      						url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
 	      	          </select></td>
 	      	        <td  align="right"><span>缴费时间：</span></td>
-	      	        <td>&nbsp;</td>
+	      	        <td><input name="birthday" id="birthday" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 28px;"/></td>
       	        </tr>
       	      </table>
 </div>
