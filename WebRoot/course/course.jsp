@@ -78,7 +78,6 @@
 	      			</table>
 	      			<p>&nbsp;</p>
                 </form>
-      	     
 	      	</div>
 	      		<div style="height: 10px;"></div>
 	      <div class="easyui-panel" style="width:100%;height:auto;" title="常规课课程">

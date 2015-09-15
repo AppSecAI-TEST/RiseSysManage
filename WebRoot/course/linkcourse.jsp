@@ -8,38 +8,41 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/css/style.css">
+		
 	 
 		<script type="text/javascript">
 			$(document).ready(function()
-				{
+			{
 				var height = $(document).height();
-				$("#frame1",top.document).css("height",height);
-			 	$("#frame2",top.document).css("height",height);
+				$("#frame1",parent.document).css("height",height+20);
+			 	$("#frame2",parent.document).css("height",height+20);
 		
-		
-				
 			})
 		</script>
   	</head>
   
   	<body>
-  		<div id="base">
-  			<div id="u0">
-        		<div id="u1">
-          			<p><span></span></p>
-        		</div>
-      		</div>
-      		
-	      	
-	      		<div style="height: 10px;"></div>
+  	<div class="easyui-panel" title="连报课程一" style="width:99%;padding:10px">
+	      <div style="height: 10px;"></div>
 	      <div class="easyui-panel" style="width:100%;height:auto;" title="常规课课程">
       	      <table width="100%" cellpadding="5px" class="maintable" id="addStudentTd2">
 	      	      <tr>
 	      	        <td align="right"> <span>阶段：</span></td>
-	      	        <td>&nbsp;</td>
+	      	        <td>
+					 <select name="stageId" class="easyui-combobox" id="stageId" style="width: 150px; height: 28px;"
+	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+	      						 onLoadSuccess:function(data){$('stageId').combobox('setValue',data[0].codeFlag);}"
+	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID" required="true" >
+      	            </select>
+					</td>
 	      	        <td align="right"><span>班级类型：</span></td>
-	      	        <td> 2010-10-10 </td>
+	      	        <td> 
+	      	         <select name="classType" class="easyui-combobox" id="classType" style="width: 150px; height: 28px;"
+	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+	      						 onLoadSuccess:function(data){$('classType').combobox('setValue',data[0].codeFlag);}"
+	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=CLASS_TYPE" required="true" >
+      	            </select>
+	      	         </td>
 	      	        <td align="right"><span>证件号码：</span></td>
 	      	        <td>1234567890</td>
       	        </tr>
@@ -54,7 +57,7 @@
 	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=REAL_SCHOOL_T&codeType=SCHOOL_TYPE" required="true" >
 	      	          </select></td>
 	      	        <td align="right"><span>业绩老师B：</span></td>
-	      	        <td><select name="advisterBSchoolId2" class="easyui-combobox" id="advisterBSchoolId2" style="width: 96px; height: 28px;"
+	      	        <td><select name="advisterBSchoolId2" class="easyui-combobox" id="advisterBSchoolId2" style="width: 150px; height: 28px;"
 	      						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#advisterBSchoolId').combobox('setValue',data[0].schoolId);}"
 	      						url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
@@ -67,20 +70,27 @@
       		<div style="height: 10px;"></div>
       	<div class="easyui-panel" style="width:100%;height:auto;" title="赠品信息">
       	
-      	      <table width="100%" cellpadding="5px" class="maintable" id="addStudentTd2">
+      	      <table width="100%" cellpadding="5px" class="maintable" id="giftTab">
 	      	      <tr>
-	      	        <td width="8%" align="right"><span style="color: red;">赠品类型</span><span>：</span></td>
-	      	        <td width="14%"><select name="schoolType2" class="easyui-combobox" id="schoolType" style="width: 150px; height: 28px;"
+	      	        <td width="8%" align="right">  <span>赠品类型：</span></td>
+	      	        <td width="14%">
+	      	        <select name="giftName" class="easyui-combobox" id="giftName" style="width: 150px; height: 28px;"
 	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      						 onLoadSuccess:function(data){$('#schoolType').combobox('setValue',data[0].codeFlag);}"
-	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=REAL_SCHOOL_T&codeType=SCHOOL_TYPE" required="true" >
-      	            </select></td>
+	      						 onLoadSuccess:function(data){$('#giftName').combobox('setValue',data[0].codeFlag);}"
+	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_T&codeType=GIFT_NAME" required="true" >
+      	            </select>
+      	            </td>
 	      	        <td width="7%" align="right"><span>赠品名称：</span></td>
-	      	        <td width="29%"><table width="200" border="1">
+	      	        <td width="29%">
+	      	        <table width="200" border="0">
    	                <tr>
-	      	              <td><select name="advisterBSchoolId5" class="easyui-combobox" id="advisterBSchoolId5" style="width: 96px; height: 28px;"
-	      						>
-      	                  </select></td>
+	      	              <td>
+							<select name="giftType" class="easyui-combobox" id="giftType" style="width: 150px; height: 28px;"
+	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+	      						 onLoadSuccess:function(data){$('#giftType').combobox('setValue',data[0].codeFlag);}"
+	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_T&codeType=GIFT_TYPE" required="true" >
+      	            </select>
+						</td>
 	      	              <td><select name="advisterBSchoolId4" class="easyui-combobox" id="advisterBSchoolId4" style="width: 96px; height: 28px;"
 	      						>
    	                  </select></td>
@@ -88,82 +98,81 @@
       	                </tr>
       	              </table></td>
 	      	        <td width="6%" align="right"><span>是否领用</span></td>
-	      	        <td width="12%" align="right">
-	      	          <input type="radio" name="radio" id="radio" value="radio">
+	      	        <td width="12%" align="left">
+	      	          <input type="radio" name="isGetY" id="isGetY" value="Y">
 	      	          <label for="radio"><span>已领用</span></label>
-	      	          <input type="radio" name="radio" id="radio" value="radio">
+	      	          <input type="radio" name="isGetN" id="isGetN" value="N">
 	      	          <label for="radio"> <span>未领用</span></label>
       	           </td>
-	      	        <td width="6%"><span>发放人</span></td>
-	      	        <td width="13%"><input name="name4" id="name4" type="text" class="easyui-textbox validatebox" required="true" style="width: 100px; height: 28px;"/></td>
-	      	        <td width="5%"><span>添加</span></td>
+	      	        <td width="6%" align="right"><span>发放人</span></td>
+	      	        <td width="13%"><input name="granter" id="granter" type="text" class="easyui-textbox validatebox" required="true" style="width: 100px; height: 28px;"/></td>
+	      	        <td width="5%"><a href="javascript:void(0)" id="addGiftBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a></td>
       	        </tr>
-	      	      <tr>
-	      	        <td align="right">&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td align="right">&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-      	        </tr>
+      	        
+      	      <tr style="display:none;" name="addGift" id="addGift" >
+      	        <td align="right"><span>赠品类型：</span></td>
+      	        <td align="left" giftName="">&nbsp;</td>
+      	        <td align="right"><span>赠品名称：</span></td>
+      	        <td align="left" giftType="" giftId="">&nbsp;</td>
+      	        <td align="right"><span>是否领用</span></td>
+      	        <td align="left" isGet="">&nbsp;</td>
+      	        <td align="right"><span>发放人</span></td>
+      	        <td align="left" granter="">&nbsp;</td>
+      	        <td><a href='javascript:void(0)' class='linkmore' ><span>删除</span></a></td>
+     	       </tr>
       	      </table>
 </div>
       		
       		<div style="height: 10px;"></div>
       		<div class="easyui-panel" style="width:100%;height:auto;" title="赠课信息">
-      	      <table width="100%" cellpadding="5px" class="maintable" id="addStudentTd2">
+      	      <table width="100%" cellpadding="5px" class="maintable" >
 	      	      <tr>
-	      	        <td colspan="2" align="right"><span>赠课名称</span></td>
-	      	        <td width="16%" align="right"><select name="schoolType3" class="easyui-combobox" id="schoolType3" style="width: 150px; height: 28px;"
+	      	        <td colspan="2" align="right"><span>赠课类型</span></td>
+	      	        <td width="16%" align="right"><select name="giftNameCoruse" class="easyui-combobox" id="giftNameCoruse" style="width: 150px; height: 28px;"
 	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      						 onLoadSuccess:function(data){$('#schoolType').combobox('setValue',data[0].codeFlag);}"
-	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=REAL_SCHOOL_T&codeType=SCHOOL_TYPE" required="true" >
+	      						 onLoadSuccess:function(data){$('#giftNameCoruse').combobox('setValue',data[0].codeFlag);}"
+	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_T&codeType=GIFT_COURSE" required="true" >
       	            </select></td>
-	      	        <td width="11%" align="right"><span>赠课细类：</span></td>
-	      	        <td width="11%"><select name="advisterBSchoolId3" class="easyui-combobox" id="advisterBSchoolId3" style="width: 96px; height: 28px;"
-	      						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-	      						 onLoadSuccess:function(data){$('#advisterBSchoolId').combobox('setValue',data[0].schoolId);}"
-	      						url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
+	      	        <td width="11%" align="right"><span>赠课名称：</span></td>
+	      	        <td width="11%"><select name="giftCourseId" class="easyui-combobox" id="giftCourseId" style="width: 96px; height: 28px;"
+	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+	      						 onLoadSuccess:function(data){$('#giftCourseId').combobox('setValue',data[0].codeFlag);}"
+	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_T&codeType=GIFT_COURSE" required="true">
 	      	          </select></td>
-	      	        <td width="7%">&nbsp;</td>
-	      	        <td width="10%" align="right"><span>课时量</span></td>
-	      	        <td width="11%"><input name="name4" id="name4" type="text" class="easyui-textbox validatebox" required="true" style="width: 100px; height: 28px;"/></td>
-	      	        <td width="10%">&nbsp;</td>
-	      	        <td width="7%"><span>添加</span></td>
+	      	       
+	      	        <td width="10%" align="right"><span>课时量:</span></td>
+	      	        <td width="11%"><input name="courseHours" id="courseHours" type="text" class="easyui-textbox validatebox" required="true" style="width: 100px; height: 28px;"/></td>
+	      	         <td width="10%" align="right"><span>有效期开始时间</span></td>
+	      	        <td width="7%"><input name="birthday" id="birthday" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 28px;"/></td>
+	      	        <td width="7%"><a href="javascript:void(0)" id="addCourse" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a></td>
       	        </tr>
       	      </table>
       	    
       	      <div class="easyui-panel" style=width:100%;padding:10px;">
-      	       <table width="100%" cellpadding="5px" class="maintable" id="addStudentTd2">
+      	       <table width="100%" cellpadding="5px" class="maintable" id="giftCourse">
 	      	    
-	      	      <tr>
-	      	        <td width="6%" align="right"><span>序号</span>
-&nbsp;</td>
-	      	        <td width="11%"><span>赠课来源</span>
-&nbsp;</td>
-	      	        <td ><span>增课名称</span></td>
-	      	        <td><span>赠送时间</span></td>
+	      	      <tr align="center">
+	      	        <td width="6%" ><span>序号</span>&nbsp;</td>
+	      	        <td ><span>赠课名称</span></td>
 	      	        <td><span>赠送课时量</span></td>
+	      	        <td><span>赠送时间</span></td>
 	      	        <td><span>课程状态</span></td>
+	      	        <td><span>赠课来源</span></td>
 	      	        <td><span>有效期开始时间</span></td>
 	      	        <td><span>失效期</span></td>
 	      	        <td><span>课程进度</span></td>
-	      	        <td><span>删除</span></td>
+	      	       
       	        </tr>
-	      	      <tr>
-	      	        <td align="right">&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td align="right">&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
+	      	      <tr style="display:none;" id="add" align="right">
+	      	        <td  val="">&nbsp;</td>
+	      	        <td  giftType="">&nbsp;</td>
+	      	        <td  giftId="">&nbsp;</td>
+	      	        <td  val="">&nbsp;</td>
+	      	        <td  val="">&nbsp;</td>
+	      	        <td  val="">&nbsp;</td>
+	      	        <td  val="">&nbsp;</td>
+	      	        <td  val="">&nbsp;</td>
+	      	        <td><a href='javascript:void(0)' class='linkmore' ><span>删除</span></a></td>
       	        </tr>
       	      </table>
       	      </div>
@@ -171,13 +180,208 @@
 <div style="height: 10px;"></div>
 
   
- 
+ 		<!--  
 	      	<div style="margin-top: 50px;">
 	      		<div style="float: left;margin-left: 900px;">
-	      			<a href="javascript:void(0)" id="studentSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
+	      			<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
 	      			&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onClick="javascript:window.history.back()">返回</a>
 	      		</div>
-	      	</div>
+	      	</div>-->
   		</div>
   	</body>
 </html>
+	<script type="text/javascript">
+	
+	//增加课程
+	$("#addCourse").click(function()
+	{
+		var objectTr=$("#add").clone();//克隆模板
+		objectTr.css("display",'table-row');
+		objectTr.attr("val","course");
+		objectTr.find("td").each(function(i,node)
+		{
+			if(i==1)
+			{
+				var name=$("#giftNameCoruse").combobox('getText');
+				var val=$("#giftNameCoruse").combobox('getValue');
+				$(node).html("<span>"+name+"</span>");	
+				$(node).attr("giftType",val);//赠课类型	
+			}else if(i==2)
+			{
+				var name=$("#giftCourseId").combobox('getText');
+			    var val=$("#giftCourseId").combobox('getValue');
+				$(node).html("<span>"+name+"</span>");	
+				$(node).attr("giftId",val);//赠课细类	
+			}else if(i==3)
+			{
+				var hours=$("#courseHours").textbox('getText');
+				$(node).html("<span>"+hours+"</span>");	
+				$(node).attr("hours",hours);//课时
+			} 
+		});
+		 
+		$("#add").after(objectTr);
+		var height = $(document).height();
+		$("#frame1",top.document).css("height",height+20);
+	 	$("#frame2",top.document).css("height",height+20);
+	});
+	
+	//增加赠品
+	$("#addGiftBtn").click(function ()
+	{
+		var giftTR=$("#addGift").clone();
+		giftTR.css("display",'table-row');
+		giftTR.attr("val","gift");
+		giftTR.find("td").each(function(n,node)
+		{
+			if(n==1)
+			{
+				var name=$("#giftName").combobox('getText');
+				var val=$("#giftName").combobox('getValue');
+				$(node).html("<span>"+name+"</span>");	
+				$(node).attr("giftName",val);//赠品类型	
+			}else
+			if(n==3)
+			{
+				var giftType=$("#giftType").combobox("getText");
+				var val=$("#giftType").combobox('getValue');
+				$(node).html("<span>"+giftType+"</span>");	
+				$(node).attr("giftType",val);//赠品名称
+				$(node).attr("giftId",val);//赠品细项
+			}else
+			if(n==5)
+			{
+				var getFlag = $("input[name='isGetY']:checked").val(); //是否领取
+				var getFlagN =$("input[name='isGetN']:checked").val(); 
+				$(node).attr("isGet","N");
+				if('Y'==getFlag)
+				{
+					$(node).html("<span>已领取</span>");	
+					$(node).attr("isGet","Y");
+				}else if('N'==getFlagN)
+				{
+					$(node).html("<span>未领取</span>");	
+					$(node).attr("isGet","N");
+				}
+				else
+				{
+					//alert("请选择是否领用");
+					//return;
+				}
+			}else if(n==7)
+			{
+				var granter=$("#granter").textbox("getValue");
+				$(node).html("<span>"+granter+"</span>");	
+				$(node).attr("granter",granter);
+			}
+			
+		});
+	
+		$("#addGift").after(giftTR);
+		var height = $(document).height();
+		$("#frame1",top.document).css("height",height+20);
+	 	$("#frame2",top.document).css("height",height+20);
+	});
+
+	var studentCourse={};//最后提交学生课程信息
+    var gifts = [];  
+	var courses=[];
+	
+	//提交课程
+	$("#submit").click(function()
+	{
+		$("#giftTab").find('tr').each(function(i,node)
+		{
+			var trName=$(this).attr("val");
+			if('gift'==trName)
+			{
+				 var  tds=$(this).children('td');
+				 var  giftName=tds.eq(1).attr('giftName');
+				 var  giftType=tds.eq(3).attr('giftType');
+				 var  giftId=tds.eq(3).attr('giftId');
+				 var  isGet=tds.eq(5).attr('isGet');
+				 var  granter=tds.eq(7).attr('granter');
+				 
+				 var  gift = {};
+				 
+				 gift.giftName = giftName;
+				 gift.giftType=giftType;
+				 gift.giftId=giftId;
+				 gift.isGet=isGet;
+				 gift.granter=granter;
+				 
+				 gifts.push(gift);  
+				// alert(JSON.stringify(gifts));
+			 }
+		});
+		$("#giftCourse").find('tr').each(function(i,node)
+		{
+			var trName=$(this).attr("val");
+			if('course'==trName)
+			{
+				 var  tds=$(this).children('td');
+				 var  giftType=tds.eq(1).attr('giftType');
+				 var  giftId=tds.eq(2).attr('giftId');
+				 var  hours=tds.eq(3).attr('hours');
+				
+				 var  course = {};
+				 course.giftType = giftType;
+				 course.giftId=giftId;
+				 course.hours=hours;
+				 
+				 courses.push(course);  
+				// alert(JSON.stringify( courses));
+			 }
+		});
+	});
+	
+	function build()
+	{
+		
+		$("#giftTab").find('tr').each(function(i,node)
+		{
+			var trName=$(this).attr("val");
+			if('gift'==trName)
+			{
+				 var  tds=$(this).children('td');
+				 var  giftName=tds.eq(1).attr('giftName');
+				 var  giftType=tds.eq(3).attr('giftType');
+				 var  giftId=tds.eq(3).attr('giftId');
+				 var  isGet=tds.eq(5).attr('isGet');
+				 var  granter=tds.eq(7).attr('granter');
+				 
+				 var  gift = {};
+				 
+				 gift.giftName = giftName;
+				 gift.giftType=giftType;
+				 gift.giftId=giftId;
+				 gift.isGet=isGet;
+				 gift.granter=granter;
+				 
+				 gifts.push(gift);  
+				// alert(JSON.stringify(gifts));
+			 }
+		});
+		$("#giftCourse").find('tr').each(function(i,node)
+		{
+			var trName=$(this).attr("val");
+			if('course'==trName)
+			{
+				 var  tds=$(this).children('td');
+				 var  giftType=tds.eq(1).attr('giftType');
+				 var  giftId=tds.eq(2).attr('giftId');
+				 var  hours=tds.eq(3).attr('hours');
+				
+				 var  course = {};
+				 course.giftType = giftType;
+				 course.giftId=giftId;
+				 course.hours=hours;
+				 
+				 courses.push(course);  
+			 }
+		});
+		studentCourse.gifts=gifts;
+		studentCourse.courses= courses;
+		return studentCourse;
+	}
+	</script>
