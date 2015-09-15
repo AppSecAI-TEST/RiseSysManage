@@ -193,7 +193,6 @@ $(document).ready(function() {
     		content += "<input type='hidden' name='realSchools' schoolType='"+schoolType+"' realSchoolId='"+realSchoolId+"'/>";
     		content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='deleteRealSchool(this)'><span>删除</span></a></td></tr>";
     		$("#addStudentTd tr:eq("+td+")").after(content);
-    		td += 1;
     	}
     	else
     	{
@@ -259,7 +258,6 @@ $(document).ready(function() {
     				content += "<input type='hidden' name='contacts' relationType='"+relationType+"' job='"+job+"' used='"+contactUsed+"' contactName='"+contactName+"' identityType='"+contactIdentityType+"' identityId='"+contactIdentityId+"' phone='"+phone+"'/></td>";
     				content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='deleteContact(this)'><span>删除</span></a></td></tr>";
     				$("#addContactTd tr:eq("+contactTd+")").after(content);
-    				contactTd += 1;
     				//初始化第一列
     				var data = $('#relationType').combobox('getData');
     				$('#relationType').combobox('setValue',data[0].codeFlag);
@@ -514,14 +512,12 @@ $(document).ready(function() {
 function deleteRealSchool(obj)
 {
 	$(obj).parent().parent().remove(); 
-	td = td - 1;
 }
 
 //删除联系人信息
 function deleteContact(obj)
 {
 	$(obj).parent().parent().remove(); 
-	contactTd = contactTd - 1;
 }
 
 function validateIsSelect()
