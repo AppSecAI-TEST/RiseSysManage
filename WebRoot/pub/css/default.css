@@ -1,5 +1,5 @@
 @CHARSET "UTF-8";
-body{margin:0; padding:0;background:none;font-size:13px;font-family:sans-serif;}
+body{margin:0; padding:0;background:none;font-size:13px;font-family:sans-serif;padding-top:5px; padding-left: 5px;}
 a{color:#08c;text-decoration:none}
 a:hover,a:focus{color:#005580;text-decoration:underline}
 a:focus,a:hover,a:active {outline: 0;}
@@ -45,3 +45,17 @@ input[type="file"],input[type="image"],input[type="submit"],input[type="reset"],
 .datagrid .datagrid-wrap .datagrid-view .datagrid-view2 .datagrid-header{width:99.8% !important;border-left-width:0px;border-right-width:1px;}
 .datagrid .datagrid-wrap .datagrid-view .datagrid-view2 .datagrid-body{width:99.8% !important;border-left-width:0px;border-right:1px solid #95B8E7;}
 .datagrid .datagrid-wrap .datagrid-pager{width:99.8% !important;border-left-width:0px;border-right:1px solid #95B8E7;}
+
+/* 学员注册样式 */
+.maintable {border-collapse: collapse; border-spacing:0; border: 0px solid #ccc; height:auto;} 
+.maintable tr {height: 30px;}
+.maintable td {border-top: 0; border-right: 1px solid #ccc; border-bottom: 1px solid #ccc; border-left: 0; } 
+.maintable tr.lastrow td {border-bottom: 0;} 
+.maintable tr td.lastCol {border-right: 0; } 
+span {font-family: Arial,微软雅黑,宋体; font-size: 14px;}
+.linkmore{color : #0099FF; text-decoration : none; cursor:pointer;}
+.linkmore:hover{color : ED0000 !important;}
+.linkmore1{color : #000000;text-decoration : none;}
+.linkmore1:hover{color : #4AC5C3 !important;}
+.linkmore2{color : #ED6C44; text-decoration : none; cursor:pointer;}
+.linkmore2:hover{color : #000 !important;}
