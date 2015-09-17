@@ -72,87 +72,15 @@
 	      	</div>
 	     <div id='frms'> 		 
 			
-			<iframe id="frame1" name="frame1"    src="/sys/course/linkcourse.jsp?order=一"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
+			<iframe id="frame1" name="frame1"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
 		
-			<iframe id="frame2" name="frame2"   src="/sys/course/linkcourse.jsp?order=二"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
+			<iframe id="frame2" name="frame2"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
 				
 		</div>
-		
-			<div id="dlg" class="easyui-dialog" style="width: 580px; height: 450px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
-  			<form id="fm" method="post">
-  				<input type="hidden" name="teacherId" id="teacherId" />
-  				<table style="width: 100%;" cellSpacing='0' cellPadding='5px'>
-  					<tr>
-  						<td style="text-align: right;width: 40%">校区：</td>
-  						<td>
-	  						<select class="easyui-combobox" style="width:155px;" name="schoolId" id="schoolId" data-options="panelHeight:'auto'">
-	  						
-	  						</select>
-  						</td>
-  					</tr>
-  					<tr>
-  						<td style="text-align: right;width: 40%">教师中文名：</td>
-  						<td>
-	  						<input class="easyui-textbox" style="width:155px;" name="chineseName" id="chineseName" data-options="panelHeight:'auto'" />
-  						</td>
-  					</tr>
-  					<tr>
-  						<td style="text-align: right;width: 40%">教师英文名：</td>
-  						<td>
-	  						<input class="easyui-textbox" style="width:155px;" name="englishName" id="englishName" data-options="panelHeight:'auto'" />
-  						</td>
-  					</tr>
-  					<tr>
-  						<td style="text-align: right;width: 40%">持证阶段：</td>
-  						<td>
-	  						<select class="easyui-combobox" style="width:155px;" name="permitteeLevel" id="permitteeLevel" data-options="panelHeight:'auto'">
-  							
-  							</select>
-  						</td>
-  					</tr>
-  					<tr>
-  						<td style="text-align: right;width: 40%">持证数量：</td>
-  						<td>
-	  						<input class="easyui-textbox" style="width:155px;" id="permitteeNum" name="permitteeNum" />
-  						</td>
-  					</tr>
-  					<tr>
-  						<td style="text-align: right;width: 40%">入职时长/月：</td>
-  						<td>
-	  						<input class="easyui-textbox" style="width:155px;" id="workMonth" name="workMonth">
-  						</td>
-  					</tr>
-  					<tr>
-  						<td style="text-align: right;width: 40%">入职年数：</td>
-  						<td>
-	  						<input class="easyui-textbox" style="width:155px;" id="workYear" name="workYear">
-  						</td>
-  					</tr>
-  					<tr>
-  						<td style="text-align: right;width: 40%">入职时间：</td>
-  						<td>
-	  						<input class="easyui-datebox" data-options="sharedCalendar:'#cc'" style="width:155px;" id="workTime" name="workTime">
-  						</td>
-  					</tr>
-  					<tr>
-  						<td style="text-align: right;width: 40%">带班阶段：</td>
-  						<td>
-	  						<input class="easyui-combobox" style="width:155px;" id="leadClassLevel" name="leadClassLevel">
-  						</td>
-  					</tr>
-  					<tr>
-  						<td style="text-align: right;width: 40%">待培训阶段：</td>
-  						<td>
-	  						<input class="easyui-combobox" style="width:155px;" id="trainingLevel" name="trainingLevel">
-  						</td>
-  					</tr>
-  				</table>
-  			</form>
-  		</div>
-		<div id="dlgBtn">
-    		<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveArchives()">确认</a> 
-    		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
-  		</div>
+			<div id="dlg" class="easyui-dialog" style="width: 800px; height: 450px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
+  				<iframe id="frame2" name="frame2"   src="/sys/course/oldCourse.jsp"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" height="445px" width="100%"></iframe>
+	  	   </div>
+	 
 		<div style="margin-top: 20px;">
 	      		<div style="float: left;margin-left: 900px;">
 	      			<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
@@ -164,23 +92,32 @@
 
 </html>
 <script type="text/javascript">
-function addArchives()
-{
-	$('#dlg').dialog('open').dialog('setTitle', '新增教师档案');
-	$('#fm').form('clear');
 
-}
-
-	//提交课程
-	var studentCourses=[];
+	var studentCourses=[];//提交课程
 	
-	    $('#link').combobox({    
-        onChange : function(n, o) 
-        {
-	    	
+	var linkCourses=[];//选择关联已有连报课程
+	
+	function linkCourse(obj)
+	{
+		linkCourses=obj;
+	}
+	
+	function addArchives()
+	{
+		$('#dlg').dialog('open').dialog('setTitle', '新增教师档案');
+		$('#fm').form('clear');
+	
+	}
+	
+	//连报课程选择
+    $('#link').combobox(
+    {    
+       onChange : function(n,o) 
+       {
 	    	for(var i=1;i<=n;i++)
 	    	{
 	    		var name="#frame"+i;
+	    		$(name).attr('src',"/sys/course/linkcourse.jsp?order=一&studentCousreId="+linkCourses[i]);
 	    		$(name).css("display","block");
 	    	}
         }  

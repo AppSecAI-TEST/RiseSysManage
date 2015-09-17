@@ -2,6 +2,7 @@
 <%
 	String path = request.getContextPath();
 	String order=request.getParameter("order").toString();
+	String studentCousreId=request.getParameter("studentCousreId").toString();
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -219,7 +220,12 @@
   		</div>
   	</body>
 </html>
-	<script type="text/javascript">
+<script type="text/javascript">
+	
+	var studentCourse={};//最后提交学生课程信息
+    var gifts = [];  
+	var courses=[];
+
 	
 	//增加课程
 	$("#addCourse").click(function()
@@ -314,10 +320,7 @@
 	  
 	});
 
-	var studentCourse={};//最后提交学生课程信息
-    var gifts = [];  
-	var courses=[];
-	
+
 	//提交课程
 	$("#submit").click(function()
 	{

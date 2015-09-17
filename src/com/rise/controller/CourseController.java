@@ -1,5 +1,7 @@
 package com.rise.controller;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +22,46 @@ public class CourseController
 
 	@Autowired
 	CourseSerivce courseSerivce;
-	//学员注册
+	
+	/**
+	 * 添加连报课程
+	 * @param param
+	 * @param response
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/addLinkCourses.do")
 	public void addLinkCourses(String param, HttpServletResponse response) throws Exception
 	{
-		
 		courseSerivce.addLinkCourses(param);
-		
+	}
+	
+	/**
+	 * 获取学员课程列表
+	 * @param param
+	 * @param response
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/getStuCourses.do")
+	public void getStuCourses(String param, HttpServletResponse response) throws Exception
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = courseSerivce.getStuCourses(param);;
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
 	}
 }
