@@ -20,7 +20,7 @@
 						<span>所属校区：</span>
 					</td>
 					<td width="114px">
-						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false" data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto', onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"	url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
+						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false" data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto', onLoadSuccess:function(data){if(data.length > 0)$('#schoolId').combobox('setValue',data[0].schoolId);}"	url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=schoolId">
      					</select>
 					</td>
 					<td align="right">
@@ -28,7 +28,7 @@
 					</td>
 					<td width="114px">
 						<select id="name" name="name" class="easyui-combobox" style="width: 114px; height: 25px;">
-      						</select>
+      					</select>
 					</td>
 					<td align="right">
 						<span>联系电话：</span>
@@ -56,8 +56,8 @@
 					<td width="114px">
 						<select id="advisterId" name="advisterId" class="easyui-combobox" style="width: 114px; height: 25px;"
 						data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
-     						 onLoadSuccess:function(data){$('#advisterId').combobox('setValue',data[0].staffId);}"
-     						url="<%=path %>/pubData/qryStaffList.do?post=001&schoolId=${sessionScope.StaffT.schoolId}">
+     						 onLoadSuccess:function(data){if(data.length > 0)$('#advisterId').combobox('setValue',data[0].staffId);}"
+     						url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=advisterId">
       						</select>
 					</td>
 					<td align="right">
@@ -66,8 +66,8 @@
 					<td width="114px">
 						<select id="dutyAdvister" name="dutyAdvister" class="easyui-combobox" style="width: 114px; height: 25px;"
 						data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
-     						 onLoadSuccess:function(data){$('#dutyAdvister').combobox('setValue',data[0].staffId);}"
-     						url="<%=path %>/pubData/qryStaffList.do?post=002&schoolId=${sessionScope.StaffT.schoolId}">
+     						 onLoadSuccess:function(data){if(data.length > 0)$('#dutyAdvister').combobox('setValue',data[0].staffId);}"
+     						url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=dutyAdvister">
       						</select>
 					</td>
 					<td align="right">
@@ -76,8 +76,8 @@
 					<td width="114px">
 						<select id="carer" name="carer" class="easyui-combobox" style="width: 114px; height: 25px;"
 						data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
-     						 onLoadSuccess:function(data){$('#carer').combobox('setValue',data[0].staffId);}"
-     						url="<%=path %>/pubData/qryStaffList.do?post=003&schoolId=${sessionScope.StaffT.schoolId}">
+     						 onLoadSuccess:function(data){if(data.length > 0)$('#carer').combobox('setValue',data[0].staffId);}"
+     						url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=carer">
       						</select>
 					</td>
 					<td align="right">
@@ -98,7 +98,7 @@
 		<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="<%=path %>/student/qryStudentList.do?funcNodeId=1000" toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 			<thead>
 				<tr>
-					<th data-options="field:'ck',checkbox:true"></th>
+					<th data-options="field:'ck',checkbox:true">f</th>
 					<th data-options="field:'schoolName',width:80,align:'center'">所属校区</th>
 					<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
 					<th data-options="field:'sexVal',width:50,align:'center'">性别</th>
@@ -133,7 +133,7 @@
   						<td width="15%">
   							<select id="updateAdvisterId" name="updateAdvisterId" class="easyui-combobox" style="width: 114px; height: 25px;"
 							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
-      						 onLoadSuccess:function(data){$('#updateAdvisterId').combobox('setValue',data[0].staffId);}"
+      						 onLoadSuccess:function(data){if(data.length > 0)$('#updateAdvisterId').combobox('setValue',data[0].staffId);}"
       						url="<%=path %>/pubData/qryStaffList.do?post=002&schoolId=${sessionScope.StaffT.schoolId}">
        						</select>
   						</td>
@@ -141,7 +141,7 @@
   						<td width="15%">
   							<select id="updateCarer" name="updateCarer" class="easyui-combobox" style="width: 114px; height: 25px;"
 							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
-      						 onLoadSuccess:function(data){$('#updateCarer').combobox('setValue',data[0].staffId);}"
+      						 onLoadSuccess:function(data){if(data.length > 0)$('#updateCarer').combobox('setValue',data[0].staffId);}"
       						url="<%=path %>/pubData/qryStaffList.do?post=003&schoolId=${sessionScope.StaffT.schoolId}">
        						</select>
   						</td>
@@ -167,5 +167,6 @@
     		<a href="javascript:void(0)" id="batchUpdateSubmit" class="easyui-linkbutton" iconCls="icon-ok">提交</a> 
     		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
   		</div>
+  		<%@ include file="../common/pub.jsp" %>
  	</body>
 </html>
