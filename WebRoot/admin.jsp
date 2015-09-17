@@ -206,7 +206,7 @@
 					var content = '';
 					if(menu.son){
 						var treedata = $.toJSON(menu.son);
-						content = '<ul class="easyui-tree" data-options=\'data:' + treedata + ',animate:true,lines:true,onClick:function(node){openUrl(node.url, node.text)}\'></ul>';
+						content = '<ul class="easyui-tree" data-options=\'data:' + treedata + ',animate:true,lines:true,onClick:function(node){openUrl(node.id, node.url, node.text)}\'></ul>';
 					}
 					$("#leftmenu").accordion("add", {title: menu.name, content: content, iconCls:'icons-folder-folder_go'});
 				});
@@ -228,8 +228,16 @@
 			    if(!stop) removeLeft(true)
 			}
 			
-			function openUrl(url , title)
+			function openUrl(id , url , title)
 			{
+				if(url.lastIndexOf("&") != -1 || url.lastIndexOf("?") != -1)
+				{
+					url += "&funcNodeId="+id;
+				}
+				else
+				{
+					url += "?funcNodeId="+id;
+				}
 				if($('#pagetabs').tabs('exists', title)){
 					$('#pagetabs').tabs('select', title);
 					var current_tab = $('#pagetabs').tabs('getSelected');
