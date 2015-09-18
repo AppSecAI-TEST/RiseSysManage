@@ -40,7 +40,7 @@
 	      	</div>
 	      	
 	      	<div style="padding:5px 0;min-width:1100px; width:100%;">
-			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="<%=path %>/student/qryStudentList.do?funcNodeId=1000" 
+			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="/sys/course/getStuCourses.do?queryCode=Qry_Course_Gift&studentId=2" 
 				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 				<thead>
 					<tr>
