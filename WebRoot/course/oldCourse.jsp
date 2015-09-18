@@ -93,8 +93,7 @@
 <script type="text/javascript">
 
 	var linkCourses=[];//选择关联已有连报课程
-	
-	
+	var courses;
 	
 	$("#submit").click(function()
 	{
@@ -104,7 +103,14 @@
 				var id = $(this).attr('studentCousreId');
 				if(id!='')
 				{
-					linkCourses.push(id);
+					$.each(courses,function(i,node)
+				   	{
+				   		var idT = node.studentCourseId;
+				   		if(id==idT)
+				   		{
+				   			linkCourses.push(node);
+				   		}
+				   	});
 				}
   			}
 		});
@@ -112,7 +118,8 @@
 		{
 				
 		}
-		parent.window.linkCourse(linkCourses);
+		parent.window.linkCourses=linkCourses;
+		parent.window.closeDlg();
 	});
 	
 
@@ -135,9 +142,8 @@
 	    	success: function (data)
 	    	{
 	    		$.messager.progress('close'); 
-	    		var courses = data.courses;//学员已有课程
-	    		
-	    		
+	    		 courses = data.data;//学员已有课程
+	    		 
 	    		$.each(courses,function(i,node)
 	    		{
 	    			var trModel=$('#cousreModel').clone();

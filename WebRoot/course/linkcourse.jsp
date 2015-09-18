@@ -1,8 +1,14 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,net.sf.json.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="com.rise.pub.util.*"%>
 <%
 	String path = request.getContextPath();
-	String order=request.getParameter("order").toString();
-	String studentCousreId=request.getParameter("studentCousreId").toString();
+	String order=request.getParameter("order");
+	String courses=request.getParameter("courses");
+	JSONObject object=new JSONObject();
+	if(courses!=null && !"".equals(courses))
+    {
+		object = JSONObject.fromObject(courses);
+    }
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -16,8 +22,12 @@
 			$(document).ready(function()
 			{
 				var height = $(document).height();
-				$("#frame1",parent.document).css("height",height+20);
+				$("#frame0",parent.document).css("height",height+20);
+			 	$("#frame1",parent.document).css("height",height+20);
 			 	$("#frame2",parent.document).css("height",height+20);
+			 	$("#frame3",parent.document).css("height",height+20);
+			 	$("#frame4",parent.document).css("height",height+20);
+			 	$("#frame5",parent.document).css("height",height+20);
 			})
 		</script>
   	</head>
@@ -30,7 +40,7 @@
 	      
       	      <table width="100%" cellpadding="5px" class="maintable" >
 	      	      <tr>
-	      	      	<input id="studentId" name="studentId" type="hidden" value="100000"/>
+	      	      	<input id="studentId" name="studentId" type="hidden" value="2"/>
 	      	    	<input id="courseType" name="courseType" type="hidden" value="001"/>
 	      	    	<input id="advisterType" name="adviserType" type="hidden" value="teacher"/>
 	      	    	<input id="courseState" name="courseState" type="hidden" value="001"/>
@@ -40,7 +50,7 @@
 	      	        <td>
 					 <select name="stageId" class="easyui-combobox" id="stageId" style="width: 150px; height: 28px;"
 	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      						 onLoadSuccess:function(data){$('stageId').combobox('setValue',data[0].codeFlag);}"
+	      						 onLoadSuccess:function(data){$('#stageId').combobox('setValue','<%=object.get("stageId")%>');}"
 	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID" required="true" >
       	            </select>
 					</td>
@@ -48,12 +58,12 @@
 	      	        <td> 
 	      	         <select name="classType" class="easyui-combobox" id="classType" style="width: 150px; height: 28px;"
 	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      						 onLoadSuccess:function(data){$('classType').combobox('setValue',data[0].codeFlag);}"
+	      						 onLoadSuccess:function(data){$('#classType').combobox('setValue','<%=object.get("classType")%>');}"
 	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=CLASS_TYPE" required="true" >
       	            </select>
 	      	         </td>
 	      	        <td align="right"><span>证件号码：</span></td>
-	      	        <td>1234567890</td>
+	      	        <td><%=object.get("payDate")%></td>
       	        </tr>
 	      	      <tr>
 	      	        <td align="right"><DIV id="u170_state0" data-label="状态1">
@@ -72,22 +82,22 @@
 	      						url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
 	      	          </select></td>
 	      	        <td  align="right"><span>缴费时间：</span></td>
-	      	        <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 28px;"/></td>
+	      	        <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 28px;" value="<%=object.get("payDate")%>"/></td>
       	        </tr>
       	      </table>
       	      
 </div>
-      		<div style="height: 10px;"></div>
+      	<div style="height: 10px;"></div>
       	<div class="easyui-panel" style="width:100%;height:auto;" title="赠品信息">
       	
       	      <table width="100%" cellpadding="5px" class="maintable" id="giftTab">
 	      	      <tr>
-	      	        <td width="7%" align="right">  <span>赠品类型：</span></td>
+	      	        <td width="7%" align="right"><span>赠品类型：</span></td>
 	      	        <td width="12%">
-	      	        <select    class="easyui-combobox" id="giftName" style="width: 150px; height: 28px;"
+	      	        <select    class="easyui-combobox" id="giftType" style="width: 150px; height: 28px;"
 	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      						 onLoadSuccess:function(data){$('#giftName').combobox('setValue',data[0].codeFlag);}"
-	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_T&codeType=GIFT_NAME" required="true" >
+	      						 onLoadSuccess:function(data){$('#giftType').combobox('setValue',data[0].codeFlag);}"
+	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_T&codeType=GIFT_TYPE" required="true" >
       	            </select>
       	            </td>
 	      	        <td width="7%" align="right"><span>赠品名称：</span></td>
@@ -95,13 +105,18 @@
 	      	        <table width="200" border="0">
    	                <tr>
 	      	              <td>
-							<select   class="easyui-combobox" id="giftType" style="width: 150px; height: 28px;"
+							<select   class="easyui-combobox" id="giftId" style="width: 150px; height: 28px;"
 	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      						 onLoadSuccess:function(data){$('#giftType').combobox('setValue',data[0].codeFlag);}"
-	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_T&codeType=GIFT_TYPE" required="true" >
+	      						 onLoadSuccess:function(data){$('#giftId').combobox('setValue',data[0].codeFlag);}"
+	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_T&codeType=GIFT_ID" required="true" >
       	            </select>
 						</td>
-	      	              <td><select  class="easyui-combobox" id="giftId" style="width: 96px; height: 28px;">
+	      	              <td><select  class="easyui-combobox" id="couponType" style="width: 120px; height: 28px;" 
+	      	              data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+	      						 onLoadSuccess:function(data){$('#couponType').combobox('setValue',data[0].codeFlag);}"
+	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_T&codeType=COUPON_TYPE" >
+	      	              
+	      	              
    	                  </select></td>
 	      	              <td><input   id="giftCode" type="text" class="easyui-textbox validatebox" required="true" style="width: 200px; height: 28px;"/></td>
       	                </tr>
@@ -120,9 +135,9 @@
       	        
       	      <tr style="display:none;" name="addGift" id="addGift" >
       	        <td align="right"><span>赠品类型：</span></td>
-      	        <td align="left" giftName="">&nbsp;</td>
+      	        <td align="left" giftType="">&nbsp;</td>
       	        <td align="right"><span>赠品名称：</span></td>
-      	        <td align="left" giftType="" giftId="">&nbsp;</td>
+      	        <td align="left" giftId="" coupon="">&nbsp;</td>
       	        <td align="right"><span>是否领用：</span></td>
       	        <td align="left" isGet="">&nbsp;</td>
       	        <td align="right"><span>发放人：</span></td>
@@ -137,16 +152,18 @@
       	      <table width="100%" cellpadding="5px" class="maintable" >
 	      	      <tr>
 	      	        <td colspan="2" align="right"><span>赠课类型</span></td>
-	      	        <td width="16%" align="right"><select  class="easyui-combobox" id="giftNameCoruse" style="width: 150px; height: 28px;"
-	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      						 onLoadSuccess:function(data){$('#giftNameCoruse').combobox('setValue',data[0].codeFlag);}"
-	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_T&codeType=GIFT_COURSE" required="true" >
-      	            </select></td>
+	      	        <td width="16%" align="right">
+		      	        <select  class="easyui-combobox" id="giftCourseType" style="width: 150px; height: 28px;"
+		      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+		      						 onLoadSuccess:function(data){$('#giftCourseType').combobox('setValue',data[0].codeFlag);}"
+		      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_T&codeType=GFIT_COURSE_TYPE" required="true" >
+	      	            </select>
+      	            </td>
 	      	        <td width="11%" align="right"><span>赠课名称：</span></td>
-	      	        <td width="11%"><select   class="easyui-combobox" id="giftCourseId" style="width: 96px; height: 28px;"
+	      	        <td width="11%"><select   class="easyui-combobox" id="giftCourseId" style="width: 120px; height: 28px;"
 	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#giftCourseId').combobox('setValue',data[0].codeFlag);}"
-	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_T&codeType=GIFT_COURSE" required="true">
+	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_T&codeType=GIFT_COURSE_ID" required="true">
 	      	          </select></td>
 	      	       
 	      	        <td width="10%" align="right"><span>课时量:</span></td>
@@ -160,7 +177,8 @@
 	      	    
 	      	      <tr align="center">
 	      	        <td width="6%" ><span>序号</span>&nbsp;</td>
-	      	        <td ><span>赠课名称</span></td>
+	      	        <td><span>赠课类型</span></td>
+	      	        <td><span>赠课名称</span></td>
 	      	        <td><span>赠送课时量</span></td>
 	      	        <td><span>赠送时间</span></td>
 	      	        <td><span>课程状态</span></td>
@@ -172,13 +190,14 @@
       	        </tr>
 	      	      <tr style="display:none;" id="add" align="right">
 	      	        <td  val="">&nbsp;</td>
-	      	        <td  giftType="">&nbsp;</td>
-	      	        <td  giftId="">&nbsp;</td>
-	      	        <td  val="">&nbsp;</td>
-	      	        <td  val="">&nbsp;</td>
-	      	        <td  val="">&nbsp;</td>
-	      	        <td  val="">&nbsp;</td>
-	      	        <td  val="">&nbsp;</td>
+	      	        <td  align="center" giftCourseType="">&nbsp;</td>
+	      	        <td  align="center"  giftId="">&nbsp;</td>
+	      	        <td  align="center">&nbsp;</td>
+	      	        <td  align="center">&nbsp;</td>
+	      	        <td  align="center">&nbsp;</td>
+	      	        <td  align="center">&nbsp;</td>
+	      	        <td  align="center">&nbsp;</td>
+	      	        <td  align="center">&nbsp;</td>
 	      	        <td><a href='javascript:void(0)' class='linkmore' ><span>删除</span></a></td>
       	        </tr>
       	      </table>
@@ -194,7 +213,7 @@
    	            </tr>
    	           
    	            <tr>
-	      	        <td width="10%"  align="right" ><span>课程<%=order%>金额：</span></td>
+	      	        <td width="10%"  align="right" ><span>课程金额：</span></td>
 	      	        <td width="14%"  align="left" ><input id="totalAmount" name="totalAmount" type="text" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"> </td>
 	      	        <td width="12%"  align="right" ><span >现金抵扣券金额：</span></td>
 	      	        <td colspan="3"  align="left" ><input id="minusAmount" name="minusAmount" type="text" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;">  </td>
@@ -223,9 +242,94 @@
 <script type="text/javascript">
 	
 	var studentCourse={};//最后提交学生课程信息
-    var gifts = [];  
+    var gifts  =[];  
 	var courses=[];
 
+	function getDataName(id,val)
+	{
+		
+		var boxdata = $("#giftType").combobox('getData');
+		
+		boxdata.each(function(i,node)
+		{
+			alert(node);
+		
+		});
+		
+	}
+	initCousreGift();
+	//初始化已有赠品信息
+	function initCousreGift()
+	{
+			//增加赠品
+	 	var sqlParam={};
+		sqlParam.studentCourseId='<%=object.get("studentCourseId")%>';
+		sqlParam.queryCode='Qry_Course_Gift';
+		var str = JSON.stringify(sqlParam);
+		$.ajax({
+			url: "/sys/course/getStuCourses.do?",
+			data: "param="+str,
+			dataType: "json",
+			async: false,
+			beforeSend: function()
+	    	{
+	    		// $.messager.progress({title : '批量修改', msg : '正在批量修改客户关怀和责任顾问，请稍等……'});
+	    	},
+	    	success: function (data)
+	    	{
+	    		$.messager.progress('close'); 
+	    		 var giftTs = data.data;//学员已有课程
+	    		
+	    		$.each(giftTs,function(i,gift)
+	    		{
+    			 	var giftTR=$("#addGift").clone();
+					giftTR.css("display",'table-row');
+					giftTR.attr("val","old");
+					giftTR.find("td").each(function(n,node)
+					{
+						if(n==1)
+						{
+						//	getDataName("#giftType",gift.giftType);
+							$(node).html("<span>"+gift.giftType+"</span>");	
+						}else
+						if(n==3)
+						{							
+							$(node).html("<span>"+gift.giftId+"  "+gift.couponType+"   "+gift.giftCode+"</span>");
+							
+						}else
+						if(n==5)
+						{	
+							if(gift.isGet=='Y')
+							{
+								$(node).html("<span>已领取</span>");	
+							}else
+							{
+								$(node).html("<span>未领取</span>");	
+							}
+							
+							 
+						}else if(n==7)
+						{
+							$(node).html("<span>"+gift.granter+"</span>");	
+						}
+					});
+				
+					$("#addGift").after(giftTR);
+					var height = $(document).height();
+					$("#frame0",parent.document).css("height",height+20);
+				 	$("#frame1",parent.document).css("height",height+20);
+				 	$("#frame2",parent.document).css("height",height+20);
+				 	$("#frame3",parent.document).css("height",height+20);
+				 	$("#frame4",parent.document).css("height",height+20);
+				 	$("#frame5",parent.document).css("height",height+20);
+					    			
+				});
+					          
+			} 
+		});
+	}
+	
+		
 	
 	//增加课程
 	$("#addCourse").click(function()
@@ -235,12 +339,16 @@
 		objectTr.attr("val","course");
 		objectTr.find("td").each(function(i,node)
 		{
+			if(i==0)
+			{
+				$(node).html("<span>"+(i+1)+"</span>");	
+			}else
 			if(i==1)
 			{
-				var name=$("#giftNameCoruse").combobox('getText');
-				var val=$("#giftNameCoruse").combobox('getValue');
+				var name=$("#giftCourseType").combobox('getText');
+				var val=$("#giftCourseType").combobox('getValue');
 				$(node).html("<span>"+name+"</span>");	
-				$(node).attr("giftType",val);//赠课类型	
+				$(node).attr("giftCourseType",val);//赠课类型	
 			}else if(i==2)
 			{
 				var name=$("#giftCourseId").combobox('getText');
@@ -257,8 +365,12 @@
 		 
 		$("#add").after(objectTr);
 		var height = $(document).height();
-		$("#frame1",parent.document).css("height",height+20);
+		$("#frame0",parent.document).css("height",height+20);
+	 	$("#frame1",parent.document).css("height",height+20);
 	 	$("#frame2",parent.document).css("height",height+20);
+	 	$("#frame3",parent.document).css("height",height+20);
+	 	$("#frame4",parent.document).css("height",height+20);
+	 	$("#frame5",parent.document).css("height",height+20);
 	 	
 	});
 	
@@ -272,18 +384,29 @@
 		{
 			if(n==1)
 			{
-				var name=$("#giftName").combobox('getText');
-				var val=$("#giftName").combobox('getValue');
+				var name=$("#giftType").combobox('getText');
+				var val=$("#giftType").combobox('getValue');
 				$(node).html("<span>"+name+"</span>");	
-				$(node).attr("giftName",val);//赠品类型	
+				$(node).attr("giftType",val);//赠品类型	
 			}else
 			if(n==3)
 			{
-				var giftType=$("#giftType").combobox("getText");
-				var val=$("#giftType").combobox('getValue');
-				$(node).html("<span>"+giftType+"</span>");	
-				$(node).attr("giftType",val);//赠品名称
-				$(node).attr("giftId",val);//赠品细项
+				var giftId=$("#giftId").combobox("getText");
+				var val=$("#giftId").combobox('getValue');
+				
+				var coupon=$("#couponType").combobox('getText');
+				var code=$("#giftCode").textbox('getValue');
+				if(''!=code)
+				{
+						$(node).html("<span>"+giftId+"  "+coupon+"   "+ code +"</span>");	
+				}else
+				{
+					$(node).html("<span>"+giftId+"</span>");	
+				}
+				
+				$(node).attr("giftId",val);//赠品名称
+				$(node).attr("couponType",val);//卷类ID
+				$(node).attr("giftCode",code);
 			}else
 			if(n==5)
 			{
@@ -315,8 +438,12 @@
 	
 		$("#addGift").after(giftTR);
 		var height = $(document).height();
-		$("#frame1",parent.document).css("height",height+20);
+		$("#frame0",parent.document).css("height",height+20);
+	 	$("#frame1",parent.document).css("height",height+20);
 	 	$("#frame2",parent.document).css("height",height+20);
+	 	$("#frame3",parent.document).css("height",height+20);
+	 	$("#frame4",parent.document).css("height",height+20);
+	 	$("#frame5",parent.document).css("height",height+20);
 	  
 	});
 
@@ -330,22 +457,24 @@
 			if('gift'==trName)
 			{
 				 var  tds=$(this).children('td');
-				 var  giftName=tds.eq(1).attr('giftName');
-				 var  giftType=tds.eq(3).attr('giftType');
+				 var  giftType=tds.eq(1).attr('giftType');
 				 var  giftId=tds.eq(3).attr('giftId');
+				 var  couponType=tds.eq(3).attr('couponType');
+				 var  giftCode=tds.eq(3).attr('giftCode');
 				 var  isGet=tds.eq(5).attr('isGet');
 				 var  granter=tds.eq(7).attr('granter');
 				 
 				 var  gift = {};
 				 
-				 gift.giftName = giftName;
-				 gift.giftType=giftType;
+				 gift.giftType = giftType;
 				 gift.giftId=giftId;
+				 gift.couponType=couponType;
+				 gift.giftCode=giftCode;
 				 gift.isGet=isGet;
 				 gift.granter=granter;
 				 
 				 gifts.push(gift);  
-				// alert(JSON.stringify(gifts));
+				 alert(JSON.stringify(gifts));
 			 }
 		});
 		$("#giftCourse").find('tr').each(function(i,node)
@@ -354,55 +483,60 @@
 			if('course'==trName)
 			{
 				 var  tds=$(this).children('td');
-				 var  giftType=tds.eq(1).attr('giftType');
+				 var  giftCourseType=tds.eq(1).attr('giftCourseType');
 				 var  giftId=tds.eq(2).attr('giftId');
 				 var  hours=tds.eq(3).attr('hours');
 				
 				 var  course = {};
-				 course.giftType = giftType;
+				 course.giftCourseType = giftCourseType;
 				 course.giftId=giftId;
 				 course.hours=hours;
 				 
 				 courses.push(course);  
-				// alert(JSON.stringify( courses));
+				 alert(JSON.stringify( courses));
 			 }
 		});
 	});
 	
+	//创建连报提交数据
 	function build()
 	{
-		
 		$("#giftTab").find('tr').each(function(i,node)
 		{
 			var trName=$(this).attr("val");
 			if('gift'==trName)
 			{
 				 var  tds=$(this).children('td');
-				 var  giftName=tds.eq(1).attr('giftName');
-				 var  giftType=tds.eq(3).attr('giftType');
+				 var  giftType=tds.eq(1).attr('giftType');
 				 var  giftId=tds.eq(3).attr('giftId');
+				 var  couponType=tds.eq(3).attr('couponType');
+				 var  giftCode=tds.eq(3).attr('giftCode');
 				 var  isGet=tds.eq(5).attr('isGet');
 				 var  granter=tds.eq(7).attr('granter');
 				 
 				 var  gift = {};
 				 
-				 gift.giftName = giftName;
-				 gift.giftType=giftType;
+				 gift.studentId=$("#studentId").val();
+				 gift.studentId=$("#studentId").val();
+				 gift.giftType = giftType;
 				 gift.giftId=giftId;
+				 gift.couponType=couponType;
+				 gift.giftCode=giftCode;
 				 gift.isGet=isGet;
 				 gift.granter=granter;
 				 
 				 gifts.push(gift);  
-				// alert(JSON.stringify(gifts));
 			 }
 		});
+			 alert(JSON.stringify(gifts));
+			 
 		$("#giftCourse").find('tr').each(function(i,node)
 		{
 			var trName=$(this).attr("val");
 			if('course'==trName)
 			{
 				 var  tds=$(this).children('td');
-				 var  giftType=tds.eq(1).attr('giftType');
+				 var  giftType=tds.eq(1).attr('giftCourseType');
 				 var  giftId=tds.eq(2).attr('giftId');
 				 var  hours=tds.eq(3).attr('hours');
 				
@@ -410,10 +544,12 @@
 				 course.giftType = giftType;
 				 course.giftId=giftId;
 				 course.hours=hours;
-				 
 				 courses.push(course);  
 			 }
 		});
+		
+		 alert(JSON.stringify(courses));
+		 
 		studentCourse.gifts=gifts;
 		studentCourse.giftCourses= courses;
 		var obj = JSON.stringify($("#courseFm").serializeObject());
