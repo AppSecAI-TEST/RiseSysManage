@@ -72,9 +72,17 @@
 	      	</div>
 	     <div id='frms'> 		 
 			
-			<iframe id="frame1" name="frame1"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
+			<iframe id="frame0" name="frame0"  style="display:none"  src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
 		
-			<iframe id="frame2" name="frame2"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
+			<iframe id="frame1" name="frame1"  style="display:none"  src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
+			
+			<iframe id="frame2" name="frame2" style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
+		
+			<iframe id="frame3" name="frame3" style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
+			
+			<iframe id="frame4" name="frame4" style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
+		
+			<iframe id="frame5" name="frame5" style="display:none"  src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
 				
 		</div>
 			<div id="dlg" class="easyui-dialog" style="width: 800px; height: 450px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
@@ -94,14 +102,12 @@
 <script type="text/javascript">
 
 	var studentCourses=[];//提交课程
-	
 	var linkCourses=[];//选择关联已有连报课程
 	
-	function linkCourse(obj)
+	function closeDlg()
 	{
-		linkCourses=obj;
+		$('#dlg').dialog('close');
 	}
-	
 	function addArchives()
 	{
 		$('#dlg').dialog('open').dialog('setTitle', '新增教师档案');
@@ -114,11 +120,21 @@
     {    
        onChange : function(n,o) 
        {
-	    	for(var i=1;i<=n;i++)
+	    	for(var i=0;i<n;i++)
 	    	{
 	    		var name="#frame"+i;
-	    		$(name).attr('src',"/sys/course/linkcourse.jsp?order=一&studentCousreId="+linkCourses[i]);
+	    		if(i<linkCourses.length)
+	    		{
+	    			var str=JSON.stringify(linkCourses[i]);
+					var url="/sys/course/linkcourse.jsp?order=1&courses="+str;
+	    			$(name).attr('src',url);
+	    		
+	    		}else
+	    		{
+	    			$(name).attr('src',"/sys/course/linkcourse.jsp?order=一");
+	    		}
 	    		$(name).css("display","block");
+	    			return;
 	    	}
         }  
     });
@@ -130,10 +146,10 @@
 		 
 		});
 		
-			var l=frame1.window.build();
-			var ll=frame2.window.build();
+			var l=frame0.window.build();
+			var ll=frame1.window.build();
 			studentCourses.push(l);
-			studentCourses.push(ll);
+			//studentCourses.push(ll);
 			
 	    var str = JSON.stringify(studentCourses);
 		
