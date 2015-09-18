@@ -89,7 +89,7 @@
     		<a href="javascript:void(0)" id="viewVip" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">浏览</a>
   		</div>
 		<div style="padding:5px 0;min-width:1100px; width:100%;">
-			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="<%=path %>/student/qryStudentList.do?funcNodeId=1000"  
+			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1000"  
 				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>

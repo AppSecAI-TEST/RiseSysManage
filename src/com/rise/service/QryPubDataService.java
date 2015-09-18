@@ -1,8 +1,11 @@
 package com.rise.service;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.stereotype.Service;
 
 import com.rise.pub.invoke.ServiceEngine;
+import com.rise.pub.util.ObjectCensor;
 
 @Service
 public class QryPubDataService 
@@ -53,5 +56,25 @@ public class QryPubDataService
 	{
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1018\",securityCode:\"0000000000\",params:{schoolId:\""+schoolId+"\",classType:\""+classType+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
+	}
+
+	public String qryDataListByPage(String page, String rows, String param, String funcNodeId) throws Exception 
+	{
+		Integer pageNum = Integer.parseInt(page) - 1;
+		Integer pageSize = Integer.parseInt(rows);
+		pageNum = pageNum * pageSize;
+		JSONObject obj = new JSONObject();
+		if(ObjectCensor.isStrRegular(param))
+		{
+			obj = JSONObject.fromObject(param);
+		}
+		if(ObjectCensor.isStrRegular(funcNodeId))
+		{
+			obj.element("funcNodeId", funcNodeId);
+		}
+		obj.element("start", pageNum);
+		obj.element("rownum", pageSize);
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1019\",securityCode:\"0000000000\",params:{param:"+obj+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
 	}
 }
