@@ -10,7 +10,7 @@ $(document).ready(function() {
     	var funcNodeId = $("#qryBtn").attr("funcNodeId");
     	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
     	$('#list_data').datagrid({
-    		url : "/sys/student/qryStudentList.do",
+    		url : "/sys/pubData/qryDataListByPage.do",
     		queryParams:{
     			param : obj
     		},
