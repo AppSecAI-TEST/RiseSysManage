@@ -40,7 +40,7 @@
 	      	</div>
 	      	
 	      	<div style="padding:5px 0;min-width:1100px; width:100%;">
-			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="/sys/course/getStuCourses.do?queryCode=Qry_Course_Gift&studentId=2" 
+			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?param={'queryCode':'Qry_Student_Gift','studentId':'2'}" 
 				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 				<thead>
 					<tr>
@@ -56,7 +56,7 @@
 						<th data-options="field:'advisterNameB',width:100,align:'center'">招生顾问B</th>
 						<th data-options="field:'dutyAdvisterName',width:100,align:'center'">责任顾问</th>
 						<th data-options="field:'carerName',width:100,align:'center'">客户关怀</th>
-						<th data-options="field:'parentsName',width:150,align:'center'">家长</th>
+						<th data-options="field:'giftType',width:150,align:'center'">家长</th>
 					</tr>
 				</thead>
 			</table>
