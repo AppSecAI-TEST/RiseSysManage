@@ -228,7 +228,7 @@
 <div style="height: 10px;"></div>
 
 	<div id="dlg" class="easyui-dialog" style="width: 800px; height: 450px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
-  				<iframe id="frame2" name="frame2"   src="/sys/course/useCoupon.jsp?studentId=2"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" height="445px" width="100%"></iframe>
+  				<iframe id="frame2" name="frame2"   src="/sys/course/useCoupon.jsp?studentId=2"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto"  width="700px"></iframe>
 	 </div>
   
   
@@ -252,6 +252,7 @@
 	var courses=[];
 	var coupons=[];//使用抵扣劵
 	var useCoupon="";
+	var minus;
 	function closeDlg()
 	{
 		$('#dlg').dialog('close');
@@ -268,6 +269,7 @@
 	function colDis(id)
 	{
 		var id="#useCoupon"+id+"";
+		$("#minusAmount").html(minus);
 		$(id).css('display','none');
 	}
 	
