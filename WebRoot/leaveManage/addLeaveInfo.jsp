@@ -11,6 +11,7 @@
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
 		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/leaveManage.js"></script>
 		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/css/style.css">
 		<style type="text/css">
 			.datagrid{
@@ -37,14 +38,6 @@
   				<tr>
   					<td align="right">学员姓名：</td>
   					<td align="left">${obj.studentInfo.name}</td>
-  					<td align="right">出生日期：</td>
-  					<td align="left">${obj.studentInfo.birthday}</td>
-  					<td align="right">性别：</td>
-  					<td align="left">${obj.studentInfo.sexVal}</td>
-  				</tr>
-  				<tr>
-  					<td align="right">证件号码：</td>
-  					<td align="left">${obj.studentInfo.identityId}</td>
   					<td align="right">英文名：</td>
   					<td align="left">${obj.studentInfo.byName}</td>
   					<td align="right">联系电话：</td>
@@ -58,33 +51,11 @@
   					<td align="right">客户关怀：</td>
   					<td align="left">${obj.studentInfo.carerName}</td>
   				</tr>
-  				<tr>
-  					<td align="right">休学开始时间：</td>
-  					<td align="left">${obj.leaveInfo.createDate}</td>
-  					<td align="right">计划休学时长：</td>
-  					<td align="left">${obj.leaveInfo.leaveTime}个月</td>
-  					<td align="right">操作人员：</td>
-  					<td align="left">${obj.leaveInfo.handerName}</td>
-  				</tr>
-  				<tr>
-  					<td align="right">休学剩余时间：</td>
-  					<td align="left">${obj.leaveInfo.leftTime}天</td>
-  					<td align="right">休学状态：</td>
-  					<td align="left">${obj.leaveInfo.leaveState}</td>
-  					<td align="right">查看休学申请：</td>
-  					<td align="left">${obj.leaveInfo.imgUrl}</td>
-  				</tr>
-  				<tr>
-  					<td align="right">复课时间：</td>
-  					<td align="left">${obj.leaveInfo.resumeDate}</td>
-  					<td align="right">复课方式：</td>
-  					<td align="left">${obj.leaveInfo.resumeType}</td>
-  					<td colspan="2"></td>
-  				</tr>
   			</table>
   		</div>
 		<div style="height: 10px;"></div>
    		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="学员课程信息">
+ 		<form id="addLeaveForm">
  		<table width="100%" cellpadding="5px" class="maintable" id="courseTd">
  			<tr>
  				<td align="center">课程名称</td>
@@ -116,10 +87,27 @@
  					</tr>
  				</c:forEach>
  			</tr>
+ 			<tr>
+ 				<td align="right">休学时长：</td>
+ 				<td colspan="2"><input class="easyui-numberbox" name="planLeaveTime" id="planLeaveTime" style="width:120px;" data-options="min:1,max:24" required="true"/></td>
+ 				<td colspan="9">休学申请单与缴费凭证：<input style="width:300px" class="easyui-filebox" name="leaveImg" data-options="prompt:''" ></td>
+ 			</tr>
+ 			<tr>
+ 				<td align="right">备注：</td>
+ 				<td colspan="11"><textarea rows="7" cols="100" id="addRemark" name="addRemark" class="easyui-validatebox textbox" required="true"></textarea></td>
+ 			</tr>
  		</table>
+ 		</form>
  		</div>
+ 		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+ 		<input id="studentId" type="hidden" value="${obj.studentInfo.studentId}" />
+ 		<input id="courseState" type="hidden" value="${courseState}" />
+ 		<input id="studentCourseId" type="hidden" value="${studentCourseId}" />
+ 		<input id="currentHours" type="hidden" value="${currentHours}" />
  		<div style="margin-top: 20px;min-width:1100px; width:99%;">
 	      	<div style="float: right;">
+	      		<a href="javascript:void(0)" id="addLeaveSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;" onclick="addLeaveSubmit()">提交</a>
+	      		&nbsp;
 	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
 	      	</div>
 	   </div>

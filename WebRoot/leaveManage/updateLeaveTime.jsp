@@ -11,6 +11,12 @@
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
 		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/leaveManage.js"></script>
+		<script type="text/javascript">
+		   	$(document).ready(function(){
+		   		 $("#delayDate").datebox("setValue","${obj.leaveInfo.leaveDate}")
+		   	});
+	   </script>
 		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/css/style.css">
 		<style type="text/css">
 			.datagrid{
@@ -74,13 +80,6 @@
   					<td align="right">查看休学申请：</td>
   					<td align="left">${obj.leaveInfo.imgUrl}</td>
   				</tr>
-  				<tr>
-  					<td align="right">复课时间：</td>
-  					<td align="left">${obj.leaveInfo.resumeDate}</td>
-  					<td align="right">复课方式：</td>
-  					<td align="left">${obj.leaveInfo.resumeType}</td>
-  					<td colspan="2"></td>
-  				</tr>
   			</table>
   		</div>
 		<div style="height: 10px;"></div>
@@ -116,10 +115,25 @@
  					</tr>
  				</c:forEach>
  			</tr>
+ 			<tr>
+ 				<td colspan="2" align="right">延长至：</td>
+ 				<td colspan="10"><input class="easyui-datebox" name="delayDate" id="delayDate" style="width:150px;"  /></td>
+ 			</tr>
+ 			<tr>
+ 				<td colspan="2" align="right">备注：</td>
+ 				<td colspan="10"><textarea rows="7" cols="100" id="updateRemark" name="updateRemark" class="easyui-validatebox textbox" required="true"></textarea></td>
+ 			</tr>
  		</table>
  		</div>
+ 		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+ 		<input id="studentId" type="hidden" value="${obj.studentInfo.studentId}" />
+ 		<input id="leaveId" type="hidden" value="${obj.leaveInfo.leaveId}" />
+ 		<input id="studentCourseId" type="hidden" value="${obj.leaveInfo.studentCourseId}" />
+ 		<input id="leaveDate" type="hidden" value="${obj.leaveInfo.leaveDate}" />
  		<div style="margin-top: 20px;min-width:1100px; width:99%;">
 	      	<div style="float: right;">
+	      		<a href="javascript:void(0)" id="restartClassSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;" onclick="updateSubmit()">提交</a>
+	      		&nbsp;
 	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
 	      	</div>
 	   </div>
