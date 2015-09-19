@@ -203,13 +203,13 @@
       	      </table>
 </div>
 	<div style="height: 10px;"></div>
-<div class="easyui-panel" style="width:100%;height:auto;" title="课程费用">
+	<div class="easyui-panel" style="width:100%;height:auto;" title="课程费用">
       	      <table width="100%" cellpadding="5px" class="maintable" >
 	      	     
    	            <tr>
       	            <td  align="right" ><span>现金抵扣劵：</span></td>
-      	            <td align="center"  ><input type="submit" name="button" id="button" value="使用现金抵扣券"></td>
-      	            <td colspan="8"  giftId="">&nbsp;</td>
+      	            <td align="center"  ><href="javascript:void(0)" id="addArchives" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addArchives()">使用现金抵扣券</</td>
+      	            <td colspan="8"  giftId=""><div id="useCoupon"/></td>
    	            </tr>
    	           
    	            <tr>
@@ -227,6 +227,12 @@
 </div>
 <div style="height: 10px;"></div>
 
+	<div id="dlg" class="easyui-dialog" style="width: 800px; height: 450px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
+  				<iframe id="frame2" name="frame2"   src="/sys/course/useCoupon.jsp?studentId=2"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" height="445px" width="100%"></iframe>
+	 </div>
+  
+  
+  
   
  		<!--  
 	      	<div style="margin-top: 50px;">
@@ -244,7 +250,33 @@
 	var studentCourse={};//最后提交学生课程信息
     var gifts  =[];  
 	var courses=[];
-
+	var coupons=[];//使用抵扣劵
+	var useCoupon="";
+	function closeDlg()
+	{
+		$('#dlg').dialog('close');
+		
+		$('#useCoupon').html(useCoupon);
+		for(var i=0;i<coupons.length;i++)
+		{
+			 
+		}
+		
+		
+	}
+	
+	function colDis(id)
+	{
+		var id="#useCoupon"+id+"";
+		$(id).css('display','none');
+	}
+	
+	
+	function addArchives()
+	{
+		$('#dlg').dialog('open').dialog('setTitle', '使用抵扣券');
+	}
+	
 	function getDataName(id,val)
 	{
 		

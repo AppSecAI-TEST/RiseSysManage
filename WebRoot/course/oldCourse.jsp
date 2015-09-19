@@ -28,7 +28,7 @@
           			<p><span></span></p>
         		</div>
       		</div>
-   			 <table width="100%" height="100PX" cellpadding="5px" class="maintable" id="addStudentTd">
+   			 <table width="100%" height="100px" cellpadding="5px" class="maintable" id="addStudentTd">
    			   <tr>
    			     <td align="right"><span>学员姓名：</span></td>
    			     <td><span>王兄阿尔</span></td>
