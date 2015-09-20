@@ -4,6 +4,7 @@
 	String path = request.getContextPath();
 	String order=request.getParameter("order");
 	String courses=request.getParameter("courses");
+	String name=request.getParameter("name");
 	JSONObject object=new JSONObject();
 	if(courses!=null && !"".equals(courses))
     {
@@ -22,12 +23,9 @@
 			$(document).ready(function()
 			{
 				var height = $(document).height();
-				$("#frame0",parent.document).css("height",height+20);
-			 	$("#frame1",parent.document).css("height",height+20);
-			 	$("#frame2",parent.document).css("height",height+20);
-			 	$("#frame3",parent.document).css("height",height+20);
-			 	$("#frame4",parent.document).css("height",height+20);
-			 	$("#frame5",parent.document).css("height",height+20);
+				 
+				$('#frame<%=name%>',parent.document).css("height",height+20);
+			 	 
 			})
 		</script>
   	</head>
@@ -50,16 +48,15 @@
 	      	        <td>
 					 <select name="stageId"  id="stageId" class="easyui-combobox" style="width: 150px; height: 28px;"
 	      						data-options="formatter:formatStageId, valueField: 'amount', textField: 'stageId', panelHeight: 'auto',
-	      						 onLoadSuccess:function(data){$('#stageId').combobox('setValue','<%=object.get("stageId")%>');}"
+	      						 onLoadSuccess:function(data){$('#stageId').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>');}"
 	      						url="<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_Set_Price','setPriceId':'10001'}" required="true" >
       	            </select>
 					</td>
 	      	        <td align="right"><span>班级类型：</span></td>
 	      	        <td> 
 	      	         <select name="classType" class="easyui-combobox" id="classType" style="width: 150px; height: 28px;"
-	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      						 onLoadSuccess:function(data){$('#classType').combobox('setValue','<%=object.get("classType")%>');}"
-	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=CLASS_TYPE" required="true" >
+	      						drequired="true" >
+	      						<option>请先选择阶段</option>
       	            </select>
 	      	         </td>
 	      	        <td align="right"><span>证件号码：</span></td>
@@ -94,10 +91,10 @@
 	      	      <tr>
 	      	        <td width="7%" align="right"><span>赠品类型：</span></td>
 	      	        <td width="12%">
-	      	        <select    class="easyui-combobox" id="giftType" style="width: 120px; height: 28px;"
-	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      						 onLoadSuccess:function(data){$('#giftType').combobox('setValue',data[0].codeFlag);}"
-	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_T&codeType=GIFT_TYPE" required="true" >
+	      	        <select  class="easyui-combobox" id="giftType" style="width: 120px; height: 28px;"
+	      				     data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+	      					 onLoadSuccess:function(data){$('#giftType').combobox('setValue',data[0].codeFlag);}"
+	      					 url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_T&codeType=GIFT_TYPE" required="true" >
       	            </select>
       	            </td>
 	      	        <td width="7%" align="right"><span>赠品名称：</span></td>
@@ -257,9 +254,26 @@
 	
 	$('#stageId').combobox(
 	{    
+		
        onChange : function(n, o)
        {
-       	 $("#totalAmount").textbox('setValue',n);
+       	 	$("#totalAmount").textbox('setValue',n);
+       		 var stageType=$("#stageId").combobox('getText');
+       		 var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",stageId:\""+stageType+"\"}";
+       	 	$("#classType").combobox({
+        		url : urls,//返回json数据的url
+        		valueField : "classType",
+        		textField : "classType",
+        		panelHeight : "auto",
+        		onLoadSuccess : function ()
+        		{ //数据加载完毕事件
+                    var data = $('#classType').combobox('getData');
+                    if (data.length > 0)
+                    {
+                        $("#classType").combobox('select', data[0].classType);
+                    }
+                }
+        	});
        }  
 	});
 	  
@@ -364,12 +378,7 @@
 				
 					$("#addGift").after(giftTR);
 					var height = $(document).height();
-					$("#frame0",parent.document).css("height",height+20);
-				 	$("#frame1",parent.document).css("height",height+20);
-				 	$("#frame2",parent.document).css("height",height+20);
-				 	$("#frame3",parent.document).css("height",height+20);
-				 	$("#frame4",parent.document).css("height",height+20);
-				 	$("#frame5",parent.document).css("height",height+20);
+					$('<%=name%>',parent.document).css("height",height+20);
 					    			
 				});
 					          
@@ -413,12 +422,7 @@
 		 
 		$("#add").after(objectTr);
 		var height = $(document).height();
-		$("#frame0",parent.document).css("height",height+20);
-	 	$("#frame1",parent.document).css("height",height+20);
-	 	$("#frame2",parent.document).css("height",height+20);
-	 	$("#frame3",parent.document).css("height",height+20);
-	 	$("#frame4",parent.document).css("height",height+20);
-	 	$("#frame5",parent.document).css("height",height+20);
+		$('#frame<%=name%>',parent.document).css("height",height+20);
 	 	
 	});
 	
@@ -486,12 +490,7 @@
 	
 		$("#addGift").after(giftTR);
 		var height = $(document).height();
-		$("#frame0",parent.document).css("height",height+20);
-	 	$("#frame1",parent.document).css("height",height+20);
-	 	$("#frame2",parent.document).css("height",height+20);
-	 	$("#frame3",parent.document).css("height",height+20);
-	 	$("#frame4",parent.document).css("height",height+20);
-	 	$("#frame5",parent.document).css("height",height+20);
+		$('#frame<%=name%>',parent.document).css("height",height+20);
 	  
 	});
 

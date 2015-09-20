@@ -167,8 +167,8 @@ function myparser(s) {
 	}
 }
 
-function formatLinkName(row) {
-	var s = '<span>' + row.linkName + '</span>';
+function formatLinkNum(row) {
+	var s = '<span>' + row.linkNum + '年连报</span>';
 	return s;
 }
 
