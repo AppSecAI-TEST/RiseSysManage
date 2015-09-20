@@ -167,6 +167,16 @@ function myparser(s) {
 	}
 }
 
+function formatLinkName(row) {
+	var s = '<span>' + row.linkName + '</span>';
+	return s;
+}
+
+function formatStageId(row) {
+	var s = '<span>' + row.stageId + '</span>';
+	return s;
+}
+
 function formatItem(row) {
 	var s = '<span>' + row.codeName + '</span>';
 	return s;

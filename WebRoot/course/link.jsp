@@ -59,12 +59,12 @@
       					  <td align="right"><span>关联已报课程：</span></td>
       					  <td><href="javascript:void(0)" id="addArchives" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addArchives()">打开学员之前的课程列表关联连报</a></td>
       					  <td align="right"><span>连报类型：</span></td>
-      					  <td colspan="3"><select name="link" class="easyui-combobox" id="link" style="width: 96px;">
-      					    <option value='0'>----请选择----</option>
-      					    <option value='2'>---2年连报---</option>
-      					    <option value='3'>---3年连报---</option>
-      					    <option value='4'>---4年连报---</option>
-      					    <option value='5'>---5年连报---</option>
+      					  <td colspan="3">
+      					  <select  id="link"  class="easyui-combobox"  style="width: 150px; height: 28px;"
+	      						data-options="formatter:formatLinkName, valueField: 'favorPrice', textField: 'linkName', panelHeight: 'auto'
+	      						 "
+	      						url="<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_Link_Favor','setPriceId':'10002'}">
+      					    
     					    </select></td>
    					  </tr>
 	      			</table>
@@ -105,6 +105,22 @@
 	var studentCourses=[];//提交课程
 	var linkCourses=[];//选择关联已有连报课程
 	
+	  $('#advisterASchoolId').combobox({    
+        onChange : function(n, o) {
+        	$("#advisterIdA").combobox({
+        		url : "/sys/pubData/qryStaffList.do?post=001&schoolId=" + n,//返回json数据的url
+        		valueField : "staffId",
+        		textField : "staffName",
+        		panelHeight : "auto",
+        		onLoadSuccess : function () { //数据加载完毕事件
+                    var data = $('#advisterIdA').combobox('getData');
+                    if (data.length > 0) {
+                        $("#advisterIdA").combobox('select', data[0].staffId);
+                    }
+                }
+        	});
+        }  
+    });
 	function closeDlg()
 	{
 		$('#dlg').dialog('close');
@@ -117,7 +133,8 @@
 	}
 	
 	//连报课程选择
-    $('#link').combobox(
+ 
+    $('#lidddddnk').combobox(
     {    
        onChange : function(n,o) 
        {
@@ -138,7 +155,7 @@
 	    			//return;
 	    	}
         }  
-    });
+    });  
 	
 	$("#submit").click(function()
 	{

@@ -15,7 +15,7 @@
 			<table class="easyui-datagrid"  title="使用现金抵扣券" style="height:400px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?param={'queryCode':'Qry_Student_Gift','studentId':'<%=studentId%>'}" 
 				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 				<thead>
-					<tr>
+					<tr>s
 						<th width="6" data-options="field:'ck',checkbox:true"></th>
 						<th width="20" data-options="field:'giftCode',width:100,align:'center'">条码</th>
 						<th width="20" data-options="field:'amount',width:30,align:'center'">面值</th>
@@ -40,10 +40,13 @@
 </html>
 <script type="text/javascript">
 	var coupons=[];
-	var minus;
+	var minus=0;
 	var name="<div style:'width:300px'>";
 	$("#submit").click(function ()
 	{
+		coupons=[];
+		name="<div style:'width:300px'>";
+		minus=0;
 		var obj = $('#list_data').datagrid('getSelections');
 		for(var i = 0, n = obj.length; i < n; i++)
 		{
@@ -55,7 +58,8 @@
 			coupon.giftCode=giftCode;
 			coupon.usableAmount=usableAmount;
 			coupon.giftId=giftId;
-			minus+=usableAmount;
+			coupon.studentGiftId=studentGiftId;
+			minus=minus+usableAmount;
 			name=name+"<span id='useCoupon"+studentGiftId+"'>"+giftCode+"/"+usableAmount+"元"+"<a href='javascript:void(0)' onclick='colDis("+studentGiftId+")'>取消</a>,</span>";
 			coupons.push(coupon);
 		}

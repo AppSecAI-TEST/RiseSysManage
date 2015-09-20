@@ -48,10 +48,10 @@
 	      	    	<input id="feeState" name="feeState" type="hidden" value="00A"/>
 	      	        <td align="right"> <span>阶段：</span></td>
 	      	        <td>
-					 <select name="stageId" class="easyui-combobox" id="stageId" style="width: 150px; height: 28px;"
-	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+					 <select name="stageId"  id="stageId" class="easyui-combobox" style="width: 150px; height: 28px;"
+	      						data-options="formatter:formatStageId, valueField: 'amount', textField: 'stageId', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#stageId').combobox('setValue','<%=object.get("stageId")%>');}"
-	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID" required="true" >
+	      						url="<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_Set_Price','setPriceId':'10001'}" required="true" >
       	            </select>
 					</td>
 	      	        <td align="right"><span>班级类型：</span></td>
@@ -94,7 +94,7 @@
 	      	      <tr>
 	      	        <td width="7%" align="right"><span>赠品类型：</span></td>
 	      	        <td width="12%">
-	      	        <select    class="easyui-combobox" id="giftType" style="width: 150px; height: 28px;"
+	      	        <select    class="easyui-combobox" id="giftType" style="width: 120px; height: 28px;"
 	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#giftType').combobox('setValue',data[0].codeFlag);}"
 	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_T&codeType=GIFT_TYPE" required="true" >
@@ -105,7 +105,7 @@
 	      	        <table width="200" border="0">
    	                <tr>
 	      	              <td>
-							<select   class="easyui-combobox" id="giftId" style="width: 150px; height: 28px;"
+							<select   class="easyui-combobox" id="giftId" style="width: 120px; height: 28px;"
 	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#giftId').combobox('setValue',data[0].codeFlag);}"
 	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_T&codeType=GIFT_ID" required="true" >
@@ -118,7 +118,8 @@
 	      	              
 	      	              
    	                  </select></td>
-	      	              <td><input   id="giftCode" type="text" class="easyui-textbox validatebox" required="true" style="width: 200px; height: 28px;"/></td>
+	      	              <td><input   id="giftCode" type="text" class="easyui-textbox validatebox" required="true" style="width:150px; height: 28px;"/></td>
+                          <td><input   id="effDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;"/></td>
       	                </tr>
       	              </table></td>
 	      	        <td width="7%" align="right"><span>是否领用：</span></td>
@@ -252,27 +253,40 @@
 	var courses=[];
 	var coupons=[];//使用抵扣劵
 	var useCoupon="";
-	var minus;
+	var minus=0;
+	
+	$('#stageId').combobox(
+	{    
+       onChange : function(n, o)
+       {
+       	 $("#totalAmount").textbox('setValue',n);
+       }  
+	});
+	  
 	function closeDlg()
 	{
 		$('#dlg').dialog('close');
-		
 		$('#useCoupon').html(useCoupon);
-		for(var i=0;i<coupons.length;i++)
-		{
-			 
-		}
-		
-		
+		$("#minusAmount").textbox('setValue',minus);
 	}
 	
 	function colDis(id)
 	{
-		var id="#useCoupon"+id+"";
-		$("#minusAmount").html(minus);
-		$(id).css('display','none');
+		var idT="#useCoupon"+id+"";
+		$(idT).css('display','none');
+		for(var i=0;i<coupons.length;i++)
+		{
+			 var coupon=coupons[i];
+			 if(coupon.studentGiftId==id)
+			 {
+				var usableAmountT=$("#minusAmount").textbox('getValue');
+				usableAmountT=usableAmountT-coupon.usableAmount;
+				$("#minusAmount").textbox('setValue',usableAmountT);
+				
+			 }
+			 
+		}
 	}
-	
 	
 	function addArchives()
 	{
@@ -312,7 +326,7 @@
 	    	success: function (data)
 	    	{
 	    		$.messager.progress('close'); 
-	    		 var giftTs = data.data;//学员已有课程
+	    		 var giftTs = data.data;//学员已有课程 
 	    		
 	    		$.each(giftTs,function(i,gift)
 	    		{
