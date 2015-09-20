@@ -111,10 +111,10 @@ var win=_a(_11);
 return win;
 },confirm:function(_12,msg,fn){
 var _13=typeof _12=="object"?_12:{title:_12,msg:msg,fn:fn};
-_13=$.extend({},$.messager.defaults,{content:"<div class=\"messager-icon messager-question\"></div>"+"<div>"+_13.msg+"</div>"+"<div style=\"clear:both;\"/>",buttons:[{text:$.messager.defaults.ok,onClick:function(){
+_13=$.extend({},$.messager.defaults,{content:"<div class=\"messager-icon messager-question\"></div>"+"<div>"+_13.msg+"</div>"+"<div style=\"clear:both;\"/>",buttons:[{text:"确定",onClick:function(){
 win.window("close");
 _13.fn(true);
-}},{text:$.messager.defaults.cancel,onClick:function(){
+}},{text:"取消",onClick:function(){
 win.window("close");
 _13.fn(false);
 }}]},_13);
