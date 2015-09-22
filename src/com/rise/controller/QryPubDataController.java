@@ -263,4 +263,30 @@ public class QryPubDataController
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/qryData.do")
+	public void qryData( String param, HttpServletResponse response)
+	{
+	 
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = qryPubDataService.qryData(param);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }

@@ -57,14 +57,14 @@
    					  </tr>
       					<tr>
       					  <td align="right"><span>关联已报课程：</span></td>
-      					  <td><href="javascript:void(0)" id="addArchives" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addArchives()">打开学员之前的课程列表关联连报</a></td>
+      					  <td><href="javascript:void(0)" id="addArchives" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="linkCourse()">打开学员之前的课程列表关联连报</a></td>
       					  <td align="right"><span>连报类型：</span></td>
-      					  <td colspan="3"><select name="link" class="easyui-combobox" id="link" style="width: 96px;">
-      					    <option value='0'>----请选择----</option>
-      					    <option value='2'>---2年连报---</option>
-      					    <option value='3'>---3年连报---</option>
-      					    <option value='4'>---4年连报---</option>
-      					    <option value='5'>---5年连报---</option>
+      					  <td colspan="3">
+      					  <select  id="link"  class="easyui-combobox"  style="width: 150px; height: 28px;"
+	      						data-options="formatter:formatLinkNum, valueField: 'favorPrice', textField: 'linkNum', panelHeight: 'auto'
+	      						 "
+	      						url="<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_Link_Favor','setPriceId':'10002'}">
+      					    
     					    </select></td>
    					  </tr>
 	      			</table>
@@ -82,7 +82,7 @@
 			
 			<iframe id="frame4" name="frame4" style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
 		
-			<iframe id="frame5" name="frame5" style="display:none"  src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
+			<iframe id="frame5" name="frame5" style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
 				
 		</div>
 			
@@ -104,14 +104,15 @@
 
 	var studentCourses=[];//提交课程
 	var linkCourses=[];//选择关联已有连报课程
+	var orderCourses=["一","二","三","四","五","六","七","八","九","十"];//连报课程大写顺序
 	
 	function closeDlg()
 	{
 		$('#dlg').dialog('close');
 	}
-	function addArchives()
+	function linkCourse()
 	{
-		$('#dlg').dialog('open').dialog('setTitle', '新增教师档案');
+		$('#dlg').dialog('open').dialog('setTitle', '关联连报课程');
 		$('#fm').form('clear');
 	
 	}
@@ -121,24 +122,35 @@
     {    
        onChange : function(n,o) 
        {
-	    	for(var i=0;i<n;i++)
-	    	{
-	    		var name="#frame"+i;
-	    		if(i<linkCourses.length)
-	    		{
-	    			var str=JSON.stringify(linkCourses[i]);
-					var url="/sys/course/linkcourse.jsp?order=1&courses="+str;
-	    			$(name).attr('src',url);
-	    		
-	    		}else
-	    		{
-	    			$(name).attr('src',"/sys/course/linkcourse.jsp?order=一");
-	    		}
-	    		$(name).css("display","block");
-	    			//return;
+    		var num=$(this).combobox('getText');
+    		$(this).combobox('setText',num+"年连报");
+    		
+    		for(var n=0;n<5;n++)
+    		{
+    			var name="#frame"+n;
+		    	if(n<num)
+		    	{
+		    		var order = orderCourses[n];
+		    		if(n<linkCourses.length)
+		    		{
+		    			var str=JSON.stringify(linkCourses[n]);
+						var url="/sys/course/linkcourse.jsp?name="+n+"&order="+order+"&courses="+str;
+							alert(url);
+		    			$(name).attr('src',url);
+		    		
+		    		}else
+		    		{
+		    			$(name).attr('src',"/sys/course/linkcourse.jsp?name="+n+"&order="+order+"&name="+name);
+		    		}
+		    		$(name).css("display","block");
+		    	}else
+		    	{
+		    	    $(name).css("display","none");
+		    	}
+		    	return;
 	    	}
         }  
-    });
+    });  
 	
 	$("#submit").click(function()
 	{
@@ -146,11 +158,11 @@
 		{
 		 
 		});
-		
-			var l=frame0.window.build();
-			var ll=frame1.window.build();
-			studentCourses.push(l);
-			//studentCourses.push(ll);
+	
+		var l=frame0.window.build();
+		var ll=frame1.window.build();
+		studentCourses.push(l);
+		//studentCourses.push(ll);
 			
 	    var str = JSON.stringify(studentCourses);
 		
