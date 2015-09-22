@@ -1,0 +1,107 @@
+var td = 2;
+$(document).ready(function() {
+	var classInstId = $("#classInstId").val();
+	$.ajax({
+		url: "/sys/applyClass/qryCreateClassById.do",
+		data: "classInstId=" + classInstId,
+		dataType: "json",
+		async: false,
+		beforeSend: function()
+		{
+			$.messager.progress({title : '取消放班申请', msg : '正在查询取消放班信息，请稍等……'});
+		},
+		success: function (data) {
+    		$.messager.progress('close'); 
+    		$("#stageId").html(data.createClassObj.stageId);
+    		$("#classType").html(data.createClassObj.classType);
+    		$("#className").html(data.createClassObj.className);
+    		$("#effectDate").html(data.createClassObj.effectDate);
+    		$("#applyDate").html(data.createClassObj.applyDate);
+    		$("#applyName").html(data.createClassObj.applyName);
+    		$("#studentChannelTypeVal").html(data.createClassObj.studentChannelTypeVal);
+    		$("#higherSchoolName").html(data.createClassObj.higherSchoolName);
+    		$("#Applyremark").html(data.createClassObj.remark);
+    		
+    		var type = $("#type").val();
+    		if(type != "" && type != null && type != "null" && type != undefined) {
+    			td = 1;
+    		}
+    		var schooltimeLength = data.schooltimeObj.total;
+    		if(schooltimeLength > 0) {
+    			var content = "";
+    			$.each(data.schooltimeObj.rows, function(i, obj){
+    				content += "<tr><td align='right' width='10%'><span id='schooltimeNameTd'>上课时段 "+ (i + 1) +"：</span></td>";
+    				content += "<td width='20%'><span id='schooltimeName'>"+ obj.schooltimeName +"</span></td>";
+    				content += "<td align='right' width='10%'><span>教室：</span></td>";
+    				content += "<td width='5%'><span id='roomName'>"+ obj.roomName +"</span></td>";
+    				content += "<td align='right' width='10%'><span>课时：</span></td>";
+    				content += "<td width='5%'><span id='lessionHours'>"+ obj.lessionHours +"</span></td>";
+    				content += "<td align='right' width='10%'><span>带班老师：</span></td>";
+    				content += "<td width='30%'><span id='schoolTeacherName'>"+ obj.schoolTeacherName +" 课时量 "+ obj.lessionHours +"</span></td></tr>";
+    			});
+    			$("#cancelApplyClassTd tr:eq("+td+")").after(content);
+    		}
+    		
+    		if(type == "" || type == null || type == "null" || type == undefined) {
+    			var tacheHistLength = data.tacheHistObj.total;
+    			var height = 0;
+    			if(tacheHistLength > 0) {
+    				var content = "";
+    				$.each(data.tacheHistObj.rows, function(i, obj){
+    					height += 75;
+    					content += "<div style='height: 10px;'></div>";
+    					$("#userName").html(obj.userName);
+    					$("#approveType").html(obj.approveType);
+    					$("#createDate").html(obj.createDate);
+    					$("#applyClassApproveRemark").html(obj.remark);
+    					content += $("#applyClassDiv").html();
+    				});
+    				$("#tacheHistDiv").html(content);
+    				$("#tacheHistDiv").css("height", height);
+    			}
+    		}
+		}
+	});
+	
+	//取消放班申请
+	$("#submit").click(function(){
+		if($("#cancelApplyClassFm").form('validate')) {
+			var obj = JSON.stringify($("#cancelApplyClassFm").serializeObject());
+			alert(obj)
+			$.ajax({
+				url: "/sys/applyClass/cancelApplyClass.do",
+				data: "param=" + obj,
+				contentType: "charset=UTF-8",
+    			dataType: "json",
+    			async: false,
+    			beforeSend: function()
+    	    	{
+    	    		$.messager.progress({title : '申请取消放班', msg : '正在申请取消放班，请稍等……'});
+    	    	},
+    	    	success: function (data) {
+    	    		$.messager.progress('close'); 
+    	    		var flag = data.flag
+    	            if(flag)
+    	            {
+    	            	$.messager.alert('提示', "申请取消放班成功！");
+    	            	window.location.reload();
+    	            }
+    	            else
+    	            {
+    	            	$.messager.alert('提示', "申请取消放班失败！");
+    	            }
+    	        } 
+			});
+		}
+	});
+	
+	//提交放班审批
+	$("#applyApproveSubmit").click(function() {
+		
+	});
+	
+	//提交取消放班申请
+	$("#cancelApproveSubmit").click(function() {
+		
+	});
+});
