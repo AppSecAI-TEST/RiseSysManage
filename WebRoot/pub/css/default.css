@@ -51,7 +51,10 @@ input[type="file"],input[type="image"],input[type="submit"],input[type="reset"],
 .maintable tr {height: 30px;}
 .maintable td {border-top: 0; border-right: 1px solid #ccc; border-bottom: 1px solid #ccc; border-left: 0; } 
 .maintable tr.lastrow td {border-bottom: 0;} 
-.maintable tr td.lastCol {border-right: 0; } 
+.maintable tr td.lastCol {border-right: 0; }
+.maintables {border-collapse: collapse; border-spacing:0; border: 0px solid #ccc; height:auto;} 
+.maintables tr {height: 30px;}
+.maintables td {border-top: 0; border: 1px solid #ccc; border-left: 0; } 
 span {font-family: Arial,微软雅黑,宋体; font-size: 14px;}
 .linkmore{color : #0099FF; text-decoration : none; cursor:pointer;}
 .linkmore:hover{color : ED0000 !important;}

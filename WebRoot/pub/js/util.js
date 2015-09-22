@@ -196,3 +196,8 @@ function formatStaff(row) {
 	var s = '<span>' + row.staffName + '</span>';
 	return s;
 }
+
+function formatClassInst(row) {
+	var s = '<span>' + row.className + '</span>';
+	return s;
+}

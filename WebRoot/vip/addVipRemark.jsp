@@ -9,7 +9,7 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/js/student.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/student/student.js"></script>
   	</head>
   
   	<body>

@@ -35,9 +35,9 @@ public class QryPubDataService
 		return ServiceEngine.invokeHttp(param);
 	}
 
-	public String qryClassInstList(String schoolId, String courseType, String stageId, String classType, String classState) throws Exception  
+	public String qryClassInstList(String schoolId, String courseType, String stageId, String classType, String classState, String classInstId) throws Exception  
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1014\",securityCode:\"0000000000\",params:{schoolId:\""+schoolId+"\",courseType:\""+courseType+"\",stageId:\""+stageId+"\",classType:\""+classType+"\",classState:\""+classState+"\"},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1014\",securityCode:\"0000000000\",params:{schoolId:\""+schoolId+"\",courseType:\""+courseType+"\",stageId:\""+stageId+"\",classType:\""+classType+"\",classState:\""+classState+"\",classInstId:\""+classInstId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 	
