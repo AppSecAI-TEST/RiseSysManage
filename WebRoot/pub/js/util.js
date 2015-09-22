@@ -167,6 +167,11 @@ function myparser(s) {
 	}
 }
 
+function formatTypeName(row) {
+	var s = '<span>' + row.typeName + '</span>';
+	return s;
+}
+
 function formatLinkNum(row) {
 	var s = '<span>' + row.linkNum + '年连报</span>';
 	return s;
