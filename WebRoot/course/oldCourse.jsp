@@ -22,7 +22,7 @@
   	</head>
   
   	<body>
-  	<div id="base">
+   
   			<div id="u0">
         		<div id="u1">
           			<p><span></span></p>
@@ -40,26 +40,26 @@
 		       </tr>
 		       </table>
 		       
-		       	<div style="height: 10px;"></div>
+		        
 		       
 		       <table width="100%" height="100px" cellpadding="5px" class="maintable" id="linkCourseTab">
    				<tr id="cousreModel">
    				  <td align="right"><span>报名日期</span></td>
    				  <td>&nbsp;</td>
    				  <td colspan="2" align="center"><span>提示：</span></td>
-   				  <td colspan="2" align="right">
+   				  <td colspan="4" align="right">
    				  <input type="checkbox" name="checkbox" id="checkbox" studentCousreId=""><span>选择连报</span></td>
-   				  <td align="right"><span>详情</span></td>
+   				  <td width="10%" align="right"><span>详情</span></td>
 			   </tr>
 			   
-			   <!--
+			   
    				<tr>
-   				  <td width="15%" align="right"><span>阶段：</span></td>
-   				  <td width="23%">&nbsp;</td>
-   				  <td width="15%" align="right"><span>班级类型：</span></td>
-   				  <td width="13%">&nbsp;</td>
-   				  <td align="right"><span>业绩类型：</span></td>
-   				  <td>&nbsp;</td>
+   				  <td width="12%" align="right"><span>阶段：</span></td>
+   				  <td width="14%">&nbsp;</td>
+   				  <td width="21%" align="right"><span>班级类型：</span></td>
+   				  <td width="10%">&nbsp;</td>
+   				  <td colspan="3" align="right"><span>业绩类型：</span></td>
+   				  <td width="6%">&nbsp;</td>
    				  <td align="right">&nbsp;</td>
 			   </tr>
    				<tr>
@@ -67,26 +67,27 @@
    				  <td>&nbsp;</td>
    				  <td align="right"><span>课程进度：</span></td>
    				  <td>&nbsp;</td>
-   				  <td align="right"><span>招生顾问：</span></td>
+   				  <td colspan="3" align="right"><span>招生顾问：</span></td>
    				  <td>&nbsp;</td>
    				  <td align="right">&nbsp;</td>
 			   </tr>
    				<tr>
    				  <td align="right"><span>备注：</span></td>
-   				  <td colspan="6">&nbsp;</td>
+   				  <td colspan="8">&nbsp;</td>
 			   </tr>
    				<tr>
    				  <td align="right"><span>总金额：</span></td>
    				  <td>&nbsp;</td>
    				  <td align="right"><span>优惠券：</span></td>
-   				  <td>&nbsp;</td>
-   				  <td align="right"><span>实缴金额：</span></td>
-   				  <td>&nbsp;</td>
-   				  <td align="right">&nbsp;</td>
-			   </tr>
-   			   -->
-			</table>
-		</div>
+   				  <td colspan="2">&nbsp;</td>
+   				  <td width="12%" align="right">实缴金额</td>
+   				  <td width="13%" align="right">&nbsp;</td>
+   				  <td colspan="2">查看缴费单</td>
+			     </tr>
+   			  
+			 </table>
+		       <p>&nbsp;</p>
+    
   	</body>
 </html>
 
