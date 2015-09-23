@@ -17,15 +17,11 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		
-	 
 		<script type="text/javascript">
 			$(document).ready(function()
 			{
 				var height = $(document).height();
-				 
 				$('#frame<%=name%>',parent.document).css("height",height+20);
-			 	 
 			})
 		</script>
   	</head>
@@ -38,11 +34,12 @@
 	      
       	      <table width="100%" cellpadding="5px" class="maintable" >
 	      	      <tr>
-	      	      	<input id="studentId" name="studentId" type="hidden" value="2"/>
-	      	    	<input id="courseType" name="courseType" type="hidden" value="001"/>
+	      	        <input id="studentCourseId" name="studentCourseId" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"studentCourseId")%>"/>
+	      	      	<input id="studentId"  name="studentId"     type="hidden" value="2"/>
+	      	    	<input id="courseType" name="courseType"    type="hidden" value="001"/>
 	      	    	<input id="advisterType" name="adviserType" type="hidden" value="teacher"/>
-	      	    	<input id="courseState" name="courseState" type="hidden" value="001"/>
-	      	    	<input id="feeType" name="feeType" type="hidden" value="001"/>
+	      	    	<input id="courseState" name="courseState"  type="hidden" value="001"/>
+	      	    	<input id="feeType"  name="feeType"  type="hidden" value="001"/>
 	      	    	<input id="feeState" name="feeState" type="hidden" value="00A"/>
 	      	        <td align="right"> <span>阶段：</span></td>
 	      	        <td>
@@ -104,7 +101,6 @@
 			      	         <td id="td1" style="display:none"><select  class="easyui-combobox" id="giftId" style="width: 120px; height: 28px;"></select></td>
 			      	         <td id="td2" style="display:none"><input   id="giftCode" type="text" class="easyui-textbox validatebox" required="true" style="width:150px; height: 28px;"/></td>
 		                     <td id="td3" style="display:none"><input   id="giftEffDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;"/></td>
-		                      
 	      	             </tr>
       	            </table>
       	            </td>
@@ -177,21 +173,19 @@
 	      	        <td  align="center">&nbsp;</td>
 	      	        <td  align="center">&nbsp;</td>
 	      	        <td  align="center">&nbsp;</td>
-	      	        <td align="center">&nbsp;</td>
-	      	        <td align="center"> <a href='javascript:void(0)' class='linkmore' onclick='delRow(this)'><span>删除</span></a></td>
+	      	        <td  align="center">&nbsp;</td>
+	      	        <td  align="center"> <a href='javascript:void(0)' class='linkmore' onclick='delRow(this)'><span>删除</span></a></td>
       	        </tr>
       	      </table>
 			</div>
 			<div style="height: 10px;"></div>
 			<div class="easyui-panel" style="width:100%;height:auto;" title="课程费用">
 			     	      <table width="100%" cellpadding="5px" class="maintable" >
-			      	     
 			  	            <tr>
 			     	            <td  align="right" ><span>现金抵扣劵：</span></td>
 			     	            <td align="center"  ><href="javascript:void(0)" id="addArchives" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addArchives()">使用现金抵扣券</</td>
 			      	            <td colspan="8"  giftId=""><div id="useCoupon"/></td>
 			   	            </tr>
-			   	           
 			   	            <tr>
 				      	        <td width="10%"  align="right" ><span>课程金额：</span></td>
 				      	        <td width="14%"  align="left" ><input id="totalAmount" name="totalAmount" type="text" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"> </td>
@@ -202,25 +196,13 @@
 				      	        <td width="12%"  align="right"><span>实缴课程一金额：</span></td>
 				      	        <td width="17%"  align="left" ><input id="amount" name="amount"     type="text" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"> </td>
 			      	         </tr>
-			      	       
 			      	      </table>
-			</div>
-			<div style="height: 10px;"></div>
-		
-			<div id="dlg" class="easyui-dialog" style="width: 800px; height: 450px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
-		  		<iframe id="frame2" name="frame2"   src="/sys/course/useCoupon.jsp?studentId=2"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto"  width="700px"></iframe>
-			</div>
-		  
-  
-  
-  
- 		<!--  
-	      	<div style="margin-top: 50px;">
-	      		<div style="float: left;margin-left: 900px;">
-	      			<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      			&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onClick="javascript:window.history.back()">返回</a>
-	      		</div>
-	      	</div>-->
+				</div>
+				<div style="height: 10px;"></div>
+			
+				<div id="dlg" class="easyui-dialog" style="width: 800px; height: 450px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
+			  		<iframe id="frame2" name="frame2"   src="/sys/course/useCoupon.jsp?studentId=2"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto"  width="700px"></iframe>
+				</div>
 	      	  </form>
   		</div>
   	</body>
@@ -261,17 +243,30 @@
 	    		{
     			 	var giftTR=$("#addGift").clone();
 					giftTR.css("display",'table-row');
-					giftTR.attr("val","old");
+					giftTR.attr("studentGiftId",gift.studentGiftId);
+					
 					giftTR.find("td").each(function(n,node)
 					{
 						if(n==1)
 						{
-						//	getDataName("#giftType",gift.giftType);
-							$(node).html("<span>"+gift.giftType+"</span>");	
+							if(gift.giftType=="GOODS")
+							{
+								$(node).html("<span>实物赠品</span>");	
+							}else
+							{
+								$(node).html("<span>券类赠品</span>");	
+							}
+							
 						}else
 						if(n==3)
-						{							
-							$(node).html("<span>"+gift.giftId+"  "+gift.couponType+"   "+gift.giftCode+"</span>");
+						{	
+							if(gift.giftType=="GOODS")
+							{
+								 $(node).html("<span>"+gift.giftName+"</span>");	
+							}else
+							{
+								 $(node).html("<span>"+gift.giftName+"   "+gift.giftCode+"   "+gift.effDate+"</span>");
+							}
 							
 						}else
 						if(n==5)
@@ -288,6 +283,15 @@
 						}else if(n==7)
 						{
 							$(node).html("<span>"+gift.granter+"</span>");	
+						}else if(n==8)
+						{
+							if(gift.isRtn=='Y')
+							{
+								$(node).html("<span>是</span>");	
+							}else
+							{
+								$(node).html("<span>否</span>");	
+							}
 						}
 					});
 				
@@ -634,6 +638,8 @@
 		$("#giftTab").find('tr').each(function(i,node)
 		{
 			var trName=$(this).attr("val");
+			var studentGiftId=$(this).attr("studentGiftId");
+	 alert(studentGiftId);
 			if('gift'==trName)
 			{
 				 var  tds=$(this).children('td');
