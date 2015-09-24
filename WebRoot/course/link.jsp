@@ -97,6 +97,9 @@
 	      		</div>
 	     </div>
 	     </div>
+	     <div id="showImg" class="easyui-dialog" title="缴费单据"  data-options="modal:true,closed:true" style="width:800px;height:450px;text-align:center;">
+			<img style="width:100%;height:100%">
+		</div>
 	</body>
 
 </html>
