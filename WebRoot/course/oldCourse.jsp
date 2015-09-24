@@ -211,6 +211,7 @@
 		 if($(obj).html()=="展开详情")
 		 {
 			 $(".detail").css("display","none");
+			  $(".base").find("a").html("展开详情");
 			 $(obj).closest(".courseDiv").find(".detail").css("display","table");
 			 $(obj).html("隐藏详情");
 		 }
