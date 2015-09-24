@@ -242,61 +242,106 @@
 	    		$.each(giftTs,function(i,gift)
 	    		{
 	    			if(gift==null)return;
-    			 	var giftTR=$("#addGift").clone();
-					giftTR.css("display",'table-row');
-					giftTR.attr("studentGiftId",gift.studentGiftId);
-					giftTR.attr("val",'gift');
-					giftTR.find("td").each(function(n,node)
+					var giftTR;
+	    			if(gift.giftType=="GOODS" || gift.parentType=="COUPON")
 					{
-						if(n==1)
+    			 		giftTR=$("#addGift").clone();
+    			 		giftTR.css("display",'table-row');
+						giftTR.attr("studentGiftId",gift.studentGiftId);
+						giftTR.attr("val",'gift');
+						giftTR.find("td").each(function(n,node)
 						{
-							if(gift.giftType=="GOODS")
+							if(n==1)
 							{
-								$(node).html("<span>实物赠品</span>");	
+								if(gift.giftType=="GOODS")
+								{
+									$(node).html("<span>实物赠品</span>");	
+								}else if(gift.giftType=="COUPON")
+								{
+									$(node).html("<span>券类赠品</span>");	
+								}
 							}else
-							{
-								$(node).html("<span>券类赠品</span>");	
-							}
-							
-						}else
-						if(n==3)
-						{	
-							if(gift.giftType=="GOODS")
-							{
-								 $(node).html("<span>"+gift.giftName+"</span>");	
+							if(n==3)
+							{	
+								if(gift.giftType=="GOODS")
+								{
+									 $(node).html("<span>"+gift.giftName+"</span>");	
+								}else
+								{
+									 $(node).html("<span>"+gift.giftName+"   "+gift.giftCode+"   "+gift.effDate+"</span>");
+								}
+								
 							}else
+							if(n==5)
+							{	
+								if(gift.isGet=='Y')
+								{
+									$(node).html("<span>已领取</span>");	
+								}else
+								{
+									$(node).html("<span>未领取</span>");	
+								}
+								
+								 
+							}else if(n==7)
 							{
-								 $(node).html("<span>"+gift.giftName+"   "+gift.giftCode+"   "+gift.effDate+"</span>");
+								$(node).html("<span>"+gift.granter+"</span>");	
+							}else if(n==8)
+							{
+								if(gift.isRtn=='Y')
+								{
+									$(node).html("<span>是</span>");	
+								}else
+								{
+									$(node).html("<span>否</span>");	
+								}
 							}
-							
-						}else
-						if(n==5)
-						{	
-							if(gift.isGet=='Y')
+						});
+					
+						$("#addGift").after(giftTR);
+    			 	}else if(gift.parentType=="COURSE")
+    			 	{
+    			 		var objectTr=$("#add").clone();//克隆模板
+						objectTr.css("display",'table-row');
+						objectTr.attr("val","course");
+						objectTr.attr("studentGiftId",gift.studentGiftId);
+						objectTr.find("td").each(function(i,node)
+						{
+							var effDate="";
+							if(i==0)
 							{
-								$(node).html("<span>已领取</span>");	
+								$(node).html("<span>"+(i+1)+"</span>");	
 							}else
+							if(i==1)
 							{
-								$(node).html("<span>未领取</span>");	
-							}
-							
+								$(node).html("<span>"+gift.typeName+"</span>");	
+							}else if(i==2)
+							{
+								 
+								$(node).html("<span>"+gift.giftName+"</span>");	
+			 	
+							}else if(i==3)
+							{
 							 
-						}else if(n==7)
-						{
-							$(node).html("<span>"+gift.granter+"</span>");	
-						}else if(n==8)
-						{
-							if(gift.isRtn=='Y')
+								$(node).html("<span>"+gift.giftNum+"</span>");	
+							}else if(i==4)
 							{
-								$(node).html("<span>是</span>");	
-							}else
+								$(node).html("<span>"+gift.createDate+"</span>");	
+							}else if(i==5)
 							{
-								$(node).html("<span>否</span>");	
-							}
-						}
-					});
-				
-					$("#addGift").after(giftTR);
+								$(node).html("<span>未使用</span>");	
+							}else if(i==6)
+							{
+								$(node).html("<span>"+gift.effDate+"</span>");	
+							}else if(i==7)
+							{
+								$(node).html("<span>"+gift.expDate+"</span>");	
+							} 
+						});
+						$("#add").after(objectTr);
+    			 	}
+					
+					
 					var height = $(document).height();
 					$('<%=name%>',parent.document).css("height",height+20);
 				});
@@ -419,22 +464,23 @@
 					}
 				}
 				
-				if(giftTypeVal=='')
-				{
-					var data = $('#giftId').combobox('getData');
-	                if (data.length > 0)
-	                {
-	                    for(var i=0;i<data.length;i++)
-	                    {
-	                    	var giftIdT=data[0].giftId;
-	                    	if(giftIdT==giftId)
-	                    	{
-	                    		giftTypeVal=data[0].giftType;
-	                    	}
-	                    }
-	                }
-				}
+				var amount=""; 
+				var data = $('#giftId').combobox('getData');
+                if (data.length > 0)
+                {
+                    for(var i=0;i<data.length;i++)
+                    {
+                    	var giftIdT=data[i].giftId;
+                    	if(giftIdT==giftId)
+                    	{
+                    		giftTypeVal=data[i].giftType;
+                    		amount=data[i].amount;
+                    	}
+                    }
+                }
+				 
 				
+				$(node).attr("amount",amount);
 				$(node).attr("giftId",giftId);
 				$(node).attr("giftType",giftTypeVal);
 				$(node).attr("giftCode",code);
@@ -636,6 +682,7 @@
 	//创建连报提交数据
 	function build()
 	{
+		gifts=[];
 		studentCourse={};                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 		$("#giftTab").find('tr').each(function(i,node)
 		{
@@ -646,6 +693,7 @@
 			{
 				 var  tds=$(this).children('td');
 			 
+				 var  amount=tds.eq(3).attr('amount');
 				 var  effNum=tds.eq(3).attr('effNum');
 				 var  unit=tds.eq(3).attr('unit');
 				 var  giftId=tds.eq(3).attr('giftId');
@@ -658,6 +706,8 @@
 				 
 				 gift.studentId=$("#studentId").val();
 				
+				 gift.usableAmount=amount;
+				 gift.amount=amount;
 				 gift.studentGiftId=studentGiftId;
 				 gift.unit = unit; 
 				 gift.effNum = effNum; 
@@ -676,6 +726,7 @@
 		$("#giftCourse").find('tr').each(function(i,node)
 		{
 			var trName=$(this).attr("val");
+			var studentGiftId=$(this).attr("studentGiftId");
 			if('course'==trName)
 			{
 				 var  tds=$(this).children('td');
@@ -683,16 +734,28 @@
 				 var  giftId=tds.eq(2).attr('giftId');
 				 var  hours=tds.eq(3).attr('hours');
 				
-				 var  course = {};
-				 course.giftType = giftType;
-				 course.giftId=giftId;
-				 course.hours=hours;
-				 courses.push(course);  
+				 var  gift = {};
+				 gift.studentId=$("#studentId").val();
+				 gift.giftType = giftType;
+				 gift.giftId=giftId;
+				 gift.giftNum=hours;
+				 gift.studentGiftId=studentGiftId;
+				 
+				 var datas = $('#giftType').combobox('getData');
+				 
+				for(var m=0;m<datas.length;m++)
+				{
+					if(giftType==datas[m].giftType)
+					{
+						gift.unit=datas[m].unit;
+						gift.effNum=datas[m].effNum;
+					}
+				}
+				
+				 gifts.push(gift);  
 			 }
 		});
 		
-		
-		 
 		studentCourse.gifts=gifts;
 		studentCourse.giftCourses= courses;
 		var obj = JSON.stringify($("#courseFm").serializeObject());
