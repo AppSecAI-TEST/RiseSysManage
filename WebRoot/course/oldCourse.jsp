@@ -27,7 +27,7 @@
   		
   		.cbox
   		{
-  			vertical-align:bottom; 
+  			vertical-align:top; 
   		}
   	
   		a
@@ -48,71 +48,71 @@
           			<p><span></span></p>
         		</div>
       		</div>
-      		<div id="baseInfo" class="easyui-panel" title="基本信息" style="width:720px">
+      		<div id="baseInfo" class="easyui-panel" title="基本信息" style="width:920px">
 	   			 <table width="100%" class="maintable">
 		   			  <tr>
-		   			     <td width="70px">学员姓名：</td><td width="100px"></td>
-		   			     <td width="70px">英文名：</td><td width="180px"></td>
-		   			     <td width="70px">出生日期：</td><td width="170px"></td>
+		   			     <td width="70px"><span>学员姓名：</span></td><td width="100px"></td>
+		   			     <td width="70px"><span>英文名：</span></td><td width="180px"></td>
+		   			     <td width="70px"><span>出生日期：</span></td><td width="170px"></td>
 		   			  </tr>
 		   			  <tr>   
-		   			     <td>性别：</td><td></td>
-		   			     <td>证件号码：</td><td colspan="2"></td>
-		   			     <td align="center"><a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">关联连报</a></td>
+		   			     <td><span>性别：</span></td><td></td>
+		   			     <td><span>证件号码：</span></td><td colspan="2"></td>
+		   			     <td align="center"><a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width:120px; height: 28px;"><span>关联连报</span></a></td>
 				      </tr>
 			     </table>
 		     </div>  
 		     <div style="height:20px;"></div>
-		     <div class="easyui-panel" title="连报课程" style="width:720px">
+		     <div class="easyui-panel" title="连报课程" style="width:920px">
 		     	<div id="courseInfo" class="courseDiv" style="display:none">
 			     <table class="infotable base" width="100%">
 			   		<tr>
-			   			<td width="70px">报名日期:</td>
-			   			<td width="100px"></td>
-			   			<td style="width:370px;color:#ff000"></td>
-			   			<td width="100px"><input type="checkbox" class="cbox">选择连报</td>
-			   			<td width="80px"><a onclick="changeDetail(this)">展开详情</a></td>
+			   			<td width="100px"><span>报名日期:</span></td>
+			   			<td width="150px"></td>
+			   			<td style="width:470px;color:#ff000"></td>
+			   			<td width="100px"><input type="checkbox" class="cbox"><span>选择连报</span></td>
+			   			<td width="100px"><a onclick="changeDetail(this)"><span>展开详情</span></a></td>
 			   		</tr>
 				 </table>
 				 <table class="infotable detail" width="100%">
 			   		<tr>
-			   			<td width="120px">课程阶段：</td>
+			   			<td width="120px"><span>课程阶段：</span></td>
 			   			<td width="120px"></td>
-			   			<td width="120px">班级类型:</td>
+			   			<td width="120px"><span>班级类型:</span></td>
 			   			<td width="120px"></td>
-			   			<td width="120px">业绩类型:</td>
+			   			<td width="120px"><span>业绩类型:</span></td>
 			   			<td width="120px"></td>
 			   		</tr>
 			   		<tr>
-			   			<td>业绩顾问：</td>
+			   			<td><span>业绩顾问：</span></td>
 			   			<td></td>
-			   			<td>业绩老师：</td>
+			   			<td><span>业绩老师：</span></td>
 			   			<td></td>
-			   			<td>课程状态：</td>
+			   			<td><span>课程状态：</span></td>
 			   			<td></td>
 			   		</tr>
 			   		<tr>
-			   			<td>课程进度：</td>
+			   			<td><span>课程进度：</span></td>
 			   			<td></td>
-			   			<td>现金抵扣券：</td>
+			   			<td><span>现金抵扣券：</span></td>
 			   			<td colspan="3"></td>
 			   		</tr>
 			   		<tr>
-			   			<td>备注：</td>
+			   			<td><span>备注：</span></td>
 			   			<td colspan="5"></td>
 			   		</tr>
 			   		<tr>
-			   			<td>总金额：</td>
+			   			<td><span>总金额：</span></td>
 			   			<td></td>
-			   			<td>优惠金额：</td>
+			   			<td><span>优惠金额：</span></td>
 			   			<td></td>
-			   			<td>连报优惠：</td>
+			   			<td><span>连报优惠：</span></td>
 			   			<td></td>
 			   		</tr>
 			   		<tr>
-			   			<td>实缴金额：</td>
+			   			<td><span>实缴金额：</span></td>
 			   			<td></td>
-			   			<td colspan="4"><a>查看缴费单据</a></td>
+			   			<td colspan="4"><a><span>查看缴费单据</span></a></td>
 			   		</tr>
 				 </table>
 				</div>
@@ -126,7 +126,7 @@
 	var courses;
 	$("#submit").click(function()
 	{
-		$(".detail").find("input[type=checkbox]").each(function (){
+		$("input[type=checkbox]").each(function (){
 			if(this.checked)
 			{
 				var id = $(this).attr('studentCousreId');
@@ -170,29 +170,29 @@
 	    		{
 	    			var tabModel=$('#courseInfo').clone();
 	    			var base=tabModel.find(".base").find("tr:eq(0)")
-	    			base.find("td:eq(1)").html(node.payDate);
-	    			base.find("td:eq(2)").html(node.remark)//提示 不知如何取 暂时取备注字段
+	    			base.find("td:eq(1)").html("<span>"+node.payDate+"</span>");
+	    			base.find("td:eq(2)").html("<span>"+node.remark+"</span>")//提示 不知如何取 暂时取备注字段
 	    			base.find("td:eq(3)").find("input[type=checkbox]").attr('studentCousreId',node.studentCourseId)
 	    			
 	    			var detail1 =tabModel.find(".detail").find("tr:eq(0)");
-	    			detail1.find("td:eq(1)").html(node.stageId)
-	    			detail1.find("td:eq(3)").html(node.classType)
-	    			detail1.find("td:eq(5)").html(node.feeType)
+	    			detail1.find("td:eq(1)").html("<span>"+node.stageId+"</span>")
+	    			detail1.find("td:eq(3)").html("<span>"+node.classType+"</span>")
+	    			detail1.find("td:eq(5)").html("<span>"+node.feeType+"</span>")
 	    			var detail2 =tabModel.find(".detail").find("tr:eq(1)");
-	    			detail2.find("td:eq(1)").html(node.adviserA+"/"+node.adviserB)
-	    			detail2.find("td:eq(3)").html(node.adviserTeacherA+"/"+node.adviserTeacherB)
-	    			detail2.find("td:eq(5)").html(node.courseState)
+	    			detail2.find("td:eq(1)").html("<span>"+node.adviserA+"/"+node.adviserB+"</span>")
+	    			detail2.find("td:eq(3)").html("<span>"+node.adviserTeacherA+"/"+node.adviserTeacherB+"</span>")
+	    			detail2.find("td:eq(5)").html("<span>"+node.courseState+"</span>")
 	    			var detail3 =tabModel.find(".detail").find("tr:eq(2)");
 	    			detail3.find("td:eq(1)").html()//课程进度字段尚无
-	    			detail3.find("td:eq(3)").html(node.minusAmount)
+	    			detail3.find("td:eq(3)").html("<span>"+node.minusAmount+"</span>")
 	    			var detail4 =tabModel.find(".detail").find("tr:eq(3)");
-	    			detail4.find("td:eq(1)").html(node.remark)
+	    			detail4.find("td:eq(1)").html("<span>"+node.remark+"</span>")
 	    			var detail5 =tabModel.find(".detail").find("tr:eq(4)");
-	    			detail5.find("td:eq(1)").html(node.totalAmount)
-	    			detail5.find("td:eq(3)").html(node.favorAmount)
-	    			detail5.find("td:eq(5)").html(node.linkFavorId)
+	    			detail5.find("td:eq(1)").html("<span>"+node.totalAmount+"</span>")
+	    			detail5.find("td:eq(3)").html("<span>"+node.favorAmount+"</span>")
+	    			detail5.find("td:eq(5)").html("<span>"+node.linkFavorId+"</span>")
 	    			var detail6 =tabModel.find(".detail").find("tr:eq(5)");
-	    			detail6.find("td:eq(1)").html(node.amount)
+	    			detail6.find("td:eq(1)").html("<span>"+node.amount+"</span>")
 	    			detail6.find("td:eq(2)").find("a").click(function(){showImage(node.imgUrl)})
 	    			tabModel.css("display","block");
 	    			$('#courseInfo').after(tabModel);
@@ -208,17 +208,17 @@
 	
 	 function changeDetail(obj)
 	 {
-		 if($(obj).html()=="展开详情")
+		 if($(obj).html()=="<span>展开详情</span>")
 		 {
 			 $(".detail").css("display","none");
-			  $(".base").find("a").html("展开详情");
+			  $(".base").find("a").html("<span>展开详情</span>");
 			 $(obj).closest(".courseDiv").find(".detail").css("display","table");
-			 $(obj).html("隐藏详情");
+			 $(obj).html("<span>隐藏详情</span>");
 		 }
 		 else
 		 {
 			 $(obj).closest(".courseDiv").find(".detail").css("display","none");
-			 $(obj).html("展开详情");
+			 $(obj).html("<span>展开详情</span>");
 		 }	 
 		 
 	 }

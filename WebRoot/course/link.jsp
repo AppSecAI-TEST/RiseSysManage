@@ -86,7 +86,7 @@
 				
 		</div>
 			
-			<div id="dlg" class="easyui-dialog" style="width: 800px; height: 450px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
+			<div id="dlg" class="easyui-dialog" style="width: 1000px; height: 450px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
   				<iframe id="frame2" name="frame2"   src="/sys/course/oldCourse.jsp"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" height="445px" width="100%"></iframe>
 	  	   </div>
 	 
@@ -97,7 +97,7 @@
 	      		</div>
 	     </div>
 	     </div>
-	     <div id="showImg" class="easyui-dialog" title="缴费单据"  data-options="modal:true,closed:true" style="width:800px;height:450px;text-align:center;">
+	     <div id="showImg" class="easyui-dialog" title="缴费单据"  data-options="modal:true,closed:true" style="width:1000px;height:450px;text-align:center;">
 			<img style="width:100%;height:100%">
 		</div>
 	</body>
