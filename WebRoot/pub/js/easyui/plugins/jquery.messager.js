@@ -5,7 +5,7 @@
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
  * To use it on other terms please contact us at info@jeasyui.com
- *
+ *$.messager.defaults
  */
 (function($){
 function _1(){

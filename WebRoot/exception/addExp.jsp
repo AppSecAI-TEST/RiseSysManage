@@ -9,24 +9,6 @@
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript" src="<%=path %>/js/expManage/addExp.js"></script>
-		<style>
-			.maintable {
-				border-collapse: collapse;
-				border-spacing: 0;
-				border:none;
-			}
-			
-			.maintable td {
-				border: solid #ccc;
-				border-width: 0px 1px 1px 0px;
-				padding:2px 1px;
-				text-align:center;
-				font-size:12px;
-			}
-			
-			.dialog-button{text-align:center;};
-			
-		</style>
   	</head>
   	
   	<body>

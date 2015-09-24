@@ -11,29 +11,11 @@
 		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
 		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
 		<script type="text/javascript" src="<%=path %>/js/expManage/selectClass.js"></script>
-		<style type="text/css">
-			.datagrid{
-				margin:0 auto;
-				min-width:1100px;
-				margin-top:20px;
-				width:97%;
-			}
-			.datagrid .panel-header{width:99% !important;}
-			/*.datagrid .panel-header .panel-title{width:100% !important;}*/
-			.datagrid .datagrid-wrap{width:100% !important;}
-			.datagrid .datagrid-wrap .datagrid-toolbar{width:99.5% !important;border-right-width:1px;}
-			.datagrid .datagrid-wrap .datagrid-view{width:100% !important;}
-			.datagrid .datagrid-wrap .datagrid-view .datagrid-view1{width:0% !important;}
-			.datagrid .datagrid-wrap .datagrid-view .datagrid-view2{width:100% !important;}
-			.datagrid .datagrid-wrap .datagrid-view .datagrid-view2 .datagrid-header{width:99.9% !important;border-left-width:0px;border-right-width:1px;}
-			.datagrid .datagrid-wrap .datagrid-view .datagrid-view2 .datagrid-body{width:99.9% !important;border-left-width:0px;border-right:1px solid #95B8E7;}
-			.datagrid .datagrid-wrap .datagrid-pager{width:99.9% !important;border-left-width:0px;border-right:1px solid #95B8E7;}
-		</style>
   	</head>
   	<body>
   		<div>
  		<form id="qryFm">
-  			<table align="center" style="min-width:1100px;width:97%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="15">
+  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="15">
   				<tr>
   					<td width="8%" align="right">所属校区：</td>
   					<td width="10%">

@@ -51,7 +51,10 @@ input[type="file"],input[type="image"],input[type="submit"],input[type="reset"],
 .maintable tr {height: 30px;}
 .maintable td {border-top: 0; border-right: 1px solid #ccc; border-bottom: 1px solid #ccc; border-left: 0; } 
 .maintable tr.lastrow td {border-bottom: 0;} 
-.maintable tr td.lastCol {border-right: 0; } 
+.maintable tr td.lastCol {border-right: 0; }
+.maintables {border-collapse: collapse; border-spacing:0; border: 0px solid #ccc; height:auto;} 
+.maintables tr {height: 30px;}
+.maintables td {border-top: 0; border: 1px solid #ccc; border-left: 0; } 
 span {font-family: Arial,微软雅黑,宋体; font-size: 14px;}
 .linkmore{color : #0099FF; text-decoration : none; cursor:pointer;}
 .linkmore:hover{color : ED0000 !important;}
@@ -59,3 +62,22 @@ span {font-family: Arial,微软雅黑,宋体; font-size: 14px;}
 .linkmore1:hover{color : #4AC5C3 !important;}
 .linkmore2{color : #ED6C44; text-decoration : none; cursor:pointer;}
 .linkmore2:hover{color : #000 !important;}
+.maintable 
+{
+	border-collapse: collapse;
+	border-spacing: 0;
+	border:none;
+}
+			
+.maintable td 
+{
+	border: solid #ccc;
+	border-width: 0px 1px 1px 0px;
+	padding:2px 1px;
+	font-size:12px;
+	text-align:center;
+}
+
+
+.info_table td{border:solid #ccc; border-width:0px 1px 1px 0px; padding:2px;font-size:12px;}
+.info_table{border:solid #ccc; border-width:1px 0px 0px 1px;}

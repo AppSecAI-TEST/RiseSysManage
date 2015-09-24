@@ -150,7 +150,7 @@
 		    	{
 		    	    $(name).css("display","none");
 		    	}
-		    	return;
+		    	 
 	    	}
         }  
     });  
@@ -163,7 +163,7 @@
 		});
 	
 		var l=frame0.window.build();
-		var ll=frame1.window.build();
+	//	var ll=frame1.window.build();
 		studentCourses.push(l);
 		//studentCourses.push(ll);
 			
