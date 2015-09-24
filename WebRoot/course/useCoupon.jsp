@@ -15,7 +15,7 @@
 			<table class="easyui-datagrid"  title="使用现金抵扣券" style="height:400px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?param={'queryCode':'Qry_Student_Gift','studentId':'<%=studentId%>'}" 
 				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 				<thead>
-					<tr>s
+					<tr>
 						<th width="6" data-options="field:'ck',checkbox:true"></th>
 						<th width="20" data-options="field:'giftCode',width:100,align:'center'">条码</th>
 						<th width="20" data-options="field:'amount',width:30,align:'center'">面值</th>

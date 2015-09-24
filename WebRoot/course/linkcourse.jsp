@@ -222,8 +222,9 @@
 	{
 			//增加赠品
 	 	var sqlParam={};
-		sqlParam.studentCourseId='<%=object.get("studentCourseId")%>';
+		sqlParam.studentCourseId='<%=StringUtil.getJSONObjectKeyVal(object,"studentCourseId")%>';
 		sqlParam.queryCode='Qry_Course_Gift';
+	
 		var str = JSON.stringify(sqlParam);
 		$.ajax({
 			url: "/sys/course/getStuCourses.do?",
@@ -238,13 +239,14 @@
 	    	{
 	    		$.messager.progress('close'); 
 	    		 var giftTs = data.data;//学员已有课程 
-	    		
+	    		 
 	    		$.each(giftTs,function(i,gift)
 	    		{
+	    			if(gift==null)return;
     			 	var giftTR=$("#addGift").clone();
 					giftTR.css("display",'table-row');
 					giftTR.attr("studentGiftId",gift.studentGiftId);
-					
+					giftTR.attr("val",'gift');
 					giftTR.find("td").each(function(n,node)
 					{
 						if(n==1)
@@ -639,7 +641,7 @@
 		{
 			var trName=$(this).attr("val");
 			var studentGiftId=$(this).attr("studentGiftId");
-	 alert(studentGiftId);
+ 
 			if('gift'==trName)
 			{
 				 var  tds=$(this).children('td');
@@ -656,6 +658,7 @@
 				 
 				 gift.studentId=$("#studentId").val();
 				
+				 gift.studentGiftId=studentGiftId;
 				 gift.unit = unit; 
 				 gift.effNum = effNum; 
 				 gift.giftType = giftType;
@@ -694,7 +697,7 @@
 		studentCourse.giftCourses= courses;
 		var obj = JSON.stringify($("#courseFm").serializeObject());
 		studentCourse.course=obj;
-		 alert(JSON.stringify(studentCourse));
+		alert(JSON.stringify(studentCourse));
 		return studentCourse;
 	}
 	
