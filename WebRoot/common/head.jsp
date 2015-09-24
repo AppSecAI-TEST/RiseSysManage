@@ -12,4 +12,5 @@
 <script type="text/javascript" src="<%=headPath %>/pub/js/json.js"></script>
 <script type="text/javascript" src="<%=headPath %>/pub/js/json2.js"></script>
 <script type="text/javascript" src="<%=headPath %>/pub/js/util.js"></script>
+<script type="text/javascript" src="<%=headPath %>/pub/js/date.js"></script>
 <%@ include file="theme.jsp" %>

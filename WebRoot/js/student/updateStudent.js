@@ -265,7 +265,6 @@ $(document).ready(function() {
     					var obj = JSON.stringify($("#studentFm").serializeObject());
 						obj = obj.substring(0, obj.length - 1);
     					obj += ",\"contactId\":\""+contactIds+"\",\"activityId\":\""+activityIds+"\",\"realId\":\""+realIds+"\",\"contactArray\":"+contactArray+",\"realSchoolArray\":"+realSchoolArray+",\"activityArray\":"+activityArray+"}";
-    					alert(obj);
     					$.ajax({
     		    			url: "/sys/student/updateStudent.do",
     		    			data: "param=" + obj,

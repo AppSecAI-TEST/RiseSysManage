@@ -8,7 +8,6 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-  	</head>
   	<style>
   		.infotable 
 		{
@@ -41,8 +40,9 @@
   			display:none;
   		}
   	</style>
+  	</head>
   	<body>
-  	<div id="base">
+   
   			<div id="u0">
         		<div id="u1">
           			<p><span></span></p>
@@ -126,7 +126,7 @@
 	var courses;
 	$("#submit").click(function()
 	{
-		$("#linkCourseTab").find("input[type=checkbox]").each(function (){
+		$(".detail").find("input[type=checkbox]").each(function (){
 			if(this.checked)
 			{
 				var id = $(this).attr('studentCousreId');

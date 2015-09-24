@@ -17,15 +17,11 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		
-	 
 		<script type="text/javascript">
 			$(document).ready(function()
 			{
 				var height = $(document).height();
-				 
 				$('#frame<%=name%>',parent.document).css("height",height+20);
-			 	 
 			})
 		</script>
   	</head>
@@ -38,16 +34,17 @@
 	      
       	      <table width="100%" cellpadding="5px" class="maintable" >
 	      	      <tr>
-	      	      	<input id="studentId" name="studentId" type="hidden" value="2"/>
-	      	    	<input id="courseType" name="courseType" type="hidden" value="001"/>
+	      	        <input id="studentCourseId" name="studentCourseId" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"studentCourseId")%>"/>
+	      	      	<input id="studentId"  name="studentId"     type="hidden" value="2"/>
+	      	    	<input id="courseType" name="courseType"    type="hidden" value="001"/>
 	      	    	<input id="advisterType" name="adviserType" type="hidden" value="teacher"/>
-	      	    	<input id="courseState" name="courseState" type="hidden" value="001"/>
-	      	    	<input id="feeType" name="feeType" type="hidden" value="001"/>
+	      	    	<input id="courseState" name="courseState"  type="hidden" value="001"/>
+	      	    	<input id="feeType"  name="feeType"  type="hidden" value="001"/>
 	      	    	<input id="feeState" name="feeState" type="hidden" value="00A"/>
 	      	        <td align="right"> <span>阶段：</span></td>
 	      	        <td>
 					 <select name="stageId"  id="stageId" class="easyui-combobox" style="width: 150px; height: 28px;"
-	      						data-options="formatter:formatStageId, valueField: 'amount', textField: 'stageId', panelHeight: 'auto',
+	      						data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#stageId').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>');}"
 	      						url="<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_Set_Price','setPriceId':'10001'}" required="true" >
       	            </select>
@@ -88,32 +85,25 @@
       	<div class="easyui-panel" style="width:100%;height:auto;" title="赠品信息">
       	
       	      <table width="100%" cellpadding="5px" class="maintable" id="giftTab">
-	      	      <tr>
+	      	      <tr id="giftModelTR">
 	      	        <td width="8%" align="right"><span>赠品类型：</span></td>
 	      	        <td width="8%">
-	      	        <select  class="easyui-combobox" id="giftType" style="width: 100px; height: 28px;"
+	      	        <select  class="easyui-combobox" id="parentType" style="width: 100px; height: 28px;"
 	      				     data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
-	      					 url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=GIFT_TYPE" required="true" >
+	      					 url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE" required="true" >
       	            </select>
       	            </td>
 	      	        <td width="7%" align="right"><span>赠品名称：</span></td>
 	      	        <td width="39%">
-	      	       <table width="200" border="0">
-   	                <tr>
-	      	              <td>
-							<select   class="easyui-combobox" id="giftId" style="width: 120px; height: 28px;"
-	      						 >
-      	            </select>
-						</td>
-	      	              <td><select  class="easyui-combobox" id="couponType" style="width: 120px; height: 28px;" 
-	      	               >
-	      	              
-	      	              
-   	                  </select></td>
-	      	              <td><input   id="giftCode" type="text" class="easyui-textbox validatebox" required="true" style="width:150px; height: 28px;"/></td>
-                          <td><input   id="giftEffDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;"/></td>
-      	                </tr>
-      	              </table></td>
+	      	      	<table  border="0">
+	   	                <tr>
+			      	         <td id='td0' ><select  class="easyui-combobox" id="giftType" style="width: 120px; height: 28px;"></select></td>
+			      	         <td id="td1" style="display:none"><select  class="easyui-combobox" id="giftId" style="width: 120px; height: 28px;"></select></td>
+			      	         <td id="td2" style="display:none"><input   id="giftCode" type="text" class="easyui-textbox validatebox" required="true" style="width:150px; height: 28px;"/></td>
+		                     <td id="td3" style="display:none"><input   id="giftEffDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;"/></td>
+	      	             </tr>
+      	            </table>
+      	            </td>
 	      	        <td width="7%" align="right"><span>是否领用：</span></td>
 	      	        <td width="7%" align="left">
 	      	          <input type="radio" name="isGetY" id="isGetY" value="Y">
@@ -126,21 +116,20 @@
 	      	        <td width="4%"><span>是否退回</span></td>
 	      	        <td width="6%"><a href="javascript:void(0)" id="addGiftBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a></td>
       	        </tr>
-      	        
+      	        </giftDiv>
       	      <tr style="display:none;" name="addGift" id="addGift" >
       	        <td align="right"><span>赠品类型：</span></td>
-      	        <td align="left" giftType="">&nbsp;</td>
+      	        <td align="left" parentType="">&nbsp;</td>
       	        <td align="right"><span>赠品名称：</span></td>
-      	        <td align="left" giftId="" coupon="">&nbsp;</td>
+      	        <td align="left" giftType="" giftId="">&nbsp;</td>
       	        <td align="right"><span>是否领用：</span></td>
       	        <td align="left" isGet="">&nbsp;</td>
       	        <td align="right"><span>发放人：</span></td>
       	        <td align="left" granter="">&nbsp;</td>
       	        <td>&nbsp;</td>
-      	        <td><a href='javascript:void(0)' class='linkmore' ><span>删除</span></a></td>
+      	        <td><a href='javascript:void(0)' class='linkmore' onclick='delRow(this)' ><span>删除</span></a></td>
      	       </tr>
       	      </table>
-</div>
       		
       		<div style="height: 10px;"></div>
       		<div class="easyui-panel" style="width:100%;height:auto;" title="赠课信息">
@@ -150,17 +139,15 @@
 	      	        <td width="22%" align="right">
 		      	        <div align="left">
 		      	          <select  class="easyui-combobox" id="giftCourseType" style="width: 150px; height: 28px;"
-		      						 
-		      						  >
-	      	              </select>
+		      	           data-options="formatter:formatTypeName,  valueField: 'giftType', textField: 'typeName', panelHeight: 'auto'"
+		      	          url="/sys/pubData/qryData.do?param={queryCode:'Qry_Gift_Type',parentType:'COURSE'}" ></select>
       	            </div></td>
 	      	        <td width="10%" align="right"><span>赠课名称：</span></td>
-	      	        <td width="11%"><select   class="easyui-combobox" id="giftCourseId" style="width: 120px; height: 28px;"
-	      						required="true">
+	      	        <td width="11%"><select class="easyui-combobox" id="giftCourseId" style="width: 120px; height: 28px;" required="true">
 	      	          </select></td>
 	      	       
 	      	        <td width="12%" align="right"><span>课时量:</span></td>
-	      	        <td width="22%"><input id="courseHours" type="text" class="easyui-textbox validatebox" required="true" style="width: 100px; height: 28px;"/></td>
+	      	        <td width="22%" id="courseHours"></td>
       	            <td width="7%"><a href="javascript:void(0)" id="addCourse" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a></td>
       	        </tr>
       	      </table>
@@ -186,21 +173,19 @@
 	      	        <td  align="center">&nbsp;</td>
 	      	        <td  align="center">&nbsp;</td>
 	      	        <td  align="center">&nbsp;</td>
-	      	        <td align="center">&nbsp;</td>
-	      	        <td align="center"> <a href='javascript:void(0)' class='linkmore' ><span>删除</span></a></td>
+	      	        <td  align="center">&nbsp;</td>
+	      	        <td  align="center"> <a href='javascript:void(0)' class='linkmore' onclick='delRow(this)'><span>删除</span></a></td>
       	        </tr>
       	      </table>
 			</div>
 			<div style="height: 10px;"></div>
 			<div class="easyui-panel" style="width:100%;height:auto;" title="课程费用">
 			     	      <table width="100%" cellpadding="5px" class="maintable" >
-			      	     
 			  	            <tr>
 			     	            <td  align="right" ><span>现金抵扣劵：</span></td>
 			     	            <td align="center"  ><href="javascript:void(0)" id="addArchives" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addArchives()">使用现金抵扣券</</td>
 			      	            <td colspan="8"  giftId=""><div id="useCoupon"/></td>
 			   	            </tr>
-			   	           
 			   	            <tr>
 				      	        <td width="10%"  align="right" ><span>课程金额：</span></td>
 				      	        <td width="14%"  align="left" ><input id="totalAmount" name="totalAmount" type="text" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"> </td>
@@ -211,25 +196,13 @@
 				      	        <td width="12%"  align="right"><span>实缴课程一金额：</span></td>
 				      	        <td width="17%"  align="left" ><input id="amount" name="amount"     type="text" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"> </td>
 			      	         </tr>
-			      	       
 			      	      </table>
-			</div>
-			<div style="height: 10px;"></div>
-		
-			<div id="dlg" class="easyui-dialog" style="width: 800px; height: 450px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
-		  		<iframe id="frame2" name="frame2"   src="/sys/course/useCoupon.jsp?studentId=2"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto"  width="700px"></iframe>
-			</div>
-		  
-  
-  
-  
- 		<!--  
-	      	<div style="margin-top: 50px;">
-	      		<div style="float: left;margin-left: 900px;">
-	      			<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      			&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onClick="javascript:window.history.back()">返回</a>
-	      		</div>
-	      	</div>-->
+				</div>
+				<div style="height: 10px;"></div>
+			
+				<div id="dlg" class="easyui-dialog" style="width: 800px; height: 450px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
+			  		<iframe id="frame2" name="frame2"   src="/sys/course/useCoupon.jsp?studentId=2"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto"  width="700px"></iframe>
+				</div>
 	      	  </form>
   		</div>
   	</body>
@@ -242,8 +215,7 @@
 	var coupons=[];//使用抵扣劵
 	var useCoupon="";
 	var minus=0;
-	
-	
+	 
 	initCousreGift();
 	//初始化已有赠品信息
 	function initCousreGift()
@@ -271,17 +243,30 @@
 	    		{
     			 	var giftTR=$("#addGift").clone();
 					giftTR.css("display",'table-row');
-					giftTR.attr("val","old");
+					giftTR.attr("studentGiftId",gift.studentGiftId);
+					
 					giftTR.find("td").each(function(n,node)
 					{
 						if(n==1)
 						{
-						//	getDataName("#giftType",gift.giftType);
-							$(node).html("<span>"+gift.giftType+"</span>");	
+							if(gift.giftType=="GOODS")
+							{
+								$(node).html("<span>实物赠品</span>");	
+							}else
+							{
+								$(node).html("<span>券类赠品</span>");	
+							}
+							
 						}else
 						if(n==3)
-						{							
-							$(node).html("<span>"+gift.giftId+"  "+gift.couponType+"   "+gift.giftCode+"</span>");
+						{	
+							if(gift.giftType=="GOODS")
+							{
+								 $(node).html("<span>"+gift.giftName+"</span>");	
+							}else
+							{
+								 $(node).html("<span>"+gift.giftName+"   "+gift.giftCode+"   "+gift.effDate+"</span>");
+							}
 							
 						}else
 						if(n==5)
@@ -298,6 +283,15 @@
 						}else if(n==7)
 						{
 							$(node).html("<span>"+gift.granter+"</span>");	
+						}else if(n==8)
+						{
+							if(gift.isRtn=='Y')
+							{
+								$(node).html("<span>是</span>");	
+							}else
+							{
+								$(node).html("<span>否</span>");	
+							}
 						}
 					});
 				
@@ -317,6 +311,7 @@
 		objectTr.attr("val","course");
 		objectTr.find("td").each(function(i,node)
 		{
+			var effDate="";
 			if(i==0)
 			{
 				$(node).html("<span>"+(i+1)+"</span>");	
@@ -335,9 +330,21 @@
 				$(node).attr("giftId",val);//赠课细类	
 			}else if(i==3)
 			{
-				var hours=$("#courseHours").textbox('getText');
+				var hours=$("#courseHours").html();
 				$(node).html("<span>"+hours+"</span>");	
 				$(node).attr("hours",hours);//课时
+			}else if(i==4)
+			{
+				$(node).html("<span>"+sysDate()+"</span>");	
+			}else if(i==5)
+			{
+				$(node).html("<span>未使用</span>");	
+			}else if(i==6)
+			{
+				$(node).html("<span>"+afterDate(1)+"</span>");	
+			}else if(i==7)
+			{
+				$(node).html("<span>"+afterYear(1)+"</span>");	
 			} 
 		});
 		 
@@ -347,42 +354,90 @@
 	 	
 	});
 	
+	//删除相对应的行  
+	function delRow(rows)  
+	{  
+	    $(rows).parent("td").parent("tr").remove();  
+	} 
+	
 	//增加赠品
 	$("#addGiftBtn").click(function ()
 	{
+		var giftModelTR=$("#giftModelTR").clone();
+		
+		//$("#giftModelTR").pa
+		
+		var flag=true;
 		var giftTR=$("#addGift").clone();
 		giftTR.css("display",'table-row');
 		giftTR.attr("val","gift");
 		giftTR.find("td").each(function(n,node)
 		{
+			var parentType=$("#parentType").combobox('getValue');
+			var giftEffDate=$("#giftEffDate").textbox('getValue');
 			if(n==1)//赠品类型;	
 			{
-				var name=$("#giftType").combobox('getText');
-				var val=$("#giftType").combobox('getValue');
-				
+				var name=$("#parentType").combobox('getText');
 				$(node).html("<span>"+name+"</span>");	
-				$(node).attr("giftType",val);
+				$(node).attr("parentType",parentType);
 			}else if(n==3)//赠品名称;劵类ID
 			{
-				var giftId=$("#giftId").combobox("getText");
-				var val=$("#giftId").combobox('getValue');
+				var giftId=$("#giftId").combobox('getValue');
+				var giftName=$("#giftId").combobox('getText');
+			 
+				var giftType=$("#giftType").combobox("getText");
+				var giftTypeVal=$("#giftType").combobox('getValue');
 				
-				var coupon=$("#couponType").combobox('getText');
 				var code=$("#giftCode").textbox('getValue');
 				
-				var giftEffDate=$("#giftEffDate").textbox('getValue');
+				//判断是否是券类
+				if(parentType=='COUPON' && code=='')
+				{
+					$.messager.alert('提示', "请输入券类编码!");
+					flag=false;
+					return;
+				}
+			
 				if(''!=code)
 				{
-						$(node).html("<span>"+giftId+"  "+coupon+"   "+ code +"   "+giftEffDate+"</span>");	
+						$(node).html("<span>"+giftType+"  "+giftName+"   "+ code +"   "+giftEffDate+"</span>");	
 				}else
 				{
-					$(node).html("<span>"+giftId+"</span>");	
+					$(node).html("<span>"+giftName+"</span>");	
 				}
 				
-				$(node).attr("giftId",val);
-				$(node).attr("couponType",val);
+				var datas = $('#giftType').combobox('getData');
+				 
+				for(var m=0;m<datas.length;m++)
+				{
+					if(giftTypeVal==datas[m].giftType)
+					{
+						 $(node).attr("effNum",datas[m].effNum);
+						 $(node).attr("unit",datas[m].unit);
+					}
+				}
+				
+				if(giftTypeVal=='')
+				{
+					var data = $('#giftId').combobox('getData');
+	                if (data.length > 0)
+	                {
+	                    for(var i=0;i<data.length;i++)
+	                    {
+	                    	var giftIdT=data[0].giftId;
+	                    	if(giftIdT==giftId)
+	                    	{
+	                    		giftTypeVal=data[0].giftType;
+	                    	}
+	                    }
+	                }
+				}
+				
+				$(node).attr("giftId",giftId);
+				$(node).attr("giftType",giftTypeVal);
 				$(node).attr("giftCode",code);
 				$(node).attr("giftEffDate",giftEffDate);
+				
 			}else if(n==5)
 			{
 				var getFlag = $("input[name='isGetY']:checked").val(); //是否领取
@@ -390,6 +445,11 @@
 				$(node).attr("isGet","N");
 				if('Y'==getFlag)
 				{
+					if(giftEffDate=='' &&　parentType=='COUPON')
+					{
+						flag=false;
+						$.messager.alert('提示', "请填写有效期!");
+					}
 					$(node).html("<span>已领取</span>");	
 					$(node).attr("isGet","Y");
 				}else if('N'==getFlagN)
@@ -410,25 +470,184 @@
 			
 		});
 	
-		$("#addGift").after(giftTR);
-		var height = $(document).height();
-		$('#frame<%=name%>',parent.document).css("height",height+20);
-	  
+		if(flag)
+		{
+			$("#giftFm").form('clear');
+			$("#addGift").after(giftTR);
+			var height = $(document).height();
+			$('#frame<%=name%>',parent.document).css("height",height+20);
+	    }
 	});
 
+	
+	$('#parentType').combobox({
+		onChange:function(n,o)
+		{
+		     $("#td0").css('display','none');
+		 	 $("#td1").css('display','none');
+             $("#td2").css('display','none');
+             $("#td3").css('display','none');
+       		if(n=='COUPON')//券类
+       		{
+			    var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift_Type\",parentType:\""+n+"\"}";
+	       		$("#giftType").combobox(
+	       		{
+	        		url : urls,//返回json数据的url
+	        		valueField : "giftType",
+	        		textField :  "typeName",
+	        		panelHeight : "auto",
+	        		onLoadSuccess : function ()
+	        		{ //数据加载完毕事件
+	                    var data = $('#giftType').combobox('getData');
+	                    if (data.length > 0)
+	                    {
+	                      //  $("#giftId").combobox('select', data[0].param2);
+	                    }
+	                    $("#td0").css('display','block');
+	                    $("#td1").css('display','block');
+	                    $("#td2").css('display','block');
+	                    $("#td3").css('display','block');
+	                }
+	        	});
+       		}else if(n=='GOODS')//实物类
+       		{
+       			$("#td1").css('display','block');
+			    var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}";
+	       		$("#giftId").combobox(
+	       		{
+	        		url : urls,//返回json数据的url
+	        		valueField : "giftId",
+	        		textField :  "giftName",
+	        		panelHeight : "auto",
+	        		onLoadSuccess : function ()
+	        		{ //数据加载完毕事件
+	                    var data = $('#giftId').combobox('getData');
+	                    if (data.length > 0)
+	                    {
+	                      //  $("#giftId").combobox('select', data[0].param2);
+	                    }
+	                }
+	        	});
+       		}
+		}
+	});
+	
+	$('#giftType').combobox({
+		onChange:function(n,o)
+		{
+       		 var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}";
+       		 $("#giftId").combobox(
+       			 {
+        		url : urls,//返回json数据的url
+        		valueField : "giftId",
+        		textField : "giftName",
+        		panelHeight : "auto",
+        		onLoadSuccess : function ()
+        		{ //数据加载完毕事件
+                    var data = $('#giftId').combobox('getData');
+                    if (data.length > 0)
+                    {
+                      //  $("#giftId").combobox('select', data[0].param2);
+                    }
+                }
+        	});
+		}
+	});
+	
+	$('#giftCourseType').combobox({
+		onChange:function(n,o)
+		{
+       		 var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}";
+       		 $("#giftCourseId").combobox(
+       		 {
+        		url : urls,//返回json数据的url
+        		valueField : "giftId",
+        		textField : "giftName",
+        		panelHeight : "auto",
+        		onLoadSuccess : function ()
+        		{ //数据加载完毕事件
+                    var data = $('#couponType').combobox('getData');
+                    if (data.length > 0)
+                    {
+                      //  $("#giftId").combobox('select', data[0].param2);
+                    }
+                }
+        	});
+		}
+	});
+	
+	$('#giftCourseId').combobox({
+		onChange:function(n,o)
+		{
+   		       var data = $('#giftCourseId').combobox('getData');
+                if (data.length > 0)
+                {
+                    for(var i=0;i<data.length;i++)
+                    {
+                    	var giftNum=data[0].giftNum;	
+                    	var giftId=data[0].giftId;
+                    	if(n==giftId)
+                    	{
+                    		$("#courseHours").html(giftNum);
+                    	}
+                    }
+                }
+		}
+	});
+	
+	//选择阶段价加载班级
+	$('#stageId').combobox(
+	{    
+       onChange : function(n, o)
+       {
+       	 	
+		    var data = $("#stageId").combobox('getData');
+			var amount;
+			for(var i=0;i<data.length;i++)
+			{
+				 if(n==data[i].stageId)
+				 {
+					 amount=data[i].amount;
+				 }
+			}
+		
+		    $("#totalAmount").textbox('setValue',amount);
+       		var stageType=$("#stageId").combobox('getText');
+       		var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",stageId:\""+stageType+"\"}";
+       	 	$("#classType").combobox({
+        		url : urls,//返回json数据的url
+        		valueField : "classType",
+        		textField : "classType",
+        		panelHeight : "auto",
+        		onLoadSuccess : function ()
+        		{ //数据加载完毕事件
+                    var data = $('#classType').combobox('getData');
+                    if (data.length > 0)
+                    {
+                        $("#classType").combobox('select', data[0].classType);
+                    }
+                }
+        	});
+       }  
+	});
+	
 	//创建连报提交数据
 	function build()
 	{
-		studentCourse=[];                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+		studentCourse={};                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 		$("#giftTab").find('tr').each(function(i,node)
 		{
 			var trName=$(this).attr("val");
+			var studentGiftId=$(this).attr("studentGiftId");
+	 alert(studentGiftId);
 			if('gift'==trName)
 			{
 				 var  tds=$(this).children('td');
-				 var  giftType=tds.eq(1).attr('giftType');
+			 
+				 var  effNum=tds.eq(3).attr('effNum');
+				 var  unit=tds.eq(3).attr('unit');
 				 var  giftId=tds.eq(3).attr('giftId');
-				 var  couponType=tds.eq(3).attr('couponType');
+				 var  giftType=tds.eq(3).attr('giftType');
 				 var  giftCode=tds.eq(3).attr('giftCode');
 				 var  isGet=tds.eq(5).attr('isGet');
 				 var  granter=tds.eq(7).attr('granter');
@@ -437,9 +656,10 @@
 				 
 				 gift.studentId=$("#studentId").val();
 				
+				 gift.unit = unit; 
+				 gift.effNum = effNum; 
 				 gift.giftType = giftType;
 				 gift.giftId=giftId;
-				 gift.couponType=couponType;
 				 gift.giftCode=giftCode;
 				 gift.giftEffDate=giftEffDate;
 				 gift.isGet=isGet;
@@ -448,7 +668,7 @@
 				 gifts.push(gift);  
 			 }
 		});
-			 alert(JSON.stringify(gifts));
+			  
 			 
 		$("#giftCourse").find('tr').each(function(i,node)
 		{
@@ -468,86 +688,17 @@
 			 }
 		});
 		
-		 alert(JSON.stringify(courses));
+		
 		 
 		studentCourse.gifts=gifts;
 		studentCourse.giftCourses= courses;
 		var obj = JSON.stringify($("#courseFm").serializeObject());
 		studentCourse.course=obj;
+		 alert(JSON.stringify(studentCourse));
 		return studentCourse;
 	}
 	
-	$('#giftType').combobox({
-		onChange:function(n,o)
-		{
-       		 var urls="/sys/pubData/qryParaConfigList.do?paramType=GIFT_TYPE&paramValue="+n;
-       		 $("#giftId").combobox(
-       			 {
-        		url : urls,//返回json数据的url
-        		valueField : "param1",
-        		textField : "param2",
-        		panelHeight : "auto",
-        		onLoadSuccess : function ()
-        		{ //数据加载完毕事件
-                    var data = $('#giftId').combobox('getData');
-                    if (data.length > 0)
-                    {
-                      //  $("#giftId").combobox('select', data[0].param2);
-                    }
-                }
-        	});
-		}
-	});
 	
-	$('#giftId').combobox({
-		
-		onChange:function(n,o)
-		{
-       		 var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}";
-       		 $("#couponType").combobox(
-       			 {
-        		url : urls,//返回json数据的url
-        		valueField : "giftId",
-        		textField : "giftName",
-        		panelHeight : "auto",
-        		onLoadSuccess : function ()
-        		{ //数据加载完毕事件
-                    var data = $('#couponType').combobox('getData');
-                    if (data.length > 0)
-                    {
-                      //  $("#giftId").combobox('select', data[0].param2);
-                    }
-                }
-        	});
-		}
-	});
-	
-	
-	//选择阶段价加载班级
-	$('#stageId').combobox(
-	{    
-       onChange : function(n, o)
-       {
-       	 	$("#totalAmount").textbox('setValue',n);
-       		 var stageType=$("#stageId").combobox('getText');
-       		 var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",stageId:\""+stageType+"\"}";
-       	 	$("#classType").combobox({
-        		url : urls,//返回json数据的url
-        		valueField : "classType",
-        		textField : "classType",
-        		panelHeight : "auto",
-        		onLoadSuccess : function ()
-        		{ //数据加载完毕事件
-                    var data = $('#classType').combobox('getData');
-                    if (data.length > 0)
-                    {
-                        $("#classType").combobox('select', data[0].classType);
-                    }
-                }
-        	});
-       }  
-	});
-	  
 	function closeDlg()
 	{
 		$('#dlg').dialog('close');
@@ -581,13 +732,12 @@
 	function getDataName(id,val)
 	{
 		
-		var boxdata = $("#giftType").combobox('getData');
+		var data = $(id).combobox('getData');
 		
-		boxdata.each(function(i,node)
+		for(var i=0;i<data.length;i++)
 		{
-			alert(node);
-		
-		});
+			 
+		}
 		
 	}
 	</script>
