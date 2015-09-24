@@ -8,8 +8,6 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
 		<script type="text/javascript" src="<%=path %>/js/courseManage.js"></script>
   	</head>
   	<body>
