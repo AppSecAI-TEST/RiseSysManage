@@ -200,9 +200,8 @@
 				</div>
 				<div style="height: 10px;"></div>
 			
-				<div id="dlg" class="easyui-dialog" style="width: 800px; height: 450px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
-			  		<iframe id="frame2" name="frame2"   src="/sys/course/useCoupon.jsp?studentId=2"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto"  width="700px"></iframe>
-				</div>
+				<iframe id="dlg" class="easyui-dialog" style="width:1000px; height: 500px; padding: 10px 20px" closed="true" modal="true">
+				</iframe>
 	      	  </form>
   		</div>
   	</body>
@@ -363,6 +362,7 @@
 	//增加赠品
 	$("#addGiftBtn").click(function ()
 	{
+		clearDatas("giftModelTR")
 		var giftModelTR=$("#giftModelTR").clone();
 		
 		//$("#giftModelTR").pa
@@ -726,7 +726,11 @@
 	
 	function addArchives()
 	{
-		$('#dlg').dialog('open').dialog('setTitle', '使用抵扣券');
+		$('#dlg').dialog({
+			title:"使用抵扣券",
+		});
+		$('#dlg').attr("src","/sys/course/useCoupon.jsp?studentId=2");
+		$('#dlg').dialog("open");
 	}
 	
 	function getDataName(id,val)

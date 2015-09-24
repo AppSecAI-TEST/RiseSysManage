@@ -226,3 +226,37 @@ function formatClassInst(row) {
 	var s = '<span>' + row.className + '</span>';
 	return s;
 }
+
+function clearDatas(name) {
+	$("input,select,textarea", $("#" + name)).each(
+			function() {
+				var t = this.type, tag = this.tagName.toLowerCase();
+				if (t == "text" || t == "hidden" || t == "password"
+						|| tag == "textarea") {
+					this.value = "";
+				} else {
+					if (t == "file") {
+						var _24 = $(this);
+						if (!_24.hasClass("textbox-value")) {
+							var _25 = _24.clone().val("");
+							_25.insertAfter(_24);
+							if (_24.data("validatebox")) {
+								_24.validatebox("destroy");
+								_25.validatebox();
+							} else {
+								_24.remove();
+							}
+						}
+					} else {
+						if (t == "checkbox" || t == "radio") {
+							this.checked = false;
+						} else {
+							if (tag == "select") {
+								this.selectedIndex = -1;
+							}
+						}
+					}
+				}
+			});
+
+}
