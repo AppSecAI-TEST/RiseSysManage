@@ -227,6 +227,7 @@ function formatClassInst(row) {
 	return s;
 }
 
+//请空name内所有控件的值
 function clearDatas(name) {
 	$("input,select,textarea", $("#" + name)).each(
 			function() {
