@@ -85,10 +85,31 @@
 			<iframe id="frame5" name="frame5" style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
 				
 		</div>
+		
 			
-			<div id="dlg" class="easyui-dialog" style="width: 1000px; height: 450px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
-  				<iframe id="frame2" name="frame2"   src="/sys/course/oldCourse.jsp"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" height="445px" width="100%"></iframe>
-	  	   </div>
+		<div style="height: 10px;"></div>
+		<div class="easyui-panel" style="width:99%;height:auto;" title="合计金额">
+		     	      <table width="100%" cellpadding="5px" class="maintable" >
+		   	            <tr>
+			      	        <td width="5%"  align="right" ><span>总金额：</span></td>
+			      	        <td width="10%"  align="left" >&nbsp;</td>
+			      	        <td width="8%"  align="right" ><span >抵扣总金额：</span></td>
+			      	        <td colspan="8%"  align="left" >&nbsp;</td>
+			      	        <td width="10%"  align="right"><span>连报总优惠金额：</span></td>
+			      	        <td width="8%"  align="left" >&nbsp;</td>
+			      	        <td width="10%"  align="right">实缴合计金额：</td>
+			      	        <td width="8%"  align="right">&nbsp;</td>
+			      	        <td width="10%"  align="right"><span>原已缴金额：</span></td>
+			      	        <td width="8%"  align="right">&nbsp;</td>
+			      	        <td width="10%"  align="right"><span>本次补缴金额：</span></td>
+			      	        <td width="8%"  align="right">&nbsp;</td>
+		      	         </tr>
+		      	      </table>
+		</div>
+					
+		<div id="dlg" class="easyui-dialog" style="width: 1000px; height: 450px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
+ 				<iframe id="frame2" name="frame2"   src="/sys/course/oldCourse.jsp"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" height="445px" width="100%"></iframe>
+  	   </div>
 	 
 		<div style="margin-top: 20px;">
 	      		<div style="float: left;margin-left: 900px;">

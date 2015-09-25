@@ -188,20 +188,23 @@
 			   	            </tr>
 			   	            <tr>
 				      	        <td width="10%"  align="right" ><span>课程金额：</span></td>
-				      	        <td width="14%"  align="left" ><input id="totalAmount" name="totalAmount" type="text" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"> </td>
+				      	        <td width="14%"  align="left" ><input id="totalAmount" name="totalAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"totalAmount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"> </td>
 				      	        <td width="12%"  align="right" ><span >现金抵扣券金额：</span></td>
-				      	        <td colspan="3"  align="left" ><input id="minusAmount" name="minusAmount" type="text" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;">  </td>
+				      	        <td colspan="3"  align="left" ><input id="minusAmount" disabled="disabled" name="minusAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;">  </td>
 				      	        <td width="11%"  align="right"><span>连报优惠金额：</span></td>
-				      	        <td width="17%"  align="left" ><input id="favorAmount" name="favorAmount" type="text" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"/></td>
+				      	        <td width="17%"  align="left" ><input id="favorAmount" name="favorAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"favorAmount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"/></td>
 				      	        <td width="12%"  align="right"><span>实缴课程一金额：</span></td>
-				      	        <td width="17%"  align="left" ><input id="amount" name="amount"     type="text" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"> </td>
+				      	        <td width="17%"  align="left" ><input id="amount" disabled="disabled" name="amount" type="text"  value="<%=StringUtil.getJSONObjectKeyVal(object,"amount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"> </td>
 			      	         </tr>
 			      	      </table>
 				</div>
+			
+				
 				<div style="height: 10px;"></div>
 			
-				<iframe id="dlg" class="easyui-dialog" style="width:1000px; height: 500px; padding: 10px 20px" closed="true" modal="true">
-				</iframe>
+				<div id="dlg" class="easyui-dialog" style="width: 800px; height: 450px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
+			  		<iframe id="frame2" name="frame2"   src="/sys/course/useCoupon.jsp?studentId=2"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto"  width="700px"></iframe>
+				</div>
 	      	  </form>
   		</div>
   	</body>
@@ -243,7 +246,7 @@
 	    		{
 	    			if(gift==null)return;
 					var giftTR;
-	    			if(gift.giftType=="GOODS" || gift.parentType=="COUPON")
+	    			if(gift.parentType=="GOODS" || gift.parentType=="COUPON")
 					{
     			 		giftTR=$("#addGift").clone();
     			 		giftTR.css("display",'table-row');
@@ -409,7 +412,6 @@
 	//增加赠品
 	$("#addGiftBtn").click(function ()
 	{
-		clearDatas("giftModelTR")
 		var giftModelTR=$("#giftModelTR").clone();
 		
 		//$("#giftModelTR").pa
@@ -758,11 +760,14 @@
 		
 		studentCourse.gifts=gifts;
 		studentCourse.giftCourses= courses;
+		
 		var obj = JSON.stringify($("#courseFm").serializeObject());
 		studentCourse.course=obj;
 		alert(JSON.stringify(studentCourse));
 		return studentCourse;
 	}
+	
+	$("#favorAmount").textbox
 	
 	
 	function closeDlg()
@@ -770,8 +775,14 @@
 		$('#dlg').dialog('close');
 		$('#useCoupon').html(useCoupon);
 		$("#minusAmount").textbox('setValue',minus);
+		var favorAmount=$("#favorAmount").textbox('getValue');
+		var totalAmount=$("#totalAmount").textbox('getValue');
+		var amount=totalAmount-minus-favorAmount;
+		$("#amount").textbox('setValue',amount);
+		
 	}
 	
+	//点击取消抵扣券，减去总的优惠金额
 	function colDis(id)
 	{
 		var idT="#useCoupon"+id+"";
@@ -784,19 +795,25 @@
 				var usableAmountT=$("#minusAmount").textbox('getValue');
 				usableAmountT=usableAmountT-coupon.usableAmount;
 				$("#minusAmount").textbox('setValue',usableAmountT);
-				
 			 }
-			 
 		}
+		var minusAmount=$("#minusAmount").textbox('getValue');
+		var favorAmount=$("#favorAmount").textbox('getValue');
+		var totalAmount=$("#totalAmount").textbox('getValue');
+		var amount=totalAmount-minusAmount-favorAmount;
+		$("#amount").textbox('setValue',amount);
+		
 	}
 	
 	function addArchives()
 	{
-		$('#dlg').dialog({
-			title:"使用抵扣券",
-		});
-		$('#dlg').attr("src","/sys/course/useCoupon.jsp?studentId=2");
-		$('#dlg').dialog("open");
+		var totalAmount=$("#totalAmount").textbox('getValue');
+		if(totalAmount=='')
+		{
+			$.messager.alert('提示', "请选择阶段!");
+			return;
+		}
+		$('#dlg').dialog('open').dialog('setTitle', '使用抵扣券');
 	}
 	
 	function getDataName(id,val)
