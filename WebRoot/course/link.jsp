@@ -72,17 +72,17 @@
 	      	</div>
 	     <div id='frms'> 		 
 			
-			<iframe id="frame0" name="frame0"  style="display:none"  src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
+			<iframe id="frame0" name="frame0"  style="display:none"  src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
 		
-			<iframe id="frame1" name="frame1"  style="display:none"  src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
+			<iframe id="frame1" name="frame1"  style="display:none"  src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
 			
-			<iframe id="frame2" name="frame2" style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
+			<iframe id="frame2" name="frame2" style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
 		
-			<iframe id="frame3" name="frame3" style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
+			<iframe id="frame3" name="frame3" style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
 			
-			<iframe id="frame4" name="frame4" style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
+			<iframe id="frame4" name="frame4" style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
 		
-			<iframe id="frame5" name="frame5" style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" width="100%"></iframe>
+			<iframe id="frame5" name="frame5" style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
 				
 		</div>
 		
@@ -92,17 +92,17 @@
 		     	      <table width="100%" cellpadding="5px" class="maintable" >
 		   	            <tr>
 			      	        <td width="5%"  align="right" ><span>总金额：</span></td>
-			      	        <td width="10%"  align="left" >&nbsp;</td>
+			      	        <td width="10%"  align="left" id="totalAmount" >&nbsp;</td>
 			      	        <td width="8%"  align="right" ><span >抵扣总金额：</span></td>
-			      	        <td colspan="8%"  align="left" >&nbsp;</td>
+			      	        <td colspan="8%"  align="left" id="minus" >&nbsp;</td>
 			      	        <td width="10%"  align="right"><span>连报总优惠金额：</span></td>
-			      	        <td width="8%"  align="left" >&nbsp;</td>
+			      	        <td width="8%"  align="left" id="favorAmount" >&nbsp;</td>
 			      	        <td width="10%"  align="right">实缴合计金额：</td>
-			      	        <td width="8%"  align="right">&nbsp;</td>
+			      	        <td width="8%"  align="right" id="amount" >&nbsp;</td>
 			      	        <td width="10%"  align="right"><span>原已缴金额：</span></td>
-			      	        <td width="8%"  align="right">&nbsp;</td>
+			      	        <td width="8%"  align="right" id="totalAmount" >&nbsp;</td>
 			      	        <td width="10%"  align="right"><span>本次补缴金额：</span></td>
-			      	        <td width="8%"  align="right">&nbsp;</td>
+			      	        <td width="8%"  align="right" id="amount" >&nbsp;</td>
 		      	         </tr>
 		      	      </table>
 		</div>
@@ -125,10 +125,16 @@
 
 </html>
 <script type="text/javascript">
-
+	var minus=0;//抵扣金额
+	var favorAmount;//优惠金额
+	var totalAmount;//课程金额
+	var amount;//实缴金额
+	var allCoupons=[];//使用抵扣券
 	var studentCourses=[];//提交课程
 	var linkCourses=[];//选择关联已有连报课程
 	var orderCourses=["一","二","三","四","五","六","七","八","九","十"];//连报课程大写顺序
+	var num;//连报年数
+	var oldCourses;//学员已有课程
 	
 	function closeDlg()
 	{
@@ -146,7 +152,7 @@
     {    
        onChange : function(n,o) 
        {
-    		var num=$(this).combobox('getText');
+    		num=$(this).combobox('getText');
     		$(this).combobox('setText',num+"年连报");
     		
     		for(var n=0;n<5;n++)
@@ -159,7 +165,7 @@
 		    		{
 		    			var str=JSON.stringify(linkCourses[n]);
 						var url="/sys/course/linkcourse.jsp?name="+n+"&order="+order+"&courses="+str;
-							alert(url);
+						//alert(url);
 		    			$(name).attr('src',url);
 		    		
 		    		}else
@@ -178,18 +184,9 @@
 	
 	$("#submit").click(function()
 	{
-		$('#frms').find('iframe').each(function (i,node)
-		{
-		 
-		});
-	
 		var l=frame0.window.build();
-	//	var ll=frame1.window.build();
 		studentCourses.push(l);
-		//studentCourses.push(ll);
-			
 	    var str = JSON.stringify(studentCourses);
-		
 	    $.ajax({
     			url: "/sys/course/addLinkCourses.do",
     			data: "param=" +str,
@@ -215,4 +212,51 @@
     		});
 			
 	});
+	
+	function countAmount()
+	{
+		  minus=0;//抵扣金额
+		  favorAmount=0;//优惠金额
+		  totalAmount=0;//课程金额
+		  amount=0;//实缴金额
+		  		
+		  for(var n=0;n<num;n++)
+		  {
+				var name="frame"+n;
+		  			 
+		   		var minusT = window.frames[name].window.getMinus();
+		   		var favorAmountT = window.frames[name].window.getFavorAmount();
+		   		var totalAmountT = window.frames[name].window.getTotalAmount();
+		   		var amountT = window.frames[name].window.getAmount();
+		   		if(totalAmountT=='' || totalAmountT=='undefined')
+		   		{
+		   			continue;
+		   		}
+		   		 minus=minus+Number(minusT);
+		   		 favorAmount=favorAmount+Number(favorAmountT);//优惠金额
+				 totalAmount=totalAmount+Number(totalAmountT);//课程金额
+				 amount=amount+Number(amountT);//实缴金额
+				   
+		    }
+			$("#minus").html(minus);
+			$("#favorAmount").html(favorAmount);
+			$("#totalAmount").html(totalAmount);
+			$("#amount").html(amount);
+	}
+	
+	function getAllCoupon()
+	{
+		 allCoupons=[];
+		 for(var n=0;n<num;n++)
+		 {
+			var name="frame"+n;
+	   		var couponsT = window.frames[name].window.coupons;
+	   		for(var m=0;m<couponsT.length;m++)
+	   		{
+	   			 allCoupons.push(couponsT[m]);
+	   		}
+		 }
+		 return allCoupons;
+	}
+	
 	</script>

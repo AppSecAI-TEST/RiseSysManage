@@ -15,7 +15,7 @@
 	</style>
 	</head>
 	<body>
-		<table class="easyui-datagrid"  align="center" title="现金抵扣券列表" style="width:800px;margin-top:10px;height:300px;" id="couponList" url="<%=path %>/pubData/qryDataListByPage.do?param={'queryCode':'Qry_Student_Gift','studentId':'<%=studentId%>'}" 
+		<table class="easyui-datagrid"  align="center" title="现金抵扣券列表" style="width:800px;margin-top:10px;height:300px;" id="couponList" url="<%=path%>/pubData/qryDataListByPage.do?param={'queryCode':'Qry_Student_Gift','studentId':'<%=studentId%>'}" 
 			 pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 			<thead>
 				<tr>
@@ -42,6 +42,8 @@
 	var coupons=[];
 	var minus=0;
 	var name="<div style:'width:300px'>";
+	var allCouponTs=parent.parent.window.getAllCoupon();
+	alert(JSON.stringify(allCouponTs));
 	$("#submit").click(function ()
 	{
 		coupons=[];
