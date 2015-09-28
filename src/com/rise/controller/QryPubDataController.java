@@ -16,7 +16,7 @@ import com.rise.service.QryPubDataService;
 @RequestMapping("/pubData")
 public class QryPubDataController 
 {
-	private static Log log = LogFactory.getLog(StudentController.class);
+	private static Log log = LogFactory.getLog(QryPubDataController.class);
 	
 	@Autowired
 	private QryPubDataService qryPubDataService;
