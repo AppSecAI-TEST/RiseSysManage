@@ -116,7 +116,6 @@
 	      	        <td width="4%"><span>是否退回</span></td>
 	      	        <td width="6%"><a href="javascript:void(0)" id="addGiftBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a></td>
       	        </tr>
-      	        </giftDiv>
       	      <tr style="display:none;" name="addGift" id="addGift" >
       	        <td align="right"><span>赠品类型：</span></td>
       	        <td align="left" parentType="">&nbsp;</td>
@@ -364,7 +363,6 @@
 	//增加赠品
 	$("#addGiftBtn").click(function ()
 	{
-		clearDatas("giftModelTR")
 		var giftModelTR=$("#giftModelTR").clone();
 		
 		//$("#giftModelTR").pa
@@ -479,6 +477,7 @@
 			var height = $(document).height();
 			$('#frame<%=name%>',parent.document).css("height",height+20);
 	    }
+		clearData("giftModelTR")
 	});
 
 	

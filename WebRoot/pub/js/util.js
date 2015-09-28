@@ -228,36 +228,37 @@ function formatClassInst(row) {
 }
 
 //请空name内所有控件的值
-function clearDatas(name) {
-	$("input,select,textarea", $("#" + name)).each(
-			function() {
-				var t = this.type, tag = this.tagName.toLowerCase();
-				if (t == "text" || t == "hidden" || t == "password"
-						|| tag == "textarea") {
-					this.value = "";
-				} else {
-					if (t == "file") {
-						var _24 = $(this);
-						if (!_24.hasClass("textbox-value")) {
-							var _25 = _24.clone().val("");
-							_25.insertAfter(_24);
-							if (_24.data("validatebox")) {
-								_24.validatebox("destroy");
-								_25.validatebox();
-							} else {
-								_24.remove();
-							}
-						}
+function clearData(name) 
+{
+	$('input,select,textarea', $("#"+name)).each(function(){
+			var t = this.type, tag = this.tagName.toLowerCase();
+			if (t == 'text' || t == 'hidden' || t == 'password' || tag == 'textarea'){
+				this.value = '';
+			} else if (t == 'file'){
+				var file = $(this);
+				if (!file.hasClass('textbox-value')){
+					var newfile = file.clone().val('');
+					newfile.insertAfter(file);
+					if (file.data('validatebox')){
+						file.validatebox('destroy');
+						newfile.validatebox();
 					} else {
-						if (t == "checkbox" || t == "radio") {
-							this.checked = false;
-						} else {
-							if (tag == "select") {
-								this.selectedIndex = -1;
-							}
-						}
+						file.remove();
 					}
 				}
-			});
-
+			} else if (t == 'checkbox' || t == 'radio'){
+				this.checked = false;
+			} else if (tag == 'select'){
+				this.selectedIndex = -1;
+			}
+			
+		});
+		var arr =["textbox","numberbox","searchbox","slider","spinner","numberspinner","timespinner","datetimespinner","combo","datebox","datetimebox","combogrid","combotree","combobox"];
+		for(var i=arr.length-1; i>=0; i--){
+			var type = arr[i];
+			var field = $("#"+name).find('.'+type+'-f');
+			if (field.length && field[type]){
+				field[type]('clear');
+			}
+		}
 }

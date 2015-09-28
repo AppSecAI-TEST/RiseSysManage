@@ -15,17 +15,20 @@
 	</style>
 	</head>
 	<body>
-		<table class="easyui-datagrid"  align="center" title="现金抵扣券列表" style="width:800px;margin-top:10px;height:300px;" id="couponList" url="<%=path %>/pubData/qryDataListByPage.do?param={'queryCode':'Qry_Student_Gift','studentId':'<%=studentId%>'}" 
+		<table class="easyui-datagrid"  align="center" title="现金抵扣券列表" style="width:850px;margin-top:10px;height:300px;" id="couponList" url="<%=path %>/pubData/qryDataListByPage.do?param={'queryCode':'Qry_Student_Coupon','studentId':'<%=studentId%>'}" 
 			 pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 			<thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
-					<th field="giftCode" align="center" width="35%"><span>条码</span></th>
-					<th field="amount" align="center" width="7%"><span>面值</span></th>
-					<th field="usableAmount" align="center" width="14%"><span>剩余金额</span></th>
-					<th field="createDate" align="center" width="14%"><span>赠送时间</span></th>
-					<th field="effDate" align="center" width="14%"><span>有效期开始时间</span></th>
-					<th field="expDate" align="center" width="14%"><span>有效期结束时间</span></th>
+					<th field="typeVal" align="center" width="12%"><span>赠券类型</span></th>
+					<th field="giftName" align="center" width="12%"><span>赠券名称</span></th>
+					<th field="giftCode" align="center" width="20%"><span>条码</span></th>
+					<th field="amount" align="center" width="8%"><span>面值</span></th>
+					<th field="usableAmount" align="center" width="9%"><span>剩余金额</span></th>
+					<th field="createDate" align="center" width="9%"><span>赠送时间</span></th>
+					<th field="effDate" align="center" width="10%"><span>有效期<br>开始时间</span></th>
+					<th field="expDate" align="center" width="10%"><span>有效期<br>结束时间</span></th>
+					<th field="giftState" align="center" width="10%"><span>状态</span></th>
 					<input type='hidden'  data-options="field:'studentGiftId'" />
 				</tr>
 			</thead>
