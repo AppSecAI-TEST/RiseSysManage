@@ -200,13 +200,9 @@
 			      	         </tr>
 			      	      </table>
 				</div>
-			
-				
-				<div style="height: 10px;"></div>
-			
-				<div id="dlg" class="easyui-dialog" style="width: 800px; height: 450px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
-			  		<iframe id="frame" name="frame" src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto"  width="700px"></iframe>
-				</div>
+						
+				<iframe id="dlg" class="easyui-dialog" style="width:1000px; height: 450px; padding: 10px 20px" closed="true" modal="true">
+				</iframe>
 	      	  </form>
   		</div>
   	</body>
@@ -534,6 +530,5 @@
 		}
 		
 	}
+	//initCousreGift();
 	</script>
-initCousreGift();
-</script>

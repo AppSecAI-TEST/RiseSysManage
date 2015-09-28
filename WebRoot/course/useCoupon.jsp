@@ -2,6 +2,7 @@
 <%
 	String path = request.getContextPath();
 	String studentId=request.getParameter("studentId");
+	System.out.print("=========="+studentId);
 %>
 <html>
 	<head>
@@ -45,8 +46,8 @@
 	var coupons=[];
 	var minus=0;
 	var name="<div style:'width:300px'>";
-	var allCouponTs=parent.parent.window.getAllCoupon();
-	alert(JSON.stringify(allCouponTs));
+	//var allCouponTs=parent.parent.window.getAllCoupon();
+	//alert(JSON.stringify(allCouponTs));
 	$("#submit").click(function ()
 	{
 		coupons=[];
