@@ -2,7 +2,6 @@
 <%
 	String path = request.getContextPath();
 	String studentId=request.getParameter("studentId");
-	System.out.print("=========="+studentId);
 %>
 <html>
 	<head>
@@ -16,7 +15,7 @@
 	</style>
 	</head>
 	<body>
-		<table class="easyui-datagrid"  align="center" title="现金抵扣券列表" style="width:850px;margin-top:10px;height:300px;" id="couponList" url="<%=path %>/pubData/qryDataListByPage.do?param={'queryCode':'Qry_Student_Coupon','studentId':'<%=studentId%>'}" 
+		<table class="easyui-datagrid"  align="center" title="现金抵扣券列表" style="width:920px;margin-top:10px;height:330px;" id="couponList" url="<%=path %>/pubData/qryDataListByPage.do?param={'queryCode':'Qry_Student_Coupon','studentId':'<%=studentId%>'}" 
 			 pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 			<thead>
 				<tr>
@@ -46,8 +45,6 @@
 	var coupons=[];
 	var minus=0;
 	var name="<div style:'width:300px'>";
-	//var allCouponTs=parent.parent.window.getAllCoupon();
-	//alert(JSON.stringify(allCouponTs));
 	$("#submit").click(function ()
 	{
 		coupons=[];
