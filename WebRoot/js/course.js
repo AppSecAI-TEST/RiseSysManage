@@ -1,7 +1,7 @@
 $(document).ready(function ()
 {  
     $('#parentType').combobox({
-	onChange:function(n,o)
+	 onChange:function(n,o)
 		{
 		     $("#td0").css('display','none');
 		 	 $("#td1").css('display','none');
@@ -328,7 +328,6 @@ function colDis(id)
 			coupons.remove(i);
 		 }
 	}
-	alert(coupons.length);
 	minus=$("#minusAmount").textbox('getValue');
 	favorAmount=$("#favorAmount").textbox('getValue');
 	totalAmount=$("#totalAmount").textbox('getValue');

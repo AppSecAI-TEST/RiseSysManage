@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
+	String studentId="2";
 %>
 <html>
 	<head>
@@ -91,18 +92,18 @@
 		<div class="easyui-panel" style="width:99%;height:auto;" title="合计金额">
 		     	      <table width="100%" cellpadding="5px" class="maintable" >
 		   	            <tr>
-			      	        <td width="5%"  align="right" ><span>总金额：</span></td>
+			      	        <td width="5%"   align="right" ><span>总金额：</span></td>
 			      	        <td width="10%"  align="left" id="totalAmount" >&nbsp;</td>
-			      	        <td width="8%"  align="right" ><span >抵扣总金额：</span></td>
-			      	        <td colspan="8%"  align="left" id="minus" >&nbsp;</td>
+			      	        <td width="8%"   align="right" ><span >抵扣总金额：</span></td>
+			      	        <td colspan="8%" align="left" id="minus" >&nbsp;</td>
 			      	        <td width="10%"  align="right"><span>连报总优惠金额：</span></td>
-			      	        <td width="8%"  align="left" id="favorAmount" >&nbsp;</td>
+			      	        <td width="8%"   align="left" id="favorAmount" >&nbsp;</td>
 			      	        <td width="10%"  align="right">实缴合计金额：</td>
-			      	        <td width="8%"  align="right" id="amount" >&nbsp;</td>
+			      	        <td width="8%"   align="right" id="amount" >&nbsp;</td>
 			      	        <td width="10%"  align="right"><span>原已缴金额：</span></td>
-			      	        <td width="8%"  align="right" id="totalAmount" >&nbsp;</td>
+			      	        <td width="8%"   align="right" id="totalAmount" >&nbsp;</td>
 			      	        <td width="10%"  align="right"><span>本次补缴金额：</span></td>
-			      	        <td width="8%"  align="right" id="amount" >&nbsp;</td>
+			      	        <td width="8%"   align="right" id="amount" >&nbsp;</td>
 		      	         </tr>
 		      	      </table>
 		</div>
@@ -126,25 +127,42 @@
 </html>
 <script type="text/javascript">
 	var minus=0;//抵扣金额
-	var favorAmount;//优惠金额
-	var totalAmount;//课程金额
-	var amount;//实缴金额
+	var favorAmount=0;//优惠金额
+	var totalAmount=0;//课程金额
+	var amount=0;//实缴金额
+	var oldAmount=0;//原已缴金额
+	var addAmount=0;//补缴金额
 	var allCoupons=[];//使用抵扣券
-	var studentCourses=[];//提交课程
+	var allCourseInfos={};//提交课程所有信息
+	var studentCourses=[];//提交课程信息
 	var linkCourses=[];//选择关联已有连报课程
 	var orderCourses=["一","二","三","四","五","六","七","八","九","十"];//连报课程大写顺序
 	var num;//连报年数
 	var oldCourses;//学员已有课程
+	var linkCourseT={};//连报金额汇总表
 	
 	function closeDlg()
 	{
 		$('#dlg').dialog('close');
 	}
+	
 	function linkCourse()
 	{
 		$('#dlg').dialog('open').dialog('setTitle', '关联连报课程');
 		$('#fm').form('clear');
 	
+	}
+	
+	function checkLink()
+	{
+		if(linkCourses.length==0)
+   	    {
+   	    	$.messager.alert('提示',"请选择关联课程!");
+   	    	$("#link").combobox('setValue',"");
+   	    	$("#link").combobox('setText',"");
+   	    	return;
+   	    }
+    	    
 	}
 	
 	//连报课程选择
@@ -184,9 +202,17 @@
 	
 	$("#submit").click(function()
 	{
-		var l=frame0.window.build();
-		studentCourses.push(l);
-	    var str = JSON.stringify(studentCourses);
+		 studentCourses=[];
+		 for(var n=0;n<num;n++)
+		 {
+			var name="frame"+n;
+	   		var l = window.frames[name].window.build();
+	   		studentCourses.push(l);
+		 } 
+		 allCourseInfos.studentCourses=studentCourses;
+		 allCourseInfos.linkCourseT=linkCourseT;
+	    var str = JSON.stringify( allCourseInfos);
+	    alert(str);
 	    $.ajax({
     			url: "/sys/course/addLinkCourses.do",
     			data: "param=" +str,
@@ -219,7 +245,7 @@
 		  favorAmount=0;//优惠金额
 		  totalAmount=0;//课程金额
 		  amount=0;//实缴金额
-		  		
+ 
 		  for(var n=0;n<num;n++)
 		  {
 				var name="frame"+n;
@@ -242,6 +268,17 @@
 			$("#favorAmount").html(favorAmount);
 			$("#totalAmount").html(totalAmount);
 			$("#amount").html(amount);
+			
+			linkCourseT={};//清除
+			linkCourseT.minusAmount=minus;
+			linkCourseT.totalAmount=totalAmount;
+			linkCourseT.favorAmount=favorAmount;
+			linkCourseT.amount=amount;
+			linkCourseT.oldAmount=oldAmount;
+			linkCourseT.addAmount=addAmount;
+			linkCourseT.linkType=num;
+			linkCourseT.studentId='<%=studentId%>';
+			
 	}
 	
 	function getAllCoupon()

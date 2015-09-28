@@ -47,7 +47,7 @@
 	      	        <td align="right"> <span>阶段：</span></td>
 	      	        <td>
 					 <select name="stageId"  id="stageId" class="easyui-combobox" style="width: 150px; height: 28px;"
-	      						data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
+	      						data-options="formatter:formatStageId,onSelect:selectStage,valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#stageId').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>');}"
 	      						url="<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_Set_Price','setPriceId':'10001'}" required="true" >
       	            </select>
@@ -132,7 +132,7 @@
       	        <td><a href='javascript:void(0)' class='linkmore' onclick='delRow(this)' ><span>删除</span></a></td>
      	       </tr>
       	      </table>
-      		
+      		</div>
       		<div style="height: 10px;"></div>
       		<div class="easyui-panel" style="width:100%;height:auto;" title="赠课信息">
       	      <table width="100%" cellpadding="5px" class="maintable" >
@@ -190,13 +190,13 @@
 			   	            </tr>
 			   	            <tr>
 				      	        <td width="10%"  align="right" ><span>课程金额：</span></td>
-				      	        <td width="14%"  align="left" ><input id="totalAmount" name="totalAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"totalAmount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"> </td>
+				      	        <td width="14%"  align="left" ><input id="totalAmount" readonly="readonly"  name="totalAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"totalAmount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"> </td>
 				      	        <td width="12%"  align="right" ><span >现金抵扣券金额：</span></td>
-				      	        <td colspan="3"  align="left" ><input id="minusAmount"   name="minusAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;">  </td>
+				      	        <td colspan="3"  align="left" ><input id="minusAmount"   readonly="readonly"  name="minusAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;">  </td>
 				      	        <td width="11%"  align="right"><span>连报优惠金额：</span></td>
-				      	        <td width="17%"  align="left" ><input id="favorAmount" name="favorAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"favorAmount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"/></td>
+				      	        <td width="17%"  align="left" ><input id="favorAmount"   name="favorAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"favorAmount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"/></td>
 				      	        <td width="12%"  align="right"><span>实缴课程一金额：</span></td>
-				      	        <td width="17%"  align="left" ><input id="amount"     name="amount" type="text"  value="<%=StringUtil.getJSONObjectKeyVal(object,"amount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"> </td>
+				      	        <td width="17%"  align="left" ><input id="amount"   readonly="readonly"   name="amount" type="text"  value="<%=StringUtil.getJSONObjectKeyVal(object,"amount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"> </td>
 			      	         </tr>
 			      	      </table>
 				</div>
@@ -220,7 +220,11 @@
 	var totalAmount=0;//课程金额
 	var amount=0;//实缴金额
  
-	
+	function selectStage(rec)
+	{
+		alert(rec.content);
+		
+	}
 	
 	//增加课程
 	$("#addCourse").click(function()
