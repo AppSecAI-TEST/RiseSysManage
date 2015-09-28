@@ -17,7 +17,20 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		
+		<style>
+			#praiseTab
+			{
+				border-collapse: collapse; border-spacing:0; border: 0px solid #ccc;
+			}
+			
+			#praiseTab td
+			{
+				border:none;
+				margin:0;
+				padding:0;
+			}
+			
+		</style>
 		<script type="text/javascript">
 			$(document).ready(function()
 			{
@@ -214,7 +227,7 @@
       	        </tr>
 	      	      <tr style="display:none;" id="add" align="right">
 	      	        <td  val="">&nbsp;</td>
-	      	        <td  align="center" giftCourseType="">&nbsp;</td>
+	      	        <td align="center" giftCourseType="">&nbsp;</td>
 	      	        <td  align="center"  giftId="">&nbsp;</td>
 	      	        <td  align="center">&nbsp;</td>
 	      	        <td  align="center">&nbsp;</td>
@@ -229,128 +242,133 @@
 			
 			<div style="height: 10px;"></div>
       		<div class="easyui-panel" style="width:100%;height:auto;" title="口碑信息">
-      	      <table width="100%" cellpadding="5px" class="maintable" >
+      	      <table width="100%" cellpadding="5px" id="praiseInfo" class="maintable" >
 	      	      <tr>
-	      	        <td colspan="3" align="right">口碑类型：</td>
-	      	        <td>&nbsp;</td>
-	      	        <td width="13%" align="right">&nbsp;</td>
-	      	        <td width="8%" id="courseHours3"></td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
+	      	        <td align="right" width="120px;"><span>口碑类型：</span></td>
+	      	        <td colspan="9" align="left"><input type="radio" checked="true" name="praise" onclick="changePraise('Y')"><span>可控口碑</span>&nbsp;&nbsp;&nbsp;<input type="radio" name="praise" onclick="changePraise('N')"><span>不可控口碑</span></td>
       	        </tr>
 	      	      <tr>
-	      	        <td width="8%" align="right">口碑来源：</td>
-	      	        <td align="right"><select name="giftCourseType2"  class="easyui-combobox" id="giftCourseType3" style="width: 150px; height: 28px;"
-		      	           data-options="formatter:formatTypeName,  valueField: 'giftType', textField: 'typeName', panelHeight: 'auto'"
-		      	          url="/sys/pubData/qryData.do?param={queryCode:'Qry_Gift_Type',parentType:'COURSE'}" >
+	      	        <td align="right"><span>口碑来源：</span></td>
+	      	        <td align="center" width="170px"><select name="praiseSelect"  class="easyui-combobox" data-options="onSelect:changePraiseSource" id="praiseSelect" style="width: 150px; height: 28px;">
+      	            	<option value=""></option>
+      	            	<option value="activity">活动邀约</option>
+      	            	<option value="ccIntroduce">CC转介绍</option>
+      	            	<option value="teacherInstroduce">老师转介绍</option>
       	            </select></td>
-	      	        <td align="right">活动名称</td>
-	      	        <td><select name="giftCourseType3"  class="easyui-combobox" id="giftCourseType4" style="width: 150px; height: 28px;"
-		      	           data-options="formatter:formatTypeName,  valueField: 'giftType', textField: 'typeName', panelHeight: 'auto'"
-		      	          url="/sys/pubData/qryData.do?param={queryCode:'Qry_Gift_Type',parentType:'COURSE'}" >
-      	            </select></td>
-	      	        <td align="right"><select name="giftCourseType4"  class="easyui-combobox" id="giftCourseType5" style="width: 150px; height: 28px;"
-		      	           data-options="formatter:formatTypeName,  valueField: 'giftType', textField: 'typeName', panelHeight: 'auto'"
-		      	          url="/sys/pubData/qryData.do?param={queryCode:'Qry_Gift_Type',parentType:'COURSE'}" >
-      	            </select></td>
-	      	        <td id="courseHours2"></td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
+	      	        <td colspan="8">
+	      	        	<table width="100%" id="praiseTab">
+	      	        		<tr id="activity" style="display:none;">
+	      	        			<td align="left" colspan="8">
+	      	        			<span>活动名称：</span> 
+	      	        			<select  class="easyui-combobox" id="activeName" style="width: 150px; height: 28px;">
+	      	        				<option value="all">所有</option>
+	      	        				<option value="all">武展</option>
+	      	        				<option value="all">总部</option>
+	      	        			</select>
+	      	        			<select  class="easyui-combobox" id="activeDetail" style="width: 150px; height: 28px;">
+	      	        				<option value="">活动1</option>
+	      	        				<option value="">活动2</option>
+	      	        				<option value="">活动3</option>
+	      	        			</select>
+	      	        			</td>
+	      	        		</tr>
+	      	        		<tr id="ccIntroduce" style="display:none;">
+	      	        			<td align="left" colspan="8">
+	      	        			<span>口碑顾问A：</span>
+	      	        			<select  class="easyui-combobox" id="schoolA" style="width: 150px; height: 28px;">
+	      	        				<option value ="">所有</option>
+	      	        				<option value ="">武展</option>
+	      	        				<option value ="">徐东</option>
+	      	        			<select>
+	      	        			<select  class="easyui-combobox" id="adviserA" style="width: 150px; height: 28px;">
+	      	        				<option value ="">顾问1</option>
+	      	        				<option value ="">顾问2</option>
+	      	        				<option value ="">顾问3</option>
+	      	        			<select>
+	      	        			<span>口碑顾问B：</span>
+	      	        			<select  class="easyui-combobox" id="schoolB" style="width: 150px; height: 28px;">
+	      	        				<option value ="">所有</option>
+	      	        				<option value ="">武展</option>
+	      	        				<option value ="">徐东</option>
+	      	        			<select>
+	      	        			<select  class="easyui-combobox" id="adviserB" style="width: 150px; height: 28px;">
+	      	        				<option value ="">顾问1</option>
+	      	        				<option value ="">顾问2</option>
+	      	        				<option value ="">顾问3</option>
+	      	        			<select>
+	      	        			</td>
+	      	        		</tr>
+	      	        		<tr id="teacherInstroduce" style="display:none;">
+	      	        			<td colspan="8">
+	      	        				<span>口碑顾问A：</span>
+	      	        			<select  class="easyui-combobox" id="schoolsA" style="width: 150px; height: 28px;">
+	      	        				<option value ="">所有</option>
+	      	        				<option value ="">武展</option>
+	      	        				<option value ="">徐东</option>
+	      	        			<select>
+	      	        			<select  class="easyui-combobox" id="teacherA" style="width: 150px; height: 28px;">
+	      	        				<option value ="">顾问1</option>
+	      	        				<option value ="">顾问2</option>
+	      	        				<option value ="">顾问3</option>
+	      	        			<select>
+	      	        			<span>口碑顾问B：</span>
+	      	        			<select  class="easyui-combobox" id="schoolsB" style="width: 150px; height: 28px;">
+	      	        				<option value ="">所有</option>
+	      	        				<option value ="">武展</option>
+	      	        				<option value ="">徐东</option>
+	      	        			<select>
+	      	        			<select  class="easyui-combobox" id="teacherB" style="width: 150px; height: 28px;">
+	      	        				<option value ="">顾问1</option>
+	      	        				<option value ="">顾问2</option>
+	      	        				<option value ="">顾问3</option>
+	      	        			<select>
+	      	        			<a href="javascript:void(0)" id="qryStudent" style="width:80px" class="easyui-linkbutton" iconCls="icon-add" plain="true">查询学生</a>
+	      	        			<a href="javascript:void(0)" id="recordGifts" style="width:80px" class="easyui-linkbutton" iconCls="icon-add" plain="true">录入赠品</a>
+	      	        			</td>
+	      	        		</tr>
+	      	        		<tr id="teacherInstroduce" style="display:none;">
+	      	        			<td width="80px" align="center" style="border-top:1px solid #ccc;border-right:1px solid #ccc;"><span>学员姓名：</span></td>
+	      	        			<td width="100px" align="center" style="border-top:1px solid #ccc;border-right:1px solid #ccc;">&nbsp;</td>
+	      	        			<td width="80px" align="center" style="border-top:1px solid #ccc;border-right:1px solid #ccc;"><span>证件号码：</span></td>
+	      	        			<td width="200px" align="center" style="border-top:1px solid #ccc;border-right:1px solid #ccc;">&nbsp;</td>
+	      	        			<td width="80px" align="center" style="border-top:1px solid #ccc;border-right:1px solid #ccc;"><span>班级：</span></td>
+	      	        			<td width="100px" align="center" style="border-top:1px solid #ccc;border-right:1px solid #ccc;">&nbsp;</td>
+	      	        			<td width="80px"  align="center"style="border-top:1px solid #ccc;border-right:1px solid #ccc;"><span>赠品：</span></td>
+	      	        			<td  align="center"style="border-top:1px solid #ccc;">&nbsp;</td>
+	      	        		</tr>
+	      	        	</table>
+	      	        </td>
       	        </tr>
-	      	      <tr>
-	      	        <td align="right">&nbsp;</td>
-	      	        <td align="right">&nbsp;</td>
-	      	        <td align="right">CC1:</td>
-	      	        <td><select name="giftCourseType5"  class="easyui-combobox" id="giftCourseType6" style="width: 150px; height: 28px;"
-		      	           data-options="formatter:formatTypeName,  valueField: 'giftType', textField: 'typeName', panelHeight: 'auto'"
-		      	          url="/sys/pubData/qryData.do?param={queryCode:'Qry_Gift_Type',parentType:'COURSE'}" >
-	      	          </select></td>
-	      	        <td><select name="giftCourseType11"  class="easyui-combobox" id="giftCourseType12" style="width: 150px; height: 28px;"
-		      	           data-options="formatter:formatTypeName,  valueField: 'giftType', textField: 'typeName', panelHeight: 'auto'"
-		      	          url="/sys/pubData/qryData.do?param={queryCode:'Qry_Gift_Type',parentType:'COURSE'}" >
-      	            </select></td>
-	      	        <td align="right">CC1:</td>
-	      	        <td><select name="giftCourseType5"  class="easyui-combobox" id="giftCourseType6" style="width: 150px; height: 28px;"
-		      	           data-options="formatter:formatTypeName,  valueField: 'giftType', textField: 'typeName', panelHeight: 'auto'"
-		      	          url="/sys/pubData/qryData.do?param={queryCode:'Qry_Gift_Type',parentType:'COURSE'}" >
-	      	          </select></td>
-	      	        <td><select name="giftCourseType6"  class="easyui-combobox" id="giftCourseType7" style="width: 150px; height: 28px;"
-		      	           data-options="formatter:formatTypeName,  valueField: 'giftType', textField: 'typeName', panelHeight: 'auto'"
-		      	          url="/sys/pubData/qryData.do?param={queryCode:'Qry_Gift_Type',parentType:'COURSE'}" >
-      	            </select></td>
-	      	        <td>&nbsp;</td>
-	      	        <td>&nbsp;</td>
-   	            </tr>
-	      	      <tr>
-	      	        <td align="right">&nbsp;</td>
-	      	        <td align="right">&nbsp;</td>
-	      	        <td align="right">老师A：</td>
-	      	        <td><select name="giftCourseType7"  class="easyui-combobox" id="giftCourseType8" style="width: 150px; height: 28px;"
-		      	           data-options="formatter:formatTypeName,  valueField: 'giftType', textField: 'typeName', panelHeight: 'auto'"
-		      	          url="/sys/pubData/qryData.do?param={queryCode:'Qry_Gift_Type',parentType:'COURSE'}" >
-      	            </select></td>
-	      	        <td><select name="giftCourseType8"  class="easyui-combobox" id="giftCourseType9" style="width: 150px; height: 28px;"
-		      	           data-options="formatter:formatTypeName,  valueField: 'giftType', textField: 'typeName', panelHeight: 'auto'"
-		      	          url="/sys/pubData/qryData.do?param={queryCode:'Qry_Gift_Type',parentType:'COURSE'}" >
-      	            </select></td>
-	      	        <td align="right">老师B:</td>
-	      	        <td><select name="giftCourseType9"  class="easyui-combobox" id="giftCourseType10" style="width: 150px; height: 28px;"
-		      	           data-options="formatter:formatTypeName,  valueField: 'giftType', textField: 'typeName', panelHeight: 'auto'"
-		      	          url="/sys/pubData/qryData.do?param={queryCode:'Qry_Gift_Type',parentType:'COURSE'}" >
-	      	          </select></td>
-	      	        <td><select name="giftCourseType10"  class="easyui-combobox" id="giftCourseType11" style="width: 150px; height: 28px;"
-		      	           data-options="formatter:formatTypeName,  valueField: 'giftType', textField: 'typeName', panelHeight: 'auto'"
-		      	          url="/sys/pubData/qryData.do?param={queryCode:'Qry_Gift_Type',parentType:'COURSE'}" >
-      	            </select></td>
-	      	        <td>查询学生</td>
-	      	        <td>录入赠品</td>
-   	            </tr>
-	      	      <tr>
-	      	        <td align="right">&nbsp;</td>
-	      	        <td align="right">&nbsp;</td>
-	      	        <td align="right">学员姓名</td>
-	      	        <td>&nbsp;</td>
-	      	        <td align="right">证件号码：</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>班级</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>赠品</td>
-	      	        <td>&nbsp;</td>
+	      	    <tr style="display:none;">
+	      	   		<td colspan="10">	      	        			
+	      	   			<a href="javascript:void(0)" id="searchStudent" style="width:150px" class="easyui-linkbutton" iconCls="icon-add" plain="true"><span>学员检索</span></a>
+	      	   		</td>     
       	        </tr>
-	      	      <tr>
-	      	        <td align="right">学员查询</td>
-	      	        <td align="right">转介绍学员姓名</td>
-	      	        <td align="right">&nbsp;</td>
-	      	        <td>转学员      	            </td>
-	      	        <td align="right"><select name="giftCourseType12"  class="easyui-combobox" id="giftCourseType13" style="width: 150px; height: 28px;"
-		      	           data-options="formatter:formatTypeName,  valueField: 'giftType', textField: 'typeName', panelHeight: 'auto'"
-		      	          url="/sys/pubData/qryData.do?param={queryCode:'Qry_Gift_Type',parentType:'COURSE'}" >
-      	            </select></td>
-	      	        <td>&nbsp;</td>
-	      	        <td>转介绍老师</td>
-	      	        <td>&nbsp;</td>
-	      	        <td>转介绍员工姓名</td>
-	      	        <td>&nbsp;</td>
-      	        </tr>
-	      	      <tr>
-	      	        <td align="right">&nbsp;</td>
-	      	        <td width="12%" align="right">&nbsp;</td>
-	      	        <td width="8%" align="right">&nbsp;</td>
-	      	        <td width="12%">&nbsp;</td>
-	      	        <td align="right">&nbsp;</td>
-	      	        <td>&nbsp;</td>
-	      	        <td width="12%">&nbsp;</td>
-	      	        <td width="13%">&nbsp;</td>
-	      	        <td width="6%">&nbsp;</td>
-	      	       
-	      	        <td width="8%">&nbsp;</td>
+      	        <tr style="display:none;">
+      	        	<td align="center"><span>转介绍学员姓名：</span></td>
+      	        	<td align="center"><input type="text" class="easyui-textbox" style="width:150px"></td>
+      	        	<td align="center"><span>转介绍学员</span></td>
+      	        	<td align="center" width="110px">
+      	        		<select  class="easyui-combobox" style="width: 100px; height: 28px;">
+	      	        		<option value ="">身份证</option>
+	      	        		<option value ="">护照</option>
+	      	        	<select>
+	      	        </td>
+	      	        <td><input type="text" class="easyui-textbox" style="width:150px"></td>
+	      	        <td align="center"><span>转介绍老师:</span></td>
+	      	        <td colspan="2">
+	      	        	<select  class="easyui-combobox" style="width: 100px; height: 28px;">
+	      	        		<option value ="">选择校区</option>
+	      	        	<select>
+	      	        	<select  class="easyui-combobox" style="width: 100px; height: 28px;">
+	      	        		<option value ="">选择老师</option>
+	      	        	<select>
+	      	        </td>
+	      	         <td align="center"><span>转介绍员工姓名:</span></td>
+	      	         <td><input type="text" class="easyui-textbox" style="width:150px"></td>
       	        </tr>
       	      </table>
-</div>
+			</div>
 			
 			<div style="height: 10px;"></div>
 			<div class="easyui-panel" style="width:100%;height:auto;" title="课程费用">
@@ -701,6 +719,58 @@
 			 
 		}
 		
+	}
+	
+	function changePraiseSource()
+	{
+		var source =$("#praiseSelect").combobox("getValue");
+		if(source=="")
+		{
+			$("#praiseTab").find("tr").css("display","none");
+		}
+		else
+		{
+			$("#praiseTab").find("tr").each(function(){
+				if($(this).attr("id")!=source)
+				{
+					$(this).css("display","none");
+				}
+				else
+				{
+					$(this).css("display","table-row");
+				}	
+			})
+		}	
+	}
+	
+	function changePraise(flag)
+	{
+		if(flag=="Y")
+		{
+			$("#praiseInfo").find("tr").each(function(index){
+				if(index==1)
+				{
+					$(this).css("display","table-row");
+				}
+				else if(index>1)
+				{
+					$(this).css("display","none");
+				}	
+			})
+		}
+		else
+		{
+			$("#praiseInfo").find("tr").each(function(index){
+				if(index==1)
+				{
+					$(this).css("display","none");
+				}
+				else if(index>1)
+				{
+					$(this).css("display","table-row");
+				}	
+			})
+		}	
 	}
 	//initCousreGift();
 	</script>
