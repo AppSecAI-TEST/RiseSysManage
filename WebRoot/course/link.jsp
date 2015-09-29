@@ -57,7 +57,7 @@
       					  <td align="right"><span>备注：</span></td>
       					  <td colspan="5"><textarea rows="2" cols="120" id="vipRemark" name="vipRemark" class="easyui-validatebox textbox"></textarea></td>
    					  </tr>
-      					<tr>
+      				  <tr>
       					  <td align="right"><span>关联已报课程：</span></td>
       					  <td><href="javascript:void(0)" id="addArchives" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="linkCourse()">打开学员之前的课程列表关联连报</a></td>
       					  <td align="right"><span>连报类型：</span></td>
@@ -74,17 +74,17 @@
 	      	</div>
 	     <div id='frms'> 		 
 			
-			<iframe id="frame0" name="frame0"  style="display:none"  src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
+			<iframe id="frame0" name="frame0"  style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
 		
-			<iframe id="frame1" name="frame1"  style="display:none"  src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
+			<iframe id="frame1" name="frame1"  style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
 			
-			<iframe id="frame2" name="frame2" style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
+			<iframe id="frame2" name="frame2"  style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
 		
-			<iframe id="frame3" name="frame3" style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
+			<iframe id="frame3" name="frame3"  style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
 			
-			<iframe id="frame4" name="frame4" style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
+			<iframe id="frame4" name="frame4"  style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
 		
-			<iframe id="frame5" name="frame5" style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
+			<iframe id="frame5" name="frame5"  style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
 				
 		</div>
 		
