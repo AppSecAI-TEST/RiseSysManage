@@ -119,7 +119,7 @@
 	  			</table>
   			</form>
   			<div id="toolbar">
-    			<a href="javascript:void(0)" id="addCourse" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addCourse()">添加课程</a>
+    			<a href="javascript:void(0)" id="addCourse" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加课程</a>
     			<a href="javascript:void(0)" id="updateCourse" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="updateCourse()">修改</a>
     			<a href="javascript:void(0)" id="courseDetail" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="courseDetail()">浏览</a>
   			</div>
