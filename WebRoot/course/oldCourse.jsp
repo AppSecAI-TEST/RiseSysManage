@@ -49,30 +49,30 @@ a {
 		<input type="hidden" id="studentId" value="<%=studentId%>">
 		<div id="baseInfo" class="easyui-panel" title="基本信息"
 			style="width: 900px">
-			<table width="100%" class="maintable">
+			<table width="100%" class="maintable" id="stuBaseInfo">
 				<tr>
 					<td width="70px">
 						<span>学员姓名：</span>
 					</td>
-					<td width="100px"></td>
+					<td width="100px"><span></span></td>
 					<td width="70px">
 						<span>英文名：</span>
 					</td>
-					<td width="180px"></td>
+					<td width="180px"><span></span></td>
 					<td width="70px">
 						<span>出生日期：</span>
 					</td>
-					<td width="170px"></td>
+					<td width="170px"><span></span></td>
 				</tr>
 				<tr>
 					<td>
 						<span>性别：</span>
 					</td>
-					<td></td>
+					<td><span></span></td>
 					<td>
 						<span>证件号码：</span>
 					</td>
-					<td colspan="2"></td>
+					<td colspan="2"><span></span></td>
 					<td align="center">
 						<a href="javascript:void(0)" id="submit" class="easyui-linkbutton"
 							iconCls="icon-ok" style="width: 120px; height: 28px;"><span>关联连报</span>
@@ -205,6 +205,7 @@ $("#submit").click(function() {
 
 $(document).ready(
 		function() {
+			loadStuBaseInfo();
 			var stu = {};
 			stu.studentId = $("#studentId").val();
 			stu.queryCode = 'Qry_Student_Courses';
@@ -327,4 +328,37 @@ function relatedLink(obj) {
 
 	});
 }
+
+function loadStuBaseInfo()
+	{
+		$.ajax({
+			type : "POST",
+			url: "/sys/student/qryStudentById.do",
+			data: "studentId="+$("#studentId").val()+"&funcNodeId=1002",
+			async: false,
+			dataType:"json",
+			beforeSend: function()
+	    	{
+	    		$.messager.progress({title : '系统消息', msg : '正在加载数据，请稍等……'});
+	    	},
+	    	success: function(data) {
+	    		$.messager.progress('close');
+	    		if(data.studentObj!=undefined&&data.studentObj!=null)
+	    		{
+	    			var obj =data.studentObj;
+	    			var tr1 =$("#stuBaseInfo").find("tr:eq(0)");
+	    			tr1.find("td:eq(1)").find("span").html(obj.name);
+	    			tr1.find("td:eq(3)").find("span").html(obj.byName);
+	    			tr1.find("td:eq(5)").find("span").html(obj.birthday);
+	    			var tr2 =$("#stuBaseInfo").find("tr:eq(1)");
+	    			tr2.find("td:eq(1)").find("span").html(obj.sexVal);
+	    			tr2.find("td:eq(3)").find("span").html(obj.identityId);
+	    		}	
+	        },
+	        error:function(){
+	        	$.messager.progress('close'); 
+	        }
+	    	
+		});
+	}
 </script>

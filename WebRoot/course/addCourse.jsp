@@ -29,6 +29,7 @@
 	<body>
 		<div class="easyui-panel" style="width: 1200px" title="学员基础信息">
 			<form id="studentFm">
+				<input type="hidden" id="studentId" name="studentId" value="<%=studentId%>">
 				<input type="hidden" id="handlerId" name="handlerId"
 					value="${sessionScope.StaffT.staffId}" />
 				<input type="hidden" id="schoolId" name="schoolId"
