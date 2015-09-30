@@ -519,7 +519,8 @@
 		$('#dlg').dialog({
 			title:"使用抵扣券",
 		});
-		$('#dlg').attr("src","/sys/course/useCoupon.jsp?studentId=2");
+		alert($("#studentId").val())
+		$('#dlg').attr("src","/sys/course/useCoupon.jsp?studentId="+$("#studentId").val());
 		$('#dlg').dialog("open");
 	}
 	

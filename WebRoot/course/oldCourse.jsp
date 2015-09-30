@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
+	String studentId =request.getParameter("studentId");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -45,6 +46,7 @@ a {
 				</p>
 			</div>
 		</div>
+		<input type="hidden" id="studentId" value="<%=studentId%>">
 		<div id="baseInfo" class="easyui-panel" title="基本信息"
 			style="width: 900px">
 			<table width="100%" class="maintable">
@@ -204,7 +206,7 @@ $("#submit").click(function() {
 $(document).ready(
 		function() {
 			var stu = {};
-			stu.studentId = '2';
+			stu.studentId = $("#studentId").val();
 			stu.queryCode = 'Qry_Student_Courses';
 			var str = JSON.stringify(stu);
 			$.ajax( {

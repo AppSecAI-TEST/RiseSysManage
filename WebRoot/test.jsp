@@ -6,27 +6,25 @@
 <html>
 	<head>
 		<title>例子</title>
-		<%@ include file="common/head.jsp" %>
-		<%@ include file="common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/pub/js/easyui/src/jquery.form.js"></script>
+		<%@ include file="common/head.jsp"%>
+		<%@ include file="common/formvalidator.jsp"%>
+</script>
 	</head>
 	<body>
-		<div id ="ff">
-			<form id="fff">
-			<select class="easyui-combobox">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-			</select>
-			<input type="text" class="easyui-textbox">
-			<input type="text" class="easyui-datebox" id="aaa" required="true">
-			<input type="radio">11111
-			<input type="checkbox">11111
-			</form>
-			<a onclick="clearForm()">清空清空</a>
-		 </div>	
+		<select name="courseTypeName" data-options="onChange:changeCourseType"
+			class="easyui-combobox" id="courseTypeName"
+			style="width: 150px; height: 28px;">
+			<option value="normal">
+				常规课
+			</option>
+			<option value="short">
+				短期课
+			</option>
+		</select>
 	</body>
-</html>	
+</html>
 <script>
-	function clearForm(){$("#fff").form("clear")};
+function changeCourseType() {
+	alert(123)
+};
 </script>

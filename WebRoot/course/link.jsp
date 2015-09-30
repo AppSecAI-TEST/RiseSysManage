@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
-	String studentId="2";
+	String studentId=request.getParameter("studentId");
 %>
 <html>
 	<head>
@@ -18,6 +18,7 @@
       		 
 			<div class="easyui-panel" style="width:99%;" title="学员基础信息">
 	      		<form id="studentFm">
+	      			<input type="hidden" id="studentId" name="studentId" value="<%=studentId%>">
 	      			<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
 	      			<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
 	      			<table width="100%" cellpadding="5px" class="maintable" id="addStudentTd">
@@ -27,22 +28,22 @@
 	      						<span>学员姓名：</span>
 	      					</td>
 	      					<td width="25%">
-	      						<span>王兄阿尔</span>
+	      						<span></span>
 	      					</td>
 	      					<td width="13%" align="right">
 	      						<span>出生日期：</span>
 	      					</td>
 	      					<td width="15%">
-	      						<span>2012-12-12</span>
+	      						<span></span>
 	      					</td>
 	      					<td align="right"><span>证件号码：</span></td>
-	      					<td><span>422822</span></td>
+	      					<td><span></span></td>
       					</tr>
 	      				<tr>
 	      					<td align="right">
 	      						<span>性别：</span>
 	      					</td>
-	      					<td><span>男</span></td>
+	      					<td><span></span></td>
 	      					<td align="right"><span>缴费时间：</span></td>
 	      					<td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 28px;"/></td>
 	      					<td align="right"><span>课程类型：</span></td>
@@ -109,7 +110,7 @@
 		</div>
 					
 		<div id="dlg" class="easyui-dialog" style="width: 1000px; height: 550px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
- 				<iframe id="frame2" name="frame2"   src="/sys/course/oldCourse.jsp"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" height="445px" width="100%"></iframe>
+ 				<iframe id="frame2" name="frame2"   src="/sys/course/oldCourse.jsp?studentId=<%=studentId%>"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" height="445px" width="100%"></iframe>
   	   </div>
 	 
 		<div style="margin-top: 20px;">
@@ -126,6 +127,7 @@
 
 </html>
 <script type="text/javascript">
+	loadStuBaseInfo();
 	var minus=0;//抵扣金额
 	var favorAmount=0;//优惠金额
 	var totalAmount=0;//课程金额
@@ -294,6 +296,37 @@
 	   		}
 		 }
 		 return allCoupons;
+	}
+	
+	function loadStuBaseInfo()
+	{
+		$.ajax({
+			type : "POST",
+			url: "/sys/student/qryStudentById.do",
+			data: "studentId="+$("#studentId").val()+"&funcNodeId=1002",
+			async: false,
+			dataType:"json",
+			beforeSend: function()
+	    	{
+	    		$.messager.progress({title : '系统消息', msg : '正在加载数据，请稍等……'});
+	    	},
+	    	success: function(data) {
+	    		$.messager.progress('close');
+	    		if(data.studentObj!=undefined&&data.studentObj!=null)
+	    		{
+	    			var obj =data.studentObj;
+	    			var tr1 =$("#addStudentTd").find("tr:eq(0)");
+	    			tr1.find("td:eq(1)").find("span").html(obj.name);
+	    			tr1.find("td:eq(3)").find("span").html(obj.birthday);
+	    			tr1.find("td:eq(5)").find("span").html(obj.identityId);
+	    			$("#addStudentTd").find("tr:eq(1)").find("td:eq(1)").find("span").html(obj.sexVal);
+	    		}	
+	        },
+	        error:function(){
+	        	$.messager.progress('close'); 
+	        }
+	    	
+		});
 	}
 	
 	</script>

@@ -25,12 +25,14 @@
 	  					<td>
 	  						<input class="easyui-textbox"  name="studentName" id="studentName" style="width:150px;" />
 	  					</td>
+	  					<td align="right">课程状态:</td>
+	  					<td>
+	  						<input class="easyui-combobox"  name="courseState" id="courseState" style="width:150px;" />
+	  					</td>
 	  					<td align="right">缴费时间:</td>
 	  					<td>
 	  						<input class="easyui-datebox" name="payStartTime" id="payStartTime" style="width:150px;" />
-	  					</td>
-	  					<td>至:</td>
-	  					<td>
+	  						&nbsp;至:&nbsp;
 	  						<input class="easyui-datebox" name="payEndTime" id="payEndTime"  style="width:150px;" />
 	  					</td>
 	  				</tr>
@@ -43,12 +45,14 @@
 	  					<td>
 	  						<input class="easyui-textbox" name="identityId" id="identityId" style="width:150px;" />
 	  					</td>
+	  					<td align="right">赠品信息:</td>
+	  					<td>
+	  						<input class="easyui-combobox" name="giftType" id="giftType" style="width:150px;" />
+	  					</td>
 	  					<td align="right">退费时间:</td>
 	  					<td>
 	  						<input class="easyui-datebox" name="feeBackStartTime" id="feeBackStartTime" style="width:150px;" />
-	  					</td>
-	  					<td>至:</td>
-	  					<td>
+	  					&nbsp;至:&nbsp;
 	  						<input class="easyui-datebox" name="feeBackEndTime" id="feeBackEndTime" style="width:150px" />
 	  					</td>
 	  				</tr>
@@ -61,32 +65,18 @@
 	  					<td>
 	  						<input class="easyui-textbox" name="dutyAdviser" id="dutyAdviser" style="width:150px;" />
 	  					</td>
-	  					<td align="right">结课时间:</td>
-	  					<td>
-	  						<input class="easyui-datebox" name="classOverStartTime" id="classOverStartTime" style="width:150px;" />
-	  					</td>
-	  					<td>至:</td>
-	  					<td>
-	  						<input class="easyui-datebox" name="classOverEndTime" id="classOverEndTime"  style="width:150px;" />
-	  					</td>
-	  				</tr>
-	  				<tr>
-	  					<td align="right">课程状态:</td>
-	  					<td>
-	  						<input class="easyui-combobox"  name="courseState" id="courseState" style="width:150px;" />
-	  					</td>
-	  					<td align="right">赠品信息:</td>
-	  					<td>
-	  						<input class="easyui-combobox" name="giftType" id="giftType" style="width:150px;" />
-	  					</td>
 	  					<td align="right">赠课信息:</td>
 	  					<td>
 	  						<select class="easyui-combobox"  name="giftClassType" id="giftClassType" style="width:150px;" />
 	  						
 	  						</select>
 	  					</td>
-	  					<td></td>
-	  					<td><a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" onclick="qryData()">查询</a></td>
+	  					<td align="right">结课时间:</td>
+	  					<td>
+	  						<input class="easyui-datebox" name="classOverStartTime" id="classOverStartTime" style="width:150px;" />
+	  					&nbsp;至:&nbsp;
+	  						<input class="easyui-datebox" name="classOverEndTime" id="classOverEndTime"  style="width:150px;" />
+	  					</td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right">课程类型:</td>
@@ -113,8 +103,8 @@
 	  							
 	  						</select>
 	  					</td>
-	  					<td></td>
-	  					<td> <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" style="width:150px" id="reset" onclick="">重置</a></td>	
+	  					<td colspan="2"> <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qrybt" onclick="">查询</a>
+	  					&nbsp;&nbsp; <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:150px" id="reset" onclick="">重置</a></td>	
 	  				</tr>	
 	  			</table>
   			</form>
