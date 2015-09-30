@@ -283,6 +283,7 @@
 			
 	}
 	
+	//获取所有连报课程已使用的抵扣券
 	function getAllCoupon()
 	{
 		 allCoupons=[];
