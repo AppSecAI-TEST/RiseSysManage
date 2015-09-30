@@ -47,7 +47,7 @@
 	      	        <td align="right"> <span>阶段：</span></td>
 	      	        <td>
 					 <select name="stageId"  id="stageId" class="easyui-combobox" style="width: 150px; height: 28px;"
-	      						data-options="formatter:formatStageId,onSelect:selectStage,valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
+	      						data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#stageId').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>');}"
 	      						url="<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_Set_Price','setPriceId':'10001'}" required="true" >
       	            </select>
@@ -220,12 +220,6 @@
 	var totalAmount=0;//课程金额
 	var amount=0;//实缴金额
  
-	function selectStage(rec)
-	{
-		alert(rec.content);
-		
-	}
-	
 	//增加课程
 	$("#addCourse").click(function()
 	{
@@ -353,7 +347,7 @@
                     }
                 }
 				 
-				
+				$(node).attr("giftName",giftName);
 				$(node).attr("amount",amount);
 				$(node).attr("giftId",giftId);
 				$(node).attr("giftType",giftTypeVal);
@@ -417,6 +411,7 @@
 			{
 				 var  tds=$(this).children('td');
 			 
+				 var giftName=tds.eq(3).attr("giftName");
 				 var  amount=tds.eq(3).attr('amount');
 				 var  effNum=tds.eq(3).attr('effNum');
 				 var  unit=tds.eq(3).attr('unit');
@@ -430,6 +425,7 @@
 				 
 				 gift.studentId=$("#studentId").val();
 				
+				 gift.giftName=giftName;
 				 gift.usableAmount=amount;
 				 gift.amount=amount;
 				 gift.studentGiftId=studentGiftId;
@@ -510,7 +506,6 @@
 				$("#minusAmount").textbox('setValue',usableAmountT);
 				
 			 }
-			 
 		}
 	}
 	
@@ -535,5 +530,5 @@
 		}
 		
 	}
-	//initCousreGift();
+	initCousreGift();
 	</script>
