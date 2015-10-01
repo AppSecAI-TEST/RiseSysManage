@@ -8,7 +8,7 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/js/student/student.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/course/addCourse.js"></script>
   	</head>
   
   	<body>
@@ -118,58 +118,9 @@
 			</table>
 		</div>
 		<div id="toolbar">
-   			<a href="javascript:void(0)" id="addStudent" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">学员注册</a>
-   			<a href="javascript:void(0)" id="updateStudent" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;" funcNodeId="1002">修改档案</a>
-   			<a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">浏览</a>
-   			<a href="javascript:void(0)" id="addActivity" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">活动奖项</a>
-			<a href="javascript:void(0)" id="batchUpdate" class="easyui-linkbutton" iconCls="icon-edit" style="width: 120px;">批量修改责任人</a>
+   			<a href="javascript:void(0)" id="single" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">单报</a>
+   			<a href="javascript:void(0)" id="multiple" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">连报</a>
+			<a href="javascript:void(0)" id="backBt" class="easyui-linkbutton" iconCls="icon-back" style="width: 120px;">返回</a>
 		</div>
-		<div id="dlg" class="easyui-dialog" style="width:900px;" closed="true" data-options="modal:true" buttons="#dlgBtn">
-  			<form id="batchUpdateFm" method="post">
-  				<input type="hidden" id="updateStudentId" name="updateStudentId"/>
-  				<input type="hidden" id="handlerId" name="handlerId"/>
-  				<h2 style="text-align: center;">客户关怀和责任顾问批量调整单</h1>
-  				<table width="100%" cellspacing="2">
-  					<tr>
-  						<td width="15%">&nbsp;</td>
-  						<td align="right" width="20%"><span>责任顾问统一调整：</span></td>
-  						<td width="15%">
-  							<select id="updateAdvisterId" name="updateAdvisterId" class="easyui-combobox" style="width: 114px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
-      						 onLoadSuccess:function(data){if(data.length > 0)$('#updateAdvisterId').combobox('setValue',data[0].staffId);}"
-      						url="<%=path %>/pubData/qryStaffList.do?post=002&schoolId=${sessionScope.StaffT.schoolId}">
-       						</select>
-  						</td>
-  						<td align="right" width="20%"><span>客户关怀统一调整：</span></td>
-  						<td width="15%">
-  							<select id="updateCarer" name="updateCarer" class="easyui-combobox" style="width: 114px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
-      						 onLoadSuccess:function(data){if(data.length > 0)$('#updateCarer').combobox('setValue',data[0].staffId);}"
-      						url="<%=path %>/pubData/qryStaffList.do?post=003&schoolId=${sessionScope.StaffT.schoolId}">
-       						</select>
-  						</td>
-  						<td width="15%">&nbsp;</td>
-  					</tr>
-  				</table>
-				<table class="easyui-datagrid" style="width:100%" id="batch_update_data">
-					<thead>
-						<tr>
-							<th data-options="field:'schoolName',width:80,align:'center'">所属校区</th>
-							<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
-							<th data-options="field:'sexVal',width:50,align:'center'">性别</th>
-							<th data-options="field:'phone',width:250,align:'center'">联系电话</th>
-							<th data-options="field:'createDate',width:100,align:'center'">建档时间</th>
-							<th data-options="field:'dutyAdvisterName',width:100,align:'center'">责任顾问</th>
-							<th data-options="field:'carerName',width:100,align:'center'">客户关怀</th>
-						</tr>
-					</thead>
-				</table>
-  			</form>
-  		</div>
-  		<div id="dlgBtn">
-    		<a href="javascript:void(0)" id="batchUpdateSubmit" class="easyui-linkbutton" iconCls="icon-ok">提交</a> 
-    		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
-  		</div>
-  		<%@ include file="../common/pub.jsp" %>
  	</body>
 </html>

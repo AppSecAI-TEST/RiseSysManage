@@ -20,27 +20,4 @@ public class CourseManageController {
 
 	@Autowired
 	private CourseManageService courseManageService;
-	
-	@RequestMapping(value="/qryCourseInfo.do")
-	public void qryCourseInfo(HttpServletRequest request,HttpServletResponse response,String page,String rows,String json)
-	{
-		PrintWriter out = null;
-		try {
-			response.setCharacterEncoding("utf-8");
-			out = response.getWriter();
-			Integer pageNumInt = Integer.parseInt(page)-1;
-			Integer pageSizeInt = Integer.parseInt(rows);
-			String retVal = courseManageService.qryCourseInfo(pageNumInt, pageSizeInt, json);
-			out.write(retVal);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null){
-				out.close();
-			}
-		}
-	}
-	
 }

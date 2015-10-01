@@ -7,32 +7,35 @@
 	<head>
 	<%@ include file="../common/head.jsp" %>
 	<%@ include file="../common/formvalidator.jsp" %>
+	<style>
+		.datagrid
+		{
+			min-width:800px;
+		}
+	</style>
 	</head>
 	<body>
-	 
-	      	
-	      	<div style="padding:5px 0; width:800px;">
-			<table class="easyui-datagrid"  title="使用现金抵扣券" style="height:400px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?param={'queryCode':'Qry_Student_Gift','studentId':'<%=studentId%>'}" 
-				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
-				<thead>
-					<tr>s
-						<th width="6" data-options="field:'ck',checkbox:true"></th>
-						<th width="20" data-options="field:'giftCode',width:100,align:'center'">条码</th>
-						<th width="20" data-options="field:'amount',width:30,align:'center'">面值</th>
-						<th width="20" data-options="field:'usableAmount',width:30,align:'center'">剩余金额</th>
-						<th width="20" data-options="field:'createDate',width:60,align:'center'">赠送时间</th>
-						<th width="20" data-options="field:'effDate',width:60,align:'center'">有效期开始时间</th>
-						<th width="20" data-options="field:'expDate',width:60,align:'center'">有效期结束时间</th>
-						<input type='hidden'  data-options="field:'studentGiftId'" />
-					</tr>
-				</thead>
-			</table>
-		</div>
-		<div style="margin-top: 10px;">
-      		 
-	      			<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      			&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onClick="javascript:window.history.back()">返回</a>
-	      	 
+		<table class="easyui-datagrid"  align="center" title="现金抵扣券列表" style="width:920px;margin-top:10px;height:330px;" id="couponList" url="<%=path %>/pubData/qryDataListByPage.do?param={'queryCode':'Qry_Student_Coupon','studentId':'<%=studentId%>'}" 
+			 pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
+			<thead>
+				<tr>
+					<th data-options="field:'ck',checkbox:true"></th>
+					<th field="typeVal" align="center" width="12%"><span>赠券类型</span></th>
+					<th field="giftName" align="center" width="12%"><span>赠券名称</span></th>
+					<th field="giftCode" align="center" width="20%"><span>条码</span></th>
+					<th field="amount" align="center" width="8%"><span>面值</span></th>
+					<th field="usableAmount" align="center" width="9%"><span>剩余金额</span></th>
+					<th field="createDate" align="center" width="9%"><span>赠送时间</span></th>
+					<th field="effDate" align="center" width="10%"><span>有效期<br>开始时间</span></th>
+					<th field="expDate" align="center" width="10%"><span>有效期<br>结束时间</span></th>
+					<th field="giftState" align="center" width="10%"><span>状态</span></th>
+					<input type='hidden'  data-options="field:'studentGiftId'" />
+				</tr>
+			</thead>
+		</table>
+		<div style="margin-top: 10px;text-align:center;">
+	      	<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
+	      	&nbsp;<a href="javascript:void(0)" id="back" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;">返回</a>
 	     </div>
 	     
 	</body>
@@ -47,7 +50,7 @@
 		coupons=[];
 		name="<div style:'width:300px'>";
 		minus=0;
-		var obj = $('#list_data').datagrid('getSelections');
+		var obj = $('#couponList').datagrid('getSelections');
 		for(var i = 0, n = obj.length; i < n; i++)
 		{
 			var usableAmount = obj[i].usableAmount;
@@ -69,4 +72,9 @@
 		parent.window.minus=minus;
 		parent.window.closeDlg();
 	});
+	
+	$("#back").click(function ()
+	{
+		parent.window.closeDlg();
+	});	
 	</script>

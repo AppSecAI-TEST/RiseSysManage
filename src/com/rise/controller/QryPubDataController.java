@@ -16,7 +16,7 @@ import com.rise.service.QryPubDataService;
 @RequestMapping("/pubData")
 public class QryPubDataController 
 {
-	private static Log log = LogFactory.getLog(StudentController.class);
+	private static Log log = LogFactory.getLog(QryPubDataController.class);
 	
 	@Autowired
 	private QryPubDataService qryPubDataService;
@@ -128,14 +128,14 @@ public class QryPubDataController
 	//²éÑ¯°à¼¶ÊµÀý
 	@RequestMapping(value = "/qryClassInstList.do")
 	public void qryClassInstList(String schoolId, String courseType, String stageId, 
-			String classType, String classState, HttpServletResponse response)
+			String classType, String classState, String classInstId, HttpServletResponse response)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = qryPubDataService.qryClassInstList(schoolId, courseType, stageId, classType, classState);
+			String retVal = qryPubDataService.qryClassInstList(schoolId, courseType, stageId, classType, classState, classInstId);
 			log.error(retVal);
 			out.write(retVal);
 		}

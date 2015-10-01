@@ -1,170 +1,364 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
+	String studentId =request.getParameter("studentId");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  	<head>
-		<%@ include file="../common/head.jsp" %>
-		<%@ include file="../common/formvalidator.jsp" %>
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/css/style.css">
-		<script type="text/javascript" src="<%=path %>/js/student.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function()
-				{
-				var height = $(document).height();
-				$("#leftFrame",top.document).css("height",height);
-				$("#nextFrame",top.document).css("height",height);
-				
-			})
-		</script>
-  	</head>
-  
-  	<body>
-  	<div id="base">
-  			<div id="u0">
-        		<div id="u1">
-          			<p><span></span></p>
-        		</div>
-      		</div>
-   			 <table width="100%" height="100px" cellpadding="5px" class="maintable" id="addStudentTd">
-   			   <tr>
-   			     <td align="right"><span>学员姓名：</span></td>
-   			     <td><span>王兄阿尔</span></td>
-   			     <td align="right"><span>出生日期：</span></td>
-   			     <td><span>2012-12-12</span></td>
-   			     <td width="16%" align="right"><span>证件号码：</span></td>
-   			     <td width="6%"><span>422822198407311010</span></td>
-   			     <td width="12%" align="right"><a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">关联连报</a></td>
-		       </tr>
-		       </table>
-		       
-		       	<div style="height: 10px;"></div>
-		       
-		       <table width="100%" height="100px" cellpadding="5px" class="maintable" id="linkCourseTab">
-   				<tr id="cousreModel">
-   				  <td align="right"><span>报名日期</span></td>
-   				  <td>&nbsp;</td>
-   				  <td colspan="2" align="center"><span>提示：</span></td>
-   				  <td colspan="2" align="right">
-   				  <input type="checkbox" name="checkbox" id="checkbox" studentCousreId=""><span>选择连报</span></td>
-   				  <td align="right"><span>详情</span></td>
-			   </tr>
-			   
-			   <!--
-   				<tr>
-   				  <td width="15%" align="right"><span>阶段：</span></td>
-   				  <td width="23%">&nbsp;</td>
-   				  <td width="15%" align="right"><span>班级类型：</span></td>
-   				  <td width="13%">&nbsp;</td>
-   				  <td align="right"><span>业绩类型：</span></td>
-   				  <td>&nbsp;</td>
-   				  <td align="right">&nbsp;</td>
-			   </tr>
-   				<tr>
-   				  <td align="right"><span>课程状态：</span></td>
-   				  <td>&nbsp;</td>
-   				  <td align="right"><span>课程进度：</span></td>
-   				  <td>&nbsp;</td>
-   				  <td align="right"><span>招生顾问：</span></td>
-   				  <td>&nbsp;</td>
-   				  <td align="right">&nbsp;</td>
-			   </tr>
-   				<tr>
-   				  <td align="right"><span>备注：</span></td>
-   				  <td colspan="6">&nbsp;</td>
-			   </tr>
-   				<tr>
-   				  <td align="right"><span>总金额：</span></td>
-   				  <td>&nbsp;</td>
-   				  <td align="right"><span>优惠券：</span></td>
-   				  <td>&nbsp;</td>
-   				  <td align="right"><span>实缴金额：</span></td>
-   				  <td>&nbsp;</td>
-   				  <td align="right">&nbsp;</td>
-			   </tr>
-   			   -->
+	<head>
+		<%@ include file="../common/head.jsp"%>
+		<%@ include file="../common/formvalidator.jsp"%>
+		<style>
+.infotable {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border: none;
+	margin-bottom: 10px;
+}
+
+.infotable td {
+	border: 1px solid #ccc;
+	padding: 2px 1px;
+	font-size: 12px;
+	text-align: center;
+}
+
+.cbox {
+	vertical-align: top;
+}
+
+a {
+	cursor: pointer;
+}
+
+.detail {
+	display: none;
+}
+</style>
+	</head>
+	<body>
+
+		<div id="u0">
+			<div id="u1">
+				<p>
+					<span></span>
+				</p>
+			</div>
+		</div>
+		<input type="hidden" id="studentId" value="<%=studentId%>">
+		<div id="baseInfo" class="easyui-panel" title="基本信息"
+			style="width: 900px">
+			<table width="100%" class="maintable" id="stuBaseInfo">
+				<tr>
+					<td width="70px">
+						<span>学员姓名：</span>
+					</td>
+					<td width="100px"><span></span></td>
+					<td width="70px">
+						<span>英文名：</span>
+					</td>
+					<td width="180px"><span></span></td>
+					<td width="70px">
+						<span>出生日期：</span>
+					</td>
+					<td width="170px"><span></span></td>
+				</tr>
+				<tr>
+					<td>
+						<span>性别：</span>
+					</td>
+					<td><span></span></td>
+					<td>
+						<span>证件号码：</span>
+					</td>
+					<td colspan="2"><span></span></td>
+					<td align="center">
+						<a href="javascript:void(0)" id="submit" class="easyui-linkbutton"
+							iconCls="icon-ok" style="width: 120px; height: 28px;"><span>关联连报</span>
+						</a>
+					</td>
+				</tr>
 			</table>
 		</div>
-  	</body>
+		<div style="height: 20px;"></div>
+		<div class="easyui-panel" title="连报课程"
+			style="width: 900px; height: 320px; overflow: auto;">
+			<div id="courseInfo" class="courseDiv" style="display: none">
+				<table class="infotable base" width="100%">
+					<tr>
+						<td width="100px">
+							<span>报名日期:</span>
+						</td>
+						<td width="150px"></td>
+						<td style="width: 470px; color: #ff000"></td>
+						<td width="100px">
+							<input type="checkbox" class="cbox">
+							<span>选择连报</span>
+						</td>
+						<td width="100px">
+							<a onclick="changeDetail(this)"><span>展开详情</span>
+							</a>
+						</td>
+					</tr>
+				</table>
+				<table class="infotable detail" width="100%">
+					<tr>
+						<td width="120px">
+							<span>课程阶段：</span>
+						</td>
+						<td width="120px"></td>
+						<td width="120px">
+							<span>班级类型:</span>
+						</td>
+						<td width="120px"></td>
+						<td width="120px">
+							<span>业绩类型:</span>
+						</td>
+						<td width="120px"></td>
+					</tr>
+					<tr>
+						<td>
+							<span>业绩顾问：</span>
+						</td>
+						<td></td>
+						<td>
+							<span>业绩老师：</span>
+						</td>
+						<td></td>
+						<td>
+							<span>课程状态：</span>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<span>课程进度：</span>
+						</td>
+						<td></td>
+						<td>
+							<span>现金抵扣券：</span>
+						</td>
+						<td colspan="3"></td>
+					</tr>
+					<tr>
+						<td>
+							<span>备注：</span>
+						</td>
+						<td colspan="5"></td>
+					</tr>
+					<tr>
+						<td>
+							<span>总金额：</span>
+						</td>
+						<td></td>
+						<td>
+							<span>优惠金额：</span>
+						</td>
+						<td></td>
+						<td>
+							<span>连报优惠：</span>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<span>实缴金额：</span>
+						</td>
+						<td></td>
+						<td colspan="4">
+							<a><span>查看缴费单据</span>
+							</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		</div>
+	</body>
 </html>
 
 <script type="text/javascript">
-
-	var linkCourses=[];//选择关联已有连报课程
-	var courses;
-	
-	$("#submit").click(function()
-	{
-		$("#linkCourseTab").find("input[type=checkbox]").each(function (){
-			if(this.checked)
-			{
-				var id = $(this).attr('studentCousreId');
-				if(id!='')
-				{
-					$.each(courses,function(i,node)
-				   	{
-				   		var idT = node.studentCourseId;
-				   		if(id==idT)
-				   		{
-				   			linkCourses.push(node);
-				   		}
-				   	});
-				}
-  			}
-		});
-		if(linkCourses.length==0)
-		{
-				
+var linkCourses = [];//选择关联已有连报课程
+var courses;
+$("#submit").click(function() {
+	$("input[type=checkbox]").each(function() {
+		if (this.checked) {
+			var id = $(this).attr('studentCousreId');
+			if (id != '') {
+				$.each(courses, function(i, node) {
+					var idT = node.studentCourseId;
+					if (id == idT) {
+						linkCourses.push(node);
+					}
+				});
+			}
 		}
-		parent.window.linkCourses=linkCourses;
-		parent.window.closeDlg();
 	});
-	
+	if (linkCourses.length == 0) {
 
-	$(document).ready(function()
+	}
+	parent.window.oldCourses = courses;
+	parent.window.linkCourses = linkCourses;
+	parent.window.closeDlg();
+});
+
+$(document).ready(
+		function() {
+			loadStuBaseInfo();
+			var stu = {};
+			stu.studentId = $("#studentId").val();
+			stu.queryCode = 'Qry_Student_Courses';
+			var str = JSON.stringify(stu);
+			$.ajax( {
+				url : "/sys/course/getStuCourses.do?",
+				data : "param=" + str,
+				dataType : "json",
+				async : false,
+				success : function(data) {
+					courses = data.data;//学员已有课程
+				$.each(
+						courses,
+						function(i, node) {
+							var tabModel = $('#courseInfo').clone();
+							tabModel.attr("linkId", node.linkId);
+							var base = tabModel.find(".base").find("tr:eq(0)")
+							base.find("td:eq(1)").html(
+									"<span>" + node.payDate + "</span>");
+							base.find("td:eq(2)").html(
+									"<span>" + node.linkId + "</span>")//提示 不知如何取 暂时取备注字段
+							var checkboxes = base.find("td:eq(3)").find(
+									"input[type=checkbox]");
+							checkboxes.attr('studentCousreId',
+									node.studentCourseId);
+							checkboxes.attr('linkId', node.linkId);
+							checkboxes.click(function() {
+								relatedLink(checkboxes)
+							});
+							var detail1 = tabModel.find(".detail").find(
+									"tr:eq(0)");
+							detail1.find("td:eq(1)").html(
+									"<span>" + node.stageId + "</span>")
+							detail1.find("td:eq(3)").html(
+									"<span>" + node.classType + "</span>")
+							detail1.find("td:eq(5)").html(
+									"<span>" + node.feeType + "</span>")
+							var detail2 = tabModel.find(".detail").find(
+									"tr:eq(1)");
+							detail2.find("td:eq(1)").html(
+									"<span>" + node.adviserA + "/"
+											+ node.adviserB + "</span>")
+							detail2.find("td:eq(3)").html(
+									"<span>" + node.adviserTeacherA + "/"
+											+ node.adviserTeacherB + "</span>")
+							detail2.find("td:eq(5)").html(
+									"<span>" + node.courseState + "</span>")
+							var detail3 = tabModel.find(".detail").find(
+									"tr:eq(2)");
+							detail3.find("td:eq(1)").html()//课程进度字段尚无
+							detail3.find("td:eq(3)").html(
+									"<span>" + node.minusAmount + "</span>")
+							var detail4 = tabModel.find(".detail").find(
+									"tr:eq(3)");
+							detail4.find("td:eq(1)").html(
+									"<span>" + node.remark + "</span>")
+							var detail5 = tabModel.find(".detail").find(
+									"tr:eq(4)");
+							detail5.find("td:eq(1)").html(
+									"<span>" + node.totalAmount + "</span>")
+							detail5.find("td:eq(3)").html(
+									"<span>" + node.favorAmount + "</span>")
+							detail5.find("td:eq(5)").html(
+									"<span>" + node.linkFavorId + "</span>")
+							var detail6 = tabModel.find(".detail").find(
+									"tr:eq(5)");
+							detail6.find("td:eq(1)").html(
+									"<span>" + node.amount + "</span>")
+							detail6.find("td:eq(2)").find("a").click(
+									function() {
+										showImage(node.imgUrl)
+									})
+							tabModel.css("display", "block");
+							$('#courseInfo').after(tabModel);
+
+						});
+
+				//	window.location.reload();
+				//$.messager.alert('提示', "批量修改客户关怀和责任顾问失败！");
+			}
+			});
+
+		});
+
+function changeDetail(obj) {
+	if ($(obj).html() == "<span>展开详情</span>") {
+		$(".detail").css("display", "none");
+		$(".base").find("a").html("<span>展开详情</span>");
+		$(obj).closest(".courseDiv").find(".detail").css("display", "table");
+		$(obj).html("<span>隐藏详情</span>");
+	} else {
+		$(obj).closest(".courseDiv").find(".detail").css("display", "none");
+		$(obj).html("<span>展开详情</span>");
+	}
+
+}
+
+function showImage(url) {
+	url = "http://pica.nipic.com/2008-03-19/2008319183523380_2.jpg";//临时查看效果
+	parent.$("#showImg").find("img").attr("src", url);
+	parent.$("#showImg").dialog('open');
+}
+
+function relatedLink(obj) {
+	var lId = $(obj).attr("linkId");
+	var flag =$(obj).is(":checked");
+	$("input[type=checkbox]").each(function(index) {
+		if (index > 0) {
+			if (lId == $(this).attr("linkId")) {
+				if(flag)
+				{
+					this.checked =true;
+				}
+				else
+				{
+					this.checked =false;
+				}	
+			}
+		}
+
+	});
+}
+
+function loadStuBaseInfo()
 	{
-		var stu={};
-		stu.studentId='2';
-		stu.queryCode='Qry_Student_Courses';
-		var str = JSON.stringify(stu);
-		
-			$.ajax({
-			url: "/sys/course/getStuCourses.do?",
-			data: "param="+str,
-			dataType: "json",
+		$.ajax({
+			type : "POST",
+			url: "/sys/student/qryStudentById.do",
+			data: "studentId="+$("#studentId").val()+"&funcNodeId=1002",
 			async: false,
+			dataType:"json",
 			beforeSend: function()
 	    	{
-	    		// $.messager.progress({title : '批量修改', msg : '正在批量修改客户关怀和责任顾问，请稍等……'});
+	    		$.messager.progress({title : '系统消息', msg : '正在加载数据，请稍等……'});
 	    	},
-	    	success: function (data)
-	    	{
-	    		$.messager.progress('close'); 
-	    		 courses = data.data;//学员已有课程
-	    		 
-	    		$.each(courses,function(i,node)
+	    	success: function(data) {
+	    		$.messager.progress('close');
+	    		if(data.studentObj!=undefined&&data.studentObj!=null)
 	    		{
-	    			var trModel=$('#cousreModel').clone();
-	    			var id = node.studentCourseId;
-	    			var payDate = node.payDate;
-	    			var  tds=$(trModel).children('td');
-				    tds.eq(1).html("<span>"+payDate+"</span>");
-				 
-	    			trModel.find("input[type=checkbox]").attr('studentCousreId',id);
-	    			
-	    			$('#cousreModel').after(trModel);
-	    			
-	    		});
-	    	 
-	            //	window.location.reload();
-	            	//$.messager.alert('提示', "批量修改客户关怀和责任顾问失败！");
-	        } 
+	    			var obj =data.studentObj;
+	    			var tr1 =$("#stuBaseInfo").find("tr:eq(0)");
+	    			tr1.find("td:eq(1)").find("span").html(obj.name);
+	    			tr1.find("td:eq(3)").find("span").html(obj.byName);
+	    			tr1.find("td:eq(5)").find("span").html(obj.birthday);
+	    			var tr2 =$("#stuBaseInfo").find("tr:eq(1)");
+	    			tr2.find("td:eq(1)").find("span").html(obj.sexVal);
+	    			tr2.find("td:eq(3)").find("span").html(obj.identityId);
+	    		}	
+	        },
+	        error:function(){
+	        	$.messager.progress('close'); 
+	        }
+	    	
 		});
-		
-	});
-	
-	 
-
+	}
 </script>
