@@ -34,7 +34,7 @@ form div.input img{cursor:pointer}
 	        <input type="text" name="username" id="username" value="" />  
 		</div>
 		<div class="input">
-			<label for="password">密&nbsp;&nbsp;码:</label>  
+			<label for="password">密　码:</label>  
 	        <input type="password" name="password" id="password" value="" />  
 		</div>
 		<div class="input">

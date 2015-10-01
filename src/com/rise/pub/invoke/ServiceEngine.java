@@ -151,8 +151,10 @@ public class ServiceEngine
 		String param1 = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0021\",securityCode:\"0000000000\",params:{busDetailId:\"1001\",state:\"A\",pageNum:\"1\",pageSize:\"10\"},rtnDataFormatType:\"user-defined\"}";
 		String param2 = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0022\",securityCode:\"0000000000\",params:{busDetailId:\"1001\"},rtnDataFormatType:\"user-defined\"}";
 		String param3 = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0023\",securityCode:\"0000000000\",params:{orderId:\"E20150825101518100000156\",state:\"H\"},rtnDataFormatType:\"user-defined\"}";
+		String param4 = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0024\",securityCode:\"0000000000\",params:{busDetailId:\"1019\",orderIds:\"E20150916111042100000300\"},rtnDataFormatType:\"user-defined\"}";
+		
 		try {
-			System.out.println(invokeHttp(param1));
+			System.out.println(invokeHttp(param4));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

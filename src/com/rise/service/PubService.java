@@ -12,4 +12,10 @@ public class PubService
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2011\",securityCode:\"0000000000\",params:{staffId:\""+staffId+"\",funcNodeId:\""+funcNodeId+"\",fieldId:\""+fieldId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
+	
+	public String pageComboxList(String funcNodeId , String fieldId) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2012\",securityCode:\"0000000000\",params:{funcNodeId:\""+funcNodeId+"\",fieldId:\""+fieldId+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
 }

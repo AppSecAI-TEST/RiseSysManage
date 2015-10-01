@@ -152,7 +152,7 @@
 				{
 					removeLeft();
 					$('body').layout('panel', 'west').panel({title: title});
-					var loading = '<div class="panel-loading">Loading...</div>';
+					var loading = '<div class="panel-loading">加载中...</div>';
 					$("#leftmenu").accordion("add", {content: loading});
 					removeLeft();
 					menuFunc(menuObj);
@@ -167,7 +167,7 @@
 						beforeSend: function(){
 							removeLeft();
 							$('body').layout('panel', 'west').panel({title: title});
-							var loading = '<div class="panel-loading">Loading...</div>';
+							var loading = '<div class="panel-loading">加载中...</div>';
 							$("#leftmenu").accordion("add", {content: loading});
 						},
 						dataType: "json",
@@ -244,7 +244,7 @@
 					$('#pagetabs').tabs('update', {
 						tab:current_tab,
 						options : {
-							content : '<iframe name="'+title+' "src="'+url+'" width="100%" height="97%" frameborder="0" scrolling="auto" style="margin-bottom:10px"></iframe>'
+							content : '<iframe name="'+title+' "src="'+url+'" width="100%" height="99%" frameborder="0" scrolling="auto"></iframe>'
 						}
 					});
 				}else{
@@ -253,7 +253,7 @@
 						//href: url,
 						closable: true,
 						cache: false,
-						content : '<iframe name="'+title+' "src="'+url+'" width="100%" height="97%" frameborder="0" scrolling="auto" style="margin-bottom:10px"></iframe>'
+						content : '<iframe name="'+title+' "src="'+url+'" width="100%" height="99%" frameborder="0" scrolling="auto"></iframe>'
 					});
 				}
 			}

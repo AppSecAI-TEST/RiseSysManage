@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.rise.model.SysRoleT;
 import com.rise.service.SysRoleService;
 
 @Controller
@@ -190,6 +191,104 @@ public class SysRoleController
 			out = response.getWriter();
 			String retVal = sysRoleService.allocSysRole(sysRoleId, staffId, allocArray, sysRoleAllocId);
 			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping(value = "/roleList.do")
+	public void roleList(String page, String rows, HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			Integer pageNumInt = Integer.parseInt(page)-1;
+			Integer pageSizeInt = Integer.parseInt(rows);
+			String retVal = sysRoleService.querySysRole(pageNumInt, pageSizeInt);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/addRole.do")
+	public void addRole(HttpServletResponse response , SysRoleT sysRoleT)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = sysRoleService.addRole(sysRoleT);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/updateRole.do")
+	public void updateRole(HttpServletResponse response , SysRoleT sysRoleT)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = sysRoleService.updateRole(sysRoleT);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/deleteRole.do")
+	public void deleteRole(HttpServletResponse response , String sysRoleId)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = sysRoleService.deleteRole(sysRoleId);
 			out.write(retVal);
 		}
 		catch(Exception e)

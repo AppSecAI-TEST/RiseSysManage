@@ -41,4 +41,28 @@ public class PubController
 		}
 	}
 	
+	@RequestMapping("/pageComboxList.do")
+	public void pageComboxList(HttpServletResponse response , String funcNodeId , String fieldId)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = pubService.pageComboxList(funcNodeId , fieldId);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 }

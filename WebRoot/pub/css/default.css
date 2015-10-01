@@ -46,6 +46,21 @@ input[type="file"],input[type="image"],input[type="submit"],input[type="reset"],
 .datagrid .datagrid-wrap .datagrid-view .datagrid-view2 .datagrid-body{width:99.8% !important;border-left-width:0px;border-right:1px solid #95B8E7;}
 .datagrid .datagrid-wrap .datagrid-pager{width:99.8% !important;border-left-width:0px;border-right:1px solid #95B8E7;}
 
+.easyui-dialog .datagrid{
+	margin:0 auto;
+	min-width:inherit !important;
+}
+.easyui-dialog .datagrid .panel-header{width:auto !important;}
+.easyui-dialog .datagrid .panel-header .panel-title{width:auto !important;}
+.easyui-dialog .datagrid .datagrid-wrap{width:auto !important;}
+.easyui-dialog .datagrid .datagrid-wrap .datagrid-toolbar{width:auto !important;border-right-width:inherit;}
+.easyui-dialog .datagrid .datagrid-wrap .datagrid-view{width:auto !important;}
+.easyui-dialog .datagrid .datagrid-wrap .datagrid-view .datagrid-view1{width:auto !important;}
+.easyui-dialog .datagrid .datagrid-wrap .datagrid-view .datagrid-view2{width:auto !important;}
+.easyui-dialog .datagrid .datagrid-wrap .datagrid-view .datagrid-view2 .datagrid-header{width:auto !important;border-left-width:auto;border-right-width:auto;}
+.easyui-dialog .datagrid .datagrid-wrap .datagrid-view .datagrid-view2 .datagrid-body{width:auto !important;border-left-width:auto;border-right:auto;}
+.easyui-dialog .datagrid .datagrid-wrap .datagrid-pager{width:auto !important;border-left-width:auto;border-right:auto;}
+
 /* 学员注册样式 */
 .maintable {border-collapse: collapse; border-spacing:0; border: 0px solid #ccc; height:auto;} 
 .maintable tr {height: 30px;}
@@ -59,3 +74,26 @@ span {font-family: Arial,微软雅黑,宋体; font-size: 14px;}
 .linkmore1:hover{color : #4AC5C3 !important;}
 .linkmore2{color : #ED6C44; text-decoration : none; cursor:pointer;}
 .linkmore2:hover{color : #000 !important;}
+
+#fm{
+	margin:0;
+	padding:10px 30px;
+}
+.ftitle{
+	font-size:14px;
+	font-weight:bold;
+	color:#666;
+	padding:5px 0;
+	margin-bottom:10px;
+	border-bottom:1px solid #ccc;
+}
+.fitem{
+	margin-bottom:5px;
+}
+.fitem label{
+	display:inline-block;
+	width:80px;
+}
+
+/* 用户管理 */
+.manage .datagrid{margin-top:0px;min-width:500px;}

@@ -16,6 +16,7 @@ public class StaffT implements java.io.Serializable {
 	private String userName;
 	private String password;
 	private Integer post;
+	private Integer deptId;
 	private Date hireDate;
 	private String phone;
 	private String state;
@@ -23,6 +24,7 @@ public class StaffT implements java.io.Serializable {
 	private Integer handlerId;
 	private String remoteIp;
 	private Date lastDate;
+	private OrgDeptT orgDeptT;
 
 	// Constructors
 
@@ -114,6 +116,14 @@ public class StaffT implements java.io.Serializable {
 	public void setPost(Integer post) {
 		this.post = post;
 	}
+	
+	public Integer getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(Integer deptId) {
+		this.deptId = deptId;
+	}
 
 	public Date getHireDate() {
 		return this.hireDate;
@@ -171,4 +181,12 @@ public class StaffT implements java.io.Serializable {
 		this.lastDate = lastDate;
 	}
 
+	public OrgDeptT getOrgDeptT() {
+		return orgDeptT;
+	}
+
+	public void setOrgDeptT(OrgDeptT orgDeptT) {
+		this.orgDeptT = orgDeptT;
+	}
+	
 }
