@@ -26,13 +26,13 @@
    			<a href="javascript:void(0)" id="deleteRole" onclick="removeRole()" class="easyui-linkbutton" iconCls="icon-remove" style="width: 120px;">删除角色</a>
    			<a href="javascript:void(0)" id="allocateRole" onclick="allocateUserRole()" class="easyui-linkbutton" iconCls="icon-reload" style="width: 120px;">分配用户角色</a>
 		</div>
-		<div id="userRoleDlg" class="easyui-dialog easyui-layout" style="width:1000px;height:420px;padding:0px 0px" modal="true" closed="true" buttons="#userRoleDlg-buttons">
-			<div class="easyui-panel" title="组织机构"  data-options="iconCls:'icons-other-house',region:'west'" style="width:30%;height:100%;margin:0 auto;padding:0 0">
+		<div id="userRoleDlg" class="easyui-dialog easyui-layout" style="width:1000px;height:350px;padding:0px 0px" modal="true" closed="true" buttons="#userRoleDlg-buttons">
+			<div class="easyui-panel" title="组织机构"  data-options="iconCls:'icons-other-house',region:'west'" style="width:30%;height:100%;margin:0 auto;padding:0 0;">
 				<ul id="deptTree" class="easyui-tree" data-options="url:'/sys/orgDept/getSubOrgDeptList.do',lines:true,animate:true,onClick:getTreeNode"></ul>
 			</div>
 			<div data-options="region:'center'" style="width:70%;height:100%;margin:0 auto;padding:0 0;position:relative;">
 				<div style="float:left;height:100%;width:43%;margin:0 auto;padding:0 0">
-					<table id="dgCanUsers" title="可分配用户" class="easyui-datagrid" style="height:100%" url="" pagination="false" rownumbers="false" fitColumns="false" singleSelect="false">
+					<table id="dgCanUsers" title="可分配用户" class="easyui-datagrid" style="height:100%" url="" striped="true" pagination="false" rownumbers="false" fitColumns="false" singleSelect="false">
 						<thead>
 							<tr>
 								<th field="staffId" checkbox="true"></th>
@@ -48,7 +48,7 @@
 					</ul>
 				</div>
 				<div style="float:left;height:100%;width:43%;margin:0 auto;padding:0 0">
-					<table id="dgHasUsers" title="已分配用户" class="easyui-datagrid" style="height:100%" url="" pagination="false" rownumbers="false" fitColumns="false" singleSelect="false">
+					<table id="dgHasUsers" title="已分配用户" class="easyui-datagrid" style="height:100%" url="" striped="true" pagination="false" rownumbers="false" fitColumns="false" singleSelect="false">
 						<thead>
 							<tr>
 								<th field="staffId" checkbox="true"></th>
@@ -60,8 +60,8 @@
 			</div>
 		</div>
 		<div id="userRoleDlg-buttons">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveRole()">保存</a>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUserRole()">保存</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#userRoleDlg').dialog('close')">取消</a>
 		</div>
 		<div id="dlg" class="easyui-dialog" style="width:480px;height:230px;padding:0px 0px" modal="true" closed="true" buttons="#dlg-buttons">
 			<form id="fm" method="post" novalidate>
@@ -82,7 +82,7 @@
 			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
 		</div>
 		<script type="text/javascript">
-			var gRoleUser = null;
+			var gSelRoleId = null;
 			function newRole(){
 				$('#dlg').dialog('open').dialog('setTitle','新增角色');
 				$('#fm').form('clear');
@@ -110,7 +110,7 @@
 						var validateFlag = $(this).form('validate');
 						if(!validateFlag)
 						{
-							$.messager.alert('提示',"输入角色信息有误,请核实后重新尝试");
+							$.messager.alert('提示',"输入角色信息不全,请核实后重新尝试");
 						}
 						return validateFlag;
 					},
@@ -152,22 +152,26 @@
 			function getTreeNode(){
 				var node = $('#deptTree').tree('getSelected');
 				if (node){
-					$.post("/sys/staff/getStaffTotalList.do",{deptId:node.id},function(data){
-						gRoleUser = data;
-					},"json");
+					var getData = $("#dgHasUsers").datagrid("getData");
+					var  arr = [];
+					for(var i = 0,n = getData.total;i < n;i++)
+					{
+						arr.push(getData.rows[i].staffId);
+					}
+					$("#dgCanUsers").datagrid({url:"/sys/staff/getStaffTotalList.do?deptId="+node.id+"&staffIds="+arr.join(",")});
 				}
 			}
 			
 			function allocateUserRole()
 			{
 				var row = $('#roleList').datagrid('getSelected');
-				if (row){
-					$('#userRoleDlg').dialog('open').dialog('setTitle','分配用户角色');
-					$("#dgCanUsers").datagrid("reload");
-					$.post("/sys/staff/getStaffListByRoleId.do",{sysRoleId:node.sysRoleId},function(data){
-						
-					},"json");
-					//$("#dgHasUsers").datagrid({url:""});
+				if (row)
+				{
+					$("#userRoleDlg").css("height","350px");
+					$("#userRoleDlg").dialog('open').dialog('setTitle','分配用户角色');
+					$("#dgCanUsers").datagrid('loadData',{total:0, rows:[]});
+					gSelRoleId = row.sysRoleId;
+					$("#dgHasUsers").datagrid({url:"/sys/staff/getStaffListByRoleId.do?sysRoleId="+gSelRoleId});
 				}
 				else
 				{
@@ -175,19 +179,20 @@
 				}
 			}
 			
-			function saveManFuncs()
+			function saveUserRole()
 			{
-				var obj = $('#dgHasFuncs').datagrid('getData');
-				var man = $('#dg').datagrid('getSelected');
+				var obj = $('#dgHasUsers').datagrid('getData');
+				var role = $('#roleList').datagrid('getSelected');
 				var arr = [];
 				for(var i = 0,n = obj.total;i < n;i++)
 				{
-					arr.push(obj.rows[i].menuId);
+					arr.push(obj.rows[i].staffId);
 				}
-				$.post('/man/updateMan.do',{manId:man.manId,manFuncs:arr.join(",")},function(result){
+				$.post('/sys/sysRole/saveChoiceRoleList.do',{sysRoleId:role.sysRoleId,staffIds:arr.join(",")},function(result){
 					if(result == "success")
 					{
-						window.location.reload();
+						$('#userRoleDlg').dialog('close');
+						$('#roleList').datagrid('reload');
 					}
 					else
 					{

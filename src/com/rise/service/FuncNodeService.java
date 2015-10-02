@@ -26,15 +26,21 @@ public class FuncNodeService
 //		return ServiceEngine.invokeHttp(param);
 //	}
 	
+	public String getSubFuncNodeList(String id) throws Exception 
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0025\",securityCode:\"0000000000\",params:{funcNodeId:\""+id+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+	
 	public String getFuncNodeInfoList(String id) throws Exception
 	{
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0029\",securityCode:\"0000000000\",params:{funcNodeId:\""+id+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 	
-	public String getSubFuncNodeList(String id) throws Exception 
+	public String getFuncNodeTableList(String id , Integer page , Integer rows) throws Exception
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0025\",securityCode:\"0000000000\",params:{funcNodeId:\""+id+"\"},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00213\",securityCode:\"0000000000\",params:{funcNodeId:\""+id+"\",page:\""+page+"\",rows:\""+rows+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 	

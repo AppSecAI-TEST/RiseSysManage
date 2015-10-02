@@ -58,15 +58,15 @@
 				</div>
 				<div class="fitem">
 					<label style="text-align:right">联系电话:</label>
-					<input name="telephone" id="telephone" type="text" style="width:495px" class="easyui-textbox easyui-validatebox" required="true" />
+					<input name="telephone" id="telephone" type="text" style="width:495px" class="easyui-textbox easyui-validatebox" />
 				</div>
 				<div class="fitem">
 					<label style="text-align:right">联系人:</label>
-					<input name="contact" id="contact" type="text" style="width:495px" class="easyui-textbox easyui-validatebox" required="true" />
+					<input name="contact" id="contact" type="text" style="width:495px" class="easyui-textbox easyui-validatebox" />
 				</div>
 				<div class="fitem" style="position:relative;height:155px;">
 					<label style="text-align:right;position:absolute;">机构描述:</label>
-					<textarea rows="10" name="deptDesc" id="deptDesc" class="easyui-validatebox" style="position:absolute;left:86px;border-radius:5px;width:495px" required="true"></textarea>
+					<textarea rows="10" name="deptDesc" id="deptDesc" class="easyui-validatebox" style="position:absolute;left:86px;border-radius:5px;width:495px"></textarea>
 				</div>
 			</form>
 		</div>
@@ -111,7 +111,12 @@
 				$('#fm').form('submit',{
 					url: url,
 					onSubmit: function(){
-						return $(this).form('validate');
+						var validateFlag = $(this).form('validate');
+						if(!validateFlag)
+						{
+							$.messager.alert('提示',"输入组织信息不全,请核实后重新尝试");
+						}
+						return validateFlag;
 					},
 					success: function(result){
 						if (result == "success"){

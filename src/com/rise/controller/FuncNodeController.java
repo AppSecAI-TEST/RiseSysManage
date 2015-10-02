@@ -51,6 +51,32 @@ public class FuncNodeController
 //		}
 //	}
 	
+	@RequestMapping(value = "/getFuncNodeTableList.do")
+	public void getFuncNodeTableList(HttpServletResponse response , String id , String page, String rows)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			Integer pageNumInt = Integer.parseInt(page)-1;
+			Integer pageSizeInt = Integer.parseInt(rows);
+			String retVal = funcNodeService.getFuncNodeTableList(id, pageNumInt*pageSizeInt, pageSizeInt);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 	@RequestMapping(value = "/getFuncNodeInfoList.do")
 	public void getFuncNodeInfoList(HttpServletResponse response , String id)
 	{

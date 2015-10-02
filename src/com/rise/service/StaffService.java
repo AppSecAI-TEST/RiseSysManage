@@ -36,9 +36,9 @@ public class StaffService {
 		return ServiceEngine.invokeHttp(param);
 	}
 	
-	public String getStaffTotalList(String deptId) throws Exception
+	public String getStaffTotalList(String deptId , String staffIds) throws Exception
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2007\",securityCode:\"0000000000\",params:{deptId:\""+deptId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2007\",securityCode:\"0000000000\",params:{deptId:\""+deptId+"\",staffIds:\""+staffIds+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 	

@@ -11,7 +11,7 @@
 	<body class="easyui-layout manage">
 		<div id="leftarea" data-options="iconCls:'icons-other-house',region:'west',title:'功能模块项',split:true,width:200">
 			<div style="width:96%;height:100%;padding-left:5px;">
-				<ul id="funcNodeTree" class="easyui-tree" data-options="url:'/sys/funcNode/getSubFuncNodeList.do',lines:true,animate:true"></ul>
+				<ul id="funcNodeTree" class="easyui-tree" data-options="url:'/sys/funcNode/getSubFuncNodeList.do',lines:true,animate:true,onClick:getTreeNode"></ul>
 			</div>
 		</div>
 		<div id="mainarea" data-options="region:'center'" style="padding:0px;background:#E0ECFF;min-width:300px">
@@ -61,7 +61,7 @@
 			function getTreeNode(){
 				var node = $('#funcNodeTree').tree('getSelected');
 				if (node){
-					$("#funcNodeData").datagrid({url:"/sys/staff/qryStaffListByDeptId.do?deptId="+node.id});
+					$("#funcNodeData").datagrid({url:"/sys/funcNode/getFuncNodeTableList.do?id="+node.id+"&page=1&rows=10"});
 				}
 			}
 		</script>

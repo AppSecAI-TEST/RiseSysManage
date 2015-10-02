@@ -212,7 +212,7 @@
 						var validateFlag = $(this).form('validate');
 						if(!validateFlag)
 						{
-							$.messager.alert('提示',"输入功能信息有误,请核实后重新尝试");
+							$.messager.alert('提示',"输入功能信息不全,请核实后重新尝试");
 						}
 						return validateFlag;
 					},

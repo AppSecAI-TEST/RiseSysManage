@@ -2,7 +2,9 @@ package com.rise.controller;
 
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -289,6 +291,31 @@ public class SysRoleController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = sysRoleService.deleteRole(sysRoleId);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/saveChoiceRoleList.do")
+	public void saveChoiceRoleList(HttpServletResponse response , HttpServletRequest request , String staffIds , String sysRoleId)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			HttpSession session = request.getSession();
+			String retVal = sysRoleService.saveChoiceRoleList(sysRoleId , staffIds , session);
 			out.write(retVal);
 		}
 		catch(Exception e)

@@ -55,14 +55,14 @@ public class StaffController {
 	}
 	
 	@RequestMapping("/getStaffTotalList.do")
-	public void getStaffTotalList(HttpServletResponse response, String deptId)
+	public void getStaffTotalList(HttpServletResponse response, String deptId, String staffIds)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = staffService.getStaffTotalList(deptId);
+			String retVal = staffService.getStaffTotalList(deptId,staffIds);
 			out.write(retVal);
 		}
 		catch(Exception e)

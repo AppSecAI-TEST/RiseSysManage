@@ -1,9 +1,12 @@
 package com.rise.service;
 
+import javax.servlet.http.HttpSession;
+
 import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Service;
 
+import com.rise.model.StaffT;
 import com.rise.model.SysRoleT;
 import com.rise.pub.invoke.ServiceEngine;
 import com.rise.pub.util.ObjectCensor;
@@ -98,5 +101,19 @@ public class SysRoleService
 	{
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00314\",securityCode:\"0000000000\",params:{sysRoleId:\""+sysRoleId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
+	}
+	
+	public String saveChoiceRoleList(String sysRoleId , String staffIds , HttpSession session) throws Exception
+	{
+		StaffT staffT = (StaffT)session.getAttribute("StaffT");
+		if(!ObjectCensor.checkObjectIsNull(staffT))
+		{
+			String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00315\",securityCode:\"0000000000\",params:{sysRoleId:\""+sysRoleId+"\",staffIds:\""+staffIds+"\",handlerId:\""+staffT.getStaffId()+"\"},rtnDataFormatType:\"user-defined\"}";
+			return ServiceEngine.invokeHttp(param);
+		}
+		else
+		{
+			return "缺乏用户信息,请核实后重新尝试";
+		}
 	}
 }
