@@ -54,6 +54,54 @@ public class StaffController {
 		}
 	}
 	
+	@RequestMapping("/getStaffTotalList.do")
+	public void getStaffTotalList(HttpServletResponse response, String deptId)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = staffService.getStaffTotalList(deptId);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/getStaffListByRoleId.do")
+	public void getStaffListByRoleId(HttpServletResponse response, String sysRoleId)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = staffService.getStaffListByRoleId(sysRoleId);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 	@RequestMapping("/addStaff.do")
 	public void addStaff(HttpServletResponse response , StaffT StaffT)
 	{

@@ -35,4 +35,17 @@ public class StaffService {
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2006\",securityCode:\"0000000000\",params:{deptId:\""+staffId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
+	
+	public String getStaffTotalList(String deptId) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2007\",securityCode:\"0000000000\",params:{deptId:\""+deptId+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+	
+	public String getStaffListByRoleId(String sysRoleId) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2008\",securityCode:\"0000000000\",params:{sysRoleId:\""+sysRoleId+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+	
 }
