@@ -76,6 +76,10 @@
 						<input name="dataSourceField" id="dataSourceField" type="text" style="width:265px" class="easyui-textbox" />
 					</div>
 					<div class="fitem">
+						<label style="text-align:right">字段名称:</label>
+						<input name="dataSourceName" id="dataSourceName" type="text" style="width:265px" class="easyui-textbox" />
+					</div>
+					<div class="fitem">
 						<label style="text-align:right;vertical-align:top;">依赖语句:</label>
 						<input name="dataSourceSql" id="dataSourceSql" type="text" style="width:265px;height:100px" class="easyui-textbox" data-options="multiline:true" />
 					</div>
@@ -114,6 +118,8 @@
 								$("#fieldArea").css("display","none");
 								$("#fieldId").validatebox({required:false});
 								$("#fieldName").validatebox({required:false});
+								$("#dataSourceField").validatebox({required:false});
+								$("#dataSourceName").validatebox({required:false});
 							}
 							else if(dataValue == "H")
 							{
@@ -122,6 +128,8 @@
 								$("#fieldArea").css("display","none");
 								$("#fieldId").validatebox({required:false});
 								$("#fieldName").validatebox({required:false});
+								$("#dataSourceField").validatebox({required:false});
+								$("#dataSourceName").validatebox({required:false});
 							}
 							else if(dataValue == "B")
 							{
@@ -131,6 +139,8 @@
 								$("#fieldArea").css("display","block");
 								$("#fieldId").validatebox({required:true});
 								$("#fieldName").validatebox({required:true});
+								$("#dataSourceField").validatebox({required:true});
+								$("#dataSourceName").validatebox({required:true});
 							}
 						}
 						else

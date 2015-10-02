@@ -24,6 +24,8 @@ public class ResourceT {
     private String dataSourceTable;
 
     private String dataSourceField;
+    
+	private String dataSourceName;
 
     private String dataSourceSql;
 
@@ -122,8 +124,16 @@ public class ResourceT {
     public void setDataSourceField(String dataSourceField) {
         this.dataSourceField = dataSourceField == null ? null : dataSourceField.trim();
     }
+    
+    public String getDataSourceName() {
+		return dataSourceName;
+	}
 
-    public String getDataSourceSql() {
+	public void setDataSourceName(String dataSourceName) {
+		this.dataSourceName = dataSourceName == null ? null : dataSourceName.trim();
+	}
+
+	public String getDataSourceSql() {
         return dataSourceSql;
     }
 

@@ -2,7 +2,9 @@ package com.rise.controller;
 
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -346,4 +348,55 @@ public class FuncNodeController
 //			}
 //		}
 //	}
+	
+	@RequestMapping("/getCtrlData.do")
+	public void getCtrlData(HttpServletResponse response , HttpServletRequest request , String resourceId , String funcNodeId)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			HttpSession session = request.getSession();
+			String retVal = funcNodeService.getCtrlData(resourceId, funcNodeId, session);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/comboboxSetting.do")
+	public void comboboxSetting(HttpServletResponse response , HttpServletRequest request , String resourceId , String funcNodeId)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			HttpSession session = request.getSession();
+			String retVal = funcNodeService.getCtrlData(resourceId, funcNodeId, session);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 }

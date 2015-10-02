@@ -1,11 +1,14 @@
 package com.rise.service;
 
+import javax.servlet.http.HttpSession;
+
 import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Service;
 
 import com.rise.model.FuncNodeT;
 import com.rise.model.ResourceT;
+import com.rise.model.StaffT;
 import com.rise.pub.invoke.ServiceEngine;
 
 @Service
@@ -106,6 +109,13 @@ public class FuncNodeService
 	public String getParentPrivList() throws Exception
 	{
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00212\",securityCode:\"0000000000\",params:{},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+	
+	public String getCtrlData(String resourceId , String funcNodeId , HttpSession session) throws Exception
+	{
+		StaffT staffT = (StaffT)session.getAttribute("StaffT");
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00214\",securityCode:\"0000000000\",params:{resourceId:\""+resourceId+"\",funcNodeId:\""+funcNodeId+"\",staffId:\""+staffT.getStaffId()+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 	
