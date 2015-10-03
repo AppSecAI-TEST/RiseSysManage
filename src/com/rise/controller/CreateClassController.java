@@ -4,11 +4,14 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.rise.service.CreateClassService;
 
@@ -127,6 +130,25 @@ public class CreateClassController
 				out.close();
 			}
 		}
+	}
+	
+	@RequestMapping(value = "/qryCreateClass.do")
+	public ModelAndView qryCreateClass(String classInstId)
+	{
+		log.error(classInstId);
+		ModelAndView view = new ModelAndView("applyClass/updateApplyClass");
+		try 
+		{
+			String retVal = createClassService.qryCreateClassById(classInstId);
+			JSONObject obj = JSONObject.fromObject(retVal);
+			log.error(obj);
+			view.addObject("obj", obj);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return view;
 	}
 	
 	//°à¼¶Î¬»¤

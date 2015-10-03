@@ -38,8 +38,7 @@ $(document).ready(function() {
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) {
 			var classInstId = row.classInstId;
-			var applyId = row.applyId;
-			window.location.href = "/sys/applyClass/updateApplyClass.jsp?classInstId="+classInstId+"&applyId="+applyId;
+			window.location.href = "/sys/applyClass/qryCreateClass.do?classInstId="+classInstId;
 		} else {
 			$.messager.alert('提示', "请先选择您要维护的班级！");
 		}

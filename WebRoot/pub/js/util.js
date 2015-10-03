@@ -268,6 +268,16 @@ function formatClassInst(row) {
 	return s;
 }
 
+function formatTeacher(row) {
+	var s = '<span>' + row.byname + '</span>';
+	return s;
+}
+
+function formatRoom(row) {
+	var s = '<span>' + row.roomName + '</span>';
+	return s;
+}
+
 //请空name内所有控件的值
 function clearData(name) 
 {
