@@ -33,9 +33,9 @@
 					</td>
 					<td align="right"><span>放班审批状态：</span></td>
 					<td width="114px">
-						<select id="classApproveState" name="classApproveState" class="easyui-combobox" style="width: 114px; height: 25px;"
+						<select id="approveState" name="approveState" class="easyui-combobox" style="width: 114px; height: 25px;"
 						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      				onLoadSuccess:function(data){$('#classApproveState').combobox('setValue',data[0].codeFlag);}" 
+	      				onLoadSuccess:function(data){$('#approveState').combobox('setValue',data[0].codeFlag);}" 
 	      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=CREATE_CLASS_T&codeType=CREATE_CLASS_APPROVE_STATE">
 		        		</select>
 					</td>
@@ -59,21 +59,21 @@
 					</td>
 					<td align="right"><span>放班审批时间：</span></td>
 	  				<td>
-						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeApprove" name="startTimeApprove" data-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeApplyApprove" name="startTimeApplyApprove" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
 					<td  align="center"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
 					<td colspan="2">
-						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="endTimeApprove" name="endTimeApprove" data-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="endTimeApplyApprove" name="endTimeApplyApprove" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
   				</tr>
   				<tr>
   					<td align="right"><span>取消申请时间：</span></td>
   					<td>
-						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeCancelApply" name="startTimeCancelApply" ata-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeCancel" name="startTimeCancel" ata-options="formatter:myformatter, parser:myparser"/>
 					</td>
 					<td align="center"><span>至</span></td>
 					<td>
-						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="endTimeCancelApply" name="endTimeCancelApply" data-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="endTimeCancel" name="endTimeCancel" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
   					<td align="right"><span>取消审批时间：</span></td>
   					<td>
@@ -96,8 +96,8 @@
 						<th data-options="field:'remark',width:200,align:'center'">申请内容</th>
 						<th data-options="field:'classType',width:100,align:'center'">课程类型</th>
 						<th data-options="field:'className',width:100,align:'center'">班级名称</th>
-						<th data-options="field:'effectDate',width:100,align:'center'">申请开课时间</th>
-						<th data-options="field:'approveState',width:100,align:'center'">审批状态</th>
+						<th data-options="field:'startDate',width:100,align:'center'">申请开课时间</th>
+						<th data-options="field:'approveStateText',width:100,align:'center'">审批状态</th>
 						<th data-options="field:'applyName',width:100,align:'center'">申请人</th>
 						<th data-options="field:'applyDate',width:100,align:'center'">申请时间</th>
 						<th data-options="field:'approveDate',width:100,align:'center'">审批时间</th>

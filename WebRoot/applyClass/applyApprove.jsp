@@ -1,6 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
+	String applyId = request.getParameter("applyId");
+	String classInstId = request.getParameter("classInstId");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -25,7 +27,7 @@
   				</tr>
   				<tr>
   					<td align="right" width="10%"><span>开课时间：</span></td>
-  					<td width="20%"><span id="effectDate"></span></td>
+  					<td width="20%"><span id="startDate"></span></td>
   					<td align="right" width="10%"><span>学员来源：</span></td>
   					<td width="20%" colspan="3"><span id="studentChannelTypeVal"></span></td>
   					<td align="right" width="10%"><span>升学班级：</span></td>
@@ -43,6 +45,7 @@
   				<input type="hidden" id="applyId" name="applyId" value="<%=applyId %>"/>
   				<input type="hidden" id="classInstId" name="classInstId" value="<%=classInstId %>"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
+  				<input type="hidden" id="approveApplyType" name="approveApplyType" value="APPLY"/>
 	  			<table width="100%" cellpadding="5px" class="maintable" id="cancelApplyClassTd">
 	  				<tr>
 	  					<td align="right" width="10%"><span>放班审批：</span></td>
@@ -62,7 +65,7 @@
   		</div>
   		<div style="margin-top: 20px;min-width:1100px; width:99%;">
 	      	<div style="float: left;margin-left: 900px;">
-	      		<a href="javascript:void(0)" id="applyApproveSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
+	      		<a href="javascript:void(0)" id="approveSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
 	      		&nbsp;<a href="javascript:void(0)" id="activityBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
 	      	</div>
 	    </div>

@@ -15,7 +15,7 @@ $(document).ready(function() {
     		$("#stageId").html(data.createClassObj.stageId);
     		$("#classType").html(data.createClassObj.classType);
     		$("#className").html(data.createClassObj.className);
-    		$("#effectDate").html(data.createClassObj.effectDate);
+    		$("#startDate").html(data.createClassObj.startDate);
     		$("#applyDate").html(data.createClassObj.applyDate);
     		$("#applyName").html(data.createClassObj.applyName);
     		$("#studentChannelTypeVal").html(data.createClassObj.studentChannelTypeVal);
@@ -96,12 +96,38 @@ $(document).ready(function() {
 	});
 	
 	//提交放班审批
-	$("#applyApproveSubmit").click(function() {
-		
-	});
-	
-	//提交取消放班申请
-	$("#cancelApproveSubmit").click(function() {
-		
+	$("#approveSubmit").click(function() {
+		var approveType = $('input:radio[name="approveType"]:checked').val();
+		if(approveType == "" || approveType == null || approveType == undefined || approveType == "null") {
+			$.messager.alert('提示', "请选择是否审批通过！");
+		} else {
+			if($("#cancelApplyClassFm").form('validate')) {
+				var obj = JSON.stringify($("#cancelApplyClassFm").serializeObject());
+				$.ajax({
+					url: "/sys/applyClass/approveApplyClass.do",
+					data: "param=" + obj,
+					contentType: "charset=UTF-8",
+					dataType: "json",
+					async: false,
+					beforeSend: function()
+					{
+						$.messager.progress({title : '审批申请', msg : '正在审批申请，请稍等……'});
+					},
+					success: function (data) {
+						$.messager.progress('close'); 
+						var flag = data.flag
+						if(flag)
+						{
+							$.messager.alert('提示', "审批申请成功！");
+							window.location.reload();
+						}
+						else
+						{
+							$.messager.alert('提示', "审批申请失败！");
+						}
+					} 
+				});
+			}
+		}
 	});
 });

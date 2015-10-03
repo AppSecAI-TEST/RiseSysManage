@@ -236,4 +236,32 @@ public class CreateClassController
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/qryClassName.do")
+	public void qryClassName(String courseType, String classType, String stageId, HttpServletResponse response)
+	{
+		log.error(courseType);
+		log.error(classType);
+		log.error(stageId);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = createClassService.qryClassName(courseType, classType, stageId);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }

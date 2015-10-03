@@ -90,7 +90,7 @@
 						<th data-options="field:'cancelApplyClassStateText',width:150,align:'center'">取消放班审批状态</th>
 						<th data-options="field:'openClassStateText',width:100,align:'center'">开班状态</th>
 						<th data-options="field:'classStateText',width:100,align:'center'">班级状态</th>
-						<th data-options="field:'effectDate',width:100,align:'center'">开课时间</th>
+						<th data-options="field:'startDate',width:100,align:'center'">开课时间</th>
 						<th data-options="field:'schooltimeName',width:200,align:'center'">上课时段与教室</th>
 						<th data-options="field:'classStudentNum',width:100,align:'center'">定班人数</th>
 						<th data-options="field:'minSubNum',width:80,align:'center'">距最低人数</th>

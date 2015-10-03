@@ -47,7 +47,7 @@ $(document).ready(function() {
         			$.messager.progress('close'); 
         			$("#className").html(data.className);
         			$("#applyDate").html(data.applyClassDate);
-        			$("#effectDate").html(data.effectDate);
+        			$("#startDate").html(data.startDate);
         			$("#teacherName").html(data.teacherName);
         			$("#classStudentNum").html(data.classStudentNum);
         			$("#classProgress").html(data.classProgress);

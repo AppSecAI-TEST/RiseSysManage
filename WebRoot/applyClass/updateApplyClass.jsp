@@ -31,7 +31,7 @@
 	  				<tr>
 	  					<td align="right" width="10%"><span>开课时间：</span></td>
 	  					<td width="20%">
-	  						<input name="effectDate" id="effectDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;"/>
+	  						<input name="startDate" id="startDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;"/>
 	  					</td>
 	  					<td align="right" width="10%"><span>学员来源：</span></td>
 	  					<td width="20%"><span id="studentChannelTypeVal"></span></td>

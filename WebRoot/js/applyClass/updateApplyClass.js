@@ -15,7 +15,7 @@ $(document).ready(function() {
     		$("#stageId").html(data.createClassObj.stageId);
     		$("#classType").html(data.createClassObj.classType);
     		$("#className").html(data.createClassObj.className);
-    		$("#effectDate").datebox("setValue", data.createClassObj.effectDate);
+    		$("#startDate").datebox("setValue", data.createClassObj.startDate);
     		$("#studentChannelTypeVal").html(data.createClassObj.studentChannelTypeVal);
     		$("#higherSchoolName").html(data.createClassObj.higherSchoolName);
     		$("#Applyremark").html(data.createClassObj.remark);

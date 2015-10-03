@@ -26,7 +26,7 @@
   				</tr>
   				<tr>
   					<td align="right" width="10%"><span>开课时间：</span></td>
-  					<td width="20%"><span id="effectDate"></span></td>
+  					<td width="20%"><span id="startDate"></span></td>
   					<td align="right" width="10%"><span>放班申请时间：</span></td>
   					<td width="20%" colspan="3"><span id="applyDate"></span></td>
   					<td align="right" width="10%"><span>申请人：</span></td>

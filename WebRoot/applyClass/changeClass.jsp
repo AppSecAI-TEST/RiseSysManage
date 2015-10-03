@@ -89,7 +89,7 @@
 		  					<td align="right" width="10%"><span>放班时间：</span></td>
 		  					<td width="15%"><span id="applyDate"></span></td>
 		  					<td align="right" width="10%"><span>开班时间：</span></td>
-		  					<td width="15%"><span id=effectDate></span></td>
+		  					<td width="15%"><span id="startDate"></span></td>
 		  					<td align="right" width="10%"><span>带班老师：</span></td>
 		  					<td width="15%"><span id="teacherName"></span></td>
 	  					</tr>
