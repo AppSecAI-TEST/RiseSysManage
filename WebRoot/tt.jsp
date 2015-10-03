@@ -18,16 +18,9 @@ datagrid-row-selected
 </style>
 	</head>
 	<body>
-    	<table>
-    	<tr>
-    	<td width="20">
-			<table width="20%" id="tt"></table>
-		</td>
-		<td>
+    	 
 			<table id="tt1"></table>
-		</td>
-		</tr>
-		</table>
+		 
 		 
 	</body>
 </html>
@@ -47,6 +40,7 @@ $(document).ready(function(){
     fitColumns: true,
     selectOnCheck:false,
     columns:[[
+      {field:'teacherId',title:'老师',width:80,align:'center'},
       {field:'001',title:'8:30',width:80,align:'center'},
       {field:'002',title:'10:30',width:80,align:'center'},
       {field:'003',title:'14:00',width:80,align:'center'},
@@ -59,21 +53,7 @@ $(document).ready(function(){
   });
   
   	
-  $('#tt').datagrid({
-    url: 'datagrid_data1.json',
-    title: '10月',
-    width: 100,
-    height: 'auto',
-    fitColumns: true,
-    selectOnCheck:false,
-    columns:[[
-      {field:'teacherId',title:'老师',width:80,align:'center'},
-     
-    ]],
-    onLoadSuccess:function(){
-    //  MergeCells("tt1","itemid,productid")
-    }
-  });
+  
   
 });
 
