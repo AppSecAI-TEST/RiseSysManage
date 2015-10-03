@@ -26,28 +26,7 @@ datagrid-row-selected
 
 
 <script type="text/javascript">
-$(document).ready(function(){
-	
-  $('#tt').datagrid({
-    url: 'datagrid_data2.json',
-    title: 'DataGrid - ContextMenu',
-    width: 600,
-    height: 'auto',
-    fitColumns: true,
-    selectOnCheck:false,
-    columns:[[
-      {field:'itemid',title:'Item ID',width:80},
-      {field:'productid',title:'Product ID',width:120},
-      {field:'listprice',title:'List Price',width:80,align:'right',styler:cellStyler},
-      {field:'unitcost',title:'Unit Cost',width:80,align:'right'},
-      {field:'attr1',title:'Attribute',width:250},
-      {field:'status',title:'Status',width:60,align:'center'}
-    ]],
-    onLoadSuccess:function(){
-      //$(this).datagrid("autoMergeCells",['itemid','productid']);
-    }
-  });
-});
+
 
 
 $(document).ready(function(){
