@@ -25,9 +25,19 @@ $(document).ready(function() {
 	$("#cancelApplyClass").click(function() {
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) {
-			var classInstId = row.classInstId;
-			var applyId = row.applyId;
-			window.location.href = "/sys/applyClass/cancelApplyClass.jsp?classInstId="+classInstId+"&applyId="+applyId;
+			var classState = row.classState;
+			if(classState == "001") {
+				var tacheState = row.tacheState;
+				if(tacheState == "002" || tacheState == "006") {
+					var classInstId = row.classInstId;
+					var applyId = row.applyId;
+					window.location.href = "/sys/applyClass/cancelApplyClass.jsp?classInstId="+classInstId+"&applyId="+applyId;
+				} else {
+					$.messager.alert('提示', "您选择的班级已经申请取消放班，不能再申请取消放班！");
+				}
+			} else {
+				$.messager.alert('提示', "您选择的班级已经取消放班审批通过，不能再申请取消放班！");
+			}
 		} else {
 			$.messager.alert('提示', "请先选择您要取消放班的班级！");
 		}
@@ -37,8 +47,13 @@ $(document).ready(function() {
 	$("#updateApplyClass").click(function() {
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) {
-			var classInstId = row.classInstId;
-			window.location.href = "/sys/applyClass/qryCreateClass.do?classInstId="+classInstId;
+			var classState = row.classState;
+			if(classState == "001") {
+				var classInstId = row.classInstId;
+				window.location.href = "/sys/applyClass/qryCreateClass.do?classInstId="+classInstId;
+			} else {
+				$.messager.alert('提示', "您选择的班级已经取消放班审批通过，不能维护该班级！");
+			}
 		} else {
 			$.messager.alert('提示', "请先选择您要维护的班级！");
 		}
