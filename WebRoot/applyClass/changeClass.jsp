@@ -69,8 +69,7 @@
   						<td align="right" width="10%"><span>更换选班：</span></td>
   						<td width="90%" colspan="5">
   							<select id="changeClassInstId" name="changeClassInstId" class="easyui-combobox" style="width: 150px; height: 25px;"
-  							data-options="formatter:formatClassInst, valueField: 'classInstId', textField: 'className', panelHeight: 'auto',
-  							onLoadSuccess:function(data){$('#changeClassInstId').combobox('setValue',data[0].classInstId);}"
+  							data-options="formatter:formatClassInst, valueField: 'classInstId', textField: 'className', panelHeight: 'auto'"
   							url="<%=path %>/pubData/qryClassInstList.do?schoolId=${sessionScope.StaffT.schoolId}&courseType=001&stageId=<%=stageId %>&classType=<%=classType %>&classState='001','002'&classInstId=<%=classInstId %>">
 		        			</select>
   						</td>
@@ -89,9 +88,9 @@
 		  					<td align="right" width="10%"><span>放班时间：</span></td>
 		  					<td width="15%"><span id="applyDate"></span></td>
 		  					<td align="right" width="10%"><span>开班时间：</span></td>
-		  					<td width="15%"><span id="startDate"></span></td>
+		  					<td width="10%"><span id="startDate"></span></td>
 		  					<td align="right" width="10%"><span>带班老师：</span></td>
-		  					<td width="15%"><span id="teacherName"></span></td>
+		  					<td width="20%"><span id="teacherName"></span></td>
 	  					</tr>
 	  					<tr>
 	  						<td align="right" width="10%"><span>定班人数：</span></td>

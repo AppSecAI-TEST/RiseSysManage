@@ -99,8 +99,8 @@
 						<th data-options="field:'startDate',width:100,align:'center'">申请开课时间</th>
 						<th data-options="field:'approveStateText',width:100,align:'center'">审批状态</th>
 						<th data-options="field:'applyName',width:100,align:'center'">申请人</th>
-						<th data-options="field:'applyDate',width:100,align:'center'">申请时间</th>
-						<th data-options="field:'approveDate',width:100,align:'center'">审批时间</th>
+						<th data-options="field:'createDate',width:100,align:'center'">申请时间</th>
+						<th data-options="field:'approveCreateDate',width:100,align:'center'">审批时间</th>
 						<th data-options="field:'approveName',width:100,align:'center'">审批人</th>
 					</tr>
 				</thead>

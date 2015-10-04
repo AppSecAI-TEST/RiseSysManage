@@ -80,7 +80,6 @@ public class QryPubDataService
 			obj.element("funcNodeId", funcNodeId);
 		}
 		
-		
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1019\",securityCode:\"0000000000\",params:{param:"+obj+"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}

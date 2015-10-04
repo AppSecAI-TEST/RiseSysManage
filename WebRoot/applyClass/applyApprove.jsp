@@ -28,7 +28,7 @@
   				<tr>
   					<td align="right" width="10%"><span>开课时间：</span></td>
   					<td width="20%"><span id="startDate"></span></td>
-  					<td align="right" width="10%"><span>学员来源：</span></td>
+  					<td align="right" width="10%"><span>学员来源类型：</span></td>
   					<td width="20%" colspan="3"><span id="studentChannelTypeVal"></span></td>
   					<td align="right" width="10%"><span>升学班级：</span></td>
   					<td width="30%"><span id="higherSchoolName"></span></td>

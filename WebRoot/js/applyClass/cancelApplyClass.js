@@ -67,7 +67,6 @@ $(document).ready(function() {
 	$("#submit").click(function(){
 		if($("#cancelApplyClassFm").form('validate')) {
 			var obj = JSON.stringify($("#cancelApplyClassFm").serializeObject());
-			alert(obj)
 			$.ajax({
 				url: "/sys/applyClass/cancelApplyClass.do",
 				data: "param=" + obj,
@@ -81,13 +80,10 @@ $(document).ready(function() {
     	    	success: function (data) {
     	    		$.messager.progress('close'); 
     	    		var flag = data.flag
-    	            if(flag)
-    	            {
+    	            if(flag) {
     	            	$.messager.alert('提示', "申请取消放班成功！");
     	            	window.location.reload();
-    	            }
-    	            else
-    	            {
+    	            } else {
     	            	$.messager.alert('提示', "申请取消放班失败！");
     	            }
     	        } 
@@ -116,13 +112,10 @@ $(document).ready(function() {
 					success: function (data) {
 						$.messager.progress('close'); 
 						var flag = data.flag
-						if(flag)
-						{
+						if(flag) {
 							$.messager.alert('提示', "审批申请成功！");
 							window.location.reload();
-						}
-						else
-						{
+						} else {
 							$.messager.alert('提示', "审批申请失败！");
 						}
 					} 

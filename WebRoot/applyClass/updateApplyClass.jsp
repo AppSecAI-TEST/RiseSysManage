@@ -18,6 +18,8 @@
   				<input type="hidden" id="applyId" name="applyId" value="${obj.createClassObj.applyId }"/>
   				<input type="hidden" id="classInstId" name="classInstId" value="${obj.createClassObj.classInstId }"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
+  				<input type="hidden" id="schoolId" name="schoolId" value="${obj.createClassObj.schoolId}"/>
+  				<input type="hidden" id="classTeacherId" name="classTeacherId"/>
 	  			<table width="99.99%" cellpadding="5px" class="maintable" id="cancelApplyClassTd">
 	  				<tr>
 	  					<td align="right" width="10%"><span>课程阶段：</span></td>
@@ -50,15 +52,16 @@
   								</tr>
   								<c:forEach items="${obj.schooltimeObj.rows }" var="schooltime" varStatus="status">
 	  								<tr>
+					        			<input type='hidden' name='schooltimes' roomId='${schooltime.roomId }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }' lessionHours='${schooltime.lessionHours }' addNum='${status.index + 1 }' schooltimeId='${schooltime.schooltimeId }'/>
 	  									<td align="center" width='4%' lessionHours='${schooltime.lessionHours }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }'><span>${status.index + 1 }</span></td>
 	  									<td align="center" width='14%'><span>${schooltime.schooltimeName }</span></td>
 	  									<td align="center" width='4%'>
-	  										<select name='room' id="roomId${status.index + 1 }" class="easyui-combobox" style="width: 80px; height: 28px;"
+	  										<select name='roomId' id="roomId${status.index + 1 }" class="easyui-combobox" style="width: 80px; height: 28px;"
+	  										weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }'
 						      				data-options="formatter:formatRoom, valueField: 'roomId', textField: 'roomName', panelHeight: 'auto',
 						      				onLoadSuccess:function(data){$('#roomId${status.index + 1 }').combobox('setValue', ${schooltime.roomId });}" 
-						      				url="<%=path %>/pubData/qryRoomList.do?schoolId=${sessionScope.StaffT.schoolId}">
+						      				url="<%=path %>/pubData/qryRoomList.do?schoolId=${obj.createClassObj.schoolId}">
 					        				</select>
-					        				<input type='hidden' name='schooltimes' roomId='${schooltime.roomId }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }' lessionHours='${schooltime.lessionHours }' addNum='${status.index + 1 }'/>
 	  									</td>
 	  									<td align="center" width='4%'><span>${schooltime.lessionHours }</span></td>
 	  									<td width='64%' lessions='${schooltime.lessionHours }'>
@@ -66,7 +69,7 @@
 	  											<span id="teacher${classTeacher.teacherId }${schooltime.weekTime }${schooltime.hourRange }">
 	  												${classTeacher.schoolName }&nbsp;${classTeacher.byname }&nbsp;${classTeacher.hours }&nbsp;${classTeacher.isLicense }&nbsp;
 	  												<a href='javascript:void(0)' class='linkmore' onclick="deleteTeacher(this, ${classTeacher.teacherId })"><span>删除</span></a>
-	  												<input type='hidden' name='teachers' teacherId='${classTeacher.teacherId }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }' lessions='${classTeacher.hours }'/>
+	  												<input type='hidden' name='teachers' teacherId='${classTeacher.teacherId }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }' lessions='${classTeacher.hours }' classTeacherId='${classTeacher.classTeacherId }'/>&nbsp;
 	  											</span>
 	  										</c:forEach>
 	  									</td>
@@ -84,7 +87,7 @@
 	  				</tr>
 	  				<tr>
 	  					<td colspan="8" align="right">
-	  						<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
+	  						<a href="javascript:void(0)" id="updateApplyClassSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
 		      				&nbsp;<a href="javascript:void(0)" id="activityBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
 		      				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	  					</td>

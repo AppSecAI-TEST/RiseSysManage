@@ -267,18 +267,15 @@ $(document).ready(function() {
 							var content = $(node).html();
 							var teacherHtml = document.getElementById("teacher" + teacherId + weekTime + hourRange);
 							if(teacherHtml == null || teacherHtml == "" || teacherHtml == undefined || teacherHtml == "null") {
-								if(content != "" && content != null && content != undefined) {
-									content += "&nbsp;&nbsp;";
-								}
 								content += "<span id=teacher"+ teacherId + weekTime + hourRange +">";
 								var teacherText = teacherSchoolName + " " + teacherName + " " + lessions + " " + licenseFlagText;
 								content += teacherText + "&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='deleteTeacher(this, "+teacherId+")'><span>删除</span></a>";
-								content += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"'/></span>";
+								content += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"'/>&nbsp;</span>";
 								$(node).html(content);
 							} else {
 								var teacherText = teacherSchoolName + " " + teacherName + " " + lessions + " " + licenseFlagText;
 								var html = teacherText + "&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='deleteTeacher(this, "+teacherId+")'><span>删除</span></a>";
-								html += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"'/>";
+								html += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"'/>&nbsp;";
 								$("#teacher" + teacherId + weekTime + hourRange).html(html);
 							}
 							$(node).attr("lessions", parseInt(lessions) + parseInt(addLessions));
@@ -405,14 +402,10 @@ function addApplyClass() {
 		success: function (data) {
 			$.messager.progress('close'); 
 			var flag = data.flag
-			if(flag)
-			{
+			if(flag) {
 				$.messager.alert('提示', "申请放班成功！");
-				window.location.reload();
-			}
-			else
-			{
-				$.messager.alert('提示', "学员注册失败！");
+			} else {
+				$.messager.alert('提示', data.msg);
 			}
 		} 
 	});
@@ -426,8 +419,7 @@ function addTeacher(obj) {
 	selTr = $(obj).parent().parent();
 }
 
-function deleteTeacher(obj, teacherId)
-{
+function deleteTeacher(obj, teacherId) {
 	var lessions = null;
 	var weekTime = null;
 	var hourRange = null;

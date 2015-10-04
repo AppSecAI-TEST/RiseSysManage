@@ -1,5 +1,6 @@
 var td = 1;
 var selTr = null;
+var classTeacherId = "";
 $(document).ready(function() {	
 	$("#selectClass").click(function() {
 		var classType = $("#classType").html();
@@ -63,37 +64,6 @@ $(document).ready(function() {
 		}
 	});
 	
-	//带班老师的学校
-	$("#teacherSchoolId").combobox({
-		onChange : function(n, o) {
-			var classType = $("#classType").combobox("getValue");
-			$("#teacherId").combobox({
-				url : "/sys/pubData/qryTeacherList.do?schoolId=" + n + "&classType=" + classType,
-				valueField : "teacherId",
-        		textField : "byname",
-        		panelHeight : "auto"
-			});
-			$("#licenseFlagText").html("");
-			$("#lessions").numberbox("setValue", "");
-		}
-	});
-
-	$("#teacherId").combobox({
-		onChange : function(n, o) {
-			var data = $('#teacherId').combobox('getData');
-			$.each(data, function(i, obj){
-				if(n == obj.teacherId) {
-					var licenseFlag = obj.licenseFlag;
-					var licenseFlagText = "未持证";
-					if("Y" == licenseFlag) {
-						licenseFlagText = "持证";
-					}
-					$("#licenseFlagText").html(licenseFlagText);
-				}
-			});
-		}
-	});
-	
 	//将学员添加到班级中
 	$("#addStudentCourseSubmit").click(function() {
 		var obj = $('#list_data').datagrid('getSelections');
@@ -136,6 +106,37 @@ $(document).ready(function() {
 			});
 		} else {
 			$.messager.alert('提示', "请先选择您要添加的学员！");
+		}
+	});
+	
+	//带班老师的学校
+	$("#teacherSchoolId").combobox({
+		onChange : function(n, o) {
+			var classType = $("#classType").html();
+			$("#teacherId").combobox({
+				url : "/sys/pubData/qryTeacherList.do?schoolId=" + n + "&classType=" + classType,
+				valueField : "teacherId",
+        		textField : "byname",
+        		panelHeight : "auto"
+			});
+			$("#licenseFlagText").html("");
+			$("#lessions").numberbox("setValue", "");
+		}
+	});
+
+	$("#teacherId").combobox({
+		onChange : function(n, o) {
+			var data = $('#teacherId').combobox('getData');
+			$.each(data, function(i, obj){
+				if(n == obj.teacherId) {
+					var licenseFlag = obj.licenseFlag;
+					var licenseFlagText = "未持证";
+					if("Y" == licenseFlag) {
+						licenseFlagText = "持证";
+					}
+					$("#licenseFlagText").html(licenseFlagText);
+				}
+			});
 		}
 	});
 	
@@ -191,12 +192,12 @@ $(document).ready(function() {
 								content += "<span id=teacher"+ teacherId + weekTime + hourRange +">";
 								var teacherText = teacherSchoolName + " " + teacherName + " " + lessions + " " + licenseFlagText;
 								content += teacherText + "&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='deleteTeacher(this, "+teacherId+")'><span>删除</span></a>";
-								content += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"'/></span>";
+								content += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"' addFlag='Y'/></span>";
 								$(node).html(content);
 							} else {
 								var teacherText = teacherSchoolName + " " + teacherName + " " + lessions + " " + licenseFlagText;
 								var html = teacherText + "&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='deleteTeacher(this, "+teacherId+")'><span>删除</span></a>";
-								html += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"'/>";
+								html += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"' addFlag='Y'/>";
 								$("#teacher" + teacherId + weekTime + hourRange).html(html);
 							}
 							$(node).attr("lessions", parseInt(lessions) + parseInt(addLessions));
@@ -211,7 +212,140 @@ $(document).ready(function() {
 			}
 		}
 	});
+	
+	if($("[name='roomId']").length > 0) {
+		$("[name='roomId']").each(function(i, obj) {
+			var id = "#roomId" + (i + 1);
+			$(id).combobox({
+				onChange : function(n, o) {
+					var changeWeekTime = $(id).attr("weekTime");
+					var changeHourRange = $(id).attr("hourRange");
+					$("[name='schooltimes']").each(function() {
+						if ($(this).attr("weekTime") == changeWeekTime && $(this).attr("hourRange") == changeHourRange) {
+							$(this).attr("roomId", n);
+						}
+					});
+				}
+			});
+		});
+	}
+	
+	//班级维护
+	$("#updateApplyClassSubmit").click(function() {
+		if($("#updateApplyClassFm").form('validate')) {
+			var flag = true;
+			if($("[name='teachers']").length > 0) {
+				var addNum = "";
+				$("[name='schooltimes']").each(function() {
+					var teacherNum = 0;
+					var weekTime = $(this).attr("weekTime");
+					var hourRange = $(this).attr("hourRange");
+					$("[name='teachers']").each(function() {
+						var teacherWeekTime = $(this).attr("weekTime");
+						var teacherHourRange = $(this).attr("hourRange");
+						if(weekTime == teacherWeekTime && hourRange == teacherHourRange) {
+							teacherNum++;
+						}
+					});
+					if(teacherNum == 0) {
+						flag = false;
+						addNum = $(this).attr("addNum");
+					}
+				});
+				if(flag) {
+					var addNum = "";
+					var hours = 0;
+					var teacherHours = 0;
+					$("[name='schooltimes']").each(function() {
+						var weekTime = $(this).attr("weekTime");
+						var hourRange = $(this).attr("hourRange");
+						var lessionHours = parseInt($(this).attr("lessionHours"));
+						var totalLessions = 0;
+						$("[name='teachers']").each(function() {
+							var teacherWeekTime = $(this).attr("weekTime");
+							var teacherHourRange = $(this).attr("hourRange");
+							if(weekTime == teacherWeekTime && hourRange == teacherHourRange) {
+								totalLessions += parseInt($(this).attr("lessions"));
+							}
+						});
+						if(totalLessions < lessionHours) {
+							flag = false;
+							addNum = $(this).attr("addNum");
+							hours = lessionHours;
+							teacherHours = totalLessions;
+						}
+					});
+					if(flag) {
+						updateApplyClass();
+					} else {
+						$.messager.alert('提示', "上课时段"+addNum+"的总课时量为"+hours+"，您选择的所有带班老师的总课时量为"+teacherHours+"，请保持课时量相等！");
+					}
+				} else {
+					$.messager.alert('提示', "请至少为上课时段"+addNum+"添加一位带班老师！");
+				}
+			} else {
+				$.messager.alert('提示', "请至少为每个上课时段添加一位带班老师！");
+			}
+		}
+	});
 });
+
+function updateApplyClass() {
+	var schooltimeArray = "[";
+	$("[name='schooltimes']").each(function() {
+		var roomId = $(this).attr("roomId");
+		var lessionHours = $(this).attr("lessionHours");
+		var schooltimeId = $(this).attr("schooltimeId");
+		var weekTime = $(this).attr("weekTime");
+		var hourRange = $(this).attr("hourRange");
+		schooltimeArray += "{schooltimeId:\""+schooltimeId+"\",roomId:\""+roomId+"\",lessionHours:\""+lessionHours+"\",";
+		schooltimeArray += "classTeacherArray:[";
+		var flag = false;
+		$("[name='teachers']").each(function() {
+			var teacherWeekTime = $(this).attr("weekTime");
+			var teacherHourRange = $(this).attr("hourRange");
+			var addFlag = $(this).attr("addFlag");
+			if(weekTime == teacherWeekTime && hourRange == teacherHourRange && "Y" == addFlag) {
+				flag = true;
+				var teacherId = $(this).attr("teacherId");
+				var lessions = $(this).attr("lessions");
+				schooltimeArray += "{teacherId:\""+teacherId+"\",teacherType:\"T\",lessions:\""+lessions+"\"},";
+			}
+		});
+		if(flag)
+		{
+			schooltimeArray = schooltimeArray.substring(0, schooltimeArray.length - 1);
+		}
+		schooltimeArray += "]},";
+	});
+	schooltimeArray = schooltimeArray.substring(0, schooltimeArray.length - 1) + "]";
+	if(classTeacherId != "" && classTeacherId != null && classTeacherId != undefined) {
+		classTeacherId = classTeacherId.substring(0, classTeacherId.length - 1);
+		$("#classTeacherId").val(classTeacherId);
+	}
+	var obj = JSON.stringify($("#updateApplyClassFm").serializeObject());
+	obj = obj.substring(0, obj.length - 1) + ",schooltimeArray:"+schooltimeArray+"}";
+	$.ajax({
+		url: "/sys/applyClass/updateCreateClass.do",
+		data: "param=" + obj,
+		dataType: "json",
+		async: false,
+		beforeSend: function()
+		{
+			$.messager.progress({title : '班级维护', msg : '正在维护班级信息，请稍等……'});
+		},
+		success: function (data) {
+			$.messager.progress('close'); 
+			var flag = data.flag;
+			if(flag) {
+				$.messager.alert('提示', "班级维护成功！");
+				window.location.reload();
+			} else {
+				$.messager.alert('提示', data.msg);
+			}
+		} 
+	});
+}
 
 function validateSelect()
 {
@@ -256,6 +390,7 @@ function deleteTeacher(obj, teacherId)
 			var selHourRange = $(this).attr("hourRange");
 			if(teacherId == selTeacherId && weekTime == selWeekTime && hourRange == selHourRange) {
 				lessions = $(this).attr("lessions");
+				classTeacherId += $(this).attr("classTeacherId") + ",";
 			}
 		});
 	}
