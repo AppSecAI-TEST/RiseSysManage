@@ -50,12 +50,23 @@ $(document).ready(function() {
 			var classState = row.classState;
 			if(classState == "001") {
 				var classInstId = row.classInstId;
-				window.location.href = "/sys/applyClass/qryCreateClass.do?classInstId="+classInstId;
+				window.location.href = "/sys/applyClass/qryCreateClass.do?classInstId="+classInstId+"&type=update";
 			} else {
 				$.messager.alert('提示', "您选择的班级已经取消放班审批通过，不能维护该班级！");
 			}
 		} else {
 			$.messager.alert('提示', "请先选择您要维护的班级！");
+		}
+	});
+	
+	//浏览
+	$("#view").click(function() {
+		var row = $('#list_data').datagrid('getSelected');
+		if(row) {
+			var classInstId = row.classInstId;
+			window.location.href = "/sys/applyClass/qryCreateClass.do?classInstId="+classInstId+"&type=view";
+		} else {
+			$.messager.alert('提示', "请先选择您要浏览的班级！");
 		}
 	});
 });

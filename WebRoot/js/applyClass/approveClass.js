@@ -51,4 +51,16 @@ $(document).ready(function() {
 			$.messager.alert('提示', "请先选择您要审批的取消放班申请！");
 		}
 	});
+	
+	//浏览
+	$("#view").click(function() {
+		var row = $('#list_data').datagrid('getSelected');
+		if(row) {
+			var classInstId = row.classInstId;
+			alert(classInstId);
+			window.location.href = "/sys/applyClass/qryCreateClass.do?classInstId="+classInstId+"&type=view";
+		} else {
+			$.messager.alert('提示', "请先选择您要浏览的班级！");
+		}
+	});
 });

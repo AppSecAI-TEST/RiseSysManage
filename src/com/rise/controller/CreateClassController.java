@@ -133,10 +133,15 @@ public class CreateClassController
 	}
 	
 	@RequestMapping(value = "/qryCreateClass.do")
-	public ModelAndView qryCreateClass(String classInstId)
+	public ModelAndView qryCreateClass(String classInstId, String type)
 	{
 		log.error(classInstId);
-		ModelAndView view = new ModelAndView("applyClass/updateApplyClass");
+		ModelAndView view = null;
+		if("update".equals(type)) {
+			view = new ModelAndView("applyClass/updateApplyClass");
+		} else {
+			view = new ModelAndView("applyClass/viewApplyClass");
+		}
 		try 
 		{
 			String retVal = createClassService.qryCreateClassById(classInstId);
