@@ -15,7 +15,7 @@
 	</style>
 	</head>
 	<body>
-		<table class="easyui-datagrid"  align="center" title="现金抵扣券列表" style="width:920px;margin-top:10px;height:330px;" id="couponList" url="<%=path %>/pubData/qryDataListByPage.do?param={'queryCode':'Qry_Student_Coupon','studentId':'<%=studentId%>'}" 
+		<table class="easyui-datagrid"  align="center" title="现金抵扣券列表" style="width:920px;margin-top:10px;height:330px;" id="couponList" url="<%=path%>/pubData/qryDataListByPage.do?param={'queryCode':'Qry_Student_Coupon','studentId':'<%=studentId%>'}" 
 			 pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 			<thead>
 				<tr>

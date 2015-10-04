@@ -3,8 +3,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>RunJS</title>
-			<%@ include file="common/head.jsp" %>
-		<%@ include file="common/formvalidator.jsp" %>
+			<%@ include file="/common/head.jsp" %>
+		<%@ include file="/common/formvalidator.jsp" %>
 		<script class="resources library" src="/sys/pub/js/autoMergeCells.js" type="text/javascript"></script>
 	
 	<style type="text/css">

@@ -111,7 +111,7 @@
 					
 		<div id="dlg" class="easyui-dialog" style="width: 1000px; height: 550px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
  				<iframe id="frame2" name="frame2"   src="/sys/course/oldCourse.jsp?studentId=<%=studentId%>"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" height="445px" width="100%"></iframe>
-  	   </div>
+  	    </div>
 	 
 		<div style="margin-top: 20px;">
 	      		<div style="float: left;margin-left: 900px;">

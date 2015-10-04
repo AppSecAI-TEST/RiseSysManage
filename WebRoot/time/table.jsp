@@ -6,8 +6,8 @@
 <html>
 	<head>
 		<title>例子</title>
-		<%@ include file="common/head.jsp" %>
-		<%@ include file="common/formvalidator.jsp" %>
+		<%@ include file="/common/head.jsp" %>
+		<%@ include file="/common/formvalidator.jsp" %>
 		<style type="text/css">
 			#fm{
 				margin:0;
