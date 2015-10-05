@@ -116,4 +116,17 @@ public class SysRoleService
 			return "缺乏用户信息,请核实后重新尝试";
 		}
 	}
+	
+	public String qryTotalRoleList() throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00316\",securityCode:\"0000000000\",params:{},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+	
+	public String settingRoleFunc(String sysRoleId , String funcNodeIds , HttpSession session) throws Exception
+	{
+		StaffT staffT = (StaffT)session.getAttribute("StaffT");
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00317\",securityCode:\"0000000000\",params:{sysRoleId:\""+sysRoleId+"\",funcNodeIds:\""+funcNodeIds+"\",staffId:\""+staffT.getStaffId()+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
 }

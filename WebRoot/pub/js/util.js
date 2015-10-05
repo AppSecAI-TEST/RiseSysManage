@@ -313,3 +313,12 @@ function clearData(name)
 			}
 		}
 }
+
+function ajaxLoading(tipsValue){ 
+    top.$("<div class=\"datagrid-mask\"></div>").css({display:"block",width:"100%",height:"100%"}).appendTo("body"); 
+    top.$("<div class=\"datagrid-mask-msg\"></div>").html(tipsValue).appendTo("body").css({display:"block",left:"50%",top:"50%"}); 
+} 
+function ajaxLoadEnd(){ 
+    top.$(".datagrid-mask").remove(); 
+    top.$(".datagrid-mask-msg").remove();             
+} 
