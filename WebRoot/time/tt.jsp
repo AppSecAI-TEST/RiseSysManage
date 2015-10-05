@@ -52,11 +52,11 @@ $(document).ready(function(){
     onClickCell:onClickCell, 
     columns:[[
       {field:'teacherName',title:'老师',width:80,align:'center'},
-      {field:'001',title:'8:30',width:80,align:'center'},
-      {field:'002',title:'10:30',width:80,align:'center'},
-      {field:'003',title:'14:00',width:80,align:'center'},
-      {field:'004',title:'16:00',width:80,align:'center'},
-      {field:'005',title:'18:30',width:80,align:'center'} 
+      {field:'H001',title:'8:30',width:80,align:'center'},
+      {field:'H002',title:'10:30',width:80,align:'center'},
+      {field:'H003',title:'14:00',width:80,align:'center'},
+      {field:'H004',title:'16:00',width:80,align:'center'},
+      {field:'H005',title:'18:30',width:80,align:'center'} 
     ]],
     onLoadSuccess:function()
     {
@@ -72,39 +72,61 @@ $(document).ready(function(){
 
 function MergeCells()
 {
-		var merges = [{
-			index: 1,
-			colspan: 2
-		},{
-			index: 5,
-			colspan: 2
-		},{
-			index: 7,
-			colspan: 2
-		}];
-		
 	    var s=  $('#tt1').datagrid('getData');
 	    var datas =s.rows;
 	 
 		for(var i=0; i<datas.length; i++)
 		{
 			var index=i;
-			var field;
+			var fieldT;
 			var colspanNum=0;
-			alert(JSON.stringify(datas[i]));
-			/*
-			if(colspanNum==0)
-			{
-				continue;
-			}
-			$("#tt1").datagrid('mergeCells',
-			{
-				index: merges[i].index,
-				field: '001',
-				colspan: merges[i].colspan
-			});*/
+			for(var key in datas[i])
+			{  
+				
+                if(key.indexOf("merge")>-1)
+                {
+                	var val=datas[i][key];
+                	fieldT="H"+key.substring(5,8);
+                	$("#tt1").datagrid('mergeCells',
+					{
+						index: i,
+						field: fieldT,
+						colspan: val
+					});
+                }
+            }  
 		}
+		$("table tr td").each(function()
+		{
+		   var d=$(this).text();
+		  if('DPre-K03'==d)
+		  {
+			     $(this).css("background-color","#EDE1D8");
+		  }else if('DPre-K01'==d)
+		  {
+			  $(this).css("background-color","#ECB1D8");
+		  }else if('DPre-K02'==d)
+		  {
+			  $(this).css("background-color","#EFE1B8");
+		  }
+		
+		});
+
+		/*
+		$("table tr").each(function(k,v)
+		{//遍历所有行
+			$("td",v).eq(3).css("background-color","#ECE9D8");//把每行的同一位置变色
+		});*/
  }
+
+	function randomcolor()
+	{
+		var str=Math.ceil(Math.random()*16777215).toString(16);   
+		if(str.length<6){   
+		 str="0"+str;   
+		}   
+		return "#"+str;
+	}
 
  function onClickCell(rowIndex, field, value)
  { 

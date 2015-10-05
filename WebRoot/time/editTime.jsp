@@ -16,11 +16,20 @@
   	</head>
   
   	<body>
+  
+  	<form id="timeFm">
 		<table width="500px" cellpadding="5px" class="maintable" id="addActivityTd">
+		    <input type="hidden" name="weekTime" value="<%=StringUtil.getJSONObjectKeyVal(object,"weekTime") %>"/>
+			<input type="hidden" name="weekSeq" value="<%=StringUtil.getJSONObjectKeyVal(object,"weekSeq") %>"/>
+			<input type="hidden" name="schooltime" value="<%=StringUtil.getJSONObjectKeyVal(object,"schooltime") %>"/>
+			<input type="hidden" name="teacherName" value="<%=StringUtil.getJSONObjectKeyVal(object,"teacherName") %>"/>
+			<input type="hidden" name="teacherId" value="<%=StringUtil.getJSONObjectKeyVal(object,"teacherId") %>"/>
+			<input type="hidden" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
+			
 			<tr>
 				<td align="right"><span>当前日期：</span></td>
 				<td>
-				<span width="100px"><%=object.get("schooltime") %></span>
+				<span width="100px"><%=StringUtil.getJSONObjectKeyVal(object,"schooltime") %></span>
 				</td>
 			</tr>
 			<tr>
@@ -32,7 +41,7 @@
 			<tr>
 			<td align="right"><span>老师类型：</span></td>
 			<td>
-				 <select class="easyui-combobox" style="width: 150px; height: 28px;"><option value="T">T</option><option value="TA">TA</option></select> 
+				 <select name="teacherType" class="easyui-combobox" style="width: 150px; height: 28px;"><option value="T">T</option><option value="TA">TA</option></select> 
 			</td>
 			</tr>
 			<tr>
@@ -49,30 +58,61 @@
 			<tr>
 				<td align="right"><span>班级名称：</span></td>
 				<td>
-					<select name="award" id="award" class="easyui-combobox" style="width: 150px; height: 28px;"
+					<select name="classInstId" id="classInstId" class="easyui-combobox" style="width: 150px; height: 28px;"
 					url="<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_School_Time','schoolId':'1001'}",
-					data-options=" valueField: 'clasInstId', textField: 'className', panelHeight: 'auto'" >
+					data-options=" valueField: 'classInstId', textField: 'className', panelHeight: 'auto'" >
  					</select>
 				</td>
 			</tr>
 			<tr>
 				<td align="right"><span>教室：</span></td>
 				<td>
-					<select id="roomId" class="easyui-combobox" style="width: 150px; height: 28px;"
+					<select name="roomId" id="roomId" class="easyui-combobox" style="width: 150px; height: 28px;"
  				data-options="formatter:formatRoom, valueField: 'roomId', textField: 'roomName', panelHeight: 'auto',
  				onLoadSuccess:function(data){$('#roomId').combobox('setValue',data[0].roomId);}" 
  				url="<%=path %>/pubData/qryRoomList.do?schoolId=${sessionScope.StaffT.schoolId}">
   				</select>
 				</td>
 			</tr>
-			 
-		</table>  		
+		</table>  	
+		</form>	
       	<div style="margin-top: 20px;min-width:500px; width:500px;">
 	      	<div style="float: left;margin-left: 150px;">
-	      		<a href="javascript:void(0)" id="activitySubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 130px; height: 28px;">删除当前排课</a>
-	      &nbsp;<a href="javascript:void(0)" id="activitySubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      &nbsp;<a href="javascript:void(0)" id="activityBack"   class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">取消</a>
+	      		<a href="javascript:void(0)" id="delete" class="easyui-linkbutton" iconCls="icon-ok" style="width: 130px; height: 28px;">删除当前排课</a>
+	      &nbsp;<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
+	      &nbsp;<a href="javascript:void(0)" id="back"   class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">取消</a>
 	      	</div>
 	    </div>
   	</body>
 </html>
+<script type="text/javascript">
+
+	$("#submit").click(function ()
+	{
+			var time = $("#timeFm").serializeObject();
+			var className=$("#classInstId").combobox('getText');
+			time.className=className;
+			var obj = JSON.stringify(time);
+			
+		 	$.ajax({
+			type : "POST",
+			url: "/sys/time/add.do",
+			data: "param="+obj,
+			async: false,
+			dataType:"json",
+			beforeSend: function()
+	    	{
+	    		$.messager.progress({title : '系统消息', msg : '正在提交数据，请稍等……'});
+	    	},
+	    	success: function(data) {
+	    		$.messager.progress('close');
+	    		 
+	        },
+	        error:function(){
+	        	$.messager.progress('close'); 
+	        }
+	    	
+		});
+	});
+
+</script>
