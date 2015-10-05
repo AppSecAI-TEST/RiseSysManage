@@ -1,0 +1,10 @@
+#Thu Aug 20 09:14:54 CST 2015
+DELEGATES_PREFERENCE=delegateValidatorList
+USER_BUILD_PREFERENCE=enabledBuildValidatorList
+USER_MANUAL_PREFERENCE=enabledManualValidatorList
+USER_PREFERENCE=overrideGlobalPreferencestruedisableAllValidationtrueversion1.2.300.me201108091322
+eclipse.preferences.version=1
+override=true
+suspend=true
+vals/org.jboss.tools.flow.jpdl4/global=FF01
+vf.version=3
