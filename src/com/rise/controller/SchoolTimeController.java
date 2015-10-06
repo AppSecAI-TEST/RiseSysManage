@@ -53,6 +53,11 @@ public class SchoolTimeController
 		}
 	}
 	
+	/**
+	 * Ôö¼ÓÅÅ¿Î
+	 * @param param
+	 * @param response
+	 */
 	@RequestMapping(value="/add.do")
 	public void addSchoolTime(String param,HttpServletResponse response)
 	{
@@ -76,5 +81,35 @@ public class SchoolTimeController
 			}
 		}
 		
+	}
+	
+	/**
+	 * É¾³ýÅÅ¿Î
+	 * @param param
+	 * @param response
+	 */
+	@RequestMapping(value="/delete.do")
+	public void deleteSchoolTime(String param,HttpServletResponse response)
+	{
+		
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = schoolTimeService.delSchoolTime(param);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{ 
+			if(out != null)
+			{
+				out.close();
+			}
+		}
 	}
 }

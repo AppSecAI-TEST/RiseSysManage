@@ -24,8 +24,8 @@
 			<input type="hidden" name="schooltime" value="<%=StringUtil.getJSONObjectKeyVal(object,"schooltime") %>"/>
 			<input type="hidden" name="teacherName" value="<%=StringUtil.getJSONObjectKeyVal(object,"teacherName") %>"/>
 			<input type="hidden" name="teacherId" value="<%=StringUtil.getJSONObjectKeyVal(object,"teacherId") %>"/>
-			<input type="hidden" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
-			
+			<input type="hidden" name="schoolId" value="<%=StringUtil.getJSONObjectKeyVal(object,"schoolId")%>"/>
+			<input type="hidden" id="schooltimeInstId" value="<%=StringUtil.getJSONObjectKeyVal(object,"schooltimeInstId")%>"/>
 			<tr>
 				<td align="right"><span>当前日期：</span></td>
 				<td>
@@ -113,6 +113,32 @@
 	        }
 	    	
 		});
+	});
+	
+	$("#delete").click(function()
+	{
+		var schooltimeId=$("#schooltimeInstId").val();
+		var param="{schooltimeInstId="+schooltimeId+"}";
+		$.ajax({
+			type : "POST",
+			url: "/sys/time/delete.do",
+			data: "param="+param,
+			async: false,
+			dataType:"json",
+			beforeSend: function()
+	    	{
+	    		$.messager.progress({title : '系统消息', msg : '正在提交数据，请稍等……'});
+	    	},
+	    	success: function(data) {
+	    		$.messager.progress('close');
+	    		 
+	        },
+	        error:function(){
+	        	$.messager.progress('close'); 
+	        }
+	    	
+		});
+		
 	});
 
 </script>
