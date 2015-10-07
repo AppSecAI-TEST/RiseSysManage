@@ -277,13 +277,9 @@ $(document).ready(function() {
     		    	    	success: function (data) {
     		    	    		$.messager.progress('close'); 
     		    	    		var flag = data.flag
-    		    	            if(flag)
-    		    	            {
-    		    	            	$.messager.alert('提示', "修改学员档案成功！");
-    		    	            	window.location.reload();
-    		    	            }
-    		    	            else
-    		    	            {
+    		    	            if(flag) {
+    		    	            	$.messager.alert('提示', "修改学员档案成功！", "info", function() {window.location.reload();});
+    		    	            } else {
     		    	            	$.messager.alert('提示', "修改学员档案失败！");
     		    	            }
     		    	        } 

@@ -80,10 +80,9 @@ $(document).ready(function() {
 				$.messager.progress('close'); 
 				var flag = data.flag
 				if(flag) {
-					$.messager.alert('提示', "添加学员成功！");
-					window.location.reload();
+					$.messager.alert('提示', "添加学员成功！", "info", function() {window.location.reload();});
 				} else {
-					$.messager.alert('提示', "添加学员失败！");
+					$.messager.alert('提示', data.msg);
 				}
 			}
 		});

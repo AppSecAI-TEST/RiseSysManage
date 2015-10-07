@@ -207,17 +207,31 @@ $(document).ready(function() {
 
 	$("#teacherId").combobox({
 		onChange : function(n, o) {
-			var data = $('#teacherId').combobox('getData');
-			$.each(data, function(i, obj){
-				if(n == obj.teacherId) {
-					var licenseFlag = obj.licenseFlag;
-					var licenseFlagText = "未持证";
-					if("Y" == licenseFlag) {
-						licenseFlagText = "持证";
-					}
-					$("#licenseFlagText").html(licenseFlagText);
+			var weekTime = null;
+			var hourRange = null;
+			selTr.find("td").each(function(i, node) {
+				if(i == 0) {
+					weekTime = $(node).attr("weekTime");
+					hourRange = $(node).attr("hourRange");
 				}
 			});
+			var flag = validateTeacher(n, weekTime, hourRange);
+			if(flag) {
+				var data = $('#teacherId').combobox('getData');
+				$.each(data, function(i, obj){
+					if(n == obj.teacherId) {
+						var licenseFlag = obj.licenseFlag;
+						var licenseFlagText = "未持证";
+						if("Y" == licenseFlag) {
+							licenseFlagText = "持证";
+						}
+						$("#licenseFlagText").html(licenseFlagText);
+					}
+				});
+			} else {
+				var teacherName = $("#teacherId").combobox("getText");
+				$.messager.alert('提示', "您选择的老师"+teacherName+"在同一上课时段已带班其他班级，请选择其他老师！", "info", function() {$("#teacherId").combobox("setValue", ""); $("#licenseFlagText").html("");});
+			}
 		}
 	});
 	
@@ -403,7 +417,7 @@ function addApplyClass() {
 			$.messager.progress('close'); 
 			var flag = data.flag
 			if(flag) {
-				$.messager.alert('提示', "申请放班成功！");
+				$.messager.alert('提示', "申请放班成功！", "info", function() {window.history.back();});
 			} else {
 				$.messager.alert('提示', data.msg);
 			}

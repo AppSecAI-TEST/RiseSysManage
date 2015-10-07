@@ -113,10 +113,9 @@ $(document).ready(function() {
 						$.messager.progress('close'); 
 						var flag = data.flag
 						if(flag) {
-							$.messager.alert('提示', "审批申请成功！");
-							window.location.reload();
+							$.messager.alert('提示', "审批申请成功！", "info", function() {window.history.back();});
 						} else {
-							$.messager.alert('提示', "审批申请失败！");
+							$.messager.alert('提示', data.msg);
 						}
 					} 
 				});

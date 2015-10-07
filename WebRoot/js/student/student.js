@@ -93,14 +93,10 @@ $(document).ready(function() {
     	    	success: function (data) {
     	    		$.messager.progress('close'); 
     	    		var flag = data.flag
-    	            if(flag)
-    	            {
-    	            	$.messager.alert('提示', "VIP学员设置成功！");
-    	            	window.location.reload();
-    	            }
-    	            else
-    	            {
-    	            	$.messager.alert('提示', "VIP学员设置失败！");
+    	            if(flag) {
+    	            	$.messager.alert('提示', "VIP学员设置成功！", "info", function() {window.history.back();});
+    	            } else {
+    	            	$.messager.alert('提示', data.msg);
     	            }
     	        } 
     		});
@@ -320,12 +316,9 @@ $(document).ready(function() {
     	    	},
     	    	success: function (data) {
     	    		var flag = data.flag
-    	            if(flag)
-    	            {
+    	            if(flag) {
     	            	$.messager.alert('提示', "该学员暂未注册，资料有效！");
-    	            }
-    	            else
-    	            {
+    	            } else {
     	            	isExists = true;
     	            	$.messager.alert('提示', data.msg);
     	            }
@@ -382,14 +375,10 @@ $(document).ready(function() {
     		    	    	success: function (data) {
     		    	    		$.messager.progress('close'); 
     		    	    		var flag = data.flag
-    		    	            if(flag)
-    		    	            {
-    		    	            	$.messager.alert('提示', "学员注册成功！");
-    		    	            	window.location.reload();
-    		    	            }
-    		    	            else
-    		    	            {
-    		    	            	$.messager.alert('提示', "学员注册失败！");
+    		    	            if(flag) {
+    		    	            	$.messager.alert('提示', "学员注册成功！", "info", function() {window.history.back();});
+    		    	            } else {
+    		    	            	$.messager.alert('提示', data.msg);
     		    	            }
     		    	        } 
     		    		});
@@ -456,14 +445,10 @@ $(document).ready(function() {
     	    	success: function (data) {
     	    		$.messager.progress('close'); 
     	    		var flag = data.flag
-    	            if(flag)
-    	            {
-    	            	$.messager.alert('提示', "成功添加VIP维护信息！");
-    	            	window.location.reload();
-    	            }
-    	            else
-    	            {
-    	            	$.messager.alert('提示', "添加VIP维护信息失败！");
+    	            if(flag) {
+    	            	$.messager.alert('提示', "成功添加VIP维护信息！", "info", function() {window.history.back();});
+    	            } else {
+    	            	$.messager.alert('提示', data.msg);
     	            }
     	        } 
     		});
@@ -494,14 +479,10 @@ $(document).ready(function() {
 	    	success: function (data) {
 	    		$.messager.progress('close'); 
 	    		var flag = data.flag
-	            if(flag)
-	            {
-	            	$.messager.alert('提示', "成功批量修改客户关怀和责任顾问！");
-	            	window.location.reload();
-	            }
-	            else
-	            {
-	            	$.messager.alert('提示', "批量修改客户关怀和责任顾问失败！");
+	            if(flag) {
+	            	$.messager.alert('提示', "成功批量修改客户关怀和责任顾问！", "info", function() {window.location.reload();});
+	            } else {
+	            	$.messager.alert('提示', data.msg);
 	            }
 	        } 
 		});
