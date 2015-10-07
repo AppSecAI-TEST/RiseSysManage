@@ -4,6 +4,10 @@
 <%
 	String path = request.getContextPath();
 	String time = request.getParameter("time");
+	String schooltime = request.getParameter("schooltime");
+	String weekTime = request.getParameter("weekTime");
+	String weekSeq = request.getParameter("weekSeq");
+	String schoolId=request.getParameter("schoolId");
 	JSONObject object=new JSONObject();
 	object = JSONObject.fromObject(time);
 %>
@@ -19,17 +23,17 @@
   
   	<form id="timeFm">
 		<table width="500px" cellpadding="5px" class="maintable" id="addActivityTd">
-		    <input type="hidden" name="weekTime" value="<%=StringUtil.getJSONObjectKeyVal(object,"weekTime") %>"/>
-			<input type="hidden" name="weekSeq" value="<%=StringUtil.getJSONObjectKeyVal(object,"weekSeq") %>"/>
-			<input type="hidden" name="schooltime" value="<%=StringUtil.getJSONObjectKeyVal(object,"schooltime") %>"/>
+		    <input type="hidden" name="weekTime" value="<%=weekTime%>"/>
+			<input type="hidden" name="weekSeq" value="<%=weekSeq%>"/>
+			<input type="hidden" name="schooltime" value="<%=schooltime %>"/>
 			<input type="hidden" name="teacherName" value="<%=StringUtil.getJSONObjectKeyVal(object,"teacherName") %>"/>
 			<input type="hidden" name="teacherId" value="<%=StringUtil.getJSONObjectKeyVal(object,"teacherId") %>"/>
-			<input type="hidden" name="schoolId" value="<%=StringUtil.getJSONObjectKeyVal(object,"schoolId")%>"/>
+			<input type="hidden" name="schoolId" value="<%=schoolId%>"/>
 			<input type="hidden" id="schooltimeInstId" value="<%=StringUtil.getJSONObjectKeyVal(object,"schooltimeInstId")%>"/>
 			<tr>
 				<td align="right"><span>当前日期：</span></td>
 				<td>
-				<span width="100px"><%=StringUtil.getJSONObjectKeyVal(object,"schooltime") %></span>
+				<span width="100px"><%=schooltime%></span>
 				</td>
 			</tr>
 			<tr>
