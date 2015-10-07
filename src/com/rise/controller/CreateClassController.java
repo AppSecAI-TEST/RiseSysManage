@@ -15,6 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.rise.service.CreateClassService;
 
+/**
+ * 放班
+ * @author wm
+ */
 @Controller
 @RequestMapping("/applyClass")
 public class CreateClassController 
@@ -53,7 +57,7 @@ public class CreateClassController
 	
 	//根据班级实例ID查询申请放班内容
 	@RequestMapping(value = "/qryCreateClassById.do")
-	public void qryCreateClassById(String classInstId, HttpServletResponse response)
+	public void qryCreateClassById(String classInstId, String applyType, HttpServletResponse response)
 	{
 		log.error(classInstId);
 		PrintWriter out = null;
@@ -61,7 +65,7 @@ public class CreateClassController
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = createClassService.qryCreateClassById(classInstId);
+			String retVal = createClassService.qryCreateClassById(classInstId, applyType);
 			log.error(retVal);
 			out.write(retVal);
 		}
@@ -133,7 +137,7 @@ public class CreateClassController
 	}
 	
 	@RequestMapping(value = "/qryCreateClass.do")
-	public ModelAndView qryCreateClass(String classInstId, String type)
+	public ModelAndView qryCreateClass(String classInstId, String applyType, String type)
 	{
 		log.error(classInstId);
 		ModelAndView view = null;
@@ -144,7 +148,7 @@ public class CreateClassController
 		}
 		try 
 		{
-			String retVal = createClassService.qryCreateClassById(classInstId);
+			String retVal = createClassService.qryCreateClassById(classInstId, applyType);
 			JSONObject obj = JSONObject.fromObject(retVal);
 			log.error(obj);
 			view.addObject("obj", obj);

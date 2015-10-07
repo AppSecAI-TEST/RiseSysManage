@@ -13,9 +13,9 @@ public class CreateClassService
 		return ServiceEngine.invokeHttp(params);
 	}
 
-	public String qryCreateClassById(String classInstId) throws Exception
+	public String qryCreateClassById(String classInstId, String applyType) throws Exception
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0072\",securityCode:\"0000000000\",params:{param:{classInstId:\""+classInstId+"\",queryCode:\"qryCreateClassById\"}},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0072\",securityCode:\"0000000000\",params:{param:{classInstId:\""+classInstId+"\",applyType:\""+applyType+"\",queryCode:\"qryCreateClassById\"}},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 

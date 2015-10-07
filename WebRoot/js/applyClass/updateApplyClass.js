@@ -186,18 +186,15 @@ $(document).ready(function() {
 							var content = $(node).html();
 							var teacherHtml = document.getElementById("teacher" + teacherId + weekTime + hourRange);
 							if(teacherHtml == null || teacherHtml == "" || teacherHtml == undefined || teacherHtml == "null") {
-								if(content != "" && content != null && content != undefined) {
-									content += "&nbsp;&nbsp;";
-								}
 								content += "<span id=teacher"+ teacherId + weekTime + hourRange +">";
 								var teacherText = teacherSchoolName + " " + teacherName + " " + lessions + " " + licenseFlagText;
 								content += teacherText + "&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='deleteTeacher(this, "+teacherId+")'><span>删除</span></a>";
-								content += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"' addFlag='Y'/></span>";
+								content += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"' addFlag='Y'/>&nbsp;</span>";
 								$(node).html(content);
 							} else {
 								var teacherText = teacherSchoolName + " " + teacherName + " " + lessions + " " + licenseFlagText;
 								var html = teacherText + "&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='deleteTeacher(this, "+teacherId+")'><span>删除</span></a>";
-								html += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"' addFlag='Y'/>";
+								html += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"' addFlag='Y'/>&nbsp;";
 								$("#teacher" + teacherId + weekTime + hourRange).html(html);
 							}
 							$(node).attr("lessions", parseInt(lessions) + parseInt(addLessions));

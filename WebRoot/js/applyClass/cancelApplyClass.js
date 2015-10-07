@@ -3,7 +3,7 @@ $(document).ready(function() {
 	var classInstId = $("#classInstId").val();
 	$.ajax({
 		url: "/sys/applyClass/qryCreateClassById.do",
-		data: "classInstId=" + classInstId,
+		data: "classInstId=" + classInstId + "&applyType=001",
 		dataType: "json",
 		async: false,
 		beforeSend: function()

@@ -12,7 +12,7 @@
   	</head>
   
   	<body>
-  		<div class="easyui-panel" style="min-width:1101px; width:100%;height:auto;" title="班级信息">
+  		<div class="easyui-panel" style="min-width:1101px; width:100%;height:auto;" title="开班信息">
   			<form id="updateApplyClassFm">
 	  			<table width="99.99%" cellpadding="5px" class="maintable" id="cancelApplyClassTd">
 	  				<tr>
@@ -31,26 +31,6 @@
 	  					<td align="right" width="10%"><span>来源班级：</span></td>
 	  					<td width="30%"><span id="higherSchoolName">${obj.createClassObj.higherSchoolName }</span></td>
 	  				</tr>
-	  				<c:if test="${!empty obj.higherSchoolObj.rows}">
-		  				<tr>
-		  					<td colspan="6">
-		  						<table width="100%" cellpadding="5px" class="maintable">
-		  							<c:forEach items="${obj.higherSchoolObj.rows }" var="higherSchool">
-			  							<tr>
-			  								<td align="right" width='10%'><span>班级：</span></td>
-			  								<td width="15%"><span>${higherSchool.className }</span></td>
-			  								<td align="right" width='10%'><span>课时进度：</span></td>
-			  								<td width="15%"><span>${higherSchool.classProgress }</span></td>
-			  								<td align="right" width='10%'><span>在读人数：</span></td>
-			  								<td width="15%"><span>${higherSchool.classStudentNum }</span></td>
-			  								<td align="right" width='10%'><span>已升学人数：</span></td>
-			  								<td width="15%"><span>${higherSchool.higherStudentNum }</span></td>
-			  							</tr>
-		  							</c:forEach>
-		  						</table>
-		  					</td>
-		  				</tr>
-	  				</c:if>
 	  				<tr>
   						<td colspan="6">
   							<table width="100%" cellpadding="5px" class="maintable">
@@ -79,16 +59,33 @@
   							</table>
   						</td>
   					</tr>
-	  				<tr>
-	  					<td align="right" width="10%"><span>备注：</span></td>
-	  					<td width="90%" colspan="5"><span id="Applyremark">${obj.createClassObj.remark }</span></td>
-	  				</tr>
 	  			</table>
   			</form>
   		</div>
-  		<div style="height: 5px;"></div>
+  		
   		<div style="padding:5px 0;min-width:1101px; width:100%;">
-  			<table class="easyui-datagrid" style="height: auto; width: 100%" id="list_data" title="放班班操作历史信息" fitColumns="true" singleSelect="false"
+	  		<table class="easyui-datagrid" title="班级学员列表" style="height:auto;" id="list_data" 
+	  			url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1005&param={'classInstId':'${obj.createClassObj.classInstId }'}" 
+		  		rownumbers="true" fitColumns="true" singleSelect="false">
+				<thead>
+					<tr>
+						<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
+						<th data-options="field:'byName',width:100,align:'center'">英文名</th>
+						<th data-options="field:'payDate',width:100,align:'center'">缴费时间</th>
+						<th data-options="field:'studentChannelType',width:100,align:'center'">学员来源</th>
+						<th data-options="field:'identityId',width:200,align:'center'">身份证号</th>
+						<th data-options="field:'phone',width:100,align:'center'">联系方式</th>
+						<th data-options="field:'selectClassNum',width:100,align:'center'">定班次数</th>
+						<th data-options="field:'waitClassDays',width:100,align:'center'">等班时长</th>
+						<th data-options="field:'dutyAdvisterName',width:100,align:'center'">责任顾问</th>
+						<th data-options="field:'adviserTeacherName',width:100,align:'center'">业绩老师</th>
+					</tr>
+				</thead>
+			</table>
+  		</div>
+  		
+  		<div style="padding:5px 0;min-width:1101px; width:100%;">
+  			<table class="easyui-datagrid" style="height: auto; width: 100%" id="list_data" title="开班操作历史信息" fitColumns="true" singleSelect="false"
   				url="<%=path %>/pubData/qryData.do?param={'classInstId':'${obj.createClassObj.classInstId }','funcNodeId':'1008'}">
 				<thead>
 					<tr>
@@ -101,5 +98,12 @@
 				</thead>
 			</table>
   		</div>
+  		
+  		<div style="margin-top: 20px;min-width:1100px; width:99%;">
+	      	<div style="float: left;margin-left: 900px;">
+	      		<a href="javascript:void(0)" id="activityBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	      	</div>
+	    </div>
+	    
   	</body>
 </html>

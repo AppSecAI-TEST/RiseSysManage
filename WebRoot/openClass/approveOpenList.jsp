@@ -44,7 +44,7 @@
 					</td>
 					<td><span>查看我的审批</span></td>
 					<td align="center">
-						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1007">查询</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1010">查询</a>
 						&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 					</td>
   				</tr>
@@ -70,7 +70,7 @@
   		</form>
   		
   		<div style="padding:5px 0;min-width:1100px; width:100%;">
-		  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1007" 
+		  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1010" 
 		  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
@@ -78,7 +78,7 @@
 						<th data-options="field:'schoolName',width:80,align:'center'">校区</th>
 						<th data-options="field:'remark',width:200,align:'center'">申请内容</th>
 						<th data-options="field:'className',width:100,align:'center'">班级名称</th>
-						<th data-options="field:'openClassText',width:100,align:'center'">开班类型</th>
+						<th data-options="field:'openClassTypeText',width:100,align:'center'">开班类型</th>
 						<th data-options="field:'startDate',width:100,align:'center'">申请开课时间</th>
 						<th data-options="field:'openClassStateText',width:100,align:'center'">开班审批状态</th>
 						<th data-options="field:'applyName',width:100,align:'center'">申请人</th>
@@ -90,8 +90,7 @@
 			</table>
 	  	</div>
 		<div id="toolbar">
-   			<a href="javascript:void(0)" id="applyApprove" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">放班审批</a>
-   			<a href="javascript:void(0)" id="cancelApprove" class="easyui-linkbutton" iconCls="icon-cancel" style="width: 120px;">取消放班审批</a>
+   			<a href="javascript:void(0)" id="approve" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px;">审批</a>
    			<a href="javascript:void(0)" id="view" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>
 		</div>
   	</body>

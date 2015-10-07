@@ -8,7 +8,7 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/js/openClass/openClass.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/openClass/openClassList.js"></script>
   	</head>
   
   	<body style="padding-top:5px">
@@ -33,14 +33,14 @@
 					</td>
 					<td align="right"><span>开班状态：</span></td>
 					<td width="114px">
-						<select id="approveState" name="approveState" class="easyui-combobox" style="width: 114px; height: 25px;"
+						<select id="openClassState" name="openClassState" class="easyui-combobox" style="width: 114px; height: 25px;"
 						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      				onLoadSuccess:function(data){$('#approveState').combobox('setValue',data[0].codeFlag);}" 
+	      				onLoadSuccess:function(data){$('#openClassState').combobox('setValue',data[0].codeFlag);}" 
 	      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=CREATE_CLASS_T&codeType=OPEN_CLASS_STATE">
 		        		</select>
 					</td>
 					<td align="center" colspan="3">
-						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1007">查询</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1009">查询</a>
 						&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 					</td>
   				</tr>
@@ -66,21 +66,21 @@
   		</form>
   		
   		<div style="padding:5px 0;min-width:1100px; width:100%;">
-		  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1007" 
+		  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1009" 
 		  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
 						<th data-options="field:'ck',checkbox:true"></th>
 						<th data-options="field:'schoolName',width:80,align:'center'">校区</th>
-						<th data-options="field:'className',width:200,align:'center'">班级名称</th>
-						<th data-options="field:'schooltimeName',width:100,align:'center'">上课时段与教室</th>
-						<th data-options="field:'classStudentNum',width:100,align:'center'">定班人数</th>
+						<th data-options="field:'className',width:100,align:'center'">班级名称</th>
+						<th data-options="field:'schooltimeName',width:200,align:'center'">上课时段与教室</th>
+						<th data-options="field:'classStudentNum',width:80,align:'center'">定班人数</th>
 						<th data-options="field:'studentNewNum',width:100,align:'center'">定班新招数</th>
 						<th data-options="field:'studentHigherNum',width:100,align:'center'">定班升学数</th>
-						<th data-options="field:'studentChannelTypeText',width:100,align:'center'">学员来源</th>
+						<th data-options="field:'studentChannelTypeText',width:80,align:'center'">学员来源</th>
 						<th data-options="field:'startDate',width:100,align:'center'">开课日期</th>
-						<th data-options="field:'approveCreateDate',width:100,align:'center'">放班审批时间</th>
-						<th data-options="field:'approveOpenDate',width:100,align:'center'">开班审批时间</th>
+						<th data-options="field:'approveCreateDate',width:120,align:'center'">放班审批时间</th>
+						<th data-options="field:'approveOpenDate',width:120,align:'center'">开班审批时间</th>
 						<th data-options="field:'openClassTypeText',width:100,align:'center'">开班类型</th>
 						<th data-options="field:'openClassStateText',width:100,align:'center'">开班状态</th>
 					</tr>
