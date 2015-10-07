@@ -127,6 +127,30 @@ public class FuncNodeController
 		}
 	}
 	
+	@RequestMapping(value = "/getSubFuncNodeListWithRole.do")
+	public void getSubFuncNodeListWithRole(HttpServletResponse response , String sysRoleId)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = funcNodeService.getSubFuncNodeListWithRole(sysRoleId);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 	@RequestMapping("/addFuncNodeInfo.do")
 	public void addFuncNodeInfo(HttpServletResponse response , FuncNodeT funcNodeT , ResourceT resourceT)
 	{
@@ -384,6 +408,30 @@ public class FuncNodeController
 			out = response.getWriter();
 			HttpSession session = request.getSession();
 			String retVal = funcNodeService.getCtrlData(resourceId, funcNodeId, session);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/getPrivFuncNodeList.do")
+	public void getPrivFuncNodeList(HttpServletResponse response , String sysRoleId)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = funcNodeService.getPrivFuncNodeList(sysRoleId);
 			out.write(retVal);
 		}
 		catch(Exception e)

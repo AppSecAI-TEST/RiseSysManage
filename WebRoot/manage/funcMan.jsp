@@ -118,8 +118,6 @@
 								$("#fieldArea").css("display","none");
 								$("#fieldId").validatebox({required:false});
 								$("#fieldName").validatebox({required:false});
-								$("#dataSourceField").validatebox({required:false});
-								$("#dataSourceName").validatebox({required:false});
 							}
 							else if(dataValue == "H")
 							{
@@ -128,8 +126,6 @@
 								$("#fieldArea").css("display","none");
 								$("#fieldId").validatebox({required:false});
 								$("#fieldName").validatebox({required:false});
-								$("#dataSourceField").validatebox({required:false});
-								$("#dataSourceName").validatebox({required:false});
 							}
 							else if(dataValue == "B")
 							{
@@ -139,8 +135,6 @@
 								$("#fieldArea").css("display","block");
 								$("#fieldId").validatebox({required:true});
 								$("#fieldName").validatebox({required:true});
-								$("#dataSourceField").validatebox({required:true});
-								$("#dataSourceName").validatebox({required:true});
 							}
 						}
 						else

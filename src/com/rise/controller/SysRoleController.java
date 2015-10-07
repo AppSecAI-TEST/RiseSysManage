@@ -218,7 +218,7 @@ public class SysRoleController
 			out = response.getWriter();
 			Integer pageNumInt = Integer.parseInt(page)-1;
 			Integer pageSizeInt = Integer.parseInt(rows);
-			String retVal = sysRoleService.querySysRole(pageNumInt, pageSizeInt);
+			String retVal = sysRoleService.querySysRole(pageNumInt*pageSizeInt, pageSizeInt);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -320,6 +320,56 @@ public class SysRoleController
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/qryTotalRoleList.do")
+	public void qryTotalRoleList(HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = sysRoleService.qryTotalRoleList();
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/settingRoleFunc.do")
+	public void settingRoleFunc(HttpServletResponse response , HttpServletRequest request , String sysRoleId , String funcNodeIds)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			HttpSession session = request.getSession();
+			String retVal = sysRoleService.settingRoleFunc(sysRoleId , funcNodeIds , session);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			out.write(e.getMessage());
 			e.printStackTrace();
 		}
 		finally

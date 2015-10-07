@@ -314,6 +314,7 @@ function clearData(name)
 		}
 }
 
+<<<<<<< HEAD
 String.prototype.endWith = function(str) {
 	if (str == null || str == "" || this.length == 0
 			|| str.length > this.length)
@@ -347,3 +348,13 @@ String.prototype.ltrim = function() {
 String.prototype.rtrim = function() {
 	return this.replace(/(\s*$)/g, "");
 }
+=======
+function ajaxLoading(tipsValue){ 
+    top.$("<div class=\"datagrid-mask\"></div>").css({display:"block",width:"100%",height:"100%"}).appendTo("body"); 
+    top.$("<div class=\"datagrid-mask-msg\"></div>").html(tipsValue).appendTo("body").css({display:"block",left:"50%",top:"50%"}); 
+} 
+function ajaxLoadEnd(){ 
+    top.$(".datagrid-mask").remove(); 
+    top.$(".datagrid-mask-msg").remove();             
+} 
+>>>>>>> refs/heads/master
