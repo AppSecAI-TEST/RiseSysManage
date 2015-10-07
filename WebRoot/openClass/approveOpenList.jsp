@@ -44,7 +44,6 @@
 					</td>
 					<td><span>查看我的审批</span></td>
 					<td align="center">
-<<<<<<< HEAD
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1010">查询</a>
 						&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 					</td>
@@ -92,7 +91,6 @@
 	  	</div>
 		<div id="toolbar">
    			<a href="javascript:void(0)" id="approve" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px;">审批</a>
-=======
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1007">查询</a>
 						&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 					</td>
@@ -141,7 +139,6 @@
 		<div id="toolbar">
    			<a href="javascript:void(0)" id="applyApprove" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">放班审批</a>
    			<a href="javascript:void(0)" id="cancelApprove" class="easyui-linkbutton" iconCls="icon-cancel" style="width: 120px;">取消放班审批</a>
->>>>>>> refs/heads/master
    			<a href="javascript:void(0)" id="view" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>
 		</div>
   	</body>
