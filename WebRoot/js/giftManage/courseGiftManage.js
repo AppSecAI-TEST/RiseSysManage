@@ -6,7 +6,7 @@ $(document).ready(function(){
 		var funcNodeId = $("#qryCourseGift").attr("funcNodeId");
 		obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
 		$('#courseGift_data').datagrid({
-			url : "/sys/pubData/qryDataListByPage.do",
+			url : "/sys/giftManage/qryDataListByPage.do",
 			queryParams:{
 				param : obj
 			},
@@ -22,13 +22,17 @@ $(document).ready(function(){
 //跳转赠课终止页面
 function courseFinish()
 {
-	getCourseInfo("courseGift_data","finish");
+	if(validateSelect("courseGift_data")) {
+		getCourseInfo("courseGift_data","finish");
+	}
 }
 
 //跳转赠课浏览页面
 function viewCourseGiftInfo()
 {
-	getCourseInfo("courseGift_data","view");
+	if(validateSelect("courseGift_data")) {
+		getCourseInfo("courseGift_data","view");
+	}
 }
 
 //获取赠课的信息，根据不同类型跳转不同页面
@@ -78,4 +82,20 @@ function courseFinishSubmit()
     		}
         } 
 	});
+}
+
+function validateSelect(object)
+{
+	var flag = false;
+	var obj = $("#"+object+"").datagrid('getSelections');
+	if(obj.length > 0) {
+		if(obj.length > 1) {
+			$.messager.alert('提示', "只能选择一个学员进行操作！");
+		} else {
+			flag = true;
+		}
+	} else {
+		$.messager.alert('提示', "请先选择您要操作的学员！");
+	}
+	return flag;
 }

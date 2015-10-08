@@ -34,11 +34,11 @@
   					<td align="right">面值：</td>
   					<td align="left">${obj.totalAmount}</td>
   					<td align="right">可用金额：</td>
-  					<td align="left">${obj.amount}</td>
+  					<td id="amount" align="left">${obj.amount}</td>
   				</tr>
   				<tr>
   					<td align="right">剩余金额：</td>
-  					<td align="left">${obj.usableAmount}</td>
+  					<td id="usableAmount" align="left">${obj.usableAmount}</td>
   					<td align="right">赠券编号：</td>
   					<td align="left">${obj.giftCode}</td>
   				</tr>

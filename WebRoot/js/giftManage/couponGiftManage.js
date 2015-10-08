@@ -6,7 +6,7 @@ $(document).ready(function(){
 		var funcNodeId = $("#qryCouponGift").attr("funcNodeId");
 		obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
 		$('#couponGift_data').datagrid({
-			url : "/sys/pubData/qryDataListByPage.do",
+			url : "/sys/giftManage/qryDataListByPage.do",
 			queryParams:{
 				param : obj
 			},
@@ -228,7 +228,9 @@ function couponDelaySubmit()
 	var studentGiftId = $("#studentGiftId").val();
 	var handlerId = $("#handlerId").val();
 	var delayRemark = $("#delayRemark").val();
-	var json = '{"studentGiftId":"'+studentGiftId+'","expBeforeDate":"'+expBeforeDate+'","expAfterDate":"'+expAfterDate+'","description":"'+delayRemark+'","handlerId":"'+handlerId+'"}';
+	var amount = $("#amount").html();
+	var usableAmount = $("#usableAmount").html();
+	var json = '{"studentGiftId":"'+studentGiftId+'","expBeforeDate":"'+expBeforeDate+'","expAfterDate":"'+expAfterDate+'","description":"'+delayRemark+'","handlerId":"'+handlerId+'","amount":"'+amount+'","usableAmount":"'+usableAmount+'"}';
 	$.ajax({
 		type : "POST",
 		url: "/sys/giftManage/updateCouponGiftInfo.do",
