@@ -62,6 +62,10 @@ public class QryPubDataService
 	public String qryDataListByPage(String page, String rows, String param, String funcNodeId) throws Exception 
 	{
 		JSONObject obj = new JSONObject();
+		if(ObjectCensor.isStrRegular(param))
+		{
+			obj = JSONObject.fromObject(param);
+		}
 		if(ObjectCensor.isStrRegular(page,rows))
 		{
 			Integer pageNum = Integer.parseInt(page) - 1;
@@ -70,16 +74,10 @@ public class QryPubDataService
 			obj.element("start", pageNum);
 			obj.element("rownum", pageSize);
 		}
-		
-		if(ObjectCensor.isStrRegular(param))
-		{
-			obj = JSONObject.fromObject(param);
-		}
 		if(ObjectCensor.isStrRegular(funcNodeId))
 		{
 			obj.element("funcNodeId", funcNodeId);
 		}
-		
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1019\",securityCode:\"0000000000\",params:{param:"+obj+"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
@@ -89,5 +87,4 @@ public class QryPubDataService
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10110\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
-
 }
