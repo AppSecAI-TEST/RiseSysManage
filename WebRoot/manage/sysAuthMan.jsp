@@ -76,14 +76,11 @@
 			<a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="adjustDataFunc()">调整权限</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlgPriv').dialog('close')">取消</a>
 		</div>
-		<div id="comboboxSettingDlg" class="easyui-dialog" style="width:450px;height:180px;padding:0px 0px;padding-top:25px" modal="true" closed="true" buttons="#comboboxSettingDlg-buttons">
+		<div id="comboboxSettingDlg" class="easyui-dialog" style="width:350px;height:170px;padding:0px 0px;padding-top:25px" modal="true" closed="true" buttons="#comboboxSettingDlg-buttons">
 			<form id="comboboxSettingFm" class="fm" method="post" novalidate>
 				<div class="fitem">
-					<label style="text-align:right">功能名称:</label>
-					<input type="hidden" id="comboboxId" name="comboboxId" />
-					<input type="hidden" id="comboboxFuncNodeId" name="comboboxFuncNodeId" value = "${param.funcNodeId}" />
-					<input type="hidden" id="comboboxResourceId" name="comboboxResourceId" />
-					<select id="comboboxName" name="comboboxName" class="easyui-combobox" style="width:265px;height:25px;" data-options="formatter:function(row){return '<span>'+row.codeName+'</span>';},editable:false, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" url="<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=comboboxName">
+					<label style="text-align:right">权限类型:</label>
+					<select id="comboboxName" name="comboboxName" class="easyui-combobox" style="width:150px;height:25px;" data-options="formatter:function(row){return '<span>'+row.codeName+'</span>';},editable:false, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" url="<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=comboboxName">
       				</select>
 				</div>
 			</form>
@@ -92,8 +89,8 @@
 			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="comboboxSettingFunc()">保存</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#comboboxSettingDlg').dialog('close')">取消</a>
 		</div>
-		<div id="datagridSettingDlg" class="easyui-dialog" style="width:480px;height:300px;padding:0px 0px" modal="true" closed="true" buttons="#datagridSettingDlg-buttons">
-			<table class="easyui-datagrid" title="数据列表" style="height:100%;" id="datagridSettingData" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
+		<div id="datagridSettingDlg" class="easyui-dialog" style="width:300px;height:400px;padding:0px 0px" modal="true" closed="true" buttons="#datagridSettingDlg-buttons">
+			<table class="easyui-datagrid" title="数据列表" style="width:100%;height:100%;margin:0 auto;padding:0 0;" id="datagridSettingData" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="false">
 				<thead>
 					<tr>
 						<th field="dataValue" checkbox="true"></th>
@@ -132,8 +129,6 @@
 			}
 			function settingPrivFuncNode()
 			{
-				/*
-				*/
 				$("#dlgPriv").css("height","350px");
 				$('#dlgPriv').dialog('open').dialog('setTitle','设置权限功能');
 			}
@@ -144,70 +139,66 @@
 					$("#dgPrivFuncList").datagrid({url:"/sys/funcNode/getPrivFuncNodeList.do?sysRoleId="+row.sysRoleId});
 				}
 			}
-			/*
 			function comboboxSettingFunc()
 			{
-				var row = $('#funcNodeData').datagrid('getSelected');
-				$("#comboboxResourceId").val(row.html);
-				$('#comboboxSettingFm').form('submit',{
-					url: "",
-					onSubmit: function(){
-						return $(this).form('validate');
-					},
-					success: function(result){
-						if (result == "success"){
-							$('#comboboxSettingDlg').dialog('close');		
-						} else {
-							$.messager.alert('提示',result);
-						}
+				var roleRow = $('#dgPrivRoleList').datagrid('getSelected');
+				var privRow = $('#dgPrivFuncList').datagrid('getSelected');
+				$.post("/sys/funcNode/settingConditionInfo.do",{roleId:roleRow.sysRoleId,funcNodeId:privRow.parentFuncNodeId,resourceId:privRow.html,valArr:$('#comboboxName').combobox('getValue'),type:"2"},function(data){
+					if(data == "success"){
+						$.messager.alert('提示',"权限调整成功","info",function(){
+							$("#dgPrivFuncList").datagrid("reload");
+							$('#comboboxSettingDlg').dialog('close');
+						});
 					}
+					else
+					{
+						$.messager.alert('提示',"调整权限失败:"+data);
+					}					
 				});
 			}
 			function datagridSettingFunc()
 			{
-				$('#fm').form('submit',{
-					url: url,
-					onSubmit: function(){
-						var validateFlag = $(this).form('validate');
-						if(!validateFlag)
-						{
-							$.messager.alert('提示',"输入用户信息不全,请核实后重新尝试");
-						}
-						return validateFlag;
-					},
-					success: function(result){
-						if (result == "success"){
-							$('#dlg').dialog('close');		
-							$("#userList").datagrid("reload");
-						} else {
-							$.messager.alert('提示',result);
-						}
+				var roleRow = $('#dgPrivRoleList').datagrid('getSelected');
+				var privRow = $('#dgPrivFuncList').datagrid('getSelected');
+				var gridSettingData = $("#datagridSettingData").datagrid('getChecked');
+				var arr = [];
+				for(var i = 0,n = gridSettingData.length;i < n;i++)
+				{
+					arr.push(gridSettingData[i].dataValue);
+				}
+				ajaxLoading("调整中....");
+				$.post("/sys/funcNode/settingConditionInfo.do",{roleId:roleRow.sysRoleId,funcNodeId:privRow.parentFuncNodeId,resourceId:privRow.html,valArr:arr.join(","),type:"1"},function(data){
+					ajaxLoadEnd();
+					if(data == "success"){
+						$.messager.alert('提示',"权限调整成功","info",function(){
+							$("#dgPrivFuncList").datagrid("reload");
+							$('#datagridSettingDlg').dialog('close');
+						});
 					}
+					else
+					{
+						$.messager.alert('提示',"调整权限失败:"+data);
+					}					
 				});
 			}
-			function conditionSettingFunc()
-			{
-			
-			}*/
 			function adjustDataFunc()
 			{
+				var roleRow = $('#dgPrivRoleList').datagrid('getSelected');
 				var row = $('#dgPrivFuncList').datagrid('getSelected');
 				if (row){
 					if(row.resourceT.widgetType == "combobox")
 					{
 						$('#datagridSettingDlg').dialog('open').dialog('setTitle','调整功能');
-						$("#datagridSettingData").datagrid({url:"/sys/funcNode/getCtrlData.do?resourceId="+row.html+"&funcNodeId=${param.funcNodeId}"});
+						$("#datagridSettingData").css("height","400px");
+						$("#datagridSettingData").datagrid({url:"/sys/funcNode/getCtrlData.do?resourceId="+row.html+"&funcNodeId="+row.parentFuncNodeId+"&sysRoleId="+roleRow.sysRoleId});
 					}
 					else
 					{
 						$('#comboboxSettingDlg').dialog('open').dialog('setTitle','调整功能');
-						$.post("/sys/funcNode/getCtrlData.do",{resourceId:row.html,funcNodeId:"${param.funcNodeId}"},function(data){
-							if(data.length > 0)
-							{
-								$('#comboboxId').val(data[0].dataId);
-								$('#comboboxName').combobox('setValue',data[0].dataValue);
-							}
-						},"json");
+						if(row.condList.length > 0)
+						{
+							$('#comboboxName').combobox('setValue',row.condList[0].val);
+						}
 					}
 				}
 				else
@@ -224,7 +215,9 @@
 				{
 					arr.push(nodes[i].id);
 				}
+				ajaxLoading("调整中....");
 				$.post("/sys/sysRole/settingRoleFunc.do",{sysRoleId:role.sysRoleId,funcNodeIds:arr.join(",")},function(data){
+					ajaxLoadEnd();
 					if(data == "success"){
 						$.messager.alert('提示',"功能点调整成功","info",function(){
 							$("#dgRoleList").datagrid("reload");

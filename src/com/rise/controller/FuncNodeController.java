@@ -374,40 +374,14 @@ public class FuncNodeController
 //	}
 	
 	@RequestMapping("/getCtrlData.do")
-	public void getCtrlData(HttpServletResponse response , HttpServletRequest request , String resourceId , String funcNodeId)
+	public void getCtrlData(HttpServletResponse response , HttpServletRequest request , String resourceId , String funcNodeId , String sysRoleId)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			HttpSession session = request.getSession();
-			String retVal = funcNodeService.getCtrlData(resourceId, funcNodeId, session);
-			out.write(retVal);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null)
-			{
-				out.close();
-			}
-		}
-	}
-	
-	@RequestMapping("/comboboxSetting.do")
-	public void comboboxSetting(HttpServletResponse response , HttpServletRequest request , String resourceId , String funcNodeId)
-	{
-		PrintWriter out = null;
-		try
-		{
-			response.setCharacterEncoding("UTF-8");
-			out = response.getWriter();
-			HttpSession session = request.getSession();
-			String retVal = funcNodeService.getCtrlData(resourceId, funcNodeId, session);
+			String retVal = funcNodeService.getCtrlData(resourceId, funcNodeId, sysRoleId);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -432,6 +406,30 @@ public class FuncNodeController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = funcNodeService.getPrivFuncNodeList(sysRoleId);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/settingConditionInfo.do")
+	public void settingConditionInfo(HttpServletResponse response , String roleId , String funcNodeId , String resourceId , String valArr , String type)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = funcNodeService.settingConditionInfo(roleId, funcNodeId, resourceId, valArr, type);
 			out.write(retVal);
 		}
 		catch(Exception e)

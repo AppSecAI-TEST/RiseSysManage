@@ -112,10 +112,9 @@ public class FuncNodeService
 		return ServiceEngine.invokeHttp(param);
 	}
 	
-	public String getCtrlData(String resourceId , String funcNodeId , HttpSession session) throws Exception
+	public String getCtrlData(String resourceId , String funcNodeId , String sysRoleId) throws Exception
 	{
-		StaffT staffT = (StaffT)session.getAttribute("StaffT");
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00214\",securityCode:\"0000000000\",params:{resourceId:\""+resourceId+"\",funcNodeId:\""+funcNodeId+"\",staffId:\""+staffT.getStaffId()+"\"},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00214\",securityCode:\"0000000000\",params:{resourceId:\""+resourceId+"\",funcNodeId:\""+funcNodeId+"\",sysRoleId:\""+sysRoleId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 	
@@ -128,6 +127,12 @@ public class FuncNodeService
 	public String getPrivFuncNodeList(String sysRoleId) throws Exception
 	{
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00216\",securityCode:\"0000000000\",params:{sysRoleId:\""+sysRoleId+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+	
+	public String settingConditionInfo(String roleId , String funcNodeId , String resourceId , String valArr , String type) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00217\",securityCode:\"0000000000\",params:{roleId:\""+roleId+"\",funcNodeId:\""+funcNodeId+"\",resourceId:\""+resourceId+"\",valArr:\""+valArr+"\",type:\""+type+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 	
