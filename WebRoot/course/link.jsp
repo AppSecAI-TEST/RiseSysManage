@@ -44,10 +44,10 @@
 	      						<span>性别：</span>
 	      					</td>
 	      					<td><span></span></td>
-	      					<td align="right"><span>缴费时间：</span></td>
-	      					<td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 28px;"/></td>
 	      					<td align="right"><span>课程类型：</span></td>
 	      					<td><span>常规课</span></td>
+	      					<td align="right"></td>
+	      					<td></td>
       					</tr>
       					<tr>
       					  <td align="right"><span>上传缴费单：</span></td>
@@ -63,8 +63,7 @@
       					  <td align="right"><span>连报类型：</span></td>
       					  <td colspan="3">
       					  <select  id="link"  class="easyui-combobox"  style="width: 150px; height: 28px;"
-	      						data-options="formatter:formatLinkNum, valueField: 'favorPrice', textField: 'linkNum', panelHeight: 'auto'
-	      						 "
+	      						data-options="formatter:formatLinkNum, valueField: 'favorPrice', textField: 'linkNum', panelHeight: 'auto'"
 	      						url="<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_Link_Favor','setPriceId':'10002'}">
       					    
     					    </select></td>

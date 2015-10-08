@@ -44,9 +44,10 @@
 	      	    	<input id="courseState" name="courseState"  type="hidden" value="001"/>
 	      	    	<input id="feeType"  name="feeType"  type="hidden" value="001"/>
 	      	    	<input id="feeState" name="feeState" type="hidden" value="00A"/>
+	      	    	<input id="stageOrder" name="stageOrder" type="hidden" value=""/>
 	      	        <td align="right"> <span>阶段：</span></td>
 	      	        <td>
-					 <select name="stageId"  id="stageId" class="easyui-combobox" style="width: 150px; height: 28px;"
+					 <select name="stageId"  id="stageId"   style="width: 150px; height: 28px;"
 	      						data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#stageId').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>');}"
 	      						url="<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_Set_Price','setPriceId':'10001'}" required="true" >
@@ -54,8 +55,7 @@
 					</td>
 	      	        <td align="right"><span>班级类型：</span></td>
 	      	        <td> 
-	      	         <select name="classType" class="easyui-combobox" id="classType" style="width: 150px; height: 28px;"
-	      						drequired="true" >
+	      	         <select name="classType" class="easyui-combobox" id="classType" style="width: 150px; height: 28px;" drequired="true" >
 	      						<option>请先选择阶段</option>
       	            </select>
 	      	         </td>
@@ -91,7 +91,7 @@
 	      	      <tr id="giftModelTR">
 	      	        <td width="8%" align="right"><span>赠品类型：</span></td>
 	      	        <td width="8%">
-	      	        <select  class="easyui-combobox" id="parentType" style="width: 100px; height: 28px;"
+	      	        <select   id="parentType" style="width: 100px; height: 28px;"
 	      				     data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
 	      					 url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE" required="true" >
       	            </select>
@@ -140,7 +140,7 @@
 	      	        <td colspan="2" align="right"><span>赠课类型</span></td>
 	      	        <td width="22%" align="right">
 		      	        <div align="left">
-		      	          <select  class="easyui-combobox" id="giftCourseType" style="width: 150px; height: 28px;"
+		      	          <select   id="giftCourseType" style="width: 150px; height: 28px;"
 		      	           data-options="formatter:formatTypeName,  valueField: 'giftType', textField: 'typeName', panelHeight: 'auto'"
 		      	          url="/sys/pubData/qryData.do?param={queryCode:'Qry_Gift_Type',parentType:'COURSE'}" ></select>
       	            </div></td>
@@ -237,6 +237,18 @@
 			{
 				var name=$("#giftCourseType").combobox('getText');
 				var val=$("#giftCourseType").combobox('getValue');
+				
+				var datas = $('#giftCourseType').combobox('getData');
+				 
+				for(var m=0;m<datas.length;m++)
+				{
+					if(val==datas[m].giftType)
+					{
+						 $(node).attr("effNum",datas[m].effNum);
+						 $(node).attr("unit",datas[m].unit);
+					}
+				}
+				
 				$(node).html("<span>"+name+"</span>");	
 				$(node).attr("giftCourseType",val);//赠课类型	
 			}else if(i==2)
@@ -352,7 +364,7 @@
 				$(node).attr("giftId",giftId);
 				$(node).attr("giftType",giftTypeVal);
 				$(node).attr("giftCode",code);
-				$(node).attr("giftEffDate",giftEffDate);
+				$(node).attr("effDate",giftEffDate);
 				
 			}else if(n==5)
 			{
@@ -420,7 +432,7 @@
 				 var  giftCode=tds.eq(3).attr('giftCode');
 				 var  isGet=tds.eq(5).attr('isGet');
 				 var  granter=tds.eq(7).attr('granter');
-				 var  giftEffDate=tds.eq(3).attr('giftEffDate');
+				 var  effDate=tds.eq(3).attr('effDate');
 				 var  gift = {};
 				 
 				 gift.studentId=$("#studentId").val();
@@ -434,7 +446,7 @@
 				 gift.giftType = giftType;
 				 gift.giftId=giftId;
 				 gift.giftCode=giftCode;
-				 gift.giftEffDate=giftEffDate;
+				 gift.effDate=effDate;
 				 gift.isGet=isGet;
 				 gift.granter=granter;
 				 
@@ -451,6 +463,8 @@
 			{
 				 var  tds=$(this).children('td');
 				 var  giftType=tds.eq(1).attr('giftCourseType');
+				 var  effNum=tds.eq(1).attr('effNum');
+				 var  unit=tds.eq(1).attr('unit');
 				 var  giftId=tds.eq(2).attr('giftId');
 				 var  hours=tds.eq(3).attr('hours');
 				
@@ -460,6 +474,8 @@
 				 gift.giftId=giftId;
 				 gift.giftNum=hours;
 				 gift.studentGiftId=studentGiftId;
+				 gift.unit = unit; 
+				 gift.effNum = effNum; 
 				 
 				 var datas = $('#giftType').combobox('getData');
 				 

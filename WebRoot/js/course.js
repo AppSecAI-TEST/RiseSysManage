@@ -128,6 +128,7 @@ $(document).ready(function ()
 				 if(n==data[i].stageId)
 				 {
 					 amount=data[i].amount;
+					 $("#stageOrder").val(data[i].seqId);
 				 }
 			}
 		
@@ -161,6 +162,7 @@ $(document).ready(function ()
 			totalAmount=$("#totalAmount").textbox('getValue');
 			amount=totalAmount-minus-favorAmount;
 			$("#amount").textbox('setValue',amount);
+			parent.window.countAmount();
    		 }  
 	}); 
  }); 
@@ -243,6 +245,13 @@ function initCousreGift()
 							{
 								$(node).html("<span>否</span>");	
 							}
+						}else if(n==9)
+						{
+							if(gift.giftState!='UNSUED')//已使用不可删除
+							{
+								 $(node).html("");
+								
+							} 
 						}
 					});
 				
