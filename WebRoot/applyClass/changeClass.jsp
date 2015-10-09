@@ -25,6 +25,7 @@
   				<input type="hidden" id="classType" name="classType" value="<%=classType %>"/>
   				<input type="hidden" id="studentCourseId" name="studentCourseId" value="<%=studentCourseId %>"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
+  				<input type="hidden" id="schoolId" name="schoolId"/>
   				<input type="hidden" id="oldClassName" name="oldClassName"/>
   				<table width="99.99%" cellpadding="5px" class="maintable">
   					<tr>
