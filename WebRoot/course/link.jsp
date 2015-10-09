@@ -210,10 +210,9 @@
 	   		var l = window.frames[name].window.build();
 	   		studentCourses.push(l);
 		 } 
-		 allCourseInfos.studentCourses=studentCourses;
-		 allCourseInfos.linkCourseT=linkCourseT;
+		allCourseInfos.studentCourses=studentCourses;
+		allCourseInfos.linkCourseT=linkCourseT;
 	    var str = JSON.stringify( allCourseInfos);
-	    alert(str);
 	    $.ajax({
     			url: "/sys/course/addLinkCourses.do",
     			data: "param=" +str,
@@ -230,17 +229,16 @@
     	    		
     	            if(flag)
     	            {
-    	            	//$.messager.alert('提示', "成功添加课程信息！");
-    	            $.messager.alert('提示', "成功添加课程信息！", "info", function() {window.history.back();});
+    	            	showMessage('提示', "成功添加课程信息！", function() {window.history.back();});
     	            }
     	            else
     	            {
-    	            	$.messager.alert('提示', "添加课程信息失败！");
+    	            	showMessage('提示', "添加课程信息失败", null);
     	            }
     	        },
 	        error:function(){
 	        	hideProgressLoader();
-	        	$.messager.alert('提示', "添加课程信息失败！");
+	        	showMessage('提示', "添加课程信息失败", null);
 	        }
     		});
 			
