@@ -376,3 +376,16 @@ function validateTeacher(teacherId, weekTime, hourRange) {
 	});
 	return flag;
 }
+
+
+function showLoader()
+{
+	$("<div id='loadings' style='z-index:9999'></div>").bPopup({modalClose: false,modalColor:"#ccc",opacity:0.5,positionStyle:"fixed"});
+}
+
+
+function hideLoader()
+{
+	$("#loadings").bPopup().close();
+	$("#loadings").remove();
+}
