@@ -71,6 +71,7 @@ $(document).ready(function() {
 			var className = $("#className").val();
 			var classInstId = $("#classInstId").val();
 			var handlerId = $("#handlerId").val();
+			var schoolId = $("#schoolId").val();
 			for(var i = 0, n = obj.length; i < n; i++) {
 				var studentCourseId = obj[i].studentCourseId;
 				var studentId = obj[i].studentId;
@@ -80,7 +81,7 @@ $(document).ready(function() {
 					studentChannelType += obj[i].oldClassName;
 				}
 				studentChannelType += obj[i].feeTypeText;
-				param += "{classInstId:\""+classInstId+"\",className:\""+className+"\",studentId:\""+studentId+"\",studentCourseId:\""+studentCourseId+"\",studentChannelType:\""+studentChannelType+"\",handlerId:\""+handlerId+"\"},";
+				param += "{classInstId:\""+classInstId+"\",className:\""+className+"\",studentId:\""+studentId+"\",studentCourseId:\""+studentCourseId+"\",studentChannelType:\""+studentChannelType+"\",handlerId:\""+handlerId+"\",schoolId:\""+schoolId+"\"},";
 			}
 			param = param.substring(0, param.length - 1) + "]";
 			$.ajax({

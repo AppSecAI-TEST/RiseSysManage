@@ -26,6 +26,7 @@ $(document).ready(function() {
 			$("#selectClassDate").html(data.selectClassDate);
 			$("#selectClassNum").html(data.selectClassNum);
 			$("#oldClassName").val(data.oldClassName);
+			$("#schoolId").val(data.schoolId);
 		}
 	});
 	
@@ -66,7 +67,8 @@ $(document).ready(function() {
 		var studentCourseId = $("#studentCourseId").val();
 		var studentChannelType = $("#oldClassName").val() + $("#feeTypeText").html();
 		var oldClassInstId = $("#classInstId").val();
-    	var param = "[{classInstId:\""+classInstId+"\",className:\""+className+"\",studentId:\""+studentId+"\",studentCourseId:\""+studentCourseId+"\",studentChannelType:\""+studentChannelType+"\",handlerId:\""+handlerId+"\",oldClassInstId:\""+oldClassInstId+"\"}]";
+		var schoolId = $("#schoolId").val();
+    	var param = "[{classInstId:\""+classInstId+"\",className:\""+className+"\",studentId:\""+studentId+"\",studentCourseId:\""+studentCourseId+"\",studentChannelType:\""+studentChannelType+"\",handlerId:\""+handlerId+"\",oldClassInstId:\""+oldClassInstId+"\",schoolId:\""+schoolId+"\"}]";
 		$.ajax({
 			url: "/sys/applyClass/addClassStudent.do",
 			data: "param=" + param,
