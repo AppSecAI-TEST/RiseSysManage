@@ -37,7 +37,8 @@
 	      
       	      <table width="100%" cellpadding="5px" class="maintable" >
 	      	      <tr>
-	      	        <input id="studentCourseId" name="studentCourseId" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"studentCourseId")%>"/>
+	      	        <input id="oldClassType" name="oldClassType" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>"/>
+	      	        <input id="studentId"  name="studentId"     type="hidden" value="2"/>
 	      	      	<input id="studentId"  name="studentId"     type="hidden" value="2"/>
 	      	    	<input id="courseType" name="courseType"    type="hidden" value="001"/>
 	      	    	<input id="advisterType" name="adviserType" type="hidden" value="teacher"/>
@@ -497,7 +498,7 @@
 		
 		var obj = JSON.stringify($("#courseFm").serializeObject());
 		studentCourse.course=obj;
-		alert(JSON.stringify(studentCourse));
+		//alert(JSON.stringify(studentCourse));
 		return studentCourse;
 	}
 		
@@ -530,21 +531,10 @@
 		$('#dlg').dialog({
 			title:"使用抵扣券",
 		});
-		alert($("#studentId").val())
+		//alert($("#studentId").val())
 		$('#dlg').attr("src","/sys/course/useCoupon.jsp?studentId="+$("#studentId").val());
 		$('#dlg').dialog("open");
 	}
-	
-	function getDataName(id,val)
-	{
-		
-		var data = $(id).combobox('getData');
-		
-		for(var i=0;i<data.length;i++)
-		{
-			 
-		}
-		
-	}
+
 	initCousreGift();
 	</script>
