@@ -17,6 +17,7 @@
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="券类赠品作废">
   			<input type="hidden" id="studentGiftId" value="${obj.studentGiftId}" />
+  			<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   			<table width="100%" cellpadding="5px" class="maintable">
   				<tr>
   					<td align="right">赠品来源：</td>

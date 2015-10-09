@@ -63,7 +63,7 @@
   					<td align="left">${obj.handerName}</td>
   				</tr>
   				<tr>
-  					<td align="right">本次使用金额：<input class="easyui-numberbox"  id="useAmount" style="width:80px;" data-options="min:1,max:${obj.usableAmount}" required="true"/></td>
+  					<td align="right">本次使用金额：<input class="easyui-numberbox" id="useAmount" style="width:80px;" data-options="min:1,max:${obj.usableAmount}" required="true"/></td>
   					<td align="left" colspan="3">购买内容：<input class="easyui-textbox"  id="content" style="width:500px;" required="true"/>
   					&nbsp;发放人：<input class="easyui-textbox" id="granter" style="width:100px;" required="true"/></td>
   				</tr>

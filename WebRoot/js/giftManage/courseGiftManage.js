@@ -23,6 +23,12 @@ $(document).ready(function(){
 function courseFinish()
 {
 	if(validateSelect("courseGift_data")) {
+		var row = $("#courseGift_data").datagrid('getSelected');
+		var giftState = row.giftState;
+		if(giftState == "终止"){
+			$.messager.alert('提示', "该赠课已经终止！");
+			return;
+		}
 		getCourseInfo("courseGift_data","finish");
 	}
 }
@@ -59,10 +65,11 @@ function getCourseInfo(obj,type)
 function courseFinishSubmit()
 {
 	var studentGiftId = $("#studentGiftId").val();
+	var handlerId = $("#handlerId").val();
 	var rtnRemark = $("#rtnRemark").val();
 	rtnRemark = string2Json(rtnRemark);
 	rtnRemark = encodeURI(rtnRemark);
-	var json = '{"studentGiftId":"'+studentGiftId+'","rtnRemark":"'+rtnRemark+'"}';
+	var json = '{"studentGiftId":"'+studentGiftId+'","rtnRemark":"'+rtnRemark+'","handlerId":"'+handlerId+'"}';
 	$.ajax({
 		type : "POST",
 		url: "/sys/giftManage/updateCourseGiftInfo.do",

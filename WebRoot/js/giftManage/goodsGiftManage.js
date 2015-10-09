@@ -151,6 +151,7 @@ function chooseActivity()
 function addGoodsGiftSubmit()
 {
 	var goodsGiftChannel = $("input[name='goodsGiftChannel']:checked").val();
+	var handlerId = $("#handlerId").val();
 	var studentId = $("#studentId").val();
 	var studentName = $("#studentName").val();
 	var giveRemark = $("#giveRemark").val();
@@ -206,6 +207,7 @@ function addGoodsGiftSubmit()
 				 gift.giftChannelDesc ="其他赠送";
 			 }
 			 gift.giveRemark=giveRemark;
+			 gift.handlerId=handlerId;
 			 gifts.push(gift);  
 		 }
 	});
@@ -361,7 +363,7 @@ function rtnGoodsGift()
 //实物教材退回提交
 function rtnGoodsGiftSubmit()
 {
-	if($("#getGoodForm").form('validate')){
+	if($("#rtnGoodForm").form('validate')){
 		var giftArray = new Array();
 		var rtnRemark = $("#rtnRemark").val();
 		$("input[name='studentGiftId']").each(function(i,node){
