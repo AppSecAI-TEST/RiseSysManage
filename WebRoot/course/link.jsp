@@ -221,21 +221,27 @@
     			async: false,
     			beforeSend: function()
     	    	{
-    	    		$.messager.progress({title : '课程信息', msg : '正在添加课程信息，请稍等……'});
+    	    		showProgressLoader("正在添加课程信息，请稍等……",1000);
     	    	},
     	    	success: function (data) {
-    	    		$.messager.progress('close'); 
+    	    		
+    	    		hideProgressLoader();
     	    		var flag = data.flag
+    	    		
     	            if(flag)
     	            {
-    	            	$.messager.alert('提示', "成功添加课程信息！");
-    	            	window.location.reload();
+    	            	//$.messager.alert('提示', "成功添加课程信息！");
+    	            $.messager.alert('提示', "成功添加课程信息！", "info", function() {window.history.back();});
     	            }
     	            else
     	            {
-    	            	$.messager.alert('提示', "添加活动课程信息！");
+    	            	$.messager.alert('提示', "添加课程信息失败！");
     	            }
-    	        } 
+    	        },
+	        error:function(){
+	        	hideProgressLoader();
+	        	$.messager.alert('提示', "添加课程信息失败！");
+	        }
     		});
 			
 	});

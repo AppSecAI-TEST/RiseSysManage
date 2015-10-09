@@ -1,4 +1,4 @@
-$(document).ready(function ()
+$(document).ready(function()
 {  
     $('#parentType').combobox({
 	 onChange:function(n,o)
@@ -131,11 +131,15 @@ $(document).ready(function ()
 					 $("#stageOrder").val(data[i].seqId);
 				 }
 			}
+		
 		    $("#totalAmount").textbox('setValue',amount);
 		    parent.window.countAmount();
+		    var classType=$('#classType').combobox("getValue");
+		    
        		var stageType=$("#stageId").combobox('getText');
        		var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",stageId:\""+stageType+"\"}";
-       	 	$("#classType").combobox({
+       	 	$("#classType").combobox(
+       	 	{
         		url : urls,//返回json数据的url
         		valueField : "classType",
         		textField : "classType",
@@ -145,57 +149,19 @@ $(document).ready(function ()
                     var data = $('#classType').combobox('getData');
                     if (data.length > 0)
                     {
-                    	var oldClassType=$("#oldClassType").val();
-                    	if(oldClassType!='')
-                    	{
-	                    	for(var i=0;i<data.length;i++)
-	                    	{
-	                    		if(oldClassType==data[i].classType)
-		                    	{
-		                    		 $("#classType").combobox('select', oldClassType);
-		                    	}
-	                    	}
-	                    
-                       }else
-                       {
-                    	     $("#classType").combobox('select', data[0].classType);
-                       }
+                       // $("#classType").combobox('select', data[0].classType);var oldClassType=$("#oldClassType").val();
+	            	    var oldClassType=$('#oldClassType').val();
+		               	for(var i=0;i<data.length;i++)
+		               	{
+		               		if(oldClassType==data[i].classType)
+		                   	{
+		                   		 $("#classType").combobox('select', oldClassType);
+		                    }
+		                }
                     }
                 }
         	});
        }  
-	});
-	
-	$(function()
-	{
-		var classType = $('#classType').combobox('getValue');
-		if(oldClassType!='' && classType=='')
-        {
-			var stageType=$('#stageId').combobox("getValue");
-			var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",stageId:\""+stageType+"\"}";
-	   	 	$("#classType").combobox({
-	    		url : urls,//返回json数据的url
-	    		valueField : "classType",
-	    		textField : "classType",
-	    		panelHeight : "auto",
-	    		onLoadSuccess : function ()
-	    		{ //数据加载完毕事件
-	                var data = $('#classType').combobox('getData');
-	                if (data.length > 0)
-	                {
-	                	var oldClassType=$("#oldClassType").val();
-	                	
-	                    	for(var i=0;i<data.length;i++)
-	                    	{
-	                    		if(oldClassType==data[i].classType)
-		                    	{
-		                    		 $("#classType").combobox('select', oldClassType);
-		                    	}
-	                    	}
-	                }
-	            }
-	   	 	}
-    	});
 	});
 	
 	$('#favorAmount').textbox(
@@ -209,7 +175,8 @@ $(document).ready(function ()
 			$("#amount").textbox('setValue',amount);
 			parent.window.countAmount();
    		 }  
-	}); 
+	});
+
  }); 
 
 //初始化已有赠品信息
@@ -350,6 +317,8 @@ function initCousreGift()
 			});
 		} 
 	});
+	
+	 
 }
 
 function closeDlg()
