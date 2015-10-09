@@ -236,10 +236,10 @@
     	            	showMessage('提示', "添加课程信息失败", null);
     	            }
     	        },
-	        error:function(){
-	        	hideProgressLoader();
-	        	showMessage('提示', "添加课程信息失败", null);
-	        }
+		        error:function(){
+		        	hideProgressLoader();
+		        	showMessage('提示', "添加课程信息失败", null);
+		        }
     		});
 			
 	});
