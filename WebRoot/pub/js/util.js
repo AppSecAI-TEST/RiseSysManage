@@ -379,7 +379,7 @@ function validateTeacher(teacherId, weekTime, hourRange) {
 	return flag;
 }
 
-
+//弹出进度框
 function showProgressLoader(text,timer)
 {
 	var progress ="<div class='panel window messager-window' style='display: block;left:-144px;width: 288px; z-index: 9005;'><div class='messager-body panel-body panel-body-noheader panel-body-noborder window-body window-body-noheader' title='' style='width: 266px;'><div class='messager-progress'><div class='messager-p-msg'></div><div class='messager-p-bar progressbar' style='height: 20px;'><div class='progressbar-text' style='width: 244px; height: 20px; line-height: 20px;'>"+text+"</div><div class='progressbar-value' style='width: 0%; height: 20px; line-height: 20px;'><div class='progressbar-text' style='width: 244px; height: 20px; line-height: 20px;'>"+text+"</div></div></div></div></div></div>";
@@ -412,4 +412,28 @@ function countProgressing()
 	{
 		countProgress =0;
 	}
+}
+
+function showMessage(title,text,callBack)
+{
+	var message ="<div class='panel window messager-window' style='display: block; width: 288px; left: -144px; top:50%; z-index: 9005;'><div class='panel-header panel-header-noborder window-header' style='width: 288px;'><div class='panel-title'>提示</div><div class='panel-tool'><a href='javascript:void(0)' onclick='hideMessage()' class='panel-tool-close'></a></div></div><div class='messager-body panel-body panel-body-noborder window-body' title='' style='width: 266px;'><div class=''></div><div>请先选择您要操作的学员！</div><div style='clear:both;'></div><div class='messager-button'><a href='javascript:void(0)' style='margin-left:10px' class='l-btn l-btn-small' group='' id='messageBtn'><span class='l-btn-left'><span class='l-btn-text'>确定</span></span></a></div></div></div>";
+	$("<div id='loadings' style='z-index:8000;text-align:center'>"+message+"</div>").bPopup({modalClose: false,modalColor:"#ccc",opacity:0.5,positionStyle:"fixed"});
+	if(callBack!=null)
+	{
+		$("#messageBtn").click(function(){
+			callBack();
+		})
+	}
+	else
+	{
+		$("#messageBtn").click(function(){
+			hideMessage();
+		})
+	}	
+}
+
+function hideMessage()
+{
+	$("#loadings").bPopup().close();
+	$("#loadings").remove();
 }
