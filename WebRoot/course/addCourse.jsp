@@ -169,112 +169,52 @@
 				<div style="height: 10px;"></div>
 				<div class="easyui-panel" style="width: 1200px; height: auto;"
 					title="赠品信息">
-
-					<table width="100%" cellpadding="5px" class="maintable"
-						id="giftTab">
-						<tr id="giftModelTR">
-							<td width="8%" align="right">
-								<span>赠品类型：</span>
-							</td>
-							<td width="8%">
-								<select class="easyui-combobox" id="parentType"
-									style="width: 100px; height: 28px;"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
-									url="<%=path%>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE"
-									required="true">
-								</select>
-							</td>
-							<td width="7%" align="right">
-								<span>赠品名称：</span>
-							</td>
-							<td width="39%">
-								<table border="0">
-									<tr>
-										<td id='td0'>
-											<select class="easyui-combobox" id="giftType"
-												style="width: 120px; height: 28px;"></select>
-										</td>
-										<td id="td1" style="display: none">
-											<select class="easyui-combobox" id="giftId"
-												style="width: 120px; height: 28px;"></select>
-										</td>
-										<td id="td2" style="display: none">
-											<input id="giftCode" type="text"
-												class="easyui-textbox validatebox" required="true"
-												style="width: 150px; height: 28px;" />
-										</td>
-										<td id="td3" style="display: none">
-											<input id="giftEffDate" type="text" class="easyui-datebox"
-												required="true" style="width: 100px; height: 28px;" />
-										</td>
-									</tr>
-								</table>
-							</td>
-							<td width="7%" align="right">
-								<span>是否领用：</span>
-							</td>
-							<td width="7%" align="left">
-								<input type="radio" name="isGetY" id="isGetY" value="Y">
-								<label for="radio">
-									<span>已领用</span>
-								</label>
-								<input type="radio" name="isGetN" id="isGetN" value="N">
-								<label for="radio">
-									<span>未领用</span>
-								</label>
-							</td>
-							<td width="6%" align="right">
-								<span>发放人：</span>
-							</td>
-							<td width="8%">
-								<input id="granter" type="text"
-									class="easyui-textbox validatebox" required="true"
-									style="width: 100px; height: 28px;" />
-							</td>
-							<td width="4%">
-								<span>是否退回</span>
-							</td>
-							<td width="6%">
-								<a href="javascript:void(0)" id="addGiftBtn"
-									class="easyui-linkbutton" iconCls="icon-add"
-									style="width: 80px; height: 28px;">添加</a>
-							</td>
-						</tr>
-						<tr style="display: none;" name="addGift" id="addGift">
-							<td align="right">
-								<span>赠品类型：</span>
-							</td>
-							<td align="left" parentType="">
-								&nbsp;
-							</td>
-							<td align="right">
-								<span>赠品名称：</span>
-							</td>
-							<td align="left" giftType="" giftId="">
-								&nbsp;
-							</td>
-							<td align="right">
-								<span>是否领用：</span>
-							</td>
-							<td align="left" isGet="">
-								&nbsp;
-							</td>
-							<td align="right">
-								<span>发放人：</span>
-							</td>
-							<td align="left" granter="">
-								&nbsp;
-							</td>
-							<td>
-								&nbsp;
-							</td>
-							<td>
-								<a href='javascript:void(0)' class='linkmore'
-									onclick='delRow(this)'><span>删除</span> </a>
-							</td>
-						</tr>
-					</table>
-				</div>
+				<table width="100%" cellpadding="5px" class="maintable" id="giftTab">
+	      	      <tr id="giftModelTR">
+	      	        <td width="8%" align="right"><span>赠品类型：</span></td>
+	      	        <td width="8%">
+	      	        <select  id="parentType" style="width: 100px; height: 28px;"
+	      				     data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
+	      					 url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE" required="true" >
+      	            </select>
+      	            </td>
+	      	        <td width="7%" align="right"><span>赠品名称：</span></td>
+	      	        <td width="39%">
+	      	      	<table  border="0">
+	   	                <tr>
+			      	         <td id='td0' ><select  class="easyui-combobox" id="giftType" style="width: 120px; height: 28px;"></select></td>
+			      	         <td id="td1" style="display:none"><select  class="easyui-combobox" id="giftId" style="width: 120px; height: 28px;"></select></td>
+			      	         <td id="td2" style="display:none"><input   id="giftCode" type="text" class="easyui-textbox validatebox" required="true" style="width:150px; height: 28px;"/></td>
+		                     <td id="td3" style="display:none"><input   id="giftEffDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;"/></td>
+	      	             </tr>
+      	            </table>
+      	            </td>
+	      	        <td width="7%" align="right"><span>是否领用：</span></td>
+	      	        <td width="7%" align="left">
+	      	          <input type="radio" name="isGetY" id="isGetY" value="Y">
+	      	          <label for="radio"><span>已领用</span></label>
+	      	          <input type="radio" name="isGetN" id="isGetN" value="N">
+	      	          <label for="radio"> <span>未领用</span></label>
+      	           </td>
+	      	        <td width="6%" align="right"><span>发放人：</span></td>
+	      	        <td width="8%"><input   id="granter" type="text" class="easyui-textbox validatebox" required="true" style="width: 100px; height: 28px;"/></td>
+	      	        <td width="4%"><span>是否退回</span></td>
+	      	        <td width="6%"><a href="javascript:void(0)" id="addGiftBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a></td>
+      	        </tr>
+      	      <tr style="display:none;" name="addGift" id="addGift" >
+      	        <td align="right"><span>赠品类型：</span></td>
+      	        <td align="left" parentType="">&nbsp;</td>
+      	        <td align="right"><span>赠品名称：</span></td>
+      	        <td align="left" giftType="" giftId="">&nbsp;</td>
+      	        <td align="right"><span>是否领用：</span></td>
+      	        <td align="left" isGet="">&nbsp;</td>
+      	        <td align="right"><span>发放人：</span></td>
+      	        <td align="left" granter="">&nbsp;</td>
+      	        <td>&nbsp;</td>
+      	        <td><a href='javascript:void(0)' class='linkmore' onclick='delRow(this)' ><span>删除</span></a></td>
+     	       </tr>
+      	      </table>
+      		</div>
 
 				<div style="height: 10px;"></div>
 				<div class="easyui-panel" style="width: 1200px; height: auto;"
@@ -834,6 +774,59 @@
 </html>
 <script type="text/javascript">
 loadStuBaseInfo();
+
+$('#parentType').combobox({
+	 onChange:function(n,o)
+		{
+		     $("#td0").css('display','none');
+		 	 $("#td1").css('display','none');
+             $("#td2").css('display','none');
+             $("#td3").css('display','none');
+       		if(n=='COUPON')//券类
+       		{
+			    var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift_Type\",parentType:\""+n+"\"}";
+	       		$("#giftType").combobox(
+	       		{
+	        		url : urls,//返回json数据的url
+	        		valueField : "giftType",
+	        		textField :  "typeName",
+	        		panelHeight : "auto",
+	        		onLoadSuccess : function ()
+	        		{ //数据加载完毕事件
+	                    var data = $('#giftType').combobox('getData');
+	                    if (data.length > 0)
+	                    {
+	                      //  $("#giftId").combobox('select', data[0].param2);
+	                    }
+	                    $("#td0").css('display','block');
+	                    $("#td1").css('display','block');
+	                    $("#td2").css('display','block');
+	                    $("#td3").css('display','block');
+	                }
+	        	});
+       		}else if(n=='GOODS')//实物类
+       		{
+       			$("#td1").css('display','block');
+			    var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}";
+	       		$("#giftId").combobox(
+	       		{
+	        		url : urls,//返回json数据的url
+	        		valueField : "giftId",
+	        		textField :  "giftName",
+	        		panelHeight : "auto",
+	        		onLoadSuccess : function ()
+	        		{ //数据加载完毕事件
+	                    var data = $('#giftId').combobox('getData');
+	                    if (data.length > 0)
+	                    {
+	                      //  $("#giftId").combobox('select', data[0].param2);
+	                    }
+	                }
+	        	});
+       		}
+		}
+	});
+
 $('#giftType')
 		.combobox(
 				{
