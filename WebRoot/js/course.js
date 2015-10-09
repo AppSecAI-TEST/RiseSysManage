@@ -131,7 +131,6 @@ $(document).ready(function ()
 					 $("#stageOrder").val(data[i].seqId);
 				 }
 			}
-		
 		    $("#totalAmount").textbox('setValue',amount);
 		    parent.window.countAmount();
        		var stageType=$("#stageId").combobox('getText');
@@ -146,11 +145,57 @@ $(document).ready(function ()
                     var data = $('#classType').combobox('getData');
                     if (data.length > 0)
                     {
-                        $("#classType").combobox('select', data[0].classType);
+                    	var oldClassType=$("#oldClassType").val();
+                    	if(oldClassType!='')
+                    	{
+	                    	for(var i=0;i<data.length;i++)
+	                    	{
+	                    		if(oldClassType==data[i].classType)
+		                    	{
+		                    		 $("#classType").combobox('select', oldClassType);
+		                    	}
+	                    	}
+	                    
+                       }else
+                       {
+                    	     $("#classType").combobox('select', data[0].classType);
+                       }
                     }
                 }
         	});
        }  
+	});
+	
+	$(function()
+	{
+		var classType = $('#classType').combobox('getValue');
+		if(oldClassType!='' && classType=='')
+        {
+			var stageType=$('#stageId').combobox("getValue");
+			var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",stageId:\""+stageType+"\"}";
+	   	 	$("#classType").combobox({
+	    		url : urls,//返回json数据的url
+	    		valueField : "classType",
+	    		textField : "classType",
+	    		panelHeight : "auto",
+	    		onLoadSuccess : function ()
+	    		{ //数据加载完毕事件
+	                var data = $('#classType').combobox('getData');
+	                if (data.length > 0)
+	                {
+	                	var oldClassType=$("#oldClassType").val();
+	                	
+	                    	for(var i=0;i<data.length;i++)
+	                    	{
+	                    		if(oldClassType==data[i].classType)
+		                    	{
+		                    		 $("#classType").combobox('select', oldClassType);
+		                    	}
+	                    	}
+	                }
+	            }
+	   	 	}
+    	});
 	});
 	
 	$('#favorAmount').textbox(
