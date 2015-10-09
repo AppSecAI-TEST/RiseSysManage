@@ -20,6 +20,7 @@
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="实物&教材赠品赠送">
   		<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
   		<input type="hidden" id="studentName" name="studentName" value="<%=studentName %>"/>
+  		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   			<table width="100%" cellpadding="5px" class="maintable">
   				<input type="hidden" id="activityId" />
   				<tr id="goodsTr">

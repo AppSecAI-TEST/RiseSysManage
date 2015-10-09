@@ -22,8 +22,8 @@
 					<th field="ck" align="center" checkbox="true" width="1%"></th>
 					<th field="titleText" align="center" width="20%"><span>活动标题</span></th>
 					<th field="activityDate" align="center" width="19%"><span>活动时间</span></th>
-					<th field="awardText" align="center" width="25%"><span>获奖情况</span></th>
-					<th field="remark" align="center" width="34%"><span>活动详细</span></th>
+					<th field="awardText" align="center" width="24%"><span>获奖情况</span></th>
+					<th field="remark" align="center" width="33%"><span>活动详细</span></th>
 					<input type='hidden'  field="activityId" />
 				</tr>
 			</thead>

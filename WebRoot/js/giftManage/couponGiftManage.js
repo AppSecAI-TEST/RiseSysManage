@@ -124,6 +124,17 @@ function getCouponGiftSubmit()
 function couponExchange()
 {
 	if(validateSelect("couponGift_data")) {
+		var row = $("#couponGift_data").datagrid('getSelected');
+		var isGet = row.isGet;
+		var giftState = row.giftState;
+		if(isGet == "否"){
+			$.messager.alert('提示', "请先领取赠券！");
+			return;
+		}
+		if(giftState == "消耗完" || giftState == "已过期" || giftState == "已作废"){
+			$.messager.alert('提示', "该赠券状态不能兑换！");
+			return;
+		}
 		getCouponInfo("couponGift_data","exchange");
 	}
 }
@@ -170,6 +181,12 @@ function couponExchangeSubmit()
 function couponInvalidate()
 {
 	if(validateSelect("couponGift_data")) {
+		var row = $("#couponGift_data").datagrid('getSelected');
+		var giftState = row.giftState;
+		if(giftState == "已作废"){
+			$.messager.alert('提示', "该赠券已经作废！");
+			return;
+		}
 		getCouponInfo("couponGift_data","invalidate");
 	}
 }
@@ -178,10 +195,11 @@ function couponInvalidate()
 function couponInvalidateSubmit()
 {
 	var studentGiftId = $("#studentGiftId").val();
+	var handlerId = $("#handlerId").val();
 	var rtnRemark = $("#rtnRemark").val();
 	rtnRemark = string2Json(rtnRemark);
 	rtnRemark = encodeURI(rtnRemark);
-	var json = '{"studentGiftId":"'+studentGiftId+'","rtnRemark":"'+rtnRemark+'"}';
+	var json = '{"studentGiftId":"'+studentGiftId+'","rtnRemark":"'+rtnRemark+'","handlerId":"'+handlerId+'"}';
 	$.ajax({
 		type : "POST",
 		url: "/sys/giftManage/updateCouponGiftInfo.do",
@@ -207,6 +225,12 @@ function couponInvalidateSubmit()
 function couponDelay()
 {
 	if(validateSelect("couponGift_data")) {
+		var row = $("#couponGift_data").datagrid('getSelected');
+		var giftState = row.giftState;
+		if(giftState == "消耗完" || giftState == "已作废"){
+			$.messager.alert('提示', "该赠券状态不能延期！");
+			return;
+		}
 		getCouponInfo("couponGift_data","delay");
 	}
 }
