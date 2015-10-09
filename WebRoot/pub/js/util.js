@@ -1,3 +1,5 @@
+var to =null;
+var countProgress =null;
 $
 		.extend(
 				$.fn.linkbutton.methods,
@@ -378,14 +380,36 @@ function validateTeacher(teacherId, weekTime, hourRange) {
 }
 
 
-function showLoader()
+function showProgressLoader(text,timer)
 {
-	$("<div id='loadings' style='z-index:9999'></div>").bPopup({modalClose: false,modalColor:"#ccc",opacity:0.5,positionStyle:"fixed"});
+	var progress ="<div class='panel window messager-window' style='display: block;left:-144px;width: 288px; z-index: 9005;'><div class='messager-body panel-body panel-body-noheader panel-body-noborder window-body window-body-noheader' title='' style='width: 266px;'><div class='messager-progress'><div class='messager-p-msg'></div><div class='messager-p-bar progressbar' style='height: 20px;'><div class='progressbar-text' style='width: 244px; height: 20px; line-height: 20px;'>"+text+"</div><div class='progressbar-value' style='width: 0%; height: 20px; line-height: 20px;'><div class='progressbar-text' style='width: 244px; height: 20px; line-height: 20px;'>"+text+"</div></div></div></div></div></div>";
+	$("<div id='loadings' style='z-index:8000;text-align:center'>"+progress+"</div>").bPopup({modalClose: false,modalColor:"#ccc",opacity:0.5,positionStyle:"fixed"});
+	countProgress =0;
+	to =setInterval("countProgressing()",timer);
 }
 
 
-function hideLoader()
+function hideProgressLoader()
 {
+	try
+	{
+		clearInterval(to);
+
+	}
+	catch(e)
+	{
+		
+	}
 	$("#loadings").bPopup().close();
 	$("#loadings").remove();
+}
+
+function countProgressing()
+{
+	$(".progressbar-value").css("width",countProgress+"%");
+	countProgress+=10;
+	if(countProgress==100)
+	{
+		countProgress =0;
+	}
 }
