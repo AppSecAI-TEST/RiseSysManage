@@ -23,12 +23,14 @@
 			{
 				var height = $(document).height();
 				$('#frame<%=name%>',parent.document).css("height",height+20);
-			})
+			});
+			
+			
 		</script>
 		<script type="text/javascript" src="<%=path %>/js/course.js"></script>
   	</head>
   
-  	<body>
+  	<body >
   	<div  class="easyui-panel" title="连报课程<%=order%>" style="width:99%;padding:10px;border-color:#95B1E7">
   	<input id="frameName" name="frameName" type="hidden" value="<%=name%>"/>
   	<form id="courseFm">
@@ -37,8 +39,9 @@
 	      
       	      <table width="100%" cellpadding="5px" class="maintable" >
 	      	      <tr>
-	      	        <input id="oldClassType" name="oldClassType" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>"/>
-	      	        <input id="studentId"  name="studentId"     type="hidden" value="2"/>
+	      	        <input id="studentCourseId" name="studentCourseId" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"studentCourseId")%>"/>
+	      	        <input id="oldClassType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>"/>
+	      	        <input id="oldStageId"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>"/>
 	      	      	<input id="studentId"  name="studentId"     type="hidden" value="2"/>
 	      	    	<input id="courseType" name="courseType"    type="hidden" value="001"/>
 	      	    	<input id="advisterType" name="adviserType" type="hidden" value="teacher"/>
@@ -56,8 +59,8 @@
 					</td>
 	      	        <td align="right"><span>班级类型：</span></td>
 	      	        <td> 
-	      	         <select name="classType" class="easyui-combobox" id="classType" style="width: 150px; height: 28px;" drequired="true" >
-	      						<option>请先选择阶段</option>
+	      	         <select name="classType" id="classType" class="easyui-combobox"  style="width: 150px; height: 28px;" drequired="true" >
+	      						<option value="">请先选择阶段</option>
       	            </select>
 	      	         </td>
 	      	        <td align="right"><span>缴费时间：</span></td>
@@ -537,4 +540,5 @@
 	}
 
 	initCousreGift();
+	
 	</script>

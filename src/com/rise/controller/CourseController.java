@@ -32,7 +32,26 @@ public class CourseController
 	@RequestMapping(value = "/addLinkCourses.do")
 	public void addLinkCourses(String param, HttpServletResponse response) throws Exception
 	{
-		courseSerivce.addLinkCourses(param);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal =courseSerivce.addLinkCourses(param);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+		
 	}
 	
 	/**
