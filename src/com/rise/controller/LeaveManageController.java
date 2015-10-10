@@ -139,4 +139,33 @@ public class LeaveManageController {
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/qryDataListByPage.do")
+	public void qryDataListByPage(String page, String rows, String param, String funcNodeId, HttpServletResponse response)
+	{
+		log.error(page);
+		log.error(rows);
+		log.error(param);
+		log.error(funcNodeId);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = leaveManageService.qryDataListByPage(page, rows, param, funcNodeId);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }
