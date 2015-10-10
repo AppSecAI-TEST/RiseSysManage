@@ -88,7 +88,7 @@
   				</tr>
   			</table>
  		</form>
-		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:400" id="goodsGift_data" toolbar="#goodsToolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="fasle">
+		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:500" id="goodsGift_data" toolbar="#goodsToolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="fasle">
 			<thead>
 				<tr>
 					<th field="ck" align="center" checkbox="true" width="1%"></th>
@@ -197,7 +197,7 @@
   			</table>
  		</form>
  		
-		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:400" id="couponGift_data" toolbar="#couponToolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
+		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:470" id="couponGift_data" toolbar="#couponToolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
 			<thead>
 				<tr>
 					<th field="ck" align="center" checkbox="true" width="1%"></th>
@@ -297,7 +297,7 @@
   			</table>
  		</form>
  		
-		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:400" id="courseGift_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:500" id="courseGift_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 			<thead>
 				<tr>
 					<th field="ck" align="center" checkbox="true" width="1%"></th>
