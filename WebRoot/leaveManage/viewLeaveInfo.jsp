@@ -12,24 +12,6 @@
 		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
 		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
 		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/css/style.css">
-		<style type="text/css">
-			.datagrid{
-				margin:0 auto;
-				min-width:1100px;
-				margin-top:20px;
-				width:97%;
-			}
-			.datagrid .panel-header{width:99% !important;}
-			/*.datagrid .panel-header .panel-title{width:100% !important;}*/
-			.datagrid .datagrid-wrap{width:100% !important;}
-			.datagrid .datagrid-wrap .datagrid-toolbar{width:99.5% !important;border-right-width:1px;}
-			.datagrid .datagrid-wrap .datagrid-view{width:100% !important;}
-			.datagrid .datagrid-wrap .datagrid-view .datagrid-view1{width:0% !important;}
-			.datagrid .datagrid-wrap .datagrid-view .datagrid-view2{width:100% !important;}
-			.datagrid .datagrid-wrap .datagrid-view .datagrid-view2 .datagrid-header{width:99.9% !important;border-left-width:0px;border-right-width:1px;}
-			.datagrid .datagrid-wrap .datagrid-view .datagrid-view2 .datagrid-body{width:99.9% !important;border-left-width:0px;border-right:1px solid #95B8E7;}
-			.datagrid .datagrid-wrap .datagrid-pager{width:99.9% !important;border-left-width:0px;border-right:1px solid #95B8E7;}
-		</style>
   	</head>
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="学员基础信息">
@@ -68,7 +50,12 @@
   				</tr>
   				<tr>
   					<td align="right">休学剩余时间：</td>
-  					<td align="left">${obj.leaveInfo.leftTime}天</td>
+  					<c:if test="${obj.leaveInfo.leftTime >= 0}">
+  						<td align="left">${obj.leaveInfo.leftTime}天</td>
+  					</c:if>
+  					<c:if test="${obj.leaveInfo.leftTime < 0}">
+  						<td align="left">0天</td>
+  					</c:if>
   					<td align="right">休学状态：</td>
   					<td align="left">${obj.leaveInfo.leaveState}</td>
   					<td align="right">查看休学申请：</td>
@@ -99,23 +86,23 @@
  				<td align="center">业绩顾问</td>
  				<td align="center">责任顾问</td>
  				<td align="center">客户关怀</td>
- 				<c:forEach items="${obj.courseInfo}" var="courseInfo">
- 					<tr>
- 						<td align="center">${courseInfo.courseName}</td>
- 						<td align="center">${courseInfo.courseState}</td>
- 						<td align="center">${courseInfo.schoolName}</td>
- 						<td align="center">${courseInfo.payDate}</td>
- 						<td align="center">${courseInfo.feeType}</td>
- 						<td align="center">${courseInfo.className}</td>
- 						<td align="center">${courseInfo.startTime}</td>
- 						<td align="center">${courseInfo.finishTime}</td>
- 						<td></td>
- 						<td align="center">${courseInfo.adviser}</td>
- 						<td align="center">${courseInfo.dutyAdvister}</td>
- 						<td align="center">${courseInfo.carer}</td>
- 					</tr>
- 				</c:forEach>
  			</tr>
+			<c:forEach items="${obj.courseInfo}" var="courseInfo">
+				<tr>
+					<td align="center">${courseInfo.courseName}</td>
+					<td align="center">${courseInfo.courseState}</td>
+					<td align="center">${courseInfo.schoolName}</td>
+					<td align="center">${courseInfo.payDate}</td>
+					<td align="center">${courseInfo.feeType}</td>
+					<td align="center">${courseInfo.className}</td>
+					<td align="center">${courseInfo.startTime}</td>
+					<td align="center">${courseInfo.finishTime}</td>
+					<td></td>
+					<td align="center">${courseInfo.adviser}</td>
+					<td align="center">${courseInfo.dutyAdvister}</td>
+					<td align="center">${courseInfo.carer}</td>
+				</tr>
+			</c:forEach>
  		</table>
  		</div>
  		<div style="margin-top: 20px;min-width:1100px; width:99%;">

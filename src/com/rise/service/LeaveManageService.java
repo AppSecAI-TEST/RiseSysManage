@@ -35,4 +35,26 @@ public class LeaveManageService {
 		return ServiceEngine.invokeHttp(param);
 	}
 
+	public String qryDataListByPage(String page, String rows, String param, String funcNodeId)throws Exception{
+		JSONObject obj = new JSONObject();
+		if(ObjectCensor.isStrRegular(param))
+		{
+			obj = JSONObject.fromObject(param);
+		}
+		if(ObjectCensor.isStrRegular(page,rows))
+		{
+			Integer pageNum = Integer.parseInt(page) - 1;
+			Integer pageSize = Integer.parseInt(rows);
+			pageNum = pageNum * pageSize;
+			obj.element("start", pageNum);
+			obj.element("rownum", pageSize);
+		}
+		if(ObjectCensor.isStrRegular(funcNodeId))
+		{
+			obj.element("funcNodeId", funcNodeId);
+		}
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1201\",securityCode:\"0000000000\",params:{param:"+obj+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+
 }

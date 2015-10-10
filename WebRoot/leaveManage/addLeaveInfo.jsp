@@ -11,26 +11,8 @@
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
 		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
-		<script type="text/javascript" src="<%=path %>/js/leaveManage.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/leaveManage/leaveManage.js"></script>
 		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/css/style.css">
-		<style type="text/css">
-			.datagrid{
-				margin:0 auto;
-				min-width:1100px;
-				margin-top:20px;
-				width:97%;
-			}
-			.datagrid .panel-header{width:99% !important;}
-			/*.datagrid .panel-header .panel-title{width:100% !important;}*/
-			.datagrid .datagrid-wrap{width:100% !important;}
-			.datagrid .datagrid-wrap .datagrid-toolbar{width:99.5% !important;border-right-width:1px;}
-			.datagrid .datagrid-wrap .datagrid-view{width:100% !important;}
-			.datagrid .datagrid-wrap .datagrid-view .datagrid-view1{width:0% !important;}
-			.datagrid .datagrid-wrap .datagrid-view .datagrid-view2{width:100% !important;}
-			.datagrid .datagrid-wrap .datagrid-view .datagrid-view2 .datagrid-header{width:99.9% !important;border-left-width:0px;border-right-width:1px;}
-			.datagrid .datagrid-wrap .datagrid-view .datagrid-view2 .datagrid-body{width:99.9% !important;border-left-width:0px;border-right:1px solid #95B8E7;}
-			.datagrid .datagrid-wrap .datagrid-pager{width:99.9% !important;border-left-width:0px;border-right:1px solid #95B8E7;}
-		</style>
   	</head>
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="学员基础信息">

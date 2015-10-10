@@ -10,29 +10,11 @@
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
 		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
-		<script type="text/javascript" src="<%=path %>/js/leaveManage.js"></script>
-		<style type="text/css">
-			.datagrid{
-				margin:0 auto;
-				min-width:1100px;
-				margin-top:20px;
-				width:97%;
-			}
-			.datagrid .panel-header{width:99% !important;}
-			/*.datagrid .panel-header .panel-title{width:100% !important;}*/
-			.datagrid .datagrid-wrap{width:100% !important;}
-			.datagrid .datagrid-wrap .datagrid-toolbar{width:99.5% !important;border-right-width:1px;}
-			.datagrid .datagrid-wrap .datagrid-view{width:100% !important;}
-			.datagrid .datagrid-wrap .datagrid-view .datagrid-view1{width:0% !important;}
-			.datagrid .datagrid-wrap .datagrid-view .datagrid-view2{width:100% !important;}
-			.datagrid .datagrid-wrap .datagrid-view .datagrid-view2 .datagrid-header{width:99.9% !important;border-left-width:0px;border-right-width:1px;}
-			.datagrid .datagrid-wrap .datagrid-view .datagrid-view2 .datagrid-body{width:99.9% !important;border-left-width:0px;border-right:1px solid #95B8E7;}
-			.datagrid .datagrid-wrap .datagrid-pager{width:99.9% !important;border-left-width:0px;border-right:1px solid #95B8E7;}
-		</style>
+		<script type="text/javascript" src="<%=path %>/js/leaveManage/leaveManage.js"></script>
   	</head>
   	<body>
  		<form id="qryStuFm">
-  			<table align="center" style="min-width:1100px;width:97%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="5">
+  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="5">
   				<tr>
   					<td align="right" width="15%">所属校区：</td>
   					<td align="left" width="5%">
@@ -57,8 +39,10 @@
   				<tr>
   					<td align="right" width="15%">课程状态：</td>
   					<td align="left" width="5%">
-  						<select class="easyui-combobox" name="courseState" id="courseState" style="width:130px;">
-  							
+  						<select class="easyui-combobox" name="courseState" id="courseState" style="width:130px;"
+  						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+      					onLoadSuccess:function(data){$('#courseState').combobox('setValue',data[0].codeFlag);}"
+      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_LEAVE_T&codeType=COURSE_STATE">
   						</select>
   					</td>
   					<td align="right" width="15%">班级老师：</td>
@@ -77,7 +61,7 @@
   			</table>
  		</form>
  		
-		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:300" id="stuList_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" >
+		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:550" id="stuList_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 			<thead>
 				<tr>
 					<th field="ck" align="center" checkbox="true" width="1%"></th>
@@ -87,15 +71,15 @@
 					<th field="stageLevel" align="center" width="10%">已升学阶段</th>
 					<th field="className" align="center" width="10%">在读班级</th>
 					<th field="courseStateVal" align="center" width="10%">课程状态</th>
-					<th field="teacherName" align="center" width="12%">带班老师</th>
-					<th field="carerName" align="center" width="11%">客户关怀</th>
+					<th field="teacherName" align="center" width="11%">带班老师</th>
+					<th field="carerName" align="center" width="10%">客户关怀</th>
 					<th field="classProgress" align="center" width="11%">在读班级课时</th>
 				</tr>
 			</thead>
 		</table>
 		<div id="toolbar">
-   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" plain="true" onclick="addLeaveInfo()">提交</a>
- 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" plain="true" onclick="javascript:window.history.back()">返回</a>
+   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="addLeaveInfo()">提交</a>
+ 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" onclick="javascript:window.history.back()">返回</a>
  		</div>
   	</body>
 </html>
