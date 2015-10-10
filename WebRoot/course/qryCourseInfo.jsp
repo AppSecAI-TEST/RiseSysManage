@@ -115,12 +115,14 @@
     			<a href="javascript:void(0)" id="courseDetail" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="">浏览</a>
   			</div>
 			<div style="padding:5px 0;">
-				<table class="easyui-datagrid" title="查询结果" style="height:450px" id="list_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+				<table class="easyui-datagrid" title="查询结果" style="height:450px" id="list_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true"
+				 url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=5000"
+				>
 					<thead>
 						<tr>
 							<th field="ck" checkbox="true" width="2%"></th>
-							<th field="schoolId" align="center" width="8%">所属校区</th>
-							<th field="studentName" align="center" width="7%">学员姓名</th>
+							<th field="schoolName" align="center" width="8%">所属校区</th>
+							<th field="name" align="center" width="7%">学员姓名</th>
 							<th field="identityId" align="center" width="10%">证件号码</th>
 							<th field="feeType" align="center" width="7%">业绩类型</th>
 							<th field="classType" align="center" width="8%">班级类型</th>
