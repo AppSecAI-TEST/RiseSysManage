@@ -124,9 +124,9 @@ public class FuncNodeService
 		return ServiceEngine.invokeHttp(param);
 	}
 	
-	public String getPrivFuncNodeList(String sysRoleId) throws Exception
+	public String getPrivFuncNodeList(String sysRoleId , String funcNodeId) throws Exception
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00216\",securityCode:\"0000000000\",params:{sysRoleId:\""+sysRoleId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00216\",securityCode:\"0000000000\",params:{sysRoleId:\""+sysRoleId+"\",funcNodeId:\""+funcNodeId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 	
@@ -136,4 +136,9 @@ public class FuncNodeService
 		return ServiceEngine.invokeHttp(param);
 	}
 	
+	public String getOperFuncNodeList(String sysRoleId) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00218\",securityCode:\"0000000000\",params:{sysRoleId:\""+sysRoleId+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
 }

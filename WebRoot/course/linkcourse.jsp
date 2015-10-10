@@ -60,7 +60,7 @@
 	      	        <td align="right"><span>班级类型：</span></td>
 	      	        <td> 
 	      	         <select name="classType" id="classType" class="easyui-combobox"  style="width: 150px; height: 28px;" drequired="true" >
-	      						<option value="">请先选择阶段</option>
+	      						<option value="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>"><%=StringUtil.getJSONObjectKeyVal(object,"classType")%></option>
       	            </select>
 	      	         </td>
 	      	        <td align="right"><span>缴费时间：</span></td>

@@ -64,14 +64,18 @@ $(document).ready(function() {
     	if(validate()) {
     		$("#dlg").dialog('open').dialog('setTitle', '批量修改客户关怀和责任顾问');//设定表头  
     		$('#batchUpdateFm').form('clear');//清空窗体数据  
+    		$('#batch_update_data').datagrid('loadData',{total:0, rows:[]}); 
     		var data = $('#updateAdvisterId').combobox('getData');
-			$('#updateAdvisterId').combobox('setValue',data[0].staffId);
+    		if(data.length > 0) {
+    			$('#updateAdvisterId').combobox('setValue',data[0].staffId);
+    		}
 			data = $('#updateCarer').combobox('getData');
-			$('#updateCarer').combobox('setValue',data[0].staffId);
+			if(data.length > 0) {
+    			$('#updateCarer').combobox('setValue',data[0].staffId);
+    		}
 			$("#handlerId").val($("#staffId").val());
     		var obj = $('#list_data').datagrid('getSelections');
-    		for(var i = 0, n = obj.length; i < n; i++)
-    		{
+    		for(var i = 0, n = obj.length; i < n; i++) {
     			$("#batch_update_data").datagrid('insertRow', {index: i, row: obj[i]});
     		}
     	}
