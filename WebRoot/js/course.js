@@ -134,8 +134,6 @@ $(document).ready(function()
 		
 		    $("#totalAmount").textbox('setValue',amount);
 		    parent.window.countAmount();
-		    var classType=$('#classType').combobox("getValue");
-		    
        		var stageType=$("#stageId").combobox('getText');
        		var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",stageId:\""+stageType+"\"}";
        	 	$("#classType").combobox(
@@ -147,17 +145,22 @@ $(document).ready(function()
         		onLoadSuccess : function ()
         		{ //数据加载完毕事件
                     var data = $('#classType').combobox('getData');
+                    var flag=false; 
                     if (data.length > 0)
                     {
-                       // $("#classType").combobox('select', data[0].classType);var oldClassType=$("#oldClassType").val();
 	            	    var oldClassType=$('#oldClassType').val();
 		               	for(var i=0;i<data.length;i++)
 		               	{
 		               		if(oldClassType==data[i].classType)
 		                   	{
-		                   		 $("#classType").combobox('select', oldClassType);
+		                   		flag=true;
+		               			$("#classType").combobox('select', oldClassType);
 		                    }
 		                }
+		               	if(!flag)
+		               	{
+		               		$("#classType").combobox('select', data[0].classType);
+		               	}
                     }
                 }
         	});

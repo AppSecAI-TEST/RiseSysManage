@@ -6,7 +6,7 @@ $(document).ready(function(){
 		addMultipleCourse();
 	});
 	$("#backBt").click(function(){
-		window.histoty.back();
+		window.location.href="qryCourseInfo.jsp";
 	});
 	$("#qryBtn").click(function() {
     	qry();

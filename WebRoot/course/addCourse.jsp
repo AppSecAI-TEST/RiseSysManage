@@ -28,76 +28,75 @@
 
 	<body>
 		<div class="easyui-panel" style="width: 1200px" title="学员基础信息">
-			<form id="studentFm">
-				<input type="hidden" id="studentId" name="studentId" value="<%=studentId%>">
-				<input type="hidden" id="handlerId" name="handlerId"
-					value="${sessionScope.StaffT.staffId}" />
-				<input type="hidden" id="schoolId" name="schoolId"
-					value="${sessionScope.StaffT.schoolId}" />
-				<table width="100%" cellpadding="5px" class="maintable"
-					id="stuBaseInfo">
-					<tr>
-						<td width="13%" align="right">
-							<span style="color: red;">*</span>
-							<span>学员姓名：</span>
-						</td>
-						<td width="25%">
-							<span></span>
-						</td>
-						<td width="13%" align="right">
-							<span>出生日期：</span>
-						</td>
-						<td width="15%">
-							<span></span>
-						</td>
-						<td align="right">
-							<span>证件号码：</span>
-						</td>
-						<td>
-							<span></span>
-						</td>
-					</tr>
-					<tr>
-						<td align="right">
-							<span>性别：</span>
-						</td>
-						<td><span><span></td>
-						<td align="right">
-							<span>缴费时间：</span>
-						</td>
-						<td>
-							<input name="payDate" id="payDate" type="text"
-								class="easyui-datebox" required="true"
-								style="width: 200px; height: 28px;" />
-						</td>
-						<td align="right">
-							<span>课程类型：</span>
-						</td>
-						<td>
-							<select name="courseTypeName"
-								data-options="onChange:changeCourseType" class="easyui-combobox"
-								id="courseTypeName" style="width: 150px; height: 28px;">
-								<option value="normal">
-									常规课
-								</option>
-								<option value="short">
-									短期课
-								</option>
-							</select>
-						</td>
-					</tr>
-				</table>
+			<input type="hidden" id="schoolId" name="schoolId"
+				value="${sessionScope.StaffT.schoolId}" />
+			<table width="100%" cellpadding="5px" class="maintable"
+				id="stuBaseInfo">
+				<tr>
+					<td width="13%" align="right">
+						<span style="color: red;">*</span>
+						<span>学员姓名：</span>
+					</td>
+					<td width="25%">
+						<span></span>
+					</td>
+					<td width="13%" align="right">
+						<span>出生日期：</span>
+					</td>
+					<td width="15%">
+						<span></span>
+					</td>
+					<td align="right">
+						<span>证件号码：</span>
+					</td>
+					<td>
+						<span></span>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						<span>性别：</span>
+					</td>
+					<td>
+						<span><span>
+					</td>
+					<td align="right">
+						<span>课程类型：</span>
+					</td>
+					<td>
+						<select name="courseTypeName"
+							data-options="onChange:changeCourseType" class="easyui-combobox"
+							id="courseTypeName" style="width: 150px; height: 28px;">
+							<option value="normal">
+								常规课
+							</option>
+							<option value="short">
+								短期课
+							</option>
+						</select>
+					</td>
+					<td>
+						&nbsp;
+					</td>
+					<td>
+						&nbsp;
+					</td>
+				</tr>
+			</table>
 			</form>
 		</div>
-		<div style="height: 10px;"></div>
 		<form id="courseFm">
+			<div style="height: 10px;"></div>
+			<input type="hidden" id="studentId" name="studentId"
+				value="<%=studentId%>">
+			<input type="hidden" id="handlerId" name="handlerId"
+				value="${sessionScope.StaffT.staffId}" />
 			<div id="normal">
 				<div class="easyui-panel" style="width: 1200px; height: auto;"
 					title="常规课课程">
 
 					<table width="100%" cellpadding="5px" class="maintable">
 						<tr>
-							<input id="studentId" name="studentId" type="hidden" value="2" />
 							<input id="courseType" name="courseType" type="hidden"
 								value="001" />
 							<input id="advisterType" name="adviserType" type="hidden"
@@ -106,6 +105,7 @@
 								value="001" />
 							<input id="feeType" name="feeType" type="hidden" value="001" />
 							<input id="feeState" name="feeState" type="hidden" value="00A" />
+							<input id="stageOrder" name="stageOrder" type="hidden" value="" />
 							<td align="right">
 								<span>阶段：</span>
 							</td>
@@ -270,8 +270,7 @@
 							</td>
 							<td>
 								<a href='javascript:void(0)' class='linkmore'
-									onclick='delRow(this)'><span>删除</span>
-								</a>
+									onclick='delRow(this)'><span>删除</span> </a>
 							</td>
 						</tr>
 					</table>
@@ -281,7 +280,7 @@
 				<div class="easyui-panel" style="width: 1200px; height: auto;"
 					title="赠课信息">
 					<table width="100%" cellpadding="5px" class="maintable">
-						<tr>
+						<tr id="giftCourseTr">
 							<td colspan="2" align="right">
 								<span>赠课类型</span>
 							</td>
@@ -377,8 +376,7 @@
 							</td>
 							<td align="center">
 								<a href='javascript:void(0)' class='linkmore'
-									onclick='delRow(this)'><span>删除</span>
-								</a>
+									onclick='delRow(this)'><span>删除</span> </a>
 							</td>
 						</tr>
 					</table>
@@ -394,179 +392,173 @@
 								<span>口碑类型：</span>
 							</td>
 							<td colspan="9" align="left">
-								<input type="radio" checked="true" name="praise"
-									onclick="changePraise('Y')">
+								<input type="radio" womType="Y" name="praise"
+									onclick="changePraise(this)">
 								<span>可控口碑</span>&nbsp;&nbsp;&nbsp;
-								<input type="radio" name="praise" onclick="changePraise('N')">
+								<input type="radio" name="praise" womType="N"
+									onclick="changePraise(this)">
 								<span>不可控口碑</span>
 							</td>
 						</tr>
-						<tr>
+						<tr style="display: none;">
 							<td align="right">
 								<span>口碑来源：</span>
 							</td>
 							<td align="center" width="170px">
-								<select name="praiseSelect" class="easyui-combobox"
-									data-options="onChange:changePraiseSource" id="praiseSelect"
-									style="width: 150px; height: 28px;">
-									<option value=""></option>
-									<option value="activity">
-										活动邀约
-									</option>
-									<option value="ccIntroduce">
-										CC转介绍
-									</option>
-									<option value="teacherInstroduce">
-										老师转介绍
-									</option>
+								<select id="praiseSourceY" name="praiseSourceY"
+									class="easyui-combobox"
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName',
+									onLoadSuccess:function(data){$('#praiseSourceY').combobox('setValue',data[0].codeFlag)},onChange:changePraiseSourceY"
+									style="width: 150px; height: 28px;"
+									url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_WOM_T&codeType=WOM_CHANNEL_Y">
 								</select>
 							</td>
 							<td colspan="8">
 								<table width="100%" class="praiseTab" id="praiseTab1">
-									<tr id="activity" style="display: none;">
+									<tr id="A" style="display: none;">
 										<td align="left" colspan="8">
 											<span>活动名称：</span>
-											<select class="easyui-combobox" id="activeName"
+											<select class="easyui-combobox" id="activeSchool"
 												style="width: 150px; height: 28px;">
-												<option value="all">
+												<option value="00">
 													所有
 												</option>
-												<option value="all">
+												<option value="01">
 													武展
 												</option>
-												<option value="all">
+												<option value="02">
 													总部
 												</option>
 											</select>
-											<select class="easyui-combobox" id="activeDetail"
+											<select class="easyui-combobox" id="activeId"
 												style="width: 150px; height: 28px;">
-												<option value="">
+												<option value="03">
 													活动1
 												</option>
-												<option value="">
+												<option value="04">
 													活动2
 												</option>
-												<option value="">
+												<option value="05">
 													活动3
 												</option>
 											</select>
 										</td>
 									</tr>
-									<tr id="ccIntroduce" style="display: none;">
+									<tr id="C" style="display: none;">
 										<td align="left" colspan="8">
 											<span>口碑顾问A：</span>
-											<select class="easyui-combobox" id="schoolA"
+											<select class="easyui-combobox" id="c_schoolA"
 												style="width: 150px; height: 28px;">
-												<option value="">
+												<option value="1">
 													所有
 												</option>
-												<option value="">
+												<option value="2">
 													武展
 												</option>
-												<option value="">
+												<option value="3">
 													徐东
 												</option>
-												</select>
-													<select class="easyui-combobox" id="adviserA"
-														style="width: 120px; height: 28px;">
-														<option value="">
-															顾问1
-														</option>
-														<option value="">
-															顾问2
-														</option>
-														<option value="">
-															顾问3
-														</option>
-														</select>
-															<span>口碑顾问B：</span>
-															<select class="easyui-combobox" id="schoolB"
-																style="width: 150px; height: 28px;">
-																<option value="">
-																	所有
-																</option>
-																<option value="">
-																	武展
-																</option>
-																<option value="">
-																	徐东
-																</option>
-																</select>
-																	<select class="easyui-combobox" id="adviserB"
-																		style="width: 120px; height: 28px;">
-																		<option value="">
-																			顾问1
-																		</option>
-																		<option value="">
-																			顾问2
-																		</option>
-																		<option value="">
-																			顾问3
-																		</option>
-																		</select>
+											</select>
+											<select class="easyui-combobox" id="c_adviserA"
+												style="width: 120px; height: 28px;">
+												<option value="4">
+													顾问1
+												</option>
+												<option value="5">
+													顾问2
+												</option>
+												<option value="6">
+													顾问3
+												</option>
+											</select>
+											<span>口碑顾问B：</span>
+											<select class="easyui-combobox" id="c_schoolB"
+												style="width: 150px; height: 28px;">
+												<option value="7">
+													所有
+												</option>
+												<option value="8">
+													武展
+												</option>
+												<option value="9">
+													徐东
+												</option>
+											</select>
+											<select class="easyui-combobox" id="c_adviserB"
+												style="width: 120px; height: 28px;">
+												<option value="10">
+													顾问1
+												</option>
+												<option value="11">
+													顾问2
+												</option>
+												<option value="12">
+													顾问3
+												</option>
+											</select>
 										</td>
 									</tr>
-									<tr id="teacherInstroduce" style="display: none;">
+									<tr id="T" style="display: none;">
 										<td colspan="8">
 											<span>口碑顾问A：</span>
-											<select class="easyui-combobox" id="schoolsA"
+											<select class="easyui-combobox" id="c_schoolsA"
 												style="width: 120px; height: 28px;">
-												<option value="">
+												<option value="13">
 													所有
 												</option>
-												<option value="">
+												<option value="14">
 													武展
 												</option>
-												<option value="">
+												<option value="15">
 													徐东
 												</option>
-												</select>
-													<select class="easyui-combobox" id="teacherA"
-														style="width: 120px; height: 28px;">
-														<option value="">
-															顾问1
-														</option>
-														<option value="">
-															顾问2
-														</option>
-														<option value="">
-															顾问3
-														</option>
-														</select>
-															<span>口碑顾问B：</span>
-															<select class="easyui-combobox" id="schoolsB"
-																style="width: 120px; height: 28px;">
-																<option value="">
-																	所有
-																</option>
-																<option value="">
-																	武展
-																</option>
-																<option value="">
-																	徐东
-																</option>
-																</select>
-																	<select class="easyui-combobox" id="teacherB"
-																		style="width: 120px; height: 28px;">
-																		<option value="">
-																			顾问1
-																		</option>
-																		<option value="">
-																			顾问2
-																		</option>
-																		<option value="">
-																			顾问3
-																		</option>
-																		</select>
-																			<a href="javascript:void(0)" id="qryStudent"
-																				style="width: 80px" class="easyui-linkbutton"
-																				iconCls="icon-add" plain="true">查询学生</a>
-																			<a href="javascript:void(0)" id="recordGifts"
-																				style="width: 80px" class="easyui-linkbutton"
-																				iconCls="icon-add" plain="true">录入赠品</a>
+											</select>
+											<select class="easyui-combobox" id="c_teacherA"
+												style="width: 120px; height: 28px;">
+												<option value="16">
+													顾问1
+												</option>
+												<option value="17">
+													顾问2
+												</option>
+												<option value="18">
+													顾问3
+												</option>
+											</select>
+											<span>口碑顾问B：</span>
+											<select class="easyui-combobox" id="c_schoolsB"
+												style="width: 120px; height: 28px;">
+												<option value="19">
+													所有
+												</option>
+												<option value="20">
+													武展
+												</option>
+												<option value="21">
+													徐东
+												</option>
+											</select>
+											<select class="easyui-combobox" id="c_teacherB"
+												style="width: 120px; height: 28px;">
+												<option value="22">
+													顾问1
+												</option>
+												<option value="23">
+													顾问2
+												</option>
+												<option value="24">
+													顾问3
+												</option>
+											</select>
+											<a href="javascript:void(0)" id="qryStudent"
+												style="width: 80px" class="easyui-linkbutton"
+												iconCls="icon-add" plain="true" onclick="qryStudent()">查询学生</a>
+											<a href="javascript:void(0)" id="recordGifts"
+												style="width: 80px" class="easyui-linkbutton"
+												iconCls="icon-add" plain="true">录入赠品</a>
 										</td>
 									</tr>
-									<tr id="teacherInstroduce" style="display: none;">
+									<tr id="T" style="display: none;">
 										<td width="80px" align="center"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
 											<span>学员姓名：</span>
@@ -603,70 +595,89 @@
 							</td>
 						</tr>
 						<tr style="display: none;">
-							<td align="right"><span>不可控口碑类型：</span></td>
+							<td align="right">
+								<span>不可控口碑类型：</span>
+							</td>
 							<td align="left" width="170px">
-								<select name="praiseType" class="easyui-combobox"
-									data-options="onChange:changePraiseType" id="praiseType"
-									style="width: 150px; height: 28px;">
-									<option value="">请选择</option>
-									<option value="stuIntroduce">
-										学员转介绍
-									</option>
-									<option value="staffInstroduce">
-										员工转介绍
-									</option>
+								<select id="praiseSourceN" name="praiseSourceN"
+									class="easyui-combobox"
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName',
+									onLoadSuccess:function(data){$('#praiseSourceN').combobox('setValue',data[0].codeFlag)},onChange:changePraiseSourceN"
+									style="width: 150px; height: 28px;"
+									url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_WOM_T&codeType=WOM_CHANNEL_N">
 								</select>
-							</td>	
+							</td>
 							<td colspan="8">
 								<table width="100%" class="praiseTab" id="praiseTab2">
-									<tr style="display:none;">
-										<td align="right" width="130px" style="border-right: 1px solid #ccc;"><span>学员姓名：</span></td>
-										<td align="center" style="border-right: 1px solid #ccc;"><input type="text" class="easyui-textbox" style="width: 150px"></td>
-										<td align="right" width="100px" style="border-right: 1px solid #ccc;">
+									<tr style="display: none;">
+										<td align="right" width="130px"
+											style="border-right: 1px solid #ccc;">
+											<span>学员姓名：</span>
+										</td>
+										<td align="center" style="border-right: 1px solid #ccc;">
+											<input type="text" class="easyui-textbox"
+												style="width: 150px">
+										</td>
+										<td align="right" width="100px"
+											style="border-right: 1px solid #ccc;">
 											<span>证件：</span>
 										</td>
-										<td align="center">	
-											<select class="easyui-combobox"
-												style="width: 100px; height: 28px;">
-												<option value="">
-													身份证
-												</option>
-												<option value="">
-														护照
-													</option>
-											<select>
-											<input type="text" class="easyui-textbox" style="width: 150px">
+										<td align="center">
+											<select id="identityType" name="identityType"
+												class="easyui-combobox"
+												data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName',
+												onLoadSuccess:function(data){$('#identityType').combobox('setValue',data[0].codeFlag)},onChange:changePraiseSourceN"
+												style="width: 150px; height: 28px;"
+												url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_T&codeType=IDENTITY_TYPE">
+											</select>
+											<input type="text" class="easyui-textbox"
+												style="width: 150px">
 										</td>
 									</tr>
-									<tr style="display:none;">	
-										<td align="right" style="border-top:1px solid #ccc;border-right: 1px solid #ccc;"><span>班级：</span></td>
-										<td align="center" style="border-top:1px solid #ccc;border-right: 1px solid #ccc;"><input type="text" class="easyui-textbox" style="width: 150px"></td>
-										<td align="right" style="border-top:1px solid #ccc;border-right: 1px solid #ccc;">
+									<tr style="display: none;">
+										<td align="right"
+											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
+											<span>班级：</span>
+										</td>
+										<td align="center"
+											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
+											<input type="text" class="easyui-textbox"
+												style="width: 150px">
+										</td>
+										<td align="right"
+											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
 											<span>转介绍老师:</span>
 										</td>
-										<td align="center" style="border-top:1px solid #ccc;border-right: 1px solid #ccc;">	
-											<select class="easyui-combobox"
+										<td align="center"
+											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
+											<select class="easyui-combobox school"
 												style="width: 100px; height: 28px;">
-												<option value="">
+												<option value="123">
 													选择校区
 												</option>
 												<select>
-											<select class="easyui-combobox"
-												style="width: 150px; height: 28px;">
-												<option value="">
-													选择老师
-												</option>
-											<select>
+													<select class="easyui-combobox teacher"
+														style="width: 150px; height: 28px;">
+														<option value="456">
+															选择老师
+														</option>
+														<select>
 										</td>
-										<td align="left"  style="border-top:1px solid #ccc;">
+										<td align="left" style="border-top: 1px solid #ccc;">
 											<a href="javascript:void(0)" id="searchStudent"
-											style="width: 150px" class="easyui-linkbutton"
-											iconCls="icon-add" plain="true"><span>学员检索</span>
+												style="width: 150px" class="easyui-linkbutton"
+												iconCls="icon-add" plain="true" onclick="searchStudent()"><span>学员检索</span>
 										</td>
 									</tr>
-									<tr style="display:none;">
-										<td width="130px" align="right" style="border-right: 1px solid #ccc;"><span>转介绍员工姓名：</span></td>
-										<td align="left"><input type="text" class="easyui-textbox" style="width: 150px"></td>
+									<tr style="display: none;">
+										<td width="130px" align="right"
+											style="border-right: 1px solid #ccc;">
+											<span>转介绍员工姓名：</span>
+										</td>
+										<td align="left">
+											<input type="text" id="womStaffName" class="easyui-textbox"
+												style="width: 150px">
+										</td>
 									</tr>
 								</table>
 							</td>
@@ -784,8 +795,8 @@
 							<span>总金额：</span>
 						</td>
 						<td align="left">
-							<input id="totalAmount" name="totalAmount" type="text"
-								value="1000" class="easyui-textbox validatebox"
+							<input id="totalAmount" name="totalAmount" type="text" value="0"
+								class="easyui-textbox validatebox"
 								style="width: 200px; height: 25px;">
 						</td>
 						<td align="right">
@@ -800,7 +811,7 @@
 							<span>实缴金额：</span>
 						</td>
 						<td align="left">
-							<input id="amount" name="amount" type="text" value="1000"
+							<input id="amount" name="amount" type="text" value="0"
 								class="easyui-textbox validatebox"
 								style="width: 200px; height: 25px;">
 						</td>
@@ -808,23 +819,126 @@
 				</table>
 			</div>
 		</form>
-		<div style="width:1200px;text-align:center">
-		 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:150px" id="submitBtn"><span>提交</span></a>
-  				&nbsp;&nbsp;&nbsp;&nbsp;
-  		 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" ><span>返回</span></a>	
-		<iframe id="dlg" class="easyui-dialog"
-			style="width: 1000px; height: 450px; padding: 10px 20px"
-			closed="true" modal="true">
-		</iframe>
+		<div style="width: 1200px; text-align: center">
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-ok" style="width: 150px" id="submitBtn"><span>提交</span>
+			</a> &nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				iconCls="icon-back" style="width: 150px" id="backBtn"><span>返回</span>
+			</a>
+			<iframe id="dlg" class="easyui-dialog"
+				style="width: 1000px; height: 450px; padding: 10px 20px"
+				closed="true" modal="true">
+			</iframe>
 	</body>
 </html>
 <script type="text/javascript">
 loadStuBaseInfo();
+$('#giftType')
+		.combobox(
+				{
+					onChange : function(n, o) {
+						var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""
+								+ n + "\"}";
+						$("#giftId").combobox( {
+							url : urls,//返回json数据的url
+							valueField : "giftId",
+							textField : "giftName",
+							panelHeight : "auto",
+							onLoadSuccess : function() { //数据加载完毕事件
+								var data = $('#giftId').combobox('getData');
+								if (data.length > 0) {
+									//  $("#giftId").combobox('select', data[0].param2);
+						}
+					}
+						});
+					}
+				});
+
+$('#giftCourseType')
+		.combobox(
+				{
+					onChange : function(n, o) {
+						var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""
+								+ n + "\"}";
+						$("#giftCourseId").combobox(
+								{
+									url : urls,//返回json数据的url
+									valueField : "giftId",
+									textField : "giftName",
+									panelHeight : "auto",
+									onLoadSuccess : function() { //数据加载完毕事件
+										var data = $('#couponType').combobox(
+												'getData');
+										if (data.length > 0) {
+											//  $("#giftId").combobox('select', data[0].param2);
+										}
+									}
+								});
+					}
+				});
+
+$('#giftCourseId').combobox( {
+	onChange : function(n, o) {
+		var data = $('#giftCourseId').combobox('getData');
+		if (data.length > 0) {
+			for ( var i = 0; i < data.length; i++) {
+				var giftNum = data[0].giftNum;
+				var giftId = data[0].giftId;
+				if (n == giftId) {
+					$("#courseHours").html(giftNum);
+				}
+			}
+		}
+	}
+});
+
+//选择阶段价加载班级
+$('#stageId').combobox({
+	onChange : function(n, o) {
+	var data = $("#stageId").combobox('getData');
+	var amount;
+	for ( var i = 0; i < data.length; i++) {
+		if (n == data[i].stageId) {
+			amount = data[i].amount;
+			$("#stageOrder").val(data[i].seqId);
+		}
+	}
+	$("#totalAmount").textbox('setValue', amount);
+	var stageType = $("#stageId").combobox('getText');
+	var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",stageId:\""+ stageType + "\"}";
+	$("#classType").combobox({
+			url : urls,//返回json数据的url
+									valueField : "classType",
+									textField : "classType",
+									panelHeight : "auto",
+									onLoadSuccess : function() { //数据加载完毕事件
+										var data = $('#classType').combobox(
+												'getData');
+										if (data.length > 0) {
+											$("#classType").combobox('select',
+													data[0].classType);
+										}
+									}
+								});
+					}
+});
+
+$('#favorAmount').textbox( {
+	onChange : function(value) {
+		minus = $("#minusAmount").textbox('getValue');
+		favorAmount = $("#favorAmount").textbox('getValue');
+		totalAmount = $("#totalAmount").textbox('getValue');
+		amount = totalAmount - minus - favorAmount;
+		$("#amount").textbox('setValue', amount);
+	}
+});
 var studentCourse = {};//最后提交学生课程信息
 var gifts = [];
 var courses = [];
 var coupons = [];//使用抵扣劵
 var useCoupon = "";
+var wom = {};//口碑信息
 
 var minus = 0;//抵扣金额
 var favorAmount = 0;//优惠金额
@@ -843,6 +957,16 @@ $("#addCourse").click(function() {
 			} else if (i == 1) {
 				var name = $("#giftCourseType").combobox('getText');
 				var val = $("#giftCourseType").combobox('getValue');
+
+				var datas = $('#giftCourseType').combobox('getData');
+
+				for ( var m = 0; m < datas.length; m++) {
+					if (val == datas[m].giftType) {
+						$(node).attr("effNum", datas[m].effNum);
+						$(node).attr("unit", datas[m].unit);
+					}
+				}
+
 				$(node).html("<span>" + name + "</span>");
 				$(node).attr("giftCourseType", val);//赠课类型	
 			} else if (i == 2) {
@@ -864,14 +988,28 @@ $("#addCourse").click(function() {
 				$(node).html("<span>" + afterYear(1) + "</span>");
 			}
 		});
-
 		$("#add").after(objectTr);
+		clearData("giftCourseTr");
+		$("#courseHours").html("");
 	});
 
 //删除相对应的行  
 function delRow(rows) {
 	$(rows).parent("td").parent("tr").remove();
 }
+
+$("#submitBtn").click(function() {
+	if($("#payDate").datebox("getValue")=="")
+	{
+		showMessage("提示","请选择缴费时间",null);
+		return false;
+	}	
+	addCourseInfo();
+});
+
+$("#backBtn").click(function() {
+	window.location.href = "addCourseList.jsp"
+});
 
 //增加赠品
 $("#addGiftBtn").click(function ()
@@ -942,12 +1080,12 @@ $("#addGiftBtn").click(function ()
                     }
                 }
 				 
-				
+				$(node).attr("giftName",giftName);
 				$(node).attr("amount",amount);
 				$(node).attr("giftId",giftId);
 				$(node).attr("giftType",giftTypeVal);
 				$(node).attr("giftCode",code);
-				$(node).attr("giftEffDate",giftEffDate);
+				$(node).attr("effDate",giftEffDate);
 				
 			}else if(n==5)
 			{
@@ -992,7 +1130,7 @@ $("#addGiftBtn").click(function ()
 		clearData("giftModelTR")
 	});
 
-	//创建连报提交数据
+	//创建单报提交数据
 	function build()
 	{
 		gifts=[];
@@ -1006,6 +1144,7 @@ $("#addGiftBtn").click(function ()
 			{
 				 var  tds=$(this).children('td');
 			 
+				 var giftName=tds.eq(3).attr("giftName");
 				 var  amount=tds.eq(3).attr('amount');
 				 var  effNum=tds.eq(3).attr('effNum');
 				 var  unit=tds.eq(3).attr('unit');
@@ -1014,11 +1153,11 @@ $("#addGiftBtn").click(function ()
 				 var  giftCode=tds.eq(3).attr('giftCode');
 				 var  isGet=tds.eq(5).attr('isGet');
 				 var  granter=tds.eq(7).attr('granter');
-				 var  giftEffDate=tds.eq(3).attr('giftEffDate');
 				 var  gift = {};
 				 
 				 gift.studentId=$("#studentId").val();
 				
+				 gift.giftName=giftName;
 				 gift.usableAmount=amount;
 				 gift.amount=amount;
 				 gift.studentGiftId=studentGiftId;
@@ -1027,10 +1166,8 @@ $("#addGiftBtn").click(function ()
 				 gift.giftType = giftType;
 				 gift.giftId=giftId;
 				 gift.giftCode=giftCode;
-				 gift.giftEffDate=giftEffDate;
 				 gift.isGet=isGet;
 				 gift.granter=granter;
-				 
 				 gifts.push(gift);  
 			 }
 		});
@@ -1044,6 +1181,8 @@ $("#addGiftBtn").click(function ()
 			{
 				 var  tds=$(this).children('td');
 				 var  giftType=tds.eq(1).attr('giftCourseType');
+				 var  effNum=tds.eq(1).attr('effNum');
+				 var  unit=tds.eq(1).attr('unit');
 				 var  giftId=tds.eq(2).attr('giftId');
 				 var  hours=tds.eq(3).attr('hours');
 				
@@ -1053,6 +1192,8 @@ $("#addGiftBtn").click(function ()
 				 gift.giftId=giftId;
 				 gift.giftNum=hours;
 				 gift.studentGiftId=studentGiftId;
+				 gift.unit = unit; 
+				 gift.effNum = effNum; 
 				 
 				 var datas = $('#giftType').combobox('getData');
 				 
@@ -1070,11 +1211,9 @@ $("#addGiftBtn").click(function ()
 		});
 		
 		studentCourse.gifts=gifts;
-		studentCourse.giftCourses= courses;
-		
-		var obj = JSON.stringify($("#courseFm").serializeObject());
+		var obj = $("#courseFm").serializeObject();
+		obj.payDate=$("#payDate").datebox("getValue");
 		studentCourse.course=obj;
-		alert(JSON.stringify(studentCourse));
 		return studentCourse;
 	}
 		
@@ -1124,30 +1263,9 @@ $("#addGiftBtn").click(function ()
 		
 	}
 	
-	function changePraiseSource()
+	function changePraise(obj)
 	{
-		var source =$("#praiseSelect").combobox("getValue");
-		if(source=="")
-		{
-			$("#praiseTab1").find("tr").css("display","none");
-		}
-		else
-		{
-			$("#praiseTab1").find("tr").each(function(){
-				if($(this).attr("id")!=source)
-				{
-					$(this).css("display","none");
-				}
-				else
-				{
-					$(this).css("display","table-row");
-				}	
-			})
-		}	
-	}
-	
-	function changePraise(flag)
-	{
+		var flag=$(obj).attr("womType");
 		if(flag=="Y")
 		{
 			$("#praiseInfo").find("tr").each(function(index){
@@ -1161,6 +1279,7 @@ $("#addGiftBtn").click(function ()
 					
 				}	
 			})
+			clearData("praiseTab2");
 		}
 		else
 		{
@@ -1168,14 +1287,19 @@ $("#addGiftBtn").click(function ()
 				if(index==1)
 				{
 					$(this).css("display","none");
+				
 				}
 				else if(index>1)
 				{
 					$(this).css("display","table-row");
-					$("#praiseTab2").find("tr").css("display","none");
 				}	
 			})
-		}	
+			clearData("praiseTab1");
+		}
+		$("#praiseTab1").find("tr").css("display","none");
+		$("#praiseSourceY").combobox("setValue"," "); 
+		$("#praiseTab2").find("tr").css("display","none");
+		$("#praiseSourceN").combobox("setValue"," "); 
 	}
 	function changeName()
 	{
@@ -1200,10 +1324,33 @@ $("#addGiftBtn").click(function ()
 		}	
 	}
 	
-	function changePraiseType()
+	function changePraiseSourceY()
 	{
-		var type=$("#praiseType").combobox("getValue");
-		if(type=="stuIntroduce")
+		var source =$("#praiseSourceY").combobox("getValue");
+		if(source=="")
+		{
+			$("#praiseTab1").find("tr").css("display","none");
+		}
+		else
+		{
+			$("#praiseTab1").find("tr").each(function(){
+				if($(this).attr("id")!=source)
+				{
+					$(this).css("display","none");
+				}
+				else
+				{
+					$(this).css("display","table-row");
+				}	
+			})
+		}	
+	}
+	
+	
+	function changePraiseSourceN()
+	{
+		var type=$("#praiseSourceN").combobox("getValue");
+		if(type=="Stu")
 		{
 			$("#praiseTab2").find("tr").each(function(index){
 				if(index>1)
@@ -1216,7 +1363,7 @@ $("#addGiftBtn").click(function ()
 				}	
 			});
 		}
-		else if(type=="staffInstroduce")
+		else if(type=="Sta")
 		{
 			$("#praiseTab2").find("tr").each(function(index){
 				if(index>1)
@@ -1265,5 +1412,354 @@ $("#addGiftBtn").click(function ()
 	    	
 		});
 	}
-	//initCousreGift();
+	
+	function addCourseInfo()
+	{
+		//获取口碑信息-begin
+		var womType="";
+		$("input[name=praise]").each(function(){
+			if(this.checked){
+				womType =$(this).attr("womType");
+			}
+		})
+		if(womType!="")
+		{	
+			var womChannel=womType=="Y"?$("#praiseSourceY").combobox("getValue"):$("#praiseSourceN").combobox("getValue");
+			if(trim(womChannel)!="")
+			{
+				var womInfo ={
+					womId:"",
+					womType:womType,
+					womChannel:womChannel,
+					studentCourseId:"",
+					handlerId:$("#handlerId").val()
+				};
+				var womItem ={
+					itemId:"",
+					womId:"",
+					activitySchool:"",
+					activityId:"",
+					adviserASchool:"",
+					adviserA:"",
+					adviserBSchool:"",
+					adviserB:"",
+					teacherASchool:"",
+					teacherA:"",
+					teacherBSchool:"",
+					teacherB:"",
+					studentIdSchool:"",
+					studentId:"",
+					studentName:"",
+					identityType:"",
+					identityId:"",
+					courseName:"",
+					teacherIdSchool:"",
+					teacherId:"",
+					staffName:"",
+					handlerId:$("#handlerId").val()
+				};
+				if(womChannel=="A")
+				{
+					if($("#activeId").combobox("getValue")=="")
+					{
+						$.messager.alert('提示', "请选择一个活动!");
+					}
+					else
+					{
+						womItem["activitySchool"]=$("#activeSchool").combobox("getValue");
+						womItem["activityId"]=$("#activeId").combobox("getValue");
+					}	
+				}
+				else if(womChannel=="C")
+				{
+					if($("#c_adviserA").combobox("getValue")==""&&$("#c_adviserB").combobox("getValue")=="")
+					{
+						$.messager.alert('提示', "请至少选择一个顾问!");
+						return false;
+					}
+					else
+					{
+						womItem["adviserASchool"]=$("#c_schoolA").combobox("getValue");
+						womItem["adviserA"]=$("#c_adviserA").combobox("getValue");
+						womItem["adviserBSchool"]=$("#c_schoolB").combobox("getValue");
+						womItem["adviserB"]=$("#c_adviserB").combobox("getValue");
+					}	
+				}
+				else if(womChannel=="T")
+				{
+					if($("#c_teacherA").combobox("getValue")==""&&$("#c_teacherB").combobox("getValue")=="")
+					{
+						$.messager.alert('提示', "请至少选择一个顾问!");
+						return false;
+					}
+					else
+					{
+						womItem["teacherASchool"]=$("#c_schoolsA").combobox("getValue");
+						womItem["teacherA"]=$("#c_teacherA").combobox("getValue");
+						womItem["teacherBSchool"]=$("#c_schoolsB").combobox("getValue");
+						womItem["teacherB"]=$("#c_teacherB").combobox("getValue");
+						var tr =$("#praiseTab1").find("tr:eq(3)");
+						if(tr.attr("studentId")!=null)
+						{
+							womItem["studentId"]=tr.attr("studentId");
+							womItem["studentIdSchool"]=tr.attr("studentSchoolId");
+							womItem["studentName"]=tr.find("td:eq(1)").find("span").html();
+							womItem["identityType"]=tr.attr("identityType");
+							womItem["identityId"]=tr.find("td:eq(3)").find("span").html();
+							womItem["className"]=tr.find("td:eq(5)").find("span").html();
+						}	
+					}	
+				}
+				else if(womChannel=="Stu")
+				{
+					var tr1=$("#praiseTab2").find("tr:eq(0)");
+					if(tr1.attr("studentId")==null)
+					{
+						$.messager.alert('提示', "请选择一个学员!");
+						return false;
+					}
+					else
+					{
+						womItem["studentId"]=tr1.attr("studentId");
+						womItem["studentIdSchool"]=tr1.attr("studentSchoolId");
+						womItem["studentName"]=tr1.find("td:eq(1)").find(".easyui-textbox").textbox("getValue");
+						womItem["identityType"]=tr1.find("td:eq(3)").find(".easyui-combobox").combobox("getValue");
+						womItem["identityId"]=tr1.find("td:eq(3)").find(".easyui-textbox").textbox("getValue");
+						var tr2 =$("#praiseTab2").find("tr:eq(1)");
+						womItem["className"]=tr2.find("td:eq(1)").find(".easyui-textbox").textbox("getValue");
+						womItem["teacherIdSchool"]=tr2.find("td:eq(3)").find(".easyui-combobox.school").combobox("getValue");
+						womItem["teacherId"]=tr2.find("td:eq(3)").find(".easyui-combobox.teacher").combobox("getValue");
+						
+					}	
+						
+				}
+				else if(womChannel=="Sta")
+				{
+					if($("#womStaffName").textbox("getValue")!="")
+					{
+						womItem["staffName"]=$("#womStaffName").textbox("getValue");
+					}
+					else
+					{
+						$.messager.alert('提示', "请填写员工姓名 !");
+						return false;
+					}	
+				}	
+				wom["info"]=womInfo;
+				wom["item"]=womItem;
+			}	
+		}
+		//获取口碑信息-end
+		var courseInfo =build();
+		var paramValue={
+			"womInfo":wom,
+			"courseInfo":courseInfo
+		};
+		paramValue =JSON.stringify(paramValue);
+		$.ajax({
+					type : "POST",
+					url: "/sys/course/addSingleCourse.do",
+					data: "param="+paramValue,
+					async: false,
+					beforeSend: function()
+			    	{
+			    		showProgressLoader("正在添加课程,请稍等...",400);
+			    	},
+			    	success: function(data) 
+			    	{
+			    		hideProgressLoader() 
+			    		if(data=="true")
+			    		{
+			    			showMessage('提示', "添加课程成功！",function(){window.location.href="addCourseList.jsp";});
+			    		}
+			    		else
+			    		{
+			    			showMessage('提示', "添加课程失败！",null);
+			    		}	
+			    		
+			    	},
+			        error:function(){
+			        	hideProgressLoader();
+			        	showMessage('提示', "调用添加课程服务失败！",null);
+			        }
+				});
+	}
+	
+	
+	function searchStudent()
+	{
+		$('#dlg').dialog({
+			title:"学员检索",
+		});
+		$('#dlg').attr("src","/sys/course/searchStudent.jsp?callBackFn=searchStudentInfo");
+		$('#dlg').dialog("open");
+	}
+	
+	function searchStudentInfo(obj)
+	{
+		obj =eval("("+obj+")");
+		var tr1 =$("#praiseTab2").find("tr:eq(0)");
+		tr1.find("td:eq(1)").find(".easyui-textbox").textbox("setValue",obj.name);
+		tr1.find("td:eq(3)").find(".easyui-combobox").combobox("setValue",obj.identityType);
+		tr1.find("td:eq(3)").find(".easyui-textbox").textbox("setValue",obj.identityId);
+		var tr2 =$("#praiseTab2").find("tr:eq(1)");
+		tr2.find("td:eq(1)").find(".easyui-textbox").textbox("setValue",obj.className);
+		tr1.attr("studentId",obj.studentId);
+		tr1.attr("studentSchoolId",obj.schoolId);
+		$('#dlg').attr("src","");
+		$('#dlg').dialog("close");
+	}
+	
+	
+	function qryStudent()
+	{
+		$('#dlg').dialog({
+			title:"查询学生",
+		});
+		$('#dlg').attr("src","/sys/course/searchStudent.jsp?callBackFn=qryStudentInfo");
+		$('#dlg').dialog("open");
+	}
+	
+	function qryStudentInfo(obj)
+	{
+		obj =eval("("+obj+")");
+		var tr =$("#praiseTab1").find("tr:eq(3)");
+		tr.find("td:eq(1)").html("<span>"+obj.name+"</span>");
+		tr.find("td:eq(3)").html("<span>"+obj.identityId+"</span>");
+		tr.find("td:eq(5)").html("<span>"+obj.className+"</span>");
+		tr.attr("identityType",obj.identityType);
+		tr.attr("studentId",obj.studentId);
+		tr.attr("studentSchoolId",obj.schoolId);
+		$('#dlg').attr("src","");
+		$('#dlg').dialog("close");
+	}
+	
+	
+	//初始化已有赠品信息
+function initCousreGift()
+{
+		//增加赠品
+ 	var sqlParam={};
+ 	var id=$("#studentCourseId").val();
+	sqlParam.studentCourseId=id;
+	sqlParam.queryCode='Qry_Course_Gift';
+	var str = JSON.stringify(sqlParam);
+	$.ajax({
+		url: "/sys/course/getStuCourses.do?",
+		data: "param="+str,
+		dataType: "json",
+		async: false,
+    	success: function (data)
+    	{
+    		$.messager.progress('close'); 
+    		 var giftTs = data.data;//学员已有课程 
+    		 
+    		$.each(giftTs,function(i,gift)
+    		{
+    			if(gift==null)return;
+				var giftTR;
+				if(gift.giftState!='UNSUED')//已使用不可删除
+				{
+					$(node).html("");
+				} 
+    			else if(gift.parentType=="GOODS" || gift.parentType=="COUPON")
+				{
+			 		giftTR=$("#addGift").clone();
+			 		giftTR.css("display",'table-row');
+					giftTR.attr("studentGiftId",gift.studentGiftId);
+					giftTR.attr("val",'gift');
+					giftTR.find("td").each(function(n,node)
+					{
+						if(n==1)
+						{
+							if(gift.giftType=="GOODS")
+							{
+								$(node).html("<span>实物赠品</span>");	
+							}else if(gift.parentType=="COUPON")
+							{
+								$(node).html("<span>券类赠品</span>");	
+							}
+						}else if(n==3)
+						{	
+							if(gift.giftType=="GOODS")
+							{
+								 $(node).html("<span>"+gift.giftName+"</span>");	
+							}else
+							{
+								 $(node).html("<span>"+gift.giftName+"   "+gift.giftCode+"   "+gift.effDate+"</span>");
+							}
+							
+						}else
+						if(n==5)
+						{	
+							if(gift.isGet=='Y')
+							{
+								$(node).html("<span>已领取</span>");	
+							}else
+							{
+								$(node).html("<span>未领取</span>");	
+							}
+							
+							 
+						}else if(n==7)
+						{
+							$(node).html("<span>"+gift.granter+"</span>");	
+						}else if(n==8)
+						{
+							if(gift.isRtn=='Y')
+							{
+								$(node).html("<span>是</span>");	
+							}else
+							{
+								$(node).html("<span>否</span>");	
+							}
+						}
+					});
+				
+					$("#addGift").after(giftTR);
+			 	}else if(gift.parentType=="COURSE")
+			 	{
+			 		var objectTr=$("#add").clone();//克隆模板
+					objectTr.css("display",'table-row');
+					objectTr.attr("val","course");
+					objectTr.attr("studentGiftId",gift.studentGiftId);
+					objectTr.find("td").each(function(i,node)
+					{
+						var effDate="";
+						if(i==0)
+						{
+							$(node).html("<span>"+(i+1)+"</span>");	
+						}else
+						if(i==1)
+						{
+							$(node).html("<span>"+gift.typeName+"</span>");	
+						}else if(i==2)
+						{
+							 
+							$(node).html("<span>"+gift.giftName+"</span>");	
+		 	
+						}else if(i==3)
+						{
+						 
+							$(node).html("<span>"+gift.giftNum+"</span>");	
+						}else if(i==4)
+						{
+							$(node).html("<span>"+gift.createDate+"</span>");	
+						}else if(i==5)
+						{
+							$(node).html("<span>未使用</span>");	
+						}else if(i==6)
+						{
+							$(node).html("<span>"+gift.effDate+"</span>");	
+						}else if(i==7)
+						{
+							$(node).html("<span>"+gift.expDate+"</span>");	
+						} 
+					});
+					$("#add").after(objectTr);
+			 	}
+			});
+		} 
+	});
+}
 	</script>

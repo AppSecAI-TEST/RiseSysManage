@@ -83,4 +83,28 @@ public class CourseController
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/addSingleCourse.do")
+	public void addSingleCourse(String param, HttpServletResponse response) throws Exception
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = courseSerivce.addSingleCourse(param);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }
