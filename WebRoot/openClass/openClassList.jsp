@@ -87,7 +87,7 @@
 				</thead>
 			</table>
 	  	</div>
-		<div id="toolbar">
+		<div id="toolbar" style="padding: 2px; height: auto">
    			<a href="javascript:void(0)" id="normalOpenClass" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px;">正常开班申请</a>
    			<a href="javascript:void(0)" id="exceptionOpenClass" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px;">异常开班申请</a>
    			<a href="javascript:void(0)" id="updateStartDate" class="easyui-linkbutton" iconCls="icon-edit" style="width: 120px;">修改开课时间</a>

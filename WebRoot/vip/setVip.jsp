@@ -2,54 +2,52 @@
 <%
 	String path = request.getContextPath();
 	String studentId = request.getParameter("studentId");
+	String name = request.getParameter("name");
+	String byName = request.getParameter("byName");
+	String birthday = request.getParameter("birthday");
+	String sexVal = request.getParameter("sexVal");
+	String identityId = request.getParameter("identityId");
+	String phone = request.getParameter("phone");
+	String schoolName = request.getParameter("schoolName");
+	String dutyAdvisterName = request.getParameter("dutyAdvisterName");
+	String carerName = request.getParameter("carerName");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  	<head>
+	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript" src="<%=path %>/js/student/student.js"></script>
   	</head>
-  
+  	
   	<body>
-      	<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="基本信息">
-      		<form id="vipRemarkFm">
-      			<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
-      			<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
-      			<!-- 
-      			<table width="100%" cellpadding="5px" class="maintable" id="addActivityTd">
-      				<tr>
-      					<td>
-			      			<textarea rows="9" cols="120" id="vipRemark" name="vipRemark" class="easyui-validatebox textbox" required="true"></textarea>
-      					</td>
-      				</tr>
-      			</table>
-      			 -->
-      			 <table width="100%" cellpadding="5px" class="maintable" id="setVipTd">
+  		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="基本信息">
+  			<form id="setVipFm">
+	  			<table width="100%" cellpadding="5px" class="maintable" id="setVipTd">
 	  				<tr>
 	  					<td align="right" width="10%"><span>学员姓名：</span></td>
-	  					<td width="25%"><span id="nameText"></span></td>
+	  					<td width="25%"><span id="nameText"><%=name %></span></td>
 	  					<td align="right" width="10%"><span>出生日期：</span></td>
-	  					<td width="20%"><span id="birthdayText"></span></td>
+	  					<td width="20%"><span id="birthdayText"><%=birthday %></span></td>
 	  					<td align="right" width="10%"><span>性别：</span></td>
-	  					<td width="25%"><span id="sexText"></span></td>
+	  					<td width="25%"><span id="sexText"><%=sexVal %></span></td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="10%"><span>证件号码：</span></td>
-	  					<td width="25%"><span id="identityIdText"></span></td>
+	  					<td width="25%"><span id="identityIdText"><%=identityId %></span></td>
 	  					<td align="right" width="10%"><span>英文名：</span></td>
-	  					<td width="20%"><span id="byNameText"></span></td>
+	  					<td width="20%"><span id="byNameText"><%=byName %></span></td>
 	  					<td align="right" width="10%"><span>联系电话：</span></td>
-	  					<td width="25%"><span id="phoneText"></span></td>
+	  					<td width="25%"><span id="phoneText"><%=phone %></span></td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="10%"><span>校区：</span></td>
-	  					<td width="25%"><span id="schoolNameText"></span></td>
+	  					<td width="25%"><span id="schoolNameText"><%=schoolName %></span></td>
 	  					<td align="right" width="10%"><span>责任顾问：</span></td>
-	  					<td width="20%"><span id="dutyAdvisterNameText"></span></td>
+	  					<td width="20%"><span id="dutyAdvisterNameText"><%=dutyAdvisterName %></span></td>
 	  					<td align="right" width="10%"><span>客户关怀：</span></td>
-	  					<td width="25%"><span id="carerNameText"></span></td>
+	  					<td width="25%"><span id="carerNameText"><%=carerName %></span></td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="10%"><span>关系：</span></td>
@@ -82,25 +80,20 @@
 	  					</td>
 	  				</tr>
 	  				<tr>
+	  					<td align="right" width="10%"><span>备注：</span></td>
+	  					<td width="90%" colspan="5">
+	  						<textarea rows="3" cols="126" id="remark" name="remark" class="easyui-validatebox textbox"></textarea>
+	  					</td>
+	  				</tr>
+	  				<tr>
 	  					<td colspan="6" align="right">
 	  						<a href="javascript:void(0)" id="vipRemarkSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-		      				&nbsp;<a href="javascript:void(0)" id="vipRemarkReset" class="easyui-linkbutton" iconCls="icon-reload" style="width: 80px; height: 28px;" onclick="javascript:$('#vipRemarkFm').form('clear');">重置</a>
 		      				&nbsp;<a href="javascript:void(0)" id="vipRemarkBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
 		      				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	  					</td>
 	  				</tr>
 	  			</table>
-      		</form>
-      	</div>
-      	
-      	<div style="padding:5px 0;min-width:1100px; width:100%;">
-		  	<table class="easyui-datagrid" title="维护记录" style="height:auto;" id="list_data" 
-		  		pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
-				<thead>
-					<tr>
-					</tr>
-				</thead>
-			</table>
-	  	</div>
+  			</form>
+  		</div>
   	</body>
 </html>

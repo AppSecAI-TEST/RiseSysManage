@@ -101,7 +101,7 @@
 				</thead>
 			</table>
 	  	</div>
-		<div id="toolbar">
+		<div id="toolbar" style="padding: 2px; height: auto">
    			<a href="javascript:void(0)" id="applyClass" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">放班申请</a>
    			<a href="javascript:void(0)" id="cancelApplyClass" class="easyui-linkbutton" iconCls="icon-cancel" style="width: 120px;">取消放班申请</a>
    			<a href="javascript:void(0)" id="updateApplyClass" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">班级维护</a>

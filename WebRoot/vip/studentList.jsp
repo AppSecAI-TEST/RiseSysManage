@@ -83,8 +83,8 @@
 				</tr>
 			</table>
 		</form> 
-		<div id="toolbar" style="padding: 2px 15px; height: auto">
-    		<a href="javascript:void(0)" id="setVip" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">VIP学员设置</a>
+		<div id="toolbar" style="padding: 2px; height: auto">
+    		<a href="javascript:void(0)" id="setVip" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">VIP设置</a>
     		<a href="javascript:void(0)" id="addVipRematk" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">VIP维护</a>
     		<a href="javascript:void(0)" id="viewVip" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">浏览</a>
   		</div>

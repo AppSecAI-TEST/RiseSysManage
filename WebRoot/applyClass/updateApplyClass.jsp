@@ -115,7 +115,7 @@
 				</thead>
 			</table>
   		</div>
-		<div id="toolbar">
+		<div id="toolbar" style="padding: 2px; height: auto">
    			<a href="javascript:void(0)" id="selectClass" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">选班</a>
    			<a href="javascript:void(0)" id="removeStudent" class="easyui-linkbutton" iconCls="icon-remove" style="width: 100px;">移除</a>
    			<a href="javascript:void(0)" id="changeClass" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">更换班级</a>

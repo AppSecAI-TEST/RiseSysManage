@@ -139,7 +139,7 @@
 			</table>
 	  	</div>
 	  	
-	  	<div id="toolbar">
+	  	<div id="toolbar" style="padding: 2px; height: auto">
    			<a href="javascript:void(0)" id="selectClassBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px;">选班</a>
    			<a href="javascript:void(0)" id="view" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>
 		</div>
