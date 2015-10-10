@@ -64,6 +64,7 @@ $(document).ready(function() {
     	if(validate()) {
     		$("#dlg").dialog('open').dialog('setTitle', '批量修改客户关怀和责任顾问');//设定表头  
     		$('#batchUpdateFm').form('clear');//清空窗体数据  
+    		$('#batch_update_data').datagrid('loadData',{total:0, rows:[]}); 
     		var data = $('#updateAdvisterId').combobox('getData');
     		if(data.length > 0) {
     			$('#updateAdvisterId').combobox('setValue',data[0].staffId);
