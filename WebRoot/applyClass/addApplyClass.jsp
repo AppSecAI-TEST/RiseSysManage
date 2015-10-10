@@ -24,10 +24,7 @@
   					<tr>
   						<td align="right" width="12%"><span>课程阶段：</span></td>
   						<td width="10%">
-  							<select name="stageId" id="stageId" class="easyui-combobox" style="width: 100px; height: 28px;"
-	      					 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      					 onLoadSuccess:function(data){$('#stageId').combobox('setValue',data[0].codeFlag);}" 
-	      					 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID">
+  							<select name="stageId" id="stageId" class="easyui-combobox" style="width: 100px; height: 28px;">
         					</select>
   						</td>
   						<td align="right" width="12%"><span>班级类型：</span></td>
@@ -48,10 +45,7 @@
   						</td>
   						<td align="right" width="12%"><span>学员来源类型：</span></td>
   						<td width="10%">
-  							<select name="studentChannelType" id="studentChannelType" class="easyui-combobox" style="width: 100px; height: 28px;"
-	      					 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      					 onLoadSuccess:function(data){$('#studentChannelType').combobox('setValue',data[0].codeFlag);}" 
-	      					 url="<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=STUDENT_CHANNEL_TYPE">
+  							<select name="studentChannelType" id="studentChannelType" class="easyui-combobox" style="width: 100px; height: 28px;">
         					</select>
   						</td>
   						<td align="right" width="8%"><span id="higherText" style="display: none;">升学班级：</span></td>
@@ -62,10 +56,7 @@
 								onLoadSuccess:function(data){$('#higherOptionSchoolId').combobox('setValue',data[0].schoolId);}"	
 								url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
 		     					</select>
-		     					<select id="higherOptionStageId" class="easyui-combobox" style="width: 100px; height: 28px;"
-		      					 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-		      					 onLoadSuccess:function(data){$('#higherOptionStageId').combobox('setValue',data[0].codeFlag);}" 
-		      					 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID">
+		     					<select id="higherOptionStageId" class="easyui-combobox" style="width: 100px; height: 28px;">
 	        					</select>
 	        					<select id="higherOptionClassInstId" class="easyui-combobox" style="width: 100px; height: 28px;">
 	        					</select>
@@ -92,10 +83,7 @@
   					<tr>
   						<td align="right" width="12%"><span>上课时段：</span></td>
   						<td colspan="3" width="32%">
-  							<select id="weekTime" class="easyui-combobox" style="width: 100px; height: 28px;"
-		      				data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-		      				onLoadSuccess:function(data){$('#weekTime').combobox('setValue',data[0].codeFlag);}" 
-		      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=SCHOOLTIME_T&codeType=WEEK_TIME">
+  							<select id="weekTime" class="easyui-combobox" style="width: 100px; height: 28px;">
 	        				</select>
 	        				<select name="hourRange" id="hourRange" class="easyui-combobox" style="width: 150px; height: 28px;">
 	        				</select>
@@ -191,10 +179,7 @@
   					<tr>
   						<td align="right" width="40%"><span>归属组织：</span></td>
   						<td width="60%">
-  							<select id="teacherSchoolId" name="teacherSchoolId" class="easyui-combobox" style="width: 200px; height: 25px;" required="true" 
-							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-			      			onLoadSuccess:function(data){$('#teacherSchoolId').combobox('setValue',data[0].schoolId);}"
-			      			url="<%=path %>/pubData/qrySchoolList.do">
+  							<select id="teacherSchoolId" name="teacherSchoolId" class="easyui-combobox" style="width: 200px; height: 25px;" required="true">
 		        			</select>
   						</td>
   					</tr>

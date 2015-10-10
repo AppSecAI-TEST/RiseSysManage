@@ -4,6 +4,16 @@ var selTr = null;
 $(document).ready(function() {
 	//学员来源类型
 	$('#studentChannelType').combobox({
+		url : "/sys/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=STUDENT_CHANNEL_TYPE",//返回json数据的url
+    	valueField : "codeFlag",
+    	textField : "codeName",
+    	panelHeight : "auto",
+    	onLoadSuccess : function () { //数据加载完毕事件
+            var data = $('#studentChannelType').combobox('getData');
+            if (data.length > 0) {
+                $("#studentChannelType").combobox('select', data[0].codeFlag);
+            }
+        },
 		onChange : function(n, o) {
 			//新招
 			if("001" == n) {
@@ -17,6 +27,16 @@ $(document).ready(function() {
 	});
 	
 	$("#stageId").combobox({
+		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID",//返回json数据的url
+    	valueField : "codeFlag",
+    	textField : "codeName",
+    	panelHeight : "auto",
+    	onLoadSuccess : function () { //数据加载完毕事件
+            var data = $('#stageId').combobox('getData');
+            if (data.length > 0) {
+                $("#stageId").combobox('select', data[0].codeFlag);
+            }
+        },
 		onChange : function(n, o) {
 			$("#classType").combobox({
         		url : "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",stageId:\""+n+"\"}",//返回json数据的url
@@ -52,6 +72,16 @@ $(document).ready(function() {
 	});
 
 	$("#higherOptionStageId").combobox({
+		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID",//返回json数据的url
+    	valueField : "codeFlag",
+    	textField : "codeName",
+    	panelHeight : "auto",
+    	onLoadSuccess : function () { //数据加载完毕事件
+            var data = $('#higherOptionStageId').combobox('getData');
+            if (data.length > 0) {
+                $("#higherOptionStageId").combobox('select', data[0].codeFlag);
+            }
+        },
 		onChange : function(n, o) {
 			var higherOptionSchoolId = $("#higherOptionSchoolId").combobox("getValue");
 			$("#higherOptionClassInstId").combobox({
@@ -174,6 +204,16 @@ $(document).ready(function() {
 	
 	//选择上课时段周标识
 	$("#weekTime").combobox({
+		url : "/sys/pubData/qryCodeNameList.do?tableName=SCHOOLTIME_T&codeType=WEEK_TIME",//返回json数据的url
+    	valueField : "codeFlag",
+    	textField : "codeName",
+    	panelHeight : "auto",
+    	onLoadSuccess : function () { //数据加载完毕事件
+            var data = $('#weekTime').combobox('getData');
+            if (data.length > 0) {
+                $("#weekTime").combobox('select', data[0].codeFlag);
+            }
+        },
 		onChange : function(n, o) {
 			$("#hourRange").combobox({
         		url : "/sys/pubData/qryHourRangeList.do?weekTime=" + n,//返回json数据的url
@@ -192,6 +232,16 @@ $(document).ready(function() {
 	
 	//带班老师的学校
 	$("#teacherSchoolId").combobox({
+		url : "/sys/pubData/qrySchoolList.do",//返回json数据的url
+    	valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	onLoadSuccess : function () { //数据加载完毕事件
+            var data = $('#teacherSchoolId').combobox('getData');
+            if (data.length > 0) {
+                $("#teacherSchoolId").combobox('select', data[0].schoolId);
+            }
+        },
 		onChange : function(n, o) {
 			var classType = $("#classType").combobox("getValue");
 			$("#teacherId").combobox({

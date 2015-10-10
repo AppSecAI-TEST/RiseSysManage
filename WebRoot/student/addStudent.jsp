@@ -57,10 +57,7 @@
 	      			<tr>
 	      				<td align="right"><span>就读学校：</span></td>
 	      				<td colspan="4">
-	      					<select id="schoolType" class="easyui-combobox" style="width: 150px; height: 28px;"
-	      					data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      					 onLoadSuccess:function(data){$('#schoolType').combobox('setValue',data[0].codeFlag);}"
-	      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=REAL_SCHOOL_T&codeType=SCHOOL_TYPE" required="true" >
+	      					<select id="schoolType" class="easyui-combobox" style="width: 150px; height: 28px;" required="true" >
         					</select>
         					&nbsp;
         					<span>学校名称：</span>
@@ -71,20 +68,14 @@
 	      			<tr>
 	      				<td align="right"><span style="color: red;">*</span><span>招生顾问A：</span></td>
 	      				<td>
-	      					<select id="advisterASchoolId" class="easyui-combobox" style="width: 100px; height: 28px;"
-	      					data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-	      					onLoadSuccess:function(data){$('#advisterASchoolId').combobox('setValue',data[0].schoolId);}"
-	      					url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
+	      					<select id="advisterASchoolId" class="easyui-combobox" style="width: 100px; height: 28px;">
         					</select>
         					<select name="advisterIdA" id="advisterIdA" class="easyui-combobox" style="width: 150px; height: 28px;">
         					</select>
 	      				</td>
 	      				<td align="right"><span style="color: red;">*</span><span>招生顾问B：</span></td>
 	      				<td colspan="2">
-	      					<select id="advisterBSchoolId" class="easyui-combobox" style="width: 100px; height: 28px;"
-	      					data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-	      				    onLoadSuccess:function(data){$('#advisterBSchoolId').combobox('setValue',data[0].schoolId);}"
-	      					url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
+	      					<select id="advisterBSchoolId" class="easyui-combobox" style="width: 100px; height: 28px;">
 	        				</select>
 	        				<select name="advisterIdB" id="advisterIdB" class="easyui-combobox" style="width: 150px; height: 28px;">
 	        				</select>
@@ -94,17 +85,17 @@
 	      				<td align="right"><span style="color: red;">*</span><span>责任顾问：</span></td>
 	      				<td>
 	      					<select name="dutyAdvister" id="dutyAdvister" class="easyui-combobox" style="width: 150px; height: 28px;"
-	      					data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
+	      					data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
 	      					onLoadSuccess:function(data){$('#dutyAdvister').combobox('setValue',data[0].staffId);}"
-	      					url="<%=path %>/pubData/qryStaffList.do?post=002&schoolId=${sessionScope.StaffT.schoolId}">
+	      					url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
         					</select>
 	      				</td>
 	      				<td align="right"><p><span>客户关怀：</span></p></td>
 	      				<td colspan="2">
 	      					<select name="carer" id="carer" class="easyui-combobox" style="width: 150px; height: 28px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
+							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
 	      					onLoadSuccess:function(data){$('#carer').combobox('setValue',data[0].staffId);}"
-	      					url="<%=path %>/pubData/qryStaffList.do?post=003&schoolId=${sessionScope.StaffT.schoolId}">
+	      					url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
         					</select>
 	      				</td>
 	      			</tr>

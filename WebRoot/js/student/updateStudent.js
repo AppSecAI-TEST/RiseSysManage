@@ -131,8 +131,74 @@ $(document).ready(function() {
         } 
 	});
 	
+	//招生顾问A的学校发生变化时执行的操作
+    $('#advisterASchoolId').combobox({
+    	url : "/sys/pubData/qrySchoolList.do?schoolId=",//返回json数据的url
+    	valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	onLoadSuccess : function () { //数据加载完毕事件
+            var data = $('#advisterASchoolId').combobox('getData');
+            if (data.length > 0) {
+                $("#advisterASchoolId").combobox('select', $("#updateAdvisterBSchoolId").val());
+            }
+        },
+        onChange : function(n, o) {
+        	$("#advisterIdA").combobox({
+        		url : "/sys/pubData/qryStaffList.do?schoolId=" + n,//返回json数据的url
+        		valueField : "staffId",
+        		textField : "userName",
+        		panelHeight : "auto",
+        		onLoadSuccess : function () { //数据加载完毕事件
+                    var data = $('#advisterIdA').combobox('getData');
+                    if (data.length > 0) {
+                        $("#advisterIdA").combobox('select', $("#updateAdvisterIdA").val());
+                    }
+                }
+        	});
+        }  
+    });
+    
+    //招生顾问B的学校发生变化时执行的操作
+    $('#advisterBSchoolId').combobox({
+    	url : "/sys/pubData/qrySchoolList.do?schoolId=",//返回json数据的url
+    	valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	onLoadSuccess : function () { //数据加载完毕事件
+            var data = $('#advisterBSchoolId').combobox('getData');
+            if (data.length > 0) {
+                $("#advisterBSchoolId").combobox('select', $("#updateAdvisterBSchoolId").val());
+            }
+        },
+        onChange : function(n, o) {
+        	$("#advisterIdB").combobox({
+        		url : "/sys/pubData/qryStaffList.do?schoolId=" + n,//返回json数据的url
+        		valueField : "staffId",
+        		textField : "userName",
+        		panelHeight : "auto",
+        		onLoadSuccess : function () { //数据加载完毕事件
+                    var data = $('#advisterIdB').combobox('getData');
+                    if (data.length > 0) {
+                        $("#advisterIdB").combobox('select', $("#updateAdvisterIdB").val());
+                    }
+                }
+        	});
+        }  
+    });
+	
 	//就读学校类型发生变化时执行的操作
     $("#schoolType").combobox({
+    	url : "/sys/pubData/qryCodeNameList.do?tableName=REAL_SCHOOL_T&codeType=SCHOOL_TYPE",//返回json数据的url
+    	valueField : "codeFlag",
+    	textField : "codeName",
+    	panelHeight : "auto",
+    	onLoadSuccess : function () { //数据加载完毕事件
+            var data = $('#schoolType').combobox('getData');
+            if (data.length > 0) {
+                $("#schoolType").combobox('select', data[0].codeFlag);
+            }
+        },
     	onChange : function(n, o) {
     		$("#realSchoolId").combobox({
     			url : "/sys/pubData/qryParaConfigList.do?paramType=REAL_SCHOOL_ID&paramValue=" + n,//返回json数据的url

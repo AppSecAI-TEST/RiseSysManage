@@ -110,6 +110,16 @@ $(document).ready(function() {
 	
 	//带班老师的学校
 	$("#teacherSchoolId").combobox({
+		url : "/sys/pubData/qrySchoolList.do",//返回json数据的url
+    	valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	onLoadSuccess : function () { //数据加载完毕事件
+            var data = $('#teacherSchoolId').combobox('getData');
+            if (data.length > 0) {
+                $("#teacherSchoolId").combobox('select', data[0].schoolId);
+            }
+        },
 		onChange : function(n, o) {
 			var classType = $("#classType").html();
 			$("#teacherId").combobox({
@@ -227,6 +237,16 @@ $(document).ready(function() {
 		$("[name='roomId']").each(function(i, obj) {
 			var id = "#roomId" + (i + 1);
 			$(id).combobox({
+				url : "/sys/pubData/qryRoomList.do?schoolId="+$("#schoolId").val(),//返回json数据的url
+		    	valueField : "roomId",
+		    	textField : "roomName",
+		    	panelHeight : "auto",
+		    	onLoadSuccess : function () { //数据加载完毕事件
+		            var data = $(id).combobox('getData');
+		            if (data.length > 0) {
+		                $(id).combobox('select', data[0].roomId);
+		            }
+		        },
 				onChange : function(n, o) {
 					var changeWeekTime = $(id).attr("weekTime");
 					var changeHourRange = $(id).attr("hourRange");

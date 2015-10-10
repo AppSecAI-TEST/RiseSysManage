@@ -56,11 +56,7 @@
 	  									<td align="center" width='4%' lessionHours='${schooltime.lessionHours }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }'><span>${status.index + 1 }</span></td>
 	  									<td align="center" width='14%'><span>${schooltime.schooltimeName }</span></td>
 	  									<td align="center" width='4%'>
-	  										<select name='roomId' id="roomId${status.index + 1 }" class="easyui-combobox" style="width: 80px; height: 28px;"
-	  										weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }'
-						      				data-options="formatter:formatRoom, valueField: 'roomId', textField: 'roomName', panelHeight: 'auto',
-						      				onLoadSuccess:function(data){$('#roomId${status.index + 1 }').combobox('setValue', ${schooltime.roomId });}" 
-						      				url="<%=path %>/pubData/qryRoomList.do?schoolId=${obj.createClassObj.schoolId}">
+	  										<select name='roomId' id="roomId${status.index + 1 }" class="easyui-combobox" style="width: 80px; height: 28px;" weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }'>
 					        				</select>
 	  									</td>
 	  									<td align="center" width='4%'><span>${schooltime.lessionHours }</span></td>
@@ -128,10 +124,7 @@
   					<tr>
   						<td align="right" width="40%"><span>归属组织：</span></td>
   						<td width="60%">
-  							<select id="teacherSchoolId" name="teacherSchoolId" class="easyui-combobox" style="width: 200px; height: 25px;" required="true" 
-							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-			      			onLoadSuccess:function(data){$('#teacherSchoolId').combobox('setValue',data[0].schoolId);}"
-			      			url="<%=path %>/pubData/qrySchoolList.do">
+  							<select id="teacherSchoolId" name="teacherSchoolId" class="easyui-combobox" style="width: 200px; height: 25px;" required="true">
 		        			</select>
   						</td>
   					</tr>

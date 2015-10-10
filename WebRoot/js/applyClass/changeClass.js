@@ -31,7 +31,17 @@ $(document).ready(function() {
 	});
 	
     //更换选班发生变化时执行的操作
-    $('#changeClassInstId').combobox({    
+    $('#changeClassInstId').combobox({
+    	url : "/sys/pubData/qryClassInstList.do?schoolId="+$("#schoolId").val()+"&courseType=001&stageId="+$("#stageId").val()+"&classType="+$("#classType").val()+"&classState='001','002'&classInstId="+$("#classInstId").val(),//返回json数据的url
+    	valueField : "classInstId",
+    	textField : "className",
+    	panelHeight : "auto",
+    	onLoadSuccess : function () { //数据加载完毕事件
+            var data = $('#changeClassInstId').combobox('getData');
+            if (data.length > 0) {
+                $("#changeClassInstId").combobox('select', data[0].classInstId);
+            }
+        },
         onChange : function(n, o) {
         	$("#changeDiv").css("display", "block");
         	var param = "{\"classInstId\":\""+n+"\",\"queryCode\":\"qryClassInstListById\"}";

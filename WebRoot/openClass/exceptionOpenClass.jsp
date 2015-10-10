@@ -119,10 +119,7 @@
   					<tr>
   						<td align="right" width="40%"><span>归属组织：</span></td>
   						<td width="60%">
-  							<select id="teacherSchoolId" name="teacherSchoolId" class="easyui-combobox" style="width: 200px; height: 25px;" required="true" 
-							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-			      			onLoadSuccess:function(data){$('#teacherSchoolId').combobox('setValue',data[0].schoolId);}"
-			      			url="<%=path %>/pubData/qrySchoolList.do">
+  							<select id="teacherSchoolId" name="teacherSchoolId" class="easyui-combobox" style="width: 200px; height: 25px;" required="true">
 		        			</select>
   						</td>
   					</tr>
