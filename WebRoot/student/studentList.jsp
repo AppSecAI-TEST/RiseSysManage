@@ -55,7 +55,7 @@
 					</td>
 					<td width="114px">
 						<select id="advisterId" name="advisterId" class="easyui-combobox" style="width: 114px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
+							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
       						 onLoadSuccess:function(data){$('#advisterId').combobox('setValue',data[0].staffId);}"
       						url="<%=path %>/pubData/qryStaffList.do?post=001&schoolId=${sessionScope.StaffT.schoolId}">
      						</select>
@@ -65,7 +65,7 @@
 					</td>
 					<td width="114px">
 						<select id="dutyAdvister" name="dutyAdvister" class="easyui-combobox" style="width: 114px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
+							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
       						 onLoadSuccess:function(data){$('#dutyAdvister').combobox('setValue',data[0].staffId);}"
       						url="<%=path %>/pubData/qryStaffList.do?post=002&schoolId=${sessionScope.StaffT.schoolId}">
       					</select>
@@ -75,7 +75,7 @@
 					</td>
 					<td width="114px">
 						<select id="carer" name="carer" class="easyui-combobox" style="width: 114px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
+							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
      						 onLoadSuccess:function(data){$('#carer').combobox('setValue',data[0].staffId);}"
      						url="<%=path %>/pubData/qryStaffList.do?post=003&schoolId=${sessionScope.StaffT.schoolId}">
      					</select>
@@ -135,7 +135,7 @@
   						<td align="right" width="20%"><span>责任顾问统一调整：</span></td>
   						<td width="15%">
   							<select id="updateAdvisterId" name="updateAdvisterId" class="easyui-combobox" style="width: 114px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
+							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
       						 onLoadSuccess:function(data){if(data.length > 0)$('#updateAdvisterId').combobox('setValue',data[0].staffId);}"
       						url="<%=path %>/pubData/qryStaffList.do?post=002&schoolId=${sessionScope.StaffT.schoolId}">
        						</select>
@@ -143,7 +143,7 @@
   						<td align="right" width="20%"><span>客户关怀统一调整：</span></td>
   						<td width="15%">
   							<select id="updateCarer" name="updateCarer" class="easyui-combobox" style="width: 114px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
+							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
       						 onLoadSuccess:function(data){if(data.length > 0)$('#updateCarer').combobox('setValue',data[0].staffId);}"
       						url="<%=path %>/pubData/qryStaffList.do?post=003&schoolId=${sessionScope.StaffT.schoolId}">
        						</select>

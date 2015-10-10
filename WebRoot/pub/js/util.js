@@ -185,7 +185,7 @@ function formatSchool(row) {
 }
 
 function formatStaff(row) {
-	var s = '<span>' + row.staffName + '</span>';
+	var s = '<span>' + row.userName + '</span>';
 	return s;
 }
 
