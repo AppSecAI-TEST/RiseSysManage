@@ -391,4 +391,3 @@ function getAmount()
 {
 	return $("#amount").textbox('getValue');
 }
-	

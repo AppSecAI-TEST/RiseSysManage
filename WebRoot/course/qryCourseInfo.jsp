@@ -114,7 +114,7 @@
     			<a href="javascript:void(0)" id="courseDetail" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="courseDetail()">浏览</a>
   			</div>
 			<div style="padding:5px 0;">
-				<table class="easyui-datagrid" title="查询结果" style="height:300px" id="list_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+				<table class="easyui-datagrid" title="查询结果" style="height:450px" id="list_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 					<thead>
 						<tr>
 							<th field="ck" checkbox="true" width="2%"></th>

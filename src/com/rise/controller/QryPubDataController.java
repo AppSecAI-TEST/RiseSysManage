@@ -289,4 +289,30 @@ public class QryPubDataController
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/qryAction.do")
+	public void qryAction(String schoolId, HttpServletResponse response)
+	{
+	 
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = qryPubDataService.qryAction(schoolId);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }

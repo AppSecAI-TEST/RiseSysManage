@@ -3,7 +3,8 @@
 <%@ page language="java" import="com.rise.pub.util.*"%>
 <%
 	String path = request.getContextPath();
-	String studentId = request.getParameter("studentId");
+	String studentInfo =request.getParameter("studentInfo");
+	String studentId =request.getParameter("studentId");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -28,8 +29,10 @@
 
 	<body>
 		<div class="easyui-panel" style="width: 1200px" title="学员基础信息">
+			<input type="hidden" id="studentInfo" name="studentInfo"
+				value="<%=studentInfo%>" />
 			<input type="hidden" id="schoolId" name="schoolId"
-				value="${sessionScope.StaffT.schoolId}" />
+				value="${sessionScope.StaffT.schoolId}" />	
 			<table width="100%" cellpadding="5px" class="maintable"
 				id="stuBaseInfo">
 				<tr>
@@ -64,15 +67,9 @@
 						<span>课程类型：</span>
 					</td>
 					<td>
-						<select name="courseTypeName"
-							data-options="onChange:changeCourseType" class="easyui-combobox"
-							id="courseTypeName" style="width: 150px; height: 28px;">
-							<option value="normal">
-								常规课
-							</option>
-							<option value="short">
-								短期课
-							</option>
+						<select name="courseTypeName" class="easyui-combobox" id="courseTypeName" style="width: 150px; height: 28px;"
+						 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',onChange:changeCourseType"
+	      				 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=SINGLE_COURSE_TYPE" required="true" >
 						</select>
 					</td>
 					<td>
@@ -146,9 +143,8 @@
 							<td>
 								<select name="adviserA" class="easyui-combobox" id="adviserA"
 									style="width: 150px; height: 28px;"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
-									url="<%=path%>/pubData/qryCodeNameList.do?tableName=REAL_SCHOOL_T&codeType=SCHOOL_TYPE"
-									required="true">
+									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+		      						url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}">
 								</select>
 							</td>
 							<td align="right">
@@ -157,8 +153,8 @@
 							<td>
 								<select name="adviserB" class="easyui-combobox" id="adviserB"
 									style="width: 150px; height: 28px;"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-									url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
+									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+		      						url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}">
 								</select>
 							</td>
 							<td align="right"></td>
@@ -173,9 +169,9 @@
 	      	      <tr id="giftModelTR">
 	      	        <td width="8%" align="right"><span>赠品类型：</span></td>
 	      	        <td width="8%">
-	      	        <select  id="parentType" style="width: 100px; height: 28px;"
-	      				     data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
-	      					 url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE" required="true" >
+	      	        <select id="parentType" style="width: 100px; height: 28px;"
+	      			data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
+	      			required="true" >
       	            </select>
       	            </td>
 	      	        <td width="7%" align="right"><span>赠品名称：</span></td>
@@ -359,28 +355,11 @@
 										<td align="left" colspan="8">
 											<span>活动名称：</span>
 											<select class="easyui-combobox" id="activeSchool"
-												style="width: 150px; height: 28px;">
-												<option value="00">
-													所有
-												</option>
-												<option value="01">
-													武展
-												</option>
-												<option value="02">
-													总部
-												</option>
+												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+												url="<%=path %>/pubData/qrySchoolList.do?schoolId=" required="true">
 											</select>
-											<select class="easyui-combobox" id="activeId"
-												style="width: 150px; height: 28px;">
-												<option value="03">
-													活动1
-												</option>
-												<option value="04">
-													活动2
-												</option>
-												<option value="05">
-													活动3
-												</option>
+											<select class="easyui-combobox" id="activeId" style="width: 150px; height: 28px;"
+												data-options="valueField: 'actionId', textField: 'title', panelHeight: 'auto'">
 											</select>
 										</td>
 									</tr>
@@ -388,53 +367,23 @@
 										<td align="left" colspan="8">
 											<span>口碑顾问A：</span>
 											<select class="easyui-combobox" id="c_schoolA"
+											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+											url="<%=path %>/pubData/qrySchoolList.do?schoolId=" required="true"
 												style="width: 150px; height: 28px;">
-												<option value="1">
-													所有
-												</option>
-												<option value="2">
-													武展
-												</option>
-												<option value="3">
-													徐东
-												</option>
 											</select>
 											<select class="easyui-combobox" id="c_adviserA"
+												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 												style="width: 120px; height: 28px;">
-												<option value="4">
-													顾问1
-												</option>
-												<option value="5">
-													顾问2
-												</option>
-												<option value="6">
-													顾问3
-												</option>
 											</select>
 											<span>口碑顾问B：</span>
 											<select class="easyui-combobox" id="c_schoolB"
+											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+											url="<%=path %>/pubData/qrySchoolList.do?schoolId=" required="true"
 												style="width: 150px; height: 28px;">
-												<option value="7">
-													所有
-												</option>
-												<option value="8">
-													武展
-												</option>
-												<option value="9">
-													徐东
-												</option>
 											</select>
 											<select class="easyui-combobox" id="c_adviserB"
+												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 												style="width: 120px; height: 28px;">
-												<option value="10">
-													顾问1
-												</option>
-												<option value="11">
-													顾问2
-												</option>
-												<option value="12">
-													顾问3
-												</option>
 											</select>
 										</td>
 									</tr>
@@ -442,53 +391,24 @@
 										<td colspan="8">
 											<span>口碑顾问A：</span>
 											<select class="easyui-combobox" id="c_schoolsA"
+												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+												url="<%=path %>/pubData/qrySchoolList.do?schoolId=" required="true"
 												style="width: 120px; height: 28px;">
-												<option value="13">
-													所有
-												</option>
-												<option value="14">
-													武展
-												</option>
-												<option value="15">
-													徐东
-												</option>
 											</select>
 											<select class="easyui-combobox" id="c_teacherA"
+												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 												style="width: 120px; height: 28px;">
-												<option value="16">
-													顾问1
-												</option>
-												<option value="17">
-													顾问2
-												</option>
-												<option value="18">
-													顾问3
-												</option>
 											</select>
 											<span>口碑顾问B：</span>
 											<select class="easyui-combobox" id="c_schoolsB"
+												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+												url="<%=path %>/pubData/qrySchoolList.do?schoolId=" required="true"
 												style="width: 120px; height: 28px;">
-												<option value="19">
-													所有
-												</option>
-												<option value="20">
-													武展
-												</option>
-												<option value="21">
-													徐东
-												</option>
 											</select>
 											<select class="easyui-combobox" id="c_teacherB"
+												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 												style="width: 120px; height: 28px;">
-												<option value="22">
-													顾问1
-												</option>
-												<option value="23">
-													顾问2
-												</option>
-												<option value="24">
-													顾问3
-												</option>
+						
 											</select>
 											<a href="javascript:void(0)" id="qryStudent"
 												style="width: 80px" class="easyui-linkbutton"
@@ -590,18 +510,15 @@
 										</td>
 										<td align="center"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
-											<select class="easyui-combobox school"
+											<select class="easyui-combobox" id="t_teacher_school"
+												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+												url="<%=path %>/pubData/qrySchoolList.do?schoolId=" required="true"
 												style="width: 100px; height: 28px;">
-												<option value="123">
-													选择校区
-												</option>
-												<select>
-													<select class="easyui-combobox teacher"
-														style="width: 150px; height: 28px;">
-														<option value="456">
-															选择老师
-														</option>
-														<select>
+											</select>
+											<select class="easyui-combobox" id="t_teacher_id"
+												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+												style="width: 150px; height: 28px;">
+											<select>
 										</td>
 										<td align="left" style="border-top: 1px solid #ccc;">
 											<a href="javascript:void(0)" id="searchStudent"
@@ -634,61 +551,44 @@
 								<span>短期课类型：</span>
 							</td>
 							<td align="left">
-								<select class="easyui-combobox"
-									style="width: 100px; height: 28px;">
-									<option value="">
-										国际班
-									</option>
-									<option value="">
-										游学班
-									</option>
-									<select>
+								<select class="easyui-combobox" id="shortCourseType" style="width: 100px; height: 28px;"
+								 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
+	      				 		 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=SHORT_COURSE_TYPE" required="true" >
+								<select>
 							</td>
 							<td align="center">
-								<select class="easyui-combobox"
-									data-options="onChange:changeName"
-									style="width: 100px; height: 28px;">
-									<option>
-										业绩老师
-									</option>
-									<option>
-										业绩顾问
-									</option>
-									<select>
+								<select class="easyui-combobox" style="width: 100px; height: 28px;"
+								 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',onChange:changeName"
+	      				 		 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=TEACHER_TYPE" required="true" >
+								<select>
 							</td>
 							<td align="center">
 								<span>业绩老师A</span>
 							</td>
 							<td align="left">
-								<select class="easyui-combobox"
+								<select class="easyui-combobox" id="s_schooldA"
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+								url="<%=path %>/pubData/qrySchoolList.do?schoolId=" required="true"
 									style="width: 100px; height: 28px;">
-									<option value="">
-										武展
-									</option>
-									<select>
-										<select class="easyui-combobox"
-											style="width: 100px; height: 28px;">
-											<option value="">
-												李丽华
-											</option>
-											<select>
+								<select>
+								<select class="easyui-combobox" id="s_teacherA"
+									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+									style="width: 100px; height: 28px;">
+								<select>
 							</td>
 							<td align="center">
 								<span>业绩老师B</span>
 							</td>
 							<td align="left">
-								<select class="easyui-combobox"
+								<select class="easyui-combobox" id="s_schooldB"
+									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+									url="<%=path %>/pubData/qrySchoolList.do?schoolId=" required="true"
 									style="width: 100px; height: 28px;">
-									<option value="">
-										武展
-									</option>
 									<select>
-										<select class="easyui-combobox"
-											style="width: 100px; height: 28px;">
-											<option value="">
-												李丽华
-											</option>
-											<select>
+								<select class="easyui-combobox" id="s_teacherB"
+									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+									style="width: 100px; height: 28px;">
+								<select>
 							</td>
 						</tr>
 						<tr>
@@ -774,7 +674,6 @@
 </html>
 <script type="text/javascript">
 loadStuBaseInfo();
-
 $('#parentType').combobox({
 	 onChange:function(n,o)
 		{
@@ -824,7 +723,8 @@ $('#parentType').combobox({
 	                }
 	        	});
        		}
-		}
+		},
+		url:"<%=path%>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE"
 	});
 
 $('#giftType')
@@ -855,19 +755,12 @@ $('#giftCourseType')
 						var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""
 								+ n + "\"}";
 						$("#giftCourseId").combobox(
-								{
-									url : urls,//返回json数据的url
-									valueField : "giftId",
-									textField : "giftName",
-									panelHeight : "auto",
-									onLoadSuccess : function() { //数据加载完毕事件
-										var data = $('#couponType').combobox(
-												'getData');
-										if (data.length > 0) {
-											//  $("#giftId").combobox('select', data[0].param2);
-										}
-									}
-								});
+						{
+							url : urls,//返回json数据的url
+							valueField : "giftId",
+							textField : "giftName",
+							panelHeight : "auto"
+						});
 					}
 				});
 
@@ -885,6 +778,17 @@ $('#giftCourseId').combobox( {
 		}
 	}
 });
+//选择活动校区加载活动
+$("#activeSchool").combobox({
+	onChange:function(){
+		var sId = $("#activeSchool").combobox('getValue');
+		var urls ="<%=path%>/pubData/qryAction.do?schoolId="+sId;
+		$("#activeId").combobox({
+			url:urls
+		});
+	}
+});
+
 
 //选择阶段价加载班级
 $('#stageId').combobox({
@@ -1221,7 +1125,7 @@ $("#addGiftBtn").click(function ()
 	{
 		var idT="#useCoupon"+id+"";
 		$(idT).css('display','none');
-		for(var i=0;i<coupons.length;i++)
+		for(var i=coupons.length-1;i>=0;i--)
 		{
 			 var coupon=coupons[i];
 			 if(coupon.studentGiftId==id)
@@ -1229,10 +1133,14 @@ $("#addGiftBtn").click(function ()
 				var usableAmountT=$("#minusAmount").textbox('getValue');
 				usableAmountT=usableAmountT-coupon.usableAmount;
 				$("#minusAmount").textbox('setValue',usableAmountT);
-				
+				coupons.remove(i);
 			 }
-			 
 		}
+		minus=$("#minusAmount").textbox('getValue');
+		favorAmount=$("#favorAmount").textbox('getValue');
+		totalAmount=$("#totalAmount").textbox('getValue');
+		amount=totalAmount-minus-favorAmount;
+		$("#amount").textbox('setValue',amount);
 	}
 	
 	function addArchives()
@@ -1244,16 +1152,24 @@ $("#addGiftBtn").click(function ()
 		$('#dlg').dialog("open");
 	}
 	
-	function getDataName(id,val)
+	function getMinus()
 	{
-		
-		var data = $(id).combobox('getData');
-		
-		for(var i=0;i<data.length;i++)
-		{
-			 
-		}
-		
+		return $("#minusAmount").textbox('getValue');
+	}
+	
+	function getFavorAmount()
+	{
+		return $("#favorAmount").textbox('getValue');
+	}
+	
+	function getTotalAmount()
+	{
+		return $("#totalAmount").textbox('getValue');
+	}
+	
+	function getAmount()
+	{
+		return $("#amount").textbox('getValue');
 	}
 	
 	function changePraise(obj)
@@ -1305,16 +1221,31 @@ $("#addGiftBtn").click(function ()
 	function changeCourseType()
 	{
 		var type=$("#courseTypeName").combobox("getValue");
-		if(type=="normal")
+		if(type=="001")
 		{
 			$("#normal").css("display","block");
 			$("#short").css("display","none");
+			initFeeInfo()
+			$("#courseType").val("001")
 		}
-		else if(type=="short")
+		else if(type=="004")
 		{
 			$("#normal").css("display","none");
 			$("#short").css("display","block");
+			initFeeInfo()
 		}	
+	}
+	
+	function initFeeInfo()
+	{
+		var minus = 0;
+		var favorAmount = 0;
+		var totalAmount = 0;
+		var amount = 0;
+		$("#totalAmount").textbox("setValue",0);
+		$("#minusAmount").textbox("setValue",0);
+		$("#amount").textbox("setValue",0);
+		$('#useCoupon').html("");
 	}
 	
 	function changePraiseSourceY()
@@ -1377,33 +1308,16 @@ $("#addGiftBtn").click(function ()
 	
 	function loadStuBaseInfo()
 	{
-		$.ajax({
-			type : "POST",
-			url: "/sys/student/qryStudentById.do",
-			data: "studentId="+$("#studentId").val()+"&funcNodeId=1002",
-			async: false,
-			dataType:"json",
-			beforeSend: function()
-	    	{
-	    		$.messager.progress({title : '系统消息', msg : '正在加载数据，请稍等……'});
-	    	},
-	    	success: function(data) {
-	    		$.messager.progress('close');
-	    		if(data.studentObj!=undefined&&data.studentObj!=null)
-	    		{
-	    			var obj =data.studentObj;
-	    			var tr1 =$("#stuBaseInfo").find("tr:eq(0)");
-	    			tr1.find("td:eq(1)").find("span").html(obj.name);
-	    			tr1.find("td:eq(3)").find("span").html(obj.birthday);
-	    			tr1.find("td:eq(5)").find("span").html(obj.identityId);
-	    			$("#stuBaseInfo").find("tr:eq(1)").find("td:eq(1)").find("span").html(obj.sexVal);
-	    		}	
-	        },
-	        error:function(){
-	        	$.messager.progress('close'); 
-	        }
-	    	
-		});
+		var studentInfo =$("#studentInfo").val();
+		if(studentInfo.indexOf(";;")!=-1)
+		{
+			studentInfo =studentInfo.split(";;");
+			var tr1 =$("#stuBaseInfo").find("tr:eq(0)");
+		    tr1.find("td:eq(1)").find("span").html(studentInfo[0]);
+		    tr1.find("td:eq(3)").find("span").html(studentInfo[2]);
+		    tr1.find("td:eq(5)").find("span").html(studentInfo[3]);
+		    $("#stuBaseInfo").find("tr:eq(1)").find("td:eq(1)").find("span").html(studentInfo[4]);
+		}	
 	}
 	
 	function addCourseInfo()
@@ -1755,4 +1669,76 @@ function initCousreGift()
 		} 
 	});
 }
+	
+	$("#c_schoolA").combobox({
+		onChange:function(){
+			var sId =$("#c_schoolA").combobox("getValue");
+			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+			$("#c_adviserA").combobox({
+				url:urls
+			});
+		}
+	})
+	
+	$("#c_schoolB").combobox({
+		onChange:function(){
+			var sId =$("#c_schoolB").combobox("getValue");
+			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+			$("#c_adviserB").combobox({
+				url:urls
+			});
+		}
+	})
+	
+	$("#c_schoolsA").combobox({
+		onChange:function(){
+			var sId =$("#c_schoolsA").combobox("getValue");
+			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+			$("#c_teacherA").combobox({
+				url:urls
+			});
+		}
+	})
+	
+	$("#c_schoolsB").combobox({
+		onChange:function(){
+			var sId =$("#c_schoolsB").combobox("getValue");
+			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+			$("#c_teacherB").combobox({
+				url:urls
+			});
+		}
+	})
+	
+	$("#t_teacher_school").combobox({
+		onChange:function(){
+			var sId =$("#t_teacher_school").combobox("getValue");
+			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+			$("#t_teacher_id").combobox({
+				url:urls
+			});
+		}
+	})
+	
+	$("#s_schooldA").combobox({
+		onChange:function(){
+			var sId =$("#s_schooldA").combobox("getValue");
+			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+			$("#s_teacherA").combobox({
+				url:urls
+			});
+		}
+	})
+	
+	$("#s_schooldB").combobox({
+		onChange:function(){
+			var sId =$("#s_schooldB").combobox("getValue");
+			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+			$("#s_teacherB").combobox({
+				url:urls
+			});
+		}
+	})
+	
+	
 	</script>

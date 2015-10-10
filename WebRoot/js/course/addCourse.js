@@ -20,7 +20,8 @@ function addSingleCourse()
 	{
 		var row = $('#list_data').datagrid('getSelected');
     	var studentId = row.studentId;
-    	window.location.href="addCourse.jsp?studentId="+studentId;
+    	var studentInfo =row.name+";;"+row.byName+";;"+row.birthday+";;"+row.identityId+";;"+row.sexVal;
+    	window.location.href="addCourse.jsp?studentId="+studentId+"&studentInfo="+studentInfo;
 	}
 }
 
@@ -30,7 +31,8 @@ function addMultipleCourse()
 	{
 		var row = $('#list_data').datagrid('getSelected');
     	var studentId = row.studentId;
-    	window.location.href="link.jsp?studentId="+studentId;
+    	var studentInfo =row.name+";;"+row.byName+";;"+row.birthday+";;"+row.identityId+";;"+row.sexVal;
+    	window.location.href="link.jsp?studentId="+studentId+"&studentInfo="+studentInfo;
 	}
 }
 

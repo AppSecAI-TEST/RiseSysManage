@@ -205,7 +205,7 @@ $("#submit").click(function() {
 
 $(document).ready(
 		function() {
-			loadStuBaseInfo();
+			loadBaseInfo();
 			var stu = {};
 			stu.studentId = $("#studentId").val();
 			stu.queryCode = 'Qry_Student_Courses';
@@ -329,36 +329,19 @@ function relatedLink(obj) {
 	});
 }
 
-function loadStuBaseInfo()
+function loadBaseInfo()
+{
+	var studentInfo =parent.$("#studentInfo").val();
+	if(studentInfo.indexOf(";;")!=-1)
 	{
-		$.ajax({
-			type : "POST",
-			url: "/sys/student/qryStudentById.do",
-			data: "studentId="+$("#studentId").val()+"&funcNodeId=1002",
-			async: false,
-			dataType:"json",
-			beforeSend: function()
-	    	{
-	    		$.messager.progress({title : '系统消息', msg : '正在加载数据，请稍等……'});
-	    	},
-	    	success: function(data) {
-	    		$.messager.progress('close');
-	    		if(data.studentObj!=undefined&&data.studentObj!=null)
-	    		{
-	    			var obj =data.studentObj;
-	    			var tr1 =$("#stuBaseInfo").find("tr:eq(0)");
-	    			tr1.find("td:eq(1)").find("span").html(obj.name);
-	    			tr1.find("td:eq(3)").find("span").html(obj.byName);
-	    			tr1.find("td:eq(5)").find("span").html(obj.birthday);
-	    			var tr2 =$("#stuBaseInfo").find("tr:eq(1)");
-	    			tr2.find("td:eq(1)").find("span").html(obj.sexVal);
-	    			tr2.find("td:eq(3)").find("span").html(obj.identityId);
-	    		}	
-	        },
-	        error:function(){
-	        	$.messager.progress('close'); 
-	        }
-	    	
-		});
-	}
+		studentInfo =studentInfo.split(";;");
+		var tr1 =$("#stuBaseInfo").find("tr:eq(0)");
+		tr1.find("td:eq(1)").find("span").html(studentInfo[0]);
+		tr1.find("td:eq(3)").find("span").html(studentInfo[1]);
+		tr1.find("td:eq(5)").find("span").html(studentInfo[2]);
+		var tr2 =$("#stuBaseInfo").find("tr:eq(1)");
+		tr2.find("td:eq(1)").find("span").html(studentInfo[4]);
+		tr2.find("td:eq(3)").find("span").html(studentInfo[3]);
+	}	
+}
 </script>

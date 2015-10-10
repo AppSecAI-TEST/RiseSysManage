@@ -2,6 +2,7 @@
 <%
 	String path = request.getContextPath();
 	String studentId=request.getParameter("studentId");
+	String studentInfo =request.getParameter("studentInfo");
 %>
 <html>
 	<head>
@@ -19,6 +20,7 @@
 			<div class="easyui-panel" style="width:99%;" title="学员基础信息">
 	      		<form id="studentFm">
 	      			<input type="hidden" id="studentId" name="studentId" value="<%=studentId%>">
+	      			<input type="hidden" id="studentInfo" name="studentInfo" value="<%=studentInfo%>" />
 	      			<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
 	      			<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
 	      			<table width="100%" cellpadding="5px" class="maintable" id="addStudentTd">
@@ -306,33 +308,16 @@
 	
 	function loadStuBaseInfo()
 	{
-		$.ajax({
-			type : "POST",
-			url: "/sys/student/qryStudentById.do",
-			data: "studentId="+$("#studentId").val()+"&funcNodeId=1002",
-			async: false,
-			dataType:"json",
-			beforeSend: function()
-	    	{
-	    		$.messager.progress({title : '系统消息', msg : '正在加载数据，请稍等……'});
-	    	},
-	    	success: function(data) {
-	    		$.messager.progress('close');
-	    		if(data.studentObj!=undefined&&data.studentObj!=null)
-	    		{
-	    			var obj =data.studentObj;
-	    			var tr1 =$("#addStudentTd").find("tr:eq(0)");
-	    			tr1.find("td:eq(1)").find("span").html(obj.name);
-	    			tr1.find("td:eq(3)").find("span").html(obj.birthday);
-	    			tr1.find("td:eq(5)").find("span").html(obj.identityId);
-	    			$("#addStudentTd").find("tr:eq(1)").find("td:eq(1)").find("span").html(obj.sexVal);
-	    		}	
-	        },
-	        error:function(){
-	        	$.messager.progress('close'); 
-	        }
-	    	
-		});
+		var studentInfo =$("#studentInfo").val();
+		if(studentInfo.indexOf(";;")!=-1)
+		{
+			studentInfo =studentInfo.split(";;");
+			var tr1 =$("#addStudentTd").find("tr:eq(0)");
+		    tr1.find("td:eq(1)").find("span").html(studentInfo[0]);
+		    tr1.find("td:eq(3)").find("span").html(studentInfo[2]);
+		    tr1.find("td:eq(5)").find("span").html(studentInfo[3]);
+		    $("#addStudentTd").find("tr:eq(1)").find("td:eq(1)").find("span").html(studentInfo[4]);
+		}
 	}
 	
 	</script>
