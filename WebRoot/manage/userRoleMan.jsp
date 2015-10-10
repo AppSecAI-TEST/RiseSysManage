@@ -36,7 +36,7 @@
 						<thead>
 							<tr>
 								<th field="staffId" checkbox="true"></th>
-								<th field="staffName" width="95%">用户</th>
+								<th field="staffName" width="88%">用户</th>
 							</tr>
 						</thead>
 					</table>
@@ -52,7 +52,7 @@
 						<thead>
 							<tr>
 								<th field="staffId" checkbox="true"></th>
-								<th field="staffName" width="95%">用户</th>
+								<th field="staffName" width="88%">用户</th>
 							</tr>
 						</thead>
 					</table>

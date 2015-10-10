@@ -1,11 +1,11 @@
 /**
- * jQuery EasyUI 1.4.2
+ * jQuery EasyUI 1.4.3
  * 
  * Copyright (c) 2009-2015 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
  * To use it on other terms please contact us at info@jeasyui.com
- *$.messager.defaults
+ *
  */
 (function($){
 function _1(){
@@ -111,10 +111,10 @@ var win=_a(_11);
 return win;
 },confirm:function(_12,msg,fn){
 var _13=typeof _12=="object"?_12:{title:_12,msg:msg,fn:fn};
-_13=$.extend({},$.messager.defaults,{content:"<div class=\"messager-icon messager-question\"></div>"+"<div>"+_13.msg+"</div>"+"<div style=\"clear:both;\"/>",buttons:[{text:"确定",onClick:function(){
+_13=$.extend({},$.messager.defaults,{content:"<div class=\"messager-icon messager-question\"></div>"+"<div>"+_13.msg+"</div>"+"<div style=\"clear:both;\"/>",buttons:[{text:$.messager.defaults.ok,onClick:function(){
 win.window("close");
 _13.fn(true);
-}},{text:"取消",onClick:function(){
+}},{text:$.messager.defaults.cancel,onClick:function(){
 win.window("close");
 _13.fn(false);
 }}]},_13);

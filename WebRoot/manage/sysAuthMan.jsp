@@ -37,7 +37,7 @@
 					<thead>
 						<tr>
 							<th field="sysRoleId" checkbox="true"></th>
-							<th field="sysRoleName" width="95%">角色</th>
+							<th field="sysRoleName" width="88%">角色</th>
 						</tr>
 					</thead>
 				</table>
@@ -50,23 +50,33 @@
 			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveRoleNode()">保存</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
 		</div>
-		<div id="dlgPriv" class="easyui-dialog easyui-layout" style="width:500px;height:350px;padding:0px 0px" modal="true" closed="true" buttons="#dlgPriv-buttons">
-			<div data-options="region:'west'" style="width:50%;height:100%;margin:0 auto;padding:0 0;">
+		<div id="dlgPriv" class="easyui-dialog easyui-layout" style="width:800px;height:350px;padding:0px 0px" modal="true" closed="true" buttons="#dlgPriv-buttons">
+			<div data-options="region:'west'" style="width:33%;height:100%;margin:0 auto;padding:0 0;">
 				<table id="dgPrivRoleList" title="系统角色" class="easyui-datagrid" data-options="url:'/sys/sysRole/qryTotalRoleList.do',onClickRow:roleListRowPrivClick" style="width:100%;height:100%;margin:0 auto;padding:0 0;" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="true">
 					<thead>
 						<tr>
 							<th field="sysRoleId" checkbox="true"></th>
-							<th field="sysRoleName" width="95%">角色</th>
+							<th field="sysRoleName" width="88%">角色</th>
 						</tr>
 					</thead>
 				</table>
 			</div>
-			<div data-options="region:'east'" style="width:50%;height:100%;margin:0 auto;padding:0 0;">
+			<div data-options="region:'center'" style="width:33%;height:100%;margin:0 auto;padding:0 0;">
+				<table id="dgOperFuncList" title="操作功能" class="easyui-datagrid" data-options="onClickRow:funcListRowPrivClick" style="width:100%;height:100%;margin:0 auto;padding:0 0;" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="true">
+					<thead>
+						<tr>
+							<th field="funcNodeId" checkbox="true"></th>
+							<th field="funcNodeName" width="88%">功能</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div data-options="region:'east'" style="width:33%;height:100%;margin:0 auto;padding:0 0;">
 				<table id="dgPrivFuncList" title="权限功能" class="easyui-datagrid" style="width:100%;height:100%;margin:0 auto;padding:0 0;" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="true">
 					<thead>
 						<tr>
 							<th field="funcNodeId" checkbox="true"></th>
-							<th field="funcNodeName" width="95%">功能</th>
+							<th field="funcNodeName" width="88%">功能</th>
 						</tr>
 					</thead>
 				</table>
@@ -94,7 +104,7 @@
 				<thead>
 					<tr>
 						<th field="dataValue" checkbox="true"></th>
-						<th field="dataName" width="95%">数据名称</th>
+						<th field="dataName" width="88%">数据名称</th>
 					</tr>
 				</thead>
 			</table>
@@ -136,7 +146,15 @@
 			{
 				var row = $('#dgPrivRoleList').datagrid('getSelected');
 				if (row){
-					$("#dgPrivFuncList").datagrid({url:"/sys/funcNode/getPrivFuncNodeList.do?sysRoleId="+row.sysRoleId});
+					$("#dgOperFuncList").datagrid({url:"/sys/funcNode/getOperFuncNodeList.do?sysRoleId="+row.sysRoleId});
+				}
+			}
+			function funcListRowPrivClick()
+			{
+				var roleRow = $('#dgPrivRoleList').datagrid('getSelected');
+				var funcRow = $("#dgOperFuncList").datagrid('getSelected');
+				if (funcRow){
+					$("#dgPrivFuncList").datagrid({url:"/sys/funcNode/getPrivFuncNodeList.do?sysRoleId="+roleRow.sysRoleId+"&funcNodeId="+funcRow.funcNodeId});
 				}
 			}
 			function comboboxSettingFunc()
@@ -190,7 +208,18 @@
 					{
 						$('#datagridSettingDlg').dialog('open').dialog('setTitle','调整功能');
 						$("#datagridSettingData").css("height","400px");
-						$("#datagridSettingData").datagrid({url:"/sys/funcNode/getCtrlData.do?resourceId="+row.html+"&funcNodeId="+row.parentFuncNodeId+"&sysRoleId="+roleRow.sysRoleId});
+						$("#datagridSettingData").datagrid({
+							url:"/sys/funcNode/getCtrlData.do?resourceId="+row.html+"&funcNodeId="+row.parentFuncNodeId+"&sysRoleId="+roleRow.sysRoleId,
+							onLoadSuccess:function(data){
+								if(data){
+						            $.each(data.rows, function(index, item){
+						                if(item.checked){
+						                    $('#datagridSettingData').datagrid('checkRow', index);
+						                }
+						            });
+						        }
+							}
+						});
 					}
 					else
 					{

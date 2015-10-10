@@ -397,15 +397,39 @@ public class FuncNodeController
 		}
 	}
 	
-	@RequestMapping("/getPrivFuncNodeList.do")
-	public void getPrivFuncNodeList(HttpServletResponse response , String sysRoleId)
+	@RequestMapping("/getOperFuncNodeList.do")
+	public void getOperFuncNodeList(HttpServletResponse response , String sysRoleId)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = funcNodeService.getPrivFuncNodeList(sysRoleId);
+			String retVal = funcNodeService.getOperFuncNodeList(sysRoleId);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/getPrivFuncNodeList.do")
+	public void getPrivFuncNodeList(HttpServletResponse response , String sysRoleId , String funcNodeId)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = funcNodeService.getPrivFuncNodeList(sysRoleId , funcNodeId);
 			out.write(retVal);
 		}
 		catch(Exception e)
