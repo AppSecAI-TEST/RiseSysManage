@@ -71,17 +71,17 @@
 	      	          <DIV id="u170_state0_content">
 	      	            <span>业绩老师A：</span>
       	                   </td>
-	      	        <td><select name="adviserA" class="easyui-combobox" id="adviserA" style="width: 150px; height: 28px;"
-	      						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      						 onLoadSuccess:function(data){$('#adviserA').combobox('setValue',data[0].codeFlag);}"
-	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=REAL_SCHOOL_T&codeType=SCHOOL_TYPE" required="true" >
-	      	          </select></td>
+      	                  
+		      				
+	      	        <td> <select name="adviserA"  class="easyui-combobox" style="width: 80px; height: 28px;"
+		     				data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
+		      				onLoadSuccess:function(data){$('#teacherId').combobox('setValue',data[0].teacherId);}" 
+		      				url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}"></td>
 	      	        <td align="right"><span>业绩老师B：</span></td>
-	      	        <td><select name="adviserB" class="easyui-combobox" id="adviserB" style="width: 150px; height: 28px;"
-	      						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-	      						 onLoadSuccess:function(data){$('adviserB').combobox('setValue',data[0].schoolId);}"
-	      						url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
-	      	          </select></td>
+	      	        <td> <select name="adviserB"  class="easyui-combobox" style="width: 80px; height: 28px;"
+		     				data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
+		      				onLoadSuccess:function(data){$('#teacherId').combobox('setValue',data[0].teacherId);}" 
+		      				url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}"></td>
 	      	        <td  align="right"></td>
 	      	        <td></td>
       	        </tr>
