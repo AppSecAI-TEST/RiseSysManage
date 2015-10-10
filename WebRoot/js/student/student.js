@@ -87,38 +87,12 @@ $(document).ready(function() {
     		var vip = row.vip;
     		if("N" == vip) {
     			var studentId = row.studentId;
-    			var name = row.name;
-    			var byName = row.byName;
-    			var birthday = row.birthday;
-    			var sexVal = row.sexVal;
-    			var identityId = row.identityId;
     			var phone = row.phone;
     			var schoolName = row.schoolName;
-    			var dutyAdvisterName = row.dutyAdvisterName;
-    			var carerName = row.carerName;
-    			window.location.href = "/sys/vip/setVip.jsp?studentId="+studentId+"&name="+name+"&byName="+byName+"&birthday="+birthday+"&sexVal="+sexVal+"&identityId="+identityId+"&phone="+phone+"&schoolName="+schoolName+"&dutyAdvisterName="+dutyAdvisterName+"&carerName="+carerName;
+    			window.location.href = "/sys/student/qryStudentVipById.do?type=ADD&studentId="+studentId+"&phone="+phone+"&schoolName="+schoolName;
     		} else {
     			$.messager.alert('提示', "您选择的学员已是VIP学员，不能再设置该学员！");
     		}
-//    		$.ajax({
-//    			url: "/sys/student/setVip.do",
-//    			data: "studentId=" + studentId,
-//    			dataType: "json",
-//    			async: false,
-//    			beforeSend: function()
-//    	    	{
-//    	    		$.messager.progress({title : 'VIP学员设置', msg : '正在设置VIP学员，请稍等……'});
-//    	    	},
-//    	    	success: function (data) {
-//    	    		$.messager.progress('close'); 
-//    	    		var flag = data.flag
-//    	            if(flag) {
-//    	            	$.messager.alert('提示', "VIP学员设置成功！", "info", function() {window.history.back();});
-//    	            } else {
-//    	            	$.messager.alert('提示', data.msg);
-//    	            }
-//    	        } 
-//    		});
     	} else {
     		$.messager.alert('提示', "请您选择您要设置VIP信息的学员！");
     	}
@@ -130,16 +104,9 @@ $(document).ready(function() {
     		var vip = row.vip;
     		if("Y" == vip) {
     			var studentId = row.studentId;
-    			var name = row.name;
-    			var byName = row.byName;
-    			var birthday = row.birthday;
-    			var sexVal = row.sexVal;
-    			var identityId = row.identityId;
     			var phone = row.phone;
     			var schoolName = row.schoolName;
-    			var dutyAdvisterName = row.dutyAdvisterName;
-    			var carerName = row.carerName;
-    			window.location.href = "/sys/vip/addVipRemark.jsp?studentId="+studentId+"&name="+name+"&byName="+byName+"&birthday="+birthday+"&sexVal="+sexVal+"&identityId="+identityId+"&phone="+phone+"&schoolName="+schoolName+"&dutyAdvisterName="+dutyAdvisterName+"&carerName="+carerName;
+    			window.location.href = "/sys/student/qryStudentVipById.do?type=UPDATE&studentId="+studentId+"&phone="+phone+"&schoolName="+schoolName;
     		} else {
     			$.messager.alert('提示', "您选择的学员不是VIP学员，请先将该学员设置为VIP学员或者选择一个VIP学员进行添加VIP维护信息！");
     		}
@@ -150,7 +117,11 @@ $(document).ready(function() {
     
     $("#viewVip").click(function() {
     	if(validateIsSelect()) {
-    		window.location.href = "/sys/vip/viewVipRemarkList.jsp";
+    		var row = $('#list_data').datagrid('getSelected');
+    		var studentId = row.studentId;
+    		window.location.href = "/sys/student/qryStudentVipById.do?type=VIEW&studentId="+studentId;
+    	} else {
+    		$.messager.alert('提示', "请您选择您要浏览的学员！");
     	}
     });
     
@@ -492,17 +463,45 @@ $(document).ready(function() {
     });
     
     //VIP维护信息添加
-    $("#vipRemarkSubmit").click(function() {
-    	if($("#vipRemarkFm").form('validate')) {
-    		var obj = JSON.stringify($("#vipRemarkFm").serializeObject());
+    $("#setVipSubmit").click(function() {
+    	if($("#setVipFm").form('validate')) {
+    		var obj = JSON.stringify($("#setVipFm").serializeObject());
+    		alert(obj)
     		$.ajax({
-    			url: "/sys/student/addVipRemark.do",
+    			url: "/sys/student/setVip.do",
     			data: "param=" + obj,
     			dataType: "json",
     			async: false,
     			beforeSend: function()
     	    	{
-    	    		$.messager.progress({title : 'VIP维护信息', msg : '正在添加VIP维护信息，请稍等……'});
+    	    		$.messager.progress({title : 'VIP学员设置', msg : '正在设置VIP学员，请稍等……'});
+    	    	},
+    	    	success: function (data) {
+    	    		$.messager.progress('close'); 
+    	    		var flag = data.flag
+    	            if(flag) {
+    	            	$.messager.alert('提示', "VIP学员设置成功！", "info", function() {window.history.back();});
+    	            } else {
+    	            	$.messager.alert('提示', data.msg);
+    	            }
+    	        } 
+    		});
+    	}
+    });
+    
+    //VIP维护信息修改
+    $("#updateVipSubmit").click(function() {
+    	if($("#updateVipFm").form('validate')) {
+    		var obj = JSON.stringify($("#updateVipFm").serializeObject());
+    		alert(obj);
+    		$.ajax({
+    			url: "/sys/student/updateVip.do",
+    			data: "param=" + obj,
+    			dataType: "json",
+    			async: false,
+    			beforeSend: function()
+    	    	{
+    	    		$.messager.progress({title : 'VIP维护信息', msg : '正在维护VIP信息，请稍等……'});
     	    	},
     	    	success: function (data) {
     	    		$.messager.progress('close'); 

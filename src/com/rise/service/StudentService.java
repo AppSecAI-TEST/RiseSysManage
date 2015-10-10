@@ -60,10 +60,10 @@ public class StudentService
 		return ServiceEngine.invokeHttp(params);
 	}
 
-	public String setVip(String studentId) throws Exception
+	public String setVip(String param) throws Exception
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0047\",securityCode:\"0000000000\",params:{studentId:\""+studentId+"\"},rtnDataFormatType:\"user-defined\"}";
-		return ServiceEngine.invokeHttp(param);
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0047\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
 	}
 
 	public String addVipRemark(String param) throws Exception
@@ -74,7 +74,7 @@ public class StudentService
 
 	public String qryVipRemarkList(String studentId) throws Exception 
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0049\",securityCode:\"0000000000\",params:{studentId:\""+studentId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0049\",securityCode:\"0000000000\",params:{param:{studentId:\""+studentId+"\",queryCode:\"qryVipRemarkList\"}},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 
@@ -82,5 +82,11 @@ public class StudentService
 	{
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00410\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
+	}
+
+	public String qryStudentVipById(String studentId) throws Exception 
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00411\",securityCode:\"0000000000\",params:{param:{studentId:\""+studentId+"\",queryCode:\"qryStudentById\"}},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
 	}
 }

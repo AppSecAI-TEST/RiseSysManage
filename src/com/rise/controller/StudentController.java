@@ -4,11 +4,14 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONObject;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.rise.service.StudentService;
 
@@ -189,15 +192,15 @@ public class StudentController
 	
 	//设置学员为VIP
 	@RequestMapping(value = "/setVip.do")
-	public void setVip(String studentId, HttpServletResponse response)
+	public void setVip(String param, HttpServletResponse response)
 	{
-		log.error(studentId);
+		log.error(param);
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = studentService.setVip(studentId);
+			String retVal = studentService.setVip(param);
 			log.error(retVal);
 			out.write(retVal);
 		}
@@ -215,8 +218,8 @@ public class StudentController
 	}
 	
 	//VIP学员维护
-	@RequestMapping(value = "/addVipRemark.do")
-	public void addVipRemark(String param, HttpServletResponse response)
+	@RequestMapping(value = "/updateVip.do")
+	public void updateVip(String param, HttpServletResponse response)
 	{
 		log.error(param);
 		PrintWriter out = null;
@@ -268,6 +271,7 @@ public class StudentController
 		}
 	}
 	
+	//批量修改责任人
 	@RequestMapping(value = "/batchUpdateAdvister.do")
 	public void batchUpdateAdvister(String param, HttpServletResponse response)
 	{
@@ -292,5 +296,33 @@ public class StudentController
 				out.close();
 			}
 		}
+	}
+	
+	//查询学员的VIP信息
+	@RequestMapping(value = "/qryStudentVipById.do")
+	public ModelAndView qryStudentVipById(String studentId, String type, String phone, String schoolName)
+	{
+		ModelAndView view = null;
+		if("ADD".equals(type)) {
+			view = new ModelAndView("vip/setVip");
+		} else if("UPDATE".equals(type)) {
+			view = new ModelAndView("vip/updateVip");
+		} else if("VIEW".equals(type)) {
+			view = new ModelAndView("vip/viewVipRemarkList");
+		}
+		try 
+		{
+			String retVal = studentService.qryStudentVipById(studentId);
+			JSONObject obj = JSONObject.fromObject(retVal);
+			log.error(obj);
+			view.addObject("obj", obj);
+			view.addObject("phone", phone);
+			view.addObject("schoolName", schoolName);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return view;
 	}
 }
