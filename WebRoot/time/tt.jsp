@@ -29,24 +29,7 @@ datagrid-row-selected
 	    	<td>
 	    	<table  id="t1"></table>
 	    	</td>
-	    	<td>
-	    	<table  id="t2"></table>
-	    	</td>
-	    	<td>
-	    	<table  id="t3"></table>
-	    	</td>
-	    	<td>
-	    	<table  id="t4"></table>
-	    	</td>
-	    	<td>
-	    	<table  id="t5"></table>
-	    	</td>
-	    	<td>
-	    	<table  id="t6"></table>
-	    	</td>
-	    	<td>
-	    	<table  id="t7"></table>
-	    	</td>
+	    	
     	</tr>
     	</table>
     	
@@ -57,8 +40,9 @@ datagrid-row-selected
 </html>
 
 
-<script type="text/javascript">
-var json1;
+	<script type="text/javascript">
+	
+	var json1;
 var json2;
 var json3;
 var json4;
@@ -70,281 +54,156 @@ function closeDlg()
 		$('#dlg').dialog('close');
 	}
 	
-	function linkCourse()
-	{
-		$('#dlg').dialog('open').dialog('setTitle', '排课');
-		$('#fm').form('clear');
-	
-	}
+function linkCourse()
+{
+	$('#dlg').dialog('open').dialog('setTitle', '排课');
+	$('#fm').form('clear');
+
+}
 
 function getWeekTime()
 {
-	$.ajax({
-			type : "POST",
-			url: "/sys/time/getTimeByWeek.do?",
-			data: "param={'month':'10','week':'1'}",
-			async: false,
-			dataType:"json",
-			beforeSend: function()
-	    	{
-	    		$.messager.progress({title : '系统消息', msg : '正在提交数据，请稍等……'});
-	    	},
-	    	success: function(data) {
-	    		$.messager.progress('close');
-	    		for(var i=0;i<data.length;i++)
-	    		{
-	    			if(i==0)
-	    			{
-	    				json1=data[i];
-	    			}
-	    			
-	    		}
-	    		 
-	        },
-	        error:function(){
-	        	$.messager.progress('close'); 
-	        }
-	    	
-		});
+	$.ajax(
+	{
+		type : "POST",
+		url: "/sys/time/getTimeByWeek.do?",
+		data: "param={'month':'10','week':'1'}",
+		async: false,
+		dataType:"json",
+		beforeSend: function()
+    	{
+    		$.messager.progress({title : '系统消息', msg : '正在提交数据，请稍等……'});
+    	},
+    	success: function(data) {
+    		$.messager.progress('close');
+    		for(var i=0;i<data.length;i++)
+    		{
+    			if(i==0)
+    			{
+    				json1=data[i];
+    				initTable("t1",json1);
+    			}else if(i==1)
+    			{
+    				json2=data[i];
+    				initTable("t2",json2);
+    			}else if(i==2)
+    			{
+    				json3=data[i];
+    				initTable("t3",json3);
+    			}else if(i==3)
+    			{
+    				json4=data[i];
+    				initTable("t4",json4);
+    			}else if(i==4)
+    			{
+    				json5=data[i];
+    				initTable("t5",json5);
+    			}else if(i==5)
+    			{
+    				json6=data[i];
+    				initTable("t6",json6);
+    			}else if(i==6)
+    			{
+    				json7=data[i];
+    				initTable("t7",json7);
+    			} 
+    			
+    		}
+    		 
+        },
+        error:function(){
+        	$.messager.progress('close'); 
+        }
+    	
+	});
 	
 }
-$(document).ready(function(){
-	
-	
+
+function initTable(tabId,data)
+{
+	var rows=data.rows;
+	var time=rows[0].schooltime;
+	var weekTime=rows[0].weekTime;
+	$('#'+tabId).datagrid({
+    title: time+"(周"+weekTime+")",
+    width: 400,
+    height: 'auto',
+    method:'get',
+    fitColumns: true,
+    singleSelect:true,
+    onClickCell:onClickCell, 
+    columns:[[
+      {field:'teacherName',title:'老师',width:50,align:'center'},
+      {field:'H001',title:'8:30',width:50,align:'center',editor:'text'},
+      {field:'H002',title:'10:30',width:50,align:'center',editor:'text'},
+      {field:'H003',title:'14:00',width:50,align:'center',editor:'text'},
+      {field:'H004',title:'16:00',width:50,align:'center',editor:'text'},
+      {field:'H005',title:'18:30',width:50,align:'center',editor:'text'} 
+    ]],
+    onLoadSuccess:function()
+    {
+	$(this).datagrid('freezeRow',0);	
+    
+    }
+  });
+  $('#'+tabId).datagrid("loadData",data);	
+}
+
+$(document).ready(function()
+{
 	getWeekTime();
-	
-	
-  $('#t1').datagrid({
-    title: '10月',
-    width: 400,
-    height: 'auto',
-    fitColumns: true,
-    singleSelect:true,
-    onClickCell:onClickCell, 
-    columns:[[
-      {field:'teacherName',title:'老师',width:50,align:'center'},
-      {field:'H001',title:'8:30',width:50,align:'center'},
-      {field:'H002',title:'10:30',width:50,align:'center'},
-      {field:'H003',title:'14:00',width:50,align:'center'},
-      {field:'H004',title:'16:00',width:50,align:'center'},
-      {field:'H005',title:'18:30',width:50,align:'center'} 
-    ]],
-    onLoadSuccess:function()
-    {
-	 
-      MergeCells();
-    }
-  });
-  
- alert(JSON.stringify(json1));
-	   $('#t1').datagrid("loadData",json1);
-    $('#t2').datagrid({
-    url: "/sys/time/getTimeByWeek.do?param={'month':'10','week':'1'}",
-    title: '10月',
-    width: 400,
-    height: 'auto',
-    fitColumns: true,
-    singleSelect:true,
-    onClickCell:onClickCell, 
-    columns:[[
-      {field:'teacherName',title:'老师',width:50,align:'center'},
-      {field:'H001',title:'8:30',width:50,align:'center'},
-      {field:'H002',title:'10:30',width:50,align:'center'},
-      {field:'H003',title:'14:00',width:50,align:'center'},
-      {field:'H004',title:'16:00',width:50,align:'center'},
-      {field:'H005',title:'18:30',width:50,align:'center'} 
-    ]],
-    onLoadSuccess:function()
-    {
-      MergeCells();
-    }
-  });
-    
-    
-  $('#t3').datagrid({
-    url: "/sys/time/getTimeByWeek.do?param={'month':'10','week':'1'}",
-    title: '10月',
-    width: 400,
-    height: 'auto',
-    fitColumns: true,
-    singleSelect:true,
-    onClickCell:onClickCell, 
-    columns:[[
-      {field:'teacherName',title:'老师',width:50,align:'center'},
-      {field:'H001',title:'8:30',width:50,align:'center'},
-      {field:'H002',title:'10:30',width:50,align:'center'},
-      {field:'H003',title:'14:00',width:50,align:'center'},
-      {field:'H004',title:'16:00',width:50,align:'center'},
-      {field:'H005',title:'18:30',width:50,align:'center'} 
-    ]],
-    onLoadSuccess:function()
-    {
-      MergeCells();
-    }
-  });
-  
-  $('#t4').datagrid({
-    url: "/sys/time/getTimeByWeek.do?param={'month':'10','week':'1'}",
-    title: '10月',
-    width: 400,
-    height: 'auto',
-    fitColumns: true,
-    singleSelect:true,
-    onClickCell:onClickCell, 
-    columns:[[
-      {field:'teacherName',title:'老师',width:50,align:'center'},
-      {field:'H001',title:'8:30',width:50,align:'center'},
-      {field:'H002',title:'10:30',width:50,align:'center'},
-      {field:'H003',title:'14:00',width:50,align:'center'},
-      {field:'H004',title:'16:00',width:50,align:'center'},
-      {field:'H005',title:'18:30',width:50,align:'center'} 
-    ]],
-    onLoadSuccess:function()
-    {
-      MergeCells();
-    }
-  });
-        
-        
-  $('#t5').datagrid({
-    url: "/sys/time/getTimeByWeek.do?param={'month':'10','week':'1'}",
-    title: '10月',
-    width: 400,
-    height: 'auto',
-    fitColumns: true,
-    singleSelect:true,
-    onClickCell:onClickCell, 
-    columns:[[
-      {field:'teacherName',title:'老师',width:50,align:'center'},
-      {field:'H001',title:'8:30',width:50,align:'center'},
-      {field:'H002',title:'10:30',width:50,align:'center'},
-      {field:'H003',title:'14:00',width:50,align:'center'},
-      {field:'H004',title:'16:00',width:50,align:'center'},
-      {field:'H005',title:'18:30',width:50,align:'center'} 
-    ]],
-    onLoadSuccess:function()
-    {
-      MergeCells();
-    }
-  });
-          
-          
-  $('#t6').datagrid({
-    url: "/sys/time/getTimeByWeek.do?param={'month':'10','week':'1'}",
-    title: '10月',
-    width: 400,
-    height: 'auto',
-    fitColumns: true,
-    singleSelect:true,
-    onClickCell:onClickCell, 
-    columns:[[
-      {field:'teacherName',title:'老师',width:50,align:'center'},
-      {field:'H001',title:'8:30',width:50,align:'center'},
-      {field:'H002',title:'10:30',width:50,align:'center'},
-      {field:'H003',title:'14:00',width:50,align:'center'},
-      {field:'H004',title:'16:00',width:50,align:'center'},
-      {field:'H005',title:'18:30',width:50,align:'center'} 
-    ]],
-    onLoadSuccess:function()
-    {
-      MergeCells();
-    }
-  });
-            
-   $('#t77').datagrid({
-    url: "/sys/time/getTimeByWeek.do?param={'month':'10','week':'1'}",
-    title: '10月',
-    width: 400,
-    height: 'auto',
-    fitColumns: true,
-    singleSelect:true,
-    onClickCell:onClickCell, 
-    columns:[[
-      {field:'teacherName',title:'老师',width:50,align:'center'},
-      {field:'H001',title:'8:30',width:50,align:'center'},
-      {field:'H002',title:'10:30',width:50,align:'center'},
-      {field:'H003',title:'14:00',width:50,align:'center'},
-      {field:'H004',title:'16:00',width:50,align:'center'},
-      {field:'H005',title:'18:30',width:50,align:'center'} 
-    ]],
-    onLoadSuccess:function()
-    {
-      MergeCells();
-    }
-  });
-  
 });
 
 
-function MergeCells()
+$.extend($.fn.datagrid.methods, 
 {
-	    var s=  $('#t1').datagrid('getData');
-	    var datas =s.rows;
-	 
-		for(var i=0; i<datas.length; i++)
-		{
-			var index=i;
-			var fieldT;
-			var colspanNum=0;
-			for(var key in datas[i])
-			{  
-				
-                if(key.indexOf("merge")>-1)
-                {
-                	var val=datas[i][key];
-                	fieldT="H"+key.substring(5,8);
-                	$("#tt1").datagrid('mergeCells',
-					{
-						index: i,
-						field: fieldT,
-						colspan: val
-					});
-                }
-            }  
-		}
-		$("table tr td").each(function()
-		{
-		   var d=$(this).text();
-		  if('DPre-K03'==d)
-		  {
-			     $(this).css("background-color","#EDE1D8");
-		  }else if('DPre-K01'==d)
-		  {
-			  $(this).css("background-color","#ECB1D8");
-		  }else if('DPre-K02'==d)
-		  {
-			  $(this).css("background-color","#EFE1B8");
-		  }
-		
-		});
-
-		/*
-		$("table tr").each(function(k,v)
-		{//遍历所有行
-			$("td",v).eq(3).css("background-color","#ECE9D8");//把每行的同一位置变色
-		});*/
- }
-
-	function randomcolor()
+	editCell: function(jq,param)
 	{
-		var str=Math.ceil(Math.random()*16777215).toString(16);   
-		if(str.length<6){   
-		 str="0"+str;   
-		}   
-		return "#"+str;
+		return jq.each(function()
+		{
+			var opts = $(this).datagrid('options');
+			var fields = $(this).datagrid('getColumnFields',true).concat($(this).datagrid('getColumnFields'));
+			for(var i=0; i<fields.length; i++)
+			{
+				var col = $(this).datagrid('getColumnOption', fields[i]);
+				col.editor1 = col.editor;
+				if (fields[i] != param.field)
+				{
+					col.editor = null;
+				}
+			}
+			$(this).datagrid('beginEdit', param.index);
+			for(var i=0; i<fields.length; i++)
+			{
+				var col = $(this).datagrid('getColumnOption', fields[i]);
+				col.editor = col.editor1;
+			}
+		});
 	}
+});
 
- function onClickCell(rowIndex, field, value)
- { 
-	
-	// $('#tt1').datagrid('beginEdit', rowIndex);
-	 var s=  $('#t1').datagrid('getData');
-	 var rows =s.rows;
-	 alert(JSON.stringify(rows[rowIndex]));
-	 $("#frame2").attr('src',"/sys/time/editTime.jsp?time="+JSON.stringify(rows[rowIndex]));
-	 $('#dlg').dialog('open').dialog('setTitle', '排课');
- } 
+var editIndex = undefined;
 
+function endEditing(tab)
+{
+	if (editIndex == undefined){return true}
+	if ($(tab).datagrid('validateRow', editIndex))
+	{
+		$(tab).datagrid('endEdit', editIndex);
+		editIndex = undefined;
+		return true;
+	} else
+	{
+		return false;
+	}
+}
 
- 
-</script>
+function onClickCell(index, field)
+{
+	if (endEditing(this))
+	{
+		$(this).datagrid('selectRow', index).datagrid('editCell', {index:index,field:field});
+		editIndex = index;
+	}
+}
+	</script>

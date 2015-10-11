@@ -157,6 +157,7 @@ function initTable(tabId,data)
     ]],
     onLoadSuccess:function()
     {
+	$(this).datagrid('freezeRow',0);	
       MergeCells(tabId);
     }
   });
