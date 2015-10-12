@@ -55,9 +55,9 @@ public class GiftManageController {
 		}
 	}
 	
-	//新增实物教材
+	//新增赠品根据类型区分
 	@RequestMapping(value="/addGiftInfo.do")
-	public void addGiftInfo(HttpServletResponse response,String json)
+	public void addGiftInfo(HttpServletResponse response,String json,String type)
 	{
 		log.error(json);
 		PrintWriter out = null;
@@ -65,7 +65,7 @@ public class GiftManageController {
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = giftManageService.addGiftInfo(json);
+			String retVal = giftManageService.addGiftInfo(json,type);
 			log.error(retVal);
 			out.write(retVal);
 		}

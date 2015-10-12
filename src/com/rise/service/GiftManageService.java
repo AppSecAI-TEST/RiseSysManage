@@ -10,9 +10,9 @@ import com.rise.pub.util.ObjectCensor;
 @Service
 public class GiftManageService {
 
-	//新增实物教材赠品
-	public String addGiftInfo(String json) throws Exception{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1301\",securityCode:\"0000000000\",params:{json:'"+json+"'},rtnDataFormatType:\"user-defined\"}";
+	//新增赠品根据类型区分
+	public String addGiftInfo(String json,String type) throws Exception{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1301\",securityCode:\"0000000000\",params:{json:'"+json+"',type:'"+type+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 

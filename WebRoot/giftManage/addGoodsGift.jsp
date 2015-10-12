@@ -40,9 +40,9 @@
 	      	   <tr id="giftModelTR">
       	        <td width="8%" align="right"><span>赠品类别：</span></td>
       	        <td width="10%">
-      	           <select class="easyui-combobox" id="giftType" style="width: 100px;"
+      	           <select id="giftType" style="width: 100px;"
    				     data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
-   					 url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE" required="true" >
+   					 url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE&codeFlag=GOODS,TEXTBOOK" required="true" >
      	           </select>
      	        </td>
       	        <td width="8%" align="right"><span>赠品名称：</span></td>

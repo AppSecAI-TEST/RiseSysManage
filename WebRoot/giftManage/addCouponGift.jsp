@@ -13,13 +13,14 @@
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
 		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
-		<script type="text/javascript" src="<%=path %>/js/giftManage/goodsGiftManage.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/giftManage/couponGiftManage.js"></script>
 		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/css/style.css">
   	</head>
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="劵类赠品赠送">
   		<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
   		<input type="hidden" id="studentName" name="studentName" value="<%=studentName %>"/>
+  		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   			<table width="100%" cellpadding="5px" class="maintable">
   				<input type="hidden" id="activityId" />
   				<tr id="goodsTr">
@@ -37,46 +38,63 @@
   			</table>
   			<table width="100%" cellpadding="5px" style="margin-top: 5px;border-top: 1px solid #ccc;" class="maintable" id="giftTab">
 	      	   <tr id="giftModelTR">
-      	        <td width="8%" align="right"><span>赠券类型：</span></td>
-      	        <td width="10%">
-      	           <select class="easyui-combobox" id="giftType" style="width: 100px;"
-   				     data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
-   					 url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE" required="true" >
+      	        <td width="6%" align="right"><span>赠券类型</span></td>
+      	        <td width="6%">
+      	           <select id="giftType" style="width: 85px;"
+   				     required="true" >
      	           </select>
      	        </td>
-      	        <td width="8%" align="right"><span>赠券面值：</span></td>
-      	        <td width="15%">
-		      	   <select class="easyui-combobox" id="giftName" style="width: 120px;"></select>
-     	            </td>
-      	        <td width="8%" align="right"><span>是否领用：</span></td>
-      	        <td width="15%" align="left">
+      	        <td width="6%" align="right"><span>赠券面值</span></td>
+      	        <td width="6%">
+		      	   <select class="easyui-combobox" id="amount" style="width: 85px;"></select>
+     	        </td>
+     	        <td width="6%" align="right"><span>可用金额</span></td>
+      	        <td width="6%">
+		      	   <select class="easyui-numberbox" id="usableAmount" style="width: 85px;"></select>
+     	        </td>
+     	        <td width="6%" align="right"><span>赠券编号</span></td>
+      	        <td width="8%">
+		      	   <select class="easyui-textbox" id="giftCode" style="width: 90px;"></select>
+     	        </td>
+     	        <td width="9%" align="right"><span>有效开始日期</span></td>
+      	        <td width="7%">
+		      	   <select class="easyui-datebox" id="effDate" style="width: 85px;"></select>
+     	        </td>
+      	        <td width="6%" align="right"><span>是否领用</span></td>
+      	        <td width="10%" align="left">
       	       		 <input type="radio" value="Y" name="isGet"/><span>已领</span>
-      				&nbsp;<input type="radio" value="N" name="isGet"/><span>未领</span>
+      				 <input type="radio" value="N" name="isGet"/><span>未领</span>
      	           </td>
-      	        <td width="7%" align="right"><span>发放人：</span></td>
-      	        <td width="8%"><input id="granter" type="text" class="easyui-textbox validatebox" required="true" style="width: 100px;"/></td>
-      	        <td width="7%" align="center"><a href="javascript:void(0)" id="addGoodsGiftBtn" class="easyui-linkbutton" id="addGiftBtn" iconCls="icon-add" style="width: 80px;" onclick="addRow()">添加</a></td>
+      	        <td width="6%" align="right"><span>发放人</span></td>
+      	        <td width="6%"><input id="granter" type="text" class="easyui-textbox validatebox" required="true" style="width: 85px;"/></td>
+      	        <td width="6%" align="center"><a href="javascript:void(0)" id="addCouponGiftBtn" class="easyui-linkbutton" id="addGiftBtn" iconCls="icon-add" style="width: 80px;" onclick="addRow()">添加</a></td>
       	      </tr>
       	      <tr style="display:none;" name="addGift" id="addGift" >
-      	        <td align="right"><span>赠品类别：</span></td>
-      	        <td align="left" giftType="">&nbsp;</td>
-      	        <td align="right"><span>赠品名称：</span></td>
-      	        <td align="left" giftName="" giftId="">&nbsp;</td>
-      	        <td align="right"><span>是否领用：</span></td>
+      	        <td align="right"><span>赠品类别</span></td>
+      	        <td align="left" giftType="" effNum="" unit="">&nbsp;</td>
+      	        <td align="right"><span>赠券面值</span></td>
+      	        <td align="left" giftId="" giftName="">&nbsp;</td>
+      	        <td align="right"><span>可用金额</span></td>
+      	        <td align="left" usableAmount="">&nbsp;</td>
+      	        <td align="right"><span>赠券编号</span></td>
+      	        <td align="left" giftCode="">&nbsp;</td>
+      	        <td align="right"><span>有效开始日期</span></td>
+      	        <td align="left" effDate="">&nbsp;</td>
+      	        <td align="right"><span>是否领用</span></td>
       	        <td align="left" isGet="">&nbsp;</td>
-      	        <td align="right"><span>发放人：</span></td>
+      	        <td align="right"><span>发放人</span></td>
       	        <td align="left" granter="">&nbsp;</td>
       	        <td><a href='javascript:void(0)' class='linkmore' onclick='delRow(this)' ><span>删除</span></a></td>
      	       </tr>
      	       <tr>
      	       	<td align="right"><span>说明：</span></td>
-     	       	<td colspan="8"><textarea rows="7" cols="100" id="giveRemark" name="giveRemark" class="easyui-validatebox textbox"></textarea></td>
+     	       	<td colspan="14"><textarea rows="7" cols="100" id="giveRemark" name="giveRemark" class="easyui-validatebox textbox"></textarea></td>
      	       </tr>
       	    </table>
   		</div>
  		<div style="margin-top: 20px;min-width:1100px; width:99%;">
 	      	<div style="float: right;">
-	      		<a href="javascript:void(0)" id="addGoodsGiftSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;" onclick="addGoodsGiftSubmit()">提交</a>
+	      		<a href="javascript:void(0)" id="addCouponGiftSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;" onclick="addCouponGiftSubmit()">提交</a>
 	      		&nbsp;
 	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
 	      	</div>

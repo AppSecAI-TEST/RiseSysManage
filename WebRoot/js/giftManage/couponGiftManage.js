@@ -17,24 +17,288 @@ $(document).ready(function(){
 		});
     });
     
-//    $("input[name=goodsGiftChannel]").click(function(){
-//	    var goodsGiftChannel = $("input[name='goodsGiftChannel']:checked").val();
-//	    if(goodsGiftChannel == "ACTIVITY"){
-//	    	$("#goodsTr").find("td").each(function(){
-//	    		$(this).css("display","table-cell");
-//	    	})
-//	    	$("#activity").css("display","block");
-//	    }else if(goodsGiftChannel == "OTHER"){
-//	    	$("#goodsTr").find("td").each(function(i){
-//	    		if(i > 0){
-//	    			$(this).css("display","none");
-//	    		}
-//	    	})
-//	    	$("#activity").css("display","none");
-//	    }
-//    });
+    $("input[name=goodsGiftChannel]").click(function(){
+	    var goodsGiftChannel = $("input[name='goodsGiftChannel']:checked").val();
+	    if(goodsGiftChannel == "ACTIVITY"){
+	    	$("#goodsTr").find("td").each(function(){
+	    		$(this).css("display","table-cell");
+	    	})
+	    	$("#activity").css("display","block");
+	    }else if(goodsGiftChannel == "OTHER"){
+	    	$("#goodsTr").find("td").each(function(i){
+	    		if(i > 0){
+	    			$(this).css("display","none");
+	    		}
+	    	})
+	    	$("#activity").css("display","none");
+	    }
+    });
+    
+     $('#giftType').combobox({
+		 url:"/sys/pubData/qryData.do?param={'queryCode':'Qry_Gift_Type','parentType':'COUPON'}",
+		 formatter:formatTypeName, 
+		 valueField: 'giftType', 
+		 textField: 'typeName', 
+		 panelHeight: 'auto',
+	 	onChange:function(n,o)
+		{
+       		$("#amount").combobox(
+       		{
+        		url : "/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}",//返回json数据的url
+        		valueField : "giftId",
+        		textField :  "amount",
+        		panelHeight : "auto",
+        		onLoadSuccess : function ()
+        		{ //数据加载完毕事件
+                    var data = $('#amount').combobox('getData');
+                    if (data.length > 0)
+                    {
+                      //  $("#giftId").combobox('select', data[0].param2);
+                    }
+                }
+        	});
+		}
+	});
     
 });
+
+//增加行
+function addRow()
+{
+	var giftModelTR=$("#giftModelTR").clone();
+	var flag=true;
+	var giftTR=$("#addGift").clone();
+	giftTR.css("display",'table-row');
+	giftTR.attr("val","gift");
+	giftTR.find("td").each(function(n,node)
+	{
+		var giftType=$("#giftType").combobox('getValue');
+		var effDate = $("#effDate").datebox('getValue');
+		if(n==1)//赠品类别;	
+		{
+			var name=$("#giftType").combobox('getText');
+			if(giftType == undefined || giftType == ""){
+				flag=false;
+				$.messager.alert('提示', "请选择赠品类别！");
+				return false;
+			}
+			$(node).html("<span>"+name+"</span>");	
+			$(node).attr("giftType",giftType);
+			
+			var datas = $('#giftType').combobox('getData');
+			for(var m=0;m<datas.length;m++)
+			{
+				if(giftType==datas[m].giftType)
+				{
+					 $(node).attr("effNum",datas[m].effNum);
+					 $(node).attr("unit",datas[m].unit);
+				}
+			}
+			
+		}else if(n==3)//赠品名称;劵类ID
+		{
+			
+			var giftId=$("#amount").combobox('getValue');
+			var amount=$("#amount").combobox('getText');
+		 	if(amount == undefined || amount == ""){
+		 		flag=false;
+				$.messager.alert('提示', "请选择赠券面值！");
+				return false;
+			}
+			$(node).html("<span>"+amount+"</span>");	
+			$(node).attr("giftId",giftId);
+			
+			var datas = $('#amount').combobox('getData');
+			for(var m=0;m<datas.length;m++)
+			{
+				if(giftId==datas[m].giftId)
+				{
+					 $(node).attr("giftName",datas[m].giftName);
+				}
+			}
+		}else if(n==5)
+		{
+			var usableAmount = $("#usableAmount").numberbox('getValue');
+			if(usableAmount == undefined || usableAmount == ""){
+				flag=false;
+				$.messager.alert('提示', "请填写可用金额！");
+				return false;
+			}
+			$(node).html("<span>"+usableAmount+"</span>");	
+			$(node).attr("usableAmount",usableAmount);
+		}else if(n==7)
+		{
+			var giftCode = $("#giftCode").textbox('getValue');
+			if(giftCode == undefined || giftCode == ""){
+				flag=false;
+				$.messager.alert('提示', "请输入赠券编号！");
+				return false;
+			}
+			$(node).html("<span>"+giftCode+"</span>");	
+			$(node).attr("giftCode",giftCode);
+		}else if(n==9)
+		{
+			$(node).html("<span>"+effDate+"</span>");	
+			$(node).attr("effDate",effDate);
+		}else if(n==11)
+		{
+			var isGet = $("input[name='isGet']:checked").val();
+			if(isGet == undefined || isGet == ""){
+				flag=false;
+				$.messager.alert('提示', "请选择是否领用！");
+				return false;
+			}
+			if('Y'==isGet)
+			{
+				if(effDate == undefined || effDate == ""){
+					flag=false;
+					$.messager.alert('提示', "请填写有效期！");
+					return false;
+				}
+				$(node).html("<span>√</span>");	
+				$(node).attr("isGet","Y");
+			}else if('N'==isGet)
+			{
+				$(node).html("<span>×</span>");	
+				$(node).attr("isGet","N");
+			}
+		}else if(n==13)
+		{
+			var granter=$("#granter").textbox("getValue");
+			if(granter == undefined || granter == ""){
+				flag=false;
+				$.messager.alert('提示', "请填写发放人！");
+				return false;
+			}
+			$(node).html("<span>"+granter+"</span>");	
+			$(node).attr("granter",granter);
+		} 
+	});
+	if(flag)
+	{
+		$("#addGift").after(giftTR);
+    }
+	clearData("giftModelTR")
+}
+
+//删除相对应的行  
+function delRow(rows)  
+{  
+    $(rows).parent("td").parent("tr").remove();  
+}
+
+//选择活动
+function chooseActivity()
+{
+	var studentId = $("#studentId").val();
+	$('#dlg').dialog({
+		title:"选择活动",
+	});
+	$('#dlg').attr("src","/sys/giftManage/chooseActivity.jsp?studentId="+studentId);
+	$('#dlg').dialog("open");
+}
+
+//新增赠券赠品提交
+function addCouponGiftSubmit()
+{
+	var goodsGiftChannel = $("input[name='goodsGiftChannel']:checked").val();
+	var handlerId = $("#handlerId").val();
+	var studentId = $("#studentId").val();
+	var studentName = $("#studentName").val();
+	var giveRemark = $("#giveRemark").val();
+	if(goodsGiftChannel == "" || goodsGiftChannel == undefined){
+		$.messager.alert('提示', "请选择来源类型！");
+		return;
+	}
+	var titleText = "";
+	var activityId = "";
+	if(goodsGiftChannel == "ACTIVITY"){
+		titleText = $("#titleText").html();
+		activityId = $("#activityId").val(); 
+		if(titleText == "" || titleText == undefined || activityId == "" || activityId == undefined)
+		{
+			$.messager.alert('提示', "活动赠送请选择一个活动！");
+			return;
+		}
+	}
+	var gifts= new Array();
+	$("#giftTab").find('tr').each(function(i,node)
+	{
+		var trName=$(this).attr("val");
+ 
+		if('gift'==trName)
+		{
+			 var tds=$(this).children('td');
+		 
+			 var giftType=tds.eq(1).attr('giftType');
+			 var effNum=tds.eq(1).attr('effNum');
+			 var unit=tds.eq(1).attr('unit');
+			 var giftId=tds.eq(3).attr('giftId');
+			 var giftName=tds.eq(3).attr('giftName');
+			 var usableAmount=tds.eq(5).attr('usableAmount');
+			 var giftCode=tds.eq(7).attr('giftCode');
+			 var effDate=tds.eq(9).attr('effDate');
+			 var isGet=tds.eq(11).attr('isGet');
+			 var granter=tds.eq(13).attr('granter');
+			 var gift = {};
+			 
+			 gift.studentId=studentId;
+			 gift.giftChannel = goodsGiftChannel;
+			 gift.giftType = giftType;
+			 gift.effNum = effNum;
+			 gift.unit = unit;
+			 gift.giftId=giftId;
+			 gift.giftName=giftName;
+			 gift.amount=usableAmount;//刚刚新增时可用金额跟剩余金额一样
+			 gift.usableAmount=usableAmount;
+			 gift.giftCode=giftCode;
+			 gift.effDate=effDate;
+			 gift.isGet=isGet;
+			 gift.isRtn="N";
+			 gift.state="00A";
+			 gift.giftState="UNSUED";
+			 gift.granter=granter;
+			 if("Y"==isGet){
+				 gift.getUser=studentName;
+			 }
+			 if(goodsGiftChannel == "ACTIVITY"){
+				 gift.channelVal = activityId;
+				 gift.giftChannelDesc = titleText+"赠送";
+			 }
+			 if(goodsGiftChannel == "OTHER"){
+				 gift.giftChannelDesc ="其他赠送";
+			 }
+			 gift.giveRemark=giveRemark;
+			 gift.handlerId=handlerId;
+			 gifts.push(gift);  
+		 }
+	});
+	if(gifts.length == 0){
+		$.messager.alert('提示', "请至少添加一个赠品！");
+		return;
+	}else{
+		alert(JSON.stringify(gifts));
+		$.ajax({
+			type : "POST",
+			url: "/sys/giftManage/addGiftInfo.do",
+			data: "json="+JSON.stringify(gifts)+"&type=addCoupon",
+			async: false,
+			beforeSend: function()
+	    	{
+	    		$.messager.progress({title : '赠券赠品赠送', msg : '赠券赠品赠送中，请稍等……'});
+	    	},
+	    	success: function(flag) {
+	    		$.messager.progress('close'); 
+	    		if(flag == "true"){
+	    			$.messager.alert('提示', "赠券赠品赠送成功！");
+	    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+	    		}else if(flag == "false"){
+	    			$.messager.alert('提示', "赠券赠品赠送失败！");
+	    		}
+	        } 
+		});
+	}
+}
 
 //跳转领取赠券
 function getCouponGift()

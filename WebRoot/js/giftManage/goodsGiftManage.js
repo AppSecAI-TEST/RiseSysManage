@@ -34,78 +34,100 @@ $(document).ready(function(){
 	    }
     });
     
+    $('#giftType').combobox({
+	 	onChange:function(n,o)
+		{
+       		$("#giftName").combobox(
+       		{
+        		url : "/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}",//返回json数据的url
+        		valueField : "giftId",
+        		textField :  "giftName",
+        		panelHeight : "auto",
+        		onLoadSuccess : function ()
+        		{ //数据加载完毕事件
+                    var data = $('#giftName').combobox('getData');
+                    if (data.length > 0)
+                    {
+                      //  $("#giftId").combobox('select', data[0].param2);
+                    }
+                }
+        	});
+		}
+	});
+	
+    
 });
 
 //增加行
 function addRow()
 {
-		var giftModelTR=$("#giftModelTR").clone();
-		var flag=true;
-		var giftTR=$("#addGift").clone();
-		giftTR.css("display",'table-row');
-		giftTR.attr("val","gift");
-		giftTR.find("td").each(function(n,node)
+	var giftModelTR=$("#giftModelTR").clone();
+	var flag=true;
+	var giftTR=$("#addGift").clone();
+	giftTR.css("display",'table-row');
+	giftTR.attr("val","gift");
+	giftTR.find("td").each(function(n,node)
+	{
+		var giftType=$("#giftType").combobox('getValue');
+		if(n==1)//赠品类别;	
 		{
-			var giftType=$("#giftType").combobox('getValue');
-			if(n==1)//赠品类别;	
-			{
-				var name=$("#giftType").combobox('getText');
-				if(giftType == undefined || giftType == ""){
-					flag=false;
-					$.messager.alert('提示', "请选择赠品类别！");
-					return false;
-				}
-				$(node).html("<span>"+name+"</span>");	
-				$(node).attr("giftType",giftType);
-			}else if(n==3)//赠品名称;劵类ID
-			{
-				
-				var giftId=$("#giftName").combobox('getValue');
-				var giftName=$("#giftName").combobox('getText');
-			 	if(giftName == undefined || giftName == ""){
-			 		flag=false;
-					$.messager.alert('提示', "请选择赠品名称！");
-					return false;
-				}
-				
-				$(node).html("<span>"+giftName+"</span>");									 
-				
-				$(node).attr("giftId",giftId);
-				$(node).attr("giftName",giftName);
-			}else if(n==5)
-			{
-				var isGet = $("input[name='isGet']:checked").val();
-				if(isGet == undefined || isGet == ""){
-					flag=false;
-					$.messager.alert('提示', "请选择是否领用！");
-					return false;
-				}
-				if('Y'==isGet)
-				{
-					$(node).html("<span>√</span>");	
-					$(node).attr("isGet","Y");
-				}else if('N'==isGet)
-				{
-					$(node).html("<span>×</span>");	
-					$(node).attr("isGet","N");
-				}
-			}else if(n==7)
-			{
-				var granter=$("#granter").textbox("getValue");
-				if(granter == undefined || granter == ""){
-					flag=false;
-					$.messager.alert('提示', "请填写发放人！");
-					return false;
-				}
-				$(node).html("<span>"+granter+"</span>");	
-				$(node).attr("granter",granter);
-			} 
-		});
-		if(flag)
+			var name=$("#giftType").combobox('getText');
+			if(giftType == undefined || giftType == ""){
+				flag=false;
+				$.messager.alert('提示', "请选择赠品类别！");
+				return false;
+			}
+			$(node).html("<span>"+name+"</span>");	
+			$(node).attr("giftType",giftType);
+		}else if(n==3)//赠品名称;劵类ID
 		{
-			$("#addGift").after(giftTR);
-	    }
-		clearData("giftModelTR")
+			
+			var giftId=$("#giftName").combobox('getValue');
+			var giftName=$("#giftName").combobox('getText');
+		 	if(giftName == undefined || giftName == ""){
+		 		flag=false;
+				$.messager.alert('提示', "请选择赠品名称！");
+				return false;
+			}
+			
+			$(node).html("<span>"+giftName+"</span>");									 
+			
+			$(node).attr("giftId",giftId);
+			$(node).attr("giftName",giftName);
+		}else if(n==5)
+		{
+			var isGet = $("input[name='isGet']:checked").val();
+			if(isGet == undefined || isGet == ""){
+				flag=false;
+				$.messager.alert('提示', "请选择是否领用！");
+				return false;
+			}
+			if('Y'==isGet)
+			{
+				$(node).html("<span>√</span>");	
+				$(node).attr("isGet","Y");
+			}else if('N'==isGet)
+			{
+				$(node).html("<span>×</span>");	
+				$(node).attr("isGet","N");
+			}
+		}else if(n==7)
+		{
+			var granter=$("#granter").textbox("getValue");
+			if(granter == undefined || granter == ""){
+				flag=false;
+				$.messager.alert('提示', "请填写发放人！");
+				return false;
+			}
+			$(node).html("<span>"+granter+"</span>");	
+			$(node).attr("granter",granter);
+		} 
+	});
+	if(flag)
+	{
+		$("#addGift").after(giftTR);
+    }
+	clearData("giftModelTR")
 }
 
 //删除相对应的行  
@@ -131,7 +153,7 @@ function addGift(type)
 			window.location.href = "/sys/giftManage/addGoodsGift.jsp?studentId="+studentId+"&studentName="+studentName;
 		}
 		if(type == "coupon"){
-			
+			window.location.href = "/sys/giftManage/addCouponGift.jsp?studentId="+studentId+"&studentName="+studentName;
 		}
 	}
 }
@@ -218,7 +240,7 @@ function addGoodsGiftSubmit()
 		$.ajax({
 			type : "POST",
 			url: "/sys/giftManage/addGiftInfo.do",
-			data: "json="+JSON.stringify(gifts),
+			data: "json="+JSON.stringify(gifts)+"&type=addGoods",
 			async: false,
 			beforeSend: function()
 	    	{
