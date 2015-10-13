@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.rise.pub.invoke.ServiceEngine;
 import com.rise.pub.util.ObjectCensor;
-import com.rise.pub.util.StringUtil;
 
 @Service
 public class QryPubDataService 
@@ -94,5 +93,44 @@ public class QryPubDataService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
+	
+	/**
+	 * 查询阶段
+	 * @author Lapalnd_Alone
+	 * @return
+	 * @throws Exception
+	 */
+	public String getStage() throws Exception 
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10112\",securityCode:\"0000000000\",params:{},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
+	/**
+	 * 查询班级定价
+	 * @author Lapalnd_Alone
+	 * @param schoolId
+	 * @param stageId
+	 * @return
+	 * @throws Exception
+	 */
+	public String getClassPrice(String schoolId,String stageId) throws Exception 
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10113\",securityCode:\"0000000000\",params:{schoolId:\""+schoolId+"\",stageId:\""+stageId+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
+	/**
+	 * 查询班级
+	 * @param schoolId
+	 * @param stageId
+	 * @return
+	 * @throws Exception
+	 */
+	public String getClassType() throws Exception 
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10113\",securityCode:\"0000000000\",params:{},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
 	
 }

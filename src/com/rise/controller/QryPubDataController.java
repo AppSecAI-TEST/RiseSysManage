@@ -315,4 +315,96 @@ public class QryPubDataController
 			}
 		}
 	}
+	
+	/**
+	 * 查询阶段
+	 * @param response
+	 */
+	@RequestMapping(value = "/qryStage.do")
+	public void getStage( HttpServletResponse response)
+	{
+	 
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = qryPubDataService.getStage();
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	/**
+	 * 查询班级价格体系
+	 * @author Lapalnd_Alone
+	 * @param response
+	 */
+	@RequestMapping(value = "/getClassPrice.do")
+	public void getClassPrice(String stageId,String schoolId, HttpServletResponse response)
+	{
+	 
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = qryPubDataService.getClassPrice(schoolId, stageId);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	/**
+	 * 查询班级
+	 * @author Lapalnd_Alone
+	 * @param response
+	 */
+	@RequestMapping(value = "/getClassType.do")
+	public void getClassType(HttpServletResponse response)
+	{
+	 
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = qryPubDataService.getClassType();
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }

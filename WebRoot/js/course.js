@@ -127,18 +127,16 @@ $(document).ready(function()
 			{
 				 if(n==data[i].stageId)
 				 {
-					 amount=data[i].amount;
-					 $("#stageOrder").val(data[i].seqId);
+					 $("#stageOrder").val(data[i].seqOrder);
 				 }
 			}
 		
-		    $("#totalAmount").textbox('setValue',amount);
-		    parent.window.countAmount();
+		  
        		var stageType=$("#stageId").combobox('getText');
-       		var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",stageId:\""+stageType+"\"}";
+       		var url="/sys/pubData/getClassPrice.do?stageId="+stageType+"&schoolId=1001";
        	 	$("#classType").combobox(
        	 	{
-        		url : urls,//返回json数据的url
+        		url : url,//返回json数据的url
         		valueField : "classType",
         		textField : "classType",
         		panelHeight : "auto",
@@ -154,15 +152,20 @@ $(document).ready(function()
 		               		if(oldClassType==data[i].classType)
 		                   	{
 		                   		flag=true;
+		                   		amount=data[i].amount;
 		               			$("#classType").combobox('select', oldClassType);
 		                    }
 		                }
 		               	if(!flag)
 		               	{
+		               		amount=data[0].amount;
 		               		$("#classType").combobox('select', data[0].classType);
 		               	}
+		               	 $("#totalAmount").textbox('setValue',amount);
+		    			 parent.window.countAmount();
                     }
                 }
+       	 	
         	});
        }  
 	});

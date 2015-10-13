@@ -54,7 +54,7 @@
 					 <select name="stageId"  id="stageId"   style="width: 150px; height: 28px;"
 	      						data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#stageId').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>');}"
-	      						url="<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_Set_Price','setPriceId':'10001'}" required="true" >
+	      						url="<%=path %>/pubData/qryStage.do" required="true" >
       	            </select>
 					</td>
 	      	        <td align="right"><span>班级类型：</span></td>

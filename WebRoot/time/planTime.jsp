@@ -146,6 +146,10 @@ function initTable(tabId,data)
     height: 'auto',
     fitColumns: true,
     singleSelect:true,
+    rowStyler: function(index,row)
+    {
+		 return 'background-color:#FFFFFF;color:#00000;';
+    },
     onClickCell:onClickCell, 
     columns:[[
       {field:'teacherName',title:'老师',width:50,align:'center'},
