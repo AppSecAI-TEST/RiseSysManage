@@ -20,6 +20,9 @@
 	margin-top:5px;
 	width:20%;
 }
+.tree-node-hover{
+text-decoration:none;color:#555555; background: #fae8bd; 
+}
 datagrid-row-selected
 </style>
 	</head>
@@ -28,11 +31,18 @@ datagrid-row-selected
     	<tr>
 	    	<td>
 	    	<table  id="t1"></table>
+	    	<div id="tb" style="height:auto">
+			<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept()">保存</a>
+			 
+	</div>
 	    	</td>
 	    	
     	</tr>
     	</table>
-    	
+    		<select name="classInstId" id="classInstId" class="easyui-combobox" style="width: 150px; height: 28px;"
+					url="/sys/pubData/qryData.do?param={'queryCode':'Qry_School_Time','schoolId':'1001'}",
+					data-options=" valueField: 'classInstId', textField: 'className', panelHeight: 'auto'" >
+ 					</select>
 		 <div id="dlg" class="easyui-dialog" style="width: 600px; height: 550px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
  				<iframe id="frame2" name="frame2"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" height="445px" width="100%"></iframe>
   	    </div>
@@ -132,21 +142,37 @@ function initTable(tabId,data)
     fitColumns: true,
     singleSelect:true,
     onClickCell:onClickCell, 
+    rowStyler: function(index,row)
+    {
+		 return 'background-color:#FFFFFF;color:#00000;';
+    },
     columns:[[
       {field:'teacherName',title:'老师',width:50,align:'center'},
       {field:'H001',title:'8:30',width:50,align:'center',editor:'text'},
       {field:'H002',title:'10:30',width:50,align:'center',editor:'text'},
       {field:'H003',title:'14:00',width:50,align:'center',editor:'text'},
       {field:'H004',title:'16:00',width:50,align:'center',editor:'text'},
-      {field:'H005',title:'18:30',width:50,align:'center',editor:'text'} 
+      {field:'H005',title:'18:30',width:100,align:'center',formatter: function(Confirmation, rowIndex)
+    	  {
+	    	   
+	    		  return "<a class='editcls'  >排课</a>"
+	    	   
+    	  }
+      } 
     ]],
     onLoadSuccess:function()
     {
 	$(this).datagrid('freezeRow',0);	
+     $('.editcls').linkbutton({text:'排课',plain:true,iconCls:'icon-add'});  
     
     }
   });
   $('#'+tabId).datagrid("loadData",data);	
+}
+
+function test()
+{
+	alert("1");	
 }
 
 $(document).ready(function()
@@ -183,6 +209,7 @@ $.extend($.fn.datagrid.methods,
 });
 
 var editIndex = undefined;
+var editField=undefined;
 
 function endEditing(tab)
 {
@@ -190,6 +217,21 @@ function endEditing(tab)
 	if ($(tab).datagrid('validateRow', editIndex))
 	{
 		$(tab).datagrid('endEdit', editIndex);
+		
+		var rowVal = $(tab).datagrid('getData').rows[editIndex];
+		
+		var val=rowVal[editField]+"";
+		
+		var vals = val.split("/");
+		
+		var className=vals[0];
+		
+		var roomName=vals[1];
+		
+		var teacherType=vals[2];
+		
+		var hourRange=vals[3];
+		
 		editIndex = undefined;
 		return true;
 	} else
@@ -202,8 +244,11 @@ function onClickCell(index, field)
 {
 	if (endEditing(this))
 	{
+		var s=  $(this).datagrid('getData');
+	 	var rows =s.rows;
 		$(this).datagrid('selectRow', index).datagrid('editCell', {index:index,field:field});
 		editIndex = index;
+		editField=field;
 	}
 }
 	</script>

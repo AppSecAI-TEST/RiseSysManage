@@ -24,7 +24,7 @@ datagrid-row-selected
 </style>
 	</head>
 	<body>
-    	<table>
+    	<table width="700"  cellpadding="0" border="0" style="border-collapse:collapse;overflow:scroll;" >
     	<tr>
 	    	<td>
 	    	<table  id="t1"></table>

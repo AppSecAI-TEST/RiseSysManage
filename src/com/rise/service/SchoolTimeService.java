@@ -47,4 +47,16 @@ public class SchoolTimeService
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS8004\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
+	
+	/**
+	 * 获取一个月周的范围
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public String getWeek(String param) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS8005\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
 }
