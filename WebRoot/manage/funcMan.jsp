@@ -34,12 +34,12 @@
 				</div>
 				<div class="fitem">
 					<label style="text-align:right">功能类型:</label>
-					<select id="funcNodeType" name="funcNodeType" class="easyui-combobox" style="width:265px;height:25px;" data-options="formatter:function(row){return '<span>'+row.codeName+'</span>';},editable:false, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto' ,onLoadSuccess:function(data){if(data.length > 0)$('#funcNodeType').combobox('setValue',data[0].codeFlag);}" url="<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=funcNodeType">
+					<select id="funcNodeType" name="funcNodeType" style="width:265px;height:25px;" required="true" >
       				</select>
 				</div>
 				<div class="fitem">
 					<label style="text-align:right">上级功能:</label>
-					<select id="parentFuncNodeId" name="parentFuncNodeId" class="easyui-combotree" style="width:265px;height:25px;">
+					<select id="parentFuncNodeId" name="parentFuncNodeId" class="easyui-combotree" style="width:265px;height:25px;" required="true" >
       				</select>
 				</div>
 				<div class="fitem">
@@ -63,25 +63,40 @@
 					</div>
 					<div class="fitem">
 						<label style="text-align:right">控件类型:</label>
-						<select id="widgetType" name="widgetType" class="easyui-combobox" style="width:265px;height:25px;" data-options="formatter:function(row){return '<span>'+row.codeName+'</span>';},editable:false, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto' ,onLoadSuccess:function(data){if(data.length > 0)$('#widgetType').combobox('setValue',data[0].codeFlag);}" url="<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=widgetType">
+						<select id="widgetType" name="widgetType" style="width:265px;height:25px;">
 	      				</select>
 	      				<input type="hidden" id="widgetName" name="widgetName" />
 					</div>
-					<div class="fitem">
-						<label style="text-align:right">所依赖表:</label>
-						<input name="dataSourceTable" id="dataSourceTable" type="text" style="width:265px" class="easyui-textbox" />
-					</div>
-					<div class="fitem">
-						<label style="text-align:right">依赖字段:</label>
-						<input name="dataSourceField" id="dataSourceField" type="text" style="width:265px" class="easyui-textbox" />
-					</div>
-					<div class="fitem">
-						<label style="text-align:right">字段名称:</label>
-						<input name="dataSourceName" id="dataSourceName" type="text" style="width:265px" class="easyui-textbox" />
-					</div>
-					<div class="fitem">
-						<label style="text-align:right;vertical-align:top;">依赖语句:</label>
-						<input name="dataSourceSql" id="dataSourceSql" type="text" style="width:265px;height:100px" class="easyui-textbox" data-options="multiline:true" />
+					<div id="comboArea" style="display:none;">
+						<div class="fitem">
+							<label style="text-align:right">查询类型:</label>
+							<select id="dataType" name="dataType" style="width:265px;height:25px;">
+		      				</select>
+						</div>
+						<div class="fitem">
+							<label style="text-align:right">语句说明:</label>
+							<input name="dataSqlName" id="dataSqlName" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
+						</div>
+						<div class="fitem">
+							<label style="text-align:right">依赖字段:</label>
+							<input name="dataSourceField" id="dataSourceField" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
+						</div>
+						<div class="fitem">
+							<label style="text-align:right">字段名称:</label>
+							<input name="dataSourceName" id="dataSourceName" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
+						</div>
+						<div class="fitem" id="dataTableArea">
+							<label style="text-align:right">所依赖表:</label>
+							<input name="dataSourceTable" id="dataSourceTable" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
+						</div>
+						<div class="fitem" id="dataSqlArea">
+							<label style="text-align:right;vertical-align:top;">依赖语句:</label>
+							<input name="dataSourceSql" id="dataSourceSql" type="text" style="width:265px;height:100px" class="easyui-textbox easyui-validatebox" data-options="multiline:true" />
+						</div>
+						<div class="fitem" id="dataParamArea">
+							<label style="text-align:right">语句参数:</label>
+							<input name="dataSqlParam" id="dataSqlParam" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
+						</div>
 					</div>
 				</div>
 			</form>
@@ -95,17 +110,23 @@
 			var gParentOperData = null;
 			var gParentPrivData = null;
 			var gEditRow = null;
-			$.post("/sys/funcNode/getParentMenuList.do",{},function(data){
-				gParentMenuData = data;
-			},"json");
-			$.post("/sys/funcNode/getParentOperList.do",{},function(data){
-				gParentOperData = data;
-			},"json");
-			$.post("/sys/funcNode/getParentPrivList.do",{},function(data){
-				gParentPrivData = data;
-			},"json");
+			var gNewDataType = false;
+			function refreshFunc()
+			{
+				$.post("/sys/funcNode/getParentMenuList.do",{},function(data){
+					gParentMenuData = data;
+				},"json");
+				$.post("/sys/funcNode/getParentOperList.do",{},function(data){
+					gParentOperData = data;
+				},"json");
+				$.post("/sys/funcNode/getParentPrivList.do",{},function(data){
+					gParentPrivData = data;
+				},"json");
+			}
 			$(document).ready(function(){
+				refreshFunc();
 				$("#funcNodeType").combobox({
+					url:"<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=funcNodeType",
 					onChange:function(){
 						var dataValue = $("#funcNodeType").combobox("getValue");
 						if(gEditRow == null)
@@ -125,7 +146,7 @@
 								$("#html").textbox("readonly",false);
 								$("#fieldArea").css("display","none");
 								$("#fieldId").validatebox({required:false});
-								$("#fieldName").validatebox({required:false});
+								$("#fieldName").validatebox({required:false})
 							}
 							else if(dataValue == "B")
 							{
@@ -141,31 +162,146 @@
 						{
 							$("#funcNodeType").combobox("setValue",gEditRow.funcNodeType);
 						}
+					},
+					formatter:function(row){
+						return '<span>'+row.codeName+'</span>';
+					},
+					editable:false, 
+					valueField: 'codeFlag', 
+					textField: 'codeName', 
+					panelHeight: 'auto' ,
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+							$('#funcNodeType').combobox('setValue',data[0].codeFlag);
 					}
 				});
 				$("#widgetType").combobox({
+					url:"<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=widgetType",
 					onChange:function(){
-						var dataText = $("#widgetType").combobox("getText");
-						$("#widgetName").val(dataText);
+						if($("#fieldArea").css("display") == "block")
+						{
+							var dataText = $("#widgetType").combobox("getText");
+							var value = $("#widgetType").combobox("getValue");
+							$("#widgetName").val(dataText);
+							if(value == 'combobox')
+							{
+								$("#dataSourceField").validatebox({required:true});
+								$("#dataSourceName").validatebox({required:true});
+								$("#dataSqlName").validatebox({required:true});
+								$("#dataSourceTable").validatebox({required:false});
+								$("#dataSourceSql").validatebox({required:false});
+								$("#dataSqlParam").validatebox({required:false});
+								$("#comboArea").css("display","block");
+								if(gNewDataType)
+								{
+									var data = $('#dataType').combobox("getData");
+									$('#dataType').combobox('setValue',data[0].codeFlag);
+								}
+							}
+							else
+							{
+								$("#dataSourceField").validatebox({required:false});
+								$("#dataSourceName").validatebox({required:false});
+								$("#dataSqlName").validatebox({required:false});
+								$("#dataSourceTable").validatebox({required:false});
+								$("#dataSourceSql").validatebox({required:false});
+								$("#dataSqlParam").validatebox({required:false});
+								$("#comboArea").css("display","none");
+							}
+						}
+					},
+					formatter:function(row){
+						return '<span>'+row.codeName+'</span>';
+					},
+					editable:false, 
+					valueField: 'codeFlag', 
+					textField: 'codeName', 
+					panelHeight: 'auto' ,
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+							$('#widgetType').combobox('setValue',data[0].codeFlag);
+					}
+				});
+				$("#dataType").combobox({
+					url:"<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=dataType",
+					onChange:function(){
+						if($("#comboArea").css("display") == "block")
+						{
+							var value = $("#dataType").combobox("getValue");
+							if(value == 'T')
+							{
+								$("#dataSourceTable").validatebox({required:true});
+								$("#dataSourceSql").validatebox({required:false});
+								$("#dataSqlParam").validatebox({required:false});
+								$("#dataTableArea").css("display","block");
+								$("#dataSqlArea").css("display","none");
+								$("#dataParamArea").css("display","none");
+							}
+							else if(value == 'S')
+							{
+								$("#dataSourceTable").validatebox({required:false});
+								$("#dataSourceSql").validatebox({required:true});
+								$("#dataSqlParam").validatebox({required:false});
+								$("#dataTableArea").css("display","none");
+								$("#dataSqlArea").css("display","block");
+								$("#dataParamArea").css("display","none");
+							}
+							else if(value == 'P')
+							{
+								$("#dataSourceTable").validatebox({required:false});
+								$("#dataSourceSql").validatebox({required:true});
+								$("#dataSqlParam").validatebox({required:true});
+								$("#dataTableArea").css("display","none");
+								$("#dataSqlArea").css("display","block");
+								$("#dataParamArea").css("display","block");
+							}
+						}
+					},
+					formatter:function(row){
+						return '<span>'+row.codeName+'</span>';
+					},
+					editable:false, 
+					valueField: 'codeFlag', 
+					textField: 'codeName', 
+					panelHeight: 'auto',
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+							$('#dataType').combobox('setValue',data[0].codeFlag);
 					}
 				});
 			});
 			function newFuncNode(){
 				gEditRow = null;
+				gNewDataType = true;
+				$("#dataSourceField").validatebox({required:false});
+				$("#dataSourceName").validatebox({required:false});
+				$("#dataSqlName").validatebox({required:false});
+				$("#dataSourceTable").validatebox({required:false});
+				$("#dataSourceSql").validatebox({required:false});
+				$("#dataSqlParam").validatebox({required:false});
 				$("#parentFuncNodeId").combotree({disabled:false});
 				$("#fieldArea").css("display","none");
 				$("#fieldId").textbox("readonly",false);
 				$('#dlg').dialog('open').dialog('setTitle','新增功能');
+				$("#comboArea").css("display","none");
 				$('#fm').form('clear');
 				$("#handlerId").val("${sessionScope.StaffT.staffId}");
 				url = '/sys/funcNode/addFuncNodeInfo.do';
 			}
 			function editFuncNode(){
+				gNewDataType = false;
+				$("#dataSourceField").validatebox({required:false});
+				$("#dataSourceName").validatebox({required:false});
+				$("#dataSqlName").validatebox({required:false});
+				$("#dataSourceTable").validatebox({required:false});
+				$("#dataSourceSql").validatebox({required:false});
+				$("#dataSqlParam").validatebox({required:false});
 				$("#parentFuncNodeId").combotree({disabled:false});
 				var row = $('#funcNodeData').treegrid('getSelected');
 				if (row && row.funcNodeId != 0)
 				{
 					$('#dlg').dialog('open').dialog('setTitle','修改功能');
+					$("#comboArea").css("display","none");
 					$('#fm').form('clear');
 					if(row.funcNodeType == 'M')
 					{
@@ -187,6 +323,16 @@
 						$("#html").textbox("readonly",true);
 						$("#fieldArea").css("display","block");
 						$("#fieldId").textbox("readonly",true);
+						if(row.widgetType == "combobox")
+						{
+							$("#widgetType").validatebox({required:true});
+							$("#dataType").validatebox({required:true});
+						}
+						else
+						{
+							$("#widgetType").validatebox({required:false});
+							$("#dataType").validatebox({required:false});
+						}
 					}
 					$('#fm').form('load',row);
 					if(row.parentFuncNodeId != 0)
@@ -218,11 +364,37 @@
 						{
 							$.messager.alert('提示',"输入功能信息不全,请核实后重新尝试");
 						}
+						else
+						{
+							if($("#comboArea").css("display") == "block")
+							{
+								var widgetType = $("#widgetType").combobox("getValue");
+								if(widgetType != "")
+								{
+									if($("#fieldArea").css("display") == "block")
+									{
+										var dataType = $("#dataType").combobox("getValue");
+										if(dataType == "")
+										{
+											$.messager.alert('提示',"输入功能信息不全,请核实后重新尝试");
+											validateFlag = false;
+										}
+									}
+								}
+								else
+								{
+									$.messager.alert('提示',"输入功能信息不全,请核实后重新尝试");
+									validateFlag = false;
+								}
+							}
+						}
 						return validateFlag;
 					},
 					success: function(result){
 						if (result == "success"){
 							$('#dlg').dialog('close');		
+							refreshFunc();
+							gNewDataType = false;
 							$("#funcNodeData").treegrid("reload");
 						} else {
 							$.messager.alert('提示',result);

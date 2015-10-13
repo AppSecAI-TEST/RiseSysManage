@@ -1,7 +1,9 @@
 package com.rise.controller;
 
 import java.io.PrintWriter;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,5 +66,31 @@ public class PubController
 			}
 		}
 	}
+	
+	@RequestMapping("/paramComboxList.do")
+	public void paramComboxList(HttpServletResponse response , HttpServletRequest request)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			Map<String,String[]> paramMap = request.getParameterMap();
+			String retVal = pubService.paramComboxList(paramMap);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 	
 }

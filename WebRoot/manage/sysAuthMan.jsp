@@ -33,7 +33,7 @@
 		</div>
 		<div id="dlg" class="easyui-dialog easyui-layout" style="width:500px;height:350px;padding:0px 0px" modal="true" closed="true" buttons="#dlg-buttons">
 			<div data-options="region:'west'" style="width:50%;height:100%;margin:0 auto;padding:0 0;">
-				<table id="dgRoleList" title="系统角色" class="easyui-datagrid" data-options="url:'/sys/sysRole/qryTotalRoleList.do',onClickRow:roleListRowClick" style="width:100%;height:100%;margin:0 auto;padding:0 0;" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="true">
+				<table id="dgRoleList" title="系统角色" class="easyui-datagrid" data-options="onClickRow:roleListRowClick" style="width:100%;height:100%;margin:0 auto;padding:0 0;" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="true">
 					<thead>
 						<tr>
 							<th field="sysRoleId" checkbox="true"></th>
@@ -52,7 +52,7 @@
 		</div>
 		<div id="dlgPriv" class="easyui-dialog easyui-layout" style="width:800px;height:350px;padding:0px 0px" modal="true" closed="true" buttons="#dlgPriv-buttons">
 			<div data-options="region:'west'" style="width:33%;height:100%;margin:0 auto;padding:0 0;">
-				<table id="dgPrivRoleList" title="系统角色" class="easyui-datagrid" data-options="url:'/sys/sysRole/qryTotalRoleList.do',onClickRow:roleListRowPrivClick" style="width:100%;height:100%;margin:0 auto;padding:0 0;" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="true">
+				<table id="dgPrivRoleList" title="系统角色" class="easyui-datagrid" data-options="onClickRow:roleListRowPrivClick" style="width:100%;height:100%;margin:0 auto;padding:0 0;" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="true">
 					<thead>
 						<tr>
 							<th field="sysRoleId" checkbox="true"></th>
@@ -114,6 +114,12 @@
 			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#datagridSettingDlg').dialog('close')">取消</a>
 		</div>
 		<script type="text/javascript">
+			$(document).ready(function(){
+				$.post("/sys/sysRole/qryTotalRoleList.do",function(data){
+					$("#dgRoleList").datagrid("loadData",data);
+					$("#dgPrivRoleList").datagrid("loadData",data);
+				},"json");
+			});
 			function getTreeNode()
 			{
 				var node = $('#funcNodeTree').tree('getSelected');
@@ -206,20 +212,40 @@
 				if (row){
 					if(row.resourceT.widgetType == "combobox")
 					{
-						$('#datagridSettingDlg').dialog('open').dialog('setTitle','调整功能');
-						$("#datagridSettingData").css("height","400px");
-						$("#datagridSettingData").datagrid({
-							url:"/sys/funcNode/getCtrlData.do?resourceId="+row.html+"&funcNodeId="+row.parentFuncNodeId+"&sysRoleId="+roleRow.sysRoleId,
-							onLoadSuccess:function(data){
-								if(data){
-						            $.each(data.rows, function(index, item){
-						                if(item.checked){
-						                    $('#datagridSettingData').datagrid('checkRow', index);
-						                }
-						            });
-						        }
-							}
-						});
+						if(row.resourceT.dataType == "P")
+						{
+							$('#datagridSettingDlg').dialog('open').dialog('setTitle','调整功能');
+							$("#datagridSettingData").css("height","400px");
+							$("#datagridSettingData").datagrid({
+								url:"/sys/funcNode/getParamCtrlData.do?resourceId="+row.html+"&funcNodeId="+row.parentFuncNodeId+"&sysRoleId="+roleRow.sysRoleId,
+								onLoadSuccess:function(data){
+									if(data){
+							            $.each(data.rows, function(index, item){
+							                if(item.checked){
+							                    $('#datagridSettingData').datagrid('checkRow', index);
+							                }
+							            });
+							        }
+								}
+							});
+						}
+						else
+						{
+							$('#datagridSettingDlg').dialog('open').dialog('setTitle','调整功能');
+							$("#datagridSettingData").css("height","400px");
+							$("#datagridSettingData").datagrid({
+								url:"/sys/funcNode/getCtrlData.do?resourceId="+row.html+"&funcNodeId="+row.parentFuncNodeId+"&sysRoleId="+roleRow.sysRoleId,
+								onLoadSuccess:function(data){
+									if(data){
+							            $.each(data.rows, function(index, item){
+							                if(item.checked){
+							                    $('#datagridSettingData').datagrid('checkRow', index);
+							                }
+							            });
+							        }
+								}
+							});
+						}
 					}
 					else
 					{

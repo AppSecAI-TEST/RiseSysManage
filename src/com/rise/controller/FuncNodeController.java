@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -375,6 +374,30 @@ public class FuncNodeController
 	
 	@RequestMapping("/getCtrlData.do")
 	public void getCtrlData(HttpServletResponse response , HttpServletRequest request , String resourceId , String funcNodeId , String sysRoleId)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = funcNodeService.getCtrlData(resourceId, funcNodeId, sysRoleId);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/getParamCtrlData.do")
+	public void getParamCtrlData(HttpServletResponse response , HttpServletRequest request , String resourceId , String funcNodeId , String sysRoleId)
 	{
 		PrintWriter out = null;
 		try

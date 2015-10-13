@@ -28,6 +28,12 @@ public class ResourceT {
 	private String dataSourceName;
 
     private String dataSourceSql;
+    
+    private String dataType;
+    
+    private String dataSqlName;
+    
+    private String dataSqlParam;
 
     private Integer funcNodeId;
 
@@ -141,7 +147,31 @@ public class ResourceT {
         this.dataSourceSql = dataSourceSql == null ? null : dataSourceSql.trim();
     }
 
-    public Integer getFuncNodeId() {
+    public String getDataType() {
+		return dataType;
+	}
+
+	public void setDataType(String dataType) {
+		this.dataType = dataType;
+	}
+
+	public String getDataSqlName() {
+		return dataSqlName;
+	}
+
+	public void setDataSqlName(String dataSqlName) {
+		this.dataSqlName = dataSqlName;
+	}
+
+	public String getDataSqlParam() {
+		return dataSqlParam;
+	}
+
+	public void setDataSqlParam(String dataSqlParam) {
+		this.dataSqlParam = dataSqlParam;
+	}
+
+	public Integer getFuncNodeId() {
         return funcNodeId;
     }
 

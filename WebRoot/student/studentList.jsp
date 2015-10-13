@@ -38,7 +38,7 @@
 						<span>学员姓名：</span>
 					</td>
 					<td width="100px">
-						<select id="name" name="name" class="easyui-combobox" style="width: 100px; height: 25px;">
+						<select id="staffName" name="staffName" class="easyui-combobox" style="width: 114px; height: 25px;" data-options="formatter:function(data){return '<span>'+data.staffName+'</span>';}, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto', onLoadSuccess:function(data){if(data.length > 0)$('#schoolId').combobox('setValue',data[0].schoolId);}"	url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=staffName">
       					</select>
 					</td>
 					<td align="right">
