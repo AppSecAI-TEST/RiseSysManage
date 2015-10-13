@@ -139,6 +139,13 @@ var gPropertyObject = {
 	}
 };
 
+var gPrivCtrl = function(staffId , funcNodeId , fieldId){
+	gPropertyObject.staffId = staffId;
+	gPropertyObject.funcNodeId = funcNodeId;
+	gPropertyObject.fieldId = fieldId;
+	return gPropertyObject.filterFunc();
+}
+
 function myformatter(date) {
 	var y = date.getFullYear();
 	var m = date.getMonth() + 1;
