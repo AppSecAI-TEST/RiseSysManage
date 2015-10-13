@@ -383,7 +383,7 @@ public class QryPubDataController
 	 * @param response
 	 */
 	@RequestMapping(value = "/getClassType.do")
-	public void getClassType(HttpServletResponse response)
+	public void getClassType(String stageId,HttpServletResponse response)
 	{
 	 
 		PrintWriter out = null;
@@ -391,7 +391,7 @@ public class QryPubDataController
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = qryPubDataService.getClassType();
+			String retVal = qryPubDataService.getClassType(stageId);
 			log.error(retVal);
 			out.write(retVal);
 		}

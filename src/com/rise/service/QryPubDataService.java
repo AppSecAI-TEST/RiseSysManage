@@ -127,9 +127,9 @@ public class QryPubDataService
 	 * @return
 	 * @throws Exception
 	 */
-	public String getClassType() throws Exception 
+	public String getClassType(String stageId) throws Exception 
 	{
-		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10113\",securityCode:\"0000000000\",params:{},rtnDataFormatType:\"user-defined\"}";
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10114\",securityCode:\"0000000000\",params:{stageId:\""+stageId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
 	
