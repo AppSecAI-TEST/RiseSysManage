@@ -21,9 +21,9 @@
 			</thead>
 		</table>
 		<div id="toolbar">
-   			<a href="javascript:void(0)" id="addFuncNode" onclick="newFuncNode()" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px;">新增功能</a>
-   			<a href="javascript:void(0)" id="updateFuncNode" onclick="editFuncNode()" class="easyui-linkbutton" iconCls="icon-edit" style="width: 120px;">修改功能</a>
-   			<a href="javascript:void(0)" id="deleteFuncNode" onclick="removeFuncNode()" class="easyui-linkbutton" iconCls="icon-remove" style="width: 120px;">删除功能</a>
+   			<a href="javascript:void(0)" id="addFuncNode" onclick="newFuncNode()" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">新增功能</a>
+   			<a href="javascript:void(0)" id="updateFuncNode" onclick="editFuncNode()" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">修改功能</a>
+   			<a href="javascript:void(0)" id="deleteFuncNode" onclick="removeFuncNode()" class="easyui-linkbutton" iconCls="icon-remove" style="width: 100px;">删除功能</a>
 		</div>
 		<div id="dlg" class="easyui-dialog" style="width:480px;height:350px;padding:0px 0px;" modal="true" closed="true" buttons="#dlg-buttons">
 			<form id="fm" method="post" novalidate>

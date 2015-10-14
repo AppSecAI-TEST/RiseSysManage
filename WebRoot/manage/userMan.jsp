@@ -33,9 +33,9 @@
 				</thead>
 			</table>
 			<div id="toolbar">
-	   			<a href="javascript:void(0)" id="addStaff" class="easyui-linkbutton" iconCls="icon-add" onclick="newStaff()" style="width: 120px;">新增用户</a>
-	   			<a href="javascript:void(0)" id="updateStaff" class="easyui-linkbutton" iconCls="icon-edit" onclick="editStaff()" style="width: 120px;">修改用户</a>
-	   			<a href="javascript:void(0)" id="deleteStaff" class="easyui-linkbutton" iconCls="icon-remove" onclick="removeStaff()" style="width: 120px;">删除用户</a>
+	   			<a href="javascript:void(0)" id="addStaff" class="easyui-linkbutton" iconCls="icon-add" onclick="newStaff()" style="width: 100px;">新增用户</a>
+	   			<a href="javascript:void(0)" id="updateStaff" class="easyui-linkbutton" iconCls="icon-edit" onclick="editStaff()" style="width: 100px;">修改用户</a>
+	   			<a href="javascript:void(0)" id="deleteStaff" class="easyui-linkbutton" iconCls="icon-remove" onclick="removeStaff()" style="width: 100px;">删除用户</a>
 			</div>
 			<div id="dlg" class="easyui-dialog" style="width:480px;height:300px;padding:0px 0px" modal="true" closed="true" buttons="#dlg-buttons">
 				<form id="fm" method="post" novalidate>

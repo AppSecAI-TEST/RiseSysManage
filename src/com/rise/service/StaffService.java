@@ -32,7 +32,7 @@ public class StaffService {
 	
 	public String deleteStaff(String staffId) throws Exception
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2006\",securityCode:\"0000000000\",params:{deptId:\""+staffId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2006\",securityCode:\"0000000000\",params:{staffId:\""+staffId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 	
