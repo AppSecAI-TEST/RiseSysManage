@@ -28,7 +28,7 @@
 						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 114px; height: 25px;"
 						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
 	      				onLoadSuccess:function(data){$('#stageId').combobox('setValue',data[0].codeFlag);}" 
-	      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID">
+	      				url="<%=path %>/pubData/qryStage.do">
 		        		</select>
 					</td>
 					<td align="right"><span>开班状态：</span></td>
