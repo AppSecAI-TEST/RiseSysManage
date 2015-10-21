@@ -3,7 +3,6 @@ package com.rise.service;
 import java.util.List;
 
 import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.rise.model.PostT;
 import com.rise.pub.base.JacksonJsonMapper;
 import com.rise.pub.invoke.ServiceEngine;
-import com.rise.pub.util.JsonUtils;
 import com.rise.pub.util.ObjectCensor;
 import com.rise.pub.util.StringUtil;
 
@@ -56,6 +54,12 @@ public class PostService
 	public String deletePost(String postId) throws Exception
 	{
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2035\",securityCode:\"0000000000\",params:{postId:\""+postId+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+	
+	public String qryPostInfoList() throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2036\",securityCode:\"0000000000\",params:{},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 }

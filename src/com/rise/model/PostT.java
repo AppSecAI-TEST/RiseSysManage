@@ -6,6 +6,8 @@ public class PostT {
     private Integer postId;
 
     private String postName;
+    
+    private String postType;
 
     private Integer deptId;
 
@@ -36,8 +38,16 @@ public class PostT {
     public void setPostName(String postName) {
         this.postName = postName == null ? null : postName.trim();
     }
+    
+    public String getPostType() {
+		return postType;
+	}
 
-    public Integer getDeptId() {
+	public void setPostType(String postType) {
+		this.postType = postType;
+	}
+
+	public Integer getDeptId() {
         return deptId;
     }
 

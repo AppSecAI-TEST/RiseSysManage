@@ -20,6 +20,10 @@
 					<input name="postName" id="postName" type="text" style="width:565px" class="easyui-textbox easyui-validatebox" required="true" />
 				</div>
 				<div class="fitem">
+					<label style="text-align:right">职位类型:</label>
+					<select id="postType" name="postType" style="width:565px" ></select>
+				</div>
+				<div class="fitem">
 					<label style="text-align:right">归属部门:</label>
 					<select class="easyui-combotree" animate="true" id="deptId" name="deptId" style="width:565px" ></select>
 				</div>
@@ -49,6 +53,17 @@
 			</div>
 		</form>
 		<script type="text/javascript">
+			$("#deptId").combotree({animate:true});
+			$("#staffState").combobox({
+				url:"<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=staffState",
+				formatter:function(row){
+					return '<span>'+row.codeName+'</span>';
+				},
+				editable:false, 
+				valueField: 'codeFlag', 
+				textField: 'codeName', 
+				panelHeight: 'auto'
+			});
 			$(document).ready(function(){
 				$("#postName").textbox("setValue",'${PostT.postName}');
 				$("#postRemark").textbox("setValue",'${PostT.postRemark}');

@@ -33,10 +33,11 @@
 				<thead>
 					<tr>
 						<th data-options="field:'postId',checkbox:true"></th>
-						<th width="24%" field="postName">职位名称</th>
-						<th width="25%" field="deptName">归属部门</th>
-						<th width="25%" field="schoolIdsName">管辖范围</th>
-						<th width="25%" field="createDate">创建时间</th>
+						<th width="20%" field="postName">职位名称</th>
+						<th width="19%" field="postTypeName">职位类型</th>
+						<th width="20%" field="deptName">归属部门</th>
+						<th width="20%" field="schoolIdsName">管辖范围</th>
+						<th width="20%" field="createDate">创建时间</th>
 					</tr>
 				</thead>
 			</table>

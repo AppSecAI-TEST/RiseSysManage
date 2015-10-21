@@ -58,6 +58,29 @@ public class PostController
 		return model;
 	}
 	
+	@RequestMapping("/qryPostInfoList.do")
+	public void qryPostInfoList(HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = postService.qryPostInfoList();
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 	
 	@RequestMapping("/addPost.do")
 	public void addPost(HttpServletResponse response , PostT postT)

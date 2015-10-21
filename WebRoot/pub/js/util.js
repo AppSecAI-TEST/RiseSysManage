@@ -1,74 +1,96 @@
 var to =null;
 var countProgress =null;
-$
-		.extend(
-				$.fn.linkbutton.methods,
-				{
-					enable : function(jq) {
-						return jq.each(function() {
-							var state = $.data(this, 'linkbutton');
-							if ($(this).hasClass('l-btn-disabled')) {
-								var itemData = state._eventsStore;
-								//恢复超链接 
-								if (itemData.href) {
-									$(this).attr("href", itemData.href);
-								}
-								//回复点击事件 
-								if (itemData.onclicks) {
-									for ( var j = 0; j < itemData.onclicks.length; j++) {
-										$(this).bind('click',
-												itemData.onclicks[j]);
-									}
-								}
-								//设置target为null，清空存储的事件处理程序 
-								itemData.target = null;
-								itemData.onclicks = [];
-								$(this).removeClass('l-btn-disabled');
-							}
-						});
-					},
-					disable : function(jq) {
-						return jq.each(function() {
-							var state = $.data(this, 'linkbutton');
-							if (!state._eventsStore)
-								state._eventsStore = {};
-							if (!$(this).hasClass('l-btn-disabled')) {
-								var eventsStore = {};
-								eventsStore.target = this;
-								eventsStore.onclicks = [];
-								//处理超链接 
-								var strHref = $(this).attr("href");
-								if (strHref) {
-									eventsStore.href = strHref;
-									$(this).attr("href", "javascript:void(0)");
-								}
-								//处理直接耦合绑定到onclick属性上的事件 
-								var onclickStr = $(this).attr("onclick");
-								if (onclickStr && onclickStr != "") {
-									eventsStore.onclicks[eventsStore.onclicks.length] = new Function(
-											onclickStr);
-									$(this).attr("onclick", "");
-								}
-								//处理使用jquery绑定的事件 
-								var eventDatas = $(this).data("events")
-										|| $._data(this, 'events');
-								if (eventDatas["click"]) {
-									var eventData = eventDatas["click"];
-									for ( var i = 0; i < eventData.length; i++) {
-										if (eventData[i].namespace != "menu") {
-											eventsStore.onclicks[eventsStore.onclicks.length] = eventData[i]["handler"];
-											$(this).unbind('click',
-													eventData[i]["handler"]);
-											i--;
-										}
-									}
-								}
-								state._eventsStore = eventsStore;
-								$(this).addClass('l-btn-disabled');
-							}
-						});
+$.extend($.fn.linkbutton.methods,{
+	enable : function(jq) {
+		return jq.each(function() {
+			var state = $.data(this, 'linkbutton');
+			if ($(this).hasClass('l-btn-disabled')) {
+				var itemData = state._eventsStore;
+				//恢复超链接 
+				if (itemData.href) {
+					$(this).attr("href", itemData.href);
+				}
+				//回复点击事件 
+				if (itemData.onclicks) {
+					for ( var j = 0; j < itemData.onclicks.length; j++) {
+						$(this).bind('click',
+								itemData.onclicks[j]);
 					}
-				});
+				}
+				//设置target为null，清空存储的事件处理程序 
+				itemData.target = null;
+				itemData.onclicks = [];
+				$(this).removeClass('l-btn-disabled');
+			}
+		});
+	},
+	disable : function(jq) {
+		return jq.each(function() {
+			var state = $.data(this, 'linkbutton');
+			if (!state._eventsStore)
+				state._eventsStore = {};
+			if (!$(this).hasClass('l-btn-disabled')) {
+				var eventsStore = {};
+				eventsStore.target = this;
+				eventsStore.onclicks = [];
+				//处理超链接 
+				var strHref = $(this).attr("href");
+				if (strHref) {
+					eventsStore.href = strHref;
+					$(this).attr("href", "javascript:void(0)");
+				}
+				//处理直接耦合绑定到onclick属性上的事件 
+				var onclickStr = $(this).attr("onclick");
+				if (onclickStr && onclickStr != "") {
+					eventsStore.onclicks[eventsStore.onclicks.length] = new Function(
+							onclickStr);
+					$(this).attr("onclick", "");
+				}
+				//处理使用jquery绑定的事件 
+				var eventDatas = $(this).data("events")
+						|| $._data(this, 'events');
+				if (eventDatas["click"]) {
+					var eventData = eventDatas["click"];
+					for ( var i = 0; i < eventData.length; i++) {
+						if (eventData[i].namespace != "menu") {
+							eventsStore.onclicks[eventsStore.onclicks.length] = eventData[i]["handler"];
+							$(this).unbind('click',
+									eventData[i]["handler"]);
+							i--;
+						}
+					}
+				}
+				state._eventsStore = eventsStore;
+				$(this).addClass('l-btn-disabled');
+			}
+		});
+	}
+});
+
+$.extend($.fn.datagrid.methods, {    
+	addEditor : function(jq, param) {        
+		if (param instanceof Array) {            
+			$.each(param, function(index, item) {                
+				var e = $(jq).datagrid('getColumnOption', item.field);                
+				e.editor = item.editor;            
+			});        
+		} else {
+			var e = $(jq).datagrid('getColumnOption', param.field);            
+			e.editor = param.editor;        
+		}    
+	},    
+	removeEditor : function(jq, param) {        
+		if (param instanceof Array) {            
+			$.each(param, function(index, item) {                
+				var e = $(jq).datagrid('getColumnOption', item);                
+				e.editor = {};            
+			});
+		} else {
+			var e = $(jq).datagrid('getColumnOption', param);            
+			e.editor = {};        
+		}    
+	}
+});
 
 var gPropertyObject = {
 	staffId : "",
@@ -196,6 +218,21 @@ function formatStaff(row) {
 	return s;
 }
 
+function formatClassInst(row) {
+	var s = '<span>' + row.className + '</span>';
+	return s;
+}
+
+function formatTeacher(row) {
+	var s = '<span>' + row.byname + '</span>';
+	return s;
+}
+
+function formatRoom(row) {
+	var s = '<span>' + row.roomName + '</span>';
+	return s;
+}
+
 function myLoadFilter(data,parentId){
 	function setData(){
 		var todo = [];
@@ -271,20 +308,6 @@ function MergeCells(tableID, fldList) {
 			}
 		}
 	}
-}
-function formatClassInst(row) {
-	var s = '<span>' + row.className + '</span>';
-	return s;
-}
-
-function formatTeacher(row) {
-	var s = '<span>' + row.byname + '</span>';
-	return s;
-}
-
-function formatRoom(row) {
-	var s = '<span>' + row.roomName + '</span>';
-	return s;
 }
 
 //请空name内所有控件的值
