@@ -34,7 +34,7 @@ Date.prototype.Format = function(fmt)
  function AddDays(d, n) {
      var t = new Date(d);//复制并操作新对象，避免改动原对象
      t.setDate(t.getDate() + n);
-     return t;
+     return t.format("yyyy-MM-dd");
  }
  
  //日期+月。日对日，若目标月份不存在该日期，则置为最后一日

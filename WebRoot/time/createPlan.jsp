@@ -44,7 +44,7 @@ $('#weekDg').datagrid({
 	 border:false,  
     fitColumns:true,  
     singleSelect: true,  
-   url: "/sys/time/getWeek.do?param={'month':'10','week':'1'}",
+    url: "/sys/time/getWeek.do?param={'month':'10','week':'1'}",
     columns:[[  
         {field:'weekName',title:'周',width:80},  
         {field:'date',title:'时间段',width:25},  
