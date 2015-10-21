@@ -102,7 +102,10 @@
 					$("#userList").datagrid({
 						url:"<%=path %>/staff/qryStaffListByDeptId.do?deptId="+node.id,
 						onLoadSuccess:function(data){
-							$(".operButton").linkbutton({text:data.state=="00A"?'离职':'复职',iconCls:"icon-reload"})
+							for(var i = 0,n = data.total;i < n;i++)
+							{
+								$("#operButton"+i).linkbutton({text:data.rows[i].state=="00A"?'离职':'复职',iconCls:"icon-reload"});
+							}
 						}
 					});
 				}

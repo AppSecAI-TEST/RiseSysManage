@@ -54,8 +54,8 @@
 		</form>
 		<script type="text/javascript">
 			$("#deptId").combotree({animate:true});
-			$("#staffState").combobox({
-				url:"<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=staffState",
+			$("#postType").combobox({
+				url:"<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=postType",
 				formatter:function(row){
 					return '<span>'+row.codeName+'</span>';
 				},

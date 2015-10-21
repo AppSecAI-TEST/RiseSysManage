@@ -28,7 +28,7 @@
 			</table>
 		</form>
 		<div style="padding:5px 0;min-width:1100px; width:100%;">
-			<table class="easyui-datagrid" title="职务列表" style="height:475px;" id="postList" url="/sys/post/queryPostList.do" 
+			<table class="easyui-datagrid" title="职务列表" style="height:460px;" id="postList" url="/sys/post/queryPostList.do" 
 				toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
