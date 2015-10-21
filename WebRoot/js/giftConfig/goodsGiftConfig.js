@@ -102,7 +102,7 @@ function updateGoods(giftId,giftCode,giftName,amount,useType,getRemark,effRemark
 	$("input[name='isEff']").each(function(i,node){
 		if(node.value == isEff)
 		{
-			$(this).attr("checked","checked");
+			$(this).prop("checked","checked");
 		}
 	});
     goodsUrl = "/sys/giftConfig/updateGiftConfig.do";

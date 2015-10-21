@@ -140,7 +140,7 @@ function updateCourseName(giftId,giftType,giftName,amount,giftNum,isEff)
 	$("input[name='isEff']").each(function(i,node){
 		if(node.value == isEff)
 		{
-			$(this).attr("checked","checked");
+			$(this).prop("checked","checked");
 		}
 	});
 	$('#giftCourseType').combobox({
@@ -290,7 +290,7 @@ function updateCourseType()
 	$("input[name='manageType']").each(function(i,node){
 		if(node.value == $("#manageTypeTd").val())
 		{
-			$(this).attr("checked","checked");
+			$(this).prop("checked","checked");
 		}
 	});
 }

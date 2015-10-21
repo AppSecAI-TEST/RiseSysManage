@@ -142,7 +142,7 @@ function updateCouponName(giftId,giftType,giftName,amount,isEff)
 	$("input[name='isEff']").each(function(i,node){
 		if(node.value == isEff)
 		{
-			$(this).attr("checked","checked");
+			$(this).prop("checked","checked");
 		}
 	});
 	$('#giftCouponType').combobox({
@@ -298,7 +298,7 @@ function updateCouponType()
 	$("input[name='isMinus']").each(function(i,node){
 		if(node.value == $("#isMinus").val())
 		{
-			$(this).attr("checked","checked");
+			$(this).prop("checked","checked");
 		}
 	});
 }

@@ -97,7 +97,7 @@ function updateTextbook(giftId,giftCode,giftName,useType,getRemark,isEff){
 	$("input[name='isEff']").each(function(i,node){
 		if(node.value == isEff)
 		{
-			$(this).attr("checked","checked");
+			$(this).prop("checked","checked");
 		}
 	});
     textbookUrl = "/sys/giftConfig/updateGiftConfig.do";
