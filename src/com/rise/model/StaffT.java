@@ -1,185 +1,329 @@
 package com.rise.model;
-// default package
 
 import java.util.Date;
 
-/**
- * StaffT entity. @author MyEclipse Persistence Tools
- */
-public class StaffT implements java.io.Serializable {
+public class StaffT {
+    private Integer staffId;
 
-	// Fields
+    private Integer schoolId;
 
-	private Integer staffId;
-	private Integer schoolId;
-	private String staffName;
-	private String userName;
-	private String password;
-	private Integer post;
-	private Integer deptId;
-	private Date hireDate;
-	private String phone;
-	private String state;
-	private Date createDate;
-	private Integer handlerId;
-	private String remoteIp;
-	private Date lastDate;
-	private OrgDeptT orgDeptT;
+    private String staffName;
 
-	// Constructors
+    private String userName;
 
-	/** default constructor */
-	public StaffT() {
-	}
+    private String password;
 
-	/** minimal constructor */
-	public StaffT(Integer staffId, Integer schoolId, String staffName,
-			String userName, String password, Integer post, Date hireDate,
-			String state, Date createDate, Integer handlerId) {
-		this.staffId = staffId;
-		this.schoolId = schoolId;
-		this.staffName = staffName;
-		this.userName = userName;
-		this.password = password;
-		this.post = post;
-		this.hireDate = hireDate;
-		this.state = state;
-		this.createDate = createDate;
-		this.handlerId = handlerId;
-	}
+    private String post;
 
-	/** full constructor */
-	public StaffT(Integer staffId, Integer schoolId, String staffName,
-			String userName, String password, Integer post, Date hireDate,
-			String phone, String state, Date createDate,
-			Integer handlerId, String remoteIp, Date lastDate) {
-		this.staffId = staffId;
-		this.schoolId = schoolId;
-		this.staffName = staffName;
-		this.userName = userName;
-		this.password = password;
-		this.post = post;
-		this.hireDate = hireDate;
-		this.phone = phone;
-		this.state = state;
-		this.createDate = createDate;
-		this.handlerId = handlerId;
-		this.remoteIp = remoteIp;
-		this.lastDate = lastDate;
-	}
+    private Integer deptId;
 
-	// Property accessors
-	public Integer getStaffId() {
-		return this.staffId;
-	}
+    private Date hireDate;
 
-	public void setStaffId(Integer staffId) {
-		this.staffId = staffId;
-	}
+    private String gender;
 
-	public Integer getSchoolId() {
-		return this.schoolId;
-	}
+    private String certType;
 
-	public void setSchoolId(Integer schoolId) {
-		this.schoolId = schoolId;
-	}
+    private String certNum;
 
-	public String getStaffName() {
-		return this.staffName;
-	}
+    private Date birthday;
 
-	public void setStaffName(String staffName) {
-		this.staffName = staffName;
-	}
+    private String phone;
 
-	public String getUserName() {
-		return this.userName;
-	}
+    private String familyAddr;
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    private String familyPhone;
 
-	public String getPassword() {
-		return this.password;
-	}
+    private String qq;
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    private String graduateSchool;
 
-	public Integer getPost() {
-		return this.post;
-	}
+    private String educationDegree;
 
-	public void setPost(Integer post) {
-		this.post = post;
-	}
-	
-	public Integer getDeptId() {
-		return deptId;
-	}
+    private String profession;
 
-	public void setDeptId(Integer deptId) {
-		this.deptId = deptId;
-	}
+    private Date joinDate;
 
-	public Date getHireDate() {
-		return this.hireDate;
-	}
+    private Date agreementDate;
 
-	public void setHireDate(Date hireDate) {
-		this.hireDate = hireDate;
-	}
+    private String jobProperty;
 
-	public String getPhone() {
-		return this.phone;
-	}
+    private String nationality;
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    private String educationExperience;
 
-	public String getState() {
-		return this.state;
-	}
+    private String workExperience;
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    private String remark;
 
-	public Date getCreateDate() {
-		return this.createDate;
-	}
+    private String remoteIp;
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
+    private Date lastDate;
 
-	public Integer getHandlerId() {
-		return this.handlerId;
-	}
+    private String state;
 
-	public void setHandlerId(Integer handlerId) {
-		this.handlerId = handlerId;
-	}
+    private Date createDate;
 
-	public String getRemoteIp() {
-		return this.remoteIp;
-	}
+    private Date stateDate;
 
-	public void setRemoteIp(String remoteIp) {
-		this.remoteIp = remoteIp;
-	}
+    private Integer handlerId;
+    
+    private OrgDeptT orgDeptT;
 
-	public Date getLastDate() {
-		return this.lastDate;
-	}
+    public Integer getStaffId() {
+        return staffId;
+    }
 
-	public void setLastDate(Date lastDate) {
-		this.lastDate = lastDate;
-	}
+    public void setStaffId(Integer staffId) {
+        this.staffId = staffId;
+    }
+
+    public Integer getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(Integer schoolId) {
+        this.schoolId = schoolId;
+    }
+
+    public String getStaffName() {
+        return staffName;
+    }
+
+    public void setStaffName(String staffName) {
+        this.staffName = staffName == null ? null : staffName.trim();
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
+        this.post = post == null ? null : post.trim();
+    }
+
+    public Integer getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
+    }
+
+    public Date getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(Date hireDate) {
+        this.hireDate = hireDate;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender == null ? null : gender.trim();
+    }
+
+    public String getCertType() {
+        return certType;
+    }
+
+    public void setCertType(String certType) {
+        this.certType = certType == null ? null : certType.trim();
+    }
+
+    public String getCertNum() {
+        return certNum;
+    }
+
+    public void setCertNum(String certNum) {
+        this.certNum = certNum == null ? null : certNum.trim();
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
+    }
+
+    public String getFamilyAddr() {
+        return familyAddr;
+    }
+
+    public void setFamilyAddr(String familyAddr) {
+        this.familyAddr = familyAddr == null ? null : familyAddr.trim();
+    }
+
+    public String getFamilyPhone() {
+        return familyPhone;
+    }
+
+    public void setFamilyPhone(String familyPhone) {
+        this.familyPhone = familyPhone == null ? null : familyPhone.trim();
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq == null ? null : qq.trim();
+    }
+
+    public String getGraduateSchool() {
+        return graduateSchool;
+    }
+
+    public void setGraduateSchool(String graduateSchool) {
+        this.graduateSchool = graduateSchool == null ? null : graduateSchool.trim();
+    }
+
+    public String getEducationDegree() {
+        return educationDegree;
+    }
+
+    public void setEducationDegree(String educationDegree) {
+        this.educationDegree = educationDegree == null ? null : educationDegree.trim();
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession == null ? null : profession.trim();
+    }
+
+    public Date getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
+    }
+
+    public Date getAgreementDate() {
+        return agreementDate;
+    }
+
+    public void setAgreementDate(Date agreementDate) {
+        this.agreementDate = agreementDate;
+    }
+
+    public String getJobProperty() {
+        return jobProperty;
+    }
+
+    public void setJobProperty(String jobProperty) {
+        this.jobProperty = jobProperty == null ? null : jobProperty.trim();
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality == null ? null : nationality.trim();
+    }
+
+    public String getEducationExperience() {
+        return educationExperience;
+    }
+
+    public void setEducationExperience(String educationExperience) {
+        this.educationExperience = educationExperience == null ? null : educationExperience.trim();
+    }
+
+    public String getWorkExperience() {
+        return workExperience;
+    }
+
+    public void setWorkExperience(String workExperience) {
+        this.workExperience = workExperience == null ? null : workExperience.trim();
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
+    }
+
+    public String getRemoteIp() {
+        return remoteIp;
+    }
+
+    public void setRemoteIp(String remoteIp) {
+        this.remoteIp = remoteIp == null ? null : remoteIp.trim();
+    }
+
+    public Date getLastDate() {
+        return lastDate;
+    }
+
+    public void setLastDate(Date lastDate) {
+        this.lastDate = lastDate;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state == null ? null : state.trim();
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getStateDate() {
+        return stateDate;
+    }
+
+    public void setStateDate(Date stateDate) {
+        this.stateDate = stateDate;
+    }
+
+    public Integer getHandlerId() {
+        return handlerId;
+    }
+
+    public void setHandlerId(Integer handlerId) {
+        this.handlerId = handlerId;
+    }
 
 	public OrgDeptT getOrgDeptT() {
 		return orgDeptT;
@@ -188,5 +332,5 @@ public class StaffT implements java.io.Serializable {
 	public void setOrgDeptT(OrgDeptT orgDeptT) {
 		this.orgDeptT = orgDeptT;
 	}
-	
+    
 }

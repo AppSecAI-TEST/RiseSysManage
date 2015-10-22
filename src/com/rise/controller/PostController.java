@@ -7,37 +7,29 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.rise.service.SchoolTimeService;
+import com.rise.model.PostT;
+import com.rise.service.PostService;
 
-/**
- * 排课
- * @author Lapalnd_Alone
- *
- */
 @Controller
-@RequestMapping("/time")
-public class SchoolTimeController
+@RequestMapping("/post")
+public class PostController 
 {
-
 	@Autowired
-	public SchoolTimeService schoolTimeService;
+	private PostService postService;
 	
-	/**
-	 * 获取一周的排课计划
-	 * @param param
-	 * @param response
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "/getTimeByWeek.do")
-	public void getStuCourses(String param, HttpServletResponse response) throws Exception
+	@RequestMapping("/queryPostList.do")
+	public void queryPostList(HttpServletResponse response, String page, String rows, String postName)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = schoolTimeService.getSchoolTimeByWeek(param);
+			Integer pageNumInt = Integer.parseInt(page)-1;
+			Integer pageSizeInt = Integer.parseInt(rows);
+			String retVal = postService.queryPostList(pageNumInt*pageSizeInt, pageSizeInt, postName);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -45,7 +37,7 @@ public class SchoolTimeController
 			e.printStackTrace();
 		}
 		finally
-		{ 
+		{
 			if(out != null)
 			{
 				out.close();
@@ -53,51 +45,28 @@ public class SchoolTimeController
 		}
 	}
 	
-	/**
-	 * 增加排课
-	 * @param param
-	 * @param response
-	 */
-	@RequestMapping(value="/add.do")
-	public void addSchoolTime(String param,HttpServletResponse response)
+	@RequestMapping("/getPostInfo.do")
+	public ModelAndView getPostInfo(String postId , String funcNodeId)
 	{
-		PrintWriter out = null;
-		try
-		{
-			response.setCharacterEncoding("UTF-8");
-			out = response.getWriter();
-			String retVal = schoolTimeService.addSchoolTime(param);
-			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		ModelAndView model = new ModelAndView("manage/postDetail");
+		try {
+			postService.getPostInfo(model, postId, funcNodeId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		finally
-		{ 
-			if(out != null)
-			{
-				out.close();
-			}
-		}
-		
+		return model;
 	}
 	
-	/**
-	 * 删除排课
-	 * @param param
-	 * @param response
-	 */
-	@RequestMapping(value="/delete.do")
-	public void deleteSchoolTime(String param,HttpServletResponse response)
+	@RequestMapping("/qryPostInfoList.do")
+	public void qryPostInfoList(HttpServletResponse response)
 	{
-		
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = schoolTimeService.delSchoolTime(param);
+			String retVal = postService.qryPostInfoList();
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -105,7 +74,7 @@ public class SchoolTimeController
 			e.printStackTrace();
 		}
 		finally
-		{ 
+		{
 			if(out != null)
 			{
 				out.close();
@@ -113,20 +82,15 @@ public class SchoolTimeController
 		}
 	}
 	
-	/**
-	 * 增加排课
-	 * @param param
-	 * @param response
-	 */
-	@RequestMapping(value="/getWeek.do")
-	public void getWeek(String param,HttpServletResponse response)
+	@RequestMapping("/addPost.do")
+	public void addPost(HttpServletResponse response , PostT postT)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = schoolTimeService.getWeek(param);
+			String retVal = postService.addPost(postT);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -134,29 +98,23 @@ public class SchoolTimeController
 			e.printStackTrace();
 		}
 		finally
-		{ 
+		{
 			if(out != null)
 			{
 				out.close();
 			}
 		}
-		
 	}
 	
-	/**
-	 * 查询校区老师排课
-	 * @param param
-	 * @param response
-	 */
-	@RequestMapping(value="/getTplan.do")
-	public void getTeacherPlan(String param,HttpServletResponse response)
+	@RequestMapping("/updatePost.do")
+	public void updatePost(HttpServletResponse response , PostT postT)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = schoolTimeService.getTpaln(param);
+			String retVal = postService.updatePost(postT);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -164,12 +122,35 @@ public class SchoolTimeController
 			e.printStackTrace();
 		}
 		finally
-		{ 
+		{
 			if(out != null)
 			{
 				out.close();
 			}
 		}
 	}
-		
+	
+	@RequestMapping("/deletePost.do")
+	public void deletePost(HttpServletResponse response , String postId)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = postService.deletePost(postId);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }

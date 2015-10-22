@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.rise.model.StaffT;
 import com.rise.pub.util.DateEditor;
@@ -39,6 +40,32 @@ public class StaffController {
 			Integer pageNumInt = Integer.parseInt(page)-1;
 			Integer pageSizeInt = Integer.parseInt(rows);
 			String retVal = staffService.qryStaffListByDeptId(deptId, pageNumInt*pageSizeInt, pageSizeInt);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/qryStaffListByCondition.do")
+	public void qryStaffListByCondition(HttpServletResponse response, String page, String rows, String deptId , String userName , String post , String state)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			Integer pageNumInt = Integer.parseInt(page)-1;
+			Integer pageSizeInt = Integer.parseInt(rows);
+			String retVal = staffService.qryStaffListByCondition(deptId, userName, post, state, pageNumInt*pageSizeInt, pageSizeInt);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -102,6 +129,19 @@ public class StaffController {
 		}
 	}
 	
+	@RequestMapping("/getStaffDetail.do")
+	public ModelAndView getStaffDetail(String pageFlag , String staffId , String funcNodeId)
+	{
+		ModelAndView model = new ModelAndView("manage/userDetail");
+		try {
+			staffService.getStaffDetail(model, pageFlag, staffId, funcNodeId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
 	@RequestMapping("/addStaff.do")
 	public void addStaff(HttpServletResponse response , StaffT StaffT)
 	{
@@ -159,6 +199,30 @@ public class StaffController {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = staffService.deleteStaff(staffId);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+		
+	@RequestMapping("/dimissionStaff.do")
+	public void dimissionStaff(HttpServletResponse response , String operType , String staffId)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = staffService.dimissionStaff(operType,staffId);
 			out.write(retVal);
 		}
 		catch(Exception e)
