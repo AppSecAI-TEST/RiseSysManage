@@ -117,7 +117,7 @@ $(document).ready(function() {
 				$.messager.alert('提示', "您选择的学员班级的转班状态为"+changeClassStateText+"，不能转出！");
 			}
 		} else {
-			$.messager.alert('提示', "请先选择您要转出的学员班级！");
+			$.messager.alert('提示', "请先选择您要转出的转班申请！");
 		}
 	});
 	
@@ -137,7 +137,7 @@ $(document).ready(function() {
 				$.messager.alert('提示', "您选择的学员班级的转班状态为"+changeClassStateText+"，不能转入！");
 			}
 		} else {
-			$.messager.alert('提示', "请先选择您要转出的学员班级！");
+			$.messager.alert('提示', "请先选择您要转入的转班申请！");
 		}
 	});
 	
@@ -151,7 +151,7 @@ $(document).ready(function() {
 			var studentCourseId = row.studentCourseId;
 			window.location.href = "/sys/changeClass/cancelChangeClass.jsp?studentId="+studentId+"&studentCourseId="+studentCourseId+"&applyId="+applyId+"&schoolId="+schoolId;
 		} else {
-			$.messager.alert('提示', "请先选择您要取消的学员班级！");
+			$.messager.alert('提示', "请先选择您要取消的转班申请！");
 		}
 	});
 	
@@ -165,7 +165,7 @@ $(document).ready(function() {
 			var studentCourseId = row.studentCourseId;
 			window.location.href = "/sys/changeClass/updateChangeClass.jsp?studentId="+studentId+"&studentCourseId="+studentCourseId+"&applyId="+applyId+"&schoolId="+schoolId;
 		} else {
-			$.messager.alert('提示', "请先选择您要更改的学员班级！");
+			$.messager.alert('提示', "请先选择您要更改转班的转班申请！");
 		}
 	});
 	
@@ -176,7 +176,7 @@ $(document).ready(function() {
 			var applyId = row.applyId;
 			window.location.href = "/sys/changeClass/viewChangeClass.jsp?applyId="+applyId;
 		} else {
-			$.messager.alert('提示', "请先选择您要浏览的学员班级！");
+			$.messager.alert('提示', "请先选择您要浏览的转班申请！");
 		}
 	});
 	
@@ -205,7 +205,7 @@ $(document).ready(function() {
 			var applyId = row.applyId;
 			window.location.href = "/sys/changeClass/viewChangeClass.jsp?applyId="+applyId;
 		} else {
-			$.messager.alert('提示', "请先选择您要浏览的学员班级！");
+			$.messager.alert('提示', "请先选择您要浏览的转班申请！");
 		}
 	});
 });

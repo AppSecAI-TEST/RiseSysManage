@@ -18,6 +18,7 @@
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="转班审批">
   			<form id="approveChangeClassFm">
   				<input type="hidden" id="applyId" name="applyId" value="<%=applyId %>"/>
+  				<input type="hidden" id="applyType" name="applyType" value="001"/>
   				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   				<input type="hidden" id="studentCourseId" name="studentCourseId" value="<%=studentCourseId %>"/>

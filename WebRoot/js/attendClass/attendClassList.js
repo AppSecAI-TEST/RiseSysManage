@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$("#qryBtn").click(function() {
-    	var obj = JSON.stringify($("#qryFm").serializeObject());
+		var obj = JSON.stringify($("#qryFm").serializeObject());
     	obj = obj.substring(0, obj.length - 1);
     	var funcNodeId = $("#qryBtn").attr("funcNodeId");
     	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
@@ -14,7 +14,7 @@ $(document).ready(function() {
     			$('#list_data').datagrid('clearSelections');
     		}
     	});
-    });
+	});
 	
 	$("#stageId").combobox({
 		url : "/sys/pubData/qryStage.do",//返回json数据的url
@@ -28,9 +28,10 @@ $(document).ready(function() {
             }
         },
 		onChange : function(n, o) {
-			var schoolId = $("#schoolId").val();
+			var schoolId = $("#schoolId").combobox("getValue");
+			//转出班级
 			$("#classInstId").combobox({
-        		url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType=001&stageId="+n+"&classType=&classState=003&classInstId=",//返回json数据的url
+        		url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType=&stageId="+n+"&classType=&classState=&classInstId=",//返回json数据的url
         		valueField : "classInstId",
         		textField : "className",
         		panelHeight : "auto",
@@ -44,32 +45,36 @@ $(document).ready(function() {
 		}
 	});
 	
-	$("#applyChangeSubmit").click(function() {
+	//班级维护
+	$("#maintenanceBtn").click(function() {
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) {
-			var changeFlag = row.changeFlag;
-			if("Y" == changeFlag) {
-				var studentCourseId = row.studentCourseId;
-				var studentId = row.studentId;
-				var byName = row.byName;
-				var changeClassNum = row.changeClassNum;
-				var className = row.className;
-				var classProgress = row.classProgress;
-				var courseStateText = row.courseStateText;
-				var name = row.name;
-				var phone = row.phone;
-				var teacherName = row.teacherName;
-				var schoolId = row.schoolId;
-				var classInstId = row.classInstId;
-				var classType = row.classType;
-				var schoolName = row.schoolName;
-				var stageId = row.stageId;
-				window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&studentId="+studentId+"&byName="+byName+"&changeClassNum="+changeClassNum+"&className="+className+"&classProgress="+classProgress+"&courseStateText="+courseStateText+"&name="+name+"&phone="+phone+"&teacherName="+teacherName+"&schoolId="+schoolId+"&schoolName="+schoolName+"&classInstId="+classInstId+"&classType="+classType+"&stageId="+stageId;
-			} else {
-				$.messager.alert('提示', "您选择的学员课程已申请转班，不能再次申请转班！");
-			}
+			var classInstId = row.classInstId;
+			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=maintenance";
 		} else {
-			$.messager.alert('提示', "请先选择您要转班的学员课程！");
+			$.messager.alert('提示', "请先选择您要维护的班级！");
+		}
+	});
+	
+	//班级解散
+	$("#disbandBtn").click(function() {
+		var row = $('#list_data').datagrid('getSelected');
+		if(row) {
+			var classInstId = row.classInstId;
+			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=disband";
+		} else {
+			$.messager.alert('提示', "请先选择您要解散的班级！");
+		}
+	});
+	
+	//浏览
+	$("#view").click(function() {
+		var row = $('#list_data').datagrid('getSelected');
+		if(row) {
+			var classInstId = row.classInstId;
+			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=view";
+		} else {
+			$.messager.alert('提示', "请先选择您要浏览的班级！");
 		}
 	});
 });

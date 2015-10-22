@@ -88,17 +88,17 @@
 					</td>
 					<td width="100px" colspan="2">
 						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;"
-						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      				onLoadSuccess:function(data){$('#stageId').combobox('setValue',data[0].codeFlag);}" 
-	      				url="<%=path %>/pubData/qryStage.do">
+							data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
+		      				onLoadSuccess:function(data){if(data.length > 0) $('#stageId').combobox('setValue',data[0].stageId);}" 
+		      				url="<%=path %>/pubData/qryStage.do">
 		        		</select>
 					</td>
 					<td align="right"><span>业绩类型：</span></td>
 					<td width="100px">
 						<select id="feeType" name="feeType" class="easyui-combobox" style="width: 100px; height: 25px;"
-						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      				onLoadSuccess:function(data){$('#feeType').combobox('setValue',data[0].codeFlag);}" 
-	      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
+							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+		      				onLoadSuccess:function(data){$('#feeType').combobox('setValue',data[0].codeFlag);}" 
+		      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
 		        		</select>
 					</td>
 					<td align="right"><span><input type="radio" name="isNeed" value="'Y', 'N'"/>所有课程：</span></td>

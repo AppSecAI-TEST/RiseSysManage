@@ -8,7 +8,7 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/js/changeSchool/changeSchool.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/changeSchool/changeStudent.js"></script>
   	</head>
   
   	<body style="padding-top:5px">
@@ -41,20 +41,22 @@
 					</td>
 					<td align="right"><span>带班老师：</span></td>
 					<td width="100px">
-						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 114px; height: 25px;">
+						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 114px; height: 25px;"
+							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
+	      					onLoadSuccess:function(data){if(data.length > 0) $('#teacherId').combobox('setValue',data[0].teacherId);}" 
+	      					url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}&classType=">
 				        </select>
 					</td>
 					<td colspan="2" align="right">
-						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryApplyBtn" funcNodeId="1012">查询</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1015">查询</a>
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 					</td>
 					<td width="40%">&nbsp;</td>
   				</tr>
   			</table>
   		</form>
-  		
   		<div style="padding:5px 0;min-width:1100px; width:100%;">
-		  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1013" 
+		  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1015" 
 		  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
@@ -62,20 +64,22 @@
 						<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
 						<th data-options="field:'byName',width:100,align:'center'">英文名</th>
 						<th data-options="field:'phone',width:200,align:'center'">联系电话</th>
-						<th data-options="field:'className',width:120,align:'center'">在读班级</th>
-						<th data-options="field:'teacherName',width:100,align:'center'">带班老师</th>
-						<th data-options="field:'classProgress',width:100,align:'center'">课时进度</th>
-						<th data-options="field:'courseStateText',width:100,align:'center'">课程状态</th>
-						<th data-options="field:'changeClassNum',width:100,align:'center'">本课程转班次数</th>
+						<th data-options="field:'higherStageId',width:120,align:'center'">已升学阶段</th>
+						<th data-options="field:'classType',width:100,align:'center'">当前课程</th>
+						<th data-options="field:'feeTypeText',width:100,align:'center'">业绩类型</th>
+						<th data-options="field:'adviserName',width:100,align:'center'">业绩顾问</th>
+						<th data-options="field:'currentClassName',width:100,align:'center'">在读班</th>
+						<th data-options="field:'adviserTeacherName',width:100,align:'center'">带班老师</th>
+						<th data-options="field:'currentClassProgress',width:100,align:'center'">课程进度</th>
+						<th data-options="field:'courseStateText',width:100,align:'center'">在读课程状态</th>
 					</tr>
 				</thead>
 			</table>
 	  	</div>
-  		
   		<div style="margin-top: 20px;min-width:1100px; width:99%;">
 	      	<div style="float: left;margin-left: 800px;">
 	      		<a href="javascript:void(0)" id="applyChangeSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      		&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	      		&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
 	      	</div>
 	   </div>
   	</body>

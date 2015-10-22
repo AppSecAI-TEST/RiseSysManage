@@ -28,7 +28,7 @@
 					<td align="right"><span>转出班老师：</span></td>
 					<td width="100px">
 						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byName', panelHeight: 'auto',
+							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
 	      					onLoadSuccess:function(data){if(data.length > 0) $('#teacherId').combobox('setValue',data[0].teacherId);}" 
 	      					url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}&classType=">
 				        </select>

@@ -72,16 +72,16 @@
 					<tr>
 						<th data-options="field:'ck',checkbox:true"></th>
 						<th data-options="field:'schoolName',width:80,align:'center'">校区</th>
-						<th data-options="field:'className',width:200,align:'center'">班级名称</th>
-						<th data-options="field:'schooltimeName',width:100,align:'center'">上课时段与教室</th>
-						<th data-options="field:'classStudentNum',width:100,align:'center'">定班人数</th>
-						<th data-options="field:'studentNewNum',width:100,align:'center'">定班新招数</th>
+						<th data-options="field:'className',width:80,align:'center'">班级名称</th>
+						<th data-options="field:'schooltimeName',width:150,align:'center'">上课时段与教室</th>
+						<th data-options="field:'classStudentNum',width:80,align:'center'">定班人数</th>
+						<th data-options="field:'studentNewNum',width:80,align:'center'">定班新招数</th>
 						<th data-options="field:'studentHigherNum',width:100,align:'center'">定班升学数</th>
 						<th data-options="field:'studentChannelTypeText',width:100,align:'center'">学员来源</th>
-						<th data-options="field:'startDate',width:100,align:'center'">开课日期</th>
-						<th data-options="field:'approveCreateDate',width:100,align:'center'">放班审批时间</th>
-						<th data-options="field:'approveOpenDate',width:100,align:'center'">开班审批时间</th>
-						<th data-options="field:'openClassTypeText',width:100,align:'center'">开班类型</th>
+						<th data-options="field:'startDate',width:80,align:'center'">开课日期</th>
+						<th data-options="field:'approveCreateDate',width:150,align:'center'">放班审批时间</th>
+						<th data-options="field:'approveOpenDate',width:150,align:'center'">开班审批时间</th>
+						<th data-options="field:'openClassTypeText',width:80,align:'center'">开班类型</th>
 						<th data-options="field:'openClassStateText',width:100,align:'center'">开班状态</th>
 					</tr>
 				</thead>

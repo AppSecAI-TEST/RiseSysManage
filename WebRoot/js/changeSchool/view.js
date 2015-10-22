@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	var applyId = $("#applyId").val();
-	var param = "{\"applyId\":\""+applyId+"\",\"queryCode\":\"qryChangeClassDetail\"}";
+	var param = "{\"applyId\":\""+applyId+"\",\"queryCode\":\"qryChangeSchoolDetail\"}";
 	$.ajax({
 		url: "/sys/applyClass/qryDataByQueryCode.do",
 		data: "param=" + param,
@@ -13,11 +13,15 @@ $(document).ready(function() {
 		success: function (data) {
 			$.messager.progress('close'); 
 			$("#changeStateText").html(data.changeStateText);
-			$("#outClass").html(data.outClass);
-			$("#inClass").html(data.inClass);
-			$("#adviserName").html(data.adviserName);
-			$("#adviserTeacherName").html(data.adviserTeacherName);
-			$("#oldCourseStateText").html(data.oldCourseStateText);
+			$("#outSchoolNameText").html(data.outSchoolName);
+			$("#outClassNameText").html(data.outClass);
+			$("#courseStateText").html(data.courseStateText);
+			$("#inSchoolNameText").html(data.inSchoolName);
+			$("#inClassNameText").html(data.inClassName);
+			$("#finishStageIdText").html(data.finishStageId);
+			$("#higherStageIdText").html(data.higherStageId);
+			$("#stageIdText").html(data.stageId);
+			$("#feeTypeText").html(data.feeTypeText);
 			var applyDate = data.applyDate;
 			if(applyDate != null && applyDate != "" && applyDate != "null" && applyDate != undefined) {
 				$("#applyDate").html(data.applyDate);
