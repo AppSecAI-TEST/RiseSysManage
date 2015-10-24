@@ -11,6 +11,10 @@
 		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
 		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
 		<script type="text/javascript" src="<%=path %>/js/genCourseConfig/stageConfig.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/genCourseConfig/classNumConfig.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/genCourseConfig/comPriceConfig.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/genCourseConfig/linkPriceConfig.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/genCourseConfig/discountPriceConfig.js"></script>
   	</head>
   	<body>
   	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
@@ -84,7 +88,78 @@
 				<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#updateStageDlg').dialog('close')">取消</a>
 			</div>
   		</div>
-  		
+  		<div title="开班人数配置" style="padding:5px;display:block;">
+			<table align="center" title="查询结果" data-options="height:600" id="class_data">
+				
+			</table>
+	 		<div id="classDlg" class="easyui-dialog" style="width:550px;height:220px;padding:0px 0px" modal="true" closed="true" buttons="#class-buttons">
+				<form id="classFm" method="post">
+					<input name="classId" type="hidden" />
+					<table width="98%" style="margin:5px 5px;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
+						<tr>
+							<td width="30%" align="right">课程阶段：</td>
+							<td width="20%" id="stageTd" align="center"</td>
+							<td width="20%" align="right">班级类型：</td>
+							<td width="30%" id="classTypeTd" align="center"></td>
+						</tr>
+						<tr>
+							<td align="right">最高开班人数：</td>
+							<td id="maxTd" align="center"></td>
+							<td align="right">修改为：</td>
+							<td align="center"><input name="maxNum" style="width:150px" class="easyui-numberbox" data-options="min:1" required="true"/></td>
+						</tr>
+						<tr>
+							<td align="right">最低开班人数：</td>
+							<td id="minTd" align="center"></td>
+							<td align="right">修改为：</td>
+							<td align="center"><input name="minNum" style="width:150px" class="easyui-numberbox" data-options="min:1" required="true"/></td>
+						</tr>
+						<tr>
+							<td align="right">异常开班人数：</td>
+							<td id="expTd" align="center"></td>
+							<td align="right">修改为：</td>
+							<td align="center"><input name="expNum" style="width:150px" class="easyui-numberbox" data-options="min:1" /></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<div id="class-buttons">
+				<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="updateClassNumSubmit()">提交</a>
+				<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#classDlg').dialog('close')">取消</a>
+			</div>
+  		</div>
+  		<div title="课程价格配置" style="padding:5px;display:block;">
+  			<div id="ttab" class="easyui-tabs" style="min-width:1110px;width:100%;height:auto;">
+  				<div title="课程价格配置" style="padding:5px;display:block;">
+					<table align="center" title="查询结果" data-options="height:500" id="common_data">
+						
+					</table>
+					<div id="commonToolbar">
+			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="addComPrice()">添加新价格</a>
+			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" onclick="viewSchoolComPrice()">校区开启价格体系</a>
+		 			</div>
+		 			<div style="margin: 5px 5px"><span style="font-size:16px;color:red;font-family:'微软雅黑'" id="upApplySchools"></span></div>
+				</div>
+				<div title="连报优惠配置" style="padding:5px;display:block;">
+					<table align="center" title="查询结果" data-options="height:550" id="link_data">
+						
+					</table>
+					<div id="linkToolbar">
+			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="addLinkPrice()">添加新优惠</a>
+			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" onclick="viewSchoolLinkPrice()">校区开启优惠体系</a>
+		 			</div>
+				</div>
+				<div title="复读折扣配置" style="padding:5px;display:block;">
+					<table align="center" title="查询结果" data-options="height:550" id="discount_data">
+						
+					</table>
+					<div id="discountToolbar">
+			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="addDiscountPrice()">添加新优惠</a>
+			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" onclick="viewSchoolDiscountPrice()">校区开启优惠体系</a>
+		 			</div>
+				</div>
+  			</div>
+  		</div>
 	  </div>
   	</body>
 </html>

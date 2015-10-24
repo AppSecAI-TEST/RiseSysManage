@@ -145,8 +145,6 @@ function updateSubmit()
 {
 	var delayDate = $("#delayDate").datebox("getValue");
 	var leaveDate = $("#leaveDate").val();
-	alert(leaveDate)
-	alert(delayDate)
 	if(delayDate <= leaveDate){
 		$.messager.alert('提示', "延期的日期不能小于计划休学日期！");
 		return;

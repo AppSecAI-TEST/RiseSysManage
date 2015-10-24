@@ -29,7 +29,7 @@ $(document).ready(function(){
 		                var btn = '<a class="update" onclick="updateClassType(\''+row.classId+'\',\''+row.stageId+'\',\''+row.classType+'\',\''+row.hours+'\',\''+row.gradHours+'\',\''+row.gradRemark+'\',\''+row.isOpen+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">修改</a>&nbsp;<a class="delete" onclick="deleteClassType(\''+row.classId+'\')" style="width:80px; height:25px;" href="javascript:void(0)">删除</a>';  
 		                return btn;  
 	        		}else if(row.typeFlag == "true"){
-	        			var btn = '<a class="update" onclick="updateClassType(\''+row.classId+'\',\''+row.stageId+'\',\''+row.classType+'\',\''+row.hours+'\',\''+row.gradHours+'\',\''+row.gradRemark+'\',\''+row.isOpen+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">修改</a>&nbsp;<a class="delete" disabled="disabled" style="width:80px; height:25px;" href="javascript:void(0)">删除</a>';  
+	        			var btn = '<a class="update" disabled="disabled" style="width:80px; height:25px;"  href="javascript:void(0)">修改</a>&nbsp;<a class="delete" disabled="disabled" style="width:80px; height:25px;" href="javascript:void(0)">删除</a>';  
 		                return btn;  
 	        		}
 	            }  
@@ -116,7 +116,6 @@ function saveSubmit()
 		var handlerId = $("#handlerId").val();
 		obj = obj.substring(0, obj.length - 1);
 		obj += ",\"handlerId\":\""+handlerId+"\"}";
-		alert(obj);
 		$.ajax({
 			type : "POST",
 			url: stageUrl,
@@ -214,13 +213,17 @@ function updateStage()
 {
 	if(validateSelect("stage_data")) {
 		var row = $("#stage_data").datagrid('getSelected');
-		$('#updateStageDlg').dialog('open').dialog('setTitle','修改课程阶段');
-		$('#updateStageFm').form('clear');
-		$('#updateStageFm').form('load',{
-			id : row.id,
-			stageId : row.stageId,
-			seqOrder : row.seqOrder
-		});
+		if(row.stageFlag == "false"){
+			$('#updateStageDlg').dialog('open').dialog('setTitle','修改课程阶段');
+			$('#updateStageFm').form('clear');
+			$('#updateStageFm').form('load',{
+				id : row.id,
+				stageId : row.stageId,
+				seqOrder : row.seqOrder
+			});
+		}else if(row.stageFlag == "true"){ //关联实例的阶段不能修改
+			$.messager.alert('提示', "该课程阶段已被关联，不能修改！");
+		}
 	}
 }
 
@@ -232,7 +235,6 @@ function updateStageSubmit()
 		var handlerId = $("#handlerId").val();
 		obj = obj.substring(0, obj.length - 1);
 		obj += ",\"handlerId\":\""+handlerId+"\"}";
-		alert(obj);
 		$.ajax({
 			type : "POST",
 			url: "/sys/genCourseConfig/updateStage.do",

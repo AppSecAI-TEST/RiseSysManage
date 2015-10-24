@@ -1,8 +1,11 @@
 package com.rise.service;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.stereotype.Service;
 
 import com.rise.pub.invoke.ServiceEngine;
+import com.rise.pub.util.ObjectCensor;
 
 @Service
 public class GenCourseService {
@@ -40,6 +43,40 @@ public class GenCourseService {
 	//删除课程阶段
 	public String deleteStageConfig(String id,String stageId)throws Exception {
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1506\",securityCode:\"0000000000\",params:{id:'"+id+"',stageId:'"+stageId+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+
+	//修改开班人数
+	public String updateClassNum(String json)throws Exception{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1507\",securityCode:\"0000000000\",params:{json:'"+json+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+	
+	public String qryDataListByPage(String page, String rows, String param, String funcNodeId)throws Exception{
+		JSONObject obj = new JSONObject();
+		if(ObjectCensor.isStrRegular(param))
+		{
+			obj = JSONObject.fromObject(param);
+		}
+		if(ObjectCensor.isStrRegular(page,rows))
+		{
+			Integer pageNum = Integer.parseInt(page) - 1;
+			Integer pageSize = Integer.parseInt(rows);
+			pageNum = pageNum * pageSize;
+			obj.element("start", pageNum);
+			obj.element("rownum", pageSize);
+		}
+		if(ObjectCensor.isStrRegular(funcNodeId))
+		{
+			obj.element("funcNodeId", funcNodeId);
+		}
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1508\",securityCode:\"0000000000\",params:{param:"+obj+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
+	public String getAllClassType()throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1509\",securityCode:\"0000000000\",params:{},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 }

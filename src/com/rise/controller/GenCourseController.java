@@ -4,11 +4,15 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.rise.service.GenCourseService;
 
@@ -183,6 +187,83 @@ public class GenCourseController {
 				out.close();
 			}
 		}
+	}
+	
+	//修改开班人数
+	@RequestMapping(value="/updateClassNum.do")
+	public void updateClassNum(HttpServletResponse response,String json)
+	{
+		log.error(json);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = genCourseService.updateClassNum(json);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping(value = "/qryDataListByPage.do")
+	public void qryDataListByPage(String page, String rows, String param, String funcNodeId, HttpServletResponse response)
+	{
+		log.error(page);
+		log.error(rows);
+		log.error(param);
+		log.error(funcNodeId);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = genCourseService.qryDataListByPage(page, rows, param, funcNodeId);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping(value="/jumpToAddPrice.do")
+	public ModelAndView jumpToAddPrice(String type)
+	{
+		ModelAndView view = null;
+		try {
+			if("COMMON".equals(type)){//跳转添加课程价格配置页面
+				view = new ModelAndView("genCourseConfig/addComPrice");
+				String ret = genCourseService.getAllClassType();
+				view.addObject("obj",JSONObject.fromObject(ret));
+			}else if("LINK".equals(type)){//跳转添加连报优惠配置页面
+				view = new ModelAndView("genCourseConfig/addLinkPrice");
+			}else if("DISCOUNT".equals(type)){//跳转添加复读折扣配置页面
+				view = new ModelAndView("genCourseConfig/addDiscountPrice");
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return view;
 	}
 	
 }
