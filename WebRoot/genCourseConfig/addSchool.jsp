@@ -14,8 +14,8 @@
 	</style>
 	</head>
 	<body>
-		<table class="easyui-datagrid" align="center" title="校区信息列表" style="width:380px;margin:5px auto;height:380px;" id="schoolList" url="<%=path %>/pubData/qrySchoolList.do" 
-			 pagination="false" rownumbers="false" fitColumns="true" singleSelect="false">
+		<table class="easyui-datagrid" align="center" title="校区信息列表" style="width:380px;margin:5px auto;height:380px;" id="schoolList_data" url="<%=path %>/pubData/qrySchoolList.do" 
+		border="true" pagination="false" rownumbers="false" fitColumns="true" singleSelect="true" data-options="onLoadSuccess:function(data){$('#schoolList_data').datagrid('clearSelections');}">
 			<thead>
 				<tr>
 					<th field="ck" align="center" checkbox="true" width="5%"></th>
@@ -32,18 +32,15 @@
 <script type="text/javascript">
 	$("#submit").click(function ()
 	{
-		var row = $('#schoolList').datagrid('getSelected');
-		var obj = $("#schoolList").datagrid('getSelections');
+		var row = $('#schoolList_data').datagrid('getSelected');
+		var obj = $("#schoolList_data").datagrid('getSelections');
 		if(obj.length <= 0) {
-			$.messager.alert('提示', "请先选择一个活动！");
+			$.messager.alert('提示', "请先选择一个校区！");
 		}
-		if(obj.length > 0){
-			var schoolIds = "";
-			for(var i = 0, n = obj.length; i < n; i++){
-				var schoolId = obj[i].schoolId;
-				
-			}
-		}
+		var content = "<span style='font-size:14px;font-family:'微软雅黑''>&nbsp;"+row.schoolName+"<a style='font-size:12px' class='linkmore' onclick='removeSchool(this)'>删除</a></span>";
+		parent.window.$("#schoolTd").html(content);
+		parent.window.$("#schoolIds").val(row.schoolId);
+		parent.window.$('#dlg').dialog('close');
 		
 	});
 	

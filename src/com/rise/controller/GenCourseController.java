@@ -266,4 +266,85 @@ public class GenCourseController {
 		return view;
 	}
 	
+	@RequestMapping(value="/addPriceSystem.do")
+	public void addPriceSystem(HttpServletResponse response,String priceJson,String classJson,String type)
+	{
+		log.error(priceJson);
+		log.error(classJson);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = genCourseService.addPriceSystem(priceJson,classJson,type);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping(value="/updatePirceOpenState.do")
+	public void updatePirceOpenState(HttpServletResponse response,String setPriceId,String operType,String priceType)
+	{
+		log.error(setPriceId);
+		log.error(operType);
+		log.error(priceType);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = genCourseService.updatePirceOpenState(setPriceId,operType,priceType);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+
+	@RequestMapping(value="/deletePriceSystem.do")
+	public void deletePriceSystem(HttpServletResponse response,String setPriceId,String type)
+	{
+		log.error(setPriceId);
+		log.error(type);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = genCourseService.deletePriceSystem(setPriceId,type);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }

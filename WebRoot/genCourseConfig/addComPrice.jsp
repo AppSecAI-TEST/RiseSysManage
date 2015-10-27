@@ -17,19 +17,19 @@
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="添加新价格">
   			<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
-  			<input type="hidden" id="schoolIds" value="1001" />
+  			<input type="hidden" id="schoolIds" value="" />
 	 		<table width="95%" align="center" style="margin:5px auto;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
 	 			<tr>
   					<td align="right" width="11%">价格体系名称：</td>
   					<td align="left" width="69%"><input id="priceName" name="priceName" style="width:300px" class="easyui-textbox" required="true" /></td>
   				</tr>
   				<tr>
-  					<td align="right"><a href="javascript:void(0)" id="" class="easyui-linkbutton" iconCls="icon-search" style="width: 110px; height: 25px;" onclick="addSchools()">添加适用校区</a></td>
-  					<td align="left"></td>
-  				</tr>
-  				<tr>
   					<td align="right">状态：</td>
   					<td align="left"><input type="radio" value="Y" name="isOpen" checked="checked"/><span>开启</span>&nbsp;<input type="radio" value="N" name="isOpen"/><span>关闭</span></td>
+  				</tr>
+  				<tr>
+  					<td align="right"><a href="javascript:void(0)" id="" class="easyui-linkbutton" iconCls="icon-search" style="width: 110px; height: 25px;" onclick="addSchools()">添加适用校区</a></td>
+  					<td align="left" id="schoolTd"></td>
   				</tr>
 	 		</table>
 	 		<table width="95%" align="center" style="margin:5px auto;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
@@ -59,11 +59,11 @@
  		</div>
  		<div style="margin-top: 20px;min-width:1100px; width:99%;">
 	      	<div style="float: right;">
-	      		<a href="javascript:void(0)" id="" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;" onclick="addComPriceSubmit()">提交</a>
+	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;" onclick="addComPriceSubmit()">提交</a>
 	      		&nbsp;
 	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
 	      	</div>
 	   </div>
- 		<iframe id="dlg" class="easyui-dialog" style="width:450px; height: 500px; padding: 10px 20px" closed="true" modal="true">
+ 		<iframe id="dlg" class="easyui-dialog" style="width:450px; height: 500px; padding: 10px 20px" closed="true" modal="true"></iframe>
   	</body>
 </html>

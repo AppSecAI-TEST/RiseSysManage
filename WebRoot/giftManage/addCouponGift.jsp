@@ -84,7 +84,7 @@
       	        <td align="left" isGet="">&nbsp;</td>
       	        <td align="right"><span>发放人</span></td>
       	        <td align="left" granter="">&nbsp;</td>
-      	        <td><a href='javascript:void(0)' class='linkmore' onclick='delRow(this)' ><span>删除</span></a></td>
+      	        <td align="center"><a href='javascript:void(0)' class='linkmore' onclick='delRow(this)' ><span>删除</span></a></td>
      	       </tr>
      	       <tr>
      	       	<td align="right"><span>说明：</span></td>

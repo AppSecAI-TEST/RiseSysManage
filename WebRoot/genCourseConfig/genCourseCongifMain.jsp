@@ -139,6 +139,7 @@
 			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" onclick="viewSchoolComPrice()">校区开启价格体系</a>
 		 			</div>
 		 			<div style="margin: 5px 5px"><span style="font-size:16px;color:red;font-family:'微软雅黑'" id="upApplySchools"></span></div>
+		 			<iframe id="comDlg" class="easyui-dialog" style="width:450px; height: 500px; padding: 10px 20px" closed="true" modal="true"></iframe>
 				</div>
 				<div title="连报优惠配置" style="padding:5px;display:block;">
 					<table align="center" title="查询结果" data-options="height:550" id="link_data">
@@ -148,15 +149,17 @@
 			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="addLinkPrice()">添加新优惠</a>
 			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" onclick="viewSchoolLinkPrice()">校区开启优惠体系</a>
 		 			</div>
+		 			<iframe id="linkDlg" class="easyui-dialog" style="width:450px; height: 500px; padding: 10px 20px" closed="true" modal="true"></iframe>
 				</div>
 				<div title="复读折扣配置" style="padding:5px;display:block;">
 					<table align="center" title="查询结果" data-options="height:550" id="discount_data">
 						
 					</table>
 					<div id="discountToolbar">
-			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="addDiscountPrice()">添加新优惠</a>
-			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" onclick="viewSchoolDiscountPrice()">校区开启优惠体系</a>
+			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="addDiscountPrice()">添加新折扣</a>
+			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" onclick="viewSchoolDiscountPrice()">查看校区开启折扣</a>
 		 			</div>
+		 			<iframe id="disDlg" class="easyui-dialog" style="width:450px; height: 500px; padding: 10px 20px" closed="true" modal="true"></iframe>
 				</div>
   			</div>
   		</div>

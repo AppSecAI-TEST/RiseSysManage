@@ -79,4 +79,19 @@ public class GenCourseService {
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1509\",securityCode:\"0000000000\",params:{},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
+
+	public String addPriceSystem(String priceJson, String classJson, String type)throws Exception{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS15010\",securityCode:\"0000000000\",params:{priceJson:'"+priceJson+"',classJson:'"+classJson+"',type:'"+type+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+	
+	public String updatePirceOpenState(String setPriceId,String operType,String priceType)throws Exception{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS15011\",securityCode:\"0000000000\",params:{setPriceId:'"+setPriceId+"',operType:'"+operType+"',priceType:'"+priceType+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+	
+	public String deletePriceSystem(String setPriceId,String type)throws Exception {
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS15012\",securityCode:\"0000000000\",params:{setPriceId:'"+setPriceId+"',type:'"+type+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
 }
