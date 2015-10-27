@@ -86,6 +86,7 @@
 						<th data-options="field:'hoursProcess',width:100,align:'center'">课时进度</th>
 						<th data-options="field:'state',width:250,align:'center'">退费类型</th>
 						<th data-options="field:'tacheName',width:150,align:'center'">退费状态</th>
+						<th data-options="field:'nextTacheName',width:150,align:'center'">下一环节</th>
 						<th data-options="field:'isAcademic',width:150,align:'center'">学术退费</th>
 						<th data-options="field:'createDate',width:150,align:'center'">申请时间</th>
 						<th data-options="field:'approveDate',width:120,align:'center'">审批通过时间</th>
@@ -122,7 +123,7 @@
 	 {
 	    var row = $('#list_data').datagrid('getSelected');
 	 	var processInstId=row.processInstanceId;
-	 	var approveId="100002";
+	 	var approveId=$("#staffId").val();
 	 	$.ajax(
 	 	{
    			url: "/sys/fee/isApprove.do?processInstId="+processInstId+"&approveId="+approveId,

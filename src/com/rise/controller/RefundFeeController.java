@@ -29,7 +29,7 @@ public class RefundFeeController
 	public void applyRefund(String param,HttpServletResponse response, HttpServletRequest request)
 	{
 		
-		String params="{\"account\":\"冉海全\",\"amount\": 30000,\"approveId\": \"10001\",\"bankCard\": 6225882701114412,\"bankName\": \"中国银行\",\"createDate\": null,\"customerReason\": \"\",\"handlerId\": 10001,\"isAcademic\": \"Y\",\"otherResaon\": \"\",\"processInstanceId\": \"\",\"realAmount\": 20000,\"refundFeeId\": 0,\"refundType\": \"card\",\"refundWay\": \"common\",\"remark\": \"\",\"schoolId\": 1001,\"schoolReason\": \"\",\"schoolReasonType\": \"\",\"state\": \"00A\",\"studentId\": 10001}";
+		String params="{\"account\":\"冉海全\",\"amount\": 30000,\"approveId\": \"10001\",\"bankCard\": 6225882701114412,\"bankName\": \"中国银行\",\"createDate\": null,\"customerReason\": \"\",\"handlerId\": 10001,\"isAcademic\": \"Y\",\"otherResaon\": \"\",\"processInstanceId\": \"\",\"realAmount\": 20000,\"refundFeeId\": 0,\"refundType\": \"card\",\"refundWay\": \"common\",\"remark\": \"\",\"schoolId\": 1001,\"schoolReason\": \"\",\"schoolReasonType\": \"\",\"state\": \"00A\",\"studentId\": 26}";
 		PrintWriter out = null;
 		try
 		{
