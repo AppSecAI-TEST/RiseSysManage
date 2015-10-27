@@ -146,6 +146,8 @@
 			function settingPrivFuncNode()
 			{
 				$("#dlgPriv").css("height","350px");
+				$("#dgOperFuncList").datagrid("loadData",new Array());
+				$("#dgPrivFuncList").datagrid("loadData",new Array());
 				$('#dlgPriv').dialog('open').dialog('setTitle','设置权限功能');
 			}
 			function roleListRowPrivClick()
@@ -153,6 +155,7 @@
 				var row = $('#dgPrivRoleList').datagrid('getSelected');
 				if (row){
 					$("#dgOperFuncList").datagrid({url:"/sys/funcNode/getOperFuncNodeList.do?sysRoleId="+row.sysRoleId});
+					$("#dgPrivFuncList").datagrid("loadData",new Array());
 				}
 			}
 			function funcListRowPrivClick()

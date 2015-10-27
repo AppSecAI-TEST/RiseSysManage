@@ -62,7 +62,11 @@
 				editable:false, 
 				valueField: 'codeFlag', 
 				textField: 'codeName', 
-				panelHeight: 'auto'
+				panelHeight: 'auto',
+				onLoadSuccess:function(data){
+					if(data.length > 0)
+						$('#postType').combobox('setValue','${PostT.postType}');
+				}
 			});
 			$(document).ready(function(){
 				$("#postName").textbox("setValue",'${PostT.postName}');
