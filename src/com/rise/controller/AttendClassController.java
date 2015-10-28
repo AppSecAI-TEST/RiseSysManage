@@ -1,5 +1,9 @@
 package com.rise.controller;
 
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
 import net.sf.json.JSONObject;
 
 import org.apache.commons.logging.Log;
@@ -35,7 +39,11 @@ public class AttendClassController
 			view = new ModelAndView("attendClass/disbandClass");
 		} else if("view".equals(type)) {
 			view = new ModelAndView("attendClass/viewAttendClass");
-		} 
+		} else if("finish".equals(type)) {
+			view = new ModelAndView("finishClass/finishClass");
+		} else if("viewFinish".equals(type)) {
+			view = new ModelAndView("finishClass/viewFinishClass");
+		}  
 		try 
 		{
 			String retVal = attendClassService.qryAttendClassById(classInstId);
@@ -48,5 +56,31 @@ public class AttendClassController
 			e.printStackTrace();
 		}
 		return view;
+	}
+	
+	@RequestMapping(value = "/disbandClass.do")
+	public void disbandClass(String param, HttpServletResponse response)
+	{
+		log.error(param);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = attendClassService.disbandClass(param);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
 	}
 }

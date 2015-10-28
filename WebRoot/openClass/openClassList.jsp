@@ -31,35 +31,35 @@
 	      				url="<%=path %>/pubData/qryStage.do">
 		        		</select>
 					</td>
-					<td align="right"><span>开班状态：</span></td>
-					<td width="114px">
+					<td align="right"><span>开班申请日期：</span></td>
+	  				<td width="114px">
+						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeApply" name="startTimeApply" ata-options="formatter:myformatter, parser:myparser"/>
+					</td>
+					<td align="center" width="14px"><span>至</span></td>
+					<td colspan="3">
+						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="endTimeApply" name="endTimeApply" data-options="formatter:myformatter, parser:myparser"/>
+					</td>
+  				</tr>
+  				<tr>
+  					<td align="right"><span>开班状态：</span></td>
+					<td width="114px" colspan="3">
 						<select id="approveState" name="approveState" class="easyui-combobox" style="width: 114px; height: 25px;"
 						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
 	      				onLoadSuccess:function(data){$('#approveState').combobox('setValue',data[0].codeFlag);}" 
 	      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=CREATE_CLASS_T&codeType=OPEN_CLASS_STATE">
 		        		</select>
 					</td>
-					<td align="center" colspan="3">
-						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1009">查询</a>
-						&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
-					</td>
-  				</tr>
-  				<tr>
-  					<td align="right"><span>开班申请日期：</span></td>
-	  				<td>
-						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeApply" name="startTimeApply" ata-options="formatter:myformatter, parser:myparser"/>
-					</td>
-					<td align="center"><span>至</span></td>
-					<td>
-						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="endTimeApply" name="endTimeApply" data-options="formatter:myformatter, parser:myparser"/>
-					</td>
 					<td align="right"><span>开班审批日期：</span></td>
-	  				<td>
+	  				<td width="114px">
 						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeApprove" name="startTimeApprove" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
-					<td  align="center"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
-					<td colspan="2">
+					<td align="center" width="14px"><span>至</span></td>
+					<td width="114px">
 						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="endTimeApprove" name="endTimeApprove" data-options="formatter:myformatter, parser:myparser"/>
+					</td>
+					<td align="center" colspan="2">
+						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1009">查询</a>
+						&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 					</td>
   				</tr>
   			</table>
