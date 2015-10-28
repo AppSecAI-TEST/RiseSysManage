@@ -24,7 +24,7 @@ datagrid-row-selected
 </style>
 	</head>
 	<body>
-	<div style="width:700; overflow:scroll;">
+	<div style="width:700; height:1000; overflow:scroll;">
    
 
     	<table width="700"  cellpadding="0" border="0" style="border-collapse:collapse;overflow:scroll;" >
@@ -64,22 +64,6 @@ datagrid-row-selected
 
 
 <script type="text/javascript">
-
-var plan=
-{
-    "weekTime": "",
-    "weekSeq": "",
-    "schooltime": "",
-    "teacherName": "",
-    "teacherId": "",
-    "schoolId": "1001",
-    "teacherType": "T",
-    "hourRange": "001",
-    "classInstId": "1",
-    "roomId": "1001",
-    "className": "DPre-K02"
-}
-
 var json1;
 var json2;
 var json3;
@@ -88,9 +72,9 @@ var json5;
 var json6;
 var josn7;
 function closeDlg()
-	{
-		$('#dlg').dialog('close');
-	}
+{
+	$('#dlg').dialog('close');
+}
 	
 function linkCourse()
 {
@@ -208,7 +192,6 @@ function initTable(tabId,data)
     ]],
     onLoadSuccess:function()
     {
-	//$(this).datagrid('freezeRow',0);	
       MergeCells(tabId);
     } 
   });
@@ -223,58 +206,58 @@ $(document).ready(function()
 
 function MergeCells(tabId)
 {		 
-		var table;
-		if(tabId!='')
-		{
-			table= $('#'+tabId);
-		} 
-	    var s = $(table).datagrid('getData');
-	    var datas =s.rows;
-	 
-		for(var i=0; i<datas.length; i++)
-		{
-			var index=i;
-			var fieldT;
-			var colspanNum=0;
-			for(var key in datas[i])
-			{  
-				
-                if(key.indexOf("merge")>-1)
-                {
-                	var val=datas[i][key];
-                	fieldT="H"+key.substring(5,8);
-                	$(table).datagrid('mergeCells',
-					{
-						index: i,
-						field: fieldT,
-						colspan: val
-					});
-                }
-            }  
-		}
-		$("table tr td").each(function()
-		{
-		   var d=$(this).text();
-		  if('DPre-K03'==d)
-		  {
-			     $(this).css("background-color","#EDE1D8");
-		  }else if('DPre-K01'==d)
-		  {
-			  $(this).css("background-color","#ECB1D8");
-		  }else if('DPre-K02'==d)
-		  {
-			  $(this).css("background-color","#EFE1B8");
-		  }
-		
-		});
+	var table;
+	if(tabId!='')
+	{
+		table= $('#'+tabId);
+	} 
+    var s = $(table).datagrid('getData');
+    var datas =s.rows;
+ 
+	for(var i=0; i<datas.length; i++)
+	{
+		var index=i;
+		var fieldT;
+		var colspanNum=0;
+		for(var key in datas[i])
+		{  
+			
+               if(key.indexOf("merge")>-1)
+               {
+               	var val=datas[i][key];
+               	fieldT="H"+key.substring(5,8);
+               	$(table).datagrid('mergeCells',
+				{
+					index: i,
+					field: fieldT,
+					colspan: val
+				});
+               }
+           }  
+	}
+	$("table tr td").each(function()
+	{
+	   var d=$(this).text();
+	  if('DPre-K03'==d)
+	  {
+		     $(this).css("background-color","#EDE1D8");
+	  }else if('DPre-K01'==d)
+	  {
+		  $(this).css("background-color","#ECB1D8");
+	  }else if('DPre-K02'==d)
+	  {
+		  $(this).css("background-color","#EFE1B8");
+	  }
+	
+	});
 
-		/*
-		$("table tr").each(function(k,v)
-		{//遍历所有行
-			$("td",v).eq(3).css("background-color","#ECE9D8");//把每行的同一位置变色
-		});*/
+	/*
+	$("table tr").each(function(k,v)
+	{//遍历所有行
+		$("td",v).eq(3).css("background-color","#ECE9D8");//把每行的同一位置变色
+	});*/
  }
-
+/*
 	function randomcolor()
 	{
 		var str=Math.ceil(Math.random()*16777215).toString(16);   
@@ -283,7 +266,7 @@ function MergeCells(tabId)
 		}   
 		return "#"+str;
 	}
- /*
+ 
  function onClickCell(rowIndex, field, value)
  { 
 	
@@ -336,41 +319,68 @@ function endEditing(tab)
 	if (editIndex == undefined){return true}
 	if ($(tab).datagrid('validateRow', editIndex))
 	{
-		//var mark=field.substring(1,field.length);
-		//var tdNum=parseInt(mark);
-		
+ 
 		var choose=getCellValue($(tab),editIndex,editField);
-		if(choose!=undefined && choose!=editValue && choose!='')
+		if(choose!=undefined && choose!=editValue)
 		{
 			var rowVal = $(tab).datagrid('getData').rows[editIndex];
-			//alert(JSON.stringify(rowVal));
+			alert(JSON.stringify(rowVal));
 			var planT={};
 			var val=rowVal[editField]+"";
+			var schooltimeInstId=rowVal[editField+"-schooltimeInstId"]+"";
+			
+			if(choose=='' && schooltimeInstId!=undefined)
+			{
+				deletePlanTime(schooltimeInstId);
+				return;
+			}
 			
 			var vals = choose.split("/");
-			
+			 
 			var className=vals[0];
-			
 			var roomName=vals[1];
-			
 			var teacherType=vals[2];
 			
-			var mergeNum=vals[3];//合并列数量
-		
-			planT.schoolId=rowVal.schoolId;
-			planT.teacherName=rowVal.teacherName;
-			planT.teacherId=rowVal.teacherId;
-			planT.teacherType=teacherType;
-		    planT.className=className;
-		    planT.roomName=roomName;
-		    planT=getHours(planT,mergeNum);
-		    if(planT.hourRange!=undefined && planT.hourRange!='')
-		    {
-				addPlanTime(planT,tab);
+			if(className==undefined)
+			{
+				alert("请输入班级名称");
+				setCellValue($(tab),editIndex,editField,editValue);//恢复初始值
+			}else
+			
+			if(roomName==undefined)
+			{
+				alert("请输入教室名称");
+				setCellValue($(tab),editIndex,editField,editValue);//恢复初始值
+			}else
+			
+			if(teacherType==undefined)
+			{
+				alert("请输入教师类型");
+				setCellValue($(tab),editIndex,editField,editValue);//恢复初始值
 			}else
 			{
-				alert("没有可适用时段");
-			}
+				var mergeNum=vals[3];//合并列数量
+			
+				
+				planT.schoolId=rowVal.schoolId;
+				planT.teacherName=rowVal.teacherName;
+				planT.teacherId=rowVal.teacherId;
+				planT.teacherType=teacherType;
+			    planT.className=className;
+			    planT.roomName=roomName;
+			   
+			    planT.schooltimeInstId=schooltimeInstId;
+			    
+			    planT=getHours(planT,mergeNum);
+			    if(planT.hourRange!=undefined && planT.hourRange!='')
+			    {
+					addPlanTime(planT,tab);
+				}else
+				{
+					alert("没有可适用上课时段");
+					setCellValue($(tab),editIndex,editField,editValue);//恢复初始值
+				}
+		    }
 		  }
 		$(tab).datagrid('endEdit', editIndex);
 		var tabId= $(tab).attr("id");
@@ -383,6 +393,31 @@ function endEditing(tab)
 	}
 }
 
+function deletePlanTime(schooltimeId)
+{
+		var param="{schooltimeInstId="+schooltimeId+"}";
+		$.ajax({
+			type : "POST",
+			url: "/sys/time/delete.do",
+			data: "param="+param,
+			async: false,
+			dataType:"json",
+			beforeSend: function()
+	    	{
+	    		$.messager.progress({title : '系统消息', msg : '正在提交数据，请稍等……'});
+	    	},
+	    	success: function(data) {
+	    		$.messager.progress('close');
+	    		 
+	        },
+	        error:function(){
+	        	$.messager.progress('close'); 
+	        }
+	    	
+		});
+		
+} 
+	
 function addPlanTime(planT,tab)
 {	
 	var s = $(tab).datagrid('getData');
@@ -400,36 +435,34 @@ function addPlanTime(planT,tab)
 		 
 	}
 	 	
-	$.ajax({
-			type : "POST",
-			url: "/sys/time/add.do",
-			data: "param="+JSON.stringify(planT),
-			async: false,
-			dataType:"json",
-			beforeSend: function()
-	    	{
-	    		$.messager.progress({title : '系统消息', msg : '正在提交数据，请稍等……'});
-	    	},
-	    	success: function(data) 
-	    	{
-	    		$.messager.progress('close');
-	    		if('false'==data.flag)
-	    		{
-	    			alert(data.msg);
-	    		}else
-	    		{
-	    			 getWeekTime();
-	    		}
-	    		 
-	        },
-	        error:function()
-	        {
-	        	$.messager.progress('close'); 
-	        }
-	    	
-		});
-	 	
- 	 
+	$.ajax(
+	{
+		type : "POST",
+		url: "/sys/time/add.do",
+		data: "param="+JSON.stringify(planT),
+		async: false,
+		dataType:"json",
+		beforeSend: function()
+    	{
+    		$.messager.progress({title : '系统消息', msg : '正在提交数据，请稍等……'});
+    	},
+    	success: function(data) 
+    	{
+    		$.messager.progress('close');
+    		if('false'==data.flag)
+    		{
+    			alert(data.msg);
+    		}else
+    		{
+    			 getWeekTime();
+    		}
+    		 
+        },
+        error:function()
+        {
+        	$.messager.progress('close'); 
+        }
+	});
 }
   
 function onClickCell(index, field,value)
@@ -448,6 +481,10 @@ function onClickCell(index, field,value)
 		var s=  $(this).datagrid('getData');
 	 	var rows =s.rows;
 		$(this).datagrid('selectRow', index).datagrid('editCell', {index:index,field:field});
+		if(value!='')
+		{	
+			setCellValue($(this),index,field,value+"/")
+		}
 		editIndex = index;
 		editField=field;
 	}
@@ -514,7 +551,8 @@ function getCellValue(tabObj,rowIndex,field)
 	var val ="";
 	var tab =tabObj.parent().find(".datagrid-view2").find(".datagrid-body").find(".datagrid-btable");
 	var tr =tab.find("tr:eq("+rowIndex+")");
-	tr.find("td").each(function(){
+	tr.find("td").each(function()
+	{
 		if($(this).attr("field")==field)
 		{
 			val =$(this).find("input[type='text']").val();
@@ -522,6 +560,21 @@ function getCellValue(tabObj,rowIndex,field)
 		}	
 	});
 	return val;
+}
+
+function setCellValue(tabObj,rowIndex,field,value)
+{
+	var val ="";
+	var tab =tabObj.parent().find(".datagrid-view2").find(".datagrid-body").find(".datagrid-btable");
+	var tr =tab.find("tr:eq("+rowIndex+")");
+	tr.find("td").each(function()
+	{
+		if($(this).attr("field")==field)
+		{
+			val =$(this).find("input[type='text']").val(value);
+		}	
+	});
+	 
 }
 
 </script>
