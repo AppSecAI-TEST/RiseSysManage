@@ -298,12 +298,17 @@ $.extend($.fn.datagrid.methods,
 var editIndex = undefined;
 var editField=undefined;
 var tabId="";
+var editValue="";
 
 function endEditing(tab)
 {
 	if (editIndex == undefined){return true}
 	if ($(tab).datagrid('validateRow', editIndex))
 	{
+		var mark=field.substring(1,field.length);
+		var tdNum=parseInt(mark);
+		var choose=$('#t1 tr:eq(3) td:nth-child(1)').html(); 
+	
 		$(tab).datagrid('endEdit', editIndex);
 		
 		var rowVal = $(tab).datagrid('getData').rows[editIndex];
@@ -390,7 +395,7 @@ function addPlanTime(planT,tab)
   
 function onClickCell(index, field,value)
 {
-	 var choose=$("this tr:eq(3)").td(field);
+	
 	alert(choose);
 	 
 	var id= $(this).attr("id");
@@ -406,6 +411,7 @@ function onClickCell(index, field,value)
 		editIndex = index;
 		editField=field;
 	}
+	editValue=value;
 	tabId=$(this).attr("id");
 }
 
