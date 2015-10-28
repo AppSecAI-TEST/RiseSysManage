@@ -87,6 +87,10 @@ function addAction() {
 		$.messager.alert("提示", "请选择活动日期");
 		return false;
 	}
+	if ($("#planHours").numberbox("getValue") == "") {
+		$.messager.alert("提示", "请填写课时");
+		return false;
+	}
 	if (trim($("#title").val()) == "") {
 		$.messager.alert("提示", "请填写活动名称");
 		return false;
@@ -95,10 +99,6 @@ function addAction() {
 		$.messager.alert("提示", "请填写创建备注");
 		return false;
 	}
-	action.schoolId = $("#actionSchoolId").combobox("getValue");
-	action.actionDate = $("#actionDate").datebox("getValue");
-	action.title = trim($("#title").val());
-	action.createRemark = trim($("#createRemark").val());
 	if ($("#timeStart").timespinner("getValue") != "") {
 		if ($("#timeEnd").timespinner("getValue") == "") {
 			$.messager.alert("提示", "请填写活动结束时段");
@@ -116,6 +116,15 @@ function addAction() {
 			}
 		}
 	}
+	else
+	{
+		$.messager.alert("提示", "请填写活动开始时段");
+		return false;
+	}	
+	action.schoolId = $("#actionSchoolId").combobox("getValue");
+	action.actionDate = $("#actionDate").datebox("getValue");
+	action.title = trim($("#title").val());
+	action.createRemark = trim($("#createRemark").val());
 	action.timeStart = $("#timeStart").timespinner("getValue");
 	action.timeEnd = $("#timeEnd").timespinner("getValue");
 	action.planHours == $("#planHours").numberbox("getValue");
@@ -133,6 +142,11 @@ function addAction() {
 		teacher.handlerId = handlerValue;
 		teacheArr.push(teacher);
 	})
+	if(teacheArr.length<1)
+	{
+		$.messager.alert("提示", "请至少添加一条老师记录");
+		return false;
+	}	
 	action.state = "P";
 	addInfo.actionInfo =action;
 	addInfo.teacherInfo =teacheArr;

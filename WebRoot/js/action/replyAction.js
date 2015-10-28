@@ -155,6 +155,11 @@ function initAddPage()
 
 
 function replyAction() {
+	
+	if ($("#realHours").numberbox("getValue") == "") {
+		$.messager.alert("提示", "请填写实际课时");
+		return false;
+	}
 	var reply={};
 	var action = {};
 	action.actionId=actionId;
@@ -173,6 +178,11 @@ function replyAction() {
 		teacher.handlerId = handlerId;
 		teacheArr.push(teacher);
 	})
+	if(teacheArr.length<1)
+	{
+		$.messager.alert("提示", "请至少添加一条老师记录");
+		return false;
+	}	
 	reply.actionInfo =action;
 	reply.teacherInfo =teacheArr;
 	reply.planInfo =planArr;
@@ -270,6 +280,10 @@ function initUpdatePage()
 
 function updateReply()
 {
+	if ($("#realHours").numberbox("getValue") == "") {
+		$.messager.alert("提示", "请填写实际课时");
+		return false;
+	}
 	var param={};
 	var action={};
 	action.actionId =actionId;
@@ -286,7 +300,12 @@ function updateReply()
 		teacher.hours = $(this).attr("hours");
 		teacher.handlerId = handlerId;
 		newArr.push(teacher);
-	})
+	});
+	if(newArr.length<1)
+	{
+		$.messager.alert("提示", "请至少添加一条老师记录");
+		return false;
+	}
 	param.actionInfo =action;
 	param.oldTeacherInfo =oldArr;
 	param.newTeacherInfo =newArr;

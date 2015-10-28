@@ -53,12 +53,12 @@ function validateSelect(object)
 	var obj = $("#"+object+"").datagrid('getSelections');
 	if(obj.length > 0) {
 		if(obj.length > 1) {
-			$.messager.alert('提示', "只能选择一条异常记录操作！");
+			$.messager.alert('提示', "只能选择一条记录操作！");
 		} else {
 			flag = true;
 		}
 	} else {
-		$.messager.alert('提示', "请先选择一条异常记录！");
+		$.messager.alert('提示', "请先选择一条记录！");
 	}
 	return flag;
 }
