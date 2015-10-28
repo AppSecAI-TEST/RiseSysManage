@@ -75,4 +75,31 @@ $(document).ready(function() {
 			$.messager.alert('提示', "请先选择您要浏览的班级！");
 		}
 	});
+	
+	//结课
+	$("#finishClassSubmit").click(function() {
+		if($("#finishClassFm").form('validate')) {
+			var obj = JSON.stringify($("#finishClassFm").serializeObject());
+			alert(obj)
+			$.ajax({
+				url: "/sys/attendClass/finishClass.do",
+				data: "param=" + obj,
+				dataType: "json",
+				async: false,
+				beforeSend: function()
+				{
+					$.messager.progress({title : '班级结课', msg : '正在班级结课，请稍等……'});
+				},
+				success: function (data) {
+					$.messager.progress('close'); 
+					var flag = data.flag;
+					if(flag) {
+						$.messager.alert('提示', "班级结课成功！", "info", function() {window.history.back();});
+					} else {
+						$.messager.alert('提示', data.msg);
+					}
+				} 
+			});
+		}
+	});
 });

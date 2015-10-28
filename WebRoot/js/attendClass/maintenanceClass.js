@@ -2,6 +2,17 @@ var td = 1;
 var selTr = null;
 var classTeacherId = "";
 $(document).ready(function() {	
+	if($("[name='teachers']").length > 0) {
+		var oldTeacherName = "";
+		$("[name='teachers']").each(function() {
+			var schoolName = $(this).attr("schoolName");
+			var byname = $(this).attr("byname");
+			var isLicense = $(this).attr("isLicense");
+			oldTeacherName += schoolName + " " + byname + "（" + isLicense + "）</br>";
+		});
+		oldTeacherName = oldTeacherName.substring(0, oldTeacherName.length - 5);
+		$("#oldTeacherName").val(oldTeacherName);
+	}
 	//带班老师的学校
 	$("#teacherSchoolId").combobox({
 		url : "/sys/pubData/qrySchoolList.do",//返回json数据的url
@@ -16,7 +27,6 @@ $(document).ready(function() {
         },
 		onChange : function(n, o) {
 			var classType = $("#classType").html();
-			alert(classType)
 			$("#teacherId").combobox({
 				url : "/sys/pubData/qryTeacherList.do?schoolId=" + n + "&classType=" + classType,
 				valueField : "teacherId",
@@ -104,12 +114,12 @@ $(document).ready(function() {
 								content += "<span id=teacher"+ teacherId + weekTime + hourRange +">";
 								var teacherText = teacherSchoolName + " " + teacherName + " " + lessions + " " + licenseFlagText;
 								content += teacherText + "&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='deleteTeacher(this, "+teacherId+")'><span>删除</span></a>";
-								content += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"' addFlag='Y'/>&nbsp;</span>";
+								content += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"' schoolName='"+teacherSchoolName+"' byname='"+teacherName+"' isLicense='"+licenseFlagText+"' addFlag='Y'/>&nbsp;</span>";
 								$(node).html(content);
 							} else {
 								var teacherText = teacherSchoolName + " " + teacherName + " " + lessions + " " + licenseFlagText;
 								var html = teacherText + "&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='deleteTeacher(this, "+teacherId+")'><span>删除</span></a>";
-								html += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"' addFlag='Y'/>&nbsp;";
+								html += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"' schoolName='"+teacherSchoolName+"' byname='"+teacherName+"' isLicense='"+licenseFlagText+"' addFlag='Y'/>&nbsp;";
 								$("#teacher" + teacherId + weekTime + hourRange).html(html);
 							}
 							$(node).attr("lessions", parseInt(lessions) + parseInt(addLessions));
@@ -188,39 +198,53 @@ $(document).ready(function() {
 	$("#removeStudent").click(function() {
 		var obj = $('#list_data').datagrid('getSelections');
 		if(obj.length > 0) {
-			$.messager.confirm('提示','您确定要移除当前选中的学员吗?',function(r) {
-				if(r) {
-					var classStudentId = "";
-					var studentCourseId = "";
-					for(var i = 0, n = obj.length; i < n; i++) {
-						classStudentId += obj[i].classStudentId + ",";
-						studentCourseId += obj[i].studentCourseId + ",";
-					}
-					classStudentId = classStudentId.substring(0, classStudentId.length - 1);
-					studentCourseId = studentCourseId.substring(0, studentCourseId.length - 1);
-					var handlerId = $("#handlerId").val();
-					var param = "{\"classStudentId\":\""+classStudentId+"\",\"studentCourseId\":\""+studentCourseId+"\",\"handlerId\":\""+handlerId+"\"}";
-					$.ajax({
-						url: "/sys/applyClass/batchRemoveStudent.do",
-						data: "param=" + param,
-						dataType: "json",
-						async: false,
-						beforeSend: function()
-						{
-							$.messager.progress({title : '学员移除', msg : '正在学员移除，请稍等……'});
-						},
-						success: function (data) {
-							$.messager.progress('close'); 
-							var flag = data.flag
-							if(flag) {
-								$.messager.alert('提示', "学员移除成功！", "info", function() {window.location.reload();});
-							} else {
-								$.messager.alert('提示', data.msg);
-							}
-						}
-					});
+			var flag = true;
+			var byName = "";
+			for(var i = 0, n = obj.length; i < n; i++) {
+				var attendFlag = obj[i].attendFlag;
+				if("Y" == attendFlag) {
+					flag = false;
+					byName = obj[i].byName;
+					break;
 				}
-			});
+			}
+			if(flag) {
+				$.messager.confirm('提示','您确定要移除当前选中的学员吗?',function(r) {
+					if(r) {
+						var classStudentId = "";
+						var studentCourseId = "";
+						for(var i = 0, n = obj.length; i < n; i++) {
+							classStudentId += obj[i].classStudentId + ",";
+							studentCourseId += obj[i].studentCourseId + ",";
+						}
+						classStudentId = classStudentId.substring(0, classStudentId.length - 1);
+						studentCourseId = studentCourseId.substring(0, studentCourseId.length - 1);
+						var handlerId = $("#handlerId").val();
+						var param = "{\"classStudentId\":\""+classStudentId+"\",\"studentCourseId\":\""+studentCourseId+"\",\"handlerId\":\""+handlerId+"\"}";
+						$.ajax({
+							url: "/sys/applyClass/batchRemoveStudent.do",
+							data: "param=" + param,
+							dataType: "json",
+							async: false,
+							beforeSend: function()
+							{
+								$.messager.progress({title : '学员移除', msg : '正在学员移除，请稍等……'});
+							},
+							success: function (data) {
+								$.messager.progress('close'); 
+								var flag = data.flag
+								if(flag) {
+									$.messager.alert('提示', "学员移除成功！", "info", function() {window.location.reload();});
+								} else {
+									$.messager.alert('提示', data.msg);
+								}
+							}
+						});
+					}
+				});
+			} else {
+				$.messager.alert('提示', "您选择的要移除的学员"+byName+"已有考勤记录，不能移除！");
+			}
 		} else {
 			$.messager.alert('提示', "请先选择您要移除的学员课程！");
 		}
@@ -228,125 +252,137 @@ $(document).ready(function() {
 	
 	//转班
 	$("#changeClass").click(function() {
-		var row = $('#list_data').datagrid('getSelected');
-		if(row) {
-			var changeClassFlag = row.changeClassFlag;
-			if("Y" == changeClassFlag) {
-				var name = row.name;
-				var phone = row.phone;
-				var byName = row.byName;
-				var stageId = row.stageId;
-				var schoolId = row.schoolId;
-				var studentId = row.studentId;
-				var classType = row.classType;
-				var className = row.className;
-				var schoolName = row.schoolName;
-				var classInstId = row.classInstId;
-				var teacherName = row.teacherName;
-				var classProgress = row.classProgress;
-				var changeClassNum = row.changeClassNum;
-				var courseStateText = row.courseStateText;
-				var studentCourseId = row.studentCourseId;
-				window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&studentId="+studentId+"&byName="+byName+"&changeClassNum="+changeClassNum+"&className="+className+"&classProgress="+classProgress+"&courseStateText="+courseStateText+"&name="+name+"&phone="+phone+"&teacherName="+teacherName+"&schoolId="+schoolId+"&schoolName="+schoolName+"&classInstId="+classInstId+"&classType="+classType+"&stageId="+stageId;
+		if(validateSelect()) {
+			var row = $('#list_data').datagrid('getSelected');
+			if(row) {
+				var changeClassFlag = row.changeClassFlag;
+				if("Y" == changeClassFlag) {
+					var name = row.name;
+					var phone = row.phone;
+					var byName = row.byName;
+					var stageId = row.stageId;
+					var schoolId = row.schoolId;
+					var studentId = row.studentId;
+					var classType = row.classType;
+					var className = row.className;
+					var schoolName = row.schoolName;
+					var classInstId = row.classInstId;
+					var teacherName = row.teacherName;
+					var classProgress = row.classProgress;
+					var changeClassNum = row.changeClassNum;
+					var courseStateText = row.courseStateText;
+					var studentCourseId = row.studentCourseId;
+					window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&studentId="+studentId+"&byName="+byName+"&changeClassNum="+changeClassNum+"&className="+className+"&classProgress="+classProgress+"&courseStateText="+courseStateText+"&name="+name+"&phone="+phone+"&teacherName="+teacherName+"&schoolId="+schoolId+"&schoolName="+schoolName+"&classInstId="+classInstId+"&classType="+classType+"&stageId="+stageId;
+				} else {
+					$.messager.alert('提示', "您选择的学员课程已申请转班，不能再次申请转班！");
+				}
 			} else {
-				$.messager.alert('提示', "您选择的学员课程已申请转班，不能再次申请转班！");
+				$.messager.alert('提示', "请先选择您要转班的学员课程！");
 			}
-		} else {
-			$.messager.alert('提示', "请先选择您要转班的学员课程！");
 		}
 	});
 	
 	//转校
 	$("#changeSchool").click(function() {
-		var row = $('#list_data').datagrid('getSelected');
-		if(row) {
-			var changeClassFlag = row.changeClassFlag;
-			if("Y" == changeClassFlag) {
-				var changeSchoolFlag = row.changeSchoolFlag;
-				if("Y" == changeSchoolFlag) {
-					var name = row.name;
-					var phone = row.phone;
-					var byName = row.byName;
-					var schoolId = row.schoolId;
-					var studentId = row.studentId;
-					var className = row.className;
-					var schoolName = row.schoolName;
-					var classInstId = row.classInstId;
-					var studentCourseId = row.studentCourseId;
-					var adviserTeacherName = row.adviserTeacherName;
-					window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentCourseId="+studentCourseId+"&studentId="+studentId+"&schoolId="+schoolId+"&schoolName="+schoolName+"&name="+name+"&byName="+byName+"&phone="+phone+"&currentClassName="+className+"&adviserTeacherName="+adviserTeacherName+"&classInstId="+classInstId;
+		if(validateSelect()) {
+			var row = $('#list_data').datagrid('getSelected');
+			if(row) {
+				var changeClassFlag = row.changeClassFlag;
+				if("Y" == changeClassFlag) {
+					var changeSchoolFlag = row.changeSchoolFlag;
+					if("Y" == changeSchoolFlag) {
+						var name = row.name;
+						var phone = row.phone;
+						var byName = row.byName;
+						var schoolId = row.schoolId;
+						var studentId = row.studentId;
+						var className = row.className;
+						var schoolName = row.schoolName;
+						var classInstId = row.classInstId;
+						var studentCourseId = row.studentCourseId;
+						var adviserTeacherName = row.adviserTeacherName;
+						window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentCourseId="+studentCourseId+"&studentId="+studentId+"&schoolId="+schoolId+"&schoolName="+schoolName+"&name="+name+"&byName="+byName+"&phone="+phone+"&currentClassName="+className+"&adviserTeacherName="+adviserTeacherName+"&classInstId="+classInstId;
+					} else {
+						$.messager.alert('提示', "您选择的学员课程已申请转校，不能再次申请转校！");
+					}
 				} else {
-					$.messager.alert('提示', "您选择的学员课程已申请转校，不能再次申请转校！");
+					$.messager.alert('提示', "您选择的学员课程有未结束的转班状态，不能申请转校！");
 				}
 			} else {
-				$.messager.alert('提示', "您选择的学员课程有未结束的转班状态，不能申请转校！");
+				$.messager.alert('提示', "请先选择您要转班的学员课程！");
 			}
-		} else {
-			$.messager.alert('提示', "请先选择您要转班的学员课程！");
 		}
 	});
 	
 	//休学
 	$("#leave").click(function() {
-		var row = $('#list_data').datagrid('getSelected');
-		if(row) {
-			var courseState = row.courseState;
-			if("003" == courseState || "005" == courseState || "006" == courseState || "007" == courseState) {
-				var studentId = row.studentId;
-				var studentCourseId = row.studentCourseId;
-				var classProgress = row.classProgress;
-				window.location.href = "/sys/leaveManage/viewLeaveInfo.do?studentId="+studentId+"&courseState="+courseState+"&studentCourseId="+studentCourseId+"&funcNodeId=&type=add&currentHours="+classProgress;
+		if(validateSelect()) {
+			var row = $('#list_data').datagrid('getSelected');
+			if(row) {
+				var courseState = row.courseState;
+				if("003" == courseState || "005" == courseState || "006" == courseState || "007" == courseState) {
+					var studentId = row.studentId;
+					var studentCourseId = row.studentCourseId;
+					var classProgress = row.classProgress;
+					window.location.href = "/sys/leaveManage/viewLeaveInfo.do?studentId="+studentId+"&courseState="+courseState+"&studentCourseId="+studentCourseId+"&funcNodeId=&type=add&currentHours="+classProgress;
+				} else {
+					$.messager.alert('提示', "您选择的学员课程已休学，不能再次申请休学！");
+				}
 			} else {
-				$.messager.alert('提示', "您选择的学员课程已休学，不能再次申请休学！");
+				$.messager.alert('提示', "请先选择您要休学的学员课程！");
 			}
-		} else {
-			$.messager.alert('提示', "请先选择您要休学的学员课程！");
 		}
 	});
 	
 	//异常
 	$("#exception").click(function() {
-		var row = $('#list_data').datagrid('getSelected');
-		if(row) {
-			var courseState = row.courseState;
-			if("003" == courseState || "004" == courseState || "006" == courseState || "007" == courseState) {
-				var studentId = row.studentId;
-				var studentCourseId = row.studentCourseId;
-				window.location.href = "/sys/exception/addExp.jsp?addInfo=" + studentId + "," + studentCourseId + "," + courseState;
+		if(validateSelect()) {
+			var row = $('#list_data').datagrid('getSelected');
+			if(row) {
+				var courseState = row.courseState;
+				if("003" == courseState || "004" == courseState || "006" == courseState || "007" == courseState) {
+					var studentId = row.studentId;
+					var studentCourseId = row.studentCourseId;
+					window.location.href = "/sys/exception/addExp.jsp?addInfo=" + studentId + "," + studentCourseId + "," + courseState;
+				} else {
+					$.messager.alert('提示', "您选择的学员课程状态为异常，不能再次修改课程状态为异常！");
+				}
 			} else {
-				$.messager.alert('提示', "您选择的学员课程状态为异常，不能再次修改课程状态为异常！");
+				$.messager.alert('提示', "请先选择您要异常的学员课程！");
 			}
-		} else {
-			$.messager.alert('提示', "请先选择您要异常的学员课程！");
 		}
 	});
 	
 	//修改档案
 	$("#updateStudent").click(function() {
-		var row = $('#list_data').datagrid('getSelected');
-		if(row) {
-			var carer = row.carer;
-			var studentId = row.studentId;
-    		var dutyAdvister = row.dutyAdvister;
-    		var advisterIdA = row.advisterIdA;
-    		var advisterIdB = row.advisterIdB;
-    		var identityType = row.identityType;
-    		var advisterASchoolId = row.advisterASchoolId;
-    		var advisterBSchoolId = row.advisterBSchoolId;
-    		var funcNodeId = $("#updateStudent").attr("funcNodeId");
-    		window.location.href = "/sys/student/updateStudent.jsp?studentId="+studentId+"&funcNodeId="+funcNodeId+"&dutyAdvister="+dutyAdvister+"&carer="+carer+"&advisterIdA="+advisterIdA+"&advisterIdB="+advisterIdB+"&identityType="+identityType+"&advisterASchoolId="+advisterASchoolId+"&advisterBSchoolId="+advisterBSchoolId;
-		} else {
-			$.messager.alert('提示', "请先选择您要修改档案的学员课程！");
+		if(validateSelect()) {
+			var row = $('#list_data').datagrid('getSelected');
+			if(row) {
+				var carer = row.carer;
+				var studentId = row.studentId;
+				var dutyAdvister = row.dutyAdvister;
+				var advisterIdA = row.advisterIdA;
+				var advisterIdB = row.advisterIdB;
+				var identityType = row.identityType;
+				var advisterASchoolId = row.advisterASchoolId;
+				var advisterBSchoolId = row.advisterBSchoolId;
+				var funcNodeId = $("#updateStudent").attr("funcNodeId");
+				window.location.href = "/sys/student/updateStudent.jsp?studentId="+studentId+"&funcNodeId="+funcNodeId+"&dutyAdvister="+dutyAdvister+"&carer="+carer+"&advisterIdA="+advisterIdA+"&advisterIdB="+advisterIdB+"&identityType="+identityType+"&advisterASchoolId="+advisterASchoolId+"&advisterBSchoolId="+advisterBSchoolId;
+			} else {
+				$.messager.alert('提示', "请先选择您要修改档案的学员课程！");
+			}
 		}
 	});
 	
 	//浏览
 	$("#view").click(function() {
-		var row = $('#list_data').datagrid('getSelected');
-		if(row) {
-			
-		} else {
-			$.messager.alert('提示', "请先选择您要浏览的学员课程！");
+		if(validateSelect()) {
+			var row = $('#list_data').datagrid('getSelected');
+			if(row) {
+				
+			} else {
+				$.messager.alert('提示', "请先选择您要浏览的学员课程！");
+			}
 		}
 	});
 });
@@ -354,52 +390,66 @@ $(document).ready(function() {
 //变更班级教师
 function maintenanceClass() {
 	var classTeacherArray = "[";
+	var flag = false;
+	var newTeacherName = "";
 	$("[name='schooltimes']").each(function() {
 		var schooltimeId = $(this).attr("schooltimeId");
 		var weekTime = $(this).attr("weekTime");
 		var hourRange = $(this).attr("hourRange");
-		var flag = false;
 		$("[name='teachers']").each(function() {
 			var teacherWeekTime = $(this).attr("weekTime");
 			var teacherHourRange = $(this).attr("hourRange");
 			var addFlag = $(this).attr("addFlag");
-			if(weekTime == teacherWeekTime && hourRange == teacherHourRange && "Y" == addFlag) {
-				flag = true;
-				var teacherId = $(this).attr("teacherId");
-				var lessions = $(this).attr("lessions");
-				classTeacherArray += "{schooltimeId:\""+schooltimeId+"\",teacherId:\""+teacherId+"\",teacherType:\"T\",lessions:\""+lessions+"\"},";
+			var schoolName = $(this).attr("schoolName");
+			var byname = $(this).attr("byname");
+			var isLicense = $(this).attr("isLicense");
+			if(weekTime == teacherWeekTime && hourRange == teacherHourRange) {
+				if("Y" == addFlag) {
+					flag = true;
+					var teacherId = $(this).attr("teacherId");
+					var lessions = $(this).attr("lessions");
+					classTeacherArray += "{schooltimeId:\""+schooltimeId+"\",teacherId:\""+teacherId+"\",teacherType:\"T\",lessions:\""+lessions+"\"},";
+				}
+				newTeacherName += schoolName + " " + byname + "（" + isLicense + "）</br>";
 			}
 		});
 	});
-	if(classTeacherArray != "[" && classTeacherArray.endWith(",")) {
-		classTeacherArray = classTeacherArray.substring(0, classTeacherArray.length - 1);
+	if(flag) {
+		newTeacherName = newTeacherName.substring(0, newTeacherName.length - 5);
+		$("#newTeacherName").val(newTeacherName);
+		if(classTeacherArray != "[" && classTeacherArray.endWith(",")) {
+			classTeacherArray = classTeacherArray.substring(0, classTeacherArray.length - 1);
+		}
+		classTeacherArray += "]";
+		if(classTeacherId != "" && classTeacherId != null && classTeacherId != undefined) {
+			classTeacherId = classTeacherId.substring(0, classTeacherId.length - 1);
+			$("#classTeacherId").val(classTeacherId);
+		}
+		var obj = JSON.stringify($("#maintenanceClassFm").serializeObject());
+		var param = "{teacherChangeHist:"+obj+",classTeacherArray:"+classTeacherArray+"}";
+		alert(param)
+		$.ajax({
+			url: "/sys/attendClass/changeTeacher.do",
+			data: "param=" + param,
+			dataType: "json",
+			async: false,
+			beforeSend: function()
+			{
+				$.messager.progress({title : '变更老师', msg : '正在变更老师，请稍等……'});
+			},
+			success: function (data) {
+				$.messager.progress('close'); 
+				var flag = data.flag;
+				if(flag) {
+					$.messager.alert('提示', "变更老师成功！", "info", function() {window.history.back();});
+				} else {
+					$.messager.alert('提示', data.msg);
+				}
+			} 
+		});
+	} else {
+		$.messager.alert('提示', "请先变更老师！");
 	}
-	classTeacherArray += "]";
-	if(classTeacherId != "" && classTeacherId != null && classTeacherId != undefined) {
-		classTeacherId = classTeacherId.substring(0, classTeacherId.length - 1);
-		$("#classTeacherId").val(classTeacherId);
-	}
-	var obj = JSON.stringify($("#maintenanceClassFm").serializeObject());
-	obj = obj.substring(0, obj.length - 1) + ",classTeacherArray:"+classTeacherArray+"}";
-	$.ajax({
-		url: "/sys/openClass/applyOpenClass.do",
-		data: "param=" + obj,
-		dataType: "json",
-		async: false,
-		beforeSend: function()
-		{
-			$.messager.progress({title : '申请开班', msg : '正在申请开班，请稍等……'});
-		},
-		success: function (data) {
-			$.messager.progress('close'); 
-			var flag = data.flag;
-			if(flag) {
-				$.messager.alert('提示', "申请开班成功！", "info", function() {window.history.back();});
-			} else {
-				$.messager.alert('提示', data.msg);
-			}
-		} 
-	});
 }
 
 //添加代班老师
@@ -440,4 +490,20 @@ function deleteTeacher(obj, teacherId)
 		}
 	});
 	$("#teacher" + teacherId + weekTime + hourRange).html("");
+}
+
+function validateSelect()
+{
+	var flag = false;
+	var obj = $('#list_data').datagrid('getSelections');
+	if(obj.length > 0) {
+		if(obj.length > 1) {
+			$.messager.alert('提示', "只能选择一个学员进行操作！");
+		} else {
+			flag = true;
+		}
+	} else {
+		$.messager.alert('提示', "请先选择您要操作的学员！");
+	}
+	return flag;
 }

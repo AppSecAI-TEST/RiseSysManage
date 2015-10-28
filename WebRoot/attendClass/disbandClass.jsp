@@ -18,6 +18,7 @@
   				<input type="hidden" id="applyId" name="applyId" value="${obj.attendClassObj.applyId }"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   				<input type="hidden" id="classInstId" name="classInstId" value="${obj.attendClassObj.classInstId }"/>
+  				<input type="hidden" id="classStudentNum" value="${obj.attendClassObj.classStudentNum }"/>
 	  			<table width="99.99%" cellpadding="5px" class="maintable">
 	  				<tr>
 	  					<td align="right" width="10%"><span>课程阶段：</span></td>
