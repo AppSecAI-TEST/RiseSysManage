@@ -16,7 +16,7 @@
 }
 .datagrid{
 	margin:0 auto;
-	min-width:400px;
+	min-width:50px;
 	margin-top:5px;
 	width:20%;
 }
@@ -24,8 +24,14 @@ datagrid-row-selected
 </style>
 	</head>
 	<body>
+	<div style="width:700; overflow:scroll;">
+   
+
     	<table width="700"  cellpadding="0" border="0" style="border-collapse:collapse;overflow:scroll;" >
     	<tr>
+    		<td>
+	    	<table  id="t0"></table>
+	    	</td>
 	    	<td>
 	    	<table  id="t1"></table>
 	    	</td>
@@ -49,7 +55,7 @@ datagrid-row-selected
 	    	</td>
     	</tr>
     	</table>
-    	
+    	</div>
 		 <div id="dlg" class="easyui-dialog" style="width: 600px; height: 550px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
  				<iframe id="frame2" name="frame2"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" height="445px" width="100%"></iframe>
   	    </div>
@@ -114,6 +120,7 @@ function getWeekTime()
     			{
     				json1=data[i];
     				initTable("t1",json1);
+    				 initTeacher("t0",json1);
     			}else if(i==1)
     			{
     				json2=data[i];
@@ -149,6 +156,30 @@ function getWeekTime()
     	
 	});
 	
+}
+
+function initTeacher(tabId,data)
+{
+	var rows=data.rows;
+	var time=rows[0].schooltime;
+	var weekTime=rows[0].weekTime;
+	$('#'+tabId).datagrid({
+    title: "老师",
+    width: 100,
+    height: 'auto',
+    fitColumns: true,
+    singleSelect:true,
+    rowStyler: function(index,row)
+    {
+		 return 'background-color:#FFFFFF;color:#00000;';
+    },
+     
+    columns:[[
+      {field:'teacherName',title:'老师',width:100,align:'center'}
+      
+    ]] 
+  });
+  $('#'+tabId).datagrid("loadData",data);	
 }
 
 function initTable(tabId,data)
@@ -309,33 +340,39 @@ function endEditing(tab)
 		//var tdNum=parseInt(mark);
 		
 		var choose=getCellValue($(tab),editIndex,editField);
-		alert(choose)
-	
+		if(choose!=undefined && choose!=editValue && choose!='')
+		{
+			var rowVal = $(tab).datagrid('getData').rows[editIndex];
+			//alert(JSON.stringify(rowVal));
+			var planT={};
+			var val=rowVal[editField]+"";
+			
+			var vals = choose.split("/");
+			
+			var className=vals[0];
+			
+			var roomName=vals[1];
+			
+			var teacherType=vals[2];
+			
+			var mergeNum=vals[3];//合并列数量
+		
+			planT.schoolId=rowVal.schoolId;
+			planT.teacherName=rowVal.teacherName;
+			planT.teacherId=rowVal.teacherId;
+			planT.teacherType=teacherType;
+		    planT.className=className;
+		    planT.roomName=roomName;
+		    planT=getHours(planT,mergeNum);
+		    if(planT.hourRange!=undefined && planT.hourRange!='')
+		    {
+				addPlanTime(planT,tab);
+			}else
+			{
+				alert("没有可适用时段");
+			}
+		  }
 		$(tab).datagrid('endEdit', editIndex);
-		
-		var rowVal = $(tab).datagrid('getData').rows[editIndex];
-		//alert(JSON.stringify(rowVal));
-		var planT={};
-		var val=rowVal[editField]+"";
-		
-		var vals = val.split("/");
-		
-		var className=vals[0];
-		
-		var roomName=vals[1];
-		
-		var teacherType=vals[2];
-		
-		var mergeNum=vals[3];//合并列数量
-	
-		planT.schoolId=rowVal.schoolId;
-		planT.teacherName=rowVal.teacherName;
-		planT.teacherId=rowVal.teacherId;
-		planT.teacherType=teacherType;
-	    planT.className=className;
-	    planT.roomName=roomName;
-	    planT=getHours(planT,mergeNum);
-		addPlanTime(planT,tab);
 		var tabId= $(tab).attr("id");
 		MergeCells(tabId);//重新合并
 		editIndex = undefined;
@@ -455,6 +492,7 @@ function getHours(planT,mergeNum)
 			{
 				planT.hourRange=paramVal;
 				planT.lessionHours=hourRange[i].param4;
+				break;
 			}
 		}else
 		{
@@ -462,6 +500,7 @@ function getHours(planT,mergeNum)
 			{
 				planT.hourRange=paramVal;
 				planT.lessionHours=hourRange[i].param4;
+				break;
 			}
 		}
 		
