@@ -148,7 +148,7 @@ function initTable(tabId,data)
     },
     columns:[[
       {field:'teacherName',title:'老师',width:50,align:'center'},
-      {field:'H001',title:'8:30',width:50,align:'center',editor:'text'},
+      {field:'H001',title:'8:30',width:50,align:'center', editor:'text'},
       {field:'H002',title:'10:30',width:50,align:'center',editor:'text'},
       {field:'H003',title:'14:00',width:50,align:'center',editor:'text'},
       {field:'H004',title:'16:00',width:50,align:'center',editor:'text'},
@@ -162,7 +162,7 @@ function initTable(tabId,data)
     ]],
     onLoadSuccess:function()
     {
-	$(this).datagrid('freezeRow',0);	
+	 $(this).datagrid('freezeRow',0);	
      $('.editcls').linkbutton({text:'排课',plain:true,iconCls:'icon-add'});  
     
     }
