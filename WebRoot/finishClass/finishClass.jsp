@@ -9,19 +9,24 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
+		<script type="text/javascript" src="<%=path %>/js/finishClass/finishClassList.js"></script>
   	</head>
   
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="班级结课">
   			<form id="finishClassFm">
+  				<input type="hidden" id="applyId" name="applyId" value="${obj.attendClassObj.applyId }"/>
+  				<input type="hidden" id="schoolId" name="schoolId" value="${obj.attendClassObj.schoolId }"/>
+  				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
+  				<input type="hidden" id="classInstId" name="classInstId" value="${obj.attendClassObj.classInstId }"/>
   				<table width="99.99%" cellpadding="5px" class="maintable">
   					<tr>
 	  					<td align="right" width="10%"><span>课程阶段：</span></td>
-	  					<td width="20%"><span id="stageId">${obj.attendClassObj.stageId }</span></td>
+	  					<td width="20%"><span id="stageIdText">${obj.attendClassObj.stageId }</span></td>
 	  					<td align="right" width="10%"><span>班级类型：</span></td>
-	  					<td width="20%"><span id="classType">${obj.attendClassObj.classType }</span></td>
+	  					<td width="20%"><span id="classTypeText">${obj.attendClassObj.classType }</span></td>
 	  					<td align="right" width="10%"><span>班级名称：</span></td>
-	  					<td width="30%"><span id="className">${obj.attendClassObj.className }</span></td>
+	  					<td width="30%"><span id="classNameText">${obj.attendClassObj.className }</span></td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="10%"><span>开课时间：</span></td>

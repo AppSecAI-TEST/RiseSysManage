@@ -111,5 +111,20 @@
 		  		</thead>
 		  	</table>
   		</div>
+  		<div style="height: 5px;"></div>
+  		<div style="padding:5px 0;min-width:1101px; width:100%;">
+  			<table class="easyui-datagrid" style="height: auto; width: 100%" id="list_data" title="放班班操作历史信息" fitColumns="true" singleSelect="false"
+  				url="<%=path %>/pubData/qryData.do?param={'classInstId':'${obj.attendClassObj.classInstId }','funcNodeId':'1008'}">
+				<thead>
+					<tr>
+						<th data-options="field:'operType',width:100,align:'center'">操作类型</th>
+						<th data-options="field:'createDate',width:120,align:'center'">操作时间</th>
+						<th data-options="field:'operName',width:100,align:'center'">操作人</th>
+						<th data-options="field:'approveRemark',width:150,align:'center'">审批意见</th>
+						<th data-options="field:'remark',width:350,align:'center'">情况说明</th>
+					</tr>
+				</thead>
+			</table>
+  		</div> 		
   	</body>
 </html>

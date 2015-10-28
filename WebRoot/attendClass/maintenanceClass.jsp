@@ -15,8 +15,14 @@
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="班级维护">
   			<form id="maintenanceClassFm">
+  				<input type="hidden" id="oldTeacherName" name="oldTeacherName"/>
+  				<input type="hidden" id="newTeacherName" name="newTeacherName"/>
+  				<input type="hidden" id="classTeacherId" name="classTeacherId"/>
   				<input type="hidden" id="schoolId" name="schoolId" value="${obj.attendClassObj.schoolId }"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
+  				<input type="hidden" id="className" name="className" value="${obj.attendClassObj.className }"/>
+  				<input type="hidden" id="classInstId" name="classInstId" value="${obj.attendClassObj.classInstId }"/>
+  				<input type="hidden" id="classProgress" name="classProgress" value="${obj.attendClassObj.classProgress }"/>
 	  			<table width="99.99%" cellpadding="5px" class="maintable">
 	  				<tr>
 	  					<td align="right" width="10%"><span>课程阶段：</span></td>
@@ -24,7 +30,7 @@
 	  					<td align="right" width="10%"><span>班级类型：</span></td>
 	  					<td width="20%"><span id="classType">${obj.attendClassObj.classType }</span></td>
 	  					<td align="right" width="10%"><span>班级名称：</span></td>
-	  					<td width="30%"><span id="className">${obj.attendClassObj.className }</span></td>
+	  					<td width="30%"><span id="classNameText">${obj.attendClassObj.className }</span></td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="10%"><span>开课时间：</span></td>
@@ -52,7 +58,7 @@
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="10%"><span>课时进度：</span></td>
-	  					<td width="20%"><span>${obj.attendClassObj.classProgress }</span></td>
+	  					<td width="20%"><span id="classProgressText">${obj.attendClassObj.classProgress }</span></td>
 	  					<td align="right" width="10%"><span>持证率：</span></td>
 	  					<td width="20%"><span id="studentChannelTypeVal">${obj.attendClassObj.licenseRateText }</span></td>
 	  					<td align="right" width="10%"><span>班级性质：</span></td>
@@ -81,7 +87,9 @@
 	  											<span id="teacher${classTeacher.teacherId }${schooltime.weekTime }${schooltime.hourRange }">
 	  												${classTeacher.schoolName }&nbsp;${classTeacher.byname }&nbsp;${classTeacher.hours }&nbsp;${classTeacher.isLicense }&nbsp;
 	  												<a href='javascript:void(0)' class='linkmore' onclick="deleteTeacher(this, ${classTeacher.teacherId })"><span>删除</span></a>
-	  												<input type='hidden' name='teachers' teacherId='${classTeacher.teacherId }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }' lessions='${classTeacher.hours }' classTeacherId='${classTeacher.classTeacherId }'/>&nbsp;
+	  												<input type='hidden' name='teachers' teacherId='${classTeacher.teacherId }' weekTime='${schooltime.weekTime }' 
+	  													hourRange='${schooltime.hourRange }' lessions='${classTeacher.hours }' classTeacherId='${classTeacher.classTeacherId }'
+	  													schoolName='${classTeacher.schoolName }' byname='${classTeacher.byname }' isLicense='${classTeacher.isLicense }'/>&nbsp;
 	  											</span>
 	  										</c:forEach>
 	  									</td>
@@ -96,7 +104,7 @@
   					<tr>
 	  					<td align="right" width="10%"><span>老师变更备注：</span></td>
 	  					<td colspan="5">
-	  						<textarea rows="6" cols="122" id="remark" name="remark" required="true" class="easyui-validatebox textbox"></textarea>
+	  						<textarea rows="6" cols="122" id="changeRemark" name="changeRemark" required="true" class="easyui-validatebox textbox"></textarea>
 	  					</td>
 	  				</tr>
 	  				<tr>
