@@ -27,7 +27,7 @@ $(document).ready(function() {
 	});
 	
 	$("#stageId").combobox({
-		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID",//返回json数据的url
+		url : "/sys/pubData/qryStage.do",//返回json数据的url
     	valueField : "codeFlag",
     	textField : "codeName",
     	panelHeight : "auto",
