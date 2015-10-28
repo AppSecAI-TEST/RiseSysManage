@@ -177,7 +177,7 @@ function initTable(tabId,data)
     ]],
     onLoadSuccess:function()
     {
-	$(this).datagrid('freezeRow',0);	
+	//$(this).datagrid('freezeRow',0);	
       MergeCells(tabId);
     } 
   });
@@ -305,9 +305,11 @@ function endEditing(tab)
 	if (editIndex == undefined){return true}
 	if ($(tab).datagrid('validateRow', editIndex))
 	{
-		var mark=field.substring(1,field.length);
-		var tdNum=parseInt(mark);
-		var choose=$('#t1 tr:eq(3) td:nth-child(1)').html(); 
+		//var mark=field.substring(1,field.length);
+		//var tdNum=parseInt(mark);
+		
+		var choose=getCellValue($(tab),editIndex,editField);
+		alert(choose)
 	
 		$(tab).datagrid('endEdit', editIndex);
 		
@@ -395,9 +397,10 @@ function addPlanTime(planT,tab)
   
 function onClickCell(index, field,value)
 {
-	
-	alert(choose);
-	 
+	if(value==undefined)
+	{
+		value ="";
+	}	
 	var id= $(this).attr("id");
 	if(tabId!='' && tabId!=id)
 	{
@@ -465,6 +468,21 @@ function getHours(planT,mergeNum)
 		
 	}
 	return planT;
+}
+
+function getCellValue(tabObj,rowIndex,field)
+{
+	var val ="";
+	var tab =tabObj.parent().find(".datagrid-view2").find(".datagrid-body").find(".datagrid-btable");
+	var tr =tab.find("tr:eq("+rowIndex+")");
+	tr.find("td").each(function(){
+		if($(this).attr("field")==field)
+		{
+			val =$(this).find("input[type='text']").val();
+			return false;
+		}	
+	});
+	return val;
 }
 
 </script>
