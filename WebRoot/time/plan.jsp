@@ -40,29 +40,13 @@
 			</table>
 		</form>
 		<div style="padding:5px 0;min-width:1100px; width:100%;">
-			<table class="easyui-datagrid" title="学员列表" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1000" 
+			<table class="easyui-datagrid" title="排课列表" style="height:435px;" id="list_data"   
 				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
-				<thead>
-					<tr>
-						<th data-options="field:'ck',checkbox:true"></th>
-						<th data-options="field:'schoolName',width:80,align:'center'">校区</th>
-						<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
-						<th data-options="field:'byName',width:100,align:'center'">英文名</th>
-						<th data-options="field:'sexVal',width:50,align:'center'">性别</th>
-						<th data-options="field:'identityId',width:200,align:'center'">证件号码</th>
-						<th data-options="field:'birthday',width:100,align:'center'">出生日期</th>
-						<th data-options="field:'phone',width:250,align:'center'">联系电话</th>
-						<th data-options="field:'createDate',width:100,align:'center'">建档时间</th>
-						<th data-options="field:'advisterName',width:150,align:'center'">招生顾问</th>
-						<th data-options="field:'dutyAdvisterName',width:100,align:'center'">责任顾问</th>
-						<th data-options="field:'carerName',width:100,align:'center'">客户关怀</th>
-						<th data-options="field:'parentsName',width:150,align:'center'">家长</th>
-					</tr>
-				</thead>
+				 
 			</table>
 		</div>
 		<div id="toolbar" style="padding: 2px; height: auto">
-   			<a href="javascript:void(0)" id="addStudent" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">创建排课</a>
+   			<a href="javascript:void(0)" id="createPlan" href="" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">创建排课</a>
    			<a href="javascript:void(0)" id="updateStudent" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;" funcNodeId="1002">维护排课</a>
    			<a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">浏览排课</a>
 		</div>
@@ -72,3 +56,12 @@
   		</div>
  	</body>
 </html>
+<<script type="text/javascript">
+    
+    $("#createPlan").click(function() {
+    	 
+    		window.location.href = "/sys/time/createPlan.jsp";
+    	}
+    );
+
+</script>

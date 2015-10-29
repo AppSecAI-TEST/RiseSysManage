@@ -21,17 +21,58 @@
 	width:20%;
 }
 datagrid-row-selected
+#wrap{  
+    width:700px;  
+    margin:0 auto;  
+}  
+#header{  
+    margin:0px;  
+    height:80px;  
+    border:solid 1px #00C9FF;  
+}  
+#container{  
+    position:relative;  
+    margin:0px;  
+    height:400px;  
+}  
+#left_side{  
+    position:absolute;  
+    top:0px;  
+    left:0px;  
+    width:100px;  
+    height:100%;  
+}  
+#content{  
+    margin:0px 10px 0px 100px;  
+      
+    height:100%;  
+}  
+#right_side{  
+    position:absolute;  
+    top:0px;  
+    right:0px;  
+    border:solid 1px #00C9FF;  
+    width:170px;  
+    height:100%;  
+}  
+#footer{  
+    margin:20px;  
+    height:80px;  
+    border:solid 1px #00C9FF;  
+}  
+
 </style>
 	</head>
 	<body>
-	<div style="width:700; height:1000; overflow:scroll;">
-   
-
+	<div id="wrap">  
+        <!--  <div id="header">header</div> --> 
+        <div id="container">  
+            <div id="left_side"> 
+	    	<table  id="t0"></table>
+	    	 </div>  
+            <div id="content"><div style="width:700; height:1000; overflow:scroll;">
     	<table width="700"  cellpadding="0" border="0" style="border-collapse:collapse;overflow:scroll;" >
     	<tr>
-    		<td>
-	    	<table  id="t0"></table>
-	    	</td>
 	    	<td>
 	    	<table  id="t1"></table>
 	    	</td>
@@ -55,7 +96,12 @@ datagrid-row-selected
 	    	</td>
     	</tr>
     	</table>
-    	</div>
+    	</div></div>  
+             
+        </div>  
+         
+    </div>  
+	
 		 <div id="dlg" class="easyui-dialog" style="width: 600px; height: 550px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
  				<iframe id="frame2" name="frame2"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" height="445px" width="100%"></iframe>
   	    </div>
@@ -183,7 +229,6 @@ function initTable(tabId,data)
     },
     onClickCell:onClickCell, 
     columns:[[
-      {field:'teacherName',title:'老师',width:120,align:'center'},
       {field:'H001',title:'8:30', width:120,align:'center', editor:'text'},
       {field:'H002',title:'10:30',width:120,align:'center', editor:'text'},
       {field:'H003',title:'14:00',width:120,align:'center', editor:'text'},
