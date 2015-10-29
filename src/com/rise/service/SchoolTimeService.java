@@ -71,4 +71,16 @@ public class SchoolTimeService
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS8006\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
+	
+	/**
+	 * ÐÞ¸ÄÅÅ¿Î±êÊ¶
+	 * @param createWeekId
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateCreateWeek(String createWeekId) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS8007\",securityCode:\"0000000000\",params:{createWeekId:"+createWeekId+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
 }

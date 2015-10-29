@@ -369,7 +369,7 @@ function endEditing(tab)
 		if(choose!=undefined && choose!=editValue)
 		{
 			var rowVal = $(tab).datagrid('getData').rows[editIndex];
-			alert(JSON.stringify(rowVal));
+		//	alert(JSON.stringify(rowVal));
 			var planT={};
 			var val=rowVal[editField]+"";
 			var schooltimeInstId=rowVal[editField+"-schooltimeInstId"]+"";
