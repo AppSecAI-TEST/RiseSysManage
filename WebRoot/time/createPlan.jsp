@@ -35,10 +35,10 @@
  	</body>
 </html>
 <script type="text/javascript">
-
+var time;
 $("#submit").click(function()
 {
-	var time=$("#time").datebox('getValue');
+	time=$("#time").datebox('getValue');
 	var param={};
 	param.handlerId=$("#handlerId").val();
 	param.schoolId=$("#schoolId").val();
@@ -76,7 +76,6 @@ $("#submit").click(function()
 
 function init(data)
 {
-	alert(JSON.stringify(data));
 	
 $('#weekDg').datagrid({  
 	 border:false,  
@@ -89,7 +88,7 @@ $('#weekDg').datagrid({
         {field:'createDdate',title:'创建时间',width:25, 
             formatter: function(Confirmation, row)
             {  
-                var btn = '<a class="editcls" onclick="planWeek(\''+row.weekTime+'\',\''+row.date+'\',\''+row.createWeekId+'\')"  href="javascript:void(0)">排课</a>';  
+              var btn = '<a class="editcls" onclick="planWeek(\''+row.weekSeq+'\',\''+row.month+'\',\''+row.createWeekId+'\')"  href="javascript:void(0)">排课</a>';  
                 return btn;  
             }  
         }  
@@ -102,7 +101,7 @@ $('#weekDg').datagrid({
 }
  
   
-function planWeek(weekTime,date,createWeekId)
+function planWeek(weekSeq,month,createWeekId)
 {
 	$.ajax(
 	{
@@ -124,6 +123,6 @@ function planWeek(weekTime,date,createWeekId)
         	$.messager.progress('close'); 
         }
 	});
-	window.location.href="/sys/time/planTime.jsp";
+	window.location.href="/sys/time/planTime.jsp?month="+month+"&weekSeq="+weekSeq;
 }
 </script>

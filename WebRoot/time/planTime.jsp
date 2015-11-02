@@ -1,4 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<% 
+	String month=request.getParameter("month");
+	String weekSeq=request.getParameter("weekSeq");
+
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -64,6 +69,7 @@ datagrid-row-selected
 </style>
 	</head>
 	<body>
+		<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
 	<div id="wrap">  
         <!--  <div id="header">header</div> --> 
         <div id="container">  
@@ -131,11 +137,12 @@ function linkCourse()
 
 function getWeekTime()
 {
+	var schoolId=$("#schoolId").val();
 	$.ajax(
 	{
 		type : "POST",
 		url: "/sys/time/getTimeByWeek.do?",
-		data: "param={'month':'10','week':'1'}",
+		data: "param={'month':'<%=month%>','week':'<%=weekSeq%>','schoolId':'"+schoolId+"'}",
 		async: false,
 		dataType:"json",
 		beforeSend: function()
@@ -494,12 +501,12 @@ function addPlanTime(planT,tab)
     	success: function(data) 
     	{
     		$.messager.progress('close');
-    		if('false'==data.flag)
-    		{
-    			alert(data.msg);
-    		}else
+    		if(data.flag)
     		{
     			 getWeekTime();
+    		}else
+    		{
+    			alert(data.msg);
     		}
     		 
         },
