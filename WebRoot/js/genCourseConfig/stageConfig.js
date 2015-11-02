@@ -16,7 +16,7 @@ $(document).ready(function(){
 	    columns:[[  
 	    	{field:'ck',checkbox:true,width:'1%',align:'center'},  
 	        {field:'stageId',title:'课程阶段',width:'12%',align:'center'},  
-	        {field:'seqOrder',title:'阶段顺序',width:'12%',align:'center'},
+	        {field:'seqOrder',title:'年级',width:'12%',align:'center'},
 	        {field:'classType',title:'班级类型',width:'12%',align:'center'},  
 	        {field:'hours',title:'基础课时',width:'10%',align:'center'},
 	        {field:'gradHours',title:'毕业典礼课时',width:'12%',align:'center'},  
@@ -26,7 +26,7 @@ $(document).ready(function(){
 	            formatter: function(Confirmation, row)
 	            {  
 	        		if(row.typeFlag == "false"){
-		                var btn = '<a class="update" onclick="updateClassType(\''+row.classId+'\',\''+row.stageId+'\',\''+row.classType+'\',\''+row.hours+'\',\''+row.gradHours+'\',\''+row.gradRemark+'\',\''+row.isOpen+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">修改</a>&nbsp;<a class="delete" onclick="deleteClassType(\''+row.classId+'\')" style="width:80px; height:25px;" href="javascript:void(0)">删除</a>';  
+		                var btn = '<a class="update" onclick="updateClassType(\''+row.classId+'\',\''+row.stageId+'\',\''+row.seqOrder+'\',\''+row.classType+'\',\''+row.hours+'\',\''+row.gradHours+'\',\''+row.gradRemark+'\',\''+row.isOpen+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">修改</a>&nbsp;<a class="delete" onclick="deleteClassType(\''+row.classId+'\')" style="width:80px; height:25px;" href="javascript:void(0)">删除</a>';  
 		                return btn;  
 	        		}else if(row.typeFlag == "true"){
 	        			var btn = '<a class="update" disabled="disabled" style="width:80px; height:25px;"  href="javascript:void(0)">修改</a>&nbsp;<a class="delete" disabled="disabled" style="width:80px; height:25px;" href="javascript:void(0)">删除</a>';  
@@ -54,8 +54,9 @@ function addStage()
 	stageAction = "添加";
 	actionType = "阶段";
 	$("#stageId").textbox('enable');//能编辑
-	$("#seqOrder").numberbox({required:true});//必须填
-	$("#seqOrderTr").css("display","table-row");//显示行
+	$("#seqOrder").numberbox({disabled: false});//能编辑
+//	$("#seqOrder").numberbox({required:true});//必须填
+//	$("#seqOrderTr").css("display","table-row");//显示行
 }
 
 //打开新增班级类型页面
@@ -69,16 +70,18 @@ function addClassType()
 		stageAction = "添加";
 		actionType = "班级类型";
 		$('#stageFm').form('load',{
-			stageId : row.stageId
+			stageId : row.stageId,
+			seqOrder : row.seqOrder
 		});
 		$("#stageId").textbox('disable');//不能编辑
-		$("#seqOrder").numberbox({required:false});//不用填
-		$("#seqOrderTr").css("display","none");//隐藏
+		$("#seqOrder").numberbox({disabled: true});//不能编辑
+//		$("#seqOrder").numberbox({required:false});//不用填
+//		$("#seqOrderTr").css("display","none");//隐藏
 	}
 }
 
 //打开修改班级类型页面
-function updateClassType(classId,stageId,classType,hours,gradHours,gradRemark,isOpen)
+function updateClassType(classId,stageId,seqOrder,classType,hours,gradHours,gradRemark,isOpen)
 {
 	$('#stageDlg').dialog('open').dialog('setTitle','修改班级类型');
 	$('#stageFm').form('clear');
@@ -88,6 +91,7 @@ function updateClassType(classId,stageId,classType,hours,gradHours,gradRemark,is
 	$('#stageFm').form('load',{
 		classId :classId,
 		stageId : stageId,
+		seqOrder : seqOrder,
 		classType : classType,
 		hours : hours,
 		gradHours : gradHours,
@@ -100,8 +104,9 @@ function updateClassType(classId,stageId,classType,hours,gradHours,gradRemark,is
 		}
 	});
 	$("#stageId").textbox('disable');//不能编辑
-	$("#seqOrder").numberbox({required:false});//不必填
-	$("#seqOrderTr").css("display","none");//隐藏行
+	$("#seqOrder").numberbox({disabled: true});//不能编辑
+//	$("#seqOrder").numberbox({required:false});//不必填
+//	$("#seqOrderTr").css("display","none");//隐藏行
 }
 
 //保存信息提交
@@ -132,7 +137,7 @@ function saveSubmit()
 	    			$('#stageDlg').dialog('close');
 	    			window.location.reload();
 	    		}else if(state == "2"){
-	    			$.messager.alert('提示', "阶段名称或者阶段顺序不能重复！");
+	    			$.messager.alert('提示', "阶段名称或者年级不能重复！");
 	    			$('#stageDlg').dialog('close');
 	    			window.location.reload();
 	    		}else if(state == "1"){
@@ -251,7 +256,7 @@ function updateStageSubmit()
 	    			$('#updateStageDlg').dialog('close');
 	    			window.location.reload();
 	    		}else if(state == "2"){
-	    			$.messager.alert('提示', "阶段名称或者阶段顺序不能重复！");
+	    			$.messager.alert('提示', "阶段名称或者年级不能重复！");
 	    			$('#updateStageDlg').dialog('close');
 	    			window.location.reload();
 	    		}else if(state == "1"){

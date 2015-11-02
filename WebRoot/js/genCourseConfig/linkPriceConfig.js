@@ -7,24 +7,27 @@ $(document).ready(function(){
 	    singleSelect: true,  
 	    rownumbers : true,
 	    pagination :true,
-	  	url: "/sys/pubData/qryDataListByPage.do",
+	  	url: "/sys/genCourseConfig/qryDataListByPage.do",
 	  	queryParams:{
 			param : obj
 		},
 	    columns:[[  
 	        {field:'priceName',title:'连报优惠体系名称',width:'15%',align:'center'},  
 	        {field:'applySchools',title:'适用校区',width:'25%',align:'center'},
-	        {field:'isUseVal',title:'状态',width:'7%',align:'center'},  
-	        {field:'handerName',title:'创建人',width:'8%',align:'center'},
-	        {field:'createDate',title:'创建时间',width:'13%',align:'center'},  
-	        {field:'opt',title:'操作',width:'32%',align:'center',
+	        {field:'isUseVal',title:'状态',width:'10%',align:'center'},  
+	        {field:'handerName',title:'创建人',width:'10%',align:'center'},
+	        {field:'createDate',title:'创建时间',width:'15%',align:'center'},  
+	        {field:'opt',title:'操作',width:'25%',align:'center',
 	            formatter: function(Confirmation, row)
 	            {  
 	        		if(row.isUse == "Y"){
-		                var btn = '<a class="view" onclick="" style="width:80px; height:25px;"  href="javascript:void(0)">浏览</a>&nbsp;<a class="close" onclick="closeLinkPrice(\''+row.setPriceId+'\',\'N\',\'FAVOR_PRICE\')" style="width:80px; height:25px;" href="javascript:void(0)">关闭</a>';  
+		                var btn = '<a class="view" onclick="viewLinkPrice(\''+row.setPriceId+'\',\''+row.priceName+'\',\''+row.applySchools+'\',\''+row.effDate+'\',\''+row.expDate+'\',\''+row.isUseVal+'\',\''+row.handerName+'\',\''+row.createDate+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">浏览</a>';  
 		                return btn;  
 	        		}else if(row.isUse == "N"){
-	        			var btn = '<a class="view" onclick="" style="width:80px; height:25px;"  href="javascript:void(0)">浏览</a>&nbsp;<a class="update" onclick="" style="width:80px; height:25px;"  href="javascript:void(0)">修改</a>&nbsp;<a class="delete" onclick="deleteLinkPrice(\''+row.setPriceId+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">删除</a>&nbsp;<a class="open" onclick="openLinkPrice(\''+row.setPriceId+'\',\'Y\',\'FAVOR_PRICE\')" style="width:80px; height:25px;" href="javascript:void(0)">开启</a>';  
+	        			var btn = '<a class="view" onclick="viewLinkPrice(\''+row.setPriceId+'\',\''+row.priceName+'\',\''+row.applySchools+'\',\''+row.effDate+'\',\''+row.expDate+'\',\''+row.isUseVal+'\',\''+row.handerName+'\',\''+row.createDate+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">浏览</a>&nbsp;<a class="update" onclick="updateLinkPrice(\''+row.setPriceId+'\',\''+row.priceName+'\',\''+row.schoolIds+'\',\''+row.applySchools+'\',\''+row.effDate+'\',\''+row.expDate+'\',\''+row.isUseVal+'\',\''+row.handerName+'\',\''+row.createDate+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">修改</a>&nbsp;<a class="delete" onclick="deleteLinkPrice(\''+row.setPriceId+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">删除</a>';  
+		                return btn;  
+	        		}else if(row.isUse == "X"){
+	        			var btn = '<a class="view" onclick="viewLinkPrice(\''+row.setPriceId+'\',\''+row.priceName+'\',\''+row.applySchools+'\',\''+row.effDate+'\',\''+row.expDate+'\',\''+row.isUseVal+'\',\''+row.handerName+'\',\''+row.createDate+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">浏览</a>';  
 		                return btn;  
 	        		}
 	            }  
@@ -34,8 +37,6 @@ $(document).ready(function(){
 			$('.view').linkbutton({text:'浏览',iconCls:'icon-redo'}); 
 	        $('.update').linkbutton({text:'修改',iconCls:'icon-edit'}); 
 	        $('.delete').linkbutton({text:'删除',iconCls:'icon-remove'});  
-	        $('.close').linkbutton({text:'关闭',iconCls:'icon-cancel'});  
-	        $('.open').linkbutton({text:'开启',iconCls:'icon-add'});  
 	        $('#link_data').datagrid('clearSelections');
 	    },
 	    toolbar:"#linkToolbar"
@@ -43,65 +44,66 @@ $(document).ready(function(){
 
 });
 
-function closeLinkPrice(setPriceId,operType,priceType)
-{
-	$.messager.confirm('提示','您确定要关闭当前连报优惠体系?',function(r){
-		if(r)
-		{
-			$.ajax({
-				type : "POST",
-				url: "/sys/genCourseConfig/updatePirceOpenState.do",
-				data: "setPriceId="+setPriceId+"&operType="+operType+"&priceType=FAVOR_PRICE",
-				async: false,
-				beforeSend: function()
-		    	{
-		    		$.messager.progress({title : '关闭连报优惠体系', msg : '关闭连报优惠体系中，请稍等……'});
-		    	},
-		    	success: function(state) {
-		    		$.messager.progress('close'); 
-		    		if(state == "1"){
-		    			$.messager.alert('提示', "关闭连报优惠体系成功！");
-		    			window.location.reload();
-		    		}else if(state == "2"){
-		    			$.messager.alert('提示', "关闭连报优惠体系失败！");
-		    		}
-		        } 
-			});
-		}
-	});
-}
+//function closeLinkPrice(setPriceId,operType,priceType)
+//{
+//	$.messager.confirm('提示','您确定要关闭当前连报优惠体系?',function(r){
+//		if(r)
+//		{
+//			$.ajax({
+//				type : "POST",
+//				url: "/sys/genCourseConfig/updatePirceOpenState.do",
+//				data: "setPriceId="+setPriceId+"&operType="+operType+"&priceType=FAVOR_PRICE",
+//				async: false,
+//				beforeSend: function()
+//		    	{
+//		    		$.messager.progress({title : '关闭连报优惠体系', msg : '关闭连报优惠体系中，请稍等……'});
+//		    	},
+//		    	success: function(state) {
+//		    		$.messager.progress('close'); 
+//		    		if(state == "1"){
+//		    			$.messager.alert('提示', "关闭连报优惠体系成功！");
+//		    			window.location.reload();
+//		    		}else if(state == "2"){
+//		    			$.messager.alert('提示', "关闭连报优惠体系失败！");
+//		    		}
+//		        } 
+//			});
+//		}
+//	});
+//}
+//
+//function openLinkPrice(setPriceId,operType,priceType)
+//{
+//	$.messager.confirm('提示','您确定要开启当前连报优惠体系?',function(r){
+//		if(r)
+//		{
+//			$.ajax({
+//				type : "POST",
+//				url: "/sys/genCourseConfig/updatePirceOpenState.do",
+//				data: "setPriceId="+setPriceId+"&operType="+operType+"&priceType=FAVOR_PRICE",
+//				async: false,
+//				beforeSend: function()
+//		    	{
+//		    		$.messager.progress({title : '开启连报优惠体系', msg : '开启连报优惠体系中，请稍等……'});
+//		    	},
+//		    	success: function(state) {
+//		    		$.messager.progress('close'); 
+//		    		if(state == "1"){
+//		    			$.messager.alert('提示', "开启连报优惠体系成功！");
+//		    			window.location.reload();
+//		    		}else if(state == "2"){
+//		    			$.messager.alert('提示', "开启连报优惠体系失败！");
+//		    		}else{
+//		    			$.messager.alert('提示', state+"已经有一个连报优惠处于开启状态！");
+//		    			window.location.reload();
+//	    			}
+//		        } 
+//			});
+//		}
+//	});
+//}
 
-function openLinkPrice(setPriceId,operType,priceType)
-{
-	$.messager.confirm('提示','您确定要开启当前连报优惠体系?',function(r){
-		if(r)
-		{
-			$.ajax({
-				type : "POST",
-				url: "/sys/genCourseConfig/updatePirceOpenState.do",
-				data: "setPriceId="+setPriceId+"&operType="+operType+"&priceType=FAVOR_PRICE",
-				async: false,
-				beforeSend: function()
-		    	{
-		    		$.messager.progress({title : '开启连报优惠体系', msg : '开启连报优惠体系中，请稍等……'});
-		    	},
-		    	success: function(state) {
-		    		$.messager.progress('close'); 
-		    		if(state == "1"){
-		    			$.messager.alert('提示', "开启连报优惠体系成功！");
-		    			window.location.reload();
-		    		}else if(state == "2"){
-		    			$.messager.alert('提示', "开启连报优惠体系失败！");
-		    		}else{
-		    			$.messager.alert('提示', state+"已经有一个连报优惠处于开启状态！");
-		    			window.location.reload();
-	    			}
-		        } 
-			});
-		}
-	});
-}
-
+//删除优惠体系
 function deleteLinkPrice(setPriceId)
 {
 	$.messager.confirm('提示','您确定要删除当前连报优惠体系?',function(r){
@@ -130,6 +132,7 @@ function deleteLinkPrice(setPriceId)
 	});
 }
 
+//打开新增校区页面
 function addSchools()
 {
 	$('#dlg').dialog({
@@ -139,6 +142,7 @@ function addSchools()
 	$('#dlg').dialog("open");
 }
 
+//打开校区开启优惠体系
 function viewSchoolLinkPrice()
 {
 	$('#linkDlg').dialog({
@@ -148,6 +152,7 @@ function viewSchoolLinkPrice()
 	$('#linkDlg').dialog("open");
 }
 
+//打开新增优惠页面
 function addLinkPrice()
 {
 	window.location.href = "/sys/genCourseConfig/jumpToAddPrice.do?type=LINK";
@@ -206,16 +211,40 @@ function addRow()
 	clearData("linkModelTR")
 }
 
+//新增优惠提交
 function addLinkPriceSubmit()
 {
 	var priceName = $("#priceName").textbox('getValue');
-	var isOpen = $("input[name='isOpen']:checked").val();
+	var effDate = $("#effDate").datebox('getValue');
+	var expDate = $("#expDate").datebox('getValue');
 	var schoolIds = $("#schoolIds").val();
 	var handlerId = $("#handlerId").val();
+	if(priceName == "" || priceName == undefined){
+		$.messager.alert('提示', "请填写联报优惠体系名称！");
+		return;
+	}
+	if(schoolIds == "" || schoolIds == undefined){
+		$.messager.alert('提示', "请选择一个适用校区！");
+		return;
+	}
+	if(effDate == "" || effDate == undefined){
+		$.messager.alert('提示', "请选择开始时间！");
+		return;
+	}
+	if(expDate == "" || expDate == undefined){
+		$.messager.alert('提示', "请选择结束时间！");
+		return;
+	}
+	if(expDate <= effDate){
+		$.messager.alert('提示', "开始时间不能小于结束时间！");
+		return;
+	}
 	var priceT = {};
 	priceT.priceName = priceName;
 	priceT.schoolIds = schoolIds;
-	priceT.isUse = isOpen;
+	priceT.isUse = "N";//默认未生效
+	priceT.effDate = effDate;
+	priceT.expDate = expDate;
 	priceT.handlerId = handlerId;
 	var linkArray = new Array();
 	$("#linkTab").find('tr').each(function(i,node)
@@ -239,7 +268,8 @@ function addLinkPriceSubmit()
 		 }
 	});
 	if(linkArray.length == 0){
-		
+		$.messager.alert('提示', "请至少添加一行连报信息！");
+		return;
 	}else{
 		$.ajax({
 			type : "POST",
@@ -257,8 +287,8 @@ function addLinkPriceSubmit()
 	    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
 	    		}else if(state == "2"){
 	    			$.messager.alert('提示', "添加新优惠失败！");
-	    		}else{
-	    			$.messager.alert('提示', state+"已经有一个优惠体系处于开启状态！");
+	    		}else if(state == "3"){
+	    			$.messager.alert('提示',"该校区该时间区间内已一个连报优惠体系！");
 	    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
 	    		}
 	        } 
@@ -266,8 +296,128 @@ function addLinkPriceSubmit()
 	}
 }
 
+//删除校区
 function removeSchool(rows)  
 {  
     $(rows).parent("span").remove();  
     $("#schoolIds").val("");
+}
+
+//浏览优惠体系信息
+function viewLinkPrice(setPriceId,priceName,applySchools,effDate,expDate,isUseVal,handerName,createDate)
+{
+	var priceT = {};
+	priceT.setPriceId = setPriceId;
+	priceT.priceName = priceName;
+	priceT.applySchools = applySchools;
+	priceT.effDate = effDate;
+	priceT.expDate = expDate;
+	priceT.isUseVal = isUseVal;
+	priceT.handerName = handerName;
+	priceT.createDate = createDate;
+	window.location.href = "/sys/genCourseConfig/viewPriceSystem.do?json="+JSON.stringify(priceT)+"&type=LINK";
+}
+
+//打开修改优惠体系页面
+function updateLinkPrice(setPriceId,priceName,schoolIds,applySchools,effDate,expDate,isUseVal,handerName,createDate)
+{
+	var priceT = {};
+	priceT.setPriceId = setPriceId;
+	priceT.priceName = priceName;
+	priceT.schoolIds = schoolIds;
+	priceT.applySchools = applySchools;
+	priceT.effDate = effDate;
+	priceT.expDate = expDate;
+	priceT.isUseVal = isUseVal;
+	priceT.handerName = handerName;
+	priceT.createDate = createDate;
+	window.location.href = "/sys/genCourseConfig/jumpToUpdatePrice.do?json="+JSON.stringify(priceT)+"&type=LINK";
+}
+
+//修改优惠体系提交
+function updateLinkPriceSubmit()
+{
+	var priceName = $("#priceName").textbox('getValue');
+	var effDate = $("#effDate").datebox('getValue');
+	var expDate = $("#expDate").datebox('getValue');
+	var schoolIds = $("#schoolIds").val();
+	var handlerId = $("#handlerId").val();
+	if(priceName == "" || priceName == undefined){
+		$.messager.alert('提示', "请填写联报优惠体系名称！");
+		return;
+	}
+	if(schoolIds == "" || schoolIds == undefined){
+		$.messager.alert('提示', "请选择一个适用校区！");
+		return;
+	}
+	if(effDate == "" || effDate == undefined){
+		$.messager.alert('提示', "请选择开始时间！");
+		return;
+	}
+	if(expDate == "" || expDate == undefined){
+		$.messager.alert('提示', "请选择结束时间！");
+		return;
+	}
+	if(expDate <= effDate){
+		$.messager.alert('提示', "开始时间不能小于结束时间！");
+		return;
+	}
+	var priceT = {};
+	priceT.setPriceId = $("#setPriceId").val();
+	priceT.priceName = priceName;
+	priceT.schoolIds = schoolIds;
+	priceT.effDate = effDate;
+	priceT.expDate = expDate;
+	priceT.handlerId = handlerId;
+	var linkArray = new Array();
+	$("#linkTab").find('tr').each(function(i,node)
+	{
+		var trName=$(this).attr("val");
+ 
+		if('link'==trName)
+		{
+			 var tds=$(this).children('td');
+		 
+			 var linkName=tds.eq(0).html();
+			 var linkNum=tds.eq(1).html();
+			 var favorPrice=tds.eq(2).html();
+			 var link = {};
+			 var linkFavorId = $(this).attr("linkFavorId");
+			 if(linkFavorId != "" && linkFavorId != undefined){
+				 link.linkFavorId = linkFavorId;
+			 }
+			 link.linkName = linkName;
+			 link.linkNum = linkNum;
+			 link.favorPrice = favorPrice;
+			 link.handlerId=handlerId;
+			 linkArray.push(link);  
+		 }
+	});
+	if(linkArray.length == 0){
+		$.messager.alert('提示', "请至少添加一行连报信息！");
+		return;
+	}else{
+		$.ajax({
+			type : "POST",
+			url: "/sys/genCourseConfig/updatePriceSystem.do",
+			data: "priceJson="+JSON.stringify(priceT)+"&classJson="+JSON.stringify(linkArray)+"&type=FAVOR_PRICE",
+			async: false,
+			beforeSend: function()
+	    	{
+	    		$.messager.progress({title : '修改优惠', msg : '修改优惠中，请稍等……'});
+	    	},
+	    	success: function(state) {
+	    		$.messager.progress('close'); 
+	    		if(state == "1"){
+	    			$.messager.alert('提示', "修改优惠成功！");
+	    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
+	    		}else if(state == "2"){
+	    			$.messager.alert('提示', "修改优惠失败！");
+	    		}else if(state == "3"){
+	    			$.messager.alert('提示',"该校区该时间区间内已一个连报优惠体系！");
+	    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
+	    		}
+	        } 
+		});
+	}
 }

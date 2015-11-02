@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rise.pub.util.StringUtil;
 import com.rise.service.GenCourseService;
 
 
@@ -216,6 +217,7 @@ public class GenCourseController {
 		}
 	}
 	
+	//体系首页面查询
 	@RequestMapping(value = "/qryDataListByPage.do")
 	public void qryDataListByPage(String page, String rows, String param, String funcNodeId, HttpServletResponse response)
 	{
@@ -245,6 +247,7 @@ public class GenCourseController {
 		}
 	}
 	
+	//跳转添加页面
 	@RequestMapping(value="/jumpToAddPrice.do")
 	public ModelAndView jumpToAddPrice(String type)
 	{
@@ -266,6 +269,7 @@ public class GenCourseController {
 		return view;
 	}
 	
+	//添加体系提交
 	@RequestMapping(value="/addPriceSystem.do")
 	public void addPriceSystem(HttpServletResponse response,String priceJson,String classJson,String type)
 	{
@@ -293,18 +297,46 @@ public class GenCourseController {
 		}
 	}
 	
-	@RequestMapping(value="/updatePirceOpenState.do")
-	public void updatePirceOpenState(HttpServletResponse response,String setPriceId,String operType,String priceType)
+//	@RequestMapping(value="/updatePirceOpenState.do")
+//	public void updatePirceOpenState(HttpServletResponse response,String setPriceId,String operType,String priceType)
+//	{
+//		log.error(setPriceId);
+//		log.error(operType);
+//		log.error(priceType);
+//		PrintWriter out = null;
+//		try
+//		{
+//			response.setCharacterEncoding("UTF-8");
+//			out = response.getWriter();
+//			String retVal = genCourseService.updatePirceOpenState(setPriceId,operType,priceType);
+//			log.error(retVal);
+//			out.write(retVal);
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//		finally
+//		{
+//			if(out != null)
+//			{
+//				out.close();
+//			}
+//		}
+//	}
+
+	//删除体系
+	@RequestMapping(value="/deletePriceSystem.do")
+	public void deletePriceSystem(HttpServletResponse response,String setPriceId,String type)
 	{
 		log.error(setPriceId);
-		log.error(operType);
-		log.error(priceType);
+		log.error(type);
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = genCourseService.updatePirceOpenState(setPriceId,operType,priceType);
+			String retVal = genCourseService.deletePriceSystem(setPriceId,type);
 			log.error(retVal);
 			out.write(retVal);
 		}
@@ -320,18 +352,79 @@ public class GenCourseController {
 			}
 		}
 	}
-
-	@RequestMapping(value="/deletePriceSystem.do")
-	public void deletePriceSystem(HttpServletResponse response,String setPriceId,String type)
+	
+	//浏览体系
+	@RequestMapping(value="/viewPriceSystem.do")
+	public ModelAndView viewPriceSystem(String json,String type)
 	{
-		log.error(setPriceId);
+		log.error(json);
 		log.error(type);
+		ModelAndView view = null;
+		try {
+			JSONObject obj = JSONObject.fromObject(json);
+			if("COMMON".equals(type)){//跳转浏览课程价格配置页面
+				view = new ModelAndView("genCourseConfig/viewComPrice");
+				String setPriceId = StringUtil.getJSONObjectKeyVal(obj, "setPriceId");
+				String ret = genCourseService.viewPriceSystem(setPriceId,type);
+				view.addObject("retObj", JSONObject.fromObject(ret));
+			}else if("LINK".equals(type)){//跳转浏览连报优惠配置页面
+				view = new ModelAndView("genCourseConfig/viewLinkPrice");
+				String setPriceId = StringUtil.getJSONObjectKeyVal(obj, "setPriceId");
+				String ret = genCourseService.viewPriceSystem(setPriceId,type);
+				view.addObject("retObj", JSONObject.fromObject(ret));
+			}else if("DISCOUNT".equals(type)){//跳转浏览复读折扣配置页面
+				view = new ModelAndView("genCourseConfig/viewDiscountPrice");
+			}
+			view.addObject("obj",obj);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return view;
+	}
+	
+	//跳转体系修改页面
+	@RequestMapping(value="/jumpToUpdatePrice.do")
+	public ModelAndView jumpToUpdatePrice(String json,String type)
+	{
+		log.error(json);
+		log.error(type);
+		ModelAndView view = null;
+		try {
+			JSONObject obj = JSONObject.fromObject(json);
+			if("COMMON".equals(type)){//跳转修改课程价格配置页面
+				view = new ModelAndView("genCourseConfig/updateComPrice");
+				String setPriceId = StringUtil.getJSONObjectKeyVal(obj, "setPriceId");
+				String ret = genCourseService.viewPriceSystem(setPriceId,"UPDATECOM");
+				view.addObject("retObj", JSONObject.fromObject(ret));
+			}else if("LINK".equals(type)){//跳转修改连报优惠配置页面
+				view = new ModelAndView("genCourseConfig/updateLinkPrice");
+				String setPriceId = StringUtil.getJSONObjectKeyVal(obj, "setPriceId");
+				String ret = genCourseService.viewPriceSystem(setPriceId,type);
+				view.addObject("retObj", JSONObject.fromObject(ret));
+			}else if("DISCOUNT".equals(type)){//跳转修改复读折扣配置页面
+				view = new ModelAndView("genCourseConfig/updateDiscountPrice");
+			}
+			view.addObject("obj",obj);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return view;
+	}
+	
+	//体系修改提交
+	@RequestMapping(value="/updatePriceSystem.do")
+	public void updatePriceSystem(HttpServletResponse response,String priceJson,String classJson,String type)
+	{
+		log.error(priceJson);
+		log.error(classJson);
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = genCourseService.deletePriceSystem(setPriceId,type);
+			String retVal = genCourseService.updatePriceSystem(priceJson,classJson,type);
 			log.error(retVal);
 			out.write(retVal);
 		}

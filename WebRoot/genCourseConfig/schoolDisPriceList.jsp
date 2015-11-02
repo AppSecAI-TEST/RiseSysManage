@@ -14,7 +14,7 @@
 	</style>
 	</head>
 	<body>
-		<table class="easyui-datagrid" align="center" title="校区复读折扣列表" id="schoolDisPrice_data" style="width:380px;margin:5px auto;height:380px;" id="schoolList" url="<%=path %>/genCourseConfig/qryDataListByPage.do?param={'queryCode':'qryAllSchoolPrice','type':'DISCOUNT_PRICE'}" 
+		<table class="easyui-datagrid" align="center" title="校区复读折扣列表" id="schoolDisPrice_data" style="width:380px;margin:5px auto;height:380px;" id="schoolList" url="<%=path %>/pubData/qryDataListByPage.do?param={'queryCode':'qryAllSchoolPrice','type':'DISCOUNT_PRICE'}" 
 		border="true" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true" data-options="onLoadSuccess:function(data){$('#schoolDisPrice_data').datagrid('clearSelections');}">
 			<thead>
 				<tr>

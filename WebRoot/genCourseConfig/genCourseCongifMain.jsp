@@ -38,8 +38,8 @@
 							<td align="left"><input id="stageId" name="stageId" style="width:265px" class="easyui-textbox" required="true"/></td>
 						</tr>
 						<tr id="seqOrderTr">
-							<td align="right">阶段顺序：</td>
-							<td align="left"><input id="seqOrder" name="seqOrder" style="width:265px" class="easyui-numberbox"/></td>
+							<td align="right">年级：</td>
+							<td align="left"><input id="seqOrder" name="seqOrder" style="width:265px" class="easyui-numberbox" required="true"/></td>
 						</tr>
 						<tr>
 							<td align="right">班级类型：</td>
@@ -47,15 +47,15 @@
 						</tr>
 						<tr>
 							<td align="right">基础课时：</td>
-							<td align="left"><input name="hours" style="width:265px" class="easyui-numberbox" required="true" /></td>
+							<td align="left"><input name="hours" style="width:265px" class="easyui-numberbox" required="true" />个</td>
 						</tr>
 						<tr>
 							<td align="right">毕业典礼课时：</td>
-							<td align="left"><input name="gradHours" style="width:265px" class="easyui-numberbox" required="true" /></td>
+							<td align="left"><input name="gradHours" style="width:265px" class="easyui-numberbox" required="true" />个</td>
 						</tr>
 						<tr>
 							<td align="right">毕业典礼消耗时长：</td>
-							<td align="left"><input name="gradRemark" style="width:265px" class="easyui-textbox" required="true"/></td>
+							<td align="left"><input name="gradRemark" style="width:265px" class="easyui-textbox" required="true"/>周</td>
 						</tr>
 						<tr>
 							<td align="right">是否开放（班级）：</td>
@@ -77,7 +77,7 @@
 							<td align="left"><input name="stageId" style="width:265px" class="easyui-textbox" required="true"/></td>
 						</tr>
 						<tr>
-							<td align="right">阶段顺序：</td>
+							<td align="right">年级：</td>
 							<td align="left"><input name="seqOrder" style="width:265px" class="easyui-numberbox" required="true"/></td>
 						</tr>
 					</table>
@@ -131,7 +131,7 @@
   		<div title="课程价格配置" style="padding:5px;display:block;">
   			<div id="ttab" class="easyui-tabs" style="min-width:1110px;width:100%;height:auto;">
   				<div title="课程价格配置" style="padding:5px;display:block;">
-					<table align="center" title="查询结果" data-options="height:500" id="common_data">
+					<table align="center" title="查询结果" data-options="height:550" id="common_data">
 						
 					</table>
 					<div id="commonToolbar">

@@ -52,6 +52,7 @@ public class GenCourseService {
 		return ServiceEngine.invokeHttp(param);
 	}
 	
+	//体系首页面查询
 	public String qryDataListByPage(String page, String rows, String param, String funcNodeId)throws Exception{
 		JSONObject obj = new JSONObject();
 		if(ObjectCensor.isStrRegular(param))
@@ -74,24 +75,39 @@ public class GenCourseService {
 		return ServiceEngine.invokeHttp(params);
 	}
 	
+	//获取所有班级类型信息
 	public String getAllClassType()throws Exception
 	{
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1509\",securityCode:\"0000000000\",params:{},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 
+	//添加体系提交
 	public String addPriceSystem(String priceJson, String classJson, String type)throws Exception{
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS15010\",securityCode:\"0000000000\",params:{priceJson:'"+priceJson+"',classJson:'"+classJson+"',type:'"+type+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 	
-	public String updatePirceOpenState(String setPriceId,String operType,String priceType)throws Exception{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS15011\",securityCode:\"0000000000\",params:{setPriceId:'"+setPriceId+"',operType:'"+operType+"',priceType:'"+priceType+"'},rtnDataFormatType:\"user-defined\"}";
-		return ServiceEngine.invokeHttp(param);
-	}
+//	public String updatePirceOpenState(String setPriceId,String operType,String priceType)throws Exception{
+//		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS15011\",securityCode:\"0000000000\",params:{setPriceId:'"+setPriceId+"',operType:'"+operType+"',priceType:'"+priceType+"'},rtnDataFormatType:\"user-defined\"}";
+//		return ServiceEngine.invokeHttp(param);
+//	}
 	
+	//删除体系
 	public String deletePriceSystem(String setPriceId,String type)throws Exception {
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS15012\",securityCode:\"0000000000\",params:{setPriceId:'"+setPriceId+"',type:'"+type+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+
+	//浏览体系
+	public String viewPriceSystem(String setPriceId, String type)throws Exception{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS15013\",securityCode:\"0000000000\",params:{setPriceId:'"+setPriceId+"',type:'"+type+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+
+	//修改体系
+	public String updatePriceSystem(String priceJson, String classJson,String type)throws Exception{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS15015\",securityCode:\"0000000000\",params:{priceJson:'"+priceJson+"',classJson:'"+classJson+"',type:'"+type+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 }

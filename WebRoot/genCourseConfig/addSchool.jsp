@@ -38,6 +38,7 @@
 			$.messager.alert('提示', "请先选择一个校区！");
 		}
 		var content = "<span style='font-size:14px;font-family:'微软雅黑''>&nbsp;"+row.schoolName+"<a style='font-size:12px' class='linkmore' onclick='removeSchool(this)'>删除</a></span>";
+		//回填信息
 		parent.window.$("#schoolTd").html(content);
 		parent.window.$("#schoolIds").val(row.schoolId);
 		parent.window.$('#dlg').dialog('close');

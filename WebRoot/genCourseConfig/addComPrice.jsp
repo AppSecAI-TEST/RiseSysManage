@@ -24,28 +24,30 @@
   					<td align="left" width="69%"><input id="priceName" name="priceName" style="width:300px" class="easyui-textbox" required="true" /></td>
   				</tr>
   				<tr>
-  					<td align="right">状态：</td>
-  					<td align="left"><input type="radio" value="Y" name="isOpen" checked="checked"/><span>开启</span>&nbsp;<input type="radio" value="N" name="isOpen"/><span>关闭</span></td>
-  				</tr>
-  				<tr>
   					<td align="right"><a href="javascript:void(0)" id="" class="easyui-linkbutton" iconCls="icon-search" style="width: 110px; height: 25px;" onclick="addSchools()">添加适用校区</a></td>
   					<td align="left" id="schoolTd"></td>
+  				</tr>
+  				<tr>
+  					<td align="right">生效时间：</td>
+  					<td align="left"><input class="easyui-datebox" id="effDate" name="effDate" style="width:300px;" required="true"/></td>
   				</tr>
 	 		</table>
 	 		<table width="95%" align="center" style="margin:5px auto;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
 	 			<tr>
   					<td align="center" width="11%">课程阶段</td>
-  					<td align="center" width="10%">班级类型</td>
-  					<td align="center" width="10%">学费</td>
-  					<td align="center" width="10%">材料费</td>
-  					<td align="center" width="10%">保育费和餐费</td>
-  					<td align="center" width="10%">总部提成</td>
-  					<td align="center" width="10%">其他费用</td>
-  					<td align="center" width="9%">总费用</td>
+  					<td align="center" width="7%">年级</td>
+  					<td align="center" width="9%">班级类型</td>
+  					<td align="center" width="9%">学费</td>
+  					<td align="center" width="9%">材料费</td>
+  					<td align="center" width="9%">保育费和餐费</td>
+  					<td align="center" width="9%">总部提成</td>
+  					<td align="center" width="9%">其他费用</td>
+  					<td align="center" width="8%">总费用</td>
   				</tr>
   				<c:forEach items="${obj.classType}" var="classTypeObj" varStatus="status">
   					<tr>
   						<td align="center" id="stageId${status.index}">${classTypeObj.stageId}</td>
+  						<td align="center" id="seqOrder${status.index}">${classTypeObj.seqOrder}</td>
   						<td align="center" id="classType${status.index}">${classTypeObj.classType}</td>
   						<td align="center"><input id="feeA${status.index}" name="feeA" style="width:100px" data-options="events:{blur: function(){sumFee(${status.index})}}" class="easyui-numberbox" /></td>
   						<td align="center"><input id="feeB${status.index}" name="feeB" style="width:100px" data-options="events:{blur: function(){sumFee(${status.index})}}" class="easyui-numberbox" /></td>

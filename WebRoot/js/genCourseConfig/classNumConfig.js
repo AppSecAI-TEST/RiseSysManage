@@ -11,12 +11,13 @@ $(document).ready(function(){
 			param : obj
 		},
 	    columns:[[  
-	        {field:'stageId',title:'课程阶段',width:'16%',align:'center'},  
-	        {field:'classType',title:'班级类型',width:'16%',align:'center'},  
-	        {field:'maxNum',title:'最高开班人数',width:'16%',align:'center'},
-	        {field:'minNum',title:'最低开班人数',width:'16%',align:'center'},  
-	        {field:'expNum',title:'异常开班人数',width:'16%',align:'center'},  
-	        {field:'opt',title:'操作',width:'20%',align:'center',
+	        {field:'stageId',title:'课程阶段',width:'14%',align:'center'},  
+	        {field:'seqOrder',title:'年级',width:'12%',align:'center'},  
+	        {field:'classType',title:'班级类型',width:'14%',align:'center'},  
+	        {field:'maxNum',title:'最高开班人数',width:'14%',align:'center'},
+	        {field:'minNum',title:'最低开班人数',width:'14%',align:'center'},  
+	        {field:'expNum',title:'异常开班人数',width:'14%',align:'center'},  
+	        {field:'opt',title:'操作',width:'18%',align:'center',
 	            formatter: function(Confirmation, row)
 	            {  
 	                var btn = '<a class="update" onclick="updateClassNum(\''+row.classId+'\',\''+row.stageId+'\',\''+row.classType+'\',\''+row.maxNum+'\',\''+row.minNum+'\',\''+row.expNum+'\')" style="width:100px; height:25px;"  href="javascript:void(0)">修改</a>';  
