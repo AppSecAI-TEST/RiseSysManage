@@ -39,7 +39,10 @@
 $(function () {
         $('#time').datebox({
             onShowPanel: function () {//显示日趋选择对象后再触发弹出月份层的事件，初始化时没有生成月份层
-                span.trigger('click'); //触发click事件弹出月份层
+        		var p = $('#time').datebox('panel'), //日期选择对象
+            	tds = false, //日期选择对象中月份
+            	span = p.find('span.calendar-text'); //显示月份层的触发控件
+                span.get(0).click(); //触发click事件弹出月份层
                 if (!tds) setTimeout(function () {//延时触发获取月份对象，因为上面的事件触发和对象生成有时间间隔
                     tds = p.find('div.calendar-menu-month-inner td');
                     tds.click(function (e) {
@@ -58,9 +61,6 @@ $(function () {
             },
             formatter: function (d) { return d.getFullYear() + '-' + d.getMonth(); }//配置formatter，只返回年月
         });
-        var p = $('#db').datebox('panel'), //日期选择对象
-            tds = false, //日期选择对象中月份
-            span = p.find('span.calendar-text'); //显示月份层的触发控件
     });
 
 function myformatter(date){
