@@ -106,11 +106,11 @@ $("#submit").click(function()
 		dataType:"json",
 		beforeSend: function()
     	{
-    		$.messager.progress({title : '系统消息', msg : '正在提交数据，请稍等……'});
+    		showProgressLoader("正在提交数据,请稍等...",500)
     	},
     	success: function(data) 
     	{
-    		$.messager.progress('close');
+    		hideProgressLoader();
     		if(data.flag)
     		{
     			init(data);
@@ -122,7 +122,7 @@ $("#submit").click(function()
         },
         error:function()
         {
-        	$.messager.progress('close'); 
+        	hideProgressLoader();
         }
 	});
 	
