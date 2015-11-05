@@ -88,6 +88,11 @@ var time;
 $("#submit").click(function()
 {
 	time=$("#time").datebox('getValue');
+	if(time=='')
+	{
+		$.messager.alert("提示","请选择排课月份");
+		return;
+	}
 	var param={};
 	param.handlerId=$("#handlerId").val();
 	param.schoolId=$("#schoolId").val();

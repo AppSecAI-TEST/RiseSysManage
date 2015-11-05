@@ -22,7 +22,7 @@
 						<span>排课月份：</span>
 					</td>
 					<td  align="left">
-						 123
+						 <%=time %>
 					</td>
 					
 				</tr>

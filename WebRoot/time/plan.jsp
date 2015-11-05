@@ -43,7 +43,7 @@
 		</form>
 		<div style="padding:5px 0;min-width:1100px; width:100%;">
 			<table class="easyui-datagrid" title="排课列表" style="height:435px;" id="list_data"   
-				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
+				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 				 <thead>
 					<tr>
 						<th data-options="field:'ck',checkbox:true"></th>
@@ -125,10 +125,16 @@
 	    if(startTime=='')
 	    {
 	    	startTime='2014-01-01';
+	    }else
+	    {
+	    	startTime=startTime+"-01";
 	    }
 	    if(endTime=='')
 	    {
 	    	endTime='2036-01-01';
+	    }else
+	    {
+	    	endTime=endTime+"-01";
 	    }
 	    var obj={};
 	    obj.funcNodeId=funcNodeId;
@@ -150,7 +156,8 @@
     	});
      });
  
-    $("#createPlan").click(function() {
+    $("#createPlan").click(function()
+    	{
     	 
     		window.location.href = "/sys/time/createPlan.jsp";
     	}
@@ -159,6 +166,14 @@
       $("#updatePlan").click(function()
       {
     	 	var row = $('#list_data').datagrid('getSelected');
+    	 	
+    	 	if(row)
+    	 	{
+				flag = true;
+			} else {
+				$.messager.alert('提示', "请先选择排课月份！");
+			}
+    	 	
     	 	var createMonthId=row.createMonthId;
     	 	var month=row.month;
     	 	var schoolId=row.schoolId;
