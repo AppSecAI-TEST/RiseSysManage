@@ -16,14 +16,14 @@
 		<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
 			<table   style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:30px;" cellspacing="2">
 				<tr>
-					<td  align="left">
+					<td  align="right" width="75px">
 						<span>排课月份：</span>
 					</td>
-					<td   align="left" width="8px">
+					<td  align="left" width="8px">
 						<input class="easyui-datebox"  type="text" style="width:100px; height: 25px;" id="time" name="startTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
 					<td>
-						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="submit" funcNodeId="1000">创建</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="width:100px; height: 25px;" id="submit" funcNodeId="1000">创建</a>
 					</td>
 				</tr>
 			</table>
@@ -40,28 +40,30 @@ $(function () {
         $('#time').datebox({
             onShowPanel: function () {//显示日趋选择对象后再触发弹出月份层的事件，初始化时没有生成月份层
         		var p = $('#time').datebox('panel'), //日期选择对象
-            	tds = false, //日期选择对象中月份
             	span = p.find('span.calendar-text'); //显示月份层的触发控件
+            	p.find(".calendar-menu-year").attr("readOnly","true");
+            	span.click(function(){
+            		p.find('div.calendar-menu').hide();
+            	});
                 span.get(0).click(); //触发click事件弹出月份层
-                if (!tds) setTimeout(function () {//延时触发获取月份对象，因为上面的事件触发和对象生成有时间间隔
-                    tds = p.find('div.calendar-menu-month-inner td');
-                    tds.click(function (e) {
-                        e.stopPropagation(); //禁止冒泡执行easyui给月份绑定的事件
-                        var year = /\d{4}/.exec(span.html())[0]//得到年份
-                        , month = parseInt($(this).attr('abbr'), 10) + 1; //月份
-                        $('#db').datebox('hidePanel')//隐藏日期对象
-                        .datebox('setValue', year + '-' + month); //设置日期的值
-                    });
-                }, 0)
+                p.find("div.datebox-button").find("td:eq(0)").css("visibility","hidden");//隐藏今天按钮
+                var months = p.find(".calendar-menu-month-inner").find(".calendar-menu-month");
+                months.unbind();
+                months.click(function(){
+                	var year = /\d{4}/.exec(span.html())[0]//得到年份
+                    , month = parseInt($(this).attr('abbr'))+1;
+                	if(month<10)
+                	{
+                		month="0"+month;
+                	}
+                	var val =year + '-' + month+"-00";
+                    $('#time').datebox('setValue',val).datebox('hidePanel'); //设置日期的值
+             	});
             },
-            parser: function (s) {//配置parser，返回选择的日期
-                if (!s) return new Date();
-                var arr = s.split('-');
-                return new Date(parseInt(arr[0], 10), parseInt(arr[1], 10) - 1, 1);
-            },
-            formatter: function (d) { return d.getFullYear() + '-' + d.getMonth(); }//配置formatter，只返回年月
-        });
-    });
+            
+            //formatter: function (d) { return d.getFullYear() + '-' + d.getMonth(); }//配置formatter，只返回年月
+    	});
+     });   
 
 function myformatter(date){
             var y = date.getFullYear();

@@ -18,10 +18,10 @@
 		<input type="hidden" id="handlerId" name="handlerId"   value="${sessionScope.StaffT.staffId}"/>
 			<table   style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:30px;" cellspacing="2">
 				<tr>
-					<td  align="left">
+					<td width="80px" align="right">
 						<span>排课月份：</span>
 					</td>
-					<td   align="left" width="8px">
+					<td  align="left">
 						 123
 					</td>
 					
