@@ -50,10 +50,10 @@ function init()
     singleSelect: true,  
     url: "/sys/pubData/qryDataListByPage.do?param="+JSON.stringify(param),
     columns:[[  
-        {field:'weekName',title:'周',width:80},  
-        {field:'dateRange',title:'时间段',width:25},  
-        {field:'isPlan',title:'是否排课',width:25},  
-        {field:'createDdate',title:'创建时间',width:25, 
+        {field:'weekName',title:'周',width:80,align:'center'},  
+        {field:'dateRange',title:'时间段',width:25,align:'center'},  
+        {field:'isPlan',title:'是否排课',width:25,align:'center'},  
+        {field:'createDdate',title:'创建时间',width:25,align:'center', 
             formatter: function(Confirmation, row)
             {  
                 var btn = '<a class="editcls" onclick="planWeek(\''+row.weekName+'\',\''+row.month+'\',\''+row.createWeekId+'\')"  href="javascript:void(0)">排课</a>';  

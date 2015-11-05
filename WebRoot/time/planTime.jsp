@@ -395,19 +395,19 @@ function endEditing(tab)
 			
 			if(className==undefined)
 			{
-				alert("请输入班级名称");
+				$.messager.alert('提示',"请输入班级名称");
 				setCellValue($(tab),editIndex,editField,editValue);//恢复初始值
 			}else
 			
 			if(roomName==undefined)
 			{
-				alert("请输入教室名称");
+				$.messager.alert('提示',"请输入教室名称");
 				setCellValue($(tab),editIndex,editField,editValue);//恢复初始值
 			}else
 			
 			if(teacherType==undefined)
 			{
-				alert("请输入教师类型");
+				$.messager.alert('提示',"请输入教师类型");
 				setCellValue($(tab),editIndex,editField,editValue);//恢复初始值
 			}else
 			{
@@ -429,7 +429,7 @@ function endEditing(tab)
 					addPlanTime(planT,tab);
 				}else
 				{
-					alert("没有可适用上课时段");
+					$.messager.alert('提示',"没有可适用上课时段");
 					setCellValue($(tab),editIndex,editField,editValue);//恢复初始值
 				}
 		    }
@@ -506,7 +506,7 @@ function addPlanTime(planT,tab)
     			 getWeekTime();
     		}else
     		{
-    			alert(data.msg);
+    			$.messager.alert('提示',data.msg);
     		}
     		 
         },
@@ -535,7 +535,7 @@ function onClickCell(index, field,value)
 		$(this).datagrid('selectRow', index).datagrid('editCell', {index:index,field:field});
 		if(value!='')
 		{	
-			setCellValue($(this),index,field,value+"/")
+		//	setCellValue($(this),index,field,value+"/")
 		}
 		editIndex = index;
 		editField=field;
