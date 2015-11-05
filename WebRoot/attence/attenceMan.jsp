@@ -315,7 +315,7 @@
 			{
 				var row = $('#manList').datagrid('getSelected');
 				if (row){
-					window.location.href = "/sys/attend/getAttendDetail.do?classInstId="+row.classInstId;
+					window.location.href = "/sys/attend/getAttendDetail.do?funcNodeId=${param.funcNodeId}&classInstId="+row.classInstId;
 				}
 				else
 				{

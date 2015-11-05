@@ -33,7 +33,7 @@ public class ClassAttendController
 		ModelAndView model = new ModelAndView("attence/attenceOperate");
 		try 
 		{
-			
+			classAttendService.getAttendOperate(model , classInstId , funcNodeId , selDateStr);
 		}
 		catch (Exception e) 
 		{

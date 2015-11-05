@@ -138,7 +138,7 @@
 				var row = $('#attendList').datagrid('getSelected');
 				if (row)
 				{
-						
+					window.location.href = "/sys/attend/getAttendOperate.do?funcNodeId=${funcNodeId}&classInstId=${classInstT.classInstId}&selDateStr="+row.monthName;
 				}
 				else
 				{
