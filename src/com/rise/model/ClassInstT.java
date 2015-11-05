@@ -60,11 +60,17 @@ public class ClassInstT {
 
     private String cancelOpenRemark;
 
+    private String disbandRemark;
+
     private Integer openClassNum;
 
     private Integer gradHours;
 
     private Integer expNum;
+
+    private Date disbandDate;
+
+    private String finishRemark;
     
     private String studentChannelTypeName;
     
@@ -72,7 +78,7 @@ public class ClassInstT {
     
     private String openClassTypeName;
     
-    private double licenseRate;
+    private String licenseRate;
     
     private List<SchooltimeT> schooltimeList;
 
@@ -300,6 +306,14 @@ public class ClassInstT {
         this.cancelOpenRemark = cancelOpenRemark == null ? null : cancelOpenRemark.trim();
     }
 
+    public String getDisbandRemark() {
+        return disbandRemark;
+    }
+
+    public void setDisbandRemark(String disbandRemark) {
+        this.disbandRemark = disbandRemark == null ? null : disbandRemark.trim();
+    }
+
     public Integer getOpenClassNum() {
         return openClassNum;
     }
@@ -322,6 +336,22 @@ public class ClassInstT {
 
     public void setExpNum(Integer expNum) {
         this.expNum = expNum;
+    }
+
+    public Date getDisbandDate() {
+        return disbandDate;
+    }
+
+    public void setDisbandDate(Date disbandDate) {
+        this.disbandDate = disbandDate;
+    }
+
+    public String getFinishRemark() {
+        return finishRemark;
+    }
+
+    public void setFinishRemark(String finishRemark) {
+        this.finishRemark = finishRemark == null ? null : finishRemark.trim();
     }
     
 	public String getStudentChannelTypeName() {
@@ -347,14 +377,6 @@ public class ClassInstT {
 	public void setOpenClassTypeName(String openClassTypeName) {
 		this.openClassTypeName = openClassTypeName;
 	}
-	
-	public double getLicenseRate() {
-		return licenseRate;
-	}
-
-	public void setLicenseRate(double licenseRate) {
-		this.licenseRate = licenseRate;
-	}
 
 	public List<SchooltimeT> getSchooltimeList() {
 		return schooltimeList;
@@ -363,5 +385,13 @@ public class ClassInstT {
 	public void setSchooltimeList(List<SchooltimeT> schooltimeList) {
 		this.schooltimeList = schooltimeList;
 	}
-    
+
+	public String getLicenseRate() {
+		return licenseRate;
+	}
+
+	public void setLicenseRate(String licenseRate) {
+		this.licenseRate = licenseRate;
+	}
+	
 }
