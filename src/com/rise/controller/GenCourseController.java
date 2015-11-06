@@ -440,4 +440,34 @@ public class GenCourseController {
 			}
 		}
 	}
+	
+	/**
+	 * ²éÑ¯°à¼¶½×¶Î
+	 * @param response
+	 */
+	@RequestMapping(value = "/qrySetClassPrice.do")
+	public void getSetClassPrice(String stageId,HttpServletResponse response)
+	{
+	 
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = genCourseService.getSetClassPrice(stageId);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }

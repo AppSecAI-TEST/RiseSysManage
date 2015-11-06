@@ -68,16 +68,20 @@
 					</td>
 					<td>
 						<select name="courseTypeName" class="easyui-combobox" id="courseTypeName" style="width: 150px; height: 28px;"
-						 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',onChange:changeCourseType"
+						 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',onChange:changeCourseType, 
+						 onLoadSuccess:function(data){$('#courseTypeName').combobox('setValue',data[0].codeName);}""
+						
 	      				 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=SINGLE_COURSE_TYPE" required="true" >
 						</select>
 					</td>
-					<td>
-						&nbsp;
-					</td>
-					<td>
-						&nbsp;
-					</td>
+					<td align="right">
+								<span>缴费时间：</span>
+							</td>
+							<td>
+								<input name="payDate" id="payDate"  
+									class="easyui-datebox" required="true"
+									style="width: 150px; height: 28px;" />
+							</td>
 				</tr>
 			</table>
 			</form>
@@ -103,38 +107,41 @@
 							<input id="feeType" name="feeType" type="hidden" value="001" />
 							<input id="feeState" name="feeState" type="hidden" value="00A" />
 							<input id="stageOrder" name="stageOrder" type="hidden" value="" />
+							
 							<td align="right">
 								<span>阶段：</span>
 							</td>
 							<td>
-								<select name="stageId" id="stageId" class="easyui-combobox"
-									style="width: 150px; height: 28px;"
-									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'"
-									url="<%=path%>/pubData/qryData.do?param={'queryCode':'Qry_Set_Price','setPriceId':'10001'}"
-									required="true">
-								</select>
+								 <select name="stageId"  id="stageId"   style="width: 150px; height: 28px;"
+	      						data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'
+	      						    "
+	      						url="<%=path %>/pubData/qryStage.do" required="true" >
 							</td>
 							<td align="right">
 								<span>班级类型：</span>
 							</td>
 							<td>
 								<select name="classType" class="easyui-combobox" id="classType"
-									style="width: 150px; height: 28px;" drequired="true">
+									style="width: 150px; height: 28px;"  required="true">
 									<option>
 										请先选择阶段
 									</option>
 								</select>
 							</td>
 							<td align="right">
-								<span>缴费时间：</span>
+										<span>业绩类型：</span>
 							</td>
 							<td>
-								<input name="payDate" id="payDate" type="text"
-									class="easyui-datebox" required="true"
-									style="width: 200px; height: 28px;" />
+								<select name="feeType" class="easyui-combobox" id="feeType"
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName',
+									onLoadSuccess:function(data){$('#feeType').combobox('setValue',data[0].codeFlag)},onChange:changePraiseSourceN"
+									style="width: 150px; height: 28px;"
+									url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
+								</select>
 							</td>
 						</tr>
 						<tr>
+						
 							<td align="right">
 								<DIV id="u170_state0" data-label="状态1">
 									<DIV id="u170_state0_content">
@@ -160,6 +167,14 @@
 							<td align="right"></td>
 							<td></td>
 						</tr>
+						<tr>
+      					  <td align="right"><span>上传缴费单：</span></td>
+      					  <td  colspan="5"><input style="width: 300px; height: 28px;" class="easyui-filebox" name="file2" data-options="prompt:''" ><a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">查看缴费单</a></td>
+   					  </tr>
+      					<tr>
+      					  <td align="right"><span>备注：</span></td>
+      					  <td colspan="5"><textarea rows="2" cols="120" id="vipRemark" name="vipRemark" class="easyui-validatebox textbox"></textarea></td>
+   					  </tr>
 					</table>
 				</div>
 				<div style="height: 10px;"></div>
@@ -186,7 +201,7 @@
       	            </table>
       	            </td>
 	      	        <td width="7%" align="right"><span>是否领用：</span></td>
-	      	        <td width="7%" align="left">
+	      	        <td width="6%" align="left">
 	      	          <input type="radio" name="isGetY" id="isGetY" value="Y">
 	      	          <label for="radio"><span>已领用</span></label>
 	      	          <input type="radio" name="isGetN" id="isGetN" value="N">
@@ -194,7 +209,7 @@
       	           </td>
 	      	        <td width="6%" align="right"><span>发放人：</span></td>
 	      	        <td width="8%"><input   id="granter" type="text" class="easyui-textbox validatebox" required="true" style="width: 100px; height: 28px;"/></td>
-	      	        <td width="4%"><span>是否退回</span></td>
+	      	       
 	      	        <td width="6%"><a href="javascript:void(0)" id="addGiftBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a></td>
       	        </tr>
       	      <tr style="display:none;" name="addGift" id="addGift" >
@@ -206,7 +221,7 @@
       	        <td align="left" isGet="">&nbsp;</td>
       	        <td align="right"><span>发放人：</span></td>
       	        <td align="left" granter="">&nbsp;</td>
-      	        <td>&nbsp;</td>
+      	        
       	        <td><a href='javascript:void(0)' class='linkmore' onclick='delRow(this)' ><span>删除</span></a></td>
      	       </tr>
       	      </table>
@@ -806,15 +821,27 @@ $('#stageId').combobox({
 	onChange : function(n, o) {
 	var data = $("#stageId").combobox('getData');
 	var amount;
-	for ( var i = 0; i < data.length; i++) {
-		if (n == data[i].stageId) {
-			amount = data[i].amount;
+
+	for ( var i = 0; i < data.length; i++)
+	{
+		if (n == data[i].stageId) 
+		{
+			//amount = data[i].amount;
 			$("#stageOrder").val(data[i].seqId);
 		}
 	}
-	$("#totalAmount").textbox('setValue', amount);
+	
 	var stageType = $("#stageId").combobox('getText');
-	var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",stageId:\""+ stageType + "\"}";
+	var payDate=$("#payDate").datebox('getValue');
+	if(payDate=='')
+	{
+		$("#stageId").combobox('setText',"");
+		$("#classType").combobox('setText',"");
+		$("#totalAmount").textbox('setValue', '');
+		$.messager.alert('提示', "请选择缴费时间");	
+		return;
+	}
+	var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\"}";
 	$("#classType").combobox({
 			url : urls,//返回json数据的url
 									valueField : "classType",
@@ -823,9 +850,10 @@ $('#stageId').combobox({
 									onLoadSuccess : function() { //数据加载完毕事件
 										var data = $('#classType').combobox(
 												'getData');
-										if (data.length > 0) {
-											$("#classType").combobox('select',
-													data[0].classType);
+										if (data.length == 1)
+										{
+											$("#classType").combobox('select',data[0].classType);
+											$("#totalAmount").textbox('setValue', data[0].amount);
 										}
 									}
 								});

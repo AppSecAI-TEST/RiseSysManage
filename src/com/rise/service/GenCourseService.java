@@ -110,4 +110,11 @@ public class GenCourseService {
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS15015\",securityCode:\"0000000000\",params:{priceJson:'"+priceJson+"',classJson:'"+classJson+"',type:'"+type+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
+	
+	//获取班级价格
+	public String getSetClassPrice(String stageId)throws Exception{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS15016\",securityCode:\"0000000000\",params:{stageId:'"+stageId+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+	
 }
