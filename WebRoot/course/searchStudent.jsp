@@ -94,7 +94,7 @@
 						</th>
 						<th field="phone" align="center" width="22%">
 							联系电话
-						</th
+						</th>
 					</tr>
 				</thead>
 			</table>

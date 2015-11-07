@@ -1,4 +1,3 @@
-<%@page	import="org.springframework.security.authentication.BadCredentialsException"%> 
 <%@page language="java" import="java.util.*" pageEncoding="UTf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
