@@ -120,7 +120,17 @@ $(document).ready(function()
 	{    
        onChange : function(n, o)
        {
-       	 	
+			var stageType = $("#stageId").combobox('getText');
+			var payDate=$("#payDate").datebox('getValue');
+			if(payDate=='')
+			{
+				$("#stageId").combobox('setText',"");
+				$("#classType").combobox('setText',"");
+				$("#totalAmount").textbox('setValue', '');
+				$.messager.alert('提示', "请选择缴费时间");	
+				return;
+			}
+			
 		    var data = $("#stageId").combobox('getData');
 			var amount;
 			for(var i=0;i<data.length;i++)
@@ -130,10 +140,10 @@ $(document).ready(function()
 					 $("#stageOrder").val(data[i].seqOrder);
 				 }
 			}
-		
 		  
        		var stageType=$("#stageId").combobox('getText');
-       		var url="/sys/pubData/getClassPrice.do?stageId="+stageType+"&schoolId=1001";
+       		var schoolId=$("#schoolId").val();
+       		var url = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\",schoolId:\""+ schoolId+ "\"}";
        	 	$("#classType").combobox(
        	 	{
         		url : url,//返回json数据的url

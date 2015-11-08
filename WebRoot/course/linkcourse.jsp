@@ -2,6 +2,7 @@
 <%@ page language="java" import="com.rise.pub.util.*"%>
 <%
 	String path = request.getContextPath();
+	String schoolId= request.getParameter("schoolId");
 	String order=request.getParameter("order");
 	String courses=request.getParameter("courses");
 	String name=request.getParameter("name");
@@ -49,6 +50,9 @@
 	      	    	<input id="feeType"  name="feeType"  type="hidden" value="001"/>
 	      	    	<input id="feeState" name="feeState" type="hidden" value="00A"/>
 	      	    	<input id="stageOrder" name="stageOrder" type="hidden" value=""/>
+	      	    	<input id="schoolId" name="schoolId" type="hidden" value="<%=schoolId%>"/>
+	      	    	 <td align="right"><span>缴费时间：</span></td>
+	      	        <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 28px;" /></td>
 	      	        <td align="right"> <span>阶段：</span></td>
 	      	        <td>
 					 <select name="stageId"  id="stageId"   style="width: 150px; height: 28px;"
@@ -61,18 +65,14 @@
 	      	        <td> 
 	      	         <select name="classType" id="classType" class="easyui-combobox"  style="width: 150px; height: 28px;" drequired="true" >
 	      						<option value="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>"><%=StringUtil.getJSONObjectKeyVal(object,"classType")%></option>
-      	            </select>
-	      	         </td>
-	      	        <td align="right"><span>缴费时间：</span></td>
-	      	        <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 28px;" value="<%=object.get("payDate")%>"/></td>
+      	           	 </select>
+	      	        </td>
+	      	       
       	        </tr>
 	      	      <tr>
-	      	        <td align="right"><DIV id="u170_state0" data-label="状态1">
-	      	          <DIV id="u170_state0_content">
+	      	        <td align="right">
 	      	            <span>业绩老师A：</span>
       	                   </td>
-      	                  
-		      				
 	      	        <td> <select name="adviserA"  class="easyui-combobox" style="width: 80px; height: 28px;"
 		     				data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
 		      				onLoadSuccess:function(data){$('#teacherId').combobox('setValue',data[0].teacherId);}" 

@@ -63,7 +63,7 @@ Date.prototype.Format = function(fmt)
  function afterDate(n)
  {
 	var d=AddDays(now,n);
-	return d.format("yyyy-MM-dd");
+	return d;
  }
  //当前日期+月
  function afterMonth(n)

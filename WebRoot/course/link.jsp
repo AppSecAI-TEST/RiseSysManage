@@ -2,6 +2,7 @@
 <%
 	String path = request.getContextPath();
 	String studentId=request.getParameter("studentId");
+	String schoolId=request.getParameter("schoolId");
 	String studentInfo =request.getParameter("studentInfo");
 %>
 <html>
@@ -22,7 +23,7 @@
 	      			<input type="hidden" id="studentId" name="studentId" value="<%=studentId%>">
 	      			<input type="hidden" id="studentInfo" name="studentInfo" value="<%=studentInfo%>" />
 	      			<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
-	      			<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
+	      			<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId%>"/>
 	      			<table width="100%" cellpadding="5px" class="maintable" id="addStudentTd">
 	      				<tr>
 	      					<td width="13%" align="right">
@@ -185,13 +186,13 @@
 		    		if(n<linkCourses.length)
 		    		{
 		    			var str=JSON.stringify(linkCourses[n]);
-						var url="/sys/course/linkcourse.jsp?name="+n+"&order="+order+"&courses="+str;
+						var url="/sys/course/linkcourse.jsp?schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str;
 						//alert(url);
 		    			$(name).attr('src',url);
 		    		
 		    		}else
 		    		{
-		    			$(name).attr('src',"/sys/course/linkcourse.jsp?name="+n+"&order="+order+"&name="+name);
+		    			$(name).attr('src',"/sys/course/linkcourse.jsp?schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&name="+name);
 		    		}
 		    		$(name).css("display","block");
 		    	}else

@@ -12,7 +12,7 @@ $(document).ready(function(){
     	qry();
     });
 })
-
+ 
 
 function addSingleCourse()
 {
@@ -20,8 +20,9 @@ function addSingleCourse()
 	{
 		var row = $('#list_data').datagrid('getSelected');
     	var studentId = row.studentId;
+    	var schoolId = row.schoolId;
     	var studentInfo =row.name+";;"+row.byName+";;"+row.birthday+";;"+row.identityId+";;"+row.sexVal;
-    	window.location.href="addCourse.jsp?studentId="+studentId+"&studentInfo="+studentInfo;
+    	window.location.href="addCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo;
 	}
 }
 
@@ -31,8 +32,9 @@ function addMultipleCourse()
 	{
 		var row = $('#list_data').datagrid('getSelected');
     	var studentId = row.studentId;
+    	var schoolId = row.schoolId;
     	var studentInfo =row.name+";;"+row.byName+";;"+row.birthday+";;"+row.identityId+";;"+row.sexVal;
-    	window.location.href="link.jsp?studentId="+studentId+"&studentInfo="+studentInfo;
+    	window.location.href="link.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo;
 	}
 }
 
@@ -78,3 +80,28 @@ function qry()
     	});
 	
 }
+
+
+function getOldCourse() 
+{
+	var courses;
+	var stu = {};
+	stu.studentId = $("#studentId").val();
+	stu.queryCode = 'Qry_Student_Courses';
+	var str = JSON.stringify(stu);
+	$.ajax( {
+		url : "/sys/course/getStuCourses.do?",
+		data : "param=" + str,
+		dataType : "json",
+		async : false,
+		success : function(data)
+		{
+		 courses= data.data;//学员已有课程
+		}
+	});
+	
+	return courses;
+}
+ 
+
+ 
