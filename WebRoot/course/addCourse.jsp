@@ -75,7 +75,7 @@
 					</td>
 					<td align="right">
 								<span>缴费时间：</span>
-							</td>
+						</td>
 							<td>
 								<input name="payDate" id="payDate"  class="easyui-datebox" editable='false' required="true"  style="width: 150px; height: 28px;" />
 							</td>
