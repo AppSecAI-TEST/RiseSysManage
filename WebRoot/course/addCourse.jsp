@@ -88,6 +88,7 @@
 			<input type="hidden" id="paySchoolId" name="paySchoolId" value="<%=schoolId%>" />	
 			<input type="hidden" id="studentId" name="studentId" value="<%=studentId%>">
 			<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}" />
+			<input type="hidden" id="coursePriceId" name="coursePriceId" value="" />
 			<div id="normal">
 				<div class="easyui-panel" style="width: 1200px; height: auto;"
 					title="常规课课程">
@@ -837,7 +838,8 @@ $("#activeSchool").combobox(
 
 //选择阶段价加载班级
 $('#stageId').combobox({
-	onChange : function(n, o) {
+	onChange : function(n, o)
+	{
 	var data = $("#stageId").combobox('getData');
 	var amount;
 
@@ -860,23 +862,24 @@ $('#stageId').combobox({
 		return;
 	}
 	var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\",schoolId:\""+ <%=schoolId%> + "\"}";
-	$("#classType").combobox({
-			url : urls,//返回json数据的url
-									valueField : "classType",
-									textField : "classType",
-									panelHeight : "auto",
-									onLoadSuccess : function() { //数据加载完毕事件
-										var data = $('#classType').combobox('getData');
-										if (data.length == 1)
-										{
-											$("#classType").combobox('select',data[0].classType);
-											$("#totalAmount").textbox('setValue', data[0].amount);
-											$("#amount").textbox('setValue', data[0].amount);
-											
-										}
-									}
-								});
-					}
+	$("#classType").combobox(
+	{
+		url : urls,//返回json数据的url
+		valueField : "classType",
+		textField : "classType",
+		panelHeight : "auto",
+		onLoadSuccess : function() { //数据加载完毕事件
+			var data = $('#classType').combobox('getData');
+			if (data.length == 1)
+			{
+				$("#classType").combobox('select',data[0].classType);
+				$("#totalAmount").textbox('setValue', data[0].amount);
+				$("#amount").textbox('setValue', data[0].amount);
+				$("#coursePriceId").val(data[0].setPriceId); 
+			}
+		}
+	});
+   }
 });
 
 $('#favorAmount').textbox( {
@@ -992,7 +995,6 @@ $("#submitBtn").click(function()
 				}
 			}
 		}
-	return;
 	addCourseInfo();
 });
 

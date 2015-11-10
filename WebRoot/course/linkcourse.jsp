@@ -30,6 +30,7 @@
 			
 		</script>
 		<script type="text/javascript" src="<%=path %>/js/course.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/course/addCourse.js"></script>
   	</head>
   
   	<body >
@@ -52,6 +53,8 @@
 	      	    	<input id="feeState"   name="feeState" type="hidden" value="00A"/>
 	      	    	<input id="stageOrder" name="stageOrder" type="hidden" value=""/>
 	      	    	<input id="schoolId"   name="schoolId" type="hidden" value="<%=schoolId%>"/>
+	      	    	<input type="hidden" id="paySchoolId" name="paySchoolId" value="<%=schoolId%>" />	
+	      	    	<input type="hidden" id="coursePriceId" name="coursePriceId" value="" />
 	      	    	 <td align="right"><span>缴费时间：</span></td>
 	      	        <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" style="width: 150px; height: 28px;" /></td>
 	      	        <td align="right"> <span>阶段：</span></td>
@@ -71,6 +74,8 @@
 	      	       
       	        </tr>
 	      	      <tr>
+	      	        <td  align="right"><span>业绩类型：</span></td>
+	      	        <td><span>升学</span></td>
 	      	        <td align="right"><span>业绩老师A：</span></td>
 	      	        <td> <select name="adviserA"  class="easyui-combobox" style="width: 150px; height: 28px;"
 		     				data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
@@ -81,8 +86,7 @@
 		     				data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
 		      				onLoadSuccess:function(data){$('#teacherId').combobox('setValue',data[0].teacherId);}" 
 		      				url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}"></td>
-	      	        <td  align="right"></td>
-	      	        <td></td>
+	      	      
       	        </tr>
       	      </table>
       	      
@@ -539,6 +543,6 @@
 		$('#dlg').dialog("open");
 	}
 
-	initCousreGift();
+	
 	
 	</script>

@@ -186,21 +186,31 @@
 		    		var order = orderCourses[n];
 		    		if(n<linkCourses.length)
 		    		{
+		    			var courseT= linkCourses[n];
 		    			var str=JSON.stringify(linkCourses[n]);
-						var url="/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str;
-						//alert(url);
-		    			$(name).attr('src',url);
-		    		
+		    			if(n==0)
+		    			{
+		    				if(courseT.feeType=='001')
+		    				{
+		    					$(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
+		    				}else
+		    				{
+		    					$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
+		    				}
+		    			}else
+		    			{
+		    				$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
+		    			}
 		    		}else
 		    		{
 		    			if(n==0)
 		    			{
-		    				$(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&name="+name);
+		    				$(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
 		    			}else
 		    			{
-		    				$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&name="+name);
+		    				$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
 		    			}
-		    			}
+		    		 }
 		    			
 		    		$(name).css("display","block");
 		    	}else
@@ -282,6 +292,7 @@ var newCourse;//新招课程阶段
 	   		{
 	   			return; 
 	   		}
+	   		//alert(JSON.stringify( courseT));
 	   		studentCourses.push(courseT);
 		 } 
 		allCourseInfos.studentCourses=studentCourses;

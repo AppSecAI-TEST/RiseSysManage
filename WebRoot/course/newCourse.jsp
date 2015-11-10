@@ -51,9 +51,13 @@
 	 	<div  class="easyui-panel" title="连报课程<%=order%>" style="width:99%;padding:10px;border-color:#95B1E7">
 		<form id="courseFm">
 			<div style="height: 10px;"></div>
+			<input id="studentCourseId" name="studentCourseId" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"studentCourseId")%>"/>
+    	    <input id="oldClassType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>"/>
+    	    <input id="oldStageId"   type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>"/>
 			<input type="hidden" id="paySchoolId" name="paySchoolId" value="<%=schoolId%>" />	
 			<input type="hidden" id="studentId" name="studentId" value="<%=studentId%>">
 			<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}" />
+			<input type="hidden" id="coursePriceId" name="coursePriceId" value="" />
 			<div id="normal">
 				<div class="easyui-panel" style="width: 100%; height: auto;"
 					title="常规课课程">
@@ -64,14 +68,15 @@
 							<input id="feeState" name="feeState" type="hidden" value="00A" />
 							<input id="stageOrder" name="stageOrder" type="hidden" value="" />
 							<td align="right"><span>缴费时间：</span></td>
-	      	    			    <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" style="width: 150px; height: 28px;" /></td>
+	      	    			    <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" value="<%=StringUtil.getJSONObjectKeyVal(object,"payDate")%>" style="width: 150px; height: 28px;" /></td>
 							<td align="right">
 								<span>阶段：</span>
 							</td>
 							<td>
 								 <select name="stageId"  id="stageId"   style="width: 150px; height: 28px;" class="easyui-combobox"
-	      						data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'"
-	      						url="<%=path %>/pubData/qryStage.do" editable='false' required="true" >
+	      						data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
+	      						 onLoadSuccess:function(data){$('#stageId').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>');}"
+	      						url="<%=path %>/pubData/qryStage.do"  required="true" >
 							</td>
 							
 							<td align="right">
@@ -104,7 +109,8 @@
 								<div id="adviserADiv">
 								<select name="adviserA" class="easyui-combobox" id="adviserA" required="true"
 									style="width: 150px; height: 28px;"
-									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
+									onLoadSuccess:function(data){$('#adviserA').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserA")%>');}"
 		      						url="<%=path %>/pubData/qryTeacherList.do">
 								</select>
 								</div>
@@ -122,7 +128,8 @@
 								<div id="adviserBDiv">
 								<select name="adviserB" class="easyui-combobox" id="adviserB" required="true"
 									style="width: 150px; height: 28px;"
-									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
+									onLoadSuccess:function(data){$('#adviserB').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserB")%>');}""
 		      						url="<%=path %>/pubData/qryTeacherList.do">
 								</select>
 								</div>
@@ -569,6 +576,8 @@
 	</body>
 </html>
 <script type="text/javascript">
+initCousreGift();
+
 $(function()
 {
 	$('#payDate').datebox().datebox('calendar').calendar(
@@ -746,7 +755,7 @@ $('#stageId').combobox({
 											$("#classType").combobox('select',data[0].classType);
 											$("#totalAmount").textbox('setValue', data[0].amount);
 											$("#amount").textbox('setValue', data[0].amount);
-											
+											$("#coursePriceId").val(data[0].setPriceId); 
 										}
 									}
 								});
@@ -762,6 +771,26 @@ $('#favorAmount').textbox( {
 		$("#amount").textbox('setValue', amount);
 	}
 });
+
+initOldCourse();
+function initOldCourse()
+{
+	var studentCourseId=$("#studentCourseId").val();
+	if(studentCourseId!='')
+	{
+		$("#payDate").attr("readOnly",true);
+		var json = '<%=courses%>';
+		var courseT=eval("("+json+")");
+		var stageId=courseT.stageId;
+		var classType=courseT.classType;
+		$("#stageId").combobox({ disabled: true});
+		$("#classType").combobox({ disabled: true});
+		$("#feeType").combobox({ disabled: true});
+		$("#adviserA").combobox({ disabled: true});
+		$("#adviserB").combobox({ disabled: true});
+	}
+}
+
 var studentCourse = {};//最后提交学生课程信息
 var gifts = [];
 var courses = [];
@@ -1494,135 +1523,6 @@ $("#addGiftBtn").click(function ()
 		$('#dlg').attr("src","");
 		$('#dlg').dialog("close");
 	}
-	
-	
-	//初始化已有赠品信息
-function initCousreGift()
-{
-		//增加赠品
- 	var sqlParam={};
- 	var id=$("#studentCourseId").val();
-	sqlParam.studentCourseId=id;
-	sqlParam.queryCode='Qry_Course_Gift';
-	var str = JSON.stringify(sqlParam);
-	$.ajax({
-		url: "/sys/course/getStuCourses.do?",
-		data: "param="+str,
-		dataType: "json",
-		async: false,
-    	success: function (data)
-    	{
-    		$.messager.progress('close'); 
-    		 var giftTs = data.data;//学员已有课程 
-    		 
-    		$.each(giftTs,function(i,gift)
-    		{
-    			if(gift==null)return;
-				var giftTR;
-				if(gift.giftState!='UNSUED')//已使用不可删除
-				{
-					$(node).html("");
-				} 
-    			else if(gift.parentType=="GOODS" || gift.parentType=="COUPON")
-				{
-			 		giftTR=$("#addGift").clone();
-			 		giftTR.css("display",'table-row');
-					giftTR.attr("studentGiftId",gift.studentGiftId);
-					giftTR.attr("val",'gift');
-					giftTR.find("td").each(function(n,node)
-					{
-						if(n==1)
-						{
-							if(gift.giftType=="GOODS")
-							{
-								$(node).html("<span>实物赠品</span>");	
-							}else if(gift.parentType=="COUPON")
-							{
-								$(node).html("<span>券类赠品</span>");	
-							}
-						}else if(n==3)
-						{	
-							if(gift.giftType=="GOODS")
-							{
-								 $(node).html("<span>"+gift.giftName+"</span>");	
-							}else
-							{
-								 $(node).html("<span>"+gift.giftName+"   "+gift.giftCode+"   "+gift.effDate+"</span>");
-							}
-							
-						}else
-						if(n==5)
-						{	
-							if(gift.isGet=='Y')
-							{
-								$(node).html("<span>已领取</span>");	
-							}else
-							{
-								$(node).html("<span>未领取</span>");	
-							}
-							
-							 
-						}else if(n==7)
-						{
-							$(node).html("<span>"+gift.granter+"</span>");	
-						}else if(n==8)
-						{
-							if(gift.isRtn=='Y')
-							{
-								$(node).html("<span>是</span>");	
-							}else
-							{
-								$(node).html("<span>否</span>");	
-							}
-						}
-					});
-				
-					$("#addGift").after(giftTR);
-			 	}else if(gift.parentType=="COURSE")
-			 	{
-			 		var objectTr=$("#add").clone();//克隆模板
-					objectTr.css("display",'table-row');
-					objectTr.attr("val","course");
-					objectTr.attr("studentGiftId",gift.studentGiftId);
-					objectTr.find("td").each(function(i,node)
-					{
-						var effDate="";
-						if(i==0)
-						{
-							$(node).html("<span>"+(i+1)+"</span>");	
-						}else
-						if(i==1)
-						{
-							$(node).html("<span>"+gift.typeName+"</span>");	
-						}else if(i==2)
-						{
-							 
-							$(node).html("<span>"+gift.giftName+"</span>");	
-		 	
-						}else if(i==3)
-						{
-						 
-							$(node).html("<span>"+gift.giftNum+"</span>");	
-						}else if(i==4)
-						{
-							$(node).html("<span>"+gift.createDate+"</span>");	
-						}else if(i==5)
-						{
-							$(node).html("<span>未使用</span>");	
-						}else if(i==6)
-						{
-							$(node).html("<span>"+gift.effDate+"</span>");	
-						}else if(i==7)
-						{
-							$(node).html("<span>"+gift.expDate+"</span>");	
-						} 
-					});
-					$("#add").after(objectTr);
-			 	}
-			});
-		} 
-	});
-}
 	
 	$("#c_schoolA").combobox({
 		onChange:function(){
