@@ -311,6 +311,10 @@ function showImage(url) {
 
 function relatedLink(obj) {
 	var lId = $(obj).attr("linkId");
+	if(lId=="")
+	{
+		return false;
+	}	
 	var flag =$(obj).is(":checked");
 	$("input[type=checkbox]").each(function(index) {
 		if (index > 0) {
