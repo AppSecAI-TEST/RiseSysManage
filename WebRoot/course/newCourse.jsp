@@ -6,6 +6,14 @@
 	String studentInfo =request.getParameter("studentInfo");
 	String studentId =request.getParameter("studentId");
 	String schoolId= request.getParameter("schoolId");
+	String order=request.getParameter("order");
+	String courses=request.getParameter("courses");
+	String name=request.getParameter("name");
+	JSONObject object=new JSONObject();
+	if(courses!=null && !"".equals(courses))
+    {
+		object = JSONObject.fromObject(courses);
+    }
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -15,6 +23,15 @@
 		<%@ include file="../common/formvalidator.jsp"%>
 		<script type="text/javascript" src="<%=path %>/pub/js/date.js"></script>
 		<script type="text/javascript" src="<%=path %>/js/course/addCourse.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function()
+		{
+			var height = $(document).height();
+			$('#frame<%=name%>',parent.document).css("height",height+20);
+		});
+			
+			
+		</script>
 		<style>
 .praiseTab {
 	border-collapse: collapse;
@@ -31,74 +48,23 @@
 	</head>
 
 	<body>
-		<div class="easyui-panel" style="width: 1200px" title="学员基础信息">
-			<input type="hidden" id="studentInfo" name="studentInfo" value="<%=studentInfo%>" />
-			<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId%>" />	
-			<table width="100%" cellpadding="5px" class="maintable"id="stuBaseInfo">
-				<tr>
-					<td width="13%" align="right">
-						<span style="color: red;">*</span>
-						<span>学员姓名：</span>
-					</td>
-					<td width="25%">
-						<span></span>
-					</td>
-					<td width="13%" align="right">
-						<span>出生日期：</span>
-					</td>
-					<td width="15%">
-						<span></span>
-					</td>
-					<td align="right">
-						<span>证件号码：</span>
-					</td>
-					<td>
-						<span></span>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<span>性别：</span>
-					</td>
-					<td>
-						<span><span>
-					</td>
-					<td align="right">
-						<span>课程类型：</span>
-					</td>
-					<td>
-						<select name="courseType" editable='false' required="true" class="easyui-combobox" id="courseType" style="width: 150px; height: 28px;"
-						 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',onChange:changeCourseType, 
-						 onLoadSuccess:function(data){$('#courseType').combobox('setValue',data[0].codeName);}"
-	      				 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=SINGLE_COURSE_TYPE" required="true" >
-						</select>
-					</td>
-					<td align="right">
-								<span>缴费时间：</span>
-						</td>
-							<td>
-								<input name="payDate" id="payDate"  class="easyui-datebox" editable='false' required="true"  style="width: 150px; height: 28px;" />
-							</td>
-				</tr>
-			</table>
-			</form>
-		</div>
+	 	<div  class="easyui-panel" title="连报课程<%=order%>" style="width:99%;padding:10px;border-color:#95B1E7">
 		<form id="courseFm">
 			<div style="height: 10px;"></div>
 			<input type="hidden" id="paySchoolId" name="paySchoolId" value="<%=schoolId%>" />	
 			<input type="hidden" id="studentId" name="studentId" value="<%=studentId%>">
 			<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}" />
 			<div id="normal">
-				<div class="easyui-panel" style="width: 1200px; height: auto;"
+				<div class="easyui-panel" style="width: 100%; height: auto;"
 					title="常规课课程">
-
 					<table width="100%" cellpadding="5px" class="maintable">
 						<tr>
 							<input id="advisterType" name="adviserType" type="hidden" value="teacher" />
 							<input id="courseState" name="courseState" type="hidden" value="001" />
 							<input id="feeState" name="feeState" type="hidden" value="00A" />
 							<input id="stageOrder" name="stageOrder" type="hidden" value="" />
-							
+							<td align="right"><span>缴费时间：</span></td>
+	      	    			    <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" style="width: 150px; height: 28px;" /></td>
 							<td align="right">
 								<span>阶段：</span>
 							</td>
@@ -107,6 +73,7 @@
 	      						data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'"
 	      						url="<%=path %>/pubData/qryStage.do" editable='false' required="true" >
 							</td>
+							
 							<td align="right">
 								<span>班级类型：</span>
 							</td>
@@ -118,7 +85,10 @@
 									</option>
 								</select>
 							</td>
-							<td align="right">
+							 
+						</tr>
+						<tr >
+						<td align="right">
 							 <span>业绩类型：</span>
 							</td>
 							<td>
@@ -129,70 +99,47 @@
 									url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
 								</select>
 							</td>
-						</tr>
-						<tr id="adviserDiv">
-							<td align="right">
-								<span>业绩顾问A：</span>
-							</td>
+							<td align="right" id="adviserNameA"><span>业绩顾问A：</span></td>
 							<td>
-								<select name="adviserA" class="easyui-combobox" id="adviserA"
+								<div id="adviserADiv">
+								<select name="adviserA" class="easyui-combobox" id="adviserA" required="true"
 									style="width: 150px; height: 28px;"
 									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 		      						url="<%=path %>/pubData/qryTeacherList.do">
 								</select>
+								</div>
+								
+								<div id="adviserTeacherADiv" style="display:none">
+									<select name="adviserTeacherA" class="easyui-combobox" id="adviserTeacherA" required="true"
+									style="width: 150px; height: 28px;"
+									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+		      						url="<%=path %>/pubData/qryTeacherList.do?schoolId=1001">
+	      						</div>
+	      						
 							</td>
-							<td align="right">
-								<span>业绩顾问B：</span>
-							</td>
+							<td align="right" id="adviserNameB"><span>业绩顾问B：</span></td>
 							<td>
-								<select name="adviserB" class="easyui-combobox" id="adviserB"
+								<div id="adviserBDiv">
+								<select name="adviserB" class="easyui-combobox" id="adviserB" required="true"
 									style="width: 150px; height: 28px;"
 									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 		      						url="<%=path %>/pubData/qryTeacherList.do">
 								</select>
+								</div>
+								<div id="adviserTeacherBDiv" style="display:none">
+								<select name="adviserTeacherB" class="easyui-combobox" id="adviserTeacherB"  required="true"
+								style="width: 150px; height: 28px;"
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+	      						url="<%=path %>/pubData/qryTeacherList.do?schoolId=1001">
+	      						</div>
+							</select>
 							</td>
-							<td align="right"></td>
-							<td></td>
 						</tr>
-						
-						<tr id="adviserTeacherDiv" style="display: none;">
-						<td align="right">
-							<span>业绩老师A：</span>
-						</td>
-						<td>
-							<select name="adviserTeacherA" class="easyui-combobox" id="adviserTeacherA"
-								style="width: 150px; height: 28px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
-	      						url="<%=path %>/pubData/qryTeacherList.do">
-							</select>
-						</td>
-						<td align="right">
-							<span>业绩老师B：</span>
-						</td>
-						<td>
-							<select name="adviserTeacherA" class="easyui-combobox" id="adviserTeacherB"
-								style="width: 150px; height: 28px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
-	      						url="<%=path %>/pubData/qryTeacherList.do">
-							</select>
-						</td>
-						<td align="right"></td>
-						<td></td>
-					</tr>
-						
-						<tr>
-      					  <td align="right"><span>上传缴费单：</span></td>
-      					  <td  colspan="5"><input style="width: 300px; height: 28px;" class="easyui-filebox" name="file2" data-options="prompt:''" ><a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">查看缴费单</a></td>
-   					  </tr>
-      					<tr>
-      					  <td align="right"><span>备注：</span></td>
-      					  <td colspan="5"><textarea rows="2" cols="120" id="vipRemark" name="vipRemark" class="easyui-validatebox textbox"></textarea></td>
-   					  </tr>
 					</table>
 				</div>
 				<div id="giftDiv">
 				<div style="height: 10px;"></div>
-				<div   class="easyui-panel" style="width: 1200px; height: auto;"
+				<div   class="easyui-panel" style="width: 100%; height: auto;"
 					title="赠品信息">
 				<table width="100%" cellpadding="5px" class="maintable" id="giftTab">
 	      	      <tr id="giftModelTR">
@@ -215,7 +162,7 @@
       	            </table>
       	            </td>
 	      	        <td width="7%" align="right"><span>是否领用：</span></td>
-	      	        <td width="6%" align="left">
+	      	        <td width="5%" align="left">
 	      	          <input type="radio" name="isGetY" id="isGetY" value="Y">
 	      	          <label for="radio"><span>已领用</span></label>
 	      	          <input type="radio" name="isGetN" id="isGetN" value="N">
@@ -242,7 +189,7 @@
       		</div>
 
 				<div style="height: 10px;"></div>
-				<div class="easyui-panel" style="width: 1200px; height: auto;"
+				<div class="easyui-panel" style="width: 100%; height: auto;"
 					title="赠课信息">
 					<table width="100%" cellpadding="5px" class="maintable">
 						<tr id="giftCourseTr">
@@ -349,7 +296,7 @@
 				</div>
 				<div id="womDiv">
 				<div style="height: 10px;"></div>
-				<div  class="easyui-panel" style="width: 1200px; height: auto;" title="口碑信息">
+				<div  class="easyui-panel" style="width: 100%; height: auto;" title="口碑信息">
 					<table width="100%" cellpadding="5px" id="praiseInfo"
 						class="maintable">
 						<tr>
@@ -572,83 +519,8 @@
 				</div>
 				</div>
 			</div>
-			<div id="short" style="display: none;">
-				<div class="easyui-panel" style="width: 1200px; height: auto;"
-					title="短期课课程">
-					<table width="99%" cellpadding="5px" class="maintable">
-						<tr>
-							<td align="right">
-								<span>短期课类型：</span>
-							</td>
-							<td align="left">
-								<select class="easyui-combobox" id="shortCourseType" style="width: 100px; height: 28px;"
-								 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
-	      				 		 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=SHORT_COURSE_TYPE"   >
-								<select>
-							</td>
-							<td align="right">
-								<span>班级类型：</span>
-							</td>
-							<td align="left">
-								 
-							</td>
-							</tr>
-							<tr>
-							<td align="right">
-								<span>业绩老师A：</span>
-							</td>
-							<td align="left">
-								<select class="easyui-combobox" id="s_schooldA"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-								url="<%=path %>/pubData/qrySchoolList.do?schoolId=" 
-									style="width: 100px; height: 28px;">
-								<select>
-								<select class="easyui-combobox" id="s_teacherA"
-									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
-									style="width: 100px; height: 28px;">
-								<select>
-							</td>
-							<td align="right">
-								<span>业绩老师B：</span>
-							</td>
-							<td align="left">
-								<select class="easyui-combobox" id="s_schooldB"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-									url="<%=path %>/pubData/qrySchoolList.do?schoolId="  
-									style="width: 100px; height: 28px;">
-									<select>
-								<select class="easyui-combobox" id="s_teacherB"
-									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
-									style="width: 100px; height: 28px;">
-								<select>
-							</td>
-						</tr>
-						<tr>
-							<td align="right">
-								<span>备注：</span>
-							</td>
-							<td colspan="6">
-								<textarea rows="2" cols="120" id="remark" name="remark"
-									class="easyui-validatebox textbox"></textarea>
-							</td>
-						</tr>
-						<tr>
-							<td align="right">
-								<span>上传缴费单：</span>
-							</td>
-							<td colspan="6">
-								<input style="width: 300px; height: 28px;"
-									class="easyui-filebox" name="file2" data-options="prompt:''">
-								<a href="javascript:void(0)" id="viewStudent"
-									class="easyui-linkbutton" iconCls="icon-redo"
-									style="width: 100px;">查看缴费单</a>
-							</td>
-						</tr>
-					</table>
-				</div>
-			</div>
 			<div style="height: 10px;"></div>
-			<div class="easyui-panel" style="width: 1200px; height: auto;" title="缴费信息">
+			<div class="easyui-panel" style="width: 100% height: auto;" title="缴费信息">
 				<table width="100%" cellpadding="5px" class="maintable">
 					<tr>
 						<td align="center">
@@ -693,23 +565,25 @@
 				</table>
 			</div>
 		</form>
-		<div style="width: 1200px; text-align: center">
-			<a href="javascript:void(0)" class="easyui-linkbutton"
-				iconCls="icon-ok" style="width: 150px" id="submitBtn"><span>提交</span>
-			</a> &nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="javascript:void(0)" class="easyui-linkbutton"
-				iconCls="icon-back" style="width: 150px" id="backBtn"><span>返回</span>
-			</a>
-			<iframe id="dlg" class="easyui-dialog"
-				style="width: 1000px; height: 450px; padding: 10px 20px"
-				closed="true" modal="true">
-			</iframe>
+		 </div>
 	</body>
 </html>
 <script type="text/javascript">
+$(function()
+{
+	$('#payDate').datebox().datebox('calendar').calendar(
+	{
+		validator: function(date)
+		{
+			var now = new Date();
+			var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate()-30);
+			var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+			return d1<=date && date<=d2;
+		}
+	});
+});
 
-
-loadStuBaseInfo();
+ 
 $('#parentType').combobox({
 	 onChange:function(n,o)
 		{
@@ -1203,6 +1077,8 @@ $("#addGiftBtn").click(function ()
 		var obj = $("#courseFm").serializeObject();
 		obj.payDate=$("#payDate").datebox("getValue");
 		studentCourse.course=obj;
+		var womInfo=getWom();
+		studentCourse.wom=womInfo;
 		return studentCourse;
 	}
 		
@@ -1316,25 +1192,28 @@ $("#addGiftBtn").click(function ()
 	function changeFeeType()
 	{
 		var type=$("#feeType").combobox("getValue");
+		 
 		if(type=='001')
 		{
 			$("#womDiv").css("display","block");
 			$("#giftDiv").css("display","block");
-			$("#adviserDiv").css("display","table-row");
-			$("#adviserTeacherDiv").css("display","none");
+			$("#adviserADiv").css("display","block");
+			$("#adviserTeacherADiv").css("display","none");
+			$("#adviserBDiv").css("display","block");
+			$("#adviserTeacherBDiv").css("display","none");
+			$("#adviserNameA").html("<span>业绩顾问A：</span>");
+			$("#adviserNameB").html("<span>业绩顾问B：</span>");
 		}else if(type=='002')
 		{
 			$("#womDiv").css("display","none");
 			$("#giftDiv").css("display","block");
-			$("#adviserDiv").css("display","none");
-			$("#adviserTeacherDiv").css("display","table-row");
-		}else if(type=='003')
-		{
-			$("#womDiv").css("display","none");
-			$("#giftDiv").css("display","none");
-			$("#adviserDiv").css("display","none");
-			$("#adviserTeacherDiv").css("display","table-row");
-		}
+			$("#adviserADiv").css("display","none");
+			$("#adviserTeacherADiv").css("display","block");
+			$("#adviserBDiv").css("display","none");
+			$("#adviserTeacherBDiv").css("display","block");
+			$("#adviserNameA").html("<span>业绩老师A：</span>");
+			$("#adviserNameB").html("<span>业绩老师B：</span>");
+		} 
 		
 	}
 	
@@ -1426,26 +1305,14 @@ $("#addGiftBtn").click(function ()
 		}	
 	}
 	
-	function loadStuBaseInfo()
-	{
-		var studentInfo =$("#studentInfo").val();
-		if(studentInfo.indexOf(";;")!=-1)
-		{
-			studentInfo =studentInfo.split(";;");
-			var tr1 =$("#stuBaseInfo").find("tr:eq(0)");
-		    tr1.find("td:eq(1)").find("span").html(studentInfo[0]);
-		    tr1.find("td:eq(3)").find("span").html(studentInfo[2]);
-		    tr1.find("td:eq(5)").find("span").html(studentInfo[3]);
-		    $("#stuBaseInfo").find("tr:eq(1)").find("td:eq(1)").find("span").html(studentInfo[4]);
-		}	
-	}
-	
-	function addCourseInfo()
+	function getWom()
 	{
 		//获取口碑信息-begin
 		var womType="";
-		$("input[name=praise]").each(function(){
-			if(this.checked){
+		$("input[name=praise]").each(function()
+		{
+			if(this.checked)
+			{
 				womType =$(this).attr("womType");
 			}
 		})
@@ -1576,40 +1443,7 @@ $("#addGiftBtn").click(function ()
 				wom["item"]=womItem;
 			}	
 		}
-		//获取口碑信息-end
-		var courseInfo =build();
-		var paramValue={
-			"womInfo":wom,
-			"courseInfo":courseInfo
-		};
-		paramValue =JSON.stringify(paramValue);
-		$.ajax({
-					type : "POST",
-					url: "/sys/course/addSingleCourse.do",
-					data: "param="+paramValue,
-					async: false,
-					beforeSend: function()
-			    	{
-			    		showProgressLoader("正在添加课程,请稍等...",400);
-			    	},
-			    	success: function(data) 
-			    	{
-			    		hideProgressLoader() 
-			    		if(data=="true")
-			    		{
-			    			//showMessage('提示', "添加课程成功！",function(){window.location.href="addCourseList.jsp";});
-			    		}
-			    		else
-			    		{
-			    			showMessage('提示', "添加课程失败！",null);
-			    		}	
-			    		
-			    	},
-			        error:function(){
-			        	hideProgressLoader();
-			        	showMessage('提示', "调用添加课程服务失败！",null);
-			        }
-				});
+		 return womInfo;
 	}
 	
 	

@@ -3,6 +3,7 @@
 <%
 	String path = request.getContextPath();
 	String schoolId= request.getParameter("schoolId");
+	String studentId =request.getParameter("studentId");
 	String order=request.getParameter("order");
 	String courses=request.getParameter("courses");
 	String name=request.getParameter("name");
@@ -42,17 +43,17 @@
 	      	      <tr>
 	      	        <input id="studentCourseId" name="studentCourseId" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"studentCourseId")%>"/>
 	      	        <input id="oldClassType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>"/>
-	      	        <input id="oldStageId"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>"/>
-	      	      	<input id="studentId"  name="studentId"     type="hidden" value="2"/>
-	      	    	<input id="courseType" name="courseType"    type="hidden" value="001"/>
+	      	        <input id="oldStageId"   type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>"/>
+	      	      	<input id="studentId"    name="studentId"     type="hidden" value="<%=studentId%>"/>
+	      	    	<input id="courseType"   name="courseType"    type="hidden" value="001"/>
 	      	    	<input id="advisterType" name="adviserType" type="hidden" value="teacher"/>
 	      	    	<input id="courseState" name="courseState"  type="hidden" value="001"/>
-	      	    	<input id="feeType"  name="feeType"  type="hidden" value="001"/>
-	      	    	<input id="feeState" name="feeState" type="hidden" value="00A"/>
+	      	    	<input id="feeType"    name="feeType"  type="hidden" value="002"/>
+	      	    	<input id="feeState"   name="feeState" type="hidden" value="00A"/>
 	      	    	<input id="stageOrder" name="stageOrder" type="hidden" value=""/>
-	      	    	<input id="schoolId" name="schoolId" type="hidden" value="<%=schoolId%>"/>
+	      	    	<input id="schoolId"   name="schoolId" type="hidden" value="<%=schoolId%>"/>
 	      	    	 <td align="right"><span>缴费时间：</span></td>
-	      	        <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 28px;" /></td>
+	      	        <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" style="width: 150px; height: 28px;" /></td>
 	      	        <td align="right"> <span>阶段：</span></td>
 	      	        <td>
 					 <select name="stageId"  id="stageId"   style="width: 150px; height: 28px;"
@@ -70,15 +71,13 @@
 	      	       
       	        </tr>
 	      	      <tr>
-	      	        <td align="right">
-	      	            <span>业绩老师A：</span>
-      	                   </td>
-	      	        <td> <select name="adviserA"  class="easyui-combobox" style="width: 80px; height: 28px;"
+	      	        <td align="right"><span>业绩老师A：</span></td>
+	      	        <td> <select name="adviserA"  class="easyui-combobox" style="width: 150px; height: 28px;"
 		     				data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
 		      				onLoadSuccess:function(data){$('#teacherId').combobox('setValue',data[0].teacherId);}" 
 		      				url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}"></td>
 	      	        <td align="right"><span>业绩老师B：</span></td>
-	      	        <td> <select name="adviserB"  class="easyui-combobox" style="width: 80px; height: 28px;"
+	      	        <td> <select name="adviserB"  class="easyui-combobox" style="width: 150px; height: 28px;"
 		     				data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
 		      				onLoadSuccess:function(data){$('#teacherId').combobox('setValue',data[0].teacherId);}" 
 		      				url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}"></td>
@@ -112,7 +111,7 @@
       	            </table>
       	            </td>
 	      	        <td width="7%" align="right"><span>是否领用：</span></td>
-	      	        <td width="7%" align="left">
+	      	        <td width="5%" align="left">
 	      	          <input type="radio" name="isGetY" id="isGetY" value="Y">
 	      	          <label for="radio"><span>已领用</span></label>
 	      	          <input type="radio" name="isGetN" id="isGetN" value="N">
@@ -199,7 +198,7 @@
 				      	        <td colspan="3"  align="left" ><input id="minusAmount"   readonly="readonly"  name="minusAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;">  </td>
 				      	        <td width="11%"  align="right"><span>连报优惠金额：</span></td>
 				      	        <td width="17%"  align="left" ><input id="favorAmount"   name="favorAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"favorAmount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"/></td>
-				      	        <td width="12%"  align="right"><span>实缴课程一金额：</span></td>
+				      	        <td width="12%"  align="right"><span>实缴课程金额：</span></td>
 				      	        <td width="17%"  align="left" ><input id="amount"   readonly="readonly"   name="amount" type="text"  value="<%=StringUtil.getJSONObjectKeyVal(object,"amount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"> </td>
 			      	         </tr>
 			      	      </table>
@@ -499,7 +498,8 @@
 		studentCourse.gifts=gifts;
 		studentCourse.giftCourses= courses;
 		
-		var obj = JSON.stringify($("#courseFm").serializeObject());
+		var obj = $("#courseFm").serializeObject();
+		alert(obj);
 		studentCourse.course=obj;
 		//alert(JSON.stringify(studentCourse));
 		return studentCourse;

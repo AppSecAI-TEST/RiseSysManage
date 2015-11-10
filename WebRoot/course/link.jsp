@@ -9,6 +9,7 @@
 	<head>
 	<%@ include file="../common/head.jsp" %>
 	<%@ include file="../common/formvalidator.jsp" %>
+	<script type="text/javascript" src="<%=path %>/js/course/addCourse.js"></script>
 	</head>
 	<body>
 	<div id="base">
@@ -186,14 +187,21 @@
 		    		if(n<linkCourses.length)
 		    		{
 		    			var str=JSON.stringify(linkCourses[n]);
-						var url="/sys/course/linkcourse.jsp?schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str;
+						var url="/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str;
 						//alert(url);
 		    			$(name).attr('src',url);
 		    		
 		    		}else
 		    		{
-		    			$(name).attr('src',"/sys/course/linkcourse.jsp?schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&name="+name);
-		    		}
+		    			if(n==0)
+		    			{
+		    				$(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&name="+name);
+		    			}else
+		    			{
+		    				$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&name="+name);
+		    			}
+		    			}
+		    			
 		    		$(name).css("display","block");
 		    	}else
 		    	{
@@ -204,14 +212,77 @@
         }  
     });  
 	
+	
+function validateCourses(order)
+{
+	var oldCourses=getOldCourse();
+	
+	for(var i=0;i<oldCourses.length;i++)
+	{
+		var course = oldCourses[i];
+		var order = course.stageOrder;
+		var courseState=course.courseState;
+		var stageName =course.stageId;
+		if(courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
+		{
+			if(feeType=='001')//新招
+			{
+				if(Number(stageOrder)<=Number(order))
+				{
+					showMessage("提示","当前所报新招阶段"+stageId+"低于或同于在读阶段"+stageName+",请重新选择阶段",null);
+					return;
+				}
+			}else if(feeType=='002')
+			{
+				if(Number(stageOrder)<Number(order))
+				{
+					showMessage("提示","当前所报升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段",null);
+					return;
+				}
+			}
+		}
+	}
+}
+
+/**
+ * 判断新招是不是最低阶段
+ */
+function checkNewCourse(courseT)
+{
+	var course=courseT.course;
+	if(course.feeType=='001')
+	{
+		newCourse=course;
+		return true;
+	}
+	if(newCourse!=null)
+	{
+		var stageOrder=newCourse.stageOrder;
+		var order =course.stageOrder;
+		if(Number(stageOrder)>Number(order))
+		{
+			 showMessage('提示', "本次报名新招阶段"+newCourse.stageId+"不是最底阶段", null);
+			 return false;
+		}
+	}
+	return true;
+}
+
+var newCourse;//新招课程阶段
+	
 	$("#submit").click(function()
 	{
+		 
 		 studentCourses=[];
 		 for(var n=0;n<num;n++)
 		 {
 			var name="frame"+n;
-	   		var l = window.frames[name].window.build();
-	   		studentCourses.push(l);
+	   		var courseT = window.frames[name].window.build();
+	   		if(!checkNewCourse(courseT))
+	   		{
+	   			return; 
+	   		}
+	   		studentCourses.push(courseT);
 		 } 
 		allCourseInfos.studentCourses=studentCourses;
 		allCourseInfos.linkCourseT=linkCourseT;
