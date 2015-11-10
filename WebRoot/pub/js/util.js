@@ -236,6 +236,11 @@ function formatSchool(row) {
 	return s;
 }
 
+function formatPost(row) {
+	var s = '<span>' + row.postName + '</span>';
+	return s;
+}
+
 function formatStaff(row) {
 	var s = '<span>' + row.userName + '</span>';
 	return s;

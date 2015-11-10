@@ -132,5 +132,16 @@ public class QryPubDataService
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10114\",securityCode:\"0000000000\",params:{stageId:\""+stageId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
+
+	/**
+	 * ²éÑ¯Ö°Îñ
+	 * @param postId
+	 * @return
+	 * @throws Exception
+	 */
+	public String qryPostList(String postId) throws Exception{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10115\",securityCode:\"0000000000\",params:{postId:\""+postId+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
 	
 }

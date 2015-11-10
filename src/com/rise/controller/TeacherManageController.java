@@ -1,15 +1,20 @@
 package com.rise.controller;
 
 import java.io.PrintWriter;
+import java.text.NumberFormat;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.rise.pub.util.StringUtil;
 import com.rise.service.TeacherManageService;
@@ -18,99 +23,95 @@ import com.rise.service.TeacherManageService;
 @RequestMapping("/teacherManage")
 public class TeacherManageController {
 	
+	private static Log log = LogFactory.getLog(TeacherManageController.class);
+	
 	@Autowired
 	private TeacherManageService teacherManageService;
 	
-	@RequestMapping(value="/qryArchivesInfo.do")
-	public void qryArchivesInfo(HttpServletRequest request,HttpServletResponse response,String page,String rows,String json)
+	//根据不同类型跳转到教师管理各个页面
+	@RequestMapping(value="/viewTeacherInfo.do")
+	public ModelAndView viewTeacherInfo(String json,String funcNodeId,String type)
 	{
-		PrintWriter out = null;
+		log.error(json);
+		log.error(funcNodeId);
+		ModelAndView view = null;
 		try {
-			response.setCharacterEncoding("utf-8");
-			out = response.getWriter();
-			Integer pageNumInt = Integer.parseInt(page)-1;
-			Integer pageSizeInt = Integer.parseInt(rows);
 			JSONObject obj = JSONObject.fromObject(json);
-			String schoolId = StringUtil.getJSONObjectKeyVal(obj, "schoolId");
-			String chineseName = StringUtil.getJSONObjectKeyVal(obj, "chineseName");
-			String englishName = StringUtil.getJSONObjectKeyVal(obj, "englishName");
-			String permitteeLevel = StringUtil.getJSONObjectKeyVal(obj, "permitteeLevel");
-			String permitteeNum = StringUtil.getJSONObjectKeyVal(obj, "permitteeNum");
-			String workMonth = StringUtil.getJSONObjectKeyVal(obj, "workMonth");
-			String workYear = StringUtil.getJSONObjectKeyVal(obj, "workYear");
-			String workTime = StringUtil.getJSONObjectKeyVal(obj, "workTime");
-			String leadClassLevel = StringUtil.getJSONObjectKeyVal(obj, "leadClassLevel");
-			String trainingLevel = StringUtil.getJSONObjectKeyVal(obj, "trainingLevel");
-			String retVal = teacherManageService.qryArchivesInfo(pageNumInt, pageSizeInt, schoolId, chineseName, englishName, permitteeLevel, permitteeNum, workMonth, workYear, workTime, leadClassLevel, trainingLevel);
-			out.write(retVal);
-		} catch (Exception e) {
+			String teacherId = StringUtil.getJSONObjectKeyVal(obj, "teacherId");
+			if("update".equals(type)){
+				view = new ModelAndView("teacherManage/updateFile");//档案维护
+			}else if("rl".equals(type)){
+				view = new ModelAndView("teacherManage/preResign");//预离职
+			}else if("rlp".equals(type)){
+				view = new ModelAndView("teacherManage/preResignRegain");//预离职复职
+				String ret = teacherManageService.getTeacherInfo(teacherId,type);
+				view.addObject("retObj",JSONObject.fromObject(ret));
+			}else if("l".equals(type)){
+				view = new ModelAndView("teacherManage/resign");//离职
+				String ret = teacherManageService.getTeacherInfo(teacherId,type);
+				view.addObject("retObj",JSONObject.fromObject(ret));
+			}else if("lp".equals(type)){
+				view = new ModelAndView("teacherManage/resignRegain");//离职复职
+				String ret = teacherManageService.getTeacherInfo(teacherId,type);
+				view.addObject("retObj",JSONObject.fromObject(ret));
+			}else if("org".equals(type)){
+				view = new ModelAndView("teacherManage/updateOrg");//更换组织
+			}else if("view".equals(type)){
+				view = new ModelAndView("teacherManage/viewTeacherInfo");//浏览
+				String ret = teacherManageService.getTeacherInfo(teacherId,type);
+				view.addObject("retObj",JSONObject.fromObject(ret));
+			}
+			//算出持证率
+			String licenses = StringUtil.getJSONObjectKeyVal(obj, "licenses");
+			String stageIds = StringUtil.getJSONObjectKeyVal(obj, "stageIds"); 
+			if("".equals(licenses)){
+				view.addObject("licenseNum", "0");
+			}else{
+				view.addObject("licenseNum",licenses.split("、").length);
+			}
+			if("".equals(stageIds)){
+				view.addObject("rate","0%");
+			}else{
+				if("".equals(licenses)){
+					view.addObject("rate","0%");
+				}else{
+					String lic[] = licenses.split("、");
+					String stage[] = stageIds.split("、");
+					int count = 0;
+					for(int i = 0;i < stage.length;i++){
+						for(int j = 0;j < lic.length;j++){
+							if(stage[i].equals(lic[j])){
+								count++;
+								break;
+							}
+						}
+					}
+					NumberFormat numberFormat = NumberFormat.getInstance();  //算出持证率
+					numberFormat.setMaximumFractionDigits(2);  
+					String result = numberFormat.format((float) count / (float) stage.length * 100);  
+					view.addObject("rate", result+"%");
+				}
+			}
+			view.addObject("obj",obj);
+		}catch(Exception e)
+		{
 			e.printStackTrace();
 		}
-		finally
-		{
-			if(out != null){
-				out.close();
-			}
-		}
+		return view;
 	}
 	
-	@RequestMapping(value="/addArchivesInfo.do")
-	public void addArchivesInfo(HttpServletRequest request,HttpServletResponse response,String schoolId,String chineseName,String englishName,String permitteeLevel,String permitteeNum,String workMonth,String workYear,String workTime,String leadClassLevel,String trainingLevel)
+	//更改教师信息，根据不同类型区分
+	@RequestMapping(value="/updateTeacherInfo.do")
+	public void updateTeacherInfo(HttpServletResponse response,String json,String type)
 	{
+		log.error(json);
 		PrintWriter out = null;
 		try
 		{
-			response.setCharacterEncoding("utf-8");
+			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = teacherManageService.addArchivesInfo(schoolId, chineseName, englishName, permitteeLevel, permitteeNum, workMonth, workYear, workTime, leadClassLevel, trainingLevel);
-			out.write(retVal);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null)
-			{
-				out.close();
-			}
-		}
-	}
-
-	@RequestMapping(value="/updateArchivesInfo.do")
-	public void updateArchivesInfo(HttpServletRequest request,HttpServletResponse response,String teacherId,String schoolId,String chineseName,String englishName,String permitteeLevel,String permitteeNum,String workMonth,String workYear,String workTime,String leadClassLevel,String trainingLevel)
-	{
-		PrintWriter out = null;
-		try
-		{
-			response.setCharacterEncoding("utf-8");
-			out = response.getWriter();
-			String retVal = teacherManageService.updateArchivesInfo(teacherId, schoolId, chineseName, englishName, permitteeLevel, permitteeNum, workMonth, workYear, workTime, leadClassLevel, trainingLevel);
-			out.write(retVal);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null)
-			{
-				out.close();
-			}
-		}
-	}
-	
-	@RequestMapping(value="/deleteArchivesInfo.do")
-	public void deleteArchivesInfo(HttpServletRequest request,HttpServletResponse response,String teacherId)
-	{
-		PrintWriter out = null;
-		try
-		{
-			response.setCharacterEncoding("utf-8");
-			out = response.getWriter();
-			String retVal = teacherManageService.deleteArchivesInfo(teacherId);
+			String retVal = teacherManageService.updateTeacherInfo(json,type);
+			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
