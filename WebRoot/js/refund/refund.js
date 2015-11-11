@@ -78,7 +78,14 @@ $(document).ready(function() {
 	
 	//浏览
 	$("#view").click(function() {
-		
+		var row = $('#apply_list_data').datagrid('getSelected');
+		if(row) {
+			var courseType = row.courseType;
+			var refundFeeId = row.refundFeeId;
+			window.location.href = "/sys/refund/qryApproveRefund.do?refundFeeId="+refundFeeId+"&courseType="+courseType+"&type=view";
+		} else {
+			$.messager.alert('提示', "请先选择您要浏览的退费申请！");
+		}
 	});
 	
 	//申请退费
@@ -92,7 +99,7 @@ $(document).ready(function() {
 		if(row) {
 			var courseType = row.courseType;
 			var refundFeeId = row.refundFeeId;
-			window.location.href = "/sys/refund/qryApproveRefund.do?refundFeeId="+refundFeeId+"&courseType="+courseType;
+			window.location.href = "/sys/refund/qryApproveRefund.do?refundFeeId="+refundFeeId+"&courseType="+courseType+"&type=approve";
 		} else {
 			$.messager.alert('提示', "请先选择您要审批的退费申请！");
 		}
@@ -100,16 +107,37 @@ $(document).ready(function() {
 	
 	//退费浏览
 	$("#refundView").click(function() {
-		
+		var row = $('#approve_list_data').datagrid('getSelected');
+		if(row) {
+			var courseType = row.courseType;
+			var refundFeeId = row.refundFeeId;
+			window.location.href = "/sys/refund/qryApproveRefund.do?refundFeeId="+refundFeeId+"&courseType="+courseType+"&type=view";
+		} else {
+			$.messager.alert('提示', "请先选择您要浏览的退费申请！");
+		}
 	});
 	
 	//取消
 	$("#refundCancel").click(function() {
-		
+		var row = $('#approve_list_data').datagrid('getSelected');
+		if(row) {
+			var courseType = row.courseType;
+			var refundFeeId = row.refundFeeId;
+			window.location.href = "/sys/refund/qryApproveRefund.do?refundFeeId="+refundFeeId+"&courseType="+courseType+"&type=cancel";
+		} else {
+			$.messager.alert('提示', "请先选择您要取消的退费申请！");
+		}
 	});
 	
 	//重新申请
 	$("#refundApplyAgain").click(function() {
-		
+		var row = $('#approve_list_data').datagrid('getSelected');
+		if(row) {
+			var courseType = row.courseType;
+			var refundFeeId = row.refundFeeId;
+			window.location.href = "/sys/refund/qryApproveRefund.do?refundFeeId="+refundFeeId+"&courseType="+courseType+"&type=againApply";
+		} else {
+			$.messager.alert('提示', "请先选择您要重新申请的退费申请！");
+		}
 	});
 });
