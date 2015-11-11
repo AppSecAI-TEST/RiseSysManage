@@ -155,7 +155,7 @@
   							<td width="13%" align="center"><a href='javascript:void(0)' class='linkmore' onclick='' id=""><span>查看缴费单据</span></a></td>
   						</tr>
   						<tr>
-  							<td width="12%" align="center">
+  							<td width="10%" align="center">
   								<span id="refundStageFee${refundStudentCourse.studentCourseId }" name="refundStageFee">${refundStudentCourse.amount }</span>
   							</td>
   							<td width="8%" align="center">

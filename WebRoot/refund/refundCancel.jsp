@@ -350,15 +350,15 @@
 			  					<td colspan="2"><span>1、校长审批信息：</span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批：</span></td>
-			  					<td width="92%">
+			  					<td align="right" width="10%"><span>审批：</span></td>
+			  					<td width="90%">
 				  					<input type="radio" value="Y" name="approveType"/><span>同意</span>
 			      					&nbsp;<input type="radio" value="N" name="approveType"/><span>不同意</span>
 			  					</td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批备注：</span></td>
-			  					<td width="92%">
+			  					<td align="right" width="10%"><span>审批备注：</span></td>
+			  					<td width="90%">
 			  						<textarea rows="4" cols="122" id="headmasterApproveRemark" name="headmasterApproveRemark" required="true" class="easyui-validatebox textbox"></textarea>
 			  					</td>
 			  				</tr>
@@ -370,16 +370,16 @@
 			  					<td colspan="6"><span>1、校长审批信息：</span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批结果：</span></td>
+			  					<td align="right" width="10%"><span>审批结果：</span></td>
 			  					<td width="8%"><span></span></td>
 			  					<td align="right" width="8%"><span>审批时间：</span></td>
 			  					<td width="10%"><span></span></td>
 			  					<td align="right" width="6%"><span>审批人：</span></td>
-			  					<td width="60%"><span></span></td>
+			  					<td width="58%"><span></span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批备注：</span></td>
-			  					<td width="92%" colspan="5">
+			  					<td align="right" width="10%"><span>审批备注：</span></td>
+			  					<td width="90%" colspan="5">
 			  						<textarea rows="2" cols="122" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
@@ -392,15 +392,15 @@
 			  					<td colspan="2"><span>2、总部财务审批信息：</span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批：</span></td>
-			  					<td width="92%">
+			  					<td align="right" width="10%"><span>审批：</span></td>
+			  					<td width="90%">
 				  					<input type="radio" value="Y" name="approveType"/><span>同意</span>
 			      					&nbsp;<input type="radio" value="N" name="approveType"/><span>不同意</span>
 			  					</td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批备注：</span></td>
-			  					<td width="92%">
+			  					<td align="right" width="10%"><span>审批备注：</span></td>
+			  					<td width="90%">
 			  						<textarea rows="4" cols="122" id="financialApproveRemark" name="financialApproveRemark" required="true" class="easyui-validatebox textbox"></textarea>
 			  					</td>
 			  				</tr>
@@ -412,16 +412,16 @@
 			  					<td colspan="6"><span>2、总部财务审批信息：</span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批结果：</span></td>
+			  					<td align="right" width="10%"><span>审批结果：</span></td>
 			  					<td width="8%"><span></span></td>
 			  					<td align="right" width="8%"><span>审批时间：</span></td>
 			  					<td width="10%"><span></span></td>
 			  					<td align="right" width="6%"><span>审批人：</span></td>
-			  					<td width="60%"><span></span></td>
+			  					<td width="58%"><span></span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批备注：</span></td>
-			  					<td width="92%" colspan="5">
+			  					<td align="right" width="10%"><span>审批备注：</span></td>
+			  					<td width="90%" colspan="5">
 			  						<textarea rows="2" cols="122" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
@@ -434,15 +434,15 @@
 			  					<td colspan="2"><span>3、总部财务总监审批信息：</span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批：</span></td>
-			  					<td width="92%">
+			  					<td align="right" width="10%"><span>审批：</span></td>
+			  					<td width="90%">
 				  					<input type="radio" value="Y" name="approveType"/><span>同意</span>
 			      					&nbsp;<input type="radio" value="N" name="approveType"/><span>不同意</span>
 			  					</td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批备注：</span></td>
-			  					<td width="92%">
+			  					<td align="right" width="10%"><span>审批备注：</span></td>
+			  					<td width="90%">
 			  						<textarea rows="4" cols="122" id="chiefFinancialOfficerApproveRemark" name="chiefFinancialOfficerApproveRemark" required="true" class="easyui-validatebox textbox"></textarea>
 			  					</td>
 			  				</tr>
@@ -454,16 +454,16 @@
 			  					<td colspan="6"><span>3、总部财务总监审批信息：</span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批结果：</span></td>
+			  					<td align="right" width="10%"><span>审批结果：</span></td>
 			  					<td width="8%"><span></span></td>
 			  					<td align="right" width="8%"><span>审批时间：</span></td>
 			  					<td width="10%"><span></span></td>
 			  					<td align="right" width="6%"><span>审批人：</span></td>
-			  					<td width="60%"><span></span></td>
+			  					<td width="58%"><span></span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批备注：</span></td>
-			  					<td width="92%" colspan="5">
+			  					<td align="right" width="10%"><span>审批备注：</span></td>
+			  					<td width="90%" colspan="5">
 			  						<textarea rows="2" cols="122" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
@@ -476,15 +476,15 @@
 			  					<td colspan="2"><span>4、学术总监/销售经理审批信息：</span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批：</span></td>
-			  					<td width="92%">
+			  					<td align="right" width="10%"><span>审批：</span></td>
+			  					<td width="90%">
 				  					<input type="radio" value="Y" name="approveType"/><span>同意</span>
 			      					&nbsp;<input type="radio" value="N" name="approveType"/><span>不同意</span>
 			  					</td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批备注：</span></td>
-			  					<td width="92%">
+			  					<td align="right" width="10%"><span>审批备注：</span></td>
+			  					<td width="90%">
 			  						<textarea rows="4" cols="122" id="academicOrSalesApproveRemark" name="academicOrSalesApproveRemark" required="true" class="easyui-validatebox textbox"></textarea>
 			  					</td>
 			  				</tr>
@@ -496,16 +496,16 @@
 			  					<td colspan="6"><span>4、学术总监/销售经理审批信息：</span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批结果：</span></td>
+			  					<td align="right" width="10%"><span>审批结果：</span></td>
 			  					<td width="8%"><span></span></td>
 			  					<td align="right" width="8%"><span>审批时间：</span></td>
 			  					<td width="10%"><span></span></td>
 			  					<td align="right" width="6%"><span>审批人：</span></td>
-			  					<td width="60%"><span></span></td>
+			  					<td width="58%"><span></span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批备注：</span></td>
-			  					<td width="92%" colspan="5">
+			  					<td align="right" width="10%"><span>审批备注：</span></td>
+			  					<td width="90%" colspan="5">
 			  						<textarea rows="2" cols="122" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
@@ -518,15 +518,15 @@
 			  					<td colspan="2"><span>5、区域校长审批信息：</span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批：</span></td>
-			  					<td width="92%">
+			  					<td align="right" width="10%"><span>审批：</span></td>
+			  					<td width="90%">
 				  					<input type="radio" value="Y" name="approveType"/><span>同意</span>
 			      					&nbsp;<input type="radio" value="N" name="approveType"/><span>不同意</span>
 			  					</td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批备注：</span></td>
-			  					<td width="92%">
+			  					<td align="right" width="10%"><span>审批备注：</span></td>
+			  					<td width="90%">
 			  						<textarea rows="4" cols="122" id="regionalPresidentApproveRemark" name="regionalPresidentApproveRemark" required="true" class="easyui-validatebox textbox"></textarea>
 			  					</td>
 			  				</tr>
@@ -538,16 +538,16 @@
 			  					<td colspan="6"><span>5、区域校长审批信息：</span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批结果：</span></td>
+			  					<td align="right" width="10%"><span>审批结果：</span></td>
 			  					<td width="8%"><span></span></td>
 			  					<td align="right" width="8%"><span>审批时间：</span></td>
 			  					<td width="10%"><span></span></td>
 			  					<td align="right" width="6%"><span>审批人：</span></td>
-			  					<td width="60%"><span></span></td>
+			  					<td width="58%"><span></span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批备注：</span></td>
-			  					<td width="92%" colspan="5">
+			  					<td align="right" width="10%"><span>审批备注：</span></td>
+			  					<td width="90%" colspan="5">
 			  						<textarea rows="2" cols="122" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
@@ -560,15 +560,15 @@
 			  					<td colspan="2"><span>6、总校长审批信息：</span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批：</span></td>
-			  					<td width="92%">
+			  					<td align="right" width="10%"><span>审批：</span></td>
+			  					<td width="90%">
 				  					<input type="radio" value="Y" name="approveType"/><span>同意</span>
 			      					&nbsp;<input type="radio" value="N" name="approveType"/><span>不同意</span>
 			  					</td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批备注：</span></td>
-			  					<td width="92%">
+			  					<td align="right" width="10%"><span>审批备注：</span></td>
+			  					<td width="90%">
 			  						<textarea rows="4" cols="122" id="principalApproveRemark" name="principalApproveRemark" required="true" class="easyui-validatebox textbox"></textarea>
 			  					</td>
 			  				</tr>
@@ -580,16 +580,16 @@
 			  					<td colspan="6"><span>6、总校长审批信息：</span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批结果：</span></td>
+			  					<td align="right" width="10%"><span>审批结果：</span></td>
 			  					<td width="8%"><span></span></td>
 			  					<td align="right" width="8%"><span>审批时间：</span></td>
 			  					<td width="10%"><span></span></td>
 			  					<td align="right" width="6%"><span>审批人：</span></td>
-			  					<td width="60%"><span></span></td>
+			  					<td width="58%"><span></span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>审批备注：</span></td>
-			  					<td width="92%" colspan="5">
+			  					<td align="right" width="10%"><span>审批备注：</span></td>
+			  					<td width="90%" colspan="5">
 			  						<textarea rows="2" cols="122" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
@@ -602,19 +602,29 @@
 			  					<td colspan="2"><span>7、总部财务打款信息：</span></td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>已打款：</span></td>
-			  					<td width="92%">
+			  					<td align="right" width="10%"><span>已打款：</span></td>
+			  					<td width="90%">
 				  					<input type="checkbox"/>
 			  					</td>
 			  				</tr>
 			  				<tr>
-			  					<td align="right" width="8%"><span>备注：</span></td>
-			  					<td width="92%">
+			  					<td align="right" width="10%"><span>备注：</span></td>
+			  					<td width="90%">
 			  						<textarea rows="4" cols="122" id="headquartersFinancialApproveRemark" name="headquartersFinancialApproveRemark" required="true" class="easyui-validatebox textbox"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
-					</div>					
+					</div>		
+			  		<div>
+			  			<table width="100%" cellpadding="5px" class="maintables">
+			  				<tr>
+						  		<td align="right" width="10%"><span>退费取消备注：</span></td>
+						  		<td width="90%">
+						  			<textarea rows="4" cols="122" id="headquartersFinancialApproveRemark" name="headquartersFinancialApproveRemark" required="true" class="easyui-validatebox textbox"></textarea>
+						  		</td>
+						  	</tr>
+			  			</table>
+			  		</div>			
   				</div>
   			</form>
   		</div>

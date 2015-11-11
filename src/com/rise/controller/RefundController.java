@@ -75,13 +75,34 @@ public class RefundController
 	}
 	
 	@RequestMapping(value = "/qryApproveRefund.do")
-	public ModelAndView qryApproveRefund(String refundFeeId, String courseType)
+	public ModelAndView qryApproveRefund(String refundFeeId, String courseType, String type)
 	{
 		ModelAndView view = null;
-		if("001".equals(courseType)) {
-			view = new ModelAndView("refund/refundApprove");
-		} else {
-			view = new ModelAndView("refund/shortRefundApprove");
+		courseType = "002";
+		if("approve".equals(type)) {
+			if("001".equals(courseType)) {
+				view = new ModelAndView("refund/refundApprove");
+			} else {
+				view = new ModelAndView("refund/shortRefundApprove");
+			}
+		} else if("view".equals(type)) {
+			if("001".equals(courseType)) {
+				view = new ModelAndView("refund/refundView");
+			} else {
+				view = new ModelAndView("refund/shortRefundView");
+			}
+		} else if("cancel".equals(type)) {
+			if("001".equals(courseType)) {
+				view = new ModelAndView("refund/refundCancel");
+			} else {
+				view = new ModelAndView("refund/shortRefundCancel");
+			}
+		} else if("againApply".equals(type)) {
+			if("001".equals(courseType)) {
+				view = new ModelAndView("refund/refundApplyAgain");
+			} else {
+				view = new ModelAndView("refund/shortRefundApplyAgain");
+			}
 		}
 		try 
 		{
