@@ -137,7 +137,7 @@
   			<form id="batchUpdateFm" method="post">
   				<input type="hidden" id="updateStudentId" name="updateStudentId"/>
   				<input type="hidden" id="handlerId" name="handlerId"/>
-  				<h2 style="text-align: center;">客户关怀和责任顾问批量调整单</h1>
+  				<h2 style="text-align: center;">客户关怀和责任顾问批量调整单</h2>
   				<table width="100%" cellspacing="2">
   					<tr>
   						<td width="15%">&nbsp;</td>
