@@ -56,7 +56,7 @@
 	      	    	<input type="hidden" id="paySchoolId" name="paySchoolId" value="<%=schoolId%>" />	
 	      	    	<input type="hidden" id="coursePriceId" name="coursePriceId" value="" />
 	      	    	 <td align="right"><span>缴费时间：</span></td>
-	      	        <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" style="width: 150px; height: 28px;" /></td>
+	      	        <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" style="width: 150px; height: 28px;" value="<%=StringUtil.getJSONObjectKeyVal(object,"payDate")%>" /></td>
 	      	        <td align="right"> <span>阶段：</span></td>
 	      	        <td>
 					 <select name="stageId"  id="stageId"   style="width: 150px; height: 28px;"
@@ -503,7 +503,7 @@
 		studentCourse.giftCourses= courses;
 		
 		var obj = $("#courseFm").serializeObject();
-		alert(obj);
+		 
 		studentCourse.course=obj;
 		//alert(JSON.stringify(studentCourse));
 		return studentCourse;
@@ -543,6 +543,6 @@
 		$('#dlg').dialog("open");
 	}
 
-	
+	initCousreGift();
 	
 	</script>

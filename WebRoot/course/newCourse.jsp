@@ -1018,8 +1018,9 @@ $("#addGiftBtn").click(function ()
 			var height = $(document).height();
 			var frameName=$("#frameName").val();
 			$(frameName,parent.document).css("height",height);
+			clearData("giftModelTR");
 	    }
-		clearData("giftModelTR")
+		
 	});
 
 	//创建单报提交数据
@@ -1106,6 +1107,7 @@ $("#addGiftBtn").click(function ()
 		var obj = $("#courseFm").serializeObject();
 		obj.payDate=$("#payDate").datebox("getValue");
 		studentCourse.course=obj;
+		alert(JSON.stringify(obj))
 		var womInfo=getWom();
 		studentCourse.wom=womInfo;
 		return studentCourse;
