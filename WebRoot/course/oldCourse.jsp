@@ -84,6 +84,7 @@ a {
 		<div style="height: 20px;"></div>
 		<div class="easyui-panel" title="连报课程"
 			style="width: 900px; height: 320px; overflow: auto;">
+			<div id="courseList">
 			<div id="courseInfo" class="courseDiv" style="display: none">
 				<table class="infotable base" width="100%">
 					<tr>
@@ -173,6 +174,7 @@ a {
 					</tr>
 				</table>
 			</div>
+		</div>	
 		</div>
 		</div>
 	</body>
@@ -195,8 +197,21 @@ $("#submit").click(function() {
 			}
 		}
 	});
-	if (linkCourses.length == 0) {
-
+	if (linkCourses.length>1) 
+	{
+		var temp;
+		for (var i = 0; i < linkCourses.length-1; i++)
+		{
+			for (var j = 0; j <linkCourses.length-i-1; j++)
+			{
+				if (parseInt( linkCourses[j].stageOrder) >  parseInt(linkCourses[j+1].stageOrder))
+				{
+					temp =  linkCourses[j];
+					linkCourses[j] =  linkCourses[j+1];
+					linkCourses[j+1] = temp;
+				}
+			}
+		}
 	}
 	parent.window.oldCourses = courses;
 	parent.window.linkCourses = linkCourses;
@@ -210,7 +225,8 @@ $(document).ready(
 			stu.studentId = $("#studentId").val();
 			stu.queryCode = 'Qry_Student_Courses';
 			var str = JSON.stringify(stu);
-			$.ajax( {
+			var arr=[];
+			$.ajax({
 				url : "/sys/course/getStuCourses.do?",
 				data : "param=" + str,
 				dataType : "json",
@@ -226,7 +242,7 @@ $(document).ready(
 							base.find("td:eq(1)").html(
 									"<span>" + node.payDate + "</span>");
 							base.find("td:eq(2)").html(
-									"<span>" + node.linkId + "</span>")//提示 不知如何取 暂时取备注字段
+									"<span>" + node.linkId+","+node.stageOrder + "</span>")//提示 不知如何取 暂时取备注字段
 							var checkboxes = base.find("td:eq(3)").find(
 									"input[type=checkbox]");
 							checkboxes.attr('studentCousreId',
@@ -281,14 +297,12 @@ $(document).ready(
 							tabModel.css("display", "block");
 							$('#courseInfo').after(tabModel);
 
-						});
+					});
 
-				//	window.location.reload();
-				//$.messager.alert('提示', "批量修改客户关怀和责任顾问失败！");
 			}
-			});
 
 		});
+	});		
 
 function changeDetail(obj) {
 	if ($(obj).html() == "<span>展开详情</span>") {
