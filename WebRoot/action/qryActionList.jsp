@@ -14,41 +14,42 @@
  		<form id="qryFm">
   			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="15">
   				<tr>
-  					<td align="right">校区：</td>
+  					<td align="right"><span>校区：</span></td>
   					<td>
-  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;">
-  							
+  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;height: 28px;"
+  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+  							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
   						</select>
   					</td>
-  					<td align="right">活动状态：</td>
+  					<td align="right"><span>活动状态：</span></td>
   					<td>
   						<select class="easyui-combobox" name="state" id="state" style="width:150px;">
   							
   						</select>
   					</td>
-  					<td align="right">活动日期：</td>
+  					<td align="right"><span>活动日期：</span></td>
   					<td>
   						<input class="easyui-datebox" name="startTime" id="startTime"  style="width:150px;" />
   					</td>
-  					<td align="center">至：</td>
+  					<td align="center"><span>至：</span></td>
   					<td>
   						<input class="easyui-datebox" name="endTime" id="endTime"  style="width:150px;" />
   					</td>
   				</tr>
   				<tr>
-  					<td align="right">活动名称：</td>
+  					<td align="right"><span>活动名称：</span></td>
   					<td>
   						<input class="easyui-textbox" name="title" id="title" style="width:150px;" />
   					</td>
-  					<td align="right">实际参与老师：</td>
+  					<td align="right"><span>实际参与老师：</span></td>
   					<td><input class="easyui-textbox" name="teacherName" id="teacherName" style="width:150px;" /></td>
   					<td></td>
   					<td>
-  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" funcNodeId="3030">查询</a>
+  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" funcNodeId="3030"><span>查询</span></a>
   					</td>
   					<td>&nbsp;</td>
   					<td>
-  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:150px" id="resetBtn" >重置</a>
+  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:150px" id="resetBtn" ><span>重置</span></a>
   					</td>
   				</tr>
   			</table>
@@ -71,11 +72,11 @@
 			</thead>
 		</table>
 		<div id="toolbar">
-   			<a href="javascript:void(0)" id="addAction" class="easyui-linkbutton" iconCls="icon-add" plain="true">创建活动</a>
-   			<a href="javascript:void(0)" id="cancelAction" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">取消活动</a>
-   			<a href="javascript:void(0)" id="replyAction" class="easyui-linkbutton" iconCls="icon-edit" plain="true">活动反馈</a>
-   			<a href="javascript:void(0)" id="updateReply" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改反馈</a>
-   			<a href="javascript:void(0)" id="viewAction" class="easyui-linkbutton" iconCls="icon-redo" plain="true">浏览</a>
+   			<a href="javascript:void(0)" id="addAction" class="easyui-linkbutton" iconCls="icon-add" plain="true"><span>创建活动</span></a>
+   			<a href="javascript:void(0)" id="cancelAction" class="easyui-linkbutton" iconCls="icon-cancel" plain="true"><span>取消活动</span></a>
+   			<a href="javascript:void(0)" id="replyAction" class="easyui-linkbutton" iconCls="icon-edit" plain="true"><span>活动反馈</span></a>
+   			<a href="javascript:void(0)" id="updateReply" class="easyui-linkbutton" iconCls="icon-edit" plain="true"><span>修改反馈</span></a>
+   			<a href="javascript:void(0)" id="viewAction" class="easyui-linkbutton" iconCls="icon-redo" plain="true"><span>浏览</span></a>
  		</div>
   	</body>
 </html>
