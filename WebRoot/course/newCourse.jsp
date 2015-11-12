@@ -557,10 +557,10 @@
 							<input id="minusAmount" name="minusAmount" type="text"   readonly="readonly" class="easyui-textbox validatebox" style="width: 200px; height: 25px;">
 						</td>
 						<td align="left">
-						 <span>优惠金额：</span> 
+						 <span>连报优惠金额：</span> 
 						 </td>
 						 <td align="left">
-				      	 <input id="favorAmount"   name="favorAmount" type="text" readonly="readonly"  class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"/> 
+				      	 <input id="favorAmount"   name="favorAmount" type="text"    class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"/> 
 				      	 </td>
 						<td align="right">
 							<span>实缴金额：</span>
@@ -720,46 +720,48 @@ $("#activeSchool").combobox(
 
 //选择阶段价加载班级
 $('#stageId').combobox({
-	onChange : function(n, o) {
-	var data = $("#stageId").combobox('getData');
-	var amount;
-
-	for ( var i = 0; i < data.length; i++)
+	onChange : function(n, o) 
 	{
-		if (n == data[i].stageId) 
-		{
-			$("#stageOrder").val(data[i].seqOrder);
-		}
-	}
+		var data = $("#stageId").combobox('getData');
+		var amount;
 	
-	var stageType = $("#stageId").combobox('getText');
-	var payDate=$("#payDate").datebox('getValue');
-	if(payDate=='')
-	{
-		$("#stageId").combobox('setText',"");
-		$("#classType").combobox('setText',"");
-		$("#totalAmount").textbox('setValue', '');
-		$.messager.alert('提示', "请选择缴费时间");	
-		return;
+		for ( var i = 0; i < data.length; i++)
+		{
+			if (n == data[i].stageId) 
+			{
+				$("#stageOrder").val(data[i].seqOrder);
+			}
+		}
+		
+		var stageType = $("#stageId").combobox('getText');
+		var payDate=$("#payDate").datebox('getValue');
+		if(payDate=='')
+		{
+			$("#stageId").combobox('setText',"");
+			$("#classType").combobox('setText',"");
+			$("#totalAmount").textbox('setValue', '');
+			$.messager.alert('提示', "请选择缴费时间");	
+			return;
+		}
+		var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\",schoolId:\""+ <%=schoolId%> + "\"}";
+		$("#classType").combobox(
+		{
+		url : urls,//返回json数据的url
+		valueField : "classType",
+		textField : "classType",
+		panelHeight : "auto",
+		onLoadSuccess : function() { //数据加载完毕事件
+			var data = $('#classType').combobox('getData');
+			if (data.length == 1)
+			{
+				$("#classType").combobox('select',data[0].classType);
+				$("#totalAmount").textbox('setValue', data[0].amount);
+				$("#amount").textbox('setValue', data[0].amount);
+				$("#coursePriceId").val(data[0].setPriceId); 
+			}
+		}
+	});
 	}
-	var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\",schoolId:\""+ <%=schoolId%> + "\"}";
-	$("#classType").combobox({
-			url : urls,//返回json数据的url
-									valueField : "classType",
-									textField : "classType",
-									panelHeight : "auto",
-									onLoadSuccess : function() { //数据加载完毕事件
-										var data = $('#classType').combobox('getData');
-										if (data.length == 1)
-										{
-											$("#classType").combobox('select',data[0].classType);
-											$("#totalAmount").textbox('setValue', data[0].amount);
-											$("#amount").textbox('setValue', data[0].amount);
-											$("#coursePriceId").val(data[0].setPriceId); 
-										}
-									}
-								});
-					}
 });
 
 $('#favorAmount').textbox( {

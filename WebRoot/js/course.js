@@ -164,6 +164,7 @@ $(document).ready(function()
 		                   		flag=true;
 		                   		amount=data[i].amount;
 		               			$("#classType").combobox('select', oldClassType);
+		               			$("#coursePriceId").val(data[i].coursePriceId); 
 		                    }
 		                }
 		               	if(!flag)

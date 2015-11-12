@@ -199,7 +199,7 @@
 		    				}
 		    			}else
 		    			{
-		    				$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
+		    				    $(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
 		    			}
 		    		}else
 		    		{
@@ -278,6 +278,28 @@ function checkNewCourse(courseT)
 	return true;
 }
 
+/**
+ * 判断连报课程是否价格体系
+ */
+function checkCoursePrice(studentCourses)
+{
+	var id;
+	for(var i=0;i<studentCourses.length;i++)
+	{
+		var course=studentCourses[i].course;
+		var priceId=course.coursePriceId;
+		if(i==0)
+		{
+			id=priceId;
+		}
+		if(id!==priceId)
+		{
+			 showMessage('提示', "本次连报阶段不在同一价格体系中,请重试", null);
+			 return false;
+		}
+	}
+	return ture;
+}
 var newCourse;//新招课程阶段
 	
 	$("#submit").click(function()
@@ -294,7 +316,12 @@ var newCourse;//新招课程阶段
 	   		}
 	   		//alert(JSON.stringify( courseT));
 	   		studentCourses.push(courseT);
-		 } 
+		 }
+		 if(!checkCoursePrice(studentCourses))
+		 {
+			 return ;
+		 }
+		 
 		allCourseInfos.studentCourses=studentCourses;
 		allCourseInfos.linkCourseT=linkCourseT;
 	    var str = JSON.stringify( allCourseInfos);
