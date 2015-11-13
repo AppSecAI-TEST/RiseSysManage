@@ -1205,6 +1205,7 @@ $("#addGiftBtn").click(function ()
 		var obj = $("#courseFm").serializeObject();
 		obj.payDate=$("#payDate").datebox("getValue");
 		studentCourse.course=obj;
+		studentCourse.coupon=coupons;
 		return studentCourse;
 	}
 		
@@ -1225,6 +1226,7 @@ $("#addGiftBtn").click(function ()
 		for(var i=coupons.length-1;i>=0;i--)
 		{
 			 var coupon=coupons[i];
+			
 			 if(coupon.studentGiftId==id)
 			 {
 				var usableAmountT=$("#minusAmount").textbox('getValue');
