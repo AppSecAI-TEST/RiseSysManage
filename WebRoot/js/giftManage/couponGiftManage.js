@@ -417,7 +417,7 @@ function couponExchangeSubmit()
 		var leftAmount = Number(usableAmount) - Number(useAmount);
 		var content = $("#content").textbox('getValue');
 		var granter = $("#granter").textbox('getValue');
-		var json = '{"studentGiftId":"'+studentGiftId+'","couponName":"'+giftName+'","couponType":"001","couponCode":"'+giftCode+'","usedAmount":"'+useAmount+'","leftAmount":"'+leftAmount+'","amount":"'+amount+'","handlerName":"'+granter+'","description":"'+content+'"}';
+		var json = '{"studentGiftId":"'+studentGiftId+'","couponName":"'+giftName+'","couponCode":"'+giftCode+'","usedAmount":"'+useAmount+'","leftAmount":"'+leftAmount+'","amount":"'+amount+'","handlerName":"'+granter+'","description":"'+content+'"}';
 		$.ajax({
 			type : "POST",
 			url: "/sys/giftManage/updateCouponGiftInfo.do",

@@ -18,7 +18,7 @@
   				<tr>
   					<td align="right" width="8%">组织：</td>
   					<td align="left" width="10%">
-  						<select id="orgId" name="orgId" class="easyui-combobox" style="width:120px;">
+  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:120px;">
         				</select>
   					</td>
   					<td align="right" width="10%">教师英文名：</td>
@@ -50,11 +50,11 @@
   					</td>
   					<td align="right">入职时长：</td>
   					<td align="left">
-  						<input class="easyui-textbox" name="joinStartTime" id="joinStartTime" style="width:120px;" />
+  						<input class="easyui-numberbox" name="joinStartTime" id="joinStartTime" style="width:120px;" />
   					</td>
   					<td align="center">至：</td>
   					<td align="left">
-  						<input class="easyui-textbox" name="joinEndTime" id="joinEndTime" style="width:120px;" />
+  						<input class="easyui-numberbox" name="joinEndTime" id="joinEndTime" style="width:120px;" />
   					</td>
   					<td align="center">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:90px; height: 25px;" id="qryBtn" funcNodeId="4100">查询</a>
