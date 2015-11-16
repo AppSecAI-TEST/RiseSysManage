@@ -505,6 +505,7 @@
 		var obj = $("#courseFm").serializeObject();
 		 
 		studentCourse.course=obj;
+		studentCourse.coupon=JSON.stringify(coupons); 
 		//alert(JSON.stringify(studentCourse));
 		return studentCourse;
 	}
