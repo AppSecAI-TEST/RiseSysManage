@@ -15,6 +15,7 @@
 	</style>
 	</head>
 	<body>
+	<input type="hidden" id="staffName" name="staffName" value="${sessionScope.StaffT.userName}" />
 		<table class="easyui-datagrid"  align="center" title="现金抵扣券列表" style="width:920px;margin-top:10px;height:330px;" id="couponList" url="<%=path%>/pubData/qryDataListByPage.do?param={'queryCode':'Qry_Student_Coupon','studentId':'<%=studentId%>'}" 
 			 pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 			<thead>
@@ -64,9 +65,11 @@
 			coupon.studentGiftId=studentGiftId;
 			coupon.couponName=obj[i].giftName;
 			coupon.couponCode=giftCode;
-			coupon.amount=amount;
+			coupon.amount=obj[i].amount;
+			coupon.usedAmount=usableAmount;
 			coupon.leftAmount="0";
-			
+			coupon.studentGiftId=obj[i].studentGiftId;
+			coupon.handlerName=$("#staffName").val();
 			minus=minus+usableAmount;
 			if("Y"!=obj[i].isGet)
 			{

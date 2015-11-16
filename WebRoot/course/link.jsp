@@ -298,7 +298,7 @@ function checkCoursePrice(studentCourses)
 			 return false;
 		}
 	}
-	return ture;
+	return true;
 }
 var newCourse;//新招课程阶段
 	

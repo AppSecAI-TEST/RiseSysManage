@@ -266,7 +266,7 @@ function formatParam(row) {
 	return s;
 }
 
-function formatTeacher(row) {
+function formatTeacherName(row) {
 	var s = '<span>' + row.teacherName + '</span>';
 	return s;
 }

@@ -1218,7 +1218,7 @@ $("#addGiftBtn").click(function ()
 		var obj = $("#courseFm").serializeObject();
 		obj.payDate=$("#payDate").datebox("getValue");
 		studentCourse.course=obj;
-		studentCourse.coupon=coupons;
+		studentCourse.coupon=JSON.stringify(coupons);
 		return studentCourse;
 	}
 		
