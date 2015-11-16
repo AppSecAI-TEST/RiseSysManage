@@ -1,6 +1,7 @@
 package com.rise.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class SchooltimeInstT {
     private Integer schooltimeInstId;
@@ -16,6 +17,8 @@ public class SchooltimeInstT {
     private Integer lessionHours;
 
     private String hourRange;
+    
+    private String hourRangeName;
 
     private String weekTime;
 
@@ -32,6 +35,18 @@ public class SchooltimeInstT {
     private String state;
 
     private Date createDate;
+    
+    private Integer planClassTime;
+    
+    private Integer realClassTime;
+    
+	private RoomT roomT;
+	
+	private SchoolT schoolT;
+	
+	private ClassInstT classInstT;
+	
+	private List<TeacherLicenseT> classLicenseList;
 
     public Integer getSchooltimeInstId() {
         return schooltimeInstId;
@@ -81,7 +96,15 @@ public class SchooltimeInstT {
         this.lessionHours = lessionHours;
     }
 
-    public String getHourRange() {
+    public String getHourRangeName() {
+		return hourRangeName;
+	}
+
+	public void setHourRangeName(String hourRangeName) {
+		this.hourRangeName = hourRangeName;
+	}
+
+	public String getHourRange() {
         return hourRange;
     }
 
@@ -152,4 +175,53 @@ public class SchooltimeInstT {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
+
+	public Integer getPlanClassTime() {
+		return planClassTime;
+	}
+
+	public void setPlanClassTime(Integer planClassTime) {
+		this.planClassTime = planClassTime;
+	}
+	
+	public Integer getRealClassTime() {
+		return realClassTime;
+	}
+
+	public void setRealClassTime(Integer realClassTime) {
+		this.realClassTime = realClassTime;
+	}
+
+	public RoomT getRoomT() {
+		return roomT;
+	}
+
+	public void setRoomT(RoomT roomT) {
+		this.roomT = roomT;
+	}
+
+	public SchoolT getSchoolT() {
+		return schoolT;
+	}
+
+	public void setSchoolT(SchoolT schoolT) {
+		this.schoolT = schoolT;
+	}
+
+	public ClassInstT getClassInstT() {
+		return classInstT;
+	}
+
+	public void setClassInstT(ClassInstT classInstT) {
+		this.classInstT = classInstT;
+	}
+
+	public List<TeacherLicenseT> getClassLicenseList() {
+		return classLicenseList;
+	}
+
+	public void setClassLicenseList(List<TeacherLicenseT> classLicenseList) {
+		this.classLicenseList = classLicenseList;
+	}
+    
 }

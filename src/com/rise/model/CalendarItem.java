@@ -1,11 +1,22 @@
 package com.rise.model;
 
 public class CalendarItem {
+	
+	private String schooltimeInstId;
+	
 	private String dateValue;
 	
 	private CalendarShow calendarShow;
 	
 	private CalendarHidden calendarHidden;
+	
+	public String getSchooltimeInstId() {
+		return schooltimeInstId;
+	}
+
+	public void setSchooltimeInstId(String schooltimeInstId) {
+		this.schooltimeInstId = schooltimeInstId;
+	}
 
 	public String getDateValue() {
 		return dateValue;

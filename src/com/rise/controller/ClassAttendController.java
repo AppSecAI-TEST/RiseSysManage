@@ -1,5 +1,9 @@
 package com.rise.controller;
 
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,13 +47,69 @@ public class ClassAttendController
 		return model;
 	}
 	
+	@RequestMapping("/getAttenceRecord.do")
+	public ModelAndView getAttenceRecord(String schooltimeInstId , String funcNodeId , String selDateStr)
+	{
+		ModelAndView model = new ModelAndView("attence/attenceRecord");
+		try
+		{
+			classAttendService.getAttenceRecord(model, schooltimeInstId, funcNodeId, selDateStr);
+		}
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
 	@RequestMapping("/getAttendView.do")
 	public ModelAndView getAttendView(String classInstId , String funcNodeId , String selDateStr)
 	{
 		ModelAndView model = new ModelAndView("attence/attenceView");
 		try 
 		{
-			
+			classAttendService.getAttendOperate(model , classInstId , funcNodeId , selDateStr);
+		}
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
+	@RequestMapping("/addAttend.do")
+	public void addAttend(String json , HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = classAttendService.addAttend(json);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/showAttenceRecord.do")
+	public ModelAndView showAttenceRecord(String classInstId , String funcNodeId , String selDateStr , String classAttendId)
+	{
+		ModelAndView model = new ModelAndView("attence/attenceDisplay");
+		try 
+		{
+			classAttendService.showAttenceRecord(model, classAttendId, classInstId, funcNodeId, selDateStr);
 		}
 		catch (Exception e) 
 		{

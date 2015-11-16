@@ -102,6 +102,36 @@ public class TeacherManageController {
 		}
 	}
 	
+	/**
+	 * 获取老师信息
+	 * @param request
+	 * @param response
+	 * @param teacherId
+	 */
+	@RequestMapping(value="/getTeacherInfo.do")
+	public void getTeacherInfo(HttpServletRequest request,HttpServletResponse response,String teacherId)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("utf-8");
+			out = response.getWriter();
+			String retVal = teacherManageService.getTeacherInfo(teacherId);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 	@RequestMapping(value="/deleteArchivesInfo.do")
 	public void deleteArchivesInfo(HttpServletRequest request,HttpServletResponse response,String teacherId)
 	{

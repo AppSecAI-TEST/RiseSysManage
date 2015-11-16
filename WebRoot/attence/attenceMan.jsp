@@ -250,42 +250,6 @@
 				    }
 				});
 			});
-			function newPost(){
-				window.location.href = "/sys/post/getPostInfo.do?funcNodeId=${param.funcNodeId}";
-			}
-			function editPost(){
-				var row = $('#postList').datagrid('getSelected');
-				if (row){
-					window.location.href = "/sys/post/getPostInfo.do?funcNodeId=${param.funcNodeId}&postId="+row.postId;
-				}
-				else
-				{
-					$.messager.alert('提示',"请先选择要修改的职务");
-				}
-			}
-			function removePost(){
-				var row = $('#postList').datagrid('getSelected');
-				if (row){
-					$.messager.confirm('提示','您确定要删除当前职务吗?',function(r){
-						if (r){
-							$.post('/sys/post/deletePost.do',{postId:row.postId},function(result){
-								if(result == "success")
-								{
-									$("#postList").datagrid("reload");
-								}
-								else
-								{
-									$.messager.alert('提示', result);
-								}
-							});
-						}
-					});
-				}
-				else
-				{
-					$.messager.alert('提示',"请先选择要删除的职务");
-				}
-			}
 			function queryManFunc()
 			{
 				var obj = $("#manFm").serializeObject();
@@ -324,25 +288,11 @@
 			}
 			function manViewFunc()
 			{
-				var row = $('#manList').datagrid('getSelected');
-				if (row){
-					window.location.href = "/sys/post/getPostInfo.do?funcNodeId=${param.funcNodeId}&postId="+row.postId;
-				}
-				else
-				{
-					$.messager.alert('提示',"请先选择要修改的职务");
-				}
+				
 			}
 			function manLeaveFunc()
 			{
-				var row = $('#manList').datagrid('getSelected');
-				if (row){
-					window.location.href = "/sys/post/getPostInfo.do?funcNodeId=${param.funcNodeId}&postId="+row.postId;
-				}
-				else
-				{
-					$.messager.alert('提示',"请先选择要修改的职务");
-				}
+				
 			}
 			function queryHisFunc()
 			{

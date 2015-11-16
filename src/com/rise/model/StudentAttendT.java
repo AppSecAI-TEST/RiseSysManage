@@ -17,13 +17,19 @@ public class StudentAttendT {
 
     private Integer schoolId;
 
-    private Integer dress;
+    private String dress;
 
-    private Integer attendType;
+    private String attendType;
 
     private Integer handlerId;
 
     private Date createDate;
+    
+    private String isFirst;
+
+	private StudentT studentT;
+	
+	private StudentCourseT studentCourseT;
 
     public Integer getStudentAttendId() {
         return studentAttendId;
@@ -81,19 +87,19 @@ public class StudentAttendT {
         this.schoolId = schoolId;
     }
 
-    public Integer getDress() {
+    public String getDress() {
         return dress;
     }
 
-    public void setDress(Integer dress) {
+    public void setDress(String dress) {
         this.dress = dress;
     }
 
-    public Integer getAttendType() {
+    public String getAttendType() {
         return attendType;
     }
 
-    public void setAttendType(Integer attendType) {
+    public void setAttendType(String attendType) {
         this.attendType = attendType;
     }
 
@@ -112,4 +118,29 @@ public class StudentAttendT {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
+    
+	public String getIsFirst() {
+		return isFirst;
+	}
+
+	public void setIsFirst(String isFirst) {
+		this.isFirst = isFirst;
+	}
+
+	public StudentT getStudentT() {
+		return studentT;
+	}
+
+	public void setStudentT(StudentT studentT) {
+		this.studentT = studentT;
+	}
+
+	public StudentCourseT getStudentCourseT() {
+		return studentCourseT;
+	}
+
+	public void setStudentCourseT(StudentCourseT studentCourseT) {
+		this.studentCourseT = studentCourseT;
+	}
+    
 }

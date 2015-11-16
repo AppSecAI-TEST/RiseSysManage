@@ -256,6 +256,16 @@ function formatRoom(row) {
 	return s;
 }
 
+function formatParam(row) {
+	var s = '<span>' + row.param1 + '</span>';
+	return s;
+}
+
+function formatTeacher(row) {
+	var s = '<span>' + row.teacherName + '</span>';
+	return s;
+}
+
 function myLoadFilter(data,parentId){
 	function setData(){
 		var todo = [];

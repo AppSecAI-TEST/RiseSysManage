@@ -15,6 +15,10 @@ public class TeacherAttendT {
 
     private String teacherName;
 
+    private String teacherType;
+    
+    private String hours;
+    
     private String attendType;
 
     private Date attendDate;
@@ -22,6 +26,8 @@ public class TeacherAttendT {
     private Integer handerId;
 
     private Date createDate;
+    
+    private TeacherT teacherT;
 
     public Integer getTeacherAttendId() {
         return teacherAttendId;
@@ -70,8 +76,24 @@ public class TeacherAttendT {
     public void setTeacherName(String teacherName) {
         this.teacherName = teacherName == null ? null : teacherName.trim();
     }
+    
+    public String getTeacherType() {
+		return teacherType;
+	}
 
-    public String getAttendType() {
+	public void setTeacherType(String teacherType) {
+		this.teacherType = teacherType;
+	}
+
+	public String getHours() {
+		return hours;
+	}
+
+	public void setHours(String hours) {
+		this.hours = hours;
+	}
+
+	public String getAttendType() {
         return attendType;
     }
 
@@ -102,4 +124,13 @@ public class TeacherAttendT {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
+
+	public TeacherT getTeacherT() {
+		return teacherT;
+	}
+
+	public void setTeacherT(TeacherT teacherT) {
+		this.teacherT = teacherT;
+	}
+
 }

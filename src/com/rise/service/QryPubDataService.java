@@ -133,4 +133,16 @@ public class QryPubDataService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
+	/**
+	 * 查询指定校区所拥有的老师
+	 * @param schoolId
+	 * @return
+	 * @throws Exception
+	 */
+	public String getTeacherBySchoolId(String schoolId) throws Exception 
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10116\",securityCode:\"0000000000\",params:{schoolId:\""+schoolId+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
 }

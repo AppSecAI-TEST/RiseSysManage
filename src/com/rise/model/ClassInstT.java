@@ -81,6 +81,8 @@ public class ClassInstT {
     private String licenseRate;
     
     private List<SchooltimeT> schooltimeList;
+    
+	private List<ClassStudentT> classStudentList;
 
     public Integer getClassInstId() {
         return classInstId;
@@ -392,6 +394,14 @@ public class ClassInstT {
 
 	public void setLicenseRate(String licenseRate) {
 		this.licenseRate = licenseRate;
+	}
+
+	public List<ClassStudentT> getClassStudentList() {
+		return classStudentList;
+	}
+
+	public void setClassStudentList(List<ClassStudentT> classStudentList) {
+		this.classStudentList = classStudentList;
 	}
 	
 }

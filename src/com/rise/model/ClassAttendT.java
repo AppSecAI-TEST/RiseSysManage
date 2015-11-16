@@ -1,6 +1,7 @@
 package com.rise.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class ClassAttendT {
     private Integer classAttendId;
@@ -29,13 +30,29 @@ public class ClassAttendT {
     
     private String isFirst;
 
-    private Integer attendRate;
+    private String attendRate;
 
     private String teacherIds;
 
+    private Date schooltime;
+    
     private Integer handlerId;
 
     private Date createDate;
+    
+	private RoomT roomT;
+	
+	private ParaConfig hourRangeObj;
+	
+	private String teacherNames;
+	
+	private String attendDateWeek;
+	
+	private StaffT handlerObj;
+	
+	private List<TeacherAttendT> teacherAttendList;
+	
+	private List<StudentAttendT> studentAttendList;
 
     public Integer getClassAttendId() {
         return classAttendId;
@@ -133,11 +150,11 @@ public class ClassAttendT {
         this.realNum = realNum;
     }
 
-    public Integer getAttendRate() {
+    public String getAttendRate() {
         return attendRate;
     }
 
-    public void setAttendRate(Integer attendRate) {
+    public void setAttendRate(String attendRate) {
         this.attendRate = attendRate;
     }
     
@@ -156,8 +173,16 @@ public class ClassAttendT {
     public void setTeacherIds(String teacherIds) {
         this.teacherIds = teacherIds == null ? null : teacherIds.trim();
     }
+    
+    public Date getSchooltime() {
+		return schooltime;
+	}
 
-    public Integer getHandlerId() {
+	public void setSchooltime(Date schooltime) {
+		this.schooltime = schooltime;
+	}
+
+	public Integer getHandlerId() {
         return handlerId;
     }
 
@@ -172,4 +197,61 @@ public class ClassAttendT {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
+
+	public RoomT getRoomT() {
+		return roomT;
+	}
+
+	public void setRoomT(RoomT roomT) {
+		this.roomT = roomT;
+	}
+
+	public ParaConfig getHourRangeObj() {
+		return hourRangeObj;
+	}
+
+	public void setHourRangeObj(ParaConfig hourRangeObj) {
+		this.hourRangeObj = hourRangeObj;
+	}
+
+	public String getTeacherNames() {
+		return teacherNames;
+	}
+
+	public void setTeacherNames(String teacherNames) {
+		this.teacherNames = teacherNames;
+	}
+	
+	public String getAttendDateWeek() {
+		return attendDateWeek;
+	}
+
+	public void setAttendDateWeek(String attendDateWeek) {
+		this.attendDateWeek = attendDateWeek;
+	}
+
+	public StaffT getHandlerObj() {
+		return handlerObj;
+	}
+
+	public void setHandlerObj(StaffT handlerObj) {
+		this.handlerObj = handlerObj;
+	}
+
+	public List<TeacherAttendT> getTeacherAttendList() {
+		return teacherAttendList;
+	}
+
+	public void setTeacherAttendList(List<TeacherAttendT> teacherAttendList) {
+		this.teacherAttendList = teacherAttendList;
+	}
+
+	public List<StudentAttendT> getStudentAttendList() {
+		return studentAttendList;
+	}
+
+	public void setStudentAttendList(List<StudentAttendT> studentAttendList) {
+		this.studentAttendList = studentAttendList;
+	}
+	
 }

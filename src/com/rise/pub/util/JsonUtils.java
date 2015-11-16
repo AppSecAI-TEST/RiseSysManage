@@ -64,13 +64,12 @@ public class JsonUtils
 	public static JsonConfig getJsonConfig(final String format)
 	{
 		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setExcludes(new String[]{"handler"});
 		jsonConfig.registerJsonValueProcessor(Timestamp.class,new JsonValueProcessor(){
 			public Object processArrayValue(Object arg0, JsonConfig arg1) {
-				// TODO Auto-generated method stub
 				return null;
 			}
 			public Object processObjectValue(String key, Object value, JsonConfig jsonConfig) {
-				// TODO Auto-generated method stub
 				if(value==null)
 					return "";
 				if (value instanceof java.sql.Timestamp) {
@@ -80,17 +79,78 @@ public class JsonUtils
 				return value.toString();
 			}
 		});
-		jsonConfig.registerJsonValueProcessor(java.util.Date.class,new JsonValueProcessor(){
+		jsonConfig.registerJsonValueProcessor(java.sql.Date.class,new JsonValueProcessor(){
 			public Object processArrayValue(Object arg0, JsonConfig arg1) {
-				// TODO Auto-generated method stub
 				return null;
 			}
 			public Object processObjectValue(String key, Object value, JsonConfig jsonConfig) {
-				// TODO Auto-generated method stub
+				if(value==null)
+					return "";
+				if (value instanceof java.sql.Date) {
+					String str = new SimpleDateFormat(format).format((Date) value);
+					return str;
+				}
+				return value.toString();
+			}
+		});
+		jsonConfig.registerJsonValueProcessor(java.util.Date.class,new JsonValueProcessor(){
+			public Object processArrayValue(Object arg0, JsonConfig arg1) {
+				return null;
+			}
+			public Object processObjectValue(String key, Object value, JsonConfig jsonConfig) {
 				if(value==null)
 					return "";
 				if (value instanceof java.util.Date) {
 					String str = new SimpleDateFormat(format).format((Date) value);
+					return str;
+				}
+				return value.toString();
+			}
+		});
+		return jsonConfig;
+	}
+	
+	public static JsonConfig getJsonConfig() 
+	{
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setExcludes(new String[]{"handler"});
+		jsonConfig.registerJsonValueProcessor(Timestamp.class, new JsonValueProcessor() {
+			public Object processArrayValue(Object arg0, JsonConfig arg1) {
+				return null;
+			}
+			public Object processObjectValue(String key, Object value, JsonConfig jsonConfig) {
+				if (value == null)
+					return "";
+				if (value instanceof java.sql.Timestamp) {
+					String str = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format((Timestamp) value);
+					return str;
+				}
+				return value.toString();
+			}
+		});
+		jsonConfig.registerJsonValueProcessor(java.sql.Date.class, new JsonValueProcessor() {
+			public Object processArrayValue(Object arg0, JsonConfig arg1) {
+				return null;
+			}
+			public Object processObjectValue(String key, Object value, JsonConfig jsonConfig) {
+				if (value == null)
+					return "";
+				if (value instanceof java.sql.Date) {
+					String str = new SimpleDateFormat("yyyy-MM-dd").format((Date) value);
+					return str;
+				}
+				return value.toString();
+			}
+		});
+		jsonConfig.registerJsonValueProcessor(java.util.Date.class, new JsonValueProcessor() {
+			public Object processArrayValue(Object arg0, JsonConfig arg1) {
+				return null;
+			}
+			public Object processObjectValue(String key, Object value, JsonConfig jsonConfig) {
+				if (value == null)
+					return "";
+				if (value instanceof java.util.Date) {
+					String str = new SimpleDateFormat("yyyy-MM-dd").format((Date) value);
 					return str;
 				}
 				return value.toString();
