@@ -2,12 +2,14 @@
 <%
 	String path = request.getContextPath();
 	String studentId=request.getParameter("studentId");
+	String schoolId=request.getParameter("schoolId");
 	String studentInfo =request.getParameter("studentInfo");
 %>
 <html>
 	<head>
 	<%@ include file="../common/head.jsp" %>
 	<%@ include file="../common/formvalidator.jsp" %>
+	<script type="text/javascript" src="<%=path %>/js/course/addCourse.js"></script>
 	</head>
 	<body>
 	<div id="base">
@@ -22,7 +24,7 @@
 	      			<input type="hidden" id="studentId" name="studentId" value="<%=studentId%>">
 	      			<input type="hidden" id="studentInfo" name="studentInfo" value="<%=studentInfo%>" />
 	      			<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
-	      			<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
+	      			<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId%>"/>
 	      			<table width="100%" cellpadding="5px" class="maintable" id="addStudentTd">
 	      				<tr>
 	      					<td width="13%" align="right">
@@ -184,15 +186,32 @@
 		    		var order = orderCourses[n];
 		    		if(n<linkCourses.length)
 		    		{
+		    			var courseT= linkCourses[n];
 		    			var str=JSON.stringify(linkCourses[n]);
-						var url="/sys/course/linkcourse.jsp?name="+n+"&order="+order+"&courses="+str;
-						//alert(url);
-		    			$(name).attr('src',url);
-		    		
+		    			if(n==0)
+		    			{
+		    				if(courseT.feeType=='001')
+		    				{
+		    					$(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
+		    				}else
+		    				{
+		    					$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
+		    				}
+		    			}else
+		    			{
+		    				    $(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
+		    			}
 		    		}else
 		    		{
-		    			$(name).attr('src',"/sys/course/linkcourse.jsp?name="+n+"&order="+order+"&name="+name);
-		    		}
+		    			if(n==0)
+		    			{
+		    				$(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
+		    			}else
+		    			{
+		    				$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
+		    			}
+		    		 }
+		    			
 		    		$(name).css("display","block");
 		    	}else
 		    	{
@@ -203,15 +222,106 @@
         }  
     });  
 	
+	
+function validateCourses(order)
+{
+	var oldCourses=getOldCourse();
+	
+	for(var i=0;i<oldCourses.length;i++)
+	{
+		var course = oldCourses[i];
+		var order = course.stageOrder;
+		var courseState=course.courseState;
+		var stageName =course.stageId;
+		if(courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
+		{
+			if(feeType=='001')//新招
+			{
+				if(Number(stageOrder)<=Number(order))
+				{
+					showMessage("提示","当前所报新招阶段"+stageId+"低于或同于在读阶段"+stageName+",请重新选择阶段",null);
+					return;
+				}
+			}else if(feeType=='002')
+			{
+				if(Number(stageOrder)<Number(order))
+				{
+					showMessage("提示","当前所报升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段",null);
+					return;
+				}
+			}
+		}
+	}
+}
+
+/**
+ * 判断新招是不是最低阶段
+ */
+function checkNewCourse(courseT)
+{
+	var course=courseT.course;
+	if(course.feeType=='001')
+	{
+		newCourse=course;
+		return true;
+	}
+	if(newCourse!=null)
+	{
+		var stageOrder=newCourse.stageOrder;
+		var order =course.stageOrder;
+		if(Number(stageOrder)>Number(order))
+		{
+			 showMessage('提示', "本次报名新招阶段"+newCourse.stageId+"不是最底阶段", null);
+			 return false;
+		}
+	}
+	return true;
+}
+
+/**
+ * 判断连报课程是否价格体系
+ */
+function checkCoursePrice(studentCourses)
+{
+	var id;
+	for(var i=0;i<studentCourses.length;i++)
+	{
+		var course=studentCourses[i].course;
+		var priceId=course.coursePriceId;
+		if(i==0)
+		{
+			id=priceId;
+		}
+		if(id!==priceId)
+		{
+			 showMessage('提示', "本次连报阶段不在同一价格体系中,请重试", null);
+			 return false;
+		}
+	}
+	return ture;
+}
+var newCourse;//新招课程阶段
+	
 	$("#submit").click(function()
 	{
+		 
 		 studentCourses=[];
 		 for(var n=0;n<num;n++)
 		 {
 			var name="frame"+n;
-	   		var l = window.frames[name].window.build();
-	   		studentCourses.push(l);
-		 } 
+	   		var courseT = window.frames[name].window.build();
+	   		if(!checkNewCourse(courseT))
+	   		{
+	   			return; 
+	   		}
+	   		//alert(JSON.stringify( courseT));
+	   		studentCourses.push(courseT);
+		 }
+		 if(!checkCoursePrice(studentCourses))
+		 {
+			 return ;
+		 }
+		 
 		allCourseInfos.studentCourses=studentCourses;
 		allCourseInfos.linkCourseT=linkCourseT;
 	    var str = JSON.stringify( allCourseInfos);

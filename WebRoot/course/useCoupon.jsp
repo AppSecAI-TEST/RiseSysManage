@@ -57,12 +57,22 @@
 			var giftCode= obj[i].giftCode;
 			var giftId= obj[i].giftId;
 			var studentGiftId=obj[i].studentGiftId;
+			alert(JSON.stringify(obj[i]));
 			var coupon={};
-			coupon.giftCode=giftCode;
 			coupon.usableAmount=usableAmount;
 			coupon.giftId=giftId;
 			coupon.studentGiftId=studentGiftId;
+			coupon.couponName=obj[i].giftName;
+			coupon.couponCode=giftCode;
+			coupon.amount=amount;
+			coupon.leftAmount="0";
+			
 			minus=minus+usableAmount;
+			if("Y"!=obj[i].isGet)
+			{
+					showMessage('提示',obj[i].giftName+",编号:"+giftCode+"未领取,不能使用",null);
+					return;
+			}
 			name=name+"<span id='useCoupon"+studentGiftId+"'>"+giftCode+"/"+usableAmount+"元"+"<a href='javascript:void(0)' onclick='colDis("+studentGiftId+")'>取消</a>,</span>";
 			coupons.push(coupon);
 		}
