@@ -184,7 +184,7 @@
 					}
 				});
 				$("#attRecordTeacherId").combobox({
-					formatter:formatTeacher, 
+					formatter:formatTeacherName,
 					valueField: 'teacherId', 
 					textField: 'teacherName', 
 					//panelHeight: 'auto',
