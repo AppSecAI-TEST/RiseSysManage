@@ -533,7 +533,7 @@
 						<td align="center">
 							<href ="javascript:void(0)" id="addArchives"
 								class="easyui-linkbutton" iconCls="icon-add" plain="true"
-								onclick="addArchives()">
+								onclick="minusCoupon()">
 							<span>使用现金抵扣券</span>
 						</td>
 						<td colspan="7" giftId="">
@@ -573,6 +573,10 @@
 			</div>
 		</form>
 		 </div>
+		 <iframe id="dlg" class="easyui-dialog"
+				style="width: 1000px; height: 450px; padding: 10px 20px"
+				closed="true" modal="true">
+			</iframe>
 	</body>
 </html>
 <script type="text/javascript">
@@ -1147,7 +1151,7 @@ $("#addGiftBtn").click(function ()
 		$("#amount").textbox('setValue',amount);
 	}
 	
-	function addArchives()
+	function minusCoupon()
 	{
 		$('#dlg').dialog({
 			title:"使用抵扣券",
