@@ -12,13 +12,14 @@ $(document).ready(function(){
 			param : obj
 		},
 	    columns:[[  
-	        {field:'priceName',title:'复读折扣名称',width:'16%',align:'center'},  
-	        {field:'applySchools',title:'适用校区',width:'20%',align:'center'},
+	        {field:'priceName',title:'复读折扣名称',width:'15%',align:'center'},  
+	        {field:'applySchools',title:'适用校区',width:'15%',align:'center'},
+	        {field:'effDate',title:'生效时间',width:'10%',align:'center'},
 	        {field:'countRate',title:'折扣率',width:'8%',align:'center'},
-	        {field:'isUseVal',title:'状态',width:'8%',align:'center'},  
-	        {field:'handerName',title:'创建人',width:'8%',align:'center'},
+	        {field:'isUseVal',title:'状态',width:'7%',align:'center'},  
+	        {field:'handerName',title:'创建人',width:'7%',align:'center'},
 	        {field:'createDate',title:'创建时间',width:'15%',align:'center'},  
-	        {field:'opt',title:'操作',width:'25%',align:'center',
+	        {field:'opt',title:'操作',width:'23%',align:'center',
 	            formatter: function(Confirmation, row)
 	            {  
 	        		if(row.isUse == "Y"){
