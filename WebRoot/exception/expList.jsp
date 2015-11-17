@@ -16,8 +16,9 @@
   				<tr>
   					<td align="right">所属校区：</td>
   					<td>
-  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;">
-  							
+  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;"
+  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+  							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
   						</select>
   					</td>
   					<td align="right">学员姓名：</td>
@@ -40,9 +41,10 @@
   					</td>
   					<td align="right">异常状态：</td>
   					<td>
-  						<select class="easyui-combobox" name="expState" id="expState" style="width:150px;">
-  						
-  						</select>
+  						<select name="courseType" editable='false' class="easyui-combobox" id="excState" name="excState" style="width: 150px;"
+						 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
+	      				 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_EXC_T&codeType=EXC_STATE">
+						</select>
   					</td>
   					<td align="right">异常发生时间：</td>
   					<td>
@@ -74,7 +76,7 @@
 					<th field="byName" align="center" width="5%">英文名</th>
 					<th field="phone" align="center" width="10%">联系电话</th>
 					<th field="excState" align="center" width="10%">异常状态</th>
-					<th field="exceptionDate" align="center" width="8%">异常发生时间</th>
+					<th field="exceptionDate" align="center" width="8%">异常发生日期</th>
 					<th field="days" align="center" width="10%">已异常天数</th>
 					<th field="stageLevel" align="center" width="10%">已升学阶段</th>
 					<th field="className" align="center" width="10%">原在读班级</th>

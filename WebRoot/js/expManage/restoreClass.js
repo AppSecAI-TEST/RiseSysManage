@@ -57,9 +57,9 @@ function initPage()
 	    				contentStr +="<td>"+obj.payDate+"</td>";
 	    				contentStr +="<td>"+obj.feeType+"</td>";
 	    				contentStr +="<td>"+obj.className+"</td>";
-	    				contentStr +="<td></td>";//开课日期
-	    				contentStr +="<td></td>";//结课日期
-	    				contentStr +="<td></td>";//课程进度
+	    				contentStr +="<td>"+obj.startTime+"</td>";//开课日期
+	    				contentStr +="<td>"+obj.finishTime+"</td>";//结课日期
+	    				contentStr +="<td>"+obj.classProgress+"</td>";//课程进度
 	    				contentStr +="<td>"+obj.adviser+"</td>";
 	    				contentStr +="<td>"+obj.dutyAdvister+"</td>";
 	    				contentStr +="<td>"+obj.carer+"</td></tr>";
@@ -93,9 +93,9 @@ function restore()
 			    		$.messager.alert('提示', "原班复课成功");
 			    		setTimeout(function(){window.location.href="expList.jsp"},1000);
 			    	}
-			    	else  if(result=="noClass")
+			    	else  if(result=="finished")
 			    	{
-			    		$.messager.alert('提示', "该学员没有班级信息");
+			    		$.messager.alert('提示', "原班课程已结课，无法原班复课！");
 			    	}
 	    			else
 	    			{

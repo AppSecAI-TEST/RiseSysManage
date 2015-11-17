@@ -19,8 +19,9 @@
   				<tr>
   					<td width="8%" align="right">所属校区：</td>
   					<td width="10%">
-  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;">
-  							
+  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;"
+  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+  							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
   						</select>
   					</td>
   					<td width="8%" align="right">学员姓名：</td>
@@ -35,8 +36,9 @@
   				<tr>
   					<td align="right">课程状态：</td>
   					<td>
-  						<select class="easyui-combobox" name="state" id="state" style="width:150px;">
-  						
+  						<select class="easyui-combobox" name="courseState" id="courseState" style="width:150px;"
+	  						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
+	      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=EXC_COURSE&codeType=COURSE_STATE">
   						</select>
   					</td>
   					<td align="right">带班老师：</td>
@@ -62,8 +64,8 @@
 					<th field="stageLevel" align="center" width="10%">已升学阶段</th>
 					<th field="className" align="center" width="10%">在读班级</th>
 					<th field="courseStateVal" align="center" width="10%">课程状态</th>
-					<th field="teacherName" align="center" width="12%">带班老师</th>
-					<th field="carerName" align="center" width="11%">客户关怀</th>
+					<th field="teacherName" align="center" width="11%">带班老师</th>
+					<th field="carerName" align="center" width="10%">客户关怀</th>
 					<th field="classProgress" align="center" width="11%">在读班级课时</th>
 				</tr>
 			</thead>

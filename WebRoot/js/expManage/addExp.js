@@ -8,7 +8,7 @@ $(document).ready(function(){
 			$.messager.alert('提示', "请填写异常原因备注！");
 			return false;
 		}
-		var paramValue ='{"studentCourseId":"'+studentCourseId+'","studentId":"'+studentId+'","excId":"","orignCourseState":"'+courseState+'","hours":"","excState":"001","remark":"'+trim($("#remark").val())+'","createDate":"","handlerId":"'+$("#handlerId").val()+'"}';
+		var paramValue ='{"studentCourseId":"'+studentCourseId+'","studentId":"'+studentId+'","excId":"","orignCourseState":"'+courseState+'","hours":"","excState":"001","remark":"'+trim($("#remark").val())+'","handlerId":"'+$("#handlerId").val()+'"}';
 		$.messager.confirm('提示','您确定要添加该异常？',function(r) {
     			if(r) 
     			{
@@ -16,7 +16,8 @@ $(document).ready(function(){
     				{
 	    				if(result=="true") 
 	    				{
-	    					$.messager.alert('提示', "添加异常成功");
+	    					showMessage('提示', "添加异常成功",function() {
+								window.location.href = "expList.jsp"});
 	    				}
 	    				else 
 	    				{
@@ -72,9 +73,9 @@ function initPage()
 	    				contentStr +="<td>"+obj.payDate+"</td>";
 	    				contentStr +="<td>"+obj.feeType+"</td>";
 	    				contentStr +="<td>"+obj.className+"</td>";
-	    				contentStr +="<td></td>";//开课日期
-	    				contentStr +="<td></td>";//结课日期
-	    				contentStr +="<td></td>";//课程进度
+	    				contentStr +="<td>"+obj.startTime+"</td>";//开课日期
+	    				contentStr +="<td>"+obj.finishTime+"</td>";//结课日期
+	    				contentStr +="<td>"+obj.classProgress+"</td>";//课程进度
 	    				contentStr +="<td>"+obj.adviser+"</td>";
 	    				contentStr +="<td>"+obj.dutyAdvister+"</td>";
 	    				contentStr +="<td>"+obj.carer+"</td></tr>";
