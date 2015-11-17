@@ -3,6 +3,8 @@ package com.rise.model;
 public class CalendarItem {
 	
 	private String schooltimeInstId;
+
+	private String classAttendId;
 	
 	private String dateValue;
 	
@@ -16,6 +18,14 @@ public class CalendarItem {
 
 	public void setSchooltimeInstId(String schooltimeInstId) {
 		this.schooltimeInstId = schooltimeInstId;
+	}
+
+	public String getClassAttendId() {
+		return classAttendId;
+	}
+
+	public void setClassAttendId(String classAttendId) {
+		this.classAttendId = classAttendId;
 	}
 
 	public String getDateValue() {

@@ -104,12 +104,12 @@ public class ClassAttendController
 	}
 	
 	@RequestMapping("/showAttenceRecord.do")
-	public ModelAndView showAttenceRecord(String classInstId , String funcNodeId , String selDateStr , String classAttendId)
+	public ModelAndView showAttenceRecord(String classInstId , String funcNodeId , String selDateStr , String classAttendId , String comeFlag)
 	{
 		ModelAndView model = new ModelAndView("attence/attenceDisplay");
 		try 
 		{
-			classAttendService.showAttenceRecord(model, classAttendId, classInstId, funcNodeId, selDateStr);
+			classAttendService.showAttenceRecord(model, classAttendId, classInstId, funcNodeId, selDateStr, comeFlag);
 		}
 		catch (Exception e) 
 		{
@@ -117,6 +117,46 @@ public class ClassAttendController
 			e.printStackTrace();
 		}
 		return model;
+	}
+	
+	@RequestMapping("/getUpdateAttenceRecord.do")
+	public ModelAndView getUpdateAttenceRecord(String classAttendId , String funcNodeId , String selDateStr)
+	{
+		ModelAndView model = new ModelAndView("attence/updateAttenceRecord");
+		try 
+		{
+			classAttendService.getUpdateAttenceRecord(model, classAttendId, funcNodeId, selDateStr);
+		}
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
+	@RequestMapping("/updateAttend.do")
+	public void updateAttend(String json , HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = classAttendService.updateAttend(json);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
 	}
 	
 }

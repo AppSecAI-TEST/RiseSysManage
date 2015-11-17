@@ -26,6 +26,8 @@ public class StudentAttendT {
     private Date createDate;
     
     private String isFirst;
+    
+    private String state;
 
 	private StudentT studentT;
 	
@@ -125,6 +127,14 @@ public class StudentAttendT {
 
 	public void setIsFirst(String isFirst) {
 		this.isFirst = isFirst;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	public StudentT getStudentT() {

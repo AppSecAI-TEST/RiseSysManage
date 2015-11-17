@@ -138,6 +138,7 @@
 				var row = $('#attendList').datagrid('getSelected');
 				if (row)
 				{
+					ajaxLoading("加载中...");
 					window.location.href = "/sys/attend/getAttendOperate.do?funcNodeId=${funcNodeId}&classInstId=${classInstT.classInstId}&selDateStr="+row.monthName;
 				}
 				else
@@ -150,6 +151,7 @@
 				var row = $('#attendList').datagrid('getSelected');
 				if (row)
 				{
+					ajaxLoading("加载中...");
 					window.location.href = "/sys/attend/getAttendView.do?funcNodeId=${funcNodeId}&classInstId=${classInstT.classInstId}&selDateStr="+row.monthName;
 				}
 				else

@@ -27,6 +27,8 @@ public class TeacherAttendT {
 
     private Date createDate;
     
+    private String state;
+    
     private TeacherT teacherT;
 
     public Integer getTeacherAttendId() {
@@ -124,6 +126,14 @@ public class TeacherAttendT {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
+    
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
 
 	public TeacherT getTeacherT() {
 		return teacherT;

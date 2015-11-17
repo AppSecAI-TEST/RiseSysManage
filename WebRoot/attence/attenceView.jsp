@@ -63,7 +63,7 @@
 										<c:otherwise>
 											<td align="center" width="4%">${node.dateValue}</td>
 											<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
-												<a href="javascript:void(0)">
+												<a href="javascript:void(0)" <c:if test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.classAttendId})"</c:if>>
 												<c:if test="${node.calendarShow.planClassTime != ''}">
 													计划:${node.calendarShow.planClassTime}
 												</c:if>
@@ -86,7 +86,7 @@
 										<c:otherwise>
 											<td align="center" width="4%">${node.dateValue}</td>
 											<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
-												<a href="javascript:void(0)">
+												<a href="javascript:void(0)" <c:if test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.classAttendId})"</c:if>>
 												<c:if test="${node.calendarShow.planClassTime != ''}">
 													计划:${node.calendarShow.planClassTime}
 												</c:if>
@@ -110,7 +110,7 @@
 										<c:otherwise>
 											<td align="center" width="4%">${node.dateValue}</td>
 											<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
-												<a href="javascript:void(0)">
+												<a href="javascript:void(0)" <c:if test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.classAttendId})"</c:if>>
 												<c:if test="${node.calendarShow.planClassTime != ''}">
 													计划:${node.calendarShow.planClassTime}
 												</c:if>
@@ -135,7 +135,7 @@
 									<c:otherwise>
 										<td align="center" width="4%">${node.dateValue}</td>
 										<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
-											<a href="javascript:void(0)">
+											<a href="javascript:void(0)" <c:if test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.classAttendId})"</c:if>>
 											<c:if test="${node.calendarShow.planClassTime != ''}">
 												计划:${node.calendarShow.planClassTime}
 											</c:if>
@@ -199,6 +199,11 @@
 				    }
 				});
 			});
+			function gotoAttendView(classAttendId)
+			{
+				ajaxLoading("加载中...");
+				window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+classAttendId+"&funcNodeId=${funcNodeId}&selDateStr="+$("#selDateStr").html()+"&classInstId=${classInstId}&comeFlag=attenceView";
+			}
 			function backFunc()
 			{
 				window.location.href = "/sys/attend/getAttendDetail.do?funcNodeId=${funcNodeId}&classInstId=${classInstId}";

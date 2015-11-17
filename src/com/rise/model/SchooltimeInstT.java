@@ -40,11 +40,15 @@ public class SchooltimeInstT {
     
     private Integer realClassTime;
     
+    private Integer attendId;
+    
 	private RoomT roomT;
 	
 	private SchoolT schoolT;
 	
 	private ClassInstT classInstT;
+	
+	private ClassAttendT classAttendT;
 	
 	private List<TeacherLicenseT> classLicenseList;
 
@@ -191,6 +195,14 @@ public class SchooltimeInstT {
 	public void setRealClassTime(Integer realClassTime) {
 		this.realClassTime = realClassTime;
 	}
+	
+	public Integer getAttendId() {
+		return attendId;
+	}
+
+	public void setAttendId(Integer attendId) {
+		this.attendId = attendId;
+	}
 
 	public RoomT getRoomT() {
 		return roomT;
@@ -214,6 +226,14 @@ public class SchooltimeInstT {
 
 	public void setClassInstT(ClassInstT classInstT) {
 		this.classInstT = classInstT;
+	}
+	
+	public ClassAttendT getClassAttendT() {
+		return classAttendT;
+	}
+
+	public void setClassAttendT(ClassAttendT classAttendT) {
+		this.classAttendT = classAttendT;
 	}
 
 	public List<TeacherLicenseT> getClassLicenseList() {

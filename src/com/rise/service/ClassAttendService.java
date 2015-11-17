@@ -87,7 +87,7 @@ public class ClassAttendService
 		return ServiceEngine.invokeHttp(param);
 	}
 	
-	public void showAttenceRecord(ModelAndView model , String classAttendId , String classInstId , String funcNodeId , String selDateStr) throws Exception
+	public void showAttenceRecord(ModelAndView model , String classAttendId , String classInstId , String funcNodeId , String selDateStr , String comeFlag) throws Exception
 	{
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2045\",securityCode:\"0000000000\",params:{classAttendId:\""+classAttendId+"\"},rtnDataFormatType:\"user-defined\"}";
 		String result = ServiceEngine.invokeHttp(param);
@@ -98,9 +98,42 @@ public class ClassAttendService
 			model.addObject("classInstId", classInstId);
 			model.addObject("funcNodeId", funcNodeId);
 			model.addObject("selDateStr", selDateStr);
+			model.addObject("comeFlag", comeFlag);
 		}catch(Exception err){
 			err.printStackTrace();
 			model.addObject("errorInfo", err.getMessage());
 		}
+	}
+	
+	public void getUpdateAttenceRecord(ModelAndView model , String classAttendId , String funcNodeId , String selDateStr) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2046\",securityCode:\"0000000000\",params:{classAttendId:\""+classAttendId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String result = ServiceEngine.invokeHttp(param);
+		try{
+			JSONObject json = JSONObject.fromObject(result);
+			model.addObject("hourRangeList", json.getJSONArray("hourRangeList"));
+			model.addObject("roomList", json.getJSONArray("roomList"));
+			model.addObject("schoolList", json.getJSONArray("schoolList"));
+			model.addObject("teacherList", json.getJSONArray("teacherList"));
+			model.addObject("teacherTypeList", json.getJSONArray("teacherTypeList"));
+			json.remove("hourRangeList");
+			json.remove("roomList");
+			json.remove("schoolList");
+			json.remove("teacherList");
+			json.remove("teacherTypeList");
+			ClassAttendT classAttendT = JacksonJsonMapper.getInstance().readValue(json.toString(), ClassAttendT.class);
+			model.addObject("classAttendT", classAttendT);
+			model.addObject("funcNodeId", funcNodeId);
+			model.addObject("selDateStr", selDateStr);
+		}catch(Exception err){
+			err.printStackTrace();
+			model.addObject("errorInfo", err.getMessage());
+		}
+	}
+	
+	public String updateAttend(String json) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2047\",securityCode:\"0000000000\",params:{json:'"+json+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
 	}
 }

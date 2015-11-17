@@ -63,7 +63,7 @@
 										<c:otherwise>
 											<td align="center" width="4%">${node.dateValue}</td>
 											<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
-												<a href="javascript:void(0)" onclick="gotoAttendRecord(${node.schooltimeInstId},'${node.calendarShow.realClassTime}')">
+												<a href="javascript:void(0)" onclick="gotoAttendRecord(${node.schooltimeInstId},'${node.classAttendId}','${node.calendarShow.realClassTime}')">
 												<c:if test="${node.calendarShow.planClassTime != ''}">
 													计划:${node.calendarShow.planClassTime}
 												</c:if>
@@ -86,7 +86,7 @@
 										<c:otherwise>
 											<td align="center" width="4%">${node.dateValue}</td>
 											<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
-												<a href="javascript:void(0)" onclick="gotoAttendRecord(${node.schooltimeInstId},'${node.calendarShow.realClassTime}')">
+												<a href="javascript:void(0)" onclick="gotoAttendRecord(${node.schooltimeInstId},'${node.classAttendId}','${node.calendarShow.realClassTime}')">
 												<c:if test="${node.calendarShow.planClassTime != ''}">
 													计划:${node.calendarShow.planClassTime}
 												</c:if>
@@ -110,7 +110,7 @@
 										<c:otherwise>
 											<td align="center" width="4%">${node.dateValue}</td>
 											<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
-												<a href="javascript:void(0)" onclick="gotoAttendRecord(${node.schooltimeInstId},'${node.calendarShow.realClassTime}')">
+												<a href="javascript:void(0)" onclick="gotoAttendRecord(${node.schooltimeInstId},'${node.classAttendId}','${node.calendarShow.realClassTime}')">
 												<c:if test="${node.calendarShow.planClassTime != ''}">
 													计划:${node.calendarShow.planClassTime}
 												</c:if>
@@ -135,7 +135,7 @@
 									<c:otherwise>
 										<td align="center" width="4%">${node.dateValue}</td>
 										<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
-											<a href="javascript:void(0)" onclick="gotoAttendRecord(${node.schooltimeInstId},'${node.calendarShow.realClassTime}')">
+											<a href="javascript:void(0)" onclick="gotoAttendRecord(${node.schooltimeInstId},'${node.classAttendId}','${node.calendarShow.realClassTime}')">
 											<c:if test="${node.calendarShow.planClassTime != ''}">
 												计划:${node.calendarShow.planClassTime}
 											</c:if>
@@ -195,15 +195,16 @@
 					data:dataObj,
 					onClickRow:function(rowIndex, rowData){
 				    	ajaxLoading("加载中...");
-						window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+rowData.classAttendId+"&funcNodeId=${funcNodeId}&selDateStr="+$("#selDateStr").html()+"&&classInstId=${classInstId}";
+						window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+rowData.classAttendId+"&funcNodeId=${funcNodeId}&selDateStr="+$("#selDateStr").html()+"&classInstId=${classInstId}&comeFlag=attenceOperate";
 				    }
 				});
 			});
-			function gotoAttendRecord(timeInstId,realClassTime)
+			function gotoAttendRecord(timeInstId,classAttendId,realClassTime)
 			{
 				if(realClassTime!="")
 				{
-					$.messager.alert('提示',"该课程已完成考勤,请确认要考勤时间","warning");
+					ajaxLoading("加载中...");
+					window.location.href = "/sys/attend/getUpdateAttenceRecord.do?funcNodeId=${funcNodeId}&classAttendId="+classAttendId+"&selDateStr="+$("#selDateStr").html();
 				}
 				else if(timeInstId != null)
 				{
