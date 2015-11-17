@@ -145,11 +145,16 @@ $(document).ready(function() {
 	$("#cancelChangeBtn").click(function() {
 		var row = $('#apply_list_data').datagrid('getSelected');
 		if(row) {
-			var applyId = row.applyId;
-			var schoolId = row.schoolId;
-			var studentId = row.studentId;
-			var studentCourseId = row.studentCourseId;
-			window.location.href = "/sys/changeClass/cancelChangeClass.jsp?studentId="+studentId+"&studentCourseId="+studentCourseId+"&applyId="+applyId+"&schoolId="+schoolId;
+			var changeClassState = row.changeClassState;
+			if("007" != changeClassState) {
+				var applyId = row.applyId;
+				var schoolId = row.schoolId;
+				var studentId = row.studentId;
+				var studentCourseId = row.studentCourseId;
+				window.location.href = "/sys/changeClass/cancelChangeClass.jsp?studentId="+studentId+"&studentCourseId="+studentCourseId+"&applyId="+applyId+"&schoolId="+schoolId;
+			} else {
+				$.messager.alert('提示', "您选择的转班申请已经完成，不能取消转班！");
+			}
 		} else {
 			$.messager.alert('提示', "请先选择您要取消的转班申请！");
 		}

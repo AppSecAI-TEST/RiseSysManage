@@ -70,28 +70,34 @@ $(document).ready(function() {
 	$("#changeInBtn").click(function() {
 		var row = $('#apply_list_data').datagrid('getSelected');
 		if(row) {
-			var tacheState = row.tacheState;
-			if("001" == tacheState) {
-				var name = row.name;
-				var phone = row.phone;
-				var byName = row.byName;
-				var applyId = row.applyId;
-				var outDate = row.outDate;
-				var outName = row.outName;
-				var studentId = row.studentId;
-				var inSchoolId = row.inSchoolId;
-				var approveDate = row.approveDate;
-				var approveName = row.approveName;
-				var outSchoolName = row.outSchoolName;
-				var approveRemark = row.approveRemark;
-				var studentCourseId = row.studentCourseId;
-				window.location.href = "/sys/changeSchool/changeInSchool.jsp?applyId="+applyId+"&studentId="+studentId+"&studentCourseId="+studentCourseId+"&name="+name+"&phone="+phone+"&byName="+byName+"&approveDate="+approveDate+"&approveName="+approveName+"&outDate="+outDate+"&outName="+outName+"&outSchoolName="+outSchoolName+"&approveRemark="+approveRemark+"&inSchoolId="+inSchoolId;
+			var courseState = row.courseState;
+			if("001" == courseState || "002" == courseState) {
+				var courseStateText = row.courseStateText;
+				$.messager.alert('提示', "您选择的转校申请的学员课程状态为"+courseStateText+"，不能转入班级，需要走未进班选班流程！");
 			} else {
-				var changeStateText = row.changeStateText;
-				$.messager.alert('提示', "您选择的转班申请的转班状态为"+changeStateText+"，不能转入！");
+				var tacheState = row.tacheState;
+				if("003" == tacheState) {
+					var name = row.name;
+					var phone = row.phone;
+					var byName = row.byName;
+					var applyId = row.applyId;
+					var outDate = row.outDate;
+					var outName = row.outName;
+					var studentId = row.studentId;
+					var inSchoolId = row.inSchoolId;
+					var approveDate = row.approveDate;
+					var approveName = row.approveName;
+					var outSchoolName = row.outSchoolName;
+					var approveRemark = row.approveRemark;
+					var studentCourseId = row.studentCourseId;
+					window.location.href = "/sys/changeSchool/changeInSchool.jsp?applyId="+applyId+"&studentId="+studentId+"&studentCourseId="+studentCourseId+"&name="+name+"&phone="+phone+"&byName="+byName+"&approveDate="+approveDate+"&approveName="+approveName+"&outDate="+outDate+"&outName="+outName+"&outSchoolName="+outSchoolName+"&approveRemark="+approveRemark+"&inSchoolId="+inSchoolId;
+				} else {
+					var changeStateText = row.changeStateText;
+					$.messager.alert('提示', "您选择的转班申请的转班状态为"+changeStateText+"，不能转入！");
+				}
 			}
 		} else {
-			$.messager.alert('提示', "请先选择您要转入的转校申请！");
+			$.messager.alert('提示', "请先选择您要转入班级的转校申请！");
 		}
 	});
 	
@@ -100,7 +106,7 @@ $(document).ready(function() {
 		var row = $('#apply_list_data').datagrid('getSelected');
 		if(row) {
 			var tacheState = row.tacheState;
-			if("001" == tacheState) {
+			if("005" != tacheState && "006" != tacheState && "007" != tacheState) {
 				var name = row.name;
 				var phone = row.phone;
 				var byName = row.byName;
@@ -127,15 +133,14 @@ $(document).ready(function() {
 		var row = $('#apply_list_data').datagrid('getSelected');
 		if(row) {
 			var tacheState = row.tacheState;
-			if("001" == tacheState) {
+			if("004" == tacheState) {
 				var name = row.name;
 				var phone = row.phone;
 				var byName = row.byName;
 				var applyId = row.applyId;
 				var studentId = row.studentId;
 				var studentCourseId = row.studentCourseId;
-				var url = "/sys/changeSchool/updateChangeSchool.jsp?applyId="+applyId+"&studentId="+studentId+"&studentCourseId="+studentCourseId;
-				url += "&name="+name+"&phone="+phone+"&byName="+byName;
+				var url = "/sys/changeSchool/updateChangeSchool.jsp?applyId="+applyId+"&studentId="+studentId+"&studentCourseId="+studentCourseId+"&name="+name+"&phone="+phone+"&byName="+byName;
 				window.location.href = url;
 			} else {
 				var changeStateText = row.changeStateText;
