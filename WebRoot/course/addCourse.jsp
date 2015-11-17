@@ -27,6 +27,15 @@
 	margin: 0;
 	padding: 0;
 }
+
+#modelSpan
+{
+	text-decoration:underline;
+	color:blue;
+	cursor:pointer;
+	display:none;
+	margin-right:5px;
+}
 </style>
 	</head>
 
@@ -441,11 +450,11 @@
 						
 											</select>
 											<a href="javascript:void(0)" id="qryStudent"
-												style="width: 80px" class="easyui-linkbutton"
+												style="width: 90px" class="easyui-linkbutton"
 												iconCls="icon-add" plain="true" onclick="qryStudent()">查询学生</a>
 											<a href="javascript:void(0)" id="recordGifts"
-												style="width: 80px" class="easyui-linkbutton"
-												iconCls="icon-add" plain="true">录入赠品</a>
+												style="width: 90px" class="easyui-linkbutton"
+												iconCls="icon-add" plain="true" onclick="getWomGift()">录入赠品</a>
 										</td>
 									</tr>
 									<tr id="T" style="display: none;">
@@ -477,8 +486,8 @@
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
 											<span>赠品：</span>
 										</td>
-										<td align="center" style="border-top: 1px solid #ccc;">
-											&nbsp;
+										<td id="womGiftTd" align="center" style="border-top: 1px solid #ccc;">
+											<span id="modelSpan" title="双击删除本赠品">
 										</td>
 									</tr>
 								</table>
@@ -703,6 +712,10 @@
 			</a>
 			<iframe id="dlg" class="easyui-dialog"
 				style="width: 1000px; height: 450px; padding: 10px 20px"
+				closed="true" modal="true">
+			</iframe>
+			<iframe id="giftDlg" class="easyui-dialog"
+				style="width: 1200px; height: 450px; padding: 10px 20px"
 				closed="true" modal="true">
 			</iframe>
 	</body>
@@ -1453,7 +1466,7 @@ $("#addGiftBtn").click(function ()
 				womType =$(this).attr("womType");
 			}
 		})
-		if(womType!="")
+		if($("#womDiv").css("display")=="block"&&womType!="")
 		{	
 			var womChannel=womType=="Y"?$("#praiseSourceY").combobox("getValue"):$("#praiseSourceN").combobox("getValue");
 			if(trim(womChannel)!="")
@@ -1489,6 +1502,7 @@ $("#addGiftBtn").click(function ()
 					staffName:"",
 					handlerId:$("#handlerId").val()
 				};
+				var womGiftArr=[];
 				if(womChannel=="A")
 				{
 					if($("#activeId").combobox("getValue")=="")
@@ -1538,6 +1552,22 @@ $("#addGiftBtn").click(function ()
 							womItem["identityType"]=tr.attr("identityType");
 							womItem["identityId"]=tr.find("td:eq(3)").find("span").html();
 							womItem["className"]=tr.find("td:eq(5)").find("span").html();
+							$(".womGiftSpan").each(function(){
+								var womGift={};
+								womGift.studentId=womItem["studentId"];
+								womGift.giftName=$(this).attr("giftName");
+								womGift.usableAmount=$(this).attr("usableAmount");
+								womGift.amount=$(this).attr("amount");
+								womGift.studentGiftId=$(this).attr("studentGiftId");
+								womGift.unit = $(this).attr("unit"); 
+								womGift.effNum =$(this).attr("effNum"); 
+								womGift.giftType = $(this).attr("giftType");
+								womGift.giftId=$(this).attr("giftId");
+								womGift.giftCode=$(this).attr("giftCode");
+								womGift.isGet=$(this).attr("isGet");
+								womGift.granter=$(this).attr("granter");
+								womGiftArr.push(womGift);
+							});
 						}	
 					}	
 				}
@@ -1578,6 +1608,7 @@ $("#addGiftBtn").click(function ()
 				}	
 				wom["info"]=womInfo;
 				wom["item"]=womItem;
+				wom["womGifts"]=womGiftArr;
 			}	
 		}
 		//获取口碑信息-end
@@ -1601,7 +1632,7 @@ $("#addGiftBtn").click(function ()
 			    		hideProgressLoader() 
 			    		if(data=="true")
 			    		{
-			    			//showMessage('提示', "添加课程成功！",function(){window.location.href="addCourseList.jsp";});
+			    			showMessage('提示', "添加课程成功！",function(){window.location.href="addCourseList.jsp";});
 			    		}
 			    		else
 			    		{
@@ -1862,7 +1893,62 @@ function initCousreGift()
 				url:urls
 			});
 		}
-	})
+	});
 	
+	function getWomGift()
+	{
+		if($("#praiseTab1").find("tr:eq(3)").attr("studentId")!=null)
+		{
+			$('#giftDlg').dialog({
+			title:"录入赠品",
+			left:50,
+				top:200
+			});
+			$('#giftDlg').attr("src","/sys/course/addGift.jsp");
+			$('#giftDlg').dialog("open");
+		}
+		else
+		{
+			showMessage("提示","请先选择一个学员",null);
+		}	
+		
+	}
+	
+	function getWomGiftInfo(obj)
+	{
+		$('#giftDlg').attr("src","");
+		$('#giftDlg').dialog("close");
+		if(obj.length>0)
+		{
+			for(var i=0;i<obj.length;i++)
+			{
+				var span =$("#modelSpan").clone();
+				span.css("display","block");
+				span.addClass("womGiftSpan");
+				span.html(obj[i].showName);
+				span.attr("giftName",obj[i].giftName);
+				span.attr("usableAmount",obj[i].amount);
+				span.attr("amount",obj[i].amount);
+				span.attr("studentGiftId",obj[i].studentGiftId);
+				span.attr("unit",obj[i].unit); 
+				span.attr("effNum",obj[i].effNum); 
+				span.attr("giftType", obj[i].giftType);
+				span.attr("giftId",obj[i].giftId);
+				span.attr("giftCode",obj[i].giftCode);
+				span.attr("isGet",obj[i].isGet);
+				span.attr("granter",obj[i].granter);
+				span.dblclick(function(){
+					span.remove();
+				});
+				$("#womGiftTd").append(span);
+			}	
+		}	
+	}
+	
+	function closeWomGift()
+	{
+		$('#giftDlg').attr("src","");
+		$('#giftDlg').dialog("close");
+	}
 	
 	</script>
