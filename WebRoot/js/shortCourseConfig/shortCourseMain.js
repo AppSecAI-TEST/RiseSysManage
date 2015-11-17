@@ -226,6 +226,16 @@ function removeShortClassType(classTypeId)
 	});
 }
 
+//跳转新增价格体系页面
+function addShortSystem(type)
+{
+	if(validateSelect("list_data")) {
+		var row = $("#list_data").datagrid('getSelected');
+		var shortClassId = row.shortClassId;
+		window.location.href = "/sys/shortCourseConfig/jumpToAddPrice.do?type="+type+"&shortClassId="+shortClassId;
+	}
+}
+
 function validateSelect(object)
 {
 	var flag = false;

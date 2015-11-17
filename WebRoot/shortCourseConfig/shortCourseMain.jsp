@@ -11,6 +11,8 @@
 		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
 		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
 		<script type="text/javascript" src="<%=path %>/js/shortCourseConfig/shortCourseMain.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/shortCourseConfig/priceConfig.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/shortCourseConfig/favorConfig.js"></script>
   	</head>
   	<body>
   	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
@@ -61,28 +63,23 @@
 				<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#courseDlg').dialog('close')">取消</a>
 			</div>
   		</div>
-  		<div title="课程价格配置" style="padding:5px;display:block;">
+  		<div title="短期课价格配置" style="padding:5px;display:block;">
   			<div id="ttab" class="easyui-tabs" style="min-width:1110px;width:100%;height:auto;">
-  				<div title="课程价格配置" style="padding:5px;display:block;">
-					<table align="center" title="查询结果" data-options="height:550" id="common_data">
+  				<div title="短期课价格配置" style="padding:5px;display:block;">
+					<table align="center" title="查询结果" data-options="height:550" id="price_data">
 						
 					</table>
-					<div id="commonToolbar">
-			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="addComPrice()">添加新价格</a>
-			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" onclick="viewSchoolComPrice()">校区开启价格体系</a>
+					<div id="priceToolbar">
+			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="locatShortCourse()">添加新价格</a>
 		 			</div>
-		 			<div style="margin: 5px 5px"><span style="font-size:16px;color:red;font-family:'微软雅黑'" id="upApplySchools"></span></div>
-		 			<iframe id="comDlg" class="easyui-dialog" style="width:450px; height: 500px; padding: 10px 20px" closed="true" modal="true"></iframe>
 				</div>
 				<div title="连报优惠配置" style="padding:5px;display:block;">
-					<table align="center" title="查询结果" data-options="height:550" id="link_data">
+					<table align="center" title="查询结果" data-options="height:550" id="favor_data">
 						
 					</table>
-					<div id="linkToolbar">
-			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="addLinkPrice()">添加新优惠</a>
-			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" onclick="viewSchoolLinkPrice()">校区开启优惠体系</a>
+					<div id="favorToolbar">
+			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="locatShortFavor()">添加新优惠</a>
 		 			</div>
-		 			<iframe id="linkDlg" class="easyui-dialog" style="width:450px; height: 500px; padding: 10px 20px" closed="true" modal="true"></iframe>
 				</div>
   			</div>
   		</div>
