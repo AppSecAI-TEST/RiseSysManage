@@ -56,6 +56,8 @@ public class StudentCourseT {
     private Date refundDate;
 
     private String remark;
+    
+	private String minusRemark;
 
     private Date createDate;
 
@@ -284,8 +286,16 @@ public class StudentCourseT {
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
+    
+    public String getMinusRemark() {
+		return minusRemark;
+	}
 
-    public Date getCreateDate() {
+	public void setMinusRemark(String minusRemark) {
+		this.minusRemark = minusRemark;
+	}
+
+	public Date getCreateDate() {
         return createDate;
     }
 

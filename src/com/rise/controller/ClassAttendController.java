@@ -159,4 +159,33 @@ public class ClassAttendController
 		}
 	}
 	
+	/**
+	 * 正常班转异常班
+	 * @param classInstId
+	 * @param response
+	 */
+	@RequestMapping("/convertClassOpenType.do")
+	public void convertClassOpenType(String classInstId , HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = classAttendService.convertClassOpenType(classInstId);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 }

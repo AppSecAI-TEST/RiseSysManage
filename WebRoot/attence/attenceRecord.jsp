@@ -101,13 +101,13 @@
 		</table>
 		<c:if test="${isFirstFlag == 'Y'}">
 			<div id="toolbar" style="width:99%;margin:5px auto;padding:0 0;">
-				<a href="javascript:void(0)" id="removeStaffBtn" class="easyui-linkbutton" iconCls="icon-remove" style="width: 150px;" onclick="backFunc()">移除学员</a>
-	   			<a href="javascript:void(0)" id="convertExceptionBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 150px;" onclick="attendMan()">正常转异常开班</a>
+				<a href="javascript:void(0)" id="removeStaffBtn" class="easyui-linkbutton" iconCls="icon-remove" style="width: 150px;" onclick="removeClassStudent()">移除学员</a>
+	   			<a href="javascript:void(0)" id="convertExceptionBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 150px;" onclick="convertExceptionClass()">正常转异常开班</a>
 			</div>
 		</c:if>
 		<table class="tab" id="studentTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
-				<td width="5%"><input type="checkbox" name="studentId" onclick="checkAllStudentFunc()" /></td>
+				<td width="5%"><input type="checkbox" name="studentId" id="studentAllId" value="" onclick="checkAllStudentFunc(this)" /></td>
 				<td width="5%">序号</td>
 				<td width="10%">学员姓名</td>
 				<td width="10%">英文名</td>
@@ -116,8 +116,8 @@
 				<td width="20%">校服着装情况</td>
 			</tr>
 			<c:forEach items="${schooltimeInstT.classInstT.classStudentList}" var="node" varStatus="i">
-				<tr>
-					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" studentName="${node.studentT.name}"><input type="checkbox" name="studentId" onclick="checkStudentFunc(${node.studentId})" /></td>
+				<tr id="studentId${node.studentId}">
+					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" studentName="${node.studentT.name}"><input type="checkbox" name="studentId" value="${node.studentId}" courseId="${node.studentCourseT.studentCourseId}" onclick="studentCheckboxClick(this)" /></td>
 					<td align="center">${i.count}</td>
 					<td align="center">${node.studentT.name}</td>
 					<td align="center">${node.studentT.byName}</td>
@@ -280,24 +280,91 @@
 					studentArr.push(studentObj);
 				});
 				obj.studentList = studentArr;
-				var json = JSON.stringify(obj);
-				ajaxLoading("提交中...");
-				$.post("/sys/attend/addAttend.do",{json:json},function(data){
-					ajaxLoadEnd();
-					if(data == "success")
+				if(teacherArr.length == 0)
+				{
+					$.messager.alert("提示", "老师人数不能为零,请添加老师后重新尝试","warning");
+				}
+				else if(studentArr.length == 0)
+				{
+					$.messager.alert("提示", "学生人数不能为零,请添加学生后重新尝试","warning");
+				}
+				else
+				{
+					var json = JSON.stringify(obj);
+					ajaxLoading("提交中...");
+					$.post("/sys/attend/addAttend.do",{json:json},function(data){
+						ajaxLoadEnd();
+						if(data == "success")
+						{
+							$.messager.alert("提示", "考勤成功","info",function(){
+								backFunc();
+							});
+						}
+						else
+						{
+							try{
+								var dataObj = eval("("+data+")");
+								$.messager.alert("提示", dataObj.msg,"error");
+							}catch(e){
+								$.messager.alert("提示", data,"error");
+							}
+						}
+					});
+				}
+			}
+			
+			function checkAllStudentFunc(obj)
+			{
+				$("input[name='studentId']").each(function(i,node){
+					node.checked = obj.checked;
+				});
+			}
+			
+			function studentCheckboxClick(obj)
+			{
+				if(!obj.checked)
+				{
+					$("#studentAllId").attr("checked",false);
+				}
+			}
+			
+			function removeClassStudent()
+			{
+				var studentArr = [];
+				var courseArr = [];
+				$("input[name='studentId']:checked").each(function(i,node){
+					studentArr.push($(node).val());
+					courseArr.push($(node).attr("courseId"));
+					$("#studentId"+$(node).val()).remove();
+				});
+				var obj = {
+					classStudentId:studentArr.join(","),
+					studentCourseId:courseArr.join(","),
+					handlerId:"${sessionScope.StaffT.staffId}"
+				};
+				$.post("/sys/applyClass/batchRemoveStudent.do",{param:JSON.stringify(obj)},function(data){
+					alert(JSON.stringify(data));
+					if(data.flag == true)
 					{
-						$.messager.alert("提示", "考勤成功","info",function(){
-							backFunc();
-						});
+						$.messager.alert("提示", "所选学员已被成功移除");
 					}
 					else
 					{
-						try{
-							var dataObj = eval("("+data+")");
-							$.messager.alert("提示", dataObj.msg,"error");
-						}catch(e){
-							$.messager.alert("提示", data,"error");
-						}
+						$.messager.alert("提示", "学员移除失败","error");
+					}
+				},"json");				
+			}
+			
+			function convertExceptionClass()
+			{
+				$.post("/sys/attend/convertClassOpenType.do",{classInstId:"${schooltimeInstT.classInstId}"},function(data){
+					if(data == "success")
+					{
+						$.messager.alert("提示", "当前班级已被转换成异常开班");
+					}
+					else
+					{
+						$.messager.alert("提示", data,"error");
 					}
 				});
 			}

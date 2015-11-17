@@ -100,7 +100,7 @@
 		</table>
 		<table class="tab" id="studentTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
-				<td width="5%"><input type="checkbox" name="studentId" onclick="checkAllStudentFunc()" /></td>
+				<td width="5%">&nbsp;</td>
 				<td width="5%">序号</td>
 				<td width="10%">学员姓名</td>
 				<td width="10%">英文名</td>
@@ -110,7 +110,7 @@
 			</tr>
 			<c:forEach items="${classAttendT.studentAttendList}" var="node" varStatus="i">
 				<tr>
-					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" studentName="${node.studentT.name}"><input type="checkbox" name="studentId" onclick="checkStudentFunc(${node.studentId})" /></td>
+					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" studentName="${node.studentT.name}"><input type="checkbox" name="studentId" /></td>
 					<td align="center">${i.count}</td>
 					<td align="center">${node.studentName}</td>
 					<td align="center">${node.studentT.byName}</td>
