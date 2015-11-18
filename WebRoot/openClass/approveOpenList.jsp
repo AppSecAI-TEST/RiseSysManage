@@ -44,9 +44,9 @@
   					<td align="right"><span>课程阶段：</span></td>
 					<td width="114px">
 						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 114px; height: 25px;"
-						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      				onLoadSuccess:function(data){$('#stageId').combobox('setValue',data[0].codeFlag);}" 
-	      				url="<%=path %>/pubData/qryStage.do">
+							data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
+	      					onLoadSuccess:function(data){$('#stageId').combobox('setValue',data[0].stageId);}" 
+	      					url="<%=path %>/pubData/qryStage.do">
 		        		</select>
 					</td>
 					<td align="right"><span>开班审批日期：</span></td>

@@ -28,8 +28,8 @@ $(document).ready(function() {
 	
 	$("#stageId").combobox({
 		url : "/sys/pubData/qryStage.do",//返回json数据的url
-    	valueField : "codeFlag",
-    	textField : "codeName",
+    	valueField : "stageId",
+    	textField : "stageId",
     	panelHeight : "auto",
     	onLoadSuccess : function () { //数据加载完毕事件
             var data = $('#stageId').combobox('getData');
