@@ -17,13 +17,13 @@
   	<body>
   	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
   		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
-  		<div title="课程配置" style="padding:5px;display:block;">
+  		<div title="短期课课程配置" style="padding:5px;display:block;">
 			<table align="center" title="查询结果" data-options="height:600" id="course_data">
 				
 			</table>
 			<div id="courseToolbar">
 	   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="addShortCourse()">添加短期课</a>
-	 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" onclick="removeShortClass()">删除阶段</a>
+	 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" onclick="removeShortClass()">删除短期课</a>
 	   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="addShortClassType()">添加班级类型</a>
 	 		</div>
 	 		<div id="courseDlg" class="easyui-dialog" style="width:550px;height:275px;padding:0px 0px" modal="true" closed="true" buttons="#course-buttons">
@@ -73,7 +73,7 @@
 			   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="locatShortCourse()">添加新价格</a>
 		 			</div>
 				</div>
-				<div title="连报优惠配置" style="padding:5px;display:block;">
+				<div title="短期课优惠配置" style="padding:5px;display:block;">
 					<table align="center" title="查询结果" data-options="height:550" id="favor_data">
 						
 					</table>

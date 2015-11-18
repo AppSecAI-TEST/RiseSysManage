@@ -17,7 +17,7 @@
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="浏览短期课优惠配置">
 	 		<table width="95%" align="center" style="margin:5px auto;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
 	 			<tr>
-  					<td align="right" width="11%">连报优惠体系名称：</td>
+  					<td align="right" width="11%">优惠体系名称：</td>
   					<td align="left" width="69%">${obj.priceName}</td>
   				</tr>
   				<tr>
