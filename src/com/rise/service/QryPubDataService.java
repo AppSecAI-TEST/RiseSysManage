@@ -139,8 +139,8 @@ public class QryPubDataService
 	 * @return
 	 * @throws Exception
 	 */
-	public String qryPostList(String postId) throws Exception{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10115\",securityCode:\"0000000000\",params:{postId:\""+postId+"\"},rtnDataFormatType:\"user-defined\"}";
+	public String qryPostList(String postId,String postType) throws Exception{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10115\",securityCode:\"0000000000\",params:{postId:\""+postId+"\",postType:\""+postType+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 	

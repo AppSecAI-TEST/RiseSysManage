@@ -75,14 +75,14 @@ public class QryPubDataController
 	
 	//查询职务列表
 	@RequestMapping(value = "/qryPostList.do")
-	public void qryPostList(String postId, HttpServletResponse response)
+	public void qryPostList(String postId, String postType, HttpServletResponse response)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = qryPubDataService.qryPostList(postId);
+			String retVal = qryPubDataService.qryPostList(postId,postType);
 			log.error(retVal);
 			out.write(retVal);
 		}
