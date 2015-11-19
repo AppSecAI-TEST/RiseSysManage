@@ -28,7 +28,7 @@
   					<td align="right" width="10%"><span>业绩顾问：</span></td>
   					<td width="12%"><span id="adviserName"></span></td>
   					<td align="right" width="10%"><span>原带班老师：</span></td>
-  					<td width="12%"><span id="adviserTeacherName"></span></td>
+  					<td width="12%"><span id="outClassTeacherName"></span></td>
   					<td align="right" width="12%"><span>原课程状态：</span></td>
   					<td width="44%" colspan="3"><span id="oldCourseStateText"></span></td>
   				</tr>

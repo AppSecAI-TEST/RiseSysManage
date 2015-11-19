@@ -16,7 +16,7 @@ $(document).ready(function() {
 			$("#outClass").html(data.outClass);
 			$("#inClass").html(data.inClass);
 			$("#adviserName").html(data.adviserName);
-			$("#adviserTeacherName").html(data.adviserTeacherName);
+			$("#outClassTeacherName").html(data.outClassTeacherName);
 			$("#oldCourseStateText").html(data.oldCourseStateText);
 			var applyDate = data.applyDate;
 			if(applyDate != null && applyDate != "" && applyDate != "null" && applyDate != undefined) {

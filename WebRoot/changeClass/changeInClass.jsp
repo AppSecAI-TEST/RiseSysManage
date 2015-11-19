@@ -25,8 +25,6 @@
   				<input type="hidden" id="outClassId"/>
   				<input type="hidden" id="inClassIsBegin"/>
   				<input type="hidden" id="applyId" value="<%=applyId %>"/>
-  				<input type="hidden" id="classInstId" name="classInstId"/>
-  				<input type="hidden" id="className" name="className"/>
   				<input type="hidden" id="studentChannelType" name="studentChannelType"/>
   				<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId %>"/>
   				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>

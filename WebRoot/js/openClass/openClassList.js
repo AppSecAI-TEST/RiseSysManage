@@ -54,7 +54,6 @@ $(document).ready(function() {
 			var openClassType = row.openClassType;
 			if(openClassType == "" || openClassType == null || openClassType == undefined) {
 				var classInstId = row.classInstId;
-				alert(classInstId)
 				window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=exception&applyType=001";
 			} else {
 				var openClassState = row.openClassState;

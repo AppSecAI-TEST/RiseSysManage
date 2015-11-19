@@ -25,8 +25,6 @@
   				<input type="hidden" id="outClassId"/>
   				<input type="hidden" id="inClassIsBegin"/>
   				<input type="hidden" id="applyId" value="<%=applyId %>"/>
-  				<input type="hidden" id="classInstId" name="classInstId"/>
-  				<input type="hidden" id="className" name="className"/>
   				<input type="hidden" id="studentChannelType" name="studentChannelType"/>
   				<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId %>"/>
   				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
@@ -75,18 +73,18 @@
   					</tr>
   					<tr>
   						<td align="right" width="15%"><span>当前选班班级：</span></td>
-  						<td width="15%"><span id=""></span></td>
+  						<td width="15%"><span id="currentSelectClassName"></span></td>
   						<td align="right" width="15%"><span>当前选班时间：</span></td>
-  						<td width="20%"><span id=""></span></td>
+  						<td width="20%"><span id="currentSelectClassDate"></span></td>
   						<td align="right" width="15%"><span>选班次数：</span></td>
-  						<td width="20%"><span id=""></span></td>
+  						<td width="20%"><span id="selectClassNum"></span></td>
   					</tr>
-  					<tr>
+  					<tr id="selectClassTr">
   						<td align="right" width="15%"><span>是否定班：</span></td>
   						<td width="15%">
-  							<input type="radio" name="isSet" value="N"/>
+  							<input type="radio" name="isSelect" value="N"/>
   							<span style="display: inline-block; text-align: center;">未定班</span>
-  							<input type="radio" name="isSet" value="Y"/>
+  							<input type="radio" name="isSelect" value="Y"/>
   							<span style="display: inline-block; text-align: center;">已定班</span>
   						</td>
   						<td align="right" width="15%"><span>班级选择：</span></td>

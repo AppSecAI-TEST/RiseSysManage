@@ -21,6 +21,7 @@
   				<input type="hidden" id="schoolId" name="schoolId" value="${obj.createClassObj.schoolId}"/>
   				<input type="hidden" id="classTeacherId" name="classTeacherId"/>
   				<input type="hidden" id="openClassType" name="openClassType" value="E"/>
+  				<input type="hidden" id="openClassNum" name="openClassNum" value="0"/>
 	  			<table width="99.99%" cellpadding="5px" class="maintable" id="cancelApplyClassTd">
 	  				<tr>
 	  					<td align="right" width="10%"><span>课程阶段：</span></td>
