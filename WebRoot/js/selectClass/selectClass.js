@@ -35,48 +35,19 @@ $(document).ready(function() {
 			$("#oldClassInstId").val(data.oldClassInstId);
 			$("#studentId").val(data.studentId);
 			$("#oldClassName").val(data.oldClassName);
+			
+			var oldClassInstId = data.oldClassInstId;
+			if(oldClassInstId != null && oldClassInstId != "" && oldClassInstId != undefined) {
+				var classIsBegin = data.classIsBegin;
+				$("input[name='isBegin'][value='"+classIsBegin+"']").attr("checked", "checked"); 
+				initClassInst(classIsBegin);
+			}
 		}
 	});
 	
 	$("input:radio[name='isBegin']").change(function() {
 		var isBegin = $("input:radio[name='isBegin']:checked").val();
-		var schoolId = $("#schoolId").val();
-		var courseType = $("#courseType").val();
-		var stageId = $("#stageId").val();
-		var oldClassInstId = $("#oldClassInstId").val();
-		var classType = $("#classType").val();
-		var schoolId = $("#schoolId").val();
-		if("Y" == isBegin) {
-			$("#beginClassInstId").combobox({
-        		url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType="+courseType+"&stageId="+stageId+"&classType="+classType+"&classState='003'&classInstId="+oldClassInstId,//返回json数据的url
-        		valueField : "classInstId",
-        		textField : "className",
-        		panelHeight : "auto",
-        		onLoadSuccess : function () { //数据加载完毕事件
-                    var data = $('#beginClassInstId').combobox('getData');
-                    if (data.length > 0) {
-                        $("#beginClassInstId").combobox('select', data[0].classInstId);
-                    }
-                }
-        	});
-			$("#notBeginClassInstId").combobox('clear');
-			$("#notBeginClassInstId").combobox("loadData", new Array());
-		} else {
-			$("#notBeginClassInstId").combobox({
-        		url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType="+courseType+"&stageId="+stageId+"&classType="+classType+"&classState='001','002'&classInstId="+oldClassInstId,//返回json数据的url
-        		valueField : "classInstId",
-        		textField : "className",
-        		panelHeight : "auto",
-        		onLoadSuccess : function () { //数据加载完毕事件
-                    var data = $('#notBeginClassInstId').combobox('getData');
-                    if (data.length > 0) {
-                        $("#notBeginClassInstId").combobox('select', data[0].classInstId);
-                    }
-                }
-        	});
-			$("#beginClassInstId").combobox('clear');
-			$("#beginClassInstId").combobox("loadData", new Array());
-		}
+		initClassInst(isBegin);
 	});
 	
 	//提交更换班级
@@ -119,3 +90,51 @@ $(document).ready(function() {
 		});
     });
 });
+
+function initClassInst(isBegin) {
+	var schoolId = $("#schoolId").val();
+	var courseType = $("#courseType").val();
+	var stageId = $("#stageId").val();
+	var oldClassInstId = $("#oldClassInstId").val();
+	var classType = $("#classType").val();
+	var schoolId = $("#schoolId").val();
+	if("Y" == isBegin) {
+		$("#beginClassInstId").combobox({
+    		url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType="+courseType+"&stageId="+stageId+"&classType="+classType+"&classState='003'&classInstId=",//返回json数据的url
+    		valueField : "classInstId",
+    		textField : "className",
+    		panelHeight : "auto",
+    		onLoadSuccess : function () { //数据加载完毕事件
+                var data = $('#beginClassInstId').combobox('getData');
+                if (data.length > 0) {
+                	if(oldClassInstId != null && oldClassInstId != "" && oldClassInstId != undefined) {
+                		$("#beginClassInstId").combobox('select', oldClassInstId);
+                	} else {
+                		$("#beginClassInstId").combobox('select', data[0].classInstId);
+                	}
+                }
+            }
+    	});
+		$("#notBeginClassInstId").combobox('clear');
+		$("#notBeginClassInstId").combobox("loadData", new Array());
+	} else {
+		$("#notBeginClassInstId").combobox({
+    		url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType="+courseType+"&stageId="+stageId+"&classType="+classType+"&classState='001','002'&classInstId=",//返回json数据的url
+    		valueField : "classInstId",
+    		textField : "className",
+    		panelHeight : "auto",
+    		onLoadSuccess : function () { //数据加载完毕事件
+                var data = $('#notBeginClassInstId').combobox('getData');
+                if (data.length > 0) {
+                	if(oldClassInstId != null && oldClassInstId != "" && oldClassInstId != undefined) {
+                		$("#notBeginClassInstId").combobox('select', oldClassInstId);
+                	} else {
+                		$("#notBeginClassInstId").combobox('select', data[0].classInstId);
+                	}
+                }
+            }
+    	});
+		$("#beginClassInstId").combobox('clear');
+		$("#beginClassInstId").combobox("loadData", new Array());
+	}
+}

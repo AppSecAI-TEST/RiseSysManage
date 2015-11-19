@@ -81,8 +81,7 @@ $(document).ready(function() {
     	    		$.messager.progress('close'); 
     	    		var flag = data.flag
     	            if(flag) {
-    	            	$.messager.alert('提示', "申请取消放班成功！");
-    	            	window.location.reload();
+    	            	$.messager.alert('提示', "申请取消放班成功！", "info", function() {window.history.back();});
     	            } else {
     	            	$.messager.alert('提示', "申请取消放班失败！");
     	            }
