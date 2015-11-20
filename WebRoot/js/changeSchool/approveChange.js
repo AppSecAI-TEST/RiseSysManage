@@ -6,7 +6,7 @@ $(document).ready(function() {
 		} else {
 			if($("#approveChangeSchoolFm").form('validate')) {
 				var obj = JSON.stringify($("#approveChangeSchoolFm").serializeObject());
-				alert(obj)
+				obj = encodeURI(obj);
 				$.ajax({
 					url: "/sys/change/approveChangeClass.do",
 					data: "param=" + obj,

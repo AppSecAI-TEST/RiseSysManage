@@ -2,6 +2,7 @@ $(document).ready(function() {
 	$("#applyChangeSubmit").click(function() {
 		if($("#applyChangeClassFm").form('validate')) {
 			var obj = JSON.stringify($("#applyChangeClassFm").serializeObject());
+			obj = encodeURI(obj);
 			$.ajax({
 				url: "/sys/change/applyChangeClass.do",
 				data: "param=" + obj,

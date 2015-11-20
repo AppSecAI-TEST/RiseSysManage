@@ -280,6 +280,7 @@ $(document).ready(function() {
 				}
 				refundVisitArray += "]";
 				var param = "{\"refundFeeObj\":"+JSON.stringify(refundFeeObj)+",\"refundFeeDetailArray\":"+refundFeeDetailArray+",\"refundVisitArray\":"+refundVisitArray+"}";
+				param = encodeURI(param);
 				$.ajax({
 					url: "/sys/refund/applyRefund.do",
 					data: "param=" + param,

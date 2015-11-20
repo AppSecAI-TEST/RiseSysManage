@@ -46,6 +46,7 @@ $(document).ready(function() {
 	$("#cancelChangeSubmit").click(function() {
 		if($("#cancelChangeClassFm").form('validate')) {
 			var obj = JSON.stringify($("#cancelChangeClassFm").serializeObject());
+			obj = encodeURI(obj);
 			$.ajax({
 				url: "/sys/change/cancelChange.do",
 				data: "param=" + obj,

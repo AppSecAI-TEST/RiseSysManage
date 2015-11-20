@@ -84,6 +84,7 @@ $(document).ready(function() {
 				param += "{classInstId:\""+classInstId+"\",className:\""+className+"\",studentId:\""+studentId+"\",studentCourseId:\""+studentCourseId+"\",studentChannelType:\""+studentChannelType+"\",handlerId:\""+handlerId+"\",schoolId:\""+schoolId+"\"},";
 			}
 			param = param.substring(0, param.length - 1) + "]";
+			param = encodeURI(param);
 			$.ajax({
 				url: "/sys/applyClass/addClassStudent.do",
 				data: "param=" + param,
@@ -355,6 +356,7 @@ function updateApplyClass() {
 	}
 	var obj = JSON.stringify($("#updateApplyClassFm").serializeObject());
 	obj = obj.substring(0, obj.length - 1) + ",schooltimeArray:"+schooltimeArray+"}";
+	obj = encodeURI(obj);
 	$.ajax({
 		url: "/sys/applyClass/updateCreateClass.do",
 		data: "param=" + obj,

@@ -94,6 +94,7 @@ $(document).ready(function() {
 			var obj = JSON.stringify($("#changeInClassFm").serializeObject());
 			obj = obj.substring(0, obj.length - 1);
 			obj += ",\"classInstId\":\""+classInstId+"\",className:\""+className+"\"}";
+			obj = encodeURI(obj);
 			$.ajax({
 				url: "/sys/change/changeIn.do",
 				data: "param=" + obj,
@@ -147,6 +148,7 @@ $(document).ready(function() {
 		    	obj = obj.substring(0, obj.length - 1);
 				obj += ",\"classInstId\":\""+classInstId+"\",className:\""+className+"\"}";
 			}
+			obj = encodeURI(obj);
 			$.ajax({
 				url: "/sys/change/updateChangeClass.do",
 				data: "param=" + obj,

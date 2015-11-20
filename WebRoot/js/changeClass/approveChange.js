@@ -36,6 +36,7 @@ $(document).ready(function() {
 		} else {
 			if($("#approveChangeClassFm").form('validate')) {
 				var obj = JSON.stringify($("#approveChangeClassFm").serializeObject());
+				obj = encodeURI(obj);
 				$.ajax({
 					url: "/sys/change/approveChangeClass.do",
 					data: "param=" + obj,

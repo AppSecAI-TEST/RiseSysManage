@@ -215,6 +215,7 @@ $(document).ready(function() {
 		} else {
 			if($("#approveOpenFm").form('validate')) {
 				var obj = JSON.stringify($("#approveOpenFm").serializeObject());
+				obj = encodeURI(obj);
 				$.ajax({
 					url: "/sys/openClass/approveOpenClass.do",
 					data: "param=" + obj,
@@ -242,6 +243,7 @@ $(document).ready(function() {
 //修改开课时间或者是取消放班
 function updateOrCancel() {
 	var obj = JSON.stringify($("#openFm").serializeObject());
+	obj = encodeURI(obj);
 	var optionType = $("#optionType").val();
 	$.ajax({
 		url: "/sys/openClass/updateOrCancel.do",
@@ -301,6 +303,7 @@ function openClass() {
 	}
 	var obj = JSON.stringify($("#openClassFm").serializeObject());
 	obj = obj.substring(0, obj.length - 1) + ",classTeacherArray:"+classTeacherArray+"}";
+	obj = encodeURI(obj);
 	$.ajax({
 		url: "/sys/openClass/applyOpenClass.do",
 		data: "param=" + obj,

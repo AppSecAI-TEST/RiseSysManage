@@ -79,7 +79,8 @@ $(document).ready(function() {
 		var oldClassInstId = $("#classInstId").val();
 		var schoolId = $("#schoolId").val();
     	var param = "[{classInstId:\""+classInstId+"\",className:\""+className+"\",studentId:\""+studentId+"\",studentCourseId:\""+studentCourseId+"\",studentChannelType:\""+studentChannelType+"\",handlerId:\""+handlerId+"\",oldClassInstId:\""+oldClassInstId+"\",schoolId:\""+schoolId+"\"}]";
-		$.ajax({
+    	param = encodeURI(param);
+    	$.ajax({
 			url: "/sys/applyClass/addClassStudent.do",
 			data: "param=" + param,
 			dataType: "json",

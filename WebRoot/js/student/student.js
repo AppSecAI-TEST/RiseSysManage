@@ -338,6 +338,7 @@ $(document).ready(function() {
     		obj = obj.substring(0, obj.length - 1);
     		var funcNodeId = $("#validate").attr("funcNodeId");
     		obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+    		obj = encodeURI(obj);
     		$.ajax({
     			url: "/sys/student/validate.do",
     			data: "param=" + obj,
@@ -396,6 +397,7 @@ $(document).ready(function() {
     					}
     					realSchoolArray += "]";
     					var param = "{studentInfo:"+obj+",contactArray:"+contactArray+",realSchoolArray:"+realSchoolArray+"}";
+    					param = encodeURI(param);
     					$.ajax({
     		    			url: "/sys/student/addStudent.do",
     		    			data: "param=" + param,
@@ -436,6 +438,7 @@ $(document).ready(function() {
     		var activityName = $("#title").combobox("getValue");
     		obj = obj.substring(0, obj.length - 1);
     		obj += ",\"activityName\":\""+activityName+"\"}";
+    		obj = encodeURI(obj);
     		$.ajax({
     			url: "/sys/student/addActivity.do",
     			data: "param=" + obj,
@@ -466,7 +469,7 @@ $(document).ready(function() {
     $("#setVipSubmit").click(function() {
     	if($("#setVipFm").form('validate')) {
     		var obj = JSON.stringify($("#setVipFm").serializeObject());
-    		alert(obj)
+    		obj = encodeURI(obj);
     		$.ajax({
     			url: "/sys/student/setVip.do",
     			data: "param=" + obj,
@@ -493,7 +496,7 @@ $(document).ready(function() {
     $("#updateVipSubmit").click(function() {
     	if($("#updateVipFm").form('validate')) {
     		var obj = JSON.stringify($("#updateVipFm").serializeObject());
-    		alert(obj);
+    		obj = encodeURI(obj);
     		$.ajax({
     			url: "/sys/student/updateVip.do",
     			data: "param=" + obj,
@@ -526,8 +529,7 @@ $(document).ready(function() {
     	studentId = studentId.substring(0, studentId.length - 1);
     	$("#updateStudentId").val(studentId);
     	var obj = JSON.stringify($("#batchUpdateFm").serializeObject());
-    	alert($("#handlerId").val());
-    	alert(obj);
+    	obj = encodeURI(obj);
 		$.ajax({
 			url: "/sys/student/batchUpdateAdvister.do",
 			data: "param=" + obj,

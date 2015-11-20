@@ -67,6 +67,7 @@ $(document).ready(function() {
 	$("#submit").click(function(){
 		if($("#cancelApplyClassFm").form('validate')) {
 			var obj = JSON.stringify($("#cancelApplyClassFm").serializeObject());
+			obj = encodeURI(obj);
 			$.ajax({
 				url: "/sys/applyClass/cancelApplyClass.do",
 				data: "param=" + obj,
@@ -98,6 +99,7 @@ $(document).ready(function() {
 		} else {
 			if($("#cancelApplyClassFm").form('validate')) {
 				var obj = JSON.stringify($("#cancelApplyClassFm").serializeObject());
+				obj = encodeURI(encodeURI);
 				$.ajax({
 					url: "/sys/applyClass/approveApplyClass.do",
 					data: "param=" + obj,

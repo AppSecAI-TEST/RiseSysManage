@@ -4,6 +4,7 @@ $(document).ready(function() {
 			var classStudentNum = parseInt($("#classStudentNum").val());
 			if(classStudentNum == 0) {
 				var obj = JSON.stringify($("#disbandClassFm").serializeObject());
+				obj = encodeURI(obj);
 				$.ajax({
 					url: "/sys/attendClass/disbandClass.do",
 					data: "param=" + obj,

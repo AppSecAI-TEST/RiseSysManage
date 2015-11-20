@@ -224,6 +224,7 @@ $(document).ready(function() {
     		obj = obj.substring(0, obj.length - 1);
     		var funcNodeId = $("#validate").attr("funcNodeId");
     		obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+    		obj = encodeURI(obj);
     		$.ajax({
     			url: "/sys/student/validate.do",
     			data: "param=" + obj,
@@ -331,6 +332,7 @@ $(document).ready(function() {
     					var obj = JSON.stringify($("#studentFm").serializeObject());
 						obj = obj.substring(0, obj.length - 1);
     					obj += ",\"contactId\":\""+contactIds+"\",\"activityId\":\""+activityIds+"\",\"realId\":\""+realIds+"\",\"contactArray\":"+contactArray+",\"realSchoolArray\":"+realSchoolArray+",\"activityArray\":"+activityArray+"}";
+    					obj = encodeURI(obj);
     					$.ajax({
     		    			url: "/sys/student/updateStudent.do",
     		    			data: "param=" + obj,

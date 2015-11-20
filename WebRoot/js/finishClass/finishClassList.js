@@ -80,7 +80,7 @@ $(document).ready(function() {
 	$("#finishClassSubmit").click(function() {
 		if($("#finishClassFm").form('validate')) {
 			var obj = JSON.stringify($("#finishClassFm").serializeObject());
-			alert(obj)
+			obj = encodeURI(obj);
 			$.ajax({
 				url: "/sys/attendClass/finishClass.do",
 				data: "param=" + obj,
