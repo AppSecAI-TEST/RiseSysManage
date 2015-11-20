@@ -99,7 +99,7 @@ $(document).ready(function() {
 		} else {
 			if($("#cancelApplyClassFm").form('validate')) {
 				var obj = JSON.stringify($("#cancelApplyClassFm").serializeObject());
-				obj = encodeURI(encodeURI);
+				obj = encodeURI(obj);
 				$.ajax({
 					url: "/sys/applyClass/approveApplyClass.do",
 					data: "param=" + obj,

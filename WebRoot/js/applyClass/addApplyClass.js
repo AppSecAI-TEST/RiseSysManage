@@ -469,7 +469,7 @@ function addApplyClass() {
 		},
 		success: function (data) {
 			$.messager.progress('close'); 
-			var flag = data.flag
+			var flag = data.flag;
 			if(flag) {
 				$.messager.alert('提示', "申请放班成功！", "info", function() {window.history.back();});
 			} else {

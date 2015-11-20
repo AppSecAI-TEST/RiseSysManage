@@ -167,7 +167,6 @@ $(document).ready(function() {
 		var row = $('#approve_list_data').datagrid('getSelected');
 		if(row) {
 			var approveState = row.approveState;
-			alert(approveState);
 			if("000" == approveState) {
 				var name = row.name;
 				var phone = row.phone;

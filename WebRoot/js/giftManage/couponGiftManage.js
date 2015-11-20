@@ -277,7 +277,6 @@ function addCouponGiftSubmit()
 		$.messager.alert('提示', "请至少添加一个赠品！");
 		return;
 	}else{
-		alert(JSON.stringify(gifts));
 		$.ajax({
 			type : "POST",
 			url: "/sys/giftManage/addGiftInfo.do",

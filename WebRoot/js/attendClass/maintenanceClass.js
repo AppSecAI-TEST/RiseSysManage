@@ -427,7 +427,7 @@ function maintenanceClass() {
 		}
 		var obj = JSON.stringify($("#maintenanceClassFm").serializeObject());
 		var param = "{teacherChangeHist:"+obj+",classTeacherArray:"+classTeacherArray+"}";
-		param = encodeURI(encodeURI);
+		param = encodeURI(param);
 		$.ajax({
 			url: "/sys/attendClass/changeTeacher.do",
 			data: "param=" + param,

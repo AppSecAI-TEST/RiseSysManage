@@ -97,7 +97,6 @@
 			var className=$("#classInstId").combobox('getText');
 			time.className=className;
 			var obj = JSON.stringify(time);
-			alert(obj);
 		 	$.ajax({
 			type : "POST",
 			url: "/sys/time/add.do",

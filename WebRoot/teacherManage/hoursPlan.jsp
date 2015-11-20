@@ -67,7 +67,6 @@ $("#qryBtn").click(function(){
 	var startDate=$("#startTime").datebox("getValue");
 	var endDate=$("#endTime").datebox("getValue");
 	var obj = JSON.stringify($("#qryFm").serializeObject());
-	alert(obj);
 	$('#list_data').datagrid({  
 		border:false,  
 	    fitColumns:true,  

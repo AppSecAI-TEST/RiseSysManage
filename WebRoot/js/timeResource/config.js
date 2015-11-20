@@ -90,7 +90,6 @@ function classTimeConfig()
 	$(".addTr").each(function(){
 		var tr =$(this);
 		tr.find("input[type='radio']").each(function(index){
-			alert(this.checked)
 			if(index==0)
 			{
 				if(this.checked)

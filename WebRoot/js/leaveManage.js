@@ -121,7 +121,6 @@ function restartSubmit()
 	    				window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";
 	    			}
 	    			if(resumeType == "002"){
-	    				alert(123)
 	    				window.location.href = "";
 	    			}
 	    			if(resumeType == "003"){

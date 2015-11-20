@@ -124,7 +124,6 @@ function updateFileSubmit()
 		obj.byName = $("#byName").textbox('getValue');
 		obj.post = $("#post").combobox('getValue');
 		var a = JSON.stringify(obj);
-		alert(a)
 		$.ajax({
 			type : "POST",
 			url: "/sys/teacherManage/updateTeacherInfo.do",
