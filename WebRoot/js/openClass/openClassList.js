@@ -26,7 +26,7 @@ $(document).ready(function() {
 				var minNum = row.minNum;
 				if(classStudentNum >= minNum) {
 					var classInstId = row.classInstId;
-					window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=normal&applyType=002";
+					window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=normal&applyType=001";
 				} else {
 					$.messager.alert('提示', "您选择的班级正常开班的最少人数为"+minNum+"人，定班人数至少要达到最少人数才能申请正常开班！");
 				}
@@ -54,7 +54,7 @@ $(document).ready(function() {
 			var openClassType = row.openClassType;
 			if(openClassType == "" || openClassType == null || openClassType == undefined) {
 				var classInstId = row.classInstId;
-				window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=exception&applyType=002";
+				window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=exception&applyType=001";
 			} else {
 				var openClassState = row.openClassState;
 				if(openClassState == '001') {

@@ -21,7 +21,7 @@ $(document).ready(function() {
 			$("#courseStateText").html(data.courseStateText);
 			$("#changeClassNumText").html(data.changeClassNum);
 			$("#teacherNameText").html(data.teacherName);
-			$("#inClassNameText").html(data.inClassName);
+			$("#inClassNameText").html(data.planInClassName);
 			$("#applyDateText").html(data.applyDate);
 			$("#applyNameText").html(data.applyName);
 			$("#changeRemarkText").html(data.applyRemark);

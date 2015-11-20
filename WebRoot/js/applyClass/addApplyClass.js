@@ -34,12 +34,14 @@ $(document).ready(function() {
     	onLoadSuccess : function () { //数据加载完毕事件
             var data = $('#stageId').combobox('getData');
             if (data.length > 0) {
-                $("#stageId").combobox('select', data[0].codeFlag);
+                $("#stageId").combobox('select', data[0].stageId);
             }
         },
 		onChange : function(n, o) {
+			var schooolId = $("#schoolId").val();
+			var date = new Date().format("yyyy-MM-dd");
 			$("#classType").combobox({
-        		url : "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",stageId:\""+n+"\"}",//返回json数据的url
+        		url : "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",stageId:\""+n+"\",schoolId:\""+schooolId+"\",time:\""+date+"\"}",//返回json数据的url
         		valueField : "classType",
         		textField : "classType",
         		panelHeight : "auto",
@@ -454,10 +456,12 @@ function addApplyClass() {
 	schooltimeArray = schooltimeArray.substring(0, schooltimeArray.length - 1) + "]";
 	var obj = JSON.stringify($("#applyClassFm").serializeObject());
 	var param = "{\"classInstObj\":"+obj+",\"schooltimeArray\":"+schooltimeArray+"}";
+	param = encodeURI(param);
 	$.ajax({
 		url: "/sys/applyClass/applyCreateClass.do",
 		data: "param=" + param,
 		dataType: "json",
+		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
 		async: false,
 		beforeSend: function()
 		{

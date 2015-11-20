@@ -57,7 +57,6 @@ $(document).ready(function() {
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) {
 			var classInstId = row.classInstId;
-			alert(classInstId);
 			window.location.href = "/sys/applyClass/qryCreateClass.do?classInstId="+classInstId+"&type=view&applyType=001";
 		} else {
 			$.messager.alert('提示', "请先选择您要浏览的班级！");

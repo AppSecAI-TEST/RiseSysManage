@@ -159,4 +159,31 @@ public class ChangeController
 			}
 		}
 	}
+	
+	//¸ü¸Ä×ª°à
+	@RequestMapping(value = "/updateChangeClass.do")
+	public void updateChangeClass(String param, HttpServletResponse response)
+	{
+		log.error(param);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = changeService.updateChangeClass(param);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }

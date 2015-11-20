@@ -1,7 +1,10 @@
 $(document).ready(function(){
+	initDate();
 	//首页面查询
     $("#qryBtn").click(function() {
-		var obj = JSON.stringify($("#qryFm").serializeObject());
+    	var json = $("#qryFm").serializeObject();
+    	json.byName = $("#byName").combobox('getText');
+		var obj = JSON.stringify(json);
 		obj = obj.substring(0, obj.length - 1);
 		var funcNodeId = $("#qryBtn").attr("funcNodeId");
 		obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
@@ -368,4 +371,12 @@ function validateSelect(object)
 		$.messager.alert('提示', "请先选择您要操作的教师！");
 	}
 	return flag;
+}
+
+function initDate()
+{
+	var curr_time = new Date();
+	$('#joinEndDate').datebox('setValue', myformatter(curr_time));
+	curr_time.setMonth(curr_time.getMonth() - 1);
+	$('#joinStartDate').datebox('setValue', myformatter(curr_time));
 }

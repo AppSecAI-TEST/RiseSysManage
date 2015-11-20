@@ -13,6 +13,12 @@ $(document).ready(function() {
 		success: function (data) {
 			$.messager.progress('close'); 
 			var inClassId = data.inClassId;
+			var isSelect = "N";
+			if(inClassId != "" && inClassId != null && inClassId != undefined) {
+				isSelect = "Y";
+			}
+			$("input[name='isSelect'][value='"+isSelect+"']").attr("checked", "checked");
+			initIsSelect(isSelect);
 			var outClassId = data.outClassId;
 			$("#nameText").html(data.name);
 			$("#birthdayText").html(data.birthday);
@@ -29,14 +35,24 @@ $(document).ready(function() {
 			$("#outClassNameText").html(data.outClassName);
 			$("#outClassProgressText").html(data.outClassProgress);
 			$("#outDateText").html(data.outDate);
-			var inClassIsBegin = data.inClassIsBegin;
 			$("#stageId").val(data.stageId);
 			$("#classType").val(data.classType);
 			$("#inClassId").val(inClassId);
 			$("#courseType").val(data.courseType);
 			$("#outClassId").val(outClassId);
+			$("#currentSelectClassName").html(data.inClassName);
+			$("#currentSelectClassDate").html(data.inDate);
+			$("#selectClassNum").html(data.selectClassNum);
+			var inClassIsBegin = data.inClassIsBegin;
 			$("#inClassIsBegin").val(inClassIsBegin);
-			$("input[name='isBegin'][value='"+inClassIsBegin+"']").attr("checked", "checked");
+			if(inClassIsBegin != null && inClassIsBegin != "" && inClassIsBegin != undefined) {
+				$("input[name='isBegin'][value='"+inClassIsBegin+"']").attr("checked", "checked");
+				initClassInst(inClassIsBegin);
+			} else {
+				var planInClassIsBegin = data.planInClassIsBegin;
+				$("input[name='isBegin'][value='"+planInClassIsBegin+"']").attr("checked", "checked");
+				initClassInst(planInClassIsBegin);
+			}
 			var feeType = data.feeType;
 			var studentChannelType = "";
 			if("001" == feeType) {
@@ -45,13 +61,18 @@ $(document).ready(function() {
 				studentChannelType = data.schoolName + data.oldClassName + data.feeTypeText;
 			}
 			$("#studentChannelType").val(studentChannelType);
-			initClassInst(inClassIsBegin);
 		}
 	});
 	
 	$("input:radio[name='isBegin']").change(function() {
 		var isBegin = $("input:radio[name='isBegin']:checked").val();
 		initClassInst(isBegin);
+	});
+	
+	//是否定班
+	$("input:radio[name='isSelect']").change(function() {
+		var isSelect = $("input:radio[name='isSelect']:checked").val();
+		initIsSelect(isSelect);
 	});
 	
 	//转班转入
@@ -61,15 +82,18 @@ $(document).ready(function() {
 		var maxNum = parseInt(classStudentNum.split("/")[1]);
 		if(studentNum <= maxNum) {
 			var classInstId = "";
+			var className = "";
 			var isBegin = $("input:radio[name='isBegin']:checked").val();
 	    	if("Y" == isBegin) {
 	    		classInstId = $('#beginClassInstId').combobox('getValue');
+	    		className = $('#beginClassInstId').combobox('getText');
 	    	} else {
 	    		classInstId = $('#notBeginClassInstId').combobox('getValue');
+	    		className = $('#notBeginClassInstId').combobox('getText');
 	    	}
 			var obj = JSON.stringify($("#changeInClassFm").serializeObject());
 			obj = obj.substring(0, obj.length - 1);
-			obj += ",\"classInstId\":\""+classInstId+"\"}";
+			obj += ",\"classInstId\":\""+classInstId+"\",className:\""+className+"\"}";
 			$.ajax({
 				url: "/sys/change/changeIn.do",
 				data: "param=" + obj,
@@ -84,6 +108,59 @@ $(document).ready(function() {
 					var flag = data.flag;
 					if(flag) {
 						$.messager.alert('提示', "转入班级成功！", "info", function() {window.history.back();});
+					} else {
+						$.messager.alert('提示', data.msg);
+					}
+				} 
+			});
+		} else {
+			var className = $("#className").html();
+			$.messager.alert('提示', "您选择的"+className+"学员已经满员，不能再向该班级转入学员！");
+		}
+	});
+	
+	//更改转班
+	$("#updateChangeSubmit").click(function() {
+		var flag = true;
+		var isSelect = $("input:radio[name='isSelect']:checked").val();
+		if("Y" == isSelect) {
+			var classStudentNum = $("#classStudentNum").html();
+			var studentNum = parseInt(classStudentNum.split("/")[0]) + 1;
+			var maxNum = parseInt(classStudentNum.split("/")[1]);
+			if(studentNum > maxNum) {
+				flag = false;
+			}
+		}
+		if(flag) {
+			var obj = JSON.stringify($("#updateChangeClassFm").serializeObject());
+			if("Y" == isSelect) {
+				var classInstId = "";
+				var className = "";
+				var isBegin = $("input:radio[name='isBegin']:checked").val();
+		    	if("Y" == isBegin) {
+		    		classInstId = $('#beginClassInstId').combobox('getValue');
+		    		className = $('#beginClassInstId').combobox('getText');
+		    	} else {
+		    		classInstId = $('#notBeginClassInstId').combobox('getValue');
+		    		className = $('#notBeginClassInstId').combobox('getText');
+		    	}
+		    	obj = obj.substring(0, obj.length - 1);
+				obj += ",\"classInstId\":\""+classInstId+"\",className:\""+className+"\"}";
+			}
+			$.ajax({
+				url: "/sys/change/updateChangeClass.do",
+				data: "param=" + obj,
+				dataType: "json",
+				async: false,
+				beforeSend: function()
+				{
+					$.messager.progress({title : '更改转班', msg : '正在更改转班，请稍等……'});
+				},
+				success: function (data) {
+					$.messager.progress('close'); 
+					var flag = data.flag;
+					if(flag) {
+						$.messager.alert('提示', "更改转班成功！", "info", function() {window.history.back();});
 					} else {
 						$.messager.alert('提示', data.msg);
 					}
@@ -177,8 +254,6 @@ function initClassInst(isBegin) {
             		},
             		success: function (data) {
             			$.messager.progress('close'); 
-            			$("#classInstId").val(data.classInstId);
-            			$("#className").val(data.className);
             			$("#classNameText").html(data.className);
             			$("#applyDate").html(data.applyClassDate);
             			$("#startDate").html(data.startDate);
@@ -192,5 +267,28 @@ function initClassInst(isBegin) {
     	});
 		$("#beginClassInstId").combobox('clear');
 		$("#beginClassInstId").combobox("loadData", new Array());
+	}
+}
+
+function initIsSelect(isSelect) {
+	//未定班  则不需要选班
+	if(isSelect == "N") {
+		$("#selectClassTr").find("td").each(function(i) {
+			if(i == 1) {
+				$(this).attr("colspan", 5);
+			} else if(i > 1) {
+				$(this).css("display", "none");
+			}
+		});
+		$("#changeDiv").css("display", "none");
+	} else {
+		$("#selectClassTr").find("td").each(function(i) {
+			if(i == 1) {
+				$(this).attr("colspan", 1);
+			} else if(i > 1) {
+				$(this).css("display", "table-cell");
+			}
+		});
+		$("#changeDiv").css("display", "block");
 	}
 }

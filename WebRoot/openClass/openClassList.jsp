@@ -43,10 +43,10 @@
   				<tr>
   					<td align="right"><span>开班状态：</span></td>
 					<td width="114px" colspan="3">
-						<select id="approveState" name="approveState" class="easyui-combobox" style="width: 114px; height: 25px;"
-						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      				onLoadSuccess:function(data){$('#approveState').combobox('setValue',data[0].codeFlag);}" 
-	      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=CREATE_CLASS_T&codeType=OPEN_CLASS_STATE">
+						<select id="openClassState" name="openClassState" class="easyui-combobox" style="width: 114px; height: 25px;"
+							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+		      				onLoadSuccess:function(data){$('#openClassState').combobox('setValue',data[0].codeFlag);}" 
+		      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=CREATE_CLASS_T&codeType=OPEN_CLASS_STATE">
 		        		</select>
 					</td>
 					<td align="right"><span>开班审批日期：</span></td>

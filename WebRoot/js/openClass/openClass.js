@@ -128,6 +128,8 @@ $(document).ready(function() {
 	
 	//提交开班申请
 	$("#openClassSubmit").click(function() {
+		var rows = $('#list_data').datagrid("getRows"); 
+		$("#openClassNum").val(rows.length);
 		if($("#openClassFm").form('validate')) {
 			var flag = true;
 			if($("[name='teachers']").length > 0) {

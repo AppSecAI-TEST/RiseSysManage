@@ -90,7 +90,7 @@
 	   			$("#byName").textbox('setValue','${obj.byname}');
 	   			$("#phone").textbox('setValue','${obj.phone}');
 	   			$('#post').combobox({
-					 url:"/sys/pubData/qryPostList.do",
+					 url:"/sys/pubData/qryPostList.do?postType=T",
 					 formatter:formatPost, 
 					 valueField: 'postId', 
 					 textField: 'postName', 
