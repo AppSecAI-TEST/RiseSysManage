@@ -428,4 +428,9 @@ var newCourse;//新招课程阶段
 		}
 	}
 	
+	function showMsg(msg)
+	{
+		showMessage('提示',msg, null);
+	}
+	
 	</script>

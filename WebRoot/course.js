@@ -7,17 +7,17 @@ $(document).ready(function()
 		 	 $("#td1").css('display','none');
              $("#td2").css('display','none');
              $("#td3").css('display','none');
-       		if(n=='COUPON')//åˆ¸ç±»
+       		if(n=='COUPON')//È¯Àà
        		{
 			    var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift_Type\",parentType:\""+n+"\"}";
 	       		$("#giftType").combobox(
 	       		{
-	        		url : urls,//è¿”å›jsonæ•°æ®çš„url
+	        		url : urls,//·µ»ØjsonÊı¾İµÄurl
 	        		valueField : "giftType",
 	        		textField :  "typeName",
 	        		panelHeight : "auto",
 	        		onLoadSuccess : function ()
-	        		{ //æ•°æ®åŠ è½½å®Œæ¯•äº‹ä»¶
+	        		{ //Êı¾İ¼ÓÔØÍê±ÏÊÂ¼ş
 	                    var data = $('#giftType').combobox('getData');
 	                    if (data.length > 0)
 	                    {
@@ -29,18 +29,18 @@ $(document).ready(function()
 	                    $("#td3").css('display','block');
 	                }
 	        	});
-       		}else if(n=='GOODS')//å®ç‰©ç±»
+       		}else if(n=='GOODS')//ÊµÎïÀà
        		{
        			$("#td1").css('display','block');
 			    var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}";
 	       		$("#giftId").combobox(
 	       		{
-	        		url : urls,//è¿”å›jsonæ•°æ®çš„url
+	        		url : urls,//·µ»ØjsonÊı¾İµÄurl
 	        		valueField : "giftId",
 	        		textField :  "giftName",
 	        		panelHeight : "auto",
 	        		onLoadSuccess : function ()
-	        		{ //æ•°æ®åŠ è½½å®Œæ¯•äº‹ä»¶
+	        		{ //Êı¾İ¼ÓÔØÍê±ÏÊÂ¼ş
 	                    var data = $('#giftId').combobox('getData');
 	                    if (data.length > 0)
 	                    {
@@ -58,12 +58,12 @@ $(document).ready(function()
        		 var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}";
        		 $("#giftId").combobox(
        			 {
-        		url : urls,//è¿”å›jsonæ•°æ®çš„url
+        		url : urls,//·µ»ØjsonÊı¾İµÄurl
         		valueField : "giftId",
         		textField : "giftName",
         		panelHeight : "auto",
         		onLoadSuccess : function ()
-        		{ //æ•°æ®åŠ è½½å®Œæ¯•äº‹ä»¶
+        		{ //Êı¾İ¼ÓÔØÍê±ÏÊÂ¼ş
                     var data = $('#giftId').combobox('getData');
                     if (data.length > 0)
                     {
@@ -80,12 +80,12 @@ $(document).ready(function()
        		 var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}";
        		 $("#giftCourseId").combobox(
        		 {
-        		url : urls,//è¿”å›jsonæ•°æ®çš„url
+        		url : urls,//·µ»ØjsonÊı¾İµÄurl
         		valueField : "giftId",
         		textField : "giftName",
         		panelHeight : "auto",
         		onLoadSuccess : function ()
-        		{ //æ•°æ®åŠ è½½å®Œæ¯•äº‹ä»¶
+        		{ //Êı¾İ¼ÓÔØÍê±ÏÊÂ¼ş
                     var data = $('#couponType').combobox('getData');
                     if (data.length > 0)
                     {
@@ -115,7 +115,7 @@ $(document).ready(function()
 		}
 	});
 	
-	//é€‰æ‹©é˜¶æ®µä»·åŠ è½½ç­çº§
+	//Ñ¡Ôñ½×¶Î¼Û¼ÓÔØ°à¼¶
 	$('#stageId').combobox(
 	{    
        onChange : function(n, o)
@@ -127,7 +127,7 @@ $(document).ready(function()
 				$("#stageId").combobox('setText',"");
 				$("#classType").combobox('setText',"");
 				$("#totalAmount").textbox('setValue', '');
-				$.messager.alert('æç¤º', "è¯·é€‰æ‹©ç¼´è´¹æ—¶é—´");	
+				$.messager.alert('ÌáÊ¾', "ÇëÑ¡Ôñ½É·ÑÊ±¼ä");	
 				return;
 			}
 			
@@ -146,12 +146,12 @@ $(document).ready(function()
        		var url = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\",schoolId:\""+ schoolId+ "\"}";
        	 	$("#classType").combobox(
        	 	{
-        		url : url,//è¿”å›jsonæ•°æ®çš„url
+        		url : url,//·µ»ØjsonÊı¾İµÄurl
         		valueField : "classType",
         		textField : "classType",
         		panelHeight : "auto",
         		onLoadSuccess : function ()
-        		{ //æ•°æ®åŠ è½½å®Œæ¯•äº‹ä»¶
+        		{ //Êı¾İ¼ÓÔØÍê±ÏÊÂ¼ş
                     var data = $('#classType').combobox('getData');
                     var flag=false; 
                     if (data.length > 0)
@@ -212,7 +212,7 @@ function closeDlg()
 	
 	
 	
-//ç‚¹å‡»å–æ¶ˆæŠµæ‰£åˆ¸ï¼Œå‡å»æ€»çš„ä¼˜æƒ é‡‘é¢
+//µã»÷È¡ÏûµÖ¿ÛÈ¯£¬¼õÈ¥×ÜµÄÓÅ»İ½ğ¶î
 function colDis(id)
 {
 	var idT="#useCoupon"+id+"";
@@ -241,11 +241,11 @@ function addArchives()
 	var totalAmount=$("#totalAmount").textbox('getValue');
 	if(totalAmount=='')
 	{
-		$.messager.alert('æç¤º', "è¯·é€‰æ‹©é˜¶æ®µ!");
+		$.messager.alert('ÌáÊ¾', "ÇëÑ¡Ôñ½×¶Î!");
 		return;
 	}
 	$("#frame").attr('src',"/sys/course/useCoupon.jsp?studentId=2");
-	$('#dlg').dialog('open').dialog('setTitle', 'ä½¿ç”¨æŠµæ‰£åˆ¸');
+	$('#dlg').dialog('open').dialog('setTitle', 'Ê¹ÓÃµÖ¿ÛÈ¯');
 }
 	
 	

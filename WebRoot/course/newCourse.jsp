@@ -22,7 +22,7 @@
 		<%@ include file="../common/head.jsp"%>
 		<%@ include file="../common/formvalidator.jsp"%>
 		<script type="text/javascript" src="<%=path %>/pub/js/date.js"></script>
-		<script type="text/javascript" src="<%=path %>/js/course/addCourse.js"></script>
+		 <script type="text/javascript" src="<%=path %>/js/course/addCourse.js"></script>
 		<script type="text/javascript">
 		$(document).ready(function()
 		{
@@ -820,7 +820,7 @@ $("#submitBtn").click(function()
 {
 	if($("#payDate").datebox("getValue")=="")
 	{
-		showMessage("提示","请选择缴费时间",null);
+		parent.window.showMsg("请选择缴费时间");
 		return false;
 	}
 	
@@ -841,14 +841,14 @@ $("#submitBtn").click(function()
 				{
 					if(Number(stageOrder)<=Number(order))
 					{
-						showMessage("提示","当前所报新招阶段"+stageId+"低于或同于在读阶段"+stageName+",请重新选择阶段",null);
+						parent.window.showMsg("当前所报新招阶段"+stageId+"低于或同于在读阶段"+stageName+",请重新选择阶段");
 						return;
 					}
 				}else if(feeType=='002'|| feeType=='003')
 				{
 					if(Number(stageOrder)<Number(order))
 					{
-						showMessage("提示","当前所报复读或升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段",null);
+						parent.window.showMsg("当前所报复读或升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段");
 						return;
 					}
 				}
@@ -862,7 +862,220 @@ $("#backBtn").click(function() {
 	window.location.href = "addCourseList.jsp"
 });
 
- 
+ //增加赠品
+$("#addGiftBtn").click(function ()
+{
+		var giftModelTR=$("#giftModelTR").clone();
+		var flag=true;
+		var giftTR=$("#addGift").clone();
+		giftTR.css("display",'table-row');
+		giftTR.attr("val","gift");
+		giftTR.find("td").each(function(n,node)
+		{
+			var parentType=$("#parentType").combobox('getValue');
+			var giftEffDate=$("#giftEffDate").textbox('getValue');
+			if(n==1)//赠品类型;	
+			{
+				var name=$("#parentType").combobox('getText');
+				if(name=='')
+				{
+					parent.window.showMsg("请选择赠品类型");
+					flag=false;
+					return false;
+				}
+				$(node).html("<span>"+name+"</span>");	
+				$(node).attr("parentType",parentType);
+			}else if(n==3)//赠品名称;劵类ID
+			{
+				var giftId=$("#giftId").combobox('getValue');
+				var giftName=$("#giftId").combobox('getText');
+			 
+				var giftType=$("#giftType").combobox("getText");
+				var giftTypeVal=$("#giftType").combobox('getValue');
+				
+				var code=$("#giftCode").textbox('getValue');
+				
+				//判断是否是券类
+				if(giftId=='')
+				{
+					parent.window.showMsg("请选择赠品名称");
+					flag=false;
+					return false;
+				}
+				
+				//判断是否是券类
+				if(parentType=='COUPON' && code=='')
+				{
+					parent.window.showMsg("请输入券类编码");
+					flag=false;
+					return false;
+				}
+			
+				if(''!=code)
+				{
+						$(node).html("<span>"+giftType+"  "+giftName+"   "+ code +"   "+giftEffDate+"</span>");	
+				}else
+				{
+					$(node).html("<span>"+giftName+"</span>");	
+				}
+				
+				var datas = $('#giftType').combobox('getData');
+				 
+				for(var m=0;m<datas.length;m++)
+				{
+					if(giftTypeVal==datas[m].giftType)
+					{
+						 $(node).attr("effNum",datas[m].effNum);
+						 $(node).attr("unit",datas[m].unit);
+					}
+				}
+				
+				var amount=""; 
+				var data = $('#giftId').combobox('getData');
+                if (data.length > 0)
+                {
+                    for(var i=0;i<data.length;i++)
+                    {
+                    	var giftIdT=data[i].giftId;
+                    	if(giftIdT==giftId)
+                    	{
+                    		giftTypeVal=data[i].giftType;
+                    		amount=data[i].amount;
+                    	}
+                    }
+                }
+				 
+				$(node).attr("giftName",giftName);
+				$(node).attr("amount",amount);
+				$(node).attr("giftId",giftId);
+				$(node).attr("giftType",giftTypeVal);
+				$(node).attr("giftCode",code);
+				$(node).attr("effDate",giftEffDate);
+				
+			}else if(n==5)
+			{
+				var getFlag = $("input[name='isGetY']:checked").val(); //是否领取
+				$(node).attr("isGet","N");
+				if('Y'==getFlag)
+				{
+					if(giftEffDate=='' &&　parentType=='COUPON')
+					{
+						flag=false;
+						parent.window.showMsg("请填写有效期");
+						return false;
+					}
+					$(node).html("<span>已领取</span>");	
+					$(node).attr("isGet","Y");
+				}else if('N'==getFlag)
+				{
+					$(node).html("<span>未领取</span>");	
+					$(node).attr("isGet","N");
+				}
+				else
+				{
+					 parent.window.showMsg("请选择已领或者未领");
+					  flag=false;
+					  return false;
+				}
+			}else if(n==7)
+			{
+				var granter=$("#granter").textbox("getValue");
+				if(''==granter)
+				{
+					  parent.window.showMsg("发放人为空");
+					  flag=false;
+					  return false;
+				}
+				$(node).html("<span>"+granter+"</span>");	
+				$(node).attr("granter",granter);
+			} 
+			
+		});
+	
+		if(flag)
+		{
+			$("#giftFm").form('clear');
+			$("#addGift").after(giftTR);
+			var height = $(document).height();
+			var frameName=$("#frameName").val();
+			$(frameName,parent.document).css("height",height);
+			clearData("giftModelTR");
+			$("input[name='isGetY'][value='Y']").attr("checked", "checked");
+	    }
+		
+	
+	
+	});
+
+//增加课程
+$("#addCourse").click(function()
+{
+	var objectTr = $("#add").clone();//克隆模板
+		objectTr.css("display", 'table-row');
+		objectTr.attr("val", "course");
+		var flag=true;
+		objectTr.find("td").each(function(i, node) {
+			var effDate = "";
+			if (i == 0) {
+				$(node).html("<span>" + (i ++) + "</span>");
+				
+			} else if (i == 1) {
+				var name = $("#giftCourseType").combobox('getText');
+				var val = $("#giftCourseType").combobox('getValue');
+
+				var datas = $('#giftCourseType').combobox('getData');
+
+				for ( var m = 0; m < datas.length; m++) 
+				{
+					if (val == datas[m].giftType) {
+						$(node).attr("effNum", datas[m].effNum);
+						$(node).attr("unit", datas[m].unit);
+					}
+				}
+				if(name=='')
+				{
+					parent.window.showMsg("请选择赠课类型");
+					flag=false;
+					return false;
+				}
+				$(node).html("<span>" + name + "</span>");
+				$(node).attr("giftCourseType", val);//赠课类型	
+			} else if (i == 2) {
+				var name = $("#giftCourseId").combobox('getText');
+				var val = $("#giftCourseId").combobox('getValue');
+				$(node).html("<span>" + name + "</span>");
+				$(node).attr("giftId", val);//赠课细类	
+				if(name=='')
+				{
+					parent.window.showMsg("请选择赠课名称");
+					flag=false;
+					return false;
+				}
+				
+			} else if (i == 3) {
+				var hours = $("#courseHours").html();
+				$(node).html("<span>" + hours + "</span>");
+				$(node).attr("hours", hours);//课时
+			} else if (i == 4) {
+				$(node).html("<span>" + sysDate() + "</span>");
+			} else if (i == 5) {
+				$(node).html("<span>未使用</span>");
+			} else if (i == 6) {
+				$(node).html("<span>" + afterDate(1) + "</span>");
+			} else if (i == 7) {
+				$(node).html("<span>" + afterYear(1) + "</span>");
+			}
+		});
+		if(flag==true)
+		{
+			$("#add").after(objectTr);
+			clearData("giftCourseTr");
+			$("#courseHours").html("");
+		}
+			
+		
+	});
+
 
 	//创建单报提交数据
 	function build()
@@ -1228,7 +1441,7 @@ $("#backBtn").click(function() {
 				{
 					if($("#activeId").combobox("getValue")=="")
 					{
-						$.messager.alert('提示', "请选择一个活动!");
+						parent.window.showMsg("请选择一个活动!");
 					}
 					else
 					{
@@ -1240,7 +1453,7 @@ $("#backBtn").click(function() {
 				{
 					if($("#c_adviserA").combobox("getValue")==""&&$("#c_adviserB").combobox("getValue")=="")
 					{
-						$.messager.alert('提示', "请至少选择一个顾问!");
+						parent.window.showMsg("请至少选择一个顾问!");
 						return false;
 					}
 					else
@@ -1255,7 +1468,7 @@ $("#backBtn").click(function() {
 				{
 					if($("#c_teacherA").combobox("getValue")==""&&$("#c_teacherB").combobox("getValue")=="")
 					{
-						$.messager.alert('提示', "请至少选择一个顾问!");
+						parent.window.showMsg("请至少选择一个顾问!");
 						return false;
 					}
 					else
@@ -1281,7 +1494,7 @@ $("#backBtn").click(function() {
 					var tr1=$("#praiseTab2").find("tr:eq(0)");
 					if(tr1.attr("studentId")==null)
 					{
-						$.messager.alert('提示', "请选择一个学员!");
+						parent.window.showMsg("请选择一个学员!");
 						return false;
 					}
 					else
@@ -1307,7 +1520,7 @@ $("#backBtn").click(function() {
 					}
 					else
 					{
-						$.messager.alert('提示', "请填写员工姓名 !");
+						parent.window.showMsg("请填写员工姓名 !");
 						return false;
 					}	
 				}	
