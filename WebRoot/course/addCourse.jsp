@@ -226,9 +226,9 @@
       	            </td>
 	      	        <td width="7%" align="right"><span>是否领用：</span></td>
 	      	        <td width="6%" align="left">
-	      	          <input type="radio" name="isGetY" id="isGetY" value="Y">
+	      	          <input type="radio" name="isGetY"  value="Y">
 	      	          <label for="radio"><span>已领用</span></label>
-	      	          <input type="radio" name="isGetN" id="isGetN" value="N">
+	      	          <input type="radio" name="isGetY" checked   value="N">
 	      	          <label for="radio"> <span>未领用</span></label>
       	           </td>
 	      	        <td width="6%" align="right"><span>发放人：</span></td>
@@ -916,58 +916,7 @@ var favorAmount = 0;//优惠金额
 var totalAmount = 0;//课程金额
 var amount = 0;//实缴金额
 
-//增加课程
-$("#addCourse").click(function() {
-	var objectTr = $("#add").clone();//克隆模板
-		objectTr.css("display", 'table-row');
-		objectTr.attr("val", "course");
-		objectTr.find("td").each(function(i, node) {
-			var effDate = "";
-			if (i == 0) {
-				$(node).html("<span>" + (i + 1) + "</span>");
-			} else if (i == 1) {
-				var name = $("#giftCourseType").combobox('getText');
-				var val = $("#giftCourseType").combobox('getValue');
 
-				var datas = $('#giftCourseType').combobox('getData');
-
-				for ( var m = 0; m < datas.length; m++) {
-					if (val == datas[m].giftType) {
-						$(node).attr("effNum", datas[m].effNum);
-						$(node).attr("unit", datas[m].unit);
-					}
-				}
-
-				$(node).html("<span>" + name + "</span>");
-				$(node).attr("giftCourseType", val);//赠课类型	
-			} else if (i == 2) {
-				var name = $("#giftCourseId").combobox('getText');
-				var val = $("#giftCourseId").combobox('getValue');
-				$(node).html("<span>" + name + "</span>");
-				$(node).attr("giftId", val);//赠课细类	
-			} else if (i == 3) {
-				var hours = $("#courseHours").html();
-				$(node).html("<span>" + hours + "</span>");
-				$(node).attr("hours", hours);//课时
-			} else if (i == 4) {
-				$(node).html("<span>" + sysDate() + "</span>");
-			} else if (i == 5) {
-				$(node).html("<span>未使用</span>");
-			} else if (i == 6) {
-				$(node).html("<span>" + afterDate(1) + "</span>");
-			} else if (i == 7) {
-				$(node).html("<span>" + afterYear(1) + "</span>");
-			}
-		});
-		$("#add").after(objectTr);
-		clearData("giftCourseTr");
-		$("#courseHours").html("");
-	});
-
-//删除相对应的行  
-function delRow(rows) {
-	$(rows).parent("td").parent("tr").remove();
-}
 
 //提交
 $("#submitBtn").click(function() 
@@ -1011,128 +960,12 @@ $("#submitBtn").click(function()
 	addCourseInfo();
 });
 
-$("#backBtn").click(function() {
+$("#backBtn").click(function()
+{
 	window.location.href = "addCourseList.jsp"
 });
 
-//增加赠品
-$("#addGiftBtn").click(function ()
-	{
-		var giftModelTR=$("#giftModelTR").clone();
-		var flag=true;
-		var giftTR=$("#addGift").clone();
-		giftTR.css("display",'table-row');
-		giftTR.attr("val","gift");
-		giftTR.find("td").each(function(n,node)
-		{
-			var parentType=$("#parentType").combobox('getValue');
-			var giftEffDate=$("#giftEffDate").textbox('getValue');
-			if(n==1)//赠品类型;	
-			{
-				var name=$("#parentType").combobox('getText');
-				$(node).html("<span>"+name+"</span>");	
-				$(node).attr("parentType",parentType);
-			}else if(n==3)//赠品名称;劵类ID
-			{
-				var giftId=$("#giftId").combobox('getValue');
-				var giftName=$("#giftId").combobox('getText');
-			 
-				var giftType=$("#giftType").combobox("getText");
-				var giftTypeVal=$("#giftType").combobox('getValue');
-				
-				var code=$("#giftCode").textbox('getValue');
-				
-				//判断是否是券类
-				if(parentType=='COUPON' && code=='')
-				{
-					$.messager.alert('提示', "请输入券类编码!");
-					flag=false;
-					return;
-				}
-			
-				if(''!=code)
-				{
-						$(node).html("<span>"+giftType+"  "+giftName+"   "+ code +"   "+giftEffDate+"</span>");	
-				}else
-				{
-					$(node).html("<span>"+giftName+"</span>");	
-				}
-				
-				var datas = $('#giftType').combobox('getData');
-				 
-				for(var m=0;m<datas.length;m++)
-				{
-					if(giftTypeVal==datas[m].giftType)
-					{
-						 $(node).attr("effNum",datas[m].effNum);
-						 $(node).attr("unit",datas[m].unit);
-					}
-				}
-				
-				var amount=""; 
-				var data = $('#giftId').combobox('getData');
-                if (data.length > 0)
-                {
-                    for(var i=0;i<data.length;i++)
-                    {
-                    	var giftIdT=data[i].giftId;
-                    	if(giftIdT==giftId)
-                    	{
-                    		giftTypeVal=data[i].giftType;
-                    		amount=data[i].amount;
-                    	}
-                    }
-                }
-				 
-				$(node).attr("giftName",giftName);
-				$(node).attr("amount",amount);
-				$(node).attr("giftId",giftId);
-				$(node).attr("giftType",giftTypeVal);
-				$(node).attr("giftCode",code);
-				$(node).attr("effDate",giftEffDate);
-				
-			}else if(n==5)
-			{
-				var getFlag = $("input[name='isGetY']:checked").val(); //是否领取
-				var getFlagN =$("input[name='isGetN']:checked").val(); 
-				$(node).attr("isGet","N");
-				if('Y'==getFlag)
-				{
-					if(giftEffDate=='' &&　parentType=='COUPON')
-					{
-						flag=false;
-						$.messager.alert('提示', "请填写有效期!");
-					}
-					$(node).html("<span>已领取</span>");	
-					$(node).attr("isGet","Y");
-				}else if('N'==getFlagN)
-				{
-					$(node).html("<span>未领取</span>");	
-					$(node).attr("isGet","N");
-				}
-				else
-				{
-					 
-				}
-			}else if(n==7)
-			{
-				var granter=$("#granter").textbox("getValue");
-				$(node).html("<span>"+granter+"</span>");	
-				$(node).attr("granter",granter);
-			} 
-			
-		});
-	
-		if(flag)
-		{
-			$("#giftFm").form('clear');
-			$("#addGift").after(giftTR);
-			var height = $(document).height();
-			var frameName=$("#frameName").val();
-			$(frameName,parent.document).css("height",height);
-	    }
-		clearData("giftModelTR")
-	});
+
 
 	//创建单报提交数据
 	function build()
