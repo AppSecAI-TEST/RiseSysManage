@@ -5,11 +5,14 @@
 	String phone = request.getParameter("phone");
 	String byName = request.getParameter("byName");
 	String applyId = request.getParameter("applyId");
+	String isFinish = request.getParameter("isFinish");
 	String studentId = request.getParameter("studentId");
 	String approveDate = request.getParameter("approveDate");
 	String approveName = request.getParameter("approveName");
+	String outClassId = request.getParameter("outClassId");
 	String outClassName = request.getParameter("outClassName");
 	String inSchoolName = request.getParameter("inSchoolName");
+	String outSchoolId = request.getParameter("outSchoolId");
 	String outSchoolName = request.getParameter("outSchoolName");
 	String approveRemark = request.getParameter("approveRemark");
 	String studentCourseId = request.getParameter("studentCourseId");
@@ -27,7 +30,10 @@
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="转校转出">
   			<form id="changeOutSchoolFm">
   				<input type="hidden" id="applyId" name="applyId" value="<%=applyId %>"/>
+  				<input type="hidden" id="isFinish" name="isFinish" value="<%=isFinish %>"/>
   				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
+  				<input type="hidden" id="outClassId" name="outClassId" value="<%=outClassId %>"/>
+  				<input type="hidden" id="outSchoolId" name="outSchoolId" value="<%=outSchoolId %>"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   				<input type="hidden" id="studentCourseId" name="studentCourseId" value="<%=studentCourseId %>"/>
   				<table width="100%" cellpadding="5px" class="maintable">
@@ -58,7 +64,7 @@
   					<tr>
   						<td align="right" width="10%"><span>备注：</span></td>
 	  					<td width="90%" colspan="5">
-		  					<textarea rows="6" cols="122" id="remark" name="remark" required="true" class="easyui-validatebox textbox"></textarea>
+		  					<textarea rows="6" cols="122" id="remark" name="remark" class="easyui-validatebox textbox"></textarea>
 		  				</td>
   					</tr>
   					<tr>

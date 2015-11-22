@@ -102,7 +102,7 @@ $(document).ready(function() {
 				async: false,
 				beforeSend: function()
 				{
-					$.messager.progress({title : '转入班级', msg : '正在转出转入，请稍等……'});
+					$.messager.progress({title : '转入班级', msg : '正在转入班级，请稍等……'});
 				},
 				success: function (data) {
 					$.messager.progress('close'); 

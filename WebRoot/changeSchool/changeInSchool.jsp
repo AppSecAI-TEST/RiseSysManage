@@ -68,7 +68,7 @@
   							<select id="beginClassInstId" name="beginClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"></select>
   						</td>
   					</tr>
-  					<tr>
+  					<tr style="display: none;" id="inClassTr">
   						<td colspan="6">
   							<table width="100%" cellpadding="5px" id="inClassTb" class="maintable">
 			  					<tr>

@@ -41,7 +41,7 @@
   					<tr>
   						<td align="right" width="12%"><span>开课时间：</span></td>
   						<td width="10%">
-	  						<input name="startDate" id="startDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;"/>
+	  						<input name="startDate" id="startDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;" editable="false"/>
   						</td>
   						<td align="right" width="12%"><span>学员来源类型：</span></td>
   						<td width="10%">
@@ -91,9 +91,9 @@
   						<td align="right" width="8%"><span>教室：</span></td>
   						<td width="6%">
   							<select id="roomId" class="easyui-combobox" style="width: 80px; height: 28px;"
-		      				data-options="formatter:formatRoom, valueField: 'roomId', textField: 'roomName', panelHeight: 'auto',
-		      				onLoadSuccess:function(data){$('#roomId').combobox('setValue',data[0].roomId);}" 
-		      				url="<%=path %>/pubData/qryRoomList.do?schoolId=${sessionScope.StaffT.schoolId}">
+		      					data-options="formatter:formatRoom, valueField: 'roomId', textField: 'roomName', panelHeight: 'auto',
+		      					onLoadSuccess:function(data){$('#roomId').combobox('setValue',data[0].roomId);}" 
+		      					url="<%=path %>/pubData/qryRoomList.do?schoolId=${sessionScope.StaffT.schoolId}" editable="false">
 	        				</select>
   						</td>
   						<td colspan="2" align="center" width="42%">

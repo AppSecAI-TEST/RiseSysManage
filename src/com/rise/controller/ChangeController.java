@@ -186,4 +186,30 @@ public class ChangeController
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/changeOutSchool.do")
+	public void changeOutSchool(String param, HttpServletResponse response)
+	{
+		log.error(param);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = changeService.changeOutSchool(param);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }

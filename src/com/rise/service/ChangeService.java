@@ -42,4 +42,10 @@ public class ChangeService
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0066\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
+
+	public String changeOutSchool(String param) throws Exception  
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0067\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
 }

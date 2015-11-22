@@ -51,12 +51,21 @@ $(document).ready(function() {
 				var studentId = row.studentId;
 				var approveDate = row.approveDate;
 				var approveName = row.approveName;
+				var outClassId = row.outClassId;
 				var outClassName = row.outClassName;
 				var inSchoolName = row.inSchoolName;
+				var outSchoolId = row.outSchoolId;
 				var outSchoolName = row.outSchoolName;
 				var approveRemark = row.approveRemark;
 				var studentCourseId = row.studentCourseId;
-				window.location.href = "/sys/changeSchool/changeOutSchool.jsp?applyId="+applyId+"&studentId="+studentId+"&studentCourseId="+studentCourseId+"&name="+name+"&phone="+phone+"&byName="+byName+"&approveDate="+approveDate+"&approveName="+approveName+"&outClassName="+outClassName+"&inSchoolName="+inSchoolName+"&outSchoolName="+outSchoolName+"&approveRemark="+approveRemark;
+				var isFinish = "N";
+				var higherStageId = row.higherStageId;
+				var oldCourseState = row.oldCourseState;
+				if((higherStageId == "" || higherStageId == null || higherStageId == undefined)
+						&& (oldCourseState != "" && oldCourseState != null && oldCourseState != undefined && oldCourseState == "009")) {
+					isFinish = "Y";
+				}
+				window.location.href = "/sys/changeSchool/changeOutSchool.jsp?applyId="+applyId+"&studentId="+studentId+"&studentCourseId="+studentCourseId+"&name="+name+"&phone="+phone+"&byName="+byName+"&approveDate="+approveDate+"&approveName="+approveName+"&outClassName="+outClassName+"&inSchoolName="+inSchoolName+"&outSchoolName="+outSchoolName+"&approveRemark="+approveRemark+"&isFinish="+isFinish+"&outSchoolId="+outSchoolId+"&outClassId="+outClassId;
 			} else {
 				var changeStateText = row.changeStateText;
 				$.messager.alert('提示', "您选择的转班申请的转班状态为"+changeStateText+"，不能转出！");

@@ -20,7 +20,10 @@
 						<span>校区：</span>
 					</td>
 					<td width="114px">
-						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false" data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto', onLoadSuccess:function(data){if(data.length > 0)$('#schoolId').combobox('setValue',data[0].schoolId);}"	url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=schoolId">
+						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false" 
+							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto', 
+							onLoadSuccess:function(data){if(data.length > 0)$('#schoolId').combobox('setValue',data[0].schoolId);}"	
+							url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=schoolId">
      					</select>
 					</td>
 					<td align="right">
@@ -50,15 +53,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td align="right">
-						<span>招生顾问：</span>
-					</td>
+					<td align="right"><span>业绩顾问：</span></td>
 					<td width="114px">
-						<select id="advisterId" name="advisterId" class="easyui-combobox" style="width: 114px; height: 25px;"
-						data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
-     						 onLoadSuccess:function(data){if(data.length > 0)$('#advisterId').combobox('setValue',data[0].staffId);}"
+						<select id="adviserId" name="adviserId" class="easyui-combobox" style="width: 114px; height: 25px;"
+							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
+     						onLoadSuccess:function(data){if(data.length > 0)$('#adviserId').combobox('setValue',data[0].staffId);}"
      						url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=advisterId">
-      						</select>
+      					</select>
 					</td>
 					<td align="right">
 						<span>责任顾问：</span>
@@ -75,9 +76,9 @@
 					</td>
 					<td width="114px">
 						<select id="carer" name="carer" class="easyui-combobox" style="width: 114px; height: 25px;"
-						data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
-   						 onLoadSuccess:function(data){if(data.length > 0)$('#carer').combobox('setValue',data[0].staffId);}"
-   						url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=carer">
+							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
+   						 	onLoadSuccess:function(data){if(data.length > 0)$('#carer').combobox('setValue',data[0].staffId);}"
+   							url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=carer">
     					</select>
 					</td>
 					<td align="right">
@@ -103,13 +104,13 @@
 						<th data-options="field:'ck',checkbox:true"></th>
 						<th data-options="field:'schoolName',width:80,align:'center'">校区</th>
 						<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
+						<th data-options="field:'name',width:80,align:'center'">英文名</th>
 						<th data-options="field:'sexVal',width:50,align:'center'">性别</th>
 						<th data-options="field:'identityId',width:200,align:'center'">证件号码</th>
 						<th data-options="field:'birthday',width:100,align:'center'">出生日期</th>
 						<th data-options="field:'phone',width:250,align:'center'">联系电话</th>
 						<th data-options="field:'createDate',width:100,align:'center'">建档时间</th>
-						<th data-options="field:'advisterNameA',width:100,align:'center'">招生顾问A</th>
-						<th data-options="field:'advisterNameB',width:100,align:'center'">招生顾问B</th>
+						<th data-options="field:'advisterName',width:100,align:'center'">招生顾问</th>
 						<th data-options="field:'dutyAdvisterName',width:100,align:'center'">责任顾问</th>
 						<th data-options="field:'carerName',width:100,align:'center'">客户关怀</th>
 						<th data-options="field:'parentsName',width:150,align:'center'">家长</th>

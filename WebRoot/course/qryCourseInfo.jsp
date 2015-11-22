@@ -13,99 +13,117 @@
   	<body>
   		<div style="padding:5px 0;">
   			<form id="qryFm">
-	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="15">
+	  			<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
 	  				<tr>
-	  					<td align="right">所属校区:</td>
+	  					<td align="right"><span>所属校区：</span></td>
 	  					<td>
-	  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;">
-	  							
-	  						</select>
-	  					</td>
-	  					<td align="right">学生姓名:</td>
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
+					      		onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
+					      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
+				        	</select>
+				        </td>
+				        <td align="right"><span>学生姓名：</span></td>
 	  					<td>
-	  						<input class="easyui-textbox"  name="studentName" id="studentName" style="width:150px;" />
+	  						<select id="studentId" name="studentId" class="easyui-combobox" style="width: 100px; height: 25px;">
+				        	</select>
 	  					</td>
-	  					<td align="right">课程状态:</td>
+	  					<td align="right"><span>责任顾问：</span></td>
 	  					<td>
-	  						<input class="easyui-combobox"  name="courseState" id="courseState" style="width:150px;" />
+	  						<select id="dutyAdviser" name="dutyAdviser" class="easyui-combobox" style="width: 100px; height: 25px;">
+				        	</select>
 	  					</td>
-	  					<td align="right">缴费时间:</td>
+	  					<td align="right"><span>联系电话：</span></td>
 	  					<td>
-	  						<input class="easyui-datebox" name="payStartTime" id="payStartTime" style="width:150px;" />
-	  						&nbsp;至:&nbsp;
-	  						<input class="easyui-datebox" name="payEndTime" id="payEndTime"  style="width:150px;" />
+	  						<input class="easyui-textbox" name="phone" id="phone" style="width:210px; height: 25px;" />
 	  					</td>
+	  					<td align="right"><span>缴费日期：</span></td>
+			  			<td width="100px">
+							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimePay" name="startTimePay" ata-options="formatter:myformatter, parser:myparser"/>
+						</td>
+						<td align="center">
+							<span>至</span>
+						</td>
+						<td width="100px">
+							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimePay" name="endTimePay" ata-options="formatter:myformatter, parser:myparser"/>
+						</td>
 	  				</tr>
 	  				<tr>
-	  					<td align="right">联系电话:</td>
+	  					<td align="right"><span>业绩顾问：</span></td>
+			  			<td width="100px">
+							<select id="adviserId" name="adviserId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+				        	</select>
+						</td>
+						<td align="right"><span>业绩类型：</span></td>
+			  			<td width="100px">
+							<select id="feeType" name="feeType" class="easyui-combobox" style="width: 100px; height: 25px;"
+								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+				      			onLoadSuccess:function(data){if(data.length > 0) $('#feeType').combobox('setValue',data[0].codeFlag);}" 
+				      			url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
+				        	</select>
+						</td>
+						<td align="right"><span>课程状态：</span></td>
 	  					<td>
-	  						<input class="easyui-textbox" name="telephone" id="telephone" style="width:150px;" />
+	  						<select id="courseState" name="courseState" class="easyui-combobox" style="width: 100px; height: 25px;"
+	  							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+				      			onLoadSuccess:function(data){if(data.length > 0) $('#courseState').combobox('setValue',data[0].codeFlag);}" 
+				      			url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_STATE">
+				        	</select>
 	  					</td>
-	  					<td align="right">证件号码:</td>
+	  					<td align="right"><span>课程类型：</span></td>
 	  					<td>
-	  						<input class="easyui-textbox" name="identityId" id="identityId" style="width:150px;" />
+	  						<select id="courseType" name="courseType" class="easyui-combobox" style="width: 100px; height: 25px;"
+								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+				      			onLoadSuccess:function(data){$('#courseType').combobox('setValue',data[0].codeFlag);}" 
+				      			url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE">
+				        	</select>
+				        	<select id="courseTypeDetail" name="courseTypeDetail" class="easyui-combobox" style="width: 100px; height: 25px;"
+								data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
+				      			onLoadSuccess:function(data){if(data.length > 0) $('#courseTypeDetail').combobox('setValue',data[0].stageId);}" 
+				      			url="<%=path %>/pubData/qryStage.do">
+		        			</select>
 	  					</td>
-	  					<td align="right">赠品信息:</td>
-	  					<td>
-	  						<input class="easyui-combobox" name="giftType" id="giftType" style="width:150px;" />
+	  					<td align="right"><span>退费时间：</span></td>
+	  					<td width="100px">
+	  						<input class="easyui-datebox" name="startTimeRefund" id="startTimeRefund" style="width:100px; height: 25px;" />
 	  					</td>
-	  					<td align="right">退费时间:</td>
-	  					<td>
-	  						<input class="easyui-datebox" name="feeBackStartTime" id="feeBackStartTime" style="width:150px;" />
-	  					&nbsp;至:&nbsp;
-	  						<input class="easyui-datebox" name="feeBackEndTime" id="feeBackEndTime" style="width:150px" />
-	  					</td>
+	  					<td align="center">
+							<span>至</span>
+						</td>
+						<td width="100px">
+							<input class="easyui-datebox" name="endTimeRefund" id="endTimeRefund" style="width:100px; height: 25px;" />
+						</td>
 	  				</tr>
 	  				<tr>
-	  					<td align="right">招生顾问:</td>
+	  					<td align="right"><span>业绩老师：</span></td>
+	  					<td width="100px" colspan="5">
+							<select id="adviserTeacherId" name="adviserTeacherId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+				        	</select>
+						</td>
+						<td align="right">口碑类型:</td>
 	  					<td>
-	  						<input class="easyui-textbox" name="recruitAdviser" id="recruitAdviser" style="width:150px;" />
-	  					</td>
-	  					<td align="right">责任顾问:</td>
-	  					<td>
-	  						<input class="easyui-textbox" name="dutyAdviser" id="dutyAdviser" style="width:150px;" />
-	  					</td>
-	  					<td align="right">赠课信息:</td>
-	  					<td>
-	  						<select class="easyui-combobox"  name="giftClassType" id="giftClassType" style="width:150px;" />
-	  						
+	  						<select class="easyui-combobox"  name="womType" id="womType" style="width:100px; height: 25px;" />
+	  						</select>
+	  						<select class="easyui-combobox"  name="womTypeDetail" id="womTypeDetail" style="width:100px; height: 25px;" />
 	  						</select>
 	  					</td>
-	  					<td align="right">结课时间:</td>
-	  					<td>
-	  						<input class="easyui-datebox" name="classOverStartTime" id="classOverStartTime" style="width:150px;" />
-	  					&nbsp;至:&nbsp;
-	  						<input class="easyui-datebox" name="classOverEndTime" id="classOverEndTime"  style="width:150px;" />
+	  					<td align="right"><span>结课时间：</span></td>
+	  					<td width="100px">
+	  						<input class="easyui-datebox" name="startTimeFinish" id="startTimeFinish" style="width:100px; height: 25px;" />
 	  					</td>
+	  					<td align="center">
+							<span>至</span>
+						</td>
+						<td width="100px">
+							<input class="easyui-datebox" name="endTimeFinish" id="endTimeFinish" style="width:100px; height: 25px;" />
+						</td>
 	  				</tr>
 	  				<tr>
-	  					<td align="right">课程类型:</td>
-	  					<td>
-	  						<select class="easyui-combobox" name="courseType" id="courseType" style="width:75px;">
-	  							
-	  						</select>
-	  						<select class="easyui-combobox"  name="courseTypeDetail" id="courseTypeDetail" style="width:75px;" />
-	  						
-	  						</select>
+	  					<td colspan="12" align="center">
+	  						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="5002">查询</a>
+							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 	  					</td>
-	  					<td align="right">口碑类型:</td>
-	  					<td>
-	  						<select class="easyui-combobox"  name="womType" id="womType" style="width:75px;" />
-	  						
-	  						</select>
-	  						<select class="easyui-combobox"  name="womTypeDetail" id="womTypeDetail" style="width:75px;" />
-	  						
-	  						</select>
-	  					</td>
-	  					<td align="right">业绩类型:</td>
-	  					<td>
-	  						<select class="easyui-combobox" name="feeType" id="feeType" style="width:150px;">
-	  							
-	  						</select>
-	  					</td>
-	  					<td colspan="2"> <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qrybt" onclick="">查询</a>
-	  					&nbsp;&nbsp; <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:150px" id="reset" onclick="">重置</a></td>	
-	  				</tr>	
+	  				</tr>
 	  			</table>
   			</form>
   			<div id="toolbar">
@@ -115,20 +133,21 @@
     			<a href="javascript:void(0)" id="courseDetail" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="">浏览</a>
   			</div>
 			<div style="padding:5px 0;">
-				<table class="easyui-datagrid" title="查询结果" style="height:450px" id="list_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true"
-				 url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=5000"
-				>
+				<table class="easyui-datagrid" title="查询结果" style="height:450px" id="list_data" toolbar="#toolbar" 
+					pagination="true" rownumbers="true" fitColumns="true" singleSelect="true"
+				 	url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=5002">
 					<thead>
 						<tr>
 							<th field="ck" checkbox="true" width="2%"></th>
 							<th field="schoolName" align="center" width="8%">所属校区</th>
 							<th field="name" align="center" width="7%">学员姓名</th>
+							<th field="byName" align="center" width="7%">英文名</th>
 							<th field="identityId" align="center" width="10%">证件号码</th>
 							<th field="feeType" align="center" width="7%">业绩类型</th>
 							<th field="classType" align="center" width="8%">班级类型</th>
 							<th field="payTime" align="center" width="8%">缴费时间</th>
-							<th field="recruitAdviserA" align="center" width="7%">招生顾问A</th>
-							<th field="recruitAdviserB" align="center" width="7%">招生顾问B</th>
+							<th field="dutyAdviser" align="center" width="7%">业绩顾问</th>
+							<th field="dutyAdviser" align="center" width="7%">业绩老师</th>
 							<th field="dutyAdviser" align="center" width="7%">责任顾问</th>
 							<th field="courseState" align="center" width="7%">课程状态</th>
 							<th field="currentClass" align="center" width="8%">当前班级</th>
