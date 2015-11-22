@@ -128,8 +128,7 @@
   			</form>
   			<div id="toolbar">
     			<a href="javascript:void(0)" id="addCourse" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加课程</a>
-    			<a href="javascript:void(0)" id="updateSingleCourse" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="">单报修改</a>
-    			<a href="javascript:void(0)" id="updateMutilpleCourse" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="">连报修改</a>
+    			<a href="javascript:void(0)" id="updateCourse" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="">修改课程</a>
     			<a href="javascript:void(0)" id="courseDetail" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="">浏览</a>
   			</div>
 			<div style="padding:5px 0;">

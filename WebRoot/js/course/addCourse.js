@@ -46,13 +46,17 @@ function validateSelect(object)
 {
 	var flag = false;
 	var obj = $("#"+object+"").datagrid('getSelections');
-	if(obj.length > 0) {
-		if(obj.length > 1) {
+	if(obj.length > 0) 
+	{
+		if(obj.length > 1) 
+		{
 			$.messager.alert('提示', "只能选择一个学员进行操作！");
-		} else {
+		} else 
+		{
 			flag = true;
 		}
-	} else {
+	} else 
+	{
 		$.messager.alert('提示', "请先选择您要操作的学员！");
 	}
 	return flag;

@@ -65,22 +65,46 @@ function qryData()
 
 function addCourse()
 {
-//	if(validateSelect("list_data"))
-//	{
-//		var row = $('#list_data').datagrid('getSelected');
-//		var studentId = row.studentId;
-//		if(studentId==null)
-//		{
-//			$.messager.alert('提示', "没有学员信息");
-//			return false;
-//		}	
-//		
-//	}
-	var studentId ="2";//临时测试用
-	window.location.href="addCourseList.jsp?studentId="+studentId;
+	window.location.href="addCourseList.jsp";
 }
 
+function getOldCourse() 
+{
+	var courses;
+	var stu = {};
+	stu.studentId = $("#studentId").val();
+	stu.queryCode = 'Qry_Student_Courses';
+	var str = JSON.stringify(stu);
+	$.ajax( {
+		url : "/sys/course/getStuCourses.do?",
+		data : "param=" + str,
+		dataType : "json",
+		async : false,
+		success : function(data)
+		{
+		 courses= data.data;//学员已有课程
+		}
+	});
+	return courses;
+}
 
+//修改课程
+function updateCourse()
+{
+	if(validateSelect("list_data"))
+	{
+		var oldCourses=getOldCourse();
+		for(var i=0;i<oldCourses.length;i++)
+		{
+			var course = oldCourses[i];
+			var order = course.stageOrder;
+			var courseState=course.courseState;
+			var stageName =course.stageId;
+			var linkId=course.linkId;
+		}
+	}
+	
+}
 function validateSelect(object)
 {
 	var flag = false;
