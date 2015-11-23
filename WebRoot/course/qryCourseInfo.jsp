@@ -57,29 +57,25 @@
 						<td align="right"><span>业绩类型：</span></td>
 			  			<td width="100px">
 							<select id="feeType" name="feeType" class="easyui-combobox" style="width: 100px; height: 25px;"
-								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-				      			onLoadSuccess:function(data){if(data.length > 0) $('#feeType').combobox('setValue',data[0].codeFlag);}" 
+								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      			url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
 				        	</select>
 						</td>
 						<td align="right"><span>课程状态：</span></td>
 	  					<td>
 	  						<select id="courseState" name="courseState" class="easyui-combobox" style="width: 100px; height: 25px;"
-	  							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-				      			onLoadSuccess:function(data){if(data.length > 0) $('#courseState').combobox('setValue',data[0].codeFlag);}" 
+	  							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      			url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_STATE">
 				        	</select>
 	  					</td>
 	  					<td align="right"><span>课程类型：</span></td>
 	  					<td>
 	  						<select id="courseType" name="courseType" class="easyui-combobox" style="width: 100px; height: 25px;"
-								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-				      			onLoadSuccess:function(data){$('#courseType').combobox('setValue',data[0].codeFlag);}" 
+								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      			url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE">
 				        	</select>
 				        	<select id="courseTypeDetail" name="courseTypeDetail" class="easyui-combobox" style="width: 100px; height: 25px;"
-								data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
-				      			onLoadSuccess:function(data){if(data.length > 0) $('#courseTypeDetail').combobox('setValue',data[0].stageId);}" 
+								data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
 				      			url="<%=path %>/pubData/qryStage.do">
 		        			</select>
 	  					</td>

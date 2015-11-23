@@ -21,24 +21,25 @@ $(document).ready(function() {
     	valueField : "codeFlag",
     	textField : "codeName",
     	panelHeight : "auto",
-    	onLoadSuccess : function () { //数据加载完毕事件
-            var data = $('#womType').combobox('getData');
-            if (data.length > 0) {
-                $("#womType").combobox('select', data[0].codeFlag);
-            }
-        },
+//    	onLoadSuccess : function () { //数据加载完毕事件
+//            var data = $('#womType').combobox('getData');
+//            if (data.length > 0) {
+//                $("#womType").combobox('select', data[0].codeFlag);
+//            }
+//        },
 		onChange : function(n, o) {
 			$("#womTypeDetail").combobox({
 				url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_WOM_T&codeType=WOM_CHANNEL_" + n,//返回json数据的url
 		    	valueField : "codeFlag",
 		    	textField : "codeName",
-		    	panelHeight : "auto",
-		    	onLoadSuccess : function () { //数据加载完毕事件
-		            var data = $('#womTypeDetail').combobox('getData');
-		            if (data.length > 0) {
-		                $("#womTypeDetail").combobox('select', data[0].codeFlag);
-		            }
-		        }
+		    	panelHeight : "auto"
+//		    		,
+//		    	onLoadSuccess : function () { //数据加载完毕事件
+//		            var data = $('#womTypeDetail').combobox('getData');
+//		            if (data.length > 0) {
+//		                $("#womTypeDetail").combobox('select', data[0].codeFlag);
+//		            }
+//		        }
 			});	
 		}
 	});	
