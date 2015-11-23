@@ -145,29 +145,39 @@ $(document).ready(function() {
 		    		classInstId = $('#notBeginClassInstId').combobox('getValue');
 		    		className = $('#notBeginClassInstId').combobox('getText');
 		    	}
-		    	obj = obj.substring(0, obj.length - 1);
-				obj += ",\"classInstId\":\""+classInstId+"\",className:\""+className+"\"}";
+		    	var inClassId = $("#inClassId").val();
+		    	if(inClassId == classInstId) {
+		    		flag = false;
+		    	} else {
+		    		obj = obj.substring(0, obj.length - 1);
+		    		obj += ",\"classInstId\":\""+classInstId+"\",className:\""+className+"\"}";
+		    	}
 			}
-			obj = encodeURI(obj);
-			$.ajax({
-				url: "/sys/change/updateChangeClass.do",
-				data: "param=" + obj,
-				dataType: "json",
-				async: false,
-				beforeSend: function()
-				{
-					$.messager.progress({title : '更改转班', msg : '正在更改转班，请稍等……'});
-				},
-				success: function (data) {
-					$.messager.progress('close'); 
-					var flag = data.flag;
-					if(flag) {
-						$.messager.alert('提示', "更改转班成功！", "info", function() {window.history.back();});
-					} else {
-						$.messager.alert('提示', data.msg);
-					}
-				} 
-			});
+			if(flag) {
+				obj = encodeURI(obj);
+				$.ajax({
+					url: "/sys/change/updateChangeClass.do",
+					data: "param=" + obj,
+					dataType: "json",
+					async: false,
+					beforeSend: function()
+					{
+						$.messager.progress({title : '更改转班', msg : '正在更改转班，请稍等……'});
+					},
+					success: function (data) {
+						$.messager.progress('close'); 
+						var flag = data.flag;
+						if(flag) {
+							$.messager.alert('提示', "更改转班成功！", "info", function() {window.history.back();});
+						} else {
+							$.messager.alert('提示', data.msg);
+						}
+					} 
+				});
+			} else {
+				var className = $("#className").html();
+				$.messager.alert('提示', "您选择的班级"+className+"是现在该学员的转入班级，请您更换一个班级！");
+			}
 		} else {
 			var className = $("#className").html();
 			$.messager.alert('提示', "您选择的"+className+"学员已经满员，不能再向该班级转入学员！");

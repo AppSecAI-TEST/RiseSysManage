@@ -7,8 +7,12 @@
 	String applyId = request.getParameter("applyId");
 	String outDate = request.getParameter("outDate");
 	String outName = request.getParameter("outName");
+	String stageId = request.getParameter("stageId");
+	String classType = request.getParameter("classType");
+	String courseType = request.getParameter("courseType");
 	String studentId = request.getParameter("studentId");
 	String inSchoolId = request.getParameter("inSchoolId");
+	String outClassId = request.getParameter("outClassId");
 	String approveDate = request.getParameter("approveDate");
 	String approveName = request.getParameter("approveName");
 	String outSchoolName = request.getParameter("outSchoolName");
@@ -27,8 +31,12 @@
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="转校转入">
   			<form id="changeInSchoolFm">
+  				<input type="hidden" id="stageId" value="<%=stageId %>"/>
+  				<input type="hidden" id="classType" value="<%=classType %>"/>
+  				<input type="hidden" id="courseType" value="<%=courseType %>"/>
   				<input type="hidden" id="applyId" name="applyId" value="<%=applyId %>"/>
   				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
+  				<input type="hidden" id="outClassId" name="outClassId" value="<%=outClassId %>"/>
   				<input type="hidden" id="inSchoolId" name="inSchoolId" value="<%=inSchoolId %>"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   				<input type="hidden" id="studentCourseId" name="studentCourseId" value="<%=studentCourseId %>"/>
@@ -94,7 +102,7 @@
   					</tr>
   					<tr>
   						<td colspan="6" align="right">
-	  						<a href="javascript:void(0)" id="changeOutSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
+	  						<a href="javascript:void(0)" id="changeInSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
 		      				&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
 		      				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	  					</td>

@@ -6,8 +6,11 @@
 	String byName = request.getParameter("byName");
 	String applyId = request.getParameter("applyId");
 	String studentId = request.getParameter("studentId"); 
+	String outClassId = request.getParameter("outClassId");
+	String courseState = request.getParameter("courseState");
 	String outClassName = request.getParameter("outClassName");
 	String outSchoolName = request.getParameter("outSchoolName");
+	String oldCourseState = request.getParameter("oldCourseState");
 	String studentCourseId = request.getParameter("studentCourseId");
 	String outClassTeacherName = request.getParameter("outClassTeacherName");
 %>
@@ -24,6 +27,12 @@
 		<div class="easyui-panel" style="min-width:1100px; width:98%;height:auto;" title="取消转校">
 			<form id="calcenChangeSchoolFm">
 				<input type="hidden" id="applyId" name="applyId" value="<%=applyId %>"/>
+				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
+				<input type="hidden" id="outClassId" name="outClassId" value="<%=outClassId %>"/>
+				<input type="hidden" id="courseState" name="courseState" value="<%=courseState %>"/>
+  				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
+				<input type="hidden" id="oldCourseState" name="oldCourseState" value="<%=oldCourseState %>"/>
+  				<input type="hidden" id="studentCourseId" name="studentCourseId" value="<%=studentCourseId %>"/>
 				<div class="easyui-panel" style="min-width:1100px; width:100%; height:auto;" title="学员信息">
 					<table width="100%" cellpadding="5px" class="maintable" id="calcenChangeSchoolTd">
 						<tr>
@@ -182,7 +191,7 @@
 		  				<tr>
 	  						<td align="right" width="10%"><span>取消转校原因：</span></td>
 		  					<td width="90%" colspan="5">
-			  					<textarea rows="6" cols="122" id="remark" name="remark" required="true" class="easyui-validatebox textbox"></textarea>
+			  					<textarea rows="6" cols="122" id="remark" name="remark" class="easyui-validatebox textbox"></textarea>
 			  				</td>
 	  					</tr>
 					</table>

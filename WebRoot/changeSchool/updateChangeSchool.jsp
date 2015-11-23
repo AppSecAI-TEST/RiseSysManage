@@ -20,15 +20,19 @@
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:98%;height:auto;" title="更改选班">
   			<form id="updateChangeSchoolFm">
-  				<input type="hidden" id="applyId" name="applyId" value="<%=applyId %>"/>
   				<input type="hidden" id="stageId"/>
   				<input type="hidden" id="classType"/>
-  				<input type="hidden" id="inClassId"/>
-  				<input type="hidden" id="inSchoolId"/>
   				<input type="hidden" id="courseType"/>
-  				<input type="hidden" id="outClassId"/>
-  				<input type="hidden" id="outSchoolId"/>
   				<input type="hidden" id="inClassIsBegin"/>
+  				<input type="hidden" id="inClassId" name="inClassId"/>
+  				<input type="hidden" id="outClassId" name="outClassId"/>
+  				<input type="hidden" id="schoolId" name="schoolId"/>
+  				<input type="hidden" id="outSchoolId" name="outSchoolId"/>
+  				<input type="hidden" id="applyId" name="applyId" value="<%=applyId %>"/>
+  				<input type="hidden" id="applyType" name="applyType" value="002"/>
+  				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
+  				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
+  				<input type="hidden" id="studentCourseId" name="studentCourseId" value="<%=studentCourseId %>"/>
   				<table width="100%" cellpadding="5px" class="maintable">
   					<tr>
 		  				<td align="right" width="15%"><span>学员姓名：</span></td>
@@ -73,9 +77,9 @@
 		  			<tr id="selectClassTr">
   						<td align="right" width="15%"><span>是否定班：</span></td>
   						<td width="15%">
-  							<input type="radio" name="isSelectClass" value="N"/>
+  							<input type="radio" name="isSelect" value="N"/>
   							<span style="display: inline-block; text-align: center;">未定班</span>
-  							<input type="radio" name="isSelectClass" value="Y"/>
+  							<input type="radio" name="isSelect" value="Y"/>
   							<span style="display: inline-block; text-align: center;">已定班</span>
   						</td>
   						<td align="right" width="15%" style="display: none;"><span>班级选择：</span></td>
@@ -88,7 +92,7 @@
   							<select id="beginClassInstId" name="beginClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"></select>
   						</td>
   					</tr>
-  					<tr>
+  					<tr style="display: none;" id="inClassTr">
   						<td colspan="6">
   							<table width="100%" cellpadding="5px" id="inClassTb" class="maintable">
 			  					<tr>

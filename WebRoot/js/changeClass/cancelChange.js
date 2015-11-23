@@ -48,19 +48,19 @@ $(document).ready(function() {
 			var obj = JSON.stringify($("#cancelChangeClassFm").serializeObject());
 			obj = encodeURI(obj);
 			$.ajax({
-				url: "/sys/change/cancelChange.do",
+				url: "/sys/change/cancelChangeSchool.do",
 				data: "param=" + obj,
 				dataType: "json",
 				async: false,
 				beforeSend: function()
 				{
-					$.messager.progress({title : '取消转班', msg : '取消转班，请稍等……'});
+					$.messager.progress({title : '取消转校', msg : '取消转校，请稍等……'});
 				},
 				success: function (data) {
 					$.messager.progress('close'); 
 					var flag = data.flag
 					if(flag) {
-						$.messager.alert('提示', "取消转班成功！", "info", function() {window.history.back();});
+						$.messager.alert('提示', "取消转校成功！", "info", function() {window.history.back();});
 					} else {
 						$.messager.alert('提示', data.msg);
 					}

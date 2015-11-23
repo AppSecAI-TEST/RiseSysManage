@@ -187,6 +187,7 @@ public class ChangeController
 		}
 	}
 	
+	//转出校区
 	@RequestMapping(value = "/changeOutSchool.do")
 	public void changeOutSchool(String param, HttpServletResponse response)
 	{
@@ -197,6 +198,60 @@ public class ChangeController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = changeService.changeOutSchool(param);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	//转入校区
+	@RequestMapping(value = "/changeInSchool.do")
+	public void changeInSchool(String param, HttpServletResponse response)
+	{
+		log.error(param);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = changeService.changeInSchool(param);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	//取消转校
+	@RequestMapping(value = "/cancelChangeSchool.do")
+	public void cancelChangeSchool(String param, HttpServletResponse response)
+	{
+		log.error(param);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = changeService.cancelChangeSchool(param);
 			log.error(retVal);
 			out.write(retVal);
 		}

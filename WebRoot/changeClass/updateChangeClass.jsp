@@ -22,9 +22,10 @@
   				<input type="hidden" id="classType"/>
   				<input type="hidden" id="inClassId"/>
   				<input type="hidden" id="courseType"/>
-  				<input type="hidden" id="outClassId"/>
   				<input type="hidden" id="inClassIsBegin"/>
+  				<input type="hidden" id="outClassId" name="outClassId"/>
   				<input type="hidden" id="applyId" value="<%=applyId %>"/>
+  				<input type="hidden" id="applyType" name="applyType" value="001"/>
   				<input type="hidden" id="studentChannelType" name="studentChannelType"/>
   				<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId %>"/>
   				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>

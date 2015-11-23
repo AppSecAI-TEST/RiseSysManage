@@ -92,14 +92,18 @@ $(document).ready(function() {
 					var applyId = row.applyId;
 					var outDate = row.outDate;
 					var outName = row.outName;
+					var stageId = row.stageId;
+					var classType = row.classType;
 					var studentId = row.studentId;
+					var courseType = row.courseType;
 					var inSchoolId = row.inSchoolId;
+					var outClassId = row.outClassId;
 					var approveDate = row.approveDate;
 					var approveName = row.approveName;
 					var outSchoolName = row.outSchoolName;
 					var approveRemark = row.approveRemark;
 					var studentCourseId = row.studentCourseId;
-					window.location.href = "/sys/changeSchool/changeInSchool.jsp?applyId="+applyId+"&studentId="+studentId+"&studentCourseId="+studentCourseId+"&name="+name+"&phone="+phone+"&byName="+byName+"&approveDate="+approveDate+"&approveName="+approveName+"&outDate="+outDate+"&outName="+outName+"&outSchoolName="+outSchoolName+"&approveRemark="+approveRemark+"&inSchoolId="+inSchoolId;
+					window.location.href = "/sys/changeSchool/changeInSchool.jsp?applyId="+applyId+"&studentId="+studentId+"&studentCourseId="+studentCourseId+"&name="+name+"&phone="+phone+"&byName="+byName+"&approveDate="+approveDate+"&approveName="+approveName+"&outDate="+outDate+"&outName="+outName+"&outSchoolName="+outSchoolName+"&approveRemark="+approveRemark+"&inSchoolId="+inSchoolId+"&outClassId="+outClassId+"&stageId="+stageId+"&classType="+classType+"&courseType="+courseType;
 				} else {
 					var changeStateText = row.changeStateText;
 					$.messager.alert('提示', "您选择的转班申请的转班状态为"+changeStateText+"，不能转入！");
@@ -121,12 +125,15 @@ $(document).ready(function() {
 				var byName = row.byName;
 				var applyId = row.applyId;
 				var studentId = row.studentId;
+				var outClassId = row.outClassId;
+				var courseState = row.courseState;
 				var outClassName = row.outClassName;
 				var outSchoolName = row.outSchoolName;
+				var oldCourseState = row.oldCourseState;
 				var studentCourseId = row.studentCourseId;
 				var outClassTeacherName = row.outClassTeacherName;
-				var url = "/sys/changeSchool/cancelChangeSchool.jsp?applyId="+applyId+"&studentId="+studentId+"&studentCourseId="+studentCourseId;
-				url += "&name="+name+"&phone="+phone+"&byName="+byName+"&outClassName="+outClassName+"&outSchoolName="+outSchoolName+"&outClassTeacherName="+outClassTeacherName;
+				var url = "/sys/changeSchool/cancelChangeSchool.jsp?applyId="+applyId+"&studentId="+studentId+"&studentCourseId="+studentCourseId+"&oldCourseState="+oldCourseState+"&outClassId="+outClassId;
+				url += "&name="+name+"&phone="+phone+"&byName="+byName+"&outClassName="+outClassName+"&outSchoolName="+outSchoolName+"&outClassTeacherName="+outClassTeacherName+"&courseState="+courseState;
 				window.location.href = url;
 			} else {
 				var changeStateText = row.changeStateText;

@@ -3,13 +3,61 @@ $(document).ready(function() {
 		var isBegin = $("input:radio[name='isBegin']:checked").val();
 		initClassInst(isBegin);
 	});
+	
+	//转入校区
+	$("#changeInSubmit").click(function() {
+		var isBegin = $("input:radio[name='isBegin']:checked").val();
+		if(isBegin != "" && isBegin != null && isBegin != undefined) {
+			var classStudentNum = $("#classStudentNum").html();
+			var studentNum = parseInt(classStudentNum.split("/")[0]) + 1;
+			var maxNum = parseInt(classStudentNum.split("/")[1]);
+			if(studentNum <= maxNum) {
+				var classInstId = "";
+				var className = "";
+				if("Y" == isBegin) {
+					classInstId = $('#beginClassInstId').combobox('getValue');
+		    		className = $('#beginClassInstId').combobox('getText');
+				} else {
+					classInstId = $('#notBeginClassInstId').combobox('getValue');
+		    		className = $('#notBeginClassInstId').combobox('getText');
+				}
+				var obj = JSON.stringify($("#changeInSchoolFm").serializeObject());
+				obj = obj.substring(0, obj.length - 1);
+				obj += ",\"classInstId\":\""+classInstId+"\",className:\""+className+"\"}";
+				obj = encodeURI(obj);
+				$.ajax({
+					url: "/sys/change/changeInSchool.do",
+					data: "param=" + obj,
+					dataType: "json",
+					async: false,
+					beforeSend: function()
+					{
+						$.messager.progress({title : '转入校区', msg : '正在转入校区，请稍等……'});
+					},
+					success: function (data) {
+						$.messager.progress('close'); 
+						var flag = data.flag;
+						if(flag) {
+							$.messager.alert('提示', "转入校区成功！", "info", function() {window.history.back();});
+						} else {
+							$.messager.alert('提示', data.msg);
+						}
+					} 
+				});
+			} else {
+				var className = $("#className").html();
+				$.messager.alert('提示', "您选择的"+className+"学员已经满员，不能再向该班级转入学员！");
+			}
+		} else {
+			$.messager.alert('提示', "请先选择您要转入的班级！");
+		}
+	});
 });
 
 function initClassInst(isBegin) {
 	var stageId = $("#stageId").val();
 	var inSchoolId = $("#inSchoolId").val();
 	var classType = $("#classType").val();
-	var inClassId = $("#inClassId").val();
 	var courseType = $("#courseType").val();
 	var inClassIsBegin = $("#inClassIsBegin").val();
 	if("Y" == isBegin) {
@@ -21,11 +69,7 @@ function initClassInst(isBegin) {
     		onLoadSuccess : function () { //数据加载完毕事件
                 var data = $('#beginClassInstId').combobox('getData');
                 if (data.length > 0) {
-                	if(isBegin == inClassIsBegin) {
-                		$("#beginClassInstId").combobox('select', inClassId);
-                	} else {
-                		$("#beginClassInstId").combobox('select', data[0].classInstId);
-                	}
+                	$("#beginClassInstId").combobox('select', data[0].classInstId);
                 }
             },
             onChange : function(n, o) {
@@ -49,7 +93,7 @@ function initClassInst(isBegin) {
             			$("#classStudentNum").html(data.classStudentNum);
             			$("#classProgress").html(data.classProgress);
             			$("#schooltimeName").html(data.schooltimeName);
-            			$("#inClassTr").css("display", "block");
+            			$("#inClassTr").css("display", "table-row");
             		}
             	});
             }
@@ -65,11 +109,7 @@ function initClassInst(isBegin) {
     		onLoadSuccess : function () { //数据加载完毕事件
                 var data = $('#notBeginClassInstId').combobox('getData');
                 if (data.length > 0) {
-                	if(isBegin == inClassIsBegin) {
-                		$("#notBeginClassInstId").combobox('select', inClassId);
-                	} else {
-                		$("#notBeginClassInstId").combobox('select', data[0].classInstId);
-                	}
+                	$("#notBeginClassInstId").combobox('select', data[0].classInstId);
                 }
             },
             onChange : function(n, o) {
@@ -95,6 +135,7 @@ function initClassInst(isBegin) {
             			$("#classStudentNum").html(data.classStudentNum);
             			$("#classProgress").html(data.classProgress);
             			$("#schooltimeName").html(data.schooltimeName);
+            			$("#inClassTr").css("display", "table-row");
             		}
             	});
             }
