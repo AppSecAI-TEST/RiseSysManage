@@ -69,11 +69,11 @@ function addCourse()
 	window.location.href="addCourseList.jsp";
 }
 
-function getOldCourse() 
+function getOldCourse(id) 
 {
 	var courses;
 	var stu = {};
-	stu.studentId = $("#studentId").val();
+	stu.studentId = id;
 	stu.queryCode = 'Qry_Student_Courses';
 	var str = JSON.stringify(stu);
 	$.ajax( {
@@ -89,23 +89,7 @@ function getOldCourse()
 	return courses;
 }
 
-//修改课程
-function updateCourse()
-{
-	if(validateSelect("list_data"))
-	{
-		var oldCourses=getOldCourse();
-		for(var i=0;i<oldCourses.length;i++)
-		{
-			var course = oldCourses[i];
-			var order = course.stageOrder;
-			var courseState=course.courseState;
-			var stageName =course.stageId;
-			var linkId=course.linkId;
-		}
-	}
-	
-}
+
 function validateSelect(object)
 {
 	var flag = false;
