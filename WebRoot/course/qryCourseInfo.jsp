@@ -142,16 +142,16 @@
 							<th field="name" align="center" width="7%">学员姓名</th>
 							<th field="byName" align="center" width="7%">英文名</th>
 							<th field="identityId" align="center" width="10%">证件号码</th>
-							<th field="feeType" align="center" width="7%">业绩类型</th>
+							<th field="feeTypeText" align="center" width="7%">业绩类型</th>
 							<th field="classType" align="center" width="8%">班级类型</th>
-							<th field="payTime" align="center" width="8%">缴费时间</th>
-							<th field="dutyAdviser" align="center" width="7%">业绩顾问</th>
-							<th field="dutyAdviser" align="center" width="7%">业绩老师</th>
-							<th field="dutyAdviser" align="center" width="7%">责任顾问</th>
-							<th field="courseState" align="center" width="7%">课程状态</th>
-							<th field="currentClass" align="center" width="8%">当前班级</th>
-							<th field="womType" align="center" width="7%">口碑类型</th>
-							<th field="telephone" align="center" width="7%">联系电话</th>
+							<th field="payDate" align="center" width="8%">缴费时间</th>
+							<th field="adviserName" align="center" width="7%">业绩顾问</th>
+							<th field="adviserTeacherName" align="center" width="7%">业绩老师</th>
+							<th field="dutyAdvisterName" align="center" width="7%">责任顾问</th>
+							<th field="courseStateText" align="center" width="7%">课程状态</th>
+							<th field="className" align="center" width="8%">当前班级</th>
+							<th field="womTypeText" align="center" width="7%">口碑类型</th>
+							<th field="phone" align="center" width="7%">联系电话</th>
 						</tr>
 					</thead>
 				</table>
