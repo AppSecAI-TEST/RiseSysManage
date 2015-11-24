@@ -155,3 +155,41 @@
   		</div>
   	</body>
 </html>
+<<script type="text/javascript">
+var linkCourses = [];
+
+$("#updateCourse").click(function()
+{
+	if(validateSelect("list_data"))
+	{
+		var row = $('#list_data').datagrid('getSelected');
+		var studentId=row.studentId;
+		var linkId=row.linkId;
+		var oldCourses=getOldCourse(studentId);
+		for(var i=0;i<oldCourses.length;i++)
+		{
+			var course = oldCourses[i];
+			var courseState=course.courseState;
+			var stageName =course.stageId;
+			var linkIdT=course.linkId;
+			if(linkId==linkIdT)
+			{
+				linkCourses.push(course);
+			}
+		}
+		if(linkCourses.length==0)
+		{
+			alert();	
+		}else
+		{
+			var studentId = row.studentId;
+	    	var schoolId = row.schoolId;
+	    	var str=JSON.stringify(row);
+	    	var studentInfo =row.name+";;"+row.byName+";;"+row.birthday+";;"+row.identityId+";;"+row.sexText;
+	    	window.location.href="updateCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&courses="+str;
+		}
+	}
+	
+}) 
+ 
+</script>

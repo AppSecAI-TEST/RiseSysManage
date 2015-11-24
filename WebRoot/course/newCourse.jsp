@@ -74,8 +74,8 @@
 							</td>
 							<td>
 								 <select name="stageId"  id="stageId"   style="width: 150px; height: 28px;" class="easyui-combobox"
-	      						data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
-	      						 onLoadSuccess:function(data){$('#stageId').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>');}"
+	      							data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
+	      						 	onLoadSuccess:function(data){$('#stageId').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>');}"
 	      						url="<%=path %>/pubData/qryStage.do"  required="true" >
 							</td>
 							
@@ -129,7 +129,7 @@
 								<select name="adviserB" class="easyui-combobox" id="adviserB" required="true"
 									style="width: 150px; height: 28px;"
 									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-									onLoadSuccess:function(data){$('#adviserB').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserB")%>');}""
+									onLoadSuccess:function(data){$('#adviserB').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserB")%>');}"
 		      						url="<%=path %>/pubData/qryTeacherList.do">
 								</select>
 								</div>
@@ -537,7 +537,7 @@
 							<span>使用现金抵扣券</span>
 						</td>
 						<td colspan="7" giftId="">
-							<div id="useCoupon">
+							<div id="useCoupon"></div>
 						</td>
 					</tr>
 					<tr>
@@ -724,32 +724,32 @@ $("#activeSchool").combobox(
 
 //选择阶段价加载班级
 $('#stageId').combobox({
-	onChange : function(n, o) 
+	onChange : function(n, o)
 	{
-		var data = $("#stageId").combobox('getData');
-		var amount;
+	var data = $("#stageId").combobox('getData');
+	var amount;
+
+	for ( var i = 0; i < data.length; i++)
+	{
+		if (n == data[i].stageId) 
+		{
+			$("#stageOrder").val(data[i].seqOrder);
+		}
+	}
 	
-		for ( var i = 0; i < data.length; i++)
-		{
-			if (n == data[i].stageId) 
-			{
-				$("#stageOrder").val(data[i].seqOrder);
-			}
-		}
-		
-		var stageType = $("#stageId").combobox('getText');
-		var payDate=$("#payDate").datebox('getValue');
-		if(payDate=='')
-		{
-			$("#stageId").combobox('setText',"");
-			$("#classType").combobox('setText',"");
-			$("#totalAmount").textbox('setValue', '');
-			$.messager.alert('提示', "请选择缴费时间");	
-			return;
-		}
-		var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\",schoolId:\""+ <%=schoolId%> + "\"}";
-		$("#classType").combobox(
-		{
+	var stageType = $("#stageId").combobox('getText');
+	var payDate=$("#payDate").datebox('getValue');
+	if(payDate=='')
+	{
+		$("#stageId").combobox('setText',"");
+		$("#classType").combobox('setText',"");
+		$("#totalAmount").textbox('setValue', '');
+		$.messager.alert('提示', "请选择缴费时间");	
+		return;
+	}
+	var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\",schoolId:\""+ <%=schoolId%> + "\"}";
+	$("#classType").combobox(
+	{
 		url : urls,//返回json数据的url
 		valueField : "classType",
 		textField : "classType",
@@ -765,8 +765,9 @@ $('#stageId').combobox({
 			}
 		}
 	});
-	}
+   }
 });
+ 
 
 $('#favorAmount').textbox( {
 	onChange : function(value) {

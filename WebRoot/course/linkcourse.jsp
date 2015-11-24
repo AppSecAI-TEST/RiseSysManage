@@ -55,9 +55,13 @@
 	      	    	<input id="schoolId"   name="schoolId" type="hidden" value="<%=schoolId%>"/>
 	      	    	<input type="hidden" id="paySchoolId" name="paySchoolId" value="<%=schoolId%>" />	
 	      	    	<input type="hidden" id="coursePriceId" name="coursePriceId" value="" />
-	      	    	 <td align="right"><span>缴费时间：</span></td>
+	      	    	
+	      	    	<td align="right"><span>缴费时间：</span></td>
+	      	      
 	      	        <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" style="width: 150px; height: 28px;" value="<%=StringUtil.getJSONObjectKeyVal(object,"payDate")%>" /></td>
+	      	       
 	      	        <td align="right"> <span>阶段：</span></td>
+	      	       
 	      	        <td>
 					 <select name="stageId"  id="stageId"   style="width: 150px; height: 28px;"
 	      						data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
@@ -65,13 +69,15 @@
 	      						url="<%=path %>/pubData/qryStage.do" required="true" >
       	            </select>
 					</td>
+					
 	      	        <td align="right"><span>班级类型：</span></td>
+	      	        
 	      	        <td> 
 	      	         <select name="classType" id="classType" class="easyui-combobox"  style="width: 150px; height: 28px;" drequired="true" >
 	      						<option value="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>"><%=StringUtil.getJSONObjectKeyVal(object,"classType")%></option>
       	           	 </select>
 	      	        </td>
-	      	       
+	      	      
       	        </tr>
 	      	      <tr>
 	      	        <td  align="right"><span>业绩类型：</span></td>
@@ -86,7 +92,7 @@
 		     				data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
 		      				onLoadSuccess:function(data){$('#teacherId').combobox('setValue',data[0].teacherId);}" 
 		      				url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}"></td>
-	      	      
+	      	       <td> </td>
       	        </tr>
       	      </table>
       	      
@@ -123,7 +129,7 @@
       	           </td>
 	      	        <td width="6%" align="right"><span>发放人：</span></td>
 	      	        <td width="8%"><input   id="granter" type="text" class="easyui-textbox validatebox" required="true" style="width: 100px; height: 28px;"/></td>
-	      	        <td width="4%"><span>是否退回</span></td>
+	      	       
 	      	        <td width="6%"><a href="javascript:void(0)" id="addGiftBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a></td>
       	        </tr>
       	      <tr style="display:none;" name="addGift" id="addGift" >
@@ -135,7 +141,7 @@
       	        <td align="left" isGet="">&nbsp;</td>
       	        <td align="right"><span>发放人：</span></td>
       	        <td align="left" granter="">&nbsp;</td>
-      	        <td>&nbsp;</td>
+      	        
       	        <td><a href='javascript:void(0)' class='linkmore' onclick='delRow(this)' ><span>删除</span></a></td>
      	       </tr>
       	      </table>
@@ -227,6 +233,51 @@
 	var totalAmount=0;//课程金额
 	var amount=0;//实缴金额
 
+	//选择阶段价加载班级
+$('#stageId').combobox({
+	onChange : function(n, o)
+	{
+	var data = $("#stageId").combobox('getData');
+	var amount;
+
+	for ( var i = 0; i < data.length; i++)
+	{
+		if (n == data[i].stageId) 
+		{
+			$("#stageOrder").val(data[i].seqOrder);
+		}
+	}
+	
+	var stageType = $("#stageid").combobox('getText');
+	var payDate=$("#payDate").datebox('getValue');
+	if(payDate=='')
+	{
+		$("#stageId").combobox('setText',"");
+		$("#classType").combobox('setText',"");
+		$("#totalAmount").textbox('setValue', '');
+		$.messager.alert('提示', "请选择缴费时间");	
+		return;
+	}
+	var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\",schoolId:\""+ <%=schoolId%> + "\"}";
+	$("#classType").combobox(
+	{
+		url : urls,//返回json数据的url
+		valueField : "classType",
+		textField : "classType",
+		panelHeight : "auto",
+		onLoadSuccess : function() { //数据加载完毕事件
+			var data = $('#classType').combobox('getData');
+			if (data.length == 1)
+			{
+				$("#classType").combobox('select',data[0].classType);
+				$("#totalAmount").textbox('setValue', data[0].amount);
+				$("#amount").textbox('setValue', data[0].amount);
+				$("#coursePriceId").val(data[0].setPriceId); 
+			}
+		}
+	});
+   }
+});
 	//增加赠品
 $("#addGiftBtn").click(function ()
 {

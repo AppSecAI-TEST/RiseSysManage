@@ -14,6 +14,46 @@ $(document).ready(function()
     });
 	
 
+	//业绩类型修改	
+$("#feeType").combobox(
+{
+	onChange : function(n, o)
+	{
+		var type=$("#feeType").combobox("getValue");
+		if(type=='001')
+		{
+			$("#womDiv").css("display","block");
+			$("#giftDiv").css("display","block");
+			$("#adviserDiv").css("display","table-row");
+			$("#adviserTeacherDiv").css("display","none");
+			$("#adviserTeacherA").combobox("setValue","");
+			$("#adviserTeacherB").combobox("setValue","");
+		}else if(type=='002')
+		{
+			$("#womDiv").css("display","none");
+			$("#giftDiv").css("display","block");
+			$("#adviserDiv").css("display","none");
+			$("#adviserTeacherDiv").css("display","table-row");
+			$("#adviserA").combobox("setValue","");
+			$("#adviserB").combobox("setValue","");
+		}else if(type=='003')
+		{
+			if(giftFlag)
+			{
+				showMessage('提示', "赠品或赠课已消耗,业绩类型不能修改为复读",null);
+				$("#feeType").combobox("setValue",o);
+				return;
+			}
+			$("#womDiv").css("display","none");
+			$("#giftDiv").css("display","none");
+			$("#adviserDiv").css("display","none");
+			$("#adviserTeacherDiv").css("display","table-row");
+			$("#adviserTeacherA").combobox("setValue","");
+			$("#adviserTeacherB").combobox("setValue","");
+		}
+	}
+	 
+});
 	
 })
  
@@ -147,12 +187,12 @@ function initCousreGift()
     	{
     		$.messager.progress('close'); 
     		 var giftTs = data.data;//学员已有课程 
-    		 
+    		
     		$.each(giftTs,function(i,gift)
     		{
     			if(gift==null)return;
 				var giftTR;
-    			if(gift.parentType=="GOODS" || gift.parentType=="COUPON")
+    			if(gift.giftType=="GOODS" || gift.parentType=="COUPON")
 				{
 			 		giftTR=$("#addGift").clone();
 			 		giftTR.css("display",'table-row');
@@ -196,21 +236,12 @@ function initCousreGift()
 							$(node).html("<span>"+gift.granter+"</span>");	
 						}else if(n==8)
 						{
-							if(gift.isRtn=='Y')
+							 if(gift.isGet=='Y')
 							{
-								$(node).html("<span>是</span>");	
-							}else
-							{
-								$(node).html("<span>否</span>");	
-							}
-						}else if(n==9)
-						{
-							if(gift.giftState!='UNSUED')//已使用不可删除
-							{
-								 $(node).html("");
-								
+								 giftFlag=true;
+								$(node).html("");	
 							} 
-						}
+						} 
 					});
 				
 					$("#addGift").after(giftTR);
@@ -244,7 +275,14 @@ function initCousreGift()
 							$(node).html("<span>"+gift.createDate+"</span>");	
 						}else if(i==5)
 						{
-							$(node).html("<span>未使用</span>");	
+							
+							 if(gift.giftState!='UNSUED')
+							{
+								$(node).html("<span>已使用</span>");	
+							}else
+							{
+								$(node).html("<span>未使用</span>");	
+							}
 						}else if(i==6)
 						{
 							$(node).html("<span>"+gift.effDate+"</span>");	
@@ -253,7 +291,11 @@ function initCousreGift()
 							$(node).html("<span>"+gift.expDate+"</span>");	
 						} else if(i==9)
 						{
-							$(node).html("");	
+							 if(gift.giftState!='UNSUED')
+							{
+								  giftFlag=true;
+								$(node).html("");	
+							} 
 						}
 					});
 					$("#add").after(objectTr);
