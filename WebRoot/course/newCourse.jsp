@@ -99,7 +99,7 @@
 							<td>
 								<select name="feeType" class="easyui-combobox" id="feeType" editable='false' required="true"
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName',
-									onLoadSuccess:function(data){$('#feeType').combobox('setValue',data[0].codeFlag)},onChange:changeFeeType"
+									onLoadSuccess:function(data){$('#feeType').combobox('setValue',data[0].codeFlag)}"
 									style="width: 150px; height: 28px;"
 									url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
 								</select>
@@ -116,10 +116,12 @@
 								</div>
 								
 								<div id="adviserTeacherADiv" style="display:none">
-									<select name="adviserTeacherA" class="easyui-combobox" id="adviserTeacherA" required="true"
-									style="width: 150px; height: 28px;"
-									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
-		      						url="<%=path %>/pubData/qryTeacherList.do?schoolId=1001">
+									<select name="adviserTeacherA" class="easyui-combobox" id="adviserTeacherA"
+								style="width: 150px; height: 28px;"
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
+								onLoadSuccess:function(data){$('#adviserTeacherA').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherA")%>');}"
+	      						url="<%=path %>/pubData/qryTeacherList.do">
+							</select>
 	      						</div>
 	      						
 							</td>
@@ -134,12 +136,14 @@
 								</select>
 								</div>
 								<div id="adviserTeacherBDiv" style="display:none">
-								<select name="adviserTeacherB" class="easyui-combobox" id="adviserTeacherB"  required="true"
+							<select name="adviserTeacherB" class="easyui-combobox" id="adviserTeacherB"
 								style="width: 150px; height: 28px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
-	      						url="<%=path %>/pubData/qryTeacherList.do?schoolId=1001">
-	      						</div>
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
+								onLoadSuccess:function(data){$('#adviserTeacherB').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherB")%>');}"
+	      						url="<%=path %>/pubData/qryTeacherList.do">
 							</select>
+	      						</div>
+							
 							</td>
 						</tr>
 					</table>
@@ -581,21 +585,6 @@
 </html>
 <script type="text/javascript">
 initCousreGift();
-
-$(function()
-{
-	$('#payDate').datebox().datebox('calendar').calendar(
-	{
-		validator: function(date)
-		{
-			var now = new Date();
-			var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate()-30);
-			var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-			return d1<=date && date<=d2;
-		}
-	});
-});
-
  
 $('#parentType').combobox({
 	 onChange:function(n,o)
@@ -756,18 +745,52 @@ $('#stageId').combobox({
 		panelHeight : "auto",
 		onLoadSuccess : function() { //数据加载完毕事件
 			var data = $('#classType').combobox('getData');
-			if (data.length == 1)
+			var classType="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>";//初始化已有值
+				 
+			for(var i=0;i<data.length;i++)
 			{
-				$("#classType").combobox('select',data[0].classType);
-				$("#totalAmount").textbox('setValue', data[0].amount);
-				$("#amount").textbox('setValue', data[0].amount);
-				$("#coursePriceId").val(data[0].setPriceId); 
+				if(classType==data[i].classType || data.length==1)
+				{
+					$("#classType").combobox('select',data[i].classType);
+					$("#totalAmount").textbox('setValue', data[i].amount);
+					minus = $("#minusAmount").textbox('getValue');
+					//favorAmount = $("#favorAmount").textbox('getValue');
+					totalAmount = $("#totalAmount").textbox('getValue');
+					amount = totalAmount - minus - favorAmount;
+					$("#amount").textbox('setValue', amount);
+					$("#coursePriceId").val(data[i].setPriceId); 
+				}
 			}
 		}
 	});
    }
 });
  
+$("#classType").combobox(
+{
+	onChange:function(n,o)
+	{
+		var data = $('#classType').combobox('getData');
+		for(var i=0;i<data.length;i++)
+		{
+			if(n==data[i].classType)
+			{
+				$("#classType").combobox('select',data[i].classType);
+			
+				$("#totalAmount").textbox('setValue', data[i].amount);
+				 
+				minus = $("#minusAmount").textbox('getValue');
+				//favorAmount = $("#favorAmount").textbox('getValue');
+				totalAmount = $("#totalAmount").textbox('getValue');
+				amount = totalAmount - minus - favorAmount;
+				$("#amount").textbox('setValue', amount);
+				$("#coursePriceId").val(data[i].setPriceId); 
+			}
+			
+		}
+	}
+
+});
 
 $('#favorAmount').textbox( {
 	onChange : function(value) {
@@ -1275,7 +1298,10 @@ $("#addCourse").click(function()
 		tr.find("td:eq(5)").find("span").html(name+"B");
 	}
 	
-	function changeFeeType()
+	
+$("#feeType").combobox(
+{
+	onChange : function(n, o)
 	{
 		var type=$("#feeType").combobox("getValue");
 		 
@@ -1299,9 +1325,20 @@ $("#addCourse").click(function()
 			$("#adviserTeacherBDiv").css("display","block");
 			$("#adviserNameA").html("<span>业绩老师A：</span>");
 			$("#adviserNameB").html("<span>业绩老师B：</span>");
+		} else if(type=='003')
+		{
+			$("#womDiv").css("display","none");
+			$("#giftDiv").css("display","block");
+			$("#adviserADiv").css("display","none");
+			$("#adviserTeacherADiv").css("display","block");
+			$("#adviserBDiv").css("display","none");
+			$("#adviserTeacherBDiv").css("display","block");
+			$("#adviserNameA").html("<span>业绩老师A：</span>");
+			$("#adviserNameB").html("<span>业绩老师B：</span>");
 		} 
 		
 	}
+});
 	
 	function changeCourseType()
 	{

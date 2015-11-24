@@ -12,51 +12,22 @@ $(document).ready(function()
 	$("#qryBtn").click(function() {
     	qry();
     });
-	
-
-	//业绩类型修改	
-$("#feeType").combobox(
-{
-	onChange : function(n, o)
-	{
-		var type=$("#feeType").combobox("getValue");
-		if(type=='001')
-		{
-			$("#womDiv").css("display","block");
-			$("#giftDiv").css("display","block");
-			$("#adviserDiv").css("display","table-row");
-			$("#adviserTeacherDiv").css("display","none");
-			$("#adviserTeacherA").combobox("setValue","");
-			$("#adviserTeacherB").combobox("setValue","");
-		}else if(type=='002')
-		{
-			$("#womDiv").css("display","none");
-			$("#giftDiv").css("display","block");
-			$("#adviserDiv").css("display","none");
-			$("#adviserTeacherDiv").css("display","table-row");
-			$("#adviserA").combobox("setValue","");
-			$("#adviserB").combobox("setValue","");
-		}else if(type=='003')
-		{
-			if(giftFlag)
-			{
-				showMessage('提示', "赠品或赠课已消耗,业绩类型不能修改为复读",null);
-				$("#feeType").combobox("setValue",o);
-				return;
-			}
-			$("#womDiv").css("display","none");
-			$("#giftDiv").css("display","none");
-			$("#adviserDiv").css("display","none");
-			$("#adviserTeacherDiv").css("display","table-row");
-			$("#adviserTeacherA").combobox("setValue","");
-			$("#adviserTeacherB").combobox("setValue","");
-		}
-	}
-	 
-});
-	
 })
- 
+
+
+$(function()
+{
+	$('#payDate').datebox().datebox('calendar').calendar(
+	{
+		validator: function(date)
+		{
+			var now = new Date();
+			var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate()-30);
+			var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+			return d1<=date && date<=d2;
+		}
+	});
+});
 
 function addSingleCourse()
 {

@@ -184,7 +184,8 @@
 						<td>
 							<select name="adviserTeacherA" class="easyui-combobox" id="adviserTeacherA"
 								style="width: 150px; height: 28px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
+								onLoadSuccess:function(data){$('#adviserTeacherA').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherA")%>');}"
 	      						url="<%=path %>/pubData/qryTeacherList.do">
 							</select>
 						</td>
@@ -194,7 +195,8 @@
 						<td>
 							<select name="adviserTeacherB" class="easyui-combobox" id="adviserTeacherB"
 								style="width: 150px; height: 28px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
+								onLoadSuccess:function(data){$('#adviserTeacherB').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherB")%>');}"
 	      						url="<%=path %>/pubData/qryTeacherList.do">
 							</select>
 						</td>
@@ -764,6 +766,47 @@ function initOldCourse()
 	}
 }
 
+	//业绩类型修改	
+$("#feeType").combobox(
+{
+	onChange : function(n, o)
+	{
+		var type=$("#feeType").combobox("getValue");
+		if(type=='001')
+		{
+			$("#womDiv").css("display","block");
+			$("#giftDiv").css("display","block");
+			$("#adviserDiv").css("display","table-row");
+			$("#adviserTeacherDiv").css("display","none");
+			$("#adviserTeacherA").combobox("setValue","");
+			$("#adviserTeacherB").combobox("setValue","");
+		}else if(type=='002')
+		{
+			$("#womDiv").css("display","none");
+			$("#giftDiv").css("display","block");
+			$("#adviserDiv").css("display","none");
+			$("#adviserTeacherDiv").css("display","table-row");
+			$("#adviserA").combobox("setValue","");
+			$("#adviserB").combobox("setValue","");
+		}else if(type=='003')
+		{
+			if(giftFlag)
+			{
+				showMessage('提示', "赠品或赠课已消耗,业绩类型不能修改为复读",null);
+				$("#feeType").combobox("setValue",o);
+				return;
+			}
+			$("#womDiv").css("display","none");
+			$("#giftDiv").css("display","none");
+			$("#adviserDiv").css("display","none");
+			$("#adviserTeacherDiv").css("display","table-row");
+			$("#adviserTeacherA").combobox("setValue","");
+			$("#adviserTeacherB").combobox("setValue","");
+		}
+	}
+	 
+});
+	
 //选择阶段价加载班级
 $('#stageId').combobox(
 {
@@ -808,9 +851,7 @@ $('#stageId').combobox(
 					if(classType==data[i].classType || data.length==1)
 					{
 						$("#classType").combobox('select',data[i].classType);
-					
 						$("#totalAmount").textbox('setValue', data[i].amount);
-						 
 						minus = $("#minusAmount").textbox('getValue');
 						//favorAmount = $("#favorAmount").textbox('getValue');
 						totalAmount = $("#totalAmount").textbox('getValue');
@@ -818,7 +859,6 @@ $('#stageId').combobox(
 						$("#amount").textbox('setValue', amount);
 						$("#coursePriceId").val(data[i].setPriceId); 
 					}
-					
 				}
 			}
 		});

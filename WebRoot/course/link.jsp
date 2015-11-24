@@ -188,6 +188,7 @@
 		    		{
 		    			var courseT= linkCourses[n];
 		    			var str=JSON.stringify(linkCourses[n]);
+		    			//alert(str);
 		    			if(n==0)
 		    			{
 		    				if(courseT.feeType=='001')

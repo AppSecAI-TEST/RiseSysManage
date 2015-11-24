@@ -6,6 +6,7 @@
 	String studentId =request.getParameter("studentId");
 	String order=request.getParameter("order");
 	String courses=request.getParameter("courses");
+	System.out.println("-------------------------------------------------------------------------------------"+courses);
 	String name=request.getParameter("name");
 	JSONObject object=new JSONObject();
 	if(courses!=null && !"".equals(courses))
@@ -69,7 +70,7 @@
 						<td align="right"><span>班级类型：</span>
 						<td>
 							<select name="classType" id="classType" class="easyui-combobox" style="width: 150px; height: 28px;" drequired="true">
-								<option value="<%=StringUtil.getJSONObjectKeyVal(object, "classType")%>"><%=StringUtil.getJSONObjectKeyVal(object, "classType")%></option>
+								
 							</select>
 						</td>
 					</tr>
@@ -78,19 +79,21 @@
 	      	       	 	<td><span>升学</span></td>
 	      	        	<td align="right"><span>业绩老师A：</span></td>
 	      	        	<td> 
-	      	        		<select name="adviserA"  class="easyui-combobox" style="width: 150px; height: 28px;"
-		     					data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-		      					onLoadSuccess:function(data){$('#teacherId').combobox('setValue',data[0].teacherId);}" 
-		      					url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}">
-		      				<select/>
+	      	        		<select name="adviserTeacherA" class="easyui-combobox" id="adviserTeacherA"
+								style="width: 150px; height: 28px;"
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
+								onLoadSuccess:function(data){$('#adviserTeacherA').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherA")%>');}"
+	      						url="<%=path %>/pubData/qryTeacherList.do">
+							</select>
 		      			</td>
 	      	        	<td align="right"><span>业绩老师B：</span></td>
 	      	        	<td> 
-	      	        		<select name="adviserB"  class="easyui-combobox" style="width: 150px; height: 28px;"
-		     					data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-		      					onLoadSuccess:function(data){$('#teacherId').combobox('setValue',data[0].teacherId);}" 
-		      					url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}">
-		      				</select>
+	      	        		<select name="adviserTeacherB" class="easyui-combobox" id="adviserTeacherB"
+								style="width: 150px; height: 28px;"
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
+								onLoadSuccess:function(data){$('#adviserTeacherB').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherB")%>');}"
+	      						url="<%=path %>/pubData/qryTeacherList.do">
+							</select>
 		      			</td>
       	        	</tr>
       	      </table>
@@ -231,6 +234,93 @@
 	var totalAmount=0;//课程金额
 	var amount=0;//实缴金额
 
+	$('#parentType').combobox({
+	 onChange:function(n,o)
+		{
+		     $("#td0").css('display','none');
+		 	 $("#td1").css('display','none');
+             $("#td2").css('display','none');
+             $("#td3").css('display','none');
+       		if(n=='COUPON')//券类
+       		{
+			    var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift_Type\",parentType:\""+n+"\"}";
+	       		$("#giftType").combobox(
+	       		{
+	        		url : urls,//返回json数据的url
+	        		valueField : "giftType",
+	        		textField :  "typeName",
+	        		panelHeight : "auto",
+	        		onLoadSuccess : function ()
+	        		{ //数据加载完毕事件
+	                    var data = $('#giftType').combobox('getData');
+	                    if (data.length > 0)
+	                    {
+	                      //  $("#giftId").combobox('select', data[0].param2);
+	                    }
+	                    $("#td0").css('display','block');
+	                    $("#td1").css('display','block');
+	                    $("#td2").css('display','block');
+	                    $("#td3").css('display','block');
+	                }
+	        	});
+       		}else if(n=='GOODS')//实物类
+       		{
+       			$("#td1").css('display','block');
+			    var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}";
+	       		$("#giftId").combobox(
+	       		{
+	        		url : urls,//返回json数据的url
+	        		valueField : "giftId",
+	        		textField :  "giftName",
+	        		panelHeight : "auto",
+	        		onLoadSuccess : function ()
+	        		{ //数据加载完毕事件
+	                    var data = $('#giftId').combobox('getData');
+	                    if (data.length > 0)
+	                    {
+	                      //  $("#giftId").combobox('select', data[0].param2);
+	                    }
+	                }
+	        	});
+       		}
+		},
+		url:"<%=path%>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE"
+	});
+	
+	$('#giftCourseType').combobox(
+{
+	onChange : function(n, o)
+	{
+		var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+ n + "\"}";
+		$("#giftCourseId").combobox(
+		{
+			url : urls,//返回json数据的url
+			valueField : "giftId",
+			textField : "giftName",
+			panelHeight : "auto"
+		});
+	}
+});
+
+$('#giftCourseId').combobox(
+{
+	onChange : function(n, o) 
+	{
+		var data = $('#giftCourseId').combobox('getData');
+		if (data.length > 0) 
+		{
+			for ( var i = 0; i < data.length; i++)
+			{
+				var giftNum = data[0].giftNum;
+				var giftId = data[0].giftId;
+				if (n == giftId) 
+				{
+					$("#courseHours").html(giftNum);
+				}
+			}
+		}
+	}
+});
 	//选择阶段价加载班级
 $('#stageId').combobox({
 	onChange : function(n, o)
@@ -246,16 +336,17 @@ $('#stageId').combobox({
 		}
 	}
 	
-	var stageType = $("#stageid").combobox('getText');
-	var payDate=$("#payDate").datebox('getValue');
+	var stageType = $("#stageId").combobox('getText');
+	var payDate=$("#payDate").datebox('getText');
 	if(payDate=='')
 	{
 		$("#stageId").combobox('setText',"");
 		$("#classType").combobox('setText',"");
 		$("#totalAmount").textbox('setValue', '');
-		$.messager.alert('提示', "请选择缴费时间");	
+		parent.window.showMsg("请选择缴费时间");	
 		return;
 	}
+	 
 	var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\",schoolId:\""+ <%=schoolId%> + "\"}";
 	$("#classType").combobox(
 	{
@@ -265,16 +356,51 @@ $('#stageId').combobox({
 		panelHeight : "auto",
 		onLoadSuccess : function() { //数据加载完毕事件
 			var data = $('#classType').combobox('getData');
-			if (data.length == 1)
+			var classType="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>";//初始化已有值
+				 
+			for(var i=0;i<data.length;i++)
 			{
-				$("#classType").combobox('select',data[0].classType);
-				$("#totalAmount").textbox('setValue', data[0].amount);
-				$("#amount").textbox('setValue', data[0].amount);
-				$("#coursePriceId").val(data[0].setPriceId); 
+				if(classType==data[i].classType || data.length==1)
+				{
+					$("#classType").combobox('select',data[i].classType);
+					$("#totalAmount").textbox('setValue', data[i].amount);
+					minus = $("#minusAmount").textbox('getValue');
+					//favorAmount = $("#favorAmount").textbox('getValue');
+					totalAmount = $("#totalAmount").textbox('getValue');
+					amount = totalAmount - minus - favorAmount;
+					$("#amount").textbox('setValue', amount);
+					$("#coursePriceId").val(data[i].setPriceId); 
+				}
 			}
 		}
 	});
    }
+});
+	
+$("#classType").combobox(
+{
+	onChange:function(n,o)
+	{
+		var data = $('#classType').combobox('getData');
+		for(var i=0;i<data.length;i++)
+		{
+			if(n==data[i].classType)
+			{
+				$("#classType").combobox('select',data[i].classType);
+			
+				$("#totalAmount").textbox('setValue', data[i].amount);
+				 
+				minus = $("#minusAmount").textbox('getValue');
+				//favorAmount = $("#favorAmount").textbox('getValue');
+				totalAmount = $("#totalAmount").textbox('getValue');
+				amount = totalAmount - minus - favorAmount;
+				$("#amount").textbox('setValue', amount);
+				$("#coursePriceId").val(data[i].setPriceId); 
+			}
+			
+		}
+	}
+
 });
 	//增加赠品
 $("#addGiftBtn").click(function ()
@@ -579,7 +705,7 @@ $("#addCourse").click(function()
 		 
 		studentCourse.course=obj;
 		studentCourse.coupon=JSON.stringify(coupons); 
-		//alert(JSON.stringify(studentCourse));
+		alert(JSON.stringify(studentCourse));
 		return studentCourse;
 	}
 		
