@@ -39,64 +39,62 @@
   	<form id="courseFm">
 	      <div style="height: 10px;"></div>
 	      <div class="easyui-panel" style="width:100%;height:auto;" title="常规课课程">
-	      
       	      <table width="100%" cellpadding="5px" class="maintable" >
 	      	      <tr>
-	      	        <input id="studentCourseId" name="studentCourseId" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"studentCourseId")%>"/>
-	      	        <input id="oldClassType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>"/>
-	      	        <input id="oldStageId"   type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>"/>
-	      	      	<input id="studentId"    name="studentId"     type="hidden" value="<%=studentId%>"/>
-	      	    	<input id="courseType"   name="courseType"    type="hidden" value="001"/>
-	      	    	<input id="advisterType" name="adviserType" type="hidden" value="teacher"/>
-	      	    	<input id="courseState" name="courseState"  type="hidden" value="001"/>
-	      	    	<input id="feeType"    name="feeType"  type="hidden" value="002"/>
-	      	    	<input id="feeState"   name="feeState" type="hidden" value="00A"/>
-	      	    	<input id="stageOrder" name="stageOrder" type="hidden" value=""/>
-	      	    	<input id="schoolId"   name="schoolId" type="hidden" value="<%=schoolId%>"/>
-	      	    	<input type="hidden" id="paySchoolId" name="paySchoolId" value="<%=schoolId%>" />	
-	      	    	<input type="hidden" id="coursePriceId" name="coursePriceId" value="" />
-	      	    	
-	      	    	<td align="right"><span>缴费时间：</span></td>
-	      	      
-	      	        <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" style="width: 150px; height: 28px;" value="<%=StringUtil.getJSONObjectKeyVal(object,"payDate")%>" /></td>
-	      	       
-	      	        <td align="right"> <span>阶段：</span></td>
-	      	       
-	      	        <td>
-					 <select name="stageId"  id="stageId"   style="width: 150px; height: 28px;"
-	      						data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
-	      						 onLoadSuccess:function(data){$('#stageId').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>');}"
-	      						url="<%=path %>/pubData/qryStage.do" required="true" >
-      	            </select>
-					</td>
-					
-	      	        <td align="right"><span>班级类型：</span></td>
-	      	        
-	      	        <td> 
-	      	         <select name="classType" id="classType" class="easyui-combobox"  style="width: 150px; height: 28px;" drequired="true" >
-	      						<option value="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>"><%=StringUtil.getJSONObjectKeyVal(object,"classType")%></option>
-      	           	 </select>
-	      	        </td>
-	      	      
-      	        </tr>
-	      	      <tr>
-	      	        <td  align="right"><span>业绩类型：</span></td>
-	      	        <td><span>升学</span></td>
-	      	        <td align="right"><span>业绩老师A：</span></td>
-	      	        <td> <select name="adviserA"  class="easyui-combobox" style="width: 150px; height: 28px;"
-		     				data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-		      				onLoadSuccess:function(data){$('#teacherId').combobox('setValue',data[0].teacherId);}" 
-		      				url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}"></td>
-	      	        <td align="right"><span>业绩老师B：</span></td>
-	      	        <td> <select name="adviserB"  class="easyui-combobox" style="width: 150px; height: 28px;"
-		     				data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-		      				onLoadSuccess:function(data){$('#teacherId').combobox('setValue',data[0].teacherId);}" 
-		      				url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}"></td>
-	      	       <td> </td>
-      	        </tr>
+						<input id="studentCourseId" name="studentCourseId" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object, "studentCourseId")%>" />
+						<input id="oldClassType" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object, "classType")%>" />
+						<input id="oldStageId" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object, "stageId")%>" />
+						<input id="studentId" name="studentId" type="hidden" value="<%=studentId%>" />
+						<input id="courseType" name="courseType" type="hidden" value="001" />
+						<input id="advisterType" name="adviserType" type="hidden" value="teacher" />
+						<input id="courseState" name="courseState" type="hidden" value="001" />
+						<input id="feeType" name="feeType" type="hidden" value="002" />
+						<input id="feeState" name="feeState" type="hidden" value="00A" />
+						<input id="stageOrder" name="stageOrder" type="hidden" value="" />
+						<input id="schoolId" name="schoolId" type="hidden" value="<%=schoolId%>" />
+						<input type="hidden" id="paySchoolId" name="paySchoolId" value="<%=schoolId%>" />
+						<input type="hidden" id="coursePriceId" name="coursePriceId" value="" />
+						<td align="right"><span>缴费时间：</span></td>
+						<td>
+							<input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" style="width: 150px; height: 28px;" value="<%=StringUtil.getJSONObjectKeyVal(object, "payDate")%>" />
+						</td>
+						<td align="right"><span>阶段：</span>
+						<td>
+							<select name="stageId" id="stageId" style="width: 150px; height: 28px;"
+								data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
+	      						onLoadSuccess:function(data){$('#stageId').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object, "stageId")%>');}"
+								url="<%=path%>/pubData/qryStage.do" required="true">
+							</select>
+						</td>
+						<td align="right"><span>班级类型：</span>
+						<td>
+							<select name="classType" id="classType" class="easyui-combobox" style="width: 150px; height: 28px;" drequired="true">
+								<option value="<%=StringUtil.getJSONObjectKeyVal(object, "classType")%>"><%=StringUtil.getJSONObjectKeyVal(object, "classType")%></option>
+							</select>
+						</td>
+					</tr>
+	      	     	<tr>
+	      	        	<td align="right"><span>业绩类型：</span></td>
+	      	       	 	<td><span>升学</span></td>
+	      	        	<td align="right"><span>业绩老师A：</span></td>
+	      	        	<td> 
+	      	        		<select name="adviserA"  class="easyui-combobox" style="width: 150px; height: 28px;"
+		     					data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
+		      					onLoadSuccess:function(data){$('#teacherId').combobox('setValue',data[0].teacherId);}" 
+		      					url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}">
+		      				<select/>
+		      			</td>
+	      	        	<td align="right"><span>业绩老师B：</span></td>
+	      	        	<td> 
+	      	        		<select name="adviserB"  class="easyui-combobox" style="width: 150px; height: 28px;"
+		     					data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
+		      					onLoadSuccess:function(data){$('#teacherId').combobox('setValue',data[0].teacherId);}" 
+		      					url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}">
+		      				</select>
+		      			</td>
+      	        	</tr>
       	      </table>
-      	      
-</div>
+		</div>
       	<div style="height: 10px;"></div>
       	<div class="easyui-panel" style="width:100%;height:auto;" title="赠品信息">
       	
