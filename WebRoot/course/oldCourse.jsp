@@ -91,9 +91,7 @@ a {
 						<td width="100px">
 							<span>课程阶段:</span>
 						</td>
-						<td width="100px">
-							<span>课程阶段:</span>
-						</td>
+						<td width="100px"></td>
 						<td width="100px">
 							<span>缴费日期:</span>
 						</td>
@@ -253,7 +251,7 @@ $(document).ready(
 							base.find("td:eq(1)").html("<span>" + node.stageId + "</span>");
 							base.find("td:eq(3)").html("<span>" + node.payDate + "</span>");
 							base.find("td:eq(4)").html("<span>" + node.linkId + "," + node.stageOrder + "</span>")//提示 不知如何取 暂时取备注字段
-							var checkboxes = base.find("td:eq(3)").find("input[type=checkbox]");
+							var checkboxes = base.find("td:eq(5)").find("input[type=checkbox]");
 							checkboxes.attr('studentCousreId', node.studentCourseId);
 							checkboxes.attr('linkId', node.linkId);
 							checkboxes.click(function() {
@@ -269,7 +267,7 @@ $(document).ready(
 							detail2.find("td:eq(5)").html("<span>" + node.courseStateText + "</span>")
 							var detail3 = tabModel.find(".detail").find("tr:eq(2)");
 							detail3.find("td:eq(1)").html()//课程进度字段尚无
-							detail3.find("td:eq(3)").html("<span>" + node.minusAmount + "</span>")
+							detail3.find("td:eq(3)").html("<span>" + node.minusRemark + "</span>")
 							var detail4 = tabModel.find(".detail").find("tr:eq(3)");
 							detail4.find("td:eq(1)").html("<span>" + node.remark + "</span>")
 							var detail5 = tabModel.find(".detail").find("tr:eq(4)");
