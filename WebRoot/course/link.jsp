@@ -146,7 +146,7 @@
 	var num;//连报年数
 	var oldCourses;//学员已有课程
 	var linkCourseT={};//连报金额汇总表
-	
+	var favorPrice=0;//连报总优惠金额
 	function closeDlg()
 	{
 		$('#dlg').dialog('close');
@@ -191,18 +191,34 @@ function updateLinkCourses()
 	{	 
 		$("#addArchives").linkbutton({ disabled: true});
 		$("#link").combobox({ disabled: true});
-		 num=links.length;
+		num=links.length;
 		linkCourses=links;
-		$("#link").combobox('setText',num+"年连报");
+		
 		toLinkCourse(num);
-	}else
-	{
+	} 
+	 
 		$("#link").combobox(
 		{
-			url:"<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_Link_Favor','setPriceId':'10002'}"
+			url:"<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_Link_Favor','setPriceId':'10002'}",
+				onLoadSuccess : function() { //数据加载完毕事件
+				var data = $(this).combobox('getData');
+				 
+				if(data==null || data.length==0)
+				{
+					 
+				} 
+				for(var i=0;i<data.length;i++)
+				{
+					 if(num==data[i].linkNum)
+					 {
+						  favorPrice =data[i].favorPrice ;
+						 $("#link").combobox('setText',num+"年连报"); 
+					 }
+				}
+			}
 		});
 		
-	}
+	 
 }	
 	
 function toLinkCourse(num)
@@ -351,6 +367,13 @@ var newCourse;//新招课程阶段
 			 return ;
 		 }
 		 
+		 if(favorPrice!=favorAmount)
+		 {
+			 showMessage('提示', "连报优惠总金额为"+favorPrice+"元,实际优惠总金额为"+favorAmount+"元,请重新核对金额", null);
+			 return;
+		 }
+		 
+		 
 		allCourseInfos.studentCourses=studentCourses;
 		allCourseInfos.linkCourseT=linkCourseT;
 	    var str = JSON.stringify( allCourseInfos);
@@ -422,7 +445,7 @@ var newCourse;//新招课程阶段
 			linkCourseT.favorAmount=favorAmount;
 			linkCourseT.amount=amount;
 			linkCourseT.oldAmount=oldAmount;
-			linkCourseT.addAmount=addAmount;
+			linkCourseT.addAmount=amount-oldAmount;
 			linkCourseT.linkType=num;
 			linkCourseT.studentId='<%=studentId%>';
 			
