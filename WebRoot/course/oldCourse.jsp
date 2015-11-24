@@ -89,10 +89,16 @@ a {
 				<table class="infotable base" width="100%">
 					<tr>
 						<td width="100px">
-							<span>报名日期:</span>
+							<span>课程阶段:</span>
 						</td>
-						<td width="150px"></td>
-						<td style="width: 470px; color: #ff000"></td>
+						<td width="100px">
+							<span>课程阶段:</span>
+						</td>
+						<td width="100px">
+							<span>缴费日期:</span>
+						</td>
+						<td width="100px"></td>
+						<td style="width: 320px; color: #ff000"></td>
 						<td width="100px">
 							<input type="checkbox" class="cbox">
 							<span>选择连报</span>
@@ -239,64 +245,40 @@ $(document).ready(
 							var tabModel = $('#courseInfo').clone();
 							tabModel.attr("linkId", node.linkId);
 							var base = tabModel.find(".base").find("tr:eq(0)")
-							base.find("td:eq(1)").html(
-									"<span>" + node.payDate + "</span>");
-							base.find("td:eq(2)").html(
-									"<span>" + node.linkId+","+node.stageOrder + "</span>")//提示 不知如何取 暂时取备注字段
-							var checkboxes = base.find("td:eq(3)").find(
-									"input[type=checkbox]");
-							checkboxes.attr('studentCousreId',
-									node.studentCourseId);
+							base.find("td:eq(1)").html("<span>" + node.stageId + "</span>");
+							base.find("td:eq(3)").html("<span>" + node.payDate + "</span>");
+							base.find("td:eq(4)").html("<span>" + node.linkId + "," + node.stageOrder + "</span>")//提示 不知如何取 暂时取备注字段
+							var checkboxes = base.find("td:eq(3)").find("input[type=checkbox]");
+							checkboxes.attr('studentCousreId', node.studentCourseId);
 							checkboxes.attr('linkId', node.linkId);
 							checkboxes.click(function() {
 								relatedLink(checkboxes)
 							});
-							var detail1 = tabModel.find(".detail").find(
-									"tr:eq(0)");
-							detail1.find("td:eq(1)").html(
-									"<span>" + node.stageId + "</span>")
-							detail1.find("td:eq(3)").html(
-									"<span>" + node.classType + "</span>")
-							detail1.find("td:eq(5)").html(
-									"<span>" + node.feeType + "</span>")
-							var detail2 = tabModel.find(".detail").find(
-									"tr:eq(1)");
-							detail2.find("td:eq(1)").html(
-									"<span>" + node.adviserA + "/"
-											+ node.adviserB + "</span>")
-							detail2.find("td:eq(3)").html(
-									"<span>" + node.adviserTeacherA + "/"
-											+ node.adviserTeacherB + "</span>")
-							detail2.find("td:eq(5)").html(
-									"<span>" + node.courseState + "</span>")
-							var detail3 = tabModel.find(".detail").find(
-									"tr:eq(2)");
+							var detail1 = tabModel.find(".detail").find("tr:eq(0)");
+							detail1.find("td:eq(1)").html("<span>" + node.stageId + "</span>")
+							detail1.find("td:eq(3)").html("<span>" + node.classType + "</span>")
+							detail1.find("td:eq(5)").html("<span>" + node.feeTypeText + "</span>")
+							var detail2 = tabModel.find(".detail").find("tr:eq(1)");
+							detail2.find("td:eq(1)").html("<span>" + node.adviserName + "</span>")
+							detail2.find("td:eq(3)").html("<span>" + node.adviserTeacherName + "</span>")
+							detail2.find("td:eq(5)").html("<span>" + node.courseStateText + "</span>")
+							var detail3 = tabModel.find(".detail").find("tr:eq(2)");
 							detail3.find("td:eq(1)").html()//课程进度字段尚无
-							detail3.find("td:eq(3)").html(
-									"<span>" + node.minusAmount + "</span>")
-							var detail4 = tabModel.find(".detail").find(
-									"tr:eq(3)");
-							detail4.find("td:eq(1)").html(
-									"<span>" + node.remark + "</span>")
-							var detail5 = tabModel.find(".detail").find(
-									"tr:eq(4)");
-							detail5.find("td:eq(1)").html(
-									"<span>" + node.totalAmount + "</span>")
-							detail5.find("td:eq(3)").html(
-									"<span>" + node.favorAmount + "</span>")
-							detail5.find("td:eq(5)").html(
-									"<span>" + node.linkFavorId + "</span>")
-							var detail6 = tabModel.find(".detail").find(
-									"tr:eq(5)");
-							detail6.find("td:eq(1)").html(
-									"<span>" + node.amount + "</span>")
+							detail3.find("td:eq(3)").html("<span>" + node.minusAmount + "</span>")
+							var detail4 = tabModel.find(".detail").find("tr:eq(3)");
+							detail4.find("td:eq(1)").html("<span>" + node.remark + "</span>")
+							var detail5 = tabModel.find(".detail").find("tr:eq(4)");
+							detail5.find("td:eq(1)").html("<span>" + node.totalAmount + "</span>")
+							detail5.find("td:eq(3)").html("<span>" + node.favorAmount + "</span>")
+							detail5.find("td:eq(5)").html("<span>" + node.linkFavorId + "</span>")
+							var detail6 = tabModel.find(".detail").find("tr:eq(5)");
+							detail6.find("td:eq(1)").html("<span>" + node.amount + "</span>")
 							detail6.find("td:eq(2)").find("a").click(
-									function() {
-										showImage(node.imgUrl)
-									})
+								function() {
+									showImage(node.imgUrl)
+								});
 							tabModel.css("display", "block");
 							$('#courseInfo').after(tabModel);
-
 					});
 
 			}
