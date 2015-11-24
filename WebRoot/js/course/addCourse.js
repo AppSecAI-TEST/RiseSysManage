@@ -14,7 +14,26 @@ $(document).ready(function()
     });
 })
 
+function getMinus()
+{
+	return $("#minusAmount").textbox('getValue');
+}
 
+function getFavorAmount()
+{
+	return $("#favorAmount").textbox('getValue');
+}
+
+function getTotalAmount()
+{
+	return $("#totalAmount").textbox('getValue');
+}
+
+function getAmount()
+{
+	return $("#amount").textbox('getValue');
+}
+	
 $(function()
 {
 	$('#payDate').datebox().datebox('calendar').calendar(

@@ -402,6 +402,7 @@ $("#classType").combobox(
 				amount = totalAmount - minus - favorAmount;
 				$("#amount").textbox('setValue', amount);
 				$("#coursePriceId").val(data[i].setPriceId); 
+				parent.window.countAmount();
 			}
 			
 		}

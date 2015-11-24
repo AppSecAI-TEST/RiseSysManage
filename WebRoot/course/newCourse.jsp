@@ -1238,25 +1238,6 @@ $("#addCourse").click(function()
 		$('#dlg').dialog("open");
 	}
 	
-	function getMinus()
-	{
-		return $("#minusAmount").textbox('getValue');
-	}
-	
-	function getFavorAmount()
-	{
-		return $("#favorAmount").textbox('getValue');
-	}
-	
-	function getTotalAmount()
-	{
-		return $("#totalAmount").textbox('getValue');
-	}
-	
-	function getAmount()
-	{
-		return $("#amount").textbox('getValue');
-	}
 	
 	function changePraise(obj)
 	{

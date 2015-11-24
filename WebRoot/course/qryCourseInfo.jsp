@@ -172,7 +172,7 @@ $("#updateCourse").click(function()
 			var courseState=course.courseState;
 			var stageName =course.stageId;
 			var linkIdT=course.linkId;
-			if(linkId==linkIdT)
+			if(linkId!='' && linkId==linkIdT)
 			{
 				linkCourses.push(course);
 			}

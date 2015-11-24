@@ -104,11 +104,11 @@
    	        <td width="10%"  align="right"><span>连报总优惠金额：</span></td>
    	        <td width="8%"   align="left" id="favorAmount" >&nbsp;</td>
    	        <td width="10%"  align="right">实缴合计金额：</td>
-   	        <td width="8%"   align="right" id="amount" >&nbsp;</td>
+   	        <td width="8%"   align="left" id="amount" >&nbsp;</td>
    	        <td width="10%"  align="right"><span>原已缴金额：</span></td>
-   	        <td width="8%"   align="right" id="totalAmount" >&nbsp;</td>
+   	        <td width="8%"   align="left" id="oldAmount" >&nbsp;</td>
    	        <td width="10%"  align="right"><span>本次补缴金额：</span></td>
-   	        <td width="8%"   align="right" id="amount" >&nbsp;</td>
+   	        <td width="8%"   align="left" id="addAmount" >&nbsp;</td>
   	         </tr>
   	      </table>
 		</div>
@@ -191,7 +191,7 @@ function updateLinkCourses()
 	{	 
 		$("#addArchives").linkbutton({ disabled: true});
 		$("#link").combobox({ disabled: true});
-		var num=links.length;
+		 num=links.length;
 		linkCourses=links;
 		$("#link").combobox('setText',num+"年连报");
 		toLinkCourse(num);
@@ -217,7 +217,8 @@ function toLinkCourse(num)
 		  		{
 		  			var courseT= linkCourses[n];
 		  			var str=JSON.stringify(linkCourses[n]);
-		  			//alert(str);
+		  			var amountT=courseT.amount;
+		  			oldAmount=oldAmount+Number(amountT);
 		  			if(n==0)
 		  			{
 		  				if(courseT.feeType=='001')
@@ -247,6 +248,7 @@ function toLinkCourse(num)
 		  	{
 		  	    $(name).css("display","none");
 		  	}
+		  	$("#oldAmount").html(oldAmount);
 		}
 }
 	
@@ -412,6 +414,7 @@ var newCourse;//新招课程阶段
 			$("#favorAmount").html(favorAmount);
 			$("#totalAmount").html(totalAmount);
 			$("#amount").html(amount);
+			$("#addAmount").html(amount-oldAmount);
 			
 			linkCourseT={};//清除
 			linkCourseT.minusAmount=minus;
