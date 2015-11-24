@@ -190,13 +190,18 @@ a {
 var linkCourses = [];//选择关联已有连报课程
 var courses;
 $("#submit").click(function() {
-	$("input[type=checkbox]").each(function() {
-		if (this.checked) {
+	$("input[type=checkbox]").each(function() 
+	{
+		if (this.checked)
+		{
 			var id = $(this).attr('studentCousreId');
-			if (id != '') {
-				$.each(courses, function(i, node) {
+			if (id != '')
+			{
+				$.each(courses, function(i, node)
+				{
 					var idT = node.studentCourseId;
-					if (id == idT) {
+					if (id == idT) 
+					{
 						linkCourses.push(node);
 					}
 				});

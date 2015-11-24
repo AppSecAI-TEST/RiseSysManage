@@ -4,6 +4,7 @@
 	String studentId=request.getParameter("studentId");
 	String schoolId=request.getParameter("schoolId");
 	String studentInfo =request.getParameter("studentInfo");
+	String linkCourses=request.getParameter("linkCourses");
 %>
 <html>
 	<head>
@@ -66,9 +67,9 @@
       					  <td><href="javascript:void(0)" id="addArchives" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="linkCourse()">打开学员之前的课程列表关联连报</a></td>
       					  <td align="right"><span>连报类型：</span></td>
       					  <td colspan="3">
-      					  <select  id="link"  class="easyui-combobox"  style="width: 150px; height: 28px;"
+      					  <select  id="link"   style="width: 150px; height: 28px;"
 	      						data-options="formatter:formatLinkNum, valueField: 'favorPrice', textField: 'linkNum', panelHeight: 'auto'"
-	      						url="<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_Link_Favor','setPriceId':'10002'}">
+	      						>
       					    
     					    </select></td>
    					  </tr>
@@ -94,22 +95,22 @@
 			
 		<div style="height: 10px;"></div>
 		<div class="easyui-panel" style="width:99%;height:auto;" title="合计金额">
-		     	      <table width="100%" cellpadding="5px" class="maintable" >
-		   	            <tr>
-			      	        <td width="5%"   align="right" ><span>总金额：</span></td>
-			      	        <td width="10%"  align="left" id="totalAmount" >&nbsp;</td>
-			      	        <td width="8%"   align="right" ><span >抵扣总金额：</span></td>
-			      	        <td colspan="8%" align="left" id="minus" >&nbsp;</td>
-			      	        <td width="10%"  align="right"><span>连报总优惠金额：</span></td>
-			      	        <td width="8%"   align="left" id="favorAmount" >&nbsp;</td>
-			      	        <td width="10%"  align="right">实缴合计金额：</td>
-			      	        <td width="8%"   align="right" id="amount" >&nbsp;</td>
-			      	        <td width="10%"  align="right"><span>原已缴金额：</span></td>
-			      	        <td width="8%"   align="right" id="totalAmount" >&nbsp;</td>
-			      	        <td width="10%"  align="right"><span>本次补缴金额：</span></td>
-			      	        <td width="8%"   align="right" id="amount" >&nbsp;</td>
-		      	         </tr>
-		      	      </table>
+ 	      <table width="100%" cellpadding="5px" class="maintable" >
+            <tr>
+   	        <td width="5%"   align="right" ><span>总金额：</span></td>
+   	        <td width="10%"  align="left" id="totalAmount" >&nbsp;</td>
+   	        <td width="8%"   align="right" ><span >抵扣总金额：</span></td>
+   	        <td colspan="8%" align="left" id="minus" >&nbsp;</td>
+   	        <td width="10%"  align="right"><span>连报总优惠金额：</span></td>
+   	        <td width="8%"   align="left" id="favorAmount" >&nbsp;</td>
+   	        <td width="10%"  align="right">实缴合计金额：</td>
+   	        <td width="8%"   align="right" id="amount" >&nbsp;</td>
+   	        <td width="10%"  align="right"><span>原已缴金额：</span></td>
+   	        <td width="8%"   align="right" id="totalAmount" >&nbsp;</td>
+   	        <td width="10%"  align="right"><span>本次补缴金额：</span></td>
+   	        <td width="8%"   align="right" id="amount" >&nbsp;</td>
+  	         </tr>
+  	      </table>
 		</div>
 					
 		<div id="dlg" class="easyui-dialog" style="width: 1000px; height: 550px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
@@ -175,54 +176,79 @@
     {    
        onChange : function(n,o) 
        {
-    		num=$(this).combobox('getText');
-    		$(this).combobox('setText',num+"年连报");
-    		
-    		for(var n=0;n<5;n++)
-    		{
-    			var name="#frame"+n;
-		    	if(n<num)
-		    	{
-		    		var order = orderCourses[n];
-		    		if(n<linkCourses.length)
-		    		{
-		    			var courseT= linkCourses[n];
-		    			var str=JSON.stringify(linkCourses[n]);
-		    			//alert(str);
-		    			if(n==0)
-		    			{
-		    				if(courseT.feeType=='001')
-		    				{
-		    					$(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
-		    				}else
-		    				{
-		    					$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
-		    				}
-		    			}else
-		    			{
-		    				    $(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
-		    			}
-		    		}else
-		    		{
-		    			if(n==0)
-		    			{
-		    				$(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
-		    			}else
-		    			{
-		    				$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
-		    			}
-		    		 }
-		    			
-		    		$(name).css("display","block");
-		    	}else
-		    	{
-		    	    $(name).css("display","none");
-		    	}
-		    	 
-	    	}
-        }  
+    		num=$("#link").combobox('getText');
+    		$("#link").combobox('setText',num+"年连报");
+    		toLinkCourse(num);
+       }  
     });  
+
+updateLinkCourses();	
+function updateLinkCourses()
+{
+	var links='<%=linkCourses%>';
+	links = eval("("+links+")");
+	if(links!=null)
+	{	 
+		$("#addArchives").linkbutton({ disabled: true});
+		$("#link").combobox({ disabled: true});
+		var num=links.length;
+		linkCourses=links;
+		$("#link").combobox('setText',num+"年连报");
+		toLinkCourse(num);
+	}else
+	{
+		$("#link").combobox(
+		{
+			url:"<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_Link_Favor','setPriceId':'10002'}"
+		});
+		
+	}
+}	
 	
+function toLinkCourse(num)
+{
+	for(var n=0;n<5;n++)
+	{
+			var name="#frame"+n;
+		  	if(n<num)
+		  	{
+		  		var order = orderCourses[n];
+		  		if(n<linkCourses.length)
+		  		{
+		  			var courseT= linkCourses[n];
+		  			var str=JSON.stringify(linkCourses[n]);
+		  			//alert(str);
+		  			if(n==0)
+		  			{
+		  				if(courseT.feeType=='001')
+		  				{
+		  					$(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
+		  				}else
+		  				{
+		  					$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
+		  				}
+		  			}else
+		  			{
+		  				    $(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
+		  			}
+		  		}else
+		  		{
+		  			if(n==0)
+		  			{
+		  				$(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
+		  			}else
+		  			{
+		  				$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
+		  			}
+		  		 }
+		  			
+		  		$(name).css("display","block");
+		  	}else
+		  	{
+		  	    $(name).css("display","none");
+		  	}
+		}
+}
 	
 function validateCourses(order)
 {

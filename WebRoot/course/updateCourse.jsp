@@ -845,7 +845,13 @@ $('#stageId').combobox(
 			{ //数据加载完毕事件
 				var data = $('#classType').combobox('getData');
 				var classType="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>";//初始化已有值
-				 
+				if(data==null || data.length==0)
+				{
+					$("#stageId").combobox('setText',"");
+					$("#classType").combobox('setText',"");
+					$.messager.alert('提示', "没有适用的常规格价格体系,请重新选择缴费日期");	
+					return;
+				} 
 				for(var i=0;i<data.length;i++)
 				{
 					if(classType==data[i].classType || data.length==1)

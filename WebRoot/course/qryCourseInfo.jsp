@@ -155,7 +155,7 @@
   		</div>
   	</body>
 </html>
-<<script type="text/javascript">
+<script type="text/javascript">
 var linkCourses = [];
 
 $("#updateCourse").click(function()
@@ -177,15 +177,17 @@ $("#updateCourse").click(function()
 				linkCourses.push(course);
 			}
 		}
-		if(linkCourses.length==0)
+		
+		var studentId = row.studentId;
+    	var schoolId = row.schoolId;
+    	var studentInfo =row.name+";;"+row.byName+";;"+row.birthday+";;"+row.identityId+";;"+row.sexText;
+		if(linkCourses.length>1)
 		{
-			alert();	
+			var str=JSON.stringify(linkCourses);
+			window.location.href="link.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&linkCourses="+str;
 		}else
 		{
-			var studentId = row.studentId;
-	    	var schoolId = row.schoolId;
-	    	var str=JSON.stringify(row);
-	    	var studentInfo =row.name+";;"+row.byName+";;"+row.birthday+";;"+row.identityId+";;"+row.sexText;
+			var str=JSON.stringify(row);
 	    	window.location.href="updateCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&courses="+str;
 		}
 	}
