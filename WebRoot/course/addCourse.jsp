@@ -14,6 +14,7 @@
 		<%@ include file="../common/formvalidator.jsp"%>
 		<script type="text/javascript" src="<%=path %>/pub/js/date.js"></script>
 		<script type="text/javascript" src="<%=path %>/js/course/addCourse.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/course/short.js"></script>
 		<style>
 .praiseTab {
 	border-collapse: collapse;
@@ -79,7 +80,7 @@
 						<select name="courseType" editable='false' required="true" class="easyui-combobox" id="courseType" style="width: 150px; height: 28px;"
 						 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',onChange:changeCourseType, 
 						 onLoadSuccess:function(data){$('#courseType').combobox('setValue',data[0].codeName);}"
-	      				 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=SINGLE_COURSE_TYPE" required="true" >
+	      				 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE" required="true" >
 						</select>
 					</td>
 					<td align="right">
@@ -132,8 +133,7 @@
 							</td>
 							<td>
 								<select name="feeType" class="easyui-combobox" id="feeType" editable='false' required="true"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName',
-									onLoadSuccess:function(data){$('#feeType').combobox('setValue',data[0].codeFlag)}"
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName'"
 									style="width: 150px; height: 28px;"
 									url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
 								</select>
@@ -587,19 +587,21 @@
 					<table width="99%" cellpadding="5px" class="maintable">
 						<tr>
 							<td align="right">
-								<span>短期课类型：</span>
+								<span>短期课名称：</span>
 							</td>
 							<td align="left">
-								<select class="easyui-combobox" id="shortCourseType" style="width: 100px; height: 28px;"
-								 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
-	      				 		 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=SHORT_COURSE_TYPE"   >
+								<select class="easyui-combobox" id="shortClassId"  name="shortClassId" style="width: 100px; height: 28px;"
+								 data-options="valueField: 'shortClassId', textField: 'className', panelHeight: 'auto'"
+	      				 		 url="/sys/pubData/qryData.do?param={queryCode:'Qrr_short_class'}"   >
 								<select>
 							</td>
 							<td align="right">
 								<span>班级类型：</span>
 							</td>
 							<td align="left">
-								 
+								 <select class="easyui-combobox" id="shortClassType" name="shortClassType" style="width: 100px; height: 28px;"
+								 data-options="valueField: 'classType', textField: 'classType', panelHeight: 'auto'">
+								<select>
 							</td>
 							</tr>
 							<tr>
@@ -607,11 +609,6 @@
 								<span>业绩老师A：</span>
 							</td>
 							<td align="left">
-								<select class="easyui-combobox" id="s_schooldA"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-								url="<%=path %>/pubData/qrySchoolList.do?schoolId=" 
-									style="width: 100px; height: 28px;">
-								<select>
 								<select class="easyui-combobox" id="s_teacherA"
 									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 									style="width: 100px; height: 28px;">
@@ -621,11 +618,6 @@
 								<span>业绩老师B：</span>
 							</td>
 							<td align="left">
-								<select class="easyui-combobox" id="s_schooldB"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-									url="<%=path %>/pubData/qrySchoolList.do?schoolId="  
-									style="width: 100px; height: 28px;">
-									<select>
 								<select class="easyui-combobox" id="s_teacherB"
 									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 									style="width: 100px; height: 28px;">
@@ -668,6 +660,14 @@
 						</td>
 						<td colspan="7" giftId="">
 							<div id="useCoupon">
+						</td>
+					</tr>
+					<tr>
+						<td align="center">
+							<span>其他优惠</span>
+						</td>
+						<td colspan="7" >
+							<div  id="favors"></div>
 						</td>
 					</tr>
 					<tr>
@@ -1349,7 +1349,7 @@ $("#addCourse").click(function()
 		$('#useCoupon').html(useCoupon);
 		$("#minusAmount").textbox('setValue',minus);
 		totalAmount=$("#totalAmount").textbox('getValue');
-		amount=totalAmount-minus;
+		amount=totalAmount-minus-favorAmount;
 		$("#amount").textbox('setValue',amount);
 	}
 	
@@ -1463,7 +1463,7 @@ $("#addCourse").click(function()
 			initFeeInfo()
 			$("#courseType").val("001")
 		}
-		else if(type=="004")
+		else if(type=="002")
 		{
 			$("#normal").css("display","none");
 			$("#short").css("display","block");

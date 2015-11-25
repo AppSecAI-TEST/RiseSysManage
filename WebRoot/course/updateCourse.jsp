@@ -7,11 +7,13 @@
 	String studentId =request.getParameter("studentId");
 	String schoolId= request.getParameter("schoolId");
 	String courses=request.getParameter("courses");
+	
 	JSONObject object=new JSONObject();
 	if(courses!=null && !"".equals(courses))
     {
 		object = JSONObject.fromObject(courses);
     }
+	System.out.println("-----------------------------------------------"+StringUtil.getJSONObjectKeyVal(object,"courseType"));
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -21,6 +23,7 @@
 		<%@ include file="../common/formvalidator.jsp"%>
 		<script type="text/javascript" src="<%=path %>/pub/js/date.js"></script>
 		<script type="text/javascript" src="<%=path %>/js/course/addCourse.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/course/short.js"></script>
 		<style>
 .praiseTab {
 	border-collapse: collapse;
@@ -84,10 +87,11 @@
 						<span>课程类型：</span>
 					</td>
 					<td>
+					
 						<select name="courseType" editable='false' required="true" class="easyui-combobox" id="courseType" style="width: 150px; height: 28px;"
-						 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',onChange:changeCourseType, 
-						 onLoadSuccess:function(data){$('#courseType').combobox('setValue',data[0].codeName);}"
-	      				 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=SINGLE_COURSE_TYPE" required="true" >
+						 data-options="valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',onChange:changeCourseType, 
+						 onLoadSuccess:function(data){$('#courseType').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"courseType")%>');}"
+	      				 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE" required="true" >
 						</select>
 					</td>
 					<td align="right">
@@ -104,6 +108,7 @@
 			<input id="studentCourseId" name="studentCourseId" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"studentCourseId")%>"/>
     	    <input id="oldClassType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>"/>
     	    <input id="oldStageId"   type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>"/>
+    	     <input id="oldCourseType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"courseType")%>"/>
     	    <input type="hidden" id="oldMinusAmount" name="oldMinusAmount" value="<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>" />	
 			<input type="hidden" id="paySchoolId" name="paySchoolId" value="<%=schoolId%>" />	
 			<input type="hidden" id="studentId" name="studentId" value="<%=studentId%>">
@@ -602,19 +607,23 @@
 					<table width="99%" cellpadding="5px" class="maintable">
 						<tr>
 							<td align="right">
-								<span>短期课类型：</span>
+								<span>短期课名称：</span>
 							</td>
 							<td align="left">
-								<select class="easyui-combobox" id="shortCourseType" style="width: 100px; height: 28px;"
-								 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
-	      				 		 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=SHORT_COURSE_TYPE"   >
+								<select class="easyui-combobox" id="shortClassId"  name="shortClassId" style="width: 100px; height: 28px;"
+								 data-options="valueField: 'shortClassId', textField: 'className', panelHeight: 'auto',
+								 onLoadSuccess:function(data){$('#shortClassId').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>');}
+								 "
+	      				 		 url="/sys/pubData/qryData.do?param={queryCode:'Qrr_short_class'}"   >
 								<select>
 							</td>
 							<td align="right">
 								<span>班级类型：</span>
 							</td>
 							<td align="left">
-								 
+								 <select class="easyui-combobox" id="shortClassType" name="shortClassType" style="width: 100px; height: 28px;"
+								 data-options="valueField: 'classType', textField: 'classType', panelHeight: 'auto'">
+								<select>
 							</td>
 							</tr>
 							<tr>
@@ -686,6 +695,14 @@
 						</td>
 					</tr>
 					<tr>
+						<td align="center">
+							<span>其他优惠</span>
+						</td>
+						<td colspan="7" >
+							<div  id="favors"></div>
+						</td>
+					</tr>
+					<tr>
 						<td align="right">
 							<span>总金额：</span>
 						</td>
@@ -705,7 +722,7 @@
 						 <span>优惠金额：</span> 
 						 </td>
 						 <td align="left">
-				      	 <input id="favorAmount"   name="favorAmount" type="text" readonly="readonly"  class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"/> 
+				      	 <input id="favorAmount"   name="favorAmount" type="text" readonly="readonly"  value="<%=StringUtil.getJSONObjectKeyVal(object,"favorAmount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"/> 
 				      	 </td>
 						<td align="right">
 							<span>实缴金额：</span>
@@ -759,9 +776,9 @@ function initOldCourse()
 	var studentCourseId=$("#studentCourseId").val();
 	if(studentCourseId!='')
 	{
-		//$("#payDate").attr("readOnly",true);
+		$("#payDate").attr("readOnly",true);
 		 
-		$("#courseType").combobox({ disabled: true});
+		//$("#courseType").combobox({ disabled: true});
 		 
 	}
 }
@@ -824,6 +841,7 @@ $('#stageId').combobox(
 		}
 		
 		var stageType = $("#stageId").combobox('getText');
+		var courseType = $("#oldCourseType").val();
 		var payDate=$("#payDate").datebox('getValue');
 		/*if(payDate=='')
 		{
@@ -834,6 +852,10 @@ $('#stageId').combobox(
 			return;
 		}
 		*/
+		if(stageType=='' || courseType=='002')
+		{
+			return;
+		}
 		var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\",schoolId:\""+ <%=schoolId%> + "\"}";
 		$("#classType").combobox(
 		{
@@ -856,6 +878,7 @@ $('#stageId').combobox(
 				{
 					if(classType==data[i].classType || data.length==1)
 					{
+						$("#minusAmount").textbox('setValue',oldMinusAmount);
 						$("#classType").combobox('select',data[i].classType);
 						$("#totalAmount").textbox('setValue', data[i].amount);
 						minus = $("#minusAmount").textbox('getValue');
@@ -1021,19 +1044,6 @@ $("#activeSchool").combobox(
 		});
 	}
 });
-
-
-
-$('#favorAmount').textbox( {
-	onChange : function(value) {
-		minus = $("#minusAmount").textbox('getValue');
-		favorAmount = $("#favorAmount").textbox('getValue');
-		totalAmount = $("#totalAmount").textbox('getValue');
-		amount = totalAmount - minus - favorAmount;
-		$("#amount").textbox('setValue', amount);
-	}
-});
-
 
 //提交
 $("#submitBtn").click(function() 
@@ -1380,6 +1390,7 @@ $("#addCourse").click(function()
 		var obj = $("#courseFm").serializeObject();
 		obj.payDate=$("#payDate").datebox("getValue");
 		studentCourse.course=obj;
+		 
 		studentCourse.coupon=JSON.stringify(coupons);
 		return studentCourse;
 	}
@@ -1388,9 +1399,10 @@ $("#addCourse").click(function()
 	{
 		$('#dlg').dialog('close');
 		$('#useCoupon').html(useCoupon);
-		$("#minusAmount").textbox('setValue',minus+oldMinusAmount);
+		$("#minusAmount").textbox('setValue',Number(minus)+Number(oldMinusAmount));
 		totalAmount=$("#totalAmount").textbox('getValue');
-		amount=totalAmount-minus-oldMinusAmount;
+		favorAmount=$("#favorAmount").textbox('getValue');
+		amount=totalAmount-minus-oldMinusAmount-favorAmount;
 		$("#amount").textbox('setValue',amount);
 	}
 	
@@ -1493,12 +1505,10 @@ $("#addCourse").click(function()
 		tr.find("td:eq(5)").find("span").html(name+"B");
 	}
 
-
- 
-	
 	function changeCourseType()
 	{
 		var type=$("#courseType").combobox("getValue");
+	 
 		if(type=="001")
 		{
 			$("#normal").css("display","block");
@@ -1506,7 +1516,7 @@ $("#addCourse").click(function()
 			initFeeInfo()
 			$("#courseType").val("001")
 		}
-		else if(type=="004")
+		else if(type=="002")
 		{
 			$("#normal").css("display","none");
 			$("#short").css("display","block");

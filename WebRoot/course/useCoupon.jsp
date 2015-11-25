@@ -58,7 +58,6 @@
 			var giftCode= obj[i].giftCode;
 			var giftId= obj[i].giftId;
 			var studentGiftId=obj[i].studentGiftId;
-			alert(JSON.stringify(obj[i]));
 			var coupon={};
 			coupon.usableAmount=usableAmount;
 			coupon.giftId=giftId;
