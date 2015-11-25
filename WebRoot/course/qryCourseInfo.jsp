@@ -181,14 +181,23 @@ $("#updateCourse").click(function()
 		var studentId = row.studentId;
     	var schoolId = row.schoolId;
     	var studentInfo =row.name+";;"+row.byName+";;"+row.birthday+";;"+row.identityId+";;"+row.sexText;
+     
 		if(linkCourses.length>1)
 		{
 			var str=JSON.stringify(linkCourses);
 			window.location.href="link.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&linkCourses="+str;
-		}else
+		}else 
 		{
 			var str=JSON.stringify(row);
-	    	window.location.href="updateCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&courses="+str;
+			if(row.courseType=='002')
+			{
+				window.location.href="updateShortCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&courses="+str;
+			}else
+			{
+				window.location.href="updateCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&courses="+str;
+			}
+			
+	    
 		}
 	}
 	

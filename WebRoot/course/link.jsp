@@ -60,7 +60,7 @@
    					  </tr>
       					<tr>
       					  <td align="right"><span>备注：</span></td>
-      					  <td colspan="5"><textarea rows="2" cols="120" id="vipRemark" name="vipRemark" class="easyui-validatebox textbox"></textarea></td>
+      					  <td colspan="5"><input type="text" id="remark" name="remark" class="easyui-textbox validatebox"  style="width: 820px; height: 25px;"></textarea></td>
    					  </tr>
       				  <tr>
       					  <td align="right"><span>关联已报课程：</span></td>

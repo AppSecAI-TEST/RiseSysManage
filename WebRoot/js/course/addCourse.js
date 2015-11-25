@@ -12,7 +12,7 @@ $(document).ready(function()
 	$("#qryBtn").click(function() {
     	qry();
     });
-})
+});
 
 function getMinus()
 {
@@ -34,7 +34,7 @@ function getAmount()
 	return $("#amount").textbox('getValue');
 }
 	
-$(function()
+function initDate()
 {
 	$('#payDate').datebox().datebox('calendar').calendar(
 	{
@@ -46,7 +46,7 @@ $(function()
 			return d1<=date && date<=d2;
 		}
 	});
-});
+} 
 
 function addSingleCourse()
 {
@@ -140,19 +140,6 @@ function getOldCourse()
 	return courses;
 }
  
-$(function()
-{
-	$('#payDate').datebox().datebox('calendar').calendar(
-	{
-		validator: function(date)
-		{
-			var now = new Date();
-			var d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate()-30);
-			var d2 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-			return d1<=date && date<=d2;
-		}
-	});
-});
 
 
 //初始化已有赠品信息

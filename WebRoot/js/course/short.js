@@ -132,15 +132,15 @@ function minusFavor(id)
 	var favorAmount=$("#favorAmount").textbox('getValue');
 	var totalAmount=$("#totalAmount").textbox('getValue');
 	var amount=$("#amount").textbox('getValue');
-	 
+	var  minus = $("#minusAmount").textbox('getValue');
 	if(obj.is(':checked'))
 	{
 		favorAmount=Number(favorAmount)+Number(price);
-		amount=Number(totalAmount)-favorAmount;
+		amount=Number(totalAmount)-favorAmount-Number(minus);
 	}else
 	{
 		favorAmount=Number(favorAmount)-Number(price);
-		amount=Number(amount)+favorAmount;
+		amount=Number(totalAmount)-Number(favorAmount)-Number(minus);
 	}
 	$("#amount").textbox('setValue', amount);
 	$("#favorAmount").textbox('setValue', favorAmount);

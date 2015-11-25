@@ -6,7 +6,6 @@
 	String studentId =request.getParameter("studentId");
 	String order=request.getParameter("order");
 	String courses=request.getParameter("courses");
-	System.out.println("-------------------------------------------------------------------------------------"+courses);
 	String name=request.getParameter("name");
 	JSONObject object=new JSONObject();
 	if(courses!=null && !"".equals(courses))
@@ -222,7 +221,7 @@
   	</body>
 </html>
 <script type="text/javascript">
-
+initDate();
 	var studentCourse={};//最后提交学生课程信息
     var gifts  =[];  
 	var courses=[];

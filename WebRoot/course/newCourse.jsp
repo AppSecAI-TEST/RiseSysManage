@@ -585,7 +585,7 @@
 </html>
 <script type="text/javascript">
 initCousreGift();
- 
+initDate(); 
 $('#parentType').combobox({
 	 onChange:function(n,o)
 		{

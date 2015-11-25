@@ -14,5 +14,5 @@
 <script type="text/javascript" src="<%=headPath %>/pub/js/util.js"></script>
 <script type="text/javascript" src="<%=headPath %>/pub/js/date.js"></script>
 <script type="text/javascript" src="<%=headPath %>/pub/js/bpopup.js"></script>
-
+<script type="text/javascript" src="<%=headPath %>/pub/js/data.js"></script>
 <%@ include file="theme.jsp" %>
