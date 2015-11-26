@@ -1,4 +1,38 @@
 $(document).ready(function() {
+    //上传
+    $("#uploadBtn").click(function() {
+    	var fileName = $("#fileName").filebox("getValue");
+    	if(fileName != "" && fileName != null && fileName != undefined) {
+    		var schoolId = $("#schoolId").val();
+    		var handlerId = $("#handlerId").val();
+    		$("#applyChangeClassFm").form("submit", {
+    			url: "/sys/fileUpload?type=change_class&schoolId="+schoolId+"&handlerId="+handlerId,
+    			onSubmit: function () {
+    				
+    			},
+    			success: function (result) {
+    				var data = JSON.parse(result);
+    				if(data.flag)
+    				{
+    					$("#imgUrl").val(data.fileId);
+    					$.messager.alert('提示', "文件上传成功！");
+    				}
+    				else
+    				{
+    					$.messager.alert('提示', data.msg);
+    				}
+    			}
+    		});
+    	} else {
+    		$.messager.alert('提示', "请您先选择一个文件！");
+    	}
+    });
+    
+    //取消上传
+    $("#cancelUploadBtn").click(function() {
+    	var fileName = $("#fileName").filebox("setValue", "");
+    });
+	
 	$("#applyChangeSubmit").click(function() {
 		if($("#applyChangeClassFm").form('validate')) {
 			var obj = JSON.stringify($("#applyChangeClassFm").serializeObject());

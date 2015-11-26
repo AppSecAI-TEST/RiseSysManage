@@ -28,7 +28,7 @@
   
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="转班申请">
-  			<form id="applyChangeClassFm">
+  			<form id="applyChangeClassFm" method="post" enctype="multipart/form-data">
   				<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId %>"/>
   				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
   				<input type="hidden" id="outClassId" name="outClassId" value="<%=classInstId %>"/>
@@ -72,7 +72,14 @@
   					</tr>
   					<tr>
   						<td align="right"><span>上传转班单据：</span></td>
-  						<td colspan="5"><input style="width: 500px; height: 28px;" class="easyui-filebox" name="imgUrl" id="imgUrl" data-options="prompt:''" ></td>
+  						<td colspan="5">
+							<div>
+								<input type="hidden" name="imgUrl" id="imgUrl"/>
+	                            <input style="width: 500px; height: 28px;" class="easyui-filebox" name="fileName" id="fileName" data-options="prompt:''"/>
+	                            <a href="javascript:void(0)" class="easyui-linkbutton" id="uploadBtn" iconCls="icon-save" iconCls="icon-save" style="width: 80px; height: 28px;">上传</a>
+	                            <a href="javascript:void(0)" class="easyui-linkbutton" id="cancelUploadBtn" iconCls="icon-cancel" iconCls="icon-cancel" style="width: 80px; height: 28px;">取消</a>
+	                        </div>
+  						</td>
   					</tr>
   					<tr>
   						<td align="right"><span>转班情况说明：</span></td>

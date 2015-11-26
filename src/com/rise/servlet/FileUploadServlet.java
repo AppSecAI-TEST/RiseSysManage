@@ -28,6 +28,8 @@ public class FileUploadServlet extends HttpServlet
 	
 	private Log log = LogFactory.getLog(FileUploadServlet.class);
 	
+	private static String separator = System.getProperty("file.separator");
+	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 	{
 		doPost(request, response);
@@ -37,79 +39,116 @@ public class FileUploadServlet extends HttpServlet
 	{
 		try 
 		{
-			String retVal = "";
+			JSONObject rstObj = new JSONObject();
 			String path = "";
-			JSONObject object = new JSONObject();
-			//创建文件处理工厂,它用于生成FileItem对象
-			DiskFileItemFactory factory = new DiskFileItemFactory();
-			//创建request的解析器,它会将数据封装到FileItem对象中
-			ServletFileUpload sfu = new ServletFileUpload(factory);
-			//解析保存在request中的数据并返回list集合
-			List items = sfu.parseRequest(request);
-			//遍历list集合,取出每一个输入项的FileItem对象,并分别获取数据
-			Iterator itr = items.iterator();
-			while (itr.hasNext())
+			String filePath = "";
+			String folderName = "";
+			String schoolName = "";
+			boolean flag = false;
+			String type = request.getParameter("type");
+			if(ObjectCensor.isStrRegular(type))
 			{
-				FileItem item = (FileItem) itr.next();
-				if (item.isFormField()) 
+				String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1015\",securityCode:\"0000000000\",params:{paramType:\"UPLOAD_PATH\",paramValue:\""+type+"\"},rtnDataFormatType:\"user-defined\"}";
+				String rstMsg = ServiceEngine.invokeHttp(param);
+				JSONArray array = JSONArray.fromObject(rstMsg);
+				if(ObjectCensor.checkListIsNull(array))
 				{
-					object.element(item.getFieldName(), item.getString("UTF-8"));
+					JSONObject obj = array.getJSONObject(0);
+					path = StringUtil.getJSONObjectKeyVal(obj, "param2");
+					filePath = StringUtil.getJSONObjectKeyVal(obj, "param1");
+					folderName = StringUtil.getJSONObjectKeyVal(obj, "param3");
 				}
-				else
+			}
+			String schoolId = request.getParameter("schoolId");
+			if(ObjectCensor.isStrRegular(schoolId))
+			{
+				String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1011\",securityCode:\"0000000000\",params:{schoolId:\"1001\"},rtnDataFormatType:\"user-defined\"}";
+				String rstMsg = ServiceEngine.invokeHttp(param);
+				JSONArray array = JSONArray.fromObject(rstMsg);
+				if(ObjectCensor.checkListIsNull(array))
 				{
-					String type = StringUtil.getJSONObjectKeyVal(object, "type");
-					if(ObjectCensor.isStrRegular(type))
+					JSONObject obj = array.getJSONObject(0);
+					schoolName = StringUtil.getJSONObjectKeyVal(obj, "schoolName");
+				}
+			}
+			String handlerId = request.getParameter("handlerId");
+			if(ObjectCensor.isStrRegular(path, schoolName, folderName, filePath))
+			{
+				File file = new File(path + separator + schoolName);
+				if(!file.exists() && !file.isDirectory())
+				{
+					file.mkdir();
+				}
+				file = new File(path + separator + schoolName + separator + folderName);
+				if(!file.exists() && !file.isDirectory())
+				{
+					file.mkdir();
+				}
+				path += separator + schoolName + separator + folderName;
+				//创建文件处理工厂,它用于生成FileItem对象
+				DiskFileItemFactory factory = new DiskFileItemFactory();
+				//创建request的解析器,它会将数据封装到FileItem对象中
+				ServletFileUpload sfu = new ServletFileUpload(factory);
+				//解析保存在request中的数据并返回list集合
+				List items = sfu.parseRequest(request);
+				//遍历list集合,取出每一个输入项的FileItem对象,并分别获取数据
+				Iterator itr = items.iterator();
+				while (itr.hasNext())
+				{
+					FileItem item = (FileItem) itr.next();
+					if (!item.isFormField()) 
 					{
-						if(!ObjectCensor.isStrRegular(path))
+						String fileName = item.getName();
+						File tempFile = new File(path + separator + fileName);
+						if(tempFile.exists())
 						{
-							String param = "{appId:\"0000000000\",channelId:\"Q\",serviceType:\"BUS3001\",capInstId:\"BUS3001\",transactionId:\"BUS3001\",signCode:\"PC\",encryptCode:\"0000000000\",params:{paraType:\"UPLOAD_PATH\",paraFlag:\""+type+"\"},rtnDataFormatType:\"json\"}";
-							String rstMsg = ServiceEngine.invokeService(param);
-							JSONObject obj = JSONObject.fromObject(rstMsg);
-							String executeType = StringUtil.getJSONObjectKeyVal(obj, "executeType");
-							if("success".equals(executeType))
+							int index = fileName.lastIndexOf(".");
+							for(int i = 1; i < 100; i++)
 							{
-								String returnMsg = StringUtil.getJSONObjectKeyVal(obj, "returnMsg");
-								JSONArray array = JSONArray.fromObject(returnMsg);
-								JSONObject rstObj = array.getJSONObject(0);
-								path = StringUtil.getJSONObjectKeyVal(rstObj, "para_refer");
-							}
-							else
-							{
-								retVal = StringUtil.getJSONObjectKeyVal(obj, "exceptionMsg");
-							}
-						}
-						if(ObjectCensor.isStrRegular(path))
-						{
-							String fileName = item.getName();
-							File tempFile = new File(path + "/" + fileName);
-							if(tempFile.exists())
-							{
-								int index = fileName.lastIndexOf(".");
-								for(int i = 1; i < 100; i++)
+								String newFileName = fileName.substring(0, index) + "（" + i + "）" + fileName.substring(index);
+								tempFile = new File(path + separator + newFileName);
+								if(!tempFile.exists())
 								{
-									String newFileName = fileName.substring(0, index) + "（" + i + "）" + fileName.substring(index);
-									tempFile = new File(path + "/" + newFileName);
-									if(!tempFile.exists())
-									{
-										retVal = newFileName;
-										break;
-									}
+									filePath += schoolName + separator + folderName + separator + newFileName;
+									break;
 								}
 							}
-							else
-							{
-								retVal = fileName;
-							}
-							item.write(tempFile);
 						}
+						else
+						{
+							filePath += schoolName + separator + folderName + separator + fileName;
+						}
+						item.write(tempFile);
+						flag = true;
+					}
+				}
+				if(flag)
+				{
+					log.error(filePath);
+					JSONObject obj = new JSONObject();
+					obj.element("fileType", "IMG");
+					obj.element("filePath", filePath);
+					obj.element("ownerId", handlerId);
+					obj.element("handlerId", handlerId);
+					obj.element("order", 1);
+					String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0101\",securityCode:\"0000000000\",params:{param:"+obj.toString()+"},rtnDataFormatType:\"user-defined\"}";
+					String rstMsg = ServiceEngine.invokeHttp(param);
+					JSONObject retObj = JSONObject.fromObject(rstMsg);
+					flag = retObj.getBoolean("flag");
+					if(flag)
+					{
+						rstObj.element("fileId", StringUtil.getJSONObjectKeyVal(retObj, "fileId"));
 					}
 				}
 			}
-			log.error(object);
-			log.error(retVal);
+			else
+			{
+				rstObj.element("msg", "请配置该功能点的上传路径！");
+			}
+			rstObj.element("flag", flag);
 			response.setCharacterEncoding("UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println(retVal);
+			out.print(rstObj);
 			out.close();
 		} 
 		catch (Exception e) 
