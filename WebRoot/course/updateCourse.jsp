@@ -1532,11 +1532,7 @@ $("#praiseSourceN").combobox({
 				};
 				if(oldWom!=null && oldWom!=undefined)
 				{
-					womId=oldWom.womId;
-					womType=oldWom.womType;
-					womChannel=oldWom.womChannel;
-					studentCourseId=oldWom.studentCourseId;
-					handlerId=oldWom.handlerId;
+					womInfo.womId=oldWom.womId;
 				}
 				var womItem ={
 					itemId:"",
@@ -1648,8 +1644,8 @@ $("#praiseSourceN").combobox({
 						womItem["identityId"]=tr1.find("td:eq(3)").find(".easyui-textbox").textbox("getValue");
 						var tr2 =$("#praiseTab2").find("tr:eq(1)");
 						womItem["className"]=tr2.find("td:eq(1)").find(".easyui-textbox").textbox("getValue");
-						womItem["teacherIdSchool"]=tr2.find("td:eq(3)").find(".easyui-combobox.school").combobox("getValue");
-						womItem["teacherId"]=tr2.find("td:eq(3)").find(".easyui-combobox.teacher").combobox("getValue");
+						womItem["teacherIdSchool"]=$("#t_teacher_school").combobox("getValue");
+						womItem["teacherId"]=$("#t_teacher_id").combobox("getValue");
 						
 					}	
 						
@@ -1906,6 +1902,14 @@ $(document).ready(function()
 				 $(this).attr("checked",true);
 				 changePraise(this);
 				 var womChannel=wom.womChannel;
+				 var obj={};
+			 	 obj.name=wom.studentName;
+				 obj.identityId=wom.identityId;
+				 obj.className=wom.className;
+				 obj.identityType=wom.identityType;
+				 obj.studentId=wom.studentId;
+				 obj.schoolId=wom.studentIdSchool;
+				 obj=JSON.stringify(obj);
 				 if(womType=='Y')
 				 {
 					
@@ -1919,20 +1923,22 @@ $(document).ready(function()
 					 $("#c_teacherA").combobox("setValue",wom.teacherA);
 					 $("#c_schoolsB").combobox("setValue",wom.teacherBSchool);
 					 $("#c_teacherB").combobox("setValue",wom.teacherB);
-					 //alert(JSON.stringify(wom));
-				 	 var obj={};
-					 obj.name=wom.studentName;
-					 obj.identityId=wom.identityId;
-					 obj.className=wom.className;
-					 obj.identityType=wom.identityType;
-					 obj.studentId=wom.studentId;
-					 obj.schoolId=wom.studentIdSchool;
-					 obj=JSON.stringify(obj);
-					 qryStudentInfo(obj);
+					 $("#activeSchool").combobox("setValue",wom.activitySchool);
+					 $("#activeId").combobox("setValue",wom.activityId);
+					
+					 
+					 
+				 	 qryStudentInfo(obj);
 				 }else if(womType=='N')
 				 {
 					$("#praiseSourceN").combobox("setValue",womChannel); 
-					 
+					 if('Stu'==womChannel)
+					 {
+						  searchStudentInfo(obj);
+						  $("#t_teacher_school").combobox("setValue",wom.teacherIdSchool); 
+						  $("#t_teacher_id").combobox("setValue",wom.teacherId); 
+					 }
+					$("#womStaffName").textbox("setValue",wom.staffName);
 				 }
 				 return false;
 			} 

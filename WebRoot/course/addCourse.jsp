@@ -1695,7 +1695,7 @@ $("#addCourse").click(function()
 					{
 						$.messager.alert('提示', "请选择一个学员!");
 						return false;
-					}
+	 				}
 					else
 					{
 						womItem["studentId"]=tr1.attr("studentId");
