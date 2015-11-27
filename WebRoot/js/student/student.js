@@ -48,7 +48,9 @@ $(document).ready(function() {
     
     $("#viewStudent").click(function() {
     	if(validateSelect()) {
-    		window.location.href = "/sys/student/viewStudent.jsp";
+    		var row = $('#list_data').datagrid('getSelected');
+    		var studentId = row.studentId;
+    		window.location.href = "/sys/view.jsp?studentId="+studentId;
     	}
     });
     
