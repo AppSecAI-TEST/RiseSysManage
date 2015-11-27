@@ -23,7 +23,7 @@
   
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:98%;height:auto;" title="转校申请">
-  			<form id="applyChangeSchoolFm">
+  			<form id="applyChangeSchoolFm" method="post" enctype="multipart/form-data">
   				<input type="hidden" id="applyType" name="applyType" value="002"/>
   				<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId %>"/>
   				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
@@ -146,7 +146,10 @@
 	  					<tr>
 	  						<td align="right" width="10%"><span>上传转校申请单：</span></td>
 	  						<td colspan="5" width="90%">
-	  							<input style="width: 500px; height: 28px;" class="easyui-filebox" name="imgUrl" id="imgUrl" data-options="prompt:''" >
+	  							<input type="hidden" name="imgUrl" id="imgUrl"/>
+	                        	<input style="width: 500px; height: 28px;" class="easyui-filebox" name="fileName" id="fileName" data-options="prompt:''"/>
+	                        	<a href="javascript:void(0)" class="easyui-linkbutton" id="uploadBtn" iconCls="icon-save" iconCls="icon-save" style="width: 80px; height: 28px;">上传</a>
+	                        	<a href="javascript:void(0)" class="easyui-linkbutton" id="cancelUploadBtn" iconCls="icon-cancel" iconCls="icon-cancel" style="width: 80px; height: 28px;">取消</a>
 	  						</td>
 	  					</tr>
 	  					<tr>

@@ -14,7 +14,7 @@
   
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="常规课退费申请">
-  			<form id="refundApplyFm">
+  			<form id="refundApplyFm" method="post" enctype="multipart/form-data">
   				<input type="hidden" id="studentId" name="studentId" value="${obj.refundObj.studentId }"/>
   				<input type="hidden" id="schoolId" name="schoolId" value="${obj.refundObj.schoolId }"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId }"/>
@@ -90,7 +90,10 @@
 	  				<tr>
 	  					<td colspan="10">
 	  						<span>上传退费申请单：</span>
-	  						<input style="width: 500px; height: 28px;" class="easyui-filebox" name="imgUrl" id="imgUrl" data-options="prompt:''" >
+	  						<input type="hidden" name="imgUrl" id="imgUrl"/>
+	                        <input style="width: 500px; height: 28px;" class="easyui-filebox" name="fileName" id="fileName" data-options="prompt:''"/>
+	                        <a href="javascript:void(0)" class="easyui-linkbutton" id="uploadBtn" iconCls="icon-save" iconCls="icon-save" style="width: 80px; height: 28px;">上传</a>
+	                        <a href="javascript:void(0)" class="easyui-linkbutton" id="cancelUploadBtn" iconCls="icon-cancel" iconCls="icon-cancel" style="width: 80px; height: 28px;">取消</a>
 	  					</td>
 	  				</tr>
 	  				<tr>

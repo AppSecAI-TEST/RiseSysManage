@@ -130,7 +130,6 @@ public class FileUploadServlet extends HttpServlet
 					obj.element("filePath", filePath);
 					obj.element("ownerId", handlerId);
 					obj.element("handlerId", handlerId);
-					obj.element("order", 1);
 					String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0101\",securityCode:\"0000000000\",params:{param:"+obj.toString()+"},rtnDataFormatType:\"user-defined\"}";
 					String rstMsg = ServiceEngine.invokeHttp(param);
 					JSONObject retObj = JSONObject.fromObject(rstMsg);

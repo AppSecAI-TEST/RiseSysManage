@@ -70,8 +70,7 @@
 	  				</tr>
 	  				<tr>
 	  					<td colspan="10">
-	  						<span>上传退费申请单：</span>
-	  						<input style="width: 500px; height: 28px;" class="easyui-filebox" name="imgUrl" id="imgUrl" data-options="prompt:''" >
+	  						<span>查看退费申请单：</span>
 	  					</td>
 	  				</tr>
 	  				<tr>
