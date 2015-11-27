@@ -34,7 +34,7 @@ function getAmount()
 	return $("#amount").textbox('getValue');
 }
 	
-function initDate()
+function initPayDate()
 {
 	$('#payDate').datebox().datebox('calendar').calendar(
 	{

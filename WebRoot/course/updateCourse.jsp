@@ -7,7 +7,7 @@
 	String studentId =request.getParameter("studentId");
 	String schoolId= request.getParameter("schoolId");
 	String courses=request.getParameter("courses");
-	
+	 
 	JSONObject object=new JSONObject();
 	if(courses!=null && !"".equals(courses))
     {
@@ -384,11 +384,9 @@
 								<span>口碑类型：</span>
 							</td>
 							<td colspan="9" align="left">
-								<input type="radio" womType="Y" name="praise"
-									onclick="changePraise(this)">
+								<input type="radio"  name="praise"  womType="Y" onclick="changePraise(this)">
 								<span>可控口碑</span>&nbsp;&nbsp;&nbsp;
-								<input type="radio" name="praise" womType="N"
-									onclick="changePraise(this)">
+								<input type="radio"  name="praise"  womType="N" onclick="changePraise(this)">
 								<span>不可控口碑</span>
 							</td>
 						</tr>
@@ -399,8 +397,7 @@
 							<td align="center" width="170px">
 								<select id="praiseSourceY" name="praiseSourceY"
 									class="easyui-combobox"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName',
-									onLoadSuccess:function(data){$('#praiseSourceY').combobox('setValue',data[0].codeFlag)},onChange:changePraiseSourceY"
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName'"
 									style="width: 150px; height: 28px;"
 									url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_WOM_T&codeType=WOM_CHANNEL_Y">
 								</select>
@@ -410,7 +407,7 @@
 									<tr id="A" style="display: none;">
 										<td align="left" colspan="8">
 											<span>活动名称：</span>
-											<select class="easyui-combobox" id="activeSchool"
+											<select class="easyui-combobox" id="activeSchool" style="width: 150px; height: 28px;"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 												  required="true">
 											</select>
@@ -422,7 +419,7 @@
 									<tr id="C" style="display: none;">
 										<td align="left" colspan="8">
 											<span>口碑顾问A：</span>
-											<select class="easyui-combobox" id="c_schoolA"
+											<select class="easyui-combobox" id="c_schoolA"  
 											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 											  required="true"
 												style="width: 150px; height: 28px;">
@@ -517,8 +514,7 @@
 							<td align="left" width="170px">
 								<select id="praiseSourceN" name="praiseSourceN"
 									class="easyui-combobox"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName',
-									onLoadSuccess:function(data){$('#praiseSourceN').combobox('setValue',data[0].codeFlag)},onChange:changePraiseSourceN"
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName'"
 									style="width: 150px; height: 28px;"
 									url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_WOM_T&codeType=WOM_CHANNEL_N">
 								</select>
@@ -532,7 +528,7 @@
 										</td>
 										<td align="center" style="border-right: 1px solid #ccc;">
 											<input type="text" class="easyui-textbox"
-												style="width: 150px">
+												style="width: 150px;height: 28px">
 										</td>
 										<td align="right" width="100px"
 											style="border-right: 1px solid #ccc;">
@@ -542,12 +538,12 @@
 											<select id="identityType" name="identityType"
 												class="easyui-combobox"
 												data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName',
-												onLoadSuccess:function(data){$('#identityType').combobox('setValue',data[0].codeFlag)},onChange:changePraiseSourceN"
+												onLoadSuccess:function(data){$('#identityType').combobox('setValue',data[0].codeFlag)}"
 												style="width: 150px; height: 28px;"
 												url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_T&codeType=IDENTITY_TYPE">
 											</select>
 											<input type="text" class="easyui-textbox"
-												style="width: 150px">
+												style="width: 150px;height: 28px">
 										</td>
 									</tr>
 									<tr style="display: none;">
@@ -558,18 +554,18 @@
 										<td align="center"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
 											<input type="text" class="easyui-textbox"
-												style="width: 150px">
+												style="width: 150px;height: 28px">
 										</td>
 										<td align="right"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
-											<span>转介绍老师:</span>
+											<span>转介绍老师：</span>
 										</td>
 										<td align="center"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
 											<select class="easyui-combobox" id="t_teacher_school"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 												 required="true"
-												style="width: 100px; height: 28px;">
+												style="width: 150px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="t_teacher_id"
 												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
@@ -589,7 +585,7 @@
 										</td>
 										<td align="left">
 											<input type="text" id="womStaffName" class="easyui-textbox"
-												style="width: 150px">
+												style="width: 150px;height: 28px;">
 										</td>
 									</tr>
 								</table>
@@ -673,7 +669,7 @@ var courses = [];
 var coupons = [];//使用抵扣劵
 var useCoupon = "";
 var wom = {};//口碑信息
-
+var oldWom;
 var minus = 0;//抵扣金额
 var favorAmount = 0;//优惠金额
 var totalAmount = 0;//课程金额
@@ -683,7 +679,8 @@ var oldMinusAmount='<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>';
 
 var giftFlag=false;//赠品、赠课是否已消耗
 
-initDate();
+
+initPayDate();
 loadStuBaseInfo();
 initCousreGift();
 initOldCourse();
@@ -1432,7 +1429,9 @@ $("#addCourse").click(function()
 		tr.find("td:eq(5)").find("span").html(name+"B");
 	}
 	
-	function changePraiseSourceY()
+$("#praiseSourceY").combobox
+({
+    onChange:function(n,o)
 	{
 		var source =$("#praiseSourceY").combobox("getValue");
 		if(source=="")
@@ -1453,9 +1452,10 @@ $("#addCourse").click(function()
 			})
 		}	
 	}
-	
-	
-	function changePraiseSourceN()
+});
+
+$("#praiseSourceN").combobox({
+	onChange:function()
 	{
 		var type=$("#praiseSourceN").combobox("getValue");
 		if(type=="Stu")
@@ -1489,6 +1489,7 @@ $("#addCourse").click(function()
 			$("#praiseTab2").find("tr").css("display","none");
 		}	
 	}
+});	
 	
 	function loadStuBaseInfo()
 	{
@@ -1504,15 +1505,19 @@ $("#addCourse").click(function()
 		}	
 	}
 	
+	
+	
 	function addCourseInfo()
 	{
 		//获取口碑信息-begin
 		var womType="";
-		$("input[name=praise]").each(function(){
-			if(this.checked){
+		$("input[name=praise]").each(function()
+		{
+			if(this.checked)
+			{
 				womType =$(this).attr("womType");
 			}
-		})
+		});
 		if($("#womDiv").css("display")=="block"&&womType!="")
 		{	
 			var womChannel=womType=="Y"?$("#praiseSourceY").combobox("getValue"):$("#praiseSourceN").combobox("getValue");
@@ -1525,6 +1530,14 @@ $("#addCourse").click(function()
 					studentCourseId:"",
 					handlerId:$("#handlerId").val()
 				};
+				if(oldWom!=null && oldWom!=undefined)
+				{
+					womId=oldWom.womId;
+					womType=oldWom.womType;
+					womChannel=oldWom.womChannel;
+					studentCourseId=oldWom.studentCourseId;
+					handlerId=oldWom.handlerId;
+				}
 				var womItem ={
 					itemId:"",
 					womId:"",
@@ -1746,13 +1759,13 @@ $("#addCourse").click(function()
 	
 
 
-	$("#c_schoolA").combobox({
-		onChange:function(){
+	$("#c_schoolA").combobox(
+	{
+		onChange:function()
+		{
 			var sId =$("#c_schoolA").combobox("getValue");
 			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
-			$("#c_adviserA").combobox({
-				url:urls
-			});
+			$("#c_adviserA").combobox({url:urls});
 		}
 	})
 	
@@ -1871,5 +1884,60 @@ $("#addCourse").click(function()
 		$('#giftDlg').attr("src","");
 		$('#giftDlg').dialog("close");
 	}
+	
+$(document).ready(function()
+{
+	$(function()
+	{
+		var studentCourseId=$("#studentCourseId").val();
+		var url  = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Student_Wom\",studentCourseId:\""+ studentCourseId + "\"}";
+		var woms=loadData(url);
+		var wom=woms[0];
+		if(wom==null||wom==undefined)
+		{
+			return;
+		}
+		oldWom=wom;
+		$("input[name=praise]").each(function()
+		{
+			var womType =$(this).attr("womType");
+			if(womType==wom.womType)
+			{
+				 $(this).attr("checked",true);
+				 changePraise(this);
+				 var womChannel=wom.womChannel;
+				 if(womType=='Y')
+				 {
+					
+					 $("#praiseSourceY").combobox("setValue",womChannel);
+					 $("#c_schoolA").combobox("setValue",wom.adviserASchool);
+					 $("#c_adviserA").combobox("setValue",wom.adviserA);
+					 $("#c_schoolB").combobox("setValue",wom.adviserBSchool);
+					 $("#c_adviserB").combobox("setValue",wom.adviserB);
+					 
+					 $("#c_schoolsA").combobox("setValue",wom.teacherASchool);
+					 $("#c_teacherA").combobox("setValue",wom.teacherA);
+					 $("#c_schoolsB").combobox("setValue",wom.teacherBSchool);
+					 $("#c_teacherB").combobox("setValue",wom.teacherB);
+					 //alert(JSON.stringify(wom));
+				 	 var obj={};
+					 obj.name=wom.studentName;
+					 obj.identityId=wom.identityId;
+					 obj.className=wom.className;
+					 obj.identityType=wom.identityType;
+					 obj.studentId=wom.studentId;
+					 obj.schoolId=wom.studentIdSchool;
+					 obj=JSON.stringify(obj);
+					 qryStudentInfo(obj);
+				 }else if(womType=='N')
+				 {
+					$("#praiseSourceN").combobox("setValue",womChannel); 
+					 
+				 }
+				 return false;
+			} 
+		});
+	});
+});
 	
 	</script>

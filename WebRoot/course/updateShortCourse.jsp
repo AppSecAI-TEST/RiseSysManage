@@ -274,7 +274,7 @@ var amount = 0;//实缴金额
 var oldMinusAmount='<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>';
 
 var giftFlag=false;//赠品、赠课是否已消耗
-initDate();
+initPayDate();
 loadStuBaseInfo();
 initOldCourse();
 function initOldCourse()

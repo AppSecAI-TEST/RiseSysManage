@@ -194,6 +194,8 @@ $("#updateCourse").click(function()
 				window.location.href="updateShortCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&courses="+str;
 			}else
 			{
+				var studentCourseId=row.studentCourseId;
+				var url  = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Student_Wom\",studentCourseId:\""+ studentCourseId + "\"}";
 				window.location.href="updateCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&courses="+str;
 			}
 			

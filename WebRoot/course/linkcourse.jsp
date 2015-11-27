@@ -221,7 +221,7 @@
   	</body>
 </html>
 <script type="text/javascript">
-initDate();
+initPayDate();
 	var studentCourse={};//最后提交学生课程信息
     var gifts  =[];  
 	var courses=[];

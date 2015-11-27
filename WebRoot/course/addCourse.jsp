@@ -391,7 +391,7 @@
 									<tr id="A" style="display: none;">
 										<td align="left" colspan="8">
 											<span>活动名称：</span>
-											<select class="easyui-combobox" id="activeSchool"
+											<select class="easyui-combobox" id="activeSchool" style="width: 150px; height: 28px;"
 												data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 												  required="true">
 											</select>
@@ -403,17 +403,17 @@
 									<tr id="C" style="display: none;">
 										<td align="left" colspan="8">
 											<span>口碑顾问A：</span>
-											<select class="easyui-combobox" id="c_schoolA"
+											<select class="easyui-combobox" id="c_schoolA" style="width: 150px; height: 28px;"
 											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 											 required="true"
 												style="width: 150px; height: 28px;">
 											</select>
-											<select class="easyui-combobox" id="c_adviserA"
+											<select class="easyui-combobox" id="c_adviserA" 
 												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 												style="width: 120px; height: 28px;">
 											</select>
 											<span>口碑顾问B：</span>
-											<select class="easyui-combobox" id="c_schoolB"
+											<select class="easyui-combobox" id="c_schoolB" style="width: 150px; height: 28px;"
 											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 											  required="true"
 												style="width: 150px; height: 28px;">
@@ -719,10 +719,22 @@
 	</body>
 </html>
 <script type="text/javascript">
-initDate();
+var studentCourse = {};//最后提交学生课程信息
+var gifts = [];
+var courses = [];
+var coupons = [];//使用抵扣劵
+var useCoupon = "";
+var wom = {};//口碑信息
+
+var minus = 0;//抵扣金额
+var favorAmount = 0;//优惠金额
+var totalAmount = 0;//课程金额
+var amount = 0;//实缴金额
+
+initPayDate();
 var schools=getSchools();
 var teachers=getTeachers();
- 
+var giftFlag=false; 
 $("#activeSchool").combobox({data:schools});
 $("#c_schoolA").combobox({data:schools});
 $("#c_schoolB").combobox({data:schools});
@@ -998,18 +1010,6 @@ $('#favorAmount').textbox( {
 		$("#amount").textbox('setValue', amount);
 	}
 });
-var studentCourse = {};//最后提交学生课程信息
-var gifts = [];
-var courses = [];
-var coupons = [];//使用抵扣劵
-var useCoupon = "";
-var wom = {};//口碑信息
-
-var minus = 0;//抵扣金额
-var favorAmount = 0;//优惠金额
-var totalAmount = 0;//课程金额
-var amount = 0;//实缴金额
-
 
 
 //提交
@@ -1491,13 +1491,14 @@ $("#addCourse").click(function()
 	
 	function initFeeInfo()
 	{
-		var minus = 0;
-		var favorAmount = 0;
-		var totalAmount = 0;
-		var amount = 0;
-		$("#totalAmount").textbox("setValue",0);
-		$("#minusAmount").textbox("setValue",0);
-		$("#amount").textbox("setValue",0);
+	    minus = 0;
+		favorAmount = 0;
+		totalAmount = 0;
+		amount = 0;
+		$("#favorAmount").textbox("setValue","");
+		$("#totalAmount").textbox("setValue","");
+		$("#minusAmount").textbox("setValue","");
+		$("#amount").textbox("setValue","");
 		$('#useCoupon').html("");
 	}
 	
