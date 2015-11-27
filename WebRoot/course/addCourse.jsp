@@ -1705,8 +1705,8 @@ $("#addCourse").click(function()
 						womItem["identityId"]=tr1.find("td:eq(3)").find(".easyui-textbox").textbox("getValue");
 						var tr2 =$("#praiseTab2").find("tr:eq(1)");
 						womItem["className"]=tr2.find("td:eq(1)").find(".easyui-textbox").textbox("getValue");
-						womItem["teacherIdSchool"]=tr2.find("td:eq(3)").find(".easyui-combobox.school").combobox("getValue");
-						womItem["teacherId"]=tr2.find("td:eq(3)").find(".easyui-combobox.teacher").combobox("getValue");
+						womItem["teacherIdSchool"]=$("#t_teacher_school").combobox("getValue");
+						womItem["teacherId"]=$("#t_teacher_id").combobox("getValue");
 						
 					}	
 						
