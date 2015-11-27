@@ -104,7 +104,7 @@
 						<th data-options="field:'ck',checkbox:true"></th>
 						<th data-options="field:'schoolName',width:80,align:'center'">校区</th>
 						<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
-						<th data-options="field:'name',width:80,align:'center'">英文名</th>
+						<th data-options="field:'byName',width:80,align:'center'">英文名</th>
 						<th data-options="field:'sexVal',width:50,align:'center'">性别</th>
 						<th data-options="field:'identityId',width:200,align:'center'">证件号码</th>
 						<th data-options="field:'birthday',width:100,align:'center'">出生日期</th>
