@@ -63,23 +63,23 @@
   		<div style="height: 5px;"></div>
   		<div style="padding:5px 0;min-width:1100px; width:100%;">
   			<table class="easyui-datagrid" title="班级学员列表" style="height:auto;" id="list_data" fitColumns="true" singleSelect="false"
-  				url="<%=path %>/pubData/qryData.do?param={'classInstId':'${obj.attendClassObj.classInstId }','funcNodeId':'1008'}">
+  				url="<%=path %>/pubData/qryDataListByPage.do?param={'classInstId':'${obj.attendClassObj.classInstId }','funcNodeId':'1021'}">
 		  		<thead>
 		  			<tr>
 		  				<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
 		  				<th data-options="field:'byName',width:80,align:'center'">英文名</th>
 		  				<th data-options="field:'payDate',width:100,align:'center'">缴费时间</th>
 		  				<th data-options="field:'payDate',width:100,align:'center'">进班上课日期</th>
-		  				<th data-options="field:'phone',width:100,align:'center'">联系方式</th>
+		  				<th data-options="field:'phone',width:180,align:'center'">联系方式</th>
 		  				<th data-options="field:'courseStateText',width:100,align:'center'">课程状态</th>
 		  				<th data-options="field:'higherStageId',width:100,align:'center'">已升学阶段</th>
-		  				<th data-options="field:'',width:100,align:'center'">正常课时</th>
-		  				<th data-options="field:'',width:100,align:'center'">请假课时</th>
-		  				<th data-options="field:'',width:100,align:'center'">旷课课时</th>
-		  				<th data-options="field:'',width:100,align:'center'">迟到次数</th>
-		  				<th data-options="field:'',width:100,align:'center'">已补课时</th>
-		  				<th data-options="field:'',width:100,align:'center'">异动开始日期</th>
-		  				<th data-options="field:'',width:100,align:'center'">异动时长（天）</th>
+		  				<th data-options="field:'normalAttend',width:80,align:'center'">正常课时</th>
+		  				<th data-options="field:'leaveAttend',width:80,align:'center'">请假课时</th>
+		  				<th data-options="field:'truancyAttend',width:80,align:'center'">旷课课时</th>
+		  				<th data-options="field:'behindhandAttend',width:80,align:'center'">迟到次数</th>
+		  				<th data-options="field:'makeupAttend',width:80,align:'center'">已补课时</th>
+		  				<th data-options="field:'exceptionDate',width:120,align:'center'">异动开始日期</th>
+		  				<th data-options="field:'exceptionDays',width:120,align:'center'">异动时长（天）</th>
 		  			</tr>
 		  		</thead>
 		  	</table>
@@ -87,7 +87,7 @@
   		<div style="height: 5px;"></div>
   		<div style="padding:5px 0;min-width:1101px; width:100%;">
   			<table class="easyui-datagrid" style="height: auto; width: 100%" id="list_data" title="放班班操作历史信息" fitColumns="true" singleSelect="false"
-  				url="<%=path %>/pubData/qryData.do?param={'classInstId':'${obj.createClassObj.classInstId }','funcNodeId':'1008'}">
+  				url="<%=path %>/pubData/qryData.do?param={'classInstId':'${obj.attendClassObj.classInstId }','funcNodeId':'1008'}">
 				<thead>
 					<tr>
 						<th data-options="field:'operType',width:100,align:'center'">操作类型</th>

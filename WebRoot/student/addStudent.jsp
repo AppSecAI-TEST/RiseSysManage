@@ -122,23 +122,23 @@
 						<td align="center"><span>操作</span></td>
 					</tr>
 					<tr>
-						<td width="100px">
+						<td width="100px" align="center">
 							<select id="relationType" class="easyui-combobox" style="width: 100px; height: 28px;"
 							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
 	      					onLoadSuccess:function(data){$('#relationType').combobox('setValue',data[0].codeFlag);}"
 	      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=CONTACT_T&codeType=RELATION_TYPE">
 	        				</select>
 						</td>
-						<td width="120px">
+						<td width="120px" align="center">
 							<input id="contactName" type="text" class="easyui-textbox validatebox" required="true" style="width: 120px; height: 28px;"/>
 						</td>
-						<td width="120px">
+						<td width="120px" align="center">
 							<input id="job" type="text" class="easyui-textbox validatebox" required="true" style="width: 120px; height: 28px;"/>
 						</td>
 						<td width="80px" align="center">
 							<input name="used" type="checkbox"/>
 						</td>
-						<td width="310px">
+						<td width="310px" align="center">
 							<select id="contactIdentityType" class="easyui-combobox" style="width: 100px; height: 28px;"
 							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
 	      					onLoadSuccess:function(data){$('#contactIdentityType').combobox('setValue',data[0].codeFlag);}" 
@@ -146,10 +146,10 @@
 	        				</select>
 	        				<input id="contactIdentityId" type="text" class="easyui-textbox numberbox" required="true" style="width: 200px; height: 28px;" validType="length[0,18]" />
 						</td>
-						<td width="150px">
+						<td width="150px" align="center">
 							<input id="phone" type="text" class="easyui-textbox numberbox" required="true" style="width: 150px; height: 28px;" validType="length[0,11]" invalidMessage="不能超过11个字符！"/>
 						</td>
-						<td width="80px">
+						<td width="80px" align="center">
 							<a href="javascript:void(0)" id="addContact" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a>
 						</td>
 					</tr>

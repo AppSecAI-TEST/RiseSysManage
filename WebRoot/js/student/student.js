@@ -120,8 +120,9 @@ $(document).ready(function() {
     $("#viewVip").click(function() {
     	if(validateIsSelect()) {
     		var row = $('#list_data').datagrid('getSelected');
+    		var vip = row.vip;
     		var studentId = row.studentId;
-    		window.location.href = "/sys/student/qryStudentVipById.do?type=VIEW&studentId="+studentId;
+			window.location.href = "/sys/view.jsp?studentId="+studentId;
     	} else {
     		$.messager.alert('提示', "请您选择您要浏览的学员！");
     	}
