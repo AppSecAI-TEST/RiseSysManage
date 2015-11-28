@@ -136,7 +136,7 @@
 							effDateStr = effDateStr.replace(/-/g, "/");
 							var effDate = new Date(effDateStr);
 							var currentDate = new Date();
-							if (effDate > currentDate) {
+							if (effDate <= currentDate) {
 								var expDateStr = row.expDate;
 								expDateStr = expDateStr.replace(/-/g, "/");
 								var expDate = new Date(expDateStr);
