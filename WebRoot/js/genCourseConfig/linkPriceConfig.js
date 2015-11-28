@@ -237,6 +237,10 @@ function addLinkPriceSubmit()
 		$.messager.alert('提示', "请选择结束时间！");
 		return;
 	}
+	if(effDate <= (new Date().format("yyyy-MM-dd"))){
+		$.messager.alert('提示', "开始时间不能小于当前时间！");
+		return;
+	}
 	if(expDate <= effDate){
 		$.messager.alert('提示', "开始时间不能小于结束时间！");
 		return;
@@ -358,6 +362,10 @@ function updateLinkPriceSubmit()
 	}
 	if(expDate == "" || expDate == undefined){
 		$.messager.alert('提示', "请选择结束时间！");
+		return;
+	}
+	if(effDate <= (new Date().format("yyyy-MM-dd"))){
+		$.messager.alert('提示', "开始时间不能小于当前时间！");
 		return;
 	}
 	if(expDate <= effDate){

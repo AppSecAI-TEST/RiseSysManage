@@ -267,7 +267,7 @@ function updateFavorPriceSubmit()
 		return;
 	}
 	if(effDate == "" || effDate == undefined){
-		$.messager.alert('提示', "请选择开始时间！");
+		$.messager.alert('提示', "请选择生效时间！");
 		return;
 	}
 	if(effDate <= (new Date().format("yyyy-MM-dd"))){
