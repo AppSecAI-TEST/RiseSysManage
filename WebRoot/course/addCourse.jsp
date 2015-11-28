@@ -123,9 +123,6 @@
 							<td>
 								<select name="classType" class="easyui-combobox" id="classType"
 									style="width: 150px; height: 28px;"  editable='false' required="true">
-									<option>
-										请先选择阶段
-									</option>
 								</select>
 							</td>
 							<td align="right">
@@ -144,7 +141,7 @@
 								<span>业绩顾问A：</span>
 							</td>
 							<td>
-								<select name="adviserA" class="easyui-combobox" id="adviserA"
+								<select name="adviserA" class="easyui-combobox" id="adviserA" required="true"
 									style="width: 150px; height: 28px;"
 									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 		      						 >
@@ -168,7 +165,7 @@
 							<span>业绩老师A：</span>
 						</td>
 						<td>
-							<select name="adviserTeacherA" class="easyui-combobox" id="adviserTeacherA"
+							<select name="adviserTeacherA" class="easyui-combobox" id="adviserTeacherA" required="true"
 								style="width: 150px; height: 28px;"
 								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 	      						 >
@@ -207,8 +204,7 @@
 	      	        <td width="8%" align="right"><span>赠品类型：</span></td>
 	      	        <td width="8%">
 	      	        <select id="parentType" style="width: 100px; height: 28px;"
-	      			data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
-	      			required="true" >
+	      			data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'">
       	            </select>
       	            </td>
 	      	        <td width="7%" align="right"><span>赠品名称：</span></td>
@@ -217,8 +213,8 @@
 	   	                <tr>
 			      	         <td id='td0' ><select  class="easyui-combobox" id="giftType" style="width: 120px; height: 28px;"></select></td>
 			      	         <td id="td1" style="display:none"><select  class="easyui-combobox" id="giftId" style="width: 120px; height: 28px;"></select></td>
-			      	         <td id="td2" style="display:none"><input   id="giftCode" type="text" class="easyui-textbox validatebox" required="true" style="width:150px; height: 28px;"/></td>
-		                     <td id="td3" style="display:none"><input   id="giftEffDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;"/></td>
+			      	         <td id="td2" style="display:none"><input   id="giftCode" type="text" class="easyui-textbox validatebox"  style="width:150px; height: 28px;"/></td>
+		                     <td id="td3" style="display:none"><input   id="giftEffDate" type="text" class="easyui-datebox"  style="width: 100px; height: 28px;"/></td>
 	      	             </tr>
       	            </table>
       	            </td>
@@ -230,7 +226,7 @@
 	      	          <label for="radio"> <span>未领用</span></label>
       	           </td>
 	      	        <td width="6%" align="right"><span>发放人：</span></td>
-	      	        <td width="8%"><input   id="granter" type="text" class="easyui-textbox validatebox" required="true" style="width: 100px; height: 28px;"/></td>
+	      	        <td width="8%"><input   id="granter" type="text" class="easyui-textbox validatebox"  style="width: 100px; height: 28px;"/></td>
 	      	       
 	      	        <td width="6%"><a href="javascript:void(0)" id="addGiftBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a></td>
       	        </tr>
@@ -393,7 +389,7 @@
 											<span>活动名称：</span>
 											<select class="easyui-combobox" id="activeSchool" style="width: 150px; height: 28px;"
 												data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-												  required="true">
+												  >
 											</select>
 											<select class="easyui-combobox" id="activeId" style="width: 150px; height: 28px;"
 												data-options="valueField: 'actionId', textField: 'title', panelHeight: 'auto'">
@@ -405,7 +401,7 @@
 											<span>口碑顾问A：</span>
 											<select class="easyui-combobox" id="c_schoolA" style="width: 150px; height: 28px;"
 											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-											 required="true"
+											 
 												style="width: 150px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="c_adviserA" 
@@ -415,7 +411,7 @@
 											<span>口碑顾问B：</span>
 											<select class="easyui-combobox" id="c_schoolB" style="width: 150px; height: 28px;"
 											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-											  required="true"
+											  
 												style="width: 150px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="c_adviserB"
@@ -429,7 +425,7 @@
 											<span>口碑顾问A：</span>
 											<select class="easyui-combobox" id="c_schoolsA"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-												  required="true"
+												  
 												style="width: 120px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="c_teacherA"
@@ -439,7 +435,7 @@
 											<span>口碑顾问B：</span>
 											<select class="easyui-combobox" id="c_schoolsB"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-												  required="true"
+												  
 												style="width: 120px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="c_teacherB"
@@ -513,7 +509,7 @@
 										</td>
 										<td align="center" style="border-right: 1px solid #ccc;">
 											<input type="text" class="easyui-textbox"
-												style="width: 150px">
+												style="width: 150px;height: 28px">
 										</td>
 										<td align="right" width="100px"
 											style="border-right: 1px solid #ccc;">
@@ -539,7 +535,7 @@
 										<td align="center"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
 											<input type="text" class="easyui-textbox"
-												style="width: 150px">
+												style="width: 150px;height: 28px">
 										</td>
 										<td align="right"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
@@ -549,7 +545,7 @@
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
 											<select class="easyui-combobox" id="t_teacher_school"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-												  required="true"
+												  
 												style="width: 100px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="t_teacher_id"
@@ -1015,6 +1011,8 @@ $('#favorAmount').textbox( {
 //提交
 $("#submitBtn").click(function() 
 {
+	if(!$("#courseFm").form('validate'))return;
+	
 	if($("#payDate").datebox("getValue")=="")
 	{
 		showMessage("提示","请选择缴费时间",null);

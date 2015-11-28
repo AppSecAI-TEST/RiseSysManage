@@ -236,8 +236,6 @@ public class QryPubDataController
 	@RequestMapping(value = "/qryTeacherList.do")
 	public void qryTeacherList(String schoolId, String classType, HttpServletResponse response)
 	{
-		log.error(schoolId);
-		log.error(classType);
 		PrintWriter out = null;
 		try
 		{

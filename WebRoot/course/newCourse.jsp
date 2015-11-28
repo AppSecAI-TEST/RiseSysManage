@@ -49,6 +49,7 @@
 
 	<body>
 	 	<div  class="easyui-panel" title="连报课程<%=order%>" style="width:99%;padding:10px;border-color:#95B1E7">
+	 		<input id="frameName" name="frameName" type="hidden" value="<%=name%>"/>
 		<form id="courseFm">
 			<div style="height: 10px;"></div>
 			<input id="studentCourseId" name="studentCourseId" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"studentCourseId")%>"/>
@@ -65,6 +66,7 @@
 						<tr>
 							<input id="advisterType" name="adviserType" type="hidden" value="teacher" />
 							<input id="courseState" name="courseState" type="hidden" value="001" />
+							<input id="courseType" name="courseType" type="hidden" value="001" />
 							<input id="feeState" name="feeState" type="hidden" value="00A" />
 							<input id="stageOrder" name="stageOrder" type="hidden" value="" />
 							<td align="right"><span>缴费时间：</span></td>
@@ -109,18 +111,16 @@
 								<div id="adviserADiv">
 								<select name="adviserA" class="easyui-combobox" id="adviserA" required="true"
 									style="width: 150px; height: 28px;"
-									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-									onLoadSuccess:function(data){$('#adviserA').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserA")%>');}"
-		      						url="<%=path %>/pubData/qryTeacherList.do">
+									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+									 ">
 								</select>
 								</div>
 								
 								<div id="adviserTeacherADiv" style="display:none">
 									<select name="adviserTeacherA" class="easyui-combobox" id="adviserTeacherA"
 								style="width: 150px; height: 28px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-								onLoadSuccess:function(data){$('#adviserTeacherA').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherA")%>');}"
-	      						url="<%=path %>/pubData/qryTeacherList.do">
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+								 >
 							</select>
 	      						</div>
 	      						
@@ -130,17 +130,13 @@
 								<div id="adviserBDiv">
 								<select name="adviserB" class="easyui-combobox" id="adviserB" required="true"
 									style="width: 150px; height: 28px;"
-									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-									onLoadSuccess:function(data){$('#adviserB').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserB")%>');}"
-		      						url="<%=path %>/pubData/qryTeacherList.do">
+									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
 								</select>
 								</div>
 								<div id="adviserTeacherBDiv" style="display:none">
 							<select name="adviserTeacherB" class="easyui-combobox" id="adviserTeacherB"
 								style="width: 150px; height: 28px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-								onLoadSuccess:function(data){$('#adviserTeacherB').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherB")%>');}"
-	      						url="<%=path %>/pubData/qryTeacherList.do">
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
 							</select>
 	      						</div>
 							
@@ -330,8 +326,7 @@
 							<td align="center" width="170px">
 								<select id="praiseSourceY" name="praiseSourceY"
 									class="easyui-combobox"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName',
-									onLoadSuccess:function(data){$('#praiseSourceY').combobox('setValue',data[0].codeFlag)},onChange:changePraiseSourceY"
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName'"
 									style="width: 150px; height: 28px;"
 									url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_WOM_T&codeType=WOM_CHANNEL_Y">
 								</select>
@@ -341,9 +336,9 @@
 									<tr id="A" style="display: none;">
 										<td align="left" colspan="8">
 											<span>活动名称：</span>
-											<select class="easyui-combobox" id="activeSchool"
+											<select class="easyui-combobox" id="activeSchool" style="width: 150px; height: 28px;"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-												url="<%=path %>/pubData/qrySchoolList.do?schoolId=" required="true">
+												  required="true">
 											</select>
 											<select class="easyui-combobox" id="activeId" style="width: 150px; height: 28px;"
 												data-options="valueField: 'actionId', textField: 'title', panelHeight: 'auto'">
@@ -355,7 +350,7 @@
 											<span>口碑顾问A：</span>
 											<select class="easyui-combobox" id="c_schoolA"
 											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-											url="<%=path %>/pubData/qrySchoolList.do?schoolId=" required="true"
+											required="true"
 												style="width: 150px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="c_adviserA"
@@ -365,7 +360,7 @@
 											<span>口碑顾问B：</span>
 											<select class="easyui-combobox" id="c_schoolB"
 											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-											url="<%=path %>/pubData/qrySchoolList.do?schoolId=" required="true"
+											  required="true"
 												style="width: 150px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="c_adviserB"
@@ -379,7 +374,7 @@
 											<span>口碑顾问A：</span>
 											<select class="easyui-combobox" id="c_schoolsA"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-												url="<%=path %>/pubData/qrySchoolList.do?schoolId=" required="true"
+												  required="true"
 												style="width: 120px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="c_teacherA"
@@ -389,7 +384,7 @@
 											<span>口碑顾问B：</span>
 											<select class="easyui-combobox" id="c_schoolsB"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-												url="<%=path %>/pubData/qrySchoolList.do?schoolId=" required="true"
+												 required="true"
 												style="width: 120px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="c_teacherB"
@@ -448,8 +443,8 @@
 							<td align="left" width="170px">
 								<select id="praiseSourceN" name="praiseSourceN"
 									class="easyui-combobox"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName',
-									onLoadSuccess:function(data){$('#praiseSourceN').combobox('setValue',data[0].codeFlag)},onChange:changePraiseSourceN"
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName'"
+									 
 									style="width: 150px; height: 28px;"
 									url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_WOM_T&codeType=WOM_CHANNEL_N">
 								</select>
@@ -472,8 +467,8 @@
 										<td align="center">
 											<select id="identityType" name="identityType"
 												class="easyui-combobox"
-												data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName',
-												onLoadSuccess:function(data){$('#identityType').combobox('setValue',data[0].codeFlag)},onChange:changePraiseSourceN"
+												data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName'"
+												 
 												style="width: 150px; height: 28px;"
 												url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_T&codeType=IDENTITY_TYPE">
 											</select>
@@ -499,7 +494,7 @@
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
 											<select class="easyui-combobox" id="t_teacher_school"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-												url="<%=path %>/pubData/qrySchoolList.do?schoolId=" required="true"
+												  required="true"
 												style="width: 100px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="t_teacher_id"
@@ -584,8 +579,36 @@
 	</body>
 </html>
 <script type="text/javascript">
+var studentCourse = {};//最后提交学生课程信息
+var gifts = [];
+var courses = [];
+var coupons = [];//使用抵扣劵
+var useCoupon = "";
+var wom = {};//口碑信息
+var oldWom;
+var minus = 0;//抵扣金额
+var favorAmount = 0;//优惠金额
+var totalAmount = 0;//课程金额
+var amount = 0;//实缴金额
+var schools=getSchools();
+var teachers=getTeachers();
 initCousreGift();
 initDate(); 
+$("#activeSchool").combobox({data:schools});
+$("#c_schoolA").combobox({data:schools});
+$("#c_schoolB").combobox({data:schools});
+$("#t_teacher_school").combobox({data:schools});
+$("#c_schoolsB").combobox({data:schools});
+$("#c_schoolsA").combobox({data:schools});
+
+$("#adviserA").combobox({data:teachers});
+$("#adviserB").combobox({data:teachers});
+
+$("#adviserTeacherA").combobox({data:teachers});
+$("#adviserTeacherB").combobox({data:teachers});
+
+$("#s_teacherA").combobox({data:teachers});
+$("#s_teacherB").combobox({data:teachers});
 $('#parentType').combobox({
 	 onChange:function(n,o)
 		{
@@ -760,7 +783,7 @@ $('#stageId').combobox({
 					$("#classType").combobox('select',data[i].classType);
 					$("#totalAmount").textbox('setValue', data[i].amount);
 					minus = $("#minusAmount").textbox('getValue');
-					//favorAmount = $("#favorAmount").textbox('getValue');
+					favorAmount = $("#favorAmount").textbox('getValue');
 					totalAmount = $("#totalAmount").textbox('getValue');
 					amount = totalAmount - minus - favorAmount;
 					$("#amount").textbox('setValue', amount);
@@ -786,11 +809,12 @@ $("#classType").combobox(
 				$("#totalAmount").textbox('setValue', data[i].amount);
 				 
 				minus = $("#minusAmount").textbox('getValue');
-				//favorAmount = $("#favorAmount").textbox('getValue');
+				favorAmount = $("#favorAmount").textbox('getValue');
 				totalAmount = $("#totalAmount").textbox('getValue');
 				amount = totalAmount - minus - favorAmount;
 				$("#amount").textbox('setValue', amount);
 				$("#coursePriceId").val(data[i].setPriceId); 
+				parent.window.countAmount();
 			}
 			
 		}
@@ -805,6 +829,7 @@ $('#favorAmount').textbox( {
 		totalAmount = $("#totalAmount").textbox('getValue');
 		amount = totalAmount - minus - favorAmount;
 		$("#amount").textbox('setValue', amount);
+		parent.window.countAmount();
 	}
 });
 
@@ -826,19 +851,6 @@ function initOldCourse()
 		$("#adviserB").combobox({ disabled: true});
 	}
 }
-
-var studentCourse = {};//最后提交学生课程信息
-var gifts = [];
-var courses = [];
-var coupons = [];//使用抵扣劵
-var useCoupon = "";
-var wom = {};//口碑信息
-
-var minus = 0;//抵扣金额
-var favorAmount = 0;//优惠金额
-var totalAmount = 0;//课程金额
-var amount = 0;//实缴金额
-
 
 //删除相对应的行  
 function delRow(rows) {
@@ -1028,7 +1040,7 @@ $("#addGiftBtn").click(function ()
 			$("#addGift").after(giftTR);
 			var height = $(document).height();
 			var frameName=$("#frameName").val();
-			$(frameName,parent.document).css("height",height);
+			$("#frame"+frameName,parent.document).css("height",height);
 			clearData("giftModelTR");
 			$("input[name='isGetY'][value='Y']").attr("checked", "checked");
 	    }
@@ -1101,6 +1113,9 @@ $("#addCourse").click(function()
 			$("#add").after(objectTr);
 			clearData("giftCourseTr");
 			$("#courseHours").html("");
+			var height = $(document).height();
+			var frameName=$("#frameName").val();
+			$("#frame"+frameName,parent.document).css("height",height);
 		}
 			
 		
@@ -1357,7 +1372,10 @@ $("#feeType").combobox(
 		$('#useCoupon').html("");
 	}
 	
-	function changePraiseSourceY()
+//可控口碑来源	
+$("#praiseSourceY").combobox
+({
+    onChange:function(n,o)
 	{
 		var source =$("#praiseSourceY").combobox("getValue");
 		if(source=="")
@@ -1377,10 +1395,15 @@ $("#feeType").combobox(
 				}	
 			})
 		}	
+		var height = $(document).height();
+		var frameName=$("#frameName").val();
+		$("#frame"+frameName,parent.document).css("height",height);
 	}
+});
 	
-	
-	function changePraiseSourceN()
+//不可控口碑来源		
+$("#praiseSourceN").combobox({
+	onChange:function()
 	{
 		var type=$("#praiseSourceN").combobox("getValue");
 		if(type=="Stu")
@@ -1412,12 +1435,16 @@ $("#feeType").combobox(
 		else
 		{
 			$("#praiseTab2").find("tr").css("display","none");
-		}	
+		}
+		var height = $(document).height();
+		var frameName=$("#frameName").val();
+		$("#frame"+frameName,parent.document).css("height",height);
 	}
+});	
 	
 	function getWom()
 	{
-		//获取口碑信息-begin
+			//获取口碑信息-begin
 		var womType="";
 		$("input[name=praise]").each(function()
 		{
@@ -1425,8 +1452,8 @@ $("#feeType").combobox(
 			{
 				womType =$(this).attr("womType");
 			}
-		})
-		if(womType!="")
+		});
+		if($("#womDiv").css("display")=="block"&&womType!="")
 		{	
 			var womChannel=womType=="Y"?$("#praiseSourceY").combobox("getValue"):$("#praiseSourceN").combobox("getValue");
 			if(trim(womChannel)!="")
@@ -1438,6 +1465,10 @@ $("#feeType").combobox(
 					studentCourseId:"",
 					handlerId:$("#handlerId").val()
 				};
+				if(oldWom!=null && oldWom!=undefined)
+				{
+					womInfo.womId=oldWom.womId;
+				}
 				var womItem ={
 					itemId:"",
 					womId:"",
@@ -1462,11 +1493,12 @@ $("#feeType").combobox(
 					staffName:"",
 					handlerId:$("#handlerId").val()
 				};
+				var womGiftArr=[];
 				if(womChannel=="A")
 				{
 					if($("#activeId").combobox("getValue")=="")
 					{
-						parent.window.showMsg("请选择一个活动!");
+						$.messager.alert('提示', "请选择一个活动!");
 					}
 					else
 					{
@@ -1478,7 +1510,7 @@ $("#feeType").combobox(
 				{
 					if($("#c_adviserA").combobox("getValue")==""&&$("#c_adviserB").combobox("getValue")=="")
 					{
-						parent.window.showMsg("请至少选择一个顾问!");
+						$.messager.alert('提示', "请至少选择一个顾问!");
 						return false;
 					}
 					else
@@ -1493,7 +1525,7 @@ $("#feeType").combobox(
 				{
 					if($("#c_teacherA").combobox("getValue")==""&&$("#c_teacherB").combobox("getValue")=="")
 					{
-						parent.window.showMsg("请至少选择一个顾问!");
+						$.messager.alert('提示', "请至少选择一个顾问!");
 						return false;
 					}
 					else
@@ -1511,6 +1543,22 @@ $("#feeType").combobox(
 							womItem["identityType"]=tr.attr("identityType");
 							womItem["identityId"]=tr.find("td:eq(3)").find("span").html();
 							womItem["className"]=tr.find("td:eq(5)").find("span").html();
+							$(".womGiftSpan").each(function(){
+								var womGift={};
+								womGift.studentId=womItem["studentId"];
+								womGift.giftName=$(this).attr("giftName");
+								womGift.usableAmount=$(this).attr("usableAmount");
+								womGift.amount=$(this).attr("amount");
+								womGift.studentGiftId=$(this).attr("studentGiftId");
+								womGift.unit = $(this).attr("unit"); 
+								womGift.effNum =$(this).attr("effNum"); 
+								womGift.giftType = $(this).attr("giftType");
+								womGift.giftId=$(this).attr("giftId");
+								womGift.giftCode=$(this).attr("giftCode");
+								womGift.isGet=$(this).attr("isGet");
+								womGift.granter=$(this).attr("granter");
+								womGiftArr.push(womGift);
+							});
 						}	
 					}	
 				}
@@ -1519,7 +1567,7 @@ $("#feeType").combobox(
 					var tr1=$("#praiseTab2").find("tr:eq(0)");
 					if(tr1.attr("studentId")==null)
 					{
-						parent.window.showMsg("请选择一个学员!");
+						$.messager.alert('提示', "请选择一个学员!");
 						return false;
 					}
 					else
@@ -1531,8 +1579,8 @@ $("#feeType").combobox(
 						womItem["identityId"]=tr1.find("td:eq(3)").find(".easyui-textbox").textbox("getValue");
 						var tr2 =$("#praiseTab2").find("tr:eq(1)");
 						womItem["className"]=tr2.find("td:eq(1)").find(".easyui-textbox").textbox("getValue");
-						womItem["teacherIdSchool"]=tr2.find("td:eq(3)").find(".easyui-combobox.school").combobox("getValue");
-						womItem["teacherId"]=tr2.find("td:eq(3)").find(".easyui-combobox.teacher").combobox("getValue");
+						womItem["teacherIdSchool"]=$("#t_teacher_school").combobox("getValue");
+						womItem["teacherId"]=$("#t_teacher_id").combobox("getValue");
 						
 					}	
 						
@@ -1545,15 +1593,16 @@ $("#feeType").combobox(
 					}
 					else
 					{
-						parent.window.showMsg("请填写员工姓名 !");
+						$.messager.alert('提示', "请填写员工姓名 !");
 						return false;
 					}	
 				}	
 				wom["info"]=womInfo;
 				wom["item"]=womItem;
+				wom["womGifts"]=womGiftArr;
 			}	
 		}
-		 return womInfo;
+		 return wom;
 	}
 	
 	
@@ -1608,6 +1657,10 @@ $("#feeType").combobox(
 	$("#c_schoolA").combobox({
 		onChange:function(){
 			var sId =$("#c_schoolA").combobox("getValue");
+			if(sId=='')
+			{
+				return;
+			}
 			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
 			$("#c_adviserA").combobox({
 				url:urls
@@ -1618,6 +1671,10 @@ $("#feeType").combobox(
 	$("#c_schoolB").combobox({
 		onChange:function(){
 			var sId =$("#c_schoolB").combobox("getValue");
+			if(sId=='')
+			{
+				return;
+			}
 			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
 			$("#c_adviserB").combobox({
 				url:urls
@@ -1628,6 +1685,10 @@ $("#feeType").combobox(
 	$("#c_schoolsA").combobox({
 		onChange:function(){
 			var sId =$("#c_schoolsA").combobox("getValue");
+			if(sId=='')
+			{
+				return;
+			}
 			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
 			$("#c_teacherA").combobox({
 				url:urls
@@ -1638,6 +1699,10 @@ $("#feeType").combobox(
 	$("#c_schoolsB").combobox({
 		onChange:function(){
 			var sId =$("#c_schoolsB").combobox("getValue");
+			if(sId=='')
+			{
+				return;
+			}
 			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
 			$("#c_teacherB").combobox({
 				url:urls
@@ -1648,6 +1713,10 @@ $("#feeType").combobox(
 	$("#t_teacher_school").combobox({
 		onChange:function(){
 			var sId =$("#t_teacher_school").combobox("getValue");
+			if(sId=='')
+			{
+				return;
+			}
 			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
 			$("#t_teacher_id").combobox({
 				url:urls
@@ -1658,6 +1727,10 @@ $("#feeType").combobox(
 	$("#s_schooldA").combobox({
 		onChange:function(){
 			var sId =$("#s_schooldA").combobox("getValue");
+			if(sId=='')
+			{
+				return;
+			}
 			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
 			$("#s_teacherA").combobox({
 				url:urls
@@ -1668,6 +1741,10 @@ $("#feeType").combobox(
 	$("#s_schooldB").combobox({
 		onChange:function(){
 			var sId =$("#s_schooldB").combobox("getValue");
+			if(sId=='')
+			{
+				return;
+			}
 			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
 			$("#s_teacherB").combobox({
 				url:urls
@@ -1675,5 +1752,69 @@ $("#feeType").combobox(
 		}
 	})
 	
-	
+	$(document).ready(function()
+{
+	$(function()
+	{
+		var studentCourseId=$("#studentCourseId").val();
+		var url  = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Student_Wom\",studentCourseId:\""+ studentCourseId + "\"}";
+		var woms=loadData(url);
+		var wom=woms[0];
+		if(wom==null||wom==undefined)
+		{
+			return;
+		}
+		oldWom=wom;
+		$("input[name=praise]").each(function()
+		{
+			var womType =$(this).attr("womType");
+			if(womType==wom.womType)
+			{
+				 $(this).attr("checked",true);
+				 changePraise(this);
+				 var womChannel=wom.womChannel;
+				 var obj={};
+			 	 obj.name=wom.studentName;
+				 obj.identityId=wom.identityId;
+				 obj.className=wom.className;
+				 obj.identityType=wom.identityType;
+				 obj.studentId=wom.studentId;
+				 obj.schoolId=wom.studentIdSchool;
+				 obj=JSON.stringify(obj);
+				 if(womType=='Y')
+				 {
+					
+					 $("#praiseSourceY").combobox("setValue",womChannel);
+					 $("#c_schoolA").combobox("setValue",wom.adviserASchool);
+					 $("#c_adviserA").combobox("setValue",wom.adviserA);
+					 $("#c_schoolB").combobox("setValue",wom.adviserBSchool);
+					 $("#c_adviserB").combobox("setValue",wom.adviserB);
+					 
+					 $("#c_schoolsA").combobox("setValue",wom.teacherASchool);
+					 $("#c_teacherA").combobox("setValue",wom.teacherA);
+					 $("#c_schoolsB").combobox("setValue",wom.teacherBSchool);
+					 $("#c_teacherB").combobox("setValue",wom.teacherB);
+					 $("#activeSchool").combobox("setValue",wom.activitySchool);
+					 $("#activeId").combobox("setValue",wom.activityId);
+					
+					 
+					 
+				 	 qryStudentInfo(obj);
+				 }else if(womType=='N')
+				 {
+					$("#praiseSourceN").combobox("setValue",womChannel); 
+					 if('Stu'==womChannel)
+					 {
+						  searchStudentInfo(obj);
+						  $("#t_teacher_school").combobox("setValue",wom.teacherIdSchool); 
+						  $("#t_teacher_id").combobox("setValue",wom.teacherId); 
+					 }
+					$("#womStaffName").textbox("setValue",wom.staffName);
+				 }
+				 return false;
+			} 
+		});
+	});
+});
+
 	</script>

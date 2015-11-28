@@ -11,8 +11,12 @@ import net.sf.json.JSONObject;
 import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
 import org.apache.axis2.AxisFault;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import sun.print.resources.serviceui;
 
 import com.rise.pub.pubData.QryPropertiesConfig;
 import com.rise.pub.util.ObjectCensor;
@@ -27,11 +31,13 @@ public class ServiceEngine
 {
 	//WEB_SERVICE µÿ÷∑
 	private static String address="";
+	public static Log log = LogFactory.getLog(ServiceEngine.class);
 	
 	private final static String url = "http://127.0.0.1:7001/sysEngine/invoke/commorder.do";
 	//private final static String url = "http://121.42.150.99/sysEngine/invoke/commorder.do";
 	public static String invokeHttp(String param) throws Exception
 	{
+		//log.error("param:"+param);
 		Map<String,String> params = new HashMap<String,String>();
 		params.put("param", param);
 		JSONObject object = JSONObject.fromObject(HttpUtil.http(url, params));

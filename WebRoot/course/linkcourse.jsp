@@ -20,6 +20,7 @@
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript" src="<%=path %>/js/course/addCourse.js"></script>
+		
 		<script type="text/javascript">
 			$(document).ready(function()
 			{
@@ -29,8 +30,7 @@
 			
 			
 		</script>
-		<script type="text/javascript" src="<%=path %>/js/course.js"></script>
-		<script type="text/javascript" src="<%=path %>/js/course/addCourse.js"></script>
+		
   	</head>
   
   	<body >
@@ -370,7 +370,7 @@ $('#stageId').combobox({
 					$("#classType").combobox('select',data[i].classType);
 					$("#totalAmount").textbox('setValue', data[i].amount);
 					minus = $("#minusAmount").textbox('getValue');
-					//favorAmount = $("#favorAmount").textbox('getValue');
+					favorAmount = $("#favorAmount").textbox('getValue');
 					totalAmount = $("#totalAmount").textbox('getValue');
 					amount = totalAmount - minus - favorAmount;
 					$("#amount").textbox('setValue', amount);
@@ -396,7 +396,7 @@ $("#classType").combobox(
 				$("#totalAmount").textbox('setValue', data[i].amount);
 				 
 				minus = $("#minusAmount").textbox('getValue');
-				//favorAmount = $("#favorAmount").textbox('getValue');
+				favorAmount = $("#favorAmount").textbox('getValue');
 				totalAmount = $("#totalAmount").textbox('getValue');
 				amount = totalAmount - minus - favorAmount;
 				$("#amount").textbox('setValue', amount);
@@ -407,6 +407,20 @@ $("#classType").combobox(
 		}
 	}
 
+});
+
+$("#favorAmount").textbox(
+{
+	onChange:function()
+	{
+		minus = $("#minusAmount").textbox('getValue');
+		favorAmount = $("#favorAmount").textbox('getValue');
+		totalAmount = $("#totalAmount").textbox('getValue');
+		amount = totalAmount - minus - favorAmount;
+		$("#amount").textbox('setValue', amount);
+		parent.window.countAmount();
+	}
+	
 });
 	//增加赠品
 $("#addGiftBtn").click(function ()

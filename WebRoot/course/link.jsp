@@ -193,7 +193,6 @@ function updateLinkCourses()
 		$("#link").combobox({ disabled: true});
 		num=links.length;
 		linkCourses=links;
-		
 		toLinkCourse(num);
 	} 
 	 
