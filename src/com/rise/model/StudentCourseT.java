@@ -30,6 +30,8 @@ public class StudentCourseT {
     private Double amount;
 
     private Double lastAmount;
+    
+    private Double adjustAmount;
 
     private Integer linkId;
 
@@ -70,6 +72,14 @@ public class StudentCourseT {
     private Integer finishSchoolId;
     
     private String courseStateName;
+    
+	private StaffT adviserAObj;
+	
+	private StaffT adviserBObj;
+	
+	private StaffT adviserTeacherAObj;
+	
+	private StaffT adviserTeacherBObj;
 
     public Integer getStudentCourseId() {
         return studentCourseId;
@@ -182,8 +192,16 @@ public class StudentCourseT {
     public void setLastAmount(Double lastAmount) {
         this.lastAmount = lastAmount;
     }
+    
+    public Double getAdjustAmount() {
+		return adjustAmount;
+	}
 
-    public Integer getLinkId() {
+	public void setAdjustAmount(Double adjustAmount) {
+		this.adjustAmount = adjustAmount;
+	}
+
+	public Integer getLinkId() {
         return linkId;
     }
 
@@ -341,6 +359,38 @@ public class StudentCourseT {
 
 	public void setCourseStateName(String courseStateName) {
 		this.courseStateName = courseStateName;
+	}
+
+	public StaffT getAdviserAObj() {
+		return adviserAObj;
+	}
+
+	public void setAdviserAObj(StaffT adviserAObj) {
+		this.adviserAObj = adviserAObj;
+	}
+
+	public StaffT getAdviserBObj() {
+		return adviserBObj;
+	}
+
+	public void setAdviserBObj(StaffT adviserBObj) {
+		this.adviserBObj = adviserBObj;
+	}
+
+	public StaffT getAdviserTeacherAObj() {
+		return adviserTeacherAObj;
+	}
+
+	public void setAdviserTeacherAObj(StaffT adviserTeacherAObj) {
+		this.adviserTeacherAObj = adviserTeacherAObj;
+	}
+
+	public StaffT getAdviserTeacherBObj() {
+		return adviserTeacherBObj;
+	}
+
+	public void setAdviserTeacherBObj(StaffT adviserTeacherBObj) {
+		this.adviserTeacherBObj = adviserTeacherBObj;
 	}
     
 }

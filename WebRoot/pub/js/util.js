@@ -271,6 +271,11 @@ function formatTeacherName(row) {
 	return s;
 }
 
+function formatParaConfig(row) {
+	var s = '<span>' + row.paramDesc + '</span>';
+	return s;
+}
+
 function myLoadFilter(data,parentId){
 	function setData(){
 		var todo = [];

@@ -11,32 +11,6 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<style type="text/css">
-			.tab td{
-				font-size:14px;
-				height:30px;
-				border-right:1px solid #ccc;
-				border-bottom:1px solid #ccc;
-				font-family:"微软雅黑";
-				padding:2px;
-			}
-			.tab tr td:nth-last-child(2n+1){
-				padding-left:4px;
-			}
-			.tab tr td:nth-last-child(2n){
-				padding-right:4px;
-			}
-			.tab tr:first-child td{
-				font-weight:bold;
-				text-align:center;
-			}
-			.tab tr td input{
-				vertical-align:middle;
-			}
-			.tab tr td label{
-				vertical-align:middle;
-			}
-		</style>
   	</head>
   
   	<body class="manage">
@@ -60,7 +34,7 @@
 			</tr>
 		</table>
 		<table class="tab" id="teacherTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<tr>
+			<tr class="headTr">
 				<td>&nbsp;</td>
 				<td>校区</td>
 				<td>姓名</td>

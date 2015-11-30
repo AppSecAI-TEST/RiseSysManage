@@ -1,6 +1,7 @@
 package com.rise.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class StudentT {
     private Integer studentId;
@@ -38,6 +39,10 @@ public class StudentT {
     private Integer handlerId;
 
     private String state;
+
+	private SchoolT schoolT;
+	
+	private List<ContactT> contactList;
 
     public Integer getStudentId() {
         return studentId;
@@ -182,4 +187,21 @@ public class StudentT {
     public void setState(String state) {
         this.state = state == null ? null : state.trim();
     }
+
+	public SchoolT getSchoolT() {
+		return schoolT;
+	}
+
+	public void setSchoolT(SchoolT schoolT) {
+		this.schoolT = schoolT;
+	}
+
+	public List<ContactT> getContactList() {
+		return contactList;
+	}
+
+	public void setContactList(List<ContactT> contactList) {
+		this.contactList = contactList;
+	}
+    
 }
