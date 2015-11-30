@@ -58,7 +58,8 @@ $(document).ready(function() {
     	if(validateSelect()) {
     		var row = $('#list_data').datagrid('getSelected');
     		var studentId = row.studentId;
-    		window.location.href = "/sys/student/addActivity.jsp?studentId="+studentId;
+    		var name = row.name;
+    		window.location.href = "/sys/student/addActivity.jsp?studentId="+studentId+"&name="+name;
     	}
     });
     
@@ -431,40 +432,6 @@ $(document).ready(function() {
     	else
     	{
     		$.messager.alert('提示', "请先对学员进行验重！");
-    	}
-    });
-    
-    //添加活动
-    $("#activitySubmit").click(function(){
-    	if($("#activityFm").form('validate')) {
-    		var obj = JSON.stringify($("#activityFm").serializeObject());
-    		var activityName = $("#title").combobox("getValue");
-    		obj = obj.substring(0, obj.length - 1);
-    		obj += ",\"activityName\":\""+activityName+"\"}";
-    		obj = encodeURI(obj);
-    		$.ajax({
-    			url: "/sys/student/addActivity.do",
-    			data: "param=" + obj,
-    			dataType: "json",
-    			async: false,
-    			beforeSend: function()
-    	    	{
-    	    		$.messager.progress({title : '活动信息', msg : '正在添加活动信息，请稍等……'});
-    	    	},
-    	    	success: function (data) {
-    	    		$.messager.progress('close'); 
-    	    		var flag = data.flag
-    	            if(flag)
-    	            {
-    	            	$.messager.alert('提示', "成功添加活动信息！");
-    	            	window.location.reload();
-    	            }
-    	            else
-    	            {
-    	            	$.messager.alert('提示', "添加活动信息失败！");
-    	            }
-    	        } 
-    		});
     	}
     });
     

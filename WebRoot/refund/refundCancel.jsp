@@ -344,7 +344,7 @@
   				
   				<div style="height: 10px"></div>
   				<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="审批信息">
-  					<div id="headmasterApproveDiv">
+  					<div id="headmasterApproveDiv" style="display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td colspan="2"><span>1、校长审批信息：</span></td>
@@ -364,7 +364,7 @@
 			  				</tr>
 	  					</table>
 					</div>
-					<div id="headmasterViewDiv">
+					<div id="headmasterViewDiv" style="display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td colspan="6"><span>1、校长审批信息：</span></td>
@@ -386,7 +386,7 @@
 	  					</table>
 					</div>
 					
-					<div id="financialApproveDiv">
+					<div id="financialApproveDiv" style="display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td colspan="2"><span>2、总部财务审批信息：</span></td>
@@ -406,7 +406,7 @@
 			  				</tr>
 	  					</table>
 					</div>
-					<div id="financialViewDiv">
+					<div id="financialViewDiv" style="display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td colspan="6"><span>2、总部财务审批信息：</span></td>
@@ -428,7 +428,7 @@
 	  					</table>
 					</div>
 					
-					<div id="chiefFinancialOfficerApproveDiv">
+					<div id="chiefFinancialOfficerApproveDiv" style="display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td colspan="2"><span>3、总部财务总监审批信息：</span></td>
@@ -448,7 +448,7 @@
 			  				</tr>
 	  					</table>
 					</div>
-					<div id="chiefFinancialOfficerViewDiv">
+					<div id="chiefFinancialOfficerViewDiv" style="display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td colspan="6"><span>3、总部财务总监审批信息：</span></td>
@@ -470,7 +470,7 @@
 	  					</table>
 					</div>
 					
-					<div id="academicOrSalesApproveDiv">
+					<div id="academicOrSalesApproveDiv" style="display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td colspan="2"><span>4、学术总监/销售经理审批信息：</span></td>
@@ -490,7 +490,7 @@
 			  				</tr>
 	  					</table>
 					</div>
-					<div id="academicOrSalesViewDiv">
+					<div id="academicOrSalesViewDiv" style="display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td colspan="6"><span>4、学术总监/销售经理审批信息：</span></td>
@@ -512,7 +512,7 @@
 	  					</table>
 					</div>
 					
-					<div id="regionalPresidentApproveDiv">
+					<div id="regionalPresidentApproveDiv" style="display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td colspan="2"><span>5、区域校长审批信息：</span></td>
@@ -532,7 +532,7 @@
 			  				</tr>
 	  					</table>
 					</div>
-					<div id="regionalPresidentViewDiv">
+					<div id="regionalPresidentViewDiv" style="display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td colspan="6"><span>5、区域校长审批信息：</span></td>
@@ -554,7 +554,7 @@
 	  					</table>
 					</div>
 					
-					<div id="principalApproveDiv">
+					<div id="principalApproveDiv" style="display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td colspan="2"><span>6、总校长审批信息：</span></td>
@@ -574,7 +574,7 @@
 			  				</tr>
 	  					</table>
 					</div>
-					<div id="principalViewDiv">
+					<div id="principalViewDiv" style="display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td colspan="6"><span>6、总校长审批信息：</span></td>
@@ -596,7 +596,7 @@
 	  					</table>
 					</div>
 					
-					<div id="headquartersFinancialApproveDiv">
+					<div id="headquartersFinancialApproveDiv" style="display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td colspan="2"><span>7、总部财务打款信息：</span></td>

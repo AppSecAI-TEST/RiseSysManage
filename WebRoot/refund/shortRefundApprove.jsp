@@ -131,7 +131,7 @@
   				
   				<div style="height: 10px"></div>
   				<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="审批信息">
-  					<div id="financialApproveDiv">
+  					<div id="financialApproveDiv" style="display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td colspan="2"><span>1、总部财务审批信息：</span></td>
@@ -151,7 +151,7 @@
 			  				</tr>
 	  					</table>
 					</div>
-					<div id="financialViewDiv">
+					<div id="financialViewDiv" style="display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td colspan="6"><span>1、总部财务审批信息：</span></td>
@@ -173,7 +173,7 @@
 	  					</table>
 					</div>
 					
-					<div id="chiefFinancialOfficerApproveDiv">
+					<div id="chiefFinancialOfficerApproveDiv" style="display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td colspan="2"><span>2、总部财务总监审批信息：</span></td>
@@ -193,7 +193,7 @@
 			  				</tr>
 	  					</table>
 					</div>
-					<div id="chiefFinancialOfficerViewDiv">
+					<div id="chiefFinancialOfficerViewDiv" style="display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td colspan="6"><span>2、总部财务总监审批信息：</span></td>
@@ -215,7 +215,7 @@
 	  					</table>
 					</div>
 					
-					<div id="headquartersFinancialApproveDiv">
+					<div id="headquartersFinancialApproveDiv" style="display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td colspan="2"><span>3、总部财务打款信息：</span></td>
