@@ -44,6 +44,52 @@ $(document).ready(function() {
 			calculateConfirmRefundAmount(studentCourseId);
 		});
 	});
+	
+	//根据不同的审批人员显示不同的审批信息
+	$("#headmasterApproveDiv").css("display", "block");
+	
+	//提交审批
+	$("#refundApproveSubmit").click(function() {
+		var approveType = $('input:radio[name="approveType"]:checked').val();
+		if(approveType == "" || approveType == null || approveType == undefined || approveType == "null") {
+			$.messager.alert('提示', "请选择是否审批通过！");
+		} else {
+			var obj = $("#refundApproveFm").serializeObject();
+			var approveObj = new Object();
+			var approveRemark = "";
+			approveObj.approveId = obj.approveId;
+			approveObj.processInstId = obj.processInstanceId;
+			approveObj.approveResult = approveType;
+			$("[name='approveRemark']").each(function() {
+				var remark = $(this).val();
+				if(remark != "" && remark != null && remark != undefined) {
+					approveRemark = remark;
+				}
+			});
+			approveObj.remark = approveRemark;
+			var param = JSON.stringify(approveObj);
+			param = encodeURI(param);
+			$.ajax({
+				url: "/sys/refund/approveRefund.do",
+				data: "param=" + param,
+				dataType: "json",
+				async: false,
+				beforeSend: function()
+				{
+					$.messager.progress({title : '审批退费', msg : '正在审批退费，请稍等……'});
+				},
+				success: function (data) {
+					$.messager.progress('close'); 
+					var flag = data.flag;
+					if(flag) {
+						$.messager.alert('提示', "退费审批成功！", "info", function() {window.location.href = "/sys/refund/refund.jsp";});
+					} else {
+						$.messager.alert('提示', data.msg);
+					}
+				} 
+			});
+		}
+	});
 });
 
 function calculateRefundAmount(studentCourseId) {

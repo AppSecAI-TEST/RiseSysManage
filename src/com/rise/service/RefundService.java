@@ -24,4 +24,10 @@ public class RefundService
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS9005\",securityCode:\"0000000000\",params:{param:{refundFeeId:\""+refundFeeId+"\",queryCode:\"qryRefundFeeInfo\"}},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
+
+	public String approveRefund(String param) throws Exception  
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS9003\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
 }
