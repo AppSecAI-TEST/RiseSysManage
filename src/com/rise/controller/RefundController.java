@@ -78,7 +78,6 @@ public class RefundController
 	public ModelAndView qryApproveRefund(String refundFeeId, String courseType, String type)
 	{
 		ModelAndView view = null;
-		courseType = "002";
 		if("approve".equals(type)) {
 			if("001".equals(courseType)) {
 				view = new ModelAndView("refund/refundApprove");
