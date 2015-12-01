@@ -139,14 +139,22 @@
 		  						<div class="easyui-panel" style="min-width:1100px; width:100%; height:auto;" title="申请信息">
 			  						<table width="100%" cellpadding="5px" class="maintable">
 			  							<tr>
-			  								<td align="right" width="10%"><span>申请时间：</span></td>
-					  						<td width="15%"><span id="applyDateText"></span></td>
-					  						<td align="right" width="10%"><span>申请人：</span></td>
-					  						<td width="15%"><span id="applyNameText"></span></td>
-					  						<td align="right" width="10%"><span>申请转入校区：</span></td>
-					  						<td width="10%"><span id="inSchoolNameText"></span></td>
-					  						<td align="right" width="10%"><span>转校情况说明：</span></td>
-					  						<td width="20%"><span id="applyRemark"></span></td>
+					  						<td align="center" width="10%"><span>申请人</span></td>
+			  								<td align="center" width="15%"><span>申请时间</span></td>
+					  						<td align="center" width="15%"><span>申请转入校区</span></td>
+					  						<td width="60%">
+					  							<span>转校情况说明</span>
+					  							<span style="display: none; width: 100px; margin-left: 250px;" id="imgUrl">
+  													<a href="#" id="url" class="linkmore">查看转校申请单</a>
+  												</span>
+  												<a href="javascript:void(0)" id="viewChangeSchoolList" class="easyui-linkbutton" iconCls="icon-redo" style="width: 120px; margin-left: 50px;">查看转校历史</a>
+					  						</td>
+			  							</tr>
+			  							<tr>
+					  						<td align="center" width="10%"><span id="applyNameText"></span></td>
+					  						<td align="center" width="15%"><span id="applyDateText"></span></td>
+					  						<td align="center" width="15%"><span id="inSchoolNameText"></span></td>
+					  						<td width="60%"><span id="applyRemark"></span></td>
 			  							</tr>
 			  						</table>
 		  						</div>
@@ -157,14 +165,16 @@
 		  						<div class="easyui-panel" style="min-width:1100px; width:100%; height:auto;" title="转校审批信息">
 			  						<table width="100%" cellpadding="5px" class="maintable">
 			  							<tr>
-			  								<td align="right" width="10%"><span>审批时间：</span></td>
-					  						<td width="15%"><span id="approveDateText"></span></td>
-					  						<td align="right" width="10%"><span>审批人：</span></td>
-					  						<td width="15%"><span id="approveNameText"></span></td>
-					  						<td align="right" width="10%"><span>审批意见：</span></td>
-					  						<td width="10%"><span id="approveTypeText"></span></td>
-					  						<td align="right" width="10%"><span>审批情况说明：</span></td>
-					  						<td width="20%"><span id="approveRemark"></span></td>
+					  						<td align="center" width="10%"><span>审批人</span></td>
+			  								<td align="center" width="15%"><span>审批时间</span></td>
+					  						<td align="center" width="15%"><span>审批意见</span></td>
+					  						<td width="60%"><span>审批情况说明</span></td>
+			  							</tr>
+			  							<tr>
+					  						<td align="center" width="10%"><span id="approveNameText"></span></td>
+					  						<td align="center" width="15%"><span id="approveDateText"></span></td>
+					  						<td align="center" width="15%"><span id="approveTypeText"></span></td>
+					  						<td width="60%"><span id="approveRemark"></span></td>
 			  							</tr>
 			  						</table>
 		  						</div>
@@ -175,14 +185,16 @@
 		  						<div class="easyui-panel" style="min-width:1100px; width:100%; height:auto;" title="转校信息">
 			  						<table width="100%" cellpadding="5px" class="maintable">
 			  							<tr>
-			  								<td align="right" width="10%"><span>是否转出原校区：</span></td>
-					  						<td width="15%"><span id="isOutText"></span></td>
-					  						<td align="right" width="10%"><span>转出时间：</span></td>
-					  						<td width="15%"><span id="outDateText"></span></td>
-					  						<td align="right" width="10%"><span>是否转入班级：</span></td>
-					  						<td width="10%"><span id="isInText"></span></td>
-					  						<td align="right" width="10%"><span>转入时间：</span></td>
-					  						<td width="20%"><span id="inDateText"></span></td>
+			  								<td align="center" width="10%"><span>是否转出原校区</span></td>
+					  						<td align="center" width="15%"><span>转出时间</span></td>
+					  						<td align="center" width="15%"><span>是否转入班级</span></td>
+					  						<td width="60%"><span>转入时间</span></td>
+			  							</tr>
+			  							<tr>
+					  						<td align="center" width="10%"><span id="isOutText"></span></td>
+					  						<td align="center" width="15%"><span id="outDateText"></span></td>
+					  						<td align="center" width="15%"><span id="isInText"></span></td>
+					  						<td width="60%"><span id="inDateText"></span></td>
 			  							</tr>
 			  						</table>
 		  						</div>

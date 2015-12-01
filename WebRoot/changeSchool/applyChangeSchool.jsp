@@ -23,6 +23,9 @@
   
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:98%;height:auto;" title="转校申请">
+	  		<div style="margin-right: 150px; margin-bottom: 5px; margin-top: 5px; text-align: right;">
+		  		<a href="javascript:void(0)" onclick="viewChangeSchoolHist()" class="easyui-linkbutton" iconCls="icon-redo" style="width: 120px;">查看转校历史</a>
+	  		</div>
   			<form id="applyChangeSchoolFm" method="post" enctype="multipart/form-data">
   				<input type="hidden" id="applyType" name="applyType" value="002"/>
   				<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId %>"/>
@@ -31,7 +34,6 @@
   				<input type="hidden" id="outClassId" name="outClassId" value="<%=classInstId %>"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   				<input type="hidden" id="studentCourseId" name="studentCourseId" value="<%=studentCourseId %>"/>
-  				<div style="height: 5px;"></div>
   				<div class="easyui-panel" style="min-width:1100px; width:100%; height:auto;" title="学员信息">
 		  			<table width="100%" cellpadding="5px" class="maintable" id="applyChangeClassTd">
 		  				<tr>
@@ -48,7 +50,9 @@
 		  					<td align="right" width="10%"><span>带班老师：</span></td>
 		  					<td width="25%"><span id="nameText"><%=adviserTeacherName %></span></td>
 		  					<td align="right" width="10%"><span>在读班级：</span></td>
-		  					<td width="25%"><span id="byNameText"><%=currentClassName %></span></td>
+		  					<td width="25%">
+		  						<span id="byNameText"><%=currentClassName %></span>
+		  					</td>
 		  				</tr>
 		  				<tr>
 		  					<td colspan="6">
@@ -155,7 +159,7 @@
 	  					<tr>
 	  						<td align="right" width="10%"><span>转校情况说明：</span></td>
 	  						<td colspan="5" width="90%">
-	  							<textarea rows="6" cols="122" id="remark" name="remark" required="true" class="easyui-validatebox textbox"></textarea>
+	  							<textarea rows="6" cols="122" id="remark" name="remark" class="easyui-validatebox textbox"></textarea>
 	  						</td>
 	  					</tr>
 		  			</table>

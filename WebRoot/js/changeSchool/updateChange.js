@@ -57,6 +57,13 @@ $(document).ready(function() {
 		initClassInst(isBegin);
 	});
 	
+	//查看转校历史信息
+	$("#viewChangeSchoolList").click(function() {
+		var studentId = $("#studentId").val();
+		var studentCourseId = $("#studentCourseId").val();
+		window.location.href = "/sys/changeSchool/changeSchoolHistList.jsp?studentId="+studentId+"&studentCourseId="+studentCourseId;
+	});
+	
 	$("#updateChangeSubmit").click(function(){
 		var flag = true;
 		var isSelect = $("input:radio[name='isSelect']:checked").val();

@@ -17,11 +17,19 @@ $(document).ready(function() {
 			$("#outClassNameText").html(data.outClass);
 			$("#courseStateText").html(data.courseStateText);
 			$("#inSchoolNameText").html(data.inSchoolName);
-			$("#inClassNameText").html(data.inClassName);
+			$("#inClassNameText").html(data.inClass);
 			$("#finishStageIdText").html(data.finishStageId);
 			$("#higherStageIdText").html(data.higherStageId);
 			$("#stageIdText").html(data.stageId);
 			$("#feeTypeText").html(data.feeTypeText);
+			
+			var imgUrl = data.imgUrl;
+			if(imgUrl != null && imgUrl != "" && imgUrl != undefined) {
+				$("#imgUrl").css("display", "block");
+				$("#url").attr("href", imgUrl);
+				$('#url').lightBox();
+			}
+			
 			var applyDate = data.applyDate;
 			if(applyDate != null && applyDate != "" && applyDate != "null" && applyDate != undefined) {
 				$("#applyDate").html(data.applyDate);

@@ -75,3 +75,10 @@ $(document).ready(function() {
 function back() {
 	window.location.href = "/sys/changeSchool/changeSchool.jsp";
 }
+
+//查看转校历史信息
+function viewChangeSchoolHist() {
+	var studentId = $("#studentId").val();
+	var studentCourseId = $("#studentCourseId").val();
+	window.location.href = "/sys/changeSchool/changeSchoolHistList.jsp?studentId="+studentId+"&studentCourseId="+studentCourseId;
+}

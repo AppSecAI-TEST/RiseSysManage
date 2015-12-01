@@ -18,10 +18,10 @@
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="取消转班">
   			<form id="cancelChangeClassFm">
-  				<input type="hidden" id="applyId" value="<%=applyId %>"/>
   				<input type="hidden" id="outClassId" name="outClassId"/>
   				<input type="hidden" id="courseState" name="courseState"/>
   				<input type="hidden" id="oldCourseState" name="oldCourseState"/>
+  				<input type="hidden" id="applyId" name="applyId" value="<%=applyId %>"/>
   				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   				<input type="hidden" id="studentCourseId" name="studentCourseId" value="<%=studentCourseId %>"/>
@@ -67,27 +67,36 @@
   						<td width="20%"><span id="inClassProgressText"></span></td>
   					</tr>
   					<tr>
-  						<td align="right" width="12%"><span>申请时间：</span></td>
-  						<td width="14%"><span id="applyDateText"></span></td>
-  						<td align="right" width="12%"><span>申请人：</span></td>
-  						<td width="8%"><span id="applyNameText"></span></td>
-  						<td align="right" width="12%"><span>转班情况说明：</span></td>
-  						<td width="42%" colspan="3"><span id="applyRemarkText"></span></td>
+  						<td align="center" width="12%"><span>申请人</span></td>
+  						<td align="center" width="14%"><span>申请时间</span></td>
+  						<td width="74%" colspan="6">
+  							<span style="display: inline-block; width: 100px;">转班情况说明</span>
+  							<span style="display: none; width: 100px; margin-left: 450px;" id="imgUrl">
+  								<a href="#" id="url" class="linkmore">查看转班申请单</a>
+  							</span>
+  						</td>
   					</tr>
   					<tr>
-  						<td align="right" width="12%"><span>审批时间：</span></td>
-  						<td width="14%"><span id="approveDateText"></span></td>
-  						<td align="right" width="12%"><span>审批人：</span></td>
-  						<td width="8%"><span id="approveNameText"></span></td>
-  						<td align="right" width="12%"><span>审批意见：</span></td>
-  						<td width="10%"><span id="approveTypeText"></span></td>
-  						<td align="right" width="12%"><span>审批情况说明：</span></td>
-  						<td width="20%"><span id="approveRemarkText"></span></td>
+  						<td align="center" width="12%"><span id="applyNameText"></span></td>
+  						<td align="center" width="14%"><span id="applyDateText"></span></td>
+  						<td width="74%" colspan="6"><span id="applyRemarkText"></span></td>
+  					</tr>
+  					<tr>
+  						<td align="center" width="12%"><span>审批人</span></td>
+  						<td align="center" width="14%"><span>审批时间</span></td>
+  						<td align="center" width="12%"><span>审批意见</span></td>
+  						<td width="62%" colspan="5"><span>审批情况说明</span></td>
+  					</tr>
+  					<tr>
+  						<td align="center" width="12%"><span id="approveNameText"></span></td>
+  						<td align="center" width="14%"><span id="approveDateText"></span></td>
+  						<td align="center" width="12%"><span id="approveTypeText"></span></td>
+  						<td width="62%" colspan="5"><span id="approveRemarkText"></span></td>
   					</tr>
   					<tr>
   						<td align="right"><span>取消转班原因：</span></td>
   						<td colspan="7">
-  							<textarea rows="6" cols="122" id="remark" name="remark" required="true" class="easyui-validatebox textbox"></textarea>
+  							<textarea rows="6" cols="122" id="remark" name="remark" class="easyui-validatebox textbox"></textarea>
   						</td>
   					</tr>
   				</table>

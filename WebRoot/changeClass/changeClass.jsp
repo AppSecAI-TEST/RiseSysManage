@@ -55,8 +55,7 @@
 		  					<td align="right"><span>业绩类型：</span></td>
 		  					<td width="100px">
 								<select id="feeType" name="feeType" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-				      				onLoadSuccess:function(data){if(data.length > 0) $('#feeType').combobox('setValue',data[0].codeFlag);}" 
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
 				        		</select>
 							</td>
@@ -80,8 +79,7 @@
 		  					<td align="right"><span>转班状态：</span></td>
 							<td width="100px">
 								<select id="changeClassState" name="changeClassState" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-				      				onLoadSuccess:function(data){if(data.length > 0) $('#changeClassState').combobox('setValue',data[0].codeFlag);}" 
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=CHANGE_T&codeType=APPLY_CHANGE_STATE">
 				        		</select>
 							</td>

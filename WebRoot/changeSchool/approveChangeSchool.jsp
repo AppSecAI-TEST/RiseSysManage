@@ -131,18 +131,26 @@
 		  				</tr>
 		  				<tr>
 		  					<td colspan="6">
-		  						<table class="easyui-datagrid" title="申请信息" style="height:auto;" id="apply_list_data"
-		  							url="<%=path %>/pubData/qryDataListByPage.do?param={funcNodeId:'1018',applyId:'<%=applyId %>',tacheState:'000'}" 
-							  		pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
-		  							<thead>
+		  						<div class="easyui-panel" style="min-width:1100px; width:100%; height:auto;" title="申请信息">
+		  							<table width="100%" cellpadding="5px" class="maintable">
 		  								<tr>
-		  									<th data-options="field:'applyDate',width:100,align:'center'">申请时间</th>
-		  									<th data-options="field:'applyName',width:100,align:'center'">申请人</th>
-		  									<th data-options="field:'inSchoolName',width:100,align:'center'">申请转入校区</th>
-		  									<th data-options="field:'applyRemark',width:100,align:'center'">转校情况说明</th>
-		  								</tr>
-		  							</thead>
-		  						</table>
+	  										<td align="center" width="10%"><span>申请人</span></td>
+	  										<td align="center" width="14%"><span>申请时间</span></td>
+	  										<td width="74%" colspan="6">
+	  											<span style="display: inline-block; width: 100px;">转班情况说明</span>
+	  											<span style="display: none; width: 100px; margin-left: 450px;" id="imgUrl">
+	  												<a href="#" id="url" class="linkmore">查看转校申请单</a>
+	  											</span>
+	  											<a href="javascript:void(0)" id="viewChangeSchool" onclick="viewChangeSchoolHist()" class="easyui-linkbutton" iconCls="icon-redo" style="width: 120px; margin-left: 50px;">查看转校历史</a>
+	  										</td>
+  										</tr>
+					  					<tr>
+					  						<td align="center" width="10%"><span id="applyNameText"></span></td>
+					  						<td align="center" width="14%"><span id="applyDateText"></span></td>
+					  						<td width="74%" colspan="6"><span id="changeRemarkText"></span></td>
+					  					</tr>
+		  							</table>
+		  						</div>
 		  					</td>
 		  				</tr>
 		  				<tr>
@@ -155,7 +163,7 @@
 	  					<tr>
 	  						<td align="right" width="10%"><span>审批意见：</span></td>
 	  						<td width="90%" colspan="5">
-		  						<textarea rows="6" cols="122" id="remark" name="remark" required="true" class="easyui-validatebox textbox"></textarea>
+		  						<textarea rows="6" cols="122" id="remark" name="remark" class="easyui-validatebox textbox"></textarea>
 		  					</td>
 	  					</tr>
 	  				</table>

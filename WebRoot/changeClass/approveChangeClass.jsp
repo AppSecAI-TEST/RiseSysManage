@@ -51,12 +51,20 @@
   						<td width="54%" align="center" colspan="4"></td>
   					</tr>
   					<tr>
-  						<td align="right" width="12%"><span>申请时间：</span></td>
-  						<td width="14%"><span id="applyDateText"></span></td>
-  						<td align="right" width="12%"><span>申请人：</span></td>
-  						<td width="8%"><span id="applyNameText"></span></td>
-  						<td align="right" width="12%"><span>转班情况说明：</span></td>
-  						<td width="34%" colspan="3"><span id="changeRemarkText"></span></td>
+  						<td align="center" width="12%"><span>申请人</span></td>
+  						<td align="center" width="14%"><span>申请时间</span></td>
+  						<td width="74%" colspan="6">
+  							<span style="display: inline-block; width: 100px;">转班情况说明</span>
+  							<span style="display: none; width: 100px; margin-left: 450px;" id="imgUrl">
+  								<a href="#" id="url" class="linkmore">查看转班申请单</a>
+  							</span>
+  							<a href="javascript:void(0)" id="viewChangeClassList" class="easyui-linkbutton" iconCls="icon-redo" style="width: 120px; margin-left: 50px;">查看转班历史</a>
+  						</td>
+  					</tr>
+  					<tr>
+  						<td align="center" width="12%"><span id="applyNameText"></span></td>
+  						<td align="center" width="14%"><span id="applyDateText"></span></td>
+  						<td width="74%" colspan="6"><span id="changeRemarkText"></span></td>
   					</tr>
   					<tr>
   						<td align="right" width="12%"><span>转班审批：</span></td>
@@ -68,7 +76,7 @@
   					<tr>
   						<td align="right" width="12%"><span>审批情况说明：</span></td>
   						<td width="88%" colspan="7">
-	  						<textarea rows="6" cols="122" id="remark" name="remark" required="true" class="easyui-validatebox textbox"></textarea>
+	  						<textarea rows="6" cols="122" id="remark" name="remark" class="easyui-validatebox textbox"></textarea>
 	  					</td>
   					</tr>
   				</table>
