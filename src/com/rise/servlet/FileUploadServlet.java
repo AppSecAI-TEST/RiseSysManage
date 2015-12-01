@@ -43,7 +43,7 @@ public class FileUploadServlet extends HttpServlet
 			String path = "";
 			String filePath = "";
 			String folderName = "";
-			String schoolName = "";
+			String schoolCode = "";
 			boolean flag = false;
 			String type = request.getParameter("type");
 			if(ObjectCensor.isStrRegular(type))
@@ -68,23 +68,23 @@ public class FileUploadServlet extends HttpServlet
 				if(ObjectCensor.checkListIsNull(array))
 				{
 					JSONObject obj = array.getJSONObject(0);
-					schoolName = StringUtil.getJSONObjectKeyVal(obj, "schoolName");
+					schoolCode = StringUtil.getJSONObjectKeyVal(obj, "schoolCode");
 				}
 			}
 			String handlerId = request.getParameter("handlerId");
-			if(ObjectCensor.isStrRegular(path, schoolName, folderName, filePath))
+			if(ObjectCensor.isStrRegular(path, schoolCode, folderName, filePath))
 			{
-				File file = new File(path + separator + schoolName);
+				File file = new File(path + separator + schoolCode);
 				if(!file.exists() && !file.isDirectory())
 				{
 					file.mkdir();
 				}
-				file = new File(path + separator + schoolName + separator + folderName);
+				file = new File(path + separator + schoolCode + separator + folderName);
 				if(!file.exists() && !file.isDirectory())
 				{
 					file.mkdir();
 				}
-				path += separator + schoolName + separator + folderName;
+				path += separator + schoolCode + separator + folderName;
 				//创建文件处理工厂,它用于生成FileItem对象
 				DiskFileItemFactory factory = new DiskFileItemFactory();
 				//创建request的解析器,它会将数据封装到FileItem对象中
@@ -109,14 +109,14 @@ public class FileUploadServlet extends HttpServlet
 								tempFile = new File(path + separator + newFileName);
 								if(!tempFile.exists())
 								{
-									filePath += schoolName + separator + folderName + separator + newFileName;
+									filePath += schoolCode + separator + folderName + separator + newFileName;
 									break;
 								}
 							}
 						}
 						else
 						{
-							filePath += schoolName + separator + folderName + separator + fileName;
+							filePath += schoolCode + separator + folderName + separator + fileName;
 						}
 						item.write(tempFile);
 						flag = true;

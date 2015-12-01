@@ -76,8 +76,13 @@ $(document).ready(function() {
 	$("#updateStartDate").click(function() {
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) {
+			var applyType = "002";
+			var openClassType = row.openClassType;
+			if(openClassType == "" || openClassType == null || openClassType == undefined) {
+				applyType = "001";
+			}
 			var classInstId = row.classInstId;
-			window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=update&applyType=002";
+			window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=update&applyType="+applyType;
 		} else {
 			$.messager.alert('提示', "请先选择您要修改开课时间的班级！");
 		}
@@ -119,7 +124,12 @@ $(document).ready(function() {
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) {
 			var classInstId = row.classInstId;
-			window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=view&applyType=002";
+			var applyType = "002";
+			var openClassType = row.openClassType;
+			if(openClassType == "" || openClassType == null || openClassType == undefined) {
+				applyType = "001";
+			}
+			window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=view&applyType="+applyType;
 		} else {
 			$.messager.alert('提示', "请先选择您要浏览的班级！");
 		}
