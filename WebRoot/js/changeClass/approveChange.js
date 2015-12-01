@@ -25,7 +25,23 @@ $(document).ready(function() {
 			$("#applyDateText").html(data.applyDate);
 			$("#applyNameText").html(data.applyName);
 			$("#changeRemarkText").html(data.applyRemark);
+			
+			var imgUrl = data.imgUrl;
+			if(imgUrl != null && imgUrl != "" && imgUrl != undefined) {
+				$("#imgUrl").css("display", "inline-block");
+				$("#url").attr("href", imgUrl);
+				$('#url').lightBox();
+			} else {
+				$("#viewChangeClassList").css("margin-left", "500px");
+			}
 		}
+	});
+	
+	//查看转班历史
+	$("#viewChangeClassList").click(function() {
+		var studentId = $("#studentId").val();
+		var studentCourseId = $("#studentCourseId").val();
+		window.location.href = "/sys/changeClass/changeClassHistList.jsp?studentId="+studentId+"&studentCourseId="+studentCourseId;
 	});
 	
 	//审批转班

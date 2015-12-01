@@ -13,6 +13,11 @@
   	</head>
   
   	<body>
+  		<div style="display: none; margin-right: 150px; margin-bottom: 5px; text-align: right;" id="imgUrl">
+	  		<span>
+	  			<a href="#" id="url" class="linkmore">查看转校申请单</a>
+	  		</span>
+  		</div>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="浏览转校信息">
   			<input type="hidden" id="applyId" value="<%=applyId %>"/>
   			<table width="100%" cellpadding="5px" class="maintable">

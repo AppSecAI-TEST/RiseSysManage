@@ -38,12 +38,12 @@ $(document).ready(function() {
     	valueField : "stageId",
     	textField : "stageId",
     	panelHeight : "auto",
-    	onLoadSuccess : function () { //数据加载完毕事件
-            var data = $('#stageId').combobox('getData');
-            if (data.length > 0) {
-                $("#stageId").combobox('select', data[0].stageId);
-            }
-        },
+//    	onLoadSuccess : function () { //数据加载完毕事件
+//            var data = $('#stageId').combobox('getData');
+//            if (data.length > 0) {
+//                $("#stageId").combobox('select', data[0].stageId);
+//            }
+//        },
 		onChange : function(n, o) {
 			var schoolId = $("#schoolId").combobox("getValue");
 			//转出班级
@@ -51,25 +51,27 @@ $(document).ready(function() {
         		url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType=001&stageId="+n+"&classType=&classState=003&classInstId=",//返回json数据的url
         		valueField : "classInstId",
         		textField : "className",
-        		panelHeight : "auto",
-        		onLoadSuccess : function () { //数据加载完毕事件
-                    var data = $('#outClassInstId').combobox('getData');
-                    if (data.length > 0) {
-                        $("#outClassInstId").combobox('select', data[0].classInstId);
-                    }
-                }
+        		panelHeight : "auto"
+//        		panelHeight : "auto",
+//        		onLoadSuccess : function () { //数据加载完毕事件
+//                    var data = $('#outClassInstId').combobox('getData');
+//                    if (data.length > 0) {
+//                        $("#outClassInstId").combobox('select', data[0].classInstId);
+//                    }
+//                }
         	});
 			$("#inClassInstId").combobox({
         		url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType=001&stageId="+n+"&classType=&classState='001','002','003'&classInstId=",//返回json数据的url
         		valueField : "classInstId",
         		textField : "className",
-        		panelHeight : "auto",
-        		onLoadSuccess : function () { //数据加载完毕事件
-                    var data = $('#inClassInstId').combobox('getData');
-                    if (data.length > 0) {
-                        $("#inClassInstId").combobox('select', data[0].classInstId);
-                    }
-                }
+        		panelHeight : "auto"
+//        		panelHeight : "auto",
+//        		onLoadSuccess : function () { //数据加载完毕事件
+//                    var data = $('#inClassInstId').combobox('getData');
+//                    if (data.length > 0) {
+//                        $("#inClassInstId").combobox('select', data[0].classInstId);
+//                    }
+//                }
         	});
 		}
 	});
@@ -87,10 +89,11 @@ $(document).ready(function() {
 			if("001" == changeClassState) {
 				$.messager.confirm("确认", "点击确定将执行学员班级转出操作，是否确认？", function (r) {
 					if (r) {
+						var applyId = row.applyId;
 						var studentId = row.studentId;
 						var studentCourseId = row.studentCourseId;
 						var handlerId = $("#handlerId").val();
-						var param = "{\"studentId\":\""+studentId+"\",\"studentCourseId\":\""+studentCourseId+"\",\"handlerId\":\""+handlerId+"\"}";
+						var param = "{\"applyId\":\""+applyId+"\",\"studentId\":\""+studentId+"\",\"studentCourseId\":\""+studentCourseId+"\",\"handlerId\":\""+handlerId+"\"}";
 						$.ajax({
 							url: "/sys/change/changeOut.do",
 							data: "param=" + param,

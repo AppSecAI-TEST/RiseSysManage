@@ -34,7 +34,23 @@ $(document).ready(function() {
 			$("#isInText").html(isInText);
 			$("#outDateText").html(outDate);
 			$("#inDateText").html(inDate);
+			
+			var imgUrl = data.imgUrl;
+			if(imgUrl != null && imgUrl != "" && imgUrl != undefined) {
+				$("#imgUrl").css("display", "inline-block");
+				$("#url").attr("href", imgUrl);
+				$('#url').lightBox();
+			} else {
+				$("#viewChangeSchoolList").css("margin-left", "300px");
+			}
 		}
+	});
+	
+	//查看转校历史信息
+	$("#viewChangeSchoolList").click(function() {
+		var studentId = $("#studentId").val();
+		var studentCourseId = $("#studentCourseId").val();
+		window.location.href = "/sys/changeSchool/changeSchoolHistList.jsp?studentId="+studentId+"&studentCourseId="+studentCourseId;
 	});
 	
 	$("#cancelChangeSubmit").click(function() {

@@ -40,6 +40,13 @@ $(document).ready(function() {
 			$("#outClassId").val(data.outClassId);
 			$("#courseState").val(data.courseState);
 			$("#oldCourseState").val(data.oldCourseState);
+			
+			var imgUrl = data.imgUrl;
+			if(imgUrl != null && imgUrl != "" && imgUrl != undefined) {
+				$("#imgUrl").css("display", "inline-block");
+				$("#url").attr("href", imgUrl);
+				$('#url').lightBox();
+			}
 		}
 	});
 	

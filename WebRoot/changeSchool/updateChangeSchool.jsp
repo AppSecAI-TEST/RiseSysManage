@@ -72,7 +72,10 @@
 		  				<td align="right" width="15%"><span>当前选班时间：</span></td>
 		  				<td width="20%"><span id="inNameText"></span></td>
 		  				<td align="right" width="15%"><span>选班次数：</span></td>
-		  				<td width="20%"><span id="inClassNameText"></span></td>
+		  				<td width="20%">
+		  					<span id="inClassNameText"></span>
+		  					<a href="javascript:void(0)" id="viewChangeSchoolList" class="easyui-linkbutton" iconCls="icon-redo" style="width: 120px; margin-left: 100px;">查看转校历史</a>
+		  				</td>
 		  			</tr>
 		  			<tr id="selectClassTr">
   						<td align="right" width="15%"><span>是否定班：</span></td>

@@ -24,9 +24,8 @@
   				<input type="hidden" id="courseType"/>
   				<input type="hidden" id="inClassIsBegin"/>
   				<input type="hidden" id="outClassId" name="outClassId"/>
-  				<input type="hidden" id="applyId" value="<%=applyId %>"/>
-  				<input type="hidden" id="applyType" name="applyType" value="001"/>
   				<input type="hidden" id="studentChannelType" name="studentChannelType"/>
+  				<input type="hidden" id="applyId" name="applyId" value="<%=applyId %>"/>
   				<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId %>"/>
   				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
