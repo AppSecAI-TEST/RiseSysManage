@@ -20,17 +20,32 @@ $(document).ready(function(){
     $("input[name=goodsGiftChannel]").click(function(){
 	    var goodsGiftChannel = $("input[name='goodsGiftChannel']:checked").val();
 	    if(goodsGiftChannel == "ACTIVITY"){
-	    	$("#goodsTr").find("td").each(function(){
+	    	$(".activity").each(function(){
 	    		$(this).css("display","table-cell");
 	    	})
+	    	$(".course").each(function(){
+	    		$(this).css("display","none");
+	    	})
 	    	$("#activity").css("display","block");
+	    	$("#course").css("display","none");
 	    }else if(goodsGiftChannel == "OTHER"){
-	    	$("#goodsTr").find("td").each(function(i){
-	    		if(i > 0){
-	    			$(this).css("display","none");
-	    		}
+	    	$(".activity").each(function(){
+	    		$(this).css("display","none");
+	    	})
+	    	$(".course").each(function(){
+	    		$(this).css("display","none");
 	    	})
 	    	$("#activity").css("display","none");
+	    	$("#course").css("display","none");
+	    }else if(goodsGiftChannel == "COURSE"){
+	    	$(".activity").each(function(){
+	    		$(this).css("display","none");
+	    	})
+	    	$(".course").each(function(){
+	    		$(this).css("display","table-cell");
+	    	})
+	    	$("#activity").css("display","none");
+	    	$("#course").css("display","block");
 	    }
     });
     
@@ -169,6 +184,17 @@ function chooseActivity()
 	$('#dlg').dialog("open");
 }
 
+//选择课程
+function chooseCourse()
+{
+	var studentId = $("#studentId").val();
+	$('#courseDlg').dialog({
+		title:"选择课程",
+	});
+	$('#courseDlg').attr("src","/sys/giftManage/chooseCourse.jsp?studentId="+studentId);
+	$('#courseDlg').dialog("open");
+}
+
 //新增实物教材赠品提交
 function addGoodsGiftSubmit()
 {
@@ -189,6 +215,17 @@ function addGoodsGiftSubmit()
 		if(titleText == "" || titleText == undefined || activityId == "" || activityId == undefined)
 		{
 			$.messager.alert('提示', "活动赠送请选择一个活动！");
+			return;
+		}
+	}
+	var stageId = "";
+	var studentCourseId = "";
+	if(goodsGiftChannel == "COURSE"){
+		stageId = $("#stageId").html();
+		studentCourseId = $("#studentCourseId").val(); 
+		if(stageId == "" || stageId == undefined || studentCourseId == "" || studentCourseId == undefined)
+		{
+			$.messager.alert('提示', "课程赠送请选择一个课程！");
 			return;
 		}
 	}
@@ -224,6 +261,11 @@ function addGoodsGiftSubmit()
 			 if(goodsGiftChannel == "ACTIVITY"){
 				 gift.channelVal = activityId;
 				 gift.giftChannelDesc = titleText+"赠送";
+			 }
+			 if(goodsGiftChannel == "COURSE"){
+				 gift.channelVal = studentCourseId;
+				 gift.studentCourseId = studentCourseId;
+				 gift.giftChannelDesc = "购买"+stageId+"赠送";
 			 }
 			 if(goodsGiftChannel == "OTHER"){
 				 gift.giftChannelDesc ="其他赠送";

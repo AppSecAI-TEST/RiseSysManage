@@ -28,6 +28,7 @@
 	 				<td align="center">剩余金额</td>
 	 				<td align="center">赠送时间</td>
 	 				<td align="center">是否领取</td>
+	 				<td align="center">赠券编号</td>
 	 				<td align="center">赠品发放人</td>
 	 				<td align="center">有效开始日期</td>
 	 			</tr>
@@ -44,13 +45,14 @@
  						<td align="center">${couponGift.usableAmount}</td>
  						<td align="center">${couponGift.createDate}</td>
  						<td align="center">${couponGift.isGet}</td>
+ 						<td align="center"><input name="giftCode" id="giftCode${status.index}" type="text" class="easyui-textbox validatebox" required="true" style="width: 100px;"/></td>
  						<td align="center"><input name="granter" id="granter${status.index}" type="text" class="easyui-textbox validatebox" required="true" style="width: 100px;"/></td>
  						<td align="center"><input name="giftEffDate" id="giftEffDate${status.index}" class="easyui-datebox" required="true" style="width: 100px;" /></td>
  					</tr>
  				</c:forEach>
  				<tr>
      	       	<td align="right"><span>说明：</span></td>
-     	       	<td colspan="10"><textarea rows="7" cols="100" id="getRemark" name="getRemark" class="easyui-validatebox textbox"></textarea></td>
+     	       	<td colspan="11"><textarea rows="7" cols="100" id="getRemark" name="getRemark" class="easyui-validatebox textbox"></textarea></td>
      	       	</tr>
 	 		</table>
 	 		</form>

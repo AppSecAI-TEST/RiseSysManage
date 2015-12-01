@@ -73,14 +73,10 @@
 	 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" onclick="viewCourseTypeInfo()">维护赠课类型</a>
 	 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="addCourseName()">添加赠课名称</a>
 	 		</div>
-	 		<div id="courseTypeDlg" class="easyui-dialog" style="width:550px;height:250px;padding:0px 0px" modal="true" closed="true" buttons="#courseType-buttons">
+	 		<div id="courseTypeDlg" class="easyui-dialog" style="width:550px;height:230px;padding:0px 0px" modal="true" closed="true" buttons="#courseType-buttons">
 				<form id="courseTypeFm" method="post">
 					<input name="giftType" type="hidden" />
 					<table width="98%" style="margin:5px 5px;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
-						<tr>
-							<td align="right">编号：</td>
-							<td align="left"><input name="giftCode" style="width:265px" class="easyui-textbox" /></td>
-						</tr>
 						<tr>
 							<td align="right">赠课类型名称：</td>
 							<td align="left"><input name="typeName" style="width:265px" class="easyui-textbox" required="true" /></td>
@@ -158,14 +154,10 @@
  			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" onclick="viewCouponTypeInfo()">维护赠券类型</a>
  			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="addCouponName()">增加券类</a>
  		</div>
-		<div id="couponTypeDlg" class="easyui-dialog" style="width:550px;height:270px;padding:0px 0px" modal="true" closed="true" buttons="#couponType-buttons">
+		<div id="couponTypeDlg" class="easyui-dialog" style="width:550px;height:250px;padding:0px 0px" modal="true" closed="true" buttons="#couponType-buttons">
 			<form id="couponTypeFm" method="post">
 			<input name="giftType" type="hidden" />
 			<table width="98%" style="margin:5px 5px;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
-				<tr>
-					<td align="right">编号：</td>
-					<td align="left"><input name="giftCode" style="width:265px" class="easyui-textbox" required="true" /></td>
-				</tr>
 				<tr>
 					<td align="right">赠券类型名称：</td>
 					<td align="left"><input name="typeName" style="width:265px" class="easyui-textbox" required="true" /></td>

@@ -18,29 +18,36 @@ $(document).ready(function(){
     });
 });
 
+//跳转客户维护页面
 function updateExp()
 {
 	if(validateSelect("list_data")) {
 		var row = $('#list_data').datagrid('getSelected');
 		var studentId = row.studentId;
 		var studentCourseId = row.studentCourseId;
-		var expType = "001";
-		window.location.href = "/sys/expManage/viewExpStuInfo.do?studentId="+studentId+"&studentCourseId="+studentCourseId+"&expType="+expType;
+		var expType = row.expType;
+		var expInfo = {};
+		expInfo.expTypeVal = row.exceptionTypeVal;
+		expInfo.expDate = row.expDate;
+		expInfo.followCount = row.followCount;
+		expInfo.expedTime = row.expedTime;
+		window.location.href = "/sys/expManage/viewExpStuInfo.do?studentId="+studentId+"&studentCourseId="+studentCourseId+"&expType="+expType+"&json="+JSON.stringify(expInfo);
 	}
 }
 
+//跳转异动浏览页面
 function viewExpInfo()
 {
 	if(validateSelect("list_data")) {
 		var row = $('#list_data').datagrid('getSelected');
 		var studentId = row.studentId;
 		var studentCourseId = row.studentCourseId;
-		var expType = "001";
+		var expType = row.expType;
 		window.location.href = "/sys/expManage/qryExpStuDetailInfo.do?studentId="+studentId+"&studentCourseId="+studentCourseId+"&expType="+expType;
 	}
 }
 
-//打开添加校区页面
+//打开异动跟进历史页面
 function viewFollowHis(studentId,expType,studentCourseId)
 {
 	$('#dlg').dialog({
@@ -48,6 +55,50 @@ function viewFollowHis(studentId,expType,studentCourseId)
 	});
 	$('#dlg').attr("src","/sys/exceptionManage/followHistory.jsp?studentId="+studentId+"&expType="+expType+"&studentCourseId="+studentCourseId);
 	$('#dlg').dialog("open");
+}
+
+//新增异动跟进信息
+function addStuExpFollowInfo()
+{
+	var studentId = $("#studentId").val();
+	var studentCourseId = $("#studentCourseId").val();
+	var exceptionType = $("#expType").val();
+	var handlerId = $("#handlerId").val();
+	var createDate = $("#createDate").datebox('getValue');
+	if(createDate == "" || createDate == undefined){
+		$.messager.alert('提示', "请选择跟进时间！");
+		return;
+	}
+	var remark = $("#remark").val();
+	remark = string2Json(remark);
+	remark = encodeURI(remark);
+	var care = {};
+	care.studentId = studentId;
+	care.studentCourseId = studentCourseId;
+	care.exceptionType = exceptionType;
+	care.handlerId = handlerId;
+	care.createDate = createDate;
+	care.remark = remark;
+	$.ajax({
+		type : "POST",
+		url: "/sys/expManage/addStuExpFollowInfo.do",
+		data: "json="+JSON.stringify(care),
+		async: false,
+		beforeSend: function()
+    	{
+    		$.messager.progress({title : '新增异动跟进记录', msg : '新增异动跟进记录中，请稍等……'});
+    	},
+    	success: function(flag) {
+    		$.messager.progress('close'); 
+    		if(flag == "true"){
+    			$.messager.alert('提示', "新增异动跟进记录成功！","info",function(){
+    				window.location.href = "/sys/exceptionManage/exceptionManage.jsp";
+				});
+    		}else if(flag == "false"){
+    			$.messager.alert('提示', "新增异动跟进记录失败！");
+    		}
+        } 
+	});
 }
 
 function validateSelect(object)

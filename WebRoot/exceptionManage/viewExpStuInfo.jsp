@@ -99,6 +99,8 @@
   			<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="常规课">
   				<input type="hidden" id="studentId" value="${obj.courseInfo.studentId}" />
   				<input type="hidden" id="studentCourseId" value="${obj.courseInfo.studentCourseId}" />
+  				<input type="hidden" id="expType" value="${expType}" />
+  				<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   				<table width="100%" cellpadding="5px" class="maintable">
 	      			<tr>
 	      				<td width="20%" align="right">课程阶段：</td>
@@ -123,11 +125,11 @@
 	      	<div style="height: 10px;"></div>
 	      	<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="异动信息">
 			   <table width="100%" cellpadding="5px" class="maintable">
-			   		<tr>
+			   		<tr id="expTr">
 	      				<td width="20%" align="right">异动类型：</td>
-	      				<td width="30%" align="left">${obj.studentObj.name}</td>
+	      				<td width="30%" align="left">${expInfo.expTypeVal}</td>
 	      				<td width="20%" align="right">异动开始时间：</td>
-	      				<td width="30%" align="left">${obj.studentObj.birthday}</td>
+	      				<td width="30%" align="left">${expInfo.expDate}</td>
 	      			</tr>
 				</table>
 	      	</div>
@@ -137,7 +139,7 @@
 			   		<tr>
 	      				<td width="20%" align="right">跟进时间：</td>
 	      				<td width="30%" align="left"><input class="easyui-datebox" name="createDate" id="createDate" style="width:120px;" /></td>
-	      				<td width="50%" align="center"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-redo'" style="width:150px; height: 25px;" onclick="viewFollowHis('${obj.courseInfo.studentId}','001','${obj.courseInfo.studentCourseId}')" >查看跟进历史</a></td>
+	      				<td width="50%" align="center"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-redo'" style="width:150px; height: 25px;" onclick="viewFollowHis('${obj.courseInfo.studentId}','${expType}','${obj.courseInfo.studentCourseId}')" >查看跟进历史</a></td>
 	      			</tr>
 	      			<tr>
 	      				<td align="right">跟进记录：</td>
@@ -146,6 +148,11 @@
 				</table>
 	      	</div>
 	      	<iframe id="dlg" class="easyui-dialog" style="width:800px; height: 420px; padding: 10px 20px" closed="true" modal="true"></iframe>
+  			<div style="margin-top: 20px;min-width:1100px; width:99%;">
+		      	<div style="float: right;">
+		      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:80px; height: 28px;" onclick="addStuExpFollowInfo()">提交</a>
+		      	</div>
+	 		</div>
   		</div>
   	  	<div title="异动历史" style="padding:5px;display:block;">
   			<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="历史异动信息">
@@ -168,5 +175,17 @@
 	      	</div>
 	  	</div>
 	  </div>
+	   <script type="text/javascript">
+	   		$(document).ready(function(){
+	   			//初始化页面值
+	   			var content = "";
+	   			var expType = "${expType}";
+	   			if(expType == "001"){
+	   				
+	   			}
+   				content += "<tr><td width='20%' align='right'>跟进次数：</td><td width='30%' align='left'>${expInfo.followCount}</td><td width='20%' align='right'>异动时长：</td><td width='30%' align='left'>${expInfo.expedTime}</td></tr>";
+	   			$("#expTr").after(content);
+	   		});
+	   </script>
   	</body>
 </html>

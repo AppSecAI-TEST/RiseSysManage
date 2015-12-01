@@ -17,22 +17,37 @@ $(document).ready(function(){
 		});
     });
     
-    $("input[name=goodsGiftChannel]").click(function(){
-	    var goodsGiftChannel = $("input[name='goodsGiftChannel']:checked").val();
-	    if(goodsGiftChannel == "ACTIVITY"){
-	    	$("#goodsTr").find("td").each(function(){
-	    		$(this).css("display","table-cell");
-	    	})
-	    	$("#activity").css("display","block");
-	    }else if(goodsGiftChannel == "OTHER"){
-	    	$("#goodsTr").find("td").each(function(i){
-	    		if(i > 0){
-	    			$(this).css("display","none");
-	    		}
-	    	})
-	    	$("#activity").css("display","none");
-	    }
-    });
+	 $("input[name=goodsGiftChannel]").click(function(){
+		    var goodsGiftChannel = $("input[name='goodsGiftChannel']:checked").val();
+		    if(goodsGiftChannel == "ACTIVITY"){
+		    	$(".activity").each(function(){
+		    		$(this).css("display","table-cell");
+		    	})
+		    	$(".course").each(function(){
+		    		$(this).css("display","none");
+		    	})
+		    	$("#activity").css("display","block");
+		    	$("#course").css("display","none");
+		    }else if(goodsGiftChannel == "OTHER"){
+		    	$(".activity").each(function(){
+		    		$(this).css("display","none");
+		    	})
+		    	$(".course").each(function(){
+		    		$(this).css("display","none");
+		    	})
+		    	$("#activity").css("display","none");
+		    	$("#course").css("display","none");
+		    }else if(goodsGiftChannel == "COURSE"){
+		    	$(".activity").each(function(){
+		    		$(this).css("display","none");
+		    	})
+		    	$(".course").each(function(){
+		    		$(this).css("display","table-cell");
+		    	})
+		    	$("#activity").css("display","none");
+		    	$("#course").css("display","block");
+		    }
+	   });
     
      $('#giftType').combobox({
 		 url:"/sys/pubData/qryData.do?param={'queryCode':'Qry_Gift_Type','parentType':'COUPON'}",
@@ -74,6 +89,7 @@ function addRow()
 	{
 		var giftType=$("#giftType").combobox('getValue');
 		var effDate = $("#effDate").datebox('getValue');
+		var giftCode = $("#giftCode").textbox('getValue');
 		if(n==1)//赠品类别;	
 		{
 			var name=$("#giftType").combobox('getText');
@@ -124,16 +140,16 @@ function addRow()
 				$.messager.alert('提示', "请填写可用金额！");
 				return false;
 			}
+			var amount=$("#amount").combobox('getText');
+			if(parseInt(usableAmount)>parseInt(amount)){
+				flag=false;
+				$.messager.alert('提示', "可用金额不能大于赠券面值！");
+				return false;
+			}
 			$(node).html("<span>"+usableAmount+"</span>");	
 			$(node).attr("usableAmount",usableAmount);
 		}else if(n==7)
 		{
-			var giftCode = $("#giftCode").textbox('getValue');
-			if(giftCode == undefined || giftCode == ""){
-				flag=false;
-				$.messager.alert('提示', "请输入赠券编号！");
-				return false;
-			}
 			$(node).html("<span>"+giftCode+"</span>");	
 			$(node).attr("giftCode",giftCode);
 		}else if(n==9)
@@ -150,6 +166,11 @@ function addRow()
 			}
 			if('Y'==isGet)
 			{
+				if(giftCode == undefined || giftCode == ""){
+					flag=false;
+					$.messager.alert('提示', "请输入赠券编号！");
+					return false;
+				}
 				if(effDate == undefined || effDate == ""){
 					flag=false;
 					$.messager.alert('提示', "请填写有效期！");
@@ -198,6 +219,17 @@ function chooseActivity()
 	$('#dlg').dialog("open");
 }
 
+//选择课程
+function chooseCourse()
+{
+	var studentId = $("#studentId").val();
+	$('#courseDlg').dialog({
+		title:"选择课程",
+	});
+	$('#courseDlg').attr("src","/sys/giftManage/chooseCourse.jsp?studentId="+studentId);
+	$('#courseDlg').dialog("open");
+}
+
 //新增赠券赠品提交
 function addCouponGiftSubmit()
 {
@@ -218,6 +250,17 @@ function addCouponGiftSubmit()
 		if(titleText == "" || titleText == undefined || activityId == "" || activityId == undefined)
 		{
 			$.messager.alert('提示', "活动赠送请选择一个活动！");
+			return;
+		}
+	}
+	var stageId = "";
+	var studentCourseId = "";
+	if(goodsGiftChannel == "COURSE"){
+		stageId = $("#stageId").html();
+		studentCourseId = $("#studentCourseId").val(); 
+		if(stageId == "" || stageId == undefined || studentCourseId == "" || studentCourseId == undefined)
+		{
+			$.messager.alert('提示', "课程赠送请选择一个课程！");
 			return;
 		}
 	}
@@ -264,6 +307,11 @@ function addCouponGiftSubmit()
 			 if(goodsGiftChannel == "ACTIVITY"){
 				 gift.channelVal = activityId;
 				 gift.giftChannelDesc = titleText+"赠送";
+			 }
+			 if(goodsGiftChannel == "COURSE"){
+				 gift.channelVal = studentCourseId;
+				 gift.studentCourseId = studentCourseId;
+				 gift.giftChannelDesc = "购买"+stageId+"赠送";
 			 }
 			 if(goodsGiftChannel == "OTHER"){
 				 gift.giftChannelDesc ="其他赠送";
@@ -352,12 +400,14 @@ function getCouponGiftSubmit()
 		   var studentGiftId = $(node).val();
 		   var granter=$("#granter"+i).textbox('getValue');
 		   var effDate = $("#giftEffDate"+i).datebox('getValue');
+		   var giftCode = $("#giftCode"+i).textbox('getValue');
 		   var expInfo = $("#expInfo"+i).val();
 		   var gift = {};
 		   gift.studentGiftId = studentGiftId;
 		   gift.granter =granter;
 		   gift.effDate =effDate;
 		   gift.getRemark =getRemark;
+		   gift.giftCode = giftCode;
 		   gift.expInfo =expInfo;
 		   giftArray.push(gift);
 		});

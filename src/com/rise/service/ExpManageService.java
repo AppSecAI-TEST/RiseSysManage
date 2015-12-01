@@ -33,13 +33,21 @@ public class ExpManageService {
 		return ServiceEngine.invokeHttp(params);
 	}
 
+	//查询客户维护页面的信息
 	public String viewExpStuInfo(String studentId, String studentCourseId,String expType)throws Exception {
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1802\",securityCode:\"0000000000\",params:{studentId:'"+studentId+"',studentCourseId:'"+studentCourseId+"',expType:'"+expType+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 
+	//浏览学员异动的跟进信息
 	public String qryExpStuDetailInfo(String studentId, String studentCourseId,String expType)throws Exception {
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1803\",securityCode:\"0000000000\",params:{studentId:'"+studentId+"',studentCourseId:'"+studentCourseId+"',expType:'"+expType+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+
+	//添加跟进记录
+	public String addStuExpFollowInfo(String json)throws Exception {
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1804\",securityCode:\"0000000000\",params:{json:'"+json+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 	

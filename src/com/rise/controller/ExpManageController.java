@@ -56,13 +56,15 @@ public class ExpManageController {
 	
 	//跳转客户维护页面
 	@RequestMapping(value="/viewExpStuInfo.do")
-	public ModelAndView viewExpStuInfo(String studentId,String studentCourseId,String expType)
+	public ModelAndView viewExpStuInfo(String studentId,String studentCourseId,String expType,String json)
 	{
 		ModelAndView view = null;
 		try {
 			view = new ModelAndView("exceptionManage/viewExpStuInfo");
 			String ret = expManageService.viewExpStuInfo(studentId, studentCourseId, expType);
 			view.addObject("obj", JSONObject.fromObject(ret));
+			view.addObject("expType",expType);
+			view.addObject("expInfo", JSONObject.fromObject(json));
 		}catch(Exception e)
 		{
 			e.printStackTrace();
@@ -70,7 +72,7 @@ public class ExpManageController {
 		return view;
 	}
 	
-	//跳转添加页面
+	//跳转浏览页面
 	@RequestMapping(value="/qryExpStuDetailInfo.do")
 	public ModelAndView qryExpStuDetailInfo(String studentId,String studentCourseId,String expType)
 	{
@@ -86,4 +88,30 @@ public class ExpManageController {
 		return view;
 	}
 	
+	//添加跟进记录
+	@RequestMapping(value="/addStuExpFollowInfo.do")
+	public void addStuExpFollowInfo(HttpServletResponse response,String json)
+	{
+		log.error(json);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = expManageService.addStuExpFollowInfo(json);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }

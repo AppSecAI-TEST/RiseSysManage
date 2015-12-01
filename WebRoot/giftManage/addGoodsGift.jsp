@@ -23,17 +23,27 @@
   		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   			<table width="100%" cellpadding="5px" class="maintable">
   				<input type="hidden" id="activityId" />
+  				<input type="hidden" id="studentCourseId" />
   				<tr id="goodsTr">
-  					<td width="25%">&nbsp;<input type="radio" value="ACTIVITY" name="goodsGiftChannel"/><span>活动赠送</span>
+  					<td id="goodsTd" width="25%">&nbsp;<input type="radio" value="ACTIVITY" name="goodsGiftChannel"/><span>活动赠送</span>
 	      				&nbsp;<input type="radio" value="OTHER" name="goodsGiftChannel"/><span>其他赠送</span>
+	      				&nbsp;<input type="radio" value="COURSE" name="goodsGiftChannel"/><span>课程赠送</span>
 						<a href="javascript:void(0)" class="easyui-linkbutton" id="activity" data-options="iconCls:'icon-search'" style="width:90px; height: 20px;display:none;float:right;margin-right:5px" onclick="chooseActivity()">选择活动</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton" id="course" data-options="iconCls:'icon-search'" style="width:90px; height: 20px;display:none;float:right;margin-right:5px" onclick="chooseCourse()">选择课程</a>
 					</td>
-					<td align="right" width="7%" style="display: none">活动标题：</td>
-					<td align="left" id="titleText" width="18%" style="display: none"></td>
-					<td align="right" width="7%" style="display: none">活动时间：</td>
-					<td align="left" id="activityDate" width="15%" style="display: none"></td>
-					<td align="right" width="7%" style="display: none">获奖情况：</td>
-					<td align="left" id="awardText" width="25%" style="display: none"></td>
+					<td align="right" class="activity" width="7%" style="display: none">活动标题：</td>
+					<td align="left" class="activity" id="titleText" width="18%" style="display: none"></td>
+					<td align="right" class="activity" width="7%" style="display: none">活动时间：</td>
+					<td align="left" class="activity" id="activityDate" width="15%" style="display: none"></td>
+					<td class="activity" width="10%" style="display: none"></td>
+					<td align="right" class="course"  width="7%" style="display: none">课程阶段：</td>
+					<td align="left" class="course" id="stageId" width="7%" style="display: none"></td>
+					<td align="right" class="course" width="7%" style="display: none">缴费时间：</td>
+					<td align="left" class="course" id="payDate" width="10%" style="display: none"></td>
+					<td align="right" class="course"  width="7%" style="display: none">课程状态：</td>
+					<td align="left" class="course" id="courseState" width="7%" style="display: none"></td>
+					<td align="right" class="course"  width="7%" style="display: none">班级：</td>
+					<td align="left" class="course" id="className" width="7%" style="display: none"></td>
   				</tr>
   			</table>
   			<table width="100%" cellpadding="5px" style="margin-top: 5px;border-top: 1px solid #ccc;" class="maintable" id="giftTab">
@@ -82,7 +92,7 @@
 	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
 	      	</div>
 	   </div>
-	   <iframe id="dlg" class="easyui-dialog" style="width:1000px; height: 450px; padding: 10px 20px" closed="true" modal="true">
-	   </iframe>
+	   <iframe id="dlg" class="easyui-dialog" style="width:1000px; height: 450px; padding: 10px 20px" closed="true" modal="true"></iframe>
+	   <iframe id="courseDlg" class="easyui-dialog" style="width:1000px; height: 450px; padding: 10px 20px" closed="true" modal="true"></iframe>
   	</body>
 </html>

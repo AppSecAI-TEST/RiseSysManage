@@ -16,7 +16,7 @@
 	</head>
 	<body>
 		<table class="easyui-datagrid"  align="center" title="活动信息列表" style="width:920px;margin-top:10px;height:330px;" id="activityList" url="<%=path %>/pubData/qryDataListByPage.do?param={'queryCode':'qryActivityList','studentId':'<%=studentId%>'}" 
-			 pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
+			 pagination="false" rownumbers="false" fitColumns="true" singleSelect="true" data-options="onLoadSuccess:function(data){$('activityList').datagrid('clearSelections');}">
 			<thead>
 				<tr>
 					<th field="ck" align="center" checkbox="true" width="1%"></th>
@@ -44,12 +44,12 @@
 		}
 		var titleText = row.titleText;
 		var activityDate = row.activityDate;
-		var awardText = row.awardText;
+	//	var awardText = row.awardText;
 		var activityId = row.activityId;
 		
 		parent.window.$("#titleText").html(titleText);
 		parent.window.$("#activityDate").html(activityDate);
-		parent.window.$("#awardText").html(awardText);
+	//	parent.window.$("#awardText").html(awardText);
 		parent.window.$("#activityId").val(activityId);
 		parent.window.$('#dlg').dialog('close');
 	});
