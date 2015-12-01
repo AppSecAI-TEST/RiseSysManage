@@ -67,4 +67,16 @@ $(document).ready(function() {
 			$.messager.alert('提示', "请先选择您要选班的班级！");
 		}
 	});
+	
+	//浏览
+	$("#view").click(function() {
+		var row = $('#list_data').datagrid('getSelected');
+		if(row) {
+			var studentId = row.studentId;
+			var studentCourseId = row.studentCourseId;
+			window.location.href = "/sys/selectClass/viewSelectClass.jsp?studentCourseId="+studentCourseId+"&studentId="+studentId;
+		} else {
+			$.messager.alert('提示', "请先选择您要浏览的班级！");
+		}
+	});
 });
