@@ -118,10 +118,35 @@ function restartSubmit()
 	    				window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";
 	    			}
 	    			if(resumeType == "002"){
-	    				window.location.href = "";
+	    				var studentCourseId = $("#studentCourseId").val();
+						var studentId = $("#studentId").val();
+						var byName = $("#byName").val();
+						var changeClassNum = $("#changeClassNum").val();
+						var className = $("#className").val();
+						var classProgress = $("#classProgress").val();
+						var courseStateText = "休学";
+						var name = $("#name").val();
+						var phone = $("#phone").val();
+						var teacherName = $("#teacherName").val();
+						var schoolId = $("#schoolId").val();
+						var classInstId = $("#classInstId").val();
+						var classType = $("#classType").val();
+						var schoolName = $("#schoolName").val();
+						var stageId = $("#stageId").val();
+	    				window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&studentId="+studentId+"&byName="+byName+"&changeClassNum="+changeClassNum+"&className="+className+"&classProgress="+encodeURIComponent(classProgress)+"&courseStateText="+courseStateText+"&name="+name+"&phone="+phone+"&teacherName="+teacherName+"&schoolId="+schoolId+"&schoolName="+schoolName+"&classInstId="+classInstId+"&classType="+classType+"&stageId="+stageId;
 	    			}
 	    			if(resumeType == "003"){
-	    				window.location.href = "";
+	    				var name = $("#name").val();
+						var phone = $("#phone").val();
+						var byName = $("#byName").val();
+						var schoolId = $("#schoolId").val();
+						var studentId = $("#studentId").val();
+						var schoolName = $("#schoolName").val();
+						var classInstId = $("#classInstId").val();
+						var studentCourseId = $("#studentCourseId").val();
+						var currentClassName = $("#className").val();
+						var adviserTeacherName = $("#teacherName").val();
+						window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentCourseId="+studentCourseId+"&studentId="+studentId+"&schoolId="+schoolId+"&schoolName="+schoolName+"&name="+name+"&byName="+byName+"&phone="+phone+"&currentClassName="+currentClassName+"&adviserTeacherName="+adviserTeacherName+"&classInstId="+classInstId;
 	    			}
 	    		}else if(flag == "false"){
 	    			if(resumeType == "001"){

@@ -11,9 +11,9 @@ import com.rise.pub.util.ObjectCensor;
 public class LeaveManageService {
 
 	//查询休学学员相关信息
-	public String viewLeaveInfo(String studentId,String leaveId,String funcNodeId)throws Exception
+	public String viewLeaveInfo(String studentId,String leaveId,String funcNodeId,String type)throws Exception
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1203\",securityCode:\"0000000000\",params:{param:{studentId:\""+studentId+"\",leaveId:\""+leaveId+"\",functionId:\""+funcNodeId+"\"}},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1203\",securityCode:\"0000000000\",params:{param:{studentId:\""+studentId+"\",leaveId:\""+leaveId+"\",functionId:\""+funcNodeId+"\",type:\""+type+"\"}},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 	

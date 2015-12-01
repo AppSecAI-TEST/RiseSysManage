@@ -104,6 +104,18 @@
  		<input id="studentId" type="hidden" value="${obj.studentInfo.studentId}" />
  		<input id="leaveId" type="hidden" value="${obj.leaveInfo.leaveId}" />
  		<input id="studentCourseId" type="hidden" value="${obj.leaveInfo.studentCourseId}" />
+ 		<input id="byName" type="hidden" value="${obj.studentInfo.byName}" />
+ 		<input id="changeClassNum" type="hidden" value="${obj.classInfo.changeClassNum}" />
+ 		<input id="className" type="hidden" value="${obj.classInfo.className}" />
+ 		<input id="classProgress" type="hidden" value="${obj.classInfo.classProgress}" />
+ 		<input id="name" type="hidden" value="${obj.studentInfo.name}" />
+ 		<input id="phone" type="hidden" value="${obj.studentInfo.phone}" />
+ 		<input id="teacherName" type="hidden" value="${obj.classInfo.teacherName}" />
+ 		<input id="schoolId" type="hidden" value="${obj.studentInfo.schoolId}" />
+ 		<input id="classInstId" type="hidden" value="${obj.classInfo.classInstId}" />
+ 		<input id="classType" type="hidden" value="${obj.classInfo.classType}" />
+ 		<input id="schoolName" type="hidden" value="${obj.studentInfo.schoolName}" />
+ 		<input id="stageId" type="hidden" value="${obj.classInfo.stageId}" />
  		<div style="margin-top: 20px;min-width:1100px; width:99%;">
 	      	<div style="float: right;">
 	      		<a href="javascript:void(0)" id="restartClassSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;" onclick="restartSubmit()">提交</a>

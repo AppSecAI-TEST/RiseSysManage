@@ -45,7 +45,7 @@ public class LeaveManageController {
 			view.addObject("currentHours", currentHours);
 		}
 		try {
-			String ret = leaveManageService.viewLeaveInfo(studentId, leaveId, funcNodeId);
+			String ret = leaveManageService.viewLeaveInfo(studentId, leaveId, funcNodeId, type);
 			JSONObject obj = JSONObject.fromObject(ret);
 			view.addObject("obj",obj);
 		}catch(Exception e)
