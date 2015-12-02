@@ -12,6 +12,7 @@
   	</head>
   
   	<body style="padding-top:5px">
+  	<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
     	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
     		<div title="退费课程查询" style="padding:5px;display:block;">
     			<form id="qryRefundCourseFm" style="margin:0 auto;">

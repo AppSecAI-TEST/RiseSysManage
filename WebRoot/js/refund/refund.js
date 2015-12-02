@@ -143,11 +143,18 @@ $(document).ready(function() {
 	//退费审批
 	$("#refundApprove").click(function() {
 		var row = $('#approve_list_data').datagrid('getSelected');
-		if(row) {
+		if(row)
+		{
 			var courseType = row.courseType;
 			var refundFeeId = row.refundFeeId;
+			var processInstId=row.processInstanceId;
+			if(!isApprove(processInstId))
+			{
+				return false;
+			}
 			window.location.href = "/sys/refund/qryApproveRefund.do?refundFeeId="+refundFeeId+"&courseType="+courseType+"&type=approve";
-		} else {
+		} else 
+		{
 			$.messager.alert('提示', "请先选择您要审批的退费申请！");
 		}
 	});
@@ -188,3 +195,34 @@ $(document).ready(function() {
 		}
 	});
 });
+
+/**
+ * 判断登陆员工是否能审批
+ * @param {Object} processInstId
+ * @return {TypeName} 
+ */
+function isApprove(processInstId)
+{
+ 		var approveId=$("#staffId").val();
+ 		var flag=false;
+	 	$.ajax(
+	 	{
+   			url: "/sys/fee/isApprove.do?processInstId="+processInstId+"&approveId="+approveId,
+   			data: "param=" + "",
+   			dataType: "json",
+   			async: false,
+   	    	success: function (data)
+   	    	{
+   	    		var id = data.processInstanceId;
+   	            if(id=='')
+   	            {
+   	            	$.messager.alert('提示', "不能审批");
+   	            	flag= false;
+   	            } else
+   	            {
+   	            	flag= true;
+   	            }
+   	        } 
+   		});
+	 	return flag;
+}
