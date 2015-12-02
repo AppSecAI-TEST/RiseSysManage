@@ -524,7 +524,7 @@
 												url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_T&codeType=IDENTITY_TYPE">
 											</select>
 											<input type="text" class="easyui-textbox"
-												style="width: 150px">
+												style="width: 150px;height: 28px">
 										</td>
 									</tr>
 									<tr style="display: none;">
@@ -539,14 +539,14 @@
 										</td>
 										<td align="right"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
-											<span>转介绍老师:</span>
+											<span>转介绍老师：</span>
 										</td>
 										<td align="center"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
 											<select class="easyui-combobox" id="t_teacher_school"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 												  
-												style="width: 100px; height: 28px;">
+												style="width: 150px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="t_teacher_id"
 												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"

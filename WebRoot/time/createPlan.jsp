@@ -31,7 +31,58 @@
 		<div style="padding:5px 0;min-width:1100px; width:100%;">
 			<table  class="easyui-datagrid" title="排课" style="height:435px;" id="weekDg" url=""></table>
 		</div>
-	 
+		<table style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:30px;" border="1px" cellspacing="0">
+		  <tr>
+		    <td rowspan="2">序号</td>
+		    <td rowspan="2">班级</td>
+		    <td rowspan="2">带班老师</td>
+		    <td rowspan="2">上课时段</td>
+		    <td rowspan="2">开课日期</td>
+		    <td rowspan="2">结课日期</td>
+		    <td rowspan="2">上月已上课时</td>
+		    <td rowspan="2">上月剩余课时数</td>
+		    <td rowspan="2">上月课时差异</td>
+		    <td colspan="2">第一周</td>
+		    <td colspan="2">第二周</td>
+		    <td colspan="2">第三周</td>
+		    <td colspan="2">第四周</td>
+		    <td colspan="2">第五周</td>
+		  </tr>
+		  <tr>
+		    <td>计划课时</td>
+		    <td>已排课时</td>
+		    <td>计划课时</td>
+		    <td>已排课时</td>
+		    <td>计划课时</td>
+		    <td>已排课时</td>
+		    <td>计划课时</td>
+		    <td>已排课时</td>
+		    <td>计划课时</td>
+		    <td>已排课时</td>
+		  </tr>
+		  
+		  <tr>
+		    <td height="61">&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		  </tr>
+		</table>
  	</body>
 </html>
 <script type="text/javascript">
@@ -84,6 +135,7 @@ function myformatter(date){
                 return new Date();
             }
         }
+  
 var time;
 $("#submit").click(function()
 {

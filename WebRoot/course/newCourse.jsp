@@ -87,9 +87,6 @@
 							<td>
 								<select name="classType" class="easyui-combobox" id="classType"
 									style="width: 150px; height: 28px;"  editable='false' required="true">
-									<option>
-										请先选择阶段
-									</option>
 								</select>
 							</td>
 							 
@@ -117,7 +114,7 @@
 								</div>
 								
 								<div id="adviserTeacherADiv" style="display:none">
-									<select name="adviserTeacherA" class="easyui-combobox" id="adviserTeacherA"
+									<select name="adviserTeacherA" class="easyui-combobox" id="adviserTeacherA" required="true"
 								style="width: 150px; height: 28px;"
 								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 								 >
@@ -128,7 +125,7 @@
 							<td align="right" id="adviserNameB"><span>业绩顾问B：</span></td>
 							<td>
 								<div id="adviserBDiv">
-								<select name="adviserB" class="easyui-combobox" id="adviserB" required="true"
+								<select name="adviserB" class="easyui-combobox" id="adviserB"  
 									style="width: 150px; height: 28px;"
 									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
 								</select>
@@ -154,7 +151,7 @@
 	      	        <td width="8%">
 	      	        <select id="parentType" style="width: 100px; height: 28px;"
 	      			data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
-	      			required="true" >
+	      			 >
       	            </select>
       	            </td>
 	      	        <td width="7%" align="right"><span>赠品名称：</span></td>
@@ -163,8 +160,8 @@
 	   	                <tr>
 			      	         <td id='td0' ><select  class="easyui-combobox" id="giftType" style="width: 120px; height: 28px;"></select></td>
 			      	         <td id="td1" style="display:none"><select  class="easyui-combobox" id="giftId" style="width: 120px; height: 28px;"></select></td>
-			      	         <td id="td2" style="display:none"><input   id="giftCode" type="text" class="easyui-textbox validatebox" required="true" style="width:150px; height: 28px;"/></td>
-		                     <td id="td3" style="display:none"><input   id="giftEffDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;"/></td>
+			      	         <td id="td2" style="display:none"><input   id="giftCode" type="text" class="easyui-textbox validatebox"  style="width:150px; height: 28px;"/></td>
+		                     <td id="td3" style="display:none"><input   id="giftEffDate" type="text" class="easyui-datebox"  style="width: 100px; height: 28px;"/></td>
 	      	             </tr>
       	            </table>
       	            </td>
@@ -176,7 +173,7 @@
 	      	          <label for="radio"> <span>未领用</span></label>
       	           </td>
 	      	        <td width="6%" align="right"><span>发放人：</span></td>
-	      	        <td width="8%"><input   id="granter" type="text" class="easyui-textbox validatebox" required="true" style="width: 100px; height: 28px;"/></td>
+	      	        <td width="8%"><input   id="granter" type="text" class="easyui-textbox validatebox"  style="width: 100px; height: 28px;"/></td>
 	      	       
 	      	        <td width="6%"><a href="javascript:void(0)" id="addGiftBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a></td>
       	        </tr>
@@ -338,7 +335,7 @@
 											<span>活动名称：</span>
 											<select class="easyui-combobox" id="activeSchool" style="width: 150px; height: 28px;"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-												  required="true">
+												  >
 											</select>
 											<select class="easyui-combobox" id="activeId" style="width: 150px; height: 28px;"
 												data-options="valueField: 'actionId', textField: 'title', panelHeight: 'auto'">
@@ -350,7 +347,7 @@
 											<span>口碑顾问A：</span>
 											<select class="easyui-combobox" id="c_schoolA"
 											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-											required="true"
+											
 												style="width: 150px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="c_adviserA"
@@ -360,7 +357,7 @@
 											<span>口碑顾问B：</span>
 											<select class="easyui-combobox" id="c_schoolB"
 											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-											  required="true"
+											  
 												style="width: 150px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="c_adviserB"
@@ -374,7 +371,7 @@
 											<span>口碑顾问A：</span>
 											<select class="easyui-combobox" id="c_schoolsA"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-												  required="true"
+												  
 												style="width: 120px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="c_teacherA"
@@ -384,7 +381,7 @@
 											<span>口碑顾问B：</span>
 											<select class="easyui-combobox" id="c_schoolsB"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-												 required="true"
+												 
 												style="width: 120px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="c_teacherB"
@@ -458,7 +455,7 @@
 										</td>
 										<td align="center" style="border-right: 1px solid #ccc;">
 											<input type="text" class="easyui-textbox"
-												style="width: 150px">
+												style="width: 150px;height: 28px;">
 										</td>
 										<td align="right" width="100px"
 											style="border-right: 1px solid #ccc;">
@@ -473,7 +470,7 @@
 												url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_T&codeType=IDENTITY_TYPE">
 											</select>
 											<input type="text" class="easyui-textbox"
-												style="width: 150px">
+												style="width: 150px;height: 28px;">
 										</td>
 									</tr>
 									<tr style="display: none;">
@@ -484,7 +481,7 @@
 										<td align="center"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
 											<input type="text" class="easyui-textbox"
-												style="width: 150px">
+												style="width: 150px;height: 28px;">
 										</td>
 										<td align="right"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
@@ -494,12 +491,12 @@
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
 											<select class="easyui-combobox" id="t_teacher_school"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-												  required="true"
-												style="width: 100px; height: 28px;">
+												  
+												style="width: 150px;height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="t_teacher_id"
 												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
-												style="width: 150px; height: 28px;">
+												style="width: 150px;height: 28px;">
 											<select>
 										</td>
 										<td align="left" style="border-top: 1px solid #ccc;">
@@ -515,7 +512,7 @@
 										</td>
 										<td align="left">
 											<input type="text" id="womStaffName" class="easyui-textbox"
-												style="width: 150px">
+												style="width: 150px;height: 28px">
 										</td>
 									</tr>
 								</table>
@@ -857,49 +854,6 @@ function delRow(rows) {
 	$(rows).parent("td").parent("tr").remove();
 }
 
-//提交
-$("#submitBtn").click(function() 
-{
-	if($("#payDate").datebox("getValue")=="")
-	{
-		parent.window.showMsg("请选择缴费时间");
-		return false;
-	}
-	
-	oldCourses =getOldCourse();
-	var stageId = $("#stageId").combobox("getValue");
-	var stageOrder =  $("#stageOrder").val();
-	var feeType = $("#feeType").combobox("getValue");
-	
-		for(var i=0;i<oldCourses.length;i++)
-		{
-			var course = oldCourses[i];
-			var order = course.stageOrder;
-			var courseState=course.courseState;
-			var stageName =course.stageId;
-			if(courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
-			{
-				if(feeType=='001')//新招
-				{
-					if(Number(stageOrder)<=Number(order))
-					{
-						parent.window.showMsg("当前所报新招阶段"+stageId+"低于或同于在读阶段"+stageName+",请重新选择阶段");
-						return;
-					}
-				}else if(feeType=='002'|| feeType=='003')
-				{
-					if(Number(stageOrder)<Number(order))
-					{
-						parent.window.showMsg("当前所报复读或升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段");
-						return;
-					}
-				}
-			}
-		}
-	return;
-	addCourseInfo();
-});
-
 $("#backBtn").click(function() {
 	window.location.href = "addCourseList.jsp"
 });
@@ -1125,6 +1079,7 @@ $("#addCourse").click(function()
 	//创建单报提交数据
 	function build()
 	{
+		if(!$("#courseFm").form('validate'))return;
 		gifts=[];
 		studentCourse={};                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 		$("#giftTab").find('tr').each(function(i,node)

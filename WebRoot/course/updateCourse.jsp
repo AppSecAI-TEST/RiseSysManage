@@ -227,7 +227,7 @@
 	      	        <td width="8%">
 	      	        <select id="parentType" style="width: 100px; height: 28px;"
 	      			data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
-	      			required="true" >
+	      			 >
       	            </select>
       	            </td>
 	      	        <td width="7%" align="right"><span>赠品名称：</span></td>
@@ -236,8 +236,8 @@
 	   	                <tr>
 			      	         <td id='td0' ><select  class="easyui-combobox" id="giftType" style="width: 120px; height: 28px;"></select></td>
 			      	         <td id="td1" style="display:none"><select  class="easyui-combobox" id="giftId" style="width: 120px; height: 28px;"></select></td>
-			      	         <td id="td2" style="display:none"><input   id="giftCode" type="text" class="easyui-textbox validatebox" required="true" style="width:150px; height: 28px;"/></td>
-		                     <td id="td3" style="display:none"><input   id="giftEffDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;"/></td>
+			      	         <td id="td2" style="display:none"><input   id="giftCode" type="text" class="easyui-textbox validatebox"  style="width:150px; height: 28px;"/></td>
+		                     <td id="td3" style="display:none"><input   id="giftEffDate" type="text" class="easyui-datebox"  style="width: 100px; height: 28px;"/></td>
 	      	             </tr>
       	            </table>
       	            </td>
@@ -249,7 +249,7 @@
 	      	          <label for="radio"> <span>未领用</span></label>
       	           </td>
 	      	        <td width="6%" align="right"><span>发放人：</span></td>
-	      	        <td width="8%"><input   id="granter" type="text" class="easyui-textbox validatebox" required="true" style="width: 100px; height: 28px;"/></td>
+	      	        <td width="8%"><input   id="granter" type="text" class="easyui-textbox validatebox"  style="width: 100px; height: 28px;"/></td>
 	      	       
 	      	        <td width="6%"><a href="javascript:void(0)" id="addGiftBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a></td>
       	        </tr>
@@ -409,7 +409,7 @@
 											<span>活动名称：</span>
 											<select class="easyui-combobox" id="activeSchool" style="width: 150px; height: 28px;"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-												  required="true">
+												  >
 											</select>
 											<select class="easyui-combobox" id="activeId" style="width: 150px; height: 28px;"
 												data-options="valueField: 'actionId', textField: 'title', panelHeight: 'auto'">
@@ -421,7 +421,7 @@
 											<span>口碑顾问A：</span>
 											<select class="easyui-combobox" id="c_schoolA"  
 											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-											  required="true"
+											  
 												style="width: 150px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="c_adviserA"
@@ -431,7 +431,7 @@
 											<span>口碑顾问B：</span>
 											<select class="easyui-combobox" id="c_schoolB"
 											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-											  required="true"
+											  
 												style="width: 150px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="c_adviserB"
@@ -445,7 +445,7 @@
 											<span>口碑顾问A：</span>
 											<select class="easyui-combobox" id="c_schoolsA"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-												  required="true"
+												  
 												style="width: 120px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="c_teacherA"
@@ -455,7 +455,7 @@
 											<span>口碑顾问B：</span>
 											<select class="easyui-combobox" id="c_schoolsB"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-												  required="true"
+												  
 												style="width: 120px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="c_teacherB"
@@ -564,7 +564,7 @@
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
 											<select class="easyui-combobox" id="t_teacher_school"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-												 required="true"
+												 
 												style="width: 150px; height: 28px;">
 											</select>
 											<select class="easyui-combobox" id="t_teacher_id"
@@ -1233,6 +1233,7 @@ $("#addCourse").click(function()
 	//创建单报提交数据
 	function build()
 	{
+		if(!$("#courseFm").form('validate'))return;
 		gifts=[];
 		studentCourse={};                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 		$("#giftTab").find('tr').each(function(i,node)

@@ -354,11 +354,16 @@ var newCourse;//新招课程阶段
 		 {
 			var name="frame"+n;
 	   		var courseT = window.frames[name].window.build();
+	   		if(courseT==undefined)
+	   		{
+	   			showMessage('提示', "课程信息填写不完整", null);
+	   			return;
+	   		}
 	   		if(!checkNewCourse(courseT))
 	   		{
 	   			return; 
 	   		}
-	   		//alert(JSON.stringify( courseT));
+	   		 
 	   		studentCourses.push(courseT);
 		 }
 		 if(!checkCoursePrice(studentCourses))
