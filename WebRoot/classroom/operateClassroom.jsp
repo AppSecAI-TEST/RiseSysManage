@@ -48,7 +48,7 @@
   						<input type="text" class="easyui-textbox" id="roomCode" style="width:200px;height: 28px;">
   					</td>
   				</tr>
-  				<tr>
+  				<tr style="display:none">
   					<td align="right"><span>添加开放课程类型</span></td>
   					<td align="left" width="40%">
   						<select class="easyui-combobox" name="state" id="state" style="width:150px;height: 28px;"
