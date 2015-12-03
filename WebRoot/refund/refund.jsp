@@ -249,7 +249,7 @@
 						<thead>
 							<tr>
 								<th field="ck" align="center" checkbox="true" width="1%"></th>
-								<th field="applyId" align="center" width="6%">申请编号</th>
+								<th field="refundFeeId" align="center" width="6%">申请编号</th>
 								<th field="schoolName" align="center" width="6%">校区</th>
 								<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
 								<th data-options="field:'byName',width:80,align:'center'">英文名</th>
@@ -257,6 +257,8 @@
 								<th data-options="field:'applyName',width:80,align:'center'">申请人</th>
 								<th data-options="field:'approveName',width:120,align:'center'">当前节点审批人</th>
 								<th data-options="field:'refundState',width:100,align:'center'">退费状态</th>
+								<th data-options="field:'tacheName',width:120,align:'center'">当前环节</th>
+								<th data-options="field:'nextTacheName',width:120,align:'center'">下一环节</th>
 								<th data-options="field:'applyDate',width:100,align:'center'">申请日期</th>
 								<th data-options="field:'approveDate',width:120,align:'center'">审批通过日期</th>
 								<th data-options="field:'finishDate',width:100,align:'center'">成功时间</th>

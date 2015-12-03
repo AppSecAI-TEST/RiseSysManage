@@ -11,6 +11,10 @@
   	</head>
   
   	<body>
+  		<div style="margin-left: 10px; margin-bottom: 5px; margin-top: 5px;">
+		  	<a href="javascript:void(0)" onclick="viewChangeTeacherHist()" class="easyui-linkbutton" iconCls="icon-redo" style="width: 120px;">老师变更历史</a>
+		  	<a href="javascript:void(0)" onclick="" class="easyui-linkbutton" iconCls="icon-redo" style="width: 120px;">浏览排课考勤</a>
+	  	</div>
   		<div class="easyui-panel" style="min-width:1100px; width:98%;height:auto;" title="班级信息">
   			<form id="disbandClassFm">
   				<input type="hidden" id="applyId" name="applyId" value="${obj.attendClassObj.applyId }"/>

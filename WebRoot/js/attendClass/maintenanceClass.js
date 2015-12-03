@@ -452,6 +452,11 @@ function maintenanceClass() {
 	}
 }
 
+//查看老师变更历史
+function viewChangeTeacherHist() {
+	$("#histDlg").dialog('open').dialog('setTitle', '老师变更历史');//设定表头  
+}
+
 //添加代班老师
 function addTeacher(obj) {
 	$("#dlg").dialog('open').dialog('setTitle', '添加老师');//设定表头  
