@@ -7,6 +7,8 @@ public class ShortClassAttendT {
     private Integer shortClassAttendId;
 
     private Integer shortClassInstId;
+    
+    private Integer shortSchooltimeId;
 
     private Integer schoolId;
 
@@ -65,8 +67,16 @@ public class ShortClassAttendT {
     public void setShortClassInstId(Integer shortClassInstId) {
         this.shortClassInstId = shortClassInstId;
     }
+    
+    public Integer getShortSchooltimeId() {
+		return shortSchooltimeId;
+	}
 
-    public Integer getSchoolId() {
+	public void setShortSchooltimeId(Integer shortSchooltimeId) {
+		this.shortSchooltimeId = shortSchooltimeId;
+	}
+
+	public Integer getSchoolId() {
         return schoolId;
     }
 

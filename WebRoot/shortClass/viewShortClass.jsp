@@ -112,7 +112,7 @@
 		<script type="text/javascript">
 			function backFunc()
 			{
-				window.location.href = "/sys/shortClass/interClassMan.jsp?funcNodeId=${funcNodeId}";
+				window.history.back();
 			}
 		</script>
  	</body>

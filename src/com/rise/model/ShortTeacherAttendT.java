@@ -21,6 +21,8 @@ public class ShortTeacherAttendT {
 
     private Integer handerId;
 
+    private String state;
+    
     private Date createDate;
     
     private TeacherT teacherT;
@@ -88,8 +90,16 @@ public class ShortTeacherAttendT {
     public void setAttendDate(Date attendDate) {
         this.attendDate = attendDate;
     }
+    
+    public String getState() {
+		return state;
+	}
 
-    public Integer getHanderId() {
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public Integer getHanderId() {
         return handerId;
     }
 

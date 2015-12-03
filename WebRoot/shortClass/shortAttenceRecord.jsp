@@ -14,15 +14,10 @@
   	</head>
   
   	<body class="manage">
-  		<input type="hidden" id="schooltimeInstId" value="${schooltimeInstT.schooltimeInstId}" />
 		<table class="tab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<tr style="display:none;">
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-			</tr>
 			<tr>
 				<td align="right" width="10%">上课时间：</td>
-				<td>周${schooltimeInstT.weekTime} <fmt:formatDate value="${schooltimeInstT.schooltime}" pattern="yyyy-MM-dd" /> <select id="classTime" name="classTime" style="width:200px" ></select></td>
+				<td>周${shortSchooltimeT.weekTime} <fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" /> <select id="classTime" name="classTime" style="width:200px" ></select></td>
 			</tr>
 			<tr>
 				<td align="right">教室：</td>
@@ -52,16 +47,16 @@
 				<td>&nbsp;</td>
 				<td align="center" width="15%"><a href="javascript:void(0)" id="addTeacherBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="addAttendTeacher()">添加</a></td>
 			</tr>
-			<c:forEach items="${teacherTimeInstList}" var="node">
+			<c:forEach items="${shortSchooltimeT.classTeacherList}" var="node">
 				<tr id="teacherId${node.teacherId}">
-					<td align="right" teacherId="${node.teacherId}" teacherName="${node.teacherName}" teacherType="${node.teacherType}" hours="${node.lessionHours}">老师：</td>
+					<td align="right" teacherId="${node.teacherId}" schoolId="${node.schoolId}" teacherType="${node.teacherType}" hours="${node.lessionHours}">老师：</td>
 					<td align="center">${node.schoolT.schoolName}</td>
-					<td align="center">${node.teacherName}</td>
+					<td align="center">${node.teacherT.teacherName}</td>
 					<td align="center">${node.teacherType}</td>
 					<td align="center">${node.lessionHours}</td>
 					<td align="center">
 						<c:choose>
-							<c:when test="${fn:length(node.classLicenseList) == 0}">
+							<c:when test="${fn:length(node.teacherT.teacherLicenseList) == 0}">
 								未持证
 							</c:when>
 							<c:otherwise>
@@ -73,12 +68,6 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<c:if test="${isFirstFlag == 'Y'}">
-			<div id="toolbar" style="width:99%;margin:5px auto;padding:0 0;">
-				<a href="javascript:void(0)" id="removeStaffBtn" class="easyui-linkbutton" iconCls="icon-remove" style="width: 150px;" onclick="removeClassStudent()">移除学员</a>
-	   			<a href="javascript:void(0)" id="convertExceptionBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 150px;" onclick="convertExceptionClass()">正常转异常开班</a>
-			</div>
-		</c:if>
 		<table class="tab" id="studentTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr class="headTr">
 				<td width="3%"><input type="checkbox" name="studentId" id="studentAllId" value="" onclick="checkAllStudentFunc(this)" /></td>
@@ -89,9 +78,9 @@
 				<td width="50%">考勤操作</td>
 				<td width="16%">校服着装情况</td>
 			</tr>
-			<c:forEach items="${schooltimeInstT.classInstT.classStudentList}" var="node" varStatus="i">
+			<c:forEach items="${shortClassInstT.classStudentList}" var="node" varStatus="i">
 				<tr id="studentId${node.studentId}">
-					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" studentName="${node.studentT.name}"><input type="checkbox" name="studentId" value="${node.studentId}" courseId="${node.studentCourseT.studentCourseId}" onclick="studentCheckboxClick(this)" /></td>
+					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}"><input type="checkbox" name="studentId" value="${node.studentId}" courseId="${node.studentCourseT.studentCourseId}" onclick="studentCheckboxClick(this)" /></td>
 					<td align="center">${i.count}</td>
 					<td align="center">${node.studentT.name}</td>
 					<td align="center">${node.studentT.byName}</td>
@@ -107,17 +96,19 @@
 		</div>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				ajaxLoadEnd();
 				var classTimeData = '${hourRangeList}';
 				var classRoomIdData = '${roomList}';
 				var attRecordSchoolIdData = '${schoolList}';
-				var attRecordTeacherId = '${teacherList}';
 				var attRecordClassType = '${teacherTypeList}';
 				classTimeData = eval("("+classTimeData+")");
 				classRoomIdData = eval("("+classRoomIdData+")");
 				attRecordSchoolIdData = eval("("+attRecordSchoolIdData+")");
-				attRecordTeacherId = eval("("+attRecordTeacherId+")");
 				attRecordClassType = eval("("+attRecordClassType+")");
+				$(document).ready(function(){
+					$("#classTime").combobox("setValue","${shortSchooltimeT.hourRange}");
+					$("#classRoomId").combobox("setValue","${shortSchooltimeT.roomId}");
+					$("#classLessonHour").textbox("setValue","${shortSchooltimeT.lessionHours}");
+				});
 				$("#classTime").combobox({
 					formatter:formatParaConfig, 
 					valueField: 'paramValue', 
@@ -149,12 +140,6 @@
 						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:data.schoolId},function(data){
 							$("#attRecordTeacherId").combobox("loadData",data);
 						},"json");
-					},
-					onLoadSuccess:function(data){
-						if(attRecordSchoolIdData.length > 0)
-						{
-							$("#attRecordSchoolId").combobox("setValue",attRecordSchoolIdData[0].schoolId);
-						}
 					}
 				});
 				$("#attRecordTeacherId").combobox({
@@ -162,8 +147,7 @@
 					valueField: 'teacherId', 
 					textField: 'teacherName', 
 					//panelHeight: 'auto',
-					listHeight:150,
-					data:attRecordTeacherId
+					listHeight:150
 				});
 				$("#attRecordClassType").combobox({
 					formatter:formatItem, 
@@ -181,7 +165,6 @@
 				var attRecordTeacherId = $("#attRecordTeacherId").combobox("getValue");
 				var attRecordClassType = $("#attRecordClassType").combobox("getValue");
 				var attRecordLessonHour = $("#attRecordLessonHour").textbox("getValue");
-				var schooltimeInstId = $("#schooltimeInstId").val();
 				if(attRecordTeacherId == "")
 				{
 					$.messager.alert('提示',"请先选择老师后重新尝试");
@@ -199,7 +182,7 @@
 					ajaxLoading("添加中...");
 					$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:attRecordTeacherId},function(data){
 						ajaxLoadEnd();
-						var trData = "<tr id='teacherId"+data.teacherId+"'><td align='right' teacherId='"+data.teacherId+"' teacherName='"+$("#attRecordTeacherId").combobox("getText")+"' teacherType='"+$("#attRecordClassType").combobox("getText")+"' hours='"+attRecordLessonHour+"'>老师：</td><td align='center'>"+$("#attRecordSchoolId").combobox("getText")+"</td><td align='center'>"+$("#attRecordTeacherId").combobox("getText")+"</td><td align='center'>"+$("#attRecordClassType").combobox("getText")+"</td><td align='center'>"+attRecordLessonHour+"</td><td align='center'>"+(data.teacherLicenseList.length>0?"已持证":"未持证")+"</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
+						var trData = "<tr id='teacherId"+data.teacherId+"'><td align='right' teacherId='"+data.teacherId+"' schoolId='"+data.schoolId+"' teacherType='"+$("#attRecordClassType").combobox("getText")+"' hours='"+attRecordLessonHour+"'>老师：</td><td align='center'>"+$("#attRecordSchoolId").combobox("getText")+"</td><td align='center'>"+$("#attRecordTeacherId").combobox("getText")+"</td><td align='center'>"+$("#attRecordClassType").combobox("getText")+"</td><td align='center'>"+attRecordLessonHour+"</td><td align='center'>"+(data.teacherLicenseList.length>0?"已持证":"未持证")+"</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
 						$("#teacherTab tr:last").after(trData);
 					},"json");
 				}
@@ -217,43 +200,46 @@
 			function attendSubmit()
 			{
 				var obj = {
-					classInstId:"${schooltimeInstT.classInstId}",
-					classSchoolId:"${schooltimeInstT.schoolId}",
+					shortClassInstId:"${shortSchooltimeT.shortClassInstId}",
+					shortSchooltimeId:"${shortSchooltimeT.shortSchooltimeId}",
+					schoolId:"${shortClassInstT.schoolId}",
 					hourRange:$("#classTime").combobox("getValue"),
 					hours:$("#classLessonHour").textbox("getValue"),
 					roomId:$("#classRoomId").combobox("getValue"),
-					classType:"${schooltimeInstT.classInstT.classType}",
-					handlerId:"${sessionScope.StaffT.staffId}",
-					schooltime:'<fmt:formatDate value="${schooltimeInstT.schooltime}" pattern="yyyy-MM-dd" />',
-					teacherList:null,
-					studentList:null
+					handerId:"${sessionScope.StaffT.staffId}",
+					schooltime:'<fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" />',
+					teacherAttendList:null,
+					studentAttendList:null
 				};
 				var teacherArr = [];
 				$("#teacherTab tr:gt(1) td:nth-child(1)").each(function(i,node){
 					var teacherObj = {
+						shortClassInstId:"${shortSchooltimeT.shortClassInstId}",
 						teacherId:$(node).attr("teacherId"),
-						teacherName:$(node).attr("teacherName"),
+						schoolId:$(node).attr("schoolId"),
 						teacherType:$(node).attr("teacherType"),
-						hours:$(node).attr("hours")
+						lessionHours:$(node).attr("hours"),
+						handerId:"${sessionScope.StaffT.staffId}"
 					};
 					teacherArr.push(teacherObj);
 				});
-				obj.teacherList = teacherArr;
+				obj.teacherAttendList = teacherArr;
 				var studentArr = [];
 				$("#studentTab tr:gt(0)").each(function(i,node){
 					var firstTr = $(node).find("td:nth-child(1)");
 					var attendTypeObj = $(node).find("input[name='attendType"+firstTr.attr("studentId")+"']:checked").val();
 					var dressObj = $(node).find("input[name='dress"+firstTr.attr("studentId")+"']:checked").val();
 					var studentObj = {
-						studentId:firstTr.attr("studentId"),
-						studentName:firstTr.attr("studentName"),
+						shortClassInstId:"${shortSchooltimeT.shortClassInstId}",
 						schoolId:firstTr.attr("schoolId"),
+						studentId:firstTr.attr("studentId"),
+						attendType:attendTypeObj,
 						dress:dressObj,
-						attendType:attendTypeObj
+						handlerId:"${sessionScope.StaffT.staffId}"
 					};
 					studentArr.push(studentObj);
 				});
-				obj.studentList = studentArr;
+				obj.studentAttendList = studentArr;
 				if(teacherArr.length == 0)
 				{
 					$.messager.alert("提示", "老师人数不能为零,请添加老师后重新尝试","warning");
@@ -266,7 +252,7 @@
 				{
 					var json = JSON.stringify(obj);
 					ajaxLoading("提交中...");
-					$.post("/sys/attend/addAttend.do",{json:json},function(data){
+					$.post("/sys/shortBus/addShortAttendTInfo.do",{json:json},function(data){
 						ajaxLoadEnd();
 						if(data == "success")
 						{
@@ -302,51 +288,9 @@
 				}
 			}
 			
-			function removeClassStudent()
-			{
-				var studentArr = [];
-				var courseArr = [];
-				$("input[name='studentId']:checked").each(function(i,node){
-					studentArr.push($(node).val());
-					courseArr.push($(node).attr("courseId"));
-					$("#studentId"+$(node).val()).remove();
-				});
-				var obj = {
-					classStudentId:studentArr.join(","),
-					studentCourseId:courseArr.join(","),
-					handlerId:"${sessionScope.StaffT.staffId}"
-				};
-				$.post("/sys/applyClass/batchRemoveStudent.do",{param:JSON.stringify(obj)},function(data){
-					alert(JSON.stringify(data));
-					if(data.flag == true)
-					{
-						$.messager.alert("提示", "所选学员已被成功移除");
-					}
-					else
-					{
-						$.messager.alert("提示", "学员移除失败","error");
-					}
-				},"json");				
-			}
-			
-			function convertExceptionClass()
-			{
-				$.post("/sys/attend/convertClassOpenType.do",{classInstId:"${schooltimeInstT.classInstId}"},function(data){
-					if(data == "success")
-					{
-						$.messager.alert("提示", "当前班级已被转换成异常开班");
-					}
-					else
-					{
-						$.messager.alert("提示", data,"error");
-					}
-				});
-			}
-			
 			function backFunc()
 			{
-				ajaxLoading("返回中...");
-				window.location.href = "/sys/attend/getAttendOperate.do?funcNodeId=${funcNodeId}&classInstId=${schooltimeInstT.classInstId}&selDateStr=${selDateStr}";
+				window.location.href = "/sys/shortBus/shortAttenceDetailPage.do?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}";
 			}
 		</script>
  	</body>

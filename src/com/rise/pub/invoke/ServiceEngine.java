@@ -16,8 +16,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import sun.print.resources.serviceui;
-
 import com.rise.pub.pubData.QryPropertiesConfig;
 import com.rise.pub.util.ObjectCensor;
 import com.rise.pub.util.StringUtil;

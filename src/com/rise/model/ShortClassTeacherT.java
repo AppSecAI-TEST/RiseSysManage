@@ -14,6 +14,8 @@ public class ShortClassTeacherT {
     private Integer teacherId;
 
     private String teacherType;
+    
+    private Integer lessionHours;
 
     private String state;
 
@@ -75,7 +77,15 @@ public class ShortClassTeacherT {
         this.teacherType = teacherType == null ? null : teacherType.trim();
     }
 
-    public String getState() {
+    public Integer getLessionHours() {
+		return lessionHours;
+	}
+
+	public void setLessionHours(Integer lessionHours) {
+		this.lessionHours = lessionHours;
+	}
+
+	public String getState() {
         return state;
     }
 

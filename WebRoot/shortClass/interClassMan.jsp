@@ -183,11 +183,19 @@
 				var row = $("#manList").datagrid("getSelected");
 				if(row)
 				{
-					if(row.classStateName != "解散")
+					if(row.classStateName == "未开课" || row.classStateName == "未开课")
 					{
 						window.location.href = "/sys/shortBus/cancelShortClassInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
 					}
-					else
+					else if(row.classStateName == "开课在读")
+					{
+						$.messager.alert('提示',"该课程已经开课不能再被修改");		
+					}
+					else if(row.classStateName == "结课")
+					{
+						$.messager.alert('提示',"该课程已经结课");		
+					}
+					else if(row.classStateName == "解散")
 					{
 						$.messager.alert('提示',"该课程已被取消");		
 					}
@@ -202,11 +210,19 @@
 				var row = $("#manList").datagrid("getSelected");
 				if(row)
 				{
-					if(row.classStateName != "解散")
+					if(row.classStateName == "未开课" || row.classStateName == "未开课")
 					{
 						window.location.href = "/sys/shortBus/shortClassManInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
 					}
-					else
+					else if(row.classStateName == "开课在读")
+					{
+						$.messager.alert('提示',"该课程已经开课不能再被修改");		
+					}
+					else if(row.classStateName == "结课")
+					{
+						$.messager.alert('提示',"该课程已经结课");		
+					}
+					else if(row.classStateName == "解散")
 					{
 						$.messager.alert('提示',"该课程已被取消");		
 					}

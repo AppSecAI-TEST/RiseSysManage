@@ -141,6 +141,7 @@
 						shortClassInstId:shortClassInstId,
 						teacherId:teacherObj.attr("teacherId"),
 						teacherType:teacherObj.attr("teacherType"),
+						lessionHours:lessonHour,
 						schoolId:teacherObj.attr("schoolId"),
 						handlerId:${sessionScope.StaffT.staffId},
 					};

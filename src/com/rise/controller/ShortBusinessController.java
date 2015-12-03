@@ -116,6 +116,21 @@ public class ShortBusinessController
 		return model;
 	}
 	
+	@RequestMapping("/shortAttenceDetailPage.do")
+	public ModelAndView shortAttenceDetailPage(String shortClassInstId , String funcNodeId)
+	{
+		ModelAndView model = new ModelAndView("shortClass/shortAttenceDetail");
+		try
+		{
+			shortBusinessService.shortAttenceDetailPage(model,shortClassInstId,funcNodeId);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
 	@RequestMapping("/cancelShortClassFunc.do")
 	public void cancelShortClassFunc(String shortClassInstId , String remark , HttpServletResponse response)
 	{
@@ -300,6 +315,99 @@ public class ShortBusinessController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = shortBusinessService.delShortStudentList(shortClassInstId , studentIds , handlerId);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/getShortClassAttendTInfo.do")
+	public ModelAndView getShortClassAttendTInfo(String shortClassInstId , String funcNodeId)
+	{
+		ModelAndView model = new ModelAndView();
+		try
+		{
+			shortBusinessService.getShortClassAttendTInfo(model,shortClassInstId,funcNodeId);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
+	@RequestMapping("/addShortAttendTInfo.do")
+	public void addShortAttendTInfo(String json , HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = shortBusinessService.addShortAttendTInfo(json);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/shortAttenceUpdatePage.do")
+	public ModelAndView shortAttenceUpdatePage(String shortClassAttendId , String funcNodeId)
+	{
+		ModelAndView model = new ModelAndView("shortClass/shortAttenceUpdate");
+		try
+		{
+			shortBusinessService.shortAttenceUpdatePage(model,shortClassAttendId,funcNodeId);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
+	@RequestMapping("/shortAttenceViewPage.do")
+	public ModelAndView shortAttenceViewPage(String shortClassAttendId , String funcNodeId)
+	{
+		ModelAndView model = new ModelAndView("shortClass/shortAttenceView");
+		try
+		{
+			shortBusinessService.shortAttenceViewPage(model,shortClassAttendId,funcNodeId);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
+	@RequestMapping("/updateShortAttendTInfo.do")
+	public void updateShortAttendTInfo(String json , HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = shortBusinessService.updateShortAttendTInfo(json);
 			out.write(retVal);
 		}
 		catch(Exception e)

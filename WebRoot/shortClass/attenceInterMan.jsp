@@ -77,19 +77,19 @@
 					<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
-								<th data-options="field:'classInstId',checkbox:true"></th>
+								<th data-options="field:'shortClassInstId',checkbox:true"></th>
 								<th width="8%" field="schoolName">上课校区</th>
-								<th width="8%" field="className">国际班类型</th>
-								<th width="8%" field="openDate">班级名称</th>
+								<th width="8%" field="classType">国际班类型</th>
+								<th width="8%" field="className">班级名称</th>
 								<th width="8%" field="teacherNames">带班老师</th>
-								<th width="8%" field="finishDate">班级状态</th>
-								<th width="8%" field="classStateName">总课时量</th>
-								<th width="8%" field="classSchedule">课时进度</th>
-								<th width="8%" field="classSchedule">定班人数</th>
-								<th width="8%" field="classSchedule">班级人数上限</th>
-								<th width="8%" field="classSchedule">放班日期</th>
-								<th width="8%" field="classSchedule">开课日期</th>
-								<th width="8%" field="classSchedule">结课日期</th>
+								<th width="8%" field="classStateName">班级状态</th>
+								<th width="8%" field="totalLessionHours">总课时量</th>
+								<th width="8%" field="classProgress">课时进度</th>
+								<th width="8%" field="personNum">定班人数</th>
+								<th width="8%" field="maxNum">班级人数上限</th>
+								<th width="8%" field="putClassDate">放班日期</th>
+								<th width="8%" field="openDate">开课日期</th>
+								<th width="8%" field="finishDate">结课日期</th>
 							</tr>
 						</thead>
 					</table>
@@ -163,12 +163,16 @@
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("加载中...");
-			$.post("<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}",function(data){
+			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
 				$("#schoolManId").combobox("loadData",data);
 				$("#schoolHisId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
 				$("#classManState").combobox("loadData",data);
+			},"json");
+			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("国际班"),function(data){
+				$("#interClassType").combobox("loadData",data);
+				$("#interClassHisType").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=classMan",function(data){
 				$("#classMan").combobox("loadData",data);
@@ -177,15 +181,19 @@
 			},"json");
 			$(document).ready(function(){
 				$("#interClassType").combobox({
-					/*formatter:formatSchool, 
-					valueField: 'schoolId', 
-					textField: 'schoolName',*/ 
+					formatter:function(data){
+						return '<span>'+data.classType+'</span>';
+					}, 
+					valueField: 'classTypeId', 
+					textField: 'classType',
 					panelHeight: 'auto'
 				});
 				$("#interClassHisType").combobox({
-					/*formatter:formatSchool, 
-					valueField: 'schoolId', 
-					textField: 'schoolName',*/ 
+					formatter:function(data){
+						return '<span>'+data.classType+'</span>';
+					}, 
+					valueField: 'classTypeId', 
+					textField: 'classType',
 					panelHeight: 'auto'
 				});
 				$("#schoolManId").combobox({
@@ -243,10 +251,9 @@
 			});
 			function queryManFunc()
 			{
-				/*
 				var obj = $("#manFm").serializeObject();
-				obj["queryCode"] = "qryAttendManList";
-				obj["funcNodeId"] = "38101";
+				obj["queryCode"] = "qryAttenceInterInfo";
+				obj["funcNodeId"] = "38113";
 				obj = JSON.stringify(obj);
 				$("#manList").datagrid({
 					url:"/sys/pubData/qryDataListByPage.do",
@@ -254,15 +261,15 @@
 						param : obj
 					}
 				});
-				*/
 			}
 			function resetManFunc()
 			{
 				$("#schoolManId").combobox("setValue","");
-				$("#classManPharse").combobox("setValue","");
+				$("#interClassType").combobox("setValue","");
 				$("#classManState").combobox("setValue","");
-				$("#classMan").combobox("setValue","");
-				//$("#teacherMan").textbox("setValue","");
+				$("#classInfo").combobox("setValue","");
+				$("#openStartManTime").datebox("setValue","");
+				$("#openEndManTime").datebox("setValue","");
 				$("#classStartManTime").datebox("setValue","");
 				$("#classEndManTime").datebox("setValue","");
 				$("#overClassStartManTime").datebox("setValue","");
@@ -270,19 +277,27 @@
 			}
 			function manOperFunc()
 			{
-				/*
 				var row = $('#manList').datagrid('getSelected');
-				if (row){
-					window.location.href = "/sys/attend/getAttendDetail.do?funcNodeId=${param.funcNodeId}&classInstId="+row.classInstId;
+				if (row)
+				{
+					window.location.href = "/sys/shortBus/shortAttenceDetailPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
 				}
 				else
 				{
 					$.messager.alert('提示',"请先选择要考勤的班级");
-				}*/
+				}
 			}
 			function manViewFunc()
 			{
-				
+				var row = $("#manList").datagrid("getSelected");
+				if(row)
+				{
+					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
+				}
+				else
+				{
+					$.messager.alert('提示',"请选择要浏览的班级");
+				}
 			}
 			function queryHisFunc()
 			{

@@ -1,7 +1,9 @@
 package com.rise.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -9,9 +11,12 @@ import net.sf.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rise.model.FuncNodeTree;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.rise.model.ShortClassAttendT;
 import com.rise.model.ShortClassInstT;
 import com.rise.model.ShortSchooltimeT;
 import com.rise.pub.base.JacksonJsonMapper;
@@ -116,6 +121,95 @@ public class ShortBusinessService
 	public String updateShortClassInstTInfo(String json) throws Exception
 	{
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20511\",securityCode:\"0000000000\",params:{json:'"+json+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
+	public void getShortClassAttendTInfo(ModelAndView model , String shortClassInstId , String funcNodeId) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20512\",securityCode:\"0000000000\",params:{shortClassInstId:\""+shortClassInstId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String result = ServiceEngine.invokeHttp(params);
+		try
+		{
+			JSONObject obj = JSONObject.fromObject(result);
+			ShortClassInstT shortClassInstT = JacksonJsonMapper.getInstance().readValue(obj.getJSONObject("shortClassInstT").toString(), ShortClassInstT.class);
+			ShortSchooltimeT shortSchooltimeT = JacksonJsonMapper.getInstance().readValue(obj.getJSONObject("shortSchooltimeT").toString(), ShortSchooltimeT.class);
+			model.addObject("hourRangeList", obj.getJSONArray("hourRangeList"));
+			model.addObject("roomList", obj.getJSONArray("roomList"));
+			model.addObject("schoolList", obj.getJSONArray("schoolList"));
+			model.addObject("teacherTypeList", obj.getJSONArray("teacherTypeList"));
+			model.addObject("shortClassInstT", shortClassInstT);
+			model.addObject("shortSchooltimeT", shortSchooltimeT);
+			model.addObject("funcNodeId", funcNodeId);
+			model.setViewName("shortClass/shortAttenceRecord");
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+			model.addObject("ErrorInfo", err.getMessage());
+		}
+	}
+	
+	public void shortAttenceDetailPage(ModelAndView model , String shortClassInstId , String funcNodeId) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20514\",securityCode:\"0000000000\",params:{shortClassInstId:\""+shortClassInstId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String result = ServiceEngine.invokeHttp(params);
+		try{
+			JSONObject json = JSONObject.fromObject(result);
+			ShortClassInstT shortClassInstT = JacksonJsonMapper.getInstance().readValue(json.getJSONObject("shortClassInstT").toString(), ShortClassInstT.class);
+			ObjectMapper mapper = JacksonJsonMapper.getInstance();
+			JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, ShortClassAttendT.class);
+			List<ShortClassAttendT> shortClassAttendTList = mapper.readValue(json.getJSONArray("shortClassAttendTList").toString(), javaType);
+			model.addObject("shortClassInstT", shortClassInstT);
+			model.addObject("shortClassAttendTList", shortClassAttendTList);
+			model.addObject("funcNodeId", funcNodeId);
+		}catch(Exception err){
+			err.printStackTrace();
+			model.addObject("ErrorInfo", err.getMessage());
+		}
+	}
+	
+	public String addShortAttendTInfo(String json) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20513\",securityCode:\"0000000000\",params:{json:'"+json+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
+	public void shortAttenceUpdatePage(ModelAndView model , String shortClassAttendId , String funcNodeId) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20515\",securityCode:\"0000000000\",params:{shortClassAttendId:\""+shortClassAttendId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String result = ServiceEngine.invokeHttp(params);
+		try{
+			JSONObject obj = JSONObject.fromObject(result);
+			ShortClassAttendT shortClassAttendT = JacksonJsonMapper.getInstance().readValue(obj.getJSONObject("shortClassAttendT").toString(), ShortClassAttendT.class);
+			model.addObject("hourRangeList", obj.getJSONArray("hourRangeList"));
+			model.addObject("roomList", obj.getJSONArray("roomList"));
+			model.addObject("schoolList", obj.getJSONArray("schoolList"));
+			model.addObject("teacherTypeList", obj.getJSONArray("teacherTypeList"));
+			model.addObject("shortClassAttendT", shortClassAttendT);
+			model.addObject("funcNodeId", funcNodeId);
+		}catch(Exception err){
+			err.printStackTrace();
+			model.addObject("ErrorInfo", err.getMessage());
+		}
+	}
+	
+	public void shortAttenceViewPage(ModelAndView model , String shortClassAttendId , String funcNodeId) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20516\",securityCode:\"0000000000\",params:{shortClassAttendId:\""+shortClassAttendId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String result = ServiceEngine.invokeHttp(params);
+		try{
+			ShortClassAttendT shortClassAttendT = JacksonJsonMapper.getInstance().readValue(result, ShortClassAttendT.class);
+			model.addObject("shortClassAttendT", shortClassAttendT);
+			model.addObject("funcNodeId", funcNodeId);
+		}catch(Exception err){
+			err.printStackTrace();
+			model.addObject("ErrorInfo", err.getMessage());
+		}
+	}
+	
+	public String updateShortAttendTInfo(String json) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20517\",securityCode:\"0000000000\",params:{json:'"+json+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
 	
