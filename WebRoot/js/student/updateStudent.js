@@ -18,16 +18,14 @@ $(document).ready(function() {
 		data: "studentId=" + studentId + "&funcNodeId=" + funcNodeId,
 		dataType: "json",
 		async: false,
-		beforeSend: function()
-    	{
+		beforeSend: function() {
     		$.messager.progress({title : '修改学员资料', msg : '正在查询学员资料，请稍等……'});
     	},
     	success: function (data) {
     		$.messager.progress('close'); 
     		var schoolId = $("#schoolId").val();
     		//分校区
-    		if(schoolId.length > 2)
-    		{
+    		if(schoolId.length > 2) {
     			$("#nameDiv").css('display', "none");
         		$("#nameText").css('display', "block");
         		
@@ -72,11 +70,9 @@ $(document).ready(function() {
     		array.push({"key": "sex", "value": studentObj.sex});
     		
     		var len1 = data.realSchoolObj.total;
-    		if(len1 > 0)
-    		{
+    		if(len1 > 0) {
     			var realSchoolArray = data.realSchoolObj.rows;
-    			for(var i = 0; i < len1; i++)
-    			{
+    			for(var i = 0; i < len1; i++) {
     				var content = "<tr><td align='right'><span>学校类型：</span></td><td><span>"+realSchoolArray[i].schoolTypeText+"</span></td>";
     	    		content += "<td align='right'><span>学校名称：</span></td><td><span>"+realSchoolArray[i].realSchoolName+"</span></td>";
     	    		content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='deleteRealSchool(this, "+realSchoolArray[i].realId+")'><span>删除</span></a></td></tr>";
@@ -86,22 +82,17 @@ $(document).ready(function() {
     		}
     		
     		contactLength = data.contactObj.total;
-    		if(contactLength > 0)
-    		{
+    		if(contactLength > 0) {
     			var contactArray = data.contactObj.rows;
-    			for(var i = 0; i < contactLength; i++)
-    			{
+    			for(var i = 0; i < contactLength; i++) {
     				var content = "<tr><td align='center'><span>"+contactArray[i].relationTypeVal+"</span></td>";
     				content += "<td align='center'><span>"+contactArray[i].name+"</span></td>";
     				content += "<td align='center'><span>"+contactArray[i].job+"</span></td>";
     				content += "<td align='center'>";
     				var used = contactArray[i].used;
-    				if("Y" == used)
-    				{
+    				if("Y" == used) {
     					content += "<input type='checkbox' checked='checked'/>";
-    				}
-    				else
-    				{
+    				} else {
     					content += "<input type='checkbox'/>";
     				}
     				content += "</td>";
@@ -114,11 +105,9 @@ $(document).ready(function() {
     		}
     		
     		var len3 = data.activityObj.total;
-    		if(len3 > 0)
-    		{
+    		if(len3 > 0) {
     			var activityArray = data.activityObj.rows;
-    			for(var i = 0; i < len3; i++)
-    			{
+    			for(var i = 0; i < len3; i++) {
     				var content = "<tr><td align='center'><span>"+activityArray[i].titleText+"</span></td>";
     				content += "<td align='center'><span>"+activityArray[i].activityDate+"</span></td>";
     				content += "<td align='center'><span>"+activityArray[i].awardText+"</span></td>";
@@ -138,10 +127,13 @@ $(document).ready(function() {
     	textField : "schoolName",
     	panelHeight : "auto",
     	onLoadSuccess : function () { //数据加载完毕事件
-            var data = $('#advisterASchoolId').combobox('getData');
-            if (data.length > 0) {
-                $("#advisterASchoolId").combobox('select', $("#updateAdvisterBSchoolId").val());
-            }
+    		var updateAdvisterASchoolId = $("#updateAdvisterASchoolId").val();
+    		if(updateAdvisterASchoolId != null && updateAdvisterASchoolId != null && updateAdvisterASchoolId != undefined) {
+    			var data = $('#advisterASchoolId').combobox('getData');
+    			if (data.length > 0) {
+    				$("#advisterASchoolId").combobox('select', updateAdvisterASchoolId);
+    			}
+    		}
         },
         onChange : function(n, o) {
         	$("#advisterIdA").combobox({
@@ -150,13 +142,96 @@ $(document).ready(function() {
         		textField : "userName",
         		panelHeight : "auto",
         		onLoadSuccess : function () { //数据加载完毕事件
-                    var data = $('#advisterIdA').combobox('getData');
-                    if (data.length > 0) {
-                        $("#advisterIdA").combobox('select', $("#updateAdvisterIdA").val());
-                    }
+        			var updateAdvisterIdA = $("#updateAdvisterIdA").val();
+        			if(updateAdvisterIdA != null && updateAdvisterIdA != null && updateAdvisterIdA != undefined) {
+        				var data = $('#advisterIdA').combobox('getData');
+        				if (data.length > 0) {
+        					$("#advisterIdA").combobox('select', updateAdvisterIdA);
+        				}
+        			}
                 }
         	});
         }  
+    });
+    
+    //加载学员证件类型
+    $("#identityType").combobox({
+    	url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_T&codeType=IDENTITY_TYPE",//返回json数据的url
+    	valueField : "codeFlag",
+    	textField : "codeName",
+    	panelHeight : "auto",
+    	onLoadSuccess : function () { //数据加载完毕事件
+    		var updateIdentityType = $("#updateIdentityType").val();
+    		if(updateIdentityType != null && updateIdentityType != "" && updateIdentityType != undefined) {
+    			var data = $('#identityType').combobox('getData');
+    			if (data.length > 0) {
+    				$("#identityType").combobox('select', updateIdentityType);
+    			}
+    		}
+        },
+    	onChange : function(n, o) {
+    		if("2BA" == n) {
+    			var identityId = $("#identityId").textbox("getValue");
+    			if(identityId != "" && identityId != null && identityId != undefined) {
+    				if(!validateIdCard(identityId)) {
+        				$.messager.alert('提示', "请输入有效的身份证号码！");
+        			}
+    			}
+    		}
+    	}
+    });
+    
+    //加载联系人证件类型
+    $("#contactIdentityType").combobox({
+    	url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_T&codeType=IDENTITY_TYPE",//返回json数据的url
+    	valueField : "codeFlag",
+    	textField : "codeName",
+    	panelHeight : "auto",
+    	onChange : function(n, o) {
+    		if("2BA" == n) {
+    			var contactIdentityId = $("#contactIdentityId").textbox("getValue");
+    			if(contactIdentityId != "" && contactIdentityId != null && contactIdentityId != undefined) {
+    				if(!validateIdCard(contactIdentityId)) {
+        				$.messager.alert('提示', "请输入有效的身份证号码！");
+        			}
+    			}
+    		}
+    	}
+    });
+    
+    var schoolId = $("#schoolId").val();
+    //加载责任顾问
+    $("#dutyAdvister").combobox({
+    	url : "/sys/pubData/qryStaffList.do?schoolId="+schoolId,//返回json数据的url
+    	valueField : "staffId",
+    	textField : "userName",
+    	panelHeight : "auto",
+    	onLoadSuccess : function () { //数据加载完毕事件
+    		var updateDutyAdvister = $("#updateDutyAdvister").val();
+    		if(updateDutyAdvister != null && updateDutyAdvister != "" && updateDutyAdvister != undefined) {
+    			var data = $('#dutyAdvister').combobox('getData');
+    			if (data.length > 0) {
+    				$("#dutyAdvister").combobox('select', updateDutyAdvister);
+    			}
+    		}
+        }
+    });
+    
+    //加载客户关怀
+    $("#carer").combobox({
+    	url : "/sys/pubData/qryStaffList.do?schoolId="+schoolId,//返回json数据的url
+    	valueField : "staffId",
+    	textField : "userName",
+    	panelHeight : "auto",
+    	onLoadSuccess : function () { //数据加载完毕事件
+    		var updateCarer = $("#updateCarer").val();
+    		if(updateCarer != null && updateCarer != "" && updateCarer != undefined) {
+    			var data = $('#carer').combobox('getData');
+    			if (data.length > 0) {
+    				$("#carer").combobox('select', updateCarer);
+    			}
+    		}
+        }
     });
     
     //招生顾问B的学校发生变化时执行的操作
@@ -193,24 +268,12 @@ $(document).ready(function() {
     	valueField : "codeFlag",
     	textField : "codeName",
     	panelHeight : "auto",
-    	onLoadSuccess : function () { //数据加载完毕事件
-            var data = $('#schoolType').combobox('getData');
-            if (data.length > 0) {
-                $("#schoolType").combobox('select', data[0].codeFlag);
-            }
-        },
     	onChange : function(n, o) {
     		$("#realSchoolId").combobox({
     			url : "/sys/pubData/qryParaConfigList.do?paramType=REAL_SCHOOL_ID&paramValue=" + n,//返回json数据的url
         		valueField : "param1",
         		textField : "param2",
-        		panelHeight : "auto",
-        		onLoadSuccess : function () { //数据加载完毕事件
-                    var data = $('#realSchoolId').combobox('getData');
-                    if (data.length > 0) {
-                        $("#realSchoolId").combobox('select', data[0].staffId);
-                    }
-                }
+        		panelHeight : "auto"
     		});
     	}
     });
@@ -230,19 +293,15 @@ $(document).ready(function() {
     			data: "param=" + obj,
     			dataType: "json",
     			async: false,
-    			beforeSend: function()
-    	    	{
+    			beforeSend: function() {
     	    		$.messager.progress({title : '验重', msg : '正在验重，请稍等……'});
     	    	},
     	    	success: function (data) {
     	    		var flag = data.flag
-    	            if(flag)
-    	            {
+    	            if(flag) {
     	            	$.messager.alert('提示', "该证件号码还暂未注册，资料有效！");
     	            	identityValidateFlag = true;
-    	            }
-    	            else
-    	            {
+    	            } else {
     	            	$.messager.alert('提示', "该证件号码已注册，请输入其他未注册的证件号码！");
     	            }
     	    		$.messager.progress('close'); 
@@ -258,20 +317,16 @@ $(document).ready(function() {
 	$("#updateSubmit").click(function() {
 		contactLength += $("[name='contacts']").length;
 		if(contactLength > 0) {
-			if($("[name='contacts']").length > 0)
-			{
+			if($("[name='contacts']").length > 0) {
 				updateFlag = true;
 			}
-			if($("[name='realSchools']").length > 0)
-			{
+			if($("[name='realSchools']").length > 0) {
 				updateFlag = true;
 			}
-			if($("[name='activitys']").length > 0)
-			{
+			if($("[name='activitys']").length > 0) {
 				updateFlag = true;
 			}
-			if(!updateFlag)
-			{
+			if(!updateFlag) {
 				updateFlag = validateStudent();
 			}
 			if(updateFlag) {
@@ -291,8 +346,7 @@ $(document).ready(function() {
 				if(flag) {
 					if($("#studentFm").form('validate')) {
 						var contactArray = "[";
-						if($("[name='contacts']").length > 0)
-						{
+						if($("[name='contacts']").length > 0) {
 							$("[name='contacts']").each(function() {
 								contactArray += "{identityId:\""+$(this).attr("identityId")+"\",identityType:\""+$(this).attr("identityType")+"\",name:\""+$(this).attr("contactName")+"\",phone:\""+$(this).attr("phone")+"\",relationType:\""+$(this).attr("relationType")+"\",job:\""+$(this).attr("job")+"\",used:\""+$(this).attr("used")+"\"},";
 							});
@@ -300,8 +354,7 @@ $(document).ready(function() {
 						}
 						contactArray += "]";
     					var realSchoolArray = "[";
-    					if($("[name='realSchools']").length > 0)
-    					{
+    					if($("[name='realSchools']").length > 0) {
     						$("[name='realSchools']").each(function() {
     							realSchoolArray += "{schoolType:\""+$(this).attr("schoolType")+"\",realSchoolId:\""+$(this).attr("realSchoolId")+"\"},";
     						});
@@ -309,24 +362,20 @@ $(document).ready(function() {
     					}
     					realSchoolArray += "]";
     					var activityArray = "[";
-    					if($("[name='activitys']").length > 0)
-    					{
+    					if($("[name='activitys']").length > 0) {
     						$("[name='activitys']").each(function() {
     							activityArray += "{title:\""+$(this).attr("title")+"\",activityDate:\""+$(this).attr("activityDate")+"\",award:\""+$(this).attr("award")+"\",remark:\""+$(this).attr("remark")+"\",activityName:\""+$(this).attr("activityName")+"\"},";
     						});
     						activityArray = activityArray.substring(0, activityArray.length - 1);
     					}
     					activityArray += "]";
-    					if(contactIds != "" && contactIds != null && contactIds != undefined && contactIds != "null")
-    					{
+    					if(contactIds != "" && contactIds != null && contactIds != undefined && contactIds != "null") {
     						contactIds = contactIds.substring(0, contactIds.length - 1);
     					}
-    					if(activityIds != "" && activityIds != null && activityIds != undefined && activityIds != "null")
-    					{
+    					if(activityIds != "" && activityIds != null && activityIds != undefined && activityIds != "null") {
     						activityIds = activityIds.substring(0, activityIds.length - 1);
     					}
-    					if(realIds != "" && realIds != null && realIds != undefined && realIds != "null")
-    					{
+    					if(realIds != "" && realIds != null && realIds != undefined && realIds != "null") {
     						realIds = realIds.substring(0, realIds.length - 1);
     					}
     					var obj = JSON.stringify($("#studentFm").serializeObject());
@@ -364,102 +413,128 @@ $(document).ready(function() {
 	
 	//点击“添加就读信息”按钮
     $("#addRealSchool").click(function() {
-    	var realSchoolId = $('#realSchoolId').combobox('getValue');
-    	if(realSchoolId != "" && realSchoolId != null && realSchoolId != undefined)
-    	{
-    		var schoolType = $('#schoolType').combobox('getValue');
-    		var schoolTypeText = $('#schoolType').combobox('getText');
-    		var realSchoolName = $('#realSchoolId').combobox('getText');
-    		var content = "<tr><td align='right'><span>学校类型：</span></td><td><span>"+schoolTypeText+"</span></td>";
-    		content += "<td align='right'><span>学校名称：</span></td><td><span>"+realSchoolName+"</span></td>";
-    		content += "<input type='hidden' name='realSchools' schoolType='"+schoolType+"' realSchoolId='"+realSchoolId+"'/>";
-    		content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='delRealSchool(this)'><span>删除</span></a></td></tr>";
-    		$("#studentTd tr:eq("+td+")").after(content);
-    		td += 1;
-    	}
-    	else
-    	{
-    		$.messager.alert('提示', "请选择一个就读学校名称！");
+    	var schoolType = $('#schoolType').combobox('getValue');
+    	if(schoolType != "" && schoolType != null && schoolType != undefined) {
+    		var realSchoolId = $('#realSchoolId').combobox('getValue');
+    		if(realSchoolId != "" && realSchoolId != null && realSchoolId != undefined) {
+    			var schoolTypeText = $('#schoolType').combobox('getText');
+    			var realSchoolName = $('#realSchoolId').combobox('getText');
+    			var content = "<tr><td align='right'><span>学校类型：</span></td><td><span>"+schoolTypeText+"</span></td>";
+    			content += "<td align='right'><span>学校名称：</span></td><td><span>"+realSchoolName+"</span></td>";
+    			content += "<input type='hidden' name='realSchools' schoolType='"+schoolType+"' realSchoolName='"+realSchoolName+"'/>";
+    			content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='delRealSchool(this)'><span>删除</span></a></td></tr>";
+    			$("#studentTd tr:eq("+td+")").after(content);
+    			td += 1;
+    		} else {
+    			$.messager.alert('提示', "请选择一个就读学校名称！");
+    		}
+    	} else {
+    		$.messager.alert('提示', "请选择一个就读学校类型！");
     	}
     });
 	
-	//点击联系人信息中的“添加”按钮
+    //点击联系人信息中的“添加”按钮
     $("#addContact").click(function() {
-    	if($("#contactFm").form('validate'))
-    	{
+    	if($("#contactFm").form('validate')) {
     		var flag = true;
     		var relationType = $('#relationType').combobox('getValue');
     		var relationTypeText = $('#relationType').combobox('getText');
-    		if($("[name='contacts']").length > 0)
-    		{
+    		if($("[name='contacts']").length > 0) {
     			$("[name='contacts']").each(function() {
-    				if(relationType == $(this).attr("relationType"))
-    				{
+    				if(relationType == $(this).attr("relationType")) {
     					flag = false;
     				}
     			});
     		}
-    		if(flag)
-    		{
-    			var used = $("[name='used']").prop("checked");
-    			var usedName = "";
-    			if(used)
-    			{
-    				$("[name='contacts']").each(function() {
-    					if("Y" == $(this).attr("used"))
-    					{
-    						usedName = $(this).attr("contactName")
+    		if(flag) {
+    			var identityId = $("#identityId").textbox("getValue");
+    			var contactIdentityId = $("#contactIdentityId").textbox("getValue");
+    			if(identityId == null || identityId == "" || identityId == undefined) {
+    				if($("[name='contacts']").length > 0) {
+    	    			$("[name='contacts']").each(function() {
+    	    				if($(this).attr("identityId") == null || $(this).attr("identityId") == "" || $(this).attr("identityId") == undefined) {
+    	    					flag = false;
+    	    				}
+    	    			});
+    	    		} else {
+    	    			if(contactIdentityId == null || contactIdentityId == "" || contactIdentityId == undefined) {
     						flag = false;
     					}
-    				});
+    	    		}
     			}
-    			if(flag)
-    			{
-    				var contactName = $("#contactName").textbox("getValue");
-    				var job = $("#job").textbox("getValue");
+    			if(flag) {
+    				var flags = true;
     				var contactIdentityType = $('#contactIdentityType').combobox('getValue');
-    				var contactIdentityTypeText = $('#contactIdentityType').combobox('getText');
-    				var contactIdentityId = $("#contactIdentityId").textbox("getValue");
-    				var phone = $("#phone").textbox("getValue");
-    				var content = "<tr><td align='center'><span>"+relationTypeText+"</span></td>";
-    				content += "<td align='center'><span>"+contactName+"</span></td>";
-    				content += "<td align='center'><span>"+job+"</span></td>";
-    				content += "<td align='center'>";
-    				var contactUsed = "N";
-    				if(used)
-    				{
-    					content += "<input type='checkbox' checked='checked'/>";
-    					contactUsed = "Y";
+    				if(contactIdentityId != "" && contactIdentityId != null && contactIdentityId != undefined) {
+    					if(contactIdentityType == "" || contactIdentityType == null || contactIdentityType == undefined) {
+    						flag = false;
+    					}
+    				} else {
+    					if(contactIdentityType != "" && contactIdentityType != null && contactIdentityType != undefined) {
+    						flags = false;
+    					}
     				}
-    				else
-    				{
-    					content += "<input type='checkbox'/>";
+    				if(flag) {
+    					if(flags) {
+    						var phone = $("#phone").textbox("getValue");
+    						if(phone == null || phone == "" || phone == undefined) {
+    							if($("[name='contacts']").length > 0) {
+    								$("[name='contacts']").each(function() {
+    									if($(this).attr("phone") == null || $(this).attr("phone") == "" || $(this).attr("phone") == undefined) {
+    										flag = false;
+    									}
+    								});
+    							} else {
+    								flag = false;
+    							}
+    						}
+    						if(flag) {
+    							var contactName = $("#contactName").textbox("getValue");
+    							var job = $("#job").textbox("getValue");
+    							var contactIdentityTypeText = $('#contactIdentityType').combobox('getText');
+    							var content = "<tr><td align='center'><span>"+relationTypeText+"</span></td>";
+    							content += "<td align='center'><span>"+contactName+"</span></td>";
+    							content += "<td align='center'><span>"+job+"</span></td>";
+    							content += "<td align='center'>";
+    							var contactUsed = "N";
+    							var used = $("input:checkbox[name='used']:checked").val();
+    							if(used) {
+    								content += "<input type='checkbox' checked='checked'/>";
+    								contactUsed = "Y";
+    							} else {
+    								content += "<input type='checkbox'/>";
+    							}
+    							content += "</td>";
+    							if(contactIdentityId != "" && contactIdentityId != null && contactIdentityId != undefined) {
+    								content += "<td align='center'><span>"+contactIdentityTypeText+"："+contactIdentityId+"</span></td>";
+    							} else {
+    								content += "<td align='center'><span></span></td>";
+    							}
+    							content += "<td align='center'><span>"+phone+"</span>";
+    							content += "<input type='hidden' name='contacts' relationType='"+relationType+"' job='"+job+"' used='"+contactUsed+"' contactName='"+contactName+"' identityType='"+contactIdentityType+"' identityId='"+contactIdentityId+"' phone='"+phone+"'/></td>";
+    							content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='deleteContact(this)'><span>删除</span></a></td></tr>";
+    							$("#addContactTd tr:eq("+contactTd+")").after(content);
+    							//初始化第一列
+    							$('#relationType').combobox('setValue', "");
+    							$('#contactIdentityType').combobox('setValue', "");
+    							$("#contactName").textbox("setValue", "");
+    							$("#job").textbox("setValue", "");
+    							$("#contactIdentityId").textbox("setValue", "");
+    							$("#phone").textbox("setValue", "");
+    							$("[name='used']").removeAttr("checked");
+    						} else {
+    							$.messager.alert('提示', "必须提供一个联系电话！");
+    						}
+    					} else {
+    						$.messager.alert('提示', "请填写联系人的证件号码！");
+    					}
+    				} else {
+    					$.messager.alert('提示', "请选择联系人的证件类型！");
     				}
-    				content += "</td>";
-    				content += "<td align='center'><span>"+contactIdentityTypeText+"："+contactIdentityId+"</span></td>";
-    				content += "<td align='center'><span>"+phone+"</span>";
-    				content += "<input type='hidden' name='contacts' relationType='"+relationType+"' job='"+job+"' used='"+contactUsed+"' contactName='"+contactName+"' identityType='"+contactIdentityType+"' identityId='"+contactIdentityId+"' phone='"+phone+"'/></td>";
-    				content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='delContact(this)'><span>删除</span></a></td></tr>";
-    				$("#contactTd tr:eq("+contactTd+")").after(content);
-    				contactTd += 1;
-    				//初始化第一列
-    				var data = $('#relationType').combobox('getData');
-    				$('#relationType').combobox('setValue',data[0].codeFlag);
-    				data = $('#contactIdentityType').combobox('getData');
-    				$('#contactIdentityType').combobox('setValue',data[0].codeFlag);
-    				$("#contactName").textbox("setValue", "");
-    				$("#job").textbox("setValue", "");
-    				$("#contactIdentityId").textbox("setValue", "");
-    				$("#phone").textbox("setValue", "");
-    				$("[name='used']").removeAttr("checked");
+    			} else {
+    				$.messager.alert('提示', "学员证件号码和家长证件号码信息必具其一！");
     			}
-    			else
-    			{
-    				$.messager.alert('提示', "您已设置了"+usedName+"为常用联系人！");
-    			}
-    		}
-    		else
-    		{
+    		} else {
     			$.messager.alert('提示', "联系人关系为“" + relationTypeText + "”的联系人已存在，请更换联系人关系！");
     		}
     	}
@@ -467,15 +542,13 @@ $(document).ready(function() {
     
     $("#addActivity").click(function() {
     	if($("#activityFm").form('validate')) {
-    		var title = $('#title').combobox('getValue');
-    		var titleText = $('#title').combobox('getText');
+    		var title = $('#title').textbox('getValue');
     		var activityDate = $("#activityDate").datebox("getValue");
-    		var award = $('#award').combobox('getValue');
-    		var awardText = $('#award').combobox('getText');
+    		var award = $('#award').textbox('getValue');
     		var remark = $("#activityRemark").textbox("getValue");
-    		var content = "<tr><td align='center'><span>"+titleText+"</span></td>";
+    		var content = "<tr><td align='center'><span>"+title+"</span></td>";
     		content += "<td align='center'><span>"+activityDate+"</span></td>";
-    		content += "<td align='center'><span>"+awardText+"</span></td>";
+    		content += "<td align='center'><span>"+award+"</span></td>";
     		content += "<td align='center'><span>"+remark+"</span>";
     		content += "<input type='hidden' name='activitys' title='"+title+"' activityDate='"+activityDate+"' award='"+award+"' remark='"+remark+"' activityName='"+title+"'/></td>";
     		content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='delActivity(this)'><span>删除</span></a></td></tr>";
@@ -483,10 +556,8 @@ $(document).ready(function() {
     		activityTd += 1;
     		
     		//初始化第一列
-			var data = $('#title').combobox('getData');
-			$('#title').combobox('setValue',data[0].codeFlag);
-			data = $('#award').combobox('getData');
-			$('#award').combobox('setValue',data[0].codeFlag);
+			$('#title').combobox('setValue', "");
+			$('#award').combobox('setValue', "");
 			$("#activityDate").datebox("setValue", "");
 			$("#remark").textbox("setValue", "");
     	}

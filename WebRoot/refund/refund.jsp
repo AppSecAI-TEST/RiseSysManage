@@ -54,22 +54,15 @@
 							<td align="right"><span>业绩类型：</span></td>
 			  				<td width="100px">
 								<select id="feeType" name="feeType" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-				      				onLoadSuccess:function(data){if(data.length > 0) $('#feeType').combobox('setValue',data[0].codeFlag);}" 
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
 				        		</select>
 							</td>
 							<td align="right"><span>课程类型：</span></td>
 							<td width="100px">
-								<select id="courseType" name="courseType" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-				      				onLoadSuccess:function(data){$('#courseType').combobox('setValue',data[0].codeFlag);}" 
-				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE">
+								<select id="courseType" name="courseType" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
-				        		<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
-				      				onLoadSuccess:function(data){if(data.length > 0) $('#stageId').combobox('setValue',data[0].stageId);}" 
-				      				url="<%=path %>/pubData/qryStage.do">
+				        		<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;">
 		        				</select>
 		        			</td>
 		        			<td align="right"><span>退费申请日期：</span></td>
@@ -92,8 +85,7 @@
 							<td align="right"><span>退费类型：</span></td>
 			  				<td width="100px">
 								<select id="refundType" name="refundType" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-				      				onLoadSuccess:function(data){if(data.length > 0) $('#refundType').combobox('setValue',data[0].codeFlag);}" 
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_TYPE">
 				        		</select>
 							</td>
@@ -119,16 +111,14 @@
     						<td align="right"><span>渠道来源：</span></td>
 			  				<td width="100px">
 								<select id="refundChannel" name="refundChannel" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-				      				onLoadSuccess:function(data){if(data.length > 0) $('#refundChannel').combobox('setValue',data[0].codeFlag);}" 
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_CHANNEL">
 				        		</select>
 							</td>
 							<td align="right"><span>退费规则：</span></td>
 			  				<td width="100px">
 								<select id="refundRule" name="refundRule" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-				      				onLoadSuccess:function(data){if(data.length > 0) $('#refundRule').combobox('setValue',data[0].codeFlag);}" 
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=REFUND_RULE">
 				        		</select>
 							</td>
@@ -219,15 +209,9 @@
 							</td>
 							<td align="right"><span>课程类型：</span></td>
 							<td width="100px">
-								<select id="approveCourseType" name="approveCourseType" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-				      				onLoadSuccess:function(data){$('#approveCourseType').combobox('setValue',data[0].codeFlag);}" 
-				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE">
+								<select id="approveCourseType" name="approveCourseType" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
-				        		<select id="approveStageId" name="approveStageId" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
-				      				onLoadSuccess:function(data){if(data.length > 0) $('#approveStageId').combobox('setValue',data[0].stageId);}" 
-				      				url="<%=path %>/pubData/qryStage.do">
+				        		<select id="approveStageId" name="approveStageId" class="easyui-combobox" style="width: 100px; height: 25px;">
 		        				</select>
 		        			</td>
 		        			<td align="right"><span>退费状态：</span></td>

@@ -8,7 +8,7 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/js/student/student.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/student/addStudent.js"></script>
   	</head>
   
   	<body>
@@ -24,7 +24,7 @@
 	      				</td>
 	      				<td align="right"><span style="color: red;">*</span><span>出生日期：</span></td>
 	      				<td colspan="2">
-	      					<input name="birthday" id="birthday" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 28px;"/>
+	      					<input name="birthday" id="birthday" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 28px;" editable="false"/>
 	      				</td>
 	      			</tr>
 	      			<tr>
@@ -35,10 +35,7 @@
 	      				</td>
 	      				<td align="right"><span>证件号码：</span></td>
 	      				<td colspan="2">
-	      					<select name="identityType" id="identityType" class="easyui-combobox" style="width: 100px; height: 28px;"
-	      					 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      					 onLoadSuccess:function(data){$('#identityType').combobox('setValue',data[0].codeFlag);}" 
-	      					 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_T&codeType=IDENTITY_TYPE">
+	      					<select name="identityType" id="identityType" class="easyui-combobox" style="width: 100px; height: 28px;">
         					</select>
         					<input name="identityId" id="identityId" type="text" class="easyui-textbox" style="width: 200px; height: 28px;"/>
 	      					<a href="javascript:void(0)" id="validate" class="easyui-linkbutton" style="width: 80px; height: 28px;" funcNodeId="1001">验重</a>
@@ -57,23 +54,24 @@
 	      			<tr>
 	      				<td align="right"><span>就读学校：</span></td>
 	      				<td colspan="4">
-	      					<select id="schoolType" class="easyui-combobox" style="width: 150px; height: 28px;" required="true" >
+	      					<select id="schoolType" class="easyui-combobox" style="width: 150px; height: 28px;" editable="false">
         					</select>
         					&nbsp;
         					<span>学校名称：</span>
-        					<input id="realSchoolId" type="text" class="easyui-combobox" style="width: 200px; height: 28px;"/>
+        					<select id="realSchoolId" class="easyui-combobox" style="width: 150px; height: 28px;">
+        					</select>
         					&nbsp;<a href="javascript:void(0)" id="addRealSchool" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px; height: 28px;">添加学校记录</a>
 	      				</td>
 	      			</tr>
 	      			<tr>
 	      				<td align="right"><span style="color: red;">*</span><span>招生顾问A：</span></td>
 	      				<td>
-	      					<select id="advisterASchoolId" class="easyui-combobox" style="width: 100px; height: 28px;">
+	      					<select id="advisterASchoolId" class="easyui-combobox" style="width: 100px; height: 28px;" required="true" editable="false">
         					</select>
-        					<select name="advisterIdA" id="advisterIdA" class="easyui-combobox" style="width: 150px; height: 28px;">
+        					<select name="advisterIdA" id="advisterIdA" class="easyui-combobox" style="width: 150px; height: 28px;" required="true" editable="false">
         					</select>
 	      				</td>
-	      				<td align="right"><span style="color: red;">*</span><span>招生顾问B：</span></td>
+	      				<td align="right"><span>招生顾问B：</span></td>
 	      				<td colspan="2">
 	      					<select id="advisterBSchoolId" class="easyui-combobox" style="width: 100px; height: 28px;">
 	        				</select>
@@ -85,17 +83,15 @@
 	      				<td align="right"><span style="color: red;">*</span><span>责任顾问：</span></td>
 	      				<td>
 	      					<select name="dutyAdvister" id="dutyAdvister" class="easyui-combobox" style="width: 150px; height: 28px;"
-	      					data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-	      					onLoadSuccess:function(data){$('#dutyAdvister').combobox('setValue',data[0].staffId);}"
-	      					url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+	      						data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
+	      						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}" required="true" editable="false">
         					</select>
 	      				</td>
 	      				<td align="right"><p><span>客户关怀：</span></p></td>
 	      				<td colspan="2">
 	      					<select name="carer" id="carer" class="easyui-combobox" style="width: 150px; height: 28px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-	      					onLoadSuccess:function(data){$('#carer').combobox('setValue',data[0].staffId);}"
-	      					url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
+	      						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}" editable="false">
         					</select>
 	      				</td>
 	      			</tr>
@@ -123,10 +119,9 @@
 					</tr>
 					<tr>
 						<td width="100px" align="center">
-							<select id="relationType" class="easyui-combobox" style="width: 100px; height: 28px;"
-							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      					onLoadSuccess:function(data){$('#relationType').combobox('setValue',data[0].codeFlag);}"
-	      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=CONTACT_T&codeType=RELATION_TYPE">
+							<select id="relationType" class="easyui-combobox" style="width: 100px; height: 28px;" editable="false" required="true"
+								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
+	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=CONTACT_T&codeType=RELATION_TYPE">
 	        				</select>
 						</td>
 						<td width="120px" align="center">
@@ -139,15 +134,12 @@
 							<input name="used" type="checkbox"/>
 						</td>
 						<td width="310px" align="center">
-							<select id="contactIdentityType" class="easyui-combobox" style="width: 100px; height: 28px;"
-							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      					onLoadSuccess:function(data){$('#contactIdentityType').combobox('setValue',data[0].codeFlag);}" 
-	      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_T&codeType=IDENTITY_TYPE">
+							<select id="contactIdentityType" class="easyui-combobox" style="width: 100px; height: 28px;">
 	        				</select>
-	        				<input id="contactIdentityId" type="text" class="easyui-textbox numberbox" required="true" style="width: 200px; height: 28px;" validType="length[0,18]" />
+	        				<input id="contactIdentityId" type="text" class="easyui-textbox numberbox" style="width: 200px; height: 28px;" validType="length[0,18]" />
 						</td>
 						<td width="150px" align="center">
-							<input id="phone" type="text" class="easyui-textbox numberbox" required="true" style="width: 150px; height: 28px;" validType="length[0,11]" invalidMessage="不能超过11个字符！"/>
+							<input id="phone" type="text" class="easyui-textbox numberbox" style="width: 150px; height: 28px;" validType="length[0,11]" invalidMessage="不能超过11个字符！"/>
 						</td>
 						<td width="80px" align="center">
 							<a href="javascript:void(0)" id="addContact" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a>

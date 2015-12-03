@@ -52,6 +52,30 @@ $(document).ready(function() {
     	});
     });
 	
+	$("#courseType").combobox({
+		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE",//返回json数据的url
+    	valueField : "codeFlag",
+    	textField : "codeName",
+    	panelHeight : "auto",
+    	onChange : function(n, o) {
+    		if("001" == n) {
+    			$("#stageId").combobox({
+    				url : "/sys/pubData/qryStage.do",//返回json数据的url
+    		    	valueField : "stageId",
+    		    	textField : "stageId",
+    		    	panelHeight : "auto"
+    			});
+    		} else {
+    			$("#stageId").combobox({
+    				url : "/sys/pubData/qryShortClass.do",//返回json数据的url
+    		    	valueField : "shortClassId",
+    		    	textField : "className",
+    		    	panelHeight : "auto"
+    			});
+    		}
+    	}
+	});
+	
 	//选班
 	$("#selectClassBtn").click(function() {
 		var row = $('#list_data').datagrid('getSelected');

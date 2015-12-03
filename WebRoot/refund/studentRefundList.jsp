@@ -18,7 +18,7 @@
 			  	rownumbers="true" fitColumns="true" singleSelect="false">
 				<thead>
 					<tr>
-						<th data-options="field:'stageId',width:120,align:'center'">阶段或课程名称</th>
+						<th data-options="field:'stageIdText',width:120,align:'center'">阶段或课程名称</th>
 						<th data-options="field:'classType',width:80,align:'center'">退费课程</th>
 						<th data-options="field:'payDate',width:80,align:'center'">缴费日期</th>
 						<th data-options="field:'adviserName',width:100,align:'center'">业绩顾问</th>

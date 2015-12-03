@@ -131,7 +131,7 @@
 								<th data-options="field:'inSchoolName',width:100,align:'center'">转入校区</th>
 								<th data-options="field:'changeStateText',width:100,align:'center'">转校状态</th>
 								<th data-options="field:'higherStageId',width:120,align:'center'">已升学阶段</th>
-								<th data-options="field:'stageId',width:120,align:'center'">当前课程</th>
+								<th data-options="field:'stageIdText',width:120,align:'center'">当前课程</th>
 								<th data-options="field:'feeTypeText',width:200,align:'center'">当前课程业绩类型</th>
 								<th data-options="field:'adviserName',width:200,align:'center'">当前课程业绩顾问</th>
 								<th data-options="field:'outClassName',width:200,align:'center'">转出校在读班</th>

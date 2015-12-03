@@ -18,9 +18,9 @@
   					<td align="right"><span>校区：</span></td>
 	  				<td width="100px">
 						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-			      		onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
-			      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
+							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
+			      			onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
+			      			url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
 		        		</select>
 					</td>
 					<td align="right"><span>学员姓名：</span></td>
@@ -34,17 +34,12 @@
 					</td>
 					<td align="right"><span>课程类型：</span></td>
 					<td width="100px">
-						<select id="courseType" name="courseType" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-		      				onLoadSuccess:function(data){$('#courseType').combobox('setValue',data[0].codeFlag);}" 
-		      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE">
+						<select id="courseType" name="courseType" class="easyui-combobox" style="width: 100px; height: 25px;">
 		        		</select>
 		        	</td>
+		        	<td align="center" width="14px">&nbsp;</td>
 		        	<td width="100px" colspan="2">
-						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
-		      				onLoadSuccess:function(data){if(data.length > 0) $('#stageId').combobox('setValue',data[0].stageId);}" 
-		      				url="<%=path %>/pubData/qryStage.do">
+						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;">
 		        		</select>
 					</td>
   				</tr>
@@ -52,16 +47,14 @@
   					<td align="right"><span>责任顾问：</span></td>
 	  				<td width="100px">
 						<select id="dutyAdvister" name="dutyAdvister" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-     						onLoadSuccess:function(data){if(data.length > 0)$('#dutyAdvister').combobox('setValue',data[0].staffId);}"
+							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
      						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
       					</select>
 					</td>
 					<td align="right"><span>业绩老师：</span></td>
 	  				<td width="114px">
 						<select id="adviserTeacher" name="adviserTeacher" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-     						onLoadSuccess:function(data){if(data.length > 0)$('#adviserTeacher').combobox('setValue',data[0].staffId);}"
+							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
      						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
       					</select>
 					</td>
@@ -76,7 +69,7 @@
 						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimePay" name="startTimePay" ata-options="formatter:myformatter, parser:myparser"/>
 					</td>
 					<td align="center" width="14px"><span>至</span></td>
-					<td width="100px">
+					<td width="100px" colspan="2">
 						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimePay" name="endTimePay" ata-options="formatter:myformatter, parser:myparser"/>
 					</td>
   				</tr>
@@ -84,8 +77,7 @@
 					<td align="right"><span>业绩类型：</span></td>
 					<td width="100px">
 						<select id="feeType" name="feeType" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-		      				onLoadSuccess:function(data){$('#feeType').combobox('setValue',data[0].codeFlag);}" 
+							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 		      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
 		        		</select>
 					</td>
@@ -107,11 +99,9 @@
 					<td width="100px">
 						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeSelect" name="endTimeSelect" ata-options="formatter:myformatter, parser:myparser"/>
 					</td>
-  				</tr>
-  				<tr>
-  					<td align="right" colspan="10">
+					<td align="center">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1011">查询</a>
-						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
+						&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 					</td>
   				</tr>
   			</table>
@@ -126,6 +116,7 @@
 						<th data-options="field:'schoolName',width:80,align:'center'">校区</th>
 						<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
 						<th data-options="field:'byName',width:100,align:'center'">英文名</th>
+						<th data-options="field:'stageIdText',width:100,align:'center'">课程阶段或名称</th>
 						<th data-options="field:'classType',width:100,align:'center'">班级类型</th>
 						<th data-options="field:'isNeedSelectText',width:120,align:'center'">是否需要选班</th>
 						<th data-options="field:'feeTypeText',width:100,align:'center'">业绩类型</th>

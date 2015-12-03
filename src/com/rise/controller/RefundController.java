@@ -27,6 +27,7 @@ public class RefundController
 	@RequestMapping(value = "/qryApplyRefund.do")
 	public ModelAndView qryApplyRefund(String studentCourseId, String studentId, String courseType)
 	{
+		log.error(courseType);
 		ModelAndView view = null;
 		if("001".equals(courseType)) {
 			view = new ModelAndView("refund/refundApply");

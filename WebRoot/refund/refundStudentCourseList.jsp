@@ -54,15 +54,9 @@
 					</td>
 					<td align="right"><span>课程类型：</span></td>
 					<td width="100px" colspan="5">
-						<select id="courseType" name="courseType" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-				      		onLoadSuccess:function(data){$('#courseType').combobox('setValue',data[0].codeFlag);}" 
-				      		url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE">
+						<select id="courseType" name="courseType" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        </select>
-				        <select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
-				      		onLoadSuccess:function(data){if(data.length > 0) $('#stageId').combobox('setValue',data[0].stageId);}" 
-				      		url="<%=path %>/pubData/qryStage.do">
+				        <select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;">
 		        		</select>
 		        	</td>
   				</tr>

@@ -47,31 +47,78 @@ $(document).ready(function() {
     	});
     });
 	
+	$("#courseType").combobox({
+		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE",//返回json数据的url
+    	valueField : "codeFlag",
+    	textField : "codeName",
+    	panelHeight : "auto",
+    	onChange : function(n, o) {
+    		if("001" == n) {
+    			$("#stageId").combobox({
+    				url : "/sys/pubData/qryStage.do",//返回json数据的url
+    		    	valueField : "stageId",
+    		    	textField : "stageId",
+    		    	panelHeight : "auto"
+    			});
+    		} else {
+    			$("#stageId").combobox({
+    				url : "/sys/pubData/qryShortClass.do",//返回json数据的url
+    		    	valueField : "shortClassId",
+    		    	textField : "className",
+    		    	panelHeight : "auto"
+    			});
+    		}
+    	}
+	});
 	
+	$("#approveCourseType").combobox({
+		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE",//返回json数据的url
+    	valueField : "codeFlag",
+    	textField : "codeName",
+    	panelHeight : "auto",
+    	onChange : function(n, o) {
+    		if("001" == n) {
+    			$("#approveStageId").combobox({
+    				url : "/sys/pubData/qryStage.do",//返回json数据的url
+    		    	valueField : "stageId",
+    		    	textField : "stageId",
+    		    	panelHeight : "auto"
+    			});
+    		} else {
+    			$("#approveStageId").combobox({
+    				url : "/sys/pubData/qryShortClass.do",//返回json数据的url
+    		    	valueField : "shortClassId",
+    		    	textField : "className",
+    		    	panelHeight : "auto"
+    			});
+    		}
+    	}
+	});
 	
 	$("#womType").combobox({
 		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_WOM_T&codeType=WOM_TYPE",//返回json数据的url
     	valueField : "codeFlag",
     	textField : "codeName",
     	panelHeight : "auto",
-    	onLoadSuccess : function () { //数据加载完毕事件
-            var data = $('#womType').combobox('getData');
-            if (data.length > 0) {
-                $("#womType").combobox('select', data[0].codeFlag);
-            }
-        },
+//    	onLoadSuccess : function () { //数据加载完毕事件
+//            var data = $('#womType').combobox('getData');
+//            if (data.length > 0) {
+//                $("#womType").combobox('select', data[0].codeFlag);
+//            }
+//        },
 		onChange : function(n, o) {
 			$("#womChannel").combobox({
 				url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_WOM_T&codeType=WOM_CHANNEL_" + n,//返回json数据的url
 		    	valueField : "codeFlag",
 		    	textField : "codeName",
-		    	panelHeight : "auto",
-		    	onLoadSuccess : function () { //数据加载完毕事件
-		            var data = $('#womChannel').combobox('getData');
-		            if (data.length > 0) {
-		                $("#womChannel").combobox('select', data[0].codeFlag);
-		            }
-		        }
+		    	panelHeight : "auto"
+//		    	panelHeight : "auto",
+//		    	onLoadSuccess : function () { //数据加载完毕事件
+//		            var data = $('#womChannel').combobox('getData');
+//		            if (data.length > 0) {
+//		                $("#womChannel").combobox('select', data[0].codeFlag);
+//		            }
+//		        }
 			});	
 		}
 	});	

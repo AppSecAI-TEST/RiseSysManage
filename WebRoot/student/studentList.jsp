@@ -60,8 +60,7 @@
 					</td>
 					<td width="100px">
 						<select id="advisterId" name="advisterId" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-      						 onLoadSuccess:function(data){$('#advisterId').combobox('setValue',data[0].staffId);}"
+							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
       						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
      						</select>
 					</td>
@@ -70,8 +69,7 @@
 					</td>
 					<td width="100px">
 						<select id="dutyAdvister" name="dutyAdvister" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-      						 onLoadSuccess:function(data){$('#dutyAdvister').combobox('setValue',data[0].staffId);}"
+							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
       						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
       					</select>
 					</td>
@@ -80,8 +78,7 @@
 					</td>
 					<td width="100px">
 						<select id="carer" name="carer" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-     						 onLoadSuccess:function(data){$('#carer').combobox('setValue',data[0].staffId);}"
+							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
      						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
      					</select>
 					</td>

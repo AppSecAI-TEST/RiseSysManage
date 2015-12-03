@@ -347,7 +347,6 @@ public class QryPubDataController
 	@RequestMapping(value = "/qryStage.do")
 	public void getStage( HttpServletResponse response)
 	{
-	 
 		PrintWriter out = null;
 		try
 		{
@@ -447,6 +446,32 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.getTeacherBySchoolId(schoolId);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	//²éÑ¯¶ÌÆÚ¿Î
+	@RequestMapping(value = "/qryShortClass.do") 
+	public void qryShortClass(HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = qryPubDataService.qryShortClass();
 			log.error(retVal);
 			out.write(retVal);
 		}
