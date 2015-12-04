@@ -8,6 +8,12 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
+		<script type="text/javascript">
+			//查看老师变更历史
+			function viewChangeTeacherHist() {
+				$("#histDlg").dialog("open").dialog("setTitle", "老师变更历史");//设定表头  
+			}
+		</script>
   	</head>
   
   	<body>
@@ -102,6 +108,10 @@
 					</tr>
 				</thead>
 			</table>
-  		</div> 		
+  		</div> 	
+  		
+  		<div id="histDlg" class="easyui-dialog" style="width:94%;height: 50%;" closed="true" data-options="modal:true">
+  			<iframe src="/sys/attendClass/changeTeacherHistList.jsp?classInstId=${obj.attendClassObj.classInstId }" scrolling="yes" frameborder="0" width="99%" height="99%"></iframe>
+  		</div>	
   	</body>
 </html>

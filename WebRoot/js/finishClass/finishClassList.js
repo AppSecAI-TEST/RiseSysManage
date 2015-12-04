@@ -21,12 +21,6 @@ $(document).ready(function() {
     	valueField : "stageId",
     	textField : "stageId",
     	panelHeight : "auto",
-    	onLoadSuccess : function () { //数据加载完毕事件
-            var data = $('#stageId').combobox('getData');
-            if (data.length > 0) {
-                $("#stageId").combobox('select', data[0].stageId);
-            }
-        },
 		onChange : function(n, o) {
 			var schoolId = $("#schoolId").combobox("getValue");
 			//转出班级
@@ -34,13 +28,7 @@ $(document).ready(function() {
         		url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType=&stageId="+n+"&classType=&classState=&classInstId=",//返回json数据的url
         		valueField : "classInstId",
         		textField : "className",
-        		panelHeight : "auto",
-        		onLoadSuccess : function () { //数据加载完毕事件
-                    var data = $('#classInstId').combobox('getData');
-                    if (data.length > 0) {
-                        $("#classInstId").combobox('select', data[0].classInstId);
-                    }
-                }
+        		panelHeight : "auto"
         	});
 		}
 	});

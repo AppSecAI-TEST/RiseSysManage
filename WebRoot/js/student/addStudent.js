@@ -55,10 +55,9 @@ $(document).ready(function() {
     $("#addRealSchool").click(function() {
     	var schoolType = $('#schoolType').combobox('getValue');
     	if(schoolType != "" && schoolType != null && schoolType != undefined) {
-    		var realSchoolId = $('#realSchoolId').combobox('getValue');
-    		if(realSchoolId != "" && realSchoolId != null && realSchoolId != undefined)  {
+    		var realSchoolName = $('#realSchoolId').combobox('getText');
+    		if(realSchoolName != "" && realSchoolName != null && realSchoolName != undefined)  {
     			var schoolTypeText = $('#schoolType').combobox('getText');
-    			var realSchoolName = $('#realSchoolId').combobox('getText');
     			var content = "<tr><td align='right'><span>学校类型：</span></td><td><span>"+schoolTypeText+"</span></td>";
     			content += "<td align='right'><span>学校名称：</span></td><td><span>"+realSchoolName+"</span></td>";
     			content += "<input type='hidden' name='realSchools' schoolType='"+schoolType+"' realSchoolName='"+realSchoolName+"'/>";
@@ -153,17 +152,14 @@ $(document).ready(function() {
     		if(flag) {
     			var identityId = $("#identityId").textbox("getValue");
     			var contactIdentityId = $("#contactIdentityId").textbox("getValue");
-    			if(identityId == null || identityId == "" || identityId == undefined) {
+    			if((identityId == null || identityId == "" || identityId == undefined)
+    					&& (contactIdentityId == null || contactIdentityId == "" || contactIdentityId == undefined)) {
     				if($("[name='contacts']").length > 0) {
     	    			$("[name='contacts']").each(function() {
     	    				if($(this).attr("identityId") == null || $(this).attr("identityId") == "" || $(this).attr("identityId") == undefined) {
     	    					flag = false;
     	    				}
     	    			});
-    	    		} else {
-    	    			if(contactIdentityId == null || contactIdentityId == "" || contactIdentityId == undefined) {
-    						flag = false;
-    					}
     	    		}
     			}
     			if(flag) {
@@ -193,39 +189,46 @@ $(document).ready(function() {
     							}
     						}
     						if(flag) {
-    							var contactName = $("#contactName").textbox("getValue");
-    							var job = $("#job").textbox("getValue");
-    							var contactIdentityTypeText = $('#contactIdentityType').combobox('getText');
-    							var content = "<tr><td align='center'><span>"+relationTypeText+"</span></td>";
-    							content += "<td align='center'><span>"+contactName+"</span></td>";
-    							content += "<td align='center'><span>"+job+"</span></td>";
-    							content += "<td align='center'>";
-    							var contactUsed = "N";
     							var used = $("input:checkbox[name='used']:checked").val();
-    							if(used) {
-    								content += "<input type='checkbox' checked='checked'/>";
-    								contactUsed = "Y";
-    							} else {
-    								content += "<input type='checkbox'/>";
+    							if(used && (phone == null || phone == "" || phone == undefined)) {
+    								flag = false;
     							}
-    							content += "</td>";
-    							if(contactIdentityId != "" && contactIdentityId != null && contactIdentityId != undefined) {
-    								content += "<td align='center'><span>"+contactIdentityTypeText+"："+contactIdentityId+"</span></td>";
+    							if(flag) {
+    								var contactName = $("#contactName").textbox("getValue");
+    								var job = $("#job").textbox("getValue");
+    								var contactIdentityTypeText = $('#contactIdentityType').combobox('getText');
+    								var content = "<tr><td align='center'><span>"+relationTypeText+"</span></td>";
+    								content += "<td align='center'><span>"+contactName+"</span></td>";
+    								content += "<td align='center'><span>"+job+"</span></td>";
+    								content += "<td align='center'>";
+    								var contactUsed = "N";
+    								if(used) {
+    									content += "<input type='checkbox' checked='checked'/>";
+    									contactUsed = "Y";
+    								} else {
+    									content += "<input type='checkbox'/>";
+    								}
+    								content += "</td>";
+    								if(contactIdentityId != "" && contactIdentityId != null && contactIdentityId != undefined) {
+    									content += "<td align='center'><span>"+contactIdentityTypeText+"："+contactIdentityId+"</span></td>";
+    								} else {
+    									content += "<td align='center'><span></span></td>";
+    								}
+    								content += "<td align='center'><span>"+phone+"</span>";
+    								content += "<input type='hidden' name='contacts' relationType='"+relationType+"' job='"+job+"' used='"+contactUsed+"' contactName='"+contactName+"' identityType='"+contactIdentityType+"' identityId='"+contactIdentityId+"' phone='"+phone+"'/></td>";
+    								content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='deleteContact(this)'><span>删除</span></a></td></tr>";
+    								$("#addContactTd tr:eq("+contactTd+")").after(content);
+    								//初始化第一列
+    								$('#relationType').combobox('setValue', "");
+    								$('#contactIdentityType').combobox('setValue', "");
+    								$("#contactName").textbox("setValue", "");
+    								$("#job").textbox("setValue", "");
+    								$("#contactIdentityId").textbox("setValue", "");
+    								$("#phone").textbox("setValue", "");
+    								$("[name='used']").removeAttr("checked");
     							} else {
-    								content += "<td align='center'><span></span></td>";
+    								$.messager.alert('提示', "常用联系人必须提供联系电话！");
     							}
-    							content += "<td align='center'><span>"+phone+"</span>";
-    							content += "<input type='hidden' name='contacts' relationType='"+relationType+"' job='"+job+"' used='"+contactUsed+"' contactName='"+contactName+"' identityType='"+contactIdentityType+"' identityId='"+contactIdentityId+"' phone='"+phone+"'/></td>";
-    							content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='deleteContact(this)'><span>删除</span></a></td></tr>";
-    							$("#addContactTd tr:eq("+contactTd+")").after(content);
-    							//初始化第一列
-    							$('#relationType').combobox('setValue', "");
-    							$('#contactIdentityType').combobox('setValue', "");
-    							$("#contactName").textbox("setValue", "");
-    							$("#job").textbox("setValue", "");
-    							$("#contactIdentityId").textbox("setValue", "");
-    							$("#phone").textbox("setValue", "");
-    							$("[name='used']").removeAttr("checked");
     						} else {
     							$.messager.alert('提示', "必须提供一个联系电话！");
     						}
@@ -329,7 +332,7 @@ $(document).ready(function() {
         					var realSchoolArray = "[";
         					if($("[name='realSchools']").length > 0) {
         						$("[name='realSchools']").each(function() {
-        							realSchoolArray += "{schoolType:\""+$(this).attr("schoolType")+"\",realSchoolId:\""+$(this).attr("realSchoolId")+"\"},";
+        							realSchoolArray += "{schoolType:\""+$(this).attr("schoolType")+"\",realSchoolName:\""+$(this).attr("realSchoolName")+"\"},";
         						});
         						realSchoolArray = realSchoolArray.substring(0, realSchoolArray.length - 1);
         					}

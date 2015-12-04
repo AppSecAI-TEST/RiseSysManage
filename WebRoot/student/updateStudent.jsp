@@ -45,7 +45,7 @@
 	      					<span id="nameText" style="display: none;"></span>
 	      				</td>
 	      				<td align="right"><span style="color: red;">*</span><span>出生日期：</span></td>
-	      				<td colspan="2">
+	      				<td colspan="4">
 	      					<div id="birthdayDiv">
 		      					<input name="birthday" id="birthday" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 28px;" editable="false"/>
 	      					</div>
@@ -62,7 +62,7 @@
 	      					<span id="sexText" style="display: none;"></span>
 	      				</td>
 	      				<td align="right"><span>证件号码：</span></td>
-	      				<td colspan="2">
+	      				<td colspan="4">
 		      				<select name="identityType" id="identityType" class="easyui-combobox" style="width: 100px; height: 28px;">
 	        				</select>
 	        				<input name="identityId" id="identityId" type="text" class="easyui-textbox" style="width: 200px; height: 28px;"/>
@@ -75,13 +75,13 @@
 	      					<input name="byName" id="byName" type="text" class="easyui-textbox" style="width: 200px; height: 28px;"/>
 	      				</td>
 	      				<td align="right"><span>家庭地址：</span></td>
-	      				<td colspan="2">
+	      				<td colspan="4">
 	      					<input name="address" id="address" type="text" class="easyui-textbox" style="width: 396px; height: 28px;"/>
 	      				</td>
 	      			</tr>
 	      			<tr>
 	      				<td align="right"><span>就读学校：</span></td>
-	      				<td colspan="4">
+	      				<td colspan="6">
 	      					<select id="schoolType" class="easyui-combobox" style="width: 150px; height: 28px;" editable="false">
         					</select>
         					&nbsp;
@@ -104,7 +104,7 @@
         					<span id="advisterAText" style="display: none;"></span>
 	      				</td>
 	      				<td align="right"><span>招生顾问B：</span></td>
-	      				<td colspan="2">
+	      				<td colspan="4">
 	      					<div id="advisterBDiv">
 		      					<select id="advisterBSchoolId" class="easyui-combobox" style="width: 100px; height: 28px;">
 		        				</select>
@@ -121,14 +121,14 @@
 	        				</select>
 	      				</td>
 	      				<td align="right"><p><span>客户关怀：</span></p></td>
-	      				<td colspan="2">
+	      				<td colspan="4">
 	      					<select name="carer" id="carer" class="easyui-combobox" style="width: 150px; height: 28px;">
         					</select>
 	      				</td>
 	      			</tr>
 	      			<tr>
 	      				<td align="right"><span>学员备注：</span></td>
-	      				<td colspan="4">
+	      				<td colspan="6">
 	      					<input id="remark" name="remark" type="text" class="easyui-textbox" style="width: 969px; height: 28px;"/>
 	      				</td>
 	      			</tr>

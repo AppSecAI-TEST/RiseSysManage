@@ -75,6 +75,7 @@ $(document).ready(function() {
     			for(var i = 0; i < len1; i++) {
     				var content = "<tr><td align='right'><span>学校类型：</span></td><td><span>"+realSchoolArray[i].schoolTypeText+"</span></td>";
     	    		content += "<td align='right'><span>学校名称：</span></td><td><span>"+realSchoolArray[i].realSchoolName+"</span></td>";
+    	    		content += "<td align='right'><span>添加时间：</span></td><td><span>"+realSchoolArray[i].createDate+"</span></td>";
     	    		content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='deleteRealSchool(this, "+realSchoolArray[i].realId+")'><span>删除</span></a></td></tr>";
     	    		$("#studentTd tr:eq("+td+")").after(content);
     	    		td += 1;
@@ -85,9 +86,15 @@ $(document).ready(function() {
     		if(contactLength > 0) {
     			var contactArray = data.contactObj.rows;
     			for(var i = 0; i < contactLength; i++) {
+    				var job = contactArray[i].job;
+    				var phone = contactArray[i].phone;
+    				var contactName = contactArray[i].name;
+    				var relationType = contactArray[i].relationType;
+    				var identityId = contactArray[i].identityId;
+    				var identityType = contactArray[i].identityType;
     				var content = "<tr><td align='center'><span>"+contactArray[i].relationTypeVal+"</span></td>";
-    				content += "<td align='center'><span>"+contactArray[i].name+"</span></td>";
-    				content += "<td align='center'><span>"+contactArray[i].job+"</span></td>";
+    				content += "<td align='center'><span>"+contactName+"</span></td>";
+    				content += "<td align='center'><span>"+job+"</span></td>";
     				content += "<td align='center'>";
     				var used = contactArray[i].used;
     				if("Y" == used) {
@@ -97,7 +104,8 @@ $(document).ready(function() {
     				}
     				content += "</td>";
     				content += "<td align='center'><span>"+contactArray[i].identity+"</span></td>";
-    				content += "<td align='center'><span>"+contactArray[i].phone+"</span></td>";
+    				content += "<td align='center'><span>"+phone+"</span>";
+    				content += "<input type='hidden' name='contacts' relationType='"+relationType+"' job='"+job+"' used='"+used+"' contactName='"+contactName+"' identityType='"+identityType+"' identityId='"+identityId+"' phone='"+phone+"'/></td>";
     				content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='deleteContact(this, "+contactArray[i].contactId+")'><span>删除</span></a></td></tr>";
     				$("#contactTd tr:eq("+contactTd+")").after(content);
     				contactTd += 1;
@@ -108,9 +116,9 @@ $(document).ready(function() {
     		if(len3 > 0) {
     			var activityArray = data.activityObj.rows;
     			for(var i = 0; i < len3; i++) {
-    				var content = "<tr><td align='center'><span>"+activityArray[i].titleText+"</span></td>";
+    				var content = "<tr><td align='center'><span>"+activityArray[i].title+"</span></td>";
     				content += "<td align='center'><span>"+activityArray[i].activityDate+"</span></td>";
-    				content += "<td align='center'><span>"+activityArray[i].awardText+"</span></td>";
+    				content += "<td align='center'><span>"+activityArray[i].award+"</span></td>";
     				content += "<td align='center'><span>"+activityArray[i].remark+"</span></td>";
     				content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='deleteActivity(this, "+activityArray[i].activityId+")'><span>删除</span></a></td></tr>";
     				$("#activityTd tr:eq("+activityTd+")").after(content);
@@ -318,7 +326,11 @@ $(document).ready(function() {
 		contactLength += $("[name='contacts']").length;
 		if(contactLength > 0) {
 			if($("[name='contacts']").length > 0) {
-				updateFlag = true;
+				$("[name='contacts']").each(function() {
+					if("add" == $(this).attr("add")) {
+						updateFlag = true;
+					}
+				});
 			}
 			if($("[name='realSchools']").length > 0) {
 				updateFlag = true;
@@ -348,15 +360,19 @@ $(document).ready(function() {
 						var contactArray = "[";
 						if($("[name='contacts']").length > 0) {
 							$("[name='contacts']").each(function() {
-								contactArray += "{identityId:\""+$(this).attr("identityId")+"\",identityType:\""+$(this).attr("identityType")+"\",name:\""+$(this).attr("contactName")+"\",phone:\""+$(this).attr("phone")+"\",relationType:\""+$(this).attr("relationType")+"\",job:\""+$(this).attr("job")+"\",used:\""+$(this).attr("used")+"\"},";
+								if("add" == $(this).attr("add")) {
+									contactArray += "{identityId:\""+$(this).attr("identityId")+"\",identityType:\""+$(this).attr("identityType")+"\",name:\""+$(this).attr("contactName")+"\",phone:\""+$(this).attr("phone")+"\",relationType:\""+$(this).attr("relationType")+"\",job:\""+$(this).attr("job")+"\",used:\""+$(this).attr("used")+"\"},";
+								}
 							});
-							contactArray = contactArray.substring(0, contactArray.length - 1);
+							if(contactArray.length > 1) {
+								contactArray = contactArray.substring(0, contactArray.length - 1);
+							}
 						}
 						contactArray += "]";
     					var realSchoolArray = "[";
     					if($("[name='realSchools']").length > 0) {
     						$("[name='realSchools']").each(function() {
-    							realSchoolArray += "{schoolType:\""+$(this).attr("schoolType")+"\",realSchoolId:\""+$(this).attr("realSchoolId")+"\"},";
+    							realSchoolArray += "{schoolType:\""+$(this).attr("schoolType")+"\",realSchoolName:\""+$(this).attr("realSchoolName")+"\"},";
     						});
     						realSchoolArray = realSchoolArray.substring(0, realSchoolArray.length - 1);
     					}
@@ -415,10 +431,9 @@ $(document).ready(function() {
     $("#addRealSchool").click(function() {
     	var schoolType = $('#schoolType').combobox('getValue');
     	if(schoolType != "" && schoolType != null && schoolType != undefined) {
-    		var realSchoolId = $('#realSchoolId').combobox('getValue');
-    		if(realSchoolId != "" && realSchoolId != null && realSchoolId != undefined) {
+    		var realSchoolName = $('#realSchoolId').combobox('getText');
+    		if(realSchoolName != "" && realSchoolName != null && realSchoolName != undefined) {
     			var schoolTypeText = $('#schoolType').combobox('getText');
-    			var realSchoolName = $('#realSchoolId').combobox('getText');
     			var content = "<tr><td align='right'><span>学校类型：</span></td><td><span>"+schoolTypeText+"</span></td>";
     			content += "<td align='right'><span>学校名称：</span></td><td><span>"+realSchoolName+"</span></td>";
     			content += "<input type='hidden' name='realSchools' schoolType='"+schoolType+"' realSchoolName='"+realSchoolName+"'/>";
@@ -449,17 +464,14 @@ $(document).ready(function() {
     		if(flag) {
     			var identityId = $("#identityId").textbox("getValue");
     			var contactIdentityId = $("#contactIdentityId").textbox("getValue");
-    			if(identityId == null || identityId == "" || identityId == undefined) {
+    			if((identityId == null || identityId == "" || identityId == undefined)
+    					&& (contactIdentityId == null || contactIdentityId == "" || contactIdentityId == undefined)) {
     				if($("[name='contacts']").length > 0) {
     	    			$("[name='contacts']").each(function() {
     	    				if($(this).attr("identityId") == null || $(this).attr("identityId") == "" || $(this).attr("identityId") == undefined) {
     	    					flag = false;
     	    				}
     	    			});
-    	    		} else {
-    	    			if(contactIdentityId == null || contactIdentityId == "" || contactIdentityId == undefined) {
-    						flag = false;
-    					}
     	    		}
     			}
     			if(flag) {
@@ -489,39 +501,46 @@ $(document).ready(function() {
     							}
     						}
     						if(flag) {
-    							var contactName = $("#contactName").textbox("getValue");
-    							var job = $("#job").textbox("getValue");
-    							var contactIdentityTypeText = $('#contactIdentityType').combobox('getText');
-    							var content = "<tr><td align='center'><span>"+relationTypeText+"</span></td>";
-    							content += "<td align='center'><span>"+contactName+"</span></td>";
-    							content += "<td align='center'><span>"+job+"</span></td>";
-    							content += "<td align='center'>";
-    							var contactUsed = "N";
     							var used = $("input:checkbox[name='used']:checked").val();
-    							if(used) {
-    								content += "<input type='checkbox' checked='checked'/>";
-    								contactUsed = "Y";
-    							} else {
-    								content += "<input type='checkbox'/>";
+    							if(used && (phone == null || phone == "" || phone == undefined)) {
+    								flag = false;
     							}
-    							content += "</td>";
-    							if(contactIdentityId != "" && contactIdentityId != null && contactIdentityId != undefined) {
-    								content += "<td align='center'><span>"+contactIdentityTypeText+"："+contactIdentityId+"</span></td>";
+    							if(flag) {
+    								var contactName = $("#contactName").textbox("getValue");
+    								var job = $("#job").textbox("getValue");
+    								var contactIdentityTypeText = $('#contactIdentityType').combobox('getText');
+    								var content = "<tr><td align='center'><span>"+relationTypeText+"</span></td>";
+    								content += "<td align='center'><span>"+contactName+"</span></td>";
+    								content += "<td align='center'><span>"+job+"</span></td>";
+    								content += "<td align='center'>";
+    								var contactUsed = "N";
+    								if(used) {
+    									content += "<input type='checkbox' checked='checked'/>";
+    									contactUsed = "Y";
+    								} else {
+    									content += "<input type='checkbox'/>";
+    								}
+    								content += "</td>";
+    								if(contactIdentityId != "" && contactIdentityId != null && contactIdentityId != undefined) {
+    									content += "<td align='center'><span>"+contactIdentityTypeText+"："+contactIdentityId+"</span></td>";
+    								} else {
+    									content += "<td align='center'><span></span></td>";
+    								}
+    								content += "<td align='center'><span>"+phone+"</span>";
+    								content += "<input type='hidden' name='contacts' relationType='"+relationType+"' job='"+job+"' used='"+contactUsed+"' contactName='"+contactName+"' identityType='"+contactIdentityType+"' identityId='"+contactIdentityId+"' phone='"+phone+"' add='add'/></td>";
+    								content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='deleteContact(this)'><span>删除</span></a></td></tr>";
+    								$("#contactTd tr:eq("+contactTd+")").after(content);
+    								//初始化第一列
+    								$('#relationType').combobox('setValue', "");
+    								$('#contactIdentityType').combobox('setValue', "");
+    								$("#contactName").textbox("setValue", "");
+    								$("#job").textbox("setValue", "");
+    								$("#contactIdentityId").textbox("setValue", "");
+    								$("#phone").textbox("setValue", "");
+    								$("[name='used']").removeAttr("checked");
     							} else {
-    								content += "<td align='center'><span></span></td>";
+    								$.messager.alert('提示', "常用联系人必须提供联系电话！");
     							}
-    							content += "<td align='center'><span>"+phone+"</span>";
-    							content += "<input type='hidden' name='contacts' relationType='"+relationType+"' job='"+job+"' used='"+contactUsed+"' contactName='"+contactName+"' identityType='"+contactIdentityType+"' identityId='"+contactIdentityId+"' phone='"+phone+"'/></td>";
-    							content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='deleteContact(this)'><span>删除</span></a></td></tr>";
-    							$("#addContactTd tr:eq("+contactTd+")").after(content);
-    							//初始化第一列
-    							$('#relationType').combobox('setValue', "");
-    							$('#contactIdentityType').combobox('setValue', "");
-    							$("#contactName").textbox("setValue", "");
-    							$("#job").textbox("setValue", "");
-    							$("#contactIdentityId").textbox("setValue", "");
-    							$("#phone").textbox("setValue", "");
-    							$("[name='used']").removeAttr("checked");
     						} else {
     							$.messager.alert('提示', "必须提供一个联系电话！");
     						}

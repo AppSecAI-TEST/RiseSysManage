@@ -9,9 +9,19 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
+		<script type="text/javascript">
+			//查看老师变更历史
+			function viewChangeTeacherHist() {
+				$("#histDlg").dialog("open").dialog("setTitle", "老师变更历史");//设定表头  
+			}
+		</script>
   	</head>
   
   	<body>
+  		<div style="margin-left: 10px; margin-bottom: 5px; margin-top: 5px;">
+		  	<a href="javascript:void(0)" onclick="viewChangeTeacherHist()" class="easyui-linkbutton" iconCls="icon-redo" style="width: 120px;">老师变更历史</a>
+		  	<a href="javascript:void(0)" onclick="" class="easyui-linkbutton" iconCls="icon-redo" style="width: 120px;">浏览排课考勤</a>
+	  	</div>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="班级结课">
   			<form id="finishClassFm">
   				<table width="99.99%" cellpadding="5px" class="maintable">
@@ -125,6 +135,10 @@
 					</tr>
 				</thead>
 			</table>
-  		</div> 		
+  		</div> 	
+  		
+  		<div id="histDlg" class="easyui-dialog" style="width:94%;height: 50%;" closed="true" data-options="modal:true">
+  			<iframe src="/sys/attendClass/changeTeacherHistList.jsp?classInstId=${obj.attendClassObj.classInstId }" scrolling="yes" frameborder="0" width="99%" height="99%"></iframe>
+  		</div>	
   	</body>
 </html>

@@ -96,7 +96,7 @@
 							<select id="adviserTeacherId" name="adviserTeacherId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 				        	</select>
 						</td>
-						<td align="right">口碑类型:</td>
+						<td align="right"><span>口碑类型：</span></td>
 	  					<td>
 	  						<select class="easyui-combobox"  name="womType" id="womType" style="width:100px; height: 25px;" />
 	  						</select>
