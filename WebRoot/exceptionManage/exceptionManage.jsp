@@ -84,7 +84,7 @@
   					<td align="left">
      					<select id="expType" name="expType" class="easyui-combobox" style="width:120px;" editable="false"
 	  						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	  						onLoadSuccess:function(data){$('#expType').combobox('setValue',data[0].codeFlag);}""
+	  						onLoadSuccess:function(data){$('#expType').combobox('setValue',data[0].codeFlag);}"
 	      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_CARE_T&codeType=EXCEPTION_TYPE">
         				</select>
   					</td>
