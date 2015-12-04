@@ -73,9 +73,9 @@ $(document).ready(function() {
     		if(len1 > 0) {
     			var realSchoolArray = data.realSchoolObj.rows;
     			for(var i = 0; i < len1; i++) {
-    				var content = "<tr><td align='right'><span>学校类型：</span></td><td><span>"+realSchoolArray[i].schoolTypeText+"</span></td>";
-    	    		content += "<td align='right'><span>学校名称：</span></td><td><span>"+realSchoolArray[i].realSchoolName+"</span></td>";
-    	    		content += "<td align='right'><span>添加时间：</span></td><td><span>"+realSchoolArray[i].createDate+"</span></td>";
+    				var content = "<tr><td align='right' width='114px'><span>学校类型：</span></td><td><span>"+realSchoolArray[i].schoolTypeText+"</span></td>";
+    	    		content += "<td align='right' width='114px'><span>学校名称：</span></td><td><span>"+realSchoolArray[i].realSchoolName+"</span></td>";
+    	    		content += "<td align='right' width='114px'><span>添加时间：</span></td><td><span>"+realSchoolArray[i].createDate+"</span></td>";
     	    		content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='deleteRealSchool(this, "+realSchoolArray[i].realId+")'><span>删除</span></a></td></tr>";
     	    		$("#studentTd tr:eq("+td+")").after(content);
     	    		td += 1;

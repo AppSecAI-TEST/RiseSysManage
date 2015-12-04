@@ -37,14 +37,14 @@
       			<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
       			<table width="100%" cellpadding="5px" class="maintable" id="studentTd">
 	      			<tr>
-	      				<td align="right"><span style="color: red;">*</span><span>学员姓名：</span></td>
+	      				<td align="right" width="114px"><span style="color: red;">*</span><span>学员姓名：</span></td>
 	      				<td>
 	      					<div id="nameDiv">
 		      					<input name="name" id="name" type="text" class="easyui-textbox validatebox" required="true" style="width: 200px; height: 28px;"/>
 	      					</div>
 	      					<span id="nameText" style="display: none;"></span>
 	      				</td>
-	      				<td align="right"><span style="color: red;">*</span><span>出生日期：</span></td>
+	      				<td align="right" width="114px"><span style="color: red;">*</span><span>出生日期：</span></td>
 	      				<td colspan="4">
 	      					<div id="birthdayDiv">
 		      					<input name="birthday" id="birthday" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 28px;" editable="false"/>
@@ -53,7 +53,7 @@
 	      				</td>
 	      			</tr>
 	      			<tr>
-	      				<td align="right"><span style="color: red;">*</span><span>性别：</span></td>
+	      				<td align="right" width="114px"><span style="color: red;">*</span><span>性别：</span></td>
 	      				<td>
 	      					<div id="sexDiv">
 		      					<input type="radio" value="1" name="sex"/><span>男</span>
@@ -61,7 +61,7 @@
 	      					</div>
 	      					<span id="sexText" style="display: none;"></span>
 	      				</td>
-	      				<td align="right"><span>证件号码：</span></td>
+	      				<td align="right" width="114px"><span>证件号码：</span></td>
 	      				<td colspan="4">
 		      				<select name="identityType" id="identityType" class="easyui-combobox" style="width: 100px; height: 28px;">
 	        				</select>
@@ -70,30 +70,28 @@
 	      				</td>
 	      			</tr>
 	      			<tr>
-	      				<td align="right"><span>英文名：</span></td>
+	      				<td align="right" width="114px"><span>英文名：</span></td>
 	      				<td>
 	      					<input name="byName" id="byName" type="text" class="easyui-textbox" style="width: 200px; height: 28px;"/>
 	      				</td>
-	      				<td align="right"><span>家庭地址：</span></td>
+	      				<td align="right" width="114px"><span>家庭地址：</span></td>
 	      				<td colspan="4">
 	      					<input name="address" id="address" type="text" class="easyui-textbox" style="width: 396px; height: 28px;"/>
 	      				</td>
 	      			</tr>
 	      			<tr>
-	      				<td align="right"><span>就读学校：</span></td>
+	      				<td align="right" width="114px"><span>就读学校：</span></td>
 	      				<td colspan="6">
 	      					<select id="schoolType" class="easyui-combobox" style="width: 150px; height: 28px;" editable="false">
         					</select>
         					&nbsp;
-        					<span>学校名称：</span>
+        					<span style="width: 114px">学校名称：</span>
         					<input id="realSchoolId" type="text" class="easyui-combobox" style="width: 200px; height: 28px;"/>
         					&nbsp;<a href="javascript:void(0)" id="addRealSchool" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px; height: 28px;">添加学校记录</a>
 	      				</td>
 	      			</tr>
 	      			<tr>
-	      				<td align="right">
-	      					<span style="color: red;">*</span><span>招生顾问A：</span>
-	      				</td>
+	      				<td align="right" width="114px"><span style="color: red;">*</span><span>招生顾问A：</span></td>
 	      				<td>
 	      					<div id="advisterADiv">
 		      					<select id="advisterASchoolId" class="easyui-combobox" style="width: 100px; height: 28px;" required="true">
@@ -103,7 +101,7 @@
 	      					</div>
         					<span id="advisterAText" style="display: none;"></span>
 	      				</td>
-	      				<td align="right"><span>招生顾问B：</span></td>
+	      				<td align="right" width="114px"><span>招生顾问B：</span></td>
 	      				<td colspan="4">
 	      					<div id="advisterBDiv">
 		      					<select id="advisterBSchoolId" class="easyui-combobox" style="width: 100px; height: 28px;">
@@ -115,19 +113,19 @@
 	      				</td>
 	      			</tr>
 	      			<tr>
-	      				<td align="right"><span style="color: red;">*</span><span>责任顾问：</span></td>
+	      				<td align="right" width="114px"><span style="color: red;">*</span><span>责任顾问：</span></td>
 	      				<td>
 		      				<select name="dutyAdvister" id="dutyAdvister" class="easyui-combobox" style="width: 150px; height: 28px;" required="true">
 	        				</select>
 	      				</td>
-	      				<td align="right"><p><span>客户关怀：</span></p></td>
+	      				<td align="right" width="114px"><span>客户关怀：</span></td>
 	      				<td colspan="4">
 	      					<select name="carer" id="carer" class="easyui-combobox" style="width: 150px; height: 28px;">
         					</select>
 	      				</td>
 	      			</tr>
 	      			<tr>
-	      				<td align="right"><span>学员备注：</span></td>
+	      				<td align="right" width="114px"><span>学员备注：</span></td>
 	      				<td colspan="6">
 	      					<input id="remark" name="remark" type="text" class="easyui-textbox" style="width: 969px; height: 28px;"/>
 	      				</td>
