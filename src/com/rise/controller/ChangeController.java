@@ -4,11 +4,14 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.rise.service.ChangeService;
 
@@ -266,5 +269,34 @@ public class ChangeController
 				out.close();
 			}
 		}
+	}
+	
+	@RequestMapping(value = "/viewChangeInfo.do")
+	public ModelAndView viewChangeInfo(String param, String changeType)
+	{
+		log.error(changeType);
+		ModelAndView view = null;
+		if("changeClass".equals(changeType)) {
+			view = new ModelAndView("changeClass/studentChangeClassList");
+		} else if("changeSchool".equals(changeType)) {
+			view = new ModelAndView("changeSchool/studentChangeSchoolList");
+		} else if("leave".equals(changeType)) {
+			view = new ModelAndView("leaveManage/studentLeaveList");
+		} else if("exception".equals(changeType)) {
+			view = new ModelAndView("exception/studentExceptionList");
+		}
+		try 
+		{
+			log.error(param);
+			String retVal = changeService.viewChangeInfo(param);
+			JSONArray array = JSONArray.fromObject(retVal);
+			log.error(array);
+			view.addObject("array", array);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return view;
 	}
 }

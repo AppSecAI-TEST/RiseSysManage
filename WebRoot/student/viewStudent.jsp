@@ -21,41 +21,41 @@
   					<td align="right" width="100px"><span>学员姓名：</span></td>
 	      			<td><span id="nameText""></span></td>
 	  				<td align="right" width="100px"><span>出生日期：</span></td>
-	  				<td><span id="birthdayText"></span></td>
+	  				<td colspan="3"><span id="birthdayText"></span></td>
   				</tr>
   				<tr>
   					<td align="right" width="100px"><span>性别：</span></td>
 	      			<td><span id="sexText""></span></td>
 	  				<td align="right" width="100px"><span>证件号码：</span></td>
-	  				<td><span id="identityIdText"></span></td>
+	  				<td colspan="3"><span id="identityIdText"></span></td>
   				</tr>
   				<tr>
   					<td align="right" width="100px"><span>英文名：</span></td>
 	      			<td><span id="byName""></span></td>
 	  				<td align="right" width="100px"><span>家庭地址：</span></td>
-	  				<td><span id="address"></span></td>
+	  				<td colspan="3"><span id="address"></span></td>
   				</tr>
   				<tr>
   					<td align="right" width="100px"><span>建档日期：</span></td>
 	      			<td><span id="createDate""></span></td>
 	  				<td align="right" width="100px"><span>录入时间：</span></td>
-	  				<td><span id="createDate"></span></td>
+	  				<td colspan="3"><span id="createDate"></span></td>
   				</tr>
   				<tr>
   					<td align="right" width="100px"><span>招生顾问A：</span></td>
 	      			<td><span id="advisterAText""></span></td>
 	  				<td align="right" width="100px"><span>招生顾问B：</span></td>
-	  				<td><span id="advisterBText"></span></td>
+	  				<td colspan="3"><span id="advisterBText"></span></td>
   				</tr>
   				<tr>
   					<td align="right" width="100px"><span>责任顾问：</span></td>
 	      			<td><span id="dutyAdvisterNameText""></span></td>
 	  				<td align="right" width="100px"><span>客户关怀：</span></td>
-	  				<td><span id="carerNameText"></span></td>
+	  				<td colspan="3"><span id="carerNameText"></span></td>
   				</tr>
   				<tr>
 	      			<td align="right" width="100px"><span>学员备注：</span></td>
-	      			<td colspan="3"><span id="remark"></span></td>
+	      			<td colspan="5"><span id="remark"></span></td>
 	      		</tr>
   			</table>
   		</div>

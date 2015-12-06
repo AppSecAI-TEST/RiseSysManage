@@ -60,4 +60,10 @@ public class ChangeService
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0069\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
+
+	public String viewChangeInfo(String param) throws Exception 
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10110\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
 }

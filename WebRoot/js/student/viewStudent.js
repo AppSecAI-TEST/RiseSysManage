@@ -34,8 +34,9 @@ $(document).ready(function() {
     			var realSchoolArray = data.realSchoolObj.rows;
     			for(var i = 0; i < len1; i++)
     			{
-    				var content = "<tr><td align='right'><span>学校类型：</span></td><td><span>"+realSchoolArray[i].schoolTypeText+"</span></td>";
-    	    		content += "<td align='right'><span>学校名称：</span></td><td><span>"+realSchoolArray[i].realSchoolName+"</span></td></tr>";
+    				var content = "<tr><td align='right' width='100px'><span>学校类型：</span></td><td><span>"+realSchoolArray[i].schoolTypeText+"</span></td>";
+    	    		content += "<td align='right' width='100px'><span>学校名称：</span></td><td><span>"+realSchoolArray[i].realSchoolName+"</span></td>";
+    	    		content += "<td align='right' width='100px'><span>添加时间：</span></td><td><span>"+realSchoolArray[i].createDate+"</span></td></tr>";
     	    		$("#studentTd tr:eq("+td+")").after(content);
     	    		td += 1;
     			}
@@ -69,9 +70,9 @@ $(document).ready(function() {
     			var activityArray = data.activityObj.rows;
     			for(var i = 0; i < len3; i++)
     			{
-    				var content = "<tr><td align='center'><span>"+activityArray[i].titleText+"</span></td>";
+    				var content = "<tr><td align='center'><span>"+activityArray[i].title+"</span></td>";
     				content += "<td align='center'><span>"+activityArray[i].activityDate+"</span></td>";
-    				content += "<td align='center'><span>"+activityArray[i].awardText+"</span></td>";
+    				content += "<td align='center'><span>"+activityArray[i].award+"</span></td>";
     				content += "<td align='center'><span></span></td>";
     				content += "<td align='center'>"+activityArray[i].remark+"</td></tr>";
     				$("#activityTd tr:eq("+activityTd+")").after(content);
