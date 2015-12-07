@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.rise.model.ShortClassAttendT;
 import com.rise.model.ShortClassInstT;
+import com.rise.model.ShortClassTeacherT;
 import com.rise.model.ShortSchooltimeT;
 import com.rise.pub.base.JacksonJsonMapper;
 import com.rise.pub.invoke.ServiceEngine;
@@ -211,6 +212,33 @@ public class ShortBusinessService
 	{
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20517\",securityCode:\"0000000000\",params:{json:'"+json+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
+	}
+	
+	public String addTourismClassInfo(String json) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20518\",securityCode:\"0000000000\",params:{json:'"+json+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
+	public void accessShortClassPage(ModelAndView model , String shortClassInstId , String funcNodeId , String classType) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20519\",securityCode:\"0000000000\",params:{shortClassInstId:\""+shortClassInstId+"\",classType:\""+classType+"\"},rtnDataFormatType:\"user-defined\"}";
+		String result = ServiceEngine.invokeHttp(params);
+		try{
+			JSONObject obj = JSONObject.fromObject(result);
+			ShortClassInstT shortClassInstT = JacksonJsonMapper.getInstance().readValue(obj.getJSONObject("shortClassInstT").toString(), ShortClassInstT.class);
+			ObjectMapper mapper = JacksonJsonMapper.getInstance();
+			JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, ShortClassTeacherT.class);
+			List<ShortClassTeacherT> shortClassTeacherTList = mapper.readValue(obj.getJSONArray("shortClassTeacherTList").toString(), javaType);
+			model.addObject("shortClassInstId", StringUtil.getJSONObjectKeyVal(obj, "shortClassInstId"));
+			model.addObject("shortClassId", StringUtil.getJSONObjectKeyVal(obj, "shortClassId"));
+			model.addObject("shortClassInstT", shortClassInstT);
+			model.addObject("shortClassTeacherTList", shortClassTeacherTList);
+			model.addObject("funcNodeId", funcNodeId);
+		}catch(Exception err){
+			err.printStackTrace();
+			model.addObject("ErrorInfo", err.getMessage());
+		}
 	}
 	
 }

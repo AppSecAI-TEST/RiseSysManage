@@ -17,50 +17,52 @@
   	</head>
   
   	<body>
-  		<div id="tab" class="easyui-tabs" style="min-width:1100px;width:99%;height:530px;font-family:'微软雅黑';margin:0 auto;padding:0 0">
+  		<div id="tab" class="easyui-tabs" style="min-width:1100px;width:99%;height:528px;font-family:'微软雅黑';margin:0 auto;padding:0 0">
 		    <div title="考勤管理">
 				<form id="manFm" style="margin:0 auto;">
-					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:100px;" cellspacing="2">
 						<tr>
-							<td align="right" width="8%">
+							<td align="right" width="12%">
 								校区：
 							</td>
 							<td width="12%">
 								<select id="schoolManId" name="schoolManId" style="width:100px" ></select>
 							</td>
-							<td align="right" width="8%">	
+							<td align="right" width="12%">	
 								课程阶段：
 							</td>
-							<td width="22%">
+							<td width="25%">
 								<select id="classManPharse" name="classManPharse" style="width:100px" ></select>
 							</td>
-							<td align="right" width="8%">
+							<td align="right" width="12%">
 								班级：
 							</td>
-							<td colspan="3">
+							<td>
 								<select id="classMan" name="classMan" style="width:100px" ></select>
 							</td>
 						</tr>
 						<tr>
-							<td align="right" width="8%">
+							<td align="right">
 								班级状态：
 							</td>
-							<td width="22%">
+							<td>
 								<select id="classManState" name="classManState" style="width:100px" ></select>
 							</td>
 							<td align="right">
-								开课日期：
+								放班申请日期：
 							</td>
 							<td>
 								<input name="classStartManTime" id="classStartManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="classEndManTime" id="classEndManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 							</td>
 							<td align="right">
-								结课日期：
+								放班审批日期：
 							</td>
 							<td>
 								<input name="overClassStartManTime" id="overClassStartManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="overClassEndManTime" id="overClassEndManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 							</td>
-							<td colspan="2" align="center">
+						</tr>
+						<tr>
+							<td colspan="6" align="center">
 								<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryManFunc()">查询</a>
 								<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetManFunc()">重置</a>
 							</td>
@@ -68,7 +70,7 @@
 					</table>
 				</form>
 				<div style="padding:5px 0;min-width:1100px; width:100%">
-					<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+					<table class="easyui-datagrid" title="班级列表" style="height:370px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
 								<th data-options="field:'classInstId',checkbox:true"></th>
@@ -97,22 +99,22 @@
 				<form id="hisFm" style="margin:0 auto;">
 					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 						<tr>
-							<td align="right" width="8%">
+							<td align="right" width="12%">
 								校区：
 							</td>
-							<td width="12%">
+							<td width="22%">
 								<select id="schoolHisId" name="schoolHisId" style="width:100px" ></select>
 							</td>
-							<td align="right" width="8%">
+							<td align="right" width="12%">
 								班级状态：
 							</td>
 							<td width="22%">
 								<select id="classHisPharse" name="classHisPharse" style="width:100px" ></select>
 							</td>
-							<td align="right" width="8%">
+							<td align="right" width="12%">
 								班级：
 							</td>
-							<td width="12%">
+							<td>
 								<select id="classHis" name="classHis" style="width:100px" ></select>
 							</td>
 						</tr>

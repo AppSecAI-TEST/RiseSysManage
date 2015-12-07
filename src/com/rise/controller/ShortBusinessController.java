@@ -158,7 +158,7 @@ public class ShortBusinessController
 	@RequestMapping("/getShortClassInfo.do")
 	public ModelAndView getShortClassInfo(String shortClassInstId , String funcNodeId)
 	{
-		ModelAndView model = new ModelAndView("shortClass/addShortClass");
+		ModelAndView model = new ModelAndView("shortClass/addInterClass");
 		try
 		{
 			shortBusinessService.getAddShortClassInfo(model,shortClassInstId,funcNodeId);
@@ -173,7 +173,7 @@ public class ShortBusinessController
 	@RequestMapping("/getAddShortClassInfo.do")
 	public ModelAndView getAddShortClassInfo(String shortClassInstId , String funcNodeId)
 	{
-		ModelAndView model = new ModelAndView("shortClass/addShortClass");
+		ModelAndView model = new ModelAndView("shortClass/addInterClass");
 		try
 		{
 			shortBusinessService.getAddShortClassInfo(model,shortClassInstId,funcNodeId);
@@ -242,6 +242,30 @@ public class ShortBusinessController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = shortBusinessService.addShortClassInstTInfo(json);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/addTourismClassInfo.do")
+	public void addTourismClassInfo(String json , HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = shortBusinessService.addTourismClassInfo(json);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -421,6 +445,21 @@ public class ShortBusinessController
 				out.close();
 			}
 		}
+	}
+	
+	@RequestMapping("/accessShortClassPage.do")
+	public ModelAndView accessShortClassPage(String shortClassInstId , String funcNodeId , String classType , String pageName)
+	{
+		ModelAndView model = new ModelAndView("shortClass/"+pageName);
+		try
+		{
+			shortBusinessService.accessShortClassPage(model,shortClassInstId,funcNodeId,classType);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return model;
 	}
 	
 }
