@@ -1,5 +1,32 @@
 $(document).ready(function(){
 	
+	//首页面查询
+    $("#qryBtn").click(function() {
+    	var json = $("#qryFm").serializeObject();
+    	json.byName = $("#byName").combobox('getText');
+    	var pay = json.pay;
+    	if(pay == "Y"){
+    		json.reparation = "1";
+    	}
+    	if(pay == "N"){
+    		json.noreparation = "1";
+    	}
+		var obj = JSON.stringify(json);
+		obj = obj.substring(0, obj.length - 1);
+		var funcNodeId = $("#qryBtn").attr("funcNodeId");
+		obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+		$('#list_data').datagrid({
+			url : "/sys/pubData/qryDataListByPage.do",
+			queryParams:{
+				param : obj
+			},
+			onLoadSuccess:function(){
+				//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+				$('#list_data').datagrid('clearSelections');
+			}
+		});
+    });
+	
 	initDate();
 	//定位教师页面查询
     $("#qryTeaBtn").click(function() {
@@ -94,7 +121,6 @@ function updateTeacherTrain()
 		var stateVal = row.stateVal;
 		window.location.href = "/sys/trainManage/viewTrainInfo.do?trainId="+trainId+"&name="+name+"&byName="+byName+"&stateVal="+stateVal+"&type=update";
 	}
-	window.location.href = "/sys/trainManage/viewTrainInfo.do?trainId=100001&name="+name+"&byName="+byName+"&stateVal="+stateVal+"&type=update";
 }
 
 //培训修改提交
@@ -148,7 +174,6 @@ function viewTeacherTrain()
 		var stateVal = row.stateVal;
 		window.location.href = "/sys/trainManage/viewTrainInfo.do?trainId="+trainId+"&name="+name+"&byName="+byName+"&stateVal="+stateVal+"&type=view";
 	}
-	window.location.href = "/sys/trainManage/viewTrainInfo.do?trainId=100001&name="+name+"&byName="+byName+"&stateVal="+stateVal+"&type=view";
 }
 
 function validateSelect(object)
