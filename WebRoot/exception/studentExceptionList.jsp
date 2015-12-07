@@ -9,11 +9,6 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript">
-			function viewChangeImg(imgUrl) {
-				parent.viewChangeImg(imgUrl);
-			}
-		</script>
   	</head>
   
   	<body>

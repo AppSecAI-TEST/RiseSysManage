@@ -10,15 +10,19 @@
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript">
-			function viewChangeImg(imgUrl) {
-				parent.viewChangeImg(imgUrl);
-			}
+			$(document).ready(function() {
+				$("[name='leaveId']").each(function() {
+					var leaveId = $(this).val();
+					$("#leaveImgUrl" + leaveId).lightBox();
+				});
+			});
 		</script>
   	</head>
   
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="学员休学信息">
   			<c:forEach items="${array }" var="leave">
+  				<input type="hidden" name="leaveId" value="${leave.leaveId }"/>
   				<table width="100%" cellpadding="5px" class="maintables" style="margin-top: 10px;">
   					<tr>
 	  					<td style="border-right: 0" colspan="6">
@@ -26,7 +30,7 @@
 	  					</td>
 	  					<td align="right" colspan="2">
 	  						<c:if test="${!empty leave.imgUrl }">
-	  							<span style="margin-right: 200px"><a href="#" onclick="viewChangeImg('${leave.imgUrl }')" class="linkmore">查看休学申请单</a></span>
+	  							<span style="margin-right: 200px"><a href="${leave.imgUrl }" id="leaveImgUrl${leave.leaveId }" class="linkmore">查看休学申请单</a></span>
 	  						</c:if>
 	  					</td>
 	  				</tr>

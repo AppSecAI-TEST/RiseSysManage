@@ -226,7 +226,7 @@ function initTable(tabId,data)
 	var weekTime=rows[0].weekTime;
 	$('#'+tabId).datagrid({
     title: time+"(周"+weekTime+")",
-    width: 650,
+    width: 550,
     height: 'auto',
     fitColumns: true,
     singleSelect:true,
@@ -236,11 +236,11 @@ function initTable(tabId,data)
     },
     onClickCell:onClickCell, 
     columns:[[
-      {field:'H001',title:'8:30', width:120,align:'center', editor:'text'},
-      {field:'H002',title:'10:30',width:120,align:'center', editor:'text'},
-      {field:'H003',title:'14:00',width:120,align:'center', editor:'text'},
-      {field:'H004',title:'16:00',width:120,align:'center', editor:'text'},
-      {field:'H005',title:'18:30',width:120,align:'center', editor:'text'} 
+      {field:'H001',title:'8:30', width:80,align:'center', editor:'text'},
+      {field:'H002',title:'10:30',width:80,align:'center', editor:'text'},
+      {field:'H003',title:'14:00',width:80,align:'center', editor:'text'},
+      {field:'H004',title:'16:00',width:80,align:'center', editor:'text'},
+      {field:'H005',title:'18:30',width:80,align:'center', editor:'text'} 
     ]],
     onLoadSuccess:function()
     {

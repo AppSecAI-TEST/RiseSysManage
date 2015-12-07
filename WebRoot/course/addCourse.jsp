@@ -1011,7 +1011,7 @@ $('#favorAmount').textbox( {
 //提交
 $("#submitBtn").click(function() 
 {
-	if(!$("#courseFm").form('validate'))return;
+	//if(!$("#courseFm").form('validate'))return;
 	
 	if($("#payDate").datebox("getValue")=="")
 	{

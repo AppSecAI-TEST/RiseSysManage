@@ -15,6 +15,7 @@
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="常规课退费审批">
   			<form id="refundApproveFm">
+  				<input type="hidden" id="studentId" value="${obj.refundFeeObj.studentId}"/>
   				<table width="100%" cellpadding="5px" class="maintable">
   					<tr>
 	  					<td align="right" width="8%"><span>学员姓名：</span></td>
@@ -148,8 +149,27 @@
 	  				</tr>
   				</table>
   				<div style="height: 20px; vertical-align: middle; line-height:20px; margin-top: 10px;">
-  					&nbsp;&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='' id=""><span>展开非缴费赠送历史记录</span></a>
+  					&nbsp;&nbsp;<a href='javascript:void(0)' class='linkmore' onclick="viewGiftHist()" id="gift"><span>展开非缴费赠送历史记录</span></a>
   					&nbsp;&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='' id=""><span>查看所有的课程信息</span></a>
+  				</div>
+  				<div id="giftDiv">
+  					<table class="easyui-datagrid" id="gift_list_data" style="height: auto;"
+						pagination="false" rownumbers="false" fitColumns="true" singleSelect="false">
+						<thead>
+							<tr>
+								<th data-options="field:'giftChannelText',width:100,align:'center'">赠送类型</th>
+								<th data-options="field:'activityName',width:400,align:'center'">活动内容</th>
+								<th data-options="field:'createDate',width:120,align:'center'">赠送时间</th>
+								<th data-options="field:'giftTypeText',width:100,align:'center'">赠品类型</th>
+								<th data-options="field:'giftName',width:100,align:'center'">赠品</th>
+								<th data-options="field:'giftNum',width:100,align:'center'">数量</th>
+								<th data-options="field:'isGetText',width:100,align:'center'">是否领用</th>
+								<th data-options="field:'getDate',width:100,align:'center'">领用时间</th>
+								<th data-options="field:'getUser',width:100,align:'center'">领用人</th>
+								<th data-options="field:'granter',width:100,align:'center'">登记人</th>
+							</tr>
+						</thead>
+					</table>
   				</div>
   				<c:forEach items="${obj.refundFeeDetailList }" var="refundFeeDetail" varStatus="status">
   					<input type="hidden" id="studentCourseId${refundFeeDetail.studentCourseId }" name="studentCourseId" value="${refundFeeDetail.studentCourseId }"/>
