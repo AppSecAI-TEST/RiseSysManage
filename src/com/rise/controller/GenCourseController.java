@@ -217,6 +217,33 @@ public class GenCourseController {
 		}
 	}
 	
+	//修改教质时间轴配置
+	@RequestMapping(value="/updateClassPlan.do")
+	public void updateClassPlan(HttpServletResponse response,String json)
+	{
+		log.error(json);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = genCourseService.updateClassPlan(json);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 	//体系首页面查询
 	@RequestMapping(value = "/qryDataListByPage.do")
 	public void qryDataListByPage(String page, String rows, String param, String funcNodeId, HttpServletResponse response)
