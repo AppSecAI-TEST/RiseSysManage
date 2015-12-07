@@ -41,11 +41,6 @@
 					}
 				});
 			});
-			
-			function viewChangeImg(imgUrl) {
-				$("#url").attr("href", imgUrl);
-				$("#url").lightBox();
-			}
 		</script>
   	</head>
   
@@ -82,9 +77,6 @@
   			<div title="VIP信息" sty le="padding:5px;display:block;">
   				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:100%;"></iframe>
   			</div>
-  		</div>
-  		<div style="display: none;">
-  			<a href="#" id="url" class="linkmore">查看转校申请单</a>
   		</div>
   	</body>
 </html>

@@ -10,15 +10,19 @@
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript">
-			function viewChangeImg(imgUrl) {
-				parent.viewChangeImg(imgUrl);
-			}
+			$(document).ready(function() {
+				$("[name='applyId']").each(function() {
+					var applyId = $(this).val();
+					$("#changeImgUrl" + applyId).lightBox();
+				});
+			});
 		</script>
   	</head>
   
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="学员转校信息">
   			<c:forEach items="${array }" var="changeSchool">
+  				<input type="hidden" name="applyId" value="${changeSchool.applyId }"/>
   				<table width="100%" cellpadding="5px" class="maintables" style="margin-top: 10px;">
   					<tr>
 	  					<td style="border-right: 0" colspan="6">
@@ -26,7 +30,7 @@
 	  					</td>
 	  					<td align="right" colspan="2">
 	  						<c:if test="${!empty changeSchool.imgUrl }">
-	  							<span style="margin-right: 200px"><a href="#" onclick="viewChangeImg('${changeSchool.imgUrl }')" class="linkmore">查看转校申请单</a></span>
+	  							<span style="margin-right: 200px"><a href="${changeSchool.imgUrl }" id="changeImgUrl${changeSchool.applyId }" class="linkmore">查看转校申请单</a></span>
 	  						</c:if>
 	  					</td>
 	  				</tr>

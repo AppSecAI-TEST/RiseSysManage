@@ -110,6 +110,7 @@ public class RefundController
 			JSONObject obj = JSONObject.fromObject(retVal);
 			log.error(obj);
 			obj.element("courseType", courseType);
+			obj.element("refundFeeId", refundFeeId);
 			view.addObject("obj", obj);
 		} 
 		catch (Exception e) 

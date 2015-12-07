@@ -34,11 +34,13 @@
 					</tr>
 				</thead>
 			</table>
-			<table class="easyui-datagrid" title="短期课-国际班信息" style="height:auto;" id="international_list_data">
+			<table class="easyui-datagrid" title="短期课-国际班信息" style="height:auto;" id="international_list_data"
+				url="<%=path %>/pubData/qryDataListByPage.do?param={funcNodeId:'1038',studentId:'<%=studentId %>'}" 
+				pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
 						<th data-options="field:'classType',width:100,align:'center'">国际班类型</th>
-						<th data-options="field:'courseStateText',width:100,align:'center'">报名校区</th>
+						<th data-options="field:'paySchoolName',width:100,align:'center'">报名校区</th>
 						<th data-options="field:'schoolName',width:100,align:'center'">上课校区</th>
 						<th data-options="field:'payDate',width:120,align:'center'">缴费日期</th>
 						<th data-options="field:'courseStateText',width:100,align:'center'">课程状态</th>

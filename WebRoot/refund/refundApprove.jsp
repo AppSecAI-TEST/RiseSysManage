@@ -13,8 +13,14 @@
   	</head>
   
   	<body>
-  		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="常规课退费审批">
+  		<div class="easyui-panel" style="min-width:1100px; width:98%;height:auto;" title="常规课退费审批">
   			<form id="refundApproveFm">
+  				<input type="hidden" id="refundFeeId" value="${obj.refundFeeId }"/>
+  				<input type="hidden" id="studentId" value="${obj.refundFeeObj.studentId }"/>
+  				<input type="hidden" id="nextState" value="${obj.refundFeeObj.nextState }"/>
+  				<input type="hidden" id="isAcademic" value="${obj.refundFeeObj.isAcademic }"/>
+  				<input type="hidden" id="refundRule" value="${obj.refundFeeObj.refundRule }"/>
+  				<input type="hidden" id="refundImgUrl" value="${obj.refundFeeObj.imgUrl}"/>
   				<input type="hidden" id="approveId" name="approveId" value="${sessionScope.StaffT.staffId}"/>
   				<input type="hidden" id="processInstanceId" name="processInstanceId" value="${obj.refundFeeObj.processInstanceId }"/>
   				<table width="100%" cellpadding="5px" class="maintable">
@@ -26,7 +32,14 @@
 	  					<td align="right" width="8%"><span>课时进度：</span></td>
 	  					<td width="10%"><span>${obj.refundFeeObj.classProgress }</span></td>
 	  					<td align="right" width="8%"><span>带班老师：</span></td>
-	  					<td width="40%" colspan="3"><span>${obj.refundFeeObj.teacherName }</span></td>
+	  					<td width="25%" colspan="2" style="border-right: 0px;">
+	  						<span style="display: inline-block;">${obj.refundFeeObj.teacherName }</span>
+	  					</td>
+	  					<td width="15%" align="right" style="border-left: 0px; ">
+	  						<c:if test="${!empty obj.refundFeeObj.imgUrl }">
+	  							<span style="margin-right: 50px;"><a href="${obj.refundFeeObj.imgUrl}" id="refundImg" class="linkmore">查看退费申请单</a></span>
+	  						</c:if>
+	  					</td>
 	  				</tr>
 	  				<tr id="refundWayTr">
 	  					<td align="right" width="8%"><span>退费形式：</span></td>
@@ -75,7 +88,7 @@
 	  					</td>
 	  					<td align="right" width="10%"><span>是否学术退费：</span></td>
 	  					<td colspan="2" width="23%">
-	  						<c:if test="${not empty obj.refundFeeObj.isAcademic }">
+	  						<c:if test="${!empty obj.refundFeeObj.isAcademic }">
 	  							<c:if test="${obj.refundFeeObj.isAcademic == 'Y' }">
 			  						<input type="radio" name="isAcademic" value="Y" checked="checked" disabled="disabled"/><span>学术退费</span>
 			  						&nbsp;&nbsp;<input type="radio" name="isAcademic" value="N"/><span>非学术退费</span>
@@ -150,9 +163,30 @@
 	  				</tr>
   				</table>
   				<div style="height: 20px; vertical-align: middle; line-height:20px; margin-top: 10px;">
-  					&nbsp;&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='' id=""><span>展开非缴费赠送历史记录</span></a>
+  					&nbsp;&nbsp;<a href='javascript:void(0)' class='linkmore' onclick="viewGiftHist()" id="gift"><span>展开非缴费赠送历史记录</span></a>
   					&nbsp;&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='' id=""><span>查看所有的课程信息</span></a>
   				</div>
+  				
+  				<div id="giftDiv">
+  					<table class="easyui-datagrid" id="gift_list_data" style="height: auto;"
+						pagination="false" rownumbers="false" fitColumns="true" singleSelect="false">
+						<thead>
+							<tr>
+								<th data-options="field:'giftChannelText',width:100,align:'center'">赠送类型</th>
+								<th data-options="field:'activityName',width:400,align:'center'">活动内容</th>
+								<th data-options="field:'createDate',width:120,align:'center'">赠送时间</th>
+								<th data-options="field:'giftTypeText',width:100,align:'center'">赠品类型</th>
+								<th data-options="field:'giftName',width:100,align:'center'">赠品</th>
+								<th data-options="field:'giftNum',width:100,align:'center'">数量</th>
+								<th data-options="field:'isGetText',width:100,align:'center'">是否领用</th>
+								<th data-options="field:'getDate',width:100,align:'center'">领用时间</th>
+								<th data-options="field:'getUser',width:100,align:'center'">领用人</th>
+								<th data-options="field:'granter',width:100,align:'center'">登记人</th>
+							</tr>
+						</thead>
+					</table>
+  				</div>
+  				
   				<c:forEach items="${obj.refundFeeDetailList }" var="refundFeeDetail" varStatus="status">
   					<input type="hidden" id="studentCourseId${refundFeeDetail.studentCourseId }" name="studentCourseId" value="${refundFeeDetail.studentCourseId }"/>
   					<table width="100%" cellpadding="5px" class="maintables" style="margin-top: 10px;">
@@ -196,7 +230,11 @@
   							<td width="8%" align="center"><span>其他扣除</span></td>
   							<td width="11%" align="center"><span>核定退费金额</span></td>
   							<td width="15%" align="center"><span>总部财务核定金额</span></td>
-  							<td width="13%" align="center"><a href='javascript:void(0)' class='linkmore' onclick='' id=""><span>查看缴费单据</span></a></td>
+  							<td width="13%" align="center">
+  								<c:if test="${!empty refundFeeDetail.imgUrl }">
+	  								<a href='${refundFeeDetail.imgUrl }' class='linkmore' id="refundFeeImgUrl${refundFeeDetail.studentCourseId }"><span>查看缴费单据</span></a>
+  								</c:if>
+  							</td>
   						</tr>
   						<tr>
   							<td width="10%" align="center">
@@ -229,122 +267,6 @@
   				</c:forEach>
   				
   				<div style="height: 10px"></div>
-  				<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="回访信息">
-  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
-	  					<c:forEach items="${obj.refundVisitList }" var="refundVisit">
-	  						<c:if test="${refundVisit.visitType == '001' }">
-		  						<tr>
-		  							<td colspan="4"><span>1、老师或CC回访信息：</span></td>
-		  						</tr>
-		  						<tr>
-		  							<td align="right" width="10%"><span>回访人员：</span></td>
-		  							<td width="32%">
-  										<c:if test="${refundVisit.userType == 'teacher' }">
-			  								<input type="radio" name="visitPersonOne" value="teacher" checked="checked" disabled="disabled"/><span>老师</span>
-			  								<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled"
-			  									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-	      										onLoadSuccess:function(data){if(data.length > 0) $('#teacherId').combobox('setValue', ${refundVisit.visitUserId });}" 
-	      										url="<%=path %>/pubData/qryStaffList.do?schoolId=${obj.refundFeeObj.schoolId }">
-					        				</select>
-			  								<input type="radio" name="visitPersonOne" value="adviser" disabled="disabled"/><span>课程顾问</span>
-			  								<select id="careAdviserId" name="careAdviserId" class="easyui-combobox" style="width: 100px; height: 25px;">
-					        				</select>
-  										</c:if>
-  										<c:if test="${refundVisit.userType == 'adviser' }">
-  											<input type="radio" name="visitPersonOne" value="teacher" disabled="disabled"/><span>老师</span>
-			  								<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;">
-					        				</select>
-			  								<input type="radio" name="visitPersonOne" value="adviser" checked="checked" disabled="disabled"/><span>课程顾问</span>
-			  								<select id="careAdviserId" name="careAdviserId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled"
-			  									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-	      										onLoadSuccess:function(data){if(data.length > 0) $('#careAdviserId').combobox('setValue', ${refundVisit.visitUserId });}" 
-	      										url="<%=path %>/pubData/qryStaffList.do?schoolId=${obj.refundFeeObj.schoolId }">
-					        				</select>
-  										</c:if>
-		  							</td>
-		  							<td align="right" width="8%"><span>回访时间：</span></td>
-		  							<td width="50%">
-		  								<input name="teacherOrAdviserVisitDate" id="teacherOrAdviserVisitDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 25px;" value="${refundVisit.visitDate }" disabled="disabled"/>
-		  							</td>
-		  						</tr>
-		  						<tr>
-		  							<td align="right" width="10%"><span>回访记录：</span></td>
-		  							<td colspan="3" width="90%">
-		  								<textarea rows="4" cols="122" id="teacherOrAdviserVisitRemark" name="teacherOrAdviserVisitRemark" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${refundVisit.remark }</textarea>
-		  							</td>
-		  						</tr>
-	  						</c:if>
-	  					</c:forEach>
-  					</table>
-  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
-  						<c:forEach items="${obj.refundVisitList }" var="refundVisit">
-	  						<c:if test="${refundVisit.visitType == '002' }">
-		  						<tr>
-		  							<td colspan="4"><span>2、学术或销售主管回访信息：</span></td>
-		  						</tr>
-		  						<tr>
-		  							<td align="right" width="10%"><span>回访人员：</span></td>
-		  							<td width="25%">
-		  								<c:if test="${refundVisit.userType == 'academic' }">
-			  								<input type="radio" name="visitPersonTwo" value="academic" checked="checked" disabled="disabled"/><span>学术主管</span>
-			  								<input type="radio" name="visitPersonTwo" value="sales" disabled="disabled"/><span>销售主管</span>
-		  								</c:if>
-		  								<c:if test="${refundVisit.userType == 'sales' }">
-		  									<input type="radio" name="visitPersonTwo" value="academic" disabled="disabled"/><span>学术主管</span>
-			  								<input type="radio" name="visitPersonTwo" value="sales" checked="checked" disabled="disabled"/><span>销售主管</span>
-		  								</c:if>
-		  								<select id="academicOrSalesId" name="academicOrSalesId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled"
-			  								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-	      									onLoadSuccess:function(data){if(data.length > 0) $('#academicOrSalesId').combobox('setValue', ${refundVisit.visitUserId });}" 
-	      									url="<%=path %>/pubData/qryStaffList.do?schoolId=${obj.refundFeeObj.schoolId }">
-				        				</select>
-		  							</td>
-		  							<td align="right" width="8%"><span>回访时间：</span></td>
-		  							<td width="57%">
-		  								<input name="academicOrSalesVisitDate" id="academicOrSalesVisitDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;" disabled="disabled" value="${refundVisit.visitDate }"/>
-		  							</td>
-		  						</tr>
-		  						<tr>
-		  							<td align="right" width="10%"><span>回访记录：</span></td>
-		  							<td colspan="3" width="90%">
-		  								<textarea rows="4" cols="122" id="academicOrSalesVisitRemark" name="academicOrSalesVisitRemark" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${refundVisit.remark }</textarea>
-		  							</td>
-		  						</tr>
-	  						</c:if>
-	  					</c:forEach>
-  					</table>
-  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
-  						<c:forEach items="${obj.refundVisitList }" var="refundVisit">
-	  						<c:if test="${refundVisit.visitType == '003' }">
-		  						<tr>
-		  							<td colspan="4"><span>3、校区校长回访信息：</span></td>
-		  						</tr>
-		  						<tr>
-		  							<td align="right" width="10%"><span>回访人员：</span></td>
-		  							<td width="8%">
-		  								<select id="headmasterId" name="headmasterId" class="easyui-combobox" style="width: 100px; height: 25px;"
-											data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-		      						 		onLoadSuccess:function(data){$('#headmasterId').combobox('setValue', ${refundVisit.visitUserId });}"
-		      								url="<%=path %>/pubData/qryStaffList.do?schoolId=${obj.refundFeeObj.schoolId }">
-				        				</select>
-		  							</td>
-		  							<td align="right" width="8%"><span>回访时间：</span></td>
-		  							<td width="74%">
-		  								<input name="headmasterVisitDate" id="headmasterVisitDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;" disabled="disabled" value="${refundVisit.visitDate }"/>
-		  							</td>
-		  						</tr>
-		  						<tr>
-		  							<td align="right" width="10%"><span>回访记录：</span></td>
-		  							<td colspan="3" width="90%">
-		  								<textarea rows="4" cols="122" id="headmasterVisitRemark" name="headmasterVisitRemark" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${refundVisit.remark }</textarea>
-		  							</td>
-		  						</tr>
-	  						</c:if>
-	  					</c:forEach>
-  					</table>
-  				</div>
-  				
-  				<div style="height: 10px"></div>
   				<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="审批信息">
   					<div id="headmasterApproveDiv" style=" display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
@@ -373,16 +295,16 @@
 			  				</tr>
 			  				<tr>
 			  					<td align="right" width="8%"><span>审批结果：</span></td>
-			  					<td width="8%"><span></span></td>
+			  					<td width="8%"><span id="headmasterResult"></span></td>
 			  					<td align="right" width="8%"><span>审批时间：</span></td>
-			  					<td width="10%"><span></span></td>
+			  					<td width="10%"><span id="headmasterDate"></span></td>
 			  					<td align="right" width="6%"><span>审批人：</span></td>
-			  					<td width="60%"><span></span></td>
+			  					<td width="60%"><span id="headmasterName"></span></td>
 			  				</tr>
 			  				<tr>
 			  					<td align="right" width="8%"><span>审批备注：</span></td>
 			  					<td width="92%" colspan="5">
-			  						<textarea rows="2" cols="122" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+			  						<textarea rows="2" cols="122" id="headmasterRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -415,16 +337,16 @@
 			  				</tr>
 			  				<tr>
 			  					<td align="right" width="8%"><span>审批结果：</span></td>
-			  					<td width="8%"><span></span></td>
+			  					<td width="8%"><span id="financialResult"></span></td>
 			  					<td align="right" width="8%"><span>审批时间：</span></td>
-			  					<td width="10%"><span></span></td>
+			  					<td width="10%"><span id="financialDate"></span></td>
 			  					<td align="right" width="6%"><span>审批人：</span></td>
-			  					<td width="60%"><span></span></td>
+			  					<td width="60%"><span id="financialName"></span></td>
 			  				</tr>
 			  				<tr>
 			  					<td align="right" width="8%"><span>审批备注：</span></td>
 			  					<td width="92%" colspan="5">
-			  						<textarea rows="2" cols="122" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+			  						<textarea rows="2" cols="122" id="financialRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -457,16 +379,16 @@
 			  				</tr>
 			  				<tr>
 			  					<td align="right" width="8%"><span>审批结果：</span></td>
-			  					<td width="8%"><span></span></td>
+			  					<td width="8%"><span id="chiefFinancialOfficerResult"></span></td>
 			  					<td align="right" width="8%"><span>审批时间：</span></td>
-			  					<td width="10%"><span></span></td>
+			  					<td width="10%"><span id="chiefFinancialOfficerDate"></span></td>
 			  					<td align="right" width="6%"><span>审批人：</span></td>
-			  					<td width="60%"><span></span></td>
+			  					<td width="60%"><span id="chiefFinancialOfficerName"></span></td>
 			  				</tr>
 			  				<tr>
 			  					<td align="right" width="8%"><span>审批备注：</span></td>
 			  					<td width="92%" colspan="5">
-			  						<textarea rows="2" cols="122" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+			  						<textarea rows="2" cols="122" id="chiefFinancialOfficerRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -475,18 +397,23 @@
 					<div id="academicOrSalesApproveDiv" style=" display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
-			  					<td colspan="2"><span>4、学术总监/销售经理审批信息：</span></td>
+			  					<td width="20%" colspan="2"><span>4、学术总监/销售经理审批信息：</span></td>
+			  					<td align="right" width="8%"><span>后续审批人：</span></td>
+			  					<td width="72%">
+			  						<select id="masterType" name="masterType" class="easyui-combobox" style="width: 100px; height: 25px;">
+	  								</select>
+			  					</td>
 			  				</tr>
 			  				<tr>
 			  					<td align="right" width="8%"><span>审批：</span></td>
-			  					<td width="92%">
+			  					<td width="92%" colspan="3">
 				  					<input type="radio" value="Y" name="approveType"/><span>同意</span>
 			      					&nbsp;<input type="radio" value="N" name="approveType"/><span>不同意</span>
 			  					</td>
 			  				</tr>
 			  				<tr>
 			  					<td align="right" width="8%"><span>审批备注：</span></td>
-			  					<td width="92%">
+			  					<td width="92%" colspan="3">
 			  						<textarea rows="4" cols="122" name="approveRemark" class="easyui-validatebox textbox"></textarea>
 			  					</td>
 			  				</tr>
@@ -499,16 +426,16 @@
 			  				</tr>
 			  				<tr>
 			  					<td align="right" width="8%"><span>审批结果：</span></td>
-			  					<td width="8%"><span></span></td>
+			  					<td width="8%"><span id="academicOrSalesResult"></span></td>
 			  					<td align="right" width="8%"><span>审批时间：</span></td>
-			  					<td width="10%"><span></span></td>
+			  					<td width="10%"><span id="academicOrSalesDate"></span></td>
 			  					<td align="right" width="6%"><span>审批人：</span></td>
-			  					<td width="60%"><span></span></td>
+			  					<td width="60%"><span id="academicOrSalesName"></span></td>
 			  				</tr>
 			  				<tr>
 			  					<td align="right" width="8%"><span>审批备注：</span></td>
 			  					<td width="92%" colspan="5">
-			  						<textarea rows="2" cols="122" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+			  						<textarea rows="2" cols="122" id="academicOrSalesRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -541,16 +468,16 @@
 			  				</tr>
 			  				<tr>
 			  					<td align="right" width="8%"><span>审批结果：</span></td>
-			  					<td width="8%"><span></span></td>
+			  					<td width="8%"><span id="regionalPresidentResult"></span></td>
 			  					<td align="right" width="8%"><span>审批时间：</span></td>
-			  					<td width="10%"><span></span></td>
+			  					<td width="10%"><span id="regionalPresidentDate"></span></td>
 			  					<td align="right" width="6%"><span>审批人：</span></td>
-			  					<td width="60%"><span></span></td>
+			  					<td width="60%"><span id="regionalPresidentName"></span></td>
 			  				</tr>
 			  				<tr>
 			  					<td align="right" width="8%"><span>审批备注：</span></td>
 			  					<td width="92%" colspan="5">
-			  						<textarea rows="2" cols="122" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+			  						<textarea rows="2" cols="122" id="regionalPresidentRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -583,16 +510,16 @@
 			  				</tr>
 			  				<tr>
 			  					<td align="right" width="8%"><span>审批结果：</span></td>
-			  					<td width="8%"><span></span></td>
+			  					<td width="8%"><span id="principalResult"></span></td>
 			  					<td align="right" width="8%"><span>审批时间：</span></td>
-			  					<td width="10%"><span></span></td>
+			  					<td width="10%"><span id="principalDate"></span></td>
 			  					<td align="right" width="6%"><span>审批人：</span></td>
-			  					<td width="60%"><span></span></td>
+			  					<td width="60%"><span id="principalName"></span></td>
 			  				</tr>
 			  				<tr>
 			  					<td align="right" width="8%"><span>审批备注：</span></td>
 			  					<td width="92%" colspan="5">
-			  						<textarea rows="2" cols="122" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+			  						<textarea rows="2" cols="122" id="principalRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -606,7 +533,7 @@
 			  				<tr>
 			  					<td align="right" width="8%"><span>已打款：</span></td>
 			  					<td width="92%">
-				  					<input type="checkbox"/>
+				  					<input type="checkbox" name="isTransfer"/>
 			  					</td>
 			  				</tr>
 			  				<tr>
@@ -616,14 +543,14 @@
 			  					</td>
 			  				</tr>
 	  					</table>
-					</div>					
+					</div>	
   				</div>
   			</form>
   		</div>
-  		<div style="margin-top: 20px;min-width:1100px; width:99%;">
+  		<div style="margin-top: 20px;min-width:1100px; width:98%;">
 	      	<div style="float: left;margin-left: 800px;">
 	      		 <a href="javascript:void(0)" id="refundApproveSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a> 
-	       &nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	       		&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
 	      	</div>
 	   </div>
   	</body>

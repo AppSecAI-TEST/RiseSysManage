@@ -1,3 +1,4 @@
+var giftDivHeight = 0;
 $(document).ready(function() {
 	var refundWay = $("#refundWay").val();
 	if("CASH" == refundWay) {
@@ -43,17 +44,42 @@ $(document).ready(function() {
 		$("input", $("#financialConfirmRefundFee" + studentCourseId).next("span")).blur(function() {
 			calculateConfirmRefundAmount(studentCourseId);
 		});
+		
+		$("#refundFeeImgUrl" + studentCourseId).lightBox();
 	});
-	
-	//根据不同的审批人员显示不同的审批信息
-	$("#headmasterApproveDiv").css("display", "block");
 	
 	//提交审批
 	$("#refundApproveSubmit").click(function() {
-		var approveType = $('input:radio[name="approveType"]:checked').val();
-		if(approveType == "" || approveType == null || approveType == undefined || approveType == "null") {
-			$.messager.alert('提示', "请选择是否审批通过！");
+		var flag = true;
+		var masterType = "";
+		var isTransfer = "N";
+		var nextState = $("#nextState").val();
+		if("108" == nextState) {
+			var transfer = $("input:checkbox[name='isTransfer']:checked").val();
+			if(transfer == null || transfer == "" || transfer == undefined) {
+				$.messager.alert('提示', "请选择是否已打款！");
+				flag = false;
+			} else {
+				if(transfer) {
+					isTransfer = "Y";
+				}
+			}
 		} else {
+			var approveType = $('input:radio[name="approveType"]:checked').val();
+			if(approveType == "" || approveType == null || approveType == undefined || approveType == "null") {
+				$.messager.alert('提示', "请选择是否审批通过！");
+				flag = false;
+			} else {
+				if("104" == nextState) {
+					masterType = $("#masterType").combobox("getValue");
+					if(masterType == null || masterType == "" || masterType == undefined) {
+						$.messager.alert('提示', "请选择后续审批人类型！");
+						flag = false;
+					}
+				}
+			}
+		}
+		if(flag) {
 			var obj = $("#refundApproveFm").serializeObject();
 			var approveObj = new Object();
 			var approveRemark = "";
@@ -67,6 +93,11 @@ $(document).ready(function() {
 				}
 			});
 			approveObj.remark = approveRemark;
+			if("104" == nextState) {
+				approveObj.masterType = masterType;
+			} else if("108" == nextState) {
+				approveObj.isTransfer = isTransfer;
+			}
 			var param = JSON.stringify(approveObj);
 			param = encodeURI(param);
 			$.ajax({
@@ -90,6 +121,127 @@ $(document).ready(function() {
 			});
 		}
 	});
+	
+	$("#gift_list_data").datagrid({ 
+		url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1036',studentId:'"+$("#studentId").val()+"'}",
+		onLoadSuccess: function() { 
+			giftDivHeight = $("#giftDiv").height();
+			$("#giftDiv").css("display", "none");
+			$("#gift").html("<span>展开非缴费赠送历史记录</span>");
+		}
+	}); 
+	
+	var refundFeeId = $("#refundFeeId").val();
+	$.ajax({
+		url: "/sys/pubData/qryData.do",
+		data: "param={'refundFeeId':'"+refundFeeId+"', 'funcNodeId':'1037'}",
+		dataType: "json",
+		async: false,
+		success: function (data) {
+			$.each(data, function(i, obj) {
+				if("101" == obj.tacheState) {
+					$("#headmasterResult").html(obj.approveTypeText);
+					$("#headmasterDate").html(obj.createDate);
+					$("#headmasterName").html(obj.handlerName);
+					$("#headmasterRemark").html(obj.remark);
+				} else if("102" == obj.tacheState) {
+					$("#financialResult").html(obj.approveTypeText);
+					$("#financialDate").html(obj.createDate);
+					$("#financialName").html(obj.handlerName);
+					$("#financialRemark").html(obj.remark);
+				} else if("103" == obj.tacheState) {
+					$("#chiefFinancialOfficerResult").html(obj.approveTypeText);
+					$("#chiefFinancialOfficerDate").html(obj.createDate);
+					$("#chiefFinancialOfficerName").html(obj.handlerName);
+					$("#chiefFinancialOfficerRemark").html(obj.remark);
+				} else if("104" == obj.tacheState || "105" == obj.tacheState) {
+					$("#academicOrSalesResult").html(obj.approveTypeText);
+					$("#academicOrSalesDate").html(obj.createDate);
+					$("#academicOrSalesName").html(obj.handlerName);
+					$("#academicOrSalesRemark").html(obj.remark);
+				} else if("106" == obj.tacheState) {
+					$("#regionalPresidentResult").html(obj.approveTypeText);
+					$("#regionalPresidentDate").html(obj.createDate);
+					$("#regionalPresidentName").html(obj.handlerName);
+					$("#regionalPresidentRemark").html(obj.remark);
+				} else if("107" == obj.tacheState) {
+					$("#principalResult").html(obj.approveTypeText);
+					$("#principalDate").html(obj.createDate);
+					$("#principalName").html(obj.handlerName);
+					$("#principalRemark").html(obj.remark);
+				}
+			});
+		} 
+	});
+	
+	//根据不同的审批人员显示不同的审批信息
+	var nextState = $("#nextState").val();
+	var isAcademic = $("#isAcademic").val();
+	var refundRule = $("#refundRule").val();
+	if("100" == nextState || "101" == nextState) {
+		$("#headmasterApproveDiv").css("display", "block");
+	} else if("102" == nextState) {
+		$("#headmasterViewDiv").css("display", "block");
+		$("#financialApproveDiv").css("display", "block");
+	} else if("103" == nextState) {
+		$("#headmasterViewDiv").css("display", "block");
+		$("#financialViewDiv").css("display", "block");
+		$("#chiefFinancialOfficerApproveDiv").css("display", "block");
+	} else if("104" == nextState || "105" == nextState) {
+		$("#masterType").combobox({
+			url : "/sys/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=MASTER_TYPE",//返回json数据的url
+	    	valueField : "codeFlag",
+	    	textField : "codeName",
+	    	panelHeight : "auto"
+		});
+		$("#headmasterViewDiv").css("display", "block");
+		$("#financialViewDiv").css("display", "block");
+		if("SPECIAL_ADJUST" == refundRule) {
+			$("#chiefFinancialOfficerViewDiv").css("display", "block");
+		}
+		$("#academicOrSalesApproveDiv").css("display", "block");
+	} else if("106" == nextState) {
+		$("#headmasterViewDiv").css("display", "block");
+		$("#financialViewDiv").css("display", "block");
+		if("SPECIAL_ADJUST" == refundRule) {
+			$("#chiefFinancialOfficerViewDiv").css("display", "block");
+		}
+		$("#academicOrSalesViewDiv").css("display", "block");
+		$("#regionalPresidentApproveDiv").css("display", "block");
+	} else if("107" == nextState) {
+		$("#headmasterViewDiv").css("display", "block");
+		$("#financialViewDiv").css("display", "block");
+		if("SPECIAL_ADJUST" == refundRule) {
+			$("#chiefFinancialOfficerViewDiv").css("display", "block");
+		}
+		$("#academicOrSalesViewDiv").css("display", "block");
+		var regionalPresidentResult = $("#regionalPresidentResult").html();
+		if(regionalPresidentResult != null && regionalPresidentResult != "" && regionalPresidentResult != undefined) {
+			$("#regionalPresidentViewDiv").css("display", "block");
+		}
+		$("#principalApproveDiv").css("display", "block");
+	} else if("108" == nextState) {
+		$("#headmasterViewDiv").css("display", "block");
+		$("#financialViewDiv").css("display", "block");
+		if("SPECIAL_ADJUST" == refundRule) {
+			$("#chiefFinancialOfficerViewDiv").css("display", "block");
+		}
+		$("#academicOrSalesViewDiv").css("display", "block");
+		var regionalPresidentResult = $("#regionalPresidentResult").html();
+		if(regionalPresidentResult != null && regionalPresidentResult != "" && regionalPresidentResult != undefined) {
+			$("#regionalPresidentViewDiv").css("display", "block");
+		}
+		var principalResult = $("#principalResult").html();
+		if(principalResult != null && principalResult != "" && principalResult != undefined) {
+			$("#principalViewDiv").css("display", "block");
+		}
+		$("#headquartersFinancialApproveDiv").css("display", "block");
+	}
+	
+	var refundImgUrl = $("#refundImg").attr("href");
+	if(refundImgUrl != null && refundImgUrl != "" && refundImgUrl != undefined) {
+		$('#refundImg').lightBox();
+	}
 });
 
 function calculateRefundAmount(studentCourseId) {
@@ -145,4 +297,16 @@ function calculateConfirmRefundAmount(studentCourseId) {
 	});
 	$("#realAmount").val(realAmount);
 	$("#realAmountText").html(realAmount);
+}
+
+function viewGiftHist() {
+	var giftDivDisplay = $("#giftDiv").css("display");
+	if("none" == giftDivDisplay) {
+		$("#giftDiv").height(giftDivHeight);
+		$("#giftDiv").css("display", "block");
+		$("#gift").html("<span>收缩非缴费赠送历史记录</span>");
+	} else {
+		$("#giftDiv").css("display", "none");
+		$("#gift").html("<span>展开非缴费赠送历史记录</span>");
+	}
 }

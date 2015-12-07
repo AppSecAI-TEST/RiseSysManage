@@ -127,7 +127,7 @@
 							<td colspan="4">
 								<input type="checkbox" name="refundState" value="'001'"/><span>已申请</span>
 								<input type="checkbox" name="refundState" value="'002'"/><span>审批中</span>
-								<input type="checkbox" name="refundState" value="'003'"/><span>审批通过</span>
+								<input type="checkbox" name="refundState" value="'003'"/><span>打款中</span>
 								<input type="checkbox" name="refundState" value="'004'"/><span>审批未通过</span>
 								<input type="checkbox" name="refundState" value="'006'"/><span>成功退费</span>
 								<input type="checkbox" name="refundState" value="'007'"/><span>取消</span>
@@ -219,11 +219,10 @@
 							<td colspan="6">
 								<input type="checkbox" name="approveRefundState" value="'001'"/><span>已申请</span>
 								<input type="checkbox" name="approveRefundState" value="'002'"/><span>审批中</span>
-								<input type="checkbox" name="approveRefundState" value="'003'"/><span>审批通过</span>
+								<input type="checkbox" name="approveRefundState" value="'003'"/><span>打款中</span>
 								<input type="checkbox" name="approveRefundState" value="'004'"/><span>审批未通过</span>
-								<input type="checkbox" name="approveRefundState" value="'005'"/><span>打款中</span>
-								<input type="checkbox" name="approveRefundState" value="'006'"/><span>成功退费</span>
-								<input type="checkbox" name="approveRefundState" value="'007'"/><span>取消</span>
+								<input type="checkbox" name="approveRefundState" value="'005'"/><span>成功退费</span>
+								<input type="checkbox" name="approveRefundState" value="'006'"/><span>取消</span>
 							</td>
 						</tr>
     				</table>
