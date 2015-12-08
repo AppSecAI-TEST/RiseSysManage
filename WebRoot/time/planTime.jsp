@@ -385,7 +385,7 @@ function endEditing(tab)
 			if(choose=='' && schooltimeInstId!=undefined)
 			{
 				var classInstId=rowVal.classInstId;
-				deletePlanTime(schooltimeInstId,classInstId);
+				deletePlanTime(schooltimeInstId);
 				return;
 			}
 			
@@ -449,7 +449,7 @@ function endEditing(tab)
 
 function deletePlanTime(schooltimeId,classInstId)
 {
-		var param="{classInstId="+classInstId+",schooltimeInstId="+schooltimeId+",createWeekId="+<%=createWeekId%>+"}";
+		var param="{schooltimeInstId="+schooltimeId+",createWeekId="+<%=createWeekId%>+"}";
 		$.ajax({
 			type : "POST",
 			url: "/sys/time/delete.do",
@@ -489,7 +489,7 @@ function addPlanTime(planT,tab)
 		}
 		 
 	}
-	 	alert(JSON.stringify(planT));
+	  
 	$.ajax(
 	{
 		type : "POST",
