@@ -56,6 +56,7 @@ function updateClassNumSubmit()
 {
 	if($("#classFm").form('validate')){
 		var obj = $("#classFm").serializeObject();
+		obj.handlerId = $("#handlerId").val();
 		var json = JSON.stringify(obj);
 		var maxNum = obj.maxNum;
 		var minNum = obj.minNum;

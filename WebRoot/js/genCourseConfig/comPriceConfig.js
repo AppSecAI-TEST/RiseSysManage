@@ -5,7 +5,7 @@ $(document).ready(function(){
     $('#tt').tabs({
 	    border:false,
 	    onSelect:function(title,index){
-	       if(index == 2 && qryComFlag){
+	       if(index == 3 && qryComFlag){
 			    $('#common_data').datagrid({  
 					border:true,  
 				    fitColumns:true,  

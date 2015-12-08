@@ -47,24 +47,21 @@
   							<td align="right"><span>业绩类型：</span></td>
 		  					<td width="100px">
 								<select id="feeType" name="feeType" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-				      				onLoadSuccess:function(data){if(data.length > 0) $('#feeType').combobox('setValue',data[0].codeFlag);}" 
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
 				        		</select>
 							</td>
 							<td align="right"><span>转校状态：</span></td>
 							<td width="100px">
 								<select id="changeSchoolState" name="changeSchoolState" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-				      				onLoadSuccess:function(data){if(data.length > 0) $('#changeSchoolState').combobox('setValue',data[0].codeFlag);}" 
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=CHANGE_T&codeType=APPLY_CHANGE_STATE">
 				        		</select>
 							</td>
 							<td align="right"><span>转出班老师：</span></td>
 							<td width="100px">
 								<select id="outTeacherId" name="outTeacherId" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-	      							onLoadSuccess:function(data){if(data.length > 0) $('#outTeacherId').combobox('setValue',data[0].teacherId);}" 
+									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'" 
 	      							url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}&classType=">
 				        		</select>
 							</td>
@@ -83,16 +80,14 @@
   							<td align="right"><span>转出校区：</span></td>
 			  				<td width="100px">
 								<select id="outSchoolId" name="outSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-					      			onLoadSuccess:function(data){if(data.length > 0) $('#outSchoolId').combobox('setValue',data[0].schoolId);}"
+									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 					      			url="<%=path %>/pubData/qrySchoolList.do">
 				        		</select>
 							</td>
 							<td align="right"><span>转入校区：</span></td>
 							<td width="100px">
 								<select id="inSchoolId" name="inSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-						      		onLoadSuccess:function(data){if(data.length > 0) $('#inSchoolId').combobox('setValue',data[0].schoolId);}"
+									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 						      		url="<%=path %>/pubData/qrySchoolList.do">
 				        		</select>
 							</td>
@@ -186,16 +181,14 @@
   							<td align="right"><span>转出校区：</span></td>
 			  				<td width="100px">
 								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-						      		onLoadSuccess:function(data){if(data.length > 0) $('#approveSchoolId').combobox('setValue',data[0].schoolId);}"
+									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 						      		url="<%=path %>/pubData/qrySchoolList.do">
 				        		</select>
 							</td>
 		  					<td align="right"><span>转入校区：</span></td>
 							<td width="100px">
 								<select id="approveInschoolId" name="approveInschoolId" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-						      		onLoadSuccess:function(data){if(data.length > 0) $('#approveInschoolId').combobox('setValue',data[0].schoolId);}"
+									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 						      		url="<%=path %>/pubData/qrySchoolList.do">
 				        		</select>
 							</td>
@@ -212,8 +205,7 @@
 							<td align="right"><span>审批状态：</span></td>
 							<td width="100px">
 								<select id="approveState" name="approveState" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-				      				onLoadSuccess:function(data){if(data.length > 0) $('#approveState').combobox('setValue',data[0].codeFlag);}" 
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=CHANGE_T&codeType=APPROVE_CHANGE_STATE">
 				        		</select>
 							</td>
@@ -225,7 +217,7 @@
   					</table>
   				</form>
   				<div style="padding:5px 0;min-width:1100px; width:100%;">
-				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="approve_list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1017" 
+				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="approve_list_data" 
 				  		toolbar="#toolbarApprove" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>

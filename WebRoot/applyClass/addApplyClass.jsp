@@ -24,12 +24,12 @@
   					<tr>
   						<td align="right" width="12%"><span>课程阶段：</span></td>
   						<td width="10%">
-  							<select name="stageId" id="stageId" class="easyui-combobox" style="width: 100px; height: 28px;">
+  							<select name="stageId" id="stageId" class="easyui-combobox" style="width: 100px; height: 28px;" required="true" >
         					</select>
   						</td>
   						<td align="right" width="12%"><span>班级类型：</span></td>
   						<td width="10%">
-  							<select name="classType" id="classType" class="easyui-combobox" style="width: 100px; height: 28px;">
+  							<select name="classType" id="classType" class="easyui-combobox" style="width: 100px; height: 28px;" required="true" >
         					</select>
   						</td>
   						<td align="right" width="8%"><span>班级名称：</span></td>
@@ -45,20 +45,19 @@
   						</td>
   						<td align="right" width="12%"><span>学员来源类型：</span></td>
   						<td width="10%">
-  							<select name="studentChannelType" id="studentChannelType" class="easyui-combobox" style="width: 100px; height: 28px;">
+  							<select name="studentChannelType" id="studentChannelType" class="easyui-combobox" style="width: 100px; height: 28px;" required="true">
         					</select>
   						</td>
   						<td align="right" width="8%"><span id="higherText" style="display: none;">升学班级：</span></td>
   						<td colspan="3" width="48%">
   							<div id="higherDiv" style="display: none;">
 	  							<select id="higherOptionSchoolId" class="easyui-combobox" style="width: 100px; height: 28px;" editable="false" 
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto', 
-								onLoadSuccess:function(data){$('#higherOptionSchoolId').combobox('setValue',data[0].schoolId);}"	
-								url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
+									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"	
+									url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
 		     					</select>
-		     					<select id="higherOptionStageId" class="easyui-combobox" style="width: 100px; height: 28px;">
+		     					<select id="higherOptionStageId" class="easyui-combobox" style="width: 100px; height: 28px;" editable="false" >
 	        					</select>
-	        					<select id="higherOptionClassInstId" class="easyui-combobox" style="width: 100px; height: 28px;">
+	        					<select id="higherOptionClassInstId" class="easyui-combobox" style="width: 100px; height: 28px;" editable="false" >
 	        					</select>
 	        					<a href="javascript:void(0)" id="addHigherSchoolBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a>
   							</div>
@@ -83,17 +82,16 @@
   					<tr>
   						<td align="right" width="12%"><span>上课时段：</span></td>
   						<td colspan="3" width="32%">
-  							<select id="weekTime" class="easyui-combobox" style="width: 100px; height: 28px;">
+  							<select id="weekTime" class="easyui-combobox" style="width: 100px; height: 28px;" editable="false" >
 	        				</select>
-	        				<select name="hourRange" id="hourRange" class="easyui-combobox" style="width: 150px; height: 28px;">
+	        				<select name="hourRange" id="hourRange" class="easyui-combobox" style="width: 150px; height: 28px;" editable="false" >
 	        				</select>
   						</td>
   						<td align="right" width="8%"><span>教室：</span></td>
   						<td width="6%">
-  							<select id="roomId" class="easyui-combobox" style="width: 80px; height: 28px;"
-		      					data-options="formatter:formatRoom, valueField: 'roomId', textField: 'roomName', panelHeight: 'auto',
-		      					onLoadSuccess:function(data){$('#roomId').combobox('setValue',data[0].roomId);}" 
-		      					url="<%=path %>/pubData/qryRoomList.do?schoolId=${sessionScope.StaffT.schoolId}" editable="false">
+  							<select id="roomId" class="easyui-combobox" style="width: 80px; height: 28px;" editable="false" 
+		      					data-options="formatter:formatRoom, valueField: 'roomId', textField: 'roomName', panelHeight: 'auto'" 
+		      					url="<%=path %>/pubData/qryRoomList.do?schoolId=${sessionScope.StaffT.schoolId}">
 	        				</select>
   						</td>
   						<td colspan="2" align="center" width="42%">
@@ -127,41 +125,10 @@
   							</table>
   						</td>
   					</tr>
-  					<!-- 
-  					<tr style="display:none;" id="addSchootimeTr">
-  						<td align="right" width="12%"><span>上课时段：</span></td>
-  						<td width="10%" colspan="2"><span id="hourRangeText"></span></td>
-  						<td colspan="3" width="24">
-  							<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
-  								<tr height="34px">
-  									<td align="right" width="6%" style="border-bottom:0px solid #ccc; border-top:0px solid #ccc;border-right:1px solid #ccc; border-left:0px solid #ccc;"><span>教室：</span></td>
-				  					<td width="6%" style="border-bottom:0px solid #ccc; border-top:0px solid #aaa;border-right:1px solid #ccc; border-left:0px solid #ccc;"><span id="RoomText"></span></td>
-				  					<td align="right" width="6%" style="border-bottom:0px solid #ccc; border-top:0px solid #aaa;border-right:1px solid #ccc; border-left:0px solid #ccc;"><span>课时：</span></td>
-				  					<td width="6%" style="border-bottom:0px solid #ccc; border-top:0px solid #aaa;border-right:0px solid #ccc; border-left:0px solid #ccc;"><span id="lessionHoursText"></span></td>
-  								</tr>
-  							</table>
-  						</td>
-	  					<td align="right" width="10%"><span>带班老师：</span></td>
-	  					<td width="32%">
-		     				<select name="teacherId" class="easyui-combobox" style="width: 80px; height: 28px;"
-		     				data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-		      				onLoadSuccess:function(data){$('#teacherId').combobox('setValue',data[0].teacherId);}" 
-		      				url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}">
-		     				</select>
-		     				<span>课时：</span>
-		     				<input name="lessions" id="lessions" type="text" class="easyui-numberbox" data-options="min:1,max:4" required="true" style="width: 60px; height: 28px;"/>
-		     				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px; height: 28px;" onclick="addTeacher(this)">添加老师</a>
-	  					</td>
-  					</tr>
-  					<tr style="display:none;" id="addTeacherTr">
-  						<td align="right" width="12%"><span>带班老师：</span></td>
-  						<td colspan="7" width="88%"><span id="addTeacherText"></span></td>
-  					</tr>
-  					 -->
   					<tr>
 	      				<td align="right" width="12%"><span>备注：</span></td>
 	      				<td colspan="7" width="88%">
-	      					<textarea rows="6" cols="122" id="remark" name="remark" required="true" class="easyui-validatebox textbox"></textarea>
+	      					<textarea rows="6" cols="122" id="remark" name="remark" class="easyui-validatebox textbox"></textarea>
 	      				</td>
 	      			</tr>
   				</table>

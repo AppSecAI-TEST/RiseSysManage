@@ -9,12 +9,6 @@ $(document).ready(function() {
     	textField : "codeName",
     	panelHeight : "auto",
     	editable : false,
-    	onLoadSuccess : function () { //数据加载完毕事件
-            var data = $('#studentChannelType').combobox('getData');
-            if (data.length > 0) {
-                $("#studentChannelType").combobox('select', data[0].codeFlag);
-            }
-        },
 		onChange : function(n, o) {
 			//新招
 			if("001" == n) {
@@ -33,12 +27,6 @@ $(document).ready(function() {
     	textField : "stageId",
     	panelHeight : "auto",
     	editable : false,
-    	onLoadSuccess : function () { //数据加载完毕事件
-            var data = $('#stageId').combobox('getData');
-            if (data.length > 0) {
-                $("#stageId").combobox('select', data[0].stageId);
-            }
-        },
 		onChange : function(n, o) {
 			var schooolId = $("#schoolId").val();
 			var date = new Date().format("yyyy-MM-dd");
@@ -48,31 +36,22 @@ $(document).ready(function() {
         		textField : "classType",
         		panelHeight : "auto",
         		editable : false,
-        		onLoadSuccess : function () { //数据加载完毕事件
-                    var data = $('#classType').combobox('getData');
-                    if (data.length > 0) {
-                        $("#classType").combobox('select', data[0].classType);
-                    }
-                }
+        		onChange : function(newValue, oldValue) {
+        			var courseType = $('#courseType').val();
+        			var stageId = $("#stageId").combobox("getValue");
+        			$.ajax({
+        				url : "/sys/applyClass/qryClassName.do",
+        				data: "courseType="+courseType+"&stageId="+stageId+"&classType="+newValue,
+        				dataType: "json",
+        				async: false,
+        				success: function (data) {
+        					$("#classNameText").html(data.className);
+        					$("#className").val(data.className);
+        					$("#classOrder").val(data.classOrder);
+        				}
+        			});
+        		}
         	});
-		}
-	});
-	
-	$("#classType").combobox({
-		onChange : function(n, o) {
-			var courseType = $('#courseType').val();
-			var stageId = $("#stageId").combobox("getValue");
-			$.ajax({
-				url : "/sys/applyClass/qryClassName.do",
-				data: "courseType="+courseType+"&stageId="+stageId+"&classType="+n,
-				dataType: "json",
-				async: false,
-				success: function (data) {
-					$("#classNameText").html(data.className);
-					$("#className").val(data.className);
-					$("#classOrder").val(data.classOrder);
-				}
-			});
 		}
 	});
 
@@ -82,12 +61,6 @@ $(document).ready(function() {
     	textField : "codeName",
     	panelHeight : "auto",
     	editable : false,
-    	onLoadSuccess : function () { //数据加载完毕事件
-            var data = $('#higherOptionStageId').combobox('getData');
-            if (data.length > 0) {
-                $("#higherOptionStageId").combobox('select', data[0].codeFlag);
-            }
-        },
 		onChange : function(n, o) {
 			var higherOptionSchoolId = $("#higherOptionSchoolId").combobox("getValue");
 			$("#higherOptionClassInstId").combobox({
@@ -95,13 +68,7 @@ $(document).ready(function() {
         		valueField : "classInstId",
         		textField : "className",
         		panelHeight : "auto",
-        		editable : false,
-        		onLoadSuccess : function () { //数据加载完毕事件
-                    var data = $('#higherOptionClassInstId').combobox('getData');
-                    if (data.length > 0) {
-                        $("#higherOptionClassInstId").combobox('select', data[0].classInstId);
-                    }
-                }
+        		editable : false
 			});
 		}
 	});
@@ -369,6 +336,7 @@ $(document).ready(function() {
 	
 	//提交放班申请
 	$("#applyClassSubmit").click(function() {
+		alert($("#applyClassFm").form('validate'))
 		if($("#applyClassFm").form('validate')) {
 			var flag = true;
 			var studentChannelType = $("#studentChannelType").combobox("getValue");

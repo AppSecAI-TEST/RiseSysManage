@@ -111,7 +111,8 @@
 		  			</table>
 		  		</form>
 		  		<div style="padding:5px 0;min-width:1100px; width:100%;">
-				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="apply_list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1012" 
+				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="apply_list_data" 
+				  		url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1012" 
 				  		toolbar="#toolbarApply" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
@@ -184,8 +185,7 @@
 		  					<td align="right"><span>课程阶段：</span></td>
 							<td width="100px">
 								<select id="approveStageId" name="approveStageId" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
-				      				onLoadSuccess:function(data){if(data.length > 0) $('#approveStageId').combobox('setValue',data[0].stageId);}" 
+									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryStage.do">
 				        		</select>
 							</td>
@@ -202,8 +202,7 @@
 							<td align="right"><span>审批状态：</span></td>
 							<td width="100px">
 								<select id="approveState" name="approveState" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-				      				onLoadSuccess:function(data){if(data.length > 0) $('#approveState').combobox('setValue',data[0].codeFlag);}" 
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=CHANGE_T&codeType=APPROVE_CHANGE_STATE">
 				        		</select>
 							</td>
@@ -215,7 +214,7 @@
 		  			</table>
 		  		</form>
 		  		<div style="padding:5px 0;min-width:1100px; width:100%;">
-				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="approve_list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1014" 
+				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="approve_list_data" 
 				  		toolbar="#toolbarApprove" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>

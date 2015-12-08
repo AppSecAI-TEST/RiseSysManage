@@ -46,6 +46,47 @@ $(document).ready(function() {
 		}
 	});
 	
+	var studentId = $("#studentId").val();
+	$("#course_list_data").datagrid({ 
+		url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1016',studentId:'"+studentId+"'}",
+		onLoadSuccess: function() { 
+			var rows = $("#course_list_data").datagrid('getRows');
+			if(parseInt(rows.length) <= 0) {
+				$("#courseTr").css("display", "none");
+			}
+		}
+	});
+	
+	$("#international_list_data").datagrid({ 
+		url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1038',studentId:'"+studentId+"'}",
+		onLoadSuccess: function() { 
+			var rows = $("#international_list_data").datagrid('getRows');
+			if(parseInt(rows.length) <= 0) {
+				$("#internationalTr").css("display", "none");
+			}
+		}
+	});
+	
+	$("#travel_list_data").datagrid({ 
+		url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1039',studentId:'"+studentId+"'}",
+		onLoadSuccess: function() { 
+			var rows = $("#travel_list_data").datagrid('getRows');
+			if(parseInt(rows.length) <= 0) {
+				$("#travelTr").css("display", "none");
+			}
+		}
+	});
+	
+	$("#gift_list_data").datagrid({ 
+		url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1030',studentId:'"+studentId+"'}",
+		onLoadSuccess: function() { 
+			var rows = $("#gift_list_data").datagrid('getRows');
+			if(parseInt(rows.length) <= 0) {
+				$("#giftTr").css("display", "none");
+			}
+		}
+	});
+	
 	//查看转校历史信息
 	$("#viewChangeSchoolList").click(function() {
 		var studentId = $("#studentId").val();

@@ -116,5 +116,11 @@ public class GenCourseService {
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS15016\",securityCode:\"0000000000\",params:{stageId:'"+stageId+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
+
+	//修改教质时间轴配置
+	public String updateClassPlan(String json)throws Exception {
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS15017\",securityCode:\"0000000000\",params:{json:'"+json+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
 	
 }
