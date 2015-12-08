@@ -38,6 +38,9 @@
 			<tr>
 				<td colspan="3"><select id="schoolId" name="schoolId" style="width:120px" ></select>&nbsp;&nbsp;<select id="teacherId" name="teacherId" style="width:120px" ></select>&nbsp;&nbsp;<a href="javascript:void(0)" id="addTeacherBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;" onclick="addTeacherFunc()">添加</a></td>
 			</tr>
+			<tr id="emptyTeacher">
+				<td colspan="3" align="center">暂未安排老师</td>
+			</tr>
 		</table>
 		<table region="center" class="tab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
@@ -107,6 +110,10 @@
 				}
 				else
 				{
+					if($(".teacherId").length == 0)
+					{
+						$("#emptyTeacher").remove();
+					}
 					ajaxLoading("添加中...");
 					$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:teacherId},function(data){
 						ajaxLoadEnd();
@@ -118,6 +125,10 @@
 			function delTeacherFunc(flagVal)
 			{
 				$("#teacherId"+flagVal).remove();
+				if($(".teacherId").length == 0)
+				{
+					$("#teacherList tr:last").after("<tr id='emptyTeacher'><td colspan='3' align='center'>暂未安排老师</td></tr>");
+				}
 			}
 			function addSubmitFunc()
 			{

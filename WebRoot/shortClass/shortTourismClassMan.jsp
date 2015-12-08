@@ -16,51 +16,35 @@
   	<body class="manage">
 		<table align="center" class="tab" style="height:90px;width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
-				<td align="right" width="15%">国际班类型：</td>
-				<td width="18%">${shortClassInstT.shortClassTypeT.classType}</td>
+				<td align="right" width="15%">游学类型：</td>
+				<td width="18%"><select name="tourismClassType" id="tourismClassType" style="width:150px" ></select></td>
 				<td align="right" width="15%">班级名称：</td>
-				<td width="18%">${shortClassInstT.className}</td>
-				<td align="right" width="15%">开课日期：</td>
-				<td width="18%"><input name="classStartTime" id="classStartTime" type="text" style="width:150px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /></td>
+				<td width="18%"><input name="className" id="className" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" /></td>
+				<td align="right" width="15%">计划招生人数：</td>
+				<td width="18%"><input name="planClassNum" id="planClassNum" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" /></td>
 			</tr>
 			<tr>
-				<td align="right">国际班上课校区：</td>
-				<td>${shortClassInstT.schoolT.schoolName}</td>
-				<td align="right">计划总课时量：</td>
-				<td><input name="planHours" id="planHours" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" /></td>
-				<td align="right">结课日期：</td>
-				<td><input name="classEndTime" id="classEndTime" type="text" style="width:150px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /></td>
+				<td align="right">游学开始日期：</td>
+				<td><input name="classStartTime" id="classStartTime" type="text" style="width:150px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /></td>
+				<td align="right">游学结束日期：</td>
+				<td><input name="classEndTime" id="classEndTime" type="text" style="width:150px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /></td>				
+				<td align="right">&nbsp;</td>
+				<td>&nbsp;</td>
 			</tr>
 		</table>
-		<div style="margin:0 auto;padding:0 0;text-align:left;padding-right:2px;width:99%;margin-top:5px">
-			<a href="javascript:void(0)" id="addPlanBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px;" onclick="addPlanFunc()">添加上课计划</a>
-		</div>
-		<table region="center" class="tab" id="schooltimeList" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+		<table region="center" class="tab" id="teacherList" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td colspan="3"><select id="schoolId" name="schoolId" style="width:120px" ></select>&nbsp;&nbsp;<select id="teacherId" name="teacherId" style="width:120px" ></select>&nbsp;&nbsp;<a href="javascript:void(0)" id="addTeacherBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;" onclick="addTeacherFunc()">添加</a></td>
+			</tr>
 			<c:choose>
-				<c:when test="${fn:length(shortClassInstT.classSchooltimeList) == 0}">
-					<tr>
-						<td colspan="9" align="center">暂无上课计划</td>
+				<c:when test="${fn:length(shortClassTeacherTList) == 0}">
+					<tr id="emptyTeacher">
+						<td colspan="3" align="center">暂无安排老师</td>
 					</tr>
 				</c:when>
 				<c:otherwise>
-					<c:forEach items="${shortClassInstT.classSchooltimeList}" var="node" varStatus="i">
-						<tr class="shortSchooltimeId" id="shortSchooltimeId${node.shortSchooltimeId}">
-							<td align="right">上课计划：</td>
-							<td><fmt:formatDate value="${node.schooltime}" pattern="yyyy-MM-dd" /> ${node.hourRangeObj.paramDesc}</td>
-							<td align="right">教室：</td>
-							<td>${node.roomT.roomName}</td>
-							<td align="right">课时：</td>
-							<td>${node.lessionHours}</td>
-							<td align="right">老师：</td>
-							<td>
-								<ul>
-									<c:forEach items="${node.classTeacherList}" var="item" varStatus="i">
-										<li><span>${item.teacherT.byName}</span><span style="padding-left:15px">${item.teacherType}</span></li>
-									</c:forEach>
-								</ul>
-							</td>
-							<td><a href="javascript:void(0)" onclick="delShortSchooltime(${node.shortSchooltimeId})">删除</a></td>
-						</tr>
+					<c:forEach items="${shortClassTeacherTList}" var="node" varStatus="i">
+						<tr id='teacherId${node.teacherT.teacherId}' class='teacherId'><td align='center' width='15%' shortClassTeacherId='${node.shortClassTeacherId}' teacherId='${node.teacherT.teacherId}' schoolId='${node.schoolId}'>${node.schoolT.schoolName}</td><td align='center' width='15%'>${node.teacherT.teacherName}</td><td width='70%' style='padding-left:30px'><a href='javascript:void(0)' onclick='delTeacherFunc("${node.teacherT.teacherId}")'>删除</a></td></tr>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
@@ -114,46 +98,103 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
+			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+				$("#schoolId").combobox("loadData",data);
+			},"json");
+			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("游学"),function(data){
+				$("#tourismClassType").combobox("loadData",data);
+			},"json");
 			$(document).ready(function(){
-				$("#planHours").textbox("setValue","${shortClassInstT.planHours}");
+				$("#schoolId").combobox({
+					formatter:formatSchool, 
+					valueField: 'schoolId', 
+					textField: 'schoolName', 
+					//panelHeight: 'auto',
+					listHeight:150,
+					onSelect:function(data){
+						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:data.schoolId},function(data){
+							$("#teacherId").combobox("loadData",data);
+						},"json");
+					},
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+						{
+							$("#schoolId").combobox("setValue",data.schoolId);
+						}
+					}
+				});
+				$("#tourismClassType").combobox({
+					formatter:function(data){
+						return '<span>'+data.classType+'</span>';
+					}, 
+					valueField: 'classTypeId', 
+					textField: 'classType',
+					panelHeight: 'auto'
+				});
+				$("#teacherId").combobox({
+					formatter:formatTeacherName,
+					valueField: 'teacherId', 
+					textField: 'teacherName', 
+					//panelHeight: 'auto',
+					listHeight:150
+				});
+				$("#tourismClassType").combobox("setValue","${shortClassInstT.classTypeId}");
+				$("#className").textbox("setValue","${shortClassInstT.className}");
+				$("#planClassNum").textbox("setValue","${shortClassInstT.planClassNum}");
 				$("#classStartTime").datebox("setValue","<fmt:formatDate value='${shortClassInstT.openDate}' pattern='yyyy-MM-dd' />");
 				$("#classEndTime").datebox("setValue","<fmt:formatDate value='${shortClassInstT.finishDate}' pattern='yyyy-MM-dd' />");
 			});
 			function addSubmitFunc()
 			{
 				var shortClassInstId = "${shortClassInstT.shortClassInstId}";
+				var className = $("#className").textbox("getValue");
+				var tourismClassType = $("#tourismClassType").combobox("getValue");
 				var classStartTime = $("#classStartTime").datebox("getValue");
-				var planHours = $("#planHours").textbox("getValue");
+				var planClassNum = $("#planClassNum").textbox("getValue");
 				var classEndTime = $("#classEndTime").combobox("getValue");
 				if(classStartTime == "")
 				{
 					$.messager.alert('提示',"开课日期不能为空,请核实后重新尝试","info");
 				}
-				else if(planHours == "")
+				else if(planClassNum == "")
 				{
-					$.messager.alert('提示',"计划总课时量不能为空,请核实后重新尝试","info");
+					$.messager.alert('提示',"计划招生人数不能为空,请核实后重新尝试","info");
 				}
 				else if(classEndTime == "")
 				{
 					$.messager.alert('提示',"结课日期不能为空,请核实后重新尝试","info");
 				}
-				else if($(".shortSchooltimeId").length == 0)
-				{
-					$.messager.alert('提示',"上课计划不能为空,请核实后重新尝试","info");
-				}
-				else if($(".studentId").length == 0)
+				else if($(".teacherId").length == 0)
              	{
-             		$.messager.alert('提示',"上课学员不能为空,请核实后重新尝试","info");
+             		$.messager.alert('提示',"上课老师不能为空,请核实后重新尝试","info");
              	}
 				else
 				{
 					var json = {
 						shortClassInstId:shortClassInstId,
-						planHours:planHours,
+						className:className,
+						classTypeId:tourismClassType,
+						planClassNum:planClassNum,
 						openDate:classStartTime,
 						finishDate:classEndTime,
-						handlerId:${sessionScope.StaffT.staffId}
+						handlerId:${sessionScope.StaffT.staffId},
+						teacherList:null
 					};
+					var arr = [];
+					$(".teacherId").each(function(i,node){
+						var teacherObj = $(node).find("td:eq(0)");
+						var obj = {
+							shortClassTeacherId:teacherObj.attr("shortClassTeacherId"),
+							shortClassInstId:shortClassInstId,
+							teacherId:teacherObj.attr("teacherId"),
+							teacherType:"",
+							lessionHours:"",
+							schoolId:teacherObj.attr("schoolId"),
+							handlerId:${sessionScope.StaffT.staffId},
+						};
+						arr.push(obj);
+					});
+					json.teacherList = arr;
 					ajaxLoading("修改中...");
 					$.post("/sys/shortBus/updateShortClassInstTInfo.do",{json:JSON.stringify(json)},function(data){
 						ajaxLoadEnd();
@@ -170,43 +211,15 @@
 					});
 				}
 			}
-			function addPlanFunc()
-			{
-				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageFlag=MAN";
-			}
 			function studentBoxFunc(obj)
 			{
 				$("input[name='studentId']").each(function(i,node){
 					node.checked = obj.checked;
 				});
 			}
-			function delShortSchooltime(val)
-			{
-				$.messager.confirm("提示", "您确定要删除该上课计划吗？", function (data) {
-		            if(data){
-		            	ajaxLoading("删除中...");
-		                $.post("/sys/shortBus/delShortSchooltimeTInfo.do",{shortSchooltimeId:val},function(data){
-		                	ajaxLoadEnd();
-		                	if(data == "success")
-		                	{
-		                		$("#shortSchooltimeId"+val).remove();
-		                		if($(".shortSchooltimeId").length == 0)
-		                		{
-		                			$("#schooltimeList").prepend("<tr><td colspan='9' align='center'>暂无上课计划</td></tr>");
-		                		}
-		                	}
-		                	else
-		                	{
-		                		$.messager.alert('提示',"删除上课计划失败:"+data,"error");
-		                	}
-		                });
-		            }
-		        });
-			}
 			function selectClassFunc()
 			{
-				window.location.href = "/sys/shortClass/choiceClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortClassMan&classType="+encodeURI("国际班");
-				//window.location.href = "/sys/shortClass/choiceClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}";
+				window.location.href = "/sys/shortClass/choiceClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortTourismClassMan&classType="+encodeURI("游学");
 			}
 			function removeClassFunc()
 			{
@@ -248,13 +261,47 @@
 			        });
 				}
 			}
+			function addTeacherFunc()
+			{
+				var schoolId = $("#schoolId").combobox("getValue");
+				var teacherId = $("#teacherId").combobox("getValue");
+				if(schoolId == "")
+				{
+					$.messager.alert('提示',"请先选择校区后重新尝试");
+				}
+				else if(teacherId == "")
+				{
+					$.messager.alert('提示',"请先选择老师后重新尝试");
+				}
+				else
+				{
+					if($(".teacherId").length == 0)
+					{
+						$("#emptyTeacher").remove();
+					}
+					ajaxLoading("添加中...");
+					$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:teacherId},function(data){
+						ajaxLoadEnd();
+						var trData = "<tr id='teacherId"+data.teacherId+"' class='teacherId'><td align='center' width='15%' teacherId='"+data.teacherId+"' schoolId='"+data.schoolId+"'>"+$("#schoolId").combobox("getText")+"</td><td align='center' width='15%'>"+$("#teacherId").combobox("getText")+"</td><td align='left' width='70%' style='padding-left:30px'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
+						$("#teacherList tr:last").after(trData);
+					},"json");
+				}
+			}
+			function delTeacherFunc(flagVal)
+			{
+				$("#teacherId"+flagVal).remove();
+				if($(".teacherId").length == 0)
+				{
+					$("#teacherList tr:last").after("<tr id='emptyTeacher'><td colspan='3' align='center'>暂未安排老师</td></tr>");
+				}
+			}
 			function viewClassFunc()
 			{
 				
 			}
 			function backFunc()
 			{
-				window.location.href = "/sys/shortClass/interClassMan.jsp?funcNodeId=${funcNodeId}";
+				window.location.href = "/sys/shortClass/tourismClassMan.jsp?funcNodeId=${funcNodeId}";
 			}
 		</script>
  	</body>

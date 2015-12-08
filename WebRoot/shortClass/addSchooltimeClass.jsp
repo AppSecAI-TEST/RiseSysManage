@@ -204,7 +204,7 @@
 				}
 				else
 				{
-					window.location.href = "/sys/shortBus/shortClassManInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId=${param.shortClassInstId}";				
+					window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId=${param.shortClassInstId}&pageName=shortClassMan&classType="+encodeURI("国际班");				
 				}
 			}
 		</script>

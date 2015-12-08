@@ -17,6 +17,7 @@
   	</head>
   	<body>
 		<form id="manFm" style="margin:0 auto;">
+			<input type="hidden" name="classType" id="classType" value="${param.classType}" />
 			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 				<tr>
 					<td align="right">
@@ -46,10 +47,10 @@
 						<select id="schoolManId" name="schoolManId" style="width:150px" ></select>
 					</td>
 					<td align="right">
-						国际班类型：
+						班级类型：
 					</td>
 					<td>
-						<select id="interClassType" name="interClassType" style="width:150px" ></select>										
+						<select id="shortClassType" name="shortClassType" style="width:150px" ></select>										
 					</td>
 					<td colspan="2" align="center">
 						<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
@@ -66,7 +67,7 @@
 						<th width="14%" field="name">学员姓名</th>
 						<th width="16%" field="identityId">证件号码</th>
 						<th width="14%" field="schoolName">校区</th>
-						<th width="14%" field="classType">国际班类型</th>
+						<th width="14%" field="classType">班级类型</th>
 						<th width="14%" field="payDate">缴费日期</th>
 						<th width="14%" field="studentPhone">联系电话</th>
 						<th width="14%" field="adviserName">业绩顾问</th>
@@ -82,8 +83,8 @@
 			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("国际班"),function(data){
-				$("#interClassType").combobox("loadData",data);
+			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("${param.classType}"),function(data){
+				$("#shortClassType").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
 				$("#schoolManId").combobox({
@@ -92,7 +93,7 @@
 					textField: 'schoolName', 
 					panelHeight: 'auto'
 				});
-				$("#interClassType").combobox({
+				$("#shortClassType").combobox({
 					formatter:function(data){
 						return '<span>'+data.classType+'</span>';
 					}, 
@@ -116,7 +117,7 @@
 			}
 			function resetFunc()
 			{
-				$("#interClassType").combobox("setValue","");
+				$("#shortClassType").combobox("setValue","");
 				$("#schoolManId").combobox("setValue","");
 				$("#openStartManTime").datebox("setValue","");
 				$("#openEndManTime").datebox("setValue","");
@@ -153,7 +154,8 @@
 			}
 			function backFunc()
 			{
-				window.location.href = "/sys/shortBus/shortClassManInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId=${param.shortClassInstId}";
+				//window.location.href = "/sys/shortBus/shortClassManInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId=${param.shortClassInstId}";
+				window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId=${param.shortClassInstId}&pageName=${param.pageName}&classType="+encodeURI("${param.classType}");
 			}
 		</script>
  	</body>
