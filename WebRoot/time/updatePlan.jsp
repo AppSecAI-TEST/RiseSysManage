@@ -11,11 +11,13 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
+		<%@ include file="../common/pub.jsp" %>
 	
   	</head>
   
   	<body>
 		<input type="hidden" id="handlerId" name="handlerId"   value="${sessionScope.StaffT.staffId}"/>
+		 
 			<table   style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:30px;" cellspacing="2">
 				<tr>
 					<td width="80px" align="right">
@@ -29,7 +31,7 @@
 			</table>
 		 
 		<div style="padding:5px 0;min-width:1100px; width:100%;">
-			<table  class="easyui-datagrid" title="排课" style="height:435px;" id="weekDg" url=""></table>
+			<table  class="easyui-datagrid" title="排课" style="height:435px;" toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false" id="weekDg" url=""></table>
 		</div>
 	 
  	</body>
@@ -50,7 +52,7 @@ function init()
     singleSelect: true,  
     url: "/sys/pubData/qryDataListByPage.do?param="+JSON.stringify(param),
     columns:[[  
-        {field:'weekName',title:'周',width:80,align:'center'},  
+        {field:'weekName',title:'周',width:25,align:'center'},  
         {field:'dateRange',title:'时间段',width:25,align:'center'},  
         {field:'isPlan',title:'是否排课',width:25,align:'center'},  
         {field:'createDdate',title:'创建时间',width:25,align:'center', 
@@ -70,26 +72,6 @@ function init()
   
 function planWeek(weekSeq,month,createWeekId)
 {
-	$.ajax(
-	{
-		type : "POST",
-		url: "/sys/time/updateCreateWeek.do?",
-		data: "createWeekId="+createWeekId,
-		async: false,
-		dataType:"json",
-		beforeSend: function()
-    	{
-    		$.messager.progress({title : '系统消息', msg : '正在提交数据，请稍等……'});
-    	},
-    	success: function(data) 
-    	{
-    		$.messager.progress('close');
-        },
-        error:function()
-        {
-        	$.messager.progress('close'); 
-        }
-	});
-	window.location.href="/sys/time/planTime.jsp?month="+month+"&weekSeq="+weekSeq;
+	window.location.href="/sys/time/planTime.jsp?month="+month+"&weekSeq="+weekSeq+"&createWeekId="+createWeekId;
 }
 </script>

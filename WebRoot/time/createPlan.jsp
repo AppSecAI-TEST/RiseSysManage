@@ -208,27 +208,7 @@ $('#weekDg').datagrid({
  
   
 function planWeek(weekSeq,month,createWeekId)
-{
-	$.ajax(
-	{
-		type : "POST",
-		url: "/sys/time/updateCreateWeek.do?",
-		data: "createWeekId="+createWeekId,
-		async: false,
-		dataType:"json",
-		beforeSend: function()
-    	{
-    		$.messager.progress({title : '系统消息', msg : '正在提交数据，请稍等……'});
-    	},
-    	success: function(data) 
-    	{
-    		$.messager.progress('close');
-        },
-        error:function()
-        {
-        	$.messager.progress('close'); 
-        }
-	});
-	window.location.href="/sys/time/planTime.jsp?month="+month+"&weekSeq="+weekSeq;
+{ 
+	window.location.href="/sys/time/planTime.jsp?month="+month+"&weekSeq="+weekSeq+"&createWeekId="+createWeekId;
 }
 </script>

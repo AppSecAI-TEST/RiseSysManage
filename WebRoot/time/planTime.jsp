@@ -2,6 +2,7 @@
 <% 
 	String month=request.getParameter("month");
 	String weekSeq=request.getParameter("weekSeq");
+	String createWeekId=request.getParameter("createWeekId");
 
 %>
 <!DOCTYPE html>
@@ -157,7 +158,7 @@ function getWeekTime()
     			{
     				json1=data[i];
     				initTable("t1",json1);
-    				 initTeacher("t0",json1);
+    				initTeacher("t0",json1);
     			}else if(i==1)
     			{
     				json2=data[i];
@@ -383,7 +384,8 @@ function endEditing(tab)
 			
 			if(choose=='' && schooltimeInstId!=undefined)
 			{
-				deletePlanTime(schooltimeInstId);
+				var classInstId=rowVal.classInstId;
+				deletePlanTime(schooltimeInstId,classInstId);
 				return;
 			}
 			
@@ -413,8 +415,8 @@ function endEditing(tab)
 			{
 				var mergeNum=vals[3];//合并列数量
 			
-				
-				planT.schoolId=rowVal.schoolId;
+				var schoolId=$("#schoolId").val();
+				planT.schoolId=schoolId;
 				planT.teacherName=rowVal.teacherName;
 				planT.teacherId=rowVal.teacherId;
 				planT.teacherType=teacherType;
@@ -445,9 +447,9 @@ function endEditing(tab)
 	}
 }
 
-function deletePlanTime(schooltimeId)
+function deletePlanTime(schooltimeId,classInstId)
 {
-		var param="{schooltimeInstId="+schooltimeId+"}";
+		var param="{classInstId="+classInstId+",schooltimeInstId="+schooltimeId+",createWeekId="+<%=createWeekId%>+"}";
 		$.ajax({
 			type : "POST",
 			url: "/sys/time/delete.do",
@@ -482,11 +484,12 @@ function addPlanTime(planT,tab)
 			planT.weekTime=data.weekTime;
 			planT.weekSeq=data.weekSeq;
 			planT.schooltime=data.schooltime;
+			planT.createWeekId='<%=createWeekId%>';
 			break;
 		}
 		 
 	}
-	 	
+	 	alert(JSON.stringify(planT));
 	$.ajax(
 	{
 		type : "POST",
@@ -503,12 +506,11 @@ function addPlanTime(planT,tab)
     		$.messager.progress('close');
     		if(data.flag)
     		{
-    			 getWeekTime();
     		}else
     		{
     			$.messager.alert('提示',data.msg);
     		}
-    		 
+    		  getWeekTime();
         },
         error:function()
         {
