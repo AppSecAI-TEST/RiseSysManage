@@ -97,6 +97,7 @@ $(document).ready(function() {
 				approveObj.masterType = masterType;
 			} else if("108" == nextState) {
 				approveObj.isTransfer = isTransfer;
+				approveObj.approveResult = "Y";
 			}
 			var param = JSON.stringify(approveObj);
 			param = encodeURI(param);

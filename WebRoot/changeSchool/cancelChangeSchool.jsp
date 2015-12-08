@@ -51,10 +51,9 @@
 		  					<td align="right" width="10%"><span>在读班级：</span></td>
 		  					<td width="25%"><span id="byNameText"><%=outClassName %></span></td>
 		  				</tr>
-		  				<tr>
+		  				<tr id="courseTr">
 		  					<td colspan="6">
 			  					<table class="easyui-datagrid" title="常规课信息" style="height:auto;" id="course_list_data" 
-							  		url="<%=path %>/pubData/qryDataListByPage.do?param={funcNodeId:'1016',studentId:'<%=studentId %>'}" 
 							  		pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
 									<thead>
 										<tr>
@@ -77,18 +76,19 @@
 								</table>
 		  					</td>
 		  				</tr>
-		  				<tr style="display: none;" id="internationalTr">
+		  				<tr id="internationalTr">
 		  					<td colspan="6">
-		  						<table class="easyui-datagrid" title="短期课-国际班信息" style="height:auto;" id="international_list_data">
+		  						<table class="easyui-datagrid" title="短期课-国际班信息" style="height:auto;" id="international_list_data"
+		  							pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
 									<thead>
 										<tr>
 											<th data-options="field:'classType',width:100,align:'center'">国际班类型</th>
-											<th data-options="field:'courseStateText',width:100,align:'center'">报名校区</th>
+											<th data-options="field:'paySchoolName',width:100,align:'center'">报名校区</th>
 											<th data-options="field:'schoolName',width:100,align:'center'">上课校区</th>
 											<th data-options="field:'payDate',width:120,align:'center'">缴费日期</th>
 											<th data-options="field:'courseStateText',width:100,align:'center'">课程状态</th>
 											<th data-options="field:'className',width:100,align:'center'">班级</th>
-											<th data-options="field:'startDate',width:120,align:'center'">开课日期</th>
+											<th data-options="field:'openDate',width:120,align:'center'">开课日期</th>
 											<th data-options="field:'finishDate',width:120,align:'center'">结课日期</th>
 											<th data-options="field:'classProgress',width:100,align:'center'">课时进度</th>
 											<th data-options="field:'adviserTeacherName',width:100,align:'center'">业绩老师</th>
@@ -98,16 +98,18 @@
 								</table>
 		  					</td>
 		  				</tr>
-		  				<tr style="display: none;" id="travelTr">
+		  				<tr id="travelTr">
 		  					<td colspan="6">
-		  						<table class="easyui-datagrid" title="短期课-游学信息" style="height:auto;" id="travel_list_data">
+		  						<table class="easyui-datagrid" title="短期课-游学信息" style="height:auto;" id="travel_list_data"
+		  							pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
 									<thead>
 										<tr>
+											<th data-options="field:'classType',width:100,align:'center'">游学班类型</th>
 											<th data-options="field:'className',width:100,align:'center'">班级</th>
-											<th data-options="field:'schoolName',width:100,align:'center'">报名校区</th>
+											<th data-options="field:'paySchoolName',width:100,align:'center'">报名校区</th>
 											<th data-options="field:'payDate',width:100,align:'center'">缴费日期</th>
 											<th data-options="field:'courseStateText',width:120,align:'center'">课程状态</th>
-											<th data-options="field:'startDate',width:100,align:'center'">出发日期</th>
+											<th data-options="field:'openDate',width:100,align:'center'">出发日期</th>
 											<th data-options="field:'finishDate',width:100,align:'center'">返回日期</th>
 											<th data-options="field:'adviserTeacherName',width:120,align:'center'">业绩老师</th>
 											<th data-options="field:'adviserName',width:120,align:'center'">业绩顾问</th>
@@ -116,19 +118,19 @@
 								</table>
 		  					</td>
 		  				</tr>
-		  				<tr style="display: none;" id="giftTr">
+		  				<tr id="giftTr">
 		  					<td colspan="6">
 		  						<table class="easyui-datagrid" title="赠送课信息" style="height:auto;" id="gift_list_data">
 									<thead>
 										<tr>
-											<th data-options="field:'className',width:100,align:'center'">赠课来源</th>
-											<th data-options="field:'schoolName',width:100,align:'center'">赠课名称</th>
-											<th data-options="field:'payDate',width:100,align:'center'">赠送时间</th>
-											<th data-options="field:'courseStateText',width:120,align:'center'">赠送课时量</th>
-											<th data-options="field:'startDate',width:100,align:'center'">课程状态</th>
-											<th data-options="field:'finishDate',width:100,align:'center'">有效期开始日期</th>
-											<th data-options="field:'adviserTeacherName',width:120,align:'center'">有效期结束日期</th>
-											<th data-options="field:'adviserName',width:120,align:'center'">课时进度</th>
+											<th data-options="field:'giftChannelDesc',width:100,align:'center'">赠课来源</th>
+											<th data-options="field:'giftName',width:100,align:'center'">赠课名称</th>
+											<th data-options="field:'createDate',width:100,align:'center'">赠送日期</th>
+											<th data-options="field:'giftNum',width:100,align:'center'">赠送课时量</th>
+											<th data-options="field:'giftStateText',width:100,align:'center'">课程状态</th>
+											<th data-options="field:'effDate',width:100,align:'center'">有效期开始日期</th>
+											<th data-options="field:'expDate',width:100,align:'center'">有效期结束日期</th>
+											<th data-options="field:'granter',width:100,align:'center'">课时进度</th>
 										</tr>
 									</thead>
 								</table>
