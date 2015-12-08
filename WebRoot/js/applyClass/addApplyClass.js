@@ -76,49 +76,68 @@ $(document).ready(function() {
 	//添加升学班级
 	$("#addHigherSchoolBtn").click(function() {
 		if(addHigherSchool < 5) {
-			var classInstId = $('#higherOptionClassInstId').combobox('getValue');
-			var higherSchoolId = $("#higherSchoolId").val();
 			var flag = true;
-			if(higherSchoolId.indexOf(",") != -1) {
-				var src = higherSchoolId.split(",");  
-				for (var i = 0; i < src.length; i++) {   
-					if(src[i] == classInstId) {
-						flag = false;
-						break;
-					}
-				}   
+			var higherOptionSchoolId = $("#higherOptionSchoolId").combobox('getValue');
+			if(higherOptionSchoolId == "" || higherOptionSchoolId == null || higherOptionSchoolId == undefined) {
+				flag = false;
+				$.messager.alert('提示', "请选择升学班级所在的校区！");
 			} else {
-				if(higherSchoolId == classInstId) {
+				var higherOptionStageId = $("#higherOptionStageId").combobox('getValue');
+				if(higherOptionStageId == "" || higherOptionStageId == null || higherOptionStageId == undefined) {
 					flag = false;
+					$.messager.alert('提示', "请选择升学班级的课程阶段！");
+				} else {
+					var classInstId = $('#higherOptionClassInstId').combobox('getValue');
+					if(classInstId == "" || classInstId == null || classInstId == undefined) {
+						flag = false;
+						$.messager.alert('提示', "请选择升学班级！");
+					}
 				}
 			}
 			if(flag) {
-				var higherOptionSchoolName = $("#higherOptionSchoolId").combobox("getText");
-				var className = $('#higherOptionClassInstId').combobox('getText');
-				var text = higherOptionSchoolName + className;
-				if(addHigherSchool == 0) {
-					var higherSchoolNameTr = $("#higherSchoolNameTr").clone();
-					higherSchoolNameTr.css("display", 'table-row');
-					higherSchoolNameTr.attr("val", "add");
-					higherSchoolNameTr.find("td").each(function(i, node) {
-						if(i == 1) {
-							$(node).html("<span id='higherOptionSchoolName'>"+text+"</span>");	
+				var classInstId = $('#higherOptionClassInstId').combobox('getValue');
+				var higherSchoolId = $("#higherSchoolId").val();
+				if(higherSchoolId.indexOf(",") >= 0) {
+					var src = higherSchoolId.split(",");  
+					for (var i = 0; i < src.length; i++) {   
+						if(src[i] == classInstId) {
+							flag = false;
+							break;
 						}
-					});
-					$("#higherSchoolName").val(text);
-					$("#higherSchoolId").val(classInstId);
-					$("#higherSchoolNameTr").after(higherSchoolNameTr);
+					}   
 				} else {
-					var higherOptionSchoolName = $("#higherOptionSchoolName").html();
-					higherOptionSchoolName += "，" + text;
-					$("#higherOptionSchoolName").html(higherOptionSchoolName);
-					$("#higherSchoolName").val(higherOptionSchoolName);
-					var higherSchoolId = $("#higherSchoolId").val();
-					$("#higherSchoolId").val(higherSchoolId + "," + classInstId);
+					if(higherSchoolId == classInstId) {
+						flag = false;
+					}
 				}
-				addHigherSchool++;
-			} else {
-				$.messager.alert('提示', "您选中的班级已经是升学班级，请选择其他班级！");
+				if(flag) {
+					var higherOptionSchoolName = $("#higherOptionSchoolId").combobox("getText");
+					var className = $('#higherOptionClassInstId').combobox('getText');
+					var text = higherOptionSchoolName + className;
+					if(addHigherSchool == 0) {
+						var higherSchoolNameTr = $("#higherSchoolNameTr").clone();
+						higherSchoolNameTr.css("display", 'table-row');
+						higherSchoolNameTr.attr("val", "add");
+						higherSchoolNameTr.find("td").each(function(i, node) {
+							if(i == 1) {
+								$(node).html("<span id='higherOptionSchoolName'>"+text+"</span>");	
+							}
+						});
+						$("#higherSchoolName").val(text);
+						$("#higherSchoolId").val(classInstId);
+						$("#higherSchoolNameTr").after(higherSchoolNameTr);
+					} else {
+						var higherOptionSchoolName = $("#higherOptionSchoolName").html();
+						higherOptionSchoolName += "，" + text;
+						$("#higherOptionSchoolName").html(higherOptionSchoolName);
+						$("#higherSchoolName").val(higherOptionSchoolName);
+						var higherSchoolId = $("#higherSchoolId").val();
+						$("#higherSchoolId").val(higherSchoolId + "," + classInstId);
+					}
+					addHigherSchool++;
+				} else {
+					$.messager.alert('提示', "您选中的班级已经是升学班级，请选择其他班级！");
+				}
 			}
 		} else {
 			$.messager.alert('提示', "升学班级最多不超过5个！");
@@ -154,26 +173,31 @@ $(document).ready(function() {
 				});
 			}
 			if(flag) {
-				addSchoolNum++;
-				var addSchootimeTd = $("#addSchootimeTd").clone();
-				addSchootimeTd.css("display", 'table-row');
-				addSchootimeTd.attr("val", "add");
-				addSchootimeTd.find("td").each(function(i, node) {
-					if(i == 0) {
-						$(node).html("<span>" + addSchoolNum + "</span>");
-						$(node).attr("lessionHours", lessionHours);
-						$(node).attr("weekTime", weekTime);
-						$(node).attr("hourRange", hourRange);
-					} else if(i == 1) {
-						$(node).html("<span>" + weekTimeText + "  " + hourRangeText + "</span>");
-					} else if(i == 2) {
-						$(node).html("<span>" + roomIdText + "</span>");
-					} else if(i == 3) {
-						$(node).html("<span>" + lessionHours + "</span><input type='hidden' name='schooltimes' roomId='"+roomId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessionHours='"+lessionHours+"' addNum='"+addSchoolNum+"'/>");
-					}
-				});
-				$("#schooltimeTb").append(addSchootimeTd);
-				$("#addSchootimeTr").css("display", 'table-row');
+				flag = validateRoom(weekTime, hourRange, roomId);
+				if(flag) {
+					addSchoolNum++;
+					var addSchootimeTd = $("#addSchootimeTd").clone();
+					addSchootimeTd.css("display", 'table-row');
+					addSchootimeTd.attr("val", "add");
+					addSchootimeTd.find("td").each(function(i, node) {
+						if(i == 0) {
+							$(node).html("<span>" + addSchoolNum + "</span>");
+							$(node).attr("lessionHours", lessionHours);
+							$(node).attr("weekTime", weekTime);
+							$(node).attr("hourRange", hourRange);
+						} else if(i == 1) {
+							$(node).html("<span>" + weekTimeText + "  " + hourRangeText + "</span>");
+						} else if(i == 2) {
+							$(node).html("<span>" + roomIdText + "</span>");
+						} else if(i == 3) {
+							$(node).html("<span>" + lessionHours + "</span><input type='hidden' name='schooltimes' roomId='"+roomId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessionHours='"+lessionHours+"' addNum='"+addSchoolNum+"'/>");
+						}
+					});
+					$("#schooltimeTb").append(addSchootimeTd);
+					$("#addSchootimeTr").css("display", 'table-row');
+				} else {
+					$.messager.alert('提示', "您选择的上课时段和教室已被其他班级占用，请选择其他上课时段或教室！");
+				}
 			} else {
 				$.messager.alert('提示', "该上课时段已经添加，请选择另一个上课时段！");
 			}
@@ -187,25 +211,13 @@ $(document).ready(function() {
     	textField : "codeName",
     	panelHeight : "auto",
     	editable : false,
-    	onLoadSuccess : function () { //数据加载完毕事件
-            var data = $('#weekTime').combobox('getData');
-            if (data.length > 0) {
-                $("#weekTime").combobox('select', data[0].codeFlag);
-            }
-        },
 		onChange : function(n, o) {
 			$("#hourRange").combobox({
         		url : "/sys/pubData/qryHourRangeList.do?weekTime=" + n,//返回json数据的url
         		valueField : "hourRange",
         		textField : "hourRangeVal",
         		panelHeight : "auto",
-        		editable : false,
-        		onLoadSuccess : function () { //数据加载完毕事件
-                    var data = $('#hourRange').combobox('getData');
-                    if (data.length > 0) {
-                        $("#hourRange").combobox('select', data[0].hourRange);
-                    }
-                }
+        		editable : false
         	});
 		}
 	});
@@ -217,12 +229,6 @@ $(document).ready(function() {
     	textField : "schoolName",
     	panelHeight : "auto",
     	editable : false,
-    	onLoadSuccess : function () { //数据加载完毕事件
-            var data = $('#teacherSchoolId').combobox('getData');
-            if (data.length > 0) {
-                $("#teacherSchoolId").combobox('select', data[0].schoolId);
-            }
-        },
 		onChange : function(n, o) {
 			var classType = $("#classType").combobox("getValue");
 			$("#teacherId").combobox({
@@ -336,7 +342,6 @@ $(document).ready(function() {
 	
 	//提交放班申请
 	$("#applyClassSubmit").click(function() {
-		alert($("#applyClassFm").form('validate'))
 		if($("#applyClassFm").form('validate')) {
 			var flag = true;
 			var studentChannelType = $("#studentChannelType").combobox("getValue");
@@ -348,8 +353,8 @@ $(document).ready(function() {
 			}
 			if(flag) {
 				if($("[name='schooltimes']").length > 0) {
+					var addNum = "";
 					if($("[name='teachers']").length > 0) {
-						var addNum = "";
 						$("[name='schooltimes']").each(function() {
 							var teacherNum = 0;
 							var weekTime = $(this).attr("weekTime");
@@ -366,14 +371,15 @@ $(document).ready(function() {
 								addNum = $(this).attr("addNum");
 							}
 						});
-						if(flag) {
-							var addNum = "";
-							var hours = 0;
-							var teacherHours = 0;
+					}
+					if(flag) {
+						if($("[name='teachers']").length > 0) {
 							$("[name='schooltimes']").each(function() {
 								var weekTime = $(this).attr("weekTime");
 								var hourRange = $(this).attr("hourRange");
 								var lessionHours = parseInt($(this).attr("lessionHours"));
+								var hours = 0;
+								var teacherHours = 0;
 								var totalLessions = 0;
 								$("[name='teachers']").each(function() {
 									var teacherWeekTime = $(this).attr("weekTime");
@@ -389,16 +395,14 @@ $(document).ready(function() {
 									teacherHours = totalLessions;
 								}
 							});
-							if(flag) {
-								addApplyClass();
-							} else {
-								$.messager.alert('提示', "上课时段"+addNum+"的总课时量为"+hours+"，您选择的所有带班老师的总课时量为"+teacherHours+"，请保持课时量相等！");
-							}
+						}
+						if(flag) {
+							addApplyClass();
 						} else {
-							$.messager.alert('提示', "请至少为上课时段"+addNum+"添加一位带班老师！");
+							$.messager.alert('提示', "上课时段"+addNum+"的总课时量为"+hours+"，您选择的所有带班老师的总课时量为"+teacherHours+"，请保持课时量相等！");
 						}
 					} else {
-						$.messager.alert('提示', "请至少为每个上课时段添加一位带班老师！");
+						$.messager.alert('提示', "请至少为上课时段"+addNum+"添加一位带班老师！");
 					}
 				} else {
 					$.messager.alert('提示', "请至少添加一个上课时段！");
@@ -419,7 +423,8 @@ function addApplyClass() {
 		var hourRange = $(this).attr("hourRange");
 		var lessionHours = $(this).attr("lessionHours");
 		schooltimeArray += "{roomId:\""+roomId+"\",weekTime:\""+weekTime+"\",hourRange:\""+hourRange+"\",lessionHours:\""+lessionHours+"\",";
-		schooltimeArray += "classTeacherArray:["
+		schooltimeArray += "classTeacherArray:[";
+		if($("[name='teachers']").length > 0) {
 			$("[name='teachers']").each(function() {
 				var teacherWeekTime = $(this).attr("weekTime");
 				var teacherHourRange = $(this).attr("hourRange");
@@ -429,7 +434,9 @@ function addApplyClass() {
 					schooltimeArray += "{teacherId:\""+teacherId+"\",teacherType:\"T\",lessions:\""+lessions+"\"},";
 				}
 			});
-		schooltimeArray = schooltimeArray.substring(0, schooltimeArray.length - 1) + "]},";
+			schooltimeArray = schooltimeArray.substring(0, schooltimeArray.length - 1);	
+		}
+		schooltimeArray += "]},";
 	});
 	schooltimeArray = schooltimeArray.substring(0, schooltimeArray.length - 1) + "]";
 	var obj = JSON.stringify($("#applyClassFm").serializeObject());

@@ -5,6 +5,7 @@
 	String classInstId = request.getParameter("classInstId");
 	String stageId = request.getParameter("stageId");
 	String classType = request.getParameter("classType");
+	String classState = request.getParameter("classState");
 	String studentCourseId = request.getParameter("studentCourseId");
 %>
 
@@ -19,10 +20,12 @@
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="选班基础信息">
   			<form id="">
-  				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
-  				<input type="hidden" id="classInstId" name="classInstId" value="<%=classInstId %>"/>
+  				<input type="hidden" id="classState" value="<%=classState %>"/>
+  				<input type="hidden" id="courseType" value="001"/>
   				<input type="hidden" id="stageId" name="stageId" value="<%=stageId %>"/>
   				<input type="hidden" id="classType" name="classType" value="<%=classType %>"/>
+  				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
+  				<input type="hidden" id="classInstId" name="classInstId" value="<%=classInstId %>"/>
   				<input type="hidden" id="studentCourseId" name="studentCourseId" value="<%=studentCourseId %>"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   				<input type="hidden" id="schoolId" name="schoolId"/>
@@ -69,41 +72,41 @@
   					<tr>
   						<td align="right" width="10%"><span>更换选班：</span></td>
   						<td width="90%" colspan="5">
-  							<select id="changeClassInstId" name="changeClassInstId" class="easyui-combobox" style="width: 150px; height: 25px;">
-		        			</select>
+  							<input type="radio" name="isBegin" value="N"/>
+  							<span style="display: inline-block; text-align: center;">未开课班级</span>
+  							<select id="notBeginClassInstId" name="notBeginClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"></select>
+  							<input type="radio" name="isBegin" value="Y"/>
+  							<span style="display: inline-block; text-align: center;">已开课班级</span>
+  							<select id="beginClassInstId" name="beginClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"></select>
+  						</td>
+  					</tr>
+  					<tr id="changeDiv" style="display: none;">
+  						<td colspan="6">
+  							<table width="99.99%" cellpadding="5px" class="maintable">
+			  					<tr>
+			  						<td align="right" width="10%"><span>班级名称：</span></td>
+				  					<td width="15%"><span id="className"></span></td>
+				  					<td align="right" width="10%"><span>放班时间：</span></td>
+				  					<td width="15%"><span id="applyDate"></span></td>
+				  					<td align="right" width="10%"><span>开班时间：</span></td>
+				  					<td width="10%"><span id="startDate"></span></td>
+				  					<td align="right" width="10%"><span>带班老师：</span></td>
+				  					<td width="20%" style="border-right: 0px;"><span id="teacherName"></span></td>
+			  					</tr>
+			  					<tr>
+			  						<td align="right" width="10%" style="border-bottom: 0px;"><span>定班人数：</span></td>
+				  					<td width="20%" style="border-bottom: 0px;"><span id="classStudentNum"></span></td>
+				  					<td align="right" width="10%" style="border-bottom: 0px;"><span>课程进度：</span></td>
+				  					<td width="20%" style="border-bottom: 0px;"><span id="classProgress"></span></td>
+				  					<td align="right" width="10%" style="border-bottom: 0px;"><span>上课时段：</span></td>
+				  					<td width="30%" colspan="3" style="border-right: 0px; border-bottom: 0px;"><span id="schooltimeName"></span></td>
+			  					</tr>
+			  				</table>
   						</td>
   					</tr>
   				</table>
   			</form>
   		</div>
-  		<div style="height: 10px;"></div>
-  		<div style="display: none;" id="changeDiv">
-	  		<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="选择班级情况">
-	  			<form id="">
-	  				<table width="99.99%" cellpadding="5px" class="maintable">
-	  					<tr>
-	  						<td align="right" width="10%"><span>班级名称：</span></td>
-		  					<td width="15%"><span id="className"></span></td>
-		  					<td align="right" width="10%"><span>放班时间：</span></td>
-		  					<td width="15%"><span id="applyDate"></span></td>
-		  					<td align="right" width="10%"><span>开班时间：</span></td>
-		  					<td width="10%"><span id="startDate"></span></td>
-		  					<td align="right" width="10%"><span>带班老师：</span></td>
-		  					<td width="20%"><span id="teacherName"></span></td>
-	  					</tr>
-	  					<tr>
-	  						<td align="right" width="10%"><span>定班人数：</span></td>
-		  					<td width="20%"><span id="classStudentNum"></span></td>
-		  					<td align="right" width="10%"><span>课程进度：</span></td>
-		  					<td width="20%"><span id="classProgress"></span></td>
-		  					<td align="right" width="10%"><span>上课时段：</span></td>
-		  					<td width="30%" colspan="3"><span id="schooltimeName"></span></td>
-	  					</tr>
-	  				</table>
-	  			</form>
-	  		</div>
-  		</div>
-  		
   		<div style="margin-top: 20px;min-width:1100px; width:99%;">
 	      	<div style="float: left;margin-left: 800px;">
 	      		<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>

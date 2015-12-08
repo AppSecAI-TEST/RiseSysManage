@@ -137,7 +137,7 @@ public class CreateClassController
 	}
 	
 	@RequestMapping(value = "/qryCreateClass.do")
-	public ModelAndView qryCreateClass(String classInstId, String applyType, String type)
+	public ModelAndView qryCreateClass(String classInstId, String applyType, String type, String classState)
 	{
 		log.error(classInstId);
 		ModelAndView view = null;
@@ -150,6 +150,7 @@ public class CreateClassController
 		{
 			String retVal = createClassService.qryCreateClassById(classInstId, applyType);
 			JSONObject obj = JSONObject.fromObject(retVal);
+			obj.element("classState", classState);
 			log.error(obj);
 			view.addObject("obj", obj);
 		} 
@@ -280,6 +281,32 @@ public class CreateClassController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.qryClassName(courseType, classType, stageId);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping(value = "/validateRoom.do")
+	public void validateRoom(String param, HttpServletResponse response)
+	{
+		log.error(param);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = createClassService.validateRoom(param);
 			log.error(retVal);
 			out.write(retVal);
 		}

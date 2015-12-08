@@ -452,6 +452,27 @@ function validateTeacher(teacherId, weekTime, hourRange) {
 	return flag;
 }
 
+function validateRoom(weekTime, hourRange, roomId) {
+	var flag = false;
+	var param = "{'queryCode':'validateRoom','weekTime':'"+weekTime+"','hourRange':'"+hourRange+"','roomId':'"+roomId+"'}";
+	$.ajax({
+		url: "/sys/applyClass/validateRoom.do",
+		data: "param=" + param,
+		dataType: "json",
+		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+		async: false,
+		beforeSend: function()
+		{
+			$.messager.progress({title : '校验上课时段和教室资源', msg : '正在校验上课时段和教室资源，请稍等……'});
+		},
+		success: function (data) {
+			$.messager.progress('close'); 
+			flag = data;
+		}
+	});
+	return flag;
+}
+
 //弹出进度框
 function showProgressLoader(text,timer)
 {

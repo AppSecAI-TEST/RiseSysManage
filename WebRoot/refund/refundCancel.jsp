@@ -288,7 +288,7 @@
 		  						<tr>
 		  							<td align="right" width="10%"><span>回访记录：</span></td>
 		  							<td colspan="3" width="90%">
-		  								<textarea rows="4" cols="122" id="teacherOrAdviserVisitRemark" name="teacherOrAdviserVisitRemark" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${refundVisit.remark }</textarea>
+		  								<textarea rows="4" cols="122" id="teacherOrAdviserVisitRemark" name="teacherOrAdviserVisitRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${refundVisit.remark }</textarea>
 		  							</td>
 		  						</tr>
 	  						</c:if>
@@ -325,7 +325,7 @@
 		  						<tr>
 		  							<td align="right" width="10%"><span>回访记录：</span></td>
 		  							<td colspan="3" width="90%">
-		  								<textarea rows="4" cols="122" id="academicOrSalesVisitRemark" name="academicOrSalesVisitRemark" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${refundVisit.remark }</textarea>
+		  								<textarea rows="4" cols="122" id="academicOrSalesVisitRemark" name="academicOrSalesVisitRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${refundVisit.remark }</textarea>
 		  							</td>
 		  						</tr>
 	  						</c:if>
@@ -348,13 +348,13 @@
 		  							</td>
 		  							<td align="right" width="8%"><span>回访时间：</span></td>
 		  							<td width="74%">
-		  								<input name="headmasterVisitDate" id="headmasterVisitDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;" disabled="disabled" value="${refundVisit.visitDate }"/>
+		  								<input name="headmasterVisitDate" id="headmasterVisitDate" type="text" class="easyui-datebox" style="width: 100px; height: 28px;" disabled="disabled" value="${refundVisit.visitDate }"/>
 		  							</td>
 		  						</tr>
 		  						<tr>
 		  							<td align="right" width="10%"><span>回访记录：</span></td>
 		  							<td colspan="3" width="90%">
-		  								<textarea rows="4" cols="122" id="headmasterVisitRemark" name="headmasterVisitRemark" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${refundVisit.remark }</textarea>
+		  								<textarea rows="4" cols="122" id="headmasterVisitRemark" name="headmasterVisitRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${refundVisit.remark }</textarea>
 		  							</td>
 		  						</tr>
 	  						</c:if>
@@ -379,7 +379,7 @@
 			  				<tr>
 			  					<td align="right" width="10%"><span>审批备注：</span></td>
 			  					<td width="90%">
-			  						<textarea rows="4" cols="122" id="headmasterApproveRemark" name="headmasterApproveRemark" required="true" class="easyui-validatebox textbox"></textarea>
+			  						<textarea rows="4" cols="122" id="headmasterApproveRemark" name="headmasterApproveRemark" class="easyui-validatebox textbox"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -400,7 +400,7 @@
 			  				<tr>
 			  					<td align="right" width="10%"><span>审批备注：</span></td>
 			  					<td width="90%" colspan="5">
-			  						<textarea rows="2" cols="122" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+			  						<textarea rows="2" cols="122" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -421,7 +421,7 @@
 			  				<tr>
 			  					<td align="right" width="10%"><span>审批备注：</span></td>
 			  					<td width="90%">
-			  						<textarea rows="4" cols="122" id="financialApproveRemark" name="financialApproveRemark" required="true" class="easyui-validatebox textbox"></textarea>
+			  						<textarea rows="4" cols="122" id="financialApproveRemark" name="financialApproveRemark" class="easyui-validatebox textbox"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -442,7 +442,7 @@
 			  				<tr>
 			  					<td align="right" width="10%"><span>审批备注：</span></td>
 			  					<td width="90%" colspan="5">
-			  						<textarea rows="2" cols="122" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+			  						<textarea rows="2" cols="122" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -463,7 +463,7 @@
 			  				<tr>
 			  					<td align="right" width="10%"><span>审批备注：</span></td>
 			  					<td width="90%">
-			  						<textarea rows="4" cols="122" id="chiefFinancialOfficerApproveRemark" name="chiefFinancialOfficerApproveRemark" required="true" class="easyui-validatebox textbox"></textarea>
+			  						<textarea rows="4" cols="122" id="chiefFinancialOfficerApproveRemark" name="chiefFinancialOfficerApproveRemark" class="easyui-validatebox textbox"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -484,7 +484,7 @@
 			  				<tr>
 			  					<td align="right" width="10%"><span>审批备注：</span></td>
 			  					<td width="90%" colspan="5">
-			  						<textarea rows="2" cols="122" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+			  						<textarea rows="2" cols="122" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -505,7 +505,7 @@
 			  				<tr>
 			  					<td align="right" width="10%"><span>审批备注：</span></td>
 			  					<td width="90%">
-			  						<textarea rows="4" cols="122" id="academicOrSalesApproveRemark" name="academicOrSalesApproveRemark" required="true" class="easyui-validatebox textbox"></textarea>
+			  						<textarea rows="4" cols="122" id="academicOrSalesApproveRemark" name="academicOrSalesApproveRemark" class="easyui-validatebox textbox"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -526,7 +526,7 @@
 			  				<tr>
 			  					<td align="right" width="10%"><span>审批备注：</span></td>
 			  					<td width="90%" colspan="5">
-			  						<textarea rows="2" cols="122" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+			  						<textarea rows="2" cols="122" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -547,7 +547,7 @@
 			  				<tr>
 			  					<td align="right" width="10%"><span>审批备注：</span></td>
 			  					<td width="90%">
-			  						<textarea rows="4" cols="122" id="regionalPresidentApproveRemark" name="regionalPresidentApproveRemark" required="true" class="easyui-validatebox textbox"></textarea>
+			  						<textarea rows="4" cols="122" id="regionalPresidentApproveRemark" name="regionalPresidentApproveRemark" class="easyui-validatebox textbox"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -568,7 +568,7 @@
 			  				<tr>
 			  					<td align="right" width="10%"><span>审批备注：</span></td>
 			  					<td width="90%" colspan="5">
-			  						<textarea rows="2" cols="122" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+			  						<textarea rows="2" cols="122" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -589,7 +589,7 @@
 			  				<tr>
 			  					<td align="right" width="10%"><span>审批备注：</span></td>
 			  					<td width="90%">
-			  						<textarea rows="4" cols="122" id="principalApproveRemark" name="principalApproveRemark" required="true" class="easyui-validatebox textbox"></textarea>
+			  						<textarea rows="4" cols="122" id="principalApproveRemark" name="principalApproveRemark" class="easyui-validatebox textbox"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -610,7 +610,7 @@
 			  				<tr>
 			  					<td align="right" width="10%"><span>审批备注：</span></td>
 			  					<td width="90%" colspan="5">
-			  						<textarea rows="2" cols="122" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+			  						<textarea rows="2" cols="122" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -630,7 +630,7 @@
 			  				<tr>
 			  					<td align="right" width="10%"><span>备注：</span></td>
 			  					<td width="90%">
-			  						<textarea rows="4" cols="122" id="headquartersFinancialApproveRemark" name="headquartersFinancialApproveRemark" required="true" class="easyui-validatebox textbox"></textarea>
+			  						<textarea rows="4" cols="122" id="headquartersFinancialApproveRemark" name="headquartersFinancialApproveRemark" class="easyui-validatebox textbox"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
@@ -640,7 +640,7 @@
 			  				<tr>
 						  		<td align="right" width="10%"><span>退费取消备注：</span></td>
 						  		<td width="90%">
-						  			<textarea rows="4" cols="122" id="headquartersFinancialApproveRemark" name="headquartersFinancialApproveRemark" required="true" class="easyui-validatebox textbox"></textarea>
+						  			<textarea rows="4" cols="122" id="headquartersFinancialApproveRemark" name="headquartersFinancialApproveRemark" class="easyui-validatebox textbox"></textarea>
 						  		</td>
 						  	</tr>
 			  			</table>

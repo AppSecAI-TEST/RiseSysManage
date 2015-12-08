@@ -89,7 +89,7 @@
 	  				<tr>
 	  					<td align="right" width="10%"><span>备注：</span></td>
   						<td width="90%">
-  							<textarea rows="6" cols="122" id="remark" name="remark" required="true" class="easyui-validatebox textbox"></textarea>
+  							<textarea rows="6" cols="122" id="remark" name="remark" class="easyui-validatebox textbox"></textarea>
   						</td>
 	  				</tr>
   				</table>

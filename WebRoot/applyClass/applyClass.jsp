@@ -92,7 +92,7 @@
 								<th field="ck" align="center" checkbox="true" width="1%"></th>
 								<th field="schoolName" align="center" width="6%">校区</th>
 								<th data-options="field:'className',width:100,align:'center'">班级名称</th>
-								<th data-options="field:'applyDate',width:120,align:'center'">放班审批时间</th>
+								<th data-options="field:'applyDate',width:150,align:'center'">放班审批时间</th>
 								<th data-options="field:'latestApplyClassState',width:100,align:'center'">最新放班状态</th>
 								<th data-options="field:'cancelApplyClassStateText',width:120,align:'center'">取消放班审批状态</th>
 								<th data-options="field:'openClassStateText',width:100,align:'center'">开班状态</th>
@@ -101,7 +101,7 @@
 								<th data-options="field:'schooltimeName',width:180,align:'center'">上课时段与教室</th>
 								<th data-options="field:'classStudentNum',width:80,align:'center'">定班人数</th>
 								<th data-options="field:'minSubNum',width:80,align:'center'">距最低人数</th>
-								<th data-options="field:'teacherName',width:80,align:'center'">带班老师</th>
+								<th data-options="field:'teacherName',width:120,align:'center'">带班老师</th>
 								<th data-options="field:'studentChannelTypeText',width:100,align:'center'">学员来源</th>
 								<th data-options="field:'higherSchoolName',width:100,align:'center'">来源班级</th>
 							</tr>

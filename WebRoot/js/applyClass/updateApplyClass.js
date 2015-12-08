@@ -58,8 +58,18 @@ $(document).ready(function() {
 			var classInstId = row.classInstId;
 			var stageId = $("#stageId").html();
 			var classType = $("#classType").html();
+			var classState = $("#classState").val();
 			var studentCourseId = row.studentCourseId;
-			window.location.href = "/sys/applyClass/changeClass.jsp?studentId="+studentId+"&classInstId="+classInstId+"&stageId="+stageId+"&classType="+classType+"&studentCourseId="+studentCourseId;
+			window.location.href = "/sys/applyClass/changeClass.jsp?studentId="+studentId+"&classInstId="+classInstId+"&stageId="+stageId+"&classType="+classType+"&studentCourseId="+studentCourseId+"&classState="+classState;
+		}
+	});
+	
+	//浏览
+	$("#view").click(function() {
+		if(validateSelect()) {
+			var row = $('#list_data').datagrid('getSelected');
+			var studentId = row.studentId;
+			window.location.href = "/sys/view.jsp?studentId="+studentId;
 		}
 	});
 	

@@ -74,7 +74,7 @@
 	  				<tr>
 	  					<td align="right" width="10%"><span>备注：</span></td>
 	  					<td width="90%" colspan="5">
-	  						<textarea rows="3" cols="126" id="vipRemark" name="vipRemark" class="easyui-validatebox textbox" required="true"></textarea>
+	  						<textarea rows="3" cols="126" id="vipRemark" name="vipRemark" class="easyui-validatebox textbox"></textarea>
 	  					</td>
 	  				</tr>
 	  				<tr>

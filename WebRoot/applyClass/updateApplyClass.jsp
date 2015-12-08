@@ -13,8 +13,9 @@
   	</head>
   
   	<body>
-  		<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="放班信息">
+  		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="放班信息">
   			<form id="updateApplyClassFm">
+  				<input type="hidden" id="classState" value="${obj.classState }"/>
   				<input type="hidden" id="applyId" name="applyId" value="${obj.createClassObj.applyId }"/>
   				<input type="hidden" id="classInstId" name="classInstId" value="${obj.createClassObj.classInstId }"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
@@ -31,9 +32,7 @@
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="10%"><span>开课时间：</span></td>
-	  					<td width="20%">
-	  						<input name="startDate" id="startDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;" value="${obj.createClassObj.startDate }"/>
-	  					</td>
+	  					<td width="20%"><span>${obj.createClassObj.startDate }</span></td>
 	  					<td align="right" width="10%"><span>学员来源类型：</span></td>
 	  					<td width="20%"><span id="studentChannelTypeVal">${obj.createClassObj.studentChannelTypeVal }</span></td>
 	  					<td align="right" width="10%"><span>来源班级：</span></td>
@@ -41,38 +40,58 @@
 	  				</tr>
 	  				<tr>
   						<td colspan="6">
-  							<table width="100%" cellpadding="5px" id="schooltimeTb" class="maintable">
+  							<table width="100%" id="schooltimeTb" class="maintable">
   								<tr>
   									<td align="center" width='4%'><span>序号</span></td>
   									<td align="center" width='14%'><span>上课时段</span></td>
   									<td align="center" width='4%'><span>教室</span></td>
   									<td align="center" width='4%'><span>课时</span></td>
   									<td align="center" width='64%'><span>带班老师</span></td>
-  									<td align="center" width='10%'><span>操作</span></td>
+  									<td align="center" width='10%' style="border-right: 0px;"><span>操作</span></td>
   								</tr>
   								<c:forEach items="${obj.schooltimeObj.rows }" var="schooltime" varStatus="status">
-	  								<tr>
-					        			<input type='hidden' name='schooltimes' roomId='${schooltime.roomId }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }' lessionHours='${schooltime.lessionHours }' addNum='${status.index + 1 }' schooltimeId='${schooltime.schooltimeId }'/>
-	  									<td align="center" width='4%' lessionHours='${schooltime.lessionHours }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }'><span>${status.index + 1 }</span></td>
-	  									<td align="center" width='14%'><span>${schooltime.schooltimeName }</span></td>
-	  									<td align="center" width='4%'>
-	  										<select name='roomId' id="roomId${status.index + 1 }" class="easyui-combobox" style="width: 80px; height: 28px;" weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }'>
-					        				</select>
-	  									</td>
-	  									<td align="center" width='4%'><span>${schooltime.lessionHours }</span></td>
-	  									<td width='64%' lessions='${schooltime.lessionHours }'>
-	  										<c:forEach items="${schooltime.classTeacherList }" var="classTeacher">
-	  											<span id="teacher${classTeacher.teacherId }${schooltime.weekTime }${schooltime.hourRange }">
-	  												${classTeacher.schoolName }&nbsp;${classTeacher.byname }&nbsp;${classTeacher.hours }&nbsp;${classTeacher.isLicense }&nbsp;
-	  												<a href='javascript:void(0)' class='linkmore' onclick="deleteTeacher(this, ${classTeacher.teacherId })"><span>删除</span></a>
-	  												<input type='hidden' name='teachers' teacherId='${classTeacher.teacherId }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }' lessions='${classTeacher.hours }' classTeacherId='${classTeacher.classTeacherId }'/>&nbsp;
-	  											</span>
-	  										</c:forEach>
-	  									</td>
-	  									<td align="center" width='10%'>
-	  										<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px; height: 28px;" onclick="addTeacher(this)">添加老师</a>
-	  									</td>
-	  								</tr>
+  									<c:if test="${status.index != obj.schooltimeObj.total - 1 }">
+		  								<tr>
+		  									<input type='hidden' name='schooltimes' roomId='${schooltime.roomId }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }' lessionHours='${schooltime.lessionHours }' addNum='${status.index + 1 }' schooltimeId='${schooltime.schooltimeId }'/>
+		  									<td align="center" width='4%' lessionHours='${schooltime.lessionHours }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }'><span>${status.index + 1 }</span></td>
+		  									<td align="center" width='14%'><span>${schooltime.schooltimeName }</span></td>
+		  									<td align="center" width='4%'><span>${schooltime.roomName }</span></td>
+		  									<td align="center" width='4%'><span>${schooltime.lessionHours }</span></td>
+		  									<td width='64%' lessions='${schooltime.lessionHours }'>
+		  										<c:forEach items="${schooltime.classTeacherList }" var="classTeacher">
+		  											<span id="teacher${classTeacher.teacherId }${schooltime.weekTime }${schooltime.hourRange }">
+		  												${classTeacher.schoolName }&nbsp;${classTeacher.byname }&nbsp;${classTeacher.hours }&nbsp;${classTeacher.isLicense }&nbsp;
+		  												<a href='javascript:void(0)' class='linkmore' onclick="deleteTeacher(this, ${classTeacher.teacherId })"><span>删除</span></a>
+		  												<input type='hidden' name='teachers' teacherId='${classTeacher.teacherId }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }' lessions='${classTeacher.hours }' classTeacherId='${classTeacher.classTeacherId }'/>&nbsp;
+		  											</span>
+		  										</c:forEach>
+		  									</td>
+		  									<td align="center" width='10%' style="border-right: 0px;">
+		  										<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px; height: 28px;" onclick="addTeacher(this)">添加老师</a>
+		  									</td>
+		  								</tr>
+  									</c:if>
+  									<c:if test="${status.index == obj.schooltimeObj.total - 1 }">
+  										<tr>
+		  									<input type='hidden' name='schooltimes' roomId='${schooltime.roomId }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }' lessionHours='${schooltime.lessionHours }' addNum='${status.index + 1 }' schooltimeId='${schooltime.schooltimeId }'/>
+		  									<td align="center" width='4%' style="border-bottom: 0px;" lessionHours='${schooltime.lessionHours }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }'><span>${status.index + 1 }</span></td>
+		  									<td align="center" width='14%' style="border-bottom: 0px;"><span>${schooltime.schooltimeName }</span></td>
+		  									<td align="center" width='4%' style="border-bottom: 0px;"><span>${schooltime.roomName }</span></td>
+		  									<td align="center" width='4%' style="border-bottom: 0px;"><span>${schooltime.lessionHours }</span></td>
+		  									<td width='64%' lessions='${schooltime.lessionHours }' style="border-bottom: 0px;">
+		  										<c:forEach items="${schooltime.classTeacherList }" var="classTeacher">
+		  											<span id="teacher${classTeacher.teacherId }${schooltime.weekTime }${schooltime.hourRange }">
+		  												${classTeacher.schoolName }&nbsp;${classTeacher.byname }&nbsp;${classTeacher.hours }&nbsp;${classTeacher.isLicense }&nbsp;
+		  												<a href='javascript:void(0)' class='linkmore' onclick="deleteTeacher(this, ${classTeacher.teacherId })"><span>删除</span></a>
+		  												<input type='hidden' name='teachers' teacherId='${classTeacher.teacherId }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }' lessions='${classTeacher.hours }' classTeacherId='${classTeacher.classTeacherId }'/>&nbsp;
+		  											</span>
+		  										</c:forEach>
+		  									</td>
+		  									<td align="center" width='10%' style="border-right: 0px; border-bottom: 0px;">
+		  										<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px; height: 28px;" onclick="addTeacher(this)">添加老师</a>
+		  									</td>
+		  								</tr>
+  									</c:if>
   								</c:forEach>
   							</table>
   						</td>
@@ -91,9 +110,10 @@
 	  			</table>
   			</form>
   		</div>
-  		<div style="padding:5px 0;min-width:1100px; width:100%;">
-	  		<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1005&param={'classInstId':'${obj.createClassObj.classInstId }'}" 
-		  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
+  		<div style="padding:5px 0;min-width:1100px; width:99%;">
+	  		<table class="easyui-datagrid" title="查询结果" style="height:auto;" id="list_data" 
+	  			url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1005&param={'classInstId':'${obj.createClassObj.classInstId }'}" 
+		  		toolbar="#toolbar" pagination="false" rownumbers="false" fitColumns="true" singleSelect="false">
 				<thead>
 					<tr>
 						<th data-options="field:'ck',checkbox:true"></th>

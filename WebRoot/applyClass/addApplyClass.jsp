@@ -24,12 +24,12 @@
   					<tr>
   						<td align="right" width="12%"><span>课程阶段：</span></td>
   						<td width="10%">
-  							<select name="stageId" id="stageId" class="easyui-combobox" style="width: 100px; height: 28px;" required="true" >
+  							<select name="stageId" id="stageId" class="easyui-combobox" required="true" style="width: 100px; height: 28px;">
         					</select>
   						</td>
   						<td align="right" width="12%"><span>班级类型：</span></td>
   						<td width="10%">
-  							<select name="classType" id="classType" class="easyui-combobox" style="width: 100px; height: 28px;" required="true" >
+  							<select name="classType" id="classType" class="easyui-combobox" required="true" style="width: 100px; height: 28px;">
         					</select>
   						</td>
   						<td align="right" width="8%"><span>班级名称：</span></td>
@@ -45,7 +45,7 @@
   						</td>
   						<td align="right" width="12%"><span>学员来源类型：</span></td>
   						<td width="10%">
-  							<select name="studentChannelType" id="studentChannelType" class="easyui-combobox" style="width: 100px; height: 28px;" required="true">
+  							<select name="studentChannelType" id="studentChannelType" class="easyui-combobox" required="true" style="width: 100px; height: 28px;">
         					</select>
   						</td>
   						<td align="right" width="8%"><span id="higherText" style="display: none;">升学班级：</span></td>
@@ -65,9 +65,7 @@
   					</tr>
   					<tr style="display:none;" id="higherSchoolNameTr">
   						<td align="right" width="12%"><span id="higherText">升学班级名称：</span></td>
-  						<td colspan="7" width="88%">
-  							
-  						</td>
+  						<td colspan="7" width="88%"></td>
   					</tr>
   					<tr style="display:none;" id="addHigherSchoolTr">
   						<td align="right" width="12%"><span>班级：</span></td>

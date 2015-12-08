@@ -148,7 +148,7 @@
 	  				<tr>
 	  					<td align="right" width="8%"><span>退费备注：</span></td>
   						<td colspan="9" width="92%">
-  							<textarea rows="6" cols="122" id="remark" name="remark" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${obj.refundFeeObj.remark }</textarea>
+  							<textarea rows="6" cols="122" id="remark" name="remark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${obj.refundFeeObj.remark }</textarea>
   						</td>
 	  				</tr>
   				</table>
@@ -263,7 +263,7 @@
 		  						<tr>
 		  							<td align="right" width="10%"><span>回访记录：</span></td>
 		  							<td colspan="3" width="90%">
-		  								<textarea rows="4" cols="122" id="teacherOrAdviserVisitRemark" name="teacherOrAdviserVisitRemark" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${refundVisit.remark }</textarea>
+		  								<textarea rows="4" cols="122" id="teacherOrAdviserVisitRemark" name="teacherOrAdviserVisitRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${refundVisit.remark }</textarea>
 		  							</td>
 		  						</tr>
 	  						</c:if>
@@ -300,7 +300,7 @@
 		  						<tr>
 		  							<td align="right" width="10%"><span>回访记录：</span></td>
 		  							<td colspan="3" width="90%">
-		  								<textarea rows="4" cols="122" id="academicOrSalesVisitRemark" name="academicOrSalesVisitRemark" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${refundVisit.remark }</textarea>
+		  								<textarea rows="4" cols="122" id="academicOrSalesVisitRemark" name="academicOrSalesVisitRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${refundVisit.remark }</textarea>
 		  							</td>
 		  						</tr>
 	  						</c:if>
@@ -329,7 +329,7 @@
 		  						<tr>
 		  							<td align="right" width="10%"><span>回访记录：</span></td>
 		  							<td colspan="3" width="90%">
-		  								<textarea rows="4" cols="122" id="headmasterVisitRemark" name="headmasterVisitRemark" required="true" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${refundVisit.remark }</textarea>
+		  								<textarea rows="4" cols="122" id="headmasterVisitRemark" name="headmasterVisitRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${refundVisit.remark }</textarea>
 		  							</td>
 		  						</tr>
 	  						</c:if>

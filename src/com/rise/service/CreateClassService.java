@@ -60,4 +60,10 @@ public class CreateClassService
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0078\",securityCode:\"0000000000\",params:{param:{courseType:\""+courseType+"\",\"classType\":\""+classType+"\",stageId:\""+stageId+"\"}},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
+
+	public String validateRoom(String param) throws Exception  
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0079\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
 }

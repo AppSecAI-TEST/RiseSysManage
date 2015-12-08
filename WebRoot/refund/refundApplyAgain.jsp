@@ -289,7 +289,7 @@
 		  						<tr>
 		  							<td align="right" width="10%"><span>回访记录：</span></td>
 		  							<td colspan="3" width="90%">
-		  								<textarea rows="4" cols="122" id="teacherOrAdviserVisitRemark" name="teacherOrAdviserVisitRemark" required="true" class="easyui-validatebox textbox">${refundVisit.remark }</textarea>
+		  								<textarea rows="4" cols="122" id="teacherOrAdviserVisitRemark" name="teacherOrAdviserVisitRemark" class="easyui-validatebox textbox">${refundVisit.remark }</textarea>
 		  							</td>
 		  						</tr>
 	  						</c:if>
@@ -326,7 +326,7 @@
 		  						<tr>
 		  							<td align="right" width="10%"><span>回访记录：</span></td>
 		  							<td colspan="3" width="90%">
-		  								<textarea rows="4" cols="122" id="academicOrSalesVisitRemark" name="academicOrSalesVisitRemark" required="true" class="easyui-validatebox textbox">${refundVisit.remark }</textarea>
+		  								<textarea rows="4" cols="122" id="academicOrSalesVisitRemark" name="academicOrSalesVisitRemark" class="easyui-validatebox textbox">${refundVisit.remark }</textarea>
 		  							</td>
 		  						</tr>
 	  						</c:if>
@@ -355,7 +355,7 @@
 		  						<tr>
 		  							<td align="right" width="10%"><span>回访记录：</span></td>
 		  							<td colspan="3" width="90%">
-		  								<textarea rows="4" cols="122" id="headmasterVisitRemark" name="headmasterVisitRemark" required="true" class="easyui-validatebox textbox">${refundVisit.remark }</textarea>
+		  								<textarea rows="4" cols="122" id="headmasterVisitRemark" name="headmasterVisitRemark" class="easyui-validatebox textbox">${refundVisit.remark }</textarea>
 		  							</td>
 		  						</tr>
 	  						</c:if>

@@ -37,7 +37,12 @@ $(document).ready(function() {
     				content += "<td align='right' width='10%'><span>课时：</span></td>";
     				content += "<td width='5%'><span id='lessionHours'>"+ obj.lessionHours +"</span></td>";
     				content += "<td align='right' width='10%'><span>带班老师：</span></td>";
-    				content += "<td width='30%'><span id='schoolTeacherName'>"+ obj.schoolTeacherName +" 课时量 "+ obj.lessionHours +"</span></td></tr>";
+    				var teacherContent = "";
+    				var schoolTeacherName = obj.schoolTeacherName;
+    				if(schoolTeacherName != null && schoolTeacherName != "" && schoolTeacherName != undefined) {
+    					teacherContent = schoolTeacherName + " 课时量 " + obj.lessionHours;
+    				}
+    				content += "<td width='30%'><span id='schoolTeacherName'>"+ teacherContent +"</span></td></tr>";
     			});
     			$("#cancelApplyClassTd tr:eq("+td+")").after(content);
     		}
