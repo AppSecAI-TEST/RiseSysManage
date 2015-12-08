@@ -1,4 +1,15 @@
 $(document).ready(function() {
+	$("#tt").tabs({
+		onSelect: function (title) {
+			var src = "";
+			if(title == "转班学员管理") {
+				$("#qryApplyBtn").click();
+			} else if(title == "转班审批管理") {
+				$("#qryApproveBtn").click();
+			} 
+		}
+	});
+	
 	$("#qryApplyBtn").click(function() {
 		var obj = JSON.stringify($("#qryApplyFm").serializeObject());
     	obj = obj.substring(0, obj.length - 1);

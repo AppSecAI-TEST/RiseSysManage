@@ -1,4 +1,15 @@
 $(document).ready(function() {
+	$("#tt").tabs({
+		onSelect: function (title) {
+			var src = "";
+			if(title == "开班班级管理") {
+				$("#qryBtn").click();
+			} else if(title == "开班审批管理") {
+				$("#qryApproveBtn").click();
+			} 
+		}
+	});
+	
 	$("#qryBtn").click(function() {
     	var obj = JSON.stringify($("#qryFm").serializeObject());
     	obj = obj.substring(0, obj.length - 1);
@@ -12,6 +23,23 @@ $(document).ready(function() {
     		onLoadSuccess:function(){
     			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
     			$('#list_data').datagrid('clearSelections');
+    		}
+    	});
+    });
+	
+	$("#qryApproveBtn").click(function() {
+    	var obj = JSON.stringify($("#qryApproveFm").serializeObject());
+    	obj = obj.substring(0, obj.length - 1);
+    	var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");
+    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+    	$('#approve_list_data').datagrid({
+    		url : "/sys/pubData/qryDataListByPage.do",
+    		queryParams:{
+    			param : obj
+    		},
+    		onLoadSuccess:function(){
+    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+    			$('#approve_list_data').datagrid('clearSelections');
     		}
     	});
     });
@@ -130,6 +158,37 @@ $(document).ready(function() {
 				applyType = "001";
 			}
 			window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=view&applyType="+applyType;
+		} else {
+			$.messager.alert('提示', "请先选择您要浏览的班级！");
+		}
+	});
+	
+	//审批
+	$("#approve").click(function() {
+		var row = $('#approve_list_data').datagrid('getSelected');
+		if(row) {
+			var openClassState = row.openClassState;
+			if(openClassState == '001') {
+				var classInstId = row.classInstId;
+				window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=approve&applyType=002";
+			} else {
+				if(openClassState == "002") {
+					$.messager.alert('提示', "您选择的班级已经审批通过，无需再次审批！");
+				} else if(openClassState == "003") {
+					$.messager.alert('提示', "您选择的班级审批未通过，不能再次审批！");
+				}
+			}
+		} else {
+			$.messager.alert('提示', "请先选择您要审批的班级！");
+		}
+	});
+	
+	//浏览
+	$("#viewApprove").click(function() {
+		var row = $('#approve_list_data').datagrid('getSelected');
+		if(row) {
+			var classInstId = row.classInstId;
+			window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=view&applyType=002";
 		} else {
 			$.messager.alert('提示', "请先选择您要浏览的班级！");
 		}
