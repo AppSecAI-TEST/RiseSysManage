@@ -56,7 +56,15 @@ function initPage()
 	    			$("#minusAmount").find("span").html(base.minusAmount+"元");
 	    			$("#favorAmount").find("span").html(base.favorAmount+"元");
 	    			$("#amount").find("span").html(base.amount+"元");
-	    			$("#beforeAmount").val(base.amount);
+	    			$("#afterAmount").html(base.amount);
+	    			$("#beforeAmount").val(base.lastAmount);
+	    			$("#adjustAmount").numberbox({
+						"onChange":function(n,o)
+						{
+							changeAfterAmount(n);
+						},
+						max:parseInt($("#amount").find("span").html())
+					});
 	    			
 	    		}
 	    		if(data.feeInfo!=undefined&&data.feeInfo.length>0)
@@ -87,23 +95,19 @@ function initPage()
 
 function changeFee()
 {
-	if($("#afterAmount").numberbox("getValue")=="")
+	if($("#adjustAmount").numberbox("getValue")=="")
 	{
-		$.messager.alert('提示', "请输入调整后的实收金额");
+		$.messager.alert('提示', "请输入调整金额");
 		return false;
 	}
-	else if($("#afterAmount").numberbox("getValue")==$("#beforAmount").val())
-    {
-		$.messager.alert('提示', "您没有调整实收金额");
-		return false;
-    }
 	var param ={};
 	param.handlerId =$("#handlerId").val();
 	param.beforeAmount=$("#beforeAmount").val();
-	param.afterAmount =$("#afterAmount").val();
+	param.afterAmount =$("#afterAmount").html();
 	param.studentCourseId =$("#studentCourseId").val();
 	param.remark =trim($("#remark").val());
 	param.state ="00A";
+	param.adjustAmount =$("#adjustAmount").numberbox("getValue");
 	$.ajax( {
 		type : "POST",
 		url : "/sys/courseFee/changeFee.do",
@@ -128,4 +132,17 @@ function changeFee()
 			showMessage('提示', "调用调整实收金额服务失败！", null);
 		}
 	});
+}
+
+function changeAfterAmount(n)
+{
+	if(n=="")
+	{
+		n=0;
+	}
+	else
+	{
+		n=parseInt(n);
+	}	
+	$("#afterAmount").html(parseInt($("#amount").find("span").html())-n);
 }

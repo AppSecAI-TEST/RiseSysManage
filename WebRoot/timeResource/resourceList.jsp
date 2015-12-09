@@ -32,7 +32,7 @@
 		 			<tr>
 			 			<th data-options="field:'ck',checkbox:true"></th>
 						<th field="month" align="center" width="5%">月份</th>
-						<th field="daysValue" align="center" width="94%">休假日期</th>
+						<th field="daysValue" align="center" width="93%">休假日期</th>
 		 			</tr>
 		 		</thead>
 		 		<tbody>	

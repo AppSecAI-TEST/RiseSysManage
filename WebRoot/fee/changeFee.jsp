@@ -38,7 +38,7 @@
   					<td align="right"><span>总金额：</span></td><td align="left" id="totalAmount"><span></span></td><td align="right"><span>抵扣金额：</span></td><td align="left" id="minusAmount"><span></span></td><td align="right"><span>优惠金额：</span></td><td width="15%" align="left" id="favorAmount"><span></span></td><td width="15%" align="right"><span>实收金额：</span></td><td width="15%" align="left" id="amount"><span></span></td>
   				</tr>
   				<tr>
-  					<td align="right"><span>实收金额调整为：</span></td><td align="left" colspan="7"><input type="text" class="easyui-numberbox" id="afterAmount" name="afterAmount" data-options="min:0,precision:0"  style="width:150px;height: 28px;"></td>
+  					<td align="right"><span>调整金额为：</span></td><td align="left"><input type="text" class="easyui-numberbox" id="adjustAmount" name="adjustAmount" data-options="min:0,precision:0"  style="width:150px;height: 28px;"></td><td align="right"><span>调整后金额：</span></td><td align="left" colspan="5"><span id="afterAmount"></span><span>元</span></td>
   				</tr>
   				<tr style="height:150px;">
   					<td align="right"><span>备注：</span></td><td align="left" colspan="7"><textarea id="remark" style="border:0;width:100%;height:100%;resize:none;overflow-y:hidden"></textarea></td>
