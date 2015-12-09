@@ -73,6 +73,18 @@ public class SchoolTimeService
 	}
 	
 	/**
+	 *时间段教室课时计划
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	public String getRoomTimePlans(String param) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS80011\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
+	/**
 	 * 修改排课标识
 	 * @param createWeekId
 	 * @return
