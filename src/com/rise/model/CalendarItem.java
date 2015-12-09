@@ -2,6 +2,8 @@ package com.rise.model;
 
 public class CalendarItem {
 	
+	private String classInstId;
+	
 	private String schooltimeInstId;
 
 	private String classAttendId;
@@ -12,6 +14,14 @@ public class CalendarItem {
 	
 	private CalendarHidden calendarHidden;
 	
+	public String getClassInstId() {
+		return classInstId;
+	}
+
+	public void setClassInstId(String classInstId) {
+		this.classInstId = classInstId;
+	}
+
 	public String getSchooltimeInstId() {
 		return schooltimeInstId;
 	}

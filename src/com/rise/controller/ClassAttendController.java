@@ -63,6 +63,22 @@ public class ClassAttendController
 		return model;
 	}
 	
+	@RequestMapping("/getAttenceRecordInst.do")
+	public ModelAndView getAttenceRecordInst(String classInstId , String funcNodeId , String selDateStr , String dateValue)
+	{
+		ModelAndView model = new ModelAndView("attence/attenceRecordInst");
+		try
+		{
+			classAttendService.getAttenceRecordInst(model, classInstId, funcNodeId, selDateStr, dateValue);
+		}
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
 	@RequestMapping("/getAttendView.do")
 	public ModelAndView getAttendView(String classInstId , String funcNodeId , String selDateStr)
 	{

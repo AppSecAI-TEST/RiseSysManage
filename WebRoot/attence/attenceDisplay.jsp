@@ -47,7 +47,7 @@
 			</tr>
 			<tr>
 				<td align="right" width="10%">上课时间：</td>
-				<td>周${classAttendT.attendDateWeek} <fmt:formatDate value="${classAttendT.schooltime}" pattern="yyyy-MM-dd" /> ${classAttendT.hourRangeObj.param1}</td>
+				<td>周${classAttendT.attendDateWeek} <fmt:formatDate value="${classAttendT.schooltime}" pattern="yyyy-MM-dd" /> ${classAttendT.hourRangeObj.paramDesc}</td>
 			</tr>
 			<tr>
 				<td align="right">教室：</td>
