@@ -29,7 +29,17 @@
 			</table>
 		 
 		<div style="padding:5px 0;min-width:1100px; width:100%;">
-			<table  class="easyui-datagrid" title="排课" style="height:435px;" id="weekDg" url=""></table>
+			<table class="easyui-datagrid" title="排课" style="height:435px;" toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false" id="weekDg" url="">
+				 <thead>
+				<tr>
+					<th data-options="field:'ck',checkbox:true"></th>
+					<th data-options="field:'schoolName',width:25,align:'center'">周</th>
+					<th data-options="field:'month',width:25,align:'center'">时间段</th>
+					<th data-options="field:'staffName',width:25,align:'center'">是否排课</th>
+					<th data-options="field:'createDate',width:25,align:'center'">创建时间</th>
+				</tr>
+				</thead>
+			</table>
 		</div>
 		<table style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:30px;" border="1px" cellspacing="0">
 		  <tr>
@@ -154,15 +164,15 @@ $("#submit").click(function()
 		type : "POST",
 		url: "/sys/time/getWeek.do?",
 		data: "param="+JSON.stringify(param),
-		async: false,
+		async: true,
 		dataType:"json",
 		beforeSend: function()
     	{
-    		showProgressLoader("正在提交数据,请稍等...",500)
+    		$.messager.progress({text:'排课中，请稍候...'});
     	},
     	success: function(data) 
     	{
-    		hideProgressLoader();
+    		$.messager.progress('close');
     		if(data.flag)
     		{
     			init(data);
@@ -170,11 +180,10 @@ $("#submit").click(function()
     		{
     			$.messager.alert('提示', data.msg);
     		}
-    		 
-        },
+         },
         error:function()
         {
-        	hideProgressLoader();
+        	$.messager.progress('close');
         }
 	});
 	
@@ -184,14 +193,14 @@ function init(data)
 {
 	
 $('#weekDg').datagrid({  
-	 border:false,  
+	border:false,  
     fitColumns:true,  
     singleSelect: true,  
     columns:[[  
-        {field:'weekName',title:'周',width:80},  
-        {field:'date',title:'时间段',width:25},  
-        {field:'isPlan',title:'是否排课',width:25},  
-        {field:'createDdate',title:'创建时间',width:25, 
+        {field:'weekName',title:'周',width:25,align:'center'},  
+        {field:'date',title:'时间段',width:25,align:'center'},  
+        {field:'isPlan',title:'是否排课',width:25,align:'center'},  
+        {field:'createDdate',title:'创建时间',width:25,align:'center', 
             formatter: function(Confirmation, row)
             {  
               var btn = '<a class="editcls" onclick="planWeek(\''+row.weekSeq+'\',\''+row.month+'\',\''+row.createWeekId+'\')"  href="javascript:void(0)">排课</a>';  

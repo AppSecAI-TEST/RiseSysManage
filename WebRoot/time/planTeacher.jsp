@@ -141,7 +141,7 @@ function getWeekTime()
 	$.ajax(
 	{
 		type : "POST",
-		url: "/sys/time//roomPlan.do?schoolId="+schoolId,
+		url: "/sys/time/teacherPlan.do?schoolId="+schoolId,
 		async: false,
 		dataType:"json",
 		beforeSend: function()
@@ -150,7 +150,7 @@ function getWeekTime()
     	},
     	success: function(data) {
     		$.messager.progress('close');
-    		//alert(JSON.stringify(data));
+    		alert(JSON.stringify(data));
     		for(var i=0;i<data.length;i++)
     		{
     			if(i==0)
@@ -212,7 +212,7 @@ function initTeacher(tabId,data)
     },
      
     columns:[[
-      {field:'roomName',title:'教室',width:100,align:'center'}
+      {field:'teacherName',title:'教师',width:100,align:'center'}
       
     ]] 
   });
