@@ -166,11 +166,18 @@ $("#addGiftBtn").click(function ()
 		giftTR.attr("val","gift");
 		giftTR.find("td").each(function(n,node)
 		{
+			var getFlag = $("input[name='isGetY']:checked").val(); //是否领取
 			var parentType=$("#parentType").combobox('getValue');
 			var giftEffDate=$("#giftEffDate").textbox('getValue');
 			if(n==1)//赠品类型;	
 			{
 				var name=$("#parentType").combobox('getText');
+				if(name=='')
+				{
+					showMessage('提示', "请选择赠品类型", null);
+					flag=false;
+					return false;
+				}
 				$(node).html("<span>"+name+"</span>");	
 				$(node).attr("parentType",parentType);
 			}else if(n==3)//赠品名称;劵类ID
@@ -184,11 +191,19 @@ $("#addGiftBtn").click(function ()
 				var code=$("#giftCode").textbox('getValue');
 				
 				//判断是否是券类
-				if(parentType=='COUPON' && code=='')
+				if(giftId=='')
 				{
-					$.messager.alert('提示', "请输入券类编码!");
+					showMessage('提示', "请选择赠品名称",null);
 					flag=false;
-					return;
+					return false;
+				}
+				
+				//判断是否是券类
+				if(parentType=='COUPON' && code=='' && 'Y'==getFlag)
+				{
+					showMessage('提示', "请输入券类编码",null);
+					flag=false;
+					return false;
 				}
 			
 				if(''!=code)
@@ -234,35 +249,43 @@ $("#addGiftBtn").click(function ()
 				
 			}else if(n==5)
 			{
-				var getFlag = $("input[name='isGetY']:checked").val(); //是否领取
-				var getFlagN =$("input[name='isGetN']:checked").val(); 
 				$(node).attr("isGet","N");
 				if('Y'==getFlag)
 				{
 					if(giftEffDate=='' &&　parentType=='COUPON')
 					{
 						flag=false;
-						$.messager.alert('提示', "请填写有效期!");
+						showMessage('提示', "请填写有效期",null);
+						return false;
 					}
 					$(node).html("<span>已领取</span>");	
 					$(node).attr("isGet","Y");
-				}else if('N'==getFlagN)
+				}else if('N'==getFlag)
 				{
 					$(node).html("<span>未领取</span>");	
 					$(node).attr("isGet","N");
 				}
 				else
 				{
-					 
+					 showMessage('提示', "请选择已领或者未领",null);
+					  flag=false;
+					  return false;
 				}
 			}else if(n==7)
 			{
 				var granter=$("#granter").textbox("getValue");
+				if(''==granter && 'Y'==getFlag)
+				{
+					  showMessage('提示', "发放人为空",null);
+					  flag=false;
+					  return false;
+				}
 				$(node).html("<span>"+granter+"</span>");	
 				$(node).attr("granter",granter);
 			} 
 			
 		});
+	
 	
 		if(flag)
 		{

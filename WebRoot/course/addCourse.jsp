@@ -222,11 +222,11 @@
 	      	        <td width="6%" align="left">
 	      	          <input type="radio" name="isGetY"  value="Y">
 	      	          <label for="radio"><span>已领用</span></label>
-	      	          <input type="radio" name="isGetY" checked   value="N">
+	      	          <input type="radio" name="isGetY" checked value="N">
 	      	          <label for="radio"> <span>未领用</span></label>
       	           </td>
 	      	        <td width="6%" align="right"><span>发放人：</span></td>
-	      	        <td width="8%"><input   id="granter" type="text" class="easyui-textbox validatebox"  style="width: 100px; height: 28px;"/></td>
+	      	        <td  width="8%"><input id="granter" type="text" disabled="disabled" class="easyui-textbox validatebox"  style="width: 100px; height: 28px;"/></td>
 	      	       
 	      	        <td width="6%"><a href="javascript:void(0)" id="addGiftBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a></td>
       	        </tr>
@@ -798,6 +798,8 @@ $('#parentType').combobox({
 		 	 $("#td1").css('display','none');
              $("#td2").css('display','none');
              $("#td3").css('display','none');
+             $("#granter").textbox({disabled:true});
+             var isGet = $("input[name='isGetY']:checked").val();
        		if(n=='COUPON')//券类
        		{
 			    var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift_Type\",parentType:\""+n+"\"}";
@@ -816,8 +818,13 @@ $('#parentType').combobox({
 	                    }
 	                    $("#td0").css('display','block');
 	                    $("#td1").css('display','block');
-	                    $("#td2").css('display','block');
-	                    $("#td3").css('display','block');
+	                  
+	                    if(isGet=='Y')
+	                    {
+	                    	 $("#td2").css('display','block');
+	                   		 $("#td3").css('display','block');
+	                    }
+	                  
 	                }
 	        	});
        		}else if(n=='GOODS')//实物类
@@ -840,6 +847,11 @@ $('#parentType').combobox({
 	                }
 	        	});
        		}
+       		 
+       		  if(isGet=='Y')
+              {
+             	  $("#granter").textbox({disabled:false});
+              }
 		},
 		url:"<%=path%>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE"
 	});
@@ -1057,6 +1069,27 @@ $("#backBtn").click(function()
 	window.location.href = "addCourseList.jsp"
 });
 
+
+$(":radio[name='isGetY']").click(function()
+{
+	var isGet=$(this).val();
+	var type=$('#parentType').combobox('getValue');
+ 	if('Y'==isGet)
+ 	{
+ 		if(type=='COUPON')
+ 		{
+ 			 $("#td2").css('display','block');
+        	 $("#td3").css('display','block');
+ 		}
+        $("#granter").textbox({disabled:false});
+ 	}else
+ 	{
+ 		  $("#td2").css('display','none');
+          $("#td3").css('display','none');
+          $("#granter").textbox({disabled:true});
+ 	}
+});
+
 //增加赠品
 $("#addGiftBtn").click(function ()
 {
@@ -1067,6 +1100,7 @@ $("#addGiftBtn").click(function ()
 		giftTR.attr("val","gift");
 		giftTR.find("td").each(function(n,node)
 		{
+			var getFlag = $("input[name='isGetY']:checked").val(); //是否领取
 			var parentType=$("#parentType").combobox('getValue');
 			var giftEffDate=$("#giftEffDate").textbox('getValue');
 			if(n==1)//赠品类型;	
@@ -1099,7 +1133,7 @@ $("#addGiftBtn").click(function ()
 				}
 				
 				//判断是否是券类
-				if(parentType=='COUPON' && code=='')
+				if(parentType=='COUPON' && code=='' && 'Y'==getFlag)
 				{
 					showMessage('提示', "请输入券类编码",null);
 					flag=false;
@@ -1149,7 +1183,6 @@ $("#addGiftBtn").click(function ()
 				
 			}else if(n==5)
 			{
-				var getFlag = $("input[name='isGetY']:checked").val(); //是否领取
 				$(node).attr("isGet","N");
 				if('Y'==getFlag)
 				{
@@ -1175,7 +1208,7 @@ $("#addGiftBtn").click(function ()
 			}else if(n==7)
 			{
 				var granter=$("#granter").textbox("getValue");
-				if(''==granter)
+				if(''==granter && 'Y'==getFlag)
 				{
 					  showMessage('提示', "发放人为空",null);
 					  flag=false;

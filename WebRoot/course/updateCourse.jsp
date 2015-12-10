@@ -249,7 +249,7 @@
 	      	          <label for="radio"> <span>未领用</span></label>
       	           </td>
 	      	        <td width="6%" align="right"><span>发放人：</span></td>
-	      	        <td width="8%"><input   id="granter" type="text" class="easyui-textbox validatebox"  style="width: 100px; height: 28px;"/></td>
+	      	        <td width="8%"><input   id="granter" type="text" disabled="disabled" class="easyui-textbox validatebox"  style="width: 100px; height: 28px;"/></td>
 	      	       
 	      	        <td width="6%"><a href="javascript:void(0)" id="addGiftBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a></td>
       	        </tr>
@@ -845,6 +845,26 @@ $("#classType").combobox(
 
 });
 
+$(":radio[name='isGetY']").click(function()
+{
+	var isGet=$(this).val();
+	var type=$('#parentType').combobox('getValue');
+ 	if('Y'==isGet)
+ 	{
+ 		if(type=='COUPON')
+ 		{
+ 			 $("#td2").css('display','block');
+        	 $("#td3").css('display','block');
+ 		}
+        $("#granter").textbox({disabled:false});
+ 	}else
+ 	{
+ 		  $("#td2").css('display','none');
+          $("#td3").css('display','none');
+          $("#granter").textbox({disabled:true});
+ 	}
+});
+
 $('#parentType').combobox({
 	 onChange:function(n,o)
 		{
@@ -852,6 +872,8 @@ $('#parentType').combobox({
 		 	 $("#td1").css('display','none');
              $("#td2").css('display','none');
              $("#td3").css('display','none');
+              $("#granter").textbox({disabled:true});
+             var isGet = $("input[name='isGetY']:checked").val();
        		if(n=='COUPON')//券类
        		{
 			    var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift_Type\",parentType:\""+n+"\"}";
@@ -870,8 +892,13 @@ $('#parentType').combobox({
 	                    }
 	                    $("#td0").css('display','block');
 	                    $("#td1").css('display','block');
-	                    $("#td2").css('display','block');
-	                    $("#td3").css('display','block');
+	                  
+	                    if(isGet=='Y')
+	                    {
+	                    	 $("#td2").css('display','block');
+	                   		 $("#td3").css('display','block');
+	                    }
+	                  
 	                }
 	        	});
        		}else if(n=='GOODS')//实物类
@@ -894,6 +921,10 @@ $('#parentType').combobox({
 	                }
 	        	});
        		}
+       		  if(isGet=='Y')
+              {
+             	  $("#granter").textbox({disabled:false});
+              }
 		},
 		url:"<%=path%>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE"
 	});

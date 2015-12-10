@@ -81,6 +81,31 @@ public class ClassAttendService
 		model.addObject("funcNodeId", funcNodeId);
 	}
 	
+	public void getAttenceRecordInst(ModelAndView model , String classInstId , String funcNodeId , String selDateStr , String dateValue) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2049\",securityCode:\"0000000000\",params:{classInstId:\""+classInstId+"\",selDateStr:\""+selDateStr+"\",dateValue:\""+dateValue+"\"},rtnDataFormatType:\"user-defined\"}";
+		String result = ServiceEngine.invokeHttp(param);
+		try
+		{
+			JSONObject json = JSONObject.fromObject(result);
+			ClassInstT classInstT = (ClassInstT)JacksonJsonMapper.getInstance().readValue(json.getJSONObject("classInstT").toString(), ClassInstT.class);
+			model.addObject("isFirstFlag", StringUtil.getJSONObjectKeyVal(json, "isFirstFlag"));
+			model.addObject("classSchooltime", StringUtil.getJSONObjectKeyVal(json, "classSchooltime"));
+			model.addObject("classWeekTime", StringUtil.getJSONObjectKeyVal(json, "classWeekTime"));
+			model.addObject("classInstT", classInstT);
+			model.addObject("hourRangeList", json.getJSONArray("hourRangeList"));
+			model.addObject("roomList", json.getJSONArray("roomList"));
+			model.addObject("schoolList", json.getJSONArray("schoolList"));
+			model.addObject("teacherList", json.getJSONArray("teacherList"));
+			model.addObject("teacherTypeList", json.getJSONArray("teacherTypeList"));
+		}catch(Exception err){
+			err.printStackTrace();
+			model.addObject("errorInfo", err.getMessage());
+		}
+		model.addObject("selDateStr", selDateStr);
+		model.addObject("funcNodeId", funcNodeId);
+	}
+	
 	public String addAttend(String json) throws Exception
 	{
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2044\",securityCode:\"0000000000\",params:{json:'"+json+"'},rtnDataFormatType:\"user-defined\"}";

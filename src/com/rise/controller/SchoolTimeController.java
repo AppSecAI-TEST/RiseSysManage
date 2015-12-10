@@ -148,7 +148,7 @@ public class SchoolTimeController
 	 * @param param
 	 * @param response
 	 */
-	@RequestMapping(value="/getTplan.do")
+	@RequestMapping(value="/getTeacherPlan.do")
 	public void getTeacherPlan(String param,HttpServletResponse response)
 	{
 		PrintWriter out = null;
@@ -157,6 +157,35 @@ public class SchoolTimeController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = schoolTimeService.getTpaln(param);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{ 
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	/**
+	 * 查询校区教室排课
+	 * @param param
+	 * @param response
+	 */
+	@RequestMapping(value="/getRoomPlan.do")
+	public void getRoomPlan(String param,HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = schoolTimeService.getRoomTimePlans(param);
 			out.write(retVal);
 		}
 		catch(Exception e)

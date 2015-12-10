@@ -14,41 +14,28 @@
   	</head>
   	<body>
  		<form id="qryFm">
-  			<table  align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:5px;font-family:'微软雅黑'" cellspacing="15">
+  			<table  align="center"   style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:5px;font-family:'微软雅黑'" cellspacing="15">
   				<tr>
-  					<td align="right">校　　区：</td>
+  					<td align="right" width="75px">校　　区：</td>
   					<td>
   						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:120px;height:25px"
 							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 				      		url="<%=path %>/pubData/qrySchoolList.do">
         				</select>
   					</td>
-  					<td align="right">教师英文名：</td>
-  					<td>
-  						<input class="easyui-textbox" name="byName" id="byName" style="width:150px;height: 25px" />
-  					</td>
-  					<td align="right">职务：</td>
-  					<td>
-  						<select name='postId' class="easyui-combobox" style="width:150px;height: 25px"></select>
-  					</td>
-  					<td>
-  						教师状态：<input name="P" id="P" value="P" type="checkbox">在职 &nbsp;<input name="R_L" id="R_L" value="R_L" type="checkbox">待离职 &nbsp;<input value="L" name="L" id="L" type="checkbox">离职 &nbsp;
-  					</td>
   						<td align="right">
 						<span>日期：</span>
 					</td>
-					<td width="8px">
+					<td align="right" >
 						<input class="easyui-datebox" type="text" required="true" style="width:100px; height: 25px;" id="startTime" name="startTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
-					<td align="center" width="14px;">
+					<td align="center">
 						<span>至</span>
 					</td>
-					<td width="90px">
+					<td >
 						<input class="easyui-datebox" required="true" type="text" style="width:100px; height: 25px;" id="endTime" name="endTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
-					
-  				</tr>
-  				<tr>
+  				 
   				<td align="center" colspan="10">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1000">查询</a>
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
@@ -89,12 +76,10 @@ $("#qryBtn").click(function(){
 		border:false,  
 	    fitColumns:true,  
 	    singleSelect: true,  
-	    url: "/sys/time/getTeacherPlan.do?param="+obj,
+	    url: "/sys/time/getRoomPlan.do?param="+obj,
 	    columns:[[  
 	        {field:'schoolName',title:'校区',align:'center',width:40},
-	         {field:'teacherName',title:'教师英文名',align:'center',width:40},
-	        {field:'tHours',title:'T课时量',align:'center',width:30},  
-	        {field:'taHours',title:'Ta课时量',align:'center',width:30},  
+	        {field:'roomName',title:'教室',align:'center',width:40},
 	        {field:'day0',title:startDate,align:'center',width:80},  
 	        {field:'day1',title:AddDays(startDate,1),align:'center',width:80},  
 	        {field:'day2',title:AddDays(startDate,2),align:'center',width:80},  
