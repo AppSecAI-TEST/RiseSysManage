@@ -14,7 +14,7 @@
   	</head>
   	<body>
  		<form id="qryFm">
-  			<table  align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:5px;font-family:'微软雅黑'" cellspacing="15">
+  			<table  align="center"   style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:5px;font-family:'微软雅黑'" cellspacing="15">
   				<tr>
   					<td align="right" width="75px">校　　区：</td>
   					<td>
@@ -26,18 +26,16 @@
   						<td align="right">
 						<span>日期：</span>
 					</td>
-					<td align="left" >
+					<td align="right" >
 						<input class="easyui-datebox" type="text" required="true" style="width:100px; height: 25px;" id="startTime" name="startTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
-					<td align="center" width="14px;"  >
+					<td align="center">
 						<span>至</span>
 					</td>
 					<td >
 						<input class="easyui-datebox" required="true" type="text" style="width:100px; height: 25px;" id="endTime" name="endTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
-					
-  				</tr>
-  				<tr>
+  				 
   				<td align="center" colspan="10">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1000">查询</a>
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
@@ -83,12 +81,12 @@ $("#qryBtn").click(function(){
 	        {field:'schoolName',title:'校区',align:'center',width:40},
 	        {field:'roomName',title:'教室',align:'center',width:40},
 	        {field:'day0',title:startDate,align:'center',width:80},  
-	        {field:'day1',title:AddDays(startDate,1),align:'left',width:80},  
-	        {field:'day2',title:AddDays(startDate,2),align:'left',width:80},  
-	        {field:'day3',title:AddDays(startDate,3),align:'left',width:80},  
-	        {field:'day4',title:AddDays(startDate,4),align:'left',width:80},  
-	        {field:'day5',title:AddDays(startDate,5),align:'left',width:80},
-	        {field:'day6',title:AddDays(startDate,6),align:'left',width:80} 
+	        {field:'day1',title:AddDays(startDate,1),align:'center',width:80},  
+	        {field:'day2',title:AddDays(startDate,2),align:'center',width:80},  
+	        {field:'day3',title:AddDays(startDate,3),align:'center',width:80},  
+	        {field:'day4',title:AddDays(startDate,4),align:'center',width:80},  
+	        {field:'day5',title:AddDays(startDate,5),align:'center',width:80},
+	        {field:'day6',title:AddDays(startDate,6),align:'center',width:80} 
 	    ]],  
 	    onLoadSuccess:function(data)
 	    {  

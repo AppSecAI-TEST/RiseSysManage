@@ -1067,6 +1067,7 @@ $("#addGiftBtn").click(function ()
 		giftTR.attr("val","gift");
 		giftTR.find("td").each(function(n,node)
 		{
+			var getFlag = $("input[name='isGetY']:checked").val(); //是否领取
 			var parentType=$("#parentType").combobox('getValue');
 			var giftEffDate=$("#giftEffDate").textbox('getValue');
 			if(n==1)//赠品类型;	
@@ -1099,7 +1100,7 @@ $("#addGiftBtn").click(function ()
 				}
 				
 				//判断是否是券类
-				if(parentType=='COUPON' && code=='')
+				if(parentType=='COUPON' && code=='' && 'Y'==getFlag)
 				{
 					showMessage('提示', "请输入券类编码",null);
 					flag=false;
@@ -1149,7 +1150,6 @@ $("#addGiftBtn").click(function ()
 				
 			}else if(n==5)
 			{
-				var getFlag = $("input[name='isGetY']:checked").val(); //是否领取
 				$(node).attr("isGet","N");
 				if('Y'==getFlag)
 				{
@@ -1175,7 +1175,7 @@ $("#addGiftBtn").click(function ()
 			}else if(n==7)
 			{
 				var granter=$("#granter").textbox("getValue");
-				if(''==granter)
+				if(''==granter && 'Y'==getFlag)
 				{
 					  showMessage('提示', "发放人为空",null);
 					  flag=false;
