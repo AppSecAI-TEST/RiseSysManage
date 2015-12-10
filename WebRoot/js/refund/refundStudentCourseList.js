@@ -28,20 +28,29 @@ $(document).ready(function() {
     	valueField : "codeFlag",
     	textField : "codeName",
     	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.codeName + "</span>";
+    	},
     	onChange : function(n, o) {
     		if("001" == n) {
     			$("#stageId").combobox({
     				url : "/sys/pubData/qryStage.do",//返回json数据的url
     		    	valueField : "stageId",
     		    	textField : "stageId",
-    		    	panelHeight : "auto"
+    		    	panelHeight : "auto",
+    		    	formatter : function(data) {
+    		    		return "<span>" + data.stageId + "</span>";
+    		    	}
     			});
     		} else {
     			$("#stageId").combobox({
     				url : "/sys/pubData/qryShortClass.do",//返回json数据的url
     		    	valueField : "shortClassId",
     		    	textField : "className",
-    		    	panelHeight : "auto"
+    		    	panelHeight : "auto",
+    		    	formatter : function(data) {
+    		    		return "<span>" + data.className + "</span>";
+    		    	}
     			});
     		}
     	}

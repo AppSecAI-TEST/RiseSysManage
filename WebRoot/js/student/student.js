@@ -22,49 +22,65 @@ $(document).ready(function() {
     });
     
     //校区
-    var staffId = $("#staffId").val();
     var funcNodeId = $("#funcNodeId").val();
-    $("#schoolId").combobox({
-    	url : "/sys/pub/pageCategory.do?staffId="+staffId+"&funcNodeId="+funcNodeId+"&fieldId=schoolId",//返回json数据的url
-    	valueField : "schoolId",
-    	textField : "schoolName",
-    	panelHeight : "auto",
-    	onLoadSuccess : function() {
-    		$("#schoolId").combobox("setValue", "");
-    		$("#schoolId").combobox("setText", "全部校区");
-    	},
-		onChange : function(n, o) {
-			if(n != "" && n != null && n != undefined) {
-				$("#classInstId").combobox({disabled: false});
-				$("#classInstId").combobox({
-	        		url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='001','002','003','004','005'&classInstId=",//返回json数据的url
-	        		valueField : "classInstId",
-	        		textField : "className",
-	        		panelHeight : "auto",
-	        		onChange : function(newVal, oldVal) {
-	        			$("#studentId").combobox({
-	    					url : "/sys/pubData/qryStudentListByClassInstId.do?classInstId="+newVal,
-	    					valueField : "studentId",
-	    	        		textField : "name",
-	    	        		panelHeight : "auto"
-	    				});
-	        		}
-	        	});
-				var classInstId = $("#classInstId").combobox("getValue");
-				if(classInstId == null || classInstId == "" || classInstId == undefined) {
-					$("#studentId").combobox({
-						url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId="+funcNodeId+"&fieldId=studentId",
-						valueField : "studentId",
-						textField : "name",
-						panelHeight : "auto"
-					});
-				}
-			} else {
-				$("#schoolId").combobox("setText", "全部校区");
-				$("#classInstId").combobox({disabled: true});
-			}
-		}
-    })
+    if(funcNodeId != null && funcNodeId != "" && funcNodeId != undefined) {
+    	var staffId = $("#staffId").val();
+    	$("#schoolId").combobox({
+    		url : "/sys/pub/pageCategory.do?staffId="+staffId+"&funcNodeId="+funcNodeId+"&fieldId=schoolId",//返回json数据的url
+    		valueField : "schoolId",
+    		textField : "schoolName",
+    		panelHeight : "auto",
+    		formatter : function(data) {
+    			return "<span>" + data.schoolName + "</span>";
+    		},
+    		onLoadSuccess : function() {
+    			$("#schoolId").combobox("setValue", "");
+    			$("#schoolId").combobox("setText", "全部校区");
+    		},
+    		onChange : function(n, o) {
+    			if(n != "" && n != null && n != undefined) {
+    				$("#classInstId").combobox({disabled: false});
+    				$("#classInstId").combobox({
+    					url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='001','002','003','004','005'&classInstId=",//返回json数据的url
+    					valueField : "classInstId",
+    					textField : "className",
+    					panelHeight : "auto",
+    					formatter : function(data) {
+    						return "<span>" + data.className + "</span>";
+    					},
+    					onChange : function(newVal, oldVal) {
+    						$("#studentId").combobox({
+    							url : "/sys/pubData/qryStudentListByClassInstId.do?classInstId="+newVal,
+    							valueField : "studentId",
+    							textField : "name",
+    							panelHeight : "auto",
+    							formatter : function(data) {
+    								return "<span>" + data.name + "</span>";
+    							}
+    						});
+    					}
+    				});
+    				var classInstId = $("#classInstId").combobox("getValue");
+    				if(classInstId == null || classInstId == "" || classInstId == undefined) {
+    					$("#studentId").combobox({
+    						url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId="+funcNodeId+"&fieldId=studentId",
+    						valueField : "studentId",
+    						textField : "name",
+    						panelHeight : "auto",
+    						formatter : function(data) {
+    							return "<span>" + data.name + "</span>";
+    						}
+    					});
+    				}
+    			} else {
+    				$("#schoolId").combobox("setText", "全部校区");
+    				$("#classInstId").combobox('clear');
+    				$("#classInstId").combobox("loadData", new Array());
+    				$("#classInstId").combobox({disabled: true});
+    			}
+    		}
+    	});
+    }
     
     $("#addStudent").click(function() {
     	window.location.href = "/sys/student/addStudent.jsp";
@@ -91,7 +107,7 @@ $(document).ready(function() {
     	if(validateSelect()) {
     		var row = $('#list_data').datagrid('getSelected');
     		var studentId = row.studentId;
-    		window.location.href = "/sys/view.jsp?studentId="+studentId;
+    		window.location.href = "/sys/view.jsp?studentId="+studentId+"&title=基础信息";
     	}
     });
     
@@ -126,8 +142,8 @@ $(document).ready(function() {
     });
     
     $("#setVip").click(function() {
-    	if(validateIsSelect()) {
-    		var row = $('#list_data').datagrid('getSelected');
+    	var row = $('#list_data').datagrid('getSelected');
+    	if(row) {
     		var vip = row.vip;
     		if("N" == vip) {
     			var studentId = row.studentId;
@@ -143,8 +159,8 @@ $(document).ready(function() {
     });
     
     $("#addVipRematk").click(function() {
-    	if(validateIsSelect()) {
-    		var row = $('#list_data').datagrid('getSelected');
+    	var row = $('#list_data').datagrid('getSelected');
+    	if(row) {
     		var vip = row.vip;
     		if("Y" == vip) {
     			var studentId = row.studentId;
@@ -160,11 +176,11 @@ $(document).ready(function() {
     });
     
     $("#viewVip").click(function() {
-    	if(validateIsSelect()) {
-    		var row = $('#list_data').datagrid('getSelected');
+    	var row = $('#list_data').datagrid('getSelected');
+    	if(row) {
     		var vip = row.vip;
     		var studentId = row.studentId;
-			window.location.href = "/sys/view.jsp?studentId="+studentId;
+			window.location.href = "/sys/view.jsp?studentId="+studentId+"&title=VIP信息";
     	} else {
     		$.messager.alert('提示', "请您选择您要浏览的学员！");
     	}

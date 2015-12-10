@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
+	String funcNodeId = request.getParameter("funcNodeId");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -18,7 +19,9 @@
   				<tr>
   					<td align="right"><span>学员姓名：</span></td>
 					<td width="100px">
-						<select id="studentId" name="studentId" class="easyui-combobox" style="width: 100px; height: 25px;">
+						<select id="studentId" name="studentId" class="easyui-combobox" style="width: 100px; height: 25px;"
+							data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"	
+							url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=${sessionScope.StaffT.schoolId}&funcNodeId=<%=funcNodeId %>&fieldId=studentId">
 		        		</select>
 					</td>
 					<td align="right"><span>联系电话：</span></td>
@@ -28,8 +31,7 @@
 					<td align="right"><span>转出班老师：</span></td>
 					<td width="100px">
 						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-	      					onLoadSuccess:function(data){if(data.length > 0) $('#teacherId').combobox('setValue',data[0].teacherId);}" 
+							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'" 
 	      					url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}&classType=">
 				        </select>
 					</td>
@@ -42,14 +44,15 @@
 					</td>
 					<td align="right"><span>选择班级：</span></td>
 					<td width="100px">
-						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 100px; height: 25px;">
+						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 100px; height: 25px;"
+							data-options="formatter:formatClassInst, valueField: 'classInstId', textField: 'className', panelHeight: 'auto'" 
+	      					url="<%=path %>/pubData/qryClassInstList.do?schoolId=${sessionScope.StaffT.schoolId}&courseType=001&stageId=&classType=&classState=003&classInstId=">
 				       	</select>
 					</td>
 					<td align="right"><span>课程状态：</span></td>
 					<td width="100px">
 						<select id="courseState" name="courseState" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      					onLoadSuccess:function(data){if(data.length > 0) $('#courseState').combobox('setValue',data[0].codeFlag);}" 
+							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 	      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_STATE&codeFlag=003,004,005">
 				       	</select>
 					</td>

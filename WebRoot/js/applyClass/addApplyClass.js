@@ -9,6 +9,9 @@ $(document).ready(function() {
     	textField : "codeName",
     	panelHeight : "auto",
     	editable : false,
+    	formatter : function(data) {
+    		return "<span>" + data.codeName + "</span>";
+    	},
 		onChange : function(n, o) {
 			//新招
 			if("001" == n) {
@@ -27,6 +30,9 @@ $(document).ready(function() {
     	textField : "stageId",
     	panelHeight : "auto",
     	editable : false,
+    	formatter : function(data) {
+    		return "<span>" + data.stageId + "</span>";
+    	},
 		onChange : function(n, o) {
 			var schooolId = $("#schoolId").val();
 			var date = new Date().format("yyyy-MM-dd");
@@ -36,6 +42,9 @@ $(document).ready(function() {
         		textField : "classType",
         		panelHeight : "auto",
         		editable : false,
+        		formatter : function(data) {
+        			return "<span>" + data.classType + "</span>";
+        		},
         		onChange : function(newValue, oldValue) {
         			var courseType = $('#courseType').val();
         			var stageId = $("#stageId").combobox("getValue");
@@ -61,6 +70,9 @@ $(document).ready(function() {
     	textField : "codeName",
     	panelHeight : "auto",
     	editable : false,
+    	formatter : function(data) {
+    		return "<span>" + data.codeName + "</span>";
+    	},
 		onChange : function(n, o) {
 			var higherOptionSchoolId = $("#higherOptionSchoolId").combobox("getValue");
 			$("#higherOptionClassInstId").combobox({
@@ -68,7 +80,10 @@ $(document).ready(function() {
         		valueField : "classInstId",
         		textField : "className",
         		panelHeight : "auto",
-        		editable : false
+        		editable : false,
+        		formatter : function(data) {
+        			return "<span>" + data.className + "</span>";
+        		}
 			});
 		}
 	});
@@ -211,13 +226,19 @@ $(document).ready(function() {
     	textField : "codeName",
     	panelHeight : "auto",
     	editable : false,
+    	formatter : function(data) {
+    		return "<span>" + data.codeName + "</span>";
+    	},
 		onChange : function(n, o) {
 			$("#hourRange").combobox({
         		url : "/sys/pubData/qryHourRangeList.do?weekTime=" + n,//返回json数据的url
         		valueField : "hourRange",
         		textField : "hourRangeVal",
         		panelHeight : "auto",
-        		editable : false
+        		editable : false,
+        		formatter : function(data) {
+        			return "<span>" + data.hourRangeVal + "</span>";
+        		}
         	});
 		}
 	});
@@ -229,6 +250,9 @@ $(document).ready(function() {
     	textField : "schoolName",
     	panelHeight : "auto",
     	editable : false,
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
 		onChange : function(n, o) {
 			var classType = $("#classType").combobox("getValue");
 			$("#teacherId").combobox({
@@ -237,6 +261,9 @@ $(document).ready(function() {
         		textField : "byname",
         		panelHeight : "auto",
         		editable : false,
+        		formatter : function(data) {
+        			return "<span>" + data.byname + "</span>";
+        		},
                 onChange : function(n, o) {
         			var weekTime = null;
         			var hourRange = null;

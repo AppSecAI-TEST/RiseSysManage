@@ -16,6 +16,39 @@ $(document).ready(function() {
     	});
     });
 	
+	$("#schoolId").combobox({
+		url : "/sys/pubData/qrySchoolList.do",
+		valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
+    	onLoadSuccess : function() {
+    		$("#schoolId").combobox("setValue", "");
+    		$("#schoolId").combobox("setText", "全部校区");
+    	},
+    	onChange : function(n, o) {
+    		if(n != null && n != "" && n != undefined) {
+    			$("#teacherId").combobox({disabled: false});
+    			$("#teacherId").combobox({
+    				url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&classType=",
+    				valueField : "teacherId",
+    		    	textField : "byname",
+    		    	panelHeight : "auto",
+    		    	formatter : function(data) {
+    		    		return "<span>" + data.byname + "</span>";
+    		    	}
+    			});
+    		} else {
+    			$("#schoolId").combobox("setText", "全部校区");
+    			$("#teacherId").combobox('clear');
+				$("#teacherId").combobox("loadData", new Array());
+				$("#teacherId").combobox({disabled: true});
+    		}
+    	}
+	});
+	
 	$("#applyChangeSubmit").click(function() {
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) {

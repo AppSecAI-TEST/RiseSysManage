@@ -9,12 +9,18 @@ $(document).ready(function() {
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
         onChange : function(n, o) {
         	$("#advisterIdA").combobox({
         		url : "/sys/pubData/qryStaffList.do?schoolId=" + n,//返回json数据的url
         		valueField : "staffId",
         		textField : "userName",
-        		panelHeight : "auto"
+        		panelHeight : "auto",
+        		formatter : function(data) {
+            		return "<span>" + data.userName + "</span>";
+            	}
         	});
         }  
     });
@@ -25,12 +31,18 @@ $(document).ready(function() {
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
         onChange : function(n, o) {
         	$("#advisterIdB").combobox({
         		url : "/sys/pubData/qryStaffList.do?schoolId=" + n,//返回json数据的url
         		valueField : "staffId",
         		textField : "userName",
-        		panelHeight : "auto"
+        		panelHeight : "auto",
+        		formatter : function(data) {
+            		return "<span>" + data.userName + "</span>";
+            	}
         	});
         }
     });
@@ -41,12 +53,18 @@ $(document).ready(function() {
     	valueField : "codeFlag",
     	textField : "codeName",
     	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.codeName + "</span>";
+    	},
     	onChange : function(n, o) {
     		$("#realSchoolId").combobox({
     			url : "/sys/pubData/qryParaConfigList.do?paramType=REAL_SCHOOL_ID&paramValue=" + n,//返回json数据的url
         		valueField : "param1",
         		textField : "param2",
-        		panelHeight : "auto"
+        		panelHeight : "auto",
+        		formatter : function(data) {
+            		return "<span>" + data.param2 + "</span>";
+            	}
     		});
     	}
     });
@@ -77,6 +95,9 @@ $(document).ready(function() {
     	valueField : "codeFlag",
     	textField : "codeName",
     	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.codeName + "</span>";
+    	},
     	onChange : function(n, o) {
     		if("2BA" == n) {
     			var identityId = $("#identityId").textbox("getValue");
@@ -95,6 +116,9 @@ $(document).ready(function() {
     	valueField : "codeFlag",
     	textField : "codeName",
     	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.codeName + "</span>";
+    	},
     	onChange : function(n, o) {
     		if("2BA" == n) {
     			var contactIdentityId = $("#contactIdentityId").textbox("getValue");

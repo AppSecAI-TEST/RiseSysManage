@@ -8,24 +8,26 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
+		<%@ include file="../common/pub.jsp" %>
 		<script type="text/javascript" src="<%=path %>/js/student/student.js"></script>
   	</head>
   
   	<body>
+		<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
+  		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
 		<form id="qryFm" style="margin:0 auto;">
 			<table  style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
 				<tr>
 					<td align="right"><span>所属校区：</span></td>
 					<td width="114px">
-						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;"
-							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-	      					onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
-	      					url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
+						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;">
         				</select>
 					</td>
 					<td align="right"><span>学员姓名：</span></td>
 					<td width="114px">
-						<select id="name" name="name" class="easyui-combobox" style="width: 114px; height: 25px;">
+						<select id="studentId" name="studentId" class="easyui-combobox" style="width: 114px; height: 25px;"
+							data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"	
+							url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=&funcNodeId=${param.funcNodeId}&fieldId=studentId">
         				</select>
 					</td>
 					<td align="right"><span>联系电话：</span></td>

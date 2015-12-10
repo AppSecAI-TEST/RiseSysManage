@@ -21,12 +21,9 @@ $(document).ready(function() {
     	valueField : "stageId",
     	textField : "stageId",
     	panelHeight : "auto",
-    	onLoadSuccess : function () { //数据加载完毕事件
-            var data = $('#stageId').combobox('getData');
-            if (data.length > 0) {
-                $("#stageId").combobox('select', data[0].stageId);
-            }
-        },
+    	formatter : function(data) {
+    		return "<span>" + data.stageId + "</span>";
+    	},
 		onChange : function(n, o) {
 			var schoolId = $("#schoolId").val();
 			$("#classInstId").combobox({
@@ -34,12 +31,9 @@ $(document).ready(function() {
         		valueField : "classInstId",
         		textField : "className",
         		panelHeight : "auto",
-        		onLoadSuccess : function () { //数据加载完毕事件
-                    var data = $('#classInstId').combobox('getData');
-                    if (data.length > 0) {
-                        $("#classInstId").combobox('select', data[0].classInstId);
-                    }
-                }
+        		formatter : function(data) {
+        			return "<span>" + data.className + "</span>";
+        		}
         	});
 		}
 	});

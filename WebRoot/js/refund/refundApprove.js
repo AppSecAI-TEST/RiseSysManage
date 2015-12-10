@@ -193,7 +193,10 @@ $(document).ready(function() {
 			url : "/sys/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=MASTER_TYPE",//返回json数据的url
 	    	valueField : "codeFlag",
 	    	textField : "codeName",
-	    	panelHeight : "auto"
+	    	panelHeight : "auto",
+	    	formatter : function(data) {
+	    		return "<span>" + data.codeName + "</span>";
+	    	}
 		});
 		$("#headmasterViewDiv").css("display", "block");
 		$("#financialViewDiv").css("display", "block");

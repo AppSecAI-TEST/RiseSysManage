@@ -5,6 +5,9 @@ $(document).ready(function() {
     	textField : "codeName",
     	panelHeight : "auto",
     	editable : false,
+    	formatter : function(data) {
+    		return "<span>" + data.codeName + "</span>";
+    	},
 		onChange : function(n, o) {
 			if("COUPON" == n) {
 				$("#otherTd").css("display", "none");
@@ -15,12 +18,18 @@ $(document).ready(function() {
 					textField :  "typeName",
 					panelHeight : "auto",
 					editable : false,
+					formatter : function(data) {
+			    		return "<span>" + data.typeName + "</span>";
+			    	},
 					onChange : function(newValue, oldValue) {
 						$("#amount").combobox({
 							url : "/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+newValue+"\"}",//返回json数据的url
 					        valueField : "giftId",
 					        textField :  "giftName",
-					        panelHeight : "auto"
+					        panelHeight : "auto",
+					        formatter : function(data) {
+					    		return "<span>" + data.giftName + "</span>";
+					    	}
 						});
 					}
 				});
@@ -34,7 +43,10 @@ $(document).ready(function() {
 					valueField : "giftId",
 					textField :  "giftName",
 					panelHeight : "auto",
-					editable : false
+					editable : false,
+					formatter : function(data) {
+			    		return "<span>" + data.giftName + "</span>";
+			    	}
 				});
 				$("#giftCode").numberbox("datebox", "");
 				$("#giftCode").numberbox("setValue", "");

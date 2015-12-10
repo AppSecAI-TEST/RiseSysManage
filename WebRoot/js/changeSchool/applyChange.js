@@ -76,38 +76,44 @@ $(document).ready(function() {
 	
 	$("#applyChangeSubmit").click(function() {
 		if($("#applyChangeSchoolFm").form('validate')) {
-			var flag = true;
-			var fileName = $("#fileName").filebox("getValue");
-			if(fileName != "" && fileName != null && fileName != undefined) {
-				var imgUrl = $("#imgUrl").val();
-				if(imgUrl == "" || imgUrl == null || imgUrl == undefined) {
-					flag = false;
+			var outSchoolId = $("#outSchoolId").val();
+			var inSchoolId = $("#inSchoolId").combobox("getValue");
+			if(inSchoolId != outSchoolId) {
+				var flag = true;
+				var fileName = $("#fileName").filebox("getValue");
+				if(fileName != "" && fileName != null && fileName != undefined) {
+					var imgUrl = $("#imgUrl").val();
+					if(imgUrl == "" || imgUrl == null || imgUrl == undefined) {
+						flag = false;
+					}
 				}
-			}
-			if(flag) {
-				var obj = JSON.stringify($("#applyChangeSchoolFm").serializeObject());
-				obj = encodeURI(obj);
-				$.ajax({
-					url: "/sys/change/applyChangeClass.do",
-					data: "param=" + obj,
-					dataType: "json",
-					async: false,
-					beforeSend: function()
-					{
-						$.messager.progress({title : '申请转校', msg : '正在申请转校，请稍等……'});
-					},
-					success: function (data) {
-						$.messager.progress('close'); 
-						var flag = data.flag
-						if(flag) {
-							$.messager.alert('提示', "申请转校成功！", "info", function() {back();});
-						} else {
-							$.messager.alert('提示', data.msg);
-						}
-					} 
-				});
+				if(flag) {
+					var obj = JSON.stringify($("#applyChangeSchoolFm").serializeObject());
+					obj = encodeURI(obj);
+					$.ajax({
+						url: "/sys/change/applyChangeClass.do",
+						data: "param=" + obj,
+						dataType: "json",
+						async: false,
+						beforeSend: function()
+						{
+							$.messager.progress({title : '申请转校', msg : '正在申请转校，请稍等……'});
+						},
+						success: function (data) {
+							$.messager.progress('close'); 
+							var flag = data.flag
+							if(flag) {
+								$.messager.alert('提示', "申请转校成功！", "info", function() {back();});
+							} else {
+								$.messager.alert('提示', data.msg);
+							}
+						} 
+					});
+				} else {
+					$.messager.alert('提示', "请您先上传文件！");
+				}
 			} else {
-				$.messager.alert('提示', "请您先上传文件！");
+				$.messager.alert('提示', "请选择另一个校区转入！");
 			}
 		}
 	});

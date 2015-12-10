@@ -44,9 +44,114 @@ $(document).ready(function() {
     	});
 	});
 	
+	$("#outSchoolId").combobox({
+		url : "/sys/pubData/qrySchoolList.do",
+		valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
+    	onLoadSuccess : function() {
+    		$("#outSchoolId").combobox("setValue", "");
+    		$("#outSchoolId").combobox("setText", "全部校区");
+    	},
+    	onChange : function(n, o) {
+    		if(n != "" && n != null && n != undefined) {
+    			$("#outTeacherId").combobox({disabled: false});
+    			$("#outTeacherId").combobox({
+    				url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&classType=",//返回json数据的url
+	        		valueField : "teacherId",
+	        		textField : "byname",
+	        		panelHeight : "auto",
+	        		formatter : function(data) {
+	        			return "<span>" + data.byname + "</span>";
+	        		}
+    			});
+    			$("#outSchoolClassInstId").combobox({disabled: false});
+    			$("#outSchoolClassInstId").combobox({
+    				url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='003'&classInstId=",//返回json数据的url
+    				valueField : "classInstId",
+    				textField : "className",
+    				panelHeight : "auto",
+    				formatter : function(data) {
+    					return "<span>" + data.className + "</span>";
+    				}
+    			});
+    		} else {
+    			$("#outSchoolId").combobox("setText", "全部校区");
+				$("#outTeacherId").combobox('clear');
+				$("#outTeacherId").combobox("loadData", new Array());
+				$("#outTeacherId").combobox({disabled: true});
+				$("#outSchoolClassInstId").combobox('clear');
+				$("#outSchoolClassInstId").combobox("loadData", new Array());
+				$("#outSchoolClassInstId").combobox({disabled: true});
+    		}
+    	}
+	});
+	
+	$("#inSchoolId").combobox({
+		url : "/sys/pubData/qrySchoolList.do",
+		valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
+    	onLoadSuccess : function() {
+    		$("#inSchoolId").combobox("setValue", "");
+    		$("#inSchoolId").combobox("setText", "全部校区");
+    	},
+    	onChange : function(n, o) {
+    		if(n == null || n == "" || n == undefined) {
+    			$("#inSchoolId").combobox("setText", "全部校区");
+    		}
+    	}
+	});
+	
+	$("#approveSchoolId").combobox({
+		url : "/sys/pubData/qrySchoolList.do",
+		valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
+    	onLoadSuccess : function() {
+    		$("#approveSchoolId").combobox("setValue", "");
+    		$("#approveSchoolId").combobox("setText", "全部校区");
+    	},
+    	onChange : function(n, o) {
+    		if(n == null || n == "" || n == undefined) {
+    			$("#approveSchoolId").combobox("setText", "全部校区");
+    		}
+    	}
+	});
+	
+	$("#approveInschoolId").combobox({
+		url : "/sys/pubData/qrySchoolList.do",
+		valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
+    	onLoadSuccess : function() {
+    		$("#approveInschoolId").combobox("setValue", "");
+    		$("#approveInschoolId").combobox("setText", "全部校区");
+    	},
+    	onChange : function(n, o) {
+    		if(n == null || n == "" || n == undefined) {
+    			$("#approveInschoolId").combobox("setText", "全部校区");
+    		}
+    	}
+	});
+
+
 	//转校申请
 	$("#changeSchoolBtn").click(function() {
-		window.location.href = "/sys/changeSchool/changeStudentList.jsp";
+		var funcNodeId = $("#funcNodeId").val();
+		window.location.href = "/sys/changeSchool/changeStudentList.jsp?funcNodeId="+funcNodeId;
 	});
 	
 	//转出

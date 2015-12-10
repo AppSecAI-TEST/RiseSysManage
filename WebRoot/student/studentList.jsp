@@ -13,8 +13,8 @@
   	</head>
   
   	<body>
-		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
 		<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
+		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
 		<form id="qryFm" style="margin:0 auto;">
 			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
 				<tr>

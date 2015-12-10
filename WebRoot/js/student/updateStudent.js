@@ -134,6 +134,9 @@ $(document).ready(function() {
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
     	onLoadSuccess : function () { //数据加载完毕事件
     		var updateAdvisterASchoolId = $("#updateAdvisterASchoolId").val();
     		if(updateAdvisterASchoolId != null && updateAdvisterASchoolId != null && updateAdvisterASchoolId != undefined) {
@@ -149,6 +152,9 @@ $(document).ready(function() {
         		valueField : "staffId",
         		textField : "userName",
         		panelHeight : "auto",
+        		formatter : function(data) {
+            		return "<span>" + data.userName + "</span>";
+            	},
         		onLoadSuccess : function () { //数据加载完毕事件
         			var updateAdvisterIdA = $("#updateAdvisterIdA").val();
         			if(updateAdvisterIdA != null && updateAdvisterIdA != null && updateAdvisterIdA != undefined) {
@@ -168,6 +174,9 @@ $(document).ready(function() {
     	valueField : "codeFlag",
     	textField : "codeName",
     	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.codeName + "</span>";
+    	},
     	onLoadSuccess : function () { //数据加载完毕事件
     		var updateIdentityType = $("#updateIdentityType").val();
     		if(updateIdentityType != null && updateIdentityType != "" && updateIdentityType != undefined) {
@@ -195,6 +204,9 @@ $(document).ready(function() {
     	valueField : "codeFlag",
     	textField : "codeName",
     	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.codeName + "</span>";
+    	},
     	onChange : function(n, o) {
     		if("2BA" == n) {
     			var contactIdentityId = $("#contactIdentityId").textbox("getValue");
@@ -214,6 +226,9 @@ $(document).ready(function() {
     	valueField : "staffId",
     	textField : "userName",
     	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.userName + "</span>";
+    	},
     	onLoadSuccess : function () { //数据加载完毕事件
     		var updateDutyAdvister = $("#updateDutyAdvister").val();
     		if(updateDutyAdvister != null && updateDutyAdvister != "" && updateDutyAdvister != undefined) {
@@ -231,6 +246,9 @@ $(document).ready(function() {
     	valueField : "staffId",
     	textField : "userName",
     	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.userName + "</span>";
+    	},
     	onLoadSuccess : function () { //数据加载完毕事件
     		var updateCarer = $("#updateCarer").val();
     		if(updateCarer != null && updateCarer != "" && updateCarer != undefined) {
@@ -248,6 +266,9 @@ $(document).ready(function() {
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
     	onLoadSuccess : function () { //数据加载完毕事件
             var data = $('#advisterBSchoolId').combobox('getData');
             if (data.length > 0) {
@@ -260,6 +281,9 @@ $(document).ready(function() {
         		valueField : "staffId",
         		textField : "userName",
         		panelHeight : "auto",
+        		formatter : function(data) {
+            		return "<span>" + data.userName + "</span>";
+            	},
         		onLoadSuccess : function () { //数据加载完毕事件
                     var data = $('#advisterIdB').combobox('getData');
                     if (data.length > 0) {
@@ -276,12 +300,18 @@ $(document).ready(function() {
     	valueField : "codeFlag",
     	textField : "codeName",
     	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.codeName + "</span>";
+    	},
     	onChange : function(n, o) {
     		$("#realSchoolId").combobox({
     			url : "/sys/pubData/qryParaConfigList.do?paramType=REAL_SCHOOL_ID&paramValue=" + n,//返回json数据的url
         		valueField : "param1",
         		textField : "param2",
-        		panelHeight : "auto"
+        		panelHeight : "auto",
+        		formatter : function(data) {
+            		return "<span>" + data.param2 + "</span>";
+            	}
     		});
     	}
     });

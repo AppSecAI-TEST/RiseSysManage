@@ -10,6 +10,9 @@ $(document).ready(function() {
     	valueField : "codeFlag",
     	textField : "codeName",
     	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.codeName + "</span>";
+    	},
     	onLoadSuccess : function () { //数据加载完毕事件
             var data = $('#refundWay').combobox('getData');
             if (data.length > 0) {
@@ -45,6 +48,9 @@ $(document).ready(function() {
 		    	valueField : "codeFlag",
 		    	textField : "codeName",
 		    	panelHeight : "auto",
+		    	formatter : function(data) {
+		    		return "<span>" + data.codeName + "</span>";
+		    	},
 		    	onLoadSuccess : function () { //数据加载完毕事件
 		            var data = $('#schoolReasonType').combobox('getData');
 		            if (data.length > 0) {
@@ -58,6 +64,9 @@ $(document).ready(function() {
 		        			valueField : "param1",
 		        			textField : "param2",
 		        			panelHeight : "auto",
+		        			formatter : function(data) {
+		    		    		return "<span>" + data.param2 + "</span>";
+		    		    	},
 		        			onLoadSuccess : function () { //数据加载完毕事件
 		        				var data = $('#schoolReason').combobox('getData');
 		        				if (data.length > 0) {
@@ -77,6 +86,9 @@ $(document).ready(function() {
 		    	valueField : "codeFlag",
 		    	textField : "codeName",
 		    	panelHeight : "auto",
+		    	formatter : function(data) {
+		    		return "<span>" + data.codeName + "</span>";
+		    	},
 		    	onLoadSuccess : function () { //数据加载完毕事件
 		            var data = $('#customerReason').combobox('getData');
 		            if (data.length > 0) {
@@ -108,6 +120,9 @@ $(document).ready(function() {
 		    	valueField : "staffId",
 		    	textField : "userName",
 		    	panelHeight : "auto",
+		    	formatter : function(data) {
+		    		return "<span>" + data.userName + "</span>";
+		    	},
 		    	onLoadSuccess : function () { //数据加载完毕事件
 		            var data = $('#teacherId').combobox('getData');
 		            if (data.length > 0) {
@@ -123,6 +138,9 @@ $(document).ready(function() {
 		    	valueField : "staffId",
 		    	textField : "userName",
 		    	panelHeight : "auto",
+		    	formatter : function(data) {
+		    		return "<span>" + data.userName + "</span>";
+		    	},
 		    	onLoadSuccess : function () { //数据加载完毕事件
 		            var data = $('#careAdviserId').combobox('getData');
 		            if (data.length > 0) {
@@ -143,6 +161,9 @@ $(document).ready(function() {
 	    	valueField : "staffId",
 	    	textField : "userName",
 	    	panelHeight : "auto",
+	    	formatter : function(data) {
+	    		return "<span>" + data.userName + "</span>";
+	    	},
 	    	onLoadSuccess : function () { //数据加载完毕事件
 	            var data = $('#academicOrSalesId').combobox('getData');
 	            if (data.length > 0) {

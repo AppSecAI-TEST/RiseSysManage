@@ -8,10 +8,12 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
+		<%@ include file="../common/pub.jsp" %>
 		<script type="text/javascript" src="<%=path %>/js/changeSchool/changeSchool.js"></script>
   	</head>
   
   	<body style="padding-top:5px">
+  		<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
   		<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   		<div id="tt" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
   			<div title="转校学员管理" style="padding:5px;display:block;">
@@ -20,7 +22,9 @@
   						<tr>
 							<td align="right"><span>学员姓名：</span></td>
 							<td width="100px">
-								<select id="studentId" name="studentId" class="easyui-combobox" style="width: 100px; height: 25px;">
+								<select id="studentId" name="studentId" class="easyui-combobox" style="width: 100px; height: 25px;"
+									data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"	
+									url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=&funcNodeId=${param.funcNodeId}&fieldId=studentId">
 				        		</select>
 							</td>
 							<td align="right"><span>联系电话：</span></td>
@@ -29,16 +33,16 @@
 							</td>
 							<td align="right"><span>业绩顾问：</span></td>
 		  					<td width="100px">
-								<select id="adviser" name="adviser" class="easyui-combobox" style="width: 100px; height: 25px;">
+								<select id="adviser" name="adviser" class="easyui-combobox" style="width: 100px; height: 25px;"
+									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
+     								url="<%=path %>/pubData/qryStaffList.do?schoolId=">
 				        		</select>
 							</td>
 							<td align="right"><span>转出日期：</span></td>
 			  				<td width="100px">
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeOut" name="startTimeOut" ata-options="formatter:myformatter, parser:myparser"/>
 							</td>
-							<td align="center">
-								<span>至</span>
-							</td>
+							<td align="center"><span>至</span></td>
 							<td width="100px">
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeOut" name="endTimeOut" ata-options="formatter:myformatter, parser:myparser"/>
 							</td>
@@ -60,18 +64,14 @@
 							</td>
 							<td align="right"><span>转出班老师：</span></td>
 							<td width="100px">
-								<select id="outTeacherId" name="outTeacherId" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'" 
-	      							url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}&classType=">
+								<select id="outTeacherId" name="outTeacherId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled">
 				        		</select>
 							</td>
 							<td align="right"><span>转入日期：</span></td>
 			  				<td width="100px">
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeIn" name="startTimeIn" ata-options="formatter:myformatter, parser:myparser"/>
 							</td>
-							<td align="center">
-								<span>至</span>
-							</td>
+							<td align="center"><span>至</span></td>
 							<td width="100px">
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeIn" name="endTimeIn" ata-options="formatter:myformatter, parser:myparser"/>
 							</td>
@@ -79,30 +79,24 @@
   						<tr>
   							<td align="right"><span>转出校区：</span></td>
 			  				<td width="100px">
-								<select id="outSchoolId" name="outSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      			url="<%=path %>/pubData/qrySchoolList.do">
+								<select id="outSchoolId" name="outSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 							</td>
 							<td align="right"><span>转入校区：</span></td>
 							<td width="100px">
-								<select id="inSchoolId" name="inSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-						      		url="<%=path %>/pubData/qrySchoolList.do">
+								<select id="inSchoolId" name="inSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 							</td>
 							<td align="right"><span>转出校在读班级：</span></td>
 							<td width="100px">
-								<select id="outSchoolClassInstId" name="outSchoolClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;">
+								<select id="outSchoolClassInstId" name="outSchoolClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled">
 				        		</select>
 							</td>
 							<td align="right"><span>完成日期：</span></td>
 			  				<td width="100px">
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeFinish" name="startTimeFinish" ata-options="formatter:myformatter, parser:myparser"/>
 							</td>
-							<td align="center">
-								<span>至</span>
-							</td>
+							<td align="center"><span>至</span></td>
 							<td width="100px">
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeFinish" name="endTimeFinish" ata-options="formatter:myformatter, parser:myparser"/>
 							</td>
@@ -114,7 +108,8 @@
   					</table>
   				</form>
   				<div style="padding:5px 0;min-width:1100px; width:100%;">
-				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="apply_list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1019" 
+				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="apply_list_data" 
+				  		url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1019" 
 				  		toolbar="#toolbarApply" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
@@ -155,7 +150,9 @@
   						<tr>
   							<td align="right"><span>学员姓名：</span></td>
 							<td width="100px">
-								<select id="approveStudentId" name="approveStudentId" class="easyui-combobox" style="width: 100px; height: 25px;">
+								<select id="approveStudentId" name="approveStudentId" class="easyui-combobox" style="width: 100px; height: 25px;"
+									data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"	
+									url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=&funcNodeId=${param.funcNodeId}&fieldId=studentId">
 				        		</select>
 							</td>
 							<td align="right"><span>联系电话：</span></td>
@@ -180,16 +177,12 @@
   						<tr>
   							<td align="right"><span>转出校区：</span></td>
 			  				<td width="100px">
-								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-						      		url="<%=path %>/pubData/qrySchoolList.do">
+								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 							</td>
 		  					<td align="right"><span>转入校区：</span></td>
 							<td width="100px">
-								<select id="approveInschoolId" name="approveInschoolId" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-						      		url="<%=path %>/pubData/qrySchoolList.do">
+								<select id="approveInschoolId" name="approveInschoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 							</td>
 							<td align="right"><span>审批日期：</span></td>

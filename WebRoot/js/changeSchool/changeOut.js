@@ -3,7 +3,6 @@ $(document).ready(function() {
 	$("#changeOutSubmit").click(function() {
 		var obj = JSON.stringify($("#changeOutSchoolFm").serializeObject());
 		obj = encodeURI(obj);
-		alert(obj);
 		$.ajax({
 			url : "/sys/change/changeOutSchool.do",
 			data: "param="+obj,

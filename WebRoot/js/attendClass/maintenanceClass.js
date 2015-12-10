@@ -19,6 +19,9 @@ $(document).ready(function() {
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
     	onLoadSuccess : function () { //数据加载完毕事件
             var data = $('#teacherSchoolId').combobox('getData');
             if (data.length > 0) {
@@ -32,6 +35,9 @@ $(document).ready(function() {
 				valueField : "teacherId",
         		textField : "byname",
         		panelHeight : "auto",
+        		formatter : function(data) {
+        			return "<span>" + data.byname + "</span>";
+        		},
         		onChange : function(n, o) {
         			var weekTime = null;
         			var hourRange = null;

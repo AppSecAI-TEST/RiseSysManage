@@ -52,25 +52,65 @@ $(document).ready(function() {
     	});
     });
 	
+	var staffId = $("#staffId").val();
+	var funcNodeId = $("#funcNodeId").val();
+	$("#schoolId").combobox({
+		url : "/sys/pub/pageCategory.do?staffId="+staffId+"&funcNodeId="+funcNodeId+"&fieldId=schoolId",//返回json数据的url
+    	valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
+    	onLoadSuccess : function() {
+    		$("#schoolId").combobox("setValue", "");
+    		$("#schoolId").combobox("setText", "全部校区");
+    	},
+    	onChange : function(n, o) {
+    		if(n != "" && n != null && n != undefined) {
+    			$("#studentId").combobox({
+					url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId="+funcNodeId+"&fieldId=studentId",
+					valueField : "studentId",
+					textField : "name",
+					panelHeight : "auto",
+					formatter : function(data) {
+			    		return "<span>" + data.name + "</span>";
+			    	}
+				});
+    		} else {
+				$("#schoolId").combobox("setText", "全部校区");
+			}
+    	}
+	});
+	
 	$("#courseType").combobox({
 		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE",//返回json数据的url
     	valueField : "codeFlag",
     	textField : "codeName",
     	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.codeName + "</span>";
+    	},
     	onChange : function(n, o) {
     		if("001" == n) {
     			$("#stageId").combobox({
     				url : "/sys/pubData/qryStage.do",//返回json数据的url
     		    	valueField : "stageId",
     		    	textField : "stageId",
-    		    	panelHeight : "auto"
+    		    	panelHeight : "auto",
+    		    	formatter : function(data) {
+			    		return "<span>" + data.stageId + "</span>";
+			    	}
     			});
     		} else {
     			$("#stageId").combobox({
     				url : "/sys/pubData/qryShortClass.do",//返回json数据的url
     		    	valueField : "shortClassId",
     		    	textField : "className",
-    		    	panelHeight : "auto"
+    		    	panelHeight : "auto",
+    		    	formatter : function(data) {
+			    		return "<span>" + data.className + "</span>";
+			    	}
     			});
     		}
     	}
@@ -85,10 +125,10 @@ $(document).ready(function() {
 				var studentCourseId = row.studentCourseId;
 				window.location.href = "/sys/selectClass/selectClass.jsp?studentCourseId="+studentCourseId;
 			} else {
-				$.messager.alert('提示', "您选择的班级暂时还不需要选班！");
+				$.messager.alert('提示', "您选择的学员暂时还不需要选班！");
 			}
 		} else {
-			$.messager.alert('提示', "请先选择您要选班的班级！");
+			$.messager.alert('提示', "请先选择您要选班的学员！");
 		}
 	});
 	

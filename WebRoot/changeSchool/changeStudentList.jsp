@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
+	String funcNodeId = request.getParameter("funcNodeId");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -17,7 +18,9 @@
   				<tr>
   					<td align="right"><span>学员姓名：</span></td>
 					<td width="100px">
-						<select id="studentId" name="studentId" class="easyui-combobox" style="width: 114px; height: 25px;">
+						<select id="studentId" name="studentId" class="easyui-combobox" style="width: 114px; height: 25px;"
+							data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"	
+							url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=&funcNodeId=<%=funcNodeId %>&fieldId=studentId">
 				        </select>
 					</td>
 					<td align="right"><span>联系电话：</span></td>
@@ -33,18 +36,12 @@
   				<tr>
   					<td align="right"><span>校区：</span></td>
 					<td width="100px">
-						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
-							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-					      	onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
-					      	url="<%=path %>/pubData/qrySchoolList.do">
+						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;">
 				        </select>
 					</td>
 					<td align="right"><span>带班老师：</span></td>
 					<td width="100px">
-						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 114px; height: 25px;"
-							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-	      					onLoadSuccess:function(data){if(data.length > 0) $('#teacherId').combobox('setValue',data[0].teacherId);}" 
-	      					url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}&classType=">
+						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 114px; height: 25px;" disabled="disabled">
 				        </select>
 					</td>
 					<td colspan="2" align="right">

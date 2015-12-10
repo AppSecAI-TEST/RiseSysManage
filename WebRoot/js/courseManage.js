@@ -16,30 +16,54 @@ $(document).ready(function() {
     	});
     });
 	
+	var staffId = $("#staffId").val();
+	var funcNodeId = $("#funcNodeId").val();
+	$("#schoolId").combobox({
+		url : "/sys/pub/pageCategory.do?staffId="+staffId+"&funcNodeId="+funcNodeId+"&fieldId=schoolId",//返回json数据的url
+    	valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
+    	onLoadSuccess : function() {
+    		$("#schoolId").combobox("setValue", "");
+    		$("#schoolId").combobox("setText", "全部校区");
+    	},
+    	onChange : function(n, o) {
+    		if(n != "" && n != null && n != undefined) {
+    			$("#studentId").combobox({
+					url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId="+funcNodeId+"&fieldId=studentId",
+					valueField : "studentId",
+					textField : "name",
+					panelHeight : "auto",
+					formatter : function(data) {
+			    		return "<span>" + data.name + "</span>";
+			    	}
+				});
+    		} else {
+				$("#schoolId").combobox("setText", "全部校区");
+			}
+    	}
+	});
+	
 	$("#womType").combobox({
 		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_WOM_T&codeType=WOM_TYPE",//返回json数据的url
     	valueField : "codeFlag",
     	textField : "codeName",
     	panelHeight : "auto",
-//    	onLoadSuccess : function () { //数据加载完毕事件
-//            var data = $('#womType').combobox('getData');
-//            if (data.length > 0) {
-//                $("#womType").combobox('select', data[0].codeFlag);
-//            }
-//        },
+    	formatter : function(data) {
+    		return "<span>" + data.codeName + "</span>";
+    	},
 		onChange : function(n, o) {
 			$("#womTypeDetail").combobox({
 				url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_WOM_T&codeType=WOM_CHANNEL_" + n,//返回json数据的url
 		    	valueField : "codeFlag",
 		    	textField : "codeName",
-		    	panelHeight : "auto"
-//		    		,
-//		    	onLoadSuccess : function () { //数据加载完毕事件
-//		            var data = $('#womTypeDetail').combobox('getData');
-//		            if (data.length > 0) {
-//		                $("#womTypeDetail").combobox('select', data[0].codeFlag);
-//		            }
-//		        }
+		    	panelHeight : "auto",
+		    	formatter : function(data) {
+		    		return "<span>" + data.codeName + "</span>";
+		    	}
 			});	
 		}
 	});	
@@ -66,7 +90,8 @@ function qryData()
 
 function addCourse()
 {
-	window.location.href="addCourseList.jsp";
+	var funcNodeId = $("#funcNodeId").val();
+	window.location.href = "addCourseList.jsp?funcNodeId="+funcNodeId;
 }
 
 function getOldCourse(id) 

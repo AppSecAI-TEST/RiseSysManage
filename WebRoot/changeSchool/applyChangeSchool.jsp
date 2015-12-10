@@ -146,8 +146,7 @@
 	  						<td align="right" width="10%"><span>申请转入：</span></td>
 	  						<td colspan="5" width="90%">
 	  							<select id="inSchoolId" name="inSchoolId" class="easyui-combobox" style="width: 200px; height: 25px;" required="true" 
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-					      			onLoadSuccess:function(data){if(data.length > 0) $('#inSchoolId').combobox('setValue',data[0].schoolId);}"
+									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 					      			url="<%=path %>/pubData/qrySchoolList.do">
 					        	</select>
 	  						</td>

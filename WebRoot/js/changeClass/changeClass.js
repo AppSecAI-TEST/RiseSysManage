@@ -44,17 +44,113 @@ $(document).ready(function() {
     	});
 	});
 	
+	var staffId = $("#handlerId").val();
+	var funcNodeId = $("#funcNodeId").val();
+	$("#schoolId").combobox({
+		url : "/sys/pub/pageCategory.do?staffId="+staffId+"&funcNodeId="+funcNodeId+"&fieldId=schoolId",//返回json数据的url
+    	valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
+    	onLoadSuccess : function() {
+    		$("#schoolId").combobox("setValue", "");
+    		$("#schoolId").combobox("setText", "全部校区");
+    	},
+    	onChange : function(n, o) {
+    		if(n != "" && n != null && n != undefined) {
+    			$("#studentId").combobox({
+					url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId="+funcNodeId+"&fieldId=studentId",
+					valueField : "studentId",
+					textField : "name",
+					panelHeight : "auto",
+					formatter : function(data) {
+						return "<span>" + data.name + "</span>";
+					}
+				});
+    			$("#outClassInstId").combobox({disabled: false});
+    			$("#outClassInstId").combobox({
+    				url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='003','004','005'&classInstId=",//返回json数据的url
+    				valueField : "classInstId",
+    				textField : "className",
+    				panelHeight : "auto",
+    				formatter : function(data) {
+    					return "<span>" + data.className + "</span>";
+    				}
+    			});
+    			$("#inClassInstId").combobox({disabled: false});
+				$("#inClassInstId").combobox({
+	        		url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='001','002','003'&classInstId=",//返回json数据的url
+	        		valueField : "classInstId",
+	        		textField : "className",
+	        		panelHeight : "auto",
+	        		formatter : function(data) {
+	        			return "<span>" + data.className + "</span>";
+	        		}
+	        	});
+				$("#outTeacherId").combobox({disabled: false});
+				$("#outTeacherId").combobox({
+	        		url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&classType=",//返回json数据的url
+	        		valueField : "teacherId",
+	        		textField : "byname",
+	        		panelHeight : "auto",
+	        		formatter : function(data) {
+	        			return "<span>" + data.byname + "</span>";
+	        		}
+	        	});
+    		} else {
+				$("#schoolId").combobox("setText", "全部校区");
+				$("#outClassInstId").combobox('clear');
+				$("#outClassInstId").combobox("loadData", new Array());
+				$("#outClassInstId").combobox({disabled: true});
+				$("#inClassInstId").combobox('clear');
+				$("#inClassInstId").combobox("loadData", new Array());
+				$("#inClassInstId").combobox({disabled: true});
+				$("#outTeacherId").combobox('clear');
+				$("#outTeacherId").combobox("loadData", new Array());
+				$("#outTeacherId").combobox({disabled: true});
+			}
+    	}
+	});
+	
+	$("#approveSchoolId").combobox({
+		url : "/sys/pub/pageCategory.do?staffId="+staffId+"&funcNodeId="+funcNodeId+"&fieldId=schoolId",//返回json数据的url
+    	valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
+    	onLoadSuccess : function() {
+    		$("#approveSchoolId").combobox("setValue", "");
+    		$("#approveSchoolId").combobox("setText", "全部校区");
+    	},
+    	onChange : function(n, o) {
+    		if(n != "" && n != null && n != undefined) {
+    			$("#approveStudentId").combobox({
+					url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId="+funcNodeId+"&fieldId=studentId",
+					valueField : "studentId",
+					textField : "name",
+					panelHeight : "auto",
+					formatter : function(data) {
+						return "<span>" + data.name + "</span>";
+					}
+				});
+    		} else {
+    			$("#approveSchoolId").combobox("setText", "全部校区");
+    		}
+    	}
+	});
+	
 	$("#stageId").combobox({
 		url : "/sys/pubData/qryStage.do",//返回json数据的url
     	valueField : "stageId",
     	textField : "stageId",
     	panelHeight : "auto",
-//    	onLoadSuccess : function () { //数据加载完毕事件
-//            var data = $('#stageId').combobox('getData');
-//            if (data.length > 0) {
-//                $("#stageId").combobox('select', data[0].stageId);
-//            }
-//        },
+    	formatter : function(data) {
+    		return "<span>" + data.stageId + "</span>";
+    	},
 		onChange : function(n, o) {
 			var schoolId = $("#schoolId").combobox("getValue");
 			//转出班级
@@ -62,34 +158,27 @@ $(document).ready(function() {
         		url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType=001&stageId="+n+"&classType=&classState=003&classInstId=",//返回json数据的url
         		valueField : "classInstId",
         		textField : "className",
-        		panelHeight : "auto"
-//        		panelHeight : "auto",
-//        		onLoadSuccess : function () { //数据加载完毕事件
-//                    var data = $('#outClassInstId').combobox('getData');
-//                    if (data.length > 0) {
-//                        $("#outClassInstId").combobox('select', data[0].classInstId);
-//                    }
-//                }
+        		panelHeight : "auto",
+        		formatter : function(data) {
+        			return "<span>" + data.className + "</span>";
+        		}
         	});
 			$("#inClassInstId").combobox({
         		url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType=001&stageId="+n+"&classType=&classState='001','002','003'&classInstId=",//返回json数据的url
         		valueField : "classInstId",
         		textField : "className",
-        		panelHeight : "auto"
-//        		panelHeight : "auto",
-//        		onLoadSuccess : function () { //数据加载完毕事件
-//                    var data = $('#inClassInstId').combobox('getData');
-//                    if (data.length > 0) {
-//                        $("#inClassInstId").combobox('select', data[0].classInstId);
-//                    }
-//                }
+        		panelHeight : "auto",
+        		formatter : function(data) {
+        			return "<span>" + data.className + "</span>";
+        		}
         	});
 		}
 	});
 	
 	//转班申请
 	$("#changeClassBtn").click(function() {
-		window.location.href = "/sys/changeClass/changeStudentList.jsp";
+		var funcNodeId = $("#funcNodeId").val();
+		window.location.href = "/sys/changeClass/changeStudentList.jsp?funcNodeId="+funcNodeId;
 	});
 	
 	//转出

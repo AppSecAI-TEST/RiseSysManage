@@ -10,11 +10,51 @@ $(document).ready(function() {
 		}
 	});
 	
+	var funcNodeId = $("#funcNodeId").val();
+	if(funcNodeId != null && funcNodeId != "" && funcNodeId != undefined) {
+		var staffId = $("#staffId").val();
+		$("#schoolId").combobox({
+    		url : "/sys/pub/pageCategory.do?staffId="+staffId+"&funcNodeId="+funcNodeId+"&fieldId=schoolId",//返回json数据的url
+    		valueField : "schoolId",
+    		textField : "schoolName",
+    		panelHeight : "auto",
+    		formatter : function(data) {
+    			return "<span>" + data.schoolName + "</span>";
+    		},
+    		onLoadSuccess : function() {
+    			$("#schoolId").combobox("setValue", "");
+    			$("#schoolId").combobox("setText", "全部校区");
+    		},
+    		onChange : function(n, o) {
+    			if(n != "" && n != null && n != undefined) {
+    				$("#classInstId").combobox({disabled: false});
+    				$("#classInstId").combobox({
+    					url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='001','002','003','004','005'&classInstId=",//返回json数据的url
+    					valueField : "classInstId",
+    					textField : "className",
+    					panelHeight : "auto",
+    					formatter : function(data) {
+    						return "<span>" + data.className + "</span>";
+    					}
+    				});
+    			} else {
+    				$("#schoolId").combobox("setText", "全部校区");
+    				$("#classInstId").combobox('clear');
+    				$("#classInstId").combobox("loadData", new Array());
+    				$("#classInstId").combobox({disabled: true});
+    			}
+    		}
+		});
+	}
+	
 	$("#stageId").combobox({
 		url : "/sys/pubData/qryStage.do",//返回json数据的url
     	valueField : "stageId",
     	textField : "stageId",
     	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.stageId + "</span>";
+    	},
 		onChange : function(n, o) {
 			var schoolId = $("#schoolId").combobox("getValue");
 			//转出班级
@@ -22,7 +62,10 @@ $(document).ready(function() {
         		url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType=&stageId="+n+"&classType=&classState='001','002','003','004','005'&classInstId=",//返回json数据的url
         		valueField : "classInstId",
         		textField : "className",
-        		panelHeight : "auto"
+        		panelHeight : "auto",
+        		formatter : function(data) {
+        			return "<span>" + data.className + "</span>";
+        		}
         	});
 		}
 	});

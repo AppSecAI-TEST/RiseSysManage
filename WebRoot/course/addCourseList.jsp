@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
+	String funcNodeId = request.getParameter("funcNodeId");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -13,35 +14,27 @@
   
   	<body>
 		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
+		<input type="hidden" id="funcNodeId" value="<%=funcNodeId %>"/>
 		<form id="qryFm" style="margin:0 auto;">
 			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
 				<tr>
-					<td align="right">
-						<span>校区：</span>
-					</td>
+					<td align="right"><span>校区：</span></td>
 					<td width="114px">
-						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false" 
-							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto', 
-							onLoadSuccess:function(data){if(data.length > 0)$('#schoolId').combobox('setValue',data[0].schoolId);}"	
-							url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=schoolId">
+						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;">
      					</select>
 					</td>
-					<td align="right">
-						<span>学员姓名：</span>
-					</td>
+					<td align="right"><span>学员姓名：</span></td>
 					<td width="114px">
-						<select id="name" name="name" class="easyui-combobox" style="width: 114px; height: 25px;">
+						<select id="studentId" name="studentId" class="easyui-combobox" style="width: 114px; height: 25px;"
+							data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"
+							url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=&funcNodeId=<%=funcNodeId %>&fieldId=studentId">
       					</select>
 					</td>
-					<td align="right">
-						<span>联系电话：</span>
-					</td>
+					<td align="right"><span>联系电话：</span></td>
 					<td width="114px">
 						<input name="phone" id="phone" type="text" class="easyui-textbox" style="width: 114px; height: 25px;"/>
 					</td>
-					<td align="right">
-						<span>证件号码：</span>
-					</td>
+					<td align="right"><span>证件号码：</span></td>
 					<td colspan="2">
 						<input name="identityId" id="identityId" type="text" class="easyui-textbox" style="width: 150px; height: 25px;"/>
 					</td>
@@ -56,42 +49,31 @@
 					<td align="right"><span>业绩顾问：</span></td>
 					<td width="114px">
 						<select id="adviserId" name="adviserId" class="easyui-combobox" style="width: 114px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
-     						onLoadSuccess:function(data){if(data.length > 0)$('#adviserId').combobox('setValue',data[0].staffId);}"
-     						url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=advisterId">
+							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
+      						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
       					</select>
 					</td>
-					<td align="right">
-						<span>责任顾问：</span>
-					</td>
+					<td align="right"><span>责任顾问：</span></td>
 					<td width="114px">
 						<select id="dutyAdvister" name="dutyAdvister" class="easyui-combobox" style="width: 114px; height: 25px;"
-						data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
-     						 onLoadSuccess:function(data){if(data.length > 0)$('#dutyAdvister').combobox('setValue',data[0].staffId);}"
-     						url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=dutyAdvister">
-      						</select>
+							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
+      						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+      					</select>
 					</td>
-					<td align="right">
-						<span>客户关怀：</span>
-					</td>
+					<td align="right"><span>客户关怀：</span></td>
 					<td width="114px">
 						<select id="carer" name="carer" class="easyui-combobox" style="width: 114px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto',
-   						 	onLoadSuccess:function(data){if(data.length > 0)$('#carer').combobox('setValue',data[0].staffId);}"
-   							url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=carer">
+							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
+      						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
     					</select>
 					</td>
-					<td align="right">
-						<span>建档时间：</span>
-					</td>
+					<td align="right"><span>建档时间：</span></td>
 					<td width="8px">
-						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTime" name="startTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
-					<td align="center" width="16px;">
-						<span>至</span>
-					</td>
+					<td align="center" width="16px;"><span>至</span></td>
 					<td width="90px">
-						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="endTime" name="endTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="endTime" name="endTime" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
 				</tr>
 			</table>

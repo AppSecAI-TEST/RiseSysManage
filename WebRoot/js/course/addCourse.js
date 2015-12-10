@@ -1,13 +1,44 @@
 $(document).ready(function()
 {
-	$("#single").click(function(){
+	var staffId = $("#staffId").val();
+	var funcNodeId = $("#funcNodeId").val();
+	$("#schoolId").combobox({
+		url : "/sys/pub/pageCategory.do?staffId="+staffId+"&funcNodeId="+funcNodeId+"&fieldId=schoolId",//返回json数据的url
+    	valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
+    	onLoadSuccess : function() {
+    		$("#schoolId").combobox("setValue", "");
+    		$("#schoolId").combobox("setText", "全部校区");
+    	},
+    	onChange : function(n, o) {
+    		if(n != "" && n != null && n != undefined) {
+    			$("#studentId").combobox({
+					url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId="+funcNodeId+"&fieldId=studentId",
+					valueField : "studentId",
+					textField : "name",
+					panelHeight : "auto",
+					formatter : function(data) {
+						return "<span>" + data.name + "</span>";
+			    	}
+				});
+    		} else {
+				$("#schoolId").combobox("setText", "全部校区");
+			}
+    	}
+	});
+	
+	$("#single").click(function() {
 		addSingleCourse();
 	});
-	$("#multiple").click(function(){
+	$("#multiple").click(function() {
 		addMultipleCourse();
 	});
-	$("#backBt").click(function(){
-		window.location.href="qryCourseInfo.jsp";
+	$("#backBt").click(function() {
+		window.location.href = "qryCourseInfo.jsp";
 	});
 	$("#qryBtn").click(function() {
     	qry();

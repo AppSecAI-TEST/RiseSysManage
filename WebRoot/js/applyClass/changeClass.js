@@ -101,6 +101,9 @@ function initClassInst(isBegin) {
     		valueField : "classInstId",
     		textField : "className",
     		panelHeight : "auto",
+    		formatter : function(data) {
+    			return "<span>" + data.className + "</span>";
+    		},
     		onLoadSuccess : function () { //数据加载完毕事件
                 var data = $('#beginClassInstId').combobox('getData');
                 if (data.length > 0) {
@@ -144,6 +147,9 @@ function initClassInst(isBegin) {
     		valueField : "classInstId",
     		textField : "className",
     		panelHeight : "auto",
+    		formatter : function(data) {
+    			return "<span>" + data.className + "</span>";
+    		},
     		onLoadSuccess : function () { //数据加载完毕事件
                 var data = $('#notBeginClassInstId').combobox('getData');
                 if (data.length > 0) {

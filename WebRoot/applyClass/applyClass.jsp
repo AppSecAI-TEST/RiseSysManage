@@ -12,6 +12,8 @@
   	</head>
   
   	<body style="padding-top:5px;">
+  		<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
+		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
   		<div id="tt" class="easyui-tabs" style="min-width:1110px; width:98%; height:auto;">
   			<div title="放班班级管理" style="padding:5px;display:block;">
   				<form id="qryFm" style="margin:0 auto;">
@@ -19,10 +21,7 @@
 			  			<tr>
 			  				<td align="right"><span>校区：</span></td>
 			  				<td width="114px">
-								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-					      			onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
-					      			url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
+								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;">
 				        		</select>
 							</td>
 							<td align="right"><span>课程阶段：</span></td>
@@ -34,7 +33,7 @@
 							</td>
 							<td align="right"><span>班级：</span></td>
 							<td width="114px">
-								<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 114px; height: 25px;">
+								<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 114px; height: 25px;" disabled="disabled">
 				        		</select>
 							</td>
 							<td align="right"><span>放班申请时间：</span></td>

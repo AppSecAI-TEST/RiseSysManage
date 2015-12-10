@@ -8,10 +8,12 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
+		<%@ include file="../common/pub.jsp" %>
 		<script type="text/javascript" src="<%=path %>/js/changeClass/changeClass.js"></script>
   	</head>
   
   	<body style="padding-top:5px">
+  		<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
   		<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   		<div id="tt" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
   			<div title="转班学员管理" style="padding:5px;display:block;">
@@ -20,15 +22,14 @@
 		  				<tr>
 		  					<td align="right"><span>校区：</span></td>
 			  				<td width="100px">
-								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-					      			onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
-					      			url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
+								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 							</td>
 							<td align="right"><span>学员姓名：</span></td>
 							<td width="100px">
-								<select id="studentId" name="studentId" class="easyui-combobox" style="width: 100px; height: 25px;">
+								<select id="studentId" name="studentId" class="easyui-combobox" style="width: 100px; height: 25px;"
+									data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"	
+									url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=&funcNodeId=${param.funcNodeId}&fieldId=studentId">
 				        		</select>
 							</td>
 							<td align="right"><span>联系电话：</span></td>
@@ -49,7 +50,7 @@
 		  				<tr>
 		  					<td align="right"><span>转出班老师：</span></td>
 							<td width="100px">
-								<select id="outTeacherId" name="outTeacherId" class="easyui-combobox" style="width: 100px; height: 25px;">
+								<select id="outTeacherId" name="outTeacherId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled">
 				        		</select>
 							</td>
 		  					<td align="right"><span>业绩类型：</span></td>
@@ -85,12 +86,12 @@
 							</td>
 							<td align="right"><span>转出班级：</span></td>
 							<td width="100px">
-								<select id="outClassInstId" name="outClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;">
+								<select id="outClassInstId" name="outClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled">
 				        		</select>
 							</td>
 							<td align="right" width="30px"><span>转入班级：</span></td>
 							<td width="100px">
-								<select id="inClassInstId" name="inClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;">
+								<select id="inClassInstId" name="inClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled">
 				        		</select>
 							</td>
 							<td align="right"><span>完成日期：</span></td>
@@ -149,14 +150,17 @@
   				<form id="qryApproveFm" style="margin:0 auto;">
 		  			<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
 		  				<tr>
-							<td align="right"><span>学员姓名：</span></td>
-							<td width="100px">
-								<select id="approveStudentId" name="approveStudentId" class="easyui-combobox" style="width: 100px; height: 25px;">
+		  					<td align="right"><span>校区：</span></td>
+			  				<td width="100px">
+								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 							</td>
-							<td align="right"><span>联系电话：</span></td>
+							<td align="right"><span>学员姓名：</span></td>
 							<td width="100px">
-								<input name="approvePhone" id="approvePhone" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
+								<select id="approveStudentId" name="approveStudentId" class="easyui-combobox" style="width: 100px; height: 25px;"
+									data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"	
+									url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=&funcNodeId=${param.funcNodeId}&fieldId=studentId">
+				        		</select>
 							</td>
 							<td align="right"><span>申请日期：</span></td>
 			  				<td width="100px">
@@ -174,20 +178,16 @@
 							<td><span>查看我的审批</span></td>
 		  				</tr>
 		  				<tr>
-		  					<td align="right"><span>校区：</span></td>
-			  				<td width="100px">
-								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-						      		onLoadSuccess:function(data){if(data.length > 0) $('#approveSchoolId').combobox('setValue',data[0].schoolId);}"
-						      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
-				        		</select>
-							</td>
 		  					<td align="right"><span>课程阶段：</span></td>
 							<td width="100px">
 								<select id="approveStageId" name="approveStageId" class="easyui-combobox" style="width: 100px; height: 25px;"
 									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryStage.do">
 				        		</select>
+							</td>
+							<td align="right"><span>联系电话：</span></td>
+							<td width="100px">
+								<input name="approvePhone" id="approvePhone" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
 							<td align="right"><span>审批日期：</span></td>
 			  				<td width="100px">

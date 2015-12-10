@@ -69,7 +69,7 @@ $(document).ready(function() {
 		if(validateSelect()) {
 			var row = $('#list_data').datagrid('getSelected');
 			var studentId = row.studentId;
-			window.location.href = "/sys/view.jsp?studentId="+studentId;
+			window.location.href = "/sys/view.jsp?studentId="+studentId+"&title=基础信息";
 		}
 	});
 	
@@ -125,6 +125,9 @@ $(document).ready(function() {
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
     	onLoadSuccess : function () { //数据加载完毕事件
             var data = $('#teacherSchoolId').combobox('getData');
             if (data.length > 0) {
@@ -137,7 +140,10 @@ $(document).ready(function() {
 				url : "/sys/pubData/qryTeacherList.do?schoolId=" + n + "&classType=" + classType,
 				valueField : "teacherId",
         		textField : "byname",
-        		panelHeight : "auto"
+        		panelHeight : "auto",
+        		formatter : function(data) {
+        			return "<span>" + data.byname + "</span>";
+        		}
 			});
 			$("#licenseFlagText").html("");
 			$("#lessions").numberbox("setValue", "");
@@ -252,6 +258,9 @@ $(document).ready(function() {
 		    	valueField : "roomId",
 		    	textField : "roomName",
 		    	panelHeight : "auto",
+		    	formatter : function(data) {
+		    		return "<span>" + data.roomName + "</span>";
+		    	},
 		    	onLoadSuccess : function () { //数据加载完毕事件
 		            var data = $(id).combobox('getData');
 		            if (data.length > 0) {
