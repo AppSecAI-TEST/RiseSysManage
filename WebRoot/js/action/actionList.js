@@ -1,25 +1,5 @@
 $(document).ready(function(){
-	initDate();
-	$("#qryBtn").click(function() {
-    	var obj = JSON.stringify($("#qryFm").serializeObject());
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-    	$('#list_data').datagrid({
-    		url : "/sys/pubData/qryDataListByPage.do",
-    		queryParams:{
-    			param : obj
-    		},
-    		onLoadSuccess:function(){
-    			$('#list_data').datagrid('clearSelections');
-    		}
-    	});
-    });
-	 
-    $("#resetBtn").click(function() {
-    	$('#qryFm').form('clear');//清空窗体数据  
-    	initDate();
-    });
+	initQryButton("qryBtn","resetBtn","qryFm","list_data");
     $("#addAction").click(function(){
 		window.location.href="addAction.jsp";
 	});

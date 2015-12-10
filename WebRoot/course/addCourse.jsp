@@ -1228,7 +1228,7 @@ $("#addGiftBtn").click(function ()
 			var frameName=$("#frameName").val();
 			$(frameName,parent.document).css("height",height);
 			clearData("giftModelTR");
-			$("input[name='isGetY'][value='Y']").attr("checked", "checked");
+			$("#giftModelTR").find("input[type='radio']:eq(1)").trigger("click");
 	    }
 		
 	
