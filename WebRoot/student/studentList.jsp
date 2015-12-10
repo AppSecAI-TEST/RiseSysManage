@@ -14,6 +14,7 @@
   
   	<body>
 		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
+		<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
 		<form id="qryFm" style="margin:0 auto;">
 			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
 				<tr>
@@ -21,24 +22,23 @@
 						<span>校区：</span>
 					</td>
 					<td width="100px">
-						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false" 
-							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto', 
-							onLoadSuccess:function(data){if(data.length > 0)$('#schoolId').combobox('setValue',data[0].schoolId);}"	
-							url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=schoolId">
+						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;">
      					</select>
 					</td>
 					<td align="right">
 						<span>班级：</span>
 					</td>
 					<td width="100px">
-						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 114px; height: 25px;">
+						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 114px; height: 25px;" disabled="disabled">
       					</select>
 					</td>
 					<td align="right">
 						<span>学员姓名：</span>
 					</td>
 					<td width="100px">
-						<select id="staffName" name="staffName" class="easyui-combobox" style="width: 114px; height: 25px;" data-options="formatter:function(data){return '<span>'+data.staffName+'</span>';}, valueField: 'staffId', textField: 'staffName', panelHeight: 'auto', onLoadSuccess:function(data){if(data.length > 0)$('#schoolId').combobox('setValue',data[0].schoolId);}"	url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=staffName">
+						<select id="studentId" name="studentId" class="easyui-combobox" style="width: 114px; height: 25px;" 
+							data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"	
+							url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=&funcNodeId=${param.funcNodeId}&fieldId=studentId">
       					</select>
 					</td>
 					<td align="right">
@@ -86,13 +86,13 @@
 						<span>建档时间：</span>
 					</td>
 					<td width="8px">
-						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTime" name="startTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
 					<td align="center" width="14px;">
 						<span>至</span>
 					</td>
 					<td width="90px">
-						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="endTime" name="endTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="endTime" name="endTime" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
 					<td align="center" colspan="2">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1000">查询</a>
@@ -141,17 +141,17 @@
   						<td align="right" width="20%"><span>责任顾问统一调整：</span></td>
   						<td width="15%">
   							<select id="updateAdvisterId" name="updateAdvisterId" class="easyui-combobox" style="width: 114px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-      						 onLoadSuccess:function(data){if(data.length > 0)$('#updateAdvisterId').combobox('setValue',data[0].staffId);}"
-      						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
+      							onLoadSuccess:function(data){if(data.length > 0)$('#updateAdvisterId').combobox('setValue',data[0].staffId);}"
+      							url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
        						</select>
   						</td>
   						<td align="right" width="20%"><span>客户关怀统一调整：</span></td>
   						<td width="15%">
   							<select id="updateCarer" name="updateCarer" class="easyui-combobox" style="width: 114px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-      						 onLoadSuccess:function(data){if(data.length > 0)$('#updateCarer').combobox('setValue',data[0].staffId);}"
-      						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
+      						 	onLoadSuccess:function(data){if(data.length > 0)$('#updateCarer').combobox('setValue',data[0].staffId);}"
+      							url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
        						</select>
   						</td>
   						<td width="15%">&nbsp;</td>
