@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	initDate();
     $("#qryBtn").click(function() {
     	var obj = JSON.stringify($("#qryFm").serializeObject());
     	obj = obj.substring(0, obj.length - 1);
@@ -17,10 +16,55 @@ $(document).ready(function() {
     	});
     });
     
+    //重置
     $("#reset").click(function() {
     	$('#qryFm').form('clear');//清空窗体数据  
-    	initDate();
     });
+    
+    //校区
+    var staffId = $("#staffId").val();
+    var funcNodeId = $("#funcNodeId").val();
+    $("#schoolId").combobox({
+    	url : "/sys/pub/pageCategory.do?staffId="+staffId+"&funcNodeId="+funcNodeId+"&fieldId=schoolId",//返回json数据的url
+    	valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	onLoadSuccess : function() {
+    		$("#schoolId").combobox("setValue", "");
+    		$("#schoolId").combobox("setText", "全部校区");
+    	},
+		onChange : function(n, o) {
+			if(n != "" && n != null && n != undefined) {
+				$("#classInstId").combobox({disabled: false});
+				$("#classInstId").combobox({
+	        		url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='001','002','003','004','005'&classInstId=",//返回json数据的url
+	        		valueField : "classInstId",
+	        		textField : "className",
+	        		panelHeight : "auto",
+	        		onChange : function(newVal, oldVal) {
+	        			$("#studentId").combobox({
+	    					url : "/sys/pubData/qryStudentListByClassInstId.do?classInstId="+newVal,
+	    					valueField : "studentId",
+	    	        		textField : "name",
+	    	        		panelHeight : "auto"
+	    				});
+	        		}
+	        	});
+				var classInstId = $("#classInstId").combobox("getValue");
+				if(classInstId == null || classInstId == "" || classInstId == undefined) {
+					$("#studentId").combobox({
+						url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId="+funcNodeId+"&fieldId=studentId",
+						valueField : "studentId",
+						textField : "name",
+						panelHeight : "auto"
+					});
+				}
+			} else {
+				$("#schoolId").combobox("setText", "全部校区");
+				$("#classInstId").combobox({disabled: true});
+			}
+		}
+    })
     
     $("#addStudent").click(function() {
     	window.location.href = "/sys/student/addStudent.jsp";

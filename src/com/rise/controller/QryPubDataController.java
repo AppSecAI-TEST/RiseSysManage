@@ -487,4 +487,29 @@ public class QryPubDataController
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/qryStudentListByClassInstId.do") 
+	public void qryStudentListByClassInstId(String classInstId, HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = qryPubDataService.qryStudentListByClassInstId(classInstId);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }

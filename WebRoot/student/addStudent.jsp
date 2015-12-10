@@ -128,7 +128,7 @@
 							<input id="contactName" type="text" class="easyui-textbox validatebox" required="true" style="width: 120px; height: 28px;"/>
 						</td>
 						<td width="120px" align="center">
-							<input id="job" type="text" class="easyui-textbox validatebox" required="true" style="width: 120px; height: 28px;"/>
+							<input id="job" type="text" class="easyui-textbox validatebox" style="width: 120px; height: 28px;"/>
 						</td>
 						<td width="80px" align="center">
 							<input name="used" type="checkbox"/>

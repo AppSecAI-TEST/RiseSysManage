@@ -6,88 +6,101 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   	<head>
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/js/easyui/themes/default/easyui.css">
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/js/easyui/themes/icon.css">
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/js/demo.css">
-		<script type="text/javascript" src="<%=path %>/pub/js/jquery.min.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/easyui/jquery.easyui.min.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
+		<%@ include file="/common/head.jsp" %>
+		<%@ include file="/common/formvalidator.jsp" %>
+		<script type="text/javascript" src="<%=path %>/js/export/newRecruit.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#list_data").datagrid({
+					onClickRow : function(index, row) {
+						var classInstId = row.classInstId;
+						$("#class_list_data").datagrid({
+							url : "/sys/pubData/qryDataListByPage.do?param={'funcNodeId':'1046', 'classInstId':'"+classInstId+"'}"
+						});
+						$("#dlg").dialog("open").dialog("setTitle", "班级学员列表");//设定表头  
+	    				$("#studentFm").form("clear");//清空窗体数据  
+					}
+				});
+			});
+		</script>
   	</head>
   
   	<body>
   		<div style="padding:5px 0;">
-  			<form id="qryFm">
-	  			<table>
+  			<form id="qryFm" style="margin:0 auto;">
+	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
 	  				<tr>
-	  					<td>校区：</td>
-	  					<td>
-	  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;">
-	  							
-	  						</select>
-	  					</td>
-	  					<td>阶段：</td>
-	  					<td>
-	  						<select class="easyui-combobox" name="step" id="step" style="width:150px;">
-	  							
-	  						</select>
-	  					</td>
-	  					<td>班级人数：</td>
-	  					<td>
-	  						<input class="easyui-textbox" name="classNum" id="classNum" style="width:150px;" />
-	  					</td>
-	  					<td>预计开班时间：</td>
-	  					<td>
-	  						<input class="easyui-datebox" id="startTime" name="startTime" style="width:150px;">
-	  					</td>
-	  					<td>至</td>
-	  					<td>
-	  						<input class="easyui-datebox" id="endTime" name="endTime" style="width:150px;">
-	  					</td>
+	  					<td align="right"><span>校区：</span></td>
+	  					<td width="100px">
+							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+					      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
+				        	</select>
+						</td>
+	  					<td align="right"><span>课程阶段：</span></td>
+						<td width="100px">
+							<select id="stageId" name="stageId" class="easyui-combobox" style="width: 114px; height: 25px;"
+								data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
+			      				url="<%=path %>/pubData/qryStage.do">
+				        	</select>
+						</td>
+	  					<td align="right"><span>定班人数：</span></td>
+						<td width="130px">
+							<input name="minClassStudentNum" id="minClassStudentNum" type="text" class="easyui-textbox" style="width: 43px; height: 25px;"/>
+							<span style="display: inline-block; text-align: center; width: 14px;">至</span>
+							<input name="maxClassStudentNum" id="maxClassStudentNum" type="text" class="easyui-textbox" style="width: 43px; height: 25px;"/>
+						</td>
+	  					<td align="right"><span>开课日期：</span></td>
+						<td width="114px">
+							<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeOpenClass" name="startTimeOpenClass" ata-options="formatter:myformatter, parser:myparser"/>
+						</td>
+						<td align="center" width="14px"><span>至</span></td>
+						<td width="114px">
+							<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="endTimeOpenClass" name="endTimeOpenClass" data-options="formatter:myformatter, parser:myparser"/>
+						</td>
+						<td align="center">
+							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1045">查询</a>
+							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
+						</td>
 	  				</tr>	
-	  				<tr>
-	  					<td colspan="7"></td>
-	  					<td>	
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" onclick="qryData()">查询</a>
-	  					</td>
-	  					<td></td>
-	  					<td>
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" style="width:150px" id="qryBtn" onclick="exportData()">导出</a>
-	  					</td>
-	  				</tr>
 	  			</table>
   			</form>
-			<div style="padding:5px 0;">
-				<table class="easyui-datagrid" title="查询结果" style="width:100%;height:250px" id="list_data" fitColumns="true">
+			<div style="padding:5px 0;min-width:1100px; width:100%;">
+				<table class="easyui-datagrid" style="height:435px;" id="list_data"
+					title="查询结果" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
 						<tr>
-							<th field="schoolId" align="center" width="20%">校区</th>
-							<th field="classId" align="center" width="10%">班级</th>
-							<th field="classTime" align="center" width="20%">上课时间</th>
-							<th field="classStuNum" align="center" width="10%">班级人数</th>
-							<th field="toMinNum" align="center" width="10%">距最低开班人数</th>
-							<th field="planTime" align="center" width="10%">预计开班时间</th>
+							<th data-options="field:'schoolName',width:100,align:'center'">校区</th>
+							<th data-options="field:'className',width:100,align:'center'">班级</th>
+							<th data-options="field:'schooltimeName',width:250,align:'center'">上课时间</th>
+							<th data-options="field:'classStudentNum',width:100,align:'center'">班级人数</th>
+							<th data-options="field:'minSubNum',width:120,align:'center'">距最低开班人数</th>
+							<th data-options="field:'startDate',width:100,align:'center'">开课日期</th>
 						</tr>
 					</thead>
 				</table>
 			</div>
+			<div id="toolbar" style="padding: 2px; height: auto">
+	   			<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
+			</div>
   		</div>
-  		<div id="dlg" class="easyui-dialog" style="width: 800px; height: 600x; padding: 10px 20px" closed="true" modal="true">
-			<table class="easyui-datagrid" style="width:760px;height:500px;overflow:auto;" id="list_datas"  rownumbers="true" fitColumns="true" >
-				<thead>
-					<tr>
-						<th field="payTime" align="center" width="11%">缴费时间</th>
-						<th field="stuName" align="center" width="11%">学员姓名</th>
-						<th field="stuNature" align="center" width="11%">学员性质</th>
-						<th field="idCardNum" align="center" width="14%">本人身份证号</th>
-						<th field="contactNum" align="center" width="11%">联系方式</th>
-						<th field="adviserA" align="center" width="8%">顾问A</th>
-						<th field="adviserB" align="center" width="8%">顾问B</th>
-						<th field="teacherA" align="center" width="8%">老师A</th>
-						<th field="teacherB" align="center" width="8%">老师B</th>
-					</tr>
-				</thead>
-			</table>
+  		<div id="dlg" class="easyui-dialog" style="width: 900px; height: auto;" closed="true" data-options="modal:true">
+  			<form id="studentFm">
+				<table class="easyui-datagrid" style="width: 100%;height: auto; overflow: auto;" id="class_list_data"  
+					pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
+					<thead>
+						<tr>
+							<th data-options="field:'payDate',width:100,align:'center'">缴费日期</th>
+							<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
+							<th data-options="field:'studentChannelType',width:100,align:'center'">学员来源</th>
+							<th data-options="field:'identityId',width:150,align:'center'">本人身份证号</th>
+							<th data-options="field:'phone',width:150,align:'center'">联系方式</th>
+							<th data-options="field:'adviserName',width:150,align:'center'">业绩顾问</th>
+							<th data-options="field:'adviserTeacherName',width:150,align:'center'">业绩老师</th>
+						</tr>
+					</thead>
+				</table>
+  			</form>
 		</div>
   	</body>
 </html>
