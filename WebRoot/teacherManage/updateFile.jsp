@@ -70,9 +70,22 @@
 	  					<td align="left">${obj.stageIds}</td>
   					</c:if>
   					<td align="right">待培训阶段：</td>
-  					<td align="left"></td>
+  					<c:if test="${obj.trainingStageIds == ''}">
+  						<td align="left">无</td>
+  					</c:if>
+  					<c:if test="${obj.trainingStageIds != ''}">
+	  					<td align="left">${obj.trainingStageIds}</td>
+  					</c:if>
   					<td align="right">在读带班持证率：</td>
   					<td align="left">${rate}</td>
+  				</tr>
+  				<tr>
+  					<td align="right">年级组：</td>
+  					<td align="left"><select id="gradeTeam" style="width:125px;" required="true"></select></td>
+  					<td></td>
+  					<td></td>
+  					<td></td>
+  					<td></td>
   				</tr>
   			</table>
   			</form>
@@ -102,6 +115,24 @@
 				       		for(var i = 0;i < data.length;i++){
 				       			 if("${obj.post}" == data[i].postId){
 				       			 	$('#post').combobox('select',data[i].postId);
+				       			 }
+				       		}
+				       	}
+					 }
+				});
+				$('#gradeTeam').combobox({
+					 url:"/sys/pubData/qryCodeNameList.do?tableName=TEACHER_T&codeType=GRADE_TEAM",
+					 formatter:formatItem, 
+					 valueField: 'codeFlag', 
+					 textField: 'codeName', 
+					 panelHeight: 'auto',
+					 onLoadSuccess:function(){
+					 	var data = $('#gradeTeam').combobox('getData');
+						if (data.length > 0)
+			            {
+				       		for(var i = 0;i < data.length;i++){
+				       			 if("${obj.gradeTeam}" == data[i].codeFlag){
+				       			 	$('#gradeTeam').combobox('select',data[i].codeFlag);
 				       			 }
 				       		}
 				       	}

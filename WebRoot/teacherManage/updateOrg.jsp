@@ -71,15 +71,25 @@
 	  					<td align="left">${obj.stageIds}</td>
   					</c:if>
   					<td align="right">待培训阶段：</td>
-  					<td align="left"></td>
+  					<c:if test="${obj.trainingStageIds == ''}">
+  						<td align="left">无</td>
+  					</c:if>
+  					<c:if test="${obj.trainingStageIds != ''}">
+	  					<td align="left">${obj.trainingStageIds}</td>
+  					</c:if>
   					<td align="right">在读带班持证率：</td>
   					<td align="left">${rate}</td>
   				</tr>
   				<tr>
   					<td align="right">转入组织：</td>
   					<td align="left"><select id="schoolST" style="width:125px;" required="true"></select></td>
-  					<td align="right"></td>
-  					<td align="left"></td>
+  					<td align="right">年级组：</td>
+  					<c:if test="${obj.gradeTeamVal == ''}">
+  						<td align="left">无</td>
+  					</c:if>
+  					<c:if test="${obj.gradeTeamVal != ''}">
+	  					<td align="left">${obj.gradeTeamVal}</td>
+  					</c:if>
   					<td align="right"></td>
   					<td align="left"></td>
   				</tr>

@@ -123,6 +123,7 @@ function updateFileSubmit()
 		obj.phone = $("#phone").numberbox('getValue');
 		obj.byName = $("#byName").textbox('getValue');
 		obj.post = $("#post").combobox('getValue');
+		obj.gradeTeam = $("#gradeTeam").combobox('getValue');
 		var a = JSON.stringify(obj);
 		$.ajax({
 			type : "POST",
@@ -348,6 +349,9 @@ function getTeacherInfo(obj,type)
 	teacher.stageIds = row.stageIds;
 	teacher.classNames = row.classNames;
 	teacher.licenses = row.licenses;
+	teacher.gradeTeam = row.gradeTeam;
+	teacher.gradeTeamVal = row.gradeTeamVal;
+	teacher.trainingStageIds = row.trainingStageIds;
 	window.location.href = "/sys/teacherManage/viewTeacherInfo.do?json="+JSON.stringify(teacher)+"&type="+type;
 }
 

@@ -86,11 +86,12 @@
 					<th field="byname" align="center" width="9%">教师英文名</th>
 					<th field="stateVal" align="center" width="8%">教师状态</th>
 					<th field="phone" align="center" width="9%">联系电话</th>
-					<th field="postVal" align="center" width="8%">职务</th>
-					<th field="joinDate" align="center" width="10%">入职时间</th>
-					<th field="joinTime" align="center" width="10%">入职时长（月）</th>
-					<th field="licenses" align="center" width="11%">持证阶段</th>
-					<th field="stageIds" align="center" width="19%">在读带班阶段</th>
+					<th field="postVal" align="center" width="7%">职务</th>
+					<th field="gradeTeamVal" align="center" width="8%">年级组</th>
+					<th field="joinDate" align="center" width="9%">入职时间</th>
+					<th field="joinTime" align="center" width="9%">入职时长（月）</th>
+					<th field="licenses" align="center" width="10%">持证阶段</th>
+					<th field="stageIds" align="center" width="15%">在读带班阶段</th>
 				</tr>
 			</thead>
 		</table>
