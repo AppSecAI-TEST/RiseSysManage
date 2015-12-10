@@ -155,6 +155,8 @@ $("#submit").click(function()
 		$.messager.alert("提示","请选择排课月份");
 		return;
 	}
+	alert(time);
+	return;
 	var param={};
 	param.handlerId=$("#handlerId").val();
 	param.schoolId=$("#schoolId").val();
