@@ -22,7 +22,7 @@
   	</head>
   
   	<body>
-  		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="学员基础信息">
+  		<div class="easyui-panel" style="min-width:1100px; width:98%;height:auto;" title="学员基础信息">
 	      	<input type="hidden" id="updateAdvisterBSchoolId" value="<%=advisterBSchoolId %>"/>
 	      	<input type="hidden" id="updateAdvisterASchoolId" value="<%=advisterASchoolId %>"/>
 	      	<input type="hidden" id="updateAdvisterIdA" value="<%=advisterIdA %>"/>
@@ -70,7 +70,7 @@
 	      				</td>
 	      			</tr>
 	      			<tr>
-	      				<td align="right" width="114px"><span>英文名：</span></td>
+	      				<td align="right" width="114px"><span style="color: red;">*</span><span>英文名：</span></td>
 	      				<td>
 	      					<input name="byName" id="byName" type="text" class="easyui-textbox" style="width: 200px; height: 28px;"/>
 	      				</td>
@@ -88,6 +88,19 @@
         					<span style="width: 114px">学校名称：</span>
         					<input id="realSchoolId" type="text" class="easyui-combobox" style="width: 200px; height: 28px;"/>
         					&nbsp;<a href="javascript:void(0)" id="addRealSchool" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px; height: 28px;">添加学校记录</a>
+	      				</td>
+	      			</tr>
+	      			<tr>
+	      				<td align="right" width="114px"><span style="color: red;">*</span><span>建档日期：</span></td>
+	      				<td>
+	      					<div id="entranceDateDiv">
+		      					<input name="entranceDate" id="entranceDate" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 28px;" editable="false"/>
+	      					</div>
+	      					<span id="entranceDateText" style="display: none;"></span>
+	      				</td>
+	      				<td align="right" width="114px"><span>录入时间：</span></td>
+	      				<td colspan="4">
+	      					<span id="createDateText"></span>
 	      				</td>
 	      			</tr>
 	      			<tr>
@@ -135,7 +148,7 @@
       	</div>
       		
       	<div style="height: 10px;"></div>
-      	<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="联系人信息">
+      	<div class="easyui-panel" style="min-width:1100px; width:98%;height:auto;" title="联系人信息">
       		<form id="contactFm">
 			      <table width="100%" cellpadding="5px" class="maintable" id="contactTd">
 					<tr>
@@ -180,7 +193,7 @@
       	</div>
       		
       	<div style="height: 10px;"></div>
-      	<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="活动信息">
+      	<div class="easyui-panel" style="min-width:1100px; width:98%;height:auto;" title="活动信息">
       		<form id="activityFm">
       			<table width="100%" cellpadding="5px" class="maintable" id="activityTd">
 					<tr>
@@ -211,7 +224,7 @@
       		</form>
       	</div>
       		
-      	<div style="margin-top: 20px;min-width:1100px; width:99%;">
+      	<div style="margin-top: 20px;min-width:1100px; width:98%;">
 	      	<div style="float: left;margin-left: 800px;">
 	      		<a href="javascript:void(0)" id="updateSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
 	      		&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>

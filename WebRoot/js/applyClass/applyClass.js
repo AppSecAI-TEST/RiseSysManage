@@ -37,6 +37,15 @@ $(document).ready(function() {
     						return "<span>" + data.className + "</span>";
     					}
     				});
+    				$("#teacherId").combobox({
+    					url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&classType=",//返回json数据的url
+    					valueField : "teacherId", 
+    					textField : "byname",
+    					panelHeight : "auto",
+    					formatter : function(data) {
+    						return "<span>" + data.byname + "</span>";
+    					}
+    				});
     			} else {
     				$("#schoolId").combobox("setText", "全部校区");
     				$("#classInstId").combobox('clear');
@@ -57,16 +66,19 @@ $(document).ready(function() {
     	},
 		onChange : function(n, o) {
 			var schoolId = $("#schoolId").combobox("getValue");
-			//转出班级
-			$("#classInstId").combobox({
-        		url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType=&stageId="+n+"&classType=&classState='001','002','003','004','005'&classInstId=",//返回json数据的url
-        		valueField : "classInstId",
-        		textField : "className",
-        		panelHeight : "auto",
-        		formatter : function(data) {
-        			return "<span>" + data.className + "</span>";
-        		}
-        	});
+			if(n != "" && n != null && n != undefined) {
+				$("#classInstId").combobox({disabled: false});
+				//转出班级
+				$("#classInstId").combobox({
+					url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType=&stageId="+n+"&classType=&classState='001','002','003','004','005'&classInstId=",//返回json数据的url
+					valueField : "classInstId",
+					textField : "className",
+					panelHeight : "auto",
+					formatter : function(data) {
+						return "<span>" + data.className + "</span>";
+					}
+				});
+			}
 		}
 	});
 	
