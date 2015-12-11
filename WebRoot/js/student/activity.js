@@ -1,4 +1,26 @@
 $(document).ready(function() {
+	$("input:radio[name='isGet']").change(function() {
+		var giftType = $("#giftType").combobox("getValue");
+		var isGet = $("input:radio[name='isGet']:checked").val();
+		if("N" == isGet) {
+			if(giftType == "COUPON") {
+				$("#couponTd").attr("colspan", "2");
+				$("#couponTd").attr("width", "410px");
+				$("#couponTd").css("border-right", "1px solid #ccc");
+				$("#getCouponTd").css("display", "none");
+			}
+			$("#granter").textbox({disabled : true});
+		} else {
+			if(giftType == "COUPON") {
+				$("#couponTd").attr("colspan", "1");
+				$("#couponTd").attr("width", "200px");
+				$("#couponTd").css("border-right", "0px");
+				$("#getCouponTd").css("display", "table-cell");
+			}
+			$("#granter").textbox({disabled : false});
+		}
+	});
+	
 	$("#giftType").combobox({
 		url : "/sys/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE",//返回json数据的url
     	valueField : "codeFlag",
@@ -11,6 +33,7 @@ $(document).ready(function() {
 		onChange : function(n, o) {
 			if("COUPON" == n) {
 				$("#otherTd").css("display", "none");
+				$("#couponTd").attr("colspan", "2");
 				$("#couponTd").css("display", "table-cell");
 				$("#couponType").combobox({
 					url : "/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift_Type\",parentType:\""+n+"\"}",//返回json数据的url
@@ -144,13 +167,13 @@ $(document).ready(function() {
 });
 
 // 增加行
-function addRow() 
-{
+function addRow() {
 	var giftModelTR = $("#giftModelTR").clone();
 	var flag = true;
 	var giftTR = $("#addGift").clone();
 	giftTR.css("display", 'table-row');
 	giftTR.attr("val", "gift");
+	var getFlag = $("input:radio[name='isGet']:checked").val();
 	giftTR.find("td").each(function(n, node) {
 		var giftType = $("#giftType").combobox('getValue');
 		if (n == 1) {
@@ -204,20 +227,24 @@ function addRow()
 								usableAmount = datas[i].amount;
 							}
 						}
-						giftCode = $("#giftCode").numberbox("getValue");
-						if (giftCode == undefined || giftCode == "" || giftCode == null) {
-							flag = false;
-							$.messager.alert('提示', "请输入"+giftName+"的编码！");
-							return false;
-						} else {
-							effDate = $("#effDate").datebox("getValue");
-							if(effDate == undefined || effDate == "" || effDate == null) {
+						if(giftType == "COUPON" && "Y" == getFlag) {
+							giftCode = $("#giftCode").numberbox("getValue");
+							if (giftCode == undefined || giftCode == "" || giftCode == null) {
 								flag = false;
-								$.messager.alert('提示', "请输入"+giftName+"的有效期开始时间！");
+								$.messager.alert('提示', "请输入"+giftName+"的编码！");
 								return false;
 							} else {
-								giftNameText = giftName + "&nbsp;&nbsp;" + giftCode + "&nbsp;&nbsp;" +  effDate;
+								effDate = $("#effDate").datebox("getValue");
+								if(effDate == undefined || effDate == "" || effDate == null) {
+									flag = false;
+									$.messager.alert('提示', "请输入"+giftName+"的有效期开始时间！");
+									return false;
+								} else {
+									giftNameText = giftName + "&nbsp;&nbsp;" + giftCode + "&nbsp;&nbsp;" +  effDate;
+								}
 							}
+						} else {
+							giftNameText = giftName;
 						}
 					}
 				}
@@ -258,7 +285,7 @@ function addRow()
 			}
 		} else if (n == 7) {
 			var granter = $("#granter").textbox("getValue");
-			if (granter == undefined || granter == "") {
+			if ((granter == undefined || granter == "" || granter == null) && "Y" == getFlag) {
 				flag = false;
 				$.messager.alert('提示', "请填写发放人！");
 				return false;
@@ -269,8 +296,14 @@ function addRow()
 	});
 	if (flag) {
 		$("#addGift").after(giftTR);
+		clearData("giftModelTR");
+		$("#couponTd").css("display", "none");
+		$("#otherTd").css("display", "table-cell");
+		$("#couponTd").attr("colspan", "2");
+		$("#couponTd").attr("width", "410px");
+		$("#couponTd").css("border-right", "1px solid #ccc");
+		$("#getCouponTd").css("display", "none");
 	}
-	clearData("giftModelTR")
 }
 
 // 删除相对应的行

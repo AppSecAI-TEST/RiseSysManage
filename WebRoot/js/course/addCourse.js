@@ -1,5 +1,4 @@
-$(document).ready(function()
-{
+$(document).ready(function() {
 	var staffId = $("#staffId").val();
 	var funcNodeId = $("#funcNodeId").val();
 	$("#schoolId").combobox({
