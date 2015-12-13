@@ -96,7 +96,12 @@ function initApplyClassTable(classes)
 		tr2.find("td:eq(4)").html(obj.readNum);
 		tr2.find("td:eq(5)").html();//已升学人数
 		tr2.find("td:eq(6)").html();//升学率
-		tr2.find("td:eq(7)").find("input").addClass("easyui-numberbox").attr("data-options","min:0,max:"+obj.readNum+",precision:0,required:true");
+		var min =0;
+		if(tr2.find("td:eq(5)").html()!="")
+		{
+			min =parseInt(tr2.find("td:eq(5)").html())
+		}	
+		tr2.find("td:eq(7)").find("input").addClass("easyui-numberbox").attr("data-options","min:"+min+",max:"+obj.readNum+",precision:0,required:true");
 		tr2.find("td:eq(8)").html();//升学缺口
 		tr2.addClass("classTr");
 		tr2.attr("classInstId",obj.classInstId);
@@ -317,27 +322,27 @@ function initCourseApply(num)
 			{
 				if(j==0&&k==0)
 				{
-					initStr+="<td width='62.23px' align='center'>校区</td>";
+					initStr+="<td width='62.2px' align='center'>校区</td>";
 				}
 				else if(j==0&&k==1)
 				{
-					initStr+="<td width='62.23px' align='center'>班级名称</td>";
+					initStr+="<td width='62.2px' align='center'>班级名称</td>";
 				}
 				else if(j==0)
 				{
-					initStr+="<td width='62.23px' align='center'>第"+(count++)+"周</td>";
+					initStr+="<td width='62.2px' align='center'>第"+(count++)+"周</td>";
 				}
 				else if(k==0)
 				{
-					initStr+="<td width='62.23px' align='center'>"+classArr[j-1].schoolName+"</td>";
+					initStr+="<td width='62.2px' align='center'>"+classArr[j-1].schoolName+"</td>";
 				}
 				else if(k==1)
 				{
-					initStr+="<td width='62.23px' align='center'>"+classArr[j-1].className+"</td>";
+					initStr+="<td width='62.2px' align='center'>"+classArr[j-1].className+"</td>";
 				}
 				else
 				{
-					initStr+="<td class='hourTd' width='62.23px' align='center'><input style='width:55px' weekOrder="+(i*18+k-19)+" classInstId="+classArr[j-1].classInstId+" data-options='required:true,min:0,max:50,precision:0'></td>";
+					initStr+="<td class='hourTd' weekOrder="+(i*18+k-19)+" classInstId="+classArr[j-1].classInstId+" width='62.2px' align='center'><input style='width:55px'  data-options='required:true,min:0,max:50,precision:0'></td>";
 				}	
 			}	
 			initStr+="</tr>";
@@ -405,6 +410,8 @@ function submitMergeInfo()
 		comboClass.teachers =$("#school1").combobox("getText")+" "+$("#teacher1").combobox("getText")+"<br/>"+$("#school2").combobox("getText")+" "+$("#teacher2").combobox("getText");
 		comboClass.comboState="001";
 		comboClass.remark=trim($("#remark").val());
+		comboClass.handlerId =$("#handlerId").val();
+		comboClass.state="00A";
 		combo.info =comboClass;
 		//获取详细计划
 		var detailArr=[];
@@ -414,24 +421,61 @@ function submitMergeInfo()
 			detail.classInstId=$(this).attr("classInstId");
 			if(index==0)
 			{
-				detail.startHours =mergeTr.find("td:eq(3)").find("input['type=hidden']").val();
-				detail.comboType =mergeTr.find("td:eq(5)").find("input['type=hidden']").val();
-				detail.comboFinishDate =mergeTr.find("td:eq(6)").find("input['type=hidden']").val();
-				detail.orderNum =mergeTr.find("td:eq(9)").find("input['type=hidden']").val();
+				detail.startHours =mergeTr.find("td:eq(3)").find("input[type='hidden']").val();
+				detail.comboType =mergeTr.find("td:eq(5)").find("input[type='hidden']").val();
+				detail.comboFinishDate =mergeTr.find("td:eq(6)").find("input[type='hidden']").val();
+				detail.orderNum =mergeTr.find("td:eq(9)").find("input[type='hidden']").val();
 			}
 			else
 			{
-				detail.startHours =mergeTr.find("td:eq(2)").find("input['type=hidden']").val();
-				detail.comboType =mergeTr.find("td:eq(3)").find("input['type=hidden']").val();
-				detail.comboFinishDate =mergeTr.find("td:eq(4)").find("input['type=hidden']").val();
-				detail.orderNum =mergeTr.find("td:eq(5)").find("input['type=hidden']").val();
+				detail.startHours =mergeTr.find("td:eq(2)").find("input[type='hidden']").val();
+				detail.comboType =mergeTr.find("td:eq(3)").find("input[type='hidden']").val();
+				detail.comboFinishDate =mergeTr.find("td:eq(4)").find("input[type='hidden']").val();
+				detail.orderNum =mergeTr.find("td:eq(5)").find("input[type='hidden']").val();
 
 			}	
+			detail.finishDate =$(this).find("td:eq(2)").html();
 			detail.times =$(this).find("td:eq(3)").html();
 			detail.studyingNum =$(this).find("td:eq(4)").html();
 			detail.higherNum =$(this).find("td:eq(5)").html();
 			detail.higherPer =$(this).find("td:eq(6)").html();
+			detail.planHigherNum =$(this).find("td:eq(7)").find("input[type='hidden']").val();
 			detailArr.push(detail);
 		})
+		combo.detail =detailArr;
+		//获取课时信息
+		var hoursArr =[];
+		$(".hourTd").each(function(){
+			var hourObj ={}
+			hourObj.classInstId =$(this).attr("classInstId");
+			hourObj.weekOrder =$(this).attr("weekOrder");
+			hourObj.hours =$(this).find("input[type='hidden']").val();
+			hoursArr.push(hourObj);
+		})
+		combo.hours =hoursArr;
+		$.ajax( {
+			type : "POST",
+			url : "/sys/mergeClass/mergeClassApply.do",
+			data :"param="+JSON.stringify(combo),
+			async : false,
+			beforeSend : function() {
+				showProgressLoader("正在提交申请,请稍等...", 400);
+			},
+			success : function(data) {
+				hideProgressLoader()
+				if (data == "true") {
+					showMessage('提示', "申请成功！", function() {
+						window.location.href = "mergeList.jsp";
+					});
+				} else {
+					showMessage('提示', "申请失败！", null);
+				}
+	
+			},
+			error : function() {
+				hideProgressLoader();
+				showMessage('提示', "调用申请合并班服务失败！", null);
+			}
+		});
 	}	
 }

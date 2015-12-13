@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
+	String isHead =request.getParameter("isHead");
 %>
 
 <!doctype html>
@@ -22,6 +23,7 @@
   	</head>
   	<body>
  		<form id="qryFm">
+ 			<input type="hidden" id="isHead" name="isHead" value="<%=isHead%>"/>
   			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="15">
   				<tr>
   					<td align="right">校区：</td>

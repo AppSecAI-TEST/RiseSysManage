@@ -92,5 +92,5 @@ function subClass()
 		return false;
 	}
 	classInstIds=classInstIds.substring(0,classInstIds.length-1);
-	window.location.href="mergeClassApply.jsp?classInstIds="+classInstIds+"&isHead=N";
+	window.location.href="mergeClassApply.jsp?classInstIds="+classInstIds+"&isHead="+$("#isHead").val();
 }

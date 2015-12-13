@@ -629,7 +629,7 @@ function initQryButton(qryName,resetName,formName,tableName)
     		onLoadSuccess:function(){
     			$("#"+tableName+"").datagrid('clearSelections');
     		}
-    	});
+    	});    
     });
 	 
     $("#"+resetName+"").click(function() {
