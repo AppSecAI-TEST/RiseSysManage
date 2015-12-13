@@ -40,6 +40,9 @@ $(document).ready(function() {
         		
         		$("#advisterBDiv").css('display', "none");
         		$("#advisterBText").css('display', "block");
+        		
+        		$("#entranceDateDiv").css('display', "none");
+        		$("#entranceDateText").css('display', "block");
     		}
     		
     		studentObj = data.studentObj;
@@ -55,6 +58,9 @@ $(document).ready(function() {
     		$("#byName").textbox('setValue', studentObj.byName);
     		$("#address").textbox('setValue', studentObj.address);
     		$("#remark").textbox('setValue', studentObj.remark);
+    		$("#entranceDateText").html(studentObj.entranceDate);
+    		$("#entranceDate").datebox('setValue', studentObj.entranceDate);
+    		$("#createDateText").html(studentObj.createDate);
     		
     		array.push({"key": "address", "value": studentObj.address});
     		array.push({"key": "advisterIdA", "value": studentObj.advisterIdA});

@@ -27,6 +27,8 @@ $(document).ready(function() {
     		$("#byName").html(studentObj.byName);
     		$("#address").html(studentObj.address);
     		$("#remark").html(studentObj.remark);
+    		$("#createDateText").html(studentObj.createDate);
+    		$("#entranceDateText").html(studentObj.entranceDate);
     		
     		var len1 = data.realSchoolObj.total;
     		if(parseInt(len1) > 0)

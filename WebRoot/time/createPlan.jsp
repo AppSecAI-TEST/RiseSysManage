@@ -8,7 +8,10 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-	
+	<style>
+		.table-c table{border-right:1px solid  #9370DB ;border-bottom:1px solid  #9370DB }
+		.table-c table td{border-left:1px solid  #9370DB ;border-top:1px solid  #9370DB }
+	</style>
   	</head>
   
   	<body>
@@ -41,38 +44,45 @@
 				</thead>
 			</table>
 		</div>
-		<table style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:30px;" border="1px" cellspacing="0">
-		  <tr>
-		    <td rowspan="2">序号</td>
-		    <td rowspan="2">班级</td>
-		    <td rowspan="2">带班老师</td>
-		    <td rowspan="2">上课时段</td>
-		    <td rowspan="2">开课日期</td>
-		    <td rowspan="2">结课日期</td>
-		    <td rowspan="2">上月已上课时</td>
-		    <td rowspan="2">上月剩余课时数</td>
-		    <td rowspan="2">上月课时差异</td>
-		    <td colspan="2">第一周</td>
-		    <td colspan="2">第二周</td>
-		    <td colspan="2">第三周</td>
-		    <td colspan="2">第四周</td>
-		    <td colspan="2">第五周</td>
+		<div class="table-c">
+		<table style="min-width:1100px; width:100%;"  cellspacing="0" cellpadding="0">
+		  <tr align="center">
+		    <td rowspan="2"><span>序号</span></td>
+		    <td width='5%' rowspan="2"><span>班级</span></td>
+		    <td rowspan="2"><span>带班老师</span></td>
+		    <td rowspan="2"><span>上课时段</span></td>
+		    <td rowspan="2"><span>开课日期</span></td>
+		    <td rowspan="2"><span>结课日期</span></td>
+		    <td rowspan="2"><span>上月已上课时</span></td>
+		    <td rowspan="2"><span>上月剩余课时数</span></td>
+		    <td rowspan="2"><span>上月课时差异</span></td>
+		    <td align="center" colspan="2"><span>第一周</span></td>
+		    <td align="center" colspan="2"><span>第二周</span></td>
+		    <td align="center" colspan="2"><span>第三周</span></td>
+		    <td align="center" colspan="2"><span>第四周</span></td>
+		    <td align="center" colspan="2"><span>第五周</span></td>
+		    <td rowspan="2"><span>本月计划课时</span></td>
+		    <td rowspan="2"><span>本月已排课时</span></td>
+		    <td rowspan="2"><span>课时差异</span></td>
 		  </tr>
-		  <tr>
-		    <td>计划课时</td>
-		    <td>已排课时</td>
-		    <td>计划课时</td>
-		    <td>已排课时</td>
-		    <td>计划课时</td>
-		    <td>已排课时</td>
-		    <td>计划课时</td>
-		    <td>已排课时</td>
-		    <td>计划课时</td>
-		    <td>已排课时</td>
+		  <tr align="center">
+		    <td><span>计划课时</span></td>
+		    <td><span>已排课时</span></td>
+		    <td><span>计划课时</span></td>
+		    <td><span>已排课时</span></td>
+		    <td><span>计划课时</span></td>
+		    <td><span>已排课时</span></td>
+		    <td><span>计划课时</span></td>
+		    <td><span>已排课时</span></td>
+		    <td><span>计划课时</span></td>
+		    <td><span>已排课时</span></td>
 		  </tr>
 		  
-		  <tr>
-		    <td height="61">&nbsp;</td>
+		  <tr align="center">
+		    <td height="30">&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
+		    <td>&nbsp;</td>
 		    <td>&nbsp;</td>
 		    <td>&nbsp;</td>
 		    <td>&nbsp;</td>
@@ -93,6 +103,7 @@
 		    <td>&nbsp;</td>
 		  </tr>
 		</table>
+		</div>
  	</body>
 </html>
 <script type="text/javascript">
@@ -155,8 +166,7 @@ $("#submit").click(function()
 		$.messager.alert("提示","请选择排课月份");
 		return;
 	}
-	alert(time);
-	return;
+	
 	var param={};
 	param.handlerId=$("#handlerId").val();
 	param.schoolId=$("#schoolId").val();

@@ -42,9 +42,9 @@
 	      				</td>
 	      			</tr>
 	      			<tr>
-	      				<td align="right" width="114px"><span>英文名：</span></td>
+	      				<td align="right" width="114px"><span style="color: red;">*</span><span>英文名：</span></td>
 	      				<td>
-	      					<input name="byName" id="byName" type="text" class="easyui-textbox" style="width: 200px; height: 28px;"/>
+	      					<input name="byName" id="byName" type="text" class="easyui-textbox" required="true" style="width: 200px; height: 28px;"/>
 	      				</td>
 	      				<td align="right" width="114px"><span>家庭地址：</span></td>
 	      				<td colspan="2">
@@ -64,7 +64,13 @@
 	      				</td>
 	      			</tr>
 	      			<tr>
-	      				<td align="right"><span style="color: red;" width="114px">*</span><span>招生顾问A：</span></td>
+	      				<td align="right" width="114px"><span style="color: red;">*</span><span>建档日期：</span></td>
+	      				<td colspan="4">
+	      					<input name="entranceDate" id="entranceDate" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 28px;" editable="false"/>
+	      				</td>
+	      			</tr>
+	      			<tr>
+	      				<td align="right" width="114px"><span style="color: red;">*</span><span>招生顾问A：</span></td>
 	      				<td>
 	      					<select id="advisterASchoolId" class="easyui-combobox" style="width: 100px; height: 28px;" required="true" editable="false">
         					</select>

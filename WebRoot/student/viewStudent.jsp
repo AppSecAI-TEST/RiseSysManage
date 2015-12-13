@@ -37,9 +37,9 @@
   				</tr>
   				<tr>
   					<td align="right" width="100px"><span>建档日期：</span></td>
-	      			<td><span id="createDate""></span></td>
+	      			<td><span id="entranceDateText"></span></td>
 	  				<td align="right" width="100px"><span>录入时间：</span></td>
-	  				<td colspan="3"><span id="createDate"></span></td>
+	  				<td colspan="3"><span id="createDateText"></span></td>
   				</tr>
   				<tr>
   					<td align="right" width="100px"><span>招生顾问A：</span></td>
