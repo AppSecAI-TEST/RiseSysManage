@@ -70,7 +70,7 @@
 							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeAttend" name="endTimeAttend" ata-options="formatter:myformatter, parser:myparser"/>
 						</td>
 						<td align="center">
-							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1040">查询</a>
+							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1047">查询</a>
 							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 						</td>
 	  				</tr>
@@ -86,16 +86,16 @@
 							<th data-options="field:'payDate',width:100,align:'center'">缴费时间</th>
 							<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
 							<th data-options="field:'byName',width:100,align:'center'">英文名</th>
-							<th data-options="field:'sexVal',width:50,align:'center'">性别</th>
-							<th data-options="field:'parentName',width:150,align:'center'">家长姓名</th>
+							<th data-options="field:'sexText',width:50,align:'center'">性别</th>
+							<th data-options="field:'parentsName',width:150,align:'center'">家长姓名</th>
 							<th data-options="field:'phone',width:150,align:'center'">联系电话</th>
-							<th data-options="field:'oldClassName',width:100,align:'center'">原在读班级</th>
-							<th data-options="field:'oldTeacherName',width:100,align:'center'">原带班老师</th>
+							<th data-options="field:'className',width:100,align:'center'">原在读班级</th>
+							<th data-options="field:'teacherName',width:100,align:'center'">原带班老师</th>
 							<th data-options="field:'carerName',width:100,align:'center'">客户关怀</th>
-							<th data-options="field:'higherStageId',width:100,align:'center'">升学阶段</th>
+							<th data-options="field:'stageId',width:100,align:'center'">升学阶段</th>
 							<th data-options="field:'selectClassNum',width:100,align:'center'">定班次数</th>
-							<th data-options="field:'classNum',width:100,align:'center'">当前定班班级</th>
-							<th data-options="field:'attendDate',width:100,align:'center'">上课日期</th>
+							<th data-options="field:'currentClassNum',width:100,align:'center'">当前定班班级</th>
+							<th data-options="field:'beginClassDate',width:100,align:'center'">上课日期</th>
 							<th data-options="field:'waitClassDays',width:100,align:'center'">等班时长（天）</th>
 						</tr>
 					</thead>
