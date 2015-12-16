@@ -15,6 +15,8 @@ public class TeacherT {
     private Integer schoolId;
 
     private String pState;
+    
+    private String gradeTeam;
 
     private String state;
 
@@ -70,6 +72,14 @@ public class TeacherT {
 
 	public void setpState(String pState) {
 		this.pState = pState;
+	}
+	
+	public String getGradeTeam() {
+		return gradeTeam;
+	}
+
+	public void setGradeTeam(String gradeTeam) {
+		this.gradeTeam = gradeTeam;
 	}
 
 	public String getState() {

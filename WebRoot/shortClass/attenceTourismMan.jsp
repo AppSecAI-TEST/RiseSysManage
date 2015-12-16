@@ -63,16 +63,15 @@
 				<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 					<thead>
 						<tr>
-							<th data-options="field:'classInstId',checkbox:true"></th>
-							<th width="11%" field="schoolName">班级名称</th>
-							<th width="11%" field="className">班级状态</th>
-							<th width="11%" field="openDate">定班人数</th>
-							<th width="11%" field="teacherNames">班级人数上限</th>
-							<th width="11%" field="finishDate">实际游学人数</th>
-							<th width="11%" field="classSchedule">班级人数上限</th>
-							<th width="11%" field="classSchedule">放班日期</th>
-							<th width="11%" field="classSchedule">游学开始日期</th>
-							<th width="11%" field="classSchedule">游学结束日期</th>
+							<th data-options="field:'shortClassInstId',checkbox:true"></th>
+							<th width="12%" field="className">班级名称</th>
+							<th width="12%" field="classStateName">班级状态</th>
+							<th width="12%" field="personNum">定班人数</th>
+							<th width="12%" field="maxNum">班级人数上限</th>
+							<th width="12%" field="realClassNum">实际游学人数</th>
+							<th width="12%" field="putClassDate">放班日期</th>
+							<th width="12%" field="openDate">游学开始日期</th>
+							<th width="12%" field="finishDate">游学结束日期</th>
 						</tr>
 					</thead>
 				</table>
@@ -102,21 +101,23 @@
 			});
 			function queryManFunc()
 			{
-				/*
 				var obj = $("#manFm").serializeObject();
-				obj["queryCode"] = "qryAttendManList";
-				obj["funcNodeId"] = "38101";
+				obj["queryCode"] = "qryTourismAttendInfo";
+				obj["funcNodeId"] = "38120";
 				obj = JSON.stringify(obj);
 				$("#manList").datagrid({
 					url:"/sys/pubData/qryDataListByPage.do",
 					queryParams:{
 						param : obj
 					}
-				});*/
+				});
 			}
 			function resetManFunc()
 			{
+				$("#classInfo").combobox("setValue","");
 				$("#classManState").combobox("setValue","");
+				$("#openStartManTime").datebox("setValue","");
+				$("#openEndManTime").datebox("setValue","");
 				$("#classStartManTime").datebox("setValue","");
 				$("#classEndManTime").datebox("setValue","");
 				$("#overClassStartManTime").datebox("setValue","");
@@ -124,20 +125,34 @@
 			}
 			function manOperFunc()
 			{
-				/*
 				var row = $('#manList').datagrid('getSelected');
-				if (row){
-					window.location.href = "/sys/attend/getAttendDetail.do?funcNodeId=${param.funcNodeId}&classInstId="+row.classInstId;
+				if (row)
+				{
+					if(row.classStateName == "未开课" || row.classStateName == "未开课" || row.classStateName == "开课在读" || row.classStateName == "结课")
+					{
+						window.location.href = "/sys/shortBus/accessShortAttenceDetail.do?funcNodeId=${param.funcNodeId}&pageName=attenceTourismDetail&shortClassInstId="+row.shortClassInstId;
+					}
+					else if(row.classStateName == "解散")
+					{
+						$.messager.alert('提示',"该课程已被取消");		
+					}
 				}
 				else
 				{
 					$.messager.alert('提示',"请先选择要考勤的班级");
 				}
-				*/
 			}
 			function manViewFunc()
 			{
-				
+				var row = $('#manList').datagrid('getSelected');
+				if (row)
+				{
+					window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=viewTourismShortClass&classType="+encodeURI("游学");
+				}
+				else
+				{
+					$.messager.alert('提示',"请先选择要考勤的班级");
+				}
 			}
 		</script>
  	</body>

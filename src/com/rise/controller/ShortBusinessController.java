@@ -155,25 +155,25 @@ public class ShortBusinessController
 		}
 	}
 	
-	@RequestMapping("/getShortClassInfo.do")
-	public ModelAndView getShortClassInfo(String shortClassInstId , String funcNodeId)
-	{
-		ModelAndView model = new ModelAndView("shortClass/addInterClass");
-		try
-		{
-			shortBusinessService.getAddShortClassInfo(model,shortClassInstId,funcNodeId);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		return model;
-	}
+//	@RequestMapping("/getShortClassInfo.do")
+//	public ModelAndView getShortClassInfo(String shortClassInstId , String funcNodeId)
+//	{
+//		ModelAndView model = new ModelAndView("shortClass/addInterClass");
+//		try
+//		{
+//			shortBusinessService.getAddShortClassInfo(model,shortClassInstId,funcNodeId);
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//		return model;
+//	}
 	
 	@RequestMapping("/getAddShortClassInfo.do")
-	public ModelAndView getAddShortClassInfo(String shortClassInstId , String funcNodeId)
+	public ModelAndView getAddShortClassInfo(String shortClassInstId , String funcNodeId , String pageName)
 	{
-		ModelAndView model = new ModelAndView("shortClass/addInterClass");
+		ModelAndView model = new ModelAndView("shortClass/"+pageName);
 		try
 		{
 			shortBusinessService.getAddShortClassInfo(model,shortClassInstId,funcNodeId);
@@ -454,6 +454,114 @@ public class ShortBusinessController
 		try
 		{
 			shortBusinessService.accessShortClassPage(model,shortClassInstId,funcNodeId,classType);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
+	@RequestMapping("/accessShortAttenceDetail.do")
+	public ModelAndView accessShortAttenceDetail(String shortClassInstId , String funcNodeId , String pageName)
+	{
+		ModelAndView model = new ModelAndView("shortClass/"+pageName);
+		try
+		{
+			shortBusinessService.accessShortAttenceDetail(model, shortClassInstId, funcNodeId);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
+	@RequestMapping("/tourismAttenceRecordPage.do")
+	public ModelAndView tourismAttenceRecordPage(String shortClassInstId , String funcNodeId)
+	{
+		ModelAndView model = new ModelAndView("shortClass/tourismAttenceRecord");
+		try
+		{
+			shortBusinessService.tourismAttenceRecordPage(model, shortClassInstId, funcNodeId);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
+	@RequestMapping("/addShortTourismAttendTInfo.do")
+	public void addShortTourismAttendTInfo(String json , HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = shortBusinessService.addShortTourismAttendTInfo(json);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/tourismAttenceRecUpdatePage.do")
+	public ModelAndView tourismAttenceRecUpdatePage(String shortClassAttendId , String funcNodeId)
+	{
+		ModelAndView model = new ModelAndView("shortClass/tourismAttenceRecUpdate");
+		try
+		{
+			shortBusinessService.tourismAttenceRecUpdatePage(model, shortClassAttendId, funcNodeId);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
+	@RequestMapping("/updateShortTourismAttenceInfo.do")
+	public void updateShortTourismAttenceInfo(String json , HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = shortBusinessService.updateShortTourismAttenceInfo(json);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/shortTourismAttenceViewPage.do")
+	public ModelAndView shortTourismAttenceViewPage(String shortClassAttendId , String funcNodeId)
+	{
+		ModelAndView model = new ModelAndView("shortClass/shortTourismAttenceView");
+		try
+		{
+			shortBusinessService.tourismAttenceRecUpdatePage(model, shortClassAttendId, funcNodeId);
 		}
 		catch(Exception e)
 		{

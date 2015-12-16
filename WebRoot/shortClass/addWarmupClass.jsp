@@ -17,19 +17,19 @@
  		<input type="hidden" id="shortClassInstId" value="${shortClassInstId}" />
 		<table align="center" class="tab" style="height:90px;width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
-				<td align="right" width="15%">国际班类型：</td>
-				<td width="18%"><select name="interClassType" id="interClassType" style="width:150px" ></select></td>
-				<td align="right" width="15%">班级名称：</td>
+				<td align="right" width="15%">课程类型：</td>
+				<td width="18%"><select name="classType" id="classType" style="width:150px" ></select></td>
+				<td align="right" width="15%">热身课班级名称：</td>
 				<td width="18%"><input name="className" id="className" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" /></td>
-				<td align="right" width="15%">开课日期：</td>
-				<td width="18%"><input name="classStartTime" id="classStartTime" type="text" style="width:150px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /></td>
+				<td align="right">计划上课人数：</td>
+				<td><input name="planClassNum" id="planClassNum" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" /></td>
 			</tr>
 			<tr>
-				<td align="right">国际班上课校区：</td>
-				<td><select name="schoolManId" id="schoolManId" style="width:150px" ></select></td>
-				<td align="right">计划总课时量：</td>
+				<td align="right">计划课时量：</td>
 				<td><input name="planHours" id="planHours" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" /></td>
-				<td align="right">结课日期：</td>
+				<td align="right" width="15%">开课时间：</td>
+				<td width="18%"><input name="classStartTime" id="classStartTime" type="text" style="width:150px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /></td>
+				<td align="right">结课时间：</td>
 				<td><input name="classEndTime" id="classEndTime" type="text" style="width:150px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /></td>
 			</tr>
 		</table>
@@ -77,14 +77,11 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
-			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
-				$("#schoolManId").combobox("loadData",data);
-			},"json");
-			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("国际班"),function(data){
-				$("#interClassType").combobox("loadData",data);
+			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("热身课"),function(data){
+				$("#classType").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
-				$("#interClassType").combobox({
+				$("#classType").combobox({
 					formatter:function(data){
 						return '<span>'+data.classType+'</span>';
 					}, 
@@ -92,26 +89,20 @@
 					textField: 'classType',
 					panelHeight: 'auto'
 				});
-				$("#schoolManId").combobox({
-					formatter:formatSchool, 
-					valueField: 'schoolId', 
-					textField: 'schoolName', 
-					panelHeight: 'auto'
-				});
 			});
 			function addSubmitFunc()
 			{
 				var shortClassInstId = $("#shortClassInstId").val();
-				var interClassType = $("#interClassType").combobox("getValue");
+				var classType = $("#classType").combobox("getValue");
 				var className = $("#className").textbox("getValue");
-				var classStartTime = $("#classStartTime").datebox("getValue");
-				var schoolManId = $("#schoolManId").combobox("getValue");
+				var planClassNum = $("#planClassNum").textbox("getValue");
 				var planHours = $("#planHours").textbox("getValue");
+				var classStartTime = $("#classStartTime").datebox("getValue");
 				var classEndTime = $("#classEndTime").combobox("getValue");
 				var remark = $("#remark").textbox("getValue");
-				if(interClassType == "")
+				if(classType == "")
 				{
-					$.messager.alert('提示',"请先选择国际班类型","info");
+					$.messager.alert('提示',"请先选择课程类型","info");
 				}
 				else if(className == "")
 				{
@@ -142,7 +133,7 @@
 					var json = {
 						shortClassInstId:shortClassInstId,
 						schoolId:schoolManId,
-						classTypeId:interClassType,
+						classTypeId:classType,
 						className:className,
 						planHours:planHours,
 						openDate:classStartTime,
@@ -167,7 +158,7 @@
 			}
 			function addPlanFunc()
 			{
-				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstId}&pageFlag=ADD&pageName=addInterClass&classType=国际班";
+				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstId}&pageFlag=ADD&pageName=addWarmupClass&classType=热身课";
 			}
 			function delShortSchooltime(val)
 			{

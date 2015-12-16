@@ -24,6 +24,12 @@ public class StudentT {
 
     private String vip;
 
+	private Integer outSchoolId;
+	
+	private Integer inSchoolId;
+    
+    private Date entranceDate;
+    
     private Date createDate;
 
     private String remark;
@@ -124,7 +130,31 @@ public class StudentT {
         this.vip = vip == null ? null : vip.trim();
     }
 
-    public Date getCreateDate() {
+    public Integer getOutSchoolId() {
+		return outSchoolId;
+	}
+
+	public void setOutSchoolId(Integer outSchoolId) {
+		this.outSchoolId = outSchoolId;
+	}
+
+	public Integer getInSchoolId() {
+		return inSchoolId;
+	}
+
+	public void setInSchoolId(Integer inSchoolId) {
+		this.inSchoolId = inSchoolId;
+	}
+
+	public Date getEntranceDate() {
+		return entranceDate;
+	}
+
+	public void setEntranceDate(Date entranceDate) {
+		this.entranceDate = entranceDate;
+	}
+
+	public Date getCreateDate() {
         return createDate;
     }
 

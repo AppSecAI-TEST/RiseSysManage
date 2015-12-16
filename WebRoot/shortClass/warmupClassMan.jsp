@@ -16,7 +16,7 @@
 		</style>
   	</head>
   	<body>
-  		<div id="tab" class="easyui-tabs" style="min-width:1100px;width:99%;height:528px;font-family:'微软雅黑';margin:0 auto;padding:0 0">
+  		<div id="tab" class="easyui-tabs" style="min-width:1150px;width:99%;height:528px;font-family:'微软雅黑';margin:0 auto;padding:0 0">
 		    <div title="班级管理">
 				<form id="manFm" style="margin:0 auto;">
 					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
@@ -24,16 +24,16 @@
 							<td align="right" width="8%">
 								校区：
 							</td>
-							<td width="12%">
+							<td width="11%">
 								<select id="schoolManId" name="schoolManId" style="width:100px" ></select>
 							</td>
-							<td align="right" width="8%">	
+							<td align="right" width="9%">	
 								课程阶段：
 							</td>
 							<td width="22%">
 								<select id="classManPharse" name="classManPharse" style="width:100px" ></select>
 							</td>
-							<td align="right" width="8%">	
+							<td align="right" width="9%">	
 								班级：
 							</td>
 							<td colspan="2">
@@ -71,25 +71,25 @@
 						<thead>
 							<tr>
 								<th data-options="field:'shortClassInstId',checkbox:true"></th>
-								<th width="8%" field="schoolName">校区</th>
-								<th width="8%" field="className">热身课班级名称</th>
-								<th width="8%" field="classStateName">班级状态</th>
-								<th width="8%" field="planClassNum">计划课时量</th>
-								<th width="8%" field="classProgress">实际反馈课时量</th>
-								<th width="8%" field="personNum">计划上课人数</th>
-								<th width="8%" field="maxNum">实际上课人数</th>
-								<th width="8%" field="putClassDate">申请时间</th>
-								<th width="8%" field="putClassDate">审批时间</th>
-								<th width="8%" field="openDate">开课日期</th>
-								<th width="8%" field="finishDate">结课日期</th>
+								<th width="9%" field="schoolName">校区</th>
+								<th width="9%" field="className">热身课班级名称</th>
+								<th width="9%" field="classStateName">班级状态</th>
+								<th width="9%" field="planClassNum">计划课时量</th>
+								<th width="9%" field="classProgress">实际反馈课时量</th>
+								<th width="9%" field="personNum">计划上课人数</th>
+								<th width="9%" field="maxNum">实际上课人数</th>
+								<th width="9%" field="putClassDate">申请时间</th>
+								<th width="9%" field="putClassDate">审批时间</th>
+								<th width="9%" field="openDate">开课日期</th>
+								<th width="9%" field="finishDate">结课日期</th>
 							</tr>
 						</thead>
 					</table>
 				</div>
 				<div id="toolManbar" style="padding: 2px; height: auto">
-					<a href="javascript:void(0)" id="classArrangementBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="classArrangementFunc()">放班排课</a>
-					<a href="javascript:void(0)" id="cancelClassBtn" class="easyui-linkbutton" iconCls="icon-remove" style="width:100px;" onclick="cancelClassFunc()">取消放班</a>
-					<a href="javascript:void(0)" id="manClassBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="manClassFunc()">班级维护</a>
+					<a href="javascript:void(0)" id="classArrangementBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="classArrangementFunc()">放班申请</a>
+					<a href="javascript:void(0)" id="cancelClassBtn" class="easyui-linkbutton" iconCls="icon-remove" style="width:100px;" onclick="cancelClassFunc()">学员维护</a>
+					<a href="javascript:void(0)" id="manClassBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="manClassFunc()">班级调整</a>
 		   			<a href="javascript:void(0)" id="viewClassBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="viewClassFunc()">浏览</a>
 				</div>
 			</div>
@@ -100,16 +100,16 @@
 							<td align="right" width="8%">
 								校区：
 							</td>
-							<td width="12%">
+							<td width="11%">
 								<select id="schoolVerId" name="schoolVerId" style="width:100px" ></select>
 							</td>
-							<td align="right" width="8%">
+							<td align="right" width="9%">
 								班级：
 							</td>
 							<td width="22%">
 								<select id="classVerInfo" name="classVerInfo" style="width:100px" ></select>
 							</td>
-							<td align="right" width="8%">
+							<td align="right" width="9%">
 								审批状态：
 							</td>
 							<td width="22%">
@@ -237,7 +237,7 @@
 			function queryFunc()
 			{
 				var obj = $("#manFm").serializeObject();
-				obj["queryCode"] = "qryInterClassList";
+				obj["queryCode"] = "qryWarmupClassList";
 				obj["funcNodeId"] = "38110";
 				obj = JSON.stringify(obj);
 				$("#manList").datagrid({
@@ -260,7 +260,7 @@
 			}
 			function classArrangementFunc()
 			{
-				window.location.href = "/sys/shortBus/getAddShortClassInfo.do?funcNodeId=${param.funcNodeId}";
+				window.location.href = "/sys/shortBus/getAddShortClassInfo.do?funcNodeId=${param.funcNodeId}&pageName=addWarmupClass";
 			}
 			function cancelClassFunc()
 			{

@@ -176,7 +176,7 @@
 			}
 			function classArrangementFunc()
 			{
-				window.location.href = "/sys/shortBus/getAddShortClassInfo.do?funcNodeId=${param.funcNodeId}";
+				window.location.href = "/sys/shortBus/getAddShortClassInfo.do?funcNodeId=${param.funcNodeId}&pageName=addInterClass";
 			}
 			function cancelClassFunc()
 			{
