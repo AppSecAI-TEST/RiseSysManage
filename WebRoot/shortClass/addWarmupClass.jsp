@@ -92,7 +92,6 @@
 				$("#classType").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
-				
 				$("#classType").combobox({
 					formatter:function(data){
 						return '<span>'+data.classType+'</span>';
@@ -107,6 +106,22 @@
 					textField: 'schoolName', 
 					panelHeight: 'auto'
 				});
+				var schoolManId = sessionStorage.getItem("schoolManId");
+				var classType = sessionStorage.getItem("classType");
+				var className = sessionStorage.getItem("className");
+				var classStartTime = sessionStorage.getItem("classStartTime");
+				var classEndTime = sessionStorage.getItem("classEndTime");
+				var planHours = sessionStorage.getItem("planHours");
+				var planClassNum = sessionStorage.getItem("planClassNum");
+				var remark = sessionStorage.getItem("remark");
+				$("#schoolManId").combobox("setValue",schoolManId);
+				$("#classType").combobox("setValue",classType);
+				$("#className").textbox("setValue",className);
+				$("#classStartTime").datebox("setValue",classStartTime);
+				$("#classEndTime").datebox("setValue",classEndTime);
+				$("#planHours").textbox("setValue",planHours);
+				$("#planClassNum").textbox("setValue",planClassNum);
+				$("#remark").textbox("setValue",remark);
 			});
 			function addSubmitFunc()
 			{
@@ -178,13 +193,28 @@
 			function addPlanFunc()
 			{
 				var schoolManId = $("#schoolManId").combobox("getValue");
+				var classType = $("#classType").combobox("getValue");
+				var className = $("#className").textbox("getValue");
+				var classStartTime = $("#classStartTime").datebox("getValue");
+				var classEndTime = $("#classEndTime").datebox("getValue");
+				var planHours = $("#planHours").textbox("getValue");
+				var planClassNum = $("#planClassNum").textbox("getValue");
+				var remark = $("#remark").textbox("getValue");
+				sessionStorage.setItem("schoolManId",schoolManId);
+				sessionStorage.setItem("classType",classType);
+				sessionStorage.setItem("className",className);
+				sessionStorage.setItem("classStartTime",classStartTime);
+				sessionStorage.setItem("classEndTime",classEndTime);
+				sessionStorage.setItem("planHours",planHours);
+				sessionStorage.setItem("planClassNum",planClassNum);
+				sessionStorage.setItem("remark",remark);
 				if(schoolManId != "")
 				{
-					window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstId}&pageFlag=ADD&pageName=addWarmupClass&classType=热身课";
+					window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstId}&pageFlag=ADD&pageName=addWarmupClass&classType=热身课&schoolId="+schoolManId;
 				}
 				else
 				{
-					$.messager.alert('提示',"","info");
+					$.messager.alert('提示',"请先选择所属校区","info");
 				}
 			}
 			function delShortSchooltime(val)
@@ -212,6 +242,7 @@
 			}
 			function backFunc()
 			{
+				sessionStorage.clear();
 				window.location.href = "/sys/shortClass/warmupClassMan.jsp?funcNodeId=${funcNodeId}";
 			}
 		</script>

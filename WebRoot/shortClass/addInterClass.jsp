@@ -98,6 +98,20 @@
 					textField: 'schoolName', 
 					panelHeight: 'auto'
 				});
+				var interClassType = sessionStorage.getItem("interClassType");
+				var className = sessionStorage.getItem("className");
+				var classStartTime = sessionStorage.getItem("classStartTime");
+				var schoolManId = sessionStorage.getItem("schoolManId");
+				var planHours = sessionStorage.getItem("planHours");
+				var classEndTime = sessionStorage.getItem("classEndTime");
+				var remark = sessionStorage.getItem("remark");
+				$("#interClassType").combobox("setValue",interClassType);
+				$("#className").textbox("setValue",className);
+				$("#classStartTime").datebox("setValue",classStartTime);
+				$("#schoolManId").combobox("setValue",schoolManId);
+				$("#planHours").textbox("setValue",planHours);
+				$("#classEndTime").datebox("setValue",classEndTime);
+				$("#remark").textbox("setValue",remark);
 			});
 			function addSubmitFunc()
 			{
@@ -167,7 +181,28 @@
 			}
 			function addPlanFunc()
 			{
-				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstId}&pageFlag=ADD&pageName=addInterClass&classType=国际班";
+				var interClassType = $("#interClassType").combobox("getValue");
+				var className = $("#className").textbox("getValue");
+				var classStartTime = $("#classStartTime").datebox("getValue");
+				var schoolManId = $("#schoolManId").combobox("getValue");
+				var planHours = $("#planHours").textbox("getValue");
+				var classEndTime = $("#classEndTime").datebox("getValue");
+				var remark = $("#remark").textbox("getValue");
+				sessionStorage.setItem("interClassType",interClassType);
+				sessionStorage.setItem("className",className);
+				sessionStorage.setItem("classStartTime",classStartTime);
+				sessionStorage.setItem("schoolManId",schoolManId);
+				sessionStorage.setItem("planHours",planHours);
+				sessionStorage.setItem("classEndTime",classEndTime);
+				sessionStorage.setItem("remark",remark);
+				if(schoolManId != "")
+				{
+					window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstId}&pageFlag=ADD&pageName=addInterClass&classType=国际班&schoolId="+schoolManId;
+				}
+				else
+				{
+					$.messager.alert('提示',"请先选择所属校区","info");
+				}
 			}
 			function delShortSchooltime(val)
 			{
@@ -194,6 +229,7 @@
 			}
 			function backFunc()
 			{
+				sessionStorage.clear();
 				window.location.href = "/sys/shortClass/interClassMan.jsp?funcNodeId=${funcNodeId}";
 			}
 		</script>

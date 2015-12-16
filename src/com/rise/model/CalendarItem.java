@@ -4,8 +4,6 @@ public class CalendarItem {
 	
 	private String classInstId;
 	
-	private String schooltimeInstId;
-
 	private String classAttendId;
 	
 	private String dateValue;
@@ -20,14 +18,6 @@ public class CalendarItem {
 
 	public void setClassInstId(String classInstId) {
 		this.classInstId = classInstId;
-	}
-
-	public String getSchooltimeInstId() {
-		return schooltimeInstId;
-	}
-
-	public void setSchooltimeInstId(String schooltimeInstId) {
-		this.schooltimeInstId = schooltimeInstId;
 	}
 
 	public String getClassAttendId() {

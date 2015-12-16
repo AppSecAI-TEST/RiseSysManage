@@ -36,6 +36,8 @@ public class ClassTeacherT {
     
     private String schoolName;
     
+    private TeacherT teacherT;
+    
     private SchoolT schoolT;
     
 	private List<TeacherLicenseT> classLicenseList;
@@ -166,6 +168,14 @@ public class ClassTeacherT {
 
 	public void setSchoolName(String schoolName) {
 		this.schoolName = schoolName;
+	}
+
+	public TeacherT getTeacherT() {
+		return teacherT;
+	}
+
+	public void setTeacherT(TeacherT teacherT) {
+		this.teacherT = teacherT;
 	}
 
 	public SchoolT getSchoolT() {

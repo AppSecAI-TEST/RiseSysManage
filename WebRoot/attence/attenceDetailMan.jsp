@@ -65,11 +65,11 @@
 					</tr>
 					<tr>
 						<td align="right">升学基数：</td>
-						<td>5</td>
+						<td>${classInstT.baseNumT.higherBaseNum}</td>
 						<td align="right">已升学人数：</td>
-						<td>10</td>
+						<td>${classInstT.baseNumT.higherNum}</td>
 						<td align="right">升学率：</td>
-						<td>100%</td>
+						<td>${classInstT.baseNumT.higherRate}</td>
 					</tr>
 				</table>
 				<table align="center" class="tab" style="height:auto;width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">

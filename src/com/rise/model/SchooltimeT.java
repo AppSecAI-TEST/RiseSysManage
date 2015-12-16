@@ -28,6 +28,8 @@ public class SchooltimeT {
     
     private String roomName;
     
+    private RoomT roomT;
+    
 	private List<ClassTeacherT> classTeacherList;
 
     public Integer getSchooltimeId() {
@@ -124,6 +126,14 @@ public class SchooltimeT {
 
 	public void setRoomName(String roomName) {
 		this.roomName = roomName;
+	}
+	
+	public RoomT getRoomT() {
+		return roomT;
+	}
+
+	public void setRoomT(RoomT roomT) {
+		this.roomT = roomT;
 	}
 
 	public List<ClassTeacherT> getClassTeacherList() {

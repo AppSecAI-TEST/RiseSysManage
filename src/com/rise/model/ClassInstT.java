@@ -80,6 +80,8 @@ public class ClassInstT {
     
     private String licenseRate;
     
+    private BaseNumT baseNumT;
+    
     private List<SchooltimeT> schooltimeList;
     
 	private List<ClassStudentT> classStudentList;
@@ -378,6 +380,14 @@ public class ClassInstT {
 
 	public void setOpenClassTypeName(String openClassTypeName) {
 		this.openClassTypeName = openClassTypeName;
+	}
+	
+	public BaseNumT getBaseNumT() {
+		return baseNumT;
+	}
+
+	public void setBaseNumT(BaseNumT baseNumT) {
+		this.baseNumT = baseNumT;
 	}
 
 	public List<SchooltimeT> getSchooltimeList() {

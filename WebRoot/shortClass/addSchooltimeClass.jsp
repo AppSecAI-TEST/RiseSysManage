@@ -46,7 +46,7 @@
 			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/pubData/qryRoomList.do?schoolId=${schoolId}",function(data){
+			$.post("<%=path %>/pubData/qryRoomList.do?schoolId=${param.schoolId}",function(data){
 				$("#roomList").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryParaConfigList.do?paramType=HOUR_RANGE",function(data){

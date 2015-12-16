@@ -185,6 +185,7 @@
 				$("#classManPharse").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
+				sessionStorage.clear();
 				$("#classInfo").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 

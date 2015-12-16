@@ -40,6 +40,8 @@ public class ClassAttendT {
 
     private Date createDate;
     
+    private Integer baseHours;
+    
 	private RoomT roomT;
 	
 	private ParaConfig hourRangeObj;
@@ -197,6 +199,14 @@ public class ClassAttendT {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
+    
+	public Integer getBaseHours() {
+		return baseHours;
+	}
+
+	public void setBaseHours(Integer baseHours) {
+		this.baseHours = baseHours;
+	}
 
 	public RoomT getRoomT() {
 		return roomT;
