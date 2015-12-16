@@ -29,8 +29,8 @@
   	<body class="easyui-layout manage">
   		<form id="fm" method="post">
   			<input type="hidden" name="classInstId" value="${classInstT.classInstId}" />
-			<div data-options="region:'north',title:'考勤信息',collapsible:false,height:200,maxHeight:180,border:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;">
-				<table align="center" class="tab" style="height:100%;width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+			<div data-options="region:'north',title:'考勤信息',collapsible:false,height:500,maxHeight:500,border:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;">
+				<table align="center" class="tab" style="height:auto;width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td align="right" width="10%">课程阶段：</td>
 						<td width="23%">${classInstT.stageId}</td>
@@ -72,9 +72,7 @@
 						<td>100%</td>
 					</tr>
 				</table>
-			</div>
-			<div data-options="region:'center',collapsible:false,maxHeight:100,height:150,border:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0px auto;">
-				<table align="center" class="tab" style="height:100%;width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+				<table align="center" class="tab" style="height:auto;width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 					<c:forEach items="${classInstT.schooltimeList}" var="node">
 						<tr>
 							<td align="right" width="10%">上课时段：</td>
@@ -92,9 +90,7 @@
 						</tr>
 					</c:forEach>
 				</table>
-			</div>
-			<div data-options="region:'south',collapsible:false,maxHeight:500,height:265,border:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0px auto;">
-				<table region="center" id="attendList" class="easyui-datagrid" title="" style="height:99%;" toolbar="#toolbar" pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
+				<table region="center" id="attendList" class="easyui-datagrid" title="" style="height:auto;margin:5px auto" toolbar="#toolbar" pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
 					<thead>
 						<tr>
 							<th data-options="field:'ck',checkbox:true"></th>

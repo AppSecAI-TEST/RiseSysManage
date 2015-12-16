@@ -216,74 +216,83 @@
 			
 			function attendSubmit()
 			{
-				var obj = {
-					classInstId:"${schooltimeInstT.classInstId}",
-					classSchoolId:"${schooltimeInstT.schoolId}",
-					hourRange:$("#classTime").combobox("getValue"),
-					hours:$("#classLessonHour").textbox("getValue"),
-					roomId:$("#classRoomId").combobox("getValue"),
-					classType:"${schooltimeInstT.classInstT.classType}",
-					handlerId:"${sessionScope.StaffT.staffId}",
-					schooltime:'<fmt:formatDate value="${schooltimeInstT.schooltime}" pattern="yyyy-MM-dd" />',
-					teacherList:null,
-					studentList:null
-				};
-				var teacherArr = [];
-				$("#teacherTab tr:gt(1) td:nth-child(1)").each(function(i,node){
-					var teacherObj = {
-						teacherId:$(node).attr("teacherId"),
-						teacherName:$(node).attr("teacherName"),
-						teacherType:$(node).attr("teacherType"),
-						hours:$(node).attr("hours")
-					};
-					teacherArr.push(teacherObj);
-				});
-				obj.teacherList = teacherArr;
-				var studentArr = [];
-				$("#studentTab tr:gt(0)").each(function(i,node){
-					var firstTr = $(node).find("td:nth-child(1)");
-					var attendTypeObj = $(node).find("input[name='attendType"+firstTr.attr("studentId")+"']:checked").val();
-					var dressObj = $(node).find("input[name='dress"+firstTr.attr("studentId")+"']:checked").val();
-					var studentObj = {
-						studentId:firstTr.attr("studentId"),
-						studentName:firstTr.attr("studentName"),
-						schoolId:firstTr.attr("schoolId"),
-						dress:dressObj,
-						attendType:attendTypeObj
-					};
-					studentArr.push(studentObj);
-				});
-				obj.studentList = studentArr;
-				if(teacherArr.length == 0)
+				var classOpenDate = '<fmt:formatDate value="${classInstT.openDate}" pattern="yyyy-MM-dd" />';
+				var calDate = "${classSchooltime}";
+				if(classOpenDate != calDate && "${isFirstFlag}" == "Y")
 				{
-					$.messager.alert("提示", "老师人数不能为零,请添加老师后重新尝试","warning");
-				}
-				else if(studentArr.length == 0)
-				{
-					$.messager.alert("提示", "学生人数不能为零,请添加学生后重新尝试","warning");
+					$.messager.alert("提示", "第一次考勤时间与开课时间不一致,请核实后重新尝试","warning");
 				}
 				else
 				{
-					var json = JSON.stringify(obj);
-					ajaxLoading("提交中...");
-					$.post("/sys/attend/addAttend.do",{json:json},function(data){
-						ajaxLoadEnd();
-						if(data == "success")
-						{
-							$.messager.alert("提示", "考勤成功","info",function(){
-								backFunc();
-							});
-						}
-						else
-						{
-							try{
-								var dataObj = eval("("+data+")");
-								$.messager.alert("提示", dataObj.msg,"error");
-							}catch(e){
-								$.messager.alert("提示", data,"error");
-							}
-						}
+					var obj = {
+						classInstId:"${schooltimeInstT.classInstId}",
+						classSchoolId:"${schooltimeInstT.schoolId}",
+						hourRange:$("#classTime").combobox("getValue"),
+						hours:$("#classLessonHour").textbox("getValue"),
+						roomId:$("#classRoomId").combobox("getValue"),
+						classType:"${schooltimeInstT.classInstT.classType}",
+						handlerId:"${sessionScope.StaffT.staffId}",
+						schooltime:'<fmt:formatDate value="${schooltimeInstT.schooltime}" pattern="yyyy-MM-dd" />',
+						teacherList:null,
+						studentList:null
+					};
+					var teacherArr = [];
+					$("#teacherTab tr:gt(1) td:nth-child(1)").each(function(i,node){
+						var teacherObj = {
+							teacherId:$(node).attr("teacherId"),
+							teacherName:$(node).attr("teacherName"),
+							teacherType:$(node).attr("teacherType"),
+							hours:$(node).attr("hours")
+						};
+						teacherArr.push(teacherObj);
 					});
+					obj.teacherList = teacherArr;
+					var studentArr = [];
+					$("#studentTab tr:gt(0)").each(function(i,node){
+						var firstTr = $(node).find("td:nth-child(1)");
+						var attendTypeObj = $(node).find("input[name='attendType"+firstTr.attr("studentId")+"']:checked").val();
+						var dressObj = $(node).find("input[name='dress"+firstTr.attr("studentId")+"']:checked").val();
+						var studentObj = {
+							studentId:firstTr.attr("studentId"),
+							studentName:firstTr.attr("studentName"),
+							schoolId:firstTr.attr("schoolId"),
+							dress:dressObj,
+							attendType:attendTypeObj
+						};
+						studentArr.push(studentObj);
+					});
+					obj.studentList = studentArr;
+					if(teacherArr.length == 0)
+					{
+						$.messager.alert("提示", "老师人数不能为零,请添加老师后重新尝试","warning");
+					}
+					else if(studentArr.length == 0)
+					{
+						$.messager.alert("提示", "学生人数不能为零,请添加学生后重新尝试","warning");
+					}
+					else
+					{
+						var json = JSON.stringify(obj);
+						ajaxLoading("提交中...");
+						$.post("/sys/attend/addAttend.do",{json:json},function(data){
+							ajaxLoadEnd();
+							if(data == "success")
+							{
+								$.messager.alert("提示", "考勤成功","info",function(){
+									backFunc();
+								});
+							}
+							else
+							{
+								try{
+									var dataObj = eval("("+data+")");
+									$.messager.alert("提示", dataObj.msg,"error");
+								}catch(e){
+									$.messager.alert("提示", data,"error");
+								}
+							}
+						});
+					}
 				}
 			}
 			

@@ -17,20 +17,28 @@
  		<input type="hidden" id="shortClassInstId" value="${shortClassInstId}" />
 		<table align="center" class="tab" style="height:90px;width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
+				<td align="right">上课校区：</td>
+				<td><select name="schoolManId" id="schoolManId" style="width:150px" ></select></td>
 				<td align="right" width="15%">课程类型：</td>
 				<td width="18%"><select name="classType" id="classType" style="width:150px" ></select></td>
 				<td align="right" width="15%">热身课班级名称：</td>
 				<td width="18%"><input name="className" id="className" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" /></td>
-				<td align="right">计划上课人数：</td>
-				<td><input name="planClassNum" id="planClassNum" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" /></td>
 			</tr>
 			<tr>
-				<td align="right">计划课时量：</td>
-				<td><input name="planHours" id="planHours" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" /></td>
 				<td align="right" width="15%">开课时间：</td>
 				<td width="18%"><input name="classStartTime" id="classStartTime" type="text" style="width:150px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /></td>
 				<td align="right">结课时间：</td>
 				<td><input name="classEndTime" id="classEndTime" type="text" style="width:150px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /></td>
+				<td align="right">计划课时量：</td>
+				<td><input name="planHours" id="planHours" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" /></td>
+			</tr>
+			<tr>
+				<td align="right">计划上课人数：</td>
+				<td><input name="planClassNum" id="planClassNum" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" /></td>
+				<td align="right">&nbsp;</td>
+				<td>&nbsp;</td>
+				<td align="right">&nbsp;</td>
+				<td>&nbsp;</td>
 			</tr>
 		</table>
 		<div style="margin:0 auto;padding:0 0;text-align:left;padding-right:2px;width:99%;margin-top:5px">
@@ -77,10 +85,14 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
+			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+				$("#schoolManId").combobox("loadData",data);
+			},"json");
 			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("热身课"),function(data){
 				$("#classType").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
+				
 				$("#classType").combobox({
 					formatter:function(data){
 						return '<span>'+data.classType+'</span>';
@@ -89,12 +101,19 @@
 					textField: 'classType',
 					panelHeight: 'auto'
 				});
+				$("#schoolManId").combobox({
+					formatter:formatSchool, 
+					valueField: 'schoolId', 
+					textField: 'schoolName', 
+					panelHeight: 'auto'
+				});
 			});
 			function addSubmitFunc()
 			{
 				var shortClassInstId = $("#shortClassInstId").val();
 				var classType = $("#classType").combobox("getValue");
 				var className = $("#className").textbox("getValue");
+				var schoolManId = $("#schoolManId").combobox("getValue");
 				var planClassNum = $("#planClassNum").textbox("getValue");
 				var planHours = $("#planHours").textbox("getValue");
 				var classStartTime = $("#classStartTime").datebox("getValue");
@@ -158,7 +177,15 @@
 			}
 			function addPlanFunc()
 			{
-				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstId}&pageFlag=ADD&pageName=addWarmupClass&classType=热身课";
+				var schoolManId = $("#schoolManId").combobox("getValue");
+				if(schoolManId != "")
+				{
+					window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstId}&pageFlag=ADD&pageName=addWarmupClass&classType=热身课";
+				}
+				else
+				{
+					$.messager.alert('提示',"","info");
+				}
 			}
 			function delShortSchooltime(val)
 			{
@@ -185,7 +212,7 @@
 			}
 			function backFunc()
 			{
-				window.location.href = "/sys/shortClass/interClassMan.jsp?funcNodeId=${funcNodeId}";
+				window.location.href = "/sys/shortClass/warmupClassMan.jsp?funcNodeId=${funcNodeId}";
 			}
 		</script>
  	</body>
