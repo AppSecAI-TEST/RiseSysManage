@@ -32,7 +32,7 @@
 							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeFinish" name="endTimeFinish" ata-options="formatter:myformatter, parser:myparser"/>
 						</td>
 						<td align="center">
-							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1042">查询</a>
+							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1048">查询</a>
 							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 						</td>
 						<td width="400px">&nbsp;</td>
@@ -52,6 +52,9 @@
 						</tr>
 					</thead>
 				</table>
+				<div id="toolbar" style="padding: 2px; height: auto">
+	   				<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
+				</div>
 			</div>
   		</div>
   	</body>

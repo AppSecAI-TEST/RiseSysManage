@@ -87,8 +87,8 @@
 							<th data-options="field:'payDate',width:100,align:'center'">缴费时间</th>
 							<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
 							<th data-options="field:'byName',width:100,align:'center'">英文名</th>
-							<th data-options="field:'sexVal',width:50,align:'center'">性别</th>
-							<th data-options="field:'parentsName',width:150,align:'center'">家长姓名</th>
+							<th data-options="field:'sexText',width:50,align:'center'">性别</th>
+							<th data-options="field:'parentName',width:150,align:'center'">家长姓名</th>
 							<th data-options="field:'phone',width:250,align:'center'">联系电话</th>
 							<th data-options="field:'advisterName',width:150,align:'center'">招生顾问</th>
 							<th data-options="field:'carerName',width:100,align:'center'">客户关怀</th>
@@ -96,7 +96,7 @@
 							<th data-options="field:'selectClassNum',width:100,align:'center'">定班次数</th>
 							<th data-options="field:'className',width:100,align:'center'">当前定班班级</th>
 							<th data-options="field:'attendDate',width:100,align:'center'">上课日期</th>
-							<th data-options="field:'waitClassDays',width:100,align:'center'">等班时长（天）</th>
+							<th data-options="field:'waitDays',width:100,align:'center'">等班时长（天）</th>
 						</tr>
 					</thead>
 				</table>

@@ -45,10 +45,10 @@
 					<thead>
 						<tr>
 							<th data-options="field:'schoolName',width:100,align:'center'">校区</th>
-							<th data-options="field:'inNum',width:150,align:'center'">1定进班人数</th>
+							<th data-options="field:'inNum',width:150,align:'center'">一定进班人数</th>
 							<th data-options="field:'newTotalNum',width:150,align:'center'">新招进班总数</th>
-							<th data-options="field:'inPercentage',width:150,align:'center'">1定新招进班占比</th>
-							<th data-options="field:'avgWaitDays',width:150,align:'center'">1定进班平均等班时间（天）</th>
+							<th data-options="field:'inPercentage',width:150,align:'center'">一定新招进班占比</th>
+							<th data-options="field:'avgWaitDays',width:150,align:'center'">一定进班平均等班时间（天）</th>
 						</tr>
 					</thead>
 				</table>
