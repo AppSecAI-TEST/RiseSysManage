@@ -70,7 +70,108 @@ $(document).ready(function(){
 		}
 	});
 	
+    var staffId = $("#staffId").val();
+	$("#goodsSchoolId").combobox({
+		url : "/sys/pubData/qrySchoolList.do?schoolId",//返回json数据的url
+		valueField : "schoolId",
+		textField : "schoolName",
+		panelHeight : "auto",
+		formatter : formatSchool,
+		onLoadSuccess : function() {
+			$("#goodsSchoolId").combobox("setValue", "");
+			$("#goodsSchoolId").combobox("setText", "");
+		},
+		onChange : function(n, o) {
+			if(n != "" && n != null && n != undefined) {
+				$("#goodsClassInstId").combobox({disabled: false});
+				$("#goodsClassInstId").combobox({
+					url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='001','002','003','004','005'&classInstId=",//返回json数据的url
+					valueField : "classInstId",
+					textField : "className",
+					panelHeight : "auto",
+					formatter : function(data) {
+						return "<span>" + data.className + "</span>";
+					}
+				});
+				$("#goodsStudentId").combobox({
+					url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId=20&fieldId=studentId",
+					valueField : "studentId",
+					textField : "name",
+					panelHeight : "auto",
+					formatter : function(data) {
+						return "<span>" + data.name + "</span>";
+					}
+				});
+			} else {
+				$("#goodsSchoolId").combobox("setText", "");
+				$("#goodsClassInstId").combobox('clear');
+				$("#goodsClassInstId").combobox("loadData", new Array());
+				$("#goodsClassInstId").combobox({disabled: true});
+			}
+		}
+	});
     
+	$("#goodsGiftChannel").combobox({
+		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_GIFT_T&codeType=GIFT_CHANNEL",//返回json数据的url
+		valueField : "codeFlag",
+		textField : "codeName",
+		panelHeight : "auto",
+		formatter : formatItem,
+		onChange : function(n, o) {
+			if(n != "" && n != null && n != undefined) {
+				if(n=="COURSE"){
+					$("#goodsStageId").combobox({disabled: false});
+					$("#goodsStageId").combobox({
+						url : "/sys/pubData/qryStage.do",//返回json数据的url
+						valueField : "stageId",
+						textField : "stageId",
+						panelHeight : "auto",
+						formatter : formatStageId
+					});
+				}else{
+					$("#goodsStageId").combobox({disabled: true});
+					$("#goodsStageId").combobox("setValue", "");
+				}
+			} else {
+				$("#goodsGiftChannel").combobox("setText", "");
+				$("#goodsStageId").combobox('clear');
+				$("#goodsStageId").combobox("loadData", new Array());
+				$("#goodsStageId").combobox({disabled: true});
+			}
+		}
+	});
+	
+	$('#goodsGiftType').combobox({
+	 	onChange:function(n,o)
+		{
+       		$("#goodsGiftId").combobox(
+       		{
+        		url : "/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}",//返回json数据的url
+        		valueField : "giftId",
+        		textField :  "giftName",
+        		panelHeight : "auto",
+        		onLoadSuccess : function ()
+        		{ //数据加载完毕事件
+                    var data = $('#giftName').combobox('getData');
+                    if (data.length > 0)
+                    {
+                      //  $("#giftId").combobox('select', data[0].param2);
+                    }
+                }
+        	});
+		}
+	});
+	
+	$(".goodsGet").change(function() {
+	   var val = $(this).val();
+	   if(val == "Y"){
+		   $("#granter").textbox({disabled:false});
+	   }else if(val == "N"){
+		   $("#granter").textbox('setValue',"");
+		   $("#granter").textbox({disabled:true});
+	   }
+    });
+	
 });
 
 //增加行
@@ -129,20 +230,24 @@ function addRow()
 		}else if(n==7)
 		{
 			var granter=$("#granter").textbox("getValue");
-			if(granter == undefined || granter == ""){
-				flag=false;
-				$.messager.alert('提示', "请填写发放人！");
-				return false;
+			var isGet = $("input[name='isGet']:checked").val();
+			if('Y'==isGet){
+				if(granter == undefined || granter == ""){
+					flag=false;
+					$.messager.alert('提示', "请填写发放人！");
+					return false;
+				}
+				$(node).html("<span>"+granter+"</span>");	
+				$(node).attr("granter",granter);
 			}
-			$(node).html("<span>"+granter+"</span>");	
-			$(node).attr("granter",granter);
 		} 
 	});
 	if(flag)
 	{
 		$("#addGift").after(giftTR);
+		clearData("giftModelTR");
+		$("#granter").textbox({disabled:false});
     }
-	clearData("giftModelTR")
 }
 
 //删除相对应的行  

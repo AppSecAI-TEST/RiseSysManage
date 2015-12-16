@@ -72,11 +72,11 @@
      	        </td>
       	        <td width="6%" align="right"><span>是否领用</span></td>
       	        <td width="10%" align="left">
-      	       		 <input type="radio" value="Y" name="isGet"/><span>已领</span>
-      				 <input type="radio" value="N" name="isGet"/><span>未领</span>
+      	       		 <input type="radio" class="couponGet" value="Y" checked="checked" name="isGet"/><span>已领</span>
+      				 <input type="radio" class="couponGet" value="N" name="isGet"/><span>未领</span>
      	           </td>
       	        <td width="6%" align="right"><span>发放人</span></td>
-      	        <td width="6%"><input id="granter" type="text" class="easyui-textbox validatebox" required="true" style="width: 85px;"/></td>
+      	        <td width="6%"><input id="granter" type="text" class="easyui-textbox validatebox" style="width: 85px;"/></td>
       	        <td width="6%" align="center"><a href="javascript:void(0)" id="addCouponGiftBtn" class="easyui-linkbutton" id="addGiftBtn" iconCls="icon-add" style="width: 80px;" onclick="addRow()">添加</a></td>
       	      </tr>
       	      <tr style="display:none;" name="addGift" id="addGift" >

@@ -209,8 +209,8 @@ function addRow()
 	if(flag)
 	{
 		$("#addLinkPrice").after(linkTR);
+		clearData("linkModelTR")
     }
-	clearData("linkModelTR")
 }
 
 //新增优惠提交

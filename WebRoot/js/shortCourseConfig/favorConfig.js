@@ -100,8 +100,8 @@ function addRow()
 	if(flag)
 	{
 		$("#addShortFavor").after(favorTR);
+		clearData("favorModelTR");
     }
-	clearData("favorModelTR")
 }
 
 //新增优惠提交

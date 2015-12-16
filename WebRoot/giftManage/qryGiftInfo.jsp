@@ -16,22 +16,19 @@
   	</head>
   	<body>
   	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
+  	<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
   	<div title="实物&教材赠品" style="padding:5px;display:block;">
  		<form id="qryGoodsFm">
   			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="5">
   				<tr>
   					<td align="right" width="8%">所属校区：</td>
   					<td align="left" width="5%">
-  						<select name="schoolId" class="easyui-combobox" style="width:100px;" editable="false"
-							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-      						 onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
-      						url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
+  						<select id="goodsSchoolId" name="schoolId" class="easyui-combobox" style="width:100px;">
         				</select>
   					</td>
   					<td align="right" width="8%">学员姓名：</td>
   					<td align="left" width="5%">
-  						<select class="easyui-combobox" name="studentId" style="width:100px;">
-  							
+  						<select class="easyui-combobox" id="goodsStudentId" name="studentId" style="width:100px;">
   						</select>
   					</td>
   					<td align="right" width="8%">联系电话：</td>
@@ -40,21 +37,25 @@
   					</td>
   					<td align="right" width="5%">班级：</td>
   					<td align="left" width="16%">
-  						<input class="easyui-textbox"  name="class" style="width:100px;" />
+  						<select id="goodsClassInstId" name="classInstId" class="easyui-combobox" style="width:100px;" disabled="disabled">
+      					</select>
   					</td>
   					<td width="40%" colspan="2"></td>
   				</tr>
   				<tr>
   					<td align="right">来源类型：</td>
   					<td align="left">
-  						<select class="easyui-combobox"  name="giftChannel" style="width:100px;" ></select>
+  						<select class="easyui-combobox" id="goodsGiftChannel" name="giftChannel" style="width:100px;" ></select>
   					</td>
-  					<td align="left"><select class="easyui-combobox"  name="giftChannelDetail" style="width:100px;" ></select></td>
+  					<td align="left"><select class="easyui-combobox" id="goodsStageId"  name="channelVal" style="width:100px;" disabled="disabled"></select></td>
   					<td align="center" colspan="2">赠品类型：
-  						<select class="easyui-combobox"  name="giftType" style="width:100px;" ></select>
+  						<select class="easyui-combobox" id="goodsGiftType"  name="giftType" style="width:100px;" 
+	  						 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
+	   					 	 url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE&codeFlag=GOODS,TEXTBOOK" >
+   					    </select>
   					</td>
   					<td align="center" colspan="2" >赠品：
-  						<select class="easyui-combobox"  name="giftId" style="width:100px;" ></select>
+  						<select class="easyui-combobox" id="goodsGiftId" name="giftId" style="width:100px;" ></select>
   					</td>
   					<td align="center">是否领取：&nbsp;
   						<input type="radio" value="Y" name="isGet"/><span>是</span>
@@ -120,30 +121,29 @@
   				<tr>
   					<td align="right" width="8%">所属校区：</td>
   					<td align="left" width="5%">
-  						<select name="schoolId" class="easyui-combobox" style="width:100px;" editable="false"
-							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-      						 onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
-      						url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
+  						<select id="couponSchoolId" name="schoolId" class="easyui-combobox" style="width:100px;" >
         				</select>
   					</td>
   					<td align="right" width="8%">学员姓名：</td>
   					<td align="left" width="5%">
-  						<select class="easyui-combobox" name="studentId" style="width:100px;">
+  						<select class="easyui-combobox" id="couponStudentId" name="studentId" style="width:100px;">
   							
   						</select>
   					</td>
   					<td align="right" width="8%">联系电话：</td>
   					<td align="left" width="5%">
-  						<input class="easyui-textbox"  name="phone" style="width:100px;" />
+  						<input class="easyui-textbox" name="phone" style="width:100px;" />
   					</td>
   					<td align="right" width="6%">班级：</td>
   					<td align="left" width="5%">
-  						<input class="easyui-textbox"  name="class" style="width:100px;" />
+  						<select id="couponClassInstId" name="classInstId" class="easyui-combobox" style="width:100px;" disabled="disabled">
+      					</select>
   					</td>
   					<td align="right" width="8%">赠券状态：</td>
   					<td align="left" width="5%">
-  						<select class="easyui-combobox" name="giftState" style="width:100px;">
-  							
+  						<select id="couponState" class="easyui-combobox" name="giftState" style="width:100px;"
+  							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
+	      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_GIFT_T&codeType=COUPON_STATE">
   						</select>
   					</td>
   					<td></td>
@@ -151,12 +151,12 @@
   				<tr>
   					<td align="right">来源类型：</td>
   					<td align="left">
-  						<select class="easyui-combobox"  name="giftChannel" style="width:100px;" ></select>
+  						<select class="easyui-combobox" id="couponGiftChannel"  name="giftChannel" style="width:100px;" ></select>
   					</td>
-  					<td align="left"><select class="easyui-combobox"  name="giftChannelDetail" style="width:100px;" ></select></td>
+  					<td align="left"><select class="easyui-combobox" id="couponStageId"  name="channelVal" style="width:100px;" disabled="disabled"></select></td>
   					<td align="center" colspan="3">赠券类型：
-  						<select class="easyui-combobox"  name="giftType" style="width:100px;" ></select>
-  						&nbsp;<select class="easyui-combobox"  name="giftId" style="width:100px;" ></select>
+  						<select class="easyui-combobox" id="couponGiftType"  name="giftType" style="width:100px;" ></select>
+  						&nbsp;<select class="easyui-combobox" id="couponGiftId"  name="giftId" style="width:100px;" ></select>
   					</td>
   					<td align="right">赠券编号：</td>
   					<td>
@@ -179,7 +179,7 @@
 				  	&nbsp;至&nbsp;
 					<input class="easyui-datebox"  name="getEndTime" style="width:90px;" />
 				  </td>
-				  <td align="right">退回日期：</td>
+				  <td align="right">作废日期：</td>
 				  <td align="left" colspan="4">
 					<input class="easyui-datebox"  name="returnStartTime" style="width:90px;" />
 					&nbsp;至&nbsp;
@@ -188,7 +188,7 @@
 				</tr>
 				<tr>
 					<td align="right">几天内过期：</td>
-					<td align="left"><input class="easyui-textbox"  name="expDate" style="width:100px;" /></td>
+					<td align="left"><input class="easyui-numberbox"  name="expedTime" style="width:100px;" /></td>
 					<td colspan="9" align="right">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:90px; height: 25px;" id="qryCouponGift" funcNodeId="4015">查询</a>
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:90px; height: 25px;" id="reset" >重置</a>
@@ -237,41 +237,41 @@
   				<tr>
   					<td align="right" width="8%">所属校区：</td>
   					<td align="left" width="5%">
-  						<select name="schoolId" class="easyui-combobox" style="width:100px;" editable="false"
-							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-      						 onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
-      						url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
+  						<select id="courseSchoolId" name="schoolId" class="easyui-combobox" style="width:100px;">
         				</select>
   					</td>
   					<td align="right" width="8%">学员姓名：</td>
   					<td align="left" width="5%">
-  						<select class="easyui-combobox" name="studentId" style="width:100px;">
-  							
+  						<select class="easyui-combobox" id="courseStudentId" name="studentId" style="width:100px;">
   						</select>
   					</td>
   					<td align="right" width="8%">联系电话：</td>
   					<td align="left" width="5%">
-  						<input class="easyui-textbox"  name="phone" style="width:100px;" />
+  						<input class="easyui-textbox" name="phone" style="width:100px;" />
   					</td>
   					<td align="right" width="10%">班级：</td>
   					<td align="left" width="16%">
-  						<input class="easyui-textbox"  name="class" style="width:100px;" />
+  						<select id="courseClassInstId" name="classInstId" class="easyui-combobox" style="width:100px;" disabled="disabled">
+      					</select>
   					</td>
   					<td width="35%"></td>
   				</tr>
   				<tr>
   					<td align="right">来源类型：</td>
   					<td align="left">
-  						<select class="easyui-combobox"  name="giftChannel" style="width:100px;" ></select>
+  						<select class="easyui-combobox" id="courseGiftChannel" name="giftChannel" style="width:100px;" ></select>
   					</td>
-  					<td align="left"><select class="easyui-combobox"  name="giftChannelDetail" style="width:100px;" ></select></td>
+  					<td align="left"><select class="easyui-combobox" id="courseStageId"  name="channelVal" style="width:100px;" disabled="disabled"></select></td>
   					<td align="center" colspan="3">赠课类型：
-  						<select class="easyui-combobox"  name="giftType" style="width:100px;" ></select>
-  						&nbsp;<select class="easyui-combobox"  name="giftId" style="width:100px;" ></select>
+  						<select class="easyui-combobox" id="courseGiftType"  name="giftType" style="width:100px;" ></select>
+  						&nbsp;<select class="easyui-combobox" id="courseGiftId" name="giftId" style="width:100px;" ></select>
   					</td>
   					<td align="right">赠券状态：</td>
   					<td>
-  						<input class="easyui-combobox"  name="giftState" style="width:100px;" />
+  						<select id="couponState" class="easyui-combobox" name="giftState" style="width:100px;"
+  							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
+	      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_GIFT_T&codeType=COURSE_STATE">
+  						</select>
 	      			</td>
 	      			<td></td>
   				</tr>
@@ -287,7 +287,7 @@
 				  </td>
 				  <td align="right">几天内过期：</td>
 				  <td>
-  					<input class="easyui-textbox"  name="expDate" style="width:100px;" />
+  					<input class="easyui-textbox"  name="expedTime" style="width:100px;" />
 	      		  </td>
 				  <td align="right">
 					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:90px; height: 25px;" id="qryCourseGift" funcNodeId="4022">查询</a>

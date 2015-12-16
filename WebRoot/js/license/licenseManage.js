@@ -98,8 +98,8 @@ function addRow()
 	if(flag)
 	{
 		$("#addLicense").after(licenseTR);
+		clearData("licenseModelTR");
     }
-	clearData("licenseModelTR")
 }
 
 //新增持证提交

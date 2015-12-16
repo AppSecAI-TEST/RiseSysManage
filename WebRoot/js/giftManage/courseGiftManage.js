@@ -17,6 +17,103 @@ $(document).ready(function(){
 		});
     });
     
+    var staffId = $("#staffId").val();
+	$("#courseSchoolId").combobox({
+		url : "/sys/pubData/qrySchoolList.do?schoolId",//返回json数据的url
+		valueField : "schoolId",
+		textField : "schoolName",
+		panelHeight : "auto",
+		formatter : formatSchool,
+		onLoadSuccess : function() {
+			$("#courseSchoolId").combobox("setValue", "");
+			$("#courseSchoolId").combobox("setText", "");
+		},
+		onChange : function(n, o) {
+			if(n != "" && n != null && n != undefined) {
+				$("#courseClassInstId").combobox({disabled: false});
+				$("#courseClassInstId").combobox({
+					url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='001','002','003','004','005'&classInstId=",//返回json数据的url
+					valueField : "classInstId",
+					textField : "className",
+					panelHeight : "auto",
+					formatter : function(data) {
+						return "<span>" + data.className + "</span>";
+					}
+				});
+				$("#courseStudentId").combobox({
+					url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId=20&fieldId=studentId",
+					valueField : "studentId",
+					textField : "name",
+					panelHeight : "auto",
+					formatter : function(data) {
+						return "<span>" + data.name + "</span>";
+					}
+				});
+			} else {
+				$("#courseSchoolId").combobox("setText", "");
+				$("#courseClassInstId").combobox('clear');
+				$("#courseClassInstId").combobox("loadData", new Array());
+				$("#courseClassInstId").combobox({disabled: true});
+			}
+		}
+	});
+    
+	$("#courseGiftChannel").combobox({
+		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_GIFT_T&codeType=GIFT_CHANNEL",//返回json数据的url
+		valueField : "codeFlag",
+		textField : "codeName",
+		panelHeight : "auto",
+		formatter : formatItem,
+		onChange : function(n, o) {
+			if(n != "" && n != null && n != undefined) {
+				if(n=="COURSE"){
+					$("#courseStageId").combobox({disabled: false});
+					$("#courseStageId").combobox({
+						url : "/sys/pubData/qryStage.do",//返回json数据的url
+						valueField : "stageId",
+						textField : "stageId",
+						panelHeight : "auto",
+						formatter : formatStageId
+					});
+				}else{
+					$("#courseStageId").combobox({disabled: true});
+					$("#courseStageId").combobox("setValue", "");
+				}
+			} else {
+				$("#courseGiftChannel").combobox("setText", "");
+				$("#courseStageId").combobox('clear');
+				$("#courseStageId").combobox("loadData", new Array());
+				$("#courseStageId").combobox({disabled: true});
+			}
+		}
+	});
+	
+	 $('#courseGiftType').combobox({
+		 url:"/sys/pubData/qryData.do?param={'queryCode':'Qry_Gift_Type','parentType':'COURSE'}",
+		 formatter:formatTypeName, 
+		 valueField: 'giftType', 
+		 textField: 'typeName', 
+		 panelHeight: 'auto',
+	 	 onChange:function(n,o)
+		 {
+       		$("#courseGiftId").combobox(
+       		{
+        		url : "/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}",//返回json数据的url
+        		valueField : "giftId",
+        		textField :  "giftName",
+        		panelHeight : "auto",
+        		onLoadSuccess : function ()
+        		{ //数据加载完毕事件
+                    var data = $('#courseGiftId').combobox('getData');
+                    if (data.length > 0)
+                    {
+                      //  $("#giftId").combobox('select', data[0].param2);
+                    }
+                }
+        	});
+		}
+	 });
+    
 });
 
 //跳转赠课终止页面

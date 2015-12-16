@@ -55,8 +55,8 @@ $(document).ready(function(){
 		 valueField: 'giftType', 
 		 textField: 'typeName', 
 		 panelHeight: 'auto',
-	 	onChange:function(n,o)
-		{
+	 	 onChange:function(n,o)
+		 {
        		$("#amount").combobox(
        		{
         		url : "/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}",//返回json数据的url
@@ -75,6 +75,119 @@ $(document).ready(function(){
 		}
 	});
     
+    var staffId = $("#staffId").val();
+	$("#couponSchoolId").combobox({
+		url : "/sys/pubData/qrySchoolList.do?schoolId",//返回json数据的url
+		valueField : "schoolId",
+		textField : "schoolName",
+		panelHeight : "auto",
+		formatter : formatSchool,
+		onLoadSuccess : function() {
+			$("#couponSchoolId").combobox("setValue", "");
+			$("#couponSchoolId").combobox("setText", "");
+		},
+		onChange : function(n, o) {
+			if(n != "" && n != null && n != undefined) {
+				$("#couponClassInstId").combobox({disabled: false});
+				$("#couponClassInstId").combobox({
+					url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='001','002','003','004','005'&classInstId=",//返回json数据的url
+					valueField : "classInstId",
+					textField : "className",
+					panelHeight : "auto",
+					formatter : function(data) {
+						return "<span>" + data.className + "</span>";
+					}
+				});
+				$("#couponStudentId").combobox({
+					url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId=20&fieldId=studentId",
+					valueField : "studentId",
+					textField : "name",
+					panelHeight : "auto",
+					formatter : function(data) {
+						return "<span>" + data.name + "</span>";
+					}
+				});
+			} else {
+				$("#couponSchoolId").combobox("setText", "");
+				$("#couponClassInstId").combobox('clear');
+				$("#couponClassInstId").combobox("loadData", new Array());
+				$("#couponClassInstId").combobox({disabled: true});
+			}
+		}
+	});
+    
+	$("#couponGiftChannel").combobox({
+		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_GIFT_T&codeType=GIFT_CHANNEL",//返回json数据的url
+		valueField : "codeFlag",
+		textField : "codeName",
+		panelHeight : "auto",
+		formatter : formatItem,
+		onChange : function(n, o) {
+			if(n != "" && n != null && n != undefined) {
+				if(n=="COURSE"){
+					$("#couponStageId").combobox({disabled: false});
+					$("#couponStageId").combobox({
+						url : "/sys/pubData/qryStage.do",//返回json数据的url
+						valueField : "stageId",
+						textField : "stageId",
+						panelHeight : "auto",
+						formatter : formatStageId
+					});
+				}else{
+					$("#couponStageId").combobox({disabled: true});
+					$("#couponStageId").combobox("setValue", "");
+				}
+			} else {
+				$("#couponGiftChannel").combobox("setText", "");
+				$("#couponStageId").combobox('clear');
+				$("#couponStageId").combobox("loadData", new Array());
+				$("#couponStageId").combobox({disabled: true});
+			}
+		}
+	});
+	
+	 $('#couponGiftType').combobox({
+		 url:"/sys/pubData/qryData.do?param={'queryCode':'Qry_Gift_Type','parentType':'COUPON'}",
+		 formatter:formatTypeName, 
+		 valueField: 'giftType', 
+		 textField: 'typeName', 
+		 panelHeight: 'auto',
+	 	 onChange:function(n,o)
+		 {
+       		$("#couponGiftId").combobox(
+       		{
+        		url : "/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}",//返回json数据的url
+        		valueField : "giftId",
+        		textField :  "giftName",
+        		panelHeight : "auto",
+        		onLoadSuccess : function ()
+        		{ //数据加载完毕事件
+                    var data = $('#couponGiftId').combobox('getData');
+                    if (data.length > 0)
+                    {
+                      //  $("#giftId").combobox('select', data[0].param2);
+                    }
+                }
+        	});
+		}
+	 });
+     
+	$(".couponGet").change(function() {
+	   var val = $(this).val();
+	   if(val == "Y"){
+		   $("#giftCode").textbox({disabled:false});
+		   $("#effDate").datebox({disabled:false});
+		   $("#granter").textbox({disabled:false});
+	   }else if(val == "N"){
+	       $("#giftCode").textbox('setValue',"");
+	       $("#effDate").datebox('setValue',"");
+		   $("#granter").textbox('setValue',"");
+		   $("#giftCode").textbox({disabled:true});
+		   $("#effDate").datebox({disabled:true});
+		   $("#granter").textbox({disabled:true});
+	   }
+    });
+	 
 });
 
 //增加行
@@ -186,20 +299,26 @@ function addRow()
 		}else if(n==13)
 		{
 			var granter=$("#granter").textbox("getValue");
-			if(granter == undefined || granter == ""){
-				flag=false;
-				$.messager.alert('提示', "请填写发放人！");
-				return false;
+			var isGet = $("input[name='isGet']:checked").val();
+			if('Y'==isGet){
+				if(granter == undefined || granter == ""){
+					flag=false;
+					$.messager.alert('提示', "请填写发放人！");
+					return false;
+				}
+				$(node).html("<span>"+granter+"</span>");	
+				$(node).attr("granter",granter);
 			}
-			$(node).html("<span>"+granter+"</span>");	
-			$(node).attr("granter",granter);
 		} 
 	});
 	if(flag)
 	{
 		$("#addGift").after(giftTR);
+		clearData("giftModelTR");
+		$("#giftCode").textbox({disabled:false});
+	    $("#effDate").datebox({disabled:false});
+		$("#granter").textbox({disabled:false});
     }
-	clearData("giftModelTR")
 }
 
 //删除相对应的行  
