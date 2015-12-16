@@ -97,7 +97,7 @@
 						<th data-options="field:'schoolName',width:80,align:'center'">所属校区</th>
 						<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
 						<th data-options="field:'byName',width:100,align:'center'">英文名</th>
-						<th data-options="field:'sexVal',width:50,align:'center'">性别</th>
+						<th data-options="field:'sexText',width:50,align:'center'">性别</th>
 						<th data-options="field:'identityId',width:200,align:'center'">证件号码</th>
 						<th data-options="field:'birthday',width:100,align:'center'">出生日期</th>
 						<th data-options="field:'phone',width:250,align:'center'">联系电话</th>
@@ -105,7 +105,7 @@
 						<th data-options="field:'advisterName',width:150,align:'center'">招生顾问</th>
 						<th data-options="field:'dutyAdvisterName',width:120,align:'center'">责任顾问</th>
 						<th data-options="field:'carerName',width:120,align:'center'">客户关怀</th>
-						<th data-options="field:'vipVal',width:80,align:'center'">VIP学员</th>
+						<th data-options="field:'vipText',width:80,align:'center'">VIP学员</th>
 					</tr>
 				</thead>
 			</table>

@@ -324,3 +324,23 @@ $(document).ready(function() {
 		}
 	});
 });
+
+function initStudentId() {
+	var data = $("#schoolId").combobox("getData");
+	if(data.length > 0) {
+		var schoolIds = "";
+		for(var i = 0, len = data.length; i < len; i++) {
+			schoolIds += data[i].schoolId + ",";
+		}
+		schoolIds = schoolIds.substring(0, schoolIds.length - 1);
+		$("#studentId").combobox({
+			url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+schoolIds+"&funcNodeId="+funcNodeId+"&fieldId=studentId",
+			valueField : "studentId",
+			textField : "name",
+			panelHeight : "auto",
+			formatter : function(data) {
+				return "<span>" + data.name + "</span>";
+			}
+		});
+	}
+}

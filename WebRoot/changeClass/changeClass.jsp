@@ -128,7 +128,7 @@
 								<th data-options="field:'outClassTeacherName',width:120,align:'center'">转出班老师</th>
 								<th data-options="field:'outClassProgress',width:120,align:'center'">原班课时</th>
 								<th data-options="field:'courseStateText',width:100,align:'center'">原课程状态</th>
-								<th data-options="field:'changeClassStateText',width:100,align:'center'">转班状态</th>
+								<th data-options="field:'changeStateText',width:100,align:'center'">转班状态</th>
 								<th data-options="field:'inClassName',width:100,align:'center'">转入班级</th>
 								<th data-options="field:'outDate',width:120,align:'center'">转出时间</th>
 							</tr>

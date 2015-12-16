@@ -34,9 +34,11 @@ function initDate()
 	var curr_time = new Date();
 	$('#endTimePay').datebox('setValue', myformatter(curr_time));
 	$('#endTimeAttend').datebox('setValue', myformatter(curr_time));
+	$('#endTimeFinish').datebox('setValue', myformatter(curr_time));
 	$('#endTimeOpenClass').datebox('setValue', myformatter(curr_time));
 	curr_time.setMonth(curr_time.getMonth() - 1);
 	$('#startTimePay').datebox('setValue', myformatter(curr_time));
 	$('#startTimeAttend').datebox('setValue', myformatter(curr_time));
+	$('#startTimeFinish').datebox('setValue', myformatter(curr_time));
 	$('#startTimeOpenClass').datebox('setValue', myformatter(curr_time));
 }

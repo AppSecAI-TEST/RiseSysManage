@@ -41,7 +41,7 @@
 		        	</td>
 		        	<td align="center" width="14px">&nbsp;</td>
 		        	<td width="100px" colspan="2">
-						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;">
+						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled">
 		        		</select>
 					</td>
   				</tr>
@@ -125,7 +125,7 @@
 						<th data-options="field:'payDate',width:100,align:'center'">缴费日期</th>
 						<th data-options="field:'dutyAdvisterName',width:100,align:'center'">责任顾问</th>
 						<th data-options="field:'phone',width:200,align:'center'">联系电话</th>
-						<th data-options="field:'currentClassName',width:100,align:'center'">当前选班</th>
+						<th data-options="field:'className',width:100,align:'center'">当前选班</th>
 						<th data-options="field:'courseStateText',width:120,align:'center'">课程状态</th>
 						<th data-options="field:'adviserTeacherName',width:120,align:'center'">业绩老师</th>
 						<th data-options="field:'selectClassNum',width:100,align:'center'">选班次数</th>

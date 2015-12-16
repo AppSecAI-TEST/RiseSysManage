@@ -92,26 +92,32 @@ $(document).ready(function() {
     		return "<span>" + data.codeName + "</span>";
     	},
     	onChange : function(n, o) {
-    		if("001" == n) {
-    			$("#stageId").combobox({
-    				url : "/sys/pubData/qryStage.do",//返回json数据的url
-    		    	valueField : "stageId",
-    		    	textField : "stageId",
-    		    	panelHeight : "auto",
-    		    	formatter : function(data) {
-			    		return "<span>" + data.stageId + "</span>";
-			    	}
-    			});
+    		if(n != "" && n != null && n != undefined) {
+    			$("#stageId").combobox({disabled: false});
+    			if("001" == n) {
+    				$("#stageId").combobox({
+    					url : "/sys/pubData/qryStage.do",//返回json数据的url
+    					valueField : "stageId",
+    					textField : "stageId",
+    					panelHeight : "auto",
+    					formatter : function(data) {
+    						return "<span>" + data.stageId + "</span>";
+    					}
+    				});
+    			} else {
+    				$("#stageId").combobox({
+    					url : "/sys/pubData/qryShortClass.do",//返回json数据的url
+    					valueField : "shortClassId",
+    					textField : "className",
+    					panelHeight : "auto",
+    					formatter : function(data) {
+    						return "<span>" + data.className + "</span>";
+    					}
+    				});
+    			}
     		} else {
-    			$("#stageId").combobox({
-    				url : "/sys/pubData/qryShortClass.do",//返回json数据的url
-    		    	valueField : "shortClassId",
-    		    	textField : "className",
-    		    	panelHeight : "auto",
-    		    	formatter : function(data) {
-			    		return "<span>" + data.className + "</span>";
-			    	}
-    			});
+    			$("#stageId").combobox("loadData", new Array());
+				$("#stageId").combobox({disabled: true});
     		}
     	}
 	});
