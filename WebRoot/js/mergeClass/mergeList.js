@@ -5,14 +5,24 @@ $(document).ready(function(){
 	$("#HeadMerge").click(function(){
 		window.location.href="selectClass.jsp?isHead=Y";
 	})
+	$("#cancelMerge").click(function(){
+		cancelMerge();
+	})
 	$("#viewMerge").click(function(){
 		viewInfo("list_data");
 	})
 	$("#viewApprove").click(function(){
 		viewInfo("list_datas");
 	})
+	$("#approve").click(function(){
+		approveApply();
+	})
+	$("#orderClass").click(function(){
+		orderClass();
+	})
 	
 	initQryButton("qryBtn","resetBtn","merFm","list_data");
+	initQryButton("qryBtns","resetBtns","appFm","list_datas");
 });
 
 
@@ -40,4 +50,46 @@ function validateSelect(tableName)
 		$.messager.alert('提示', "请先选择一条记录！");
 	}
 	return flag;
+}
+
+
+function approveApply()
+{
+	if(validateSelect("list_datas"))
+	{
+		var row = $("#list_datas").datagrid('getSelected');
+		window.location.href ="approveApply.jsp?applyId="+row.applyId+"&comboState="+row.stateValue;
+	}	
+}
+
+function cancelMerge()
+{
+	if(validateSelect("list_data"))
+	{
+		var row = $("#list_data").datagrid('getSelected');
+		if(row.stateValue=="001"||row.stateValue=="003")
+		{
+			window.location.href ="cancelMergeApply.jsp?applyId="+row.applyId;
+		}
+		else
+		{
+			$.messager.alert('提示', "只有处于合并已申请或合并审批通过状态的记录才能取消合并申请！");
+		}	
+	}
+}
+
+function orderClass()
+{
+	if(validateSelect("list_data"))
+	{
+		var row = $("#list_data").datagrid('getSelected');
+		//if(row.stateValue=="001")
+		//{
+			window.location.href ="orderClass.jsp?applyId="+row.applyId;
+		//}
+		//else
+		//{
+			//$.messager.alert('提示', "！");
+		//}	
+	}
 }

@@ -95,7 +95,7 @@
   		</div>
   		<div id="courseChangePlan"  class="easyui-panel" title="课程调整计划" style="width:1293px;">  			
   		</div>
-  		<div class="easyui-panel" title="备注" style="width:1293px;height:100px;">
+  		<div class="easyui-panel" title="合并说明" style="width:1293px;height:100px;">
   			<textarea id="remark" style="border:0;width:100%;height:100%;resize:none;overflow-y:hidden"></textarea>
   		</div>
   		<div style="width:1293px;text-align:center;margin-top:50px;">

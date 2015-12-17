@@ -122,7 +122,7 @@
 		   			<a href="javascript:void(0)" id="cancelMerge" class="easyui-linkbutton" iconCls="icon-edit" plain="true">取消合并申请</a>
 		   			<a href="javascript:void(0)" id="HeadMerge" class="easyui-linkbutton" iconCls="icon-add" plain="true">总部合并</a>
 		   			<a href="javascript:void(0)" id="changeTime" class="easyui-linkbutton" iconCls="icon-edit" plain="true">调整上课时段</a>
-		   			<a href="javascript:void(0)" id="linkClass" class="easyui-linkbutton" iconCls="icon-edit" plain="true">定班处理</a>
+		   			<a href="javascript:void(0)" id="orderClass" class="easyui-linkbutton" iconCls="icon-edit" plain="true">定班处理</a>
 		   			<a href="javascript:void(0)" id="viewMerge" class="easyui-linkbutton" iconCls="icon-redo" plain="true">浏览</a>
 		 		</div>
 		 	</div>	
@@ -175,7 +175,7 @@
 		  				<tr>
 		  					<td colspan="5" >&nbsp;</td>
 		  					<td>	
-		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtns" funcNodeId="3001">查询</a>
+		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtns" funcNodeId="3112">查询</a>
 		  					</td>
 		  					<td>&nbsp;</td>
 		  					<td>
@@ -185,6 +185,33 @@
 		  			</table>
 		 		</form>
 		 		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:500" id="list_datas" toolbar="#toolbars" pagination="true" rownumbers="true" fitColumns="true">
+					<thead>
+						<tr>
+							<th data-options="field:'ck',checkbox:true"></th>
+							<th field="applyId" align="center" width="10%">编号</th>
+							<th field="comboState" align="center" width="8%">合并状态</th>
+							<th field="applyDate" align="center" width="8%">申请日期</th>
+							<th field="approveDate" align="center" width="8%">审批日期</th>
+							<th field="schoolName" align="center" width="8%">校区</th>
+							<th field="classesName" align="center" width="8%">班级名称</th>
+							<th field="finishDate" align="center" width="8%">结课日期</th>
+							<th field="classTime" align="center" width="15%">上课时段</th>
+							<th field="studyingNum" align="center" width="5%">在读人数</th>
+							<th field="higherNum" align="center" width="5%">已升学人数</th>
+							<th field="higherPer" align="center" width="5%">升学率</th>
+							<th field="startDate" align="center" width="8%">开始日期</th>
+							<th field="startHours" align="center" width="8%">开始课时</th>
+							<th field="weeks" align="center" width="5%">合并时长</th>
+							<th field="comboType" align="center" width="10%">合并形式</th>
+							<th field="comboFinishDate" align="center" width="10%">合并后结课日期</th>
+							<th field="className" align="center" width="8%">合并后班级</th>
+							<th field="orderNum" align="center" width="5%">定班人数</th>
+							<th field="orderPer" align="center" width="5%">定班率</th>
+							<th field="times" align="center" width="15%">合并后上课时段</th>
+							<th field="teachers" align="center" width="15%">带班老师</th>
+							<th field="openClassDate" align="center" width="8%">开课日期</th>
+						</tr>
+					</thead>
 				</table>
 				<div id="toolbars">
 		   			<a href="javascript:void(0)" id="approve" class="easyui-linkbutton" iconCls="icon-edit" plain="true">审批</a>

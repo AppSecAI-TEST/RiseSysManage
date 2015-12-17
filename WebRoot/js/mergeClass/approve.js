@@ -1,89 +1,11 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-	String path = request.getContextPath();
-	String applyId =request.getParameter("applyId");
-%>
-
-<!doctype html>
-<html>
-  	<head>
-		<%@ include file="../common/head.jsp" %>
-		<%@ include file="../common/formvalidator.jsp" %>
-  	</head>
-  	<body>
-  		<input id="applyId" type="hidden" value="<%=applyId%>"/>
-  		<div class="easyui-panel" title="班级信息" style="width:1293px;">
-  			<table id="tab1" width="100%;" class="maintable">
-	  			<tr>
-	  				<td align="center" width="6%">校区</td>
-	  				<td align="center" width="7%">班级名称</td>
-	  				<td align="center" width="15%">结课日期</td>
-	  				<td align="center"  width="29%">上课时间段</td>
-	  				<td align="center" width="7%">在读人数</td>
-	  				<td align="center" width="7%">已升学人数</td>
-	  				<td align="center" width="7%">升学率</td>
-	  				<td align="center" width="14%">可升学人数</td>
-	  				<td align="center" width="7%">升学缺口</td>
-	  			</tr>
-	  			<tr id="modelTr1" style="display:none">
-	  				<td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td>
-	  				<td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td>
-	  			</tr>
-  			</table>
-  		</div>
-  		<div class="easyui-panel" title="合并班计划" style="width:1293px;">
-  			<table id="tab2" width="100%;" class="maintable">
-  				<tr>
-  					<td align="center" width="4%">校区</td>
-  					<td align="center" width="5%">班级名称</td>
-  					<td align="center" width="9%">开始日期</td>
-  					<td align="center" width="4%">开始课时</td>
-  					<td align="center" width="4%">合并时长(周)</td>
-  					<td align="center" width="8%">合并形式</td>
-  					<td align="center" width="8%">合并后结课日期</td>
-  					<td align="center" width="5%">合并后班级</td>
-  					<td align="center" width="4%">定班人数</td>
-  					<td align="center" width="4%">定班率</td>
-  					<td align="center" width="18%">合并后上课时段</td>
-  					<td align="center" width="14%">带班老师</td>
-  					<td align="center" width="9%">开课日期</td>
-  				</tr>
-  				<tr id="modelTr2" style="display:none">
-  					<td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td>
-  					<td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td>
-  				</tr>
-  				<tr id="modelTr21" style="display:none">
-  					<td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td>
-  				</tr>
-  			</table>
-  		</div>
-  		<div id="courseChangePlan"  class="easyui-panel" title="课程调整计划" style="width:1293px;">  			
-  		</div>
-  		<div class="easyui-panel" title="审批信息" style="width:1293px;">
-  			<table id="tab3" width="100%;" class="maintable">
-	  			<tr>
-		  			<td align="center" width="15%">操作类型</td>
-		  			<td align="center" width="15%">操作时间</td>
-		  			<td align="center" width="10%">操作人</td>
-		  			<td align="center" width="10%">审批意见</td>
-		  			<td align="center" width="50%">情况说明</td>
-	  			</tr>
-	  			<tr id="modelTr3" style="display:none">
-	  				<td align="center"></td><td align="center"></td><td align="center"></td>
-	  				<td align="center"></td><td align="center"></td>
-	  			</tr>
-	  		</table>	  						
-  		</div>
-  		<div style="width:1293px;text-align:center;margin-top:50px;">
-  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" ><span>返回</span></a>	
-  		</div>		
-  	</body>
-</html>
-<script type="text/javascript">
 	$(document).ready(function(){
 		$("#backBtn").click(function(){
 			window.history.back();
 		});
+		$("#submitBtn").click(function(){
+			approve();
+		});
+		
 		initPage();
 	});
 	function initPage()
@@ -91,7 +13,7 @@
 		$.ajax({
 			type : "POST",
 			url : "/sys/mergeClass/getMergeInfo.do",
-			data :"applyId="+$("#applyId").val()+"&approveFlag=Y",
+			data :"applyId="+$("#applyId").val()+"&approveFlag=N",
 			async : false,
 			dataType:"json",
 			beforeSend : function() 
@@ -241,6 +163,25 @@
 						initStr +="</table>";
 					}
 					$("#courseChangePlan").html(initStr)
+					if($("#comboState").val()=="001")
+					{
+						$("#approveName").html("合并班审批：");
+						$("#text1").html("同意合并班");
+						$("#text2").html("不同意合并班");
+						$("#applyRemark").panel({
+							title:"合并说明"
+						});
+					}
+					else
+					{
+						$("#approveName").html("取消合并班审批：");
+						$("#text1").html("同意取消合并班");
+						$("#text2").html("不同意取消合并班");
+						$("#applyRemark").panel({
+							title:"取消合并说明"
+						});
+					}
+					$("#applyRemark").html(data.remark);
 				}	
 				hideProgressLoader();
 			},
@@ -251,10 +192,8 @@
 		});
 	}
 	
-	
-	
-	function getCellHours(val1,val2,objs)
-	{
+function getCellHours(val1,val2,objs)
+{
 		var str ="";
 		$.each(objs,function(i,obj){
 			if(val1==obj.weekOrder&&val2==obj.applyDetailId)
@@ -264,6 +203,54 @@
 			}
 		})	
 		return str;
-	}
-</script>
+}
+	
 
+function approve()
+{
+	var approveType="";
+	$("input[name='approveType']").each(function(){
+		if($(this).is(":checked"))
+		{
+			approveType =$(this).val();
+			return false;
+		}	
+	})
+	if(approveType=="")
+	{
+		$.messager.alert('提示', "请选择是否同意该申请！");
+	}
+	else
+	{
+		var param ={};
+		param.approveType =approveType;
+		param.handlerId =$("#handlerId").val();
+		param.comboState =$("#comboState").val();
+		param.remark =trim($("#remark").val());
+		param.applyId =$("#applyId").val();
+		$.ajax( {
+			type : "POST",
+			url : "/sys/mergeClass/approveApply.do",
+			data :"param="+JSON.stringify(param),
+			async : false,
+			beforeSend : function() {
+				showProgressLoader("正在提交审批,请稍等...", 400);
+			},
+			success : function(data) {
+				hideProgressLoader()
+				if (data == "true") {
+					showMessage('提示', "审批成功！", function() {
+						window.location.href = "mergeList.jsp";
+					});
+				} else {
+					showMessage('提示', "审批失败！", null);
+				}
+	
+			},
+			error : function() {
+				hideProgressLoader();
+				showMessage('提示', "调用审批服务失败！", null);
+			}
+		});
+	}	
+}

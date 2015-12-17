@@ -100,5 +100,105 @@ public class MergeClassController
 		}
 	}
 	
-
+	@RequestMapping("/cancelApply.do")
+	public void cancelApply(String param, HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = msc.cancelApply(param);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{ 
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	
+	@RequestMapping("/approveApply.do")
+	public void approveApply(String param, HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = msc.approveApply(param);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{ 
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	
+	@RequestMapping("/qryMergeClassStudent.do")
+	public void qryMergeClassStudent(String applyId, HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = msc.qryMergeClassStudent(applyId);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{ 
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	
+	@RequestMapping("/orderClass.do")
+	public void orderClass(String param, HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = msc.orderClass(param);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{ 
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	
+	
 }
