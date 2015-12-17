@@ -36,11 +36,11 @@
   					</td>
   					<td align="right">课时进度：</td>
   					<td>
-  						<input class="easyui-numberbox" name="min" id="min" data-options="min:0,max:500,precision:0" style="width:150px;" />
+  						<input class="easyui-datebox" name="minTime" id="minTime" style="width:150px;" />
   					</td>
   					<td align="center"  width="10px">至：</td>
   					<td>
-  						<input class="easyui-numberbox" name="max" id="max" data-options="min:1,max:500,precision:0" style="width:150px;" />
+  						<input class="easyui-datebox" name="maxTime" id="maxTime" style="width:150px;" />
   					</td>
   					<td></td>
   				</tr>
