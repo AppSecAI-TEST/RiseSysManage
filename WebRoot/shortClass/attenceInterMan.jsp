@@ -113,7 +113,7 @@
 								班级名称：
 							</td>
 							<td width="30%">
-								<select id="classHisPharse" name="classHisPharse" style="width:100px" ></select>
+								<select id="classHisName" name="classHisName" style="width:100px" ></select>
 							</td>
 							<td align="right">&nbsp;</td>
 						</tr>
@@ -141,17 +141,17 @@
 					<table class="easyui-datagrid" title="历史考勤列表" style="height:390px;" id="hisList" url="" toolbar="#toolHisbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
-								<th data-options="field:'postId',checkbox:true"></th>
-								<th width="10%" field="postName">上课校区</th>
-								<th width="10%" field="postTypeName">国际班类型</th>
-								<th width="10%" field="deptName">班级名称</th>
-								<th width="10%" field="schoolIdsName">上课时间</th>
-								<th width="10%" field="createDate">应到人数</th>
-								<th width="10%" field="postName">实到人数</th>
-								<th width="10%" field="postTypeName">请假人数</th>
-								<th width="10%" field="deptName">迟到人数</th>
-								<th width="10%" field="schoolIdsName">旷课人数</th>
-								<th width="10%" field="createDate">穿校服人数</th>
+								<th data-options="field:'shortClassInstId',checkbox:true"></th>
+								<th width="10%" field="schoolName">上课校区</th>
+								<th width="10%" field="classType">国际班类型</th>
+								<th width="10%" field="className">班级名称</th>
+								<th width="10%" field="schooltime">上课时间</th>
+								<th width="10%" field="attendNum">应到人数</th>
+								<th width="10%" field="realNum">实到人数</th>
+								<th width="10%" field="leaveNum">请假人数</th>
+								<th width="10%" field="lateNum">迟到人数</th>
+								<th width="10%" field="truantNum">旷课人数</th>
+								<th width="10%" field="dressNum">穿校服人数</th>
 							</tr>
 						</thead>
 					</table>
@@ -228,7 +228,7 @@
 					textField: 'schoolName', 
 					panelHeight: 'auto'
 				});
-				$("#classHisPharse").combobox({
+				$("#classHisName").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
 					textField: 'codeName', 
@@ -301,24 +301,36 @@
 			}
 			function queryHisFunc()
 			{
-				
+				var obj = $("#hisFm").serializeObject();
+				obj["queryCode"] = "qryAttenceInterHisInfo";
+				obj["funcNodeId"] = "38121";
+				obj = JSON.stringify(obj);
+				$("#hisList").datagrid({
+					url:"/sys/pubData/qryDataListByPage.do",
+					queryParams:{
+						param : obj
+					}
+				});
 			}
 			function resetHisFunc()
 			{
+				$("#interClassHisType").combobox("setValue","");
+				$("#classHisName").combobox("setValue","");
 				$("#schoolHisId").combobox("setValue","");
-				$("#classHisPharse").combobox("setValue","");
 				$("#classHisStart").datebox("setValue","");
 				$("#classHisEnd").datebox("setValue","");
-				$("#classHis").combobox("setValue","");
-				$("#teacherHis").textbox("setValue","");
-				$("#attendStartRate").numberbox("setValue","");
-				$("#attendEndRate").numberbox("setValue","");
-				$("#schoolWearStartRate").numberbox("setValue","");
-				$("#schoolWearEndRate").numberbox("setValue","");
 			}
 			function hisViewFunc()
 			{
-				
+				var row = $("#hisList").datagrid("getSelected");
+				if(row)
+				{
+					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
+				}
+				else
+				{
+					$.messager.alert('提示',"请选择要浏览的班级");
+				}
 			}
 		</script>
  	</body>
