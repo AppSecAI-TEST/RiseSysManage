@@ -465,6 +465,12 @@ $("#addGiftBtn").click(function ()
 			var getFlag = $("input[name='isGetY']:checked").val(); //是否领取
 			var parentType=$("#parentType").combobox('getValue');
 			var giftEffDate=$("#giftEffDate").textbox('getValue');
+			if('N'==getFlag)
+			{
+				$("#giftEffDate").textbox('setValue','');
+				$("#giftCode").textbox('setValue','');
+				$("#granter").textbox("setValue",'');
+			}
 			if(n==1)//赠品类型;	
 			{
 				var name=$("#parentType").combobox('getText');
@@ -502,9 +508,12 @@ $("#addGiftBtn").click(function ()
 					return false;
 				}
 			
-				if(''!=code)
+				if(''!=giftName && code!='')
 				{
-						$(node).html("<span>"+giftType+"  "+giftName+"   "+ code +"   "+giftEffDate+"</span>");	
+					$(node).html("<span>"+giftType+"  "+giftName+"   "+ code +"   "+giftEffDate+"</span>");	
+				}else if(''!=giftName && code=='')
+				{
+					$(node).html("<span>"+giftType+"  "+giftName+"</span>");	
 				}else
 				{
 					$(node).html("<span>"+giftName+"</span>");	
