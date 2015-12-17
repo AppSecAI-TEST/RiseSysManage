@@ -201,6 +201,12 @@ $("#addGiftBtn").click(function ()
 			var getFlag = $("input[name='isGetY']:checked").val(); //是否领取
 			var parentType=$("#parentType").combobox('getValue');
 			var giftEffDate=$("#giftEffDate").textbox('getValue');
+			if('N'==getFlag)
+			{
+				$("#giftEffDate").textbox('setValue','');
+				$("#giftCode").textbox('setValue','');
+				$("#granter").textbox("setValue",'');
+			}
 			if(n==1)//赠品类型;	
 			{
 				var name=$("#parentType").combobox('getText');
