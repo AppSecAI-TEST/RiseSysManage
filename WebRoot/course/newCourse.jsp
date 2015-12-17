@@ -903,6 +903,13 @@ $("#addGiftBtn").click(function ()
 		{
 			var parentType=$("#parentType").combobox('getValue');
 			var giftEffDate=$("#giftEffDate").textbox('getValue');
+			if('N'==getFlag)
+			{
+				$("#giftEffDate").textbox('setValue','');
+				$("#giftCode").textbox('setValue','');
+				$("#granter").textbox("setValue",'');
+			}
+				
 			if(n==1)//赠品类型;	
 			{
 				var name=$("#parentType").combobox('getText');
@@ -940,9 +947,12 @@ $("#addGiftBtn").click(function ()
 					return false;
 				}
 			
-				if(''!=code)
+				if(''!=giftName && code!='')
 				{
-						$(node).html("<span>"+giftType+"  "+giftName+"   "+ code +"   "+giftEffDate+"</span>");	
+					$(node).html("<span>"+giftType+"  "+giftName+"   "+ code +"   "+giftEffDate+"</span>");	
+				}else if(''!=giftName && code=='')
+				{
+					$(node).html("<span>"+giftType+"  "+giftName+"</span>");	
 				}else
 				{
 					$(node).html("<span>"+giftName+"</span>");	
@@ -1130,6 +1140,7 @@ $("#addCourse").click(function()
 				 var  giftId=tds.eq(3).attr('giftId');
 				 var  giftType=tds.eq(3).attr('giftType');
 				 var  giftCode=tds.eq(3).attr('giftCode');
+				 var  effDate=tds.eq(3).attr('effDate');
 				 var  isGet=tds.eq(5).attr('isGet');
 				 var  granter=tds.eq(7).attr('granter');
 				 var  gift = {};
@@ -1145,6 +1156,7 @@ $("#addCourse").click(function()
 				 gift.giftType = giftType;
 				 gift.giftId=giftId;
 				 gift.giftCode=giftCode;
+				 $(node).attr("effDate",giftEffDate);
 				 gift.isGet=isGet;
 				 gift.granter=granter;
 				 gifts.push(gift);  

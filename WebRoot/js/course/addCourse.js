@@ -85,7 +85,7 @@ function addSingleCourse()
 		var row = $('#list_data').datagrid('getSelected');
     	var studentId = row.studentId;
     	var schoolId = row.schoolId;
-    	var studentInfo =row.name+";;"+row.byName+";;"+row.birthday+";;"+row.identityId+";;"+row.sexVal;
+    	var studentInfo =row.name+";;"+row.byName+";;"+row.birthday+";;"+row.identityId+";;"+row.sexText;
     	window.location.href="addCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo;
 	}
 }
@@ -97,7 +97,7 @@ function addMultipleCourse()
 		var row = $('#list_data').datagrid('getSelected');
     	var studentId = row.studentId;
     	var schoolId = row.schoolId;
-    	var studentInfo =row.name+";;"+row.byName+";;"+row.birthday+";;"+row.identityId+";;"+row.sexVal;
+    	var studentInfo =row.name+";;"+row.byName+";;"+row.birthday+";;"+row.identityId+";;"+row.sexText;
     	window.location.href="link.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo;
 	}
 }
