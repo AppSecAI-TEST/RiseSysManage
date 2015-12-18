@@ -17,7 +17,7 @@
   	<body>
 		<input type="hidden" id="handlerId" name="handlerId"   value="${sessionScope.StaffT.staffId}"/>
 		<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
-			<table   style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:30px;" cellspacing="2">
+			<table  style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:30px;" cellspacing="2">
 				<tr>
 					<td  align="right" width="75px">
 						<span>排课月份：</span>
@@ -44,9 +44,9 @@
 				</thead>
 			</table>
 		</div>
-		<div style="min-width:1100px;overflow:auto;margin-left:7px;width:99%">
-		<div class="easyui-panel" title="排课信息">
-		<table class="maintable" id="hoursPlanTab" cellspacing="0" cellpadding="0">
+		<div style="min-width:1100px;width:99%;margin:0 auto;">
+		<div class="easyui-panel" title="排课信息" style="width:100%;overflow:auto;">
+		<table class="maintable" id="hoursPlanTab" style="width:1500px;" cellspacing="0" cellpadding="0">
 		  <tr align="center">
 		    <td align="center" width="40px;" rowspan="2"><span>序号</span></td>
 		    <td align="center" width="78px;" rowspan="2"><span>班级</span></td>
@@ -54,35 +54,35 @@
 		    <td align="center" width="240px;"rowspan="2"><span>上课时段</span></td>
 		    <td align="center" width="86px;" rowspan="2"><span>开课日期</span></td>
 		    <td align="center" width="86px;" rowspan="2"><span>结课日期</span></td>
-		    <td align="center" rowspan="2"><span>上月已上课时</span></td>
-		    <td align="center" rowspan="2"><span>上月剩余课时数</span></td>
-		    <td align="center" rowspan="2"><span>上月课时差异</span></td>
-		    <td align="center" colspan="2"><span>第一周</span></td>
-		    <td align="center" colspan="2"><span>第二周</span></td>
-		    <td align="center" colspan="2"><span>第三周</span></td>
-		    <td align="center" colspan="2"><span>第四周</span></td>
-		    <td align="center" colspan="2"><span>第五周</span></td>
-		    <td align="center" colspan="2"><span>第六周</span></td>
-		    <td align="center" colspan="2"><span>第日周</span></td>
-		    <td align="center" rowspan="2"><span>本月计划课时</span></td>
-		    <td align="center" rowspan="2"><span>本月已排课时</span></td>
-		    <td align="center" rowspan="2"><span>课时差异</span></td>
+		    <td align="center" width="42px;" rowspan="2"><span>上月已上课时</span></td>
+		    <td align="center" width="42px;" rowspan="2"><span>上月剩余课时数</span></td>
+		    <td align="center" width="42px;" rowspan="2"><span>上月课时差异</span></td>
+		    <td align="center" width="62px;" colspan="2"><span>第一周</span></td>
+		    <td align="center" width="62px;" colspan="2"><span>第二周</span></td>
+		    <td align="center" width="62px;" colspan="2"><span>第三周</span></td>
+		    <td align="center" width="62px;" colspan="2"><span>第四周</span></td>
+		    <td align="center" width="62px;" colspan="2"><span>第五周</span></td>
+		    <td align="center" width="62px;" colspan="2"><span>第六周</span></td>
+		    <td align="center" width="62px;" colspan="2"><span>第日周</span></td>
+		    <td align="center" width="48px;" rowspan="2"><span>本月计划课时</span></td>
+		    <td align="center" width="48px;" rowspan="2"><span>本月已排课时</span></td>
+		    <td align="center" width="48px;" rowspan="2"><span>课时差异</span></td>
 		  </tr>
 		  <tr align="center">
-		    <td align="center"><span>计划课时</span></td>
-		    <td align="center"><span>已排课时</span></td>
-		    <td align="center"><span>计划课时</span></td>
-		    <td align="center"><span>已排课时</span></td>
-		    <td align="center"><span>计划课时</span></td>
-		    <td align="center"><span>已排课时</span></td>
-		    <td align="center"><span>计划课时</span></td>
-		    <td align="center"><span>已排课时</span></td>
-		    <td align="center"><span>计划课时</span></td>
-		    <td align="center"><span>已排课时</span></td>
-		    <td align="center"><span>计划课时</span></td>
-		    <td align="center"><span>已排课时</span></td>
-		    <td align="center"><span>计划课时</span></td>
-		    <td align="center"><span>已排课时</span></td>
+		    <td align="center" width="40px;"><span>计划课时</span></td>
+		    <td align="center" width="40px;"><span>已排课时</span></td>
+		    <td align="center" width="40px;"><span>计划课时</span></td>
+		    <td align="center" width="40px;"><span>已排课时</span></td>
+		    <td align="center" width="40px;"><span>计划课时</span></td>
+		    <td align="center" width="40px;"><span>已排课时</span></td>
+		    <td align="center" width="40px;"><span>计划课时</span></td>
+		    <td align="center" width="40px;"><span>已排课时</span></td>
+		    <td align="center" width="40px;"><span>计划课时</span></td>
+		    <td align="center" width="40px;"><span>已排课时</span></td>
+		    <td align="center" width="40px;"><span>计划课时</span></td>
+		    <td align="center" width="40px;"><span>已排课时</span></td>
+		    <td align="center" width="40px;"><span>计划课时</span></td>
+		    <td align="center" width="40px;"><span>已排课时</span></td>
 		  </tr>
 		</table>
 		</div>
