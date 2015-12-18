@@ -28,34 +28,37 @@
   				<tr>
   					<td align="right">校区：</td>
   					<td>
-  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;">
-  							
-  						</select>
+  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 150px;" editable="false"
+							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
+			      			onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
+			      			url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
+		        		</select>
   					</td>
   					<td align="right">课时进度：</td>
   					<td>
-  						<input class="easyui-datebox" name="startPlanTime" id="startPlanTime"  style="width:150px;" />
+  						<input class="easyui-datebox" name="minTime" id="minTime" style="width:150px;" />
   					</td>
   					<td align="center"  width="10px">至：</td>
   					<td>
-  						<input class="easyui-datebox" name="endPlanTime" id="endPlanTime"  style="width:150px;" />
+  						<input class="easyui-datebox" name="maxTime" id="maxTime" style="width:150px;" />
   					</td>
   					<td></td>
   				</tr>
   				<tr>
   					<td align="right">课程阶段：</td>
   					<td>
-  						<select class="easyui-combobox" name="courseState" id="courseState" style="width:150px;">
-  							
-  						</select>
+  						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 150px;"
+							data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'"
+			      			url="<%=path %>/pubData/qryStage.do?">
+		        		</select>
   					</td>
   					<td align="right">开课日期：</td>
   					<td>
-  						<input class="easyui-datebox" name="startMergeTime" id="startMergeTime" style="width:150px;" />
+  						<input class="easyui-datebox" name="startTime" id="startTime" style="width:150px;" />
   					</td>
   					<td align="center">至：</td>
   					<td>
-  						<input class="easyui-datebox" name="endMergeTime" id="endMergeTime" style="width:150px;" />
+  						<input class="easyui-datebox" name="endTime" id="endTime" style="width:150px;" />
   					</td>
   					<td>
   						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" funcNodeId="3110">查询</a>

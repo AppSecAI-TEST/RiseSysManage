@@ -288,4 +288,33 @@ public class SchoolTimeController
 			}
 		}
 	}
+	
+	/**
+	 * 查询校区老师排课
+	 * @param param
+	 * @param response
+	 */
+	@RequestMapping(value="/hoursPlan.do")
+	public void hoursPlan(String schoolId,String month,HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = schoolTimeService.getHoursPlan(schoolId,month);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{ 
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }

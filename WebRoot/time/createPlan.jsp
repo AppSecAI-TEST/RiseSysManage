@@ -51,9 +51,9 @@
 		    <td width='5%' rowspan="2"><span>班级</span></td>
 		    <td rowspan="2"><span>带班老师</span></td>
 		    <td rowspan="2"><span>上课时段</span></td>
-		    <td rowspan="2"><span>开课日期</span></td>
-		    <td rowspan="2"><span>结课日期</span></td>
-		    <td rowspan="2"><span>上月已上课时</span></td>
+		    <td width='15%' rowspan="2"><span>开课日期</span></td>
+		    <td width='15%' rowspan="2"><span>结课日期</span></td>
+		    <td width='5%'  rowspan="2"><span>上月已上课时</span></td>
 		    <td rowspan="2"><span>上月剩余课时数</span></td>
 		    <td rowspan="2"><span>上月课时差异</span></td>
 		    <td align="center" colspan="2"><span>第一周</span></td>
@@ -61,11 +61,17 @@
 		    <td align="center" colspan="2"><span>第三周</span></td>
 		    <td align="center" colspan="2"><span>第四周</span></td>
 		    <td align="center" colspan="2"><span>第五周</span></td>
+		    <td align="center" colspan="2"><span>第六周</span></td>
+		    <td align="center" colspan="2"><span>第日周</span></td>
 		    <td rowspan="2"><span>本月计划课时</span></td>
 		    <td rowspan="2"><span>本月已排课时</span></td>
 		    <td rowspan="2"><span>课时差异</span></td>
 		  </tr>
-		  <tr align="center">
+		  <tr align="center" id="hoursPlan">
+		    <td><span>计划课时</span></td>
+		    <td><span>已排课时</span></td>
+		    <td><span>计划课时</span></td>
+		    <td><span>已排课时</span></td>
 		    <td><span>计划课时</span></td>
 		    <td><span>已排课时</span></td>
 		    <td><span>计划课时</span></td>
@@ -78,35 +84,68 @@
 		    <td><span>已排课时</span></td>
 		  </tr>
 		  
-		  <tr align="center">
-		    <td height="30">&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
-		    <td>&nbsp;</td>
 		  </tr>
 		</table>
 		</div>
  	</body>
 </html>
 <script type="text/javascript">
+
+
+$.ajax(
+	{
+		type : "POST",
+		url: "/sys/time/hoursPlan.do?schoolId=1001&month=2015-12",
+		async: true,
+		dataType:"json",
+		beforeSend: function()
+    	{
+    		$.messager.progress({text:'排课中，请稍候...'});
+    	},
+    	success: function(data) 
+    	{
+    		$.messager.progress('close');
+    		var html="";
+    		for(var i=0;i<data.length;i++)
+    		{
+    			var obj=data[i];
+    			 html+="<tr>";
+    			html+="<td height='30'>"+i+1+"</td>";
+    			html+="<td><span>"+obj.className+"</span></td>";
+    			html+="<td><span>"+obj.byname+"</span></td>";
+    			html+="<td><span>"+obj.dateRange+"</span></td>";
+    			html+="<td><span>"+obj.startDate+"</span></td>";
+    			html+="<td><span>"+obj.finishDate+"</span></td>";
+    			html+="<td width='5%'><span>"+obj.realHour+"</span></td>";
+    			html+="<td><span>"+obj.diffNum+"</span></td>";
+    			html+="<td><span>"+obj.monthDiffNum+"</span></td>";
+    			html+="<td><span>"+obj.weekPlan1+"</span></td>";
+    			html+="<td><span>"+obj.weekHand1+"</span></td>";
+    			html+="<td><span>"+obj.weekPlan2+"</span></td>";
+    			html+="<td><span>"+obj.weekHand2+"</span></td>";
+    			html+="<td><span>"+obj.weekPlan3+"</span></td>";
+    			html+="<td><span>"+obj.weekHand3+"</span></td>";
+    			html+="<td><span>"+obj.weekPlan4+"</span></td>";
+    			html+="<td><span>"+obj.weekHand4+"</span></td>";
+    			html+="<td><span>"+obj.weekPlan5+"</span></td>";
+    			html+="<td><span>"+obj.weekHand5+"</span></td>";
+    			html+="<td><span>"+obj.weekPlan6+"</span></td>";
+    			html+="<td><span>"+obj.weekHand6+"</span></td>";
+    			html+="<td><span>"+obj.weekPlan7+"</span></td>";
+    			html+="<td><span>"+obj.weekHand7+"</span></td>";
+    			html+="<td><span>"+obj.monthPlanHours+"</span></td>";
+    			html+="<td><span>"+obj.monthHandHours+"</span></td>";
+    			html+="<td><span>"+obj.mDiffNum+"</span></td>";
+    			html+="</tr>";
+    		}
+			
+			$("#hoursPlan").after(html);
+         },
+        error:function()
+        {
+        	$.messager.progress('close');
+        }
+	});
 
 $(function () {
         $('#time').datebox({
@@ -135,7 +174,10 @@ $(function () {
             
             //formatter: function (d) { return d.getFullYear() + '-' + d.getMonth(); }//配置formatter，只返回年月
     	});
-     });   
+     }
+
+
+);   
 
 function myformatter(date){
             var y = date.getFullYear();
