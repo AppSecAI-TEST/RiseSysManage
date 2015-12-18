@@ -110,9 +110,9 @@
 			$(document).ready(function(){
 				sessionStorage.clear();
 				$("#classInfo").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
+					formatter:formatClassInst, 
+					valueField: 'shortClassInstId', 
+					textField: 'className', 
 					panelHeight: 'auto'
 				});
 				$("#schoolManId").combobox({
@@ -143,7 +143,7 @@
 						}
 					},
 					onChange:function (data) {
-						$.post("/sys/shortBus/getShortClassInstTList.do",{typeName:encodeURI("国际班"),classTypeId:data.classTypeId},function(result){
+						$.post("/sys/shortBus/getShortClassInstTList.do",{typeName:encodeURI("国际班"),classTypeId:data},function(result){
 							$("#classInfo").combobox("loadData",result);
 						},"json");
 					}
@@ -213,7 +213,7 @@
 				{
 					if(row.classStateName == "未开课" || row.classStateName == "未开课")
 					{
-						window.location.href = "/sys/shortBus/shortClassManInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
+						window.location.href = "/sys/shortBus/shortClassManInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=shortInterClassMan";
 					}
 					else if(row.classStateName == "开课在读")
 					{

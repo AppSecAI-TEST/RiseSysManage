@@ -134,7 +134,11 @@
 				var classStartTime = $("#classStartTime").datebox("getValue");
 				var classEndTime = $("#classEndTime").combobox("getValue");
 				var remark = $("#remark").textbox("getValue");
-				if(classType == "")
+				if(schoolManId == "")
+				{
+					$.messager.alert('提示',"请先选择上课校区","info");
+				}
+				else if(classType == "")
 				{
 					$.messager.alert('提示',"请先选择课程类型","info");
 				}
@@ -146,17 +150,17 @@
 				{
 					$.messager.alert('提示',"开课日期不能为空,请核实后重新尝试","info");
 				}
-				else if(schoolManId == "")
-				{
-					$.messager.alert('提示',"请先选择国际班上课校区","info");
-				}
-				else if(planHours == "")
-				{
-					$.messager.alert('提示',"计划总课时量不能为空,请核实后重新尝试","info");
-				}
 				else if(classEndTime == "")
 				{
 					$.messager.alert('提示',"结课日期不能为空,请核实后重新尝试","info");
+				}
+				else if(planHours == "")
+				{
+					$.messager.alert('提示',"计划课时量不能为空,请核实后重新尝试","info");
+				}
+				else if(planClassNum == "")
+				{
+					$.messager.alert('提示',"计划上课人数不能为空,请核实后重新尝试","info");
 				}
 				else if($(".shortSchooltimeId").length == 0)
 				{
@@ -169,6 +173,7 @@
 						schoolId:schoolManId,
 						classTypeId:classType,
 						className:className,
+						planClassNum:planClassNum,
 						planHours:planHours,
 						openDate:classStartTime,
 						finishDate:classEndTime,
@@ -176,7 +181,9 @@
 						createId:${sessionScope.StaffT.staffId},
 						handlerId:${sessionScope.StaffT.staffId}
 					};
-					$.post("/sys/shortBus/addShortClassInstTInfo.do",{json:JSON.stringify(json)},function(data){
+					ajaxLoading("放班中...");
+					$.post("/sys/shortBus/addShortClassInstTInfo.do",{json:JSON.stringify(json),className:encodeURI("热身课")},function(data){
+						ajaxLoadEnd();
 						if(data == "success")
 						{
 							$.messager.alert('提示',"完成当前放班","",function(){

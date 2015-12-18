@@ -87,9 +87,9 @@ public class ShortBusinessController
 	}
 	
 	@RequestMapping("/shortClassManInfo.do")
-	public ModelAndView shortClassManInfo(String shortClassInstId , String funcNodeId)
+	public ModelAndView shortClassManInfo(String shortClassInstId , String funcNodeId , String pageName)
 	{
-		ModelAndView model = new ModelAndView("shortClass/shortClassMan");
+		ModelAndView model = new ModelAndView("shortClass/"+pageName);
 		try
 		{
 			shortBusinessService.getShortClassInfo(model,shortClassInstId,funcNodeId);
@@ -234,14 +234,14 @@ public class ShortBusinessController
 	}
 	
 	@RequestMapping("/addShortClassInstTInfo.do")
-	public void addShortClassInstTInfo(String json , HttpServletResponse response)
+	public void addShortClassInstTInfo(String json , String className , HttpServletResponse response)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = shortBusinessService.addShortClassInstTInfo(json);
+			String retVal = shortBusinessService.addShortClassInstTInfo(json , className);
 			out.write(retVal);
 		}
 		catch(Exception e)

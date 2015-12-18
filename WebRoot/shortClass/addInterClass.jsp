@@ -165,7 +165,7 @@
 						createId:${sessionScope.StaffT.staffId},
 						handlerId:${sessionScope.StaffT.staffId}
 					};
-					$.post("/sys/shortBus/addShortClassInstTInfo.do",{json:JSON.stringify(json)},function(data){
+					$.post("/sys/shortBus/addShortClassInstTInfo.do",{json:JSON.stringify(json),className:encodeURI("国际班")},function(data){
 						if(data == "success")
 						{
 							$.messager.alert('提示',"完成当前放班","",function(){

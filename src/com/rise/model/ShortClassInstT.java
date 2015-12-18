@@ -40,7 +40,7 @@ public class ShortClassInstT {
 
     private Date finishDate;
 
-    private Date applyDate;
+    private Date approvePerson;
 
     private Date approveDate;
     
@@ -212,15 +212,15 @@ public class ShortClassInstT {
         this.finishDate = finishDate;
     }
 
-    public Date getApplyDate() {
-        return applyDate;
-    }
+    public Date getApprovePerson() {
+		return approvePerson;
+	}
 
-    public void setApplyDate(Date applyDate) {
-        this.applyDate = applyDate;
-    }
+	public void setApprovePerson(Date approvePerson) {
+		this.approvePerson = approvePerson;
+	}
 
-    public Date getApproveDate() {
+	public Date getApproveDate() {
         return approveDate;
     }
 
