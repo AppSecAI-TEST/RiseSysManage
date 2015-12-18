@@ -205,7 +205,7 @@ function initClassInst(isBegin) {
     		onLoadSuccess : function () { //数据加载完毕事件
                 var data = $('#beginClassInstId').combobox('getData');
                 if (data.length > 0) {
-                	if(isBegin == inClassIsBegin) {
+                	if(inClassId != "" && inClassId != null && inClassId != undefined) {
                 		$("#beginClassInstId").combobox('select', inClassId);
                 	} else {
                 		$("#beginClassInstId").combobox('select', data[0].classInstId);
@@ -251,7 +251,7 @@ function initClassInst(isBegin) {
     		onLoadSuccess : function () { //数据加载完毕事件
                 var data = $('#notBeginClassInstId').combobox('getData');
                 if (data.length > 0) {
-                	if(isBegin == inClassIsBegin) {
+                	if(inClassId != "" && inClassId != null && inClassId != undefined) {
                 		$("#notBeginClassInstId").combobox('select', inClassId);
                 	} else {
                 		$("#notBeginClassInstId").combobox('select', data[0].classInstId);

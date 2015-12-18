@@ -56,17 +56,8 @@ $(document).ready(function() {
 			if("N" == changeClassFlagText) {
 				var changeSchoolFlagText = row.changeSchoolFlagText;
 				if("N" == changeSchoolFlagText) {
-					var name = row.name;
-					var phone = row.phone;
-					var byName = row.byName;
-					var schoolId = row.schoolId;
-					var studentId = row.studentId;
-					var schoolName = row.schoolName;
-					var classInstId = row.classInstId;
 					var studentCourseId = row.studentCourseId;
-					var currentClassName = row.currentClassName;
-					var adviserTeacherName = row.adviserTeacherName;
-					window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentCourseId="+studentCourseId+"&studentId="+studentId+"&schoolId="+schoolId+"&schoolName="+schoolName+"&name="+name+"&byName="+byName+"&phone="+phone+"&currentClassName="+currentClassName+"&adviserTeacherName="+adviserTeacherName+"&classInstId="+classInstId;
+					window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentCourseId="+studentCourseId+"&changeSource=change";
 				} else {
 					$.messager.alert('提示', "您选择的学员课程已经申请转校，不能再次申请转校！");
 				}

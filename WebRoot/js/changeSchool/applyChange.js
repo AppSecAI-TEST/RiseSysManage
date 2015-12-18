@@ -1,4 +1,32 @@
 $(document).ready(function() {
+	var studentCourseId = $("#studentCourseId").val();
+	$.ajax({
+		url: "/sys/pubData/qryData.do",
+		data: "param={'queryCode':'qryApplyStudentCourseInfo','studentCourseId':'"+studentCourseId+"'}",
+		dataType: "json",
+		async: false,
+		beforeSend: function()
+		{
+			$.messager.progress({title : '转校申请', msg : '正在查询申请转校的课程信息，请稍等……'});
+		},
+		success: function (data) {
+			$.messager.progress('close'); 
+			$.each(data, function(i, obj) {
+				$("#schoolNameText").html(obj.schoolName);
+				$("#nameText").html(obj.name);
+				$("#byNameText").html(obj.byName);
+				$("#phoneText").html(obj.phone);
+				$("#classNameText").html(obj.className);
+				$("#teacherNameText").html(obj.teacherName);
+				
+				$("#schoolId").val(obj.schoolId);
+				$("#studentId").val(obj.studentId);
+				$("#outSchoolId").val(obj.schoolId);
+				$("#outClassId").val(obj.classInstId);
+			});
+		}
+	});
+	
 	var studentId = $("#studentId").val();
 	$("#course_list_data").datagrid({ 
 		url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1016',studentId:'"+studentId+"'}",

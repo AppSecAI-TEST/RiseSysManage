@@ -263,22 +263,8 @@ $(document).ready(function() {
 			if(row) {
 				var changeClassFlag = row.changeClassFlag;
 				if("Y" == changeClassFlag) {
-					var name = row.name;
-					var phone = row.phone;
-					var byName = row.byName;
-					var stageId = row.stageId;
-					var schoolId = row.schoolId;
-					var studentId = row.studentId;
-					var classType = row.classType;
-					var className = row.className;
-					var schoolName = row.schoolName;
-					var classInstId = row.classInstId;
-					var teacherName = row.teacherName;
-					var classProgress = row.classProgress;
-					var changeClassNum = row.changeClassNum;
-					var courseStateText = row.courseStateText;
 					var studentCourseId = row.studentCourseId;
-					window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&studentId="+studentId+"&byName="+byName+"&changeClassNum="+changeClassNum+"&className="+className+"&classProgress="+classProgress+"&courseStateText="+courseStateText+"&name="+name+"&phone="+phone+"&teacherName="+teacherName+"&schoolId="+schoolId+"&schoolName="+schoolName+"&classInstId="+classInstId+"&classType="+classType+"&stageId="+stageId;
+					window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&changeSource=change";
 				} else {
 					$.messager.alert('提示', "您选择的学员课程已申请转班，不能再次申请转班！");
 				}
@@ -297,17 +283,8 @@ $(document).ready(function() {
 				if("Y" == changeClassFlag) {
 					var changeSchoolFlag = row.changeSchoolFlag;
 					if("Y" == changeSchoolFlag) {
-						var name = row.name;
-						var phone = row.phone;
-						var byName = row.byName;
-						var schoolId = row.schoolId;
-						var studentId = row.studentId;
-						var className = row.className;
-						var schoolName = row.schoolName;
-						var classInstId = row.classInstId;
 						var studentCourseId = row.studentCourseId;
-						var adviserTeacherName = row.adviserTeacherName;
-						window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentCourseId="+studentCourseId+"&studentId="+studentId+"&schoolId="+schoolId+"&schoolName="+schoolName+"&name="+name+"&byName="+byName+"&phone="+phone+"&currentClassName="+className+"&adviserTeacherName="+adviserTeacherName+"&classInstId="+classInstId;
+						window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentCourseId="+studentCourseId+"&changeSource=change";
 					} else {
 						$.messager.alert('提示', "您选择的学员课程已申请转校，不能再次申请转校！");
 					}

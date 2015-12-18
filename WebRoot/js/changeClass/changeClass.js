@@ -236,8 +236,8 @@ $(document).ready(function() {
 				var studentCourseId = row.studentCourseId;
 				window.location.href = "/sys/changeClass/changeInClass.jsp?studentId="+studentId+"&studentCourseId="+studentCourseId+"&applyId="+applyId+"&schoolId="+schoolId;
 			} else {
-				var changeClassStateText = row.changeClassStateText;
-				$.messager.alert('提示', "您选择的学员班级的转班状态为"+changeClassStateText+"，不能转入！");
+				var changeStateText = row.changeStateText;
+				$.messager.alert('提示', "您选择的学员班级的转班状态为"+changeStateText+"，不能转入！");
 			}
 		} else {
 			$.messager.alert('提示', "请先选择您要转入的转班申请！");
@@ -256,8 +256,8 @@ $(document).ready(function() {
 				var studentCourseId = row.studentCourseId;
 				window.location.href = "/sys/changeClass/cancelChangeClass.jsp?studentId="+studentId+"&studentCourseId="+studentCourseId+"&applyId="+applyId+"&schoolId="+schoolId;
 			} else {
-				var changeClassStateText = row.changeClassStateText;
-				$.messager.alert('提示', "您选择的转班申请已"+changeClassStateText+"，不能取消转班！");
+				var changeStateText = row.changeStateText;
+				$.messager.alert('提示', "您选择的转班申请已"+changeStateText+"，不能取消转班！");
 			}
 		} else {
 			$.messager.alert('提示', "请先选择您要取消的转班申请！");
@@ -276,8 +276,8 @@ $(document).ready(function() {
 				var studentCourseId = row.studentCourseId;
 				window.location.href = "/sys/changeClass/updateChangeClass.jsp?studentId="+studentId+"&studentCourseId="+studentCourseId+"&applyId="+applyId+"&schoolId="+schoolId;
 			} else {
-				var changeClassStateText = row.changeClassStateText;
-				$.messager.alert('提示', "您选择的转班申请已"+changeClassStateText+"，不能更改转班！");
+				var changeStateText = row.changeStateText;
+				$.messager.alert('提示', "您选择的转班申请已"+changeStateText+"，不能更改转班！");
 			}
 		} else {
 			$.messager.alert('提示', "请先选择您要更改转班的转班申请！");

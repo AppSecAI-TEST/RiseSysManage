@@ -44,21 +44,7 @@ $(document).ready(function() {
 			var changeFlag = row.changeFlag;
 			if("Y" == changeFlag) {
 				var studentCourseId = row.studentCourseId;
-				var studentId = row.studentId;
-				var byName = row.byName;
-				var changeClassNum = row.changeClassNum;
-				var className = row.className;
-				var classProgress = row.classProgress;
-				var courseStateText = row.courseStateText;
-				var name = row.name;
-				var phone = row.phone;
-				var teacherName = row.teacherName;
-				var schoolId = row.schoolId;
-				var classInstId = row.classInstId;
-				var classType = row.classType;
-				var schoolName = row.schoolName;
-				var stageId = row.stageId;
-				window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&studentId="+studentId+"&byName="+byName+"&changeClassNum="+changeClassNum+"&className="+className+"&classProgress="+classProgress+"&courseStateText="+courseStateText+"&name="+name+"&phone="+phone+"&teacherName="+teacherName+"&schoolId="+schoolId+"&schoolName="+schoolName+"&classInstId="+classInstId+"&classType="+classType+"&stageId="+stageId;
+				window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&changeSource=change";
 			} else {
 				$.messager.alert('提示', "您选择的学员课程已申请转班，不能再次申请转班！");
 			}

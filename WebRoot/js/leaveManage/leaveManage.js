@@ -112,50 +112,22 @@ function restartSubmit()
 	    	},
 	    	success: function(flag) {
 	    		$.messager.progress('close'); 
-	    		if(flag == "true"){
-	    			if(resumeType == "001"){
+	    		if(flag == "true") {
+	    			var studentCourseId = $("#studentCourseId").val();
+	    			if(resumeType == "001") {
 	    				$.messager.alert('提示', "原班复课成功！");
 	    				window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";
+	    			} else if(resumeType == "002") {
+	    				window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&changeSource=leave";
+	    			} else if(resumeType == "003") {
+						window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentCourseId="+studentCourseId+"&changeSource=leave";
 	    			}
-	    			if(resumeType == "002"){
-	    				var studentCourseId = $("#studentCourseId").val();
-						var studentId = $("#studentId").val();
-						var byName = $("#byName").val();
-						var changeClassNum = $("#changeClassNum").val();
-						var className = $("#className").val();
-						var classProgress = $("#classProgress").val();
-						var courseStateText = "休学";
-						var name = $("#name").val();
-						var phone = $("#phone").val();
-						var teacherName = $("#teacherName").val();
-						var schoolId = $("#schoolId").val();
-						var classInstId = $("#classInstId").val();
-						var classType = $("#classType").val();
-						var schoolName = $("#schoolName").val();
-						var stageId = $("#stageId").val();
-	    				window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&studentId="+studentId+"&byName="+byName+"&changeClassNum="+changeClassNum+"&className="+className+"&classProgress="+encodeURIComponent(classProgress)+"&courseStateText="+courseStateText+"&name="+name+"&phone="+phone+"&teacherName="+teacherName+"&schoolId="+schoolId+"&schoolName="+schoolName+"&classInstId="+classInstId+"&classType="+classType+"&stageId="+stageId;
-	    			}
-	    			if(resumeType == "003"){
-	    				var name = $("#name").val();
-						var phone = $("#phone").val();
-						var byName = $("#byName").val();
-						var schoolId = $("#schoolId").val();
-						var studentId = $("#studentId").val();
-						var schoolName = $("#schoolName").val();
-						var classInstId = $("#classInstId").val();
-						var studentCourseId = $("#studentCourseId").val();
-						var currentClassName = $("#className").val();
-						var adviserTeacherName = $("#teacherName").val();
-						window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentCourseId="+studentCourseId+"&studentId="+studentId+"&schoolId="+schoolId+"&schoolName="+schoolName+"&name="+name+"&byName="+byName+"&phone="+phone+"&currentClassName="+currentClassName+"&adviserTeacherName="+adviserTeacherName+"&classInstId="+classInstId;
-	    			}
-	    		}else if(flag == "false"){
-	    			if(resumeType == "001"){
+	    		} else if(flag == "false") {
+	    			if(resumeType == "001") {
 	    				$.messager.alert('提示', "原班课程已结课，无法原班复课！");
-	    			}
-	    			if(resumeType == "002"){
+	    			} else if(resumeType == "002") {
 	    				$.messager.alert('提示', "有待审批的转班申请单，无法转班复课！");
-	    			}
-	    			if(resumeType == "003"){
+	    			} else if(resumeType == "003") {
 	    				$.messager.alert('提示', "有待审批的转校申请单，无法转班复课！");
 	    			}
 	    		}

@@ -1,21 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
-	String name = request.getParameter("name");
-	String phone = request.getParameter("phone");
-	String byName = request.getParameter("byName");
-	String stageId = request.getParameter("stageId");
-	String schoolId = request.getParameter("schoolId");
-	String classType = request.getParameter("classType");
-	String className = request.getParameter("className");
-	String studentId = request.getParameter("studentId");
-	String schoolName = request.getParameter("schoolName");
-	String teacherName = request.getParameter("teacherName");
-	String classInstId = request.getParameter("classInstId");
-	String classProgress = request.getParameter("classProgress");
-	String changeClassNum = request.getParameter("changeClassNum");
+	String changeSource = request.getParameter("changeSource");
 	String studentCourseId = request.getParameter("studentCourseId");
-	String courseStateText = request.getParameter("courseStateText");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -29,44 +16,44 @@
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="转班申请">
   			<form id="applyChangeClassFm" method="post" enctype="multipart/form-data">
-  				<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId %>"/>
-  				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
-  				<input type="hidden" id="outClassId" name="outClassId" value="<%=classInstId %>"/>
+  				<input type="hidden" id="stageId"/>
+  				<input type="hidden" id="classType"/>
+  				<input type="hidden" id="schoolId" name="schoolId"/>
+  				<input type="hidden" id="studentId" name="studentId"/>
+  				<input type="hidden" id="outClassId" name="outClassId"/>
   				<input type="hidden" id="applyType" name="applyType" value="001"/>
+  				<input type="hidden" id="changeSource" name="changeSource" value="<%=changeSource %>"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   				<input type="hidden" id="studentCourseId" name="studentCourseId" value="<%=studentCourseId %>"/>
   				<table width="100%" cellpadding="5px" class="maintable" id="applyChangeClassTd">
   					<tr>
   						<td align="right"><span>校区：</span></td>
-  						<td><span id="schoolNameText"><%=schoolName %></span></td>
+  						<td><span id="schoolNameText"></span></td>
   						<td align="right"><span>学员姓名：</span></td>
-  						<td><span id="nameText"><%=name %></span></td>
+  						<td><span id="nameText"></span></td>
   						<td align="right"><span>英文名：</span></td>
-  						<td><span id="byNameText"><%=byName %></span></td>
+  						<td><span id="byNameText"></span></td>
   					</tr>
   					<tr>
   						<td align="right"><span>联系电话：</span></td>
-  						<td><span id="phoneText"><%=phone %></span></td>
+  						<td><span id="phoneText"></span></td>
   						<td align="right"><span>在读班级：</span></td>
-  						<td><span id="classNameText"><%=className %></span></td>
+  						<td><span id="classNameText"></span></td>
   						<td align="right"><span>课时进度：</span></td>
-  						<td><span id="classProgressText"><%=classProgress %></span></td>
+  						<td><span id="classProgressText"></span></td>
   					</tr>
   					<tr>
   						<td align="right"><span>带班老师：</span></td>
-  						<td><span id="teacherNameText"><%=teacherName %></span></td>
+  						<td><span id="teacherNameText"></span></td>
   						<td align="right"><span>课程状态：</span></td>
-  						<td><span id="courseStateText"><%=courseStateText %></span></td>
+  						<td><span id="courseStateText"></span></td>
   						<td align="right"><span>本课程转班次数：</span></td>
-  						<td><span id="changeClassNumText"><%=changeClassNum %></span></td>
+  						<td><span id="changeClassNumText"></span></td>
   					</tr>
   					<tr>
   						<td align="right"><span>计划转入班级：</span></td>
   						<td colspan="5">
-  							<select id="planInClassId" name="planInClassId" class="easyui-combobox" style="width: 200px; height: 25px;" required="true" 
-								data-options="formatter:formatClassInst, valueField: 'classInstId', textField: 'className', panelHeight: 'auto',
-				      			onLoadSuccess:function(data){$('#inClassId').combobox('setValue',data[0].classInstId);}" 
-				      			url="<%=path %>/pubData/qryClassInstList.do?schoolId=<%=schoolId %>&courseType=001&stageId=<%=stageId %>&classType=<%=classType %>&classState='001','002','003'&classInstId=<%=classInstId %>">
+  							<select id="planInClassId" name="planInClassId" class="easyui-combobox" style="width: 200px; height: 25px;" required="true">
 				        	</select>
   						</td>
   					</tr>
