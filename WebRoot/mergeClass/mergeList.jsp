@@ -117,13 +117,13 @@
 						</tr>
 					</thead>
 				</table>
-				<div id="toolbar">
-		   			<a href="javascript:void(0)" id="applyMerge" class="easyui-linkbutton" iconCls="icon-add" plain="true">合并申请</a>
-		   			<a href="javascript:void(0)" id="cancelMerge" class="easyui-linkbutton" iconCls="icon-edit" plain="true">取消合并申请</a>
-		   			<a href="javascript:void(0)" id="HeadMerge" class="easyui-linkbutton" iconCls="icon-add" plain="true">总部合并</a>
-		   			<a href="javascript:void(0)" id="changeTime" class="easyui-linkbutton" iconCls="icon-edit" plain="true">调整上课时段</a>
-		   			<a href="javascript:void(0)" id="orderClass" class="easyui-linkbutton" iconCls="icon-edit" plain="true">定班处理</a>
-		   			<a href="javascript:void(0)" id="viewMerge" class="easyui-linkbutton" iconCls="icon-redo" plain="true">浏览</a>
+				<div id="toolbar" style="padding: 2px;height:auto;">
+		   			<a href="javascript:void(0)" id="applyMerge" class="easyui-linkbutton" style="width: 100px;" iconCls="icon-add">合并申请</a>
+		   			<a href="javascript:void(0)" id="cancelMerge" class="easyui-linkbutton" style="width: 150px;" iconCls="icon-edit">取消合并申请</a>
+		   			<a href="javascript:void(0)" id="HeadMerge" class="easyui-linkbutton" style="width: 100px;" iconCls="icon-add">总部合并</a>
+		   			<a href="javascript:void(0)" id="changeTime" class="easyui-linkbutton" style="width: 150px;" iconCls="icon-edit">调整上课时段</a>
+		   			<a href="javascript:void(0)" id="orderClass" class="easyui-linkbutton" style="width: 100px;" iconCls="icon-edit">定班处理</a>
+		   			<a href="javascript:void(0)" id="viewMerge" class="easyui-linkbutton" style="width: 100px;" iconCls="icon-redo">浏览</a>
 		 		</div>
 		 	</div>	
 		 	<div title="审批管理" style="padding:5px;display:block;">

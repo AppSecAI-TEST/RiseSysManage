@@ -85,13 +85,13 @@
 				</tr>
 			</thead>
 		</table>
-		<div id="toolbar">
+		<div id="toolbar" style="padding: 2px;height:auto;">
 			<table>	
 				<tr>
 					<td>
-			   			<a href="javascript:void(0)" id="addClass" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加</a>
-			   			<a href="javascript:void(0)" id="subClass" class="easyui-linkbutton" iconCls="icon-ok" plain="true">提交</a>
-			   			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" plain="true">返回</a>
+			   			<a href="javascript:void(0)" id="addClass" class="easyui-linkbutton" style="width: 100px;" iconCls="icon-add">添加</a>
+			   			<a href="javascript:void(0)" id="subClass" class="easyui-linkbutton" style="width: 100px;"iconCls="icon-ok">提交</a>
+			   			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" style="width: 100px;" iconCls="icon-back">返回</a>
 	   				</td>
 	   				<td>
 	   					<div id="classList">已添加班级：</div>

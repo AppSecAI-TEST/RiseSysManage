@@ -102,10 +102,10 @@
 				</tr>
 			</thead>
 		</table>
-		<div id="toolbar">
-   			<a href="javascript:void(0)" id="changeFee" class="easyui-linkbutton" iconCls="icon-edit" plain="true">调整费用</a>
-   			<a href="javascript:void(0)" id="viewFee" class="easyui-linkbutton" iconCls="icon-redo" plain="true">浏览</a>
-   			<a href="javascript:void(0)" id="qryChange" class="easyui-linkbutton" iconCls="icon-search" plain="true">调整记录查询</a>
+		<div id="toolbar" style="padding: 2px;height:auto;">
+   			<a href="javascript:void(0)" id="changeFee" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">调整费用</a>
+   			<a href="javascript:void(0)" id="viewFee" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">浏览</a>
+   			<a href="javascript:void(0)" id="qryChange" class="easyui-linkbutton" iconCls="icon-search" style="width: 150px;">调整记录查询</a>
  		</div>
   	</body>
 </html>

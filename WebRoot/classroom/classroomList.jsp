@@ -38,7 +38,7 @@
   			</table>
  		</form>
  		
- 		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:300" id="list_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true">
+ 		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:400" id="list_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true">
 			<thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
@@ -50,10 +50,10 @@
 				</tr>
 			</thead>
 		</table>
-		<div id="toolbar">
-   			<a href="javascript:void(0)" id="addClassroom" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加</a>
-   			<a href="javascript:void(0)" id="updateClassroom" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
-   			<a href="javascript:void(0)" id="deleteClassroom" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">删除</a>
+		<div id="toolbar" style="padding: 2px;height:auto;">
+   			<a href="javascript:void(0)" id="addClassroom" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">添加</a>
+   			<a href="javascript:void(0)" id="updateClassroom" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">修改</a>
+   			<a href="javascript:void(0)" id="deleteClassroom" class="easyui-linkbutton" iconCls="icon-cancel" style="width: 100px;">删除</a>
  		</div>
   	</body>
 </html>

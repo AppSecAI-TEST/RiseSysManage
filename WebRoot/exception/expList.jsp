@@ -86,10 +86,10 @@
 				</tr>
 			</thead>
 		</table>
-		<div id="toolbar">
-   			<a href="javascript:void(0)" id="addExp" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增异常</a>
-   			<a href="javascript:void(0)" id="restoreClass" class="easyui-linkbutton" iconCls="icon-edit" plain="true">复课</a>
-   			<a href="javascript:void(0)" id="viewInfo" class="easyui-linkbutton" iconCls="icon-redo" plain="true">浏览</a>
+		<div id="toolbar" style="padding: 2px;height:auto;">
+   			<a href="javascript:void(0)" id="addExp" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">新增异常</a>
+   			<a href="javascript:void(0)" id="restoreClass" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">复课</a>
+   			<a href="javascript:void(0)" id="viewInfo" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">浏览</a>
  		</div>
   	</body>
 </html>

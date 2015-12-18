@@ -71,12 +71,12 @@
 				</tr>
 			</thead>
 		</table>
-		<div id="toolbar">
-   			<a href="javascript:void(0)" id="addAction" class="easyui-linkbutton" iconCls="icon-add" plain="true"><span>创建活动</span></a>
-   			<a href="javascript:void(0)" id="cancelAction" class="easyui-linkbutton" iconCls="icon-cancel" plain="true"><span>取消活动</span></a>
-   			<a href="javascript:void(0)" id="replyAction" class="easyui-linkbutton" iconCls="icon-edit" plain="true"><span>活动反馈</span></a>
-   			<a href="javascript:void(0)" id="updateReply" class="easyui-linkbutton" iconCls="icon-edit" plain="true"><span>修改反馈</span></a>
-   			<a href="javascript:void(0)" id="viewAction" class="easyui-linkbutton" iconCls="icon-redo" plain="true"><span>浏览</span></a>
+		<div id="toolbar" style="padding: 2px;height:auto;">
+   			<a href="javascript:void(0)" id="addAction" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;"><span>创建活动</span></a>
+   			<a href="javascript:void(0)" id="cancelAction" class="easyui-linkbutton" iconCls="icon-cancel" style="width: 100px;"><span>取消活动</span></a>
+   			<a href="javascript:void(0)" id="replyAction" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;"><span>活动反馈</span></a>
+   			<a href="javascript:void(0)" id="updateReply" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;"><span>修改反馈</span></a>
+   			<a href="javascript:void(0)" id="viewAction" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;"><span>浏览</span></a>
  		</div>
   	</body>
 </html>

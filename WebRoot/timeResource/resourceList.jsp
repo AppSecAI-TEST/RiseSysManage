@@ -38,10 +38,10 @@
 		 		<tbody>	
 	 			</tbody>	
 	 		</table>
- 			<div id="toolbar" class="easyui-panel">
-	   			<a href="javascript:void(0)" id="addBtn" class="easyui-linkbutton" iconCls="icon-add" plain="true"><span>创建</span></a>
-	   			<a href="javascript:void(0)" id="updateBtn" class="easyui-linkbutton" iconCls="icon-edit" plain="true"><span>修改</span></a>
-	   			<a href="javascript:void(0)" id="timeConfig" class="easyui-linkbutton" iconCls="icon-edit" plain="true"><span>上课时段配置</span></a>
+ 			<div id="toolbar" class="easyui-panel" style="padding:2px;height:auto">
+	   			<a href="javascript:void(0)" id="addBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;"><span>创建</span></a>
+	   			<a href="javascript:void(0)" id="updateBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;"><span>修改</span></a>
+	   			<a href="javascript:void(0)" id="timeConfig" class="easyui-linkbutton" iconCls="icon-edit" style="width: 150px;"><span>上课时段配置</span></a>
  			</div>
  			<iframe id="dlg" class="easyui-dialog" style="width:800px; height: 450px; padding: 10px 20px" closed="true" modal="true">
 			</iframe>
