@@ -56,7 +56,7 @@
   					</td>
   					<td align="right"><span>缴费日期：</span></td>
 	  				<td>
-						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTime" name="startTime" ata-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
 					<td align="center"><span>至</span></td>
 					<td>

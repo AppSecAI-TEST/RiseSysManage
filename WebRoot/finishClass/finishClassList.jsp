@@ -42,7 +42,7 @@
 					</td>
 					<td align="right"><span>开课日期：</span></td>
 					<td width="117px">
-						<input class="easyui-datebox" type="text" style="width:117px; height: 25px;" id="startTimeOpenClass" name="startTimeOpenClass" ata-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:117px; height: 25px;" id="startTimeOpenClass" name="startTimeOpenClass" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
 					<td align="center" width="14px"><span>至</span></td>
 					<td width="117px">
@@ -76,7 +76,7 @@
 					</td>
 					<td align="right"><span>结课日期：</span></td>
 					<td width="117px">
-						<input class="easyui-datebox" type="text" style="width:117px; height: 25px;" id="startTimeFinishClass" name="startTimeFinishClass" ata-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:117px; height: 25px;" id="startTimeFinishClass" name="startTimeFinishClass" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
 					<td align="center" width="14px"><span>至</span></td>
 					<td width="117px">
@@ -113,7 +113,7 @@
 					</td>
 					<td align="right"><span>解散日期：</span></td>
 					<td width="117px">
-						<input class="easyui-datebox" type="text" style="width:117px; height: 25px;" id="startTimeDisbandClass" name="startTimeDisbandClass" ata-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:117px; height: 25px;" id="startTimeDisbandClass" name="startTimeDisbandClass" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
 					<td align="center" width="14px"><span>至</span></td>
 					<td width="117px">

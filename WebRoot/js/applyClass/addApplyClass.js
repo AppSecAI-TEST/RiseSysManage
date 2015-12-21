@@ -233,11 +233,11 @@ $(document).ready(function() {
 			$("#hourRange").combobox({
         		url : "/sys/pubData/qryHourRangeList.do?weekTime=" + n,//返回json数据的url
         		valueField : "hourRange",
-        		textField : "hourRangeVal",
+        		textField : "timeName",
         		panelHeight : "auto",
         		editable : false,
         		formatter : function(data) {
-        			return "<span>" + data.hourRangeVal + "</span>";
+        			return "<span>" + data.timeName + "</span>";
         		}
         	});
 		}

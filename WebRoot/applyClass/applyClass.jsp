@@ -38,7 +38,7 @@
 							</td>
 							<td align="right"><span>放班申请时间：</span></td>
 			  				<td width="114px">
-								<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeApply" name="startTimeApply" ata-options="formatter:myformatter, parser:myparser"/>
+								<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeApply" name="startTimeApply" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 							<td align="center"><span>至</span></td>
 							<td width="114px">
@@ -136,7 +136,7 @@
 							</td>
 							<td align="right"><span>放班申请时间：</span></td>
 			  				<td width="114px">
-								<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeApproveApply" name="startTimeApproveApply" ata-options="formatter:myformatter, parser:myparser"/>
+								<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeApproveApply" name="startTimeApproveApply" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 							<td align="center"><span>至</span></td>
 							<td width="114px">
@@ -165,7 +165,7 @@
 							<td><span>查看我的审批</span></td>
 							<td align="right"><span>取消申请时间：</span></td>
 		  					<td width="114px">
-								<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeCancel" name="startTimeCancel" ata-options="formatter:myformatter, parser:myparser"/>
+								<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeCancel" name="startTimeCancel" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 							<td align="center"><span>至</span></td>
 							<td width="114px">
@@ -173,7 +173,7 @@
 							</td>
 		  					<td align="right"><span>取消审批时间：</span></td>
 		  					<td width="114px">
-								<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeCancelApprove" name="startTimeCancelApprove" ata-options="formatter:myformatter, parser:myparser"/>
+								<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeCancelApprove" name="startTimeCancelApprove" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 							<td align="center"><span>至</span></td>
 							<td width="114px">

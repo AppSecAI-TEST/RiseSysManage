@@ -34,11 +34,11 @@
 					</td>
 					<td align="right"><span>缴费日期：</span></td>
 			  		<td width="100px">
-						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimePay" name="startTimePay" ata-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimePay" name="startTimePay" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
 					<td align="center"><span>至</span></td>
 					<td width="100px">
-						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimePay" name="endTimePay" ata-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimePay" name="endTimePay" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
 					<td width="150px">&nbsp;</td>
   				</tr>

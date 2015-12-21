@@ -38,13 +38,13 @@
 							</td>
 							<td align="right"><span>转出日期：</span></td>
 			  				<td width="100px">
-								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeOut" name="startTimeOut" ata-options="formatter:myformatter, parser:myparser"/>
+								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeOut" name="startTimeOut" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 							<td align="center">
 								<span>至</span>
 							</td>
 							<td width="100px">
-								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeOut" name="endTimeOut" ata-options="formatter:myformatter, parser:myparser"/>
+								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeOut" name="endTimeOut" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 		  				</tr>
 		  				<tr>
@@ -67,13 +67,13 @@
 							</td>
 							<td align="right"><span>转入日期：</span></td>
 			  				<td width="100px">
-								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeIn" name="startTimeIn" ata-options="formatter:myformatter, parser:myparser"/>
+								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeIn" name="startTimeIn" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 							<td align="center">
 								<span>至</span>
 							</td>
 							<td width="100px">
-								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeIn" name="endTimeIn" ata-options="formatter:myformatter, parser:myparser"/>
+								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeIn" name="endTimeIn" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 		  				</tr>
 		  				<tr>
@@ -96,13 +96,13 @@
 							</td>
 							<td align="right"><span>完成日期：</span></td>
 			  				<td width="100px">
-								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeFinish" name="startTimeFinish" ata-options="formatter:myformatter, parser:myparser"/>
+								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeFinish" name="startTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 							<td align="center">
 								<span>至</span>
 							</td>
 							<td width="100px">
-								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeFinish" name="endTimeFinish" ata-options="formatter:myformatter, parser:myparser"/>
+								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeFinish" name="endTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 							<td align="center">
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryApplyBtn" funcNodeId="1012">查询</a>
@@ -164,13 +164,13 @@
 							</td>
 							<td align="right"><span>申请日期：</span></td>
 			  				<td width="100px">
-								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeApply" name="startTimeApply" ata-options="formatter:myformatter, parser:myparser"/>
+								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeApply" name="startTimeApply" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 							<td align="center">
 								<span>至</span>
 							</td>
 							<td width="100px">
-								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApply" name="endTimeApply" ata-options="formatter:myformatter, parser:myparser"/>
+								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApply" name="endTimeApply" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 							<td align="right">
 								<input type="checkbox" name=""/>
@@ -191,13 +191,13 @@
 							</td>
 							<td align="right"><span>审批日期：</span></td>
 			  				<td width="100px">
-								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeApprove" name="startTimeApprove" ata-options="formatter:myformatter, parser:myparser"/>
+								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeApprove" name="startTimeApprove" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 							<td align="center">
 								<span>至</span>
 							</td>
 							<td width="100px">
-								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApprove" name="endTimeApprove" ata-options="formatter:myformatter, parser:myparser"/>
+								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApprove" name="endTimeApprove" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 							<td align="right"><span>审批状态：</span></td>
 							<td width="100px">
