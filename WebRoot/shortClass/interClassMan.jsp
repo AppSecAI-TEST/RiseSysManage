@@ -240,7 +240,7 @@
 				{
 					if(row.classStateName != "解散")
 					{
-						window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
+						window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=viewInterShortClass&shortClassInstId="+row.shortClassInstId;
 					}
 					else
 					{

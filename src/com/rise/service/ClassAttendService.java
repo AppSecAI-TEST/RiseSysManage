@@ -28,8 +28,11 @@ public class ClassAttendService
 		JSONObject json = JSONObject.fromObject(result);
 		ObjectMapper mapper = JacksonJsonMapper.getInstance();
 		String statistics = json.getJSONArray("classAttendStatistics").toString();
+		String classProgressInfo = StringUtil.getJSONObjectKeyVal(json, "classProgressInfo");
 		model.addObject("statistics", statistics);
+		model.addObject("classProgressInfo", classProgressInfo);
 		json.remove("classAttendStatistics");
+		json.remove("classProgressInfo");
 		ClassInstT classInstT = (ClassInstT)mapper.readValue(json.toString() , ClassInstT.class);
 		model.addObject("classInstT", classInstT);
 		model.addObject("funcNodeId", funcNodeId);

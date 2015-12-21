@@ -88,7 +88,7 @@
 				</div>
 				<div id="toolManbar" style="padding: 2px; height: auto">
 					<a href="javascript:void(0)" id="classArrangementBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="classArrangementFunc()">放班申请</a>
-					<a href="javascript:void(0)" id="cancelClassBtn" class="easyui-linkbutton" iconCls="icon-remove" style="width:100px;" onclick="manClassFunc()">班级维护</a>
+					<a href="javascript:void(0)" id="cancelClassBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="manClassFunc()">班级维护</a>
 		   			<a href="javascript:void(0)" id="viewClassBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="viewClassFunc()">浏览</a>
 				</div>
 			</div>
@@ -321,7 +321,7 @@
 				{
 					if(row.classStateName != "解散")
 					{
-						window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
+						window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=viewWarmupShortClass&shortClassInstId="+row.shortClassInstId;
 					}
 					else
 					{
@@ -364,7 +364,22 @@
 			}
 			function viewManFunc()
 			{
-				
+				var row = $("#hisList").datagrid("getSelected");
+				if(row)
+				{
+					if(row.classStateName != "解散")
+					{
+						window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=viewWarmupShortClass&shortClassInstId="+row.shortClassInstId;
+					}
+					else
+					{
+						$.messager.alert('提示',"该课程已被取消");		
+					}
+				}
+				else
+				{
+					$.messager.alert('提示',"请选择要浏览的班级");
+				}
 			}
 		</script>
  	</body>

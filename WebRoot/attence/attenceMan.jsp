@@ -154,21 +154,21 @@
 					<table class="easyui-datagrid" title="历史考勤列表" style="height:390px;" id="hisList" url="" toolbar="#toolHisbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
-								<th data-options="field:'postId',checkbox:true"></th>
-								<th width="7%" field="postName">校区</th>
-								<th width="7%" field="postTypeName">上课时间</th>
-								<th width="7%" field="deptName">班级名称</th>
-								<th width="7%" field="schoolIdsName">上课T老师</th>
-								<th width="7%" field="createDate">上课TA老师</th>
-								<th width="7%" field="postName">实际课时</th>
-								<th width="7%" field="postTypeName">应到人数</th>
-								<th width="7%" field="deptName">实到人数</th>
-								<th width="7%" field="schoolIdsName">请假人数</th>
-								<th width="7%" field="createDate">旷课人数</th>
-								<th width="7%" field="createDate">迟到人数</th>
-								<th width="7%" field="createDate">校服穿着人数</th>
-								<th width="7%" field="createDate">出勤率</th>
-								<th width="7%" field="createDate">校服穿着率</th>
+								<th data-options="field:'classAttendId',checkbox:true"></th>
+								<th width="7%" field="schoolName">校区</th>
+								<th width="7%" field="schoolDate">上课时间</th>
+								<th width="7%" field="className">班级名称</th>
+								<th width="7%" field="tTeacherNames">上课T老师</th>
+								<th width="7%" field="taTeacherNames">上课TA老师</th>
+								<th width="7%" field="hours">实际课时</th>
+								<th width="7%" field="attendNum">应到人数</th>
+								<th width="7%" field="realNum">实到人数</th>
+								<th width="7%" field="leaveNum">请假人数</th>
+								<th width="7%" field="truantNum">旷课人数</th>
+								<th width="7%" field="lateNum">迟到人数</th>
+								<th width="7%" field="dressNum">校服穿着人数</th>
+								<th width="7%" field="attendRate">出勤率</th>
+								<th width="7%" field="dressRate">校服穿着率</th>
 							</tr>
 						</thead>
 					</table>
@@ -189,6 +189,11 @@
 				$("#classHisPharse").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
+				data = $.grep(data,function(obj){
+					if(obj.codeFlag != "001")
+						return true;
+					return false;
+				});
 				$("#classManState").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=classMan",function(data){
@@ -296,7 +301,16 @@
 			}
 			function queryHisFunc()
 			{
-				
+				var obj = $("#hisFm").serializeObject();
+				obj["queryCode"] = "qryAttenceHisList";
+				obj["funcNodeId"] = "38120";
+				obj = JSON.stringify(obj);
+				$("#hisList").datagrid({
+					url:"/sys/pubData/qryDataListByPage.do",
+					queryParams:{
+						param : obj
+					}
+				});
 			}
 			function resetHisFunc()
 			{
@@ -313,7 +327,14 @@
 			}
 			function hisViewFunc()
 			{
-				
+				var row = $('#hisList').datagrid('getSelected');
+				if (row){
+					window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+row.classAttendId+"&funcNodeId=${param.funcNodeId}&selDateStr=&classInstId=&comeFlag=attenceMan";
+				}
+				else
+				{
+					$.messager.alert('提示',"请先选择要查看的考勤");
+				}
 			}
 		</script>
  	</body>

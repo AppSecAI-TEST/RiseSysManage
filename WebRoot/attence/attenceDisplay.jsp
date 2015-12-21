@@ -146,6 +146,10 @@
 				{
 					window.location.href = "/sys/attend/getAttendView.do?funcNodeId=${funcNodeId}&classInstId=${classInstId}&selDateStr=${selDateStr}";
 				}
+				else if("attenceMan" == "${comeFlag}")
+				{
+					window.location.href = "/sys/attence/attenceMan.jsp?funcNodeId=${funcNodeId}";
+				}
 				else
 				{
 					window.location.href = "/sys/attend/getAttendOperate.do?funcNodeId=${funcNodeId}&classInstId=${classInstId}&selDateStr=${selDateStr}";

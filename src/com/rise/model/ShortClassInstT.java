@@ -44,6 +44,8 @@ public class ShortClassInstT {
 
     private Date approveDate;
     
+    private String verifyRemark;
+    
 	private String remark;
 
     private Integer createId;
@@ -227,8 +229,16 @@ public class ShortClassInstT {
     public void setApproveDate(Date approveDate) {
         this.approveDate = approveDate;
     }
+    
+    public String getVerifyRemark() {
+		return verifyRemark;
+	}
 
-    public String getRemark() {
+	public void setVerifyRemark(String verifyRemark) {
+		this.verifyRemark = verifyRemark;
+	}
+
+	public String getRemark() {
 		return remark;
 	}
 

@@ -9,9 +9,9 @@ public class BaseNumT {
 
     private Integer studyingNum;
 
-    private Integer higherBaseNum;
+    private Double higherBaseNum;
 
-    private Integer higherNum;
+    private Double higherNum;
 
     private String higherRate;
 
@@ -47,19 +47,19 @@ public class BaseNumT {
         this.studyingNum = studyingNum;
     }
 
-    public Integer getHigherBaseNum() {
+    public Double getHigherBaseNum() {
         return higherBaseNum;
     }
 
-    public void setHigherBaseNum(Integer higherBaseNum) {
+    public void setHigherBaseNum(Double higherBaseNum) {
         this.higherBaseNum = higherBaseNum;
     }
 
-    public Integer getHigherNum() {
+    public Double getHigherNum() {
         return higherNum;
     }
 
-    public void setHigherNum(Integer higherNum) {
+    public void setHigherNum(Double higherNum) {
         this.higherNum = higherNum;
     }
 

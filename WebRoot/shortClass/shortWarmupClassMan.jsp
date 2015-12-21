@@ -19,7 +19,7 @@
 				<td align="right" width="15%">课程类型：</td>
 				<td width="18%"><select id="classType" name="classType" style="width:100px" ></select></td>
 				<td align="right" width="15%">热身课班级名称：</td>
-				<td width="18%"><select id="classInfo" name="classInfo" style="width:100px" ></select></td>
+				<td width="18%"><input name="classInfo" id="classInfo" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" /></td>
 				<td align="right" width="15%">计划上课人数：</td>
 				<td width="18%"><input name="planClassNum" id="planClassNum" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" /></td>
 			</tr>
@@ -65,50 +65,52 @@
 				</c:otherwise>
 			</c:choose>
 		</table>
-		<div style="margin:0 auto;padding:0 0;text-align:left;padding-right:2px;width:99%;margin-top:5px">
-			<a href="javascript:void(0)" id="selectClassBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;" onclick="selectClassFunc()">选班</a>
-			<a href="javascript:void(0)" id="removeClassBtn" class="easyui-linkbutton" iconCls="icon-remove" style="width: 100px;" onclick="removeClassFunc()">移除</a>
-			<a href="javascript:void(0)" id="viewClassBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="viewClassFunc()">浏览</a>
-		</div>
-		<table region="center" class="tab" id="studentList" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<tr class="headTr">
-				<td><input type="checkbox" id="studentAllBox" onclick="studentBoxFunc(this)" /></td>
-				<td>序号</td>
-				<td>学员姓名</td>
-				<td>英文名</td>
-				<td>校区</td>
-				<td>缴费日期</td>
-				<td>本人证件号码</td>
-				<td>联系方式</td>
-				<td>班级</td>
-				<td>业绩顾问</td>
-				<td>业绩老师</td>
-			</tr>
-			<c:choose>	
-				<c:when test="${fn:length(shortClassInstT.classStudentList) == 0}">
-					<tr>
-						<td colspan="11" align="center">暂无学生报名</td>
-					</tr>
-				</c:when>
-				<c:otherwise>
-					<c:forEach items="${shortClassInstT.classStudentList}" var="node" varStatus="i">
-						<tr class="studentId" id="studentId${node.studentId}">
-							<td align="center"><input type="checkbox" name="studentId" value="${node.studentId}" /></td>
-							<td align="center">${i.count}</td>
-							<td align="center">${node.studentT.name}</td>
-							<td align="center">${node.studentT.byName}</td>
-							<td align="center">${node.studentT.schoolT.schoolName}</td>
-							<td align="center"><fmt:formatDate value="${node.studentCourseT.payDate}" pattern="yyyy-MM-dd" /></td>
-							<td align="center">${node.studentT.identityId}</td>
-							<td align="center"><c:forEach items="${node.studentT.contactList}" var="item" varStatus="j"><c:choose><c:when test="${j.last}">${item.phone}</c:when><c:otherwise>${item.phone},</c:otherwise></c:choose></c:forEach></td>
-							<td align="center">${shortClassInstT.className}</td>
-							<td align="center">${node.studentCourseT.adviserAObj.staffName} ${node.studentCourseT.adviserBObj.staffName}</td>
-							<td align="center">${node.studentCourseT.adviserTeacherAObj.staffName} ${node.studentCourseT.adviserTeacherBObj.staffName}</td>
+		<c:if test="${!empty shortClassInstT.approveDate}">
+			<div style="margin:0 auto;padding:0 0;text-align:left;padding-right:2px;width:99%;margin-top:5px">
+				<a href="javascript:void(0)" id="selectClassBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;" onclick="selectClassFunc()">选班</a>
+				<a href="javascript:void(0)" id="removeClassBtn" class="easyui-linkbutton" iconCls="icon-remove" style="width: 100px;" onclick="removeClassFunc()">移除</a>
+				<a href="javascript:void(0)" id="viewClassBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="viewClassFunc()">浏览</a>
+			</div>
+			<table region="center" class="tab" id="studentList" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+				<tr class="headTr">
+					<td><input type="checkbox" id="studentAllBox" onclick="studentBoxFunc(this)" /></td>
+					<td>序号</td>
+					<td>学员姓名</td>
+					<td>英文名</td>
+					<td>校区</td>
+					<td>缴费日期</td>
+					<td>本人证件号码</td>
+					<td>联系方式</td>
+					<td>班级</td>
+					<td>业绩顾问</td>
+					<td>业绩老师</td>
+				</tr>
+				<c:choose>	
+					<c:when test="${fn:length(shortClassInstT.classStudentList) == 0}">
+						<tr>
+							<td colspan="11" align="center">暂无学生报名</td>
 						</tr>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-		</table>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${shortClassInstT.classStudentList}" var="node" varStatus="i">
+							<tr class="studentId" id="studentId${node.studentId}">
+								<td align="center"><input type="checkbox" name="studentId" value="${node.studentId}" /></td>
+								<td align="center">${i.count}</td>
+								<td align="center">${node.studentT.name}</td>
+								<td align="center">${node.studentT.byName}</td>
+								<td align="center">${node.studentT.schoolT.schoolName}</td>
+								<td align="center"><fmt:formatDate value="${node.studentCourseT.payDate}" pattern="yyyy-MM-dd" /></td>
+								<td align="center">${node.studentT.identityId}</td>
+								<td align="center"><c:forEach items="${node.studentT.contactList}" var="item" varStatus="j"><c:choose><c:when test="${j.last}">${item.phone}</c:when><c:otherwise>${item.phone},</c:otherwise></c:choose></c:forEach></td>
+								<td align="center">${shortClassInstT.className}</td>
+								<td align="center">${node.studentCourseT.adviserAObj.staffName} ${node.studentCourseT.adviserBObj.staffName}</td>
+								<td align="center">${node.studentCourseT.adviserTeacherAObj.staffName} ${node.studentCourseT.adviserTeacherBObj.staffName}</td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</table>
+		</c:if>
 		<div style="margin:0 auto;padding:0 0;text-align:right;padding-right:2px;width:99%;margin-top:10px">
 			<a href="javascript:void(0)" id="addSubmitBtn" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;" onclick="addSubmitFunc()">提交</a>
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
@@ -118,35 +120,16 @@
 				$("#classType").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
-				$("#classInfo").combobox({
-					formatter:formatClassInst, 
-					valueField: 'shortClassInstId', 
-					textField: 'className', 
-					panelHeight: 'auto'
-				});
 				$("#classType").combobox({
 					formatter:function(data){
 						return '<span>'+data.classType+'</span>';
 					}, 
 					valueField: 'classTypeId', 
 					textField: 'classType',
-					panelHeight: 'auto',
-					onLoadSuccess:function(data){
-						if(data.length > 0)
-						{
-							$.post("/sys/shortBus/getShortClassInstTList.do",{typeName:encodeURI("热身课"),classTypeId:data[0].classTypeId},function(result){
-								$("#classInfo").combobox("loadData",result);
-							},"json");
-						}
-					},
-					onChange:function (data) {
-						$.post("/sys/shortBus/getShortClassInstTList.do",{typeName:encodeURI("热身课"),classTypeId:data},function(result){
-							$("#classInfo").combobox("loadData",result);
-						},"json");
-					}
+					panelHeight: 'auto'
 				});
 				$("#classType").combobox("setValue","${shortClassInstT.classTypeId}");
-				$("#classInfo").combobox("setValue","${shortClassInstT.shortClassInstId}");
+				$("#classInfo").textbox("setValue","${shortClassInstT.shortClassInstId}");
 				$("#planHours").textbox("setValue","${shortClassInstT.planHours}");
 				$("#planClassNum").textbox("setValue","${shortClassInstT.planClassNum}");
 				$("#classStartTime").datebox("setValue","<fmt:formatDate value='${shortClassInstT.openDate}' pattern='yyyy-MM-dd' />");
@@ -155,9 +138,12 @@
 			function addSubmitFunc()
 			{
 				var shortClassInstId = "${shortClassInstT.shortClassInstId}";
-				var classStartTime = $("#classStartTime").datebox("getValue");
+				var classType = $("#classType").combobox("getValue");
+				var classInfo = $("#classInfo").textbox("getValue");
+				var planClassNum = $("#planClassNum").textbox("getValue");
 				var planHours = $("#planHours").textbox("getValue");
-				var classEndTime = $("#classEndTime").combobox("getValue");
+				var classStartTime = $("#classStartTime").datebox("getValue");
+				var classEndTime = $("#classEndTime").datebox("getValue");
 				if(classStartTime == "")
 				{
 					$.messager.alert('提示',"开课日期不能为空,请核实后重新尝试","info");
@@ -174,14 +160,19 @@
 				{
 					$.messager.alert('提示',"上课计划不能为空,请核实后重新尝试","info");
 				}
+				<c:if test="${!empty shortClassInstT.approveDate}">
 				else if($(".studentId").length == 0)
              	{
              		$.messager.alert('提示',"上课学员不能为空,请核实后重新尝试","info");
              	}
+             	</c:if>
 				else
 				{
 					var json = {
 						shortClassInstId:shortClassInstId,
+						className:classInfo,
+						classTypeId:classType,
+						planClassNum:planClassNum,
 						planHours:planHours,
 						openDate:classStartTime,
 						finishDate:classEndTime,
@@ -205,7 +196,7 @@
 			}
 			function addPlanFunc()
 			{
-				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageFlag=MAN";
+				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortWarmupClassMan&classType=热身课&schoolId=${shortClassInstT.schoolId}";
 			}
 			function studentBoxFunc(obj)
 			{
@@ -238,8 +229,7 @@
 			}
 			function selectClassFunc()
 			{
-				window.location.href = "/sys/shortClass/choiceClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortClassMan&classType="+encodeURI("国际班");
-				//window.location.href = "/sys/shortClass/choiceClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}";
+				window.location.href = "/sys/shortClass/choiceClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortWarmupClassMan&classType="+encodeURI("热身课");
 			}
 			function removeClassFunc()
 			{

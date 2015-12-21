@@ -217,7 +217,7 @@
 				sessionStorage.setItem("remark",remark);
 				if(schoolManId != "")
 				{
-					window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstId}&pageFlag=ADD&pageName=addWarmupClass&classType=热身课&schoolId="+schoolManId;
+					window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstId}&pageName=addWarmupClass&classType=热身课&schoolId="+schoolManId;
 				}
 				else
 				{

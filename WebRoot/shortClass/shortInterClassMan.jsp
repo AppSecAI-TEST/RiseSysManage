@@ -124,7 +124,7 @@
 				var shortClassInstId = "${shortClassInstT.shortClassInstId}";
 				var classStartTime = $("#classStartTime").datebox("getValue");
 				var planHours = $("#planHours").textbox("getValue");
-				var classEndTime = $("#classEndTime").combobox("getValue");
+				var classEndTime = $("#classEndTime").datebox("getValue");
 				if(classStartTime == "")
 				{
 					$.messager.alert('提示',"开课日期不能为空,请核实后重新尝试","info");
@@ -172,7 +172,7 @@
 			}
 			function addPlanFunc()
 			{
-				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageFlag=MAN";
+				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortInterClassMan&classType=国际班&schoolId=${shortClassInstT.schoolId}";
 			}
 			function studentBoxFunc(obj)
 			{
@@ -205,8 +205,7 @@
 			}
 			function selectClassFunc()
 			{
-				window.location.href = "/sys/shortClass/choiceClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortClassMan&classType="+encodeURI("国际班");
-				//window.location.href = "/sys/shortClass/choiceClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}";
+				window.location.href = "/sys/shortClass/choiceClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortInterClassMan&classType="+encodeURI("国际班");
 			}
 			function removeClassFunc()
 			{

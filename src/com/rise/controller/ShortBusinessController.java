@@ -102,9 +102,9 @@ public class ShortBusinessController
 	}
 	
 	@RequestMapping("/viewShortClassPage.do")
-	public ModelAndView viewShortClassPage(String shortClassInstId , String funcNodeId)
+	public ModelAndView viewShortClassPage(String shortClassInstId , String funcNodeId , String pageName)
 	{
-		ModelAndView model = new ModelAndView("shortClass/viewShortClass");
+		ModelAndView model = new ModelAndView("shortClass/"+pageName);
 		try
 		{
 			shortBusinessService.getShortClassInfo(model,shortClassInstId,funcNodeId);
@@ -154,21 +154,6 @@ public class ShortBusinessController
 			}
 		}
 	}
-	
-//	@RequestMapping("/getShortClassInfo.do")
-//	public ModelAndView getShortClassInfo(String shortClassInstId , String funcNodeId)
-//	{
-//		ModelAndView model = new ModelAndView("shortClass/addInterClass");
-//		try
-//		{
-//			shortBusinessService.getAddShortClassInfo(model,shortClassInstId,funcNodeId);
-//		}
-//		catch(Exception e)
-//		{
-//			e.printStackTrace();
-//		}
-//		return model;
-//	}
 	
 	@RequestMapping("/getAddShortClassInfo.do")
 	public ModelAndView getAddShortClassInfo(String shortClassInstId , String funcNodeId , String pageName)
