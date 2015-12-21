@@ -161,7 +161,7 @@
 				</div>
 		    </div>
 		</div>
-		<script type="text/javascript">
+		<blockquote><br></blockquote><script type="text/javascript">
 			ajaxLoading("加载中...");
 			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
 				$("#schoolManId").combobox("loadData",data);
@@ -292,7 +292,7 @@
 				var row = $("#manList").datagrid("getSelected");
 				if(row)
 				{
-					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
+					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=viewInterShortClass";
 				}
 				else
 				{
@@ -325,7 +325,7 @@
 				var row = $("#hisList").datagrid("getSelected");
 				if(row)
 				{
-					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
+					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=viewInterShortClass";
 				}
 				else
 				{

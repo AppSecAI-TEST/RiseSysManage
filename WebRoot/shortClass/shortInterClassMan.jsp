@@ -172,7 +172,7 @@
 			}
 			function addPlanFunc()
 			{
-				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortInterClassMan&classType=国际班&schoolId=${shortClassInstT.schoolId}";
+				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortInterClassMan&classType=国际班&schoolId=${shortClassInstT.schoolId}&paramFlag=UPDATE";
 			}
 			function studentBoxFunc(obj)
 			{

@@ -196,7 +196,7 @@
 			}
 			function addPlanFunc()
 			{
-				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortWarmupClassMan&classType=热身课&schoolId=${shortClassInstT.schoolId}";
+				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortWarmupClassMan&classType=热身课&schoolId=${shortClassInstT.schoolId}&paramFlag=UPDATE";
 			}
 			function studentBoxFunc(obj)
 			{

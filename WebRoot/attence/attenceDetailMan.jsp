@@ -114,6 +114,7 @@
 		</div>
 		<script type="text/javascript">
 			$(document).ready(function(){
+				ajaxLoadEnd();
 				var statistics = '${statistics}';
 				var dataObj = null;
 				if(statistics != "[]")

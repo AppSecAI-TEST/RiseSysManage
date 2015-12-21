@@ -102,7 +102,9 @@
 			</c:choose>
 		</table>
 		<div style="margin:0 auto;padding:0 0;text-align:left;padding-right:2px;width:99%;margin-top:5px">
-   			<a href="javascript:void(0)" id="addAttenceBtn" class="easyui-linkbutton" iconCls="icon-add" onclick="addAttenceFunc()" style="width: 100px;">添加考勤</a>
+			<c:if test="${shortClassInstT.classState != '004'}">
+	   			<a href="javascript:void(0)" id="addAttenceBtn" class="easyui-linkbutton" iconCls="icon-add" onclick="addAttenceFunc()" style="width: 100px;">添加考勤</a>
+			</c:if>
    			<a href="javascript:void(0)" id="updateAttenceBtn" class="easyui-linkbutton" iconCls="icon-edit" onclick="updateAttenceFunc()" style="width: 100px;">修改考勤</a>
    			<a href="javascript:void(0)" id="viewAttenceBtn" class="easyui-linkbutton" iconCls="icon-search" onclick="viewAttenceFunc()" style="width: 100px;">浏览</a>
 		</div>

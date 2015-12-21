@@ -170,4 +170,27 @@ public class ClassAttendService
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2048\",securityCode:\"0000000000\",params:{classInstId:'"+classInstId+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
+	
+	public void getAttenceCalendarView(ModelAndView model , String classInstId , String year , String month , String funcNodeId) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20410\",securityCode:\"0000000000\",params:{classInstId:\""+classInstId+"\",year:\""+year+"\",month:\""+month+"\"},rtnDataFormatType:\"user-defined\"}";
+		String result = ServiceEngine.invokeHttp(param);
+		try{
+			JSONObject json = JSONObject.fromObject(result);
+			ObjectMapper mapper = JacksonJsonMapper.getInstance();
+			JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, CalendarItem.class);
+			List calendarInfo = (List)mapper.readValue(json.getJSONArray("calendarInfo").toString(), javaType);
+			model.addObject("calendarInfo", calendarInfo);
+			model.addObject("yearMonthInfo", json.getJSONArray("yearMonthInfo").toString());
+			model.addObject("selDateStr", StringUtil.getJSONObjectKeyVal(json, "selDateStr"));
+			model.addObject("year", StringUtil.getJSONObjectKeyVal(json, "year"));
+			model.addObject("month", StringUtil.getJSONObjectKeyVal(json, "month"));
+			model.addObject("classInstId", classInstId);
+			model.addObject("funcNodeId", funcNodeId);
+		}catch(Exception err){
+			err.printStackTrace();
+			model.addObject("errorInfo", err.getMessage());
+		}
+	}
+	
 }
