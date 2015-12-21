@@ -1629,6 +1629,11 @@ $("#addCourse").click(function()
 		})
 		if($("#womDiv").css("display")=="block"&&womType!="")
 		{	
+			if($("#adviserA").combobox('getValue')==""&&$("#adviserA").combobox('getValue')=="null")
+			{
+				$.messager.alert('提示', "请选择常规课课程的业绩顾问A!");
+				return false;
+			}	
 			var womChannel=womType=="Y"?$("#praiseSourceY").combobox("getValue"):$("#praiseSourceN").combobox("getValue");
 			if(trim(womChannel)!="")
 			{

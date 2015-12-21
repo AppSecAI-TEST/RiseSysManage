@@ -31,7 +31,7 @@
 							<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="endTime" name="endTime" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
 						<td align="center">
-							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1045">查询</a>
+							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="3700">查询</a>
 							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 						</td>
 	  				</tr>	
@@ -43,21 +43,21 @@
 					<thead>
 						<tr>
 							<th field="schoolName" align="center" width="5%">校区</th>
-							<th field="stateVal" align="center" width="8%">缴费日期</th>
-							<th field="title" align="center" width="8%">缴费阶段</th>
-							<th field="actionTime" align="center" width="8%">学员姓名</th>
-							<th field="timeRange" align="center" width="8%">缴费金额</th>
-							<th field="planTeacher" align="center" width="10%">来源渠道</th>
-							<th field="planHours" align="center" width="10%">活动类型</th>
-							<th field="replyTeacher" align="center" width="10%">活动时间</th>
-							<th field="realHours" align="center" width="10%">活动名称</th>
-							<th field="realHours" align="center" width="5%">老师</th>
-							<th field="realHours" align="center" width="10%">转介绍学员</th>
-							<th field="realHours" align="center" width="15%">转介绍学员身份证</th>
-							<th field="realHours" align="center" width="10%">班级</th>
-							<th field="realHours" align="center" width="10%">CC1</th>
-							<th field="realHours" align="center" width="10%">CC2</th>
-							<th field="realHours" align="center" width="15%">赠品</th>
+							<th field="payDate" align="center" width="8%">缴费日期</th>
+							<th field="stageId" align="center" width="8%">缴费阶段</th>
+							<th field="studentName" align="center" width="8%">学员姓名</th>
+							<th field="amount" align="center" width="8%">缴费金额</th>
+							<th field=channelName align="center" width="10%">来源渠道</th>
+							<th field="actType" align="center" width="10%">活动类型</th>
+							<th field="activityDate" align="center" width="10%">活动时间</th>
+							<th field="activityName" align="center" width="10%">活动名称</th>
+							<th field="teacherName" align="center" width="15%">老师</th>
+							<th field="stuName" align="center" width="10%">转介绍学员</th>
+							<th field="studentNbr" align="center" width="15%">转介绍学员身份证</th>
+							<th field="className" align="center" width="10%">班级</th>
+							<th field="cc1" align="center" width="10%">CC1</th>
+							<th field="cc2" align="center" width="10%">CC2</th>
+							<th field="giftName" align="center" width="15%">赠品</th>
 						</tr>
 					</thead>
 				</table>
