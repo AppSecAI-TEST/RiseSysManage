@@ -52,7 +52,7 @@
 						</td>
 	  					<td align="right"><span>开课日期：</span></td>
 						<td width="114px">
-							<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeOpenClass" name="startTimeOpenClass" ata-options="formatter:myformatter, parser:myparser"/>
+							<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeOpenClass" name="startTimeOpenClass" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
 						<td align="center" width="14px"><span>至</span></td>
 						<td width="114px">

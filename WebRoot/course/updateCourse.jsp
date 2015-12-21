@@ -1097,7 +1097,7 @@ $("#addGiftBtn").click(function ()
 				}
 				
 				//判断是否是券类
-				if(parentType=='COUPON' && code=='' && && 'Y'==getFlag)
+				if(parentType=='COUPON' && code==''  && 'Y'==getFlag)
 				{
 					showMessage('提示', "请输入券类编码",null);
 					flag=false;

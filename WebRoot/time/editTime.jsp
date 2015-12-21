@@ -52,9 +52,9 @@
 				<td align="right"><span>时间范围：</span></td>
 				<td>
 					<select name="hourRange" id="hourRange" class="easyui-combobox" style="width: 150px; height: 28px;"
-					data-options="valueField: 'hourRange', textField: 'hourRangeVal', panelHeight: 'auto',
- 				onLoadSuccess:function(data){$('#hourRange').combobox('setValue',data[0].hourRange);}" 
-					url="/sys/pubData/qryHourRangeList.do?weekTime=一" required="true">
+						data-options="valueField: 'hourRange', textField: 'timeName', panelHeight: 'auto',
+ 						onLoadSuccess:function(data){$('#hourRange').combobox('setValue',data[0].hourRange);}" 
+						url="/sys/pubData/qryHourRangeList.do?weekTime=一" required="true">
  					</select>
 				</td>
 			</tr>

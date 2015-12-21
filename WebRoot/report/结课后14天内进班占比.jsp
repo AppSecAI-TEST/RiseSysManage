@@ -25,11 +25,11 @@
 						</td>
 	  					<td align="right"><span>结课日期：</span></td>
 	  					<td width="100px">
-							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeFinish" name="startTimeFinish" ata-options="formatter:myformatter, parser:myparser"/>
+							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeFinish" name="startTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
 						<td align="center" width="14px"><span>至</span></td>
 						<td width="100px">
-							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeFinish" name="endTimeFinish" ata-options="formatter:myformatter, parser:myparser"/>
+							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeFinish" name="endTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
 						<td align="center">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1049">查询</a>

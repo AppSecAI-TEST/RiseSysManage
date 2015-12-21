@@ -190,7 +190,7 @@ function initApplyClassTable(classes)
 						$("#hourRange1").combobox({
 							url:"../pubData/qryHourRangeList.do?weekTime="+$("#weekTime1").combobox('getValue'),
 							valueField : "timeId",
-							textField : "hourRangeVal",
+							textField : "timeName",
 						});
 					},
 					data:data	
@@ -200,7 +200,7 @@ function initApplyClassTable(classes)
 						$("#hourRange2").combobox({
 							url:"../pubData/qryHourRangeList.do?weekTime="+$("#weekTime2").combobox('getValue'),
 							valueField : "timeId",
-							textField : "hourRangeVal",
+							textField : "timeName",
 						});
 					},
 					data:data	

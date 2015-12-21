@@ -362,10 +362,12 @@ $("#submit").click(function(){
 				 var  giftCode=tds.eq(3).attr('giftCode');
 				 var  isGet=tds.eq(5).attr('isGet');
 				 var  granter=tds.eq(7).attr('granter');
+				 var  showName=tds.eq(1).find("span").html()+":"+giftName;
 				 var  gift = {};
 				 
 				 gift.studentId=$("#studentId").val();
 				
+				 gift.showName=showName;
 				 gift.giftName=giftName;
 				 gift.usableAmount=amount;
 				 gift.amount=amount;
