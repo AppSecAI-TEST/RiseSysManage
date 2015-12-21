@@ -150,7 +150,7 @@ public class QryPubDataService
 	 * @return
 	 * @throws Exception
 	 */
-	public String getTeacherBySchoolId(String schoolId) throws Exception 
+	public String getTeacherBySchoolId(String schoolId) throws Exception
 	{
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10116\",securityCode:\"0000000000\",params:{schoolId:\""+schoolId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
@@ -162,9 +162,27 @@ public class QryPubDataService
 		return ServiceEngine.invokeHttp(params);
 	}
 
-	public String qryStudentListByClassInstId(String classInstId) throws Exception  
+	public String qryStudentListByClassInstId(String classInstId) throws Exception
 	{
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10118\",securityCode:\"0000000000\",params:{classInstId:\""+classInstId+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
+	public String qryQuarterList() throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10119\",securityCode:\"0000000000\",params:{},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+
+	public String qryMonthList(String quarter) throws Exception 
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10120\",securityCode:\"0000000000\",params:{quarter:\""+quarter+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+
+	public String qryRegionList() throws Exception 
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10121\",securityCode:\"0000000000\",params:{},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
 }
