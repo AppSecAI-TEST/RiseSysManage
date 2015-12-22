@@ -7,6 +7,7 @@
 <html>
 	<head>
 		<%@ include file="../common/head.jsp" %>
+		<%@ include file="../common/pub.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript" src="<%=path %>/js/refund/refund.js"></script>
   	</head>
@@ -23,7 +24,7 @@
 								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 					      			onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
-					      			url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
+					      			url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=&funcNodeId=${param.funcNodeId}&fieldId=schoolId">
 				        		</select>
 							</td>
 							<td align="right"><span>学员姓名：</span></td>
