@@ -79,7 +79,7 @@
 					<td>
 						<select name="courseType" editable='false' required="true" class="easyui-combobox" id="courseType" style="width: 150px; height: 28px;"
 						 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',onChange:changeCourseType, 
-						 onLoadSuccess:function(data){$('#courseType').combobox('setValue',data[0].codeName);}"
+						 onLoadSuccess:function(data){$('#courseType').combobox('setValue',data[0].codeFlag);}"
 	      				 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE" required="true" >
 						</select>
 					</td>
