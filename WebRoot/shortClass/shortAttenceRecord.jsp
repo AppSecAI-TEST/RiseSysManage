@@ -290,7 +290,7 @@
 			
 			function backFunc()
 			{
-				window.location.href = "/sys/shortBus/shortAttenceDetailPage.do?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}";
+				window.location.href = "/sys/shortBus/shortAttenceDetailPage.do?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=${pageName}";
 			}
 		</script>
  	</body>

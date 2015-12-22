@@ -29,10 +29,10 @@
 								<select id="schoolManId" name="schoolManId" style="width:100px" ></select>
 							</td>
 							<td align="right" width="12%">	
-								课程阶段：
+								课程类型：
 							</td>
 							<td width="25%">
-								<select id="classManPharse" name="classManPharse" style="width:100px" ></select>
+								<select id="classType" name="classType" style="width:100px" ></select>
 							</td>
 							<td align="right" width="12%">
 								班级：
@@ -73,19 +73,18 @@
 					<table class="easyui-datagrid" title="班级列表" style="height:370px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
-								<th data-options="field:'classInstId',checkbox:true"></th>
-								<th width="8%" field="schoolName">校区</th>
-								<th width="8%" field="className">热身课班级</th>
-								<th width="8%" field="openDate">班级状态</th>
-								<th width="8%" field="teacherNames">计划课时量</th>
-								<th width="8%" field="finishDate">实际反馈课时量</th>
-								<th width="8%" field="classStateName">应到人数</th>
-								<th width="8%" field="classSchedule">实到人数</th>
-								<th width="8%" field="classSchedule">定班人数</th>
-								<th width="8%" field="classSchedule">申请时间</th>
-								<th width="8%" field="classSchedule">审批时间</th>
-								<th width="8%" field="classSchedule">开课时间</th>
-								<th width="8%" field="classSchedule">结课时间</th>
+								<th data-options="field:'shortClassInstId',checkbox:true"></th>
+								<th width="9%" field="schoolName">校区</th>
+								<th width="9%" field="className">热身课班级名称</th>
+								<th width="9%" field="classStateName">班级状态</th>
+								<th width="9%" field="planHours">计划课时量</th>
+								<th width="9%" field="classProgress">实际反馈课时量</th>
+								<th width="9%" field="planClassNum">计划上课人数</th>
+								<th width="9%" field="realClassNum">实际上课人数</th>
+								<th width="9%" field="putClassDate">申请时间</th>
+								<th width="9%" field="approveDate">审批时间</th>
+								<th width="9%" field="openDate">开课日期</th>
+								<th width="9%" field="finishDate">结课日期</th>
 							</tr>
 						</thead>
 					</table>
@@ -163,14 +162,19 @@
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("加载中...");
-			$.post("<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}",function(data){
+			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
 				$("#schoolManId").combobox("loadData",data);
 				$("#schoolHisId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID",function(data){
-				$("#classManPharse").combobox("loadData",data);
+			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("热身课"),function(data){
+				$("#classType").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
+				data = $.grep(data , function(node,i){
+					if(i>=1 && i < data.length-1)
+						return true;
+					return false;
+				});
 				$("#classManState").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=classMan",function(data){
@@ -185,11 +189,26 @@
 					textField: 'schoolName', 
 					panelHeight: 'auto'
 				});
-				$("#classManPharse").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
-					panelHeight: 'auto'
+				$("#classType").combobox({
+					formatter:function(data){
+						return '<span>'+data.classType+'</span>';
+					}, 
+					valueField: 'classTypeId', 
+					textField: 'classType',
+					panelHeight: 'auto',
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+						{
+							$.post("/sys/shortBus/getShortClassInstTList.do",{typeName:encodeURI("热身课"),classTypeId:data[0].classTypeId},function(result){
+								$("#classMan").combobox("loadData",result);
+							},"json");
+						}
+					},
+					onChange:function (data) {
+						$.post("/sys/shortBus/getShortClassInstTList.do",{typeName:encodeURI("热身课"),classTypeId:data},function(result){
+							$("#classMan").combobox("loadData",result);
+						},"json");
+					}
 				});
 				$("#classManState").combobox({
 					formatter:formatItem, 
@@ -198,11 +217,9 @@
 					panelHeight: 'auto'
 				});
 				$("#classMan").combobox({
-					formatter:function(row){
-						return '<span>'+row.className+'</span>';
-					},
-					valueField: 'classInstId',
-					textField: 'className',
+					formatter:formatClassInst, 
+					valueField: 'shortClassInstId', 
+					textField: 'className', 
 					panelHeight: 'auto'
 				});
 				$("#schoolHisId").combobox({
@@ -234,10 +251,9 @@
 			});
 			function queryManFunc()
 			{
-				/*
 				var obj = $("#manFm").serializeObject();
-				obj["queryCode"] = "qryAttendManList";
-				obj["funcNodeId"] = "38101";
+				obj["queryCode"] = "qryWarmupAttenceList";
+				obj["funcNodeId"] = "38125";
 				obj = JSON.stringify(obj);
 				$("#manList").datagrid({
 					url:"/sys/pubData/qryDataListByPage.do",
@@ -245,15 +261,13 @@
 						param : obj
 					}
 				});
-				*/
 			}
 			function resetManFunc()
 			{
 				$("#schoolManId").combobox("setValue","");
-				$("#classManPharse").combobox("setValue","");
+				$("#classType").combobox("setValue","");
 				$("#classManState").combobox("setValue","");
 				$("#classMan").combobox("setValue","");
-				$("#teacherMan").textbox("setValue","");
 				$("#classStartManTime").datebox("setValue","");
 				$("#classEndManTime").datebox("setValue","");
 				$("#overClassStartManTime").datebox("setValue","");
@@ -261,20 +275,27 @@
 			}
 			function manOperFunc()
 			{
-				/*
 				var row = $('#manList').datagrid('getSelected');
-				if (row){
-					window.location.href = "/sys/attend/getAttendDetail.do?funcNodeId=${param.funcNodeId}&classInstId="+row.classInstId;
+				if (row)
+				{
+					window.location.href = "/sys/shortBus/shortAttenceDetailPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=shortAttenceWarmUpDetail";
 				}
 				else
 				{
 					$.messager.alert('提示',"请先选择要考勤的班级");
 				}
-				*/
 			}
 			function manViewFunc()
 			{
-				
+				var row = $("#manList").datagrid("getSelected");
+				if(row)
+				{
+					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=viewInterShortClass";
+				}
+				else
+				{
+					$.messager.alert('提示',"请选择要浏览的班级");
+				}
 			}
 			function queryHisFunc()
 			{
