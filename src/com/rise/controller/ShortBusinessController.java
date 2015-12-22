@@ -555,4 +555,28 @@ public class ShortBusinessController
 		return model;
 	}
 	
+	@RequestMapping("/verifyShortClassFunc.do")
+	public void verifyShortClassFunc(String shortClassInstId , String handlerId , String isPutClass , String verifyCont , HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = shortBusinessService.verifyShortClassFunc(shortClassInstId, handlerId, isPutClass, verifyCont);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 }

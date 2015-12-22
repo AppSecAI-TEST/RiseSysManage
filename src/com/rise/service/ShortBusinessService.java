@@ -310,4 +310,10 @@ public class ShortBusinessService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
+	public String verifyShortClassFunc(String shortClassInstId , String handlerId , String isPutClass , String verifyCont) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20524\",securityCode:\"0000000000\",params:{shortClassInstId:'"+shortClassInstId+"',handlerId:\""+handlerId+"\",isPutClass:\""+isPutClass+"\",verifyCont:\""+verifyCont+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
 }

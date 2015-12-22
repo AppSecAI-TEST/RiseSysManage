@@ -204,4 +204,20 @@ public class ClassAttendController
 		}
 	}
 	
+	@RequestMapping("/getAttenceCalendarView.do")
+	public ModelAndView getAttenceCalendarView(String classInstId , String year , String month , String funcNodeId)
+	{
+		ModelAndView model = new ModelAndView("attence/attenceCalendarView");
+		try 
+		{
+			classAttendService.getAttenceCalendarView(model, classInstId, year, month, funcNodeId);
+		}
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
 }

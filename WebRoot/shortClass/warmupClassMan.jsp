@@ -292,7 +292,7 @@
 				var row = $("#manList").datagrid("getSelected");
 				if(row)
 				{
-					if(row.classStateName == "未开课" || row.classStateName == "未开课")
+					if(row.classStateName == "未开课" || row.classStateName == "待开课")
 					{
 						window.location.href = "/sys/shortBus/shortClassManInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=shortWarmupClassMan";
 					}
@@ -360,21 +360,29 @@
 			}
 			function verifyManFunc()
 			{
-				
+				var row = $("#hisList").datagrid("getSelected");
+				if(row)
+				{
+					if(row.verifyState == "已申请")
+					{
+						window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=verifyWarmupShortClass&shortClassInstId="+row.shortClassInstId;
+					}
+					else
+					{
+						$.messager.alert('提示',"该课程已进行过审批");		
+					}
+				}
+				else
+				{
+					$.messager.alert('提示',"请选择要审批的班级");
+				}
 			}
 			function viewManFunc()
 			{
 				var row = $("#hisList").datagrid("getSelected");
 				if(row)
 				{
-					if(row.classStateName != "解散")
-					{
-						window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=viewWarmupShortClass&shortClassInstId="+row.shortClassInstId;
-					}
-					else
-					{
-						$.messager.alert('提示',"该课程已被取消");		
-					}
+					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=viewWarmupShortClass&shortClassInstId="+row.shortClassInstId;
 				}
 				else
 				{

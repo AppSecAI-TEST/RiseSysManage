@@ -35,7 +35,6 @@
   		<input type="hidden" id="classInstId" value="${classInstId}" />
   		<input type="hidden" id="funcNodeId" value="${funcNodeId}" />
   		<form id="fm" method="post">
-  			<input type="hidden" name="classInstId" value="${staffT.staffId}" />
 			<div data-options="region:'north',title:'考勤信息',collapsible:false,height:550,maxHeight:550,border:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;">
 				<table align="center" class="tab" style="height:55%;width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc" border="0" cellpadding="0" cellspacing="0">
 					<tr>

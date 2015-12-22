@@ -156,6 +156,7 @@ function getWeekTime()
     		{
     			if(i==0)
     			{
+    				//alert(JSON.stringify(data));
     				json1=data[i];
     				initTable("t1",json1);
     				initTeacher("t0",json1);
@@ -414,7 +415,7 @@ function endEditing(tab)
 				setCellValue($(tab),editIndex,editField,editValue);//恢复初始值
 			}else
 			{
-				var mergeNum=vals[3];//合并列数量
+				var hoursNum=vals[3];//课时数量
 			
 				var schoolId=$("#schoolId").val();
 				planT.schoolId=schoolId;
@@ -426,7 +427,7 @@ function endEditing(tab)
 			   
 			    planT.schooltimeInstId=schooltimeInstId;
 			    
-			    planT=getHours(planT,mergeNum);
+			    planT=getHours(planT,hoursNum);
 			    if(planT.hourRange!=undefined && planT.hourRange!='')
 			    {
 					addPlanTime(planT,tab);
@@ -569,18 +570,24 @@ $.ajax(
 
 var hourRanges=[];
 
-function getHours(planT,mergeNum)
+/**
+ * 根据填写的课时量定位时间段范围
+ * @param {Object} planT
+ * @param {Object} mergeNum
+ * @return {TypeName} 
+ */
+function getHours(planT,hoursNum)
 {
 	var mark=editField.substring(1,editField.length);
 	
 	for(var i=0;i<hourRange.length;i++)
 	{
 		var paramVal=hourRange[i].paramValue;
-		var param1=hourRange[i].param1;
+		var hours=hourRange[i].param4;
 		 
-		if(mergeNum==''|| mergeNum==undefined)
+		if(hoursNum==''|| hoursNum==undefined)
 		{
-			if(paramVal.indexOf(mark)>-1 &&param1==1)
+			if(paramVal.indexOf(mark)>-1 && hours==2)//不填默认两个课时
 			{
 				planT.hourRange=paramVal;
 				planT.lessionHours=hourRange[i].param4;
@@ -588,7 +595,7 @@ function getHours(planT,mergeNum)
 			}
 		}else
 		{
-			if(paramVal.indexOf(mark)>-1 && param1==mergeNum)
+			if(paramVal.indexOf(mark)>-1 && hours==hoursNum)
 			{
 				planT.hourRange=paramVal;
 				planT.lessionHours=hourRange[i].param4;

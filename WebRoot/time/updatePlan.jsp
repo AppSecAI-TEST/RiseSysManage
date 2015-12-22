@@ -11,8 +11,6 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<%@ include file="../common/pub.jsp" %>
-	
   	</head>
   
   	<body>

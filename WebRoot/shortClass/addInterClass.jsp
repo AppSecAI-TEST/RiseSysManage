@@ -197,7 +197,7 @@
 				sessionStorage.setItem("remark",remark);
 				if(schoolManId != "")
 				{
-					window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstId}&pageName=addInterClass&classType=国际班&schoolId="+schoolManId;
+					window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstId}&pageName=addInterClass&classType=国际班&schoolId="+schoolManId+"&paramFlag=ADD";
 				}
 				else
 				{

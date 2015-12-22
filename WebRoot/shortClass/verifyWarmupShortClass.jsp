@@ -36,20 +36,20 @@
 			<c:choose>
 				<c:when test="${fn:length(shortClassInstT.classSchooltimeList) == 0}">
 					<tr>
-						<td colspan="9" align="center">暂无上课计划</td>
+						<td colspan="8" align="center">暂无上课计划</td>
 					</tr>
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${shortClassInstT.classSchooltimeList}" var="node" varStatus="i">
 						<tr>
-							<td align="right">上课计划：</td>
-							<td><fmt:formatDate value="${node.schooltime}" pattern="yyyy-MM-dd" /> ${node.hourRangeObj.paramDesc}</td>
-							<td align="right">教室：</td>
-							<td>${node.roomT.roomName}</td>
-							<td align="right">课时：</td>
-							<td>${node.lessionHours}</td>
-							<td align="right">老师：</td>
-							<td>
+							<td align="right" width="15%">上课计划：</td>
+							<td width="18%"><fmt:formatDate value="${node.schooltime}" pattern="yyyy-MM-dd" /> ${node.hourRangeObj.paramDesc}</td>
+							<td align="right" width="5%">教室：</td>
+							<td width="10%">${node.roomT.roomName}</td>
+							<td align="right" width="8%">课时：</td>
+							<td width="10%">${node.lessionHours}</td>
+							<td align="right" width="9%">老师：</td>
+							<td width="24%">
 								<ul>
 									<c:forEach items="${node.classTeacherList}" var="item" varStatus="i">
 										<li><span>${item.teacherT.byName}</span><span style="padding-left:15px">${item.teacherType}</span></li>
@@ -70,16 +70,36 @@
 				</td>
 			</tr>
 			<tr>
-				<td align="right" width="15%">审批意见:</td>
+				<td align="right" width="15%" valign="top">审批意见:</td>
 				<td>
-					<input name="dataSourceSql" id="dataSourceSql" type="text" style="width:265px;height:100px" class="easyui-textbox easyui-validatebox" data-options="multiline:true" />
+					<input name="verifyCont" id="verifyCont" type="text" style="width:800px;height:120px" class="easyui-textbox easyui-validatebox" data-options="multiline:true" />
 				</td>
 			</tr>
 		</table>
 		<div style="margin:0 auto;padding:0 0;text-align:right;padding-right:2px;width:99%;margin-top:10px">
+			<a href="javascript:void(0)" id="enterBtn" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;" onclick="attendSubmit()">提交</a>
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
+			function attendSubmit()
+			{
+				$.messager.confirm('提示','您确定审批当前热身课吗?',function(r){
+					if (r){
+						ajaxLoading("审批中...");
+						$.post('/sys/shortBus/verifyShortClassFunc.do',{shortClassInstId:${shortClassInstT.shortClassInstId},handlerId:${sessionScope.StaffT.staffId},isPutClass:$("input[name='isPutClass']:checked").val(),verifyCont:$("#verifyCont").textbox("getValue")},function(result){
+							ajaxLoadEnd();
+							if(result == "success")
+							{
+								backFunc();
+							}
+							else
+							{
+								$.messager.alert('提示', result);
+							}
+						});
+					}
+				});
+			}
 			function backFunc()
 			{
 				window.history.back();

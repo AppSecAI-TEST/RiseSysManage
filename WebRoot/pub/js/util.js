@@ -211,6 +211,20 @@ function myparser(s) {
 	}
 }
 
+function yearFormatter(date) {
+	return date.getFullYear();
+}
+
+function yearParser(s) {
+	if(s) {
+		$("#yearDiv").html(String(s).substring(0, 4));
+		return new Date(String(s).substring(0, 4));
+	} else {
+		$("#yearDiv").html(new Date().getFullYear());
+		return new Date();
+	}
+}
+
 function formatTypeName(row) {
 	var s = '<span>' + row.typeName + '</span>';
 	return s;

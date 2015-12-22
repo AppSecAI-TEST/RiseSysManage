@@ -121,7 +121,7 @@
 								班级：
 							</td>
 							<td width="12%">
-								<select id="classHis" name="classHis" style="width:100px" ></select>
+								<select id="classHis" name="classHis" style="width:110px" ></select>
 							</td>
 						</tr>
 						<tr>
@@ -180,7 +180,7 @@
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("加载中...");
-			$.post("<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}",function(data){
+			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
 				$("#schoolManId").combobox("loadData",data);
 				$("#schoolHisId").combobox("loadData",data);
 			},"json");
@@ -246,7 +246,8 @@
 					},
 					valueField: 'classInstId',
 					textField: 'className',
-					panelHeight: 'auto'
+					//panelHeight: 'auto'
+					listHeight:200
 				});
 				$('#tab').tabs({
 				    border:true,
@@ -283,7 +284,9 @@
 			function manOperFunc()
 			{
 				var row = $('#manList').datagrid('getSelected');
-				if (row){
+				if (row)
+				{
+					ajaxLoading("加载中...");
 					window.location.href = "/sys/attend/getAttendDetail.do?funcNodeId=${param.funcNodeId}&classInstId="+row.classInstId;
 				}
 				else
@@ -293,7 +296,16 @@
 			}
 			function manViewFunc()
 			{
-				
+				var row = $('#manList').datagrid('getSelected');
+				if (row)
+				{
+					ajaxLoading("加载中...");
+					window.location.href = "/sys/attend/getAttenceCalendarView.do?funcNodeId=${param.funcNodeId}&classInstId="+row.classInstId;
+				}
+				else
+				{
+					$.messager.alert('提示',"请先选择要浏览的班级");
+				}
 			}
 			function manLeaveFunc()
 			{
@@ -328,7 +340,9 @@
 			function hisViewFunc()
 			{
 				var row = $('#hisList').datagrid('getSelected');
-				if (row){
+				if (row)
+				{
+					ajaxLoading("加载中...");
 					window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+row.classAttendId+"&funcNodeId=${param.funcNodeId}&selDateStr=&classInstId=&comeFlag=attenceMan";
 				}
 				else
