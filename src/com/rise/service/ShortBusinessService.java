@@ -125,7 +125,7 @@ public class ShortBusinessService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
-	public void getShortClassAttendTInfo(ModelAndView model , String shortClassInstId , String funcNodeId) throws Exception
+	public void getShortClassAttendTInfo(ModelAndView model , String shortClassInstId , String funcNodeId , String pageName) throws Exception
 	{
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20512\",securityCode:\"0000000000\",params:{shortClassInstId:\""+shortClassInstId+"\"},rtnDataFormatType:\"user-defined\"}";
 		String result = ServiceEngine.invokeHttp(params);
@@ -141,7 +141,7 @@ public class ShortBusinessService
 			model.addObject("shortClassInstT", shortClassInstT);
 			model.addObject("shortSchooltimeT", shortSchooltimeT);
 			model.addObject("funcNodeId", funcNodeId);
-			model.setViewName("shortClass/shortAttenceRecord");
+			model.addObject("pageName", pageName);
 		}
 		catch(Exception err)
 		{
@@ -175,7 +175,7 @@ public class ShortBusinessService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
-	public void shortAttenceUpdatePage(ModelAndView model , String shortClassAttendId , String funcNodeId) throws Exception
+	public void shortAttenceUpdatePage(ModelAndView model , String shortClassAttendId , String funcNodeId , String pageName) throws Exception
 	{
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20515\",securityCode:\"0000000000\",params:{shortClassAttendId:\""+shortClassAttendId+"\"},rtnDataFormatType:\"user-defined\"}";
 		String result = ServiceEngine.invokeHttp(params);
@@ -188,13 +188,14 @@ public class ShortBusinessService
 			model.addObject("teacherTypeList", obj.getJSONArray("teacherTypeList"));
 			model.addObject("shortClassAttendT", shortClassAttendT);
 			model.addObject("funcNodeId", funcNodeId);
+			model.addObject("pageName", pageName);
 		}catch(Exception err){
 			err.printStackTrace();
 			model.addObject("ErrorInfo", err.getMessage());
 		}
 	}
 	
-	public void shortAttenceViewPage(ModelAndView model , String shortClassAttendId , String funcNodeId) throws Exception
+	public void shortAttenceViewPage(ModelAndView model , String shortClassAttendId , String funcNodeId , String pageName) throws Exception
 	{
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20516\",securityCode:\"0000000000\",params:{shortClassAttendId:\""+shortClassAttendId+"\"},rtnDataFormatType:\"user-defined\"}";
 		String result = ServiceEngine.invokeHttp(params);
@@ -202,6 +203,7 @@ public class ShortBusinessService
 			ShortClassAttendT shortClassAttendT = JacksonJsonMapper.getInstance().readValue(result, ShortClassAttendT.class);
 			model.addObject("shortClassAttendT", shortClassAttendT);
 			model.addObject("funcNodeId", funcNodeId);
+			model.addObject("pageName", pageName);
 		}catch(Exception err){
 			err.printStackTrace();
 			model.addObject("ErrorInfo", err.getMessage());

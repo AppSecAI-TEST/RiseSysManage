@@ -49,7 +49,7 @@
 				</div>
 				<div class="fitem">
 					<label style="text-align:right">所在区域:</label>
-					<select id="regionId" name="regionId" class="easyui-combobox" style="width:495px;height:25px;" data-options="formatter:function(row){return '<span>'+row.regionName+'</span>';}, valueField: 'regionId', textField: 'regionName', panelHeight: 'auto', onLoadSuccess:function(data){if(data.length > 0)$('#regionId').combobox('setValue',data[0].regionId);}" url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=regionId">
+					<select id="regionId" name="regionId" class="easyui-combobox" style="width:495px;height:25px;" data-options="formatter:function(row){return '<span>'+row.regionName+'</span>';}, valueField: 'regionId', textField: 'regionName', panelHeight: 'auto', onLoadSuccess:function(data){if(data.length > 0)$('#regionId').combobox('setValue',data[0].regionId);}" url="<%=path %>/pubData/qryRegionList.do">
       				</select>
 				</div>
 				<div class="fitem">

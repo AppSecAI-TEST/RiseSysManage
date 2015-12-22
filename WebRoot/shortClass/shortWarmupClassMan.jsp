@@ -129,7 +129,7 @@
 					panelHeight: 'auto'
 				});
 				$("#classType").combobox("setValue","${shortClassInstT.classTypeId}");
-				$("#classInfo").textbox("setValue","${shortClassInstT.shortClassInstId}");
+				$("#classInfo").textbox("setValue","${shortClassInstT.className}");
 				$("#planHours").textbox("setValue","${shortClassInstT.planHours}");
 				$("#planClassNum").textbox("setValue","${shortClassInstT.planClassNum}");
 				$("#classStartTime").datebox("setValue","<fmt:formatDate value='${shortClassInstT.openDate}' pattern='yyyy-MM-dd' />");

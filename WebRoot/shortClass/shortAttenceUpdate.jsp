@@ -318,7 +318,7 @@
 			
 			function backFunc()
 			{
-				window.location.href = "/sys/shortBus/shortAttenceDetailPage.do?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassAttendT.shortClassInstId}";
+				window.location.href = "/sys/shortBus/shortAttenceDetailPage.do?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassAttendT.shortClassInstId}&pageName=shortAttenceInterDetail";
 			}
 		</script>
  	</body>

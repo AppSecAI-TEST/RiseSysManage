@@ -280,7 +280,7 @@
 				var row = $('#manList').datagrid('getSelected');
 				if (row)
 				{
-					window.location.href = "/sys/shortBus/shortAttenceDetailPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
+					window.location.href = "/sys/shortBus/shortAttenceDetailPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=shortAttenceInterDetail";
 				}
 				else
 				{

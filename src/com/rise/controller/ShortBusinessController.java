@@ -117,9 +117,9 @@ public class ShortBusinessController
 	}
 	
 	@RequestMapping("/shortAttenceDetailPage.do")
-	public ModelAndView shortAttenceDetailPage(String shortClassInstId , String funcNodeId)
+	public ModelAndView shortAttenceDetailPage(String shortClassInstId , String funcNodeId , String pageName)
 	{
-		ModelAndView model = new ModelAndView("shortClass/shortAttenceDetail");
+		ModelAndView model = new ModelAndView("shortClass/"+pageName);
 		try
 		{
 			shortBusinessService.shortAttenceDetailPage(model,shortClassInstId,funcNodeId);
@@ -340,12 +340,12 @@ public class ShortBusinessController
 	}
 	
 	@RequestMapping("/getShortClassAttendTInfo.do")
-	public ModelAndView getShortClassAttendTInfo(String shortClassInstId , String funcNodeId)
+	public ModelAndView getShortClassAttendTInfo(String shortClassInstId , String funcNodeId , String pageName)
 	{
-		ModelAndView model = new ModelAndView();
+		ModelAndView model = new ModelAndView("shortClass/shortAttenceRecord");
 		try
 		{
-			shortBusinessService.getShortClassAttendTInfo(model,shortClassInstId,funcNodeId);
+			shortBusinessService.getShortClassAttendTInfo(model , shortClassInstId , funcNodeId , pageName);
 		}
 		catch(Exception e)
 		{
@@ -379,12 +379,12 @@ public class ShortBusinessController
 	}
 	
 	@RequestMapping("/shortAttenceUpdatePage.do")
-	public ModelAndView shortAttenceUpdatePage(String shortClassAttendId , String funcNodeId)
+	public ModelAndView shortAttenceUpdatePage(String shortClassAttendId , String funcNodeId , String pageName)
 	{
 		ModelAndView model = new ModelAndView("shortClass/shortAttenceUpdate");
 		try
 		{
-			shortBusinessService.shortAttenceUpdatePage(model,shortClassAttendId,funcNodeId);
+			shortBusinessService.shortAttenceUpdatePage(model,shortClassAttendId,funcNodeId,pageName);
 		}
 		catch(Exception e)
 		{
@@ -394,12 +394,12 @@ public class ShortBusinessController
 	}
 	
 	@RequestMapping("/shortAttenceViewPage.do")
-	public ModelAndView shortAttenceViewPage(String shortClassAttendId , String funcNodeId)
+	public ModelAndView shortAttenceViewPage(String shortClassAttendId , String funcNodeId , String pageName)
 	{
 		ModelAndView model = new ModelAndView("shortClass/shortAttenceView");
 		try
 		{
-			shortBusinessService.shortAttenceViewPage(model,shortClassAttendId,funcNodeId);
+			shortBusinessService.shortAttenceViewPage(model,shortClassAttendId,funcNodeId,pageName);
 		}
 		catch(Exception e)
 		{
