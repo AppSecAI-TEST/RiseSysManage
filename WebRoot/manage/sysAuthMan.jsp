@@ -99,8 +99,9 @@
 			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="comboboxSettingFunc()">保存</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#comboboxSettingDlg').dialog('close')">取消</a>
 		</div>
-		<div id="datagridSettingDlg" class="easyui-dialog" style="width:300px;height:400px;padding:0px 0px" modal="true" closed="true" buttons="#datagridSettingDlg-buttons">
-			<table class="easyui-datagrid" title="数据列表" style="width:100%;height:100%;margin:0 auto;padding:0 0;" id="datagridSettingData" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="false">
+		<div id="datagridSettingDlg" class="easyui-dialog" style="width:300px;height:420px;padding:0px 0px" modal="true" closed="true" buttons="#datagridSettingDlg-buttons">
+			<p style="text-align:left;width:95%;height:5%;margin:8px auto;padding:0 0;font-size:12px;font-family:'微软雅黑';font-weight:bold;">资源标识：<span id="ctrlResId" style="font-weight:normal;"></span></p>
+			<table class="easyui-datagrid" title="数据列表" style="width:99%;height:90%;margin:0 auto;padding:0 0;" id="datagridSettingData" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="false">
 				<thead>
 					<tr>
 						<th field="dataValue" checkbox="true"></th>
@@ -215,6 +216,7 @@
 				if (row){
 					if(row.resourceT.widgetType == "combobox")
 					{
+						$("#ctrlResId").html(row.resourceT.resourceId);
 						if(row.resourceT.dataType == "P")
 						{
 							$('#datagridSettingDlg').dialog('open').dialog('setTitle','调整功能');

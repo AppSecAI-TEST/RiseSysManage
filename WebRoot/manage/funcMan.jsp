@@ -12,10 +12,11 @@
 		<table id="funcNodeData" title="功能模块列表" class="easyui-treegrid" style="width:99%;height:99%" data-options="url:'/sys/funcNode/getFuncNodeInfoList.do',method: 'post',rownumbers: true,idField: 'funcNodeId',treeField: 'funcNodeName',loadFilter: myLoadFilter,toolbar:'#toolbar',onBeforeExpand:function(row){var url = '/sys/funcNode/getFuncNodeInfoList.do?id='+row.funcNodeId;$('#funcNodeData').treegrid('options').url = url;return true;}">
 			<thead>
 				<tr>
-					<th field="funcNodeName" width="20%">功能名称</th>
-					<th field="funcNodeTypeName" width="20%">功能类型</th>
-					<th field="html" width="20%">功能链接</th>
-					<th field="description" width="20%">功能状态</th>
+					<th field="funcNodeName" width="16%">功能名称</th>
+					<th field="funcNodeTypeName" width="16%">功能类型</th>
+					<th field="html" width="16%">功能链接</th>
+					<th field="resourceId" width="16%">资源标识符</th>
+					<th field="description" width="16%">功能状态</th>
 					<th field="stateDate" width="20%">创建时间</th>
 				</tr>
 			</thead>

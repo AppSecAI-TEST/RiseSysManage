@@ -45,11 +45,12 @@
 					<tr>
 						<th field="staffName" width="11%">中文名</th>
 						<th field="userName" width="11%">英文名</th>
-						<th field="gender" width="11%">性别</th>
-						<th field="deptName" width="11%">部门</th>
+						<th field="gender" width="6%">性别</th>
+						<th field="deptName" width="10%">部门</th>
 						<th field="postName" width="11%">职务</th>
+						<th field="roleNames" width="11%">角色</th>
 						<th field="phone" width="11%">联系电话</th>
-						<th field="stateName" width="11%">状态</th>
+						<th field="stateName" width="6%">状态</th>
 						<th field="createDate" width="16%">创建时间</th>
 						<th field="operArea" width="7%">操作</th>
 					</tr>
