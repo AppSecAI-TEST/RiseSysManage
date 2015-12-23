@@ -83,8 +83,6 @@ $(document).ready(function() {
     	if("quarter" == higherType) {
     		var year = $('#year').datebox('getValue');
     		$("#yearDiv").html(year);
-    	} else if("allQuarter" == higherType) {
-    		
     	}
     });
 	
