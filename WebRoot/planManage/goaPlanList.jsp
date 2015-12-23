@@ -77,7 +77,7 @@
   					<tr>
   						<td style="text-align: right;">升学目标：</td>
   						<td>
-	  						<input type="text" class="easyui-numberbox" id="firstValue" name="firstValue" style="width:200px;" data-options="min:1,precision:0,max:100">%
+	  						<input type="text" class="easyui-numberbox" id="firstValue" name="firstValue" style="width:196px;" data-options="min:1,precision:0,max:100">(%)
   						</td>
   					</tr>
   				</table>
