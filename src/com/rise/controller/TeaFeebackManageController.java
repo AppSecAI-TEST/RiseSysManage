@@ -26,7 +26,7 @@ private static Log log = LogFactory.getLog(TeaFeebackManageController.class);
 	
 	//根据班级实例Id查所有班级学员
 	@RequestMapping(value="/qryClassStuByInstId.do")
-	public ModelAndView qryClassStuByInstId(HttpServletResponse response,String classInstId,String qualityId,String schoolId,String className)
+	public ModelAndView qryClassStuByInstId(HttpServletResponse response,String classInstId,String qualityId,String schoolId,String className,String month)
 	{
 		log.error(classInstId);
 		ModelAndView view = new ModelAndView("teaFeebackManage/addTeaFeedback");
@@ -36,6 +36,7 @@ private static Log log = LogFactory.getLog(TeaFeebackManageController.class);
 			view.addObject("qualityId", qualityId);
 			view.addObject("schoolId", schoolId);
 			view.addObject("className", className);
+			view.addObject("month", month);
 			view.addObject("obj",JSONObject.fromObject(ret));
 		}catch(Exception e)
 		{

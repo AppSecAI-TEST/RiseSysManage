@@ -5,88 +5,149 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  	<head>
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/js/easyui/themes/default/easyui.css">
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/js/easyui/themes/icon.css">
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/js/demo.css">
-		<script type="text/javascript" src="<%=path %>/pub/js/jquery.min.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/easyui/jquery.easyui.min.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
+ 	<head>
+		<%@ include file="/common/head.jsp" %>
+		<%@ include file="/common/formvalidator.jsp" %>
+		<script type="text/javascript" src="<%=path %>/js/export/teachingFeedback.js"></script>
   	</head>
-  
   	<body>
-  		<div style="padding:5px 10px;">
-  			<form id="qryFm">
-	  			<table>
-	  				<tr>
-	  					<td>校区：</td>
-	  					<td>
-	  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;">
-	  							
-	  						</select>
-	  					</td>
-	  					<td>班级：</td>
-	  					<td>
-	  						<select class="easyui-combobox" name="classId" id="classId" style="width:150px;">
-	  							
-	  						</select>
-	  					</td>
-	  					<td>老师：</td>
-	  					<td>
-	  						<select class="easyui-combobox" name="teacherId" id="teacherId" style="width:150px;">
-	  							
-	  						</select>
-	  					</td>
-	  					<td>姓名：</td>
-	  					<td>
-	  						<input class="easyui-textbox" name="name" id="name" style="width:150px;">
-	  					</td>
-	  				</tr>
-	  				<tr>
-	  					<td>联系电话：</td>
-	  					<td>
-	  						<input class="easyui-textbox" name="contactNbr" id="contactNbr" style="width:150px;">
-	  					</td>	
-	  					<td>教质时间：</td>
-	  					<td>
-	  						<select class="easyui-combobox" name="month" id="month" style="width:150px;">
-	  							
-	  						</select>
-	  					</td>
-	  					<td>数据类型：</td>
-	  					<td>
-	  						<select class="easyui-combobox"  name="dataType" id="dataType" style="width:150px;">
-	  							
-	  						</select>
-	  					</td>
-	  					<td></td>
-	  					<td>	
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" onclick="qryData()">查询</a>
-	  					</td>
-	  					<td>
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" style="width:150px" id="qryBtn" onclick="exportData()">导出</a>
-	  					</td>
-	  				</tr>
-	  			</table>
-  			</form>
-			<div style="padding:5px 0;">
-				<table class="easyui-datagrid" title="查询结果" style="width:100%;height:250px" id="list_data" fitColumns="true">
-					<thead>
-						<tr>
-							<th field="schoolId" align="center" width="11%">校区</th>
-							<th field="event" align="center" width="11%" >教质事件</th>
-							<th field="dateType" align="center" width="11%" >数据类型</th>
-							<th field="name" align="center" width="11%" >姓名</th>
-							<th field="enName" align="center" width="11%" >英文名</th>
-							<th field="class" align="center" width="11%" >班级</th>
-							<th field="contactNbr" align="center" width="11%" >联系电话</th>
-							<th field="teacherA" align="center" width="11%" >老师A</th>
-							<th field="teacherB" align="center" width="11%" >老师B</th>
+ 		<form id="qryFm" style="margin:0 auto;">
+ 			<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
+			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="5">
+				<tr>
+					<td width="10%" align="right"><span>校区：</span></td>
+					<td width="10%" align="left">
+						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 120px">
+			        	</select>
+					</td>
+					<td width="10%" align="right"><span>学员姓名：</span></td>
+					<td width="10%" align="left">
+					 <select id="studentId" name="studentId" style="width:120px" class="easyui-combobox">
+    				</select>
+					</td>
+					<td width="10%" align="right">
+						<span>带班老师：</span>
+					</td>
+					<td width="10%" align="left">
+						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 114px; height: 25px;"
+							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'" 
+		      				url="<%=path %>/pubData/qryTeacherList.do">
+				        </select>
+					</td>
+					<td width="10%" align="right"><span>月份：</span></td>
+					<td align="left" width="10%">
+						<input class="easyui-datebox" type="text" style="width:120px" id="time" editable="false" data-options="formatter:myformatter, parser:myparser"/>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td width="10%" align="right"><span>班级：</span></td>
+					<td width="10%" align="left">
+						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 120px" disabled="disabled">
+			        	</select>
+					</td>
+					<td width="10%" align="right"><span>联系电话：</span></td>
+							<td width="10%" align="left">
+						 <input name="phone" class="easyui-numberbox" style="width:120px"/>
+					</td>
+					<td width="10%" align="right"><span>电教次数：</span></td>
+					<td colspan="2" align="left" width="10%">
+						<input name="teachingNum" type="checkbox" value="0" style="margin:0 auto;vertical-align:middle;" /><span>0次</span>
+						&nbsp;&nbsp;&nbsp;<input name="teachingNum" type="checkbox" value="1" style="margin:0 auto;vertical-align:middle;" /><span>1次</span>
+						&nbsp;&nbsp;&nbsp;<input name="teachingNum" type="checkbox" value="2" style="margin:0 auto;vertical-align:middle;" /><span>2次</span>
+					</td>
+					<td colspan="2"></td>
 						</tr>
-					</thead>
-				</table>
-			</div>
-  		</div>
+						<tr>
+					<td width="10%" align="right"><span>家长会：</span></td>
+					<td width="10%" align="left">
+						<input name="meetingIsAttend" type="checkbox" value="Y" style="margin:0 auto;vertical-align:middle;" /><span>已到</span>
+						&nbsp;&nbsp;&nbsp;<input name="meetingIsAttend" type="checkbox" value="N" style="margin:0 auto;vertical-align:middle;" /><span>未到</span>
+					</td>
+					<td width="10%" align="right"><span>公开课：</span></td>
+					<td width="10%" align="left">
+						<input name="openIsAttend" type="checkbox" value="Y" style="margin:0 auto;vertical-align:middle;" /><span>已到</span>
+						&nbsp;&nbsp;&nbsp;<input name="openIsAttend" type="checkbox" value="N" style="margin:0 auto;vertical-align:middle;" /><span>未到</span>
+					</td>
+					<td width="10%" align="right"><span>毕业典礼：</span></td>
+					<td align="left" width="10%">
+						<input name="gradIsAttend" type="checkbox" value="Y" style="margin:0 auto;vertical-align:middle;" /><span>已到</span>
+						&nbsp;&nbsp;&nbsp;<input name="gradIsAttend" type="checkbox" value="N" style="margin:0 auto;vertical-align:middle;" /><span>未到</span>
+					</td>
+					<td colspan="2" align="right">
+						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:90px; height: 25px;" id="qryBtn" funcNodeId="4610">查询</a>
+						&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:90px; height: 25px;" id="reset" >重置</a
+					</td>
+					<td></td>
+				</tr>
+			</table>
+		</form>
+		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:540" id="list_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
+			<thead>
+				<tr>
+					<th field="schoolName" align="center" width="12%">校区</th>
+					<th field="teachingEvent" align="center" width="12%" >教质事件</th>
+					<th field="dataType" align="center" width="12%" >数据类型</th>
+					<th field="studentName" align="center" width="12%" >学员姓名</th>
+					<th field="byname" align="center" width="12%" >英文名</th>
+					<th field="className" align="center" width="12%" >班级</th>
+					<th field="phone" align="center" width="14%" >联系电话</th>
+					<th field="teacherName" align="center" width="14%" >带班老师</th>
+				</tr>
+			</thead>
+		</table>
+		<div id="toolbar">
+   			<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" >导出</a>
+ 		</div>
+  		<script type="text/javascript">
+		$(function () {
+	        $('#time').datebox({
+	            onShowPanel: function () {//显示日趋选择对象后再触发弹出月份层的事件，初始化时没有生成月份层
+	        		var p = $('#time').datebox('panel'), //日期选择对象
+	            	span = p.find('span.calendar-text'); //显示月份层的触发控件
+	            	p.find(".calendar-menu-year").attr("readOnly","true");
+	            	span.click(function(){
+	            		p.find('div.calendar-menu').hide();
+	            	});
+	                span.get(0).click(); //触发click事件弹出月份层
+	                p.find("div.datebox-button").find("td:eq(0)").css("visibility","hidden");//隐藏今天按钮
+	                var months = p.find(".calendar-menu-month-inner").find(".calendar-menu-month");
+	                months.unbind();
+	                months.click(function(){
+	                	var year = /\d{4}/.exec(span.html())[0]//得到年份
+	                    , month = parseInt($(this).attr('abbr'))+1;
+	                	if(month<10)
+	                	{
+	                		month="0"+month;
+	                	}
+	                	var val =year + '-' + month+"-00";
+	                    $('#time').datebox('setValue',val).datebox('hidePanel'); //设置日期的值
+	             	});
+	            },
+	            
+	            //formatter: function (d) { return d.getFullYear() + '-' + d.getMonth(); }//配置formatter，只返回年月
+	    	});
+	     });   
+	
+		function myformatter(date){
+            var y = date.getFullYear();
+            var m = date.getMonth()+1;
+            var d = date.getDate();
+            return y+'-'+(m<10?('0'+m):m);
+        }
+	
+	    function myparser(s){
+            if (!s) return new Date();
+            var ss = (s.split('-'));
+            var y = parseInt(ss[0],10);
+            var m = parseInt(ss[1],10);
+            var d = parseInt(ss[2],10);
+            if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+                return new Date(y,m-1,d);
+            } else {
+                return new Date();
+            }
+        }
+	</script>
   	</body>
 </html>
