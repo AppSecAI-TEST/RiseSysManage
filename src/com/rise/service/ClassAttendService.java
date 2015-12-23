@@ -1,6 +1,9 @@
 package com.rise.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import net.sf.json.JSONObject;
@@ -10,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rise.model.AttStudentObj;
 import com.rise.model.CalendarItem;
 import com.rise.model.ClassAttendT;
 import com.rise.model.ClassInstT;
@@ -187,6 +191,30 @@ public class ClassAttendService
 			model.addObject("month", StringUtil.getJSONObjectKeyVal(json, "month"));
 			model.addObject("classInstId", classInstId);
 			model.addObject("funcNodeId", funcNodeId);
+		}catch(Exception err){
+			err.printStackTrace();
+			model.addObject("errorInfo", err.getMessage());
+		}
+	}
+	
+	public void getClassStudentAttenceInfo(ModelAndView model , String classInstId  , String monthDate) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20411\",securityCode:\"0000000000\",params:{classInstId:\""+classInstId+"\",monthDate:\""+monthDate+"\"},rtnDataFormatType:\"user-defined\"}";
+		String result = ServiceEngine.invokeHttp(param);
+		try{
+			ObjectMapper mapper = JacksonJsonMapper.getInstance();
+			JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, AttStudentObj.class);
+			List attStudentList = (List)mapper.readValue(result, javaType);
+			model.addObject("attStudentList", attStudentList);
+			model.addObject("classInstId", classInstId);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+			Date month = sdf.parse(monthDate);
+			model.addObject("monthDateStr", monthDate);
+			model.addObject("monthDate", month);
+			Calendar cal = Calendar.getInstance();
+	        cal.setTime(month);
+	        int maxDay=cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+	        model.addObject("maxDay", maxDay);
 		}catch(Exception err){
 			err.printStackTrace();
 			model.addObject("errorInfo", err.getMessage());

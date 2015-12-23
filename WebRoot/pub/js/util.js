@@ -197,6 +197,39 @@ function myformatter(date) {
 	var d = date.getDate();
 	return y + '-' + (m < 10 ? ('0' + m) : m) + '-' + (d < 10 ? ('0' + d) : d);
 }
+
+function myYearMonthformatter(date){
+	var y = date.getFullYear();
+	var m = date.getMonth()+1;
+	return y+'-'+(m<10?('0'+m):m);
+}
+
+function settingYearMonthPanel() 
+{
+	//显示日趋选择对象后再触发弹出月份层的事件，初始化时没有生成月份层
+	var obj = $(this);
+	var p = obj.datebox('panel'), //日期选择对象
+	span = p.find('span.calendar-text'); //显示月份层的触发控件
+	p.find(".calendar-menu-year").attr("readOnly","true");
+	span.click(function(){
+		p.find('div.calendar-menu').hide();
+	});
+    span.get(0).click(); //触发click事件弹出月份层
+    p.find("div.datebox-button").find("td:eq(0)").css("visibility","hidden");//隐藏今天按钮
+    var months = p.find(".calendar-menu-month-inner").find(".calendar-menu-month");
+    months.unbind();
+    months.click(function(){
+    	var year = /\d{4}/.exec(span.html())[0]//得到年份
+        , month = parseInt($(this).attr('abbr'))+1;
+    	if(month<10)
+    	{
+    		month="0"+month;
+    	}
+    	var val =year + '-' + month+"-00";
+        obj.datebox('setValue',val).datebox('hidePanel'); //设置日期的值
+ 	});
+}
+
 function myparser(s) {
 	if (!s)
 		return new Date();
