@@ -37,20 +37,20 @@
 					title="查询结果" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
 						<tr>
-							<th align="center" colspan="3">学员信息</th>
-							<th align="center" colspan="6">报名缴费情况</th>
-							<th align="center" colspan="4">退费申请</th>
+							<th align="center" colspan="3"><span>学员信息</span></th>
+							<th align="center" colspan="6"><span>报名缴费情况</span></th>
+							<th align="center" colspan="4"><span>退费申请</span></th>
 							<th align="center" width="150px;">&nbsp;</th>
-							<th align="center" align="center" rowspan="2" field="approveDate">审批通过日期</th>
+							<th align="center" align="center" rowspan="2" field="approveDate"><span>审批通过日期</span></th>
 						</tr>
 						<tr>
 							<th field="schoolName" align="center" width="5%">校区</th>
 							<th field="schoolName" align="center" width="5%">学员姓名</th>
 							<th field="phone" align="center" width="10%">家长电话</th>
-							<th field="payDate" align="center" width="8%">报名日期</th>
+							<th field="payDate" align="center" width="7%">报名日期</th>
 							<th field="stageId" align="center" width="5%">报名阶段</th>
 							<th field="amount" align="center" width="5%">报名金额</th>
-							<th field="className" align="center" width="5%">在读班级</th>
+							<th field="className" align="center" width="6%">在读班级</th>
 							<th field="adviserName" align="center" width="10%">顾问</th>
 							<th field="adviserTeacherName" align="center" width="10%">老师</th>
 							<th field="refundType" align="center" width="5%">退费类别</th>

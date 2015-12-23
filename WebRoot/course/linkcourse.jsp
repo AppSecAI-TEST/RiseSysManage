@@ -307,6 +307,25 @@ initPayDate();
 	                    }
 	                }
 	        	});
+       		}else if(n=='TEXTBOOK')//实物类
+       		{
+       			$("#td1").css('display','block');
+			    var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}";
+	       		$("#giftId").combobox(
+	       		{
+	        		url : urls,//返回json数据的url
+	        		valueField : "giftId",
+	        		textField :  "giftName",
+	        		panelHeight : "auto",
+	        		onLoadSuccess : function ()
+	        		{ //数据加载完毕事件
+	                    var data = $('#giftId').combobox('getData');
+	                    if (data.length > 0)
+	                    {
+	                      //  $("#giftId").combobox('select', data[0].param2);
+	                    }
+	                }
+	        	});
        		}
        		 if(isGet=='Y')
               {
