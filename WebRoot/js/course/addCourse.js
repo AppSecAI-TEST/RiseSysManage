@@ -83,7 +83,7 @@ function initCousreGift()
     		{
     			if(gift==null)return;
 				var giftTR;
-    			if(gift.giftType=="GOODS" || gift.parentType=="COUPON")
+    			if(gift.giftType=="GOODS" || gift.parentType=="COUPON" || gift.giftType=="TEXTBOOK")
 				{
 			 		giftTR=$("#addGift").clone();
 			 		giftTR.css("display",'table-row');
@@ -99,13 +99,17 @@ function initCousreGift()
 							}else if(gift.parentType=="COUPON")
 							{
 								$(node).html("<span>券类赠品</span>");	
+							}else if(gift.giftType=="TEXTBOOK")
+							{
+								$(node).html("<span>教材赠品</span>");	
 							}
 						}else if(n==3)
 						{	
-							if(gift.giftType=="GOODS")
+							if(gift.giftType=="GOODS" || gift.giftType=="TEXTBOOK")
 							{
 								 $(node).html("<span>"+gift.giftName+"</span>");	
-							}else
+							} 
+							else
 							{
 								 $(node).html("<span>"+gift.giftName+"   "+gift.giftCode+"   "+gift.effDate+"</span>");
 							}
