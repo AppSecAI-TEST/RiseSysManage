@@ -220,4 +220,20 @@ public class ClassAttendController
 		return model;
 	}
 	
+	@RequestMapping("/getClassStudentAttenceInfo.do")
+	public ModelAndView getClassStudentAttenceInfo(String classInstId , String monthDate)
+	{
+		ModelAndView model = new ModelAndView("report/班级考勤之学生明细");
+		try 
+		{
+			classAttendService.getClassStudentAttenceInfo(model, classInstId, monthDate);
+		}
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
 }
