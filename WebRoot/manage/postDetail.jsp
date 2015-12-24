@@ -14,7 +14,7 @@
   	<body class="easyui-layout manage">
   		<form id="fm" method="post" novalidate>
   			<input type="hidden" name="postId" value="${PostT.postId}" />
-			<div data-options="region:'north',title:'基础信息',collapsible:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;height:300px;padding-top:30px;padding-left:10px">
+			<div data-options="region:'north',title:'基础信息',collapsible:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;text-align:center;height:500px;padding-top:90px">
 				<div class="fitem">
 					<label style="text-align:right">职位名称:</label>
 					<input name="postName" id="postName" type="text" style="width:565px" class="easyui-textbox easyui-validatebox" required="true" />
@@ -32,22 +32,24 @@
 					<input name="postRemark" id="postRemark" type="text" style="width:565px;height:150px" class="easyui-textbox" data-options="multiline:true" />
 				</div>
 			</div>
-			<div data-options="region:'center',title:'数据范围',collapsible:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;height:50px;padding-top:20px;padding-left:40px">
-				<div class="fitem">
-					<input id="checkAll" type="checkbox" value="0" onclick="choiceSchoolFunc(this)" />
-					<label for="checkAll">全选</label>
-				</div>
-				<div class="fitem">
-					<c:forEach items="${SchoolList}" var="node" varStatus="i">
-						<input name="schoolIds" id="schoolIds${i.count}" type="checkbox" value="${node.schoolId}" />
-						<label for="schoolIds${i.count}">${node.schoolName}</label>
-						<c:if test="${i.count%10 == 0}">
-							<br />
-						</c:if>
-					</c:forEach>
+			<div style="display:none;">
+				<div data-options="region:'center',title:'数据范围',collapsible:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;height:50px;padding-top:20px;padding-left:40px">
+					<div class="fitem">
+						<input id="checkAll" type="checkbox" value="0" onclick="choiceSchoolFunc(this)" />
+						<label for="checkAll">全选</label>
+					</div>
+					<div class="fitem">
+						<c:forEach items="${SchoolList}" var="node" varStatus="i">
+							<input name="schoolIds" id="schoolIds${i.count}" type="checkbox" value="${node.schoolId}" />
+							<label for="schoolIds${i.count}">${node.schoolName}</label>
+							<c:if test="${i.count%10 == 0}">
+								<br />
+							</c:if>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
-			<div data-options="region:'south',border:false,collapsible:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;height:100px;text-align:right;padding-top:30px;padding-right:30px;">
+			<div data-options="region:'south',border:false,collapsible:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;height:100px;text-align:right;padding-top:0px;padding-right:30px;">
 				<a href="javascript:void(0)" id="enterBtn" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;" onclick="postSubmit()">提交</a>
 				<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 			</div>

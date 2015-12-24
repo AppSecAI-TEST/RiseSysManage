@@ -8,7 +8,7 @@ public class SysRoleT implements java.io.Serializable {
 	private Integer sysRoleId;
 	private String sysRoleName;
 	private String roleMemo;
-	private Integer schoolId;
+	private String schoolIds;
 	private Timestamp createDate;
 	private String state;
 	private Timestamp stateDate;
@@ -38,12 +38,12 @@ public class SysRoleT implements java.io.Serializable {
 		this.roleMemo = roleMemo;
 	}
 
-	public Integer getSchoolId() {
-		return this.schoolId;
+	public String getSchoolIds() {
+		return schoolIds;
 	}
 
-	public void setSchoolId(Integer schoolId) {
-		this.schoolId = schoolId;
+	public void setSchoolIds(String schoolIds) {
+		this.schoolIds = schoolIds;
 	}
 
 	public Timestamp getCreateDate() {

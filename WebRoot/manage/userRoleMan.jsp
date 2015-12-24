@@ -1,6 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.rise.pub.pubData.PubData" %>
 <%
 	String path = request.getContextPath();
+	List schoolList = PubData.qrySchoolList("");
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -63,7 +66,7 @@
 			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUserRole()">保存</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#userRoleDlg').dialog('close')">取消</a>
 		</div>
-		<div id="dlg" class="easyui-dialog" style="width:480px;height:230px;padding:0px 0px" modal="true" closed="true" buttons="#dlg-buttons">
+		<div id="dlg" class="easyui-dialog" style="width:480px;height:360px;padding:0px 0px" modal="true" closed="true" buttons="#dlg-buttons">
 			<form id="fm" method="post" novalidate>
 				<input id="sysRoleId" name="sysRoleId" type="hidden" value="" />
 				<input id="staffId" name="staffId" type="hidden" value="" />
@@ -74,6 +77,22 @@
 				<div class="fitem">
 					<label style="text-align:right;vertical-align:top;">角色描述:</label>
 					<input name="roleMemo" id="roleMemo" type="text" style="width:265px;height:100px" class="easyui-textbox easyui-validatebox" data-options="multiline:true" required="true" />
+				</div>
+				<div class="fitem">
+					<label style="text-align:right;vertical-align:top">数据范围:</label>
+					<input id="checkAll" type="checkbox" value="0" onclick="choiceSchoolFunc(this)" />
+					<label for="checkAll">全选</label><br />
+					<c:set var="SchoolList" value="<%=schoolList %>" />
+					<c:forEach items="${SchoolList}" var="node" varStatus="i">
+						<c:if test="${i.count%3 == 1}">
+							<label style="text-align:right;vertical-align:top">&nbsp;</label>
+						</c:if>
+						<input name="schoolIds" id="schoolIds${i.count}" type="checkbox" value="${node.schoolId}" />
+						<label for="schoolIds${i.count}">${node.schoolName}</label>
+						<c:if test="${i.count%3 == 0}">
+							<br />
+						</c:if>
+					</c:forEach>
 				</div>
 			</form>
 		</div>
@@ -95,6 +114,17 @@
 					$('#dlg').dialog('open').dialog('setTitle','修改角色');
 					$('#fm').form('clear');
 					$('#fm').form('load',row);
+					var schoolArr = row.schoolIds;
+					var isAllSelect = true;
+					$("input[name='schoolIds']").each(function(i,node){
+						if(schoolArr.indexOf(node.value) != -1){
+							node.checked = true;
+						}
+						else{
+							isAllSelect = false;
+						}
+					});
+					$("#checkAll").get(0).checked = isAllSelect;
 					$("#staffId").val("${sessionScope.StaffT.staffId}");
 					url = '/sys/sysRole/updateRole.do';
 				}
@@ -148,7 +178,12 @@
 					$.messager.alert('提示',"请先选择要删除的角色");
 				}
 			}
-			
+			function choiceSchoolFunc(obj)
+			{
+				$("input[name='schoolIds']").each(function(i,node){
+					node.checked = obj.checked;
+				});
+			}
 			function getTreeNode(){
 				var node = $('#deptTree').tree('getSelected');
 				if (node){
