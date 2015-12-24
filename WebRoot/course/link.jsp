@@ -249,13 +249,13 @@ function toLinkCourse(num)
 		  			}
 		  		}else
 		  		{
-		  			if(n==0)
-		  			{
-		  				$(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
-		  			}else
-		  			{
-		  				$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
-		  			}
+			  			if(n==0)
+			  			{
+			  			    $(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
+			  			}else
+			  			{
+			  				$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
+			  			}
 		  		 }
 		  			
 		  		$(name).css("display","block");
@@ -270,7 +270,6 @@ function toLinkCourse(num)
 function validateCourses(order)
 {
 	var oldCourses=getOldCourse();
-	
 	for(var i=0;i<oldCourses.length;i++)
 	{
 		var course = oldCourses[i];
@@ -288,11 +287,11 @@ function validateCourses(order)
 				}
 			}else if(feeType=='002')
 			{
-				if(Number(stageOrder)<Number(order))
-				{
+			   if(Number(stageOrder)<Number(order))
+			   {
 					showMessage("提示","当前所报升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段",null);
 					return;
-				}
+			   }
 			}
 		}
 	}
@@ -315,7 +314,7 @@ function checkNewCourse(courseT)
 		var order =course.stageOrder;
 		if(Number(stageOrder)>Number(order))
 		{
-			 showMessage('提示', "本次报名新招阶段"+newCourse.stageId+"不是最底阶段", null);
+			 showMessage('提示', "本次报名新招阶段"+newCourse.stageId+"不是最低阶段", null);
 			 return false;
 		}
 	}
@@ -323,7 +322,7 @@ function checkNewCourse(courseT)
 }
 
 /**
- * 判断连报课程是否价格体系
+ * 判断连报课程是否在同一价格体系
  */
 function checkCoursePrice(studentCourses)
 {
