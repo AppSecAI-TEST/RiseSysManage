@@ -53,8 +53,9 @@
 		<form id="courseFm">
 			<div style="height: 10px;"></div>
 			<input id="studentCourseId" name="studentCourseId" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"studentCourseId")%>"/>
-    	    <input id="oldClassType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>"/>
-    	    <input id="oldStageId"   type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>"/>
+    	    <input id="oldClassType" name="oldClassType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>"/>
+    	    <input id="oldStageId"   name="oldStageId"   type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>"/>
+    	    <input id="oldFeeType"   name="oldFeeType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"feeType")%>"/>
 			<input type="hidden" id="paySchoolId" name="paySchoolId" value="<%=schoolId%>" />	
 			<input type="hidden" id="studentId" name="studentId" value="<%=studentId%>">
 			<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}" />

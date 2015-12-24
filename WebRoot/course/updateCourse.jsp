@@ -108,7 +108,7 @@
     	    <input id="oldClassType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>"/>
     	    <input id="oldStageId"   type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>"/>
     	    <input id="oldCourseType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"courseType")%>"/>
-    	      <input id="oldFeeType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"feeType")%>"/>
+    	    <input id="oldFeeType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"feeType")%>"/>
     	    <input type="hidden" id="oldMinusAmount" name="oldMinusAmount" value="<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>" />	
 			<input type="hidden" id="paySchoolId" name="paySchoolId" value="<%=schoolId%>" />	
 			<input type="hidden" id="studentId" name="studentId" value="<%=studentId%>">
@@ -1072,10 +1072,13 @@ $("#submitBtn").click(function()
 					}
 				}else if(feeType=='002'|| feeType=='003')
 				{
-					if(Number(stageOrder)<Number(order))
+					if(courseState=='002' || courseState=='003' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 					{
-						showMessage("提示","当前所报复读或升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段",null);
-						return;
+						if(Number(stageOrder)<Number(order))
+						{
+							showMessage("提示","当前所报复读或升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段",null);
+							return;
+						}
 					}
 				}
 			}
