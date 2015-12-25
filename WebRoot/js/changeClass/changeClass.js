@@ -47,7 +47,7 @@ $(document).ready(function() {
 	var staffId = $("#handlerId").val();
 	var funcNodeId = $("#funcNodeId").val();
 	$("#schoolId").combobox({
-		url : "/sys/pub/pageCategory.do?staffId="+staffId+"&funcNodeId="+funcNodeId+"&fieldId=schoolId",//返回json数据的url
+		url : "/sys/pubData/qrySchoolList.do?schoolId=",//返回json数据的url
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
@@ -115,7 +115,7 @@ $(document).ready(function() {
 	});
 	
 	$("#approveSchoolId").combobox({
-		url : "/sys/pub/pageCategory.do?staffId="+staffId+"&funcNodeId="+funcNodeId+"&fieldId=schoolId",//返回json数据的url
+		url : "/sys/pubData/qrySchoolList.do?schoolId=",//返回json数据的url
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
