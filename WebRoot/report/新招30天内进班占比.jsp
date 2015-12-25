@@ -59,3 +59,6 @@
   		</div>
   	</body>
 </html>
+<script>
+	exportLink("export","list_data");
+</script>
