@@ -624,7 +624,7 @@
 								<span>备注：</span>
 							</td>
 							<td colspan="6">
-								<textarea rows="2" cols="120" id="remark" name="remark"
+								<textarea rows="2" cols="120" id="shortRemark" name="shortRemark"
 									class="easyui-validatebox textbox"></textarea>
 							</td>
 						</tr>
