@@ -9,6 +9,7 @@ import org.springframework.beans.factory.BeanFactory;
 import com.rise.pub.base.JacksonJsonMapper;
 import com.rise.pub.cache.CacheManager;
 import com.rise.pub.util.BeanFactoryHelper;
+import com.rise.service.QryPubDataService;
 
 public class PubData 
 {
@@ -36,4 +37,14 @@ public class PubData
 		CacheManager signService = (CacheManager) beanFactory.getBean("cacheManager");
 		return signService.qryBusiCapaTypeLevel();
 	}
+	
+	public static List qrySchoolList(String schoolId) throws Exception
+	{
+		BeanFactory beanFactory = BeanFactoryHelper.getBeanfactory();
+		QryPubDataService qryPubDataService = (QryPubDataService) beanFactory.getBean("qryPubDataService");
+		String json = qryPubDataService.qrySchoolList(schoolId);
+		List list = JacksonJsonMapper.getInstance().readValue(json, List.class);
+		return list;
+	}
+	
 }

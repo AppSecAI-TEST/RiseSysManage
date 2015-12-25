@@ -37,4 +37,8 @@ public class CacheManager
     	String returnMsg = StringUtil.getJSONObjectKeyVal(object, "returnMsg");
     	return JSONArray.fromObject(returnMsg);
     }
+    
+    
+    
+    
 }

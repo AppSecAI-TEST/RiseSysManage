@@ -249,13 +249,13 @@ function toLinkCourse(num)
 		  			}
 		  		}else
 		  		{
-		  			if(n==0)
-		  			{
-		  				$(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
-		  			}else
-		  			{
-		  				$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
-		  			}
+			  			if(n==0)
+			  			{
+			  			    $(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
+			  			}else
+			  			{
+			  				$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
+			  			}
 		  		 }
 		  			
 		  		$(name).css("display","block");
@@ -267,31 +267,66 @@ function toLinkCourse(num)
 		}
 }
 	
-function validateCourses(order)
+function validateCourses(studentCourses)
 {
 	var oldCourses=getOldCourse();
 	
-	for(var i=0;i<oldCourses.length;i++)
+	for(var i=0;i<studentCourses.length;i++)
 	{
-		var course = oldCourses[i];
-		var order = course.stageOrder;
-		var courseState=course.courseState;
-		var stageName =course.stageId;
-		if(courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
+		var course=studentCourses[i].course;
+		var oldStageId =course.oldStageId;
+		var oldFeeType =course.oldFeeType;
+		var stageId =course.stageId;
+		var feeType =course.feeType;
+		var studentCourseId=course.studentCourseId;
+		var stageOrder = course.stageOrder;
+		if(oldStageId==stageId && feeType==oldFeeType)//业绩类型、阶段没有变化不校验
 		{
-			if(feeType=='001')//新招
+			continue;
+		}
+		for(var i=0;i<oldCourses.length;i++)
+		{
+			var oldCourse = oldCourses[i];
+			var order = oldCourse.stageOrder;
+			var courseState=oldCourse.courseState;
+			var stageName =oldCourse.stageId;
+			if(studentCourseId==oldCourse.studentCourseId)//同一课程不比较
 			{
-				if(Number(stageOrder)<=Number(order))
-				{
-					showMessage("提示","当前所报新招阶段"+stageId+"低于或同于在读阶段"+stageName+",请重新选择阶段",null);
-					return;
-				}
-			}else if(feeType=='002')
+				continue;
+			}
+			if(courseState=='001' || courseState=='002' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 			{
-				if(Number(stageOrder)<Number(order))
+				if(feeType=='001')//新招
+				{ 
+					if(courseState=='002' || courseState=='003' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
+					{
+						showMessage("提示","该学员有未结束课程,当前所报阶段"+stageId+"不可选择新招业绩类型,请重新选择业绩类型",null);
+						return;
+					}
+					if(courseState=='001')//未定班
+					{
+						if(oldCourse.feeType=='001')//已有新招
+						{
+							showMessage("提示","已存在新招阶段"+stageName+",请重新选择业绩类型",null);
+							return;
+						}
+						if(Number(stageOrder)>Number(order))
+						{
+							showMessage("提示","当前所报新招阶段"+stageId+"不是最低阶段"+stageName+",请重新选择阶段",null);
+							return;
+						}
+					}
+				}else if(feeType=='002'|| feeType=='003')
 				{
-					showMessage("提示","当前所报升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段",null);
-					return;
+					if(courseState=='002' || courseState=='003' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
+					{
+						if(Number(stageOrder)<Number(order))
+						{
+							showMessage("提示","当前所报复读或升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段",null);
+							return;
+						}
+					}
+					
 				}
 			}
 		}
@@ -315,7 +350,7 @@ function checkNewCourse(courseT)
 		var order =course.stageOrder;
 		if(Number(stageOrder)>Number(order))
 		{
-			 showMessage('提示', "本次报名新招阶段"+newCourse.stageId+"不是最底阶段", null);
+			 showMessage('提示', "本次报名新招阶段"+newCourse.stageId+"不是最低阶段", null);
 			 return false;
 		}
 	}
@@ -323,7 +358,7 @@ function checkNewCourse(courseT)
 }
 
 /**
- * 判断连报课程是否价格体系
+ * 判断连报课程是否在同一价格体系
  */
 function checkCoursePrice(studentCourses)
 {

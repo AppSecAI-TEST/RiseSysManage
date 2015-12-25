@@ -22,6 +22,7 @@
   			<input id="classInstId" type="hidden" value="${classInstId}"/>
   			<input id="className" type="hidden" value="${className}"/>
   			<input id="schoolId" type="hidden" value="${schoolId}"/>
+  			<input id="month" type="hidden" value="${month}"/>
 	 		<table id="feedbackTab" width="95%" align="center" style="margin:5px auto;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
 	 			<tr>
   					<td width="3%" align="center">序号</td>

@@ -624,7 +624,7 @@
 								<span>备注：</span>
 							</td>
 							<td colspan="6">
-								<textarea rows="2" cols="120" id="remark" name="remark"
+								<textarea rows="2" cols="120" id="shortRemark" name="shortRemark"
 									class="easyui-validatebox textbox"></textarea>
 							</td>
 						</tr>
@@ -1055,22 +1055,30 @@ $("#submitBtn").click(function()
 	var stageOrder =  $("#stageOrder").val();
 	var feeType = $("#feeType").combobox("getValue");
 	
-		for(var i=0;i<oldCourses.length;i++)
+	var count=0;
+	for(var i=0;i<oldCourses.length;i++)
+	{
+		var course = oldCourses[i];
+		var order = course.stageOrder;
+		var courseState=course.courseState;
+		var stageName =course.stageId;
+		if(courseState=='001' || courseState=='002' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 		{
-			var course = oldCourses[i];
-			var order = course.stageOrder;
-			var courseState=course.courseState;
-			var stageName =course.stageId;
-			if(courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
+			if(feeType=='001')//新够买阶段业绩类型为新招，学员还有未结束课程再次购买业绩类型不能为新招。
 			{
-				if(feeType=='001')//新招
+			 	showMessage("提示","该学员有未结束课程,当前所报阶段"+stageId+"不可选择新招业绩类型,请重新选择业绩类型",null);
+				return;
+				 
+			}else if(feeType=='002'|| feeType=='003')
+			{
+				if(courseState=='001' || courseState=='002')
 				{
 					if(Number(stageOrder)<=Number(order))
 					{
-						showMessage("提示","当前所报新招阶段"+stageId+"低于或同于在读阶段"+stageName+",请重新选择阶段",null);
+						showMessage("提示","当前所报复读或升学阶段"+stageId+"低于或等于未开课阶段"+stageName+",请重新选择阶段",null);
 						return;
 					}
-				}else if(feeType=='002'|| feeType=='003')
+				}else if(courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 				{
 					if(Number(stageOrder)<Number(order))
 					{
@@ -1080,6 +1088,7 @@ $("#submitBtn").click(function()
 				}
 			}
 		}
+	}
 	addCourseInfo();
 });
 

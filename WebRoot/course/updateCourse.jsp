@@ -108,6 +108,7 @@
     	    <input id="oldClassType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>"/>
     	    <input id="oldStageId"   type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>"/>
     	    <input id="oldCourseType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"courseType")%>"/>
+    	    <input id="oldFeeType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"feeType")%>"/>
     	    <input type="hidden" id="oldMinusAmount" name="oldMinusAmount" value="<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>" />	
 			<input type="hidden" id="paySchoolId" name="paySchoolId" value="<%=schoolId%>" />	
 			<input type="hidden" id="studentId" name="studentId" value="<%=studentId%>">
@@ -1032,28 +1033,53 @@ $("#submitBtn").click(function()
 	var stageId = $("#stageId").combobox("getValue");
 	var stageOrder =  $("#stageOrder").val();
 	var feeType = $("#feeType").combobox("getValue");
-	
-	for(var i=0;i<oldCourses.length;i++)
+	var studentCourseId=$("#studentCourseId").val();
+	var oldStageId = $("#oldStageId").combobox("getValue");
+	var oldFeeType = $("#oldFeeType").combobox("getValue");
+	if(oldStageId!=stageId || oldFeeType!=feeType)//阶段、业绩类型未修改不做校验
 	{
-		var course = oldCourses[i];
-		var order = course.stageOrder;
-		var courseState=course.courseState;
-		var stageName =course.stageId;
-		if(courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
+		for(var i=0;i<oldCourses.length;i++)
 		{
-			if(feeType=='001')//新招
+			var course = oldCourses[i];
+			var order = course.stageOrder;
+			var courseState=course.courseState;
+			var stageName =course.stageId;
+			if(studentCourseId==course.studentCourseId)
 			{
-				if(Number(stageOrder)<=Number(order))
-				{
-					showMessage("提示","当前所报新招阶段"+stageId+"低于或同于在读阶段"+stageName+",请重新选择阶段",null);
-					return;
-				}
-			}else if(feeType=='002'|| feeType=='003')
+				continue;
+			}
+			if(courseState=='001' || courseState=='002' || courseState=='003' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 			{
-				if(Number(stageOrder)<Number(order))
+				if(feeType=='001')//新招
 				{
-					showMessage("提示","当前所报复读或升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段",null);
-					return;
+					if(courseState=='002' || courseState=='003' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
+					{
+						showMessage("提示","该学员有未结束课程,当前所报阶段"+stageId+"不可选择新招业绩类型,请重新选择业绩类型",null);
+						return;
+					}
+					if(courseState=='001')//未定班
+					{
+						if(course.feeType=='001')
+						{
+							showMessage("提示","已存在新招阶段"+stageName+",请重新选择业绩类型",null);
+							return;
+						}
+						if(Number(stageOrder)>Number(order))
+						{
+							showMessage("提示","当前所报新招阶段"+stageId+"不是最低阶段"+stageName+",请重新选择阶段",null);
+							return;
+						}
+					}
+				}else if(feeType=='002'|| feeType=='003')
+				{
+					if(courseState=='002' || courseState=='003' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
+					{
+						if(Number(stageOrder)<Number(order))
+						{
+							showMessage("提示","当前所报复读或升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段",null);
+							return;
+						}
+					}
 				}
 			}
 		}

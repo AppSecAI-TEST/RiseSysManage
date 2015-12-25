@@ -6,16 +6,26 @@ import org.springframework.beans.factory.BeanFactoryAware;
 
 public class BeanFactoryHelper implements BeanFactoryAware
 {
-	private static BeanFactory beanFactory; //BEAN¹¤³§
+	private static BeanFactory beanFactory ; 
 	
-	public void setBeanFactory(BeanFactory f) throws BeansException
+	private BeanFactoryHelper(){}
+	
+	public void setBeanFactory(BeanFactory beanFactory) throws BeansException
 	{
-		this.beanFactory = f;
+		this.beanFactory = beanFactory;
 	}
 
 	public static BeanFactory getBeanfactory()
 	{
 		return beanFactory;
 	}
-
+	
+	public static Object getBean(String serviceName)
+	{
+		if(beanFactory == null)
+		{
+			getBeanfactory();
+		}
+		return beanFactory.getBean(serviceName);
+	}
 }

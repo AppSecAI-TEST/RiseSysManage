@@ -258,6 +258,25 @@ function yearParser(s) {
 	}
 }
 
+function monthFormatter(date) {
+	var y = date.getFullYear();
+	var m = date.getMonth() + 1;
+	return y + '-' + (m < 10 ? ('0' + m) : m);
+}
+
+function monthParser(s) {
+	if (!s)
+		return new Date();
+	var ss = (s.split('-'));
+	var y = parseInt(ss[0], 10);
+	var m = parseInt(ss[1], 10);
+	if (!isNaN(y) && !isNaN(m)) {
+		return new Date(y, m - 1);
+	} else {
+		return new Date();
+	}
+}
+
 function formatTypeName(row) {
 	var s = '<span>' + row.typeName + '</span>';
 	return s;

@@ -64,11 +64,12 @@ function addTeaFeedBack(){
 		var qualityId = row.qualityId;
 		var schoolId = row.schoolId;
 		var className = row.className;
+		var month = row.month;
 		if(reflect == "是"){
 			 $.messager.alert('提示', "该教质已经反馈！");
 			   return;
 		}
-		window.location.href = "/sys/teaFeebackManage/qryClassStuByInstId.do?classInstId="+classInstId+"&qualityId="+qualityId+"&schoolId="+schoolId+"&className="+className;
+		window.location.href = "/sys/teaFeebackManage/qryClassStuByInstId.do?classInstId="+classInstId+"&qualityId="+qualityId+"&schoolId="+schoolId+"&className="+className+"&month="+month;
 	}
 }
 
@@ -79,6 +80,7 @@ function addTeaFeedbackSubmit()
 	var classInstId = $("#classInstId").val();
 	var className = $("#className").val();
 	var schoolId = $("#schoolId").val();
+	var month = $("#month").val();
 	var handlerId = $("#handlerId").val();
 	var feedback = {};
 	feedback.qualityId = qualityId;
@@ -100,6 +102,7 @@ function addTeaFeedbackSubmit()
 	   var feedbackDetail = {};
 	   feedbackDetail.classInstId = classInstId;
 	   feedbackDetail.schoolId = schoolId;
+	   feedbackDetail.month = month;
 	   feedbackDetail.studentId = studentId;
 	   feedbackDetail.studentName = studentName;
 	   feedbackDetail.byname = byname;
