@@ -82,39 +82,8 @@ $(document).ready(function() {
 		}
 	});
 	
-	$("#qryApproveBtn").click(function() {
-    	var obj = JSON.stringify($("#qryApproveFm").serializeObject());
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-    	$('#approve_list_data').datagrid({
-    		url : "/sys/pubData/qryDataListByPage.do",
-    		queryParams:{
-    			param : obj
-    		},
-    		onLoadSuccess:function(){
-    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
-    			$('#approve_list_data').datagrid('clearSelections');
-    		}
-    	});
-    });
-	
-	$("#qryBtn").click(function() {
-    	var obj = JSON.stringify($("#qryFm").serializeObject());
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-    	$('#list_data').datagrid({
-    		url : "/sys/pubData/qryDataListByPage.do",
-    		queryParams:{
-    			param : obj
-    		},
-    		onLoadSuccess:function(){
-    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
-    			$('#list_data').datagrid('clearSelections');
-    		}
-    	});
-    });
+	initQryButton("qryBtn", "reset", "qryFm", "list_data");
+	initQryButton("qryApproveBtn", "resetApprove", "qryApproveFm", "approve_list_data");
 	
 	//放班申请
 	$("#applyClass").click(function() {
@@ -157,7 +126,8 @@ $(document).ready(function() {
 			var classState = row.classState;
 			if(classState == "001" || classState == "002") {
 				var classInstId = row.classInstId;
-				window.location.href = "/sys/applyClass/qryCreateClass.do?classInstId="+classInstId+"&type=update&applyType=001&classState="+classState;
+				var funcNodeId = $("#funcNodeId").val();
+				window.location.href = "/sys/applyClass/qryCreateClass.do?classInstId="+classInstId+"&type=update&applyType=001&classState="+classState+"&funcNodeId="+funcNodeId;
 			} else {
 				var classStateText = row.classStateText;
 				$.messager.alert('提示', "您选择的班级为"+classStateText+"，不能维护该班级！");

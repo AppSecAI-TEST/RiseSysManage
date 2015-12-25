@@ -52,6 +52,8 @@ $(document).ready(function() {
     	});
     });
 	
+	initQryButton("qryBtn", "reset", "qryFm", "list_data");
+	
 	var staffId = $("#staffId").val();
 	var funcNodeId = $("#funcNodeId").val();
 	$("#schoolId").combobox({

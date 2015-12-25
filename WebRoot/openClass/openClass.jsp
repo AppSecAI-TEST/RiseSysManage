@@ -21,8 +21,8 @@
 			  				<td width="114px">
 								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
 									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-					      			onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
-					      			url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
+					      			onLoadSuccess:function(data){$('#schoolId').combobox('setValue',''); $('#schoolId').combobox('setText','全部校区');}"
+					      			url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
 				        		</select>
 							</td>
 							<td align="right"><span>课程阶段：</span></td>
@@ -103,8 +103,8 @@
 			  				<td width="114px">
 								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
 									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-									onLoadSuccess:function(data){$('#approveSchoolId').combobox('setValue',data[0].schoolId);}"
-					      			url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
+									onLoadSuccess:function(data){$('#approveSchoolId').combobox('setValue',''); $('#schoolId').combobox('setText','全部校区');}"
+					      			url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
 				        		</select>
 							</td>
 							<td align="right"><span>开班申请日期：</span></td>

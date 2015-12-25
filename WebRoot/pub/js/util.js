@@ -700,6 +700,14 @@ function initQryButton(qryName,resetName,formName,tableName)
 	 
     $("#"+resetName+"").click(function() {
     	$("#"+formName+"").form('clear');//清空窗体数据  
+    	if($("#schoolId").length > 0) {
+    		$("#schoolId").combobox("setValue", "");
+    		$("#schoolId").combobox("setText", "全部校区");
+    	}
+    	if($("#approveSchoolId").length > 0) {
+    		$("#approveSchoolId").combobox("setValue", "");
+    		$("#approveSchoolId").combobox("setText", "全部校区");
+    	}
     });
 }
 
