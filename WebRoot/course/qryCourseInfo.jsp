@@ -156,7 +156,6 @@
 							<th field="className" align="center" width="6%">当前班级</th>
 							<th field="womTypeText" align="center" width="6%">口碑类型</th>
 							<th field="phone" align="center" width="10%">联系电话</th>
-							<th field="remark" align="center" width="15%">备注</th>
 						</tr>
 					</thead>
 				</table>
