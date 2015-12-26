@@ -65,6 +65,39 @@ $(document).ready(function() {
     	}
 	});
 	
+	$("#courseType").combobox({
+		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE",//返回json数据的url
+    	valueField : "codeFlag",
+    	textField : "codeName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.codeName + "</span>";
+    	},
+    	onChange : function(n, o) {
+    		if("001" == n) {
+    			$("#courseTypeDetail").combobox({
+    				url : "/sys/pubData/qryStage.do",//返回json数据的url
+    		    	valueField : "stageId",
+    		    	textField : "stageId",
+    		    	panelHeight : "auto",
+    		    	formatter : function(data) {
+    		    		return "<span>" + data.stageId + "</span>";
+    		    	}
+    			});
+    		} else {
+    			$("#courseTypeDetail").combobox({
+    				url : "/sys/pubData/qryShortClass.do",//返回json数据的url
+    		    	valueField : "shortClassId",
+    		    	textField : "className",
+    		    	panelHeight : "auto",
+    		    	formatter : function(data) {
+    		    		return "<span>" + data.className + "</span>";
+    		    	}
+    			});
+    		}
+    	}
+	});
+	
 	$("#womType").combobox({
 		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_WOM_T&codeType=WOM_TYPE",//返回json数据的url
     	valueField : "codeFlag",
