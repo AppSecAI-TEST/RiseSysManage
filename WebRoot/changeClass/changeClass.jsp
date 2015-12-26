@@ -50,7 +50,7 @@
 		  				<tr>
 		  					<td align="right"><span>转出班老师：</span></td>
 							<td width="100px">
-								<select id="outTeacherId" name="outTeacherId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled">
+								<select id="outTeacherId" name="outTeacherId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 							</td>
 		  					<td align="right"><span>业绩类型：</span></td>
