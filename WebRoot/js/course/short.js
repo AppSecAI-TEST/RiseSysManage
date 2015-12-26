@@ -93,6 +93,8 @@ function loadShortFavor()
 	var payDate=$("#payDate").datebox('getValue');
 	var schoolId=$("#schoolId").val();
 	var shortClassId = $("#shortClassId").combobox('getValue');
+	var favors=$("#favorType").val();
+	var favorIds=favors.split(",");
 	var url = "/sys/pubData/qryData.do?param={queryCode:\"Qry_short_favor\",time:\""+ payDate + "\",schoolId:\""+ schoolId + "\",shortClassId:\""+ shortClassId + "\"}";
 	$.ajax(
 	{
@@ -113,7 +115,23 @@ function loadShortFavor()
     			 var name =favor.favorName;
     			 var price=favor.favorPrice;
     			 var id=favor.favorId;
-    			 html+="<input type='checkbox' onclick=minusFavor("+id+") id="+id+" price='"+price+"'/><span>"+name+"("+price+"元)</span>&nbsp&nbsp"; 
+    			 var flag=false;
+    			 for(var n=0;n<favorIds.length;n++)
+    			 {
+    				 if(favorIds[n]==id)
+    				 {
+    					 flag=true;
+    					 break;
+    				 }
+    			 }
+    			 if(flag)
+    			 {
+    				  html+="<input type='checkbox' onclick=minusFavor("+id+") id="+id+" checked price='"+price+"'/><span>"+name+"("+price+"元)</span>&nbsp&nbsp"; 
+    			 }else
+    			 {
+    				  html+="<input type='checkbox' onclick=minusFavor("+id+") id="+id+" price='"+price+"'/><span>"+name+"("+price+"元)</span>&nbsp&nbsp"; 
+    			 }
+    			
     		 }
     		 $("#favors").html(html);
     	}
@@ -135,12 +153,24 @@ function minusFavor(id)
 	var  minus = $("#minusAmount").textbox('getValue');
 	if(obj.is(':checked'))
 	{
+		favorIds+=id+",";
 		favorAmount=Number(favorAmount)+Number(price);
 		amount=Number(totalAmount)-favorAmount-Number(minus);
 	}else
 	{
 		favorAmount=Number(favorAmount)-Number(price);
 		amount=Number(totalAmount)-Number(favorAmount)-Number(minus);
+		var ids=favorIds.split(",");
+		var idsT="";
+		for(var i=0;i<ids.length;i++)
+		{
+			var idT=ids[i];
+			if(idT!=id && idT!='')
+			{
+				idsT+=idT+",";			
+			}
+		}
+		favorIds=idsT;
 	}
 	$("#amount").textbox('setValue', amount);
 	$("#favorAmount").textbox('setValue', favorAmount);

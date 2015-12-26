@@ -108,7 +108,7 @@
 							<input id="courseState" name="courseState" type="hidden" value="001" />
 							<input id="feeState" name="feeState" type="hidden" value="00A" />
 							<input id="stageOrder" name="stageOrder" type="hidden" value="" />
-							
+							 <input id="favorType"  type="hidden" value=""/>
 							<td align="right">
 								<span>阶段：</span>
 							</td>
@@ -726,6 +726,7 @@ var minus = 0;//抵扣金额
 var favorAmount = 0;//优惠金额
 var totalAmount = 0;//课程金额
 var amount = 0;//实缴金额
+var favorIds="";//短期课其他优惠
 
 initPayDate();
 var schools=getSchools();
@@ -1428,6 +1429,7 @@ $("#addCourse").click(function()
 		studentCourse.gifts=gifts;
 		var obj = $("#courseFm").serializeObject();
 		obj.payDate=$("#payDate").datebox("getValue");
+		obj.favorType=favorIds;
 		studentCourse.course=obj;
 		studentCourse.coupon=JSON.stringify(coupons);
 		return studentCourse;

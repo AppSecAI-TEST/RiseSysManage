@@ -108,7 +108,8 @@
 			<input id="studentCourseId" name="studentCourseId" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"studentCourseId")%>"/>
     	    <input id="oldClassType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>"/>
     	    <input id="oldStageId"   type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>"/>
-    	     <input id="oldCourseType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"courseType")%>"/>
+    	    <input id="oldCourseType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"courseType")%>"/>
+    	     <input id="favorType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"favorType")%>"/>
     	    <input type="hidden" id="oldMinusAmount" name="oldMinusAmount" value="<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>" />	
 			<input type="hidden" id="paySchoolId" name="paySchoolId" value="<%=schoolId%>" />	
 			<input type="hidden" id="studentId" name="studentId" value="<%=studentId%>">
@@ -274,6 +275,7 @@ var amount = 0;//实缴金额
 var oldMinusAmount='<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>';
 
 var giftFlag=false;//赠品、赠课是否已消耗
+var favorIds="";//短期课其他优惠
 initPayDate();
 loadStuBaseInfo();
 initOldCourse();
@@ -351,6 +353,7 @@ $("#backBtn").click(function()
 		var gifts=[];
 		var obj = $("#courseFm").serializeObject();
 		obj.payDate=$("#payDate").datebox("getValue");
+		obj.favorType=favorIds;
 		studentCourse.course=obj;
 		studentCourse.gifts=gifts; 
 		studentCourse.coupon=JSON.stringify(coupons);
