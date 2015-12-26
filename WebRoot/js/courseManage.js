@@ -1,25 +1,10 @@
 $(document).ready(function() {
-	$("#qryBtn").click(function() {
-    	var obj = JSON.stringify($("#qryFm").serializeObject());
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-    	$('#list_data').datagrid({
-    		url : "/sys/pubData/qryDataListByPage.do",
-    		queryParams:{
-    			param : obj
-    		},
-    		onLoadSuccess:function(){
-    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
-    			$('#list_data').datagrid('clearSelections');
-    		}
-    	});
-    });
+	initQryButton("qryBtn", "reset", "qryFm", "list_data");
 	
 	var staffId = $("#staffId").val();
 	var funcNodeId = $("#funcNodeId").val();
 	$("#schoolId").combobox({
-		url : "/sys/pub/pageCategory.do?staffId="+staffId+"&funcNodeId="+funcNodeId+"&fieldId=schoolId",//返回json数据的url
+		url : "/sys/pubData/qrySchoolList.do?schoolId=",//返回json数据的url
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
@@ -44,6 +29,39 @@ $(document).ready(function() {
     		} else {
 				$("#schoolId").combobox("setText", "全部校区");
 			}
+    	}
+	});
+	
+	$("#courseType").combobox({
+		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE",//返回json数据的url
+    	valueField : "codeFlag",
+    	textField : "codeName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.codeName + "</span>";
+    	},
+    	onChange : function(n, o) {
+    		if("001" == n) {
+    			$("#courseTypeDetail").combobox({
+    				url : "/sys/pubData/qryStage.do",//返回json数据的url
+    		    	valueField : "stageId",
+    		    	textField : "stageId",
+    		    	panelHeight : "auto",
+    		    	formatter : function(data) {
+    		    		return "<span>" + data.stageId + "</span>";
+    		    	}
+    			});
+    		} else {
+    			$("#courseTypeDetail").combobox({
+    				url : "/sys/pubData/qryShortClass.do",//返回json数据的url
+    		    	valueField : "shortClassId",
+    		    	textField : "className",
+    		    	panelHeight : "auto",
+    		    	formatter : function(data) {
+    		    		return "<span>" + data.className + "</span>";
+    		    	}
+    			});
+    		}
     	}
 	});
 	

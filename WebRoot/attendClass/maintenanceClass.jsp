@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <%
 	String path = request.getContextPath();
 %>
@@ -87,17 +88,24 @@
 		  									<td align="center" width='14%'><span>${schooltime.schooltimeName }</span></td>
 		  									<td align="center" width='4%'><span>${schooltime.roomName }</span></td>
 		  									<td align="center" width='4%'><span>${schooltime.lessionHours }</span></td>
-		  									<td width='64%' lessions='${schooltime.lessionHours }'>
-		  										<c:forEach items="${schooltime.classTeacherList }" var="classTeacher">
-		  											<span id="teacher${classTeacher.teacherId }${schooltime.weekTime }${schooltime.hourRange }">
-		  												${classTeacher.schoolName }&nbsp;${classTeacher.byname }&nbsp;${classTeacher.hours }&nbsp;${classTeacher.isLicense }&nbsp;
-		  												<a href='javascript:void(0)' class='linkmore' onclick="deleteTeacher(this, ${classTeacher.teacherId })"><span>删除</span></a>
-		  												<input type='hidden' name='teachers' teacherId='${classTeacher.teacherId }' weekTime='${schooltime.weekTime }' 
-		  													hourRange='${schooltime.hourRange }' lessions='${classTeacher.hours }' classTeacherId='${classTeacher.classTeacherId }'
-		  													schoolName='${classTeacher.schoolName }' byname='${classTeacher.byname }' isLicense='${classTeacher.isLicense }'/>&nbsp;
-		  											</span>
-		  										</c:forEach>
-		  									</td>
+		  									<c:choose>
+			  									<c:when test="${fn:length(schooltime.classTeacherList) > 0 }">
+			  										<td width='64%' lessions='${schooltime.lessionHours }'>
+				  										<c:forEach items="${schooltime.classTeacherList }" var="classTeacher">
+				  											<span id="teacher${classTeacher.teacherId }${schooltime.weekTime }${schooltime.hourRange }">
+				  												${classTeacher.schoolName }&nbsp;${classTeacher.byname }&nbsp;${classTeacher.hours }&nbsp;${classTeacher.isLicense }&nbsp;
+				  												<a href='javascript:void(0)' class='linkmore' onclick="deleteTeacher(this, ${classTeacher.teacherId })"><span>删除</span></a>
+				  												<input type='hidden' name='teachers' teacherId='${classTeacher.teacherId }' weekTime='${schooltime.weekTime }' 
+				  													hourRange='${schooltime.hourRange }' lessions='${classTeacher.hours }' classTeacherId='${classTeacher.classTeacherId }'
+				  													schoolName='${classTeacher.schoolName }' byname='${classTeacher.byname }' isLicense='${classTeacher.isLicense }'/>&nbsp;
+				  											</span>
+				  										</c:forEach>
+				  									</td>
+			  									</c:when>
+		  										<c:otherwise>
+		  											<td width='64%' lessions='0'></td>
+		  										</c:otherwise>
+		  									</c:choose>
 		  									<td align="center" width='10%'>
 		  										<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px; height: 28px;" onclick="addTeacher(this)">添加老师</a>
 		  									</td>

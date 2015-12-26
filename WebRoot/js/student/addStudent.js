@@ -3,6 +3,9 @@ var contactTd = 1;
 var isExists = false;
 var validateFlag = false;
 $(document).ready(function() {
+	var currDate = new Date();
+	$('#entranceDate').datebox('setValue', myformatter(currDate));
+	
 	//招生顾问A的学校发生变化时执行的操作
     $('#advisterASchoolId').combobox({
     	url : "/sys/pubData/qrySchoolList.do?schoolId=",//返回json数据的url

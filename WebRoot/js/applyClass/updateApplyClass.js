@@ -3,11 +3,18 @@ var selTr = null;
 var classTeacherId = "";
 $(document).ready(function() {	
 	$("#selectClass").click(function() {
-		var classType = $("#classType").html();
-		var schoolId = $("#schoolId").val();
 		var className = $("#className").html();
-		var classInstId = $("#classInstId").val();
-		window.location.href = "/sys/applyClass/studentCourseList.jsp?classType="+classType+"&schoolId="+schoolId+"&className="+className+"&classInstId="+classInstId;
+		var classState = $("#classState").val();
+		if("002" == classState) {
+			$.messager.alert('提示', className + "为待开课班级，不允许选班！");
+		} else {
+			var stageId = $("#stageId").html();
+			var classType = $("#classType").html();
+			var schoolId = $("#schoolId").val();
+			var classInstId = $("#classInstId").val();
+			var funcNodeId = $("#funcNodeId").val();
+			window.location.href = "/sys/applyClass/studentCourseList.jsp?stageId="+stageId+"&classType="+classType+"&schoolId="+schoolId+"&className="+className+"&classInstId="+classInstId+"&funcNodeId="+funcNodeId;
+		}
 	});
 	
 	$("#removeStudent").click(function() {
@@ -183,19 +190,19 @@ $(document).ready(function() {
 	//点击提交老师
 	$("#addTeacherSubmit").click(function() {
 		if($("#addTeacherFm").form('validate')) {
-			var lessionHours = null;
-			var addLessions = null;
+			var lessionHours = 0;
+			var addLessions = 0;
 			var weekTime = null;
 			var hourRange = null;
 			selTr.find("td").each(function(i, node) {
 				if(i == 0) {
-					lessionHours = $(node).attr("lessionHours");
+					lessionHours = parseInt($(node).attr("lessionHours"));
 					weekTime = $(node).attr("weekTime");
 					hourRange = $(node).attr("hourRange");
 				} else if(i == 4) {
-					addLessions = $(node).attr("lessions");
-					if(addLessions == null || addLessions == "" || addLessions == undefined) {
-						addLessions = 0;
+					var lessions = $(node).attr("lessions");
+					if(lessions != null && lessions != "" && lessions != undefined) {
+						addLessions = parseInt(lessions);
 					}
 				}
 			});
@@ -212,7 +219,7 @@ $(document).ready(function() {
 				});
 			}
 			if(flag) {
-				var subLessions = parseInt(lessionHours) - parseInt(addLessions);
+				var subLessions = lessionHours - addLessions;
 				var lessions = $("#lessions").numberbox("getValue");
 				if(parseInt(lessions) > subLessions) {
 					flag = false;

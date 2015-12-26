@@ -31,10 +31,10 @@
 					<td width="10%" align="left">
 						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 114px; height: 25px;"
 							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'" 
-		      				url="<%=path %>/pubData/qryTeacherList.do">
+		      				url="<%=path %>/pubData/qryData.do?param={'queryCode':'qryClassTeacherInfo'}">
 				        </select>
 					</td>
-					<td width="10%" align="right"><span>月份：</span></td>
+					<td width="10%" align="right"><span>教质月份：</span></td>
 					<td align="left" width="10%">
 						<input class="easyui-datebox" type="text" style="width:120px" id="time" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 					</td>

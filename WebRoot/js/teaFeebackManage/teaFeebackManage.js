@@ -107,6 +107,9 @@ function addTeaFeedbackSubmit()
 	   feedbackDetail.studentName = studentName;
 	   feedbackDetail.byname = byname;
 	   feedbackDetail.courseType = courseState;
+	   if(teachingNum == "" || teachingNum == undefined){
+		   teachingNum = "0";
+	   }
 	   feedbackDetail.teachingNum = teachingNum;
 	   feedbackDetail.meetingIsAttend = meetingIsAttend;
 	   if(meetingIsAttend == "Y"){

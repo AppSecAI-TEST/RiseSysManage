@@ -700,6 +700,14 @@ function initQryButton(qryName,resetName,formName,tableName)
 	 
     $("#"+resetName+"").click(function() {
     	$("#"+formName+"").form('clear');//清空窗体数据  
+    	if($("#schoolId").length > 0) {
+    		$("#schoolId").combobox("setValue", "");
+    		$("#schoolId").combobox("setText", "全部校区");
+    	}
+    	if($("#approveSchoolId").length > 0) {
+    		$("#approveSchoolId").combobox("setValue", "");
+    		$("#approveSchoolId").combobox("setText", "全部校区");
+    	}
     });
 }
 
@@ -731,4 +739,29 @@ function initYearAndMonth(yearName,monthName) {
 		$("#"+monthName).combobox("loadData", data2);
 	}
 	
+}
+
+
+function exportLink(btName,tableName)
+{
+	$("#"+btName).click(function(){
+		if($("#"+tableName).datagrid("getData").total>0)
+		{
+			var fileName =parent.$("li.tabs-selected").find("span.tabs-title").html();
+			try
+			{
+				window.location.href="/sys/export/normalExport.do?fileName="+fileName+"&param="+JSON.stringify($("#"+tableName).datagrid("options").queryParams.param);
+			}
+			catch(e)
+			{
+				$.messager.alert('提示', "模版不存在！",function(){
+					window.history.back();
+				});
+			}
+		}
+		else
+		{
+			$.messager.alert('提示', "没有数据可以导出！");
+		}	
+	})
 }

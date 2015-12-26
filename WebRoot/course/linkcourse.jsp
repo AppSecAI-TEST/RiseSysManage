@@ -43,7 +43,8 @@
 	      	      <tr>
 						<input id="studentCourseId" name="studentCourseId" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object, "studentCourseId")%>" />
 						<input id="oldClassType" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object, "classType")%>" />
-						<input id="oldStageId" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object, "stageId")%>" />
+						<input id="oldStageId" name="oldStageId"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object, "stageId")%>" />
+						<input id="oldFeeType" name="oldFeeType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object, "feeType")%>" />
 						<input id="studentId" name="studentId" type="hidden" value="<%=studentId%>" />
 						<input id="courseType" name="courseType" type="hidden" value="001" />
 						<input id="advisterType" name="adviserType" type="hidden" value="teacher" />

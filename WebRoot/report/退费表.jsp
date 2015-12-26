@@ -45,7 +45,7 @@
 						</tr>
 						<tr>
 							<th field="schoolName" align="center" width="5%">校区</th>
-							<th field="schoolName" align="center" width="5%">学员姓名</th>
+							<th field="name" align="center" width="7%">学员姓名</th>
 							<th field="phone" align="center" width="10%">家长电话</th>
 							<th field="payDate" align="center" width="7%">报名日期</th>
 							<th field="stageId" align="center" width="5%">报名阶段</th>
@@ -55,7 +55,7 @@
 							<th field="adviserTeacherName" align="center" width="10%">老师</th>
 							<th field="refundType" align="center" width="5%">退费类别</th>
 							<th field="stageId" align="center" width="5%">退费阶段</th>
-							<th field="stageId" align="center" width="10%">退费原因</th>
+							<th field="refundReason" align="center" width="20%">退费原因</th>
 							<th field="applyDate" align="center" width="8%">退费申请日期</th>
 							<th field="financialConfirmFee" align="center" width="8%">核定退费金额</th>
 						</tr>
@@ -95,6 +95,7 @@ $(document).ready(function(){
             }
     	});
  		initQryButton("qryBtn","reset","qryFm","list_data");
+ 		exportLink("export","list_data");
 	})
 function myformatter(date){
             var y = date.getFullYear();

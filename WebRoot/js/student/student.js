@@ -26,7 +26,7 @@ $(document).ready(function() {
     if(funcNodeId != null && funcNodeId != "" && funcNodeId != undefined) {
     	var staffId = $("#staffId").val();
     	$("#schoolId").combobox({
-    		url : "/sys/pub/pageCategory.do?staffId="+staffId+"&funcNodeId="+funcNodeId+"&fieldId=schoolId",//返回json数据的url
+    		url : "/sys/pubData/qrySchoolList.do?schoolId=",//返回json数据的url
     		valueField : "schoolId",
     		textField : "schoolName",
     		panelHeight : "auto",
@@ -62,6 +62,7 @@ $(document).ready(function() {
     				});
     				var classInstId = $("#classInstId").combobox("getValue");
     				if(classInstId == null || classInstId == "" || classInstId == undefined) {
+    					alert(funcNodeId)
     					$("#studentId").combobox({
     						url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId="+funcNodeId+"&fieldId=studentId",
     						valueField : "studentId",

@@ -1,9 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
+	String stageId = request.getParameter("stageId");
 	String classType = request.getParameter("classType");
 	String schoolId = request.getParameter("schoolId");
 	String className = request.getParameter("className");
+	String funcNodeId = request.getParameter("funcNodeId");
 	String classInstId = request.getParameter("classInstId");
 %>
 
@@ -12,11 +14,12 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/js/applyClass/updateApplyClass.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/applyClass/studentCourseList.js"></script>
   	</head>
   
   	<body style="padding-top:5px">
   		<form id="qryFm" style="margin:0 auto;">
+  			<input type="hidden" id="stageId" name="stageId" value="<%=stageId %>"/>
   			<input type="hidden" id="classType" name="classType" value="<%=classType %>"/>
   			<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId %>"/>
   			<input type="hidden" id="className" name="className" value="<%=className %>"/>
@@ -26,12 +29,16 @@
   				<tr>
   					<td align="right"><span>班级：</span></td>
   					<td width="114px">
-  						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false">
+  						<select id="oldClassInstId" name="oldClassInstId" class="easyui-combobox" style="width: 114px; height: 25px;"
+  							data-options="formatter:function(row) {return '<span>' + row.className + '</span>';}, valueField: 'classInstId', textField: 'className', panelHeight: 'auto'"
+  							url="<%=path %>/pubData/qryClassInstList.do?schoolId=<%=schoolId %>&courseType=001&stageId=&classType=&classState='001','002','003','004'&classInstId=">
 		        		</select>
   					</td>
   					<td align="right"><span>学员姓名：</span></td>
   					<td width="114px">
-  						<select id="studentId" name="studentId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false">
+  						<select id="studentId" name="studentId" class="easyui-combobox" style="width: 114px; height: 25px;"
+  							data-options="formatter:function(row) {return '<span>' + row.name + '</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"
+  							url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=<%=schoolId %>&funcNodeId=20&fieldId=studentId">
 		        		</select>
   					</td>
   					<td align="right"><span>联系电话：</span></td>
@@ -46,12 +53,16 @@
   				<tr>
   					<td align="right"><span>业绩顾问：</span></td>
   					<td width="114px">
-  						<select id="adviser" name="adviser" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false">
+  						<select id="adviser" name="adviser" class="easyui-combobox" style="width: 114px; height: 25px;"
+  							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
+     						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
 		        		</select>
   					</td>
   					<td align="right"><span>业绩老师：</span></td>
   					<td width="114px">
-  						<select id="adviserTeacher" name="adviserTeacher" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false">
+  						<select id="adviserTeacher" name="adviserTeacher" class="easyui-combobox" style="width: 114px; height: 25px;"
+  							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+      						url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}&classType=">
 		        		</select>
   					</td>
   					<td align="right"><span>缴费日期：</span></td>

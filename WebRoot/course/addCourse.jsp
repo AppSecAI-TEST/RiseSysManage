@@ -108,7 +108,7 @@
 							<input id="courseState" name="courseState" type="hidden" value="001" />
 							<input id="feeState" name="feeState" type="hidden" value="00A" />
 							<input id="stageOrder" name="stageOrder" type="hidden" value="" />
-							
+							 <input id="favorType"  type="hidden" value=""/>
 							<td align="right">
 								<span>阶段：</span>
 							</td>
@@ -624,7 +624,7 @@
 								<span>备注：</span>
 							</td>
 							<td colspan="6">
-								<textarea rows="2" cols="120" id="remark" name="remark"
+								<textarea rows="2" cols="120" id="shortRemark" name="shortRemark"
 									class="easyui-validatebox textbox"></textarea>
 							</td>
 						</tr>
@@ -726,6 +726,7 @@ var minus = 0;//抵扣金额
 var favorAmount = 0;//优惠金额
 var totalAmount = 0;//课程金额
 var amount = 0;//实缴金额
+var favorIds="";//短期课其他优惠
 
 initPayDate();
 var schools=getSchools();
@@ -1064,20 +1065,25 @@ $("#submitBtn").click(function()
 		var stageName =course.stageId;
 		if(courseState=='001' || courseState=='002' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 		{
-			if(feeType=='001')//新招
+			if(feeType=='001')//新够买阶段业绩类型为新招，学员还有未结束课程再次购买业绩类型不能为新招。
 			{
-				if(Number(stageOrder)<=Number(order))
-				{
-					showMessage("提示","当前学员阶段"+stageId+"未结束,请重新选择其它业绩类型",null);
-					return;
-				}
+			 	showMessage("提示","该学员有未结束课程,当前所报阶段"+stageId+"不可选择新招业绩类型,请重新选择业绩类型",null);
+				return;
+				 
 			}else if(feeType=='002'|| feeType=='003')
 			{
 				if(courseState=='001' || courseState=='002')
 				{
 					if(Number(stageOrder)<=Number(order))
 					{
-						showMessage("提示","当前所报复读或升学阶段"+stageId+"低于或等于已有阶段"+stageName+",请重新选择阶段",null);
+						showMessage("提示","当前所报复读或升学阶段"+stageId+"低于或等于未开课阶段"+stageName+",请重新选择阶段",null);
+						return;
+					}
+				}else if(courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
+				{
+					if(Number(stageOrder)<Number(order))
+					{
+						showMessage("提示","当前所报复读或升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段",null);
 						return;
 					}
 				}
@@ -1423,6 +1429,7 @@ $("#addCourse").click(function()
 		studentCourse.gifts=gifts;
 		var obj = $("#courseFm").serializeObject();
 		obj.payDate=$("#payDate").datebox("getValue");
+		obj.favorType=favorIds;
 		studentCourse.course=obj;
 		studentCourse.coupon=JSON.stringify(coupons);
 		return studentCourse;

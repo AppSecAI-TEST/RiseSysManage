@@ -63,7 +63,7 @@
 				</table>
 			</div>
 			<div id="toolbar" style="padding: 2px; height: auto">
-	   			<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
+	   			<a href="javascript:void(0)" id="export"  class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
 			</div>
   		</div>
   		<div id="dlg" class="easyui-dialog" style="width: 900px; height: auto;" closed="true" data-options="modal:true">
@@ -86,3 +86,6 @@
 		</div>
   	</body>
 </html>
+<script>
+	exportLink("export","list_data");
+</script>

@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <%
 	String path = request.getContextPath();
 %>
@@ -16,6 +17,7 @@
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="放班信息">
   			<form id="updateApplyClassFm">
   				<input type="hidden" id="classState" value="${obj.classState }"/>
+  				<input type="hidden" id="funcNodeId" value="${obj.funcNodeId }"/>
   				<input type="hidden" id="applyId" name="applyId" value="${obj.createClassObj.applyId }"/>
   				<input type="hidden" id="classInstId" name="classInstId" value="${obj.createClassObj.classInstId }"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
@@ -57,15 +59,22 @@
 		  									<td align="center" width='14%'><span>${schooltime.schooltimeName }</span></td>
 		  									<td align="center" width='4%'><span>${schooltime.roomName }</span></td>
 		  									<td align="center" width='4%'><span>${schooltime.lessionHours }</span></td>
-		  									<td width='64%' lessions='${schooltime.lessionHours }'>
-		  										<c:forEach items="${schooltime.classTeacherList }" var="classTeacher">
-		  											<span id="teacher${classTeacher.teacherId }${schooltime.weekTime }${schooltime.hourRange }">
-		  												${classTeacher.schoolName }&nbsp;${classTeacher.byname }&nbsp;${classTeacher.hours }&nbsp;${classTeacher.isLicense }&nbsp;
-		  												<a href='javascript:void(0)' class='linkmore' onclick="deleteTeacher(this, ${classTeacher.teacherId })"><span>删除</span></a>
-		  												<input type='hidden' name='teachers' teacherId='${classTeacher.teacherId }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }' lessions='${classTeacher.hours }' classTeacherId='${classTeacher.classTeacherId }'/>&nbsp;
-		  											</span>
-		  										</c:forEach>
-		  									</td>
+		  									<c:choose>
+			  									<c:when test="${fn:length(schooltime.classTeacherList) > 0 }">
+			  										<td width='64%' lessions='${schooltime.lessionHours }'>
+				  										<c:forEach items="${schooltime.classTeacherList }" var="classTeacher">
+				  											<span id="teacher${classTeacher.teacherId }${schooltime.weekTime }${schooltime.hourRange }">
+				  												${classTeacher.schoolName }&nbsp;${classTeacher.byname }&nbsp;${classTeacher.hours }&nbsp;${classTeacher.isLicense }&nbsp;
+				  												<a href='javascript:void(0)' class='linkmore' onclick="deleteTeacher(this, ${classTeacher.teacherId })"><span>删除</span></a>
+				  												<input type='hidden' name='teachers' teacherId='${classTeacher.teacherId }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }' lessions='${classTeacher.hours }' classTeacherId='${classTeacher.classTeacherId }'/>&nbsp;
+				  											</span>
+				  										</c:forEach>
+			  										</td>
+			  									</c:when>
+		  										<c:otherwise>
+		  											<td width='64%' lessions='0'></td>
+		  										</c:otherwise>
+		  									</c:choose>
 		  									<td align="center" width='10%' style="border-right: 0px;">
 		  										<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px; height: 28px;" onclick="addTeacher(this)">添加老师</a>
 		  									</td>
@@ -78,15 +87,22 @@
 		  									<td align="center" width='14%' style="border-bottom: 0px;"><span>${schooltime.schooltimeName }</span></td>
 		  									<td align="center" width='4%' style="border-bottom: 0px;"><span>${schooltime.roomName }</span></td>
 		  									<td align="center" width='4%' style="border-bottom: 0px;"><span>${schooltime.lessionHours }</span></td>
-		  									<td width='64%' lessions='${schooltime.lessionHours }' style="border-bottom: 0px;">
-		  										<c:forEach items="${schooltime.classTeacherList }" var="classTeacher">
-		  											<span id="teacher${classTeacher.teacherId }${schooltime.weekTime }${schooltime.hourRange }">
-		  												${classTeacher.schoolName }&nbsp;${classTeacher.byname }&nbsp;${classTeacher.hours }&nbsp;${classTeacher.isLicense }&nbsp;
-		  												<a href='javascript:void(0)' class='linkmore' onclick="deleteTeacher(this, ${classTeacher.teacherId })"><span>删除</span></a>
-		  												<input type='hidden' name='teachers' teacherId='${classTeacher.teacherId }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }' lessions='${classTeacher.hours }' classTeacherId='${classTeacher.classTeacherId }'/>&nbsp;
-		  											</span>
-		  										</c:forEach>
-		  									</td>
+		  									<c:choose>
+			  									<c:when test="${fn:length(schooltime.classTeacherList) > 0 }">
+			  										<td width='64%' lessions='${schooltime.lessionHours }' style="border-bottom: 0px;">
+				  										<c:forEach items="${schooltime.classTeacherList }" var="classTeacher">
+				  											<span id="teacher${classTeacher.teacherId }${schooltime.weekTime }${schooltime.hourRange }">
+				  												${classTeacher.schoolName }&nbsp;${classTeacher.byname }&nbsp;${classTeacher.hours }&nbsp;${classTeacher.isLicense }&nbsp;
+				  												<a href='javascript:void(0)' class='linkmore' onclick="deleteTeacher(this, ${classTeacher.teacherId })"><span>删除</span></a>
+				  												<input type='hidden' name='teachers' teacherId='${classTeacher.teacherId }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }' lessions='${classTeacher.hours }' classTeacherId='${classTeacher.classTeacherId }'/>&nbsp;
+				  											</span>
+				  										</c:forEach>
+				  									</td>
+			  									</c:when>
+		  										<c:otherwise>
+		  											<td width='64%' lessions='0' style="border-bottom: 0px;"></td>
+		  										</c:otherwise>
+		  									</c:choose>
 		  									<td align="center" width='10%' style="border-right: 0px; border-bottom: 0px;">
 		  										<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px; height: 28px;" onclick="addTeacher(this)">添加老师</a>
 		  									</td>
