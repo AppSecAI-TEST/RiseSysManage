@@ -157,22 +157,18 @@ $(document).ready(function() {
     
     //提交申请
     $("#refundApplySubmit").click(function() {
-    	alert(checkParam())
     	if(!checkParam()) {
     		return;
     	} else {
-    		alert($("#refundApplyFm").form('validate'))
     		if($("#refundApplyFm").form('validate')) {
     			var flag = true;
 				var fileName = $("#fileName").filebox("getValue");
-				alert(fileName)
-				if(fileName != "" && fileName != null && fileName != undefined) {
+ 				if(fileName != "" && fileName != null && fileName != undefined) {
 					var imgUrl = $("#imgUrl").val();
 					if(imgUrl == "" || imgUrl == null || imgUrl == undefined) {
-						flag = false;
+						flag = false;  
 					}
-				}
-				alert(flag)
+				} 
 				if(flag) {
 					var obj = $("#refundApplyFm").serializeObject();
 					var refundFeeObj = new Object();
