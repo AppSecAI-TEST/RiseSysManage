@@ -16,37 +16,31 @@
 		</style>
   	</head>
   	<body>
-  		<div id="tab" class="easyui-tabs" style="min-width:1100px;width:99%;height:528px;font-family:'微软雅黑';margin:0 auto;padding:0 0">
+  		<div id="tab" class="easyui-tabs" style="min-width:1150px;width:99%;height:528px;font-family:'微软雅黑';margin:0 auto;padding:0 0">
 		    <div title="班级管理">
 				<form id="manFm" style="margin:0 auto;">
 					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 						<tr>
-							<td align="right" width="8%">
+							<td align="right" width="9%">
 								校区：
 							</td>
-							<td width="12%">
+							<td width="22%">
 								<select id="schoolManId" name="schoolManId" style="width:100px" ></select>
 							</td>
-							<td align="right" width="8%">	
-								课程阶段：
+							<td align="right" width="9%">	
+								赠送课类型：
 							</td>
 							<td width="22%">
-								<select id="classManPharse" name="classManPharse" style="width:100px" ></select>
+								<select id="classType" name="classType" style="width:100px" ></select>
 							</td>
-							<td align="right" width="8%">	
-								班级：
-							</td>
-							<td colspan="2">
-								<select id="classInfo" name="classInfo" style="width:100px" ></select>
-							</td>
-						</tr>
-						<tr>
-							<td align="right">
+							<td align="right" width="9%">
 								班级状态：
 							</td>
 							<td>
 								<select id="classManState" name="classManState" style="width:100px" ></select>
 							</td>
+						</tr>
+						<tr>
 							<td align="right">
 								放班申请日期：
 							</td>
@@ -59,7 +53,7 @@
 							<td>
 								<input name="verifyStartManTime" id="verifyStartManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="verifyEndManTime" id="verifyEndManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 							</td>
-							<td align="center">
+							<td align="center" colspan="2">
 								<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
 								<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
 							</td>
@@ -71,25 +65,26 @@
 						<thead>
 							<tr>
 								<th data-options="field:'shortClassInstId',checkbox:true"></th>
-								<th width="8%" field="schoolName">校区</th>
-								<th width="8%" field="className">热身课班级名称</th>
-								<th width="8%" field="classStateName">班级状态</th>
-								<th width="8%" field="planClassNum">计划课时量</th>
-								<th width="8%" field="classProgress">实际反馈课时量</th>
-								<th width="8%" field="personNum">计划上课人数</th>
-								<th width="8%" field="maxNum">实际上课人数</th>
-								<th width="8%" field="putClassDate">申请时间</th>
-								<th width="8%" field="putClassDate">审批时间</th>
-								<th width="8%" field="openDate">开课日期</th>
-								<th width="8%" field="finishDate">结课日期</th>
+								<th width="7.8%" field="schoolName">校区</th>
+								<th width="7.8%" field="classType">赠课类型</th>
+								<th width="7.8%" field="className">班级名称</th>
+								<th width="7.8%" field="classStateName">班级状态</th>
+								<th width="7.8%" field="planHours">计划课时</th>
+								<th width="7.8%" field="classProgress">实际反馈课时</th>
+								<th width="7.8%" field="planClassNum">计划上课人数</th>
+								<th width="7.8%" field="realClassNum">实际上课人数</th>
+								<th width="7.8%" field="personNum">定班人数</th>
+								<th width="7.8%" field="putClassDate">申请时间</th>
+								<th width="7.8%" field="approveDate">审批时间</th>
+								<th width="7.8%" field="openDate">开课日期</th>
+								<th width="7.8%" field="finishDate">结课日期</th>
 							</tr>
 						</thead>
 					</table>
 				</div>
 				<div id="toolManbar" style="padding: 2px; height: auto">
-					<a href="javascript:void(0)" id="classArrangementBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="classArrangementFunc()">放班排课</a>
-					<a href="javascript:void(0)" id="cancelClassBtn" class="easyui-linkbutton" iconCls="icon-remove" style="width:100px;" onclick="cancelClassFunc()">取消放班</a>
-					<a href="javascript:void(0)" id="manClassBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="manClassFunc()">班级维护</a>
+					<a href="javascript:void(0)" id="classArrangementBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="classArrangementFunc()">放班申请</a>
+					<a href="javascript:void(0)" id="cancelClassBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="manClassFunc()">班级维护</a>
 		   			<a href="javascript:void(0)" id="viewClassBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="viewClassFunc()">浏览</a>
 				</div>
 			</div>
@@ -100,23 +95,23 @@
 							<td align="right" width="8%">
 								校区：
 							</td>
-							<td width="12%">
+							<td width="11%">
 								<select id="schoolVerId" name="schoolVerId" style="width:100px" ></select>
 							</td>
-							<td align="right" width="8%">
+							<td align="right" width="9%">
 								班级：
 							</td>
 							<td width="22%">
 								<select id="classVerInfo" name="classVerInfo" style="width:100px" ></select>
 							</td>
-							<td align="right" width="8%">
+							<td align="right" width="9%">
 								审批状态：
 							</td>
 							<td width="22%">
 								<select id="verifyState" name="verifyState" style="width:100px" ></select>
 							</td>
 							<td>
-								<input name="myVerify" id="myVerify" type="checkbox" value="是" /><label for="feeReturnYes">查看我的审批</label>
+								<input name="myVerify" id="myVerify" type="checkbox" value="${sessionScope.StaffT.staffId}" /><label for="feeReturnYes">查看我的审批</label>
 							</td>
 						</tr>
 						<tr>
@@ -149,19 +144,17 @@
 					<table class="easyui-datagrid" title="班级申请列表" style="height:390px;" id="hisList" url="" toolbar="#toolHisbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
-								<th data-options="field:'postId',checkbox:true"></th>
-								<th width="8%" field="postName">校区</th>
-								<th width="8%" field="postTypeName">热身课名称</th>
-								<th width="8%" field="deptName">审批状态</th>
-								<th width="8%" field="schoolIdsName">计划课时量</th>
-								<th width="8%" field="createDate">实际反馈课时量</th>
-								<th width="8%" field="postName">计划上课人数</th>
-								<th width="8%" field="postTypeName">实际上课人数</th>
-								<th width="8%" field="deptName">定班人数</th>
-								<th width="8%" field="schoolIdsName">申请时间</th>
-								<th width="8%" field="createDate">审批时间</th>
-								<th width="8%" field="createDate">开课时间</th>
-								<th width="8%" field="createDate">结课时间</th>
+								<th data-options="field:'shortClassInstId',checkbox:true"></th>
+								<th width="9%" field="schoolName">校区</th>
+								<th width="10%" field="classType">课程类型</th>
+								<th width="10%" field="className">班级名称</th>
+								<th width="10%" field="verifyState">审批状态</th>
+								<th width="10%" field="planHours">计划课时量</th>
+								<th width="10%" field="planClassNum">计划上课人数</th>
+								<th width="10%" field="putClassDate">申请时间</th>
+								<th width="10%" field="approveDate">审批时间</th>
+								<th width="10%" field="openDate">开课时间</th>
+								<th width="10%" field="finishDate">结课时间</th>
 							</tr>
 						</thead>
 					</table>
@@ -181,14 +174,15 @@
 				$("#classManState").combobox("loadData",data);
 				$("#classManVerState").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID",function(data){
-				$("#classManPharse").combobox("loadData",data);
+			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("小拼暑类班"),function(data){
+				$("#classType").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
+				sessionStorage.clear();
 				$("#classInfo").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
+					formatter:formatClassInst, 
+					valueField: 'shortClassInstId', 
+					textField: 'className', 
 					panelHeight: 'auto'
 				});
 				$("#schoolManId").combobox({
@@ -203,10 +197,12 @@
 					textField: 'codeName', 
 					panelHeight: 'auto'
 				});
-				$("#classManPharse").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
+				$("#classType").combobox({
+					formatter:function(data){
+						return '<span>'+data.classType+'</span>';
+					}, 
+					valueField: 'classTypeId', 
+					textField: 'classType',
 					panelHeight: 'auto'
 				});
 				$("#classVerInfo").combobox({
@@ -225,7 +221,17 @@
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
 					textField: 'codeName', 
-					panelHeight: 'auto'
+					panelHeight: 'auto',
+					data:[{
+						codeFlag:"1",
+						codeName:"已申请"
+					},{
+						codeFlag:"2",
+						codeName:"已通过"
+					},{
+						codeFlag:"3",
+						codeName:"未通过"
+					}]
 				});
 				$("#classManVerState").combobox({
 					formatter:formatItem, 
@@ -237,8 +243,8 @@
 			function queryFunc()
 			{
 				var obj = $("#manFm").serializeObject();
-				obj["queryCode"] = "qryInterClassList";
-				obj["funcNodeId"] = "38110";
+				obj["queryCode"] = "qrySummerClassInfo";
+				obj["funcNodeId"] = "38129";
 				obj = JSON.stringify(obj);
 				$("#manList").datagrid({
 					url:"/sys/pubData/qryDataListByPage.do",
@@ -249,8 +255,7 @@
 			}
 			function resetFunc()
 			{
-				$("#classManPharse").combobox("setValue","");
-				$("#classInfo").combobox("setValue","");
+				$("#classType").combobox("setValue","");
 				$("#classManState").combobox("setValue","");
 				$("#schoolManId").combobox("setValue","");
 				$("#openStartManTime").datebox("setValue","");
@@ -260,43 +265,16 @@
 			}
 			function classArrangementFunc()
 			{
-				window.location.href = "/sys/shortBus/getAddShortClassInfo.do?funcNodeId=${param.funcNodeId}";
-			}
-			function cancelClassFunc()
-			{
-				var row = $("#manList").datagrid("getSelected");
-				if(row)
-				{
-					if(row.classStateName == "未开课" || row.classStateName == "未开课")
-					{
-						window.location.href = "/sys/shortBus/cancelShortClassInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
-					}
-					else if(row.classStateName == "开课在读")
-					{
-						$.messager.alert('提示',"该课程已经开课不能再被修改");		
-					}
-					else if(row.classStateName == "结课")
-					{
-						$.messager.alert('提示',"该课程已经结课");		
-					}
-					else if(row.classStateName == "解散")
-					{
-						$.messager.alert('提示',"该课程已被取消");		
-					}
-				}
-				else
-				{
-					$.messager.alert('提示',"请选择要取消的班级");
-				}
+				window.location.href = "/sys/shortBus/getAddShortClassInfo.do?funcNodeId=${param.funcNodeId}&pageName=addSummerClass";
 			}
 			function manClassFunc()
 			{
 				var row = $("#manList").datagrid("getSelected");
 				if(row)
 				{
-					if(row.classStateName == "未开课" || row.classStateName == "未开课")
+					if(row.classStateName == "未开课" || row.classStateName == "待开课")
 					{
-						window.location.href = "/sys/shortBus/shortClassManInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
+						window.location.href = "/sys/shortBus/shortClassManInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=shortSummerClassMan";
 					}
 					else if(row.classStateName == "开课在读")
 					{
@@ -323,7 +301,7 @@
 				{
 					if(row.classStateName != "解散")
 					{
-						window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
+						window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=viewSummerShortClass&shortClassInstId="+row.shortClassInstId;
 					}
 					else
 					{
@@ -337,19 +315,59 @@
 			}
 			function queryVerFunc()
 			{
-				
+				var obj = $("#hisFm").serializeObject();
+				obj["queryCode"] = "qrySummerAuditInfo";
+				obj["funcNodeId"] = "38130";
+				obj = JSON.stringify(obj);
+				$("#hisList").datagrid({
+					url:"/sys/pubData/qryDataListByPage.do",
+					queryParams:{
+						param : obj
+					}
+				});
 			}
 			function resetVerFunc()
 			{
-				
+				$("#schoolVerId").combobox("setValue","");
+				$("#classVerInfo").combobox("setValue","");
+				$("#classManVerState").combobox("setValue","");
+				$("#verifyState").combobox("setValue","");
+				$("#myVerify").get(0).checked = false;
+				$("#openApplyStartManTime").datebox("setValue","");
+				$("#openApplyEndManTime").datebox("setValue","");
+				$("#openVerStartManTime").datebox("setValue","");
+				$("#openVerEndManTime").datebox("setValue","");
 			}
 			function verifyManFunc()
 			{
-				
+				var row = $("#hisList").datagrid("getSelected");
+				if(row)
+				{
+					if(row.verifyState == "已申请")
+					{
+						window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=verifySummerShortClass&shortClassInstId="+row.shortClassInstId;
+					}
+					else
+					{
+						$.messager.alert('提示',"该课程已进行过审批");		
+					}
+				}
+				else
+				{
+					$.messager.alert('提示',"请选择要审批的班级");
+				}
 			}
 			function viewManFunc()
 			{
-				
+				var row = $("#hisList").datagrid("getSelected");
+				if(row)
+				{
+					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=viewWarmupShortClass&shortClassInstId="+row.shortClassInstId;
+				}
+				else
+				{
+					$.messager.alert('提示',"请选择要浏览的班级");
+				}
 			}
 		</script>
  	</body>

@@ -136,7 +136,7 @@
 						schoolId:row.schoolId,
 						handlerId:${sessionScope.StaffT.staffId}
 					}
-					$.post("/sys/shortBus/addShortStudentTInfo.do",{json:JSON.stringify(json)},function(data){
+					$.post("/sys/shortBus/addShortStudentTInfo.do",{json:JSON.stringify(json),classType:encodeURI("游学")},function(data){
 						if(data == "success")
 						{
 							backFunc();

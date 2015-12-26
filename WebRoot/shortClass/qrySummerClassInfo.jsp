@@ -17,54 +17,59 @@
   	</head>
   	<body>
 		<form id="manFm" style="margin:0 auto;">
-			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+			<table align="center" style="min-width:1200px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 				<tr>
-					<td align="right" width="12%">
+					<td align="right" width="7%">
 						校区：
 					</td>
-					<td width="12%">
+					<td width="10%">
 						<select id="schoolId" name="schoolId" style="width:100px;height:25px;" ></select>
 					</td>
-					<td align="right" width="8%">	
+					<td align="right" width="7%">	
 						学员姓名：
 					</td>
-					<td width="12%">
+					<td width="10%">
 						<select id="staffName" name="staffName" style="width:100px;height:25px;">
       					</select>
 					</td>
-					<td align="right" width="8%">
+					<td align="right" width="7%">
 						缴费日期：
 					</td>
-					<td width="22%">
+					<td width="20%">
 						<input name="feeStartTime" id="feeStartTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="feeEndTime" id="feeEndTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
 					</td>
-					<td align="right" width="8%">
+					<td align="right" width="9%">
 						联系电话：
 					</td>
-					<td>
+					<td colspan="3">
 						<input name="contactPhone" id="contactPhone" type="text" class="easyui-textbox" style="width:100px; height: 25px;"/>
 					</td>
 				</tr>
 				<tr>
 					<td align="right">
-						是否退费：
+						赠课类型：
 					</td>
 					<td>
-						<input name="feeReturn" id="feeReturnYes" type="radio" value="是" /><label for="feeReturnYes">是</label>&nbsp;
-						<input name="feeReturn" id="feeReturnNo" type="radio" value="否" /><label for="feeReturnNo">否</label>										
+						<select id="classType" name="classType" style="width:100px" ></select>								
 					</td>
 					<td align="right">
-						国际班类型：
+						赠课状态：
 					</td>
 					<td>
-						<select id="interClassType" name="interClassType" style="width:100px" ></select>								
+						<select id="classState" name="classState" style="width:100px" ></select>				
 					</td>
 					<td align="right">
-						是否选班：
+						是否过期：
 					</td>
 					<td>
-						<input name="selectClass" id="selectClassYes" type="radio" value="已选" /><label for="selectClassYes">已选</label>&nbsp;
-						<input name="selectClass" id="selectClassNo" type="radio" value="未选" /><label for="selectClassNo">未选</label>								
+						<input name="isExpire" id="isExpireYes" type="radio" value="已选" /><label for="isExpireYes">已选</label>&nbsp;
+						<input name="isExpire" id="isExpireNo" type="radio" value="未选" /><label for="isExpireNo">未选</label>								
+					</td>
+					<td align="right">
+						几天内过期：
+					</td>
+					<td>
+						<input name="expireDate" id="expireDate" type="text" class="easyui-textbox" style="width:100px; height: 25px;"/>
 					</td>
 					<td colspan="2">
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
@@ -77,20 +82,22 @@
 			<table class="easyui-datagrid" title="学员列表" style="height:390px" id="manList" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
-						<th data-options="field:'classInstId',checkbox:true"></th>
-						<th width="7%" field="schoolName">校区</th>
-						<th width="7%" field="name">学员姓名</th>
-						<th width="10%" field="studentPhone">联系电话</th>
-						<th width="7%" field="classType">国际班类型</th>
-						<th width="7%" field="className">班级</th>
-						<th width="10%" field="adviserTeacher">业绩老师</th>
-						<th width="7%" field="adviser">业绩顾问</th>
-						<th width="7%" field="payDate">缴费日期</th>
-						<th width="7%" field="totalAmount">实际缴费金额</th>
-						<th width="10%" field="favorType">优惠方式</th>
-						<th width="7%" field="feeStateName">是否退费</th>
-						<th width="7%" field="isChoiceClass">是否选班</th>
-						<th width="7%" field="interClassName">国际班班级</th>
+						<th data-options="field:'shortClassInstId',checkbox:true"></th>
+						<th width="6.6666%" field="schoolName">校区</th>
+						<th width="6.6666%" field="name">学员姓名</th>
+						<th width="6.6666%" field="studentPhone">英文名</th>
+						<th width="6.6666%" field="classType">联系电话</th>
+						<th width="6.6666%" field="className">赠课来源</th>
+						<th width="6.6666%" field="adviserTeacher">关联课缴费日期</th>
+						<th width="6.6666%" field="adviser">关联课程状态</th>
+						<th width="6.6666%" field="payDate">赠课类型</th>
+						<th width="6.6666%" field="totalAmount">赠课班级</th>
+						<th width="6.6666%" field="favorType">赠课状态</th>
+						<th width="6.6666%" field="feeStateName">赠送课时</th>
+						<th width="6.6666%" field="isChoiceClass">已消耗课时</th>
+						<th width="6.6666%" field="interClassName">有效期开始日期</th>
+						<th width="6.6666%" field="interClassName">有效期结束日期</th>
+						<th width="6.6666%" field="interClassName">距过期天数</th>
 					</tr>
 				</thead>
 			</table>
@@ -103,12 +110,15 @@
 			$.post("<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=staffName",function(data){
 				$("#staffName").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("国际班"),function(data){
-				$("#interClassType").combobox("loadData",data);
+			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_STATE",function(data){
+				$("#classState").combobox("loadData",data);
+			},"json");
+			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("小拼暑类班"),function(data){
+				$("#classType").combobox("loadData",data);
 				ajaxLoadEnd();
 			},"json");
 			$(document).ready(function(){
-				$("#interClassType").combobox({
+				$("#classType").combobox({
 					formatter:function(data){
 						return '<span>'+data.classType+'</span>';
 					}, 
@@ -122,6 +132,12 @@
 					},
 					valueField: 'staffId', 
 					textField: 'staffName', 
+					panelHeight: 'auto'
+				});
+				$("#classState").combobox({
+					formatter:formatItem, 
+					valueField: 'codeFlag', 
+					textField: 'codeName', 
 					panelHeight: 'auto'
 				});
 				$("#schoolId").combobox({
@@ -149,7 +165,7 @@
 				$("#schoolId").combobox("setValue","");
 				$("#staffName").combobox("setValue","");
 				$("#contactPhone").textbox("setValue","");
-				$("#interClassType").combobox("setValue","");
+				$("#classType").combobox("setValue","");
 				$("#feeStartTime").datebox("setValue","");
 				$("input[name='feeReturn']").each(function(i,node){
 					node.checked = false; 

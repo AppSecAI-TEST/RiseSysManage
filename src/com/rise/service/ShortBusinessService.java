@@ -1,9 +1,7 @@
 package com.rise.service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimeZone;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -11,11 +9,8 @@ import net.sf.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.rise.model.ShortClassAttendT;
 import com.rise.model.ShortClassInstT;
 import com.rise.model.ShortClassTeacherT;
@@ -107,9 +102,9 @@ public class ShortBusinessService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
-	public String addShortStudentTInfo(String json) throws Exception
+	public String addShortStudentTInfo(String json , String classType) throws Exception
 	{
-		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2059\",securityCode:\"0000000000\",params:{json:'"+json+"'},rtnDataFormatType:\"user-defined\"}";
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2059\",securityCode:\"0000000000\",params:{json:'"+json+"',classType:\""+classType+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
 	

@@ -219,7 +219,7 @@
 			}
 			function selectClassFunc()
 			{
-				window.location.href = "/sys/shortClass/choiceClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortTourismClassMan&classType="+encodeURI("游学");
+				window.location.href = "/sys/shortClass/choiceTourismClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortTourismClassMan&classType="+encodeURI("游学");
 			}
 			function removeClassFunc()
 			{

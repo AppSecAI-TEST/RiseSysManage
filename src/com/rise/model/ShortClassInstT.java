@@ -10,7 +10,7 @@ public class ShortClassInstT {
 
     private Integer shortClassId;
 
-    private Integer classTypeId;
+    private String classTypeId;
 
     private String className;
 
@@ -94,15 +94,15 @@ public class ShortClassInstT {
         this.shortClassId = shortClassId;
     }
 
-    public Integer getClassTypeId() {
-        return classTypeId;
-    }
+    public String getClassTypeId() {
+		return classTypeId;
+	}
 
-    public void setClassTypeId(Integer classTypeId) {
-        this.classTypeId = classTypeId;
-    }
+	public void setClassTypeId(String classTypeId) {
+		this.classTypeId = classTypeId;
+	}
 
-    public String getClassName() {
+	public String getClassName() {
         return className;
     }
 

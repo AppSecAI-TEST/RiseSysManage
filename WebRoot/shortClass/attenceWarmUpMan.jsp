@@ -108,7 +108,7 @@
 								班级状态：
 							</td>
 							<td width="22%">
-								<select id="classHisPharse" name="classHisPharse" style="width:100px" ></select>
+								<select id="classHisState" name="classHisState" style="width:100px" ></select>
 							</td>
 							<td align="right" width="12%">
 								班级：
@@ -141,16 +141,16 @@
 					<table class="easyui-datagrid" title="历史考勤列表" style="height:390px;" id="hisList" url="" toolbar="#toolHisbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
-								<th data-options="field:'postId',checkbox:true"></th>
-								<th width="11%" field="postName">校区</th>
-								<th width="11%" field="postTypeName">热身课班级</th>
-								<th width="11%" field="deptName">班级状态</th>
-								<th width="11%" field="schoolIdsName">上课时间</th>
-								<th width="11%" field="createDate">应到人数</th>
-								<th width="11%" field="postName">实到人数</th>
-								<th width="11%" field="postTypeName">请假人数</th>
-								<th width="11%" field="deptName">迟到人数</th>
-								<th width="11%" field="schoolIdsName">旷课人数</th>
+								<th data-options="field:'shortClassInstId',checkbox:true"></th>
+								<th width="11%" field="schoolName">校区</th>
+								<th width="11%" field="className">热身课班级</th>
+								<th width="11%" field="classTypeId">班级类型</th>
+								<th width="11%" field="schoolDate">上课时间</th>
+								<th width="11%" field="attendNum">应到人数</th>
+								<th width="11%" field="realNum">实到人数</th>
+								<th width="11%" field="leaveNum">请假人数</th>
+								<th width="11%" field="lateNum">迟到人数</th>
+								<th width="11%" field="truantNum">旷课人数</th>
 							</tr>
 						</thead>
 					</table>
@@ -175,6 +175,7 @@
 						return true;
 					return false;
 				});
+				$("#classHisState").combobox("loadData",data);
 				$("#classManState").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=classMan",function(data){
@@ -228,7 +229,7 @@
 					textField: 'schoolName', 
 					panelHeight: 'auto'
 				});
-				$("#classHisPharse").combobox({
+				$("#classHisState").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
 					textField: 'codeName', 
@@ -290,7 +291,7 @@
 				var row = $("#manList").datagrid("getSelected");
 				if(row)
 				{
-					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=viewInterShortClass";
+					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=viewWarmupShortClass";
 				}
 				else
 				{
@@ -299,24 +300,38 @@
 			}
 			function queryHisFunc()
 			{
-				
+				var obj = $("#hisFm").serializeObject();
+				obj["queryCode"] = "qryAttenceWarmupHisInfo";
+				obj["funcNodeId"] = "38131";
+				obj = JSON.stringify(obj);
+				$("#hisList").datagrid({
+					url:"/sys/pubData/qryDataListByPage.do",
+					queryParams:{
+						param : obj
+					}
+				});
 			}
 			function resetHisFunc()
 			{
 				$("#schoolHisId").combobox("setValue","");
-				$("#classHisPharse").combobox("setValue","");
-				$("#classHisStart").datebox("setValue","");
-				$("#classHisEnd").datebox("setValue","");
+				$("#classHisState").combobox("setValue","");
 				$("#classHis").combobox("setValue","");
-				$("#teacherHis").textbox("setValue","");
-				$("#attendStartRate").numberbox("setValue","");
-				$("#attendEndRate").numberbox("setValue","");
-				$("#schoolWearStartRate").numberbox("setValue","");
-				$("#schoolWearEndRate").numberbox("setValue","");
+				$("#openApplyStartManTime").datebox("setValue","");
+				$("#openApplyEndManTime").datebox("setValue","");
+				$("#openAuditStartManTime").datebox("setValue","");
+				$("#openAuditEndManTime").datebox("setValue","");
 			}
 			function hisViewFunc()
 			{
-				
+				var row = $("#hisList").datagrid("getSelected");
+				if(row)
+				{
+					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=viewWarmupShortClass";
+				}
+				else
+				{
+					$.messager.alert('提示',"请选择要浏览的班级");
+				}
 			}
 		</script>
  	</body>

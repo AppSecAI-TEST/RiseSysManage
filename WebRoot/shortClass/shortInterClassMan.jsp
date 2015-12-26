@@ -205,7 +205,7 @@
 			}
 			function selectClassFunc()
 			{
-				window.location.href = "/sys/shortClass/choiceClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortInterClassMan&classType="+encodeURI("国际班");
+				window.location.href = "/sys/shortClass/choiceInterClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortInterClassMan&classType="+encodeURI("国际班");
 			}
 			function removeClassFunc()
 			{

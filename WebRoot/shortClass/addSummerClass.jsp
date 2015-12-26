@@ -19,9 +19,9 @@
 			<tr>
 				<td align="right">上课校区：</td>
 				<td><select name="schoolManId" id="schoolManId" style="width:150px" ></select></td>
-				<td align="right" width="15%">课程类型：</td>
+				<td align="right" width="15%">赠课类型：</td>
 				<td width="18%"><select name="classType" id="classType" style="width:150px" ></select></td>
-				<td align="right" width="15%">热身课班级名称：</td>
+				<td align="right" width="15%">赠送课班级名称：</td>
 				<td width="18%"><input name="className" id="className" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" /></td>
 			</tr>
 			<tr>
@@ -88,14 +88,16 @@
 			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=CLASS_TYPE",function(data){
+			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("小拼暑类班"),function(data){
 				$("#classType").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
 				$("#classType").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
+					formatter:function(data){
+						return '<span>'+data.classType+'</span>';
+					}, 
+					valueField: 'classTypeId', 
+					textField: 'classType',
 					panelHeight: 'auto'
 				});
 				$("#schoolManId").combobox({
@@ -180,7 +182,7 @@
 						handlerId:${sessionScope.StaffT.staffId}
 					};
 					ajaxLoading("放班中...");
-					$.post("/sys/shortBus/addShortClassInstTInfo.do",{json:JSON.stringify(json),className:encodeURI("热身课")},function(data){
+					$.post("/sys/shortBus/addShortClassInstTInfo.do",{json:JSON.stringify(json),className:encodeURI("小拼暑类班")},function(data){
 						ajaxLoadEnd();
 						if(data == "success")
 						{
@@ -215,7 +217,7 @@
 				sessionStorage.setItem("remark",remark);
 				if(schoolManId != "")
 				{
-					window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstId}&pageName=addWarmupClass&classType=热身课&schoolId="+schoolManId+"&paramFlag=ADD";
+					window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstId}&pageName=addSummerClass&classType=小拼暑类班&schoolId="+schoolManId+"&paramFlag=ADD";
 				}
 				else
 				{
@@ -248,7 +250,7 @@
 			function backFunc()
 			{
 				sessionStorage.clear();
-				window.location.href = "/sys/shortClass/warmupClassMan.jsp?funcNodeId=${funcNodeId}";
+				window.location.href = "/sys/shortClass/summerClassMan.jsp?funcNodeId=${funcNodeId}";
 			}
 		</script>
  	</body>

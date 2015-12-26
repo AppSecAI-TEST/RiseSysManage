@@ -17,51 +17,39 @@
   	</head>
   
   	<body>
-  		<div id="tab" class="easyui-tabs" style="min-width:1100px;width:99%;height:530px;font-family:'微软雅黑';margin:0 auto;padding:0 0">
+  		<div id="tab" class="easyui-tabs" style="min-width:1100px;width:99%;height:528px;font-family:'微软雅黑';margin:0 auto;padding:0 0">
 		    <div title="考勤管理">
 				<form id="manFm" style="margin:0 auto;">
-					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:100px;" cellspacing="2">
 						<tr>
-							<td align="right" width="8%">
+							<td align="right" width="12%">
 								校区：
 							</td>
-							<td width="12%">
+							<td width="22%">
 								<select id="schoolManId" name="schoolManId" style="width:100px" ></select>
 							</td>
-							<td align="right" width="8%">	
-								课程阶段：
+							<td align="right" width="12%">	
+								赠课类型：
 							</td>
 							<td width="22%">
-								<select id="classManPharse" name="classManPharse" style="width:100px" ></select>
+								<select id="classType" name="classType" style="width:100px" ></select>
 							</td>
-							<td align="right" width="8%">
+							<td align="right" width="12%">
 								班级状态：
 							</td>
-							<td width="22%">
+							<td>
 								<select id="classManState" name="classManState" style="width:100px" ></select>
-							</td>
-							<td align="right" width="8%">
-								班级：
-							</td>
-							<td width="12%">
-								<select id="classMan" name="classMan" style="width:100px" ></select>
 							</td>
 						</tr>
 						<tr>
 							<td align="right">
-								带班老师：
-							</td>
-							<td>
-								<input name="teacherMan" id="teacherMan" type="text" style="width:100px" class="easyui-textbox" />								
-							</td>
-							<td align="right">
-								开课日期：
+								放班申请日期：
 							</td>
 							<td>
 								<input name="classStartManTime" id="classStartManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="classEndManTime" id="classEndManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 							</td>
 							<td align="right">
-								结课日期：
+								放班审批日期：
 							</td>
 							<td>
 								<input name="overClassStartManTime" id="overClassStartManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="overClassEndManTime" id="overClassEndManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
@@ -74,74 +62,67 @@
 					</table>
 				</form>
 				<div style="padding:5px 0;min-width:1100px; width:100%">
-					<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+					<table class="easyui-datagrid" title="班级列表" style="height:370px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
-								<th data-options="field:'classInstId',checkbox:true"></th>
-								<th width="14%" field="schoolName">校区</th>
-								<th width="14%" field="className">班级名称</th>
-								<th width="14%" field="openDate">开课日期</th>
-								<th width="14%" field="teacherNames">带班老师</th>
-								<th width="14%" field="finishDate">结课日期</th>
-								<th width="14%" field="classStateName">班级状态</th>
-								<th width="14%" field="classSchedule">课时进度</th>
+								<th data-options="field:'shortClassInstId',checkbox:true"></th>
+								<th width="7.7%" field="schoolName">校区</th>
+								<th width="7.7%" field="classType">赠课类型</th>
+								<th width="7.7%" field="className">班级名称</th>
+								<th width="7.7%" field="classStateName">班级状态</th>
+								<th width="7.7%" field="planHours">计划课时</th>
+								<th width="7.7%" field="classProgress">实际反馈课时</th>
+								<th width="7.7%" field="planClassNum">应到人数</th>
+								<th width="7.7%" field="realClassNum">实到人数</th>
+								<th width="7.7%" field="realClassNum">定班人数</th>
+								<th width="7.7%" field="putClassDate">申请时间</th>
+								<th width="7.7%" field="approveDate">审批时间</th>
+								<th width="7.7%" field="openDate">开课日期</th>
+								<th width="7.7%" field="finishDate">结课日期</th>
 							</tr>
 						</thead>
 					</table>
 				</div>
 				<div id="toolManbar" style="padding: 2px; height: auto">
-					<a href="javascript:void(0)" id="manOperBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="manOperFunc()">考勤管理</a>
-		   			<a href="javascript:void(0)" id="manViewBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="manViewFunc()">浏览考勤</a>
-		   			<a href="javascript:void(0)" id="manLeaveBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="manLeaveFunc()">请假补课</a>
+					<a href="javascript:void(0)" id="manOperBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="manOperFunc()">考勤维护</a>
+		   			<a href="javascript:void(0)" id="manViewBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="manViewFunc()">浏览</a>
 				</div>
 		    </div>
 		    <div title="历史考勤">
 				<form id="hisFm" style="margin:0 auto;">
 					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 						<tr>
-							<td align="right" width="8%">
+							<td align="right" width="12%">
 								校区：
 							</td>
-							<td width="12%">
+							<td width="22%">
 								<select id="schoolHisId" name="schoolHisId" style="width:100px" ></select>
 							</td>
-							<td align="right" width="8%">
-								课程阶段：
+							<td align="right" width="12%">
+								班级状态：
 							</td>
 							<td width="22%">
-								<select id="classHisPharse" name="classHisPharse" style="width:100px" ></select>
+								<select id="classHisState" name="classHisState" style="width:100px" ></select>
 							</td>
-							<td align="right" width="8%">
-								上课日期：
-							</td>
-							<td width="22%">
-								<input name="classHisStart" id="classHisStart" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="classHisEnd" id="classHisEnd" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
-							</td>
-							<td align="right" width="8%">
+							<td align="right" width="12%">
 								班级：
 							</td>
-							<td width="12%">
+							<td>
 								<select id="classHis" name="classHis" style="width:100px" ></select>
 							</td>
 						</tr>
 						<tr>
 							<td align="right">
-								老师：
+								放班申请日期：
 							</td>
 							<td>
-								<input name="teacherHis" id="teacherHis" type="text" style="width:100px" class="easyui-textbox" />								
+								<input name="openApplyStartManTime" id="openApplyStartManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="openApplyEndManTime" id="openApplyEndManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 							</td>
 							<td align="right">
-								出勤率：
+								放班审批日期：
 							</td>
 							<td>
-								<input name="attendStartRate" id="attendStartRate" type="text" style="width:88px" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />% 至 <input name="attendEndRate" id="attendEndRate" type="text" style="width:88px" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />%							
-							</td>
-							<td align="right">
-								校服穿着率：
-							</td>
-							<td>
-								<input name="schoolWearStartRate" id="schoolWearStartRate" type="text" style="width:88px" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />% 至 <input name="schoolWearEndRate" id="schoolWearEndRate" type="text" style="width:88px" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />%								
+								<input name="openAuditStartManTime" id="openAuditStartManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="openAuditEndManTime" id="openAuditEndManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 							</td>
 							<td colspan="2" align="center">
 								<a href="javascript:void(0)" id="queryHisBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryHisFunc()">查询</a>
@@ -154,21 +135,16 @@
 					<table class="easyui-datagrid" title="历史考勤列表" style="height:390px;" id="hisList" url="" toolbar="#toolHisbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
-								<th data-options="field:'postId',checkbox:true"></th>
-								<th width="7%" field="postName">校区</th>
-								<th width="7%" field="postTypeName">上课时间</th>
-								<th width="7%" field="deptName">班级名称</th>
-								<th width="7%" field="schoolIdsName">上课T老师</th>
-								<th width="7%" field="createDate">上课TA老师</th>
-								<th width="7%" field="postName">实际课时</th>
-								<th width="7%" field="postTypeName">应到人数</th>
-								<th width="7%" field="deptName">实到人数</th>
-								<th width="7%" field="schoolIdsName">请假人数</th>
-								<th width="7%" field="createDate">旷课人数</th>
-								<th width="7%" field="createDate">迟到人数</th>
-								<th width="7%" field="createDate">校服穿着人数</th>
-								<th width="7%" field="createDate">出勤率</th>
-								<th width="7%" field="createDate">校服穿着率</th>
+								<th data-options="field:'shortClassInstId',checkbox:true"></th>
+								<th width="11%" field="schoolName">校区</th>
+								<th width="11%" field="className">热身课班级</th>
+								<th width="11%" field="classType">班级类型</th>
+								<th width="11%" field="schoolDate">上课时间</th>
+								<th width="11%" field="attendNum">应到人数</th>
+								<th width="11%" field="realNum">实到人数</th>
+								<th width="11%" field="leaveNum">请假人数</th>
+								<th width="11%" field="lateNum">迟到人数</th>
+								<th width="11%" field="truantNum">旷课人数</th>
 							</tr>
 						</thead>
 					</table>
@@ -180,19 +156,23 @@
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("加载中...");
-			$.post("<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}",function(data){
+			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
 				$("#schoolManId").combobox("loadData",data);
 				$("#schoolHisId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID",function(data){
-				$("#classManPharse").combobox("loadData",data);
-				$("#classHisPharse").combobox("loadData",data);
+			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("小拼暑类班"),function(data){
+				$("#classType").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
+				data = $.grep(data , function(node,i){
+					if(i>=1 && i < data.length-1)
+						return true;
+					return false;
+				});
 				$("#classManState").combobox("loadData",data);
+				$("#classHisState").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=classMan",function(data){
-				$("#classMan").combobox("loadData",data);
 				$("#classHis").combobox("loadData",data);
 				ajaxLoadEnd();
 			},"json");
@@ -203,24 +183,18 @@
 					textField: 'schoolName', 
 					panelHeight: 'auto'
 				});
-				$("#classManPharse").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
+				$("#classType").combobox({
+					formatter:function(data){
+						return '<span>'+data.classType+'</span>';
+					}, 
+					valueField: 'classTypeId', 
+					textField: 'classType',
 					panelHeight: 'auto'
 				});
 				$("#classManState").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
 					textField: 'codeName', 
-					panelHeight: 'auto'
-				});
-				$("#classMan").combobox({
-					formatter:function(row){
-						return '<span>'+row.className+'</span>';
-					},
-					valueField: 'classInstId',
-					textField: 'className',
 					panelHeight: 'auto'
 				});
 				$("#schoolHisId").combobox({
@@ -253,8 +227,8 @@
 			function queryManFunc()
 			{
 				var obj = $("#manFm").serializeObject();
-				obj["queryCode"] = "qryAttendManList";
-				obj["funcNodeId"] = "38101";
+				obj["queryCode"] = "qrySummerAttenceList";
+				obj["funcNodeId"] = "38132";
 				obj = JSON.stringify(obj);
 				$("#manList").datagrid({
 					url:"/sys/pubData/qryDataListByPage.do",
@@ -266,10 +240,9 @@
 			function resetManFunc()
 			{
 				$("#schoolManId").combobox("setValue","");
-				$("#classManPharse").combobox("setValue","");
+				$("#classType").combobox("setValue","");
 				$("#classManState").combobox("setValue","");
 				$("#classMan").combobox("setValue","");
-				$("#teacherMan").textbox("setValue","");
 				$("#classStartManTime").datebox("setValue","");
 				$("#classEndManTime").datebox("setValue","");
 				$("#overClassStartManTime").datebox("setValue","");
@@ -278,8 +251,9 @@
 			function manOperFunc()
 			{
 				var row = $('#manList').datagrid('getSelected');
-				if (row){
-					window.location.href = "/sys/attend/getAttendDetail.do?funcNodeId=${param.funcNodeId}&classInstId="+row.classInstId;
+				if (row)
+				{
+					window.location.href = "/sys/shortBus/shortAttenceDetailPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=shortAttenceSummerDetail";
 				}
 				else
 				{
@@ -288,15 +262,28 @@
 			}
 			function manViewFunc()
 			{
-				
-			}
-			function manLeaveFunc()
-			{
-				
+				var row = $("#manList").datagrid("getSelected");
+				if(row)
+				{
+					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=viewSummerShortClass";
+				}
+				else
+				{
+					$.messager.alert('提示',"请选择要浏览的班级");
+				}
 			}
 			function queryHisFunc()
 			{
-				
+				var obj = $("#hisFm").serializeObject();
+				obj["queryCode"] = "qryAttenceSummerHisInfo";
+				obj["funcNodeId"] = "38133";
+				obj = JSON.stringify(obj);
+				$("#hisList").datagrid({
+					url:"/sys/pubData/qryDataListByPage.do",
+					queryParams:{
+						param : obj
+					}
+				});
 			}
 			function resetHisFunc()
 			{
@@ -313,7 +300,15 @@
 			}
 			function hisViewFunc()
 			{
-				
+				var row = $("#hisList").datagrid("getSelected");
+				if(row)
+				{
+					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=viewSummerShortClass";
+				}
+				else
+				{
+					$.messager.alert('提示',"请选择要浏览的班级");
+				}
 			}
 		</script>
  	</body>

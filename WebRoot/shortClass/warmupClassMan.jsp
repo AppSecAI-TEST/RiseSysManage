@@ -180,7 +180,7 @@
 				$("#classManState").combobox("loadData",data);
 				$("#classManVerState").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("热身课"),function(data){
+			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=CLASS_TYPE",function(data){
 				$("#classType").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
@@ -204,16 +204,14 @@
 					panelHeight: 'auto'
 				});
 				$("#classType").combobox({
-					formatter:function(data){
-						return '<span>'+data.classType+'</span>';
-					}, 
-					valueField: 'classTypeId', 
-					textField: 'classType',
+					formatter:formatItem, 
+					valueField: 'codeFlag', 
+					textField: 'codeName', 
 					panelHeight: 'auto',
 					onLoadSuccess:function(data){
 						if(data.length > 0)
 						{
-							$.post("/sys/shortBus/getShortClassInstTList.do",{typeName:encodeURI("热身课"),classTypeId:data[0].classTypeId},function(result){
+							$.post("/sys/shortBus/getShortClassInstTList.do",{typeName:encodeURI("热身课"),classTypeId:data[0].codeFlag},function(result){
 								$("#classInfo").combobox("loadData",result);
 							},"json");
 						}
@@ -274,7 +272,7 @@
 			}
 			function resetFunc()
 			{
-				$("#classManPharse").combobox("setValue","");
+				$("#classType").combobox("setValue","");
 				$("#classInfo").combobox("setValue","");
 				$("#classManState").combobox("setValue","");
 				$("#schoolManId").combobox("setValue","");

@@ -16,9 +16,9 @@
   	<body class="manage">
 		<table align="center" class="tab" style="height:90px;width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
-				<td align="right" width="15%">课程类型：</td>
+				<td align="right" width="15%">赠课类型：</td>
 				<td width="18%"><select id="classType" name="classType" style="width:100px" ></select></td>
-				<td align="right" width="15%">热身课班级名称：</td>
+				<td align="right" width="15%">赠送课班级名称：</td>
 				<td width="18%"><input name="classInfo" id="classInfo" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" /></td>
 				<td align="right" width="15%">计划上课人数：</td>
 				<td width="18%"><input name="planClassNum" id="planClassNum" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" /></td>
@@ -116,14 +116,16 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
-			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=CLASS_TYPE",function(data){
+			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("小拼暑类班"),function(data){
 				$("#classType").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
 				$("#classType").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
+					formatter:function(data){
+						return '<span>'+data.classType+'</span>';
+					}, 
+					valueField: 'classTypeId', 
+					textField: 'classType',
 					panelHeight: 'auto'
 				});
 				$("#classType").combobox("setValue","${shortClassInstT.classTypeId}");
@@ -194,7 +196,7 @@
 			}
 			function addPlanFunc()
 			{
-				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortWarmupClassMan&classType=热身课&schoolId=${shortClassInstT.schoolId}&paramFlag=UPDATE";
+				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortSummerClassMan&classType=小拼暑类班&schoolId=${shortClassInstT.schoolId}&paramFlag=UPDATE";
 			}
 			function studentBoxFunc(obj)
 			{
@@ -227,7 +229,7 @@
 			}
 			function selectClassFunc()
 			{
-				window.location.href = "/sys/shortClass/choiceWarmupClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortWarmupClassMan&classType="+encodeURI("热身课");
+				window.location.href = "/sys/shortClass/choiceSummerClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortSummerClassMan&classType="+encodeURI("小拼暑类班");
 			}
 			function removeClassFunc()
 			{
@@ -275,7 +277,7 @@
 			}
 			function backFunc()
 			{
-				window.location.href = "/sys/shortClass/warmupClassMan.jsp?funcNodeId=${funcNodeId}";
+				window.location.href = "/sys/shortClass/summerClassMan.jsp?funcNodeId=${funcNodeId}";
 			}
 		</script>
  	</body>

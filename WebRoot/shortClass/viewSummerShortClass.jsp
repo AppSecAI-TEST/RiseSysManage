@@ -16,15 +16,15 @@
   	<body class="manage">
 		<table align="center" class="tab" style="height:90px;width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
-				<td align="right" width="15%">课程类型：</td>
-				<td width="18%">${shortClassInstT.classTypeId}</td>
-				<td align="right" width="15%">热身课班级名称：</td>
+				<td align="right" width="15%">赠课类型：</td>
+				<td width="18%">${shortClassInstT.shortClassTypeT.classType}</td>
+				<td align="right" width="15%">班级名称：</td>
 				<td width="18%">${shortClassInstT.className}</td>
 				<td align="right" width="15%">计划上课人数：</td>
 				<td width="18%">${shortClassInstT.planClassNum}</td>
 			</tr>
 			<tr>
-				<td align="right">计划课时量：</td>
+				<td align="right">计划课时：</td>
 				<td>${shortClassInstT.planHours}</td>
 				<td align="right">开课日期：</td>
 				<td><fmt:formatDate value="${shortClassInstT.openDate}" pattern="yyyy-MM-dd" /></td>
