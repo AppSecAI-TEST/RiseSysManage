@@ -138,4 +138,209 @@ $(document).ready(function() {
     $("#cancelUploadBtn").click(function() {
     	var fileName = $("#fileName").filebox("setValue", "");
     });
+    
+    $("input", $("#minusTextbookFee").next("span")).blur(function() {
+		calculateRefundAmount();
+	});
+	
+	$("input", $("#minusCourseFee").next("span")).blur(function() {
+		calculateRefundAmount();
+	});
+	
+	$("input", $("#handlingChange").next("span")).blur(function() {
+		calculateRefundAmount();
+	});
+	
+	$("input", $("#minusOtherFee").next("span")).blur(function() {
+		calculateRefundAmount();
+	});
+    
+    //提交申请
+    $("#refundApplySubmit").click(function() {
+    	alert(checkParam())
+    	if(!checkParam()) {
+    		return;
+    	} else {
+    		alert($("#refundApplyFm").form('validate'))
+    		if($("#refundApplyFm").form('validate')) {
+    			var flag = true;
+				var fileName = $("#fileName").filebox("getValue");
+				alert(fileName)
+				if(fileName != "" && fileName != null && fileName != undefined) {
+					var imgUrl = $("#imgUrl").val();
+					if(imgUrl == "" || imgUrl == null || imgUrl == undefined) {
+						flag = false;
+					}
+				}
+				alert(flag)
+				if(flag) {
+					var obj = $("#refundApplyFm").serializeObject();
+					var refundFeeObj = new Object();
+					refundFeeObj.schoolId = obj.schoolId;
+					refundFeeObj.studentId = obj.studentId;
+					refundFeeObj.refundWay = obj.refundWay;
+					refundFeeObj.refundRule = "";
+					refundFeeObj.courseType = obj.courseType;
+					refundFeeObj.isAcademic = "";
+					refundFeeObj.amount = obj.totalAmount;
+					refundFeeObj.realAmount = obj.realAmount;
+					refundFeeObj.schoolReasonType = obj.schoolReasonType;
+					refundFeeObj.schoolReason = obj.schoolReason;
+					refundFeeObj.customerReason = obj.customerReason;
+					refundFeeObj.otherReason = obj.otherReason;
+					refundFeeObj.bankName = obj.bankName;
+					refundFeeObj.account = obj.account;
+					refundFeeObj.bankCard = obj.bankCard;
+					refundFeeObj.remark = obj.remark;
+					refundFeeObj.handlerId = obj.handlerId;
+					refundFeeObj.approveId = obj.handlerId;
+					var refundFeeDetailArray = "[";
+					var refundFeeDetailObj = new Object();
+					var studentCourseId = $("#studentCourseId").val();
+					refundFeeDetailObj.studentCourseId = studentCourseId;
+					refundFeeDetailObj.refundType = "";
+					refundFeeDetailObj.refundChannel = "";
+					refundFeeDetailObj.courseState = $("#courseState").val();
+					refundFeeDetailObj.classInstId = $("#classInstId").val();
+					refundFeeDetailObj.className = $("#className").val();
+					refundFeeDetailObj.classType = "";
+					refundFeeDetailObj.stageId = "";
+					refundFeeDetailObj.refundStageFee = $("#refundStageFee").val();
+					var isRtnGift = "Y";
+					var minusGiftFee = 0;
+					if(minusGiftFee > 0) {
+						isRtnGift = "N";
+					}
+					refundFeeDetailObj.minusGiftFee = minusGiftFee;
+					refundFeeDetailObj.minusCourseFee = $("#minusCourseFee").textbox("getValue");
+					var isRtnTextbook = "Y";
+					var minusTextbookFee = parseFloat($("#minusTextbookFee").textbox("getValue"));
+					if(minusTextbookFee > 0) {
+						isRtnTextbook = "N";
+					}
+					refundFeeDetailObj.minusTextbookFee = minusTextbookFee;
+					refundFeeDetailObj.minusOtherFee = $("#minusOtherFee").textbox("getValue");
+					refundFeeDetailObj.handlingChange = $("#handlingChange").textbox("getValue");
+					refundFeeDetailObj.confirmRefundFee = $("#confirmRefundFee").textbox("getValue");
+					refundFeeDetailObj.financialConfirmFee = $("#confirmRefundFee").textbox("getValue");
+					refundFeeDetailObj.isRtnTextbook = isRtnTextbook;
+					refundFeeDetailObj.isRtnGift = isRtnGift;
+					refundFeeDetailObj.handlerId = obj.handlerId;
+					refundFeeDetailArray += JSON.stringify(refundFeeDetailObj) + "]";
+					var param = "{\"refundFeeObj\":"+JSON.stringify(refundFeeObj)+",\"refundFeeDetailArray\":"+refundFeeDetailArray+"}";
+					param = encodeURI(param);
+					$.ajax({
+						url: "/sys/refund/applyRefund.do",
+						data: "param=" + param,
+						dataType: "json",
+						async: false,
+						beforeSend: function()
+						{
+							$.messager.progress({title : '申请退费', msg : '正在申请退费，请稍等……'});
+						},
+						success: function (data) {
+							$.messager.progress('close'); 
+							var flag = data.flag
+							if(flag) {
+								$.messager.alert('提示', "申请退费成功！", "info", function() {window.location.href = "/sys/refund/refund.jsp";});
+							} else {
+								$.messager.alert('提示', data.msg);
+							}
+						} 
+					});
+				} else {
+					$.messager.alert('提示', "请您先上传文件！");
+				}
+    		}
+    	}
+    });
 });
+
+function calculateRefundAmount() {
+	var refundStageFee = parseFloat($("#refundStageFee").val());
+	var minusTextbookFee = parseFloat($("#minusTextbookFee").textbox("getValue"));
+	var total = parseFloat(minusTextbookFee);
+	if(total >= refundStageFee) {
+		$("#minusTextbookFee").textbox("setValue", 0);
+	} else {
+		var minusCourseFee = parseFloat($("#minusCourseFee").textbox("getValue"));
+		total = parseFloat(minusTextbookFee + minusCourseFee);
+		if(total >= refundStageFee) {
+			$("#minusCourseFee").textbox("setValue", 0);
+		} else {
+			var handlingChange = parseFloat($("#handlingChange").textbox("getValue"));
+			total = parseFloat(minusTextbookFee + minusCourseFee + handlingChange);
+			if(total >= refundStageFee) {
+				$("#handlingChange").textbox("setValue", 0);
+			} else {
+				var minusOtherFee = parseFloat($("#minusOtherFee").textbox("getValue"));
+				total = parseFloat(minusTextbookFee + minusCourseFee + handlingChange + minusOtherFee);
+				if(total >= refundStageFee) {
+					$("#minusOtherFee").textbox("setValue", 0);
+				} else {
+					var totalAmount = refundStageFee - total;
+					$("#totalAmount").val(totalAmount);
+					$("#totalAmountText").html(totalAmount);
+					$("#confirmRefundFee").textbox("setValue", totalAmount);
+				}
+			}
+		}
+	}
+}
+
+function checkParam() {
+	var refundWay = $("#refundWay").combobox('getValue');
+	if(refundWay == null || refundWay == "" || refundWay == undefined || refundWay == "null") {
+		$.messager.alert('提示', "请选择退费形式！");
+		return false;
+	} else {
+		if("BANK_CARD" == refundWay) {
+			var bankName = $("#bankName").textbox("getValue");
+			if(bankName == null || bankName == "" || bankName == undefined || bankName == "null") {
+				$.messager.alert('提示', "请输入退费银行！");
+				return false;
+			} else {
+				var account = $("#account").textbox("getValue");
+				if(account == null || account == "" || account == undefined || account == "null") {
+					$.messager.alert('提示', "请输入银行账户名！");
+					return false;
+				} else {
+					var bankCard = $("#bankCard").textbox("getValue");
+					if(account == null || account == "" || account == undefined || account == "null") {
+						$.messager.alert('提示', "请输入银行账号！");
+						return false;
+					}
+				}
+			}
+		}
+	}
+	var refundReason = $("input:radio[name='refundReason']:checked").val();
+	if(refundReason == null || refundReason == "" || refundReason == undefined || refundReason == "null") {
+		$.messager.alert('提示', "请选择退费原因！");
+		return false;
+	} else {
+		if("school" == refundReason) {
+			var schoolReasonType = $("#schoolReasonType").combobox('getValue');
+			if(schoolReasonType == null || schoolReasonType == "" || schoolReasonType == undefined || schoolReasonType == "null") {
+				$.messager.alert('提示', "请选择申请退费的校方原因类型！");
+				return false;
+			} else {
+				var schoolReason = $("#schoolReason").combobox('getValue');
+				if(schoolReason == null || schoolReason == "" || schoolReason == undefined || schoolReason == "null") {
+					$.messager.alert('提示', "请选择申请退费的校方原因！");
+					return false;
+				}
+			}
+		} else if("customer" == refundReason) {
+			var customerReason = $("#customerReason").combobox('getValue');
+			if(customerReason == null || customerReason == "" || customerReason == undefined || customerReason == "null") {
+				$.messager.alert('提示', "请选择申请退费的客户原因！");
+				return false;
+			}
+		} else {
+			$.messager.alert('提示', "请输入申请退费的其他原因！");
+			return false;
+		}
+	}
+	return true;
+}

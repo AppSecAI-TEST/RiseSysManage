@@ -283,22 +283,22 @@ $(document).ready(function() {
 						refundFeeDetailObj.stageId = $("#stageId" + studentCourseId).val();
 						refundFeeDetailObj.refundStageFee = $("#refundStageFee" + studentCourseId).html();
 						var isRtnGift = "Y";
-						var minusGiftFee = parseFloat($("#minusGiftFee" + studentCourseId).numberbox("getValue"));
+						var minusGiftFee = parseFloat($("#minusGiftFee" + studentCourseId).textbox("getValue"));
 						if(minusGiftFee > 0) {
 							isRtnGift = "N";
 						}
 						refundFeeDetailObj.minusGiftFee = minusGiftFee;
-						refundFeeDetailObj.minusCourseFee = $("#minusCourseFee" + studentCourseId).numberbox("getValue");
+						refundFeeDetailObj.minusCourseFee = $("#minusCourseFee" + studentCourseId).textbox("getValue");
 						var isRtnTextbook = "Y";
-						var minusTextbookFee = parseFloat($("#minusTextbookFee" + studentCourseId).numberbox("getValue"));
+						var minusTextbookFee = parseFloat($("#minusTextbookFee" + studentCourseId).textbox("getValue"));
 						if(minusTextbookFee > 0) {
 							isRtnTextbook = "N";
 						}
 						refundFeeDetailObj.minusTextbookFee = minusTextbookFee;
-						refundFeeDetailObj.minusOtherFee = $("#minusOtherFee" + studentCourseId).numberbox("getValue");
-						refundFeeDetailObj.handlingChange = $("#handlingChange" + studentCourseId).numberbox("getValue");
+						refundFeeDetailObj.minusOtherFee = $("#minusOtherFee" + studentCourseId).textbox("getValue");
+						refundFeeDetailObj.handlingChange = $("#handlingChange" + studentCourseId).textbox("getValue");
 						refundFeeDetailObj.confirmRefundFee = $("#confirmRefundFee" + studentCourseId).html();
-						refundFeeDetailObj.financialConfirmFee = $("#financialConfirmRefundFee" + studentCourseId).numberbox("getValue");
+						refundFeeDetailObj.financialConfirmFee = $("#financialConfirmRefundFee" + studentCourseId).textbox("getValue");
 						refundFeeDetailObj.isRtnTextbook = isRtnTextbook;
 						refundFeeDetailObj.isRtnGift = isRtnGift;
 						refundFeeDetailObj.handlerId = obj.handlerId;
@@ -374,30 +374,30 @@ $(document).ready(function() {
 
 function calculateRefundAmount(studentCourseId) {
 	var refundStageFee = parseFloat($("#refundStageFee" + studentCourseId).html());
-	var minusGiftFee = parseFloat($("#minusGiftFee" + studentCourseId).numberbox("getValue"));
+	var minusGiftFee = parseFloat($("#minusGiftFee" + studentCourseId).textbox("getValue"));
 	var total = 0;
 	if(minusGiftFee >= refundStageFee) {
-		$("#minusGiftFee" + studentCourseId).numberbox("setValue", 0);
+		$("#minusGiftFee" + studentCourseId).textbox("setValue", 0);
 	} else {
-		var minusTextbookFee = parseFloat($("#minusTextbookFee" + studentCourseId).numberbox("getValue"));
+		var minusTextbookFee = parseFloat($("#minusTextbookFee" + studentCourseId).textbox("getValue"));
 		total = parseFloat(minusGiftFee + minusTextbookFee);
 		if(total >= refundStageFee) {
-			$("#minusTextbookFee" + studentCourseId).numberbox("setValue", 0);
+			$("#minusTextbookFee" + studentCourseId).textbox("setValue", 0);
 		} else {
-			var minusCourseFee = parseFloat($("#minusCourseFee" + studentCourseId).numberbox("getValue"));
+			var minusCourseFee = parseFloat($("#minusCourseFee" + studentCourseId).textbox("getValue"));
 			total = parseFloat(minusGiftFee + minusTextbookFee + minusCourseFee);
 			if(total >= refundStageFee) {
-				$("#minusCourseFee" + studentCourseId).numberbox("setValue", 0);
+				$("#minusCourseFee" + studentCourseId).textbox("setValue", 0);
 			} else {
-				var handlingChange = parseFloat($("#handlingChange" + studentCourseId).numberbox("getValue"));
+				var handlingChange = parseFloat($("#handlingChange" + studentCourseId).textbox("getValue"));
 				total = parseFloat(minusGiftFee + minusTextbookFee + minusCourseFee + handlingChange);
 				if(total >= refundStageFee) {
-					$("#handlingChange" + studentCourseId).numberbox("setValue", 0);
+					$("#handlingChange" + studentCourseId).textbox("setValue", 0);
 				} else {
-					var minusOtherFee = parseFloat($("#minusOtherFee" + studentCourseId).numberbox("getValue"));
+					var minusOtherFee = parseFloat($("#minusOtherFee" + studentCourseId).textbox("getValue"));
 					total = parseFloat(minusGiftFee + minusTextbookFee + minusCourseFee + handlingChange + minusOtherFee);
 					if(total >= refundStageFee) {
-						$("#minusOtherFee" + studentCourseId).numberbox("setValue", 0);
+						$("#minusOtherFee" + studentCourseId).textbox("setValue", 0);
 					} else {
 						var confirmRefundFee = refundStageFee - total;
 						$("#confirmRefundFee" + studentCourseId).html(confirmRefundFee);
@@ -418,7 +418,7 @@ function calculateConfirmRefundAmount(studentCourseId) {
 	var realAmount = 0;
 	$("[name='studentCourseId']").each(function() {
 		var studentCourseId = $(this).val();
-		var financialConfirmRefundFee = $("#financialConfirmRefundFee" + studentCourseId).numberbox("getValue");
+		var financialConfirmRefundFee = $("#financialConfirmRefundFee" + studentCourseId).textbox("getValue");
 		if(financialConfirmRefundFee != null && financialConfirmRefundFee != "" && financialConfirmRefundFee != "null" && financialConfirmRefundFee != undefined) {
 			realAmount += parseFloat(financialConfirmRefundFee);
 		}

@@ -14,6 +14,15 @@
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="短期课退费申请">
   			<form id="refundApplyFm" method="post" enctype="multipart/form-data">
+  				<input type="hidden" id="studentId" name="studentId" value="${obj.refundObj.studentId }"/>
+  				<input type="hidden" id="schoolId" name="schoolId" value="${obj.refundObj.schoolId }"/>
+  				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId }"/>
+  				<input type="hidden" id="courseType" name="courseType" value="${obj.courseType }"/>
+  				<input type="hidden" id="className" name="className" value="${obj.refundStudentCourseList[0].className }"/>
+  				<input type="hidden" id="courseState" name="courseState" value="${obj.refundStudentCourseList[0].courseState }"/>
+  				<input type="hidden" id="classInstId" name="classInstId" value="${obj.refundStudentCourseList[0].classInstId }"/>
+  				<input type="hidden" id="refundStageFee" name="refundStageFee" value="${obj.refundStudentCourseList[0].amount }"/>
+  				<input type="hidden" id="studentCourseId" name="studentCourseId" value="${obj.refundStudentCourseList[0].studentCourseId }"/>
   				<table width="100%" cellpadding="5px" class="maintable">
   					<tr>
 	  					<td align="right" width="8%"><span>学员姓名：</span></td>
@@ -47,30 +56,30 @@
 		  				</td>
 		  				<td align="right" width="10%"><span>退费总金额：</span></td>
 		  				<td width="15%">
-		  					<span id="totalAmountText"></span>
-		  					<input type="hidden" id="totalAmount" name="totalAmount"/>
+		  					<span id="totalAmountText">${obj.refundStudentCourseList[0].amount }</span>
+		  					<input type="hidden" id="totalAmount" name="totalAmount" value="${obj.refundStudentCourseList[0].amount }"/>
 		  				</td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="8%"><span>教材扣除：</span></td>
 	  					<td width="8%">
-	  						<input id="minusTextbookFee" name="minusTextbookFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:10000, precision:2" style="width: 100px; height: 25px;" required="true"/>
+	  						<input id="minusTextbookFee" name="minusTextbookFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:10000, precision:2" style="width: 100px; height: 25px;" required="true" value="0"/>
 	  					</td>
 	  					<td align="right" width="8%"><span>课程扣除：</span></td>
 	  					<td width="10%">
-	  						<input id="minusCourseFee" name="minusCourseFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:10000, precision:2" style="width: 120px; height: 25px;" required="true"/>
+	  						<input id="minusCourseFee" name="minusCourseFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:10000, precision:2" style="width: 120px; height: 25px;" required="true" value="0"/>
 	  					</td>
 	  					<td align="right" width="8%"><span>手续费：</span></td>
 		  				<td width="10%">
-		  					<input id="handlingChange" name="handlingChange" type="text" class="easyui-textbox numberbox" data-options="min:0, max:10000, precision:2" style="width: 120px; height: 25px;" required="true"/>
+		  					<input id="handlingChange" name="handlingChange" type="text" class="easyui-textbox numberbox" data-options="min:0, max:10000, precision:2" style="width: 120px; height: 25px;" required="true" value="0"/>
 		  				</td>
 		  				<td align="right" width="8%"><span>其他扣除：</span></td>
 		  				<td width="15%">
-		  					<input id="handlingChange" name="handlingChange" type="text" class="easyui-textbox numberbox" data-options="min:0, max:10000, precision:2" style="width: 180px; height: 25px;" required="true"/>
+		  					<input id="minusOtherFee" name="minusOtherFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:10000, precision:2" style="width: 180px; height: 25px;" required="true" value="0"/>
 		  				</td>
 		  				<td align="right" width="10%"><span>财务确认金额：</span></td>
 	  					<td width="15%">
-	  						<input id="realAmount" name="realAmount" type="text" class="easyui-textbox numberbox" data-options="min:0, max:10000, precision:2" style="width: 120px; height: 25px;" required="true"/>
+	  						<input id="confirmRefundFee" name="confirmRefundFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:10000, precision:2" style="width: 120px; height: 25px;" required="true" value="${obj.refundStudentCourseList[0].amount }"/>
 	  					</td>
 	  				</tr>
 	  				<tr>
