@@ -31,7 +31,6 @@ $(document).ready(function() {
     	obj = obj.substring(0, obj.length - 1);
     	var funcNodeId = $("#qryBtn").attr("funcNodeId");
     	obj += ",\"month\":\""+time+"\",\"funcNodeId\":\""+funcNodeId+"\"}";
-    	alert(obj)
     	$('#list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",
     		queryParams:{
