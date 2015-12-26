@@ -179,7 +179,7 @@ $(document).ready(function() {
 					refundFeeObj.courseType = obj.courseType;
 					refundFeeObj.isAcademic = "";
 					refundFeeObj.amount = obj.totalAmount;
-					refundFeeObj.realAmount = obj.realAmount;
+					refundFeeObj.realAmount = $("#confirmRefundFee").textbox("getValue");
 					refundFeeObj.schoolReasonType = obj.schoolReasonType;
 					refundFeeObj.schoolReason = obj.schoolReason;
 					refundFeeObj.customerReason = obj.customerReason;
