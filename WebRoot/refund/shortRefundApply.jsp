@@ -18,6 +18,8 @@
   				<input type="hidden" id="schoolId" name="schoolId" value="${obj.refundObj.schoolId }"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId }"/>
   				<input type="hidden" id="courseType" name="courseType" value="${obj.courseType }"/>
+  				<input type="hidden" id="stageId" name="stageId" value="${obj.refundStudentCourseList[0].stageId }"/>
+  				<input type="hidden" id="classType" name="classType" value="${obj.refundStudentCourseList[0].classType }"/>
   				<input type="hidden" id="className" name="className" value="${obj.refundStudentCourseList[0].className }"/>
   				<input type="hidden" id="courseState" name="courseState" value="${obj.refundStudentCourseList[0].courseState }"/>
   				<input type="hidden" id="classInstId" name="classInstId" value="${obj.refundStudentCourseList[0].classInstId }"/>

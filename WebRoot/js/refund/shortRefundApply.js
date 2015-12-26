@@ -199,8 +199,8 @@ $(document).ready(function() {
 					refundFeeDetailObj.courseState = $("#courseState").val();
 					refundFeeDetailObj.classInstId = $("#classInstId").val();
 					refundFeeDetailObj.className = $("#className").val();
-					refundFeeDetailObj.classType = "";
-					refundFeeDetailObj.stageId = "";
+					refundFeeDetailObj.classType = obj.classType;
+					refundFeeDetailObj.stageId = obj.stageId;
 					refundFeeDetailObj.refundStageFee = $("#refundStageFee").val();
 					var isRtnGift = "Y";
 					var minusGiftFee = 0;

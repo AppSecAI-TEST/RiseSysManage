@@ -14,8 +14,12 @@
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="短期课退费审批">
   			<form id="refundApplyFm">
-  				<input type="hidden" id="minusGiftFee" name="minusGiftFee" value="0"/>
-  				<input type="hidden" id="refundStageFee" name="refundStageFee" value=""/>
+  				<input type="hidden" id="refundFeeId" value="${obj.refundFeeId }"/>
+  				<input type="hidden" id="studentId" value="${obj.refundFeeObj.studentId }"/>
+  				<input type="hidden" id="minusGiftFee" value="${obj.refundFeeObj.minusGiftFee }"/>
+  				<input type="hidden" id="refundStageFee" value="${obj.refundFeeObj.refundStageFee }"/>
+  				<input type="hidden" id="approveId" name="approveId" value="${sessionScope.StaffT.staffId}"/>
+  				<input type="hidden" id="processInstanceId" name="processInstanceId" value="${obj.refundFeeObj.processInstanceId }"/>
   				<table width="100%" cellpadding="5px" class="maintable">
   					<tr>
 	  					<td align="right" width="8%"><span>学员姓名：</span></td>
@@ -25,32 +29,32 @@
 	  					<td align="right" width="8%"><span>课时进度：</span></td>
 	  					<td width="10%"><span>${obj.refundObj.classProgress }</span></td>
 	  					<td align="right" width="8%"><span>业绩顾问：</span></td>
-	  					<td width="15%"><span>${obj.refundObj.teacherName }</span></td>
+	  					<td width="15%"><span>${obj.refundObj.adviserName }</span></td>
 	  					<td align="right" width="10%"><span>业绩老师：</span></td>
-	  					<td width="15%"><span>${obj.refundObj.teacherName }</span></td>
+	  					<td width="15%"><span>${obj.refundObj.adviserTeacherName }</span></td>
 	  				</tr>
 	  				<tr id="refundWayTr">
 	  					<td align="right" width="8%"><span>退费形式：</span></td>
 	  					<td width="8%">
-	  						<select id="refundWay" name="refundWay" class="easyui-combobox" style="width: 100px; height: 25px;" required="true">
-		        			</select>
+	  						<input type="hidden" id="refundWay" name="refundWay" value="${obj.refundFeeObj.refundWay }"/>
+	  						<span>${obj.refundFeeObj.refundWayText }</span>
 	  					</td>
 	  					<td align="right" width="8%"><span>退费银行：</span></td>
 		  				<td width="10%">
-		  					<input id="bankName" name="bankName" type="text" class="easyui-textbox" style="width: 120px; height: 25px;"/>
+		  					<input id="bankName" name="bankName" type="text" class="easyui-textbox" style="width: 120px; height: 25px;" value="${obj.refundFeeObj.bankName }"/>
 		  				</td>
 		  				<td align="right" width="8%"><span>账户名：</span></td>
 		  				<td width="10%">
-		  					<input id="account" name="account" type="text" class="easyui-textbox" style="width: 120px; height: 25px;"/>
+		  					<input id="account" name="account" type="text" class="easyui-textbox" style="width: 120px; height: 25px;" value="${obj.refundFeeObj.account }"/>
 		  				</td>
 		  				<td align="right" width="8%"><span>账号：</span></td>
 		  				<td width="15%">
-		  					<input id="bankCard" name="bankCard" type="text" class="easyui-textbox" style="width: 180px; height: 25px;"/>
+		  					<input id="bankCard" name="bankCard" type="text" class="easyui-textbox" style="width: 180px; height: 25px;" value="${obj.refundFeeObj.bankCard }"/>
 		  				</td>
 		  				<td align="right" width="10%"><span>退费总金额：</span></td>
 		  				<td width="15%">
-		  					<span id="totalAmountText"></span>
-		  					<input type="hidden" id="totalAmount" name="totalAmount"/>
+		  					<span id="totalAmountText">${obj.refundFeeObj.amount }</span>
+		  					<input type="hidden" id="totalAmount" name="totalAmount" value="${obj.refundFeeObj.amount }"/>
 		  				</td>
 	  				</tr>
 	  				<tr>
