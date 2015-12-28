@@ -1,5 +1,6 @@
 package com.rise.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -79,6 +80,10 @@ public class ClassInstT {
     private String openClassTypeName;
     
     private String licenseRate;
+    
+	private String isApplyBonus;
+	
+	private String isGetBonus;
     
     private BaseNumT baseNumT;
     
@@ -404,6 +409,22 @@ public class ClassInstT {
 
 	public void setLicenseRate(String licenseRate) {
 		this.licenseRate = licenseRate;
+	}
+	
+	public String getIsApplyBonus() {
+		return isApplyBonus;
+	}
+
+	public void setIsApplyBonus(String isApplyBonus) {
+		this.isApplyBonus = isApplyBonus;
+	}
+
+	public String getIsGetBonus() {
+		return isGetBonus;
+	}
+
+	public void setIsGetBonus(String isGetBonus) {
+		this.isGetBonus = isGetBonus;
 	}
 
 	public List<ClassStudentT> getClassStudentList() {

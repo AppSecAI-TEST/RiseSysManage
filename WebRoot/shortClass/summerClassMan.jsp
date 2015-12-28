@@ -65,19 +65,19 @@
 						<thead>
 							<tr>
 								<th data-options="field:'shortClassInstId',checkbox:true"></th>
-								<th width="7.8%" field="schoolName">校区</th>
-								<th width="7.8%" field="classType">赠课类型</th>
-								<th width="7.8%" field="className">班级名称</th>
-								<th width="7.8%" field="classStateName">班级状态</th>
+								<th width="8%" field="schoolName">校区</th>
+								<th width="8%" field="typeName">赠课类型</th>
+								<th width="8%" field="className">班级名称</th>
+								<th width="8%" field="classStateName">班级状态</th>
 								<th width="7.8%" field="planHours">计划课时</th>
 								<th width="7.8%" field="classProgress">实际反馈课时</th>
 								<th width="7.8%" field="planClassNum">计划上课人数</th>
 								<th width="7.8%" field="realClassNum">实际上课人数</th>
 								<th width="7.8%" field="personNum">定班人数</th>
-								<th width="7.8%" field="putClassDate">申请时间</th>
-								<th width="7.8%" field="approveDate">审批时间</th>
-								<th width="7.8%" field="openDate">开课日期</th>
-								<th width="7.8%" field="finishDate">结课日期</th>
+								<th width="8%" field="putClassDate">申请时间</th>
+								<th width="8%" field="approveDate">审批时间</th>
+								<th width="8%" field="openDate">开课日期</th>
+								<th width="8%" field="finishDate">结课日期</th>
 							</tr>
 						</thead>
 					</table>
@@ -146,7 +146,7 @@
 							<tr>
 								<th data-options="field:'shortClassInstId',checkbox:true"></th>
 								<th width="9%" field="schoolName">校区</th>
-								<th width="10%" field="classType">课程类型</th>
+								<th width="10%" field="typeName">课程类型</th>
 								<th width="10%" field="className">班级名称</th>
 								<th width="10%" field="verifyState">审批状态</th>
 								<th width="10%" field="planHours">计划课时量</th>
@@ -174,7 +174,7 @@
 				$("#classManState").combobox("loadData",data);
 				$("#classManVerState").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("小拼暑类班"),function(data){
+			$.post("<%=path %>/shortBus/getGiftTypeList.do",function(data){
 				$("#classType").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
@@ -199,10 +199,10 @@
 				});
 				$("#classType").combobox({
 					formatter:function(data){
-						return '<span>'+data.classType+'</span>';
+						return '<span>'+data.typeName+'</span>';
 					}, 
-					valueField: 'classTypeId', 
-					textField: 'classType',
+					valueField: 'giftType', 
+					textField: 'typeName',
 					panelHeight: 'auto'
 				});
 				$("#classVerInfo").combobox({
@@ -362,7 +362,7 @@
 				var row = $("#hisList").datagrid("getSelected");
 				if(row)
 				{
-					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=viewWarmupShortClass&shortClassInstId="+row.shortClassInstId;
+					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=viewSummerShortClass&shortClassInstId="+row.shortClassInstId;
 				}
 				else
 				{

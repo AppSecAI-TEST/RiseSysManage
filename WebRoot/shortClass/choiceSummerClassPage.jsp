@@ -20,17 +20,37 @@
 			<input type="hidden" name="classType" id="classType" value="${param.classType}" />
 			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 				<tr>
-					<td align="right">
+					<td align="right" width="8%">
+						校区：
+					</td>
+					<td width="12%">
+						<select id="schoolManId" name="schoolManId" style="width:150px" ></select>
+					</td>
+					<td align="right" width="8%">
 						学员姓名：
 					</td>
-					<td>
+					<td width="22%">
 						<input name="studentName" id="studentName" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" />								
 					</td>
-					<td align="right" width="8%">	
+					<td align="right">	
 						联系电话：
 					</td>
-					<td width="22%">
+					<td colspan="2">
 						<input name="phoneNum" id="phoneNum" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						赠课类型：
+					</td>
+					<td>
+						<select id="shortClassType" name="shortClassType" style="width:150px" ></select>										
+					</td>
+					<td align="right">
+						赠课状态：
+					</td>
+					<td>
+						<select id="shortClassState" name="shortClassState" style="width:150px" ></select>										
 					</td>
 					<td align="right" width="8%">
 						缴费日期：
@@ -38,21 +58,7 @@
 					<td width="22%">
 						<input name="payStartManTime" id="payStartManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="payEndManTime" id="payEndManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
 					</td>
-				</tr>
-				<tr>
-					<td align="right" width="8%">
-						校区：
-					</td>
-					<td width="12%">
-						<select id="schoolManId" name="schoolManId" style="width:150px" ></select>
-					</td>
-					<td align="right">
-						班级类型：
-					</td>
-					<td>
-						<select id="shortClassType" name="shortClassType" style="width:150px" ></select>										
-					</td>
-					<td colspan="2" align="center">
+					<td align="center">
 						<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
 						<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
 					</td>
@@ -64,13 +70,21 @@
 				<thead>
 					<tr>
 						<th data-options="field:'studentId',checkbox:true"></th>
-						<th width="14%" field="name">学员姓名</th>
-						<th width="16%" field="identityId">证件号码</th>
-						<th width="14%" field="schoolName">校区</th>
-						<th width="14%" field="classType">班级类型</th>
-						<th width="14%" field="payDate">缴费日期</th>
-						<th width="14%" field="studentPhone">联系电话</th>
-						<th width="14%" field="adviserName">业绩顾问</th>
+						<th width="6%" field="schoolName">校区</th>
+						<th width="6%" field="name">学员姓名</th>
+						<th width="6%" field="byName">英文名</th>
+						<th width="7%" field="studentPhone">联系电话</th>
+						<th width="7%" field="giftChannelDesc">赠课来源</th>
+						<th width="7%" field="payDate">关联课缴费日期</th>
+						<th width="7%" field="courseStateName">关联课程状态</th>
+						<th width="6%" field="typeName">赠课类型</th>
+						<th width="6%" field="className">赠课班级</th>
+						<th width="6%" field="giftStateName">赠课状态</th>
+						<th width="6%" field="giftNum">赠送课时</th>
+						<th width="6%" field="giftJoinNum">已消耗课时</th>
+						<th width="7%" field="effDate">有效期开始日期</th>
+						<th width="7%" field="expDate">有效期结束日期</th>
+						<th width="7%" field="disExpDate">距过期天数</th>
 					</tr>
 				</thead>
 			</table>
@@ -83,8 +97,11 @@
 			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("${param.classType}"),function(data){
+			$.post("<%=path %>/shortBus/getGiftTypeList.do",function(data){
 				$("#shortClassType").combobox("loadData",data);
+			},"json");
+			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_GIFT_T&codeType=COURSE_STATE",function(data){
+				$("#shortClassState").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
 				$("#schoolManId").combobox({
@@ -95,18 +112,24 @@
 				});
 				$("#shortClassType").combobox({
 					formatter:function(data){
-						return '<span>'+data.classType+'</span>';
+						return '<span>'+data.typeName+'</span>';
 					}, 
-					valueField: 'classTypeId', 
-					textField: 'classType',
+					valueField: 'giftType', 
+					textField: 'typeName',
+					panelHeight: 'auto'
+				});
+				$("#shortClassState").combobox({
+					formatter:formatItem, 
+					valueField: 'codeFlag', 
+					textField: 'codeName', 
 					panelHeight: 'auto'
 				});
 			});
 			function queryFunc()
 			{
 				var obj = $("#manFm").serializeObject();
-				obj["queryCode"] = "qryInterChoiceClassList";
-				obj["funcNodeId"] = "38111";
+				obj["queryCode"] = "qrySummerChoiceClassList";
+				obj["funcNodeId"] = "38135";
 				obj = JSON.stringify(obj);
 				$("#studentList").datagrid({
 					url:"/sys/pubData/qryDataListByPage.do",

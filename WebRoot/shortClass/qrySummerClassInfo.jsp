@@ -62,8 +62,8 @@
 						是否过期：
 					</td>
 					<td>
-						<input name="isExpire" id="isExpireYes" type="radio" value="已选" /><label for="isExpireYes">已选</label>&nbsp;
-						<input name="isExpire" id="isExpireNo" type="radio" value="未选" /><label for="isExpireNo">未选</label>								
+						<input name="isExpire" id="isExpireYes" type="radio" value="是" /><label for="isExpireYes">是</label>&nbsp;
+						<input name="isExpire" id="isExpireNo" type="radio" value="否" /><label for="isExpireNo">否</label>								
 					</td>
 					<td align="right">
 						几天内过期：
@@ -82,22 +82,21 @@
 			<table class="easyui-datagrid" title="学员列表" style="height:390px" id="manList" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
-						<th data-options="field:'shortClassInstId',checkbox:true"></th>
-						<th width="6.6666%" field="schoolName">校区</th>
-						<th width="6.6666%" field="name">学员姓名</th>
-						<th width="6.6666%" field="studentPhone">英文名</th>
-						<th width="6.6666%" field="classType">联系电话</th>
-						<th width="6.6666%" field="className">赠课来源</th>
-						<th width="6.6666%" field="adviserTeacher">关联课缴费日期</th>
-						<th width="6.6666%" field="adviser">关联课程状态</th>
-						<th width="6.6666%" field="payDate">赠课类型</th>
-						<th width="6.6666%" field="totalAmount">赠课班级</th>
-						<th width="6.6666%" field="favorType">赠课状态</th>
-						<th width="6.6666%" field="feeStateName">赠送课时</th>
-						<th width="6.6666%" field="isChoiceClass">已消耗课时</th>
-						<th width="6.6666%" field="interClassName">有效期开始日期</th>
-						<th width="6.6666%" field="interClassName">有效期结束日期</th>
-						<th width="6.6666%" field="interClassName">距过期天数</th>
+						<th width="6%" field="schoolName">校区</th>
+						<th width="6%" field="name">学员姓名</th>
+						<th width="6%" field="byName">英文名</th>
+						<th width="7%" field="studentPhone">联系电话</th>
+						<th width="7%" field="giftChannelDesc">赠课来源</th>
+						<th width="7%" field="payDate">关联课缴费日期</th>
+						<th width="7%" field="courseStateName">关联课程状态</th>
+						<th width="6%" field="typeName">赠课类型</th>
+						<th width="6%" field="className">赠课班级</th>
+						<th width="6%" field="giftStateName">赠课状态</th>
+						<th width="6%" field="giftNum">赠送课时</th>
+						<th width="6%" field="giftJoinNum">已消耗课时</th>
+						<th width="7%" field="effDate">有效期开始日期</th>
+						<th width="7%" field="expDate">有效期结束日期</th>
+						<th width="7%" field="disExpDate">距过期天数</th>
 					</tr>
 				</thead>
 			</table>
@@ -110,20 +109,20 @@
 			$.post("<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=staffName",function(data){
 				$("#staffName").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_STATE",function(data){
+			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_GIFT_T&codeType=COURSE_STATE",function(data){
 				$("#classState").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("小拼暑类班"),function(data){
+			$.post("<%=path %>/shortBus/getGiftTypeList.do",function(data){
 				$("#classType").combobox("loadData",data);
 				ajaxLoadEnd();
 			},"json");
 			$(document).ready(function(){
 				$("#classType").combobox({
 					formatter:function(data){
-						return '<span>'+data.classType+'</span>';
+						return '<span>'+data.typeName+'</span>';
 					}, 
-					valueField: 'classTypeId', 
-					textField: 'classType',
+					valueField: 'giftType', 
+					textField: 'typeName',
 					panelHeight: 'auto'
 				});
 				$("#staffName").combobox({
@@ -150,8 +149,8 @@
 			function queryFunc()
 			{
 				var obj = $("#manFm").serializeObject();
-				obj["queryCode"] = "qryInterInfoList";
-				obj["funcNodeId"] = "38112";
+				obj["queryCode"] = "qrySummerInfoList";
+				obj["funcNodeId"] = "38136";
 				obj = JSON.stringify(obj);
 				$("#manList").datagrid({
 					url:"/sys/pubData/qryDataListByPage.do",
@@ -166,11 +165,11 @@
 				$("#staffName").combobox("setValue","");
 				$("#contactPhone").textbox("setValue","");
 				$("#classType").combobox("setValue","");
+				$("#classState").combobox("setValue","");
 				$("#feeStartTime").datebox("setValue","");
-				$("input[name='feeReturn']").each(function(i,node){
-					node.checked = false; 
-				});
-				$("input[name='selectClass']").each(function(i,node){
+				$("#feeEndTime").datebox("setValue","");
+				$("#expireDate").datebox("setValue","");
+				$("input[name='isExpire']").each(function(i,node){
 					node.checked = false; 
 				});
 			}
