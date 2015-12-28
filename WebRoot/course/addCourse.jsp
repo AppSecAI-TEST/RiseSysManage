@@ -422,7 +422,7 @@
 									</tr>
 									<tr id="T" style="display: none;">
 										<td colspan="8">
-											<span>口碑顾问A：</span>
+											<span>口碑老师A：</span>
 											<select class="easyui-combobox" id="c_schoolsA"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 												  
@@ -432,7 +432,7 @@
 												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 												style="width: 120px; height: 28px;">
 											</select>
-											<span>口碑顾问B：</span>
+											<span>口碑老师B：</span>
 											<select class="easyui-combobox" id="c_schoolsB"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 												  
@@ -1730,7 +1730,7 @@ $("#addCourse").click(function()
 				{
 					if($("#c_teacherA").combobox("getValue")==""&&$("#c_teacherB").combobox("getValue")=="")
 					{
-						$.messager.alert('提示', "请至少选择一个顾问!");
+						$.messager.alert('提示', "请至少选择一个老师!");
 						return false;
 					}
 					else
