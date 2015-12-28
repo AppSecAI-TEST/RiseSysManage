@@ -313,4 +313,10 @@ public class ShortBusinessService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
+	public String getGiftTypeList() throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20525\",securityCode:\"0000000000\",params:{},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
 }

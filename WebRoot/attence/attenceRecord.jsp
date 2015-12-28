@@ -91,7 +91,7 @@
 			</tr>
 			<c:forEach items="${schooltimeInstT.classInstT.classStudentList}" var="node" varStatus="i">
 				<tr id="studentId${node.studentId}">
-					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" studentName="${node.studentT.name}"><input type="checkbox" name="studentId" value="${node.studentId}" courseId="${node.studentCourseT.studentCourseId}" onclick="studentCheckboxClick(this)" /></td>
+					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" studentName="${node.studentT.name}" studentCourseId="${node.studentCourseId}" stageId="${schooltimeInstT.classInstT.stageId}"><input type="checkbox" name="studentId" value="${node.studentId}" courseId="${node.studentCourseT.studentCourseId}" onclick="studentCheckboxClick(this)" /></td>
 					<td align="center">${i.count}</td>
 					<td align="center">${node.studentT.name}</td>
 					<td align="center">${node.studentT.byName}</td>
@@ -146,6 +146,7 @@
 					listHeight:150,
 					data:attRecordSchoolIdData,
 					onSelect:function(data){
+						$("#attRecordTeacherId").combobox("setValue","");
 						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:data.schoolId},function(data){
 							$("#attRecordTeacherId").combobox("loadData",data);
 						},"json");
@@ -254,6 +255,8 @@
 						var dressObj = $(node).find("input[name='dress"+firstTr.attr("studentId")+"']:checked").val();
 						var studentObj = {
 							studentId:firstTr.attr("studentId"),
+							studentCourseId:firstTr.attr("studentCourseId"),
+							stageId:firstTr.attr("stageId"),
 							studentName:firstTr.attr("studentName"),
 							schoolId:firstTr.attr("schoolId"),
 							dress:dressObj,

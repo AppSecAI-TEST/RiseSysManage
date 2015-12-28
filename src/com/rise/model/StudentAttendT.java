@@ -8,8 +8,12 @@ public class StudentAttendT {
     private Integer classAttendId;
 
     private Integer classInstId;
+    
+	private String stageId;
 
     private String classType;
+    
+	private Integer studentCourseId;
 
     private Integer studentId;
 
@@ -20,6 +24,8 @@ public class StudentAttendT {
     private String dress;
 
     private String attendType;
+    
+    private Date attendDate;
 
     private Integer handlerId;
 
@@ -56,16 +62,32 @@ public class StudentAttendT {
     public void setClassInstId(Integer classInstId) {
         this.classInstId = classInstId;
     }
+    
+    public String getStageId() {
+		return stageId;
+	}
 
-    public String getClassType() {
+	public void setStageId(String stageId) {
+		this.stageId = stageId;
+	}
+
+	public String getClassType() {
         return classType;
     }
 
     public void setClassType(String classType) {
         this.classType = classType == null ? null : classType.trim();
     }
+    
+    public Integer getStudentCourseId() {
+		return studentCourseId;
+	}
 
-    public Integer getStudentId() {
+	public void setStudentCourseId(Integer studentCourseId) {
+		this.studentCourseId = studentCourseId;
+	}
+
+	public Integer getStudentId() {
         return studentId;
     }
 
@@ -104,8 +126,16 @@ public class StudentAttendT {
     public void setAttendType(String attendType) {
         this.attendType = attendType;
     }
+    
+    public Date getAttendDate() {
+		return attendDate;
+	}
 
-    public Integer getHandlerId() {
+	public void setAttendDate(Date attendDate) {
+		this.attendDate = attendDate;
+	}
+
+	public Integer getHandlerId() {
         return handlerId;
     }
 

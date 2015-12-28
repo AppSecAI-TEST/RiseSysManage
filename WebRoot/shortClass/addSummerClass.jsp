@@ -88,16 +88,16 @@
 			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("小拼暑类班"),function(data){
+			$.post("<%=path %>/shortBus/getGiftTypeList.do",function(data){
 				$("#classType").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
 				$("#classType").combobox({
 					formatter:function(data){
-						return '<span>'+data.classType+'</span>';
+						return '<span>'+data.typeName+'</span>';
 					}, 
-					valueField: 'classTypeId', 
-					textField: 'classType',
+					valueField: 'giftType', 
+					textField: 'typeName',
 					panelHeight: 'auto'
 				});
 				$("#schoolManId").combobox({

@@ -62,6 +62,8 @@ public class ShortClassInstT {
 	
 	private ShortClassTypeT shortClassTypeT;
 	
+	private GiftTypeT giftTypeT;
+	
 	private StageT stageT;
 	
 	private StaffT creatorObj;
@@ -300,6 +302,14 @@ public class ShortClassInstT {
 
 	public void setShortClassTypeT(ShortClassTypeT shortClassTypeT) {
 		this.shortClassTypeT = shortClassTypeT;
+	}
+	
+	public GiftTypeT getGiftTypeT() {
+		return giftTypeT;
+	}
+
+	public void setGiftTypeT(GiftTypeT giftTypeT) {
+		this.giftTypeT = giftTypeT;
 	}
 
 	public StageT getStageT() {

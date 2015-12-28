@@ -189,6 +189,7 @@
 					listHeight:150,
 					data:attRecordSchoolIdData,
 					onSelect:function(data){
+						$("#attRecordTeacherId").combobox("setValue","");
 						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:data.schoolId},function(data){
 							$("#attRecordTeacherId").combobox("loadData",data);
 						},"json");

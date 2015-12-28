@@ -67,7 +67,7 @@
 							<tr>
 								<th data-options="field:'shortClassInstId',checkbox:true"></th>
 								<th width="7.7%" field="schoolName">校区</th>
-								<th width="7.7%" field="classType">赠课类型</th>
+								<th width="7.7%" field="typeName">赠课类型</th>
 								<th width="7.7%" field="className">班级名称</th>
 								<th width="7.7%" field="classStateName">班级状态</th>
 								<th width="7.7%" field="planHours">计划课时</th>
@@ -138,7 +138,7 @@
 								<th data-options="field:'shortClassInstId',checkbox:true"></th>
 								<th width="11%" field="schoolName">校区</th>
 								<th width="11%" field="className">热身课班级</th>
-								<th width="11%" field="classType">班级类型</th>
+								<th width="11%" field="typeName">班级类型</th>
 								<th width="11%" field="schoolDate">上课时间</th>
 								<th width="11%" field="attendNum">应到人数</th>
 								<th width="11%" field="realNum">实到人数</th>
@@ -160,7 +160,7 @@
 				$("#schoolManId").combobox("loadData",data);
 				$("#schoolHisId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("小拼暑类班"),function(data){
+			$.post("<%=path %>/shortBus/getGiftTypeList.do",function(data){
 				$("#classType").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
@@ -185,10 +185,10 @@
 				});
 				$("#classType").combobox({
 					formatter:function(data){
-						return '<span>'+data.classType+'</span>';
+						return '<span>'+data.typeName+'</span>';
 					}, 
-					valueField: 'classTypeId', 
-					textField: 'classType',
+					valueField: 'giftType', 
+					textField: 'typeName',
 					panelHeight: 'auto'
 				});
 				$("#classManState").combobox({
@@ -203,7 +203,7 @@
 					textField: 'schoolName', 
 					panelHeight: 'auto'
 				});
-				$("#classHisPharse").combobox({
+				$("#classHisState").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
 					textField: 'codeName', 

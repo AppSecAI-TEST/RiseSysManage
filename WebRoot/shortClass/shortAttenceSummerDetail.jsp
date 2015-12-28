@@ -31,7 +31,7 @@
  		<table align="center" class="tab" style="height:90px;width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="right" width="15%">赠课类型：</td>
-				<td width="18%">${shortClassInstT.shortClassTypeT.classType}</td>
+				<td width="18%">${shortClassInstT.giftTypeT.typeName}</td>
 				<td align="right" width="15%">班级名称：</td>
 				<td width="18%">${shortClassInstT.className}</td>
 				<td align="right" width="15%">计划上课人数：</td>
