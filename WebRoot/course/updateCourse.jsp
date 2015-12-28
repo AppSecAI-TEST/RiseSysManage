@@ -1034,8 +1034,8 @@ $("#submitBtn").click(function()
 	var stageOrder =  $("#stageOrder").val();
 	var feeType = $("#feeType").combobox("getValue");
 	var studentCourseId=$("#studentCourseId").val();
-	var oldStageId = $("#oldStageId").combobox("getValue");
-	var oldFeeType = $("#oldFeeType").combobox("getValue");
+	var oldStageId = $("#oldStageId").val();
+	var oldFeeType = $("#oldFeeType").val();
 	if(oldStageId!=stageId || oldFeeType!=feeType)//阶段、业绩类型未修改不做校验
 	{
 		for(var i=0;i<oldCourses.length;i++)

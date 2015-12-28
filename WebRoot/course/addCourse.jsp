@@ -1073,9 +1073,9 @@ $("#submitBtn").click(function()
 			{
 				if(courseState=='001' || courseState=='002')
 				{
-					if(Number(stageOrder)<=Number(order))
+					if(Number(stageOrder)==Number(order))
 					{
-						showMessage("提示","当前所报复读或升学阶段"+stageId+"低于或等于未开课阶段"+stageName+",请重新选择阶段",null);
+						showMessage("提示","当前所报复读或升学阶段"+stageId+"低于或等于阶段"+stageName+",请重新选择阶段",null);
 						return;
 					}
 				}else if(courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
