@@ -52,6 +52,12 @@
 					</thead>
 				</table>
 			</div>
+			<div id="toolbar" style="padding: 2px; height: auto">
+	   			<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
+			</div>
   		</div>
   	</body>
 </html>
+<script>
+	exportLink("export","list_data");
+</script>
