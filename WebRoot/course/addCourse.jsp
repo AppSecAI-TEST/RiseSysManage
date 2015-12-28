@@ -6,7 +6,6 @@
 	String studentId =request.getParameter("studentId");
 	String schoolId= request.getParameter("schoolId");
 %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
@@ -175,7 +174,7 @@
 							<span>业绩老师B：</span>
 						</td>
 						<td>
-							<select name="adviserTeacherA" class="easyui-combobox" id="adviserTeacherB"
+							<select name="adviserTeacherB" class="easyui-combobox" id="adviserTeacherB"
 								style="width: 150px; height: 28px;"
 								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 	      						 >
