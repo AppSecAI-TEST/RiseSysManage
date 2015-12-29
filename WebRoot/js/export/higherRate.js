@@ -8,9 +8,19 @@ $(document).ready(function() {
     		return "<span>" + data.schoolName + "</span>";
     	},
     	onLoadSuccess:function(data) {
-    		if(data.length > 0) {
-    			$('#schoolId').combobox('setValue',data[0].schoolId);
+    		var higherType = $("#higherType").val();
+    		if("gap" == higherType) {
+    			$("#schoolId").combobox("setValue", "");
+    			$("#schoolId").combobox("setText", "全部校区");
+    		} else if("gapRate" == higherType) {
+    			$("#schoolId").combobox("setValue", "");
+    			$("#schoolId").combobox("setText", "全部校区");
     			$("#qryBtn").click();
+    		} else {
+    			if(data.length > 0) {
+    				$('#schoolId').combobox('setValue', data[0].schoolId);
+    				$("#qryBtn").click();
+    			}
     		}
     	},
 		onChange : function(n, o) {
@@ -29,7 +39,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	if($("#quarter").length > 0 && $("#month").length > 0 ) {
+	if($("#quarter").length > 0) {
 		$("#quarter").combobox({
 			url : "/sys/pubData/qryQuarterList.do",//返回json数据的url
 			valueField : "quarter",
@@ -38,16 +48,46 @@ $(document).ready(function() {
 	    	formatter : function(data) {
 	    		return "<span>" + data.quarterText + "</span>";
 	    	},
+	    	onLoadSuccess:function(data) {
+	    		var higherType = $("#higherType").val();
+	    		if("gap" == higherType) {
+	    			$('#quarter').combobox('setValue', data[0].quarter);
+	    			$("#qryBtn").click();
+	    			var quarterText = $("#quarter").combobox("getText");
+	    			$("#goal").html(quarterText + "距目标缺口");
+	    			$("#rate").html(quarterText + "升学率");
+	    			var quarter = $("#quarter").combobox("getValue");
+	    			if("1" == quarter) {
+	    				$("#1_month").html("1月升学率");
+	    				$("#2_month").html("2月升学率");
+	    				$("#3_month").html("3月升学率");
+	    			} else if("2" == quarter) {
+	    				$("#1_month").html("4月升学率");
+	    				$("#2_month").html("5月升学率");
+	    				$("#3_month").html("6月升学率");
+	    			} else if("3" == quarter) {
+	    				$("#1_month").html("7月升学率");
+	    				$("#2_month").html("8月升学率");
+	    				$("#3_month").html("9月升学率");
+	    			} else if("4" == quarter) {
+	    				$("#1_month").html("10月升学率");
+	    				$("#2_month").html("11月升学率");
+	    				$("#3_month").html("12月升学率");
+	    			}
+	    		}
+	    	},
 	    	onChange : function(n, o) {
-	    		$("#month").combobox({
-	    			url : "/sys/pubData/qryMonthList.do?quarter="+n,//返回json数据的url
-					valueField : "month",
-					textField : "monthText",
-					panelHeight : "auto",
-					formatter : function(data) {
-						return "<span>" + data.monthText + "</span>";
-					}
-	    		});
+	    		if($("#month").length > 0) {
+	    			$("#month").combobox({
+	    				url : "/sys/pubData/qryMonthList.do?quarter="+n,//返回json数据的url
+	    				valueField : "month",
+	    				textField : "monthText",
+	    				panelHeight : "auto",
+	    				formatter : function(data) {
+	    					return "<span>" + data.monthText + "</span>";
+	    				}
+	    			});
+	    		}
 	    	}
 		});
 	}
@@ -83,7 +123,29 @@ $(document).ready(function() {
     	if("quarter" == higherType) {
     		var year = $('#year').datebox('getValue');
     		$("#yearDiv").html(year);
-    	}
+    	} else if("gap" == higherType) {
+			var quarterText = $("#quarter").combobox("getText");
+			$("#goal").html(quarterText + "距目标缺口");
+			$("#rate").html(quarterText + "升学率");
+			var quarter = $("#quarter").combobox("getValue");
+			if("1" == quarter) {
+				$("#1_month").html("1月升学率");
+				$("#2_month").html("2月升学率");
+				$("#3_month").html("3月升学率");
+			} else if("2" == quarter) {
+				$("#1_month").html("4月升学率");
+				$("#2_month").html("5月升学率");
+				$("#3_month").html("6月升学率");
+			} else if("3" == quarter) {
+				$("#1_month").html("7月升学率");
+				$("#2_month").html("8月升学率");
+				$("#3_month").html("9月升学率");
+			} else if("4" == quarter) {
+				$("#1_month").html("10月升学率");
+				$("#2_month").html("11月升学率");
+				$("#3_month").html("12月升学率");
+			}
+		}
     });
 	
 	var higherType = $("#higherType").val();
@@ -95,197 +157,54 @@ $(document).ready(function() {
 function onLoadSuccess() {
 	var higherType = $("#higherType").val();
 	if("quarter" == higherType) {
-		var merges = [{index: 0, rowspan: 3},
-		              {index: 3, rowspan: 3},
-		              {index: 6, rowspan: 3},
-		              {index: 9, rowspan: 3}];
-		for(var i = 0; i < merges.length; i++) {
-			$('#list_data').datagrid('mergeCells', {
-				index: merges[i].index,
-				field: 'quarterHigherRate',
-				rowspan: merges[i].rowspan
-			});
-		}
+		//校区月季度升学率
+		mergeCellsByField("list_data", "quarterHigherRate");
 	} else if("allStage" == higherType) {
-		var stageId = $("#stageId").combobox("getValue");
-		if(stageId != null && stageId != "" && stageId != undefined) {
-			var merges = [{index: 0, rowspan: 2},
-			              {index: 2, rowspan: 2},
-			              {index: 4, rowspan: 2},
-			              {index: 6, rowspan: 2},
-			              {index: 8, rowspan: 2},
-			              {index: 10, rowspan: 2},
-			              {index: 12, rowspan: 2},
-			              {index: 14, rowspan: 2},
-			              {index: 16, rowspan: 2},
-			              {index: 18, rowspan: 2},
-			              {index: 20, rowspan: 2},
-			              {index: 22, rowspan: 2},
-			              {index: 24, rowspan: 2},
-			              {index: 26, rowspan: 2}];
-		} else {
-			var merges = [{index: 0, rowspan: 11},
-			              {index: 11, rowspan: 11},
-			              {index: 22, rowspan: 11},
-			              {index: 33, rowspan: 11},
-			              {index: 44, rowspan: 11},
-			              {index: 55, rowspan: 11},
-			              {index: 66, rowspan: 11},
-			              {index: 77, rowspan: 11},
-			              {index: 88, rowspan: 11},
-			              {index: 99, rowspan: 11},
-			              {index: 110, rowspan: 11},
-			              {index: 121, rowspan: 11},
-			              {index: 132, rowspan: 11},
-			              {index: 143, rowspan: 11}];
-		}
-		for(var i = 0; i < merges.length; i++) {
-			$('#list_data').datagrid('mergeCells', {
-				index: merges[i].index,
-				field: 'schoolName',
-				rowspan: merges[i].rowspan
-			});
-		}
+		//总校年级组升学率
+		mergeCellsByField("list_data", "schoolName");
 	} else if("allQuarter" == higherType) {
-		var month = $("#month").combobox("getValue");
-		if(month == null || month == "" || month == undefined) {
-			//选择了季度
-			var quarter = $("#quarter").combobox("getValue");
-			if(quarter != null && quarter != "" && quarter != undefined) {
-				var merges = [{index: 0, rowspan: 3},
-				              {index: 3, rowspan: 3},
-				              {index: 6, rowspan: 3},
-				              {index: 9, rowspan: 3},
-				              {index: 12, rowspan: 3},
-				              {index: 15, rowspan: 3},
-				              {index: 18, rowspan: 3},
-				              {index: 21, rowspan: 3},
-				              {index: 24, rowspan: 3},
-				              {index: 27, rowspan: 3},
-				              {index: 30, rowspan: 3},
-				              {index: 33, rowspan: 3},
-				              {index: 36, rowspan: 3}];
-				for(var i = 0; i < merges.length; i++) {
-					$('#list_data').datagrid('mergeCells', {
-				  		index: merges[i].index,
-				  			field: 'quarterHigherRate',
-				  			rowspan: merges[i].rowspan
-				  		});
-				}
-				for(var i = 0; i < merges.length; i++) {
-					$('#list_data').datagrid('mergeCells', {
-						index: merges[i].index,
-						field: 'schoolName',
-						rowspan: merges[i].rowspan
-					});
-				}
-			} else {
-				var merges = [{index: 0, rowspan: 12},
-				              {index: 12, rowspan: 12},
-				              {index: 24, rowspan: 12},
-				              {index: 36, rowspan: 12},
-				              {index: 48, rowspan: 12},
-				              {index: 60, rowspan: 12},
-				              {index: 72, rowspan: 12},
-				              {index: 84, rowspan: 12},
-				              {index: 96, rowspan: 12},
-				              {index: 108, rowspan: 12},
-				              {index: 120, rowspan: 12},
-				              {index: 132, rowspan: 12},
-				              {index: 144, rowspan: 12}];
-				for(var i = 0; i < merges.length; i++) {
-					$('#list_data').datagrid('mergeCells', {
-						index: merges[i].index,
-						field: 'schoolName',
-						rowspan: merges[i].rowspan
-					});
-					if(i == 0) {
-						var merges2 = [{index: i * 3, rowspan: 3},
-						               {index: (i + 1) * 3, rowspan: 3},
-						               {index: (i + 2) * 3, rowspan: 3},
-						               {index: (i + 3) * 3, rowspan: 3}];
-					} else {
-						var merges2 = [{index: i * 3 + i * 9, rowspan: 3},
-						               {index: (i + 1) * 3 + i * 9, rowspan: 3},
-						               {index: (i + 2) * 3 + i * 9, rowspan: 3},
-						               {index: (i + 3) * 3 + i * 9, rowspan: 3}];
-					}
-					for(var j = 0; j < merges2.length; j++) {
-						$('#list_data').datagrid('mergeCells', {
-							index: merges2[j].index,
-							field: 'quarterHigherRate',
-							rowspan: merges2[j].rowspan
-						});
-					}
-				}
-			}
-		}
+		//总校区月季度升学率
+		mergeCellsByField("list_data", "schoolName,quarterHigherRate");
 	} else if("allRegion" == higherType) {
-		var month = $("#month").combobox("getValue");
-		if(month == null || month == "" || month == undefined) {
-			var regionId = $("#regionId").combobox("getValue");
-			//选了片区
-			if(regionId != null && regionId != "" && regionId != undefined) {
-				//选择了季度
-				var quarter = $("#quarter").combobox("getValue");
-				if(quarter != null && quarter != "" && quarter != undefined) {
-					var merges = [{index: 0, rowspan: 3}];
-					var merges2 = [{index: 0, rowspan: 3}];
-				} else {
-					var merges = [{index: 0, rowspan: 12}];
-					var merges2 = [{index: 0, rowspan: 3},
-					              {index: 3, rowspan: 3},
-					              {index: 6, rowspan: 3},
-					              {index: 9, rowspan: 3}];
-				}
-				for(var i = 0; i < merges.length; i++) {
-					$('#list_data').datagrid('mergeCells', {
-						index: merges[i].index,
-						field: 'regionName',
-						rowspan: merges[i].rowspan
-					});
-				}
-				for(var j = 0; j < merges2.length; j++) {
-					$('#list_data').datagrid('mergeCells', {
-						index: merges2[j].index,
-						field: 'quarterHigherRate',
-						rowspan: merges2[j].rowspan
-					});
-				}
-			} else {
-				//选择了季度
-				var quarter = $("#quarter").combobox("getValue");
-				if(quarter != null && quarter != "" && quarter != undefined) {
-					var merges = [{index: 0, rowspan: 3}, {index: 3, rowspan: 6}];
-				} else {
-					var merges = [{index: 0, rowspan: 12}, {index: 12, rowspan: 12}];
-					for(var i = 0; i < merges.length; i++) {
-						$('#list_data').datagrid('mergeCells', {
-							index: merges[i].index,
-							field: 'regionName',
-							rowspan: merges[i].rowspan
-						});
-						if(i == 0) {
-							var merges2 = [{index: i * 3, rowspan: 3},
-							               {index: (i + 1) * 3, rowspan: 3},
-							               {index: (i + 2) * 3, rowspan: 3},
-							               {index: (i + 3) * 3, rowspan: 3}];
-						} else {
-							var merges2 = [{index: i * 3 + i * 9, rowspan: 3},
-							               {index: (i + 1) * 3 + i * 9, rowspan: 3},
-							               {index: (i + 2) * 3 + i * 9, rowspan: 3},
-							               {index: (i + 3) * 3 + i * 9, rowspan: 3}];
-						}
-						for(var j = 0; j < merges2.length; j++) {
-							$('#list_data').datagrid('mergeCells', {
-								index: merges2[j].index,
-								field: 'quarterHigherRate',
-								rowspan: merges2[j].rowspan
-							});
-						}
-					}
-				}
-			}
-		}
+		//片区升学率
+		mergeCellsByField("list_data", "regionName,quarterHigherRate");
 	} 
+}
+
+function mergeCellsByField(tableId, colList) {
+    var rowspan;
+    var megerIndex;
+    var before = "";
+    var after = "";
+    var target = $("#" + tableId);
+    var colunms = colList.split(",");
+    var rows = target.datagrid("getRows").length;
+    for (var j = colunms.length - 1; j >= 0; j--) {
+    	var field = colunms[j];
+    	before = "";
+        rowspan = 1;
+        megerIndex = 0;
+        for (var i = 0; i <= rows; i++) {
+            if (i == rows) {
+            	after = "";
+            } else {
+            	if("quarterHigherRate" == field) {
+            		after = target.datagrid("getRows")[i].quarter;
+            	} else {
+            		after = target.datagrid("getRows")[i][field];
+            	}
+            }
+            if (before == after) {
+            	rowspan += 1;
+            } else {
+            	target.datagrid("mergeCells", {
+        			index: i - rowspan,
+        			field: field,　　// 合并字段
+        			rowspan: rowspan
+        		});
+            	rowspan = 1;
+            }
+            before = after;
+        }
+    }
 }

@@ -77,7 +77,8 @@
   			</table>
   		</form>
   		<div style="padding:5px 0;min-width:1100px; width:100%;">
-  			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1004&param={'classType':'<%=classType %>','schoolId':'<%=schoolId %>'}" 
+  			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" 
+  				url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1004&param={'classType':'<%=classType %>','schoolId':'<%=schoolId %>'}" 
 				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 				<thead>
 					<tr>
