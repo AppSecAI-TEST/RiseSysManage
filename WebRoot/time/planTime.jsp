@@ -71,6 +71,9 @@ datagrid-row-selected
 	</head>
 	<body>
 		<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
+	<div style="margin:10px 0px 20px 20px">
+  		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" onclick="javascript:window.history.back()">返回</a>	
+  	</div>	
 	<div id="wrap">  
         <!--  <div id="header">header</div> --> 
         <div id="container">  
@@ -106,7 +109,6 @@ datagrid-row-selected
     	</div></div>  
              
         </div>  
-         
     </div>  
 	
 		 <div id="dlg" class="easyui-dialog" style="width: 600px; height: 550px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
