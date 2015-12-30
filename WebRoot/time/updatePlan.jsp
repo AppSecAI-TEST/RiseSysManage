@@ -53,7 +53,7 @@ function init()
         {field:'weekName',title:'周',width:25,align:'center'},  
         {field:'dateRange',title:'时间段',width:25,align:'center'},  
         {field:'isPlan',title:'是否排课',width:25,align:'center'},  
-        {field:'createDdate',title:'创建时间',width:25,align:'center', 
+        {field:'createDdate',title:'操作',width:25,align:'center', 
             formatter: function(Confirmation, row)
             {  
                 var btn = '<a class="editcls" onclick="planWeek(\''+row.weekName+'\',\''+row.month+'\',\''+row.createWeekId+'\')"  href="javascript:void(0)">排课</a>';  

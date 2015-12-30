@@ -39,7 +39,7 @@
 					<th data-options="field:'schoolName',width:25,align:'center'">周</th>
 					<th data-options="field:'month',width:25,align:'center'">时间段</th>
 					<th data-options="field:'staffName',width:25,align:'center'">是否排课</th>
-					<th data-options="field:'createDate',width:25,align:'center'">创建时间</th>
+					<th data-options="field:'createDate',width:25,align:'center'">操作</th>
 				</tr>
 				</thead>
 			</table>
