@@ -104,6 +104,7 @@
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
 				$("#classManState").combobox("loadData",data);
+				ajaxLoadEnd();
 			},"json");
 			$(document).ready(function(){
 				$("#classManState").combobox({

@@ -79,7 +79,7 @@
 			</tr>
 			<c:forEach items="${shortClassAttendT.studentAttendList}" var="node" varStatus="i">
 				<tr id="studentId${node.studentId}">
-					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" shortStudentAttendId="${node.shortStudentAttendId}"><input type="checkbox" name="studentId" value="${node.studentId}" onclick="studentCheckboxClick(this)" /></td>
+					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" shortStudentAttendId="${node.shortStudentAttendId}" studentCourseId="${node.studentCourseId}"><input type="checkbox" name="studentId" value="${node.studentId}" onclick="studentCheckboxClick(this)" /></td>
 					<td align="center">${i.count}</td>
 					<td align="center">${node.studentT.name}</td>
 					<td align="center">${node.studentT.byName}</td>
@@ -262,6 +262,8 @@
 						shortClassInstId:"${shortClassAttendT.shortClassInstId}",
 						schoolId:firstTr.attr("schoolId"),
 						studentId:firstTr.attr("studentId"),
+						studentCourseId:firstTr.attr("studentCourseId"),
+						hours:$("#classLessonHour").textbox("getValue"),
 						attendType:attendTypeObj,
 						dress:dressObj,
 						handlerId:"${sessionScope.StaffT.staffId}"

@@ -58,27 +58,27 @@
 					<tr>
 						<th data-options="field:'shortClassInstId',checkbox:true"></th>
 						<th width="6%" field="schoolName">校区</th>
-						<th width="6%" field="classType">外教课阶段</th>
-						<th width="7%" field="className">计划上课时间</th>
-						<th width="7%" field="className">实际上课时间</th>
-						<th width="6%" field="className">已预约人数</th>
-						<th width="6%" field="className">实际上课人数</th>
-						<th width="6%" field="teacherNames">计划T老师</th>
-						<th width="7%" field="teacherNames">实际T老师</th>
-						<th width="6%" field="classStateName">计划Ta老师</th>
-						<th width="7%" field="classStateName">实际Ta老师</th>
-						<th width="6%" field="totalLessionHours">外教课班级状态</th>
-						<th width="6%" field="classProgress">创建人</th>
-						<th width="7%" field="personNum">创建时间</th>
-						<th width="6%" field="classProgress">反馈人</th>
-						<th width="7%" field="personNum">反馈时间</th>
+						<th width="6%" field="stageId">外教课阶段</th>
+						<th width="7%" field="planSchoolDate">计划上课时间</th>
+						<th width="7%" field="schoolDate">实际上课时间</th>
+						<th width="6%" field="realClassNum">已预约人数</th>
+						<th width="6%" field="personNum">实际上课人数</th>
+						<th width="6%" field="planTeahcerT">计划T老师</th>
+						<th width="7%" field="teacherT">实际T老师</th>
+						<th width="6%" field="planTeahcerTa">计划Ta老师</th>
+						<th width="7%" field="teacherTa">实际Ta老师</th>
+						<th width="6%" field="classStateName">外教课班级状态</th>
+						<th width="6%" field="createId">创建人</th>
+						<th width="7%" field="createDate">创建时间</th>
+						<th width="6%" field="handerId">反馈人</th>
+						<th width="7%" field="attendDate">反馈时间</th>
 					</tr>
 				</thead>
 			</table>
 		</div>
 		<div id="toolManbar" style="padding: 2px; height: auto">
 			<a href="javascript:void(0)" id="classArrangementBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="classArrangementFunc()">预约管理</a>
-			<a href="javascript:void(0)" id="cancelClassBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="cancelClassFunc()">反馈管理</a>
+			<a href="javascript:void(0)" id="cancelClassBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="forwardClassFunc()">反馈管理</a>
    			<a href="javascript:void(0)" id="viewClassBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="viewClassFunc()">浏览</a>
 		</div>
 		<script type="text/javascript">
@@ -114,8 +114,8 @@
 			function queryFunc()
 			{
 				var obj = $("#manFm").serializeObject();
-				obj["queryCode"] = "qryInterClassList";
-				obj["funcNodeId"] = "38110";
+				obj["queryCode"] = "qryAttenceForeignClass";
+				obj["funcNodeId"] = "38139";
 				obj = JSON.stringify(obj);
 				$("#manList").datagrid({
 					url:"/sys/pubData/qryDataListByPage.do",
@@ -134,16 +134,24 @@
 			}
 			function classArrangementFunc()
 			{
-				window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&classType=外教课&pageName=attenceForeignDetail";
+				var row = $("#manList").datagrid("getSelected");
+				if(row)
+				{
+					window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&classType=外教课&pageName=shortAttenceForeignDetail";					
+				}
+				else
+				{
+					$.messager.alert('提示',"请选择要预约的班级");
+				}
 			}
-			function cancelClassFunc()
+			function forwardClassFunc()
 			{
 				var row = $("#manList").datagrid("getSelected");
 				if(row)
 				{
 					if(row.classStateName == "未开课" || row.classStateName == "未开课")
 					{
-						window.location.href = "/sys/shortBus/cancelShortClassInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
+						window.location.href = "/sys/shortBus/getForeignAttendTInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
 					}
 					else if(row.classStateName == "开课在读")
 					{
@@ -160,7 +168,7 @@
 				}
 				else
 				{
-					$.messager.alert('提示',"请选择要取消的班级");
+					$.messager.alert('提示',"请选择要反馈的班级");
 				}
 			}
 			function viewClassFunc()

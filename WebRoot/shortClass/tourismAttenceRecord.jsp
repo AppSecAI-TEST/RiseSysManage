@@ -54,7 +54,7 @@
 			</tr>
 			<c:forEach items="${shortClassInstT.classStudentList}" var="node" varStatus="i">
 				<tr id="studentId${node.studentId}">
-					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}">${i.count}</td>
+					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" studentCourseId="${node.studentCourseId}">${i.count}</td>
 					<td align="center">${node.studentT.schoolT.schoolName}</td>
 					<td align="center">${node.studentT.name}</td>
 					<td align="center">${node.studentT.byName}</td>
@@ -162,6 +162,8 @@
 						shortClassInstId:"${shortClassInstT.shortClassInstId}",
 						schoolId:firstTr.attr("schoolId"),
 						studentId:firstTr.attr("studentId"),
+						studentCourseId:firstTr.attr("studentCourseId"),
+						hours:"",
 						attendType:attendTypeObj,
 						dress:"",
 						handlerId:"${sessionScope.StaffT.staffId}"

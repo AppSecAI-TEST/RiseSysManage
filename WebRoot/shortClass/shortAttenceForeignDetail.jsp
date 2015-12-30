@@ -62,6 +62,7 @@
 		</div>
 		<table region="center" class="tab" id="teacherList" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr class="headTr">
+				<td>&nbsp;</td>
 				<td>序号</td>
 				<td>学员姓名</td>
 				<td>班级类型</td>
@@ -75,12 +76,13 @@
 			<c:choose>
 				<c:when test="${fn:length(shortClassInstT.classStudentList) == 0}">
 					<tr>
-						<td colspan="9" align="center">暂无预约用户</td>
+						<td colspan="10" align="center">暂无预约用户</td>
 					</tr>
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${shortClassInstT.classStudentList}" var="node" varStatus="i">
-						<tr>
+						<tr class="studentId" id="studentId${node.studentId}">
+							<td align="center"><input type="checkbox" name="studentId" value="${node.studentId}" onclick="classAttendCheckbox(this)" /></td>
 							<td align='center'>${i.count}</td>
 							<td align='center'>${node.studentT.name}</td>
 							<td align='center'>${node.studentCourseT.classType}</td>
@@ -128,17 +130,62 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
+			var gClassAttend = null;
 			function addAttenceFunc()
 			{
 				window.location.href = "/sys/shortClass/choiceForeignClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&classType="+encodeURI("外教课");
 			}
 			function cancelAttenceFunc()
 			{
-				
+				var stuArr = [];
+				$("input[name='studentId']").each(function(i,node){
+					if(node.checked)
+					{
+						stuArr.push(node.value);
+					}
+				});
+				if(stuArr.length == 0)
+				{
+					$.messager.alert('提示',"移除所勾选的学员失败:");
+				}
+				else
+				{
+					$.messager.confirm("提示", "您确定要移除所勾选的学员吗？", function (data) {
+			            if(data){
+			            	ajaxLoading("移除中...");
+			                $.post("/sys/shortBus/delShortStudentList.do",{shortClassInstId:${shortClassInstT.shortClassInstId},studentIds:stuArr.join(","),handlerId:${sessionScope.StaffT.staffId}},function(data){
+			                	ajaxLoadEnd();
+			                	if(data == "success")
+			                	{
+			                		for(var i = 0,n = stuArr.length;i < n;i++)
+			                		{
+				                		$("#studentId"+stuArr[i]).remove();
+			                		}
+			                		if($(".studentId").length == 0)
+			                		{
+			                			$(".headTr").after("<tr><td colspan='10' align='center'>暂无预约用户</td></tr>");
+			                		}
+			                	}
+			                	else
+			                	{
+			                		$.messager.alert('提示',"移除所勾选的学员失败:"+data,"error");
+			                	}
+			                });
+			            }
+			        });
+				}
+			}
+			function classAttendCheckbox(obj)
+			{
+				if(gClassAttend != null && gClassAttend != obj)
+				{
+					gClassAttend.checked = false;
+				}
+				gClassAttend = obj;			
 			}
 			function backFunc()
 			{
-				window.location.href = "/sys/shortClass/foreignClassMan.jsp?funcNodeId=${funcNodeId}";
+				window.location.href = "/sys/shortClass/attenceForeignMan.jsp?funcNodeId=${funcNodeId}";
 			}
 		</script>
  	</body>

@@ -35,7 +35,6 @@
 				<td>姓名</td>
 				<td>课时类型</td>
 				<td>课时量</td>
-				<td>是否持证</td>
 				<td>操作</td>
 			</tr>
 			<tr>
@@ -44,7 +43,6 @@
 				<td align="center"><select id="attRecordTeacherId" name="attRecordTeacherId" style="width:150px" ></select></td>
 				<td align="center"><select id="attRecordClassType" name="attRecordClassType" style="width:150px" ></select></td>
 				<td align="center"><input name="attRecordLessonHour" id="attRecordLessonHour" type="text" style="width:150px" class="easyui-textbox" /></td>
-				<td>&nbsp;</td>
 				<td align="center" width="15%"><a href="javascript:void(0)" id="addTeacherBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="addAttendTeacher()">添加</a></td>
 			</tr>
 			<c:forEach items="${shortSchooltimeT.classTeacherList}" var="node">
@@ -54,39 +52,25 @@
 					<td align="center">${node.teacherT.teacherName}</td>
 					<td align="center">${node.teacherType}</td>
 					<td align="center">${node.lessionHours}</td>
-					<td align="center">
-						<c:choose>
-							<c:when test="${fn:length(node.teacherT.teacherLicenseList) == 0}">
-								未持证
-							</c:when>
-							<c:otherwise>
-								已持证
-							</c:otherwise>
-						</c:choose>
-					</td>
 					<td align="center"><a href="javascript:void(0)" onclick="delTeacherFunc(${node.teacherId})">删除</a></td>
 				</tr>
 			</c:forEach>
 		</table>
 		<table class="tab" id="studentTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr class="headTr">
-				<td width="3%"><input type="checkbox" name="studentId" id="studentAllId" value="" onclick="checkAllStudentFunc(this)" /></td>
-				<td width="3%">序号</td>
-				<td width="10%">学员姓名</td>
-				<td width="10%">英文名</td>
-				<td width="8%">课程状态</td>
+				<td width="5%">序号</td>
+				<td width="15%">校区</td>
+				<td width="15%">学员姓名</td>
+				<td width="15%">英文名</td>
 				<td width="50%">考勤操作</td>
-				<td width="16%">校服着装情况</td>
 			</tr>
 			<c:forEach items="${shortClassInstT.classStudentList}" var="node" varStatus="i">
-				<tr id="studentId${node.studentId}">
-					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" studentCourseId="${node.studentCourseId}"><input type="checkbox" name="studentId" value="${node.studentId}" courseId="${node.studentCourseT.studentCourseId}" onclick="studentCheckboxClick(this)" /></td>
+				<tr id="studentId${node.studentId}" studentId="${node.studentId}" studentCourseId="${node.studentCourseId}" schoolId="${node.schoolId}">
 					<td align="center">${i.count}</td>
+					<td align="center">${node.studentT.schoolT.schoolName}</td>
 					<td align="center">${node.studentT.name}</td>
 					<td align="center">${node.studentT.byName}</td>
-					<td align="center">${node.studentCourseT.courseStateName}</td>
-					<td align="center"><input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}1" value="N" checked="checked" /><label for="attendType${node.studentId}1">正常上课</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}2" value="B" /><label for="attendType${node.studentId}2">迟到</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}3" value="L" /><label for="attendType${node.studentId}3">请假</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}4" value="T" /><label for="attendType${node.studentId}4">旷课</label>&nbsp;&nbsp;&nbsp;&nbsp;<input class="easyui-filebox" name="uploadAttenceLeave${node.studentId}" data-options="prompt:'',buttonText:'上传请假单'" style="width:200px"></td>
-					<td align="center"><input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" checked="checked" /><label for="dress${node.studentId}1">未穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" /><label for="dress${node.studentId}2">已穿校服</label></td>
+					<td align="center"><input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}1" value="N" checked="checked" /><label for="attendType${node.studentId}1">已到</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}2" value="T" /><label for="attendType${node.studentId}2">未到</label></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -227,17 +211,14 @@
 				obj.teacherAttendList = teacherArr;
 				var studentArr = [];
 				$("#studentTab tr:gt(0)").each(function(i,node){
-					var firstTr = $(node).find("td:nth-child(1)");
-					var attendTypeObj = $(node).find("input[name='attendType"+firstTr.attr("studentId")+"']:checked").val();
-					var dressObj = $(node).find("input[name='dress"+firstTr.attr("studentId")+"']:checked").val();
+					var attendTypeObj = $(node).find("input[name='attendType"+$(node).attr("studentId")+"']:checked").val();
 					var studentObj = {
 						shortClassInstId:"${shortSchooltimeT.shortClassInstId}",
-						schoolId:firstTr.attr("schoolId"),
-						studentId:firstTr.attr("studentId"),
-						studentCourseId:firstTr.attr("studentCourseId"),
+						schoolId:$(node).attr("schoolId"),
+						studentId:$(node).attr("studentId"),
+						studentCourseId:$(node).attr("studentCourseId"),
 						hours:$("#classLessonHour").textbox("getValue"),
 						attendType:attendTypeObj,
-						dress:dressObj,
 						handlerId:"${sessionScope.StaffT.staffId}"
 					};
 					studentArr.push(studentObj);
@@ -276,24 +257,9 @@
 				}
 			}
 			
-			function checkAllStudentFunc(obj)
-			{
-				$("input[name='studentId']").each(function(i,node){
-					node.checked = obj.checked;
-				});
-			}
-			
-			function studentCheckboxClick(obj)
-			{
-				if(!obj.checked)
-				{
-					$("#studentAllId").attr("checked",false);
-				}
-			}
-			
 			function backFunc()
 			{
-				window.location.href = "/sys/shortBus/shortAttenceDetailPage.do?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=${pageName}";
+				window.location.href = "/sys/shortClass/attenceForeignMan.jsp?funcNodeId=${funcNodeId}";
 			}
 		</script>
  	</body>

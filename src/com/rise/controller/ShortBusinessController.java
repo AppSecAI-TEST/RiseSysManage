@@ -651,4 +651,19 @@ public class ShortBusinessController
 		}
 	}
 	
+	@RequestMapping("/getForeignAttendTInfo.do")
+	public ModelAndView getForeignAttendTInfo(String shortClassInstId , String funcNodeId)
+	{
+		ModelAndView model = new ModelAndView("shortClass/shortAttenceForeignRecord");
+		try
+		{
+			shortBusinessService.getShortClassAttendTInfo(model , shortClassInstId , funcNodeId , "");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
 }

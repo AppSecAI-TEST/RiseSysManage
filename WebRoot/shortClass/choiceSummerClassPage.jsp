@@ -140,10 +140,12 @@
 			}
 			function resetFunc()
 			{
-				$("#shortClassType").combobox("setValue","");
 				$("#schoolManId").combobox("setValue","");
-				$("#openStartManTime").datebox("setValue","");
-				$("#openEndManTime").datebox("setValue","");
+				$("#shortClassType").combobox("setValue","");
+				$("#shortClassState").combobox("setValue","");
+				$("#schoolManId").combobox("setValue","");
+				$("#payStartManTime").datebox("setValue","");
+				$("#payEndManTime").datebox("setValue","");
 				$("#studentName").textbox("setValue","");
 				$("#phoneNum").textbox("setValue","");
 			}
