@@ -309,7 +309,7 @@
 			}
 			function manLeaveFunc()
 			{
-				
+				window.location.href = "/sys/attence/leaveMakeupMan.jsp?funcNodeId=${param.funcNodeId}";
 			}
 			function queryHisFunc()
 			{

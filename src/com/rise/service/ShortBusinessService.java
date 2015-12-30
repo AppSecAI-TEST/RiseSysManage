@@ -319,4 +319,10 @@ public class ShortBusinessService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
+	public String addDirectShortClassInstInfo(String json , String classType , String schoolId , String stageId) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20526\",securityCode:\"0000000000\",params:{json:'"+json+"',classType:\""+classType+"\",schoolId:\""+schoolId+"\",stageId:\""+stageId+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
 }

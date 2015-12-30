@@ -603,4 +603,28 @@ public class ShortBusinessController
 		}
 	}
 	
+	@RequestMapping("/addDirectShortClassInstInfo.do")
+	public void addDirectShortClassInstInfo(HttpServletResponse response , String json , String classType , String schoolId , String stageId)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = shortBusinessService.addDirectShortClassInstInfo(json , classType , schoolId , stageId);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 }

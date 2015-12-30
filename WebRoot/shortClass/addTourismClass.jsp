@@ -69,6 +69,7 @@
 					//panelHeight: 'auto',
 					listHeight:150,
 					onSelect:function(data){
+						$("#teacherId").combobox("setValue","");
 						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:data.schoolId},function(data){
 							$("#teacherId").combobox("loadData",data);
 						},"json");

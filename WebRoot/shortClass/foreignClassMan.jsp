@@ -127,7 +127,7 @@
 			}
 			function classArrangementFunc()
 			{
-				window.location.href = "/sys/shortBus/getAddShortClassInfo.do?funcNodeId=${param.funcNodeId}";
+				window.location.href = "/sys/shortClass/directShortClassInst.jsp?funcNodeId=${param.funcNodeId}&classType="+encodeURI("外教课");
 			}
 			function cancelClassFunc()
 			{

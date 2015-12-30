@@ -22,7 +22,7 @@ public class ShortClassInstT {
 
     private Integer classProgress;
 
-    private Integer stageId;
+    private String stageId;
 
     private Integer planClassNum;
 
@@ -144,11 +144,11 @@ public class ShortClassInstT {
         this.classProgress = classProgress;
     }
 
-    public Integer getStageId() {
+    public String getStageId() {
         return stageId;
     }
 
-    public void setStageId(Integer stageId) {
+    public void setStageId(String stageId) {
         this.stageId = stageId;
     }
 

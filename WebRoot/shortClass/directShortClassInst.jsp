@@ -13,7 +13,6 @@
   	</head>
   
   	<body class="manage">
- 		<input type="hidden" id="shortClassInstId" value="${param.shortClassInstId}" />
 		<table align="center" class="tab" style="width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="right" width="10%">日期：</td>
@@ -25,6 +24,10 @@
 			<tr>
 				<td align="right">教室：</td>
 				<td colspan="4"><select id="roomList" name="roomList" style="width:150px" ></select></td>
+			</tr>
+			<tr>
+				<td align="right">课程阶段：</td>
+				<td colspan="4"><select id="classPharse" name="classPharse" style="width:150px" ></select></td>
 			</tr>
 			<tr>
 				<td align="right">课时：</td>
@@ -46,7 +49,7 @@
 			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/pubData/qryRoomList.do?schoolId=${param.schoolId}",function(data){
+			$.post("<%=path %>/pubData/qryRoomList.do?schoolId=${sessionScope.StaffT.schoolId}",function(data){
 				$("#roomList").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryParaConfigList.do?paramType=HOUR_RANGE",function(data){
@@ -54,6 +57,9 @@
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=ACTION_T&codeType=TEACHER_TYPE",function(data){
 				$("#teacherType").combobox("loadData",data);
+			},"json");
+			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID",function(data){
+				$("#classPharse").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
 				$("#roomList").combobox({
@@ -72,6 +78,12 @@
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
 					textField: 'codeName',
+					panelHeight: 'auto'
+				});
+				$("#classPharse").combobox({
+					formatter:formatItem, 
+					valueField: 'codeFlag', 
+					textField: 'codeName', 
 					panelHeight: 'auto'
 				});
 				$("#schoolId").combobox({
@@ -130,16 +142,15 @@
 			}
 			function addSubmitFunc()
 			{
-				var shortClassInstId = $("#shortClassInstId").val();
 				var schooltimeDate = $("#schooltimeDate").datebox("getValue");
 				var hourRange = $("#hourRange").combobox("getValue");
 				var roomList = $("#roomList").combobox("getValue");
 				var lessonHour = $("#lessonHour").textbox("getValue");
+				var stageId = $("#classPharse").combobox("getValue");
 				var arr = [];
 				$(".teacherId").each(function(i,node){
 					var teacherObj = $(node).find("td:eq(0)");
 					var obj = {
-						shortClassInstId:shortClassInstId,
 						teacherId:teacherObj.attr("teacherId"),
 						teacherType:teacherObj.attr("teacherType"),
 						lessionHours:lessonHour,
@@ -156,6 +167,10 @@
 				{
 					$.messager.alert('提示',"排课时间范围不能为空,请核实后重新尝试","info");
 				}
+				else if(stageId == "")
+				{
+					$.messager.alert('提示',"请先选择课程阶段后重新尝试");
+				}
 				else if(roomList == "")
 				{
 					$.messager.alert('提示',"排课教室不能为空,请核实后重新尝试","info");
@@ -171,7 +186,6 @@
 				else
 				{
 					var json = {
-						shortClassInstId:shortClassInstId,
 						roomId:roomList,
 						schooltime:schooltimeDate,
 						hourRange:hourRange,
@@ -179,7 +193,7 @@
 						handlerId:${sessionScope.StaffT.staffId},
 						classTeacherList:arr
 					};
-					$.post("/sys/shortBus/addShortSchooltimeTInfo.do",{json:JSON.stringify(json)},function(data){
+					$.post("/sys/shortBus/addDirectShortClassInstInfo.do",{json:JSON.stringify(json),classType:encodeURI("${param.classType}"),schoolId:${sessionScope.StaffT.schoolId},stageId:stageId},function(data){
 						if(data == "success")
 						{
 							$.messager.alert('提示',"完成当前排课","",function(){
@@ -199,14 +213,7 @@
 			}
 			function backFunc()
 			{
-				if("${param.paramFlag}" == "ADD")
-				{
-					window.location.href = "/sys/shortBus/getAddShortClassInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId=${param.shortClassInstId}&pageName=${param.pageName}";
-				}
-				else
-				{
-					window.location.href = "/sys/shortBus/shortClassManInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId=${param.shortClassInstId}&pageName=${param.pageName}";
-				}
+				window.history.back();			
 			}
 		</script>
  	</body>

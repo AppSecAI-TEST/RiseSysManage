@@ -80,14 +80,14 @@
 						<th data-options="field:'classInstId',checkbox:true"></th>
 						<th width="7%" field="schoolName">校区</th>
 						<th width="7%" field="name">学员姓名</th>
-						<th width="10%" field="studentPhone">联系电话</th>
+						<th width="9%" field="studentPhone">联系电话</th>
 						<th width="7%" field="classType">国际班类型</th>
 						<th width="7%" field="className">班级</th>
-						<th width="10%" field="adviserTeacher">业绩老师</th>
+						<th width="9%" field="adviserTeacher">业绩老师</th>
 						<th width="7%" field="adviser">业绩顾问</th>
 						<th width="7%" field="payDate">缴费日期</th>
 						<th width="7%" field="totalAmount">实际缴费金额</th>
-						<th width="10%" field="favorType">优惠方式</th>
+						<th width="9%" field="favorType">优惠方式</th>
 						<th width="7%" field="feeStateName">是否退费</th>
 						<th width="7%" field="isChoiceClass">是否选班</th>
 						<th width="7%" field="interClassName">国际班班级</th>

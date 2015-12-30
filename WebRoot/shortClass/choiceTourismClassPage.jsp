@@ -17,7 +17,7 @@
   	</head>
   	<body>
 		<form id="manFm" style="margin:0 auto;">
-			<input type="hidden" name="classType" id="classType" value="${param.classType}" />
+			<input type="hidden" name="classType" id="classType" value="N" />
 			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 				<tr>
 					<td align="right">
