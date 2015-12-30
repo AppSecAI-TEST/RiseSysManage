@@ -105,18 +105,18 @@
 						<td>
 							<c:choose>
 								<c:when test="${pageFlag == 'NEW'}">
-									<input name="nationality" id="nationalityCn" type="radio" value="中国国籍" checked="checked"/><label for="nationalityCn">中国国籍</label>
-									<input name="nationality" id="nationalityFor" type="radio" value="外国国籍" /><label for="nationalityFor">外国国籍</label>
+									<input name="nationality" id="nationalityCn" type="radio" value="native" checked="checked"/><label for="nationalityCn">中国国籍</label>
+									<input name="nationality" id="nationalityFor" type="radio" value="foreign" /><label for="nationalityFor">外国国籍</label>
 								</c:when>
 								<c:otherwise>
 									<c:choose>
-										<c:when test="${staffT.nationality == '外国国籍'}">
-											<input name="nationality" id="nationalityCn" type="radio" value="中国国籍" /><label for="nationalityCn">中国国籍</label>
-											<input name="nationality" id="nationalityFor" type="radio" value="外国国籍" checked="checked"/><label for="nationalityFor">外国国籍</label>
+										<c:when test="${staffT.nationality == 'foreign'}">
+											<input name="nationality" id="nationalityCn" type="radio" value="native" /><label for="nationalityCn">中国国籍</label>
+											<input name="nationality" id="nationalityFor" type="radio" value="foreign" checked="checked"/><label for="nationalityFor">外国国籍</label>
 										</c:when>
 										<c:otherwise>
-											<input name="nationality" id="nationalityCn" type="radio" value="中国国籍" checked="checked"/><label for="nationalityCn">中国国籍</label>
-											<input name="nationality" id="nationalityFor" type="radio" value="外国国籍" /><label for="nationalityFor">外国国籍</label>
+											<input name="nationality" id="nationalityCn" type="radio" value="native" checked="checked"/><label for="nationalityCn">中国国籍</label>
+											<input name="nationality" id="nationalityFor" type="radio" value="foreign" /><label for="nationalityFor">外国国籍</label>
 										</c:otherwise>
 									</c:choose>
 								</c:otherwise>

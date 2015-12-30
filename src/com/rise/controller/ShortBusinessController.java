@@ -132,14 +132,14 @@ public class ShortBusinessController
 	}
 	
 	@RequestMapping("/cancelShortClassFunc.do")
-	public void cancelShortClassFunc(String shortClassInstId , String remark , HttpServletResponse response)
+	public void cancelShortClassFunc(String shortClassInstId , String remark , String handleId , HttpServletResponse response)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = shortBusinessService.cancelShortClassFunc(shortClassInstId,remark);
+			String retVal = shortBusinessService.cancelShortClassFunc(shortClassInstId , remark , handleId);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -612,6 +612,30 @@ public class ShortBusinessController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = shortBusinessService.addDirectShortClassInstInfo(json , classType , schoolId , stageId);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/cancelGiftClassFunc.do")
+	public void cancelGiftClassFunc(String shortClassInstId , String remark , String classType , String handleId , HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = shortBusinessService.cancelGiftClassFunc(shortClassInstId , remark , classType , handleId);
 			out.write(retVal);
 		}
 		catch(Exception e)

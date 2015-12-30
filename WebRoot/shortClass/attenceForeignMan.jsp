@@ -57,21 +57,21 @@
 				<thead>
 					<tr>
 						<th data-options="field:'shortClassInstId',checkbox:true"></th>
-						<th width="12%" field="schoolName">校区</th>
-						<th width="12%" field="classType">外教课阶段</th>
-						<th width="12%" field="className">计划上课时间</th>
-						<th width="12%" field="className">实际上课时间</th>
-						<th width="12%" field="className">已预约人数</th>
-						<th width="12%" field="className">实际上课人数</th>
-						<th width="13%" field="teacherNames">计划T老师</th>
-						<th width="13%" field="teacherNames">实际T老师</th>
-						<th width="13%" field="classStateName">计划Ta老师</th>
-						<th width="13%" field="classStateName">实际Ta老师</th>
-						<th width="12%" field="totalLessionHours">外教课班级状态</th>
-						<th width="12%" field="classProgress">创建人</th>
-						<th width="12%" field="personNum">创建时间</th>
-						<th width="12%" field="classProgress">反馈人</th>
-						<th width="12%" field="personNum">反馈时间</th>
+						<th width="6%" field="schoolName">校区</th>
+						<th width="6%" field="classType">外教课阶段</th>
+						<th width="7%" field="className">计划上课时间</th>
+						<th width="7%" field="className">实际上课时间</th>
+						<th width="6%" field="className">已预约人数</th>
+						<th width="6%" field="className">实际上课人数</th>
+						<th width="6%" field="teacherNames">计划T老师</th>
+						<th width="7%" field="teacherNames">实际T老师</th>
+						<th width="6%" field="classStateName">计划Ta老师</th>
+						<th width="7%" field="classStateName">实际Ta老师</th>
+						<th width="6%" field="totalLessionHours">外教课班级状态</th>
+						<th width="6%" field="classProgress">创建人</th>
+						<th width="7%" field="personNum">创建时间</th>
+						<th width="6%" field="classProgress">反馈人</th>
+						<th width="7%" field="personNum">反馈时间</th>
 					</tr>
 				</thead>
 			</table>
@@ -134,7 +134,7 @@
 			}
 			function classArrangementFunc()
 			{
-				window.location.href = "/sys/shortBus/getAddShortClassInfo.do?funcNodeId=${param.funcNodeId}";
+				window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&classType=外教课&pageName=attenceForeignDetail";
 			}
 			function cancelClassFunc()
 			{

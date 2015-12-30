@@ -58,13 +58,13 @@
 					<tr>
 						<th data-options="field:'shortClassInstId',checkbox:true"></th>
 						<th width="12%" field="schoolName">校区</th>
-						<th width="12%" field="classType">外教课阶段</th>
-						<th width="12%" field="className">计划上课时间</th>
-						<th width="13%" field="teacherNames">计划T老师</th>
-						<th width="13%" field="classStateName">计划Ta老师</th>
-						<th width="12%" field="totalLessionHours">外教课班级状态</th>
-						<th width="12%" field="classProgress">创建人</th>
-						<th width="12%" field="personNum">创建时间</th>
+						<th width="12%" field="stageId">外教课阶段</th>
+						<th width="12%" field="schoolDate">计划上课时间</th>
+						<th width="13%" field="teahcerT">计划T老师</th>
+						<th width="13%" field="teahcerTa">计划Ta老师</th>
+						<th width="12%" field="classStateName">外教课班级状态</th>
+						<th width="12%" field="staffName">创建人</th>
+						<th width="12%" field="createDate">创建时间</th>
 					</tr>
 				</thead>
 			</table>
@@ -107,8 +107,8 @@
 			function queryFunc()
 			{
 				var obj = $("#manFm").serializeObject();
-				obj["queryCode"] = "qryInterClassList";
-				obj["funcNodeId"] = "38110";
+				obj["queryCode"] = "qryForeignManList";
+				obj["funcNodeId"] = "38138";
 				obj = JSON.stringify(obj);
 				$("#manList").datagrid({
 					url:"/sys/pubData/qryDataListByPage.do",
@@ -136,7 +136,7 @@
 				{
 					if(row.classStateName == "未开课" || row.classStateName == "未开课")
 					{
-						window.location.href = "/sys/shortBus/cancelShortClassInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
+						window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&classType=外教课&pageName=cancelForeignClass";
 					}
 					else if(row.classStateName == "开课在读")
 					{
@@ -163,7 +163,7 @@
 				{
 					if(row.classStateName != "解散")
 					{
-						window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
+						window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&classType=外教课&pageName=viewForeignClass";
 					}
 					else
 					{

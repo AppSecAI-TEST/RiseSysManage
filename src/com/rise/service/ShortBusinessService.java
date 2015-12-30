@@ -96,9 +96,9 @@ public class ShortBusinessService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
-	public String cancelShortClassFunc(String shortClassInstId , String remark) throws Exception
+	public String cancelShortClassFunc(String shortClassInstId , String remark , String handleId) throws Exception
 	{
-		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2058\",securityCode:\"0000000000\",params:{shortClassInstId:\""+shortClassInstId+"\",remark:\""+remark+"\"},rtnDataFormatType:\"user-defined\"}";
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2058\",securityCode:\"0000000000\",params:{shortClassInstId:\""+shortClassInstId+"\",remark:\""+remark+"\",handleId:\""+handleId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
 	
@@ -322,6 +322,12 @@ public class ShortBusinessService
 	public String addDirectShortClassInstInfo(String json , String classType , String schoolId , String stageId) throws Exception
 	{
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20526\",securityCode:\"0000000000\",params:{json:'"+json+"',classType:\""+classType+"\",schoolId:\""+schoolId+"\",stageId:\""+stageId+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
+	public String cancelGiftClassFunc(String shortClassInstId , String remark , String classType , String handleId) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20527\",securityCode:\"0000000000\",params:{shortClassInstId:\""+shortClassInstId+"\",remark:\""+remark+"\",classType:\""+classType+"\",handleId:\""+handleId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
 	

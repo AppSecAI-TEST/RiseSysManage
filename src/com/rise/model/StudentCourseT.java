@@ -73,6 +73,8 @@ public class StudentCourseT {
     
     private String courseStateName;
     
+    private String studentClassName;
+    
 	private StaffT adviserAObj;
 	
 	private StaffT adviserBObj;
@@ -359,6 +361,14 @@ public class StudentCourseT {
 
 	public void setCourseStateName(String courseStateName) {
 		this.courseStateName = courseStateName;
+	}
+
+	public String getStudentClassName() {
+		return studentClassName;
+	}
+
+	public void setStudentClassName(String studentClassName) {
+		this.studentClassName = studentClassName;
 	}
 
 	public StaffT getAdviserAObj() {

@@ -1,5 +1,6 @@
 package com.rise.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -55,6 +56,10 @@ public class ShortClassInstT {
     private Date stateDate;
 
     private Integer handlerId;
+    
+	private Integer cancelHandlerId;
+	
+	private Date cancelDate;
     
     private SchoolT schoolT;
     
@@ -279,6 +284,22 @@ public class ShortClassInstT {
     public void setHandlerId(Integer handlerId) {
         this.handlerId = handlerId;
     }
+    
+	public Integer getCancelHandlerId() {
+		return cancelHandlerId;
+	}
+
+	public void setCancelHandlerId(Integer cancelHandlerId) {
+		this.cancelHandlerId = cancelHandlerId;
+	}
+
+	public Date getCancelDate() {
+		return cancelDate;
+	}
+
+	public void setCancelDate(Date cancelDate) {
+		this.cancelDate = cancelDate;
+	}
 
 	public SchoolT getSchoolT() {
 		return schoolT;

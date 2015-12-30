@@ -85,7 +85,7 @@
 				$.messager.confirm("提示", "您确定要取消该课程吗？", function (data) {
 		            if(data){
 		            	ajaxLoading("取消中...");
-		                $.post("/sys/shortBus/cancelShortClassFunc.do",{shortClassInstId:${shortClassInstT.shortClassInstId},remark:$("#remark").textbox("getValue")},function(data){
+		                $.post("/sys/shortBus/cancelShortClassFunc.do",{shortClassInstId:${shortClassInstT.shortClassInstId},remark:$("#remark").textbox("getValue"),handleId:${sessionScope.StaffT.staffId}},function(data){
 		                	ajaxLoadEnd();
 		                	if(data == "success")
 		                	{
