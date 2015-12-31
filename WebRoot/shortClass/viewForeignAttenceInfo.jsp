@@ -26,7 +26,7 @@
 			<tr>
 				<td align="right">计划T老师：</td>
 				<td>
-					<c:forEach items="${shortClassTeacherTList}" var="teacherNode">
+					<c:forEach items="${shortClassInstT.classSchooltimeList[0].classTeacherList}" var="teacherNode">
 						<c:if test="${teacherNode.teacherType == 'T'}">
 							${teacherNode.teacherT.teacherName}
 						</c:if>
@@ -34,7 +34,7 @@
 				</td>
 				<td align="right">计划TA老师：</td>
 				<td>
-					<c:forEach items="${shortClassTeacherTList}" var="teacherNode">
+					<c:forEach items="${shortClassInstT.classSchooltimeList[0].classTeacherList}" var="teacherNode">
 						<c:if test="${teacherNode.teacherType == 'TA'}">
 							${teacherNode.teacherT.teacherName}
 						</c:if>
@@ -59,23 +59,35 @@
 				<td align="right">&nbsp;</td>
 				<td>&nbsp;</td>
 				<td align="right">实际上课时间：</td>
-				<td>&nbsp;</td>				
+				<td><fmt:formatDate value="${shortClassAttendTList[0].schooltime}" pattern="yyyy-MM-dd" timeZone="GMT"/></td>				
 				<td align="right">实际上课人数：</td>
-				<td>&nbsp;</td>
+				<td>${shortClassAttendTList[0].realNum}</td>
 			</tr>
 			<tr>
 				<td align="right">实际T老师：</td>
-				<td>&nbsp;</td>
+				<td>
+					<c:forEach items="${shortClassAttendTList[0].teacherAttendList}" var="teacherNode">
+						<c:if test="${teacherNode.teacherType == 'T'}">
+							${teacherNode.teacherT.teacherName}
+						</c:if>
+					</c:forEach>
+				</td>
 				<td align="right">实际TA老师：</td>
-				<td>&nbsp;</td>				
+				<td>
+					<c:forEach items="${shortClassAttendTList[0].teacherAttendList}" var="teacherNode">
+						<c:if test="${teacherNode.teacherType == 'TA'}">
+							${teacherNode.teacherT.teacherName}
+						</c:if>
+					</c:forEach>
+				</td>				
 				<td align="right">&nbsp;</td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
 				<td align="right">反馈人：</td>
-				<td>&nbsp;</td>
+				<td>${shortClassAttendTList[0].handlerObj.staffName}</td>
 				<td align="right">反馈记录录入时间：</td>
-				<td>&nbsp;</td>				
+				<td><fmt:formatDate value="${shortClassAttendTList[0].attendDate}" pattern="yyyy-MM-dd HH:mm:ss" timeZone="GMT"/></td>				
 				<td align="right">&nbsp;</td>
 				<td>&nbsp;</td>
 			</tr>

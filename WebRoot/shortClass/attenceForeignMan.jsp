@@ -68,9 +68,9 @@
 						<th width="6%" field="planTeahcerTa">计划Ta老师</th>
 						<th width="7%" field="teacherTa">实际Ta老师</th>
 						<th width="6%" field="classStateName">外教课班级状态</th>
-						<th width="6%" field="createId">创建人</th>
+						<th width="6%" field="createName">创建人</th>
 						<th width="7%" field="createDate">创建时间</th>
-						<th width="6%" field="handerId">反馈人</th>
+						<th width="6%" field="handerName">反馈人</th>
 						<th width="7%" field="attendDate">反馈时间</th>
 					</tr>
 				</thead>
@@ -178,7 +178,7 @@
 				{
 					if(row.classStateName != "解散")
 					{
-						window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
+						window.location.href = "/sys/shortBus/shortAttenceDetailPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=viewForeignAttenceInfo";
 					}
 					else
 					{

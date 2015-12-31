@@ -240,7 +240,7 @@
 						ajaxLoadEnd();
 						if(data == "success")
 						{
-							$.messager.alert("提示", "考勤成功","info",function(){
+							$.messager.alert("提示", "反馈成功","info",function(){
 								backFunc();
 							});
 						}

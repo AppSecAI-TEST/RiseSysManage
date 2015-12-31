@@ -56,14 +56,14 @@
 						是否过期：
 					</td>
 					<td>
-						<input name="feeReturn" id="feeReturnYes" type="radio" value="是" /><label for="feeReturnYes">是</label>&nbsp;
-						<input name="feeReturn" id="feeReturnNo" type="radio" value="否" /><label for="feeReturnNo">否</label>										
+						<input name="isExpire" id="isExpireYes" type="radio" value="是" /><label for="isExpireYes">是</label>&nbsp;
+						<input name="isExpire" id="isExpireNo" type="radio" value="否" /><label for="isExpireNo">否</label>										
 					</td>
 					<td align="right">
 						几天内过期：
 					</td>
 					<td>
-						<input name="contactPhone" id="contactPhone" type="text" class="easyui-textbox" style="width:100px; height: 25px;"/>						
+						<input name="expireDate" id="expireDate" type="text" class="easyui-textbox" style="width:100px; height: 25px;"/>						
 					</td>
 					<td colspan="2">
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
@@ -76,20 +76,19 @@
 			<table class="easyui-datagrid" title="学员列表" style="height:390px" id="manList" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
-						<th data-options="field:'classInstId',checkbox:true"></th>
 						<th width="7%" field="schoolName">校区</th>
-						<th width="7%" field="name">学员姓名</th>
-						<th width="7%" field="byname">英文名</th>
-						<th width="10%" field="studentPhone">联系电话</th>
-						<th width="7%" field="classType">赠课来源</th>
-						<th width="7%" field="className">赠课来源开始日期</th>
-						<th width="10%" field="adviserTeacher">关联课状态</th>
-						<th width="7%" field="adviser">外教课状态</th>
-						<th width="7%" field="payDate">赠送课时</th>
-						<th width="7%" field="totalAmount">已消耗课时</th>
-						<th width="7%" field="favorType">有效期开始日期</th>
-						<th width="7%" field="feeStateName">有效期结束日期</th>
-						<th width="7%" field="isChoiceClass">距过期天数</th>
+						<th width="8%" field="name">学员姓名</th>
+						<th width="8%" field="byName">英文名</th>
+						<th width="8%" field="studentPhone">联系电话</th>
+						<th width="7%" field="giftChannelDesc">赠课来源</th>
+						<th width="9%" field="payDate">赠课来源开始日期</th>
+						<th width="7%" field="courseStateName">关联课状态</th>
+						<th width="7%" field="giftStateName">外教课状态</th>
+						<th width="7%" field="giftNum">赠送课时</th>
+						<th width="8%" field="giftJoinNum">已消耗课时</th>
+						<th width="8%" field="effDate">有效期开始日期</th>
+						<th width="8%" field="expDate">有效期结束日期</th>
+						<th width="7%" field="disExpDate">距过期天数</th>
 					</tr>
 				</thead>
 			</table>
@@ -108,11 +107,9 @@
 			},"json");
 			$(document).ready(function(){
 				$("#classManState").combobox({
-					formatter:function(data){
-						return '<span>'+data.classType+'</span>';
-					}, 
-					valueField: 'classTypeId', 
-					textField: 'classType',
+					formatter:formatItem, 
+					valueField: 'codeFlag', 
+					textField: 'codeName', 
 					panelHeight: 'auto'
 				});
 				$("#staffName").combobox({
@@ -133,8 +130,8 @@
 			function queryFunc()
 			{
 				var obj = $("#manFm").serializeObject();
-				obj["queryCode"] = "qryInterInfoList";
-				obj["funcNodeId"] = "38112";
+				obj["queryCode"] = "qryForeignInfoList";
+				obj["funcNodeId"] = "38141";
 				obj = JSON.stringify(obj);
 				$("#manList").datagrid({
 					url:"/sys/pubData/qryDataListByPage.do",
@@ -148,14 +145,13 @@
 				$("#schoolId").combobox("setValue","");
 				$("#staffName").combobox("setValue","");
 				$("#contactPhone").textbox("setValue","");
-				$("#interClassType").combobox("setValue","");
+				$("#classManState").combobox("setValue","");
 				$("#feeStartTime").datebox("setValue","");
-				$("input[name='feeReturn']").each(function(i,node){
+				$("#feeEndTime").datebox("setValue","");
+				$("input[name='isExpire']").each(function(i,node){
 					node.checked = false; 
 				});
-				$("input[name='selectClass']").each(function(i,node){
-					node.checked = false; 
-				});
+				$("#expireDate").textbox("setValue","");
 			}
 		</script>
  	</body>
