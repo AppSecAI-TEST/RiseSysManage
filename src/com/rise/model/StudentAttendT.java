@@ -20,6 +20,8 @@ public class StudentAttendT {
     private String studentName;
 
     private Integer schoolId;
+    
+    private Integer hours;
 
     private String dress;
 
@@ -110,8 +112,16 @@ public class StudentAttendT {
     public void setSchoolId(Integer schoolId) {
         this.schoolId = schoolId;
     }
+    
+    public Integer getHours() {
+		return hours;
+	}
 
-    public String getDress() {
+	public void setHours(Integer hours) {
+		this.hours = hours;
+	}
+
+	public String getDress() {
         return dress;
     }
 

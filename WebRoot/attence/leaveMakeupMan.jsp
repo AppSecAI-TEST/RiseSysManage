@@ -25,7 +25,7 @@
 					<td width="12%">
 						<select id="schoolManId" name="schoolManId" style="width:100px" ></select>
 					</td>
-					<td align="right" width="8%">	
+					<td align="right" width="8%">
 						课程阶段：
 					</td>
 					<td width="12%">

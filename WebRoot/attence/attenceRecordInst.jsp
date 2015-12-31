@@ -70,7 +70,7 @@
 			</tr>
 			<c:forEach items="${classInstT.classStudentList}" var="node" varStatus="i">
 				<tr id="studentId${node.studentId}">
-					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" studentName="${node.studentT.name}"><input type="checkbox" name="studentId" value="${node.studentId}" courseId="${node.studentCourseT.studentCourseId}" onclick="studentCheckboxClick(this)" /></td>
+					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" studentName="${node.studentT.name}" studentCourseId="${node.studentCourseId}" stageId="${classInstT.stageId}"><input type="checkbox" name="studentId" value="${node.studentId}" courseId="${node.studentCourseT.studentCourseId}" onclick="studentCheckboxClick(this)" /></td>
 					<td align="center">${i.count}</td>
 					<td align="center">${node.studentT.name}</td>
 					<td align="center">${node.studentT.byName}</td>
@@ -229,8 +229,11 @@
 						var dressObj = $(node).find("input[name='dress"+firstTr.attr("studentId")+"']:checked").val();
 						var studentObj = {
 							studentId:firstTr.attr("studentId"),
+							studentCourseId:firstTr.attr("studentCourseId"),
+							stageId:firstTr.attr("stageId"),
 							studentName:firstTr.attr("studentName"),
 							schoolId:firstTr.attr("schoolId"),
+							hours:classLessonHour,
 							dress:dressObj,
 							attendType:attendTypeObj
 						};
