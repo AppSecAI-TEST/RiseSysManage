@@ -221,4 +221,57 @@ public class ClassAttendService
 		}
 	}
 	
+	public void uploadLeavePage(ModelAndView model , String studentId , String funcNodeId) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20412\",securityCode:\"0000000000\",params:{studentId:\""+studentId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String result = ServiceEngine.invokeHttp(param);
+		try{
+			model.addObject("makeupInfo", result);
+			model.addObject("funcNodeId", funcNodeId);
+		}catch(Exception err){
+			err.printStackTrace();
+			model.addObject("errorInfo", err.getMessage());
+		}
+	}
+	
+	public void uploadLeaveDetailPage(ModelAndView model , String classAttendId , String funcNodeId) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2045\",securityCode:\"0000000000\",params:{classAttendId:\""+classAttendId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String result = ServiceEngine.invokeHttp(param);
+		try{
+			JSONObject json = JSONObject.fromObject(result);
+			ClassAttendT classAttendT = JacksonJsonMapper.getInstance().readValue(json.toString(), ClassAttendT.class);
+			model.addObject("classAttendT", classAttendT);
+			model.addObject("funcNodeId", funcNodeId);
+		}catch(Exception err){
+			err.printStackTrace();
+			model.addObject("errorInfo", err.getMessage());
+		}
+	}
+	
+	public String uploadLeaveOper(String json) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20413\",securityCode:\"0000000000\",params:{json:'"+json+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+	
+	public void commitMakeupDetailPage(ModelAndView model , String classAttendId , String funcNodeId) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20414\",securityCode:\"0000000000\",params:{classAttendId:\""+classAttendId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String result = ServiceEngine.invokeHttp(param);
+		try{
+			JSONObject json = JSONObject.fromObject(result);
+			model.addObject("classHours", StringUtil.getJSONObjectKeyVal(json, "classHours"));
+			model.addObject("hourRangeArr", json.getJSONArray("hourRangeArr"));
+			json.remove("classHours");
+			json.remove("hourRangeArr");
+			ClassAttendT classAttendT = JacksonJsonMapper.getInstance().readValue(json.toString(), ClassAttendT.class);
+			model.addObject("classAttendT", classAttendT);
+			model.addObject("funcNodeId", funcNodeId);
+		}catch(Exception err){
+			err.printStackTrace();
+			model.addObject("errorInfo", err.getMessage());
+		}
+	}
+	
 }

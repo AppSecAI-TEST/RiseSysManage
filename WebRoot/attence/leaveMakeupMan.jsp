@@ -133,7 +133,7 @@
 				var row = $("#manList").datagrid("getSelected");
 				if(row)
 				{
-					
+					window.location.href = "/sys/attend/uploadLeavePage.do?studentId="+row.studentId+"&funcNodeId=${param.funcNodeId}";
 				}
 				else
 				{
@@ -145,7 +145,7 @@
 				var row = $("#manList").datagrid("getSelected");
 				if(row)
 				{
-					
+					window.location.href = "/sys/attend/commitMakeupPage.do?studentId="+row.studentId+"&funcNodeId=${param.funcNodeId}";
 				}
 				else
 				{

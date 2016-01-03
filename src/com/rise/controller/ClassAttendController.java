@@ -236,4 +236,92 @@ public class ClassAttendController
 		return model;
 	}
 	
+	@RequestMapping("/uploadLeavePage.do")
+	public ModelAndView uploadLeavePage(String studentId , String funcNodeId)
+	{
+		ModelAndView model = new ModelAndView("attence/uploadLeavePage");
+		try 
+		{
+			classAttendService.uploadLeavePage(model, studentId, funcNodeId);
+		}
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
+	@RequestMapping("/uploadLeaveDetailPage.do")
+	public ModelAndView uploadLeaveDetailPage(String classAttendId , String funcNodeId)
+	{
+		ModelAndView model = new ModelAndView("attence/uploadLeaveDetail");
+		try 
+		{
+			classAttendService.uploadLeaveDetailPage(model, classAttendId, funcNodeId);
+		}
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
+	@RequestMapping("/uploadLeaveOper.do")
+	public void uploadLeaveOper(String json , HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = classAttendService.uploadLeaveOper(json);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/commitMakeupPage.do")
+	public ModelAndView commitMakeupPage(String studentId , String funcNodeId)
+	{
+		ModelAndView model = new ModelAndView("attence/commitMakeupPage");
+		try 
+		{
+			classAttendService.uploadLeavePage(model, studentId, funcNodeId);
+		}
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
+	@RequestMapping("/commitMakeupDetailPage.do")
+	public ModelAndView commitMakeupDetailPage(String classAttendId , String funcNodeId)
+	{
+		ModelAndView model = new ModelAndView("attence/commitMakeupDetail");
+		try 
+		{
+			classAttendService.commitMakeupDetailPage(model, classAttendId, funcNodeId);
+		}
+		catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
 }

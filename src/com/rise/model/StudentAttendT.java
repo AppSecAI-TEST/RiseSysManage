@@ -22,6 +22,8 @@ public class StudentAttendT {
     private Integer schoolId;
     
     private Integer hours;
+    
+    private Integer baseHours;
 
     private String dress;
 
@@ -119,6 +121,14 @@ public class StudentAttendT {
 
 	public void setHours(Integer hours) {
 		this.hours = hours;
+	}
+	
+	public Integer getBaseHours() {
+		return baseHours;
+	}
+
+	public void setBaseHours(Integer baseHours) {
+		this.baseHours = baseHours;
 	}
 
 	public String getDress() {
