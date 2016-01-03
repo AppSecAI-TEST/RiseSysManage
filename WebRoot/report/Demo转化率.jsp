@@ -1,97 +1,92 @@
+
+
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!doctype html>
 <html>
   	<head>
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/js/easyui/themes/default/easyui.css">
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/js/easyui/themes/icon.css">
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/js/demo.css">
-		<script type="text/javascript" src="<%=path %>/pub/js/jquery.min.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/easyui/jquery.easyui.min.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
+		<%@ include file="../common/head.jsp" %>
+		<%@ include file="../common/formvalidator.jsp" %>
   	</head>
-  
   	<body>
-  		<div style="padding:5px 0;">
-  			<form id="qryFm">
-	  			<table>
-	  				<tr>
-	  					<td>校区：</td>
-	  					<td>
-	  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;">
-	  							
-	  						</select>
-	  					</td>
-	  					<td>Demo课时间：</td>
-	  					<td>
-	  						<select class="easyui-combobox" name="classId" id="classId" style="width:150px;">
-	  							
-	  						</select>
-	  					</td>
-	  					<td>Demo：</td>
-	  					<td>
-	  						<select class="easyui-combobox" name="teacherId" id="teacherId" style="width:150px;">
-	  							
-	  						</select>
-	  					</td>
-	  				</tr>
-	  				<tr>
-	  					<td>DemoTA：</td>
-	  					<td>
-	  						<input class="easyui-datebox" id="endTime" name="endTime" style="width:150px;">
-	  					</td>
-	  					<td>Demo转化率：</td>
-	  					<td>
-	  						<input class="easyui-textbox" id="lowLimit" style="width:58px;">%至
-	  						<input class="easyui-textbox" id="Limit" style="width:58px;">%
-	  					</td>
-	  					<td>	
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" onclick="qryData()">查询</a>
-	  					</td>
-	  					<td>
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" style="width:150px" id="qryBtn" onclick="exportData()">导出</a>
-	  					</td>
-	  				</tr>
-	  			</table>
-  			</form>
-			<div style="padding:5px 0;">
-				<table class="easyui-datagrid" title="查询结果" style="width:100%;height:250px" id="list_data">
-					<thead>
-						<tr>
-							<th field="schoolId" align="center" width="10%">校区</th>
-							<th field="time" align="center" width="10%">时间</th>
-							<th field="demoNum" align="center" width="10%">参加Demo人数</th>
-							<th field="payNum" align="center" width="10%">定金个数</th>
-							<th field="allPay" align="center" width="10%">全费个数</th>
-							<th field="sToAll" align="center" width="10%">定金转全费</th>
-							<th field="pay" align="center" width="10%">补缴全费</th>
-							<th field="tansRate" align="center" width="10%">Demo转化率</th>
-							<th field="demoT" align="center" width="10%">Demo T</th>
-							<th field="demoTa" align="center" width="10%">Demo TA</th>
-						</tr>
-					</thead>
-				</table>
-			</div>
-  		</div>
-  		<div id="dlg" class="easyui-dialog" style="width: 800px; height: 250px; padding: 10px 20px" closed="true" data-options="modal:true">
-  			<table class="easyui-datagrid" title="结课班级学员升学明细" style="width:100%;height:250px" id="list_datas">
-					<thead>
-						<tr>
-							<th field="name" align="center" width="10%">姓名</th>
-							<th field="demoTime" align="center" width="10%">Demo课时间</th>
-							<th field="isPay" align="center" width="10%">是否缴定金</th>
-							<th field="isAll" align="center" width="10%">是否缴全费</th>
-							<th field="isPayToAll" align="center" width="15%">是否定金转全费</th>
-							<th field="payToAllDate" align="center" width="15%">定金转全费日期</th>
-							<th field="isPayLast" align="center" width="15%">是否补缴全费</th>
-							<th field="payLastDate" align="center" width="15%">补缴全费日期</th>
-						</tr>
-					</thead>
-				</table>
-  		</div>
+ 		<form id="qryFm">
+  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="15">
+  				<tr>
+  					<td align="right"><span>DemoT：</span></td>
+  					<td>
+  						<select class="easyui-combobox" name="DemoT" id="DemoT" style="width:150px;height:28px;"
+  							data-options="formatter:formatTeacher, valueField: 'teacherId',textField: 'byname', panelHeight: 'auto'"
+  							url ="<%=path %>/pubData/qryData.do?param={'queryCode':'qryDemoTeacherInfo','teacherType':'T'}">
+  						</select>
+  					</td>
+  					<td align="right"><span>DemoTa：</span></td>
+  					<td>
+  						<select class="easyui-combobox" name="DemoTA" id="DemoTA" style="width:150px;height:28px;"
+  							data-options="formatter:formatTeacher, valueField: 'teacherId',textField: 'byname', panelHeight: 'auto'"
+  							url ="<%=path %>/pubData/qryData.do?param={'queryCode':'qryDemoTeacherInfo','teacherType':'TA'}">
+  						</select>
+  					</td>
+  					<td align="right"><span>DEMO转化率：</span></td>
+  					<td>
+  						<input class="easyui-numberbox" name="min" id="min"  style="width:145px;" data-options="min:0,max:99,precision:0" />%
+  					</td>
+  					<td align="center"><span>至：</span></td>
+  					<td>
+  						<input class="easyui-numberbox" name="max" id="max"  style="width:145px;" data-options="min:1,max:100,precision:0"/>%
+  					</td>
+  				</tr>
+  				<tr>
+  					<td align="right"><span>校区：</span></td>
+  					<td>
+  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;height: 28px;"
+  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+  							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
+  						</select>
+  					</td>
+  					<td align="right"><span>Demo课日期：</span></td>
+  					<td>
+  						<input class="easyui-datebox" name="startTime" id="startTime"  style="width:150px;" />
+  					</td>
+  					<td align="center"><span>至：</span></td>
+  					<td>
+  						<input class="easyui-datebox" name="endTime" id="endTime"  style="width:150px;" />
+  					</td>
+  					<td>
+  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" funcNodeId ="3500" ><span>查询</span></a>
+  						&nbsp;&nbsp;
+  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="resetBtn" ><span>重置</span></a>
+  					</td>
+  				</tr>
+  			</table>
+ 		</form>
+ 		
+ 		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:450" id="list_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true">
+			<thead>
+				<tr>
+					<th field="schoolName" align="center" width="6%">校区</th>
+					<th field="schoolTime" align="center" width="20%">上课时间</th>
+					<th field="stuNum" align="center" width="8%">参与Demo人数</th>
+					<th field="orderNum" align="center" width="7%">定金个数</th>
+					<th field="allNum" align="center" width="7%">全费个数</th>
+					<th field="turnNum" align="center" width="8%">定金转全费</th>
+					<th field="repayNum" align="center" width="7%">补缴全费</th>
+					<th field="demoRate" align="center" width="8%">Demo转化率</th>
+					<th field="demoT" align="center" width="15%">反馈DemoT</th>
+					<th field="demoTa" align="center" width="15%">反馈DemoTa</th>
+				</tr>
+			</thead>
+		</table>
+		<div id="toolbar" style="padding: 2px; height: auto">
+	   			<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
+		</div>
   	</body>
 </html>
+<script>
+	$(document).ready(function(){
+		initQryButton("qryBtn","resetBtn","qryFm","list_data");
+		exportLink("export","list_data");
+	});	
+</script>
