@@ -193,7 +193,7 @@ $(document).ready(function() {
     		}
         },
     	onChange : function(n, o) {
-    		if("2BA" == n) {
+    		if("2BA" == n && o != "") {
     			var identityId = $("#identityId").textbox("getValue");
     			if(identityId != "" && identityId != null && identityId != undefined) {
     				if(!validateIdCard(identityId)) {
@@ -321,37 +321,83 @@ $(document).ready(function() {
     		});
     	}
     });
+    
+    //验证学员身份证信息
+    $("input", $("#identityId").next("span")).blur(function() {
+    	var identityType = $('#identityType').combobox('getValue');
+    	if("2BA" == identityType) {
+    		var identityId = $("#identityId").textbox("getValue");
+    		if(identityId != "" && identityId != null && identityId != undefined) {
+    			if(!validateIdCard(identityId)) {
+    				$.messager.alert('提示', "请输入有效的身份证号码！");
+    			}
+			}
+    	}
+	});
+    
+    //验证联系人身份证信息
+    $("input", $("#contactIdentityId").next("span")).blur(function() {
+    	var contactIdentityType = $('#contactIdentityType').combobox('getValue');
+    	if("2BA" == contactIdentityType) {
+    		var identityId = $("#contactIdentityId").textbox("getValue");
+    		if(!validateIdCard(identityId)) {
+    			$.messager.alert('提示', "请输入有效的身份证号码！");
+    		}
+    	}
+	});
+    
+    //验证联系人联系电话
+    $("input", $("#phone").next("span")).blur(function() {
+    	var phone = $("#phone").textbox("getValue");
+    	if(!checkMobile(phone)) {
+    		$.messager.alert('提示', "请输入完整的11位手机号或者正确的手机号前七位！");
+    	}
+    });
 	
 	//学员验重
 	$("#validate").click(function() {
     	var identityId = $("#identityId").textbox("getValue");
     	if(studentObj.identityId != identityId) {
-    		updateFlag = true;
-    		var obj = JSON.stringify($("#studentFm").serializeObject());
-    		obj = obj.substring(0, obj.length - 1);
-    		var funcNodeId = $("#validate").attr("funcNodeId");
-    		obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-    		obj = encodeURI(obj);
-    		$.ajax({
-    			url: "/sys/student/validate.do",
-    			data: "param=" + obj,
-    			dataType: "json",
-    			async: false,
-    			beforeSend: function() {
-    	    		$.messager.progress({title : '验重', msg : '正在验重，请稍等……'});
-    	    	},
-    	    	success: function (data) {
-    	    		var flag = data.flag
-    	            if(flag) {
-    	            	$.messager.alert('提示', "该证件号码还暂未注册，资料有效！");
-    	            	identityValidateFlag = true;
-    	            } else {
-    	            	$.messager.alert('提示', "该证件号码已注册，请输入其他未注册的证件号码！");
-    	            }
-    	    		$.messager.progress('close'); 
-    	    		validateFlag = true;
-    	        } 
-    		});
+    		var flags = true;
+    		var identityType = $('#identityType').combobox('getValue');
+    		if("2BA" == identityType) {
+        		var identityId = $("#identityId").textbox("getValue");
+        		if(identityId != "" && identityId != null && identityId != undefined) {
+        			if(!validateIdCard(identityId)) {
+        				flags = false;
+        			}
+    			}
+        	}
+    		if(flags) {
+    			updateFlag = true;
+    			var obj = JSON.stringify($("#studentFm").serializeObject());
+    			obj = obj.substring(0, obj.length - 1);
+    			var funcNodeId = $("#validate").attr("funcNodeId");
+    			obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+    			obj = encodeURI(obj);
+    			$.ajax({
+    				url: "/sys/student/validate.do",
+    				data: "param=" + obj,
+    				dataType: "json",
+    				async: false,
+    				beforeSend: function() {
+    					$.messager.progress({title : '验重', msg : '正在验重，请稍等……'});
+    				},
+    				success: function (data) {
+    					var flag = data.flag
+    					if(flag) {
+    						$.messager.alert('提示', "该证件号码还暂未注册，资料有效！");
+    						identityValidateFlag = true;
+    					} else {
+    						$.messager.alert('提示', "该证件号码已注册，请输入其他未注册的证件号码！");
+    					}
+    					$.messager.progress('close'); 
+    					validateFlag = true;
+    				} 
+    			});
+    		} else {
+    			$.messager.alert('提示', "请输入有效的身份证号码！");
+    		}
     	} else {
     		$.messager.alert('提示', "请先修改该学员的证件号码再进行验重！");
     	}
@@ -378,81 +424,95 @@ $(document).ready(function() {
 				updateFlag = validateStudent();
 			}
 			if(updateFlag) {
-				var flag = true;
-				var identityId = $("#identityId").textbox("getValue");
-				if(identityId != null && identityId != "" && identityId != undefined && identityId != studentObj.identityId) {
-					if(validateFlag) {
-						if(!identityValidateFlag) {
+				if($("#studentFm").form('validate')) {
+					var flag = true;
+					var identityId = $("#identityId").textbox("getValue");
+					if(identityId != null && identityId != "" && identityId != undefined && identityId != studentObj.identityId) {
+						if(validateFlag) {
+							if(!identityValidateFlag) {
+								flag = false;
+								$.messager.alert('提示', "您修改的证件号码验重不通过，请输入其他证件号码！");
+							} 
+						} else {
 							flag = false;
-							$.messager.alert('提示', "您修改的证件号码验重不通过，请输入其他证件号码！");
-						} 
-					} else {
-						flag = false;
-						$.messager.alert('提示', "请先对学员进行验重！");
-					}
-				}
-				if(flag) {
-					if($("#studentFm").form('validate')) {
-						var contactArray = "[";
-						if($("[name='contacts']").length > 0) {
-							$("[name='contacts']").each(function() {
-								if("add" == $(this).attr("add")) {
-									contactArray += "{identityId:\""+$(this).attr("identityId")+"\",identityType:\""+$(this).attr("identityType")+"\",name:\""+$(this).attr("contactName")+"\",phone:\""+$(this).attr("phone")+"\",relationType:\""+$(this).attr("relationType")+"\",job:\""+$(this).attr("job")+"\",used:\""+$(this).attr("used")+"\"},";
-								}
-							});
-							if(contactArray.length > 1) {
-								contactArray = contactArray.substring(0, contactArray.length - 1);
-							}
+							$.messager.alert('提示', "请先对学员进行验重！");
 						}
-						contactArray += "]";
-    					var realSchoolArray = "[";
-    					if($("[name='realSchools']").length > 0) {
-    						$("[name='realSchools']").each(function() {
-    							realSchoolArray += "{schoolType:\""+$(this).attr("schoolType")+"\",realSchoolName:\""+$(this).attr("realSchoolName")+"\"},";
-    						});
-    						realSchoolArray = realSchoolArray.substring(0, realSchoolArray.length - 1);
-    					}
-    					realSchoolArray += "]";
-    					var activityArray = "[";
-    					if($("[name='activitys']").length > 0) {
-    						$("[name='activitys']").each(function() {
-    							activityArray += "{title:\""+$(this).attr("title")+"\",activityDate:\""+$(this).attr("activityDate")+"\",award:\""+$(this).attr("award")+"\",remark:\""+$(this).attr("remark")+"\",activityName:\""+$(this).attr("activityName")+"\"},";
-    						});
-    						activityArray = activityArray.substring(0, activityArray.length - 1);
-    					}
-    					activityArray += "]";
-    					if(contactIds != "" && contactIds != null && contactIds != undefined && contactIds != "null") {
-    						contactIds = contactIds.substring(0, contactIds.length - 1);
-    					}
-    					if(activityIds != "" && activityIds != null && activityIds != undefined && activityIds != "null") {
-    						activityIds = activityIds.substring(0, activityIds.length - 1);
-    					}
-    					if(realIds != "" && realIds != null && realIds != undefined && realIds != "null") {
-    						realIds = realIds.substring(0, realIds.length - 1);
-    					}
-    					var obj = JSON.stringify($("#studentFm").serializeObject());
-						obj = obj.substring(0, obj.length - 1);
-    					obj += ",\"contactId\":\""+contactIds+"\",\"activityId\":\""+activityIds+"\",\"realId\":\""+realIds+"\",\"contactArray\":"+contactArray+",\"realSchoolArray\":"+realSchoolArray+",\"activityArray\":"+activityArray+"}";
-    					obj = encodeURI(obj);
-    					$.ajax({
-    		    			url: "/sys/student/updateStudent.do",
-    		    			data: "param=" + obj,
-    		    			dataType: "json",
-    		    			async: false,
-    		    			beforeSend: function()
-    		    	    	{
-    		    	    		$.messager.progress({title : '修改档案', msg : '正在修改学员档案，请稍等……'});
-    		    	    	},
-    		    	    	success: function (data) {
-    		    	    		$.messager.progress('close'); 
-    		    	    		var flag = data.flag
-    		    	            if(flag) {
-    		    	            	$.messager.alert('提示', "修改学员档案成功！", "info", function() {window.location.reload();});
-    		    	            } else {
-    		    	            	$.messager.alert('提示', "修改学员档案失败！");
-    		    	            }
-    		    	        } 
-    		    		});
+					}
+					if(flag) {
+						var identityId = $("#identityId").textbox("getValue");
+            			var identityType = $('#identityType').combobox('getValue');
+            			if(identityId != null && identityId != "" && identityId != undefined && identityType == "2BA"
+            					&& identityType != null && identityType != "" && identityType != undefined) {
+            				var birthday = $("#birthday").datebox("getValue");
+            				birthday = birthday.replace(/-/g, "");
+            				if(birthday != identityId.substring(6, 14)) {
+            					flag = false;
+            				}
+            			}
+            			if(flag) {
+            				var contactArray = "[";
+            				if($("[name='contacts']").length > 0) {
+            					$("[name='contacts']").each(function() {
+            						if("add" == $(this).attr("add")) {
+            							contactArray += "{identityId:\""+$(this).attr("identityId")+"\",identityType:\""+$(this).attr("identityType")+"\",name:\""+$(this).attr("contactName")+"\",phone:\""+$(this).attr("phone")+"\",relationType:\""+$(this).attr("relationType")+"\",job:\""+$(this).attr("job")+"\",used:\""+$(this).attr("used")+"\"},";
+            						}
+            					});
+            					if(contactArray.length > 1) {
+            						contactArray = contactArray.substring(0, contactArray.length - 1);
+            					}
+            				}
+            				contactArray += "]";
+            				var realSchoolArray = "[";
+            				if($("[name='realSchools']").length > 0) {
+            					$("[name='realSchools']").each(function() {
+            						realSchoolArray += "{schoolType:\""+$(this).attr("schoolType")+"\",realSchoolName:\""+$(this).attr("realSchoolName")+"\"},";
+            					});
+            					realSchoolArray = realSchoolArray.substring(0, realSchoolArray.length - 1);
+            				}
+            				realSchoolArray += "]";
+            				var activityArray = "[";
+            				if($("[name='activitys']").length > 0) {
+            					$("[name='activitys']").each(function() {
+            						activityArray += "{title:\""+$(this).attr("title")+"\",activityDate:\""+$(this).attr("activityDate")+"\",award:\""+$(this).attr("award")+"\",remark:\""+$(this).attr("remark")+"\",activityName:\""+$(this).attr("activityName")+"\"},";
+            					});
+            					activityArray = activityArray.substring(0, activityArray.length - 1);
+            				}
+            				activityArray += "]";
+            				if(contactIds != "" && contactIds != null && contactIds != undefined && contactIds != "null") {
+            					contactIds = contactIds.substring(0, contactIds.length - 1);
+            				}
+            				if(activityIds != "" && activityIds != null && activityIds != undefined && activityIds != "null") {
+            					activityIds = activityIds.substring(0, activityIds.length - 1);
+            				}
+            				if(realIds != "" && realIds != null && realIds != undefined && realIds != "null") {
+            					realIds = realIds.substring(0, realIds.length - 1);
+            				}
+            				var obj = JSON.stringify($("#studentFm").serializeObject());
+            				obj = obj.substring(0, obj.length - 1);
+            				obj += ",\"contactId\":\""+contactIds+"\",\"activityId\":\""+activityIds+"\",\"realId\":\""+realIds+"\",\"contactArray\":"+contactArray+",\"realSchoolArray\":"+realSchoolArray+",\"activityArray\":"+activityArray+"}";
+            				obj = encodeURI(obj);
+            				$.ajax({
+            					url: "/sys/student/updateStudent.do",
+            					data: "param=" + obj,
+            					dataType: "json",
+            					async: false,
+            					beforeSend: function()
+            					{
+            						$.messager.progress({title : '修改档案', msg : '正在修改学员档案，请稍等……'});
+            					},
+            					success: function (data) {
+            						$.messager.progress('close'); 
+            						var flag = data.flag
+            						if(flag) {
+            							$.messager.alert('提示', "修改学员档案成功！", "info", function() {window.location.reload();});
+            						} else {
+            							$.messager.alert('提示', "修改学员档案失败！");
+            						}
+            					} 
+            				});
+            			} else {
+            				$.messager.alert('提示', "出生日期需要与本人身份证号码中的出生日期一致！");
+            			}
 					}
 				}
 			} else {
@@ -471,7 +531,7 @@ $(document).ready(function() {
     		if(realSchoolName != "" && realSchoolName != null && realSchoolName != undefined) {
     			var schoolTypeText = $('#schoolType').combobox('getText');
     			var content = "<tr><td align='right'><span>学校类型：</span></td><td><span>"+schoolTypeText+"</span></td>";
-    			content += "<td align='right'><span>学校名称：</span></td><td><span>"+realSchoolName+"</span></td>";
+    			content += "<td align='right'><span>学校名称：</span></td><td colspan='3'><span>"+realSchoolName+"</span></td>";
     			content += "<input type='hidden' name='realSchools' schoolType='"+schoolType+"' realSchoolName='"+realSchoolName+"'/>";
     			content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='delRealSchool(this)'><span>删除</span></a></td></tr>";
     			$("#studentTd tr:eq("+td+")").after(content);
