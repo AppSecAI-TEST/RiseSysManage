@@ -25,7 +25,7 @@ $(document).ready(function(){
 		                var btn = '<a class="view" onclick="viewFavorPrice(\''+row.setPriceId+'\',\''+row.priceName+'\',\''+row.applySchools+'\',\''+row.effDate+'\',\''+row.isUseVal+'\',\''+row.handerName+'\',\''+row.createDate+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">浏览</a>';  
 		                return btn;  
 	        		}else if(row.isUse == "N"){
-	        			var btn = '<a class="view" onclick="viewFavorPrice(\''+row.setPriceId+'\',\''+row.priceName+'\',\''+row.applySchools+'\',\''+row.effDate+'\',\''+row.isUseVal+'\',\''+row.handerName+'\',\''+row.createDate+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">浏览</a>&nbsp;<a class="update" onclick="updateFavorPrice(\''+row.setPriceId+'\',\''+row.priceName+'\',\''+row.schoolIds+'\',\''+row.applySchools+'\',\''+row.effDate+'\',\''+row.isUseVal+'\',\''+row.handerName+'\',\''+row.createDate+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">修改</a>&nbsp;<a class="delete" onclick="deleteFavorPrice(\''+row.setPriceId+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">删除</a>';  
+	        			var btn = '<a class="view" onclick="viewFavorPrice(\''+row.setPriceId+'\',\''+row.priceName+'\',\''+row.applySchools+'\',\''+row.effDate+'\',\''+row.isUseVal+'\',\''+row.handerName+'\',\''+row.createDate+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">浏览</a>&nbsp;<a class="update" onclick="updateFavorPrice(\''+row.setPriceId+'\',\''+row.shortClassId+'\',\''+row.priceName+'\',\''+row.schoolIds+'\',\''+row.applySchools+'\',\''+row.effDate+'\',\''+row.isUseVal+'\',\''+row.handerName+'\',\''+row.createDate+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">修改</a>&nbsp;<a class="delete" onclick="deleteFavorPrice(\''+row.setPriceId+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">删除</a>';  
 		                return btn;  
 	        		}else if(row.isUse == "X"){
 	        			var btn = '<a class="view" onclick="viewFavorPrice(\''+row.setPriceId+'\',\''+row.priceName+'\',\''+row.applySchools+'\',\''+row.effDate+'\',\''+row.isUseVal+'\',\''+row.handerName+'\',\''+row.createDate+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">浏览</a>';  
@@ -127,14 +127,15 @@ function addShortFavorSubmit()
 		$.messager.alert('提示', "生效时间不能小于当前时间！");
 		return;
 	}
+	var shortClassId = $("#shortClassId").val();
 	var priceT = {};
 	priceT.priceName = priceName;
 	priceT.schoolIds = schoolIds;
+	priceT.shortClassId = shortClassId;
 	priceT.isUse = "N";//默认未生效
 	priceT.effDate = effDate;
 	priceT.handlerId = handlerId;
 	var favorArray = new Array();
-	var shortClassId = $("#shortClassId").val();
 	$("#favorTab").find('tr').each(function(i,node)
 	{
 		var trName=$(this).attr("val");
@@ -237,10 +238,11 @@ function deleteFavorPrice(setPriceId)
 }
 
 //打开修改短期课优惠体系页面
-function updateFavorPrice(setPriceId,priceName,schoolIds,applySchools,effDate,isUseVal,handerName,createDate)
+function updateFavorPrice(setPriceId,shortClassId,priceName,schoolIds,applySchools,effDate,isUseVal,handerName,createDate)
 {
 	var priceT = {};
 	priceT.setPriceId = setPriceId;
+	priceT.shortClassId= shortClassId;
 	priceT.priceName = priceName;
 	priceT.schoolIds = schoolIds;
 	priceT.applySchools = applySchools;
@@ -276,6 +278,7 @@ function updateFavorPriceSubmit()
 	}
 	var priceT = {};
 	priceT.setPriceId = $("#setPriceId").val();
+	priceT.shortClassId = $("#shortClassId").val();
 	priceT.priceName = priceName;
 	priceT.schoolIds = schoolIds;
 	priceT.effDate = effDate;

@@ -86,7 +86,7 @@
         					</select>
         					&nbsp;
         					<span style="width: 114px">学校名称：</span>
-        					<input id="realSchoolId" type="text" class="easyui-combobox" style="width: 200px; height: 28px;"/>
+        					<input id="realSchoolId" type="text" class="easyui-combobox" style="width: 300px; height: 28px;"/>
         					&nbsp;<a href="javascript:void(0)" id="addRealSchool" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px; height: 28px;">添加学校记录</a>
 	      				</td>
 	      			</tr>

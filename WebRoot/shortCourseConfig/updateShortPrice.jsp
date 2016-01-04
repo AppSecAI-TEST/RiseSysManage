@@ -20,6 +20,7 @@
   			<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   			<input type="hidden" id="schoolIds" value="${obj.schoolIds}" />
   			<input type="hidden" id="setPriceId" value="${obj.setPriceId}"/>
+  			<input type="hidden" id="shortClassId" value="${obj.shortClassId}"/>
 	 		<table width="95%" align="center" style="margin:5px auto;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
 	 			<tr>
   					<td align="right" width="11%">价格体系名称：</td>
