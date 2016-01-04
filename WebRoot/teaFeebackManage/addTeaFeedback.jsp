@@ -45,15 +45,15 @@
 						<td align="center"><input id="teachingNum${status.index}" class="easyui-numberbox" min="0" max="2"  style='width:120px;' /></td>
 						<td align="center">
 							<input type="radio" class="meeting" value="Y" name="meetingIsAttend${status.index}" checked="checked"/><span>已到</span>&nbsp;<input type="radio" class="meeting" value="N" name="meetingIsAttend${status.index}"/><span>未到</span>
-							&nbsp;<span class="meetingCsi">满意度：<input id="meetingCsi${status.index}" class="easyui-textbox"  style='width:40px;' /></span>
+							&nbsp;<span class="meetingCsi">满意度：<input id="meetingCsi${status.index}" class="easyui-numberbox" min="0" max="100" style='width:40px;' />%</span>
 						</td>
 						<td align="center">
 							<input type="radio" class="open" value="Y" name="openIsAttend${status.index}" checked="checked"/><span>已到</span>&nbsp;<input type="radio" class="open" value="N" name="openIsAttend${status.index}"/><span>未到</span>
-							&nbsp;<span class="openCsi">满意度：<input id="openCsi${status.index}" class="easyui-textbox"  style='width:40px;' /></span>
+							&nbsp;<span class="openCsi">满意度：<input id="openCsi${status.index}" class="easyui-numberbox" min="0" max="100" style='width:40px;' />%</span>
 						</td>
 						<td align="center">
 							<input type="radio" class="grad" value="Y" name="gradIsAttend${status.index}" checked="checked"/><span>已到</span>&nbsp;<input type="radio" class="grad" value="N" name="gradIsAttend${status.index}"/><span>未到</span>
-							&nbsp;<span class="gradCsi">满意度：<input id="gradCsi${status.index}" class="easyui-textbox"  style='width:40px;' /></span>
+							&nbsp;<span class="gradCsi">满意度：<input id="gradCsi${status.index}" class="easyui-numberbox" min="0" max="100" style='width:40px;' />%</span>
 						</td>
 					</tr>
 			   </c:forEach>

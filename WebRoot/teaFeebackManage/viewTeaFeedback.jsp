@@ -35,7 +35,7 @@
 						<td align="center">${feedback.teachingNum}</td>
 						<td align="center">
 							<c:if test="${feedback.meetingIsAttend == 'Y'}">
-								<span>已到</span>&nbsp;&nbsp;&nbsp;<span>满意度：${feedback.meetingCsi}</span>
+								<span>已到</span>&nbsp;&nbsp;&nbsp;<span>满意度：${feedback.meetingCsi}%</span>
 							</c:if>
 							<c:if test="${feedback.meetingIsAttend == 'N'}">
 								<span>未到</span>&nbsp;&nbsp;&nbsp;
@@ -43,7 +43,7 @@
 						</td>
 						<td align="center">
 							<c:if test="${feedback.openIsAttend == 'Y'}">
-								<span>已到</span>&nbsp;&nbsp;&nbsp;<span>满意度：${feedback.openCsi}</span>
+								<span>已到</span>&nbsp;&nbsp;&nbsp;<span>满意度：${feedback.openCsi}%</span>
 							</c:if>
 							<c:if test="${feedback.openIsAttend == 'N'}">
 								<span>未到</span>&nbsp;&nbsp;&nbsp;
@@ -51,7 +51,7 @@
 						</td>
 						<td align="center">
 							<c:if test="${feedback.gradIsAttend == 'Y'}">
-								<span>已到</span>&nbsp;&nbsp;&nbsp;<span>满意度：${feedback.gradCsi}</span>
+								<span>已到</span>&nbsp;&nbsp;&nbsp;<span>满意度：${feedback.gradCsi}%</span>
 							</c:if>
 							<c:if test="${feedback.gradIsAttend == 'N'}">
 								<span>未到</span>&nbsp;&nbsp;&nbsp;
