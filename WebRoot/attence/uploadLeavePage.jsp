@@ -77,7 +77,7 @@
 						},
 						{
 							field:'classAttendId',title:'操作', width:100,align:'center',formatter:function(val,row){
-								if(row.isMakeup == '否')
+								if(row.leaveUrl == '')
 								{
 									return "<a href='javascript:void(0)' class='oper_button' style='width: 100px;' onclick='uploadLevelFunc("+val+")'>上传请假单</a>";
 								}
@@ -99,11 +99,11 @@
 			function uploadLevelFunc(attId)
 			{
 				ajaxLoading("加载中...");
-				window.location.href = "/sys/attend/uploadLeaveDetailPage.do?classAttendId="+attId+"&funcNodeId=${funcNodeId}";
+				window.location.href = "/sys/attend/uploadLeaveDetailPage.do?classAttendId="+attId+"&funcNodeId=${funcNodeId}&studentId=${studentId}";
 			}
 			function backFunc()
 			{
-				window.history.back();
+				window.location.href = "/sys/attence/leaveMakeupMan.jsp?funcNodeId=${funcNodeId}";
 			}
 		</script>
  	</body>

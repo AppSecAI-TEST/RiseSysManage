@@ -82,6 +82,7 @@
 			</table>
 		</div>
 		<div id="toolManbar" style="padding: 2px; height: auto">
+			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 120px;" onclick="backFunc()">返回</a>
 			<a href="javascript:void(0)" id="uploadLevelBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:120px;" onclick="uploadLevelFunc()">上传请假单</a>
 			<a href="javascript:void(0)" id="commitMakeupBtn" class="easyui-linkbutton" iconCls="icon-remove" style="width:120px;" onclick="commitMakeupFunc()">提交补课记录</a>
 		</div>
@@ -151,6 +152,10 @@
 				{
 					$.messager.alert('提示',"请先选择要提交补课记录的学员");
 				}
+			}
+			function backFunc()
+			{
+				window.location.href = "/sys/attence/attenceMan.jsp?funcNodeId=${param.funcNodeId}";
 			}
 		</script>
  	</body>
