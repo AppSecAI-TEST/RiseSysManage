@@ -127,7 +127,7 @@ function addAction() {
 	action.createRemark = trim($("#createRemark").val());
 	action.timeStart = $("#timeStart").timespinner("getValue");
 	action.timeEnd = $("#timeEnd").timespinner("getValue");
-	action.planHours == $("#planHours").numberbox("getValue");
+	action.planHours = $("#planHours").numberbox("getValue");
 	var handlerValue = $("#handlerId").val();
 	action.handlerId = handlerValue;
 	var teacheArr = [];

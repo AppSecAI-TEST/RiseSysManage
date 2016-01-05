@@ -40,18 +40,18 @@
 							<th field="schoolName" align="center" width="8%">校区</th>
 							<th field="name" align="center" width="8%">姓名</th>
 							<th field="classType" align="center" width="8%">课程类型</th>
-							<th field="identityId" align="center" width="8%">证件号码</th>
+							<th field="identityId" align="center" width="10%">证件号码</th>
 							<th field="className" align="center" width="8%">班级</th>
 							<th field="adviserTeacherName" align="center" width="8%">业绩老师</th>
 							<th field="adviserName" align="center" width="8%">业绩顾问</th>
 							<th field="normalClassName" align="center" width="8%">游学班级</th>
 							<th field="payDate" align="center" width="8%">游学缴费日期</th>
-							<th field="amount" align="center" width="8%">实收金额</th>
+							<th field="amount" align="center" width="7%">实收金额</th>
 							<th field="favorName" align="center" width="8%">优惠方式</th>
 							<th field="startDate" align="center" width="8%">游学出发日期</th>
 							<th field="finishDate" align="center" width="8%">游学返回日期</th>
 							<th field="attendDate" align="center" width="8%">确认收入月份</th>
-							<th field="amount" align="center" width="8%">确认收入</th>
+							<th field="amount" align="center" width="7%">确认收入</th>
 						</tr>
 					</thead>
 				</table>

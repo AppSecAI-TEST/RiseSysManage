@@ -12,7 +12,7 @@
   	<body>
   		<div style="padding:5px 0;">
   			<form id="qryFm" style="margin:0 auto;">
-	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
+	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:10px;height:auto;" cellspacing="2">
 	  				<tr>
 	  					<td align="right"><span>校区：</span></td>
 	  					<td align="left"  width="120px">
