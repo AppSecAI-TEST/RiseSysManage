@@ -17,6 +17,7 @@ import com.rise.model.ShortClassTeacherT;
 import com.rise.model.ShortSchooltimeT;
 import com.rise.pub.base.JacksonJsonMapper;
 import com.rise.pub.invoke.ServiceEngine;
+import com.rise.pub.util.ObjectCensor;
 import com.rise.pub.util.StringUtil;
 
 @Service
@@ -329,6 +330,58 @@ public class ShortBusinessService
 	{
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20527\",securityCode:\"0000000000\",params:{shortClassInstId:\""+shortClassInstId+"\",remark:\""+remark+"\",classType:\""+classType+"\",handleId:\""+handleId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
+	}
+	
+	public String qryDataListByPage(String page, String rows, String param, String funcNodeId) throws Exception 
+	{
+		JSONObject obj = new JSONObject();
+		if(ObjectCensor.isStrRegular(param))
+		{
+			obj = JSONObject.fromObject(param);
+		}
+		if(ObjectCensor.isStrRegular(page,rows))
+		{
+			Integer pageNum = Integer.parseInt(page) - 1;
+			Integer pageSize = Integer.parseInt(rows);
+			pageNum = pageNum * pageSize;
+			obj.element("start", pageNum);
+			obj.element("rownum", pageSize);
+		}
+		if(ObjectCensor.isStrRegular(funcNodeId))
+		{
+			obj.element("funcNodeId", funcNodeId);
+		}
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1019\",securityCode:\"0000000000\",params:{param:"+obj+"},rtnDataFormatType:\"user-defined\"}";
+		String result = ServiceEngine.invokeHttp(params);
+		JSONObject json = JSONObject.fromObject(result);
+		if(json.containsKey("rows"))
+		{
+			JSONArray arrJSON = json.getJSONArray("rows");
+			int warmupTimesNum = 0;
+			int planHoursNum = 0;
+			for(int i = 0,n = arrJSON.size();i < n;i++)
+			{
+				JSONObject item = arrJSON.getJSONObject(i);
+				String warmupTimes = StringUtil.getJSONObjectKeyVal(item, "warmupTimes");
+				String planHours = StringUtil.getJSONObjectKeyVal(item, "planHoursNum");
+				if(ObjectCensor.isStrRegular(warmupTimes) && StringUtil.checkStringIsNum(warmupTimes))
+				{
+					warmupTimesNum += Integer.parseInt(warmupTimes);
+				}
+				if(ObjectCensor.isStrRegular(planHours) && StringUtil.checkStringIsNum(planHours))
+				{
+					planHoursNum += Integer.parseInt(planHours);
+				}
+			}
+			JSONArray footArr = new JSONArray();
+			JSONObject footJson = new JSONObject();
+			footJson.put("schoolName", "×Ü¼Æ");
+			footJson.put("warmupTimes", warmupTimesNum);
+			footJson.put("planHoursNum", planHoursNum);
+			footArr.add(footJson);
+			json.put("footer", footArr);
+		}
+		return json.toString();
 	}
 	
 }
