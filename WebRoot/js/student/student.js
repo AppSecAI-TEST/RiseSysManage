@@ -62,7 +62,6 @@ $(document).ready(function() {
     				});
     				var classInstId = $("#classInstId").combobox("getValue");
     				if(classInstId == null || classInstId == "" || classInstId == undefined) {
-    					alert(funcNodeId)
     					$("#studentId").combobox({
     						url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId="+funcNodeId+"&fieldId=studentId",
     						valueField : "studentId",

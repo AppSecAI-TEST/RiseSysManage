@@ -113,7 +113,7 @@ function addTeaFeedbackSubmit()
 	   feedbackDetail.teachingNum = teachingNum;
 	   feedbackDetail.meetingIsAttend = meetingIsAttend;
 	   if(meetingIsAttend == "Y"){
-		   var meetingCsi = $("#meetingCsi"+i+"").textbox('getValue');
+		   var meetingCsi = $("#meetingCsi"+i+"").numberbox('getValue');
 		   if(meetingCsi == "" || meetingCsi == undefined){
 			   $.messager.alert('提示', "已到请填写家长会满意度！");
 			   flag = false;
@@ -125,7 +125,7 @@ function addTeaFeedbackSubmit()
 	   }
 	   feedbackDetail.openIsAttend = openIsAttend;
 	   if(openIsAttend == "Y"){
-		   var openCsi = $("#openCsi"+i+"").textbox('getValue');
+		   var openCsi = $("#openCsi"+i+"").numberbox('getValue');
 		   if(openCsi == "" || openCsi == undefined){
 			   $.messager.alert('提示', "已到请填写公开课满意度！");
 			   flag = false;
@@ -137,7 +137,7 @@ function addTeaFeedbackSubmit()
 	   }
 	   feedbackDetail.gradIsAttend = gradIsAttend;
 	   if(gradIsAttend == "Y"){
-		   var gradCsi = $("#gradCsi"+i+"").textbox('getValue');
+		   var gradCsi = $("#gradCsi"+i+"").numberbox('getValue');
 		   if(gradCsi == "" || gradCsi == undefined){
 			   $.messager.alert('提示', "已到请填写毕业典礼满意度！");
 			   flag = false;

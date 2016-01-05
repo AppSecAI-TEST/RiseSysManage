@@ -227,6 +227,7 @@ public class ClassAttendService
 		String result = ServiceEngine.invokeHttp(param);
 		try{
 			model.addObject("makeupInfo", result);
+			model.addObject("studentId", studentId);
 			model.addObject("funcNodeId", funcNodeId);
 		}catch(Exception err){
 			err.printStackTrace();
@@ -234,14 +235,14 @@ public class ClassAttendService
 		}
 	}
 	
-	public void uploadLeaveDetailPage(ModelAndView model , String classAttendId , String funcNodeId) throws Exception
+	public void uploadLeaveDetailPage(ModelAndView model , String classAttendId , String studentId , String funcNodeId) throws Exception
 	{
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2045\",securityCode:\"0000000000\",params:{classAttendId:\""+classAttendId+"\"},rtnDataFormatType:\"user-defined\"}";
 		String result = ServiceEngine.invokeHttp(param);
 		try{
-			JSONObject json = JSONObject.fromObject(result);
-			ClassAttendT classAttendT = JacksonJsonMapper.getInstance().readValue(json.toString(), ClassAttendT.class);
+			ClassAttendT classAttendT = JacksonJsonMapper.getInstance().readValue(result, ClassAttendT.class);
 			model.addObject("classAttendT", classAttendT);
+			model.addObject("studentId", studentId);
 			model.addObject("funcNodeId", funcNodeId);
 		}catch(Exception err){
 			err.printStackTrace();
@@ -255,23 +256,31 @@ public class ClassAttendService
 		return ServiceEngine.invokeHttp(param);
 	}
 	
-	public void commitMakeupDetailPage(ModelAndView model , String classAttendId , String funcNodeId) throws Exception
+	public void commitMakeupDetailPage(ModelAndView model , String classAttendId , String studentAttendId , String studentId , String attendType , String interval , String funcNodeId) throws Exception
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20414\",securityCode:\"0000000000\",params:{classAttendId:\""+classAttendId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20414\",securityCode:\"0000000000\",params:{classAttendId:\""+classAttendId+"\",studentAttendId:\""+studentAttendId+"\",studentId:\""+studentId+"\",attendType:\""+attendType+"\",interval:\""+interval+"\"},rtnDataFormatType:\"user-defined\"}";
 		String result = ServiceEngine.invokeHttp(param);
 		try{
 			JSONObject json = JSONObject.fromObject(result);
-			model.addObject("classHours", StringUtil.getJSONObjectKeyVal(json, "classHours"));
+			model.addObject("classHours", json.getJSONArray("classHours"));
 			model.addObject("hourRangeArr", json.getJSONArray("hourRangeArr"));
 			json.remove("classHours");
 			json.remove("hourRangeArr");
 			ClassAttendT classAttendT = JacksonJsonMapper.getInstance().readValue(json.toString(), ClassAttendT.class);
 			model.addObject("classAttendT", classAttendT);
+			model.addObject("studentAttendId", studentAttendId);
+			model.addObject("studentId", studentId);
 			model.addObject("funcNodeId", funcNodeId);
 		}catch(Exception err){
 			err.printStackTrace();
 			model.addObject("errorInfo", err.getMessage());
 		}
+	}
+	
+	public String addStudentMakeupInfo(String json) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20415\",securityCode:\"0000000000\",params:{json:'"+json+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
 	}
 	
 }

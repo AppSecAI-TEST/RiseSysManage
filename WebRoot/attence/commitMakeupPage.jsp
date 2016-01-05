@@ -79,7 +79,7 @@
 							field:'classAttendId',title:'操作', width:100,align:'center',formatter:function(val,row){
 								if(row.isMakeup == '否')
 								{
-									return "<a href='javascript:void(0)' class='oper_button' style='width: 100px;' onclick='commitMakeupFunc("+val+")'>补课</a>";
+									return "<a href='javascript:void(0)' class='oper_button' style='width: 100px;' onclick=commitMakeupFunc("+val+","+row.studentAttendId+",'"+row.attendType+"','"+row.interval+"')>补课</a>";
 								}
 								else
 								{
@@ -96,14 +96,14 @@
 			        }
 				});
 			});
-			function commitMakeupFunc(attId)
+			function commitMakeupFunc(classAttId,stuAttId,attType,interVal)
 			{
 				ajaxLoading("加载中...");
-				window.location.href = "/sys/attend/commitMakeupDetailPage.do?classAttendId="+attId+"&funcNodeId=${funcNodeId}";
+				window.location.href = "/sys/attend/commitMakeupDetailPage.do?studentId=${studentId}&classAttendId="+classAttId+"&funcNodeId=${funcNodeId}&studentAttendId="+stuAttId+"&attendType="+attType+"&interval="+interVal;
 			}
 			function backFunc()
 			{
-				window.history.back();
+				window.location.href = "/sys/attence/leaveMakeupMan.jsp?funcNodeId=${funcNodeId}";
 			}
 		</script>
  	</body>

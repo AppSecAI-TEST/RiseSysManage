@@ -253,12 +253,12 @@ public class ClassAttendController
 	}
 	
 	@RequestMapping("/uploadLeaveDetailPage.do")
-	public ModelAndView uploadLeaveDetailPage(String classAttendId , String funcNodeId)
+	public ModelAndView uploadLeaveDetailPage(String classAttendId , String studentId , String funcNodeId)
 	{
 		ModelAndView model = new ModelAndView("attence/uploadLeaveDetail");
 		try 
 		{
-			classAttendService.uploadLeaveDetailPage(model, classAttendId, funcNodeId);
+			classAttendService.uploadLeaveDetailPage(model, classAttendId, studentId , funcNodeId);
 		}
 		catch (Exception e) 
 		{
@@ -309,12 +309,12 @@ public class ClassAttendController
 	}
 	
 	@RequestMapping("/commitMakeupDetailPage.do")
-	public ModelAndView commitMakeupDetailPage(String classAttendId , String funcNodeId)
+	public ModelAndView commitMakeupDetailPage(String classAttendId , String studentAttendId , String studentId , String attendType , String interval , String funcNodeId)
 	{
 		ModelAndView model = new ModelAndView("attence/commitMakeupDetail");
 		try 
 		{
-			classAttendService.commitMakeupDetailPage(model, classAttendId, funcNodeId);
+			classAttendService.commitMakeupDetailPage(model, classAttendId , studentAttendId , studentId , attendType , interval , funcNodeId);
 		}
 		catch (Exception e) 
 		{
@@ -322,6 +322,30 @@ public class ClassAttendController
 			e.printStackTrace();
 		}
 		return model;
+	}
+	
+	@RequestMapping("/addStudentMakeupInfo.do")
+	public void addStudentMakeupInfo(String json , HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = classAttendService.addStudentMakeupInfo(json);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
 	}
 	
 }

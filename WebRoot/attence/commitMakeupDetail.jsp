@@ -70,12 +70,25 @@
 			var gTeacherList = null;
 			var gClassList = null;
 			var classTimeData = '${hourRangeArr}';
+			var classHoursData = '${classHours}';
 			classTimeData = eval("("+classTimeData+")");
-			$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:${sessionScope.StaffT.schoolId}},function(data){
-				gTeacherList = data;
-			},"json");
+			classHoursData = eval("("+classHoursData+")");
 			$.post("/sys/pubData/qryClassInstList.do",{schoolId:${sessionScope.StaffT.schoolId},courseType:'${classAttendT.studentAttendList[0].studentCourseT.courseType}',stageId:'${classAttendT.studentAttendList[0].stageId}',classType:'${classAttendT.studentAttendList[0].classType}',classState:"'001','002','003','004','005'",classInstId:""},function(data){
 				gClassList = data;
+				$("#makeupValue").combobox({
+   					valueField : "classInstId",
+   					textField : "className",
+   					panelHeight : "auto",
+   					data:gClassList,
+   					formatter : function(data) {
+   						return "<span>" + data.className + "</span>";
+   					}
+   				});
+   				$("#makeupValue").combobox("setValue","");
+				$("#makeupValue").combobox("setText","请选择补课班级");
+			},"json");
+			$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:${sessionScope.StaffT.schoolId}},function(data){
+				gTeacherList = data;
 			},"json");
 			$(document).ready(function(){
 				ajaxLoadEnd();
@@ -90,13 +103,20 @@
 					}
 				});
 				$("#classProgress").combobox({
-					panelHeight: 'auto'
+					panelHeight: 'auto',
+					formatter : function(data) {
+   						return "<span>" + data.keyInfo + "</span>";
+   					},
+   					valueField: 'attachInfo', 
+					textField: 'keyInfo',
+					data:classHoursData,
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+						{
+							$("#classProgress").combobox("setValue",data[0].attachInfo);
+						}
+					}
 				});
-				$("#makeupValue").combobox({listHeight:150
-				});
-				$("#classProgress").combobox("setValue","${classHours}");
-				$("#classProgress").combobox("setText","${classHours}");
-				choiceClassFunc();
 			});
 			function choiceClassFunc()
 			{
@@ -127,37 +147,79 @@
 			}
 			function makeupFunc()
 			{
-				var obj = {
-					classAttendId:"${classAttendT.classAttendId}",
-					handlerId:"${sessionScope.StaffT.staffId}",
-					studentList:null
-				};
-				var studentArr = [];
-				obj.studentList = studentArr;
-				var json = JSON.stringify(obj);
-				ajaxLoading("提交中...");
-				$.post("/sys/attend/uploadLeaveOper.do",{json:json},function(data){
-					ajaxLoadEnd();
-					if(data == "success")
+				var hourRange = $("#classTime").combobox("getValue");
+				var classProgress = $("#classProgress").combobox("getText");
+				var studentAttendId = $("#classProgress").combobox("getValue");
+				var makeupType = $("input[name='makeupType']:checked").val();
+				var makeupValue = $("#makeupValue").combobox("getValue");
+				if(hourRange == "")
+				{
+					$.messager.alert('提示',"请先选择补课时间后重新尝试");
+				}
+				else if(classProgress == "")
+				{
+					$.messager.alert('提示',"请先选择课时进度后重新尝试");
+				}
+				else if(makeupType == "")
+				{
+					$.messager.alert('提示',"请先选择补课方式后重新尝试");
+				}
+				else if(makeupValue == "")
+				{
+					$.messager.alert('提示',"请先选择对应的"+("F" == makeupType?"班级":"老师")+"后重新尝试");
+				}
+				else
+				{
+					var classInstId = null;
+					var teacherId = null;
+					if("F" == makeupType)
 					{
-						$.messager.alert("提示", "提交成功","info",function(){
-							backFunc();
-						});
+						classInstId = makeupValue;
+						teacherId = "";
 					}
 					else
 					{
-						try{
-							var dataObj = eval("("+data+")");
-							$.messager.alert("提示", dataObj.msg,"error");
-						}catch(e){
-							$.messager.alert("提示", data,"error");
-						}
+						classInstId = "";
+						teacherId = makeupValue;
 					}
-				});
+					var timeArr = classProgress.split("~");
+					var obj = {
+						studentAttendId:studentAttendId,
+						makeupType:makeupType,
+						schooltime:"<fmt:formatDate value="${classAttendT.schooltime}" pattern="yyyy-MM-dd" />",
+						hourRange:hourRange,
+						baseHour:(parseInt(timeArr[0])-1),
+						hours:(parseInt(timeArr[1])-parseInt(timeArr[0])+1),
+						classInstId:classInstId,
+						teacherId:teacherId,
+						leaveUrl:"",
+						makeupUrl:""
+					};
+					var json = JSON.stringify(obj);
+					ajaxLoading("提交中...");
+					$.post("/sys/attend/addStudentMakeupInfo.do",{json:json},function(data){
+						ajaxLoadEnd();
+						if(data == "success")
+						{
+							$.messager.alert("提示", "提交成功","info",function(){
+								backFunc();
+							});
+						}
+						else
+						{
+							try{
+								var dataObj = eval("("+data+")");
+								$.messager.alert("提示", dataObj.msg,"error");
+							}catch(e){
+								$.messager.alert("提示", data,"error");
+							}
+						}
+					});
+				}
 			}
 			function backFunc()
 			{
-				window.history.back();
+				window.location.href = "/sys/attend/commitMakeupPage.do?studentId=${studentId}&funcNodeId=${funcNodeId}"
 			}
 		</script>
  	</body>
