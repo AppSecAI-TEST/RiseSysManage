@@ -47,5 +47,29 @@ public class ReportController
 			}
 		}
 	}
+	
+	@RequestMapping(value="/getTeacherNum.do")
+	public void getTeacherNum (HttpServletRequest request,HttpServletResponse response,String schoolId,String teacherId,String month)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("utf-8");
+			out = response.getWriter();
+			String retVal = reportService.getTeacherNum(schoolId,teacherId,month);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 
 }

@@ -6,13 +6,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   	<head>
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/js/easyui/themes/default/easyui.css">
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/js/easyui/themes/icon.css">
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/js/demo.css">
-		<script type="text/javascript" src="<%=path %>/pub/js/jquery.min.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/easyui/jquery.easyui.min.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
+			<%@ include file="../common/head.jsp" %>
+		<%@ include file="../common/formvalidator.jsp" %>
   	</head>
   	<body>
   		<div style="padding:5px 10px;">
@@ -21,63 +16,22 @@
 	  				<tr>
 	  					<td>校区：</td>
 	  					<td>
-	  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;">
+	  					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
+					      			onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
+					      			url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=&fieldId=schoolId">
+				        		</select>
+	  					</td>
+	  					<td>老师：</td>
+	  					<td>
+	  						<input class="easyui-combobox"  id="teacherId" style="width:150px;">
+	  					</td>
+	  					<td>月份：</td>
+	  					<td>
+	  						<select class="easyui-combobox" name="time" id="time" style="width:150px;">
 	  							
 	  						</select>
 	  					</td>
-	  					<td>姓名：</td>
-	  					<td>
-	  						<input class="easyui-textbox" id="LowLimit" style="width:150px;">
-	  					</td>
-	  					<td>入职时间：</td>
-	  					<td>
-	  						<input class="easyui-datebox" id="startTime" name="startTime" style="width:150px;">
-	  					</td>
-	  					<td>
-	  						<input class="easyui-datebox" id="endTime" name="endTime" style="width:150px;">
-	  					</td>
-	  				</tr>
-	  				<tr>	
-	  					<td>升学个数：</td>
-	  					<td>
-	  						<input class="easyui-textbox" id="graduateNum" style="width:150px;">
-	  					</td>
-	  					<td>升学年数：</td>
-	  					<td>
-	  						<input class="easyui-textbox" id="graduateYear" style="width:150px;">
-	  					</td>
-	  					<td>时间：</td>
-	  					<td>
-	  						<input class="easyui-datebox" id="startTime1" name="startTime1" style="width:150px;">
-	  					</td>
-	  					<td>
-	  						<input class="easyui-datebox" id="endTime1" name="endTime1" style="width:150px;">
-	  					</td>
-	  				</tr>
-	  				<tr>
-	  					<td>退费个数：</td>
-	  					<td>
-	  						<input class="easyui-textbox" id="graduateYear" style="width:150px;">
-	  					</td>
-	  					<td>退费年数：</td>
-	  					<td>
-	  						<input class="easyui-textbox" id="graduateYear" style="width:150px;">
-	  					</td>
-	  					<td>口碑个数：</td>
-	  					<td>
-	  						<input class="easyui-textbox" id="graduateYear" style="width:150px;">
-	  					</td>	
-	  				</tr>
-	  				<tr>
-	  					<td>游学业绩：</td>
-	  					<td>
-	  						<input class="easyui-textbox" id="graduateYear" style="width:150px;">
-	  					</td>	
-	  					<td>国际班业绩：</td>
-	  					<td>
-	  						<input class="easyui-textbox" id="graduateYear" style="width:150px;">
-	  					</td>
-	  					<td></td>
 	  					<td>	
 	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" onclick="qryData()">查询</a>
 	  					</td>
