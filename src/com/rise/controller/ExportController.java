@@ -54,4 +54,124 @@ public class ExportController
 		}
 
 	}
+	
+	//导出总校教质汇总
+	@RequestMapping("/exportCenterTeaFeedback.do")
+	public void exportCenterTeaFeedback(String fileName,String param, HttpServletResponse response , HttpServletRequest request)
+	{
+		OutputStream out = null;
+		try
+		{
+			StringBuffer displayFileName = new StringBuffer(fileName);
+			displayFileName.append(new SimpleDateFormat("yyMMdd").format(new Date()));
+			displayFileName.append(".xls");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName="+URLEncoder.encode(displayFileName.toString(),"utf-8"));
+			out = response.getOutputStream();
+			es.exportCenterTeaFeedback(fileName,param , out);
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+		}
+
+	}
+	
+	//查询总校教质汇总
+	@RequestMapping(value = "/qryCenterTeaFeedback.do")
+	public void qryCenterTeaFeedback(String param, HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = es.qryCenterTeaFeedback(param);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	//查询教质未完成明细
+	@RequestMapping(value = "/qryUnfinishFeedback.do")
+	public void qryUnfinishFeedback(String param, HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = es.qryUnfinishFeedback(param);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	// 导出教质未完成明细
+	@RequestMapping(value = "/exportUnfinishFeedback.do")
+	public void exportUnfinishFeedback(String fileName,String param, HttpServletResponse response , HttpServletRequest request)
+	{
+		OutputStream out = null;
+		try
+		{
+			StringBuffer displayFileName = new StringBuffer(fileName);
+			displayFileName.append(new SimpleDateFormat("yyMMdd").format(new Date()));
+			displayFileName.append(".xls");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName="+URLEncoder.encode(displayFileName.toString(),"utf-8"));
+			out = response.getOutputStream();
+			es.exportUnfinishFeedback(fileName,param , out);
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+		}
+	}
+	
+	// 导出教师课时反馈
+	@RequestMapping(value = "/exportTeacherAttend.do")
+	public void exportTeacherAttend(String fileName,String param, HttpServletResponse response , HttpServletRequest request)
+	{
+		OutputStream out = null;
+		try
+		{
+			StringBuffer displayFileName = new StringBuffer(fileName);
+			displayFileName.append(new SimpleDateFormat("yyMMdd").format(new Date()));
+			displayFileName.append(".xls");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName="+URLEncoder.encode(displayFileName.toString(),"utf-8"));
+			out = response.getOutputStream();
+			es.exportTeacherAttend(fileName,param , out);
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+		}
+	}
+	
 }

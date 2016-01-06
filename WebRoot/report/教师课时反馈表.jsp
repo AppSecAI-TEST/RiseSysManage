@@ -10,11 +10,10 @@
 		<%@ include file="../common/formvalidator.jsp" %>
   	</head>
   	<body>
-  		<div style="padding:5px 10px;">
   			<form id="qryFm">
-	  			<table>
+	  			 <table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="15">
 	  				<tr>
-	  					<td>校区：</td>
+	  					<td><span>校区：</span></td>
 	  					<td>
 	  					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
@@ -22,77 +21,78 @@
 					      			url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=&fieldId=schoolId">
 				        		</select>
 	  					</td>
-	  					<td>老师：</td>
+	  					<td><span>老师：</span></td>
 	  					<td>
-	  						<input class="easyui-combobox"  id="teacherId" style="width:150px;">
-	  					</td>
-	  					<td>月份：</td>
-	  					<td>
-	  						<select class="easyui-combobox" name="time" id="time" style="width:150px;">
-	  							
+	  						<select class="easyui-combobox" name="teacherId" id="teacherId" style="width:120px;"
+	  							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
 	  						</select>
 	  					</td>
+	  					<td><span>月份：</span></td>
+	  					<td>
+	  						<input class="easyui-datebox"  type="text" style="width:120px; height: 25px;" id="time" name="time" editable="false" data-options="formatter:myformatter, parser:myparser"/>
+	  					</td>
 	  					<td>	
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" onclick="qryData()">查询</a>
+	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" onclick="qryData()"></span>查询</span></a>
 	  					</td>
 	  					<td>
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" style="width:150px" id="qryBtn" onclick="exportData()">导出</a>
+	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" style="width:150px" id="resetBtn" onclick="resetData()"></span>重置</span></a>
 	  					</td>
 	  				</tr>
 	  			</table>
   			</form>
-			<div style="padding:5px 0;">
-				<table class="easyui-datagrid" title="查询结果" style="width:100%;height:550px" id="list_data" fitColumns="true">
+ 				<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:450" id="list_data" toolbar="#toolbar" rownumbers="true" fitColumns="true">
 					<thead>
 						<tr>
 							<th field="schoolName" align="center" width="9%" rowspan="2">校区</th>
 							<th field="teacherName" align="center" width="9%" rowspan="2">中文名</th>
-							<th field="byname" align="center" width="9%" rowspan="2">英文名</th>
+							<th field="byname" align="center" width="6%" rowspan="2">英文名</th>
 							<th field="projectName" align="center" width="9%" rowspan="2">项目</th>
 							<th field="date" align="center" width="62%" colspan="31">日期</th>
-							<th field="total" align="center" width="2%" rowspan="2">总计</th>
+							<th field="total" align="center" width="4%" rowspan="2">总计</th>
 						</tr>
 						<tr>
-							<th field="1" align="center" width="2%">1</th>
-							<th field="2" align="center" width="2%">2</th>
-							<th field="3" align="center" width="2%">3</th>
-							<th field="4" align="center" width="2%">4</th>
-							<th field="5" align="center" width="2%">5</th>
-							<th field="6" align="center" width="2%">6</th>
-							<th field="7" align="center" width="2%">7</th>
-							<th field="8" align="center" width="2%">8</th>
-							<th field="9" align="center" width="2%">9</th>
-							<th field="10" align="center" width="2%">10</th>
-							<th field="11" align="center" width="2%">11</th>
-							<th field="12" align="center" width="2%">12</th>
-							<th field="13" align="center" width="2%">13</th>
-							<th field="14" align="center" width="2%">14</th>
-							<th field="15" align="center" width="2%">15</th>
-							<th field="16" align="center" width="2%">16</th>
-							<th field="17" align="center" width="2%">17</th>
-							<th field="18" align="center" width="2%">18</th>
-							<th field="19" align="center" width="2%">19</th>
-							<th field="20" align="center" width="2%">20</th>
-							<th field="21" align="center" width="2%">21</th>
-							<th field="22" align="center" width="2%">22</th>
-							<th field="23" align="center" width="2%">23</th>
-							<th field="24" align="center" width="2%">24</th>
-							<th field="25" align="center" width="2%">25</th>
-							<th field="26" align="center" width="2%">26</th>
-							<th field="27" align="center" width="2%">27</th>
-							<th field="28" align="center" width="2%">28</th>
-							<th field="29" align="center" width="2%">29</th>
-							<th field="30" align="center" width="2%">30</th>
-							<th field="31" align="center" width="2%">31</th>
+							<th field="d1" align="center" width="2%">1</th>
+							<th field="d2" align="center" width="2%">2</th>
+							<th field="d3" align="center" width="2%">3</th>
+							<th field="d4" align="center" width="2%">4</th>
+							<th field="d5" align="center" width="2%">5</th>
+							<th field="d6" align="center" width="2%">6</th>
+							<th field="d7" align="center" width="2%">7</th>
+							<th field="d8" align="center" width="2%">8</th>
+							<th field="d9" align="center" width="2%">9</th>
+							<th field="d10" align="center" width="2%">10</th>
+							<th field="d11" align="center" width="2%">11</th>
+							<th field="d12" align="center" width="2%">12</th>
+							<th field="d13" align="center" width="2%">13</th>
+							<th field="d14" align="center" width="2%">14</th>
+							<th field="d15" align="center" width="2%">15</th>
+							<th field="d16" align="center" width="2%">16</th>
+							<th field="d17" align="center" width="2%">17</th>
+							<th field="d18" align="center" width="2%">18</th>
+							<th field="d19" align="center" width="2%">19</th>
+							<th field="d20" align="center" width="2%">20</th>
+							<th field="d21" align="center" width="2%">21</th>
+							<th field="d22" align="center" width="2%">22</th>
+							<th field="d23" align="center" width="2%">23</th>
+							<th field="d24" align="center" width="2%">24</th>
+							<th field="d25" align="center" width="2%">25</th>
+							<th field="d26" align="center" width="2%">26</th>
+							<th field="d27" align="center" width="2%">27</th>
+							<th field="d28" align="center" width="2%">28</th>
+							<th field="d29" align="center" width="2%">29</th>
+							<th field="d30" align="center" width="2%">30</th>
+							<th field="d31" align="center" width="2%">31</th>
 						</tr>
 					</thead>
 				</table>
-			</div>
-  		</div>
+				<div id="toolbar" style="padding: 2px; height: auto">
+	   				<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
+				</div>
   	</body>
 </html>
 <script type="text/javascript">
- $('#time').datebox({
+$(document).ready(function(){
+	$('#time').datebox({
             onShowPanel: function () {//显示日趋选择对象后再触发弹出月份层的事件，初始化时没有生成月份层
         		var p = $('#time').datebox('panel'), //日期选择对象
             	span = p.find('span.calendar-text'); //显示月份层的触发控件
@@ -115,7 +115,42 @@
                     $('#time').datebox('setValue',val).datebox('hidePanel'); //设置日期的值
              	});
             }});
-            
+ 		$("#schoolId").combobox({
+	 		onChange:function(){
+	 			$("#teacherId").combobox({
+					url : "/sys/pubData/getTeacherBySchoolId.do?schoolId="+$("#schoolId").combobox('getValue')
+				});
+	 		}
+	 	});
+   	var now =new Date();
+	$('#time').datebox("setValue",now.getFullYear()+"-"+(now.getMonth()+1));
+	$("#export").click(function(){
+		var param={
+			teacherId:$("#teacherId").combobox('getValue'),
+			schoolId:$("#schoolId").combobox('getValue'),
+			month:$("#time").datebox('getValue')
+		};
+		if($("#list_data").datagrid("getData").total>0)
+		{
+			var fileName =parent.$("li.tabs-selected").find("span.tabs-title").html();
+			try
+			{
+				window.location.href="/sys/export/exportTeacherAttend.do?fileName="+fileName+"&param="+JSON.stringify(param);
+			}
+			catch(e)
+			{
+				$.messager.alert('提示', "模版不存在！",function(){
+					window.history.back();
+				});
+			}
+		}
+		else
+		{
+			$.messager.alert('提示', "没有数据可以导出！");
+		}	
+	})
+});
+
 function myformatter(date){
             var y = date.getFullYear();
             var m = date.getMonth()+1;
@@ -136,19 +171,20 @@ function myformatter(date){
             }
         }
   
+function resetData()
+{
+	$("#qryFm").form('clear');
+	var now =new Date();
+	$('#time').datebox("setValue",now.getFullYear()+"-"+(now.getMonth()+1));
+	$('#schoolId').combobox('setValue',$('#schoolId').combobox("getData")[0].schoolId);
+}
+  
+  
 function qryData()
 {
-	time=$("#time").datebox('getValue');
-	if(time=='')
-	{
-		//$.messager.alert("提示","请选择排课月份");
-		//return;
-	}
-	
-	 
 	var teacherId=$("#teacherId").combobox('getValue');
 	var schoolId=$("#schoolId").combobox('getValue');
-	var month='2015-12';
+	var month=$("#time").datebox('getValue');
 	$.ajax(
 	{
 		type : "POST",
@@ -157,16 +193,16 @@ function qryData()
 		dataType:"json",
 		beforeSend: function()
     	{
-    		//$.messager.progress({text:'排课中，请稍候...'});
+    		showProgressLoader("正在查询,请稍后...",300)
     	},
     	success: function(data) 
     	{
-    		$.messager.progress('close');
+    		hideProgressLoader();
     		$('#list_data').datagrid("loadData",data);
          },
         error:function()
         {
-        	$.messager.progress('close');
+        	hideProgressLoader();
         }
 	});
 	
