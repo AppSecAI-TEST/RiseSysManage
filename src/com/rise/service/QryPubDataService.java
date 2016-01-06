@@ -185,4 +185,16 @@ public class QryPubDataService
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10121\",securityCode:\"0000000000\",params:{},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
+
+	public String qryReportMonthList(String tableName, String year) throws Exception  
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10122\",securityCode:\"0000000000\",params:{tableName:\""+tableName+"\",year:\""+year+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
+	public String qryReportWeekList(String tableName, String year, String month) throws Exception  
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10123\",securityCode:\"0000000000\",params:{tableName:\""+tableName+"\",year:\""+year+"\",month:\""+month+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
 }

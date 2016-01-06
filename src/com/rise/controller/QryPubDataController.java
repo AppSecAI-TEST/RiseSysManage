@@ -587,4 +587,54 @@ public class QryPubDataController
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/qryReportMonthList.do")
+	public void qryReportMonthList(String tableName, String year, HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = qryPubDataService.qryReportMonthList(tableName, year);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping(value = "/qryReportWeekList.do")
+	public void qryReportWeekList(String tableName, String year, String month, HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = qryPubDataService.qryReportWeekList(tableName, year, month);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }

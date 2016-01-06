@@ -62,13 +62,13 @@ public class FileUploadServlet extends HttpServlet
 			String schoolId = request.getParameter("schoolId");
 			if(ObjectCensor.isStrRegular(schoolId))
 			{
-				String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1011\",securityCode:\"0000000000\",params:{schoolId:\"1001\"},rtnDataFormatType:\"user-defined\"}";
+				String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1011\",securityCode:\"0000000000\",params:{schoolId:\""+schoolId+"\"},rtnDataFormatType:\"user-defined\"}";
 				String rstMsg = ServiceEngine.invokeHttp(param);
 				JSONArray array = JSONArray.fromObject(rstMsg);
 				if(ObjectCensor.checkListIsNull(array))
 				{
 					JSONObject obj = array.getJSONObject(0);
-					schoolCode = StringUtil.getJSONObjectKeyVal(obj, "schoolCode");
+					schoolCode = StringUtil.getJSONObjectKeyVal(obj, "shcoolCode");
 				}
 			}
 			String handlerId = request.getParameter("handlerId");
