@@ -67,5 +67,24 @@
 	$(document).ready(function(){
 		initQryButton("qryBtn","resetBtn","qryFm","list_data");
 		exportLink("export","list_data");
+		$("#startTime").datebox({
+			onChange:function(val){
+				if(val!="")
+				{
+					var start = new Date(Date.parse(val.replace(/-/g,  "/")));
+					$("#endTime").datebox('calendar').calendar({
+						validator: function(date){
+							
+								var d1 = new Date(start.getFullYear(), start.getMonth(),start.getDate());
+								var d2 = new Date(start.getFullYear(), start.getMonth(),new Date(start.getFullYear(), start.getMonth()+1,0).getDate());
+								return d1<date && date<=d2;
+							
+						},
+						year:start.getFullYear(),
+						month:start.getMonth()+1	
+					});
+				}
+			}
+		})
 	});	
 </script>

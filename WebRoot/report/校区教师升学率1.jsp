@@ -26,7 +26,7 @@
 	  						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 114px; height: 25px;">
 	  						</select>
 	  					</td>
-	  					<td align="right" width="130px"><span>课时进度比：</span></td>
+	  					<td align="left" width="130px"><span>课时进度比：</span></td>
 	  					<td width="130px">
 	  						<input name="minAttendRate" id="minAttendRate" type="text" class="easyui-numberbox" style="width: 45px; height: 25px;"/>
 							<span style="display: inline-block; text-align: center; width: 14px;">至</span>
@@ -81,3 +81,6 @@
   		</div>
   	</body>
 </html>
+<script>
+exportLink("export","list_data");
+</script>

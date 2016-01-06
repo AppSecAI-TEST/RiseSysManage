@@ -77,14 +77,14 @@
 					<tr>
 						<th width="8.333%" field="schoolName">校区</th>
 						<th width="8.333%" field="schooltime">上课日期</th>
-						<th width="8.333%" field="weekday">星期</th>
+						<th width="4%" field="weekday">星期</th>
 						<th width="8.333%" field="className">班级</th>
-						<th width="8.333%" field="teacherNames">上课教师</th>
-						<th width="8.333%" field="schoolDate">上课时间</th>
+						<th width="12%" field="teacherNames">上课教师</th>
+						<th width="10%" field="schoolDate">上课时间</th>
 						<th width="8.333%" field="realHours">实际课时</th>
 						<th width="8.333%" field="attendNum">在读人数</th>
 						<th width="8.333%" field="realNum">出勤人数</th>
-						<th width="8.333%" field="dressNum">学员校服穿着人数</th>
+						<th width="10%" field="dressNum">学员校服穿着人数</th>
 						<th width="8.333%" field="attendRate">出勤率</th>
 						<th width="8.333%" field="dressRate">校服穿着率</th>
 					</tr>
@@ -92,7 +92,7 @@
 			</table>
 		</div>
 		<div id="toolbar" style="padding: 2px; height: auto">
-   			<a href="javascript:void(0)" id="hisViewBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="exportFunc()">导出</a>
+   			<a href="javascript:void(0)" id="hisViewBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;">导出</a>
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("加载中...");
@@ -128,6 +128,7 @@
 					//panelHeight: 'auto'
 					listHeight:200
 				});
+				exportLink("hisViewBtn","attList");
 			});
 			function queryFunc()
 			{

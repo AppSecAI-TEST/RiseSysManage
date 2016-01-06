@@ -35,12 +35,12 @@
 					<thead>
 						<tr>
 							<th data-options="field:'schoolName',width:100,align:'center'">校区</th>
-							<th data-options="field:'75HigherNum',width:100,align:'center'">75%</th>
-							<th data-options="field:'80HigherNum',width:100,align:'center'">80%</th>
-							<th data-options="field:'80HigherNum',width:100,align:'center'">85%</th>
-							<th data-options="field:'90HigherNum',width:100,align:'center'">90%</th>
-							<th data-options="field:'95HigherNum',width:100,align:'center'">95%</th>
-							<th data-options="field:'100HigherNum',width:100,align:'center'">100%</th>
+							<th data-options="field:'higherNum1',width:100,align:'center'">75%</th>
+							<th data-options="field:'higherNum2',width:100,align:'center'">80%</th>
+							<th data-options="field:'higherNum3',width:100,align:'center'">85%</th>
+							<th data-options="field:'higherNum4',width:100,align:'center'">90%</th>
+							<th data-options="field:'higherNum5',width:100,align:'center'">95%</th>
+							<th data-options="field:'higherNum5',width:100,align:'center'">100%</th>
 						</tr>
 					</thead>
 				</table>
@@ -51,3 +51,6 @@
   		</div>
   	</body>
 </html>
+<script>
+exportLink("export","list_data");
+</script>

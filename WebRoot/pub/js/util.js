@@ -765,3 +765,29 @@ function exportLink(btName,tableName)
 		}	
 	})
 }
+
+
+
+function exportMergeLink(btName,tableName,mergeName,mergeIndex)
+{
+	$("#"+btName).click(function(){
+		if($("#"+tableName).datagrid("getData").total>0)
+		{
+			var fileName =parent.$("li.tabs-selected").find("span.tabs-title").html();
+			try
+			{
+				window.location.href="/sys/export/normalMergeExport.do?fileName="+fileName+"&mergeName="+mergeName+"&mergeIndex="+mergeIndex+"&param="+JSON.stringify($("#"+tableName).datagrid("options").queryParams.param);
+			}
+			catch(e)
+			{
+				$.messager.alert('提示', "模版不存在！",function(){
+					window.history.back();
+				});
+			}
+		}
+		else
+		{
+			$.messager.alert('提示', "没有数据可以导出！");
+		}	
+	})
+}

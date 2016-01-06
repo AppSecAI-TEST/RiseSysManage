@@ -61,7 +61,6 @@
 			<table class="easyui-datagrid" title="班级考勤表 " style="height:390px;" id="attList" url="" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
-						<th data-options="field:'classInstId',checkbox:true"></th>
 						<th width="12.5%" field="schoolName">校区</th>
 						<th width="12.5%" field="className">班级</th>
 						<th width="12.5%" field="openDate">开课日期</th>
@@ -75,7 +74,7 @@
 			</table>
 		</div>
 		<div id="toolbar" style="padding: 2px; height: auto">
-   			<a href="javascript:void(0)" id="hisViewBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="exportFunc()">导出</a>
+   			<a href="javascript:void(0)" id="hisViewBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;">导出</a>
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("加载中...");
@@ -120,6 +119,7 @@
 						window.location.href = "/sys/attend/getClassStudentAttenceInfo.do?classInstId="+node.classInstId+"&monthDate="+node.monthday;
 					}
 				});
+				exportLink("hisViewBtn","attList");
 			});
 			function queryFunc()
 			{

@@ -40,7 +40,7 @@
 			</table>
 		</form>
 		<div style="padding:5px 0;min-width:1100px; width:100%;">
-			<table class="easyui-datagrid" title="出勤率汇总表 " style="height:390px;" id="attList" url="" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+			<table class="easyui-datagrid" title="出勤率汇总表 " style="height:390px;text-align:center;" id="attList" url="" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
 						<th width="16.7%" field="schoolName">校区</th>
@@ -54,7 +54,7 @@
 			</table>
 		</div>
 		<div id="toolbar" style="padding: 2px; height: auto">
-   			<a href="javascript:void(0)" id="hisViewBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="exportFunc()">导出</a>
+   			<a href="javascript:void(0)" id="hisViewBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;">导出</a>
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("加载中...");
@@ -72,6 +72,7 @@
 				$("#monthDate").datebox({
 					onShowPanel:settingYearMonthPanel
 				})
+				exportLink("hisViewBtn","attList");
 			});
 			function queryFunc()
 			{
@@ -90,10 +91,6 @@
 			{
 				$("#schoolId").combobox("setValue","");
 				$("#monthDate").datebox("setValue","");
-			}
-			function exportFunc()
-			{
-				
 			}
 		</script>
  	</body>

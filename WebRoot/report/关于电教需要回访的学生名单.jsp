@@ -127,6 +127,7 @@
 	            
 	            //formatter: function (d) { return d.getFullYear() + '-' + d.getMonth(); }//配置formatter，只返回年月
 	    	});
+	        exportLink("export","list_data");
 	     });   
 	
 		function myformatter(date){
