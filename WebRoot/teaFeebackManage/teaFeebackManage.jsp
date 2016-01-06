@@ -18,10 +18,8 @@
   				<tr>
   					<td align="right" width="7%">校区：</td>
   					<td align="left" width="9%">
-  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:120px;"
-							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-				      		url="<%=path %>/pubData/qrySchoolList.do">
-        				</select>
+  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 120px">
+			        	</select>
   					</td>
   					<td align="right" width="9%">课程阶段：</td>
   					<td align="left" width="9%">
@@ -32,8 +30,9 @@
   					</td>
   					<td align="right" width="9%">班级：</td>
   					<td align="left" width="9%">
-  						<select id="className" name="className" class="easyui-combobox" style="width:120px;"
-        				</select>
+						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 120px" disabled="disabled">
+			        	</select>
+					</td>
   					</td>
   					<td align="right" width="9%">开课时间：</td>
   					<td align="left" width="9%">
@@ -48,8 +47,10 @@
   				<tr>
   					<td align="right">带班老师：</td>
   					<td align="left">
-  						<select name="byName" id="byName" class="easyui-combobox" style="width:120px"
-						</select>
+  						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 120px"
+							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'" 
+		      				url="<%=path %>/pubData/qryData.do?param={'queryCode':'qryClassTeacherInfo'}">
+				        </select>
   					</td>
   					<td align="right">是否反馈：</td>
   					<td align="left">
@@ -62,8 +63,10 @@
 					</td>
   					<td align="right">班级状态：</td>
   					<td align="left">
-  						<select name="classState" id="classState" class="easyui-combobox" style="width:120px"
-						</select>
+  						<select id="classState" name="classState" class="easyui-combobox" style="width:120px;"
+	  						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
+	      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE&codeFlag=003,004">
+        				</select>
   					</td>
   					<td colspan="3" align="center">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:90px; height: 25px;" id="qryBtn" funcNodeId="4500">查询</a>

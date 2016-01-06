@@ -31,7 +31,7 @@ private static Log log = LogFactory.getLog(TeaFeebackManageController.class);
 		log.error(classInstId);
 		ModelAndView view = new ModelAndView("teaFeebackManage/addTeaFeedback");
 		try {
-			String ret = teaFeebackManageService.qryClassStuByInstId(classInstId);
+			String ret = teaFeebackManageService.qryClassStuByInstId(classInstId,qualityId);
 			view.addObject("classInstId", classInstId);
 			view.addObject("qualityId", qualityId);
 			view.addObject("schoolId", schoolId);

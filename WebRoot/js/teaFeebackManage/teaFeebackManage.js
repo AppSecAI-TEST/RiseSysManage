@@ -2,18 +2,18 @@ $(document).ready(function(){
 	//首页面查询
     $("#qryBtn").click(function() {
     	var json = $("#qryFm").serializeObject();
-//    	json.byName = $("#byName").combobox('getText');
-//    	var pay = json.pay;
-//    	if(pay == "Y"){
-//    		json.reparation = "1";
-//    	}
-//    	if(pay == "N"){
-//    		json.noreparation = "1";
-//    	}
+		var feedback = json.feedback;
+    	if(feedback == "Y"){
+    		json.yesfeedback = "1";
+    	}
+    	if(feedback == "N"){
+    		json.nofeedback = "1";
+    	}
+    	var month = $("#time").datebox('getValue');
 		var obj = JSON.stringify(json);
 		obj = obj.substring(0, obj.length - 1);
 		var funcNodeId = $("#qryBtn").attr("funcNodeId");
-		obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+		obj += ",\"month\":\""+month+"\",\"funcNodeId\":\""+funcNodeId+"\"}";
 		$('#list_data').datagrid({
 			url : "/sys/pubData/qryDataListByPage.do",
 			queryParams:{
@@ -26,6 +26,37 @@ $(document).ready(function(){
 		});
     });
 	
+	$("#schoolId").combobox({
+		url : "/sys/pubData/qrySchoolList.do?schoolId",//返回json数据的url
+		valueField : "schoolId",
+		textField : "schoolName",
+		panelHeight : "auto",
+		formatter : formatSchool,
+		onLoadSuccess : function() {
+			$("#schoolId").combobox("setValue", "");
+			$("#schoolId").combobox("setText", "");
+		},
+		onChange : function(n, o) {
+			if(n != "" && n != null && n != undefined) {
+				$("#classInstId").combobox({disabled: false});
+				$("#classInstId").combobox({
+					url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='003','004'&classInstId=",//返回json数据的url
+					valueField : "classInstId",
+					textField : "className",
+					panelHeight : "auto",
+					formatter : function(data) {
+						return "<span>" + data.className + "</span>";
+					}
+				});
+			} else {
+				$("#schoolId").combobox("setText", "");
+				$("#classInstId").combobox('clear');
+				$("#classInstId").combobox("loadData", new Array());
+				$("#classInstId").combobox({disabled: true});
+			}
+		}
+	});
+    
    $(".meeting").change(function() {
 	   var val = $(this).val();
 	   if(val == "Y"){
@@ -151,8 +182,6 @@ function addTeaFeedbackSubmit()
 	   feedbackDetailArray.push(feedbackDetail);
 	});
 	if(flag){
-		alert(JSON.stringify(feedback));
-		alert(JSON.stringify(feedbackDetailArray));
 		$.ajax({
 			type : "POST",
 			url: "/sys/teaFeebackManage/addTeachingFeedback.do",

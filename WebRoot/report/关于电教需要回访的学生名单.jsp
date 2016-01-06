@@ -29,7 +29,7 @@
 						<span>带班老师：</span>
 					</td>
 					<td width="10%" align="left">
-						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 114px; height: 25px;"
+						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 120px"
 							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'" 
 		      				url="<%=path %>/pubData/qryData.do?param={'queryCode':'qryClassTeacherInfo'}">
 				        </select>

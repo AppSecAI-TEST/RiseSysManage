@@ -44,12 +44,12 @@ function addPlan(){
 }
 
 //查询校区下面所有有效状态班级
-function createPlan(schoolId)
+function createPlan(schoolId,month)
 {
 	$.ajax({
 		type : "POST",
 		url: "/sys/teaPlanManage/qryClassInfoById.do",
-		data: "schoolId="+schoolId,
+		data: "schoolId="+schoolId+"&month="+month,
 		dataType: "json",
 		async: false,
 		beforeSend: function()
@@ -70,8 +70,22 @@ function createPlan(schoolId)
     			if(length > 0){
     				var content = "";
     				for(var i = 0; i < length; i++) {
-    					content += "<tr><td id='classInstId"+i+"' class='classInfo' instId='"+classList[i].classInstId+"' align='center'>"+classList[i].className+"</td><td align='center'><input id='teachingDate"+i+"' class='view' style='width:120px;' /></td><td align='center'><input id='meetingDate"+i+"' class='view' style='width:120px;' /></td>";
-    					content += "<td align='center'><input id='openClassDate"+i+"' class='view' style='width:120px;' /></td><td align='center'><input id='gradDate"+i+"' class='view' style='width:120px;' /></td></tr>";
+    					content += "<tr><td align='center'>"+(i+1)+"</td><td id='classInstId"+i+"' openFlag='"+classList[i].openFlag+"' gradFlag='"+classList[i].gradFlag+"' class='classInfo' instId='"+classList[i].classInstId+"' align='center'>"+classList[i].className+"</td><td align='center'><input id='teachingDate"+i+"' class='view' style='width:120px;' /></td>";
+    					if(classList[i].openFlag == 'false' && classList[i].gradFlag == 'false'){
+	    					content += "<td align='center'><input id='meetingDate"+i+"' class='view' style='width:120px;' /></td>";
+	    					content += "<td align='center'></td>";
+	    					content += "<td align='center'></td></tr>";
+    					}else{
+    						content += "<td align='center'></td>";
+    						if(classList[i].openFlag == 'true' && classList[i].gradFlag == 'false'){
+    							content += "<td align='center'><input id='openClassDate"+i+"' class='view' style='width:120px;' /></td>";
+		    					content += "<td align='center'></td></tr>";
+    						}
+    						if(classList[i].openFlag == 'false' && classList[i].gradFlag == 'true'){
+    							content += "<td align='center'></td>";
+		    					content += "<td align='center'><input id='gradDate"+i+"' class='view' style='width:120px;' /></td></tr>";
+    						}
+    					}
     				}
     				$("#planTr").after(content);
 					$(".view").datebox({}); 
@@ -103,29 +117,75 @@ function addPlanSubmit()
 	createQuality.handlerId = handlerId;
 	createQuality.month = time;
 	var teachingQualityArray = new Array();
+	var flag = true;
 	$(".classInfo").each(function(i,node){
 	   var classInstId = $(node).attr("instId");
-	   var className=$(node).html();
+	   var openFlag = $(node).attr("openFlag");
+	   var gradFlag = $(node).attr("gradFlag");
+	   var className = $(node).html();
 	   var teachingDate = $("#teachingDate"+i+"").datebox('getValue');
-	   var meetingDate = $("#meetingDate"+i+"").datebox('getValue');
-	   var openClassDate = $("#openClassDate"+i+"").datebox('getValue');
-	   var gradDate = $("#gradDate"+i+"").datebox('getValue');
+	   if(teachingDate == "" || teachingDate == undefined){
+		   $.messager.alert('提示', "第"+(i+1)+"行请选择电教日期！");
+		   flag = false;
+		   return false;
+	   }
+	   if(teachingDate.indexOf(time) == -1){
+		   $.messager.alert('提示', "第"+(i+1)+"行电教月份必须与教质月份相同！");
+		   flag = false;
+		   return false;
+	   }
 	   var teachingQuality = {};
 	   teachingQuality.schoolId = schoolId;
 	   teachingQuality.month = time;
 	   teachingQuality.classInstId = classInstId;
 	   teachingQuality.className = className;
 	   teachingQuality.teachingDate = teachingDate;
-	   teachingQuality.meetingDate = meetingDate;
-	   teachingQuality.openClassDate = openClassDate;
-	   teachingQuality.gradDate = gradDate;
+	   if(openFlag == 'false' && gradFlag == 'false'){
+		   var meetingDate = $("#meetingDate"+i+"").datebox('getValue');
+		   if(meetingDate == "" || meetingDate == undefined){
+			   $.messager.alert('提示', "第"+(i+1)+"行请选择家长会日期！");
+			   flag = false;
+			   return false;
+		   }
+		   if(meetingDate.indexOf(time) == -1){
+			   $.messager.alert('提示', "第"+(i+1)+"行家长会月份必须与教质月份相同！");
+			   flag = false;
+			   return false;
+		   }
+	   	   teachingQuality.meetingDate = meetingDate;
+	   }
+	   if(openFlag == 'true' && gradFlag == 'false'){
+		   var openClassDate = $("#openClassDate"+i+"").datebox('getValue');
+		   if(openClassDate == "" || openClassDate == undefined){
+			   $.messager.alert('提示', "第"+(i+1)+"行请选择公开课日期！");
+			   flag = false;
+			   return false;
+		   }
+		   if(openClassDate.indexOf(time) == -1){
+			   $.messager.alert('提示', "第"+(i+1)+"行公开课月份必须与教质月份相同！");
+			   flag = false;
+			   return false;
+		   }
+	   	   teachingQuality.openClassDate = openClassDate;
+	   }
+	   if(openFlag == 'false' && gradFlag == 'true'){
+		   var gradDate = $("#gradDate"+i+"").datebox('getValue');
+		   if(gradDate == "" || gradDate == undefined){
+			   $.messager.alert('提示', "第"+(i+1)+"行请选择毕业典礼日期！");
+			   flag = false;
+			   return false;
+		   }
+		   if(gradDate.indexOf(time) == -1){
+			   $.messager.alert('提示', "第"+(i+1)+"行毕业典礼月份必须与教质月份相同！");
+			   flag = false;
+			   return false;
+		   }
+	   	   teachingQuality.gradDate = gradDate;
+	   }
 	   teachingQuality.handlerId = handlerId;
 	   teachingQualityArray.push(teachingQuality);
 	});
-	if(teachingQualityArray.length == 0){
-		$.messager.alert('提示', "该校区没有适合班级！");
-		return;
-	}else{
+	if(teachingQualityArray.length > 0 && flag){
 		$.ajax({
 			type : "POST",
 			url: "/sys/teaPlanManage/addTeachingPlan.do",
@@ -150,6 +210,10 @@ function addPlanSubmit()
 	    		}
 	        } 
 		});
+		
+	}else if(teachingQualityArray.length == 0 && flag){
+		$.messager.alert('提示', "该校区没有适合班级！");
+		return;
 	}
 }
 
@@ -169,14 +233,41 @@ function updatePlan()
 //修改教质计划提交
 function updatePlanSubmit()
 {
+	var month = $("#teachingMonth").html();
 	var handlerId = $("#handlerId").val();
 	var teachingQualityArray = new Array();
+	var flag = true;
 	$("input[name='qualityId']").each(function(i,node){
 	   var qualityId = $("#qualityId"+i+"").val();
 	   var teachingDate = $("#teachingDate"+i+"").datebox('getValue');
 	   var meetingDate = $("#meetingDate"+i+"").datebox('getValue');
 	   var openClassDate = $("#openClassDate"+i+"").datebox('getValue');
 	   var gradDate = $("#gradDate"+i+"").datebox('getValue');
+	   if(teachingDate == "" || teachingDate == undefined){
+		   $.messager.alert('提示', "第"+(i+1)+"行请选择电教日期！");
+		   flag = false;
+		   return false;
+	   }
+	   if(teachingDate.indexOf(month) == -1){
+		   $.messager.alert('提示', "第"+(i+1)+"行电教月份必须与教质月份相同！");
+		   flag = false;
+		   return false;
+	   }
+	   if(meetingDate != "" && meetingDate != undefined && meetingDate.indexOf(month) == -1){
+		   $.messager.alert('提示', "第"+(i+1)+"行家长会月份必须与教质月份相同！");
+		   flag = false;
+		   return false;
+	   }
+	   if(openClassDate != "" && openClassDate != undefined && openClassDate.indexOf(month) == -1){
+		   $.messager.alert('提示', "第"+(i+1)+"行公开课月份必须与教质月份相同！");
+		   flag = false;
+		   return false;
+	   }
+	   if(gradDate != "" && gradDate != undefined && gradDate.indexOf(month) == -1){
+		   $.messager.alert('提示', "第"+(i+1)+"行毕业典礼月份必须与教质月份相同！");
+		   flag = false;
+		   return false;
+	   }
 	   var teachingQuality = {};
 	   teachingQuality.qualityId = qualityId;
 	   teachingQuality.teachingDate = teachingDate;
@@ -186,26 +277,28 @@ function updatePlanSubmit()
 	   teachingQuality.handlerId = handlerId;
 	   teachingQualityArray.push(teachingQuality);
 	});
-	$.ajax({
-		type : "POST",
-		url: "/sys/teaPlanManage/updateTeachingPlan.do",
-		data: "json="+JSON.stringify(teachingQualityArray),
-		async: false,
-		beforeSend: function()
-    	{
-    		$.messager.progress({title : '修改教质计划', msg : '修改教质计划中，请稍等……'});
-    	},
-    	success: function(flag) {
-    		$.messager.progress('close'); 
-    		if(flag == "true"){
-    			$.messager.alert('提示', "修改教质计划成功！","info",function(){
-	    			window.location.href = "/sys/teaPlanManage/teaPlanManage.jsp";
-				});
-    		}else if(flag == "false"){
-    			$.messager.alert('提示', "修改教质计划失败！");
-    		}
-        } 
-	});
+	if(flag){
+		$.ajax({
+			type : "POST",
+			url: "/sys/teaPlanManage/updateTeachingPlan.do",
+			data: "json="+JSON.stringify(teachingQualityArray),
+			async: false,
+			beforeSend: function()
+	    	{
+	    		$.messager.progress({title : '修改教质计划', msg : '修改教质计划中，请稍等……'});
+	    	},
+	    	success: function(flag) {
+	    		$.messager.progress('close'); 
+	    		if(flag == "true"){
+	    			$.messager.alert('提示', "修改教质计划成功！","info",function(){
+		    			window.location.href = "/sys/teaPlanManage/teaPlanManage.jsp";
+					});
+	    		}else if(flag == "false"){
+	    			$.messager.alert('提示', "修改教质计划失败！");
+	    		}
+	        } 
+		});
+	}
 }
 
 //跳转浏览教质计划页面

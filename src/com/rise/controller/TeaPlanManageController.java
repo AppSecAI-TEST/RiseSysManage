@@ -26,15 +26,16 @@ public class TeaPlanManageController {
 	
 	//根据学校Id查所有有效班级实例
 	@RequestMapping(value = "/qryClassInfoById.do")
-	public void qryClassInfoById(HttpServletResponse response,String schoolId)
+	public void qryClassInfoById(HttpServletResponse response,String schoolId,String month)
 	{
 		log.error(schoolId);
+		log.debug(month);
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = teaPlanManageService.qryClassInfoById(schoolId);
+			String retVal = teaPlanManageService.qryClassInfoById(schoolId,month);
 			log.error(retVal);
 			out.write(retVal);
 		}

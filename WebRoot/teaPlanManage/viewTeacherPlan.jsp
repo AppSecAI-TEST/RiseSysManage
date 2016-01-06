@@ -26,14 +26,16 @@
   			</table>
   			<table width="100%" cellpadding="5px" style="margin-top: 5px;margin-bottom: 5px;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;" class="maintable">
 	      	   <tr>
-	      	   	 <td align="center">班级</td>
-	      	   	 <td align="center">电教</td>
-	      	   	 <td align="center">家长会</td>
-	      	   	 <td align="center">公开课</td>
-	      	   	 <td align="center">毕业典礼</td>
+	      	   	 <td align="center" width="3%">序号</td>
+	      	   	 <td align="center" width="17%">班级</td>
+	      	   	 <td align="center" width="20%">电教</td>
+	      	   	 <td align="center" width="20%">家长会</td>
+	      	   	 <td align="center" width="20%">公开课</td>
+	      	   	 <td align="center" width="20%">毕业典礼</td>
      	       </tr>
-     	       <c:forEach items="${obj.teachingPlan}" var="teachingPlan">
+     	       <c:forEach items="${obj.teachingPlan}" var="teachingPlan" varStatus="status">
 				<tr>
+					<td align="center">${status.count}</td>
 					<td align="center">${teachingPlan.className}</td>
 					<td align="center">${teachingPlan.teachingDate}</td>
 					<td align="center">${teachingPlan.meetingDate}</td>

@@ -147,31 +147,31 @@
 							<td align="right">第1次公开课：</td>
 							<td id="oneTd" align="center"></td>
 							<td align="right">修改为：</td>
-							<td align="center"><input name="one" style="width:150px" class="easyui-numberbox" data-options="min:1" required="true"/></td>
+							<td align="center"><input name="one" style="width:150px" class="easyui-numberbox" data-options="min:1,max:24" required="true"/></td>
 						</tr>
 						<tr>
 							<td align="right">第2次公开课：</td>
 							<td id="twoTd" align="center"></td>
 							<td align="right">修改为：</td>
-							<td align="center"><input name="two" style="width:150px" class="easyui-numberbox" data-options="min:1" required="true"/></td>
+							<td align="center"><input name="two" style="width:150px" class="easyui-numberbox" data-options="min:1,max:24" required="true"/></td>
 						</tr>
 						<tr>
 							<td align="right">第3次公开课：</td>
 							<td id="threeTd" align="center"></td>
 							<td align="right">修改为：</td>
-							<td align="center"><input name="three" style="width:150px" class="easyui-numberbox" data-options="min:1" required="true"/></td>
+							<td align="center"><input name="three" style="width:150px" class="easyui-numberbox" data-options="min:1,max:24" required="true"/></td>
 						</tr>
 						<tr>
 							<td align="right">第4次公开课：</td>
 							<td id="fourTd" align="center"></td>
 							<td align="right">修改为：</td>
-							<td align="center"><input name="four" style="width:150px" class="easyui-numberbox" data-options="min:1" required="true"/></td>
+							<td align="center"><input name="four" style="width:150px" class="easyui-numberbox" data-options="min:1,max:24" required="true"/></td>
 						</tr>
 						<tr>
 							<td align="right">毕业典礼：</td>
 							<td id="gradTd" align="center"></td>
 							<td align="right">修改为：</td>
-							<td align="center"><input name="grad" style="width:150px" class="easyui-numberbox" data-options="min:1" required="true"/></td>
+							<td align="center"><input name="grad" style="width:150px" class="easyui-numberbox" data-options="min:1,max:24" required="true"/></td>
 						</tr>
 					</table>
 				</form>

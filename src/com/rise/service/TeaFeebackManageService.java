@@ -8,8 +8,8 @@ import com.rise.pub.invoke.ServiceEngine;
 public class TeaFeebackManageService {
 
 	//根据班级实例Id查所有班级学员
-	public String qryClassStuByInstId(String classInstId)throws Exception {
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS4201\",securityCode:\"0000000000\",params:{classInstId:'"+classInstId+"'},rtnDataFormatType:\"user-defined\"}";
+	public String qryClassStuByInstId(String classInstId,String qualityId)throws Exception {
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS4201\",securityCode:\"0000000000\",params:{classInstId:'"+classInstId+"',qualityId:'"+qualityId+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 

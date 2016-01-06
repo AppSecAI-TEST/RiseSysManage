@@ -21,7 +21,7 @@
   			<table width="100%" style="border:1px solid #ccc;font-family:'微软雅黑';margin:0 auto;height:30px;" cellspacing="2">
   				<tr>
 					<td align="right" width="10%"><span>教质月份：</span></td>
-					<td align="left" width="10%">${month}</td>
+					<td id="teachingMonth" align="left" width="10%">${month}</td>
   					<td align="right" width="8%"><span>校区：</span></td>
 	  				<td align="left" width="10%">${schoolName}</td>
 					<td align="center" width="60%"></td>
@@ -29,15 +29,17 @@
   			</table>
   			<table width="100%" cellpadding="5px" style="margin-top: 5px;margin-bottom: 5px;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;" class="maintable">
 	      	   <tr id="planTr">
-	      	   	 <td align="center">班级</td>
-	      	   	 <td align="center">电教</td>
-	      	   	 <td align="center">家长会</td>
-	      	   	 <td align="center">公开课</td>
-	      	   	 <td align="center">毕业典礼</td>
+	      	   	 <td align="center" width="3%">序号</td>
+	      	   	 <td align="center" width="17%">班级</td>
+	      	   	 <td align="center" width="20%">电教</td>
+	      	   	 <td align="center" width="20%">家长会</td>
+	      	   	 <td align="center" width="20%">公开课</td>
+	      	   	 <td align="center" width="20%">毕业典礼</td>
      	       </tr>
      	       <c:forEach items="${obj.teachingPlan}" var="teachingPlan" varStatus="status">
      	        <input type="hidden" name="qualityId" id="qualityId${status.index}" value="${teachingPlan.qualityId}"/>
 				<tr>
+					<td align="center">${status.count}</td>
 					<td align="center">${teachingPlan.className}</td>
 					<td align="center"><input id="teachingDate${status.index}" dateVal="${teachingPlan.teachingDate}" class="easyui-datebox"  style='width:120px;' /></td>
 					<td align="center"><input id="meetingDate${status.index}" dateVal="${teachingPlan.meetingDate}" class="easyui-datebox"  style='width:120px;' /></td>

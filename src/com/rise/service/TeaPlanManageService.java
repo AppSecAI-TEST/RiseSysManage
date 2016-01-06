@@ -8,8 +8,8 @@ import com.rise.pub.invoke.ServiceEngine;
 public class TeaPlanManageService {
 
 	//根据学校Id查所有有效班级实例
-	public String qryClassInfoById(String schoolId)throws Exception {
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS4101\",securityCode:\"0000000000\",params:{schoolId:'"+schoolId+"'},rtnDataFormatType:\"user-defined\"}";
+	public String qryClassInfoById(String schoolId,String month)throws Exception {
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS4101\",securityCode:\"0000000000\",params:{schoolId:'"+schoolId+"',month:'"+month+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 	

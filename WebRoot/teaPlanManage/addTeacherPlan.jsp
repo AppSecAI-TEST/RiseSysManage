@@ -32,11 +32,12 @@
   			</table>
   			<table id="planTab" width="100%" cellpadding="5px" style="margin-top: 5px;margin-bottom: 5px;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;" class="maintable">
 	      	   <tr id="planTr">
-	      	   	 <td align="center">班级</td>
-	      	   	 <td align="center">电教</td>
-	      	   	 <td align="center">家长会</td>
-	      	   	 <td align="center">公开课</td>
-	      	   	 <td align="center">毕业典礼</td>
+	      	   	 <td align="center" width="3%">序号</td>
+	      	   	 <td align="center" width="17%">班级</td>
+	      	   	 <td align="center" width="20%">电教</td>
+	      	   	 <td align="center" width="20%">家长会</td>
+	      	   	 <td align="center" width="20%">公开课</td>
+	      	   	 <td align="center" width="20%">毕业典礼</td>
      	       </tr>
       	    </table>
   		</div>
@@ -71,12 +72,12 @@
 	                	}
 	                	var val =year + '-' + month+"-00";
 	                    $('#time').datebox('setValue',val).datebox('hidePanel'); //设置日期的值
+	                    createPlan($('#schoolId').combobox('getValue'),$('#time').datebox("getValue"));
 	             	});
-	            },
-	            
+	            }
 	            //formatter: function (d) { return d.getFullYear() + '-' + d.getMonth(); }//配置formatter，只返回年月
 	    	});
-	    	
+	    	$('#time').datebox('setValue',new Date().format("yyyy-MM"));
 	    	$('#schoolId').combobox({//联动信息带出
 				url:"/sys/pubData/qrySchoolList.do",
 				formatter:formatSchool, 
@@ -88,7 +89,7 @@
 				},
 			 	onChange:function(n,o)
 				{
-					createPlan(n);
+					createPlan(n,$('#time').datebox('getValue'));
 				}
 			});
 	    	
