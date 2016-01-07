@@ -60,7 +60,7 @@
 											<td align="left" width="10%" style="background-color:#fafafa">&nbsp;</td>
 										</c:when>
 										<c:otherwise>
-											<td align="center" width="4%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}')">${node.dateValue}</a></td>
+											<td align="center" width="4%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}','${node.schooltimeId}')">${node.dateValue}</a></td>
 											<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
 												<c:if test="${node.calendarShow.planClassTime != ''}">
 													计划:${node.calendarShow.planClassTime}
@@ -81,7 +81,7 @@
 											<td align="left" width="10%" style="background-color:#fafafa">&nbsp;</td>
 										</c:when>
 										<c:otherwise>
-											<td align="center" width="4%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}')">${node.dateValue}</a></td>
+											<td align="center" width="4%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}','${node.schooltimeId}')">${node.dateValue}</a></td>
 											<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
 												<c:if test="${node.calendarShow.planClassTime != ''}">
 													计划:${node.calendarShow.planClassTime}
@@ -103,7 +103,7 @@
 											<td align="left" width="10%" style="background-color:#fafafa">&nbsp;</td>
 										</c:when>
 										<c:otherwise>
-											<td align="center" width="4%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}')">${node.dateValue}</a></td>
+											<td align="center" width="4%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}','${node.schooltimeId}')">${node.dateValue}</a></td>
 											<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
 												<c:if test="${node.calendarShow.planClassTime != ''}">
 													计划:${node.calendarShow.planClassTime}
@@ -126,7 +126,7 @@
 										<td align="left" width="10%" style="background-color:#fafafa">&nbsp;</td>
 									</c:when>
 									<c:otherwise>
-										<td align="center" width="4%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}')">${node.dateValue}</a></td>
+										<td align="center" width="4%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}','${node.schooltimeId}')">${node.dateValue}</a></td>
 										<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
 											<c:if test="${node.calendarShow.planClassTime != ''}">
 												计划:${node.calendarShow.planClassTime}
@@ -188,12 +188,17 @@
 				    }
 				});
 			});
-			function gotoAttendRecord(classInstId,dateValue,classAttendId,realClassTime)
+			function gotoAttendRecord(classInstId,dateValue,classAttendId,realClassTime,schooltimeId)
 			{
 				if(realClassTime != "")
 				{
 					ajaxLoading("加载中...");
 					window.location.href = "/sys/attend/getUpdateAttenceRecord.do?funcNodeId=${funcNodeId}&classAttendId="+classAttendId+"&selDateStr="+$("#selDateStr").html();
+				}
+				else if(schooltimeId != "")
+				{
+					ajaxLoading("加载中...");
+					window.location.href = "/sys/attend/getAttenceRecord.do?funcNodeId=${funcNodeId}&schooltimeId="+schooltimeId+"&selDateStr="+$("#selDateStr").html()+"&dateValue="+dateValue;
 				}
 				else if(classInstId != "")
 				{

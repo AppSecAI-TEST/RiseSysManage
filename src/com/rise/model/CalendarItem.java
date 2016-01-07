@@ -8,6 +8,8 @@ public class CalendarItem {
 	
 	private String dateValue;
 	
+	private String schooltimeId;
+	
 	private CalendarShow calendarShow;
 	
 	private CalendarHidden calendarHidden;
@@ -34,6 +36,14 @@ public class CalendarItem {
 
 	public void setDateValue(String dateValue) {
 		this.dateValue = dateValue;
+	}
+	
+	public String getSchooltimeId() {
+		return schooltimeId;
+	}
+
+	public void setSchooltimeId(String schooltimeId) {
+		this.schooltimeId = schooltimeId;
 	}
 
 	public CalendarShow getCalendarShow() {

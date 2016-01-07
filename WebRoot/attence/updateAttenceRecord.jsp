@@ -166,7 +166,7 @@
 				$("#classTime").combobox({
 					formatter:formatParam, 
 					valueField: 'paramValue', 
-					textField: 'param1', 
+					textField: 'paramDesc', 
 					panelHeight: 'auto',
 					data:classTimeData,
 					onLoadSuccess:function(data){

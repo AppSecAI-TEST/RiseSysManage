@@ -46,6 +46,8 @@ public class ShortClassAttendT {
 	
 	private String teacherNames;
 	
+	private Integer isTieOff;
+	
 	private StaffT handlerObj;
 	
 	private List<ShortTeacherAttendT> teacherAttendList;
@@ -218,6 +220,14 @@ public class ShortClassAttendT {
 
 	public void setTeacherNames(String teacherNames) {
 		this.teacherNames = teacherNames;
+	}
+
+	public Integer getIsTieOff() {
+		return isTieOff;
+	}
+
+	public void setIsTieOff(Integer isTieOff) {
+		this.isTieOff = isTieOff;
 	}
 
 	public StaffT getHandlerObj() {

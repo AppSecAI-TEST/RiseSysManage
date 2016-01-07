@@ -13,6 +13,8 @@ public class TeacherT {
     private String sex;
 
     private Integer schoolId;
+    
+    private Integer post;
 
     private String pState;
     
@@ -20,6 +22,10 @@ public class TeacherT {
 
     private String state;
 
+    private Date applyLeaveDate;
+    
+    private Date leaveDate;
+    
     private Date createDate;
     
     private SchoolT schoolT;
@@ -66,6 +72,14 @@ public class TeacherT {
         this.schoolId = schoolId;
     }
 
+	public Integer getPost() {
+		return post;
+	}
+
+	public void setPost(Integer post) {
+		this.post = post;
+	}
+
 	public String getpState() {
 		return pState;
 	}
@@ -97,6 +111,22 @@ public class TeacherT {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
+    
+	public Date getApplyLeaveDate() {
+		return applyLeaveDate;
+	}
+
+	public void setApplyLeaveDate(Date applyLeaveDate) {
+		this.applyLeaveDate = applyLeaveDate;
+	}
+
+	public Date getLeaveDate() {
+		return leaveDate;
+	}
+
+	public void setLeaveDate(Date leaveDate) {
+		this.leaveDate = leaveDate;
+	}
 
 	public SchoolT getSchoolT() {
 		return schoolT;

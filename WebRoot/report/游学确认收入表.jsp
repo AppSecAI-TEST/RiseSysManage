@@ -58,6 +58,7 @@
 			</div>
 			<div id="toolbar" style="padding: 2px; height: auto">
 	   			<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
+				<a href="javascript:void(0)" id="tieOffBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;" onclick="tieOffFunc()">扎帐管理</a>
 			</div>
   		</div>
   	</body>
@@ -113,4 +114,10 @@ function myformatter(date){
                 return new Date();
             }
         }
+ 
+function tieOffFunc()
+{
+	ajaxLoading("加载中...");
+	window.location.href = "/sys/tieOff/tourismTieOffPage.jsp";
+}
 </script>

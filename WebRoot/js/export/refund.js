@@ -75,3 +75,9 @@ function initDate()
                 }
             }
         }
+ 
+function tieOffFunc()
+{
+	ajaxLoading("加载中...");
+	window.location.href = "/sys/tieOff/regularTieOffPage.jsp";
+}

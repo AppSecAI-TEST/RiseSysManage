@@ -14,7 +14,7 @@
   	</head>
   
   	<body class="manage">
-  		<input type="hidden" id="schooltimeInstId" value="${schooltimeInstT.schooltimeInstId}" />
+  		<input type="hidden" id="schooltimeId" value="${schooltimeT.schooltimeId}" />
 		<table class="tab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr style="display:none;">
 				<td>&nbsp;</td>
@@ -22,7 +22,7 @@
 			</tr>
 			<tr>
 				<td align="right" width="10%">上课时间：</td>
-				<td>周${schooltimeInstT.weekTime} <fmt:formatDate value="${schooltimeInstT.schooltime}" pattern="yyyy-MM-dd" /> <select id="classTime" name="classTime" style="width:200px" ></select></td>
+				<td>周${schooltimeT.weekTime} ${selDateStr}-${dateValue} <select id="classTime" name="classTime" style="width:200px" ></select></td>
 			</tr>
 			<tr>
 				<td align="right">教室：</td>
@@ -52,13 +52,13 @@
 				<td>&nbsp;</td>
 				<td align="center" width="15%"><a href="javascript:void(0)" id="addTeacherBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="addAttendTeacher()">添加</a></td>
 			</tr>
-			<c:forEach items="${teacherTimeInstList}" var="node">
+			<c:forEach items="${schooltimeT.classTeacherList}" var="node">
 				<tr id="teacherId${node.teacherId}">
-					<td align="right" teacherId="${node.teacherId}" teacherName="${node.teacherName}" teacherType="${node.teacherType}" hours="${node.lessionHours}">老师：</td>
+					<td align="right" teacherId="${node.teacherId}" teacherName="${node.teacherT.teacherName}" teacherType="${node.teacherType}" hours="${schooltimeT.lessionHours}">老师：</td>
 					<td align="center">${node.schoolT.schoolName}</td>
-					<td align="center">${node.teacherName}</td>
+					<td align="center">${node.teacherT.teacherName}</td>
 					<td align="center">${node.teacherType}</td>
-					<td align="center">${node.lessionHours}</td>
+					<td align="center">${schooltimeT.lessionHours}</td>
 					<td align="center">
 						<c:choose>
 							<c:when test="${fn:length(node.classLicenseList) == 0}">
@@ -89,7 +89,7 @@
 				<td width="50%">考勤操作</td>
 				<td width="16%">校服着装情况</td>
 			</tr>
-			<c:forEach items="${schooltimeInstT.classInstT.classStudentList}" var="node" varStatus="i">
+			<c:forEach items="${classInstT.classStudentList}" var="node" varStatus="i">
 				<tr id="studentId${node.studentId}">
 					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" studentName="${node.studentT.name}" studentCourseId="${node.studentCourseId}" stageId="${classInstT.stageId}"><input type="checkbox" name="studentId" value="${node.studentId}" courseId="${node.studentCourseT.studentCourseId}" onclick="studentCheckboxClick(this)" /></td>
 					<td align="center">${i.count}</td>
@@ -125,7 +125,7 @@
 					panelHeight: 'auto',
 					data:classTimeData,
 					onLoadSuccess:function(data){
-						$("#classTime").combobox("setValue","${schooltimeInstT.hourRange}");
+						$("#classTime").combobox("setValue","${schooltimeT.hourRange}");
 					}
 				});
 				$("#classRoomId").combobox({
@@ -135,7 +135,7 @@
 					panelHeight: 'auto',
 					data:classRoomIdData,
 					onLoadSuccess:function(data){
-						$("#classRoomId").combobox("setValue","${schooltimeInstT.roomId}");
+						$("#classRoomId").combobox("setValue","${schooltimeT.roomId}");
 					}
 				});
 				$("#attRecordSchoolId").combobox({
@@ -173,7 +173,7 @@
 					panelHeight: 'auto',
 					data:attRecordClassType
 				});
-				$("#classLessonHour").textbox("setValue","${schooltimeInstT.lessionHours}");
+				$("#classLessonHour").textbox("setValue","${schooltimeT.lessionHours}");
 			});
 			
 			function addAttendTeacher()
@@ -182,7 +182,6 @@
 				var attRecordTeacherId = $("#attRecordTeacherId").combobox("getValue");
 				var attRecordClassType = $("#attRecordClassType").combobox("getValue");
 				var attRecordLessonHour = $("#attRecordLessonHour").textbox("getValue");
-				var schooltimeInstId = $("#schooltimeInstId").val();
 				if(attRecordTeacherId == "")
 				{
 					$.messager.alert('提示',"请先选择老师后重新尝试");
@@ -226,14 +225,14 @@
 				else
 				{
 					var obj = {
-						classInstId:"${schooltimeInstT.classInstId}",
-						classSchoolId:"${schooltimeInstT.schoolId}",
+						classInstId:"${schooltimeT.classInstId}",
+						classSchoolId:"${schooltimeT.schoolId}",
 						hourRange:$("#classTime").combobox("getValue"),
 						hours:$("#classLessonHour").textbox("getValue"),
 						roomId:$("#classRoomId").combobox("getValue"),
-						classType:"${schooltimeInstT.classInstT.classType}",
+						classType:"${classInstT.classType}",
 						handlerId:"${sessionScope.StaffT.staffId}",
-						schooltime:'<fmt:formatDate value="${schooltimeInstT.schooltime}" pattern="yyyy-MM-dd" />',
+						schooltime:'${selDateStr}-${dateValue}',
 						teacherList:null,
 						studentList:null
 					};
@@ -344,7 +343,7 @@
 			
 			function convertExceptionClass()
 			{
-				$.post("/sys/attend/convertClassOpenType.do",{classInstId:"${schooltimeInstT.classInstId}"},function(data){
+				$.post("/sys/attend/convertClassOpenType.do",{classInstId:"${schooltimeT.classInstId}"},function(data){
 					if(data == "success")
 					{
 						$.messager.alert("提示", "当前班级已被转换成异常开班");
@@ -359,7 +358,7 @@
 			function backFunc()
 			{
 				ajaxLoading("返回中...");
-				window.location.href = "/sys/attend/getAttendOperate.do?funcNodeId=${funcNodeId}&classInstId=${schooltimeInstT.classInstId}&selDateStr=${selDateStr}";
+				window.location.href = "/sys/attend/getAttendOperate.do?funcNodeId=${funcNodeId}&classInstId=${schooltimeT.classInstId}&selDateStr=${selDateStr}";
 			}
 		</script>
  	</body>

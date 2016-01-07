@@ -18,6 +18,7 @@ import com.rise.model.CalendarItem;
 import com.rise.model.ClassAttendT;
 import com.rise.model.ClassInstT;
 import com.rise.model.SchooltimeInstT;
+import com.rise.model.SchooltimeT;
 import com.rise.pub.base.JacksonJsonMapper;
 import com.rise.pub.invoke.ServiceEngine;
 import com.rise.pub.util.StringUtil;
@@ -62,19 +63,17 @@ public class ClassAttendService
 		model.addObject("funcNodeId", funcNodeId);
 	}
 	
-	public void getAttenceRecord(ModelAndView model , String schooltimeInstId , String funcNodeId , String selDateStr) throws Exception
+	public void getAttenceRecord(ModelAndView model , String schooltimeId , String funcNodeId , String selDateStr , String dateValue) throws Exception
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2043\",securityCode:\"0000000000\",params:{schooltimeInstId:\""+schooltimeInstId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2043\",securityCode:\"0000000000\",params:{schooltimeId:\""+schooltimeId+"\"},rtnDataFormatType:\"user-defined\"}";
 		String result = ServiceEngine.invokeHttp(param);
 		try{
 			JSONObject json = JSONObject.fromObject(result);
-			SchooltimeInstT schooltimeInstT = (SchooltimeInstT)JacksonJsonMapper.getInstance().readValue(json.getJSONObject("schooltimeInstT").toString(), SchooltimeInstT.class);
-			ObjectMapper mapper = JacksonJsonMapper.getInstance();
-			JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, SchooltimeInstT.class);
-			List teacherTimeInstList = (List)mapper.readValue(json.getJSONArray("teacherTimeInstList").toString(), javaType);
+			SchooltimeT schooltimeT = (SchooltimeT)JacksonJsonMapper.getInstance().readValue(json.getJSONObject("schooltimeT").toString(), SchooltimeT.class);
+			ClassInstT classInstT = (ClassInstT)JacksonJsonMapper.getInstance().readValue(json.getJSONObject("classInstT").toString(), ClassInstT.class);
 			model.addObject("isFirstFlag", StringUtil.getJSONObjectKeyVal(json, "isFirstFlag"));
-			model.addObject("schooltimeInstT", schooltimeInstT);
-			model.addObject("teacherTimeInstList", teacherTimeInstList);
+			model.addObject("schooltimeT", schooltimeT);
+			model.addObject("classInstT", classInstT);
 			model.addObject("hourRangeList", json.getJSONArray("hourRangeList"));
 			model.addObject("roomList", json.getJSONArray("roomList"));
 			model.addObject("schoolList", json.getJSONArray("schoolList"));
@@ -85,6 +84,7 @@ public class ClassAttendService
 			model.addObject("errorInfo", err.getMessage());
 		}
 		model.addObject("selDateStr", selDateStr);
+		model.addObject("dateValue", dateValue);
 		model.addObject("funcNodeId", funcNodeId);
 	}
 	

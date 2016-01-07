@@ -48,12 +48,12 @@ public class ClassAttendController
 	}
 	
 	@RequestMapping("/getAttenceRecord.do")
-	public ModelAndView getAttenceRecord(String schooltimeInstId , String funcNodeId , String selDateStr)
+	public ModelAndView getAttenceRecord(String schooltimeId , String funcNodeId , String selDateStr , String dateValue)
 	{
 		ModelAndView model = new ModelAndView("attence/attenceRecord");
 		try
 		{
-			classAttendService.getAttenceRecord(model, schooltimeInstId, funcNodeId, selDateStr);
+			classAttendService.getAttenceRecord(model, schooltimeId, funcNodeId, selDateStr, dateValue);
 		}
 		catch (Exception e) 
 		{
