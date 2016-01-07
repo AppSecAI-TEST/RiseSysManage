@@ -22,9 +22,9 @@ body
 form{width:340px;height:420px;margin:50px auto;}
 label{float:left;display:block;font-size:16px;color:#aba1a4;height:29px;margin:6px 0px 2px 25px;}
 .inputDiv{margin:0 auto 30px;background:#F8F5F8;height:37px;border:1px solid #e4e4e2;border-radius:4px;}
-#username,#password,#code{font-size:14px;cursor:pointer;height:31px;color:#4b4b5b;background:transparent;margin:2px;padding:0;border:0px;-webkit-appearance:none;appearance:none;outline:none;-webkit-tap-highlight-color:transparent;border-radius:0;}
+#username,#password,#code{font-size:14px;cursor:pointer;height:31px;color:#4b4b5b;background:transparent;margin:2px;padding:0;border:none;-webkit-appearance:none;appearance:none;outline:none;-webkit-tap-highlight-color:transparent;border-radius:0;}
 #username,#password{width:250px;}
-#code{width:80px;}
+#code{width:108px;}
 .loginttitle
 {
 	width:100%;
@@ -100,7 +100,7 @@ label{float:left;display:block;font-size:16px;color:#aba1a4;height:29px;margin:6
 			        <input type="password" name="password" id="password" value="" />  
 				</div>
 				<div class="inputDiv" style="width:200px;margin:0 0 30px 0;position:relative;">
-					<label for="code">验证码</label>  
+					<label for="code" style="margin-left:9px;">验证码</label>  
 			        <input type="text" name="code" id="code" size="4" />
 			        <span style="position:absolute;right:-138px;"><img id="code_img" align="top" width="100" height="35" onclick="changeCode()" src="/sys/auth.do?method=getSecurityImage" title="点击切换验证码"></span> 			        
 				</div>
