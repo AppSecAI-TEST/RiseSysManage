@@ -120,7 +120,7 @@ $(document).ready(function() {
     	});
     	
     	var higherType = $("#higherType").val();
-    	if("quarter" == higherType) {
+    	if("quarter" == higherType||"allQuarter"==higherType) {
     		var year = $('#year').datebox('getValue');
     		$("#yearDiv").html(year);
     	} else if("gap" == higherType) {

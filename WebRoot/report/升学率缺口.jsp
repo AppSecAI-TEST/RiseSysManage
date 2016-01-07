@@ -24,11 +24,11 @@
 						</td>
 	  					<td align="right" width="50px"><span>年度：</span></td>
 						<td width="100px">
-							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="year" name="year" data-options="formatter:yearFormatter, parser:yearParser"/>
+							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="year" name="year" editable="false" data-options="formatter:yearFormatter, parser:yearParser"/>
 						</td>
 						<td align="right" width="50px"><span>季度：</span></td>
 						<td width="114px">
-							<select id="quarter" name="quarter" class="easyui-combobox" style="width: 114px; height: 25px;">
+							<select id="quarter" name="quarter" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false">
 	  						</select>
 						</td>
 	  					<td align="left" colspan="2" width="400px">
@@ -45,10 +45,10 @@
 						<tr>
 							<th data-options="field:'schoolName',width:100,align:'center'">校区</th>
 							<th data-options="field:'goalHigherNum',width:100,align:'center'"><div id="goal"></div></th>
-							<th data-options="field:'90HigherNum',width:100,align:'center'">距90%缺口</th>
-							<th data-options="field:'1MonthHigherRate',width:100,align:'center'"><div id="1_month"></div></th>
-							<th data-options="field:'2MonthHigherRate',width:100,align:'center'"><div id="2_month"></div></th>
-							<th data-options="field:'3MonthHigherRate',width:100,align:'center'"><div id="3_month"></div></th>
+							<th data-options="field:'higherNum90',width:100,align:'center'">距90%缺口</th>
+							<th data-options="field:'monthHigherRate1',width:100,align:'center'"><div id="1_month"></div></th>
+							<th data-options="field:'monthHigherRate2',width:100,align:'center'"><div id="2_month"></div></th>
+							<th data-options="field:'monthHigherRate3',width:100,align:'center'"><div id="3_month"></div></th>
 							<th data-options="field:'quarterHigherBaseNum',width:100,align:'center'">基数</th>
 							<th data-options="field:'quarterHigherRate',width:100,align:'center'"><div id="rate"></div></th>
 						</tr>
@@ -61,3 +61,25 @@
   		</div>
   	</body>
 </html>
+<script>
+		$("#export").click(function(){
+			if($("#list_data").datagrid("getData").total>0)
+			{
+				var fileName =parent.$("li.tabs-selected").find("span.tabs-title").html();
+				try
+				{
+					window.location.href="/sys/export/exportLackOfGradRate.do?fileName="+fileName+"&year="+$("#year").datebox("getValue")+"&quarter="+$("#quarter").combobox("getValue")+"&param="+JSON.stringify($("#list_data").datagrid("options").queryParams.param);
+				}
+				catch(e)
+				{
+					$.messager.alert('提示', "模版不存在！",function(){
+						window.history.back();
+					});
+				}
+			}
+			else
+			{
+				$.messager.alert('提示', "没有数据可以导出！");
+			}	
+		});
+</script>

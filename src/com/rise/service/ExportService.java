@@ -71,6 +71,69 @@ public class ExportService
 		}
 	}
 	
+	public void exportLackOfGradRate(String fileName,String year,String quarter,String param,OutputStream out) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1019\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		String result= ServiceEngine.invokeHttp(params);
+		JSONObject obj =JSONObject.fromObject(result);
+		if(ObjectCensor.isStrRegular(StringUtil.getJSONObjectKeyVal(obj, "rows")))
+		{
+			List list = JacksonJsonMapper.getInstance().readValue(obj.getString("rows"), List.class);
+			String filePath =this.getFullFilePath(fileName);
+			HttpClient client = new HttpClient();   
+			GetMethod httpGet = new GetMethod(filePath);  
+			client.executeMethod(httpGet); 
+			InputStream inputStream =httpGet.getResponseBodyAsStream();
+			Map<String, List<Map>> beanParams = new HashMap<String, List<Map>>();
+			beanParams.put("reportList", list);  
+	        XLSTransformer former = new XLSTransformer(); 
+	        HSSFWorkbook workBook = (HSSFWorkbook)former.transformXLS(inputStream, beanParams);
+		    HSSFSheet sheet = workBook.getSheetAt(0);
+		    sheet.getRow(0).getCell(0).setCellValue(year+"升学率缺口");
+		    String name1="",name2="",name3="",name4="",name5="";
+		    if("1".equals(quarter))
+		    {
+		    	name1 ="一季度距目标缺口";
+		    	name2 ="1月升学率";
+		    	name3 ="2月升学率";
+		    	name4 ="3月升学率";
+		    	name5 ="一季度升学率";
+		    }
+		    else if("2".equals(quarter))
+		    {
+		    	name1 ="二季度距目标缺口";
+		    	name2 ="4月升学率";
+		    	name3 ="5月升学率";
+		    	name4 ="6月升学率";
+		    	name5 ="二季度升学率";
+		    }	
+		    else if("3".equals(quarter))
+		    {
+		    	name1 ="三季度距目标缺口";
+		    	name2 ="7月升学率";
+		    	name3 ="8月升学率";
+		    	name4 ="9月升学率";
+		    	name5 ="三季度升学率";
+		    }	
+		    else if("4".equals(quarter))
+		    {
+		    	name1 ="四季度距目标缺口";
+		    	name2 ="10月升学率";
+		    	name3 ="11月升学率";
+		    	name4 ="12月升学率";
+		    	name5 ="四季度升学率";
+		    }
+		    sheet.getRow(1).getCell(1).setCellValue(name1);
+		    sheet.getRow(1).getCell(3).setCellValue(name2);
+		    sheet.getRow(1).getCell(4).setCellValue(name3);
+		    sheet.getRow(1).getCell(5).setCellValue(name4);
+		    sheet.getRow(1).getCell(7).setCellValue(name5);
+	        workBook.write(out);
+			inputStream.close();
+			out.close();
+		}
+	}
+	
 	public void normalMergeExport(String fileName,String mergeName,String mergeIndex,String param,OutputStream out) throws Exception
 	{
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1019\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
@@ -366,13 +429,13 @@ public class ExportService
 		    	for(int j=1;j<array.size();j++)
 				{
 					JSONObject item =array.getJSONObject(j);
-					if(value.equals(StringUtil.getJSONObjectKeyVal(item,"quarter")))
+					if(value.equals(StringUtil.getJSONObjectKeyVal(item,"schoolId")))
 					{
 						flag =true;	
 						tr =j+2;
 						if(j==(array.size()-1)&&flag)
 						{
-							CellRangeAddress range1 =new CellRangeAddress(fr, tr, 4,4);
+							CellRangeAddress range1 =new CellRangeAddress(fr, tr, 0,0);
 							cellRangeList.add(range1);
 							
 						}	
@@ -381,12 +444,12 @@ public class ExportService
 					{
 						if(flag)
 						{
-							CellRangeAddress range2 =new CellRangeAddress(fr, tr, 4,4);
+							CellRangeAddress range2 =new CellRangeAddress(fr, tr, 0,0);
 							cellRangeList.add(range2);
 							flag =false;
 						}
 						fr =j+2;
-						value =StringUtil.getJSONObjectKeyVal(item, "quarter");
+						value =StringUtil.getJSONObjectKeyVal(item, "schoolId");
 					}
 				}	
 		    }	
@@ -399,6 +462,179 @@ public class ExportService
 			out.close();
 		}
 	}
+	
+	public void exportCenterMSRate(String fileName,String year,String param,OutputStream out) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1019\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		String result= ServiceEngine.invokeHttp(params);
+		JSONObject obj =JSONObject.fromObject(result);
+		if(ObjectCensor.isStrRegular(StringUtil.getJSONObjectKeyVal(obj, "rows")))
+		{
+			List list = JacksonJsonMapper.getInstance().readValue(obj.getString("rows"), List.class);
+			String filePath =this.getFullFilePath(fileName);
+			HttpClient client = new HttpClient();   
+			GetMethod httpGet = new GetMethod(filePath);  
+			client.executeMethod(httpGet); 
+			InputStream inputStream =httpGet.getResponseBodyAsStream();
+			Map<String, List<Map>> beanParams = new HashMap<String, List<Map>>();
+			beanParams.put("reportList", list);  
+	        XLSTransformer former = new XLSTransformer(); 
+	        List<CellRangeAddress> cellRangeList =new ArrayList<CellRangeAddress>();
+	        HSSFWorkbook workBook = (HSSFWorkbook)former.transformXLS(inputStream, beanParams);
+		    HSSFSheet sheet = workBook.getSheetAt(0);
+		    sheet.getRow(0).getCell(0).setCellValue(year+"月度/季度升学率");
+		    JSONArray array =obj.getJSONArray("rows");
+		    if(array.size()>0)
+		    {
+		    	boolean flag1 =false,flag2 =false;
+		    	int fr1=2,tr1=2,fr2=2,tr2=2;
+		    	String value1 =StringUtil.getJSONObjectKeyVal(array.getJSONObject(0), "schoolId");
+		    	String value2 =StringUtil.getJSONObjectKeyVal(array.getJSONObject(0), "quarter");
+		    	for(int j=1;j<array.size();j++)
+				{
+					JSONObject item =array.getJSONObject(j);
+					if(value1.equals(StringUtil.getJSONObjectKeyVal(item,"schoolId")))
+					{
+						flag1 =true;	
+						tr1 =j+2;
+						if(j==(array.size()-1)&&flag1)
+						{
+							CellRangeAddress range1 =new CellRangeAddress(fr1, tr1, 0,0);
+							cellRangeList.add(range1);
+							
+						}	
+					}
+					else
+					{
+						if(flag1)
+						{
+							CellRangeAddress range2 =new CellRangeAddress(fr1, tr1, 0,0);
+							cellRangeList.add(range2);
+							flag1 =false;
+						}
+						fr1 =j+2;
+						value1 =StringUtil.getJSONObjectKeyVal(item, "schoolId");
+					}
+					if(value2.equals(StringUtil.getJSONObjectKeyVal(item,"quarter")))
+					{
+						flag2 =true;	
+						tr2 =j+2;
+						if(j==(array.size()-1)&&flag1)
+						{
+							CellRangeAddress range1 =new CellRangeAddress(fr2, tr2, 5,5);
+							cellRangeList.add(range1);
+							
+						}	
+					}
+					else
+					{
+						if(flag2)
+						{
+							CellRangeAddress range2 =new CellRangeAddress(fr2, tr2,5,5);
+							cellRangeList.add(range2);
+							flag2 =false;
+						}
+						fr2 =j+2;
+						value2 =StringUtil.getJSONObjectKeyVal(item, "quarter");
+					}
+				}	
+		    }	
+		    for(CellRangeAddress cellRange:cellRangeList)
+		    {
+		    	sheet.addMergedRegion(cellRange);
+		    }	
+	        workBook.write(out);
+			inputStream.close();
+			out.close();
+		}
+	}
+	
+	
+	public void exportRegionGradRate(String fileName,String param,OutputStream out) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1019\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		String result= ServiceEngine.invokeHttp(params);
+		JSONObject obj =JSONObject.fromObject(result);
+		if(ObjectCensor.isStrRegular(StringUtil.getJSONObjectKeyVal(obj, "rows")))
+		{
+			List list = JacksonJsonMapper.getInstance().readValue(obj.getString("rows"), List.class);
+			String filePath =this.getFullFilePath(fileName);
+			HttpClient client = new HttpClient();   
+			GetMethod httpGet = new GetMethod(filePath);  
+			client.executeMethod(httpGet); 
+			InputStream inputStream =httpGet.getResponseBodyAsStream();
+			Map<String, List<Map>> beanParams = new HashMap<String, List<Map>>();
+			beanParams.put("reportList", list);  
+	        XLSTransformer former = new XLSTransformer(); 
+	        List<CellRangeAddress> cellRangeList =new ArrayList<CellRangeAddress>();
+	        HSSFWorkbook workBook = (HSSFWorkbook)former.transformXLS(inputStream, beanParams);
+		    HSSFSheet sheet = workBook.getSheetAt(0);
+		    JSONArray array =obj.getJSONArray("rows");
+		    if(array.size()>0)
+		    {
+		    	boolean flag1 =false,flag2 =false;
+		    	int fr1=1,tr1=1,fr2=1,tr2=1;
+		    	String value1 =StringUtil.getJSONObjectKeyVal(array.getJSONObject(0), "regionId");
+		    	String value2 =StringUtil.getJSONObjectKeyVal(array.getJSONObject(0), "quarter");
+		    	for(int j=1;j<array.size();j++)
+				{
+					JSONObject item =array.getJSONObject(j);
+					if(value1.equals(StringUtil.getJSONObjectKeyVal(item,"regionId")))
+					{
+						flag1 =true;	
+						tr1 =j+1;
+						if(j==(array.size()-1)&&flag1)
+						{
+							CellRangeAddress range1 =new CellRangeAddress(fr1, tr1, 0,0);
+							cellRangeList.add(range1);
+							
+						}	
+					}
+					else
+					{
+						if(flag1)
+						{
+							CellRangeAddress range2 =new CellRangeAddress(fr1, tr1, 0,0);
+							cellRangeList.add(range2);
+							flag1 =false;
+						}
+						fr1 =j+1;
+						value1 =StringUtil.getJSONObjectKeyVal(item, "regionId");
+					}
+					if(value2.equals(StringUtil.getJSONObjectKeyVal(item,"quarter")))
+					{
+						flag2 =true;	
+						tr2 =j+1;
+						if(j==(array.size()-1)&&flag1)
+						{
+							CellRangeAddress range1 =new CellRangeAddress(fr2, tr2, 5,5);
+							cellRangeList.add(range1);
+							
+						}	
+					}
+					else
+					{
+						if(flag2)
+						{
+							CellRangeAddress range2 =new CellRangeAddress(fr2, tr2,5,5);
+							cellRangeList.add(range2);
+							flag2 =false;
+						}
+						fr2 =j+1;
+						value2 =StringUtil.getJSONObjectKeyVal(item, "quarter");
+					}
+				}	
+		    }	
+		    for(CellRangeAddress cellRange:cellRangeList)
+		    {
+		    	sheet.addMergedRegion(cellRange);
+		    }	
+	        workBook.write(out);
+			inputStream.close();
+			out.close();
+		}
+	}
+	
 	
 	
 	public void exportUnfinishFeedback(String fileName,String param,OutputStream out) throws Exception

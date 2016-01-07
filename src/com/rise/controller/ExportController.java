@@ -244,7 +244,7 @@ public class ExportController
 	}
 	
 	
-	// 校区月季度升学率
+	// 总校年级升学率
 	@RequestMapping("/exportCenterGradeRate.do")
 	public void exportCenterGradeRate(String fileName,String param, HttpServletResponse response , HttpServletRequest request)
 	{
@@ -267,4 +267,72 @@ public class ExportController
 
 	}
 	
+	//总校月季度升学率
+	@RequestMapping("/exportCenterMSRate.do")
+	public void exportCenterMSRate(String fileName,String year,String param, HttpServletResponse response , HttpServletRequest request)
+	{
+		OutputStream out = null;
+		try
+		{
+			StringBuffer displayFileName = new StringBuffer(fileName);
+			displayFileName.append(new SimpleDateFormat("yyMMdd").format(new Date()));
+			displayFileName.append(".xls");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName="+URLEncoder.encode(displayFileName.toString(),"utf-8"));
+			out = response.getOutputStream();
+			es.exportCenterMSRate(fileName,year, param, out);
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+		}
+
+	}
+	
+	//升学率缺口
+	@RequestMapping("/exportLackOfGradRate.do")
+	public void exportLackOfGradRate(String fileName,String year,String quarter, String param, HttpServletResponse response , HttpServletRequest request)
+	{
+		OutputStream out = null;
+		try
+		{
+			StringBuffer displayFileName = new StringBuffer(fileName);
+			displayFileName.append(new SimpleDateFormat("yyMMdd").format(new Date()));
+			displayFileName.append(".xls");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName="+URLEncoder.encode(displayFileName.toString(),"utf-8"));
+			out = response.getOutputStream();
+			es.exportLackOfGradRate(fileName,year,quarter,param, out);
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+		}
+
+	}
+	
+	//片区升学率
+	@RequestMapping("/exportRegionGradRate.do")
+	public void exportRegionGradRate(String fileName,String param, HttpServletResponse response , HttpServletRequest request)
+	{
+		OutputStream out = null;
+		try
+		{
+			StringBuffer displayFileName = new StringBuffer(fileName);
+			displayFileName.append(new SimpleDateFormat("yyMMdd").format(new Date()));
+			displayFileName.append(".xls");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName="+URLEncoder.encode(displayFileName.toString(),"utf-8"));
+			out = response.getOutputStream();
+			es.exportRegionGradRate(fileName,param, out);
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+		}
+
+	}
 }
