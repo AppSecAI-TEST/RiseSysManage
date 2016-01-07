@@ -6,7 +6,6 @@ import java.text.NumberFormat;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.logging.Log;
@@ -157,4 +156,29 @@ public class TeacherManageController {
 		}
 	}
 	
+	@RequestMapping(value = "/qryTeacherArchivesList.do")
+	public void qryTeacherArchives(String param, HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			log.error(param);
+			response.setCharacterEncoding("utf-8");
+			out = response.getWriter();
+			String retVal = teacherManageService.qryTeacherArchivesList(param);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }
