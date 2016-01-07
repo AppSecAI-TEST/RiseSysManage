@@ -85,7 +85,7 @@
 	  			</table>
   			</form>
 			<div style="padding:5px 0;min-width:1100px; width:100%;">
-				<table class="easyui-datagrid" style="height:auto;" id="list_data"
+				<table class="easyui-datagrid" style="height:435;" id="list_data"
 					title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
 						<tr>
@@ -108,7 +108,7 @@
 							<th field="higherBaseNum" align="center" width="7%">升学率基数</th>
 							<th field="higherNum" align="center" width="7%">已升学基数</th>
 							<th field="higherRate" align="center" width="7%">当前升学率</th>
-							<th field="90RateNum" align="center" width="9%">距90%升学缺口</th>
+							<th field="rateNum90" align="center" width="9%">距90%升学缺口</th>
 							<th field="handTypeText" align="center" width="6%">班级性质</th>
 							<th field="changeRemark" align="center" width="15%">更换老师情况</th>
 						</tr>

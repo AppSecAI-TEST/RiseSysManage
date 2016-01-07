@@ -96,7 +96,7 @@ public class SecurityCodeCreater
         Graphics graphics = image.getGraphics(); 
          
         //设置背景色（） 
-        graphics.setColor(getRandColor(1,50));
+        graphics.setColor(new Color(238,238,238));
         
         //填充矩形区域 ，作为背景
         graphics.fillRect(0, 0, IMAGEWIDTH * 4, IMAGEHEIGHT); 
@@ -105,21 +105,21 @@ public class SecurityCodeCreater
         graphics.setColor(new Color(0,0,0));
         
         //画出边框 
-        for (int i=0; i<2; i++) 
-            graphics.drawRect(i, i, IMAGEWIDTH * CODE_LENGTH - i * 2+1, IMAGEHEIGHT - i * 2+1); 
+//        for (int i=0; i<2; i++) 
+//            graphics.drawRect(i, i, IMAGEWIDTH * CODE_LENGTH - i * 2+1, IMAGEHEIGHT - i * 2+1); 
          
         //设置随机干扰线条颜色 
         graphics.setColor(getRandColor(50,100)); 
         
         //产生50条干扰线条 
-        for (int i=0; i<50; i++)
-        { 
-            int x1 = random.nextInt(IMAGEWIDTH * CODE_LENGTH - 4) + 2; 
-            int y1 = random.nextInt(IMAGEHEIGHT - 4) + 2; 
-            int x2 = random.nextInt(IMAGEWIDTH * CODE_LENGTH - 2 - x1) + x1; 
-            int y2 = y1; 
-            graphics.drawLine(x1, y1, x2, y2); 
-        } 
+//        for (int i=0; i<50; i++)
+//        { 
+//            int x1 = random.nextInt(IMAGEWIDTH * CODE_LENGTH - 4) + 2; 
+//            int y1 = random.nextInt(IMAGEHEIGHT - 4) + 2; 
+//            int x2 = random.nextInt(IMAGEWIDTH * CODE_LENGTH - 2 - x1) + x1; 
+//            int y2 = y1; 
+//            graphics.drawLine(x1, y1, x2, y2); 
+//        } 
          
         //设置字体 变形
         AffineTransform fontAT = new AffineTransform();
@@ -128,10 +128,10 @@ public class SecurityCodeCreater
         	// 产生弧度 
 	        int rotate = random.nextInt(15);
 	        //fontAT.rotate(random.nextBoolean() ? Math.toRadians(rotate):-Math.toRadians(rotate / 2));
-	        Font fx = new Font(new String[] { "Times New Roman", "Verdana","arial" }[random.nextInt(2)], Font.PLAIN, 20).deriveFont(fontAT);
+	        Font fx = new Font("Times New Roman", Font.BOLD, 14);
 	        graphics.setFont(fx);
         	String temp = verifyCode.substring(i, i+1); 
-        	graphics.setColor(getRandColor(100,255)); 
+        	graphics.setColor(new Color(55,206,254)); 
         	graphics.drawString(temp, 13 * i + 16, 18); 
         }
         //图像生效 

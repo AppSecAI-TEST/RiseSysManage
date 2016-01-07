@@ -45,8 +45,7 @@
 					<th field="schoolName" align="center" width="10%">校区</th>
 					<th field="roomCode" align="center" width="15%">教室编号</th>
 					<th field="roomName" align="center" width="25%">教室名称</th>
-					<th field="stateVal" align="center" width="9%">教室状态</th>
-					<th field="classType" align="center" width="40%">开放课程类型</th>
+					<th field="stateVal" align="center" width="10%">教室状态</th>
 				</tr>
 			</thead>
 		</table>

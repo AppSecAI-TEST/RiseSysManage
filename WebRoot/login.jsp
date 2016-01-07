@@ -12,13 +12,68 @@
  -->
 <%@ include file="/common/head.jsp" %>
 <style type="text/css">
-form{width:280px;height:120px;margin:30px auto 0;}
-form div label{float:left;display:block;width:65px;font-size:16px;padding-top:6px;}
-form div{margin:8px auto;}
-form div.input input{height:21px;padding:2px 3px;}
-form div.input img{cursor:pointer}
-#username,#password{width:200px;}
-#code{width:68px}
+body
+{
+	margin:0;
+	padding:0;
+	background:#F1ECF4;
+	font-family:"Microsoft YaHei"；
+}
+form{width:340px;height:420px;margin:50px auto;}
+label{float:left;display:block;font-size:16px;color:#aba1a4;height:29px;margin:6px 0px 2px 25px;}
+.inputDiv{margin:0 auto 30px;background:#F8F5F8;height:37px;border:1px solid #e4e4e2;border-radius:4px;}
+#username,#password,#code{font-size:14px;cursor:pointer;height:31px;color:#4b4b5b;background:transparent;margin:2px;padding:0;border:0px;-webkit-appearance:none;appearance:none;outline:none;-webkit-tap-highlight-color:transparent;border-radius:0;}
+#username,#password{width:250px;}
+#code{width:80px;}
+.loginttitle
+{
+	width:100%;
+	background:#44C5F6;
+	height:75px;
+}
+
+#titleimg
+{
+	margin-top:20px;
+}
+
+#loginDiv
+{
+	width:800px;
+	margin:20px auto;
+	background:#fff;
+	border-radius:8px;
+	height:540px;
+}
+
+.loginLeft
+{
+	float:left;
+	width:400px;
+	text-align:right;
+}
+.loginRight
+{
+	float:left;
+	width:400px;
+}
+
+.righttitle
+{
+	background:#FABF12;
+	height:40px;
+	text-align:left;
+	 border-top-right-radius:8px;
+}
+#loginBtn
+{
+	background:#2194cb;
+	padding:10px;
+	text-align:center;
+	color:#fff;
+	font-size:16px;
+	cursor:pointer;	
+}
 </style>
 </head>
 <body>
@@ -27,25 +82,36 @@ form div.input img{cursor:pointer}
 		$.messager.alert('提示', '${error}', 'error');
 	</script>
 </c:if>
-<div class="easyui-dialog" title="用户登录" style="width:380px;height:240px" data-options="closable:false,iconCls:'icons-lock-lock',buttons:[{text:'登录',iconCls:'icons-user-user_go',handler:login}]">
-	<form id='form' method="post">
-		<div class="input">
-			<label for="username">用户名:</label>  
-	        <input type="text" name="username" id="username" value="" />  
+<div class="loginttitle"><img id="titleimg" src="<%=path%>/pub/images/logintitle1.png"></div>
+<div style="text-align:center;">
+	<div id="loginDiv">
+		<div class="loginLeft">
+			<img src="<%=path%>/pub/images/girl.png" style="margin:32px 28px 0px 0px;">
 		</div>
-		<div class="input">
-			<label for="password">密　码:</label>  
-	        <input type="password" name="password" id="password" value="" />  
+		<div class="loginRight">
+			<div class="righttitle"><img src="<%=path%>/pub/images/rightimg.png" style="margin:10px 0px 10px 40px;"></div>
+			<form id='form' method="post">
+				<div class="inputDiv">
+					<label for="username">账户</label>  
+			        <input type="text" name="username" id="username" value="" style="background-color:transparent;" />  
+				</div>
+				<div class="inputDiv">
+					<label for="password">密码</label>  
+			        <input type="password" name="password" id="password" value="" />  
+				</div>
+				<div class="inputDiv" style="width:200px;margin:0 0 30px 0;position:relative;">
+					<label for="code">验证码</label>  
+			        <input type="text" name="code" id="code" size="4" />
+			        <span style="position:absolute;right:-138px;"><img id="code_img" align="top" width="100" height="35" onclick="changeCode()" src="/sys/auth.do?method=getSecurityImage" title="点击切换验证码"></span> 			        
+				</div>
+				<div id="loginBtn" onclick="login()">登录</div>
+			</form> 
 		</div>
-		<div class="input">
-			<label for="code">验证码:</label>  
-	        <input type="text" name="code" id="code" size="4" />
-	        <span style="margin-left:10px"><img id="code_img" align="top" width="100" height="28" onclick="changeCode()" src="/sys/auth.do?method=getSecurityImage" title="点击切换验证码"></span> 
-		</div>
-	</form> 
+	</div>
 </div>
 <script type="text/javascript">
 $(function(){
+	$("#titleimg").css("margin-left",$('#loginDiv').offset().left+5);
 	$('input:text:first').focus();
 	$('form').keyup(function(event){
 		if(event.keyCode ==13){
