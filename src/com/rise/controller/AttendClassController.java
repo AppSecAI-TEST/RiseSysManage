@@ -43,7 +43,9 @@ public class AttendClassController
 			view = new ModelAndView("finishClass/finishClass");
 		} else if("viewFinish".equals(type)) {
 			view = new ModelAndView("finishClass/viewFinishClass");
-		}  
+		}else if("numChange".equals(type)) {
+			view = new ModelAndView("baseChange/change");
+		}    
 		try 
 		{
 			String retVal = attendClassService.qryAttendClassById(classInstId);
