@@ -122,7 +122,7 @@ function updateFileSubmit()
 		obj.teacherId = $("#teacherId").val();
 		obj.phone = $("#phone").numberbox('getValue');
 		obj.byName = $("#byName").textbox('getValue');
-		obj.post = $("#post").combobox('getValue');
+//		obj.post = $("#post").combobox('getValue');
 		obj.gradeTeam = $("#gradeTeam").combobox('getValue');
 		var a = JSON.stringify(obj);
 		$.ajax({

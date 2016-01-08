@@ -39,7 +39,7 @@
   					<td align="right">教师状态：</td>
   					<td align="left">${obj.stateVal}</td>
   					<td align="right">职务：</td>
-  					<td align="left"><select id="post" style="width:125px;" required="true"></select></td>
+  					<td align="left">${obj.postVal}</td>
   					<td align="right">国籍：</td>
   					<td align="left">${obj.nationality}</td>
   				</tr>
@@ -102,24 +102,24 @@
 	   			//初始化页面值
 	   			$("#byName").textbox('setValue','${obj.byname}');
 	   			$("#phone").textbox('setValue','${obj.phone}');
-	   			$('#post').combobox({
-					 url:"/sys/pubData/qryPostList.do?postType=T",
-					 formatter:formatPost, 
-					 valueField: 'postId', 
-					 textField: 'postName', 
-					 panelHeight: 'auto',
-					 onLoadSuccess:function(){
-					 	var data = $('#post').combobox('getData');
-						if (data.length > 0)
-			            {
-				       		for(var i = 0;i < data.length;i++){
-				       			 if("${obj.post}" == data[i].postId){
-				       			 	$('#post').combobox('select',data[i].postId);
-				       			 }
-				       		}
-				       	}
-					 }
-				});
+	//   		$('#post').combobox({
+	//				 url:"/sys/pubData/qryPostList.do?postType=T",
+	//				 formatter:formatPost, 
+	//			     valueField: 'postId', 
+	//				 textField: 'postName', 
+	//				 panelHeight: 'auto',
+	//				 onLoadSuccess:function(){
+	//				 	var data = $('#post').combobox('getData');
+	//					if (data.length > 0)
+	//		            {
+	//			       		for(var i = 0;i < data.length;i++){
+	//			       			 if("${obj.post}" == data[i].postId){
+	//			       			 	$('#post').combobox('select',data[i].postId);
+	//			       			 }
+	//			       		}
+	//			       	}
+	//				 }
+	//			});
 				$('#gradeTeam').combobox({
 					 url:"/sys/pubData/qryCodeNameList.do?tableName=TEACHER_T&codeType=GRADE_TEAM",
 					 formatter:formatItem, 
