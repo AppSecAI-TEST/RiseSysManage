@@ -10,42 +10,40 @@
 		<%@ include file="../common/formvalidator.jsp" %>
   	</head>
   	<body>
-  		<div style="padding:5px 10px;">
-  			<form id="qryFm">
-	  			<table>
+  		<div style="padding:5px 0;">
+  			<form id="qryFm" style="margin:0 auto;">
+	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
 	  				<tr>
-	  					<td>校区：</td>
-	  					<td>
+	  					<td align="right"><span>校区：</span></td>
+	  					<td align="left">
 	  					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 					      			onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
 					      			url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=&fieldId=schoolId">
 				        		</select>
 	  					</td>
-	  					<td>老师：</td>
-	  					<td>
+	  					<td align="right"><span>老师：</span></td>
+	  					<td align="left">
 	  						<input class="easyui-combobox"  id="teacherId" style="width:150px;">
 	  					</td>
-	  					<td>月份：</td>
-	  					<td>
+	  					<td align="right"><span>月份：</span></td>
+	  					<td align="left">
 	  						<select class="easyui-combobox" name="time" id="time" style="width:150px;">
-	  							
 	  						</select>
 	  					</td>
 	  					<td>	
 	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" onclick="qryData()">查询</a>
 	  					</td>
 	  					<td>
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" style="width:150px" id="qryBtn" onclick="exportData()">导出</a>
+	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:150px" id="qryBtn" onclick="exportData()">重置</a>
 	  					</td>
 	  				</tr>
 	  			</table>
   			</form>
-			<div style="padding:5px 0;">
-				<table class="easyui-datagrid" title="查询结果" style="width:100%;height:550px" id="list_data" fitColumns="true">
+			<div style="padding:5px 0;min-width:1100px; width:100%;">
+					<table class="easyui-datagrid" style="height:435px;" id="list_data" title="查询结果" toolbar="#toolbar" pagination="false" fitColumns="true" >
 					<thead>
 						<tr>
-							<th field="seq" align="center" width="6%" rowspan="2">序号</th>
 							<th field="schoolName" align="center" width="6%" rowspan="2">校区</th>
 							<th field="teacherName" align="center" width="6%" rowspan="2">中文名</th>
 							<th field="byname" align="center" width="6%" rowspan="2">英文名</th>
@@ -68,6 +66,9 @@
 						</tr>
 					</thead>
 				</table>
+				<div id="toolbar" style="padding: 2px; height: auto">
+	   				<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
+				</div>
 			</div>
   		</div>
   	</body>
@@ -117,7 +118,7 @@ $(document).ready(function(){
 			var fileName =parent.$("li.tabs-selected").find("span.tabs-title").html();
 			try
 			{
-				window.location.href="/sys/export/exportTeacherAttend.do?fileName="+fileName+"&param="+JSON.stringify(param);
+				window.location.href="/sys/export/exportTeacherNum.do?fileName="+fileName+"&param="+JSON.stringify(param);
 			}
 			catch(e)
 			{

@@ -199,6 +199,9 @@ function qryData()
     	{
     		hideProgressLoader();
     		$('#list_data').datagrid("loadData",data);
+    		MergeCells("list_data","schoolName");
+    		MergeCellWidthSchool("list_data","teacherName");
+    		MergeCellWidthSchool("list_data","byname");
          },
         error:function()
         {
@@ -208,4 +211,49 @@ function qryData()
 	
 } 
 
+
+
+  function MergeCellWidthSchool(tableID, fldList) {
+            var Arr = fldList.split(",");
+            var dg = $('#' + tableID);
+            var fldName;
+            var RowCount = dg.datagrid("getRows").length;
+            var span;
+            var PerValue = "";
+            var PreSchool ="";
+            var CurValue = "";
+            var CurSchool ="";
+            var length = Arr.length - 1;
+            for (i = length; i >= 0; i--) {
+                fldName = Arr[i];
+                PerValue = "";
+                PreSchool="";
+                span = 1;
+                for (row = 0; row <= RowCount; row++) {
+                    if (row == RowCount) {
+                        CurValue = "";
+                        CurSchool="";
+                    }
+                    else {
+                        CurValue = dg.datagrid("getRows")[row][fldName];
+                        CurSchool =  dg.datagrid("getRows")[row]["schoolId"]
+                    }
+                    if (PerValue == CurValue&&PreSchool==CurSchool) {
+                        span += 1;
+                    }
+                    else {
+                        var index = row - span;
+                        dg.datagrid('mergeCells', {
+                            index: index,
+                            field: fldName,
+                            rowspan: span,
+                            colspan: null
+                        });
+                        span = 1;
+                        PerValue = CurValue;
+                        PreSchool = CurSchool;
+                    }
+                }
+            }
+        }
 </script>
