@@ -163,9 +163,9 @@
 							</select>
 								<select name="adviserA" class="easyui-combobox" id="adviserA"
 									style="width: 100px; height: 28px;"
-									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
+									data-options="formatter:formatTeacher, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
 									onLoadSuccess:function(data){$('#adviserA').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserA")%>');}"
-		      						url="<%=path %>/pubData/qryTeacherList.do">
+		      						url="<%=path %>/pubData/qryStaffList.do?post=16,17">
 								</select>
 							</td>
 							<td align="right">
@@ -177,9 +177,9 @@
 								  >
 								<select name="adviserB" class="easyui-combobox" id="adviserB"
 									style="width: 100px; height: 28px;"
-									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
+									data-options="formatter:formatTeacher, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
 									onLoadSuccess:function(data){$('#adviserB').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserB")%>');}"
-		      						url="<%=path %>/pubData/qryTeacherList.do">
+		      						url="<%=path %>/pubData/qryStaffList.do?post=16,17">
 								</select>
 							</td>
 							<td align="right"></td>
@@ -705,6 +705,8 @@ $("#c_schoolB").combobox({data:schools});
 $("#t_teacher_school").combobox({data:schools});
 $("#c_schoolsB").combobox({data:schools});
 $("#c_schoolsA").combobox({data:schools});
+
+
 
 function initOldCourse()
 {

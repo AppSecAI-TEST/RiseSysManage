@@ -208,8 +208,7 @@
 				</div>
 				<div id="giftDiv">
 				<div style="height: 10px;"></div>
-				<div   class="easyui-panel" style="width: 1200px; height: auto;"
-					title="赠品信息">
+				<div class="easyui-panel" style="width: 1200px; height: auto;" title="赠品信息">
 				<table width="100%" cellpadding="5px" class="maintable" id="giftTab">
 	      	      <tr id="giftModelTR">
 	      	        <td width="8%" align="right"><span>赠品类型：</span></td>
