@@ -19,6 +19,12 @@ body
 	background:#F1ECF4;
 	font-family:"Microsoft YaHei"；
 }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    box-shadow:0 0 0 60px #F8F5F8 inset;
+    -webkit-text-fill-color: #4b4b5b;
+}
 form{width:340px;height:420px;margin:50px auto;}
 label{float:left;display:block;font-size:16px;color:#aba1a4;height:29px;margin:6px 0px 2px 25px;}
 .inputDiv{margin:0 auto 30px;background:#F8F5F8;height:37px;border:1px solid #e4e4e2;border-radius:4px;}

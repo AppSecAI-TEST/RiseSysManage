@@ -66,3 +66,6 @@
   		</div>
   	</body>
 </html>
+<script>
+exportMergeLink("export","list_data","schoolId","0");
+</script>

@@ -21,7 +21,12 @@
 		<!-- 头部 -->
 		<div id="toparea" style="display:block;" data-options="region:'north',border:false,height:95">
 			<div id="topmenu" class="easyui-panel" data-options="fit:true,border:false">
-				<a class="logo"></a>
+				<img src="<%=path %>/pub/images/adm_logo.png" style="width:100%;height:100%;position:relative;border:none;">
+				<img src="<%=path %>/pub/images/adm_menu1.png" style="right:230px;top:10px;position:absolute;cursor:pointer;">
+				<img src="<%=path %>/pub/images/adm_menu2.png" style="right:180px;top:10px;position:absolute;cursor:pointer;">
+				<img src="<%=path %>/pub/images/adm_menu3.png" style="right:100px;top:10px;position:absolute;cursor:pointer;">
+				<img onclick="logout()" src="<%=path %>/pub/images/adm_menu4.png" style="right:50px;top:10px;position:absolute;cursor:pointer;">
+				
 				<!-- 
 				<ul class="nav">
 					<c:forEach items="${menuList}" var="node">
@@ -38,9 +43,6 @@
 					</c:forEach>
 				</ul>
 				 -->
-				<div class="nav-right">
-					<a href="javascript:logout();" class="easyui-linkbutton" data-options="plain:true,iconCls:'logout',size:'large',iconAlign:'top'">退出</a>
-			    </div>
 			</div>
 			<div class="panel-header panel-header-noborder top-toolbar" style="position:absolute;bottom:0px;border-top-width:1px;border-bottom-width:0px;z-index:1;display:none;">
 				<div id="infobar">

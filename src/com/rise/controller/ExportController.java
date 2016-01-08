@@ -197,6 +197,29 @@ public class ExportController
 		}
 	}
 	
+	
+	// 导出教师个人业绩
+	@RequestMapping(value = "/exportTeacherNum.do")
+	public void exportTeacherNum(String fileName,String param, HttpServletResponse response , HttpServletRequest request)
+	{
+		OutputStream out = null;
+		try
+		{
+			StringBuffer displayFileName = new StringBuffer(fileName);
+			displayFileName.append(new SimpleDateFormat("yyMMdd").format(new Date()));
+			displayFileName.append(".xls");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName="+URLEncoder.encode(displayFileName.toString(),"utf-8"));
+			out = response.getOutputStream();
+			es.exportTeacherNum(fileName,param , out);
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+		}
+	}
+	
 	// 导出班级明细
 	@RequestMapping("/exportClassInstDetail.do")
 	public void exportClassInstDetail(String fileName,String mergeName,String mergeIndex,String param, HttpServletResponse response , HttpServletRequest request)
@@ -328,6 +351,30 @@ public class ExportController
 			response.setHeader("Content-Disposition", "attachment;fileName="+URLEncoder.encode(displayFileName.toString(),"utf-8"));
 			out = response.getOutputStream();
 			es.exportRegionGradRate(fileName,param, out);
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+		}
+
+	}
+	
+	
+	//异常开班明细
+	@RequestMapping("/exportExpClassDetai.do")
+	public void exportExpClassDetai(String fileName,String param, HttpServletResponse response , HttpServletRequest request)
+	{
+		OutputStream out = null;
+		try
+		{
+			StringBuffer displayFileName = new StringBuffer(fileName);
+			displayFileName.append(new SimpleDateFormat("yyMMdd").format(new Date()));
+			displayFileName.append(".xls");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName="+URLEncoder.encode(displayFileName.toString(),"utf-8"));
+			out = response.getOutputStream();
+			es.exportExpClassDetai(fileName,param, out);
 		}
 		catch(Exception err)
 		{

@@ -48,7 +48,7 @@
 							<th field="schoolName" align="center" width="10%">校区</th>
 							<th field="postName" align="center" width="20%">带班数</th>
 							<th field="above5" align="center" width="15%">5个以上班</th>
-							<th field="4To5" align="center" width="15%">4-5个班</th>
+							<th field="fTo5" align="center" width="15%">4-5个班</th>
 							<th field="equal3" align="center" width="15%">3个班</th>
 							<th field="below3" align="center" width="15%">3个以下班</th>
 							<th field="total" align="center" width="10%">人数合计</th>
@@ -62,3 +62,6 @@
   		</div>
   	</body>
 </html>
+<script>
+exportMergeLink("export","list_data","schoolId","0");
+</script>
