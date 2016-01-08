@@ -40,7 +40,7 @@ body {
 				</tr>
 				<tr>
 					<td align="center" width="400">
-						<form action="/logout" method="post" target="_top" id="myForm">
+						<form action="/sys/auth.do?method=logout" method="post" target="_top" id="myForm">
 							<input type="submit" value="重新登录">
 						</form>
 					</td>

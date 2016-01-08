@@ -36,6 +36,19 @@
 			</props>
 		</property>
 	</bean>
+	
+	<mvc:interceptors>    
+    	<mvc:interceptor>    
+        	<mvc:mapping path="/**" />
+	        <bean class="com.rise.filter.SessionTimeoutInterceptor" >    
+	            <property name="allowUrls">      
+	                <list>      
+	                	<value>/auth.do</value>   
+	                </list>
+	            </property>      
+	        </bean>    
+    	</mvc:interceptor>
+    </mvc:interceptors>
 
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 
@@ -65,7 +78,7 @@
 	<context:component-scan base-package="com.rise.controller" />
 
 	<context:component-scan base-package="com.rise.service" />
-	
+
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass">
