@@ -103,7 +103,15 @@ public class AuthController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			StaffT staffT = (StaffT)session.getAttribute("StaffT");
-			String retVal = authService.menuLeft(menuId , staffT);
+			String retVal = null;
+			if(staffT != null)
+			{
+				retVal = authService.menuLeft(menuId , staffT);
+			}
+			else
+			{
+				retVal = "timeout";
+			}
 			out.write(retVal);
 		}
 		catch(Exception e)

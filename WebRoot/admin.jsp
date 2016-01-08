@@ -170,9 +170,22 @@
 							var loading = '<div class="panel-loading">加载中...</div>';
 							$("#leftmenu").accordion("add", {content: loading});
 						},
-						dataType: "json",
 						success: function(data){
 							removeLeft();
+							if(data != "timeout")
+							{
+								try{
+									data = eval("("+data+")"); 
+								}catch(e){
+									$.messager.alert('提示', '系统有误,请联系管理员!', 'error',function(){
+										window.location.href = "/sys/login.jsp";
+									});
+								}
+							}
+							else
+							{
+								window.location.href = "/sys/login.jsp";
+							}
 							var dataObj = new MenuInfo(menuId , data); 
 							gMenuArr.push(dataObj);
 							menuFunc(data)

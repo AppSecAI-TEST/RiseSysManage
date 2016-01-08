@@ -79,7 +79,7 @@ label{float:left;display:block;font-size:16px;color:#aba1a4;height:29px;margin:6
 <body>
 <c:if test="${!empty error}">
 	<script language="javascript">
-		$.messager.alert('提示', '${error}', 'error');
+		$.messager.alert('提示', '${error}', 'info');
 	</script>
 </c:if>
 <div class="loginttitle"><img id="titleimg" src="<%=path%>/pub/images/logintitle1.png"></div>
@@ -125,22 +125,22 @@ var changeCode = function(){
 }
 var login = function(){
 	if(!$('#username').val()){
-		$.messager.alert('提示信息', '请填写用户名', 'error');
+		$.messager.alert('提示信息', '请填写用户名', 'info');
 		return false;
 	}
 	if(!$('#password').val()){
-		$.messager.alert('提示信息', '请填写密码', 'error');
+		$.messager.alert('提示信息', '请填写密码', 'info');
 		return false;
 	}
 	if(!$('#code').val()){
-		$.messager.alert('提示信息', '请填写验证码', 'error');
+		$.messager.alert('提示信息', '请填写验证码', 'info');
 		return false;
 	}
 	$.messager.progress({text:'登录中，请稍候...'});
 	$.post('/sys/auth.do?method=authStaff', $("form").serialize(), function(data){
 		$.messager.progress('close');
 		if(data != "success"){
-			$.messager.alert('提示', data, 'error');
+			$.messager.alert('提示', data, 'info');
 			changeCode();
 		}else{
 			$.messager.progress({text:'加载中，请稍候...'});
