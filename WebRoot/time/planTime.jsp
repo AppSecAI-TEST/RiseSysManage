@@ -3,6 +3,7 @@
 	String month=request.getParameter("month");
 	String weekSeq=request.getParameter("weekSeq");
 	String createWeekId=request.getParameter("createWeekId");
+	String dateRange=request.getParameter("dateRange");
 
 %>
 <!DOCTYPE html>
@@ -71,9 +72,7 @@ datagrid-row-selected
 	</head>
 	<body>
 		<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
-	<div style="margin:10px 0px 20px 20px">
-  		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" onclick="javascript:window.history.back()">返回</a>	
-  	</div>	
+  		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px" onclick="javascript:window.history.back()">返回</a>	
 	<div id="wrap">  
         <!--  <div id="header">header</div> --> 
         <div id="container">  
@@ -145,12 +144,12 @@ function getWeekTime()
 	{
 		type : "POST",
 		url: "/sys/time/getTimeByWeek.do?",
-		data: "param={'month':'<%=month%>','week':'<%=weekSeq%>','schoolId':'"+schoolId+"'}",
-		async: false,
+		data: "param={'month':'<%=month%>','week':'<%=weekSeq%>','dateRange':'<%=dateRange%>','schoolId':'"+schoolId+"'}",
+		async: true,
 		dataType:"json",
 		beforeSend: function()
     	{
-    		$.messager.progress({title : '系统消息', msg : '正在提交数据，请稍等……'});
+    		$.messager.progress({title : '提示', msg : '正在获取排课信息，请稍等……'});
     	},
     	success: function(data) {
     		$.messager.progress('close');
@@ -206,6 +205,7 @@ function initTeacher(tabId,data)
 	var weekTime=rows[0].weekTime;
 	$('#'+tabId).datagrid({
     title: "老师",
+    align:'center',
     width: 100,
     height: 'auto',
     fitColumns: true,
@@ -216,7 +216,7 @@ function initTeacher(tabId,data)
     },
      
     columns:[[
-      {field:'teacherName',title:'老师',width:100,align:'center'}
+      {field:'teacherName',title:'',width:100,align:'center'}
       
     ]] 
   });
@@ -240,12 +240,11 @@ function initTable(tabId,data)
     },
     onClickCell:onClickCell, 
     columns:[[
-       {field:'teacherName',title:'老师',width:100,align:'center'},	
-      {field:'H001',title:'8:30', width:80,align:'center', editor:'text'},
-      {field:'H002',title:'10:30',width:80,align:'center', editor:'text'},
-      {field:'H003',title:'14:00',width:80,align:'center', editor:'text'},
-      {field:'H004',title:'16:00',width:80,align:'center', editor:'text'},
-      {field:'H005',title:'18:30',width:80,align:'center', editor:'text'} 
+      {field:'H001',title:'8:30', width:68,align:'center', editor:'text'},
+      {field:'H002',title:'10:30',width:68,align:'center', editor:'text'},
+      {field:'H003',title:'14:00',width:68,align:'center', editor:'text'},
+      {field:'H004',title:'16:00',width:68,align:'center', editor:'text'},
+      {field:'H005',title:'18:30',width:68,align:'center', editor:'text'} 
     ]],
     onLoadSuccess:function()
     {
