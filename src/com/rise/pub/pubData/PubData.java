@@ -47,4 +47,13 @@ public class PubData
 		return list;
 	}
 	
+	public static List qryStageList() throws Exception
+	{
+		BeanFactory beanFactory = BeanFactoryHelper.getBeanfactory();
+		QryPubDataService qryPubDataService = (QryPubDataService) beanFactory.getBean("qryPubDataService");
+		String json = qryPubDataService.getStage();
+		List list = JacksonJsonMapper.getInstance().readValue(json, List.class);
+		return list;
+	}
+	
 }

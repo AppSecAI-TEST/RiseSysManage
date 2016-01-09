@@ -4,6 +4,7 @@
 <%
 	String path = request.getContextPath();
 	List schoolList = PubData.qrySchoolList("");
+	List stageList = PubData.qryStageList();
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -66,7 +67,7 @@
 			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUserRole()">保存</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#userRoleDlg').dialog('close')">取消</a>
 		</div>
-		<div id="dlg" class="easyui-dialog" style="width:480px;height:360px;padding:0px 0px" modal="true" closed="true" buttons="#dlg-buttons">
+		<div id="dlg" class="easyui-dialog" style="width:480px;height:440px;padding:0px 0px" modal="true" closed="true" buttons="#dlg-buttons">
 			<form id="fm" method="post" novalidate>
 				<input id="sysRoleId" name="sysRoleId" type="hidden" value="" />
 				<input id="staffId" name="staffId" type="hidden" value="" />
@@ -80,8 +81,8 @@
 				</div>
 				<div class="fitem">
 					<label style="text-align:right;vertical-align:top">数据范围:</label>
-					<input id="checkAll" type="checkbox" value="0" onclick="choiceSchoolFunc(this)" />
-					<label for="checkAll">全选</label><br />
+					<input id="checkAllSchool" type="checkbox" value="0" onclick="choiceSchoolFunc(this)" />
+					<label for="checkAllSchool">全选</label><br />
 					<c:set var="SchoolList" value="<%=schoolList %>" />
 					<c:forEach items="${SchoolList}" var="node" varStatus="i">
 						<c:if test="${i.count%3 == 1}">
@@ -89,6 +90,22 @@
 						</c:if>
 						<input name="schoolIds" id="schoolIds${i.count}" type="checkbox" value="${node.schoolId}" />
 						<label for="schoolIds${i.count}">${node.schoolName}</label>
+						<c:if test="${i.count%3 == 0}">
+							<br />
+						</c:if>
+					</c:forEach>
+				</div>
+				<div class="fitem">
+					<label style="text-align:right;vertical-align:top">阶段范围:</label>
+					<input id="checkAllStage" type="checkbox" value="0" onclick="choiceStageFunc(this)" />
+					<label for="checkAllStage">全选</label><br />
+					<c:set var="stageList" value="<%=stageList %>" />
+					<c:forEach items="${stageList}" var="node" varStatus="i">
+						<c:if test="${i.count%3 == 1}">
+							<label style="text-align:right;vertical-align:top">&nbsp;</label>
+						</c:if>
+						<input name="stageIds" id="stageIds${i.count}" type="checkbox" value="${node.stageId}" />
+						<label for="stageIds${i.count}">${node.stageId}</label>
 						<c:if test="${i.count%3 == 0}">
 							<br />
 						</c:if>
@@ -124,7 +141,18 @@
 							isAllSelect = false;
 						}
 					});
-					$("#checkAll").get(0).checked = isAllSelect;
+					$("#checkAllSchool").get(0).checked = isAllSelect;
+					var stageArr = row.stageIds;
+					isAllSelect = true;
+					$("input[name='stageIds']").each(function(i,node){
+						if(stageArr.indexOf(node.value) != -1){
+							node.checked = true;
+						}
+						else{
+							isAllSelect = false;
+						}
+					});
+					$("#checkAllStage").get(0).checked = isAllSelect;
 					$("#staffId").val("${sessionScope.StaffT.staffId}");
 					url = '/sys/sysRole/updateRole.do';
 				}
@@ -181,6 +209,12 @@
 			function choiceSchoolFunc(obj)
 			{
 				$("input[name='schoolIds']").each(function(i,node){
+					node.checked = obj.checked;
+				});
+			}
+			function choiceStageFunc(obj)
+			{
+				$("input[name='stageIds']").each(function(i,node){
 					node.checked = obj.checked;
 				});
 			}

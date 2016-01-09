@@ -16,6 +16,8 @@ public class SchoolT {
     private String address;
 
     private Integer managerId;
+    
+    private String headFlag;
 
     private String remark;
 
@@ -80,8 +82,16 @@ public class SchoolT {
     public void setManagerId(Integer managerId) {
         this.managerId = managerId;
     }
+    
+    public String getHeadFlag() {
+		return headFlag;
+	}
 
-    public String getRemark() {
+	public void setHeadFlag(String headFlag) {
+		this.headFlag = headFlag;
+	}
+
+	public String getRemark() {
         return remark;
     }
 

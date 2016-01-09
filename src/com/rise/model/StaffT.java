@@ -10,6 +10,8 @@ public class StaffT {
     private String staffName;
 
     private String userName;
+    
+    private String sysName;
 
     private String password;
 
@@ -100,8 +102,16 @@ public class StaffT {
     public void setUserName(String userName) {
         this.userName = userName == null ? null : userName.trim();
     }
+    
+    public String getSysName() {
+		return sysName;
+	}
 
-    public String getPassword() {
+	public void setSysName(String sysName) {
+		this.sysName = sysName;
+	}
+
+	public String getPassword() {
         return password;
     }
 
