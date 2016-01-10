@@ -101,7 +101,7 @@
 				</tr>
 			</table>
 		</form>
-		<div style="padding:5px 0;min-width:1100px; width:100%;">
+		<div style="padding:0px 0;min-width:1100px; width:100%;">
 			<table class="easyui-datagrid" title="学员列表" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1000" 
 				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 				<thead>

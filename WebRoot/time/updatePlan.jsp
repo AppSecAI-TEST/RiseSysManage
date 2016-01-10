@@ -29,7 +29,7 @@
 			</table>
 		 
 		<div style="padding:5px 0;min-width:1100px; width:100%;">
-			<table  class="easyui-datagrid" title="排课" style="height:435px;" toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false" id="weekDg" url=""></table>
+			<table  class="easyui-datagrid" title="排课" style="height:250px;" toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false" id="weekDg" url=""></table>
 		</div>
 	 <div style="min-width:1100px;width:99%;margin:0 auto;">
 		<div class="easyui-panel" title="排课信息" style="width:100%;overflow:auto;">
