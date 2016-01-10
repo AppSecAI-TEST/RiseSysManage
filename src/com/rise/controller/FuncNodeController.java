@@ -492,4 +492,28 @@ public class FuncNodeController
 		}
 	}
 	
+	@RequestMapping("/getSubSetFuncList.do")
+	public void getSubSetFuncList(HttpServletResponse response , String parentFuncNodeId)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = funcNodeService.getSubSetFuncList(parentFuncNodeId);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 }

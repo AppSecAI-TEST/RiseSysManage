@@ -26,7 +26,7 @@
    			<a href="javascript:void(0)" id="updateFuncNode" onclick="editFuncNode()" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">修改功能</a>
    			<a href="javascript:void(0)" id="deleteFuncNode" onclick="removeFuncNode()" class="easyui-linkbutton" iconCls="icon-remove" style="width: 100px;">删除功能</a>
 		</div>
-		<div id="dlg" class="easyui-dialog" style="width:480px;height:350px;padding:0px 0px;" modal="true" closed="true" buttons="#dlg-buttons">
+		<div id="dlg" class="easyui-dialog" style="width:480px;height:380px;padding:0px 0px;" modal="true" closed="true" buttons="#dlg-buttons">
 			<form id="fm" method="post" novalidate>
 				<input id="funcNodeId" name="funcNodeId" type="hidden" value="" />
 				<div class="fitem">
@@ -43,7 +43,17 @@
 					<select id="parentFuncNodeId" name="parentFuncNodeId" class="easyui-combotree" style="width:265px;height:25px;" required="true" >
       				</select>
 				</div>
-				<div class="fitem">
+				<div class="fitem" id="funcPropertyArea">
+					<label style="text-align:right">功能性质:</label>
+					<input type="radio" name="funcProperty" id="funcPropertyF" value="F" onclick="changeFuncProperty(this)" style="vertical-align:top;" checked="checked" /><label for="funcPropertyF">集合型</label>
+					<input type="radio" name="funcProperty" id="funcPropertyS" value="S" onclick="changeFuncProperty(this)" style="vertical-align:top;" /><label for="funcPropertyS">原始型</label>
+				</div>
+				<div class="fitem" id="setFuncIdArea">
+					<label style="text-align:right">集合功能:</label>
+					<select id="setFuncId" name="setFuncId" class="easyui-combotree" style="width:265px;height:25px;" >
+      				</select>
+				</div>
+				<div class="fitem" id="funcLinkArea">
 					<label style="text-align:right">功能链接:</label>
 					<input name="html" id="html" type="text" style="width:265px" class="easyui-textbox" />
 				</div>
@@ -112,6 +122,7 @@
 			var gParentPrivData = null;
 			var gEditRow = null;
 			var gNewDataType = false;
+			var gFuncPropertyData = null;
 			function refreshFunc()
 			{
 				$.post("/sys/funcNode/getParentMenuList.do",{},function(data){
@@ -135,6 +146,9 @@
 							if(dataValue == "M")
 							{
 								$("#parentFuncNodeId").combotree("loadData",gParentMenuData);
+								$("#funcLinkArea").css("display","none");
+								$("#funcPropertyArea").css("display","none");
+								$("#setFuncIdArea").css("display","none");
 								$("#html").textbox("setValue","");
 								$("#html").textbox("readonly",true);
 								$("#fieldArea").css("display","none");
@@ -144,6 +158,18 @@
 							else if(dataValue == "H")
 							{
 								$("#parentFuncNodeId").combotree("loadData",gParentOperData);
+								$("#funcLinkArea").css("display","none");
+								$("#funcPropertyArea").css("display","block");
+								if(gFuncPropertyData == null || gFuncPropertyData == "F")
+								{
+									$("#funcPropertyF").get(0).checked = true;
+									changeFuncProperty($("#funcPropertyF").get(0));
+								}
+								else
+								{
+									$("#funcPropertyS").get(0).checked = true;
+									changeFuncProperty($("#funcPropertyS").get(0));
+								}
 								$("#html").textbox("readonly",false);
 								$("#fieldArea").css("display","none");
 								$("#fieldId").validatebox({required:false});
@@ -152,6 +178,9 @@
 							else if(dataValue == "B")
 							{
 								$("#parentFuncNodeId").combotree("loadData",gParentPrivData);
+								$("#funcLinkArea").css("display","none");
+								$("#funcPropertyArea").css("display","none");
+								$("#setFuncIdArea").css("display","none");
 								$("#html").textbox("setValue","");
 								$("#html").textbox("readonly",true);
 								$("#fieldArea").css("display","block");
@@ -223,6 +252,17 @@
 							$('#widgetType').combobox('setValue',data[0].codeFlag);
 					}
 				});
+				$("#parentFuncNodeId").combotree({
+					onChange:function(data){
+						var funcNodeType = $("#funcNodeType").combobox("getValue");
+						if(funcNodeType == "H")
+						{
+							$("#setFuncId").combotree({
+								url:"/sys/funcNode/getSubSetFuncList.do?parentFuncNodeId="+data
+							});
+						}
+					}
+				});
 				$("#dataType").combobox({
 					url:"<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=dataType",
 					onChange:function(){
@@ -273,6 +313,7 @@
 			});
 			function newFuncNode(){
 				gEditRow = null;
+				gFuncPropertyData = null;
 				gNewDataType = true;
 				$("#dataSourceField").validatebox({required:false});
 				$("#dataSourceName").validatebox({required:false});
@@ -298,6 +339,9 @@
 				$("#dataSourceSql").validatebox({required:false});
 				$("#dataSqlParam").validatebox({required:false});
 				$("#parentFuncNodeId").combotree({disabled:false});
+				$("#funcPropertyArea").css("display","none");
+				$("#setFuncIdArea").css("display","none");
+				$("#funcLinkArea").css("display","none");
 				var row = $('#funcNodeData').treegrid('getSelected');
 				if (row && row.funcNodeId != 0)
 				{
@@ -313,10 +357,25 @@
 					}
 					else if(row.funcNodeType == 'H')
 					{
+						$("#setFuncId").combotree({
+							url:"/sys/funcNode/getSubSetFuncList.do?parentFuncNodeId="+row.parentFuncNodeId
+						});
 						$("#parentFuncNodeId").combotree("loadData",gParentOperData);
 						$("#html").textbox("readonly",false);
 						$("#fieldArea").css("display","none");
 						$("#fieldId").textbox("readonly",false);
+						$("#funcPropertyArea").css("display","block");
+						if(row.funcProperty == "F")
+						{
+							$("#setFuncIdArea").css("display","none");
+							$("#funcLinkArea").css("display","none");
+						}
+						else
+						{
+							$("#setFuncIdArea").css("display","block");
+							$("#funcLinkArea").css("display","block");
+						}
+						gFuncPropertyData = row.funcProperty;
 					}
 					else
 					{
@@ -425,6 +484,32 @@
 				else
 				{
 					$.messager.alert('提示',"请先选择要删除的功能");
+				}
+			}
+			function changeFuncProperty(obj)
+			{
+				if(obj.value == "F")
+				{
+					$("#setFuncIdArea").css("display","none");
+					$("#funcLinkArea").css("display","none");
+				}
+				else
+				{
+					$("#setFuncIdArea").css("display","block");
+					$("#funcLinkArea").css("display","block");
+					var setFuncData = $("#setFuncId").combotree("tree");
+					var setFuncValue = $("#setFuncId").combotree("getValue");
+					if(setFuncData.length == 1 && setFuncValue == "")
+					{
+						var funcNodeType = $("#funcNodeType").combobox("getValue");
+						if(funcNodeType == "H")
+						{
+							var parentFuncNodeId = $("#parentFuncNodeId").combotree("getValue");
+							$("#setFuncId").combotree({
+								url:"/sys/funcNode/getSubSetFuncList.do?parentFuncNodeId="+parentFuncNodeId
+							});
+						}
+					}
 				}
 			}
 		</script>

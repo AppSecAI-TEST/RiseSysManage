@@ -1,34 +1,32 @@
 package com.rise.controller;
 
 import java.io.PrintWriter;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.rise.service.PubService;
+import com.rise.service.SysCacheService;
 
 @Controller
-@RequestMapping("/pub")
-public class PubController 
+@RequestMapping("/cache")
+public class SysCacheController 
 {
+
 	@Autowired
-	private PubService pubService;
+	private SysCacheService sysCacheService;
 	
-	@RequestMapping("/pageCategory.do")
-	public void pageCategory(HttpServletResponse response , HttpServletRequest request , String staffId , String funcNodeId , String fieldId , String resourceId)
+	@RequestMapping("/flushCache.do")
+	public void flushCache(HttpServletResponse response , String cacheName)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			Map paramMap = request.getParameterMap();
-			String retVal = pubService.pageCategory(staffId , paramMap);
+			String retVal = sysCacheService.flushCache(cacheName);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -44,15 +42,15 @@ public class PubController
 		}
 	}
 	
-	@RequestMapping("/pageComboxList.do")
-	public void pageComboxList(HttpServletResponse response , String funcNodeId , String fieldId)
+	@RequestMapping("/flushAllCache.do")
+	public void flushAllCache(HttpServletResponse response)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = pubService.pageComboxList(funcNodeId , fieldId);
+			String retVal = sysCacheService.flushAllCache();
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -68,16 +66,17 @@ public class PubController
 		}
 	}
 	
-	@RequestMapping("/paramComboxList.do")
-	public void paramComboxList(HttpServletResponse response , HttpServletRequest request)
+	@RequestMapping(value = "/sysCacheList.do")
+	public void sysCacheList(String page, String rows, HttpServletResponse response)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			Map<String,String[]> paramMap = request.getParameterMap();
-			String retVal = pubService.paramComboxList(paramMap);
+			Integer pageNumInt = Integer.parseInt(page)-1;
+			Integer pageSizeInt = Integer.parseInt(rows);
+			String retVal = sysCacheService.sysCacheList(pageNumInt*pageSizeInt, pageSizeInt);
 			out.write(retVal);
 		}
 		catch(Exception e)

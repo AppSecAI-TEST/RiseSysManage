@@ -48,4 +48,5 @@ public class PubService
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2013\",securityCode:\"0000000000\",params:{json:'"+obj.toString()+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
+	
 }

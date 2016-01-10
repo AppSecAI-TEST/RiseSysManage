@@ -16,6 +16,8 @@ public class FuncNodeT implements java.io.Serializable,Cloneable {
 	private String funcNodeName;
 	private String subSysTypeCd;
 	private String funcNodeType;
+	private String funcProperty;
+	private Integer setFuncId;
 	private String subFuncNodeType;
 	private Integer funcNodeSeq;
 	private String html;
@@ -30,12 +32,14 @@ public class FuncNodeT implements java.io.Serializable,Cloneable {
 	}
 	
 	/** minimal constructor */
-	public FuncNodeT(Integer parentFuncNodeId, String funcNodeCode,
+	public FuncNodeT(Integer parentFuncNodeId, String funcNodeCode, String funcProperty, Integer setFuncId,
 			String funcNodeName, String subSysTypeCd, String funcNodeType,
 			String subFuncNodeType, Integer funcNodeSeq, String html,
 			String description) {
 		this.parentFuncNodeId = parentFuncNodeId;
 		this.funcNodeCode = funcNodeCode;
+		this.funcProperty = funcProperty;
+		this.setFuncId = setFuncId;
 		this.funcNodeName = funcNodeName;
 		this.subSysTypeCd = subSysTypeCd;
 		this.funcNodeType = funcNodeType;
@@ -48,12 +52,14 @@ public class FuncNodeT implements java.io.Serializable,Cloneable {
 	}
 
 	/** full constructor */
-	public FuncNodeT(Integer parentFuncNodeId, String funcNodeCode,
+	public FuncNodeT(Integer parentFuncNodeId, String funcNodeCode, String funcProperty, Integer setFuncId,
 			String funcNodeName, String subSysTypeCd, String funcNodeType,
 			String subFuncNodeType, Integer funcNodeSeq, String html,
 			String description, String state, Timestamp stateDate) {
 		this.parentFuncNodeId = parentFuncNodeId;
 		this.funcNodeCode = funcNodeCode;
+		this.funcProperty = funcProperty;
+		this.setFuncId = setFuncId;
 		this.funcNodeName = funcNodeName;
 		this.subSysTypeCd = subSysTypeCd;
 		this.funcNodeType = funcNodeType;
@@ -88,6 +94,22 @@ public class FuncNodeT implements java.io.Serializable,Cloneable {
 
 	public void setFuncNodeCode(String funcNodeCode) {
 		this.funcNodeCode = funcNodeCode;
+	}
+	
+	public String getFuncProperty() {
+		return funcProperty;
+	}
+
+	public void setFuncProperty(String funcProperty) {
+		this.funcProperty = funcProperty;
+	}
+
+	public Integer getSetFuncId() {
+		return setFuncId;
+	}
+
+	public void setSetFuncId(Integer setFuncId) {
+		this.setFuncId = setFuncId;
 	}
 
 	public String getFuncNodeName() {

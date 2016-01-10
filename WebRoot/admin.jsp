@@ -13,6 +13,21 @@
 		 -->
 		<%@ include file="/common/head.jsp" %>
 		<%@ include file="/common/formvalidator.jsp" %>
+		<style type="text/css">
+			.txtNode{
+				color:#000000;
+				text-decoration:none !important;
+				display:block;
+				width:250px;
+			}
+			.txtNode:HOVER{
+				text-decoration: none;
+			}
+			.tree-node-selected{
+				background-color:#cccccc !important;
+				color:#0081c2 !important;
+			}
+		</style>
 	</head>
 	<body class="easyui-layout">
 		<c:if test="${empty sessionScope.StaffT}">
@@ -217,14 +232,29 @@
 			
 			function menuFunc(data)
 			{
-				$.each(data, function(i, menu) {
-					var content = '';
-					if(menu.son){
-						var treedata = $.toJSON(menu.son);
-						content = '<ul class="easyui-tree" data-options=\'data:' + treedata + ',animate:true,lines:true,onClick:function(node){openUrl(node.id, node.url, node.text)}\'></ul>';
+				for(var i = 0,n = data.length;i < n;i++)
+				{
+					var arr = [];
+					arr.push('<ul class="easyui-tree" data-options=\'animate:true,lines:true,state:closed\'>');
+					for(var j = 0,m = data[i].son.length;j < m;j++)
+					{
+						if(data[i].son[j].url != "#")
+						{
+							arr.push('<li><span><a href="javascript:void(0)" class="tree-hit txtNode" style="background-image:url();display:block;width:250px" onclick=openUrl("'+data[i].son[j].id+'","'+data[i].son[j].url+'","'+data[i].son[j].text+'")>'+data[i].son[j].text+'</a></span></li>');
+						}
+						else
+						{
+							arr.push('<li><span><a href="javascript:void(0)" class="tree-hit txtNode" style="background-image:url();display:block;width:250px">'+data[i].son[j].text+'</span><ul>');
+							for(var k = 0,t = data[i].son[j].items.length;k < t;k++)
+							{
+								arr.push("<li><a href='javascript:void(0)' class='txtNode' url='"+data[i].son[j].items[k].itemPageUrl+"' text='"+data[i].son[j].items[k].itemName+"' onclick=openUrl('"+data[i].son[j].items[k].itemId+"','"+data[i].son[j].items[k].itemPageUrl+"','"+data[i].son[j].items[k].itemName+"')>"+data[i].son[j].items[k].itemName+"</a></li>")
+							}
+							arr.push('</ul></li>');
+						}
 					}
-					$("#leftmenu").accordion("add", {title: menu.name, content: content, iconCls:'icons-folder-folder_go'});
-				});
+					arr.push("</ul>");
+					$("#leftmenu").accordion("add", {title: data[i].name, content: arr.join(""), iconCls:'icons-folder-folder_go'});
+				}
 			}
 			
 			function removeLeft(stop){

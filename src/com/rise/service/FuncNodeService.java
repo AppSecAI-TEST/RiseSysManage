@@ -141,4 +141,11 @@ public class FuncNodeService
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00218\",securityCode:\"0000000000\",params:{sysRoleId:\""+sysRoleId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
+	
+	public String getSubSetFuncList(String parentFuncNodeId) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00219\",securityCode:\"0000000000\",params:{parentFuncNodeId:\""+parentFuncNodeId+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+	
 }
