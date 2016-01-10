@@ -36,9 +36,9 @@ input[type="file"],input[type="image"],input[type="submit"],input[type="reset"],
 	margin:0 auto;
 	min-width:1100px;
 	margin-top:5px;
-	width:99%;
+	width:100%;
 }
-.datagrid .panel-header{width:98.9% !important;}
+.datagrid .panel-header{width:99% !important;}
 .datagrid .panel-header .panel-title{width:100% !important;}
 .datagrid .datagrid-wrap{width:100% !important;}
 .datagrid .datagrid-wrap .datagrid-toolbar{width:99.5% !important;border-right-width:1px;}
@@ -47,7 +47,7 @@ input[type="file"],input[type="image"],input[type="submit"],input[type="reset"],
 .datagrid .datagrid-wrap .datagrid-view .datagrid-view2{width:100% !important;}
 .datagrid .datagrid-wrap .datagrid-view .datagrid-view2 .datagrid-header{width:99.8% !important;border-left-width:0px;border-right-width:1px;}
 .datagrid .datagrid-wrap .datagrid-view .datagrid-view2 .datagrid-body{width:99.8% !important;border-left-width:0px;border-right:1px solid #95B8E7;}
-.datagrid .datagrid-wrap .datagrid-pager{width:99.8% !important;border-left-width:0px;border-right:1px solid #95B8E7;}
+.datagrid .datagrid-wrap .datagrid-pager{width:100% !important;border-left-width:0px;border-right:1px solid #95B8E7;}
 
 .easyui-dialog .datagrid{
 	margin:0 auto;
@@ -78,7 +78,7 @@ input[type="file"],input[type="image"],input[type="submit"],input[type="reset"],
 .maintable1 tr {height: 30px;}
 .maintable1 td {border: 1px solid #ccc; padding: 5px;} 
 
-span {font-family: Arial,微软雅黑,宋体; font-size: 14px;}
+span {font-family: Arial,微软雅黑,宋体; font-size: 12px;}
 .linkmore{color : #0099FF; text-decoration : none; cursor:pointer;}
 .linkmore:hover{color : ED0000 !important;}
 .linkmore1{color : #000000;text-decoration : none;}
@@ -140,3 +140,21 @@ span {font-family: Arial,微软雅黑,宋体; font-size: 14px;}
 .tab .headTr{text-align:center;font-weight:bold;}
 .tab tr td input{vertical-align:middle;}
 .tab tr td label{vertical-align:middle;}
+
+
+
+/*查询页面公用样式*/
+.search_tab
+{
+	min-width:1100px;
+	border:1px solid #95B8E7;
+    font-family:'微软雅黑';
+    margin:auto;
+    magrin-top:5px;
+    width:100%;
+}
+
+.search_tab td
+{
+	padding:5px;
+}
