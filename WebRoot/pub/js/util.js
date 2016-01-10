@@ -342,6 +342,15 @@ function formatParaConfig(row) {
 	return s;
 }
 
+function formatEfficiency(value, row, index) {
+	if(value >= 0) {
+		return value;
+	} else {
+		value = value.substring(1);
+		return "<font color='red'>（" + value + "）</font>";
+	}
+}
+
 function myLoadFilter(data,parentId){
 	function setData(){
 		var todo = [];

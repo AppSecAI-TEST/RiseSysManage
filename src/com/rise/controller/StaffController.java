@@ -190,6 +190,31 @@ public class StaffController {
 		}
 	}
 	
+	//–ﬁ∏ƒ”√ªß√‹¬Î
+	@RequestMapping(value="/updatePassword.do")
+	public void updatePassword(HttpServletResponse response,String staffId,String oldPassword,String newPassword)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = staffService.updatePassword(staffId,oldPassword,newPassword);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 	@RequestMapping("/deleteStaff.do")
 	public void deleteStaff(HttpServletResponse response , String staffId)
 	{

@@ -37,7 +37,7 @@
 		<div id="toparea" style="display:block;" data-options="region:'north',border:false,height:95">
 			<div id="topmenu" class="easyui-panel" data-options="fit:true,border:false">
 				<img src="<%=path %>/pub/images/adm_logo.png" style="width:100%;height:100%;position:relative;border:none;">
-				<img src="<%=path %>/pub/images/adm_menu1.png" style="right:230px;top:10px;position:absolute;cursor:pointer;">
+				<img onclick="updatePassword()" src="<%=path %>/pub/images/adm_menu1.png" style="right:230px;top:10px;position:absolute;cursor:pointer;">
 				<img src="<%=path %>/pub/images/adm_menu2.png" style="right:180px;top:10px;position:absolute;cursor:pointer;">
 				<img src="<%=path %>/pub/images/adm_menu3.png" style="right:100px;top:10px;position:absolute;cursor:pointer;">
 				<img onclick="logout()" src="<%=path %>/pub/images/adm_menu4.png" style="right:50px;top:10px;position:absolute;cursor:pointer;">
@@ -67,7 +67,29 @@
 		        </div>
 			</div>
 		</div>
-
+		<div id="dlg" class="easyui-dialog" style="width:380px;height:180px;padding:0px 0px" modal="true" closed="true" buttons="#buttons">
+			<form id='form' method="post">
+				<input id="staffId" type="hidden" name="staffId" value="${sessionScope.StaffT.staffId}" />
+				<table width="98%" style="margin:5px 5px;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
+					<tr>
+						<td align="right">*旧密码:</td>
+						<td align="left"><input name="oldPassword" id="oldPassword" type="password" style="width:246px" validType="length[4,20]" missingMessage="请输入旧密码" class="easyui-textbox easyui-validatebox" required="true" /></td>
+					</tr>
+					<tr>
+						<td align="right">*新密码:</td>
+						<td align="left"><input name="password" id="password" type="password" style="width:246px" validType="length[4,20]" missingMessage="请输入新密码" class="easyui-textbox easyui-validatebox" required="true" /></td>
+					</tr>
+					<tr>
+						<td align="right">*确认新密码：</td>
+						<td align="left"><input name="confirm" id="confirm" type="password" style="width:246px" validType="equalTo['#password']" missingMessage="请确认新密码" invalidMessage="两次输入密码不匹配" class="easyui-textbox easyui-validatebox" required="true" /></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div id="buttons">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="updatePasswordSubmit()">提交</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="cancelUpdatePassword()">取消</a>
+		</div>
 		<!-- 左侧菜单 -->
 		<div id="leftarea" data-options="iconCls:'icons-other-house',region:'west',title:'加载中...',split:true,width:200">
 			<div id="leftmenu" class="easyui-accordion" data-options="fit:true,border:false"></div>
@@ -159,6 +181,45 @@
 				$.messager.confirm('提示信息', '确定要退出登录吗？', function(result){
 					if(result) window.location.href = '/sys/auth.do?method=logout';
 				});
+			}
+			
+			function updatePassword(){
+				$('#dlg').dialog('open').dialog('setTitle','修改密码');
+			}
+			
+			function updatePasswordSubmit(){
+				if($("#form").form('validate')){
+					var staffId = $("#staffId").val();
+					var oldPassword = $("#oldPassword").textbox("getValue");
+					var newPassword = $("#password").textbox("getValue");
+					$.ajax({
+						type : "POST",
+						url: "/sys/staff/updatePassword.do",
+						data: "staffId="+staffId+"&oldPassword="+oldPassword+"&newPassword="+newPassword,
+						async: false,
+						beforeSend: function()
+				    	{
+				    		$.messager.progress({title : '修改密码', msg : '修改密码中，请稍等……'});
+				    	},
+				    	success: function(data) {
+				    		$.messager.progress('close'); 
+				    		if(data == "success"){
+				    			$.messager.alert('提示', "修改密码成功！","info",function(){
+					    			window.location.href = "/sys/login.jsp";
+								});
+				    		}else {
+				    			$.messager.alert('提示', data);
+				    		}
+				        } 
+					});
+				}
+			}
+			
+			function cancelUpdatePassword(){
+				$("#oldPassword").textbox("setValue","");
+				$("#password").textbox("setValue","");
+				$("#confirm").textbox("setValue","");
+				$('#dlg').dialog('close');
 			}
 			
 			function getLeft(menuId, title, that){

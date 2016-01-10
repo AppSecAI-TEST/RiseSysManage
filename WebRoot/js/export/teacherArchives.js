@@ -126,10 +126,6 @@ $(document).ready(function() {
 		if(data.length > 0) {
 			$('#month').combobox('setValue', data[0].month);
 		}
-		data = $("#week").combobox("getData");
-		if(data.length > 0) {
-			$('#week').combobox('setValue', data[0].weekName);
-		}
 	});
 	
 	$.ajax({

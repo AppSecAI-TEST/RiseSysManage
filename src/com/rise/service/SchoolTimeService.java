@@ -92,7 +92,7 @@ public class SchoolTimeService
 	 */
 	public String updateCreateWeek(String createWeekId) throws Exception
 	{
-		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS8007\",securityCode:\"0000000000\",params:{createWeekId:"+createWeekId+"},rtnDataFormatType:\"user-defined\"}";
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS8007\",securityCode:\"0000000000\",params:{createWeekId:"+createWeekId+",classInstId:''},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
 	

@@ -81,4 +81,9 @@ public class StaffService {
 		model.addObject("pageFlag", pageFlag);
 		model.addObject("funcNodeId", funcNodeId);
 	}
+
+	public String updatePassword(String staffId, String oldPassword,String newPassword)throws Exception {
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20012\",securityCode:\"0000000000\",params:{staffId:'"+staffId+"',oldPassword:'"+oldPassword+"',newPassword:'"+newPassword+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
 }
