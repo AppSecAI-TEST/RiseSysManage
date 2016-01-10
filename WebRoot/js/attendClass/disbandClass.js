@@ -9,7 +9,7 @@ $(document).ready(function() {
 					url: "/sys/attendClass/disbandClass.do",
 					data: "param=" + obj,
 					dataType: "json",
-					async: false,
+					async: true,
 					beforeSend: function()
 					{
 						$.messager.progress({title : '班级解散', msg : '正在解散班级，请稍等……'});

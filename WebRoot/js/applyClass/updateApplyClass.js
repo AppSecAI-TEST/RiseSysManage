@@ -36,7 +36,7 @@ $(document).ready(function() {
 						url: "/sys/applyClass/batchRemoveStudent.do",
 						data: "param=" + param,
 						dataType: "json",
-						async: false,
+						async: true,
 						beforeSend: function()
 						{
 							$.messager.progress({title : '学员移除', msg : '正在学员移除，请稍等……'});
@@ -341,7 +341,7 @@ function updateApplyClass() {
 		url: "/sys/applyClass/updateCreateClass.do",
 		data: "param=" + obj,
 		dataType: "json",
-		async: false,
+		async: true,
 		beforeSend: function()
 		{
 			$.messager.progress({title : '班级维护', msg : '正在维护班级信息，请稍等……'});

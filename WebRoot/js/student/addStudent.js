@@ -321,7 +321,7 @@ $(document).ready(function() {
     					url: "/sys/student/validate.do",
     					data: "param=" + obj,
     					dataType: "json",
-    					async: false,
+    					async: true,
     					beforeSend: function() {
     						$.messager.progress({title : '验重', msg : '正在验重，请稍等……'});
     					},
@@ -388,7 +388,7 @@ $(document).ready(function() {
             					url: "/sys/student/addStudent.do",
             					data: "param=" + param,
             					dataType: "json",
-            					async: false,
+            					async: true,
             					beforeSend: function()
             					{
             						$.messager.progress({title : '学员注册', msg : '学员正在注册，请稍等……'});

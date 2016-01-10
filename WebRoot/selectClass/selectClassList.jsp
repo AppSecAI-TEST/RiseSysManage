@@ -118,7 +118,7 @@
 						<th data-options="field:'schoolName',width:80,align:'center'">校区</th>
 						<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
 						<th data-options="field:'byName',width:100,align:'center'">英文名</th>
-						<th data-options="field:'stageIdText',width:100,align:'center'">课程阶段或名称</th>
+						<th data-options="field:'stageIdText',width:100,align:'center', formatter:function(value, row, index) {if (row.stageIdText == '') {return row.classType;} else {return row.stageIdText;}}">课程阶段或名称</th>
 						<th data-options="field:'classType',width:100,align:'center'">班级类型</th>
 						<th data-options="field:'isNeedSelectText',width:120,align:'center'">是否需要选班</th>
 						<th data-options="field:'feeTypeText',width:100,align:'center'">业绩类型</th>

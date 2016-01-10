@@ -50,7 +50,7 @@
   						<td><span id="dutyAdvisterNameText"></span></td>
   					</tr>
   					<tr>
-  						<td align="right"><span>业绩老师：</span></td>
+  						<td align="right"><span id="adviserTeacher">业绩老师：</span></td>
   						<td><span id="adviserTeacherNameText"></span></td>
   						<td align="right"><span>班级类型：</span></td>
   						<td colspan="3"><span id="classTypeText"></span></td>

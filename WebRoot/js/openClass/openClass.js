@@ -226,7 +226,7 @@ $(document).ready(function() {
 					url: "/sys/openClass/approveOpenClass.do",
 					data: "param=" + obj,
 					dataType: "json",
-					async: false,
+					async: true,
 					beforeSend: function()
 					{
 						$.messager.progress({title : '开班审批', msg : '正在审批开班，请稍等……'});
@@ -255,7 +255,7 @@ function updateOrCancel() {
 		url: "/sys/openClass/updateOrCancel.do",
 		data: "param=" + obj,
 		dataType: "json",
-		async: false,
+		async: true,
 		beforeSend: function()
 		{
 			if(optionType == "CANCEL_OPEN") {
@@ -314,7 +314,7 @@ function openClass() {
 		url: "/sys/openClass/applyOpenClass.do",
 		data: "param=" + obj,
 		dataType: "json",
-		async: false,
+		async: true,
 		beforeSend: function()
 		{
 			$.messager.progress({title : '申请开班', msg : '正在申请开班，请稍等……'});

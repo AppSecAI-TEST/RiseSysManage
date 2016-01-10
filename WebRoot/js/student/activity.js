@@ -146,7 +146,7 @@ $(document).ready(function() {
     				url: "/sys/student/addActivity.do",
     				data: "param=" + param,
     				dataType: "json",
-    				async: false,
+    				async: true,
     				beforeSend: function()
     				{
     					$.messager.progress({title : '活动信息', msg : '正在添加活动信息，请稍等……'});

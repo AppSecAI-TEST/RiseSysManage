@@ -105,7 +105,7 @@ $(document).ready(function() {
 				url: "/sys/refund/approveRefund.do",
 				data: "param=" + param,
 				dataType: "json",
-				async: false,
+				async: true,
 				beforeSend: function()
 				{
 					$.messager.progress({title : '审批退费', msg : '正在审批退费，请稍等……'});
@@ -137,7 +137,7 @@ $(document).ready(function() {
 		url: "/sys/pubData/qryData.do",
 		data: "param={'refundFeeId':'"+refundFeeId+"', 'funcNodeId':'1037'}",
 		dataType: "json",
-		async: false,
+		async: true,
 		success: function (data) {
 			$.each(data, function(i, obj) {
 				if("101" == obj.tacheState) {

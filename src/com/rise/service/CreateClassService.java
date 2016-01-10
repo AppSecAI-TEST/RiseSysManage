@@ -72,4 +72,10 @@ public class CreateClassService
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00710\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
+
+	public String getBonus(String classInstId) throws Exception  
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00711\",securityCode:\"0000000000\",params:{classInstId:"+classInstId+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
 }

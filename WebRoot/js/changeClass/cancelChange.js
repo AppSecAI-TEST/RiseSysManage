@@ -5,7 +5,7 @@ $(document).ready(function() {
 		url: "/sys/applyClass/qryDataByQueryCode.do",
 		data: "param=" + param,
 		dataType: "json",
-		async: false,
+		async: true,
 		beforeSend: function()
 		{
 			$.messager.progress({title : '转班', msg : '正在查询转班信息，请稍等……'});
@@ -58,7 +58,7 @@ $(document).ready(function() {
 				url: "/sys/change/cancelChangeSchool.do",
 				data: "param=" + obj,
 				dataType: "json",
-				async: false,
+				async: true,
 				beforeSend: function()
 				{
 					$.messager.progress({title : '取消转校', msg : '取消转校，请稍等……'});

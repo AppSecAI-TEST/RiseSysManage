@@ -79,9 +79,9 @@
 	      				</td>
 	      				<td align="right" width="114px"><span>招生顾问B：</span></td>
 	      				<td colspan="2">
-	      					<select id="advisterBSchoolId" class="easyui-combobox" style="width: 100px; height: 28px;">
+	      					<select id="advisterBSchoolId" class="easyui-combobox" style="width: 100px; height: 28px;" editable="false">
 	        				</select>
-	        				<select name="advisterIdB" id="advisterIdB" class="easyui-combobox" style="width: 150px; height: 28px;">
+	        				<select name="advisterIdB" id="advisterIdB" class="easyui-combobox" style="width: 150px; height: 28px;" editable="false">
 	        				</select>
 	      				</td>
 	      			</tr>
@@ -140,7 +140,7 @@
 							<input name="used" type="checkbox"/>
 						</td>
 						<td width="310px" align="center">
-							<select id="contactIdentityType" class="easyui-combobox" style="width: 100px; height: 28px;">
+							<select id="contactIdentityType" class="easyui-combobox" style="width: 100px; height: 28px;" editable="false">
 	        				</select>
 	        				<input id="contactIdentityId" type="text" class="easyui-textbox numberbox" style="width: 200px; height: 28px;" validType="length[0,18]" />
 						</td>

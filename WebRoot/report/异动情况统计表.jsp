@@ -52,13 +52,13 @@
 							<th field="changeSchoolNum" align="center" width="5%" rowspan="2">转校</th>
 							<th field="exceptionNum" align="center" width="11%" colspan="2">异常</th>
 							<th field="leaveNum" align="center" width="11%" colspan="2">休学</th>
-							<th field="higherNotInClassNum" align="center" width="9%" rowspan="2">升学未进班总数</th>
-							<th field="newNotInClassNum" align="center" width="9%" rowspan="2">新生未进班总数</th>
+							<th data-options="field:'higherNotInClassNum', width:'9%', align:'center', rowspan:2, formatter:formatHigherNotInClass">升学未进班总数</th>
+							<th data-options="field:'newNotInClassNum', width:'9%', align:'center', rowspan:2, formatter:formatNewNotInClass">新招未进班总数</th>
 							<th field="excNum" align="center" width="6%" rowspan="2">异动人数</th>
 							<th field="academicChangeRate" align="center" width="6%" rowspan="2">学术异动</th>
 							<th field="newChangeRate" align="center" width="6%" rowspan="2">新招异动</th>
-							<th field="above14AcademicChangeRate" align="center" width="10%" rowspan="2">学术异动（不含2周内结课）</th>
-							<th field="above1NewChangeRate" align="center" width="10%" rowspan="2">新招异动（不含1个月内新招）</th>
+							<th field="above14AcademicChangeRate" align="center" width="10%" rowspan="2">学术异动（不</br>含2周内结课）</th>
+							<th field="above1NewChangeRate" align="center" width="10%" rowspan="2">新招异动（不含</br>1个月内新招）</th>
 						</tr>
 						<tr>
 							<th field="nonAcademicRefundNum" align="center" width="6%">非学术</th>
@@ -70,24 +70,26 @@
 						</tr>
 					</thead>
 				</table>
-				<div id="dlg" class="easyui-dialog" closed="true" modal="true">
-					<table class="easyui-datagrid" title="升学未进班阶段明细" style="width:100%;height:250px" id="list_data1" fitColumns="true">
+				<div id="higher_dlg" class="easyui-dialog" closed="true" modal="true">
+					<table class="easyui-datagrid" style="width:650px;height:300px" id="higher_list_data" fitColumns="true">
 						<thead>
 							<tr>
-								<th field="stageId" align="center" width="30%">阶段</th>
-								<th field="inTwoWeeks" align="center" width="35%">2周内结课人数</th>
-								<th field="aftTwoWeeks" align="center" width="35%">2周以上结课人数</th>
+								<th field="stageId" align="center" width="100px">阶段</th>
+								<th field="above14Num" align="center" width="200px">2周内结课人数</th>
+								<th field="lower14Num" align="center" width="200px">2周以上结课人数</th>
+								<th field="total" align="center" width="150px">阶段人数总计</th>
 							</tr>
 						</thead>
 					</table>
 				</div>
-				<div id="dlg1" class="easyui-dialog" closed="true" modal="true">
-					<table class="easyui-datagrid" title="新生未进班阶段明细" style="width:100%;height:250px" id="list_data2" fitColumns="true">
+				<div id="new_dlg" class="easyui-dialog" closed="true" modal="true">
+					<table class="easyui-datagrid" style="width:650px;height:300px" id="new_list_data" fitColumns="true">
 						<thead>
 							<tr>
-								<th field="stageId" align="center" width="30%">阶段</th>
-								<th field="inMonth" align="center" width="35%">1个月以内新招未进</th>
-								<th field="aftMonth" align="center" width="35%">1个月以上新招未进班</th>
+								<th field="stageId" align="center" width="100px">阶段</th>
+								<th field="above1Num" align="center" width="200px">1个月以内新招未进</th>
+								<th field="lower1Num" align="center" width="200px">1个月以上新招未进班</th>
+								<th field="total" align="center" width="150px">阶段人数总计</th>
 							</tr>
 						</thead>
 					</table>

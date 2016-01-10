@@ -201,7 +201,7 @@ $(document).ready(function() {
 							url: "/sys/change/changeOut.do",
 							data: "param=" + param,
 							dataType: "json",
-							async: false,
+							async: true,
 							beforeSend: function()
 							{
 								$.messager.progress({title : '转出班级', msg : '正在转出班级，请稍等……'});

@@ -52,7 +52,7 @@ $(document).ready(function() {
         				url : "/sys/applyClass/qryClassName.do",
         				data: "courseType="+courseType+"&stageId="+stageId+"&classType="+newValue,
         				dataType: "json",
-        				async: false,
+        				async: true,
         				success: function (data) {
         					$("#classNameText").html(data.className);
         					$("#className").val(data.className);
@@ -474,7 +474,7 @@ function addApplyClass() {
 		data: "param=" + param,
 		dataType: "json",
 		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-		async: false,
+		async: true,
 		beforeSend: function()
 		{
 			$.messager.progress({title : '申请放班', msg : '正在申请放班，请稍等……'});

@@ -5,7 +5,7 @@ $(document).ready(function() {
 		url: "/sys/applyClass/qryDataByQueryCode.do",
 		data: "param=" + param,
 		dataType: "json",
-		async: false,
+		async: true,
 		beforeSend: function()
 		{
 			$.messager.progress({title : '转班', msg : '正在查询转班信息，请稍等……'});
@@ -99,7 +99,7 @@ $(document).ready(function() {
 				url: "/sys/change/changeIn.do",
 				data: "param=" + obj,
 				dataType: "json",
-				async: false,
+				async: true,
 				beforeSend: function()
 				{
 					$.messager.progress({title : '转入班级', msg : '正在转入班级，请稍等……'});
@@ -159,7 +159,7 @@ $(document).ready(function() {
 					url: "/sys/change/updateChangeClass.do",
 					data: "param=" + obj,
 					dataType: "json",
-					async: false,
+					async: true,
 					beforeSend: function()
 					{
 						$.messager.progress({title : '更改转班', msg : '正在更改转班，请稍等……'});
@@ -219,7 +219,7 @@ function initClassInst(isBegin) {
             		url: "/sys/applyClass/qryDataByQueryCode.do",
             		data: "param=" + param,
             		dataType: "json",
-            		async: false,
+            		async: true,
             		beforeSend: function()
             		{
             			$.messager.progress({title : '班级维护', msg : '正在查询班级信息，请稍等……'});
@@ -265,7 +265,7 @@ function initClassInst(isBegin) {
             		url: "/sys/applyClass/qryDataByQueryCode.do",
             		data: "param=" + param,
             		dataType: "json",
-            		async: false,
+            		async: true,
             		beforeSend: function()
             		{
             			$.messager.progress({title : '班级维护', msg : '正在查询班级信息，请稍等……'});

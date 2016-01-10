@@ -4,7 +4,7 @@ $(document).ready(function() {
 		url: "/sys/pubData/qryData.do",
 		data: "param={'queryCode':'qryApplyStudentCourseInfo','studentCourseId':'"+studentCourseId+"'}",
 		dataType: "json",
-		async: false,
+		async: true,
 		beforeSend: function()
 		{
 			$.messager.progress({title : '转校申请', msg : '正在查询申请转校的课程信息，请稍等……'});
@@ -122,7 +122,7 @@ $(document).ready(function() {
 						url: "/sys/change/applyChangeClass.do",
 						data: "param=" + obj,
 						dataType: "json",
-						async: false,
+						async: true,
 						beforeSend: function()
 						{
 							$.messager.progress({title : '申请转校', msg : '正在申请转校，请稍等……'});

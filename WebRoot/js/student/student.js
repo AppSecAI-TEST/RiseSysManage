@@ -195,7 +195,7 @@ $(document).ready(function() {
     			url: "/sys/student/setVip.do",
     			data: "param=" + obj,
     			dataType: "json",
-    			async: false,
+    			async: true,
     			beforeSend: function()
     	    	{
     	    		$.messager.progress({title : 'VIP学员设置', msg : '正在设置VIP学员，请稍等……'});
@@ -222,7 +222,7 @@ $(document).ready(function() {
     			url: "/sys/student/updateVip.do",
     			data: "param=" + obj,
     			dataType: "json",
-    			async: false,
+    			async: true,
     			beforeSend: function()
     	    	{
     	    		$.messager.progress({title : 'VIP维护信息', msg : '正在维护VIP信息，请稍等……'});
@@ -255,7 +255,7 @@ $(document).ready(function() {
 			url: "/sys/student/batchUpdateAdvister.do",
 			data: "param=" + obj,
 			dataType: "json",
-			async: false,
+			async: true,
 			beforeSend: function()
 	    	{
 	    		$.messager.progress({title : '批量修改', msg : '正在批量修改客户关怀和责任顾问，请稍等……'});

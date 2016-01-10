@@ -52,7 +52,13 @@ $(document).ready(function() {
     	});
     });
 	
-	initQryButton("qryBtn", "reset", "qryFm", "list_data");
+	$("#reset").click(function() {
+    	$("#qryFm").form('clear');//清空窗体数据  
+    	if($("#schoolId").length > 0) {
+    		$("#schoolId").combobox("setValue", "");
+    		$("#schoolId").combobox("setText", "全部校区");
+    	}
+    });
 	
 	var staffId = $("#staffId").val();
 	var funcNodeId = $("#funcNodeId").val();

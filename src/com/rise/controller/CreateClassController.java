@@ -349,4 +349,29 @@ public class CreateClassController
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/getBonus.do")
+	public void getBonus(String classInstId, HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = createClassService.getBonus(classInstId);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }

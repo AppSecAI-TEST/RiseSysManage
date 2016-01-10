@@ -5,7 +5,7 @@ $(document).ready(function() {
 		url: "/sys/applyClass/qryDataByQueryCode.do",
 		data: "param=" + param,
 		dataType: "json",
-		async: false,
+		async: true,
 		beforeSend: function()
 		{
 			$.messager.progress({title : '浏览', msg : '正在查询浏览转校信息，请稍等……'});
@@ -102,7 +102,7 @@ $(document).ready(function() {
 					url: "/sys/change/updateChangeClass.do",
 					data: "param=" + obj,
 					dataType: "json",
-					async: false,
+					async: true,
 					beforeSend: function()
 					{
 						$.messager.progress({title : '更改选班', msg : '正在更改选班，请稍等……'});
@@ -161,7 +161,7 @@ function initClassInst(isBegin) {
             			url: "/sys/applyClass/qryDataByQueryCode.do",
             			data: "param=" + param,
             			dataType: "json",
-            			async: false,
+            			async: true,
             			beforeSend: function()
             			{
             				$.messager.progress({title : '班级维护', msg : '正在查询班级信息，请稍等……'});
@@ -211,7 +211,7 @@ function initClassInst(isBegin) {
             			url: "/sys/applyClass/qryDataByQueryCode.do",
             			data: "param=" + param,
             			dataType: "json",
-            			async: false,
+            			async: true,
             			beforeSend: function()
             			{
             				$.messager.progress({title : '班级维护', msg : '正在查询班级信息，请稍等……'});

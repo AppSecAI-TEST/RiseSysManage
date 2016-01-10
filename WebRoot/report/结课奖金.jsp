@@ -75,20 +75,20 @@
 					title="查询结果" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
 						<tr>
-							<th data-options="field:'schoolName',width:50,align:'center'">校区</th>
-							<th data-options="field:'stageId',width:100,align:'center'">课程阶段</th>
-							<th data-options="field:'className',width:100,align:'center'">班级</th>
-							<th data-options="field:'finishDate',width:100,align:'center'">结课日期</th>
-							<th data-options="field:'isTwoHand',width:100,align:'center'">是否二手班</th>
-							<th data-options="field:'byname',width:100,align:'center'">带班老师</th>
-							<th data-options="field:'openClassNum',width:100,align:'center'">开班人数</th>
-							<th data-options="field:'higherBaseNum',width:100,align:'center'">升学基数</th>
-							<th data-options="field:'higherNum',width:100,align:'center'">已升学人数</th>
-							<th data-options="field:'higherRate',width:100,align:'center'">升学率</th>
-							<th data-options="field:'changeTeacherRemark',width:200,align:'center'">中途更换老师情况</th>
-							<th data-options="field:'teacherHours',width:120,align:'center'">授课课时比例</th>
-							<th data-options="field:'isApplyBonusText',width:120,align:'center'">是否已申请奖金</th>
-							<th data-options="field:'option',width:50,align:'center'">操作</th>
+							<th data-options="field:'schoolName',width:'6%',align:'center'">校区</th>
+							<th data-options="field:'stageId',width:'7%',align:'center'">课程阶段</th>
+							<th data-options="field:'className',width:'7%',align:'center'">班级</th>
+							<th data-options="field:'finishDate',width:'8%',align:'center'">结课日期</th>
+							<th data-options="field:'isTwoHand',width:'7%',align:'center'">是否二手班</th>
+							<th data-options="field:'byname',width:'10%',align:'center'">带班老师</th>
+							<th data-options="field:'openClassNum',width:'7%',align:'center'">开班人数</th>
+							<th data-options="field:'higherBaseNum',width:'7%',align:'center'">升学基数</th>
+							<th data-options="field:'higherNum',width:'7%',align:'center'">已升学人数</th>
+							<th data-options="field:'higherRate',width:'7%',align:'center'">升学率</th>
+							<th data-options="field:'changeTeacherRemark',width:'20%',align:'center'">中途更换老师情况</th>
+							<th data-options="field:'teacherHours',width:'12%',align:'center'">授课课时比例</th>
+							<th data-options="field:'isApplyBonusText',width:'9%',align:'center'">是否已申请奖金</th>
+							<th data-options="field:'option', width:'6%', align:'center', formatter:formatFinishBonus">操作</th>
 						</tr>
 					</thead>
 				</table>

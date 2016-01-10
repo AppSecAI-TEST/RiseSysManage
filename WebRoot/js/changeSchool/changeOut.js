@@ -7,7 +7,7 @@ $(document).ready(function() {
 			url : "/sys/change/changeOutSchool.do",
 			data: "param="+obj,
 			dataType: "json",
-			async: false,
+			async: true,
 			beforeSend: function()
 			{
 				$.messager.progress({title : '转入班级', msg : '正在转出校区，请稍等……'});

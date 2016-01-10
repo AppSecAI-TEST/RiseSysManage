@@ -351,6 +351,30 @@ function formatEfficiency(value, row, index) {
 	}
 }
 
+function formatHigherNotInClass(value, row, index) {
+	if(value > 0) {
+		return "<a href='javascript:void(0)' onclick='viewNotInClassDetail(" + index + ", \"higher\")' style='text-decoration:none'>" + value + "</a>";
+	} else {
+		return value;
+	}
+}
+
+function formatNewNotInClass(value, row, index) {
+	if(value > 0) {
+		return "<a href='javascript:void(0)' onclick='viewNotInClassDetail(" + index + ", \"new\")' style='text-decoration:none'>" + value + "</a>";
+	} else {
+		return value;
+	}
+}
+
+function formatFinishBonus(value, row, index) {
+	if(row.isApplyBonus == "Y" && row.isGetBonus == "N") {
+		return "<a href='javascript:void(0)' onclick='getBonus(" + row.classInstId + ")' style='text-decoration:none'>领取</a>";
+	} else {
+		return "";
+	}
+}
+
 function myLoadFilter(data,parentId){
 	function setData(){
 		var todo = [];

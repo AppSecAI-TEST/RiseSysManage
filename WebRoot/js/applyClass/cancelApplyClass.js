@@ -5,7 +5,7 @@ $(document).ready(function() {
 		url: "/sys/applyClass/qryCreateClassById.do",
 		data: "classInstId=" + classInstId + "&applyType=001",
 		dataType: "json",
-		async: false,
+		async: true,
 		beforeSend: function()
 		{
 			$.messager.progress({title : '取消放班申请', msg : '正在查询取消放班信息，请稍等……'});
@@ -78,7 +78,7 @@ $(document).ready(function() {
 				data: "param=" + obj,
 				contentType: "charset=UTF-8",
     			dataType: "json",
-    			async: false,
+    			async: true,
     			beforeSend: function()
     	    	{
     	    		$.messager.progress({title : '申请取消放班', msg : '正在申请取消放班，请稍等……'});
@@ -110,7 +110,7 @@ $(document).ready(function() {
 					data: "param=" + obj,
 					contentType: "charset=UTF-8",
 					dataType: "json",
-					async: false,
+					async: true,
 					beforeSend: function()
 					{
 						$.messager.progress({title : '审批申请', msg : '正在审批申请，请稍等……'});

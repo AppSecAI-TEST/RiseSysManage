@@ -107,9 +107,9 @@
 	      				<td align="right" width="114px"><span style="color: red;">*</span><span>招生顾问A：</span></td>
 	      				<td>
 	      					<div id="advisterADiv">
-		      					<select id="advisterASchoolId" class="easyui-combobox" style="width: 100px; height: 28px;" required="true">
+		      					<select id="advisterASchoolId" class="easyui-combobox" style="width: 100px; height: 28px;" required="true" editable="false">
 	        					</select>
-	        					<select name="advisterIdA" id="advisterIdA" class="easyui-combobox" style="width: 150px; height: 28px;" required="true">
+	        					<select name="advisterIdA" id="advisterIdA" class="easyui-combobox" style="width: 150px; height: 28px;" required="true" editable="false">
 	        					</select>
 	      					</div>
         					<span id="advisterAText" style="display: none;"></span>
@@ -117,9 +117,9 @@
 	      				<td align="right" width="114px"><span>招生顾问B：</span></td>
 	      				<td colspan="4">
 	      					<div id="advisterBDiv">
-		      					<select id="advisterBSchoolId" class="easyui-combobox" style="width: 100px; height: 28px;">
+		      					<select id="advisterBSchoolId" class="easyui-combobox" style="width: 100px; height: 28px;" editable="false">
 		        				</select>
-		        				<select name="advisterIdB" id="advisterIdB" class="easyui-combobox" style="width: 150px; height: 28px;">
+		        				<select name="advisterIdB" id="advisterIdB" class="easyui-combobox" style="width: 150px; height: 28px;" editable="false">
 		        				</select>
 	      					</div>
 	        				<span id="advisterBText" style="display: none;"></span>
@@ -128,12 +128,12 @@
 	      			<tr>
 	      				<td align="right" width="114px"><span style="color: red;">*</span><span>责任顾问：</span></td>
 	      				<td>
-		      				<select name="dutyAdvister" id="dutyAdvister" class="easyui-combobox" style="width: 150px; height: 28px;" required="true">
+		      				<select name="dutyAdvister" id="dutyAdvister" class="easyui-combobox" style="width: 150px; height: 28px;" required="true" editable="false">
 	        				</select>
 	      				</td>
 	      				<td align="right" width="114px"><span>客户关怀：</span></td>
 	      				<td colspan="4">
-	      					<select name="carer" id="carer" class="easyui-combobox" style="width: 150px; height: 28px;">
+	      					<select name="carer" id="carer" class="easyui-combobox" style="width: 150px; height: 28px;" editable="false">
         					</select>
 	      				</td>
 	      			</tr>
@@ -164,7 +164,7 @@
 						<td align="center" width="100px">
 							<select id="relationType" class="easyui-combobox" style="width: 100px; height: 28px;"
 								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
-	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=CONTACT_T&codeType=RELATION_TYPE">
+	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=CONTACT_T&codeType=RELATION_TYPE" editable="false">
 	        				</select>
 						</td>
 						<td align="center" width="120px">
@@ -177,7 +177,7 @@
 							<input name="used" type="checkbox"/>
 						</td>
 						<td align="center" width="310px">
-							<select id="contactIdentityType" class="easyui-combobox" style="width: 100px; height: 28px;">
+							<select id="contactIdentityType" class="easyui-combobox" style="width: 100px; height: 28px;" editable="false">
 	        				</select>
 	        				<input id="contactIdentityId" type="text" class="easyui-textbox numberbox" style="width: 200px; height: 28px;" validType="length[0,18]" />
 						</td>

@@ -349,7 +349,7 @@ $(document).ready(function() {
 						url: "/sys/refund/applyRefund.do",
 						data: "param=" + param,
 						dataType: "json",
-						async: false,
+						async: true,
 						beforeSend: function()
 						{
 							$.messager.progress({title : '申请退费', msg : '正在申请退费，请稍等……'});

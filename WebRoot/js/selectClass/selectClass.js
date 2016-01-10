@@ -5,7 +5,7 @@ $(document).ready(function() {
 		url: "/sys/applyClass/qryDataByQueryCode.do",
 		data: "param=" + param,
 		dataType: "json",
-		async: false,
+		async: true,
 		beforeSend: function()
 		{
 			$.messager.progress({title : '班级维护', msg : '正在查询班级信息，请稍等……'});
@@ -21,12 +21,18 @@ $(document).ready(function() {
 			$("#byNameText").html(data.byName);
 			$("#payDateText").html(data.payDate);
 			$("#dutyAdvisterNameText").html(data.dutyAdvisterName);
-			$("#adviserTeacherNameText").html(data.adviserTeacherName);
 			$("#classTypeText").html(data.classType);
 			$("#currentClassNameText").html(data.currentClassName);
 			$("#selectClassDateText").html(data.selectClassDate);
 			$("#selectClassNumText").html(data.selectClassNum);
 			$("#courseStateText").html(data.courseStateText);
+			if("001" == data.feeType) {
+				$("#adviserTeacher").html("业绩顾问：");
+				$("#adviserTeacherNameText").html(data.adviserName);
+			} else {
+				$("#adviserTeacher").html("业绩老师：");
+				$("#adviserTeacherNameText").html(data.adviserTeacherName);
+			}
 			
 			$("#schoolId").val(data.schoolId);
 			$("#courseType").val(data.courseType);
@@ -63,33 +69,37 @@ $(document).ready(function() {
     			classInstId = $('#notBeginClassInstId').combobox('getValue');
     			className = $('#notBeginClassInstId').combobox('getText');
     		}
-    		var handlerId = $("#handlerId").val();
-    		var studentId = $("#studentId").val();
-    		var studentChannelType = $("#oldClassName").val() + $("#feeTypeText").html();
-    		var studentCourseId = $("#studentCourseId").val();
-    		var oldClassInstId = $("#oldClassInstId").val();
-    		var schoolId = $("#schoolId").val();
-    		var param = "[{classInstId:\""+classInstId+"\",className:\""+className+"\",studentId:\""+studentId+"\",studentCourseId:\""+studentCourseId+"\",studentChannelType:\""+studentChannelType+"\",handlerId:\""+handlerId+"\",oldClassInstId:\""+oldClassInstId+"\",schoolId:\""+schoolId+"\"}]";
-    		param = encodeURI(param);
-    		$.ajax({
-    			url: "/sys/applyClass/addClassStudent.do",
-    			data: "param=" + param,
-    			dataType: "json",
-    			async: false,
-    			beforeSend: function()
-    			{
-    				$.messager.progress({title : '选班', msg : '正在选班，请稍等……'});
-    			},
-    			success: function (data) {
-    				$.messager.progress('close'); 
-    				var flag = data.flag
-    				if(flag) {
-    					$.messager.alert('提示', "选班成功！", "info", function() {window.history.back();});
-    				} else {
-    					$.messager.alert('提示', data.msg);
+    		if(classInstId != "" && classInstId != null && classInstId != undefined) {
+    			var handlerId = $("#handlerId").val();
+    			var studentId = $("#studentId").val();
+    			var studentChannelType = $("#oldClassName").val() + $("#feeTypeText").html();
+    			var studentCourseId = $("#studentCourseId").val();
+    			var oldClassInstId = $("#oldClassInstId").val();
+    			var schoolId = $("#schoolId").val();
+    			var param = "[{classInstId:\""+classInstId+"\",className:\""+className+"\",studentId:\""+studentId+"\",studentCourseId:\""+studentCourseId+"\",studentChannelType:\""+studentChannelType+"\",handlerId:\""+handlerId+"\",oldClassInstId:\""+oldClassInstId+"\",schoolId:\""+schoolId+"\"}]";
+    			param = encodeURI(param);
+    			$.ajax({
+    				url: "/sys/applyClass/addClassStudent.do",
+    				data: "param=" + param,
+    				dataType: "json",
+    				async: true,
+    				beforeSend: function()
+    				{
+    					$.messager.progress({title : '选班', msg : '正在选班，请稍等……'});
+    				},
+    				success: function (data) {
+    					$.messager.progress('close'); 
+    					var flag = data.flag
+    					if(flag) {
+    						$.messager.alert('提示', "选班成功！", "info", function() {window.history.back();});
+    					} else {
+    						$.messager.alert('提示', data.msg);
+    					}
     				}
-    			}
-    		});
+    			});
+    		} else {
+    			$.messager.alert('提示', "请选择一个班级！");
+    		}
     	} else {
     		$.messager.alert('提示', "请先选择您要选择的班级是否开课！");
     	}

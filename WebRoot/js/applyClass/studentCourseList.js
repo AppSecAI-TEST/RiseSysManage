@@ -28,7 +28,7 @@ $(document).ready(function() {
 				url: "/sys/applyClass/addClassStudent.do",
 				data: "param=" + param,
 				dataType: "json",
-				async: false,
+				async: true,
 				beforeSend: function()
 				{
 					$.messager.progress({title : '添加学员', msg : '正在添加学员，请稍等……'});

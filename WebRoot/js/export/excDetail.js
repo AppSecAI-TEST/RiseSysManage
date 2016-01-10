@@ -103,3 +103,27 @@ function mergeCellsByField(tableId, colList) {
         }
     }
 }
+
+function viewNotInClassDetail(index, type) {
+	var rows = $('#list_data').datagrid('getRows');
+	var schoolId = rows[index].schoolId;
+	var object = $("#qryFm").serializeObject();
+	object.schoolId = schoolId;
+	object.queryCode = "qryNewNotInClassDetail";
+	if("higher" == type) {
+		object.queryCode = "qryHigherNotInClassDetail";
+	}
+	var obj = JSON.stringify(object);
+	$('#'+type+'_list_data').datagrid({
+		url : "/sys/pubData/qryDataListByPage.do",
+		queryParams:{
+			param : obj
+		}
+	});
+	$('#'+type+'_dlg').form('clear');//清空窗体数据 
+	if("higher" == type) {
+		$('#'+type+'_dlg').dialog('open').dialog('setTitle', '升学未进班阶段明细');//设定表头  
+	} else {
+		$('#'+type+'_dlg').dialog('open').dialog('setTitle', '新招未进班阶段明细');//设定表头  
+	}
+}

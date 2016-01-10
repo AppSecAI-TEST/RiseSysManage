@@ -79,7 +79,7 @@ $(document).ready(function() {
 				url: "/sys/attendClass/finishClass.do",
 				data: "param=" + obj,
 				dataType: "json",
-				async: false,
+				async: true,
 				beforeSend: function()
 				{
 					$.messager.progress({title : '班级结课', msg : '正在班级结课，请稍等……'});

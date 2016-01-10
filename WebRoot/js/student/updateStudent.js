@@ -17,7 +17,7 @@ $(document).ready(function() {
 		url: "/sys/student/qryStudentById.do",
 		data: "studentId=" + studentId + "&funcNodeId=" + funcNodeId,
 		dataType: "json",
-		async: false,
+		async: true,
 		beforeSend: function() {
     		$.messager.progress({title : '修改学员资料', msg : '正在查询学员资料，请稍等……'});
     	},
@@ -379,7 +379,7 @@ $(document).ready(function() {
     				url: "/sys/student/validate.do",
     				data: "param=" + obj,
     				dataType: "json",
-    				async: false,
+    				async: true,
     				beforeSend: function() {
     					$.messager.progress({title : '验重', msg : '正在验重，请稍等……'});
     				},
@@ -495,7 +495,7 @@ $(document).ready(function() {
             					url: "/sys/student/updateStudent.do",
             					data: "param=" + obj,
             					dataType: "json",
-            					async: false,
+            					async: true,
             					beforeSend: function()
             					{
             						$.messager.progress({title : '修改档案', msg : '正在修改学员档案，请稍等……'});

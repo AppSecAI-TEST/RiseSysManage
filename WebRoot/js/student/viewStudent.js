@@ -8,7 +8,7 @@ $(document).ready(function() {
 		url: "/sys/student/qryStudentById.do",
 		data: "studentId=" + studentId + "&funcNodeId=" + funcNodeId,
 		dataType: "json",
-		async: false,
+		async: true,
 		beforeSend: function()
     	{
     		$.messager.progress({title : '查看学员资料', msg : '正在查询学员资料，请稍等……'});
