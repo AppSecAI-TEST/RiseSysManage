@@ -9,7 +9,6 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript"></script>
   	</head>
   	
   	<body>
@@ -25,11 +24,12 @@
   			</table>
   		</div>
   		<div style="width:1100px;text-align:center;margin-top:50px;">
-  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" >返回</a>	
+  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px" id="backBtn" >返回</a>	
   		</div>
   	</body>
 </html>
 <script type="text/javascript">
+$(document).ready(function(){
 	$.ajax({
 			type : "POST",
 			url: "/sys/courseFee/qryFeeChangeInfo.do",
@@ -69,5 +69,5 @@
 	$("#backBtn").click(function(){
 		window.location.href = "qryCourseFee.jsp";
 	});
-
+})
 </script>

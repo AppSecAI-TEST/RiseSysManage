@@ -11,28 +11,28 @@
 		<script type="text/javascript" src="<%=path %>/js/classroom/roomList.js"></script>
   	</head>
   	<body>
+  		<div style="margin-right:5px;">
  		<form id="qryFm">
-  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="15">
+  			<table class="search_tab">
   				<tr>
-  					<td align="right">校区：</td>
-  					<td>
-  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;height: 28px;"
-  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+  					<td width="100px" align="right">校区：</td>
+  					<td width="120px">
+  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height: 25px;"
+  							data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
   							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
   						</select>
   					</td>
-  					<td align="right">教室状态：</td>
-  					<td>
-  						<select class="easyui-combobox" name="roomState" id="roomState" style="width:150px;"
+  					<td width="80px" align="right">教室状态：</td>
+  					<td width="100px">
+  						<select class="easyui-combobox" name="roomState" id="roomState" style="width:80px;height: 25px;"
   							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
   							url="<%=path%>/pubData/qryCodeNameList.do?tableName=ROOM_T&codeType=ROOM_STATE">
   						</select>
   					</td>
   					<td>
-  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" funcNodeId="3040">查询</a>
-  					</td>
-  					<td>
-  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:150px" id="resetBtn" >重置</a>
+  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:80px" id="qryBtn" funcNodeId="3040">查询</a>
+  						&nbsp;&nbsp;
+  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:80px" id="resetBtn" >重置</a>
   					</td>
   				</tr>
   			</table>
@@ -54,5 +54,6 @@
    			<a href="javascript:void(0)" id="updateClassroom" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">修改</a>
    			<a href="javascript:void(0)" id="deleteClassroom" class="easyui-linkbutton" iconCls="icon-cancel" style="width: 100px;">删除</a>
  		</div>
+ 	</div>	
   	</body>
 </html>

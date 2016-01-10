@@ -1,13 +1,13 @@
 $(document).ready(function(){
 	initDate();
 	$("#state").combobox({
-		url : "../pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=SINGLE_COURSE_TYPE",
+		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=SINGLE_COURSE_TYPE",
 		onChange:function(){
 			var urls ="";
 			var stateValue=$("#state").combobox("getValue");
 			if(stateValue=="001")
 			{
-				urls ="../pubData/getClassType.do?";
+				urls ="/sys/pubData/getClassType.do?";
 				$("#classType").combobox({
 				url:urls,
 				valueField : "classType",
@@ -16,6 +16,19 @@ $(document).ready(function(){
 				});
 			}
 			
+		}
+	});
+	$("#schoolId").combobox( {
+		url : "/sys/pubData/qrySchoolList.do?schoolId=",
+		onChange : function() {
+			var sId = $("#schoolId").combobox("getValue");
+			var urls = "/sys/pubData/qryTeacherList.do?schoolId=" + sId;
+			$("#adviser").combobox( {
+				url : urls
+			});
+			$("#adviserTeacher").combobox( {
+				url : urls
+			});
 		}
 	});
 	$("#qryBtn").click(function() {
@@ -48,7 +61,12 @@ $(document).ready(function(){
     $("#qryChange").click(function(){
     	window.location.href ="qryChangeFee.jsp";
     });
-    
+    if($("#backBtn").length>0)
+    {
+    	$("#backBtn").click(function(){
+    		window.history.back();
+    	});
+    }	
 });
 	
 function initDate()

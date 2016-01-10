@@ -12,59 +12,56 @@
 		<%@ include file="../common/formvalidator.jsp" %>
   	</head>
   	<body>
+  		<div style="margin-right:5px;">
  		<form id="qryFm">
-  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="15">
+  			<table class="search_tab">
   				<tr>
-  					<td align="right"><span>校区：</span></td>
-  					<td>
-  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;height: 28px;"
+  					<td align="right" width="90px"><span>校区：</span></td>
+  					<td width="110px">
+  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height: 25px;"
   							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
   							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
   						</select>
   					</td>
-  					<td align="right"><span>班级状态：</span></td>
-  					<td>
-  						<select class="easyui-combobox" name="classState" id="classState" style="width:150px;height:28px;"
+  					<td width="120px" align="right"><span>班级状态：</span></td>
+  					<td width="110px">
+  						<select class="easyui-combobox" name="classState" id="classState" style="width:100px;height:25px;"
   							  data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
 	      				 		url="<%=path %>/pubData/qryCodeNameList.do?tableName=DEMO&codeType=CLASS_STATE">
   						</select>
   					</td>
-  					<td align="right"><span>上课日期：</span></td>
-  					<td>
-  						<input class="easyui-datebox" name="startTime" id="startTime"  style="width:150px;" />
-  					</td>
-  					<td align="center"><span>至：</span></td>
-  					<td>
-  						<input class="easyui-datebox" name="endTime" id="endTime"  style="width:150px;" />
+  					<td width="110px" align="right"><span>上课日期：</span></td>
+  					<td width="250px">
+  						<input class="easyui-datebox" name="startTime" id="startTime"  style="width:100px;height: 25px;" />
+  						至
+  						<input class="easyui-datebox" name="endTime" id="endTime"  style="width:100px;height: 25px;" />
   					</td>
   				</tr>
   				<tr>
   					<td align="right"><span>DemoT：</span></td>
   					<td>
-  						<select class="easyui-combobox" name="DemoT" id="DemoT" style="width:150px;height:28px;"
+  						<select class="easyui-combobox" name="DemoT" id="DemoT" style="width:100px;height:25px;"
   							data-options="formatter:formatTeacher, valueField: 'teacherId',textField: 'byname', panelHeight: 'auto'"
   							url ="<%=path %>/pubData/qryData.do?param={'queryCode':'qryDemoTeacherInfo','teacherType':'T'}">
   						</select>
   					</td>
   					<td align="right"><span>DemoTa：</span></td>
   					<td>
-  						<select class="easyui-combobox" name="DemoTA" id="DemoTA" style="width:150px;height:28px;"
+  						<select class="easyui-combobox" name="DemoTA" id="DemoTA" style="width:100px;height:25px;"
   							data-options="formatter:formatTeacher, valueField: 'teacherId',textField: 'byname', panelHeight: 'auto'"
   							url ="<%=path %>/pubData/qryData.do?param={'queryCode':'qryDemoTeacherInfo','teacherType':'TA'}">
   						</select>
   					</td>
   					<td align="right"><span>DEMO转化率：</span></td>
   					<td>
-  						<input class="easyui-numberbox" name="min" id="min"  style="width:145px;" data-options="min:0,max:99,precision:0" />%
-  					</td>
-  					<td align="center"><span>至：</span></td>
-  					<td>
-  						<input class="easyui-numberbox" name="max" id="max"  style="width:145px;" data-options="min:1,max:100,precision:0"/>%
+  						<input class="easyui-numberbox" name="min" id="min"  style="width:92px;height:25px;" data-options="min:0,max:99,precision:0" />%
+  						-
+  						<input class="easyui-numberbox" name="max" id="max"  style="width:92px;height:25px;" data-options="min:1,max:100,precision:0"/>%
   					</td>
   					<td>
-  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" funcNodeId ="3500" ><span>查询</span></a>
+  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;height:25px;" id="qryBtn" funcNodeId ="3500" ><span>查询</span></a>
   						&nbsp;&nbsp;
-  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="resetBtn" ><span>重置</span></a>
+  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px;height:25px;" id="resetBtn" ><span>重置</span></a>
   					</td>
   				</tr>
   			</table>
@@ -93,6 +90,7 @@
    			<a href="javascript:void(0)" id="insertData" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;"><span>录入数据</span></a>
    			<a href="javascript:void(0)" id="viewInfo" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;"><span>浏览</span></a>
  		</div>
+ 	</div>	
   	</body>
 </html>
 <script>

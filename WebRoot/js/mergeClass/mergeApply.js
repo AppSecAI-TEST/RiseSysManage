@@ -392,7 +392,7 @@ function submitMergeInfo()
 	})
 	if(!flag)
 	{
-		$.messager.alert('提示', "请将合并信息填写完整!");
+		showMessage('提示', "请将合并信息填写完整!",null);
 		return false;
 	}
 	else
