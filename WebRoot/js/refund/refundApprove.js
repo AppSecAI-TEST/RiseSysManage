@@ -314,3 +314,36 @@ function viewGiftHist() {
 		$("#gift").html("<span>展开非缴费赠送历史记录</span>");
 	}
 }
+
+function viewStudentCourseList() {
+	$('#dlg').form('clear');//清空窗体数据 
+	var studentId = $("#studentId").val();
+	$("#course_list_data").datagrid({ 
+		url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1016',studentId:'"+studentId+"'}",
+		onLoadSuccess: function() { 
+			var rows = $("#course_list_data").datagrid('getRows');
+			if(parseInt(rows.length) <= 0) {
+				$("#courseDiv").css("display", "none");
+			}
+		}
+	});
+	$("#international_list_data").datagrid({ 
+		url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1038',studentId:'"+studentId+"'}",
+		onLoadSuccess: function() { 
+			var rows = $("#international_list_data").datagrid('getRows');
+			if(parseInt(rows.length) <= 0) {
+				$("#internationalDiv").css("display", "none");
+			}
+		}
+	});
+	$("#travel_list_data").datagrid({ 
+		url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1039',studentId:'"+studentId+"'}",
+		onLoadSuccess: function() { 
+			var rows = $("#travel_list_data").datagrid('getRows');
+			if(parseInt(rows.length) <= 0) {
+				$("#travelDiv").css("display", "none");
+			}
+		}
+	});
+	$('#dlg').dialog('open').dialog('setTitle', '课程信息');//设定表头  
+}
