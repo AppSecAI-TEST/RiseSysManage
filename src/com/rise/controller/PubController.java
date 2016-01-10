@@ -20,14 +20,15 @@ public class PubController
 	private PubService pubService;
 	
 	@RequestMapping("/pageCategory.do")
-	public void pageCategory(HttpServletResponse response , String staffId , String funcNodeId , String fieldId , String resourceId)
+	public void pageCategory(HttpServletResponse response , HttpServletRequest request , String staffId , String funcNodeId , String fieldId , String resourceId)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = pubService.pageCategory(staffId , funcNodeId , fieldId , resourceId);
+			Map paramMap = request.getParameterMap();
+			String retVal = pubService.pageCategory(staffId , paramMap);
 			out.write(retVal);
 		}
 		catch(Exception e)

@@ -45,6 +45,7 @@
 				<div class="fitem">
 					<label style="text-align:right">机构类型:</label>
 					<input type="radio" name="deptType" value="T" onclick="changeDept(this)" style="vertical-align:top;" checked="checked" /><span style="vertical-align:middle;">普通机构</span>
+					<input type="radio" name="deptType" value="A" onclick="changeDept(this)" style="vertical-align:top;" /><span style="vertical-align:middle;">总部机构</span>
 					<input type="radio" name="deptType" value="S" onclick="changeDept(this)" style="vertical-align:top;" /><span style="vertical-align:middle;">校区机构</span>
 				</div>
 				<div class="fitem">
@@ -120,7 +121,6 @@
 					},
 					success: function(result){
 						if (result == "success"){
-							$
 							$('#dlg').dialog('close');		
 							$("#deptList").treegrid("reload");
 						} else {
@@ -163,6 +163,12 @@
 			function changeDept(obj)
 			{
 				if(obj.value == "S")
+				{
+					$("#regionId").combobox("enable");
+					$("#parentDeptId").combotree("setValue","");
+					$("#parentDeptId").combotree("disable");
+				}
+				else if(obj.value == "A")
 				{
 					$("#regionId").combobox("enable");
 					$("#parentDeptId").combotree("setValue","");

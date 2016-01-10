@@ -87,7 +87,7 @@
 					</td>
 					<td>
 					
-						<select name="courseType" editable='false' required="true" class="easyui-combobox" id="courseType" style="width: 150px; height: 28px;"
+						<select name="courseType" editable='false' required="true" class="easyui-combobox" id="courseType" style="width: 100px; height: 28px;"
 						 data-options="valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
 	      				  required="true" >
 	      				  <option value="001">常规课</option>
@@ -97,7 +97,7 @@
 								<span>缴费时间：</span>
 						</td>
 							<td>
-								<input name="payDate" id="payDate"  class="easyui-datebox" editable='false' required="true" value="<%=StringUtil.getJSONObjectKeyVal(object,"payDate")%>"  style="width: 150px; height: 28px;" />
+								<input name="payDate" id="payDate"  class="easyui-datebox" editable='false' required="true" value="<%=StringUtil.getJSONObjectKeyVal(object,"payDate")%>"  style="width: 100px; height: 28px;" />
 							</td>
 				</tr>
 			</table>
@@ -128,7 +128,7 @@
 								<span>阶段：</span>
 							</td>
 							<td>
-								 <select name="stageId"  id="stageId"    style="width: 150px; height: 28px;" 
+								 <select name="stageId"  id="stageId"    style="width: 100px; height: 28px;" 
 	      						data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
 	      						 onLoadSuccess:function(data){$('#stageId').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>');}"
 	      						url="<%=path %>/pubData/qryStage.do" editable='false' required="true" >
@@ -138,7 +138,7 @@
 							</td>
 							<td>
 								<select name="classType"  id="classType"
-									style="width: 150px; height: 28px;"  editable='false' required="true">
+									style="width: 100px; height: 28px;"  editable='false' required="true">
 									 
 								</select>
 							</td>
@@ -149,7 +149,7 @@
 								<select name="feeType"   id="feeType" editable='false' required="true"
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName',
 									onLoadSuccess:function(data){$('#feeType').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"feeType")%>')}"
-									style="width: 150px; height: 28px;"
+									style="width: 100px; height: 28px;"
 									url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
 								</select>
 							</td>
@@ -159,22 +159,28 @@
 								<span>业绩顾问A：</span>
 							</td>
 							<td>
-								<select name="adviserA" class="easyui-combobox" id="adviserA"
-									style="width: 150px; height: 28px;"
-									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
+								<select class="easyui-combobox" editable='false' id="adviserA_school" style="width: 100px; height: 28px;" data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+							</select>
+								<select name="adviserA" class="easyui-combobox" id="adviserA" editable='false'
+									style="width: 100px; height: 28px;"
+									data-options=" valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
 									onLoadSuccess:function(data){$('#adviserA').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserA")%>');}"
-		      						url="<%=path %>/pubData/qryTeacherList.do">
+		      						url="<%=path %>/pubData/qryStaffList.do?post=16,17">
 								</select>
 							</td>
 							<td align="right">
 								<span>业绩顾问B：</span>
 							</td>
 							<td>
-								<select name="adviserB" class="easyui-combobox" id="adviserB"
-									style="width: 150px; height: 28px;"
-									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
+							<select class="easyui-combobox" editable='false' id="adviserB_school" style="width: 100px; height: 28px;"
+								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+								  >
+								  </select>
+								<select name="adviserB" class="easyui-combobox" id="adviserB" editable='false'
+									style="width: 100px; height: 28px;"
+									data-options=" valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
 									onLoadSuccess:function(data){$('#adviserB').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserB")%>');}"
-		      						url="<%=path %>/pubData/qryTeacherList.do">
+		      						url="<%=path %>/pubData/qryStaffList.do?post=16,17">
 								</select>
 							</td>
 							<td align="right"></td>
@@ -186,8 +192,12 @@
 							<span>业绩老师A：</span>
 						</td>
 						<td>
-							<select name="adviserTeacherA" class="easyui-combobox" id="adviserTeacherA"
-								style="width: 150px; height: 28px;"
+							<select class="easyui-combobox" editable='false' id="adviserTeacherA_school" style="width: 100px; height: 28px;"
+								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+								  ></select>
+								  
+							<select name="adviserTeacherA" class="easyui-combobox" id="adviserTeacherA" editable='false'
+								style="width: 100px; height: 28px;"
 								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
 								onLoadSuccess:function(data){$('#adviserTeacherA').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherA")%>');}"
 	      						url="<%=path %>/pubData/qryTeacherList.do">
@@ -197,8 +207,10 @@
 							<span>业绩老师B：</span>
 						</td>
 						<td>
+						<select class="easyui-combobox" editable='false' id="adviserTeacherB_school" style="width: 100px; height: 28px;" data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+						</select>
 							<select name="adviserTeacherB" class="easyui-combobox" id="adviserTeacherB"
-								style="width: 150px; height: 28px;"
+								style="width: 100px; height: 28px;"
 								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
 								onLoadSuccess:function(data){$('#adviserTeacherB').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherB")%>');}"
 	      						url="<%=path %>/pubData/qryTeacherList.do">
@@ -235,9 +247,9 @@
 	      	        <td width="39%">
 	      	      	<table  border="0">
 	   	                <tr>
-			      	         <td id='td0' ><select  class="easyui-combobox" id="giftType" style="width: 120px; height: 28px;"></select></td>
-			      	         <td id="td1" style="display:none"><select  class="easyui-combobox" id="giftId" style="width: 120px; height: 28px;"></select></td>
-			      	         <td id="td2" style="display:none"><input   id="giftCode" type="text" class="easyui-textbox validatebox"  style="width:150px; height: 28px;"/></td>
+			      	         <td id='td0' ><select  class="easyui-combobox" editable='false' id="giftType" style="width: 120px; height: 28px;"></select></td>
+			      	         <td id="td1" style="display:none"><select editable='false'  class="easyui-combobox" id="giftId" style="width: 120px; height: 28px;"></select></td>
+			      	         <td id="td2" style="display:none"><input   id="giftCode" type="text" class="easyui-textbox validatebox"  style="width:100px; height: 28px;"/></td>
 		                     <td id="td3" style="display:none"><input   id="giftEffDate" type="text" class="easyui-datebox"  style="width: 100px; height: 28px;"/></td>
 	      	             </tr>
       	            </table>
@@ -279,8 +291,8 @@
 							</td>
 							<td width="22%" align="right">
 								<div align="left">
-									<select class="easyui-combobox" id="giftCourseType"
-										style="width: 150px; height: 28px;"
+									<select class="easyui-combobox" id="giftCourseType" editable='false'
+										style="width: 100px; height: 28px;"
 										data-options="formatter:formatTypeName,  valueField: 'giftType', textField: 'typeName', panelHeight: 'auto'"
 										url="/sys/pubData/qryData.do?param={queryCode:'Qry_Gift_Type',parentType:'COURSE'}"></select>
 								</div>
@@ -289,7 +301,7 @@
 								<span>赠课名称：</span>
 							</td>
 							<td width="11%">
-								<select class="easyui-combobox" id="giftCourseId"
+								<select class="easyui-combobox" id="giftCourseId" editable='false'
 									style="width: 120px; height: 28px;" >
 								</select>
 							</td>
@@ -397,9 +409,9 @@
 							</td>
 							<td align="center" width="170px">
 								<select id="praiseSourceY" name="praiseSourceY"
-									class="easyui-combobox"
+									class="easyui-combobox" editable='false'
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName'"
-									style="width: 150px; height: 28px;"
+									style="width: 100px; height: 28px;"
 									url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_WOM_T&codeType=WOM_CHANNEL_Y">
 								</select>
 							</td>
@@ -408,11 +420,11 @@
 									<tr id="A" style="display: none;">
 										<td align="left" colspan="8">
 											<span>活动名称：</span>
-											<select class="easyui-combobox" id="activeSchool" style="width: 150px; height: 28px;"
+											<select class="easyui-combobox" editable='false' id="activeSchool" style="width: 100px; height: 28px;"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 												  >
 											</select>
-											<select class="easyui-combobox" id="activeId" style="width: 150px; height: 28px;"
+											<select class="easyui-combobox" editable='false' id="activeId" style="width: 100px; height: 28px;"
 												data-options="valueField: 'actionId', textField: 'title', panelHeight: 'auto'">
 											</select>
 										</td>
@@ -420,46 +432,46 @@
 									<tr id="C" style="display: none;">
 										<td align="left" colspan="8">
 											<span>口碑顾问A：</span>
-											<select class="easyui-combobox" id="c_schoolA"  
+											<select class="easyui-combobox" editable='false' id="c_schoolA"  
 											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 											  
-												style="width: 150px; height: 28px;">
+												style="width: 100px; height: 28px;">
 											</select>
-											<select class="easyui-combobox" id="c_adviserA"
-												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+											<select class="easyui-combobox" editable='false' id="c_adviserA"
+												data-options=" valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
 												style="width: 120px; height: 28px;">
 											</select>
 											<span>口碑顾问B：</span>
-											<select class="easyui-combobox" id="c_schoolB"
+											<select class="easyui-combobox" editable='false' id="c_schoolB"
 											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 											  
-												style="width: 150px; height: 28px;">
+												style="width: 100px; height: 28px;">
 											</select>
-											<select class="easyui-combobox" id="c_adviserB"
-												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+											<select class="easyui-combobox" editable='false' id="c_adviserB"
+												data-options="valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
 												style="width: 120px; height: 28px;">
 											</select>
 										</td>
 									</tr>
 									<tr id="T" style="display: none;">
 										<td colspan="8">
-											<span>口碑顾问A：</span>
-											<select class="easyui-combobox" id="c_schoolsA"
+											<span>口碑老师A：</span>
+											<select class="easyui-combobox" editable='false' id="c_schoolsA"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 												  
 												style="width: 120px; height: 28px;">
 											</select>
-											<select class="easyui-combobox" id="c_teacherA"
+											<select class="easyui-combobox" editable='false' id="c_teacherA"
 												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 												style="width: 120px; height: 28px;">
 											</select>
-											<span>口碑顾问B：</span>
-											<select class="easyui-combobox" id="c_schoolsB"
+											<span>口碑老师B：</span>
+											<select class="easyui-combobox" editable='false' id="c_schoolsB"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 												  
 												style="width: 120px; height: 28px;">
 											</select>
-											<select class="easyui-combobox" id="c_teacherB"
+											<select class="easyui-combobox" editable='false' id="c_teacherB"
 												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 												style="width: 120px; height: 28px;">
 						
@@ -514,9 +526,9 @@
 							</td>
 							<td align="left" width="170px">
 								<select id="praiseSourceN" name="praiseSourceN"
-									class="easyui-combobox"
+									class="easyui-combobox" editable='false'
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName'"
-									style="width: 150px; height: 28px;"
+									style="width: 100px; height: 28px;"
 									url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_WOM_T&codeType=WOM_CHANNEL_N">
 								</select>
 							</td>
@@ -529,7 +541,7 @@
 										</td>
 										<td align="center" style="border-right: 1px solid #ccc;">
 											<input type="text" class="easyui-textbox"
-												style="width: 150px;height: 28px">
+												style="width: 100px;height: 28px">
 										</td>
 										<td align="right" width="100px"
 											style="border-right: 1px solid #ccc;">
@@ -537,14 +549,14 @@
 										</td>
 										<td align="center">
 											<select id="identityType" name="identityType"
-												class="easyui-combobox"
+												class="easyui-combobox" editable='false'
 												data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName',
 												onLoadSuccess:function(data){$('#identityType').combobox('setValue',data[0].codeFlag)}"
-												style="width: 150px; height: 28px;"
+												style="width: 100px; height: 28px;"
 												url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_T&codeType=IDENTITY_TYPE">
 											</select>
 											<input type="text" class="easyui-textbox"
-												style="width: 150px;height: 28px">
+												style="width: 100px;height: 28px">
 										</td>
 									</tr>
 									<tr style="display: none;">
@@ -555,7 +567,7 @@
 										<td align="center"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
 											<input type="text" class="easyui-textbox"
-												style="width: 150px;height: 28px">
+												style="width: 100px;height: 28px">
 										</td>
 										<td align="right"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
@@ -563,19 +575,19 @@
 										</td>
 										<td align="center"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
-											<select class="easyui-combobox" id="t_teacher_school"
+											<select class="easyui-combobox" editable='false' id="t_teacher_school"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 												 
-												style="width: 150px; height: 28px;">
+												style="width: 100px; height: 28px;">
 											</select>
-											<select class="easyui-combobox" id="t_teacher_id"
+											<select class="easyui-combobox" editable='false' id="t_teacher_id"
 												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
-												style="width: 150px; height: 28px;">
+												style="width: 100px; height: 28px;">
 											<select>
 										</td>
 										<td align="left" style="border-top: 1px solid #ccc;">
 											<a href="javascript:void(0)" id="searchStudent"
-												style="width: 150px" class="easyui-linkbutton"
+												style="width: 100px" class="easyui-linkbutton"
 												iconCls="icon-add" plain="true" onclick="searchStudent()"><span>学员检索</span>
 										</td>
 									</tr>
@@ -586,7 +598,7 @@
 										</td>
 										<td align="left">
 											<input type="text" id="womStaffName" class="easyui-textbox"
-												style="width: 150px;height: 28px;">
+												style="width: 100px;height: 28px;">
 										</td>
 									</tr>
 								</table>
@@ -646,10 +658,10 @@
 		</form>
 		<div style="width: 1200px; text-align: center">
 			<a href="javascript:void(0)" class="easyui-linkbutton"
-				iconCls="icon-ok" style="width: 150px" id="submitBtn"><span>提交</span>
+				iconCls="icon-ok" style="width: 100px" id="submitBtn"><span>提交</span>
 			</a> &nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="javascript:void(0)" class="easyui-linkbutton"
-				iconCls="icon-back" style="width: 150px" id="backBtn"><span>返回</span>
+				iconCls="icon-back" style="width: 100px" id="backBtn"><span>返回</span>
 			</a>
 			<iframe id="dlg" class="easyui-dialog"
 				style="width: 1000px; height: 450px; padding: 10px 20px"
@@ -696,11 +708,65 @@ $("#t_teacher_school").combobox({data:schools});
 $("#c_schoolsB").combobox({data:schools});
 $("#c_schoolsA").combobox({data:schools});
 
+
+$("#adviserA_school").combobox({data:schools});
+$("#adviserB_school").combobox({data:schools});
+
+$("#adviserTeacherA_school").combobox({data:schools});
+$("#adviserTeacherB_school").combobox({data:schools});
+
+	$("#adviserA_school").combobox({
+		onChange:function(){
+			var sId =$("#adviserA_school").combobox("getValue");
+			var url="<%=path %>/pubData/qryStaffList.do?post=16,17"+"&schoolId="+sId;
+			$("#adviserA").combobox({
+				valueField:'staffId', 
+				textField:'userName', 
+				url:url
+			});
+			 
+		}
+	})
+	
+	$("#adviserB_school").combobox({
+		onChange:function(){
+			var sId =$("#adviserB_school").combobox("getValue");
+			var url="<%=path %>/pubData/qryStaffList.do?post=16,17"+"&schoolId="+sId;
+			$("#adviserB").combobox({
+				valueField:'staffId', 
+				textField:'userName', 
+				url:url
+			});
+			 
+		}
+	})
+	
+	
+$("#adviserTeacherA_school").combobox({
+		onChange:function(){
+			var sId =$("#adviserTeacherA_school").combobox("getValue");
+			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+			$("#adviserTeacherA").combobox({
+				url:urls
+			});
+		}
+	})
+	
+	$("#adviserTeacherB_school").combobox({
+		onChange:function(){
+			var sId =$("#adviserTeacherB_school").combobox("getValue");
+			var urls ="<%=path%>/pubData/qryTeacherList.do?schoolId="+sId;
+			$("#adviserTeacherB").combobox({
+				url:urls
+			});
+		}
+	})
+
 function initOldCourse()
 {
 	var studentCourseId=$("#studentCourseId").val();
 	if(studentCourseId!='')
-	{
+	{ 
 		$("#payDate").attr("readOnly",true);
 		 
 		//$("#courseType").combobox({ disabled: true});
@@ -1036,6 +1102,7 @@ $("#submitBtn").click(function()
 	var studentCourseId=$("#studentCourseId").val();
 	var oldStageId = $("#oldStageId").val();
 	var oldFeeType = $("#oldFeeType").val();
+	 
 	if(oldStageId!=stageId || oldFeeType!=feeType)//阶段、业绩类型未修改不做校验
 	{
 		for(var i=0;i<oldCourses.length;i++)
@@ -1083,7 +1150,7 @@ $("#submitBtn").click(function()
 				}
 			}
 		}
-	}
+	} 
 	addCourseInfo();
 });
 
@@ -1768,7 +1835,7 @@ $("#praiseSourceN").combobox({
 					type : "POST",
 					url: "/sys/course/addSingleCourse.do",
 					data: "param="+paramValue,
-					async: false,
+					async: true,
 					beforeSend: function()
 			    	{
 			    		showProgressLoader("正在修改课程,请稍等...",400);
@@ -1850,18 +1917,24 @@ $("#praiseSourceN").combobox({
 		onChange:function()
 		{
 			var sId =$("#c_schoolA").combobox("getValue");
-			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
-			$("#c_adviserA").combobox({url:urls});
+			var url="<%=path %>/pubData/qryStaffList.do?post=16,17"+"&schoolId="+sId;
+			$("#c_adviserA").combobox({
+				valueField:'staffId', 
+				textField:'userName', 
+				url:url
+			});
 		}
 	})
 	
 	$("#c_schoolB").combobox({
 		onChange:function(){
 			var sId =$("#c_schoolB").combobox("getValue");
-			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
-			$("#c_adviserB").combobox({
-				url:urls
-			});
+				var url="<%=path %>/pubData/qryStaffList.do?post=16,17"+"&schoolId="+sId;
+				$("#c_adviserB").combobox({
+					valueField:'staffId', 
+					textField:'userName', 
+					url:url
+				});
 		}
 	})
 	

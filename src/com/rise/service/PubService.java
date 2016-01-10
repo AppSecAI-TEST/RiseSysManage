@@ -11,10 +11,25 @@ import com.rise.pub.invoke.ServiceEngine;
 @Service
 public class PubService 
 {
-	public String pageCategory(String staffId , String funcNodeId , String fieldId , String resourceId) throws Exception
+	public String pageCategory(String staffId , Map paramMap) throws Exception
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2011\",securityCode:\"0000000000\",params:{staffId:\""+staffId+"\",funcNodeId:\""+funcNodeId+"\",fieldId:\""+fieldId+"\",resourceId:\""+resourceId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2011\",securityCode:\"0000000000\",params:{json:'"+convertParam(paramMap).toString()+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
+	}
+	
+	private JSONObject convertParam(Map<String,String[]> paramMap)
+	{
+		JSONObject json = new JSONObject();
+		for(Map.Entry<String, String[]> entry : paramMap.entrySet())
+		{
+			String key = entry.getKey();
+			String[] value = entry.getValue();
+			if(value.length > 0)
+			{
+				json.put(key, value[0]);
+			}
+		}
+		return json;
 	}
 	
 	public String pageComboxList(String funcNodeId , String fieldId) throws Exception

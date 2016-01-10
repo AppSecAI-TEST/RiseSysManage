@@ -251,12 +251,12 @@ $('#weekDg').datagrid({
     singleSelect: true,  
     columns:[[  
         {field:'weekName',title:'周',width:25,align:'center'},  
-        {field:'date',title:'时间段',width:25,align:'center'},  
+        {field:'dateRange',title:'时间段',width:25,align:'center'},  
         {field:'isPlan',title:'是否排课',width:25,align:'center'},  
         {field:'createDdate',title:'创建时间',width:25,align:'center', 
             formatter: function(Confirmation, row)
             {  
-              var btn = '<a class="editcls" onclick="planWeek(\''+row.weekSeq+'\',\''+row.month+'\',\''+row.createWeekId+'\')"  href="javascript:void(0)">排课</a>';  
+              var btn = '<a class="editcls" onclick="planWeek(\''+row.weekSeq+'\',\''+row.dateRange+'\',\''+row.month+'\',\''+row.createWeekId+'\')"  href="javascript:void(0)">排课</a>';  
                 return btn;  
             }  
         }  
@@ -269,8 +269,29 @@ $('#weekDg').datagrid({
 }
  
   
-function planWeek(weekSeq,month,createWeekId)
-{ 
-	window.location.href="/sys/time/planTime.jsp?month="+month+"&weekSeq="+weekSeq+"&createWeekId="+createWeekId;
+function planWeek(weekSeq,dateRange,month,createWeekId)
+{
+	$.ajax(
+	{
+		type : "POST",
+		url: "/sys/time/updateCreateWeek.do?",
+		data: "createWeekId="+createWeekId,
+		async: false,
+		dataType:"json",
+		beforeSend: function()
+    	{
+    		$.messager.progress({title : '系统消息', msg : '正在提交数据，请稍等……'});
+    	},
+    	success: function(data) 
+    	{
+    		$.messager.progress('close');
+        },
+        error:function()
+        {
+        	$.messager.progress('close'); 
+        }
+	});
+	window.location.href="/sys/time/planTime.jsp?month="+month+"&weekSeq="+weekSeq+"&createWeekId="+createWeekId+"&dateRange="+dateRange;
 }
+ 
 </script>

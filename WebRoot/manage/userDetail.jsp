@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	String path = request.getContextPath();
+	List postList = (List)request.getAttribute("postList");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -32,18 +33,22 @@
   			<input type="hidden" name="handlerId" value="${sessionScope.StaffT.staffId}" />
   			<c:choose>
   				<c:when test="${pageFlag == 'NEW'}">
-					<div data-options="region:'north',title:'新增用户',collapsible:false,maxHeight:500" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;">
+					<div data-options="region:'north',title:'新增用户',collapsible:false,maxHeight:600" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;">
   				</c:when>
   				<c:otherwise>
-  					<div data-options="region:'north',title:'修改用户',collapsible:false,maxHeight:500" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;">
+  					<div data-options="region:'north',title:'修改用户',collapsible:false,maxHeight:600" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;">
   				</c:otherwise>
   			</c:choose>
 				<table align="center" class="tab" style="height:100%;width:100%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 					<tr>
-						<td align="right" width="10%">*英文名(登录名):</td>
+						<td align="right" width="10%">*登录名:</td>
+						<td width="23%"><input name="sysName" id="sysName" type="text" style="width:246px" class="easyui-validatebox easyui-textbox" missingMessage="请填写登录名" required="true" /></td>
+						<td align="right" width="10%">*英文名:</td>
 						<td width="23%"><input name="userName" id="userName" type="text" style="width:246px" class="easyui-validatebox easyui-textbox" missingMessage="请填写英文名" required="true" /></td>
 						<td align="right" width="10%">*中文名:</td>
 						<td width="23%"><input name="staffName" id="staffName" type="text" style="width:246px" class="easyui-textbox easyui-validatebox" missingMessage="请填写中文名" required="true" /></td>
+					</tr>
+					<tr>
 						<td align="right" width="10%">*性别:</td>
 						<td width="23%">
 							<c:choose>
@@ -65,40 +70,38 @@
 								</c:otherwise>
 							</c:choose>
 						</td>
-					</tr>
-					<tr>
 						<td align="right">*证件号码:</td>
 						<td><select id="certType" name="certType" style="width:80px" ></select>　<input name="certNum" id="certNum" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" missingMessage="请填写证件号码" required="true" /></td>
 						<td align="right">*出生日期:</td>
 						<td><input name="birthday" id="birthday" type="text" style="width:246px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" missingMessage="请填写出生日期" required="true" /></td>
-						<td align="right">*手机:</td>
-						<td><input name="phone" id="phone" type="text" style="width:246px" class="easyui-textbox easyui-validatebox" missingMessage="请填写手机号码" required="true" /></td>
 					</tr>
 					<tr>
+						<td align="right">*手机:</td>
+						<td><input name="phone" id="phone" type="text" style="width:246px" class="easyui-textbox easyui-validatebox" missingMessage="请填写手机号码" required="true" /></td>
 						<td align="right">家庭地址:</td>
 						<td><input name="familyAddr" id="familyAddr" type="text" style="width:246px" class="easyui-textbox" /></td>
 						<td align="right">家庭电话:</td>
 						<td><input name="familyPhone" id="familyPhone" type="text" style="width:246px" class="easyui-textbox" /></td>
-						<td align="right">QQ号:</td>
-						<td><input name="qq" id="qq" type="text" style="width:246px" class="easyui-textbox" /></td>
 					</tr>
 					<tr>
+						<td align="right">QQ号:</td>
+						<td><input name="qq" id="qq" type="text" style="width:246px" class="easyui-textbox" /></td>
 						<td align="right">毕业学校:</td>
 						<td><input name="graduateSchool" id="graduateSchool" type="text" style="width:246px" class="easyui-textbox" /></td>
 						<td align="right">学历:</td>
 						<td><input name="educationDegree" id="educationDegree" type="text" style="width:246px" class="easyui-textbox" /></td>
-						<td align="right">专业:</td>
-						<td><input name="profession" id="profession" type="text" style="width:246px" class="easyui-textbox" /></td>
 					</tr>
 					<tr>
+						<td align="right">专业:</td>
+						<td><input name="profession" id="profession" type="text" style="width:246px" class="easyui-textbox" /></td>
 						<td align="right">*入职时间:</td>
 						<td><input name="joinDate" id="joinDate" type="text" style="width:246px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" missingMessage="请填写入职时间" required="true" /></td>
 						<td align="right">聘用时间:</td>
 						<td><input name="hireDate" id="hireDate" type="text" style="width:246px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" required="true" /></td>
-						<td align="right">合同到期时间:</td>
-						<td><input name="agreementDate" id="agreementDate" type="text" style="width:246px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" required="true" /></td>
 					</tr>
 					<tr>
+						<td align="right">合同到期时间:</td>
+						<td><input name="agreementDate" id="agreementDate" type="text" style="width:246px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" required="true" /></td>
 						<td align="right">*部门:</td>
 						<td><select id="deptId" name="deptId" style="width:244px" ></select></td>
 						<td align="right">国籍:</td>
@@ -122,8 +125,14 @@
 								</c:otherwise>
 							</c:choose>
 						</td>
+					</tr>
+					<tr>
 						<td align="right">*性质:</td>
 						<td><select id="jobProperty" name="jobProperty" style="width:244px" ></select></td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
 					</tr>
 					<tr>
 						<td align="right">*登录密码:</td>
@@ -137,11 +146,10 @@
 						<td align="right">担任:</td>
 						<td colspan="5" style="padding:0 0;">
 							<c:forEach items="${postList}" var="node" varStatus="i">
-								<input name="post" id="post${i.count}" type="checkbox" value="${node.postId}" style="margin:0 auto;vertical-align:middle;" />
-								<label for="post${i.count}" style="margin:0 0;vertical-align:middle;">${node.postName}</label>
-								<c:if test="${i.count%10 == 0}">
-									<br />
-								</c:if>
+								<p style="float:left;width:150px;height:20px;margin:0 auto;padding:0 5px">
+									<input name="post" id="post${i.count}" type="checkbox" value="${node.postId}" postType="${node.postType}" style="margin:0 auto;vertical-align:middle;" onclick="postClickFunc(this)" />
+									<label for="post${i.count}" style="margin:0 0;vertical-align:middle;">${node.postName}</label>
+								</p>
 							</c:forEach>
 						</td>
 					</tr>
@@ -171,6 +179,7 @@
 			</div>
 		</form>
 		<script type="text/javascript">
+			var postTeaTypeObj = null;
 			<c:choose>
 				<c:when test="${pageFlag == 'NEW'}">
 					var url = "/sys/staff/addStaff.do";
@@ -213,11 +222,12 @@
 				}
 			});
 			$(document).ready(function(){
-				$("#userName").textbox("setValue",'${staffT.userName}');
+				$("#sysName").textbox("setValue",'${staffT.sysName}');
 				if(!pageFlag)
 				{
-					$("#userName").textbox("readonly", true);
+					$("#sysName").textbox("readonly", true);
 				}
+				$("#userName").textbox("setValue",'${staffT.userName}');
 				$("#staffName").textbox("setValue",'${staffT.staffName}');
 				$("#certNum").textbox("setValue",'${staffT.certNum}');
 				$("#birthday").datebox("setValue",'<fmt:formatDate value="${staffT.birthday}" pattern="yyyy-MM-dd" />');
@@ -234,12 +244,11 @@
 				$("#educationExperience").textbox("setValue",'${staffT.educationExperience}');
 				$("#workExperience").textbox("setValue",'${staffT.workExperience}');
 				$("#remark").textbox("setValue",'${staffT.remark}');
-				var postArr = "${staffT.post}";
-				$("input[name='post']").each(function(i,node){
-					if(postArr.indexOf(node.value) != -1){
-						node.checked = true;
-					}
-				});
+				var postArr = [${staffT.post}];
+				for(var i = 0,n = postArr.length;i < n;i++)
+				{
+					$("#post"+postArr[i]).get(0).checked = true;
+				}
 				ajaxLoading("加载中...");
 				$.ajax({
 					url:"/sys/orgDept/getRootOrgDept.do",
@@ -259,6 +268,20 @@
 				$("input[name='post']").each(function(i,node){
 					node.checked = obj.checked;
 				});
+			}
+			function postClickFunc(obj)
+			{
+				if($(obj).attr("postType") == "T")
+				{
+					if(postTeaTypeObj != obj)
+					{
+						if(postTeaTypeObj != null)
+						{
+							postTeaTypeObj.checked = false;
+						}
+						postTeaTypeObj = obj;
+					}
+				}
 			}
 			function staffSubmit(){
 				$('#fm').form('submit',{
