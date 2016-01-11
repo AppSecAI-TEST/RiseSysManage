@@ -23,7 +23,7 @@
   				</tr>
   			</table>
   		</div>
-  		<div style="width:1100px;text-align:center;margin-top:50px;">
+  		<div style="width:1100px;text-align:center;margin-top:25px;">
   			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px" id="backBtn" >返回</a>	
   		</div>
   	</body>

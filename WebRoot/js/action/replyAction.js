@@ -237,7 +237,7 @@ function initUpdatePage()
 				}	
 				tab.find("tr:eq(1)").find("td:eq(1)").html("<span>"+actionTime+"</span>");
 				tab.find("tr:eq(2)").find("td:eq(1)").html("<span>"+action.title+"</span>");
-				$("#realHours").numberbox("setValue",action.planHours);
+				$("#realHours").numberbox("setValue",action.realHours);
 				$("#replyRemark").val(action.replyRemark);
 			}
 			if(data.teacherInfo!=null&&data.teacherInfo.length>0)

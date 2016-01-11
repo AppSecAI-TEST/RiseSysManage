@@ -35,23 +35,23 @@
 		  				<tr>
 		  					<td width="90px;" align="right">校区：</td>
 		  					<td width="120px;">
-		  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px;height:25px;"
+		  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px;height:25px;" editable="false"
 									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 						      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
 				        		</select>
 		  					</td>
 		  					<td width="90px;" align="right">课程阶段：</td>
 		  					<td width="140px;">
-		  						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 120px;height:25px;"
+		  						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 120px;height:25px;" editable="false"
 									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryStage.do">
 				        		</select>
 		  					</td>
 		  					<td width="110px;" align="right">计划审批时间：</td>
 		  					<td width="250x;">
-		  						<input class="easyui-datebox" name="startPlanTime" id="startPlanTime"  style="width:100px;height:25px;" />
+		  						<input class="easyui-datebox" name="startPlanTime" id="startPlanTime"  style="width:100px;height:25px;" editable="false"/>
 		  						至
-		  						<input class="easyui-datebox" name="endPlanTime" id="endPlanTime"  style="width:100px;height:25px;" />
+		  						<input class="easyui-datebox" name="endPlanTime" id="endPlanTime"  style="width:100px;height:25px;" editable="false"/>
 		  					</td>
 		  				</tr>
 		  				<tr>
@@ -63,16 +63,16 @@
 		  					</td>
 		  					<td align="right">合并状态：</td>
 		  					<td>
-		  						<select class="easyui-combobox" name="merState" id="merState" style="width:120px;height:25px;"
+		  						<select class="easyui-combobox" name="merState" id="merState" style="width:120px;height:25px;" editable="false"
 		  							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName'"
 		  							url="<%=path %>/pubData/qryCodeNameList.do?tableName=COMBO_CLASS_T&codeType=COMBO_STATE">
 		  						</select>
 		  					</td>
 		  					<td align="right">合并开始时间：</td>
 		  					<td>
-		  						<input class="easyui-datebox" name="startMergeTime" id="startMergeTime" style="width:100px;" />
+		  						<input class="easyui-datebox" name="startMergeTime" id="startMergeTime" style="width:100px;" editable="false"/>
 		  						至
-		  						<input class="easyui-datebox" name="endMergeTime" id="endMergeTime" style="width:100px;" />
+		  						<input class="easyui-datebox" name="endMergeTime" id="endMergeTime" style="width:100px;" editable="false"/>
 		  					</td>
 		  					<td align="left">	
 		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:80px" id="qryBtn" funcNodeId="3111">查询</a>
@@ -121,29 +121,29 @@
 		   			<a href="javascript:void(0)" id="viewMerge" class="easyui-linkbutton" style="width: 100px;" iconCls="icon-redo">浏览</a>
 		 		</div>
 		 	</div>	
-		 	<div title="审批管理" style="padding:5px;">
+		 	<div id="2" title="审批管理" style="padding:5px;">
 		 		<form id="appFm">
 					<table class="search_tab">
 		  				<tr>
 		  					<td width="90px;" align="right">校区：</td>
 		  					<td width="120px;">
-		  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px;height:25px;"
+		  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px;height:25px;" editable="false"
 									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 						      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
 				        		</select>
 		  					</td>
 		  					<td width="90px;" align="right">课程阶段：</td>
 		  					<td width="140px;">
-		  						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 120px;height:25px;"
+		  						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 120px;height:25px;" editable="false"
 									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryStage.do">
 				        		</select>
 		  					</td>
 		  					<td width="110px;" align="right">计划审批时间：</td>
 		  					<td width="250x;">
-		  						<input class="easyui-datebox" name="startPlanTime" id="startPlanTime"  style="width:100px;height:25px;" />
+		  						<input class="easyui-datebox" name="startPlanTime" id="startPlanTime"  style="width:100px;height:25px;" editable="false"/>
 		  						至
-		  						<input class="easyui-datebox" name="endPlanTime" id="endPlanTime"  style="width:100px;height:25px;" />
+		  						<input class="easyui-datebox" name="endPlanTime" id="endPlanTime"  style="width:100px;height:25px;" editable="false"/>
 		  					</td>
 		  				</tr>
 		  				<tr>
@@ -155,16 +155,16 @@
 		  					</td>
 		  					<td align="right">合并状态：</td>
 		  					<td>
-		  						<select class="easyui-combobox" name="merState" id="merState" style="width:120px;height:25px;"
+		  						<select class="easyui-combobox" name="merState" id="merState" style="width:120px;height:25px;" editable="false"
 		  							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName'"
 		  							url="<%=path %>/pubData/qryCodeNameList.do?tableName=COMBO_CLASS_T&codeType=COMBO_STATE">
 		  						</select>
 		  					</td>
 		  					<td align="right">合并开始时间：</td>
 		  					<td>
-		  						<input class="easyui-datebox" name="startMergeTime" id="startMergeTime" style="width:100px;" />
+		  						<input class="easyui-datebox" name="startMergeTime" id="startMergeTime" style="width:100px;" editable="false"/>
 		  						至
-		  						<input class="easyui-datebox" name="endMergeTime" id="endMergeTime" style="width:100px;" />
+		  						<input class="easyui-datebox" name="endMergeTime" id="endMergeTime" style="width:100px;" editable="false"/>
 		  					</td>
 		  					<td align="left" width="450px;">	
 		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:80px" id="qryBtn" funcNodeId="3111">查询</a>
@@ -208,13 +208,13 @@
 		   			<a href="javascript:void(0)" id="viewApprove" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">浏览</a>
 		 		</div>
 		 	</div>
-		 	<div title="测试1" style="padding:5px;">
+		 	<div id="3" title="测试1" style="padding:5px;">
 		 	测试1
 		 	</div>
-		 	<div title="测试2" style="padding:5px;">
+		 	<div id="4" title="测试2" style="padding:5px;">
 		 	测试2
 		 	</div>
-		 	<div title="测试3" style="padding:5px;">
+		 	<div id="5" title="测试3" style="padding:5px;">
 		 	测试3
 		 	</div>
  		</div>	

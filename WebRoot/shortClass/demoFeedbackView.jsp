@@ -31,6 +31,7 @@
 	 			</tr>		
  			</table>
  		</div>
+ 		<div style="height:5px;"></div>
  		<div id="stuDiv" class="easyui-panel" title="学生反馈信息" style="width:1100px;">
  			<table id="stuTab" width="100%;" class="maintable">
 				<tr>
@@ -43,7 +44,7 @@
 				</tr>
  			</table>
  		</div>
- 		<div style="width:1100px;text-align:center;margin-top:30px;">
+ 		<div style="width:1100px;text-align:center;margin-top:25px;">
   			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" onclick="window.history.back();" >返回</a>	
   		</div>	
   	</body>

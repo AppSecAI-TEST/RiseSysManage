@@ -1,21 +1,47 @@
 $(document).ready(function(){
-	initDate();
 	$("#state").combobox({
-		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=SINGLE_COURSE_TYPE",
+		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE",
 		onChange:function(){
 			var urls ="";
 			var stateValue=$("#state").combobox("getValue");
 			if(stateValue=="001")
 			{
-				urls ="/sys/pubData/getClassType.do?";
+				urls ="/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=CLASS_TYPE";
 				$("#classType").combobox({
 				url:urls,
-				valueField : "classType",
-				textField : "classType",
 				panelHeight : "auto"
 				});
 			}
+			else
+			{
+				$("#classType").combobox({
+				url:"/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=11111",
+				panelHeight : "auto"
+				});
+			}	
 			
+		}
+	});
+	$("#states").combobox({
+		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE",
+		onChange:function(){
+			var urls ="";
+			var stateValue=$("#states").combobox("getValue");
+			if(stateValue=="001")
+			{
+				urls ="/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=CLASS_TYPE";
+				$("#classTypes").combobox({
+				url:urls,
+				panelHeight : "auto"
+				});
+			}
+			else
+			{
+				$("#classTypes").combobox({
+				url:"/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=11111",
+				panelHeight : "auto"
+				});
+			}	
 		}
 	});
 	$("#schoolId").combobox( {
@@ -29,28 +55,27 @@ $(document).ready(function(){
 			$("#adviserTeacher").combobox( {
 				url : urls
 			});
+		},
+		onLoadSuccess:function(data){
+			$("#schoolId").combobox("select",data[0].schoolId);
 		}
 	});
-	$("#qryBtn").click(function() {
-    	var obj = JSON.stringify($("#qryFm").serializeObject());
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-    	$('#list_data').datagrid({
-    		url : "/sys/pubData/qryDataListByPage.do",
-    		queryParams:{
-    			param : obj
-    		},
-    		onLoadSuccess:function(){
-    			$('#list_data').datagrid('clearSelections');
-    		}
-    	});
-    });
-	 
-    $("#resetBtn").click(function() {
-    	$('#qryFm').form('clear');//清空窗体数据  
-    	initDate();
-    });
+	$("#schoolIds").combobox( {
+		url : "/sys/pubData/qrySchoolList.do?schoolId=",
+		onChange : function() {
+			var sId = $("#schoolIds").combobox("getValue");
+			var urls = "/sys/pubData/qryTeacherList.do?schoolId=" + sId;
+			$("#advisers").combobox( {
+				url : urls
+			});
+			$("#adviserTeachers").combobox( {
+				url : urls
+			});
+		},
+		onLoadSuccess:function(data){
+			$("#schoolIds").combobox("select",data[0].schoolId);
+		}
+	});
     
     $("#changeFee").click(function() {
     	changeFee();
@@ -58,15 +83,8 @@ $(document).ready(function(){
     $("#viewFee").click(function(){
     	viewFeeInfo();
     });
-    $("#qryChange").click(function(){
-    	window.location.href ="qryChangeFee.jsp";
-    });
-    if($("#backBtn").length>0)
-    {
-    	$("#backBtn").click(function(){
-    		window.history.back();
-    	});
-    }	
+    initQryButton("qryBtn","resetBtn","qryFm","list_data");
+	initQryButton("qryBtn1","resetBtn1","qryFm1","list_data1");
 });
 	
 function initDate()

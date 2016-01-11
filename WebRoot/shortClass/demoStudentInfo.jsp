@@ -35,13 +35,13 @@
 				</tr>
  			</table>	
  		</div>
- 		<div style="width:1100px;text-align:center;margin-top:30px;">
+ 		<div style="width:1100px;text-align:center;margin-top:25px;">
   			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" ><span>返回</span></a>	
   		</div>
   		<div id="dlg" class="easyui-dialog" style="width: 580px; height: 350px; padding: 10px 20px" closed="true" data-options="modal:true" buttons="#dlgBtn">
   			<table  class="tab" style="width:500px;margin:20px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0"">
   				<tr>
-  					<td align="right">姓名:</td><td align="center" colspan="2"><input type="text" id="studentName" class="easyui-textbox" style="width:120px;"></td>
+  					<td align="right">姓名:</td><td align="center" colspan="2"><input type="text" id="studentName" class="easyui-textbox" style="width:120px;height:25px;"></td>
   					<td align="right"></td><td align="center"></td>
   				</tr>
   				<tr>
@@ -53,7 +53,7 @@
   						<input type="radio" name="001" value="N" title="双击取消选择"><lable>定金</lable>
   					</td>
   					<td align="right">缴费日期:</td>
-  					<td align="center"><input style="width:120px;" id="001" type="text" class="easyui-datebox"></td>
+  					<td align="center"><input style="width:120px;height:25px" id="001" type="text" class="easyui-datebox"></td>
   				</tr>
   				<tr>
   					<td align="right">是否定金转全费:</td>
@@ -64,7 +64,7 @@
   						<input type="radio" name="002" value="Y" title="双击取消选择"><lable>是</lable>
   					</td>
   					<td align="right">定金转全费日期:</td>
-  					<td align="center"><input style="width:120px;" id="002" type="text" class="easyui-datebox"></td>
+  					<td align="center"><input style="width:120px;height:25px" id="002" type="text" class="easyui-datebox"></td>
   				</tr>
   				<tr>
   					<td align="right">是否补缴全费:</td>
@@ -75,7 +75,7 @@
   						<input type="radio" name="003" value="Y" title="双击取消选择"><lable>是</lable>
   					</td>
   					<td align="right">补缴全费日期:</td>
-  					<td align="center"><input style="width:120px;" id="003" type="text" class="easyui-datebox"></td>
+  					<td align="center"><input style="width:120px;height:25px" id="003" type="text" class="easyui-datebox"></td>
   				</tr>
   			</table>
   		</div>

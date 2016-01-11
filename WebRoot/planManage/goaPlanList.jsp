@@ -17,7 +17,7 @@
  		<form id="qryFm">
   			<table class="search_tab">
   				<tr>
-  					<td width="80px" align="right"><span>校区：</span></td>
+  					<td width="80px" align="right"><span>所属校区：</span></td>
   					<td width="110px">
   						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height: 25px;"
   							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
@@ -59,26 +59,26 @@
   			<form id="fm">
   				<table style="width: 100%;" cellSpacing='0' cellPadding='16'>
   					<tr>
-  						<td style="text-align: right;">校区：</td>
+  						<td style="text-align: right;"><span>校区：</span></td>
   						<td>
-	  						<select class="easyui-combobox" name="schoolIds" id="schoolIds" style="width:205px;"
+	  						<select class="easyui-combobox" name="schoolIds" id="schoolIds" style="width:205px;height: 25px;"
 	  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 	  							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
   							</select>
   						</td>
   					</tr>
   					<tr>
-  						<td style="text-align: right;">年度：</td>
+  						<td style="text-align: right;"><span>年度：</span></td>
   						<td>
-	  						<select class="easyui-combobox" name="planYear" id="planYear" style="width:205px;"
+	  						<select class="easyui-combobox" name="planYear" id="planYear" style="width:205px;height: 25px;"
 	  							data-options="valueField:'val',textField:'text', panelHeight: 'auto',editable:false">
 	  						</select>
   						</td>
   					</tr>
   					<tr>
-  						<td style="text-align: right;">升学目标：</td>
+  						<td style="text-align: right;"><span>升学目标：</span></td>
   						<td>
-	  						<input type="text" class="easyui-numberbox" id="firstValue" name="firstValue" style="width:196px;" data-options="min:1,precision:0,max:100">(%)
+	  						<input type="text" class="easyui-numberbox" id="firstValue" name="firstValue" style="width:196px;height: 25px;" data-options="min:1,precision:0,max:100">(%)
   						</td>
   					</tr>
   				</table>

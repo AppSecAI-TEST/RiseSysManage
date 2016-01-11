@@ -26,8 +26,8 @@
  				<tr>
 	 				<td width="150px" align="right"><span>上课时间：</span></td>
 	 				<td align="left" colspan="5">
-	 					&nbsp;&nbsp;<input class="easyui-datebox" name="openDate" id="openDate"  style="width:150px;height: 28px;"/>&nbsp;&nbsp;
-	 					<select class="easyui-combobox" name="hourRange" id="hourRange" style="width:180px;height: 28px;"
+	 					&nbsp;&nbsp;<input class="easyui-datebox" name="openDate" id="openDate"  style="width:150px;height: 25px;" editable="false"/>&nbsp;&nbsp;
+	 					<select class="easyui-combobox" name="hourRange" id="hourRange" style="width:180px;height: 25px;" editable="false"
   							 data-options="valueField: 'paramValue', textField: 'paramDesc', panelHeight: 'auto'"
 	      					 url="<%=path %>/pubData/qryParaConfigList.do?paramType=HOUR_RANGE">
   						</select>
@@ -52,23 +52,23 @@
 	 			<tr>
 	 				<td align="right"></td>
 	 				<td align="center">
-	 					<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;height: 28px;"
+	 					<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;height: 25px;" editable="false"
   							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
   						</select>
 	 				</td>
 	 				<td align="center">
-	 					<select class="easyui-combobox" name="teacherId" id="teacherId" style="width:150px;height: 28px;"
+	 					<select class="easyui-combobox" name="teacherId" id="teacherId" style="width:150px;height: 25px;" editable="false"
   							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
   						</select>
 	 				</td>
 	 				<td align="center">
-	 					<select class="easyui-combobox" name="teacherType" id="teacherType" style="width:100px;height: 28px;"
+	 					<select class="easyui-combobox" name="teacherType" id="teacherType" style="width:100px;height: 25px;" editable="false"
   							 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
 	      				 		url="<%=path %>/pubData/qryCodeNameList.do?tableName=ACTION_T&codeType=TEACHER_TYPE">
   						</select>
 	 				</td>
 	 				<td align="center">
-	 					<input type="text" class="easyui-numberbox" id="lessionHours" name="lessionHours" data-options="min:1,precision:0"  style="width:150px;height: 28px;">
+	 					<input type="text" class="easyui-numberbox" id="lessionHours" name="lessionHours" data-options="min:1,precision:0"  style="width:150px;height: 25px;">
 	 				</td>
 	 				<td align="center">
 	 					<a href="javascript:void(0)" id="addBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:150px;" onclick="addTeacher()"><span>添加</span></a>

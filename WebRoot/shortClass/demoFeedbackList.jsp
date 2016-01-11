@@ -16,38 +16,38 @@
  		<form id="qryFm">
   			<table class="search_tab">
   				<tr>
-  					<td align="right" width="90px"><span>校区：</span></td>
+  					<td align="right" width="80px"><span>校区：</span></td>
   					<td width="110px">
-  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height: 25px;"
+  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height: 25px;" editable="false"
   							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
   							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
   						</select>
   					</td>
-  					<td width="120px" align="right"><span>班级状态：</span></td>
-  					<td width="110px">
-  						<select class="easyui-combobox" name="classState" id="classState" style="width:100px;height:25px;"
+  					<td width="80px" align="right"><span>班级状态：</span></td>
+  					<td width="140px">
+  						<select class="easyui-combobox" name="classState" id="classState" style="width:130px;height:25px;" editable="false"
   							  data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
 	      				 		url="<%=path %>/pubData/qryCodeNameList.do?tableName=DEMO&codeType=CLASS_STATE">
   						</select>
   					</td>
-  					<td width="110px" align="right"><span>上课日期：</span></td>
+  					<td width="100px" align="right"><span>上课日期：</span></td>
   					<td width="250px">
-  						<input class="easyui-datebox" name="startTime" id="startTime"  style="width:100px;height: 25px;" />
+  						<input class="easyui-datebox" name="startTime" id="startTime"  style="width:100px;height: 25px;" editable="false"/>
   						至
-  						<input class="easyui-datebox" name="endTime" id="endTime"  style="width:100px;height: 25px;" />
+  						<input class="easyui-datebox" name="endTime" id="endTime"  style="width:100px;height: 25px;" editable="false"/>
   					</td>
   				</tr>
   				<tr>
   					<td align="right"><span>DemoT：</span></td>
   					<td>
-  						<select class="easyui-combobox" name="DemoT" id="DemoT" style="width:100px;height:25px;"
+  						<select class="easyui-combobox" name="DemoT" id="DemoT" style="width:100px;height:25px;" editable="false"
   							data-options="formatter:formatTeacher, valueField: 'teacherId',textField: 'byname', panelHeight: 'auto'"
   							url ="<%=path %>/pubData/qryData.do?param={'queryCode':'qryDemoTeacherInfo','teacherType':'T'}">
   						</select>
   					</td>
   					<td align="right"><span>DemoTa：</span></td>
   					<td>
-  						<select class="easyui-combobox" name="DemoTA" id="DemoTA" style="width:100px;height:25px;"
+  						<select class="easyui-combobox" name="DemoTA" id="DemoTA" style="width:130px;height:25px;" editable="false"
   							data-options="formatter:formatTeacher, valueField: 'teacherId',textField: 'byname', panelHeight: 'auto'"
   							url ="<%=path %>/pubData/qryData.do?param={'queryCode':'qryDemoTeacherInfo','teacherType':'TA'}">
   						</select>

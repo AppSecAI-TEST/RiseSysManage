@@ -17,7 +17,7 @@
   				<tr>
   					<td width="15%" align="right"><span>校区：</span></td>
   					<td align="left" colspan="2">
-  						<select class="easyui-combobox" name="actionSchoolId" id="actionSchoolId" style="width:150px;height: 28px;"
+  						<select class="easyui-combobox" name="actionSchoolId" id="actionSchoolId" style="width:150px;height: 25px;" editable="false"
   							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
   							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
   						</select>
@@ -26,9 +26,9 @@
   				<tr>
   					<td width="15%" align="right"><span>活动日期：</span></td>
   					<td align="left" colspan="2">
-  						<input class="easyui-datebox" name="actionDate" id="actionDate"  style="width:150px;height: 28px;"/>&nbsp;&nbsp;
-  						<input class="easyui-timespinner" id="timeStart" name="timeStart" style="width:80px;height: 28px;" data-options="showSeconds:false">&nbsp;&nbsp;
-  						<input class="easyui-timespinner" id="timeEnd" name="timeEnd" style="width:80px;height: 28px;" data-options="showSeconds:false">
+  						<input class="easyui-datebox" name="actionDate" id="actionDate"  style="width:100px;height: 25px;" editable="false"/>&nbsp;&nbsp;
+  						<input class="easyui-timespinner" id="timeStart" name="timeStart" style="width:70px;height: 25px;"  data-options="showSeconds:false">&nbsp;&nbsp;
+  						<input class="easyui-timespinner" id="timeEnd" name="timeEnd" style="width:70px;height: 25px;"  data-options="showSeconds:false">
   					</td>
   				</tr>
   				<tr>
@@ -40,27 +40,27 @@
   				<tr>
   					<td align="right"><span>课时：</span></td>
   					<td align="left" colspan="2">
-  						<input type="text" class="easyui-numberbox" id="planHours" name="planHours" data-options="min:1,max:24,precision:0"  style="width:100px;height: 28px;">
+  						<input type="text" class="easyui-numberbox" id="planHours" name="planHours" data-options="min:1,max:24,precision:0"  style="width:100px;height: 25px;">
   					</td>
   				</tr>
   				<tr id="addInfo">
   					<td align="right"><span>老师：</span></td>
   					<td align="left">
-  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;height: 28px;"
+  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height: 25px;" editable="false"
   							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
   						</select>
   						&nbsp;&nbsp;
-  						<select class="easyui-combobox" name="teacherId" id="teacherId" style="width:150px;height: 28px;"
+  						<select class="easyui-combobox" name="teacherId" id="teacherId" style="width:100px;height: 25px;" editable="false"
   							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
   						</select>
   						&nbsp;&nbsp;
-  						<select class="easyui-combobox" name="teacherType" id="teacherType" style="width:100px;height: 28px;"
+  						<select class="easyui-combobox" name="teacherType" id="teacherType" style="width:100px;height: 25px;" editable="false"
   							 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
 	      				 url="<%=path %>/pubData/qryCodeNameList.do?tableName=ACTION_T&codeType=TEACHER_TYPE">
   						</select>
   					</td>
   					<td width="20%" align="center">
-  						<a href="javascript:void(0)" id="addBtn" class="easyui-linkbutton" iconCls="icon-add" plain="true"><span>添加</span></a>
+  						<a href="javascript:void(0)" id="addBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px"><span>添加</span></a>
   					</td>
   				</tr>
   				<tr>
@@ -71,7 +71,7 @@
   				</tr>
   			</table>
   		</div>
-  		<div style="width:1100px;text-align:center;margin-top:50px;">
+  		<div style="width:1100px;text-align:center;margin-top:25px;">
   			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:150px" id="submitBtn">提交</a>
   				&nbsp;&nbsp;&nbsp;&nbsp;
   			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" >返回</a>	

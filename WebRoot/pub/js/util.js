@@ -731,15 +731,24 @@ function initQryButton(qryName,resetName,formName,tableName)
     	});    
     });
 	 
-    $("#"+resetName+"").click(function() {
+    $("#"+resetName+"").click(function() 
+    {
     	$("#"+formName+"").form('clear');//清空窗体数据  
-    	if($("#schoolId").length > 0) {
-    		$("#schoolId").combobox("setValue", "");
-    		$("#schoolId").combobox("setText", "全部校区");
+    	//校区赋默认值
+    	var schoolNameArr =['schoolId','schoolIds','approveSchoolId','actionSchoolId'];
+    	for(var i=0;i<schoolNameArr.length;i++)
+    	{
+    		var schoolObj =$("#"+formName+"").find("#"+schoolNameArr[i]);
+    		if(schoolObj.length>0)
+    		{
+    			schoolObj.combobox("select",schoolObj.combobox("getData")[0].schoolId);
+    		}	
     	}
-    	if($("#approveSchoolId").length > 0) {
-    		$("#approveSchoolId").combobox("setValue", "");
-    		$("#approveSchoolId").combobox("setText", "全部校区");
+    	//阶段赋默认值
+    	var stageObj =$("#"+formName+"").find("#stageId");
+    	if(stageObj.length>0)
+    	{
+    		stageObj.combobox("select",stageObj.combobox("getData")[0].stageId);
     	}
     });
 }

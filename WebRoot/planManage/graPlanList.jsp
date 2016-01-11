@@ -17,7 +17,7 @@
  		<form id="qryFm">
   			<table class="search_tab">
   				<tr>
-  					<td width="80px" align="right"><span>校区：</span></td>
+  					<td width="80px" align="right"><span>所属校区：</span></td>
   					<td width="110px">
   						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height: 25px;"
   							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
@@ -76,27 +76,27 @@
   			<form id="fm">
   				<table style="width: 100%;" cellSpacing='0' cellPadding='16'>
   					<tr>
-  						<td style="text-align: right;">校区：</td>
+  						<td style="text-align: right;"><span>校区：</span></td>
   						<td>
-	  						<select class="easyui-combobox" name="schoolIds" id="schoolIds" style="width:205px;"
+	  						<select class="easyui-combobox" name="schoolIds" id="schoolIds" style="width:205px;height: 25px;"
 	  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 	  							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
   							</select>
   						</td>
   					</tr>
   					<tr>
-  						<td style="text-align: right;">月度：</td>
+  						<td style="text-align: right;"><span>月度：</span></td>
   						<td>
-	  						<select class="easyui-combobox" name="planYear" id="planYear" style="width:100px;"
+	  						<select class="easyui-combobox" name="planYear" id="planYear" style="width:100px;height: 25px;"
 	  							data-options="valueField:'val',textField:'text', panelHeight: 'auto',editable:false">
 	  						</select>
-	  						<select class="easyui-combobox" name="planMonth" id="planMonth" style="width:100px;"
+	  						<select class="easyui-combobox" name="planMonth" id="planMonth" style="width:100px;height: 25px;"
 	  							data-options="valueField:'val',textField:'text', panelHeight: 'auto',editable:false">
 	  						</select>
   						</td>
   					</tr>
   					<tr>
-  						<td style="text-align: right;">课程阶段：</td>
+  						<td style="text-align: right;"><span>课程阶段：</span></td>
   						<td>
 	  						<select id="stageIds" name="stageIds" class="easyui-combobox" style="width:205px; height: 25px;"
 								data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
@@ -105,15 +105,15 @@
   						</td>
   					</tr>
   					<tr>
-  						<td style="text-align: right;">计划升学（个数）：</td>
+  						<td style="text-align: right;"><span>计划升学（个数）：</span></td>
   						<td>
-	  						<input type="text" class="easyui-numberbox" id="firstValue" name="firstValue" style="width:205px;" data-options="min:1,precision:0,max:100000000">
+	  						<input type="text" class="easyui-numberbox" id="firstValue" name="firstValue" style="width:205px;height: 25px;" data-options="min:1,precision:0,max:100000000">
   						</td>
   					</tr>
   					<tr>
-  						<td style="text-align: right;">计划升学（个数）：</td>
+  						<td style="text-align: right;"><span>计划升学（个数）：</span></td>
   						<td>
-	  						<input type="text" class="easyui-numberbox" id="secondValue" name="secondValue" style="width:205px;" data-options="min:1,precision:0,max:100000000">
+	  						<input type="text" class="easyui-numberbox" id="secondValue" name="secondValue" style="width:205px;height: 25px;" data-options="min:1,precision:0,max:100000000">
   						</td>
   					</tr>
   				</table>
