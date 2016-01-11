@@ -1,7 +1,9 @@
 package com.rise.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +17,7 @@ import com.rise.model.FuncNodeTree;
 import com.rise.model.StaffT;
 import com.rise.pub.base.JacksonJsonMapper;
 import com.rise.pub.invoke.ServiceEngine;
+import com.rise.pub.util.ObjectCensor;
 
 /**
  * @author LEO
@@ -52,10 +55,24 @@ public class AuthService
 		return retVal;
 	}
 	
-	public String menuLeft(String menuId , StaffT staffT) throws Exception
+	public String menuLeft(String menuId , StaffT staffT , HttpSession session) throws Exception
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2002\",securityCode:\"0000000000\",params:{menuId:\""+menuId+"\",staffId:\""+staffT.getStaffId()+"\"},rtnDataFormatType:\"user-defined\"}";
-		return ServiceEngine.invokeHttp(param);
+		Map<String,String> map = (Map<String,String>)session.getAttribute("menuNodeInfo");
+		if(ObjectCensor.checkObjectIsNull(map))
+		{
+			map = new HashMap<String,String>();
+		}
+		if(map.containsKey(menuId))
+		{
+			return map.get(menuId);
+		}
+		else
+		{
+			String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2002\",securityCode:\"0000000000\",params:{menuId:\""+menuId+"\",staffId:\""+staffT.getStaffId()+"\"},rtnDataFormatType:\"user-defined\"}";
+			String result = ServiceEngine.invokeHttp(param);
+			map.put(menuId, result);
+			return result;
+		}
 	}
 }
 
