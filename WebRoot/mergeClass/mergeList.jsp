@@ -208,6 +208,15 @@
 		   			<a href="javascript:void(0)" id="viewApprove" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">浏览</a>
 		 		</div>
 		 	</div>
+		 	<div title="测试1" style="padding:5px;">
+		 	测试1
+		 	</div>
+		 	<div title="测试2" style="padding:5px;">
+		 	测试2
+		 	</div>
+		 	<div title="测试3" style="padding:5px;">
+		 	测试3
+		 	</div>
  		</div>	
   	</body>
 </html>

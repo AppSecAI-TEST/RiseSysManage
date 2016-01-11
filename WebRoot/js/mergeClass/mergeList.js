@@ -20,14 +20,14 @@ $(document).ready(function(){
 	$("#orderClass").click(function(){
 		orderClass();
 	})
-//	var strArr=["审批管理","审批管理3"];
-//	$("ul.tabs").find("li").each(function(){
-//		if(!isContain(strArr,$(this).find("span.tabs-title").html()))
-//		{
-//			$(this).css("display","none");
-//		}	
-//	})
-//	$("ul.tabs").find("li:visible:first").trigger("click");
+	var strArr=["审批管理","合并班级管理"];
+	$("ul.tabs").find("li").each(function(){
+		if(!isContain(strArr,$(this).find("span.tabs-title").html()))
+		{
+			$(this).css("display","none");
+		}	
+	})
+	$("ul.tabs").find("li:visible:first").trigger("click");
 	initQryButton("qryBtn","resetBtn","merFm","list_data");
 	initQryButton("qryBtns","resetBtns","appFm","list_datas");
 });
