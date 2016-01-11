@@ -37,7 +37,7 @@
   	<div  class="easyui-panel" title="连报课程<%=order%>" style="width:99%;padding:10px;border-color:#95B1E7">
   	<input id="frameName" name="frameName" type="hidden" value="<%=name%>"/>
   	<form id="courseFm">
-	      <div style="height: 10px;"></div>
+	      <div style="height: 5px;"></div>
 	      <div class="easyui-panel" style="width:100%;height:auto;" title="常规课课程">
       	      <table width="100%" cellpadding="5px" class="maintable" >
 	      	      <tr>
@@ -57,11 +57,11 @@
 						<input type="hidden" id="coursePriceId" name="coursePriceId" value="" />
 						<td align="right"><span>缴费时间：</span></td>
 						<td>
-							<input name="payDate" id="payDate" editable='false' type="text" class="easyui-datebox" required="true" style="width: 150px; height: 28px;" value="<%=StringUtil.getJSONObjectKeyVal(object, "payDate")%>" />
+							<input name="payDate" id="payDate" editable='false' type="text" class="easyui-datebox" required="true" style="width: 100px; height: 25px;" value="<%=StringUtil.getJSONObjectKeyVal(object, "payDate")%>" />
 						</td>
 						<td align="right"><span>阶段：</span>
 						<td>
-							<select name="stageId" id="stageId" editable='false'  style="width: 150px; height: 28px;"
+							<select name="stageId" id="stageId" editable='false'  style="width: 100px; height: 25px;"
 								data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
 	      						onLoadSuccess:function(data){$('#stageId').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object, "stageId")%>');}"
 								url="<%=path%>/pubData/qryStage.do" required="true">
@@ -69,7 +69,7 @@
 						</td>
 						<td align="right"><span>班级类型：</span>
 						<td>
-							<select name="classType" id="classType" editable='false' class="easyui-combobox" style="width: 150px; height: 28px;" drequired="true">
+							<select name="classType" id="classType" editable='false' class="easyui-combobox" style="width: 100px; height: 25px;" drequired="true">
 								
 							</select>
 						</td>
@@ -80,7 +80,7 @@
 	      	        	<td align="right"><span>业绩老师A：</span></td>
 	      	        	<td> 
 	      	        		<select name="adviserTeacherA" class="easyui-combobox" editable='false' id="adviserTeacherA"
-								style="width: 150px; height: 28px;"
+								style="width: 100px; height: 25px;"
 								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
 								onLoadSuccess:function(data){$('#adviserTeacherA').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherA")%>');}"
 	      						url="<%=path %>/pubData/qryTeacherList.do">
@@ -89,7 +89,7 @@
 	      	        	<td align="right"><span>业绩老师B：</span></td>
 	      	        	<td> 
 	      	        		<select name="adviserTeacherB" class="easyui-combobox" id="adviserTeacherB" editable='false'
-								style="width: 150px; height: 28px;"
+								style="width: 100px; height: 25px;"
 								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
 								onLoadSuccess:function(data){$('#adviserTeacherB').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherB")%>');}"
 	      						url="<%=path %>/pubData/qryTeacherList.do">
@@ -105,7 +105,7 @@
 	      	      <tr id="giftModelTR">
 	      	        <td width="8%" align="right"><span>赠品类型：</span></td>
 	      	        <td width="8%">
-	      	        <select   id="parentType" style="width: 100px; height: 28px;"
+	      	        <select   id="parentType" style="width: 100px; height: 25px;"
 	      				     data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
 	      					 url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE"  >
       	            </select>
@@ -114,10 +114,10 @@
 	      	        <td width="39%">
 	      	      	<table  border="0">
 	   	                <tr>
-			      	         <td id='td0' ><select  class="easyui-combobox" editable='false' id="giftType" style="width: 120px; height: 28px;"></select></td>
-			      	         <td id="td1" style="display:none"><select  editable='false' class="easyui-combobox" id="giftId" style="width: 120px; height: 28px;"></select></td>
-			      	         <td id="td2" style="display:none"><input   id="giftCode" type="text" class="easyui-textbox validatebox" required="true" style="width:150px; height: 28px;"/></td>
-		                     <td id="td3" style="display:none"><input   id="giftEffDate" type="text" class="easyui-datebox"  style="width: 100px; height: 28px;"/></td>
+			      	         <td id='td0' ><select  class="easyui-combobox" editable='false' id="giftType" style="width: 100px; height: 25px;"></select></td>
+			      	         <td id="td1" style="display:none"><select  editable='false' class="easyui-combobox" id="giftId" style="width: 100px; height: 25px;"></select></td>
+			      	         <td id="td2" style="display:none"><input   id="giftCode" type="text" class="easyui-textbox validatebox" required="true" style="width:100px; height: 25px;"/></td>
+		                     <td id="td3" style="display:none"><input   id="giftEffDate" type="text" class="easyui-datebox"  style="width: 100px; height: 25px;"/></td>
 	      	             </tr>
       	            </table>
       	            </td>
@@ -129,9 +129,9 @@
 	      	          <label for="radio"> <span>未领用</span></label>
       	           </td>
 	      	        <td width="6%" align="right"><span>发放人：</span></td>
-	      	        <td width="8%"><input   id="granter" type="text" disabled="disabled" class="easyui-textbox validatebox"  style="width: 100px; height: 28px;"/></td>
+	      	        <td width="8%"><input   id="granter" type="text" disabled="disabled" class="easyui-textbox validatebox"  style="width: 100px; height: 25px;"/></td>
 	      	       
-	      	        <td width="6%"><a href="javascript:void(0)" id="addGiftBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a></td>
+	      	        <td width="6%"><a href="javascript:void(0)" id="addGiftBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px; height: 25px;">添加</a></td>
       	        </tr>
       	      <tr style="display:none;" name="addGift" id="addGift" >
       	        <td align="right"><span>赠品类型：</span></td>
@@ -147,24 +147,24 @@
      	       </tr>
       	      </table>
       		</div>
-      		<div style="height: 10px;"></div>
+      		<div style="height: 5px;"></div>
       		<div class="easyui-panel" style="width:100%;height:auto;" title="赠课信息">
       	      <table width="100%" cellpadding="5px" class="maintable" >
 	      	      <tr>
 	      	        <td colspan="2" align="right"><span>赠课类型</span></td>
 	      	        <td width="22%" align="right">
 		      	        <div align="left">
-		      	          <select   id="giftCourseType" style="width: 150px; height: 28px;"
+		      	          <select   id="giftCourseType" style="width: 100px; height: 25px;"
 		      	           data-options="formatter:formatTypeName,  valueField: 'giftType', textField: 'typeName', panelHeight: 'auto'"
 		      	          url="/sys/pubData/qryData.do?param={queryCode:'Qry_Gift_Type',parentType:'COURSE'}" ></select>
       	            </div></td>
 	      	        <td width="10%" align="right"><span>赠课名称：</span></td>
-	      	        <td width="11%"><select class="easyui-combobox" editable='false' id="giftCourseId" style="width: 120px; height: 28px;" >
+	      	        <td width="11%"><select class="easyui-combobox" editable='false' id="giftCourseId" style="width: 100px; height: 25px;" >
 	      	          </select></td>
 	      	       
 	      	        <td width="12%" align="right"><span>课时量:</span></td>
 	      	        <td width="22%" id="courseHours"></td>
-      	            <td width="7%"><a href="javascript:void(0)" id="addCourse" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a></td>
+      	            <td width="7%"><a href="javascript:void(0)" id="addCourse" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px; height: 25px;">添加</a></td>
       	        </tr>
       	      </table>
       	       <table width="100%" cellpadding="5px" class="maintable" id="giftCourse">
@@ -194,7 +194,7 @@
       	        </tr>
       	      </table>
 			</div>
-			<div style="height: 10px;"></div>
+			<div style="height: 5px;"></div>
 			<div class="easyui-panel" style="width:100%;height:auto;" title="课程费用">
 			     	      <table width="100%" cellpadding="5px" class="maintable" >
 			  	            <tr>
