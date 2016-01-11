@@ -305,12 +305,20 @@
 						}
 						else
 						{
-							arr.push('<li><span><a href="javascript:void(0)" class="tree-hit txtNode" style="background-image:url();display:block;width:250px">'+data[i].son[j].text+'</span><ul>');
-							for(var k = 0,t = data[i].son[j].items.length;k < t;k++)
+							var k = 0,t = data[i].son[j].items.length;
+							if(t == 0)
 							{
-								arr.push("<li><a href='javascript:void(0)' class='txtNode' url='"+data[i].son[j].items[k].itemPageUrl+"' text='"+data[i].son[j].items[k].itemName+"' onclick=openUrl('"+data[i].son[j].items[k].itemId+"','"+data[i].son[j].items[k].itemPageUrl+"','"+data[i].son[j].items[k].itemName+"')>"+data[i].son[j].items[k].itemName+"</a></li>")
+								arr.push('<li><span><a href="javascript:void(0)" class="tree-hit txtNode" style="background-image:url();display:block;width:250px">'+data[i].son[j].text+'</a></span></li>');
 							}
-							arr.push('</ul></li>');
+							else
+							{
+								arr.push('<li><span><a href="javascript:void(0)" class="tree-hit txtNode" style="background-image:url();display:block;width:250px">'+data[i].son[j].text+'</a></span><ul>');
+								for(;k < t;k++)
+								{
+									arr.push("<li><a href='javascript:void(0)' class='txtNode' url='"+data[i].son[j].items[k].itemPageUrl+"' text='"+data[i].son[j].items[k].itemName+"' onclick=openUrl('"+data[i].son[j].items[k].itemId+"','"+data[i].son[j].items[k].itemPageUrl+"','"+data[i].son[j].items[k].itemName+"')>"+data[i].son[j].items[k].itemName+"</a></li>")
+								}
+								arr.push('</ul></li>');
+							}
 						}
 					}
 					arr.push("</ul>");
