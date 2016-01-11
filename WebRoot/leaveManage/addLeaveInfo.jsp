@@ -37,7 +37,7 @@
   		</div>
 		<div style="height: 10px;"></div>
    		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="学员课程信息">
- 		<form id="addLeaveForm">
+ 		<form id="addLeaveForm" method="post" enctype="multipart/form-data">
  		<table width="100%" cellpadding="5px" class="maintable" id="courseTd">
  			<tr>
  				<td align="center">课程名称</td>
@@ -62,7 +62,7 @@
  						<td align="center">${courseInfo.className}</td>
  						<td align="center">${courseInfo.startTime}</td>
  						<td align="center">${courseInfo.finishTime}</td>
- 						<td></td>
+ 						<td align="center">${courseInfo.classProgress}</td>
  						<td align="center">${courseInfo.adviser}</td>
  						<td align="center">${courseInfo.dutyAdvister}</td>
  						<td align="center">${courseInfo.carer}</td>
@@ -72,17 +72,23 @@
  			<tr>
  				<td align="right">休学时长：</td>
  				<td colspan="2"><input class="easyui-numberbox" name="planLeaveTime" id="planLeaveTime" style="width:120px;" data-options="min:1,max:24" required="true"/></td>
- 				<td colspan="9">休学申请单与缴费凭证：<input style="width:300px" class="easyui-filebox" name="leaveImg" data-options="prompt:''" ></td>
+ 				<td colspan="9">休学申请单与缴费凭证：
+ 					<input type="hidden" name="imgUrl" id="imgUrl"/>
+                    <input style="width: 500px; height: 28px;" class="easyui-filebox" name="fileName" id="fileName" data-options="prompt:''"/>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" id="uploadBtn" iconCls="icon-save" iconCls="icon-save" style="width: 100px; height: 25px;">上传</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" id="cancelUploadBtn" iconCls="icon-cancel" iconCls="icon-cancel" style="width: 100px; height: 25px;">取消</a>
+				</td>
  			</tr>
  			<tr>
  				<td align="right">备注：</td>
- 				<td colspan="11"><textarea rows="7" cols="100" id="addRemark" name="addRemark" class="easyui-validatebox textbox" required="true"></textarea></td>
+ 				<td colspan="11"><textarea rows="7" cols="100" id="addRemark" name="addRemark" class="easyui-validatebox textbox"></textarea></td>
  			</tr>
  		</table>
  		</form>
  		</div>
  		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
  		<input id="studentId" type="hidden" value="${obj.studentInfo.studentId}" />
+ 		<input id="schoolId" type="hidden" value="${schoolId}" />
  		<input id="courseState" type="hidden" value="${courseState}" />
  		<input id="studentCourseId" type="hidden" value="${studentCourseId}" />
  		<input id="currentHours" type="hidden" value="${currentHours}" />

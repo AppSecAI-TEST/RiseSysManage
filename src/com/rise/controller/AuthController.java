@@ -106,7 +106,7 @@ public class AuthController
 			String retVal = null;
 			if(staffT != null)
 			{
-				retVal = authService.menuLeft(menuId , staffT);
+				retVal = authService.menuLeft(menuId , staffT , session);
 			}
 			else
 			{
@@ -137,6 +137,7 @@ public class AuthController
 			HttpSession session = request.getSession();
 			session.removeAttribute("StaffT");
 			session.removeAttribute("funcNodeInfo");
+			session.removeAttribute("menuNodeInfo");
 		}
 		catch(Exception e)
 		{

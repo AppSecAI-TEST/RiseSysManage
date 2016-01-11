@@ -1,6 +1,7 @@
 package com.rise.controller;
 
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,7 +27,7 @@ public class LeaveManageController {
 	
 	//页面跳转根据type区分，带出休学学员相关信息
 	@RequestMapping(value="/viewLeaveInfo.do")
-	public ModelAndView viewLeaveInfo(String studentId,String leaveId,String funcNodeId,String type,String courseState,String studentCourseId,String currentHours)
+	public ModelAndView viewLeaveInfo(String studentId,String schoolId,String leaveId,String funcNodeId,String type,String courseState,String studentCourseId,String currentHours)
 	{
 		log.error(studentId);
 		log.error(funcNodeId);
@@ -43,6 +44,7 @@ public class LeaveManageController {
 			view.addObject("courseState",courseState);
 			view.addObject("studentCourseId",studentCourseId);
 			view.addObject("currentHours", currentHours);
+			view.addObject("schoolId", schoolId);
 		}
 		try {
 			String ret = leaveManageService.viewLeaveInfo(studentId, leaveId, funcNodeId, type);
@@ -123,7 +125,7 @@ public class LeaveManageController {
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = leaveManageService.addLeaveInfo(json);
+			String retVal = leaveManageService.addLeaveInfo(URLEncoder.encode(json,"utf-8"));
 			log.error(retVal);
 			out.write(retVal);
 		}

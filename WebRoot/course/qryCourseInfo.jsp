@@ -14,7 +14,7 @@
   	<body>
   		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
 		<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
-  		<div style="padding:5px 0;">
+  		<div style="margin-right:5px">
   			<form id="qryFm">
 	  			<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
 	  				<tr>
@@ -131,7 +131,7 @@
     			<a href="javascript:void(0)" id="updateCourse" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="">修改课程</a>
     			<a href="javascript:void(0)" id="courseDetail" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="">浏览</a>
   			</div>
-			<div style="padding:5px 0;">
+			 
 				<table class="easyui-datagrid" title="查询结果" style="height:450px" id="list_data" toolbar="#toolbar" 
 					pagination="true" rownumbers="true" fitColumns="true" singleSelect="true"
 				 	url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=5002">
@@ -155,7 +155,7 @@
 						</tr>
 					</thead>
 				</table>
-			</div>
+			 
   		</div>
   	</body>
 </html>
