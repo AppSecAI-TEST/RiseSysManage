@@ -1,3 +1,4 @@
+var giftDivHeight = 0;
 $(document).ready(function() {
 	var totalAmount = 0;
 	$("[name='confirmRefundFee']").each(function() {
@@ -152,6 +153,15 @@ $(document).ready(function() {
 			$("#teacherId").combobox("loadData", new Array());
 		}
 	});
+	
+	$("#gift_list_data").datagrid({ 
+		url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1036',studentId:'"+$("#studentId").val()+"'}",
+		onLoadSuccess: function() { 
+			giftDivHeight = $("#giftDiv").height();
+			$("#giftDiv").css("display", "none");
+			$("#gift").html("<span>展开非缴费赠送历史记录</span>");
+		}
+	}); 
 	
 	$("input:radio[name='visitPersonTwo']").change(function() {
 		var visitPersonTwo = $("input:radio[name='visitPersonTwo']:checked").val();
@@ -526,4 +536,49 @@ function checkParam() {
 		}
 	}
 	return true;
+}
+
+function viewGiftHist() {
+	var giftDivDisplay = $("#giftDiv").css("display");
+	if("none" == giftDivDisplay) {
+		$("#giftDiv").height(giftDivHeight);
+		$("#giftDiv").css("display", "block");
+		$("#gift").html("<span>收缩非缴费赠送历史记录</span>");
+	} else {
+		$("#giftDiv").css("display", "none");
+		$("#gift").html("<span>展开非缴费赠送历史记录</span>");
+	}
+}
+
+function viewStudentCourseList() {
+	$('#dlg').form('clear');//清空窗体数据 
+	var studentId = $("#studentId").val();
+	$("#course_list_data").datagrid({ 
+		url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1016',studentId:'"+studentId+"'}",
+		onLoadSuccess: function() { 
+			var rows = $("#course_list_data").datagrid('getRows');
+			if(parseInt(rows.length) <= 0) {
+				$("#courseDiv").css("display", "none");
+			}
+		}
+	});
+	$("#international_list_data").datagrid({ 
+		url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1038',studentId:'"+studentId+"'}",
+		onLoadSuccess: function() { 
+			var rows = $("#international_list_data").datagrid('getRows');
+			if(parseInt(rows.length) <= 0) {
+				$("#internationalDiv").css("display", "none");
+			}
+		}
+	});
+	$("#travel_list_data").datagrid({ 
+		url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1039',studentId:'"+studentId+"'}",
+		onLoadSuccess: function() { 
+			var rows = $("#travel_list_data").datagrid('getRows');
+			if(parseInt(rows.length) <= 0) {
+				$("#travelDiv").css("display", "none");
+			}
+		}
+	});
+	$('#dlg').dialog('open').dialog('setTitle', '课程信息');//设定表头  
 }

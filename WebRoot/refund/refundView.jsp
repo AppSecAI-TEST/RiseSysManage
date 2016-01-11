@@ -223,120 +223,132 @@
   				
   				<div style="height: 10px"></div>
   				<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="回访信息">
-  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
-	  					<c:forEach items="${obj.refundVisitList }" var="refundVisit">
-	  						<c:if test="${refundVisit.visitType == '001' }">
-		  						<tr>
-		  							<td colspan="4"><span>1、老师或CC回访信息：</span></td>
-		  						</tr>
-		  						<tr>
-		  							<td align="right" width="10%"><span>回访人员：</span></td>
-		  							<td width="32%">
-  										<c:if test="${refundVisit.userType == 'teacher' }">
-			  								<input type="radio" name="visitPersonOne" value="teacher" checked="checked" disabled="disabled"/><span>老师</span>
-			  								<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled"
-			  									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-	      										onLoadSuccess:function(data){if(data.length > 0) $('#teacherId').combobox('setValue', ${refundVisit.visitUserId });}" 
-	      										url="<%=path %>/pubData/qryStaffList.do?schoolId=${obj.refundFeeObj.schoolId }">
-					        				</select>
-			  								<input type="radio" name="visitPersonOne" value="adviser" disabled="disabled"/><span>课程顾问</span>
-			  								<select id="careAdviserId" name="careAdviserId" class="easyui-combobox" style="width: 100px; height: 25px;">
-					        				</select>
-  										</c:if>
-  										<c:if test="${refundVisit.userType == 'adviser' }">
-  											<input type="radio" name="visitPersonOne" value="teacher" disabled="disabled"/><span>老师</span>
-			  								<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;">
-					        				</select>
-			  								<input type="radio" name="visitPersonOne" value="adviser" checked="checked" disabled="disabled"/><span>课程顾问</span>
-			  								<select id="careAdviserId" name="careAdviserId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled"
-			  									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-	      										onLoadSuccess:function(data){if(data.length > 0) $('#careAdviserId').combobox('setValue', ${refundVisit.visitUserId });}" 
-	      										url="<%=path %>/pubData/qryStaffList.do?schoolId=${obj.refundFeeObj.schoolId }">
-					        				</select>
-  										</c:if>
-		  							</td>
-		  							<td align="right" width="8%"><span>回访时间：</span></td>
-		  							<td width="50%">
-		  								<input name="teacherOrAdviserVisitDate" id="teacherOrAdviserVisitDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 25px;" value="${refundVisit.visitDate }" disabled="disabled"/>
-		  							</td>
-		  						</tr>
-		  						<tr>
-		  							<td align="right" width="10%"><span>回访记录：</span></td>
-		  							<td colspan="3" width="90%">
-		  								<textarea rows="4" cols="122" id="teacherOrAdviserVisitRemark" name="teacherOrAdviserVisitRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${refundVisit.remark }</textarea>
-		  							</td>
-		  						</tr>
-	  						</c:if>
-	  					</c:forEach>
-  					</table>
-  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
+  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;" class="maintable1">
+  						<tr>
+  							<td align="center" width="10%"><span>回访人</span></td>
+  							<td align="center" width="10%"><span>职务</span></td>
+  							<td align="center" width="10%"><span>回访日期</span></td>
+  							<td align="center" width="70%"><span>回访记录</span></td>
+  						</tr>
   						<c:forEach items="${obj.refundVisitList }" var="refundVisit">
-	  						<c:if test="${refundVisit.visitType == '002' }">
-		  						<tr>
-		  							<td colspan="4"><span>2、学术或销售主管回访信息：</span></td>
-		  						</tr>
-		  						<tr>
-		  							<td align="right" width="10%"><span>回访人员：</span></td>
-		  							<td width="25%">
-		  								<c:if test="${refundVisit.userType == 'academic' }">
-			  								<input type="radio" name="visitPersonTwo" value="academic" checked="checked" disabled="disabled"/><span>学术主管</span>
-			  								<input type="radio" name="visitPersonTwo" value="sales" disabled="disabled"/><span>销售主管</span>
-		  								</c:if>
-		  								<c:if test="${refundVisit.userType == 'sales' }">
-		  									<input type="radio" name="visitPersonTwo" value="academic" disabled="disabled"/><span>学术主管</span>
-			  								<input type="radio" name="visitPersonTwo" value="sales" checked="checked" disabled="disabled"/><span>销售主管</span>
-		  								</c:if>
-		  								<select id="academicOrSalesId" name="academicOrSalesId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled"
-			  								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-	      									onLoadSuccess:function(data){if(data.length > 0) $('#academicOrSalesId').combobox('setValue', ${refundVisit.visitUserId });}" 
-	      									url="<%=path %>/pubData/qryStaffList.do?schoolId=${obj.refundFeeObj.schoolId }">
-				        				</select>
-		  							</td>
-		  							<td align="right" width="8%"><span>回访时间：</span></td>
-		  							<td width="57%">
-		  								<input name="academicOrSalesVisitDate" id="academicOrSalesVisitDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;" disabled="disabled" value="${refundVisit.visitDate }"/>
-		  							</td>
-		  						</tr>
-		  						<tr>
-		  							<td align="right" width="10%"><span>回访记录：</span></td>
-		  							<td colspan="3" width="90%">
-		  								<textarea rows="4" cols="122" id="academicOrSalesVisitRemark" name="academicOrSalesVisitRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${refundVisit.remark }</textarea>
-		  							</td>
-		  						</tr>
-	  						</c:if>
-	  					</c:forEach>
-  					</table>
-  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
-  						<c:forEach items="${obj.refundVisitList }" var="refundVisit">
-	  						<c:if test="${refundVisit.visitType == '003' }">
-		  						<tr>
-		  							<td colspan="4"><span>3、校区校长回访信息：</span></td>
-		  						</tr>
-		  						<tr>
-		  							<td align="right" width="10%"><span>回访人员：</span></td>
-		  							<td width="8%">
-		  								<select id="headmasterId" name="headmasterId" class="easyui-combobox" style="width: 100px; height: 25px;"
-											data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-		      						 		onLoadSuccess:function(data){$('#headmasterId').combobox('setValue', ${refundVisit.visitUserId });}"
-		      								url="<%=path %>/pubData/qryStaffList.do?schoolId=${obj.refundFeeObj.schoolId }">
-				        				</select>
-		  							</td>
-		  							<td align="right" width="8%"><span>回访时间：</span></td>
-		  							<td width="74%">
-		  								<input name="headmasterVisitDate" id="headmasterVisitDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;" disabled="disabled" value="${refundVisit.visitDate }"/>
-		  							</td>
-		  						</tr>
-		  						<tr>
-		  							<td align="right" width="10%"><span>回访记录：</span></td>
-		  							<td colspan="3" width="90%">
-		  								<textarea rows="4" cols="122" id="headmasterVisitRemark" name="headmasterVisitRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${refundVisit.remark }</textarea>
-		  							</td>
-		  						</tr>
-	  						</c:if>
-	  					</c:forEach>
+  							<tr>
+  								<td align="center" width="10%"><span>${refundVisit.staffName }</span></td>
+  								<td align="center" width="10%"><span>${refundVisit.userTypeText }</span></td>
+  								<td align="center" width="10%"><span>${refundVisit.visitDate }</span></td>
+  								<td align="center" width="70%"><span>${refundVisit.remark }</span></td>
+  							</tr>
+  						</c:forEach>
   					</table>
   				</div> 
+  				
+  				<div style="height: 10px"></div>
+  				<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="审批记录">
+  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;" class="maintable1">
+  						<tr>
+  							<td align="center" width="10%"><span>审批人</span></td>
+  							<td align="center" width="10%"><span>职务</span></td>
+  							<td align="center" width="10%"><span>审批日期</span></td>
+  							<td align="center" width="10%"><span>审批结果</span></td>
+  							<td align="center" width="60%"><span>审批备注</span></td>
+  						</tr>
+  						<c:forEach items="${obj.refundApproveList }" var="refundApprove">
+  							<tr>
+  								<td align="center" width="10%"><span>${refundApprove.staffName }</span></td>
+  								<td align="center" width="10%"><span>${refundApprove.post }</span></td>
+  								<td align="center" width="10%"><span>${refundApprove.createDate }</span></td>
+  								<td align="center" width="10%"><span>${refundApprove.approveTypeText }</span></td>
+  								<td align="center" width="60%"><span>${refundApprove.remark }</span></td>
+  							</tr>
+  						</c:forEach>
+  					</table>
+  				</div>
+  				
+  				<div style="height: 10px"></div>
+  				<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="申请与取消信息">
+  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;" class="maintable1">
+  						<tr>
+  							<td align="center" width="10%"><span>操作人</span></td>
+  							<td align="center" width="10%"><span>操作类型</span></td>
+  							<td align="center" width="10%"><span>操作时间</span></td>
+  							<td align="center" width="70%"><span>备注</span></td>
+  						</tr>
+  						<c:forEach items="${obj.refundApplyList }" var="refundApply">
+  							<tr>
+  								<td align="center" width="10%"><span>${refundApply.staffName }</span></td>
+  								<td align="center" width="10%"><span>${refundApply.optionType }</span></td>
+  								<td align="center" width="10%"><span>${refundApply.createDate }</span></td>
+  								<td align="center" width="70%"><span>${refundApply.remark }</span></td>
+  							</tr>
+  						</c:forEach>
+  					</table>
+  				</div>
   			</form>
+  		</div>
+  		<div id="dlg" class="easyui-dialog" closed="true" modal="true">
+  			<div style="height: 10px"></div>
+  			<div id="courseDiv">
+	  			<table class="easyui-datagrid" title="常规课信息" style="height: auto; width: 1100px;" id="course_list_data"
+					pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
+					<thead>
+						<tr>
+							<th data-options="field:'stageId',width:100,align:'center'">课程阶段</th>
+							<th data-options="field:'courseStateText',width:100,align:'center'">课程状态</th>
+							<th data-options="field:'paySchoolName',width:100,align:'center'">校区</th>
+							<th data-options="field:'payDate',width:120,align:'center'">缴费日期</th>
+							<th data-options="field:'feeTypeText',width:100,align:'center'">业绩类型</th>
+							<th data-options="field:'className',width:100,align:'center'">班级</th>
+							<th data-options="field:'startDate',width:120,align:'center'">开课日期</th>
+							<th data-options="field:'finishDate',width:120,align:'center'">结课日期</th>
+							<th data-options="field:'classProgress',width:100,align:'center'">课时进度</th>
+							<th data-options="field:'classTeacherName',width:100,align:'center'">带班老师</th>
+							<th data-options="field:'adviserName',width:100,align:'center'">业绩顾问</th>
+							<th data-options="field:'adviserTeacherName',width:100,align:'center'">业绩老师</th>
+							<th data-options="field:'dutyAdvisterName',width:100,align:'center'">责任顾问</th>
+							<th data-options="field:'carerName',width:100,align:'center'">客户关怀</th>
+						</tr>
+					</thead>
+				</table>
+  			</div>
+  			<div style="height: 10px"></div>
+  			<div id="internationalDiv">
+				<table class="easyui-datagrid" title="短期课-国际班信息" style="height: auto; width: 1100px;" id="international_list_data"
+					pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
+					<thead>
+						<tr>
+							<th data-options="field:'classType',width:100,align:'center'">国际班类型</th>
+							<th data-options="field:'paySchoolName',width:100,align:'center'">报名校区</th>
+							<th data-options="field:'schoolName',width:100,align:'center'">上课校区</th>
+							<th data-options="field:'payDate',width:120,align:'center'">缴费日期</th>
+							<th data-options="field:'courseStateText',width:100,align:'center'">课程状态</th>
+							<th data-options="field:'className',width:100,align:'center'">班级</th>
+							<th data-options="field:'openDate',width:120,align:'center'">开课日期</th>
+							<th data-options="field:'finishDate',width:120,align:'center'">结课日期</th>
+							<th data-options="field:'classProgress',width:100,align:'center'">课时进度</th>
+							<th data-options="field:'adviserTeacherName',width:100,align:'center'">业绩老师</th>
+							<th data-options="field:'adviserName',width:100,align:'center'">业绩顾问</th>
+						</tr>
+					</thead>
+				</table>
+  			</div>
+  			<div style="height: 10px"></div>
+  			<div id="travelDiv">
+				<table class="easyui-datagrid" title="短期课-游学信息" style="height: auto; width: 1100px;" id="travel_list_data"
+					pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
+					<thead>
+						<tr>
+							<th data-options="field:'classType',width:100,align:'center'">游学班类型</th>
+							<th data-options="field:'className',width:100,align:'center'">班级</th>
+							<th data-options="field:'paySchoolName',width:100,align:'center'">报名校区</th>
+							<th data-options="field:'payDate',width:100,align:'center'">缴费日期</th>
+							<th data-options="field:'courseStateText',width:120,align:'center'">课程状态</th>
+							<th data-options="field:'openDate',width:100,align:'center'">出发日期</th>
+							<th data-options="field:'finishDate',width:100,align:'center'">返回日期</th>
+							<th data-options="field:'adviserTeacherName',width:120,align:'center'">业绩老师</th>
+							<th data-options="field:'adviserName',width:120,align:'center'">业绩顾问</th>
+						</tr>
+					</thead>
+				</table>
+  			</div>
   		</div>
   	</body>
 </html>
