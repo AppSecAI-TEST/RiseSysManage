@@ -16,22 +16,23 @@
   		<div id ="baseInfo" class="easyui-panel" title="基本信息" style="width:1100px;">
   			<table width="100%;" class="maintable">
   				<tr>
-  					<td width="15%" align="right">学员姓名：</td><td align="left" id="name"></td><td width="15%" align="right">出生日期：</td><td align="left" id="birthday"></td><td width="15%" align="right">性别：</td><td align="left" id="sexVal"></td>
+  					<td width="15%" align="right"><span>学员姓名：</span></td><td align="left" id="name"></td><td width="15%" align="right"><span>出生日期：</span></td><td align="left" id="birthday"></td><td width="15%" align="right"><span>性别：</span></td><td align="left" id="sexVal"></td>
   				</tr>
   				<tr>
-  					<td align="right">证件号码：</td><td align="left" id="identityId"></td><td align="right">英文名：</td><td align="left" id="byName"></td><td align="right">联系电话：</td><td align="left" id="phone"></td>
+  					<td align="right"><span>证件号码：</span></td><td align="left" id="identityId"></td><td align="right"><span>英文名：</span></td><td align="left" id="byName"></td><td align="right"><span>联系电话：</span></td><td align="left" id="phone"></td>
   				</tr>
   				<tr>
-  					<td align="right">所属校区：</td><td align="left" id="schoolName"></td><td></td><td></td><td></td><td></td>
+  					<td align="right"><span>所属校区：</span></td><td align="left" id="schoolName"></td><td></td><td></td><td></td><td></td>
   				</tr>
   			</table>
   		</div>
-  		<div  class="easyui-panel" title="基本信息" style="width:1100px;">
-  			<table width="100%;" class="maintable" id ="classInfo">
+  		<div style="height:5px;"></div>
+  		<div  class="easyui-panel" title="课程信息" style="width:1100px;">
+  			<table style="width:100%;text-align:center;" class="maintable" id ="classInfo">
   				<tr>
-  					<td>课程名称</td><td>课程状态</td><td>校区</td><td>缴费时间</td>
-  					<td>业绩类型</td><td>班级</td><td>开课日期</td><td>结课日期</td>
-  					<td>课程进度</td><td>业绩顾问</td><td>责任顾问</td><td>客户关怀</td>
+  					<td><span>课程名称</span></td><td><span>课程状态</span></td><td><span>校区</span></td><td><span>缴费时间</span></td>
+  					<td><span>业绩类型</span></td><td><span>班级</span></td><td><span>开课日期</span></td><td><span>结课日期</span></td>
+  					<td><span>课程进度</span></td><td><span>业绩顾问</span></td><td><span>责任顾问</span></td><td><span>客户关怀</span></td>
   				</tr>
   			</table>
   		</div>

@@ -14,42 +14,42 @@
   	</head>
   	<body>
   		<div>
+  		<div style="margin-right:5px">
  		<form id="qryFm">
-  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="15">
+  			<table class="search_tab">
   				<tr>
-  					<td width="8%" align="right">所属校区：</td>
-  					<td width="10%">
-  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;"
+  					<td width="100px" align="right"><span>所属校区：</span></td>
+  					<td width="110px">
+  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height:25px;"
   							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
   							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
   						</select>
   					</td>
-  					<td width="8%" align="right">学员姓名：</td>
-  					<td width="8%">
-  						<input class="easyui-textbox"  name="name" id="name" style="width:150px;" />
+  					<td width="100px" align="right"><span>学员姓名：</span></td>
+  					<td width="110px">
+  						<input class="easyui-textbox"  name="name" id="name" style="width:100px;height:25px;" />
   					</td>
-  					<td width="8%" align="right">联系电话：</td>
-  					<td width="8%">
-  						<input class="easyui-textbox" name="phone" id="phone" style="width:150px;" />
+  					<td width="100px" align="right"><span>联系电话：</span></td>
+  					<td width="160px" align="left">
+  						<input class="easyui-textbox" name="phone" id="phone" style="width:150px;height:25px;" />
   					</td>
-  				</tr>
-  				<tr>
-  					<td align="right">课程状态：</td>
-  					<td>
-  						<select class="easyui-combobox" name="courseState" id="courseState" style="width:150px;"
+  					<td width="100px" align="right"><span>课程状态：</span></td>
+  					<td align="left"  width="110px">
+  						<select class="easyui-combobox" name="courseState" id="courseState" style="width:100px;height:25px;"
 	  						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
 	      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=EXC_COURSE&codeType=COURSE_STATE">
   						</select>
   					</td>
-  					<td align="right">带班老师：</td>
-  					<td>
-  						<input class="easyui-textbox"  name="teacher" id="teacher" style="width:150px;" />
-  					</td>
-  					<td align="right">  						
-  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" funcNodeId="3002">查询</a>
-  					</td>
+  					<td align="right" width="100px"><span>带班老师：</span></td>
   					<td align="left">
-  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:150px" id="resetBtn">重置</a>
+  						<input class="easyui-textbox"  name="teacher" id="teacher" style="width:100px;height:25px;" />
+  					</td>
+  				</tr>
+  				<tr>
+  					<td colspan="10" align="center">  						
+  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" funcNodeId="3002">查询</a>
+  						&nbsp;&nbsp;	
+  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="resetBtn">重置</a>
   					</td>
   				</tr>
   			</table>
@@ -58,21 +58,22 @@
 			<thead>
 				<tr>
 					<th field="ck" align="center" checkbox="true" width="1%"></th>
-					<th field="name" align="center" width="10%">学员姓名</th>
-					<th field="byName" align="center" width="10%">英文名</th>
-					<th field="phone" align="center" width="15%">联系电话</th>
-					<th field="stageLevel" align="center" width="10%">已升学阶段</th>
-					<th field="className" align="center" width="10%">在读班级</th>
-					<th field="courseStateVal" align="center" width="10%">课程状态</th>
-					<th field="teacherName" align="center" width="11%">带班老师</th>
-					<th field="carerName" align="center" width="10%">客户关怀</th>
-					<th field="classProgress" align="center" width="11%">在读班级课时</th>
+					<th field="name" align="center" width="10%"><span>学员姓名</span></th>
+					<th field="byName" align="center" width="10%"><span>英文名</span></th>
+					<th field="phone" align="center" width="15%"><span>联系电话</span></th>
+					<th field="stageLevel" align="center" width="10%"><span>已升学阶段</span></th>
+					<th field="className" align="center" width="10%"><span>在读班级</span></th>
+					<th field="courseStateVal" align="center" width="10%"><span>课程状态</span></th>
+					<th field="teacherName" align="center" width="11%"><span>带班老师</span></th>
+					<th field="carerName" align="center" width="10%"><span>客户关怀</span></th>
+					<th field="classProgress" align="center" width="11%"><span>在读班级课时</span></th>
 				</tr>
 			</thead>
 		</table>
-		<div id="toolbar">
-   			<a href="javascript:void(0)" id="submitBtn" class="easyui-linkbutton" iconCls="icon-ok" plain="true">提交</a>
-   			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" plain="true">返回</a>
+		<div id="toolbar" style="padding:2px;height:auto;">
+   			<a href="javascript:void(0)" id="submitBtn" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px">提交</a>
+   			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width:100px">返回</a>
+ 		</div>
  		</div>
   	</body>
 </html>

@@ -9,9 +9,10 @@ $(document).ready(function(){
 function initPage()
 {
 	var info =document.URL.split("=")[1];
-	studentId =info.split(",")[0];
-	studentCourseId =info.split(",")[1];
-	var param = '{"excFlag":"Y","studentId":"'+studentId+'","studentCourseId":"'+studentCourseId+'"}';
+	var studentId =info.split(",")[0];
+	var studentCourseId =info.split(",")[1];
+	var excId =info.split(",")[2];
+	var param = '{"excFlag":"Y","studentId":"'+studentId+'","studentCourseId":"'+studentCourseId+'","excId":"'+excId+'"}';
 	$.ajax({
 			type : "POST",
 			url: "/sys/exception/qryInfo.do",

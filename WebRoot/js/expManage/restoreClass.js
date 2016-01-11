@@ -1,6 +1,7 @@
 var resumeType =null;
 var studentId =null;
 var studentCourseId =null;
+var excId =null;
 $(document).ready(function(){
 	$("#submitBtn").on("click",function(){
 		restore();
@@ -16,7 +17,8 @@ function initPage()
 	var info =document.URL.split("=")[1];
 	studentId =info.split(",")[0];
 	studentCourseId =info.split(",")[1];
-	var param = '{"excFlag":"Y","studentId":"'+studentId+'","studentCourseId":"'+studentCourseId+'"}';
+	excId =info.split(",")[2];
+	var param = '{"excFlag":"Y","studentId":"'+studentId+'","studentCourseId":"'+studentCourseId+'","excId":"'+excId+'"}';
 	$.ajax({
 			type : "POST",
 			url: "/sys/exception/qryInfo.do",
@@ -44,7 +46,6 @@ function initPage()
 	    				$("#excState").html(data.excInfo.state);
 	    				$("#excDays").html(data.excInfo.excDays+"天");
 	    				$("#excHandler").html(data.excInfo.handler);
-	    				$("#excId").val(data.excInfo.excId);
 	    			}	
 	    		}
 	    		if(data.courseInfo!=undefined&&data.courseInfo.length>0)
@@ -80,60 +81,64 @@ function restore()
 		$.messager.alert('提示', "请选择复课方式");
 		return false;
 	}	
-	var paramValue ='{"studentCourseId":"'+studentCourseId+'","studentId":"'+studentId+'","excId":"'+$("#excId").val()+'","resumeType":"'+resumeType+'","handlerId":"'+$("#handlerId").val()+'"}';
-	$.messager.confirm('提示','您确定要复课？',function(r) {
-	    if(r) 
-	    {
-	    	$.post('/sys/exception/restoreClass.do', {param:paramValue}, function(result) 
-	    	{
-	    		if(resumeType=="001")
-	    		{
-	    			if(result=="true") 
+	var paramValue ='{"studentCourseId":"'+studentCourseId+'","studentId":"'+studentId+'","excId":"'+excId+'","resumeType":"'+resumeType+'","handlerId":"'+$("#handlerId").val()+'"}';
+	$.messager.confirm("提示", "您确定要复课？", function (data) 
+	{
+      	if (data) 
+      	{
+        	$.ajax({
+				type : "POST",
+				url: "/sys/exception/restoreClass.do",
+				data:"param="+paramValue,
+				async: false,
+				beforeSend: function()
+		    	{
+		    		showProgressLoader("正在复课...",400);
+		    	},
+		    	success: function(result) 
+		    	{
+		    		hideProgressLoader();
+		    		if(result == "true") 
 		    		{
-			    		$.messager.alert('提示', "原班复课成功");
-			    		setTimeout(function(){window.location.href="expList.jsp"},1000);
-			    	}
-			    	else  if(result=="finished")
-			    	{
-			    		$.messager.alert('提示', "原班课程已结课，无法原班复课！");
-			    	}
-	    			else
-	    			{
-	    				$.messager.alert('提示', "原班复课失败");
-	    			}	
-	    		}
-	    		else if(resumeType=="002")
-	    		{
-	    			if(result=="true") 
+		    			if(resumeType == "001") 
+		    			{
+		    				showMessage('提示', "原班复课成功！",function(){
+		    					hideMessage();
+		    					window.location.href = "expList.jsp";
+		    				});
+		    				
+		    			}
+		    			else if(resumeType == "002") 
+		    			{
+		    				window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&changeSource=exception";
+		    			} 
+		    			else if(resumeType == "003") 
+		    			{
+							window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentCourseId="+studentCourseId+"&changeSource=exception";
+		    			}
+		    		} 
+		    		else if(result == "false") 
 		    		{
-			    		//跳转
-			    	}
-			    	else if(result=="exist")
-			    	{
-			    		$.messager.alert('提示', "已经存在转班复课的申请单");
-			    	}
-	    			else
-	    			{
-	    				$.messager.alert('提示', "转班复课失败");
-	    			}	
-	    		}
-	    		else if(resumeType=="003")
-	    		{
-	    			if(result=="true") 
-		    		{
-			    		//跳转
-			    	}
-			    	else if(result=="exist")
-			    	{
-			    		$.messager.alert('提示', "已经存在转校复课的申请单");
-			    	}
-	    			else
-	    			{
-	    				$.messager.alert('提示', "转校复课失败");
-	    			}	
-	    		}	
-	    	});
-	    }
+		    			if(resumeType == "001") 
+		    			{
+		    				showMessage('提示', "原班课程已结课，无法原班复课！",null);
+		    			}
+		    			else if(resumeType == "002") 
+		    			{
+		    				showMessage('提示', "有待审批的转班申请单，无法转班复课！",null);
+		    			} 
+		    			else if(resumeType == "003") 
+		    			{
+		    				showMessage('提示', "有待审批的转校申请单，无法转班复课！",null);
+		    			}
+		    		}
+		        },
+		        error:function(result)
+		        {
+		        	hideProgressLoader();
+		        }
+			});
+        }
     });
 }
 

@@ -54,7 +54,7 @@ function viewDetail()
 			$.messager.alert('提示', "此学生没有课程信息");
 			return false;
 		}	
-		window.location.href="expDetail.jsp?expInfo="+studentId+","+studentCourseId;
+		window.location.href="expDetail.jsp?expInfo="+studentId+","+studentCourseId+","+row.excId;
 	}	
 }
 
@@ -96,7 +96,7 @@ function restoreClass()
 		}
 		else
 		{
-			window.location.href="restoreClass.jsp?expInfo="+studentId+","+studentCourseId;
+			window.location.href="restoreClass.jsp?expInfo="+studentId+","+studentCourseId+","+row.excId;
 		}	
 	}	
 }
