@@ -12,6 +12,11 @@
 		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
 		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
 		<script type="text/javascript" src="<%=path %>/js/leaveManage/leaveManage.js"></script>
+		<script type="text/javascript">
+		   	$(document).ready(function(){
+		   		 $("#leaveImgUrl").lightBox();
+		   	});
+	   </script>
 		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/css/style.css">
   	</head>
   	<body>
@@ -55,7 +60,11 @@
   					<td align="right">休学状态：</td>
   					<td align="left">${obj.leaveInfo.leaveState}</td>
   					<td align="right">查看休学申请：</td>
-  					<td align="left">${obj.leaveInfo.imgUrl}</td>
+  					<td align="left">
+  						<c:if test="${!empty obj.leaveInfo.imgUrl }">
+  							<span style="margin-right: 200px"><a href="${obj.leaveInfo.imgUrl }" id="leaveImgUrl" class="linkmore">查看休学申请单</a></span>
+  						</c:if>
+					</td>
   				</tr>
   			</table>
   		</div>
@@ -85,7 +94,7 @@
  						<td align="center">${courseInfo.className}</td>
  						<td align="center">${courseInfo.startTime}</td>
  						<td align="center">${courseInfo.finishTime}</td>
- 						<td></td>
+ 						<td align="center">${courseInfo.classProgress}</td>
  						<td align="center">${courseInfo.adviser}</td>
  						<td align="center">${courseInfo.dutyAdvister}</td>
  						<td align="center">${courseInfo.carer}</td>

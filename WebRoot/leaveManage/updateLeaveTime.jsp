@@ -15,6 +15,7 @@
 		<script type="text/javascript">
 		   	$(document).ready(function(){
 		   		 $("#delayDate").datebox("setValue","${obj.leaveInfo.leaveDate}")
+		   		 $("#leaveImgUrl").lightBox();
 		   	});
 	   </script>
 		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/css/style.css">
@@ -65,7 +66,11 @@
   					<td align="right">休学状态：</td>
   					<td align="left">${obj.leaveInfo.leaveState}</td>
   					<td align="right">查看休学申请：</td>
-  					<td align="left">${obj.leaveInfo.imgUrl}</td>
+  					<td align="left">
+						<c:if test="${!empty obj.leaveInfo.imgUrl }">
+  							<span style="margin-right: 200px"><a href="${obj.leaveInfo.imgUrl }" id="leaveImgUrl" class="linkmore">查看休学申请单</a></span>
+  						</c:if>
+					</td>
   				</tr>
   			</table>
   		</div>
@@ -95,7 +100,7 @@
  						<td align="center">${courseInfo.className}</td>
  						<td align="center">${courseInfo.startTime}</td>
  						<td align="center">${courseInfo.finishTime}</td>
- 						<td></td>
+ 						<td align="center">${courseInfo.classProgress}</td>
  						<td align="center">${courseInfo.adviser}</td>
  						<td align="center">${courseInfo.dutyAdvister}</td>
  						<td align="center">${courseInfo.carer}</td>
@@ -108,7 +113,7 @@
  			</tr>
  			<tr>
  				<td colspan="2" align="right">备注：</td>
- 				<td colspan="10"><textarea rows="7" cols="100" id="updateRemark" name="updateRemark" class="easyui-validatebox textbox" required="true"></textarea></td>
+ 				<td colspan="10"><textarea rows="7" cols="100" id="updateRemark" name="updateRemark" class="easyui-validatebox textbox"></textarea></td>
  			</tr>
  		</table>
  		</div>

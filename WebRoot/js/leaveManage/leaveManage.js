@@ -36,6 +36,40 @@ $(document).ready(function(){
 		});
     });
     
+    //上传
+    $("#uploadBtn").click(function() {
+    	var fileName = $("#fileName").filebox("getValue");
+    	if(fileName != "" && fileName != null && fileName != undefined) {
+    		var schoolId = $("#schoolId").val();
+    		var handlerId = $("#handlerId").val();
+    		$("#addLeaveForm").form("submit", {
+    			url: "/sys/fileUpload?type=leave&schoolId="+schoolId+"&handlerId="+handlerId,
+    			onSubmit: function () {
+    				
+    			},
+    			success: function (result) {
+    				var data = JSON.parse(result);
+    				if(data.flag)
+    				{
+    					$("#imgUrl").val(data.fileId);
+    					$.messager.alert('提示', "文件上传成功！", "info", function() {$("#cancelUploadBtn").linkbutton('disable');});
+    				}
+    				else
+    				{
+    					$.messager.alert('提示', data.msg);
+    				}
+    			}
+    		});
+    	} else {
+    		$.messager.alert('提示', "请您先选择一个文件！");
+    	}
+    });
+    
+    //取消上传
+    $("#cancelUploadBtn").click(function() {
+    	var fileName = $("#fileName").filebox("setValue", "");
+    });
+     
 });
 
 //跳转到查询可以休学学员页面
@@ -181,11 +215,12 @@ function addLeaveInfo()
 	if(validateSelect("stuList_data")) {
 		var row = $('#stuList_data').datagrid('getSelected');
 		var studentId = row.studentId;
+		var schoolId = row.schoolId;
 		var courseState = row.courseState;
 		var studentCourseId = row.studentCourseId;
-		var classProgress = row.classProgress;
+		var classProgress = encodeURIComponent(row.classProgress);
 		var funcNodeId = "";
-		window.location.href = "/sys/leaveManage/viewLeaveInfo.do?studentId="+studentId+"&courseState="+courseState+"&studentCourseId="+studentCourseId+"&funcNodeId="+funcNodeId+"&type=add&currentHours="+classProgress;
+		window.location.href = "/sys/leaveManage/viewLeaveInfo.do?studentId="+studentId+"&schoolId="+schoolId+"&courseState="+courseState+"&studentCourseId="+studentCourseId+"&funcNodeId="+funcNodeId+"&type=add&currentHours="+classProgress;
 	}
 }
 
@@ -193,40 +228,53 @@ function addLeaveInfo()
 function addLeaveSubmit()
 {
 	if($("#addLeaveForm").form('validate')){
-		var planLeaveTime = $("#planLeaveTime").val();
-		var addRemark = $("#addRemark").val();
-		addRemark = string2Json(addRemark);
-		addRemark = encodeURI(addRemark);
-		var studentId = $("#studentId").val();
-		var courseState = $("#courseState").val();
-		var studentCourseId = $("#studentCourseId").val();
-		var currentHours = $("#currentHours").val();
-		var handlerId = $("#handlerId").val();
-//		var createDate = new Date().format("yyyy-MM-dd");
-		//计算出 休学到期日期
-//		var leaveDate = new Date().dateAdd("m",parseInt(planLeaveTime)).format("yyyy-MM-dd");
-		var json = '{"studentId":"'+studentId+'","studentCourseId":"'+studentCourseId+'","leaveState":"001","leaveTime":"'+planLeaveTime+'","orignCourseState":"'+courseState+'","hours":"'+currentHours+'","leaveReason":"'+addRemark+'","handlerId":"'+handlerId+'"}';
-		$.ajax({
-			type : "POST",
-			url: "/sys/leaveManage/addLeaveInfo.do",
-			data: "json="+json,
-			async: false,
-			beforeSend: function()
-	    	{
-	    		$.messager.progress({title : '提交休学', msg : '正在提交休学，请稍等……'});
-	    	},
-	    	success: function(flag) {
-	    		$.messager.progress('close'); 
-	    		if(flag == "true"){
-	    			$.messager.alert('提示', "休学成功！");
-	    			window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";
-	    		}else if(flag == "false"){
-	    			$.messager.alert('提示', "休学失败！");
-	    		}
-	        } 
-		});
+		var flag = true;
+		var fileName = $("#fileName").filebox("getValue");
+		if(fileName != "" && fileName != null && fileName != undefined) {
+			var imgUrl = $("#imgUrl").val();
+			if(imgUrl == "" || imgUrl == null || imgUrl == undefined) {
+				flag = false;
+			}
+		}
+		if(flag) {
+			var planLeaveTime = $("#planLeaveTime").val();
+			var addRemark = $("#addRemark").val();
+			addRemark = string2Json(addRemark);
+			addRemark = encodeURI(addRemark);
+			var studentId = $("#studentId").val();
+			var courseState = $("#courseState").val();
+			var studentCourseId = $("#studentCourseId").val();
+			var currentHours = $("#currentHours").val();
+			var handlerId = $("#handlerId").val();
+			var imgUrl = $("#imgUrl").val();
+			alert(encodeURIComponent(currentHours))
+	//		var createDate = new Date().format("yyyy-MM-dd");
+			//计算出 休学到期日期
+	//		var leaveDate = new Date().dateAdd("m",parseInt(planLeaveTime)).format("yyyy-MM-dd");
+			var json = '{"studentId":"'+studentId+'","studentCourseId":"'+studentCourseId+'","leaveState":"001","leaveTime":"'+planLeaveTime+'","orignCourseState":"'+courseState+'","hours":"'+encodeURIComponent(currentHours)+'","imgUrl":"'+imgUrl+'","leaveReason":"'+addRemark+'","handlerId":"'+handlerId+'"}';
+			$.ajax({
+				type : "POST",
+				url: "/sys/leaveManage/addLeaveInfo.do",
+				data: "json="+json,
+				async: false,
+				beforeSend: function()
+		    	{
+		    		$.messager.progress({title : '提交休学', msg : '正在提交休学，请稍等……'});
+		    	},
+		    	success: function(flag) {
+		    		$.messager.progress('close'); 
+		    		if(flag == "true"){
+		    			$.messager.alert('提示', "休学成功！");
+		    			window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";
+		    		}else if(flag == "false"){
+		    			$.messager.alert('提示', "休学失败！");
+		    		}
+		        } 
+			});
+		}else {
+			$.messager.alert('提示', "请您先上传文件！");
+		}
 	}
-		
 }
 
 function validateSelect(object)
