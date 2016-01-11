@@ -13,38 +13,39 @@
   	<body>
   		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   		<input id="planId" type="hidden" value=""/>
+  		<div style="margin-right:5px">
  		<form id="qryFm">
-  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="15">
+  			<table class="search_tab">
   				<tr>
-  					<td align="right"><span>校区：</span></td>
-  					<td>
-  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;height: 25px;"
+  					<td width="80px" align="right"><span>所属校区：</span></td>
+  					<td width="110px">
+  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height: 25px;"
   							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
   							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
   						</select>
   					</td>
-  					<td align="right"><span>年度：</span></td>
-  					<td>
-  						<select class="easyui-combobox" name="year" id="year" style="width:150px;height: 25px;"
+  					<td width="40px" align="right"><span>年度：</span></td>
+  					<td width="90px">
+  						<select class="easyui-combobox" name="year" id="year" style="width:80px;height: 25px;"
   							data-options="valueField:'val',textField:'text', panelHeight: 'auto'">
   						</select>
   					</td>
-  					<td align="right"><span>月度：</span></td>
-  					<td>
-  						<select class="easyui-combobox" name="month" id="month" style="width:150px;height: 25px;"
+  					<td width="40px" align="right"><span>月度：</span></td>
+  					<td width="90px">
+  						<select class="easyui-combobox" name="month" id="month" style="width:80px;height: 25px;"
   							data-options="valueField:'val',textField:'text', panelHeight: 'auto'">
   						</select>
   					</td>
   					<td>
-  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" funcNodeId="3600"><span>查询</span></a>
+  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" funcNodeId="3600"><span>查询</span></a>
   						&nbsp;&nbsp;
-  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:150px" id="resetBtn" ><span>重置</span></a>
+  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="resetBtn" ><span>重置</span></a>
   					</td>
   				</tr>
   			</table>
  		</form>
  		
- 		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:450" id="list_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true">
+ 		<table class="easyui-datagrid" align="center" title="查询结果" id="list_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true">
 			<thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true" width="5%"></th>
@@ -96,6 +97,7 @@
   		<div id="dlgBtn">
     		<a href="javascript:void(0)" id="submitBtn" class="easyui-linkbutton" iconCls="icon-ok">保存</a> 
     		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+  		</div>
   		</div>
   	</body>
 </html>

@@ -20,11 +20,34 @@ $(document).ready(function(){
 	$("#orderClass").click(function(){
 		orderClass();
 	})
-	
+	var strArr=["审批管理","合并班级管理"];
+	$("ul.tabs").find("li").each(function(){
+		if(!isContain(strArr,$(this).find("span.tabs-title").html()))
+		{
+			$(this).css("display","none");
+		}	
+	})
+	$("ul.tabs").find("li:visible:first").trigger("click");
 	initQryButton("qryBtn","resetBtn","merFm","list_data");
 	initQryButton("qryBtns","resetBtns","appFm","list_datas");
 });
 
+function isContain(arr,val)
+{
+	var flag =false;
+	if(arr.length>0)
+	{
+		for(var i=0;i<arr.length;i++)
+		{
+			if(val==arr[i])
+			{
+				flag =true;
+				break;
+			}	
+		}	
+	}	
+	return flag;
+}
 
 function viewInfo(tableName)
 {
