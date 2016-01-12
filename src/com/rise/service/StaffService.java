@@ -86,4 +86,9 @@ public class StaffService {
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20012\",securityCode:\"0000000000\",params:{staffId:'"+staffId+"',oldPassword:'"+oldPassword+"',newPassword:'"+newPassword+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
+	
+	public String getStaffMsg(String staffId,String flag)throws Exception {
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS9011\",securityCode:\"0000000000\",params:{staffId:'"+staffId+"',flag:'"+flag+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
 }

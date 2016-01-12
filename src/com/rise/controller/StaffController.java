@@ -263,4 +263,28 @@ public class StaffController {
 		}
 	}
 	
+	@RequestMapping("/msg.do")
+	public void getStaffMsg(HttpServletResponse response , String operType , String staffId,String flag)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = staffService.getStaffMsg(staffId,flag);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 }
