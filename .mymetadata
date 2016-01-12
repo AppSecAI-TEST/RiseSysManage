@@ -3,7 +3,7 @@
   type="WEB"
   name="RiseSysManage"
   id="myeclipse.1345691459634"
-  context-root="/SystemManage"
+  context-root="/RiseSysManage"
   j2ee-spec="5.0"
   archive="RiseSysManage.war">
   <attributes>

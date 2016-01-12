@@ -154,18 +154,15 @@ $(document).ready(function() {
 	//退费审批
 	$("#refundApprove").click(function() {
 		var row = $('#approve_list_data').datagrid('getSelected');
-		if(row)
-		{
+		if (row) {
 			var courseType = row.courseType;
 			var refundFeeId = row.refundFeeId;
-			var processInstId=row.processInstanceId;
-			if(!isApprove(processInstId))
-			{
+			var processInstId = row.processInstanceId;
+			if (!isApprove(processInstId)) {
 				return false;
 			}
-			window.location.href = "/sys/refund/qryApproveRefund.do?refundFeeId="+refundFeeId+"&courseType="+courseType+"&type=approve";
-		} else 
-		{
+			window.location.href = "/sys/refund/qryApproveRefund.do?refundFeeId=" + refundFeeId + "&courseType=" + courseType + "&type=approve";
+		} else {
 			$.messager.alert('提示', "请先选择您要审批的退费申请！");
 		}
 	});
