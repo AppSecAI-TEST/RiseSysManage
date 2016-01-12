@@ -22,10 +22,10 @@ $(document).ready(function(){
 	            formatter: function(Confirmation, row)
 	            {  
 	        		if(row.flag == "false"){
-		                var btn = '<a class="update" onclick="updateTextbook(\''+row.giftId+'\',\''+row.giftCode+'\',\''+row.giftName+'\',\''+row.useType+'\',\''+row.getRemark+'\',\''+row.isEff+'\')" style="width:60px; height:25px;"  href="javascript:void(0)">修改</a>&nbsp;<a class="delete" onclick="removeTextbook(\''+row.giftId+'\')" style="width:60px; height:25px;" href="javascript:void(0)">删除</a>';  
+		                var btn = '<a class="update" onclick="updateTextbook(\''+row.giftId+'\',\''+row.giftCode+'\',\''+row.giftName+'\',\''+row.useType+'\',\''+row.getRemark+'\',\''+row.isEff+'\')" style="width:60px; height:25px;"  href="javascript:void(0)"><span>修改</span></a>&nbsp;<a class="delete" onclick="removeTextbook(\''+row.giftId+'\')" style="width:60px; height:25px;" href="javascript:void(0)"><span>删除</span></a>';  
 		                return btn;  
 	        		}else if(row.flag == "true"){
-	        			var btn = '<a class="update" disabled="disabled" style="width:60px; height:25px;"  href="javascript:void(0)">修改</a>&nbsp;<a class="delete" disabled="disabled" style="width:60px; height:25px;" href="javascript:void(0)">删除</a>';  
+	        			var btn = '<a class="update" disabled="disabled" style="width:60px; height:25px;"  href="javascript:void(0)"><span>修改</span></a>&nbsp;<a class="delete" disabled="disabled" style="width:60px; height:25px;" href="javascript:void(0)"><span>删除</span></a>';  
 		                return btn;  
 	        		}
 	            }  
