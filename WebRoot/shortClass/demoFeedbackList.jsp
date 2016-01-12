@@ -19,8 +19,9 @@
   					<td align="right" width="80px"><span>校区：</span></td>
   					<td width="110px">
   						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height: 25px;" editable="false"
-  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-  							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
+  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
+  							onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
+  							url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=701&fieldId=schoolId&headFlag=N">
   						</select>
   					</td>
   					<td width="80px" align="right"><span>班级状态：</span></td>

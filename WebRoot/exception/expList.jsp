@@ -17,9 +17,10 @@
   				<tr>
   					<td width="100px" align="right"><span>所属校区：</span></td>
   					<td width="110px">
-  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height:25px;"
-  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-  							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
+  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height:25px;" editable ="false"
+  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
+  							onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
+  							url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=701&fieldId=schoolId&headFlag=N">
   						</select>
   					</td>
   					<td width="100px" align="right"><span>学员姓名：</span></td>
@@ -30,7 +31,7 @@
   					<td width="240px">
   						<input class="easyui-textbox" name="startDay" id="startDay"  style="width:100px;height:25px;" />
   						&nbsp;-&nbsp;
-  						<input class="easyui-textbox" name="endDay" id="endDay"  style="width:100px;height:25px;" />
+  						<input class="easyui-textbox" name="endDay" id="endDay"  style="width:100px;height:25px;"/>
   					</td>
   				</tr>
   				<tr>
@@ -40,16 +41,16 @@
   					</td>
   					<td align="right"><span>异常状态：</span></td>
   					<td>
-  						<select name="excState" editable='false' class="easyui-combobox" id="excState" name="excState" style="width: 100px;height:25px;"
+  						<select name="excState" editable='false' class="easyui-combobox" id="excState" name="excState" style="width: 100px;height:25px;" editable="false"
 						 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
 	      				 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_EXC_T&codeType=EXC_STATE">
 						</select>
   					</td>
   					<td align="right"><span>异常发生时间：</span></td>
   					<td>
-  						<input class="easyui-datebox" name="startTime" id="startTime" style="width:100px;height:25px;" />
+  						<input class="easyui-datebox" name="startTime" id="startTime" style="width:100px;height:25px;" editable="false" />
   						至
-  						<input class="easyui-datebox" name="endTime" id="endTime" style="width:100px;height:25px;" />
+  						<input class="easyui-datebox" name="endTime" id="endTime" style="width:100px;height:25px;" editable="false"/>
   					</td>
   					<td>
   						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;height:25px;" id="qryBtn" funcNodeId="3001">查询</a>

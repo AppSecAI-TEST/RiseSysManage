@@ -1,25 +1,5 @@
 $(document).ready(function() {
-	initDate();
-    $("#qryBtn").click(function() {
-    	var obj = JSON.stringify($("#qryFm").serializeObject());
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-    	$('#list_data').datagrid({
-    		url : "/sys/pubData/qryDataListByPage.do",
-    		queryParams:{
-    			param : obj
-    		},
-    		onLoadSuccess:function(){
-    			$('#list_data').datagrid('clearSelections');
-    		}
-    	});
-    });
-	 
-    $("#resetBtn").click(function() {
-    	$('#qryFm').form('clear');//清空窗体数据  
-    	initDate();
-    });
+	initQryButton("qryBtn","resetBtn","qryFm","list_data");
     $("#addExp").click(function(){
     	window.location.href="selectClass.jsp";
     });
@@ -30,17 +10,6 @@ $(document).ready(function() {
     	 restoreClass();
      });
 });
-
-
-function initDate()
-{
-	var curr_time = new Date();
-	$('#endTime').datebox('setValue', myformatter(curr_time));
-	curr_time.setMonth(curr_time.getMonth() - 1);
-	$('#startTime').datebox('setValue', myformatter(curr_time));
-	$("#startDay").textbox('setValue',"0");
-	$("#endDay").textbox('setValue',"30");
-}
 
 function viewDetail()
 {

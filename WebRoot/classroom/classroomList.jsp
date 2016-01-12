@@ -15,16 +15,17 @@
  		<form id="qryFm">
   			<table class="search_tab">
   				<tr>
-  					<td width="100px" align="right">校区：</td>
+  					<td width="80px" align="right">校区：</td>
   					<td width="120px">
-  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height: 25px;"
-  							data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-  							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
+  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height: 25px;" editable="false"
+  							data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
+  							onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
+  							url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=706&fieldId=schoolId&headFlag=N">
   						</select>
   					</td>
   					<td width="80px" align="right">教室状态：</td>
   					<td width="100px">
-  						<select class="easyui-combobox" name="roomState" id="roomState" style="width:80px;height: 25px;"
+  						<select class="easyui-combobox" name="roomState" id="roomState" style="width:80px;height: 25px;" editable="false"
   							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
   							url="<%=path%>/pubData/qryCodeNameList.do?tableName=ROOM_T&codeType=ROOM_STATE">
   						</select>

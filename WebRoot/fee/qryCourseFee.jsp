@@ -11,6 +11,7 @@
 		<script type="text/javascript" src="<%=path %>/js/courseFee/qryCourseFee.js"></script>
   	</head>
   	<body>
+  		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   		<div id="tt" class="easyui-tabs" style="min-width:1110px;width:100%;overflow:auto;height:auto;">
   		<div  title="费用调整" style="padding:5px;">
 	 		<form id="qryFm">

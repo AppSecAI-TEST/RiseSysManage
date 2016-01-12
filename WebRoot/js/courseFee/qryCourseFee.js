@@ -45,7 +45,7 @@ $(document).ready(function(){
 		}
 	});
 	$("#schoolId").combobox( {
-		url : "/sys/pubData/qrySchoolList.do?schoolId=",
+		url : "/sys/pub/pageCategory.do?staffId="+$("#handlerId").val()+"&resourceId=700&fieldId=schoolId&headFlag=N",
 		onChange : function() {
 			var sId = $("#schoolId").combobox("getValue");
 			var urls = "/sys/pubData/qryTeacherList.do?schoolId=" + sId;
@@ -57,11 +57,14 @@ $(document).ready(function(){
 			});
 		},
 		onLoadSuccess:function(data){
-			$("#schoolId").combobox("select",data[0].schoolId);
+			if(data.length>0)
+			{
+				$("#schoolId").combobox("select",data[0].schoolId);
+			}
 		}
 	});
 	$("#schoolIds").combobox( {
-		url : "/sys/pubData/qrySchoolList.do?schoolId=",
+		url : "/sys/pub/pageCategory.do?staffId="+$("#handlerId").val()+"&resourceId=700&fieldId=schoolId&headFlag=N",
 		onChange : function() {
 			var sId = $("#schoolIds").combobox("getValue");
 			var urls = "/sys/pubData/qryTeacherList.do?schoolId=" + sId;
@@ -73,7 +76,10 @@ $(document).ready(function(){
 			});
 		},
 		onLoadSuccess:function(data){
-			$("#schoolIds").combobox("select",data[0].schoolId);
+			if(data.length>0)
+			{
+				$("#schoolIds").combobox("select",data[0].schoolId);
+			}	
 		}
 	});
     

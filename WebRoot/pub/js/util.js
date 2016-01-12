@@ -715,40 +715,68 @@ function checkMobile(mobile) {
 //绑定查询页面的查询重置按钮事件
 function initQryButton(qryName,resetName,formName,tableName)
 {
+	var schoolNameArr =['schoolId','schoolIds','approveSchoolId','actionSchoolId'];
 	$("#"+qryName+"").click(function() {
-    	var obj = JSON.stringify($("#"+formName+"").serializeObject());
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#"+qryName+"").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-    	$("#"+tableName+"").datagrid({
-    		url : "/sys/pubData/qryDataListByPage.do",
-    		queryParams:{
-    			param : obj
-    		},
-    		onLoadSuccess:function(){
-    			$("#"+tableName+"").datagrid('clearSelections');
+		var qryFlag =true;
+
+		//判断查询校区是否有值
+		for(var i=0;i<schoolNameArr.length;i++)
+    	{
+    		var schoolObj =$("#"+formName+"").find("#"+schoolNameArr[i]);
+    		if(schoolObj.length>0)
+    		{
+    			if(schoolObj.combobox("getValue")=="")
+	    		{
+	    			qryFlag =false;
+	    			break;
+	    		}	
     		}
-    	});    
+    	}
+		if(qryFlag)
+		{
+			var obj = JSON.stringify($("#"+formName+"").serializeObject());
+	    	obj = obj.substring(0, obj.length - 1);
+	    	var funcNodeId = $("#"+qryName+"").attr("funcNodeId");
+	    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+	    	$("#"+tableName+"").datagrid({
+	    		url : "/sys/pubData/qryDataListByPage.do",
+	    		queryParams:{
+	    			param : obj
+	    		},
+	    		onLoadSuccess:function(){
+	    			$("#"+tableName+"").datagrid('clearSelections');
+	    		}
+	    	}); 
+		}
+		else
+		{
+			showMessage("提示","没有有效的校区可供查询",null);
+		}	
     });
 	 
     $("#"+resetName+"").click(function() 
     {
     	$("#"+formName+"").form('clear');//清空窗体数据  
     	//校区赋默认值
-    	var schoolNameArr =['schoolId','schoolIds','approveSchoolId','actionSchoolId'];
     	for(var i=0;i<schoolNameArr.length;i++)
     	{
     		var schoolObj =$("#"+formName+"").find("#"+schoolNameArr[i]);
     		if(schoolObj.length>0)
     		{
-    			schoolObj.combobox("select",schoolObj.combobox("getData")[0].schoolId);
+    			if(schoolObj.combobox("getData").length>0)
+    			{
+    				schoolObj.combobox("select",schoolObj.combobox("getData")[0].schoolId);
+    			}	
     		}	
     	}
     	//阶段赋默认值
     	var stageObj =$("#"+formName+"").find("#stageId");
     	if(stageObj.length>0)
     	{
-    		stageObj.combobox("select",stageObj.combobox("getData")[0].stageId);
+    		if(stageObj.combobox("getData").length>0)
+    		{
+    			 stageObj.combobox("select",stageObj.combobox("getData")[0].stageId);
+    		}	
     	}
     });
 }

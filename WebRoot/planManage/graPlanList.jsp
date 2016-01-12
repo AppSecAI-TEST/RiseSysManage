@@ -20,15 +20,18 @@
   					<td width="80px" align="right"><span>所属校区：</span></td>
   					<td width="110px">
   						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height: 25px;"
-  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-  							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
+  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
+  							onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
+  							url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=708&fieldId=schoolId&headFlag=N">
+
   						</select>
   					</td>
   					<td width="80px" align="right"><span>课程阶段：</span></td>
   					<td width="110px">
   						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
-			      			url="<%=path %>/pubData/qryStage.do">
+							data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto', 
+			      			onLoadSuccess:function(data){if(data.length > 0) $('#stageId').combobox('setValue',data[0].stageId);}"
+  									url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=803&fieldId=stageId">
 				        </select>
   					</td>
   							

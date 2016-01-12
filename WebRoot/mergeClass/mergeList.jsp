@@ -36,15 +36,17 @@
 		  					<td width="90px;" align="right">校区：</td>
 		  					<td width="120px;">
 		  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px;height:25px;" editable="false"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-						      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
+		  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
+									onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
+  									url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=704&fieldId=schoolId&headFlag=N">
 				        		</select>
 		  					</td>
 		  					<td width="90px;" align="right">课程阶段：</td>
 		  					<td width="140px;">
 		  						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 120px;height:25px;" editable="false"
-									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
-				      				url="<%=path %>/pubData/qryStage.do">
+									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
+				      				onLoadSuccess:function(data){if(data.length > 0) $('#stageId').combobox('setValue',data[0].stageId);}"
+  									url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=801&fieldId=stageId">
 				        		</select>
 		  					</td>
 		  					<td width="110px;" align="right">计划审批时间：</td>
@@ -127,16 +129,18 @@
 		  				<tr>
 		  					<td width="90px;" align="right">校区：</td>
 		  					<td width="120px;">
-		  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px;height:25px;" editable="false"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-						      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
+		  						<select id="schoolIds" name="schoolId" class="easyui-combobox" style="width: 100px;height:25px;" editable="false"
+									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
+						      		onLoadSuccess:function(data){if(data.length > 0) $('#schoolIds').combobox('setValue',data[0].schoolId);}"
+  									url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=705&fieldId=schoolId&headFlag=N">
 				        		</select>
 		  					</td>
 		  					<td width="90px;" align="right">课程阶段：</td>
 		  					<td width="140px;">
-		  						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 120px;height:25px;" editable="false"
-									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
-				      				url="<%=path %>/pubData/qryStage.do">
+		  						<select id="stageIds" name="stageId" class="easyui-combobox" style="width: 120px;height:25px;" editable="false"
+									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto', 
+				      				onLoadSuccess:function(data){if(data.length > 0) $('#stageIds').combobox('setValue',data[0].stageId);}"
+  									url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=802&fieldId=stageId">
 				        		</select>
 		  					</td>
 		  					<td width="110px;" align="right">计划审批时间：</td>
@@ -207,15 +211,6 @@
 		   			<a href="javascript:void(0)" id="approve" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">审批</a>
 		   			<a href="javascript:void(0)" id="viewApprove" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">浏览</a>
 		 		</div>
-		 	</div>
-		 	<div id="3" title="测试1" style="padding:5px;">
-		 	测试1
-		 	</div>
-		 	<div id="4" title="测试2" style="padding:5px;">
-		 	测试2
-		 	</div>
-		 	<div id="5" title="测试3" style="padding:5px;">
-		 	测试3
 		 	</div>
  		</div>	
   	</body>
