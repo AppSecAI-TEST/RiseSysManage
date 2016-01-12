@@ -145,4 +145,30 @@ public class RefundController
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/cancelRefund.do")
+	public void cancelRefund(String param, HttpServletResponse response)
+	{
+		log.error(param);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = refundService.cancelRefund(param);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }

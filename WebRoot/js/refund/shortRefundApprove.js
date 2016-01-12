@@ -60,26 +60,46 @@ $(document).ready(function() {
 					$("#financialName").html(obj.handlerName);
 					$("#financialRemark").html(obj.remark);
 				} else if("104" == obj.tacheState) {
-					$("#academicOrSalesResult").html(obj.approveTypeText);
-					$("#academicOrSalesDate").html(obj.createDate);
-					$("#academicOrSalesName").html(obj.handlerName);
-					$("#academicOrSalesRemark").html(obj.remark);
+					$("#chiefFinancialOfficerResult").html(obj.approveTypeText);
+					$("#chiefFinancialOfficerDate").html(obj.createDate);
+					$("#chiefFinancialOfficerName").html(obj.handlerName);
+					$("#chiefFinancialOfficerRemark").html(obj.remark);
+				} else if("005" == obj.tacheState) {
+					$("#headquartersFinancialRemark").html(obj.remark);
 				}
 			});
 		} 
 	});
 	
 	//根据不同的审批人员显示不同的审批信息
-	var nextState = $("#nextState").val();
-	if("102" == nextState) {
-		$("#financialApproveDiv").css("display", "block");
-	} else if("104" == nextState) {
-		$("#financialViewDiv").css("display", "block");
-		$("#chiefFinancialOfficerApproveDiv").css("display", "block");
-	} else if("106" == nextState) {
-		$("#financialViewDiv").css("display", "block");
-		$("#chiefFinancialOfficerViewDiv").css("display", "block");
-		$("#headquartersFinancialApproveDiv").css("display", "block");
+	var optionType = $("#optionType").val();
+	if("approve" == optionType) {
+		var nextState = $("#nextState").val();
+		if("102" == nextState) {
+			$("#financialApproveDiv").css("display", "block");
+		} else if("104" == nextState) {
+			$("#financialViewDiv").css("display", "block");
+			$("#chiefFinancialOfficerApproveDiv").css("display", "block");
+		} else if("108" == nextState) {
+			$("#financialViewDiv").css("display", "block");
+			$("#chiefFinancialOfficerViewDiv").css("display", "block");
+			$("#headquartersFinancialApproveDiv").css("display", "block");
+		}
+	} else if("cancel" == optionType) {
+		var tacheState = $("#tacheState").val();
+		if("005" == tacheState) {
+			$("#financialApproveDiv").css("display", "block");
+			$("#chiefFinancialOfficerViewDiv").css("display", "block");
+			$("#headquartersFinancialViewDiv").css("display", "block");
+		} else {
+			var nextState = $("#nextState").val();
+			if("104" == nextState) {
+				$("#financialViewDiv").css("display", "block");
+			} else if("108" == nextState) {
+				$("#financialViewDiv").css("display", "block");
+				$("#chiefFinancialOfficerViewDiv").css("display", "block");
+			}
+		}
 	}
 	
 	$("input", $("#minusTextbookFee").next("span")).blur(function() {
@@ -167,6 +187,32 @@ $(document).ready(function() {
 				} 
 			});
 		}
+	});
+	
+	//取消退费
+	$("#refundCancelSubmit").click(function() {
+		var obj = $("#refundCancelFm").serializeObject();
+		var param = JSON.stringify(obj);
+		param = encodeURI(param);
+		$.ajax({
+			url: "/sys/refund/cancelRefund.do",
+			data: "param=" + param,
+			dataType: "json",
+			async: true,
+			beforeSend: function()
+			{
+				$.messager.progress({title : '取消退费', msg : '正在取消退费，请稍等……'});
+			},
+			success: function (data) {
+				$.messager.progress('close'); 
+				var flag = data.flag;
+				if(flag) {
+					$.messager.alert('提示', "取消退费成功！", "info", function() {window.location.href = "/sys/refund/refund.jsp";});
+				} else {
+					$.messager.alert('提示', data.msg);
+				}
+			} 
+		});
 	});
 });
 

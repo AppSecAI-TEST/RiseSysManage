@@ -13,8 +13,9 @@
   	</head>
   
   	<body>
-  		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="短期课退费审批">
+  		<div class="easyui-panel" style="min-width:1100px; width:98%;height:auto;" title="短期课退费审批">
   			<form id="refundApproveFm">
+  				<input type="hidden" id="optionType" value="approve"/>
   				<input type="hidden" id="refundFeeId" value="${obj.refundFeeId }"/>
   				<input type="hidden" id="studentId" value="${obj.refundFeeObj.studentId }"/>
   				<input type="hidden" id="refundImgUrl" value="${obj.refundFeeObj.imgUrl }"/>
@@ -27,11 +28,11 @@
   				<table width="100%" cellpadding="5px" class="maintable">
   					<tr>
 	  					<td align="right" width="8%"><span>学员姓名：</span></td>
-	  					<td width="8%"><span>${obj.refundObj.name }</span></td>
+	  					<td width="8%"><span>${obj.refundFeeObj.name }</span></td>
 	  					<td align="right" width="8%"><span>在读班级：</span></td>
-	  					<td width="10%"><span>${obj.refundObj.className }</span></td>
+	  					<td width="10%"><span>${obj.refundFeeObj.className }</span></td>
 	  					<td align="right" width="8%"><span>课时进度：</span></td>
-	  					<td width="10%"><span>${obj.refundObj.classProgress }</span></td>
+	  					<td width="10%"><span>${obj.refundFeeObj.classProgress }</span></td>
 	  					<td align="right" width="8%"><span>业绩顾问：</span></td>
 	  					<td width="15%">
 	  						<span>
@@ -317,10 +318,10 @@
   				</div>
   			</form>
   		</div>
-  		<div style="margin-top: 20px;min-width:1100px; width:99%;">
+  		<div style="margin-top: 25px;min-width:1100px; width:99%;">
 	      	<div style="float: left;margin-left: 800px;">
 	      		<a href="javascript:void(0)" id="refundApproveSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      		&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	      		&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
 	      	</div>
 	   </div>
 	   <div id="dlg" class="easyui-dialog" closed="true" modal="true">
