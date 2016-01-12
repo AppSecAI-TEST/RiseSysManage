@@ -58,6 +58,8 @@ public class StaffT {
     private String remark;
 
     private String remoteIp;
+    
+	private String tabsAuthInfo;
 
     private Date lastDate;
 
@@ -294,8 +296,16 @@ public class StaffT {
     public void setRemoteIp(String remoteIp) {
         this.remoteIp = remoteIp == null ? null : remoteIp.trim();
     }
+    
+    public String getTabsAuthInfo() {
+		return tabsAuthInfo;
+	}
 
-    public Date getLastDate() {
+	public void setTabsAuthInfo(String tabsAuthInfo) {
+		this.tabsAuthInfo = tabsAuthInfo;
+	}
+
+	public Date getLastDate() {
         return lastDate;
     }
 

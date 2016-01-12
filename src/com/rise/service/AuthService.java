@@ -71,6 +71,7 @@ public class AuthService
 			String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2002\",securityCode:\"0000000000\",params:{menuId:\""+menuId+"\",staffId:\""+staffT.getStaffId()+"\"},rtnDataFormatType:\"user-defined\"}";
 			String result = ServiceEngine.invokeHttp(param);
 			map.put(menuId, result);
+			session.setAttribute("menuNodeInfo", map);
 			return result;
 		}
 	}

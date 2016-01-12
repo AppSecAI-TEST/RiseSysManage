@@ -114,6 +114,24 @@
 			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="datagridSettingFunc()">保存</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#datagridSettingDlg').dialog('close')">取消</a>
 		</div>
+		<div id="tabsFilterDlg" class="easyui-dialog" style="width:300px;height:420px;padding:0px 0px" modal="true" closed="true" buttons="#tabsFilterDlg-buttons">
+			<p style="text-align:left;width:95%;height:8%;margin:8px auto;padding:0 0;font-size:12px;font-family:'微软雅黑';">标签：&nbsp;&nbsp;<input name="filterDataValue" id="filterDataValue" type="text" style="width:150px" class="easyui-textbox" />&nbsp;&nbsp;<a href="javascript:void(0)" id="filterDataBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:70px;" onclick="addFilterDataFunc()">添加</a></p>
+			<table class="easyui-datagrid" title="可使用标签列表" style="width:99%;height:85%;margin:0 auto;padding:0 0;" id="tabsFilterData" toolbar="#tabsFilterData-toolbar" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="false">
+				<thead>
+					<tr>
+						<th field="dataValue" checkbox="true"></th>
+						<th field="dataName" width="88%">标签名称</th>
+					</tr>
+				</thead>
+			</table>
+			<div id="tabsFilterData-toolbar">
+	   			<a href="javascript:void(0)" id="deleteTabs" onclick="removeFilterData()" class="easyui-linkbutton" iconCls="icon-remove" style="width:70px;">删除</a>
+			</div>
+		</div>
+		<div id="tabsFilterDlg-buttons">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="tabsFilterFunc()">保存</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#tabsFilterDlg').dialog('close')">取消</a>
+		</div>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$.post("/sys/sysRole/qryTotalRoleList.do",function(data){
@@ -252,6 +270,23 @@
 							});
 						}
 					}
+					else if(row.resourceT.widgetType == "tabs")
+					{
+						$('#tabsFilterDlg').dialog('open').dialog('setTitle','调整功能');
+						$("#tabsFilterData").css("height","400px");
+						$("#tabsFilterData").datagrid({
+							url:"/sys/funcNode/getCtrlData.do?resourceId="+row.html+"&funcNodeId="+row.parentFuncNodeId+"&sysRoleId="+roleRow.sysRoleId,
+							onLoadSuccess:function(data){
+								if(data){
+						            $.each(data.rows, function(index, item){
+						                if(item.checked){
+						                    $('#tabsFilterData').datagrid('checkRow', index);
+						                }
+						            });
+						        }
+							}
+						});
+					}
 					else
 					{
 						$('#comboboxSettingDlg').dialog('open').dialog('setTitle','调整功能');
@@ -290,6 +325,82 @@
 						$.messager.alert('提示',"调整功能点失败:"+data);
 					}
 				});
+			}
+			function tabsFilterFunc()
+			{
+				var roleRow = $('#dgPrivRoleList').datagrid('getSelected');
+				var privRow = $('#dgPrivFuncList').datagrid('getSelected');
+				var tabsFilterData = $("#tabsFilterData").datagrid('getData');
+				var arr = [];
+				for(var i = 0,n = tabsFilterData.rows.length;i < n;i++)
+				{
+					arr.push(tabsFilterData.rows[i].dataValue);
+				}
+				ajaxLoading("调整中....");
+				$.post("/sys/funcNode/settingConditionInfo.do",{roleId:roleRow.sysRoleId,funcNodeId:privRow.parentFuncNodeId,resourceId:privRow.html,valArr:arr.join(","),type:"1"},function(data){
+					ajaxLoadEnd();
+					if(data == "success"){
+						$.messager.alert('提示',"权限调整成功","info",function(){
+							$("#dgPrivFuncList").datagrid("reload");
+							$('#tabsFilterDlg').dialog('close');
+						});
+					}
+					else
+					{
+						$.messager.alert('提示',"调整权限失败:"+data);
+					}					
+				});
+			}
+			function addFilterDataFunc()
+			{
+				var filterDataValue = $("#filterDataValue").textbox("getValue");
+				if(filterDataValue != "")
+				{
+					var tabsFilterData = $("#tabsFilterData").datagrid("getData");
+					if(isExistFilterData(tabsFilterData,filterDataValue))
+					{
+						var obj = {
+							dataValue:filterDataValue,
+							dataName:filterDataValue
+						};
+						$("#tabsFilterData").datagrid('insertRow', {
+		                    index: 0,
+		                    row: obj
+		                });
+					}
+					else
+					{
+						$.messager.alert('提示',"您输入的标签已经存在","info",function(){
+							$("#filterDataValue").textbox("setValue","");
+							$("#filterDataValue").textbox("textbox").focus();
+						});
+					}
+				}
+				else
+				{
+					$.messager.alert('提示',"请输入要添加标签名称","info",function(){
+						$("#filterDataValue").textbox("textbox").focus();
+					});
+				}
+			}
+			function isExistFilterData(dataArr , value)
+			{
+				for(var i = 0,n = dataArr.rows.length;i < n;i++)
+				{
+					if(dataArr.rows[i].dataValue == value)
+					{
+						return false;
+					}
+				}
+				return true;
+			}
+			function removeFilterData()
+			{
+				var tabsFilterData = $("#tabsFilterData").datagrid('getChecked');
+				for(var i = 0,n = tabsFilterData.length;i < n;i++)
+				{
+					$("#tabsFilterData").datagrid('deleteRow', $('#tabsFilterData').datagrid("getRowIndex",tabsFilterData[i]));					
+				}
 			}
 		</script>
 	</body>
