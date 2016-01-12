@@ -11,10 +11,7 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
 		<script type="text/javascript" src="<%=path %>/js/giftManage/goodsGiftManage.js"></script>
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/css/style.css">
   	</head>
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="实物&教材赠品赠送">
@@ -31,18 +28,18 @@
 						<a href="javascript:void(0)" class="easyui-linkbutton" id="activity" data-options="iconCls:'icon-search'" style="width:90px; height: 20px;display:none;float:right;margin-right:5px" onclick="chooseActivity()">选择活动</a>
 						<a href="javascript:void(0)" class="easyui-linkbutton" id="course" data-options="iconCls:'icon-search'" style="width:90px; height: 20px;display:none;float:right;margin-right:5px" onclick="chooseCourse()">选择课程</a>
 					</td>
-					<td align="right" class="activity" width="7%" style="display: none">活动标题：</td>
+					<td align="right" class="activity" width="7%" style="display: none"><span>活动标题：</span></td>
 					<td align="left" class="activity" id="titleText" width="18%" style="display: none"></td>
-					<td align="right" class="activity" width="7%" style="display: none">活动时间：</td>
+					<td align="right" class="activity" width="7%" style="display: none"><span>活动时间：</span></td>
 					<td align="left" class="activity" id="activityDate" width="15%" style="display: none"></td>
 					<td class="activity" width="10%" style="display: none"></td>
-					<td align="right" class="course"  width="7%" style="display: none">课程阶段：</td>
+					<td align="right" class="course"  width="7%" style="display: none"><span>课程阶段：</span></td>
 					<td align="left" class="course" id="stageId" width="7%" style="display: none"></td>
-					<td align="right" class="course" width="7%" style="display: none">缴费时间：</td>
+					<td align="right" class="course" width="7%" style="display: none"><span>缴费时间：</span></td>
 					<td align="left" class="course" id="payDate" width="10%" style="display: none"></td>
-					<td align="right" class="course"  width="7%" style="display: none">课程状态：</td>
+					<td align="right" class="course"  width="7%" style="display: none"><span>课程状态：</span></td>
 					<td align="left" class="course" id="courseState" width="7%" style="display: none"></td>
-					<td align="right" class="course"  width="7%" style="display: none">班级：</td>
+					<td align="right" class="course"  width="7%" style="display: none"><span>班级：</span></td>
 					<td align="left" class="course" id="className" width="7%" style="display: none"></td>
   				</tr>
   			</table>
@@ -50,14 +47,14 @@
 	      	   <tr id="giftModelTR">
       	        <td width="8%" align="right"><span>赠品类别：</span></td>
       	        <td width="10%">
-      	           <select id="giftType" style="width: 100px;"
+      	           <select id="giftType" style="width: 100px;height:25px;"
    				     data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
    					 url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE&codeFlag=GOODS,TEXTBOOK" required="true" >
      	           </select>
      	        </td>
       	        <td width="8%" align="right"><span>赠品名称：</span></td>
       	        <td width="15%">
-		      	   <select class="easyui-combobox" id="giftName" style="width: 120px;"></select>
+		      	   <select class="easyui-combobox" id="giftName" style="width: 120px;height:25px;"></select>
      	            </td>
       	        <td width="8%" align="right"><span>是否领用：</span></td>
       	        <td width="15%" align="left">
@@ -65,7 +62,7 @@
       				&nbsp;<input class="goodsGet" type="radio" value="N" name="isGet"/><span>未领</span>
      	           </td>
       	        <td width="7%" align="right"><span>发放人：</span></td>
-      	        <td width="8%"><input id="granter" type="text" class="easyui-textbox validatebox" style="width: 100px;"/></td>
+      	        <td width="8%"><input id="granter" type="text" class="easyui-textbox validatebox" style="width: 100px;height:25px;"/></td>
       	        <td width="7%" align="center"><a href="javascript:void(0)" id="addGoodsGiftBtn" class="easyui-linkbutton" id="addGiftBtn" iconCls="icon-add" style="width: 80px;" onclick="addRow()">添加</a></td>
       	      </tr>
       	      <tr style="display:none;" name="addGift" id="addGift" >
@@ -85,13 +82,15 @@
      	       </tr>
       	    </table>
   		</div>
- 		<div style="margin-top: 20px;min-width:1100px; width:99%;">
-	      	<div style="float: right;">
-	      		<a href="javascript:void(0)" id="addGoodsGiftSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;" onclick="addGoodsGiftSubmit()">提交</a>
-	      		&nbsp;
-	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
-	      	</div>
-	   </div>
+  		<table style="margin-top: 20px;min-width:1100px; width:99%;">
+			<tr>
+				<td align="center">
+					<a href="javascript:void(0)" id="addGoodsGiftSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;" onclick="addGoodsGiftSubmit()"><span>提交</span></a>
+		      		&nbsp;
+		      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="javascript:window.history.back()"><span>返回</span></a>
+				</td>
+			</tr>
+		</table>
 	   <iframe id="dlg" class="easyui-dialog" style="width:1000px; height: 450px; padding: 10px 20px" closed="true" modal="true"></iframe>
 	   <iframe id="courseDlg" class="easyui-dialog" style="width:1000px; height: 450px; padding: 10px 20px" closed="true" modal="true"></iframe>
   	</body>

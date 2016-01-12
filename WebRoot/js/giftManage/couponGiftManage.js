@@ -77,14 +77,13 @@ $(document).ready(function(){
     
     var staffId = $("#staffId").val();
 	$("#couponSchoolId").combobox({
-		url : "/sys/pubData/qrySchoolList.do?schoolId",//返回json数据的url
+		url : "/sys/pub/pageCategory.do?staffId="+staffId+"&resourceId=503&fieldId=schoolId&headFlag=N",//返回json数据的url
 		valueField : "schoolId",
 		textField : "schoolName",
 		panelHeight : "auto",
 		formatter : formatSchool,
-		onLoadSuccess : function() {
-			$("#couponSchoolId").combobox("setValue", "");
-			$("#couponSchoolId").combobox("setText", "");
+		onLoadSuccess : function(data) {
+			$("#couponSchoolId").combobox('setValue',data[0].schoolId);
 		},
 		onChange : function(n, o) {
 			if(n != "" && n != null && n != undefined) {
@@ -98,15 +97,15 @@ $(document).ready(function(){
 						return "<span>" + data.className + "</span>";
 					}
 				});
-				$("#couponStudentId").combobox({
-					url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId=20&fieldId=studentId",
-					valueField : "studentId",
-					textField : "name",
-					panelHeight : "auto",
-					formatter : function(data) {
-						return "<span>" + data.name + "</span>";
-					}
-				});
+//				$("#couponStudentId").combobox({
+//					url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId=20&fieldId=studentId",
+//					valueField : "studentId",
+//					textField : "name",
+//					panelHeight : "auto",
+//					formatter : function(data) {
+//						return "<span>" + data.name + "</span>";
+//					}
+//				});
 			} else {
 				$("#couponSchoolId").combobox("setText", "");
 				$("#couponClassInstId").combobox('clear');

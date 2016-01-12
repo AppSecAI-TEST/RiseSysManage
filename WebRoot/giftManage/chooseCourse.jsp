@@ -31,9 +31,9 @@
 				</tr>
 			</thead>
 		</table>
-		<div style="margin-top: 10px;text-align:right;">
-	      	<a href="javascript:void(0)" id="courseSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      	&nbsp;<a href="javascript:void(0)" id="back" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:parent.window.$('#courseDlg').dialog('close')">返回</a>
+		<div style="margin-top: 10px;text-align:center;">
+	      	<a href="javascript:void(0)" id="courseSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;">提交</a>
+	      	&nbsp;<a href="javascript:void(0)" id="back" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="javascript:parent.window.$('#courseDlg').dialog('close')">返回</a>
 	     </div>
 	</body>
 </html>

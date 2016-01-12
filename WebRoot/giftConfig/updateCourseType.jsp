@@ -63,13 +63,13 @@
 			</form>
 		</div>
 		<div style="text-align:center" id="courseType-buttons">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px; height:25px;" onclick="updateCourseTypeSubmit()"><span>提交</span></a>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" style="width:100px; height:25px;" onclick="javascript:$('#updateCourseTypeDlg').dialog('close')"><span>取消</span></a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;" onclick="updateCourseTypeSubmit()"><span>提交</span></a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" style="width:100px;" onclick="javascript:$('#updateCourseTypeDlg').dialog('close')"><span>取消</span></a>
 		</div>
  		<table style="margin-top: 20px;min-width:1100px; width:99%;">
 			<tr>
 				<td align="center">
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px; height: 25px;" onclick="javascript:window.history.back()"><span>返回</span></a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="javascript:window.history.back()"><span>返回</span></a>
 				</td>
 			</tr>
 		</table>

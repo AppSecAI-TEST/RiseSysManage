@@ -58,8 +58,8 @@
 				</form>
 			</div>
 			<div style="text-align:center" id="goods-buttons">
-				<a href="#" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;height:25px;" onclick="saveGoodsSubmit()"><span>提交</span></a>
-				<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" style="width:100px;height:25px;" onclick="javascript:$('#goodsDlg').dialog('close')"><span>取消</span></a>
+				<a href="#" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;" onclick="saveGoodsSubmit()"><span>提交</span></a>
+				<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" style="width:100px;" onclick="javascript:$('#goodsDlg').dialog('close')"><span>取消</span></a>
 			</div>
   		</div>
   		<div title="课程赠品" style="padding:5px;display:block;">
@@ -95,8 +95,8 @@
 				</form>
 			</div>
 			<div style="text-align:center" id="courseType-buttons">
-				<a href="#" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;height:25px;" onclick="saveCourseType()"><span>提交</span></a>
-				<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" style="width:100px;height:25px;" onclick="javascript:$('#courseTypeDlg').dialog('close')"><span>取消</span></a>
+				<a href="#" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;" onclick="saveCourseType()"><span>提交</span></a>
+				<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" style="width:100px;" onclick="javascript:$('#courseTypeDlg').dialog('close')"><span>取消</span></a>
 			</div>
 	 		<div id="courseNameDlg" class="easyui-dialog" style="width:550px;height:320px;padding:0px 0px" modal="true" closed="true" buttons="#courseName-buttons">
 				<form id="courseNameFm" method="post" novalidate>
@@ -139,8 +139,8 @@
 				</form>
 			</div>
 			<div style="text-align:center" id="courseName-buttons">
-				<a href="#" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;height:25px;" onclick="saveCourseName()"><span>提交</span></a>
-				<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" style="width:100px;height:25px;" onclick="javascript:$('#courseNameDlg').dialog('close')"><span>取消</span></a>
+				<a href="#" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;" onclick="saveCourseName()"><span>提交</span></a>
+				<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" style="width:100px;" onclick="javascript:$('#courseNameDlg').dialog('close')"><span>取消</span></a>
 			</div>
   		</div>
   		<div title="券类赠品" style="padding:5px;display:block;">
@@ -180,8 +180,8 @@
 			</form>
 		</div>
 		<div style="text-align:center" id="couponType-buttons">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;height:25px;" onclick="saveCouponType()"><span>提交</span></a>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" style="width:100px;height:25px;" onclick="javascript:$('#couponTypeDlg').dialog('close')"><span>取消</span></a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;" onclick="saveCouponType()"><span>提交</span></a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" style="width:100px;" onclick="javascript:$('#couponTypeDlg').dialog('close')"><span>取消</span></a>
 		</div>
  		<div id="couponNameDlg" class="easyui-dialog" style="width:550px;height:340px;padding:0px 0px" modal="true" closed="true" buttons="#couponName-buttons">
 			<form id="couponNameFm" method="post">
@@ -224,8 +224,8 @@
 			</form>
 		</div>
 		<div style="text-align:center" id="couponName-buttons">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;height:25px;" onclick="saveCouponName()"><span>提交</span></a>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" style="width:100px;height:25px;" onclick="javascript:$('#couponNameDlg').dialog('close')"><span>取消</span></a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;" onclick="saveCouponName()"><span>提交</span></a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" style="width:100px;" onclick="javascript:$('#couponNameDlg').dialog('close')"><span>取消</span></a>
 		</div> 		
 	  	</div>
 	  </div>

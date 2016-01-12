@@ -47,8 +47,8 @@
 				</form>
 			</div>
 			<div style="text-align:center" id="textbook-buttons">
-				<a href="#" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;height:25px;" onclick="saveTextbookSubmit()"><span>提交</span></a>
-				<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" style="width:100px;height:25px;" onclick="javascript:$('#textbookDlg').dialog('close')"><span>取消</span></a>
+				<a href="#" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;" onclick="saveTextbookSubmit()"><span>提交</span></a>
+				<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" style="width:100px;" onclick="javascript:$('#textbookDlg').dialog('close')"><span>取消</span></a>
 			</div>
   		</div>
   	</body>

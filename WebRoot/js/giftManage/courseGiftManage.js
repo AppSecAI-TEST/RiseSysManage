@@ -19,14 +19,13 @@ $(document).ready(function(){
     
     var staffId = $("#staffId").val();
 	$("#courseSchoolId").combobox({
-		url : "/sys/pubData/qrySchoolList.do?schoolId",//返回json数据的url
+		url : "/sys/pub/pageCategory.do?staffId="+staffId+"&resourceId=504&fieldId=schoolId&headFlag=N",//返回json数据的url
 		valueField : "schoolId",
 		textField : "schoolName",
 		panelHeight : "auto",
 		formatter : formatSchool,
-		onLoadSuccess : function() {
-			$("#courseSchoolId").combobox("setValue", "");
-			$("#courseSchoolId").combobox("setText", "");
+		onLoadSuccess : function(data) {
+			$("#courseSchoolId").combobox('setValue',data[0].schoolId);
 		},
 		onChange : function(n, o) {
 			if(n != "" && n != null && n != undefined) {
@@ -40,15 +39,15 @@ $(document).ready(function(){
 						return "<span>" + data.className + "</span>";
 					}
 				});
-				$("#courseStudentId").combobox({
-					url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId=20&fieldId=studentId",
-					valueField : "studentId",
-					textField : "name",
-					panelHeight : "auto",
-					formatter : function(data) {
-						return "<span>" + data.name + "</span>";
-					}
-				});
+//				$("#courseStudentId").combobox({
+//					url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId=20&fieldId=studentId",
+//					valueField : "studentId",
+//					textField : "name",
+//					panelHeight : "auto",
+//					formatter : function(data) {
+//						return "<span>" + data.name + "</span>";
+//					}
+//				});
 			} else {
 				$("#courseSchoolId").combobox("setText", "");
 				$("#courseClassInstId").combobox('clear');
