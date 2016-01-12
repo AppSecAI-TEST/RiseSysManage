@@ -715,14 +715,15 @@ function checkMobile(mobile) {
 //绑定查询页面的查询重置按钮事件
 function initQryButton(qryName,resetName,formName,tableName)
 {
-	var schoolNameArr =['schoolId','schoolIds','approveSchoolId','actionSchoolId'];
+	var schoolArr =['schoolId','schoolIds','approveSchoolId','actionSchoolId'];
+	var stageArr =['stageId','stageIds'];
 	$("#"+qryName+"").click(function() {
 		var qryFlag =true;
 
 		//判断查询校区是否有值
-		for(var i=0;i<schoolNameArr.length;i++)
+		for(var i=0;i<schoolArr.length;i++)
     	{
-    		var schoolObj =$("#"+formName+"").find("#"+schoolNameArr[i]);
+    		var schoolObj =$("#"+formName+"").find("#"+schoolArr[i]);
     		if(schoolObj.length>0)
     		{
     			if(schoolObj.combobox("getValue")=="")
@@ -758,9 +759,9 @@ function initQryButton(qryName,resetName,formName,tableName)
     {
     	$("#"+formName+"").form('clear');//清空窗体数据  
     	//校区赋默认值
-    	for(var i=0;i<schoolNameArr.length;i++)
+    	for(var i=0;i<schoolArr.length;i++)
     	{
-    		var schoolObj =$("#"+formName+"").find("#"+schoolNameArr[i]);
+    		var schoolObj =$("#"+formName+"").find("#"+schoolArr[i]);
     		if(schoolObj.length>0)
     		{
     			if(schoolObj.combobox("getData").length>0)
@@ -770,14 +771,17 @@ function initQryButton(qryName,resetName,formName,tableName)
     		}	
     	}
     	//阶段赋默认值
-    	var stageObj =$("#"+formName+"").find("#stageId");
-    	if(stageObj.length>0)
+    	for(var j=0;j<stageArr.length;j++)
     	{
-    		if(stageObj.combobox("getData").length>0)
-    		{
-    			 stageObj.combobox("select",stageObj.combobox("getData")[0].stageId);
-    		}	
-    	}
+    		var stageObj =$("#"+formName+"").find("#"+stageArr[j]);
+	    	if(stageObj.length>0)
+	    	{
+	    		if(stageObj.combobox("getData").length>0)
+	    		{
+	    			 stageObj.combobox("select",stageObj.combobox("getData")[0].stageId);
+	    		}	
+	    	}
+    	}	
     });
 }
 
