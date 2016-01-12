@@ -1,15 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
-	String name = request.getParameter("name");
-	String phone = request.getParameter("phone");
-	String byName = request.getParameter("byName");
 	String applyId = request.getParameter("applyId");
-	String studentId = request.getParameter("studentId");
-	String schoolName = request.getParameter("schoolName");
-	String outClassName = request.getParameter("outClassName");
-	String studentCourseId = request.getParameter("studentCourseId");
-	String outClassTeacherName = request.getParameter("outClassTeacherName");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -25,26 +17,26 @@
   			<form id="approveChangeSchoolFm">
   				<input type="hidden" id="applyId" name="applyId" value="<%=applyId %>"/>
   				<input type="hidden" id="applyType" name="applyType" value="002"/>
-  				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
+  				<input type="hidden" id="studentId" name="studentId" value=""/>
+  				<input type="hidden" id="studentCourseId" name="studentCourseId" value=""/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
-  				<input type="hidden" id="studentCourseId" name="studentCourseId" value="<%=studentCourseId %>"/>
   				<div class="easyui-panel" style="min-width:1100px; width:100%; height:auto;" title="学员信息">
 	  				<table width="100%" cellpadding="5px" class="maintable" id="approveChangeSchoolTd">
 	  					<tr>
 	  						<td align="right" width="10%"><span>校区：</span></td>
-			  				<td width="20%"><span id="schoolNameText"><%=schoolName %></span></td>
+			  				<td width="20%"><span id="schoolNameText"></span></td>
 			  				<td align="right" width="10%"><span>学员姓名：</span></td>
-			  				<td width="25%"><span id="nameText"><%=name %></span></td>
+			  				<td width="25%"><span id="nameText"></span></td>
 			  				<td align="right" width="10%"><span>英文名：</span></td>
-			  				<td width="25%"><span id="byNameText"><%=byName %></span></td>
+			  				<td width="25%"><span id="byNameText"></span></td>
 	  					</tr>
 	  					<tr>
 		  					<td align="right" width="10%"><span>联系电话：</span></td>
-		  					<td width="20%"><span id="phoneText"><%=phone %></span></td>
+		  					<td width="20%"><span id="phoneText"></span></td>
 		  					<td align="right" width="10%"><span>带班老师：</span></td>
-		  					<td width="25%"><span id="nameText"><%=outClassTeacherName %></span></td>
+		  					<td width="25%"><span id="teacherNameText"></span></td>
 		  					<td align="right" width="10%"><span>在读班级：</span></td>
-		  					<td width="25%"><span id="byNameText"><%=outClassName %></span></td>
+		  					<td width="25%"><span id="outClassNameText"></span></td>
 		  				</tr>
 		  				<tr id="courseTr">
 		  					<td colspan="6">

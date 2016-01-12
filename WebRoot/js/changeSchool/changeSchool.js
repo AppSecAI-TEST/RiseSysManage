@@ -300,16 +300,8 @@ $(document).ready(function() {
 		if(row) {
 			var approveState = row.approveState;
 			if("000" == approveState) {
-				var name = row.name;
-				var phone = row.phone;
-				var byName = row.byName;
 				var applyId = row.applyId;
-				var studentId = row.studentId;
-				var schoolName = row.schoolName
-				var outClassName = row.outClassName;
-				var studentCourseId = row.studentCourseId;
-				var outClassTeacherName = row.outClassTeacherName;
-				window.location.href = "/sys/changeSchool/approveChangeSchool.jsp?applyId="+applyId+"&studentId="+studentId+"&studentCourseId="+studentCourseId+"&name="+name+"&phone="+phone+"&byName="+byName+"&outClassName="+outClassName+"&schoolName="+schoolName+"&outClassTeacherName="+outClassTeacherName;
+				window.location.href = "/sys/changeSchool/approveChangeSchool.jsp?applyId="+applyId;
 			} else {
 				$.messager.alert('提示', "您选择的转校审批已经审批，不能再次审批！");
 			}
