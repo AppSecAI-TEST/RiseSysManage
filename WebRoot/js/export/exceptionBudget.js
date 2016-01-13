@@ -160,7 +160,27 @@ $(document).ready(function() {
 			}
 		});
 	});
-	
+		$("#export").click(function(){
+			alert(1111111111)
+			if($("#list_data").datagrid("getData").total>0)
+			{
+				var fileName =parent.$("li.tabs-selected").find("span.tabs-title").html();
+				try
+				{
+					window.location.href="/sys/export/exportCenterGradeRate.do?fileName="+fileName+"&param="+JSON.stringify($("#list_data").datagrid("options").queryParams.param);
+				}
+				catch(e)
+				{
+					$.messager.alert('提示', "模版不存在！",function(){
+						window.history.back();
+					});
+				}
+			}
+			else
+			{
+				$.messager.alert('提示', "没有数据可以导出！");
+			}	
+		});
 });
 
 function mergeCellsByField(tableId, colList) {

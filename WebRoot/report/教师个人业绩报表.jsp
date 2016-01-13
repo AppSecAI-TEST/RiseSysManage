@@ -10,32 +10,28 @@
 		<%@ include file="../common/formvalidator.jsp" %>
   	</head>
   	<body>
-  		<div style="padding:5px 0;">
-  			<form id="qryFm" style="margin:0 auto;">
-	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
+  		<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+  		<div style="margin-right:5px;">
+  			<form id="qryFm">
+	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right"><span>校区：</span></td>
-	  					<td align="left">
-	  					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-					      			onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
-					      			url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=&fieldId=schoolId">
-				        		</select>
+	  					<td width="80px" align="right"><span>校区：</span></td>
+	  					<td width="110px" align="left">
+	  					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+				        </select>
 	  					</td>
-	  					<td align="right"><span>老师：</span></td>
-	  					<td align="left">
-	  						<input class="easyui-combobox"  id="teacherId" style="width:150px;">
+	  					<td width="80px" align="right"><span>教师英文名：</span></td>
+	  					<td width="110px" align="left">
+	  						<input class="easyui-textbox"  id="teacherId" name="teacherId" style="width:100px; height: 25px;">
 	  					</td>
-	  					<td align="right"><span>月份：</span></td>
-	  					<td align="left">
-	  						<select class="easyui-combobox" name="time" id="time" style="width:150px;">
-	  						</select>
+	  					<td width="50px" align="right"><span>月份：</span></td>
+	  					<td width="160px" align="left">
+	  						<input class="easyui-datebox" type="text" style="width:150px; height: 25px;" id="time" name="time" data-options="formatter:myformatter, parser:myparser" editable="false"/>
 	  					</td>
-	  					<td>	
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" onclick="qryData()">查询</a>
-	  					</td>
-	  					<td>
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:150px" id="qryBtn" onclick="exportData()">重置</a>
+	  					<td align="left">	
+	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" onclick="qryData()">查询</a>
+	  							&nbsp;&nbsp;
+	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="qryBtn" onclick="exportData()">重置</a>
 	  					</td>
 	  				</tr>
 	  			</table>
@@ -99,17 +95,23 @@ $(document).ready(function(){
              	});
             }});
  		$("#schoolId").combobox({
-	 		onChange:function(){
-	 			$("#teacherId").combobox({
-					url : "/sys/pubData/getTeacherBySchoolId.do?schoolId="+$("#schoolId").combobox('getValue')
-				});
-	 		}
-	 	});
-   	var now =new Date();
-	$('#time').datebox("setValue",now.getFullYear()+"-"+(now.getMonth()+1));
+			url : "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId=711&fieldId=schoolId&headFlag=N",
+    		valueField : "schoolId",
+    		textField : "schoolName",
+    		panelHeight : "auto",
+    		formatter : function(data) {
+    			return "<span>" + data.schoolName + "</span>";
+    		},
+    		onLoadSuccess : function() {
+    			if($("#schoolId").combobox("getData").length>0)
+    			{
+    				$("#schoolId").combobox("setValue",$("#schoolId").combobox("getData")[0].schoolId);
+    			}	
+    		}
+    	});
 	$("#export").click(function(){
 		var param={
-			teacherId:$("#teacherId").combobox('getValue'),
+			teacherId:$("#teacherId").textbox('getValue'),
 			schoolId:$("#schoolId").combobox('getValue'),
 			month:$("#time").datebox('getValue')
 		};
@@ -165,7 +167,7 @@ function resetData()
   
 function qryData()
 {
-	var teacherId=$("#teacherId").combobox('getValue');
+	var teacherId=$("#teacherId").textbox('getValue');
 	var schoolId=$("#schoolId").combobox('getValue');
 	var month=$("#time").datebox('getValue');
 	$.ajax(

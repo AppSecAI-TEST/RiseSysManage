@@ -865,3 +865,29 @@ function exportMergeLink(btName,tableName,mergeName,mergeIndex)
 		}	
 	})
 }
+
+
+//绑定查询页面的查询重置按钮事件
+function initRPQryButton(qryName,resetName,formName,tableName)
+{
+	$("#"+qryName+"").click(function() {
+		var obj = JSON.stringify($("#"+formName+"").serializeObject());
+	    obj = obj.substring(0, obj.length - 1);
+	    var funcNodeId = $("#"+qryName+"").attr("funcNodeId");
+	    obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+	    $("#"+tableName+"").datagrid({
+	    	url : "/sys/pubData/qryDataListByPage.do",
+	    	queryParams:{
+	    		param : obj
+	    	},
+	    	onLoadSuccess:function(){
+	    		$("#"+tableName+"").datagrid('clearSelections');
+	    	}
+	    }); 
+    });
+	 
+    $("#"+resetName+"").click(function() 
+    {
+    	$("#"+formName+"").form('clear');//清空窗体数据  
+    });
+}

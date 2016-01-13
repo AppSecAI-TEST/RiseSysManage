@@ -12,8 +12,8 @@
   	</head>
   
   	<body>
-  		<div style="padding:5px 0;">
-  			<form id="qryFm" style="margin:0 auto;">
+  		<div style="margin-right:5px;">
+  			<form id="qryFm">
   				<input type="hidden" id="tableName" value="report_teacher_service_rate"/>
   				<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
   					<tr>

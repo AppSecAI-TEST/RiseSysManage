@@ -11,41 +11,39 @@
 		<script type="text/javascript" src="<%=path %>/js/export/newRecruit.js"></script>
   	</head>
   	<body>
+  		<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   		<div style="padding:5px 0;">
   			<form id="qryFm" style="margin:0 auto;">
 	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
 	  				<tr>
-	  					<td align="right"><span>校区：</span></td>
-	  					<td align="left"  width="120px">
-	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      		url="<%=path %>/pubData/qrySchoolList.do?">
+	  					<td align="right" width="80px"><span>校区：</span></td>
+	  					<td align="left"  width="110px">
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 				        	</select>
 	  					</td>
-	  					<td align="right"><span>班级：</span></td>
-	  					<td align="left"  width="120px">
-	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      		url="<%=path %>/pubData/qrySchoolList.do?">
+	  					<td align="right" width="50px"><span>班级：</span></td>
+	  					<td align="left"  width="110px">
+	  						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+								data-options="formatter:formatClassInst, valueField: 'classInstId', textField: 'className', panelHeight: 'auto'">
 				        	</select>
 	  					</td>
-	  					<td align="right"><span>教师：</span></td>
-	  					<td align="left"  width="120px">
-	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      		url="<%=path %>/pubData/qrySchoolList.do?">
+	  					<td align="right" width="50px"><span>教师：</span></td>
+	  					<td align="left"  width="110px">
+	  						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 				        	</select>
 	  					</td>
-	  					<td align="right"><span>阶段：</span></td>
-	  					<td align="left"  width="120px">
-	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      		url="<%=path %>/pubData/qrySchoolList.do?">
+	  					<td align="right" width="50px"><span>阶段：</span></td>
+	  					<td align="left"  width="110px">
+	  						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+								data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'"
+					      		url="<%=path %>/pubData/qryStage.do?">
 				        	</select>
 	  					</td>
-	  					<td width="100px" align="right"><span>日期：</span></td>
+	  					<td width="50px" align="right" ><span>日期：</span></td>
 						<td width="114px">
-							<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myformatter, parser:myparser"/>
+	  						<input class="easyui-datebox" type="text" style="width:150px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myYearMonthformatter, parser:myparser,onShowPanel:settingYearMonthPanel" editable="false"/>
 						</td>
 						<td align="center">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="5007">查询</a>
@@ -54,11 +52,11 @@
 	  				</tr>	
 	  			</table>
   			</form>
-  		   <div style="min-width:1100px;width:99%;margin:0 auto;">
+  		<div style="min-width:1100px;width:99%;margin:0 auto;background:#ccc;"><a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;margin: 2px 10px">导出全部</a></div>	
+  		<div style="min-width:1100px;width:99%;margin:0 auto;">
 		<div class="easyui-panel" title="排课信息" style="width:100%;overflow:auto;">
 		<table class="maintable" id="hoursPlanTab" style="width:1500px;" cellspacing="0" cellpadding="0">
 		  <tr align="center">
-		    <td align="center" width="40px;" rowspan="2"><span>序号</span></td>
 		     <td align="center" width="78px;" rowspan="2"><span>学校</span></td>
 		    <td align="center" width="78px;" rowspan="2"><span>班级</span></td>
 		    <td align="center" width="96px;" rowspan="2"><span>带班老师</span></td>
@@ -82,102 +80,122 @@
 		  <tr align="center">
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>实际课时</span></td>
+		    <td align="center" width="40px;"><span>已排课时</span></td>
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>实际课时</span></td>
+		    <td align="center" width="40px;"><span>已排课时</span></td>
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>实际课时</span></td>
+		    <td align="center" width="40px;"><span>已排课时</span></td>
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>实际课时</span></td>
+		    <td align="center" width="40px;"><span>已排课时</span></td>
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>实际课时</span></td>
+		    <td align="center" width="40px;"><span>已排课时</span></td>
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>实际课时</span></td>
+		    <td align="center" width="40px;"><span>已排课时</span></td>
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>实际课时</span></td>
+		    <td align="center" width="40px;"><span>已排课时</span></td>
 		  </tr>
 		</table>
 		</div>
 		</div>
-			<div id="toolbar" style="padding: 2px; height: auto">
-	   			<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
-			</div>
   		</div>	
   	</body>
 </html>
 <script type="text/javascript">
-	$("#qryBtn").click(function() {
-		var object = $("#qryFm").serializeObject();
-    	var obj = JSON.stringify(object);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-    	$.ajax(
-				{
-					type : "POST",
-					url : "/sys/report/getHours.do?param="+obj,
-					async: true,
-					dataType:"json",
-					beforeSend: function()
-			    	{
-			    		//$.messager.progress({text:'排课中，请稍候...'});
-			    	},
-			    	success: function(data) 
-			    	{
-			    		var html="<tr>"+$("#hoursPlanTab").find("tr:eq(0)").html()+"</tr><tr>"+$("#hoursPlanTab").find("tr:eq(1)").html()+"</tr>";
-			    		for(var i=0;i<data.length;i++)
-			    		{
-			    			var obj=data[i];
-			    			 html+="<tr>";
-			    			html+="<td align='center'>"+(i+1)+"</td>";
-			    			html+="<td align='center'><span>"+obj.schoolName+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.className+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.byname+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.dateRange+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.startDate+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.finishDate+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.realHour+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.diffNum+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.monthDiffNum+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekDiff1+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekPlan1+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekHand1+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekDiff2+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekPlan2+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekHand2+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekDiff3+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekPlan3+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekHand3+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekDiff4+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekPlan4+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekHand4+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekDiff5+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekPlan5+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekHand5+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekDiff6+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekPlan6+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekHand6+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekDiff7+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekPlan7+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekHand7+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.monthPlanHours+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.monthHandHours+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.mDiffNum+"</span></td>";
-			    			html+="</tr>";
-			    		}
-						
-						$("#hoursPlanTab").html(html);
-			    	},
-			    	  error:function()
-			        {
-			    		alert("1");
-			        	$.messager.progress('close');
-			        }
-			   });
-    });
+	$(document).ready(function(){
+		$('#startTime').datebox("setValue",new Date().getFullYear()+"-"+(new Date().getMonth()+1));
+		$("#schoolId").combobox({
+			url : "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId=714&fieldId=schoolId&headFlag=N",
+    		onLoadSuccess : function() {
+    			if($("#schoolId").combobox("getData").length>0)
+    			{
+    				$("#schoolId").combobox("setValue",$("#schoolId").combobox("getData")[0].schoolId);
+    			}	
+    		},
+    		onChange : function(n, o) {
+    			$("#classInstId").combobox({
+    				url:"/sys/pubData/qryClassInstList.do?schoolId="+n+"&stageId="+$("#stageId").combobox("getValue")                                   
+    			});
+    			$("#teacherId").combobox({
+		    		url:"/sys/pubData/qryTeacherList.do?schoolId="+n
+		    	});
+    		}
+    	});	
+		
+		$("#qryBtn").click(function() {
+			var object = $("#qryFm").serializeObject();
+	    	var obj = JSON.stringify(object);
+	    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
+	    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+	    	$.ajax(
+					{
+						type : "POST",
+						url : "/sys/report/getHours.do?param="+obj,
+						async: true,
+						dataType:"json",
+						beforeSend: function()
+				    	{
+				    		showProgressLoader("正在查询,请稍后...",400);
+				    	},
+				    	success: function(data) 
+				    	{
+				    		hideProgressLoader();
+				    		var html="<tr>"+$("#hoursPlanTab").find("tr:eq(0)").html()+"</tr><tr>"+$("#hoursPlanTab").find("tr:eq(1)").html()+"</tr>";
+				    		for(var i=0;i<data.length;i++)
+				    		{
+				    			var obj=data[i];
+				    			html+="<tr>";
+				    			html+="<td align='center'><span>"+obj.schoolName+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.className+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.byname+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.dateRange+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.startDate+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.finishDate+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.realHour+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.diffNum+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.monthDiffNum+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekDiff1+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekPlan1+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekHand1+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekDiff2+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekPlan2+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekHand2+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekDiff3+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekPlan3+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekHand3+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekDiff4+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekPlan4+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekHand4+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekDiff5+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekPlan5+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekHand5+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekDiff6+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekPlan6+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekHand6+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekDiff7+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekPlan7+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekHand7+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.monthPlanHours+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.monthHandHours+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.mDiffNum+"</span></td>";
+				    			html+="</tr>";
+				    		}
+							
+							$("#hoursPlanTab").html(html);
+				    	},
+				    	error:function()
+				        {
+				    		hideProgressLoader();
+				        	$.messager.progress('close');
+				        }
+				   });
+	    });
+	});
+
+	
 </script>

@@ -15,20 +15,18 @@
   	<body style="padding-top:5px">
   		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
 		<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
-  		<form id="qryFm" style="margin:0 auto;">
-  			<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
+		<div style="margin-right:5px;">
+  		<form id="qryFm">
+  			<table class="search_tab">
   				<tr>
   					<td align="right"><span>校区：</span></td>
 	  				<td width="100px">
-						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
+						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 		        		</select>
 					</td>
 					<td align="right"><span>学员姓名：</span></td>
 					<td width="114px">
-						<select id="studentId" name="studentId" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"	
-							url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=&funcNodeId=${param.funcNodeId}&fieldId=studentId">
-		        		</select>
+						<input id="studentId" name="studentId" class="easyui-textbox" style="width: 100px; height: 25px;">
 					</td>
 					<td align="right"><span>联系电话：</span></td>
 					<td width="130px">
@@ -36,7 +34,7 @@
 					</td>
 					<td align="right"><span>课程类型：</span></td>
 					<td width="100px">
-						<select id="courseType" name="courseType" class="easyui-combobox" style="width: 100px; height: 25px;">
+						<select id="courseType" name="courseType" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 		        		</select>
 		        	</td>
 		        	<td align="center" width="14px">&nbsp;</td>
@@ -110,7 +108,7 @@
   		</form>
   		
   		<div style="padding:5px 0;min-width:1100px; width:100%;">
-		  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1011" 
+		  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" 
 		  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
@@ -137,6 +135,7 @@
 	  	<div id="toolbar" style="padding: 2px; height: auto">
    			<a href="javascript:void(0)" id="selectClassBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px;">选班</a>
    			<a href="javascript:void(0)" id="view" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>
+		</div>
 		</div>
   	</body>
 </html>
