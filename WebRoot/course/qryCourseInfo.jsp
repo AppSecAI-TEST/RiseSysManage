@@ -16,23 +16,20 @@
 		<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
   		<div style="margin-right:5px">
   			<form id="qryFm">
-	  			<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
+	  			<table class="search_tab">
 	  				<tr>
 	  					<td align="right"><span>所属校区：</span></td>
 	  					<td>
-	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 				        	</select>
 				        </td>
 				        <td align="right"><span>学生姓名：</span></td>
 	  					<td>
-	  						<select id="studentId" name="studentId" class="easyui-combobox" style="width: 100px; height: 25px;" 
-								data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"	
-								url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=&funcNodeId=${param.funcNodeId}&fieldId=studentId">
-      						</select>
+	  						<input id="studentId" name="studentId" class="easyui-textbox" style="width: 100px; height: 25px;">
 	  					</td>
 	  					<td align="right"><span>责任顾问：</span></td>
 	  					<td>
-	  						<select id="dutyAdviser" name="dutyAdviser" class="easyui-combobox" style="width: 100px; height: 25px;"
+	  						<select id="dutyAdviser" name="dutyAdviser" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
       							url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
 				        	</select>
@@ -43,19 +40,19 @@
 	  					</td>
 	  					<td align="right"><span>缴费日期：</span></td>
 			  			<td width="100px">
-							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimePay" name="startTimePay" data-options="formatter:myformatter, parser:myparser"/>
+							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimePay" name="startTimePay" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
 						<td align="center">
 							<span>至</span>
 						</td>
 						<td width="100px">
-							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimePay" name="endTimePay" data-options="formatter:myformatter, parser:myparser"/>
+							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimePay" name="endTimePay" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right"><span>业绩顾问：</span></td>
 			  			<td width="100px">
-							<select id="adviserId" name="adviserId" class="easyui-combobox" style="width: 100px; height: 25px;"
+							<select id="adviserId" name="adviserId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
       							url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
 				        	</select>
@@ -63,59 +60,59 @@
 						<td align="right"><span>业绩类型：</span></td>
 			  			<td width="100px">
 							<select id="feeType" name="feeType" class="easyui-combobox" style="width: 100px; height: 25px;"
-								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
+								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" editable="false"
 				      			url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
 				        	</select>
 						</td>
 						<td align="right"><span>课程状态：</span></td>
 	  					<td>
-	  						<select id="courseState" name="courseState" class="easyui-combobox" style="width: 100px; height: 25px;"
+	  						<select id="courseState" name="courseState" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 	  							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      			url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_STATE">
 				        	</select>
 	  					</td>
 	  					<td align="right"><span>课程类型：</span></td>
 	  					<td>
-	  						<select id="courseType" name="courseType" class="easyui-combobox" style="width: 100px; height: 25px;">
+	  						<select id="courseType" name="courseType" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 				        	</select>
-				        	<select id="courseTypeDetail" name="courseTypeDetail" class="easyui-combobox" style="width: 100px; height: 25px;">
+				        	<select id="courseTypeDetail" name="courseTypeDetail" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 		        			</select>
 	  					</td>
 	  					<td align="right"><span>退费时间：</span></td>
 	  					<td width="100px">
-	  						<input class="easyui-datebox" name="startTimeRefund" id="startTimeRefund" style="width:100px; height: 25px;" />
+	  						<input class="easyui-datebox" name="startTimeRefund" id="startTimeRefund" style="width:100px; height: 25px;" editable="false"/>
 	  					</td>
 	  					<td align="center">
 							<span>至</span>
 						</td>
 						<td width="100px">
-							<input class="easyui-datebox" name="endTimeRefund" id="endTimeRefund" style="width:100px; height: 25px;" />
+							<input class="easyui-datebox" name="endTimeRefund" id="endTimeRefund" style="width:100px; height: 25px;" editable="false"/>
 						</td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right"><span>业绩老师：</span></td>
 	  					<td width="100px" colspan="5">
-							<select id="adviserTeacherId" name="adviserTeacherId" class="easyui-combobox" style="width: 100px; height: 25px;"
+							<select id="adviserTeacherId" name="adviserTeacherId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
       							url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}&classType=">
 				        	</select>
 						</td>
 						<td align="right"><span>口碑类型：</span></td>
 	  					<td>
-	  						<select class="easyui-combobox"  name="womType" id="womType" style="width:100px; height: 25px;" />
+	  						<select class="easyui-combobox"  name="womType" id="womType" style="width:100px; height: 25px;" editable="false"/>
 	  						</select>
 	  						<select class="easyui-combobox"  name="womTypeDetail" id="womTypeDetail" style="width:100px; height: 25px;" />
 	  						</select>
 	  					</td>
 	  					<td align="right"><span>结课时间：</span></td>
 	  					<td width="100px">
-	  						<input class="easyui-datebox" name="startTimeFinish" id="startTimeFinish" style="width:100px; height: 25px;" />
+	  						<input class="easyui-datebox" name="startTimeFinish" id="startTimeFinish" style="width:100px; height: 25px;" editable="false"/>
 	  					</td>
 	  					<td align="center">
 							<span>至</span>
 						</td>
 						<td width="100px">
-							<input class="easyui-datebox" name="endTimeFinish" id="endTimeFinish" style="width:100px; height: 25px;" />
+							<input class="easyui-datebox" name="endTimeFinish" id="endTimeFinish" style="width:100px; height: 25px;" editable="false"/>
 						</td>
 	  				</tr>
 	  				<tr>
@@ -127,12 +124,12 @@
 	  			</table>
   			</form>
   			<div id="toolbar">
-    			<a href="javascript:void(0)" id="addCourse" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加课程</a>
-    			<a href="javascript:void(0)" id="updateCourse" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="">修改课程</a>
-    			<a href="javascript:void(0)" id="courseDetail" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="">浏览</a>
+    			<a href="javascript:void(0)" id="addCourse" class="easyui-linkbutton" style="width:100px;" iconCls="icon-add">添加课程</a>
+    			<a href="javascript:void(0)" id="updateCourse" class="easyui-linkbutton" style="width:100px;" iconCls="icon-edit">修改课程</a>
+    			<a href="javascript:void(0)" id="courseDetail" class="easyui-linkbutton" style="width:100px;" iconCls="icon-redo">浏览</a>
   			</div>
 			 
-				<table class="easyui-datagrid" title="查询结果" style="height:450px" id="list_data" toolbar="#toolbar" 
+				<table class="easyui-datagrid" title="查询结果" style="height:400px" id="list_data" toolbar="#toolbar" 
 					pagination="true" rownumbers="true" fitColumns="true" singleSelect="true"
 				 	url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=5002">
 					<thead>

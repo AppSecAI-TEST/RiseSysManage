@@ -1,10 +1,9 @@
 $(document).ready(function(){
 	$("#state").combobox({
 		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE",
-		onChange:function(){
+		onChange:function(newValue){
 			var urls ="";
-			var stateValue=$("#state").combobox("getValue");
-			if(stateValue=="001")
+			if(newValue=="001")
 			{
 				urls ="/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=CLASS_TYPE";
 				$("#classType").combobox({
@@ -24,10 +23,9 @@ $(document).ready(function(){
 	});
 	$("#states").combobox({
 		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE",
-		onChange:function(){
+		onChange:function(newValue){
 			var urls ="";
-			var stateValue=$("#states").combobox("getValue");
-			if(stateValue=="001")
+			if(newValue=="001")
 			{
 				urls ="/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=CLASS_TYPE";
 				$("#classTypes").combobox({
@@ -46,8 +44,7 @@ $(document).ready(function(){
 	});
 	$("#schoolId").combobox( {
 		url : "/sys/pub/pageCategory.do?staffId="+$("#handlerId").val()+"&resourceId=700&fieldId=schoolId&headFlag=N",
-		onChange : function() {
-			var sId = $("#schoolId").combobox("getValue");
+		onChange : function(sId) {
 			var urls = "/sys/pubData/qryTeacherList.do?schoolId=" + sId;
 			$("#adviser").combobox( {
 				url : urls
@@ -65,8 +62,7 @@ $(document).ready(function(){
 	});
 	$("#schoolIds").combobox( {
 		url : "/sys/pub/pageCategory.do?staffId="+$("#handlerId").val()+"&resourceId=700&fieldId=schoolId&headFlag=N",
-		onChange : function() {
-			var sId = $("#schoolIds").combobox("getValue");
+		onChange : function(sId) {
 			var urls = "/sys/pubData/qryTeacherList.do?schoolId=" + sId;
 			$("#advisers").combobox( {
 				url : urls

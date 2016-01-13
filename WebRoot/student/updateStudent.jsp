@@ -40,14 +40,14 @@
 	      				<td align="right" width="114px"><span style="color: red;">*</span><span>学员姓名：</span></td>
 	      				<td>
 	      					<div id="nameDiv">
-		      					<input name="name" id="name" type="text" class="easyui-textbox validatebox" required="true" style="width: 200px; height: 28px;"/>
+		      					<input name="name" id="name" type="text" class="easyui-textbox validatebox" required="true" style="width: 200px; height: 25px;"/>
 	      					</div>
 	      					<span id="nameText" style="display: none;"></span>
 	      				</td>
 	      				<td align="right" width="114px"><span style="color: red;">*</span><span>出生日期：</span></td>
 	      				<td colspan="4">
 	      					<div id="birthdayDiv">
-		      					<input name="birthday" id="birthday" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 28px;" editable="false"/>
+		      					<input name="birthday" id="birthday" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 25px;" editable="false"/>
 	      					</div>
 	      					<span id="birthdayText" style="display: none;"></span>
 	      				</td>
@@ -63,38 +63,38 @@
 	      				</td>
 	      				<td align="right" width="114px"><span>证件号码：</span></td>
 	      				<td colspan="4">
-		      				<select name="identityType" id="identityType" class="easyui-combobox" style="width: 100px; height: 28px;">
+		      				<select name="identityType" id="identityType" class="easyui-combobox" style="width: 100px; height: 25px;">
 	        				</select>
-	        				<input name="identityId" id="identityId" type="text" class="easyui-textbox" style="width: 200px; height: 28px;"/>
-		      				<a href="javascript:void(0)" id="validate" class="easyui-linkbutton" style="width: 80px; height: 28px;" funcNodeId="1001">验重</a>
+	        				<input name="identityId" id="identityId" type="text" class="easyui-textbox" style="width: 200px; height: 25px;"/>
+		      				<a href="javascript:void(0)" id="validate" class="easyui-linkbutton" style="width: 80px; height: 25px;" funcNodeId="1001">验重</a>
 	      				</td>
 	      			</tr>
 	      			<tr>
 	      				<td align="right" width="114px"><span style="color: red;">*</span><span>英文名：</span></td>
 	      				<td>
-	      					<input name="byName" id="byName" type="text" class="easyui-textbox" style="width: 200px; height: 28px;"/>
+	      					<input name="byName" id="byName" type="text" class="easyui-textbox" style="width: 200px; height: 25px;"/>
 	      				</td>
 	      				<td align="right" width="114px"><span>家庭地址：</span></td>
 	      				<td colspan="4">
-	      					<input name="address" id="address" type="text" class="easyui-textbox" style="width: 396px; height: 28px;"/>
+	      					<input name="address" id="address" type="text" class="easyui-textbox" style="width: 396px; height: 25px;"/>
 	      				</td>
 	      			</tr>
 	      			<tr>
 	      				<td align="right" width="114px"><span>就读学校：</span></td>
 	      				<td colspan="6">
-	      					<select id="schoolType" class="easyui-combobox" style="width: 150px; height: 28px;" editable="false">
+	      					<select id="schoolType" class="easyui-combobox" style="width: 150px; height: 25px;" editable="false">
         					</select>
         					&nbsp;
         					<span style="width: 114px">学校名称：</span>
-        					<input id="realSchoolId" type="text" class="easyui-combobox" style="width: 300px; height: 28px;"/>
-        					&nbsp;<a href="javascript:void(0)" id="addRealSchool" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px; height: 28px;">添加学校记录</a>
+        					<input id="realSchoolId" type="text" class="easyui-combobox" style="width: 300px; height: 25px;"/>
+        					&nbsp;<a href="javascript:void(0)" id="addRealSchool" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px; height: 25px;">添加学校记录</a>
 	      				</td>
 	      			</tr>
 	      			<tr>
 	      				<td align="right" width="114px"><span style="color: red;">*</span><span>建档日期：</span></td>
 	      				<td>
 	      					<div id="entranceDateDiv">
-		      					<input name="entranceDate" id="entranceDate" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 28px;" editable="false"/>
+		      					<input name="entranceDate" id="entranceDate" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 25px;" editable="false"/>
 	      					</div>
 	      					<span id="entranceDateText" style="display: none;"></span>
 	      				</td>
@@ -107,9 +107,9 @@
 	      				<td align="right" width="114px"><span style="color: red;">*</span><span>招生顾问A：</span></td>
 	      				<td>
 	      					<div id="advisterADiv">
-		      					<select id="advisterASchoolId" class="easyui-combobox" style="width: 100px; height: 28px;" required="true" editable="false">
+		      					<select id="advisterASchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" required="true" editable="false">
 	        					</select>
-	        					<select name="advisterIdA" id="advisterIdA" class="easyui-combobox" style="width: 150px; height: 28px;" required="true" editable="false">
+	        					<select name="advisterIdA" id="advisterIdA" class="easyui-combobox" style="width: 150px; height: 25px;" required="true" editable="false">
 	        					</select>
 	      					</div>
         					<span id="advisterAText" style="display: none;"></span>
@@ -117,9 +117,9 @@
 	      				<td align="right" width="114px"><span>招生顾问B：</span></td>
 	      				<td colspan="4">
 	      					<div id="advisterBDiv">
-		      					<select id="advisterBSchoolId" class="easyui-combobox" style="width: 100px; height: 28px;" editable="false">
+		      					<select id="advisterBSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 		        				</select>
-		        				<select name="advisterIdB" id="advisterIdB" class="easyui-combobox" style="width: 150px; height: 28px;" editable="false">
+		        				<select name="advisterIdB" id="advisterIdB" class="easyui-combobox" style="width: 150px; height: 25px;" editable="false">
 		        				</select>
 	      					</div>
 	        				<span id="advisterBText" style="display: none;"></span>
@@ -128,19 +128,19 @@
 	      			<tr>
 	      				<td align="right" width="114px"><span style="color: red;">*</span><span>责任顾问：</span></td>
 	      				<td>
-		      				<select name="dutyAdvister" id="dutyAdvister" class="easyui-combobox" style="width: 150px; height: 28px;" required="true" editable="false">
+		      				<select name="dutyAdvister" id="dutyAdvister" class="easyui-combobox" style="width: 150px; height: 25px;" required="true" editable="false">
 	        				</select>
 	      				</td>
 	      				<td align="right" width="114px"><span>客户关怀：</span></td>
 	      				<td colspan="4">
-	      					<select name="carer" id="carer" class="easyui-combobox" style="width: 150px; height: 28px;" editable="false">
+	      					<select name="carer" id="carer" class="easyui-combobox" style="width: 150px; height: 25px;" editable="false">
         					</select>
 	      				</td>
 	      			</tr>
 	      			<tr>
 	      				<td align="right" width="114px"><span>学员备注：</span></td>
 	      				<td colspan="6">
-	      					<input id="remark" name="remark" type="text" class="easyui-textbox" style="width: 969px; height: 28px;"/>
+	      					<input id="remark" name="remark" type="text" class="easyui-textbox" style="width: 969px; height: 25px;"/>
 	      				</td>
 	      			</tr>
 	      		</table>
@@ -162,30 +162,30 @@
 					</tr>
 					<tr>
 						<td align="center" width="100px">
-							<select id="relationType" class="easyui-combobox" style="width: 100px; height: 28px;"
+							<select id="relationType" class="easyui-combobox" style="width: 100px; height: 25px;"
 								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
 	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=CONTACT_T&codeType=RELATION_TYPE" editable="false">
 	        				</select>
 						</td>
 						<td align="center" width="120px">
-							<input id="contactName" type="text" class="easyui-textbox validatebox" required="true" style="width: 120px; height: 28px;"/>
+							<input id="contactName" type="text" class="easyui-textbox validatebox" required="true" style="width: 120px; height: 25px;"/>
 						</td>
 						<td align="center" width="120px">
-							<input id="job" type="text" class="easyui-textbox validatebox" style="width: 120px; height: 28px;"/>
+							<input id="job" type="text" class="easyui-textbox validatebox" style="width: 120px; height: 25px;"/>
 						</td>
 						<td width="80px" align="center">
 							<input name="used" type="checkbox"/>
 						</td>
 						<td align="center" width="310px">
-							<select id="contactIdentityType" class="easyui-combobox" style="width: 100px; height: 28px;" editable="false">
+							<select id="contactIdentityType" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 	        				</select>
-	        				<input id="contactIdentityId" type="text" class="easyui-textbox numberbox" style="width: 200px; height: 28px;" validType="length[0,18]" />
+	        				<input id="contactIdentityId" type="text" class="easyui-textbox numberbox" style="width: 200px; height: 25px;" validType="length[0,18]" />
 						</td>
 						<td align="center" width="150px">
-							<input id="phone" type="text" class="easyui-textbox numberbox" style="width: 150px; height: 28px;" validType="length[0,11]" invalidMessage="不能超过11个字符！"/>
+							<input id="phone" type="text" class="easyui-textbox numberbox" style="width: 150px; height: 25px;" validType="length[0,11]" invalidMessage="不能超过11个字符！"/>
 						</td>
 						<td align="center" width="80px">
-							<a href="javascript:void(0)" id="addContact" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a>
+							<a href="javascript:void(0)" id="addContact" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 25px;">添加</a>
 						</td>
 					</tr>
 				</table>
@@ -205,30 +205,28 @@
 					</tr>
 					<tr>
 						<td align="center" width="150px">
-							<input id="title" type="text" class="easyui-textbox" style="width: 150px; height: 28px;" required="true"/>
+							<input id="title" type="text" class="easyui-textbox" style="width: 150px; height: 25px;" required="true"/>
 						</td>
 						<td align="center" width="100px">
-							<input id="activityDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;" editable="false"/>
+							<input id="activityDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 25px;" editable="false"/>
 						</td>
 						<td align="center" width="150px">
-							<input id="award" type="text" class="easyui-textbox" style="width: 150px; height: 28px;" required="true"/>
+							<input id="award" type="text" class="easyui-textbox" style="width: 150px; height: 25px;" required="true"/>
 						</td>
 						<td align="center" width="563px">
-							<input id="activityRemark" type="text" class="easyui-textbox" style="width: 563px; height: 28px;"/>
+							<input id="activityRemark" type="text" class="easyui-textbox" style="width: 563px; height: 25px;"/>
 						</td>
 						<td align="center" width="80px">
-							<a href="javascript:void(0)" id="addActivity" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 28px;">添加</a>
+							<a href="javascript:void(0)" id="addActivity" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 25px;">添加</a>
 						</td>
 					</tr>
 				</table>
       		</form>
       	</div>
       		
-      	<div style="margin-top: 20px;min-width:1100px; width:98%;">
-	      	<div style="float: left;margin-left: 800px;">
-	      		<a href="javascript:void(0)" id="updateSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      		&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
-	      	</div>
+      	<div style="margin-top: 20px;min-width:1100px; width:100%;">
+	      	<a href="javascript:void(0)" id="updateSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 25px;">提交</a>
+	      	&nbsp;&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 25px;" onclick="javascript:window.history.back()">返回</a>
 		</div>
   	</body>
 </html>

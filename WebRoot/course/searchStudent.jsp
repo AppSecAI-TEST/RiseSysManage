@@ -34,7 +34,7 @@
 						<span>校区：</span>
 					</td>
 					<td width="114px">
-						<select id="schoolId" name="schoolId" class="easyui-combobox"
+						<select id="schoolId" name="schoolId" class="easyui-combobox" editable="false"
 							style="width: 114px; height: 25px;" editable="false"
 							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 						</select>
@@ -43,9 +43,8 @@
 						<span>学员姓名：</span>
 					</td>
 					<td width="114px">
-						<select id="name" name="name" class="easyui-combobox"
+						<input id="name" name="name" class="easyui-textbobox"
 							style="width: 114px; height: 25px;">
-						</select>
 					</td>
 				</tr>
 				<tr>

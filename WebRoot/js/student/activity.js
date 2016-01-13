@@ -163,6 +163,10 @@ $(document).ready(function() {
     			});
     		}
     	}
+    	else
+    	{
+    		$("#activityFm").find(".textbox-text.validatebox-text.validatebox-invalid:first").trigger("mouseover");
+    	}	
     });
 });
 

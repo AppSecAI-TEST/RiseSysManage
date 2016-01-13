@@ -53,7 +53,7 @@
   	</head>
   
   	<body style="padding-top:5px;">
-  		<div id="tt" class="easyui-tabs" style="min-width:1110px; width:98%; height:auto;">
+  		<div id="tt" class="easyui-tabs" style="min-width:1110px; width:100%; height:auto;">
   			<input type="hidden" id="title" value="<%=title %>"/>
   			<input type="hidden" id="studentId" value="<%=studentId %>"/>
   			<div title="基础信息" style="padding:5px;display:block;">
@@ -87,5 +87,8 @@
   				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:100%;"></iframe>
   			</div>
   		</div>
+  		<div style="text-align:center;margin-top: 25px;min-width:1100px; width:99%;">
+	      	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 25px;" onclick="javascript:window.history.back()">返回</a>
+	   </div>
   	</body>
 </html>

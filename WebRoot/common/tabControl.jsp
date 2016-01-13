@@ -2,7 +2,7 @@
 <input type="hidden" id="tabsInfo" value="${sessionScope.StaffT.tabsAuthInfo}">
 <script type="text/javascript">
 	$(document).ready(function(){
-		if($("ul.tabs").length&&$("ul.tabs").length>0&&document.URL.indexOf("admin.jsp")==-1)
+		if($("ul.tabs").length&&$("ul.tabs").length>0&&document.URL.indexOf("admin.jsp")==-1&&&&document.URL.indexOf("view.jsp")==-1)
 		{
 			var strArr=$("#tabsInfo").val().split(",");
 			$("ul.tabs").find("li").each(function()

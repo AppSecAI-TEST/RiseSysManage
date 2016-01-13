@@ -23,38 +23,38 @@
       				<tr>
       					<td align="right" width="8%"><span style="color: red;">*</span><span>活动标题：</span></td>
 	      				<td width="92%" colspan="9">
-	      					<input name="title" id="title" type="text" class="easyui-textbox validatebox" required="true" style="width: 400px; height: 28px;"/>
+	      					<input name="title" id="title" type="text" class="easyui-textbox validatebox" required="true" style="width: 400px; height: 25px;"/>
 	      				</td>
       				</tr>
       				<tr>
       					<td align="right" width="8%"><span style="color: red;">*</span><span>活动时间：</span></td>
 	      				<td width="92%" colspan="9">
-	      					<input name="activityDate" id="activityDate" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 28px;"/>
+	      					<input class="easyui-validatebox easyui-datebox" style="width: 180px; height: 25px;" name="activityDate" id="activityDate" editable="false" required="true">
 	      				</td>
       				</tr>
       				<tr>
       					<td align="right" width="8%"><span>获奖情况：</span></td>
 	      				<td width="92%" colspan="9">
-	      					<input name="award" id="award" type="text" class="easyui-textbox validatebox" required="true" style="width: 400px; height: 28px;"/>
+	      					<input name="award" id="award" type="text" class="easyui-textbox validatebox" required="true" style="width: 400px; height: 25px;"/>
 	      				</td>
       				</tr>
       				<tr id="giftModelTR">
       					<td align="right" width="90px"><span>赠品类别：</span></td>
       					<td align="center" width="100px">
-      						<select id="giftType" class="easyui-combobox" style="width: 100px; height: 28px;">
+      						<select id="giftType" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
         					</select>
       					</td>
       					<td align="right" width="80px"><span>赠品名称：</span></td>
       					<td width="410px" align="left" id="otherTd" colspan="2">
-      						<select id="giftName" class="easyui-combobox" style="width: 100px; height: 28px;"></select>
+      						<select id="giftName" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"></select>
       					</td>
       					<td width="410px" align="left" id="couponTd" style="display: none;">
-      						<select id="couponType" class="easyui-combobox" style="width: 100px; height: 28px;"></select>
-      						<select id="amount" class="easyui-combobox" style="width: 100px; height: 28px;"></select>
+      						<select id="couponType" class="easyui-combobox" style="width: 100px; height: 25px;"></select>
+      						<select id="amount" class="easyui-combobox" style="width: 100px; height: 25px;"></select>
       					</td>
       					<td width="210px" align="left" id="getCouponTd" style="display: none;">
-	      					<input id="giftCode" type="text" class="easyui-numberbox" style="width: 100px; height: 28px;"/>
-		        			<input id="effDate" type="text" class="easyui-datebox" style="width: 100px; height: 28px;"/>
+	      					<input id="giftCode" type="text" class="easyui-numberbox" style="width: 100px; height: 25px;"/>
+		        			<input id="effDate" type="text" class="easyui-datebox" style="width: 100px; height: 25px;"/>
       					</td>
       					<td align="right" width="80px"><span>是否领取：</span></td>
       					<td width="100px" align="left">
@@ -63,7 +63,7 @@
      	           		</td>
      	           		<td align="right" width="60px"><span>发放人：</span></td>
       	        		<td width="90px">
-      	        			<input id="granter" type="text" class="easyui-textbox validatebox" style="width: 100px; height: 28px;" disabled="disabled"/>
+      	        			<input id="granter" type="text" class="easyui-textbox validatebox" style="width: 100px; height: 25px;" disabled="disabled"/>
       	        		</td>
       	        		<td width="90px" align="center">
       	        			<a href="javascript:void(0)" id="addGoodsGiftBtn" class="easyui-linkbutton" id="addGiftBtn" iconCls="icon-add" style="width: 80px;" onclick="addRow()">添加</a>
@@ -90,11 +90,9 @@
       		</form>
       	</div>
       		
-      	<div style="margin-top: 20px;min-width:1100px; width:99%;">
-	      	<div style="float: left;margin-left: 800px;">
-	      		<a href="javascript:void(0)" id="activitySubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      		&nbsp;<a href="javascript:void(0)" id="activityBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
-	      	</div>
+      	<div style="text-align:center;margin-top: 20px;min-width:1100px; width:99%;">
+	      		<a href="javascript:void(0)" id="activitySubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 25px;">提交</a>
+	      		&nbsp;&nbsp;<a href="javascript:void(0)" id="activityBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 25px;" onclick="javascript:window.history.back()">返回</a>
 	    </div>
   	</body>
 </html>

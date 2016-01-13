@@ -55,7 +55,7 @@
   				</tr>
   			</table>
   		</div>
-  		<div style="width:1100px;text-align:center;margin-top:50px;">
+  		<div style="width:1100px;text-align:center;margin:25px 0;">
   			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:150px" id="submitBtn">提交</a>
   				&nbsp;&nbsp;&nbsp;&nbsp;
   			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" >返回</a>	

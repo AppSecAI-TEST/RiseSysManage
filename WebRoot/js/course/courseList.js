@@ -2,7 +2,7 @@ $(document).ready(function(){
 	var staffId = $("#staffId").val();
 	var funcNodeId = $("#funcNodeId").val();
 	$("#schoolId").combobox({
-		url : "/sys/pubData/qrySchoolList.do?schoolId=",//返回json数据的url
+		url : "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId=711&fieldId=schoolId&headFlag=N",
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
@@ -10,23 +10,14 @@ $(document).ready(function(){
     		return "<span>" + data.schoolName + "</span>";
     	},
     	onLoadSuccess : function() {
-    		$("#schoolId").combobox("setValue", "");
-    		$("#schoolId").combobox("setText", "全部校区");
+    		if($("#schoolId").combobox("getData").length>0)
+    		{
+    			$("#schoolId").combobox("setValue",$("#schoolId").combobox("getData")[0].schoolId);
+    		}	
     	},
     	onChange : function(n, o) {
     		if(n != "" && n != null && n != undefined) {
-    			$("#studentId").combobox({
-					url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId="+funcNodeId+"&fieldId=studentId",
-					valueField : "studentId",
-					textField : "name",
-					panelHeight : "auto",
-					formatter : function(data) {
-						return "<span>" + data.name + "</span>";
-			    	}
-				});
-    		} else {
-				$("#schoolId").combobox("setText", "全部校区");
-			}
+    		} 
     	}
 	});
 	

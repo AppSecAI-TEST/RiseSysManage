@@ -453,10 +453,10 @@
 											</select>
 											<a href="javascript:void(0)" id="qryStudent"
 												style="width: 90px" class="easyui-linkbutton"
-												iconCls="icon-add" plain="true" onclick="qryStudent()">查询学生</a>
+												iconCls="icon-add" onclick="qryStudent()">查询学生</a>
 											<a href="javascript:void(0)" id="recordGifts"
 												style="width: 90px" class="easyui-linkbutton"
-												iconCls="icon-add" plain="true" onclick="getWomGift()">录入赠品</a>
+												iconCls="icon-add" onclick="getWomGift()">录入赠品</a>
 										</td>
 									</tr>
 									<tr id="T" style="display: none;">
@@ -564,7 +564,7 @@
 										<td align="left" style="border-top: 1px solid #ccc;">
 											<a href="javascript:void(0)" id="searchStudent"
 												style="width: 100px" class="easyui-linkbutton"
-												iconCls="icon-add" plain="true" onclick="searchStudent()"><span>学员检索</span>
+												iconCls="icon-add"  onclick="searchStudent()"><span>学员检索</span>
 										</td>
 									</tr>
 									<tr style="display: none;">
@@ -665,7 +665,7 @@
 					<tr>
 						<td align="center">
 							<href ="javascript:void(0)" id="addArchives"
-								class="easyui-linkbutton" iconCls="icon-add" plain="true"
+								class="easyui-linkbutton" iconCls="icon-add"
 								onclick="addArchives()">
 							<span>使用现金抵扣券</span>
 						</td>
@@ -1121,13 +1121,11 @@ $('#favorAmount').textbox( {
 $("#submitBtn").click(function() 
 {
 	//if(!$("#courseFm").form('validate'))return;
-	
-	if($("#payDate").datebox("getValue")=="")
+	if(!$("#courseFm").form("validate"))
 	{
-		showMessage("提示","请选择缴费时间",null);
+		$("#courseFm").find(".textbox-text.validatebox-text.validatebox-invalid:first").trigger("mouseover");
 		return false;
 	}
-	
 	oldCourses =getOldCourse();
 	var stageId = $("#stageId").combobox("getValue");
 	var stageOrder =  $("#stageOrder").val();
@@ -1727,6 +1725,11 @@ $("#addCourse").click(function()
 	
 	function addCourseInfo()
 	{
+		if(!$("#courseFm").form("validate"))
+		{
+			$("#qryFm").find(".textbox-text.validatebox-text.validatebox-invalid:first").trigger("mouseover");
+			return false;
+		}	
 		//获取口碑信息-begin
 		var womType="";
 		$("input[name=praise]").each(function(){

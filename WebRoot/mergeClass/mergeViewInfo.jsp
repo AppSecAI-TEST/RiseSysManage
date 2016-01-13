@@ -31,6 +31,7 @@
 	  			</tr>
   			</table>
   		</div>
+  		<div style="height:5px;"></div>
   		<div class="easyui-panel" title="合并班计划" style="width:1293px;">
   			<table id="tab2" width="100%;" class="maintable">
   				<tr>
@@ -57,8 +58,10 @@
   				</tr>
   			</table>
   		</div>
+  		<div style="height:5px;"></div>
   		<div id="courseChangePlan"  class="easyui-panel" title="课程调整计划" style="width:1293px;">  			
   		</div>
+  		<div style="height:5px;"></div>
   		<div class="easyui-panel" title="审批信息" style="width:1293px;">
   			<table id="tab3" width="100%;" class="maintable">
 	  			<tr>
@@ -74,7 +77,7 @@
 	  			</tr>
 	  		</table>	  						
   		</div>
-  		<div style="width:1293px;text-align:center;margin-top:50px;">
+  		<div style="width:1293px;text-align:center;margin-top:25px 0;">
   			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" ><span>返回</span></a>	
   		</div>		
   	</body>

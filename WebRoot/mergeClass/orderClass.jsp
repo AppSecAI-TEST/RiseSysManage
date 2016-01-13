@@ -15,7 +15,7 @@
   		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   		<input id="applyId" type="hidden" value="<%=applyId%>"/>
   		<div id="detail"></div>
-  		<div style="width:1293px;text-align:center;margin:50px 0px;">
+  		<div style="width:1293px;text-align:center;margin:25px 0;">
   			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:150px" id="submitBtn"><span>提交</span></a>
   				&nbsp;&nbsp;&nbsp;&nbsp;
   			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" ><span>返回</span></a>	

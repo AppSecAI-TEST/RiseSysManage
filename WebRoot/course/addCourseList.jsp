@@ -15,71 +15,66 @@
   	<body>
 		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
 		<input type="hidden" id="funcNodeId" value="<%=funcNodeId %>"/>
-		<form id="qryFm" style="margin:0 auto;">
-			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
+		<div style="margin-right:5px">
+		<form id="qryFm">
+			<table class="search_tab">
 				<tr>
-					<td align="right"><span>校区：</span></td>
+					<td width="80px" align="right"><span>所属校区：</span></td>
 					<td width="114px">
-						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;">
+						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
      					</select>
 					</td>
 					<td align="right"><span>学员姓名：</span></td>
 					<td width="114px">
-						<select id="studentId" name="studentId" class="easyui-combobox" style="width: 114px; height: 25px;"
-							data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"
-							url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=&funcNodeId=<%=funcNodeId %>&fieldId=studentId">
-      					</select>
+						<input id="studentId" name="studentId" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 					</td>
-					<td align="right"><span>联系电话：</span></td>
+					<td width="80px" align="right"><span>联系电话：</span></td>
 					<td width="114px">
-						<input name="phone" id="phone" type="text" class="easyui-textbox" style="width: 114px; height: 25px;"/>
+						<input name="phone" id="phone" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 					</td>
-					<td align="right"><span>证件号码：</span></td>
-					<td colspan="2">
-						<input name="identityId" id="identityId" type="text" class="easyui-textbox" style="width: 150px; height: 25px;"/>
+					<td width="80px" align="right"><span>证件号码：</span></td>
+					<td colspan="2" width="230px">
+						<input name="identityId" id="identityId" type="text" class="easyui-textbox" style="width: 220px; height: 25px;"/>
 					</td>
-					<td align="center">
-						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1000">查询</a>
-					</td>
-					<td align="center">
-						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
-					</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td align="right"><span>业绩顾问：</span></td>
-					<td width="114px">
-						<select id="adviserId" name="adviserId" class="easyui-combobox" style="width: 114px; height: 25px;"
+					<td>
+						<select id="adviserId" name="adviserId" class="easyui-combobox" style="width: 100px; height: 25px;"
 							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
       						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
       					</select>
 					</td>
 					<td align="right"><span>责任顾问：</span></td>
-					<td width="114px">
-						<select id="dutyAdvister" name="dutyAdvister" class="easyui-combobox" style="width: 114px; height: 25px;"
+					<td>
+						<select id="dutyAdvister" name="dutyAdvister" class="easyui-combobox" style="width: 100px; height: 25px;"
 							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
       						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
       					</select>
 					</td>
 					<td align="right"><span>客户关怀：</span></td>
-					<td width="114px">
-						<select id="carer" name="carer" class="easyui-combobox" style="width: 114px; height: 25px;"
+					<td>
+						<select id="carer" name="carer" class="easyui-combobox" style="width: 100px; height: 25px;"
 							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
       						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
     					</select>
 					</td>
 					<td align="right"><span>建档时间：</span></td>
-					<td width="8px">
-						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myformatter, parser:myparser"/>
+					<td>
+						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myformatter, parser:myparser"/>
+						<span>至</span>
+						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTime" name="endTime" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
-					<td align="center" width="16px;"><span>至</span></td>
-					<td width="90px">
-						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="endTime" name="endTime" data-options="formatter:myformatter, parser:myparser"/>
+					<td align="left">
+						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1000">查询</a>
+						&nbsp;&nbsp;
+						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 					</td>
 				</tr>
 			</table>
 		</form>
-		<div style="padding:5px 0;min-width:1100px; width:100%;">
-			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1000" 
+		<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1000" 
 				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 				<thead>
 					<tr>
@@ -98,12 +93,12 @@
 						<th data-options="field:'parentName',width:150,align:'center'">家长</th>
 					</tr>
 				</thead>
-			</table>
-		</div>
+		</table>
 		<div id="toolbar">
    			<a href="javascript:void(0)" id="single" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">单报</a>
    			<a href="javascript:void(0)" id="multiple" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">连报</a>
 			<a href="javascript:void(0)" id="backBt" class="easyui-linkbutton" iconCls="icon-back" style="width: 120px;">返回</a>
 		</div>
+	</div>	
  	</body>
 </html>

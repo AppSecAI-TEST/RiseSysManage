@@ -29,9 +29,9 @@
   					</td>
   					<td width="110px" align="right"><span>异常时常(天)：</span></td>
   					<td width="240px">
-  						<input class="easyui-textbox" name="startDay" id="startDay"  style="width:100px;height:25px;" />
+  						<input class="easyui-numberbox" name="startDay" id="startDay"  style="width:100px;height:25px;" />
   						&nbsp;-&nbsp;
-  						<input class="easyui-textbox" name="endDay" id="endDay"  style="width:100px;height:25px;"/>
+  						<input class="easyui-numberbox" name="endDay" id="endDay"  style="width:100px;height:25px;"/>
   					</td>
   				</tr>
   				<tr>

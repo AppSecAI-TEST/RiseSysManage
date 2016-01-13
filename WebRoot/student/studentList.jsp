@@ -15,14 +15,15 @@
   	<body>
 		<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
 		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
+		<div style="margin-right:5px">
 		<form id="qryFm" style="margin:0 auto;">
-			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
+			<table class="search_tab">
 				<tr>
 					<td align="right">
 						<span>校区：</span>
 					</td>
 					<td width="100px">
-						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;">
+						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false">
      					</select>
 					</td>
 					<td align="right">
@@ -36,10 +37,7 @@
 						<span>学员姓名：</span>
 					</td>
 					<td width="100px">
-						<select id="studentId" name="studentId" class="easyui-combobox" style="width: 114px; height: 25px;" 
-							data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"	
-							url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=&funcNodeId=${param.funcNodeId}&fieldId=studentId">
-      					</select>
+						<input id="studentId" name="studentId" class="easyui-textbox" style="width: 114px; height: 25px;" 
 					</td>
 					<td align="right">
 						<span>联系电话：</span>
@@ -86,13 +84,13 @@
 						<span>建档时间：</span>
 					</td>
 					<td width="8px">
-						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:110px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
 					<td align="center" width="14px;">
 						<span>至</span>
 					</td>
 					<td width="90px">
-						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="endTime" name="endTime" data-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:110px; height: 25px;" id="endTime" name="endTime" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
 					<td align="center" colspan="2">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1000">查询</a>
@@ -101,7 +99,6 @@
 				</tr>
 			</table>
 		</form>
-		<div style="padding:0px 0;min-width:1100px; width:100%;">
 			<table class="easyui-datagrid" title="学员列表" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1000" 
 				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 				<thead>
@@ -122,14 +119,14 @@
 					</tr>
 				</thead>
 			</table>
-		</div>
 		<div id="toolbar" style="padding: 2px; height: auto">
    			<a href="javascript:void(0)" id="addStudent" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">学员注册</a>
    			<a href="javascript:void(0)" id="updateStudent" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;" funcNodeId="1002">修改档案</a>
    			<a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>
    			<a href="javascript:void(0)" id="addActivity" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">活动奖项</a>
-			<a href="javascript:void(0)" id="batchUpdate" class="easyui-linkbutton" iconCls="icon-edit" style="width: 120px;">批量修改责任人</a>
+			<a href="javascript:void(0)" id="batchUpdate" class="easyui-linkbutton" iconCls="icon-edit" style="width: 150px;">批量修改责任人</a>
 		</div>
+		</div>	
 		<div id="dlg" class="easyui-dialog" style="width:900px;" closed="true" data-options="modal:true" buttons="#dlgBtn">
   			<form id="batchUpdateFm" method="post">
   				<input type="hidden" id="updateStudentId" name="updateStudentId"/>

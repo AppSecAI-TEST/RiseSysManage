@@ -11,6 +11,7 @@
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript" src="<%=path %>/js/mergeClass/selectClass.js"></script>
 		<style>
+			#classList{margin-left:10px;}
 			#classList a
 			{
 				display:inline-block;
@@ -26,39 +27,39 @@
  			<input type="hidden" id="isHead" name="isHead" value="<%=isHead%>"/>
   			<table class="search_tab">
   				<tr>
-  					<td align="right">校区：</td>
-  					<td>
+  					<td width="80px;" align="right"><span>校区：</span></td>
+  					<td width="110px;">
   						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px;height:25px" editable="false"
 							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 			      			onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
 			      			url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
 		        		</select>
   					</td>
-  					<td align="right">课时进度：</td>
-  					<td>
+  					<td  width="80px;" align="right"><span>课时进度：</span></td>
+  					<td  width="230px;">
   						<input class="easyui-datebox" name="minTime" id="minTime" style="width: 100px;height:25px" />
-  						至：
+  						至
   						<input class="easyui-datebox" name="maxTime" id="maxTime" style="width: 100px;height:25px" />
   					</td>
   					<td></td>
   				</tr>
   				<tr>
-  					<td align="right">课程阶段：</td>
+  					<td align="right"><span>课程阶段：</span></td>
   					<td>
   						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px;height:25px"
 							data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'"
 			      			url="<%=path %>/pubData/qryStage.do?">
 		        		</select>
   					</td>
-  					<td align="right">开课日期：</td>
+  					<td align="right"><span>开课日期：</span></td>
   					<td>
   						<input class="easyui-datebox" name="startTime" id="startTime" style="width: 100px;height:25px" />
-  						至：
+  						至
   						<input class="easyui-datebox" name="endTime" id="endTime" style="width: 100px;height:25px" />
   					</td>
   					<td>
-  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" funcNodeId="3110">查询</a>
-  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:150px" id="resetBtn" >重置</a>
+  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" funcNodeId="3110">查询</a>
+  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="resetBtn" >重置</a>
   					</td>
   				</tr>
   			</table>
@@ -68,16 +69,16 @@
 			<thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
-					<th field="schoolName" align="center" width="5%">校区</th>
-					<th field="className" align="center" width="8%">班级名称</th>
-					<th field="startDate" align="center" width="10%">开课日期</th>
-					<th field="teacherName" align="center" width="10%">带班老师</th>
-					<th field="finishDate" align="center" width="10%">结课日期</th>
-					<th field="classProgress" align="center" width="7%">课时进度</th>
-					<th field="progressRate" align="center" width="10%">课时进度%</th>
-					<th field="classTime" align="center" width="18%">上课时间段</th>
-					<th field="readNum" align="center" width="10%">在读人数</th>
-					<th field="graduteNum" align="center" width="10%">已升学人数</th>
+					<th field="schoolName" align="center" width="5%"><span>校区</span></th>
+					<th field="className" align="center" width="8%"><span>班级名称</span></th>
+					<th field="startDate" align="center" width="10%"><span>开课日期</span></th>
+					<th field="teacherName" align="center" width="10%"><span>带班老师</span></th>
+					<th field="finishDate" align="center" width="10%"><span>结课日期</span></th>
+					<th field="classProgress" align="center" width="7%"><span>课时进度</span></th>
+					<th field="progressRate" align="center" width="10%"><span>课时进度%</span></th>
+					<th field="classTime" align="center" width="18%"><span>上课时间段</span></th>
+					<th field="readNum" align="center" width="10%"><span>在读人数</span></th>
+					<th field="graduteNum" align="center" width="10%"><span>已升学人数</span></th>
 				</tr>
 			</thead>
 		</table>

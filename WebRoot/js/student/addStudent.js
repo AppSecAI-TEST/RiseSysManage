@@ -100,16 +100,6 @@ $(document).ready(function() {
     	panelHeight : "auto",
     	formatter : function(data) {
     		return "<span>" + data.codeName + "</span>";
-    	},
-    	onChange : function(n, o) {
-    		if("2BA" == n) {
-    			var identityId = $("#identityId").textbox("getValue");
-    			if(identityId != "" && identityId != null && identityId != undefined) {
-    				if(!validateIdCard(identityId)) {
-        				$.messager.alert('提示', "请输入有效的身份证号码！");
-        			}
-    			}
-    		}
     	}
     });
     
@@ -159,12 +149,12 @@ $(document).ready(function() {
 	});
     
     //验证联系人联系电话
-    $("input", $("#phone").next("span")).blur(function() {
-    	var phone = $("#phone").textbox("getValue");
-    	if(!checkMobile(phone)) {
-    		$.messager.alert('提示', "请输入完整的11位手机号或者正确的手机号前七位！");
-    	}
-    });
+//    $("input", $("#phone").next("span")).blur(function() {
+//    	var phone = $("#phone").textbox("getValue");
+//    	if(!checkMobile(phone)) {
+//    		$.messager.alert('提示', "请输入完整的11位手机号或者正确的手机号前七位！");
+//    	}
+//    });
     
     //点击联系人信息中的“添加”按钮
     $("#addContact").click(function() {
@@ -275,6 +265,10 @@ $(document).ready(function() {
     			$.messager.alert('提示', "联系人关系为“" + relationTypeText + "”的联系人已存在，请更换联系人关系！");
     		}
     	}
+    	else
+    	{
+    		$("#contactFm").find(".textbox-text.validatebox-text.validatebox-invalid:first").trigger("mouseover");
+    	}	
     });
     
     //学员验重
@@ -414,6 +408,10 @@ $(document).ready(function() {
         		$.messager.alert('提示', "请先对学员进行验重！");
         	}
     	}
+    	else
+    	{
+    		$("#studentFm").find(".textbox-text.validatebox-text.validatebox-invalid:first").trigger("mouseover");
+    	}	
     });
 });
 
