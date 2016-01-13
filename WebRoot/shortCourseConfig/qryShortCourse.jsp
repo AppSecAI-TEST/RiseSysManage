@@ -9,8 +9,6 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
 		<script type="text/javascript" src="<%=path %>/js/shortCourseConfig/shortCourseMain.js"></script>
   	</head>
   	<body>
@@ -19,16 +17,16 @@
 			<thead>
 				<tr>
 					<th field="ck" align="center" checkbox="true" width="1%"></th>
-					<th field="className" align="center" width="25%">短期课名称</th>
-					<th field="isTeachingVal" align="center" width="24%">管理类型</th>
-					<th field="handlerName" align="center" width="25%">创建人</th>
-					<th field="createDate" align="center" width="25%">创建时间</th>
+					<th field="className" align="center" width="25%"><span>短期课名称</span></th>
+					<th field="isTeachingVal" align="center" width="24%"><span>管理类型</span></th>
+					<th field="handlerName" align="center" width="25%"><span>创建人</span></th>
+					<th field="createDate" align="center" width="25%"><span>创建时间</span></th>
 				</tr>
 			</thead>
 		</table>
 		<div id="toolbar">
-   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="addShortSystem('<%=type %>')">提交</a>
- 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" onclick="javascript:window.history.back()">返回</a>
+   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;" onclick="addShortSystem('<%=type %>')"><span>提交</span></a>
+ 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="javascript:window.history.back()"><span>返回</span></a>
  		</div>
  		<script type="text/javascript">
 	   		$(document).ready(function(){

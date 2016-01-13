@@ -23,9 +23,9 @@
 				</tr>
 			</thead>
 		</table>
-		<div style="margin-top: 10px;text-align:right;">
-	      	<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      	<a href="javascript:void(0)" id="back" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:parent.window.$('#dlg').dialog('close')">返回</a>
+		<div style="margin-top: 10px;text-align:center;">
+	      	<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;"><span>提交</span></a>
+	      	<a href="javascript:void(0)" id="back" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="javascript:parent.window.$('#dlg').dialog('close')"><span>返回</span></a>
 	     </div>
 	</body>
 </html>

@@ -9,9 +9,6 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/css/style.css">
 		<script type="text/javascript" src="<%=path %>/js/shortCourseConfig/priceConfig.js"></script>
   	</head>
   	<body>
@@ -21,7 +18,7 @@
   			<input type="hidden" id="schoolIds" value="" />
 	 		<table width="95%" align="center" style="margin:5px auto;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
 	 			<tr>
-  					<td align="right" width="11%">价格体系名称：</td>
+  					<td align="right" width="11%"><span>价格体系名称：</span></td>
   					<td align="left" width="69%"><input id="priceName" name="priceName" style="width:300px" class="easyui-textbox" required="true" /></td>
   				</tr>
   				<tr>
@@ -29,19 +26,19 @@
   					<td align="left" id="schoolTd"></td>
   				</tr>
   				<tr>
-  					<td align="right">生效时间：</td>
+  					<td align="right"><span>生效时间：</span></td>
   					<td align="left"><input class="easyui-datebox" id="effDate" name="effDate" style="width:300px;" required="true"/></td>
   				</tr>
 	 		</table>
 	 		<table width="95%" align="center" style="margin:5px auto;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
 	 			<tr>
-  					<td align="center" width="13%">班级类型</td>
-  					<td align="center" width="13%">学费</td>
-  					<td align="center" width="13%">材料费</td>
-  					<td align="center" width="13%">保育费和餐费</td>
-  					<td align="center" width="13%">总部提成</td>
-  					<td align="center" width="13%">其他费用</td>
-  					<td align="center" width="13%">总费用</td>
+  					<td align="center" width="13%"><span>班级类型</span></td>
+  					<td align="center" width="13%"><span>学费</span></td>
+  					<td align="center" width="13%"><span>材料费</span></td>
+  					<td align="center" width="13%"><span>保育费和餐费</span></td>
+  					<td align="center" width="13%"><span>总部提成</span></td>
+  					<td align="center" width="13%"><span>其他费用</span></td>
+  					<td align="center" width="13%"><span>总费用</span></td>
   				</tr>
   				<c:forEach items="${obj.classType}" var="classTypeObj" varStatus="status">
   					<tr>
@@ -57,10 +54,10 @@
 	 		</table>
  		</div>
  		<div style="margin-top: 20px;min-width:1100px; width:99%;">
-	      	<div style="float: right;">
-	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;" onclick="addShortPriceSubmit()">提交</a>
+	      	<div style="text-align:center">
+	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;" onclick="addShortPriceSubmit()"><span>提交</span></a>
 	      		&nbsp;
-	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="javascript:window.history.back()"><span>返回</span></a>
 	      	</div>
 	   </div>
  		<iframe id="dlg" class="easyui-dialog" style="width:450px; height: 500px; padding: 10px 20px" closed="true" modal="true"></iframe>

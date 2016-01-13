@@ -9,9 +9,6 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/css/style.css">
 		<script type="text/javascript" src="<%=path %>/js/genCourseConfig/discountPriceConfig.js"></script>
   	</head>
   	<body>
@@ -21,19 +18,19 @@
   			<input type="hidden" id="setPriceId" value="${obj.setPriceId}"/>
 	 		<table width="95%" align="center" style="margin:5px auto;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
 	 			<tr>
-  					<td align="right" width="11%">复读折扣名称：</td>
+  					<td align="right" width="11%"><span>复读折扣名称：</span></td>
   					<td align="left" width="69%"><input id="priceName" name="priceName" style="width:300px" class="easyui-textbox" required="true" /></td>
   				</tr>
   				<tr>
-  					<td align="right">状态：</td>
+  					<td align="right"><span>状态：</span></td>
   					<td align="left">${obj.isUseVal}</td>
   				</tr>
   				<tr>
-  					<td align="right">折扣率：</td>
+  					<td align="right"><span>折扣率：</span></td>
   					<td align="left"><input id="countRate" name="countRate" style="width:300px" class="easyui-textbox" required="true" /></td>
   				</tr>
   				<tr>
-  					<td align="right">生效时间：</td>
+  					<td align="right"><span>生效时间：</span></td>
   					<td align="left"><input class="easyui-datebox" id="effDate" name="effDate" style="width:300px;" required="true"/></td>
   				</tr>
   				<tr>
@@ -41,20 +38,20 @@
   					<td align="left" id="schoolTd"><span style="font-size:14px;font-family:'微软雅黑'">&nbsp;${obj.applySchools}<a style='font-size:12px' class='linkmore' onclick="removeSchool(this)">删除</a></span></td>
   				</tr>
   				<tr>
-  					<td align="right">创建人：</td>
+  					<td align="right"><span>创建人：</span></td>
   					<td align="left">${obj.handerName}</td>
   				</tr>
   				<tr>
-  					<td align="right">创建时间：</td>
+  					<td align="right"><span>创建时间：</span></td>
   					<td align="left">${obj.createDate}</td>
   				</tr>
 	 		</table>
  		</div>
  		<div style="margin-top: 20px;min-width:1100px; width:99%;">
-	      	<div style="float: right;">
-	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:80px; height: 28px;" onclick="updateDisPriceSubmit()">提交</a>
+	      	<div style="text-align:center">
+	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;" onclick="updateDisPriceSubmit()"><span>提交</span></a>
 	      		&nbsp;
-	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="javascript:window.history.back()"><span>返回</span></a>
 	      	</div>
 	   </div>
 	   <iframe id="dlg" class="easyui-dialog" style="width:450px; height: 500px; padding: 10px 20px" closed="true" modal="true"></iframe>

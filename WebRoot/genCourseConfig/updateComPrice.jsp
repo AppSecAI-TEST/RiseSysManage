@@ -10,9 +10,6 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/css/style.css">
 		<script type="text/javascript" src="<%=path %>/js/genCourseConfig/comPriceConfig.js"></script>
   	</head>
   	<body>
@@ -22,7 +19,7 @@
   			<input type="hidden" id="setPriceId" value="${obj.setPriceId}"/>
 	 		<table width="95%" align="center" style="margin:5px auto;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
 	 			<tr>
-  					<td align="right" width="11%">价格体系名称：</td>
+  					<td align="right" width="11%"><span>价格体系名称：</span></td>
   					<td align="left" width="69%"><input id="priceName" name="priceName" style="width:300px" class="easyui-textbox" required="true" /></td>
   				</tr>
   				<tr>
@@ -30,33 +27,33 @@
   					<td align="left" id="schoolTd"><span style="font-size:14px;font-family:'微软雅黑'">&nbsp;${obj.applySchools}<a style='font-size:12px' class='linkmore' onclick="removeSchool(this)">删除</a></span></td>
   				</tr>
   				<tr>
-  					<td align="right">生效时间：</td>
+  					<td align="right"><span>生效时间：</span></td>
   					<td align="left"><input class="easyui-datebox" id="effDate" name="effDate" style="width:300px;" required="true"/></td>
   				</tr>
   				<tr>
-  					<td align="right">状态：</td>
+  					<td align="right"><span>状态：</span></td>
   					<td align="left">${obj.isUseVal}</td>
   				</tr>
   				<tr>
-  					<td align="right">创建人：</td>
+  					<td align="right"><span>创建人：</span></td>
   					<td align="left">${obj.handerName}</td>
   				</tr>
   				<tr>
-  					<td align="right">创建时间：</td>
+  					<td align="right"><span>创建时间：</span></td>
   					<td align="left">${obj.createDate}</td>
   				</tr>
 	 		</table>
 	 		<table width="95%" align="center" style="margin:5px auto;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
 	 			<tr>
-  					<td align="center" width="11%">课程阶段</td>
-  					<td align="center" width="7%">年级</td>
-  					<td align="center" width="9%">班级类型</td>
-  					<td align="center" width="9%">学费</td>
-  					<td align="center" width="9%">材料费</td>
-  					<td align="center" width="9%">保育费和餐费</td>
-  					<td align="center" width="9%">总部提成</td>
-  					<td align="center" width="9%">其他费用</td>
-  					<td align="center" width="8%">总费用</td>
+  					<td align="center" width="11%"><span>课程阶段</span></td>
+  					<td align="center" width="7%"><span>年级</span></td>
+  					<td align="center" width="9%"><span>班级类型</span></td>
+  					<td align="center" width="9%"><span>学费</span></td>
+  					<td align="center" width="9%"><span>材料费</span></td>
+  					<td align="center" width="9%"><span>保育费和餐费</span></td>
+  					<td align="center" width="9%"><span>总部提成</span></td>
+  					<td align="center" width="9%"><span>其他费用</span></td>
+  					<td align="center" width="8%"><span>总费用</span></td>
   				</tr>
   				<c:forEach items="${retObj.result}" var="result" varStatus="status">
   					<input type="hidden" id="setClassId${status.index}" value="${result.setClassId}"/>
@@ -76,10 +73,10 @@
 	 		</table>
  		</div>
  		<div style="margin-top: 20px;min-width:1100px; width:99%;">
-	      	<div style="float: right;">
-	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:80px; height: 28px;" onclick="updateComPriceSubmit()">提交</a>
+	      	<div style="text-align:center">
+	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;" onclick="updateComPriceSubmit()"><span>提交</span></a>
 	      		&nbsp;
-	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="javascript:window.history.back()"><span>返回</span></a>
 	      	</div>
 	   </div>
 	   <iframe id="dlg" class="easyui-dialog" style="width:450px; height: 500px; padding: 10px 20px" closed="true" modal="true"></iframe>

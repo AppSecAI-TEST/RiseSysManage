@@ -23,8 +23,8 @@
 				</tr>
 			</thead>
 		</table>
-		<div style="margin-top: 10px;text-align:right;">
-	      	<a href="javascript:void(0)" id="back" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:parent.window.$('#disDlg').dialog('close')">返回</a>
+		<div style="margin-top: 10px;text-align:center;">
+	      	<a href="javascript:void(0)" id="back" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:parent.window.$('#disDlg').dialog('close')"><span>返回</span></a>
 	     </div>
 	</body>
 </html>

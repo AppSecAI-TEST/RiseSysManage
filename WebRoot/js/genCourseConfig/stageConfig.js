@@ -26,10 +26,10 @@ $(document).ready(function(){
 	            formatter: function(Confirmation, row)
 	            {  
 	        		if(row.typeFlag == "false"){
-		                var btn = '<a class="update" onclick="updateClassType(\''+row.classId+'\',\''+row.stageId+'\',\''+row.seqOrder+'\',\''+row.classType+'\',\''+row.hours+'\',\''+row.gradHours+'\',\''+row.gradRemark+'\',\''+row.isOpen+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">修改</a>&nbsp;<a class="delete" onclick="deleteClassType(\''+row.classId+'\')" style="width:80px; height:25px;" href="javascript:void(0)">删除</a>';  
+		                var btn = '<a class="update" onclick="updateClassType(\''+row.classId+'\',\''+row.stageId+'\',\''+row.seqOrder+'\',\''+row.classType+'\',\''+row.hours+'\',\''+row.gradHours+'\',\''+row.gradRemark+'\',\''+row.isOpen+'\')" style="width:80px; height:25px;"  href="javascript:void(0)"><span>修改</span></a>&nbsp;<a class="delete" onclick="deleteClassType(\''+row.classId+'\')" style="width:80px; height:25px;" href="javascript:void(0)"><span>删除</span></a>';  
 		                return btn;  
 	        		}else if(row.typeFlag == "true"){
-	        			var btn = '<a class="update" disabled="disabled" style="width:80px; height:25px;"  href="javascript:void(0)">修改</a>&nbsp;<a class="delete" disabled="disabled" style="width:80px; height:25px;" href="javascript:void(0)">删除</a>';  
+	        			var btn = '<a class="update" disabled="disabled" style="width:80px; height:25px;"  href="javascript:void(0)"><span>修改</span></a>&nbsp;<a class="delete" disabled="disabled" style="width:80px; height:25px;" href="javascript:void(0)"><span>删除</span></a>';  
 		                return btn;  
 	        		}
 	            }  

@@ -23,13 +23,13 @@ $(document).ready(function(){
 	            formatter: function(Confirmation, row)
 	            {  
 	        		if(row.isUse == "Y"){
-		                var btn = '<a class="view" onclick="viewDisPrice(\''+row.setPriceId+'\',\''+row.priceName+'\',\''+row.applySchools+'\',\''+row.effDate+'\',\''+row.isUseVal+'\',\''+row.handerName+'\',\''+row.createDate+'\',\''+row.countRate+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">浏览</a>';  
+		                var btn = '<a class="view" onclick="viewDisPrice(\''+row.setPriceId+'\',\''+row.priceName+'\',\''+row.applySchools+'\',\''+row.effDate+'\',\''+row.isUseVal+'\',\''+row.handerName+'\',\''+row.createDate+'\',\''+row.countRate+'\')" style="width:80px; height:25px;"  href="javascript:void(0)"><span>浏览</span></a>';  
 		                return btn;  
 	        		}else if(row.isUse == "N"){
-	        			var btn = '<a class="view" onclick="viewDisPrice(\''+row.setPriceId+'\',\''+row.priceName+'\',\''+row.applySchools+'\',\''+row.effDate+'\',\''+row.isUseVal+'\',\''+row.handerName+'\',\''+row.createDate+'\',\''+row.countRate+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">浏览</a>&nbsp;<a class="update" onclick="updateDisPrice(\''+row.setPriceId+'\',\''+row.priceName+'\',\''+row.schoolIds+'\',\''+row.applySchools+'\',\''+row.effDate+'\',\''+row.isUseVal+'\',\''+row.handerName+'\',\''+row.createDate+'\',\''+row.countRate+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">修改</a>&nbsp;<a class="delete" onclick="deleteDiscountPrice(\''+row.setPriceId+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">删除</a>';  
+	        			var btn = '<a class="view" onclick="viewDisPrice(\''+row.setPriceId+'\',\''+row.priceName+'\',\''+row.applySchools+'\',\''+row.effDate+'\',\''+row.isUseVal+'\',\''+row.handerName+'\',\''+row.createDate+'\',\''+row.countRate+'\')" style="width:80px; height:25px;"  href="javascript:void(0)"><span>浏览</span></a>&nbsp;<a class="update" onclick="updateDisPrice(\''+row.setPriceId+'\',\''+row.priceName+'\',\''+row.schoolIds+'\',\''+row.applySchools+'\',\''+row.effDate+'\',\''+row.isUseVal+'\',\''+row.handerName+'\',\''+row.createDate+'\',\''+row.countRate+'\')" style="width:80px; height:25px;"  href="javascript:void(0)"><span>修改</span></a>&nbsp;<a class="delete" onclick="deleteDiscountPrice(\''+row.setPriceId+'\')" style="width:80px; height:25px;"  href="javascript:void(0)"><span>删除</span></a>';  
 		                return btn;  
 	        		}else if(row.isUse == "X"){
-	        			var btn = '<a class="view" onclick="viewDisPrice(\''+row.setPriceId+'\',\''+row.priceName+'\',\''+row.applySchools+'\',\''+row.effDate+'\',\''+row.isUseVal+'\',\''+row.handerName+'\',\''+row.createDate+'\',\''+row.countRate+'\')" style="width:80px; height:25px;"  href="javascript:void(0)">浏览</a>';  
+	        			var btn = '<a class="view" onclick="viewDisPrice(\''+row.setPriceId+'\',\''+row.priceName+'\',\''+row.applySchools+'\',\''+row.effDate+'\',\''+row.isUseVal+'\',\''+row.handerName+'\',\''+row.createDate+'\',\''+row.countRate+'\')" style="width:80px; height:25px;"  href="javascript:void(0)"><span>浏览</span></a>';  
 		                return btn; 
 	        		}
 	            }  

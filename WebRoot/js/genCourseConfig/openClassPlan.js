@@ -22,7 +22,7 @@ $(document).ready(function(){
 	        {field:'opt',title:'操作',width:'15%',align:'center',
 	            formatter: function(Confirmation, row)
 	            {  
-	                var btn = '<a class="update" onclick="updateClassPlan(\''+row.openId+'\',\''+row.stageId+'\',\''+row.classType+'\',\''+row.one+'\',\''+row.two+'\',\''+row.three+'\',\''+row.four+'\',\''+row.grad+'\')" style="width:100px; height:25px;"  href="javascript:void(0)">修改</a>';  
+	                var btn = '<a class="update" onclick="updateClassPlan(\''+row.openId+'\',\''+row.stageId+'\',\''+row.classType+'\',\''+row.one+'\',\''+row.two+'\',\''+row.three+'\',\''+row.four+'\',\''+row.grad+'\')" style="width:100px; height:25px;"  href="javascript:void(0)"><span>修改</span></a>';  
 	                return btn;  
 	            }  
 	        }  
