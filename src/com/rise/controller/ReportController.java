@@ -71,5 +71,52 @@ public class ReportController
 			}
 		}
 	}
+	
+	@RequestMapping(value="/getCourseIncome.do")
+	public void getCourseIncome (HttpServletRequest request,HttpServletResponse response,String schoolId,String feeType,String month)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("utf-8");
+			out = response.getWriter();
+			String retVal = reportService.getCourseIncome(schoolId,feeType,month);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 
+	@RequestMapping(value="/getHours.do")
+	public void getHours (HttpServletRequest request,HttpServletResponse response,String param)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("utf-8");
+			out = response.getWriter();
+			String retVal = reportService.getHours(param);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }
