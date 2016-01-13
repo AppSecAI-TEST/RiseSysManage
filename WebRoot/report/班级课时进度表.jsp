@@ -75,32 +75,32 @@
 		    <td align="center" width="62px;" colspan="3"><span>第五周</span></td>
 		    <td align="center" width="62px;" colspan="3"><span>第六周</span></td>
 		    <td align="center" width="62px;" colspan="3"><span>第日周</span></td>
-		    <td align="center" width="48px;" rowspan="3"><span>本月计划课时</span></td>
-		    <td align="center" width="48px;" rowspan="3"><span>本月已排课时</span></td>
-		    <td align="center" width="48px;" rowspan="3"><span>课时差异</span></td>
+		    <td align="center" width="48px;" rowspan="2"><span>本月计划课时</span></td>
+		    <td align="center" width="48px;" rowspan="2"><span>本月已排课时</span></td>
+		    <td align="center" width="48px;" rowspan="2"><span>课时差异</span></td>
 		  </tr>
 		  <tr align="center">
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>已排课时</span></td>
+		    <td align="center" width="40px;"><span>实际课时</span></td>
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>已排课时</span></td>
+		    <td align="center" width="40px;"><span>实际课时</span></td>
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>已排课时</span></td>
+		    <td align="center" width="40px;"><span>实际课时</span></td>
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>已排课时</span></td>
+		    <td align="center" width="40px;"><span>实际课时</span></td>
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>已排课时</span></td>
+		    <td align="center" width="40px;"><span>实际课时</span></td>
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>已排课时</span></td>
+		    <td align="center" width="40px;"><span>实际课时</span></td>
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>已排课时</span></td>
+		    <td align="center" width="40px;"><span>实际课时</span></td>
 		  </tr>
 		</table>
 		</div>
@@ -129,7 +129,6 @@
 			    	},
 			    	success: function(data) 
 			    	{
-			    		alert(JSON.stringify(data));
 			    		var html="<tr>"+$("#hoursPlanTab").find("tr:eq(0)").html()+"</tr><tr>"+$("#hoursPlanTab").find("tr:eq(1)").html()+"</tr>";
 			    		for(var i=0;i<data.length;i++)
 			    		{
