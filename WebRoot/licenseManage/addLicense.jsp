@@ -9,9 +9,6 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/css/style.css">
 		<script type="text/javascript" src="<%=path %>/js/license/licenseManage.js"></script>
   	</head>
   	<body>
@@ -20,9 +17,9 @@
   			<input id="teacherId" type="hidden" value="<%=teacherId %>"/>
 	 		<table id="licenseTab" width="95%" align="center" style="margin:5px auto;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
 	 			<tr>
-  					<td align="center" width="35%">课程阶段</td>
-  					<td align="center" width="35%">持证开始时间</td>
-  					<td align="center" width="20%">操作</td>
+  					<td align="center" width="35%"><span>课程阶段</span></td>
+  					<td align="center" width="35%"><span>持证开始时间</span></td>
+  					<td align="center" width="20%"><span>操作</span></td>
   				</tr>
   				<tr id="licenseModelTR">
 	      	        <td align="center">
@@ -42,10 +39,10 @@
 	 		</table>
  		</div>
  		<div style="margin-top: 20px;min-width:1100px; width:99%;">
-	      	<div style="float: right;">
-	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;" onclick="addLicenseSubmit()">提交</a>
+	      	<div style="text-align:center">
+	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;" onclick="addLicenseSubmit()"><span>提交</span></a>
 	      		&nbsp;
-	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="javascript:window.history.back()"><span>返回</span></a>
 	      	</div>
 	   </div>
 	   <script type="text/javascript">

@@ -20,6 +20,37 @@ $(document).ready(function(){
 		});
     });
     
+    var staffId = $("#staffId").val();
+	$("#schoolId").combobox({
+		url : "/sys/pub/pageCategory.do?staffId="+staffId+"&resourceId=505&fieldId=schoolId&headFlag=N",//返回json数据的url 
+		valueField : "schoolId",
+		textField : "schoolName",
+		panelHeight : "auto",
+		formatter : formatSchool,
+		onLoadSuccess : function(data) {
+			$("#schoolId").combobox('setValue',data[0].schoolId);
+		},
+		onChange : function(n, o) {
+			if(n != "" && n != null && n != undefined) {
+//				$("#byName").combobox({disabled: false});
+				$("#byName").combobox({
+					url : "/sys/pubData/qryTeacherList.do?schoolId="+n,//返回json数据的url
+					valueField : "teacherId",
+					textField : "byname",
+					panelHeight : "auto",
+					formatter : function(data) {
+						return "<span>" + data.byname + "</span>";
+					}
+				});
+			} else {
+				$("#schoolId").combobox("setText", "");
+				$("#byName").combobox('clear');
+				$("#byName").combobox("loadData", new Array());
+//				$("#byName").combobox({disabled: true});
+			}
+		}
+	});
+    
 });
 
 //跳转档案维页面

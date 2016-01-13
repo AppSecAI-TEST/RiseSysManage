@@ -27,27 +27,57 @@ $(document).ready(function(){
 		});
     });
 	
-	initDate();
-	//定位教师页面查询
-    $("#qryTeaBtn").click(function() {
-    	var json = $("#qryTeaFm").serializeObject();
-    	json.byName = $("#byName").combobox('getText');
-		var obj = JSON.stringify(json);
-		obj = obj.substring(0, obj.length - 1);
-		var funcNodeId = $("#qryTeaBtn").attr("funcNodeId");
-		obj += ",\"teacherState\":\"P\",\"funcNodeId\":\""+funcNodeId+"\"}";
-		$('#teacher_list').datagrid({
-			url : "/sys/pubData/qryDataListByPage.do",
-			queryParams:{
-				param : obj
-			},
-			onLoadSuccess:function(){
-				//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
-				$('#teacher_list').datagrid('clearSelections');
-			}
-		});
-    });
+//	initDate();
+//	//定位教师页面查询
+//    $("#qryTeaBtn").click(function() {
+//    	var json = $("#qryTeaFm").serializeObject();
+//    	json.byName = $("#byName").combobox('getText');
+//		var obj = JSON.stringify(json);
+//		obj = obj.substring(0, obj.length - 1);
+//		var funcNodeId = $("#qryTeaBtn").attr("funcNodeId");
+//		obj += ",\"teacherState\":\"P\",\"funcNodeId\":\""+funcNodeId+"\"}";
+//		$('#teacher_list').datagrid({
+//			url : "/sys/pubData/qryDataListByPage.do",
+//			queryParams:{
+//				param : obj
+//			},
+//			onLoadSuccess:function(){
+//				//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+//				$('#teacher_list').datagrid('clearSelections');
+//			}
+//		});
+//    });
     
+    var staffId = $("#staffId").val();
+	$("#schoolId").combobox({
+		url : "/sys/pub/pageCategory.do?staffId="+staffId+"&resourceId=508&fieldId=schoolId&headFlag=N",//返回json数据的url 
+		valueField : "schoolId",
+		textField : "schoolName",
+		panelHeight : "auto",
+		formatter : formatSchool,
+		onLoadSuccess : function(data) {
+			$("#schoolId").combobox('setValue',data[0].schoolId);
+		},
+		onChange : function(n, o) {
+			if(n != "" && n != null && n != undefined) {
+//				$("#byName").combobox({disabled: false});
+				$("#byName").combobox({
+					url : "/sys/pubData/qryTeacherList.do?schoolId="+n,//返回json数据的url
+					valueField : "teacherId",
+					textField : "byname",
+					panelHeight : "auto",
+					formatter : function(data) {
+						return "<span>" + data.byname + "</span>";
+					}
+				});
+			} else {
+				$("#schoolId").combobox("setText", "");
+				$("#byName").combobox('clear');
+				$("#byName").combobox("loadData", new Array());
+//				$("#byName").combobox({disabled: true});
+			}
+		}
+	});
 });
 
 
@@ -58,17 +88,17 @@ function locateTeacher()
 }
 
 //跳转新增培训页面
-function addTrain()
-{
-	if(validateSelect("teacher_list")) {
-		var row = $("#teacher_list").datagrid('getSelected');
-		var teacherId = row.teacherId;
-		var name = row.teacherName;
-		var byName = row.byname;
-		var stateVal = row.stateVal;
-		window.location.href = "/sys/trainManage/addTrain.jsp?teacherId="+teacherId+"&name="+name+"&byName="+byName+"&stateVal="+stateVal;
-	}
-}
+//function addTrain()
+//{
+//	if(validateSelect("teacher_list")) {
+//		var row = $("#teacher_list").datagrid('getSelected');
+//		var teacherId = row.teacherId;
+//		var name = row.teacherName;
+//		var byName = row.byname;
+//		var stateVal = row.stateVal;
+//		window.location.href = "/sys/trainManage/addTrain.jsp?teacherId="+teacherId+"&name="+name+"&byName="+byName+"&stateVal="+stateVal;
+//	}
+//}
 
 //新增培训提交
 function addTrainSubmit()
