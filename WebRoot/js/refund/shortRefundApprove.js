@@ -73,8 +73,8 @@ $(document).ready(function() {
 	
 	//根据不同的审批人员显示不同的审批信息
 	var optionType = $("#optionType").val();
+	var nextState = $("#nextState").val();
 	if("approve" == optionType) {
-		var nextState = $("#nextState").val();
 		if("102" == nextState) {
 			$("#financialApproveDiv").css("display", "block");
 		} else if("104" == nextState) {
@@ -92,8 +92,9 @@ $(document).ready(function() {
 			$("#chiefFinancialOfficerViewDiv").css("display", "block");
 			$("#headquartersFinancialViewDiv").css("display", "block");
 		} else {
-			var nextState = $("#nextState").val();
-			if("104" == nextState) {
+			if("102" == nextState) {
+				$("#approveDiv").css("display", "none");
+			} else if("104" == nextState) {
 				$("#financialViewDiv").css("display", "block");
 			} else if("108" == nextState) {
 				$("#financialViewDiv").css("display", "block");

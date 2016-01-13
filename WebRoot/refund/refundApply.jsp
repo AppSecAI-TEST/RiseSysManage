@@ -15,6 +15,7 @@
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="常规课退费申请">
   			<form id="refundApplyFm" method="post" enctype="multipart/form-data">
+  				<input type="hidden" id="optionType" value="apply"/>
   				<input type="hidden" id="studentId" name="studentId" value="${obj.refundObj.studentId }"/>
   				<input type="hidden" id="schoolId" name="schoolId" value="${obj.refundObj.schoolId }"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId }"/>
@@ -46,7 +47,7 @@
 		  				</td>
 		  				<td align="right" width="8%"><span>账号：</span></td>
 		  				<td width="15%">
-		  					<input id="account" name="bankCard" type="text" class="easyui-textbox" style="width: 200px; height: 25px;"/>
+		  					<input id="account" name="bankCard" type="text" class="easyui-textbox numberbox" validType="length[0,19]" style="width: 200px; height: 25px;"/>
 		  				</td>
 		  				<td align="right" width="10%"><span>退费总金额：</span></td>
 		  				<td width="15%">
@@ -133,6 +134,7 @@
   					<input type="hidden" id="classType${refundStudentCourse.studentCourseId }" name="classType" value="${refundStudentCourse.classType }"/>
   					<input type="hidden" id="courseState${refundStudentCourse.studentCourseId }" name="courseState" value="${refundStudentCourse.courseState }"/>
   					<input type="hidden" id="stageId${refundStudentCourse.studentCourseId }" name="stageId" value="${refundStudentCourse.stageId }"/>
+  					<input type="hidden" id="refundHours${refundStudentCourse.studentCourseId }" name="refundHours" value="${refundStudentCourse.refundHours }"/>
   					<table width="100%" cellpadding="5px" class="maintables" style="margin-top: 10px;">
   						<tr>
   							<td width="12%" style="border-right: 0">
@@ -174,7 +176,11 @@
   							<td width="8%" align="center"><span>其他扣除</span></td>
   							<td width="11%" align="center"><span>核定退费金额</span></td>
   							<td width="15%" align="center"><span>总部财务核定金额</span></td>
-  							<td width="13%" align="center"><a href='javascript:void(0)' class='linkmore' onclick='' id=""><span>查看缴费单据</span></a></td>
+  							<td width="13%" align="center">
+  								<c:if test="${not empty refundFeeDetail.imgUrl }">
+	  								<a href="${refundFeeDetail.imgUrl }" class="linkmore" id="courseImgUrl"><span>查看缴费单据</span></a>
+  								</c:if>
+  							</td>
   						</tr>
   						<tr>
   							<td width="10%" align="center">
@@ -201,9 +207,131 @@
   							<td width="15%" align="center">
   								<input id="financialConfirmRefundFee${refundStudentCourse.studentCourseId }" name="financialConfirmRefundFee" type="text" class="easyui-textbox numberbox" style="width: 100px; height: 25px;" required="true"/>
   							</td>
-  							<td width="13%" align="center"><a href='javascript:void(0)' class='linkmore' onclick='' id=""><span>展开/收缩课程</span></a></td>
+  							<td width="13%" align="center"><a href='javascript:void(0)' class='linkmore' onclick="viewCourseDetail(${refundStudentCourse.studentCourseId })" id="studentCourseDetail${refundStudentCourse.studentCourseId }"><span>展开课程</span></a></td>
   						</tr>
   					</table>
+  					
+  					<div id="courseDetail${refundStudentCourse.studentCourseId }" style="display: none;min-width:1100px; width:98.4%;height:auto;padding:0 0;">
+  						<div style="height: 10px"></div>
+  						<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="课程信息">
+	  						<table width="100%" cellpadding="5px" class="maintables">
+	  							<tr>
+	  								<td width="10%" align="right"><span>课程阶段：</span></td>
+	  								<td width="15%"><span>${refundStudentCourse.stageId }</span></td>
+	  								<td width="10%" align="right"><span>班级类型：</span></td>
+	  								<td width="15%"><span>${refundStudentCourse.classType }</span></td>
+	  								<td width="15%" align="right"><span>缴费时间：</span></td>
+	  								<td width="35%" colspan="3"><span>${refundStudentCourse.payDate }</span></td>
+	  							</tr>
+	  							<tr>
+	  								<td width="10%" align="right"><span>业绩类型：</span></td>
+	  								<td width="15%"><span>${refundStudentCourse.feeTypeText }</span></td>
+	  								<td width="10%" align="right"><span>招生顾问A：</span></td>
+	  								<td width="15%"><span>${refundStudentCourse.advisterIdAName }</span></td>
+	  								<td width="15%" align="right"><span>招生顾问B：</span></td>
+	  								<td width="35%" colspan="3"><span>${refundStudentCourse.advisterIdBName }</span></td>
+	  							</tr>
+	  							<tr>
+	  								<td width="10%" align="right"><span>现金抵扣券：</span></td>
+	  								<td width="90%" colspan="7"><span>${refundStudentCourse.minusRemark }</span></td>
+	  							</tr>
+	  							<tr>
+	  								<td width="10%" align="right"><span>总金额：</span></td>
+	  								<td width="15%"><span>${refundStudentCourse.totalAmount }元</span></td>
+	  								<td width="10%" align="right"><span>抵扣金额：</span></td>
+	  								<td width="15%">
+	  									<span>
+	  										<c:if test="${empty refundStudentCourse.minusAmount }">0元</c:if>
+	  										<c:if test="${not empty refundStudentCourse.minusAmount }">${refundFeeDetail.minusAmount }元</c:if>
+	  									</span>
+	  								</td>
+	  								<td width="15%" align="right"><span>连报优惠金额：</span></td>
+	  								<td width="10%">
+	  									<span>
+	  										<c:if test="${empty refundStudentCourse.favorAmount }">0元</c:if>
+	  										<c:if test="${not empty refundStudentCourse.favorAmount }">${refundFeeDetail.favorAmount }元</c:if>
+	  									</span>
+	  								</td>
+	  								<td width="10%" align="right"><span>实收金额：</span></td>
+	  								<td width="15%"><span>${refundStudentCourse.amount }元</span></td>
+	  							</tr>
+	  							<tr>
+	  								<td width="10%" align="right"><span>课程状态：</span></td>
+	  								<td width="15%"><span>${refundStudentCourse.courseStateText }</span></td>
+	  								<td width="10%" align="right"><span>课时进度：</span></td>
+	  								<td width="15%"><span>${refundStudentCourse.classProgress }</span></td>
+	  								<td width="15%" align="right"><span>正常上课课时量：</span></td>
+	  								<td width="35%" colspan="3"><span>${refundStudentCourse.normalClassHours }</span></td>
+	  							</tr>
+	  							<tr>
+	  								<td width="10%" align="right"><span>当前班级：</span></td>
+	  								<td width="15%"><span>${refundStudentCourse.className }</span></td>
+	  								<td width="10%" align="right"><span>带班老师：</span></td>
+	  								<td width="65%" colspan="5"><span>${refundStudentCourse.teacherName }</span></td>
+	  							</tr>
+	  						</table>
+  						</div>
+  						
+  						<div id="goodsDiv${refundStudentCourse.studentCourseId }">
+  							<div style="height: 10px"></div>
+	  						<table class="easyui-datagrid" title="实物赠品与教材" style="height:auto;" id="goods_list_data${refundStudentCourse.studentCourseId }"
+								pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
+								<thead>
+									<tr>
+										<th data-options="field:'giftChannelDesc',width:200,align:'center'">赠品来源</th>
+										<th data-options="field:'giftName',width:100,align:'center'">赠品名称</th>
+										<th data-options="field:'createDate',width:100,align:'center'">赠送日期</th>
+										<th data-options="field:'isGetText',width:80,align:'center'">是否领用</th>
+										<th data-options="field:'isRtnText',width:80,align:'center'">是否退回</th>
+										<th data-options="field:'getDate',width:150,align:'center'">领取时间</th>
+										<th data-options="field:'rtnDate',width:150,align:'center'">退回时间</th>
+										<th data-options="field:'granter',width:100,align:'center'">赠品发放人</th>
+									</tr>
+								</thead>
+							</table>
+  						</div>
+			  			<div id="couponDiv${refundStudentCourse.studentCourseId }">
+			  				<div style="height: 10px"></div>
+							<table class="easyui-datagrid" title="券类赠品" style="height:auto;" id="coupon_list_data${refundStudentCourse.studentCourseId }"
+								pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
+								<thead>
+									<tr>
+										<th data-options="field:'giftChannelDesc',width:200,align:'center'">赠品来源</th>
+										<th data-options="field:'typeName',width:80,align:'center'">赠券类型</th>
+										<th data-options="field:'amount',width:80,align:'center'">面值</th>
+										<th data-options="field:'usableAmount',width:80,align:'center'">剩余金额</th>
+										<th data-options="field:'giftCode',width:150,align:'center'">赠券编号</th>
+										<th data-options="field:'createDate',width:100,align:'center'">赠送日期</th>
+										<th data-options="field:'effDate',width:120,align:'center'">有效期开始日期</th>
+										<th data-options="field:'expDate',width:120,align:'center'">有效期结束日期</th>
+										<th data-options="field:'isGetText',width:80,align:'center'">是否领用</th>
+										<th data-options="field:'giftStateText',width:100,align:'center'">赠券状态</th>
+										<th data-options="field:'getDate',width:150,align:'center'">领取时间</th>
+										<th data-options="field:'granter',width:100,align:'center'">赠品发放人</th>
+									</tr>
+								</thead>
+							</table>
+			  			</div>
+				  		<div id="courseDiv${refundStudentCourse.studentCourseId }">
+				  			<div style="height: 10px"></div>
+							<table class="easyui-datagrid" title="赠课信息" style="height:auto;" id="course_list_data${refundStudentCourse.studentCourseId }"
+								pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
+								<thead>
+									<tr>
+										<th data-options="field:'giftChannelDesc',width:100,align:'center'">赠课来源</th>
+										<th data-options="field:'giftName',width:100,align:'center'">赠课名称</th>
+										<th data-options="field:'createDate',width:100,align:'center'">赠送时间</th>
+										<th data-options="field:'giftNum',width:100,align:'center'">赠送课时量</th>
+										<th data-options="field:'giftStateText',width:100,align:'center'">课程状态</th>
+										<th data-options="field:'effDate',width:100,align:'center'">有效期开始日期</th>
+										<th data-options="field:'expDate',width:100,align:'center'">有效期结束日期</th>
+										<th data-options="field:'granter',width:100,align:'center'">课时进度</th>
+									</tr>
+								</thead>
+							</table>
+				  		</div>
+  					</div>
+  					
   				</c:forEach>
   				
   				<div style="height: 10px"></div>
@@ -286,10 +414,10 @@
   				</div>
   			</form>
   		</div>
-  		<div style="margin-top: 20px;min-width:1100px; width:99%;">
+  		<div style="margin-top: 25px;min-width:1100px; width:99%;">
 	      	<div style="float: left;margin-left: 800px;">
 	      		<a href="javascript:void(0)" id="refundApplySubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      		&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	      		&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
 	      	</div>
 	   </div>
 	   <div id="dlg" class="easyui-dialog" closed="true" modal="true">

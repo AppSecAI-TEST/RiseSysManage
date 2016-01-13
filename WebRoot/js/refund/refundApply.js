@@ -17,7 +17,13 @@ $(document).ready(function() {
     	onLoadSuccess : function () { //数据加载完毕事件
             var data = $('#refundWay').combobox('getData');
             if (data.length > 0) {
-                $("#refundWay").combobox('select', data[0].codeFlag);
+            	var optionType = $("#optionType").val();
+            	if("applyAgain" == optionType) {
+            		var oldRefundWay = $("#oldRefundWay").val();
+            		$("#refundWay").combobox('select', oldRefundWay);
+            	} else {
+            		$("#refundWay").combobox('select', data[0].codeFlag);
+            	}
             }
         },
 		onChange : function(n, o) {
@@ -29,6 +35,12 @@ $(document).ready(function() {
 						$(this).css("display", "none");
 					}
 		    	});
+				var optionType = $("#optionType").val();
+            	if("applyAgain" == optionType) {
+            		$("#bankName").textbox("setValue", "");
+            		$("#account").textbox("setValue", "");
+            		$("#bankCard").textbox("setValue", "");
+            	}
 			} else if("BANK_CARD" == n) {
 				$("#refundWayTr").find("td").each(function(i) {
 					if(i == 1) {
@@ -210,6 +222,16 @@ $(document).ready(function() {
 		});
 	});
 	
+	var refundImgUrl = $("#refundImg").attr("href");
+	if(refundImgUrl != null && refundImgUrl != "" && refundImgUrl != undefined) {
+		$('#refundImg').lightBox();
+	}
+	
+	var courseImgUrl = $("#courseImgUrl").attr("href");
+	if(courseImgUrl != null && courseImgUrl != "" && courseImgUrl != undefined) {
+		$('#courseImgUrl').lightBox();
+	}
+	
 	//上传
     $("#uploadBtn").click(function() {
     	var fileName = $("#fileName").filebox("getValue");
@@ -251,11 +273,13 @@ $(document).ready(function() {
 		} else {
 			if($("#refundApplyFm").form('validate')) {
 				var flag = true;
-				var fileName = $("#fileName").filebox("getValue");
-				if(fileName != "" && fileName != null && fileName != undefined) {
-					var imgUrl = $("#imgUrl").val();
-					if(imgUrl == "" || imgUrl == null || imgUrl == undefined) {
-						flag = false;
+				if($("#fileName").length > 0) {
+					var fileName = $("#fileName").filebox("getValue");
+					if(fileName != "" && fileName != null && fileName != undefined) {
+						var imgUrl = $("#imgUrl").val();
+						if(imgUrl == "" || imgUrl == null || imgUrl == undefined) {
+							flag = false;
+						}
 					}
 				}
 				if(flag) {
@@ -291,6 +315,7 @@ $(document).ready(function() {
 						refundFeeDetailObj.className = $("#className" + studentCourseId).val();
 						refundFeeDetailObj.classType = $("#classType" + studentCourseId).val();
 						refundFeeDetailObj.stageId = $("#stageId" + studentCourseId).val();
+						refundFeeDetailObj.refundHours = $("#refundHours" + studentCourseId).val();
 						refundFeeDetailObj.refundStageFee = $("#refundStageFee" + studentCourseId).html();
 						var isRtnGift = "Y";
 						var minusGiftFee = parseFloat($("#minusGiftFee" + studentCourseId).textbox("getValue"));
@@ -581,4 +606,42 @@ function viewStudentCourseList() {
 		}
 	});
 	$('#dlg').dialog('open').dialog('setTitle', '课程信息');//设定表头  
+}
+
+function viewCourseDetail(studentCourseId) {
+	var courseDetailDivDisplay = $("#courseDetail" + studentCourseId).css("display");
+	if("none" == courseDetailDivDisplay) {
+		$("#goods_list_data" + studentCourseId).datagrid({ 
+			url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1074',studentCourseId:'"+studentCourseId+"'}",
+			onLoadSuccess: function() { 
+				var rows = $("#goods_list_data" + studentCourseId).datagrid('getRows');
+				if(parseInt(rows.length) <= 0) {
+					$("#goodsDiv" + studentCourseId).css("display", "none");
+				}
+			}
+		});
+		$("#coupon_list_data" + studentCourseId).datagrid({ 
+			url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1075',studentCourseId:'"+studentCourseId+"'}",
+			onLoadSuccess: function() { 
+				var rows = $("#coupon_list_data" + studentCourseId).datagrid('getRows');
+				if(parseInt(rows.length) <= 0) {
+					$("#couponDiv" + studentCourseId).css("display", "none");
+				}
+			}
+		});
+		$("#course_list_data" + studentCourseId).datagrid({ 
+			url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1076',studentCourseId:'"+studentCourseId+"'}",
+			onLoadSuccess: function() { 
+				var rows = $("#course_list_data" + studentCourseId).datagrid('getRows');
+				if(parseInt(rows.length) <= 0) {
+					$("#courseDiv" + studentCourseId).css("display", "none");
+				}
+			}
+		});
+		$("#courseDetail" + studentCourseId).css("display", "block");
+		$("#studentCourseDetail" + studentCourseId).html("<span>收缩课程</span>");
+	} else {
+		$("#courseDetail" + studentCourseId).css("display", "none");
+		$("#studentCourseDetail" + studentCourseId).html("<span>展开课程</span>");
+	}
 }

@@ -109,7 +109,7 @@
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=SCHOOL_REASON_TYPE">
 			        			</select>
 			        			<select id="schoolReason" name="schoolReason" class="easyui-combobox" style="width: 150px; height: 25px;" disabled="disabled"
-									data-options="formatter:formatItem, valueField: 'param1', textField: 'param2', panelHeight: 'auto',
+									data-options="formatter:function(row){return '<span>' + row.param2 + '</span>';}, valueField: 'param1', textField: 'param2', panelHeight: 'auto',
 				      				onLoadSuccess:function(data){if(data.length > 0) $('#schoolReason').combobox('setValue', '${obj.refundFeeObj.schoolReason }');}" 
 				      				url="<%=path %>/pubData/qryParaConfigList.do?paramType=SCHOOL_REASON&paramValue=${obj.refundFeeObj.schoolReasonType }">
 			        			</select>
@@ -161,12 +161,12 @@
 	  				<tr>
 	  					<td align="right" width="8%"> <span>退费备注：</span></td>
   						<td colspan="9" width="92%">
-  							<textarea rows="4" cols="122" id="remark" name="remark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${obj.refundFeeObj.remark }</textarea>
+  							<textarea rows="2" cols="122" id="remark" name="remark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${obj.refundFeeObj.remark }</textarea>
   						</td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="16%" colspan="2"><span>抵扣券使用情况：</span></td>
-	  					<td width="84%" colspan="8">${obj.refundFeeDetailList[0].minusRemark }</td>
+	  					<td width="84%" colspan="8"><span>${obj.refundFeeDetailList[0].minusRemark }</span></td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="16%" colspan="2"><span>其他优惠使用情况：</span></td>

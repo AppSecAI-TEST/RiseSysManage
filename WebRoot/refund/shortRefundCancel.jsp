@@ -110,7 +110,7 @@
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=SCHOOL_REASON_TYPE">
 			        			</select>
 			        			<select id="schoolReason" name="schoolReason" class="easyui-combobox" style="width: 150px; height: 25px;" disabled="disabled"
-									data-options="formatter:formatItem, valueField: 'param1', textField: 'param2', panelHeight: 'auto',
+									data-options="formatter:function(row){return '<span>' + row.param2 + '</span>';}, valueField: 'param1', textField: 'param2', panelHeight: 'auto',
 				      				onLoadSuccess:function(data){if(data.length > 0) $('#schoolReason').combobox('setValue', '${obj.refundFeeObj.schoolReason }');}" 
 				      				url="<%=path %>/pubData/qryParaConfigList.do?paramType=SCHOOL_REASON&paramValue=${obj.refundFeeObj.schoolReasonType }">
 			        			</select>
@@ -162,12 +162,12 @@
 	  				<tr>
 	  					<td align="right" width="8%"> <span>退费备注：</span></td>
   						<td colspan="9" width="92%">
-  							<textarea rows="4" cols="122" id="remark" name="remark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${obj.refundFeeObj.remark }</textarea>
+  							<textarea rows="2" cols="122" id="remark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${obj.refundFeeObj.remark }</textarea>
   						</td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="16%" colspan="2"><span>抵扣券使用情况：</span></td>
-	  					<td width="84%" colspan="8">${obj.refundFeeDetailList[0].minusRemark }</td>
+	  					<td width="84%" colspan="8"><span>${obj.refundFeeDetailList[0].minusRemark }</span></td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="16%" colspan="2"><span>其他优惠使用情况：</span></td>
@@ -212,77 +212,80 @@
 					</table>
   				</div>
   				<div style="height: 10px"></div>
-  				<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="审批信息">
-					<div id="financialViewDiv" style="display: none;">
-	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
-	  						<tr>
-			  					<td colspan="6"><span>1、总部财务审批信息：</span></td>
-			  				</tr>
-			  				<tr>
-			  					<td align="right" width="8%"><span>审批结果：</span></td>
-			  					<td width="8%"><span id="financialResult"></span></td>
-			  					<td align="right" width="8%"><span>审批时间：</span></td>
-			  					<td width="10%"><span id="financialDate"></span></td>
-			  					<td align="right" width="6%"><span>审批人：</span></td>
-			  					<td width="60%"><span id="financialName"></span></td>
-			  				</tr>
-			  				<tr>
-			  					<td align="right" width="8%"><span>审批备注：</span></td>
-			  					<td width="92%" colspan="5">
-			  						<textarea rows="2" cols="122" id="financialRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
-			  					</td>
-			  				</tr>
-	  					</table>
-					</div>
-					<div id="chiefFinancialOfficerViewDiv" style="display: none;">
-	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
-	  						<tr>
-			  					<td colspan="6"><span>2、总部财务总监审批信息：</span></td>
-			  				</tr>
-			  				<tr>
-			  					<td align="right" width="8%"><span>审批结果：</span></td>
-			  					<td width="8%"><span id="chiefFinancialOfficerResult"></span></td>
-			  					<td align="right" width="8%"><span>审批时间：</span></td>
-			  					<td width="10%"><span id="chiefFinancialOfficerDate"></span></td>
-			  					<td align="right" width="6%"><span>审批人：</span></td>
-			  					<td width="60%"><span id="chiefFinancialOfficerName"></span></td>
-			  				</tr>
-			  				<tr>
-			  					<td align="right" width="8%"><span>审批备注：</span></td>
-			  					<td width="92%" colspan="5">
-			  						<textarea rows="2" cols="122" id="chiefFinancialOfficerRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
-			  					</td>
-			  				</tr>
-	  					</table>
-					</div>
-					
-					<div id="headquartersFinancialViewDiv" style="display: none;">
-	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
-	  						<tr>
-			  					<td colspan="2"><span>3、总部财务打款信息：</span></td>
-			  				</tr>
-			  				<tr>
-			  					<td align="right" width="8%"><span>已打款：</span></td>
-			  					<td width="92%">
-				  					<input type="checkbox" name="isTransfer" checked="checked" disabled="disabled"/>
-			  					</td>
-			  				</tr>
-			  				<tr>
-			  					<td align="right" width="8%"><span>备注：</span></td>
-			  					<td width="92%">
-			  						<textarea rows="2" cols="122" id="headquartersFinancialRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
-			  					</td>
-			  				</tr>
-	  					</table>
-					</div>
+  				<div id="approveDiv">
+	  				<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="审批信息">
+						<div id="financialViewDiv" style="display: none;">
+		  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
+		  						<tr>
+				  					<td colspan="6"><span>1、总部财务审批信息：</span></td>
+				  				</tr>
+				  				<tr>
+				  					<td align="right" width="8%"><span>审批结果：</span></td>
+				  					<td width="8%"><span id="financialResult"></span></td>
+				  					<td align="right" width="8%"><span>审批时间：</span></td>
+				  					<td width="10%"><span id="financialDate"></span></td>
+				  					<td align="right" width="6%"><span>审批人：</span></td>
+				  					<td width="60%"><span id="financialName"></span></td>
+				  				</tr>
+				  				<tr>
+				  					<td align="right" width="8%"><span>审批备注：</span></td>
+				  					<td width="92%" colspan="5">
+				  						<textarea rows="2" cols="122" id="financialRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+				  					</td>
+				  				</tr>
+		  					</table>
+						</div>
+						<div id="chiefFinancialOfficerViewDiv" style="display: none;">
+		  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
+		  						<tr>
+				  					<td colspan="6"><span>2、总部财务总监审批信息：</span></td>
+				  				</tr>
+				  				<tr>
+				  					<td align="right" width="8%"><span>审批结果：</span></td>
+				  					<td width="8%"><span id="chiefFinancialOfficerResult"></span></td>
+				  					<td align="right" width="8%"><span>审批时间：</span></td>
+				  					<td width="10%"><span id="chiefFinancialOfficerDate"></span></td>
+				  					<td align="right" width="6%"><span>审批人：</span></td>
+				  					<td width="60%"><span id="chiefFinancialOfficerName"></span></td>
+				  				</tr>
+				  				<tr>
+				  					<td align="right" width="8%"><span>审批备注：</span></td>
+				  					<td width="92%" colspan="5">
+				  						<textarea rows="2" cols="122" id="chiefFinancialOfficerRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+				  					</td>
+				  				</tr>
+		  					</table>
+						</div>
+						
+						<div id="headquartersFinancialViewDiv" style="display: none;">
+		  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
+		  						<tr>
+				  					<td colspan="2"><span>3、总部财务打款信息：</span></td>
+				  				</tr>
+				  				<tr>
+				  					<td align="right" width="8%"><span>已打款：</span></td>
+				  					<td width="92%">
+					  					<input type="checkbox" name="isTransfer" checked="checked" disabled="disabled"/>
+				  					</td>
+				  				</tr>
+				  				<tr>
+				  					<td align="right" width="8%"><span>备注：</span></td>
+				  					<td width="92%">
+				  						<textarea rows="2" cols="122" id="headquartersFinancialRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+				  					</td>
+				  				</tr>
+		  					</table>
+						</div>
+	  				</div>
   				</div>
   				
+  				<div style="height: 10px"></div>
   				<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="短期课取消信息">
   					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 			  			<tr>
 			  				<td align="right" width="10%"><span>退费取消备注：</span></td>
 			  				<td width="90%">
-			  					<textarea rows="4" cols="118" id="cancelRemark" name="cancelRemark" class="easyui-validatebox textbox"></textarea>
+			  					<textarea rows="4" cols="120" id="cancelRemark" name="cancelRemark" class="easyui-validatebox textbox"></textarea>
 			  				</td>
 			  			</tr>
 	  				</table>

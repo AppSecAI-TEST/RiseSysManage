@@ -181,6 +181,13 @@ $(document).ready(function() {
 			$("#gift").html("<span>展开非缴费赠送历史记录</span>");
 		}
 	}); 
+	
+	var refundImgUrl = $("#refundImgUrl").val();
+	if(refundImgUrl != null && refundImgUrl != "" && refundImgUrl != undefined) {
+		$("#imgUrl").css("display", "inline-block");
+		$("#url").attr("href", refundImgUrl);
+		$('#url').lightBox();
+	} 
     
     //提交申请
     $("#refundApplySubmit").click(function() {
@@ -189,13 +196,15 @@ $(document).ready(function() {
     	} else {
     		if($("#refundApplyFm").form('validate')) {
     			var flag = true;
-				var fileName = $("#fileName").filebox("getValue");
- 				if(fileName != "" && fileName != null && fileName != undefined) {
-					var imgUrl = $("#imgUrl").val();
-					if(imgUrl == "" || imgUrl == null || imgUrl == undefined) {
-						flag = false;  
-					}
-				} 
+    			if($("#fileName").length > 0) {
+    				var fileName = $("#fileName").filebox("getValue");
+    				if(fileName != "" && fileName != null && fileName != undefined) {
+    					var imgUrl = $("#imgUrl").val();
+    					if(imgUrl == "" || imgUrl == null || imgUrl == undefined) {
+    						flag = false;  
+    					}
+    				} 
+    			}
 				if(flag) {
 					var obj = $("#refundApplyFm").serializeObject();
 					var refundFeeObj = new Object();
@@ -228,6 +237,7 @@ $(document).ready(function() {
 					refundFeeDetailObj.className = $("#className").val();
 					refundFeeDetailObj.classType = obj.classType;
 					refundFeeDetailObj.stageId = obj.stageId;
+					refundFeeDetailObj.refundHours = obj.refundHours;
 					refundFeeDetailObj.refundStageFee = $("#refundStageFee").val();
 					var isRtnGift = "Y";
 					var minusGiftFee = 0;

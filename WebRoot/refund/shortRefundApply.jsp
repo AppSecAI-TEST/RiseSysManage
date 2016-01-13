@@ -24,6 +24,7 @@
   				<input type="hidden" id="classType" name="classType" value="${obj.refundStudentCourseList[0].classType }"/>
   				<input type="hidden" id="className" name="className" value="${obj.refundStudentCourseList[0].className }"/>
   				<input type="hidden" id="courseState" name="courseState" value="${obj.refundStudentCourseList[0].courseState }"/>
+  				<input type="hidden" id="refundHours" name="refundHours" value="${obj.refundStudentCourseList[0].refundHours }"/>
   				<input type="hidden" id="classInstId" name="classInstId" value="${obj.refundStudentCourseList[0].classInstId }"/>
   				<input type="hidden" id="refundStageFee" name="refundStageFee" value="${obj.refundStudentCourseList[0].amount }"/>
   				<input type="hidden" id="studentCourseId" name="studentCourseId" value="${obj.refundStudentCourseList[0].studentCourseId }"/>
@@ -70,7 +71,7 @@
 		  				</td>
 		  				<td align="right" width="8%"><span>账号：</span></td>
 		  				<td width="15%">
-		  					<input id="account" name="bankCard" type="text" class="easyui-textbox" style="width: 180px; height: 25px;"/>
+		  					<input id="bankCard" name="bankCard" type="text" class="easyui-textbox numberbox" validType="length[0,19]" style="width: 180px; height: 25px;"/>
 		  				</td>
 		  				<td align="right" width="10%"><span>退费总金额：</span></td>
 		  				<td width="15%">
@@ -81,19 +82,19 @@
 	  				<tr>
 	  					<td align="right" width="8%"><span>教材扣除：</span></td>
 	  					<td width="8%">
-	  						<input id="minusTextbookFee" name="minusTextbookFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:10000, precision:2" style="width: 100px; height: 25px;" required="true" value="0"/>
+	  						<input id="minusTextbookFee" name="minusTextbookFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:10000, precision:2" style="width: 100px; height: 25px;" required="true"/>
 	  					</td>
 	  					<td align="right" width="8%"><span>课程扣除：</span></td>
 	  					<td width="10%">
-	  						<input id="minusCourseFee" name="minusCourseFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:10000, precision:2" style="width: 120px; height: 25px;" required="true" value="0"/>
+	  						<input id="minusCourseFee" name="minusCourseFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:10000, precision:2" style="width: 120px; height: 25px;" required="true"/>
 	  					</td>
 	  					<td align="right" width="8%"><span>手续费：</span></td>
 		  				<td width="10%">
-		  					<input id="handlingChange" name="handlingChange" type="text" class="easyui-textbox numberbox" data-options="min:0, max:10000, precision:2" style="width: 120px; height: 25px;" required="true" value="0"/>
+		  					<input id="handlingChange" name="handlingChange" type="text" class="easyui-textbox numberbox" data-options="min:0, max:10000, precision:2" style="width: 120px; height: 25px;" required="true"/>
 		  				</td>
 		  				<td align="right" width="8%"><span>其他扣除：</span></td>
 		  				<td width="15%">
-		  					<input id="minusOtherFee" name="minusOtherFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:10000, precision:2" style="width: 180px; height: 25px;" required="true" value="0"/>
+		  					<input id="minusOtherFee" name="minusOtherFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:10000, precision:2" style="width: 180px; height: 25px;" required="true"/>
 		  				</td>
 		  				<td align="right" width="10%"><span>财务确认金额：</span></td>
 	  					<td width="15%">

@@ -81,7 +81,7 @@
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=SCHOOL_REASON_TYPE">
 			        			</select>
 			        			<select id="schoolReason" name="schoolReason" class="easyui-combobox" style="width: 150px; height: 25px;" disabled="disabled"
-									data-options="formatter:formatItem, valueField: 'param1', textField: 'param2', panelHeight: 'auto',
+									data-options="formatter:function(row){return '<span>' + row.param2 + '</span>';}, valueField: 'param1', textField: 'param2', panelHeight: 'auto',
 				      				onLoadSuccess:function(data){if(data.length > 0) $('#schoolReason').combobox('setValue', '${obj.refundFeeObj.schoolReason }');}" 
 				      				url="<%=path %>/pubData/qryParaConfigList.do?paramType=SCHOOL_REASON&paramValue=${obj.refundFeeObj.schoolReasonType }">
 			        			</select>
@@ -138,7 +138,7 @@
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="16%" colspan="2"><span>抵扣券使用情况：</span></td>
-	  					<td width="84%" colspan="8">${obj.refundFeeDetailList[0].minusRemark }</td>
+	  					<td width="84%" colspan="8"><span>${obj.refundFeeDetailList[0].minusRemark }</span></td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="16%" colspan="2"><span>其他优惠使用情况：</span></td>
@@ -161,7 +161,7 @@
   				</table>
   				<div style="height: 20px; vertical-align: middle; line-height:20px; margin-top: 10px;">
   					&nbsp;&nbsp;<a href='javascript:void(0)' class='linkmore' onclick="viewGiftHist()" id="gift"><span>展开非缴费赠送历史记录</span></a>
-  					&nbsp;&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='viewStudentCourseList()'><span>查看所有的课程信息</span></a>
+  					&nbsp;&nbsp;<a href='javascript:void(0)' class='linkmore' onclick="viewStudentCourseList()"><span>查看所有的课程信息</span></a>
   				</div>
   			</form>
   			<div id="giftDiv">

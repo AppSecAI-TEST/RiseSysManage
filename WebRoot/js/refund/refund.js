@@ -183,9 +183,14 @@ $(document).ready(function() {
 	$("#refundCancel").click(function() {
 		var row = $('#approve_list_data').datagrid('getSelected');
 		if(row) {
-			var courseType = row.courseType;
-			var refundFeeId = row.refundFeeId;
-			window.location.href = "/sys/refund/qryApproveRefund.do?refundFeeId="+refundFeeId+"&courseType="+courseType+"&type=cancel";
+			var processInstId = row.processInstanceId;
+			if(!isCancel(processInstId)) {
+				return;
+			} else {
+				var courseType = row.courseType;
+				var refundFeeId = row.refundFeeId;
+				window.location.href = "/sys/refund/qryApproveRefund.do?refundFeeId="+refundFeeId+"&courseType="+courseType+"&type=cancel";
+			}
 		} else {
 			$.messager.alert('提示', "请先选择您要取消的退费申请！");
 		}
@@ -195,9 +200,21 @@ $(document).ready(function() {
 	$("#refundApplyAgain").click(function() {
 		var row = $('#approve_list_data').datagrid('getSelected');
 		if(row) {
-			var courseType = row.courseType;
-			var refundFeeId = row.refundFeeId;
-			window.location.href = "/sys/refund/qryApproveRefund.do?refundFeeId="+refundFeeId+"&courseType="+courseType+"&type=againApply";
+			var tacheState = row.tacheState;
+			if("006" == tacheState) {
+				var handlerId = row.handlerId;
+				var staffId = $("#staffId").val();
+				if(staffId == handlerId) {
+					var courseType = row.courseType;
+					var refundFeeId = row.refundFeeId;
+					window.location.href = "/sys/refund/qryApproveRefund.do?refundFeeId="+refundFeeId+"&courseType="+courseType+"&type=againApply";
+				} else {
+					$.messager.alert('提示', "该退费申请单不是由您申请，您不能重新申请！");
+				}
+			} else {
+				var refundState = row.refundState;
+				$.messager.alert('提示', "该退费申请单" + refundState + "，不能重新申请！");
+			}
 		} else {
 			$.messager.alert('提示', "请先选择您要重新申请的退费申请！");
 		}
@@ -211,26 +228,40 @@ $(document).ready(function() {
  */
 function isApprove(processInstId)
 {
- 		var approveId=$("#staffId").val();
- 		var flag=false;
-	 	$.ajax(
-	 	{
-   			url: "/sys/fee/isApprove.do?processInstId="+processInstId+"&approveId="+approveId,
-   			data: "param=" + "",
-   			dataType: "json",
-   			async: false,
-   	    	success: function (data)
-   	    	{
-   	    		var id = data.processInstanceId;
-   	            if(id=='')
-   	            {
-   	            	$.messager.alert('提示', "不能审批");
-   	            	flag= false;
-   	            } else
-   	            {
-   	            	flag= true;
-   	            }
-   	        } 
-   		});
-	 	return flag;
+	var flag = false;
+	var approveId = $("#staffId").val();
+	$.ajax({
+		url : "/sys/fee/isApprove.do?processInstId=" + processInstId + "&approveId=" + approveId,
+		data : "param=" + "",
+		dataType : "json",
+		async : false,
+		success : function(data) {
+			var id = data.processInstanceId;
+			if (id == '') {
+				$.messager.alert('提示', "不能审批！");
+				flag = false;
+			} else {
+				flag = true;
+			}
+		}
+	});
+	return flag;
+}
+
+function isCancel(processInstId) {
+	var flag = false;
+	var approveId = $("#staffId").val();
+	$.ajax({
+		url : "/sys/refund/isCancel.do",
+		data : "processInstId=" + processInstId + "&approveId=" + approveId ,
+		dataType : "json",
+		async : false,
+		success : function(data) {
+			flag = data.flag;
+			if(!flag) {
+				$.messager.alert('提示', data.msg);
+			}
+		}
+	});
+	return flag;
 }
