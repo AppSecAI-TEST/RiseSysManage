@@ -53,8 +53,9 @@ $(document).ready(function() {
     		return "<span>" + data.schoolName + "</span>";
     	},
     	onLoadSuccess : function() {
-    		$("#outSchoolId").combobox("setValue", "");
-    		$("#outSchoolId").combobox("setText", "全部校区");
+    		if(data.length > 0) {
+    			$("#outSchoolId").combobox("setValue", data[0].schoolId);
+    		}
     	},
     	onChange : function(n, o) {
     		if(n != "" && n != null && n != undefined) {
@@ -79,7 +80,8 @@ $(document).ready(function() {
     				}
     			});
     		} else {
-    			$("#outSchoolId").combobox("setText", "全部校区");
+    			var data = $("#outSchoolId").combobox("getData");
+    			$("#outSchoolId").combobox("setValue", data[0].schoolId);
 				$("#outTeacherId").combobox('clear');
 				$("#outTeacherId").combobox("loadData", new Array());
 				$("#outTeacherId").combobox({disabled: true});
@@ -98,13 +100,9 @@ $(document).ready(function() {
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
     	},
-    	onLoadSuccess : function() {
-    		$("#inSchoolId").combobox("setValue", "");
-    		$("#inSchoolId").combobox("setText", "全部校区");
-    	},
-    	onChange : function(n, o) {
-    		if(n == null || n == "" || n == undefined) {
-    			$("#inSchoolId").combobox("setText", "全部校区");
+    	onLoadSuccess : function(data) {
+    		if(data.length > 0) {
+    			$("#inSchoolId").combobox("setValue", data[0].schoolId);
     		}
     	}
 	});
@@ -117,13 +115,9 @@ $(document).ready(function() {
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
     	},
-    	onLoadSuccess : function() {
-    		$("#approveSchoolId").combobox("setValue", "");
-    		$("#approveSchoolId").combobox("setText", "全部校区");
-    	},
-    	onChange : function(n, o) {
-    		if(n == null || n == "" || n == undefined) {
-    			$("#approveSchoolId").combobox("setText", "全部校区");
+    	onLoadSuccess : function(data) {
+    		if(data.length > 0) {
+    			$("#approveSchoolId").combobox("setValue", data[0].schoolId);
     		}
     	}
 	});
@@ -136,13 +130,9 @@ $(document).ready(function() {
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
     	},
-    	onLoadSuccess : function() {
-    		$("#approveInschoolId").combobox("setValue", "");
-    		$("#approveInschoolId").combobox("setText", "全部校区");
-    	},
-    	onChange : function(n, o) {
-    		if(n == null || n == "" || n == undefined) {
-    			$("#approveInschoolId").combobox("setText", "全部校区");
+    	onLoadSuccess : function(data) {
+    		if(data.length > 0) {
+    			$("#approveInschoolId").combobox("setValue", data[0].schoolId);
     		}
     	}
 	});

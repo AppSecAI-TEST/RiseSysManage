@@ -21,7 +21,7 @@
 			  				<td width="114px">
 								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
 									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-					      			onLoadSuccess:function(data){$('#schoolId').combobox('setValue',''); $('#schoolId').combobox('setText','全部校区');}"
+					      			onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue', data[0].schoolId);}"
 					      			url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
 				        		</select>
 							</td>
@@ -103,7 +103,7 @@
 			  				<td width="114px">
 								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
 									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-									onLoadSuccess:function(data){$('#approveSchoolId').combobox('setValue',''); $('#schoolId').combobox('setText','全部校区');}"
+									onLoadSuccess:function(data){if(data.length > 0) $('#approveSchoolId').combobox('setValue', data[0].schoolId);}"
 					      			url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
 				        		</select>
 							</td>

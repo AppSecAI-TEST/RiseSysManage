@@ -178,7 +178,7 @@
 			  				<td width="100px">
 								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-					      			onLoadSuccess:function(data){$('#approveSchoolId').combobox('setValue', ''); $('#approveSchoolId').combobox('setText', '全部校区');}"
+					      			onLoadSuccess:function(data){if(data.length > 0) $('#approveSchoolId').combobox('setValue', data[0].schoolId);}"
 					      			url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=252&fieldId=schoolId">
 				        		</select>
 							</td>
