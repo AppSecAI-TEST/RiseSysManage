@@ -78,7 +78,7 @@
   				</tr>
   				<tr>
   					<td align="right"><span>年级组：</span></td>
-  					<td align="left"><select id="gradeTeam" style="width:125px;" required="true"></select></td>
+  					<td align="left"><select id="gradeTeam" editable="false" style="width:125px;"></select></td>
   					<td></td>
   					<td></td>
   					<td></td>

@@ -9,13 +9,10 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/css/style.css">
   	</head>
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="教质计划浏览">
-  			<table width="100%" style="border:1px solid #ccc;font-family:'微软雅黑';margin:0 auto;height:30px;" cellspacing="2">
+  			<table width="98%" style="border:1px solid #ccc;font-family:'微软雅黑';margin-top:5px;height:30px;" align="center" cellspacing="2">
   				<tr>
 					<td align="right" width="10%"><span>教质月份：</span></td>
 					<td align="left" width="10%">${month}</td>
@@ -24,14 +21,14 @@
 					<td align="center" width="60%"></td>
   				</tr>
   			</table>
-  			<table width="100%" cellpadding="5px" style="margin-top: 5px;margin-bottom: 5px;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;" class="maintable">
+  			<table width="98%" cellpadding="2px" style="margin-top: 5px;margin-bottom: 5px;border:1px solid #ccc;" align="center" class="maintable">
 	      	   <tr>
-	      	   	 <td align="center" width="3%">序号</td>
-	      	   	 <td align="center" width="17%">班级</td>
-	      	   	 <td align="center" width="20%">电教</td>
-	      	   	 <td align="center" width="20%">家长会</td>
-	      	   	 <td align="center" width="20%">公开课</td>
-	      	   	 <td align="center" width="20%">毕业典礼</td>
+	      	   	 <td align="center" width="3%"><span>序号</span></td>
+	      	   	 <td align="center" width="17%"><span>班级</span></td>
+	      	   	 <td align="center" width="20%"><span>电教</span></td>
+	      	   	 <td align="center" width="20%"><span>家长会</span></td>
+	      	   	 <td align="center" width="20%"><span>公开课</span></td>
+	      	   	 <td align="center" width="20%"><span>毕业典礼</span></td>
      	       </tr>
      	       <c:forEach items="${obj.teachingPlan}" var="teachingPlan" varStatus="status">
 				<tr>
@@ -46,8 +43,8 @@
       	    </table>
   		</div>
  		<div style="margin-top: 20px;min-width:1100px; width:99%;">
-	      	<div style="float: right;">
-	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	      	<div style="text-align:center">
+	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:80px; height: 28px;" onclick="javascript:window.history.back()"><span>返回</span></a>
 	      	</div>
 	   </div>
   	</body>

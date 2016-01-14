@@ -17,10 +17,7 @@
   				<tr>
   					<td align="right" width="10%"><span>所属校区：</span></td>
   					<td align="left" width="5%">
-  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:100px;height: 25px;" editable="false"
-							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-      						 onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
-      						url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=501&fieldId=schoolId&headFlag=N">
+  						<select id="stuSchoolId" name="schoolId" class="easyui-combobox" style="width:100px;height:25px;" editable="false">
         				</select>
   					</td>
   					<td align="right" width="10%"><span>学员姓名：</span></td>
@@ -29,20 +26,18 @@
   					</td>
   					<td align="right" width="10%"><span>联系电话：</span></td>
   					<td align="left" width="5%">
-  						<input class="easyui-textbox"  name="phone" id="phone" style="width:100px;height: 25px;" />
+  						<input class="easyui-numberbox"  name="phone" id="phone" style="width:100px;height: 25px;" />
   					</td>
   					<td align="right" width="10%"><span>课程状态：</span></td>
   					<td align="left" width="5%">
   						<select class="easyui-combobox" name="courseState" id="courseState" style="width:100px;height: 25px;"
-  						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-      					onLoadSuccess:function(data){$('#courseState').combobox('setValue',data[0].codeFlag);}"
+  						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
       					url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_LEAVE_T&codeType=COURSE_STATE">
   						</select>
   					</td>
   					<td align="right" width="10%"><span>班级老师：</span></td>
   					<td align="left" width="5%">
-  						<select class="easyui-combobox" name="teacherId" id="teacherId" style="width:100px;height: 25px;">
-  							
+  						<select class="easyui-combobox" name="teacherId" id="teacherId" style="width:100px;height:25px;">
   						</select>
   					</td>
   					<td></td>
@@ -51,7 +46,7 @@
   					<td colspan="10" align="center">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px" id="qryStuBtn" funcNodeId="4005"><span>查询</span></a>
 						&nbsp;&nbsp;
-						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px" id="reset" ><span>重置</span></a>
+						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px" id="stuResetBtn" ><span>重置</span></a>
 					</td>
   				</tr>
   			</table>
@@ -78,5 +73,37 @@
  			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="javascript:window.history.back()"><span>返回</span></a>
  		</div>
  		</div>
+ 		<script type="text/javascript">
+	   		$(document).ready(function(){
+	   			//初始化页面值
+	   				$("#stuSchoolId").combobox({
+						url : "/sys/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=501&fieldId=schoolId&headFlag=N",//返回json数据的url
+						valueField : "schoolId",
+						textField : "schoolName",
+						panelHeight : "auto",
+						formatter : formatSchool,
+						onLoadSuccess : function(data) {
+							$("#stuSchoolId").combobox('setValue',data[0].schoolId);
+						},
+						onChange : function(n, o) {
+							if(n != "" && n != null && n != undefined) {
+								$("#teacherId").combobox({
+									url : "/sys/pubData/qryData.do?param={'queryCode':'qryClassTeacherInfo','schoolId':'"+n+"'}",//返回json数据的url
+									valueField : "teacherId",
+									textField : "byname",
+									panelHeight : "auto",
+									formatter : function(data) {
+										return "<span>" + data.byname + "</span>";
+									}
+								});
+							} else {
+								$("#stuSchoolId").combobox("setText", "");
+								$("#teacherId").combobox('clear');
+								$("#teacherId").combobox("loadData", new Array());
+							}
+						}
+					});
+	   		});
+	   </script>
   	</body>
 </html>

@@ -26,19 +26,19 @@ $(document).ready(function(){
 		});
     });
 	
+    var staffId = $("#staffId").val();
 	$("#schoolId").combobox({
-		url : "/sys/pubData/qrySchoolList.do?schoolId",//返回json数据的url
+		url : "/sys/pub/pageCategory.do?staffId="+staffId+"&resourceId=512&fieldId=schoolId&headFlag=N",//返回json数据的url
 		valueField : "schoolId",
 		textField : "schoolName",
 		panelHeight : "auto",
 		formatter : formatSchool,
-		onLoadSuccess : function() {
-			$("#schoolId").combobox("setValue", "");
-			$("#schoolId").combobox("setText", "");
+		onLoadSuccess : function(data) {
+			$("#schoolId").combobox('setValue',data[0].schoolId);
 		},
 		onChange : function(n, o) {
 			if(n != "" && n != null && n != undefined) {
-				$("#classInstId").combobox({disabled: false});
+//				$("#classInstId").combobox({disabled: false});
 				$("#classInstId").combobox({
 					url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='003','004'&classInstId=",//返回json数据的url
 					valueField : "classInstId",
@@ -48,11 +48,22 @@ $(document).ready(function(){
 						return "<span>" + data.className + "</span>";
 					}
 				});
+				$("#teacherId").combobox({
+					url : "/sys/pubData/qryData.do?param={'queryCode':'qryClassTeacherInfo','schoolId':'"+n+"'}",//返回json数据的url
+					valueField : "teacherId",
+					textField : "byname",
+					panelHeight : "auto",
+					formatter : function(data) {
+						return "<span>" + data.byname + "</span>";
+					}
+				});
 			} else {
 				$("#schoolId").combobox("setText", "");
 				$("#classInstId").combobox('clear');
 				$("#classInstId").combobox("loadData", new Array());
-				$("#classInstId").combobox({disabled: true});
+				$("#teacherId").combobox('clear');
+				$("#teacherId").combobox("loadData", new Array());
+//				$("#classInstId").combobox({disabled: true});
 			}
 		}
 	});
@@ -110,7 +121,7 @@ function addTeaFeedbackSubmit()
 	var qualityId = $("#qualityId").val();
 	var classInstId = $("#classInstId").val();
 	var className = $("#className").val();
-	var schoolId = $("#schoolId").val();
+	var schoolId = $("#fSchoolId").val();
 	var month = $("#month").val();
 	var handlerId = $("#handlerId").val();
 	var feedback = {};
