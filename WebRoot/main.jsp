@@ -35,13 +35,13 @@
 	function viewMsgDetail(row) {
 		var url = "";
 		var title = "";
-		var applyId = row.apply_id;
-		var msgType = row.msg_type;
-		var pushType = row.push_type;
-		var applyType = row.apply_type;
-		var studentId = row.student_id;
-		var classInstId = row.class_inst_id;
-		var studentCourseId = row.student_course_id;
+		var applyId = row.applyId;
+		var msgType = row.msgType;
+		var pushType = row.pushType;
+		var applyType = row.applyType;
+		var studentId = row.studentId;
+		var classInstId = row.classInstId;
+		var studentCourseId = row.studentCourseId;
 		if(msgType.indexOf("leave_course") > -1) { //休学
 			title = "休学管理";
 			url = "/sys/leaveManage/viewLeaveInfo.do?studentId=" + studentId + "&leaveId=" + applyId + "&funcNodeId=&type=view";
