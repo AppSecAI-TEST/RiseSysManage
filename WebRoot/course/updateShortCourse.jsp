@@ -439,4 +439,37 @@ $("#backBtn").click(function()
 		    $("#stuBaseInfo").find("tr:eq(1)").find("td:eq(1)").find("span").html(studentInfo[4]);
 		}	
 	}
+	
+		function checkParam()
+		{
+			if($("#shortClassId").combobox("getValue")=="")
+			{
+				showMessage("提示","请选择短期课名称",function(){
+					hideMessage();
+				});
+				return false;
+			}
+			if($("#shortClassType").combobox("getValue")=="")
+			{
+				showMessage("提示","请选择班级类型",function(){
+					hideMessage();
+				});
+				return false;
+			}
+			if($("#adviserTeacherA").combobox("getValue")=="")
+			{
+				showMessage("提示","请选择业绩老师A",function(){
+					hideMessage();
+				});
+				return false;
+			}
+			else if($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue"))
+			{
+				showMessage("提示","请选择业绩老师B不能和业绩老师A相同",function(){
+					hideMessage();
+				});
+				return false;
+			}	
+			return true;
+		}
 	</script>

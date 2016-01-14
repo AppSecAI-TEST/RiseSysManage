@@ -29,7 +29,7 @@
   	<body>
   		<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   		<div id="tt" class="easyui-tabs" style="min-width:1110px;width:100%;overflow:auto;height:auto;">
-  			<div title="合并班级管理" style="padding:5px;">
+  			<div title="合并班管理" style="padding:5px;">
 		 		<form id="merFm">
 		  			<table class="search_tab">
 		  				<tr>
@@ -122,7 +122,7 @@
 		   			<a href="javascript:void(0)" id="viewMerge" class="easyui-linkbutton" style="width: 100px;" iconCls="icon-redo">浏览</a>
 		 		</div>
 		 	</div>	
-		 	<div id="2" title="审批管理" style="padding:5px;">
+		 	<div id="2" title="合并班审批管理" style="padding:5px;">
 		 		<form id="appFm">
 					<table class="search_tab">
 		  				<tr>

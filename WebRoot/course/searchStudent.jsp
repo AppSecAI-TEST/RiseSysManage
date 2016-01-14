@@ -31,7 +31,7 @@
 				cellspacing="2">
 				<tr>
 					<td align="right">
-						<span>校区：</span>
+						<span>所属校区：</span>
 					</td>
 					<td width="114px">
 						<select id="schoolId" name="schoolId" class="easyui-combobox" editable="false"

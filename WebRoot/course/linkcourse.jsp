@@ -57,7 +57,7 @@
 						<input type="hidden" id="coursePriceId" name="coursePriceId" value="" />
 						<td align="right"><span>缴费时间：</span></td>
 						<td>
-							<input name="payDate" id="payDate" editable='false' type="text" class="easyui-datebox" required="true" style="width: 100px; height: 25px;" value="<%=StringUtil.getJSONObjectKeyVal(object, "payDate")%>" />
+							<input name="payDate" id="payDate" editable='false' type="text" class="easyui-datebox" required="true" style="width: 120px; height: 25px;" value="<%=StringUtil.getJSONObjectKeyVal(object, "payDate")%>" />
 						</td>
 						<td align="right"><span>阶段：</span>
 						<td>
@@ -825,4 +825,50 @@ $("#addCourse").click(function()
 
 	initCousreGift();
 	
+		var arr=["连报课程一的","连报课程二的","连报课程三的","连报课程四的","连报课程五的","连报课程六的"];
+		function checkParam(n)
+		{
+			if($("#payDate").datebox("getValue")=="")
+			{
+				parent.showMessage("提示","请选择"+arr[n]+"缴费时间",function(){
+					parent.hideMessage();
+					parent.scrolltoFrame(n,$("#payDate").parent().offset().top);
+				});
+				return false;
+			}
+			if($("#stageId").combobox("getValue")=="")
+			{
+				parent.showMessage("提示","请选择"+arr[n]+"阶段",function(){
+					parent.hideMessage();
+					parent.scrolltoFrame(n,$("#stageId").parent().offset().top);
+				});
+				return false;
+			}
+			if($("#classType").combobox("getValue")=="")
+			{
+				parent.showMessage("提示","请选择"+arr[n]+"班级类型",function(){
+					parent.hideMessage();
+					parent.scrolltoFrame(n,$("#classType").parent().offset().top);
+					
+				});
+				return false;
+			}
+			if($("#adviserTeacherA").combobox("getValue")=="")
+			{
+				parent.showMessage("提示","请选择"+arr[n]+"业绩老师A",function(){
+					parent.hideMessage();
+					parent.scrolltoFrame(n,$("#adviserTeacherA").parent().offset().top);
+				});
+				return false;
+			}
+			else if($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue"))
+			{
+				parent.showMessage("提示",arr[n]+"业绩老师A不能和业绩老师B相同",function(){
+					parent.hideMessage();
+					parent.scrolltoFrame(n,$("#adviserTeacherB").parent().offset().top);
+				});
+				return false;
+			}
+			return true;
+		}
 	</script>

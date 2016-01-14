@@ -891,3 +891,9 @@ function initRPQryButton(qryName,resetName,formName,tableName)
     	$("#"+formName+"").form('clear');//清空窗体数据  
     });
 }
+
+
+function scrolltoDom(obj)
+{
+	$("html,body").animate({scrollTop: obj.offset().top-50}, 100);
+}

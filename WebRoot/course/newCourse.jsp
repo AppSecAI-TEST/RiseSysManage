@@ -71,7 +71,7 @@
 							<input id="feeState" name="feeState" type="hidden" value="00A" />
 							<input id="stageOrder" name="stageOrder" type="hidden" value="" />
 							<td align="right"><span>缴费时间：</span></td>
-	      	    			    <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" value="<%=StringUtil.getJSONObjectKeyVal(object,"payDate")%>" style="width: 100px; height: 28px;" /></td>
+	      	    			    <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" value="<%=StringUtil.getJSONObjectKeyVal(object,"payDate")%>" style="width: 120px; height: 28px;" /></td>
 							<td align="right">
 								<span>阶段：</span>
 							</td>
@@ -109,7 +109,7 @@
 								<div id="adviserADiv">
 											<select class="easyui-combobox" id="adviserA_school" style="width: 100px; height: 25px;" data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 							</select>
-								<select name="adviserA" class="easyui-combobox" id="adviserA" editable='false'
+								<select name="adviserA" class="easyui-combobox" id="adviserA" editable='false' required="true"
 									style="width: 100px; height: 25px;"
 									data-options=" valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
 									onLoadSuccess:function(data){$('#adviserA').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserA")%>');}"
@@ -123,7 +123,7 @@
 								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 								  ></select>
 								  
-							<select name="adviserTeacherA" class="easyui-combobox" editable='false' id="adviserTeacherA"
+							<select name="adviserTeacherA" class="easyui-combobox" editable='false' id="adviserTeacherA" required="true"
 								style="width: 100px; height: 25px;"
 								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
 								onLoadSuccess:function(data){$('#adviserTeacherA').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherA")%>');}"
@@ -1912,5 +1912,86 @@ $("#praiseSourceN").combobox({
 		});
 	});
 });
+	
+		var arr=["连报课程一的","连报课程二的","连报课程三的","连报课程四的","连报课程五的","连报课程六的"];
+		function checkParam(n)
+		{
+			if($("#payDate").datebox("getValue")=="")
+			{
+				parent.showMessage("提示","请选择"+arr[n]+"缴费时间",function(){
+					parent.hideMessage();
+					parent.scrolltoFrame(n,$("#payDate").parent().offset().top);
+				});
+				return false;
+			}
+			if($("#stageId").combobox("getValue")=="")
+			{
+				parent.showMessage("提示","请选择"+arr[n]+"阶段",function(){
+					parent.hideMessage();
+					parent.scrolltoFrame(n,$("#stageId").parent().offset().top);
+				});
+				return false;
+			}
+			if($("#classType").combobox("getValue")=="")
+			{
+				parent.showMessage("提示","请选择"+arr[n]+"班级类型",function(){
+					parent.hideMessage();
+					parent.scrolltoFrame(n,$("#classType").parent().offset().top);
+					
+				});
+				return false;
+			}
+			if($("#feeType").combobox("getValue")=="")
+			{
+				parent.showMessage("提示","请选择"+arr[n]+"业绩类型",function(){
+					parent.hideMessage();
+					parent.scrolltoFrame(n,$("#feeType").parent().offset().top);
+				});
+				return false;
+			}
+			else
+			{
+				if($("#feeType").combobox("getValue")=="001")
+				{
+					if($("#adviserA").combobox("getValue")=="")
+					{
+						parent.showMessage("提示","请选择"+arr[n]+"业绩顾问A",function(){
+							parent.hideMessage();
+							parent.scrolltoFrame(n,$("#adviserA").parent().offset().top);
+						});
+						return false;
+					}
+					else if($("#adviserB").combobox("getValue")==$("#adviserA").combobox("getValue"))
+					{
+						parent.showMessage("提示",arr[n]+"业绩顾问A不能和业绩顾问B相同",function(){
+							parent.hideMessage();
+							parent.scrolltoFrame(n,$("#adviserB").parent().offset().top);
+						});
+						return false;
+					}	
+				}
+				else
+				{
+					if($("#adviserTeacherA").combobox("getValue")=="")
+					{
+						parent.showMessage("提示","请选择"+arr[n]+"业绩老师A",function(){
+							parent.hideMessage();
+							parent.scrolltoFrame(n,$("#adviserTeacherA").parent().offset().top);
+						});
+						return false;
+					}
+					else if($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue"))
+					{
+						parent.showMessage("提示",arr[n]+"业绩老师A不能和业绩老师B相同",function(){
+							parent.hideMessage();
+							parent.scrolltoFrame(n,$("#adviserTeacherB").parent().offset().top);
+						});
+						return false;
+					}
+					
+				}	
+			}
+			return true;
+		}
 
 	</script>

@@ -20,7 +20,7 @@
         		</div>
       		</div>
       		 
-			<div class="easyui-panel" style="width:99%;" title="学员基础信息">
+			<div class="easyui-panel" style="width:99%;min-width:1100px;" title="学员基础信息">
 	      		<form id="studentFm">
 	      			<input type="hidden" id="studentId" name="studentId" value="<%=studentId%>">
 	      			<input type="hidden" id="studentInfo" name="studentInfo" value="<%=studentInfo%>" />
@@ -76,7 +76,7 @@
 	      			</table>
                 </form>
 	      	</div>
-	     <div id='frms'> 		 
+	     <div id='frms' style="margin-left:-5px;"> 		 
 			
 			<iframe id="frame0" name="frame0"  style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
 		
@@ -117,11 +117,9 @@
  				<iframe id="frame2" name="frame2"   src="/sys/course/oldCourse.jsp?studentId=<%=studentId%>"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" height="445px" width="100%"></iframe>
   	    </div>
 	 
-		<div style="margin-top: 20px;">
-	      		<div style="float: left;margin-left: 900px;">
-	      			<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      			&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onClick="javascript:window.history.back()">返回</a>
-	      		</div>
+		<div style="margin-top: 25px;text-align:center;">
+	      		<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
+	      		&nbsp;&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onClick="javascript:window.history.back()">返回</a>
 	     </div>
 	     </div>
 	     <div id="showImg" class="easyui-dialog" title="缴费单据"  data-options="modal:true,closed:true" style="width:1000px;height:450px;text-align:center;">
@@ -383,7 +381,10 @@ var newCourse;//新招课程阶段
 	
 	$("#submit").click(function()
 	{
-		 
+		 if(!checkParam())
+		 {
+			 return false;
+		 }	 
 		 studentCourses=[];
 		 for(var n=0;n<num;n++)
 		 {
@@ -525,4 +526,21 @@ var newCourse;//新招课程阶段
 		showMessage('提示',msg, null);
 	}
 	
+	function  checkParam()
+	{
+		for(var n=0;n<num;n++)
+		{
+			var name="frame"+n;
+	   		if(!window.frames[name].window.checkParam(n))
+	   		{
+	   			return false;
+	   		}	
+		}
+		return true;
+	}
+	
+	function scrolltoFrame(nums,top)
+	{
+		$("html,body").animate({scrollTop: document.getElementById("frame"+nums).offsetTop+top-50}, 100);	
+	}
 	</script>

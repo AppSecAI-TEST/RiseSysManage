@@ -79,14 +79,14 @@
 						<select name="courseType" editable='false' required="true" class="easyui-combobox" id="courseType" style="width: 100px; height: 25px;"
 						 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',onChange:changeCourseType, 
 						 onLoadSuccess:function(data){$('#courseType').combobox('setValue',data[0].codeFlag);}"
-	      				 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE" required="true" >
+	      				 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE">
 						</select>
 					</td>
 					<td align="right">
 								<span>缴费时间：</span>
 						</td>
 							<td>
-								<input name="payDate" id="payDate"  class="easyui-datebox" editable='false' required="true"  style="width: 100px; height: 25px;" />
+								<input name="payDate" id="payDate"  class="easyui-datebox" editable='false' required="true"  style="width: 120px; height: 25px;" />
 							</td>
 				</tr>
 			</table>
@@ -111,15 +111,15 @@
 								<span>阶段：</span>
 							</td>
 							<td>
-								 <select name="stageId"  id="stageId"   style="width: 100px; height: 25px;" class="easyui-combobox"
+								 <select name="stageId"  id="stageId"   style="width: 100px; height: 25px;" class="easyui-combobox vaildatebox"
 	      						data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'"
-	      						url="<%=path %>/pubData/qryStage.do" editable='false' required="true" >
+	      						url="<%=path %>/pubData/qryStage.do" editable='false'  required="true">
 							</td>
 							<td align="right">
 								<span>班级类型：</span>
 							</td>
 							<td>
-								<select name="classType" class="easyui-combobox" id="classType"
+								<select name="classType" class="easyui-combobox vaildatebox" id="classType"
 									style="width: 100px; height: 25px;"  editable='false' required="true">
 								</select>
 							</td>
@@ -127,9 +127,9 @@
 							 <span>业绩类型：</span>
 							</td>
 							<td>
-								<select name="feeType"  id="feeType" editable='false' required="true"
+								<select name="feeType"  class="easyui-combobox vaildatebox" id="feeType" editable='false'
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName'"
-									style="width: 100px; height: 25px;"
+									style="width: 100px; height: 25px;" required="true"
 									url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
 								</select>
 							</td>
@@ -139,11 +139,11 @@
 								<span>业绩顾问A：</span>
 							</td>
 							<td>
-							<select class="easyui-combobox" id="adviserA_school" style="width: 100px; height: 25px;"
+							<select class="easyui-combobox" id="adviserA_school" style="width: 100px; height: 25px;" editable='false'
 								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 								  >
 							</select>
-							<select name="adviserA" editable='false' class="easyui-combobox" id="adviserA" required="true"
+							<select name="adviserA" editable='false' class="easyui-combobox vaildatebox"  id="adviserA" required="true"
 								style="width:100px;height:25px;"
 	      						 >
 							</select>
@@ -156,7 +156,7 @@
 								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 								  >
 							</select>
-								<select name="adviserB" class="easyui-combobox" id="adviserB" style="width: 100px; height: 25px;">
+								<select name="adviserB" class="easyui-combobox vaildatebox" id="adviserB" style="width: 100px; height: 25px;">
 								</select>
 							</td>
 							<td align="right"></td>
@@ -168,25 +168,25 @@
 							<span>业绩老师A：</span>
 						</td>
 						<td>
-						<select class="easyui-combobox" id="adviserTeacherA_school" style="width: 100px; height: 25px;"
+						<select class="easyui-combobox" id="adviserTeacherA_school" style="width: 100px; height: 25px;" editable='false' 
 								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 								  >
 							</select>
-							<select name="adviserTeacherA" editable='false' class="easyui-combobox" id="adviserTeacherA" required="true"
+							<select name="adviserTeacherA" editable='false' class="easyui-combobox vaildatebox" id="adviserTeacherA"
 								style="width: 100px; height: 25px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'" required="true"
 	      						 >
 							</select>
 						</td>
 						<td align="right">
 							<span>业绩老师B：</span>
 						</td>
-						<td>
-						<select class="easyui-combobox" id="adviserTeacherB_school" style="width: 100px; height: 25px;"
+						<td> 
+						<select class="easyui-combobox" id="adviserTeacherB_school" style="width: 100px; height: 25px;" editable='false'
 								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 				         >
 						</select>
-						<select name="adviserTeacherB" editable='false' class="easyui-combobox" id="adviserTeacherB"
+						<select name="adviserTeacherB" editable='false' class="easyui-combobox vaildatebox" id="adviserTeacherB" 
 							style="width: 100px; height: 25px;"
 							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
       						 >
@@ -195,7 +195,6 @@
 						<td align="right"></td>
 						<td></td>
 					</tr>
-						
 						<tr>
       					  <td align="right"><span>上传缴费单：</span></td>
       					  <td  colspan="5"><input style="width: 300px; height: 25px;" class="easyui-filebox" name="file2" data-options="prompt:''" ><a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">查看缴费单</a></td>
@@ -367,7 +366,7 @@
 					<table width="100%" cellpadding="5px" id="praiseInfo"
 						class="maintable">
 						<tr>
-							<td align="right" width="100px;">
+							<td align="right" width="120px;">
 								<span>口碑类型：</span>
 							</td>
 							<td colspan="9" align="left">
@@ -380,7 +379,7 @@
 							</td>
 						</tr>
 						<tr style="display: none;">
-							<td align="right">
+							<td width="120px; align="right">
 								<span>口碑来源：</span>
 							</td>
 							<td align="center" width="170px">
@@ -496,7 +495,7 @@
 							</td>
 						</tr>
 						<tr style="display: none;">
-							<td align="right">
+							<td width="120px; align="right">
 								<span>不可控口碑类型：</span>
 							</td>
 							<td align="left" width="170px">
@@ -595,7 +594,7 @@
 							<td align="left">
 								<select  id="shortClassId" editable='false'  name="shortClassId" style="width: 100px; height: 25px;"
 								 data-options="valueField: 'shortClassId', textField: 'className', panelHeight: 'auto'"
-	      				 		 url="/sys/pubData/qryData.do?param={queryCode:'Qrr_short_class'}"   >
+	      				 		 url="/sys/pubData/qryData.do?param={queryCode:'Qrr_short_class'}"  required="true" >
 								<select>
 							</td>
 							<td align="right">
@@ -603,7 +602,7 @@
 							</td>
 							<td align="left">
 								 <select class="easyui-combobox" editable='false' id="shortClassType" name="shortClassType" style="width: 100px; height: 25px;"
-								 data-options="valueField: 'classType', textField: 'classType', panelHeight: 'auto'">
+								 data-options="valueField: 'classType', textField: 'classType', panelHeight: 'auto'"  required="true">
 								<select>
 							</td>
 							</tr>
@@ -620,7 +619,7 @@
 											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 												style="width: 100px; height: 25px;">
 												</select>
-								<select class="easyui-combobox"  editable='false' id="s_teacherA" name="staffIdA" style="width: 100px; height: 25px;">
+								<select class="easyui-combobox"  editable='false' id="s_teacherA" name="staffIdA" style="width: 100px; height: 25px;"  required="true">
 								<select>
 							</td>
 							<td align="right">
@@ -713,7 +712,7 @@
 				</table>
 			</div>
 		</form>
-		<div style="width: 1200px; text-align: center">
+		<div style="width: 1200px;margin-top:25px; text-align: center">
 			<a href="javascript:void(0)" class="easyui-linkbutton"
 				iconCls="icon-ok" style="width: 100px" id="submitBtn"><span>提交</span>
 			</a> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -1047,7 +1046,7 @@ $('#stageId').combobox({
 		$("#stageId").combobox('setText',"");
 		$("#classType").combobox('setText',"");
 		$("#totalAmount").textbox('setValue', '');
-		$.messager.alert('提示', "请选择缴费时间");	
+		showMessage('提示', "请选择缴费时间",null);	
 		return;
 	}
 	var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\",schoolId:\""+ <%=schoolId%> + "\"}";
@@ -1063,7 +1062,7 @@ $('#stageId').combobox({
 			{
 				$("#stageId").combobox('setText',"");
 				$("#classType").combobox('setText',"");
-				$.messager.alert('提示', "没有适用的常规格价格体系,请重新选择缴费日期");	
+				showMessage('提示', "没有适用的常规格价格体系,请重新选择缴费日期",null);	
 				return;
 			} 
 			if (data.length == 1)
@@ -1120,12 +1119,10 @@ $('#favorAmount').textbox( {
 //提交
 $("#submitBtn").click(function() 
 {
-	//if(!$("#courseFm").form('validate'))return;
-	if(!$("#courseFm").form("validate"))
+	if(!checkParam())
 	{
-		$("#courseFm").find(".textbox-text.validatebox-text.validatebox-invalid:first").trigger("mouseover");
 		return false;
-	}
+	}	
 	oldCourses =getOldCourse();
 	var stageId = $("#stageId").combobox("getValue");
 	var stageOrder =  $("#stageOrder").val();
@@ -1627,14 +1624,14 @@ $("#addCourse").click(function()
 		{
 			$("#normal").css("display","block");
 			$("#short").css("display","none");
-			initFeeInfo()
+			initFeeInfo();
 			$("#courseType").val("001")
 		}
 		else if(type=="002")
 		{
 			$("#normal").css("display","none");
 			$("#short").css("display","block");
-			initFeeInfo()
+			initFeeInfo();
 		}	
 	}
 	
@@ -1725,11 +1722,6 @@ $("#addCourse").click(function()
 	
 	function addCourseInfo()
 	{
-		if(!$("#courseFm").form("validate"))
-		{
-			$("#qryFm").find(".textbox-text.validatebox-text.validatebox-invalid:first").trigger("mouseover");
-			return false;
-		}	
 		//获取口碑信息-begin
 		var womType="";
 		$("input[name=praise]").each(function(){
@@ -2141,4 +2133,119 @@ $("#addCourse").click(function()
 		$('#giftDlg').dialog("close");
 	}
 	
+	
+	function checkParam()
+	{
+		if($("#payDate").datebox("getValue")=="")
+		{
+			showMessage("提示","请选择缴费时间",function(){
+				hideMessage();
+				scrolltoDom($("#payDate").parent());
+			});
+			return false;
+		}
+		if($("#courseType").combobox("getValue")=="001")
+		{
+			if($("#stageId").combobox("getValue")=="")
+			{
+				showMessage("提示","请选择阶段",function(){
+					hideMessage();
+					scrolltoDom($("#stageId").parent());
+				});
+				return false;
+			}
+			if($("#classType").combobox("getValue")=="")
+			{
+				showMessage("提示","请选择班级类型",function(){
+					hideMessage();
+					scrolltoDom($("#classType").parent());
+				});
+				return false;
+			}
+			if($("#feeType").combobox("getValue")=="")
+			{
+				showMessage("提示","请选择业绩类型",function(){
+					hideMessage();
+					scrolltoDom($("#feeType").parent());
+				});
+				return false;
+			}
+			else
+			{
+				if($("#feeType").combobox("getValue")=="001")
+				{
+					if($("#adviserA").combobox("getValue")=="")
+					{
+						showMessage("提示","请选择业绩顾问A",function(){
+							hideMessage();
+							scrolltoDom($("#adviserA").parent());
+						});
+						return false;
+					}
+					else if($("#adviserB").combobox("getValue")==$("#adviserA").combobox("getValue"))
+					{
+						showMessage("提示","业绩顾问A不能和业绩顾问B相同",function(){
+							hideMessage();
+							scrolltoDom($("#adviserB").parent());
+						});
+						return false;
+					}	
+				}
+				else
+				{
+					if($("#adviserTeacherA").combobox("getValue")=="")
+					{
+						showMessage("提示","请选择业绩老师A",function(){
+							hideMessage();
+							scrolltoDom($("#adviserTeacherA").parent());
+						});
+						return false;
+					}
+					else if($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue"))
+					{
+						showMessage("提示","业绩老师A不能和业绩老师B相同",function(){
+							hideMessage();
+							scrolltoDom($("#adviserTeacherB").parent());
+						});
+						return false;
+					}
+					
+				}	
+			}
+			
+		}
+		else
+		{
+			if($("#shortClassId").combobox("getValue")=="")
+			{
+				showMessage("提示","请选择短期课名称",function(){
+					hideMessage();
+				});
+				return false;
+			}
+			if($("#shortClassType").combobox("getValue")=="")
+			{
+				showMessage("提示","请选择班级类型",function(){
+					hideMessage();
+				});
+				return false;
+			}
+			if($("#s_teacherA").combobox("getValue")=="")
+			{
+				showMessage("提示","请选择"+$("#adviserType").combobox("getText")+"A",function(){
+					hideMessage();
+				});
+				return false;
+			}
+			else if($("#s_teacherB").combobox("getValue")==$("#s_teacherA").combobox("getValue"))
+			{
+				showMessage("提示",$("#adviserType").combobox("getText")+"A不能和"+$("#adviserType").combobox("getText")+"B相同",function(){
+					hideMessage();
+				});
+				return false;
+			}	
+			
+		}
+		return true;
+	}
 	</script>

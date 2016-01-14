@@ -97,7 +97,7 @@
 								<span>缴费时间：</span>
 						</td>
 							<td>
-								<input name="payDate" id="payDate"  class="easyui-datebox" editable='false' required="true" value="<%=StringUtil.getJSONObjectKeyVal(object,"payDate")%>"  style="width: 100px; height: 28px;" />
+								<input name="payDate" id="payDate"  class="easyui-datebox" editable='false' required="true" value="<%=StringUtil.getJSONObjectKeyVal(object,"payDate")%>"  style="width: 120px; height: 28px;" />
 							</td>
 				</tr>
 			</table>
@@ -161,7 +161,7 @@
 							<td>
 								<select class="easyui-combobox" editable='false' id="adviserA_school" style="width: 100px; height: 28px;" data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 							</select>
-								<select name="adviserA" class="easyui-combobox" id="adviserA" editable='false'
+								<select name="adviserA" class="easyui-combobox" id="adviserA" editable='false' required="true"
 									style="width: 100px; height: 28px;"
 									data-options=" valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
 									onLoadSuccess:function(data){$('#adviserA').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserA")%>');}"
@@ -196,7 +196,7 @@
 								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 								  ></select>
 								  
-							<select name="adviserTeacherA" class="easyui-combobox" id="adviserTeacherA" editable='false'
+							<select name="adviserTeacherA" class="easyui-combobox" id="adviserTeacherA" editable='false' required="true"
 								style="width: 100px; height: 28px;"
 								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
 								onLoadSuccess:function(data){$('#adviserTeacherA').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherA")%>');}"
@@ -656,7 +656,7 @@
 				</table>
 			</div>
 		</form>
-		<div style="width: 1200px; text-align: center">
+		<div style="width: 1200px;margin-top:25px;text-align: center">
 			<a href="javascript:void(0)" class="easyui-linkbutton"
 				iconCls="icon-ok" style="width: 100px" id="submitBtn"><span>提交</span>
 			</a> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -1089,11 +1089,10 @@ $("#activeSchool").combobox(
 //提交
 $("#submitBtn").click(function() 
 {
-	if(!$("#courseFm").form("validate"))
+	if(!checkParam())
 	{
-		$("#courseFm").find(".textbox-text.validatebox-text.validatebox-invalid:first").trigger("mouseover");
 		return false;
-	}
+	}	
 	oldCourses =getOldCourse();
 	var stageId = $("#stageId").combobox("getValue");
 	var stageOrder =  $("#stageOrder").val();
@@ -1386,7 +1385,6 @@ $("#addCourse").click(function()
 	//创建单报提交数据
 	function build()
 	{
-		if(!$("#courseFm").form('validate'))return;
 		gifts=[];
 		studentCourse={};                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 		$("#giftTab").find('tr').each(function(i,node)
@@ -2107,5 +2105,75 @@ $(document).ready(function()
 		});
 	});
 });
+		function checkParam()
+		{
+			if($("#stageId").combobox("getValue")=="")
+			{
+				showMessage("提示","请选择阶段",function(){
+					hideMessage();
+					scrolltoDom($("#stageId").parent());
+				});
+				return false;
+			}
+			if($("#classType").combobox("getValue")=="")
+			{
+				showMessage("提示","请选择班级类型",function(){
+					hideMessage();
+					scrolltoDom($("#classType").parent());
+				});
+				return false;
+			}
+			if($("#feeType").combobox("getValue")=="")
+			{
+				showMessage("提示","请选择业绩类型",function(){
+					hideMessage();
+					scrolltoDom($("#feeType").parent());
+				});
+				return false;
+			}
+			else
+			{
+				if($("#feeType").combobox("getValue")=="001")
+				{
+					if($("#adviserA").combobox("getValue")=="")
+					{
+						showMessage("提示","请选择业绩顾问A",function(){
+							hideMessage();
+							scrolltoDom($("#adviserA").parent());
+						});
+						return false;
+					}
+					else if($("#adviserB").combobox("getValue")==$("#adviserA").combobox("getValue"))
+					{
+						showMessage("提示","业绩顾问A不能和业绩顾问B相同",function(){
+							hideMessage();
+							scrolltoDom($("#adviserB").parent());
+						});
+						return false;
+					}	
+				}
+				else
+				{
+					if($("#adviserTeacherA").combobox("getValue")=="")
+					{
+						showMessage("提示","请选择业绩老师A",function(){
+							hideMessage();
+							scrolltoDom($("#adviserTeacherA").parent());
+						});
+						return false;
+					}
+					else if($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue"))
+					{
+						showMessage("提示","业绩老师A不能和业绩老师B相同",function(){
+							hideMessage();
+							scrolltoDom($("#adviserTeacherB").parent());
+						});
+						return false;
+					}
+					
+				}	
+			}
+			return true;
+		}
 	
 	</script>

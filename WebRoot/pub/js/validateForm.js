@@ -80,6 +80,66 @@ $(document).ready(function(){
 				}
 				return true;
 			}
-		}
+		},
+		checkNull:
+		{
+			validator:function(value,param)
+			{
+				if($("#courseType").combobox("getValue")=="001")
+				{
+					if(param[1].indexOf($("#"+param[0]).combobox("getValue"))!=-1&&value=="")
+					{
+						if(param[1]=="001")
+						{
+							$.fn.validatebox.defaults.rules.checkNull.message="请选择一位业绩顾问";
+						}
+						else
+						{
+							$.fn.validatebox.defaults.rules.checkNull.message="请选择一位业绩老师";
+						}	
+						return false;	
+					}
+				}
+				return true;
+			}
+		},
+		checkSame:
+		{
+			validator:function(value,param)
+			{
+				if($("#courseType").combobox("getValue")=="001")
+				{
+					if(param[1].indexOf($("#"+param[0]).combobox("getValue"))!=-1&&value!=""&&value==$("#"+param[2]).combobox("getValue"))
+					{
+						if(param[1]=="001")
+						{
+							$.fn.validatebox.defaults.rules.checkSame.message="不能选相同的业绩顾问";
+						}
+						else
+						{
+							$.fn.validatebox.defaults.rules.checkSame.message="不能选相同的业绩老师";
+						}	
+						return false;	
+					}
+				}	
+				return true;
+			}
+		},
+		normalNull:
+		{
+			validator:function(value,param)
+			{
+				alert(1121)
+				if($("#courseType").combobox("getValue")=="001")
+				{
+					if(value=="")
+					{
+						$.fn.validatebox.defaults.rules.normalNull.message="该选项不能为空";
+						return false;
+					}	
+				}	
+				return true;
+			}
+		}	
 	}); 
 });
