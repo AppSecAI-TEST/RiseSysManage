@@ -20,7 +20,7 @@ $(document).ready(function() {
 			$("#inClassNameText").html(data.inClass);
 			$("#finishStageIdText").html(data.finishStageId);
 			$("#higherStageIdText").html(data.higherStageId);
-			$("#stageIdText").html(data.stageId);
+			$("#stageIdText").html(data.stageIdText);
 			$("#feeTypeText").html(data.feeTypeText);
 			
 			var imgUrl = data.imgUrl;

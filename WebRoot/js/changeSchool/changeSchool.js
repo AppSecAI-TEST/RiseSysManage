@@ -291,7 +291,8 @@ $(document).ready(function() {
 			var approveState = row.approveState;
 			if("000" == approveState) {
 				var applyId = row.applyId;
-				window.location.href = "/sys/changeSchool/approveChangeSchool.jsp?applyId="+applyId;
+				var studentId = row.studentId;
+				window.location.href = "/sys/changeSchool/approveChangeSchool.jsp?applyId="+applyId+"&studentId="+studentId;
 			} else {
 				$.messager.alert('提示', "您选择的转校审批已经审批，不能再次审批！");
 			}

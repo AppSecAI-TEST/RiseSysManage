@@ -76,7 +76,7 @@
 			if("notice" == pushType) {
 				url = "/sys/changeSchool/viewChangeSchool.jsp?applyId=" + applyId;
 			} else {
-				url = "/sys/changeSchool/approveChangeSchool.jsp?applyId=" + applyId;
+				url = "/sys/changeSchool/approveChangeSchool.jsp?applyId=" + applyId + "&studentId=" + studentId;
 			}
 		} else if(msgType.indexOf("change_class") > -1) { //转班
 			title = "转班管理";

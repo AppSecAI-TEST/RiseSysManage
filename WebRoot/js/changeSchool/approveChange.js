@@ -28,11 +28,10 @@ $(document).ready(function() {
 			$("#nameText").html(data.name);
 			$("#phoneText").html(data.phone);
 			$("#byNameText").html(data.byName);
-			$("#teacherNameText").html(data.schoolName);
+			$("#schoolNameText").html(data.schoolName);
 			$("#outClassNameText").html(data.outClassName);
 			$("#teacherNameText").html(data.outClassTeacherName);
 			
-			$("#studentId").val(data.studentId);
 			$("#studentCourseId").val(data.studentCourseId);
 		}
 	});

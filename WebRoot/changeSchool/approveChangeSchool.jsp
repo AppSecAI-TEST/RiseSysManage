@@ -2,6 +2,7 @@
 <%
 	String path = request.getContextPath();
 	String applyId = request.getParameter("applyId");
+	String studentId = request.getParameter("studentId");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -17,7 +18,7 @@
   			<form id="approveChangeSchoolFm">
   				<input type="hidden" id="applyId" name="applyId" value="<%=applyId %>"/>
   				<input type="hidden" id="applyType" name="applyType" value="002"/>
-  				<input type="hidden" id="studentId" name="studentId" value=""/>
+  				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
   				<input type="hidden" id="studentCourseId" name="studentCourseId" value=""/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   				<div class="easyui-panel" style="min-width:1100px; width:100%; height:auto;" title="学员信息">
