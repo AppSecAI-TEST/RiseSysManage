@@ -106,19 +106,19 @@
 <div id="index_public_main" class="easyui-panel" data-options="fit:true,title:'',border:false">
 	<table width="100%" cellspacing="5" border="0" style="height:300px">
 		<tr>
-			<td width="70%" valign="top">
-				<div class="panel">
+			<td width="65%" valign="top">
+				<div   class="panel">
 					<div class="panel-header">
 						<div class="panel-title">待办事项</div>
 					</div>
 					<div class="panel-body" style="padding:8px;line-height:1.8;text-align:center;height:auto;font-family:'微软雅黑';font-size:12px;">
-						<table class="easyui-datagrid" style="min-width:300px; height: auto;" id="approve_list_data"
+						<table  class="easyui-datagrid" style="min-width:300px; height: 220px" id="approve_list_data"
 							url = "<%=path %>/staff/msg.do?staffId=${sessionScope.StaffT.staffId}&flag=approve"
 							pagination="false" rownumbers="false" fitColumns="true">
 							<thead>
 								<tr>
-									<th data-options="field:'remark',width:'70%',align:'left'">待办事项标题</th>
-									<th data-options="field:'date',width:'30%',align:'left'">时间</th>
+									<th data-options="field:'remark',width:'70%',align:'center'">待办事项标题</th>
+									<th data-options="field:'date',width:'30%',align:'center'">时间</th>
 								</tr>
 							</thead>
 						</table>
@@ -139,19 +139,19 @@
 			</td>
 		</tr>
 		<tr>
-			<td width="70%" valign="top">
+			<td width="65%" valign="top">
 				<div class="panel">
 					<div class="panel-header">
 						<div class="panel-title">通知事项</div>
 					</div>
 					<div class="panel-body" style="padding:8px;line-height:1.8;text-align:center;height:auto;font-family:'微软雅黑';font-size:12px;">
-						<table class="easyui-datagrid" style="min-width:300px; height: auto;" id="notice_list_data"
+						<table class="easyui-datagrid" style="min-width:300px; height:220px;" id="notice_list_data"
 							url = "<%=path %>/staff/msg.do?staffId=${sessionScope.StaffT.staffId}&flag=notice"
 							pagination="false" rownumbers="false" fitColumns="true">
 							<thead>
 								<tr>
-									<th data-options="field:'remark',width:'70%',align:'left'">通知事项标题</th>
-									<th data-options="field:'date',width:'30%',align:'left'">时间</th>
+									<th data-options="field:'remark',width:'70%',align:'center'">通知事项标题</th>
+									<th data-options="field:'date',width:'30%',align:'center'">时间</th>
 								</tr>
 							</thead>
 						</table>
