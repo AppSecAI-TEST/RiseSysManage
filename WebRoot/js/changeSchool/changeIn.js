@@ -1,4 +1,38 @@
 $(document).ready(function() {
+	var applyId = $("#applyId").val();
+	var param = "{\"applyId\":\""+applyId+"\",\"queryCode\":\"qryChangeSchoolDetail\"}";
+	$.ajax({
+		url: "/sys/applyClass/qryDataByQueryCode.do",
+		data: "param=" + param,
+		dataType: "json",
+		async: true,
+		beforeSend: function()
+		{
+			$.messager.progress({title : '转入班级', msg : '正在查询转入班级信息，请稍等……'});
+		},
+		success: function (data) {
+			$.messager.progress('close'); 
+			$("#nameText").html(data.name);
+			$("#phoneText").html(data.phone);
+			$("#byNameText").html(data.byName);
+			
+			$("#approveDateText").html(data.approveDate);
+			$("#approveNameText").html(data.approveName);
+			$("#approveRemarkText").html(data.approveRemark);
+			
+			$("#outDateText").html(data.outDate);
+			$("#outNameText").html(data.outName);
+			$("#outSchoolName").html(data.outSchoolName);
+			
+			$("#stageId").val(data.stageId);
+			$("#classType").val(data.classType);
+			$("#courseType").val(data.courseType);
+			$("#outClassId").val(data.outClassId);
+			$("#inSchoolId").val(data.inSchoolId);
+			$("#studentCourseId").val(data.studentCourseId);
+		}
+	});
+	
 	$("input:radio[name='isBegin']").change(function() {
 		var isBegin = $("input:radio[name='isBegin']:checked").val();
 		initClassInst(isBegin);
@@ -61,6 +95,7 @@ function initClassInst(isBegin) {
 	var courseType = $("#courseType").val();
 	var inClassIsBegin = $("#inClassIsBegin").val();
 	if("Y" == isBegin) {
+		$("#beginClassInstId").combobox({disabled: false});
 		$("#beginClassInstId").combobox({
     		url : "/sys/pubData/qryClassInstList.do?schoolId="+inSchoolId+"&courseType="+courseType+"&stageId="+stageId+"&classType="+classType+"&classState='003'&classInstId=",//返回json数据的url
     		valueField : "classInstId",
@@ -102,8 +137,10 @@ function initClassInst(isBegin) {
             }
     	});
 		$("#notBeginClassInstId").combobox('clear');
+		$("#notBeginClassInstId").combobox({disabled: true});
 		$("#notBeginClassInstId").combobox("loadData", new Array());
 	} else {
+		$("#notBeginClassInstId").combobox({disabled: false});
 		$("#notBeginClassInstId").combobox({
     		url : "/sys/pubData/qryClassInstList.do?schoolId="+inSchoolId+"&courseType="+courseType+"&stageId="+stageId+"&classType="+classType+"&classState='001','002'&classInstId=",//返回json数据的url
     		valueField : "classInstId",
@@ -131,7 +168,7 @@ function initClassInst(isBegin) {
             			$.messager.progress({title : '班级维护', msg : '正在查询班级信息，请稍等……'});
             		},
             		success: function (data) {
-            			$.messager.progress('close'); 
+            			$.messager.progress('close');
             			$("#classInstId").val(data.classInstId);
             			$("#className").val(data.className);
             			$("#classNameText").html(data.className);
@@ -147,6 +184,7 @@ function initClassInst(isBegin) {
             }
     	});
 		$("#beginClassInstId").combobox('clear');
+		$("#beginClassInstId").combobox({disabled: true});
 		$("#beginClassInstId").combobox("loadData", new Array());
 	}
 }

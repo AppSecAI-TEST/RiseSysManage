@@ -1,23 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
-	String name = request.getParameter("name");
-	String phone = request.getParameter("phone");
-	String byName = request.getParameter("byName");
 	String applyId = request.getParameter("applyId");
-	String outDate = request.getParameter("outDate");
-	String outName = request.getParameter("outName");
-	String stageId = request.getParameter("stageId");
-	String classType = request.getParameter("classType");
-	String courseType = request.getParameter("courseType");
 	String studentId = request.getParameter("studentId");
-	String inSchoolId = request.getParameter("inSchoolId");
-	String outClassId = request.getParameter("outClassId");
-	String approveDate = request.getParameter("approveDate");
-	String approveName = request.getParameter("approveName");
-	String outSchoolName = request.getParameter("outSchoolName");
-	String approveRemark = request.getParameter("approveRemark");
-	String studentCourseId = request.getParameter("studentCourseId");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -31,49 +16,49 @@
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="转校转入">
   			<form id="changeInSchoolFm">
-  				<input type="hidden" id="stageId" value="<%=stageId %>"/>
-  				<input type="hidden" id="classType" value="<%=classType %>"/>
-  				<input type="hidden" id="courseType" value="<%=courseType %>"/>
+  				<input type="hidden" id="stageId" value=""/>
+  				<input type="hidden" id="classType" value=""/>
+  				<input type="hidden" id="courseType" value=""/>
   				<input type="hidden" id="applyId" name="applyId" value="<%=applyId %>"/>
   				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
-  				<input type="hidden" id="outClassId" name="outClassId" value="<%=outClassId %>"/>
-  				<input type="hidden" id="inSchoolId" name="inSchoolId" value="<%=inSchoolId %>"/>
+  				<input type="hidden" id="outClassId" name="outClassId" value=""/>
+  				<input type="hidden" id="inSchoolId" name="inSchoolId" value=""/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
-  				<input type="hidden" id="studentCourseId" name="studentCourseId" value="<%=studentCourseId %>"/>
+  				<input type="hidden" id="studentCourseId" name="studentCourseId" value=""/>
   				<table width="100%" cellpadding="5px" class="maintable">
   					<tr>
   						<td align="right" width="10%"><span>学员姓名：</span></td>
-  						<td width="10%"><span id="nameText"><%=name %></span></td>
+  						<td width="10%"><span id="nameText"></span></td>
   						<td align="right" width="10%"><span>英文名：</span></td>
-  						<td width="12%"><span id="byNameText"><%=byName %></span></td>
+  						<td width="12%"><span id="byNameText"></span></td>
   						<td align="right" width="10%"><span>联系电话：</span></td>
-  						<td width="48%"><span id="phoneText"><%=phone %></span></td>
+  						<td width="48%"><span id="phoneText"></span></td>
   					</tr>
   					<tr>
   						<td align="right" width="10%"><span>审批时间：</span></td>
-  						<td width="12%"><span id="approveDateText"><%=approveDate %></span></td>
+  						<td width="12%"><span id="approveDateText"></span></td>
   						<td align="right" width="10%"><span>审批人：</span></td>
-  						<td width="10%"><span id="approveNameText"><%=approveName %></span></td>
+  						<td width="10%"><span id="approveNameText"></span></td>
   						<td align="right" width="10%"><span>审批描述：</span></td>
-  						<td width="48%"><span id="approveRemarkText"><%=approveRemark %></span></td>
+  						<td width="48%"><span id="approveRemarkText"></span></td>
   					</tr>
   					<tr>
   						<td align="right" width="10%"><span>转出时间：</span></td>
-  						<td width="12%"><span id="outDateText"><%=outDate %></span></td>
+  						<td width="12%"><span id="outDateText"></span></td>
   						<td align="right" width="10%"><span>转出人：</span></td>
-  						<td width="10%"><span id="approveNameText"><%=outName %></span></td>
+  						<td width="10%"><span id="outNameText"></span></td>
   						<td align="right" width="10%"><span>转出校区：</span></td>
-  						<td width="48%"><span id="approveRemarkText"><%=outSchoolName %></span></td>
+  						<td width="48%"><span id="outSchoolName"></span></td>
   					</tr>
   					<tr>
   						<td align="right" width="15%"><span>转入班级：</span></td>
   						<td width="85%" colspan="5">
   							<input type="radio" name="isBegin" value="N"/>
   							<span style="display: inline-block; text-align: center;">未开课班级</span>
-  							<select id="notBeginClassInstId" name="notBeginClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"></select>
+  							<select id="notBeginClassInstId" name="notBeginClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false" disabled="disabled"></select>
   							<input type="radio" name="isBegin" value="Y"/>
   							<span style="display: inline-block; text-align: center;">已开课班级</span>
-  							<select id="beginClassInstId" name="beginClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"></select>
+  							<select id="beginClassInstId" name="beginClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false" disabled="disabled"></select>
   						</td>
   					</tr>
   					<tr style="display: none;" id="inClassTr">

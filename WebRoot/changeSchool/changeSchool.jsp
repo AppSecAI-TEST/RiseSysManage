@@ -138,7 +138,7 @@
 			  	<div id="toolbarApply" style="padding: 2px; height: auto">
 		   			<a href="javascript:void(0)" id="changeSchoolBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">转校申请</a>
 		   			<a href="javascript:void(0)" id="changeOutBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px;">转出校区</a>
-		   			<a href="javascript:void(0)" id="changeInBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px;">转入校区</a>
+		   			<a href="javascript:void(0)" id="changeInBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px;">转入班级</a>
 		   			<a href="javascript:void(0)" id="cancelChangeBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">取消转校</a>
 		   			<a href="javascript:void(0)" id="updateChangeBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">更改选班</a>
 		   			<a href="javascript:void(0)" id="view" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>

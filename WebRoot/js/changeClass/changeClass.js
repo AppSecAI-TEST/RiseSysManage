@@ -223,8 +223,8 @@ $(document).ready(function() {
 					}
 				});
 			} else {
-				var changeClassStateText = row.changeClassStateText;
-				$.messager.alert('提示', "您选择的学员班级的转班状态为"+changeClassStateText+"，不能转出！");
+				var changeStateText = row.changeStateText;
+				$.messager.alert('提示', "您选择的学员班级的转班状态为"+changeStateText+"，不能转出！");
 			}
 		} else {
 			$.messager.alert('提示', "请先选择您要转出的转班申请！");

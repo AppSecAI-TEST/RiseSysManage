@@ -65,12 +65,12 @@
      					</select>
 					</td>
 					<td align="right" style="min-width: 80px;"><span>建档时间：</span></td>
-					<td width="8px">
-						<input class="easyui-datebox" type="text" style="width:80px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myformatter, parser:myparser"/>
+					<td width="90px">
+						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
-					<td align="center" width="10px;"><span>至</span></td>
-					<td width="80px">
-						<input class="easyui-datebox" type="text" style="width:80px; height: 25px;" id="endTime" name="endTime" data-options="formatter:myformatter, parser:myparser"/>
+					<td align="center"><span>至</span></td>
+					<td width="90px">
+						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTime" name="endTime" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
 					<td align="center" colspan="2" width="180px">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:80px; height: 25px;" id="qryBtn" funcNodeId="1000">查询</a>

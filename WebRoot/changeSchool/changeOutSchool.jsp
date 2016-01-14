@@ -1,21 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
-	String name = request.getParameter("name");
-	String phone = request.getParameter("phone");
-	String byName = request.getParameter("byName");
 	String applyId = request.getParameter("applyId");
 	String isFinish = request.getParameter("isFinish");
 	String studentId = request.getParameter("studentId");
-	String approveDate = request.getParameter("approveDate");
-	String approveName = request.getParameter("approveName");
-	String outClassId = request.getParameter("outClassId");
-	String outClassName = request.getParameter("outClassName");
-	String inSchoolName = request.getParameter("inSchoolName");
-	String outSchoolId = request.getParameter("outSchoolId");
-	String outSchoolName = request.getParameter("outSchoolName");
-	String approveRemark = request.getParameter("approveRemark");
-	String studentCourseId = request.getParameter("studentCourseId");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -32,34 +20,34 @@
   				<input type="hidden" id="applyId" name="applyId" value="<%=applyId %>"/>
   				<input type="hidden" id="isFinish" name="isFinish" value="<%=isFinish %>"/>
   				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
-  				<input type="hidden" id="outClassId" name="outClassId" value="<%=outClassId %>"/>
-  				<input type="hidden" id="outSchoolId" name="outSchoolId" value="<%=outSchoolId %>"/>
+  				<input type="hidden" id="outClassId" name="outClassId" value=""/>
+  				<input type="hidden" id="outSchoolId" name="outSchoolId" value=""/>
+  				<input type="hidden" id="studentCourseId" name="studentCourseId" value=""/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
-  				<input type="hidden" id="studentCourseId" name="studentCourseId" value="<%=studentCourseId %>"/>
   				<table width="100%" cellpadding="5px" class="maintable">
   					<tr>
   						<td align="right" width="10%"><span>学员姓名：</span></td>
-  						<td width="10%"><span id="nameText"><%=name %></span></td>
+  						<td width="10%"><span id="nameText"></span></td>
   						<td align="right" width="10%"><span>英文名：</span></td>
-  						<td width="12%"><span id="byNameText"><%=byName %></span></td>
+  						<td width="12%"><span id="byNameText"></span></td>
   						<td align="right" width="10%"><span>联系电话：</span></td>
-  						<td width="48%"><span id="phoneText"><%=phone %></span></td>
+  						<td width="48%"><span id="phoneText"></span></td>
   					</tr>
   					<tr>
   						<td align="right" width="10%"><span>转出校区：</span></td>
-  						<td width="10%"><span id="outSchoolNameText"><%=outSchoolName %></span></td>
+  						<td width="10%"><span id="outSchoolNameText"></span></td>
   						<td align="right" width="10%"><span>原在读班级：</span></td>
-  						<td width="12%"><span id="outClassNameText"><%=outClassName %></span></td>
+  						<td width="12%"><span id="outClassNameText"></span></td>
   						<td align="right" width="10%"><span>转入校区：</span></td>
-  						<td width="48%"><span id="inSchoolNameText"><%=inSchoolName %></span></td>
+  						<td width="48%"><span id="inSchoolNameText"></span></td>
   					</tr>
   					<tr>
   						<td align="right" width="10%"><span>审批人：</span></td>
-  						<td width="10%"><span id="approveNameText"><%=approveName %></span></td>
+  						<td width="10%"><span id="approveNameText"></span></td>
   						<td align="right" width="10%"><span>审批时间：</span></td>
-  						<td width="12%"><span id="approveDateText"><%=approveDate %></span></td>
+  						<td width="12%"><span id="approveDateText"></span></td>
   						<td align="right" width="10%"><span>审批描述：</span></td>
-  						<td width="48%"><span id="approveRemarkText"><%=approveRemark %></span></td>
+  						<td width="48%"><span id="approveRemarkText"></span></td>
   					</tr>
   					<tr>
   						<td align="right" width="10%"><span>备注：</span></td>
