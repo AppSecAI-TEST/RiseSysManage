@@ -14,7 +14,7 @@
   		<div style="margin-right:5px">
   		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
  		<form id="qryFm">
-  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="5">
+  			<table class="search_tab">
   				<tr>
   					<td align="right" width="8%"><span>组织：</span></td>
   					<td align="left" width="8%">

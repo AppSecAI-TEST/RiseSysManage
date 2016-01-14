@@ -34,8 +34,7 @@
   					<td align="right" width="15%"><span>休学状态：</span></td>
   					<td align="left" width="10%">
   						<select class="easyui-combobox" name="leaveState" id="leaveState" style="width:100px;height: 25px;"
-  						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-      					onLoadSuccess:function(data){$('#leaveState').combobox('setValue',data[0].codeFlag);}"
+  						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
       					url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_LEAVE_T&codeType=LEAVE_STATE">
   						</select>
   					</td>
@@ -44,15 +43,15 @@
   				<tr>
   					<td align="right"><span>已休时长：</span></td>
   					<td>
-  						<input class="easyui-textbox"  name="leavedStartTime" id="leavedStartTime" style="width:37px;height: 25px;" />
+  						<input class="easyui-numberbox"  name="leavedStartTime" id="leavedStartTime" style="width:37px;height: 25px;" />
   						<span>至</span>
-  						<input class="easyui-textbox"  name="leavedEndTime" id="leavedEndTime" style="width:37px;height: 25px;" />
+  						<input class="easyui-numberbox"  name="leavedEndTime" id="leavedEndTime" style="width:37px;height: 25px;" />
   					</td>
   					<td align="right"><span>申请休学时长：</span></td>
   					<td>
-  						<input class="easyui-textbox"  name="leaveStartTime" id="leaveStartTime" style="width:37px;height: 25px;" />
+  						<input class="easyui-numberbox"  name="leaveStartTime" id="leaveStartTime" style="width:37px;height: 25px;" />
   						<span>至</span>
-  						<input class="easyui-textbox"  name="leaveEndTime" id="leaveEndTime" style="width:37px;height: 25px;" />
+  						<input class="easyui-numberbox"  name="leaveEndTime" id="leaveEndTime" style="width:37px;height: 25px;" />
   					</td>
   					<td align="right"><span>休学开始时间：</span></td>
   					<td colspan="2">
@@ -62,7 +61,7 @@
   					</td>
   					<td colspan="2" align="left">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px" id="qryBtn" funcNodeId="4000"><span>查询</span></a>
-						&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px" id="reset" ><span>重置</span></a>
+						&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" id="resetBtn" style="width:100px" id="reset" ><span>重置</span></a>
 					</td>
   				</tr>
   			</table>

@@ -20,22 +20,22 @@
 			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 				<tr>
 					<td align="right" width="8%">
-						校区：
+						所属校区：
 					</td>
 					<td width="12%">
-						<select id="schoolManId" name="schoolManId" style="width:100px" ></select>
+						<select id="schoolManId" name="schoolManId" style="width:100px;height:25px;" ></select>
 					</td>
 					<td align="right" width="8%">
 						课程阶段：
 					</td>
 					<td width="12%">
-						<select id="classPharse" name="classPharse" style="width:100px" ></select>
+						<select id="classPharse" name="classPharse" style="width:100px;height:25px;" ></select>
 					</td>
 					<td align="right" width="8%">
 						班级名称：
 					</td>
 					<td colspan="2">
-						<input name="classInfo" id="classInfo" type="text" style="width:100px" class="easyui-textbox" />
+						<input name="classInfo" id="classInfo" type="text" style="width:100px;height:25px;" class="easyui-textbox" />
 					</td>
 				</tr>
 				<tr>
@@ -43,19 +43,19 @@
 						学员姓名：
 					</td>
 					<td>
-						<input name="staffName" id="staffName" type="text" style="width:100px" class="easyui-textbox"  />								
+						<input name="staffName" id="staffName" type="text" style="width:100px;height:25px;" class="easyui-textbox"  />								
 					</td>
 					<td align="right">
 						联系电话：
 					</td>
 					<td>
-						<input name="contactNum" id="contactNum" type="text" style="width:100px" class="easyui-textbox" />								
+						<input name="contactNum" id="contactNum" type="text" style="width:100px;height:25px;" class="easyui-textbox" />								
 					</td>
 					<td align="right">
 						带班老师：
 					</td>
 					<td>
-						<input name="teacherMan" id="teacherMan" type="text" style="width:100px" class="easyui-textbox" />								
+						<input name="teacherMan" id="teacherMan" type="text" style="width:100px;height:25px;" class="easyui-textbox" />								
 					</td>
 					<td>
 						<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>

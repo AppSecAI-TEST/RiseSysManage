@@ -23,28 +23,28 @@
 					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 						<tr>
 							<td align="right" width="8%">
-								校区：
+								所属校区：
 							</td>
 							<td width="12%">
-								<select id="schoolManId" name="schoolManId" style="width:100px" ></select>
+								<select id="schoolManId" name="schoolManId" style="width:100px;height:25px;" ></select>
 							</td>
 							<td align="right" width="8%">	
 								课程阶段：
 							</td>
 							<td width="22%">
-								<select id="classManPharse" name="classManPharse" style="width:100px" ></select>
+								<select id="classManPharse" name="classManPharse" style="width:100px;height:25px;" ></select>
 							</td>
 							<td align="right" width="8%">
 								班级状态：
 							</td>
 							<td width="22%">
-								<select id="classManState" name="classManState" style="width:100px" ></select>
+								<select id="classManState" name="classManState" style="width:100px;height:25px;" ></select>
 							</td>
 							<td align="right" width="8%">
 								班级：
 							</td>
 							<td width="12%">
-								<select id="classMan" name="classMan" style="width:100px" ></select>
+								<select id="classMan" name="classMan" style="width:100px;height:25px;" ></select>
 							</td>
 						</tr>
 						<tr>
@@ -52,19 +52,19 @@
 								带班老师：
 							</td>
 							<td>
-								<input name="teacherMan" id="teacherMan" type="text" style="width:100px" class="easyui-textbox" />								
+								<input name="teacherMan" id="teacherMan" type="text" style="width:100px;height:25px;" class="easyui-textbox" />								
 							</td>
 							<td align="right">
 								开课日期：
 							</td>
 							<td>
-								<input name="classStartManTime" id="classStartManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="classEndManTime" id="classEndManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
+								<input name="classStartManTime" id="classStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="classEndManTime" id="classEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 							</td>
 							<td align="right">
 								结课日期：
 							</td>
 							<td>
-								<input name="overClassStartManTime" id="overClassStartManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="overClassEndManTime" id="overClassEndManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
+								<input name="overClassStartManTime" id="overClassStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="overClassEndManTime" id="overClassEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 							</td>
 							<td colspan="2" align="center">
 								<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryManFunc()">查询</a>
@@ -100,28 +100,28 @@
 					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 						<tr>
 							<td align="right" width="8%">
-								校区：
+								所属校区：
 							</td>
 							<td width="12%">
-								<select id="schoolHisId" name="schoolHisId" style="width:100px" ></select>
+								<select id="schoolHisId" name="schoolHisId" style="width:100px;height:25px;" ></select>
 							</td>
 							<td align="right" width="8%">
 								课程阶段：
 							</td>
 							<td width="22%">
-								<select id="classHisPharse" name="classHisPharse" style="width:100px" ></select>
+								<select id="classHisPharse" name="classHisPharse" style="width:100px;height:25px;" ></select>
 							</td>
 							<td align="right" width="8%">
 								上课日期：
 							</td>
 							<td width="22%">
-								<input name="classHisStart" id="classHisStart" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="classHisEnd" id="classHisEnd" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
+								<input name="classHisStart" id="classHisStart" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="classHisEnd" id="classHisEnd" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
 							</td>
 							<td align="right" width="8%">
 								班级：
 							</td>
 							<td width="12%">
-								<select id="classHis" name="classHis" style="width:110px" ></select>
+								<select id="classHis" name="classHis" style="width:100px;height:25px;" ></select>
 							</td>
 						</tr>
 						<tr>
@@ -129,7 +129,7 @@
 								老师：
 							</td>
 							<td>
-								<input name="teacherHis" id="teacherHis" type="text" style="width:100px" class="easyui-textbox" />								
+								<input name="teacherHis" id="teacherHis" type="text" style="width:100px;height:25px;" class="easyui-textbox" />								
 							</td>
 							<td align="right">
 								出勤率：

@@ -26,7 +26,7 @@
   					</td>
   					<td width="80px" align="right"><span>班级状态：</span></td>
   					<td width="140px">
-  						<select class="easyui-combobox" name="classState" id="classState" style="width:130px;height:25px;" editable="false"
+  						<select class="easyui-combobox" name="classState" id="classState" style="width:100px;height:25px;" editable="false"
   							  data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
 	      				 		url="<%=path %>/pubData/qryCodeNameList.do?tableName=DEMO&codeType=CLASS_STATE">
   						</select>
@@ -48,7 +48,7 @@
   					</td>
   					<td align="right"><span>DemoTa：</span></td>
   					<td>
-  						<select class="easyui-combobox" name="DemoTA" id="DemoTA" style="width:130px;height:25px;" editable="false"
+  						<select class="easyui-combobox" name="DemoTA" id="DemoTA" style="width:100px;height:25px;" editable="false"
   							data-options="formatter:formatTeacher, valueField: 'teacherId',textField: 'byname', panelHeight: 'auto'"
   							url ="<%=path %>/pubData/qryData.do?param={'queryCode':'qryDemoTeacherInfo','teacherType':'TA'}">
   						</select>

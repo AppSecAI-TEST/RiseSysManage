@@ -8,70 +8,69 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
 		<script type="text/javascript" src="<%=path %>/js/teaFeebackManage/teaFeebackManage.js"></script>
   	</head>
   	<body>
+  		<div style="margin-right:5px">
+  		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
  		<form id="qryFm">
-  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="5">
+  			<table class="search_tab">
   				<tr>
-  					<td align="right" width="7%">校区：</td>
-  					<td align="left" width="9%">
-  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 120px">
+  					<td align="right" width="7%"><span>所属校区：</span></td>
+  					<td align="left" width="8%">
+  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:100px;height:25px;">
 			        	</select>
   					</td>
-  					<td align="right" width="9%">课程阶段：</td>
-  					<td align="left" width="9%">
-  						<select name="stageId"  id="stageId"  style="width:120px" class="easyui-combobox" editable='false'
+  					<td align="right" width="8%"><span>课程阶段：</span></td>
+  					<td align="left" width="8%">
+  						<select name="stageId"  id="stageId"  style="width:100px;height:25px;" class="easyui-combobox" editable='false'
      						data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'"
      						url="<%=path %>/pubData/qryStage.do">
 	      				</select>
   					</td>
-  					<td align="right" width="9%">班级：</td>
-  					<td align="left" width="9%">
-						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 120px" disabled="disabled">
+  					<td align="right" width="8%"><span>班级：</span></td>
+  					<td align="left" width="8%">
+						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width:100px;height:25px;">
 			        	</select>
 					</td>
   					</td>
-  					<td align="right" width="9%">开课时间：</td>
-  					<td align="left" width="9%">
-  						<input class="easyui-datebox" name="startTime" id="startTime" style="width:120px;" />
+  					<td align="right" width="8%"><span>开课时间：</span></td>
+  					<td align="left" width="8%">
+  						<input class="easyui-datebox" name="startTime" id="startTime" style="width:100px;height:25px;" />
   					</td>
-  					<td align="center" width="3%">至：</td>
-  					<td align="left" width="15%">
-  						<input class="easyui-datebox" name="endTime" id="endTime" style="width:120px;" />
+  					<td align="center" width="2%"><span>至</span></td>
+  					<td align="left" width="20%">
+  						<input class="easyui-datebox" name="endTime" id="endTime" style="width:100px;height:25px;" />
   					</td>
   					<td></td>
   				</tr>
   				<tr>
-  					<td align="right">带班老师：</td>
+  					<td align="right"><span>带班老师：</span></td>
   					<td align="left">
-  						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 120px"
-							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'" 
-		      				url="<%=path %>/pubData/qryData.do?param={'queryCode':'qryClassTeacherInfo'}">
+  						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width:100px;height:25px;">
 				        </select>
   					</td>
-  					<td align="right">是否反馈：</td>
-  					<td align="left">
+  					<td align="right"><span>是否反馈：</span></td>
+  					<td align="center">
   						<input name="feedback" type="checkbox" value="Y" style="margin:0 auto;vertical-align:middle;" /><span>是</span>
   						&nbsp;&nbsp;&nbsp;<input name="feedback" type="checkbox" value="N" style="margin:0 auto;vertical-align:middle;" /><span>否</span>
   					</td>
   					<td align="right" width="10%"><span>教质月份：</span></td>
 					<td align="left" width="10%">
-						<input class="easyui-datebox" type="text" style="width:120px" id="time" editable="false" data-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:100px;height:25px;" id="time" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
-  					<td align="right">班级状态：</td>
+  					<td align="right"><span>班级状态：</span></td>
   					<td align="left">
-  						<select id="classState" name="classState" class="easyui-combobox" style="width:120px;"
+  						<select id="classState" name="classState" class="easyui-combobox" style="width:100px;height:25px;"
 	  						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
 	      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE&codeFlag=003,004">
         				</select>
   					</td>
-  					<td colspan="3" align="center">
-						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:90px; height: 25px;" id="qryBtn" funcNodeId="4500">查询</a>
-						&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:90px; height: 25px;" id="reset" >重置</a>
+  					<td colspan="2" align="center">
+						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px;" id="qryBtn" funcNodeId="4500"><span>查询</span></a>
+						&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px;" id="reset" ><span>重置</span></a>
 					</td>
+					<td></td>
   				</tr>
   			</table>
  		</form>
@@ -80,22 +79,23 @@
 			<thead>
 				<tr>
 					<th field="ck" align="center" checkbox="true" width="1%"></th>
-					<th field="schoolName" align="center" width="10%">校区</th>
-					<th field="className" align="center" width="10%">班级名称</th>
-					<th field="openDate" align="center" width="10%">开课时间</th>
-					<th field="teacherName" align="center" width="10%">带班老师</th>
-					<th field="reflect" align="center" width="9%">是否反馈</th>
-					<th field="createDate" align="center" width="10%">反馈时间</th>
-					<th field="teachingDate" align="center" width="10%">电教时间</th>
-					<th field="meetingDate" align="center" width="10%">家长会时间</th>
-					<th field="openClassDate" align="center" width="10%">公开课时间</th>
-					<th field="gradDate" align="center" width="10%">毕业典礼时间</th>
+					<th field="schoolName" align="center" width="10%"><span>校区</span></th>
+					<th field="className" align="center" width="10%"><span>班级名称</span></th>
+					<th field="openDate" align="center" width="10%"><span>开课时间</span></th>
+					<th field="teacherName" align="center" width="10%"><span>带班老师</span></th>
+					<th field="reflect" align="center" width="9%"><span>是否反馈</span></th>
+					<th field="createDate" align="center" width="10%"><span>反馈时间</span></th>
+					<th field="teachingDate" align="center" width="10%"><span>电教时间</span></th>
+					<th field="meetingDate" align="center" width="10%"><span>家长会时间</span></th>
+					<th field="openClassDate" align="center" width="10%"><span>公开课时间</span></th>
+					<th field="gradDate" align="center" width="10%"><span>毕业典礼时间</span></th>
 				</tr>
 			</thead>
 		</table>
-		<div id="toolbar">
-   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="addTeaFeedBack()">反馈维护</a>
- 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" onclick="viewTeaFeedBack()">浏览</a>
+		<div id="toolbar" style="padding: 2px;height:auto;">
+   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="addTeaFeedBack()"><span>反馈维护</span></a>
+ 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" style="width:100px;" onclick="viewTeaFeedBack()"><span>浏览</span></a>
+ 		</div>
  		</div>
  		<script type="text/javascript">
 		$(function () {

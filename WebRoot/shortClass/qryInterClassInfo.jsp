@@ -20,7 +20,7 @@
 			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 				<tr>
 					<td align="right" width="12%">
-						校区：
+						所属校区：
 					</td>
 					<td width="12%">
 						<select id="schoolId" name="schoolId" style="width:100px;height:25px;" ></select>
@@ -36,13 +36,13 @@
 						缴费日期：
 					</td>
 					<td width="22%">
-						<input name="feeStartTime" id="feeStartTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="feeEndTime" id="feeEndTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
+						<input name="feeStartTime" id="feeStartTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="feeEndTime" id="feeEndTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
 					</td>
 					<td align="right" width="8%">
 						联系电话：
 					</td>
 					<td>
-						<input name="contactPhone" id="contactPhone" type="text" class="easyui-textbox" style="width:100px; height: 25px;"/>
+						<input name="contactPhone" id="contactPhone" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 					</td>
 				</tr>
 				<tr>
@@ -57,7 +57,7 @@
 						国际班类型：
 					</td>
 					<td>
-						<select id="interClassType" name="interClassType" style="width:100px" ></select>								
+						<select id="interClassType" name="interClassType" style="width:100px;height:25px;" ></select>								
 					</td>
 					<td align="right">
 						是否选班：

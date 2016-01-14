@@ -38,7 +38,7 @@
 			<div data-options="region:'north',title:'考勤信息',collapsible:false,height:550,maxHeight:550,border:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;">
 				<table align="center" class="tab" style="height:85%;width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc" border="0" cellpadding="0" cellspacing="0">
 					<tr>
-						<td align="left" colspan="14">考勤月份：<select id="yearList" name="yearList" style="width:100px" ></select>&nbsp;&nbsp;<select id="monthList" name="monthList" style="width:100px" ></select></td>
+						<td align="left" colspan="14">考勤月份：<select id="yearList" name="yearList" style="width:100px;height:25px;" ></select>&nbsp;&nbsp;<select id="monthList" name="monthList" style="width:100px;height:25px;" ></select></td>
 					</tr>
 					<tr>
 						<td align="center" width="14%" colspan="2">周日</td>

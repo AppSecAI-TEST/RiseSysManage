@@ -48,7 +48,7 @@
   					<td align="left">
   						 <select name="stageId"  id="stageId" style="width:100px;height:25px;" class="easyui-combobox" editable='false'
      						data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'"
-     						url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=601&fieldId=stageId">
+     						url="<%=path %>/pubData/qryStage.do">
 	      				</select>
   					</td>
   					<td align="right"><span>带班数量：</span></td>

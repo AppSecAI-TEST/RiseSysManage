@@ -19,7 +19,7 @@
 	  				<tr>
 	  					<td width="100px" align="right"><span>扎帐月份：</span></td>
 						<td width="114px">
-							<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="tieOffTime" name="tieOffTime" data-options="formatter:myYearMonthformatter, parser:myparser" />
+							<input class="easyui-datebox" type="text" style="width:100px;height:25px;" id="tieOffTime" name="tieOffTime" data-options="formatter:myYearMonthformatter, parser:myparser" />
 						</td>
 						<td style="padding-left:60px">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" onclick="queryFunc()">查询</a>&nbsp;

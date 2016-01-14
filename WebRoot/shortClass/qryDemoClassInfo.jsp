@@ -20,7 +20,7 @@
 			<table align="center" style="min-width:1200px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 				<tr>
 					<td align="right" width="10%">
-						校区：
+						所属校区：
 					</td>
 					<td width="10%">
 						<select id="schoolId" name="schoolId" style="width:120px;" ></select>

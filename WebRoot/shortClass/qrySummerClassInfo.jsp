@@ -20,7 +20,7 @@
 			<table align="center" style="min-width:1200px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 				<tr>
 					<td align="right" width="7%">
-						校区：
+						所属校区：
 					</td>
 					<td width="10%">
 						<select id="schoolId" name="schoolId" style="width:100px;height:25px;" ></select>
@@ -36,13 +36,13 @@
 						缴费日期：
 					</td>
 					<td width="20%">
-						<input name="feeStartTime" id="feeStartTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="feeEndTime" id="feeEndTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
+						<input name="feeStartTime" id="feeStartTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="feeEndTime" id="feeEndTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
 					</td>
 					<td align="right" width="9%">
 						联系电话：
 					</td>
 					<td colspan="3">
-						<input name="contactPhone" id="contactPhone" type="text" class="easyui-textbox" style="width:100px; height: 25px;"/>
+						<input name="contactPhone" id="contactPhone" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 					</td>
 				</tr>
 				<tr>
@@ -50,13 +50,13 @@
 						赠课类型：
 					</td>
 					<td>
-						<select id="classType" name="classType" style="width:100px" ></select>								
+						<select id="classType" name="classType" style="width:100px;height:25px;" ></select>								
 					</td>
 					<td align="right">
 						赠课状态：
 					</td>
 					<td>
-						<select id="classState" name="classState" style="width:100px" ></select>				
+						<select id="classState" name="classState" style="width:100px;height:25px;" ></select>				
 					</td>
 					<td align="right">
 						是否过期：
@@ -69,7 +69,7 @@
 						几天内过期：
 					</td>
 					<td>
-						<input name="expireDate" id="expireDate" type="text" class="easyui-textbox" style="width:100px; height: 25px;"/>
+						<input name="expireDate" id="expireDate" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 					</td>
 					<td colspan="2">
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
