@@ -27,22 +27,18 @@ $(document).ready(function() {
 				$("#classType").val(obj.classType);
 				$("#studentId").val(obj.studentId);
 				$("#outClassId").val(obj.classInstId);
+				
+				$("#planInClassId").combobox({
+					url : "/sys/pubData/qryClassInstList.do?schoolId="+obj.schoolId+"&courseType=001&stageId="+obj.stageId+"&classType="+obj.classType+"&classState='001','002','003'&classInstId="+obj.classInstId,//返回json数据的url
+					valueField : "classInstId",
+					textField : "className",
+					panelHeight : "auto",
+					formatter : function(data) {
+						return "<span>" + data.className + "</span>";
+					}
+				});
 			});
 		}
-	});
-	
-	var stageId = $("#stageId").val();
-	var schoolId = $("#schoolId").val();
-	var classType = $("#classType").val();
-	var outClassId = $("#outClassId").val();
-	$("#planInClassId").combobox({
-		url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType=001&stageId="+stageId+"&classType="+classType+"&classState='001','002','003'&classInstId="+outClassId,//返回json数据的url
-    	valueField : "classInstId",
-    	textField : "className",
-    	panelHeight : "auto",
-    	formatter : function(data) {
-    		return "<span>" + data.className + "</span>";
-    	}
 	});
 	
     //上传

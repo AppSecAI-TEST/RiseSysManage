@@ -3,6 +3,7 @@
 	String path = request.getContextPath();
 	String applyId = request.getParameter("applyId");
 	String schoolId = request.getParameter("schoolId");
+	System.err.println(schoolId)
 	String studentId = request.getParameter("studentId");
 	String studentCourseId = request.getParameter("studentCourseId");
 %>

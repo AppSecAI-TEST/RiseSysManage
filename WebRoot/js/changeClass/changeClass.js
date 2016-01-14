@@ -10,42 +10,8 @@ $(document).ready(function() {
 		}
 	});
 	
-//	$("#qryApplyBtn").click(function() {
-//		var obj = JSON.stringify($("#qryApplyFm").serializeObject());
-//    	obj = obj.substring(0, obj.length - 1);
-//    	var funcNodeId = $("#qryApplyBtn").attr("funcNodeId");
-//    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-//    	$('#apply_list_data').datagrid({
-//    		url : "/sys/pubData/qryDataListByPage.do",
-//    		queryParams:{
-//    			param : obj
-//    		},
-//    		onLoadSuccess:function(){
-//    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
-//    			$('#apply_list_data').datagrid('clearSelections');
-//    		}
-//    	});
-//	});
-//	
-//	$("#qryApproveBtn").click(function() {
-//		var obj = JSON.stringify($("#qryApproveFm").serializeObject());
-//    	obj = obj.substring(0, obj.length - 1);
-//    	var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");
-//    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-//    	$('#approve_list_data').datagrid({
-//    		url : "/sys/pubData/qryDataListByPage.do",
-//    		queryParams:{
-//    			param : obj
-//    		},
-//    		onLoadSuccess:function(){
-//    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
-//    			$('#approve_list_data').datagrid('clearSelections');
-//    		}
-//    	});
-//	});
-	
-	initQryButton("qryApplyBtn", "reset", "qryApplyFm", "apply_list_data");
-	initQryButton("qryApproveBtn", "resetApprove", "qryApproveFm", "approve_list_data");
+	initRPQryButton("qryApplyBtn", "reset", "qryApplyFm", "apply_list_data");
+	initRPQryButton("qryApproveBtn", "resetApprove", "qryApproveFm", "approve_list_data");
 	
 	var staffId = $("#handlerId").val();
 	var funcNodeId = $("#funcNodeId").val();
@@ -56,11 +22,6 @@ $(document).ready(function() {
     	panelHeight : "auto",
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
-    	},
-    	onLoadSuccess : function(data) {
-    		if(data.length > 0) {
-    			$("#schoolId").combobox("setValue", data[0].schoolId);
-    		}
     	},
     	onChange : function(n, o) {
     		if(n != "" && n != null && n != undefined) {
@@ -126,11 +87,6 @@ $(document).ready(function() {
     	panelHeight : "auto",
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
-    	},
-    	onLoadSuccess : function(data) {
-    		if(data.length > 0) {
-    			$("#approveSchoolId").combobox("setValue", data[0].schoolId);
-    		}
     	},
     	onChange : function(n, o) {
     		if(n != "" && n != null && n != undefined) {
