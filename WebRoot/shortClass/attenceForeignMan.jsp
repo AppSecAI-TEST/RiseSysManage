@@ -20,28 +20,28 @@
 			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 				<tr>
 					<td align="right" width="7%">
-						校区：
+						所属校区：
 					</td>
 					<td width="10%">
-						<select id="schoolManId" name="schoolManId" style="width:100px" ></select>
+						<select id="schoolManId" name="schoolManId" style="width:100px;height:25px;" ></select>
 					</td>
 					<td align="right" width="7%">	
 						课程阶段：
 					</td>
 					<td width="10%">
-						<select id="classManPharse" name="classManPharse" style="width:100px" ></select>
+						<select id="classManPharse" name="classManPharse" style="width:100px;height:25px;" ></select>
 					</td>
 					<td align="right" width="11%">
 						外教课班级状态：
 					</td>
 					<td width="10%">
-						<select id="classManState" name="classManState" style="width:100px" ></select>
+						<select id="classManState" name="classManState" style="width:100px;height:25px;" ></select>
 					</td>
 					<td align="right" width="9%">
 						实际上课日期：
 					</td>
 					<td width="22%">
-						<input name="openStartManTime" id="openStartManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="openEndManTime" id="openEndManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
+						<input name="openStartManTime" id="openStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="openEndManTime" id="openEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 					</td>
 				</tr>
 				<tr>

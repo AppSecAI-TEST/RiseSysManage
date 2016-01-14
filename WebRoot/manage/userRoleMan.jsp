@@ -131,24 +131,38 @@
 					$('#dlg').dialog('open').dialog('setTitle','修改角色');
 					$('#fm').form('clear');
 					$('#fm').form('load',row);
-					var schoolArr = row.schoolIds;
+					var schoolArr = eval("["+row.schoolIds+"]");
 					var isAllSelect = true;
 					$("input[name='schoolIds']").each(function(i,node){
-						if(schoolArr.indexOf(node.value) != -1){
-							node.checked = true;
+						var i = 0,n = schoolArr.length;
+						for(;i < n;i++)
+						{
+							if(schoolArr[i] == node.value)
+							{
+								node.checked = true;
+								break;
+							}
 						}
-						else{
+						if(i >= n)
+						{
 							isAllSelect = false;
 						}
 					});
 					$("#checkAllSchool").get(0).checked = isAllSelect;
-					var stageArr = row.stageIds;
+					var stageArr = eval("["+row.stageIds+"]");
 					isAllSelect = true;
 					$("input[name='stageIds']").each(function(i,node){
-						if(stageArr.indexOf(node.value) != -1){
-							node.checked = true;
+						var i = 0,n = stageArr.length;
+						for(;i < n;i++)
+						{
+							if(stageArr[i] == node.value)
+							{
+								node.checked = true;
+								break;
+							}
 						}
-						else{
+						if(i >= n)
+						{
 							isAllSelect = false;
 						}
 					});

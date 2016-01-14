@@ -36,7 +36,7 @@
 						缴费日期：
 					</td>
 					<td width="22%">
-						<input name="payStartManTime" id="payStartManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="payEndManTime" id="payEndManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
+						<input name="payStartManTime" id="payStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="payEndManTime" id="payEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
 					</td>
 				</tr>
 				<tr>
@@ -56,7 +56,7 @@
 						课程状态：
 					</td>
 					<td>
-						<select id="classState" name="classState" style="width:100px" ></select>										
+						<select id="classState" name="classState" style="width:100px;height:25px;" ></select>										
 					</td>
 					<td colspan="2" align="center">
 						<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
