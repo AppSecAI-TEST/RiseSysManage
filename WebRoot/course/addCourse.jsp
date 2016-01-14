@@ -223,7 +223,7 @@
 			      	         <td id='td0' ><select editable='false' class="easyui-combobox" id="giftType" style="width: 100px; height: 25px;"></select></td>
 			      	         <td id="td1" style="display:none"><select editable='false'  class="easyui-combobox" id="giftId" style="width: 100px; height: 25px;"></select></td>
 			      	         <td id="td2" style="display:none"><input   id="giftCode" type="text" class="easyui-textbox validatebox"  style="width:100px; height: 25px;"/></td>
-		                     <td id="td3" style="display:none"><input   id="giftEffDate" type="text" class="easyui-datebox"  style="width: 100px; height: 25px;"/></td>
+		                     <td id="td3" style="display:none"><input   id="giftEffDate" type="text" class="easyui-datebox"  style="width: 120px; height: 25px;"/></td>
 	      	             </tr>
       	            </table>
       	            </td>

@@ -138,6 +138,11 @@
 		</div>
 
 		<script type="text/javascript">
+		
+		//监控退出
+		
+		
+		
 			var gMenuArr = [];
 			var MenuInfo = function(menuId , menuData){
 				this.menuId = menuId;
