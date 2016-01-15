@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	initQryButton("qryBtn", "reset", "qryFm", "list_data");
+	initRPQryButton("qryBtn", "reset", "qryFm", "list_data");
 	
 	//批量选班
 	//将学员添加到班级中

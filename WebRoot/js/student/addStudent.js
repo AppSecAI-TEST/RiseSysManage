@@ -345,71 +345,80 @@ $(document).ready(function() {
     //学员注册
     $("#studentSubmit").click(function() {
     	if($("#studentFm").form('validate')) {
-    		if(validateFlag) {
-        		if(isExists) {
-        			$.messager.alert('提示', "该学员已存在资料，不需要再进行注册！");
-        		} else {
-        			if($("[name='contacts']").length > 0) {
-            			var flag = true;
-            			var identityId = $("#identityId").textbox("getValue");
-            			var identityType = $('#identityType').combobox('getValue');
-            			if(identityId != null && identityId != "" && identityId != undefined && identityType == "2BA"
-            					&& identityType != null && identityType != "" && identityType != undefined) {
-            				var birthday = $("#birthday").datebox("getValue");
-            				birthday = birthday.replace(/-/g, "");
-            				if(birthday != identityId.substring(6, 14)) {
-            					flag = false;
-            				}
-            			}
-            			if(flag) {
-            				var obj = JSON.stringify($("#studentFm").serializeObject());
-            				var contactArray = "[";
-            				$("[name='contacts']").each(function() {
-            					contactArray += "{identityId:\""+$(this).attr("identityId")+"\",identityType:\""+$(this).attr("identityType")+"\",name:\""+$(this).attr("contactName")+"\",phone:\""+$(this).attr("phone")+"\",relationType:\""+$(this).attr("relationType")+"\",job:\""+$(this).attr("job")+"\",used:\""+$(this).attr("used")+"\"},";
-            				});
-            				contactArray = contactArray.substring(0, contactArray.length - 1) + "]";
-            				var realSchoolArray = "[";
-            				if($("[name='realSchools']").length > 0) {
-            					$("[name='realSchools']").each(function() {
-            						realSchoolArray += "{schoolType:\""+$(this).attr("schoolType")+"\",realSchoolName:\""+$(this).attr("realSchoolName")+"\"},";
-            					});
-            					realSchoolArray = realSchoolArray.substring(0, realSchoolArray.length - 1);
-            				}
-            				realSchoolArray += "]";
-            				var param = "{studentInfo:"+obj+",contactArray:"+contactArray+",realSchoolArray:"+realSchoolArray+"}";
-            				param = encodeURI(param);
-            				$.ajax({
-            					url: "/sys/student/addStudent.do",
-            					data: "param=" + param,
-            					dataType: "json",
-            					async: true,
-            					beforeSend: function()
-            					{
-            						$.messager.progress({title : '学员注册', msg : '学员正在注册，请稍等……'});
-            					},
-            					success: function (data) {
-            						$.messager.progress('close'); 
-            						var flag = data.flag
-            						if(flag) {
-            							$.messager.alert('提示', "学员注册成功！", "info", function() {window.history.back();});
-            						} else {
-            							$.messager.alert('提示', data.msg);
-            						}
-            					} 
-            				});
-            			} else {
-            				$.messager.alert('提示', "出生日期需要与本人身份证号码中的出生日期一致！");
-            			}
-            		} else {
-            			$.messager.alert('提示', "请至少添加一个联系人信息！");
-            		}
-        		}
-        	} else {
-        		$.messager.alert('提示', "请先对学员进行验重！");
-        	}
-    	}
-    	else
-    	{
+    		var sex = $("input:radio[name='sex']:checked").val();
+    		if(sex != "" && sex != null && sex != undefined) {
+    			if(validateFlag) {
+    				if(isExists) {
+    					$.messager.alert('提示', "该学员已存在资料，不需要再进行注册！");
+    				} else {
+    					if($("[name='contacts']").length > 0) {
+    						var flag = true;
+    						var identityId = $("#identityId").textbox("getValue");
+    						var identityType = $('#identityType').combobox('getValue');
+    						if(identityId != null && identityId != "" && identityId != undefined && identityType == "2BA"
+    							&& identityType != null && identityType != "" && identityType != undefined) {
+    							var birthday = $("#birthday").datebox("getValue");
+    							birthday = birthday.replace(/-/g, "");
+    							if(birthday != identityId.substring(6, 14)) {
+    								flag = false;
+    							}
+    						}
+    						if(flag) {
+    							var advisterIdA = $("#advisterIdA").combobox("getValue");
+    							var advisterIdB = $("#advisterIdB").combobox("getValue");
+    							if(advisterIdA != advisterIdB) {
+    								var obj = JSON.stringify($("#studentFm").serializeObject());
+    								var contactArray = "[";
+    								$("[name='contacts']").each(function() {
+    									contactArray += "{identityId:\""+$(this).attr("identityId")+"\",identityType:\""+$(this).attr("identityType")+"\",name:\""+$(this).attr("contactName")+"\",phone:\""+$(this).attr("phone")+"\",relationType:\""+$(this).attr("relationType")+"\",job:\""+$(this).attr("job")+"\",used:\""+$(this).attr("used")+"\"},";
+    								});
+    								contactArray = contactArray.substring(0, contactArray.length - 1) + "]";
+    								var realSchoolArray = "[";
+    								if($("[name='realSchools']").length > 0) {
+    									$("[name='realSchools']").each(function() {
+    										realSchoolArray += "{schoolType:\""+$(this).attr("schoolType")+"\",realSchoolName:\""+$(this).attr("realSchoolName")+"\"},";
+    									});
+    									realSchoolArray = realSchoolArray.substring(0, realSchoolArray.length - 1);
+    								}
+    								realSchoolArray += "]";
+    								var param = "{studentInfo:"+obj+",contactArray:"+contactArray+",realSchoolArray:"+realSchoolArray+"}";
+    								param = encodeURI(param);
+    								$.ajax({
+    									url: "/sys/student/addStudent.do",
+    									data: "param=" + param,
+    									dataType: "json",
+    									async: true,
+    									beforeSend: function()
+    									{
+    										$.messager.progress({title : '学员注册', msg : '学员正在注册，请稍等……'});
+    									},
+    									success: function (data) {
+    										$.messager.progress('close'); 
+    										var flag = data.flag
+    										if(flag) {
+    											$.messager.alert('提示', "学员注册成功！", "info", function() {window.history.back();});
+    										} else {
+    											$.messager.alert('提示', data.msg);
+    										}
+    									} 
+    								});
+    							} else {
+    								$.messager.alert('提示', "招生顾问A和招生顾问B不能选择同一人！");
+    							}
+    						} else {
+    							$.messager.alert('提示', "出生日期需要与本人身份证号码中的出生日期一致！");
+    						}
+    					} else {
+    						$.messager.alert('提示', "请至少添加一个联系人信息！");
+    					}
+    				}
+    			} else {
+    				$.messager.alert('提示', "请先对学员进行验重！");
+    			}
+    		} else {
+    			$.messager.alert('提示', "请先选择学员的性别！");
+    		}
+    	} else {
     		$("#studentFm").find(".textbox-text.validatebox-text.validatebox-invalid:first").trigger("mouseover");
     	}	
     });

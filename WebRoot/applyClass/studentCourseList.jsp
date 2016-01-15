@@ -31,7 +31,7 @@
   					<td width="114px">
   						<select id="oldClassInstId" name="oldClassInstId" class="easyui-combobox" style="width: 114px; height: 25px;"
   							data-options="formatter:function(row) {return '<span>' + row.className + '</span>';}, valueField: 'classInstId', textField: 'className', panelHeight: 'auto'"
-  							url="<%=path %>/pubData/qryClassInstList.do?schoolId=<%=schoolId %>&courseType=001&stageId=&classType=&classState='001','002','003','004'&classInstId=">
+  							url="<%=path %>/pubData/qryClassInstList.do?schoolId=<%=schoolId %>&courseType=001&stageId=&classType=&classState='001','002','003','004'&classInstId=<%=classInstId %>">
 		        		</select>
   					</td>
   					<td align="right"><span>学员姓名：</span></td>
@@ -78,7 +78,7 @@
   		</form>
   		<div style="padding:5px 0;min-width:1100px; width:100%;">
   			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" 
-  				url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1004&param={'classType':'<%=classType %>','schoolId':'<%=schoolId %>'}" 
+  				url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1004&param={'classType':'<%=classType %>','schoolId':'<%=schoolId %>','classInstId':'<%=classInstId %>'}" 
 				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 				<thead>
 					<tr>

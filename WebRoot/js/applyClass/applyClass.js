@@ -129,9 +129,16 @@ $(document).ready(function() {
 		if(row) {
 			var classState = row.classState;
 			if(classState == "001" || classState == "002") {
-				var classInstId = row.classInstId;
-				var funcNodeId = $("#funcNodeId").val();
-				window.location.href = "/sys/applyClass/qryCreateClass.do?classInstId="+classInstId+"&type=update&applyType=001&classState="+classState+"&funcNodeId="+funcNodeId;
+				var tacheState = row.tacheState;
+				//审批通过  放班取消申请  取消放班审批未通过
+				if(tacheState == "002" || tacheState == "004" || tacheState == "006") {
+					var classInstId = row.classInstId;
+					var funcNodeId = $("#funcNodeId").val();
+					window.location.href = "/sys/applyClass/qryCreateClass.do?classInstId="+classInstId+"&type=update&applyType=001&classState="+classState+"&funcNodeId="+funcNodeId;
+				} else {
+					var tacheStateText = row.tacheStateText;
+					$.messager.alert('提示', "您选择的班级已"+tacheStateText+"，不能维护该班级！");
+				}
 			} else {
 				var classStateText = row.classStateText;
 				$.messager.alert('提示', "您选择的班级为"+classStateText+"，不能维护该班级！");
