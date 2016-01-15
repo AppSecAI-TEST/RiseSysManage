@@ -149,19 +149,14 @@
 						}
 					});
 					$("#checkAllSchool").get(0).checked = isAllSelect;
-					var stageArr = eval("["+row.stageIds+"]");
+					var stageArr = row.stageIds;
 					isAllSelect = true;
 					$("input[name='stageIds']").each(function(i,node){
-						var i = 0,n = stageArr.length;
-						for(;i < n;i++)
+						if(stageArr.indexOf(node.value) != -1)
 						{
-							if(stageArr[i] == node.value)
-							{
-								node.checked = true;
-								break;
-							}
+							node.checked = true;
 						}
-						if(i >= n)
+						else
 						{
 							isAllSelect = false;
 						}

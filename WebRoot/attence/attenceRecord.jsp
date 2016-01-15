@@ -97,7 +97,7 @@
 					<td align="center">${node.studentT.byName}</td>
 					<td align="center">${node.studentCourseT.courseStateName}</td>
 					<td align="center"><input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}1" value="N" checked="checked" /><label for="attendType${node.studentId}1">正常上课</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}2" value="B" /><label for="attendType${node.studentId}2">迟到</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}3" value="L" /><label for="attendType${node.studentId}3">请假</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}4" value="T" /><label for="attendType${node.studentId}4">旷课</label>&nbsp;&nbsp;&nbsp;&nbsp;<input class="easyui-filebox" name="uploadAttenceLeave${node.studentId}" data-options="prompt:'',buttonText:'上传请假单'" style="width:200px"></td>
-					<td align="center"><input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" checked="checked" /><label for="dress${node.studentId}1">未穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" /><label for="dress${node.studentId}2">已穿校服</label></td>
+					<td align="center"><input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" checked="checked" /><label for="dress${node.studentId}2">已穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" /><label for="dress${node.studentId}1">未穿校服</label></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -199,7 +199,24 @@
 					ajaxLoading("添加中...");
 					$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:attRecordTeacherId},function(data){
 						ajaxLoadEnd();
-						var trData = "<tr id='teacherId"+data.teacherId+"'><td align='right' teacherId='"+data.teacherId+"' teacherName='"+$("#attRecordTeacherId").combobox("getText")+"' teacherType='"+$("#attRecordClassType").combobox("getText")+"' hours='"+attRecordLessonHour+"'>老师：</td><td align='center'>"+$("#attRecordSchoolId").combobox("getText")+"</td><td align='center'>"+$("#attRecordTeacherId").combobox("getText")+"</td><td align='center'>"+$("#attRecordClassType").combobox("getText")+"</td><td align='center'>"+attRecordLessonHour+"</td><td align='center'>"+(data.teacherLicenseList.length>0?"已持证":"未持证")+"</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
+						var trData = "<tr id='teacherId"+data.teacherId+"'><td align='right' teacherId='"+data.teacherId+"' teacherName='"+$("#attRecordTeacherId").combobox("getText")+"' teacherType='"+$("#attRecordClassType").combobox("getText")+"' hours='"+attRecordLessonHour+"'>老师：</td><td align='center'>"+$("#attRecordSchoolId").combobox("getText")+"</td><td align='center'>"+$("#attRecordTeacherId").combobox("getText")+"</td><td align='center'>"+$("#attRecordClassType").combobox("getText")+"</td><td align='center'>"+attRecordLessonHour+"</td><td align='center'>"
+						var i = 0,n = data.teacherLicenseList.length;
+						for(;i < n;i++)
+						{
+							if("${classInstT.stageId}" == data.teacherLicenseList[i].stageId)
+							{
+								break;
+							}
+						}
+						if(i >= n)
+						{
+							trData+="未持证";
+						}
+						else
+						{
+							trData+="已持证";
+						}
+						trData+="</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
 						$("#teacherTab tr:last").after(trData);
 					},"json");
 				}
@@ -217,7 +234,7 @@
 			function attendSubmit()
 			{
 				var classOpenDate = '<fmt:formatDate value="${classInstT.openDate}" pattern="yyyy-MM-dd" />';
-				var calDate = "${classSchooltime}";
+				var calDate = "${selDateStr}-${dateValue}";
 				if(classOpenDate != calDate && "${isFirstFlag}" == "Y")
 				{
 					$.messager.alert("提示", "第一次考勤时间与开课时间不一致,请核实后重新尝试","warning");

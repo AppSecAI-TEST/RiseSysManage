@@ -21,6 +21,7 @@ import com.rise.model.SchooltimeInstT;
 import com.rise.model.SchooltimeT;
 import com.rise.pub.base.JacksonJsonMapper;
 import com.rise.pub.invoke.ServiceEngine;
+import com.rise.pub.util.ObjectCensor;
 import com.rise.pub.util.StringUtil;
 
 @Service
@@ -84,7 +85,14 @@ public class ClassAttendService
 			model.addObject("errorInfo", err.getMessage());
 		}
 		model.addObject("selDateStr", selDateStr);
-		model.addObject("dateValue", dateValue);
+		if(ObjectCensor.isStrRegular(dateValue))
+		{
+			if(dateValue.length() == 1)
+			{
+				dateValue = "0"+dateValue;
+			}
+			model.addObject("dateValue", dateValue);
+		}
 		model.addObject("funcNodeId", funcNodeId);
 	}
 	
