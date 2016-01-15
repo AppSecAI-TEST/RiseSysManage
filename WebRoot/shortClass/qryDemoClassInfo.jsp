@@ -3,90 +3,82 @@
 	String path = request.getContextPath();
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!doctype html>
 <html>
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<style type="text/css">
-			td{
-				font-size:14px;
-				font-family:"微软雅黑";
-			}
-		</style>
   	</head>
   	<body>
-		<form id="manFm" style="margin:0 auto;">
-			<table align="center" style="min-width:1200px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+  		<div style="margin-right:5px">
+  		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
+		<form id="manFm" >
+			<table class="search_tab">
 				<tr>
-					<td align="right" width="10%">
-						所属校区：
+					<td align="right" width="8%">
+						<span>所属校区：</span>
 					</td>
-					<td width="10%">
-						<select id="schoolId" name="schoolId" style="width:120px;" ></select>
+					<td align="left" width="8%">
+						<select id="schoolId" name="schoolId" style="width:100px;height:25px;" ></select>
 					</td>
-					<td align="right" width="10%">	
-						班级状态：
+					<td align="right" width="8%">	
+						<span>班级状态：</span>
 					</td>
-					<td width="10%">
-						<select id="classState" name="classState" class="easyui-combobox" style="width:120px;">
+					<td align="left" width="8%">
+						<select id="classState" name="classState" class="easyui-combobox" style="width:100px;height:25px;">
       					</select>
 					</td>
-					<td align="right" width="10%">
-						上课日期：
+					<td align="right" width="8%">
+						<span>DEMO T：</span>
 					</td>
-					<td width="25%">
-						<input name="schoolStartTime" id="schoolStartTime" type="text" style="width:120px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />&nbsp;至&nbsp;<input name="schoolendTime" id="schoolendTime" type="text" style="width:120px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
+					<td align="left" width="8%">
+						<select id="demoT" name="demoT" class="easyui-combobox" style="width:100px;height:25px;" ></select>								
 					</td>
-					<td>
+					<td align="right" width="8%">
+						<span>DEMO Ta：</span>
 					</td>
+					<td align="left" width="8%">
+						<select id="demoTa" name="demoTa" class="easyui-combobox" style="width:100px;height:25px;" ></select>				
+					</td>
+					<td align="right" width="8%">
+						<span>上课日期：</span>
+					</td>
+					<td width="28%">
+						<input name="schoolStartTime" id="schoolStartTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />&nbsp;至&nbsp;<input name="schoolendTime" id="schoolendTime" type="text" style="width:120px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
+					</td>
+					
 				</tr>
 				<tr>
-					<td align="right">
-						DEMO T：
+					<td align="center" colspan="10">
+						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="queryFunc()"><span>查询</span></a>
+						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px;" onclick=""><span>重置</span></a>
 					</td>
-					<td>
-						<select id="demoT" name="demoT" class="easyui-combobox" style="width:120px;" ></select>								
-					</td>
-					<td align="right">
-						DEMO Ta：
-					</td>
-					<td>
-						<select id="demoTa" name="demoTa" class="easyui-combobox" style="width:120px;" ></select>				
-					</td>
-					<td align="right" colspan="2">
-						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
-						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="">重置</a>
-					</td>
-					<td></td>
 				</tr>
 			</table>
 		</form>
-		<div style="padding:5px 0;min-width:1100px; width:100%">
-			<table class="easyui-datagrid" title="排课列表" style="height:550px" id="manList" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
-				<thead>
-					<tr>
-						<th width="1%" align="center" data-options="field:'shortClassInstId',checkbox:true"></th>
-						<th width="12%" align="center" field="schoolName">校区</th>
-						<th width="18%" align="center" field="schoolDate">上课时间</th>
-						<th width="14%" align="center" field="classStateVal">班级状态</th>
-						<th width="14%" align="center" field="demoT">计划Demo T</th>
-						<th width="14%" align="center" field="demoTa">计划Demo TA</th>
-						<th width="15%" align="center" field="createDate">创建时间</th>
-						<th width="12%" align="center" field="handlerName">创建人</th>
-					</tr>
-				</thead>
-			</table>
-			<div id="toolbar">
-	   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="addClassManage()">排课管理</a>
-	 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" onclick="cancleDemoClass()">取消排课</a>
- 			</div>
+		<table class="easyui-datagrid" title="排课列表" style="height:550px" id="manList" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+			<thead>
+				<tr>
+					<th width="1%" align="center" data-options="field:'shortClassInstId',checkbox:true"></th>
+					<th width="12%" align="center" field="schoolName"><span>校区</span></th>
+					<th width="18%" align="center" field="schoolDate"><span>上课时间</span></th>
+					<th width="14%" align="center" field="classStateVal"><span>班级状态</span></th>
+					<th width="14%" align="center" field="demoT"><span>计划Demo T</span></th>
+					<th width="14%" align="center" field="demoTa"><span>计划Demo TA</span></th>
+					<th width="15%" align="center" field="createDate"><span>创建时间</span></th>
+					<th width="12%" align="center" field="handlerName"><span>创建人</span></th>
+				</tr>
+			</thead>
+		</table>
+		<div id="toolbar" style="padding: 2px;height:auto;">
+   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="addClassManage()"><span>排课管理</span></a>
+ 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" style="width:100px;" onclick="cancleDemoClass()"><span>取消排课</span></a>
+			</div>
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("加载中...");
 			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
 				$("#schoolId").combobox("loadData",data);
-				ajaxLoadEnd();
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=DEMO&codeType=CLASS_STATE",function(data){
 				$("#classState").combobox("loadData",data);

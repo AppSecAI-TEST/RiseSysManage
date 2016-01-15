@@ -87,7 +87,7 @@ $(document).ready(function(){
 		},
 		onChange : function(n, o) {
 			if(n != "" && n != null && n != undefined) {
-				$("#couponClassInstId").combobox({disabled: false});
+//				$("#couponClassInstId").combobox({disabled: false});
 				$("#couponClassInstId").combobox({
 					url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='001','002','003','004','005'&classInstId=",//返回json数据的url
 					valueField : "classInstId",
@@ -110,7 +110,7 @@ $(document).ready(function(){
 				$("#couponSchoolId").combobox("setText", "");
 				$("#couponClassInstId").combobox('clear');
 				$("#couponClassInstId").combobox("loadData", new Array());
-				$("#couponClassInstId").combobox({disabled: true});
+//				$("#couponClassInstId").combobox({disabled: true});
 			}
 		}
 	});

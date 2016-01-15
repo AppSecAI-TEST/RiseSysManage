@@ -1,41 +1,56 @@
 $(document).ready(function(){
 	//首页面查询
     $("#qryBtn").click(function() {
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-	    var startTime= $("#startTime").datebox('getValue');
-	    var endTime= $("#endTime").datebox('getValue');;
-	    if(startTime=='')
-	    {
-	    	startTime='2014-01-01';
-	    }else
-	    {
-	    	startTime=startTime+"-01";
-	    }
-	    if(endTime=='')
-	    {
-	    	endTime='2036-01-01';
-	    }else
-	    {
-	    	endTime=endTime+"-01";
-	    }
-	    var obj={};
-	    obj.funcNodeId=funcNodeId;
-	    obj.startTime=startTime;
-	    obj.endTime=endTime;
-	    obj.schoolId=$("#schoolId").combobox('getValue');
-	    var json=JSON.stringify(obj);
-		$('#list_data').datagrid({
-			url : "/sys/pubData/qryDataListByPage.do",
-			queryParams:{
-				param : json
-			},
-			onLoadSuccess:function(){
-				//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
-				$('#list_data').datagrid('clearSelections');
-			}
-		});
+    	var schoolId = $("#schoolId").combobox("getValue");
+	    if(schoolId != ""){
+	    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
+		    var startTime= $("#startTime").datebox('getValue');
+		    var endTime= $("#endTime").datebox('getValue');;
+		    if(startTime=='')
+		    {
+		    	startTime='2014-01-01';
+		    }else
+		    {
+		    	startTime=startTime+"-01";
+		    }
+		    if(endTime=='')
+		    {
+		    	endTime='2036-01-01';
+		    }else
+		    {
+		    	endTime=endTime+"-01";
+		    }
+		    var obj={};
+		    obj.funcNodeId=funcNodeId;
+		    obj.startTime=startTime;
+		    obj.endTime=endTime;
+		    obj.schoolId=$("#schoolId").combobox('getValue');
+		    var json=JSON.stringify(obj);
+			$('#list_data').datagrid({
+				url : "/sys/pubData/qryDataListByPage.do",
+				queryParams:{
+					param : json
+				},
+				onLoadSuccess:function(){
+					//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+					$('#list_data').datagrid('clearSelections');
+				}
+			});
+	    }else{
+			showMessage("提示","没有有效的校区可供查询",null);
+		}
     });
 	
+    //首页面重置
+    $("#resetBtn").click(function() 
+    {
+    	$("#qryFm").form('clear');//清空窗体数据  
+    	//校区赋默认值
+    	if($("#schoolId").combobox("getData").length>0){
+    		$("#schoolId").combobox("select",$("#schoolId").combobox("getData")[0].schoolId);
+    	}
+    });
+    
 });
 
 //跳转创建教质计划页面

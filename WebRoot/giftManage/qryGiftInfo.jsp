@@ -34,7 +34,7 @@
   					</td>
   					<td align="right" width="50px"><span>班级：</span></td>
   					<td align="left" width="110px">
-  						<select id="goodsClassInstId" name="classInstId" class="easyui-combobox" style="width:100px;height:25px;" disabled="disabled">
+  						<select id="goodsClassInstId" name="classInstId" class="easyui-combobox" style="width:100px;height:25px;">
       					</select>
   					</td>
   					<td></td>
@@ -67,8 +67,8 @@
   				<tr>
 				  <td align="right"><span>赠送日期：</span></td>
 				  <td align="left" colspan="2">
-					<input class="easyui-datebox"  name="sendStartTime" style="width:100px;height:25px;" />
-				   <span>至&nbsp;</span><input class="easyui-datebox"  name="sendEndTime" style="width:100px;height:25px;" /></td>
+					<input class="easyui-datebox"  name="sendStartTime" style="width:90px;height:25px;" />
+				   <span>至&nbsp;</span><input class="easyui-datebox"  name="sendEndTime" style="width:90px;height:25px;" /></td>
 				  <td align="left" style="padding-left:5px" colspan="7"><span>领取日期：</span>
 				  <input class="easyui-datebox"  name="getStartTime" style="width:90px;height:25px;" />
 				  	<span>至</span>
@@ -78,7 +78,7 @@
 					<span>至</span>
 					<input class="easyui-datebox"  name="returnEndTime" style="width:90px;height:25px;" />
 					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px;" id="qryGoodsGift" funcNodeId="4010"><span>查询</span></a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px;" id="reset" ><span>重置</span></a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px;" id="resetGoods" ><span>重置</span></a>
 				  </td>
   				</tr>
   			</table>
@@ -128,7 +128,7 @@
   					</td>
   					<td align="right" width="70px"><span>班级：</span></td>
   					<td align="left" width="110px">
-  						<select id="couponClassInstId" name="classInstId" class="easyui-combobox" style="width:100px;height:25px;" disabled="disabled">
+  						<select id="couponClassInstId" name="classInstId" class="easyui-combobox" style="width:100px;height:25px;">
       					</select>
   					</td>
   					<td align="right" width="70px"><span>赠券状态：</span></td>
@@ -241,7 +241,7 @@
   					</td>
   					<td align="right" width="11%"><span>班级：</span></td>
   					<td align="left" width="16%">
-  						<select id="courseClassInstId" name="classInstId" class="easyui-combobox" style="width:100px;height:25px;" disabled="disabled">
+  						<select id="courseClassInstId" name="classInstId" class="easyui-combobox" style="width:100px;height:25px;">
       					</select>
   					</td>
   					<td width="27%"></td>

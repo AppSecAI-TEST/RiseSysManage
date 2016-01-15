@@ -60,7 +60,7 @@
   					</td>
   					<td align="left">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px;" id="qryTeaBtn" funcNodeId="4100">查询</a>
-						&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px;" id="reset" >重置</a>
+						&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px;" id="resetBtn" >重置</a>
 					</td>
   				</tr>
   			</table>
@@ -92,23 +92,38 @@
 	   		$(document).ready(function(){
 	   			//定位教师页面查询
 			    $("#qryTeaBtn").click(function() {
-			    	var json = $("#qryTeaFm").serializeObject();
-			    	json.byName = $("#byName").combobox('getText');
-					var obj = JSON.stringify(json);
-					obj = obj.substring(0, obj.length - 1);
-					var funcNodeId = $("#qryTeaBtn").attr("funcNodeId");
-					obj += ",\"teacherState\":\"P\",\"funcNodeId\":\""+funcNodeId+"\"}";
-					$('#teacher_list').datagrid({
-						url : "/sys/pubData/qryDataListByPage.do",
-						queryParams:{
-							param : obj
-						},
-						onLoadSuccess:function(){
-							//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
-							$('#teacher_list').datagrid('clearSelections');
-						}
-					});
+			    	var schoolId = $("#schoolId").combobox("getValue");
+		   			if(schoolId != ""){
+				    	var json = $("#qryTeaFm").serializeObject();
+				    	json.byName = $("#byName").combobox('getText');
+						var obj = JSON.stringify(json);
+						obj = obj.substring(0, obj.length - 1);
+						var funcNodeId = $("#qryTeaBtn").attr("funcNodeId");
+						obj += ",\"teacherState\":\"P\",\"funcNodeId\":\""+funcNodeId+"\"}";
+						$('#teacher_list').datagrid({
+							url : "/sys/pubData/qryDataListByPage.do",
+							queryParams:{
+								param : obj
+							},
+							onLoadSuccess:function(){
+								//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+								$('#teacher_list').datagrid('clearSelections');
+							}
+						});
+					}else{
+						showMessage("提示","没有有效的校区可供查询",null);
+					}
 			    });
+			    
+			    $("#resetBtn").click(function() 
+			    {
+			    	$("#qryTeaFm").form('clear');//清空窗体数据  
+			    	//校区赋默认值
+			    	if($("#schoolId").combobox("getData").length>0){
+			    		$("#schoolId").combobox("select",$("#schoolId").combobox("getData")[0].schoolId);
+			    	}
+			    });
+			    
 	   			var staffId = $("#staffId").val();
 				$("#schoolId").combobox({
 					url : "/sys/pub/pageCategory.do?staffId="+staffId+"&resourceId=509&fieldId=schoolId&headFlag=N",//返回json数据的url 

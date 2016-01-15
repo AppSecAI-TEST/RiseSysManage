@@ -50,7 +50,7 @@
   						&nbsp;&nbsp;&nbsp;<input name="pay" type="checkbox" value="N" style="margin:0 auto;vertical-align:middle;" /><span>否</span>
   					<td colspan="4" align="right">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px;" id="qryBtn" funcNodeId="4300"><span>查询</span></a>
-						&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px;" id="reset" ><span>重置</span></a>
+						&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px;" id="resetBtn" ><span>重置</span></a>
 					</td>
 					<td></td>
   				</tr>

@@ -1,20 +1,35 @@
 $(document).ready(function(){
 	//首页面查询
     $("#qryGoodsGift").click(function() {
-		var obj = JSON.stringify($("#qryGoodsFm").serializeObject());
-		obj = obj.substring(0, obj.length - 1);
-		var funcNodeId = $("#qryGoodsGift").attr("funcNodeId");
-		obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-		$('#goodsGift_data').datagrid({
-			url : "/sys/pubData/qryDataListByPage.do",
-			queryParams:{
-				param : obj
-			},
-			onLoadSuccess:function(){
-				//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
-				$('#goodsGift_data').datagrid('clearSelections');
-			}
-		});
+    	var schoolId = $("#goodsSchoolId").combobox("getValue");
+	    if(schoolId != ""){
+			var obj = JSON.stringify($("#qryGoodsFm").serializeObject());
+			obj = obj.substring(0, obj.length - 1);
+			var funcNodeId = $("#qryGoodsGift").attr("funcNodeId");
+			obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+			$('#goodsGift_data').datagrid({
+				url : "/sys/pubData/qryDataListByPage.do",
+				queryParams:{
+					param : obj
+				},
+				onLoadSuccess:function(){
+					//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+					$('#goodsGift_data').datagrid('clearSelections');
+				}
+			});
+	    }else{
+			showMessage("提示","没有有效的校区可供查询",null);
+		}
+    });
+    
+     //首页面重置
+    $("#resetGoods").click(function() 
+    {
+    	$("#qryGoodsFm").form('clear');//清空窗体数据  
+    	//校区赋默认值
+    	if($("#goodsSchoolId").combobox("getData").length>0){
+    		$("#goodsSchoolId").combobox("select",$("#goodsSchoolId").combobox("getData")[0].schoolId);
+    	}
     });
     
     $("input[name=goodsGiftChannel]").click(function(){
@@ -82,7 +97,7 @@ $(document).ready(function(){
 		},
 		onChange : function(n, o) {
 			if(n != "" && n != null && n != undefined) {
-				$("#goodsClassInstId").combobox({disabled: false});
+//				$("#goodsClassInstId").combobox({disabled: false});
 				$("#goodsClassInstId").combobox({
 					url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='001','002','003','004','005'&classInstId=",//返回json数据的url
 					valueField : "classInstId",
@@ -105,7 +120,7 @@ $(document).ready(function(){
 				$("#goodsSchoolId").combobox("setText", "");
 				$("#goodsClassInstId").combobox('clear');
 				$("#goodsClassInstId").combobox("loadData", new Array());
-				$("#goodsClassInstId").combobox({disabled: true});
+//				$("#goodsClassInstId").combobox({disabled: true});
 			}
 		}
 	});
