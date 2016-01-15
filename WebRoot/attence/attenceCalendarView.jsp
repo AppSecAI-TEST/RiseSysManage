@@ -230,6 +230,7 @@
 					onChange:function (data) {
 						if(gFirstFlag)
 						{
+							ajaxLoading("加载中...");
 							window.location.href = "/sys/attend/getAttenceCalendarView.do?classInstId=${classInstId}&year="+$("#yearList").combobox("getValue")+"&month="+$("#monthList").combobox("getValue")+"&funcNodeId=${funcNodeId}";
 						}
 						else

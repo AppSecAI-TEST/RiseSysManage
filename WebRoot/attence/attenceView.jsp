@@ -206,6 +206,7 @@
 			}
 			function backFunc()
 			{
+				ajaxLoading("返回中...");
 				window.location.href = "/sys/attend/getAttendDetail.do?funcNodeId=${funcNodeId}&classInstId=${classInstId}";
 			}
 		</script>

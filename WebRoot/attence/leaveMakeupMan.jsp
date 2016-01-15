@@ -87,6 +87,7 @@
 			<a href="javascript:void(0)" id="commitMakeupBtn" class="easyui-linkbutton" iconCls="icon-remove" style="width:120px;" onclick="commitMakeupFunc()">提交补课记录</a>
 		</div>
 		<script type="text/javascript">
+			ajaxLoadEnd();
 			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
