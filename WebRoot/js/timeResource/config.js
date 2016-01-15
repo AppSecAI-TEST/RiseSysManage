@@ -121,7 +121,8 @@ function classTimeConfig()
 				hideProgressLoader()
 				if (data == "true") {
 					showMessage('提示', "添加上课时段配置成功！", function() {
-						window.location.href = "resourceList.jsp";
+						hideMessage();
+						window.location.reload();
 					});
 				} else {
 					showMessage('提示', "添加上课时段配置失败！", null);

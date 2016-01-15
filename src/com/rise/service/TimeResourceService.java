@@ -86,7 +86,7 @@ public class TimeResourceService
 		JSONArray array =new JSONArray();
 		JSONArray week =JSONArray.fromObject(pubService.qryCodeNameList("SCHOOLTIME_T", "WEEK_TIME", ""));
 		JSONArray config =JSONArray.fromObject(pubService.qryParaConfigList("HOUR_RANGE", ""));
-		JSONArray timeRange=JSONArray.fromObject(pubService.qryHourRangeList(""));
+		JSONArray timeRange=this.qryTimeConfig();
 		if(week.size()>0&&config.size()>0)
 		{
 			json.put("rowspan", config.size());
@@ -120,6 +120,12 @@ public class TimeResourceService
 		}
 		json.put("configInfo", array);
 		return json;
+	}
+	
+	private JSONArray qryTimeConfig() throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS3055\",securityCode:\"0000000000\",params:{},rtnDataFormatType:\"user-defined\"}";
+		return JSONArray.fromObject(ServiceEngine.invokeHttp(param));
 	}
 	
 	
