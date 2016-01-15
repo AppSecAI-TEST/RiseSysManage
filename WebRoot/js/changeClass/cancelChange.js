@@ -55,7 +55,7 @@ $(document).ready(function() {
 			var obj = JSON.stringify($("#cancelChangeClassFm").serializeObject());
 			obj = encodeURI(obj);
 			$.ajax({
-				url: "/sys/change/cancelChangeSchool.do",
+				url: "/sys/change/cancelChange.do",
 				data: "param=" + obj,
 				dataType: "json",
 				async: true,

@@ -3,7 +3,6 @@
 	String path = request.getContextPath();
 	String applyId = request.getParameter("applyId");
 	String schoolId = request.getParameter("schoolId");
-	System.err.println(schoolId)
 	String studentId = request.getParameter("studentId");
 	String studentCourseId = request.getParameter("studentCourseId");
 %>
@@ -24,7 +23,6 @@
   				<input type="hidden" id="inClassId"/>
   				<input type="hidden" id="courseType"/>
   				<input type="hidden" id="outClassId"/>
-  				<input type="hidden" id="inClassIsBegin"/>
   				<input type="hidden" id="applyId" name="applyId" value="<%=applyId %>"/>
   				<input type="hidden" id="studentChannelType" name="studentChannelType"/>
   				<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId %>"/>
@@ -87,7 +85,7 @@
   			</form>
   		</div>
   		<div style="height: 10px;"></div>
-  		<div style="display: none;" id="changeDiv">
+  		<div style="display: none;min-width:1100px; width:99%;height:auto;" id="changeDiv">
 	  		<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="选择班级情况">
 	  			<form id="">
 	  				<table width="99.99%" cellpadding="5px" class="maintable">
@@ -116,7 +114,7 @@
   		<div style="margin-top: 20px;min-width:1100px; width:99%;">
 	      	<div style="float: left;margin-left: 800px;">
 	      		<a href="javascript:void(0)" id="changeInSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      		&nbsp;<a href="javascript:void(0)" id="activityBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	      		&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
 	      	</div>
 	    </div>
   	</body>

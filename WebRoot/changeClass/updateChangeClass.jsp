@@ -12,7 +12,7 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/js/changeClass/changeIn.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/changeClass/updateChangeClass.js"></script>
   	</head>
   
   	<body>
