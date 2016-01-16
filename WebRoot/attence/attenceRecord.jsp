@@ -54,9 +54,9 @@
 			</tr>
 			<c:forEach items="${schooltimeT.classTeacherList}" var="node">
 				<tr id="teacherId${node.teacherId}">
-					<td align="right" teacherId="${node.teacherId}" teacherName="${node.teacherT.teacherName}" teacherType="${node.teacherType}" hours="${schooltimeT.lessionHours}">老师：</td>
+					<td align="right" teacherId="${node.teacherId}" teacherName="${node.teacherT.byName}" teacherType="${node.teacherType}" hours="${schooltimeT.lessionHours}">老师：</td>
 					<td align="center">${node.schoolT.schoolName}</td>
-					<td align="center">${node.teacherT.teacherName}</td>
+					<td align="center">${node.teacherT.byName}</td>
 					<td align="center">${node.teacherType}</td>
 					<td align="center">${schooltimeT.lessionHours}</td>
 					<td align="center">
@@ -161,7 +161,7 @@
 				$("#attRecordTeacherId").combobox({
 					formatter:formatTeacherName,
 					valueField: 'teacherId', 
-					textField: 'teacherName', 
+					textField: 'byName', 
 					//panelHeight: 'auto',
 					listHeight:150,
 					data:attRecordTeacherId

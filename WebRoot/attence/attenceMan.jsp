@@ -180,7 +180,7 @@
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("加载中...");
-			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=505&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
 				$("#schoolHisId").combobox("loadData",data);
 			},"json");

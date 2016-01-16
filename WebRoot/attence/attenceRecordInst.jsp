@@ -134,7 +134,7 @@
 				$("#attRecordTeacherId").combobox({
 					formatter:formatTeacherName,
 					valueField: 'teacherId', 
-					textField: 'teacherName', 
+					textField: 'byName', 
 					//panelHeight: 'auto',
 					listHeight:150,
 					data:attRecordTeacherId

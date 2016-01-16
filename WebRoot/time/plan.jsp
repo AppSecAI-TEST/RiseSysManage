@@ -23,7 +23,7 @@
 						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 150px; height: 25px;" editable="false"
 						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 			      		onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
-			      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
+			      		url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=504&fieldId=schoolId">
 		        		</select>
 					</td>
 					<td width="80px" align="right">
