@@ -190,7 +190,7 @@
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
 				data = $.grep(data,function(obj){
-					if(obj.codeFlag != "001")
+					if(obj.codeFlag != "001" && obj.codeFlag != "005")
 						return true;
 					return false;
 				});

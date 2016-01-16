@@ -170,29 +170,43 @@
 				}
 				else
 				{
-					ajaxLoading("添加中...");
-					$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:attRecordTeacherId},function(data){
-						ajaxLoadEnd();
-						var trData = "<tr id='teacherId"+data.teacherId+"'><td align='right' teacherId='"+data.teacherId+"' teacherName='"+$("#attRecordTeacherId").combobox("getText")+"' teacherType='"+$("#attRecordClassType").combobox("getText")+"' hours='"+attRecordLessonHour+"'>老师：</td><td align='center'>"+$("#attRecordSchoolId").combobox("getText")+"</td><td align='center'>"+$("#attRecordTeacherId").combobox("getText")+"</td><td align='center'>"+$("#attRecordClassType").combobox("getText")+"</td><td align='center'>"+attRecordLessonHour+"</td><td align='center'>";
-						var i = 0,n = data.teacherLicenseList.length;
-						for(;i < n;i++)
+					var teacherFlag = true;
+					$("#teacherTab tr:gt(1) td:nth-child(1)").each(function(i,node){
+						if($(node).attr("teacherId") == attRecordTeacherId)
 						{
-							if("${classInstT.stageId}" == data.teacherLicenseList[i].stageId)
+							teacherFlag = false;
+						}
+					});
+					if(teacherFlag)
+					{
+						ajaxLoading("添加中...");
+						$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:attRecordTeacherId},function(data){
+							ajaxLoadEnd();
+							var trData = "<tr id='teacherId"+data.teacherId+"'><td align='right' teacherId='"+data.teacherId+"' teacherName='"+$("#attRecordTeacherId").combobox("getText")+"' teacherType='"+$("#attRecordClassType").combobox("getText")+"' hours='"+attRecordLessonHour+"'>老师：</td><td align='center'>"+$("#attRecordSchoolId").combobox("getText")+"</td><td align='center'>"+$("#attRecordTeacherId").combobox("getText")+"</td><td align='center'>"+$("#attRecordClassType").combobox("getText")+"</td><td align='center'>"+attRecordLessonHour+"</td><td align='center'>";
+							var i = 0,n = data.teacherLicenseList.length;
+							for(;i < n;i++)
 							{
-								break;
+								if("${classInstT.stageId}" == data.teacherLicenseList[i].stageId)
+								{
+									break;
+								}
 							}
-						}
-						if(i >= n)
-						{
-							trData+="未持证";
-						}
-						else
-						{
-							trData+="已持证";
-						}
-						trData+="</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
-						$("#teacherTab tr:last").after(trData);
-					},"json");
+							if(i >= n)
+							{
+								trData+="未持证";
+							}
+							else
+							{
+								trData+="已持证";
+							}
+							trData+="</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
+							$("#teacherTab tr:last").after(trData);
+						},"json");
+					}
+					else
+					{
+						$.messager.alert('提示',"当前老师已存在,不能重复添加");
+					}
 				}
 			}
 			

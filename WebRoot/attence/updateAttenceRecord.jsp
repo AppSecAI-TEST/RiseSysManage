@@ -135,10 +135,10 @@
 						<td align="center">
 							<c:choose>
 								<c:when test="${node.dress == 'N'}">
-									<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" checked="checked" /><label for="dress${node.studentId}1">未穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" /><label for="dress${node.studentId}2">已穿校服</label>
+									<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" /><label for="dress${node.studentId}2">已穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" checked="checked" /><label for="dress${node.studentId}1">未穿校服</label>
 								</c:when>
 								<c:when test="${node.dress == 'Y'}">
-									<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" /><label for="dress${node.studentId}1">未穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" checked="checked" /><label for="dress${node.studentId}2">已穿校服</label>
+									<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" checked="checked" /><label for="dress${node.studentId}2">已穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" /><label for="dress${node.studentId}1">未穿校服</label>
 								</c:when>
 							</c:choose>
 						</td>
@@ -164,7 +164,7 @@
 				attRecordTeacherId = eval("("+attRecordTeacherId+")");
 				attRecordClassType = eval("("+attRecordClassType+")");
 				$("#classTime").combobox({
-					formatter:formatParam, 
+					formatter:formatParaConfig, 
 					valueField: 'paramValue', 
 					textField: 'paramDesc', 
 					panelHeight: 'auto',
@@ -243,12 +243,43 @@
 				}
 				else
 				{
-					ajaxLoading("添加中...");
-					$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:attRecordTeacherId},function(data){
-						ajaxLoadEnd();
-						var trData = "<tr id='teacherId"+data.teacherId+"'><td align='right' teacherId='"+data.teacherId+"' teacherName='"+$("#attRecordTeacherId").combobox("getText")+"' teacherType='"+$("#attRecordClassType").combobox("getText")+"' hours='"+attRecordLessonHour+"'>老师：</td><td align='center'>"+$("#attRecordSchoolId").combobox("getText")+"</td><td align='center'>"+$("#attRecordTeacherId").combobox("getText")+"</td><td align='center'>"+$("#attRecordClassType").combobox("getText")+"</td><td align='center'>"+attRecordLessonHour+"</td><td align='center'>"+(data.teacherLicenseList.length>0?"已持证":"未持证")+"</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
-						$("#teacherTab tr:last").after(trData);
-					},"json");
+					var teacherFlag = true;
+					$("#teacherTab tr:gt(1) td:nth-child(1)").each(function(i,node){
+						if($(node).attr("teacherId") == attRecordTeacherId)
+						{
+							teacherFlag = false;
+						}
+					});
+					if(teacherFlag)
+					{
+						ajaxLoading("添加中...");
+						$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:attRecordTeacherId},function(data){
+							ajaxLoadEnd();
+							var trData = "<tr id='teacherId"+data.teacherId+"'><td align='right' teacherId='"+data.teacherId+"' teacherName='"+$("#attRecordTeacherId").combobox("getText")+"' teacherType='"+$("#attRecordClassType").combobox("getText")+"' hours='"+attRecordLessonHour+"'>老师：</td><td align='center'>"+$("#attRecordSchoolId").combobox("getText")+"</td><td align='center'>"+$("#attRecordTeacherId").combobox("getText")+"</td><td align='center'>"+$("#attRecordClassType").combobox("getText")+"</td><td align='center'>"+attRecordLessonHour+"</td><td align='center'>";
+							var i = 0,n = data.teacherLicenseList.length;
+							for(;i < n;i++)
+							{
+								if("${classInstT.stageId}" == data.teacherLicenseList[i].stageId)
+								{
+									break;
+								}
+							}
+							if(i >= n)
+							{
+								trData+="未持证";
+							}
+							else
+							{
+								trData+="已持证";
+							}
+							trData+="</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
+							$("#teacherTab tr:last").after(trData);
+						},"json");
+					}
+					else
+					{
+						$.messager.alert('提示',"当前老师已存在,不能重复添加");
+					}
 				}
 			}
 			
