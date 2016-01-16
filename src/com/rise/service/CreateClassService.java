@@ -55,9 +55,9 @@ public class CreateClassService
 		return ServiceEngine.invokeHttp(params);
 	}
 
-	public String qryClassName(String courseType, String classType, String stageId) throws Exception 
+	public String qryClassName(String courseType, String classType, String stageId, String schoolId) throws Exception 
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0078\",securityCode:\"0000000000\",params:{param:{courseType:\""+courseType+"\",\"classType\":\""+classType+"\",stageId:\""+stageId+"\"}},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0078\",securityCode:\"0000000000\",params:{param:{courseType:\""+courseType+"\",\"classType\":\""+classType+"\",stageId:\""+stageId+"\",schoolId:\""+schoolId+"\"}},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 
