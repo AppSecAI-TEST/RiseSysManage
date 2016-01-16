@@ -93,7 +93,7 @@ $(document).ready(function() {
 				}
 			});
 			approveObj.remark = approveRemark;
-			if("104" == nextState) {
+			if("104" == nextState || "105" == nextState) {
 				approveObj.masterType = masterType;
 			} else if("108" == nextState) {
 				approveObj.isTransfer = isTransfer;
