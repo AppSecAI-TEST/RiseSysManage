@@ -126,13 +126,8 @@ $(document).ready(function() {
 			var openClassState = row.openClassState;
 			if(openClassState != null && openClassState != "" && openClassState != undefined) {
 				if(openClassState == '002') {
-					var classStudentNum = row.classStudentNum;
-					if(classStudentNum == 0) {
-						var classInstId = row.classInstId;
-						window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=cancel&applyType=002";
-					} else {
-						$.messager.alert('提示', "您选择的班级还有学员，请将所有的学员移除之后，再取消放班！");
-					}
+					var classInstId = row.classInstId;
+					window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=cancel&applyType=002";
 				} else {
 					if(openClassState == '001') {
 						$.messager.alert('提示', "您选择的班级开班申请正在审批中，不能取消开班！");
