@@ -76,7 +76,7 @@
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("加载中...");
-			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=821&fieldId=schoolId",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=staffName",function(data){

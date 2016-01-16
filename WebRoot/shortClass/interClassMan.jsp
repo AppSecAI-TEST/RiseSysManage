@@ -98,7 +98,7 @@
    			<a href="javascript:void(0)" id="viewClassBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="viewClassFunc()">浏览</a>
 		</div>
 		<script type="text/javascript">
-			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=817&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){

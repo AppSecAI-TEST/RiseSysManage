@@ -172,7 +172,7 @@
 		    </div>
 		</div>
 		<script type="text/javascript">
-			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=824&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
 				$("#schoolVerId").combobox("loadData",data);
 			},"json");
