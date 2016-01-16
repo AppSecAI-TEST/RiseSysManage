@@ -132,7 +132,9 @@
 					}
 				});
 				$("#attRecordTeacherId").combobox({
-					formatter:formatTeacherName,
+					formatter:function(row){
+						return "<span>"+row.byName+"</span>";
+					},
 					valueField: 'teacherId', 
 					textField: 'byName', 
 					//panelHeight: 'auto',
