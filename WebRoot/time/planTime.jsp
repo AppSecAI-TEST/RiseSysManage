@@ -414,7 +414,12 @@ function endEditing(tab)
 			{
 				$.messager.alert('提示',"请输入教师类型");
 				setCellValue($(tab),editIndex,editField,editValue);//恢复初始值
-			}else
+			}else if( teacherType!='T' && teacherType!='TA')
+			{
+				$.messager.alert('提示',"教师类型格式只能是T或TA");
+				setCellValue($(tab),editIndex,editField,editValue);//恢复初始值
+			}
+			else
 			{
 				var hoursNum=vals[3];//课时数量
 			
