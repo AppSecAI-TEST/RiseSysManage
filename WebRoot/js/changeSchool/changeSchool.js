@@ -52,11 +52,6 @@ $(document).ready(function() {
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
     	},
-    	onLoadSuccess : function() {
-    		if(data.length > 0) {
-    			$("#outSchoolId").combobox("setValue", data[0].schoolId);
-    		}
-    	},
     	onChange : function(n, o) {
     		if(n != "" && n != null && n != undefined) {
     			$("#outTeacherId").combobox({disabled: false});
@@ -99,11 +94,6 @@ $(document).ready(function() {
     	panelHeight : "auto",
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
-    	},
-    	onLoadSuccess : function(data) {
-    		if(data.length > 0) {
-    			$("#inSchoolId").combobox("setValue", data[0].schoolId);
-    		}
     	}
 	});
 	
@@ -114,11 +104,6 @@ $(document).ready(function() {
     	panelHeight : "auto",
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
-    	},
-    	onLoadSuccess : function(data) {
-    		if(data.length > 0) {
-    			$("#approveSchoolId").combobox("setValue", data[0].schoolId);
-    		}
     	}
 	});
 	
@@ -129,11 +114,6 @@ $(document).ready(function() {
     	panelHeight : "auto",
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
-    	},
-    	onLoadSuccess : function(data) {
-    		if(data.length > 0) {
-    			$("#approveInschoolId").combobox("setValue", data[0].schoolId);
-    		}
     	}
 	});
 
