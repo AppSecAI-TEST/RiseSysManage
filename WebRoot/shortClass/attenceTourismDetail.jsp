@@ -88,15 +88,18 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
+			ajaxLoadEnd();
 			var gClassAttend = null;
 			function addAttenceFunc()
 			{
+				ajaxLoading("加载中...");
 				window.location.href = "/sys/shortBus/tourismAttenceRecordPage.do?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}";
 			}
 			function updateAttenceFunc()
 			{
 				if (gClassAttend != null)
 				{
+					ajaxLoading("加载中...");
 					window.location.href =  "/sys/shortBus/tourismAttenceRecUpdatePage.do?funcNodeId=${funcNodeId}&shortClassAttendId="+gClassAttend.value;
 				}
 				else
@@ -108,6 +111,7 @@
 			{
 				if (gClassAttend != null)
 				{
+					ajaxLoading("加载中...");
 					window.location.href =  "/sys/shortBus/shortTourismAttenceViewPage.do?funcNodeId=${funcNodeId}&shortClassAttendId="+gClassAttend.value;
 				}
 				else

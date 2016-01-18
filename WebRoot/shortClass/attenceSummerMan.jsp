@@ -156,7 +156,7 @@
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("加载中...");
-			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=809&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
 				$("#schoolHisId").combobox("loadData",data);
 			},"json");
@@ -253,6 +253,7 @@
 				var row = $('#manList').datagrid('getSelected');
 				if (row)
 				{
+					ajaxLoading("加载中...");
 					window.location.href = "/sys/shortBus/shortAttenceDetailPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=shortAttenceSummerDetail";
 				}
 				else
@@ -265,6 +266,7 @@
 				var row = $("#manList").datagrid("getSelected");
 				if(row)
 				{
+					ajaxLoading("加载中...");
 					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=viewSummerShortClass";
 				}
 				else
@@ -303,6 +305,7 @@
 				var row = $("#hisList").datagrid("getSelected");
 				if(row)
 				{
+					ajaxLoading("加载中...");
 					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=viewSummerShortClass";
 				}
 				else

@@ -85,7 +85,8 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
-			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+			ajaxLoadEnd();
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=806&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=CLASS_TYPE",function(data){

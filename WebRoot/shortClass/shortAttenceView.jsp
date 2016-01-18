@@ -103,8 +103,10 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
+			ajaxLoadEnd();
 			function backFunc()
 			{
+				ajaxLoading("返回中...");
 				window.location.href = "/sys/shortBus/shortAttenceDetailPage.do?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassAttendT.shortClassInstId}&pageName=${pageName}";
 			}
 		</script>

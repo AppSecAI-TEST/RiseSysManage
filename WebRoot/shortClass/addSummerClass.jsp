@@ -85,7 +85,8 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
-			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+			ajaxLoadEnd();
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=804&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/shortBus/getGiftTypeList.do",function(data){
@@ -217,6 +218,7 @@
 				sessionStorage.setItem("remark",remark);
 				if(schoolManId != "")
 				{
+					ajaxLoading("加载中...");
 					window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstId}&pageName=addSummerClass&classType=小拼暑类班&schoolId="+schoolManId+"&paramFlag=ADD";
 				}
 				else

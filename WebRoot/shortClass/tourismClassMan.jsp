@@ -126,6 +126,7 @@
 			}
 			function classArrangementFunc()
 			{
+				ajaxLoading("加载中...");
 				window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=addTourismClass&classType="+encodeURI("游学");
 			}
 			function cancelClassFunc()
@@ -135,6 +136,7 @@
 				{
 					if(row.classStateName == "未开课" || row.classStateName == "未开课")
 					{
+						ajaxLoading("加载中...");
 						window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=cancelTourismClass&classType="+encodeURI("游学");
 					}
 					else if(row.classStateName == "开课在读")
@@ -162,6 +164,7 @@
 				{
 					if(row.classStateName == "未开课" || row.classStateName == "未开课")
 					{
+						ajaxLoading("加载中...");
 						window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=shortTourismClassMan&classType="+encodeURI("游学");
 					}
 					else if(row.classStateName == "开课在读")
@@ -189,6 +192,7 @@
 				{
 					if(row.classStateName != "解散")
 					{
+						ajaxLoading("加载中...");
 						window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=viewTourismShortClass&classType="+encodeURI("游学");
 					}
 					else

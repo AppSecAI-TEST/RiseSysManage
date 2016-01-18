@@ -43,7 +43,8 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
-			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+			ajaxLoadEnd();
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=803&fieldId=schoolId",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryRoomList.do?schoolId=${param.schoolId}",function(data){
@@ -179,7 +180,9 @@
 						handlerId:${sessionScope.StaffT.staffId},
 						classTeacherList:arr
 					};
+					ajaxLoading("提交中...");
 					$.post("/sys/shortBus/addShortSchooltimeTInfo.do",{json:JSON.stringify(json)},function(data){
+						ajaxLoadEnd();
 						if(data == "success")
 						{
 							$.messager.alert('提示',"完成当前排课","",function(){
@@ -199,6 +202,7 @@
 			}
 			function backFunc()
 			{
+				ajaxLoading("返回中...");
 				if("${param.paramFlag}" == "ADD")
 				{
 					window.location.href = "/sys/shortBus/getAddShortClassInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId=${param.shortClassInstId}&pageName=${param.pageName}";

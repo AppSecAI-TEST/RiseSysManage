@@ -172,7 +172,7 @@
 		    </div>
 		</div>
 		<script type="text/javascript">
-			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=824&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
 				$("#schoolVerId").combobox("loadData",data);
 			},"json");
@@ -283,6 +283,7 @@
 			}
 			function classArrangementFunc()
 			{
+				ajaxLoading("加载中...");
 				window.location.href = "/sys/shortBus/getAddShortClassInfo.do?funcNodeId=${param.funcNodeId}&pageName=addWarmupClass";
 			}
 			function manClassFunc()
@@ -292,6 +293,7 @@
 				{
 					if(row.classStateName == "未开课" || row.classStateName == "待开课")
 					{
+						ajaxLoading("加载中...");
 						window.location.href = "/sys/shortBus/shortClassManInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=shortWarmupClassMan";
 					}
 					else if(row.classStateName == "开课在读")
@@ -319,6 +321,7 @@
 				{
 					if(row.classStateName != "解散")
 					{
+						ajaxLoading("加载中...");
 						window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=viewWarmupShortClass&shortClassInstId="+row.shortClassInstId;
 					}
 					else
@@ -363,6 +366,7 @@
 				{
 					if(row.verifyState == "已申请")
 					{
+						ajaxLoading("加载中...");
 						window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=verifyWarmupShortClass&shortClassInstId="+row.shortClassInstId;
 					}
 					else
@@ -380,6 +384,7 @@
 				var row = $("#hisList").datagrid("getSelected");
 				if(row)
 				{
+					ajaxLoading("加载中...");
 					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=viewWarmupShortClass&shortClassInstId="+row.shortClassInstId;
 				}
 				else

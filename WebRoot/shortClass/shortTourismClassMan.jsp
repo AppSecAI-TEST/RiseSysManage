@@ -98,7 +98,8 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
-			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+			ajaxLoadEnd();
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=822&fieldId=schoolId",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("游学"),function(data){
@@ -219,6 +220,7 @@
 			}
 			function selectClassFunc()
 			{
+				ajaxLoading("加载中...");
 				window.location.href = "/sys/shortClass/choiceTourismClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortTourismClassMan&classType="+encodeURI("游学");
 			}
 			function removeClassFunc()

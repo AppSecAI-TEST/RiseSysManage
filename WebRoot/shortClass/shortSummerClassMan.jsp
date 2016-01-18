@@ -116,6 +116,7 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
+			ajaxLoadEnd();
 			$.post("<%=path %>/shortBus/getGiftTypeList.do",function(data){
 				$("#classType").combobox("loadData",data);
 			},"json");
@@ -196,6 +197,7 @@
 			}
 			function addPlanFunc()
 			{
+				ajaxLoading("加载中...");
 				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortSummerClassMan&classType=小拼暑类班&schoolId=${shortClassInstT.schoolId}&paramFlag=UPDATE";
 			}
 			function studentBoxFunc(obj)

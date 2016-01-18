@@ -151,15 +151,18 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
+			ajaxLoadEnd();
 			var gClassAttend = null;
 			function addAttenceFunc()
 			{
+				ajaxLoading("加载中...");
 				window.location.href = "/sys/shortBus/getShortClassAttendTInfo.do?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortAttenceInterDetail";
 			}
 			function updateAttenceFunc()
 			{
 				if (gClassAttend != null)
 				{
+					ajaxLoading("加载中...");
 					window.location.href =  "/sys/shortBus/shortAttenceUpdatePage.do?funcNodeId=${funcNodeId}&shortClassAttendId="+gClassAttend.value+"&pageName=shortAttenceInterDetail";
 				}
 				else
@@ -171,6 +174,7 @@
 			{
 				if (gClassAttend != null)
 				{
+					ajaxLoading("加载中...");
 					window.location.href =  "/sys/shortBus/shortAttenceViewPage.do?funcNodeId=${funcNodeId}&shortClassAttendId="+gClassAttend.value+"&pageName=shortAttenceInterDetail";
 				}
 				else

@@ -98,7 +98,7 @@
    			<a href="javascript:void(0)" id="viewClassBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="viewClassFunc()">浏览</a>
 		</div>
 		<script type="text/javascript">
-			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=817&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
@@ -177,6 +177,7 @@
 			}
 			function classArrangementFunc()
 			{
+				ajaxLoading("加载中...");
 				window.location.href = "/sys/shortBus/getAddShortClassInfo.do?funcNodeId=${param.funcNodeId}&pageName=addInterClass";
 			}
 			function cancelClassFunc()
@@ -186,6 +187,7 @@
 				{
 					if(row.classStateName == "未开课" || row.classStateName == "未开课")
 					{
+						ajaxLoading("加载中...");
 						window.location.href = "/sys/shortBus/cancelShortClassInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
 					}
 					else if(row.classStateName == "开课在读")
@@ -213,6 +215,7 @@
 				{
 					if(row.classStateName == "未开课" || row.classStateName == "未开课")
 					{
+						ajaxLoading("加载中...");
 						window.location.href = "/sys/shortBus/shortClassManInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=shortInterClassMan";
 					}
 					else if(row.classStateName == "开课在读")
@@ -240,6 +243,7 @@
 				{
 					if(row.classStateName != "解散")
 					{
+						ajaxLoading("加载中...");
 						window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=viewInterShortClass&shortClassInstId="+row.shortClassInstId;
 					}
 					else

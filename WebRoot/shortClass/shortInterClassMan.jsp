@@ -114,6 +114,7 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
+			ajaxLoadEnd();
 			$(document).ready(function(){
 				$("#planHours").textbox("setValue","${shortClassInstT.planHours}");
 				$("#classStartTime").datebox("setValue","<fmt:formatDate value='${shortClassInstT.openDate}' pattern='yyyy-MM-dd' />");
@@ -172,6 +173,7 @@
 			}
 			function addPlanFunc()
 			{
+				ajaxLoading("加载中...");
 				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortInterClassMan&classType=国际班&schoolId=${shortClassInstT.schoolId}&paramFlag=UPDATE";
 			}
 			function studentBoxFunc(obj)
@@ -205,6 +207,7 @@
 			}
 			function selectClassFunc()
 			{
+				ajaxLoading("加载中...");
 				window.location.href = "/sys/shortClass/choiceInterClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortInterClassMan&classType="+encodeURI("国际班");
 			}
 			function removeClassFunc()

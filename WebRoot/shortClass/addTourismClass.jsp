@@ -55,7 +55,8 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
-			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+			ajaxLoadEnd();
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=805&fieldId=schoolId",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("游学"),function(data){
@@ -195,7 +196,9 @@
 						arr.push(obj);
 					});
 					json.teacherList = arr;
+					ajaxLoading("放班中...");
 					$.post("/sys/shortBus/addTourismClassInfo.do",{json:JSON.stringify(json)},function(data){
+						ajaxLoadEnd();
 						if(data == "success")
 						{
 							$.messager.alert('提示',"完成当前放班","",function(){

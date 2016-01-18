@@ -80,7 +80,8 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
-			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+			ajaxLoadEnd();
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=814&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("${param.classType}"),function(data){
@@ -136,7 +137,9 @@
 						schoolId:row.schoolId,
 						handlerId:${sessionScope.StaffT.staffId}
 					}
+					ajaxLoading("选课中...");
 					$.post("/sys/shortBus/addShortStudentTInfo.do",{json:JSON.stringify(json),classType:encodeURI("游学")},function(data){
+						ajaxLoadEnd();
 						if(data == "success")
 						{
 							backFunc();
@@ -154,6 +157,7 @@
 			}
 			function backFunc()
 			{
+				ajaxLoading("返回中...");
 				if("游学" == "${param.classType}")
 				{
 					window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId=${param.shortClassInstId}&pageName=${param.pageName}&classType="+encodeURI("${param.classType}");
