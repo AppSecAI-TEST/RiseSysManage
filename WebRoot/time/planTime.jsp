@@ -4,6 +4,7 @@
 	String weekSeq=request.getParameter("weekSeq");
 	String createWeekId=request.getParameter("createWeekId");
 	String dateRange=request.getParameter("dateRange");
+	String schoolId=request.getParameter("schoolId");
 
 %>
 <!DOCTYPE html>
@@ -71,7 +72,7 @@ datagrid-row-selected
 </style>
 	</head>
 	<body>
-		<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
+		<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId%>"/>
   		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px" onclick="javascript:window.history.back()">返回</a>	
 	<div id="wrap">  
         <!--  <div id="header">header</div> --> 

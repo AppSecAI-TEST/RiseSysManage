@@ -93,7 +93,7 @@ function init()
         {field:'createDdate',title:'操作',width:25,align:'center', 
             formatter: function(Confirmation, row)
             {  
-                var btn = '<a class="editcls" onclick="planWeek(\''+row.weekName+'\',\''+row.dateRange+'\',\''+row.month+'\',\''+row.createWeekId+'\')"  href="javascript:void(0)">排课</a>';  
+                var btn = '<a class="editcls" onclick="planWeek(\''+row.weekName+'\',\''+row.dateRange+'\',\''+row.month+'\',\''+row.createWeekId+'\',\''+row.schoolId+'\')"  href="javascript:void(0)">排课</a>';  
                 return btn;  
             }  
         }  
@@ -159,28 +159,29 @@ function plan()
 	});
 }
   
-function planWeek(weekSeq,dateRange,month,createWeekId)
+function planWeek(weekSeq,dateRange,month,createWeekId,schoolId)
 {
 	$.ajax(
 	{
 		type : "POST",
 		url: "/sys/time/updateCreateWeek.do?",
 		data: "createWeekId="+createWeekId,
-		async: false,
+		async: true,
 		dataType:"json",
 		beforeSend: function()
     	{
-    		$.messager.progress({title : '系统消息', msg : '正在提交数据，请稍等……'});
+    		$.messager.progress({title : '系统消息', msg : '处理中，请稍待……'});
     	},
     	success: function(data) 
     	{
     		$.messager.progress('close');
+    			window.location.href="/sys/time/planTime.jsp?month="+month+"&weekSeq="+weekSeq+"&createWeekId="+createWeekId+"&dateRange="+dateRange+"&schoolId="+schoolId;
         },
         error:function()
         {
         	$.messager.progress('close'); 
         }
 	});
-	window.location.href="/sys/time/planTime.jsp?month="+month+"&weekSeq="+weekSeq+"&createWeekId="+createWeekId+"&dateRange="+dateRange;
+
 }
 </script>

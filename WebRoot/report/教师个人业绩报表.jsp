@@ -170,6 +170,11 @@ function qryData()
 	var teacherId=$("#teacherId").textbox('getValue');
 	var schoolId=$("#schoolId").combobox('getValue');
 	var month=$("#time").datebox('getValue');
+	if(month=='')
+	{
+		$.messager.alert('提示', "请选择月份");
+		return ;
+	}
 	$.ajax(
 	{
 		type : "POST",
