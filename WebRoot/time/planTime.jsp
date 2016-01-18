@@ -241,6 +241,7 @@ function initTable(tabId,data)
     },
     onClickCell:onClickCell, 
     columns:[[
+    	 {field:'teacherName',title:'',width:100,align:'center'},
       {field:'H001',title:'8:30', width:68,align:'center', editor:'text'},
       {field:'H002',title:'10:30',width:68,align:'center', editor:'text'},
       {field:'H003',title:'14:00',width:68,align:'center', editor:'text'},
@@ -463,11 +464,11 @@ function deletePlanTime(schooltimeId,classInstId)
 			type : "POST",
 			url: "/sys/time/delete.do",
 			data: "param="+param,
-			async: false,
+			async: true,
 			dataType:"json",
 			beforeSend: function()
 	    	{
-	    		$.messager.progress({title : '系统消息', msg : '正在提交数据，请稍等……'});
+	    		$.messager.progress({title : '系统消息', msg : '正在处理，请稍待……'});
 	    	},
 	    	success: function(data) {
 	    		$.messager.progress('close');

@@ -246,7 +246,7 @@ $('#weekDg').datagrid({
         {field:'createDdate',title:'操作',width:25,align:'center', 
             formatter: function(Confirmation, row)
             {  
-              var btn = '<a class="editcls" onclick="planWeek(\''+row.weekSeq+'\',\''+row.dateRange+'\',\''+row.month+'\',\''+row.createWeekId+'\')"  href="javascript:void(0)">排课</a>';  
+              var btn = '<a class="editcls" onclick="planWeek(\''+row.weekSeq+'\',\''+row.dateRange+'\',\''+row.month+'\',\''+row.createWeekId+'\',\''+row.schoolId+'\')"  href="javascript:void(0)">排课</a>';  
                 return btn;  
             }  
         }  
@@ -281,7 +281,7 @@ function planWeek(weekSeq,dateRange,month,createWeekId)
         	$.messager.progress('close'); 
         }
 	});
-	window.location.href="/sys/time/planTime.jsp?month="+month+"&weekSeq="+weekSeq+"&createWeekId="+createWeekId+"&dateRange="+dateRange;
+	window.location.href="/sys/time/planTime.jsp?month="+month+"&weekSeq="+weekSeq+"&createWeekId="+createWeekId+"&dateRange="+dateRange+"&schoolId="+schoolId;
 }
  
 </script>
