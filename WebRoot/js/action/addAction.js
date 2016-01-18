@@ -95,10 +95,6 @@ function addAction() {
 		$.messager.alert("提示", "请填写活动名称");
 		return false;
 	}
-	if (trim($("#createRemark").val()) == "") {
-		$.messager.alert("提示", "请填写创建备注");
-		return false;
-	}
 	if ($("#timeStart").timespinner("getValue") != "") {
 		if ($("#timeEnd").timespinner("getValue") == "") {
 			$.messager.alert("提示", "请填写活动结束时段");
