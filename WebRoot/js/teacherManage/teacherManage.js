@@ -116,10 +116,10 @@ function resign()
 	if(validateSelect("list_data")) {
 		var row = $("#list_data").datagrid('getSelected');
 		var state = row.tState;
-		if(state == "R_L"){
+		if(state == "P" || state == "R_L"){
 			getTeacherInfo("list_data","l");
 		}else{
-			$.messager.alert('提示', "只有预离职状态的教师才能离职！");
+			$.messager.alert('提示', "只有在职或预离职状态的教师才能离职！");
 		}
 	}
 }

@@ -867,28 +867,36 @@ function exportMergeLink(btName,tableName,mergeName,mergeIndex)
 }
 
 
-//绑定查询页面的查询重置按钮事件
-function initRPQryButton(qryName,resetName,formName,tableName)
+//绑定报表查询页面的查询重置按钮事件
+function initReportButton(resetName,formName,schoolId)
 {
-	$("#"+qryName+"").click(function() {
-		var obj = JSON.stringify($("#"+formName+"").serializeObject());
-	    obj = obj.substring(0, obj.length - 1);
-	    var funcNodeId = $("#"+qryName+"").attr("funcNodeId");
-	    obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-	    $("#"+tableName+"").datagrid({
-	    	url : "/sys/pubData/qryDataListByPage.do",
-	    	queryParams:{
-	    		param : obj
-	    	},
-	    	onLoadSuccess:function(){
-	    		$("#"+tableName+"").datagrid('clearSelections');
-	    	}
-	    }); 
-    });
-	 
+	var clearFlag =true;
+	$("#"+formName).find("#"+schoolId).combobox({
+		url:"/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",
+		onLoadSuccess:function(){
+			var arr =$("#"+formName).find("#"+schoolId).combobox("getData");
+			if(arr.length==1)
+			{
+				$("#"+formName).find("#"+schoolId).combobox("select",arr[0].schoolId);
+				clearFlag =false;
+			}
+			else
+			{
+				$("#"+formName).find("#"+schoolId).combobox('setValue','').combobox('setText','所有校区');
+			}	
+		}
+	});	 
     $("#"+resetName+"").click(function() 
     {
     	$("#"+formName+"").form('clear');//清空窗体数据  
+    	if(!clearFlag)
+    	{
+    		$("#"+formName).find("#"+schoolId).combobox('setValue',$("#"+formName).find("#"+schoolId).combobox("getData")[0].schoolId);
+    	}
+    	else
+    	{
+    		$("#"+formName).find("#"+schoolId).combobox('setValue','').combobox('setText','所有校区');
+    	}	
     });
 }
 

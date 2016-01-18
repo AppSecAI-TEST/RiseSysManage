@@ -145,31 +145,31 @@
 							<td align="right"><span>第1次公开课：</span></td>
 							<td id="oneTd" align="center"></td>
 							<td align="right"><span>修改为：</span></td>
-							<td align="center"><input name="one" style="width:150px" class="easyui-numberbox" data-options="min:1,max:24" required="true"/></td>
+							<td align="center"><input name="one" style="width:150px" class="easyui-numberbox" data-options="min:1,max:24" /></td>
 						</tr>
 						<tr>
 							<td align="right"><span>第2次公开课：</span></td>
 							<td id="twoTd" align="center"></td>
 							<td align="right"><span>修改为：</span></td>
-							<td align="center"><input name="two" style="width:150px" class="easyui-numberbox" data-options="min:1,max:24" required="true"/></td>
+							<td align="center"><input name="two" style="width:150px" class="easyui-numberbox" data-options="min:1,max:24" /></td>
 						</tr>
 						<tr>
 							<td align="right"><span>第3次公开课：</span></td>
 							<td id="threeTd" align="center"></td>
 							<td align="right"><span>修改为：</span></td>
-							<td align="center"><input name="three" style="width:150px" class="easyui-numberbox" data-options="min:1,max:24" required="true"/></td>
+							<td align="center"><input name="three" style="width:150px" class="easyui-numberbox" data-options="min:1,max:24" /></td>
 						</tr>
 						<tr>
 							<td align="right"><span>第4次公开课：</span></td>
 							<td id="fourTd" align="center"></td>
 							<td align="right"><span>修改为：</span></td>
-							<td align="center"><input name="four" style="width:150px" class="easyui-numberbox" data-options="min:1,max:24" required="true"/></td>
+							<td align="center"><input name="four" style="width:150px" class="easyui-numberbox" data-options="min:1,max:24" /></td>
 						</tr>
 						<tr>
 							<td align="right"><span>毕业典礼：</span></td>
 							<td id="gradTd" align="center"></td>
 							<td align="right"><span>修改为：</span></td>
-							<td align="center"><input name="grad" style="width:150px" class="easyui-numberbox" data-options="min:1,max:24" required="true"/></td>
+							<td align="center"><input name="grad" style="width:150px" class="easyui-numberbox" data-options="min:1,max:24" /></td>
 						</tr>
 					</table>
 				</form>

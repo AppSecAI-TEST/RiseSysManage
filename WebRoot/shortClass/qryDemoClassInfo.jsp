@@ -29,30 +29,35 @@
       					</select>
 					</td>
 					<td align="right" width="8%">
-						<span>DEMO T：</span>
-					</td>
-					<td align="left" width="8%">
-						<select id="demoT" name="demoT" class="easyui-combobox" style="width:100px;height:25px;" ></select>								
-					</td>
-					<td align="right" width="8%">
-						<span>DEMO Ta：</span>
-					</td>
-					<td align="left" width="8%">
-						<select id="demoTa" name="demoTa" class="easyui-combobox" style="width:100px;height:25px;" ></select>				
-					</td>
-					<td align="right" width="8%">
 						<span>上课日期：</span>
 					</td>
-					<td width="28%">
-						<input name="schoolStartTime" id="schoolStartTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />&nbsp;至&nbsp;<input name="schoolendTime" id="schoolendTime" type="text" style="width:120px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
+					<td width="8%">
+						<input name="schoolStartTime" id="schoolStartTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
 					</td>
-					
+					<td width="2%"><span>至</span></td>
+					<td width="8%">
+						<input name="schoolendTime" id="schoolendTime" type="text" style="width:120px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
+					</td>
+					<td></td>
 				</tr>
 				<tr>
-					<td align="center" colspan="10">
-						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="queryFunc()"><span>查询</span></a>
-						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px;" onclick=""><span>重置</span></a>
+					<td align="right">
+						<span>DEMO T：</span>
 					</td>
+					<td align="left">
+						<select id="demoT" name="demoT" class="easyui-combobox" style="width:100px;height:25px;" ></select>								
+					</td>
+					<td align="right">
+						<span>DEMO Ta：</span>
+					</td>
+					<td align="left">
+						<select id="demoTa" name="demoTa" class="easyui-combobox" style="width:100px;height:25px;" ></select>				
+					</td>
+					<td align="right" colspan="4">
+						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="queryFunc()"><span>查询</span></a>
+						&nbsp;<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px;" id="resetBtn"><span>重置</span></a>
+					</td>
+					<td></td>
 				</tr>
 			</table>
 		</form>
@@ -77,17 +82,11 @@
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("加载中...");
-			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=818&fieldId=schoolId",function(data){
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=513&fieldId=schoolId&headFlag=N",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=DEMO&codeType=CLASS_STATE",function(data){
 				$("#classState").combobox("loadData",data);
-			},"json");
-			$.post("<%=path %>/pubData/qryData.do?param={'queryCode':'qryDemoTeacherInfo','teacherType':'T'}",function(data){
-				$("#demoT").combobox("loadData",data);
-			},"json");
-			$.post("<%=path %>/pubData/qryData.do?param={'queryCode':'qryDemoTeacherInfo','teacherType':'TA'}",function(data){
-				$("#demoTa").combobox("loadData",data);
 				ajaxLoadEnd();
 			},"json");
 			$(document).ready(function(){
@@ -95,7 +94,39 @@
 					formatter:formatSchool, 
 					valueField: 'schoolId', 
 					textField: 'schoolName', 
-					panelHeight: 'auto'
+					panelHeight: 'auto',
+					formatter : formatSchool,
+					onLoadSuccess : function(data) {
+						$("#schoolId").combobox('setValue',data[0].schoolId);
+					},
+					onChange : function(n, o) {
+						if(n != "" && n != null && n != undefined) {
+							$("#demoT").combobox({
+								url : "/sys/pubData/qryData.do?param={'queryCode':'qryDemoTeacherInfo','teacherType':'T','schoolId':'"+n+"'}",//返回json数据的url
+								valueField : "teacherId",
+								textField : "byname",
+								panelHeight : "auto",
+								formatter : function(data) {
+									return "<span>" + data.byname + "</span>";
+								}
+							});
+							$("#demoTa").combobox({
+								url : "/sys/pubData/qryData.do?param={'queryCode':'qryDemoTeacherInfo','teacherType':'TA','schoolId':'"+n+"'}",//返回json数据的url
+								valueField : "teacherId",
+								textField : "byname",
+								panelHeight : "auto",
+								formatter : function(data) {
+									return "<span>" + data.byname + "</span>";
+								}
+							});
+						} else {
+							$("#schoolId").combobox("setText", "");
+							$("#demoT").combobox('clear');
+							$("#demoT").combobox("loadData", new Array());
+							$("#demoTa").combobox('clear');
+							$("#demoTa").combobox("loadData", new Array());
+						}
+					}
 				});
 				$("#classState").combobox({
 					formatter:formatItem, 
@@ -103,31 +134,34 @@
 					textField: 'codeName', 
 					panelHeight: 'auto'
 				});
-				$("#demoT").combobox({
-					formatter:formatTeacher, 
-					valueField: 'teacherId', 
-					textField: 'byname', 
-					panelHeight: 'auto'
-				});
-				$("#demoTa").combobox({
-					formatter:formatTeacher, 
-					valueField: 'teacherId', 
-					textField: 'byname', 
-					panelHeight: 'auto'
-				});
+				
+				//首页面重置
+			    $("#resetBtn").click(function() 
+			    {
+			    	$("#manFm").form('clear');//清空窗体数据  
+			    	//校区赋默认值
+			    	if($("#schoolId").combobox("getData").length>0){
+			    		$("#schoolId").combobox("select",$("#schoolId").combobox("getData")[0].schoolId);
+			    	}
+			    });
 			});
 			function queryFunc()
 			{
-				var obj = $("#manFm").serializeObject();
-				obj["queryCode"] = "qryDemoClassInfo";
-				obj["funcNodeId"] = "4620";
-				obj = JSON.stringify(obj);
-				$("#manList").datagrid({
-					url:"/sys/pubData/qryDataListByPage.do",
-					queryParams:{
-						param : obj
-					}
-				});
+				var schoolId = $("#schoolId").combobox("getValue");
+	   			if(schoolId != ""){
+					var obj = $("#manFm").serializeObject();
+					obj["queryCode"] = "qryDemoClassInfo";
+					obj["funcNodeId"] = "4620";
+					obj = JSON.stringify(obj);
+					$("#manList").datagrid({
+						url:"/sys/pubData/qryDataListByPage.do",
+						queryParams:{
+							param : obj
+						}
+					});
+	   			}else{
+					showMessage("提示","没有有效的校区可供查询",null);
+				}
 			}
 			function addClassManage()
 			{

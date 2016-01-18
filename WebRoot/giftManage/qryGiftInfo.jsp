@@ -183,7 +183,7 @@
 				<tr>
 					<td colspan="10" align="center">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px;" id="qryCouponGift" funcNodeId="4015"><span>查询</span></a>
-						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px;" id="reset" ><span>重置</span></a>
+						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px;" id="resetCoupon" ><span>重置</span></a>
 				  	</td>
 				</tr>
   			</table>
@@ -281,7 +281,7 @@
 	      		  </td>
 				  <td align="left">
 					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px;" id="qryCourseGift" funcNodeId="4022"><span>查询</span></a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px;" id="reset" ><span>重置</span></a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px;" id="resetCourse" ><span>重置</span></a>
 				  </td>
   				</tr>
   			</table>

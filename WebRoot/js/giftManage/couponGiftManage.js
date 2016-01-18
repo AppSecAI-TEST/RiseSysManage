@@ -1,20 +1,35 @@
 $(document).ready(function(){
 	//首页面查询
     $("#qryCouponGift").click(function() {
-		var obj = JSON.stringify($("#qryCouponFm").serializeObject());
-		obj = obj.substring(0, obj.length - 1);
-		var funcNodeId = $("#qryCouponGift").attr("funcNodeId");
-		obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-		$('#couponGift_data').datagrid({
-			url : "/sys/giftManage/qryDataListByPage.do",
-			queryParams:{
-				param : obj
-			},
-			onLoadSuccess:function(){
-				//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
-				$('#couponGift_data').datagrid('clearSelections');
-			}
-		});
+    	var schoolId = $("#couponSchoolId").combobox("getValue");
+	    if(schoolId != ""){
+			var obj = JSON.stringify($("#qryCouponFm").serializeObject());
+			obj = obj.substring(0, obj.length - 1);
+			var funcNodeId = $("#qryCouponGift").attr("funcNodeId");
+			obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+			$('#couponGift_data').datagrid({
+				url : "/sys/giftManage/qryDataListByPage.do",
+				queryParams:{
+					param : obj
+				},
+				onLoadSuccess:function(){
+					//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+					$('#couponGift_data').datagrid('clearSelections');
+				}
+			});
+	    }else{
+			showMessage("提示","没有有效的校区可供查询",null);
+		}
+    });
+    
+     //首页面重置
+    $("#resetCoupon").click(function() 
+    {
+    	$("#qryCouponFm").form('clear');//清空窗体数据  
+    	//校区赋默认值
+    	if($("#couponSchoolId").combobox("getData").length>0){
+    		$("#couponSchoolId").combobox("select",$("#couponSchoolId").combobox("getData")[0].schoolId);
+    	}
     });
     
 	 $("input[name=goodsGiftChannel]").click(function(){

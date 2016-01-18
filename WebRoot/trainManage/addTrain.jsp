@@ -44,8 +44,8 @@
   					<td align="right"><span>培训类型：</span></td>
   					<td align="left">
   						<select name="trainType" id="trainType" class="easyui-combobox" style="width:200px" required="true" editable='false'
-							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
-	      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=TEACHER_TRAIN_T&codeType=TRAIN_TYPE">
+							data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'"
+     						url="<%=path %>/pubData/qryStage.do">
 						</select>
   					</td>
   				</tr>
