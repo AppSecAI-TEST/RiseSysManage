@@ -34,10 +34,10 @@ $(document).ready(function() {
     		return "<span>" + data.stageId + "</span>";
     	},
 		onChange : function(n, o) {
-			var schooolId = $("#schoolId").val();
+			var schoolId = $("#schoolId").val();
 			var date = new Date().format("yyyy-MM-dd");
 			$("#classType").combobox({
-        		url : "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",stageId:\""+n+"\",schoolId:\""+schooolId+"\",time:\""+date+"\"}",//返回json数据的url
+        		url : "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",stageId:\""+n+"\",schoolId:\""+schoolId+"\",time:\""+date+"\"}",//返回json数据的url
         		valueField : "classType",
         		textField : "classType",
         		panelHeight : "auto",
@@ -50,7 +50,7 @@ $(document).ready(function() {
         			var stageId = $("#stageId").combobox("getValue");
         			$.ajax({
         				url : "/sys/applyClass/qryClassName.do",
-        				data: "courseType="+courseType+"&stageId="+stageId+"&classType="+newValue+"&schooolId="+schooolId,
+        				data: "courseType="+courseType+"&stageId="+stageId+"&classType="+newValue+"&schoolId="+schoolId,
         				dataType: "json",
         				async: true,
         				success: function (data) {
@@ -61,30 +61,60 @@ $(document).ready(function() {
         			});
         		}
         	});
+			
+			$("#higherOptionStageId").combobox({
+				url : "/sys/pubData/qryData.do?param={queryCode:\"qryHigherStageId\",stageId:\""+n+"\"}",//返回json数据的url
+		    	valueField : "stageId",
+		    	textField : "stageId",
+		    	panelHeight : "auto",
+		    	editable : false,
+		    	formatter : function(data) {
+		    		return "<span>" + data.stageId + "</span>";
+		    	},
+				onChange : function(n, o) {
+					var higherOptionSchoolId = $("#higherOptionSchoolId").combobox("getValue");
+					if(higherOptionSchoolId != "" && higherOptionSchoolId != null && higherOptionSchoolId != undefined) {
+						$("#higherOptionClassInstId").combobox({
+							url : "/sys/pubData/qryData.do?param={queryCode:\"qryHigherClassInstList\",stageId:\""+n+"\",schoolId:\""+higherOptionSchoolId+"\"}",//返回json数据的url
+							valueField : "classInstId",
+							textField : "className",
+							panelHeight : "auto",
+							editable : false,
+							formatter : function(data) {
+								return "<span>" + data.className + "</span>";
+							}
+						});
+					} else {
+						$.messager.alert('提示', "请选择升学班级所在的校区！");
+					}
+				}
+			});
 		}
 	});
-
-	$("#higherOptionStageId").combobox({
-		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID",//返回json数据的url
-    	valueField : "codeFlag",
-    	textField : "codeName",
+	
+	$("#higherOptionSchoolId").combobox({
+		url : "/sys/pubData/qrySchoolList.do?schoolId=",//返回json数据的url
+    	valueField : "schoolId",
+    	textField : "schoolName",
     	panelHeight : "auto",
     	editable : false,
     	formatter : function(data) {
-    		return "<span>" + data.codeName + "</span>";
+    		return "<span>" + data.schoolName + "</span>";
     	},
 		onChange : function(n, o) {
-			var higherOptionSchoolId = $("#higherOptionSchoolId").combobox("getValue");
-			$("#higherOptionClassInstId").combobox({
-				url : "/sys/pubData/qryData.do?param={queryCode:\"qryHigherSchoolList\",stageId:\""+n+"\",schoolId:\""+higherOptionSchoolId+"\"}",//返回json数据的url
-        		valueField : "classInstId",
-        		textField : "className",
-        		panelHeight : "auto",
-        		editable : false,
-        		formatter : function(data) {
-        			return "<span>" + data.className + "</span>";
-        		}
-			});
+			var higherOptionStageId = $("#higherOptionStageId").combobox("getValue");
+			if(higherOptionStageId != null && higherOptionStageId != "" && higherOptionStageId != undefined) {
+				$("#higherOptionClassInstId").combobox({
+					url : "/sys/pubData/qryData.do?param={queryCode:\"qryHigherClassInstList\",stageId:\""+higherOptionStageId+"\",schoolId:\""+n+"\"}",//返回json数据的url
+					valueField : "classInstId",
+					textField : "className",
+					panelHeight : "auto",
+					editable : false,
+					formatter : function(data) {
+						return "<span>" + data.className + "</span>";
+					}
+				});
+			}
 		}
 	});
 	

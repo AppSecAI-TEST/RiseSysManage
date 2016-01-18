@@ -51,9 +51,7 @@
   						<td align="right" width="8%"><span id="higherText" style="display: none;">升学班级：</span></td>
   						<td colspan="3" width="48%">
   							<div id="higherDiv" style="display: none;">
-	  							<select id="higherOptionSchoolId" class="easyui-combobox" style="width: 100px; height: 28px;" editable="false" 
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"	
-									url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
+	  							<select id="higherOptionSchoolId" class="easyui-combobox" style="width: 100px; height: 28px;" editable="false">
 		     					</select>
 		     					<select id="higherOptionStageId" class="easyui-combobox" style="width: 100px; height: 28px;" editable="false" >
 	        					</select>

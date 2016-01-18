@@ -37,8 +37,9 @@
 	  				</tr>
 	  			</table>
   			</form>
-			<table class="easyui-datagrid" style="height:435px;" id="list_data"
-					title="查询结果" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
+			<div style="padding:5px 0;min-width:1100px; width:100%;">
+				<table class="easyui-datagrid" style="height:435px;" id="list_data"
+					title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
 						<tr>
 							<th data-options="field:'schoolName',width:100,align:'center'">校区</th>
@@ -82,7 +83,4 @@
 		initReportButton("reset","qryFm","schoolId")
 		exportLink("export","list_data");
 	})
-	
-	
-	
 </script>

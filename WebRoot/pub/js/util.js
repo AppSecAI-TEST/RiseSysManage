@@ -368,10 +368,14 @@ function formatNewNotInClass(value, row, index) {
 }
 
 function formatFinishBonus(value, row, index) {
-	if(row.isApplyBonus == "Y" && row.isGetBonus == "N") {
-		return "<a href='javascript:void(0)' onclick='getBonus(" + row.classInstId + ")' style='text-decoration:none'>领取</a>";
+	if(row.isApplyBonus == "N") {
+		return "<a href='javascript:void(0)' onclick='getBonus(" + row.classInstId + ", \"APPLY\")' class='apply' style='width: 100px;'><span>申请奖金</span></a>";
 	} else {
-		return "";
+		if(row.isGetBonus == "N") {
+			return "<a href='javascript:void(0)' onclick='getBonus(" + row.classInstId + ", \"GET\")' class='get' style='width: 100px;'><span>领取奖金</span></a>";
+		} else {
+			return "";
+		}
 	}
 }
 

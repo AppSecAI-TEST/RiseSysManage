@@ -44,18 +44,6 @@ $(document).ready(function() {
     		queryParams:{
     			param : obj
     		},
-//    		onBeforeEdit:function(index, row) {
-//    			row.editing = true;
-//    			$(this).datagrid('refreshRow', index);
-//    		},
-//    		onAfterEdit:function(index, row) {
-//    			row.editing = false;
-//    			$(this).datagrid('refreshRow', index);
-//    		},
-//    		onCancelEdit:function(index, row) {
-//    			row.editing = false;
-//    			$(this).datagrid('refreshRow', index);
-//    		},
     		onLoadSuccess:function() {
     			// 一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
     			mergeCellsByField("list_data", "schoolName");
@@ -129,7 +117,6 @@ $(document).ready(function() {
 			budgetObj.studentInSchoolNum = studentInSchoolNum;
 			//异动人数 = 上周异动人数 - 异动进班人数 + 本周结课已升学 + 本周新招 - 异动退费 - 转出进班  
 			exceptionNum = parseInt(exceptionNum) - parseInt(exceptionInClassNum) + parseInt(finishHigherNum) + parseInt(newPlanNum) - parseInt(exceptionRefundNum) - parseInt(changeOutClassNum);
-			alert(exceptionNum);
 			//在读人数 = 上周在读人数 + 本周异动进班人数 - 本周结课在读 + 转入进班 - 在读退费
 			studyingNum = parseInt(studyingNum) + parseInt(exceptionInClassNum) - parseInt(finishStudyingNum) + parseInt(changeInClassNum) - parseInt(studyingRefundNum);
 			//在校人数 = 在读人数 + 异动总人数	
@@ -160,27 +147,20 @@ $(document).ready(function() {
 			}
 		});
 	});
-		$("#export").click(function(){
-			alert(1111111111)
-			if($("#list_data").datagrid("getData").total>0)
-			{
-				var fileName =parent.$("li.tabs-selected").find("span.tabs-title").html();
-				try
-				{
-					window.location.href="/sys/export/exportCenterGradeRate.do?fileName="+fileName+"&param="+JSON.stringify($("#list_data").datagrid("options").queryParams.param);
-				}
-				catch(e)
-				{
-					$.messager.alert('提示', "模版不存在！",function(){
-						window.history.back();
-					});
-				}
+	
+	$("#export").click(function(){
+		var total = $("#list_data").datagrid("getData").total;
+		if(total > 0) {
+			var fileName = parent.$("li.tabs-selected").find("span.tabs-title").html();
+			try {
+				window.location.href = "/sys/export/exportCenterGradeRate.do?fileName="+fileName+"&param="+JSON.stringify($("#list_data").datagrid("options").queryParams.param);
+			} catch(e) {
+				$.messager.alert('提示', "模版不存在！",function() {window.history.back();});
 			}
-			else
-			{
-				$.messager.alert('提示', "没有数据可以导出！");
-			}	
-		});
+		} else {
+			$.messager.alert('提示', "没有数据可以导出！");
+		}	
+	});
 });
 
 function mergeCellsByField(tableId, colList) {

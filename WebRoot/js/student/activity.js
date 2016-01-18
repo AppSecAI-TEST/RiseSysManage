@@ -162,9 +162,7 @@ $(document).ready(function() {
     				} 
     			});
     		}
-    	}
-    	else
-    	{
+    	} else {
     		$("#activityFm").find(".textbox-text.validatebox-text.validatebox-invalid:first").trigger("mouseover");
     	}	
     });

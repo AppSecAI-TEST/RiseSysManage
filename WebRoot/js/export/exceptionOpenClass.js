@@ -20,6 +20,9 @@ $(document).ready(function() {
     		},
     		onLoadSuccess:function(){
     			onLoadSuccess();
+    			$('.get').linkbutton({text:'领取奖金', iconCls:'icon-add'});
+    			$('.apply').linkbutton({text:'申请奖金', iconCls:'icon-add'});
+    	        $('#list_data').datagrid('clearSelections');
     		}
     	});
     });
@@ -154,20 +157,28 @@ function mergeCellsByField(tableId, colList) {
     }
 }
 
-function getBonus(classInstId) {
+function getBonus(classInstId, type) {
 	$.ajax({
 		url : "/sys/applyClass/getBonus.do",// 返回json数据的url
 		type : "post",
-		data : "classInstId=" + classInstId,
+		data : "classInstId=" + classInstId + "&type=" + type,
 		dataType : "json",
 		async : true,
 		beforeSend: function() {
-			$.messager.progress({title : '领取结课奖金', msg : '正在领取结课奖金，请稍等……'});
+			if("GET" == type) {
+				$.messager.progress({title : '领取结课奖金', msg : '正在领取结课奖金，请稍等……'});
+			} else {
+				$.messager.progress({title : '申请结课奖金', msg : '正在申请结课奖金，请稍等……'});
+			}
 		},
 		success: function (data) {
 			$.messager.progress('close'); 
 			if(data.flag) {
-				$.messager.alert('提示', "领取结课奖金成功！", "info", function() {$("#qryBtn").click();});
+				if("GET" == type) {
+					$.messager.alert('提示', "领取结课奖金成功！", "info", function() {$("#qryBtn").click();});
+				} else {
+					$.messager.alert('提示', "申请结课奖金成功！", "info", function() {$("#qryBtn").click();});
+				}
 			} else {
 				$.messager.alert('提示', data.msg);
 			}

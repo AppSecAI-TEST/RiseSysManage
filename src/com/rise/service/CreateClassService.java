@@ -73,9 +73,9 @@ public class CreateClassService
 		return ServiceEngine.invokeHttp(params);
 	}
 
-	public String getBonus(String classInstId) throws Exception  
+	public String getBonus(String classInstId, String type) throws Exception  
 	{
-		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00711\",securityCode:\"0000000000\",params:{classInstId:"+classInstId+"},rtnDataFormatType:\"user-defined\"}";
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00711\",securityCode:\"0000000000\",params:{classInstId:"+classInstId+",type:\""+type+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
 }

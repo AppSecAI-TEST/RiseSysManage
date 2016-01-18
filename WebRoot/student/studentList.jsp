@@ -26,12 +26,11 @@
 					</td>
 					<td align="right" style="min-width: 80px;"><span>班级：</span></td>
 					<td width="100px">
-						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled">
-      					</select>
+						<input name="classInstId" id="classInstId" type="text" class="easyui-textbox" style="width: 120px; height: 25px;"/>
 					</td>
 					<td align="right" style="min-width: 80px;"><span>学员姓名：</span></td>
 					<td width="100px">
-						<input id="studentId" name="studentId" class="easyui-textbox" style="width: 100px; height: 25px;" 
+						<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 120px; height: 25px;"/>
 					</td>
 					<td align="right" style="min-width: 80px;"><span>联系电话：</span></td>
 					<td width="100px" colspan="2">

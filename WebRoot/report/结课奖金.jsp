@@ -16,7 +16,7 @@
   			<form id="qryFm" style="margin:0 auto;">
   				<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
   					<tr>
-  						<td align="right" width="100px"><span>校区：</span></td>
+  						<td align="right" style="min-width: 60px"><span>校区：</span></td>
 	  					<td width="114px">
 							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;"
 								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
@@ -88,7 +88,7 @@
 							<th data-options="field:'changeTeacherRemark',width:'20%',align:'center'">中途更换老师情况</th>
 							<th data-options="field:'teacherHours',width:'12%',align:'center'">授课课时比例</th>
 							<th data-options="field:'isApplyBonusText',width:'9%',align:'center'">是否已申请奖金</th>
-							<th data-options="field:'option', width:'6%', align:'center', formatter:formatFinishBonus">操作</th>
+							<th data-options="field:'option', width:'10%', align:'center', formatter:formatFinishBonus">操作</th>
 						</tr>
 					</thead>
 				</table>

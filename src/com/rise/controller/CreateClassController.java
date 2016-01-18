@@ -277,6 +277,7 @@ public class CreateClassController
 		log.error(courseType);
 		log.error(classType);
 		log.error(stageId);
+		log.error(schoolId);
 		PrintWriter out = null;
 		try
 		{
@@ -351,14 +352,14 @@ public class CreateClassController
 	}
 	
 	@RequestMapping(value = "/getBonus.do")
-	public void getBonus(String classInstId, HttpServletResponse response)
+	public void getBonus(String classInstId, String type, HttpServletResponse response)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = createClassService.getBonus(classInstId);
+			String retVal = createClassService.getBonus(classInstId, type);
 			log.error(retVal);
 			out.write(retVal);
 		}
