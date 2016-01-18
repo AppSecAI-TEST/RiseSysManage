@@ -30,8 +30,7 @@
 					</td>
 					<td align="right"><span>班级：</span></td>
 					<td width="130px">
-						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 117px; height: 25px;">
-		        		</select>
+						<input id="className" name="className" type="text" class="easyui-textbox validatebox"  style="width: 50px; height: 23px;"/>
 					</td>
 				
 				
@@ -72,7 +71,6 @@
   		</form>
   		<div style="padding:5px 0;min-width:1100px; width:100%;">
   			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" 
-  				url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1022" 
 		  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 		  		<thead>
 		  			<tr>
@@ -93,7 +91,7 @@
 		  	</table>
   		</div>
   		<div id="toolbar">
-   			<a href="javascript:void(0)" id="changeBase" class="easyui-linkbutton" iconCls="icon-edit" plain="true">基数费用</a>
+   			<a href="javascript:void(0)" id="changeBase" class="easyui-linkbutton" iconCls="icon-edit" plain="true">基数调整</a>
    			<a href="javascript:void(0)" id="viewChange" class="easyui-linkbutton" iconCls="icon-redo" plain="true">查看调整历史</a>
  		</div>
   	</body>
@@ -104,6 +102,12 @@
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) 
 		{
+			if(row.classState!='003')
+			{
+			    $.messager.alert('提示', "该班级不能调整基数！");
+			    return;
+			}
+		 
 		    var classState = row.classState;
 			var classInstId = row.classInstId;
 			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=numChange";

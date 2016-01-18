@@ -46,7 +46,7 @@
 		  				</tr>
 		  				<tr>
 		  					<td align="right" width="10%"><span>升学基数：</span></td>
-		  					<td width="20%"><span>${obj.attendClassObj.classStudentNum }</span>&nbsp;&nbsp;
+		  					<td width="20%"><span>${obj.attendClassObj.higherBaseNum }</span>&nbsp;&nbsp;
 		  					<span id="higherSchoolName">改为：</span>
 		  					<input id="higherBaseNum" name="higherBaseNum" type="text" class="easyui-textbox validatebox"  style="width: 50px; height: 23px;"/>
 		  					</td>
