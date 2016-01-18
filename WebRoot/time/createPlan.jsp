@@ -62,17 +62,11 @@
 		    <td align="center" width="62px;" colspan="2"><span>第三周</span></td>
 		    <td align="center" width="62px;" colspan="2"><span>第四周</span></td>
 		    <td align="center" width="62px;" colspan="2"><span>第五周</span></td>
-		    <td align="center" width="62px;" colspan="2"><span>第六周</span></td>
-		    <td align="center" width="62px;" colspan="2"><span>第日周</span></td>
 		    <td align="center" width="48px;" rowspan="2"><span>本月计划课时</span></td>
 		    <td align="center" width="48px;" rowspan="2"><span>本月已排课时</span></td>
 		    <td align="center" width="48px;" rowspan="2"><span>课时差异</span></td>
 		  </tr>
 		  <tr align="center">
-		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>已排课时</span></td>
-		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>已排课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
 		    <td align="center" width="40px;"><span>已排课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
@@ -152,10 +146,6 @@ $(function () {
 			    			html+="<td align='center'><span>"+obj.weekHand4+"</span></td>";
 			    			html+="<td align='center'><span>"+obj.weekPlan5+"</span></td>";
 			    			html+="<td align='center'><span>"+obj.weekHand5+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekPlan6+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekHand6+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekPlan7+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekHand7+"</span></td>";
 			    			html+="<td align='center'><span>"+obj.monthPlanHours+"</span></td>";
 			    			html+="<td align='center'><span>"+obj.monthHandHours+"</span></td>";
 			    			html+="<td align='center'><span>"+obj.mDiffNum+"</span></td>";
@@ -253,7 +243,7 @@ $('#weekDg').datagrid({
         {field:'weekName',title:'周',width:25,align:'center'},  
         {field:'dateRange',title:'时间段',width:25,align:'center'},  
         {field:'isPlan',title:'是否排课',width:25,align:'center'},  
-        {field:'createDdate',title:'创建时间',width:25,align:'center', 
+        {field:'createDdate',title:'操作',width:25,align:'center', 
             formatter: function(Confirmation, row)
             {  
               var btn = '<a class="editcls" onclick="planWeek(\''+row.weekSeq+'\',\''+row.dateRange+'\',\''+row.month+'\',\''+row.createWeekId+'\')"  href="javascript:void(0)">排课</a>';  

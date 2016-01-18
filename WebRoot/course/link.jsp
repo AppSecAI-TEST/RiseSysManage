@@ -316,7 +316,7 @@ function validateCourses(studentCourses)
 					}
 				}else if(feeType=='002'|| feeType=='003')
 				{
-					if(courseState=='002' || courseState=='003' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
+					if(courseState=='002' || courseState=='003'  || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 					{
 						if(Number(stageOrder)<Number(order))
 						{

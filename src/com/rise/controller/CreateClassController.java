@@ -272,7 +272,7 @@ public class CreateClassController
 	}
 	
 	@RequestMapping(value = "/qryClassName.do")
-	public void qryClassName(String courseType, String classType, String stageId, HttpServletResponse response)
+	public void qryClassName(String courseType, String classType, String stageId, String schoolId, HttpServletResponse response)
 	{
 		log.error(courseType);
 		log.error(classType);
@@ -282,7 +282,7 @@ public class CreateClassController
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = createClassService.qryClassName(courseType, classType, stageId);
+			String retVal = createClassService.qryClassName(courseType, classType, stageId, schoolId);
 			log.error(retVal);
 			out.write(retVal);
 		}

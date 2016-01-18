@@ -50,7 +50,7 @@ $(document).ready(function() {
         			var stageId = $("#stageId").combobox("getValue");
         			$.ajax({
         				url : "/sys/applyClass/qryClassName.do",
-        				data: "courseType="+courseType+"&stageId="+stageId+"&classType="+newValue,
+        				data: "courseType="+courseType+"&stageId="+stageId+"&classType="+newValue+"&schooolId="+schooolId,
         				dataType: "json",
         				async: true,
         				success: function (data) {

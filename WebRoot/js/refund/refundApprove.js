@@ -70,7 +70,7 @@ $(document).ready(function() {
 				$.messager.alert('提示', "请选择是否审批通过！");
 				flag = false;
 			} else {
-				if("104" == nextState) {
+				if("104" == nextState || "105" == nextState) {
 					masterType = $("#masterType").combobox("getValue");
 					if(masterType == null || masterType == "" || masterType == undefined) {
 						$.messager.alert('提示', "请选择后续审批人类型！");
@@ -93,7 +93,7 @@ $(document).ready(function() {
 				}
 			});
 			approveObj.remark = approveRemark;
-			if("104" == nextState) {
+			if("104" == nextState || "105" == nextState) {
 				approveObj.masterType = masterType;
 			} else if("108" == nextState) {
 				approveObj.isTransfer = isTransfer;

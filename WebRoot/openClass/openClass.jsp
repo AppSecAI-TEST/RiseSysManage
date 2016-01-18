@@ -22,7 +22,7 @@
 								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
 									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 					      			onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue', data[0].schoolId);}"
-					      			url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
+					      			url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=502&fieldId=schoolId">
 				        		</select>
 							</td>
 							<td align="right"><span>课程阶段：</span></td>
@@ -104,7 +104,7 @@
 								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
 									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 									onLoadSuccess:function(data){if(data.length > 0) $('#approveSchoolId').combobox('setValue', data[0].schoolId);}"
-					      			url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
+					      			url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=502&fieldId=schoolId">
 				        		</select>
 							</td>
 							<td align="right"><span>开班申请日期：</span></td>
