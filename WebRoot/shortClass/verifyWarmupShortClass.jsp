@@ -81,6 +81,7 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
+			ajaxLoadEnd();
 			function attendSubmit()
 			{
 				$.messager.confirm('提示','您确定审批当前热身课吗?',function(r){

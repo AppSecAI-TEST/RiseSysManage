@@ -86,6 +86,7 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
+			ajaxLoadEnd();
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=811&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
@@ -140,7 +141,9 @@
 						schoolId:row.schoolId,
 						handlerId:${sessionScope.StaffT.staffId}
 					}
+					ajaxLoading("选课中...");
 					$.post("/sys/shortBus/addShortStudentTInfo.do",{json:JSON.stringify(json),classType:encodeURI("外教课")},function(data){
+						ajaxLoadEnd();
 						if(data == "success")
 						{
 							backFunc();
@@ -158,6 +161,7 @@
 			}
 			function backFunc()
 			{
+				ajaxLoading("返回中...");
 				window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId=${param.shortClassInstId}&classType=外教课&pageName=shortAttenceForeignDetail";
 			}
 		</script>

@@ -116,6 +116,7 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
+			ajaxLoadEnd();
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=CLASS_TYPE",function(data){
 				$("#classType").combobox("loadData",data);
 			},"json");
@@ -194,6 +195,7 @@
 			}
 			function addPlanFunc()
 			{
+				ajaxLoading("加载中...");
 				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortWarmupClassMan&classType=热身课&schoolId=${shortClassInstT.schoolId}&paramFlag=UPDATE";
 			}
 			function studentBoxFunc(obj)
@@ -227,6 +229,7 @@
 			}
 			function selectClassFunc()
 			{
+				ajaxLoading("加载中...");
 				window.location.href = "/sys/shortClass/choiceWarmupClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortWarmupClassMan&classType="+encodeURI("热身课");
 			}
 			function removeClassFunc()

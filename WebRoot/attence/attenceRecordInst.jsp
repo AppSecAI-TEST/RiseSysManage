@@ -240,7 +240,8 @@
 						roomId:classRoomId,
 						classType:"${classInstT.classType}",
 						handlerId:"${sessionScope.StaffT.staffId}",
-						schooltime:'${classSchooltime}',
+						schooltime:'',
+						attendDate:'${classSchooltime}',
 						teacherList:null,
 						studentList:null
 					};
@@ -250,6 +251,7 @@
 							teacherId:$(node).attr("teacherId"),
 							teacherName:$(node).attr("teacherName"),
 							teacherType:$(node).attr("teacherType"),
+							attendDate:'${classSchooltime}',
 							hours:$(node).attr("hours")
 						};
 						teacherArr.push(teacherObj);
@@ -266,6 +268,7 @@
 							stageId:firstTr.attr("stageId"),
 							studentName:firstTr.attr("studentName"),
 							schoolId:firstTr.attr("schoolId"),
+							attendDate:'${classSchooltime}',
 							hours:classLessonHour,
 							dress:dressObj,
 							attendType:attendTypeObj

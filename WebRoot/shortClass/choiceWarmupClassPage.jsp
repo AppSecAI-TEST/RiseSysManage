@@ -90,6 +90,7 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
+			ajaxLoadEnd();
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
 				data = $.grep(data , function(node){
 					if(node.codeFlag != '004' && node.codeFlag != '005')
@@ -164,7 +165,9 @@
 						schoolId:row.schoolId,
 						handlerId:${sessionScope.StaffT.staffId}
 					}
+					ajaxLoading("选课中...");
 					$.post("/sys/shortBus/addShortStudentTInfo.do",{json:JSON.stringify(json),classType:encodeURI("热身课")},function(data){
+						ajaxLoadEnd();
 						if(data == "success")
 						{
 							backFunc();
@@ -182,6 +185,7 @@
 			}
 			function backFunc()
 			{
+				ajaxLoading("返回中...");
 				if("游学" == "${param.classType}")
 				{
 					window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId=${param.shortClassInstId}&pageName=${param.pageName}&classType="+encodeURI("${param.classType}");

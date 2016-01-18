@@ -50,6 +50,7 @@
   	</body>
 </html>
 <script>
+	ajaxLoadEnd();
 	$(document).ready(function(){
 		$.ajax( {
 			type : "POST",

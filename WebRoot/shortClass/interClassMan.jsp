@@ -241,15 +241,8 @@
 				var row = $("#manList").datagrid("getSelected");
 				if(row)
 				{
-					if(row.classStateName != "解散")
-					{
-						ajaxLoading("加载中...");
-						window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=viewInterShortClass&shortClassInstId="+row.shortClassInstId;
-					}
-					else
-					{
-						$.messager.alert('提示',"该课程已被取消");		
-					}
+					ajaxLoading("加载中...");
+					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=viewInterShortClass&shortClassInstId="+row.shortClassInstId;
 				}
 				else
 				{

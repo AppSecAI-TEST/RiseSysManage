@@ -1,3 +1,4 @@
+ajaxLoadEnd();
 var shortClassInstId,classState,handlerId;
 $(document).ready(function() {
 	$("#backBtn").click(function() {

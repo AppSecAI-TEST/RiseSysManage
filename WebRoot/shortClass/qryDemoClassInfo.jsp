@@ -131,6 +131,7 @@
 			}
 			function addClassManage()
 			{
+				ajaxLoading("加载中...");
 				window.location.href = "/sys/shortClass/addDemoClass.jsp";
 			}
 			function cancleDemoClass()

@@ -157,7 +157,7 @@
 				<table id="classAttendInfo" class="easyui-datagrid" title="" style="height:99%;margin:0 auto;height:180px" pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
 					<thead>
 						<tr>
-							<th field="schooltimeName" width="10%" align="center">上课日期</th>
+							<th field="attendDateName" width="10%" align="center">上课日期</th>
 							<th field="hourRangeName" width="10%" align="center">实际上课时间</th>
 							<th field="roomName" width="7%" align="center">教室</th>
 							<th field="hours" width="7%" align="center">课时</th>
@@ -168,7 +168,7 @@
 							<th field="leaveNum" width="7%" align="center">请假</th>
 							<th field="truantNum" width="7%" align="center">旷课</th>
 							<th field="attendRateNum" width="7%" align="center">出勤率</th>
-							<th field="attendDateName" width="8%" align="center">考勤录入时间</th>
+							<th field="createDateName" width="8%" align="center">考勤录入时间</th>
 							<th field="handlerName" width="7%" align="center">录入人</th>
 						</tr>
 					</thead>

@@ -216,6 +216,7 @@
 				sessionStorage.setItem("remark",remark);
 				if(schoolManId != "")
 				{
+					ajaxLoading("加载中...");
 					window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstId}&pageName=addWarmupClass&classType=热身课&schoolId="+schoolManId+"&paramFlag=ADD";
 				}
 				else

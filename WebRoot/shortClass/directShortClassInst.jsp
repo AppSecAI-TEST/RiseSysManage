@@ -46,6 +46,7 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
+			ajaxLoadEnd();
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=815&fieldId=schoolId",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
@@ -193,7 +194,9 @@
 						handlerId:${sessionScope.StaffT.staffId},
 						classTeacherList:arr
 					};
+					ajaxLoading("排课中...");
 					$.post("/sys/shortBus/addDirectShortClassInstInfo.do",{json:JSON.stringify(json),classType:encodeURI("${param.classType}"),schoolId:${sessionScope.StaffT.schoolId},stageId:stageId},function(data){
+						ajaxLoadEnd();
 						if(data == "success")
 						{
 							$.messager.alert('提示',"完成当前排课","",function(){

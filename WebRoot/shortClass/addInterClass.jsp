@@ -124,6 +124,8 @@
 				var planHours = $("#planHours").textbox("getValue");
 				var classEndTime = $("#classEndTime").combobox("getValue");
 				var remark = $("#remark").textbox("getValue");
+				var classStartDate = new Date(classStartTime);
+				var classEndDate = new Date(classEndTime);
 				if(interClassType == "")
 				{
 					$.messager.alert('提示',"请先选择国际班类型","info");
@@ -151,6 +153,10 @@
 				else if($(".shortSchooltimeId").length == 0)
 				{
 					$.messager.alert('提示',"上课计划不能为空,请核实后重新尝试","info");
+				}
+				else if(classEndDate.getTime() <= classStartDate.getTime())
+				{
+					$.messager.alert('提示',"结课时间必须大于开课时间,请核实后重新尝试","info");
 				}
 				else
 				{

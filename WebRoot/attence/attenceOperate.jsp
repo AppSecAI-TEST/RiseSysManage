@@ -60,7 +60,7 @@
 											<td align="left" width="10%" style="background-color:#fafafa">&nbsp;</td>
 										</c:when>
 										<c:otherwise>
-											<td align="center" width="4%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}','${node.schooltimeId}')">${node.dateValue}</a></td>
+											<td align="center" width="4%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}','${node.schooltimeInstId}')">${node.dateValue}</a></td>
 											<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
 												<c:if test="${node.calendarShow.planClassTime != ''}">
 													计划:${node.calendarShow.planClassTime}
@@ -81,7 +81,7 @@
 											<td align="left" width="10%" style="background-color:#fafafa">&nbsp;</td>
 										</c:when>
 										<c:otherwise>
-											<td align="center" width="4%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}','${node.schooltimeId}')">${node.dateValue}</a></td>
+											<td align="center" width="4%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}','${node.schooltimeInstId}')">${node.dateValue}</a></td>
 											<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
 												<c:if test="${node.calendarShow.planClassTime != ''}">
 													计划:${node.calendarShow.planClassTime}
@@ -103,7 +103,7 @@
 											<td align="left" width="10%" style="background-color:#fafafa">&nbsp;</td>
 										</c:when>
 										<c:otherwise>
-											<td align="center" width="4%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}','${node.schooltimeId}')">${node.dateValue}</a></td>
+											<td align="center" width="4%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}','${node.schooltimeInstId}')">${node.dateValue}</a></td>
 											<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
 												<c:if test="${node.calendarShow.planClassTime != ''}">
 													计划:${node.calendarShow.planClassTime}
@@ -126,7 +126,7 @@
 										<td align="left" width="10%" style="background-color:#fafafa">&nbsp;</td>
 									</c:when>
 									<c:otherwise>
-										<td align="center" width="4%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}','${node.schooltimeId}')">${node.dateValue}</a></td>
+										<td align="center" width="4%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}','${node.schooltimeInstId}')">${node.dateValue}</a></td>
 										<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
 											<c:if test="${node.calendarShow.planClassTime != ''}">
 												计划:${node.calendarShow.planClassTime}
@@ -146,7 +146,7 @@
 				<table id="classAttendInfo" class="easyui-datagrid" title="" style="height:99%;margin:0 auto;height:180px" pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
 					<thead>
 						<tr>
-							<th field="schooltimeName" width="10%" align="center">上课日期</th>
+							<th field="attendDateName" width="10%" align="center">上课日期</th>
 							<th field="hourRangeName" width="10%" align="center">实际上课时间</th>
 							<th field="roomName" width="7%" align="center">教室</th>
 							<th field="hours" width="7%" align="center">课时</th>
@@ -157,7 +157,7 @@
 							<th field="leaveNum" width="7%" align="center">请假</th>
 							<th field="truantNum" width="7%" align="center">旷课</th>
 							<th field="attendRateNum" width="7%" align="center">出勤率</th>
-							<th field="attendDateName" width="8%" align="center">考勤录入时间</th>
+							<th field="createDateName" width="8%" align="center">考勤录入时间</th>
 							<th field="handlerName" width="7%" align="center">录入人</th>
 						</tr>
 					</thead>
@@ -188,17 +188,17 @@
 				    }
 				});
 			});
-			function gotoAttendRecord(classInstId,dateValue,classAttendId,realClassTime,schooltimeId)
+			function gotoAttendRecord(classInstId,dateValue,classAttendId,realClassTime,schooltimeInstId)
 			{
 				if(realClassTime != "")
 				{
 					ajaxLoading("加载中...");
 					window.location.href = "/sys/attend/getUpdateAttenceRecord.do?funcNodeId=${funcNodeId}&classAttendId="+classAttendId+"&selDateStr="+$("#selDateStr").html();
 				}
-				else if(schooltimeId != "")
+				else if(schooltimeInstId != "")
 				{
 					ajaxLoading("加载中...");
-					window.location.href = "/sys/attend/getAttenceRecord.do?funcNodeId=${funcNodeId}&schooltimeId="+schooltimeId+"&selDateStr="+$("#selDateStr").html()+"&dateValue="+dateValue;
+					window.location.href = "/sys/attend/getAttenceRecord.do?funcNodeId=${funcNodeId}&schooltimeInstId="+schooltimeInstId+"&selDateStr="+$("#selDateStr").html()+"&dateValue="+dateValue;
 				}
 				else if(classInstId != "")
 				{

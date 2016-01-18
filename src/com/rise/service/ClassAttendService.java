@@ -17,6 +17,8 @@ import com.rise.model.AttStudentObj;
 import com.rise.model.CalendarItem;
 import com.rise.model.ClassAttendT;
 import com.rise.model.ClassInstT;
+import com.rise.model.FuncNodeTree;
+import com.rise.model.SchooltimeInstT;
 import com.rise.model.SchooltimeT;
 import com.rise.pub.base.JacksonJsonMapper;
 import com.rise.pub.invoke.ServiceEngine;
@@ -63,16 +65,20 @@ public class ClassAttendService
 		model.addObject("funcNodeId", funcNodeId);
 	}
 	
-	public void getAttenceRecord(ModelAndView model , String schooltimeId , String funcNodeId , String selDateStr , String dateValue) throws Exception
+	public void getAttenceRecord(ModelAndView model , String schooltimeInstId , String funcNodeId , String selDateStr , String dateValue) throws Exception
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2043\",securityCode:\"0000000000\",params:{schooltimeId:\""+schooltimeId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2043\",securityCode:\"0000000000\",params:{schooltimeInstId:\""+schooltimeInstId+"\"},rtnDataFormatType:\"user-defined\"}";
 		String result = ServiceEngine.invokeHttp(param);
 		try{
 			JSONObject json = JSONObject.fromObject(result);
-			SchooltimeT schooltimeT = (SchooltimeT)JacksonJsonMapper.getInstance().readValue(json.getJSONObject("schooltimeT").toString(), SchooltimeT.class);
+			SchooltimeInstT schooltimeInstT = (SchooltimeInstT)JacksonJsonMapper.getInstance().readValue(json.getJSONObject("schooltimeInstT").toString(), SchooltimeInstT.class);
 			ClassInstT classInstT = (ClassInstT)JacksonJsonMapper.getInstance().readValue(json.getJSONObject("classInstT").toString(), ClassInstT.class);
+			ObjectMapper mapper = JacksonJsonMapper.getInstance();
+			JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, SchooltimeInstT.class);
+			List schooltimeInstTList = (List)mapper.readValue(json.getJSONArray("schooltimeInstTList").toString(), javaType);
 			model.addObject("isFirstFlag", StringUtil.getJSONObjectKeyVal(json, "isFirstFlag"));
-			model.addObject("schooltimeT", schooltimeT);
+			model.addObject("schooltimeInstT", schooltimeInstT);
+			model.addObject("schooltimeInstTList", schooltimeInstTList);
 			model.addObject("classInstT", classInstT);
 			model.addObject("hourRangeList", json.getJSONArray("hourRangeList"));
 			model.addObject("roomList", json.getJSONArray("roomList"));

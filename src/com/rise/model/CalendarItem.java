@@ -8,7 +8,7 @@ public class CalendarItem {
 	
 	private String dateValue;
 	
-	private String schooltimeId;
+	private String schooltimeInstId;
 	
 	private CalendarShow calendarShow;
 	
@@ -38,12 +38,12 @@ public class CalendarItem {
 		this.dateValue = dateValue;
 	}
 	
-	public String getSchooltimeId() {
-		return schooltimeId;
+	public String getSchooltimeInstId() {
+		return schooltimeInstId;
 	}
 
-	public void setSchooltimeId(String schooltimeId) {
-		this.schooltimeId = schooltimeId;
+	public void setSchooltimeInstId(String schooltimeInstId) {
+		this.schooltimeInstId = schooltimeInstId;
 	}
 
 	public CalendarShow getCalendarShow() {

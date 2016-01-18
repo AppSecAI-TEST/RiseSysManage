@@ -130,9 +130,11 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
+			ajaxLoadEnd();
 			var gClassAttend = null;
 			function addAttenceFunc()
 			{
+				ajaxLoading("加载中...");
 				window.location.href = "/sys/shortClass/choiceForeignClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&classType="+encodeURI("外教课");
 			}
 			function cancelAttenceFunc()

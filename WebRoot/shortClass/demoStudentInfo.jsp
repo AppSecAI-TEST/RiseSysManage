@@ -86,6 +86,7 @@
   	</body>
 </html>
 <script type="text/javascript">
+	ajaxLoadEnd();
 	$(document).ready(function(){
 		$("#backBtn").click(function(){
 			window.history.back();

@@ -137,6 +137,7 @@
 				var row = $("#manList").datagrid("getSelected");
 				if(row)
 				{
+					ajaxLoading("加载中...");
 					window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&classType=外教课&pageName=shortAttenceForeignDetail";					
 				}
 				else
@@ -151,6 +152,7 @@
 				{
 					if(row.classStateName == "未开课" || row.classStateName == "未开课")
 					{
+						ajaxLoading("加载中...");
 						window.location.href = "/sys/shortBus/getForeignAttendTInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId;
 					}
 					else if(row.classStateName == "开课在读")
@@ -178,6 +180,7 @@
 				{
 					if(row.classStateName != "解散")
 					{
+						ajaxLoading("加载中...");
 						window.location.href = "/sys/shortBus/shortAttenceDetailPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=viewForeignAttenceInfo";
 					}
 					else

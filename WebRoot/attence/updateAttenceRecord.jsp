@@ -303,7 +303,6 @@
 					roomId:$("#classRoomId").combobox("getValue"),
 					classType:"${schooltimeInstT.classInstT.classType}",
 					handlerId:"${sessionScope.StaffT.staffId}",
-					schooltime:'<fmt:formatDate value="${classAttendT.schooltime}" pattern="yyyy-MM-dd" />',
 					teacherList:null,
 					studentList:null
 				};

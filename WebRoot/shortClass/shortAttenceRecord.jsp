@@ -145,9 +145,11 @@
 					}
 				});
 				$("#attRecordTeacherId").combobox({
-					formatter:formatTeacherName,
+					formatter:function(row){
+						return "<span>"+row.byName+"</span>";
+					},
 					valueField: 'teacherId', 
-					textField: 'teacherName', 
+					textField: 'byName', 
 					//panelHeight: 'auto',
 					listHeight:150
 				});
@@ -179,15 +181,58 @@
 				{
 					$.messager.alert('提示',"请先输入课时量后重新尝试");
 				}
+				else if(isNaN(attRecordLessonHour))
+				{
+					$.messager.alert('提示',"您输入的课时量不合法,请核实后重新尝试");
+				}
 				else
 				{
-					ajaxLoading("添加中...");
-					$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:attRecordTeacherId},function(data){
-						ajaxLoadEnd();
-						var trData = "<tr id='teacherId"+data.teacherId+"'><td align='right' teacherId='"+data.teacherId+"' schoolId='"+data.schoolId+"' teacherType='"+$("#attRecordClassType").combobox("getText")+"' hours='"+attRecordLessonHour+"'>老师：</td><td align='center'>"+$("#attRecordSchoolId").combobox("getText")+"</td><td align='center'>"+$("#attRecordTeacherId").combobox("getText")+"</td><td align='center'>"+$("#attRecordClassType").combobox("getText")+"</td><td align='center'>"+attRecordLessonHour+"</td><td align='center'>"+(data.teacherLicenseList.length>0?"已持证":"未持证")+"</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
-						$("#teacherTab tr:last").after(trData);
-					},"json");
+					var teacherFlag = true;
+					var teacherNum = 0;
+					$("#teacherTab tr:gt(1) td:nth-child(1)").each(function(i,node){
+						if($(node).attr("teacherId") == attRecordTeacherId)
+						{
+							teacherFlag = false;
+						}
+						if($(node).attr("teacherType") == "T")
+						{
+							teacherNum += $(node).attr("hours");
+						}
+					});
+					if(teacherFlag)
+					{
+						var classLessonHour = $("#classLessonHour").textbox("getValue");
+						if(classLessonHour == "" || isNaN(classLessonHour))
+						{
+							invokeGetTeacherInfo(attRecordTeacherId);
+						}
+						else
+						{
+							if(teacherNum+attRecordLessonHour > classLessonHour)
+							{
+								$.messager.alert('提示',"当前添加的老师课时已经超过了排课课时,请核实后重新尝试");
+							}
+							else
+							{
+								invokeGetTeacherInfo(attRecordTeacherId)
+							}
+						}
+					}
+					else
+					{
+						$.messager.alert('提示',"该老师已经被添加,请核实后重新尝试");
+					}
 				}
+			}
+			
+			function invokeGetTeacherInfo(attRecordTeacherId)
+			{
+				ajaxLoading("添加中...");
+				$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:attRecordTeacherId},function(data){
+					ajaxLoadEnd();
+					var trData = "<tr id='teacherId"+data.teacherId+"'><td align='right' teacherId='"+data.teacherId+"' schoolId='"+data.schoolId+"' teacherType='"+$("#attRecordClassType").combobox("getText")+"' hours='"+attRecordLessonHour+"'>老师：</td><td align='center'>"+$("#attRecordSchoolId").combobox("getText")+"</td><td align='center'>"+$("#attRecordTeacherId").combobox("getText")+"</td><td align='center'>"+$("#attRecordClassType").combobox("getText")+"</td><td align='center'>"+attRecordLessonHour+"</td><td align='center'>"+(data.teacherLicenseList.length>0?"已持证":"未持证")+"</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
+					$("#teacherTab tr:last").after(trData);
+				},"json");
 			}
 			
 			function delTeacherFunc(val)
