@@ -24,9 +24,7 @@
 	  					</td>
 	  					<td align="right" width="50px"><span>班级：</span></td>
 	  					<td align="left"  width="110px">
-	  						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-								data-options="formatter:formatClassInst, valueField: 'classInstId', textField: 'className', panelHeight: 'auto'">
-				        	</select>
+	  						<input id="className" name="className" class="easyui-textbox" style="width: 100px; height: 25px;">
 	  					</td>
 	  					<td align="right" width="50px"><span>教师：</span></td>
 	  					<td align="left"  width="110px">
@@ -112,9 +110,6 @@
     			}	
     		},
     		onChange : function(n, o) {
-    			$("#classInstId").combobox({
-    				url:"/sys/pubData/qryClassInstList.do?schoolId="+n+"&stageId="+$("#stageId").combobox("getValue")                                   
-    			});
     			$("#teacherId").combobox({
 		    		url:"/sys/pubData/qryTeacherList.do?schoolId="+n
 		    	});
