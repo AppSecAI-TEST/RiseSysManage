@@ -241,7 +241,6 @@ function initTable(tabId,data)
     },
     onClickCell:onClickCell, 
     columns:[[
-    	 {field:'teacherName',title:'',width:100,align:'center'},
       {field:'H001',title:'8:30', width:68,align:'center', editor:'text'},
       {field:'H002',title:'10:30',width:68,align:'center', editor:'text'},
       {field:'H003',title:'14:00',width:68,align:'center', editor:'text'},

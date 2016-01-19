@@ -52,10 +52,11 @@
 	  				</tr>	
 	  			</table>
   			</form>
-  		<div style="min-width:1100px;width:99%;margin:0 auto;background:#ccc;"><a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;margin: 2px 10px">导出全部</a></div>	
+  		<div style="min-width:1100px;width:99%;margin:0 auto;"><a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;margin: 2px ">导出全部</a>
+  		<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px;margin: 2px ">提交差异说明</a></div>	
   		<div style="min-width:1100px;width:99%;margin:0 auto;">
 		<div class="easyui-panel" title="排课信息" style="width:100%;overflow:auto;">
-		<table class="maintable" id="hoursPlanTab" style="width:1500px;" cellspacing="0" cellpadding="0">
+		<table class="maintable" id="hoursPlanTab" style="width:1500px;margin-right: 10px" cellspacing="0" cellpadding="0">
 		  <tr align="center">
 		     <td align="center" width="78px;" rowspan="2"><span>学校</span></td>
 		    <td align="center" width="78px;" rowspan="2"><span>班级</span></td>
@@ -74,6 +75,7 @@
 		    <td align="center" width="48px;" rowspan="2"><span>本月计划课时</span></td>
 		    <td align="center" width="48px;" rowspan="2"><span>本月已排课时</span></td>
 		    <td align="center" width="48px;" rowspan="2"><span>课时差异</span></td>
+		    <td align="center" width="48px;" rowspan="2"><span>差异说明</span></td>
 		  </tr>
 		  <tr align="center">
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
@@ -169,6 +171,7 @@
 				    			html+="<td align='center'><span>"+obj.monthPlanHours+"</span></td>";
 				    			html+="<td align='center'><span>"+obj.monthHandHours+"</span></td>";
 				    			html+="<td align='center'><span>"+obj.mDiffNum+"</span></td>";
+				    			html+="<td align='center' width='40px;'><input class='easyui-text' style='width:150px; height: 25px;'/></td>";
 				    			html+="</tr>";
 				    		}
 							
