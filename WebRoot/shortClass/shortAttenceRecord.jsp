@@ -196,7 +196,7 @@
 						}
 						if($(node).attr("teacherType") == "T")
 						{
-							teacherNum += $(node).attr("hours");
+							teacherNum += parseInt($(node).attr("hours"));
 						}
 					});
 					if(teacherFlag)
@@ -204,17 +204,17 @@
 						var classLessonHour = $("#classLessonHour").textbox("getValue");
 						if(classLessonHour == "" || isNaN(classLessonHour))
 						{
-							invokeGetTeacherInfo(attRecordTeacherId);
+							invokeGetTeacherInfo(attRecordTeacherId,attRecordLessonHour);
 						}
 						else
 						{
-							if(teacherNum+attRecordLessonHour > classLessonHour)
+							if(teacherNum+parseInt(attRecordLessonHour) > parseInt(classLessonHour) && attRecordClassType == "T")
 							{
 								$.messager.alert('提示',"当前添加的老师课时已经超过了排课课时,请核实后重新尝试");
 							}
 							else
 							{
-								invokeGetTeacherInfo(attRecordTeacherId)
+								invokeGetTeacherInfo(attRecordTeacherId,attRecordLessonHour)
 							}
 						}
 					}
@@ -225,7 +225,7 @@
 				}
 			}
 			
-			function invokeGetTeacherInfo(attRecordTeacherId)
+			function invokeGetTeacherInfo(attRecordTeacherId,attRecordLessonHour)
 			{
 				ajaxLoading("添加中...");
 				$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:attRecordTeacherId},function(data){
@@ -255,6 +255,7 @@
 					roomId:$("#classRoomId").combobox("getValue"),
 					handerId:"${sessionScope.StaffT.staffId}",
 					schooltime:'<fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" />',
+					attendDate:'<fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" />',
 					teacherAttendList:null,
 					studentAttendList:null
 				};
@@ -265,6 +266,7 @@
 						teacherId:$(node).attr("teacherId"),
 						schoolId:$(node).attr("schoolId"),
 						teacherType:$(node).attr("teacherType"),
+						attendDate:'<fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" />',
 						lessionHours:$(node).attr("hours"),
 						handerId:"${sessionScope.StaffT.staffId}"
 					};
@@ -281,6 +283,7 @@
 						schoolId:firstTr.attr("schoolId"),
 						studentId:firstTr.attr("studentId"),
 						studentCourseId:firstTr.attr("studentCourseId"),
+						attendDate:'<fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" />',
 						hours:$("#classLessonHour").textbox("getValue"),
 						attendType:attendTypeObj,
 						dress:dressObj,

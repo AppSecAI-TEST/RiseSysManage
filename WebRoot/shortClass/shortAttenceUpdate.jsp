@@ -228,7 +228,6 @@
 					shortClassInstId:"${shortClassAttendT.shortClassInstId}",
 					shortSchooltimeId:"${shortClassAttendT.shortSchooltimeId}",
 					schoolId:"${shortClassInstT.schoolId}",
-					schooltime:'<fmt:formatDate value="${shortClassAttendT.schooltime}" pattern="yyyy-MM-dd" />',
 					hourRange:$("#classTime").combobox("getValue"),
 					hours:$("#classLessonHour").textbox("getValue"),
 					roomId:$("#classRoomId").combobox("getValue"),

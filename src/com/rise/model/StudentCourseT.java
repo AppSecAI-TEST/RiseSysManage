@@ -75,8 +75,6 @@ public class StudentCourseT {
     
     private String studentClassName;
     
-	private ChangeT transferChangeT;
-    
 	private StaffT adviserAObj;
 	
 	private StaffT adviserBObj;
@@ -373,14 +371,6 @@ public class StudentCourseT {
 		this.studentClassName = studentClassName;
 	}
 	
-	public ChangeT getTransferChangeT() {
-		return transferChangeT;
-	}
-
-	public void setTransferChangeT(ChangeT transferChangeT) {
-		this.transferChangeT = transferChangeT;
-	}
-
 	public StaffT getAdviserAObj() {
 		return adviserAObj;
 	}
