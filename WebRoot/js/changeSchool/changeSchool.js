@@ -27,6 +27,10 @@ $(document).ready(function() {
     	});
 	});
 	
+	$("#reset").click(function() {
+		$("#qryApplyFm").form('clear');//清空窗体数据  
+	});
+	
 	$("#qryApproveBtn").click(function() {
 		var obj = JSON.stringify($("#qryApproveFm").serializeObject());
     	obj = obj.substring(0, obj.length - 1);
@@ -42,6 +46,10 @@ $(document).ready(function() {
     			$('#approve_list_data').datagrid('clearSelections');
     		}
     	});
+	});
+	
+	$("#resetApprove").click(function() {
+		$("#qryApproveFm").form('clear');//清空窗体数据  
 	});
 	
 	$("#outSchoolId").combobox({
@@ -64,25 +72,12 @@ $(document).ready(function() {
 	        			return "<span>" + data.byname + "</span>";
 	        		}
     			});
-    			$("#outSchoolClassInstId").combobox({disabled: false});
-    			$("#outSchoolClassInstId").combobox({
-    				url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='003'&classInstId=",//返回json数据的url
-    				valueField : "classInstId",
-    				textField : "className",
-    				panelHeight : "auto",
-    				formatter : function(data) {
-    					return "<span>" + data.className + "</span>";
-    				}
-    			});
     		} else {
     			var data = $("#outSchoolId").combobox("getData");
     			$("#outSchoolId").combobox("setValue", data[0].schoolId);
 				$("#outTeacherId").combobox('clear');
 				$("#outTeacherId").combobox("loadData", new Array());
 				$("#outTeacherId").combobox({disabled: true});
-				$("#outSchoolClassInstId").combobox('clear');
-				$("#outSchoolClassInstId").combobox("loadData", new Array());
-				$("#outSchoolClassInstId").combobox({disabled: true});
     		}
     	}
 	});

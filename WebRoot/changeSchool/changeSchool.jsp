@@ -22,10 +22,7 @@
   						<tr>
 							<td align="right"><span>学员姓名：</span></td>
 							<td width="100px">
-								<select id="studentId" name="studentId" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"	
-									url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=&funcNodeId=${param.funcNodeId}&fieldId=studentId">
-				        		</select>
+								<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
 							<td align="right"><span>联系电话：</span></td>
 							<td width="100px">
@@ -89,8 +86,7 @@
 							</td>
 							<td align="right"><span>转出校在读班级：</span></td>
 							<td width="100px">
-								<select id="outSchoolClassInstId" name="outSchoolClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled">
-				        		</select>
+								<input name="outSchoolClassInstId" id="outSchoolClassInstId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
 							<td align="right"><span>完成日期：</span></td>
 			  				<td width="100px">
@@ -150,10 +146,7 @@
   						<tr>
   							<td align="right"><span>学员姓名：</span></td>
 							<td width="100px">
-								<select id="approveStudentId" name="approveStudentId" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"	
-									url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=&funcNodeId=${param.funcNodeId}&fieldId=studentId">
-				        		</select>
+								<input name="approveStudentId" id="approveStudentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
 							<td align="right"><span>联系电话：</span></td>
 							<td width="100px">

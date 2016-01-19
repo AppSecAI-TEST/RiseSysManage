@@ -27,10 +27,7 @@
 							</td>
 							<td align="right"><span>学员姓名：</span></td>
 							<td width="100px">
-								<select id="studentId" name="studentId" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"	
-									url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=&funcNodeId=${param.funcNodeId}&fieldId=studentId">
-				        		</select>
+								<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
 							<td align="right"><span>联系电话：</span></td>
 							<td width="100px">
@@ -86,13 +83,11 @@
 							</td>
 							<td align="right"><span>转出班级：</span></td>
 							<td width="100px">
-								<select id="outClassInstId" name="outClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled">
-				        		</select>
+								<input name="outClassInstId" id="outClassInstId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
 							<td align="right" width="30px"><span>转入班级：</span></td>
 							<td width="100px">
-								<select id="inClassInstId" name="inClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled">
-				        		</select>
+								<input name="inClassInstId" id="inClassInstId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
 							<td align="right"><span>完成日期：</span></td>
 			  				<td width="100px">
@@ -157,10 +152,7 @@
 							</td>
 							<td align="right"><span>学员姓名：</span></td>
 							<td width="100px">
-								<select id="approveStudentId" name="approveStudentId" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"	
-									url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=&funcNodeId=${param.funcNodeId}&fieldId=studentId">
-				        		</select>
+								<input name="approveStudentId" id="approveStudentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
 							<td align="right"><span>申请日期：</span></td>
 			  				<td width="100px">

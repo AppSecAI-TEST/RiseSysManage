@@ -1,5 +1,24 @@
 $(document).ready(function() {
-	initRPQryButton("qryBtn", "reset", "qryFm", "list_data");
+	$("#qryBtn").click(function() {
+		var object = $("#qryFm").serializeObject();
+		var funcNodeId = $("#qryBtn").attr("funcNodeId");
+		object.funcNodeId = funcNodeId;
+    	var obj = JSON.stringify(object);
+    	$('#list_data').datagrid({
+    		url : "/sys/pubData/qryDataListByPage.do",
+    		queryParams:{
+    			param : obj
+    		},
+    		onLoadSuccess:function(){
+    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+    			$('#list_data').datagrid('clearSelections');
+    		}
+    	});
+    });
+	
+	$("#reset").click(function() {
+		$("#qryFm").form('clear');//清空窗体数据  
+	});
 	
 	//批量选班
 	//将学员添加到班级中
