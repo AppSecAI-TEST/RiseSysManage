@@ -76,7 +76,7 @@
 				<thead>
 					<tr>
 						<th width="8.333%" field="schoolName">校区</th>
-						<th width="8.333%" field="schooltime">上课日期</th>
+						<th width="8.333%" field="attendDate">上课日期</th>
 						<th width="4%" field="weekday">星期</th>
 						<th width="8.333%" field="className">班级</th>
 						<th width="12%" field="teacherNames">上课教师</th>
@@ -96,7 +96,7 @@
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("加载中...");
-			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=840&fieldId=schoolId",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID",function(data){

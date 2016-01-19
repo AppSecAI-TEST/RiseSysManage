@@ -87,8 +87,6 @@ public class ClassInstT {
     
     private BaseNumT baseNumT;
     
-    private List<SchooltimeInstT> schooltimeInstList;
-    
     private List<SchooltimeT> schooltimeList;
     
 	private List<ClassStudentT> classStudentList;
@@ -397,14 +395,6 @@ public class ClassInstT {
 		this.baseNumT = baseNumT;
 	}
 	
-	public List<SchooltimeInstT> getSchooltimeInstList() {
-		return schooltimeInstList;
-	}
-
-	public void setSchooltimeInstList(List<SchooltimeInstT> schooltimeInstList) {
-		this.schooltimeInstList = schooltimeInstList;
-	}
-
 	public List<SchooltimeT> getSchooltimeList() {
 		return schooltimeList;
 	}

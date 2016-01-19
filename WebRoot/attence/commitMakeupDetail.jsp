@@ -47,7 +47,7 @@
 			</tr>
 			<tr>
 				<td align="right" width="10%">补课时间：</td>
-				<td><fmt:formatDate value="${classAttendT.schooltime}" pattern="yyyy-MM-dd" /> <select id="classTime" name="classTime" style="width:200px" ></select></td>
+				<td><fmt:formatDate value="${classAttendT.attendDate}" pattern="yyyy-MM-dd" /> <select id="classTime" name="classTime" style="width:200px" ></select></td>
 			</tr>
 			<tr>
 				<td align="right">课时进度：</td>
@@ -186,7 +186,7 @@
 					var obj = {
 						studentAttendId:studentAttendId,
 						makeupType:makeupType,
-						schooltime:"<fmt:formatDate value="${classAttendT.schooltime}" pattern="yyyy-MM-dd" />",
+						schooltime:"<fmt:formatDate value="${classAttendT.attendDate}" pattern="yyyy-MM-dd" />",
 						hourRange:hourRange,
 						baseHour:(parseInt(timeArr[0])-1),
 						hours:(parseInt(timeArr[1])-parseInt(timeArr[0])+1),
