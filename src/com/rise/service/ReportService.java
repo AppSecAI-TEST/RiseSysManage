@@ -30,4 +30,11 @@ public class ReportService
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS8203\",securityCode:\"0000000000\",params:{param:'"+param+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
+	
+	public String recordDiffInfo(String param) throws Exception  
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS8204\",securityCode:\"0000000000\",params:{param:'"+param+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
 }

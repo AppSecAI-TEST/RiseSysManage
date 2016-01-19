@@ -53,10 +53,10 @@
 	  			</table>
   			</form>
   		<div style="min-width:1100px;width:99%;margin:0 auto;"><a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;margin: 2px ">导出全部</a>
-  		<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px;margin: 2px ">提交差异说明</a></div>	
+  		<a href="javascript:void(0)" id="diffBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px;margin: 2px ">提交差异说明</a></div>	
   		<div style="min-width:1100px;width:99%;margin:0 auto;">
-		<div class="easyui-panel" title="排课信息" style="width:100%;overflow:auto;">
-		<table class="maintable" id="hoursPlanTab" style="width:1500px;margin-right: 10px" cellspacing="0" cellpadding="0">
+		<div class="easyui-panel" title="排课信息" style="width:100%;overflow:auto;min-height:400px">
+		<table class="maintable" id="hoursPlanTab" style="width:1500px;margin-right: 10px;" cellspacing="0" cellpadding="0">
 		  <tr align="center">
 		     <td align="center" width="78px;" rowspan="2"><span>学校</span></td>
 		    <td align="center" width="78px;" rowspan="2"><span>班级</span></td>
@@ -143,7 +143,7 @@
 				    		for(var i=0;i<data.length;i++)
 				    		{
 				    			var obj=data[i];
-				    			html+="<tr>";
+				    			html+="<tr class='infoTr' classInstId =\""+obj.classInstId+"\" month=\""+obj.month+"\">";
 				    			html+="<td align='center'><span>"+obj.schoolName+"</span></td>";
 				    			html+="<td align='center'><span>"+obj.className+"</span></td>";
 				    			html+="<td align='center'><span>"+obj.byname+"</span></td>";
@@ -171,11 +171,12 @@
 				    			html+="<td align='center'><span>"+obj.monthPlanHours+"</span></td>";
 				    			html+="<td align='center'><span>"+obj.monthHandHours+"</span></td>";
 				    			html+="<td align='center'><span>"+obj.mDiffNum+"</span></td>";
-				    			html+="<td align='center' width='40px;'><input class='easyui-text' style='width:150px; height: 25px;'/></td>";
+				    			html+="<td align='center' width='40px;'><input class='easyui-textbox' style='width:150px; height: 25px;'/></td>";
 				    			html+="</tr>";
 				    		}
 							
 							$("#hoursPlanTab").html(html);
+							$.parser.parse(	$("#hoursPlanTab"))
 				    	},
 				    	error:function()
 				        {
@@ -184,6 +185,55 @@
 				        }
 				   });
 	    });
+		
+		
+		$("#diffBtn").click(function(){
+			var arr =[];
+			$(".infoTr").each(function(){
+				var val =$(this).find("td:last").find(".textbox-value").val();
+				if(val!=null&&val!="")
+				{
+					var obj ={
+						classInstId:$(this).attr("classInstId"),
+						month:$(this).attr("month"),
+						val:val
+					}
+					arr.push(obj);
+				}	
+			});
+			if(arr.length>0)
+			{
+				$.ajax({
+				url:"/sys/report/recordDiffInfo.do",
+				data:"param="+JSON.stringify(arr),
+				type:"post",
+				beforeSend:function(){
+					showProgressLoader("正在提交数据,请稍后",400);
+				},
+				success:function(data)
+				{
+					hideProgressLoader();
+					if(data=="true")
+					{
+						showMessage("提示","提交差异说明成功",null);
+					}
+					else
+					{
+						showMessage("提示","提交差异说明失败",null);
+					}	
+				},
+				error:function(data)
+				{
+					hideProgressLoader();
+				}
+				});
+			}
+			else
+			{
+				showMessage("提示","没有差异说明数据可以提交",null);
+				return false;
+			}	
+		});
 	});
 
 	

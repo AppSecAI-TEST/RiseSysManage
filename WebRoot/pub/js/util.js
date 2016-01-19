@@ -871,7 +871,7 @@ function exportMergeLink(btName,tableName,mergeName,mergeIndex)
 }
 
 
-//绑定报表查询页面的查询重置按钮事件
+//绑定报表重置按钮事件
 function initReportButton(resetName,formName,schoolId)
 {
 	var clearFlag =true;

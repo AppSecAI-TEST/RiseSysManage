@@ -119,4 +119,29 @@ public class ReportController
 			}
 		}
 	}
+	
+	
+	@RequestMapping(value="/recordDiffInfo.do")
+	public void recordDiffInfo(HttpServletRequest request,HttpServletResponse response,String param)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("utf-8");
+			out = response.getWriter();
+			String retVal = reportService.recordDiffInfo(param);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }
