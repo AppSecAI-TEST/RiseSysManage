@@ -10,31 +10,32 @@
 		<%@ include file="/common/formvalidator.jsp" %>
   	</head>
   	<body>
-  		<div style="padding:5px 0;">
-  			<form id="qryFm" style="margin:0 auto;">
-	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:120px;" cellpadding="2">
+  			<div style="margin-right:5px;">
+  			<input type="hidden" id="resourceId" value="721">
+  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId}"/>
+  			<form id="qryFm">
+	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right"><span>校区：</span></td>
-	  					<td align="left">
-	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 120px; height: 25px;"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      		url="<%=path %>/pubData/qrySchoolList.do?">
+	  					<td width="100px" align="right"><span>校区：</span></td>
+	  					<td width="130px" align="left">
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 				        	</select>
 	  					</td>
-	  					<td align="right"><span>阶段：</span></td>
-	  					<td align="left">
-	  						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 114px; height: 25px;"
+	  					<td width="120px;" align="right"><span>阶段：</span></td>
+	  					<td align="left" width="130px;">
+	  						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 								data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
 			      				url="<%=path %>/pubData/qryStage.do">
 				        	</select>
 	  					</td>
-	  					<td align="right"><span>班级：</span></td>
-	  					<td align="left">
-	  						<select class="easyui-combobox" name="classInstId" id="classInstId" style="width:120px;"
+	  					<td width="120px;" align="right"><span>班级：</span></td>
+	  					<td align="left" width="130px;">
+	  						<select class="easyui-combobox" name="classInstId" id="classInstId" style="width:100px;height:25px;" editable="false"
 	  							data-options="formatter:formatClassInst, valueField: 'classInstId', textField: 'className', panelHeight: 'auto'">
 	  						</select>
 	  					</td>
-	  					<td align="right"><span>时间：</span></td>
+	  					<td align="right" width="120px;"><span>时间：</span></td>
 	  					<td align="left">
 	  						<input class="easyui-datebox"  type="text" style="width:120px; height: 25px;" id="month" name="month" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 	  					</td>
@@ -42,29 +43,29 @@
 	  				<tr>
 	  					<td align="right"><span>公开课满意度：</span></td>
 	  					<td align="left">
-	  						<input class="easyui-numberbox" name="min1" id="min1"  style="width:38px;" data-options="min:0,max:99,precision:0" />%至
-	  						<input class="easyui-numberbox" name="max1" id="max1"  style="width:38px;" data-options="min:1,max:100,precision:0" />%
+	  						<input class="easyui-numberbox" name="min1" id="min1"  style="width:38px;height:25px;" data-options="min:0,max:99,precision:0" />%至
+	  						<input class="easyui-numberbox" name="max1" id="max1"  style="width:38px;height:25px;" data-options="min:1,max:100,precision:0" />%
 	  					</td>
 	  					<td align="right"><span>毕业典礼满意度：</span></td>
 	  					<td align="left">
-	  						<input class="easyui-numberbox" name="min2" id="min2"  style="width:38px;" data-options="min:0,max:99,precision:0" />%至
-	  						<input class="easyui-numberbox" name="max2" id="max2"  style="width:38px;" data-options="min:1,max:100,precision:0" />%
+	  						<input class="easyui-numberbox" name="min2" id="min2"  style="width:38px;height:25px;" data-options="min:0,max:99,precision:0" />%至
+	  						<input class="easyui-numberbox" name="max2" id="max2"  style="width:38px;height:25px;" data-options="min:1,max:100,precision:0" />%
 	  					</td>
 	  					<td align="right"><span>电教完成率：</span></td>
 	  					<td align="left">
-	  						<input class="easyui-numberbox" name="min3" id="min3"  style="width:38px;" data-options="min:0,max:99,precision:0" />%至
-	  						<input class="easyui-numberbox" name="max3" id="max3"  style="width:38px;" data-options="min:1,max:100,precision:0" />%
+	  						<input class="easyui-numberbox" name="min3" id="min3"  style="width:38px;height:25px;" data-options="min:0,max:99,precision:0" />%至
+	  						<input class="easyui-numberbox" name="max3" id="max3"  style="width:38px;height:25px;" data-options="min:1,max:100,precision:0" />%
 	  					</td>
 	  					<td align="right"><span>家长会满意度：</span></td>
 	  					<td align="left">
-	  						<input class="easyui-numberbox" name="min4" id="min4"  style="width:38px;" data-options="min:0,max:99,precision:0" />%至
-	  						<input class="easyui-numberbox" name="max4" id="max4"  style="width:38px;" data-options="min:1,max:100,precision:0" />%
+	  						<input class="easyui-numberbox" name="min4" id="min4"  style="width:38px;height:25px;" data-options="min:0,max:99,precision:0" />%至
+	  						<input class="easyui-numberbox" name="max4" id="max4"  style="width:38px;height:25px;" data-options="min:1,max:100,precision:0" />%
 	  					</td>
 	  				</tr>	
 	  				<tr>		
 	  					<td align="right"><span>老师：</span></td>
 	  					<td align="left">
-	  						<select class="easyui-combobox" name="teacherId" id="teacherId" style="width:120px;"
+	  						<select class="easyui-combobox" name="teacherId" id="teacherId" style="width:100px;height:25px;" editable="false"
 	  							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
 	  						</select>
 	  					</td>
@@ -74,14 +75,13 @@
 	  						<input type="radio" name="isFinish" value="N"><lable><span>否</span></lable>
 	  					</td>
 	  					<td align="left" colspan="4">	
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:120px" id="qryBtn" funcNodeId ="3708"><span>查询</a>
+	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" funcNodeId ="3708"><span>查询</a>
 	  						&nbsp;&nbsp;&nbsp;&nbsp;
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" style="width:120px" id="resetBtn"><span>重置</a>
+	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" style="width:100px" id="resetBtn"><span>重置</a>
 	  					</td>
 	  				</tr>
 	  			</table>
   			</form>
-			<div style="padding:5px 0;min-width:1100px; width:100%;">
 				<table class="easyui-datagrid" style="height:390px;" id="list_data"
 					title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true">
 					<thead>
@@ -112,7 +112,6 @@
 						</tr>
 					</thead>
 				</table>
-			</div>
 			<div id="toolbar" style="padding: 2px; height: auto">
 	   			<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
 			</div>
@@ -146,7 +145,20 @@ $(document).ready(function(){
              	});
             }
     	});
-	 
+	 	initReportButton("resetBtn","qryFm","schoolId")
+	 	$("#qryBtn").click(function() {
+		var object = $("#qryFm").serializeObject();
+    	var obj = JSON.stringify(object);
+    	obj = obj.substring(0, obj.length - 1);
+    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
+    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+    	$('#list_data').datagrid({
+    		url : "/sys/pubData/qryDataListByPage.do",
+    		queryParams:{
+    			param : obj
+    		}
+    	});
+    });
 	 	$("#schoolId").combobox({
 	 		onChange:function(){
 	 			$("#classInstId").combobox({
@@ -164,7 +176,6 @@ $(document).ready(function(){
 				});
 	 		}
 	 	});
-	 	initQryButton("qryBtn","resetBtn","qryFm","list_data");
 	 	exportLink("export","list_data");
 });
 

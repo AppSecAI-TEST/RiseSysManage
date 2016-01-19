@@ -10,32 +10,32 @@
 		<%@ include file="../common/formvalidator.jsp" %>
   	</head>
   	<body>
+  		<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+  		<input type="hidden" id="resourceId" value="724">
+  		<div style="margin-right:5px;">
   			<form id="qryFm">
-	  			 <table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="15">
+	  			<table class="search_tab">
 	  				<tr>
-	  					<td><span>校区：</span></td>
-	  					<td>
-	  					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-					      			onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
-					      			url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=&fieldId=schoolId">
-				        		</select>
+	  					<td width="80px" align="right"><span>校区：</span></td>
+	  					<td width="110px" align="left">
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+				        	</select>
 	  					</td>
-	  					<td><span>老师：</span></td>
-	  					<td>
-	  						<select class="easyui-combobox" name="teacherId" id="teacherId" style="width:120px;"
+	  					<td width="60px" align="right"><span>老师：</span></td>
+	  					<td width="110px" align="left">
+	  						<select class="easyui-combobox" name="teacherId" id="teacherId" style="width:100px;height: 25px;" editable="false"
 	  							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
 	  						</select>
 	  					</td>
-	  					<td><span>月份：</span></td>
-	  					<td>
-	  						<input class="easyui-datebox"  type="text" style="width:120px; height: 25px;" id="time" name="time" editable="false" data-options="formatter:myformatter, parser:myparser"/>
+	  					<td width="60px" align="right"><span>月份：</span></td>
+	  					<td width="110px" align="left">
+	  						<input class="easyui-datebox"  type="text" style="width:100px; height: 25px;" id="time" name="time" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 	  					</td>
-	  					<td>	
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" onclick="qryData()"></span>查询</span></a>
-	  					</td>
-	  					<td>
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" style="width:150px" id="resetBtn" onclick="resetData()"></span>重置</span></a>
+	  					<td align="left">	
+	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" onclick="qryData()"></span>查询</span></a>
+	  						&nbsp;&nbsp;
+	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" style="width:100px" id="resetBtn"></span>重置</span></a>
 	  					</td>
 	  				</tr>
 	  			</table>
@@ -115,15 +115,19 @@ $(document).ready(function(){
                     $('#time').datebox('setValue',val).datebox('hidePanel'); //设置日期的值
              	});
             }});
- 		$("#schoolId").combobox({
+   	var now =new Date();
+	$('#time').datebox("setValue",now.getFullYear()+"-"+(now.getMonth()+1));
+	initReportButton("resetBtn","qryFm","schoolId");
+	$("#resetBtn").click(function(){
+		resetData();
+	})
+	$("#schoolId").combobox({
 	 		onChange:function(){
 	 			$("#teacherId").combobox({
 					url : "/sys/pubData/getTeacherBySchoolId.do?schoolId="+$("#schoolId").combobox('getValue')
 				});
 	 		}
-	 	});
-   	var now =new Date();
-	$('#time').datebox("setValue",now.getFullYear()+"-"+(now.getMonth()+1));
+	 });
 	$("#export").click(function(){
 		var param={
 			teacherId:$("#teacherId").combobox('getValue'),
@@ -173,10 +177,8 @@ function myformatter(date){
   
 function resetData()
 {
-	$("#qryFm").form('clear');
 	var now =new Date();
 	$('#time').datebox("setValue",now.getFullYear()+"-"+(now.getMonth()+1));
-	$('#schoolId').combobox('setValue',$('#schoolId').combobox("getData")[0].schoolId);
 }
   
   

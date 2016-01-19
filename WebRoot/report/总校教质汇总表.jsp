@@ -10,28 +10,28 @@
 		<%@ include file="/common/formvalidator.jsp" %>
   	</head>
   	<body>
-  		<div style="padding:5px 0;">
-  			<form id="qryFm" style="margin:0 auto;">
-	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellpadding="2">
+  		<div style="margin-right:5px;">
+  			<form id="qryFm">
+	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right"><span>月份：</span></td>
-	  					<td align="left">
-	  						<input class="easyui-datebox"  type="text" style="width:120px; height: 25px;" id="month" name="month" editable="false" data-options="formatter:myformatter, parser:myparser"/>
+	  					<td align="right" width="80px"><span>月份：</span></td>
+	  					<td align="left" width="110px">
+	  						<input class="easyui-datebox"  type="text" style="width:100px; height: 25px;" id="month" name="month" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 	  					</td>
-	  					<td align="right"><span>综合完成率：</span></td>
-	  					<td align="left">
-	  						<input class="easyui-numberbox" name="minFinish" id="minFinish"  style="width:60px;" data-options="min:0,max:99,precision:0" />%至
-	  						<input class="easyui-numberbox" name="maxFinish" id="maxFinish"  style="width:60px;" data-options="min:1,max:100,precision:0" />%
+	  					<td align="right" width="80px"><span>综合完成率：</span></td>
+	  					<td align="left" width="170px">
+	  						<input class="easyui-numberbox" name="minFinish" id="minFinish"  style="width:60px;height: 25px;" data-options="min:0,max:99,precision:0" />%至
+	  						<input class="easyui-numberbox" name="maxFinish" id="maxFinish"  style="width:60px;height: 25px;" data-options="min:1,max:100,precision:0" />%
 	  					</td>
-	  					<td align="right"><span>综合满意度：</span></td>
-	  					<td align="left">
+	  					<td align="right" width="80px"><span>综合满意度：</span></td>
+	  					<td align="left" width="170px">
 	  						<input class="easyui-numberbox" name="minCsi" id="minCsi"  style="width:60px;" data-options="min:0,max:99,precision:0" />%至
 	  						<input class="easyui-numberbox" name="maxCsi" id="maxCsi"  style="width:60px;" data-options="min:1,max:100,precision:0" />%
 	  					</td>
-	  					<td align="center" >	
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:120px" id="qryBtn" funcNodeId ="3709"><span>查询</a>
+	  					<td align="left" >	
+	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" funcNodeId ="3709"><span>查询</a>
 	  						&nbsp;&nbsp;&nbsp;&nbsp;
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" style="width:120px" id="resetBtn"><span>重置</a>
+	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" style="width:100px" id="resetBtn"><span>重置</a>
 	  					</td>
 	  				</tr>
 	  			</table>

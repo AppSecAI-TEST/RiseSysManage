@@ -12,32 +12,34 @@
 		<%@ include file="../common/formvalidator.jsp" %>
   	</head>
   	<body>
- 		<form id="qryFm">
-  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="15">
+ 		<div style="margin-right:5px;">
+  			<input type="hidden" id="resourceId" value="722">
+  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId}"/>
+  			<form id="qryFm">
+	  			<table class="search_tab">
   				<tr>
-  						<td align="right"><span>校区：</span></td>
-	  					<td align="left">
-	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 120px; height: 25px;"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      		url="<%=path %>/pubData/qrySchoolList.do?">
+  						<td align="right" width="80px"><span>校区：</span></td>
+	  					<td align="left"  width="110px">
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 				        	</select>
 	  					</td>
-	  					<td align="right"><span>阶段：</span></td>
-	  					<td align="left">
-	  						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 114px; height: 25px;"
+	  					<td align="right" width="60px"><span>阶段：</span></td>
+	  					<td align="left" width="110px">
+	  						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;"
 								data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
 			      				url="<%=path %>/pubData/qryStage.do">
 				        	</select>
 	  					</td>
-	  					<td align="right"><span>班级：</span></td>
-	  					<td align="left">
-	  						<select class="easyui-combobox" name="classInstId" id="classInstId" style="width:120px;"
+	  					<td align="right" width="60px"><span>班级：</span></td>
+	  					<td align="left" width="110px">
+	  						<select class="easyui-combobox" name="classInstId" id="classInstId" style="width:100px;height: 25px;"
 	  							data-options="formatter:formatClassInst, valueField: 'classInstId', textField: 'className', panelHeight: 'auto'">
 	  						</select>
 	  					</td>
-	  					<td align="right"><span>老师：</span></td>
+	  					<td align="right" width="60px"><span>老师：</span></td>
 	  					<td align="left">
-	  						<select class="easyui-combobox" name="teacherId" id="teacherId" style="width:120px;"
+	  						<select class="easyui-combobox" name="teacherId" id="teacherId" style="width:100px;"
 	  							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
 	  						</select>
 	  					</td>
@@ -45,15 +47,15 @@
   				<tr>
   					<td align="right"><span>月份：</span></td>
 	  				<td align="left">
-	  					<input class="easyui-datebox"  type="text" style="width:120px; height: 25px;" id="month" name="month" editable="false" data-options="formatter:myformatter, parser:myparser"/>
+	  					<input class="easyui-datebox"  type="text" style="width:100px; height: 25px;" id="month" name="month" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 	  				</td>
-	  				<td align="right"><span>未完成原因：</span></td>
-  					<td align="left" colspan="3">
+  					<td align="right" colspan="5">
+  						<span>未完成原因：</span>
   						<input type="checkbox" id="001" name="001" onclick="clickControl(this,true)">&nbsp;<span>电教未完成</span>&nbsp;&nbsp;&nbsp;&nbsp;
   						<input type="checkbox" id="002" name="002" onclick="clickControl(this,true)">&nbsp;<span>出勤率未达80%</span>&nbsp;&nbsp;&nbsp;&nbsp;
   						<input type="checkbox" id="003" name="003" onclick="clickControl(this,false)">&nbsp;<span>未开教质事件</span>&nbsp;&nbsp;&nbsp;&nbsp;
   					</td>
-  					<td colspan="2">
+  					<td align="left">
   						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" funcNodeId ="3710" ><span>查询</span></a>
   						&nbsp;&nbsp;
   						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="resetBtn" ><span>重置</span></a>
@@ -105,7 +107,20 @@ $(document).ready(function(){
              	});
             }
     	});
-	 
+	 	initReportButton("resetBtn","qryFm","schoolId");
+	 	$("#qryBtn").click(function() {
+		var object = $("#qryFm").serializeObject();
+    	var obj = JSON.stringify(object);
+    	obj = obj.substring(0, obj.length - 1);
+    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
+    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+    	$('#list_data').datagrid({
+    		url : "/sys/pubData/qryDataListByPage.do",
+    		queryParams:{
+    			param : obj
+    		}
+    	});
+	 });
 	 	$("#schoolId").combobox({
 	 		onChange:function(){
 	 			$("#classInstId").combobox({
@@ -143,7 +158,6 @@ $(document).ready(function(){
     		});    
     	});
 	    $("#resetBtn").click(function() {
-	    	$("#qryFm").form('clear');
 	    	var now =new Date();
 	 		$('#month').datebox("setValue",now.getFullYear()+"-"+(now.getMonth()+1));
 	    });

@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	initDate();
 	$("#qryBtn").click(function() {
 		var object = $("#qryFm").serializeObject();
     	var obj = JSON.stringify(object);
@@ -17,10 +16,7 @@ $(document).ready(function() {
     		}
     	});
     });
-	$("#reset").click(function(){
-		$("#qryFm").form('clear');
-		initDate();
-	});
+	initReportButton("reset","qryFm","schoolId")
 });
 
 function initDate()

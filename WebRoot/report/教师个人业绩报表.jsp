@@ -11,27 +11,29 @@
   	</head>
   	<body>
   		<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+  		<input type="hidden" id="resourceId" value="723">
   		<div style="margin-right:5px;">
   			<form id="qryFm">
 	  			<table class="search_tab">
 	  				<tr>
 	  					<td width="80px" align="right"><span>校区：</span></td>
 	  					<td width="110px" align="left">
-	  					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
-				        </select>
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+				        	</select>
 	  					</td>
 	  					<td width="80px" align="right"><span>教师英文名：</span></td>
 	  					<td width="110px" align="left">
 	  						<input class="easyui-textbox"  id="teacherId" name="teacherId" style="width:100px; height: 25px;">
 	  					</td>
 	  					<td width="50px" align="right"><span>月份：</span></td>
-	  					<td width="160px" align="left">
-	  						<input class="easyui-datebox" type="text" style="width:150px; height: 25px;" id="time" name="time" data-options="formatter:myformatter, parser:myparser" editable="false"/>
+	  					<td width="11px" align="left">
+	  						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="time" name="time" data-options="formatter:myformatter, parser:myparser" editable="false"/>
 	  					</td>
 	  					<td align="left">	
 	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" onclick="qryData()">查询</a>
 	  							&nbsp;&nbsp;
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="qryBtn" onclick="exportData()">重置</a>
+	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="resetBtn" onclick="resetData()">重置</a>
 	  					</td>
 	  				</tr>
 	  			</table>
@@ -94,21 +96,7 @@ $(document).ready(function(){
                     $('#time').datebox('setValue',val).datebox('hidePanel'); //设置日期的值
              	});
             }});
- 		$("#schoolId").combobox({
-			url : "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId=711&fieldId=schoolId&headFlag=N",
-    		valueField : "schoolId",
-    		textField : "schoolName",
-    		panelHeight : "auto",
-    		formatter : function(data) {
-    			return "<span>" + data.schoolName + "</span>";
-    		},
-    		onLoadSuccess : function() {
-    			if($("#schoolId").combobox("getData").length>0)
-    			{
-    				$("#schoolId").combobox("setValue",$("#schoolId").combobox("getData")[0].schoolId);
-    			}	
-    		}
-    	});
+ 	initReportButton("resetBtn","qryFm","schoolId");	
 	$("#export").click(function(){
 		var param={
 			teacherId:$("#teacherId").textbox('getValue'),
@@ -158,10 +146,8 @@ function myformatter(date){
   
 function resetData()
 {
-	$("#qryFm").form('clear');
 	var now =new Date();
 	$('#time').datebox("setValue",now.getFullYear()+"-"+(now.getMonth()+1));
-	$('#schoolId').combobox('setValue',$('#schoolId').combobox("getData")[0].schoolId);
 }
   
   

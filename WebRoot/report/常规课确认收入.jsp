@@ -10,22 +10,24 @@
 		<%@ include file="/common/formvalidator.jsp" %>
   	</head>
   	<body>
+  		<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+  		<input type="hidden" id="resourceId" value="728">
   		<div style="margin-right:5px;">
   			<form id="qryFm">
 	  			<table class="search_tab">
 	  				<tr>
 	  					<td align="right" width="80px"><span>校区：</span></td>
-	  					<td align="left"  width="120px">
-	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      		url="<%=path %>/pubData/qrySchoolList.do?">
+	  					<td align="left"  width="110px">
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+					      		
 				        	</select>
 	  					</td>
 	  					<td align="right" width="50px"><span>月份：</span></td>
 	  					<td align="left"  width="130px">
 	  						<input class="easyui-datebox"  type="text" style="width:120px; height: 25px;" id="attendMonth" name="attendMonth" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 	  					</td>
-	  					<td width="100px" align="right"><span>业绩类型：</span></td>
+	  					<td width="70px" align="right"><span>业绩类型：</span></td>
 						<td width="110px">
 							<select name="feeType" editable='false' class="easyui-combobox" id="feeType" style="width: 100px; height: 25px;"
 								 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
@@ -105,7 +107,24 @@
 		});
 		var now =new Date();
 		$('#attendMonth').datebox("setValue",now.getFullYear()+"-"+(now.getMonth()+1));
-		initRPQryButton("qryBtn","reset","qryFm","list_data");
+		initReportButton("reset","qryFm","schoolId");
+	 	$("#qryBtn").click(function() {
+			var object = $("#qryFm").serializeObject();
+	    	var obj = JSON.stringify(object);
+	    	obj = obj.substring(0, obj.length - 1);
+	    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
+	    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+	    	$('#list_data').datagrid({
+	    		url : "/sys/pubData/qryDataListByPage.do",
+	    		queryParams:{
+	    			param : obj
+	    		}
+	    	});
+    	});
+	 	$("#reset").click(function(){
+	 		var now =new Date();
+			$('#attendMonth').datebox("setValue",now.getFullYear()+"-"+(now.getMonth()+1));
+	 	});
 		exportLink("export","list_data");
 	})
 

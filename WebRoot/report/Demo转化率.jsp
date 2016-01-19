@@ -12,49 +12,47 @@
 		<%@ include file="../common/formvalidator.jsp" %>
   	</head>
   	<body>
- 		<form id="qryFm">
-  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:10px;font-family:'微软雅黑'" cellspacing="15">
+ 		<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+  		<input type="hidden" id="resourceId" value="725">
+  		<div style="margin-right:5px;">
+  			<form id="qryFm">
+	  			<table class="search_tab">
   				<tr>
-  					<td align="right"><span>DemoT：</span></td>
-  					<td>
-  						<select class="easyui-combobox" name="DemoT" id="DemoT" style="width:150px;height:28px;"
+  					<td align="right" width="80px"><span>DemoT：</span></td>
+  					<td width="110px">
+  						<select class="easyui-combobox" name="DemoT" id="DemoT" style="width:100px;height:25px;" editable="false"
   							data-options="formatter:formatTeacher, valueField: 'teacherId',textField: 'byname', panelHeight: 'auto'"
   							url ="<%=path %>/pubData/qryData.do?param={'queryCode':'qryDemoTeacherInfo','teacherType':'T'}">
   						</select>
   					</td>
-  					<td align="right"><span>DemoTa：</span></td>
-  					<td>
-  						<select class="easyui-combobox" name="DemoTA" id="DemoTA" style="width:150px;height:28px;"
+  					<td align="right" width="90px"><span>DemoTa：</span></td>
+  					<td width="250px">
+  						<select class="easyui-combobox" name="DemoTA" id="DemoTA" style="width:100px;height:25px;"  editable="false"
   							data-options="formatter:formatTeacher, valueField: 'teacherId',textField: 'byname', panelHeight: 'auto'"
   							url ="<%=path %>/pubData/qryData.do?param={'queryCode':'qryDemoTeacherInfo','teacherType':'TA'}">
   						</select>
   					</td>
-  					<td align="right"><span>DEMO转化率：</span></td>
-  					<td>
-  						<input class="easyui-numberbox" name="min" id="min"  style="width:145px;" data-options="min:0,max:99,precision:0" />%
-  					</td>
-  					<td align="center"><span>至：</span></td>
-  					<td>
-  						<input class="easyui-numberbox" name="max" id="max"  style="width:145px;" data-options="min:1,max:100,precision:0"/>%
+  					<td align="left">
+  						<span>DEMO转化率：</span>
+  						<input class="easyui-numberbox" name="min" id="min"  style="width:36px;height:25px" data-options="min:0,max:99,precision:0" />%
+  						至
+  						<input class="easyui-numberbox" name="max" id="max"  style="width:36px;height:25px" data-options="min:1,max:100,precision:0"/>%
   					</td>
   				</tr>
   				<tr>
   					<td align="right"><span>校区：</span></td>
   					<td>
-  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;height: 28px;"
-  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-  							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
-  						</select>
+  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false" 
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+				        </select>
   					</td>
   					<td align="right"><span>Demo课日期：</span></td>
   					<td>
-  						<input class="easyui-datebox" name="startTime" id="startTime"  style="width:150px;" />
+  						<input class="easyui-datebox" name="startTime" id="startTime"  style="width:100px;height:25px;"  editable="false"/>
+  						至
+  						<input class="easyui-datebox" name="endTime" id="endTime"  style="width:100px;height:25px;"  editable="false" />
   					</td>
-  					<td align="center"><span>至：</span></td>
-  					<td>
-  						<input class="easyui-datebox" name="endTime" id="endTime"  style="width:150px;" />
-  					</td>
-  					<td>
+  					<td align="left">
   						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" funcNodeId ="3500" ><span>查询</span></a>
   						&nbsp;&nbsp;
   						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="resetBtn" ><span>重置</span></a>
@@ -67,8 +65,8 @@
 			<thead>
 				<tr>
 					<th field="schoolName" align="center" width="6%">校区</th>
-					<th field="schoolTime" align="center" width="20%">上课时间</th>
-					<th field="stuNum" align="center" width="8%">参与Demo人数</th>
+					<th field="schoolTime" align="center" width="19%">上课时间</th>
+					<th field="stuNum" align="center" width="9%">参与Demo人数</th>
 					<th field="orderNum" align="center" width="7%">定金个数</th>
 					<th field="allNum" align="center" width="7%">全费个数</th>
 					<th field="turnNum" align="center" width="8%">定金转全费</th>
@@ -86,7 +84,20 @@
 </html>
 <script>
 	$(document).ready(function(){
-		initQryButton("qryBtn","resetBtn","qryFm","list_data");
+		initReportButton("resetBtn","qryFm","schoolId");
+		$("#qryBtn").click(function() {
+			var object = $("#qryFm").serializeObject();
+	    	var obj = JSON.stringify(object);
+	    	obj = obj.substring(0, obj.length - 1);
+	    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
+	    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+	    	$('#list_data').datagrid({
+	    		url : "/sys/pubData/qryDataListByPage.do",
+	    		queryParams:{
+	    			param : obj
+	    		}
+	    	});
+    	});
 		exportLink("export","list_data");
 	});	
 </script>

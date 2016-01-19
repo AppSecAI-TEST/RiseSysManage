@@ -10,29 +10,30 @@
 		<%@ include file="/common/formvalidator.jsp" %>
   	</head>
   	<body>
-  		<div style="padding:5px 0;">
-  			<form id="qryFm" style="margin:0 auto;">
-	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:10px;height:auto;" cellspacing="2">
+  	<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+  	<input type="hidden" id="resourceId" value="727">
+  		<div style="margin-right:5px;">
+  			<form id="qryFm">
+	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right"><span>校区：</span></td>
-	  					<td align="left"  width="120px">
-	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      		url="<%=path %>/pubData/qrySchoolList.do?">
+	  					<td align="right" width="80px"><span>校区：</span></td>
+	  					<td align="left"  width="110px">
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+					      		
 				        	</select>
 	  					</td>
-	  					<td width="100px" align="right"><span>日期：</span></td>
-						<td width="114px">
-							<input class="easyui-datebox"  type="text" style="width:114px; height: 25px;" id="month" name="month" editable="false" data-options="formatter:myformatter, parser:myparser"/>
+	  					<td width="60px" align="right"><span>日期：</span></td>
+						<td width="110px">
+							<input class="easyui-datebox"  type="text" style="width:100px; height: 25px;" id="month" name="month" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
-						<td align="center">
+						<td align="left">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId ="3706">查询</a>
 							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 						</td>
 	  				</tr>	
 	  			</table>
   			</form>
-			<div style="padding:5px 0;min-width:1100px; width:100%;">
 				<table class="easyui-datagrid" style="height:435px;" id="list_data"
 					title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
@@ -48,10 +49,10 @@
 							<th field="amount" align="center" width="8%">实收金额</th>
 							<th field="favorName" align="center" width="8%">优惠方式</th>
 							<th field="attendDate" align="center" width="8%">确认收入月份</th>
-							<th field="planHours" align="center" width="8%">总课时数</th>
+							<th field="totalRealHours" align="center" width="8%">总课时数</th>
 							<th field="monthRealHours" align="center" width="8%">本月课时</th>
 							<th field="monthIncome" align="center" width="8%">本月确认收入</th>
-							<th field="totalRealHours" align="center" width="8%">累计课时</th>
+							<th field="hours" align="center" width="8%">累计课时</th>
 							<th field="totalIncome" align="center" width="8%">累计确认收入</th>
 							<th field="remainIncome" align="center" width="8%">未确认收入余额</th>
 						</tr>
@@ -92,7 +93,20 @@ $(document).ready(function(){
              	});
             }
     	});
-	 	initQryButton("qryBtn","resetBtn","qryFm","list_data");
+	 	initReportButton("reset","qryFm","schoolId");
+	 	$("#qryBtn").click(function() {
+			var object = $("#qryFm").serializeObject();
+	    	var obj = JSON.stringify(object);
+	    	obj = obj.substring(0, obj.length - 1);
+	    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
+	    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+	    	$('#list_data').datagrid({
+	    		url : "/sys/pubData/qryDataListByPage.do",
+	    		queryParams:{
+	    			param : obj
+	    		}
+	    	});
+    	});
 		exportLink("export","list_data");
 });
 
