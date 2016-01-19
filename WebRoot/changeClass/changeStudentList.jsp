@@ -19,10 +19,7 @@
   				<tr>
   					<td align="right"><span>学员姓名：</span></td>
 					<td width="100px">
-						<select id="studentId" name="studentId" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"	
-							url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=${sessionScope.StaffT.schoolId}&funcNodeId=<%=funcNodeId %>&fieldId=studentId">
-		        		</select>
+						<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 114px; height: 25px;"/>
 					</td>
 					<td align="right"><span>联系电话：</span></td>
 					<td width="100px">
@@ -44,10 +41,7 @@
 					</td>
 					<td align="right"><span>选择班级：</span></td>
 					<td width="100px">
-						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatClassInst, valueField: 'classInstId', textField: 'className', panelHeight: 'auto'" 
-	      					url="<%=path %>/pubData/qryClassInstList.do?schoolId=${sessionScope.StaffT.schoolId}&courseType=001&stageId=&classType=&classState=003&classInstId=">
-				       	</select>
+						<input name="classInstId" id="classInstId" type="text" class="easyui-textbox" style="width: 114px; height: 25px;"/>
 					</td>
 					<td align="right"><span>课程状态：</span></td>
 					<td width="100px">

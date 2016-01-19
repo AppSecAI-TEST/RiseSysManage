@@ -25,10 +25,7 @@
 					</td>
 					<td align="right"><span>学员姓名：</span></td>
 					<td width="114px">
-						<select id="studentId" name="studentId" class="easyui-combobox" style="width: 114px; height: 25px;"
-							data-options="formatter:function(data){return '<span>'+data.name+'</span>';}, valueField: 'studentId', textField: 'name', panelHeight: 'auto'"	
-							url="<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&schoolId=&funcNodeId=${param.funcNodeId}&fieldId=studentId">
-        				</select>
+						<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 114x; height: 25px;"/>
 					</td>
 					<td align="right"><span>联系电话：</span></td>
 					<td width="114px">

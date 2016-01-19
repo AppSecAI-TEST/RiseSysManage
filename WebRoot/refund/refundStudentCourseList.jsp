@@ -25,8 +25,7 @@
 					</td>
 					<td align="right"><span>学员姓名：</span></td>
 					<td width="130px">
-						<select id="studentId" name="studentId" class="easyui-combobox" style="width: 130px; height: 25px;">
-		        		</select>
+						<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 130px; height: 25px;"/>
 					</td>
 					<td align="right"><span>证件号码：</span></td>
 					<td width="210px">

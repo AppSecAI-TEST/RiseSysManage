@@ -10,8 +10,47 @@ $(document).ready(function() {
 		}
 	});
 	
-	initRPQryButton("qryApplyBtn", "reset", "qryApplyFm", "apply_list_data");
-	initRPQryButton("qryApproveBtn", "resetApprove", "qryApproveFm", "approve_list_data");
+	$("#qryApplyBtn").click(function() {
+		var obj = JSON.stringify($("#qryApplyFm").serializeObject());
+    	obj = obj.substring(0, obj.length - 1);
+    	var funcNodeId = $("#qryApplyBtn").attr("funcNodeId");
+    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+    	$('#apply_list_data').datagrid({
+    		url : "/sys/pubData/qryDataListByPage.do",
+    		queryParams:{
+    			param : obj
+    		},
+    		onLoadSuccess:function(){
+    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+    			$('#apply_list_data').datagrid('clearSelections');
+    		}
+    	});
+	});
+	
+	$("#reset").click(function() {
+		$("#qryApplyFm").form('clear');//清空窗体数据  
+	});
+	
+	$("#qryApproveBtn").click(function() {
+		var obj = JSON.stringify($("#qryApproveFm").serializeObject());
+    	obj = obj.substring(0, obj.length - 1);
+    	var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");
+    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+    	$('#approve_list_data').datagrid({
+    		url : "/sys/pubData/qryDataListByPage.do",
+    		queryParams:{
+    			param : obj
+    		},
+    		onLoadSuccess:function(){
+    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+    			$('#approve_list_data').datagrid('clearSelections');
+    		}
+    	});
+	});
+	
+	$("#resetApprove").click(function() {
+		$("#qryApproveFm").form('clear');//清空窗体数据  
+	});
 	
 	var staffId = $("#handlerId").val();
 	var funcNodeId = $("#funcNodeId").val();
@@ -25,35 +64,6 @@ $(document).ready(function() {
     	},
     	onChange : function(n, o) {
     		if(n != "" && n != null && n != undefined) {
-    			$("#studentId").combobox({
-					url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId="+funcNodeId+"&fieldId=studentId",
-					valueField : "studentId",
-					textField : "name",
-					panelHeight : "auto",
-					formatter : function(data) {
-						return "<span>" + data.name + "</span>";
-					}
-				});
-    			$("#outClassInstId").combobox({disabled: false});
-    			$("#outClassInstId").combobox({
-    				url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='003','004','005'&classInstId=",//返回json数据的url
-    				valueField : "classInstId",
-    				textField : "className",
-    				panelHeight : "auto",
-    				formatter : function(data) {
-    					return "<span>" + data.className + "</span>";
-    				}
-    			});
-    			$("#inClassInstId").combobox({disabled: false});
-				$("#inClassInstId").combobox({
-	        		url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='001','002','003'&classInstId=",//返回json数据的url
-	        		valueField : "classInstId",
-	        		textField : "className",
-	        		panelHeight : "auto",
-	        		formatter : function(data) {
-	        			return "<span>" + data.className + "</span>";
-	        		}
-	        	});
 				$("#outTeacherId").combobox({disabled: false});
 				$("#outTeacherId").combobox({
 	        		url : "/sys/pubData/qryData.do?param={'queryCode':'qryClassTeacherInfo', 'schoolId':'"+n+"'}",//返回json数据的url
@@ -67,12 +77,6 @@ $(document).ready(function() {
     		} else {
     			var data = $("#schoolId").combobox("getData");
     			$("#schoolId").combobox("setValue", data[0].schoolId);
-				$("#outClassInstId").combobox('clear');
-				$("#outClassInstId").combobox("loadData", new Array());
-				$("#outClassInstId").combobox({disabled: true});
-				$("#inClassInstId").combobox('clear');
-				$("#inClassInstId").combobox("loadData", new Array());
-				$("#inClassInstId").combobox({disabled: true});
 				$("#outTeacherId").combobox('clear');
 				$("#outTeacherId").combobox("loadData", new Array());
 				$("#outTeacherId").combobox({disabled: true});
@@ -87,22 +91,6 @@ $(document).ready(function() {
     	panelHeight : "auto",
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
-    	},
-    	onChange : function(n, o) {
-    		if(n != "" && n != null && n != undefined) {
-    			$("#approveStudentId").combobox({
-					url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId="+funcNodeId+"&fieldId=studentId",
-					valueField : "studentId",
-					textField : "name",
-					panelHeight : "auto",
-					formatter : function(data) {
-						return "<span>" + data.name + "</span>";
-					}
-				});
-    		} else {
-    			var data = $("#approveSchoolId").combobox("getData");
-    			$("#approveSchoolId").combobox("setValue", data[0].schoolId);
-    		}
     	}
 	});
 	

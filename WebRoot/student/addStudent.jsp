@@ -104,7 +104,7 @@
 	      			<tr>
 	      				<td align="right" width="114px"><span>学员备注：</span></td>
 	      				<td colspan="4">
-	      					<input id="remark" name="remark" type="text" class="easyui-textbox" style="width: 969px; height: 25px;"/>
+	      					<textarea rows="4" cols="122" id="remark" name="remark" class="easyui-validatebox textbox"></textarea>
 	      				</td>
 	      			</tr>
 	      		</table>
