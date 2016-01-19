@@ -166,7 +166,14 @@
 				    			html+="<td align='center'><span>"+obj.monthPlanHours+"</span></td>";
 				    			html+="<td align='center'><span>"+obj.monthHandHours+"</span></td>";
 				    			html+="<td align='center'><span>"+obj.mDiffNum+"</span></td>";
-				    			html+="<td align='center' width='40px;'><input class='easyui-textbox' style='width:150px; height: 25px;'/></td>";
+				    			if(obj.remark=='')
+				    			{
+				    				html+="<td align='center' width='40px;'><input class='easyui-textbox' style='width:150px; height: 25px;'/></td>";
+				    			}else
+				    			{
+				    				html+="<td align='center'><span>"+obj.remark+"</span></td>";
+				    			}
+				    			
 				    			html+="</tr>";
 				    		}
 							
