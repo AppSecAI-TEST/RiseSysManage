@@ -2,13 +2,17 @@ package com.rise.controller;
 
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rise.model.StaffT;
+import com.rise.pub.util.ObjectCensor;
 import com.rise.service.ClassAttendService;
 
 @Controller
@@ -48,12 +52,21 @@ public class ClassAttendController
 	}
 	
 	@RequestMapping("/getAttenceRecord.do")
-	public ModelAndView getAttenceRecord(String schooltimeInstId , String funcNodeId , String selDateStr , String dateValue)
+	public ModelAndView getAttenceRecord(HttpServletRequest request , String schooltimeInstId , String funcNodeId , String selDateStr , String dateValue)
 	{
 		ModelAndView model = new ModelAndView("attence/attenceRecord");
 		try
 		{
-			classAttendService.getAttenceRecord(model, schooltimeInstId, funcNodeId, selDateStr, dateValue);
+			HttpSession session = request.getSession();
+			StaffT staffT = (StaffT)session.getAttribute("StaffT");
+			if(!ObjectCensor.checkObjectIsNull(staffT))
+			{
+				classAttendService.getAttenceRecord(model, schooltimeInstId, funcNodeId, selDateStr, dateValue, staffT.getStaffId());
+			}
+			else
+			{
+				model.setViewName("common/userSessionout");
+			}
 		}
 		catch (Exception e) 
 		{
@@ -64,12 +77,21 @@ public class ClassAttendController
 	}
 	
 	@RequestMapping("/getAttenceRecordInst.do")
-	public ModelAndView getAttenceRecordInst(String classInstId , String funcNodeId , String selDateStr , String dateValue)
+	public ModelAndView getAttenceRecordInst(HttpServletRequest request , String classInstId , String funcNodeId , String selDateStr , String dateValue)
 	{
 		ModelAndView model = new ModelAndView("attence/attenceRecordInst");
 		try
 		{
-			classAttendService.getAttenceRecordInst(model, classInstId, funcNodeId, selDateStr, dateValue);
+			HttpSession session = request.getSession();
+			StaffT staffT = (StaffT)session.getAttribute("StaffT");
+			if(!ObjectCensor.checkObjectIsNull(staffT))
+			{
+				classAttendService.getAttenceRecordInst(model, classInstId, funcNodeId, selDateStr, dateValue, staffT.getStaffId());
+			}
+			else
+			{
+				model.setViewName("common/userSessionout");
+			}
 		}
 		catch (Exception e) 
 		{
@@ -136,12 +158,21 @@ public class ClassAttendController
 	}
 	
 	@RequestMapping("/getUpdateAttenceRecord.do")
-	public ModelAndView getUpdateAttenceRecord(String classAttendId , String funcNodeId , String selDateStr)
+	public ModelAndView getUpdateAttenceRecord(HttpServletRequest request , String classAttendId , String funcNodeId , String selDateStr)
 	{
 		ModelAndView model = new ModelAndView("attence/updateAttenceRecord");
 		try 
 		{
-			classAttendService.getUpdateAttenceRecord(model, classAttendId, funcNodeId, selDateStr);
+			HttpSession session = request.getSession();
+			StaffT staffT = (StaffT)session.getAttribute("StaffT");
+			if(!ObjectCensor.checkObjectIsNull(staffT))
+			{
+				classAttendService.getUpdateAttenceRecord(model, classAttendId, funcNodeId, selDateStr, staffT.getStaffId());
+			}
+			else
+			{
+				model.setViewName("common/userSessionout");
+			}
 		}
 		catch (Exception e) 
 		{

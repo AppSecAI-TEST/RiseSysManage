@@ -69,7 +69,6 @@
 													<br />
 													实际:${node.calendarShow.realClassTime}
 												</c:if>
-												&nbsp;
 											</td>	
 										</c:otherwise>
 									</c:choose>
@@ -90,7 +89,6 @@
 													<br />
 													实际:${node.calendarShow.realClassTime}
 												</c:if>
-												&nbsp;
 											</td>
 										</c:otherwise>
 									</c:choose>
@@ -112,7 +110,6 @@
 													<br />
 													实际:${node.calendarShow.realClassTime}
 												</c:if>
-												&nbsp;
 											</td>
 										</c:otherwise>
 									</c:choose>
@@ -135,7 +132,6 @@
 												<br />
 												实际:${node.calendarShow.realClassTime}
 											</c:if>
-											&nbsp;
 										</td>
 									</c:otherwise>
 								</c:choose>

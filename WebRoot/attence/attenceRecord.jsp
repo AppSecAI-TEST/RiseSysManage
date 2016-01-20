@@ -110,12 +110,10 @@
 				var classTimeData = '${hourRangeList}';
 				var classRoomIdData = '${roomList}';
 				var attRecordSchoolIdData = '${schoolList}';
-				var attRecordTeacherId = '${teacherList}';
 				var attRecordClassType = '${teacherTypeList}';
 				classTimeData = eval("("+classTimeData+")");
 				classRoomIdData = eval("("+classRoomIdData+")");
 				attRecordSchoolIdData = eval("("+attRecordSchoolIdData+")");
-				attRecordTeacherId = eval("("+attRecordTeacherId+")");
 				attRecordClassType = eval("("+attRecordClassType+")");
 				$("#classTime").combobox({
 					formatter:formatParaConfig, 
@@ -139,6 +137,16 @@
 						$("#classRoomId").combobox("setValue","${schooltimeInstT.roomId}");
 					}
 				});
+				$("#attRecordTeacherId").combobox({
+					formatter:function(row){
+						return "<span>"+row.byName+"</span>";
+					},
+					valueField: 'teacherId', 
+					textField: 'byName', 
+					//panelHeight: 'auto',
+					listHeight:150,
+					editable:false
+				});
 				$("#attRecordSchoolId").combobox({
 					formatter:formatSchool, 
 					valueField: 'schoolId', 
@@ -147,9 +155,9 @@
 					listHeight:150,
 					editable:false,
 					data:attRecordSchoolIdData,
-					onSelect:function(data){
+					onChange:function(value){
 						$("#attRecordTeacherId").combobox("setValue","");
-						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:data.schoolId},function(data){
+						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:value},function(data){
 							$("#attRecordTeacherId").combobox("loadData",data);
 						},"json");
 					},
@@ -159,17 +167,6 @@
 							$("#attRecordSchoolId").combobox("setValue",attRecordSchoolIdData[0].schoolId);
 						}
 					}
-				});
-				$("#attRecordTeacherId").combobox({
-					formatter:function(row){
-						return "<span>"+row.byName+"</span>";
-					},
-					valueField: 'teacherId', 
-					textField: 'byName', 
-					//panelHeight: 'auto',
-					listHeight:150,
-					editable:false,
-					data:attRecordTeacherId
 				});
 				$("#attRecordClassType").combobox({
 					formatter:formatItem, 

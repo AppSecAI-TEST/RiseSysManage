@@ -61,9 +61,8 @@
 											<td align="left" width="10%" style="background-color:#fafafa">&nbsp;</td>
 										</c:when>
 										<c:otherwise>
-											<td align="center" width="4%">${node.dateValue}</td>
+											<td align="center" width="4%"><a href="javascript:void(0)" <c:choose><c:when test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.classAttendId})"</c:when><c:otherwise>style="cursor:default"</c:otherwise></c:choose>>${node.dateValue}</a></td>
 											<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
-												<a href="javascript:void(0)" <c:if test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.classAttendId})"</c:if>>
 												<c:if test="${node.calendarShow.planClassTime != ''}">
 													计划:${node.calendarShow.planClassTime}
 												</c:if>
@@ -71,8 +70,6 @@
 													<br />
 													实际:${node.calendarShow.realClassTime}
 												</c:if>
-												&nbsp;
-												</a>
 											</td>	
 										</c:otherwise>
 									</c:choose>
@@ -84,9 +81,8 @@
 											<td align="left" width="10%" style="background-color:#fafafa">&nbsp;</td>
 										</c:when>
 										<c:otherwise>
-											<td align="center" width="4%">${node.dateValue}</td>
+											<td align="center" width="4%"><a href="javascript:void(0)" <c:choose><c:when test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.classAttendId})"</c:when><c:otherwise>style="cursor:default"</c:otherwise></c:choose>>${node.dateValue}</a></td>
 											<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
-												<a href="javascript:void(0)" <c:if test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.classAttendId})"</c:if>>
 												<c:if test="${node.calendarShow.planClassTime != ''}">
 													计划:${node.calendarShow.planClassTime}
 												</c:if>
@@ -94,8 +90,6 @@
 													<br />
 													实际:${node.calendarShow.realClassTime}
 												</c:if>
-												&nbsp;
-												</a>
 											</td>
 										</c:otherwise>
 									</c:choose>
@@ -108,9 +102,8 @@
 											<td align="left" width="10%" style="background-color:#fafafa">&nbsp;</td>
 										</c:when>
 										<c:otherwise>
-											<td align="center" width="4%">${node.dateValue}</td>
+											<td align="center" width="4%"><a href="javascript:void(0)" <c:choose><c:when test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.classAttendId})"</c:when><c:otherwise>style="cursor:default"</c:otherwise></c:choose>>${node.dateValue}</a></td>
 											<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
-												<a href="javascript:void(0)" <c:if test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.classAttendId})"</c:if>>
 												<c:if test="${node.calendarShow.planClassTime != ''}">
 													计划:${node.calendarShow.planClassTime}
 												</c:if>
@@ -118,8 +111,6 @@
 													<br />
 													实际:${node.calendarShow.realClassTime}
 												</c:if>
-												&nbsp;
-												</a>
 											</td>
 										</c:otherwise>
 									</c:choose>
@@ -133,9 +124,8 @@
 										<td align="left" width="10%" style="background-color:#fafafa">&nbsp;</td>
 									</c:when>
 									<c:otherwise>
-										<td align="center" width="4%">${node.dateValue}</td>
+										<td align="center" width="4%"><a href="javascript:void(0)" <c:choose><c:when test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.classAttendId})"</c:when><c:otherwise>style="cursor:default"</c:otherwise></c:choose>>${node.dateValue}</a></td>
 										<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
-											<a href="javascript:void(0)" <c:if test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.classAttendId})"</c:if>>
 											<c:if test="${node.calendarShow.planClassTime != ''}">
 												计划:${node.calendarShow.planClassTime}
 											</c:if>
@@ -143,8 +133,6 @@
 												<br />
 												实际:${node.calendarShow.realClassTime}
 											</c:if>
-											&nbsp;
-											</a>
 										</td>
 									</c:otherwise>
 								</c:choose>
