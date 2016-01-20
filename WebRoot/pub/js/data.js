@@ -16,6 +16,15 @@ function getTeachers()
 	return loadData(url);
 }
 
+function getAdvister()
+{
+	var url="/sys/pubData/qryStaffList.do?post=16,17";
+	return loadData(url);
+}
+
+
+		 
+
 function loadData(urls)
 {
 	var loadData;

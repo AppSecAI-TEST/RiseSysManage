@@ -154,6 +154,16 @@ var linkCourses = [];
 
 $("#updateCourse").click(function()
 {
+	coures("update");
+}) 
+ 
+$("#courseDetail").click(function()
+{
+	coures("view");
+});
+
+function coures(type)
+{
 	if(validateSelect("list_data"))
 	{
 		var row = $('#list_data').datagrid('getSelected');
@@ -171,11 +181,9 @@ $("#updateCourse").click(function()
 				linkCourses.push(course);
 			}
 		}
-		
 		var studentId = row.studentId;
     	var schoolId = row.schoolId;
     	var studentInfo =row.name+";;"+row.byName+";;"+row.birthday+";;"+row.identityId+";;"+row.sexText;
-     
 		if(linkCourses.length>1)
 		{
 			var str=JSON.stringify(linkCourses);
@@ -188,24 +196,20 @@ $("#updateCourse").click(function()
 				window.location.href="updateShortCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&courses="+str;
 			}else
 			{
-				if(row.courseState=='001')
+				if(true)
 				{
 					var studentCourseId=row.studentCourseId;
 					var url  = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Student_Wom\",studentCourseId:\""+ studentCourseId + "\"}";
 					window.location.href="updateCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&courses="+str;
 				}else if(row.courseState=='002' && row.classInstId!='')
 				{
-					showMessage("提示","该课程处于已定班状态,请修改成未定班",null);
+					showMessage("提示","该课程处于已定班状态,请重新选择",null);
 				}else
 				{
 					showMessage("提示","该课程不可修改,请重新选择",null);
 				}
 			}
-			
-	    
 		}
 	}
-	
-}) 
- 
+}
 </script>

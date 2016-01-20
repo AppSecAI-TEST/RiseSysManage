@@ -293,9 +293,7 @@
 					<table width="100%" cellpadding="5px" class="maintable"
 						id="giftCourse">
 						<tr align="center">
-							<td width="6%">
-								<span>序号</span>&nbsp;
-							</td>
+							<td style="visibility:hidden"></td>
 							<td width="9%">
 								<span>赠课类型</span>
 							</td>
@@ -354,7 +352,7 @@
 							</td>
 							<td align="center">
 								<a href='javascript:void(0)' class='linkmore'
-									onclick='delRow(this)'><span>删除</span> </a>
+									onclick='delGiftCourse(this)'><span>删除</span> </a>
 							</td>
 						</tr>
 					</table>
@@ -687,26 +685,26 @@
 						<td align="left">
 							<input id="totalAmount" name="totalAmount" type="text"    readonly="readonly"
 								class="easyui-textbox validatebox"
-								style="width: 200px; height: 25px;">
+								style="width:100px; height: 25px;">
 						</td>
 						<td align="right">
 							<span>赠券抵扣金额：</span>
 						</td>
 						 
 						<td align="left">
-							<input id="minusAmount" name="minusAmount" type="text"   readonly="readonly" class="easyui-textbox validatebox" style="width: 200px; height: 25px;">
+							<input id="minusAmount" name="minusAmount" type="text"   readonly="readonly" class="easyui-textbox validatebox" style="width: 100px; height: 25px;">
 						</td>
 						<td align="left">
 						 <span>优惠金额：</span> 
 						 </td>
 						 <td align="left">
-				      	 <input id="favorAmount"   name="favorAmount" type="text" readonly="readonly"  class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"/> 
+				      	 <input id="favorAmount"   name="favorAmount" type="text" readonly="readonly"  class="easyui-textbox validatebox"  style="width: 100px; height: 25px;"/> 
 				      	 </td>
 						<td align="right">
 							<span>实缴金额：</span>
 						</td>
 						<td align="left">
-							<input id="amount" name="amount" type="text"   readonly="readonly" class="easyui-textbox validatebox" style="width: 200px; height: 25px;">
+							<input id="amount" name="amount" type="text"   readonly="readonly" class="easyui-textbox validatebox" style="width: 100px; height: 25px;">
 						</td>
 					</tr>
 				</table>
@@ -1028,6 +1026,10 @@ $("#activeSchool").combobox(
 $('#stageId').combobox({
 	onChange : function(n, o)
 	{
+	 if(n=='')
+	 {
+		 return;
+	 }
 	var data = $("#stageId").combobox('getData');
 	var amount;
 
@@ -1043,8 +1045,8 @@ $('#stageId').combobox({
 	var payDate=$("#payDate").datebox('getValue');
 	if(payDate=='')
 	{
-		$("#stageId").combobox('setText',"");
-		$("#classType").combobox('setText',"");
+		$("#stageId").combobox('setValue',"");
+		$("#classType").combobox('setValue',"");
 		$("#totalAmount").textbox('setValue', '');
 		showMessage('提示', "请选择缴费时间",null);	
 		return;
@@ -1347,6 +1349,7 @@ $("#addGiftBtn").click(function ()
 	
 	});
 
+var giftCourseNum=1;
 //增加课程
 $("#addCourse").click(function()
 {
@@ -1356,10 +1359,7 @@ $("#addCourse").click(function()
 		var flag=true;
 		objectTr.find("td").each(function(i, node) {
 			var effDate = "";
-			if (i == 0) {
-				$(node).html("<span>" + (i ++) + "</span>");
-				
-			} else if (i == 1) {
+			if (i == 1) {
 				var name = $("#giftCourseType").combobox('getText');
 				var val = $("#giftCourseType").combobox('getValue');
 
@@ -2193,15 +2193,7 @@ $("#addCourse").click(function()
 				}
 				else
 				{
-					if($("#adviserTeacherA").combobox("getValue")=="")
-					{
-						showMessage("提示","请选择业绩老师A",function(){
-							hideMessage();
-							scrolltoDom($("#adviserTeacherA").parent());
-						});
-						return false;
-					}
-					else if($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue"))
+					if($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue"))
 					{
 						showMessage("提示","业绩老师A不能和业绩老师B相同",function(){
 							hideMessage();

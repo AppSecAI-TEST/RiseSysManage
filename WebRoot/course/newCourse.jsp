@@ -71,7 +71,7 @@
 							<input id="feeState" name="feeState" type="hidden" value="00A" />
 							<input id="stageOrder" name="stageOrder" type="hidden" value="" />
 							<td align="right"><span>缴费时间：</span></td>
-	      	    			    <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" value="<%=StringUtil.getJSONObjectKeyVal(object,"payDate")%>" style="width: 120px; height: 28px;" /></td>
+	      	    			    <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" value="<%=StringUtil.getJSONObjectKeyVal(object,"payDate")%>" style="width: 100px; height: 25px;" /></td>
 							<td align="right">
 								<span>阶段：</span>
 							</td>
@@ -163,7 +163,7 @@
 				</div>
 				<div id="giftDiv">
 				<div style="height: 5px;"></div>
-				<div   class="easyui-panel" style="width: 100%; height: auto;"
+				<div   class="easyui-panel" style="width: 100%; height: auto;min-width:1100px;"
 					title="赠品信息">
 				<table width="100%" cellpadding="5px" class="maintable" id="giftTab">
 	      	      <tr id="giftModelTR">
@@ -557,26 +557,26 @@
 						<td align="left">
 							<input id="totalAmount" name="totalAmount" type="text"    readonly="readonly"
 								class="easyui-textbox validatebox"
-								style="width: 200px; height: 25px;">
+								style="width: 100px; height: 25px;">
 						</td>
 						<td align="right">
 							<span>赠券抵扣金额：</span>
 						</td>
 						 
 						<td align="left">
-							<input id="minusAmount" name="minusAmount" type="text"   readonly="readonly" class="easyui-textbox validatebox" style="width: 200px; height: 25px;">
+							<input id="minusAmount" name="minusAmount" type="text"   readonly="readonly" class="easyui-textbox validatebox" style="width: 100px; height: 25px;">
 						</td>
 						<td align="left">
 						 <span>连报优惠金额：</span> 
 						 </td>
 						 <td align="left">
-				      	 <input id="favorAmount"   name="favorAmount" type="text"    class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"/> 
+				      	 <input id="favorAmount"   name="favorAmount" type="text"    class="easyui-textbox validatebox"  style="width: 100px; height: 25px;"/> 
 				      	 </td>
 						<td align="right">
 							<span>实缴金额：</span>
 						</td>
 						<td align="left">
-							<input id="amount" name="amount" type="text"   readonly="readonly" class="easyui-textbox validatebox" style="width: 200px; height: 25px;">
+							<input id="amount" name="amount" type="text"   readonly="readonly" class="easyui-textbox validatebox" style="width: 100px; height: 25px;">
 						</td>
 					</tr>
 				</table>
@@ -604,7 +604,16 @@ var amount = 0;//实缴金额
 var schools=getSchools();
 var teachers=getTeachers();
 initCousreGift();
-initDate(); 
+initPayDate();
+var setPriceId="<%=StringUtil.getJSONObjectKeyVal(object,"coursePriceId")%>";
+initOldCourse();
+function initOldCourse()
+{
+	if(setPriceId!='')
+	{
+		$("#payDate").datebox({ disabled: true});
+	}
+}
 $("#activeSchool").combobox({data:schools});
 $("#c_schoolA").combobox({data:schools});
 $("#c_schoolB").combobox({data:schools});
@@ -624,6 +633,19 @@ $("#adviserTeacherB").combobox({data:teachers});
 
 $("#s_teacherA").combobox({data:teachers});
 $("#s_teacherB").combobox({data:teachers});
+
+$('#favorAmount').textbox( {
+	onChange : function(value) {
+		minus = $("#minusAmount").textbox('getValue');
+		favorAmount = $("#favorAmount").textbox('getValue');
+		totalAmount = $("#totalAmount").textbox('getValue');
+		amount = totalAmount - minus - favorAmount;
+		$("#amount").textbox('setValue', amount);
+		parent.window.countAmount();
+		parent.window.checkFavorAmount();
+	}
+});
+
 
 	$("#adviserA_school").combobox({
 		onChange:function(){
@@ -854,7 +876,10 @@ $('#stageId').combobox({
 	{
 	var data = $("#stageId").combobox('getData');
 	var amount;
-
+	if(n=='')
+	 {
+		 return;
+	 }
 	for ( var i = 0; i < data.length; i++)
 	{
 		if (n == data[i].stageId) 
@@ -867,22 +892,31 @@ $('#stageId').combobox({
 	var payDate=$("#payDate").datebox('getValue');
 	if(payDate=='')
 	{
-		$("#stageId").combobox('setText',"");
-		$("#classType").combobox('setText',"");
+		$("#stageId").combobox('setValue',"");
+		$("#classType").combobox('setValue',"");
 		$("#totalAmount").textbox('setValue', '');
 		$.messager.alert('提示', "请选择缴费时间");	
 		return;
 	}
-	var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\",schoolId:\""+ <%=schoolId%> + "\"}";
+	var studentCourseId=$("#studentCourseId").val();
+	var classType="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>";//初始化已有值
+	var url="";
+	if(studentCourseId=='')//新报
+	{
+		url = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\",schoolId:\""+ <%=schoolId%> + "\"}";
+	}else//已有
+	{
+		url= "/sys/pubData/qryData.do?param={queryCode:\"Qry_Old_Stage_Class\",setPriceId:\""+ setPriceId + "\",stageId:\""+ stageType + "\",classType:\""+ classType + "\"}";
+	}
+	
 	$("#classType").combobox(
 	{
-		url : urls,//返回json数据的url
+		url : url,//返回json数据的url
 		valueField : "classType",
 		textField : "classType",
 		panelHeight : "auto",
 		onLoadSuccess : function() { //数据加载完毕事件
 			var data = $('#classType').combobox('getData');
-			var classType="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>";//初始化已有值
 			if(data==null || data.length==0)
 			{
 				$("#stageId").combobox('setText',"");
@@ -936,16 +970,6 @@ $("#classType").combobox(
 
 });
 
-$('#favorAmount').textbox( {
-	onChange : function(value) {
-		minus = $("#minusAmount").textbox('getValue');
-		favorAmount = $("#favorAmount").textbox('getValue');
-		totalAmount = $("#totalAmount").textbox('getValue');
-		amount = totalAmount - minus - favorAmount;
-		$("#amount").textbox('setValue', amount);
-		parent.window.countAmount();
-	}
-});
 
 //initOldCourse();
 function initOldCourse()
@@ -1972,15 +1996,7 @@ $("#praiseSourceN").combobox({
 				}
 				else
 				{
-					if($("#adviserTeacherA").combobox("getValue")=="")
-					{
-						parent.showMessage("提示","请选择"+arr[n]+"业绩老师A",function(){
-							parent.hideMessage();
-							parent.scrolltoFrame(n,$("#adviserTeacherA").parent().offset().top);
-						});
-						return false;
-					}
-					else if($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue"))
+					if($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue"))
 					{
 						parent.showMessage("提示",arr[n]+"业绩老师A不能和业绩老师B相同",function(){
 							parent.hideMessage();

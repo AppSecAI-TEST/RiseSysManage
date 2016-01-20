@@ -188,8 +188,10 @@ a {
 var linkCourses = [];//选择关联已有连报课程
 var courses;
 $("#submit").click(function() {
+	linkCourses = [];
 	$("input[type=checkbox]").each(function() 
 	{
+		
 		if (this.checked)
 		{
 			var id = $(this).attr('studentCousreId');
@@ -250,7 +252,7 @@ $(document).ready(
 							var base = tabModel.find(".base").find("tr:eq(0)")
 							base.find("td:eq(1)").html("<span>" + node.stageId + "</span>");
 							base.find("td:eq(3)").html("<span>" + node.payDate + "</span>");
-							base.find("td:eq(4)").html("<span>" + node.linkId + "," + node.stageOrder + "</span>")//提示 不知如何取 暂时取备注字段
+							base.find("td:eq(4)").html("<span></span>")//提示 不知如何取 暂时取备注字段
 							var checkboxes = base.find("td:eq(5)").find("input[type=checkbox]");
 							checkboxes.attr('studentCousreId', node.studentCourseId);
 							checkboxes.attr('linkId', node.linkId);

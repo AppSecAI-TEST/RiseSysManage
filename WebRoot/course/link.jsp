@@ -41,7 +41,7 @@
 	      					<td width="15%">
 	      						<span></span>
 	      					</td>
-	      					<td align="right"><span>证件号码：</span></td>
+	      					<td width="13%" align="right"><span>证件号码：</span></td>
 	      					<td><span></span></td>
       					</tr>
 	      				<tr>
@@ -94,7 +94,7 @@
 		
 			
 		<div style="height: 10px;"></div>
-		<div class="easyui-panel" style="width:99%;height:auto;" title="合计金额">
+		<div class="easyui-panel" style="width:99%;height:auto;min-width:1100px;" title="合计金额">
  	      <table width="100%" cellpadding="5px" class="maintable" >
             <tr>
    	        <td width="5%"   align="right" ><span>总金额：</span></td>
@@ -152,6 +152,8 @@
 	
 	function linkCourse()
 	{
+		$("#link").combobox('setValue',"");
+   	    $("#link").combobox('setText',"");
 		$('#dlg').dialog('open').dialog('setTitle', '关联连报课程');
 		$('#fm').form('clear');
 	
@@ -174,9 +176,29 @@
     {    
        onChange : function(n,o) 
        {
+    	    if(n==''){return}
     		num=$("#link").combobox('getText');
     		$("#link").combobox('setText',num+"年连报");
-    		toLinkCourse(num);
+    		if(linkCourses.length>=num)
+    		{
+    			favorPrice=0;
+    			$("#link").combobox('setValue',"");
+   	   		 	$("#link").combobox('setText',"");
+    			showMessage('提示', "连报年数需大于关联连报课程数,请重新选择", null);
+    			return;
+    		}else
+    		{
+    			var data = $(this).combobox('getData');
+				for(var i=0;i<data.length;i++)
+				{
+					 if(num==data[i].linkNum)
+					 {
+						 favorPrice=data[i].favorPrice; 
+					 }
+				}
+    			toLinkCourse(num);
+    		}
+    		
        }  
     });  
 
@@ -196,19 +218,19 @@ function updateLinkCourses()
 	 
 		$("#link").combobox(
 		{
-			url:"<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_Link_Favor','setPriceId':'10002'}",
+			    url:"<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_Link_Favor','schoolId':'"+<%=schoolId%>+"'}",
 				onLoadSuccess : function() { //数据加载完毕事件
 				var data = $(this).combobox('getData');
 				 
 				if(data==null || data.length==0)
 				{
-					 
+					 showMessage("提示","该校区没有可用连报价格体系",null);
+					 return;
 				} 
 				for(var i=0;i<data.length;i++)
 				{
 					 if(num==data[i].linkNum)
 					 {
-						  favorPrice =data[i].favorPrice ;
 						 $("#link").combobox('setText',num+"年连报"); 
 					 }
 				}
@@ -395,6 +417,9 @@ var newCourse;//新招课程阶段
 	   			showMessage('提示', "课程信息填写不完整", null);
 	   			return;
 	   		}
+	   		
+	   	
+	   		
 	   		if(!checkNewCourse(courseT))
 	   		{
 	   			return; 
@@ -407,12 +432,7 @@ var newCourse;//新招课程阶段
 			 return ;
 		 }
 		 
-		 if(favorPrice!=favorAmount)
-		 {
-			 showMessage('提示', "连报优惠总金额为"+favorPrice+"元,实际优惠总金额为"+favorAmount+"元,请重新核对金额", null);
-			 return;
-		 }
-		 
+		 validateCourses(studentCourses);
 		 
 		allCourseInfos.studentCourses=studentCourses;
 		allCourseInfos.linkCourseT=linkCourseT;
@@ -488,9 +508,17 @@ var newCourse;//新招课程阶段
 			linkCourseT.addAmount=amount-oldAmount;
 			linkCourseT.linkType=num;
 			linkCourseT.studentId='<%=studentId%>';
-			
 	}
-	
+ 
+	function checkFavorAmount()
+	{
+		countAmount()
+		if(favorPrice!=favorAmount)
+		{
+			 showMessage('提示', "连报优惠总金额为"+favorPrice+"元,实际优惠总金额为"+favorAmount+"元,请核对金额", null);
+			 return;
+		}
+	}
 	//获取所有连报课程已使用的抵扣券
 	function getAllCoupon()
 	{

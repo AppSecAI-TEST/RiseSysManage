@@ -150,7 +150,7 @@
       		<div style="height: 5px;"></div>
       		<div class="easyui-panel" style="width:100%;height:auto;" title="赠课信息">
       	      <table width="100%" cellpadding="5px" class="maintable" >
-	      	      <tr>
+	      	      <tr  id="giftCourseTr">
 	      	        <td colspan="2" align="right"><span>赠课类型</span></td>
 	      	        <td width="22%" align="right">
 		      	        <div align="left">
@@ -204,13 +204,13 @@
 			   	            </tr>
 			   	            <tr>
 				      	        <td width="10%"  align="right" ><span>课程金额：</span></td>
-				      	        <td width="14%"  align="left" ><input id="totalAmount" readonly="readonly"  name="totalAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"totalAmount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"> </td>
+				      	        <td width="14%"  align="left" ><input id="totalAmount" readonly="readonly"  name="totalAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"totalAmount")%>" class="easyui-textbox validatebox"  style="width: 100px; height: 25px;"> </td>
 				      	        <td width="12%"  align="right" ><span >现金抵扣券金额：</span></td>
-				      	        <td colspan="3"  align="left" ><input id="minusAmount"   readonly="readonly"  name="minusAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;">  </td>
+				      	        <td colspan="3"  align="left" ><input id="minusAmount"   readonly="readonly"  name="minusAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>" class="easyui-textbox validatebox"  style="width: 100px; height: 25px;">  </td>
 				      	        <td width="11%"  align="right"><span>连报优惠金额：</span></td>
-				      	        <td width="17%"  align="left" ><input id="favorAmount"   name="favorAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"favorAmount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"/></td>
+				      	        <td width="17%"  align="left" ><input id="favorAmount"   name="favorAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"favorAmount")%>" class="easyui-textbox validatebox"  style="width: 100px; height: 25px;"/></td>
 				      	        <td width="12%"  align="right"><span>实缴课程金额：</span></td>
-				      	        <td width="17%"  align="left" ><input id="amount"   readonly="readonly"   name="amount" type="text"  value="<%=StringUtil.getJSONObjectKeyVal(object,"amount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"> </td>
+				      	        <td width="17%"  align="left" ><input id="amount"   readonly="readonly"   name="amount" type="text"  value="<%=StringUtil.getJSONObjectKeyVal(object,"amount")%>" class="easyui-textbox validatebox"  style="width: 100px; height: 25px;"> </td>
 			      	         </tr>
 			      	      </table>
 				</div>
@@ -233,6 +233,16 @@ initPayDate();
 	var favorAmount=0;//优惠金额
 	var totalAmount=0;//课程金额
 	var amount=0;//实缴金额
+
+	var setPriceId="<%=StringUtil.getJSONObjectKeyVal(object,"coursePriceId")%>";
+	initOldCourse();
+function initOldCourse()
+{
+	if(setPriceId!='')
+	{
+		$("#payDate").datebox({ disabled: true});
+	}
+}
 
 	$(":radio[name='isGetY']").click(function()
 {
@@ -397,7 +407,10 @@ $('#stageId').combobox({
 	{
 	var data = $("#stageId").combobox('getData');
 	var amount;
-
+	if(n=='')
+	 {
+		 return;
+	 }
 	for ( var i = 0; i < data.length; i++)
 	{
 		if (n == data[i].stageId) 
@@ -410,23 +423,34 @@ $('#stageId').combobox({
 	var payDate=$("#payDate").datebox('getText');
 	if(payDate=='')
 	{
-		$("#stageId").combobox('setText',"");
-		$("#classType").combobox('setText',"");
+		$("#stageId").combobox('setValue',"");
+		$("#classType").combobox('setValue',"");
 		$("#totalAmount").textbox('setValue', '');
 		parent.window.showMsg("请选择缴费时间");	
 		return;
 	}
+	
+	var studentCourseId=$("#studentCourseId").val();
+	var classType="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>";//初始化已有值
 	 
-	var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\",schoolId:\""+ <%=schoolId%> + "\"}";
+	var url="";
+	if(studentCourseId=='')//新报
+	{
+		url = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\",schoolId:\""+ <%=schoolId%> + "\"}";
+	}else//已有
+	{
+		url= "/sys/pubData/qryData.do?param={queryCode:\"Qry_Old_Stage_Class\",setPriceId:\""+ setPriceId + "\",stageId:\""+ stageType + "\",classType:\""+ classType + "\"}";
+	}
 	$("#classType").combobox(
 	{
-		url : urls,//返回json数据的url
+		url : url,//返回json数据的url
 		valueField : "classType",
 		textField : "classType",
 		panelHeight : "auto",
-		onLoadSuccess : function() { //数据加载完毕事件
+		onLoadSuccess : function() //数据加载完毕事件
+		{ 
 			var data = $('#classType').combobox('getData');
-			var classType="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>";//初始化已有值
+			
 			if(data==null || data.length==0)
 			{
 				$("#stageId").combobox('setText',"");
@@ -490,6 +514,7 @@ $("#favorAmount").textbox(
 		amount = totalAmount - minus - favorAmount;
 		$("#amount").textbox('setValue', amount);
 		parent.window.countAmount();
+		parent.window.checkFavorAmount();
 	}
 	
 });
@@ -874,15 +899,8 @@ $("#addCourse").click(function()
 				});
 				return false;
 			}
-			if($("#adviserTeacherA").combobox("getValue")=="")
-			{
-				parent.showMessage("提示","请选择"+arr[n]+"业绩老师A",function(){
-					parent.hideMessage();
-					parent.scrolltoFrame(n,$("#adviserTeacherA").parent().offset().top);
-				});
-				return false;
-			}
-			else if($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue"))
+			
+			if($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue"))
 			{
 				parent.showMessage("提示",arr[n]+"业绩老师A不能和业绩老师B相同",function(){
 					parent.hideMessage();
