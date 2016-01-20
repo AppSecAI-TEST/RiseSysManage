@@ -212,7 +212,7 @@ function initTeacher(tabId,data)
     },
      
     columns:[[
-      {field:'teacherName',title:'教师',width:100,align:'center'}
+      {field:'teacherName',title:'',width:100,align:'center'}
       
     ]] 
   });
@@ -235,6 +235,7 @@ function initTable(tabId,data)
 		 return 'background-color:#FFFFFF;color:#00000;';
     },
     columns:[[
+       {field:'teacherName',title:'教师',width:100,align:'center'},	
       {field:'H001',title:'上午1', width:120,align:'center', editor:'text'},
       {field:'H002',title:'上午2',width:120,align:'center', editor:'text'},
       {field:'H003',title:'下午1',width:120,align:'center', editor:'text'},

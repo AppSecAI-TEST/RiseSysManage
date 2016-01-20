@@ -141,7 +141,7 @@ function getWeekTime()
 	$.ajax(
 	{
 		type : "POST",
-		url: "/sys/time//roomPlan.do?schoolId="+schoolId,
+		url: "/sys/time/roomPlan.do?schoolId="+schoolId,
 		async: false,
 		dataType:"json",
 		beforeSend: function()
