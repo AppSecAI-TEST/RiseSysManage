@@ -129,8 +129,8 @@
 				$("#classManPharse").combobox("setValue","");
 				$("#classManState").combobox("setValue","");
 				$("#schoolManId").combobox("setValue","");
-				$("#planStartManTime").datebox("setValue","");
-				$("#planEndManTime").datebox("setValue","");
+				$("#openStartManTime").datebox("setValue","");
+				$("#openEndManTime").datebox("setValue","");
 			}
 			function classArrangementFunc()
 			{

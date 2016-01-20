@@ -28,7 +28,7 @@
 				<td>
 					<c:forEach items="${shortClassTeacherTList}" var="teacherNode">
 						<c:if test="${teacherNode.teacherType == 'T'}">
-							${teacherNode.teacherT.teacherName}
+							${teacherNode.teacherT.byName}
 						</c:if>
 					</c:forEach>
 				</td>
@@ -36,7 +36,7 @@
 				<td>
 					<c:forEach items="${shortClassTeacherTList}" var="teacherNode">
 						<c:if test="${teacherNode.teacherType == 'TA'}">
-							${teacherNode.teacherT.teacherName}
+							${teacherNode.teacherT.byName}
 						</c:if>
 					</c:forEach>
 				</td>				

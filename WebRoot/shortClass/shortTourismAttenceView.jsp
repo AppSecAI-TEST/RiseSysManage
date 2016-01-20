@@ -27,7 +27,7 @@
 				<tr>
 					<td align="right" width="15%">老师：</td>
 					<td align="center" width="15%">${node.teacherT.schoolT.schoolName}</td>
-					<td align="center" width="15%">${node.teacherT.teacherName}</td>
+					<td align="center" width="15%">${node.teacherT.byName}</td>
 					<td>&nbsp;</td>
 				</tr>
 			</c:forEach>

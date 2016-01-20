@@ -125,7 +125,8 @@
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
 					textField: 'codeName', 
-					panelHeight: 'auto'
+					panelHeight: 'auto',
+					editable:false
 				});
 				$("#classType").combobox("setValue","${shortClassInstT.classTypeId}");
 				$("#classInfo").textbox("setValue","${shortClassInstT.className}");
@@ -143,28 +144,44 @@
 				var planHours = $("#planHours").textbox("getValue");
 				var classStartTime = $("#classStartTime").datebox("getValue");
 				var classEndTime = $("#classEndTime").datebox("getValue");
-				if(classStartTime == "")
+				var classStartTimeDate = new Date(classStartTime);
+				var classEndTimeDate = new Date(classEndTime);
+				if(classInfo == "")
 				{
-					$.messager.alert('提示',"开课日期不能为空,请核实后重新尝试","info");
+					$.messager.alert('提示',"热身课班级名称不能为空,请核实后重新尝试","info");
+				}
+				else if(planClassNum == "")
+				{
+					$.messager.alert('提示',"计划上课人数不能为空,请核实后重新尝试","info");
+				}
+				else if(isNaN(planClassNum))
+				{
+					$.messager.alert('提示',"计划上课人数不合法,请核实后重新尝试","info");
 				}
 				else if(planHours == "")
 				{
-					$.messager.alert('提示',"计划总课时量不能为空,请核实后重新尝试","info");
+					$.messager.alert('提示',"计划课时量不能为空,请核实后重新尝试","info");
+				}
+				else if(isNaN(planHours))
+				{
+					$.messager.alert('提示',"计划课时量不合法,请核实后重新尝试","info");
+				}
+				else if(classStartTime == "")
+				{
+					$.messager.alert('提示',"开课日期不能为空,请核实后重新尝试","info");
 				}
 				else if(classEndTime == "")
 				{
 					$.messager.alert('提示',"结课日期不能为空,请核实后重新尝试","info");
 				}
+				else if(classStartTimeDate.getTime() >= classEndTimeDate.getTime())
+				{
+					$.messager.alert('提示',"结课时间必须大于开课时间,请核实后重新尝试","info");
+				}
 				else if($(".shortSchooltimeId").length == 0)
 				{
 					$.messager.alert('提示',"上课计划不能为空,请核实后重新尝试","info");
 				}
-				<c:if test="${!empty shortClassInstT.approveDate}">
-				else if($(".studentId").length == 0)
-             	{
-             		$.messager.alert('提示',"上课学员不能为空,请核实后重新尝试","info");
-             	}
-             	</c:if>
 				else
 				{
 					var json = {

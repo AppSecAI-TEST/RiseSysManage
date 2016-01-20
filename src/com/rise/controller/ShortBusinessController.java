@@ -2,13 +2,17 @@ package com.rise.controller;
 
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rise.model.StaffT;
+import com.rise.pub.util.ObjectCensor;
 import com.rise.service.ShortBusinessService;
 
 @Controller
@@ -292,14 +296,14 @@ public class ShortBusinessController
 	
 	
 	@RequestMapping("/addShortStudentTInfo.do")
-	public void addShortStudentTInfo(String json , String classType , HttpServletResponse response)
+	public void addShortStudentTInfo(String json , String classType , String shortClassInstId , HttpServletResponse response)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = shortBusinessService.addShortStudentTInfo(json , classType);
+			String retVal = shortBusinessService.addShortStudentTInfo(json , classType , shortClassInstId);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -340,12 +344,21 @@ public class ShortBusinessController
 	}
 	
 	@RequestMapping("/getShortClassAttendTInfo.do")
-	public ModelAndView getShortClassAttendTInfo(String shortClassInstId , String funcNodeId , String pageName)
+	public ModelAndView getShortClassAttendTInfo(HttpServletRequest request , String shortClassInstId , String funcNodeId , String pageName)
 	{
 		ModelAndView model = new ModelAndView("shortClass/shortAttenceRecord");
 		try
 		{
-			shortBusinessService.getShortClassAttendTInfo(model , shortClassInstId , funcNodeId , pageName);
+			HttpSession session = request.getSession();
+			StaffT staffT = (StaffT)session.getAttribute("StaffT");
+			if(!ObjectCensor.checkObjectIsNull(staffT))
+			{
+				shortBusinessService.getShortClassAttendTInfo(model , shortClassInstId , funcNodeId , pageName , staffT.getStaffId());
+			}
+			else
+			{
+				model.setViewName("common/userSessionout");
+			}
 		}
 		catch(Exception e)
 		{
@@ -463,12 +476,21 @@ public class ShortBusinessController
 	}
 	
 	@RequestMapping("/tourismAttenceRecordPage.do")
-	public ModelAndView tourismAttenceRecordPage(String shortClassInstId , String funcNodeId)
+	public ModelAndView tourismAttenceRecordPage(HttpServletRequest request , String shortClassInstId , String funcNodeId)
 	{
 		ModelAndView model = new ModelAndView("shortClass/tourismAttenceRecord");
 		try
 		{
-			shortBusinessService.tourismAttenceRecordPage(model, shortClassInstId, funcNodeId);
+			HttpSession session = request.getSession();
+			StaffT staffT = (StaffT)session.getAttribute("StaffT");
+			if(!ObjectCensor.checkObjectIsNull(staffT))
+			{
+				shortBusinessService.tourismAttenceRecordPage(model, shortClassInstId, funcNodeId, staffT.getStaffId());
+			}
+			else
+			{
+				model.setViewName("common/userSessionout");
+			}
 		}
 		catch(Exception e)
 		{
@@ -502,12 +524,21 @@ public class ShortBusinessController
 	}
 	
 	@RequestMapping("/tourismAttenceRecUpdatePage.do")
-	public ModelAndView tourismAttenceRecUpdatePage(String shortClassAttendId , String funcNodeId)
+	public ModelAndView tourismAttenceRecUpdatePage(HttpServletRequest request , String shortClassAttendId , String funcNodeId)
 	{
 		ModelAndView model = new ModelAndView("shortClass/tourismAttenceRecUpdate");
 		try
 		{
-			shortBusinessService.tourismAttenceRecUpdatePage(model, shortClassAttendId, funcNodeId);
+			HttpSession session = request.getSession();
+			StaffT staffT = (StaffT)session.getAttribute("StaffT");
+			if(!ObjectCensor.checkObjectIsNull(staffT))
+			{
+				shortBusinessService.tourismAttenceRecUpdatePage(model, shortClassAttendId, funcNodeId, staffT.getStaffId());
+			}
+			else
+			{
+				model.setViewName("common/userSessionout");
+			}
 		}
 		catch(Exception e)
 		{
@@ -541,12 +572,21 @@ public class ShortBusinessController
 	}
 	
 	@RequestMapping("/shortTourismAttenceViewPage.do")
-	public ModelAndView shortTourismAttenceViewPage(String shortClassAttendId , String funcNodeId)
+	public ModelAndView shortTourismAttenceViewPage(HttpServletRequest request , String shortClassAttendId , String funcNodeId)
 	{
 		ModelAndView model = new ModelAndView("shortClass/shortTourismAttenceView");
 		try
 		{
-			shortBusinessService.tourismAttenceRecUpdatePage(model, shortClassAttendId, funcNodeId);
+			HttpSession session = request.getSession();
+			StaffT staffT = (StaffT)session.getAttribute("StaffT");
+			if(!ObjectCensor.checkObjectIsNull(staffT))
+			{
+				shortBusinessService.tourismAttenceRecUpdatePage(model, shortClassAttendId, funcNodeId, staffT.getStaffId());
+			}
+			else
+			{
+				model.setViewName("common/userSessionout");
+			}
 		}
 		catch(Exception e)
 		{
@@ -652,12 +692,21 @@ public class ShortBusinessController
 	}
 	
 	@RequestMapping("/getForeignAttendTInfo.do")
-	public ModelAndView getForeignAttendTInfo(String shortClassInstId , String funcNodeId)
+	public ModelAndView getForeignAttendTInfo(HttpServletRequest request , String shortClassInstId , String funcNodeId)
 	{
 		ModelAndView model = new ModelAndView("shortClass/shortAttenceForeignRecord");
 		try
 		{
-			shortBusinessService.getShortClassAttendTInfo(model , shortClassInstId , funcNodeId , "");
+			HttpSession session = request.getSession();
+			StaffT staffT = (StaffT)session.getAttribute("StaffT");
+			if(!ObjectCensor.checkObjectIsNull(staffT))
+			{
+				shortBusinessService.getShortClassAttendTInfo(model , shortClassInstId , funcNodeId , "" , staffT.getStaffId());
+			}
+			else
+			{
+				model.setViewName("common/userSessionout");
+			}
 		}
 		catch(Exception e)
 		{

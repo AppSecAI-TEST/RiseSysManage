@@ -91,12 +91,14 @@
 					}, 
 					valueField: 'classTypeId', 
 					textField: 'classType',
+					editable:false,
 					panelHeight: 'auto'
 				});
 				$("#schoolManId").combobox({
 					formatter:formatSchool, 
 					valueField: 'schoolId', 
-					textField: 'schoolName', 
+					textField: 'schoolName',
+					editable:false,
 					panelHeight: 'auto'
 				});
 				var interClassType = sessionStorage.getItem("interClassType");
@@ -145,6 +147,10 @@
 				else if(planHours == "")
 				{
 					$.messager.alert('提示',"计划总课时量不能为空,请核实后重新尝试","info");
+				}
+				else if(isNaN(planHours))
+				{
+					$.messager.alert('提示',"计划总课时量不合法,请核实后重新尝试","info");
 				}
 				else if(classEndTime == "")
 				{

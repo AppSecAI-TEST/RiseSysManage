@@ -42,7 +42,7 @@
 				<c:otherwise>
 					<c:forEach items="${shortClassTeacherTList}" var="node" varStatus="i">
 						<tr>
-							<tr><td align='center' width='15%'>${node.schoolT.schoolName}</td><td align='center' width='15%'>${node.teacherT.teacherName}</td><td width='70%' style='padding-left:30px'>&nbsp;</td></tr>
+							<tr><td align='center' width='15%'>${node.schoolT.schoolName}</td><td align='center' width='15%'>${node.teacherT.byName}</td><td width='70%' style='padding-left:30px'>&nbsp;</td></tr>
 						</tr>
 					</c:forEach>
 				</c:otherwise>

@@ -44,7 +44,7 @@
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${shortClassTeacherTList}" var="node" varStatus="i">
-						<tr id='teacherId${node.teacherT.teacherId}' class='teacherId'><td align='center' width='15%' shortClassTeacherId='${node.shortClassTeacherId}' teacherId='${node.teacherT.teacherId}' schoolId='${node.schoolId}'>${node.schoolT.schoolName}</td><td align='center' width='15%'>${node.teacherT.teacherName}</td><td width='70%' style='padding-left:30px'><a href='javascript:void(0)' onclick='delTeacherFunc("${node.teacherT.teacherId}")'>删除</a></td></tr>
+						<tr id='teacherId${node.teacherT.teacherId}' class='teacherId'><td align='center' width='15%' shortClassTeacherId='${node.shortClassTeacherId}' teacherId='${node.teacherT.teacherId}' schoolId='${node.schoolId}'>${node.schoolT.schoolName}</td><td align='center' width='15%'>${node.teacherT.byName}</td><td width='70%' style='padding-left:30px'><a href='javascript:void(0)' onclick='delTeacherFunc("${node.teacherT.teacherId}")'>删除</a></td></tr>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
@@ -112,6 +112,7 @@
 					textField: 'schoolName', 
 					//panelHeight: 'auto',
 					listHeight:150,
+					editable:false,
 					onSelect:function(data){
 						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:data.schoolId},function(data){
 							$("#teacherId").combobox("loadData",data);
@@ -130,14 +131,18 @@
 					}, 
 					valueField: 'classTypeId', 
 					textField: 'classType',
-					panelHeight: 'auto'
+					panelHeight: 'auto',
+					editable:false
 				});
 				$("#teacherId").combobox({
-					formatter:formatTeacherName,
+					formatter:function(row){
+						return "<span>"+row.byName+"</span>";
+					},
 					valueField: 'teacherId', 
-					textField: 'teacherName', 
+					textField: 'byName', 
 					//panelHeight: 'auto',
-					listHeight:150
+					listHeight:150,
+					editable:false
 				});
 				$("#tourismClassType").combobox("setValue","${shortClassInstT.classTypeId}");
 				$("#className").textbox("setValue","${shortClassInstT.className}");
@@ -153,17 +158,27 @@
 				var classStartTime = $("#classStartTime").datebox("getValue");
 				var planClassNum = $("#planClassNum").textbox("getValue");
 				var classEndTime = $("#classEndTime").combobox("getValue");
+				var classStartTimeDate = new Date(classStartTime);
+				var classEndTimeDate = new Date(classEndTime);
 				if(classStartTime == "")
 				{
 					$.messager.alert('提示',"开课日期不能为空,请核实后重新尝试","info");
+				}
+				else if(classEndTime == "")
+				{
+					$.messager.alert('提示',"结课日期不能为空,请核实后重新尝试","info");
 				}
 				else if(planClassNum == "")
 				{
 					$.messager.alert('提示',"计划招生人数不能为空,请核实后重新尝试","info");
 				}
-				else if(classEndTime == "")
+				else if(isNaN(planClassNum))
 				{
-					$.messager.alert('提示',"结课日期不能为空,请核实后重新尝试","info");
+					$.messager.alert('提示',"计划招生人数不合法,请核实后重新尝试","info");
+				}
+             	else if(classEndTimeDate.getTime() <= classStartTimeDate.getTime())
+				{
+					$.messager.alert('提示',"游学结束日期必须大于游学开始日期,请核实后重新尝试","info");
 				}
 				else if($(".teacherId").length == 0)
              	{
@@ -277,16 +292,31 @@
 				}
 				else
 				{
-					if($(".teacherId").length == 0)
+					var teacherFlag = true;
+					$(".teacherId").each(function(i,node){
+						var teacherObj = $(node).find("td:eq(0)");
+						if(teacherObj.attr("teacherId") == teacherId)
+						{
+							teacherFlag = false;
+						}
+					});
+					if(teacherFlag)
 					{
-						$("#emptyTeacher").remove();
+						if($(".teacherId").length == 0)
+						{
+							$("#emptyTeacher").remove();
+						}
+						ajaxLoading("添加中...");
+						$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:teacherId},function(data){
+							ajaxLoadEnd();
+							var trData = "<tr id='teacherId"+data.teacherId+"' class='teacherId'><td align='center' width='15%' teacherId='"+data.teacherId+"' schoolId='"+data.schoolId+"'>"+$("#schoolId").combobox("getText")+"</td><td align='center' width='15%'>"+$("#teacherId").combobox("getText")+"</td><td align='left' width='70%' style='padding-left:30px'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
+							$("#teacherList tr:last").after(trData);
+						},"json");
 					}
-					ajaxLoading("添加中...");
-					$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:teacherId},function(data){
-						ajaxLoadEnd();
-						var trData = "<tr id='teacherId"+data.teacherId+"' class='teacherId'><td align='center' width='15%' teacherId='"+data.teacherId+"' schoolId='"+data.schoolId+"'>"+$("#schoolId").combobox("getText")+"</td><td align='center' width='15%'>"+$("#teacherId").combobox("getText")+"</td><td align='left' width='70%' style='padding-left:30px'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
-						$("#teacherList tr:last").after(trData);
-					},"json");
+					else
+					{
+						$.messager.alert('提示',"该老师已经被添加,请核实后重新尝试");
+					}
 				}
 			}
 			function delTeacherFunc(flagVal)

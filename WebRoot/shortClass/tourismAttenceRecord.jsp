@@ -81,20 +81,24 @@
 					textField: 'schoolName', 
 					//panelHeight: 'auto',
 					listHeight:150,
+					editable:false,
 					data:attRecordSchoolIdData,
-					onSelect:function(data){
+					onChange:function(value){
 						$("#attRecordTeacherId").combobox("setValue","");
-						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:data.schoolId},function(data){
+						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:value},function(data){
 							$("#attRecordTeacherId").combobox("loadData",data);
 						},"json");
 					}
 				});
 				$("#attRecordTeacherId").combobox({
-					formatter:formatTeacherName,
+					formatter:function(row){
+						return "<span>"+row.byName+"</span>"
+					},
 					valueField: 'teacherId', 
-					textField: 'teacherName', 
+					textField: 'byName', 
 					//panelHeight: 'auto',
-					listHeight:150
+					listHeight:150,
+					editable:false
 				});
 			});
 			
@@ -108,12 +112,26 @@
 				}
 				else
 				{
-					ajaxLoading("添加中...");
-					$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:attRecordTeacherId},function(data){
-						ajaxLoadEnd();
-						var trData = "<tr id='teacherId"+data.teacherId+"'><td align='right' teacherId='"+data.teacherId+"' schoolId='"+data.schoolId+"'>老师：</td><td align='center'>"+$("#attRecordSchoolId").combobox("getText")+"</td><td align='center'>"+$("#attRecordTeacherId").combobox("getText")+"</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
-						$("#teacherTab tr:last").after(trData);
-					},"json");
+					var teacherFlag = true;
+					$("#teacherTab tr:gt(1) td:nth-child(1)").each(function(i,node){
+						if($(node).attr("teacherId") == attRecordTeacherId)
+						{
+							teacherFlag = false;
+						}
+					});
+					if(teacherFlag)
+					{
+						ajaxLoading("添加中...");
+						$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:attRecordTeacherId},function(data){
+							ajaxLoadEnd();
+							var trData = "<tr id='teacherId"+data.teacherId+"'><td align='right' teacherId='"+data.teacherId+"' schoolId='"+data.schoolId+"'>老师：</td><td align='center'>"+$("#attRecordSchoolId").combobox("getText")+"</td><td align='center'>"+$("#attRecordTeacherId").combobox("getText")+"</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
+							$("#teacherTab tr:last").after(trData);
+						},"json");
+					}
+					else
+					{
+						$.messager.alert('提示',"该老师已经被添加,请核实后重新尝试");				
+					}
 				}
 			}
 			
@@ -128,6 +146,7 @@
 			
 			function attendSubmit()
 			{
+				var attendDate = new Date().format("yyyy-MM-dd");
 				var obj = {
 					shortClassInstId:"${shortClassInstT.shortClassInstId}",
 					shortSchooltimeId:"",
@@ -136,18 +155,22 @@
 					hours:"",
 					roomId:"",
 					handerId:"${sessionScope.StaffT.staffId}",
-					schooltime:new Date().format("yyyy-MM-dd"),
+					schooltime:attendDate,
+					attendDate:attendDate,
 					teacherAttendList:null,
 					studentAttendList:null,
 					openDate:$("#openDate").datebox("getValue"),
 					finishDate:$("#finishDate").datebox("getValue")
 				};
+				var openDateTime = new Date(obj.openDate);
+				var finishDateTime = new Date(obj.finishDate);
 				var teacherArr = [];
 				$("#teacherTab tr:gt(1) td:nth-child(1)").each(function(i,node){
 					var teacherObj = {
 						shortClassInstId:"${shortClassInstT.shortClassInstId}",
 						teacherId:$(node).attr("teacherId"),
 						schoolId:$(node).attr("schoolId"),
+						attendDate:attendDate,
 						teacherType:"",
 						lessionHours:"",
 						handerId:"${sessionScope.StaffT.staffId}"
@@ -164,6 +187,7 @@
 						schoolId:firstTr.attr("schoolId"),
 						studentId:firstTr.attr("studentId"),
 						studentCourseId:firstTr.attr("studentCourseId"),
+						attendDate:attendDate,
 						hours:"",
 						attendType:attendTypeObj,
 						dress:"",
@@ -179,6 +203,10 @@
 				else if(obj.finishDate == "")
 				{
 					$.messager.alert("提示", "游学结束日期不能为空,请选择后重新尝试","warning");
+				}
+				else if(openDateTime.getTime() >= finishDateTime.getTime())
+				{
+					$.messager.alert('提示',"游学结束日期必须大于游学开始日期,请核实后重新尝试","info");
 				}
 				else if(teacherArr.length == 0)
 				{

@@ -32,7 +32,7 @@
 								班级：
 							</td>
 							<td width="22%">
-								<select id="classInfo" name="classInfo" style="width:100px;height:25px;" ></select>
+								<input name="classInfo" id="classInfo" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 							</td>
 							<td align="right" width="8%">
 								放班日期：
@@ -113,7 +113,7 @@
 								班级名称：
 							</td>
 							<td width="30%">
-								<select id="classHisName" name="classHisName" style="width:100px;height:25px;" ></select>
+								<input name="classHisName" id="classHisName" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 							</td>
 							<td align="right">&nbsp;</td>
 						</tr>
@@ -202,12 +202,6 @@
 					textField: 'schoolName', 
 					panelHeight: 'auto'
 				});
-				$("#classInfo").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
-					panelHeight: 'auto'
-				});
 				$("#classManState").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
@@ -226,12 +220,6 @@
 					formatter:formatSchool, 
 					valueField: 'schoolId', 
 					textField: 'schoolName', 
-					panelHeight: 'auto'
-				});
-				$("#classHisName").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
 					panelHeight: 'auto'
 				});
 				$("#classHis").combobox({
@@ -267,7 +255,7 @@
 				$("#schoolManId").combobox("setValue","");
 				$("#interClassType").combobox("setValue","");
 				$("#classManState").combobox("setValue","");
-				$("#classInfo").combobox("setValue","");
+				$("#classInfo").textbox("setValue","");
 				$("#openStartManTime").datebox("setValue","");
 				$("#openEndManTime").datebox("setValue","");
 				$("#classStartManTime").datebox("setValue","");
@@ -317,7 +305,7 @@
 			function resetHisFunc()
 			{
 				$("#interClassHisType").combobox("setValue","");
-				$("#classHisName").combobox("setValue","");
+				$("#classHisName").textbox("setValue","");
 				$("#schoolHisId").combobox("setValue","");
 				$("#classHisStart").datebox("setValue","");
 				$("#classHisEnd").datebox("setValue","");

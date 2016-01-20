@@ -29,8 +29,7 @@
 						学员姓名：
 					</td>
 					<td width="12%">
-						<select id="staffName" name="staffName" style="width:100px;height:25px;">
-      					</select>
+      					<input name="staffName" id="staffName" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 					</td>
 					<td align="right" width="8%">
 						缴费日期：
@@ -98,9 +97,6 @@
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=819&fieldId=schoolId",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=staffName",function(data){
-				$("#staffName").combobox("loadData",data);
-			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
 				$("#classManState").combobox("loadData",data);
 				ajaxLoadEnd();
@@ -110,14 +106,6 @@
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
 					textField: 'codeName', 
-					panelHeight: 'auto'
-				});
-				$("#staffName").combobox({
-					formatter:function(data){
-						return '<span>'+data.staffName+'</span>';
-					},
-					valueField: 'staffId', 
-					textField: 'staffName', 
 					panelHeight: 'auto'
 				});
 				$("#schoolId").combobox({
@@ -143,7 +131,7 @@
 			function resetFunc()
 			{
 				$("#schoolId").combobox("setValue","");
-				$("#staffName").combobox("setValue","");
+				$("#staffName").textbox("setValue","");
 				$("#contactPhone").textbox("setValue","");
 				$("#classManState").combobox("setValue","");
 				$("#feeStartTime").datebox("setValue","");

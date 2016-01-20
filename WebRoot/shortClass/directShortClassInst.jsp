@@ -46,7 +46,6 @@
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
 		<script type="text/javascript">
-			ajaxLoadEnd();
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=815&fieldId=schoolId",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
@@ -61,31 +60,46 @@
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID",function(data){
 				$("#classPharse").combobox("loadData",data);
+				ajaxLoadEnd();
 			},"json");
 			$(document).ready(function(){
 				$("#roomList").combobox({
 					formatter:formatRoom, 
 					valueField: 'roomId', 
 					textField: 'roomName',
+					editable:false,
 					panelHeight: 'auto'
 				});
 				$("#hourRange").combobox({
 					formatter:formatParaConfig, 
 					valueField: 'paramValue', 
 					textField: 'paramDesc',
+					editable:false,
 					panelHeight: 'auto'
 				});
 				$("#teacherType").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
 					textField: 'codeName',
+					editable:false,
 					panelHeight: 'auto'
 				});
 				$("#classPharse").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
-					textField: 'codeName', 
+					textField: 'codeName',
+					editable:false,
 					panelHeight: 'auto'
+				});
+				$("#teacherId").combobox({
+					formatter:function(row){
+						return "<span>"+row.byName+"</span>"
+					},
+					valueField: 'teacherId', 
+					textField: 'byName', 
+					//panelHeight: 'auto',
+					listHeight:150,
+					editable:false
 				});
 				$("#schoolId").combobox({
 					formatter:formatSchool, 
@@ -93,9 +107,10 @@
 					textField: 'schoolName', 
 					//panelHeight: 'auto',
 					listHeight:150,
-					onSelect:function(data){
+					editable:false,
+					onChange:function(value){
 						$("#teacherId").combobox("setValue","");
-						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:data.schoolId},function(data){
+						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:value},function(data){
 							$("#teacherId").combobox("loadData",data);
 						},"json");
 					},
@@ -105,13 +120,6 @@
 							$("#schoolId").combobox("setValue",data.schoolId);
 						}
 					}
-				});
-				$("#teacherId").combobox({
-					formatter:formatTeacherName,
-					valueField: 'teacherId', 
-					textField: 'teacherName', 
-					//panelHeight: 'auto',
-					listHeight:150
 				});
 			});
 			function addTeacherFunc()
@@ -133,12 +141,27 @@
 				}
 				else
 				{
-					ajaxLoading("添加中...");
-					$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:teacherId},function(data){
-						ajaxLoadEnd();
-						var trData = "<tr id='teacherId"+data.teacherId+"' class='teacherId'><td align='right' teacherId='"+data.teacherId+"' teacherName='"+$("#teacherId").combobox("getText")+"' teacherType='"+$("#teacherType").combobox("getText")+"' schoolId='"+data.schoolId+"'>老师：</td><td align='center'>"+$("#schoolId").combobox("getText")+"</td><td align='center'>"+$("#teacherId").combobox("getText")+"</td><td align='center'>"+$("#teacherType").combobox("getText")+"</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
-						$(".tab tr:last").after(trData);
-					},"json");
+					var teacherFlag = true;
+					$(".teacherId").each(function(i,node){
+						var teacherObj = $(node).find("td:eq(0)");
+						if(teacherObj.attr("teacherId") == teacherId)
+						{
+							teacherFlag = false;
+						}
+					});
+					if(teacherFlag)
+					{
+						ajaxLoading("添加中...");
+						$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:teacherId},function(data){
+							ajaxLoadEnd();
+							var trData = "<tr id='teacherId"+data.teacherId+"' class='teacherId'><td align='right' teacherId='"+data.teacherId+"' teacherName='"+$("#teacherId").combobox("getText")+"' teacherType='"+$("#teacherType").combobox("getText")+"' schoolId='"+data.schoolId+"'>老师：</td><td align='center'>"+$("#schoolId").combobox("getText")+"</td><td align='center'>"+$("#teacherId").combobox("getText")+"</td><td align='center'>"+$("#teacherType").combobox("getText")+"</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
+							$(".tab tr:last").after(trData);
+						},"json");
+					}
+					else
+					{
+						$.messager.alert('提示',"该老师已经被添加,请核实后重新尝试");
+					}
 				}
 			}
 			function addSubmitFunc()
@@ -179,6 +202,10 @@
 				else if(lessonHour == "")
 				{
 					$.messager.alert('提示',"排课课时不能为空,请核实后重新尝试","info");
+				}
+				else if(isNaN(lessonHour))
+				{
+					$.messager.alert('提示',"排课课时不合法,请核实后重新尝试","info");
 				}
 				else if(arr.length == 0)
 				{

@@ -66,7 +66,7 @@
 			</table>
 		</form>
 		<div style="padding:5px 0;min-width:1100px; width:100%">
-			<table class="easyui-datagrid" title="学员列表" style="height:390px" id="studentList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+			<table class="easyui-datagrid" title="学员列表" style="height:390px" id="studentList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
 				<thead>
 					<tr>
 						<th data-options="field:'studentId',checkbox:true"></th>
@@ -146,27 +146,33 @@
 			}
 			function resetFunc()
 			{
-				$("#shortClassType").combobox("setValue","");
-				$("#schoolManId").combobox("setValue","");
-				$("#openStartManTime").datebox("setValue","");
-				$("#openEndManTime").datebox("setValue","");
+				$("#stageId").combobox("setValue","");
+				$("#classInstId").combobox("setValue","");
+				$("#classState").combobox("setValue","");
+				$("#payStartManTime").datebox("setValue","");
+				$("#payEndManTime").datebox("setValue","");
 				$("#studentName").textbox("setValue","");
 				$("#phoneNum").textbox("setValue","");
 			}
 			function manFunc()
 			{
-				var row = $("#studentList").datagrid('getSelected');
-				if (row)
+				var rows = $("#studentList").datagrid('getChecked');
+				if (rows && rows.length >0)
 				{
-					var json = {
-						shortClassInstId:"${param.shortClassInstId}",
-						studentId:row.studentId,
-						studentCourseId:row.studentCourseId,
-						schoolId:row.schoolId,
-						handlerId:${sessionScope.StaffT.staffId}
+					var arr = [];
+					for(var i = 0,n = rows.length;i < n;i++)
+					{
+						var json = {
+							shortClassInstId:"${param.shortClassInstId}",
+							studentId:rows[i].studentId,
+							studentCourseId:rows[i].studentCourseId,
+							schoolId:rows[i].schoolId,
+							handlerId:${sessionScope.StaffT.staffId}
+						}
+						arr.push(json);
 					}
 					ajaxLoading("选课中...");
-					$.post("/sys/shortBus/addShortStudentTInfo.do",{json:JSON.stringify(json),classType:encodeURI("热身课")},function(data){
+					$.post("/sys/shortBus/addShortStudentTInfo.do",{json:JSON.stringify(arr),classType:encodeURI("热身课"),shortClassInstId:"${param.shortClassInstId}"},function(data){
 						ajaxLoadEnd();
 						if(data == "success")
 						{

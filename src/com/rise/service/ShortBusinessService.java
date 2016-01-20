@@ -103,9 +103,9 @@ public class ShortBusinessService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
-	public String addShortStudentTInfo(String json , String classType) throws Exception
+	public String addShortStudentTInfo(String json , String classType , String shortClassInstId) throws Exception
 	{
-		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2059\",securityCode:\"0000000000\",params:{json:'"+json+"',classType:\""+classType+"\"},rtnDataFormatType:\"user-defined\"}";
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2059\",securityCode:\"0000000000\",params:{json:'"+json+"',classType:\""+classType+"\",shortClassInstId:\""+shortClassInstId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
 	
@@ -121,9 +121,9 @@ public class ShortBusinessService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
-	public void getShortClassAttendTInfo(ModelAndView model , String shortClassInstId , String funcNodeId , String pageName) throws Exception
+	public void getShortClassAttendTInfo(ModelAndView model , String shortClassInstId , String funcNodeId , String pageName , int staffId) throws Exception
 	{
-		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20512\",securityCode:\"0000000000\",params:{shortClassInstId:\""+shortClassInstId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20512\",securityCode:\"0000000000\",params:{shortClassInstId:\""+shortClassInstId+"\",staffId:\""+staffId+"\"},rtnDataFormatType:\"user-defined\"}";
 		String result = ServiceEngine.invokeHttp(params);
 		try
 		{
@@ -258,9 +258,9 @@ public class ShortBusinessService
 		}
 	}
 	
-	public void tourismAttenceRecordPage(ModelAndView model , String shortClassInstId , String funcNodeId) throws Exception
+	public void tourismAttenceRecordPage(ModelAndView model , String shortClassInstId , String funcNodeId , int staffId) throws Exception
 	{
-		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20520\",securityCode:\"0000000000\",params:{shortClassInstId:\""+shortClassInstId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20520\",securityCode:\"0000000000\",params:{shortClassInstId:\""+shortClassInstId+"\",staffId:\""+staffId+"\"},rtnDataFormatType:\"user-defined\"}";
 		String result = ServiceEngine.invokeHttp(params);
 		try{
 			JSONObject obj = JSONObject.fromObject(result);
@@ -284,9 +284,9 @@ public class ShortBusinessService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
-	public void tourismAttenceRecUpdatePage(ModelAndView model , String shortClassAttendId , String funcNodeId) throws Exception
+	public void tourismAttenceRecUpdatePage(ModelAndView model , String shortClassAttendId , String funcNodeId , int staffId) throws Exception
 	{
-		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20522\",securityCode:\"0000000000\",params:{shortClassAttendId:\""+shortClassAttendId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20522\",securityCode:\"0000000000\",params:{shortClassAttendId:\""+shortClassAttendId+"\",staffId:\""+staffId+"\"},rtnDataFormatType:\"user-defined\"}";
 		String result = ServiceEngine.invokeHttp(params);
 		try{
 			JSONObject obj = JSONObject.fromObject(result);
