@@ -207,7 +207,12 @@ function initCousreGift()
 
 
 
-
+//删除相对应的行  
+function delGiftCourse(rows)
+{
+	$(rows).parent("td").parent("tr").remove();
+	giftCourseNum--;
+}
 
 //删除相对应的行  
 function delRow(rows)

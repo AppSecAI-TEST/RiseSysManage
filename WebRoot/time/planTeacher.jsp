@@ -12,7 +12,15 @@
 			<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script class="resources library" src="/sys/pub/js/autoMergeCells.js" type="text/javascript"></script>
-	
+	<script type="text/javascript">
+		$(document).ready(function()
+		{
+			var height = $(document).height();
+			$('#frame0',parent.document).css("height",height+20);
+		});
+			
+			
+		</script>
 	<style type="text/css">
 .tree-node-hover {
 	text-decoration: none;
@@ -107,10 +115,6 @@ datagrid-row-selected
 	    		</div>  
 	        </div>  
     	</div>  
-	
-		 <div id="dlg" class="easyui-dialog" style="width: 600px; height: 550px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
- 				<iframe id="frame2" name="frame2"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" height="445px" width="100%"></iframe>
-  	    </div>
 	</body>
 </html>
 
@@ -150,7 +154,7 @@ function getWeekTime()
     	},
     	success: function(data) {
     		$.messager.progress('close');
-    		alert(JSON.stringify(data));
+    		 
     		for(var i=0;i<data.length;i++)
     		{
     			if(i==0)
@@ -212,7 +216,7 @@ function initTeacher(tabId,data)
     },
      
     columns:[[
-      {field:'teacherName',title:'教师',width:100,align:'center'}
+      {field:'teacherName',title:'',width:100,align:'center'}
       
     ]] 
   });
@@ -235,6 +239,7 @@ function initTable(tabId,data)
 		 return 'background-color:#FFFFFF;color:#00000;';
     },
     columns:[[
+       {field:'teacherName',title:'教师',width:100,align:'center'},	
       {field:'H001',title:'上午1', width:120,align:'center', editor:'text'},
       {field:'H002',title:'上午2',width:120,align:'center', editor:'text'},
       {field:'H003',title:'下午1',width:120,align:'center', editor:'text'},
