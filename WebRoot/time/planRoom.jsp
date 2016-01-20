@@ -70,7 +70,8 @@ datagrid-row-selected
 	</head>
 	<body>
 		<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
-		<div id="wrap">  
+		
+		 
         <!--  <div id="header">header</div> --> 
 	        <div id="container">  
 	            <div id="left_side"> 
@@ -103,14 +104,11 @@ datagrid-row-selected
 					    	</td>
 				    	</tr>
 				    	</table>
-		    		 
-	    		</div>  
 	        </div>  
     	</div>  
-	
-		 <div id="dlg" class="easyui-dialog" style="width: 600px; height: 550px; padding: 10px 20px" closed="true" modal="true" buttons="#dlgBtn">
- 				<iframe id="frame2" name="frame2"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" height="445px" width="100%"></iframe>
-  	    </div>
+    	
+    	<iframe id="frame0" name="frame0"  src="/sys/time/planTeacher.jsp"  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" style="width:100%"></iframe>
+  	
 	</body>
 </html>
 
