@@ -24,7 +24,7 @@
 							班级：
 						</td>
 						<td width="22%">
-							<select id="classInfo" name="classInfo" style="width:100px;height:25px;" ></select>
+							<input name="classInfo" id="classInfo" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 						</td>
 						<td align="right" width="8%">
 							放班日期：
@@ -86,12 +86,6 @@
 				$("#classManState").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
-				$("#classInfo").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
-					panelHeight: 'auto'
-				});
 				$("#classManState").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
@@ -114,7 +108,7 @@
 			}
 			function resetManFunc()
 			{
-				$("#classInfo").combobox("setValue","");
+				$("#classInfo").textbox("setValue","");
 				$("#classManState").combobox("setValue","");
 				$("#openStartManTime").datebox("setValue","");
 				$("#openEndManTime").datebox("setValue","");

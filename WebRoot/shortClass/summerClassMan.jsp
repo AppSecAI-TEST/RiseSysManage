@@ -102,7 +102,7 @@
 								班级：
 							</td>
 							<td width="22%">
-								<select id="classVerInfo" name="classVerInfo" style="width:100px;height:25px;" ></select>
+								<input name="classVerInfo" id="classVerInfo" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 							</td>
 							<td align="right" width="9%">
 								审批状态：
@@ -203,12 +203,6 @@
 					}, 
 					valueField: 'giftType', 
 					textField: 'typeName',
-					panelHeight: 'auto'
-				});
-				$("#classVerInfo").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
 					panelHeight: 'auto'
 				});
 				$("#schoolVerId").combobox({
@@ -332,7 +326,7 @@
 			function resetVerFunc()
 			{
 				$("#schoolVerId").combobox("setValue","");
-				$("#classVerInfo").combobox("setValue","");
+				$("#classVerInfo").textbox("setValue","");
 				$("#classManVerState").combobox("setValue","");
 				$("#verifyState").combobox("setValue","");
 				$("#myVerify").get(0).checked = false;

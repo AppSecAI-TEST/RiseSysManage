@@ -108,7 +108,7 @@
 								班级：
 							</td>
 							<td>
-								<select id="classHis" name="classHis" style="width:100px;height:25px;" ></select>
+								<input name="classHis" id="classHis" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 							</td>
 						</tr>
 						<tr>
@@ -171,9 +171,6 @@
 				});
 				$("#classManState").combobox("loadData",data);
 				$("#classHisState").combobox("loadData",data);
-			},"json");
-			$.post("<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=classMan",function(data){
-				$("#classHis").combobox("loadData",data);
 				ajaxLoadEnd();
 			},"json");
 			$(document).ready(function(){
@@ -207,14 +204,6 @@
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
 					textField: 'codeName', 
-					panelHeight: 'auto'
-				});
-				$("#classHis").combobox({
-					formatter:function(row){
-						return '<span>'+row.className+'</span>';
-					},
-					valueField: 'classInstId',
-					textField: 'className',
 					panelHeight: 'auto'
 				});
 				$('#tab').tabs({
@@ -290,15 +279,12 @@
 			function resetHisFunc()
 			{
 				$("#schoolHisId").combobox("setValue","");
-				$("#classHisPharse").combobox("setValue","");
-				$("#classHisStart").datebox("setValue","");
-				$("#classHisEnd").datebox("setValue","");
-				$("#classHis").combobox("setValue","");
-				$("#teacherHis").textbox("setValue","");
-				$("#attendStartRate").numberbox("setValue","");
-				$("#attendEndRate").numberbox("setValue","");
-				$("#schoolWearStartRate").numberbox("setValue","");
-				$("#schoolWearEndRate").numberbox("setValue","");
+				$("#classHisState").combobox("setValue","");
+				$("#classHis").textbox("setValue","");
+				$("#openApplyStartManTime").datebox("setValue","");
+				$("#openApplyEndManTime").datebox("setValue","");
+				$("#openAuditStartManTime").datebox("setValue","");
+				$("#openAuditEndManTime").datebox("setValue","");
 			}
 			function hisViewFunc()
 			{

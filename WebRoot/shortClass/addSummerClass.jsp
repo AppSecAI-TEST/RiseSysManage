@@ -99,13 +99,15 @@
 					}, 
 					valueField: 'giftType', 
 					textField: 'typeName',
-					panelHeight: 'auto'
+					panelHeight: 'auto',
+					editable:false
 				});
 				$("#schoolManId").combobox({
 					formatter:formatSchool, 
 					valueField: 'schoolId', 
 					textField: 'schoolName', 
-					panelHeight: 'auto'
+					panelHeight: 'auto',
+					editable:false
 				});
 				var schoolManId = sessionStorage.getItem("schoolManId");
 				var classType = sessionStorage.getItem("classType");
@@ -135,6 +137,8 @@
 				var classStartTime = $("#classStartTime").datebox("getValue");
 				var classEndTime = $("#classEndTime").combobox("getValue");
 				var remark = $("#remark").textbox("getValue");
+				var classStartTimeDate = new Date(classStartTime);
+				var classEndTimeDate = new Date(classEndTime);
 				if(schoolManId == "")
 				{
 					$.messager.alert('提示',"请先选择上课校区","info");
@@ -159,9 +163,21 @@
 				{
 					$.messager.alert('提示',"计划课时量不能为空,请核实后重新尝试","info");
 				}
+				else if(isNaN(planHours))
+				{
+					$.messager.alert('提示',"计划课时量不合法,请核实后重新尝试","info");
+				}
 				else if(planClassNum == "")
 				{
 					$.messager.alert('提示',"计划上课人数不能为空,请核实后重新尝试","info");
+				}
+				else if(isNaN(planClassNum))
+				{
+					$.messager.alert('提示',"计划上课人数不合法,请核实后重新尝试","info");
+				}
+				else if(classStartTimeDate.getTime() >= classEndTimeDate.getTime())
+				{
+					$.messager.alert('提示',"结课时间必须大于开课时间,请核实后重新尝试","info");
 				}
 				else if($(".shortSchooltimeId").length == 0)
 				{

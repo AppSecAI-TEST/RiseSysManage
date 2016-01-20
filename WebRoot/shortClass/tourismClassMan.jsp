@@ -23,7 +23,7 @@
 						游学班级：
 					</td>
 					<td width="22%">
-						<select id="classInfo" name="classInfo" style="width:100px;height:25px;" ></select>
+						<input name="classInfo" id="classInfo" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 					</td>
 					<td align="right" width="8%">
 						班级状态：
@@ -68,7 +68,7 @@
 						<th width="11%" field="classStateName">班级状态</th>
 						<th width="11%" field="personNum">定班人数</th>
 						<th width="11%" field="maxNum">班级人数上限</th>
-						<th width="11%" field="realPersonNum">实际游学人数</th>
+						<th width="11%" field="realClassNum">实际游学人数</th>
 						<th width="11%" field="putClassDate">放班日期</th>
 						<th width="11%" field="openDate">游学开始日期</th>
 						<th width="11%" field="finishDate">游学结束日期</th>
@@ -87,12 +87,6 @@
 				$("#classManState").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
-				$("#classInfo").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
-					panelHeight: 'auto'
-				});
 				$("#classManState").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
@@ -115,7 +109,7 @@
 			}
 			function resetFunc()
 			{
-				$("#classInfo").combobox("setValue","");
+				$("#classInfo").textbox("setValue","");
 				$("#classManState").combobox("setValue","");
 				$("#openStartManTime").datebox("setValue","");
 				$("#openEndManTime").datebox("setValue","");

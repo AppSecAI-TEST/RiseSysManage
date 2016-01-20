@@ -51,7 +51,7 @@
 				<tr id="teacherId${node.teacherId}">
 					<td align="right" teacherId="${node.teacherId}" shortTeacherAttendId="${node.shortTeacherAttendId}" state="${node.state}" schoolId="${node.schoolId}" teacherType="${node.teacherType}" hours="${node.lessionHours}">老师：</td>
 					<td align="center">${node.teacherT.schoolT.schoolName}</td>
-					<td align="center">${node.teacherT.teacherName}</td>
+					<td align="center">${node.teacherT.byName}</td>
 					<td align="center">${node.teacherType}</td>
 					<td align="center">${node.lessionHours}</td>
 					<td align="center">
@@ -102,10 +102,10 @@
 					<td align="center">
 						<c:choose>
 							<c:when test="${node.dress == 'N'}">
-								<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" checked="checked" /><label for="dress${node.studentId}1">未穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" /><label for="dress${node.studentId}2">已穿校服</label>
+								<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" /><label for="dress${node.studentId}2">已穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" checked="checked" /><label for="dress${node.studentId}1">未穿校服</label>
 							</c:when>
 							<c:when test="${node.dress == 'Y'}">
-								<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" /><label for="dress${node.studentId}1">未穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" checked="checked" /><label for="dress${node.studentId}2">已穿校服</label>
+								<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" checked="checked" /><label for="dress${node.studentId}2">已穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" /><label for="dress${node.studentId}1">未穿校服</label>
 							</c:when>
 						</c:choose>
 					</td>
@@ -137,6 +137,7 @@
 					valueField: 'paramValue', 
 					textField: 'paramDesc', 
 					panelHeight: 'auto',
+					editable:false,
 					data:classTimeData,
 					onLoadSuccess:function(data){
 						$("#classTime").combobox("setValue","${shortClassAttendT.hourRange}");
@@ -147,10 +148,21 @@
 					valueField: 'roomId', 
 					textField: 'roomName', 
 					panelHeight: 'auto',
+					editable:false,
 					data:classRoomIdData,
 					onLoadSuccess:function(data){
 						$("#classRoomId").combobox("setValue","${shortClassAttendT.roomId}");
 					}
+				});
+				$("#attRecordTeacherId").combobox({
+					formatter:function(row){
+						return "<span>"+row.byName+"</span>";
+					},
+					valueField: 'teacherId', 
+					textField: 'byName', 
+					//panelHeight: 'auto',
+					listHeight:150,
+					editable:false
 				});
 				$("#attRecordSchoolId").combobox({
 					formatter:formatSchool, 
@@ -158,26 +170,21 @@
 					textField: 'schoolName', 
 					//panelHeight: 'auto',
 					listHeight:150,
+					editable:false,
 					data:attRecordSchoolIdData,
-					onSelect:function(data){
+					onChange:function(value){
 						$("#attRecordTeacherId").combobox("setValue","");
-						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:data.schoolId},function(data){
+						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:value},function(data){
 							$("#attRecordTeacherId").combobox("loadData",data);
 						},"json");
 					}
-				});
-				$("#attRecordTeacherId").combobox({
-					formatter:formatTeacherName,
-					valueField: 'teacherId', 
-					textField: 'teacherName', 
-					//panelHeight: 'auto',
-					listHeight:150
 				});
 				$("#attRecordClassType").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
 					textField: 'codeName', 
 					panelHeight: 'auto',
+					editable:false,
 					data:attRecordClassType
 				});
 				$("#classLessonHour").textbox("setValue","${shortClassAttendT.hours}");
@@ -201,15 +208,58 @@
 				{
 					$.messager.alert('提示',"请先输入课时量后重新尝试");
 				}
+				else if(isNaN(attRecordLessonHour))
+				{
+					$.messager.alert('提示',"您输入的课时量不合法,请核实后重新尝试");
+				}
 				else
 				{
-					ajaxLoading("添加中...");
-					$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:attRecordTeacherId},function(data){
-						ajaxLoadEnd();
-						var trData = "<tr id='teacherId"+data.teacherId+"'><td align='right' teacherId='"+data.teacherId+"' schoolId='"+data.schoolId+"' teacherType='"+$("#attRecordClassType").combobox("getText")+"' hours='"+attRecordLessonHour+"'>老师：</td><td align='center'>"+$("#attRecordSchoolId").combobox("getText")+"</td><td align='center'>"+$("#attRecordTeacherId").combobox("getText")+"</td><td align='center'>"+$("#attRecordClassType").combobox("getText")+"</td><td align='center'>"+attRecordLessonHour+"</td><td align='center'>"+(data.teacherLicenseList.length>0?"已持证":"未持证")+"</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
-						$("#teacherTab tr:last").after(trData);
-					},"json");
+					var teacherFlag = true;
+					var teacherNum = 0;
+					$("#teacherTab tr:gt(1) td:nth-child(1)").each(function(i,node){
+						if($(node).attr("teacherId") == attRecordTeacherId)
+						{
+							teacherFlag = false;
+						}
+						if($(node).attr("teacherType") == "T")
+						{
+							teacherNum += parseInt($(node).attr("hours"));
+						}
+					});
+					if(teacherFlag)
+					{
+						var classLessonHour = $("#classLessonHour").textbox("getValue");
+						if(classLessonHour == "" || isNaN(classLessonHour))
+						{
+							invokeGetTeacherInfo(attRecordTeacherId,attRecordLessonHour);
+						}
+						else
+						{
+							if(teacherNum+parseInt(attRecordLessonHour) > parseInt(classLessonHour) && attRecordClassType == "T")
+							{
+								$.messager.alert('提示',"当前添加的老师课时已经超过了排课课时,请核实后重新尝试");
+							}
+							else
+							{
+								invokeGetTeacherInfo(attRecordTeacherId,attRecordLessonHour)
+							}
+						}
+					}
+					else
+					{
+						$.messager.alert('提示',"该老师已经被添加,请核实后重新尝试");
+					}
 				}
+			}
+			
+			function invokeGetTeacherInfo(attRecordTeacherId,attRecordLessonHour)
+			{
+				ajaxLoading("添加中...");
+				$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:attRecordTeacherId},function(data){
+					ajaxLoadEnd();
+					var trData = "<tr id='teacherId"+data.teacherId+"'><td align='right' teacherId='"+data.teacherId+"' schoolId='"+data.schoolId+"' teacherType='"+$("#attRecordClassType").combobox("getText")+"' hours='"+attRecordLessonHour+"'>老师：</td><td align='center'>"+$("#attRecordSchoolId").combobox("getText")+"</td><td align='center'>"+$("#attRecordTeacherId").combobox("getText")+"</td><td align='center'>"+$("#attRecordClassType").combobox("getText")+"</td><td align='center'>"+attRecordLessonHour+"</td><td align='center'>"+(data.teacherLicenseList.length>0?"已持证":"未持证")+"</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
+					$("#teacherTab tr:last").after(trData);
+				},"json");
 			}
 			
 			function delTeacherFunc(val)
@@ -223,19 +273,24 @@
 			
 			function attendSubmit()
 			{
+				var classTime = $("#classTime").combobox("getValue");
+				var classLessonHour = $("#classLessonHour").textbox("getValue");
+				var classRoomId = $("#classRoomId").combobox("getValue");
 				var obj = {
 					shortClassAttendId:"${shortClassAttendT.shortClassAttendId}",
 					shortClassInstId:"${shortClassAttendT.shortClassInstId}",
 					shortSchooltimeId:"${shortClassAttendT.shortSchooltimeId}",
 					schoolId:"${shortClassInstT.schoolId}",
-					hourRange:$("#classTime").combobox("getValue"),
-					hours:$("#classLessonHour").textbox("getValue"),
-					roomId:$("#classRoomId").combobox("getValue"),
+					hourRange:classTime,
+					hours:classLessonHour,
+					roomId:classRoomId,
+					attendDate:'<fmt:formatDate value="${shortClassAttendT.attendDate}" pattern="yyyy-MM-dd" />',
 					handerId:"${sessionScope.StaffT.staffId}",
 					teacherAttendList:null,
 					studentAttendList:null
 				};
 				var teacherArr = [];
+				var teacherTime = 0;
 				$("#teacherTab tr:gt(1) td:nth-child(1)").each(function(i,node){
 					var teacherObj = {
 						shortTeacherAttendId:$(node).attr("shortTeacherAttendId"),
@@ -243,12 +298,17 @@
 						shortClassInstId:"${shortClassAttendT.shortClassInstId}",
 						schoolId:$(node).attr("schoolId"),
 						teacherId:$(node).attr("teacherId"),
+						attendDate:'<fmt:formatDate value="${shortClassAttendT.attendDate}" pattern="yyyy-MM-dd" />',
 						state:$(node).attr("state"),
 						teacherType:$(node).attr("teacherType"),
 						lessionHours:$(node).attr("hours"),
 						handerId:"${sessionScope.StaffT.staffId}"
 					};
 					teacherArr.push(teacherObj);
+					if($(node).attr("teacherType") == 'T')
+					{
+						teacherTime += parseInt($(node).attr("hours"));
+					}
 				});
 				obj.teacherAttendList = teacherArr;
 				var studentArr = [];
@@ -262,6 +322,7 @@
 						shortClassInstId:"${shortClassAttendT.shortClassInstId}",
 						schoolId:firstTr.attr("schoolId"),
 						studentId:firstTr.attr("studentId"),
+						attendDate:'<fmt:formatDate value="${shortClassAttendT.attendDate}" pattern="yyyy-MM-dd" />',
 						studentCourseId:firstTr.attr("studentCourseId"),
 						hours:$("#classLessonHour").textbox("getValue"),
 						attendType:attendTypeObj,
@@ -271,13 +332,33 @@
 					studentArr.push(studentObj);
 				});
 				obj.studentAttendList = studentArr;
-				if(teacherArr.length == 0)
+				if(classTime == "")
+				{
+					$.messager.alert("提示", "请选择上课时间后重新尝试","warning");
+				}
+				else if(classRoomId == "")
+				{
+					$.messager.alert("提示", "请选择教室后重新尝试","warning");
+				}
+				else if(classLessonHour == "")
+				{
+					$.messager.alert("提示", "请选择课时后重新尝试","warning");
+				}
+				else if(isNaN(classLessonHour))
+				{
+					$.messager.alert("提示", "请检查课时是否合法后重新尝试","warning");
+				}
+				else if(teacherArr.length == 0)
 				{
 					$.messager.alert("提示", "老师人数不能为零,请添加老师后重新尝试","warning");
 				}
 				else if(studentArr.length == 0)
 				{
 					$.messager.alert("提示", "学生人数不能为零,请添加学生后重新尝试","warning");
+				}
+				else if(teacherTime > classLessonHour)
+				{
+					$.messager.alert("提示", "老师课时量已超过课程总课时量,请核实后重新尝试","warning");
 				}
 				else
 				{

@@ -29,8 +29,7 @@
 						学员姓名：
 					</td>
 					<td width="12%">
-						<select id="staffName" name="staffName" style="width:100px;height:25px;">
-      					</select>
+      					<input name="staffName" id="staffName" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 					</td>
 					<td align="right" width="8%">
 						缴费日期：
@@ -100,9 +99,6 @@
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=819&fieldId=schoolId",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=staffName",function(data){
-				$("#staffName").combobox("loadData",data);
-			},"json");
 			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("国际班"),function(data){
 				$("#interClassType").combobox("loadData",data);
 				ajaxLoadEnd();
@@ -112,16 +108,8 @@
 					formatter:function(data){
 						return '<span>'+data.classType+'</span>';
 					}, 
-					valueField: 'classTypeId', 
+					valueField: 'classType', 
 					textField: 'classType',
-					panelHeight: 'auto'
-				});
-				$("#staffName").combobox({
-					formatter:function(data){
-						return '<span>'+data.staffName+'</span>';
-					},
-					valueField: 'staffId', 
-					textField: 'staffName', 
 					panelHeight: 'auto'
 				});
 				$("#schoolId").combobox({
@@ -147,10 +135,11 @@
 			function resetFunc()
 			{
 				$("#schoolId").combobox("setValue","");
-				$("#staffName").combobox("setValue","");
+				$("#staffName").textbox("setValue","");
 				$("#contactPhone").textbox("setValue","");
 				$("#interClassType").combobox("setValue","");
 				$("#feeStartTime").datebox("setValue","");
+				$("#feeEndTime").datebox("setValue","");
 				$("input[name='feeReturn']").each(function(i,node){
 					node.checked = false; 
 				});

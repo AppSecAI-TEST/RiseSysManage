@@ -145,6 +145,8 @@
 				var planHours = $("#planHours").textbox("getValue");
 				var classStartTime = $("#classStartTime").datebox("getValue");
 				var classEndTime = $("#classEndTime").datebox("getValue");
+				var classStartTimeDate = new Date(classStartTime);
+				var classEndTimeDate = new Date(classEndTime);
 				if(classStartTime == "")
 				{
 					$.messager.alert('提示',"开课日期不能为空,请核实后重新尝试","info");
@@ -152,6 +154,10 @@
 				else if(planHours == "")
 				{
 					$.messager.alert('提示',"计划总课时量不能为空,请核实后重新尝试","info");
+				}
+				else if(isNaN(planHours))
+				{
+					$.messager.alert('提示',"计划总课时量不合法,请核实后重新尝试","info");
 				}
 				else if(classEndTime == "")
 				{
@@ -161,12 +167,10 @@
 				{
 					$.messager.alert('提示',"上课计划不能为空,请核实后重新尝试","info");
 				}
-				<c:if test="${!empty shortClassInstT.approveDate}">
-				else if($(".studentId").length == 0)
-             	{
-             		$.messager.alert('提示',"上课学员不能为空,请核实后重新尝试","info");
-             	}
-             	</c:if>
+				else if(classStartTimeDate.getTime() >= classEndTimeDate.getTime())
+				{
+					$.messager.alert('提示',"结课时间必须大于开课时间,请核实后重新尝试","info");
+				}
 				else
 				{
 					var json = {

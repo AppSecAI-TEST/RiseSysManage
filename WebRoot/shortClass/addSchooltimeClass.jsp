@@ -61,19 +61,22 @@
 					formatter:formatRoom, 
 					valueField: 'roomId', 
 					textField: 'roomName',
-					panelHeight: 'auto'
+					panelHeight: 'auto',
+					editable:false
 				});
 				$("#hourRange").combobox({
 					formatter:formatParaConfig, 
 					valueField: 'paramValue', 
 					textField: 'paramDesc',
-					panelHeight: 'auto'
+					panelHeight: 'auto',
+					editable:false
 				});
 				$("#teacherType").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
 					textField: 'codeName',
-					panelHeight: 'auto'
+					panelHeight: 'auto',
+					editable:false
 				});
 				$("#schoolId").combobox({
 					formatter:formatSchool, 
@@ -81,9 +84,10 @@
 					textField: 'schoolName', 
 					//panelHeight: 'auto',
 					listHeight:150,
-					onSelect:function(data){
+					editable:false,
+					onChange:function(value){
 						$("#teacherId").combobox("setValue","");
-						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:data.schoolId},function(data){
+						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:value},function(data){
 							$("#teacherId").combobox("loadData",data);
 						},"json");
 					},
@@ -181,6 +185,10 @@
 				else if(lessonHour == "")
 				{
 					$.messager.alert('提示',"排课课时不能为空,请核实后重新尝试","info");
+				}
+				else if(isNaN(lessonHour))
+				{
+					$.messager.alert('提示',"排课课时输入不合法请核实后重新尝试","info");
 				}
 				else if(arr.length == 0)
 				{

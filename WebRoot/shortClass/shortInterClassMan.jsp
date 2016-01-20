@@ -136,6 +136,10 @@
 				{
 					$.messager.alert('提示',"计划总课时量不能为空,请核实后重新尝试","info");
 				}
+				else if(isNaN(planHours))
+				{
+					$.messager.alert('提示',"计划总课时量不合法,请核实后重新尝试","info");
+				}
 				else if(classEndTime == "")
 				{
 					$.messager.alert('提示',"结课日期不能为空,请核实后重新尝试","info");

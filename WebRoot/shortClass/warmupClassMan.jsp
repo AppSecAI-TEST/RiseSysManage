@@ -37,7 +37,7 @@
 								班级：
 							</td>
 							<td colspan="2">
-								<select id="classInfo" name="classInfo" style="width:100px;height:25px;" ></select>
+								<input name="classInfo" id="classInfo" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 							</td>
 						</tr>
 						<tr>
@@ -106,7 +106,7 @@
 								班级：
 							</td>
 							<td width="22%">
-								<select id="classVerInfo" name="classVerInfo" style="width:100px;height:25px;" ></select>
+								<input name="classVerInfo" id="classVerInfo" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 							</td>
 							<td align="right" width="9%">
 								审批状态：
@@ -185,12 +185,6 @@
 			},"json");
 			$(document).ready(function(){
 				sessionStorage.clear();
-				$("#classInfo").combobox({
-					formatter:formatClassInst, 
-					valueField: 'shortClassInstId', 
-					textField: 'className', 
-					panelHeight: 'auto'
-				});
 				$("#schoolManId").combobox({
 					formatter:formatSchool, 
 					valueField: 'schoolId', 
@@ -204,25 +198,6 @@
 					panelHeight: 'auto'
 				});
 				$("#classType").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
-					panelHeight: 'auto',
-					onLoadSuccess:function(data){
-						if(data.length > 0)
-						{
-							$.post("/sys/shortBus/getShortClassInstTList.do",{typeName:encodeURI("热身课"),classTypeId:data[0].codeFlag},function(result){
-								$("#classInfo").combobox("loadData",result);
-							},"json");
-						}
-					},
-					onChange:function (data) {
-						$.post("/sys/shortBus/getShortClassInstTList.do",{typeName:encodeURI("热身课"),classTypeId:data},function(result){
-							$("#classInfo").combobox("loadData",result);
-						},"json");
-					}
-				});
-				$("#classVerInfo").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
 					textField: 'codeName', 
@@ -244,10 +219,10 @@
 						codeName:"已申请"
 					},{
 						codeFlag:"2",
-						codeName:"已通过"
+						codeName:"未通过"
 					},{
 						codeFlag:"3",
-						codeName:"未通过"
+						codeName:"已通过"
 					}]
 				});
 				$("#classManVerState").combobox({
@@ -273,7 +248,7 @@
 			function resetFunc()
 			{
 				$("#classType").combobox("setValue","");
-				$("#classInfo").combobox("setValue","");
+				$("#classInfo").textbox("setValue","");
 				$("#classManState").combobox("setValue","");
 				$("#schoolManId").combobox("setValue","");
 				$("#openStartManTime").datebox("setValue","");
@@ -350,7 +325,7 @@
 			function resetVerFunc()
 			{
 				$("#schoolVerId").combobox("setValue","");
-				$("#classVerInfo").combobox("setValue","");
+				$("#classVerInfo").textbox("setValue","");
 				$("#classManVerState").combobox("setValue","");
 				$("#verifyState").combobox("setValue","");
 				$("#myVerify").get(0).checked = false;

@@ -38,7 +38,7 @@
 								班级：
 							</td>
 							<td>
-								<select id="classMan" name="classMan" style="width:100px;height:25px;" ></select>
+								<input name="classMan" id="classMan" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 							</td>
 						</tr>
 						<tr>
@@ -114,7 +114,7 @@
 								班级：
 							</td>
 							<td>
-								<select id="classHis" name="classHis" style="width:100px;height:25px;" ></select>
+								<input name="classHis" id="classHis" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 							</td>
 						</tr>
 						<tr>
@@ -166,7 +166,7 @@
 				$("#schoolManId").combobox("loadData",data);
 				$("#schoolHisId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("热身课"),function(data){
+			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=CLASS_TYPE",function(data){
 				$("#classType").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
@@ -177,10 +177,6 @@
 				});
 				$("#classHisState").combobox("loadData",data);
 				$("#classManState").combobox("loadData",data);
-			},"json");
-			$.post("<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=classMan",function(data){
-				$("#classMan").combobox("loadData",data);
-				$("#classHis").combobox("loadData",data);
 				ajaxLoadEnd();
 			},"json");
 			$(document).ready(function(){
@@ -191,36 +187,15 @@
 					panelHeight: 'auto'
 				});
 				$("#classType").combobox({
-					formatter:function(data){
-						return '<span>'+data.classType+'</span>';
-					}, 
-					valueField: 'classTypeId', 
-					textField: 'classType',
-					panelHeight: 'auto',
-					onLoadSuccess:function(data){
-						if(data.length > 0)
-						{
-							$.post("/sys/shortBus/getShortClassInstTList.do",{typeName:encodeURI("热身课"),classTypeId:data[0].classTypeId},function(result){
-								$("#classMan").combobox("loadData",result);
-							},"json");
-						}
-					},
-					onChange:function (data) {
-						$.post("/sys/shortBus/getShortClassInstTList.do",{typeName:encodeURI("热身课"),classTypeId:data},function(result){
-							$("#classMan").combobox("loadData",result);
-						},"json");
-					}
-				});
-				$("#classManState").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
 					textField: 'codeName', 
 					panelHeight: 'auto'
 				});
-				$("#classMan").combobox({
-					formatter:formatClassInst, 
-					valueField: 'shortClassInstId', 
-					textField: 'className', 
+				$("#classManState").combobox({
+					formatter:formatItem, 
+					valueField: 'codeFlag', 
+					textField: 'codeName', 
 					panelHeight: 'auto'
 				});
 				$("#schoolHisId").combobox({
@@ -233,14 +208,6 @@
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
 					textField: 'codeName', 
-					panelHeight: 'auto'
-				});
-				$("#classHis").combobox({
-					formatter:function(row){
-						return '<span>'+row.className+'</span>';
-					},
-					valueField: 'classInstId',
-					textField: 'className',
 					panelHeight: 'auto'
 				});
 				$('#tab').tabs({
@@ -268,7 +235,7 @@
 				$("#schoolManId").combobox("setValue","");
 				$("#classType").combobox("setValue","");
 				$("#classManState").combobox("setValue","");
-				$("#classMan").combobox("setValue","");
+				$("#classMan").textbox("setValue","");
 				$("#classStartManTime").datebox("setValue","");
 				$("#classEndManTime").datebox("setValue","");
 				$("#overClassStartManTime").datebox("setValue","");
@@ -317,7 +284,7 @@
 			{
 				$("#schoolHisId").combobox("setValue","");
 				$("#classHisState").combobox("setValue","");
-				$("#classHis").combobox("setValue","");
+				$("#classHis").textbox("setValue","");
 				$("#openApplyStartManTime").datebox("setValue","");
 				$("#openApplyEndManTime").datebox("setValue","");
 				$("#openAuditStartManTime").datebox("setValue","");
