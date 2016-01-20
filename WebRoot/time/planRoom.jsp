@@ -25,62 +25,18 @@
 	margin-top:5px;
 	width:20%;
 }
-datagrid-row-selected
-#wrap{  
-    width:700px;  
-    margin:0 auto;  
-}  
-#header{  
-    margin:0px;  
-    height:80px;  
-    border:solid 1px #00C9FF;  
-}  
-#container{  
-    position:relative;  
-    margin:0px;  
-    height:400px;  
-}  
-#left_side{  
-    position:absolute;  
-    top:0px;  
-    left:0px;  
-    width:100px;  
-    height:100%;  
-}  
-#content{  
-    margin:0px 10px 0px 100px;  
-      
-    height:100%;  
-}  
-#right_side{  
-    position:absolute;  
-    top:0px;  
-    right:0px;  
-    border:solid 1px #00C9FF;  
-    width:170px;  
-    height:100%;  
-}  
-#footer{  
-    margin:20px;  
-    height:80px;  
-    border:solid 1px #00C9FF;  
-}  
+
 
 </style>
 	</head>
 	<body>
 		<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
-		
-		 
-        <!--  <div id="header">header</div> --> 
-	        <div id="container">  
-	            <div id="left_side"> 
-		    		<table  id="t0"></table>
-		    	</div>  
-	            <div id="content">
+	            <div id="content" style="margin-left:6px;">
 		            
 				    	<table width="700"  cellpadding="0" border="0" style="border-collapse:collapse;overflow:scroll;" >
+				    	<tr><td colspan="8" style="text-align:center;font-size:20px;color:##0E2D5F;font-weight:bold;">班级情况和教室资源统计表</td></tr>
 				    	<tr>
+				    		<td><table  id="t0"></table></td>
 					    	<td>
 					    	<table  id="t1"></table>
 					    	</td>
@@ -107,7 +63,7 @@ datagrid-row-selected
 	        </div>  
     	</div>  
     	
-    	<iframe id="frame0" name="frame0"  src="/sys/time/planTeacher.jsp"  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" style="width:100%"></iframe>
+    	<iframe id="frame0" name="frame0"  src="/sys/time/planTeacher.jsp"  marginwidth=0 marginheight=0 frameborder=0 style="width:100%"></iframe>
   	
 	</body>
 </html>
@@ -199,7 +155,7 @@ function initTeacher(tabId,data)
 	var time=rows[0].schooltime;
 	var weekTime=rows[0].weekTime;
 	$('#'+tabId).datagrid({
-    title: "教室",
+	title:" ",	
     width: 100,
     height: 'auto',
     fitColumns: true,

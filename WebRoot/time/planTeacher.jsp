@@ -33,61 +33,19 @@
 	margin-top:5px;
 	width:20%;
 }
-datagrid-row-selected
-#wrap{  
-    width:700px;  
-    margin:0 auto;  
-}  
-#header{  
-    margin:0px;  
-    height:80px;  
-    border:solid 1px #00C9FF;  
-}  
-#container{  
-    position:relative;  
-    margin:0px;  
-    height:400px;  
-}  
-#left_side{  
-    position:absolute;  
-    top:0px;  
-    left:0px;  
-    width:100px;  
-    height:100%;  
-}  
-#content{  
-    margin:0px 10px 0px 100px;  
-      
-    height:100%;  
-}  
-#right_side{  
-    position:absolute;  
-    top:0px;  
-    right:0px;  
-    border:solid 1px #00C9FF;  
-    width:170px;  
-    height:100%;  
-}  
-#footer{  
-    margin:20px;  
-    height:80px;  
-    border:solid 1px #00C9FF;  
-}  
+
 
 </style>
 	</head>
 	<body>
 		<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
-		<div id="wrap">  
-        <!--  <div id="header">header</div> --> 
-	        <div id="container">  
-	            <div id="left_side"> 
-		    		<table  id="t0"></table>
-		    	</div>  
 	            <div id="content">
-		            
 				    	<table width="700"  cellpadding="0" border="0" style="border-collapse:collapse;overflow:scroll;" >
+				    	<tr><td colspan="8" style="text-align:center;font-size:20px;color:##0E2D5F;font-weight:bold;">教师资源统计表</td></tr>
 				    	<tr>
+				    		<td>
+					    	<table  id="t0"></table>
+					    	</td>
 					    	<td>
 					    	<table  id="t1"></table>
 					    	</td>
@@ -111,10 +69,7 @@ datagrid-row-selected
 					    	</td>
 				    	</tr>
 				    	</table>
-		    		 
 	    		</div>  
-	        </div>  
-    	</div>  
 	</body>
 </html>
 
@@ -205,7 +160,7 @@ function initTeacher(tabId,data)
 	var time=rows[0].schooltime;
 	var weekTime=rows[0].weekTime;
 	$('#'+tabId).datagrid({
-    title: "教室",
+    title: " ",
     width: 100,
     height: 'auto',
     fitColumns: true,
@@ -216,7 +171,7 @@ function initTeacher(tabId,data)
     },
      
     columns:[[
-      {field:'teacherName',title:'',width:100,align:'center'}
+      {field:'teacherName',title:'教师',width:100,align:'center'}
       
     ]] 
   });
@@ -239,7 +194,6 @@ function initTable(tabId,data)
 		 return 'background-color:#FFFFFF;color:#00000;';
     },
     columns:[[
-       {field:'teacherName',title:'教师',width:100,align:'center'},	
       {field:'H001',title:'上午1', width:120,align:'center', editor:'text'},
       {field:'H002',title:'上午2',width:120,align:'center', editor:'text'},
       {field:'H003',title:'下午1',width:120,align:'center', editor:'text'},
@@ -257,6 +211,13 @@ function initTable(tabId,data)
 $(document).ready(function()
 {
 	getWeekTime();
+	$("#frame0",window.parent.document).width($("#content,window.parent.document").find("table").width()+100);
+	$("#title",window.parent.document).width($("#content,window.parent.document").find("table").width());
+	$("#title",window.parent.document).parent().find(".panel-header:first").width($("#content",window.parent.document).find("table").width());
+	$("#title").width($("#content,window.parent.document").find("table").width());
+	$("#title").parent().find(".panel-header:first").width($("#content",window.parent.document).find("table").width());
+	$("#frame0",window.parent.document).height($("#content").find("table").height()+40);
+	
 });
 
 
