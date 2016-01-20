@@ -56,7 +56,7 @@
 		  				</tr>
 		  				<tr>
 		  					<td align="right" width="10%"><span>升学基数：</span></td>
-		  					<td width="20%"><span>${obj.attendClassObj.classStudentNum }</span></td>
+		  					<td width="20%"><span>${obj.attendClassObj.higherBaseNum }</span></td>
 		  					<td align="right" width="10%"><span>已升学人数：</span></td>
 		  					<td width="20%"><span id="studentChannelTypeVal">${obj.attendClassObj.higherStudentNum }</span></td>
 		  					<td align="right" width="10%"><span>升学率：</span></td>
