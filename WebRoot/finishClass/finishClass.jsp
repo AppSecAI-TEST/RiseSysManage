@@ -90,7 +90,7 @@
 	  						</td>
 	  					</tr>
 	  					<tr>
-		  					<td align="right" width="10%"><span>结课原因：</span></td>
+		  					<td align="right" width="10%"><span>取消原因：</span></td>
 		  					<td colspan="5">
 		  						<textarea rows="6" cols="122" id="remark" name="remark" class="easyui-validatebox textbox"></textarea>
 		  					</td>
@@ -99,7 +99,7 @@
 		  					<td colspan="6" align="right">
 		  						<a href="javascript:void(0)" id="finishClassSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
 			      				&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
-			      				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			      				
 		  					</td>
 		  				</tr>
 	  				</table>
@@ -109,7 +109,6 @@
 			  				url="<%=path %>/pubData/qryDataListByPage.do?param={'classInstId':'${obj.attendClassObj.classInstId }','funcNodeId':'1021'}">
 					  		<thead>
 					  			<tr>
-					  				<th data-options="field:'ck',checkbox:true"></th>
 					  				<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
 					  				<th data-options="field:'byName',width:80,align:'center'">英文名</th>
 					  				<th data-options="field:'payDate',width:100,align:'center'">缴费时间</th>

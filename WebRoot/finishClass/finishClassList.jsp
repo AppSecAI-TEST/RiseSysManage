@@ -130,7 +130,7 @@
   		</form>
   		<div style="padding:5px 0;min-width:1100px; width:100%;">
   			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" 
-  				url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1022" 
+  				 
 		  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 		  		<thead>
 		  			<tr>
@@ -151,7 +151,7 @@
 		  	</table>
   		</div>
   		<div id="toolbar" style="padding: 2px; height: auto">
-   			<a href="javascript:void(0)" id="finishClassBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">班级结课</a>
+   			<a href="javascript:void(0)" id="finishClassBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width: 120px;">取消毕业典礼</a>
    			<a href="javascript:void(0)" id="view" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>
 		</div>
   	</body>

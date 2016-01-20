@@ -53,7 +53,7 @@
 							<td align="left"><input name="gradHours" style="width:265px" class="easyui-numberbox" required="true" /><span>个</span></td>
 						</tr>
 						<tr>
-							<td align="right"><span>毕业典礼消耗时长：</span></td>
+							<td align="right"><span>毕业典礼消耗时长(周)：</span></td>
 							<td align="left"><input name="gradRemark" style="width:265px" class="easyui-textbox" required="true"/><span>周</span></td>
 						</tr>
 						<tr>

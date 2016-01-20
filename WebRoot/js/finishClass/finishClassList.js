@@ -44,18 +44,23 @@ $(document).ready(function() {
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) {
 			var classState = row.classState;
-			if("003" == classState) {
+			var isGrad=row.isGrad;
+			if("004" == classState)
+			{
+				if(isGrad=='Y')
+				{
+					$.messager.alert('提示', "该班级毕业典礼已取消");
+					return;
+				}
 				var classInstId = row.classInstId;
 				window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=finish";
-			} else {
-				var classStateText = "已结课";
-				if("005" == classState) {
-					classStateText = "已解散";
-				}
-				$.messager.alert('提示', "您选择要班级"+classStateText+"！");
+			} else 
+			{
+				$.messager.alert('提示', "请选择已结课班级");
 			}
-		} else {
-			$.messager.alert('提示', "请先选择您要结课的班级！");
+		} else
+		{
+			$.messager.alert('提示', "请选择班级");
 		}
 	});
 	
@@ -66,7 +71,7 @@ $(document).ready(function() {
 			var classInstId = row.classInstId;
 			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=viewFinish";
 		} else {
-			$.messager.alert('提示', "请先选择您要浏览的班级！");
+			$.messager.alert('提示', "请先选择您要浏览的班级");
 		}
 	});
 	
@@ -82,13 +87,13 @@ $(document).ready(function() {
 				async: true,
 				beforeSend: function()
 				{
-					$.messager.progress({title : '班级结课', msg : '正在班级结课，请稍等……'});
+					$.messager.progress({title : '班级结课', msg : '处理中，请稍等……'});
 				},
 				success: function (data) {
 					$.messager.progress('close'); 
 					var flag = data.flag;
 					if(flag) {
-						$.messager.alert('提示', "班级结课成功！", "info", function() {window.history.back();});
+						$.messager.alert('提示', "处理成功", "info", function() {window.history.back();});
 					} else {
 						$.messager.alert('提示', data.msg);
 					}
