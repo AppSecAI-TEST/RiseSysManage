@@ -293,7 +293,7 @@
 					<table width="100%" cellpadding="5px" class="maintable"
 						id="giftCourse">
 						<tr align="center">
-							<td style="visibility:hidden"></td>
+							<td style="display:none"></td>
 							<td width="9%">
 								<span>赠课类型</span>
 							</td>
@@ -323,7 +323,7 @@
 							</td>
 						</tr>
 						<tr style="display: none;" id="add" align="right">
-							<td align="center" val="">
+							<td style="display: none;" align="center" val="">
 								&nbsp;
 							</td>
 							<td align="center" giftCourseType="">

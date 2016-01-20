@@ -71,7 +71,7 @@
 							<input id="feeState" name="feeState" type="hidden" value="00A" />
 							<input id="stageOrder" name="stageOrder" type="hidden" value="" />
 							<td align="right"><span>缴费时间：</span></td>
-	      	    			    <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" value="<%=StringUtil.getJSONObjectKeyVal(object,"payDate")%>" style="width: 100px; height: 25px;" /></td>
+	      	    			    <td><input name="payDate" id="payDate" type="text" class="easyui-datebox" required="true" value="<%=StringUtil.getJSONObjectKeyVal(object,"payDate")%>" style="width: 120px; height: 25px;" /></td>
 							<td align="right">
 								<span>阶段：</span>
 							</td>
@@ -100,63 +100,31 @@
 								<select name="feeType" class="easyui-combobox" id="feeType" editable='false' required="true"
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName',
 									onLoadSuccess:function(data){$('#feeType').combobox('setValue',data[0].codeFlag)}"
-									style="width: 100px; height: 25px;"
+									style="width: 120px; height: 25px;"
 									url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
 								</select>
 							</td>
-							<td align="right" id="adviserNameA"><span>业绩顾问A：</span></td>
-							<td>
-								<div id="adviserADiv">
-											<select class="easyui-combobox" id="adviserA_school" style="width: 100px; height: 25px;" data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
-							</select>
-								<select name="adviserA" class="easyui-combobox" id="adviserA" editable='false' required="true"
-									style="width: 100px; height: 25px;"
-									data-options=" valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-									onLoadSuccess:function(data){$('#adviserA').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserA")%>');}"
-		      						url="<%=path %>/pubData/qryStaffList.do?post=16,17">
-								</select>
-								</select>
-							</div>
-								
-								<div id="adviserTeacherADiv" style="display:none">
-									<select class="easyui-combobox" editable='false' id="adviserTeacherA_school" style="width: 100px; height: 25px;"
-								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-								  ></select>
-								  
-							<select name="adviserTeacherA" class="easyui-combobox" editable='false' id="adviserTeacherA" required="true"
-								style="width: 100px; height: 25px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-								onLoadSuccess:function(data){$('#adviserTeacherA').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherA")%>');}"
-	      						url="<%=path %>/pubData/qryTeacherList.do">
-							</select>
-	      						</div>
-	      						
+							<td align="right">
+								<span>业绩顾问A：</span>
 							</td>
-							<td align="right" id="adviserNameB"><span>业绩顾问B：</span></td>
 							<td>
-								<div id="adviserBDiv">
-								<select class="easyui-combobox" editable='false' id="adviserB_school" style="width: 100px; height: 25px;"
-								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-								  >
-								  </select>
-								<select name="adviserB" class="easyui-combobox" id="adviserB" editable='false'
-									style="width: 100px; height: 25px;"
-									data-options=" valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-									onLoadSuccess:function(data){$('#adviserB').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserB")%>');}"
-		      						url="<%=path %>/pubData/qryStaffList.do?post=16,17">
+								<select  editable='false' id="adviserA_school" style="width: 100px; height: 25px;" data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 								</select>
-								</div>
-								<div id="adviserTeacherBDiv" style="display:none">
-							<select class="easyui-combobox" id="adviserTeacherB_school" editable='false' style="width: 100px; height: 25px;" data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
-						</select>
-							<select name="adviserTeacherB" class="easyui-combobox" id="adviserTeacherB" editable='false'
-								style="width: 100px; height: 25px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-								onLoadSuccess:function(data){$('#adviserTeacherB').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherB")%>');}"
-	      						url="<%=path %>/pubData/qryTeacherList.do">
-							</select>
-	      						</div>
-							
+								<select name="adviserA"   id="adviserA" editable='false' required="true" data-options="valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
+									style="width: 100px; height: 25px;">
+								</select>
+							</td>
+							<td align="right">
+								<span>业绩顾问B：</span>
+							</td>
+							<td>
+							<select  editable='false' id="adviserB_school" style="width: 100px; height: 25px;"
+								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'" >
+								  </select>
+								<select name="adviserB" id="adviserB" editable='false'
+									style="width: 100px; height: 25px;"
+									data-options=" valueField: 'staffId', textField: 'userName', panelHeight: 'auto'">
+								</select>
 							</td>
 						</tr>
 					</table>
@@ -250,8 +218,8 @@
 					</table>
 					<table width="100%" cellpadding="5px" class="maintable"
 						id="giftCourse">
-						<tr align="center">
-							<td width="6%">
+						<tr  align="center">
+							<td width="6%" style="display:none;">
 								<span>序号</span>&nbsp;
 							</td>
 							<td width="9%">
@@ -283,7 +251,7 @@
 							</td>
 						</tr>
 						<tr style="display: none;" id="add" align="right">
-							<td align="center" val="">
+							<td style="display:none;" align="center" val="">
 								&nbsp;
 							</td>
 							<td align="center" giftCourseType="">
@@ -540,45 +508,20 @@
 			<div class="easyui-panel" style="width: 100% height: auto;" title="缴费信息">
 				<table width="100%" cellpadding="5px" class="maintable">
 					<tr>
-						<td align="center">
-							<href ="javascript:void(0)" id="addArchives"
-								class="easyui-linkbutton" iconCls="icon-add" plain="true"
-								onclick="minusCoupon()">
-							<span>使用现金抵扣券</span>
-						</td>
-						<td colspan="7" giftId="">
-							<div id="useCoupon"></div>
-						</td>
-					</tr>
-					<tr>
-						<td align="right">
-							<span>总金额：</span>
-						</td>
-						<td align="left">
-							<input id="totalAmount" name="totalAmount" type="text"    readonly="readonly"
-								class="easyui-textbox validatebox"
-								style="width: 100px; height: 25px;">
-						</td>
-						<td align="right">
-							<span>赠券抵扣金额：</span>
-						</td>
-						 
-						<td align="left">
-							<input id="minusAmount" name="minusAmount" type="text"   readonly="readonly" class="easyui-textbox validatebox" style="width: 100px; height: 25px;">
-						</td>
-						<td align="left">
-						 <span>连报优惠金额：</span> 
-						 </td>
-						 <td align="left">
-				      	 <input id="favorAmount"   name="favorAmount" type="text"    class="easyui-textbox validatebox"  style="width: 100px; height: 25px;"/> 
-				      	 </td>
-						<td align="right">
-							<span>实缴金额：</span>
-						</td>
-						<td align="left">
-							<input id="amount" name="amount" type="text"   readonly="readonly" class="easyui-textbox validatebox" style="width: 100px; height: 25px;">
-						</td>
-					</tr>
+			     	    <td  align="right" ><span>现金抵扣劵：</span></td>
+			     	    <td align="center"  ><href="javascript:void(0)" id="addArchives" class="easyui-linkbutton" iconCls="icon-add" onclick="minusCoupon()">使用现金抵扣券</</td>
+			      	    <td colspan="8"  giftId=""><div id="useCoupon"/></td>
+			   	     </tr>
+					 <tr>
+				      	  <td width="10%"  align="right" ><span>课程金额：</span></td>
+				      	  <td width="14%"  align="left" ><input id="totalAmount" readonly="readonly"  name="totalAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"totalAmount")%>" class="easyui-textbox validatebox"  style="width: 100px; height: 25px;"> </td>
+				      	  <td width="12%"  align="right" ><span >现金抵扣券金额：</span></td>
+				      	  <td colspan="3"  align="left" ><input id="minusAmount"   readonly="readonly"  name="minusAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>" class="easyui-textbox validatebox"  style="width: 100px; height: 25px;">  </td>
+				      	  <td width="11%"  align="right"><span>连报优惠金额：</span></td>
+				      	  <td width="17%"  align="left" ><input id="favorAmount"   name="favorAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"favorAmount")%>" class="easyui-textbox validatebox"  style="width: 100px; height: 25px;"/></td>
+				      	  <td width="12%"  align="right"><span>实缴课程金额：</span></td>
+				      	  <td width="17%"  align="left" ><input id="amount"   readonly="readonly"   name="amount" type="text"  value="<%=StringUtil.getJSONObjectKeyVal(object,"amount")%>" class="easyui-textbox validatebox"  style="width: 100px; height: 25px;"> </td>
+			      	 </tr>
 				</table>
 			</div>
 		</form>
@@ -603,17 +546,13 @@ var totalAmount = 0;//课程金额
 var amount = 0;//实缴金额
 var schools=getSchools();
 var teachers=getTeachers();
+var advisters=getAdvister();
+
 initCousreGift();
 initPayDate();
 var setPriceId="<%=StringUtil.getJSONObjectKeyVal(object,"coursePriceId")%>";
-initOldCourse();
-function initOldCourse()
-{
-	if(setPriceId!='')
-	{
-		$("#payDate").datebox({ disabled: true});
-	}
-}
+var advisterAid="<%=StringUtil.getJSONObjectKeyVal(object,"adviserA")%>";
+var advisterBid="<%=StringUtil.getJSONObjectKeyVal(object,"adviserB")%>";
 $("#activeSchool").combobox({data:schools});
 $("#c_schoolA").combobox({data:schools});
 $("#c_schoolB").combobox({data:schools});
@@ -623,29 +562,11 @@ $("#c_schoolsA").combobox({data:schools});
 
 $("#adviserA_school").combobox({data:schools});
 $("#adviserB_school").combobox({data:schools});
-
-$("#adviserTeacherA_school").combobox({data:schools});
-$("#adviserTeacherB_school").combobox({data:schools});
-
-
-$("#adviserTeacherA").combobox({data:teachers});
-$("#adviserTeacherB").combobox({data:teachers});
+$("#adviserA").combobox({data:advisters});	
+$("#adviserB").combobox({data:advisters});	
 
 $("#s_teacherA").combobox({data:teachers});
 $("#s_teacherB").combobox({data:teachers});
-
-$('#favorAmount').textbox( {
-	onChange : function(value) {
-		minus = $("#minusAmount").textbox('getValue');
-		favorAmount = $("#favorAmount").textbox('getValue');
-		totalAmount = $("#totalAmount").textbox('getValue');
-		amount = totalAmount - minus - favorAmount;
-		$("#amount").textbox('setValue', amount);
-		parent.window.countAmount();
-		parent.window.checkFavorAmount();
-	}
-});
-
 
 	$("#adviserA_school").combobox({
 		onChange:function(){
@@ -671,29 +592,7 @@ $('#favorAmount').textbox( {
 			});
 			 
 		}
-	})
-	
-	
-$("#adviserTeacherA_school").combobox({
-		onChange:function(){
-			var sId =$("#adviserTeacherA_school").combobox("getValue");
-			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
-			$("#adviserTeacherA").combobox({
-				url:urls
-			});
-		}
-	})
-	
-	$("#adviserTeacherB_school").combobox({
-		onChange:function(){
-			var sId =$("#adviserTeacherB_school").combobox("getValue");
-			var urls ="<%=path%>/pubData/qryTeacherList.do?schoolId="+sId;
-			$("#adviserTeacherB").combobox({
-				url:urls
-			});
-		}
-	})
-	
+	});
 
 $(":radio[name='isGetY']").click(function()
 {
@@ -970,8 +869,7 @@ $("#classType").combobox(
 
 });
 
-
-//initOldCourse();
+ initOldCourse();
 function initOldCourse()
 {
 	var studentCourseId=$("#studentCourseId").val();
@@ -985,9 +883,21 @@ function initOldCourse()
 		$("#stageId").combobox({ disabled: true});
 		$("#classType").combobox({ disabled: true});
 		$("#feeType").combobox({ disabled: true});
-		$("#adviserA").combobox({ disabled: true});
-		$("#adviserB").combobox({ disabled: true});
+		for ( var i = 0; i < advisters.length; i++)
+		{
+			if (advisterAid == advisters[i].staffId) 
+			{
+				$("#adviserA_school").combobox('setValue',advisters[i].schoolId);
+				$("#adviserA").combobox('setValue',advisters[i].staffId); 
+			}
+			if (advisterBid == advisters[i].staffId) 
+			{
+				$("#adviserB_school").combobox('setValue',advisters[i].schoolId);
+				$("#adviserB").combobox('setValue',advisters[i].staffId); 
+			}
+		}
 	}
+	
 }
 
 //删除相对应的行  
@@ -2009,5 +1919,22 @@ $("#praiseSourceN").combobox({
 			}
 			return true;
 		}
-
+		
+		$('#favorAmount').textbox( {
+			onChange : function(value) {
+				minus = $("#minusAmount").textbox('getValue');
+				favorAmount = $("#favorAmount").textbox('getValue');
+				var reg= /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
+				if(!reg.test(favorAmount))
+				{
+					$("#favorAmount").textbox('setValue','');
+					return false;
+				}	
+				totalAmount = $("#totalAmount").textbox('getValue');
+				amount = totalAmount - minus - favorAmount;
+				$("#amount").textbox('setValue', amount);
+				parent.window.countAmount();
+				parent.window.checkFavorAmount();
+			}
+		});
 	</script>

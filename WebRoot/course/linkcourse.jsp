@@ -77,24 +77,30 @@
 	      	     	<tr>
 	      	        	<td align="right"><span>业绩类型：</span></td>
 	      	       	 	<td><span>升学</span></td>
-	      	        	<td align="right"><span>业绩老师A：</span></td>
-	      	        	<td> 
-	      	        		<select name="adviserTeacherA" class="easyui-combobox" editable='false' id="adviserTeacherA"
+	      	        	<td align="right">
+							<span>业绩老师A：</span>
+						</td>
+						<td>
+							<select   editable='false' id="adviserTeacherA_school" style="width: 100px; height: 25px;"
+								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+								  ></select>
+								  
+							<select name="adviserTeacherA"  id="adviserTeacherA" editable='false' required="true"
 								style="width: 100px; height: 25px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-								onLoadSuccess:function(data){$('#adviserTeacherA').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherA")%>');}"
-	      						url="<%=path %>/pubData/qryTeacherList.do">
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
 							</select>
-		      			</td>
-	      	        	<td align="right"><span>业绩老师B：</span></td>
-	      	        	<td> 
-	      	        		<select name="adviserTeacherB" class="easyui-combobox" id="adviserTeacherB" editable='false'
+						</td>
+						<td align="right">
+							<span>业绩老师B：</span>
+						</td>
+						<td>
+						<select   editable='false' id="adviserTeacherB_school" style="width: 100px; height: 25px;" data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+						</select>
+							<select name="adviserTeacherB" id="adviserTeacherB"
 								style="width: 100px; height: 25px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-								onLoadSuccess:function(data){$('#adviserTeacherB').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherB")%>');}"
-	      						url="<%=path %>/pubData/qryTeacherList.do">
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
 							</select>
-		      			</td>
+						</td>
       	        	</tr>
       	      </table>
 		</div>
@@ -169,7 +175,7 @@
       	      </table>
       	       <table width="100%" cellpadding="5px" class="maintable" id="giftCourse">
 	      	      <tr align="center">
-	      	        <td width="6%" ><span>序号</span>&nbsp;</td>
+	      	        <td style="display:none;" width="6%" ><span>序号</span>&nbsp;</td>
 	      	        <td width="9%"><span>赠课类型</span></td>
 	      	        <td width="9%"><span>赠课名称</span></td>
 	      	        <td width="11%"><span>赠送课时量</span></td>
@@ -181,7 +187,7 @@
 	      	        <td width="7%"><span>操作</span></td>
       	        </tr>
 	      	      <tr style="display:none;" id="add" align="right">
-	      	        <td  val="">&nbsp;</td>
+	      	        <td style="display:none;"  val="">&nbsp;</td>
 	      	        <td  align="center" giftCourseType="">&nbsp;</td>
 	      	        <td  align="center"  giftId="">&nbsp;</td>
 	      	        <td  align="center">&nbsp;</td>
@@ -199,7 +205,7 @@
 			     	      <table width="100%" cellpadding="5px" class="maintable" >
 			  	            <tr>
 			     	            <td  align="right" ><span>现金抵扣劵：</span></td>
-			     	            <td align="center"  ><href="javascript:void(0)" id="addArchives" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addArchives()">使用现金抵扣券</</td>
+			     	            <td align="center"  ><href="javascript:void(0)" id="addArchives" class="easyui-linkbutton" iconCls="icon-add" onclick="addArchives()">使用现金抵扣券</</td>
 			      	            <td colspan="8"  giftId=""><div id="useCoupon"/></td>
 			   	            </tr>
 			   	            <tr>
@@ -235,14 +241,56 @@ initPayDate();
 	var amount=0;//实缴金额
 
 	var setPriceId="<%=StringUtil.getJSONObjectKeyVal(object,"coursePriceId")%>";
+	var adviserTeacherAid="<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherA")%>";
+	var adviserTeacherBid="<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherB")%>";
+	
+	var schools=getSchools();
+	var teachers=getTeachers();
+	$("#adviserTeacherA_school").combobox({data:schools});
+	$("#adviserTeacherB_school").combobox({data:schools});
+	$("#adviserTeacherA").combobox({data:teachers});
+	$("#adviserTeacherB").combobox({data:teachers});
+	$("#adviserTeacherA_school").combobox({
+		onChange:function(){
+			var sId =$("#adviserTeacherA_school").combobox("getValue");
+			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+			$("#adviserTeacherA").combobox({
+				url:urls
+			});
+		}
+	})
+	
+	$("#adviserTeacherB_school").combobox({
+		onChange:function(){
+			var sId =$("#adviserTeacherB_school").combobox("getValue");
+			var urls ="<%=path%>/pubData/qryTeacherList.do?schoolId="+sId;
+			$("#adviserTeacherB").combobox({
+				url:urls
+			});
+		}
+	})
 	initOldCourse();
-function initOldCourse()
-{
-	if(setPriceId!='')
+	function initOldCourse()
 	{
-		$("#payDate").datebox({ disabled: true});
+		if(setPriceId!='')
+		{
+			$("#payDate").datebox({ disabled: true});
+		}
+		for ( var i = 0; i < teachers.length; i++)
+		{
+			if (adviserTeacherAid == teachers[i].teacherId) 
+			{
+				$("#adviserTeacherA_school").combobox('setValue',teachers[i].schoolId);
+				$("#adviserTeacherA").combobox('setValue',teachers[i].teacherId); 
+			}
+			if (adviserTeacherBid == teachers[i].teacherId) 
+			{
+				$("#adviserTeacherB_school").combobox('setValue',teachers[i].schoolId);
+				$("#adviserTeacherB").combobox('setValue',teachers[i].teacherId); 
+			}
+		}
+		
 	}
-}
 
 	$(":radio[name='isGetY']").click(function()
 {
@@ -510,6 +558,12 @@ $("#favorAmount").textbox(
 	{
 		minus = $("#minusAmount").textbox('getValue');
 		favorAmount = $("#favorAmount").textbox('getValue');
+		var reg= /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
+		if(!reg.test(favorAmount))
+		{
+			$("#favorAmount").textbox('setValue','');
+			return false;
+		}	
 		totalAmount = $("#totalAmount").textbox('getValue');
 		amount = totalAmount - minus - favorAmount;
 		$("#amount").textbox('setValue', amount);

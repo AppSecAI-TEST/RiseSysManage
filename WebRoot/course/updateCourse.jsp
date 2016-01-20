@@ -313,7 +313,7 @@
 					<table width="100%" cellpadding="5px" class="maintable"
 						id="giftCourse">
 						<tr align="center">
-							<td width="6%">
+							<td style="display: none;"  width="6%">
 								<span>序号</span>&nbsp;
 							</td>
 							<td width="9%">
@@ -345,7 +345,7 @@
 							</td>
 						</tr>
 						<tr style="display: none;" id="add" align="right">
-							<td align="center" val="">
+							<td align="center" style="display: none;" val="">
 								&nbsp;
 							</td>
 							<td align="center" giftCourseType="">
@@ -740,14 +740,9 @@ var adviserTeacherBid="<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherB
 			});
 			 
 		}
-	})
+	});
 	
-	initPayDate();
-loadStuBaseInfo();
-initCousreGift();
-initOldCourse();
-	
-$("#adviserTeacherA_school").combobox({
+	$("#adviserTeacherA_school").combobox({
 		onChange:function(){
 			var sId =$("#adviserTeacherA_school").combobox("getValue");
 			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
@@ -766,7 +761,11 @@ $("#adviserTeacherA_school").combobox({
 			});
 		}
 	})
-
+	
+	initPayDate();
+loadStuBaseInfo();
+initCousreGift();
+initOldCourse();
 function initOldCourse()
 {
 	$("#payDate").datebox({ disabled: true});

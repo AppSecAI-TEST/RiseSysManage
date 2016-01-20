@@ -406,7 +406,13 @@ var newCourse;//新招课程阶段
 		 if(!checkParam())
 		 {
 			 return false;
-		 }	 
+		 }	
+		 countAmount();
+		 if(favorPrice<favorAmount)
+		 {
+			showMessage('提示', "实际优惠总金额:"+favorAmount+"元大于连报优惠总金额:"+favorPrice+"元,请核对金额", null);
+		 	return false;
+		 }
 		 studentCourses=[];
 		 for(var n=0;n<num;n++)
 		 {
