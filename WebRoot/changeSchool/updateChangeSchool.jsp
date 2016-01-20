@@ -95,63 +95,68 @@
   							<select id="beginClassInstId" name="beginClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"></select>
   						</td>
   					</tr>
-  					<tr style="display: none;" id="inClassTr">
-  						<td colspan="6">
-  							<table width="100%" cellpadding="5px" id="inClassTb" class="maintable">
-			  					<tr>
-			  						<td align="right" width="10%"><span>班级名称：</span></td>
-				  					<td width="15%"><span id="classNameText"></span></td>
-				  					<td align="right" width="10%"><span>放班时间：</span></td>
-				  					<td width="15%"><span id="applyDate"></span></td>
-				  					<td align="right" width="10%"><span>开班时间：</span></td>
-				  					<td width="10%"><span id="startDate"></span></td>
-				  					<td align="right" width="10%"><span>带班老师：</span></td>
-				  					<td width="20%"><span id="teacherName"></span></td>
-			  					</tr>
-			  					<tr>
-			  						<td align="right" width="10%"><span>定班人数：</span></td>
-				  					<td width="20%"><span id="classStudentNum"></span></td>
-				  					<td align="right" width="10%"><span>课程进度：</span></td>
-				  					<td width="20%"><span id="classProgress"></span></td>
-				  					<td align="right" width="10%"><span>上课时段：</span></td>
-				  					<td width="30%" colspan="3"><span id="schooltimeName"></span></td>
-			  					</tr>
-			  				</table>
-  						</td>
-  					</tr>
-  					<tr>
-  						<td colspan="6" align="right">
-	  						<a href="javascript:void(0)" id="updateChangeSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-		      				&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
-		      				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	  					</td>
-  					</tr>
   				</table>
   			</form>
   		</div>
-  		<div style="padding:5px 0;min-width:1101px; width:100%;">
-  			<table class="easyui-datagrid" title="常规课信息" style="height:auto;" id="course_list_data" 
-				url="<%=path %>/pubData/qryDataListByPage.do?param={funcNodeId:'1016',studentId:'<%=studentId %>'}" 
-				pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
-				<thead>
-					<tr>
-						<th data-options="field:'stageId',width:100,align:'center'">课程阶段</th>
-						<th data-options="field:'courseStateText',width:100,align:'center'">课程状态</th>
-						<th data-options="field:'paySchoolName',width:100,align:'center'">校区</th>
-						<th data-options="field:'payDate',width:120,align:'center'">缴费日期</th>
-						<th data-options="field:'feeTypeText',width:100,align:'center'">业绩类型</th>
-						<th data-options="field:'className',width:100,align:'center'">班级</th>
-						<th data-options="field:'startDate',width:120,align:'center'">开课日期</th>
-						<th data-options="field:'finishDate',width:120,align:'center'">结课日期</th>
-						<th data-options="field:'classProgress',width:100,align:'center'">课时进度</th>
-						<th data-options="field:'classTeacherName',width:100,align:'center'">带班老师</th>
-						<th data-options="field:'adviserName',width:100,align:'center'">业绩顾问</th>
-						<th data-options="field:'adviserTeacherName',width:100,align:'center'">业绩老师</th>
-						<th data-options="field:'dutyAdvisterName',width:100,align:'center'">责任顾问</th>
-						<th data-options="field:'carerName',width:100,align:'center'">客户关怀</th>
-					</tr>
-				</thead>
-			</table>
+  		<div style="height: 10px;"></div>
+  		<div style="display: none;min-width:1100px; width:100%;height:auto;" id="changeDiv">
+	  		<div class="easyui-panel" style="min-width:1100px; width:98%;height:auto;" title="选择班级情况">
+	  			<form id="">
+	  				<table style="min-width:1100px; width: 100%" cellpadding="5px" id="inClassTb" class="maintable">
+			  			<tr>
+			  				<td align="right" width="10%"><span>班级名称：</span></td>
+				  			<td width="15%"><span id="classNameText"></span></td>
+				  			<td align="right" width="10%"><span>放班时间：</span></td>
+				  			<td width="15%"><span id="applyDate"></span></td>
+				  			<td align="right" width="10%"><span>开班时间：</span></td>
+				  			<td width="10%"><span id="startDate"></span></td>
+				  			<td align="right" width="10%"><span>带班老师：</span></td>
+				  			<td width="20%"><span id="teacherName"></span></td>
+			  			</tr>
+			  			<tr>
+			  				<td align="right" width="10%"><span>定班人数：</span></td>
+				  			<td width="20%"><span id="classStudentNum"></span></td>
+				  			<td align="right" width="10%"><span>课程进度：</span></td>
+				  			<td width="20%"><span id="classProgress"></span></td>
+				  			<td align="right" width="10%"><span>上课时段：</span></td>
+				  			<td width="30%" colspan="3"><span id="schooltimeName"></span></td>
+			  			</tr>
+			  		</table>
+	  			</form>
+	  		</div>
   		</div>
+  		<div style="margin-top: 25px;min-width:1100px; width:100%;">
+	      	<div style="float: left;margin-left: 800px;">
+	      		<a href="javascript:void(0)" id="updateChangeSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
+		      	&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	      	</div>
+	    </div>
+	    <div style="height: 10px;"></div>
+	    <div style="min-width:1100px; width:100%; margin-top: 20px">
+	  		<div style="padding:5px 0;min-width:1100px; width:98%;">
+	  			<table class="easyui-datagrid" title="常规课信息" style="height:auto;" id="course_list_data" 
+					url="<%=path %>/pubData/qryDataListByPage.do?param={funcNodeId:'1016',studentId:'<%=studentId %>'}" 
+					pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
+					<thead>
+						<tr>
+							<th data-options="field:'stageId',width:100,align:'center'">课程阶段</th>
+							<th data-options="field:'courseStateText',width:100,align:'center'">课程状态</th>
+							<th data-options="field:'paySchoolName',width:100,align:'center'">校区</th>
+							<th data-options="field:'payDate',width:120,align:'center'">缴费日期</th>
+							<th data-options="field:'feeTypeText',width:100,align:'center'">业绩类型</th>
+							<th data-options="field:'className',width:100,align:'center'">班级</th>
+							<th data-options="field:'startDate',width:120,align:'center'">开课日期</th>
+							<th data-options="field:'finishDate',width:120,align:'center'">结课日期</th>
+							<th data-options="field:'classProgress',width:100,align:'center'">课时进度</th>
+							<th data-options="field:'classTeacherName',width:100,align:'center'">带班老师</th>
+							<th data-options="field:'adviserName',width:100,align:'center'">业绩顾问</th>
+							<th data-options="field:'adviserTeacherName',width:100,align:'center'">业绩老师</th>
+							<th data-options="field:'dutyAdvisterName',width:100,align:'center'">责任顾问</th>
+							<th data-options="field:'carerName',width:100,align:'center'">客户关怀</th>
+						</tr>
+					</thead>
+				</table>
+	  		</div>
+	    </div>
   	</body>
 </html>

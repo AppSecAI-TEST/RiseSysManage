@@ -131,6 +131,15 @@ function initClassInst(isBegin) {
                 		$("#beginClassInstId").combobox('select', data[0].classInstId);
                 	}
                 }
+                var classInstId = $("#notBeginClassInstId").combobox("getValue");
+                if(classInstId != "" && classInstId != null && classInstId != undefined) {
+                	qryClassDetail(classInstId);
+                }
+            },
+            onChange : function(n, o) {
+            	if(n != "" && n != null && n != undefined) {
+            		qryClassDetail(n);
+            	}
             }
     	});
 		$("#notBeginClassInstId").combobox('clear');
@@ -153,9 +162,43 @@ function initClassInst(isBegin) {
                 		$("#notBeginClassInstId").combobox('select', data[0].classInstId);
                 	}
                 }
+                var classInstId = $("#notBeginClassInstId").combobox("getValue");
+                if(classInstId != "" && classInstId != null && classInstId != undefined) {
+                	qryClassDetail(classInstId);
+                }
+            },
+            onChange : function(n, o) {
+            	if(n != "" && n != null && n != undefined) {
+            		qryClassDetail(n);
+            	}
             }
     	});
 		$("#beginClassInstId").combobox('clear');
 		$("#beginClassInstId").combobox("loadData", new Array());
 	}
+}
+
+function qryClassDetail(classInstId) {
+	var param = "{\"classInstId\":\""+classInstId+"\",\"queryCode\":\"qryClassInstListById\"}";
+	$.ajax({
+		url: "/sys/applyClass/qryDataByQueryCode.do",
+		data: "param=" + param,
+		dataType: "json",
+		async: true,
+		beforeSend: function()
+		{
+			$.messager.progress({title : '班级维护', msg : '正在查询班级信息，请稍等……'});
+		},
+		success: function (data) {
+			$.messager.progress('close'); 
+			$("#classNameText").html(data.className);
+			$("#applyDate").html(data.applyClassDate);
+			$("#startDate").html(data.startDate);
+			$("#teacherName").html(data.teacherName);
+			$("#classStudentNum").html(data.classStudentNum);
+			$("#classProgress").html(data.classProgress);
+			$("#schooltimeName").html(data.schooltimeName);
+			$("#changeDiv").css("display", "block");
+		}
+	});
 }

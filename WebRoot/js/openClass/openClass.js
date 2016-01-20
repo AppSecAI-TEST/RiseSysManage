@@ -185,10 +185,10 @@ $(document).ready(function() {
 						$.messager.alert('提示', "上课时段"+addNum+"的总课时量为"+hours+"，您选择的所有带班老师的总课时量为"+teacherHours+"，请保持课时量相等！");
 					}
 				} else {
-					$.messager.alert('提示', "请至少为上课时段"+addNum+"添加一位带班老师！");
+					$.messager.alert('提示', "请为上课时段"+addNum+"添加一位带班老师！");
 				}
 			} else {
-				$.messager.alert('提示', "请至少为每个上课时段添加一位带班老师！");
+				$.messager.alert('提示', "请为每个上课时段各添加一位带班老师！");
 			}
 		}
 	});
@@ -333,15 +333,25 @@ function openClass() {
 
 //添加代班老师
 function addTeacher(obj) {
-	$("#dlg").dialog('open').dialog('setTitle', '添加老师');//设定表头  
-	$('#addTeacherFm').form('clear');//清空窗体数据  
-	$("#licenseFlagText").html("");
-	selTr = $(obj).parent().parent();
+	var content = "";
+	var tr = $(obj).parent().parent();
+	tr.find("td").each(function(i, node) {
+		if(i == 4) {
+			content = $(node).html();
+		}
+	});
+	if(content == "" || content == null || content == undefined) {
+		$("#dlg").dialog('open').dialog('setTitle', '添加老师');//设定表头  
+		$('#addTeacherFm').form('clear');//清空窗体数据  
+		$("#licenseFlagText").html("");
+		selTr = $(obj).parent().parent();
+	} else {
+		$.messager.alert('提示', "一个上课时段只允许一位老师带班！");
+	}
 }
 
 function deleteTeacher(obj, teacherId)
 {
-	var lessions = null;
 	var weekTime = null;
 	var hourRange = null;
 	var delTr = $(obj).parent().parent().parent();
@@ -357,15 +367,14 @@ function deleteTeacher(obj, teacherId)
 			var selWeekTime = $(this).attr("weekTime");
 			var selHourRange = $(this).attr("hourRange");
 			if(teacherId == selTeacherId && weekTime == selWeekTime && hourRange == selHourRange) {
-				lessions = $(this).attr("lessions");
 				classTeacherId += $(this).attr("classTeacherId") + ",";
 			}
 		});
 	}
 	delTr.find("td").each(function(i, node) {
 		if(i == 4) {
-			var lession = $(node).attr("lessions");
-			$(node).attr("lessions", parseInt(lession) - parseInt(lessions));
+			$(node).html("");
+			$(node).attr("lessions", 0);
 		}
 	});
 	$("#teacher" + teacherId + weekTime + hourRange).html("");

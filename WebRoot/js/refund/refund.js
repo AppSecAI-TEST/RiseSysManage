@@ -201,7 +201,7 @@ $(document).ready(function() {
 		var row = $('#approve_list_data').datagrid('getSelected');
 		if(row) {
 			var tacheState = row.tacheState;
-			if("006" == tacheState) {
+			if("006" == tacheState || "004" == tacheState) {
 				var handlerId = row.handlerId;
 				var staffId = $("#staffId").val();
 				if(staffId == handlerId) {

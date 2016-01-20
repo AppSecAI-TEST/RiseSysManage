@@ -77,8 +77,8 @@
 	  			</table>
   			</form>
 			<div style="padding:5px 0;">
-				<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" 
-				  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true">
+				<table class="easyui-datagrid" title="查询结果" style="min-height: 435px" id="list_data" 
+				  		toolbar="#toolbar" pagination="false" rownumbers="false" fitColumns="true">
 					<thead>
 						<tr>
 							<th field="baseInfo" align="center" width="5%" colspan="11">教师带班基本信息</th>

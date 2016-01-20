@@ -83,13 +83,13 @@
 					</td>
 					<td align="right" style="min-width: 80px;"><span><input type="radio" name="isNeed" value="'Y', 'N'"/>所有课程：</span></td>
 					<td style="min-width: 110px;">
-						<input type="checkbox" name="courseStateAll" value="'001'" disabled="disabled"/><span>未定班</span>
-						<input type="checkbox" name="courseStateAll" value="'002'" disabled="disabled"/><span>已定班</span>
+						<input type="checkbox" name="courseStateAll" value="001" disabled="disabled"/><span>未定班</span>
+						<input type="checkbox" name="courseStateAll" value="002" disabled="disabled"/><span>已定班</span>
 					</td>
 					<td align="right" style="min-width: 80px;"><span><input type="radio" name="isNeed" value="'Y'"/>需选班：</span></td>
 					<td style="min-width: 110px;">
-						<input type="checkbox" name="courseStateNeed" value="'001'" disabled="disabled"/><span>未定班</span>
-						<input type="checkbox" name="courseStateNeed" value="'002'" disabled="disabled"/><span>已定班</span>
+						<input type="checkbox" name="courseStateNeed" value="001" disabled="disabled"/><span>未定班</span>
+						<input type="checkbox" name="courseStateNeed" value="002" disabled="disabled"/><span>已定班</span>
 					</td>
 					<td align="right" style="min-width: 80px;"><span>选班日期：</span></td>
 	  				<td style="min-width: 90px;">

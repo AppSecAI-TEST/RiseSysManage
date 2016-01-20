@@ -91,18 +91,18 @@
   						<td width="55%" colspan="3">
   							<input type="radio" name="isBegin" value="N"/>
   							<span style="display: inline-block; text-align: center;">未开课班级</span>
-  							<select id="notBeginClassInstId" name="notBeginClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false" disabled="disabled"></select>
+  							<select id="notBeginClassInstId" name="notBeginClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"></select>
   							<input type="radio" name="isBegin" value="Y"/>
   							<span style="display: inline-block; text-align: center;">已开课班级</span>
-  							<select id="beginClassInstId" name="beginClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false" disabled="disabled"></select>
+  							<select id="beginClassInstId" name="beginClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"></select>
   						</td>
   					</tr>
   				</table>
   			</form>
   		</div>
   		<div style="height: 10px;"></div>
-  		<div style="display: none;" id="changeDiv">
-	  		<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="选择班级情况">
+  		<div style="display: none;min-width:1100px; width:100%;height:auto;" id="changeDiv">
+	  		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="选择班级情况">
 	  			<form id="">
 	  				<table width="99.99%" cellpadding="5px" class="maintable">
 	  					<tr>

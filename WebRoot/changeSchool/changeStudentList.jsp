@@ -58,13 +58,11 @@
 						<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
 						<th data-options="field:'byName',width:100,align:'center'">英文名</th>
 						<th data-options="field:'phone',width:200,align:'center'">联系电话</th>
-						<th data-options="field:'higherStageId',width:120,align:'center'">已升学阶段</th>
 						<th data-options="field:'classType',width:100,align:'center'">当前课程</th>
 						<th data-options="field:'feeTypeText',width:100,align:'center'">业绩类型</th>
 						<th data-options="field:'adviserName',width:100,align:'center'">业绩顾问</th>
-						<th data-options="field:'currentClassName',width:100,align:'center'">在读班</th>
-						<th data-options="field:'adviserTeacherName',width:100,align:'center'">带班老师</th>
-						<th data-options="field:'currentClassProgress',width:100,align:'center'">课程进度</th>
+						<th data-options="field:'className',width:100,align:'center'">在读班</th>
+						<th data-options="field:'teacherName',width:100,align:'center'">带班老师</th>
 						<th data-options="field:'courseStateText',width:100,align:'center'">在读课程状态</th>
 					</tr>
 				</thead>

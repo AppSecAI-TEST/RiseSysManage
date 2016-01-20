@@ -78,7 +78,33 @@
   				</table>
   			</form>
   		</div>
-  		
+  		<div style="height: 10px;"></div>
+  		<div style="display: none;min-width:1100px; width:100%;height:auto;" id="changeDiv">
+	  		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="选择班级情况">
+	  			<form id="">
+	  				<table width="99.99%" cellpadding="5px" class="maintable">
+			  			<tr>
+			  				<td align="right" width="10%"><span>班级名称：</span></td>
+				  			<td width="15%"><span id="classNameText"></span></td>
+				  			<td align="right" width="10%"><span>放班时间：</span></td>
+				  			<td width="15%"><span id="applyDate"></span></td>
+				  			<td align="right" width="10%"><span>开班时间：</span></td>
+				  			<td width="10%"><span id="startDate"></span></td>
+				  			<td align="right" width="10%"><span>带班老师：</span></td>
+				  			<td width="20%" style="border-right: 0px;"><span id="teacherName"></span></td>
+			  			</tr>
+			  			<tr>
+			  				<td align="right" width="10%" style="border-bottom: 0px;"><span>定班人数：</span></td>
+				  			<td width="20%" style="border-bottom: 0px;"><span id="classStudentNum"></span></td>
+				  			<td align="right" width="10%" style="border-bottom: 0px;"><span>课程进度：</span></td>
+				  			<td width="20%" style="border-bottom: 0px;"><span id="classProgress"></span></td>
+				  			<td align="right" width="10%" style="border-bottom: 0px;"><span>上课时段：</span></td>
+				  			<td width="30%" colspan="3" style="border-right: 0px; border-bottom: 0px;"><span id="schooltimeName"></span></td>
+			  			</tr>
+			  		</table>
+	  			</form>
+	  		</div>
+  		</div>
   		<div style="margin-top: 20px;min-width:1100px; width:99%;">
 	      	<div style="float: left;margin-left: 800px;">
 	      		<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>

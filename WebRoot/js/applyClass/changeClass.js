@@ -36,14 +36,14 @@ $(document).ready(function() {
 			var classInstId = $("#classInstId").val();
 			if(classInstId != null && classInstId != "" && classInstId != undefined) {
 				$("input[name='isBegin'][value='"+classIsBegin+"']").attr("checked", "checked"); 
-				initClassInst(classIsBegin);
+				initClassInst(classIsBegin, classInstId);
 			}
 		}
 	});
 	
 	$("input:radio[name='isBegin']").change(function() {
 		var isBegin = $("input:radio[name='isBegin']:checked").val();
-		initClassInst(isBegin);
+		initClassInst(isBegin, "");
 	});
 
     //提交更换班级
@@ -71,8 +71,7 @@ $(document).ready(function() {
 			data: "param=" + param,
 			dataType: "json",
 			async: true,
-			beforeSend: function()
-			{
+			beforeSend: function() {
 				$.messager.progress({title : '更换班级', msg : '正在更换班级，请稍等……'});
 			},
 			success: function (data) {
@@ -88,11 +87,10 @@ $(document).ready(function() {
     });
 });
 
-function initClassInst(isBegin) {
+function initClassInst(isBegin, classInstId) {
 	var schoolId = $("#schoolId").val();
 	var courseType = $("#courseType").val();
 	var stageId = $("#stageId").val();
-	var classInstId = $("#classInstId").val();
 	var classType = $("#classType").val();
 	var schoolId = $("#schoolId").val();
 	if("Y" == isBegin) {
@@ -112,31 +110,20 @@ function initClassInst(isBegin) {
                 	} else {
                 		$("#beginClassInstId").combobox('select', data[0].classInstId);
                 	}
+                	var classInstId = $("#beginClassInstId").combobox("getValue");
+                    if(classInstId != "" && classInstId != null && classInstId != undefined) {
+                    	qryClassDetail(classInstId);
+                    } else {
+                		$("#changeDiv").css("display", "none");
+                	}
                 }
             },
             onChange : function(n, o) {
-	        	$("#changeDiv").css("display", "block");
-	        	var param = "{\"classInstId\":\""+n+"\",\"queryCode\":\"qryClassInstListById\"}";
-	        	$.ajax({
-	        		url: "/sys/applyClass/qryDataByQueryCode.do",
-	        		data: "param=" + param,
-	        		dataType: "json",
-	        		async: true,
-	        		beforeSend: function()
-	        		{
-	        			$.messager.progress({title : '班级维护', msg : '正在查询班级信息，请稍等……'});
-	        		},
-	        		success: function (data) {
-	        			$.messager.progress('close'); 
-	        			$("#className").html(data.className);
-	        			$("#applyDate").html(data.applyClassDate);
-	        			$("#startDate").html(data.startDate);
-	        			$("#teacherName").html(data.teacherName);
-	        			$("#classStudentNum").html(data.classStudentNum);
-	        			$("#classProgress").html(data.classProgress);
-	        			$("#schooltimeName").html(data.schooltimeName);
-	        		}
-	        	});
+            	if(n != "" && n != null && n != undefined) {
+	        		qryClassDetail(n);
+	        	} else {
+            		$("#changeDiv").css("display", "none");
+            	}
             }
     	});
 		$("#notBeginClassInstId").combobox('clear');
@@ -159,33 +146,47 @@ function initClassInst(isBegin) {
                 		$("#notBeginClassInstId").combobox('select', data[0].classInstId);
                 	}
                 }
+                var classInstId = $("#notBeginClassInstId").combobox("getValue");
+                if(classInstId != "" && classInstId != null && classInstId != undefined) {
+                	qryClassDetail(classInstId);
+                } else {
+            		$("#changeDiv").css("display", "none");
+            	}
             },
             onChange : function(n, o) {
-	        	$("#changeDiv").css("display", "table-row");
-	        	var param = "{\"classInstId\":\""+n+"\",\"queryCode\":\"qryClassInstListById\"}";
-	        	$.ajax({
-	        		url: "/sys/applyClass/qryDataByQueryCode.do",
-	        		data: "param=" + param,
-	        		dataType: "json",
-	        		async: true,
-	        		beforeSend: function()
-	        		{
-	        			$.messager.progress({title : '班级维护', msg : '正在查询班级信息，请稍等……'});
-	        		},
-	        		success: function (data) {
-	        			$.messager.progress('close'); 
-	        			$("#className").html(data.className);
-	        			$("#applyDate").html(data.applyClassDate);
-	        			$("#startDate").html(data.startDate);
-	        			$("#teacherName").html(data.teacherName);
-	        			$("#classStudentNum").html(data.classStudentNum);
-	        			$("#classProgress").html(data.classProgress);
-	        			$("#schooltimeName").html(data.schooltimeName);
-	        		}
-	        	});
+	        	if(n != "" && n != null && n != undefined) {
+	        		qryClassDetail(n);
+	        	} else {
+            		$("#changeDiv").css("display", "none");
+            	}
             }
     	});
 		$("#beginClassInstId").combobox('clear');
 		$("#beginClassInstId").combobox("loadData", new Array());
 	}
+}
+
+function qryClassDetail(classInstId) {
+	var param = "{\"classInstId\":\""+classInstId+"\",\"queryCode\":\"qryClassInstListById\"}";
+	$.ajax({
+		url: "/sys/applyClass/qryDataByQueryCode.do",
+		data: "param=" + param,
+		dataType: "json",
+		async: true,
+		beforeSend: function()
+		{
+			$.messager.progress({title : '班级维护', msg : '正在查询班级信息，请稍等……'});
+		},
+		success: function (data) {
+			$.messager.progress('close'); 
+			$("#className").html(data.className);
+			$("#applyDate").html(data.applyClassDate);
+			$("#startDate").html(data.startDate);
+			$("#teacherName").html(data.teacherName);
+			$("#classStudentNum").html(data.classStudentNum);
+			$("#classProgress").html(data.classProgress);
+			$("#schooltimeName").html(data.schooltimeName);
+			$("#changeDiv").css("display", "block");
+		}
+	});
 }

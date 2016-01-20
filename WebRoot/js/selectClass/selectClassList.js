@@ -22,12 +22,9 @@ $(document).ready(function() {
 	initQryButton("qryBtn","reset","qryFm","list_data");
 	$("#qryBtn").unbind();
 	$("#qryBtn").click(function() {
-    	if($("#schoolId").combobox("getValue")=="")
-    	{
+    	if($("#schoolId").combobox("getValue") == "") {
     		showMessage("提示","没有有效的校区可供查询",null);
-    	}
-    	else
-    	{
+    	} else {
     		var obj = JSON.stringify($("#qryFm").serializeObject());
 	    	obj = obj.substring(0, obj.length - 1);
 	    	var isNeed = $("input:radio[name='isNeed']:checked").val();
@@ -35,11 +32,11 @@ $(document).ready(function() {
 	    		var courseState = "";
 	    		if("'Y'" == isNeed) {
 	    			$("[name='courseStateNeed']:checked").each(function() {
-	    				courseState += $(this).val()+",";
+	    				courseState += $(this).val() + ",";
 	    			});
 	    		} else {
 	    			$("[name='courseStateAll']:checked").each(function() {
-	    				courseState += $(this).val()+",";
+	    				courseState += $(this).val() + ",";
 	    			});
 	    		}
 	    		courseState = courseState.substring(0, courseState.length - 1);

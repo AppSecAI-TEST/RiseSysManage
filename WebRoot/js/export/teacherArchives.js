@@ -64,59 +64,7 @@ $(document).ready(function() {
 	});
 	
 	$("#qryBtn").click(function() {
-		var object = $("#qryFm").serializeObject();
-		if($("[name='stageId']").length > 0) {
-			var s = "";
-			$('input[name="stageId"]:checked').each(function() {
-				s += $(this).val() + ",";
-			});
-			s = s.substring(0, s.length - 1);
-			object.stageId = s;
-		} else {
-			object.stageId = "";
-		}
-		if($("[name='licenseStageId']").length > 0) {
-			var s = "";
-			$('input[name="licenseStageId"]:checked').each(function() {
-				s += $(this).val() + ",";
-			});
-			s = s.substring(0, s.length - 1);
-			object.licenseStageId = s;
-		} else {
-			object.licenseStageId = "";
-		}
-    	var obj = JSON.stringify(object);
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-    	$.ajax({
-    		url : "/sys/teacherManage/qryTeacherArchivesList.do",//返回json数据的url
-    		type : "post",
-    		data : "param=" + obj,
-    		dataType: "json",
-    		success: function (data) {
-    			onLoadSuccess(data);
-    		}
-    	});
-    	
-//    	$('#list_data').datagrid({
-//    		fit : true,
-//    		nowrap : true,
-//    		border : false,
-//    		striped : true,
-//    		pagination : true,
-//    		rownumbers : true,
-//    		singleSelect : false,
-//    		columns : columns,
-//    		fitColumns : false,
-//    		url : "/sys/teacherManage/qryTeacherArchivesList.do",
-//    		queryParams:{
-//    			param : obj
-//    		},
-//    		onLoadSuccess:function(data) {
-//    			onLoadSuccess(data);
-//    		}
-//    	});
+		getData();
     });
 	
 	$("#reset").click(function() {
@@ -136,8 +84,8 @@ $(document).ready(function() {
 			var content = "";
 			var licenseContent = "";
 			$.each(data, function(i, obj){
-				content += "<input type='checkbox' name='stageId' value='\""+obj.stageId+"\"'/>&nbsp;<span>"+obj.stageId+"</span>&nbsp;&nbsp;&nbsp;";
-				licenseContent += "<input type='checkbox' name='licenseStageId' value='\""+obj.stageId+"\"'/>&nbsp;<span>"+obj.stageId+"</span>&nbsp;&nbsp;&nbsp;";
+				content += "<input type='checkbox' name='stageId' value='"+obj.stageId+"'/>&nbsp;<span>"+obj.stageId+"</span>&nbsp;&nbsp;&nbsp;";
+				licenseContent += "<input type='checkbox' name='licenseStageId' value='"+obj.stageId+"'/>&nbsp;<span>"+obj.stageId+"</span>&nbsp;&nbsp;&nbsp;";
 			});
 			$("#stageTd").html(content);
 			$("#licenseStageTd").html(licenseContent);
@@ -145,32 +93,73 @@ $(document).ready(function() {
 	});
 });
 
+function getData() {
+	var object = $("#qryFm").serializeObject();
+	if($("[name='stageId']").length > 0) {
+		var s = "";
+		$('input[name="stageId"]:checked').each(function() {
+			s += "'" + $(this).val() + "',";
+		});
+		s = s.substring(0, s.length - 1);
+		object.stageId = s;
+	} else {
+		object.stageId = "";
+	}
+	if($("[name='licenseStageId']").length > 0) {
+		var s = "";
+		$('input[name="licenseStageId"]:checked').each(function() {
+			s += "'" + $(this).val() + "',";
+		});
+		s = s.substring(0, s.length - 1);
+		object.licenseStageId = s;
+	} else {
+		object.licenseStageId = "";
+	}
+	var funcNodeId = $("#qryBtn").attr("funcNodeId");
+	object.funcNodeId = funcNodeId;
+	var obj = JSON.stringify(object);
+	$.ajax({
+		url : "/sys/teacherManage/qryTeacherArchivesList.do",//返回json数据的url
+		type : "post",
+		data : "param=" + obj,
+		dataType: "json",
+		async: false,
+		success: function (data) {
+			onLoadSuccess(data);
+		}
+	});
+}
+
 function onLoadSuccess(data) {
-	var colsOne = new Array();
-	var colsTwo = new Array();
-	var columns = new Array();
-	$.each(data.rowOne, function() {
-		var colData = new Object();
-		colData.field = this.field;
-		colData.title = this.title;
-		colData.align = this.align;
-		colData.colspan = this.colspan;
-		colsOne.push(colData);
-	});
-	columns.push(colsOne);
-	$.each(data.rowTwo, function() {
-		var colData = new Object();
-		colData.field = this.field;
-		colData.title = this.title;
-		colData.width = this.width;
-		colData.align = this.align;
-		colsTwo.push(colData);
-	});
-	columns.push(colsTwo);
-	$("#list_data").datagrid({
-	    pagination	: true,
-	    columns		: columns,
-	    fitColumns : false,
-		data: data.rows
-	})
+	if(data.total > 0) {
+		var colsOne = new Array();
+		var colsTwo = new Array();
+		var columns = new Array();
+		$.each(data.rowOne, function() {
+			var colData = new Object();
+			colData.field = this.field;
+			colData.title = this.title;
+			colData.align = this.align;
+			colData.colspan = this.colspan;
+			colsOne.push(colData);
+		});
+		columns.push(colsOne);
+		$.each(data.rowTwo, function() {
+			var colData = new Object();
+			colData.field = this.field;
+			colData.title = this.title;
+			colData.width = this.width;
+			colData.align = this.align;
+			colsTwo.push(colData);
+		});
+		columns.push(colsTwo);
+		$("#list_data").datagrid({
+		    pagination	: false,
+		    columns		: columns,
+		    fitColumns : false,
+			data: data.rows
+		})
+	} else {
+		$("#list_data").datagrid("loadData", new Array());
+	}
 }
