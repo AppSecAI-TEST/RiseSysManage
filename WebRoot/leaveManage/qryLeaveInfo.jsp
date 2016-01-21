@@ -79,9 +79,9 @@
 					<th field="leavedTime" align="center" width="7%"><span>已休时长（天）</span></th>
 					<th field="leaveTime" align="center" width="9%"><span>申请休学时长（月）</span></th>
 					<th field="stageLevel" align="center" width="9%"><span>已升学阶段</span></th>
-					<th field="className" align="center" width="7%"><span>原在读班级</span></th>
+					<th field="orignClassName" align="center" width="7%"><span>原在读班级</span></th>
 					<th field="orignCourseState" align="center" width="8%"><span>原在读课程状态</span></th>
-					<th field="teacherName" align="center" width="8%"><span>带班老师</span></th>
+					<th field="teacherNames" align="center" width="8%"><span>带班老师</span></th>
 					<th field="carerName" align="center" width="5%"><span>客户关怀</span></th>
 					<th field="hours" align="center" width="8%"><span>原在读班级课时</span></th>
 				</tr>

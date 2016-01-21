@@ -248,9 +248,12 @@ function addLeaveInfo()
 		var schoolId = row.schoolId;
 		var courseState = row.courseState;
 		var studentCourseId = row.studentCourseId;
+		var stageLevel = row.stageLevel;
+		var className = row.className;
+		var teacherName = row.teacherName;
 		var classProgress = encodeURIComponent(row.classProgress);
 		var funcNodeId = "";
-		window.location.href = "/sys/leaveManage/viewLeaveInfo.do?studentId="+studentId+"&schoolId="+schoolId+"&courseState="+courseState+"&studentCourseId="+studentCourseId+"&funcNodeId="+funcNodeId+"&type=add&currentHours="+classProgress;
+		window.location.href = "/sys/leaveManage/viewLeaveInfo.do?studentId="+studentId+"&schoolId="+schoolId+"&courseState="+courseState+"&studentCourseId="+studentCourseId+"&funcNodeId="+funcNodeId+"&type=add&currentHours="+classProgress+"&stageLevel="+stageLevel+"&className="+className+"&teacherName="+teacherName;
 	}
 }
 
@@ -274,13 +277,16 @@ function addLeaveSubmit()
 			var studentId = $("#studentId").val();
 			var courseState = $("#courseState").val();
 			var studentCourseId = $("#studentCourseId").val();
+			var stageLevel = $("#stageLevel").val();
+			var className = $("#className").val();
+			var teacherName = $("#teacherName").val();
 			var currentHours = $("#currentHours").val();
 			var handlerId = $("#handlerId").val();
 			var imgUrl = $("#imgUrl").val();
 	//		var createDate = new Date().format("yyyy-MM-dd");
 			//计算出 休学到期日期
 	//		var leaveDate = new Date().dateAdd("m",parseInt(planLeaveTime)).format("yyyy-MM-dd");
-			var json = '{"studentId":"'+studentId+'","studentCourseId":"'+studentCourseId+'","leaveState":"001","leaveTime":"'+planLeaveTime+'","orignCourseState":"'+courseState+'","hours":"'+encodeURIComponent(currentHours)+'","imgUrl":"'+imgUrl+'","leaveReason":"'+addRemark+'","handlerId":"'+handlerId+'"}';
+			var json = '{"studentId":"'+studentId+'","studentCourseId":"'+studentCourseId+'","leaveState":"001","leaveTime":"'+planLeaveTime+'","stageLevel":"'+stageLevel+'","orignClassName":"'+className+'","orignCourseState":"'+courseState+'","teacherNames":"'+teacherName+'","hours":"'+encodeURIComponent(currentHours)+'","imgUrl":"'+imgUrl+'","leaveReason":"'+addRemark+'","handlerId":"'+handlerId+'"}';
 			$.ajax({
 				type : "POST",
 				url: "/sys/leaveManage/addLeaveInfo.do",
