@@ -97,8 +97,39 @@
 	   			<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
 			</div>
   		</div>
+  		<div id="dlg" class="easyui-dialog" closed="true" modal="true">
+			<table class="easyui-datagrid" style="width:900px;height:500px" id="detail_list_data" fitColumns="true">
+				<thead>
+					<tr>
+						<th field="rownum" align="center" width="100px">序号</th>
+						<th field="name" align="center" width="200px">中文名</th>
+						<th field="byName" align="center" width="200px">英文名</th>
+						<th field="isHigherText" align="center" width="150px">是否升学</th>
+						<th field="className" align="center" width="150px">现在读班级</th>
+						<th field="classProgress" align="center" width="150px">学员课时进度</th>
+						<th field="payDate" align="center" width="150px">缴费日期</th>
+						<th field="higherBaseNum" align="center" width="150px">升学基数</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
   	</body>
 </html>
 <script>
 exportLink("export","list_data");
+
+$("#list_data").datagrid({
+	onClickRow : function(index, row) {
+		var classInstId = row.classInstId;
+		var obj = "{queryCode:\"qryFinishClassHigherDetail\",classInstId:\""+classInstId+"\"}";
+		$("#detail_list_data").datagrid({
+			url : "/sys/pubData/qryDataListByPage.do",
+			queryParams:{
+				param : obj
+			}
+		});
+		$("#dlg").form("clear");//清空窗体数据 
+		$("#dlg").dialog("open").dialog("setTitle", "结课班级学员升学明细");//设定表头  
+	}
+});
 </script>

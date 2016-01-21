@@ -2,7 +2,6 @@
 <%
 	String path = request.getContextPath();
 	String studentId = request.getParameter("studentId");
-	System.err.println(studentId);
 	String changeSource = request.getParameter("changeSource");
 %>
 

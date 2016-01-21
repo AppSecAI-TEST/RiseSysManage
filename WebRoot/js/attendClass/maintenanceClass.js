@@ -284,7 +284,7 @@ $(document).ready(function() {
 					var changeSchoolFlag = row.changeSchoolFlag;
 					if("Y" == changeSchoolFlag) {
 						var studentId = row.studentId;
-						window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentCourseId="+studentId+"&changeSource=change";
+						window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentId="+studentId+"&changeSource=change";
 					} else {
 						$.messager.alert('提示', "您选择的学员课程已申请转校，不能再次申请转校！");
 					}
