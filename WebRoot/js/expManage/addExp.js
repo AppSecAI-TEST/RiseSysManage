@@ -1,14 +1,18 @@
 var studentId =null;
 var studentCourseId =null;
 var courseState =null;
+var teacherName=null;
+var stageLevel =null;
+var className =null;
+var classProgress =null;
 $(document).ready(function(){
 	$("#submitBtn").on("click",function(){
 		if(trim($("#remark").val())=="")
 		{
 			$.messager.alert('提示', "请填写异常原因备注！");
 			return false;
-		}
-		var paramValue ='{"studentCourseId":"'+studentCourseId+'","studentId":"'+studentId+'","excId":"","orignCourseState":"'+courseState+'","hours":"","excState":"001","remark":"'+trim($("#remark").val())+'","handlerId":"'+$("#handlerId").val()+'"}';
+		}   
+		var paramValue ='{"stageLevel":"'+stageLevel+'","orignClassName":"'+className+'","studentCourseId":"'+studentCourseId+'","studentId":"'+studentId+'","excId":"","orignCourseState":"'+courseState+'","teacherName":"'+teacherName+'","hours":"'+classProgress+'","excState":"001","remark":"'+trim($("#remark").val())+'","handlerId":"'+$("#handlerId").val()+'"}';
 		$.messager.confirm('提示','您确定要添加该异常？',function(r) {
     			if(r) 
     			{
@@ -40,6 +44,10 @@ function initPage()
 	studentId =info.split(",")[0];
 	studentCourseId =info.split(",")[1];
 	courseState =info.split(",")[2];
+	classProgress =replaceAdd(info.split(",")[3]);
+	stageLevel =info.split(",")[4];
+	className =info.split(",")[5];
+	teacherName =info.split(",")[6];
 	var param = '{"excFlag":"N","studentId":"'+studentId+'"}';
 	$.ajax({
 			type : "POST",
@@ -88,4 +96,25 @@ function initPage()
 	        }
 	    	
 	});
+}
+
+function replaceAdd(s)
+{
+	var newstr = "";
+	if(s.length > 0)
+	{
+		for (var i=0; i<s.length; i++) 
+		{
+			c = s.charAt(i); 
+			if(c=="+")
+			{
+				newstr+="%2B";
+			}
+			else
+			{
+				newstr+=c;
+			}	
+		}
+	}
+   return newstr; 
 }
