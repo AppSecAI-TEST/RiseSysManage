@@ -304,9 +304,9 @@ function validateCourses(studentCourses)
 		{
 			continue;
 		}
-		for(var i=0;i<oldCourses.length;i++)
+		for(var n=0;n<oldCourses.length;n++)
 		{
-			var oldCourse = oldCourses[i];
+			var oldCourse = oldCourses[n];
 			var order = oldCourse.stageOrder;
 			var courseState=oldCourse.courseState;
 			var stageName =oldCourse.stageId;
@@ -407,7 +407,7 @@ var newCourse;//新招课程阶段
 		 {
 			 return false;
 		 }	
-		 countAmount();
+		countAmount();
 		 if(favorPrice<favorAmount)
 		 {
 			showMessage('提示', "实际优惠总金额:"+favorAmount+"元大于连报优惠总金额:"+favorPrice+"元,请核对金额", null);
@@ -447,7 +447,7 @@ var newCourse;//新招课程阶段
     			url: "/sys/course/addLinkCourses.do",
     			data: "param=" +str,
     			dataType: "json",
-    			async: false,
+    			async: true,
     			beforeSend: function()
     	    	{
     	    		showProgressLoader("正在添加课程信息，请稍等……",1000);
