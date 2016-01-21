@@ -20,7 +20,7 @@
 				<tr>
 					<td align="right"><span>校区：</span></td>
 	  				<td width="180px">
-						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 150px; height: 25px;" editable="false"
+						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 			      		onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
 			      		url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=504&fieldId=schoolId">
@@ -47,10 +47,10 @@
 				 <thead>
 					<tr>
 						<th data-options="field:'ck',checkbox:true"></th>
-						<th data-options="field:'schoolName',width:80,align:'center'">校区</th>
-						<th data-options="field:'month',width:100,align:'center'">排课月份</th>
-						<th data-options="field:'staffName',width:100,align:'center'">创建人</th>
-						<th data-options="field:'createDate',width:50,align:'center'">创建时间</th>
+						<th data-options="field:'schoolName',width:20,align:'center'">校区</th>
+						<th data-options="field:'month',width:30,align:'center'">排课月份</th>
+						<th data-options="field:'staffName',width:30,align:'center'">创建人</th>
+						<th data-options="field:'createDate',width:30,align:'center'">创建时间</th>
 					</tr>
 				</thead>
 			</table>
@@ -177,10 +177,27 @@
     	 	var createMonthId=row.createMonthId;
     	 	var month=row.month;
     	 	var schoolId=row.schoolId;
-    		window.location.href = "/sys/time/updatePlan.jsp?time="+month+"&createMonthId="+createMonthId+"&schoolId="+schoolId;
+    		window.location.href = "/sys/time/updatePlan.jsp?flag=update&time="+month+"&createMonthId="+createMonthId+"&schoolId="+schoolId;
       }
     );
     
+       $("#viewPlan").click(function()
+      {
+    	 	var row = $('#list_data').datagrid('getSelected');
+    	 	
+    	 	if(row)
+    	 	{
+				flag = true;
+			} else {
+				$.messager.alert('提示', "请先选择排课月份！");
+			}
+    	 	
+    	 	var createMonthId=row.createMonthId;
+    	 	var month=row.month;
+    	 	var schoolId=row.schoolId;
+    		window.location.href = "/sys/time/updatePlan.jsp?flag=view&time="+month+"&createMonthId="+createMonthId+"&schoolId="+schoolId;
+      }
+    );
       function myformatter(date){
             var y = date.getFullYear();
             var m = date.getMonth()+1;
