@@ -174,3 +174,14 @@
   		</div>
   	</body>
 </html>
+<script type="text/javascript" >
+$("#view").click(function()
+	{
+	$("#pagetabs").tabs("add", {
+			title: "排期表",
+			closable: true,
+			cache: false,
+			content : "<iframe name='排期表' src='/sys/time/planRoom.jsp' width='100%' height='99%' frameborder='0' scrolling='auto'></iframe>"
+		});
+	});
+</script>
