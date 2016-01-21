@@ -75,5 +75,11 @@ public class AuthService
 			return result;
 		}
 	}
+	
+	public String logoutStaff(int staffId , String remoteIp) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20014\",securityCode:\"0000000000\",params:{staffId:\""+staffId+"\",remoteIp:\""+remoteIp+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
 }
 

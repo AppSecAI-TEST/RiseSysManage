@@ -105,7 +105,10 @@
 						onLoadSuccess:function(data){
 							for(var i = 0,n = data.total;i < n;i++)
 							{
-								$("#operButton"+i).linkbutton({text:data.rows[i].state=="00A"?'离职':'复职',iconCls:"icon-reload"});
+								if(data.rows[i])
+								{
+									$("#operButton"+i).linkbutton({text:(data.rows[i].state=="00A"?'离职':'复职'),iconCls:"icon-reload"});
+								}
 							}
 						}
 					});
@@ -121,7 +124,10 @@
 					onLoadSuccess:function(data){
 						for(var i = 0,n = data.total;i < n;i++)
 						{
-							$("#operButton"+i).linkbutton({text:data.rows[i].state=="00A"?'离职':'复职',iconCls:"icon-reload"});
+							if(data.rows[i])
+							{
+								$("#operButton"+i).linkbutton({text:(data.rows[i].state=="00A"?'离职':'复职'),iconCls:"icon-reload"});
+							}
 						}
 					}
 				});

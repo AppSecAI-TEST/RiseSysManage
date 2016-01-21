@@ -200,7 +200,13 @@
 					formatter:formatSchool, 
 					valueField: 'schoolId', 
 					textField: 'schoolName', 
-					panelHeight: 'auto'
+					panelHeight: 'auto',
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+						{
+							$("#schoolManId").combobox("setValue",data[0].schoolId);
+						}
+					}
 				});
 				$("#classManState").combobox({
 					formatter:formatItem, 
@@ -220,7 +226,13 @@
 					formatter:formatSchool, 
 					valueField: 'schoolId', 
 					textField: 'schoolName', 
-					panelHeight: 'auto'
+					panelHeight: 'auto',
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+						{
+							$("#schoolHisId").combobox("setValue",data[0].schoolId);
+						}
+					}
 				});
 				$("#classHis").combobox({
 					formatter:function(row){

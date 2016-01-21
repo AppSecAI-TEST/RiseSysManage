@@ -134,14 +134,16 @@
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 					</tr>
-					<tr>
-						<td align="right">*登录密码:</td>
-						<td><input name="password" id="password" type="password" style="width:246px" validType="length[4,20]" missingMessage="请输入登录密码" class="easyui-textbox easyui-validatebox" required="true" /></td>
-						<td align="right">*确认密码:</td>
-						<td><input name="confirm" id="confirm" type="password" style="width:246px" validType="equalTo['#password']" missingMessage="请输入确认密码" invalidMessage="两次输入密码不匹配" class="easyui-textbox easyui-validatebox" required="true" /></td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-					</tr>
+					<c:if test="${pageFlag == 'NEW'}">
+						<tr>
+							<td align="right">*登录密码:</td>
+							<td><input name="password" id="password" type="password" style="width:246px" validType="length[4,20]" missingMessage="请输入登录密码" class="easyui-textbox easyui-validatebox" required="true" /></td>
+							<td align="right">*确认密码:</td>
+							<td><input name="confirm" id="confirm" type="password" style="width:246px" validType="equalTo['#password']" missingMessage="请输入确认密码" invalidMessage="两次输入密码不匹配" class="easyui-textbox easyui-validatebox" required="true" /></td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+					</c:if>
 					<tr>
 						<td align="right">担任:</td>
 						<td colspan="5" style="padding:0 0;">

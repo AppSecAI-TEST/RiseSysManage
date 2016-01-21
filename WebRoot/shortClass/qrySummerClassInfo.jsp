@@ -131,7 +131,13 @@
 					formatter:formatSchool, 
 					valueField: 'schoolId', 
 					textField: 'schoolName', 
-					panelHeight: 'auto'
+					panelHeight: 'auto',
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+						{
+							$("#schoolId").combobox("setValue",data[0].schoolId);
+						}
+					}
 				});
 			});
 			function queryFunc()
