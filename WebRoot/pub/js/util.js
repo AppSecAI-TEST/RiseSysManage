@@ -935,3 +935,38 @@ function initRPQryButton(qryName,resetName,formName,tableName)
     	$("#"+formName+"").form('clear');//清空窗体数据  
     });
 }
+
+//绑定非报表页面重置按钮事件及重置后的校区阶段控制
+function initResetButton(resetName,formName)
+{
+	var schoolArr =['schoolId','schoolIds','approveSchoolId','actionSchoolId'];
+	var stageArr =['stageId','stageIds'];
+	$("#"+resetName+"").click(function() 
+    {
+    	$("#"+formName+"").form('clear');//清空窗体数据  
+    	//校区赋默认值
+    	for(var i=0;i<schoolArr.length;i++)
+    	{
+    		var schoolObj =$("#"+formName+"").find("#"+schoolArr[i]);
+    		if(schoolObj.length>0)
+    		{
+    			if(schoolObj.combobox("getData").length>0)
+    			{
+    				schoolObj.combobox("select",schoolObj.combobox("getData")[0].schoolId);
+    			}	
+    		}	
+    	}
+    	//阶段赋默认值
+    	for(var j=0;j<stageArr.length;j++)
+    	{
+    		var stageObj =$("#"+formName+"").find("#"+stageArr[j]);
+	    	if(stageObj.length>0)
+	    	{
+	    		if(stageObj.combobox("getData").length>0)
+	    		{
+	    			 stageObj.combobox("select",stageObj.combobox("getData")[0].stageId);
+	    		}	
+	    	}
+    	}	
+    });
+}

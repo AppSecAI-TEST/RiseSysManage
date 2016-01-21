@@ -67,7 +67,7 @@
 </html>
 <script type="text/javascript">
 
-
+initResetButton("reset","qryFm")
 $("#qryBtn").click(function(){
 	
 	var startDate=$("#startTime").datebox("getValue");
