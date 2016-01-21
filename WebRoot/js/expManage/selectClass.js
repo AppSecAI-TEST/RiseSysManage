@@ -10,12 +10,16 @@ $(document).ready(function(){
 			var studentId = row.studentId;
 			var studentCourseId =row.studentCourseId;
 			var courseState =row.courseState;
+			var classProgress =row.classProgress;
+			var stageLevel =row.stageLevel;
+			var className =row.className;
+			var teacherName =row.teacherName;
 			if(studentId==null||studentCourseId==null)
 			{
 				$.messager.alert('提示', "此学生没有课程信息");
 				return false;
 			}	
-			window.location.href="addExp.jsp?addInfo="+studentId+","+studentCourseId+","+courseState;
+			window.location.href="addExp.jsp?addInfo="+studentId+","+studentCourseId+","+courseState+","+classProgress+","+stageLevel+","+className+","+teacherName;
 		}	
 	});
 });
