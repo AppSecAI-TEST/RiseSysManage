@@ -17,6 +17,7 @@
   	</head>
   	<body>
 		<form id="manFm" style="margin:0 auto;">
+			<input type="hidden" id="warmupCnt" name="warmupCnt" />
 			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 				<tr>
 					<td align="right" width="8%">
@@ -59,7 +60,7 @@
 			<a href="javascript:void(0)" id="exportBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="exportFunc()">导出</a>
 		</div>
 		<script type="text/javascript">
-			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=851&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
@@ -72,6 +73,19 @@
 			});
 			function queryFunc()
 			{
+				var warmupStart = $("#warmupStart").textbox("getValue");
+				var warmupEnd = $("#warmupEnd").textbox("getValue");
+				var planTimesStart = $("#planTimesStart").textbox("getValue");
+				var planTimesEnd = $("#planTimesEnd").textbox("getValue");
+				$("#warmupCnt").val("");
+				if(warmupStart != "" && warmupEnd != "")
+				{
+					$("#warmupCnt").val("1");
+				}
+				if(planTimesStart != "" && planTimesEnd != "")
+				{
+					$("#warmupCnt").val("1");
+				}
 				var obj = $("#manFm").serializeObject();
 				obj["queryCode"] = "qryWarmupSummary";
 				obj["funcNodeId"] = "38142";
@@ -85,6 +99,7 @@
 			}
 			function resetFunc()
 			{
+				$("#warmupCnt").val("");
 				$("#schoolManId").combobox("setValue","");
 				$("#warmupStart").textbox("setValue","");
 				$("#warmupEnd").textbox("setValue","");
