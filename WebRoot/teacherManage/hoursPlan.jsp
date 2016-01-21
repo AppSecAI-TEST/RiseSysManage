@@ -18,18 +18,19 @@
   				<tr>
   					<td align="right">校　　区：</td>
   					<td>
-  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:120px;height:25px"
-							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-				      		url="<%=path %>/pubData/qrySchoolList.do">
-        				</select>
+  					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
+			      		onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
+			      		url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=5041&fieldId=schoolId">
+		        		</select>
   					</td>
   					<td align="right">教师英文名：</td>
   					<td>
-  						<input class="easyui-textbox" name="byName" id="byName" style="width:150px;height: 25px" />
+  						<input class="easyui-textbox" name="byName" id="byName" style="width:100px;height: 25px" />
   					</td>
   					<td align="right">职务：</td>
   					<td>
-  						<select name='postId' class="easyui-combobox" style="width:150px;height: 25px"></select>
+  						<select name='postId' class="easyui-combobox" style="width:100px;height: 25px"></select>
   					</td>
   					<td>
   						教师状态：<input name="P" id="P" value="P" type="checkbox">在职 &nbsp;<input name="R_L" id="R_L" value="R_L" type="checkbox">待离职 &nbsp;<input value="L" name="L" id="L" type="checkbox">离职 &nbsp;
