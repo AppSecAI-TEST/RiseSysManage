@@ -58,7 +58,7 @@
 						<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
 						<th data-options="field:'byName',width:100,align:'center'">英文名</th>
 						<th data-options="field:'phone',width:200,align:'center'">联系电话</th>
-						<th data-options="field:'classType',width:100,align:'center'">当前课程</th>
+						<th data-options="field:'stageId',width:100,align:'center'">当前课程</th>
 						<th data-options="field:'feeTypeText',width:100,align:'center'">业绩类型</th>
 						<th data-options="field:'adviserName',width:100,align:'center'">业绩顾问</th>
 						<th data-options="field:'className',width:100,align:'center'">在读班</th>

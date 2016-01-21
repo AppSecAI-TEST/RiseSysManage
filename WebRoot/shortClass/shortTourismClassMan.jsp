@@ -110,8 +110,8 @@
 					formatter:formatSchool, 
 					valueField: 'schoolId', 
 					textField: 'schoolName', 
-					//panelHeight: 'auto',
-					listHeight:150,
+					panelHeight: 'auto',
+					//listHeight:150,
 					editable:false,
 					onSelect:function(data){
 						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:data.schoolId},function(data){

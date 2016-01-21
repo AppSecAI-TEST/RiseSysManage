@@ -1,8 +1,9 @@
 $(document).ready(function() {
-	var studentCourseId = $("#studentCourseId").val();
+	var studentId = $("#studentId").val();
+	var param = "{queryCode:\"qryApplyStudentCourseInfo\",studentId:\""+studentId+"\"}";
 	$.ajax({
 		url: "/sys/pubData/qryData.do",
-		data: "param={'queryCode':'qryApplyStudentCourseInfo','studentCourseId':'"+studentCourseId+"'}",
+		data: "param=" + param,
 		dataType: "json",
 		async: true,
 		beforeSend: function()
@@ -19,54 +20,56 @@ $(document).ready(function() {
 				$("#classNameText").html(obj.className);
 				$("#teacherNameText").html(obj.teacherName);
 				
-				$("#schoolId").val(obj.schoolId);
-				$("#studentId").val(obj.studentId);
-				$("#outSchoolId").val(obj.schoolId);
+				var schoolId = obj.schoolId;
+				$("#schoolId").val(schoolId);
+				$("#studentId").val(studentId);
+				$("#outSchoolId").val(schoolId);
 				$("#outClassId").val(obj.classInstId);
+				$("#studentCourseId").val(obj.studentCourseId);
+				
+				$("#course_list_data").datagrid({ 
+					url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1016',studentId:'"+studentId+"'}",
+					onLoadSuccess: function() { 
+						var rows = $("#course_list_data").datagrid('getRows');
+						if(parseInt(rows.length) <= 0) {
+							$("#courseTr").css("display", "none");
+						}
+					}
+				});
+				
+				$("#international_list_data").datagrid({ 
+					url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1038',studentId:'"+studentId+"'}",
+					onLoadSuccess: function() { 
+						var rows = $("#international_list_data").datagrid('getRows');
+						if(parseInt(rows.length) <= 0) {
+							$("#internationalTr").css("display", "none");
+						}
+					}
+				});
+				
+				$("#travel_list_data").datagrid({ 
+					url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1039',studentId:'"+studentId+"'}",
+					onLoadSuccess: function() { 
+						var rows = $("#travel_list_data").datagrid('getRows');
+						if(parseInt(rows.length) <= 0) {
+							$("#travelTr").css("display", "none");
+						}
+					}
+				});
+				
+				$("#gift_list_data").datagrid({ 
+					url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1030',studentId:'"+studentId+"'}",
+					onLoadSuccess: function() { 
+						var rows = $("#gift_list_data").datagrid('getRows');
+						if(parseInt(rows.length) <= 0) {
+							$("#giftTr").css("display", "none");
+						}
+					}
+				});
 			});
 		}
 	});
 	
-	var studentId = $("#studentId").val();
-	$("#course_list_data").datagrid({ 
-		url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1016',studentId:'"+studentId+"'}",
-		onLoadSuccess: function() { 
-			var rows = $("#course_list_data").datagrid('getRows');
-			if(parseInt(rows.length) <= 0) {
-				$("#courseTr").css("display", "none");
-			}
-		}
-	});
-	
-	$("#international_list_data").datagrid({ 
-		url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1038',studentId:'"+studentId+"'}",
-		onLoadSuccess: function() { 
-			var rows = $("#international_list_data").datagrid('getRows');
-			if(parseInt(rows.length) <= 0) {
-				$("#internationalTr").css("display", "none");
-			}
-		}
-	});
-	
-	$("#travel_list_data").datagrid({ 
-		url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1039',studentId:'"+studentId+"'}",
-		onLoadSuccess: function() { 
-			var rows = $("#travel_list_data").datagrid('getRows');
-			if(parseInt(rows.length) <= 0) {
-				$("#travelTr").css("display", "none");
-			}
-		}
-	});
-	
-	$("#gift_list_data").datagrid({ 
-		url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1030',studentId:'"+studentId+"'}",
-		onLoadSuccess: function() { 
-			var rows = $("#gift_list_data").datagrid('getRows');
-			if(parseInt(rows.length) <= 0) {
-				$("#giftTr").css("display", "none");
-			}
-		}
-	});
 	
     //上传
     $("#uploadBtn").click(function() {

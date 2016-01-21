@@ -56,8 +56,13 @@ $(document).ready(function() {
 				var classStudentNum = row.classStudentNum;
 				var minNum = row.minNum;
 				if(classStudentNum >= minNum) {
-					var classInstId = row.classInstId;
-					window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=normal&applyType=001";
+					var isOpenFlag = row.isOpenFlag;
+					if("Y" == isOpenFlag) {
+						var classInstId = row.classInstId;
+						window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=normal&applyType=001";
+					} else {
+						$.messager.alert('提示', "您选择的班级中还有在读学员，暂不能申请开班！");
+					}
 				} else {
 					$.messager.alert('提示', "您选择的班级正常开班的最少人数为"+minNum+"人，定班人数至少要达到最少人数才能申请正常开班！");
 				}
@@ -83,11 +88,23 @@ $(document).ready(function() {
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) {
 			var openClassType = row.openClassType;
+			alert(openClassType)
 			if(openClassType == "" || openClassType == null || openClassType == undefined) {
-				var classInstId = row.classInstId;
-				window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=exception&applyType=001";
+				var classStudentNum = row.classStudentNum;
+				if(classStudentNum > 0) {
+					var isOpenFlag = row.isOpenFlag;
+					if("Y" == isOpenFlag) {
+						var classInstId = row.classInstId;
+						window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=exception&applyType=001";
+					} else {
+						$.messager.alert('提示', "您选择的班级中还有在读学员，暂不能申请开班！");
+					}
+				} else {
+					$.messager.alert('提示', "您选择的班级中还没有学员，暂不能申请开班！");
+				}
 			} else {
 				var openClassState = row.openClassState;
+				alert(openClassState)
 				if(openClassState == '001') {
 					$.messager.alert('提示', "您选择的班级开班申请正在审批中，不能申请异常开班！");
 				} else if(openClassState == '002') {

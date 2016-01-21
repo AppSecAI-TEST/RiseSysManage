@@ -114,7 +114,7 @@ function restore()
 		    			} 
 		    			else if(resumeType == "003") 
 		    			{
-							window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentCourseId="+studentCourseId+"&changeSource=exception";
+							window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentId="+studentId+"&changeSource=exception";
 		    			}
 		    		} 
 		    		else if(result == "false") 

@@ -89,14 +89,14 @@
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=806&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=CLASS_TYPE",function(data){
+			$.post("<%=path %>/pubData/qryStage.do",function(data){
 				$("#classType").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
 				$("#classType").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
+					formatter:formatStageId, 
+					valueField: 'stageId', 
+					textField: 'stageId', 
 					panelHeight: 'auto',
 					editable:false
 				});

@@ -805,7 +805,7 @@ $('#stageId').combobox({
 		url = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\",schoolId:\""+ <%=schoolId%> + "\"}";
 	}else//已有
 	{
-		url= "/sys/pubData/qryData.do?param={queryCode:\"Qry_Old_Stage_Class\",setPriceId:\""+ setPriceId + "\",stageId:\""+ stageType + "\",classType:\""+ classType + "\"}";
+		url= "/sys/pubData/qryData.do?param={queryCode:\"Qry_Old_Stage_Class\",setPriceId:\""+ setPriceId + "\",stageId:\""+ stageType + "\"}";
 	}
 	
 	$("#classType").combobox(
@@ -827,7 +827,7 @@ $('#stageId').combobox({
 			{
 				if(classType==data[i].classType || data.length==1)
 				{
-					$("#classType").combobox('select',data[i].classType);
+					$("#classType").combobox('setValue',data[i].classType);
 					$("#totalAmount").textbox('setValue', data[i].amount);
 					minus = $("#minusAmount").textbox('getValue');
 					favorAmount = $("#favorAmount").textbox('getValue');
@@ -880,9 +880,9 @@ function initOldCourse()
 		var courseT=eval("("+json+")");
 		var stageId=courseT.stageId;
 		var classType=courseT.classType;
-		$("#stageId").combobox({ disabled: true});
-		$("#classType").combobox({ disabled: true});
-		$("#feeType").combobox({ disabled: true});
+		//$("#stageId").combobox({ disabled: true});
+		//$("#classType").combobox({ disabled: true});
+		//$("#feeType").combobox({ disabled: true});
 		for ( var i = 0; i < advisters.length; i++)
 		{
 			if (advisterAid == advisters[i].staffId) 

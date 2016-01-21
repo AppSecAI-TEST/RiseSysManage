@@ -197,8 +197,8 @@
 					formatter:formatSchool, 
 					valueField: 'schoolId', 
 					textField: 'schoolName', 
-					//panelHeight: 'auto',
-					listHeight:150,
+					panelHeight: 'auto',
+					//listHeight:150,
 					editable:false,
 					data:attRecordSchoolIdData,
 					onChange:function(value){

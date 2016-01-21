@@ -24,13 +24,19 @@
 			      		url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=5041&fieldId=schoolId">
 		        		</select>
   					</td>
-  					<td align="right">教师英文名：</td>
+  					<td align="right">教师：</td>
   					<td>
-  						<input class="easyui-textbox" name="byName" id="byName" style="width:100px;height: 25px" />
+  						<input name="teacherId"  class="easyui-combobox vaildatebox" id="teacherId"
+								style="width: 100px; height: 25px;"
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'" required="true" />
   					</td>
   					<td align="right">职务：</td>
   					<td>
-  						<select name='postId' class="easyui-combobox" style="width:100px;height: 25px"></select>
+  						<select name='postId' class="easyui-combobox" style="width:100px;height: 25px"
+  						data-options="valueField: 'postId', textField: 'postName', panelHeight: 'auto',
+			      		onLoadSuccess:function(data){$('#postId').combobox('setValue',data[0].postId);}"
+			      		url="<%=path %>/pubData/qryPostList.do?postType=T"
+  						></select>
   					</td>
   					<td>
   						教师状态：<input name="P" id="P" value="P" type="checkbox">在职 &nbsp;<input name="R_L" id="R_L" value="R_L" type="checkbox">待离职 &nbsp;<input value="L" name="L" id="L" type="checkbox">离职 &nbsp;
@@ -67,7 +73,20 @@
 </html>
 <script type="text/javascript">
 
-initResetButton("reset","qryFm")
+ 
+initResetButton("reset","qryFm");
+ 
+$("#schoolId").combobox({
+		onChange:function(){
+			var sId =$("#schoolId").combobox("getValue");
+			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+			$("#teacherId").combobox({
+				url:urls
+			});
+		}
+	})
+
+ 
 $("#qryBtn").click(function(){
 	
 	var startDate=$("#startTime").datebox("getValue");

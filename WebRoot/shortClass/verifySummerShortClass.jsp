@@ -84,7 +84,7 @@
 			ajaxLoadEnd();
 			function attendSubmit()
 			{
-				$.messager.confirm('提示','您确定审批当前热身课吗?',function(r){
+				$.messager.confirm('提示','您确定审批当前课程吗?',function(r){
 					if (r){
 						ajaxLoading("审批中...");
 						$.post('/sys/shortBus/verifyShortClassFunc.do',{shortClassInstId:${shortClassInstT.shortClassInstId},handlerId:${sessionScope.StaffT.staffId},isPutClass:$("input[name='isPutClass']:checked").val(),verifyCont:$("#verifyCont").textbox("getValue")},function(result){

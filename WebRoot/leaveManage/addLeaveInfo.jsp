@@ -37,7 +37,7 @@
  		<form id="addLeaveForm" method="post" enctype="multipart/form-data">
  		<table width="100%" cellpadding="5px" class="maintable" id="courseTd">
  			<tr>
- 				<td align="center"><span>课程名称</span></td>
+ 				<td align="center"><span>课程阶段</span></td>
  				<td align="center"><span>课程状态</span></td>
  				<td align="center"><span>校区</span></td>
  				<td align="center"><span>缴费时间</span></td>
@@ -46,23 +46,27 @@
  				<td align="center"><span>开课日期</span></td>
  				<td align="center"><span>结课日期</span></td>
  				<td align="center"><span>课程进度</span></td>
+ 				<td align="center"><span>带班老师</span></td>
  				<td align="center"><span>业绩顾问</span></td>
+ 				<td align="center"><span>业绩老师</span></td>
  				<td align="center"><span>责任顾问</span></td>
  				<td align="center"><span>客户关怀</span></td>
  				<c:forEach items="${obj.courseInfo}" var="courseInfo">
  					<tr>
- 						<td align="center"><span>${courseInfo.courseName}</span></td>
- 						<td align="center"><span>${courseInfo.courseState}</span></td>
- 						<td align="center"><span>${courseInfo.schoolName}</span></td>
+ 						<td align="center"><span>${courseInfo.stageId}</span></td>
+ 						<td align="center"><span>${courseInfo.courseStateText}</span></td>
+ 						<td align="center"><span>${courseInfo.paySchoolName}</span></td>
  						<td align="center"><span>${courseInfo.payDate}</span></td>
- 						<td align="center"><span>${courseInfo.feeType}</span></td>
+ 						<td align="center"><span>${courseInfo.feeTypeText}</span></td>
  						<td align="center"><span>${courseInfo.className}</span></td>
- 						<td align="center"><span>${courseInfo.startTime}</span></td>
- 						<td align="center"><span>${courseInfo.finishTime}</span></td>
+ 						<td align="center"><span>${courseInfo.startDate}</span></td>
+ 						<td align="center"><span>${courseInfo.finishDate}</span></td>
  						<td align="center"><span>${courseInfo.classProgress}</span></td>
- 						<td align="center"><span>${courseInfo.adviser}</span></td>
- 						<td align="center"><span>${courseInfo.dutyAdvister}</span></td>
- 						<td align="center"><span>${courseInfo.carer}</span></td>
+ 						<td align="center"><span>${courseInfo.classTeacherName}</span></td>
+ 						<td align="center"><span>${courseInfo.adviserName}</span></td>
+ 						<td align="center"><span>${courseInfo.adviserTeacherName}</span></td>
+ 						<td align="center"><span>${courseInfo.dutyAdvisterName}</span></td>
+ 						<td align="center"><span>${courseInfo.carerName}</span></td>
  					</tr>
  				</c:forEach>
  			</tr>
@@ -87,6 +91,9 @@
  		<input id="studentId" type="hidden" value="${obj.studentInfo.studentId}" />
  		<input id="schoolId" type="hidden" value="${schoolId}" />
  		<input id="courseState" type="hidden" value="${courseState}" />
+ 		<input id="stageLevel" type="hidden" value="${stageLevel}" />
+ 		<input id="className" type="hidden" value="${className}" />
+ 		<input id="teacherName" type="hidden" value="${teacherName}" />
  		<input id="studentCourseId" type="hidden" value="${studentCourseId}" />
  		<input id="currentHours" type="hidden" value="${currentHours}" />
       	<table style="margin-top: 20px;min-width:1100px; width:99%;">

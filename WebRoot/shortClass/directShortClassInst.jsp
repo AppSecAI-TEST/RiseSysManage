@@ -105,8 +105,8 @@
 					formatter:formatSchool, 
 					valueField: 'schoolId', 
 					textField: 'schoolName', 
-					//panelHeight: 'auto',
-					listHeight:150,
+					panelHeight: 'auto',
+					//listHeight:150,
 					editable:false,
 					onChange:function(value){
 						$("#teacherId").combobox("setValue","");

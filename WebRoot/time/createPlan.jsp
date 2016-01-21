@@ -27,12 +27,13 @@
 					</td>
 					<td>
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="width:100px; height: 25px;" id="submit" funcNodeId="1000">创建</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px" onclick="javascript:window.history.back()">返回</a>
 					</td>
 				</tr>
 			</table>
 		 
 		<div style="padding:5px 0;min-width:1100px; width:100%;">
-			<table class="easyui-datagrid" title="排课" style="height:200px;" toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false" id="weekDg" url="">
+			<table class="easyui-datagrid" title="排课" style="height:500px;" toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false" id="weekDg" url="">
 				 <thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>

@@ -166,7 +166,7 @@
 				$("#schoolManId").combobox("loadData",data);
 				$("#schoolHisId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=CLASS_TYPE",function(data){
+			$.post("<%=path %>/pubData/qryStage.do",function(data){
 				$("#classType").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
@@ -187,9 +187,9 @@
 					panelHeight: 'auto'
 				});
 				$("#classType").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
+					formatter:formatStageId, 
+					valueField: 'stageId', 
+					textField: 'stageId', 
 					panelHeight: 'auto'
 				});
 				$("#classManState").combobox({

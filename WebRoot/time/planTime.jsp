@@ -5,6 +5,7 @@
 	String createWeekId=request.getParameter("createWeekId");
 	String dateRange=request.getParameter("dateRange");
 	String schoolId=request.getParameter("schoolId");
+	String flag=request.getParameter("flag");
 
 %>
 <!DOCTYPE html>
@@ -530,6 +531,10 @@ function addPlanTime(planT,tab)
   
 function onClickCell(index, field,value)
 {
+	if('<%=flag%>'=='view')
+	{
+		return;	
+	}
 	if(value==undefined)
 	{
 		value ="";

@@ -10,8 +10,8 @@ $('#shortClassId').combobox({
 		var payDate=$("#payDate").datebox('getValue');
 		if(payDate=='')
 		{
-			$("#shortClassId").combobox('setText',"");
-			$("#shortClassType").combobox('setText',"");
+			$("#shortClassId").combobox('setValue',"");
+			$("#shortClassType").combobox('setValue',"");
 			$("#totalAmount").textbox('setValue', '');
 			$.messager.alert('提示', "请选择缴费时间");	
 			return;

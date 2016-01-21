@@ -1,8 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
+	String studentId = request.getParameter("studentId");
 	String changeSource = request.getParameter("changeSource");
-	String studentCourseId = request.getParameter("studentCourseId");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -20,13 +20,13 @@
 	  		</div>
   			<form id="applyChangeSchoolFm" method="post" enctype="multipart/form-data">
   				<input type="hidden" id="schoolId" name="schoolId"/>
-  				<input type="hidden" id="studentId" name="studentId"/>
   				<input type="hidden" id="outSchoolId" name="outSchoolId"/>
   				<input type="hidden" id="outClassId" name="outClassId"/>
   				<input type="hidden" id="applyType" name="applyType" value="002"/>
+  				<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
   				<input type="hidden" id="changeSource" name="changeSource" value="<%=changeSource %>"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
-  				<input type="hidden" id="studentCourseId" name="studentCourseId" value="<%=studentCourseId %>"/>
+  				<input type="hidden" id="studentCourseId" name="studentCourseId"/>
   				<div class="easyui-panel" style="min-width:1100px; width:100%; height:auto;" title="学员信息">
 		  			<table width="100%" cellpadding="5px" class="maintable" id="applyChangeClassTd">
 		  				<tr>
