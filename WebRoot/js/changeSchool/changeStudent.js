@@ -60,8 +60,8 @@ $(document).ready(function() {
 			if("N" == changeClassFlagText) {
 				var changeSchoolFlagText = row.changeSchoolFlagText;
 				if("N" == changeSchoolFlagText) {
-					var studentCourseId = row.studentCourseId;
-					window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentCourseId="+studentCourseId+"&changeSource=change";
+					var studentId = row.studentId;
+					window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentId="+studentId+"&changeSource=change";
 				} else {
 					$.messager.alert('提示', "您选择的学员课程已经申请转校，不能再次申请转校！");
 				}

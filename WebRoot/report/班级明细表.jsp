@@ -34,8 +34,8 @@
 						<td align="right" width="100px"><span>班级状态：</span></td>
 						<td width="114px">
 							<select id="classState" name="classState" class="easyui-combobox" style="width: 114px; height: 25px;"
-								data-options="formatter:formatStageId, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
-			      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE&codeFlag='003','004'">
+								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
+			      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE&codeFlag=003,004">
 				        	</select>
 						</td>
 						<td width="150px">&nbsp;</td>

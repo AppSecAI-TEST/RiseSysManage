@@ -184,7 +184,7 @@ function restartSubmit()
 	    			} else if(resumeType == "002") {
 	    				window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&changeSource=leave";
 	    			} else if(resumeType == "003") {
-						window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentCourseId="+studentCourseId+"&changeSource=leave";
+						window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentId="+studentId+"&changeSource=leave";
 	    			}
 	    		} else if(flag == "false") {
 	    			if(resumeType == "001") {
