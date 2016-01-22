@@ -104,7 +104,7 @@
 			</table>
 		 
 		</div>
-			<div style="height: 10px;"></div>
+			<div style="height: 5px;"></div>
 			<input id="studentCourseId" name="studentCourseId" type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"studentCourseId")%>"/>
     	    <input id="oldClassType"  type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"classType")%>"/>
     	    <input id="oldStageId"   type="hidden" value="<%=StringUtil.getJSONObjectKeyVal(object,"stageId")%>"/>
@@ -114,7 +114,7 @@
 			<input type="hidden" id="paySchoolId" name="paySchoolId" value="<%=schoolId%>" />	
 			<input type="hidden" id="studentId" name="studentId" value="<%=studentId%>">
 			<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}" />
-			<input type="hidden" id="coursePriceId" name="coursePriceId" value="" />
+			<input type="hidden" id="coursePriceId" name="coursePriceId" value="<%=StringUtil.getJSONObjectKeyVal(object,"coursePriceId")%>" />
 		
 			<div id="short">
 				<div class="easyui-panel" style="width: 1200px; height: auto;"
@@ -141,29 +141,33 @@
 								<select>
 							</td>
 							</tr>
-							<tr>
+							<tr >
 							<td align="right">
-							<span>业绩老师A：</span>
-						</td>
-						<td>
-							<select name="adviserTeacherA" class="easyui-combobox" id="adviserTeacherA"
-								style="width: 150px; height: 28px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-								onLoadSuccess:function(data){$('#adviserTeacherA').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherA")%>');}"
-	      						url="<%=path %>/pubData/qryTeacherList.do">
+								<select class="easyui-combobox" editable='false' id="adviserType" name="adviserType" style="width: 100px; height: 25px;">
+								<option value='0'>业绩老师</option>
+								<option value='1'>业绩顾问</option>
+								</select>
+								<span>A：</span>
+							</td>
+							<td  id="adviserTd1" align="left">
+							<select  editable='false' id="s_schooldA" style="width: 100px; height: 25px;"
+											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+												style="width: 100px; height: 25px;">
 							</select>
-						</td>
-						<td align="right">
-							<span>业绩老师B：</span>
-						</td>
-						<td>
-							<select name="adviserTeacherB" class="easyui-combobox" id="adviserTeacherB"
-								style="width: 150px; height: 28px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto',
-								onLoadSuccess:function(data){$('#adviserTeacherB').combobox('setValue','<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherB")%>');}"
-	      						url="<%=path %>/pubData/qryTeacherList.do">
-							</select>
-						</td>
+							<select editable='false' id="s_teacherA" name="staffIdA" style="width: 100px; height: 25px;"  required="true">
+							<select>
+							</td>
+							<td align="right">
+								<span>B：</span>
+							</td>
+							<td id="adviserTd2" align="left">
+								<select  editable='false' id="s_schooldB" style="width: 100px; height: 25px;"
+											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+												style="width: 100px; height: 25px;">
+												</select>
+								<select  editable='false' id="s_teacherB" name="staffIdB" style="width: 100px; height: 25px;">
+								<select>
+							</td>
 						</tr>
 						<tr>
 							<td align="right">
@@ -224,30 +228,30 @@
 						</td>
 						 
 						<td align="left">
-							<input id="minusAmount" name="minusAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>"  readonly="readonly" class="easyui-textbox validatebox" style="width: 200px; height: 25px;">
+							<input id="minusAmount" name="minusAmount" type="text" value="<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>"  readonly="readonly" class="easyui-textbox validatebox" style="width: 100px; height: 25px;">
 						</td>
 						<td align="left">
 						 <span>优惠金额：</span> 
 						 </td>
 						 <td align="left">
-				      	 <input id="favorAmount"   name="favorAmount" type="text" readonly="readonly"  value="<%=StringUtil.getJSONObjectKeyVal(object,"favorAmount")%>" class="easyui-textbox validatebox"  style="width: 200px; height: 25px;"/> 
+				      	 <input id="favorAmount"   name="favorAmount" type="text" readonly="readonly"  value="<%=StringUtil.getJSONObjectKeyVal(object,"favorAmount")%>" class="easyui-textbox validatebox"  style="width: 100px; height: 25px;"/> 
 				      	 </td>
 						<td align="right">
 							<span>实缴金额：</span>
 						</td>
 						<td align="left">
-							<input id="amount" name="amount" type="text"   readonly="readonly" value="<%=StringUtil.getJSONObjectKeyVal(object,"amount")%>" class="easyui-textbox validatebox" style="width: 200px; height: 25px;">
+							<input id="amount" name="amount" type="text"   readonly="readonly" value="<%=StringUtil.getJSONObjectKeyVal(object,"amount")%>" class="easyui-textbox validatebox" style="width: 100px; height: 25px;">
 						</td>
 					</tr>
 				</table>
 			</div>
 		</form>
-		<div style="width: 1200px; text-align: center">
+		<div style="width: 1200px; text-align: center;margin-top:25px">
 			<a href="javascript:void(0)" class="easyui-linkbutton"
-				iconCls="icon-ok" style="width: 150px" id="submitBtn"><span>提交</span>
+				iconCls="icon-ok" style="width: 100px" id="submitBtn"><span>提交</span>
 			</a> &nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="javascript:void(0)" class="easyui-linkbutton"
-				iconCls="icon-back" style="width: 150px" id="backBtn"><span>返回</span>
+				iconCls="icon-back" style="width: 100px" id="backBtn"><span>返回</span>
 			</a>
 			<iframe id="dlg" class="easyui-dialog"
 				style="width: 1000px; height: 450px; padding: 10px 20px"
@@ -274,22 +278,165 @@ var amount = 0;//实缴金额
 
 var oldMinusAmount='<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>';
 
+var schools=getSchools();
+var teachers=getTeachers();
+var advisters=getAdvister();
+
+$("#s_schooldA").combobox({data:schools});
+$("#s_schooldB").combobox({data:schools});
+
+  
 var giftFlag=false;//赠品、赠课是否已消耗
 var favorIds="";//短期课其他优惠
 initPayDate();
 loadStuBaseInfo();
+
+
+var advisterAid="<%=StringUtil.getJSONObjectKeyVal(object,"adviserA")%>";
+var advisterBid="<%=StringUtil.getJSONObjectKeyVal(object,"adviserB")%>";
+var adviserTeacherAid="<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherA")%>";
+var adviserTeacherBid="<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherB")%>";
+
+$("#adviserType").combobox({
+		onChange:function(n,o)
+		{
+	    	clearData("adviserTd1");
+	    	clearData("adviserTd2");
+		}
+	});
+
+$("#s_schooldA").combobox({
+		
+		onChange:function(){
+			var sId =$("#s_schooldA").combobox("getValue");
+			var type=$("#adviserType").combobox("getValue");
+			if("1"==type)
+			{
+				var url="<%=path %>/pubData/qryStaffList.do?post=16,17"+"&schoolId="+sId;
+				$("#s_teacherA").combobox({
+					valueField:'staffId', 
+					textField:'userName', 
+					url:url
+				});
+			}else
+			{
+				var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+				$("#s_teacherA").combobox({
+					valueField:'teacherId', 
+					textField:'byname', 
+					url:urls
+				});
+			}
+			
+		}
+	})
+	
+	$("#s_schooldB").combobox({
+		onChange:function(){
+			var type=$("#adviserType").combobox("getValue");
+			var sId =$("#s_schooldB").combobox("getValue");
+			if("1"==type)
+			{
+				var url="<%=path %>/pubData/qryStaffList.do?post=16,17"+"&schoolId="+sId;
+				$("#s_teacherB").combobox({
+					valueField:'staffId', 
+					textField:'userName', 
+					url:url
+				});
+			}else
+			{
+				var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+				$("#s_teacherB").combobox({
+					valueField:'teacherId', 
+					textField:'byname', 
+					url:urls
+				});
+			}
+		}
+	});
+
 initOldCourse();
 function initOldCourse()
 {
 	var studentCourseId=$("#studentCourseId").val();
 	if(studentCourseId!='')
 	{
-		$("#payDate").attr("readOnly",true);
-		 
-		//$("#courseType").combobox({ disabled: true});
-		 
+		$("#payDate").combobox({ disabled: true});
+		
+		if(advisterAid!='' || advisterBid!='')
+		{
+			$("#adviserType").combobox('setValue','1');
+			
+			$("#s_teacherA").combobox(
+			{
+				data:advisters,
+				valueField:'staffId', 
+				textField:'userName'
+			});	
+			
+			$("#s_teacherB").combobox(
+			{
+				data:advisters,
+				valueField:'staffId', 
+				textField:'userName'
+			});	
+			
+			for ( var i = 0; i < advisters.length; i++)
+			{
+				if (advisterAid == advisters[i].staffId) 
+				{
+					$("#s_schooldA").combobox('setValue',advisters[i].schoolId);
+					$("#s_teacherA").combobox('setValue',advisters[i].staffId); 
+				}
+				if (advisterBid == advisters[i].staffId) 
+				{
+					$("#s_schooldB").combobox('setValue',advisters[i].schoolId);
+					$("#s_teacherB").combobox('setValue',advisters[i].staffId); 
+				}
+			}
+			
+		}else
+		{
+				
+			$("#s_teacherA").combobox(
+			{
+				data:advisters,
+				valueField:'teacherId', 
+				textField:'byname', 
+			});	
+			
+			$("#s_teacherB").combobox(
+			{
+				data:advisters,
+				valueField:'teacherId', 
+				textField:'byname' 
+			});	
+			
+			for ( var i = 0; i < teachers.length; i++)
+			{
+				if (adviserTeacherAid == teachers[i].teacherId) 
+				{
+					$("#s_schooldA").combobox('setValue',teachers[i].schoolId);
+					$("#s_teacherA").combobox('setValue',teachers[i].teacherId); 
+				}
+				if (adviserTeacherBid == teachers[i].teacherId) 
+				{
+					$("#s_schooldB").combobox('setValue',teachers[i].schoolId);
+					$("#s_teacherB").combobox('setValue',teachers[i].teacherId); 
+				}
+			}
+		
+			
+		}
+		
+		
+		
+	
 	}
 }
+
+
+
 
 //提交
 $("#submitBtn").click(function() 
