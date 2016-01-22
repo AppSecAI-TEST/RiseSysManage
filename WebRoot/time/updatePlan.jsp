@@ -20,18 +20,22 @@
   	<body>
 		<input type="hidden" id="handlerId" name="handlerId"   value="${sessionScope.StaffT.staffId}"/>
 		<input type="hidden" id="schoolId" name="schoolId"   value="<%=schoolId%>"/> 
-			<table   style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:30px;" cellspacing="2">
+		<div style="padding:5px 0;min-width:1100px; width:100%;">
+			<table   style="width:100%;border:1px solid #95B8E7;font-family:'微软雅黑';height:50px;" cellspacing="2">
 				<tr>
 					<td width="80px" align="right">
 						<span>排课月份：</span>
 					</td>
-					<td  align="left">
-						 <%=time %>
+					<td width="80px" align="left">
+						 <%=time%>
 					</td>
-					
+					<td  align="left">
+						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="width:100px; height: 25px;" id="refreshPlan" funcNodeId="1001">刷新排课</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px" onclick="javascript:window.history.back()">返回</a>
+					</td>
 				</tr>
 			</table>
-		 
+		 </div>
  
 		<div style="padding:5px 0;min-width:1100px; width:100%;">
 			<table class="easyui-datagrid" title="排课" style="height:250px;" toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false" id="weekDg" url="">
@@ -47,8 +51,8 @@
 			</table>
 		</div>
 		
-	 <div style="min-width:1100px;width:99%;margin:0 auto;">
-		<div class="easyui-panel" title="排课信息" style="width:100%;overflow:auto;">
+	 <div style="padding:5px 0;min-width:1100px;width:99%;">
+	<div class="easyui-panel" title="排课信息" style="width:100%;overflow:auto;">
 		<table class="maintable" id="hoursPlanTab" style="width:1500px;"  cellspacing="0" cellpadding="0">
 		  <tr align="center">
 		    <td align="center" width="40px;" rowspan="2"><span>序号</span></td>
@@ -88,6 +92,44 @@
  	</body>
 </html>
 <script type="text/javascript">
+
+$("#refreshPlan").click(function()
+{
+	var param={};
+	param.handlerId=$("#handlerId").val();
+	param.schoolId=$("#schoolId").val();
+	param.month='<%=time%>';
+	$.ajax(
+	{
+		type : "POST",
+		url: "/sys/time/refreshPlan.do?",
+		data: "param="+JSON.stringify(param),
+		async: true,
+		dataType:"json",
+		beforeSend: function()
+    	{
+    		$.messager.progress({text:'排课中，请稍候...'});
+    	},
+    	success: function(data) 
+    	{
+    		$.messager.progress('close');
+    		if(data.flag)
+    		{
+    			init(data);
+    		}else
+    		{
+    			$.messager.alert('提示', data.msg);
+    		}
+         },
+        error:function()
+        {
+        	$.messager.progress('close');
+        }
+	});
+
+
+});
+
 init();
 function init()
 {

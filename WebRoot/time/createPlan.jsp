@@ -16,9 +16,16 @@
   
   	<body>
 		<input type="hidden" id="handlerId" name="handlerId"   value="${sessionScope.StaffT.staffId}"/>
-		<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
-			<table  style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:30px;" cellspacing="2">
+			<table  style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:30px;"  >
 				<tr>
+				<td align="right"><span>校区：</span></td>
+  					<td width="100px">
+					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
+		      			onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
+		      			url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=505&fieldId=schoolId">
+	        		</select>
+					</td>
 					<td  align="right" width="75px">
 						<span>排课月份：</span>
 					</td>
@@ -28,6 +35,9 @@
 					<td>
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="width:100px; height: 25px;" id="submit" funcNodeId="1000">创建</a>
 						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px" onclick="javascript:window.history.back()">返回</a>
+					</td>
+					<td width="600px">
+						 
 					</td>
 				</tr>
 			</table>
@@ -193,6 +203,12 @@ var time;
 $("#submit").click(function()
 {
 	time=$("#time").datebox('getValue');
+	var schoolId=$("#schoolId").combobox('getValue');
+	if(schoolId=='' && schoolId=='10')
+	{
+		$.messager.alert("提示","请选择校区");
+		return;
+	}
 	if(time=='')
 	{
 		$.messager.alert("提示","请选择排课月份");
@@ -201,7 +217,7 @@ $("#submit").click(function()
 	
 	var param={};
 	param.handlerId=$("#handlerId").val();
-	param.schoolId=$("#schoolId").val();
+	param.schoolId=$("#schoolId").combobox('getValue');
 	param.month=time;
 	$.ajax(
 	{
