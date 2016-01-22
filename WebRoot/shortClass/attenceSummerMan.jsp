@@ -20,7 +20,7 @@
   		<div id="tab" class="easyui-tabs" style="min-width:1100px;width:99%;height:528px;font-family:'微软雅黑';margin:0 auto;padding:0 0">
 		    <div title="考勤管理">
 				<form id="manFm" style="margin:0 auto;">
-					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:100px;" cellspacing="2">
+					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 						<tr>
 							<td align="right" width="12%">
 								所属校区：
@@ -66,19 +66,19 @@
 						<thead>
 							<tr>
 								<th data-options="field:'shortClassInstId',checkbox:true"></th>
-								<th width="7.7%" field="schoolName">校区</th>
-								<th width="7.7%" field="typeName">赠课类型</th>
-								<th width="7.7%" field="className">班级名称</th>
-								<th width="7.7%" field="classStateName">班级状态</th>
-								<th width="7.7%" field="planHours">计划课时</th>
-								<th width="7.7%" field="classProgress">实际反馈课时</th>
-								<th width="7.7%" field="planClassNum">应到人数</th>
-								<th width="7.7%" field="realClassNum">实到人数</th>
-								<th width="7.7%" field="realClassNum">定班人数</th>
-								<th width="7.7%" field="putClassDate">申请时间</th>
-								<th width="7.7%" field="approveDate">审批时间</th>
-								<th width="7.7%" field="openDate">开课日期</th>
-								<th width="7.7%" field="finishDate">结课日期</th>
+								<th width="7%" field="schoolName">校区</th>
+								<th width="7%" field="typeName">赠课类型</th>
+								<th width="8%" field="className">班级名称</th>
+								<th width="7%" field="classStateName">班级状态</th>
+								<th width="7%" field="planHours">计划课时</th>
+								<th width="8%" field="classProgress">实际反馈课时</th>
+								<th width="7%" field="planClassNum">应到人数</th>
+								<th width="7%" field="realClassNum">实到人数</th>
+								<th width="7%" field="realClassNum">定班人数</th>
+								<th width="8%" field="putClassDate">申请时间</th>
+								<th width="8%" field="approveDate">审批时间</th>
+								<th width="8%" field="openDate">开课日期</th>
+								<th width="8%" field="finishDate">结课日期</th>
 							</tr>
 						</thead>
 					</table>

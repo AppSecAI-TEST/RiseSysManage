@@ -25,7 +25,7 @@
 			</tr>
 			<tr>
 				<td align="right">课时：</td>
-				<td><input name="classLessonHour" id="classLessonHour" type="text" style="width:200px" class="easyui-textbox" /></td>
+				<td><input name="classLessonHour" id="classLessonHour" type="text" style="width:200px" class="easyui-textbox" data-options="readonly:true" /></td>
 			</tr>
 		</table>
 		<table class="tab" id="teacherTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
@@ -103,6 +103,9 @@
 					data:classTimeData,
 					onLoadSuccess:function(data){
 						$("#classTime").combobox("setValue","${schooltimeInstT.hourRange}");
+					},
+					onSelect:function(data){
+						$("#classLessonHour").textbox("setValue",data.param4);
 					}
 				});
 				$("#classRoomId").combobox({

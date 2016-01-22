@@ -151,7 +151,7 @@
 								<th width="10%" field="leaveNum">请假人数</th>
 								<th width="10%" field="lateNum">迟到人数</th>
 								<th width="10%" field="truantNum">旷课人数</th>
-								<th width="10%" field="dressNum">穿校服人数</th>
+								<th width="9%" field="dressNum">穿校服人数</th>
 							</tr>
 						</thead>
 					</table>
