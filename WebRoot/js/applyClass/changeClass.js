@@ -105,10 +105,19 @@ function initClassInst(isBegin, classInstId) {
     		onLoadSuccess : function () { //数据加载完毕事件
                 var data = $('#beginClassInstId').combobox('getData');
                 if (data.length > 0) {
+                	var flag = true;
                 	if(classInstId != null && classInstId != "" && classInstId != undefined) {
-                		$("#beginClassInstId").combobox('select', classInstId);
-                	} else {
+                		for(var i = 0, len = data.length; i < len; i++) {
+                			if(data[i].classInstId == classInstId) {
+                				flag = false;
+                				break;
+                			}
+                		}
+                	}
+                	if(flag) {
                 		$("#beginClassInstId").combobox('select', data[0].classInstId);
+                	} else {
+                		$("#beginClassInstId").combobox('select', classInstId);
                 	}
                 	var classInstId = $("#beginClassInstId").combobox("getValue");
                     if(classInstId != "" && classInstId != null && classInstId != undefined) {
@@ -140,10 +149,19 @@ function initClassInst(isBegin, classInstId) {
     		onLoadSuccess : function () { //数据加载完毕事件
                 var data = $('#notBeginClassInstId').combobox('getData');
                 if (data.length > 0) {
+                	var flag = true;
                 	if(classInstId != null && classInstId != "" && classInstId != undefined) {
-                		$("#notBeginClassInstId").combobox('select', classInstId);
-                	} else {
+                		for(var i = 0, len = data.length; i < len; i++) {
+                			if(data[i].classInstId == classInstId) {
+                				flag = false;
+                				break;
+                			}
+                		}
+                	}
+                	if(flag) {
                 		$("#notBeginClassInstId").combobox('select', data[0].classInstId);
+                	} else {
+                		$("#notBeginClassInstId").combobox('select', classInstId);
                 	}
                 }
                 var classInstId = $("#notBeginClassInstId").combobox("getValue");

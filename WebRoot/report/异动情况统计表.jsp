@@ -71,7 +71,7 @@
 					</thead>
 				</table>
 				<div id="higher_dlg" class="easyui-dialog" closed="true" modal="true">
-					<table class="easyui-datagrid" style="width:650px;height:300px" id="higher_list_data" fitColumns="true">
+					<table class="easyui-datagrid" style="width:900px;height:400px" id="higher_list_data" fitColumns="true">
 						<thead>
 							<tr>
 								<th field="stageId" align="center" width="100px">阶段</th>
@@ -83,7 +83,7 @@
 					</table>
 				</div>
 				<div id="new_dlg" class="easyui-dialog" closed="true" modal="true">
-					<table class="easyui-datagrid" style="width:650px;height:300px" id="new_list_data" fitColumns="true">
+					<table class="easyui-datagrid" style="width:900px;height:400px" id="new_list_data" fitColumns="true">
 						<thead>
 							<tr>
 								<th field="stageId" align="center" width="100px">阶段</th>

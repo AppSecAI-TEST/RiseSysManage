@@ -11,10 +11,10 @@ $(document).ready(function() {
 	});
 	
 	$("#qryApplyBtn").click(function() {
-		var obj = JSON.stringify($("#qryApplyFm").serializeObject());
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryApplyBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+		var object = $("#qryApplyFm").serializeObject();
+		var funcNodeId = $("#qryApplyBtn").attr("funcNodeId");
+		object.funcNodeId = funcNodeId;
+		var obj = JSON.stringify(object);
     	$('#apply_list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",
     		queryParams:{
@@ -32,10 +32,10 @@ $(document).ready(function() {
 	});
 	
 	$("#qryApproveBtn").click(function() {
-		var obj = JSON.stringify($("#qryApproveFm").serializeObject());
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+		var object = $("#qryApproveFm").serializeObject();
+		var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");
+		object.funcNodeId = funcNodeId;
+		var obj = JSON.stringify(object);
     	$('#approve_list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",
     		queryParams:{
@@ -62,7 +62,6 @@ $(document).ready(function() {
     	},
     	onChange : function(n, o) {
     		if(n != "" && n != null && n != undefined) {
-    			$("#outTeacherId").combobox({disabled: false});
     			$("#outTeacherId").combobox({
     				url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&classType=",//返回json数据的url
 	        		valueField : "teacherId",
@@ -77,7 +76,6 @@ $(document).ready(function() {
     			$("#outSchoolId").combobox("setValue", data[0].schoolId);
 				$("#outTeacherId").combobox('clear');
 				$("#outTeacherId").combobox("loadData", new Array());
-				$("#outTeacherId").combobox({disabled: true});
     		}
     	}
 	});
@@ -125,13 +123,20 @@ $(document).ready(function() {
 		if(row) {
 			var tacheState = row.tacheState;
 			if("001" == tacheState) {
+				var isFinish = "N";
 				var applyId = row.applyId;
 				var studentId = row.studentId;
-				var isFinish = "N";
+				var courseState = row.courseState;
 				var higherStageId = row.higherStageId;
-				var oldCourseState = row.oldCourseState;
-				if((higherStageId == "" || higherStageId == null || higherStageId == undefined)
-						&& (oldCourseState != "" && oldCourseState != null && oldCourseState != undefined && oldCourseState == "009")) {
+				var lowerCourseState = row.lowerCourseState;
+				//没有升学阶段
+				if((higherStageId == "" || higherStageId == null || higherStageId == undefined) 
+						//没有当前课程
+						&& (courseState == "" || courseState == null && courseState == undefined)
+						//没有上个阶段
+						&& ((lowerCourseState == "" || lowerCourseState == null && lowerCourseState == undefined) 
+								//有结课的上个阶段	
+								|| (lowerCourseState != "" && lowerCourseState != null && lowerCourseState != undefined && lowerCourseState == "009"))) {
 					isFinish = "Y";
 				}
 				window.location.href = "/sys/changeSchool/changeOutSchool.jsp?applyId="+applyId+"&studentId="+studentId+"&isFinish="+isFinish;

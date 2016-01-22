@@ -34,7 +34,12 @@ $(document).ready(function() {
 				$("#adviserTeacherNameText").html(data.adviserTeacherName);
 			}
 			
-			$("#schoolId").val(data.schoolId);
+			var schoolId = data.schoolId;
+			var inSchoolId = data.inSchoolId;
+			if(inSchoolId != "" && inSchoolId != null && inSchoolId != undefined) {
+				schoolId = inSchoolId;
+			}
+			$("#schoolId").val(schoolId);
 			$("#courseType").val(data.courseType);
 			$("#stageId").val(data.stageId);
 			$("#classType").val(data.classType);
@@ -125,10 +130,19 @@ function initClassInst(isBegin) {
     		onLoadSuccess : function () { //数据加载完毕事件
                 var data = $('#beginClassInstId').combobox('getData');
                 if (data.length > 0) {
+                	var flag = true;
                 	if(oldClassInstId != null && oldClassInstId != "" && oldClassInstId != undefined) {
-                		$("#beginClassInstId").combobox('select', oldClassInstId);
-                	} else {
+                		for(var i = 0, len = data.length; i < len; i++) {
+                			if(data[i].classInstId == oldClassInstId) {
+                				flag = false;
+                				break;
+                			}
+                		}
+                	}
+                	if(flag) {
                 		$("#beginClassInstId").combobox('select', data[0].classInstId);
+                	} else {
+                		$("#beginClassInstId").combobox('select', oldClassInstId);
                 	}
                 }
                 var classInstId = $("#notBeginClassInstId").combobox("getValue");
@@ -156,12 +170,22 @@ function initClassInst(isBegin) {
     		onLoadSuccess : function () { //数据加载完毕事件
                 var data = $('#notBeginClassInstId').combobox('getData');
                 if (data.length > 0) {
+                	var flag = true;
                 	if(oldClassInstId != null && oldClassInstId != "" && oldClassInstId != undefined) {
-                		$("#notBeginClassInstId").combobox('select', oldClassInstId);
-                	} else {
+                		for(var i = 0, len = data.length; i < len; i++) {
+                			if(data[i].classInstId == oldClassInstId) {
+                				flag = false;
+                				break;
+                			}
+                		}
+                	}
+                	if(flag) {
                 		$("#notBeginClassInstId").combobox('select', data[0].classInstId);
+                	} else {
+                		$("#notBeginClassInstId").combobox('select', oldClassInstId);
                 	}
                 }
+                
                 var classInstId = $("#notBeginClassInstId").combobox("getValue");
                 if(classInstId != "" && classInstId != null && classInstId != undefined) {
                 	qryClassDetail(classInstId);

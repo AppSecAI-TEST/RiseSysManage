@@ -28,13 +28,12 @@
 							<td style="min-width: 100px;">
 								<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;"
 									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
-			      					url="<%=path %>/pubData/qryStage.do">
+				      				url="<%=path %>/pubData/qryStage.do">
 				        		</select>
 							</td>
 							<td align="right" style="min-width: 80px;"><span>班级：</span></td>
 							<td style="min-width: 100px;">
-								<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled">
-				        		</select>
+								<input id="classInstId" name="classInstId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
 							<td align="right" style="min-width: 100px;"><span>放班申请时间：</span></td>
 			  				<td style="min-width: 100px;">
@@ -62,9 +61,7 @@
 			  				</td>
 			  				<td align="right" style="min-width: 80px;"><span>带班老师：</span></td>
 			  				<td style="min-width: 100px;">
-			  					<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'" 
-				      				url="<%=path %>/pubData/qryTeacherList.do?schoolId=&classType=">
+			  					<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 			  				</td>
 							<td align="right" style="min-width: 100px;"><span>放班审批时间：</span></td>
@@ -84,7 +81,6 @@
 			  	</form>
 			  	<div style="padding:5px 0;min-width:1100px; width:100%;">
 				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" 
-				  		url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1006" 
 				  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
@@ -121,10 +117,7 @@
 		  				<tr>
 		  					<td align="right" style="min-width: 120px;"><span>校区：</span></td>
 			  				<td style="min-width: 100px;">
-								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-					      			onLoadSuccess:function(data){$('#approveSchoolId').combobox('setValue',data[0].schoolId);}"
-					      			url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=501&fieldId=schoolId">
+								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 				        		</select>
 							</td>
 							<td align="right" style="min-width: 80px;"><span>课程阶段：</span></td>

@@ -18,65 +18,55 @@
 		<form id="qryFm" style="margin:0 auto;">
 			<table  style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
 				<tr>
-					<td align="right"><span>所属校区：</span></td>
-					<td width="114px">
-						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;">
+					<td align="right" style="min-width: 80px"><span>校区：</span></td>
+					<td style="min-width: 100px">
+						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
         				</select>
 					</td>
-					<td align="right"><span>学员姓名：</span></td>
-					<td width="114px">
-						<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 114x; height: 25px;"/>
+					<td align="right" style="min-width: 80px"><span>学员姓名：</span></td>
+					<td style="min-width: 100px">
+						<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 					</td>
-					<td align="right"><span>联系电话：</span></td>
-					<td width="114px">
-						<input name="phone" id="phone" type="text" class="easyui-textbox" style="width: 114px; height: 25px;"/>
+					<td align="right" style="min-width: 80px"><span>联系电话：</span></td>
+					<td style="min-width: 110px">
+						<input name="phone" id="phone" type="text" class="easyui-textbox" style="width: 110px; height: 25px;"/>
 					</td>
-					<td align="right"><span>VIP学员：</span></td>
-					<td colspan="2">
+					<td align="right" style="min-width: 80px"><span>VIP学员：</span></td>
+					<td style="min-width: 100px">
 						<input type="radio" value="Y" name="vip"/><span>是</span>
 	      				&nbsp;<input type="radio" value="N" name="vip"/><span>否</span>
 					</td>
-					<td align="center">
+					<td align="center" colspan="3" style="min-width: 210px">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1000">查询</a>
+						&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 					</td>
-					<td align="center">
-						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
-					</td>
+					<td style="min-width: 100px">&nbsp;</td>
 				</tr>
 				<tr>
-					<td align="right"><span>招生顾问：</span></td>
-					<td width="114px">
-						<select id="advisterId" name="advisterId" class="easyui-combobox" style="width: 114px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
-	      					url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+					<td align="right" style="min-width: 80px"><span>招生顾问：</span></td>
+					<td style="min-width: 100px">
+						<select id="advisterId" name="advisterId" class="easyui-combobox" style="width: 100px; height: 25px;">
         				</select>
 					</td>
-					<td align="right"><span>责任顾问：</span></td>
-					<td width="114px">
-						<select id="dutyAdvister" name="dutyAdvister" class="easyui-combobox" style="width: 114px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
-	      					url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+					<td align="right" style="min-width: 80px"><span>责任顾问：</span></td>
+					<td style="min-width: 100px">
+						<select id="dutyAdvister" name="dutyAdvister" class="easyui-combobox" style="width: 100px; height: 25px;">
         				</select>
 					</td>
-					<td align="right"><span>客户关怀：</span></td>
-					<td width="114px">
-						<select id="carer" name="carer" class="easyui-combobox" style="width: 114px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
-	      					url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+					<td align="right" style="min-width: 80px"><span>客户关怀：</span></td>
+					<td style="min-width: 110px">
+						<select id="carer" name="carer" class="easyui-combobox" style="width: 110px; height: 25px;">
         				</select>
 					</td>
-					<td align="right">
-						<span>建档时间：</span>
-					</td>
+					<td align="right" style="min-width: 80px"><span>建档时间：</span></td>
 					<td width="8px">
-						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTime" name="startTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTime" name="startTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
-					<td align="center" width="16px;">
-						<span>至</span>
-					</td>
+					<td align="center" style="min-width: 14px;"><span>至</span></td>
 					<td width="90px">
-						<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="endTime" name="endTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
+						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTime" name="endTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
+					<td style="min-width: 100px">&nbsp;</td>
 				</tr>
 			</table>
 		</form> 
@@ -86,7 +76,7 @@
     		<a href="javascript:void(0)" id="viewVip" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">浏览</a>
   		</div>
 		<div style="padding:5px 0;min-width:1100px; width:100%;">
-			<table class="easyui-datagrid" title="学员列表" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1000"  
+			<table class="easyui-datagrid" title="学员列表" style="height:435px;" id="list_data"
 				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>

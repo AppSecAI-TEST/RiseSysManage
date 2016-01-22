@@ -34,7 +34,14 @@
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="10%"><span>开课时间：</span></td>
-	  					<td width="20%"><span>${obj.createClassObj.startDate }</span></td>
+	  					<td width="20%">
+	  						<c:if test="${obj.classState == '001' }">
+	  							<input name="startDate" id="startDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;" value="${obj.createClassObj.startDate }" editable="false"/>
+	  						</c:if>
+	  						<c:if test="${obj.classState == '002' }">
+		  						<span id="startDateText">${obj.createClassObj.startDate }</span>
+	  						</c:if>
+	  					</td>
 	  					<td align="right" width="10%"><span>学员来源类型：</span></td>
 	  					<td width="20%"><span id="studentChannelTypeVal">${obj.createClassObj.studentChannelTypeVal }</span></td>
 	  					<td align="right" width="10%"><span>来源班级：</span></td>

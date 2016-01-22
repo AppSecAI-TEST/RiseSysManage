@@ -10,42 +10,89 @@ $(document).ready(function() {
 		}
 	});
 	
-//	$("#qryBtn").click(function() {
-//    	var obj = JSON.stringify($("#qryFm").serializeObject());
-//    	obj = obj.substring(0, obj.length - 1);
-//    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-//    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-//    	$('#list_data').datagrid({
-//    		url : "/sys/pubData/qryDataListByPage.do",
-//    		queryParams:{
-//    			param : obj
-//    		},
-//    		onLoadSuccess:function(){
-//    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
-//    			$('#list_data').datagrid('clearSelections');
-//    		}
-//    	});
-//    });
-//	
-//	$("#qryApproveBtn").click(function() {
-//    	var obj = JSON.stringify($("#qryApproveFm").serializeObject());
-//    	obj = obj.substring(0, obj.length - 1);
-//    	var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");
-//    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-//    	$('#approve_list_data').datagrid({
-//    		url : "/sys/pubData/qryDataListByPage.do",
-//    		queryParams:{
-//    			param : obj
-//    		},
-//    		onLoadSuccess:function(){
-//    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
-//    			$('#approve_list_data').datagrid('clearSelections');
-//    		}
-//    	});
-//    });
+	$("#qryBtn").click(function() {
+    	var obj = JSON.stringify($("#qryFm").serializeObject());
+    	obj = obj.substring(0, obj.length - 1);
+    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
+    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+    	$('#list_data').datagrid({
+    		url : "/sys/pubData/qryDataListByPage.do",
+    		queryParams:{
+    			param : obj
+    		},
+    		onLoadSuccess:function(){
+    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+    			$('#list_data').datagrid('clearSelections');
+    		}
+    	});
+    });
 	
-	initQryButton("qryBtn", "reset", "qryFm", "list_data");
-	initQryButton("qryApproveBtn", "resetApprove", "qryApproveFm", "approve_list_data");
+	//重置
+	$("#reset").click(function() {
+		$("#qryFm").form('clear');//清空窗体数据  
+		var data = $("#schoolId").combobox("getData");
+		if(data.length > 0) {
+			$("#schoolId").combobox("setValue", data[0].schoolId);
+		}
+	});
+	
+	$("#qryApproveBtn").click(function() {
+    	var obj = JSON.stringify($("#qryApproveFm").serializeObject());
+    	obj = obj.substring(0, obj.length - 1);
+    	var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");
+    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+    	$('#approve_list_data').datagrid({
+    		url : "/sys/pubData/qryDataListByPage.do",
+    		queryParams:{
+    			param : obj
+    		},
+    		onLoadSuccess:function(){
+    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+    			$('#approve_list_data').datagrid('clearSelections');
+    		}
+    	});
+    });
+	
+	//重置
+	$("#resetApprove").click(function() {
+		$("#qryApproveFm").form('clear');//清空窗体数据  
+		var data = $("#schoolId").combobox("getData");
+		if(data.length > 0) {
+			$("#approveSchoolId").combobox("setValue", data[0].schoolId);
+		}
+	});
+	
+	var staffId = $("#staffId").val();
+	$("#schoolId").combobox({
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=502&fieldId=schoolId",
+		valueField : "schoolId",
+		textField : "schoolName",
+		panelHeight : "auto",
+		formatter : function(data) {
+			return "<span>" + data.schoolName + "</span>";
+		},
+		onLoadSuccess : function(data) {
+			if(data.length > 0) {
+				$("#schoolId").combobox("setValue", data[0].schoolId);
+			}
+			$("#qryBtn").click();
+		}
+	});
+	
+	$("#approveSchoolId").combobox({
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=502&fieldId=schoolId",
+		valueField : "schoolId",
+		textField : "schoolName",
+		panelHeight : "auto",
+		formatter : function(data) {
+			return "<span>" + data.schoolName + "</span>";
+		},
+		onLoadSuccess : function(data) {
+			if(data.length > 0) {
+				$("#schoolId").combobox("setValue", data[0].schoolId);
+			}
+		}
+	});
 	
 	//正常开班申请
 	$("#normalOpenClass").click(function() {
@@ -88,7 +135,6 @@ $(document).ready(function() {
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) {
 			var openClassType = row.openClassType;
-			alert(openClassType)
 			if(openClassType == "" || openClassType == null || openClassType == undefined) {
 				var classStudentNum = row.classStudentNum;
 				if(classStudentNum > 0) {
@@ -104,7 +150,6 @@ $(document).ready(function() {
 				}
 			} else {
 				var openClassState = row.openClassState;
-				alert(openClassState)
 				if(openClassState == '001') {
 					$.messager.alert('提示', "您选择的班级开班申请正在审批中，不能申请异常开班！");
 				} else if(openClassState == '002') {

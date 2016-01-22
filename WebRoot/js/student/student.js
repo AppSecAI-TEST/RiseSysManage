@@ -1,67 +1,77 @@
 $(document).ready(function() {
-    
-    initQryButton("qryBtn","reset","qryFm","list_data");
-    //校区
-    var funcNodeId = $("#funcNodeId").val();
-    if(funcNodeId != null && funcNodeId != "" && funcNodeId != undefined) {
-    	var staffId = $("#staffId").val();
-    	$("#schoolId").combobox({
-			url : "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId=711&fieldId=schoolId&headFlag=N",
-    		valueField : "schoolId",
-    		textField : "schoolName",
-    		panelHeight : "auto",
-    		formatter : function(data) {
-    			return "<span>" + data.schoolName + "</span>";
+	$("#qryBtn").click(function() {
+		var object = $("#qryFm").serializeObject();
+		var funcNodeId = $("#qryBtn").attr("funcNodeId");
+		object.funcNodeId = funcNodeId;
+    	var obj = JSON.stringify(object);
+    	$('#list_data').datagrid({
+    		url : "/sys/pubData/qryDataListByPage.do",
+    		queryParams:{
+    			param : obj
     		},
-    		onLoadSuccess : function() {
-    			if($("#schoolId").combobox("getData").length>0)
-    			{
-    				$("#schoolId").combobox("setValue",$("#schoolId").combobox("getData")[0].schoolId);
-    			}	
-    		},
-    		onChange : function(n, o) {
-    			if(n != "" && n != null && n != undefined) {
-    				$("#classInstId").combobox({disabled: false});
-    				$("#classInstId").combobox({
-    					url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='001','002','003','004','005'&classInstId=",//返回json数据的url
-    					valueField : "classInstId",
-    					textField : "className",
-    					panelHeight : "auto",
-    					formatter : function(data) {
-    						return "<span>" + data.className + "</span>";
-    					},
-    					onChange : function(newVal, oldVal) {
-    						$("#studentId").combobox({
-    							url : "/sys/pubData/qryStudentListByClassInstId.do?classInstId="+newVal,
-    							valueField : "studentId",
-    							textField : "name",
-    							panelHeight : "auto",
-    							formatter : function(data) {
-    								return "<span>" + data.name + "</span>";
-    							}
-    						});
-    					}
-    				});
-    				var classInstId = $("#classInstId").combobox("getValue");
-    				if(classInstId == null || classInstId == "" || classInstId == undefined) {
-    					$("#studentId").combobox({
-    						url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId="+funcNodeId+"&fieldId=studentId",
-    						valueField : "studentId",
-    						textField : "name",
-    						panelHeight : "auto",
-    						formatter : function(data) {
-    							return "<span>" + data.name + "</span>";
-    						}
-    					});
-    				}
-    			} else {
-    				$("#classInstId").combobox('clear');
-    				$("#classInstId").combobox("loadData", new Array());
-    				$("#classInstId").combobox({disabled: true});
-    			}
+    		onLoadSuccess:function(){
+    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+    			$('#list_data').datagrid('clearSelections');
     		}
     	});
-    }
+    });
+	
+	//重置
+	$("#reset").click(function() {
+		$("#qryFm").form('clear');//清空窗体数据  
+		var data = $("#schoolId").combobox("getData");
+		if(data.length > 0) {
+			$("#schoolId").combobox("setValue", data[0].schoolId);
+		}
+	});
+	
+    //校区
+    var staffId = $("#staffId").val();
+    $("#schoolId").combobox({
+    	url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=711&fieldId=schoolId&headFlag=N",
+    	valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
+    	onLoadSuccess : function() {
+    		var data = $("#schoolId").combobox("getData");
+    		if(data.length > 0) {
+    			$("#schoolId").combobox("setValue", data[0].schoolId);
+    		}
+    		$("#qryBtn").click();
+    	},
+    	onChange : function(n, o) {
+    		$("#advisterId").combobox({
+    			url : "/sys/pubData/qryStaffList.do?post=16,17&schoolId=" + n,
+    			valueField : "staffId",
+    	    	textField : "userName",
+    	    	panelHeight : "auto",
+    	    	formatter : function(data) {
+    	    		return "<span>" + data.userName + "</span>";
+    	    	}
+    		});
+    		$("#dutyAdvister").combobox({
+    			url : "/sys/pubData/qryStaffList.do?post=16,17&schoolId=" + n,
+    			valueField : "staffId",
+    	    	textField : "userName",
+    	    	panelHeight : "auto",
+    	    	formatter : function(data) {
+    	    		return "<span>" + data.userName + "</span>";
+    	    	}
+    		});
+    		$("#carer").combobox({
+    			url : "/sys/pubData/qryStaffList.do?post=31,32,33&schoolId=" + n,
+    			valueField : "staffId",
+    	    	textField : "userName",
+    	    	panelHeight : "auto",
+    	    	formatter : function(data) {
+    	    		return "<span>" + data.userName + "</span>";
+    	    	}
+    		});
+    	}
+    });
     
     $("#addStudent").click(function() {
     	window.location.href = "/sys/student/addStudent.jsp";
@@ -177,8 +187,7 @@ $(document).ready(function() {
     			data: "param=" + obj,
     			dataType: "json",
     			async: true,
-    			beforeSend: function()
-    	    	{
+    			beforeSend: function() {
     	    		$.messager.progress({title : 'VIP学员设置', msg : '正在设置VIP学员，请稍等……'});
     	    	},
     	    	success: function (data) {
@@ -204,8 +213,7 @@ $(document).ready(function() {
     			data: "param=" + obj,
     			dataType: "json",
     			async: true,
-    			beforeSend: function()
-    	    	{
+    			beforeSend: function() {
     	    		$.messager.progress({title : 'VIP维护信息', msg : '正在维护VIP信息，请稍等……'});
     	    	},
     	    	success: function (data) {
@@ -224,8 +232,7 @@ $(document).ready(function() {
     $("#batchUpdateSubmit").click(function() {
     	var studentId = "";
     	var obj = $('#list_data').datagrid('getSelections');
-    	for(var i = 0, n = obj.length; i < n; i++)
-    	{
+    	for(var i = 0, n = obj.length; i < n; i++) {
     		studentId += obj[i].studentId + ",";
     	}
     	studentId = studentId.substring(0, studentId.length - 1);
@@ -237,8 +244,7 @@ $(document).ready(function() {
 			data: "param=" + obj,
 			dataType: "json",
 			async: true,
-			beforeSend: function()
-	    	{
+			beforeSend: function() {
 	    		$.messager.progress({title : '批量修改', msg : '正在批量修改客户关怀和责任顾问，请稍等……'});
 	    	},
 	    	success: function (data) {
@@ -254,8 +260,7 @@ $(document).ready(function() {
     });
 });
 
-function validateIsSelect()
-{
+function validateIsSelect() {
 	var flag = false;
 	var row = $('#list_data').datagrid('getSelected');
 	if(row) {
@@ -266,21 +271,18 @@ function validateIsSelect()
 	return flag;
 }
 
-function validate()
-{
+function validate() {
 	var flag = false;
 	var obj = $('#list_data').datagrid('getSelections');
 	if(obj.length > 0) {
 		flag = true;
-	}
-	else {
+	} else {
 		$.messager.alert('提示', "请先选择您要操作的学员！");
 	}
 	return flag;
 }
 
-function validateSelect()
-{
+function validateSelect() {
 	var flag = false;
 	var obj = $('#list_data').datagrid('getSelections');
 	if(obj.length > 0) {
@@ -293,12 +295,4 @@ function validateSelect()
 		$.messager.alert('提示', "请先选择您要操作的学员！");
 	}
 	return flag;
-}
-
-function initDate()
-{
-	var curr_time = new Date();
-	$('#endTime').datebox('setValue', myformatter(curr_time));
-	curr_time.setMonth(curr_time.getMonth() - 1);
-	$('#startTime').datebox('setValue', myformatter(curr_time));
 }

@@ -13,6 +13,7 @@
   
   	<body style="padding-top:5px">
   		<form id="qryFm" style="margin:0 auto;">
+  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
   			<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
   				<tr>
   					<td align="right" style="min-width: 70px;"><span>校区：</span></td>
@@ -27,8 +28,7 @@
 					</td>
 					<td align="right" style="min-width: 70px;"><span>班级：</span></td>
 					<td style="min-width: 130px;">
-						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 127px; height: 25px;" disabled="disabled">
-		        		</select>
+						<input id="classInstId" name="classInstId" type="text" class="easyui-textbox" style="width: 127px; height: 25px;"/>
 					</td>
 					<td align="right" style="min-width: 70px;"><span>开课日期：</span></td>
 					<td style="min-width: 117px;">
@@ -102,7 +102,7 @@
   			</table>
   		</form>
   		<div style="padding:5px 0;min-width:1100px; width:100%;">
-  			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1020" 
+  			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data"
 		  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>

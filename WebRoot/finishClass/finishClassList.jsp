@@ -13,14 +13,12 @@
   
   	<body style="padding-top:5px">
   		<form id="qryFm" style="margin:0 auto;">
+  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
   			<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
   				<tr>
   					<td align="right" style="min-width: 70px;"><span>校区：</span></td>
 	  				<td style="min-width: 100px;">
-						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-			      			onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
-			      			url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=503&fieldId=schoolId">
+						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 		        		</select>
 					</td>
 					<td align="right" style="min-width: 70px;"><span>课程阶段：</span></td>
@@ -30,8 +28,7 @@
 					</td>
 					<td align="right" style="min-width: 70px;"><span>班级：</span></td>
 					<td style="min-width: 130px;">
-						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 127px; height: 25px;">
-		        		</select>
+						<input id="classInstId" name="classInstId" type="text" class="easyui-textbox" style="width: 127px; height: 25px;"/>
 					</td>
 					<td align="right" style="min-width: 70px;"><span>班级性质：</span></td>
 					<td style="min-width: 117px;">
@@ -130,7 +127,6 @@
   		</form>
   		<div style="padding:5px 0;min-width:1100px; width:100%;">
   			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" 
-  				 
 		  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 		  		<thead>
 		  			<tr>

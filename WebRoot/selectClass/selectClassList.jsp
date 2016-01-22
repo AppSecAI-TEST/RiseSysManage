@@ -46,16 +46,12 @@
   				<tr>
   					<td align="right" style="min-width: 80px;"><span>责任顾问：</span></td>
 	  				<td style="min-width: 90px;">
-						<select id="dutyAdvister" name="dutyAdvister" class="easyui-combobox" style="width: 90px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
-     						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+						<select id="dutyAdvister" name="dutyAdvister" class="easyui-combobox" style="width: 90px; height: 25px;">
       					</select>
 					</td>
 					<td align="right" style="min-width: 80px;"><span>业绩老师：</span></td>
 	  				<td style="min-width: 110px;">
-						<select id="adviserTeacher" name="adviserTeacher" class="easyui-combobox" style="width: 110px; height: 25px;"
-							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
-      						url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}&classType=">
+						<select id="adviserTeacher" name="adviserTeacher" class="easyui-combobox" style="width: 110px; height: 25px;">
       					</select>
 					</td>
 					<td align="right" style="min-width: 80px;"><span>选班次数：</span></td>

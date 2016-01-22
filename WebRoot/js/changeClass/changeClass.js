@@ -11,10 +11,10 @@ $(document).ready(function() {
 	});
 	
 	$("#qryApplyBtn").click(function() {
-		var obj = JSON.stringify($("#qryApplyFm").serializeObject());
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryApplyBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+		var object = $("#qryApplyFm").serializeObject();
+		var funcNodeId = $("#qryApplyBtn").attr("funcNodeId");
+		object.funcNodeId = funcNodeId;
+		var obj = JSON.stringify(object);
     	$('#apply_list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",
     		queryParams:{
@@ -29,13 +29,17 @@ $(document).ready(function() {
 	
 	$("#reset").click(function() {
 		$("#qryApplyFm").form('clear');//清空窗体数据  
+		var data = $("#schoolId").combobox("getData");
+		if(data.length > 0) {
+			$("#schoolId").combobox("setValue", data[0].schoolId);
+		}
 	});
 	
 	$("#qryApproveBtn").click(function() {
-		var obj = JSON.stringify($("#qryApproveFm").serializeObject());
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+		var object = $("#qryApproveFm").serializeObject();
+		var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");
+		object.funcNodeId = funcNodeId;
+		var obj = JSON.stringify(object);
     	$('#approve_list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",
     		queryParams:{
@@ -50,18 +54,27 @@ $(document).ready(function() {
 	
 	$("#resetApprove").click(function() {
 		$("#qryApproveFm").form('clear');//清空窗体数据  
+		var data = $("#approveSchoolId").combobox("getData");
+		if(data.length > 0) {
+			$("#approveSchoolId").combobox("setValue", data[0].schoolId);
+		}
 	});
 	
 	var staffId = $("#handlerId").val();
-	var funcNodeId = $("#funcNodeId").val();
 	$("#schoolId").combobox({
-		url : "/sys/pubData/qrySchoolList.do?schoolId=",//返回json数据的url
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=503&fieldId=schoolId",
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
     	},
+    	onLoadSuccess : function(data) {
+			if(data.length > 0) {
+				$("#schoolId").combobox("setValue", data[0].schoolId);
+			}
+			$("#qryApplyBtn").click();
+		},
     	onChange : function(n, o) {
     		if(n != "" && n != null && n != undefined) {
 				$("#outTeacherId").combobox({disabled: false});
@@ -85,13 +98,18 @@ $(document).ready(function() {
 	});
 	
 	$("#approveSchoolId").combobox({
-		url : "/sys/pubData/qrySchoolList.do?schoolId=",//返回json数据的url
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=503&fieldId=schoolId",
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
-    	}
+    	},
+    	onLoadSuccess : function(data) {
+			if(data.length > 0) {
+				$("#approveSchoolId").combobox("setValue", data[0].schoolId);
+			}
+		}
 	});
 	
 	$("#stageId").combobox({

@@ -261,12 +261,23 @@ $(document).ready(function() {
 		if(validateSelect()) {
 			var row = $('#list_data').datagrid('getSelected');
 			if(row) {
-				var changeClassFlag = row.changeClassFlag;
-				if("Y" == changeClassFlag) {
-					var studentCourseId = row.studentCourseId;
-					window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&changeSource=change";
+				var courseState = row.courseState;
+				if("003" == courseState) {
+					var changeClassFlag = row.changeClassFlag;
+					if("N" == changeClassFlag) {
+						var changeSchoolFlag = row.changeSchoolFlag;
+						if("N" == changeSchoolFlag) {
+							var studentCourseId = row.studentCourseId;
+							window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&changeSource=change";
+						} else {
+							$.messager.alert('提示', "您选择的学员课程已申请转校，不能申请转班！");
+						}
+					} else {
+						$.messager.alert('提示', "您选择的学员课程已申请转班，不能再次申请转班！");
+					}
 				} else {
-					$.messager.alert('提示', "您选择的学员课程已申请转班，不能再次申请转班！");
+					var courseStateText = row.courseStateText;
+					$.messager.alert('提示', "您选择的学员课程已"+courseStateText+"，不能再次申请转班！");
 				}
 			} else {
 				$.messager.alert('提示', "请先选择您要转班的学员课程！");
@@ -279,17 +290,23 @@ $(document).ready(function() {
 		if(validateSelect()) {
 			var row = $('#list_data').datagrid('getSelected');
 			if(row) {
-				var changeClassFlag = row.changeClassFlag;
-				if("Y" == changeClassFlag) {
-					var changeSchoolFlag = row.changeSchoolFlag;
-					if("Y" == changeSchoolFlag) {
-						var studentId = row.studentId;
-						window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentId="+studentId+"&changeSource=change";
+				var courseState = row.courseState;
+				if("003" == courseState) {
+					var changeClassFlag = row.changeClassFlag;
+					if("N" == changeClassFlag) {
+						var changeSchoolFlag = row.changeSchoolFlag;
+						if("N" == changeSchoolFlag) {
+							var studentId = row.studentId;
+							window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentId="+studentId+"&changeSource=change";
+						} else {
+							$.messager.alert('提示', "您选择的学员课程已申请转校，不能再次申请转校！");
+						}
 					} else {
-						$.messager.alert('提示', "您选择的学员课程已申请转校，不能再次申请转校！");
+						$.messager.alert('提示', "您选择的学员课程已申请转班，不能申请转校！");
 					}
 				} else {
-					$.messager.alert('提示', "您选择的学员课程有未结束的转班状态，不能申请转校！");
+					var courseStateText = row.courseStateText;
+					$.messager.alert('提示', "您选择的学员课程已"+courseStateText+"，不能申请转校！");
 				}
 			} else {
 				$.messager.alert('提示', "请先选择您要转班的学员课程！");
@@ -362,7 +379,8 @@ $(document).ready(function() {
 		if(validateSelect()) {
 			var row = $('#list_data').datagrid('getSelected');
 			if(row) {
-				
+				var studentId = row.studentId;
+	    		window.location.href = "/sys/view.jsp?studentId="+studentId+"&title=基础信息";
 			} else {
 				$.messager.alert('提示', "请先选择您要浏览的学员课程！");
 			}

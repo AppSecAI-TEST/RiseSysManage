@@ -8,7 +8,7 @@ $(document).ready(function() {
 		async: true,
 		beforeSend: function()
 		{
-			$.messager.progress({title : '转班', msg : '正在查询转班信息，请稍等……'});
+			$.messager.progress({title : '转班', msg : '正在查询取消转班信息，请稍等……'});
 		},
 		success: function (data) {
 			$.messager.progress('close'); 

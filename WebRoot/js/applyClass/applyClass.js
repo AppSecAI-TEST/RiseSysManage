@@ -10,84 +10,107 @@ $(document).ready(function() {
 		}
 	});
 	
-	var funcNodeId = $("#funcNodeId").val();
-	if(funcNodeId != null && funcNodeId != "" && funcNodeId != undefined) {
-		var staffId = $("#staffId").val();
-		$("#schoolId").combobox({
-    		url : "/sys/pubData/qrySchoolList.do?schoolId=",//返回json数据的url
-    		valueField : "schoolId",
-    		textField : "schoolName",
-    		panelHeight : "auto",
-    		formatter : function(data) {
-    			return "<span>" + data.schoolName + "</span>";
+	$("#qryBtn").click(function() {
+		var object = $("#qryFm").serializeObject();
+		var funcNodeId = $("#qryBtn").attr("funcNodeId");
+		object.funcNodeId = funcNodeId;
+    	var obj = JSON.stringify(object);
+    	$('#list_data').datagrid({
+    		url : "/sys/pubData/qryDataListByPage.do",
+    		queryParams:{
+    			param : obj
     		},
-    		onLoadSuccess : function(data) {
-    			if(data.length > 0) {
-    				$("#schoolId").combobox("setValue", data[0].schoolId);
-    			}
-    		},
-    		onChange : function(n, o) {
-    			if(n != "" && n != null && n != undefined) {
-    				$("#classInstId").combobox({disabled: false});
-    				$("#classInstId").combobox({
-    					url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='001','002','003','004','005'&classInstId=",//返回json数据的url
-    					valueField : "classInstId",
-    					textField : "className",
-    					panelHeight : "auto",
-    					formatter : function(data) {
-    						return "<span>" + data.className + "</span>";
-    					}
-    				});
-    				$("#teacherId").combobox({
-    					url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&classType=",//返回json数据的url
-    					valueField : "teacherId", 
-    					textField : "byname",
-    					panelHeight : "auto",
-    					formatter : function(data) {
-    						return "<span>" + data.byname + "</span>";
-    					}
-    				});
-    			} else {
-    				var data = $("#schoolId").combobox("getData");
-    				if(data.length > 0) {
-    					$("#schoolId").combobox("setText", data[0].schoolId);
-    				}
-    				$("#classInstId").combobox('clear');
-    				$("#classInstId").combobox("loadData", new Array());
-    				$("#classInstId").combobox({disabled: true});
-    			}
+    		onLoadSuccess:function(){
+    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+    			$('#list_data').datagrid('clearSelections');
     		}
-		});
-	}
+    	});
+    });
 	
-	$("#stageId").combobox({
-		url : "/sys/pubData/qryStage.do",//返回json数据的url
-    	valueField : "stageId",
-    	textField : "stageId",
-    	panelHeight : "auto",
-    	formatter : function(data) {
-    		return "<span>" + data.stageId + "</span>";
-    	},
+	//重置
+	$("#reset").click(function() {
+		$("#qryFm").form('clear');//清空窗体数据  
+		var data = $("#schoolId").combobox("getData");
+		if(data.length > 0) {
+			$("#schoolId").combobox("setValue", data[0].schoolId);
+		}
+	});
+	
+	$("#qryApproveBtn").click(function() {
+		var object = $("#qryApproveFm").serializeObject();
+		var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");
+		object.funcNodeId = funcNodeId;
+    	var obj = JSON.stringify(object);
+    	$('#approve_list_data').datagrid({
+    		url : "/sys/pubData/qryDataListByPage.do",
+    		queryParams:{
+    			param : obj
+    		},
+    		onLoadSuccess:function(){
+    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+    			$('#approve_list_data').datagrid('clearSelections');
+    		}
+    	});
+    });
+	
+	//重置
+	$("#resetApprove").click(function() {
+		$("#qryApproveFm").form('clear');//清空窗体数据  
+		var data = $("#schoolId").combobox("getData");
+		if(data.length > 0) {
+			$("#approveSchoolId").combobox("setValue", data[0].schoolId);
+		}
+	});
+	
+	var staffId = $("#staffId").val();
+	$("#schoolId").combobox({
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=501&fieldId=schoolId",
+		valueField : "schoolId",
+		textField : "schoolName",
+		panelHeight : "auto",
+		formatter : function(data) {
+			return "<span>" + data.schoolName + "</span>";
+		},
+		onLoadSuccess : function(data) {
+			if(data.length > 0) {
+				$("#schoolId").combobox("setValue", data[0].schoolId);
+			}
+			$("#qryBtn").click();
+		},
 		onChange : function(n, o) {
-			var schoolId = $("#schoolId").combobox("getValue");
 			if(n != "" && n != null && n != undefined) {
-				$("#classInstId").combobox({disabled: false});
-				//转出班级
-				$("#classInstId").combobox({
-					url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType=&stageId="+n+"&classType=&classState='001','002','003','004','005'&classInstId=",//返回json数据的url
-					valueField : "classInstId",
-					textField : "className",
+				$("#teacherId").combobox({
+					url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&classType=",//返回json数据的url
+					valueField : "teacherId", 
+					textField : "byname",
 					panelHeight : "auto",
 					formatter : function(data) {
-						return "<span>" + data.className + "</span>";
+						return "<span>" + data.byname + "</span>";
 					}
 				});
+			} else {
+				var data = $("#schoolId").combobox("getData");
+				if(data.length > 0) {
+					$("#schoolId").combobox("setText", data[0].schoolId);
+				}
 			}
 		}
 	});
 	
-	initQryButton("qryBtn", "reset", "qryFm", "list_data");
-	initQryButton("qryApproveBtn", "resetApprove", "qryApproveFm", "approve_list_data");
+	$("#approveSchoolId").combobox({
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=501&fieldId=schoolId",
+		valueField : "schoolId",
+		textField : "schoolName",
+		panelHeight : "auto",
+		formatter : function(data) {
+			return "<span>" + data.schoolName + "</span>";
+		},
+		onLoadSuccess : function(data) {
+			if(data.length > 0) {
+				$("#approveSchoolId").combobox("setValue", data[0].schoolId);
+			}
+		}
+	});
 	
 	//放班申请
 	$("#applyClass").click(function() {
@@ -137,6 +160,9 @@ $(document).ready(function() {
 					window.location.href = "/sys/applyClass/qryCreateClass.do?classInstId="+classInstId+"&type=update&applyType=001&classState="+classState+"&funcNodeId="+funcNodeId;
 				} else {
 					var tacheStateText = row.tacheStateText;
+					if(tacheStateText == null || tacheStateText == "" || tacheStateText == undefined) {
+						tacheStateText = row.cancelApplyClassStateText;
+					}
 					$.messager.alert('提示', "您选择的班级已"+tacheStateText+"，不能维护该班级！");
 				}
 			} else {

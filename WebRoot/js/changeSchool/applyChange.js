@@ -1,13 +1,12 @@
 $(document).ready(function() {
 	var studentId = $("#studentId").val();
-	var param = "{queryCode:\"qryApplyStudentCourseInfo\",studentId:\""+studentId+"\"}";
+	var param = "{queryCode:\"qryApplyChangeSchool\",studentId:\""+studentId+"\"}";
 	$.ajax({
 		url: "/sys/pubData/qryData.do",
 		data: "param=" + param,
 		dataType: "json",
 		async: true,
-		beforeSend: function()
-		{
+		beforeSend: function() {
 			$.messager.progress({title : '转校申请', msg : '正在查询申请转校的课程信息，请稍等……'});
 		},
 		success: function (data) {
@@ -134,7 +133,7 @@ $(document).ready(function() {
 							$.messager.progress('close'); 
 							var flag = data.flag
 							if(flag) {
-								$.messager.alert('提示', "申请转校成功！", "info", function() {back();});
+								$.messager.alert('提示', "申请转校成功！", "info", function() {window.history.back();});
 							} else {
 								$.messager.alert('提示', data.msg);
 							}
@@ -149,10 +148,6 @@ $(document).ready(function() {
 		}
 	});
 });
-
-function back() {
-	window.location.href = "/sys/changeSchool/changeSchool.jsp";
-}
 
 //查看转校历史信息
 function viewChangeSchoolHist() {

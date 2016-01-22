@@ -8,7 +8,7 @@ $(document).ready(function() {
 		async: true,
 		beforeSend: function()
 		{
-			$.messager.progress({title : '转出班级', msg : '正在查询转出班级信息，请稍等……'});
+			$.messager.progress({title : '转出班级', msg : '正在查询转出校区信息，请稍等……'});
 		},
 		success: function (data) {
 			$.messager.progress('close'); 

@@ -13,7 +13,7 @@
   	</head>
   
   	<body style="padding-top:5px">
-  	<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
+  		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
     	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
     		<div title="退费课程查询" style="padding:5px;display:block;">
     			<form id="qryRefundCourseFm" style="margin:0 auto;">
@@ -21,10 +21,7 @@
     					<tr>
     						<td align="right"><span>校区：</span></td>
 			  				<td width="100px">
-								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-					      			onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
-					      			url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=252&fieldId=schoolId">
+								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 				        		</select>
 							</td>
 							<td align="right"><span>学员姓名：</span></td>
@@ -140,7 +137,7 @@
     				</table>
     			</form>
     			<div style="padding:5px 0;min-width:1100px; width:100%;">
-				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="apply_list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1023" 
+				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="apply_list_data"
 				  		toolbar="#toolbarApply" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
@@ -199,7 +196,7 @@
 							</td>
 							<td align="center">
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryApproveBtn" funcNodeId="1025">查询</a>
-								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
+								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="resetApprove">重置</a>
 							</td>
 						</tr>
 						<tr>
@@ -227,7 +224,7 @@
     				</table>
     			</form>
     			<div style="padding:5px 0;min-width:1100px; width:100%;">
-				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="approve_list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1025" 
+				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="approve_list_data"
 				  		toolbar="#toolbarApprove" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>

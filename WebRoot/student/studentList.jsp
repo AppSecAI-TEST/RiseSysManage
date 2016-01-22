@@ -44,23 +44,17 @@
 				<tr>
 					<td align="right" style="min-width: 80px;"><span>招生顾问：</span></td>
 					<td width="100px">
-						<select id="advisterId" name="advisterId" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
-      						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+						<select id="advisterId" name="advisterId" class="easyui-combobox" style="width: 100px; height: 25px;">
      					</select>
 					</td>
 					<td align="right" style="min-width: 80px;"><span>责任顾问：</span></td>
 					<td width="100px">
-						<select id="dutyAdvister" name="dutyAdvister" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
-      						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+						<select id="dutyAdvister" name="dutyAdvister" class="easyui-combobox" style="width: 120px; height: 25px;">
       					</select>
 					</td>
 					<td align="right" style="min-width: 80px;"><span>客户关怀：</span></td>
 					<td width="100px">
-						<select id="carer" name="carer" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
-     						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+						<select id="carer" name="carer" class="easyui-combobox" style="width: 120px; height: 25px;">
      					</select>
 					</td>
 					<td align="right" style="min-width: 80px;"><span>建档时间：</span></td>
@@ -78,7 +72,7 @@
 				</tr>
 			</table>
 		</form>
-			<table class="easyui-datagrid" title="学员列表" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1000" 
+			<table class="easyui-datagrid" title="学员列表" style="height:435px;" id="list_data" 
 				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 				<thead>
 					<tr>

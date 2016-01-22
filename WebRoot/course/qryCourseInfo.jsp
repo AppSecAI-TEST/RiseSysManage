@@ -29,9 +29,7 @@
 	  					</td>
 	  					<td align="right" style="min-width: 70px;"><span>责任顾问：</span></td>
 	  					<td style="min-width: 100px;">
-	  						<select id="dutyAdviser" name="dutyAdviser" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
-      							url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+	  						<select id="dutyAdviser" name="dutyAdviser" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        	</select>
 	  					</td>
 	  					<td align="right" style="min-width: 70px;"><span>联系电话：</span></td>
@@ -50,9 +48,7 @@
 	  				<tr>
 	  					<td align="right" style="min-width: 70px;"><span>业绩顾问：</span></td>
 			  			<td style="min-width: 100px;">
-							<select id="adviserId" name="adviserId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
-      							url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+							<select id="adviserId" name="adviserId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        	</select>
 						</td>
 						<td align="right" style="min-width: 70px;"><span>业绩类型：</span></td>
@@ -88,9 +84,7 @@
 	  					</td>
 	  					<td align="right" style="min-width: 70px;"><span>业绩老师：</span></td>
 	  					<td style="min-width: 100px;">
-							<select id="adviserTeacherId" name="adviserTeacherId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
-      							url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}&classType=">
+							<select id="adviserTeacherId" name="adviserTeacherId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        	</select>
 						</td>
 						<td align="right" style="min-width: 70px;"><span>口碑类型：</span></td>

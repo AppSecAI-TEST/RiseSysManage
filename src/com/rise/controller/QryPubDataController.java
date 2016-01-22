@@ -291,7 +291,7 @@ public class QryPubDataController
 	@RequestMapping(value = "/qryData.do")
 	public void qryData( String param, HttpServletResponse response)
 	{
-	 
+		log.error(param);
 		PrintWriter out = null;
 		try
 		{

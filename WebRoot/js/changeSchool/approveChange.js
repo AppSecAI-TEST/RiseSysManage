@@ -8,7 +8,7 @@ $(document).ready(function() {
 		async: true,
 		beforeSend: function()
 		{
-			$.messager.progress({title : '浏览', msg : '正在查询浏览转班信息，请稍等……'});
+			$.messager.progress({title : '浏览', msg : '正在查询审批转班信息，请稍等……'});
 		},
 		success: function (data) {
 			$.messager.progress('close'); 
@@ -92,13 +92,13 @@ $(document).ready(function() {
 					async: true,
 					beforeSend: function()
 					{
-						$.messager.progress({title : '转班审批', msg : '正在审批转班，请稍等……'});
+						$.messager.progress({title : '转校审批', msg : '正在审批转校，请稍等……'});
 					},
 					success: function (data) {
 						$.messager.progress('close'); 
 						var flag = data.flag;
 						if(flag) {
-							$.messager.alert('提示', "转班审批成功！", "info", function() {window.history.back();});
+							$.messager.alert('提示', "转校审批成功！", "info", function() {window.history.back();});
 						} else {
 							$.messager.alert('提示', data.msg);
 						}

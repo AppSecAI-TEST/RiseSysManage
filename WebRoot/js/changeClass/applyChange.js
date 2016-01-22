@@ -2,11 +2,10 @@ $(document).ready(function() {
 	var studentCourseId = $("#studentCourseId").val();
 	$.ajax({
 		url: "/sys/pubData/qryData.do",
-		data: "param={'queryCode':'qryApplyStudentCourseInfo','studentCourseId':'"+studentCourseId+"'}",
+		data: "param={\"queryCode\":\"qryApplyChangeClass\",\"studentCourseId\":\""+studentCourseId+"\"}",
 		dataType: "json",
 		async: true,
-		beforeSend: function()
-		{
+		beforeSend: function() {
 			$.messager.progress({title : '转班申请', msg : '正在查询申请转班的课程信息，请稍等……'});
 		},
 		success: function (data) {

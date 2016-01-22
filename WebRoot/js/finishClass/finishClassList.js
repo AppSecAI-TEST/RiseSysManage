@@ -1,19 +1,55 @@
 $(document).ready(function() {
 	$("#qryBtn").click(function() {
-		var obj = JSON.stringify($("#qryFm").serializeObject());
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+		var object = $("#qryFm").serializeObject();
+		var funcNodeId = $("#qryBtn").attr("funcNodeId");
+		object.funcNodeId = funcNodeId;
+		var obj = JSON.stringify(object);
     	$('#list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",
     		queryParams:{
     			param : obj
     		},
-    		onLoadSuccess:function(){
+    		onLoadSuccess:function() {
     			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
     			$('#list_data').datagrid('clearSelections');
     		}
     	});
+	});
+	
+	$("#reset").click(function() {
+		$("#qryFm").form('clear');//清空窗体数据  
+		var data = $("#schoolId").combobox("getData");
+		if(data.length > 0) {
+			$("#schoolId").combobox("setValue", data[0].schoolId);
+		}
+	});
+	
+	var staffId = $("#staffId").val();
+	$("#schoolId").combobox({
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=503&fieldId=schoolId",
+		valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
+    	onLoadSuccess:function(data) {
+    		if(data.length > 0) {
+    			$("#schoolId").combobox("setValue", data[0].schoolId);
+    		}
+    		$("#qryBtn").click();
+    	},
+    	onChange : function(n, o) {
+    		$("#teacherId").combobox({
+				url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&classType=",//返回json数据的url
+				valueField : "teacherId", 
+				textField : "byname",
+				panelHeight : "auto",
+				formatter : function(data) {
+					return "<span>" + data.byname + "</span>";
+				}
+			});
+    	}
 	});
 	
 	$("#stageId").combobox({
@@ -93,7 +129,7 @@ $(document).ready(function() {
 					$.messager.progress('close'); 
 					var flag = data.flag;
 					if(flag) {
-						$.messager.alert('提示', "处理成功", "info", function() {window.history.back();});
+						$.messager.alert('提示', "处理成功！", "info", function() {window.history.back();});
 					} else {
 						$.messager.alert('提示', data.msg);
 					}

@@ -19,14 +19,14 @@ $(document).ready(function() {
 			});
 		}
 	});
-	initQryButton("qryBtn","reset","qryFm","list_data");
+	
 	$("#qryBtn").unbind();
 	$("#qryBtn").click(function() {
-    	if($("#schoolId").combobox("getValue") == "") {
-    		showMessage("提示","没有有效的校区可供查询",null);
+		var schoolId = $("#schoolId").combobox("getValue");
+    	if(schoolId == "" || schoolId == null || schoolId == undefined) {
+    		showMessage("提示", "没有有效的校区可供查询", null);
     	} else {
-    		var obj = JSON.stringify($("#qryFm").serializeObject());
-	    	obj = obj.substring(0, obj.length - 1);
+    		var object = $("#qryFm").serializeObject();
 	    	var isNeed = $("input:radio[name='isNeed']:checked").val();
 	    	if(isNeed != null && isNeed != null && isNeed != undefined) {
 	    		var courseState = "";
@@ -40,10 +40,11 @@ $(document).ready(function() {
 	    			});
 	    		}
 	    		courseState = courseState.substring(0, courseState.length - 1);
-	    		obj += ",\"courseState\":\""+courseState+"\"";
+	    		object.courseState = courseState;
 	    	}
 	    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-	    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+	    	object.funcNodeId = funcNodeId;
+	    	var obj = JSON.stringify(object);
 	    	$('#list_data').datagrid({
 	    		url : "/sys/pubData/qryDataListByPage.do",
 	    		queryParams:{
@@ -55,13 +56,19 @@ $(document).ready(function() {
 	    		}
 	    	});
     	}	
-    	
     });
+	
+	$("#reset").click(function() {
+		$("#qryFm").form('clear');//清空窗体数据  
+		var data = $("#schoolId").combobox("getData");
+		if(data.length > 0) {
+			$("#schoolId").combobox("setValue", data[0].schoolId);
+		}
+	});
 		
 	var staffId = $("#staffId").val();
-	var funcNodeId = $("#funcNodeId").val();
 	$("#schoolId").combobox({
-		url : "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId=713&fieldId=schoolId&headFlag=N",
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=713&fieldId=schoolId&headFlag=N",
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
@@ -69,10 +76,31 @@ $(document).ready(function() {
     		return "<span>" + data.schoolName + "</span>";
     	},
     	onLoadSuccess : function() {
-    		if($("#schoolId").combobox("getData").length>0)
-    		{
-    			$("#schoolId").combobox("setValue",$("#schoolId").combobox("getData")[0].schoolId);
-    		}	
+    		var data = $("#schoolId").combobox("getData");
+    		if(data.length > 0) {
+    			$("#schoolId").combobox("setValue", data[0].schoolId);
+    		}
+    		$("#qryBtn").click();
+    	},
+    	onChange : function(n, o) {
+    		$("#dutyAdvister").combobox({
+    			url : "/sys/pubData/qryStaffList.do?post=16,17&schoolId=" + n,
+    			valueField : "staffId",
+    	    	textField : "userName",
+    	    	panelHeight : "auto",
+    	    	formatter : function(data) {
+    	    		return "<span>" + data.userName + "</span>";
+    	    	}
+    		});
+    		$("#adviserTeacher").combobox({
+    			url : "/sys/pubData/qryTeacherList.do?schoolId=" + n + "&classType=",
+    			valueField : "teacherId",
+    	    	textField : "byname",
+    	    	panelHeight : "auto",
+    	    	formatter : function(data) {
+    	    		return "<span>" + data.byname + "</span>";
+    	    	}
+    		});
     	}
 	});
 	
@@ -121,8 +149,13 @@ $(document).ready(function() {
 		if(row) {
 			var isNeedSelect = row.isNeedSelect;
 			if("Y" == isNeedSelect) {
-				var studentCourseId = row.studentCourseId;
-				window.location.href = "/sys/selectClass/selectClass.jsp?studentCourseId="+studentCourseId;
+				var changeFlag = row.changeFlag;
+				if("N" == changeFlag) {
+					var studentCourseId = row.studentCourseId;
+					window.location.href = "/sys/selectClass/selectClass.jsp?studentCourseId="+studentCourseId;
+				} else {
+					$.messager.alert('提示', "您选择的学员已申请转校，不能进行选班！");
+				}
 			} else {
 				$.messager.alert('提示', "您选择的学员暂时还不需要选班！");
 			}

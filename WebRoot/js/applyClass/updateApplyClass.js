@@ -3,18 +3,13 @@ var selTr = null;
 var classTeacherId = "";
 $(document).ready(function() {	
 	$("#selectClass").click(function() {
+		var stageId = $("#stageId").html();
+		var schoolId = $("#schoolId").val();
 		var className = $("#className").html();
-		var classState = $("#classState").val();
-		if("002" == classState) {
-			$.messager.alert('提示', className + "为待开课班级，不允许选班！");
-		} else {
-			var stageId = $("#stageId").html();
-			var classType = $("#classType").html();
-			var schoolId = $("#schoolId").val();
-			var classInstId = $("#classInstId").val();
-			var funcNodeId = $("#funcNodeId").val();
-			window.location.href = "/sys/applyClass/studentCourseList.jsp?stageId="+stageId+"&classType="+classType+"&schoolId="+schoolId+"&className="+className+"&classInstId="+classInstId+"&funcNodeId="+funcNodeId;
-		}
+		var classType = $("#classType").html();
+		var funcNodeId = $("#funcNodeId").val();
+		var classInstId = $("#classInstId").val();
+		window.location.href = "/sys/applyClass/studentCourseList.jsp?stageId="+stageId+"&classType="+classType+"&schoolId="+schoolId+"&className="+className+"&classInstId="+classInstId+"&funcNodeId="+funcNodeId;
 	});
 	
 	$("#removeStudent").click(function() {
@@ -328,8 +323,7 @@ function updateApplyClass() {
 				schooltimeArray += "{teacherId:\""+teacherId+"\",teacherType:\"T\",lessions:\""+lessions+"\"},";
 			}
 		});
-		if(flag)
-		{
+		if(flag) {
 			schooltimeArray = schooltimeArray.substring(0, schooltimeArray.length - 1);
 		}
 		schooltimeArray += "]},";

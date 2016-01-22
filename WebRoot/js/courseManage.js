@@ -2,9 +2,8 @@ $(document).ready(function() {
 	initQryButton("qryBtn", "reset", "qryFm", "list_data");
 	
 	var staffId = $("#staffId").val();
-	var funcNodeId = $("#funcNodeId").val();
 	$("#schoolId").combobox({
-		url : "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId=712&fieldId=schoolId&headFlag=N",
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=712&fieldId=schoolId&headFlag=N",
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
@@ -16,6 +15,35 @@ $(document).ready(function() {
     		{
     			$("#schoolId").combobox("setValue",data[0].schoolId);
     		}	
+    	},
+    	onChange : function(n, o) {
+    		$("#dutyAdviser").combobox({
+    			url : "/sys/pubData/qryStaffList.do?post=16,17&schoolId=" + n,
+    			valueField : "staffId",
+    	    	textField : "userName",
+    	    	panelHeight : "auto",
+    	    	formatter : function(data) {
+    	    		return "<span>" + data.userName + "</span>";
+    	    	}
+    		});
+    		$("#adviserId").combobox({
+    			url : "/sys/pubData/qryStaffList.do?post=16,17&schoolId=" + n,
+    			valueField : "staffId",
+    	    	textField : "userName",
+    	    	panelHeight : "auto",
+    	    	formatter : function(data) {
+    	    		return "<span>" + data.userName + "</span>";
+    	    	}
+    		});
+    		$("#adviserTeacherId").combobox({
+    			url : "/sys/pubData/qryTeacherList.do?schoolId=" + n + "&classType=",
+    			valueField : "teacherId",
+    	    	textField : "byname",
+    	    	panelHeight : "auto",
+    	    	formatter : function(data) {
+    	    		return "<span>" + data.byname + "</span>";
+    	    	}
+    		});
     	}
 	});
 	

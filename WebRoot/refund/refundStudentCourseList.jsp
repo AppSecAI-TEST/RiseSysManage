@@ -12,15 +12,13 @@
   	</head>
   
   	<body style="padding-top:5px">
+  		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
   		<form id="qryFm" style="margin:0 auto;">
   			<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
   				<tr>
   					<td align="right"><span>校区：</span></td>
 			  		<td width="130px">
-						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 130px; height: 25px;" editable="false"
-							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-					      	onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
-					      	url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
+						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 130px; height: 25px;" editable="false">
 				        </select>
 					</td>
 					<td align="right"><span>学员姓名：</span></td>

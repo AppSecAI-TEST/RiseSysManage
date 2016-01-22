@@ -162,7 +162,9 @@ function initClassInst(isBegin) {
                 if (data.length > 0) {
                 	var inClassId = $("#inClassId").val();
                 	if(inClassId != "" && inClassId != null && inClassId != undefined) {
-                		$("#notBeginClassInstId").combobox('select', inClassId);
+                		for(var i = 0, len = data.length; i < len; i++) {
+                			$("#notBeginClassInstId").combobox('select', inClassId);
+                		}
                 	}
                 }
             },

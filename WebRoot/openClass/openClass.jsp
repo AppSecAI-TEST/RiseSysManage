@@ -15,14 +15,12 @@
   		<div id="tt" class="easyui-tabs" style="min-width:1110px; width:98%; height:auto;">
   			<div title="开班班级管理" style="padding:5px;display:block;">
   				<form id="qryFm" style="margin:0 auto;">
+  					<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
 		  			<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
 		  				<tr>
 		  					<td align="right"><span>校区：</span></td>
 			  				<td width="114px">
-								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-					      			onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue', data[0].schoolId);}"
-					      			url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=502&fieldId=schoolId">
+								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false">
 				        		</select>
 							</td>
 							<td align="right"><span>课程阶段：</span></td>
@@ -66,7 +64,6 @@
 		  		</form>
 		  		<div style="padding:5px 0;min-width:1100px; width:100%;">
 				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" 
-				  		url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1009" 
 				  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
@@ -101,15 +98,12 @@
 		  				<tr>
 		  					<td align="right"><span>校区：</span></td>
 			  				<td width="114px">
-								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-									onLoadSuccess:function(data){if(data.length > 0) $('#approveSchoolId').combobox('setValue', data[0].schoolId);}"
-					      			url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=502&fieldId=schoolId">
+								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false">
 				        		</select>
 							</td>
 							<td align="right"><span>开班申请日期：</span></td>
 			  				<td width="114px">
-								<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeOpenApply" name="startTimeOpenApply" ata-options="formatter:myformatter, parser:myparser"/>
+								<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTimeOpenApply" name="startTimeOpenApply" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 							<td align="center"><span>至</span></td>
 							<td>

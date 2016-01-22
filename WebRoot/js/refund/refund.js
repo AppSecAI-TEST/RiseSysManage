@@ -1,16 +1,26 @@
 $(document).ready(function() {
+	$("#tt").tabs({
+		onSelect: function (title) {
+			var src = "";
+			if(title == "退费课程查询") {
+				$("#qryBtn").click();
+			} else if(title == "退费课程管理") {
+				$("#qryApproveBtn").click();
+			} 
+		}
+	});
+	
 	$("#qryBtn").click(function() {
 		var s = "";
 		$('input[name="refundState"]:checked').each(function() {
 		    s += $(this).val() + ",";
 		});
 		s = s.substring(0, s.length - 1);
+		var funcNodeId = $("#qryBtn").attr("funcNodeId");
 		var object = $("#qryRefundCourseFm").serializeObject();
 		object.refundState = s;
+		object.funcNodeId = funcNodeId;
     	var obj = JSON.stringify(object);
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
     	$('#apply_list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",
     		queryParams:{
@@ -23,6 +33,15 @@ $(document).ready(function() {
     	});
     });
 	
+	//重置
+	$("#reset").click(function() {
+		$("#qryRefundCourseFm").form('clear');//清空窗体数据  
+		var data = $("#schoolId").combobox("getData");
+		if(data.length > 0) {
+			$("#schoolId").combobox("setValue", data[0].schoolId);
+		}
+	});
+	
 	$("#qryApproveBtn").click(function() {
 		var s = "";
 		$('input[name="approveRefundState"]:checked').each(function() {
@@ -30,11 +49,10 @@ $(document).ready(function() {
 		});
 		s = s.substring(0, s.length - 1);
 		var object = $("#qryRefundApproveFm").serializeObject();
+		var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");
 		object.approveRefundState = s;
+		object.funcNodeId = funcNodeId;
     	var obj = JSON.stringify(object);
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
     	$('#approve_list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",
     		queryParams:{
@@ -46,6 +64,53 @@ $(document).ready(function() {
     		}
     	});
     });
+	
+	//重置
+	$("#resetApprove").click(function() {
+		$("#qryRefundApproveFm").form('clear');//清空窗体数据  
+		var data = $("#approveSchoolId").combobox("getData");
+		if(data.length > 0) {
+			$("#approveSchoolId").combobox("setValue", data[0].schoolId);
+		}
+	});
+	
+	var staffId = $("#staffId").val();
+	$("#schoolId").combobox({
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=252&fieldId=schoolId",
+    	valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
+    	onLoadSuccess : function() {
+    		var data = $("#schoolId").combobox("getData");
+    		if(data.length > 0) {
+    			$("#schoolId").combobox("setValue", data[0].schoolId);
+    		}
+    		$("#qryBtn").click();
+    	},
+    	onChange : function(n, o) {
+    		$("#adviserId").combobox({
+    			url : "/sys/pubData/qryStaffList.do?post=16,17&schoolId=" + n,
+    			valueField : "staffId",
+    	    	textField : "userName",
+    	    	panelHeight : "auto",
+    	    	formatter : function(data) {
+    	    		return "<span>" + data.userName + "</span>";
+    	    	}
+    		});
+    		$("#teacherId").combobox({
+    			url : "/sys/pubData/qryTeacherList.do?schoolId=" + n + "&classType=",
+    			valueField : "teacherId",
+    	    	textField : "byname",
+    	    	panelHeight : "auto",
+    	    	formatter : function(data) {
+    	    		return "<span>" + data.byname + "</span>";
+    	    	}
+    		});
+    	}
+	});
 	
 	$("#courseType").combobox({
 		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE",//返回json数据的url

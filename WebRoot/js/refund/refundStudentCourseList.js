@@ -5,12 +5,11 @@ $(document).ready(function() {
 		    s += $(this).val() + ",";
 		});
 		s = s.substring(0, s.length - 1);
+		var funcNodeId = $("#qryBtn").attr("funcNodeId");
 		var object = $("#qryFm").serializeObject();
 		object.courseState = s;
+		object.funcNodeId = funcNodeId;
     	var obj = JSON.stringify(object);
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
     	$('#list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",
     		queryParams:{
@@ -22,6 +21,43 @@ $(document).ready(function() {
     		}
     	});
     });
+	
+	$("#reset").click(function() {
+		$("#qryFm").form('clear');//清空窗体数据  
+		var data = $("#schoolId").combobox("getData");
+		if(data.length > 0) {
+			$("#schoolId").combobox("setValue", data[0].schoolId);
+		}
+	});
+	
+	var staffId = $("#staffId").val();
+	$("#schoolId").combobox({
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=252&fieldId=schoolId",
+    	valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
+    	onLoadSuccess : function() {
+    		var data = $("#schoolId").combobox("getData");
+    		if(data.length > 0) {
+    			$("#schoolId").combobox("setValue", data[0].schoolId);
+    		}
+    		$("#qryBtn").click();
+    	},
+    	onChange : function(n, o) {
+    		$("#adviserId").combobox({
+    			url : "/sys/pubData/qryStaffList.do?post=16,17&schoolId=" + n,
+    			valueField : "staffId",
+    	    	textField : "userName",
+    	    	panelHeight : "auto",
+    	    	formatter : function(data) {
+    	    		return "<span>" + data.userName + "</span>";
+    	    	}
+    		});
+    	}
+	});
 	
 	$("#courseType").combobox({
 		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE",//返回json数据的url
