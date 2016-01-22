@@ -71,7 +71,7 @@
 		    <td align="center" width="62px;" colspan="3"><span>第四周</span></td>
 		    <td align="center" width="62px;" colspan="3"><span>第五周</span></td>
 		    <td align="center" width="48px;" rowspan="2"><span>本月计划课时</span></td>
-		    <td align="center" width="48px;" rowspan="2"><span>本月已排课时</span></td>
+		    <td align="center" width="48px;" rowspan="2"><span>本月实际课时</span></td>
 		    <td align="center" width="48px;" rowspan="2"><span>课时差异</span></td>
 		    <td align="center" width="48px;" rowspan="2"><span>差异说明</span></td>
 		  </tr>
@@ -164,10 +164,11 @@
 				    			html+="<td align='center'><span>"+obj.weekPlan5+"</span></td>";
 				    			html+="<td align='center'><span>"+obj.weekHand5+"</span></td>";
 				    			html+="<td align='center'><span>"+obj.monthPlanHours+"</span></td>";
-				    			html+="<td align='center'><span>"+obj.monthHandHours+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.monthRealNum+"</span></td>";
 				    			html+="<td align='center'><span>"+obj.mDiffNum+"</span></td>";
-				    			if(obj.remark=='')
+				    			if(obj.remark=='' || obj.remark==undefined)
 				    			{
+				    				
 				    				html+="<td align='center' width='40px;'><input class='easyui-textbox' style='width:150px; height: 25px;'/></td>";
 				    			}else
 				    			{

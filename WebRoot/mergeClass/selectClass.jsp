@@ -32,30 +32,30 @@
   						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px;height:25px" editable="false"
 							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 			      			onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
-			      			url="<%=path %>/pubData/qrySchoolList.do?schoolId=${sessionScope.StaffT.schoolId}">
+			      			url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=704&fieldId=schoolId&headFlag=N">
 		        		</select>
   					</td>
   					<td  width="80px;" align="right"><span>课时进度：</span></td>
   					<td  width="230px;">
-  						<input class="easyui-datebox" name="minTime" id="minTime" style="width: 100px;height:25px" />
+  						<input class="easyui-numberbox" name="minTime" id="minTime" data-options="min:0,max:99,precision:0" style="width: 100px;height:25px" />
   						至
-  						<input class="easyui-datebox" name="maxTime" id="maxTime" style="width: 100px;height:25px" />
+  						<input class="easyui-numberbox" name="maxTime" id="maxTime" data-options="min:1,max:100,precision:0" style="width: 100px;height:25px" />
   					</td>
   					<td></td>
   				</tr>
   				<tr>
   					<td align="right"><span>课程阶段：</span></td>
   					<td>
-  						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px;height:25px"
+  						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px;height:25px" editable="false"
 							data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'"
 			      			url="<%=path %>/pubData/qryStage.do?">
 		        		</select>
   					</td>
   					<td align="right"><span>开课日期：</span></td>
   					<td>
-  						<input class="easyui-datebox" name="startTime" id="startTime" style="width: 100px;height:25px" />
+  						<input class="easyui-datebox" name="startTime" id="startTime" style="width: 100px;height:25px" editable="false"/>
   						至
-  						<input class="easyui-datebox" name="endTime" id="endTime" style="width: 100px;height:25px" />
+  						<input class="easyui-datebox" name="endTime" id="endTime" style="width: 100px;height:25px" editable="false"/>
   					</td>
   					<td>
   						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" funcNodeId="3110">查询</a>
