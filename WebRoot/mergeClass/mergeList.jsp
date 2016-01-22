@@ -46,7 +46,7 @@
 		  						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 120px;height:25px;" editable="false"
 									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
 				      				onLoadSuccess:function(data){if(data.length > 0) $('#stageId').combobox('setValue',data[0].stageId);}"
-  									url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=801&fieldId=stageId">
+  									url="<%=path%>/pubData/qryStage.do?">
 				        		</select>
 		  					</td>
 		  					<td width="110px;" align="right">计划审批时间：</td>
@@ -59,9 +59,9 @@
 		  				<tr>
 		  					<td align="right">定班率：</td>
 		  					<td>
-		  						<input class="easyui-textbox" id="lowLimit" name="lowLimit" style="width:35px;height:25px;">%
+		  						<input class="easyui-textbox" id="lowLimit" name="lowLimit" data-options="min:0,max:99,precision:0" style="width:35px;height:25px;">%
 		  						-
-			  					<input class="easyui-textbox" id="limit" name="limit" style="width:35px;height:25px;">%
+			  					<input class="easyui-textbox" id="limit" name="limit" data-options="min:1,max:100,precision:0" style="width:35px;height:25px;">%
 		  					</td>
 		  					<td align="right">合并状态：</td>
 		  					<td>
@@ -139,7 +139,7 @@
 		  						<select id="stageIds" name="stageId" class="easyui-combobox" style="width: 120px;height:25px;" editable="false"
 									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto', 
 				      				onLoadSuccess:function(data){if(data.length > 0) $('#stageIds').combobox('setValue',data[0].stageId);}"
-  									url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=802&fieldId=stageId">
+  									url="<%=path%>/pubData/qryStage.do?">
 				        		</select>
 		  					</td>
 		  					<td width="110px;" align="right">计划审批时间：</td>
