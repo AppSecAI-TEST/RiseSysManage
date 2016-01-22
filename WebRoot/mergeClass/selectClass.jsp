@@ -78,7 +78,7 @@
 					<th field="progressRate" align="center" width="10%"><span>课时进度%</span></th>
 					<th field="classTime" align="center" width="18%"><span>上课时间段</span></th>
 					<th field="readNum" align="center" width="10%"><span>在读人数</span></th>
-					<th field="graduteNum" align="center" width="10%"><span>已升学人数</span></th>
+					<th field="higherNum" align="center" width="10%"><span>已升学人数</span></th>
 				</tr>
 			</thead>
 		</table>

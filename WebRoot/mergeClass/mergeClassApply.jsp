@@ -17,6 +17,7 @@
   		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   		<input id="classInstIds" type="hidden" value="<%=classInstIds%>"/>
   		<input id="isHead" type="hidden" value="<%=isHead%>"/>
+  		<input id="comSchoolId" type="hidden" value="<%=isHead%>"/>
   		<div id ="classInfo" class="easyui-panel" title="班级信息" style="width:1293px;">
   			<table width="100%;" id="classTab" class="maintable">
   				<tr>
@@ -98,7 +99,7 @@
   		<div class="easyui-panel" title="合并说明" style="width:1293px;height:100px;">
   			<textarea id="remark" style="border:0;width:100%;height:100%;resize:none;overflow-y:hidden"></textarea>
   		</div>
-  		<div style="width:1293px;text-align:center;margin-top:50px;">
+  		<div style="width:1293px;text-align:center;margin:50px 0;">
   			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:150px" id="submitBtn"><span>提交</span></a>
   				&nbsp;&nbsp;&nbsp;&nbsp;
   			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" ><span>返回</span></a>	

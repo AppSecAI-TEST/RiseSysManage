@@ -4,6 +4,9 @@ var maxWeek =18;
 var totalNum =0;
 var orderNum =0;
 $(document).ready(function(){
+	$("#backBtn").click(function(){
+		window.history.back();
+	})
 	$.ajax({
 		type : "POST",
 		url : "/sys/mergeClass/qryClassInstList.do",
@@ -86,7 +89,10 @@ function initApplyClassTable(classes)
 		tr1.find("td:eq(8)").find("input").attr("data-options","min:0,max:"+obj.readNum+",precision:0,required:true");
 		tr1.css("display","table-row");
 		$("#mergeTab").append(tr1);
-		totalNum +=obj.readNum;
+		if(obj.higherNum!="")
+		{
+			totalNum +=parseInt(obj.higherNum);
+		}	
 		//班级信息
 		var tr2 =$("#modelTr2").clone();
 		tr2.find("td:eq(0)").html(obj.schoolName);
@@ -94,12 +100,12 @@ function initApplyClassTable(classes)
 		tr2.find("td:eq(2)").html(obj.finishDate);
 		tr2.find("td:eq(3)").html(obj.classTime);
 		tr2.find("td:eq(4)").html(obj.readNum);
-		tr2.find("td:eq(5)").html();//已升学人数
-		tr2.find("td:eq(6)").html();//升学率
+		tr2.find("td:eq(5)").html(obj.higherNum);//已升学人数
+		tr2.find("td:eq(6)").html(obj.higherRate);//升学率
 		var min =0;
 		if(tr2.find("td:eq(5)").html()!="")
 		{
-			min =parseInt(tr2.find("td:eq(5)").html())
+			min =parseInt(tr2.find("td:eq(5)").html());
 		}	
 		tr2.find("td:eq(7)").find("input").addClass("easyui-numberbox").attr("data-options","min:"+min+",max:"+obj.readNum+",precision:0,required:true");
 		tr2.find("td:eq(8)").html();//升学缺口
@@ -236,6 +242,30 @@ function initApplyClassTable(classes)
 			}	
 		}
 	});
+	
+	//绑定可升学人数变化事件
+	$(".classTr").each(function(){
+		var index=$(this);
+		$(this).find("td:eq(7)").find(".easyui-numberbox").numberbox({
+			onChange:function(nval)
+			{
+				if(nval=="")
+				{
+					index.find("td:eq(8)").html("");
+				}
+				else
+				{
+					var val1 =parseInt(nval);
+					var val2=0;
+					if(index.find("td:eq(5)").html()!="")
+					{
+						val2 =parseInt(index.find("td:eq(5)").html())
+					}
+					index.find("td:eq(8)").html(val1-val2);
+				}	
+			}
+		});
+	});
 	//绑定合并时长改变事件
 	$("#mergeWeek").numberbox({
 		onChange:function(n,o)
@@ -264,12 +294,9 @@ function initApplyClassTable(classes)
 			});
 		}	
 	});
-	//绑定提交返回事件
+	//绑定提交事件
 	$("#submitBtn").click(function(){
 		submitMergeInfo();
-	})
-	$("#backBtn").click(function(){
-		window.history.back();
 	})
 }
 
@@ -358,25 +385,34 @@ function initCourseApply(num)
 
 function getOrderRate(newValue,oldValue)
 {
-	if(newValue==""||newValue==undefined)
+	if(totalNum==0)
 	{
-		newValue=0
+		$("#orderRate").html("0%");
 	}
 	else
 	{
-		newValue=parseInt(newValue)
-	}
-	if(oldValue==""||oldValue==undefined)
-	{
-		oldValue=0
-	}
-	else
-	{
-		oldValue=parseInt(oldValue)
-	}
-	orderNum =orderNum-oldValue+newValue;
-	var rateValue =(orderNum/totalNum*100).toFixed(2)+"%";
-	$("#orderRate").html(rateValue);
+		if(newValue==""||newValue==undefined)
+		{
+			newValue=0
+		}
+		else
+		{
+			newValue=parseInt(newValue)
+		}
+		if(oldValue==""||oldValue==undefined)
+		{
+			oldValue=0
+		}
+		else
+		{
+			oldValue=parseInt(oldValue)
+		}
+		orderNum =orderNum-oldValue+newValue;
+		var rateValue =(orderNum/totalNum*100).toFixed(2)+"%";
+		$("#orderRate").html(rateValue);
+	}	
+	
+	
 }
 
 
@@ -424,6 +460,7 @@ function submitMergeInfo()
 				detail.startHours =mergeTr.find("td:eq(3)").find("input[type='hidden']").val();
 				detail.comboType =mergeTr.find("td:eq(5)").find("input[type='hidden']").val();
 				detail.comboFinishDate =mergeTr.find("td:eq(6)").find("input[type='hidden']").val();
+				detail.orderNum =mergeTr.find("td:eq(9)").find("input[type='hidden']").val();
 				detail.orderNum =mergeTr.find("td:eq(9)").find("input[type='hidden']").val();
 			}
 			else
