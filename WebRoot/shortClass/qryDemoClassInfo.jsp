@@ -97,7 +97,10 @@
 					panelHeight: 'auto',
 					formatter : formatSchool,
 					onLoadSuccess : function(data) {
-						$("#schoolId").combobox('setValue',data[0].schoolId);
+						if(data.length > 0)
+						{
+							$("#schoolId").combobox('setValue',data[0].schoolId);
+						}
 					},
 					onChange : function(n, o) {
 						if(n != "" && n != null && n != undefined) {

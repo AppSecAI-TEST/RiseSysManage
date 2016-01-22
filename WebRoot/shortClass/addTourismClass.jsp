@@ -79,7 +79,7 @@
 					onLoadSuccess:function(data){
 						if(data.length > 0)
 						{
-							$("#schoolId").combobox("setValue",data.schoolId);
+							$("#schoolId").combobox("setValue",data[0].schoolId);
 						}
 					}
 				});

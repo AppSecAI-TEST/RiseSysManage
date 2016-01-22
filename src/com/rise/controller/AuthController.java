@@ -135,6 +135,11 @@ public class AuthController
 		try
 		{
 			HttpSession session = request.getSession();
+			StaffT staffT = (StaffT)session.getAttribute("StaffT");
+			if(!ObjectCensor.checkObjectIsNull(staffT))
+			{
+				authService.logoutStaff(staffT.getStaffId() , request.getRemoteAddr());
+			}
 			session.removeAttribute("StaffT");
 			session.removeAttribute("funcNodeInfo");
 			session.removeAttribute("menuNodeInfo");

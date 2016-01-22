@@ -16,7 +16,7 @@
 	  				<tr>
 	  					<td align="right"><span>校区：</span></td>
 	  					<td align="left"  width="120px">
-	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:100px;height:25px;" editable="false" data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'" url="<%=path %>/pubData/qrySchoolList.do?">
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:100px;height:25px;" editable="false" data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',onLoadSuccess:function(data){if(data.length > 0){$('#schoolId').combobox('setValue',data[0].schoolId);}}" url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=860&fieldId=schoolId">
 				        	</select>
 	  					</td>
 	  					<td width="100px" align="right"><span>日期：</span></td>

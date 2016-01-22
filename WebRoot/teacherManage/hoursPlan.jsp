@@ -28,7 +28,7 @@
   					<td>
   						<input name="teacherId"  class="easyui-combobox vaildatebox" id="teacherId"
 								style="width: 100px; height: 25px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'" required="true" />
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"   />
   					</td>
   					<td align="right">职务：</td>
   					<td>

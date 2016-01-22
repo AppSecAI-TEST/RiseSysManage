@@ -23,7 +23,10 @@
 			</tr>
 			<tr>
 				<td align="right">教室：</td>
-				<td colspan="4"><select id="roomList" name="roomList" style="width:150px" ></select></td>
+				<td colspan="4">
+					<select id="schoolRoomId" name="schoolRoomId" style="width:150px" ></select>&nbsp;&nbsp;
+					<select id="roomList" name="roomList" style="width:150px" ></select>
+				</td>
 			</tr>
 			<tr>
 				<td align="right">课程阶段：</td>
@@ -48,9 +51,7 @@
 		<script type="text/javascript">
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=815&fieldId=schoolId",function(data){
 				$("#schoolId").combobox("loadData",data);
-			},"json");
-			$.post("<%=path %>/pubData/qryRoomList.do?schoolId=${sessionScope.StaffT.schoolId}",function(data){
-				$("#roomList").combobox("loadData",data);
+				$("#schoolRoomId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryParaConfigList.do?paramType=HOUR_RANGE",function(data){
 				$("#hourRange").combobox("loadData",data);
@@ -110,14 +111,34 @@
 					editable:false,
 					onChange:function(value){
 						$("#teacherId").combobox("setValue","");
-						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:value},function(data){
+						$.post("<%=path %>/pubData/getTeacherBySchoolId.do",{schoolId:value},function(data){
 							$("#teacherId").combobox("loadData",data);
 						},"json");
 					},
 					onLoadSuccess:function(data){
 						if(data.length > 0)
 						{
-							$("#schoolId").combobox("setValue",data.schoolId);
+							$("#schoolId").combobox("setValue",data[0].schoolId);
+						}
+					}
+				});
+				$("#schoolRoomId").combobox({
+					formatter:formatSchool, 
+					valueField: 'schoolId', 
+					textField: 'schoolName', 
+					panelHeight: 'auto',
+					//listHeight:150,
+					editable:false,
+					onChange:function(value){
+						$("#roomList").combobox("setValue","");
+						$.post("<%=path %>/pubData/qryRoomList.do",{schoolId:value},function(data){
+							$("#roomList").combobox("loadData",data);
+						},"json");
+					},
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+						{
+							$("#schoolRoomId").combobox("setValue",data[0].schoolId);
 						}
 					}
 				});

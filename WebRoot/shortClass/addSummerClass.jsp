@@ -107,7 +107,13 @@
 					valueField: 'schoolId', 
 					textField: 'schoolName', 
 					panelHeight: 'auto',
-					editable:false
+					editable:false,
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+						{
+							$("#schoolManId").combobox("setValue",data[0].schoolId);
+						}
+					}
 				});
 				var schoolManId = sessionStorage.getItem("schoolManId");
 				var classType = sessionStorage.getItem("classType");
