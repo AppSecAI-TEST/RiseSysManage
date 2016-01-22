@@ -48,7 +48,7 @@
 							field:'attendTypeName',title:'考勤状态',align:'center',width:50
 						},
 						{
-							field:'attendDate',title:'缺课日期',align:'center',width:150
+							field:'attendDate',title:'缺课日期',align:'center',width:150,formatter:function(value){return new Date(value).format("yyyy-MM-dd")}
 						},
 						{
 							field:'isMakeup',title:'是否补课',align:'center',width:50

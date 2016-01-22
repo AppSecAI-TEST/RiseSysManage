@@ -46,7 +46,7 @@
   				</tr>
   				<tr>
   					<td align="right"><span>休学开始时间：</span></td>
-  					<td align="left"><span>${obj.leaveInfo.createDate}</span></td>
+  					<td align="left"><span id="leaveStartDate">${obj.leaveInfo.createDate}</span></td>
   					<td align="right"><span>计划休学时长：</span></td>
   					<td align="left"><span>${obj.leaveInfo.leaveTime}个月</span></td>
   					<td align="right"><span>操作人员：</span></td>

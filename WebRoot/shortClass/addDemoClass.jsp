@@ -30,7 +30,7 @@
 			</tr>
 			<tr>
 				<td align="right"><span>课时：</span></td>
-				<td colspan="4"><input name="lessonHour" id="lessonHour" type="text" style="width:150px" class="easyui-textbox" /></td>
+				<td colspan="4"><input name="lessonHour" id="lessonHour" type="text" style="width:150px" class="easyui-textbox" data-options="readonly:true" /></td>
 			</tr>
 			<tr>
 				<td align="right"><span>老师：</span></td>
@@ -69,7 +69,10 @@
 					valueField: 'paramValue', 
 					textField: 'paramDesc',
 					panelHeight: 'auto',
-					editable:false
+					editable:false,
+					onSelect:function(data){
+						$("#lessonHour").textbox("setValue",data.param4);
+					}
 				});
 				$("#teacherType").combobox({
 					formatter:formatItem, 

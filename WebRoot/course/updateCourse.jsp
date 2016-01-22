@@ -1173,7 +1173,14 @@ $("#submitBtn").click(function()
 					}
 				}else if(feeType=='002'|| feeType=='003')
 				{
-					if(courseState=='002' || courseState=='003' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
+					if(courseState=='001' || courseState=='002')
+					{
+						if(Number(stageOrder)==Number(order))
+						{
+							showMessage("提示","当前所报复读或升学阶段"+stageId+"低于或等于阶段"+stageName+",请重新选择阶段",null);
+							return;
+						}
+					}else if(courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 					{
 						if(Number(stageOrder)<Number(order))
 						{

@@ -286,7 +286,9 @@ function toLinkCourse(num)
 		  	$("#oldAmount").html(oldAmount);
 		}
 }
-	
+
+
+
 function validateCourses(studentCourses)
 {
 	var oldCourses=getOldCourse();
@@ -304,6 +306,19 @@ function validateCourses(studentCourses)
 		{
 			continue;
 		}
+		
+		//校验本次购买课程是否有相同
+		for(var m=0;m<studentCourses.length;m++)
+		{
+			var courseT=studentCourses[m].course;
+			var stageIdT =courseT.stageId;
+			if(stageId==stageIdT && i!=m)
+			{
+				showMessage("提示",stageId+"阶段只能购买一次",null);
+				return;
+			}
+		}
+		
 		for(var n=0;n<oldCourses.length;n++)
 		{
 			var oldCourse = oldCourses[n];
@@ -338,7 +353,14 @@ function validateCourses(studentCourses)
 					}
 				}else if(feeType=='002'|| feeType=='003')
 				{
-					if(courseState=='002' || courseState=='003'  || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
+					if(courseState=='001' || courseState=='002')
+					{
+						if(Number(stageOrder)==Number(order))
+						{
+							showMessage("提示","当前所报复读或升学阶段"+stageId+"低于或等于阶段"+stageName+",请重新选择阶段",null);
+							return;
+						}
+					}else if(courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 					{
 						if(Number(stageOrder)<Number(order))
 						{
@@ -439,7 +461,7 @@ var newCourse;//新招课程阶段
 		 }
 		 
 		 validateCourses(studentCourses);
-		 
+		 return;
 		allCourseInfos.studentCourses=studentCourses;
 		allCourseInfos.linkCourseT=linkCourseT;
 	    var str = JSON.stringify( allCourseInfos);

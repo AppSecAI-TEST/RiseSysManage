@@ -882,7 +882,8 @@ $("#addCourse").click(function()
 		studentCourse.giftCourses= courses;
 		
 		var obj = $("#courseFm").serializeObject();
-		 
+		obj.payDate=$("#payDate").datebox("getValue");
+		studentCourse.course=obj;
 		studentCourse.course=obj;
 		studentCourse.coupon=JSON.stringify(coupons); 
 		//alert(JSON.stringify(studentCourse));
@@ -954,7 +955,7 @@ $("#addCourse").click(function()
 				return false;
 			}
 			
-			if($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue"))
+			if($("#adviserTeacherB").combobox("getValue")!='' && ($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue")))
 			{
 				parent.showMessage("提示",arr[n]+"业绩老师A不能和业绩老师B相同",function(){
 					parent.hideMessage();

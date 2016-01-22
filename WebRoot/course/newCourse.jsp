@@ -92,7 +92,7 @@
 							</td>
 							 
 						</tr>
-						<tr >
+						
 						<td align="right">
 							 <span>业绩类型：</span>
 							</td>
@@ -104,29 +104,53 @@
 									url="<%=path%>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
 								</select>
 							</td>
-							<td align="right">
-								<span>业绩顾问A：</span>
-							</td>
+							<td align="right" id="adviserNameA"><span>业绩顾问A：</span></td>
 							<td>
-								<select  editable='false' id="adviserA_school" style="width: 100px; height: 25px;" data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
-								</select>
-								<select name="adviserA"   id="adviserA" editable='false' required="true" data-options="valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
+								<div id="adviserADiv">
+											<select class="easyui-combobox" id="adviserA_school" style="width: 100px; height: 25px;" data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+							</select>
+									<select name="adviserA"   id="adviserA" editable='false' required="true" data-options="valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
 									style="width: 100px; height: 25px;">
 								</select>
+								</select>
+							</div>
+								
+								<div id="adviserTeacherADiv" style="display:none">
+									<select class="easyui-combobox" editable='false' id="adviserTeacherA_school" style="width: 100px; height: 25px;"
+										data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+								  ></select>
+								  
+							<select name="adviserTeacherA"  id="adviserTeacherA" editable='false' required="true"
+								style="width: 100px; height: 25px;"
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
+							</select>
+	      						</div>
+	      						
 							</td>
-							<td align="right">
-								<span>业绩顾问B：</span>
-							</td>
+							<td align="right" id="adviserNameB"><span>业绩顾问B：</span></td>
 							<td>
-							<select  editable='false' id="adviserB_school" style="width: 100px; height: 25px;"
-								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'" >
+								<div id="adviserBDiv">
+								<select class="easyui-combobox" editable='false' id="adviserB_school" style="width: 100px; height: 25px;"
+								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+								  >
 								  </select>
 								<select name="adviserB" id="adviserB" editable='false'
 									style="width: 100px; height: 25px;"
 									data-options=" valueField: 'staffId', textField: 'userName', panelHeight: 'auto'">
 								</select>
+								</div>
+								<div id="adviserTeacherBDiv" style="display:none">
+							<select class="easyui-combobox" id="adviserTeacherB_school" editable='false' style="width: 100px; height: 25px;" data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+						</select>
+							<select name="adviserTeacherB" id="adviserTeacherB"
+								style="width: 100px; height: 25px;"
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
+							</select>
+	      						</div>
+							
 							</td>
 						</tr>
+						
 					</table>
 				</div>
 				<div id="giftDiv">
@@ -562,12 +586,23 @@ $("#c_schoolsA").combobox({data:schools});
 
 $("#adviserA_school").combobox({data:schools});
 $("#adviserB_school").combobox({data:schools});
+
+$("#adviserTeacherA_school").combobox({data:schools});
+$("#adviserTeacherB_school").combobox({data:schools});
+
 $("#adviserA").combobox({data:advisters});	
 $("#adviserB").combobox({data:advisters});	
 
+$("#adviserTeacherA").combobox({data:teachers});
+$("#adviserTeacherB").combobox({data:teachers});
+
 $("#s_teacherA").combobox({data:teachers});
 $("#s_teacherB").combobox({data:teachers});
-
+var advisterAid="<%=StringUtil.getJSONObjectKeyVal(object,"adviserA")%>";
+var advisterBid="<%=StringUtil.getJSONObjectKeyVal(object,"adviserB")%>";
+var adviserTeacherAid="<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherA")%>";
+var adviserTeacherBid="<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherB")%>";
+	
 	$("#adviserA_school").combobox({
 		onChange:function(){
 			var sId =$("#adviserA_school").combobox("getValue");
@@ -577,7 +612,6 @@ $("#s_teacherB").combobox({data:teachers});
 				textField:'userName', 
 				url:url
 			});
-			 
 		}
 	})
 	
@@ -593,6 +627,62 @@ $("#s_teacherB").combobox({data:teachers});
 			 
 		}
 	});
+	
+	$("#adviserTeacherA_school").combobox({
+		onChange:function(){
+			var sId =$("#adviserTeacherA_school").combobox("getValue");
+			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+			$("#adviserTeacherA").combobox({
+				url:urls
+			});
+		}
+	})
+	
+	$("#adviserTeacherB_school").combobox({
+		onChange:function(){
+			var sId =$("#adviserTeacherB_school").combobox("getValue");
+			var urls ="<%=path%>/pubData/qryTeacherList.do?schoolId="+sId;
+			$("#adviserTeacherB").combobox({
+				url:urls
+			});
+		}
+	})
+	
+	initOldCourse();
+function initOldCourse()
+{
+	$("#payDate").datebox({ disabled: true});
+	 
+	for ( var i = 0; i < advisters.length; i++)
+	{
+		if (advisterAid == advisters[i].staffId) 
+		{
+			$("#adviserA_school").combobox('setValue',advisters[i].schoolId);
+			$("#adviserA").combobox('setValue',advisters[i].staffId); 
+		}
+		if (advisterBid == advisters[i].staffId) 
+		{
+			$("#adviserB_school").combobox('setValue',advisters[i].schoolId);
+			$("#adviserB").combobox('setValue',advisters[i].staffId); 
+		}
+	}
+	
+	for ( var i = 0; i < teachers.length; i++)
+	{
+		if (adviserTeacherAid == teachers[i].teacherId) 
+		{
+			$("#adviserTeacherA_school").combobox('setValue',teachers[i].schoolId);
+			$("#adviserTeacherA").combobox('setValue',teachers[i].teacherId); 
+		}
+		if (adviserTeacherBid == teachers[i].teacherId) 
+		{
+			$("#adviserTeacherB_school").combobox('setValue',teachers[i].schoolId);
+			$("#adviserTeacherB").combobox('setValue',teachers[i].teacherId); 
+		}
+	}
+	
+	
+}
 
 $(":radio[name='isGetY']").click(function()
 {
@@ -1906,7 +1996,7 @@ $("#praiseSourceN").combobox({
 				}
 				else
 				{
-					if($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue"))
+					if($("#adviserTeacherB").combobox("getValue")!='' &&( $("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue")))
 					{
 						parent.showMessage("提示",arr[n]+"业绩老师A不能和业绩老师B相同",function(){
 							parent.hideMessage();

@@ -205,8 +205,14 @@ function updateSubmit()
 {
 	var delayDate = $("#delayDate").datebox("getValue");
 	var leaveDate = $("#leaveDate").val();
+	var leaveStartDate = $("#leaveStartDate").html();
+	var leaveMaxDate = new Date(leaveStartDate).dateAdd("m",parseInt(24)).format("yyyy-MM-dd");
 	if(delayDate <= leaveDate){
 		$.messager.alert('提示', "延期的日期不能小于计划休学日期！");
+		return;
+	}
+	if(leaveMaxDate < delayDate){
+		$.messager.alert('提示', "延期的日期不能大于"+leaveMaxDate+"！");
 		return;
 	}
 	var handlerId = $("#handlerId").val();
@@ -214,10 +220,10 @@ function updateSubmit()
 	var updateRemark = $("#updateRemark").val();
 	updateRemark = string2Json(updateRemark);
 	updateRemark = encodeURI(updateRemark);
-	if(updateRemark == "" || updateRemark == undefined){
-		$.messager.alert('提示', "备注信息不能为空！");
-		return;
-	}
+//	if(updateRemark == "" || updateRemark == undefined){
+//		$.messager.alert('提示', "备注信息不能为空！");
+//		return;
+//	}
 	$.ajax({
 		type : "POST",
 		url: "/sys/leaveManage/updateLeaveTime.do",

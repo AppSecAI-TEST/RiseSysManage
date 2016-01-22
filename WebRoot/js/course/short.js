@@ -22,10 +22,23 @@ $('#shortClassId').combobox({
 			return;
 		}
 		var schoolId=$("#schoolId").val();
-		var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Short_Class_Price\",time:\""+ payDate + "\",schoolId:\""+ schoolId + "\",shortClassId:\""+ shortClassId + "\"}";
+	    var studentCourseId=$("#studentCourseId").val();
+		var coursePriceId=$("#coursePriceId").val();
+		
+	    var url="";
+	    if(coursePriceId!='')
+	    {
+	    	url = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Short_Course_Old_Price\",setPriceId:\""+ coursePriceId + "\",schoolId:\""+ schoolId + "\",shortClassId:\""+ shortClassId + "\"}";
+	    }else
+	    {
+	    	url = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Short_Class_Price\",time:\""+ payDate + "\",schoolId:\""+ schoolId + "\",shortClassId:\""+ shortClassId + "\"}";
+	    }
+	    
+		
+		
 		$("#shortClassType").combobox(
 		{
-			url : urls,//返回json数据的url
+			url : url,//返回json数据的url
 			valueField : "classType",
 			textField : "classType",
 			panelHeight : "auto",
