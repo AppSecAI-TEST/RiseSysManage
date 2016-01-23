@@ -36,9 +36,6 @@
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="width:100px; height: 25px;" id="submit" funcNodeId="1000">创建</a>
 						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px" onclick="javascript:window.history.back()">返回</a>
 					</td>
-					<td width="600px">
-						 
-					</td>
 				</tr>
 			</table>
 		 

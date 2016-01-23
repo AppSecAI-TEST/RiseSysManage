@@ -461,7 +461,7 @@ var newCourse;//新招课程阶段
 		 }
 		 
 		 validateCourses(studentCourses);
-		 return;
+		  
 		allCourseInfos.studentCourses=studentCourses;
 		allCourseInfos.linkCourseT=linkCourseT;
 	    var str = JSON.stringify( allCourseInfos);
