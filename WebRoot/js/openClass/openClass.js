@@ -271,7 +271,7 @@ function updateOrCancel() {
 				if(optionType == "CANCEL_OPEN") {
 					$.messager.alert('提示', "取消开班成功！", "info", function() {window.history.back();});
 				} else {
-					$.messager.alert('提示', "修改开课时间成功！", "info", function() {window.history.back();});
+					$.messager.alert('提示', "修改开课时间成功,请重新排课", "info", function() {window.history.back();});
 				}
 			} else {
 				$.messager.alert('提示', data.msg);

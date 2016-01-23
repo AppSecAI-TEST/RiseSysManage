@@ -164,6 +164,7 @@ function coures(type)
 		var studentId=row.studentId;
 		var linkId=row.linkId;
 		var oldCourses=getOldCourse(studentId);
+		var courseState=row.courseState;
 		for(var i=0;i<oldCourses.length;i++)
 		{
 			var course = oldCourses[i];
@@ -190,14 +191,10 @@ function coures(type)
 				window.location.href="updateShortCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&courses="+str;
 			}else
 			{
-				if(true)
+				if(courseState=='001' || courseState=='002')
 				{
 					var studentCourseId=row.studentCourseId;
-					var url  = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Student_Wom\",studentCourseId:\""+ studentCourseId + "\"}";
 					window.location.href="updateCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&courses="+str;
-				}else if(row.courseState=='002' && row.classInstId!='')
-				{
-					showMessage("提示","该课程处于已定班状态,请重新选择",null);
 				}else
 				{
 					showMessage("提示","该课程不可修改,请重新选择",null);
