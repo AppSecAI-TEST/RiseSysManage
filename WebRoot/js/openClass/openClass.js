@@ -259,7 +259,7 @@ function updateOrCancel() {
 		beforeSend: function()
 		{
 			if(optionType == "CANCEL_OPEN") {
-				$.messager.progress({title : '取消放班', msg : '正在取消放班，请稍等……'});
+				$.messager.progress({title : '取消开班', msg : '正在取消开班，请稍等……'});
 			} else {
 				$.messager.progress({title : '修改开课时间', msg : '正在修改开课时间，请稍等……'});
 			}
@@ -269,7 +269,7 @@ function updateOrCancel() {
 			var flag = data.flag;
 			if(flag) {
 				if(optionType == "CANCEL_OPEN") {
-					$.messager.alert('提示', "取消放班成功！", "info", function() {window.history.back();});
+					$.messager.alert('提示', "取消开班成功！", "info", function() {window.history.back();});
 				} else {
 					$.messager.alert('提示', "修改开课时间成功！", "info", function() {window.history.back();});
 				}
