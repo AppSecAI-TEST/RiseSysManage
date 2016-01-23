@@ -61,8 +61,8 @@
 											<td align="left" width="10%" style="background-color:#fafafa">&nbsp;</td>
 										</c:when>
 										<c:otherwise>
-											<td align="center" width="4%"><a href="javascript:void(0)" <c:choose><c:when test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.classAttendId})"</c:when><c:otherwise>style="cursor:default"</c:otherwise></c:choose>>${node.dateValue}</a></td>
-											<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
+											<td align="center" width="4%"><a href="javascript:void(0)" <c:choose><c:when test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.calendarHiddenList[0].classAttendId})"</c:when><c:otherwise>style="cursor:default"</c:otherwise></c:choose>>${node.dateValue}</a></td>
+											<td align="left" width="10%" <c:if test="${fn:length(node.calendarHiddenList) > 0}">title="<c:forEach items='${node.calendarHiddenList}' var='nodeObj'>${nodeObj.hourRange}/${nodeObj.roomName}<br /><c:forEach items='${nodeObj.teacherList}' var='item'>${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
 												<c:if test="${node.calendarShow.planClassTime != ''}">
 													计划:${node.calendarShow.planClassTime}
 												</c:if>
@@ -81,8 +81,8 @@
 											<td align="left" width="10%" style="background-color:#fafafa">&nbsp;</td>
 										</c:when>
 										<c:otherwise>
-											<td align="center" width="4%"><a href="javascript:void(0)" <c:choose><c:when test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.classAttendId})"</c:when><c:otherwise>style="cursor:default"</c:otherwise></c:choose>>${node.dateValue}</a></td>
-											<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
+											<td align="center" width="4%"><a href="javascript:void(0)" <c:choose><c:when test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.calendarHiddenList[0].classAttendId})"</c:when><c:otherwise>style="cursor:default"</c:otherwise></c:choose>>${node.dateValue}</a></td>
+											<td align="left" width="10%" <c:if test="${fn:length(node.calendarHiddenList) > 0}">title="<c:forEach items='${node.calendarHiddenList}' var='nodeObj'>${nodeObj.hourRange}/${nodeObj.roomName}<br /><c:forEach items='${nodeObj.teacherList}' var='item'>${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
 												<c:if test="${node.calendarShow.planClassTime != ''}">
 													计划:${node.calendarShow.planClassTime}
 												</c:if>
@@ -102,8 +102,8 @@
 											<td align="left" width="10%" style="background-color:#fafafa">&nbsp;</td>
 										</c:when>
 										<c:otherwise>
-											<td align="center" width="4%"><a href="javascript:void(0)" <c:choose><c:when test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.classAttendId})"</c:when><c:otherwise>style="cursor:default"</c:otherwise></c:choose>>${node.dateValue}</a></td>
-											<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
+											<td align="center" width="4%"><a href="javascript:void(0)" <c:choose><c:when test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.calendarHiddenList[0].classAttendId})"</c:when><c:otherwise>style="cursor:default"</c:otherwise></c:choose>>${node.dateValue}</a></td>
+											<td align="left" width="10%" <c:if test="${fn:length(node.calendarHiddenList) > 0}">title="<c:forEach items='${node.calendarHiddenList}' var='nodeObj'>${nodeObj.hourRange}/${nodeObj.roomName}<br /><c:forEach items='${nodeObj.teacherList}' var='item'>${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
 												<c:if test="${node.calendarShow.planClassTime != ''}">
 													计划:${node.calendarShow.planClassTime}
 												</c:if>
@@ -124,8 +124,8 @@
 										<td align="left" width="10%" style="background-color:#fafafa">&nbsp;</td>
 									</c:when>
 									<c:otherwise>
-										<td align="center" width="4%"><a href="javascript:void(0)" <c:choose><c:when test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.classAttendId})"</c:when><c:otherwise>style="cursor:default"</c:otherwise></c:choose>>${node.dateValue}</a></td>
-										<td align="left" width="10%" <c:if test="${node.calendarHidden.hourRange != ''}">title="${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br /><c:forEach items="${node.calendarHidden.teacherList}" var="item">${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
+										<td align="center" width="4%"><a href="javascript:void(0)" <c:choose><c:when test="${node.calendarShow.realClassTime != ''}">onclick="gotoAttendView(${node.calendarHiddenList[0].classAttendId})"</c:when><c:otherwise>style="cursor:default"</c:otherwise></c:choose>>${node.dateValue}</a></td>
+										<td align="left" width="10%" <c:if test="${fn:length(node.calendarHiddenList) > 0}">title="<c:forEach items='${node.calendarHiddenList}' var='nodeObj'>${nodeObj.hourRange}/${nodeObj.roomName}<br /><c:forEach items='${nodeObj.teacherList}' var='item'>${item.schoolName} ${item.teacherName} ${item.teacherType}<br /></c:forEach></c:forEach>" class="easyui-tooltip" style="cursor:pointer" </c:if>>
 											<c:if test="${node.calendarShow.planClassTime != ''}">
 												计划:${node.calendarShow.planClassTime}
 											</c:if>

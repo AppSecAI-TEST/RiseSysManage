@@ -46,8 +46,11 @@
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
+				<td colspan="2">修改考勤信息</td>
+			</tr>
+			<tr>
 				<td align="right" width="10%">上课时间：</td>
-				<td>周${classAttendT.attendDateWeek} <fmt:formatDate value="${classAttendT.schooltime}" pattern="yyyy-MM-dd" /> <select id="classTime" name="classTime" style="width:200px" ></select></td>
+				<td>周${classAttendT.attendDateWeek} <fmt:formatDate value="${classAttendT.attendDate}" pattern="yyyy-MM-dd" /> <select id="classTime" name="classTime" style="width:200px" ></select></td>
 			</tr>
 			<tr>
 				<td align="right">教室：</td>
@@ -173,6 +176,54 @@
 					},
 					onSelect:function(data){
 						$("#classLessonHour").textbox("setValue",data.param4);
+						var classAttendIds = "${classAttendIdArr}";
+						var schooltimeInstIds = "${schooltimeInstIdArr}";
+						if(classAttendIds != "")
+						{
+							var classAttendIdArr = classAttendIds.split("#");
+							var attendArr = [];
+							var schooltimeArr = [];
+							if(schooltimeInstIds != "")
+							{
+								var schooltimeInstIdArr = schooltimeInstIds.split("#");
+								for(var i = 0,n = schooltimeInstIdArr.length;i < n;i++)
+								{
+									var objArr = schooltimeInstIdArr[i].split("~");
+									schooltimeArr.push(objArr[0]);
+								}
+							}
+							for(var i = 0,n = classAttendIdArr.length;i < n;i++)
+							{
+								var objArr = classAttendIdArr[i].split("~");
+								attendArr.push(objArr[0]);
+							}
+							for(var i = 0,n = classAttendIdArr.length;i < n;i++)
+							{
+								var objArr = classAttendIdArr[i].split("~");
+								if(objArr.length > 1 && objArr[1]==data.paramValue)
+								{
+									ajaxLoading("加载中...");
+									window.location.href = "/sys/attend/getUpdateAttenceRecord.do?funcNodeId=${funcNodeId}&classAttendId="+objArr[0]+"&classAttendIds="+attendArr.join("#")+"&schooltimeInstIds="+schooltimeArr.join("#")+"&selDateStr=<fmt:formatDate value='${classAttendT.attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${classAttendT.attendDate}' pattern='dd' />";
+									return ;
+								}
+							}
+						}
+						if(schooltimeInstIds != "")
+						{
+							var schooltimeInstIdArr = schooltimeInstIds.split("#");
+							for(var i = 0,n = schooltimeInstIdArr.length;i < n;i++)
+							{
+								var objArr = schooltimeInstIdArr[i].split("~");
+								if(objArr.length > 1 && objArr[1]==data.paramValue)
+								{
+									ajaxLoading("加载中...");
+									window.location.href = "/sys/attend/getAttenceRecord.do?funcNodeId=${funcNodeId}&schooltimeInstId="+objArr[0]+"&selDateStr=<fmt:formatDate value='${classAttendT.attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${classAttendT.attendDate}' pattern='dd' />";
+									return ;
+								}
+							}
+						}
+						ajaxLoading("加载中...");
+						window.location.href = "/sys/attend/getAttenceRecordInst.do?funcNodeId=${funcNodeId}&classInstId=${classAttendT.classInstId}&hourRange="+data.paramValue+"&selDateStr=<fmt:formatDate value='${classAttendT.attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${classAttendT.attendDate}' pattern='dd' />";
 					}
 				});
 				$("#classRoomId").combobox({

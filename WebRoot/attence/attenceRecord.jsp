@@ -20,6 +20,9 @@
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
+				<td colspan="2">新增考勤信息</td>
+			</tr>
+			<tr>
 				<td align="right" width="10%">上课时间：</td>
 				<td>周${schooltimeInstT.weekTime} ${selDateStr}-${dateValue} <select id="classTime" name="classTime" style="width:200px" ></select></td>
 			</tr>
@@ -90,7 +93,7 @@
 			</tr>
 			<c:forEach items="${classInstT.classStudentList}" var="node" varStatus="i">
 				<tr id="studentId${node.studentId}">
-					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" studentName="${node.studentT.name}" studentCourseId="${node.studentCourseId}" stageId="${classInstT.stageId}"><input type="checkbox" name="studentId" value="${node.studentId}" courseId="${node.studentCourseT.studentCourseId}" onclick="studentCheckboxClick(this)" /></td>
+					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" studentName="${node.studentT.name}" studentCourseId="${node.studentCourseId}" stageId="${classInstT.stageId}"><input type="checkbox" name="studentId" value="${node.studentId}" courseId="${node.studentCourseT.studentCourseId}" classStudentId="${node.classStudentId}" onclick="studentCheckboxClick(this)" /></td>
 					<td align="center">${i.count}</td>
 					<td align="center">${node.studentT.name}</td>
 					<td align="center">${node.studentT.byName}</td>
@@ -404,7 +407,7 @@
 				var studentArr = [];
 				var courseArr = [];
 				$("input[name='studentId']:checked").each(function(i,node){
-					studentArr.push($(node).val());
+					studentArr.push($(node).attr("classStudentId"));
 					courseArr.push($(node).attr("courseId"));
 					$("#studentId"+$(node).val()).remove();
 				});
@@ -414,7 +417,6 @@
 					handlerId:"${sessionScope.StaffT.staffId}"
 				};
 				$.post("/sys/applyClass/batchRemoveStudent.do",{param:JSON.stringify(obj)},function(data){
-					alert(JSON.stringify(data));
 					if(data.flag == true)
 					{
 						$.messager.alert("提示", "所选学员已被成功移除");

@@ -1,18 +1,16 @@
 package com.rise.model;
 
+import java.util.List;
+
 public class CalendarItem {
 	
 	private String classInstId;
 	
-	private String classAttendId;
-	
 	private String dateValue;
-	
-	private String schooltimeInstId;
 	
 	private CalendarShow calendarShow;
 	
-	private CalendarHidden calendarHidden;
+	private List<CalendarHidden> calendarHiddenList;
 	
 	public String getClassInstId() {
 		return classInstId;
@@ -20,14 +18,6 @@ public class CalendarItem {
 
 	public void setClassInstId(String classInstId) {
 		this.classInstId = classInstId;
-	}
-
-	public String getClassAttendId() {
-		return classAttendId;
-	}
-
-	public void setClassAttendId(String classAttendId) {
-		this.classAttendId = classAttendId;
 	}
 
 	public String getDateValue() {
@@ -38,14 +28,6 @@ public class CalendarItem {
 		this.dateValue = dateValue;
 	}
 	
-	public String getSchooltimeInstId() {
-		return schooltimeInstId;
-	}
-
-	public void setSchooltimeInstId(String schooltimeInstId) {
-		this.schooltimeInstId = schooltimeInstId;
-	}
-
 	public CalendarShow getCalendarShow() {
 		return calendarShow;
 	}
@@ -54,12 +36,12 @@ public class CalendarItem {
 		this.calendarShow = calendarShow;
 	}
 
-	public CalendarHidden getCalendarHidden() {
-		return calendarHidden;
+	public List<CalendarHidden> getCalendarHiddenList() {
+		return calendarHiddenList;
 	}
 
-	public void setCalendarHidden(CalendarHidden calendarHidden) {
-		this.calendarHidden = calendarHidden;
+	public void setCalendarHiddenList(List<CalendarHidden> calendarHiddenList) {
+		this.calendarHiddenList = calendarHiddenList;
 	}
-	
+
 }

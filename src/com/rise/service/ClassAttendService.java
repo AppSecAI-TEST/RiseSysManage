@@ -98,7 +98,7 @@ public class ClassAttendService
 		model.addObject("funcNodeId", funcNodeId);
 	}
 	
-	public void getAttenceRecordInst(ModelAndView model , String classInstId , String funcNodeId , String selDateStr , String dateValue , int staffId) throws Exception
+	public void getAttenceRecordInst(ModelAndView model , String classInstId , String funcNodeId , String selDateStr , String dateValue , int staffId , String hourRange) throws Exception
 	{
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2049\",securityCode:\"0000000000\",params:{classInstId:\""+classInstId+"\",selDateStr:\""+selDateStr+"\",dateValue:\""+dateValue+"\",staffId:\""+staffId+"\"},rtnDataFormatType:\"user-defined\"}";
 		String result = ServiceEngine.invokeHttp(param);
@@ -114,6 +114,7 @@ public class ClassAttendService
 			model.addObject("roomList", json.getJSONArray("roomList"));
 			model.addObject("schoolList", json.getJSONArray("schoolList"));
 			model.addObject("teacherTypeList", json.getJSONArray("teacherTypeList"));
+			model.addObject("selHourRange", hourRange);
 		}catch(Exception err){
 			err.printStackTrace();
 			model.addObject("errorInfo", err.getMessage());
@@ -146,9 +147,9 @@ public class ClassAttendService
 		}
 	}
 	
-	public void getUpdateAttenceRecord(ModelAndView model , String classAttendId , String funcNodeId , String selDateStr , int staffId) throws Exception
+	public void getUpdateAttenceRecord(ModelAndView model , String classAttendId , String classAttendIds , String funcNodeId , String selDateStr , int staffId) throws Exception
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2046\",securityCode:\"0000000000\",params:{classAttendId:\""+classAttendId+"\",staffId:\""+staffId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2046\",securityCode:\"0000000000\",params:{classAttendId:\""+classAttendId+"\",classAttendIds:\""+classAttendIds+"\",staffId:\""+staffId+"\"},rtnDataFormatType:\"user-defined\"}";
 		String result = ServiceEngine.invokeHttp(param);
 		try{
 			JSONObject json = JSONObject.fromObject(result);
@@ -157,11 +158,15 @@ public class ClassAttendService
 			model.addObject("schoolList", json.getJSONArray("schoolList"));
 			model.addObject("teacherTypeList", json.getJSONArray("teacherTypeList"));
 			model.addObject("stageId", StringUtil.getJSONObjectKeyVal(json, "stageId"));
+			model.addObject("classAttendIdArr", StringUtil.getJSONObjectKeyVal(json, "classAttendIdArr"));
+			model.addObject("schooltimeInstIdArr", StringUtil.getJSONObjectKeyVal(json, "schooltimeInstIdArr"));
 			json.remove("hourRangeList");
 			json.remove("roomList");
 			json.remove("schoolList");
 			json.remove("teacherTypeList");
 			json.remove("stageId");
+			json.remove("classAttendIdArr");
+			json.remove("schooltimeInstIdArr");
 			ClassAttendT classAttendT = JacksonJsonMapper.getInstance().readValue(json.toString(), ClassAttendT.class);
 			model.addObject("classAttendT", classAttendT);
 			model.addObject("funcNodeId", funcNodeId);

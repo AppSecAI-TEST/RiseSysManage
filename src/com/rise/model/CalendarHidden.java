@@ -4,11 +4,31 @@ import java.util.List;
 
 public class CalendarHidden {
 	
+	private String classAttendId;
+	
+	private String schooltimeInstId;
+	
 	private String hourRange;
 	
 	private String roomName;
 	
 	private List<TeacherInfo> teacherList;
+	
+	public String getClassAttendId() {
+		return classAttendId;
+	}
+
+	public void setClassAttendId(String classAttendId) {
+		this.classAttendId = classAttendId;
+	}
+
+	public String getSchooltimeInstId() {
+		return schooltimeInstId;
+	}
+
+	public void setSchooltimeInstId(String schooltimeInstId) {
+		this.schooltimeInstId = schooltimeInstId;
+	}
 
 	public String getHourRange() {
 		return hourRange;

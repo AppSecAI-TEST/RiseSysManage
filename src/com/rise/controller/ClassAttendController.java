@@ -77,7 +77,7 @@ public class ClassAttendController
 	}
 	
 	@RequestMapping("/getAttenceRecordInst.do")
-	public ModelAndView getAttenceRecordInst(HttpServletRequest request , String classInstId , String funcNodeId , String selDateStr , String dateValue)
+	public ModelAndView getAttenceRecordInst(HttpServletRequest request , String classInstId , String funcNodeId , String selDateStr , String dateValue , String hourRange)
 	{
 		ModelAndView model = new ModelAndView("attence/attenceRecordInst");
 		try
@@ -86,7 +86,7 @@ public class ClassAttendController
 			StaffT staffT = (StaffT)session.getAttribute("StaffT");
 			if(!ObjectCensor.checkObjectIsNull(staffT))
 			{
-				classAttendService.getAttenceRecordInst(model, classInstId, funcNodeId, selDateStr, dateValue, staffT.getStaffId());
+				classAttendService.getAttenceRecordInst(model, classInstId, funcNodeId, selDateStr, dateValue, staffT.getStaffId(), hourRange);
 			}
 			else
 			{
@@ -158,7 +158,7 @@ public class ClassAttendController
 	}
 	
 	@RequestMapping("/getUpdateAttenceRecord.do")
-	public ModelAndView getUpdateAttenceRecord(HttpServletRequest request , String classAttendId , String funcNodeId , String selDateStr)
+	public ModelAndView getUpdateAttenceRecord(HttpServletRequest request , String classAttendId , String classAttendIds , String funcNodeId , String selDateStr)
 	{
 		ModelAndView model = new ModelAndView("attence/updateAttenceRecord");
 		try 
@@ -167,7 +167,7 @@ public class ClassAttendController
 			StaffT staffT = (StaffT)session.getAttribute("StaffT");
 			if(!ObjectCensor.checkObjectIsNull(staffT))
 			{
-				classAttendService.getUpdateAttenceRecord(model, classAttendId, funcNodeId, selDateStr, staffT.getStaffId());
+				classAttendService.getUpdateAttenceRecord(model, classAttendId , classAttendIds , funcNodeId, selDateStr, staffT.getStaffId());
 			}
 			else
 			{

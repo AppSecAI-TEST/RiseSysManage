@@ -60,12 +60,14 @@
 											<td align="left" width="11%" style="background-color:#fafafa">&nbsp;</td>
 										</c:when>
 										<c:otherwise>
-											<td align="center" width="3%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}')">${node.dateValue}</a></td>
+											<td align="center" width="3%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.calendarShow.realClassTime}',<c:choose><c:when test='${fn:length(node.calendarHiddenList) != 0}'>'${node.calendarHiddenList[0].classAttendId}'</c:when><c:otherwise>''</c:otherwise></c:choose>)">${node.dateValue}</a></td>
 											<td align="left" width="11%" style="font-size:12px">
-												<c:if test="${node.calendarHidden.hourRange != ''}">
-													${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br />
-													<c:forEach items="${node.calendarHidden.teacherList}" var="item">
-														${item.schoolName} ${item.teacherName} ${item.teacherType}<br />
+												<c:if test="${fn:length(node.calendarHiddenList) != 0}">
+													<c:forEach items="${node.calendarHiddenList}" var="nodeObj">
+														${nodeObj.hourRange}/${nodeObj.roomName}<br />
+														<c:forEach items="${nodeObj.teacherList}" var="item">
+															${item.schoolName} ${item.teacherName} ${item.teacherType}<br />
+														</c:forEach>
 													</c:forEach>
 												</c:if>
 												<c:if test="${node.calendarShow.realClassTime != ''}">
@@ -90,12 +92,14 @@
 											<td align="left" width="11%" style="background-color:#fafafa">&nbsp;</td>
 										</c:when>
 										<c:otherwise>
-											<td align="center" width="3%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}')">${node.dateValue}</a></td>
+											<td align="center" width="3%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.calendarShow.realClassTime}',<c:choose><c:when test='${fn:length(node.calendarHiddenList) != 0}'>'${node.calendarHiddenList[0].classAttendId}'</c:when><c:otherwise>''</c:otherwise></c:choose>)">${node.dateValue}</a></td>
 											<td align="left" width="11%" style="font-size:12px">
-												<c:if test="${node.calendarHidden.hourRange != ''}">
-													${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br />
-													<c:forEach items="${node.calendarHidden.teacherList}" var="item">
-														${item.schoolName} ${item.teacherName} ${item.teacherType}<br />
+												<c:if test="${fn:length(node.calendarHiddenList) != 0}">
+													<c:forEach items="${node.calendarHiddenList}" var="nodeObj">
+														${nodeObj.hourRange}/${nodeObj.roomName}<br />
+														<c:forEach items="${nodeObj.teacherList}" var="item">
+															${item.schoolName} ${item.teacherName} ${item.teacherType}<br />
+														</c:forEach>
 													</c:forEach>
 												</c:if>
 												<c:if test="${node.calendarShow.realClassTime != ''}">
@@ -121,12 +125,14 @@
 											<td align="left" width="11%" style="background-color:#fafafa">&nbsp;</td>
 										</c:when>
 										<c:otherwise>
-											<td align="center" width="3%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}')">${node.dateValue}</a></td>
+											<td align="center" width="3%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.calendarShow.realClassTime}',<c:choose><c:when test='${fn:length(node.calendarHiddenList) != 0}'>'${node.calendarHiddenList[0].classAttendId}'</c:when><c:otherwise>''</c:otherwise></c:choose>)">${node.dateValue}</a></td>
 											<td align="left" width="11%" style="font-size:12px">
-												<c:if test="${node.calendarHidden.hourRange != ''}">
-													${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br />
-													<c:forEach items="${node.calendarHidden.teacherList}" var="item">
-														${item.schoolName} ${item.teacherName} ${item.teacherType}<br />
+												<c:if test="${fn:length(node.calendarHiddenList) != 0}">
+													<c:forEach items="${node.calendarHiddenList}" var="nodeObj">
+														${nodeObj.hourRange}/${nodeObj.roomName}<br />
+														<c:forEach items="${nodeObj.teacherList}" var="item">
+															${item.schoolName} ${item.teacherName} ${item.teacherType}<br />
+														</c:forEach>
 													</c:forEach>
 												</c:if>
 												<c:if test="${node.calendarShow.realClassTime != ''}">
@@ -153,12 +159,14 @@
 										<td align="left" width="11%" style="background-color:#fafafa">&nbsp;</td>
 									</c:when>
 									<c:otherwise>
-										<td align="center" width="3%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.classAttendId}','${node.calendarShow.realClassTime}')">${node.dateValue}</a></td>
+										<td align="center" width="3%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.calendarShow.realClassTime}',<c:choose><c:when test='${fn:length(node.calendarHiddenList) != 0}'>'${node.calendarHiddenList[0].classAttendId}'</c:when><c:otherwise>''</c:otherwise></c:choose>)">${node.dateValue}</a></td>
 										<td align="left" width="11%" style="font-size:12px">
-											<c:if test="${node.calendarHidden.hourRange != ''}">
-												${node.calendarHidden.hourRange}/${node.calendarHidden.roomName}<br />
-												<c:forEach items="${node.calendarHidden.teacherList}" var="item">
-													${item.schoolName} ${item.teacherName} ${item.teacherType}<br />
+											<c:if test="${fn:length(node.calendarHiddenList) != 0}">
+												<c:forEach items="${node.calendarHiddenList}" var="nodeObj">
+													${nodeObj.hourRange}/${nodeObj.roomName}<br />
+													<c:forEach items="${nodeObj.teacherList}" var="item">
+														${item.schoolName} ${item.teacherName} ${item.teacherType}<br />
+													</c:forEach>
 												</c:forEach>
 											</c:if>
 											<c:if test="${node.calendarShow.realClassTime != ''}">
@@ -240,7 +248,7 @@
 					}
 				});
 			});
-			function gotoAttendRecord(classInstId,dateValue,classAttendId,realClassTime)
+			function gotoAttendRecord(classInstId,dateValue,realClassTime,classAttendId)
 			{
 				if(realClassTime != "")
 				{
