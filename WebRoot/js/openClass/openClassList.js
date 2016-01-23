@@ -107,8 +107,13 @@ $(document).ready(function() {
 				if(classStudentNum >= minNum) {
 					var isOpenFlag = row.isOpenFlag;
 					if("Y" == isOpenFlag) {
+						var applyType = "001";
 						var classInstId = row.classInstId;
-						window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=normal&applyType=001";
+						if(openClassState == "003" || openClassState == "004") {
+							applyType = "002";
+						}
+						var classInstId = row.classInstId;
+						window.location.href = "/sys/openClass/qryCreateClass.do?classInstId=" + classInstId + "&type=normal&applyType=" + applyType;
 					} else {
 						$.messager.alert('提示', "您选择的班级中还有在读学员，暂不能申请开班！");
 					}
