@@ -113,13 +113,7 @@ $("#refreshPlan").click(function()
     	success: function(data) 
     	{
     		$.messager.progress('close');
-    		if(data.flag)
-    		{
-    			init(data);
-    		}else
-    		{
-    			$.messager.alert('提示', data.msg);
-    		}
+    		showMessage('提示', "刷新排课成功", null);
          },
         error:function()
         {
