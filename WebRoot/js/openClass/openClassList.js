@@ -99,7 +99,9 @@ $(document).ready(function() {
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) {
 			var openClassType = row.openClassType;
-			if(openClassType == "" || openClassType == null || openClassType == undefined) {
+			var openClassState = row.openClassState;
+			if(openClassType == "" || openClassType == null || openClassType == undefined
+					|| (openClassState == "003" || openClassState == "004")) {
 				var classStudentNum = row.classStudentNum;
 				var minNum = row.minNum;
 				if(classStudentNum >= minNum) {
@@ -114,15 +116,10 @@ $(document).ready(function() {
 					$.messager.alert('提示', "您选择的班级正常开班的最少人数为"+minNum+"人，定班人数至少要达到最少人数才能申请正常开班！");
 				}
 			} else {
-				var openClassState = row.openClassState;
 				if(openClassState == '001') {
 					$.messager.alert('提示', "您选择的班级开班申请正在审批中，不能申请正常开班！");
 				} else if(openClassState == '002') {
 					$.messager.alert('提示', "您选择的班级开班申请审批已通过，不能申请正常开班！");
-				} else if(openClassState == '003') {
-					$.messager.alert('提示', "您选择的班级开班申请审批未通过，不能再次申请正常开班！");
-				} else if(openClassState == '004') {
-					$.messager.alert('提示', "您选择的班级已经取消开班，不能申请正常开班！");
 				}
 			}
 		} else {
@@ -135,13 +132,19 @@ $(document).ready(function() {
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) {
 			var openClassType = row.openClassType;
-			if(openClassType == "" || openClassType == null || openClassType == undefined) {
+			var openClassState = row.openClassState;
+			if(openClassType == "" || openClassType == null || openClassType == undefined
+					|| (openClassState == "003" || openClassState == "004")) {
 				var classStudentNum = row.classStudentNum;
 				if(classStudentNum > 0) {
 					var isOpenFlag = row.isOpenFlag;
 					if("Y" == isOpenFlag) {
+						var applyType = "001";
 						var classInstId = row.classInstId;
-						window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=exception&applyType=001";
+						if(openClassState == "003" || openClassState == "004") {
+							applyType = "002";
+						}
+						window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=exception&applyType=" + applyType;
 					} else {
 						$.messager.alert('提示', "您选择的班级中还有在读学员，暂不能申请开班！");
 					}
@@ -149,15 +152,10 @@ $(document).ready(function() {
 					$.messager.alert('提示', "您选择的班级中还没有学员，暂不能申请开班！");
 				}
 			} else {
-				var openClassState = row.openClassState;
 				if(openClassState == '001') {
 					$.messager.alert('提示', "您选择的班级开班申请正在审批中，不能申请异常开班！");
 				} else if(openClassState == '002') {
 					$.messager.alert('提示', "您选择的班级开班申请审批已通过，不能申请异常开班！");
-				} else if(openClassState == '003') {
-					$.messager.alert('提示', "您选择的班级开班申请审批未通过，不能再次申请异常开班！");
-				} else if(openClassState == '004') {
-					$.messager.alert('提示', "您选择的班级已经取消开班，不能申请异常开班！");
 				}
 			}
 		} else {
