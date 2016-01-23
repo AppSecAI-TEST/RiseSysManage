@@ -240,6 +240,9 @@ $(document).ready(function() {
 					});
 					$("#schooltimeTb").append(addSchootimeTd);
 					$("#addSchootimeTr").css("display", 'table-row');
+					$("#roomId").combobox("setValue", "");
+					$("#weekTime").combobox("setValue", "");
+					$("#hourRange").combobox("setValue", "");
 				} else {
 					$.messager.alert('提示', "您选择的上课时段和教室已被其他班级占用，请选择其他上课时段或教室！");
 				}
@@ -410,8 +413,8 @@ $(document).ready(function() {
 			}
 			if(flag) {
 				if($("[name='schooltimes']").length > 0) {
-					if(addSchoolNum > 4) {
-						$.messager.alert('提示', "一个班级最多只有3个上课时段！");
+					if($("[name='schooltimes']").length >= 3) {
+						$.messager.alert('提示', "一个班级最多只有2个上课时段！");
 					} else {
 						var addNum = "";
 						if($("[name='teachers']").length > 0) {

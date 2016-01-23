@@ -27,21 +27,26 @@
   			<table width="98%" cellpadding="2px" style="margin-top:5px;margin-bottom:5px;border:1px solid #ccc;" align="center" class="maintable">
 	      	   <tr id="planTr">
 	      	   	 <td align="center" width="3%"><span>序号</span></td>
-	      	   	 <td align="center" width="17%"><span>班级</span></td>
-	      	   	 <td align="center" width="20%"><span>电教</span></td>
-	      	   	 <td align="center" width="20%"><span>家长会</span></td>
-	      	   	 <td align="center" width="20%"><span>公开课</span></td>
-	      	   	 <td align="center" width="20%"><span>毕业典礼</span></td>
+	      	   	 <td align="center" width="9%"><span>班级</span></td>
+	      	   	 <td align="center" width="12%"><span>电教</span></td>
+	      	   	 <td align="center" width="12%"><span>家长会</span></td>
+	      	   	 <td align="center" width="12%"><span>公开课</span></td>
+	      	   	 <td align="center" width="12%"><span>毕业典礼</span></td>
+	      	   	 <td align="center" width="15%"><span>是否开教质事件</span></td>
+	      	   	 <td align="center" width="25%"><span>说明</span></td>
      	       </tr>
      	       <c:forEach items="${obj.teachingPlan}" var="teachingPlan" varStatus="status">
      	        <input type="hidden" name="qualityId" id="qualityId${status.index}" value="${teachingPlan.qualityId}"/>
 				<tr>
+					<input type="hidden" id="teachingIsOpen${status.index}" value="${teachingPlan.teachingIsOpen}" />
 					<td align="center">${status.count}</td>
 					<td align="center">${teachingPlan.className}</td>
-					<td align="center"><input id="teachingDate${status.index}" dateVal="${teachingPlan.teachingDate}" class="easyui-datebox"  style='width:120px;' /></td>
-					<td align="center"><input id="meetingDate${status.index}" dateVal="${teachingPlan.meetingDate}" class="easyui-datebox"  style='width:120px;' /></td>
-					<td align="center"><input id="openClassDate${status.index}" dateVal="${teachingPlan.openClassDate}" class="easyui-datebox"  style='width:120px;' /></td>
-					<td align="center"><input id="gradDate${status.index}" dateVal="${teachingPlan.gradDate}" class="easyui-datebox"  style='width:120px;' /></td>
+					<td align="center"><div id="teaDiv${status.index}"><input id="teachingDate${status.index}" dateVal="${teachingPlan.teachingDate}" class="easyui-numberbox" status="${status.index}" style='width:100px;' /></div></td>
+					<td align="center"><div id="meetDiv${status.index}"><input id="meetingDate${status.index}" dateVal="${teachingPlan.meetingDate}" class="easyui-numberbox" status="${status.index}" style='width:100px;' /></div></td>
+					<td align="center"><div id="openDiv${status.index}"><input id="openClassDate${status.index}" dateVal="${teachingPlan.openClassDate}" class="easyui-numberbox" status="${status.index}"  style='width:100px;' /></div></td>
+					<td align="center"><div id="gradDiv${status.index}"><input id="gradDate${status.index}" dateVal="${teachingPlan.gradDate}" class="easyui-numberbox" status="${status.index}"  style='width:100px;' /></div></td>
+					<td align="center"><input name="teachingIsOpen${status.index}" type="radio" status="${status.index}" class="teachingIsOpen" value="Y"/><span>是</span>&nbsp;<input name="teachingIsOpen${status.index}" type="radio" status="${status.index}" class="teachingIsOpen" value="N"/><span>否</span></td>
+					<td align="center"><input id="remark${status.index}" remarkVal="${teachingPlan.remark}" class="easyui-textbox" style="width:250px;" /></td>
 				</tr>
 			   </c:forEach>
       	    </table>
@@ -56,24 +61,95 @@
   	</body>
   	<script type="text/javascript">
 		$(document).ready(function(){
+			var month = $("#teachingMonth").html();
+   			var str = month.split("-");
+    		var maxDays = DayNumOfMonth(str[0],str[1]);
    			for(var i = 0;i < ${fn:length(obj.teachingPlan)};i++){
    				var teachingDate = $("#teachingDate"+i+"").attr('dateVal');
    				if(teachingDate != "/"){
-	   				$("#teachingDate"+i+"").datebox('setValue',teachingDate);
+   					teachingDate = teachingDate.substring(8);
+	   				$("#teachingDate"+i+"").numberbox('setValue',teachingDate);
    				}
    				var meetingDate = $("#meetingDate"+i+"").attr('dateVal');
    				if(meetingDate != "/"){
-	   				$("#meetingDate"+i+"").datebox('setValue',meetingDate);
+   					meetingDate = meetingDate.substring(8);
+	   				$("#meetingDate"+i+"").numberbox('setValue',meetingDate);
    				}
    				var openClassDate = $("#openClassDate"+i+"").attr('dateVal');
    				if(openClassDate != "/"){
-	   				$("#openClassDate"+i+"").datebox('setValue',openClassDate);
+   					openClassDate = openClassDate.substring(8);
+	   				$("#openClassDate"+i+"").numberbox('setValue',openClassDate);
    				}
    				var gradDate = $("#gradDate"+i+"").attr('dateVal');
    				if(gradDate != "/"){
-	   				$("#gradDate"+i+"").datebox('setValue',gradDate);
+   					gradDate = gradDate.substring(8);
+	   				$("#gradDate"+i+"").numberbox('setValue',gradDate);
    				}
+   				$("input[name='teachingIsOpen"+i+"']").each(function(index,node){
+					if(node.value == $("#teachingIsOpen"+i).val())
+					{
+						$(this).prop("checked","checked");
+						if(node.value == "N"){
+						   $("#teaDiv"+i).css("display", "none");
+						   $("#meetDiv"+i).css("display", "none");
+						   $("#openDiv"+i).css("display", "none");
+						   $("#gradDiv"+i).css("display", "none");
+						}
+					}
+				});
+   				var remark = $("#remark"+i+"").attr('remarkVal');
+   				if(remark != ""){
+   					$("#remark"+i+"").textbox('setValue',remark);
+   				}
+   				$("#teachingDate"+i+"").numberbox({
+					min:1,
+					max:maxDays,
+				}); 
+				$("#meetingDate"+i+"").numberbox({
+					min:1,
+					max:maxDays,
+				/**	onChange:function(data){
+						var c = $(this).attr("status");
+						$("#openClassDate"+c).numberbox('clear');
+						$("#gradDate"+c).numberbox('clear');
+					} **/
+				}); 
+				$("#openClassDate"+i+"").numberbox({
+					min:1,
+					max:maxDays,
+				/**	onChange:function(){
+						var c = $(this).attr("status");
+						$("#meetingDate"+c).numberbox('clear');
+						$("#gradDate"+c).numberbox('clear');
+					} **/
+				}); 
+				$("#gradDate"+i+"").numberbox({
+					min:1,
+					max:maxDays,
+				/**	onChange:function(){
+						var c = $(this).attr("status");
+						$("#meetingDate"+c).numberbox('clear');
+						$("#openClassDate"+c).numberbox('clear');
+					} **/
+				}); 
    			}
+   			$(".teachingIsOpen").change(function() {
+			   var val = $(this).val();
+			   if(val == "Y"){
+				   var status = $(this).attr("status");
+				   $("#teaDiv"+status).css("display", "block");
+				   $("#meetDiv"+status).css("display", "block");
+				   $("#openDiv"+status).css("display", "block");
+				   $("#gradDiv"+status).css("display", "block");
+			   }else if(val == "N"){
+				   var status = $(this).attr("status");
+				   $("#teaDiv"+status).css("display", "none");
+				   $("#meetDiv"+status).css("display", "none");
+				   $("#openDiv"+status).css("display", "none");
+				   $("#gradDiv"+status).css("display", "none");
+			   }
+		   });
    		});
+   		
 	</script>
 </html>

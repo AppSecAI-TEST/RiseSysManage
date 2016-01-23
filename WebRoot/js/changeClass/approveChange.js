@@ -6,8 +6,7 @@ $(document).ready(function() {
 		data: "param=" + param,
 		dataType: "json",
 		async: true,
-		beforeSend: function()
-		{
+		beforeSend: function() {
 			$.messager.progress({title : '转班', msg : '正在查询审批转班信息，请稍等……'});
 		},
 		success: function (data) {
