@@ -23,12 +23,14 @@
   			</table>
   			<table width="98%" cellpadding="2px" style="margin-top: 5px;margin-bottom: 5px;border:1px solid #ccc;" align="center" class="maintable">
 	      	   <tr>
-	      	   	 <td align="center" width="3%"><span>序号</span></td>
-	      	   	 <td align="center" width="17%"><span>班级</span></td>
-	      	   	 <td align="center" width="20%"><span>电教</span></td>
-	      	   	 <td align="center" width="20%"><span>家长会</span></td>
-	      	   	 <td align="center" width="20%"><span>公开课</span></td>
-	      	   	 <td align="center" width="20%"><span>毕业典礼</span></td>
+	      	     <td align="center" width="3%"><span>序号</span></td>
+	      	   	 <td align="center" width="9%"><span>班级</span></td>
+	      	   	 <td align="center" width="12%"><span>电教</span></td>
+	      	   	 <td align="center" width="12%"><span>家长会</span></td>
+	      	   	 <td align="center" width="12%"><span>公开课</span></td>
+	      	   	 <td align="center" width="12%"><span>毕业典礼</span></td>
+	      	   	 <td align="center" width="15%"><span>是否开教质事件</span></td>
+	      	   	 <td align="center" width="25%"><span>说明</span></td>
      	       </tr>
      	       <c:forEach items="${obj.teachingPlan}" var="teachingPlan" varStatus="status">
 				<tr>
@@ -38,6 +40,13 @@
 					<td align="center">${teachingPlan.meetingDate}</td>
 					<td align="center">${teachingPlan.openClassDate}</td>
 					<td align="center">${teachingPlan.gradDate}</td>
+					<c:if test="${teachingPlan.teachingIsOpen == 'Y'}">
+						<td align="center">是</td>
+					</c:if>
+					<c:if test="${teachingPlan.teachingIsOpen == 'N'}">
+						<td align="center">否</td>
+					</c:if>
+					<td align="center">${teachingPlan.remark}</td>
 				</tr>
 			</c:forEach>
       	    </table>
