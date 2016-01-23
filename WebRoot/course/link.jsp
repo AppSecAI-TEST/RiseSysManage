@@ -296,26 +296,22 @@ function validateCourses(studentCourses)
 	for(var i=0;i<studentCourses.length;i++)
 	{
 		var course=studentCourses[i].course;
-		var oldStageId =course.oldStageId;
-		var oldFeeType =course.oldFeeType;
+		
 		var stageId =course.stageId;
 		var feeType =course.feeType;
 		var studentCourseId=course.studentCourseId;
 		var stageOrder = course.stageOrder;
-		if(oldStageId==stageId && feeType==oldFeeType)//业绩类型、阶段没有变化不校验
-		{
-			continue;
-		}
 		
 		//校验本次购买课程是否有相同
 		for(var m=0;m<studentCourses.length;m++)
 		{
 			var courseT=studentCourses[m].course;
 			var stageIdT =courseT.stageId;
+			
 			if(stageId==stageIdT && i!=m)
 			{
 				showMessage("提示",stageId+"阶段只能购买一次",null);
-				return;
+				return false;
 			}
 		}
 		
@@ -325,7 +321,9 @@ function validateCourses(studentCourses)
 			var order = oldCourse.stageOrder;
 			var courseState=oldCourse.courseState;
 			var stageName =oldCourse.stageId;
-			if(studentCourseId==oldCourse.studentCourseId)//同一课程不比较
+			var oldFeeType =oldCourse.oldFeeType;
+			
+			if(studentCourseId==oldCourse.studentCourseId && stageName==stageId && feeType==oldFeeType )//同一课程不比较，业绩类型、阶段没有变化不校验
 			{
 				continue;
 			}
@@ -336,19 +334,19 @@ function validateCourses(studentCourses)
 					if(courseState=='002' || courseState=='003' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 					{
 						showMessage("提示","该学员有未结束课程,当前所报阶段"+stageId+"不可选择新招业绩类型,请重新选择业绩类型",null);
-						return;
+						return false;
 					}
 					if(courseState=='001')//未定班
 					{
 						if(oldCourse.feeType=='001')//已有新招
 						{
 							showMessage("提示","已存在新招阶段"+stageName+",请重新选择业绩类型",null);
-							return;
+							return false;
 						}
 						if(Number(stageOrder)>Number(order))
 						{
 							showMessage("提示","当前所报新招阶段"+stageId+"不是最低阶段"+stageName+",请重新选择阶段",null);
-							return;
+							return false;
 						}
 					}
 				}else if(feeType=='002'|| feeType=='003')
@@ -358,14 +356,14 @@ function validateCourses(studentCourses)
 						if(Number(stageOrder)==Number(order))
 						{
 							showMessage("提示","当前所报复读或升学阶段"+stageId+"低于或等于阶段"+stageName+",请重新选择阶段",null);
-							return;
+							return false;
 						}
 					}else if(courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 					{
 						if(Number(stageOrder)<Number(order))
 						{
 							showMessage("提示","当前所报复读或升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段",null);
-							return;
+							return false;
 						}
 					}
 					
@@ -460,8 +458,11 @@ var newCourse;//新招课程阶段
 			 return ;
 		 }
 		 
-		 validateCourses(studentCourses);
-		  
+		if(!validateCourses(studentCourses))
+		{
+			return;
+		}
+		
 		allCourseInfos.studentCourses=studentCourses;
 		allCourseInfos.linkCourseT=linkCourseT;
 	    var str = JSON.stringify( allCourseInfos);
