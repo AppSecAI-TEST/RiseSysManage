@@ -75,18 +75,51 @@ private static Log log = LogFactory.getLog(TeaFeebackManageController.class);
 	
 	//浏览教质反馈信息
 	@RequestMapping(value="/viewTeachingFeedback.do")
-	public ModelAndView viewTeachingFeedback(String feedbackId)
+	public ModelAndView viewTeachingFeedback(String feedbackId,String type)
 	{
 		log.error(feedbackId);
-		ModelAndView view = new ModelAndView("teaFeebackManage/viewTeaFeedback");
+		ModelAndView view = null;
 		try {
+			if("view".equals(type)){
+				view = new ModelAndView("teaFeebackManage/viewTeaFeedback");
+			}else if("update".equals(type)){
+				view = new ModelAndView("teaFeebackManage/updateTeaFeedback");
+			}
 			String ret = teaFeebackManageService.viewTeachingFeedback(feedbackId);
 			view.addObject("obj",JSONObject.fromObject(ret));
+			view.addObject("feedbackId", feedbackId);
 		}catch(Exception e)
 		{
 			e.printStackTrace();
 		}
 		return view;
+	}
+	
+	//修改教质反馈
+	@RequestMapping(value="/updateTeachingFeedback.do")
+	public void addTeachingFeedback(HttpServletResponse response,String json)
+	{
+		log.error(json);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = teaFeebackManageService.updateTeachingFeedback(json);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
 	}
 	
 }

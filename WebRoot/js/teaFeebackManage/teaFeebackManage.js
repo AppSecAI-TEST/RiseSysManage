@@ -87,8 +87,16 @@ $(document).ready(function(){
 	   var val = $(this).val();
 	   if(val == "Y"){
 		   $(this).siblings(".meetingCsi").css("visibility","visible");
+		   var status = $(this).attr("status");
+		   $(".teaching"+status).css("visibility","visible");
 	   }else if(val == "N"){
 		   $(this).siblings(".meetingCsi").css("visibility","hidden");
+		   var status = $(this).attr("status");
+		   var openIsAttend = $("input[name='openIsAttend"+status+"']:checked").val();
+	  	   var gradIsAttend = $("input[name='gradIsAttend"+status+"']:checked").val();
+	  	   if(openIsAttend != "Y" && gradIsAttend != "Y"){
+	  		   $(".teaching"+status).css("visibility","hidden");
+	  	   }
 	   }
    });
    
@@ -96,8 +104,16 @@ $(document).ready(function(){
 	   var val = $(this).val();
 	   if(val == "Y"){
 		   $(this).siblings(".openCsi").css("visibility","visible");
+		   var status = $(this).attr("status");
+		   $(".teaching"+status).css("visibility","visible");
 	   }else if(val == "N"){
 		   $(this).siblings(".openCsi").css("visibility","hidden");
+		   var status = $(this).attr("status");
+		   var meetingIsAttend = $("input[name='meetingIsAttend"+status+"']:checked").val();
+	  	   var gradIsAttend = $("input[name='gradIsAttend"+status+"']:checked").val();
+	  	   if(meetingIsAttend != "Y" && gradIsAttend != "Y"){
+	  		   $(".teaching"+status).css("visibility","hidden");
+	  	   }
 	   }
    });
    
@@ -105,8 +121,16 @@ $(document).ready(function(){
 	   var val = $(this).val();
 	   if(val == "Y"){
 		   $(this).siblings(".gradCsi").css("visibility","visible");
+		   var status = $(this).attr("status");
+		   $(".teaching"+status).css("visibility","visible");
 	   }else if(val == "N"){
 		   $(this).siblings(".gradCsi").css("visibility","hidden");
+		   var status = $(this).attr("status");
+		   var meetingIsAttend = $("input[name='meetingIsAttend"+status+"']:checked").val();
+		   var openIsAttend = $("input[name='openIsAttend"+status+"']:checked").val();
+	  	   if(meetingIsAttend != "Y" && openIsAttend != "Y"){
+	  		   $(".teaching"+status).css("visibility","hidden");
+	  	   }
 	   }
    });
     
@@ -152,7 +176,6 @@ function addTeaFeedbackSubmit()
 	   var courseState = $("#courseState"+i+"").val();
 	   var studentName = $("#studentName"+i+"").html();
 	   var byname = $("#byname"+i+"").html();
-	   var teachingNum = $("#teachingNum"+i+"").numberbox('getValue');
 	   var meetingIsAttend = $("input[name='meetingIsAttend"+i+"']:checked").val();
 	   var openIsAttend = $("input[name='openIsAttend"+i+"']:checked").val();
 	   var gradIsAttend = $("input[name='gradIsAttend"+i+"']:checked").val();
@@ -164,10 +187,6 @@ function addTeaFeedbackSubmit()
 	   feedbackDetail.studentName = studentName;
 	   feedbackDetail.byname = byname;
 	   feedbackDetail.courseType = courseState;
-	   if(teachingNum == "" || teachingNum == undefined){
-		   teachingNum = "0";
-	   }
-	   feedbackDetail.teachingNum = teachingNum;
 	   feedbackDetail.meetingIsAttend = meetingIsAttend;
 	   if(meetingIsAttend == "Y"){
 		   var meetingCsi = $("#meetingCsi"+i+"").numberbox('getValue');
@@ -179,6 +198,8 @@ function addTeaFeedbackSubmit()
 		   meetingCsi = string2Json(meetingCsi);
 		   meetingCsi = encodeURI(meetingCsi);
 		   feedbackDetail.meetingCsi = meetingCsi;
+		   var teachingNum = $("input[name='teachingNum"+i+"']:checked").val();
+		   feedbackDetail.teachingNum = teachingNum;
 	   }
 	   feedbackDetail.openIsAttend = openIsAttend;
 	   if(openIsAttend == "Y"){
@@ -191,6 +212,8 @@ function addTeaFeedbackSubmit()
 		   openCsi = string2Json(openCsi);
 		   openCsi = encodeURI(openCsi);
 		   feedbackDetail.openCsi = openCsi;
+		   var teachingNum = $("input[name='teachingNum"+i+"']:checked").val();
+		   feedbackDetail.teachingNum = teachingNum;
 	   }
 	   feedbackDetail.gradIsAttend = gradIsAttend;
 	   if(gradIsAttend == "Y"){
@@ -203,6 +226,8 @@ function addTeaFeedbackSubmit()
 		   gradCsi = string2Json(gradCsi);
 		   gradCsi = encodeURI(gradCsi);
 		   feedbackDetail.gradCsi = gradCsi;
+		   var teachingNum = $("input[name='teachingNum"+i+"']:checked").val();
+		   feedbackDetail.teachingNum = teachingNum;
 	   }
 	   feedbackDetail.handlerId = handlerId;
 	   feedbackDetailArray.push(feedbackDetail);
@@ -215,16 +240,110 @@ function addTeaFeedbackSubmit()
 			async: false,
 			beforeSend: function()
 	    	{
-	    		$.messager.progress({title : '新增反馈维护', msg : '新增反馈维护中，请稍等……'});
+	    		$.messager.progress({title : '添加反馈维护', msg : '添加反馈维护中，请稍等……'});
 	    	},
 	    	success: function(flag) {
 	    		$.messager.progress('close'); 
 	    		if(flag == "true"){
-	    			$.messager.alert('提示', "新增反馈维护成功！","info",function(){
+	    			$.messager.alert('提示', "添加反馈维护成功！","info",function(){
 		    			window.location.href = "/sys/teaFeebackManage/teaFeebackManage.jsp";
 					});
 	    		}else if(flag == "false"){
-	    			$.messager.alert('提示', "新增反馈维护失败！");
+	    			$.messager.alert('提示', "添加反馈维护失败！");
+	    		}
+	        } 
+		});
+	}
+}
+
+//跳转修改教质反馈页面
+function updateTeaFeedBack(){
+	if(validateSelect("list_data")) {
+		var row = $("#list_data").datagrid('getSelected');
+		var feedbackId = row.feedbackId;
+		var reflect = row.reflect;
+		if(reflect == "否"){
+			 $.messager.alert('提示', "该教质还未反馈，不能修改！");
+			   return;
+		}
+		window.location.href = "/sys/teaFeebackManage/viewTeachingFeedback.do?feedbackId="+feedbackId+"&type=update";
+	}
+}
+
+//修改教质反馈提交
+function updateTeaFeedbackSubmit(){
+	var feedbackId = $("#feedbackId").val();
+	var feedbackDetailArray = new Array();
+	var flag = true;
+	$("input[name='feedbackDetailId']").each(function(i,node){
+	   var feedbackDetailId = $(node).val();
+	   var meetingIsAttend = $("input[name='meetingIsAttend"+i+"']:checked").val();
+	   var openIsAttend = $("input[name='openIsAttend"+i+"']:checked").val();
+	   var gradIsAttend = $("input[name='gradIsAttend"+i+"']:checked").val();
+	   var feedbackDetail = {};
+	   feedbackDetail.feedbackDetailId = feedbackDetailId;
+	   feedbackDetail.meetingIsAttend = meetingIsAttend;
+	   if(meetingIsAttend == "Y"){
+		   var meetingCsi = $("#meetingCsi"+i+"").numberbox('getValue');
+		   if(meetingCsi == "" || meetingCsi == undefined){
+			   $.messager.alert('提示', "已到请填写家长会满意度！");
+			   flag = false;
+			   return false;
+		   }
+		   meetingCsi = string2Json(meetingCsi);
+		   meetingCsi = encodeURI(meetingCsi);
+		   feedbackDetail.meetingCsi = meetingCsi;
+		   var teachingNum = $("input[name='teachingNum"+i+"']:checked").val();
+		   feedbackDetail.teachingNum = teachingNum;
+	   }
+	   feedbackDetail.openIsAttend = openIsAttend;
+	   if(openIsAttend == "Y"){
+		   var openCsi = $("#openCsi"+i+"").numberbox('getValue');
+		   if(openCsi == "" || openCsi == undefined){
+			   $.messager.alert('提示', "已到请填写公开课满意度！");
+			   flag = false;
+			   return false;
+		   }
+		   openCsi = string2Json(openCsi);
+		   openCsi = encodeURI(openCsi);
+		   feedbackDetail.openCsi = openCsi;
+		   var teachingNum = $("input[name='teachingNum"+i+"']:checked").val();
+		   feedbackDetail.teachingNum = teachingNum;
+	   }
+	   feedbackDetail.gradIsAttend = gradIsAttend;
+	   if(gradIsAttend == "Y"){
+		   var gradCsi = $("#gradCsi"+i+"").numberbox('getValue');
+		   if(gradCsi == "" || gradCsi == undefined){
+			   $.messager.alert('提示', "已到请填写毕业典礼满意度！");
+			   flag = false;
+			   return false;
+		   }
+		   gradCsi = string2Json(gradCsi);
+		   gradCsi = encodeURI(gradCsi);
+		   feedbackDetail.gradCsi = gradCsi;
+		   var teachingNum = $("input[name='teachingNum"+i+"']:checked").val();
+		   feedbackDetail.teachingNum = teachingNum;
+	   }
+	   feedbackDetailArray.push(feedbackDetail);
+	});
+	if(flag){
+		$.ajax({
+			type : "POST",
+			url: "/sys/teaFeebackManage/updateTeachingFeedback.do",
+			data: "json="+JSON.stringify(feedbackDetailArray),
+			async: false,
+			beforeSend: function()
+	    	{
+	    		$.messager.progress({title : '修改反馈维护', msg : '修改反馈维护中，请稍等……'});
+	    	},
+	    	success: function(flag) {
+	    		$.messager.progress('close'); 
+	    		if(flag == "true"){
+	    			$.messager.alert('提示', "修改反馈维护成功！","info",function(){
+		    			window.location.href = "/sys/teaFeebackManage/teaFeebackManage.jsp";
+					});
+	    		}else if(flag == "false"){
+	    			$.messager.alert('提示', "修改反馈维护失败！");
 	    		}
 	        } 
 		});
@@ -241,7 +360,7 @@ function viewTeaFeedBack(){
 			 $.messager.alert('提示', "该教质还未反馈，不能浏览！");
 			   return;
 		}
-		window.location.href = "/sys/teaFeebackManage/viewTeachingFeedback.do?feedbackId="+feedbackId;
+		window.location.href = "/sys/teaFeebackManage/viewTeachingFeedback.do?feedbackId="+feedbackId+"&type=view";
 	}
 }
 

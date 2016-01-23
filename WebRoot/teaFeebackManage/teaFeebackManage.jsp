@@ -93,7 +93,8 @@
 			</thead>
 		</table>
 		<div id="toolbar" style="padding: 2px;height:auto;">
-   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="addTeaFeedBack()"><span>反馈维护</span></a>
+   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="addTeaFeedBack()"><span>添加反馈</span></a>
+   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="updateTeaFeedBack()"><span>修改反馈</span></a>
  			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" style="width:100px;" onclick="viewTeaFeedBack()"><span>浏览</span></a>
  		</div>
  		</div>

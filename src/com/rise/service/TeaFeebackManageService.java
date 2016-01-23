@@ -24,5 +24,11 @@ public class TeaFeebackManageService {
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS4203\",securityCode:\"0000000000\",params:{feedbackId:\""+feedbackId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
+
+	//修改教质反馈信息
+	public String updateTeachingFeedback(String json)throws Exception {
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS4204\",securityCode:\"0000000000\",params:{json:'"+json+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
 	
 }

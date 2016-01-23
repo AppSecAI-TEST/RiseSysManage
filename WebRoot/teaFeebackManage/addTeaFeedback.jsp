@@ -13,7 +13,7 @@
 		<script type="text/javascript" src="<%=path %>/js/teaFeebackManage/teaFeebackManage.js"></script>
   	</head>
   	<body>
-  		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="新增反馈维护">
+  		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="添加反馈维护">
   			<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   			<input id="qualityId" type="hidden" value="${qualityId}"/>
   			<input id="classInstId" type="hidden" value="${classInstId}"/>
@@ -39,10 +39,11 @@
 						<td id="studentName${status.index}" align="center">${studentInfo.name}</td>
 						<td id="byname${status.index}" align="center">${studentInfo.byName}</td>
 						<td align="center">${studentInfo.courseStateVal}</td>
-						<td align="center"><input id="teachingNum${status.index}" class="easyui-numberbox" min="0" max="2"  style='width:120px;' /></td>
+						<td align="center"><span class="teaching${status.index}"><input type="radio" value="0" name="teachingNum${status.index}" checked="checked"/><span>0</span>&nbsp;<input type="radio" value="1" name="teachingNum${status.index}"/><span>1</span>
+						&nbsp;<input type="radio" value="2" name="teachingNum${status.index}" /><span>2</span></span></td>
 						<c:if test="${obj.qualityInfo.meetingFlag == '0'}">
 							<td align="center">
-								<input type="radio" class="meeting" value="Y" name="meetingIsAttend${status.index}" checked="checked"/><span>已到</span>&nbsp;<input type="radio" class="meeting" value="N" name="meetingIsAttend${status.index}"/><span>未到</span>
+								<input type="radio" class="meeting" value="Y" status="${status.index}" name="meetingIsAttend${status.index}" checked="checked"/><span>已到</span>&nbsp;<input type="radio" class="meeting" value="N" status="${status.index}" name="meetingIsAttend${status.index}"/><span>未到</span>
 								&nbsp;<span class="meetingCsi">满意度：<input id="meetingCsi${status.index}" class="easyui-numberbox" min="0" max="100" style='width:40px;' />%</span>
 							</td>
 						</c:if>
@@ -52,7 +53,7 @@
 						</c:if>
 						<c:if test="${obj.qualityInfo.openClassFlag == '0'}">
 							<td align="center">
-								<input type="radio" class="open" value="Y" name="openIsAttend${status.index}" checked="checked"/><span>已到</span>&nbsp;<input type="radio" class="open" value="N" name="openIsAttend${status.index}"/><span>未到</span>
+								<input type="radio" class="open" value="Y" status="${status.index}" name="openIsAttend${status.index}" checked="checked"/><span>已到</span>&nbsp;<input type="radio" class="open" value="N" status="${status.index}" name="openIsAttend${status.index}"/><span>未到</span>
 								&nbsp;<span class="openCsi">满意度：<input id="openCsi${status.index}" class="easyui-numberbox" min="0" max="100" style='width:40px;' />%</span>
 							</td>
 						</c:if>
@@ -62,7 +63,7 @@
 						</c:if>
 						<c:if test="${obj.qualityInfo.gradFlag == '0'}">
 							<td align="center">
-								<input type="radio" class="grad" value="Y" name="gradIsAttend${status.index}" checked="checked"/><span>已到</span>&nbsp;<input type="radio" class="grad" value="N" name="gradIsAttend${status.index}"/><span>未到</span>
+								<input type="radio" class="grad" value="Y" status="${status.index}" name="gradIsAttend${status.index}" checked="checked"/><span>已到</span>&nbsp;<input type="radio" class="grad" value="N" status="${status.index}" name="gradIsAttend${status.index}"/><span>未到</span>
 								&nbsp;<span class="gradCsi">满意度：<input id="gradCsi${status.index}" class="easyui-numberbox" min="0" max="100" style='width:40px;' />%</span>
 							</td>
 						</c:if>
