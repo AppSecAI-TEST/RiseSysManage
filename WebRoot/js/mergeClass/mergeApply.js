@@ -7,6 +7,16 @@ $(document).ready(function(){
 	$("#backBtn").click(function(){
 		window.history.back();
 	})
+	if($("#isHead").val()=="N")
+	{
+		$("#schoolInfo").remove();
+	}	
+	else
+	{
+		$("#schoolId").combobox({
+			url:"/sys/pub/pageCategory.do?staffId="+$("#handlerId").val()+"&resourceId=704&fieldId=schoolId&headFlag=N"
+		})
+	}	
 	$.ajax({
 		type : "POST",
 		url : "/sys/mergeClass/qryClassInstList.do",
@@ -86,12 +96,13 @@ function initApplyClassTable(classes)
 			});
 			tr1.find("td:eq(12)").find("input").attr("id","openClassDate");
 		}
-		tr1.find("td:eq(8)").find("input").attr("data-options","min:0,max:"+obj.readNum+",precision:0,required:true");
+		var max=parseFloat(obj.readNum);
+		tr1.find("td:eq(8)").find("input").attr("data-options","min:0,max:"+max+",precision:1,required:true");
 		tr1.css("display","table-row");
 		$("#mergeTab").append(tr1);
 		if(obj.higherNum!="")
 		{
-			totalNum +=parseInt(obj.higherNum);
+			totalNum +=parseFloat(obj.higherNum);
 		}	
 		//班级信息
 		var tr2 =$("#modelTr2").clone();
@@ -105,9 +116,9 @@ function initApplyClassTable(classes)
 		var min =0;
 		if(tr2.find("td:eq(5)").html()!="")
 		{
-			min =parseInt(tr2.find("td:eq(5)").html());
+			min =parseFloat(tr2.find("td:eq(5)").html());
 		}	
-		tr2.find("td:eq(7)").find("input").addClass("easyui-numberbox").attr("data-options","min:"+min+",max:"+obj.readNum+",precision:0,required:true");
+		tr2.find("td:eq(7)").find("input").addClass("easyui-numberbox").attr("data-options","min:"+min+",max:"+max+",precision:1,required:true");
 		tr2.find("td:eq(8)").html();//升学缺口
 		tr2.addClass("classTr");
 		tr2.attr("classInstId",obj.classInstId);
@@ -255,13 +266,13 @@ function initApplyClassTable(classes)
 				}
 				else
 				{
-					var val1 =parseInt(nval);
+					var val1 =parseFloat(nval);
 					var val2=0;
 					if(index.find("td:eq(5)").html()!="")
 					{
-						val2 =parseInt(index.find("td:eq(5)").html())
+						val2 =parseFloat(index.find("td:eq(5)").html())
 					}
-					index.find("td:eq(8)").html(val1-val2);
+					index.find("td:eq(8)").html((val1-val2).toFixed(1));
 				}	
 			}
 		});
@@ -397,7 +408,7 @@ function getOrderRate(newValue,oldValue)
 		}
 		else
 		{
-			newValue=parseInt(newValue)
+			newValue=parseFloat(newValue)
 		}
 		if(oldValue==""||oldValue==undefined)
 		{
@@ -405,9 +416,9 @@ function getOrderRate(newValue,oldValue)
 		}
 		else
 		{
-			oldValue=parseInt(oldValue)
+			oldValue=parseFloat(oldValue)
 		}
-		orderNum =orderNum-oldValue+newValue;
+		orderNum =(orderNum-oldValue+newValue).toFixed(1);
 		var rateValue =(orderNum/totalNum*100).toFixed(2)+"%";
 		$("#orderRate").html(rateValue);
 	}	
@@ -418,6 +429,11 @@ function getOrderRate(newValue,oldValue)
 
 function submitMergeInfo()
 {
+	if($("#isHead").val()=="Y"&&$("#schoolId").combobox("getValue")=="")
+	{
+		showMessage('提示', "请选择合并班校区!",null);
+		return false;
+	}
 	var flag = true;
 	$("input[type='hidden']").each(function(){
 		if($(this).val()=="")
@@ -442,6 +458,14 @@ function submitMergeInfo()
 		comboClass.weeks =$("#mergeWeek").numberbox("getValue");
 		comboClass.orderPer =$("#orderRate").html();
 		comboClass.isHead=$("#isHead").val();
+		if(comboClass.isHead=="Y")
+		{
+			comboClass.schoolId =$("schoolId").combobox("getValue")
+		}
+		else
+		{
+			comboClass.schoolId =$("#comSchoolId").val();
+		}	
 		comboClass.times=$("#weekTime1").combobox("getText")+" "+$("#hourRange1").combobox("getText")+"<br/>"+$("#weekTime2").combobox("getText")+" "+$("#hourRange2").combobox("getText");
 		comboClass.teachers =$("#school1").combobox("getText")+" "+$("#teacher1").combobox("getText")+"<br/>"+$("#school2").combobox("getText")+" "+$("#teacher2").combobox("getText");
 		comboClass.comboState="001";

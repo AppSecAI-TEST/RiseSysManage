@@ -3,6 +3,8 @@
 	String path = request.getContextPath();
 	String classInstIds =request.getParameter("classInstIds");
 	String isHead =request.getParameter("isHead");
+	String schoolId =request.getParameter("schoolId");
+	System.err.println("isHead:"+isHead+"schoolId:"+schoolId);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -17,7 +19,13 @@
   		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   		<input id="classInstIds" type="hidden" value="<%=classInstIds%>"/>
   		<input id="isHead" type="hidden" value="<%=isHead%>"/>
-  		<input id="comSchoolId" type="hidden" value="<%=isHead%>"/>
+  		<input id="comSchoolId" type="hidden" value="<%=schoolId%>"/>
+  		<div id="schoolInfo" style="width:1293px;margin:20px">
+  			<span>合并班校区：</span>
+  			<select id="schoolId" name="schoolId" style="width: 100px;height:25px" editable="false"
+				data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+		    </select>
+  		</div>
   		<div id ="classInfo" class="easyui-panel" title="班级信息" style="width:1293px;">
   			<table width="100%;" id="classTab" class="maintable">
   				<tr>

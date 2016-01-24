@@ -14,12 +14,13 @@ $(document).ready(function(){
 			var stageLevel =row.stageLevel;
 			var className =row.className;
 			var teacherName =row.teacherName;
+			var classInstId =row.classInstId;
 			if(studentId==null||studentCourseId==null)
 			{
 				$.messager.alert('提示', "此学生没有课程信息");
 				return false;
 			}	
-			window.location.href="addExp.jsp?addInfo="+studentId+","+studentCourseId+","+courseState+","+classProgress+","+stageLevel+","+className+","+teacherName;
+			window.location.href="addExp.jsp?addInfo="+studentId+","+studentCourseId+","+courseState+","+classProgress+","+stageLevel+","+className+","+teacherName+","+classInstId;
 		}	
 	});
 });

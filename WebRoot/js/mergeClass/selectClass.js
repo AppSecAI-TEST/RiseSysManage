@@ -92,5 +92,5 @@ function subClass()
 		return false;
 	}
 	classInstIds=classInstIds.substring(0,classInstIds.length-1);
-	window.location.href="mergeClassApply.jsp?classInstIds="+classInstIds+"&isHead="+$("#isHead").val();
+	window.location.href="mergeClassApply.jsp?classInstIds="+classInstIds+"&isHead="+$("#isHead").val()+"&schoolId="+$('#schoolId').combobox('getValue');
 }

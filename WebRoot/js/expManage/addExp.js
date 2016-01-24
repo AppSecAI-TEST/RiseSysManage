@@ -1,10 +1,11 @@
 var studentId =null;
 var studentCourseId =null;
-var courseState =null;
-var teacherName=null;
-var stageLevel =null;
-var className =null;
-var classProgress =null;
+var courseState ="";
+var teacherName="";
+var stageLevel ="";
+var className ="";
+var classProgress ="";
+var classInstId ="";
 $(document).ready(function(){
 	initPage();
 	$("#submitBtn").on("click",function(){
@@ -13,7 +14,7 @@ $(document).ready(function(){
 			$.messager.alert('提示', "请填写异常原因备注！");
 			return false;
 		}   
-		var paramValue ='{"stageLevel":"'+stageLevel+'","orignClassName":"'+className+'","studentCourseId":"'+studentCourseId+'","studentId":"'+studentId+'","excId":"","orignCourseState":"'+courseState+'","teacherName":"'+teacherName+'","hours":"'+classProgress+'","excState":"001","remark":"'+trim($("#remark").val())+'","handlerId":"'+$("#handlerId").val()+'"}';
+		var paramValue ='{"stageLevel":"'+stageLevel+'","orignClassId":"'+classInstId+'","orignClassName":"'+className+'","studentCourseId":"'+studentCourseId+'","studentId":"'+studentId+'","excId":"","orignCourseState":"'+courseState+'","teacherName":"'+teacherName+'","hours":"'+classProgress+'","excState":"001","remark":"'+trim($("#remark").val())+'","handlerId":"'+$("#handlerId").val()+'"}';
 		$.messager.confirm('提示','您确定要添加该异常？',function(r) {
     			if(r) 
     			{
@@ -48,6 +49,7 @@ function initPage()
 	stageLevel =getFormatStr(info.split(",")[4]);
 	className =getFormatStr(info.split(",")[5]);
 	teacherName =getFormatStr(info.split(",")[6]);
+	classInstId =getFormatStr(info.split(",")[7]);
 	var param = '{"excFlag":"N","studentId":"'+studentId+'"}';
 	$.ajax({
 			type : "POST",
