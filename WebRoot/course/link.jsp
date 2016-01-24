@@ -371,6 +371,7 @@ function validateCourses(studentCourses)
 			}
 		}
 	}
+	return true;
 }
 
 /**
