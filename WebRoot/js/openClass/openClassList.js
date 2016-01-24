@@ -89,7 +89,7 @@ $(document).ready(function() {
 		},
 		onLoadSuccess : function(data) {
 			if(data.length > 0) {
-				$("#schoolId").combobox("setValue", data[0].schoolId);
+				$("#approveSchoolId").combobox("setValue", data[0].schoolId);
 			}
 		}
 	});

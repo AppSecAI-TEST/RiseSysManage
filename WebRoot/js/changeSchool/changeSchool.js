@@ -208,18 +208,24 @@ $(document).ready(function() {
 		var row = $('#apply_list_data').datagrid('getSelected');
 		if(row) {
 			var tacheState = row.tacheState;
-			if("004" == tacheState) {
-				var name = row.name;
-				var phone = row.phone;
-				var byName = row.byName;
-				var applyId = row.applyId;
-				var studentId = row.studentId;
-				var studentCourseId = row.studentCourseId;
-				var url = "/sys/changeSchool/updateChangeSchool.jsp?applyId="+applyId+"&studentId="+studentId+"&studentCourseId="+studentCourseId+"&name="+name+"&phone="+phone+"&byName="+byName;
-				window.location.href = url;
+			var courseState = row.courseState;
+			if("001" == courseState || "002" == courseState) {
+				var courseStateText = row.courseStateText;
+				$.messager.alert('提示', "您选择的转校申请的学员课程状态为"+courseStateText+"，不能转入班级，需要走未进班选班流程！");
 			} else {
-				var changeStateText = row.changeStateText;
-				$.messager.alert('提示', "您选择的转班申请的转班状态为"+changeStateText+"，不能更改选班！");
+				if("004" == tacheState) {
+					var name = row.name;
+					var phone = row.phone;
+					var byName = row.byName;
+					var applyId = row.applyId;
+					var studentId = row.studentId;
+					var studentCourseId = row.studentCourseId;
+					var url = "/sys/changeSchool/updateChangeSchool.jsp?applyId="+applyId+"&studentId="+studentId+"&studentCourseId="+studentCourseId+"&name="+name+"&phone="+phone+"&byName="+byName;
+					window.location.href = url;
+				} else {
+					var changeStateText = row.changeStateText;
+					$.messager.alert('提示', "您选择的转班申请的转班状态为"+changeStateText+"，不能更改选班！");
+				}
 			}
 		} else {
 			$.messager.alert('提示', "请先选择您要更改选班的转校申请！");
