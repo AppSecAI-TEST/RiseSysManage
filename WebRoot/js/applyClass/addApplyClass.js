@@ -362,37 +362,53 @@ $(document).ready(function() {
 				});
 			}
 			if(flag) {
-				var subLessions = parseInt(lessionHours) - parseInt(addLessions);
-				var lessions = $("#lessions").numberbox("getValue");
-				if(parseInt(lessions) > subLessions) {
+				var teacherNum = 1;
+				if($("[name='teachers']").length > 0) {
+					$("[name='teachers']").each(function() {
+						var selTeacherId = $(this).attr("teacherId");
+						if(teacherId != selTeacherId) {
+							teacherNum++;
+						}
+					});
+				}
+				if(teacherNum > 2) {
 					flag = false;
 				}
 				if(flag) {
-					var teacherSchoolName = $("#teacherSchoolId").combobox("getText");
-					var teacherName = $("#teacherId").combobox("getText");
-					var licenseFlagText = $("#licenseFlagText").html();
-					selTr.find("td").each(function(i, node) {
-						if(i == 4) {
-							var content = $(node).html();
-							var teacherHtml = document.getElementById("teacher" + teacherId + weekTime + hourRange);
-							if(teacherHtml == null || teacherHtml == "" || teacherHtml == undefined || teacherHtml == "null") {
-								content += "<span id=teacher"+ teacherId + weekTime + hourRange +">";
-								var teacherText = teacherSchoolName + " " + teacherName + " " + lessions + " " + licenseFlagText;
-								content += teacherText + "&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='deleteTeacher(this, "+teacherId+")'><span>删除</span></a>";
-								content += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"'/>&nbsp;</span>";
-								$(node).html(content);
-							} else {
-								var teacherText = teacherSchoolName + " " + teacherName + " " + lessions + " " + licenseFlagText;
-								var html = teacherText + "&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='deleteTeacher(this, "+teacherId+")'><span>删除</span></a>";
-								html += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"'/>&nbsp;";
-								$("#teacher" + teacherId + weekTime + hourRange).html(html);
+					var subLessions = parseInt(lessionHours) - parseInt(addLessions);
+					var lessions = $("#lessions").numberbox("getValue");
+					if(parseInt(lessions) > subLessions) {
+						flag = false;
+					}
+					if(flag) {
+						var teacherSchoolName = $("#teacherSchoolId").combobox("getText");
+						var teacherName = $("#teacherId").combobox("getText");
+						var licenseFlagText = $("#licenseFlagText").html();
+						selTr.find("td").each(function(i, node) {
+							if(i == 4) {
+								var content = $(node).html();
+								var teacherHtml = document.getElementById("teacher" + teacherId + weekTime + hourRange);
+								if(teacherHtml == null || teacherHtml == "" || teacherHtml == undefined || teacherHtml == "null") {
+									content += "<span id=teacher"+ teacherId + weekTime + hourRange +">";
+									var teacherText = teacherSchoolName + " " + teacherName + " " + lessions + " " + licenseFlagText;
+									content += teacherText + "&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='deleteTeacher(this, "+teacherId+")'><span>删除</span></a>";
+									content += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"'/>&nbsp;</span>";
+									$(node).html(content);
+								} else {
+									var teacherText = teacherSchoolName + " " + teacherName + " " + lessions + " " + licenseFlagText;
+									var html = teacherText + "&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='deleteTeacher(this, "+teacherId+")'><span>删除</span></a>";
+									html += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"'/>&nbsp;";
+									$("#teacher" + teacherId + weekTime + hourRange).html(html);
+								}
+								$(node).attr("lessions", parseInt(lessions) + parseInt(addLessions));
 							}
-							$(node).attr("lessions", parseInt(lessions) + parseInt(addLessions));
-						}
-					});
-					$('#dlg').dialog('close');
+						});
+						$('#dlg').dialog('close');
+					} else {
+						$.messager.alert('提示', "该上课时段可用的课时为"+subLessions+"个课时，请填写的课时小于或者等于"+subLessions+"！");
+					}
 				} else {
-					$.messager.alert('提示', "该上课时段可用的课时为"+subLessions+"个课时，请填写的课时小于或者等于"+subLessions+"！");
+					$.messager.alert('提示', "一个班级最多只允许有2个带班老师！");
 				}
 			} else {
 				$.messager.alert('提示', "该上课时段已经添加该带班老师，请选择另一个老师！");
@@ -413,60 +429,56 @@ $(document).ready(function() {
 			}
 			if(flag) {
 				if($("[name='schooltimes']").length > 0) {
-					if($("[name='schooltimes']").length >= 3) {
-						$.messager.alert('提示', "一个班级最多只有2个上课时段！");
-					} else {
-						var addNum = "";
+					var addNum = "";
+					if($("[name='teachers']").length > 0) {
+						$("[name='schooltimes']").each(function() {
+							var teacherNum = 0;
+							var weekTime = $(this).attr("weekTime");
+							var hourRange = $(this).attr("hourRange");
+							$("[name='teachers']").each(function() {
+								var teacherWeekTime = $(this).attr("weekTime");
+								var teacherHourRange = $(this).attr("hourRange");
+								if(weekTime == teacherWeekTime && hourRange == teacherHourRange) {
+									teacherNum++;
+								}
+							});
+							if(teacherNum == 0) {
+								flag = false;
+								addNum = $(this).attr("addNum");
+							}
+						});
+					}
+					if(flag) {
 						if($("[name='teachers']").length > 0) {
 							$("[name='schooltimes']").each(function() {
-								var teacherNum = 0;
 								var weekTime = $(this).attr("weekTime");
 								var hourRange = $(this).attr("hourRange");
+								var lessionHours = parseInt($(this).attr("lessionHours"));
+								var hours = 0;
+								var teacherHours = 0;
+								var totalLessions = 0;
 								$("[name='teachers']").each(function() {
 									var teacherWeekTime = $(this).attr("weekTime");
 									var teacherHourRange = $(this).attr("hourRange");
 									if(weekTime == teacherWeekTime && hourRange == teacherHourRange) {
-										teacherNum++;
+										totalLessions += parseInt($(this).attr("lessions"));
 									}
 								});
-								if(teacherNum == 0) {
+								if(totalLessions < lessionHours) {
 									flag = false;
 									addNum = $(this).attr("addNum");
+									hours = lessionHours;
+									teacherHours = totalLessions;
 								}
 							});
 						}
 						if(flag) {
-							if($("[name='teachers']").length > 0) {
-								$("[name='schooltimes']").each(function() {
-									var weekTime = $(this).attr("weekTime");
-									var hourRange = $(this).attr("hourRange");
-									var lessionHours = parseInt($(this).attr("lessionHours"));
-									var hours = 0;
-									var teacherHours = 0;
-									var totalLessions = 0;
-									$("[name='teachers']").each(function() {
-										var teacherWeekTime = $(this).attr("weekTime");
-										var teacherHourRange = $(this).attr("hourRange");
-										if(weekTime == teacherWeekTime && hourRange == teacherHourRange) {
-											totalLessions += parseInt($(this).attr("lessions"));
-										}
-									});
-									if(totalLessions < lessionHours) {
-										flag = false;
-										addNum = $(this).attr("addNum");
-										hours = lessionHours;
-										teacherHours = totalLessions;
-									}
-								});
-							}
-							if(flag) {
-								addApplyClass();
-							} else {
-								$.messager.alert('提示', "上课时段"+addNum+"的总课时量为"+hours+"，您选择的所有带班老师的总课时量为"+teacherHours+"，请保持课时量相等！");
-							}
+							addApplyClass();
 						} else {
-							$.messager.alert('提示', "请为上课时段"+addNum+"添加一位带班老师！");
+							$.messager.alert('提示', "上课时段"+addNum+"的总课时量为"+hours+"，您选择的所有带班老师的总课时量为"+teacherHours+"，请保持课时量相等！");
 						}
+					} else {
+						$.messager.alert('提示', "请为上课时段"+addNum+"添加一位带班老师！");
 					}
 				} else {
 					$.messager.alert('提示', "请至少添加一个上课时段！");
