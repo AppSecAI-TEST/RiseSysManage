@@ -58,7 +58,7 @@ function restoreClass()
 			$.messager.alert('提示', "此学生没有课程信息");
 			return false;
 		}
-		if(state!="异常中")
+		if(state!="001")
 		{
 			$.messager.alert('提示', "非异常中状态的异常信息不能复课！");
 			return false;

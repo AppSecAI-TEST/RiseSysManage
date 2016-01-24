@@ -970,3 +970,16 @@ function initResetButton(resetName,formName)
     	}	
     });
 }
+
+
+function getFormatStr(str)
+{
+	if(str==undefined||str==null||str==""||str=="null")
+	{
+		return "";
+	}
+	else
+	{
+		return str;
+	}	
+}

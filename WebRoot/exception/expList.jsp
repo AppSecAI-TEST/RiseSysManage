@@ -68,14 +68,14 @@
 					<th field="name" align="center" width="5%"><span>学员姓名</span></th>
 					<th field="byName" align="center" width="5%"><span>英文名</span></th>
 					<th field="phone" align="center" width="10%"><span>联系电话</span></th>
-					<th field="excState" align="center" width="10%"><span>异常状态</span></th>
-					<th field="exceptionDate" align="center" width="8%"><span>异常发生日期</span></th>
+					<th field="excStateVal" align="center" width="10%"><span>异常状态</span></th>
+					<th field="createDate" align="center" width="8%"><span>异常发生日期</span></th>
 					<th field="days" align="center" width="10%"><span>已异常天数</span></th>
 					<th field="stageLevel" align="center" width="10%"><span>已升学阶段</span></th>
 					<th field="className" align="center" width="10%"><span>原在读班级</span></th>
 					<th field="teacherName" align="center" width="10%"><span>带班老师</span></th>
-					<th field="orignCourseState" align="center" width="10%"><span>原在读课程状态</span></th>
-					<th field="lessonNum" align="center" width="10%"><span>原在读班级课时</span></th>
+					<th field="orignCourseStateVal" align="center" width="10%"><span>原在读课程状态</span></th>
+					<th field="classProgress" align="center" width="10%"><span>原在读班级课时</span></th>
 				</tr>
 			</thead>
 		</table>

@@ -6,6 +6,7 @@ var stageLevel =null;
 var className =null;
 var classProgress =null;
 $(document).ready(function(){
+	initPage();
 	$("#submitBtn").on("click",function(){
 		if(trim($("#remark").val())=="")
 		{
@@ -34,7 +35,6 @@ $(document).ready(function(){
 	$("#backBtn").on("click",function(){
 		 window.history.back();
 	});
-	initPage();
 });
 
 
@@ -44,10 +44,10 @@ function initPage()
 	studentId =info.split(",")[0];
 	studentCourseId =info.split(",")[1];
 	courseState =info.split(",")[2];
-	classProgress =replaceAdd(info.split(",")[3]);
-	stageLevel =info.split(",")[4];
-	className =info.split(",")[5];
-	teacherName =info.split(",")[6];
+	classProgress =getFormatStr(replaceAdd(info.split(",")[3]));
+	stageLevel =getFormatStr(info.split(",")[4]);
+	className =getFormatStr(info.split(",")[5]);
+	teacherName =getFormatStr(info.split(",")[6]);
 	var param = '{"excFlag":"N","studentId":"'+studentId+'"}';
 	$.ajax({
 			type : "POST",
