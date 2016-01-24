@@ -31,8 +31,10 @@ public class ServiceEngine
 	private static String address="";
 	public static Log log = LogFactory.getLog(ServiceEngine.class);
 	
-     private final static String url = "http://127.0.0.1:7001/sysEngine/invoke/commorder.do";
-	// private final static String url = "http://114.215.130.45/sysEngine/invoke/commorder.do";
+ 
+	//private final static String url = "http://127.0.0.1:7001/sysEngine/invoke/commorder.do";
+	private final static String url = "http://114.215.130.45/sysEngine/invoke/commorder.do";
+ 
 	public static String invokeHttp(String param) throws Exception
 	{
 		//log.error("param:"+param);
