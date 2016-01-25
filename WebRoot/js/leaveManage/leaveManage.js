@@ -192,7 +192,7 @@ function restartSubmit()
 	    			} else if(resumeType == "002") {
 	    				$.messager.alert('提示', "有待审批的转班申请单，无法转班复课！");
 	    			} else if(resumeType == "003") {
-	    				$.messager.alert('提示', "有待审批的转校申请单，无法转班复课！");
+	    				$.messager.alert('提示', "有待审批的转校申请单，无法转校复课！");
 	    			}
 	    		}
 	        } 

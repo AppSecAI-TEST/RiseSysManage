@@ -119,35 +119,14 @@ $(document).ready(function() {
     	panelHeight : "auto",
     	formatter : function(data) {
     		return "<span>" + data.stageId + "</span>";
-    	},
-		onChange : function(n, o) {
-			var schoolId = $("#schoolId").combobox("getValue");
-			//转出班级
-			$("#outClassInstId").combobox({
-        		url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType=001&stageId="+n+"&classType=&classState=003&classInstId=",//返回json数据的url
-        		valueField : "classInstId",
-        		textField : "className",
-        		panelHeight : "auto",
-        		formatter : function(data) {
-        			return "<span>" + data.className + "</span>";
-        		}
-        	});
-			$("#inClassInstId").combobox({
-        		url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType=001&stageId="+n+"&classType=&classState='001','002','003'&classInstId=",//返回json数据的url
-        		valueField : "classInstId",
-        		textField : "className",
-        		panelHeight : "auto",
-        		formatter : function(data) {
-        			return "<span>" + data.className + "</span>";
-        		}
-        	});
-		}
+    	}
 	});
 	
 	//转班申请
 	$("#changeClassBtn").click(function() {
 		var funcNodeId = $("#funcNodeId").val();
-		window.location.href = "/sys/changeClass/changeStudentList.jsp?funcNodeId="+funcNodeId;
+		var schoolId = $("#schoolId").combobox("getValue");
+		window.location.href = "/sys/changeClass/changeStudentList.jsp?funcNodeId=" + funcNodeId + "&schoolId=" + schoolId;
 	});
 	
 	//转出

@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
+	String schoolId = request.getParameter("schoolId");
 	String funcNodeId = request.getParameter("funcNodeId");
 %>
 
@@ -14,12 +15,12 @@
   
   	<body style="padding-top:5px">
   		<form id="qryFm" style="margin:0 auto;">
-  			<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
+  			<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId %>"/>
   			<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
   				<tr>
   					<td align="right"><span>学员姓名：</span></td>
 					<td width="100px">
-						<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 114px; height: 25px;"/>
+						<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 					</td>
 					<td align="right"><span>联系电话：</span></td>
 					<td width="100px">
@@ -29,7 +30,7 @@
 					<td width="100px">
 						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;"
 							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'" 
-	      					url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}&classType=">
+	      					url="<%=path %>/pubData/qryTeacherList.do?schoolId=<%=schoolId %>&classType=">
 				        </select>
 					</td>
   				</tr>
@@ -41,7 +42,7 @@
 					</td>
 					<td align="right"><span>选择班级：</span></td>
 					<td width="100px">
-						<input name="classInstId" id="classInstId" type="text" class="easyui-textbox" style="width: 114px; height: 25px;"/>
+						<input name="classInstId" id="classInstId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 					</td>
 					<td align="right"><span>课程状态：</span></td>
 					<td width="100px">
@@ -59,7 +60,7 @@
   		</form>
   		
   		<div style="padding:5px 0;min-width:1100px; width:100%;">
-		  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1013" 
+		  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data"
 		  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>

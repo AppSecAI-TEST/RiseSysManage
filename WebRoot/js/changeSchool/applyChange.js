@@ -24,6 +24,7 @@ $(document).ready(function() {
 				$("#studentId").val(studentId);
 				$("#outSchoolId").val(schoolId);
 				$("#outClassId").val(obj.classInstId);
+				$("#courseState").val(obj.courseState);
 				$("#studentCourseId").val(obj.studentCourseId);
 				
 				$("#course_list_data").datagrid({ 
@@ -133,7 +134,7 @@ $(document).ready(function() {
 							$.messager.progress('close'); 
 							var flag = data.flag
 							if(flag) {
-								$.messager.alert('提示', "申请转校成功！", "info", function() {window.history.back();});
+								$.messager.alert('提示', "申请转校成功！", "info", function() {back();});
 							} else {
 								$.messager.alert('提示', data.msg);
 							}
@@ -148,6 +149,17 @@ $(document).ready(function() {
 		}
 	});
 });
+
+function back() {
+	var changeSource = $("#changeSource").val();
+	if("change" == changeSource) {
+		window.location.href = "/sys/changeSchool/changeSchool.jsp";
+	} else if("leave" == changeSource) {
+		window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";
+	} else if("exception" == changeSource) {
+		window.location.href = "/sys/exception/expList.jsp";
+	}
+}
 
 //查看转校历史信息
 function viewChangeSchoolHist() {

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	$("#qryBtn").click();
 	$("#qryBtn").click(function() {
     	var obj = JSON.stringify($("#qryFm").serializeObject());
     	obj = obj.substring(0, obj.length - 1);

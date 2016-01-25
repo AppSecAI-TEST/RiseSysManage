@@ -26,6 +26,7 @@ $(document).ready(function() {
 				$("#classType").val(obj.classType);
 				$("#studentId").val(obj.studentId);
 				$("#outClassId").val(obj.classInstId);
+				$("#courseState").val(obj.courseState);
 				
 				$("#planInClassId").combobox({
 					url : "/sys/pubData/qryClassInstList.do?schoolId="+obj.schoolId+"&courseType=001&stageId="+obj.stageId+"&classType="+obj.classType+"&classState='001','002','003'&classInstId="+obj.classInstId,//返回json数据的url
@@ -114,5 +115,12 @@ $(document).ready(function() {
 });
 
 function back() {
-	window.location.href = "/sys/changeClass/changeClass.jsp";
+	var changeSource = $("#changeSource").val();
+	if("change" == changeSource) {
+		window.location.href = "/sys/changeClass/changeClass.jsp";
+	} else if("leave" == changeSource) {
+		window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";
+	} else if("exception" == changeSource) {
+		window.location.href = "/sys/exception/expList.jsp";
+	}
 }

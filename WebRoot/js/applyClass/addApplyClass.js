@@ -524,13 +524,13 @@ function addApplyClass() {
 		dataType: "json",
 		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
 		async: true,
-		beforeSend: function()
-		{
+		beforeSend: function() {
 			$.messager.progress({title : '申请放班', msg : '正在申请放班，请稍等……'});
 		},
 		success: function (data) {
 			$.messager.progress('close'); 
 			var flag = data.flag;
+			alert(flag)
 			if(flag) {
 				$.messager.alert('提示', "申请放班成功！", "info", function() {window.history.back();});
 			} else {

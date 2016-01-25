@@ -21,6 +21,7 @@
   				<input type="hidden" id="schoolId" name="schoolId"/>
   				<input type="hidden" id="studentId" name="studentId"/>
   				<input type="hidden" id="outClassId" name="outClassId"/>
+  				<input type="hidden" id="courseState" name="courseState"/>
   				<input type="hidden" id="applyType" name="applyType" value="001"/>
   				<input type="hidden" id="changeSource" name="changeSource" value="<%=changeSource %>"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
