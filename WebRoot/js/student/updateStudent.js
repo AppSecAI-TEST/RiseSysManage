@@ -12,7 +12,7 @@ var studentObj = null;
 var array = new Array();
 $(document).ready(function() {
 	var studentId = $("#studentId").val();
-	var funcNodeId = $("#funcNodeId").val();
+	var funcNodeId = 1002;
 	$.ajax({
 		url: "/sys/student/qryStudentById.do",
 		data: "studentId=" + studentId + "&funcNodeId=" + funcNodeId,
