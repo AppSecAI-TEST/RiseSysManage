@@ -32,4 +32,9 @@ public class TeacherManageService {
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1604\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
+
+	public String isCanLeaveTeacher(String teacherId)throws Exception {
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20013\",securityCode:\"0000000000\",params:{staffId:'"+teacherId+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
 }

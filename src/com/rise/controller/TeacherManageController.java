@@ -181,4 +181,31 @@ public class TeacherManageController {
 			}
 		}
 	}
+	
+	//判断老师能否离职
+	@RequestMapping(value="/isCanLeaveTeacher.do")
+	public void isCanLeaveTeacher(HttpServletResponse response,String teacherId)
+	{
+		log.error(teacherId);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = teacherManageService.isCanLeaveTeacher(teacherId);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }

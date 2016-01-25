@@ -20,17 +20,17 @@
 			<thead>
 				<tr>
 					<th field="ck" align="center" checkbox="true" width="1%"></th>
-					<th field="titleText" align="center" width="20%"><span>活动标题</span></th>
+					<th field="title" align="center" width="20%"><span>活动标题</span></th>
 					<th field="activityDate" align="center" width="19%"><span>活动时间</span></th>
-					<th field="awardText" align="center" width="24%"><span>获奖情况</span></th>
+					<th field="award" align="center" width="24%"><span>获奖情况</span></th>
 					<th field="remark" align="center" width="33%"><span>活动详细</span></th>
 					<input type='hidden'  field="activityId" />
 				</tr>
 			</thead>
 		</table>
 		<div style="margin-top: 10px;text-align:center;">
-	      	<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;">提交</a>
-	      	&nbsp;<a href="javascript:void(0)" id="back" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="javascript:parent.window.$('#dlg').dialog('close')">返回</a>
+	      	<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;"><span>提交</span></a>
+	      	&nbsp;<a href="javascript:void(0)" id="back" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="javascript:parent.window.$('#dlg').dialog('close')"><span>返回</span></a>
 	     </div>
 	</body>
 </html>
@@ -42,9 +42,9 @@
 		if(obj.length <= 0) {
 			$.messager.alert('提示', "请先选择一个活动！");
 		}
-		var titleText = row.titleText;
+		var titleText = row.title;
 		var activityDate = row.activityDate;
-	//	var awardText = row.awardText;
+	//	var awardText = row.award;
 		var activityId = row.activityId;
 		
 		parent.window.$("#titleText").html(titleText);

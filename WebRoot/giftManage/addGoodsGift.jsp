@@ -22,24 +22,24 @@
   				<input type="hidden" id="activityId" />
   				<input type="hidden" id="studentCourseId" />
   				<tr id="goodsTr">
-  					<td id="goodsTd" width="25%">&nbsp;<input type="radio" value="ACTIVITY" name="goodsGiftChannel"/><span>活动赠送</span>
+  					<td id="goodsTd" width="30%">&nbsp;<input type="radio" value="ACTIVITY" name="goodsGiftChannel"/><span>活动赠送</span>
 	      				&nbsp;<input type="radio" value="OTHER" name="goodsGiftChannel"/><span>其他赠送</span>
 	      				&nbsp;<input type="radio" value="COURSE" name="goodsGiftChannel"/><span>课程赠送</span>
 						<a href="javascript:void(0)" class="easyui-linkbutton" id="activity" data-options="iconCls:'icon-search'" style="width:90px; height: 20px;display:none;float:right;margin-right:5px" onclick="chooseActivity()">选择活动</a>
 						<a href="javascript:void(0)" class="easyui-linkbutton" id="course" data-options="iconCls:'icon-search'" style="width:90px; height: 20px;display:none;float:right;margin-right:5px" onclick="chooseCourse()">选择课程</a>
 					</td>
 					<td align="right" class="activity" width="7%" style="display: none"><span>活动标题：</span></td>
-					<td align="left" class="activity" id="titleText" width="18%" style="display: none"></td>
+					<td align="left" class="activity" id="titleText" width="15%" style="display: none"></td>
 					<td align="right" class="activity" width="7%" style="display: none"><span>活动时间：</span></td>
-					<td align="left" class="activity" id="activityDate" width="15%" style="display: none"></td>
+					<td align="left" class="activity" id="activityDate" width="12%" style="display: none"></td>
 					<td class="activity" width="10%" style="display: none"></td>
 					<td align="right" class="course"  width="7%" style="display: none"><span>课程阶段：</span></td>
 					<td align="left" class="course" id="stageId" width="7%" style="display: none"></td>
 					<td align="right" class="course" width="7%" style="display: none"><span>缴费时间：</span></td>
-					<td align="left" class="course" id="payDate" width="10%" style="display: none"></td>
+					<td align="left" class="course" id="payDate" width="7%" style="display: none"></td>
 					<td align="right" class="course"  width="7%" style="display: none"><span>课程状态：</span></td>
-					<td align="left" class="course" id="courseState" width="7%" style="display: none"></td>
-					<td align="right" class="course"  width="7%" style="display: none"><span>班级：</span></td>
+					<td align="left" class="course" id="courseState" width="6%" style="display: none"></td>
+					<td align="right" class="course"  width="6%" style="display: none"><span>班级：</span></td>
 					<td align="left" class="course" id="className" width="7%" style="display: none"></td>
   				</tr>
   			</table>

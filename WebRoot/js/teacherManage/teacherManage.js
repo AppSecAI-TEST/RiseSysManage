@@ -117,7 +117,24 @@ function resign()
 		var row = $("#list_data").datagrid('getSelected');
 		var state = row.tState;
 		if(state == "P" || state == "R_L"){
-			getTeacherInfo("list_data","l");
+			$.ajax({
+				type : "POST",
+				url: "/sys/teacherManage/isCanLeaveTeacher.do",
+				data: "teacherId="+row.teacherId,
+				async: false,
+				beforeSend: function()
+		    	{
+		    		$.messager.progress({title : '', msg : '请稍等……'});
+		    	},
+		    	success: function(flag) {
+		    		$.messager.progress('close'); 
+		    		if(flag == "success"){
+						getTeacherInfo("list_data","l");
+		    		}else{
+		    			$.messager.alert('提示', flag);
+		    		}
+		        } 
+			});
 		}else{
 			$.messager.alert('提示', "只有在职或预离职状态的教师才能离职！");
 		}
