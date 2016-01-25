@@ -536,11 +536,11 @@ function ajaxLoadEnd(){
     top.$(".datagrid-mask-msg").remove();             
 } 
 
-function validateTeacher(teacherId, weekTime, hourRange) {
+function validateTeacher(teacherId, weekTime, hourRange, classInstId) {
 	var flag = false;
 	$.ajax({
 		url: "/sys/openClass/validateTeacher.do",
-		data: "param={teacherId:\""+teacherId+"\",weekTime:\""+weekTime+"\",hourRange:\""+hourRange+"\",queryCode:\"validateTeacher\"}",
+		data: "param={teacherId:\""+teacherId+"\",weekTime:\""+weekTime+"\",hourRange:\""+hourRange+"\",classInstId:\""+classInstId+"\",queryCode:\"validateTeacher\"}",
 		dataType: "json",
 		async: false,
 		beforeSend: function()

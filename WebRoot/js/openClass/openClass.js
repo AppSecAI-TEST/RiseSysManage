@@ -42,7 +42,8 @@ $(document).ready(function() {
 					hourRange = $(node).attr("hourRange");
 				}
 			});
-			var flag = validateTeacher(n, weekTime, hourRange);
+			var classInstId = $("#classInstId").val();
+			var flag = validateTeacher(n, weekTime, hourRange, classInstId);
 			if(flag) {
 				var data = $('#teacherId').combobox('getData');
 				$.each(data, function(i, obj){
@@ -331,19 +332,24 @@ function openClass() {
 		data: "param=" + obj,
 		dataType: "json",
 		async: true,
-		beforeSend: function()
-		{
+		beforeSend: function() {
 			$.messager.progress({title : '申请开班', msg : '正在申请开班，请稍等……'});
 		},
 		success: function (data) {
-			$.messager.progress('close'); 
+			alert(data)
 			var flag = data.flag;
+			alert(flag)
+			$.messager.progress('close'); 
 			if(flag) {
 				$.messager.alert('提示', "申请开班成功！", "info", function() {window.history.back();});
 			} else {
 				$.messager.alert('提示', data.msg);
 			}
-		} 
+		},
+		error: function (data) {
+			alert(data)
+			alert(data.status);
+		}
 	});
 }
 

@@ -47,7 +47,8 @@ $(document).ready(function() {
         					hourRange = $(node).attr("hourRange");
         				}
         			});
-        			var flag = validateTeacher(n, weekTime, hourRange);
+        			var classInstId = $("#classInstId").val();
+        			var flag = validateTeacher(n, weekTime, hourRange, classInstId);
         			if(flag) {
         				var data = $('#teacherId').combobox('getData');
         				$.each(data, function(i, obj){

@@ -18,6 +18,7 @@
   			<form id="updateApplyClassFm">
   				<input type="hidden" id="classState" value="${obj.classState }"/>
   				<input type="hidden" id="funcNodeId" value="${obj.funcNodeId }"/>
+  				<input type="hidden" id="maxNum" name="maxNum" value="${obj.createClassObj.maxNum }"/>
   				<input type="hidden" id="applyId" name="applyId" value="${obj.createClassObj.applyId }"/>
   				<input type="hidden" id="classInstId" name="classInstId" value="${obj.createClassObj.classInstId }"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>

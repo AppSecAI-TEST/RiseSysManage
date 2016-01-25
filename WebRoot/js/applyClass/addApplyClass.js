@@ -306,7 +306,7 @@ $(document).ready(function() {
         					hourRange = $(node).attr("hourRange");
         				}
         			});
-        			var flag = validateTeacher(n, weekTime, hourRange);
+        			var flag = validateTeacher(n, weekTime, hourRange, "");
         			if(flag) {
         				var data = $('#teacherId').combobox('getData');
         				$.each(data, function(i, obj){
@@ -530,7 +530,6 @@ function addApplyClass() {
 		success: function (data) {
 			$.messager.progress('close'); 
 			var flag = data.flag;
-			alert(flag)
 			if(flag) {
 				$.messager.alert('提示', "申请放班成功！", "info", function() {window.history.back();});
 			} else {

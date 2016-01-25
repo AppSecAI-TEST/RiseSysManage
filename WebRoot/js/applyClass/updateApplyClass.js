@@ -3,19 +3,28 @@ var selTr = null;
 var classTeacherId = "";
 $(document).ready(function() {	
 	$("#selectClass").click(function() {
-		var stageId = $("#stageId").html();
-		var schoolId = $("#schoolId").val();
+		var maxNum = $("#maxNum").val();
+		var rows = $('#list_data').datagrid("getRows"); 
 		var className = $("#className").html();
-		var classType = $("#classType").html();
-		var funcNodeId = $("#funcNodeId").val();
-		var classInstId = $("#classInstId").val();
-		window.location.href = "/sys/applyClass/studentCourseList.jsp?stageId="+stageId+"&classType="+classType+"&schoolId="+schoolId+"&className="+className+"&classInstId="+classInstId+"&funcNodeId="+funcNodeId;
+		if(parseInt(rows.length) > parseInt(maxNum)) {
+			var sub = parseInt(maxNum) - parseInt(rows.length);
+			$.messager.confirm('提示', className + "已有" + rows.length + "名学员，您还可以为该班级添加" + sub + "名学员", function(r) {
+				var stageId = $("#stageId").html();
+				var schoolId = $("#schoolId").val();
+				var classType = $("#classType").html();
+				var funcNodeId = $("#funcNodeId").val();
+				var classInstId = $("#classInstId").val();
+				window.location.href = "/sys/applyClass/studentCourseList.jsp?stageId="+stageId+"&classType="+classType+"&schoolId="+schoolId+"&className="+className+"&classInstId="+classInstId+"&funcNodeId="+funcNodeId;
+			});
+		} else {
+			$.messager.alert('提示', className + "已经满员，不能再为该班级添加学员！");
+		}
 	});
 	
 	$("#removeStudent").click(function() {
 		var obj = $('#list_data').datagrid('getSelections');
 		if(obj.length > 0) {
-			$.messager.confirm('提示','您确定要移除当前选中的学员吗?',function(r){
+			$.messager.confirm('提示','您确定要移除当前选中的学员吗?',function(r) {
 				if(r){
 					var classStudentId = "";
 					var studentCourseId = "";
@@ -116,7 +125,8 @@ $(document).ready(function() {
 					hourRange = $(node).attr("hourRange");
 				}
 			});
-			var flag = validateTeacher(n, weekTime, hourRange);
+			var classInstId = $("#classInstId").val();
+			var flag = validateTeacher(n, weekTime, hourRange, classInstId);
 			if(flag) {
 				var data = $('#teacherId').combobox('getData');
 				$.each(data, function(i, obj){
@@ -256,29 +266,34 @@ $(document).ready(function() {
 	$("#updateApplyClassSubmit").click(function() {
 		if($("#updateApplyClassFm").form('validate')) {
 			if($("[name='schooltimes']").length > 0) {
-				if($("[name='schooltimes']").length > 4) {
-					$.messager.alert('提示', "一个班级最多只有3个上课时段！");
-				} else {
-					var flag = true;
-					var addNum = "";
-					if($("[name='teachers']").length > 0) {
-						$("[name='schooltimes']").each(function() {
-							var teacherNum = 0;
-							var weekTime = $(this).attr("weekTime");
-							var hourRange = $(this).attr("hourRange");
-							$("[name='teachers']").each(function() {
-								var teacherWeekTime = $(this).attr("weekTime");
-								var teacherHourRange = $(this).attr("hourRange");
-								if(weekTime == teacherWeekTime && hourRange == teacherHourRange) {
-									teacherNum++;
-								}
-							});
-							if(teacherNum == 0) {
-								flag = false;
-								addNum = $(this).attr("addNum");
+				var flag = true;
+				var addNum = "";
+				var flags = true;
+				if($("[name='teachers']").length > 0) {
+					$("[name='schooltimes']").each(function() {
+						var teacherNum = 0;
+						var weekTime = $(this).attr("weekTime");
+						var hourRange = $(this).attr("hourRange");
+						$("[name='teachers']").each(function() {
+							var teacherWeekTime = $(this).attr("weekTime");
+							var teacherHourRange = $(this).attr("hourRange");
+							if(weekTime == teacherWeekTime && hourRange == teacherHourRange) {
+								teacherNum++;
 							}
 						});
+						if(teacherNum == 0) {
+							flag = false;
+							addNum = $(this).attr("addNum");
+						}
+					});
+				} else {
+					//待开课班级必须要有老师
+					var classState = $("#classState").val();
+					if(classState == "002") {
+						flags = false;
 					}
+				}
+				if(flags) {
 					if(flag) {
 						var hours = 0;
 						var teacherHours = 0;
@@ -309,6 +324,8 @@ $(document).ready(function() {
 					} else {
 						$.messager.alert('提示', "请至少为上课时段"+addNum+"添加一位带班老师！");
 					}
+				} else {
+					$.messager.alert('提示', "待开课的班级每个上课时段都需要有带班老师！");
 				}
 			} else {
 				$.messager.alert('提示', "请至少添加一个上课时段！");
@@ -365,7 +382,7 @@ function updateApplyClass() {
 			$.messager.progress('close'); 
 			var flag = data.flag;
 			if(flag) {
-				$.messager.alert('提示', "班级维护成功！", "info", function() {window.location.reload();});
+				$.messager.alert('提示', "班级维护成功！", "info", function() {window.history.back();});
 			} else {
 				$.messager.alert('提示', data.msg);
 			}
