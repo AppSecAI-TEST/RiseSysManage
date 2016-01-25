@@ -121,12 +121,19 @@
 						</td>
 						<td align="center">
 							<c:choose>
-								<c:when test="${node.dress == 'N'}">
-									未穿校服
+								<c:when test="${node.attendType == 'L' || node.attendType == 'T'}">
+									&nbsp;
 								</c:when>
-								<c:when test="${node.dress == 'Y'}">
-									已穿校服
-								</c:when>
+								<c:otherwise>
+									<c:choose>
+										<c:when test="${node.dress == 'N'}">
+											未穿校服
+										</c:when>
+										<c:when test="${node.dress == 'Y'}">
+											已穿校服
+										</c:when>
+									</c:choose>
+								</c:otherwise>
 							</c:choose>
 						</td>
 					</tr>

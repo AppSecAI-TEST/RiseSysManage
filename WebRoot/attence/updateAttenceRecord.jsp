@@ -122,27 +122,41 @@
 						<td align="center">
 							<c:choose>
 								<c:when test="${node.attendType=='N'}">
-									<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}1" value="N" checked="checked" /><label for="attendType${node.studentId}1">正常上课</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}2" value="B" /><label for="attendType${node.studentId}2">迟到</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}3" value="L" /><label for="attendType${node.studentId}3">请假</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}4" value="T" /><label for="attendType${node.studentId}4">旷课</label>&nbsp;&nbsp;&nbsp;&nbsp;<input class="easyui-filebox" name="uploadAttenceLeave${node.studentId}" data-options="prompt:'',buttonText:'上传请假单'" style="width:200px">
+									<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}1" value="N" onclick="attendTypeClickFunc(this,'${node.studentId}')" checked="checked" /><label for="attendType${node.studentId}1">正常上课</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}2" value="B" onclick="attendTypeClickFunc(this,'${node.studentId}')" /><label for="attendType${node.studentId}2">迟到</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}3" value="L" onclick="attendTypeClickFunc(this,'${node.studentId}')" /><label for="attendType${node.studentId}3">请假</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}4" value="T" onclick="attendTypeClickFunc(this,'${node.studentId}')" /><label for="attendType${node.studentId}4">旷课</label>&nbsp;&nbsp;&nbsp;&nbsp;<input class="easyui-filebox" name="uploadAttenceLeave${node.studentId}" data-options="prompt:'',buttonText:'上传请假单'" style="width:200px">
 								</c:when>
 								<c:when test="${node.attendType=='B'}">
-									<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}1" value="N" /><label for="attendType${node.studentId}1">正常上课</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}2" value="B" checked="checked" /><label for="attendType${node.studentId}2">迟到</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}3" value="L" /><label for="attendType${node.studentId}3">请假</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}4" value="T" /><label for="attendType${node.studentId}4">旷课</label>&nbsp;&nbsp;&nbsp;&nbsp;<input class="easyui-filebox" name="uploadAttenceLeave${node.studentId}" data-options="prompt:'',buttonText:'上传请假单'" style="width:200px">
+									<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}1" value="N" onclick="attendTypeClickFunc(this,'${node.studentId}')" /><label for="attendType${node.studentId}1">正常上课</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}2" value="B" onclick="attendTypeClickFunc(this,'${node.studentId}')" checked="checked" /><label for="attendType${node.studentId}2">迟到</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}3" value="L" onclick="attendTypeClickFunc(this,'${node.studentId}')" /><label for="attendType${node.studentId}3">请假</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}4" value="T" onclick="attendTypeClickFunc(this,'${node.studentId}')" /><label for="attendType${node.studentId}4">旷课</label>&nbsp;&nbsp;&nbsp;&nbsp;<input class="easyui-filebox" name="uploadAttenceLeave${node.studentId}" data-options="prompt:'',buttonText:'上传请假单'" style="width:200px">
 								</c:when>
 								<c:when test="${node.attendType=='L'}">
-									<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}1" value="N" /><label for="attendType${node.studentId}1">正常上课</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}2" value="B" /><label for="attendType${node.studentId}2">迟到</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}3" value="L" checked="checked" /><label for="attendType${node.studentId}3">请假</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}4" value="T" /><label for="attendType${node.studentId}4">旷课</label>&nbsp;&nbsp;&nbsp;&nbsp;<input class="easyui-filebox" name="uploadAttenceLeave${node.studentId}" data-options="prompt:'',buttonText:'上传请假单'" style="width:200px">
+									<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}1" value="N" onclick="attendTypeClickFunc(this,'${node.studentId}')" /><label for="attendType${node.studentId}1">正常上课</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}2" value="B" onclick="attendTypeClickFunc(this,'${node.studentId}')" /><label for="attendType${node.studentId}2">迟到</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}3" value="L" onclick="attendTypeClickFunc(this,'${node.studentId}')" checked="checked" /><label for="attendType${node.studentId}3">请假</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}4" value="T" onclick="attendTypeClickFunc(this,'${node.studentId}')" /><label for="attendType${node.studentId}4">旷课</label>&nbsp;&nbsp;&nbsp;&nbsp;<input class="easyui-filebox" name="uploadAttenceLeave${node.studentId}" data-options="prompt:'',buttonText:'上传请假单'" style="width:200px">
 								</c:when>
 								<c:when test="${node.attendType=='T'}">
-									<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}1" value="N" /><label for="attendType${node.studentId}1">正常上课</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}2" value="B" /><label for="attendType${node.studentId}2">迟到</label>&nbsp;<input type="radio" name="attendType" id="attendType${node.studentId}3" value="L" /><label for="attendType${node.studentId}3">请假</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}4" value="T" checked="checked" /><label for="attendType${node.studentId}4">旷课</label>&nbsp;&nbsp;&nbsp;&nbsp;<input class="easyui-filebox" name="uploadAttenceLeave${node.studentId}" data-options="prompt:'',buttonText:'上传请假单'" style="width:200px">
+									<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}1" value="N" onclick="attendTypeClickFunc(this,'${node.studentId}')" /><label for="attendType${node.studentId}1">正常上课</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}2" value="B" onclick="attendTypeClickFunc(this,'${node.studentId}')" /><label for="attendType${node.studentId}2">迟到</label>&nbsp;<input type="radio" name="attendType" id="attendType${node.studentId}3" value="L" onclick="attendTypeClickFunc(this,'${node.studentId}')" /><label for="attendType${node.studentId}3">请假</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}4" value="T" checked="checked" onclick="attendTypeClickFunc(this,'${node.studentId}')" /><label for="attendType${node.studentId}4">旷课</label>&nbsp;&nbsp;&nbsp;&nbsp;<input class="easyui-filebox" name="uploadAttenceLeave${node.studentId}" data-options="prompt:'',buttonText:'上传请假单'" style="width:200px">
 								</c:when>
 							</c:choose>
 						</td>
 						<td align="center">
 							<c:choose>
-								<c:when test="${node.dress == 'N'}">
-									<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" /><label for="dress${node.studentId}2">已穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" checked="checked" /><label for="dress${node.studentId}1">未穿校服</label>
+								<c:when test="${node.attendType == 'L' || node.attendType == 'T'}">
+									<c:choose>
+										<c:when test="${node.dress == 'N'}">
+											<span id="dressArea${node.studentId}" style="visibility:hidden;"><input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" /><label for="dress${node.studentId}2">已穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" checked="checked" /><label for="dress${node.studentId}1">未穿校服</label></span>
+										</c:when>
+										<c:when test="${node.dress == 'Y'}">
+											<span id="dressArea${node.studentId}" style="visibility:hidden;"><input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" checked="checked" /><label for="dress${node.studentId}2">已穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" /><label for="dress${node.studentId}1">未穿校服</label></span>
+										</c:when>
+									</c:choose>
 								</c:when>
-								<c:when test="${node.dress == 'Y'}">
-									<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" checked="checked" /><label for="dress${node.studentId}2">已穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" /><label for="dress${node.studentId}1">未穿校服</label>
-								</c:when>
+								<c:otherwise>
+									<c:choose>
+										<c:when test="${node.dress == 'N'}">
+											<span id="dressArea${node.studentId}" style="visibility:visible;"><input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" /><label for="dress${node.studentId}2">已穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" checked="checked" /><label for="dress${node.studentId}1">未穿校服</label></span>
+										</c:when>
+										<c:when test="${node.dress == 'Y'}">
+											<span id="dressArea${node.studentId}" style="visibility:visible;"><input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" checked="checked" /><label for="dress${node.studentId}2">已穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" /><label for="dress${node.studentId}1">未穿校服</label></span>
+										</c:when>
+									</c:choose>
+								</c:otherwise>
 							</c:choose>
 						</td>
 					</tr>
@@ -305,6 +319,7 @@
 				{
 					var teacherFlag = true;
 					var teacherTime = 0;
+					var teacherTaTime = 0;
 					$("#teacherTab tr:gt(1) td:nth-child(1)").each(function(i,node){
 						if($(node).attr("teacherId") == attRecordTeacherId)
 						{
@@ -314,10 +329,19 @@
 						{
 							teacherTime += parseInt($(node).attr("hours"));
 						}
+						if($(node).attr("teacherType") == 'TA')
+						{
+							teacherTaTime += parseInt($(node).attr("hours"));
+						}
 					});
 					if($("#classLessonHour").textbox("getValue") != "" && !isNaN($("#classLessonHour").textbox("getValue")) && attRecordClassType == "T" && parseInt(attRecordLessonHour)+teacherTime > parseInt($("#classLessonHour").textbox("getValue")))
 					{
 						$.messager.alert('提示',"添加老师课时量已超过课程总课时量,不能再添加老师");
+						return ;
+					}
+					if(teacherTaTime+parseInt(attRecordLessonHour) > teacherTime && attRecordClassType == "TA")
+					{
+						$.messager.alert('提示',"添加TA老师课时量已超过T老师总课时量,不能再添加老师");
 						return ;
 					}
 					if(teacherFlag)
@@ -362,6 +386,18 @@
 		        });
 			}
 			
+			function attendTypeClickFunc(obj,flag)
+			{
+				if(obj.value == 'L' || obj.value == 'T')
+				{
+					$("#dressArea"+flag).css("visibility","hidden");
+				}
+				else
+				{
+					$("#dressArea"+flag).css("visibility","visible");
+				}
+			}
+			
 			function attendUpdate()
 			{
 				var classTime = $("#classTime").combobox("getValue");
@@ -381,6 +417,7 @@
 				};
 				var teacherArr = [];
 				var teacherTime = 0;
+				var teacherTaTime = 0;
 				$("#teacherTab tr:gt(1) td:nth-child(1)").each(function(i,node){
 					var teacherObj = {
 						teacherId:$(node).attr("teacherId"),
@@ -393,6 +430,10 @@
 					if($(node).attr("teacherType") == 'T')
 					{
 						teacherTime += parseInt($(node).attr("hours"));
+					}
+					if($(node).attr("teacherType") == 'TA')
+					{
+						teacherTaTime += parseInt($(node).attr("hours"));
 					}
 				});
 				obj.teacherList = teacherArr;
@@ -431,6 +472,10 @@
 				else if(teacherTime > classLessonHour)
 				{
 					$.messager.alert("提示", "老师课时量已超过课程总课时量,请核实后重新尝试","warning");
+				}
+				else if(teacherTaTime > teacherTime)
+				{
+					$.messager.alert('提示',"添加TA老师课时量已超过T老师总课时量,不能再添加老师","warning");
 				}
 				else
 				{

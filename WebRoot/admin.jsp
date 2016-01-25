@@ -8,9 +8,7 @@
 <html lang="zh-CN">
 	<head>
 		<meta charset="utf-8">
-		<!-- 
 		<title>瑞思教务管理系统</title>
-		 -->
 		<%@ include file="/common/head.jsp" %>
 		<%@ include file="/common/formvalidator.jsp" %>
 		<style type="text/css">
@@ -41,23 +39,6 @@
 				<img src="<%=path %>/pub/images/adm_menu2.png" style="right:180px;top:10px;position:absolute;cursor:pointer;">
 				<img src="<%=path %>/pub/images/adm_menu3.png" style="right:100px;top:10px;position:absolute;cursor:pointer;">
 				<img onclick="logout()" src="<%=path %>/pub/images/adm_menu4.png" style="right:50px;top:10px;position:absolute;cursor:pointer;">
-				
-				<!-- 
-				<ul class="nav">
-					<c:forEach items="${menuList}" var="node">
-						<li>
-							<c:choose>
-								<c:when test="${node.menuId == 1}">
-									<a class="focus" href="javascript:void(0);" onclick="getLeft(${node.menuId},'${node.menuName}', this)">${node.menuName}</a>
-								</c:when>
-								<c:otherwise>
-									<a href="javascript:void(0);" onclick="getLeft(${node.menuId},'${node.menuName}', this)">${node.menuName}</a>
-								</c:otherwise>
-							</c:choose>
-						</li>
-					</c:forEach>
-				</ul>
-				 -->
 			</div>
 			<div class="panel-header panel-header-noborder top-toolbar" style="position:absolute;bottom:0px;border-top-width:1px;border-bottom-width:0px;z-index:1;display:none;">
 				<div id="infobar">
@@ -94,7 +75,6 @@
 		<div id="leftarea" data-options="iconCls:'icons-other-house',region:'west',title:'加载中...',split:true,width:200">
 			<div id="leftmenu" class="easyui-accordion" data-options="fit:true,border:false"></div>
 		</div>
-
 		<!-- 内容 -->
 		<div id="mainarea" data-options="region:'center'" style="padding: 0px;background:#E0ECFF;min-width:800px">
 			<div class="easyui-layout" data-options="fit:true,border:false,plain:false">
@@ -123,40 +103,15 @@
 	     		</div>
      		</div>
 		</div>
-
-		<!-- 右键菜单 -->
-		<div id="rightmenu" class="easyui-menu"
-			data-options="onClick:rightMenuHandler">
-			<div
-				data-options="name:'home',iconCls:'icons-application-application_home'">
-				访问前台
-			</div>
-			<div class="menu-sep"></div>
-			<div data-options="name:'exit'">
-				退出登录
-			</div>
-		</div>
-
 		<script type="text/javascript">
-		
-		//监控退出
-		
-		
-		
 			var gMenuArr = [];
 			var MenuInfo = function(menuId , menuData){
 				this.menuId = menuId;
 				this.menuData = menuData;
 			};
+			
 			$(function(){
 				getLeft(${sessionScope.funcNodeInfo[0].funcNodeList[0].funcNodeId}, '导航菜单');
-				$(document).bind('contextmenu',function(e){
-					e.preventDefault();
-					$('#rightmenu').menu('show', {
-						left: e.pageX,
-						top: e.pageY
-					});
-				});
 				$.messager.show({			
 					title:'登录提示',
 					msg:'您好！${sessionScope.StaffT.staffName} 欢迎回来！<br/>最后登录时间：<fmt:formatDate value="${sessionScope.StaffT.lastDate}" pattern="yyyy-MM-dd HH:mm:ss" /><br/>最后登录IP：${sessionScope.StaffT.remoteIp}',
@@ -164,23 +119,6 @@
 					showType:'slide'
 				});
 			});
-			
-			function rightMenuHandler(item){
-			
-				if(!item.name) return;
-				switch(item.name){
-					case 'home':
-						window.open('admin.jsp');
-						break;
-					case 'refresh': //刷新后台
-						window.location.href = window.location.href;
-						break;
-					case 'exit': //退出登录
-						logout();
-						break;
-				}
-			
-			}
 			
 			function logout(){
 				$.messager.confirm('提示信息', '确定要退出登录吗？', function(result){

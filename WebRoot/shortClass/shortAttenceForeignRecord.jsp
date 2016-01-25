@@ -181,6 +181,7 @@
 				{
 					var teacherFlag = true;
 					var teacherTime = 0;
+					var teacherTaTime = 0;
 					$("#teacherTab tr:gt(1) td:nth-child(1)").each(function(i,node){
 						if($(node).attr("teacherId") == attRecordTeacherId)
 						{
@@ -190,10 +191,19 @@
 						{
 							teacherTime += parseInt($(node).attr("hours"));
 						}
+						if($(node).attr("teacherType") == 'TA')
+						{
+							teacherTaTime += parseInt($(node).attr("hours"));
+						}
 					});
 					if($("#classLessonHour").textbox("getValue") != "" && !isNaN($("#classLessonHour").textbox("getValue")) && attRecordClassType == "T" && parseInt(attRecordLessonHour)+teacherTime > parseInt($("#classLessonHour").textbox("getValue")))
 					{
 						$.messager.alert('提示',"添加老师课时量已超过课程总课时量,不能再添加老师");
+						return ;
+					}
+					if(teacherTaTime+parseInt(attRecordLessonHour) > teacherTime && attRecordClassType == "TA")
+					{
+						$.messager.alert('提示',"添加TA老师课时量已超过T老师总课时量,不能再添加老师");
 						return ;
 					}
 					if(teacherFlag)
@@ -239,6 +249,7 @@
 				};
 				var teacherArr = [];
 				var teacherTime = 0;
+				var teacherTaTime = 0;
 				$("#teacherTab tr:gt(1) td:nth-child(1)").each(function(i,node){
 					var teacherObj = {
 						shortClassInstId:"${shortSchooltimeT.shortClassInstId}",
@@ -253,6 +264,10 @@
 					if($(node).attr("teacherType") == 'T')
 					{
 						teacherTime += parseInt($(node).attr("hours"));
+					}
+					if($(node).attr("teacherType") == 'TA')
+					{
+						teacherTaTime += parseInt($(node).attr("hours"));
 					}
 				});
 				obj.teacherAttendList = teacherArr;
@@ -283,6 +298,10 @@
 				else if(teacherTime > classLessonHour)
 				{
 					$.messager.alert("提示", "老师课时量已超过课程总课时量,请核实后重新尝试","warning");
+				}
+				else if(teacherTaTime > teacherTime)
+				{
+					$.messager.alert('提示',"添加TA老师课时量已超过T老师总课时量,不能再添加老师","warning");
 				}
 				else if(teacherArr.length == 0)
 				{
