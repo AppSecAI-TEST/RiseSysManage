@@ -117,10 +117,11 @@ $(function () {
              	});
             },
             onChange:function(newValue){
+            	var schoolId=+$("#schoolId").combobox('getValue');
             	$.ajax(
 				{
 					type : "POST",
-					url: "/sys/time/hoursPlan.do?schoolId="+$("#schoolId").val()+"&month="+newValue,
+					url: "/sys/time/hoursPlan.do?schoolId="+schoolId+"&month="+newValue,
 					async: true,
 					dataType:"json",
 					beforeSend: function()
@@ -273,7 +274,7 @@ $('#weekDg').datagrid({
 }
  
   
-function planWeek(weekSeq,dateRange,month,createWeekId)
+function planWeek(weekSeq,dateRange,month,createWeekId,schoolId)
 {
 	$.ajax(
 	{

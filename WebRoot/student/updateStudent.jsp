@@ -148,7 +148,7 @@
       		</form>
       	</div>
       		
-      	<div style="height: 10px;"></div>
+      	<div style="height: 5px;"></div>
       	<div class="easyui-panel" style="min-width:1100px; width:98%;height:auto;" title="联系人信息">
       		<form id="contactFm">
 			      <table width="100%" cellpadding="5px" class="maintable" id="contactTd">
@@ -193,7 +193,7 @@
 	      	</form>
       	</div>
       		
-      	<div style="height: 10px;"></div>
+      	<div style="height: 5px;"></div>
       	<div class="easyui-panel" style="min-width:1100px; width:98%;height:auto;" title="活动信息">
       		<form id="activityFm">
       			<table width="100%" cellpadding="5px" class="maintable" id="activityTd">
