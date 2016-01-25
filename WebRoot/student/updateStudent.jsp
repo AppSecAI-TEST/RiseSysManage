@@ -18,6 +18,7 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
+		<%@ include file="../common/pub.jsp" %>
 		<script type="text/javascript" src="<%=path %>/js/student/updateStudent.js"></script>
   	</head>
   
@@ -40,14 +41,14 @@
 	      				<td align="right" width="114px"><span style="color: red;">*</span><span>学员姓名：</span></td>
 	      				<td>
 	      					<div id="nameDiv">
-		      					<input name="name" id="name" type="text" class="easyui-textbox validatebox" required="true" style="width: 200px; height: 25px;"/>
+		      					<input name="name" id="name" type="text" class="easyui-textbox validatebox" required="true" style="width: 100px; height: 25px;"/>
 	      					</div>
 	      					<span id="nameText" style="display: none;"></span>
 	      				</td>
 	      				<td align="right" width="114px"><span style="color: red;">*</span><span>出生日期：</span></td>
 	      				<td colspan="4">
 	      					<div id="birthdayDiv">
-		      					<input name="birthday" id="birthday" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 25px;" editable="false"/>
+		      					<input name="birthday" id="birthday" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 25px;" editable="false"/>
 	      					</div>
 	      					<span id="birthdayText" style="display: none;"></span>
 	      				</td>
@@ -72,7 +73,7 @@
 	      			<tr>
 	      				<td align="right" width="114px"><span style="color: red;">*</span><span>英文名：</span></td>
 	      				<td>
-	      					<input name="byName" id="byName" type="text" class="easyui-textbox" style="width: 200px; height: 25px;"/>
+	      					<input name="byName" id="byName" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 	      				</td>
 	      				<td align="right" width="114px"><span>家庭地址：</span></td>
 	      				<td colspan="4">
@@ -82,7 +83,7 @@
 	      			<tr>
 	      				<td align="right" width="114px"><span>就读学校：</span></td>
 	      				<td colspan="6">
-	      					<select id="schoolType" class="easyui-combobox" style="width: 150px; height: 25px;" editable="false">
+	      					<select id="schoolType" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
         					</select>
         					&nbsp;
         					<span style="width: 114px">学校名称：</span>
@@ -94,7 +95,7 @@
 	      				<td align="right" width="114px"><span style="color: red;">*</span><span>建档日期：</span></td>
 	      				<td>
 	      					<div id="entranceDateDiv">
-		      					<input name="entranceDate" id="entranceDate" type="text" class="easyui-datebox" required="true" style="width: 200px; height: 25px;" editable="false"/>
+		      					<input name="entranceDate" id="entranceDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 25px;" editable="false"/>
 	      					</div>
 	      					<span id="entranceDateText" style="display: none;"></span>
 	      				</td>
@@ -109,7 +110,7 @@
 	      					<div id="advisterADiv">
 		      					<select id="advisterASchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" required="true" editable="false">
 	        					</select>
-	        					<select name="advisterIdA" id="advisterIdA" class="easyui-combobox" style="width: 150px; height: 25px;" required="true" editable="false">
+	        					<select name="advisterIdA" id="advisterIdA" class="easyui-combobox" style="width: 100px; height: 25px;" required="true" editable="false">
 	        					</select>
 	      					</div>
         					<span id="advisterAText" style="display: none;"></span>
@@ -119,7 +120,7 @@
 	      					<div id="advisterBDiv">
 		      					<select id="advisterBSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 		        				</select>
-		        				<select name="advisterIdB" id="advisterIdB" class="easyui-combobox" style="width: 150px; height: 25px;" editable="false">
+		        				<select name="advisterIdB" id="advisterIdB" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 		        				</select>
 	      					</div>
 	        				<span id="advisterBText" style="display: none;"></span>
@@ -128,12 +129,12 @@
 	      			<tr>
 	      				<td align="right" width="114px"><span style="color: red;">*</span><span>责任顾问：</span></td>
 	      				<td>
-		      				<select name="dutyAdvister" id="dutyAdvister" class="easyui-combobox" style="width: 150px; height: 25px;" required="true" editable="false">
+		      				<select name="dutyAdvister" id="dutyAdvister" class="easyui-combobox" style="width: 100px; height: 25px;" required="true" editable="false">
 	        				</select>
 	      				</td>
 	      				<td align="right" width="114px"><span>客户关怀：</span></td>
 	      				<td colspan="4">
-	      					<select name="carer" id="carer" class="easyui-combobox" style="width: 150px; height: 25px;" editable="false">
+	      					<select name="carer" id="carer" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
         					</select>
 	      				</td>
 	      			</tr>
@@ -147,7 +148,7 @@
       		</form>
       	</div>
       		
-      	<div style="height: 10px;"></div>
+      	<div style="height: 5px;"></div>
       	<div class="easyui-panel" style="min-width:1100px; width:98%;height:auto;" title="联系人信息">
       		<form id="contactFm">
 			      <table width="100%" cellpadding="5px" class="maintable" id="contactTd">
@@ -192,7 +193,7 @@
 	      	</form>
       	</div>
       		
-      	<div style="height: 10px;"></div>
+      	<div style="height: 5px;"></div>
       	<div class="easyui-panel" style="min-width:1100px; width:98%;height:auto;" title="活动信息">
       		<form id="activityFm">
       			<table width="100%" cellpadding="5px" class="maintable" id="activityTd">

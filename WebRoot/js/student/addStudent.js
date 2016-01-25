@@ -177,32 +177,8 @@ $(document).ready(function() {
     			});
     		}
     		if(flag) {
-    			var identityId = $("#identityId").textbox("getValue");
+    				var identityId = $("#identityId").textbox("getValue");
     			var contactIdentityId = $("#contactIdentityId").textbox("getValue");
-    			if((identityId == null || identityId == "" || identityId == undefined)
-    					&& (contactIdentityId == null || contactIdentityId == "" || contactIdentityId == undefined)) {
-    				if($("[name='contacts']").length > 0) {
-    	    			$("[name='contacts']").each(function() {
-    	    				if($(this).attr("identityId") == null || $(this).attr("identityId") == "" || $(this).attr("identityId") == undefined) {
-    	    					flag = false;
-    	    				}
-    	    			});
-    	    		}
-    			}
-    			if(flag) {
-    				var flags = true;
-    				var contactIdentityType = $('#contactIdentityType').combobox('getValue');
-    				if(contactIdentityId != "" && contactIdentityId != null && contactIdentityId != undefined) {
-    					if(contactIdentityType == "" || contactIdentityType == null || contactIdentityType == undefined) {
-    						flag = false;
-    					}
-    				} else {
-    					if(contactIdentityType != "" && contactIdentityType != null && contactIdentityType != undefined) {
-    						flags = false;
-    					}
-    				}
-    				if(flag) {
-    					if(flags) {
     						var phone = $("#phone").textbox("getValue");
     						if(phone == null || phone == "" || phone == undefined) {
     							if($("[name='contacts']").length > 0) {
@@ -224,11 +200,22 @@ $(document).ready(function() {
     								var contactName = $("#contactName").textbox("getValue");
     								var job = $("#job").textbox("getValue");
     								var contactIdentityTypeText = $('#contactIdentityType').combobox('getText');
+    								var contactIdentityType = $('#contactIdentityType').combobox('getValue');
+    								var contactIdentityId = $("#contactIdentityId").textbox("getValue");
+    								if(contactIdentityId!='' && contactIdentityType=='')
+    								{
+    									$.messager.alert('提示', "请选择联系人证件类型");
+    									return false;
+    								}
     								var content = "<tr><td align='center'><span>"+relationTypeText+"</span></td>";
     								content += "<td align='center'><span>"+contactName+"</span></td>";
     								content += "<td align='center'><span>"+job+"</span></td>";
     								content += "<td align='center'>";
     								var contactUsed = "N";
+    								if($("[name='contacts']").length == 0)//第一个默认主要联系人
+    								{
+    								 	used=true;
+    								}
     								if(used) {
     									content += "<input type='checkbox' checked='checked'/>";
     									contactUsed = "Y";
@@ -259,15 +246,9 @@ $(document).ready(function() {
     						} else {
     							$.messager.alert('提示', "必须提供一个联系电话！");
     						}
-    					} else {
-    						$.messager.alert('提示', "请填写联系人的证件号码！");
-    					}
-    				} else {
-    					$.messager.alert('提示', "请选择联系人的证件类型！");
-    				}
-    			} else {
-    				$.messager.alert('提示', "学员证件号码和家长证件号码信息必具其一！");
-    			}
+    				 
+    				 
+    			 
     		} else {
     			$.messager.alert('提示', "联系人关系为“" + relationTypeText + "”的联系人已存在，请更换联系人关系！");
     		}
@@ -346,25 +327,44 @@ $(document).ready(function() {
     			if(isExists) {
 					$.messager.alert('提示', "该学员已存在资料，不需要再进行注册！");
 				} else {
-					if($("[name='contacts']").length > 0) {
+					if($("[name='contacts']").length > 0)
+					{
 						var flag = true;
 						var identityId = $("#identityId").textbox("getValue");
 						var identityType = $('#identityType').combobox('getValue');
-						if(identityId != null && identityId != "" && identityId != undefined && identityType == "2BA"
-							&& identityType != null && identityType != "" && identityType != undefined) {
+						if(identityId != null && identityId != "" && identityId != undefined && identityType == "2BA"&& identityType != null && identityType != "" && identityType != undefined) 
+						{
 							var birthday = $("#birthday").datebox("getValue");
 							birthday = birthday.replace(/-/g, "");
 							if(birthday != identityId.substring(6, 14)) {
 								flag = false;
 							}
 						}
+						
+						var contactsNo=true;
+						$("[name='contacts']").each(function() 
+						{
+							if($(this).attr("identityId")!='')
+							{
+								contactsNo=false;
+							}
+						});
+						if((identityId == null || identityId == "" || identityId == undefined  ) && contactsNo)
+						{
+							$.messager.alert({title : '学员注册', msg : '学员证件号码和联系人证件号码不能同时为空,至少填写一项'});
+							return false;
+						}
+				
+						
 						if(flag) {
 							var advisterIdA = $("#advisterIdA").combobox("getValue");
 							var advisterIdB = $("#advisterIdB").combobox("getValue");
-							if(advisterIdA != advisterIdB) {
+							if(advisterIdA != advisterIdB)
+							{
 								var obj = JSON.stringify($("#studentFm").serializeObject());
 								var contactArray = "[";
-								$("[name='contacts']").each(function() {
+								$("[name='contacts']").each(function() 
+								{
 									contactArray += "{identityId:\""+$(this).attr("identityId")+"\",identityType:\""+$(this).attr("identityType")+"\",name:\""+$(this).attr("contactName")+"\",phone:\""+$(this).attr("phone")+"\",relationType:\""+$(this).attr("relationType")+"\",job:\""+$(this).attr("job")+"\",used:\""+$(this).attr("used")+"\"},";
 								});
 								contactArray = contactArray.substring(0, contactArray.length - 1) + "]";
@@ -378,6 +378,7 @@ $(document).ready(function() {
 								realSchoolArray += "]";
 								var param = "{studentInfo:"+obj+",contactArray:"+contactArray+",realSchoolArray:"+realSchoolArray+"}";
 								param = encodeURI(param);
+								
 								$.ajax({
 									url: "/sys/student/addStudent.do",
 									data: "param=" + param,

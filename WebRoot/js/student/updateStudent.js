@@ -25,26 +25,6 @@ $(document).ready(function() {
     		$.messager.progress('close'); 
     		var schoolId = $("#schoolId").val();
     		//分校区
-    		if(schoolId.length > 2) {
-    			$("#nameDiv").css('display', "none");
-        		$("#nameText").css('display', "block");
-        		
-        		$("#birthdayDiv").css('display', "none");
-        		$("#birthdayText").css('display', "block");
-        		
-        		$("#sexDiv").css('display', "none");
-        		$("#sexText").css('display', "block");
-        		
-        		$("#advisterADiv").css('display', "none");
-        		$("#advisterAText").css('display', "block");
-        		
-        		$("#advisterBDiv").css('display', "none");
-        		$("#advisterBText").css('display', "block");
-        		
-        		$("#entranceDateDiv").css('display', "none");
-        		$("#entranceDateText").css('display', "block");
-    		}
-    		
     		studentObj = data.studentObj;
     		$("#nameText").html(studentObj.name);
     		$("#name").textbox('setValue', studentObj.name);
