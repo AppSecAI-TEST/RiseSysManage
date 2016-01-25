@@ -59,9 +59,9 @@
 		  				<tr>
 		  					<td align="right">定班率：</td>
 		  					<td>
-		  						<input class="easyui-textbox" id="lowLimit" name="lowLimit" data-options="min:0,max:99,precision:0" style="width:35px;height:25px;">%
+		  						<input class="easyui-textbox" id="lowLimit" name="lowLimit" data-options="min:0,max:999,precision:0" style="width:35px;height:25px;">%
 		  						-
-			  					<input class="easyui-textbox" id="limit" name="limit" data-options="min:1,max:100,precision:0" style="width:35px;height:25px;">%
+			  					<input class="easyui-textbox" id="limit" name="limit" data-options="min:1,max:1000,precision:0" style="width:35px;height:25px;">%
 		  					</td>
 		  					<td align="right">合并状态：</td>
 		  					<td>
@@ -92,12 +92,12 @@
 							<th field="applyId" align="center" width="10%">编号</th>
 							<th field="applyDate" align="center" width="8%">申请日期</th>
 							<th field="approveDate" align="center" width="8%">审批日期</th>
-							<th field="schoolName" align="center" width="8%">校区</th>
+							<th field="schoolName" align="center" width="6%">校区</th>
 							<th field="classesName" align="center" width="8%">班级名称</th>
 							<th field="finishDate" align="center" width="8%">结课日期</th>
 							<th field="classTime" align="center" width="15%">上课时段</th>
 							<th field="studyingNum" align="center" width="5%">在读人数</th>
-							<th field="higherNum" align="center" width="5%">已升学人数</th>
+							<th field="higherNum" align="center" width="7%">已升学人数</th>
 							<th field="higherPer" align="center" width="5%">升学率</th>
 							<th field="startDate" align="center" width="8%">开始日期</th>
 							<th field="startHours" align="center" width="8%">开始课时</th>
@@ -170,9 +170,9 @@
 		  						<input class="easyui-datebox" name="endMergeTime" id="endMergeTime" style="width:100px;" editable="false"/>
 		  					</td>
 		  					<td align="left" width="450px;">	
-		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:80px" id="qryBtn" funcNodeId="3111">查询</a>
+		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:80px" id="qryBtns" funcNodeId="3111">查询</a>
 		  						&nbsp;&nbsp;
-		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:80px" id="resetBtn" >重置</a>
+		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:80px" id="resetBtns" >重置</a>
 		  					</td>
 		  				</tr>
 		  			</table>		 		

@@ -31,10 +31,10 @@
 						tr1.find("td:eq(2)").html(obj.finishDate);
 						tr1.find("td:eq(3)").html(obj.classTime);
 						tr1.find("td:eq(4)").html(obj.readNum);
-						tr1.find("td:eq(5)").html();//已升学人数
-						tr1.find("td:eq(6)").html();//升学率
-						tr1.find("td:eq(7)").html();//可升学人数
-						tr1.find("td:eq(8)").html();//升学缺口
+						tr1.find("td:eq(5)").html(obj.higherNum);//已升学人数
+						tr1.find("td:eq(6)").html(obj.higherRate);//升学率
+						tr1.find("td:eq(7)").html(obj.planHigherNum);//可升学人数
+						tr1.find("td:eq(8)").html(obj.numGap);//升学缺口
 						tr1.css("display","table-row")
 						$("#tab1").append(tr1);
 					});

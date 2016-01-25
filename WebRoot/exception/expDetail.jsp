@@ -24,10 +24,10 @@
   					<td align="right"><span>所属校区：</span></td><td align="left" id="schoolName"></td><td align="right"><span>异常状态：</span></td><td align="left" id="excState"></td><td align="right"><span>异常开始时间：</span></span></td><td align="left" id="createDate"></td>
   				</tr>
   				<tr>
-  					<td align="right"><span>异常时长：</span></td><td align="left" id="excDays"></td><td align="right"><span>终止时间：</span></td><td align="left" id="endDate"></td><td align="right"><span>操作人：</span></td><td align="left" id="excHandler"></td>
+  					<td align="right"><span>异常时长：</span></td><td align="left" id="excDays"></td><td align="right"><span>终止时间：</span></td><td align="left" id="finishDate"></td><td align="right"><span>操作人：</span></td><td align="left" id="excHandler"></td>
   				</tr>
   				<tr>
-  					<td align="right"><span>复课时间：</span></td><td align="left" id="refundDate"></td><td align="right"><span>复课方式：</span></td><td align="left" id="refundState"></td><td align="right"><span>操作人：</span></td><td align="left" id="refundHandler"></td>
+  					<td align="right"><span>复课时间：</span></td><td align="left" id="resumeDate"></td><td align="right"><span>复课方式：</span></td><td align="left" id="resumeType"></td><td align="right"><span>操作人：</span></td><td align="left" id="refundHandler"></td>
   				</tr>
   			</table>
   		</div>

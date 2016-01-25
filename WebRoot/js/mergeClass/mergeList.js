@@ -58,7 +58,14 @@ function approveApply()
 	if(validateSelect("list_datas"))
 	{
 		var row = $("#list_datas").datagrid('getSelected');
-		window.location.href ="approveApply.jsp?applyId="+row.applyId+"&comboState="+row.stateValue;
+		if(row.stateValue=="001"||row.stateValue=="004")
+		{
+			window.location.href ="approveApply.jsp?applyId="+row.applyId+"&comboState="+row.stateValue;
+		}	
+		else
+		{
+			$.messager.alert('提示', "只能审批合并已申请和取消已申请的记录！");
+		}	
 	}	
 }
 
@@ -67,7 +74,7 @@ function cancelMerge()
 	if(validateSelect("list_data"))
 	{
 		var row = $("#list_data").datagrid('getSelected');
-		if(row.stateValue=="001"||row.stateValue=="003")
+		if(row.stateValue=="001"||row.stateValue=="002")
 		{
 			window.location.href ="cancelMergeApply.jsp?applyId="+row.applyId;
 		}

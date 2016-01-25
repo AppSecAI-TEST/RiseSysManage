@@ -176,9 +176,16 @@ function orderClass()
 {
 	var operate=[];
 	var changeText=[];
+	var numArr=[];
 	$.each(arr,function(i,obj){
 		var addStr="";
 		var delStr="";
+		var numObj ={
+			classInstId:obj.classInstId,
+			applyId:applyId,
+			orderNum:0
+		}
+		numArr.push(numObj);
 		if(obj.operateArr.length<1)
 		{
 			return true;
@@ -237,9 +244,21 @@ function orderClass()
 	}
 	else
 	{
+		$("input:checkbox:checked").each(function(){
+			var classInstId =$(this).attr("classInstId");
+			for(var i=0;i<numArr.length;i++)
+			{
+				if(numArr[i].classInstId==classInstId)
+				{
+					numArr[i].orderNum +=1;
+					return true;
+				}	
+			}	
+		});
 		var param={
 			operate:operate,
-			change:changeText
+			change:changeText,
+			orderInfo:numArr
 		}
 		$.ajax( {
 			type : "POST",

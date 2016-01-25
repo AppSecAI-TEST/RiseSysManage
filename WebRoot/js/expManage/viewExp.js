@@ -41,24 +41,31 @@ function initPage()
 	    				$("#excDays").html(data.excInfo.excDays+"天");
 	    				$("#excHandler").html(data.excInfo.handler);
 	    				$("#remark").html(data.excInfo.remark);
+	    				$("#finishDate").html(data.excInfo.finishDate);
+	    				$("#resumeDate").html(data.excInfo.resumeDate);
+	    				$("#resumeType").html(data.excInfo.resumeType);
+	    				if(data.excInfo.state=='异常中'&&data.excInfo.excDays!=""&&parseInt(data.excInfo.excDays)>730)
+	    				{
+	    					$("#excState").html("已超期");
+	    				}	
 	    			}	
 	    		}
 	    		if(data.courseInfo!=undefined&&data.courseInfo.length>0)
 	    		{
 	    			var contentStr ="";
 	    			$.each(data.courseInfo,function(i,obj){
-	    				contentStr +="<tr><td>"+obj.courseName+"</td>";
-	    				contentStr +="<td>"+obj.courseState+"</td>";
-	    				contentStr +="<td>"+obj.schoolName+"</td>";
+	    				contentStr +="<tr><td>"+obj.stageId+"</td>";
+	    				contentStr +="<td>"+obj.courseStateText+"</td>";
+	    				contentStr +="<td>"+obj.paySchoolName+"</td>";
 	    				contentStr +="<td>"+obj.payDate+"</td>";
-	    				contentStr +="<td>"+obj.feeType+"</td>";
+	    				contentStr +="<td>"+obj.feeTypeText+"</td>";
 	    				contentStr +="<td>"+obj.className+"</td>";
-	    				contentStr +="<td>"+obj.startTime+"</td>";//开课日期
-	    				contentStr +="<td>"+obj.finishTime+"</td>";//结课日期
-	    				contentStr +="<td>"+obj.classProgress+"</td>";//课程进度
-	    				contentStr +="<td>"+obj.adviser+"</td>";
-	    				contentStr +="<td>"+obj.dutyAdvister+"</td>";
-	    				contentStr +="<td>"+obj.carer+"</td></tr>";
+	    				contentStr +="<td>"+obj.startDate+"</td>";
+	    				contentStr +="<td>"+obj.finishDate+"</td>";
+	    				contentStr +="<td>"+obj.classProgress+"</td>";
+	    				contentStr +="<td>"+obj.adviserName+"</td>";
+	    				contentStr +="<td>"+obj.dutyAdvisterName+"</td>";
+	    				contentStr +="<td>"+obj.carerName+"</td></tr>";
 	    			});
 	    			$("#classInfo").append(contentStr);
 	    		}
@@ -66,6 +73,5 @@ function initPage()
 	        error:function(){
 	        	$.messager.progress('close'); 
 	        }
-	    	
 	});
 }

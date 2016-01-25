@@ -460,7 +460,7 @@ function submitMergeInfo()
 		comboClass.isHead=$("#isHead").val();
 		if(comboClass.isHead=="Y")
 		{
-			comboClass.schoolId =$("schoolId").combobox("getValue")
+			comboClass.schoolId =$("schoolId").combobox("getValue");
 		}
 		else
 		{
@@ -484,8 +484,7 @@ function submitMergeInfo()
 				detail.startHours =mergeTr.find("td:eq(3)").find("input[type='hidden']").val();
 				detail.comboType =mergeTr.find("td:eq(5)").find("input[type='hidden']").val();
 				detail.comboFinishDate =mergeTr.find("td:eq(6)").find("input[type='hidden']").val();
-				detail.orderNum =mergeTr.find("td:eq(9)").find("input[type='hidden']").val();
-				detail.orderNum =mergeTr.find("td:eq(9)").find("input[type='hidden']").val();
+				detail.orderNum =mergeTr.find("td:eq(8)").find("input[type='hidden']").val();
 			}
 			else
 			{

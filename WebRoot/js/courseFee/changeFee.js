@@ -56,8 +56,8 @@ function initPage()
 	    			$("#minusAmount").find("span").html(base.minusAmount+"元");
 	    			$("#favorAmount").find("span").html(base.favorAmount+"元");
 	    			$("#amount").find("span").html(base.amount+"元");
-	    			$("#afterAmount").html(base.lastAmount==""?base.amount:base.lastAmount);
-	    			$("#beforeAmount").val(base.lastAmount==""?base.amount:base.lastAmount);
+	    			$("#afterAmount").html(base.lastAmount);
+	    			$("#beforeAmount").val(base.lastAmount);
 	    			$("#adjustAmount").numberbox({
 						"onChange":function(n,o)
 						{

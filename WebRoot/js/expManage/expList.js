@@ -65,6 +65,11 @@ function restoreClass()
 		}
 		else
 		{
+			if(row.excStateVal=="已超期")
+			{
+				$.messager.alert('提示', "已超期的异常信息不能复课！");
+				return false;
+			}	
 			window.location.href="restoreClass.jsp?expInfo="+studentId+","+studentCourseId+","+row.excId;
 		}	
 	}	
