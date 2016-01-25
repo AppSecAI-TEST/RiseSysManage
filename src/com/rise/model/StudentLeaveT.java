@@ -3,33 +3,41 @@ package com.rise.model;
 import java.util.Date;
 
 public class StudentLeaveT {
-    private Integer leaveId;
-
-    private Integer studentId;
-
-    private Integer studentCourseId;
-
-    private String leaveState;
-
-    private String orignCourseState;
-
-    private String hours;
-
-    private String leaveTime;
-
-    private Date leaveDate;
-
-    private String leaveReason;
-
-    private String imgUrl;
-
-    private Date createDate;
-
-    private Integer handlerId;
-
-    private String resumeType;
-
-    private Date resumeDate;
+	private Integer leaveId;
+	
+	private Integer studentId;
+	
+	private Integer studentCourseId;
+	
+	private String leaveState;
+	
+	private String stageLevel;
+	
+	private String orignClassName;
+	
+	private String orignCourseState;
+	
+	private String teacherNames;
+	
+	private String hours;
+	
+	private String leaveTime;
+	
+	private Date leaveDate;
+	
+	private String leaveReason;
+	
+	private String imgUrl;
+	
+	private Date createDate;
+	
+	private Integer handlerId;
+	
+	private String resumeType;
+	
+	private Date resumeDate;
+	
+	private Integer orignClassId;
 
     public Integer getLeaveId() {
         return leaveId;
@@ -142,4 +150,37 @@ public class StudentLeaveT {
     public void setResumeDate(Date resumeDate) {
         this.resumeDate = resumeDate;
     }
+
+	public String getStageLevel() {
+		return stageLevel;
+	}
+
+	public void setStageLevel(String stageLevel) {
+		this.stageLevel = stageLevel;
+	}
+
+	public String getOrignClassName() {
+		return orignClassName;
+	}
+
+	public void setOrignClassName(String orignClassName) {
+		this.orignClassName = orignClassName;
+	}
+
+	public String getTeacherNames() {
+		return teacherNames;
+	}
+
+	public void setTeacherNames(String teacherNames) {
+		this.teacherNames = teacherNames;
+	}
+
+	public Integer getOrignClassId() {
+		return orignClassId;
+	}
+
+	public void setOrignClassId(Integer orignClassId) {
+		this.orignClassId = orignClassId;
+	}
+    
 }

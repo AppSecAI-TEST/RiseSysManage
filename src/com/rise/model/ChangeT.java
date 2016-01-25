@@ -42,6 +42,8 @@ public class ChangeT {
     private Integer planInClassId;
 
     private String approveState;
+    
+    private StudentT studentT;
 
     public Integer getApplyId() {
         return applyId;
@@ -202,4 +204,13 @@ public class ChangeT {
     public void setApproveState(String approveState) {
         this.approveState = approveState == null ? null : approveState.trim();
     }
+
+	public StudentT getStudentT() {
+		return studentT;
+	}
+
+	public void setStudentT(StudentT studentT) {
+		this.studentT = studentT;
+	}
+    
 }
