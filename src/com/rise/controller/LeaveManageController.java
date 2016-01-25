@@ -27,7 +27,7 @@ public class LeaveManageController {
 	
 	//页面跳转根据type区分，带出休学学员相关信息
 	@RequestMapping(value="/viewLeaveInfo.do")
-	public ModelAndView viewLeaveInfo(String studentId,String schoolId,String leaveId,String funcNodeId,String type,String courseState,String studentCourseId,String currentHours,String stageLevel,String className,String teacherName)
+	public ModelAndView viewLeaveInfo(String studentId,String schoolId,String leaveId,String funcNodeId,String type,String courseState,String studentCourseId,String currentHours,String stageLevel,String classInstId,String className,String teacherName)
 	{
 		log.error(studentId);
 		log.error(funcNodeId);
@@ -44,6 +44,7 @@ public class LeaveManageController {
 			view.addObject("courseState",courseState);
 			view.addObject("studentCourseId",studentCourseId);
 			view.addObject("stageLevel", stageLevel);
+			view.addObject("classInstId", classInstId);
 			view.addObject("className", className);
 			view.addObject("teacherName", teacherName);
 			view.addObject("currentHours", currentHours);

@@ -108,7 +108,7 @@ function addLeave()
 	window.location.href = "/sys/leaveManage/qryCanLeaveStu.jsp";
 }
 
-//跳转复课页面，有限制条件，已经复课和终止不能复课
+//跳转复课页面，有限制条件，超期、已经复课和终止不能复课
 function restartClass()
 {
 	if(validateSelect("list_data")) {
@@ -179,8 +179,9 @@ function restartSubmit()
 	    		if(flag == "true") {
 	    			var studentCourseId = $("#studentCourseId").val();
 	    			if(resumeType == "001") {
-	    				$.messager.alert('提示', "原班复课成功！");
+	    				$.messager.alert('提示', "原班复课成功！","info",function(){
 	    				window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";
+					});
 	    			} else if(resumeType == "002") {
 	    				window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&changeSource=leave";
 	    			} else if(resumeType == "003") {
@@ -207,8 +208,13 @@ function updateSubmit()
 	var leaveDate = $("#leaveDate").val();
 	var leaveStartDate = $("#leaveStartDate").html();
 	var leaveMaxDate = new Date(leaveStartDate).dateAdd("m",parseInt(24)).format("yyyy-MM-dd");
+	var date = new Date().format("yyyy-MM-dd");
 	if(delayDate <= leaveDate){
 		$.messager.alert('提示', "延期的日期不能小于计划休学日期！");
+		return;
+	}
+	if(delayDate < date){
+		$.messager.alert('提示', "延期的日期不能小于当前日期！");
 		return;
 	}
 	if(leaveMaxDate < delayDate){
@@ -236,8 +242,9 @@ function updateSubmit()
     	success: function(flag) {
     		$.messager.progress('close'); 
     		if(flag == "true"){
-    			$.messager.alert('提示', "修改休学时长成功！");
-    			window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";
+    			$.messager.alert('提示', "修改休学时长成功！","info",function(){
+	    			window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";
+				});
     		}else if(flag == "false"){
     			$.messager.alert('提示', "修改休学时长失败！");
     		}
@@ -255,11 +262,12 @@ function addLeaveInfo()
 		var courseState = row.courseState;
 		var studentCourseId = row.studentCourseId;
 		var stageLevel = row.stageLevel;
+		var classInstId = row.classInstId;
 		var className = row.className;
 		var teacherName = row.teacherName;
 		var classProgress = encodeURIComponent(row.classProgress);
 		var funcNodeId = "";
-		window.location.href = "/sys/leaveManage/viewLeaveInfo.do?studentId="+studentId+"&schoolId="+schoolId+"&courseState="+courseState+"&studentCourseId="+studentCourseId+"&funcNodeId="+funcNodeId+"&type=add&currentHours="+classProgress+"&stageLevel="+stageLevel+"&className="+className+"&teacherName="+teacherName;
+		window.location.href = "/sys/leaveManage/viewLeaveInfo.do?studentId="+studentId+"&schoolId="+schoolId+"&courseState="+courseState+"&studentCourseId="+studentCourseId+"&funcNodeId="+funcNodeId+"&type=add&currentHours="+classProgress+"&stageLevel="+stageLevel+"&classInstId="+classInstId+"&className="+className+"&teacherName="+teacherName;
 	}
 }
 
@@ -284,6 +292,7 @@ function addLeaveSubmit()
 			var courseState = $("#courseState").val();
 			var studentCourseId = $("#studentCourseId").val();
 			var stageLevel = $("#stageLevel").val();
+			var classInstId = $("#classInstId").val();
 			var className = $("#className").val();
 			var teacherName = $("#teacherName").val();
 			var currentHours = $("#currentHours").val();
@@ -292,7 +301,7 @@ function addLeaveSubmit()
 	//		var createDate = new Date().format("yyyy-MM-dd");
 			//计算出 休学到期日期
 	//		var leaveDate = new Date().dateAdd("m",parseInt(planLeaveTime)).format("yyyy-MM-dd");
-			var json = '{"studentId":"'+studentId+'","studentCourseId":"'+studentCourseId+'","leaveState":"001","leaveTime":"'+planLeaveTime+'","stageLevel":"'+stageLevel+'","orignClassName":"'+className+'","orignCourseState":"'+courseState+'","teacherNames":"'+teacherName+'","hours":"'+encodeURIComponent(currentHours)+'","imgUrl":"'+imgUrl+'","leaveReason":"'+addRemark+'","handlerId":"'+handlerId+'"}';
+			var json = '{"studentId":"'+studentId+'","studentCourseId":"'+studentCourseId+'","leaveState":"001","leaveTime":"'+planLeaveTime+'","stageLevel":"'+stageLevel+'","orignClassId":"'+classInstId+'","orignClassName":"'+className+'","orignCourseState":"'+courseState+'","teacherNames":"'+teacherName+'","hours":"'+encodeURIComponent(currentHours)+'","imgUrl":"'+imgUrl+'","leaveReason":"'+addRemark+'","handlerId":"'+handlerId+'"}';
 			$.ajax({
 				type : "POST",
 				url: "/sys/leaveManage/addLeaveInfo.do",
@@ -305,8 +314,9 @@ function addLeaveSubmit()
 		    	success: function(flag) {
 		    		$.messager.progress('close'); 
 		    		if(flag == "true"){
-		    			$.messager.alert('提示', "休学成功！");
+		    			$.messager.alert('提示', "休学成功！","info",function(){
 		    			window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";
+					});
 		    		}else if(flag == "false"){
 		    			$.messager.alert('提示', "休学失败！");
 		    		}

@@ -92,6 +92,7 @@
  		<input id="schoolId" type="hidden" value="${schoolId}" />
  		<input id="courseState" type="hidden" value="${courseState}" />
  		<input id="stageLevel" type="hidden" value="${stageLevel}" />
+ 		<input id="classInstId" type="hidden" value="${classInstId}" />
  		<input id="className" type="hidden" value="${className}" />
  		<input id="teacherName" type="hidden" value="${teacherName}" />
  		<input id="studentCourseId" type="hidden" value="${studentCourseId}" />
