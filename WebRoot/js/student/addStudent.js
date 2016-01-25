@@ -378,6 +378,7 @@ $(document).ready(function() {
 								realSchoolArray += "]";
 								var param = "{studentInfo:"+obj+",contactArray:"+contactArray+",realSchoolArray:"+realSchoolArray+"}";
 								param = encodeURI(param);
+								return;
 								$.ajax({
 									url: "/sys/student/addStudent.do",
 									data: "param=" + param,
