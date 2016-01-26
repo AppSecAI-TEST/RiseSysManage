@@ -341,7 +341,13 @@ $(document).ready(function() {
 					var studentId = row.studentId;
 					var studentCourseId = row.studentCourseId;
 					var classProgress = row.classProgress;
-					window.location.href = "/sys/leaveManage/viewLeaveInfo.do?studentId="+studentId+"&courseState="+courseState+"&studentCourseId="+studentCourseId+"&funcNodeId=&type=add&currentHours="+classProgress;
+					var classInstId=row.classInstId;
+					var stageLevel=row.stageId;
+					var className=row.className;
+					var teacherName=row.teacherName;
+					var schoolId=row.schoolId;
+					var funcNodeId="";
+					window.location.href ="/sys/leaveManage/viewLeaveInfo.do?studentId="+studentId+"&schoolId="+schoolId+"&courseState="+courseState+"&studentCourseId="+studentCourseId+"&funcNodeId="+funcNodeId+"&type=add&currentHours="+classProgress+"&stageLevel="+stageLevel+"&classInstId="+classInstId+"&className="+className+"&teacherName="+teacherName; 
 				} else {
 					$.messager.alert('提示', "您选择的学员课程已休学，不能再次申请休学！");
 				}
@@ -360,7 +366,16 @@ $(document).ready(function() {
 				if("003" == courseState || "004" == courseState || "006" == courseState || "007" == courseState) {
 					var studentId = row.studentId;
 					var studentCourseId = row.studentCourseId;
-					window.location.href = "/sys/exception/addExp.jsp?addInfo=" + studentId + "," + studentCourseId + "," + courseState;
+					var studentId = row.studentId;
+					var studentCourseId = row.studentCourseId;
+					var classProgress = row.classProgress;
+					var classInstId=row.classInstId;
+					var stageLevel=row.stageId;
+					var className=row.className;
+					var teacherName=row.teacherName;
+					var schoolId=row.schoolId;
+					var funcNodeId="";
+					window.location.href = "/sys/exception/addExp.jsp?addInfo="+studentId+","+studentCourseId+","+courseState+","+classProgress+","+stageLevel+","+className+","+teacherName+","+classInstId;
 				} else {
 					$.messager.alert('提示', "您选择的学员课程状态为异常，不能再次修改课程状态为异常！");
 				}
