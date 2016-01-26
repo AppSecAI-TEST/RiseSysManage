@@ -99,35 +99,35 @@ $(document).ready(function(){
 		formatter : formatSchool,
 		onLoadSuccess : function(data) {
 			$("#couponSchoolId").combobox('setValue',data[0].schoolId);
-		},
-		onChange : function(n, o) {
-			if(n != "" && n != null && n != undefined) {
-//				$("#couponClassInstId").combobox({disabled: false});
-				$("#couponClassInstId").combobox({
-					url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='001','002','003','004','005'&classInstId=",//返回json数据的url
-					valueField : "classInstId",
-					textField : "className",
-					panelHeight : "auto",
-					formatter : function(data) {
-						return "<span>" + data.className + "</span>";
-					}
-				});
-//				$("#couponStudentId").combobox({
-//					url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId=20&fieldId=studentId",
-//					valueField : "studentId",
-//					textField : "name",
+		}
+//		onChange : function(n, o) {
+//			if(n != "" && n != null && n != undefined) {
+////				$("#couponClassInstId").combobox({disabled: false});
+//				$("#couponClassInstId").combobox({
+//					url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId=&classType=&classState='001','002','003','004','005'&classInstId=",//返回json数据的url
+//					valueField : "classInstId",
+//					textField : "className",
 //					panelHeight : "auto",
 //					formatter : function(data) {
-//						return "<span>" + data.name + "</span>";
+//						return "<span>" + data.className + "</span>";
 //					}
 //				});
-			} else {
-				$("#couponSchoolId").combobox("setText", "");
-				$("#couponClassInstId").combobox('clear');
-				$("#couponClassInstId").combobox("loadData", new Array());
-//				$("#couponClassInstId").combobox({disabled: true});
-			}
-		}
+////				$("#couponStudentId").combobox({
+////					url : "/sys/pub/paramComboxList.do?staffId="+staffId+"&schoolId="+n+"&funcNodeId=20&fieldId=studentId",
+////					valueField : "studentId",
+////					textField : "name",
+////					panelHeight : "auto",
+////					formatter : function(data) {
+////						return "<span>" + data.name + "</span>";
+////					}
+////				});
+//			} else {
+//				$("#couponSchoolId").combobox("setText", "");
+//				$("#couponClassInstId").combobox('clear');
+//				$("#couponClassInstId").combobox("loadData", new Array());
+////				$("#couponClassInstId").combobox({disabled: true});
+//			}
+//		}
 	});
     
 	$("#couponGiftChannel").combobox({

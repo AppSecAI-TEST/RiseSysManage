@@ -30,8 +30,7 @@
   					</td>
   					<td align="right" width="8%"><span>班级：</span></td>
   					<td align="left" width="8%">
-						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width:100px;height:25px;">
-			        	</select>
+						<input id="classInstId" name="className" class="easyui-textbox" style="width:100px;height:25px;" />
 					</td>
   					</td>
   					<td align="right" width="8%"><span>开课时间：</span></td>
