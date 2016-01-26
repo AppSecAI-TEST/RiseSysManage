@@ -336,10 +336,8 @@ function openClass() {
 			$.messager.progress({title : '申请开班', msg : '正在申请开班，请稍等……'});
 		},
 		success: function (data) {
-			alert(data)
-			var flag = data.flag;
-			alert(flag)
 			$.messager.progress('close'); 
+			var flag = data.flag;
 			if(flag) {
 				$.messager.alert('提示', "申请开班成功！", "info", function() {window.history.back();});
 			} else {
