@@ -17,7 +17,7 @@
   				<tr>
   					<td align="right"><span>校区：</span></td>
 	  				<td width="114px">
-						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 117px; height: 25px;" editable="false"
+						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 			      			url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=506&fieldId=schoolId">
 		        		</select>
