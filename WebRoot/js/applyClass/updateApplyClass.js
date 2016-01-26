@@ -6,7 +6,7 @@ $(document).ready(function() {
 		var maxNum = $("#maxNum").val();
 		var rows = $('#list_data').datagrid("getRows"); 
 		var className = $("#className").html();
-		if(parseInt(rows.length) > parseInt(maxNum)) {
+		if(parseInt(rows.length)<parseInt(maxNum)) {
 			var sub = parseInt(maxNum) - parseInt(rows.length);
 			$.messager.confirm('提示', className + "已有" + rows.length + "名学员，您还可以为该班级添加" + sub + "名学员", function(r) {
 				var stageId = $("#stageId").html();

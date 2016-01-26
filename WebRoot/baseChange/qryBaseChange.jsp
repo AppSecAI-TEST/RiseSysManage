@@ -24,12 +24,12 @@
 					</td>
 					<td align="right"><span>课程阶段：</span></td>
 					<td width="130px">
-						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 117px; height: 25px;">
+						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;">
 		        		</select>
 					</td>
 					<td align="right"><span>班级：</span></td>
 					<td width="130px">
-						<input id="className" name="className" type="text" class="easyui-textbox validatebox"  style="width: 117px; height: 23px;"/>
+						<input id="className" name="className" type="text" class="easyui-textbox validatebox"  style="width: 100px; height: 23px;"/>
 					</td>
 				
 				
@@ -38,24 +38,24 @@
   				<tr>
 					<td align="right"><span>带班老师：</span></td>
 					<td width="114px">
-						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 117px; height: 25px;">
+						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;">
 		        		</select>
 					</td>
 					 	
 					<td align="right"><span>班级状态 ：</span></td>
 	  				<td width="130px">
-						<select id="classState" name="classState" class="easyui-combobox" style="width: 117px; height: 25px;"
+						<select id="classState" name="classState" class="easyui-combobox" style="width: 100px; height: 25px;"
 							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 	      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=FINISH_CLASS_STATE">
 		        		</select>
 					</td>
 						<td align="right"><span>开课日期：</span></td>
-					<td width="117px">
-						<input class="easyui-datebox" type="text" style="width:117px; height: 25px;" id="startTimeOpenClass" name="startTimeOpenClass" data-options="formatter:myformatter, parser:myparser"/>
+					<td width="100px">
+						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeOpenClass" name="startTimeOpenClass" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
-					<td align="center" width="14px"><span>至</span></td>
-					<td width="117px">
-						<input class="easyui-datebox" type="text" style="width:117px; height: 25px;" id="endTimeOpenClass" name="endTimeOpenClass" data-options="formatter:myformatter, parser:myparser"/>
+					<td align="center" ><span>至</span></td>
+					<td width="100px">
+						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeOpenClass" name="endTimeOpenClass" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
 					<td align="center">&nbsp;</td>
   				</tr>

@@ -228,14 +228,14 @@ function addPlanSubmit()
 	    	success: function(state) {
 	    		$.messager.progress('close'); 
 	    		if(state == "1"){
-	    			$.messager.alert('提示', "创建教质计划成功！","info",function(){
-		    			window.location.href = "/sys/teaPlanManage/teaPlanManage.jsp";
-					});
-	    		}else if(state == "2"){
-	    			$.messager.alert('提示', "该校区该月已创建教质计划！","info",function(){
-		    			window.location.href = "/sys/teaPlanManage/teaPlanManage.jsp";
-					});
-	    		}else if(state == "3"){
+	    			$.messager.alert('提示', "创建教质计划成功！");
+	    			window.location.href = "/sys/teaPlanManage/teaPlanManage.jsp";v
+	    		}else if(state == "2")
+	    		{
+	    			$.messager.alert('提示', "该校区该月已创建教质计划！");
+	    			 
+	    		}else if(state == "3")
+	    		{
 	    			$.messager.alert('提示', "创建教质计划失败！");
 	    		}
 	        } 
