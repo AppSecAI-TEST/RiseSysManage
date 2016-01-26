@@ -16,8 +16,9 @@ $(document).ready(function() {
     	});
     });
 	
+	var staffId = $("#handlerId").val();
 	$("#schoolId").combobox({
-		url : "/sys/pubData/qrySchoolList.do",
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=503&fieldId=schoolId",
 		valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",

@@ -95,7 +95,6 @@ function initClassInst(isBegin) {
 	var courseType = $("#courseType").val();
 	var inClassIsBegin = $("#inClassIsBegin").val();
 	if("Y" == isBegin) {
-		$("#beginClassInstId").combobox({disabled: false});
 		$("#beginClassInstId").combobox({
     		url : "/sys/pubData/qryClassInstList.do?schoolId="+inSchoolId+"&courseType="+courseType+"&stageId="+stageId+"&classType="+classType+"&classState='003'&classInstId=",//返回json数据的url
     		valueField : "classInstId",
@@ -137,10 +136,8 @@ function initClassInst(isBegin) {
             }
     	});
 		$("#notBeginClassInstId").combobox('clear');
-		$("#notBeginClassInstId").combobox({disabled: true});
 		$("#notBeginClassInstId").combobox("loadData", new Array());
 	} else {
-		$("#notBeginClassInstId").combobox({disabled: false});
 		$("#notBeginClassInstId").combobox({
     		url : "/sys/pubData/qryClassInstList.do?schoolId="+inSchoolId+"&courseType="+courseType+"&stageId="+stageId+"&classType="+classType+"&classState='001','002'&classInstId=",//返回json数据的url
     		valueField : "classInstId",
@@ -184,7 +181,6 @@ function initClassInst(isBegin) {
             }
     	});
 		$("#beginClassInstId").combobox('clear');
-		$("#beginClassInstId").combobox({disabled: true});
 		$("#beginClassInstId").combobox("loadData", new Array());
 	}
 }

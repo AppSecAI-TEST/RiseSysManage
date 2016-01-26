@@ -55,10 +55,10 @@
   						<td width="85%" colspan="5">
   							<input type="radio" name="isBegin" value="N"/>
   							<span style="display: inline-block; text-align: center;">未开课班级</span>
-  							<select id="notBeginClassInstId" name="notBeginClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false" disabled="disabled"></select>
+  							<select id="notBeginClassInstId" name="notBeginClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"></select>
   							<input type="radio" name="isBegin" value="Y"/>
   							<span style="display: inline-block; text-align: center;">已开课班级</span>
-  							<select id="beginClassInstId" name="beginClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false" disabled="disabled"></select>
+  							<select id="beginClassInstId" name="beginClassInstId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"></select>
   						</td>
   					</tr>
   					<tr style="display: none;" id="inClassTr">
