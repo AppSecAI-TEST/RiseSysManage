@@ -32,15 +32,18 @@ public class ServiceEngine
 	public static Log log = LogFactory.getLog(ServiceEngine.class);
 	
  
-	private final static String url = "http://127.0.0.1:7001/sysEngine/invoke/commorder.do";
+	//private final static String url = "http://127.0.0.1:7001/sysEngine/invoke/commorder.do";
 	//private final static String url = "http://114.215.130.45/sysEngine/invoke/commorder.do";
 
 	public static String invokeHttp(String param) throws Exception
 	{
-		//log.error("param:"+param);
+		if (ObjectCensor.checkObjectIsNull(address)) 
+		{
+			address = QryPropertiesConfig.getPropertyById("SYS_SERVICE_URL");
+		}
 		Map<String,String> params = new HashMap<String,String>();
 		params.put("param", param);
-		JSONObject object = JSONObject.fromObject(HttpUtil.http(url, params));
+		JSONObject object = JSONObject.fromObject(HttpUtil.http(address, params));
 		if("success".equals(StringUtil.getJSONObjectKeyVal(object, "executeType")))
 		{
 			return StringUtil.getJSONObjectKeyVal(object, "returnMsg");
