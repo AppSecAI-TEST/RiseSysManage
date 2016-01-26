@@ -9,7 +9,7 @@ public class RefundService
 {
 	public String qryApplyRefund(String studentCourseId, String studentId) throws Exception
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS9004\",securityCode:\"0000000000\",params:{param:{studentCourseId:\""+studentCourseId+"\",queryCode:\"qryRefundStudentInfo\"}},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS9004\",securityCode:\"0000000000\",params:{param:{studentCourseId:\""+studentCourseId+"\",studentId:\""+studentId+"\",queryCode:\"qryRefundStudentInfo\"}},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 

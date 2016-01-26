@@ -279,7 +279,7 @@ $(document).ready(function() {
 			var row = $('#list_data').datagrid('getSelected');
 			if(row) {
 				var courseState = row.courseState;
-				if("003" == courseState) {
+				if("003" == courseState || "004" == courseState || "005" == courseState) {
 					var changeClassFlag = row.changeClassFlag;
 					if("N" == changeClassFlag) {
 						var changeSchoolFlag = row.changeSchoolFlag;
@@ -308,7 +308,7 @@ $(document).ready(function() {
 			var row = $('#list_data').datagrid('getSelected');
 			if(row) {
 				var courseState = row.courseState;
-				if("003" == courseState) {
+				if("003" == courseState || "004" == courseState || "005" == courseState) {
 					var changeClassFlag = row.changeClassFlag;
 					if("N" == changeClassFlag) {
 						var changeSchoolFlag = row.changeSchoolFlag;
