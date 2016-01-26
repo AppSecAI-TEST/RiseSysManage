@@ -16,7 +16,8 @@
   
   	<body>
 		<input type="hidden" id="handlerId" name="handlerId"   value="${sessionScope.StaffT.staffId}"/>
-			<table  style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:30px;"  >
+		<div style="margin-right:5px;">
+			<table class="search_tab" >
 				<tr>
 				<td align="right"><span>校区：</span></td>
   					<td width="100px">
@@ -51,44 +52,42 @@
 				</tr>
 				</thead>
 			</table>
-		</div>
-		<div style="min-width:1100px;width:99%;margin:0 auto;">
-		<div class="easyui-panel" title="排课信息" style="width:100%;overflow:auto;">
-		<table class="maintable" id="hoursPlanTab" style="width:1500px;" cellspacing="0" cellpadding="0">
-		  <tr align="center">
-		    <td align="center" width="40px;" rowspan="2"><span>序号</span></td>
-		    <td align="center" width="78px;" rowspan="2"><span>班级</span></td>
-		    <td align="center" width="96px;" rowspan="2"><span>带班老师</span></td>
-		    <td align="center" width="240px;"rowspan="2"><span>上课时段</span></td>
-		    <td align="center" width="86px;" rowspan="2"><span>开课日期</span></td>
-		    <td align="center" width="86px;" rowspan="2"><span>结课日期</span></td>
-		    <td align="center" width="42px;" rowspan="2"><span>上月已上课时</span></td>
-		    <td align="center" width="42px;" rowspan="2"><span>上月剩余课时数</span></td>
-		    <td align="center" width="42px;" rowspan="2"><span>上月课时差异</span></td>
-		    <td align="center" width="62px;" colspan="2"><span>第一周</span></td>
-		    <td align="center" width="62px;" colspan="2"><span>第二周</span></td>
-		    <td align="center" width="62px;" colspan="2"><span>第三周</span></td>
-		    <td align="center" width="62px;" colspan="2"><span>第四周</span></td>
-		    <td align="center" width="62px;" colspan="2"><span>第五周</span></td>
-		    <td align="center" width="48px;" rowspan="2"><span>本月计划课时</span></td>
-		    <td align="center" width="48px;" rowspan="2"><span>本月已排课时</span></td>
-		    <td align="center" width="48px;" rowspan="2"><span>课时差异</span></td>
-		  </tr>
-		  <tr align="center">
-		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>已排课时</span></td>
-		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>已排课时</span></td>
-		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>已排课时</span></td>
-		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>已排课时</span></td>
-		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>已排课时</span></td>
-		  </tr>
+			<table id="hoursPlanTab" class="easyui-datagrid" title="排课信息" style="height:auto;min-max:1100px;" pagination="false" rownumbers="true" fitColumns="true" >
+			 <thead>
+			 	<tr align="center">
+				    <th data-options="field:'className',width:78,align:'center'" rowspan="2"><span>班级</span></td>
+				    <th data-options="field:'byname',width:90,align:'center'" rowspan="2"><span>带班老师</span></td>
+				    <th data-options="field:'dateRange',width:240,align:'center'" rowspan="2"><span>上课时段</span></td>
+				    <th data-options="field:'startDate',width:86,align:'center'" rowspan="2"><span>开课日期</span></td>
+				    <th data-options="field:'finishDate',width:86,align:'center'" rowspan="2"><span>结课日期</span></td>
+				    <th data-options="field:'realHour',width:60,align:'center'" rowspan="2"><span>上月已上<br>课时</span></td>
+				    <th data-options="field:'diffNum',width:60,align:'center'" rowspan="2"><span>上月剩余<br>课时数</span></td>
+				    <th data-options="field:'monthDiffNum',width:60,align:'center'" rowspan="2"><span>上月课时<br>差异</span></td>
+				    <th data-options="field:'week1',width:62,align:'center'" colspan="2"><span>第一周</span></td>
+				    <th data-options="field:'week2',width:62,align:'center'" colspan="2"><span>第二周</span></td>
+				    <th data-options="field:'week3',width:62,align:'center'" colspan="2"><span>第三周</span></td>
+				    <th data-options="field:'week4',width:62,align:'center'" colspan="2"><span>第四周</span></td>
+				    <th data-options="field:'week5',width:62,align:'center'" colspan="2"><span>第五周</span></td>
+				    <th data-options="field:'monthPlanHours',width:48,align:'center'" rowspan="2"><span>本月计<br>划课时</span></td>
+				    <th data-options="field:'monthHandNum',width:48,align:'center'" rowspan="2"><span>本月已<br>排课时</span></td>
+				    <th data-options="field:'mDiffNum',width:48,align:'center'" rowspan="2"><span>课时<br>差异</span></td>
+				 </tr>
+				 <tr align="center">
+				    <th data-options="field:'weekPlan1',width:35,align:'center'"><span>计划<br>课时</span></td>
+				    <th data-options="field:'weekHand1',width:35,align:'center'"><span>已排<br>课时</span></td>
+				    <th data-options="field:'weekPlan2',width:35,align:'center'"><span>计划<br>课时</span></td>
+				    <th data-options="field:'weekHand2',width:35,align:'center'"><span>已排<br>课时</span></td>
+				    <th data-options="field:'weekPlan3',width:35,align:'center'"><span>计划<br>课时</span></td>
+				    <th data-options="field:'weekHand3',width:35,align:'center'"><span>已排<br>课时</span></td>
+				    <th data-options="field:'weekPlan4',width:35,align:'center'"><span>计划<br>课时</span></td>
+				    <th data-options="field:'weekHand4',width:35,align:'center'"><span>已排<br>课时</span></td>
+				    <th data-options="field:'weekPlan5',width:35,align:'center'"><span>计划<br>课时</span></td>
+				    <th data-options="field:'weekHand5',width:35,align:'center'"><span>已排<br>课时</span></td>
+				 </tr>
+			  <thead>
 		</table>
-		</div>
-		</div>
+	</div>
+	</div>	
  	</body>
 </html>
 <script type="text/javascript">
@@ -131,37 +130,12 @@ $(function () {
 			    	success: function(data) 
 			    	{
 			    		$.messager.progress('close');
-			    		var html="<tr>"+$("#hoursPlanTab").find("tr:eq(0)").html()+"</tr><tr>"+$("#hoursPlanTab").find("tr:eq(1)").html()+"</tr>";
-			    		for(var i=0;i<data.length;i++)
-			    		{
-			    			var obj=data[i];
-			    			 html+="<tr>";
-			    			html+="<td align='center'>"+(i+1)+"</td>";
-			    			html+="<td align='center'><span>"+obj.className+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.byname+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.dateRange+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.startDate+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.finishDate+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.realHour+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.diffNum+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.monthDiffNum+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekPlan1+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekHand1+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekPlan2+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekHand2+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekPlan3+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekHand3+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekPlan4+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekHand4+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekPlan5+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.weekHand5+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.monthPlanHours+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.monthHandNum+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.mDiffNum+"</span></td>";
-			    			html+="</tr>";
+			    		var dataobj ={
+			    			rows:data,
+			    			total:data.length
 			    		}
-						
-						$("#hoursPlanTab").html(html);
+			    		alert(JSON.stringify(dataobj))
+			    		$("#hoursPlanTab").datagrid("loadData",dataobj);
 			         },
 			        error:function()
 			        {

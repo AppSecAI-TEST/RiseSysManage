@@ -14,12 +14,12 @@
   
   	<body>
 		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
-		 
-		<form id="qryFm" style="margin:0 auto;">
-			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:30px;" cellspacing="15">
+		<div style="margin-right:5px;">
+		<form id="qryFm">
+			<table class="search_tab">
 				<tr>
-					<td align="right"><span>校区：</span></td>
-	  				<td width="180px">
+					<td width="80px" align="right"><span>校区：</span></td>
+	  				<td width="110px">
 						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 			      		onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
@@ -60,7 +60,7 @@
    			<a href="javascript:void(0)" id="updatePlan" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;" >维护排课</a>
    			<a href="javascript:void(0)" id="viewPlan" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">浏览排课</a>
 		</div>
-  		
+  	</div>
  	</body>
 </html>
 <script type="text/javascript">
