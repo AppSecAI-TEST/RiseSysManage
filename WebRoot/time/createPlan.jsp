@@ -134,7 +134,6 @@ $(function () {
 			    			rows:data,
 			    			total:data.length
 			    		}
-			    		alert(JSON.stringify(dataobj))
 			    		$("#hoursPlanTab").datagrid("loadData",dataobj);
 			         },
 			        error:function()
