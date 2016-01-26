@@ -185,12 +185,12 @@
 							<th field="comboState" align="center" width="8%">合并状态</th>
 							<th field="applyDate" align="center" width="8%">申请日期</th>
 							<th field="approveDate" align="center" width="8%">审批日期</th>
-							<th field="schoolName" align="center" width="8%">校区</th>
+							<th field="schoolName" align="center" width="6%">校区</th>
 							<th field="classesName" align="center" width="8%">班级名称</th>
 							<th field="finishDate" align="center" width="8%">结课日期</th>
 							<th field="classTime" align="center" width="15%">上课时段</th>
 							<th field="studyingNum" align="center" width="5%">在读人数</th>
-							<th field="higherNum" align="center" width="5%">已升学人数</th>
+							<th field="higherNum" align="center" width="7%">已升学人数</th>
 							<th field="higherPer" align="center" width="5%">升学率</th>
 							<th field="startDate" align="center" width="8%">开始日期</th>
 							<th field="startHours" align="center" width="8%">开始课时</th>
