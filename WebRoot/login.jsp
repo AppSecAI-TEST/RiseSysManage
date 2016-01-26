@@ -35,12 +35,12 @@ label{float:left;display:block;font-size:16px;color:#aba1a4;height:29px;margin:6
 {
 	width:100%;
 	background:#44C5F6;
-	height:75px;
+	height:85px;
 }
 
 #titleimg
 {
-	margin-top:20px;
+	margin-top:16px;
 }
 
 #loginDiv

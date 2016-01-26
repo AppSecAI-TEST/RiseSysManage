@@ -32,13 +32,13 @@
 			<c:redirect url="login.jsp" />
 		</c:if>
 		<!-- 头部 -->
-		<div id="toparea" style="display:block;" data-options="region:'north',border:false,height:95">
-			<div id="topmenu" class="easyui-panel" data-options="fit:true,border:false">
-				<img src="<%=path %>/pub/images/adm_logo.png" style="width:100%;height:100%;position:relative;border:none;">
-				<img onclick="updatePassword()" src="<%=path %>/pub/images/adm_menu1.png" style="right:230px;top:10px;position:absolute;cursor:pointer;">
-				<img src="<%=path %>/pub/images/adm_menu2.png" style="right:180px;top:10px;position:absolute;cursor:pointer;">
-				<img src="<%=path %>/pub/images/adm_menu3.png" style="right:100px;top:10px;position:absolute;cursor:pointer;">
-				<img onclick="logout()" src="<%=path %>/pub/images/adm_menu4.png" style="right:50px;top:10px;position:absolute;cursor:pointer;">
+		<div id="toparea" style="display:block;" data-options="region:'north',border:false,height:109">
+			<div id="topmenu" class="easyui-panel" data-options="fit:true,border:false" style="height:79px;">
+				<img src="<%=path %>/pub/images/adm_logo.png" style="width:100%;height:79px;position:relative;border:none;">
+				<img onclick="updatePassword()" src="<%=path %>/pub/images/adm_menu1.png" style="right:230px;top:16px;position:absolute;cursor:pointer;">
+				<img src="<%=path %>/pub/images/adm_menu2.png" style="right:180px;top:16px;position:absolute;cursor:pointer;">
+				<img src="<%=path %>/pub/images/adm_menu3.png" style="right:100px;top:16px;position:absolute;cursor:pointer;">
+				<img onclick="logout()" src="<%=path %>/pub/images/adm_menu4.png" style="right:50px;top:16px;position:absolute;cursor:pointer;">
 			</div>
 			<div class="panel-header panel-header-noborder top-toolbar" style="position:absolute;bottom:0px;border-top-width:1px;border-bottom-width:0px;z-index:1;display:none;">
 				<div id="infobar">
