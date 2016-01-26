@@ -216,7 +216,7 @@ function addLeaveSubmit()
 			type : "POST",
 			url: "/sys/leaveManage/addLeaveInfo.do",
 			data: "json="+json,
-			async: false,
+			async: true,
 			beforeSend: function()
 	    	{
 	    		$.messager.progress({title : '提交休学', msg : '正在提交休学，请稍等……'});

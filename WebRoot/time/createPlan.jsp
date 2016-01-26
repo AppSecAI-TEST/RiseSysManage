@@ -71,7 +71,7 @@
 		    <td align="center" width="62px;" colspan="2"><span>第四周</span></td>
 		    <td align="center" width="62px;" colspan="2"><span>第五周</span></td>
 		    <td align="center" width="48px;" rowspan="2"><span>本月计划课时</span></td>
-		    <td align="center" width="48px;" rowspan="2"><span>本月实际课时</span></td>
+		    <td align="center" width="48px;" rowspan="2"><span>本月已排课时</span></td>
 		    <td align="center" width="48px;" rowspan="2"><span>课时差异</span></td>
 		  </tr>
 		  <tr align="center">
@@ -156,7 +156,7 @@ $(function () {
 			    			html+="<td align='center'><span>"+obj.weekPlan5+"</span></td>";
 			    			html+="<td align='center'><span>"+obj.weekHand5+"</span></td>";
 			    			html+="<td align='center'><span>"+obj.monthPlanHours+"</span></td>";
-			    			html+="<td align='center'><span>"+obj.monthRealNum+"</span></td>";
+			    			html+="<td align='center'><span>"+obj.monthHandNum+"</span></td>";
 			    			html+="<td align='center'><span>"+obj.mDiffNum+"</span></td>";
 			    			html+="</tr>";
 			    		}
