@@ -128,8 +128,12 @@
 			}
 			function resetFunc()
 			{
+				var schoolData = $("#schoolManId").combobox("getData");
+				if(schoolData != null && schoolData.length > 0)
+				{
+					$("#schoolManId").combobox("setValue",schoolData[0].schoolId);
+				}
 				$("#shortClassState").combobox("setValue","");
-				$("#schoolManId").combobox("setValue","");
 				$("#payStartManTime").datebox("setValue","");
 				$("#payEndManTime").datebox("setValue","");
 				$("#studentName").textbox("setValue","");

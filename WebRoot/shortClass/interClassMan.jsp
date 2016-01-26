@@ -170,10 +170,14 @@
 			}
 			function resetFunc()
 			{
+				var schoolData = $("#schoolManId").combobox("getData");
+				if(schoolData != null && schoolData.length > 0)
+				{
+					$("#schoolManId").combobox("setValue",schoolData[0].schoolId);
+				}
 				$("#interClassType").combobox("setValue","");
 				$("#classInfo").combobox("setValue","");
 				$("#classManState").combobox("setValue","");
-				$("#schoolManId").combobox("setValue","");
 				$("#openStartManTime").datebox("setValue","");
 				$("#openEndManTime").datebox("setValue","");
 				$("#classStartManTime").datebox("setValue","");

@@ -120,7 +120,11 @@
 			}
 			function resetFunc()
 			{
-				$("#schoolId").combobox("setValue","");
+				var schoolData = $("#schoolId").combobox("getData");
+				if(schoolData != null && schoolData.length > 0)
+				{
+					$("#schoolId").combobox("setValue",schoolData[0].schoolId);
+				}
 				$("#staffName").combobox("setValue","");
 				$("#contactPhone").textbox("setValue","");
 				$("#feeStartTime").datebox("setValue","");
