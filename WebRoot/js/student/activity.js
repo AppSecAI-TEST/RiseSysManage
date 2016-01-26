@@ -139,6 +139,10 @@ $(document).ready(function() {
 					gift.giftChannelDesc = paramObj.title + "赠送";
 					gift.giveRemark = paramObj.remark;
 					gift.handlerId = paramObj.handlerId;
+					if(gift.effDate==null||gift.effDate=='')
+					{
+						delete gift.effDate;
+					}										
 					gifts.push(gift);  
     			}
     		});
