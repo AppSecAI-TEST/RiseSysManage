@@ -110,11 +110,11 @@
  			</tr>
  			<tr>
  				<td colspan="2" align="right"><span>延长至：</span></td>
- 				<td colspan="10"><input class="easyui-datebox" name="delayDate" id="delayDate" style="width:100px;height:25px;" editable="false"/></td>
+ 				<td colspan="12"><input class="easyui-datebox" name="delayDate" id="delayDate" style="width:100px;height:25px;" editable="false"/></td>
  			</tr>
  			<tr>
  				<td colspan="2" align="right"><span>备注：</span></td>
- 				<td colspan="10"><textarea rows="7" cols="100" id="updateRemark" name="updateRemark" class="easyui-validatebox textbox"></textarea></td>
+ 				<td colspan="12"><textarea rows="7" cols="100" id="updateRemark" name="updateRemark" class="easyui-validatebox textbox"></textarea></td>
  			</tr>
  		</table>
  		</div>

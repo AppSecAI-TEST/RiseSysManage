@@ -115,7 +115,8 @@ function restartClass()
 		var row = $('#list_data').datagrid('getSelected');
 		var studentId = row.studentId;
 		var leaveState = row.leaveState;
-		if(leaveState != "001" ){
+		var resumeType = row.resumeType;
+		if(leaveState != "001" || (leaveState == '001' && resumeType != "")){
 			$.messager.alert('提示', "该学员不能复课！");
 			return;
 		}
@@ -144,7 +145,8 @@ function updateLeaveTime()
 		var row = $('#list_data').datagrid('getSelected');
 		var studentId = row.studentId;
 		var leaveState = row.leaveState;
-		if(leaveState == "003" || leaveState == "004"){
+		var resumeType = row.resumeType;
+		if(leaveState == "003" || leaveState == "004" || resumeType != ""){
 			$.messager.alert('提示', "该学员不能修改休学时长！");
 			return;
 		}
