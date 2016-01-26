@@ -58,7 +58,7 @@
 				<td align="right">开班人数：</td>
 				<td><c:if test="${classInstT.classState == '003' || classInstT.classState == '004'}">${classInstT.openClassNum}</c:if></td>
 				<td align="right">在读人数：</td>
-				<td><c:if test="${classInstT.classState == '003' || classInstT.classState == '004'}">${fn:length(classInstT.classStudentList)}</c:if></td>
+				<td><c:if test="${classInstT.classState == '003' || classInstT.classState == '004'}">${classInstT.baseNumT.studyingNum}</c:if></td>
 				<td align="right">持证率：</td>
 				<td><fmt:formatNumber value="${classInstT.licenseRate}" type="percent" /></td>
 			</tr>
