@@ -18,8 +18,7 @@
   					<td align="right"><span>校区：</span></td>
 	  				<td width="114px">
 						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 117px; height: 25px;" editable="false"
-							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-			      			onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
+							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 			      			url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=506&fieldId=schoolId">
 		        		</select>
 					</td>
@@ -30,7 +29,7 @@
 					</td>
 					<td align="right"><span>班级：</span></td>
 					<td width="130px">
-						<input id="className" name="className" type="text" class="easyui-textbox validatebox"  style="width: 50px; height: 23px;"/>
+						<input id="className" name="className" type="text" class="easyui-textbox validatebox"  style="width: 117px; height: 23px;"/>
 					</td>
 				
 				
