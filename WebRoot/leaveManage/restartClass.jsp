@@ -104,7 +104,7 @@
  			</tr>
  			<tr>
  				<td colspan="2" align="right"><span>复课方式：</span></td>
- 				<td colspan="10"><input type="radio" value="001" name="resumeType"/><span>原班复课</span>
+ 				<td colspan="12"><input type="radio" value="001" name="resumeType"/><span>原班复课</span>
 	      		&nbsp;<input type="radio" value="002" name="resumeType"/><span>转班复课</span>
 	      		&nbsp;<input type="radio" value="003" name="resumeType"/><span>转校复课</span></td>
  			</tr>

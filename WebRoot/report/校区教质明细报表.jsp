@@ -98,7 +98,7 @@
 						</tr>
 						<tr>
 							<th field="teachingNum" align="center" width="5%">参与人数</th>
-							<th field="oneNum" align="center" width="10%">1次课后复习人数</th>
+							<th field="oneNum" align="center" width="10%">2次课后复习人数</th>
 							<th field="teaRateVal" align="center" width="6%">电教完成率</th>
 							<th field="studentMeetingNum" align="center" width="5%">参与人数</th>
 							<th field="attendMeetingVal" align="center" width="5%">出勤率</th>

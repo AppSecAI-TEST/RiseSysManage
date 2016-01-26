@@ -129,7 +129,11 @@
 			}
 			function resetFunc()
 			{
-				$("#schoolManId").combobox("setValue","");
+				var schoolData = $("#schoolManId").combobox("getData");
+				if(schoolData != null && schoolData.length > 0)
+				{
+					$("#schoolManId").combobox("setValue",schoolData[0].schoolId);
+				}
 				$("#classPharse").combobox("setValue","");
 				$("#classInfo").textbox("setValue","");
 				$("#staffName").textbox("setValue","");

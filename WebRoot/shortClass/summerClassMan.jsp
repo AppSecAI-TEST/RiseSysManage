@@ -261,9 +261,13 @@
 			}
 			function resetFunc()
 			{
+				var schoolData = $("#schoolManId").combobox("getData");
+				if(schoolData != null && schoolData.length > 0)
+				{
+					$("#schoolManId").combobox("setValue",schoolData[0].schoolId);
+				}
 				$("#classType").combobox("setValue","");
 				$("#classManState").combobox("setValue","");
-				$("#schoolManId").combobox("setValue","");
 				$("#openStartManTime").datebox("setValue","");
 				$("#openEndManTime").datebox("setValue","");
 				$("#verifyStartManTime").datebox("setValue","");
@@ -337,7 +341,11 @@
 			}
 			function resetVerFunc()
 			{
-				$("#schoolVerId").combobox("setValue","");
+				var schoolData = $("#schoolVerId").combobox("getData");
+				if(schoolData != null && schoolData.length > 0)
+				{
+					$("#schoolVerId").combobox("setValue",schoolData[0].schoolId);
+				}
 				$("#classVerInfo").textbox("setValue","");
 				$("#classManVerState").combobox("setValue","");
 				$("#verifyState").combobox("setValue","");
