@@ -20,7 +20,7 @@
   						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height: 25px;" editable="false"
   							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
   							onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
-  							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
+  							url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=732&fieldId=schoolId&headFlag=N">
   						</select>
   					</td>
   					<td width="100px" align="right"><span>活动状态：</span></td>

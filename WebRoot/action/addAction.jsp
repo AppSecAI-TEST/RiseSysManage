@@ -38,7 +38,7 @@
   					</td>
   				</tr>
   				<tr>
-  					<td align="right"><span>课时：</span></td>
+  					<td align="right"><span>活动课时：</span></td>
   					<td align="left" colspan="2">
   						<input type="text" class="easyui-numberbox" id="planHours" name="planHours" data-options="min:1,max:24,precision:0"  style="width:100px;height: 25px;">
   					</td>
@@ -58,6 +58,8 @@
   							 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
 	      				 url="<%=path %>/pubData/qryCodeNameList.do?tableName=ACTION_T&codeType=TEACHER_TYPE">
   						</select>
+  						&nbsp;&nbsp;
+  						<input type="text" class="easyui-numberbox" id="hours" name="hours" data-options="min:1,max:24,precision:0"  style="width:100px;height: 25px;">
   					</td>
   					<td width="20%" align="center">
   						<a href="javascript:void(0)" id="addBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px"><span>添加</span></a>

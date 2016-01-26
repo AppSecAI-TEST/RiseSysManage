@@ -182,17 +182,17 @@ function replyAction() {
 		{
 			countHour +=parseInt($(this).attr("hours"));
 		}	
-	});
-	if(countHour>parseInt(action.realHours))
-	{
-		$.messager.alert("提示", "主T老师课时数之和"+countHour+"大于课时数"+action.realHours+"，请修改");
-		return false;
-	}	
+	});	
 	if(teacheArr.length<1)
 	{
 		$.messager.alert("提示", "请至少添加一条老师记录");
 		return false;
-	}	
+	}
+	if(countHour>parseInt(action.realHours))
+	{
+		$.messager.alert("提示", "主T老师课时数之和"+countHour+"大于课时数"+action.realHours+"，请修改");
+		return false;
+	}
 	reply.actionInfo =action;
 	reply.teacherInfo =teacheArr;
 	reply.planInfo =planArr;
@@ -299,6 +299,7 @@ function updateReply()
 	action.actionId =actionId;
 	action.handlerId =handlerId;
 	action.replyRemark =trim($("#replyRemark").val());
+	action.realHours =$("#realHours").numberbox("getValue");
 	var countHour =0;
 	var newArr=[];
 	$(".addTr").each(function() {
@@ -315,15 +316,15 @@ function updateReply()
 		{
 			countHour +=parseInt($(this).attr("hours"));
 		}	
-	});
-	if(countHour>parseInt($("#realHours").numberbox("getValue")))
-	{
-		$.messager.alert("提示", "主T老师课时数之和"+countHour+"大于课时数"+$("#realHours").numberbox("getValue")+"，请修改");
-		return false;
-	}	
+	});	
 	if(newArr.length<1)
 	{
 		$.messager.alert("提示", "请至少添加一条老师记录");
+		return false;
+	}
+	if(countHour>parseInt(action.realHours))
+	{
+		$.messager.alert("提示", "主T老师课时数之和"+countHour+"大于课时数"+$("#realHours").numberbox("getValue")+"，请修改");
 		return false;
 	}
 	param.actionInfo =action;

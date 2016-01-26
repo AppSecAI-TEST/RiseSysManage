@@ -36,6 +36,10 @@ function addTrInfo() {
 		$.messager.alert("提示", "请选择教师类型");
 		return false;
 	}
+	if ($("#hours").numberbox("getValue") == "") {
+		$.messager.alert("提示", "请填写教师课时");
+		return false;
+	}
 	tr.addClass("addTr");
 	if (checkTeacherOnly($("#teacherId").combobox("getValue"))) {
 		tr.attr("schoolId", $("#schoolId").combobox("getValue"));
@@ -43,10 +47,11 @@ function addTrInfo() {
 		tr.attr("teacherId", $("#teacherId").combobox("getValue"));
 		tr.attr("teacherName", $("#teacherId").combobox("getText"));
 		tr.attr("teacherType", $("#teacherType").combobox("getValue"));
+		tr.attr("hours", $("#hours").numberbox("getValue"));
 		var tdStr = "<span style='margin-right:20px'>" + tr.attr("schoolName")
 				+ "</span><span style='margin-right:20px'>"
-				+ tr.attr("teacherName") + "</span><span>"
-				+ tr.attr("teacherType") + "</span>";
+				+ tr.attr("teacherName") + "</span><span style='margin-right:20px'>"
+				+ tr.attr("teacherType") + "</span><span>"+ tr.attr("hours") + "</span>";
 		tr.find("td:eq(1)").html(tdStr);
 		tr.find("td:eq(2)").html("<a href='javascript:void(0)'class='easyui-linkbutton' iconCls='icon-remove' onclick='deleteTr(this)' plain='true'><span>删除</span></a>");
 		$("#addInfo").after(tr);
@@ -88,7 +93,7 @@ function addAction() {
 		return false;
 	}
 	if ($("#planHours").numberbox("getValue") == "") {
-		$.messager.alert("提示", "请填写课时");
+		$.messager.alert("提示", "请填写活动课时");
 		return false;
 	}
 	if (trim($("#title").val()) == "") {
@@ -126,6 +131,7 @@ function addAction() {
 	action.planHours = $("#planHours").numberbox("getValue");
 	var handlerValue = $("#handlerId").val();
 	action.handlerId = handlerValue;
+	var countHour =0;
 	var teacheArr = [];
 	$(".addTr").each(function() {
 		var teacher = {};
@@ -134,15 +140,25 @@ function addAction() {
 		teacher.teacherId = $(this).attr("teacherId");
 		teacher.teacherName = $(this).attr("teacherName");
 		teacher.teacherType = $(this).attr("teacherType");
+		teacher.hours =$(this).attr("hours");
 		teacher.isPlan = "Y";
 		teacher.handlerId = handlerValue;
 		teacheArr.push(teacher);
+		if($(this).attr("teacherType")=="T")
+		{
+			countHour +=parseInt($(this).attr("hours"));
+		}
 	})
 	if(teacheArr.length<1)
 	{
 		$.messager.alert("提示", "请至少添加一条老师记录");
 		return false;
-	}	
+	}
+	if(countHour>parseInt(action.planHours))
+	{
+		$.messager.alert("提示", "主T老师课时数之和"+countHour+"大于活动课时数"+action.planHours+"，请修改");
+		return false;
+	}
 	action.state = "P";
 	addInfo.actionInfo =action;
 	addInfo.teacherInfo =teacheArr;
