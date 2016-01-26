@@ -34,8 +34,7 @@
   					</td>
   					<td align="right" width="50px"><span>班级：</span></td>
   					<td align="left" width="110px">
-  						<select id="goodsClassInstId" name="classInstId" class="easyui-combobox" style="width:100px;height:25px;">
-      					</select>
+  						<input id="goodsClassInstId" name="className" class="easyui-textbox" style="width:100px;height:25px;" />
   					</td>
   					<td></td>
   					<td></td>
@@ -83,7 +82,7 @@
   				</tr>
   			</table>
  		</form>
-		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:480" id="goodsGift_data" toolbar="#goodsToolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="fasle">
+		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:460" id="goodsGift_data" toolbar="#goodsToolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="fasle">
 			<thead>
 				<tr>
 					<th field="ck" align="center" checkbox="true" width="1%"></th>
@@ -128,8 +127,7 @@
   					</td>
   					<td align="right" width="70px"><span>班级：</span></td>
   					<td align="left" width="110px">
-  						<select id="couponClassInstId" name="classInstId" class="easyui-combobox" style="width:100px;height:25px;">
-      					</select>
+  						<input id="couponClassInstId" name="className" class="easyui-textbox" style="width:100px;height:25px;" />
   					</td>
   					<td align="right" width="70px"><span>赠券状态：</span></td>
   					<td align="left" width="150px">
@@ -188,7 +186,7 @@
 				</tr>
   			</table>
  		</form>
-		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:450" id="couponGift_data" toolbar="#couponToolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
+		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:430" id="couponGift_data" toolbar="#couponToolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
 			<thead>
 				<tr>
 					<th field="ck" align="center" checkbox="true" width="1%"></th>
@@ -241,8 +239,7 @@
   					</td>
   					<td align="right" width="11%"><span>班级：</span></td>
   					<td align="left" width="16%">
-  						<select id="courseClassInstId" name="classInstId" class="easyui-combobox" style="width:100px;height:25px;">
-      					</select>
+  						<input id="courseClassInstId" name="className" class="easyui-textbox" style="width:100px;height:25px;" />
   					</td>
   					<td width="27%"></td>
   				</tr>
@@ -286,7 +283,7 @@
   				</tr>
   			</table>
  		</form>
-		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:480" id="courseGift_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:460" id="courseGift_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 			<thead>
 				<tr>
 					<th field="ck" align="center" checkbox="true" width="1%"></th>

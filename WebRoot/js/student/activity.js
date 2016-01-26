@@ -83,7 +83,21 @@ $(document).ready(function() {
 	
 	//添加活动
     $("#activitySubmit").click(function() {
-    	if($("#activityFm").form('validate')) {
+    		if($("#title").textbox("getValue")=="")
+    		{
+    			showMessage("提示","请填写活动标题",null);
+    			return false;
+    		}
+    		if($("#activityDate").datebox("getValue")=="")
+    		{
+    			showMessage("提示","请选择活动时间",null);
+    			return false;
+    		}
+    		if($("#award").textbox("getValue")=="")
+    		{
+    			showMessage("提示","请填写获奖情况",null);
+    			return false;
+    		}
     		var paramObj = $("#activityFm").serializeObject();
     		var gifts = new Array();
     		$("#addActivityTd").find('tr').each(function(i, node) {
@@ -125,6 +139,10 @@ $(document).ready(function() {
 					gift.giftChannelDesc = paramObj.title + "赠送";
 					gift.giveRemark = paramObj.remark;
 					gift.handlerId = paramObj.handlerId;
+					if(gift.effDate==null||gift.effDate=='')
+					{
+						delete gift.effDate;
+					}										
 					gifts.push(gift);  
     			}
     		});
@@ -162,9 +180,6 @@ $(document).ready(function() {
     				} 
     			});
     		}
-    	} else {
-    		$("#activityFm").find(".textbox-text.validatebox-text.validatebox-invalid:first").trigger("mouseover");
-    	}	
     });
 });
 

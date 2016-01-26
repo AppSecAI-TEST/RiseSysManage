@@ -69,7 +69,12 @@ function restoreClass()
 			{
 				$.messager.alert('提示', "已超期的异常信息不能复课！");
 				return false;
-			}	
+			}
+			if(row.resumeType!="")
+			{
+				$.messager.alert('提示', "已存在复课申请信息的异常信息不能复课！");
+				return false;
+			}
 			window.location.href="restoreClass.jsp?expInfo="+studentId+","+studentCourseId+","+row.excId;
 		}	
 	}	
