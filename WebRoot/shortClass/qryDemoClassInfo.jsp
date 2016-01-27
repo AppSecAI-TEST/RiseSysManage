@@ -81,7 +81,7 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-			ajaxLoading("加载中...");
+			ajaxLoading("正在处理，请稍待。。。");
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=513&fieldId=schoolId&headFlag=N",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
@@ -168,7 +168,7 @@
 			}
 			function addClassManage()
 			{
-				ajaxLoading("加载中...");
+				ajaxLoading("正在处理，请稍待。。。");
 				window.location.href = "/sys/shortClass/addDemoClass.jsp";
 			}
 			function cancleDemoClass()
@@ -182,7 +182,7 @@
 					}
 					$.messager.confirm("提示", "您确定要取消该DEMO课吗？", function (data) {
 			            if(data){
-			            	ajaxLoading("取消中...");
+			            	ajaxLoading("正在处理，请稍待。。。");
 			            	$.post("/sys/shortBus/cancelShortClassFunc.do",{shortClassInstId:row.shortClassInstId,remark:"",handleId:${sessionScope.StaffT.staffId}},function(data){
 			                	ajaxLoadEnd();
 			                	if(data == "success")

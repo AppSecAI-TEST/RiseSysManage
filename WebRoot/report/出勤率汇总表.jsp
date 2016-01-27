@@ -57,7 +57,7 @@
    			<a href="javascript:void(0)" id="hisViewBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;">导出</a>
 		</div>
 		<script type="text/javascript">
-			ajaxLoading("加载中...");
+			ajaxLoading("正在处理，请稍待。。。");
 			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
 				$("#schoolId").combobox("loadData",data);
 				ajaxLoadEnd();

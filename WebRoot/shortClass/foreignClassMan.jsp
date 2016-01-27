@@ -137,7 +137,7 @@
 			}
 			function classArrangementFunc()
 			{
-				ajaxLoading("加载中...");
+				ajaxLoading("正在处理，请稍待。。。");
 				window.location.href = "/sys/shortClass/directShortClassInst.jsp?funcNodeId=${param.funcNodeId}&classType="+encodeURI("外教课");
 			}
 			function cancelClassFunc()
@@ -147,7 +147,7 @@
 				{
 					if(row.classStateName == "未开课" || row.classStateName == "未开课")
 					{
-						ajaxLoading("加载中...");
+						ajaxLoading("正在处理，请稍待。。。");
 						window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&classType=外教课&pageName=cancelForeignClass";
 					}
 					else if(row.classStateName == "开课在读")
@@ -175,7 +175,7 @@
 				{
 					if(row.classStateName != "解散")
 					{
-						ajaxLoading("加载中...");
+						ajaxLoading("正在处理，请稍待。。。");
 						window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&classType=外教课&pageName=viewForeignClass";
 					}
 					else

@@ -208,7 +208,7 @@
 					}
 					if(teacherFlag)
 					{
-						ajaxLoading("添加中...");
+						ajaxLoading("正在处理，请稍待。。。");
 						$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:attRecordTeacherId},function(data){
 							ajaxLoadEnd();
 							var trData = "<tr id='teacherId"+data.teacherId+"'><td align='right' teacherId='"+data.teacherId+"' schoolId='"+data.schoolId+"' teacherType='"+$("#attRecordClassType").combobox("getText")+"' hours='"+attRecordLessonHour+"'>老师：</td><td align='center'>"+$("#attRecordSchoolId").combobox("getText")+"</td><td align='center'>"+$("#attRecordTeacherId").combobox("getText")+"</td><td align='center'>"+$("#attRecordClassType").combobox("getText")+"</td><td align='center'>"+attRecordLessonHour+"</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
@@ -314,7 +314,7 @@
 				else
 				{
 					var json = JSON.stringify(obj);
-					ajaxLoading("提交中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					$.post("/sys/shortBus/addShortAttendTInfo.do",{json:json},function(data){
 						ajaxLoadEnd();
 						if(data == "success")

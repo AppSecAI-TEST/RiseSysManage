@@ -134,7 +134,7 @@
 			var gClassAttend = null;
 			function addAttenceFunc()
 			{
-				ajaxLoading("加载中...");
+				ajaxLoading("正在处理，请稍待。。。");
 				window.location.href = "/sys/shortClass/choiceForeignClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&classType="+encodeURI("外教课");
 			}
 			function cancelAttenceFunc()
@@ -154,7 +154,7 @@
 				{
 					$.messager.confirm("提示", "您确定要移除所勾选的学员吗？", function (data) {
 			            if(data){
-			            	ajaxLoading("移除中...");
+			            	ajaxLoading("正在处理，请稍待。。。");
 			                $.post("/sys/shortBus/delShortStudentList.do",{shortClassInstId:${shortClassInstT.shortClassInstId},studentIds:stuArr.join(","),handlerId:${sessionScope.StaffT.staffId}},function(data){
 			                	ajaxLoadEnd();
 			                	if(data == "success")

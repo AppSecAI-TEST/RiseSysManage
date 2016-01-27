@@ -155,7 +155,7 @@
 			{
 				var row = $('#dgRoleList').datagrid('getSelected');
 				if (row){
-					ajaxLoading("加载中....")
+					ajaxLoading("正在处理，请稍待。。。")
 					$.post("/sys/funcNode/getSubFuncNodeListWithRole.do",{sysRoleId:row.sysRoleId},function(data){
 						ajaxLoadEnd();
 						$("#nodeTree").tree("loadData",data);
@@ -212,7 +212,7 @@
 				{
 					arr.push(gridSettingData[i].dataValue);
 				}
-				ajaxLoading("调整中....");
+				ajaxLoading("正在处理，请稍待。。。");
 				$.post("/sys/funcNode/settingConditionInfo.do",{roleId:roleRow.sysRoleId,funcNodeId:privRow.parentFuncNodeId,resourceId:privRow.html,valArr:arr.join(","),type:"1"},function(data){
 					ajaxLoadEnd();
 					if(data == "success"){
@@ -310,7 +310,7 @@
 				{
 					arr.push(nodes[i].id);
 				}
-				ajaxLoading("调整中....");
+				ajaxLoading("正在处理，请稍待。。。");
 				$.post("/sys/sysRole/settingRoleFunc.do",{sysRoleId:role.sysRoleId,funcNodeIds:arr.join(",")},function(data){
 					ajaxLoadEnd();
 					if(data == "success"){
@@ -336,7 +336,7 @@
 				{
 					arr.push(tabsFilterData.rows[i].dataValue);
 				}
-				ajaxLoading("调整中....");
+				ajaxLoading("正在处理，请稍待。。。");
 				$.post("/sys/funcNode/settingConditionInfo.do",{roleId:roleRow.sysRoleId,funcNodeId:privRow.parentFuncNodeId,resourceId:privRow.html,valArr:arr.join(","),type:"1"},function(data){
 					ajaxLoadEnd();
 					if(data == "success"){

@@ -219,7 +219,7 @@
 				$("#classAttendInfo").datagrid({
 					data:dataObj,
 					onClickRow:function(rowIndex, rowData){
-				    	ajaxLoading("加载中...");
+				    	ajaxLoading("正在处理，请稍待。。。");
 						window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+rowData.classAttendId+"&funcNodeId=${funcNodeId}&selDateStr="+$("#selDateStr").html()+"&classInstId=${classInstId}&comeFlag=attenceOperate";
 				    }
 				});
@@ -228,18 +228,18 @@
 			{
 				if(classAttendIds != "")
 				{
-					ajaxLoading("加载中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					classAttendIds = classAttendIds.substring(0,classAttendIds.length -1);
 					window.location.href = "/sys/attend/getUpdateAttenceRecord.do?funcNodeId=${funcNodeId}&classAttendId="+classAttendIds.split("#")[0]+"&classAttendIds="+classAttendIds+"&selDateStr="+$("#selDateStr").html();
 				}
 				else if(classAttendIds == "" && schooltimeInstIds != "")
 				{
-					ajaxLoading("加载中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					window.location.href = "/sys/attend/getAttenceRecord.do?funcNodeId=${funcNodeId}&schooltimeInstId="+schooltimeInstIds.split("#")[0]+"&selDateStr="+$("#selDateStr").html()+"&dateValue="+dateValue;
 				}
 				else if(classInstId != "")
 				{
-					ajaxLoading("加载中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					window.location.href = "/sys/attend/getAttenceRecordInst.do?funcNodeId=${funcNodeId}&classInstId="+classInstId+"&selDateStr="+$("#selDateStr").html()+"&dateValue="+dateValue;
 				}
 			}

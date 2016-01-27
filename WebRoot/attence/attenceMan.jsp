@@ -179,7 +179,7 @@
 		    </div>
 		</div>
 		<script type="text/javascript">
-			ajaxLoading("加载中...");
+			ajaxLoading("正在处理，请稍待。。。");
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=505&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
 				$("#schoolHisId").combobox("loadData",data);
@@ -303,7 +303,7 @@
 				var row = $('#manList').datagrid('getSelected');
 				if (row)
 				{
-					ajaxLoading("加载中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					window.location.href = "/sys/attend/getAttendDetail.do?funcNodeId=${param.funcNodeId}&classInstId="+row.classInstId;
 				}
 				else
@@ -316,7 +316,7 @@
 				var row = $('#manList').datagrid('getSelected');
 				if (row)
 				{
-					ajaxLoading("加载中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					window.location.href = "/sys/attend/getAttenceCalendarView.do?funcNodeId=${param.funcNodeId}&classInstId="+row.classInstId;
 				}
 				else
@@ -326,7 +326,7 @@
 			}
 			function manLeaveFunc()
 			{
-				ajaxLoading("加载中...");
+				ajaxLoading("正在处理，请稍待。。。");
 				window.location.href = "/sys/attence/leaveMakeupMan.jsp?funcNodeId=${param.funcNodeId}";
 			}
 			function queryHisFunc()
@@ -364,7 +364,7 @@
 				var row = $('#hisList').datagrid('getSelected');
 				if (row)
 				{
-					ajaxLoading("加载中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+row.classAttendId+"&funcNodeId=${param.funcNodeId}&selDateStr=&classInstId=&comeFlag=attenceMan";
 				}
 				else

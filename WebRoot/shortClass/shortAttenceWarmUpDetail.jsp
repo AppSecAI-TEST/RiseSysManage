@@ -129,14 +129,14 @@
 			var gClassAttend = null;
 			function addAttenceFunc()
 			{
-				ajaxLoading("加载中...");
+				ajaxLoading("正在处理，请稍待。。。");
 				window.location.href = "/sys/shortBus/getShortClassAttendTInfo.do?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortAttenceWarmUpDetail";
 			}
 			function updateAttenceFunc()
 			{
 				if (gClassAttend != null)
 				{
-					ajaxLoading("加载中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					window.location.href =  "/sys/shortBus/shortAttenceUpdatePage.do?funcNodeId=${funcNodeId}&shortClassAttendId="+gClassAttend.value+"&pageName=shortAttenceWarmUpDetail";
 				}
 				else
@@ -148,7 +148,7 @@
 			{
 				if (gClassAttend != null)
 				{
-					ajaxLoading("加载中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					window.location.href =  "/sys/shortBus/shortAttenceViewPage.do?funcNodeId=${funcNodeId}&shortClassAttendId="+gClassAttend.value+"&pageName=shortAttenceWarmUpDetail";
 				}
 				else

@@ -66,7 +66,7 @@
 			{
 				$.messager.confirm("提示", "您确定要取消该课程吗？", function (data) {
 		            if(data){
-		            	ajaxLoading("取消中...");
+		            	ajaxLoading("正在处理，请稍待。。。");
 		                $.post("/sys/shortBus/cancelShortClassFunc.do",{shortClassInstId:${shortClassInstId},remark:$("#remark").textbox("getValue"),handleId:${sessionScope.StaffT.staffId}},function(data){
 		                	ajaxLoadEnd();
 		                	if(data == "success")

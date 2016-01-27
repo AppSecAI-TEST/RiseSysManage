@@ -238,7 +238,7 @@
 					onChange:function (data) {
 						if(gFirstFlag)
 						{
-							ajaxLoading("加载中...");
+							ajaxLoading("正在处理，请稍待。。。");
 							window.location.href = "/sys/attend/getAttenceCalendarView.do?classInstId=${classInstId}&year="+$("#yearList").combobox("getValue")+"&month="+$("#monthList").combobox("getValue")+"&funcNodeId=${funcNodeId}";
 						}
 						else
@@ -252,7 +252,7 @@
 			{
 				if(realClassTime != "")
 				{
-					ajaxLoading("加载中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+classAttendId+"&funcNodeId=${funcNodeId}&selDateStr=&classInstId=${classInstId}&comeFlag=attenceCalendarView";
 				}
 			}

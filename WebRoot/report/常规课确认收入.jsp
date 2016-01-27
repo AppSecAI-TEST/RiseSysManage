@@ -150,7 +150,7 @@
         
   	function tieOffFunc()
 	{
-		ajaxLoading("加载中...");
+		ajaxLoading("正在处理，请稍待。。。");
 		window.location.href = "/sys/tieOff/regularTieOffPage.jsp";
 	}
 </script>
