@@ -50,14 +50,14 @@
 					<td style="min-width: 100px;">
 						<select id="dutyAdvister" name="dutyAdvister" class="easyui-combobox" style="width: 100px; height: 25px;"
 							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
-      						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+      						url="<%=path %>/pubData/qryStaffList.do?post=16,17&schoolId=${sessionScope.StaffT.schoolId}">
       					</select>
 					</td>
 					<td align="right" style="min-width: 80px;"><span>客户关怀：</span></td>
 					<td style="min-width: 100px;">
 						<select id="carer" name="carer" class="easyui-combobox" style="width: 100px; height: 25px;"
 							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
-      						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+      						url="<%=path %>/pubData/qryStaffList.do?post=31,32,33&schoolId=${sessionScope.StaffT.schoolId}">
     					</select>
 					</td>
 					<td align="right" style="min-width: 80px;"><span>建档时间：</span></td>

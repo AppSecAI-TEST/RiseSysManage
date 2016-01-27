@@ -16,7 +16,7 @@ $(document).ready(function() {
     	},
         onChange : function(n, o) {
         	$("#advisterIdA").combobox({
-        		url : "/sys/pubData/qryStaffList.do?schoolId=" + n,//返回json数据的url
+        		url : "/sys/pubData/qryStaffList.do?post=16,17&schoolId=" + n,//返回json数据的url
         		valueField : "staffId",
         		textField : "userName",
         		panelHeight : "auto",
@@ -38,7 +38,7 @@ $(document).ready(function() {
     	},
         onChange : function(n, o) {
         	$("#advisterIdB").combobox({
-        		url : "/sys/pubData/qryStaffList.do?schoolId=" + n,//返回json数据的url
+        		url : "/sys/pubData/qryStaffList.do?post=16,17&schoolId=" + n,//返回json数据的url
         		valueField : "staffId",
         		textField : "userName",
         		panelHeight : "auto",
