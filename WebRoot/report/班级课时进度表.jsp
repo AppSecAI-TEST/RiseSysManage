@@ -12,9 +12,9 @@
   	</head>
   	<body>
   		<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
-  		<div style="padding:5px 0;">
-  			<form id="qryFm" style="margin:0 auto;">
-	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
+  		<div style="margin-right:5px;">
+  			<form id="qryFm">
+	  			<table class="search_tab">
 	  				<tr>
 	  					<td align="right" width="80px"><span>校区：</span></td>
 	  					<td align="left"  width="110px">
@@ -50,10 +50,9 @@
 	  				</tr>	
 	  			</table>
   			</form>
-  		<div style="min-width:1100px;width:99%;margin:0 auto;"><a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;margin: 2px ">导出全部</a>
+  		<div style="min-width:1100px;width:100%;margin:2px auto;"><a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;margin: 2px ">导出全部</a>
   		<a href="javascript:void(0)" id="diffBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px;margin: 2px ">提交差异说明</a></div>	
-  		<div style="min-width:1100px;width:99%;margin:0 auto;">
-		<div class="easyui-panel" title="排课信息" style="width:100%;overflow:auto;min-height:400px">
+		<div class="easyui-panel" title="排课信息" style="width:1505px;overflow:auto;min-height:400px">
 		<table class="maintable" id="hoursPlanTab" style="width:1500px;margin-right: 10px;" cellspacing="0" cellpadding="0">
 		  <tr align="center">
 		     <td align="center" width="78px;" rowspan="2"><span>学校</span></td>
@@ -95,7 +94,9 @@
 		</table>
 		</div>
 		</div>
-  		</div>	
+		<form id="excelForm" action="<%=path%>/export/exportExpClassDetail.do" enctype="multipart/form-data"  method="post">
+			<input type="hidden" id="param" name="param">
+		</form>
   	</body>
 </html>
 <script type="text/javascript">
@@ -239,5 +240,61 @@
 		});
 	});
 
-	
+	$("#export").click(function(){
+		var arr =[];
+		$(".infoTr").each(function(){
+			var obj={};
+			obj.schoolName =$(this).find("td:eq(0)").find("span").html();
+			obj.className =$(this).find("td:eq(1)").find("span").html();
+			obj.byname =$(this).find("td:eq(2)").find("span").html();
+			obj.dateRange =$(this).find("td:eq(3)").find("span").html();
+			obj.startDate =$(this).find("td:eq(4)").find("span").html();
+			obj.finishDate =$(this).find("td:eq(5)").find("span").html();
+			obj.realHour =$(this).find("td:eq(6)").find("span").html();
+			obj.diffNum =$(this).find("td:eq(7)").find("span").html();
+			obj.monthDiffNum =$(this).find("td:eq(8)").find("span").html();
+			obj.weekDiff1 =$(this).find("td:eq(9)").find("span").html();
+			obj.weekPlan1 =$(this).find("td:eq(10)").find("span").html();
+			obj.weekHand1 =$(this).find("td:eq(11)").find("span").html();
+			obj.weekDiff2 =$(this).find("td:eq(12)").find("span").html();
+			obj.weekPlan2 =$(this).find("td:eq(13)").find("span").html();
+			obj.weekHand2 =$(this).find("td:eq(14)").find("span").html();
+			obj.weekDiff3 =$(this).find("td:eq(15)").find("span").html();
+			obj.weekPlan3 =$(this).find("td:eq(16)").find("span").html();
+			obj.weekHand3 =$(this).find("td:eq(17)").find("span").html();
+			obj.weekDiff4 =$(this).find("td:eq(18)").find("span").html();
+			obj.weekPlan4 =$(this).find("td:eq(19)").find("span").html();
+			obj.weekHand4 =$(this).find("td:eq(20)").find("span").html();
+			obj.weekDiff5 =$(this).find("td:eq(21)").find("span").html();
+			obj.weekPlan5 =$(this).find("td:eq(22)").find("span").html();
+			obj.weekHand5 =$(this).find("td:eq(23)").find("span").html();
+			obj.monthPlanHours =$(this).find("td:eq(24)").find("span").html();
+			obj.monthRealNum =$(this).find("td:eq(25)").find("span").html();
+			obj.mDiffNum =$(this).find("td:eq(26)").find("span").html();
+			if($(this).find("td:eq(27)").find(".textbox-value").length>0)
+			{
+				obj.remark ="";
+			}
+			else
+			{
+				obj.remark =$(this).find("td:eq(27)").find("span").html();
+			}
+			arr.push(obj);
+		});
+		if(arr.length<1)
+		{
+			showMessage("提示","没有数据可以导出",null);
+			return false;
+		}
+		else
+		{
+			var param={
+				info:arr,
+				fileName:parent.$("li.tabs-selected").find("span.tabs-title").html()
+			}
+			$("#param").val(JSON.stringify(param));
+			alert($("#param").val())
+			$("#excelForm").submit();
+		}	
+	});
 </script>

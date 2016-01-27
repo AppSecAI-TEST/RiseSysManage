@@ -23,8 +23,11 @@ import net.sf.jxls.transformer.XLSTransformer;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.http.HttpResponse;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.Region;
@@ -69,6 +72,30 @@ public class ExportService
 			inputStream.close();
 			out.close();
 		}
+	}
+	
+	public void exportClassHourDetail(String fileName,String param,OutputStream out) throws Exception
+	{
+		List list = JacksonJsonMapper.getInstance().readValue(param, List.class);
+		String filePath =this.getFullFilePath(fileName);
+		HttpClient client = new HttpClient();   
+		GetMethod httpGet = new GetMethod(filePath);  
+		client.executeMethod(httpGet); 
+		InputStream inputStream =httpGet.getResponseBodyAsStream();
+		Map<String, List<Map>> beanParams = new HashMap<String, List<Map>>();
+		beanParams.put("reportList", list);  
+        XLSTransformer former = new XLSTransformer(); 
+        HSSFWorkbook workBook = (HSSFWorkbook)former.transformXLS(inputStream, beanParams);
+        //加入换行格式
+        for(int i=1;i<=list.size()+1;i++)
+        {
+        	Cell obj =workBook.getSheetAt(0).getRow(i).getCell(3);
+        	obj.setCellValue(obj.getStringCellValue().replace("<br>", "\n"));
+        }	
+        
+        workBook.write(out);
+		inputStream.close();
+		out.close();
 	}
 	
 	public void exportLackOfGradRate(String fileName,String year,String quarter,String param,OutputStream out) throws Exception

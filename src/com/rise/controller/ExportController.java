@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.logging.Log;
@@ -375,6 +376,33 @@ public class ExportController
 			response.setHeader("Content-Disposition", "attachment;fileName="+URLEncoder.encode(displayFileName.toString(),"utf-8"));
 			out = response.getOutputStream();
 			es.exportExpClassDetai(fileName,param, out);
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+		}
+
+	}
+	
+	
+	//班级课时进度统计(类似导出可通用)
+	@RequestMapping("/exportExpClassDetail.do")
+	public void exportClassHourDetail(HttpServletResponse response , HttpServletRequest request)
+	{
+		OutputStream out = null;
+		try
+		{
+			JSONObject json =JSONObject.fromObject(request.getParameter("param"));
+			String fileName =json.getString("fileName");
+			String param =json.getString("info");
+			StringBuffer displayFileName = new StringBuffer(fileName);
+			displayFileName.append(new SimpleDateFormat("yyMMdd").format(new Date()));
+			displayFileName.append(".xls");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName="+URLEncoder.encode(displayFileName.toString(),"utf-8"));
+			out = response.getOutputStream();
+			es.exportClassHourDetail(fileName,param, out);
 		}
 		catch(Exception err)
 		{
