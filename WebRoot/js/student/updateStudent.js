@@ -102,11 +102,12 @@ $(document).ready(function() {
     		if(len3 > 0) {
     			var activityArray = data.activityObj.rows;
     			for(var i = 0; i < len3; i++) {
-    				var content = "<tr><td align='center'><span>"+activityArray[i].title+"</span></td>";
-    				content += "<td align='center'><span>"+activityArray[i].activityDate+"</span></td>";
-    				content += "<td align='center'><span>"+activityArray[i].award+"</span></td>";
-    				content += "<td align='center'><span>"+activityArray[i].remark+"</span></td>";
-    				content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='deleteActivity(this, "+activityArray[i].activityId+")'><span>删除</span></a></td></tr>";
+    				var content = "<tr><td align='center' width='150px'><span>"+activityArray[i].title+"</span></td>";
+    				content += "<td align='center' width='100px'><span>"+activityArray[i].activityDate+"</span></td>";
+    				content += "<td align='center' width='150px'><span>"+activityArray[i].award+"</span></td>";
+    				content += "<td align='center' width='300px'><span>"+activityArray[i].remark+"</span></td>";
+    				content += "<td align='center' width='363px'><span>"+activityArray[i].gift+"</span></td>";
+    				content += "<td align='center' width='80px'><a href='javascript:void(0)' class='linkmore' onclick='deleteActivity(this, "+activityArray[i].activityId+")'><span>删除</span></a></td></tr>";
     				$("#activityTd tr:eq("+activityTd+")").after(content);
     				activityTd += 1;
     			}
@@ -387,116 +388,115 @@ $(document).ready(function() {
 	$("#updateSubmit").click(function() {
 		contactLength += $("[name='contacts']").length;
 		if(contactLength > 0) {
+			var usedFlag = false;
 			if($("[name='contacts']").length > 0) {
 				$("[name='contacts']").each(function() {
 					if("add" == $(this).attr("add")) {
 						updateFlag = true;
 					}
+					var used = $(this).attr("used");
+					if("Y" == used) {
+						usedFlag = true;
+					}
 				});
 			}
-			if($("[name='realSchools']").length > 0) {
-				updateFlag = true;
-			}
-			if($("[name='activitys']").length > 0) {
-				updateFlag = true;
-			}
-			if(!updateFlag) {
-				updateFlag = validateStudent();
-			}
-			if(updateFlag) {
-				if($("#studentFm").form('validate')) {
-					var flag = true;
-					var identityId = $("#identityId").textbox("getValue");
-					if(identityId != null && identityId != "" && identityId != undefined && identityId != studentObj.identityId) {
-						if(validateFlag) {
-							if(!identityValidateFlag) {
+			if(usedFlag) {
+				if($("[name='realSchools']").length > 0) {
+					updateFlag = true;
+				}
+				if(!updateFlag) {
+					updateFlag = validateStudent();
+				}
+				if(updateFlag) {
+					if($("#studentFm").form('validate')) {
+						var flag = true;
+						var identityId = $("#identityId").textbox("getValue");
+						if(identityId != null && identityId != "" && identityId != undefined && identityId != studentObj.identityId) {
+							if(validateFlag) {
+								if(!identityValidateFlag) {
+									flag = false;
+									$.messager.alert('提示', "您修改的证件号码验重不通过，请输入其他证件号码！");
+								} 
+							} else {
 								flag = false;
-								$.messager.alert('提示', "您修改的证件号码验重不通过，请输入其他证件号码！");
-							} 
-						} else {
-							flag = false;
-							$.messager.alert('提示', "请先对学员进行验重！");
+								$.messager.alert('提示', "请先对学员进行验重！");
+							}
+						}
+						if(flag) {
+							var identityId = $("#identityId").textbox("getValue");
+							var identityType = $('#identityType').combobox('getValue');
+							if(identityId != null && identityId != "" && identityId != undefined && identityType == "2BA"
+								&& identityType != null && identityType != "" && identityType != undefined) {
+								var birthday = $("#birthday").datebox("getValue");
+								birthday = birthday.replace(/-/g, "");
+								if(birthday != identityId.substring(6, 14)) {
+									flag = false;
+								}
+							}
+							if(flag) {
+								var contactArray = "[";
+								if($("[name='contacts']").length > 0) {
+									$("[name='contacts']").each(function() {
+										if("add" == $(this).attr("add")) {
+											contactArray += "{identityId:\""+$(this).attr("identityId")+"\",identityType:\""+$(this).attr("identityType")+"\",name:\""+$(this).attr("contactName")+"\",phone:\""+$(this).attr("phone")+"\",relationType:\""+$(this).attr("relationType")+"\",job:\""+$(this).attr("job")+"\",used:\""+$(this).attr("used")+"\"},";
+										}
+									});
+									if(contactArray.length > 1) {
+										contactArray = contactArray.substring(0, contactArray.length - 1);
+									}
+								}
+								contactArray += "]";
+								var realSchoolArray = "[";
+								if($("[name='realSchools']").length > 0) {
+									$("[name='realSchools']").each(function() {
+										realSchoolArray += "{schoolType:\""+$(this).attr("schoolType")+"\",realSchoolName:\""+$(this).attr("realSchoolName")+"\"},";
+									});
+									realSchoolArray = realSchoolArray.substring(0, realSchoolArray.length - 1);
+								}
+								realSchoolArray += "]";
+								if(contactIds != "" && contactIds != null && contactIds != undefined && contactIds != "null") {
+									contactIds = contactIds.substring(0, contactIds.length - 1);
+								}
+								if(activityIds != "" && activityIds != null && activityIds != undefined && activityIds != "null") {
+									activityIds = activityIds.substring(0, activityIds.length - 1);
+								}
+								if(realIds != "" && realIds != null && realIds != undefined && realIds != "null") {
+									realIds = realIds.substring(0, realIds.length - 1);
+								}
+								
+								var obj = getParam();
+								obj = obj.substring(0, obj.length - 1);
+								obj += ",\"contactId\":\""+contactIds+"\",\"activityId\":\""+activityIds+"\",\"realId\":\""+realIds+"\",\"contactArray\":"+contactArray+",\"realSchoolArray\":"+realSchoolArray+",\"activityArray\":[]}";
+								obj = encodeURI(obj);
+								$.ajax({
+									url: "/sys/student/updateStudent.do",
+									data: "param=" + obj,
+									dataType: "json",
+									async: true,
+									beforeSend: function()
+									{
+										$.messager.progress({title : '修改档案', msg : '正在修改学员档案，请稍等……'});
+									},
+									success: function (data) {
+										$.messager.progress('close'); 
+										var flag = data.flag
+										if(flag) {
+											$.messager.alert('提示', "修改学员档案成功！", "info", function() {window.history.back();});
+										} else {
+											$.messager.alert('提示', "修改学员档案失败！");
+										}
+									} 
+								});
+							} else {
+								$.messager.alert('提示', "出生日期需要与本人身份证号码中的出生日期一致！");
+							}
 						}
 					}
-					if(flag) {
-						var identityId = $("#identityId").textbox("getValue");
-            			var identityType = $('#identityType').combobox('getValue');
-            			if(identityId != null && identityId != "" && identityId != undefined && identityType == "2BA"
-            					&& identityType != null && identityType != "" && identityType != undefined) {
-            				var birthday = $("#birthday").datebox("getValue");
-            				birthday = birthday.replace(/-/g, "");
-            				if(birthday != identityId.substring(6, 14)) {
-            					flag = false;
-            				}
-            			}
-            			if(flag) {
-            				var contactArray = "[";
-            				if($("[name='contacts']").length > 0) {
-            					$("[name='contacts']").each(function() {
-            						if("add" == $(this).attr("add")) {
-            							contactArray += "{identityId:\""+$(this).attr("identityId")+"\",identityType:\""+$(this).attr("identityType")+"\",name:\""+$(this).attr("contactName")+"\",phone:\""+$(this).attr("phone")+"\",relationType:\""+$(this).attr("relationType")+"\",job:\""+$(this).attr("job")+"\",used:\""+$(this).attr("used")+"\"},";
-            						}
-            					});
-            					if(contactArray.length > 1) {
-            						contactArray = contactArray.substring(0, contactArray.length - 1);
-            					}
-            				}
-            				contactArray += "]";
-            				var realSchoolArray = "[";
-            				if($("[name='realSchools']").length > 0) {
-            					$("[name='realSchools']").each(function() {
-            						realSchoolArray += "{schoolType:\""+$(this).attr("schoolType")+"\",realSchoolName:\""+$(this).attr("realSchoolName")+"\"},";
-            					});
-            					realSchoolArray = realSchoolArray.substring(0, realSchoolArray.length - 1);
-            				}
-            				realSchoolArray += "]";
-            				var activityArray = "[";
-            				if($("[name='activitys']").length > 0) {
-            					$("[name='activitys']").each(function() {
-            						activityArray += "{title:\""+$(this).attr("title")+"\",activityDate:\""+$(this).attr("activityDate")+"\",award:\""+$(this).attr("award")+"\",remark:\""+$(this).attr("remark")+"\",activityName:\""+$(this).attr("activityName")+"\"},";
-            					});
-            					activityArray = activityArray.substring(0, activityArray.length - 1);
-            				}
-            				activityArray += "]";
-            				if(contactIds != "" && contactIds != null && contactIds != undefined && contactIds != "null") {
-            					contactIds = contactIds.substring(0, contactIds.length - 1);
-            				}
-            				if(activityIds != "" && activityIds != null && activityIds != undefined && activityIds != "null") {
-            					activityIds = activityIds.substring(0, activityIds.length - 1);
-            				}
-            				if(realIds != "" && realIds != null && realIds != undefined && realIds != "null") {
-            					realIds = realIds.substring(0, realIds.length - 1);
-            				}
-            				var obj = JSON.stringify($("#studentFm").serializeObject());
-            				obj = obj.substring(0, obj.length - 1);
-            				obj += ",\"contactId\":\""+contactIds+"\",\"activityId\":\""+activityIds+"\",\"realId\":\""+realIds+"\",\"contactArray\":"+contactArray+",\"realSchoolArray\":"+realSchoolArray+",\"activityArray\":"+activityArray+"}";
-            				obj = encodeURI(obj);
-            				$.ajax({
-            					url: "/sys/student/updateStudent.do",
-            					data: "param=" + obj,
-            					dataType: "json",
-            					async: true,
-            					beforeSend: function()
-            					{
-            						$.messager.progress({title : '修改档案', msg : '正在修改学员档案，请稍等……'});
-            					},
-            					success: function (data) {
-            						$.messager.progress('close'); 
-            						var flag = data.flag
-            						if(flag) {
-            							$.messager.alert('提示', "修改学员档案成功！", "info", function() {window.location.reload();});
-            						} else {
-            							$.messager.alert('提示', "修改学员档案失败！");
-            						}
-            					} 
-            				});
-            			} else {
-            				$.messager.alert('提示', "出生日期需要与本人身份证号码中的出生日期一致！");
-            			}
-					}
+				} else {
+					$.messager.alert('提示', "请先对该学员做一些修改之后，再进行提交！");
 				}
 			} else {
-				$.messager.alert('提示', "请先对该学员做一些修改之后，再进行提交！");
+				$.messager.alert('提示', "请至少设置一位联系人为常用联系人！");
 			}
 		} else {
 			$.messager.alert('提示', "请至少添加一个联系人信息！");
@@ -606,6 +606,7 @@ $(document).ready(function() {
     								content += "<input type='hidden' name='contacts' relationType='"+relationType+"' job='"+job+"' used='"+contactUsed+"' contactName='"+contactName+"' identityType='"+contactIdentityType+"' identityId='"+contactIdentityId+"' phone='"+phone+"' add='add'/></td>";
     								content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='deleteContact(this)'><span>删除</span></a></td></tr>";
     								$("#contactTd tr:eq("+contactTd+")").after(content);
+    								contactTd++;
     								//初始化第一列
     								$('#relationType').combobox('setValue', "");
     								$('#contactIdentityType').combobox('setValue', "");
@@ -648,7 +649,7 @@ $(document).ready(function() {
     		content += "<input type='hidden' name='activitys' title='"+title+"' activityDate='"+activityDate+"' award='"+award+"' remark='"+remark+"' activityName='"+title+"'/></td>";
     		content += "<td align='center'><a href='javascript:void(0)' class='linkmore' onclick='delActivity(this)'><span>删除</span></a></td></tr>";
     		$("#activityTd tr:eq("+activityTd+")").after(content);
-    		activityTd += 1;
+    		activityTd++;
     		
     		//初始化第一列
 			$('#title').combobox('setValue', "");
@@ -723,4 +724,105 @@ function validateStudent()
 		}
 	}
 	return flag;
+}
+
+function getParam() {
+	var nameDisabled = $("#name").attr("disabled");
+	if("disabled" == nameDisabled) {
+		$("#name").textbox({disabled : false});
+	}
+	var birthdayDisabled = $("#birthday").attr("disabled");
+	if("disabled" == birthdayDisabled) {
+		$("#birthday").textbox({disabled : false});
+	}
+	var sexDisabled = $(".sex").attr("disabled");
+	if("disabled" == sexDisabled) {
+		$(".sex").removeAttr("disabled");
+	}
+	var identityTypeDisabled = $("#identityType").attr("disabled");
+	if("disabled" == identityTypeDisabled) {
+		$("#identityType").combobox({disabled : false});
+	}
+	var identityIdDisabled = $("#identityId").attr("disabled");
+	if("disabled" == identityIdDisabled) {
+		$("#identityId").textbox({disabled : false});
+	}
+	var byNameDisabled = $("#byName").attr("disabled");
+	if("disabled" == byNameDisabled) {
+		$("#byName").textbox({disabled : false});
+	}
+	var addressDisabled = $("#address").attr("disabled");
+	if("disabled" == addressDisabled) {
+		$("#address").textbox({disabled : false});
+	}
+	var entranceDateDisabled = $("#entranceDate").attr("disabled");
+	if("disabled" == entranceDateDisabled) {
+		$("#entranceDate").textbox({disabled : false});
+	}
+	var advisterIdADisabled = $("#advisterIdA").attr("disabled");
+	if("disabled" == advisterIdADisabled) {
+		$("#advisterIdA").combobox({disabled : false});
+	}
+	var advisterIdBDisabled = $("#advisterIdB").attr("disabled");
+	if("disabled" == advisterIdBDisabled) {
+		$("#advisterIdB").combobox({disabled : false});
+	}
+	var dutyAdvisterDisabled = $("#dutyAdvister").attr("disabled");
+	if("disabled" == dutyAdvisterDisabled) {
+		$("#dutyAdvister").combobox({disabled : false});
+	}
+	var carerDisabled = $("#carer").attr("disabled"); 
+	if("disabled" == carerDisabled) {
+		$("#carer").combobox({disabled : false});
+	}
+	var obj = JSON.stringify($("#studentFm").serializeObject());
+	nameDisabled = $("#name").attr("disabled");
+	if(nameDisabled == "" || nameDisabled == null || nameDisabled == undefined) {
+		$("#name").textbox({disabled : true});
+	}
+	birthdayDisabled = $("#birthday").attr("disabled");
+	if(birthdayDisabled == "" || birthdayDisabled == null || birthdayDisabled == undefined) {
+		$("#birthday").textbox({disabled : true});
+	}
+	sexDisabled = $(".sex").attr("disabled");
+	if(sexDisabled == "" || sexDisabled == null || sexDisabled == undefined) {
+		$(".sex").attr("disabled", "disabled");
+	}
+	identityTypeDisabled = $("#identityType").attr("disabled");
+	if(identityTypeDisabled == "" || identityTypeDisabled == null || identityTypeDisabled == undefined) {
+		$("#identityType").combobox({disabled : true});
+	}
+	identityIdDisabled = $("#identityId").attr("disabled");
+	if(identityIdDisabled == "" || identityIdDisabled == null || identityIdDisabled == undefined) {
+		$("#identityId").textbox({disabled : true});
+	}
+	byNameDisabled = $("#byName").attr("disabled");
+	if(byNameDisabled == "" || byNameDisabled == null || byNameDisabled == undefined) {
+		$("#byName").textbox({disabled : true});
+	}
+	addressDisabled = $("#address").attr("disabled");
+	if(addressDisabled == "" || addressDisabled == null || addressDisabled == undefined) {
+		$("#address").textbox({disabled : true});
+	}
+	entranceDateDisabled = $("#entranceDate").attr("disabled");
+	if(entranceDateDisabled == "" || entranceDateDisabled == null || entranceDateDisabled == undefined) {
+		$("#entranceDate").textbox({disabled : true});
+	}
+	advisterIdADisabled = $("#advisterIdA").attr("disabled");
+	if(advisterIdADisabled == "" || advisterIdADisabled == null || advisterIdADisabled == undefined) {
+		$("#advisterIdA").combobox({disabled : true});
+	}
+	advisterIdBDisabled = $("#advisterIdB").attr("disabled");
+	if(advisterIdBDisabled == "" || advisterIdBDisabled == null || advisterIdBDisabled == undefined) {
+		$("#advisterIdB").combobox({disabled : true});
+	}
+	dutyAdvisterDisabled = $("#dutyAdvister").attr("disabled");
+	if(dutyAdvisterDisabled == "" || dutyAdvisterDisabled == null || dutyAdvisterDisabled == undefined) {
+		$("#dutyAdvister").combobox({disabled : true});
+	}
+	var carerDisabled = $("#carer").attr("disabled"); 
+	if(carerDisabled == "" || carerDisabled == null || carerDisabled == undefined) {
+		$("#carer").combobox({disabled : true});
+	}
+	return obj;
 }
