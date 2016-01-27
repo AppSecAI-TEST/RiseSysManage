@@ -76,8 +76,8 @@
 			</thead>
 		</table>
 		<div id="toolbar" style="padding: 2px;height:auto;">
-   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="addClassManage()"><span>排课管理</span></a>
- 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" style="width:100px;" onclick="cancleDemoClass()"><span>取消排课</span></a>
+   			<a href="javascript:void(0)" id="manage" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="addClassManage()"><span>排课管理</span></a>
+ 			<a href="javascript:void(0)" id="cancel"class="easyui-linkbutton" iconCls="icon-remove" style="width:100px;" onclick="cancleDemoClass()"><span>取消排课</span></a>
 			</div>
 		</div>
 		<script type="text/javascript">
