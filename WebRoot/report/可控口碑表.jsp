@@ -46,7 +46,6 @@
 							<th field="studentName" align="center" width="8%">学员姓名</th>
 							<th field="amount" align="center" width="8%">缴费金额</th>
 							<th field=channelName align="center" width="10%">来源渠道</th>
-							<th field="actType" align="center" width="10%">活动类型</th>
 							<th field="activityDate" align="center" width="10%">活动时间</th>
 							<th field="activityName" align="center" width="10%">活动名称</th>
 							<th field="teacherName" align="center" width="15%">老师</th>

@@ -75,7 +75,7 @@ $(document).ready(function() {
     				var content = "<tr><td align='center'><span>"+activityArray[i].title+"</span></td>";
     				content += "<td align='center'><span>"+activityArray[i].activityDate+"</span></td>";
     				content += "<td align='center'><span>"+activityArray[i].award+"</span></td>";
-    				content += "<td align='center'><span></span></td>";
+    				content += "<td align='center'><span>"+activityArray[i].gift+"</span></td>";
     				content += "<td align='center'>"+activityArray[i].remark+"</td></tr>";
     				$("#activityTd tr:eq("+activityTd+")").after(content);
     				activityTd += 1;

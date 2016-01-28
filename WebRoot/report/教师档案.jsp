@@ -77,7 +77,7 @@
 	  			</table>
   			</form>
 			<div style="padding:5px 0;">
-				<table class="easyui-datagrid" title="查询结果" style="min-height: 435px" id="list_data" 
+				<table class="easyui-datagrid" title="查询结果" style="height: 435px" id="list_data" 
 				  		toolbar="#toolbar" pagination="false" rownumbers="false" fitColumns="true">
 					<thead>
 						<tr>

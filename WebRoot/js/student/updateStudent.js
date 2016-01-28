@@ -105,8 +105,8 @@ $(document).ready(function() {
     				var content = "<tr><td align='center' width='150px'><span>"+activityArray[i].title+"</span></td>";
     				content += "<td align='center' width='100px'><span>"+activityArray[i].activityDate+"</span></td>";
     				content += "<td align='center' width='150px'><span>"+activityArray[i].award+"</span></td>";
-    				content += "<td align='center' width='300px'><span>"+activityArray[i].remark+"</span></td>";
-    				content += "<td align='center' width='363px'><span>"+activityArray[i].gift+"</span></td>";
+    				content += "<td align='center' width='200px'><span>"+activityArray[i].gift+"</span></td>";
+    				content += "<td align='center' width='463px'><span>"+activityArray[i].remark+"</span></td>";
     				content += "<td align='center' width='80px'><a href='javascript:void(0)' class='linkmore' onclick='deleteActivity(this, "+activityArray[i].activityId+")'><span>删除</span></a></td></tr>";
     				$("#activityTd tr:eq("+activityTd+")").after(content);
     				activityTd += 1;

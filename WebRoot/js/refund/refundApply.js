@@ -522,8 +522,11 @@ function checkParam() {
 				return false;
 			}
 		} else {
-			$.messager.alert('提示', "请输入申请退费的其他原因！");
-			return false;
+			var otherReason = $("#otherReason").textbox("getValue");
+			if(otherReason == null || otherReason == "" || otherReason == undefined || otherReason == "null") {
+				$.messager.alert('提示', "请输入申请退费的其他原因！");
+				return false;
+			}
 		}
 	}
 	var visitPersonOne = $("input:radio[name='visitPersonOne']:checked").val();

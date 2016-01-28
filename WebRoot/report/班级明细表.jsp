@@ -91,9 +91,9 @@
 						<tr>
 							<th field="quarterText" align="center" width="5%">季度</th>
 							<th field="seq" align="center" width="5%">序号</th>
-							<th field="className" align="center" width="5%">结课班级</th>
+							<th field="className" align="center" width="7%">结课班级</th> 
 							<th field="licenseRateText" align="center" width="6%">班级持证率</th>
-							<th field="teacherName" align="center" width="8%">带班老师</th>
+							<th field="teacherName" align="center" width="10%">带班老师</th>
 							<th field="finishMonth" align="center" width="5%">结课月</th>
 							<th field="openClassNum" align="center" width="6%">开班人数</th>
 							<th field="inSchoolNum" align="center" width="6%">转校转入</th>
