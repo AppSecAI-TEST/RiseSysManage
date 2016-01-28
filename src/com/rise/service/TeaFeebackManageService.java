@@ -1,8 +1,11 @@
 package com.rise.service;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.stereotype.Service;
 
 import com.rise.pub.invoke.ServiceEngine;
+import com.rise.pub.util.ObjectCensor;
 
 @Service
 public class TeaFeebackManageService {
@@ -29,6 +32,29 @@ public class TeaFeebackManageService {
 	public String updateTeachingFeedback(String json)throws Exception {
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS4204\",securityCode:\"0000000000\",params:{json:'"+json+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
+	}
+
+	//教质回访名单报表查询
+	public String qryDataListByPage(String page, String rows, String param, String funcNodeId)throws Exception{
+		JSONObject obj = new JSONObject();
+		if(ObjectCensor.isStrRegular(param))
+		{
+			obj = JSONObject.fromObject(param);
+		}
+		if(ObjectCensor.isStrRegular(page,rows))
+		{
+			Integer pageNum = Integer.parseInt(page) - 1;
+			Integer pageSize = Integer.parseInt(rows);
+			pageNum = pageNum * pageSize;
+			obj.element("start", pageNum);
+			obj.element("rownum", pageSize);
+		}
+		if(ObjectCensor.isStrRegular(funcNodeId))
+		{
+			obj.element("funcNodeId", funcNodeId);
+		}
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS4205\",securityCode:\"0000000000\",params:{param:"+obj+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
 	}
 	
 }
