@@ -14,6 +14,7 @@
   	<body style="padding-top:5px">
   		<form id="qryFm" style="margin:0 auto;">
   			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
+  			<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
   			<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
   				<tr>
   					<td align="right" style="min-width: 70px;"><span>校区：</span></td>

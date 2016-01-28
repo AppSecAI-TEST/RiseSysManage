@@ -17,7 +17,7 @@
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="班级维护">
   			<div style="margin-left: 10px; margin-bottom: 5px; margin-top: 5px;">
 		  		<a href="javascript:void(0)" onclick="viewChangeTeacherHist()" class="easyui-linkbutton" iconCls="icon-redo" style="width: 120px;">老师变更历史</a>
-		  		<a href="javascript:void(0)" onclick="" class="easyui-linkbutton" iconCls="icon-redo" style="width: 120px;">浏览排课考勤</a>
+		  		<a href="javascript:void(0)" onclick="viewClassAttendInfo()" class="easyui-linkbutton" iconCls="icon-redo" style="width: 120px;">浏览排课考勤</a>
 	  		</div>
   			<form id="maintenanceClassFm">
   				<input type="hidden" id="oldTeacherName" name="oldTeacherName"/>
@@ -28,6 +28,7 @@
   				<input type="hidden" id="className" name="className" value="${obj.attendClassObj.className }"/>
   				<input type="hidden" id="classInstId" name="classInstId" value="${obj.attendClassObj.classInstId }"/>
   				<input type="hidden" id="classProgress" name="classProgress" value="${obj.attendClassObj.classProgress }"/>
+  				<input type="hidden" id="funcNodeId" name="funcNodeId" value="${funcNodeId}" />
   				<div class="easyui-panel" style="min-width:1100px; width:100%; height:auto;" title="班级信息">
 		  			<table width="99.99%" cellpadding="5px" class="maintable">
 		  				<tr>
@@ -123,7 +124,7 @@
 		  				<tr>
 		  					<td colspan="6" align="right">
 		  						<a href="javascript:void(0)" id="maintenanceClassSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-			      				&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+			      				&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.location.href='/sys/attendClass/attendClassList.jsp?funcNodeId=${funcNodeId}'">返回</a>
 			      				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		  					</td>
 		  				</tr>

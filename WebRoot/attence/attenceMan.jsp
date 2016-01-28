@@ -317,7 +317,7 @@
 				if (row)
 				{
 					ajaxLoading("正在处理，请稍待。。。");
-					window.location.href = "/sys/attend/getAttenceCalendarView.do?funcNodeId=${param.funcNodeId}&classInstId="+row.classInstId;
+					window.location.href = "/sys/attend/getAttenceCalendarView.do?funcNodeId=${param.funcNodeId}&classInstId="+row.classInstId+"&flag=attend";
 				}
 				else
 				{

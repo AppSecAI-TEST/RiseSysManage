@@ -236,12 +236,12 @@ public class ClassAttendController
 	}
 	
 	@RequestMapping("/getAttenceCalendarView.do")
-	public ModelAndView getAttenceCalendarView(String classInstId , String year , String month , String funcNodeId)
+	public ModelAndView getAttenceCalendarView(String classInstId , String year , String month , String funcNodeId , String flag)
 	{
 		ModelAndView model = new ModelAndView("attence/attenceCalendarView");
 		try 
 		{
-			classAttendService.getAttenceCalendarView(model, classInstId, year, month, funcNodeId);
+			classAttendService.getAttenceCalendarView(model, classInstId, year, month, funcNodeId, flag);
 		}
 		catch (Exception e) 
 		{

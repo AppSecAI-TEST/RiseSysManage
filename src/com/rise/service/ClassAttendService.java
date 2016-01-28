@@ -189,7 +189,7 @@ public class ClassAttendService
 		return ServiceEngine.invokeHttp(param);
 	}
 	
-	public void getAttenceCalendarView(ModelAndView model , String classInstId , String year , String month , String funcNodeId) throws Exception
+	public void getAttenceCalendarView(ModelAndView model , String classInstId , String year , String month , String funcNodeId , String flag) throws Exception
 	{
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20410\",securityCode:\"0000000000\",params:{classInstId:\""+classInstId+"\",year:\""+year+"\",month:\""+month+"\"},rtnDataFormatType:\"user-defined\"}";
 		String result = ServiceEngine.invokeHttp(param);
@@ -205,6 +205,7 @@ public class ClassAttendService
 			model.addObject("month", StringUtil.getJSONObjectKeyVal(json, "month"));
 			model.addObject("classInstId", classInstId);
 			model.addObject("funcNodeId", funcNodeId);
+			model.addObject("flag",flag);
 		}catch(Exception err){
 			err.printStackTrace();
 			model.addObject("errorInfo", err.getMessage());

@@ -14,13 +14,17 @@
 			function viewChangeTeacherHist() {
 				$("#histDlg").dialog("open").dialog("setTitle", "老师变更历史");//设定表头  
 			}
+			function viewClassAttendInfo(){
+				ajaxLoading("正在处理，请稍待。。。");
+				window.location.href = "/sys/attend/getAttenceCalendarView.do?funcNodeId=${funcNodeId}&classInstId=${obj.attendClassObj.classInstId}&flag=viewFinish";
+			}
 		</script>
   	</head>
   
   	<body>
   		<div style="margin-left: 10px; margin-bottom: 5px; margin-top: 5px;">
 		  	<a href="javascript:void(0)" onclick="viewChangeTeacherHist()" class="easyui-linkbutton" iconCls="icon-redo" style="width: 120px;">老师变更历史</a>
-		  	<a href="javascript:void(0)" onclick="" class="easyui-linkbutton" iconCls="icon-redo" style="width: 120px;">浏览排课考勤</a>
+		  	<a href="javascript:void(0)" onclick="viewClassAttendInfo()" class="easyui-linkbutton" iconCls="icon-redo" style="width: 120px;">浏览排课考勤</a>
 	  	</div>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="班级结课">
   			<form id="finishClassFm">

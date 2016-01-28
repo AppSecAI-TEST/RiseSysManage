@@ -258,7 +258,14 @@
 			}
 			function backFunc()
 			{
-				window.location.href = "/sys/attence/attenceMan.jsp?funcNodeId=${funcNodeId}";
+				if("${flag}" == "attend")
+				{
+					window.location.href = "/sys/attence/attenceMan.jsp?funcNodeId=${funcNodeId}";
+				}
+				else
+				{
+					window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId=${classInstId}&type=${flag}";
+				}
 			}
 		</script>
  	</body>

@@ -29,7 +29,7 @@ public class AttendClassController
 	private AttendClassService attendClassService;
 	
 	@RequestMapping(value = "/qryAttendClass.do")
-	public ModelAndView qryAttendClass(String classInstId, String type)
+	public ModelAndView qryAttendClass(String classInstId, String type, String funcNodeId)
 	{
 		log.error(classInstId);
 		ModelAndView view = null;
@@ -54,6 +54,7 @@ public class AttendClassController
 			JSONObject obj = JSONObject.fromObject(retVal);
 			log.error(obj);
 			view.addObject("obj", obj);
+			view.addObject("funcNodeId", funcNodeId);
 		} 
 		catch (Exception e) 
 		{

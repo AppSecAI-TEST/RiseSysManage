@@ -490,6 +490,11 @@ function viewChangeTeacherHist() {
 	$("#histDlg").dialog('open').dialog('setTitle', '老师变更历史');//设定表头  
 }
 
+function viewClassAttendInfo(){
+	ajaxLoading("正在处理，请稍待。。。");
+	window.location.href = "/sys/attend/getAttenceCalendarView.do?funcNodeId="+$("#funcNodeId").val()+"&classInstId="+$("#classInstId").val()+"&flag=maintenance";
+}
+
 //添加代班老师
 function addTeacher(obj) {
 	var content = "";

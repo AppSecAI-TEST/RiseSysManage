@@ -78,7 +78,7 @@ $(document).ready(function() {
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) {
 			var classInstId = row.classInstId;
-			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=maintenance";
+			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=maintenance&funcNodeId="+$("#funcNodeId").val();
 		} else {
 			$.messager.alert('提示', "请先选择您要维护的班级！");
 		}
