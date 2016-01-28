@@ -184,7 +184,7 @@
 				$("#schoolManId").combobox("loadData",data);
 				$("#schoolHisId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID",function(data){
+			$.post("<%=path %>/pubData/qryStage.do",function(data){
 				$("#classManPharse").combobox("loadData",data);
 				$("#classHisPharse").combobox("loadData",data);
 			},"json");
@@ -215,9 +215,9 @@
 					}
 				});
 				$("#classManPharse").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
+					formatter:formatStageId, 
+					valueField: 'stageId', 
+					textField: 'stageId', 
 					panelHeight: 'auto'
 				});
 				$("#classManState").combobox({
@@ -248,9 +248,9 @@
 					}
 				});
 				$("#classHisPharse").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
+					formatter:formatStageId, 
+					valueField: 'stageId', 
+					textField: 'stageId', 
 					panelHeight: 'auto'
 				});
 				$("#classHis").combobox({

@@ -42,9 +42,9 @@
 					<td align="center">${status.count}</td>
 					<td align="center">${teachingPlan.className}</td>
 					<td align="center"><div id="teaDiv${status.index}"><input id="teachingDate${status.index}" dateVal="${teachingPlan.teachingDate}" class="easyui-numberbox" status="${status.index}" style='width:100px;' /></div></td>
-					<td align="center"><div id="meetDiv${status.index}"><input id="meetingDate${status.index}" dateVal="${teachingPlan.meetingDate}" class="easyui-numberbox" status="${status.index}" style='width:100px;' /></div></td>
-					<td align="center"><div id="openDiv${status.index}"><input id="openClassDate${status.index}" dateVal="${teachingPlan.openClassDate}" class="easyui-numberbox" status="${status.index}"  style='width:100px;' /></div></td>
-					<td align="center"><div id="gradDiv${status.index}"><input id="gradDate${status.index}" dateVal="${teachingPlan.gradDate}" class="easyui-numberbox" status="${status.index}"  style='width:100px;' /></div></td>
+					<td align="center"><div id="meetDiv${status.index}"><input id="meetingDate${status.index}" dateVal="${teachingPlan.meetingDate}" class="easyui-numberbox" dateNum="" status="${status.index}" data-options="events:{blur: function(){clearOthers(${status.index},'meetingDate','openClassDate','gradDate')},focus: function(){saveCurrentNum(${status.index},'meetingDate')}}" style='width:100px;' /></div></td>
+					<td align="center"><div id="openDiv${status.index}"><input id="openClassDate${status.index}" dateVal="${teachingPlan.openClassDate}" class="easyui-numberbox" dateNum="" status="${status.index}" data-options="events:{blur: function(){clearOthers(${status.index},'openClassDate','meetingDate','gradDate')},focus: function(){saveCurrentNum(${status.index},'openClassDate')}}" style='width:100px;' /></div></td>
+					<td align="center"><div id="gradDiv${status.index}"><input id="gradDate${status.index}" dateVal="${teachingPlan.gradDate}" class="easyui-numberbox" dateNum="" status="${status.index}" data-options="events:{blur: function(){clearOthers(${status.index},'gradDate','meetingDate','openClassDate')},focus: function(){saveCurrentNum(${status.index},'gradDate')}}" style='width:100px;' /></div></td>
 					<td align="center"><input name="teachingIsOpen${status.index}" type="radio" status="${status.index}" class="teachingIsOpen" value="Y"/><span>是</span>&nbsp;<input name="teachingIsOpen${status.index}" type="radio" status="${status.index}" class="teachingIsOpen" value="N"/><span>否</span></td>
 					<td align="center"><input id="remark${status.index}" remarkVal="${teachingPlan.remark}" class="easyui-textbox" style="width:250px;" /></td>
 				</tr>
@@ -150,6 +150,20 @@
 			   }
 		   });
    		});
-   		
+   		function clearOthers(index,saveObj,clearObj1,clearObj2)
+		{
+			var currentNum = $("#"+saveObj+index).numberbox("getValue");
+			var dateNum = $("#"+saveObj+index).attr("dateNum");
+			if(currentNum != dateNum){
+				$("#"+clearObj1+index).numberbox('clear');
+				$("#"+clearObj2+index).numberbox('clear');
+			}
+		}
+		function saveCurrentNum(index,saveObj)
+		{
+			var currentNum = $("#"+saveObj+index).numberbox("getValue");
+			$("#"+saveObj+index).attr("dateNum",currentNum);
+			var dateNum = $("#"+saveObj+index).attr("dateNum");
+		}
 	</script>
 </html>

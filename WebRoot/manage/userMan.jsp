@@ -27,13 +27,13 @@
 			<table region="north" class="queryArea" split="true" align="center" style="height:30px;width:100%;min-width:1000px;">
 				<tr>
 					<td align="right">部门:</td>
-					<td><select id="deptId" name="deptId" style="width:100px;height:25px;" ></select></td>
+					<td><select id="deptId" name="deptId" style="width:120px;height:25px;" ></select></td>
 					<td align="right">英文名:</td>
-					<td><input name="userName" id="userName" type="text" style="width:100px;height:25px;" class="easyui-textbox" /></td>
+					<td><input name="userName" id="userName" type="text" style="width:120px;height:25px;" class="easyui-textbox" /></td>
 					<td align="right">职务:</td>
-					<td><select id="post" name="post" style="width:100px;height:25px;" ></select></td>
+					<td><select id="post" name="post" style="width:120px;height:25px;" ></select></td>
 					<td align="right">状态:</td>
-					<td><select id="staffState" name="staffState" style="width:100px;height:25px;" ></select></td>
+					<td><select id="staffState" name="staffState" style="width:120px;height:25px;" ></select></td>
 					<td style="padding-right:20px">
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 80px;" onclick="queryFunc()">查询</a>
 						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 80px;" onclick="resetFunc()">重置</a>
