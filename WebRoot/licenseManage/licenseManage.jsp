@@ -85,8 +85,8 @@
 			</thead>
 		</table>
 		<div id="toolbar" style="padding: 2px;height:auto;">
-   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="locateTeacher()"><span>持证维护</span></a>
- 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" style="width:100px;" onclick="viewTeacherLicense()"><span>浏览</span></a>
+   			<a href="javascript:void(0)" id="toolBtn1" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="locateTeacher()"><span>持证维护</span></a>
+ 			<a href="javascript:void(0)" id="toolBtn2" class="easyui-linkbutton" iconCls="icon-redo" style="width:100px;" onclick="viewTeacherLicense()"><span>浏览</span></a>
  		</div>
  		</div>
   	</body>

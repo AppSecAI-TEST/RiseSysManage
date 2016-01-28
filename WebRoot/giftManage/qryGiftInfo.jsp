@@ -102,10 +102,10 @@
 			</thead>
 		</table>
 		<div id="goodsToolbar" style="padding: 2px;height:auto;">
-   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" style="width:120px;" onclick="locateStu('goods')"><span>实物赠品赠送</span></a>
- 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="getGoodsGift()"><span>赠品领取</span></a>
- 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" style="width:100px;" onclick="rtnGoodsGift()"><span>赠品退回</span></a>
- 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" style="width:100px;" onclick="viewGoodsGift()"><span>浏览</span></a>
+   			<a href="javascript:void(0)" id="toolbtn1" class="easyui-linkbutton" iconCls="icon-add" style="width:120px;" onclick="locateStu('goods')"><span>实物赠品赠送</span></a>
+ 			<a href="javascript:void(0)" id="toolbtn2" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="getGoodsGift()"><span>赠品领取</span></a>
+ 			<a href="javascript:void(0)" id="toolbtn3" class="easyui-linkbutton" iconCls="icon-remove" style="width:100px;" onclick="rtnGoodsGift()"><span>赠品退回</span></a>
+ 			<a href="javascript:void(0)" id="toolbtn4" class="easyui-linkbutton" iconCls="icon-redo" style="width:100px;" onclick="viewGoodsGift()"><span>浏览</span></a>
  		</div>
   	</div>
   	  	<div title="劵类赠品" style="padding:5px;display:block;">

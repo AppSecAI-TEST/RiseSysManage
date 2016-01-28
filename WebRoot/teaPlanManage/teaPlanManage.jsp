@@ -52,9 +52,9 @@
 			</thead>
 		</table>
 		<div id="toolbar" style="padding: 2px;height:auto;">
-   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="addPlan()"><span>创建</span></a>
-   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="updatePlan()"><span>修改</span></a>
- 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" style="width:100px;" onclick="viewPlan()"><span>浏览</span></a>
+   			<a href="javascript:void(0)" id="toolBtn1" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="addPlan()"><span>创建</span></a>
+   			<a href="javascript:void(0)" id="toolBtn2" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="updatePlan()"><span>修改</span></a>
+ 			<a href="javascript:void(0)" id="toolBtn3" class="easyui-linkbutton" iconCls="icon-redo" style="width:100px;" onclick="viewPlan()"><span>浏览</span></a>
  		</div>
  		</div>
  		<script type="text/javascript">

@@ -119,8 +119,8 @@
 			</thead>
 		</table>
 		<div id="toolbar">
-   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" onclick="updateExp()">客户维护</a>
- 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" onclick="viewExpInfo()">浏览</a>
+   			<a href="javascript:void(0)" id="updateBtn" class="easyui-linkbutton" iconCls="icon-edit" onclick="updateExp()">客户维护</a>
+ 			<a href="javascript:void(0)" id="viewBtn" class="easyui-linkbutton" iconCls="icon-redo" onclick="viewExpInfo()">浏览</a>
  		</div>
   	</body>
 </html>

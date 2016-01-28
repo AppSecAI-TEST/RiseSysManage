@@ -94,13 +94,13 @@
 			</thead>
 		</table>
 		<div id="toolbar" style="padding: 2px;height:auto;">
-   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="updateFile()"><span>档案维护</span></a>
-   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="preResign()"><span>预离职</span></a>
-   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="preResignRegain()"><span>预离职复职</span></a>
- 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="resign()"><span>离职</span></a>
- 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="resignRegain()"><span>离职复职</span></a>
- 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="updateOrg()"><span>更换组织</span></a>
- 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" style="width:100px;" onclick="viewTeacherInfo()"><span>浏览</span></a>
+   			<a href="javascript:void(0)" id="toolBtn1" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="updateFile()"><span>档案维护</span></a>
+   			<a href="javascript:void(0)" id="toolBtn2" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="preResign()"><span>预离职</span></a>
+   			<a href="javascript:void(0)" id="toolBtn3" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="preResignRegain()"><span>预离职复职</span></a>
+ 			<a href="javascript:void(0)" id="toolBtn4" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="resign()"><span>离职</span></a>
+ 			<a href="javascript:void(0)" id="toolBtn5" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="resignRegain()"><span>离职复职</span></a>
+ 			<a href="javascript:void(0)" id="toolBtn6" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="updateOrg()"><span>更换组织</span></a>
+ 			<a href="javascript:void(0)" id="toolBtn7" class="easyui-linkbutton" iconCls="icon-redo" style="width:100px;" onclick="viewTeacherInfo()"><span>浏览</span></a>
  		</div>
  		</div>
   	</body>
