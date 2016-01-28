@@ -124,7 +124,7 @@
 				{
 					if(row.classStateName == "未开课" || row.classStateName == "未开课" || row.classStateName == "开课在读" || row.classStateName == "结课")
 					{
-						ajaxLoading("加载中...");
+						ajaxLoading("正在处理，请稍待。。。");
 						window.location.href = "/sys/shortBus/accessShortAttenceDetail.do?funcNodeId=${param.funcNodeId}&pageName=attenceTourismDetail&shortClassInstId="+row.shortClassInstId;
 					}
 					else if(row.classStateName == "解散")
@@ -142,7 +142,7 @@
 				var row = $('#manList').datagrid('getSelected');
 				if (row)
 				{
-					ajaxLoading("加载中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=viewTourismShortClass&classType="+encodeURI("游学");
 				}
 				else

@@ -171,7 +171,7 @@
 						}
 						arr.push(json);
 					}
-					ajaxLoading("选课中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					$.post("/sys/shortBus/addShortStudentTInfo.do",{json:JSON.stringify(arr),classType:encodeURI("热身课"),shortClassInstId:"${param.shortClassInstId}"},function(data){
 						ajaxLoadEnd();
 						if(data == "success")

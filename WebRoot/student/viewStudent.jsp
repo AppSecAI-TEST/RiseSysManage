@@ -78,8 +78,8 @@
   				<tr>
 					<td align="center" width="150px"><span>活动标题</span></td>
 					<td align="center" width="100px"><span>活动时间</span></td>
-					<td align="center" width="150px"><span>获奖情况</span></td>
-					<td align="center" width="543px"><span>奖品赠品</span></td>
+					<td align="center" width="200px"><span>获奖情况</span></td>
+					<td align="center" width="493px"><span>奖品赠品</span></td>
 					<td align="center" width="100px"><span>活动详细</span></td>
 				</tr>
   			</table>

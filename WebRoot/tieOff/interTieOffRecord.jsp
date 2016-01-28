@@ -72,7 +72,7 @@
 				var tieOffTime = $("#tieOffTime").datebox("getValue");
 				if(tieOffTime != "")
 				{
-					ajaxLoading("查询中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					$.post("/sys/incomeFinish/getRecordInfo.do",{monthDate:tieOffTime,incomeFlag:"inter"},function(data){
 						ajaxLoadEnd();
 						var dataObj = null;
@@ -166,7 +166,7 @@
 						}
 						arr.push(obj);
 					});
-					ajaxLoading("提交中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					$.post("/sys/incomeFinish/addIncomeFinishRecord.do",{json:encodeURI(JSON.stringify(arr))},function(data){
 						ajaxLoadEnd();
 						if(data == "success")

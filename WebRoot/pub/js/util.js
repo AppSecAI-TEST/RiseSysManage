@@ -707,7 +707,7 @@ function validateIdCard(obj) {
 
 function checkMobile(mobile) { 
 	var isPhone = /^([0-9]{3,4}-)?[0-9]{7,8}$/;
-	var isMob = /^((\+?86)|(\(\+86\)))?(13[012356789][0-9]{8}|15[012356789][0-9]{8}|18[02356789][0-9]{8}|147[0-9]{8}|1349[0-9]{7})$/;
+	var isMob = /^(13[0-9]|14[0-9]|15[0-9]|18[0-9]|177)\d{8}$/;
 	if(isMob.test(mobile) || isPhone.test(mobile)) {
 		return true;
 	} else{

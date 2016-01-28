@@ -41,7 +41,7 @@
 	      				<td align="right" width="114px"><span style="color: red;">*</span><span>学员姓名：</span></td>
 	      				<td>
 	      					<div id="nameDiv">
-		      					<input name="name" id="name" type="text" class="easyui-textbox validatebox" required="true" style="width: 100px; height: 25px;"/>
+		      					<input name="name" id="name" type="text" class="easyui-textbox validatebox" validType="length[0,15]" required="true" style="width: 100px; height: 25px;"/>
 	      					</div>
 	      					<span id="nameText" style="display: none;"></span>
 	      				</td>
@@ -198,13 +198,14 @@
       		<form id="activityFm">
       			<table width="100%" cellpadding="5px" class="maintable" id="activityTd">
 					<tr>
-						<td align="center"><span>活动标题</span></td>
-						<td align="center"><span>活动时间</span></td>
-						<td align="center"><span>获奖情况</span></td>
-						<td align="center"><span>活动详细</span></td>
-						<td align="center"><span>操作</span></td>
+						<td align="center" width="150px"><span>活动标题</span></td>
+						<td align="center" width="100px"><span>活动时间</span></td>
+						<td align="center" width="150px"><span>获奖情况</span></td>
+						<td align="center" width="200px"><span>奖品赠品</span></td>
+						<td align="center" width="463px"><span>活动详细</span></td>
+						<td align="center" width="80px"><span>操作</span></td>
 					</tr>
-					<tr>
+					<tr style="display: none;">
 						<td align="center" width="150px">
 							<input id="title" type="text" class="easyui-textbox" style="width: 150px; height: 25px;" required="true"/>
 						</td>
@@ -224,10 +225,11 @@
 				</table>
       		</form>
       	</div>
-      		
-      	<div style="margin-top: 20px;min-width:1100px; width:100%;">
-	      	<a href="javascript:void(0)" id="updateSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 25px;">提交</a>
-	      	&nbsp;&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 25px;" onclick="javascript:window.history.back()">返回</a>
-		</div>
+      	<div style="margin-top: 25px;min-width:1100px; width:99%;">
+      		<div style="float: left;margin-left: 800px;">
+		      	<a href="javascript:void(0)" id="updateSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 25px;">提交</a>
+		      	&nbsp;&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 25px;" onclick="javascript:window.history.back()">返回</a>
+      		</div>
+      	</div>
   	</body>
 </html>

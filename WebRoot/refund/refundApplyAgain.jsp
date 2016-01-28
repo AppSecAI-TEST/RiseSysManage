@@ -159,7 +159,7 @@
 	  				<tr>
 	  					<td align="right" width="8%"><span>退费备注：</span></td>
   						<td colspan="9" width="92%">
-  							<textarea rows="4" cols="122" id="remark" name="remark" required="true" class="easyui-validatebox textbox">${obj.refundFeeObj.remark }</textarea>
+  							<textarea rows="4" cols="122" id="remark" name="remark" class="easyui-validatebox textbox">${obj.refundFeeObj.remark }</textarea>
   						</td>
 	  				</tr>
   				</table>

@@ -161,7 +161,7 @@
 		    </div>
 		</div>
 		<script type="text/javascript">
-			ajaxLoading("加载中...");
+			ajaxLoading("正在处理，请稍待。。。");
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=810&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
 				$("#schoolHisId").combobox("loadData",data);
@@ -262,7 +262,7 @@
 				var row = $('#manList').datagrid('getSelected');
 				if (row)
 				{
-					ajaxLoading("加载中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					window.location.href = "/sys/shortBus/shortAttenceDetailPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=shortAttenceWarmUpDetail";
 				}
 				else
@@ -275,7 +275,7 @@
 				var row = $("#manList").datagrid("getSelected");
 				if(row)
 				{
-					ajaxLoading("加载中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=viewWarmupShortClass";
 				}
 				else
@@ -315,7 +315,7 @@
 				var row = $("#hisList").datagrid("getSelected");
 				if(row)
 				{
-					ajaxLoading("加载中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=viewWarmupShortClass";
 				}
 				else

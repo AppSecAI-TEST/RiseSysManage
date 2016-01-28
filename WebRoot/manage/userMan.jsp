@@ -63,7 +63,7 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-			ajaxLoading("加载中...");
+			ajaxLoading("正在处理，请稍待。。。");
 			$("#deptTree").tree({
 				url:'/sys/orgDept/getSubOrgDeptList.do',
 				lines:true,

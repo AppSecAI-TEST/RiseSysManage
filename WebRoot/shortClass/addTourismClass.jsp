@@ -131,7 +131,7 @@
 						{
 							$("#emptyTeacher").remove();
 						}
-						ajaxLoading("添加中...");
+						ajaxLoading("正在处理，请稍待。。。");
 						$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:teacherId},function(data){
 							ajaxLoadEnd();
 							var trData = "<tr id='teacherId"+data.teacherId+"' class='teacherId'><td align='center' width='15%' teacherId='"+data.teacherId+"' schoolId='"+data.schoolId+"'>"+$("#schoolId").combobox("getText")+"</td><td align='center' width='15%'>"+$("#teacherId").combobox("getText")+"</td><td align='left' width='70%' style='padding-left:30px'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
@@ -226,7 +226,7 @@
 						arr.push(obj);
 					});
 					json.teacherList = arr;
-					ajaxLoading("放班中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					$.post("/sys/shortBus/addTourismClassInfo.do",{json:JSON.stringify(json)},function(data){
 						ajaxLoadEnd();
 						if(data == "success")

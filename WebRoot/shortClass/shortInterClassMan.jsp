@@ -161,7 +161,7 @@
 						finishDate:classEndTime,
 						handlerId:${sessionScope.StaffT.staffId}
 					};
-					ajaxLoading("修改中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					$.post("/sys/shortBus/updateShortClassInstTInfo.do",{json:JSON.stringify(json)},function(data){
 						ajaxLoadEnd();
 						if(data == "success")
@@ -179,7 +179,7 @@
 			}
 			function addPlanFunc()
 			{
-				ajaxLoading("加载中...");
+				ajaxLoading("正在处理，请稍待。。。");
 				window.location.href = "/sys/shortClass/addSchooltimeClass.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortInterClassMan&classType=国际班&schoolId=${shortClassInstT.schoolId}&paramFlag=UPDATE";
 			}
 			function studentBoxFunc(obj)
@@ -192,7 +192,7 @@
 			{
 				$.messager.confirm("提示", "您确定要删除该上课计划吗？", function (data) {
 		            if(data){
-		            	ajaxLoading("删除中...");
+		            	ajaxLoading("正在处理，请稍待。。。");
 		                $.post("/sys/shortBus/delShortSchooltimeTInfo.do",{shortSchooltimeId:val},function(data){
 		                	ajaxLoadEnd();
 		                	if(data == "success")
@@ -213,7 +213,7 @@
 			}
 			function selectClassFunc()
 			{
-				ajaxLoading("加载中...");
+				ajaxLoading("正在处理，请稍待。。。");
 				window.location.href = "/sys/shortClass/choiceInterClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortInterClassMan&classType="+encodeURI("国际班");
 			}
 			function removeClassFunc()
@@ -233,7 +233,7 @@
 				{
 					$.messager.confirm("提示", "您确定要移除所勾选的学员吗？", function (data) {
 			            if(data){
-			            	ajaxLoading("移除中...");
+			            	ajaxLoading("正在处理，请稍待。。。");
 			                $.post("/sys/shortBus/delShortStudentList.do",{shortClassInstId:${shortClassInstT.shortClassInstId},studentIds:stuArr.join(","),handlerId:${sessionScope.StaffT.staffId}},function(data){
 			                	ajaxLoadEnd();
 			                	if(data == "success")

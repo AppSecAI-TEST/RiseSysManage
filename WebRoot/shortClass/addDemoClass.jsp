@@ -161,7 +161,7 @@
 					});
 					if(teacherFlag)
 					{
-						ajaxLoading("添加中...");
+						ajaxLoading("正在处理，请稍待。。。");
 						$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:teacherId},function(data){
 							ajaxLoadEnd();
 							var trData = "<tr id='teacherId"+data.teacherId+"' class='teacherId'><td align='right' teacherId='"+data.teacherId+"' teacherName='"+$("#teacherId").combobox("getText")+"' teacherType='"+$("#teacherType").combobox("getText")+"' schoolId='"+data.schoolId+"'>老师：</td><td align='center'>"+$("#schoolId").combobox("getText")+"</td><td align='center'>"+$("#teacherId").combobox("getText")+"</td><td align='center'>"+$("#teacherType").combobox("getText")+"</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
@@ -227,7 +227,7 @@
 						handlerId:${sessionScope.StaffT.staffId},
 						classTeacherList:arr
 					};
-					ajaxLoading("排课中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					$.post("/sys/shortBus/addDirectShortClassInstInfo.do",{json:JSON.stringify(json),classType:encodeURI("DEMO"),schoolId:${sessionScope.StaffT.schoolId},stageId:""},function(data){
 						ajaxLoadEnd();
 						if(data == "success")

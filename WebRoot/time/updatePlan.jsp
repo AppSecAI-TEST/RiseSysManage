@@ -108,6 +108,7 @@ $("#refreshPlan").click(function()
     	{
     		$.messager.progress('close');
     		showMessage('提示', "刷新排课成功", null);
+    		plan();
          },
         error:function()
         {

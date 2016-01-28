@@ -84,7 +84,7 @@
 					}
 				});
 				$("#checkAll").attr("checked",isAllSelect);
-				ajaxLoading("加载中...");
+				ajaxLoading("正在处理，请稍待。。。");
 				$.ajax({
 					url:"/sys/orgDept/getRootOrgDept.do",
 					type:"POST",

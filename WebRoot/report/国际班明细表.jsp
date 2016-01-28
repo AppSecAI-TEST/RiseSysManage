@@ -98,7 +98,7 @@
 			<a href="javascript:void(0)" id="exportBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="exportFunc()">导出全部</a>
 		</div>
 		<script type="text/javascript">
-			ajaxLoading("加载中...");
+			ajaxLoading("正在处理，请稍待。。。");
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=852&fieldId=schoolId",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");

@@ -216,7 +216,7 @@
 								var objArr = classAttendIdArr[i].split("~");
 								if(objArr.length > 1 && objArr[1]==data.paramValue)
 								{
-									ajaxLoading("加载中...");
+									ajaxLoading("正在处理，请稍待。。。");
 									window.location.href = "/sys/attend/getUpdateAttenceRecord.do?funcNodeId=${funcNodeId}&classAttendId="+objArr[0]+"&classAttendIds="+attendArr.join("#")+"&schooltimeInstIds="+schooltimeArr.join("#")+"&selDateStr=<fmt:formatDate value='${classAttendT.attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${classAttendT.attendDate}' pattern='dd' />";
 									return ;
 								}
@@ -230,13 +230,13 @@
 								var objArr = schooltimeInstIdArr[i].split("~");
 								if(objArr.length > 1 && objArr[1]==data.paramValue)
 								{
-									ajaxLoading("加载中...");
+									ajaxLoading("正在处理，请稍待。。。");
 									window.location.href = "/sys/attend/getAttenceRecord.do?funcNodeId=${funcNodeId}&schooltimeInstId="+objArr[0]+"&selDateStr=<fmt:formatDate value='${classAttendT.attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${classAttendT.attendDate}' pattern='dd' />";
 									return ;
 								}
 							}
 						}
-						ajaxLoading("加载中...");
+						ajaxLoading("正在处理，请稍待。。。");
 						window.location.href = "/sys/attend/getAttenceRecordInst.do?funcNodeId=${funcNodeId}&classInstId=${classAttendT.classInstId}&hourRange="+data.paramValue+"&selDateStr=<fmt:formatDate value='${classAttendT.attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${classAttendT.attendDate}' pattern='dd' />";
 					}
 				});
@@ -346,7 +346,7 @@
 					}
 					if(teacherFlag)
 					{
-						ajaxLoading("添加中...");
+						ajaxLoading("正在处理，请稍待。。。");
 						$.post("/sys/teacherManage/getTeacherInfo.do",{teacherId:attRecordTeacherId},function(data){
 							ajaxLoadEnd();
 							var trData = "<tr id='teacherId"+data.teacherId+"'><td align='right' teacherId='"+data.teacherId+"' teacherName='"+$("#attRecordTeacherId").combobox("getText")+"' teacherType='"+$("#attRecordClassType").combobox("getText")+"' hours='"+attRecordLessonHour+"'>老师：</td><td align='center'>"+$("#attRecordSchoolId").combobox("getText")+"</td><td align='center'>"+$("#attRecordTeacherId").combobox("getText")+"</td><td align='center'>"+$("#attRecordClassType").combobox("getText")+"</td><td align='center'>"+attRecordLessonHour+"</td><td align='center'>";
@@ -480,7 +480,7 @@
 				else
 				{
 					var json = JSON.stringify(obj);
-					ajaxLoading("修改中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					$.post("/sys/attend/updateAttend.do",{json:json},function(data){
 						ajaxLoadEnd();
 						if(data == "success")

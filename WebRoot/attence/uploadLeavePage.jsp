@@ -98,7 +98,7 @@
 			});
 			function uploadLevelFunc(attId)
 			{
-				ajaxLoading("加载中...");
+				ajaxLoading("正在处理，请稍待。。。");
 				window.location.href = "/sys/attend/uploadLeaveDetailPage.do?classAttendId="+attId+"&funcNodeId=${funcNodeId}&studentId=${studentId}";
 			}
 			function backFunc()

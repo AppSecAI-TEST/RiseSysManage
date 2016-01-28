@@ -75,7 +75,7 @@
 			</table>
 		</div>
 		<script type="text/javascript">
-			ajaxLoading("加载中...");
+			ajaxLoading("正在处理，请稍待。。。");
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=821&fieldId=schoolId",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");

@@ -92,14 +92,14 @@
 			var gClassAttend = null;
 			function addAttenceFunc()
 			{
-				ajaxLoading("加载中...");
+				ajaxLoading("正在处理，请稍待。。。");
 				window.location.href = "/sys/shortBus/tourismAttenceRecordPage.do?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}";
 			}
 			function updateAttenceFunc()
 			{
 				if (gClassAttend != null)
 				{
-					ajaxLoading("加载中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					window.location.href =  "/sys/shortBus/tourismAttenceRecUpdatePage.do?funcNodeId=${funcNodeId}&shortClassAttendId="+gClassAttend.value;
 				}
 				else
@@ -111,7 +111,7 @@
 			{
 				if (gClassAttend != null)
 				{
-					ajaxLoading("加载中...");
+					ajaxLoading("正在处理，请稍待。。。");
 					window.location.href =  "/sys/shortBus/shortTourismAttenceViewPage.do?funcNodeId=${funcNodeId}&shortClassAttendId="+gClassAttend.value;
 				}
 				else

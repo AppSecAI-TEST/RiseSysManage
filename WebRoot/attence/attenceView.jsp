@@ -182,14 +182,14 @@
 				$("#classAttendInfo").datagrid({
 					data:dataObj,
 					onClickRow:function(rowIndex, rowData){
-				    	ajaxLoading("加载中...");
+				    	ajaxLoading("正在处理，请稍待。。。");
 						window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+rowData.classAttendId+"&funcNodeId=${funcNodeId}&selDateStr="+$("#selDateStr").html()+"&&classInstId=${classInstId}";
 				    }
 				});
 			});
 			function gotoAttendView(classAttendId)
 			{
-				ajaxLoading("加载中...");
+				ajaxLoading("正在处理，请稍待。。。");
 				window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+classAttendId+"&funcNodeId=${funcNodeId}&selDateStr="+$("#selDateStr").html()+"&classInstId=${classInstId}&comeFlag=attenceView";
 			}
 			function backFunc()

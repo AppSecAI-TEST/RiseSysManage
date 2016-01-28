@@ -168,7 +168,7 @@
 				});
 				obj.studentList = studentArr;
 				var json = JSON.stringify(obj);
-				ajaxLoading("提交中...");
+				ajaxLoading("正在处理，请稍待。。。");
 				$.post("/sys/attend/uploadLeaveOper.do",{json:json},function(data){
 					ajaxLoadEnd();
 					if(data == "success")

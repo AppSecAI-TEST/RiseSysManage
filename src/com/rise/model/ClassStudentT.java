@@ -23,6 +23,8 @@ public class ClassStudentT {
 
     private Integer schoolId;
     
+    private Integer isStudentOverNum;
+    
     private StudentT studentT;
     
 	private StudentCourseT studentCourseT;
@@ -106,6 +108,14 @@ public class ClassStudentT {
     public void setSchoolId(Integer schoolId) {
         this.schoolId = schoolId;
     }
+    
+	public Integer getIsStudentOverNum() {
+		return isStudentOverNum;
+	}
+
+	public void setIsStudentOverNum(Integer isStudentOverNum) {
+		this.isStudentOverNum = isStudentOverNum;
+	}
 
 	public StudentT getStudentT() {
 		return studentT;
