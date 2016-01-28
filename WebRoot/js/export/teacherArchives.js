@@ -123,8 +123,12 @@ function getData() {
 		type : "post",
 		data : "param=" + obj,
 		dataType: "json",
-		async: false,
+		async: true,
+		beforeSend: function() {
+			$.messager.progress({title : '教师档案', msg : '正在查询教师档案，请稍等……'});
+		},
 		success: function (data) {
+			$.messager.progress('close'); 
 			onLoadSuccess(data);
 		}
 	});
