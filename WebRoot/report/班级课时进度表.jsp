@@ -293,7 +293,6 @@
 				fileName:parent.$("li.tabs-selected").find("span.tabs-title").html()
 			}
 			$("#param").val(JSON.stringify(param));
-			alert($("#param").val())
 			$("#excelForm").submit();
 		}	
 	});
