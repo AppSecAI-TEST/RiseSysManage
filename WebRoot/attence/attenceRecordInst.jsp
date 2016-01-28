@@ -335,20 +335,24 @@
 					var studentArr = [];
 					$("#studentTab tr:gt(0)").each(function(i,node){
 						var firstTr = $(node).find("td:nth-child(1)");
-						var attendTypeObj = $(node).find("input[name='attendType"+firstTr.attr("studentId")+"']:checked").val();
-						var dressObj = $(node).find("input[name='dress"+firstTr.attr("studentId")+"']:checked").val();
-						var studentObj = {
-							studentId:firstTr.attr("studentId"),
-							studentCourseId:firstTr.attr("studentCourseId"),
-							stageId:firstTr.attr("stageId"),
-							studentName:firstTr.attr("studentName"),
-							schoolId:firstTr.attr("schoolId"),
-							attendDate:'${classSchooltime}',
-							hours:classLessonHour,
-							dress:dressObj,
-							attendType:attendTypeObj
-						};
-						studentArr.push(studentObj);
+						var studentId = firstTr.attr("studentId");
+						if(studentId != null && studentId != "")
+						{
+							var attendTypeObj = $(node).find("input[name='attendType"+firstTr.attr("studentId")+"']:checked").val();
+							var dressObj = $(node).find("input[name='dress"+firstTr.attr("studentId")+"']:checked").val();
+							var studentObj = {
+								studentId:firstTr.attr("studentId"),
+								studentCourseId:firstTr.attr("studentCourseId"),
+								stageId:firstTr.attr("stageId"),
+								studentName:firstTr.attr("studentName"),
+								schoolId:firstTr.attr("schoolId"),
+								attendDate:'${classSchooltime}',
+								hours:classLessonHour,
+								dress:dressObj,
+								attendType:attendTypeObj
+							};
+							studentArr.push(studentObj);
+						}
 					});
 					obj.studentList = studentArr;
 					if(classTime == "")
