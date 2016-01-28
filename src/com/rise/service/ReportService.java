@@ -15,7 +15,7 @@ public class ReportService
 
 	public String getTeacherNum(String schoolId,String teacherId,String month) throws Exception  
 	{
-		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS8202\",securityCode:\"0000000000\",params:{schoolId:'"+schoolId+"',teacherId:'"+teacherId+"',month:'"+month+"'},rtnDataFormatType:\"user-defined\"}";
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS8202\",securityCode:\"0000000000\",params:{schoolId:'"+schoolId+"',teacherName:'"+teacherId+"',month:'"+month+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
 	
