@@ -232,7 +232,7 @@ function addTeaFeedbackSubmit()
 	   feedbackDetail.handlerId = handlerId;
 	   feedbackDetailArray.push(feedbackDetail);
 	});
-	if(flag){
+	if(feedbackDetailArray.length > 0 && flag){
 		$.ajax({
 			type : "POST",
 			url: "/sys/teaFeebackManage/addTeachingFeedback.do",
@@ -253,6 +253,9 @@ function addTeaFeedbackSubmit()
 	    		}
 	        } 
 		});
+	}else if(feedbackDetailArray.length == 0 && flag){
+		$.messager.alert('提示', "该班级没有在读学生，不能反馈！");
+		return;
 	}
 }
 
