@@ -26,7 +26,7 @@ $('#shortClassId').combobox({
 		var coursePriceId=$("#coursePriceId").val();
 		
 	    var url="";
-	    if(coursePriceId!='')
+	    if(studentCourseId!='' && studentCourseId !=undefined && studentCourseId !=null)
 	    {
 	    	url = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Short_Course_Old_Price\",setPriceId:\""+ coursePriceId + "\",schoolId:\""+ schoolId + "\",shortClassId:\""+ shortClassId + "\"}";
 	    }else
