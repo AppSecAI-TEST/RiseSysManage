@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -23,8 +24,10 @@ import net.sf.jxls.transformer.XLSTransformer;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.http.HttpResponse;
+import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
+import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -66,8 +69,30 @@ public class ExportService
 			Map<String, List<Map>> beanParams = new HashMap<String, List<Map>>();
 			beanParams.put("reportList", list);  
 	        XLSTransformer former = new XLSTransformer(); 
-	        Workbook workBook = former.transformXLS(inputStream, beanParams);
-	        
+	        HSSFWorkbook workBook = (HSSFWorkbook)former.transformXLS(inputStream, beanParams);
+	        HSSFSheet sheet= workBook.getSheetAt(0);
+	        int rows = sheet.getPhysicalNumberOfRows();
+	        HSSFCellStyle cellStyle=workBook.createCellStyle();  
+	        cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);// 左右居中   
+	        cellStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);// 上下居中 
+	        cellStyle.setWrapText(true); 
+	        for (int i = 1; i < rows; i++) 
+	        {
+	        	HSSFRow row = sheet.getRow(i);
+	        	if (row != null) 
+	        	{
+	        		int cells = row.getPhysicalNumberOfCells();
+	        		for (int j = 0; j < cells; j++) 
+	        		{
+	        			HSSFCell cell = row.getCell(j);
+	        			if (cell != null&&(HSSFCell.CELL_TYPE_STRING==cell.getCellType())) 
+	        			{
+	        				cell.setCellStyle(cellStyle);
+	        				cell.setCellValue(new HSSFRichTextString(cell.getStringCellValue().replaceAll("<(/)?br(/)?>", "/")));
+	        			}
+	        		}
+	        	}	
+	        }
 	        workBook.write(out);
 			inputStream.close();
 			out.close();
@@ -87,10 +112,15 @@ public class ExportService
         XLSTransformer former = new XLSTransformer(); 
         HSSFWorkbook workBook = (HSSFWorkbook)former.transformXLS(inputStream, beanParams);
         //加入换行格式
+        HSSFCellStyle cellStyle=workBook.createCellStyle();  
+        cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);// 左右居中   
+        cellStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);// 上下居中 
+        cellStyle.setWrapText(true); 
         for(int i=1;i<=list.size()+1;i++)
         {
         	Cell obj =workBook.getSheetAt(0).getRow(i).getCell(3);
-        	obj.setCellValue(obj.getStringCellValue().replace("<br>", "\n"));
+        	obj.setCellStyle(cellStyle);
+        	obj.setCellValue(new HSSFRichTextString(obj.getStringCellValue().replaceAll("<(/)?br(/)?>", "/")));
         }	
         
         workBook.write(out);
@@ -919,58 +949,20 @@ public class ExportService
 		if(ObjectCensor.isStrRegular(StringUtil.getJSONObjectKeyVal(json, "rows")))
 		{
 			JSONArray array =json.getJSONArray("rows");
-			JSONArray newArray =new JSONArray();
 			if(array.size()>0)
 			{
-				for(int i=0;i<array.size();i++)
-				{
-					JSONObject obj =array.getJSONObject(i);
-					if("".equals(StringUtil.getJSONObjectKeyVal(obj, "isOpenFinish"))&&"".equals(StringUtil.getJSONObjectKeyVal(obj, "isTeachingFinish"))&&"".equals(StringUtil.getJSONObjectKeyVal(obj, "isMeetingFinish"))&&"".equals(StringUtil.getJSONObjectKeyVal(obj, "isGradFinish")))
-					{
-						obj.element("type", "");
-						obj.element("reason", "未开教质事件");
-						newArray.add(obj);
-					}
-					else
-					{
-						if("N".equals(StringUtil.getJSONObjectKeyVal(obj, "isTeachingFinish")))
-						{
-							obj.element("type", "电教");
-							obj.element("reason", "电教未完成");
-							newArray.add(obj);
-						}
-						if("N".equals(StringUtil.getJSONObjectKeyVal(obj, "isMeetingFinish")))
-						{
-							obj.element("type", "家长会");
-							obj.element("reason", "出勤未达80%");
-							newArray.add(obj);
-						}
-						if("N".equals(StringUtil.getJSONObjectKeyVal(obj, "isOpenFinish")))
-						{
-							obj.element("type", "公开课");
-							obj.element("reason", "出勤未达80%");
-							newArray.add(obj);
-						}
-						if("N".equals(StringUtil.getJSONObjectKeyVal(obj, "isGradFinish")))
-						{
-							obj.element("type", "毕业典礼");
-							obj.element("reason", "出勤未达80%");
-							newArray.add(obj);
-						}
-					}	
-				}
 				List<CellRangeAddress> cellRangeList =new ArrayList<CellRangeAddress>();
 				int fr1=1,tr1=1,fr2=1,tr2=1;
 				boolean flag1=false,flag2=false;
-				String schoolIndex=StringUtil.getJSONObjectKeyVal(newArray.getJSONObject(0), "schoolId"),classIndex=StringUtil.getJSONObjectKeyVal(newArray.getJSONObject(0), "classInstId");
-				for(int j=1;j<newArray.size();j++)
+				String schoolIndex=StringUtil.getJSONObjectKeyVal(array.getJSONObject(0), "schoolId"),classIndex=StringUtil.getJSONObjectKeyVal(array.getJSONObject(0), "classInstId");
+				for(int j=1;j<array.size();j++)
 				{
-					JSONObject item =newArray.getJSONObject(j);
+					JSONObject item =array.getJSONObject(j);
 					if(schoolIndex.equals(StringUtil.getJSONObjectKeyVal(item, "schoolId")))
 					{
 						flag1 =true;	
 						tr1 =j+1;
-						if(j==(newArray.size()-1)&&flag1)
+						if(j==(array.size()-1)&&flag1)
 						{
 							CellRangeAddress range1 =new CellRangeAddress(fr1, tr1, 0, 0);
 							cellRangeList.add(range1);
@@ -991,7 +983,7 @@ public class ExportService
 					{
 						flag2 =true;	
 						tr2 =j+1;
-						if(j==(newArray.size()-1)&&flag2)
+						if(j==(array.size()-1)&&flag2)
 						{
 							CellRangeAddress range2 =new CellRangeAddress(fr2, tr2, 1, 1);
 							CellRangeAddress range3 =new CellRangeAddress(fr2, tr2, 2, 2);
@@ -1013,7 +1005,7 @@ public class ExportService
 						classIndex =StringUtil.getJSONObjectKeyVal(item, "classInstId");
 					}
 				}	
-				List list = JacksonJsonMapper.getInstance().readValue(newArray.toString(), List.class);
+				List list = JacksonJsonMapper.getInstance().readValue(array.toString(), List.class);
 				String filePath =this.getFullFilePath(fileName);
 				HttpClient client = new HttpClient();   
 				GetMethod httpGet = new GetMethod(filePath);  

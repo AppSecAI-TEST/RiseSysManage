@@ -108,21 +108,9 @@ $(document).ready(function(){
             }
     	});
 	 	initReportButton("resetBtn","qryFm","schoolId");
-	 	$("#qryBtn").click(function() {
-		var object = $("#qryFm").serializeObject();
-    	var obj = JSON.stringify(object);
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-    	$('#list_data').datagrid({
-    		url : "/sys/pubData/qryDataListByPage.do",
-    		queryParams:{
-    			param : obj
-    		}
-    	});
-	 });
 	 	$("#schoolId").combobox({
 	 		onChange:function(){
+	 			alert(1111)
 	 			$("#classInstId").combobox({
 					url:"/sys/pubData/qryClassInstList.do?schoolId="+$("#schoolId").combobox('getValue')+"&stageId="+$("#stageId").combobox('getValue')
 				});
@@ -146,7 +134,7 @@ $(document).ready(function(){
     		var funcNodeId = $("#qryBtn").attr("funcNodeId");
     		obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
     		$("#list_data").datagrid({
-	    		url : "/sys/export/qryUnfinishFeedback.do",
+	    		url : "/sys/pubData/qryDataListByPage.do",
 	    		queryParams:{
 	    			param : obj
 	    		},
