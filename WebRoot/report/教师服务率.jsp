@@ -48,24 +48,24 @@
 							<th field="schoolName" align="center" width="5%" >校区</th>
 							<th field="studentInSchoolNum" align="center" width="4%" >在校</br>生人数</th>
 							<th field="studyingNum" align="center" width="3%" >在读</br>人数</th>
-							<th field="studyingClassNum" align="center" width="3%" >在读</br>班级</br>总数</th>
-							<th field="avgClassStudyingNum" align="center" width="6%" >平均班级人</br>数=班级数/</br>在读班级数</th>
-							<th field="avgClassNum" align="center" width="6%" >平均带班量</br>=在职中教/</br>在读班级数</th>
-							<th field="teacherNum" align="center" width="6%" >在职教师</br>总数（中教</br>+外教）</th>
+							<th field="studyingClassNum" align="center" width="5%" >在读班</br>级总数</th>
+							<th field="avgClassStudyingNum" align="center" width="4%" >平均班</br>级人数</th>
+							<th field="avgClassNum" align="center" width="4%" >平均带</br>班量</th>
+							<th field="teacherNum" align="center" width="4%" >在职教</br>师总数</th>
 							<th field="nativeTeacherNum" align="center" width="5%" >在职教</br>师-中教</th>
 							<th field="lower3TeacherNum" align="center" width="5%" >入职3个</br>月内教</br>师人数</th>
 							<th field="lower3ServiceNum" align="center" width="6%" >入职3个月</br>内教师</br>服务人数</th>
 							<th field="avgLower3ServiceRate" align="center" width="8%" >入职3个月内</br>教师在读平</br>均服务效率</th>
 							<th field="above3TeacherNum" align="center" width="6%" >入职3个月</br>以上普通</br>教师人数</th>
-							<th field="above3ServiceNum" align="center" width="7%" >入职3个月</br>以上普通</br>教师服务人数</th>
-							<th field="avgAbove3ServiceRate" align="center" width="8%" >入职3个月</br>以上在读</br>平均服务效率</th>
-							<th field="avgSchoolServiceRate" align="center" width="8%" >普通教师在</br>校服务效率</br>=在校人数/在</br>职中教人数</th>
-							<th field="teacherCompilation" align="center" width="5%" >教师编制</br>=在校人数</br>/36</th>
-							<th field="preLeaveNum" align="center" width="11%" >1个月内待离职人数</br>（此处信息由校区反馈</br>教师待离职状态生成）</th>
-							<th field="avgLeaveServiceRate" align="center" width="13%" >离职后在读服务效率=</br>3个月以上老师服务人数/</br>（入职3个月以上教师人数-</br>1个月内待离职教师人数）</th>
-							<th field="avgLeaveSchoolServiceRate" align="center" width="12%" >离职后在校服务</br>效率=在校人数/（在职</br>中教-1个月内待离职）</th>
-							<th field="efficiencyVariance" align="center" width="11%" data-options="formatter:formatEfficiency">效率差异需补给</br> = 教师编制 -（在职人数</br>-1个月内待离职人数）</th>
-							<th field="foreignTeacherNum" align="center" width="9%" >美籍教师=在职教</br>师总数-中教人数</th>
+							<th field="above3ServiceNum" align="center" width="7%" >入职3个月</br>以上普通教</br>师服务人数</th>
+							<th field="avgAbove3ServiceRate" align="center" width="8%" >入职3个月</br>以上在读平</br>均服务效率</th>
+							<th field="avgSchoolServiceRate" align="center" width="8%" >普通教师在</br>校服务效率</th>
+							<th field="teacherCompilation" align="center" width="5%" >教师编制</th>
+							<th field="preLeaveNum" align="center" width="6%" >1个月内</br>待离职人数</th>
+							<th field="avgLeaveServiceRate" align="center" width="6%" >离职后在读</br>服务效率</th>
+							<th field="avgLeaveSchoolServiceRate" align="center" width="6%" >离职后在校</br>服务效率</th>
+							<th field="efficiencyVariance" align="center" width="6%" data-options="formatter:formatEfficiency">效率差异</br>需补给</th>
+							<th field="foreignTeacherNum" align="center" width="5%" >美籍教师</th>
 						</tr>
 					</thead>
 				</table>
