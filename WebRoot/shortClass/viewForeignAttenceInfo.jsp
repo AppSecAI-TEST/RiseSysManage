@@ -28,7 +28,7 @@
 				<td>
 					<c:forEach items="${shortClassInstT.classSchooltimeList[0].classTeacherList}" var="teacherNode">
 						<c:if test="${teacherNode.teacherType == 'T'}">
-							${teacherNode.teacherT.byName}
+							${teacherNode.teacherT.byName} ${teacherNode.lessionHours}
 						</c:if>
 					</c:forEach>
 				</td>
@@ -36,7 +36,7 @@
 				<td>
 					<c:forEach items="${shortClassInstT.classSchooltimeList[0].classTeacherList}" var="teacherNode">
 						<c:if test="${teacherNode.teacherType == 'TA'}">
-							${teacherNode.teacherT.byName}
+							${teacherNode.teacherT.byName} ${teacherNode.lessionHours}
 						</c:if>
 					</c:forEach>
 				</td>				
@@ -68,7 +68,7 @@
 				<td>
 					<c:forEach items="${shortClassAttendTList[0].teacherAttendList}" var="teacherNode">
 						<c:if test="${teacherNode.teacherType == 'T'}">
-							${teacherNode.teacherT.byName}
+							${teacherNode.teacherT.byName} ${teacherNode.lessionHours}
 						</c:if>
 					</c:forEach>
 				</td>
@@ -76,7 +76,7 @@
 				<td>
 					<c:forEach items="${shortClassAttendTList[0].teacherAttendList}" var="teacherNode">
 						<c:if test="${teacherNode.teacherType == 'TA'}">
-							${teacherNode.teacherT.byName}
+							${teacherNode.teacherT.byName} ${teacherNode.lessionHours}
 						</c:if>
 					</c:forEach>
 				</td>				
@@ -131,7 +131,7 @@
 							</td>
 							<td align='center'>${node.studentCourseT.studentClassName}</td>
 							<td align='center'>
-								<fmt:formatDate value="${node.studentCourseT.payDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+								<fmt:formatDate value="${node.studentCourseT.payDate}" pattern="yyyy-MM-dd" />
 							</td>
 							<td align='center'>
 								${node.studentCourseT.courseStateName}

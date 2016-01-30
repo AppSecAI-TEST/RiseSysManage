@@ -201,9 +201,9 @@
 						$.messager.alert('提示',"添加老师课时量已超过课程总课时量,不能再添加老师");
 						return ;
 					}
-					if(teacherTaTime+parseInt(attRecordLessonHour) > teacherTime && attRecordClassType == "TA")
+					if(teacherTaTime+parseInt(attRecordLessonHour) > parseInt($("#classLessonHour").textbox("getValue")) && attRecordClassType == "TA")
 					{
-						$.messager.alert('提示',"添加TA老师课时量已超过T老师总课时量,不能再添加老师");
+						$.messager.alert('提示',"添加老师课时量已超过课程总课时量,不能再添加老师");
 						return ;
 					}
 					if(teacherFlag)

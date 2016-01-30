@@ -47,10 +47,10 @@
   				<tr>
   					<td align="right">缴费情况:</td>
   					<td align="center" style="border-right:none;">
-  						<input type="radio" name="001" value="Y" title="双击取消选择"><lable>全费</lable>
+  						<input type="radio" name="001" id="payYesObj" value="Y" title="双击取消选择" onclick="payYesFunc(this)"><lable>全费</lable>
   					</td>
   					<td>	
-  						<input type="radio" name="001" value="N" title="双击取消选择"><lable>定金</lable>
+  						<input type="radio" name="001" id="payNoObj" value="N" title="双击取消选择" onclick="payNoFunc(this)"><lable>定金</lable>
   					</td>
   					<td align="right">缴费日期:</td>
   					<td align="center"><input style="width:120px;height:25px" id="001" type="text" class="easyui-datebox"></td>
@@ -58,10 +58,10 @@
   				<tr>
   					<td align="right">是否定金转全费:</td>
   					<td align="center" style="padding-right:16px;border-right:none;">
-  						<input type="radio" name="002" value="N" title="双击取消选择"><lable>否</lable>
+  						<input type="radio" name="002" id="earnestNoObj" value="N" title="双击取消选择" onclick="earnestNoFunc(this)"><lable>否</lable>
   					</td>
   					<td>	
-  						<input type="radio" name="002" value="Y" title="双击取消选择"><lable>是</lable>
+  						<input type="radio" name="002" id="earnestYesObj" value="Y" title="双击取消选择" onclick="earnestYesFunc(this)"><lable>是</lable>
   					</td>
   					<td align="right">定金转全费日期:</td>
   					<td align="center"><input style="width:120px;height:25px" id="002" type="text" class="easyui-datebox"></td>
@@ -69,10 +69,10 @@
   				<tr>
   					<td align="right">是否补缴全费:</td>
   					<td align="center" style="padding-right:16px;border-right:none;">
-  						<input type="radio" name="003" value="N" title="双击取消选择"><lable>否</lable>
+  						<input type="radio" name="003" id="suppleNoObj" value="N" title="双击取消选择" onclick="suppleNoFunc(this)"><lable>否</lable>
   					</td>
   					<td>	
-  						<input type="radio" name="003" value="Y" title="双击取消选择"><lable>是</lable>
+  						<input type="radio" name="003" id="suppleYesObj" value="Y" title="双击取消选择" onclick="suppleYesFunc(this)"><lable>是</lable>
   					</td>
   					<td align="right">补缴全费日期:</td>
   					<td align="center"><input style="width:120px;height:25px" id="003" type="text" class="easyui-datebox"></td>
@@ -296,7 +296,51 @@
 				hideProgressLoader();
 			}
 		});
-		
 		$("#dlg").dialog('open').dialog('setTitle', '修改反馈');
+	}
+	
+	function payYesFunc(obj)
+	{
+		$("#earnestNoObj").get(0).checked = false;
+		$("#earnestYesObj").get(0).checked = false;
+		$("#suppleNoObj").get(0).checked = false;
+		$("#suppleYesObj").get(0).checked = false;
+	}
+	
+	function payNoFunc(obj)
+	{
+		$("#earnestNoObj").get(0).checked = true;
+		$("#suppleNoObj").get(0).checked = false;
+		$("#suppleYesObj").get(0).checked = false;
+	}
+	
+	function earnestNoFunc(obj)
+	{
+		$("#payNoObj").get(0).checked = true;
+		$("#suppleNoObj").get(0).checked = false;
+		$("#suppleYesObj").get(0).checked = false;
+	}
+	
+	function earnestYesFunc(obj)
+	{
+		$("#payNoObj").get(0).checked = true;
+		$("#suppleNoObj").get(0).checked = false;
+		$("#suppleYesObj").get(0).checked = false;
+	}
+	
+	function suppleNoFunc(obj)
+	{
+		$("#payNoObj").get(0).checked = false;
+		$("#payYesObj").get(0).checked = false;
+		$("#earnestYesObj").get(0).checked = false;
+		$("#earnestNoObj").get(0).checked = false;
+	}
+	
+	function suppleYesFunc(obj)
+	{
+		$("#payNoObj").get(0).checked = false;
+		$("#payYesObj").get(0).checked = false;
+		$("#earnestYesObj").get(0).checked = false;
+		$("#earnestNoObj").get(0).checked = false;
 	}
 </script>

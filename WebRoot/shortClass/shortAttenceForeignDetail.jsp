@@ -101,7 +101,7 @@
 							</td>
 							<td align='center'>${node.studentCourseT.studentClassName}</td>
 							<td align='center'>
-								<fmt:formatDate value="${node.studentCourseT.payDate}" pattern="yyyy-MM-dd HH:mm:ss" />
+								<fmt:formatDate value="${node.studentCourseT.payDate}" pattern="yyyy-MM-dd" />
 							</td>
 							<td align='center'>
 								${node.studentCourseT.courseStateName}
