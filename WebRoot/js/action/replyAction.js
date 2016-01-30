@@ -63,7 +63,8 @@ function addTrInfo() {
 		return false;
 	}
 	tr.addClass("addTr");
-	if (checkTeacherOnly($("#teacherId").combobox("getValue"))) {
+	var flag = checkTeacherOnly($("#teacherId").combobox("getValue"),$("#hours").numberbox("getValue"));
+	if (flag == 0) {
 		tr.attr("schoolId", $("#schoolId").combobox("getValue"));
 		tr.attr("schoolName", $("#schoolId").combobox("getText"));
 		tr.attr("teacherId", $("#teacherId").combobox("getValue"));
@@ -82,8 +83,11 @@ function addTrInfo() {
 		$("#addInfo").after(tr);
 		$.parser.parse(tr);
 		clearData("addInfo");
-	} else {
+	} else if(flag == 1) {
 		$.messager.alert("提示", "不能重复选择教师");
+		return false;
+	} else if(flag == 2) {
+		$.messager.alert("提示", "添加老师的课时不能大于当前班级课时");
 		return false;
 	}
 
@@ -93,16 +97,20 @@ function deleteTr(obj) {
 	$(obj).closest("tr").remove();
 }
 
-function checkTeacherOnly(val) {
-	var flag = true;
+function checkTeacherOnly(val,hour) {
+	var flag = 0;
 	$(".addTr").each(
-			function() {
-				if ($(this).attr("teacherId") != null
-						&& $(this).attr("teacherId") == val) {
-					flag = false;
-					return false;
-				}
-			})
+		function() {
+			if ($(this).attr("teacherId") != null
+					&& $(this).attr("teacherId") == val) {
+				flag = 1;
+				return false;
+			}
+			else if(parseInt($("#realHours").numberbox("getValue")) < parseInt(hour)) {
+				flag = 2;
+				return false;
+			}
+		});
 	return flag;
 }
 

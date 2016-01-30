@@ -180,22 +180,30 @@
 						 $.messager.alert('提示', "该DEMO课已经取消排课！");
 						   return;
 					}
-					$.messager.confirm("提示", "您确定要取消该DEMO课吗？", function (data) {
-			            if(data){
-			            	ajaxLoading("正在处理，请稍待。。。");
-			            	$.post("/sys/shortBus/cancelShortClassFunc.do",{shortClassInstId:row.shortClassInstId,remark:"",handleId:${sessionScope.StaffT.staffId}},function(data){
-			                	ajaxLoadEnd();
-			                	if(data == "success")
-			                	{
-			                		window.location.reload();
-			                	}
-			                	else
-			                	{
-			                		$.messager.alert('提示',"取消DEMO课失败:"+data,"error");
-			                	}
-			                });
-			            }
-		       	 	});
+					else if(classStateVal == "未开课")
+					{
+						$.messager.confirm("提示", "您确定要取消该DEMO课吗？", function (data) {
+				            if(data){
+				            	ajaxLoading("正在处理，请稍待。。。");
+				            	$.post("/sys/shortBus/cancelShortClassFunc.do",{shortClassInstId:row.shortClassInstId,remark:"",handleId:${sessionScope.StaffT.staffId}},function(data){
+				                	ajaxLoadEnd();
+				                	if(data == "success")
+				                	{
+				                		window.location.reload();
+				                	}
+				                	else
+				                	{
+				                		$.messager.alert('提示',"取消DEMO课失败:"+data,"error");
+				                	}
+				                });
+				            }
+			       	 	});
+					}
+					else
+					{
+						$.messager.alert('提示', "该DEMO课状态不能取消排课！");
+						return;
+					}
 				}
 			}
 			function validateSelect(object)
