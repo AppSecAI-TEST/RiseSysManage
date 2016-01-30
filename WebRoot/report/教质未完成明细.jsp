@@ -70,7 +70,7 @@
 					<th field="schoolName" align="center" width="10%">校区</th>
 					<th field="className" align="center" width="15%">班级</th>
 					<th field="byname" align="center" width="20%">带班老师</th>
-					<th field="type" align="center" width="20%">教质事件</th>
+					<th field="qualityType" align="center" width="20%">教质事件</th>
 					<th field="reason" align="center" width="35%">未完成原因</th>
 				</tr>
 			</thead>
@@ -110,7 +110,6 @@ $(document).ready(function(){
 	 	initReportButton("resetBtn","qryFm","schoolId");
 	 	$("#schoolId").combobox({
 	 		onChange:function(){
-	 			alert(1111)
 	 			$("#classInstId").combobox({
 					url:"/sys/pubData/qryClassInstList.do?schoolId="+$("#schoolId").combobox('getValue')+"&stageId="+$("#stageId").combobox('getValue')
 				});
