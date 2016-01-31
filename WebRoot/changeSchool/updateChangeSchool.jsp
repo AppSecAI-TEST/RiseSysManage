@@ -106,9 +106,9 @@
 			  			<tr>
 			  				<td align="right" width="10%"><span>班级名称：</span></td>
 				  			<td width="15%"><span id="classNameText"></span></td>
-				  			<td align="right" width="10%"><span>放班时间：</span></td>
+				  			<td align="right" width="10%"><span>放班日期：</span></td>
 				  			<td width="15%"><span id="applyDate"></span></td>
-				  			<td align="right" width="10%"><span>开班时间：</span></td>
+				  			<td align="right" width="10%"><span>开课日期：</span></td>
 				  			<td width="10%"><span id="startDate"></span></td>
 				  			<td align="right" width="10%"><span>带班老师：</span></td>
 				  			<td width="20%"><span id="teacherName"></span></td>

@@ -133,10 +133,26 @@ function initClassInst(isBegin) {
     		onLoadSuccess : function () { //数据加载完毕事件
                 var data = $('#beginClassInstId').combobox('getData');
                 if (data.length > 0) {
+                	var flag = true;
                 	var inClassId = $("#inClassId").val();
-                	if(inClassId != "" && inClassId != null && inClassId != undefined) {
+                	if(inClassId != null && inClassId != "" && inClassId != undefined) {
+                		for(var i = 0, len = data.length; i < len; i++) {
+                			if(data[i].classInstId == inClassId) {
+                				flag = false;
+                				break;
+                			}
+                		}
+                	}
+                	if(flag) {
+                		$("#beginClassInstId").combobox('select', data[0].classInstId);
+                	} else {
                 		$("#beginClassInstId").combobox('select', inClassId);
                 	}
+                	
+                	var classInstId = $("#beginClassInstId").combobox("getValue");
+                    if(classInstId != "" && classInstId != null && classInstId != undefined) {
+                    	qryClassDetail(classInstId);
+                    }
                 }
             },
             onChange : function(n, o) {
@@ -160,12 +176,26 @@ function initClassInst(isBegin) {
     		onLoadSuccess : function () { //数据加载完毕事件
                 var data = $('#notBeginClassInstId').combobox('getData');
                 if (data.length > 0) {
+                	var flag = true;
                 	var inClassId = $("#inClassId").val();
-                	if(inClassId != "" && inClassId != null && inClassId != undefined) {
+                	if(inClassId != null && inClassId != "" && inClassId != undefined) {
                 		for(var i = 0, len = data.length; i < len; i++) {
-                			$("#notBeginClassInstId").combobox('select', inClassId);
+                			if(data[i].classInstId == inClassId) {
+                				flag = false;
+                				break;
+                			}
                 		}
                 	}
+                	if(flag) {
+                		$("#notBeginClassInstId").combobox('select', data[0].classInstId);
+                	} else {
+                		$("#notBeginClassInstId").combobox('select', inClassId);
+                	}
+                	
+                	var classInstId = $("#notBeginClassInstId").combobox("getValue");
+                    if(classInstId != "" && classInstId != null && classInstId != undefined) {
+                    	qryClassDetail(classInstId);
+                    }
                 }
             },
             onChange : function(n, o) {

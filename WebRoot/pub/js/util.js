@@ -371,11 +371,12 @@ function formatFinishBonus(value, row, index) {
 	if(row.isApplyBonus == "N") {
 		return "<a href='javascript:void(0)' onclick='getBonus(" + row.classInstId + ", \"APPLY\")' class='apply' style='width: 100px;'><span>申请奖金</span></a>";
 	} else {
-		if(row.isGetBonus == "N") {
-			return "<a href='javascript:void(0)' onclick='getBonus(" + row.classInstId + ", \"GET\")' class='get' style='width: 100px;'><span>领取奖金</span></a>";
-		} else {
-			return "";
-		}
+		return "";
+//		if(row.isGetBonus == "N") {
+//			return "<a href='javascript:void(0)' onclick='getBonus(" + row.classInstId + ", \"GET\")' class='get' style='width: 100px;'><span>领取奖金</span></a>";
+//		} else {
+//			
+//		}
 	}
 }
 

@@ -20,13 +20,45 @@ $(document).ready(function() {
     		},
     		onLoadSuccess:function(){
     			onLoadSuccess();
-    			$('.get').linkbutton({text:'领取奖金', iconCls:'icon-add'});
     			$('.apply').linkbutton({text:'申请奖金', iconCls:'icon-add'});
     	        $('#list_data').datagrid('clearSelections');
     		}
     	});
     });
-	$("#qryBtn").click();
+	if($("#schoolId").length > 0) {
+		var staffId = $("#staffId").val();
+		$("#schoolId").combobox({
+			url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=503&fieldId=schoolId",
+	    	valueField : "schoolId",
+	    	textField : "schoolName",
+	    	panelHeight : "auto",
+	    	formatter : function(data) {
+	    		return "<span>" + data.schoolName + "</span>";
+	    	},
+	    	onLoadSuccess:function(data) {
+	    		if(data.length > 0) {
+					$('#schoolId').combobox('setValue', data[0].schoolId);
+					$("#qryBtn").click();
+				}
+	    	},
+	    	onChange : function(n, o) {
+	    		if($("#teacherId").length > 0) {
+					//学校的教师
+					$("#teacherId").combobox({
+						url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&classType=",//返回json数据的url
+						valueField : "teacherId",
+						textField : "byname",
+						panelHeight : "auto",
+						formatter : function(data) {
+							return "<span>" + data.byname + "</span>";
+						}
+					});
+				}
+	    	}
+		});
+	} else {
+		$("#qryBtn").click();
+	}
 });
 
 function onLoadSuccess() {

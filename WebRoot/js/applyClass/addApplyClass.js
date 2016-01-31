@@ -218,31 +218,44 @@ $(document).ready(function() {
 				});
 			}
 			if(flag) {
+				var subHourRange = hourRange.substring(0, 3);
 				flag = validateRoom(weekTime, hourRange, roomId);
 				if(flag) {
-					addSchoolNum++;
-					var addSchootimeTd = $("#addSchootimeTd").clone();
-					addSchootimeTd.css("display", 'table-row');
-					addSchootimeTd.attr("val", "add");
-					addSchootimeTd.find("td").each(function(i, node) {
-						if(i == 0) {
-							$(node).html("<span>" + addSchoolNum + "</span>");
-							$(node).attr("lessionHours", lessionHours);
-							$(node).attr("weekTime", weekTime);
-							$(node).attr("hourRange", hourRange);
-						} else if(i == 1) {
-							$(node).html("<span>" + weekTimeText + "  " + hourRangeText + "</span>");
-						} else if(i == 2) {
-							$(node).html("<span>" + roomIdText + "</span>");
-						} else if(i == 3) {
-							$(node).html("<span>" + lessionHours + "</span><input type='hidden' name='schooltimes' roomId='"+roomId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessionHours='"+lessionHours+"' addNum='"+addSchoolNum+"'/>");
+					$("[name='schooltimes']").each(function() {
+						var selWeekTime = $(this).attr("weekTime");
+						var selHourRange = $(this).attr("hourRange");
+						var subSelHourRange = selHourRange.substring(0, 3);
+						if(subHourRange == subSelHourRange && selWeekTime == weekTime) {
+							flag = false;
 						}
 					});
-					$("#schooltimeTb").append(addSchootimeTd);
-					$("#addSchootimeTr").css("display", 'table-row');
-					$("#roomId").combobox("setValue", "");
-					$("#weekTime").combobox("setValue", "");
-					$("#hourRange").combobox("setValue", "");
+					if(flag) {
+						addSchoolNum++;
+						var addSchootimeTd = $("#addSchootimeTd").clone();
+						addSchootimeTd.css("display", 'table-row');
+						addSchootimeTd.attr("val", "add");
+						addSchootimeTd.find("td").each(function(i, node) {
+							if(i == 0) {
+								$(node).html("<span>" + addSchoolNum + "</span>");
+								$(node).attr("lessionHours", lessionHours);
+								$(node).attr("weekTime", weekTime);
+								$(node).attr("hourRange", hourRange);
+							} else if(i == 1) {
+								$(node).html("<span>" + weekTimeText + "  " + hourRangeText + "</span>");
+							} else if(i == 2) {
+								$(node).html("<span>" + roomIdText + "</span>");
+							} else if(i == 3) {
+								$(node).html("<span>" + lessionHours + "</span><input type='hidden' name='schooltimes' roomId='"+roomId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessionHours='"+lessionHours+"' addNum='"+addSchoolNum+"'/>");
+							}
+						});
+						$("#schooltimeTb").append(addSchootimeTd);
+						$("#addSchootimeTr").css("display", 'table-row');
+						$("#roomId").combobox("setValue", "");
+						$("#weekTime").combobox("setValue", "");
+						$("#hourRange").combobox("setValue", "");
+					} else {
+						$.messager.alert('提示', "您选择的上课时段有重叠时间，请选择其他上课时段！");
+					}
 				} else {
 					$.messager.alert('提示', "您选择的上课时段和教室已被其他班级占用，请选择其他上课时段或教室！");
 				}

@@ -40,7 +40,7 @@
 							<th data-options="field:'higherNum3',width:100,align:'center'">85%</th>
 							<th data-options="field:'higherNum4',width:100,align:'center'">90%</th>
 							<th data-options="field:'higherNum5',width:100,align:'center'">95%</th>
-							<th data-options="field:'higherNum5',width:100,align:'center'">100%</th>
+							<th data-options="field:'higherNum6',width:100,align:'center'">100%</th>
 						</tr>
 					</thead>
 				</table>

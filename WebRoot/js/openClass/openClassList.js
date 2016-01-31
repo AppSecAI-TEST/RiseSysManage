@@ -102,8 +102,8 @@ $(document).ready(function() {
 			var openClassState = row.openClassState;
 			if(openClassType == "" || openClassType == null || openClassType == undefined
 					|| (openClassState == "003" || openClassState == "004")) {
-				var classStudentNum = row.classStudentNum;
 				var minNum = row.minNum;
+				var classStudentNum = row.classStudentNum;
 				if(classStudentNum >= minNum) {
 					var maxNum = row.maxNum;
 					if(classStudentNum <= maxNum) {
@@ -147,8 +147,8 @@ $(document).ready(function() {
 					|| (openClassState == "003" || openClassState == "004")) {
 				var classStudentNum = row.classStudentNum;
 				if(classStudentNum > 0) {
-					var maxNum = row.maxNum;
-					if(classStudentNum <= maxNum) {
+					var minNum = row.minNum;
+					if(classStudentNum < minNum) {
 						var isOpenFlag = row.isOpenFlag;
 						if("Y" == isOpenFlag) {
 							var applyType = "001";
@@ -161,7 +161,7 @@ $(document).ready(function() {
 							$.messager.alert('提示', "您选择的班级中还有在读学员，暂不能申请开班！");
 						}
 					} else {
-						$.messager.alert('提示', "您选择的班级正常开班的最多人数为"+maxNum+"人，定班人数不能超过班级最多人数才能申请异常开班！");
+						$.messager.alert('提示', "您选择的班级定班人数已达到正常开班最少人数，不能异常开班！");
 					}
 				} else {
 					$.messager.alert('提示', "您选择的班级中还没有学员，暂不能申请开班！");
