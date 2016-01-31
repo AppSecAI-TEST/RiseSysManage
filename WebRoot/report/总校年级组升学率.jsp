@@ -12,8 +12,9 @@
   	</head>   
   	<body>
     	<div style="padding:5px 0;">
-    		<input type="hidden" id="higherType" value="allStage"/>
     		<form id="qryFm" style="margin:0 auto;">
+	    		<input type="hidden" id="higherType" value="allStage"/>
+    			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
     			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
   					<tr>
 						<td align="right" width="50px"><span>阶段：</span></td>
@@ -47,7 +48,7 @@
 						<tr>
 							<th data-options="field:'schoolName',width:100,align:'center',rowspan:2">校区</th>
 							<th data-options="field:'finish',width:500,align:'center',colspan:5">已结课</th>
-							<th data-options="field:'attend',width:500,align:'center',colspan:5">课时进度＜50%</th>
+							<th data-options="field:'attend',width:500,align:'center',colspan:5"><div id="classProgress">未结课</div></th>
 						</tr>
 						<tr>
 							<th data-options="field:'stageId',width:100,align:'center'">阶段</th>

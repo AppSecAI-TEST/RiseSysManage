@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	initDate();
 	$("#qryBtn").click(function() {
 		var object = $("#qryFm").serializeObject();
 		if($("[name='isAttend']").length > 0) {
@@ -26,11 +25,63 @@ $(document).ready(function() {
     	});
     });
 	
-	$("#qryBtn").click();
+	//重置
+	$("#reset").click(function() {
+		$("#qryFm").form('clear');//清空窗体数据 
+		if($("#schoolId").length > 0) {
+			var data = $("#schoolId").combobox("getData");
+			if(data.length > 0) {
+				$("#schoolId").combobox("setValue", data[0].schoolId);
+			}
+		}
+		var type = $("#type").val();
+		if("inClass30Rate" == type || "inClassOneRate" == type || "inClassAvgDays" == type) {
+			initDate();
+		}
+	});
+	
+	if($("#schoolId").length > 0) {
+		var type = $("#type").val();
+		if("inClassDetail" == type || "inClass30Rate" == type || "higherInClassDetail" == type || "classDetail" == type
+				|| "inClassOneRate" == type || "inClassAvgDays" == type || "notInClassAvgDays" == type) {
+			var staffId = $("#staffId").val();
+			$("#schoolId").combobox({
+				url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=711&fieldId=schoolId",
+				valueField : "schoolId",
+				textField : "schoolName",
+				panelHeight : "auto",
+				formatter : function(data) {
+					return "<span>" + data.schoolName + "</span>";
+				},
+				onLoadSuccess : function() {
+		    		var data = $("#schoolId").combobox("getData");
+		    		if(data.length > 0) {
+		    			$("#schoolId").combobox("setValue", data[0].schoolId);
+		    		}
+		    		$("#qryBtn").click();
+		    	},
+				onChange : function(n, o) {
+					if($("#carer").length > 0) {
+						$("#carer").combobox({
+							url : "/sys/pubData/qryStaffList.do?post=31,32,33&schoolId=" + n,
+							valueField : "staffId",
+							textField : "userName",
+							panelHeight : "auto",
+							formatter : function(data) {
+								return "<span>" + data.userName + "</span>";
+							}
+						});
+					}
+				}
+			});
+			if("inClass30Rate" == type || "inClassOneRate" == type || "inClassAvgDays" == type) {
+				initDate();
+			}
+		}
+	}
 });
 
-function initDate()
-{
+function initDate() {
 	var curr_time = new Date();
 	$('#endTimePay').datebox('setValue', myformatter(curr_time));
 	$('#endTimeAttend').datebox('setValue', myformatter(curr_time));

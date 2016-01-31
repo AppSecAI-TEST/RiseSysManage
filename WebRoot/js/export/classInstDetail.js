@@ -1,6 +1,7 @@
 $(document).ready(function() {
+	var staffId = $("#staffId").val();
 	$("#schoolId").combobox({
-		url : "/sys/pubData/qrySchoolList.do?schoolId=",//返回json数据的url
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=711&fieldId=schoolId",
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
@@ -14,16 +15,6 @@ $(document).ready(function() {
 			}
     	},
     	onChange : function(n, o) {
-    		var stageId = $("#stageId").combobox("getValue");
-    		$("#classInstId").combobox({
-				url : "/sys/pubData/qryClassInstList.do?schoolId="+n+"&courseType=&stageId="+stageId+"&classType=&classState='003','004'&classInstId=",//返回json数据的url
-				valueField : "classInstId",
-				textField : "className",
-				panelHeight : "auto",
-				formatter : function(data) {
-					return "<span>" + data.className + "</span>";
-				}
-			});
     		if($("#teacherId").length > 0) {
 				//学校的教师
 				$("#teacherId").combobox({
@@ -46,23 +37,10 @@ $(document).ready(function() {
     	panelHeight : "auto",
     	formatter : function(data) {
     		return "<span>" + data.stageId + "</span>";
-    	},
-    	onChange : function(n, o) {
-    		var schoolId = $("#schoolId").combobox("getValue");
-    		$("#classInstId").combobox({
-				url : "/sys/pubData/qryClassInstList.do?schoolId="+schoolId+"&courseType=&stageId="+n+"&classType=&classState='003','004'&classInstId=",//返回json数据的url
-				valueField : "classInstId",
-				textField : "className",
-				panelHeight : "auto",
-				formatter : function(data) {
-					return "<span>" + data.className + "</span>";
-				}
-			});
     	}
 	});
 	
-	var curr_time = new Date();
-	$('#year').datebox('setValue', yearFormatter(curr_time));
+	initYear();
 	
 	$("#qryBtn").click(function() {
 		var object = $("#qryFm").serializeObject();
@@ -91,23 +69,31 @@ $(document).ready(function() {
     	});
     });
 	
-	$("#export").click(function(){
-		if($("#list_data").datagrid("getData").total>0)
-		{
-			var fileName =parent.$("li.tabs-selected").find("span.tabs-title").html();
-			try
-			{
-				window.location.href="/sys/export/exportClassInstDetail.do?fileName="+fileName+"&mergeName=quarterText&mergeIndex=0&param="+JSON.stringify($("#list_data").datagrid("options").queryParams.param);
+	//重置
+	$("#reset").click(function() {
+		$("#qryFm").form('clear');//清空窗体数据 
+		if($("#schoolId").length > 0) {
+			var data = $("#schoolId").combobox("getData");
+			if(data.length > 0) {
+				$("#schoolId").combobox("setValue", data[0].schoolId);
 			}
-			catch(e)
-			{
+		}
+		if($('#year').length > 0) {
+			initYear();
+		}
+	});
+	
+	$("#export").click(function(){
+		if($("#list_data").datagrid("getData").total > 0) {
+			var fileName =parent.$("li.tabs-selected").find("span.tabs-title").html();
+			try {
+				window.location.href="/sys/export/exportClassInstDetail.do?fileName="+fileName+"&mergeName=quarterText&mergeIndex=0&param="+JSON.stringify($("#list_data").datagrid("options").queryParams.param);
+			} catch(e) {
 				$.messager.alert('提示', "模版不存在！",function(){
 					window.history.back();
 				});
 			}
-		}
-		else
-		{
+		} else {
 			$.messager.alert('提示', "没有数据可以导出！");
 		}	
 	})
@@ -153,4 +139,9 @@ function mergeCellsByField(tableId, colList) {
             before = after;
         }
     }
+}
+
+function initYear() {
+	var curr_time = new Date();
+	$('#year').datebox('setValue', yearFormatter(curr_time));
 }

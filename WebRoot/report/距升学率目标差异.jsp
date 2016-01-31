@@ -13,8 +13,9 @@
   
   	<body>
   		<div style="padding:5px 0;">
-  			<input type="hidden" id="higherType" value="gapRate"/>
   			<form id="qryFm" style="margin:0 auto;">
+	  			<input type="hidden" id="higherType" value="gapRate"/>
+	  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
 	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
 	  				<tr>
 	  					<td align="right" width="50px"><span>校区：</span></td>

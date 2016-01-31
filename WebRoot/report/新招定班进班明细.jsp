@@ -14,23 +14,20 @@
   	<body>
   		<div style="padding:5px 0;">
   			<form id="qryFm" style="margin:0 auto;">
+  				<input type="hidden" id="type" value="inClassDetail"/>
+  				<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
 	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
 	  				<tr>
 	  					<td align="right"><span>校区：</span></td>
 	  					<td width="100px">
-							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
+							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false">
 				        	</select>
 						</td>
 	  					<td align="right"><span>学员姓名：</span></td>
 	  					<td width="100px">
-							<select id="studentId" name="studentId" class="easyui-combobox" style="width: 114px; height: 25px;">
-      						</select>
+	  						<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 114px; height: 25px;"/>
 						</td>
-	  					<td align="right">
-							<span>联系电话：</span>
-						</td>
+	  					<td align="right"><span>联系电话：</span></td>
 	  					<td width="100px">
 							<input name="phone" id="phone" type="text" class="easyui-textbox" style="width: 120px; height: 25px;"/>
 						</td>
@@ -53,9 +50,7 @@
 						</td>
 	  					<td align="right"><span>客户关怀：</span></td>
 						<td width="100px">
-							<select id="carer" name="carer" class="easyui-combobox" style="width: 114px; height: 25px;"
-								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
-	     						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+							<select id="carer" name="carer" class="easyui-combobox" style="width: 114px; height: 25px;">
 	     					</select>
 						</td>
 	  					<td align="right"><span>是否进班：</span></td>
@@ -63,7 +58,7 @@
 	  						<input type="checkbox" name="isAttend" value="'003','005','006','007','009'"/><span>&nbsp;是</span>
 							&nbsp;&nbsp;<input type="checkbox" name="isAttend" value="'001','002'"/><span>&nbsp;否</span>
 	  					</td>
-	  					<td align="right"><span>上课日期：</span></td>
+	  					<td align="right"><span>进班日期：</span></td>
 	  					<td width="100px">
 							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeAttend" name="startTimeAttend" ata-options="formatter:myformatter, parser:myparser"/>
 						</td>
@@ -95,7 +90,7 @@
 							<th data-options="field:'stageId',width:100,align:'center'">报名阶段</th>
 							<th data-options="field:'selectClassNum',width:100,align:'center'">定班次数</th>
 							<th data-options="field:'className',width:100,align:'center'">当前定班班级</th>
-							<th data-options="field:'attendDate',width:100,align:'center'">上课日期</th>
+							<th data-options="field:'attendDate',width:100,align:'center'">进班日期</th>
 							<th data-options="field:'waitDays',width:100,align:'center'">等班时长（天）</th>
 						</tr>
 					</thead>

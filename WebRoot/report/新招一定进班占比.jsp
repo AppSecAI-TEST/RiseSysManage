@@ -14,22 +14,22 @@
   	<body>
   		<div style="padding:5px 0;">
   			<form id="qryFm" style="margin:0 auto;">
+  				<input type="hidden" id="type" value="inClassOneRate"/>
+  				<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
 	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
 	  				<tr>
 	  					<td align="right"><span>校区：</span></td>
 	  					<td width="100px">
-							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
+							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false">
 				        	</select>
 						</td>
-	  					<td align="right"><span>缴费日期：</span></td>
+	  					<td align="right"><span>进班日期：</span></td>
 	  					<td width="100px">
-							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimePay" name="startTimePay" data-options="formatter:myformatter, parser:myparser"/>
+							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeAttend" name="startTimeAttend" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
 						<td align="center" width="14px"><span>至</span></td>
 						<td width="100px">
-							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimePay" name="endTimePay" data-options="formatter:myformatter, parser:myparser"/>
+							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeAttend" name="endTimeAttend" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
 						<td align="center">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1042">查询</a>

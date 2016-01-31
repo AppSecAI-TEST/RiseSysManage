@@ -1,6 +1,7 @@
 $(document).ready(function() {
+	var staffId = $("#staffId").val();
 	$("#schoolId").combobox({
-		url : "/sys/pubData/qrySchoolList.do?schoolId=",//返回json数据的url
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=711&fieldId=schoolId",//返回json数据的url
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
@@ -8,20 +9,10 @@ $(document).ready(function() {
     		return "<span>" + data.schoolName + "</span>";
     	},
     	onLoadSuccess:function(data) {
-    		var higherType = $("#higherType").val();
-    		if("gap" == higherType) {
-    			$("#schoolId").combobox("setValue", "");
-    			$("#schoolId").combobox("setText", "全部校区");
-    		} else if("gapRate" == higherType) {
-    			$("#schoolId").combobox("setValue", "");
-    			$("#schoolId").combobox("setText", "全部校区");
-    			$("#qryBtn").click();
-    		} else {
-    			if(data.length > 0) {
-    				$('#schoolId').combobox('setValue', data[0].schoolId);
-    				$("#qryBtn").click();
-    			}
-    		}
+    		if(data.length > 0) {
+				$('#schoolId').combobox('setValue', data[0].schoolId);
+				$("#qryBtn").click();
+			}
     	},
 		onChange : function(n, o) {
 			if($("#teacherId").length > 0) {
@@ -146,6 +137,25 @@ $(document).ready(function() {
 				$("#3_month").html("12月升学率");
 			}
 		}
+    	if($("#classProgress").length > 0) {
+    		var content = "";
+    		var minAttendRate = $("#minAttendRate").textbox("getValue");
+    		var maxAttendRate = $("#maxAttendRate").textbox("getValue");
+    		if(minAttendRate != null && minAttendRate != "" && minAttendRate != undefined) {
+    			if(maxAttendRate != null && maxAttendRate != "" && maxAttendRate != undefined) {
+    				content += minAttendRate + "% <= 课时进度 <= " + maxAttendRate + "%";
+    			} else {
+    				content += minAttendRate + "% <= 课时进度";
+    			}
+    		} else {
+    			if(maxAttendRate != null && maxAttendRate != "" && maxAttendRate != undefined) {
+    				content += "课时进度 <= " + maxAttendRate + "%";
+    			} else {
+    				content += "未结课";
+    			}
+    		}
+    		$("#classProgress").html(content);
+    	}
     });
 	
 	var higherType = $("#higherType").val();

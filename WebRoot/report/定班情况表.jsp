@@ -28,13 +28,13 @@
   	<body>
   		<div style="padding:5px 0;">
   			<form id="qryFm" style="margin:0 auto;">
+  				<input type="hidden" id="type" value="classDetail"/>
+  				<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
 	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
 	  				<tr>
 	  					<td align="right"><span>校区：</span></td>
 	  					<td width="100px">
-							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
+							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false">
 				        	</select>
 						</td>
 	  					<td align="right"><span>课程阶段：</span></td>
@@ -84,7 +84,7 @@
 	   			<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
 			</div>
   		</div>
-  		<div id="dlg" class="easyui-dialog" style="width: 900px; height: auto;" closed="true" data-options="modal:true">
+  		<div id="dlg" class="easyui-dialog" style="width: 900px; height: 300px;" closed="true" data-options="modal:true">
   			<form id="studentFm">
 				<table class="easyui-datagrid" style="width: 100%;height: auto; overflow: auto;" id="class_list_data"  
 					pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
