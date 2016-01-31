@@ -17,6 +17,10 @@ public class ShortClassAttendT {
     private Date schooltime;
 
     private String hourRange;
+    
+	private String startTime;
+	
+	private String endTime;
 
     private Integer hours;
 
@@ -109,8 +113,24 @@ public class ShortClassAttendT {
     public void setHourRange(String hourRange) {
         this.hourRange = hourRange == null ? null : hourRange.trim();
     }
+    
+    public String getStartTime() {
+		return startTime;
+	}
 
-    public Integer getHours() {
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+	public Integer getHours() {
         return hours;
     }
 
