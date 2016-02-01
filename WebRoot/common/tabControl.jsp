@@ -5,9 +5,10 @@
 		if($("ul.tabs").length&&$("ul.tabs").length>0&&document.URL.indexOf("admin.jsp")==-1&&&&document.URL.indexOf("view.jsp")==-1)
 		{
 			var strArr=$("#tabsInfo").val().split(",");
+			
 			$("ul.tabs").find("li").each(function()
 			{
-				if(!isContain(strArr,$(this).find("span.tabs-title").html()))
+				if(isContain(strArr,$(this).find("span.tabs-title").html()))
 				{
 					$(this).css("display","none");
 				}	
