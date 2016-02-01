@@ -19,6 +19,7 @@
 <script type="text/javascript" src="<%=headPath %>/pub/js/data.js"></script>
 <script type="text/javascript" src="<%=headPath %>/pub/js/validateForm.js"></script>
 <%@ include file="theme.jsp" %>
+<%@ include file="pub.jsp" %>
 <%-- 权限控制Tab页
 	<%@ include file="tabControl.jsp" %>
  --%>
