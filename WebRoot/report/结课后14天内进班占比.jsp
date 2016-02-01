@@ -8,34 +8,32 @@
   	<head>
 		<%@ include file="/common/head.jsp" %>
 		<%@ include file="/common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/js/export/newRecruit.js"></script>
   	</head>
   
   	<body>
   		<div style="padding:5px 0;">
-  			<form id="qryFm" style="margin:0 auto;">
-	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
+  			<form id="qryFm">
+  				<input type="hidden" id="resourceId" value="717">
+	  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
+	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right"><span>校区：</span></td>
-	  					<td width="100px">
+	  					<td align="right" style="min-width: 50px"><span>校区：</span></td>
+	  					<td style="min-width: 100px">
 							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 				        	</select>
 						</td>
-	  					<td align="right"><span>结课日期：</span></td>
-	  					<td width="100px">
+	  					<td align="right" style="min-width: 80px"><span>结课日期：</span></td>
+	  					<td style="min-width: 210px">
 							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeFinish" name="startTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
-						</td>
-						<td align="center" width="14px"><span>至</span></td>
-						<td width="100px">
+							<span style="display: inline-block; text-align: center; width: 14px;">至</span>
 							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeFinish" name="endTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
 						<td align="center">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1049">查询</a>
 							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 						</td>
-						<td width="400px">&nbsp;</td>
+						<td width="380px">&nbsp;</td>
 	  				</tr>
 	  			</table>
   			</form>
@@ -59,5 +57,30 @@
   	</body>
 </html>
 <script>
-	exportLink("export","list_data");
+	$(document).ready(function(){
+		var curr_time = new Date();
+		$('#endTimeFinish').datebox('setValue', myformatter(curr_time));
+		curr_time.setMonth(curr_time.getMonth() - 1);
+		$('#startTimeFinish').datebox('setValue', myformatter(curr_time));
+		$("#qryBtn").click(function() {
+			if($('#endTimeFinish').datebox('getValue')==""||$('#startTimeFinish').datebox('getValue')=="")
+			{
+				showMessage("提示","结课日期起止时间不能为空",null);
+				return false;
+			}	
+			var obj = JSON.stringify($("#qryFm").serializeObject());
+		    obj = obj.substring(0, obj.length - 1);
+		    var funcNodeId = $("#qryBtn").attr("funcNodeId");
+		    obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+		    $("#list_data").datagrid({
+		    	url : "/sys/pubData/qryDataListByPage.do",
+		    	queryParams:{
+		    		param : obj
+		    	}
+		    }); 
+		
+	    });
+		initReportButton("reset","qryFm","schoolId")
+		exportLink("export","list_data");
+	})
 </script>

@@ -12,28 +12,28 @@
   
   	<body>
   		<div style="margin-right:5px;">
-  			<input type="hidden" id="resourceId" value="717">
-  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId}"/>
   			<form id="qryFm">
+	  			<input type="hidden" id="resourceId" value="717">
+	  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
 	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right" width="80px"><span>校区：</span></td>
-	  					<td width="100px">
+	  					<td align="right" style="min-width: 50px"><span>校区：</span></td>
+	  					<td style="min-width: 100px">
 							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 				        	</select>
 						</td>
-	  					<td align="right" width="80px"><span>结课日期：</span></td>
-	  					<td width="280px">
-							<input class="easyui-datebox" type="text" style="width:120px; height: 25px;" id="startTimeFinish" name="startTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
-							至
-							<input class="easyui-datebox" type="text" style="width:120px; height: 25px;" id="endTimeFinish" name="endTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
+	  					<td align="right" style="min-width: 80px"><span>结课日期：</span></td>
+	  					<td style="min-width: 210px">
+							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeFinish" name="startTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
+							<span style="display: inline-block; text-align: center; width: 14px;">至</span>
+							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeFinish" name="endTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
-						<td align="center">
+						<td align="center" style="min-width: 210px">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1048">查询</a>
 							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 						</td>
-						<td width="400px">&nbsp;</td>
+						<td width="380px">&nbsp;</td>
 	  				</tr>
 	  			</table>
   			</form>
