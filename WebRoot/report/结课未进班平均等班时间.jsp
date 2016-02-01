@@ -13,14 +13,13 @@
   
   	<body>
   		<div style="padding:5px 0;">
-  			<form id="qryFm" style="margin:0 auto;">
-	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
+  			<form id="qryFm">
+	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right"><span>校区：</span></td>
-	  					<td width="100px">
+	  					<td align="right" style="min-width: 50px"><span>校区：</span></td>
+	  					<td style="min-width: 100px">
 							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 				        	</select>
 						</td>
 						<td align="center">
