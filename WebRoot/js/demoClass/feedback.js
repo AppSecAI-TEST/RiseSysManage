@@ -11,7 +11,7 @@ $(document).ready(function() {
 	classState = $("#classState").val();
 	handlerId =$("#handlerId").val();
 	$("#schoolId").combobox( {
-		url : "/sys/pub/pageCategory.do?staffId="+handlerId+"&resourceId=861&fieldId=schoolId",
+		url : "/sys/pubData/qrySchoolListWithTS.do",
 		onChange : function() {
 			var sId = $("#schoolId").combobox("getValue");
 			var urls = "/sys/pubData/qryTeacherList.do?schoolId=" + sId;

@@ -47,8 +47,10 @@
 		<script type="text/javascript">
 			ajaxLoadEnd();
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=801&fieldId=schoolId",function(data){
-				$("#schoolId").combobox("loadData",data);
 				$("#schoolRoomId").combobox("loadData",data);
+			},"json");
+			$.post("<%=path %>/pubData/qrySchoolListWithTS.do",function(data){
+				$("#schoolId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryParaConfigList.do?paramType=HOUR_RANGE",function(data){
 				$("#hourRange").combobox("loadData",data);

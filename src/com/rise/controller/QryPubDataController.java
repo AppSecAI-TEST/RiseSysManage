@@ -73,6 +73,32 @@ public class QryPubDataController
 		}
 	}
 	
+	//查询学校列表
+	@RequestMapping(value = "/qrySchoolListWithTS.do")
+	public void qrySchoolListWithTS(String schoolId, HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = qryPubDataService.qrySchoolListWithTS(schoolId);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 	//查询职务列表
 	@RequestMapping(value = "/qryPostList.do")
 	public void qryPostList(String postId, String postType, HttpServletResponse response)

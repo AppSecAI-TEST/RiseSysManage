@@ -56,7 +56,7 @@
 		</div>
 		<script type="text/javascript">
 			ajaxLoadEnd();
-			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=805&fieldId=schoolId",function(data){
+			$.post("<%=path %>/pubData/qrySchoolListWithTS.do",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("游学"),function(data){

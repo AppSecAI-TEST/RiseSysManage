@@ -44,7 +44,7 @@
 		</div>
 		<script type="text/javascript">
 			ajaxLoadEnd();
-			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=803&fieldId=schoolId",function(data){
+			$.post("<%=path %>/pubData/qrySchoolListWithTS.do",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryRoomList.do?schoolId=${param.schoolId}",function(data){

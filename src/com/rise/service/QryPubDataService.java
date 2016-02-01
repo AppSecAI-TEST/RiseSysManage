@@ -203,4 +203,10 @@ public class QryPubDataService
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10124\",securityCode:\"0000000000\",params:{tableName:\""+tableName+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
+	
+	public String qrySchoolListWithTS(String schoolId) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10125\",securityCode:\"0000000000\",params:{schoolId:\""+schoolId+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
 }

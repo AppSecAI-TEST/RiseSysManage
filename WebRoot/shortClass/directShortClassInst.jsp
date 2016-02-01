@@ -50,8 +50,10 @@
 		</div>
 		<script type="text/javascript">
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=815&fieldId=schoolId",function(data){
-				$("#schoolId").combobox("loadData",data);
 				$("#schoolRoomId").combobox("loadData",data);
+			},"json");
+			$.post("<%=path %>/pubData/qrySchoolListWithTS.do",function(data){
+				$("#schoolId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=ACTION_T&codeType=TEACHER_TYPE",function(data){
 				$("#teacherType").combobox("loadData",data);
