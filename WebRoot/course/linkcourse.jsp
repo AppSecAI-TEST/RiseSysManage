@@ -85,7 +85,7 @@
 								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 								  ></select>
 								  
-							<select name="adviserTeacherA"  id="adviserTeacherA" editable='false' required="true"
+							<select name="adviserTeacherA"  id="adviserTeacherA" editable='false'  
 								style="width: 100px; height: 25px;"
 								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
 							</select>
@@ -955,7 +955,7 @@ $("#addCourse").click(function()
 				return false;
 			}
 			
-			if($("#adviserTeacherB").combobox("getValue")!='' && ($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue")))
+			if($("#adviserTeacherA").combobox("getValue")!='' && ($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue")))
 			{
 				parent.showMessage("提示",arr[n]+"业绩老师A不能和业绩老师B相同",function(){
 					parent.hideMessage();
