@@ -12,16 +12,17 @@
   	</head>
   
   	<body>
-  		<div style="padding:5px 0;">
+  		<div style="margin-right:5px;">
   			<input type="hidden" id="type" value="detail"/>
-  			<form id="qryFm" style="margin:0 auto;">
-  				<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
+  			<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+  			<input type="hidden" id="resourceId" value="503">
+  			<form id="qryFm">
+  				<table class="search_tab">
   					<tr>
   						<td align="right" width="50px"><span>校区：</span></td>
 	  					<td width="114px">
-							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
+							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false" 
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 				        	</select>
 						</td>
 						<td align="right" width="50px"><span>阶段：</span></td>
@@ -39,11 +40,11 @@
 	  					</td>
 	  					<td align="right" width="100px"><span>开课日期：</span></td>
 	  					<td width="100px">
-							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeOpen" name="startTimeOpen" data-options="formatter:myformatter, parser:myparser"/>
+							<input class="easyui-datebox" type="text" style="width:120px; height: 25px;" id="startTimeOpen" name="startTimeOpen" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
 						<td align="center" width="14px"><span>至</span></td>
 						<td width="100px">
-							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeOpen" name="endTimeOpen" data-options="formatter:myformatter, parser:myparser"/>
+							<input class="easyui-datebox" type="text" style="width:120px; height: 25px;" id="endTimeOpen" name="endTimeOpen" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
 						<td align="left" width="250px">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1059">查询</a>
