@@ -422,8 +422,8 @@ $(document).ready(function() {
 
 //变更班级教师
 function maintenanceClass() {
-	var classTeacherArray = "[";
 	var flag = false;
+	var classTeacherArray = "[";
 	var newTeacherName = "";
 	$("[name='schooltimes']").each(function() {
 		var schooltimeId = $(this).attr("schooltimeId");
@@ -447,6 +447,13 @@ function maintenanceClass() {
 			}
 		});
 	});
+	var handTypeDisabled = $(".handType").attr("disabled");
+	if(handTypeDisabled == "" || handTypeDisabled == null || handTypeDisabled == undefined) {
+		var handType = $("input:radio[name='handType']:checked").val();
+		if("2" == handType) {
+			flag = true;
+		}
+	}
 	if(flag) {
 		newTeacherName = newTeacherName.substring(0, newTeacherName.length - 5);
 		$("#newTeacherName").val(newTeacherName);
@@ -458,7 +465,8 @@ function maintenanceClass() {
 			classTeacherId = classTeacherId.substring(0, classTeacherId.length - 1);
 			$("#classTeacherId").val(classTeacherId);
 		}
-		var obj = JSON.stringify($("#maintenanceClassFm").serializeObject());
+		var object = $("#maintenanceClassFm").serializeObject();
+		var obj = JSON.stringify(object);
 		var param = "{teacherChangeHist:"+obj+",classTeacherArray:"+classTeacherArray+"}";
 		param = encodeURI(param);
 		$.ajax({
@@ -481,7 +489,7 @@ function maintenanceClass() {
 			} 
 		});
 	} else {
-		$.messager.alert('提示', "请先变更老师！");
+		$.messager.alert('提示', "请先变更老师或者更改班级性质！");
 	}
 }
 

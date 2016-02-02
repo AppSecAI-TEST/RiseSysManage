@@ -54,7 +54,7 @@
   					<tr>
   						<td align="right"><span>计划转入班级：</span></td>
   						<td colspan="5">
-  							<select id="planInClassId" name="planInClassId" class="easyui-combobox" style="width: 200px; height: 25px;" required="true" editable="false">
+  							<select id="planInClassId" name="planInClassId" class="easyui-combobox" style="width: 200px; height: 25px;" editable="false">
 				        	</select>
   						</td>
   					</tr>

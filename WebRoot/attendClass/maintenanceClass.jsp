@@ -69,7 +69,16 @@
 		  					<td align="right" width="10%"><span>持证率：</span></td>
 		  					<td width="20%"><span id="studentChannelTypeVal">${obj.attendClassObj.licenseRateText }</span></td>
 		  					<td align="right" width="10%"><span>班级性质：</span></td>
-		  					<td width="30%"><span id="higherSchoolName">${obj.attendClassObj.handTypeText }</span></td>
+		  					<td width="30%">
+		  						<c:if test="${obj.attendClassObj.handType == '1' }">
+		  							<input type="radio" value="1" name="handType" checked="checked"/><span>一手班</span>
+	      							&nbsp;<input type="radio" value="2" name="handType"/><span>二手班</span>
+		  						</c:if>
+		  						<c:if test="${obj.attendClassObj.handType == '2' }">
+		  							<input type="radio" value="1" name="handType" disabled="disabled"/><span>一手班</span>
+	      							&nbsp;<input type="radio" value="2" name="handType" disabled="disabled" checked="checked"/><span>二手班</span>
+		  						</c:if>
+		  					</td>
 		  				</tr>
 		  				<tr>
 	  						<td colspan="6">

@@ -70,12 +70,17 @@ $(document).ready(function() {
 				$.messager.alert('提示', "请选择是否审批通过！");
 				flag = false;
 			} else {
-				if("104" == nextState || "105" == nextState) {
-					masterType = $("#masterType").combobox("getValue");
-					if(masterType == null || masterType == "" || masterType == undefined) {
-						$.messager.alert('提示', "请选择后续审批人类型！");
-						flag = false;
+				if("Y" == approveType) {
+					if("104" == nextState || "105" == nextState) {
+						masterType = $("#masterType").combobox("getValue");
+						if(masterType == null || masterType == "" || masterType == undefined) {
+							$.messager.alert('提示', "请选择后续审批人类型！");
+							flag = false;
+						}
 					}
+				} else {
+					$("#masterType").combobox('clear');
+					$("#masterType").combobox("loadData", new Array());
 				}
 			}
 		}
@@ -193,15 +198,6 @@ $(document).ready(function() {
 			$("#financialViewDiv").css("display", "block");
 			$("#chiefFinancialOfficerApproveDiv").css("display", "block");
 		} else if("104" == nextState || "105" == nextState) {
-			$("#masterType").combobox({
-				url : "/sys/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=MASTER_TYPE",//返回json数据的url
-				valueField : "codeFlag",
-				textField : "codeName",
-				panelHeight : "auto",
-				formatter : function(data) {
-					return "<span>" + data.codeName + "</span>";
-				}
-			});
 			$("#headmasterViewDiv").css("display", "block");
 			$("#financialViewDiv").css("display", "block");
 			if("SPECIAL_ADJUST" == refundRule) {
@@ -312,6 +308,25 @@ $(document).ready(function() {
 				}
 			}
 		}
+	}
+	if("104" == nextState || "105" == nextState) {
+		$("input:radio[name='approveType']").change(function() {
+			var approveType = $("input:radio[name='approveType']:checked").val();
+			if("Y" == approveType) {
+				$("#masterType").combobox({
+					url : "/sys/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=MASTER_TYPE",//返回json数据的url
+					valueField : "codeFlag",
+					textField : "codeName",
+					panelHeight : "auto",
+					formatter : function(data) {
+						return "<span>" + data.codeName + "</span>";
+					}
+				});
+			} else {
+				$("#masterType").combobox('clear');
+				$("#masterType").combobox("loadData", new Array());
+			}
+		});
 	}
 	
 	var refundImgUrl = $("#refundImg").attr("href");

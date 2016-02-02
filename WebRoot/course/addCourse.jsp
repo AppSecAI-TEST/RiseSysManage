@@ -174,7 +174,7 @@
 							</select>
 							<select name="adviserTeacherA" editable='false' class="easyui-combobox vaildatebox" id="adviserTeacherA"
 								style="width: 100px; height: 25px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'" required="true"
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'" 
 	      						 >
 							</select>
 						</td>
@@ -2193,7 +2193,7 @@ $("#addCourse").click(function()
 				}
 				else
 				{
-					if($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue"))
+					if($("#adviserTeacherA").combobox("getValue")!='' && ($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue")))
 					{
 						showMessage("提示","业绩老师A不能和业绩老师B相同",function(){
 							hideMessage();

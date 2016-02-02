@@ -1996,7 +1996,7 @@ $("#praiseSourceN").combobox({
 				}
 				else
 				{
-					if($("#adviserTeacherB").combobox("getValue")!='' &&( $("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue")))
+					if($("#adviserTeacherA").combobox("getValue")!='' &&( $("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue")))
 					{
 						parent.showMessage("提示",arr[n]+"业绩老师A不能和业绩老师B相同",function(){
 							parent.hideMessage();

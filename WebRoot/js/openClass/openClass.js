@@ -339,7 +339,12 @@ function openClass() {
 			$.messager.progress('close'); 
 			var flag = data.flag;
 			if(flag) {
-				$.messager.alert('提示', "申请开班成功！", "info", function() {window.history.back();});
+				var msg = "申请开班成功！";
+				var openClassType = $("#openClassType").val();
+				if("E" == openClassType) {
+					msg = "申请开班成功，异常开班扣款500元！";
+				}
+				$.messager.alert('提示', msg, "info", function() {window.history.back();});
 			} else {
 				$.messager.alert('提示', data.msg);
 			}
