@@ -376,10 +376,14 @@ $(document).ready(function() {
 			}
 			if(flag) {
 				var teacherNum = 1;
+				var s="";
 				if($("[name='teachers']").length > 0) {
-					$("[name='teachers']").each(function() {
+					$("[name='teachers']").each(function() 
+						{
 						var selTeacherId = $(this).attr("teacherId");
-						if(teacherId != selTeacherId) {
+						if(teacherId != selTeacherId && s.indexOf(selTeacherId)<1) 
+						{
+							s=s+","+selTeacherId+",";
 							teacherNum++;
 						}
 					});
@@ -420,7 +424,8 @@ $(document).ready(function() {
 					} else {
 						$.messager.alert('提示', "该上课时段可用的课时为"+subLessions+"个课时，请填写的课时小于或者等于"+subLessions+"！");
 					}
-				} else {
+				} else
+				{
 					$.messager.alert('提示', "一个班级最多只允许有2个带班老师！");
 				}
 			} else {
