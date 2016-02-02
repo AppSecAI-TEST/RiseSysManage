@@ -1136,8 +1136,9 @@ $("#submitBtn").click(function()
 	var studentCourseId=$("#studentCourseId").val();
 	var oldStageId = $("#oldStageId").val();
 	var oldFeeType = $("#oldFeeType").val();
-	 
-	if(oldStageId!=stageId || oldFeeType!=feeType)//阶段、业绩类型未修改不做校验
+	var classType = $("#classType").combobox("getValue");
+	
+	if(oldStageId!=stageId || oldFeeType!=feeType || classType!=oldClassType)//阶段、业绩类型未修改不做校验
 	{
 		for(var i=0;i<oldCourses.length;i++)
 		{
@@ -1145,9 +1146,18 @@ $("#submitBtn").click(function()
 			var order = course.stageOrder;
 			var courseState=course.courseState;
 			var stageName =course.stageId;
-			if(studentCourseId==course.studentCourseId)
+			var oldClassType=course.classType;
+			 
+			if((studentCourseId==course.studentCourseId)  &&(oldStageId!=stageName || classType!=oldClassType || oldFeeType!=feeType))
 			{
-				continue;
+				if(courseState=='002')
+				{
+					showMessage("提示","当前课程为已定班,不能修改课程信息",null);
+					return;
+				}else
+				{
+					continue;
+				}
 			}
 			if(courseState=='001' || courseState=='002' || courseState=='003' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 			{
@@ -1192,6 +1202,7 @@ $("#submitBtn").click(function()
 			}
 		}
 	} 
+	
 	addCourseInfo();
 });
 

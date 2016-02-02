@@ -301,6 +301,7 @@ function validateCourses(studentCourses)
 		var feeType =course.feeType;
 		var studentCourseId=course.studentCourseId;
 		var stageOrder = course.stageOrder;
+		var classType=course.classType;
 		
 		//校验本次购买课程是否有相同
 		for(var m=0;m<studentCourses.length;m++)
@@ -322,11 +323,20 @@ function validateCourses(studentCourses)
 			var courseState=oldCourse.courseState;
 			var stageName =oldCourse.stageId;
 			var oldFeeType =oldCourse.oldFeeType;
+			var oldClassType=oldCourse.classType;
 			
-			if(studentCourseId==oldCourse.studentCourseId && stageName==stageId && feeType==oldFeeType )//同一课程不比较，业绩类型、阶段没有变化不校验
+			if((studentCourseId==oldCourse.studentCourseId)  &&(stageId!=stageName || classType!=oldClassType || oldFeeType!=feeType))
 			{
-				continue;
+				if(courseState=='002')
+				{
+					showMessage("提示","当前课程"+orderCourses[m]+classType+"为已定班,不能修改课程信息",null);
+					return;
+				}else
+				{
+					continue;
+				}
 			}
+				
 			if(courseState=='001' || courseState=='002' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 			{
 				if(feeType=='001')//新招

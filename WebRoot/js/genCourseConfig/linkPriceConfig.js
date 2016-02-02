@@ -123,8 +123,9 @@ function deleteLinkPrice(setPriceId)
 		    	success: function(flag) {
 		    		$.messager.progress('close'); 
 		    		if(flag == "true"){
-		    			$.messager.alert('提示', "删除连报优惠体系成功！");
-		    			window.location.reload();
+		    			$.messager.alert('提示', "删除连报优惠体系成功！","info",function(){
+			    			window.location.reload();
+						});
 		    		}else if(flag == "false"){
 		    			$.messager.alert('提示', "删除连报优惠体系失败！");
 		    		}
@@ -289,13 +290,15 @@ function addLinkPriceSubmit()
 	    	success: function(state) {
 	    		$.messager.progress('close'); 
 	    		if(state == "1"){
-	    			$.messager.alert('提示', "添加新优惠成功！");
-	    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
+	    			$.messager.alert('提示', "添加新优惠成功！","info",function(){
+		    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
+					});
 	    		}else if(state == "2"){
 	    			$.messager.alert('提示', "添加新优惠失败！");
 	    		}else if(state == "3"){
-	    			$.messager.alert('提示',"该校区该时间区间内已一个连报优惠体系！");
-	    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
+	    			$.messager.alert('提示',"该校区该时间区间内已一个连报优惠体系！","info",function(){
+		    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
+					});
 	    		}
 	        } 
 		});
@@ -419,13 +422,15 @@ function updateLinkPriceSubmit()
 	    	success: function(state) {
 	    		$.messager.progress('close'); 
 	    		if(state == "1"){
-	    			$.messager.alert('提示', "修改优惠成功！");
-	    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
+	    			$.messager.alert('提示', "修改优惠成功！","info",function(){
+		    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
+					});
 	    		}else if(state == "2"){
 	    			$.messager.alert('提示', "修改优惠失败！");
 	    		}else if(state == "3"){
-	    			$.messager.alert('提示',"该校区该时间区间内已一个连报优惠体系！");
-	    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
+	    			$.messager.alert('提示',"该校区该时间区间内已一个连报优惠体系！","info",function(){
+		    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
+					});
 	    		}
 	        } 
 		});

@@ -43,8 +43,10 @@ $(document).ready(function() {
 				initClassInst(inClassIsBegin);
 			} else {
 				var planInClassIsBegin = data.planInClassIsBegin;
-				$("input[name='isBegin'][value='"+planInClassIsBegin+"']").attr("checked", "checked");
-				initClassInst(planInClassIsBegin);
+				if(planInClassIsBegin != null && planInClassIsBegin != "" && planInClassIsBegin != undefined) {
+					$("input[name='isBegin'][value='"+planInClassIsBegin+"']").attr("checked", "checked");
+					initClassInst(planInClassIsBegin);
+				}
 			}
 			var feeType = data.feeType;
 			var studentChannelType = "";
