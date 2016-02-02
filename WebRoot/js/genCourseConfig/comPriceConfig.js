@@ -132,8 +132,9 @@ function deleteComPrice(setPriceId)
 		    	success: function(flag) {
 		    		$.messager.progress('close'); 
 		    		if(flag == "true"){
-		    			$.messager.alert('提示', "删除课程价格体系成功！");
+		    			$.messager.alert('提示', "删除课程价格体系成功！","info",function(){
 		    			window.location.reload();
+					});
 		    		}else if(flag == "false"){
 		    			$.messager.alert('提示', "删除课程价格体系失败！");
 		    		}

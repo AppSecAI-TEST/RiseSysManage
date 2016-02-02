@@ -73,7 +73,7 @@ function updateClassNumSubmit()
 			type : "POST",
 			url: "/sys/genCourseConfig/updateClassNum.do",
 			data: "json="+json,
-			async: false,
+			async: true,
 			beforeSend: function()
 	    	{
 	    		$.messager.progress({title : '修改开班人数', msg : '修改开班人数中，请稍等……'});
@@ -81,9 +81,10 @@ function updateClassNumSubmit()
 	    	success: function(flag) {
 	    		$.messager.progress('close'); 
 	    		if(flag == "true"){
-	    			$.messager.alert('提示', "修改开班人数成功！");
-	    			$('#classDlg').dialog('close');
-	    			window.location.reload();
+	    			$.messager.alert('提示', "修改开班人数成功！","info",function(){
+		    			$('#classDlg').dialog('close');
+		    			window.location.reload();
+					});
 	    		}else if(flag == "false"){
 	    			$.messager.alert('提示', "修改开班人数失败！");
 	    		}

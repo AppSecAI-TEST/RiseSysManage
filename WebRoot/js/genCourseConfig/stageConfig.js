@@ -133,13 +133,15 @@ function saveSubmit()
 	    	success: function(state) {
 	    		$.messager.progress('close'); 
 	    		if(state == "3"){
-	    			$.messager.alert('提示', stageAction+actionType+"成功！");
-	    			$('#stageDlg').dialog('close');
-	    			window.location.reload();
+	    			$.messager.alert('提示', stageAction+actionType+"成功！","info",function(){
+		    			$('#stageDlg').dialog('close');
+		    			window.location.reload();
+					});
 	    		}else if(state == "2"){
-	    			$.messager.alert('提示', "阶段名称或者年级不能重复！");
-	    			$('#stageDlg').dialog('close');
-	    			window.location.reload();
+	    			$.messager.alert('提示', "阶段名称或者年级不能重复！","info",function(){
+		    			$('#stageDlg').dialog('close');
+		    			window.location.reload();
+					});
 	    		}else if(state == "1"){
 	    			$.messager.alert('提示', stageAction+actionType+"失败！");
 	    		}
@@ -166,8 +168,9 @@ function deleteClassType(classId)
 	    	success: function(flag) {
 	    		$.messager.progress('close'); 
 	    		if(flag == "true"){
-	    			$.messager.alert('提示', "删除班级类型成功！");
-	    			window.location.reload();
+	    			$.messager.alert('提示', "删除班级类型成功！","info",function(){
+		    			window.location.reload();
+					});
 	    		}else if(flag == "false"){
 	    			$.messager.alert('提示', "删除班级类型失败！");
 	    		}
@@ -198,8 +201,9 @@ function deleteStage()
 			    	success: function(flag) {
 			    		$.messager.progress('close'); 
 			    		if(flag == "true"){
-			    			$.messager.alert('提示', "删除课程阶段成功！");
-			    			window.location.reload();
+			    			$.messager.alert('提示', "删除课程阶段成功！","info",function(){
+				    			window.location.reload();
+							});
 			    		}else if(flag == "false"){
 			    			$.messager.alert('提示', "删除课程阶段失败！");
 			    		}
@@ -252,13 +256,15 @@ function updateStageSubmit()
 	    	success: function(state) {
 	    		$.messager.progress('close'); 
 	    		if(state == "3"){
-	    			$.messager.alert('提示', "修改阶段成功！");
-	    			$('#updateStageDlg').dialog('close');
-	    			window.location.reload();
+	    			$.messager.alert('提示', "修改阶段成功！","info",function(){
+		    			$('#updateStageDlg').dialog('close');
+		    			window.location.reload();
+					});
 	    		}else if(state == "2"){
-	    			$.messager.alert('提示', "阶段名称或者年级不能重复！");
-	    			$('#updateStageDlg').dialog('close');
-	    			window.location.reload();
+	    			$.messager.alert('提示', "阶段名称或者年级不能重复！","info",function(){
+		    			$('#updateStageDlg').dialog('close');
+		    			window.location.reload();
+					});
 	    		}else if(state == "1"){
 	    			$.messager.alert('提示', "修改阶段失败！");
 	    		}
