@@ -470,8 +470,9 @@ function addCouponGiftSubmit()
 	    	success: function(flag) {
 	    		$.messager.progress('close'); 
 	    		if(flag == "true"){
-	    			$.messager.alert('提示', "赠券赠品赠送成功！");
-	    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+	    			$.messager.alert('提示', "赠券赠品赠送成功！","info",function(){
+		    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+					});
 	    		}else if(flag == "false"){
 	    			$.messager.alert('提示', "赠券赠品赠送失败！");
 	    		}
@@ -556,8 +557,9 @@ function getCouponGiftSubmit()
 	    	success: function(flag) {
 	    		$.messager.progress('close'); 
 	    		if(flag == "true"){
-	    			$.messager.alert('提示', "赠券领取成功！");
-	    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+	    			$.messager.alert('提示', "赠券领取成功！","info",function(){
+		    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+					});
 	    		}else if(flag == "false"){
 	    			$.messager.alert('提示', "赠券领取失败！");
 	    		}
@@ -612,8 +614,9 @@ function couponExchangeSubmit()
 	    	success: function(flag) {
 	    		$.messager.progress('close'); 
 	    		if(flag == "true"){
-	    			$.messager.alert('提示', "赠券兑换成功！");
-	    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+	    			$.messager.alert('提示', "赠券兑换成功！","info",function(){
+		    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+					});
 	    		}else if(flag == "false"){
 	    			$.messager.alert('提示', "赠券兑换失败！");
 	    		}
@@ -658,8 +661,9 @@ function couponInvalidateSubmit()
     	success: function(flag) {
     		$.messager.progress('close'); 
     		if(flag == "true"){
-    			$.messager.alert('提示', "赠券作废成功！");
-    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+    			$.messager.alert('提示', "赠券作废成功！","info",function(){
+	    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+				});
     		}else if(flag == "false"){
     			$.messager.alert('提示', "赠券作废失败！");
     		}
@@ -713,8 +717,9 @@ function couponDelaySubmit()
     	success: function(flag) {
     		$.messager.progress('close'); 
     		if(flag == "true"){
-    			$.messager.alert('提示', "赠券延期成功！");
-    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+    			$.messager.alert('提示', "赠券延期成功！","info",function(){
+	    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+				});
     		}else if(flag == "false"){
     			$.messager.alert('提示', "赠券延期失败！");
     		}

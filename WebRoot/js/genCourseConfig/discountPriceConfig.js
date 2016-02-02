@@ -123,8 +123,9 @@ function deleteDiscountPrice(setPriceId)
 		    	success: function(flag) {
 		    		$.messager.progress('close'); 
 		    		if(flag == "true"){
-		    			$.messager.alert('提示', "删除复读折扣配置成功！");
+		    			$.messager.alert('提示', "删除复读折扣配置成功！","info",function(){
 		    			window.location.reload();
+					});
 		    		}else if(flag == "false"){
 		    			$.messager.alert('提示', "删除复读折扣配置失败！");
 		    		}
@@ -209,13 +210,15 @@ function addDiscountPriceSubmit()
     	success: function(state) {
     		$.messager.progress('close'); 
     		if(state == "1"){
-    			$.messager.alert('提示', "添加新折扣成功！");
-    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
+    			$.messager.alert('提示', "添加新折扣成功！","info",function(){
+	    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
+				});
     		}else if(state == "2"){
     			$.messager.alert('提示', "添加新折扣失败！");
     		}else if(state == "3"){
-    			$.messager.alert('提示', "该校区该时间点已经有一个复读折扣配置！");
-    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
+    			$.messager.alert('提示', "该校区该时间点已经有一个复读折扣配置！","info",function(){
+	    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
+				});
     		}
         } 
 	});
@@ -308,13 +311,15 @@ function updateDisPriceSubmit()
     	success: function(state) {
     		$.messager.progress('close'); 
     		if(state == "1"){
-    			$.messager.alert('提示', "修改折扣成功！");
-    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
+    			$.messager.alert('提示', "修改折扣成功！","info",function(){
+	    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
+				});
     		}else if(state == "2"){
     			$.messager.alert('提示', "修改折扣失败！");
     		}else if(state == "3"){
-    			$.messager.alert('提示', "该校区该时间点已经有一个复读折扣配置！");
-    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
+    			$.messager.alert('提示', "该校区该时间点已经有一个复读折扣配置！","info",function(){
+	    			window.location.href = "/sys/genCourseConfig/genCourseCongifMain.jsp";
+				});
     		}
         } 
 	});

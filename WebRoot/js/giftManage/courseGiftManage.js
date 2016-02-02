@@ -193,8 +193,9 @@ function courseFinishSubmit()
     	success: function(flag) {
     		$.messager.progress('close'); 
     		if(flag == "true"){
-    			$.messager.alert('提示', "赠课终止成功！");
-    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+    			$.messager.alert('提示', "赠课终止成功！","info",function(){
+	    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+				});
     		}else if(flag == "false"){
     			$.messager.alert('提示', "赠课终止失败！");
     		}

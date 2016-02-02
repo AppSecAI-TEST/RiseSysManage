@@ -70,8 +70,8 @@
 					</td>
 					<td width="10%" align="right"><span>毕业典礼：</span></td>
 					<td align="left" width="10%">
-						<input name="gradIsAttend" class="openIsAttend" type="checkbox" value="Y" style="margin:0 auto;vertical-align:middle;" /><span>已到</span>
-						&nbsp;&nbsp;&nbsp;<input name="gradIsAttend" class="openIsAttend" type="checkbox" value="N" style="margin:0 auto;vertical-align:middle;" /><span>未到</span>
+						<input name="gradIsAttend" class="gradIsAttend" type="checkbox" value="Y" style="margin:0 auto;vertical-align:middle;" /><span>已到</span>
+						&nbsp;&nbsp;&nbsp;<input name="gradIsAttend" class="gradIsAttend" type="checkbox" value="N" style="margin:0 auto;vertical-align:middle;" /><span>未到</span>
 					</td>
 					<td colspan="2" align="center">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px;" id="qryBtn" funcNodeId="4610"><span>查询</span></a>
@@ -136,8 +136,8 @@
 				$(".openIsAttend").removeAttr("checked");
 				$(this).prop("checked", "checked");
 			});
-			$(".openIsAttend").click(function() {
-				$(".openIsAttend").removeAttr("checked");
+			$(".gradIsAttend").click(function() {
+				$(".gradIsAttend").removeAttr("checked");
 				$(this).prop("checked", "checked");
 			});
 	        exportLink("export","list_data");

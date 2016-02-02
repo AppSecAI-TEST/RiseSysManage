@@ -410,8 +410,9 @@ function addGoodsGiftSubmit()
 	    	success: function(flag) {
 	    		$.messager.progress('close'); 
 	    		if(flag == "true"){
-	    			$.messager.alert('提示', "实物&教材赠品赠送成功！");
-	    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+	    			$.messager.alert('提示', "实物&教材赠品赠送成功！","info",function(){
+		    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+					});
 	    		}else if(flag == "false"){
 	    			$.messager.alert('提示', "实物&教材赠品赠送失败！");
 	    		}
@@ -486,8 +487,9 @@ function getGoodsGiftSubmit()
 	    	success: function(flag) {
 	    		$.messager.progress('close'); 
 	    		if(flag == "true"){
-	    			$.messager.alert('提示', "实物&教材赠品领取成功！");
-	    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+	    			$.messager.alert('提示', "实物&教材赠品领取成功！","info",function(){
+		    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+					});
 	    		}else if(flag == "false"){
 	    			$.messager.alert('提示', "实物&教材赠品领取失败！");
 	    		}
@@ -570,8 +572,9 @@ function rtnGoodsGiftSubmit()
 	    	success: function(flag) {
 	    		$.messager.progress('close'); 
 	    		if(flag == "true"){
-	    			$.messager.alert('提示', "实物&教材赠品退回成功！");
-	    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+	    			$.messager.alert('提示', "实物&教材赠品退回成功！","info",function(){
+		    			window.location.href = "/sys/giftManage/qryGiftInfo.jsp";
+					});
 	    		}else if(flag == "false"){
 	    			$.messager.alert('提示', "实物&教材赠品退回失败！");
 	    		}

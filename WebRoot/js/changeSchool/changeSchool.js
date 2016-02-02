@@ -12,6 +12,8 @@ $(document).ready(function() {
 	
 	$("#qryApplyBtn").click(function() {
 		var object = $("#qryApplyFm").serializeObject();
+		var schoolId = $("#schoolId").val();
+		object.schoolId = schoolId;
 		var funcNodeId = $("#qryApplyBtn").attr("funcNodeId");
 		object.funcNodeId = funcNodeId;
 		var obj = JSON.stringify(object);
@@ -33,6 +35,8 @@ $(document).ready(function() {
 	
 	$("#qryApproveBtn").click(function() {
 		var object = $("#qryApproveFm").serializeObject();
+		var schoolId = $("#schoolId").val();
+		object.schoolId = schoolId;
 		var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");
 		object.funcNodeId = funcNodeId;
 		var obj = JSON.stringify(object);
