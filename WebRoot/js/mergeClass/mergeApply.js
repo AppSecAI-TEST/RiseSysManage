@@ -460,7 +460,7 @@ function submitMergeInfo()
 		comboClass.isHead=$("#isHead").val();
 		if(comboClass.isHead=="Y")
 		{
-			comboClass.schoolId =$("schoolId").combobox("getValue");
+			comboClass.schoolId =$("#schoolId").combobox("getValue");
 		}
 		else
 		{
