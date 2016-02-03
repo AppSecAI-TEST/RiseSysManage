@@ -67,7 +67,7 @@
 				hideProgressLoader()
 				if(data.baseInfo!=undefined&&data.baseInfo!="")
 				{
-					$("#infoTab").find("tr:eq(0)").find("td:eq(1)").find("span").html(data.baseInfo.openDate+" "+data.baseInfo.rangeVal);
+					$("#infoTab").find("tr:eq(0)").find("td:eq(1)").find("span").html(data.baseInfo.openDate+" "+data.baseInfo.startTime+"~"+data.baseInfo.endTime);
 					$("#infoTab").find("tr:eq(1)").find("td:eq(1)").find("span").html(data.baseInfo.roomName);
 					$("#infoTab").find("tr:eq(2)").find("td:eq(1)").find("span").html(data.baseInfo.lessionHours);
 				}

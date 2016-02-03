@@ -17,7 +17,7 @@
 		<table class="tab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="right" width="10%">上课时间：</td>
-				<td><fmt:formatDate value="${shortClassAttendT.schooltime}" pattern="yyyy-MM-dd" /> ${shortClassAttendT.hourRangeObj.paramDesc}</td>
+				<td><fmt:formatDate value="${shortClassAttendT.schooltime}" pattern="yyyy-MM-dd" /> ${shortClassAttendT.startTime}~${shortClassAttendT.endTime}</td>
 			</tr>
 			<tr>
 				<td align="right">教室：</td>

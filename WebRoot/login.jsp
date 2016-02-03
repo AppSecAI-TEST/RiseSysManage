@@ -7,9 +7,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<!-- 
 <title>瑞思教务管理系统 - 用户登录</title>
- -->
 <%@ include file="/common/head.jsp" %>
 <style type="text/css">
 body

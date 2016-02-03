@@ -18,7 +18,7 @@
 				<td align="right" width="10%"><span>日期：</span></td>
 				<td width="35%" colspan="4">
 					<input name="schooltimeDate" id="schooltimeDate" type="text" style="width:150px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />&nbsp;&nbsp;
-					<select id="hourRange" name="hourRange" style="width:150px" ></select>
+					<input class="easyui-timespinner" id="startTime" name="startTime" style="width:70px;height: 25px;"  data-options="showSeconds:false">&nbsp;&nbsp;<input class="easyui-timespinner" id="endTime" name="endTime" style="width:70px;height: 25px;"  data-options="showSeconds:false"></select>
 				</td>
 			</tr>
 			<tr>
@@ -52,9 +52,6 @@
 			$.post("<%=path %>/pubData/qrySchoolListWithTS.do",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/pubData/qryParaConfigList.do?paramType=HOUR_RANGE",function(data){
-				$("#hourRange").combobox("loadData",data);
-			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=ACTION_T&codeType=TEACHER_TYPE",function(data){
 				$("#teacherType").combobox("loadData",data);
 			},"json");
@@ -66,14 +63,24 @@
 					panelHeight: 'auto',
 					editable:false
 				});
-				$("#hourRange").combobox({
-					formatter:formatParaConfig, 
-					valueField: 'paramValue', 
-					textField: 'paramDesc',
-					panelHeight: 'auto',
-					editable:false,
-					onSelect:function(data){
-						$("#lessonHour").textbox("setValue",data.param4);
+				$("#startTime").timespinner({
+					onChange:function(row){
+						if($("#endTime").timespinner("getValue") != "")
+						{
+							var endTime = parseInt($("#endTime").timespinner("getHours"))+(parseInt($("#endTime").timespinner("getMinutes"))>0?1:0);
+							var startTime = parseInt($("#startTime").timespinner("getHours"))+(parseInt($("#startTime").timespinner("getMinutes"))>0?1:0);
+							$("#lessonHour").textbox("setValue",(endTime-startTime));
+						}
+					}
+				});
+				$("#endTime").timespinner({
+					onChange:function(row){
+						if($("#startTime").timespinner("getValue") != "")
+						{
+							var endTime = parseInt($("#endTime").timespinner("getHours"))+(parseInt($("#endTime").timespinner("getMinutes"))>0?1:0);
+							var startTime = parseInt($("#startTime").timespinner("getHours"))+(parseInt($("#startTime").timespinner("getMinutes"))>0?1:0);
+							$("#lessonHour").textbox("setValue",(endTime-startTime));
+						}
 					}
 				});
 				$("#teacherType").combobox({
@@ -180,7 +187,8 @@
 			function addSubmitFunc()
 			{
 				var schooltimeDate = $("#schooltimeDate").datebox("getValue");
-				var hourRange = $("#hourRange").combobox("getValue");
+				var startTime = $("#startTime").timespinner("getValue");
+				var endTime = $("#endTime").timespinner("getValue");
 				var roomList = $("#roomList").combobox("getValue");
 				var lessonHour = $("#lessonHour").textbox("getValue");
 				var arr = [];
@@ -199,9 +207,13 @@
 				{
 					$.messager.alert('提示',"排课日期不能为空,请核实后重新尝试","info");
 				}
-				else if(hourRange == "")
+				else if(startTime == "")
 				{
-					$.messager.alert('提示',"排课时间范围不能为空,请核实后重新尝试","info");
+					$.messager.alert('提示',"排课起始时间不能为空,请核实后重新尝试","info");
+				}
+				else if(endTime == "")
+				{
+					$.messager.alert('提示',"排课结课时间不能为空,请核实后重新尝试","info");
 				}
 				else if(roomList == "")
 				{
@@ -215,6 +227,10 @@
 				{
 					$.messager.alert('提示',"排课课时不合法,请核实后重新尝试","info");
 				}
+				else if(parseInt(lessonHour) <= 0)
+				{
+					$.messager.alert('提示',"排课结课时间必须大于排课起始时间,请核实后重新尝试","info");
+				}
 				else if(arr.length == 0)
 				{
 					$.messager.alert('提示',"排课老师不能为空,请添加排课老师","info");
@@ -224,13 +240,14 @@
 					var json = {
 						roomId:roomList,
 						schooltime:schooltimeDate,
-						hourRange:hourRange,
+						startTime:startTime,
+						endTime:endTime,
 						lessionHours:lessonHour,
 						handlerId:${sessionScope.StaffT.staffId},
 						classTeacherList:arr
 					};
 					ajaxLoading("正在处理，请稍待。。。");
-					$.post("/sys/shortBus/addDirectShortClassInstInfo.do",{json:JSON.stringify(json),classType:encodeURI("DEMO"),schoolId:${sessionScope.StaffT.schoolId},stageId:""},function(data){
+					$.post("/sys/shortBus/addDirectShortClassInstInfo.do",{json:JSON.stringify(json),classType:encodeURI("DEMO"),schoolId:$("#schoolRoomId").combobox("getValue"),stageId:""},function(data){
 						ajaxLoadEnd();
 						if(data == "success")
 						{

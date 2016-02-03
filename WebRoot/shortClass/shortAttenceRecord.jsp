@@ -17,7 +17,7 @@
 		<table class="tab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="right" width="10%">上课时间：</td>
-				<td>周${shortSchooltimeT.weekTime} <fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" /> <select id="classTime" name="classTime" style="width:200px" ></select></td>
+				<td>周${shortSchooltimeT.weekTime} <fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" /> <input class="easyui-timespinner" id="startTime" name="startTime" style="width:70px;height: 25px;"  data-options="showSeconds:false">&nbsp;&nbsp;<input class="easyui-timespinner" id="endTime" name="endTime" style="width:70px;height: 25px;"  data-options="showSeconds:false"></td>
 			</tr>
 			<tr>
 				<td align="right">教室：</td>
@@ -97,31 +97,34 @@
 		<script type="text/javascript">
 			ajaxLoadEnd();
 			$(document).ready(function(){
-				var classTimeData = '${hourRangeList}';
 				var classRoomIdData = '${roomList}';
 				var attRecordSchoolIdData = '${schoolList}';
 				var attRecordClassType = '${teacherTypeList}';
-				classTimeData = eval("("+classTimeData+")");
 				classRoomIdData = eval("("+classRoomIdData+")");
 				attRecordSchoolIdData = eval("("+attRecordSchoolIdData+")");
 				attRecordClassType = eval("("+attRecordClassType+")");
 				$(document).ready(function(){
-					$("#classTime").combobox("setValue","${shortSchooltimeT.hourRange}");
 					$("#classRoomId").combobox("setValue","${shortSchooltimeT.roomId}");
 					$("#classLessonHour").textbox("setValue","${shortSchooltimeT.lessionHours}");
 				});
-				$("#classTime").combobox({
-					formatter:formatParaConfig, 
-					valueField: 'paramValue', 
-					textField: 'paramDesc', 
-					panelHeight: 'auto',
-					editable:false,
-					data:classTimeData,
-					onLoadSuccess:function(data){
-						$("#classTime").combobox("setValue","${schooltimeInstT.hourRange}");
-					},
-					onSelect:function(data){
-						$("#classLessonHour").textbox("setValue",data.param4);
+				$("#startTime").timespinner({
+					onChange:function(row){
+						if($("#endTime").timespinner("getValue") != "")
+						{
+							var endTime = parseInt($("#endTime").timespinner("getHours"))+(parseInt($("#endTime").timespinner("getMinutes"))>0?1:0);
+							var startTime = parseInt($("#startTime").timespinner("getHours"))+(parseInt($("#startTime").timespinner("getMinutes"))>0?1:0);
+							$("#classLessonHour").textbox("setValue",(endTime-startTime));
+						}
+					}
+				});
+				$("#endTime").timespinner({
+					onChange:function(row){
+						if($("#startTime").timespinner("getValue") != "")
+						{
+							var endTime = parseInt($("#endTime").timespinner("getHours"))+(parseInt($("#endTime").timespinner("getMinutes"))>0?1:0);
+							var startTime = parseInt($("#startTime").timespinner("getHours"))+(parseInt($("#startTime").timespinner("getMinutes"))>0?1:0);
+							$("#classLessonHour").textbox("setValue",(endTime-startTime));
+						}
 					}
 				});
 				$("#classRoomId").combobox({
@@ -168,6 +171,8 @@
 					editable:false,
 					data:attRecordClassType
 				});
+				$("#startTime").timespinner("setValue","${shortSchooltimeT.startTime}");
+				$("#endTime").timespinner("setValue","${shortSchooltimeT.endTime}");
 				$("#classLessonHour").textbox("setValue","${schooltimeInstT.lessionHours}");
 			});
 			
@@ -275,14 +280,16 @@
 			
 			function attendSubmit()
 			{
-				var classTime = $("#classTime").combobox("getValue");
+				var startTime = $("#startTime").timespinner("getValue");
+				var endTime = $("#endTime").timespinner("getValue");
 				var classLessonHour = $("#classLessonHour").textbox("getValue");
 				var classRoomId = $("#classRoomId").combobox("getValue");
 				var obj = {
 					shortClassInstId:"${shortSchooltimeT.shortClassInstId}",
 					shortSchooltimeId:"${shortSchooltimeT.shortSchooltimeId}",
 					schoolId:"${shortClassInstT.schoolId}",
-					hourRange:classTime,
+					startTime:$("#startTime").timespinner("getValue"),
+					endTime:$("#endTime").timespinner("getValue"),
 					hours:classLessonHour,
 					roomId:classRoomId,
 					handerId:"${sessionScope.StaffT.staffId}",
@@ -334,9 +341,13 @@
 					studentArr.push(studentObj);
 				});
 				obj.studentAttendList = studentArr;
-				if(classTime == "")
+				if(startTime == "")
 				{
-					$.messager.alert("提示", "请选择上课时间后重新尝试","warning");
+					$.messager.alert('提示',"上课起始时间不能为空,请核实后重新尝试","warning");
+				}
+				else if(endTime == "")
+				{
+					$.messager.alert('提示',"上课结束时间不能为空,请核实后重新尝试","warning");
 				}
 				else if(classRoomId == "")
 				{
@@ -349,6 +360,10 @@
 				else if(isNaN(classLessonHour))
 				{
 					$.messager.alert("提示", "请检查课时是否合法后重新尝试","warning");
+				}
+				else if(classLessonHour <= 0)
+				{
+					$.messager.alert('提示',"上课结束时间必须大于上课起始时间,请核实后重新尝试","warning");
 				}
 				else if(teacherArr.length == 0)
 				{

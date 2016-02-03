@@ -89,6 +89,8 @@
 				attRecordClassType = eval("("+attRecordClassType+")");
 				$(document).ready(function(){
 					$("#classRoomId").combobox("setValue","${shortSchooltimeT.roomId}");
+					$("#startTime").timespinner("setValue","${shortSchooltimeT.startTime}");
+					$("#endTime").timespinner("setValue","${shortSchooltimeT.endTime}");
 					$("#classLessonHour").textbox("setValue","${shortSchooltimeT.lessionHours}");
 				});
 				$("#startTime").timespinner({
@@ -155,9 +157,6 @@
 					editable:false,
 					data:attRecordClassType
 				});
-				$("#startTime").timespinner("setValue","${shortSchooltimeT.startTime}");
-				$("#endTime").timespinner("setValue","${shortSchooltimeT.endTime}");
-				$("#classLessonHour").textbox("setValue","${shortSchooltimeT.lessionHours}");
 			});
 			
 			function addAttendTeacher()
@@ -245,8 +244,8 @@
 					shortClassInstId:"${shortSchooltimeT.shortClassInstId}",
 					shortSchooltimeId:"${shortSchooltimeT.shortSchooltimeId}",
 					schoolId:"${shortClassInstT.schoolId}",
-					startTime:$("#startTime").timespinner("getValue"),
-					endTime:$("#endTime").timespinner("getValue"),
+					startTime:startTime,
+					endTime:endTime,
 					hours:classLessonHour,
 					roomId:$("#classRoomId").combobox("getValue"),
 					handerId:"${sessionScope.StaffT.staffId}",

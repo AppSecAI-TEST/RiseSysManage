@@ -165,7 +165,7 @@
 						<div class="panel-tool"></div>
 					</div>
 					<div class="panel-body" style="padding:8px;line-height:1.8">
-						<!-- 瑞思教务管理系统 -->
+						 瑞思教务管理系统 
 					</div>
 				</div>
 			</td>

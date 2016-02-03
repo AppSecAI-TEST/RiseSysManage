@@ -27,10 +27,7 @@
 	 				<td width="150px" align="right"><span>上课时间：</span></td>
 	 				<td align="left" colspan="5">
 	 					&nbsp;&nbsp;<input class="easyui-datebox" name="openDate" id="openDate"  style="width:150px;height: 25px;" editable="false"/>&nbsp;&nbsp;
-	 					<select class="easyui-combobox" name="hourRange" id="hourRange" style="width:180px;height: 25px;" editable="false"
-  							 data-options="valueField: 'paramValue', textField: 'paramDesc', panelHeight: 'auto'"
-	      					 url="<%=path %>/pubData/qryParaConfigList.do?paramType=HOUR_RANGE">
-  						</select>
+	 					<input class="easyui-timespinner" id="startTime" name="startTime" style="width:70px;height: 25px;"  data-options="showSeconds:false">&nbsp;&nbsp;<input class="easyui-timespinner" id="endTime" name="endTime" style="width:70px;height: 25px;"  data-options="showSeconds:false"></select>
 	 				</td>
 	 			</tr>
 	 			<tr>

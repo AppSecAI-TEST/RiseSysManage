@@ -43,7 +43,7 @@
 					<c:forEach items="${shortClassInstT.classSchooltimeList}" var="node" varStatus="i">
 						<tr>
 							<td align="right" width="15%">上课计划：</td>
-							<td width="18%"><fmt:formatDate value="${node.schooltime}" pattern="yyyy-MM-dd" /> ${node.hourRangeObj.paramDesc}</td>
+							<td width="18%"><fmt:formatDate value="${node.schooltime}" pattern="yyyy-MM-dd" /> ${node.startTime}~${node.endTime}</td>
 							<td align="right" width="5%">教室：</td>
 							<td width="10%">${node.roomT.roomName}</td>
 							<td align="right" width="8%">课时：</td>

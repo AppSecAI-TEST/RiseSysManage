@@ -130,7 +130,6 @@ public class ShortBusinessService
 			JSONObject obj = JSONObject.fromObject(result);
 			ShortClassInstT shortClassInstT = JacksonJsonMapper.getInstance().readValue(obj.getJSONObject("shortClassInstT").toString(), ShortClassInstT.class);
 			ShortSchooltimeT shortSchooltimeT = JacksonJsonMapper.getInstance().readValue(obj.getJSONObject("shortSchooltimeT").toString(), ShortSchooltimeT.class);
-			model.addObject("hourRangeList", obj.getJSONArray("hourRangeList"));
 			model.addObject("roomList", obj.getJSONArray("roomList"));
 			model.addObject("schoolList", obj.getJSONArray("schoolList"));
 			model.addObject("teacherTypeList", obj.getJSONArray("teacherTypeList"));
@@ -178,7 +177,6 @@ public class ShortBusinessService
 		try{
 			JSONObject obj = JSONObject.fromObject(result);
 			ShortClassAttendT shortClassAttendT = JacksonJsonMapper.getInstance().readValue(obj.getJSONObject("shortClassAttendT").toString(), ShortClassAttendT.class);
-			model.addObject("hourRangeList", obj.getJSONArray("hourRangeList"));
 			model.addObject("roomList", obj.getJSONArray("roomList"));
 			model.addObject("schoolList", obj.getJSONArray("schoolList"));
 			model.addObject("teacherTypeList", obj.getJSONArray("teacherTypeList"));

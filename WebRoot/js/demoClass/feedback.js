@@ -20,6 +20,32 @@ $(document).ready(function() {
 			});
 		}
 	});
+	$("#startTime").timespinner({
+		onChange:function(row){
+			if($("#endTime").timespinner("getValue") != "")
+			{
+				var endTime = parseInt($("#endTime").timespinner("getHours"))+(parseInt($("#endTime").timespinner("getMinutes"))>0?1:0);
+				var startTime = parseInt($("#startTime").timespinner("getHours"))+(parseInt($("#startTime").timespinner("getMinutes"))>0?1:0);
+				$("#infoTab").find("tr:eq(2)").find("td:eq(1)").html(
+							"&nbsp;&nbsp;<span>" + (endTime-startTime)
+									+ "</span>");
+				$("#hours").val(endTime-startTime);
+			}
+		}
+	});
+	$("#endTime").timespinner({
+		onChange:function(row){
+			if($("#startTime").timespinner("getValue") != "")
+			{
+				var endTime = parseInt($("#endTime").timespinner("getHours"))+(parseInt($("#endTime").timespinner("getMinutes"))>0?1:0);
+				var startTime = parseInt($("#startTime").timespinner("getHours"))+(parseInt($("#startTime").timespinner("getMinutes"))>0?1:0);
+				$("#infoTab").find("tr:eq(2)").find("td:eq(1)").html(
+							"&nbsp;&nbsp;<span>" + (endTime-startTime)
+									+ "</span>");
+				$("#hours").val(endTime-startTime);
+			}
+		}
+	});
 	initInfo();
 });
 
@@ -38,8 +64,6 @@ function initInfo() {
 				hideProgressLoader()
 				if (data.baseInfo != null) {
 					$("#openDate").datebox("setValue", data.baseInfo.openDate);
-					$("#hourRange").combobox("setValue",
-							data.baseInfo.hourRange);
 					$("#infoTab").find("tr:eq(1)").find("td:eq(1)").html(
 							"&nbsp;&nbsp;<span>" + data.baseInfo.roomName
 									+ "</span>");
@@ -56,7 +80,9 @@ function initInfo() {
 					if(classState!="001")
 					{
 						$("#shortClassAttendId").val(data.baseInfo.shortClassAttendId);
-					}	
+					}
+					$("#startTime").timespinner("setValue",data.baseInfo.startTime);
+					$("#endTime").timespinner("setValue",data.baseInfo.endTime);
 				}
 				if (data.teacherInfo != null && data.teacherInfo.length > 0) {
 					$.each(data.teacherInfo,
@@ -154,9 +180,19 @@ function submitInfo() {
 			$.messager.alert("提示", "请选择上课日期");
 			return false;
 		}
-		if($("#hourRange").combobox("getValue")=="")
+		if($("#startTime").timespinner("getValue") == "")
 		{
-			$.messager.alert("提示", "请选择上课时段");
+			$.messager.alert('提示',"上课起始时间不能为空,请核实后重新尝试");
+			return false;
+		}
+		if($("#endTime").timespinner("getValue") == "")
+		{
+			$.messager.alert('提示',"上课结束时间不能为空,请核实后重新尝试");
+			return false;
+		}
+		if(parseInt($("#hours").val()) <= 0)
+		{
+			$.messager.alert('提示',"上课起始时间必须大于上课结束时间,请核实后重新尝试");
 			return false;
 		}
 	}
@@ -172,7 +208,8 @@ function submitInfo() {
 	classAttend.roomId =$("#roomIds").val();
 	classAttend.shortSchooltimeId =$("#shortSchooltimeId").val();
 	classAttend.attendDate =$("#openDate").datebox("getValue");
-	classAttend.hourRange =$("#hourRange").combobox("getValue");
+	classAttend.startTime = $("#startTime").timespinner("getValue");
+	classAttend.endTime = $("#endTime").timespinner("getValue");
 	classAttend.handerId =handlerId;
 	classAttend.attendNum="0";
 	classAttend.attendRate="0";

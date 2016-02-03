@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +29,8 @@ public class PubController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			Map paramMap = request.getParameterMap();
-			String retVal = pubService.pageCategory(staffId , paramMap);
+			HttpSession session = request.getSession();
+			String retVal = pubService.pageCategory(staffId , paramMap , fieldId , session);
 			out.write(retVal);
 		}
 		catch(Exception e)

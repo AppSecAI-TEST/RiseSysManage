@@ -18,6 +18,7 @@ import com.rise.model.StaffT;
 import com.rise.pub.base.JacksonJsonMapper;
 import com.rise.pub.invoke.ServiceEngine;
 import com.rise.pub.util.ObjectCensor;
+import com.rise.pub.util.StringUtil;
 
 /**
  * @author LEO
@@ -39,16 +40,27 @@ public class AuthService
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2001\",securityCode:\"0000000000\",params:{userName:\""+username+"\",password:\""+password+"\"},rtnDataFormatType:\"user-defined\"}";
 		String result = ServiceEngine.invokeHttp(param);
 		String retVal = null;
-		try{
+		try
+		{
 			JSONObject json = JSONObject.fromObject(result);
-			ObjectMapper mapper = JacksonJsonMapper.getInstance();
-			JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, FuncNodeTree.class);
-			List funcNodeInfo = (List)mapper.readValue(json.getJSONArray("funcNodeInfo").toString(), javaType);
-			StaffT staffT = (StaffT)JSONObject.toBean(json.getJSONObject("staff"), StaffT.class);
-			session.setAttribute("StaffT", staffT);
-			session.setAttribute("funcNodeInfo", funcNodeInfo);
-			retVal = "success";
-		}catch(Exception err){
+			String flag = StringUtil.getJSONObjectKeyVal(json, "flag");
+			if(!ObjectCensor.isStrRegular(flag))
+			{
+				ObjectMapper mapper = JacksonJsonMapper.getInstance();
+				JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, FuncNodeTree.class);
+				List funcNodeInfo = (List)mapper.readValue(json.getJSONArray("funcNodeInfo").toString(), javaType);
+				StaffT staffT = (StaffT)JSONObject.toBean(json.getJSONObject("staff"), StaffT.class);
+				session.setAttribute("StaffT", staffT);
+				session.setAttribute("funcNodeInfo", funcNodeInfo);
+				retVal = "success";
+			}
+			else
+			{
+				retVal = StringUtil.getJSONObjectKeyVal(json, "msg");
+			}
+		}
+		catch(Exception err)
+		{
 			err.printStackTrace();
 			retVal = result;
 		}
