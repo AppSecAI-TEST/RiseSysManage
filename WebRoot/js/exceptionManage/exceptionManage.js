@@ -1,12 +1,35 @@
 $(document).ready(function(){
 	//首页面查询
     $("#qryBtn").click(function() {
-		var obj = JSON.stringify($("#qryFm").serializeObject());
-		obj = obj.substring(0, obj.length - 1);
-		var funcNodeId = $("#qryBtn").attr("funcNodeId");
-		obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+    	var object = $("#qryFm").serializeObject();
+    	var funcNodeId = "";
+    	var expType = $("#expType").combobox("getValue");
+    	if("new_not_in_class" == expType) { //新招未进班
+    		funcNodeId = "1077";
+    	} else if("higher_not_in_class" == expType) { //升学未进班
+    		funcNodeId = "1077";
+    	} else if("reread_not_in_class" == expType) { //复读未进班
+    		funcNodeId = "1077";
+    	} else if("new_not_in_change_school" == expType) { //新招未进班转校
+    		funcNodeId = "1078";
+    	} else if("higher_not_in_change_school" == expType) { //升学未进班转校
+    		funcNodeId = "1078";
+    	} else if("reread_not_in_change_school" == expType) { //复读未进班转校
+    		funcNodeId = "1078";
+    	} else if("study_change_school" == expType) { //在读转校
+    		funcNodeId = "1078";
+    	} else if("study_change_class" == expType) { //转班
+    		funcNodeId = "1079";
+    	} else if("exception" == expType) { //异常
+    		funcNodeId = "1080";
+    	} else if("leave" == expType) { //休学
+    		funcNodeId = "1081";
+    	}
+    	object.expType = expType;
+    	object.funcNodeId = funcNodeId;
+		var obj = JSON.stringify(object);
 		$('#list_data').datagrid({
-			url : "/sys/expManage/qryDataListByPage.do",
+			url : "/sys/pubData/qryDataListByPage.do",
 			queryParams:{
 				param : obj
 			},
@@ -15,6 +38,67 @@ $(document).ready(function(){
 				$('#list_data').datagrid('clearSelections');
 			}
 		});
+    });
+    
+    //重置
+	$("#reset").click(function() {
+		$("#qryFm").form('clear');//清空窗体数据  
+		var data = $("#schoolId").combobox("getData");
+		if(data.length > 0) {
+			$("#schoolId").combobox("setValue", data[0].schoolId);
+		}
+		data = $("#expType").combobox("getData");
+		if(data.length > 0) {
+			$("#expType").combobox("setValue", data[0].codeFlag);
+		}
+	});
+	
+	//校区
+	var staffId = $("#staffId").val();
+	$("#schoolId").combobox({
+    	url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=711&fieldId=schoolId",
+    	valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
+    	onLoadSuccess : function() {
+    		var data = $("#schoolId").combobox("getData");
+    		if(data.length > 0) {
+    			$("#schoolId").combobox("setValue", data[0].schoolId);
+    		}
+    		$("#qryBtn").click();
+    	},
+    	onChange : function(n, o) {
+    		$("#dutyAdvister").combobox({
+    			url : "/sys/pubData/qryStaffList.do?post=16,17&schoolId=" + n,
+    			valueField : "staffId",
+    	    	textField : "userName",
+    	    	panelHeight : "auto",
+    	    	formatter : function(data) {
+    	    		return "<span>" + data.userName + "</span>";
+    	    	}
+    		});
+    		$("#carer").combobox({
+    			url : "/sys/pubData/qryStaffList.do?post=31,32,33&schoolId=" + n,
+    			valueField : "staffId",
+    	    	textField : "userName",
+    	    	panelHeight : "auto",
+    	    	formatter : function(data) {
+    	    		return "<span>" + data.userName + "</span>";
+    	    	}
+    		});
+    		$("#teacherId").combobox({
+				url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&classType=",//返回json数据的url
+				valueField : "teacherId",
+				textField : "byname",
+				panelHeight : "auto",
+				formatter : function(data) {
+					return "<span>" + data.byname + "</span>";
+				}
+			});
+    	}
     });
 });
 
