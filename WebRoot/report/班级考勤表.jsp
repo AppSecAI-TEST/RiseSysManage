@@ -36,7 +36,7 @@
 						班级：
 					</td>
 					<td width="10%">
-						<select id="classInfo" name="classInfo" style="width:110px" ></select>
+						<input name="classInfo" id="classInfo" type="text" style="width:100px" class="easyui-textbox" />
 					</td>
 					<td align="right" width="5%">
 						月份：
@@ -48,7 +48,7 @@
 						带班老师：
 					</td>
 					<td width="10%">
-						<input name="teacher" id="teacher" type="text" style="width:100px" class="easyui-textbox" />								
+						<select id="teacher" name="teacher" style="width:110px" ></select>							
 					</td>
 					<td colspan="2" align="center">
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
@@ -78,14 +78,11 @@
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("正在处理，请稍待。。。");
-			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=911&fieldId=schoolId",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID",function(data){
 				$("#classPharse").combobox("loadData",data);
-			},"json");
-			$.post("<%=path %>/pub/pageComboxList.do?funcNodeId=381&fieldId=classMan",function(data){
-				$("#classInfo").combobox("loadData",data);
 				ajaxLoadEnd();
 			},"json");
 			$(document).ready(function(){
@@ -93,7 +90,16 @@
 					formatter:formatSchool, 
 					valueField: 'schoolId', 
 					textField: 'schoolName', 
-					panelHeight: 'auto'
+					panelHeight: 'auto',
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+						{
+							$("#schoolId").combobox("setValue",data[0].schoolId);
+						}
+					},
+			    	onChange:function(n, o) {
+						$("#teacher").combobox({url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&classType="});
+			    	}
 				});
 				$("#classPharse").combobox({
 					formatter:formatItem, 
@@ -104,14 +110,13 @@
 				$("#monthDate").datebox({
 					onShowPanel:settingYearMonthPanel
 				})
-				$("#classInfo").combobox({
-					formatter:function(row){
-						return '<span>'+row.className+'</span>';
-					},
-					valueField: 'classInstId',
-					textField: 'className',
-					//panelHeight: 'auto'
-					listHeight:200
+				$("#teacher").combobox({
+					valueField : "teacherId",
+					textField : "byname",
+					panelHeight : "auto",
+					formatter : function(data) {
+						return "<span>" + data.byname + "</span>";
+					}
 				});
 				$("#attList").datagrid({
 					onClickRow:function(i,node){

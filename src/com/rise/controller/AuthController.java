@@ -143,6 +143,8 @@ public class AuthController
 			session.removeAttribute("StaffT");
 			session.removeAttribute("funcNodeInfo");
 			session.removeAttribute("menuNodeInfo");
+			session.removeAttribute("privSchoolInfo");
+			session.removeAttribute("privNodeInfo");
 		}
 		catch(Exception e)
 		{

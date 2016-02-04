@@ -1,5 +1,6 @@
 package com.rise.service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.rise.pub.invoke.ServiceEngine;
 import com.rise.pub.util.ObjectCensor;
+import com.rise.pub.util.StringUtil;
 
 @Service
 public class PubService 
@@ -25,17 +27,41 @@ public class PubService
 			}
 			else
 			{
-				String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2011\",securityCode:\"0000000000\",params:{json:'"+convertParam(paramMap).toString()+"'},rtnDataFormatType:\"user-defined\"}";
-				result = ServiceEngine.invokeHttp(param);
+				result = pageCategoryInvoke(paramMap);
 				session.setAttribute("privSchoolInfo", result);
+				return result;
+			}
+		}
+		else if(!ObjectCensor.isStrRegular(fieldId))
+		{
+			String funcNodeId = StringUtil.getMapKeyVal(paramMap , "funcNodeId");
+			Map<String,String> map = (Map<String,String>)session.getAttribute("privNodeInfo");
+			if(ObjectCensor.checkObjectIsNull(map))
+			{
+				map = new HashMap<String,String>();
+			}
+			if(map.containsKey(funcNodeId))
+			{
+				return map.get(funcNodeId);
+			}
+			else
+			{
+				String result = pageCategoryInvoke(paramMap);
+				map.put(funcNodeId, result);
+				session.setAttribute("privNodeInfo", map);
 				return result;
 			}
 		}
 		else
 		{
-			String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2011\",securityCode:\"0000000000\",params:{json:'"+convertParam(paramMap).toString()+"'},rtnDataFormatType:\"user-defined\"}";
-			return ServiceEngine.invokeHttp(param);
+			return pageCategoryInvoke(paramMap);
 		}
+	}
+	
+	private String pageCategoryInvoke(Map paramMap) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2011\",securityCode:\"0000000000\",params:{json:'"+convertParam(paramMap).toString()+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
 	}
 	
 	private JSONObject convertParam(Map<String,String[]> paramMap)

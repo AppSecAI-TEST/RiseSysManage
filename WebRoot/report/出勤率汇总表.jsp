@@ -58,7 +58,7 @@
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("正在处理，请稍待。。。");
-			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=901&fieldId=schoolId",function(data){
 				$("#schoolId").combobox("loadData",data);
 				ajaxLoadEnd();
 			},"json");
@@ -67,7 +67,13 @@
 					formatter:formatSchool, 
 					valueField: 'schoolId', 
 					textField: 'schoolName', 
-					panelHeight: 'auto'
+					panelHeight: 'auto',
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+						{
+							$("#schoolId").combobox("setValue",data[0].schoolId);
+						}
+					}
 				});
 				$("#monthDate").datebox({
 					onShowPanel:settingYearMonthPanel
