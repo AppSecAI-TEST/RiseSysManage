@@ -14,81 +14,6 @@
 				font-family:"微软雅黑";
 			}
 		</style>
-  	</head>
-  	<body>
-		<form id="manFm" style="margin:0 auto;">
-			<input type="hidden" name="classType" id="classType" value="${param.classType}" />
-			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
-				<tr>
-					<td align="right">
-						学员姓名：
-					</td>
-					<td>
-						<input name="studentName" id="studentName" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" />								
-					</td>
-					<td align="right" width="8%">	
-						联系电话：
-					</td>
-					<td width="22%">
-						<input name="phoneNum" id="phoneNum" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" />
-					</td>
-					<td align="right" width="8%">
-						缴费日期：
-					</td>
-					<td width="22%">
-						<input name="payStartManTime" id="payStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="payEndManTime" id="payEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
-					</td>
-				</tr>
-				<tr>
-					<td align="right">	
-						课程阶段：
-					</td>
-					<td>
-						<select id="stageId" name="stageId" style="width:150px"></select>
-					</td>
-					<td align="right">
-						班级：
-					</td>
-					<td>
-						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width:150px"></select>
-					</td>
-					<td align="right">
-						课程状态：
-					</td>
-					<td>
-						<select id="classState" name="classState" style="width:100px;height:25px;" ></select>										
-					</td>
-					<td colspan="2" align="center">
-						<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
-						<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
-					</td>
-				</tr>
-			</table>
-		</form>
-		<div style="padding:5px 0;min-width:1100px; width:100%">
-			<table class="easyui-datagrid" title="学员列表" style="height:390px" id="studentList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
-				<thead>
-					<tr>
-						<th data-options="field:'studentId',checkbox:true"></th>
-						<th width="9%" field="name">学员姓名</th>
-						<th width="9%" field="byName">英文名</th>
-						<th width="9%" field="identityId">证件号码</th>
-						<th width="9%" field="feeTypeName">业绩类型</th>
-						<th width="9%" field="classType">班级类型</th>
-						<th width="9%" field="payDate">缴费日期</th>
-						<th width="9%" field="adviserName">业绩顾问</th>
-						<th width="9%" field="dutyAdvister">责任顾问</th>
-						<th width="9%" field="classStateName">课程状态</th>
-						<th width="9%" field="className">当前班级</th>
-						<th width="9%" field="studentPhone">联系电话</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
-		<div id="toolManbar" style="padding: 2px; height: auto">
-			<a href="javascript:void(0)" id="manBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="manFunc()">确定</a>
-			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="backFunc()">返回</a>
-		</div>
 		<script type="text/javascript">
 			ajaxLoadEnd();
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
@@ -202,5 +127,80 @@
 				}
 			}
 		</script>
+  	</head>
+  	<body>
+		<form id="manFm" style="margin:0 auto;">
+			<input type="hidden" name="classType" id="classType" value="${param.classType}" />
+			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+				<tr>
+					<td align="right">
+						学员姓名：
+					</td>
+					<td>
+						<input name="studentName" id="studentName" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" />								
+					</td>
+					<td align="right" width="8%">	
+						联系电话：
+					</td>
+					<td width="22%">
+						<input name="phoneNum" id="phoneNum" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" />
+					</td>
+					<td align="right" width="8%">
+						缴费日期：
+					</td>
+					<td width="22%">
+						<input name="payStartManTime" id="payStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="payEndManTime" id="payEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">	
+						课程阶段：
+					</td>
+					<td>
+						<select id="stageId" name="stageId" style="width:150px"></select>
+					</td>
+					<td align="right">
+						班级：
+					</td>
+					<td>
+						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width:150px"></select>
+					</td>
+					<td align="right">
+						课程状态：
+					</td>
+					<td>
+						<select id="classState" name="classState" style="width:100px;height:25px;" ></select>										
+					</td>
+					<td colspan="2" align="center">
+						<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
+						<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<div style="padding:5px 0;min-width:1100px; width:100%">
+			<table class="easyui-datagrid" title="学员列表" style="height:390px" id="studentList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
+				<thead>
+					<tr>
+						<th data-options="field:'studentId',checkbox:true"></th>
+						<th width="9%" field="name">学员姓名</th>
+						<th width="9%" field="byName">英文名</th>
+						<th width="9%" field="identityId">证件号码</th>
+						<th width="9%" field="feeTypeName">业绩类型</th>
+						<th width="9%" field="classType">班级类型</th>
+						<th width="9%" field="payDate">缴费日期</th>
+						<th width="9%" field="adviserName">业绩顾问</th>
+						<th width="9%" field="dutyAdvister">责任顾问</th>
+						<th width="9%" field="classStateName">课程状态</th>
+						<th width="9%" field="className">当前班级</th>
+						<th width="9%" field="studentPhone">联系电话</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div id="toolManbar" style="padding: 2px; height: auto">
+			<a href="javascript:void(0)" id="manBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="manFunc()">确定</a>
+			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="backFunc()">返回</a>
+		</div>
  	</body>
 </html>

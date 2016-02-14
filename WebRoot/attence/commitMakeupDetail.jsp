@@ -37,35 +37,6 @@
 				vertical-align:middle;
 			}
 		</style>
-  	</head>
-  
-  	<body class="manage">
-		<table class="tab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<tr style="display:none;">
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td align="right" width="10%">补课时间：</td>
-				<td><fmt:formatDate value="${classAttendT.attendDate}" pattern="yyyy-MM-dd" /> <select id="classTime" name="classTime" style="width:200px" ></select></td>
-			</tr>
-			<tr>
-				<td align="right">课时进度：</td>
-				<td><select id="classProgress" name="classProgress" style="width:200px" ></select></td>
-			</tr>
-			<tr>
-				<td align="right">补课方式：</td>
-				<td><input type="radio" name="makeupType" id="makeupType1" value="F" onclick="choiceClassFunc()" checked="checked" /><label for="makeupType1">跟班补</label>&nbsp;<input type="radio" name="makeupType" id="makeupType2" value="S" onclick="choiceTeacherFunc()" /><label for="makeupType2">单独补</label>&nbsp;<select id="makeupValue" name="makeupValue" style="width:200px" ></select></td>
-			</tr>
-			<tr>
-				<td align="right">补课单据：</td>
-				<td><input class="easyui-filebox" data-options="prompt:'',buttonText:' 浏览 '" style="width:400px"></td>
-			</tr>
-		</table>
-		<div style="margin:0 auto;padding:0 0;text-align:right;padding-right:2px;width:99%;margin-top:10px">
-			<a href="javascript:void(0)" id="enterBtn" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;" onclick="makeupFunc()">提交</a>
-			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
-		</div>
 		<script type="text/javascript">
 			var gTeacherList = null;
 			var gClassList = null;
@@ -222,5 +193,34 @@
 				window.location.href = "/sys/attend/commitMakeupPage.do?studentId=${studentId}&funcNodeId=${funcNodeId}"
 			}
 		</script>
- 	</body>
+  	</head>
+  
+  	<body class="manage">
+		<table class="tab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+			<tr style="display:none;">
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="right" width="10%">补课时间：</td>
+				<td><fmt:formatDate value="${classAttendT.attendDate}" pattern="yyyy-MM-dd" /> <select id="classTime" name="classTime" style="width:200px" ></select></td>
+			</tr>
+			<tr>
+				<td align="right">课时进度：</td>
+				<td><select id="classProgress" name="classProgress" style="width:200px" ></select></td>
+			</tr>
+			<tr>
+				<td align="right">补课方式：</td>
+				<td><input type="radio" name="makeupType" id="makeupType1" value="F" onclick="choiceClassFunc()" checked="checked" /><label for="makeupType1">跟班补</label>&nbsp;<input type="radio" name="makeupType" id="makeupType2" value="S" onclick="choiceTeacherFunc()" /><label for="makeupType2">单独补</label>&nbsp;<select id="makeupValue" name="makeupValue" style="width:200px" ></select></td>
+			</tr>
+			<tr>
+				<td align="right">补课单据：</td>
+				<td><input class="easyui-filebox" data-options="prompt:'',buttonText:' 浏览 '" style="width:400px"></td>
+			</tr>
+		</table>
+		<div style="margin:0 auto;padding:0 0;text-align:right;padding-right:2px;width:99%;margin-top:10px">
+			<a href="javascript:void(0)" id="enterBtn" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;" onclick="makeupFunc()">提交</a>
+			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
+		</div>
+	 	</body>
 </html>

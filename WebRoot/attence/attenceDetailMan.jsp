@@ -25,8 +25,53 @@
 				padding-right:4px;
 			}
 		</style>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				ajaxLoadEnd();
+				var statistics = '${statistics}';
+				var dataObj = null;
+				if(statistics != "[]")
+				{
+					dataObj = eval("("+statistics+")");
+				}
+				else
+				{
+					dataObj = new Array();
+				}
+				$("#attendList").datagrid("loadData",dataObj);
+			});
+			function attendMan()
+			{
+				var row = $('#attendList').datagrid('getSelected');
+				if (row)
+				{
+					ajaxLoading("正在处理，请稍待。。。");
+					window.location.href = "/sys/attend/getAttendOperate.do?funcNodeId=${funcNodeId}&classInstId=${classInstT.classInstId}&selDateStr="+row.monthName;
+				}
+				else
+				{
+					$.messager.alert('提示',"请先选择要维护的考勤");
+				}
+			}
+			function attendView()
+			{
+				var row = $('#attendList').datagrid('getSelected');
+				if (row)
+				{
+					ajaxLoading("正在处理，请稍待。。。");
+					window.location.href = "/sys/attend/getAttendView.do?funcNodeId=${funcNodeId}&classInstId=${classInstT.classInstId}&selDateStr="+row.monthName;
+				}
+				else
+				{
+					$.messager.alert('提示',"请先选择要浏览的考勤");
+				}
+			}
+			function backFunc()
+			{
+				window.location.href = "/sys/attence/attenceMan.jsp?funcNodeId=${funcNodeId}";
+			}
+		</script>
   	</head>
-  
   	<body class="manage">
  		<input type="hidden" name="classInstId" value="${classInstT.classInstId}" />
 		<table align="center" class="tab" style="height:auto;width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
@@ -112,51 +157,5 @@
    			<a href="javascript:void(0)" id="addStaff" class="easyui-linkbutton" iconCls="icon-add" onclick="attendMan()" style="width: 100px;">考勤维护</a>
    			<a href="javascript:void(0)" id="updateStaff" class="easyui-linkbutton" iconCls="icon-edit" onclick="attendView()" style="width: 100px;">考勤浏览</a>
 		</div>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				ajaxLoadEnd();
-				var statistics = '${statistics}';
-				var dataObj = null;
-				if(statistics != "[]")
-				{
-					dataObj = eval("("+statistics+")");
-				}
-				else
-				{
-					dataObj = new Array();
-				}
-				$("#attendList").datagrid("loadData",dataObj);
-			});
-			function attendMan()
-			{
-				var row = $('#attendList').datagrid('getSelected');
-				if (row)
-				{
-					ajaxLoading("正在处理，请稍待。。。");
-					window.location.href = "/sys/attend/getAttendOperate.do?funcNodeId=${funcNodeId}&classInstId=${classInstT.classInstId}&selDateStr="+row.monthName;
-				}
-				else
-				{
-					$.messager.alert('提示',"请先选择要维护的考勤");
-				}
-			}
-			function attendView()
-			{
-				var row = $('#attendList').datagrid('getSelected');
-				if (row)
-				{
-					ajaxLoading("正在处理，请稍待。。。");
-					window.location.href = "/sys/attend/getAttendView.do?funcNodeId=${funcNodeId}&classInstId=${classInstT.classInstId}&selDateStr="+row.monthName;
-				}
-				else
-				{
-					$.messager.alert('提示',"请先选择要浏览的考勤");
-				}
-			}
-			function backFunc()
-			{
-				window.location.href = "/sys/attence/attenceMan.jsp?funcNodeId=${funcNodeId}";
-			}
-		</script>
  	</body>
 </html>

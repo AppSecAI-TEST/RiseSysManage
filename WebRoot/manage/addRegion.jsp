@@ -10,9 +10,50 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
 		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/css/style.css">
+		<script type="text/javascript">
+			function addRegionSubmit()
+			{
+				if($("#addRegionForm").form('validate')){
+					var json = $("#addRegionForm").serializeObject();
+					var remark = json.remark;
+					remark = string2Json(remark);
+					remark = encodeURI(remark);
+					json.remark = remark;
+					var schoolIds = "";
+					 $("input[name='schoolIds']:checked").each(function(){
+				        schoolIds += $(this).val() + ",";
+    				});
+    				if(schoolIds != ""){
+    					schoolIds = schoolIds.substring(0,schoolIds.length-1);
+    				}
+    				json.schoolIds = schoolIds;
+					var obj = JSON.stringify(json);
+					$.ajax({
+						type : "POST",
+						url: "/sys/regionManage/addRegion.do",
+						data: "json="+obj,
+						async: false,
+						beforeSend: function()
+				    	{
+				    		$.messager.progress({title : '新增片区', msg : '新增片区中，请稍等……'});
+				    	},
+				    	success: function(state) {
+				    		$.messager.progress('close'); 
+				    		if(state == "1"){
+				    			$.messager.alert('提示', "新增片区成功！","info",function(){
+					    			window.location.href = "/sys/manage/regionMan.jsp";
+								});
+				    		}else if(state == "3"){
+				    			$.messager.alert('提示', "新增片区失败！");
+				    		}else{
+				    			$.messager.alert('提示', state+"校区已经属于其他片区！");
+				    		}
+				        } 
+					});
+				}
+			}
+		</script>
   	</head>
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="新增片区">
@@ -56,48 +97,5 @@
 	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
 	      	</div>
 	   </div>
-	   <script type="text/javascript">
-			function addRegionSubmit()
-			{
-				if($("#addRegionForm").form('validate')){
-					var json = $("#addRegionForm").serializeObject();
-					var remark = json.remark;
-					remark = string2Json(remark);
-					remark = encodeURI(remark);
-					json.remark = remark;
-					var schoolIds = "";
-					 $("input[name='schoolIds']:checked").each(function(){
-				        schoolIds += $(this).val() + ",";
-    				});
-    				if(schoolIds != ""){
-    					schoolIds = schoolIds.substring(0,schoolIds.length-1);
-    				}
-    				json.schoolIds = schoolIds;
-					var obj = JSON.stringify(json);
-					$.ajax({
-						type : "POST",
-						url: "/sys/regionManage/addRegion.do",
-						data: "json="+obj,
-						async: false,
-						beforeSend: function()
-				    	{
-				    		$.messager.progress({title : '新增片区', msg : '新增片区中，请稍等……'});
-				    	},
-				    	success: function(state) {
-				    		$.messager.progress('close'); 
-				    		if(state == "1"){
-				    			$.messager.alert('提示', "新增片区成功！","info",function(){
-					    			window.location.href = "/sys/manage/regionMan.jsp";
-								});
-				    		}else if(state == "3"){
-				    			$.messager.alert('提示', "新增片区失败！");
-				    		}else{
-				    			$.messager.alert('提示', state+"校区已经属于其他片区！");
-				    		}
-				        } 
-					});
-				}
-			}
-		</script>
   	</body>
 </html>

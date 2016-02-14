@@ -11,8 +11,14 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
+		<script type="text/javascript">
+			ajaxLoadEnd();
+			function backFunc()
+			{
+				window.history.back();
+			}
+		</script>
   	</head>
-  
   	<body class="manage">
 		<table align="center" class="tab" style="height:90px;width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
@@ -131,12 +137,5 @@
 		<div style="margin:0 auto;padding:0 0;text-align:right;padding-right:2px;width:99%;margin-top:10px">
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
-		<script type="text/javascript">
-			ajaxLoadEnd();
-			function backFunc()
-			{
-				window.history.back();
-			}
-		</script>
  	</body>
 </html>

@@ -10,74 +10,21 @@
 <title>瑞思教务管理系统 - 用户登录</title>
 <%@ include file="/common/head.jsp" %>
 <style type="text/css">
-body
-{
-	margin:0;
-	padding:0;
-	background:#F1ECF4;
-	font-family:"Microsoft YaHei"；
-}
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus {
-    box-shadow:0 0 0 60px #F8F5F8 inset;
-    -webkit-text-fill-color: #4b4b5b;
-}
+body{margin:0;padding:0;background:#F1ECF4;}
+input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus{box-shadow:0 0 0 60px #F8F5F8 inset;-webkit-text-fill-color: #4b4b5b;}
 form{width:340px;height:420px;margin:50px auto;}
-label{float:left;display:block;font-size:16px;color:#aba1a4;height:29px;margin:6px 0px 2px 25px;}
+label{float:left;display:block;font-size:16px;color:#aba1a4;height:26px;margin:9px 0px 2px 25px;}
 .inputDiv{margin:0 auto 30px;background:#F8F5F8;height:37px;border:1px solid #e4e4e2;border-radius:4px;}
-#username,#password,#code{font-size:14px;cursor:pointer;height:31px;color:#4b4b5b;background:transparent;margin:2px;padding:0;border:none;-webkit-appearance:none;appearance:none;outline:none;-webkit-tap-highlight-color:transparent;border-radius:0;}
+#username,#password,#code{font-size:14px;cursor:pointer;height:31px;color:#4b4b5b;background:transparent;margin:2px;padding:0;border:none !important;-webkit-appearance:none;appearance:none;outline:none;-webkit-tap-highlight-color:transparent;border-radius:0;}
 #username,#password{width:250px;}
 #code{width:108px;}
-.loginttitle
-{
-	width:100%;
-	background:#44C5F6;
-	height:85px;
-}
-
-#titleimg
-{
-	margin-top:16px;
-}
-
-#loginDiv
-{
-	width:800px;
-	margin:20px auto;
-	background:#fff;
-	border-radius:8px;
-	height:540px;
-}
-
-.loginLeft
-{
-	float:left;
-	width:400px;
-	text-align:right;
-}
-.loginRight
-{
-	float:left;
-	width:400px;
-}
-
-.righttitle
-{
-	background:#FABF12;
-	height:40px;
-	text-align:left;
-	 border-top-right-radius:8px;
-}
-#loginBtn
-{
-	background:#2194cb;
-	padding:10px;
-	text-align:center;
-	color:#fff;
-	font-size:16px;
-	cursor:pointer;	
-}
+.loginttitle{width:100%;background:#44C5F6;height:85px;background-image:url('<%=path%>/pub/images/logintitle1.png');background-position:center center;background-repeat:no-repeat;}
+#titleimg{margin-top:16px;}
+#loginDiv{width:800px;margin:20px auto;background:#fff;border-radius:8px;height:540px;}
+.loginLeft{float:left;width:400px;text-align:right;}
+.loginRight{float:left;width:400px;}
+.righttitle{background:#FABF12;height:40px;text-align:left;border-top-right-radius:8px;}
+#loginBtn{background:#2194cb;padding:10px;text-align:center;color:#fff;font-size:16px;cursor:pointer;}
 </style>
 </head>
 <body>
@@ -86,7 +33,7 @@ label{float:left;display:block;font-size:16px;color:#aba1a4;height:29px;margin:6
 		$.messager.alert('提示', '${error}', 'info');
 	</script>
 </c:if>
-<div class="loginttitle"><img id="titleimg" src="<%=path%>/pub/images/logintitle1.png"></div>
+<div class="loginttitle"></div>
 <div style="text-align:center;">
 	<div id="loginDiv">
 		<div class="loginLeft">
@@ -97,7 +44,7 @@ label{float:left;display:block;font-size:16px;color:#aba1a4;height:29px;margin:6
 			<form id='form' method="post">
 				<div class="inputDiv">
 					<label for="username">账户</label>  
-			        <input type="text" name="username" id="username" value="" style="background-color:transparent;" />  
+			        <input type="text" name="username" id="username" value="" />  
 				</div>
 				<div class="inputDiv">
 					<label for="password">密码</label>  
@@ -115,7 +62,6 @@ label{float:left;display:block;font-size:16px;color:#aba1a4;height:29px;margin:6
 </div>
 <script type="text/javascript">
 $(function(){
-	$("#titleimg").css("margin-left",$('#loginDiv').offset().left+5);
 	$('input:text:first').focus();
 	$('form').keyup(function(event){
 		if(event.keyCode ==13){

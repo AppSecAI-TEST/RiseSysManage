@@ -37,8 +37,33 @@
 				vertical-align:middle;
 			}
 		</style>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				ajaxLoadEnd();
+			});
+			function backFunc()
+			{
+				ajaxLoading("返回中...");
+				if("attenceView" == "${comeFlag}")
+				{
+					window.location.href = "/sys/attend/getAttendView.do?funcNodeId=${funcNodeId}&classInstId=${classInstId}&selDateStr=${selDateStr}";
+				}
+				else if("attenceMan" == "${comeFlag}")
+				{
+					window.location.href = "/sys/attence/attenceMan.jsp?funcNodeId=${funcNodeId}";
+				}
+				else if("attenceCalendarView" == "${comeFlag}")
+				{
+					window.location.href = "/sys/attend/getAttenceCalendarView.do?classInstId=${classInstId}&funcNodeId=${funcNodeId}";	
+				}
+				else
+				{
+					window.location.href = "/sys/attend/getAttendOperate.do?funcNodeId=${funcNodeId}&classInstId=${classInstId}&selDateStr=${selDateStr}";
+				}
+				
+			}
+		</script>
   	</head>
-  
   	<body class="manage">
 		<table class="tab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr style="display:none;">
@@ -143,32 +168,5 @@
 		<div style="margin:0 auto;padding:0 0;text-align:right;padding-right:2px;width:99%;margin-top:10px">
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				ajaxLoadEnd();
-			});
-			
-			function backFunc()
-			{
-				ajaxLoading("返回中...");
-				if("attenceView" == "${comeFlag}")
-				{
-					window.location.href = "/sys/attend/getAttendView.do?funcNodeId=${funcNodeId}&classInstId=${classInstId}&selDateStr=${selDateStr}";
-				}
-				else if("attenceMan" == "${comeFlag}")
-				{
-					window.location.href = "/sys/attence/attenceMan.jsp?funcNodeId=${funcNodeId}";
-				}
-				else if("attenceCalendarView" == "${comeFlag}")
-				{
-					window.location.href = "/sys/attend/getAttenceCalendarView.do?classInstId=${classInstId}&funcNodeId=${funcNodeId}";	
-				}
-				else
-				{
-					window.location.href = "/sys/attend/getAttendOperate.do?funcNodeId=${funcNodeId}&classInstId=${classInstId}&selDateStr=${selDateStr}";
-				}
-				
-			}
-		</script>
  	</body>
 </html>

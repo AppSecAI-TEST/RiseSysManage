@@ -14,8 +14,202 @@
 				font-family:"微软雅黑";
 			}
 		</style>
+		<script type="text/javascript">
+			ajaxLoading("正在处理，请稍待。。。");
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=505&fieldId=schoolId",function(data){
+				$("#schoolManId").combobox("loadData",data);
+				$("#schoolHisId").combobox("loadData",data);
+			},"json");
+			$.post("<%=path %>/pubData/qryStage.do",function(data){
+				$("#classManPharse").combobox("loadData",data);
+				$("#classHisPharse").combobox("loadData",data);
+			},"json");
+			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
+				data = $.grep(data,function(obj){
+					if(obj.codeFlag != "001" && obj.codeFlag != "005")
+						return true;
+					return false;
+				});
+				$("#classManState").combobox("loadData",data);
+			},"json");
+			$.post("<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=classMan",function(data){
+				$("#classMan").combobox("loadData",data);
+				$("#classHis").combobox("loadData",data);
+				ajaxLoadEnd();
+			},"json");
+			$(document).ready(function(){
+				$("#schoolManId").combobox({
+					formatter:formatSchool, 
+					valueField: 'schoolId', 
+					textField: 'schoolName', 
+					panelHeight: 'auto',
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+						{
+							$("#schoolManId").combobox("setValue",data[0].schoolId);
+						}
+					}
+				});
+				$("#classManPharse").combobox({
+					formatter:formatStageId, 
+					valueField: 'stageId', 
+					textField: 'stageId', 
+					panelHeight: 'auto'
+				});
+				$("#classManState").combobox({
+					formatter:formatItem, 
+					valueField: 'codeFlag', 
+					textField: 'codeName', 
+					panelHeight: 'auto'
+				});
+				$("#classMan").combobox({
+					formatter:function(row){
+						return '<span>'+row.className+'</span>';
+					},
+					valueField: 'classInstId',
+					textField: 'className',
+					//panelHeight: 'auto',
+					listHeight:200
+				});
+				$("#schoolHisId").combobox({
+					formatter:formatSchool, 
+					valueField: 'schoolId', 
+					textField: 'schoolName', 
+					panelHeight: 'auto',
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+						{
+							$("#schoolHisId").combobox("setValue",data[0].schoolId);
+						}
+					}
+				});
+				$("#classHisPharse").combobox({
+					formatter:formatStageId, 
+					valueField: 'stageId', 
+					textField: 'stageId', 
+					panelHeight: 'auto'
+				});
+				$("#classHis").combobox({
+					formatter:function(row){
+						return '<span>'+row.className+'</span>';
+					},
+					valueField: 'classInstId',
+					textField: 'className',
+					//panelHeight: 'auto'
+					listHeight:200
+				});
+				$('#tab').tabs({
+				    border:true,
+				    onSelect:function(title){
+						
+				    }
+				});
+			});
+			function queryManFunc()
+			{
+				var obj = $("#manFm").serializeObject();
+				obj["queryCode"] = "qryAttendManList";
+				obj["funcNodeId"] = "38101";
+				obj = JSON.stringify(obj);
+				$("#manList").datagrid({
+					url:"/sys/pubData/qryDataListByPage.do",
+					queryParams:{
+						param : obj
+					}
+				});
+			}
+			function resetManFunc()
+			{
+				var schoolData = $("#schoolManId").combobox("getData");
+				if(schoolData != null && schoolData.length > 0)
+				{
+					$("#schoolManId").combobox("setValue",schoolData[0].schoolId);
+				}
+				$("#classManPharse").combobox("setValue","");
+				$("#classManState").combobox("setValue","");
+				$("#classMan").combobox("setValue","");
+				$("#teacherMan").textbox("setValue","");
+				$("#classStartManTime").datebox("setValue","");
+				$("#classEndManTime").datebox("setValue","");
+				$("#overClassStartManTime").datebox("setValue","");
+				$("#overClassEndManTime").datebox("setValue","");
+			}
+			function manOperFunc()
+			{
+				var row = $('#manList').datagrid('getSelected');
+				if (row)
+				{
+					ajaxLoading("正在处理，请稍待。。。");
+					window.location.href = "/sys/attend/getAttendDetail.do?funcNodeId=${param.funcNodeId}&classInstId="+row.classInstId;
+				}
+				else
+				{
+					$.messager.alert('提示',"请先选择要考勤的班级");
+				}
+			}
+			function manViewFunc()
+			{
+				var row = $('#manList').datagrid('getSelected');
+				if (row)
+				{
+					ajaxLoading("正在处理，请稍待。。。");
+					window.location.href = "/sys/attend/getAttenceCalendarView.do?funcNodeId=${param.funcNodeId}&classInstId="+row.classInstId+"&flag=attend";
+				}
+				else
+				{
+					$.messager.alert('提示',"请先选择要浏览的班级");
+				}
+			}
+			function manLeaveFunc()
+			{
+				ajaxLoading("正在处理，请稍待。。。");
+				window.location.href = "/sys/attence/leaveMakeupMan.jsp?funcNodeId=${param.funcNodeId}";
+			}
+			function queryHisFunc()
+			{
+				var obj = $("#hisFm").serializeObject();
+				obj["queryCode"] = "qryAttenceHisList";
+				obj["funcNodeId"] = "38120";
+				obj = JSON.stringify(obj);
+				$("#hisList").datagrid({
+					url:"/sys/pubData/qryDataListByPage.do",
+					queryParams:{
+						param : obj
+					}
+				});
+			}
+			function resetHisFunc()
+			{
+				var schoolData = $("#schoolHisId").combobox("getData");
+				if(schoolData != null && schoolData.length > 0)
+				{
+					$("#schoolHisId").combobox("setValue",schoolData[0].schoolId);
+				}
+				$("#classHisPharse").combobox("setValue","");
+				$("#classHisStart").datebox("setValue","");
+				$("#classHisEnd").datebox("setValue","");
+				$("#classHis").combobox("setValue","");
+				$("#teacherHis").textbox("setValue","");
+				$("#attendStartRate").numberbox("setValue","");
+				$("#attendEndRate").numberbox("setValue","");
+				$("#schoolWearStartRate").numberbox("setValue","");
+				$("#schoolWearEndRate").numberbox("setValue","");
+			}
+			function hisViewFunc()
+			{
+				var row = $('#hisList').datagrid('getSelected');
+				if (row)
+				{
+					ajaxLoading("正在处理，请稍待。。。");
+					window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+row.classAttendId+"&funcNodeId=${param.funcNodeId}&selDateStr=&classInstId=&comeFlag=attenceMan";
+				}
+				else
+				{
+					$.messager.alert('提示',"请先选择要查看的考勤");
+				}
+			}
+		</script>
   	</head>
-  
   	<body>
   		<div id="tab" class="easyui-tabs" style="min-width:1100px;width:99%;height:530px;font-family:'微软雅黑';margin:0 auto;padding:0 0">
 		    <div title="考勤管理">
@@ -178,200 +372,5 @@
 				</div>
 		    </div>
 		</div>
-		<script type="text/javascript">
-			ajaxLoading("正在处理，请稍待。。。");
-			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=505&fieldId=schoolId",function(data){
-				$("#schoolManId").combobox("loadData",data);
-				$("#schoolHisId").combobox("loadData",data);
-			},"json");
-			$.post("<%=path %>/pubData/qryStage.do",function(data){
-				$("#classManPharse").combobox("loadData",data);
-				$("#classHisPharse").combobox("loadData",data);
-			},"json");
-			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
-				data = $.grep(data,function(obj){
-					if(obj.codeFlag != "001" && obj.codeFlag != "005")
-						return true;
-					return false;
-				});
-				$("#classManState").combobox("loadData",data);
-			},"json");
-			$.post("<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=classMan",function(data){
-				$("#classMan").combobox("loadData",data);
-				$("#classHis").combobox("loadData",data);
-				ajaxLoadEnd();
-			},"json");
-			$(document).ready(function(){
-				$("#schoolManId").combobox({
-					formatter:formatSchool, 
-					valueField: 'schoolId', 
-					textField: 'schoolName', 
-					panelHeight: 'auto',
-					onLoadSuccess:function(data){
-						if(data.length > 0)
-						{
-							$("#schoolManId").combobox("setValue",data[0].schoolId);
-						}
-					}
-				});
-				$("#classManPharse").combobox({
-					formatter:formatStageId, 
-					valueField: 'stageId', 
-					textField: 'stageId', 
-					panelHeight: 'auto'
-				});
-				$("#classManState").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
-					panelHeight: 'auto'
-				});
-				$("#classMan").combobox({
-					formatter:function(row){
-						return '<span>'+row.className+'</span>';
-					},
-					valueField: 'classInstId',
-					textField: 'className',
-					//panelHeight: 'auto',
-					listHeight:200
-				});
-				$("#schoolHisId").combobox({
-					formatter:formatSchool, 
-					valueField: 'schoolId', 
-					textField: 'schoolName', 
-					panelHeight: 'auto',
-					onLoadSuccess:function(data){
-						if(data.length > 0)
-						{
-							$("#schoolHisId").combobox("setValue",data[0].schoolId);
-						}
-					}
-				});
-				$("#classHisPharse").combobox({
-					formatter:formatStageId, 
-					valueField: 'stageId', 
-					textField: 'stageId', 
-					panelHeight: 'auto'
-				});
-				$("#classHis").combobox({
-					formatter:function(row){
-						return '<span>'+row.className+'</span>';
-					},
-					valueField: 'classInstId',
-					textField: 'className',
-					//panelHeight: 'auto'
-					listHeight:200
-				});
-				$('#tab').tabs({
-				    border:true,
-				    onSelect:function(title){
-						console.log(title+' is selected');
-				    }
-				});
-			});
-			function queryManFunc()
-			{
-				var obj = $("#manFm").serializeObject();
-				obj["queryCode"] = "qryAttendManList";
-				obj["funcNodeId"] = "38101";
-				obj = JSON.stringify(obj);
-				$("#manList").datagrid({
-					url:"/sys/pubData/qryDataListByPage.do",
-					queryParams:{
-						param : obj
-					}
-				});
-			}
-			function resetManFunc()
-			{
-				var schoolData = $("#schoolManId").combobox("getData");
-				if(schoolData != null && schoolData.length > 0)
-				{
-					$("#schoolManId").combobox("setValue",schoolData[0].schoolId);
-				}
-				$("#classManPharse").combobox("setValue","");
-				$("#classManState").combobox("setValue","");
-				$("#classMan").combobox("setValue","");
-				$("#teacherMan").textbox("setValue","");
-				$("#classStartManTime").datebox("setValue","");
-				$("#classEndManTime").datebox("setValue","");
-				$("#overClassStartManTime").datebox("setValue","");
-				$("#overClassEndManTime").datebox("setValue","");
-			}
-			function manOperFunc()
-			{
-				var row = $('#manList').datagrid('getSelected');
-				if (row)
-				{
-					ajaxLoading("正在处理，请稍待。。。");
-					window.location.href = "/sys/attend/getAttendDetail.do?funcNodeId=${param.funcNodeId}&classInstId="+row.classInstId;
-				}
-				else
-				{
-					$.messager.alert('提示',"请先选择要考勤的班级");
-				}
-			}
-			function manViewFunc()
-			{
-				var row = $('#manList').datagrid('getSelected');
-				if (row)
-				{
-					ajaxLoading("正在处理，请稍待。。。");
-					window.location.href = "/sys/attend/getAttenceCalendarView.do?funcNodeId=${param.funcNodeId}&classInstId="+row.classInstId+"&flag=attend";
-				}
-				else
-				{
-					$.messager.alert('提示',"请先选择要浏览的班级");
-				}
-			}
-			function manLeaveFunc()
-			{
-				ajaxLoading("正在处理，请稍待。。。");
-				window.location.href = "/sys/attence/leaveMakeupMan.jsp?funcNodeId=${param.funcNodeId}";
-			}
-			function queryHisFunc()
-			{
-				var obj = $("#hisFm").serializeObject();
-				obj["queryCode"] = "qryAttenceHisList";
-				obj["funcNodeId"] = "38120";
-				obj = JSON.stringify(obj);
-				$("#hisList").datagrid({
-					url:"/sys/pubData/qryDataListByPage.do",
-					queryParams:{
-						param : obj
-					}
-				});
-			}
-			function resetHisFunc()
-			{
-				var schoolData = $("#schoolHisId").combobox("getData");
-				if(schoolData != null && schoolData.length > 0)
-				{
-					$("#schoolHisId").combobox("setValue",schoolData[0].schoolId);
-				}
-				$("#classHisPharse").combobox("setValue","");
-				$("#classHisStart").datebox("setValue","");
-				$("#classHisEnd").datebox("setValue","");
-				$("#classHis").combobox("setValue","");
-				$("#teacherHis").textbox("setValue","");
-				$("#attendStartRate").numberbox("setValue","");
-				$("#attendEndRate").numberbox("setValue","");
-				$("#schoolWearStartRate").numberbox("setValue","");
-				$("#schoolWearEndRate").numberbox("setValue","");
-			}
-			function hisViewFunc()
-			{
-				var row = $('#hisList').datagrid('getSelected');
-				if (row)
-				{
-					ajaxLoading("正在处理，请稍待。。。");
-					window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+row.classAttendId+"&funcNodeId=${param.funcNodeId}&selDateStr=&classInstId=&comeFlag=attenceMan";
-				}
-				else
-				{
-					$.messager.alert('提示',"请先选择要查看的考勤");
-				}
-			}
-		</script>
  	</body>
 </html>

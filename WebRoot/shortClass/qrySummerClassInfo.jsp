@@ -14,6 +14,78 @@
 				font-family:"微软雅黑";
 			}
 		</style>
+		<script type="text/javascript">
+			ajaxLoading("正在处理，请稍待。。。");
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=820&fieldId=schoolId",function(data){
+				$("#schoolId").combobox("loadData",data);
+			},"json");
+			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_GIFT_T&codeType=COURSE_STATE",function(data){
+				$("#classState").combobox("loadData",data);
+			},"json");
+			$.post("<%=path %>/shortBus/getGiftTypeList.do",function(data){
+				$("#classType").combobox("loadData",data);
+				ajaxLoadEnd();
+			},"json");
+			$(document).ready(function(){
+				$("#classType").combobox({
+					formatter:function(data){
+						return '<span>'+data.typeName+'</span>';
+					}, 
+					valueField: 'giftType', 
+					textField: 'typeName',
+					panelHeight: 'auto'
+				});
+				$("#classState").combobox({
+					formatter:formatItem, 
+					valueField: 'codeFlag', 
+					textField: 'codeName', 
+					panelHeight: 'auto'
+				});
+				$("#schoolId").combobox({
+					formatter:formatSchool, 
+					valueField: 'schoolId', 
+					textField: 'schoolName', 
+					panelHeight: 'auto',
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+						{
+							$("#schoolId").combobox("setValue",data[0].schoolId);
+						}
+					}
+				});
+			});
+			function queryFunc()
+			{
+				var obj = $("#manFm").serializeObject();
+				obj["queryCode"] = "qrySummerInfoList";
+				obj["funcNodeId"] = "38136";
+				obj = JSON.stringify(obj);
+				$("#manList").datagrid({
+					url:"/sys/pubData/qryDataListByPage.do",
+					queryParams:{
+						param : obj
+					}
+				});
+			}
+			function resetFunc()
+			{
+				var schoolData = $("#schoolId").combobox("getData");
+				if(schoolData != null && schoolData.length > 0)
+				{
+					$("#schoolId").combobox("setValue",schoolData[0].schoolId);
+				}
+				$("#staffName").textbox("setValue","");
+				$("#contactPhone").textbox("setValue","");
+				$("#classType").combobox("setValue","");
+				$("#classState").combobox("setValue","");
+				$("#feeStartTime").datebox("setValue","");
+				$("#feeEndTime").datebox("setValue","");
+				$("#expireDate").datebox("setValue","");
+				$("input[name='isExpire']").each(function(i,node){
+					node.checked = false; 
+				});
+			}
+		</script>
   	</head>
   	<body>
 		<form id="manFm" style="margin:0 auto;">
@@ -100,77 +172,5 @@
 				</thead>
 			</table>
 		</div>
-		<script type="text/javascript">
-			ajaxLoading("正在处理，请稍待。。。");
-			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=820&fieldId=schoolId",function(data){
-				$("#schoolId").combobox("loadData",data);
-			},"json");
-			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_GIFT_T&codeType=COURSE_STATE",function(data){
-				$("#classState").combobox("loadData",data);
-			},"json");
-			$.post("<%=path %>/shortBus/getGiftTypeList.do",function(data){
-				$("#classType").combobox("loadData",data);
-				ajaxLoadEnd();
-			},"json");
-			$(document).ready(function(){
-				$("#classType").combobox({
-					formatter:function(data){
-						return '<span>'+data.typeName+'</span>';
-					}, 
-					valueField: 'giftType', 
-					textField: 'typeName',
-					panelHeight: 'auto'
-				});
-				$("#classState").combobox({
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
-					panelHeight: 'auto'
-				});
-				$("#schoolId").combobox({
-					formatter:formatSchool, 
-					valueField: 'schoolId', 
-					textField: 'schoolName', 
-					panelHeight: 'auto',
-					onLoadSuccess:function(data){
-						if(data.length > 0)
-						{
-							$("#schoolId").combobox("setValue",data[0].schoolId);
-						}
-					}
-				});
-			});
-			function queryFunc()
-			{
-				var obj = $("#manFm").serializeObject();
-				obj["queryCode"] = "qrySummerInfoList";
-				obj["funcNodeId"] = "38136";
-				obj = JSON.stringify(obj);
-				$("#manList").datagrid({
-					url:"/sys/pubData/qryDataListByPage.do",
-					queryParams:{
-						param : obj
-					}
-				});
-			}
-			function resetFunc()
-			{
-				var schoolData = $("#schoolId").combobox("getData");
-				if(schoolData != null && schoolData.length > 0)
-				{
-					$("#schoolId").combobox("setValue",schoolData[0].schoolId);
-				}
-				$("#staffName").textbox("setValue","");
-				$("#contactPhone").textbox("setValue","");
-				$("#classType").combobox("setValue","");
-				$("#classState").combobox("setValue","");
-				$("#feeStartTime").datebox("setValue","");
-				$("#feeEndTime").datebox("setValue","");
-				$("#expireDate").datebox("setValue","");
-				$("input[name='isExpire']").each(function(i,node){
-					node.checked = false; 
-				});
-			}
-		</script>
  	</body>
 </html>

@@ -37,8 +37,74 @@
 				vertical-align:middle;
 			}
 		</style>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				ajaxLoadEnd();
+			});
+			function attendUpdate()
+			{
+				var obj = {
+					classAttendId:"${classAttendT.classAttendId}",
+					handlerId:"${sessionScope.StaffT.staffId}",
+					studentList:null
+				};
+				var studentArr = [];
+				$("#studentTab tr:gt(0)").each(function(i,node){
+					var firstTr = $(node).find("td:nth-child(1)");
+					var attendTypeObj = $(node).find("input[name='attendType"+firstTr.attr("studentId")+"']:checked").val();
+					var dressObj = $(node).find("input[name='dress"+firstTr.attr("studentId")+"']:checked").val();
+					var studentObj = {
+						studentId:firstTr.attr("studentId"),
+						studentCourseId:firstTr.attr("studentCourseId"),
+						stageId:firstTr.attr("stageId"),
+						studentName:firstTr.attr("studentName"),
+						schoolId:firstTr.attr("schoolId"),
+						hours:${classAttendT.hours},
+						classType:"${classInstT.classType}",
+						dress:dressObj,
+						attendType:attendTypeObj
+					};
+					studentArr.push(studentObj);
+				});
+				obj.studentList = studentArr;
+				var json = JSON.stringify(obj);
+				ajaxLoading("正在处理，请稍待。。。");
+				$.post("/sys/attend/uploadLeaveOper.do",{json:json},function(data){
+					ajaxLoadEnd();
+					if(data == "success")
+					{
+						$.messager.alert("提示", "提交成功","info",function(){
+							backFunc();
+						});
+					}
+					else
+					{
+						try{
+							var dataObj = eval("("+data+")");
+							$.messager.alert("提示", dataObj.msg,"error");
+						}catch(e){
+							$.messager.alert("提示", data,"error");
+						}
+					}
+				});
+			}
+			function attendTypeClickFunc(obj,flag)
+			{
+				if(obj.value == 'L' || obj.value == 'T')
+				{
+					$("#dressArea"+flag).css("visibility","hidden");
+				}
+				else
+				{
+					$("#dressArea"+flag).css("visibility","visible");
+				}
+			}
+			function backFunc()
+			{
+				window.history.back();
+			}
+		</script>
   	</head>
-  
   	<body class="manage">
 		<table class="tab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr style="display:none;">
@@ -137,72 +203,5 @@
 			<a href="javascript:void(0)" id="enterBtn" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;" onclick="attendUpdate()">提交</a>
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				ajaxLoadEnd();
-			});
-			function attendUpdate()
-			{
-				var obj = {
-					classAttendId:"${classAttendT.classAttendId}",
-					handlerId:"${sessionScope.StaffT.staffId}",
-					studentList:null
-				};
-				var studentArr = [];
-				$("#studentTab tr:gt(0)").each(function(i,node){
-					var firstTr = $(node).find("td:nth-child(1)");
-					var attendTypeObj = $(node).find("input[name='attendType"+firstTr.attr("studentId")+"']:checked").val();
-					var dressObj = $(node).find("input[name='dress"+firstTr.attr("studentId")+"']:checked").val();
-					var studentObj = {
-						studentId:firstTr.attr("studentId"),
-						studentCourseId:firstTr.attr("studentCourseId"),
-						stageId:firstTr.attr("stageId"),
-						studentName:firstTr.attr("studentName"),
-						schoolId:firstTr.attr("schoolId"),
-						hours:${classAttendT.hours},
-						classType:"${classInstT.classType}",
-						dress:dressObj,
-						attendType:attendTypeObj
-					};
-					studentArr.push(studentObj);
-				});
-				obj.studentList = studentArr;
-				var json = JSON.stringify(obj);
-				ajaxLoading("正在处理，请稍待。。。");
-				$.post("/sys/attend/uploadLeaveOper.do",{json:json},function(data){
-					ajaxLoadEnd();
-					if(data == "success")
-					{
-						$.messager.alert("提示", "提交成功","info",function(){
-							backFunc();
-						});
-					}
-					else
-					{
-						try{
-							var dataObj = eval("("+data+")");
-							$.messager.alert("提示", dataObj.msg,"error");
-						}catch(e){
-							$.messager.alert("提示", data,"error");
-						}
-					}
-				});
-			}
-			function attendTypeClickFunc(obj,flag)
-			{
-				if(obj.value == 'L' || obj.value == 'T')
-				{
-					$("#dressArea"+flag).css("visibility","hidden");
-				}
-				else
-				{
-					$("#dressArea"+flag).css("visibility","visible");
-				}
-			}
-			function backFunc()
-			{
-				window.history.back();
-			}
-		</script>
  	</body>
 </html>

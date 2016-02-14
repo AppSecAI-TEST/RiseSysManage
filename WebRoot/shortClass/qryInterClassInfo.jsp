@@ -14,6 +14,70 @@
 				font-family:"微软雅黑";
 			}
 		</style>
+		<script type="text/javascript">
+			ajaxLoading("正在处理，请稍待。。。");
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=819&fieldId=schoolId",function(data){
+				$("#schoolId").combobox("loadData",data);
+			},"json");
+			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("国际班"),function(data){
+				$("#interClassType").combobox("loadData",data);
+				ajaxLoadEnd();
+			},"json");
+			$(document).ready(function(){
+				$("#interClassType").combobox({
+					formatter:function(data){
+						return '<span>'+data.classType+'</span>';
+					}, 
+					valueField: 'classType', 
+					textField: 'classType',
+					panelHeight: 'auto'
+				});
+				$("#schoolId").combobox({
+					formatter:formatSchool, 
+					valueField: 'schoolId', 
+					textField: 'schoolName', 
+					panelHeight: 'auto',
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+						{
+							$("#schoolId").combobox("setValue",data[0].schoolId);
+						}
+					}
+				});
+			});
+			function queryFunc()
+			{
+				var obj = $("#manFm").serializeObject();
+				obj["queryCode"] = "qryInterInfoList";
+				obj["funcNodeId"] = "38112";
+				obj = JSON.stringify(obj);
+				$("#manList").datagrid({
+					url:"/sys/pubData/qryDataListByPage.do",
+					queryParams:{
+						param : obj
+					}
+				});
+			}
+			function resetFunc()
+			{
+				var schoolData = $("#schoolId").combobox("getData");
+				if(schoolData != null && schoolData.length > 0)
+				{
+					$("#schoolId").combobox("setValue",schoolData[0].schoolId);
+				}
+				$("#staffName").textbox("setValue","");
+				$("#contactPhone").textbox("setValue","");
+				$("#interClassType").combobox("setValue","");
+				$("#feeStartTime").datebox("setValue","");
+				$("#feeEndTime").datebox("setValue","");
+				$("input[name='feeReturn']").each(function(i,node){
+					node.checked = false; 
+				});
+				$("input[name='selectClass']").each(function(i,node){
+					node.checked = false; 
+				});
+			}
+		</script>
   	</head>
   	<body>
 		<form id="manFm" style="margin:0 auto;">
@@ -94,69 +158,5 @@
 				</thead>
 			</table>
 		</div>
-		<script type="text/javascript">
-			ajaxLoading("正在处理，请稍待。。。");
-			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=819&fieldId=schoolId",function(data){
-				$("#schoolId").combobox("loadData",data);
-			},"json");
-			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("国际班"),function(data){
-				$("#interClassType").combobox("loadData",data);
-				ajaxLoadEnd();
-			},"json");
-			$(document).ready(function(){
-				$("#interClassType").combobox({
-					formatter:function(data){
-						return '<span>'+data.classType+'</span>';
-					}, 
-					valueField: 'classType', 
-					textField: 'classType',
-					panelHeight: 'auto'
-				});
-				$("#schoolId").combobox({
-					formatter:formatSchool, 
-					valueField: 'schoolId', 
-					textField: 'schoolName', 
-					panelHeight: 'auto',
-					onLoadSuccess:function(data){
-						if(data.length > 0)
-						{
-							$("#schoolId").combobox("setValue",data[0].schoolId);
-						}
-					}
-				});
-			});
-			function queryFunc()
-			{
-				var obj = $("#manFm").serializeObject();
-				obj["queryCode"] = "qryInterInfoList";
-				obj["funcNodeId"] = "38112";
-				obj = JSON.stringify(obj);
-				$("#manList").datagrid({
-					url:"/sys/pubData/qryDataListByPage.do",
-					queryParams:{
-						param : obj
-					}
-				});
-			}
-			function resetFunc()
-			{
-				var schoolData = $("#schoolId").combobox("getData");
-				if(schoolData != null && schoolData.length > 0)
-				{
-					$("#schoolId").combobox("setValue",schoolData[0].schoolId);
-				}
-				$("#staffName").textbox("setValue","");
-				$("#contactPhone").textbox("setValue","");
-				$("#interClassType").combobox("setValue","");
-				$("#feeStartTime").datebox("setValue","");
-				$("#feeEndTime").datebox("setValue","");
-				$("input[name='feeReturn']").each(function(i,node){
-					node.checked = false; 
-				});
-				$("input[name='selectClass']").each(function(i,node){
-					node.checked = false; 
-				});
-			}
-		</script>
  	</body>
 </html>

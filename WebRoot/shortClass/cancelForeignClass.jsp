@@ -11,8 +11,33 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
+		<script type="text/javascript">
+			ajaxLoadEnd();
+			function addSubmitFunc()
+			{
+				$.messager.confirm("提示", "您确定要取消该课程吗？", function (data) {
+		            if(data){
+		            	ajaxLoading("正在处理，请稍待。。。");
+		                $.post("/sys/shortBus/cancelGiftClassFunc.do",{shortClassInstId:${shortClassInstId},remark:$("#remark").textbox("getValue"),classType:encodeURI("外教课"),handleId:${sessionScope.StaffT.staffId}},function(data){
+		                	ajaxLoadEnd();
+		                	if(data == "success")
+		                	{
+		                		backFunc();
+		                	}
+		                	else
+		                	{
+		                		$.messager.alert('提示',"取消课程失败:"+data,"error");
+		                	}
+		                });
+		            }
+		        });
+			}
+			function backFunc()
+			{
+				window.history.back();
+			}
+		</script>
   	</head>
-  
   	<body class="manage">
 		<table align="center" class="tab" style="height:90px;width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
@@ -132,31 +157,5 @@
 			<a href="javascript:void(0)" id="addSubmitBtn" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;" onclick="addSubmitFunc()">提交</a>
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
-		<script type="text/javascript">
-			ajaxLoadEnd();
-			function addSubmitFunc()
-			{
-				$.messager.confirm("提示", "您确定要取消该课程吗？", function (data) {
-		            if(data){
-		            	ajaxLoading("正在处理，请稍待。。。");
-		                $.post("/sys/shortBus/cancelGiftClassFunc.do",{shortClassInstId:${shortClassInstId},remark:$("#remark").textbox("getValue"),classType:encodeURI("外教课"),handleId:${sessionScope.StaffT.staffId}},function(data){
-		                	ajaxLoadEnd();
-		                	if(data == "success")
-		                	{
-		                		backFunc();
-		                	}
-		                	else
-		                	{
-		                		$.messager.alert('提示',"取消课程失败:"+data,"error");
-		                	}
-		                });
-		            }
-		        });
-			}
-			function backFunc()
-			{
-				window.history.back();
-			}
-		</script>
  	</body>
 </html>

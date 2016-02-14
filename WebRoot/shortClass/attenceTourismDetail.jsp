@@ -25,6 +25,51 @@
 				padding-right:4px;
 			}
 		</style>
+		<script type="text/javascript">
+			ajaxLoadEnd();
+			var gClassAttend = null;
+			function addAttenceFunc()
+			{
+				ajaxLoading("正在处理，请稍待。。。");
+				window.location.href = "/sys/shortBus/tourismAttenceRecordPage.do?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}";
+			}
+			function updateAttenceFunc()
+			{
+				if (gClassAttend != null)
+				{
+					ajaxLoading("正在处理，请稍待。。。");
+					window.location.href =  "/sys/shortBus/tourismAttenceRecUpdatePage.do?funcNodeId=${funcNodeId}&shortClassAttendId="+gClassAttend.value;
+				}
+				else
+				{
+					$.messager.alert('提示',"请先选择要维护的考勤");
+				}
+			}
+			function viewAttenceFunc()
+			{
+				if (gClassAttend != null)
+				{
+					ajaxLoading("正在处理，请稍待。。。");
+					window.location.href =  "/sys/shortBus/shortTourismAttenceViewPage.do?funcNodeId=${funcNodeId}&shortClassAttendId="+gClassAttend.value;
+				}
+				else
+				{
+					$.messager.alert('提示',"请先选择要浏览的考勤");
+				}
+			}
+			function classAttendCheckbox(obj)
+			{
+				if(gClassAttend != null && gClassAttend != obj)
+				{
+					gClassAttend.checked = false;
+				}
+				gClassAttend = obj;			
+			}
+			function backFunc()
+			{
+				window.location.href = "/sys/shortClass/attenceTourismMan.jsp?funcNodeId=${funcNodeId}";
+			}
+		</script>
   	</head>
   
   	<body class="manage">
@@ -87,50 +132,5 @@
 		<div style="margin:0 auto;padding:0 0;text-align:right;padding-right:2px;width:99%;margin-top:10px">
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 		</div>
-		<script type="text/javascript">
-			ajaxLoadEnd();
-			var gClassAttend = null;
-			function addAttenceFunc()
-			{
-				ajaxLoading("正在处理，请稍待。。。");
-				window.location.href = "/sys/shortBus/tourismAttenceRecordPage.do?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}";
-			}
-			function updateAttenceFunc()
-			{
-				if (gClassAttend != null)
-				{
-					ajaxLoading("正在处理，请稍待。。。");
-					window.location.href =  "/sys/shortBus/tourismAttenceRecUpdatePage.do?funcNodeId=${funcNodeId}&shortClassAttendId="+gClassAttend.value;
-				}
-				else
-				{
-					$.messager.alert('提示',"请先选择要维护的考勤");
-				}
-			}
-			function viewAttenceFunc()
-			{
-				if (gClassAttend != null)
-				{
-					ajaxLoading("正在处理，请稍待。。。");
-					window.location.href =  "/sys/shortBus/shortTourismAttenceViewPage.do?funcNodeId=${funcNodeId}&shortClassAttendId="+gClassAttend.value;
-				}
-				else
-				{
-					$.messager.alert('提示',"请先选择要浏览的考勤");
-				}
-			}
-			function classAttendCheckbox(obj)
-			{
-				if(gClassAttend != null && gClassAttend != obj)
-				{
-					gClassAttend.checked = false;
-				}
-				gClassAttend = obj;			
-			}
-			function backFunc()
-			{
-				window.location.href = "/sys/shortClass/attenceTourismMan.jsp?funcNodeId=${funcNodeId}";
-			}
-		</script>
  	</body>
 </html>

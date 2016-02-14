@@ -14,16 +14,6 @@
 				font-family:"微软雅黑";
 			}
 		</style>
-  	</head>
-  	<body>
-		<div style="padding:5px 0;min-width:1100px; width:100%">
-			<table id="manList">
-				
-			</table>
-			<p style="text-align:right;margin-right:5px">
-				<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
-			</p>
-		</div>
 		<script type="text/javascript">
 			var gTableData = '${makeupInfo}';
 			try{
@@ -106,5 +96,15 @@
 				window.location.href = "/sys/attence/leaveMakeupMan.jsp?funcNodeId=${funcNodeId}";
 			}
 		</script>
+  	</head>
+  	<body>
+		<div style="padding:5px 0;min-width:1100px; width:100%">
+			<table id="manList">
+				
+			</table>
+			<p style="text-align:right;margin-right:5px">
+				<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
+			</p>
+		</div>
  	</body>
 </html>

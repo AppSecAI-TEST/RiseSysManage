@@ -14,6 +14,63 @@
 				font-family:"微软雅黑";
 			}
 		</style>
+		<script type="text/javascript">
+			ajaxLoading("正在处理，请稍待。。。");
+			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=821&fieldId=schoolId",function(data){
+				$("#schoolId").combobox("loadData",data);
+			},"json");
+			$.post("<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=staffName",function(data){
+				$("#staffName").combobox("loadData",data);
+				ajaxLoadEnd();
+			},"json");
+			$(document).ready(function(){
+				$("#staffName").combobox({
+					formatter:function(data){
+						return '<span>'+data.staffName+'</span>';
+					},
+					valueField: 'staffId', 
+					textField: 'staffName', 
+					panelHeight: 'auto'
+				});
+				$("#schoolId").combobox({
+					formatter:formatSchool, 
+					valueField: 'schoolId', 
+					textField: 'schoolName', 
+					panelHeight: 'auto',
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+						{
+							$("#schoolId").combobox("setValue",data[0].schoolId);
+						}
+					}
+				});
+			});
+			function queryFunc()
+			{
+				var obj = $("#manFm").serializeObject();
+				obj["queryCode"] = "qryTourismInfoList";
+				obj["funcNodeId"] = "38114";
+				obj = JSON.stringify(obj);
+				$("#manList").datagrid({
+					url:"/sys/pubData/qryDataListByPage.do",
+					queryParams:{
+						param : obj
+					}
+				});
+			}
+			function resetFunc()
+			{
+				var schoolData = $("#schoolId").combobox("getData");
+				if(schoolData != null && schoolData.length > 0)
+				{
+					$("#schoolId").combobox("setValue",schoolData[0].schoolId);
+				}
+				$("#staffName").combobox("setValue","");
+				$("#contactPhone").textbox("setValue","");
+				$("#feeStartTime").datebox("setValue","");
+				$("#feeEndTime").datebox("setValue","");
+			}
+		</script>
   	</head>
   	<body>
 		<form id="manFm" style="margin:0 auto;">
@@ -74,62 +131,5 @@
 				</thead>
 			</table>
 		</div>
-		<script type="text/javascript">
-			ajaxLoading("正在处理，请稍待。。。");
-			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=821&fieldId=schoolId",function(data){
-				$("#schoolId").combobox("loadData",data);
-			},"json");
-			$.post("<%=path %>/pub/paramComboxList.do?staffId=${sessionScope.StaffT.staffId}&funcNodeId=${param.funcNodeId}&fieldId=staffName",function(data){
-				$("#staffName").combobox("loadData",data);
-				ajaxLoadEnd();
-			},"json");
-			$(document).ready(function(){
-				$("#staffName").combobox({
-					formatter:function(data){
-						return '<span>'+data.staffName+'</span>';
-					},
-					valueField: 'staffId', 
-					textField: 'staffName', 
-					panelHeight: 'auto'
-				});
-				$("#schoolId").combobox({
-					formatter:formatSchool, 
-					valueField: 'schoolId', 
-					textField: 'schoolName', 
-					panelHeight: 'auto',
-					onLoadSuccess:function(data){
-						if(data.length > 0)
-						{
-							$("#schoolId").combobox("setValue",data[0].schoolId);
-						}
-					}
-				});
-			});
-			function queryFunc()
-			{
-				var obj = $("#manFm").serializeObject();
-				obj["queryCode"] = "qryTourismInfoList";
-				obj["funcNodeId"] = "38114";
-				obj = JSON.stringify(obj);
-				$("#manList").datagrid({
-					url:"/sys/pubData/qryDataListByPage.do",
-					queryParams:{
-						param : obj
-					}
-				});
-			}
-			function resetFunc()
-			{
-				var schoolData = $("#schoolId").combobox("getData");
-				if(schoolData != null && schoolData.length > 0)
-				{
-					$("#schoolId").combobox("setValue",schoolData[0].schoolId);
-				}
-				$("#staffName").combobox("setValue","");
-				$("#contactPhone").textbox("setValue","");
-				$("#feeStartTime").datebox("setValue","");
-				$("#feeEndTime").datebox("setValue","");
-			}
-		</script>
  	</body>
 </html>

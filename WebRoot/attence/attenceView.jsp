@@ -29,8 +29,39 @@
 				padding-right:4px;
 			}
 		</style>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				ajaxLoadEnd();
+				var classAttendInfo = '${classAttendInfo}';
+				var dataObj = null;
+				if(classAttendInfo != "[]")
+				{
+					dataObj = eval("("+classAttendInfo+")");
+				}
+				else
+				{
+					dataObj = new Array();
+				}
+				$("#classAttendInfo").datagrid({
+					data:dataObj,
+					onClickRow:function(rowIndex, rowData){
+				    	ajaxLoading("正在处理，请稍待。。。");
+						window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+rowData.classAttendId+"&funcNodeId=${funcNodeId}&selDateStr="+$("#selDateStr").html()+"&&classInstId=${classInstId}";
+				    }
+				});
+			});
+			function gotoAttendView(classAttendId)
+			{
+				ajaxLoading("正在处理，请稍待。。。");
+				window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+classAttendId+"&funcNodeId=${funcNodeId}&selDateStr="+$("#selDateStr").html()+"&classInstId=${classInstId}&comeFlag=attenceView";
+			}
+			function backFunc()
+			{
+				ajaxLoading("返回中...");
+				window.location.href = "/sys/attend/getAttendDetail.do?funcNodeId=${funcNodeId}&classInstId=${classInstId}";
+			}
+		</script>
   	</head>
-  
   	<body class="easyui-layout manage">
   		<input type="hidden" id="classInstId" value="${classInstId}" />
   		<input type="hidden" id="funcNodeId" value="${funcNodeId}" />
@@ -166,37 +197,5 @@
 				</p>
 			</div>
 		</form>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				ajaxLoadEnd();
-				var classAttendInfo = '${classAttendInfo}';
-				var dataObj = null;
-				if(classAttendInfo != "[]")
-				{
-					dataObj = eval("("+classAttendInfo+")");
-				}
-				else
-				{
-					dataObj = new Array();
-				}
-				$("#classAttendInfo").datagrid({
-					data:dataObj,
-					onClickRow:function(rowIndex, rowData){
-				    	ajaxLoading("正在处理，请稍待。。。");
-						window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+rowData.classAttendId+"&funcNodeId=${funcNodeId}&selDateStr="+$("#selDateStr").html()+"&&classInstId=${classInstId}";
-				    }
-				});
-			});
-			function gotoAttendView(classAttendId)
-			{
-				ajaxLoading("正在处理，请稍待。。。");
-				window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+classAttendId+"&funcNodeId=${funcNodeId}&selDateStr="+$("#selDateStr").html()+"&classInstId=${classInstId}&comeFlag=attenceView";
-			}
-			function backFunc()
-			{
-				ajaxLoading("返回中...");
-				window.location.href = "/sys/attend/getAttendDetail.do?funcNodeId=${funcNodeId}&classInstId=${classInstId}";
-			}
-		</script>
  	</body>
 </html>

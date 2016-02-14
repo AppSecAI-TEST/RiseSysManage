@@ -109,7 +109,6 @@
 				this.menuId = menuId;
 				this.menuData = menuData;
 			};
-			
 			$(function(){
 				getLeft(${sessionScope.funcNodeInfo[0].funcNodeList[0].funcNodeId}, '导航菜单');
 				$.messager.show({			
@@ -119,17 +118,14 @@
 					showType:'slide'
 				});
 			});
-			
 			function logout(){
 				$.messager.confirm('提示信息', '确定要退出登录吗？', function(result){
 					if(result) window.location.href = '/sys/auth.do?method=logout';
 				});
 			}
-			
 			function updatePassword(){
 				$('#dlg').dialog('open').dialog('setTitle','修改密码');
 			}
-			
 			function updatePasswordSubmit(){
 				if($("#form").form('validate')){
 					var staffId = $("#staffId").val();
@@ -157,14 +153,12 @@
 					});
 				}
 			}
-			
 			function cancelUpdatePassword(){
 				$("#oldPassword").textbox("setValue","");
 				$("#password").textbox("setValue","");
 				$("#confirm").textbox("setValue","");
 				$('#dlg').dialog('close');
 			}
-			
 			function getLeft(menuId, title, that){
 				var options = $('body').layout('panel', 'west').panel('options');
 				//if(title == options.title) return false;
@@ -220,7 +214,6 @@
 					$(that).addClass('focus');
 				}
 			}
-			
 			function getMenuArr(valId)
 			{
 				for(var i = 0,n = gMenuArr.length;i < n;i++)
@@ -233,7 +226,6 @@
 				}
 				return null;
 			}
-			
 			function menuFunc(data)
 			{
 				for(var i = 0,n = data.length;i < n;i++)
@@ -268,7 +260,6 @@
 					$("#leftmenu").accordion("add", {title: data[i].name, content: arr.join(""), iconCls:'icons-folder-folder_go'});
 				}
 			}
-			
 			function removeLeft(stop){
 				var pp = $("#leftmenu").accordion("panels");
 				$.each(pp, function(i, n) {
@@ -284,7 +275,6 @@
 			    }
 			    if(!stop) removeLeft(true)
 			}
-			
 			function openUrl(id , url , title)
 			{
 				if(url.lastIndexOf("&") != -1 || url.lastIndexOf("?") != -1)

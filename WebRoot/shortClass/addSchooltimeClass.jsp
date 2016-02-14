@@ -10,38 +10,6 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-  	</head>
-  
-  	<body class="manage">
- 		<input type="hidden" id="shortClassInstId" value="${param.shortClassInstId}" />
-		<table align="center" class="tab" style="width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<tr>
-				<td align="right" width="10%">日期：</td>
-				<td width="35%" colspan="4">
-					<input name="schooltimeDate" id="schooltimeDate" type="text" style="width:150px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />&nbsp;&nbsp;
-					<input class="easyui-timespinner" id="startTime" name="startTime" style="width:70px;height: 25px;"  data-options="showSeconds:false">&nbsp;&nbsp;<input class="easyui-timespinner" id="endTime" name="endTime" style="width:70px;height: 25px;"  data-options="showSeconds:false"></select>
-				</td>
-			</tr>
-			<tr>
-				<td align="right">教室：</td>
-				<td colspan="4"><select id="roomList" name="roomList" style="width:150px" ></select></td>
-			</tr>
-			<tr>
-				<td align="right">课时：</td>
-				<td colspan="4"><input name="lessonHour" id="lessonHour" type="text" style="width:150px" class="easyui-textbox" data-options="readonly:true" /></td>
-			</tr>
-			<tr>
-				<td align="right">老师：</td>
-				<td><select id="schoolId" name="schoolId" style="width:150px" ></select></td>
-				<td><select id="teacherId" name="teacherId" style="width:150px" ></select></td>
-				<td><select id="teacherType" name="teacherType" style="width:150px" ></select></td>
-				<td><a href="javascript:void(0)" id="addTeacherBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;" onclick="addTeacherFunc()">添加</a></td>
-			</tr>
-		</table>
-		<div style="margin:0 auto;padding:0 0;text-align:right;padding-right:2px;width:99%;margin-top:10px">
-			<a href="javascript:void(0)" id="addSubmitBtn" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;" onclick="addSubmitFunc()">提交</a>
-			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
-		</div>
 		<script type="text/javascript">
 			ajaxLoadEnd();
 			$.post("<%=path %>/pubData/qrySchoolListWithTS.do",function(data){
@@ -258,5 +226,37 @@
 				}
 			}
 		</script>
+  	</head>
+  
+  	<body class="manage">
+ 		<input type="hidden" id="shortClassInstId" value="${param.shortClassInstId}" />
+		<table align="center" class="tab" style="width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td align="right" width="10%">日期：</td>
+				<td width="35%" colspan="4">
+					<input name="schooltimeDate" id="schooltimeDate" type="text" style="width:150px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />&nbsp;&nbsp;
+					<input class="easyui-timespinner" id="startTime" name="startTime" style="width:70px;height: 25px;"  data-options="showSeconds:false">&nbsp;&nbsp;<input class="easyui-timespinner" id="endTime" name="endTime" style="width:70px;height: 25px;"  data-options="showSeconds:false"></select>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">教室：</td>
+				<td colspan="4"><select id="roomList" name="roomList" style="width:150px" ></select></td>
+			</tr>
+			<tr>
+				<td align="right">课时：</td>
+				<td colspan="4"><input name="lessonHour" id="lessonHour" type="text" style="width:150px" class="easyui-textbox" data-options="readonly:true" /></td>
+			</tr>
+			<tr>
+				<td align="right">老师：</td>
+				<td><select id="schoolId" name="schoolId" style="width:150px" ></select></td>
+				<td><select id="teacherId" name="teacherId" style="width:150px" ></select></td>
+				<td><select id="teacherType" name="teacherType" style="width:150px" ></select></td>
+				<td><a href="javascript:void(0)" id="addTeacherBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;" onclick="addTeacherFunc()">添加</a></td>
+			</tr>
+		</table>
+		<div style="margin:0 auto;padding:0 0;text-align:right;padding-right:2px;width:99%;margin-top:10px">
+			<a href="javascript:void(0)" id="addSubmitBtn" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;" onclick="addSubmitFunc()">提交</a>
+			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
+		</div>
  	</body>
 </html>

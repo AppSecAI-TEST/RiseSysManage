@@ -14,44 +14,6 @@
 				font-family:"微软雅黑";
 			}
 		</style>
-  	</head>
-  	<body>
-		<form id="manFm" style="margin:0 auto;">
-			<table align="center" style="min-width:1200px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:40px;" cellspacing="2">
-				<tr>
-					<td align="right" width="10%">
-						片区名称：
-					</td>
-					<td width="10%">
-						<input class="easyui-textbox" name="regionName" id="regionName" style="width:120px;" />
-					</td>
-					<td align="right" width="75%">
-						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
-						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="">重置</a>
-					</td>
-					<td></td>
-				</tr>
-			</table>
-		</form>
-		<div style="padding:5px 0;min-width:1100px; width:100%">
-			<table class="easyui-datagrid" title="片区列表" style="height:580px" id="manList" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
-				<thead>
-					<tr>
-						<th width="1%" align="center" data-options="field:'regionId',checkbox:true"></th>
-						<th width="15%" align="center" field="regionName">片区名称</th>
-						<th width="30%" align="center" field="schoolNames">包含校区</th>
-						<th width="15%" align="center" field="managerName">联系人</th>
-						<th width="15%" align="center" field="phone">联系电话</th>
-						<th width="24%" align="center" field="remark">备注</th>
-					</tr>
-				</thead>
-			</table>
-			<div id="toolbar">
-	   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="addRegion()">新增片区</a>
-	 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" onclick="updateRegion()">修改片区</a>
-	 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" onclick="deleteRegion()">删除片区</a>
- 			</div>
-		</div>
 		<script type="text/javascript">
 			function queryFunc()
 			{
@@ -131,5 +93,43 @@
 				return flag;
 			}
 		</script>
+  	</head>
+  	<body>
+		<form id="manFm" style="margin:0 auto;">
+			<table align="center" style="min-width:1200px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:40px;" cellspacing="2">
+				<tr>
+					<td align="right" width="10%">
+						片区名称：
+					</td>
+					<td width="10%">
+						<input class="easyui-textbox" name="regionName" id="regionName" style="width:120px;" />
+					</td>
+					<td align="right" width="75%">
+						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
+						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="">重置</a>
+					</td>
+					<td></td>
+				</tr>
+			</table>
+		</form>
+		<div style="padding:5px 0;min-width:1100px; width:100%">
+			<table class="easyui-datagrid" title="片区列表" style="height:580px" id="manList" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+				<thead>
+					<tr>
+						<th width="1%" align="center" data-options="field:'regionId',checkbox:true"></th>
+						<th width="15%" align="center" field="regionName">片区名称</th>
+						<th width="30%" align="center" field="schoolNames">包含校区</th>
+						<th width="15%" align="center" field="managerName">联系人</th>
+						<th width="15%" align="center" field="phone">联系电话</th>
+						<th width="24%" align="center" field="remark">备注</th>
+					</tr>
+				</thead>
+			</table>
+			<div id="toolbar">
+	   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="addRegion()">新增片区</a>
+	 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" onclick="updateRegion()">修改片区</a>
+	 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" onclick="deleteRegion()">删除片区</a>
+ 			</div>
+		</div>
  	</body>
 </html>

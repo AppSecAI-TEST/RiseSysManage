@@ -11,73 +11,6 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-  	</head>
-  
-  	<body class="manage">
-		<table class="tab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<tr>
-				<td align="right" width="10%">上课时间：</td>
-				<td>周${shortSchooltimeT.weekTime} <fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" /> <input class="easyui-timespinner" id="startTime" name="startTime" style="width:70px;height: 25px;"  data-options="showSeconds:false">&nbsp;&nbsp;<input class="easyui-timespinner" id="endTime" name="endTime" style="width:70px;height: 25px;"  data-options="showSeconds:false"></td>
-			</tr>
-			<tr>
-				<td align="right">教室：</td>
-				<td><select id="classRoomId" name="classRoomId" style="width:200px" ></select></td>
-			</tr>
-			<tr>
-				<td align="right">课时：</td>
-				<td><input name="classLessonHour" id="classLessonHour" type="text" style="width:200px" class="easyui-textbox" data-options="readonly:true" /></td>
-			</tr>
-		</table>
-		<table class="tab" id="teacherTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<tr class="headTr">
-				<td>&nbsp;</td>
-				<td>校区</td>
-				<td>姓名</td>
-				<td>课时类型</td>
-				<td>课时量</td>
-				<td>操作</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td align="center"><select id="attRecordSchoolId" name="attRecordSchoolId" style="width:150px" ></select></td>
-				<td align="center"><select id="attRecordTeacherId" name="attRecordTeacherId" style="width:150px" ></select></td>
-				<td align="center"><select id="attRecordClassType" name="attRecordClassType" style="width:150px" ></select></td>
-				<td align="center"><input name="attRecordLessonHour" id="attRecordLessonHour" type="text" style="width:150px" class="easyui-textbox" /></td>
-				<td align="center" width="15%"><a href="javascript:void(0)" id="addTeacherBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="addAttendTeacher()">添加</a></td>
-			</tr>
-			<c:forEach items="${shortSchooltimeT.classTeacherList}" var="node">
-				<tr id="teacherId${node.teacherId}">
-					<td align="right" teacherId="${node.teacherId}" schoolId="${node.schoolId}" teacherType="${node.teacherType}" hours="${node.lessionHours}">老师：</td>
-					<td align="center">${node.schoolT.schoolName}</td>
-					<td align="center">${node.teacherT.byName}</td>
-					<td align="center">${node.teacherType}</td>
-					<td align="center">${node.lessionHours}</td>
-					<td align="center"><a href="javascript:void(0)" onclick="delTeacherFunc(${node.teacherId})">删除</a></td>
-				</tr>
-			</c:forEach>
-		</table>
-		<table class="tab" id="studentTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<tr class="headTr">
-				<td width="5%">序号</td>
-				<td width="15%">校区</td>
-				<td width="15%">学员姓名</td>
-				<td width="15%">英文名</td>
-				<td width="50%">考勤操作</td>
-			</tr>
-			<c:forEach items="${shortClassInstT.classStudentList}" var="node" varStatus="i">
-				<tr id="studentId${node.studentId}" studentId="${node.studentId}" studentCourseId="${node.studentCourseId}" schoolId="${node.schoolId}">
-					<td align="center">${i.count}</td>
-					<td align="center">${node.studentT.schoolT.schoolName}</td>
-					<td align="center">${node.studentT.name}</td>
-					<td align="center">${node.studentT.byName}</td>
-					<td align="center"><input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}1" value="N" checked="checked" /><label for="attendType${node.studentId}1">已到</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}2" value="T" /><label for="attendType${node.studentId}2">未到</label></td>
-				</tr>
-			</c:forEach>
-		</table>
-		<div style="margin:0 auto;padding:0 0;text-align:right;padding-right:2px;width:99%;margin-top:10px">
-			<a href="javascript:void(0)" id="enterBtn" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;" onclick="attendSubmit()">提交</a>
-			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
-		</div>
 		<script type="text/javascript">
 			ajaxLoadEnd();
 			$(document).ready(function(){
@@ -158,7 +91,6 @@
 					data:attRecordClassType
 				});
 			});
-			
 			function addAttendTeacher()
 			{
 				var attRecordSchoolId = $("#attRecordSchoolId").combobox("getValue");
@@ -225,7 +157,6 @@
 					}
 				}
 			}
-			
 			function delTeacherFunc(val)
 			{
 				 $.messager.confirm("提示", "您确定要删除该老师吗？", function (data) {
@@ -234,7 +165,6 @@
 		            }
 		        });
 			}
-			
 			function attendSubmit()
 			{
 				var classLessonHour = $("#classLessonHour").textbox("getValue");
@@ -354,11 +284,76 @@
 					});
 				}
 			}
-			
 			function backFunc()
 			{
 				window.location.href = "/sys/shortClass/attenceForeignMan.jsp?funcNodeId=${funcNodeId}";
 			}
 		</script>
+  	</head>
+  	<body class="manage">
+		<table class="tab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td align="right" width="10%">上课时间：</td>
+				<td>周${shortSchooltimeT.weekTime} <fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" /> <input class="easyui-timespinner" id="startTime" name="startTime" style="width:70px;height: 25px;"  data-options="showSeconds:false">&nbsp;&nbsp;<input class="easyui-timespinner" id="endTime" name="endTime" style="width:70px;height: 25px;"  data-options="showSeconds:false"></td>
+			</tr>
+			<tr>
+				<td align="right">教室：</td>
+				<td><select id="classRoomId" name="classRoomId" style="width:200px" ></select></td>
+			</tr>
+			<tr>
+				<td align="right">课时：</td>
+				<td><input name="classLessonHour" id="classLessonHour" type="text" style="width:200px" class="easyui-textbox" data-options="readonly:true" /></td>
+			</tr>
+		</table>
+		<table class="tab" id="teacherTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+			<tr class="headTr">
+				<td>&nbsp;</td>
+				<td>校区</td>
+				<td>姓名</td>
+				<td>课时类型</td>
+				<td>课时量</td>
+				<td>操作</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td align="center"><select id="attRecordSchoolId" name="attRecordSchoolId" style="width:150px" ></select></td>
+				<td align="center"><select id="attRecordTeacherId" name="attRecordTeacherId" style="width:150px" ></select></td>
+				<td align="center"><select id="attRecordClassType" name="attRecordClassType" style="width:150px" ></select></td>
+				<td align="center"><input name="attRecordLessonHour" id="attRecordLessonHour" type="text" style="width:150px" class="easyui-textbox" /></td>
+				<td align="center" width="15%"><a href="javascript:void(0)" id="addTeacherBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="addAttendTeacher()">添加</a></td>
+			</tr>
+			<c:forEach items="${shortSchooltimeT.classTeacherList}" var="node">
+				<tr id="teacherId${node.teacherId}">
+					<td align="right" teacherId="${node.teacherId}" schoolId="${node.schoolId}" teacherType="${node.teacherType}" hours="${node.lessionHours}">老师：</td>
+					<td align="center">${node.schoolT.schoolName}</td>
+					<td align="center">${node.teacherT.byName}</td>
+					<td align="center">${node.teacherType}</td>
+					<td align="center">${node.lessionHours}</td>
+					<td align="center"><a href="javascript:void(0)" onclick="delTeacherFunc(${node.teacherId})">删除</a></td>
+				</tr>
+			</c:forEach>
+		</table>
+		<table class="tab" id="studentTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+			<tr class="headTr">
+				<td width="5%">序号</td>
+				<td width="15%">校区</td>
+				<td width="15%">学员姓名</td>
+				<td width="15%">英文名</td>
+				<td width="50%">考勤操作</td>
+			</tr>
+			<c:forEach items="${shortClassInstT.classStudentList}" var="node" varStatus="i">
+				<tr id="studentId${node.studentId}" studentId="${node.studentId}" studentCourseId="${node.studentCourseId}" schoolId="${node.schoolId}">
+					<td align="center">${i.count}</td>
+					<td align="center">${node.studentT.schoolT.schoolName}</td>
+					<td align="center">${node.studentT.name}</td>
+					<td align="center">${node.studentT.byName}</td>
+					<td align="center"><input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}1" value="N" checked="checked" /><label for="attendType${node.studentId}1">已到</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}2" value="T" /><label for="attendType${node.studentId}2">未到</label></td>
+				</tr>
+			</c:forEach>
+		</table>
+		<div style="margin:0 auto;padding:0 0;text-align:right;padding-right:2px;width:99%;margin-top:10px">
+			<a href="javascript:void(0)" id="enterBtn" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;" onclick="attendSubmit()">提交</a>
+			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
+		</div>
  	</body>
 </html>

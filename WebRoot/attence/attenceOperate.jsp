@@ -29,8 +29,53 @@
 				padding-right:4px;
 			}
 		</style>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				ajaxLoadEnd();
+				var classAttendInfo = '${classAttendInfo}';
+				var dataObj = null;
+				if(classAttendInfo != "[]")
+				{
+					dataObj = eval("("+classAttendInfo+")");
+				}
+				else
+				{
+					dataObj = new Array();
+				}
+				$("#classAttendInfo").datagrid({
+					data:dataObj,
+					onClickRow:function(rowIndex, rowData){
+				    	ajaxLoading("正在处理，请稍待。。。");
+						window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+rowData.classAttendId+"&funcNodeId=${funcNodeId}&selDateStr="+$("#selDateStr").html()+"&classInstId=${classInstId}&comeFlag=attenceOperate";
+				    }
+				});
+			});
+			function gotoAttendRecord(classInstId,dateValue,realClassTime,schooltimeInstIds,classAttendIds)
+			{
+				if(classAttendIds != "")
+				{
+					ajaxLoading("正在处理，请稍待。。。");
+					classAttendIds = classAttendIds.substring(0,classAttendIds.length -1);
+					window.location.href = "/sys/attend/getUpdateAttenceRecord.do?funcNodeId=${funcNodeId}&classAttendId="+classAttendIds.split("#")[0]+"&classAttendIds="+classAttendIds+"&selDateStr="+$("#selDateStr").html();
+				}
+				else if(classAttendIds == "" && schooltimeInstIds != "")
+				{
+					ajaxLoading("正在处理，请稍待。。。");
+					window.location.href = "/sys/attend/getAttenceRecord.do?funcNodeId=${funcNodeId}&schooltimeInstId="+schooltimeInstIds.split("#")[0]+"&selDateStr="+$("#selDateStr").html()+"&dateValue="+dateValue;
+				}
+				else if(classInstId != "")
+				{
+					ajaxLoading("正在处理，请稍待。。。");
+					window.location.href = "/sys/attend/getAttenceRecordInst.do?funcNodeId=${funcNodeId}&classInstId="+classInstId+"&selDateStr="+$("#selDateStr").html()+"&dateValue="+dateValue;
+				}
+			}
+			function backFunc()
+			{
+				ajaxLoading("返回中...");
+				window.location.href = "/sys/attend/getAttendDetail.do?funcNodeId=${funcNodeId}&classInstId=${classInstId}";
+			}
+		</script>
   	</head>
-  
   	<body class="easyui-layout manage">
   		<input type="hidden" id="classInstId" value="${classInstId}" />
   		<input type="hidden" id="funcNodeId" value="${funcNodeId}" />
@@ -203,51 +248,5 @@
 				</p>
 			</div>
 		</form>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				ajaxLoadEnd();
-				var classAttendInfo = '${classAttendInfo}';
-				var dataObj = null;
-				if(classAttendInfo != "[]")
-				{
-					dataObj = eval("("+classAttendInfo+")");
-				}
-				else
-				{
-					dataObj = new Array();
-				}
-				$("#classAttendInfo").datagrid({
-					data:dataObj,
-					onClickRow:function(rowIndex, rowData){
-				    	ajaxLoading("正在处理，请稍待。。。");
-						window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+rowData.classAttendId+"&funcNodeId=${funcNodeId}&selDateStr="+$("#selDateStr").html()+"&classInstId=${classInstId}&comeFlag=attenceOperate";
-				    }
-				});
-			});
-			function gotoAttendRecord(classInstId,dateValue,realClassTime,schooltimeInstIds,classAttendIds)
-			{
-				if(classAttendIds != "")
-				{
-					ajaxLoading("正在处理，请稍待。。。");
-					classAttendIds = classAttendIds.substring(0,classAttendIds.length -1);
-					window.location.href = "/sys/attend/getUpdateAttenceRecord.do?funcNodeId=${funcNodeId}&classAttendId="+classAttendIds.split("#")[0]+"&classAttendIds="+classAttendIds+"&selDateStr="+$("#selDateStr").html();
-				}
-				else if(classAttendIds == "" && schooltimeInstIds != "")
-				{
-					ajaxLoading("正在处理，请稍待。。。");
-					window.location.href = "/sys/attend/getAttenceRecord.do?funcNodeId=${funcNodeId}&schooltimeInstId="+schooltimeInstIds.split("#")[0]+"&selDateStr="+$("#selDateStr").html()+"&dateValue="+dateValue;
-				}
-				else if(classInstId != "")
-				{
-					ajaxLoading("正在处理，请稍待。。。");
-					window.location.href = "/sys/attend/getAttenceRecordInst.do?funcNodeId=${funcNodeId}&classInstId="+classInstId+"&selDateStr="+$("#selDateStr").html()+"&dateValue="+dateValue;
-				}
-			}
-			function backFunc()
-			{
-				ajaxLoading("返回中...");
-				window.location.href = "/sys/attend/getAttendDetail.do?funcNodeId=${funcNodeId}&classInstId=${classInstId}";
-			}
-		</script>
  	</body>
 </html>

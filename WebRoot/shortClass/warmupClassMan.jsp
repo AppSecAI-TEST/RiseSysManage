@@ -14,163 +14,6 @@
 				font-family:"微软雅黑";
 			}
 		</style>
-  	</head>
-  	<body>
-  		<div id="tab" class="easyui-tabs" style="min-width:1150px;width:99%;height:528px;font-family:'微软雅黑';margin:0 auto;padding:0 0">
-		    <div title="班级管理">
-				<form id="manFm" style="margin:0 auto;">
-					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
-						<tr>
-							<td align="right" width="8%">
-								所属校区：
-							</td>
-							<td width="11%">
-								<select id="schoolManId" name="schoolManId" style="width:100px;height:25px;" ></select>
-							</td>
-							<td align="right" width="9%">	
-								课程类型：
-							</td>
-							<td width="22%">
-								<select id="classType" name="classType" style="width:100px;height:25px;" ></select>
-							</td>
-							<td align="right" width="9%">	
-								班级：
-							</td>
-							<td colspan="2">
-								<input name="classInfo" id="classInfo" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
-							</td>
-						</tr>
-						<tr>
-							<td align="right">
-								班级状态：
-							</td>
-							<td>
-								<select id="classManState" name="classManState" style="width:100px;height:25px;" ></select>
-							</td>
-							<td align="right">
-								放班申请日期：
-							</td>
-							<td>
-								<input name="openStartManTime" id="openStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="openEndManTime" id="openEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
-							</td>
-							<td align="right">
-								放班审批日期：
-							</td>
-							<td>
-								<input name="verifyStartManTime" id="verifyStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="verifyEndManTime" id="verifyEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
-							</td>
-							<td align="center">
-								<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
-								<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
-							</td>
-						</tr>
-					</table>
-				</form>
-				<div style="padding:5px 0;min-width:1100px; width:100%">
-					<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
-						<thead>
-							<tr>
-								<th data-options="field:'shortClassInstId',checkbox:true"></th>
-								<th width="9%" field="schoolName">校区</th>
-								<th width="9%" field="className">热身课班级名称</th>
-								<th width="9%" field="classStateName">班级状态</th>
-								<th width="9%" field="planHours">计划课时量</th>
-								<th width="9%" field="classProgress">实际反馈课时量</th>
-								<th width="9%" field="planClassNum">计划上课人数</th>
-								<th width="9%" field="realClassNum">实际上课人数</th>
-								<th width="9%" field="putClassDate">申请时间</th>
-								<th width="9%" field="approveDate">审批时间</th>
-								<th width="9%" field="openDate">开课日期</th>
-								<th width="9%" field="finishDate">结课日期</th>
-							</tr>
-						</thead>
-					</table>
-				</div>
-				<div id="toolManbar" style="padding: 2px; height: auto">
-					<a href="javascript:void(0)" id="classArrangementBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="classArrangementFunc()">放班申请</a>
-					<a href="javascript:void(0)" id="cancelClassBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="manClassFunc()">班级维护</a>
-		   			<a href="javascript:void(0)" id="viewClassBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="viewClassFunc()">浏览</a>
-				</div>
-			</div>
-		    <div title="审批管理">
-				<form id="hisFm" style="margin:0 auto;">
-					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
-						<tr>
-							<td align="right" width="8%">
-								所属校区：
-							</td>
-							<td width="11%">
-								<select id="schoolVerId" name="schoolVerId" style="width:100px;height:25px;" ></select>
-							</td>
-							<td align="right" width="9%">
-								班级：
-							</td>
-							<td width="22%">
-								<input name="classVerInfo" id="classVerInfo" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
-							</td>
-							<td align="right" width="9%">
-								审批状态：
-							</td>
-							<td width="22%">
-								<select id="verifyState" name="verifyState" style="width:100px;height:25px;" ></select>
-							</td>
-							<td>
-								<input name="myVerify" id="myVerify" type="checkbox" value="${sessionScope.StaffT.staffId}" /><label for="feeReturnYes">查看我的审批</label>
-							</td>
-						</tr>
-						<tr>
-							<td align="right">
-								班级状态：
-							</td>
-							<td>
-								<select id="classManVerState" name="classManVerState" style="width:100px;height:25px;" ></select>
-							</td>
-							<td align="right">
-								放班申请时间：
-							</td>
-							<td>
-								<input name="openApplyStartManTime" id="openApplyStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="openApplyEndManTime" id="openApplyEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />							
-							</td>
-							<td align="right">
-								放班审批时间：
-							</td>
-							<td>
-								<input name="openVerStartManTime" id="openVerStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="openVerEndManTime" id="openVerEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />							
-							</td>
-							<td align="left">
-								<a href="javascript:void(0)" id="queryVerBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryVerFunc()">查询</a>
-								<a href="javascript:void(0)" id="resetVerBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetVerFunc()">重置</a>
-							</td>
-						</tr>
-					</table>
-				</form>
-				<div style="padding:5px 0;min-width:1100px; width:100%;">
-					<table class="easyui-datagrid" title="班级申请列表" style="height:390px;" id="hisList" url="" toolbar="#toolHisbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
-						<thead>
-							<tr>
-								<th data-options="field:'shortClassInstId',checkbox:true"></th>
-								<th width="8%" field="schoolName">校区</th>
-								<th width="8%" field="className">热身课名称</th>
-								<th width="8%" field="verifyState">审批状态</th>
-								<th width="8%" field="planHours">计划课时量</th>
-								<th width="8%" field="classProgress">实际反馈课时量</th>
-								<th width="8%" field="planClassNum">计划上课人数</th>
-								<th width="8%" field="realClassNum">实际上课人数</th>
-								<th width="8%" field="personNum">定班人数</th>
-								<th width="8%" field="putClassDate">申请时间</th>
-								<th width="8%" field="approveDate">审批时间</th>
-								<th width="8%" field="openDate">开课时间</th>
-								<th width="8%" field="finishDate">结课时间</th>
-							</tr>
-						</thead>
-					</table>
-				</div>
-				<div id="toolHisbar" style="padding: 2px; height: auto">
-		   			<a href="javascript:void(0)" id="veriftyManBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="verifyManFunc()">审批</a>
-		   			<a href="javascript:void(0)" id="viewManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="viewManFunc()">浏览</a>
-				</div>
-		    </div>
-		</div>
 		<script type="text/javascript">
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=824&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
@@ -388,5 +231,162 @@
 				}
 			}
 		</script>
+  	</head>
+  	<body>
+  		<div id="tab" class="easyui-tabs" style="min-width:1150px;width:99%;height:528px;font-family:'微软雅黑';margin:0 auto;padding:0 0">
+		    <div title="班级管理">
+				<form id="manFm" style="margin:0 auto;">
+					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+						<tr>
+							<td align="right" width="8%">
+								所属校区：
+							</td>
+							<td width="11%">
+								<select id="schoolManId" name="schoolManId" style="width:100px;height:25px;" ></select>
+							</td>
+							<td align="right" width="9%">	
+								课程类型：
+							</td>
+							<td width="22%">
+								<select id="classType" name="classType" style="width:100px;height:25px;" ></select>
+							</td>
+							<td align="right" width="9%">	
+								班级：
+							</td>
+							<td colspan="2">
+								<input name="classInfo" id="classInfo" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
+							</td>
+						</tr>
+						<tr>
+							<td align="right">
+								班级状态：
+							</td>
+							<td>
+								<select id="classManState" name="classManState" style="width:100px;height:25px;" ></select>
+							</td>
+							<td align="right">
+								放班申请日期：
+							</td>
+							<td>
+								<input name="openStartManTime" id="openStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="openEndManTime" id="openEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
+							</td>
+							<td align="right">
+								放班审批日期：
+							</td>
+							<td>
+								<input name="verifyStartManTime" id="verifyStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="verifyEndManTime" id="verifyEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
+							</td>
+							<td align="center">
+								<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
+								<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
+							</td>
+						</tr>
+					</table>
+				</form>
+				<div style="padding:5px 0;min-width:1100px; width:100%">
+					<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+						<thead>
+							<tr>
+								<th data-options="field:'shortClassInstId',checkbox:true"></th>
+								<th width="9%" field="schoolName">校区</th>
+								<th width="9%" field="className">热身课班级名称</th>
+								<th width="9%" field="classStateName">班级状态</th>
+								<th width="9%" field="planHours">计划课时量</th>
+								<th width="9%" field="classProgress">实际反馈课时量</th>
+								<th width="9%" field="planClassNum">计划上课人数</th>
+								<th width="9%" field="realClassNum">实际上课人数</th>
+								<th width="9%" field="putClassDate">申请时间</th>
+								<th width="9%" field="approveDate">审批时间</th>
+								<th width="9%" field="openDate">开课日期</th>
+								<th width="9%" field="finishDate">结课日期</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div id="toolManbar" style="padding: 2px; height: auto">
+					<a href="javascript:void(0)" id="classArrangementBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="classArrangementFunc()">放班申请</a>
+					<a href="javascript:void(0)" id="cancelClassBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="manClassFunc()">班级维护</a>
+		   			<a href="javascript:void(0)" id="viewClassBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="viewClassFunc()">浏览</a>
+				</div>
+			</div>
+		    <div title="审批管理">
+				<form id="hisFm" style="margin:0 auto;">
+					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+						<tr>
+							<td align="right" width="8%">
+								所属校区：
+							</td>
+							<td width="11%">
+								<select id="schoolVerId" name="schoolVerId" style="width:100px;height:25px;" ></select>
+							</td>
+							<td align="right" width="9%">
+								班级：
+							</td>
+							<td width="22%">
+								<input name="classVerInfo" id="classVerInfo" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
+							</td>
+							<td align="right" width="9%">
+								审批状态：
+							</td>
+							<td width="22%">
+								<select id="verifyState" name="verifyState" style="width:100px;height:25px;" ></select>
+							</td>
+							<td>
+								<input name="myVerify" id="myVerify" type="checkbox" value="${sessionScope.StaffT.staffId}" /><label for="feeReturnYes">查看我的审批</label>
+							</td>
+						</tr>
+						<tr>
+							<td align="right">
+								班级状态：
+							</td>
+							<td>
+								<select id="classManVerState" name="classManVerState" style="width:100px;height:25px;" ></select>
+							</td>
+							<td align="right">
+								放班申请时间：
+							</td>
+							<td>
+								<input name="openApplyStartManTime" id="openApplyStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="openApplyEndManTime" id="openApplyEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />							
+							</td>
+							<td align="right">
+								放班审批时间：
+							</td>
+							<td>
+								<input name="openVerStartManTime" id="openVerStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="openVerEndManTime" id="openVerEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />							
+							</td>
+							<td align="left">
+								<a href="javascript:void(0)" id="queryVerBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryVerFunc()">查询</a>
+								<a href="javascript:void(0)" id="resetVerBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetVerFunc()">重置</a>
+							</td>
+						</tr>
+					</table>
+				</form>
+				<div style="padding:5px 0;min-width:1100px; width:100%;">
+					<table class="easyui-datagrid" title="班级申请列表" style="height:390px;" id="hisList" url="" toolbar="#toolHisbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+						<thead>
+							<tr>
+								<th data-options="field:'shortClassInstId',checkbox:true"></th>
+								<th width="8%" field="schoolName">校区</th>
+								<th width="8%" field="className">热身课名称</th>
+								<th width="8%" field="verifyState">审批状态</th>
+								<th width="8%" field="planHours">计划课时量</th>
+								<th width="8%" field="classProgress">实际反馈课时量</th>
+								<th width="8%" field="planClassNum">计划上课人数</th>
+								<th width="8%" field="realClassNum">实际上课人数</th>
+								<th width="8%" field="personNum">定班人数</th>
+								<th width="8%" field="putClassDate">申请时间</th>
+								<th width="8%" field="approveDate">审批时间</th>
+								<th width="8%" field="openDate">开课时间</th>
+								<th width="8%" field="finishDate">结课时间</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div id="toolHisbar" style="padding: 2px; height: auto">
+		   			<a href="javascript:void(0)" id="veriftyManBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="verifyManFunc()">审批</a>
+		   			<a href="javascript:void(0)" id="viewManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="viewManFunc()">浏览</a>
+				</div>
+		    </div>
+		</div>
  	</body>
 </html>

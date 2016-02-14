@@ -5,7 +5,6 @@
 	String path = request.getContextPath();
 	List postList = (List)request.getAttribute("postList");
 %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   	<head>
@@ -25,8 +24,143 @@
 				padding-right:4px;
 			}
 		</style>
+		<script type="text/javascript">
+			var postTeaTypeObj = null;
+			<c:choose>
+				<c:when test="${pageFlag == 'NEW'}">
+					var url = "/sys/staff/addStaff.do";
+					var pageFlag = true;
+				</c:when>
+				<c:otherwise>
+					var url = "/sys/staff/updateStaff.do";
+					var pageFlag = false;
+				</c:otherwise>
+			</c:choose>
+			$(document).ready(function(){
+				$("#deptId").combotree({animate:true,required:true,missingMessage:"请选择部门"});
+				$("#certType").combobox({
+					url:"<%=path %>/pub/pageComboxList.do?funcNodeId=${funcNodeId}&fieldId=certType",
+					formatter:function(row){
+						return '<span>'+row.codeName+'</span>';
+					},
+					editable:false, 
+					valueField: 'codeFlag', 
+					textField: 'codeName', 
+					panelHeight: 'auto',
+					required:true,
+					missingMessage:"请选择证件类型",
+					onLoadSuccess:function(data){
+						$("#certType").combobox("setValue",'${staffT.certType}');
+					}
+				});
+				$("#jobProperty").combobox({
+					url:"<%=path %>/pub/pageComboxList.do?funcNodeId=${funcNodeId}&fieldId=jobProperty",
+					formatter:function(row){
+						return '<span>'+row.codeName+'</span>';
+					},
+					editable:false, 
+					valueField: 'codeFlag', 
+					textField: 'codeName', 
+					panelHeight: 'auto',
+					required:true,
+					missingMessage:"请选择工作性质",
+					onLoadSuccess:function(data){
+						$("#jobProperty").combobox("setValue",'${staffT.jobProperty}');
+					}
+				});
+				$("#sysName").textbox("setValue",'${staffT.sysName}');
+				if(!pageFlag)
+				{
+					$("#sysName").textbox("readonly", true);
+				}
+				$("#userName").textbox("setValue",'${staffT.userName}');
+				$("#staffName").textbox("setValue",'${staffT.staffName}');
+				$("#certNum").textbox("setValue",'${staffT.certNum}');
+				$("#birthday").datebox("setValue",'<fmt:formatDate value="${staffT.birthday}" pattern="yyyy-MM-dd" />');
+				$("#phone").textbox("setValue",'${staffT.phone}');
+				$("#familyAddr").textbox("setValue",'${staffT.familyAddr}');
+				$("#familyPhone").textbox("setValue",'${staffT.familyPhone}');
+				$("#qq").textbox("setValue",'${staffT.qq}');
+				$("#graduateSchool").textbox("setValue",'${staffT.graduateSchool}');
+				$("#educationDegree").textbox("setValue",'${staffT.educationDegree}');
+				$("#profession").textbox("setValue",'${staffT.profession}');
+				$("#joinDate").datebox("setValue",'<fmt:formatDate value="${staffT.joinDate}" pattern="yyyy-MM-dd" />');
+				$("#hireDate").datebox("setValue",'<fmt:formatDate value="${staffT.hireDate}" pattern="yyyy-MM-dd" />');
+				$("#agreementDate").datebox("setValue",'<fmt:formatDate value="${staffT.agreementDate}" pattern="yyyy-MM-dd" />');
+				$("#educationExperience").textbox("setValue",'${staffT.educationExperience}');
+				$("#workExperience").textbox("setValue",'${staffT.workExperience}');
+				$("#remark").textbox("setValue",'${staffT.remark}');
+				var postArr = [${staffT.post}];
+				for(var i = 0,n = postArr.length;i < n;i++)
+				{
+					$("#post"+postArr[i]).get(0).checked = true;
+				}
+				ajaxLoading("正在处理，请稍待。。。");
+				$.ajax({
+					url:"/sys/orgDept/getRootOrgDept.do",
+					type:"POST",
+					dataType:"json",
+					complete:function(){
+						ajaxLoadEnd();
+					},
+					success:function(data){
+						$("#deptId").combotree("loadData",data);
+						$("#deptId").combotree("setValue",'${staffT.deptId}');
+					}	
+				});
+			});
+			function choicePostFunc(obj)
+			{
+				$("input[name='post']").each(function(i,node){
+					node.checked = obj.checked;
+				});
+			}
+			function postClickFunc(obj)
+			{
+				if($(obj).attr("postType") == "T")
+				{
+					if(postTeaTypeObj != obj)
+					{
+						if(postTeaTypeObj != null)
+						{
+							postTeaTypeObj.checked = false;
+						}
+						postTeaTypeObj = obj;
+					}
+				}
+			}
+			function staffSubmit(){
+				$('#fm').form('submit',{
+					url: url,
+					onSubmit: function(){
+						return $(this).form('validate');
+					},
+					success: function(result){
+						if (result == "success"){
+							var pageStr = null;
+							if(pageFlag)
+							{
+								pageStr = "新增";
+							}
+							else
+							{
+								pageStr = "修改";
+							}
+							$.messager.alert('提示',pageStr+"人员成功","info",function(){
+								backFunc();
+							});
+						} else {
+							$.messager.alert('提示',result);
+						}
+					}
+				});
+			}
+			function backFunc()
+			{
+				window.location.href = "/sys/manage/userMan.jsp?funcNodeId=${funcNodeId}";
+			}
+		</script>
   	</head>
-  
   	<body class="easyui-layout manage">
   		<form id="fm" method="post">
   			<input type="hidden" name="staffId" value="${staffT.staffId}" />
@@ -180,142 +314,5 @@
 				<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
 			</div>
 		</form>
-		<script type="text/javascript">
-			var postTeaTypeObj = null;
-			<c:choose>
-				<c:when test="${pageFlag == 'NEW'}">
-					var url = "/sys/staff/addStaff.do";
-					var pageFlag = true;
-				</c:when>
-				<c:otherwise>
-					var url = "/sys/staff/updateStaff.do";
-					var pageFlag = false;
-				</c:otherwise>
-			</c:choose>
-			$("#deptId").combotree({animate:true,required:true,missingMessage:"请选择部门"});
-			$("#certType").combobox({
-				url:"<%=path %>/pub/pageComboxList.do?funcNodeId=${funcNodeId}&fieldId=certType",
-				formatter:function(row){
-					return '<span>'+row.codeName+'</span>';
-				},
-				editable:false, 
-				valueField: 'codeFlag', 
-				textField: 'codeName', 
-				panelHeight: 'auto',
-				required:true,
-				missingMessage:"请选择证件类型",
-				onLoadSuccess:function(data){
-					$("#certType").combobox("setValue",'${staffT.certType}');
-				}
-			});
-			$("#jobProperty").combobox({
-				url:"<%=path %>/pub/pageComboxList.do?funcNodeId=${funcNodeId}&fieldId=jobProperty",
-				formatter:function(row){
-					return '<span>'+row.codeName+'</span>';
-				},
-				editable:false, 
-				valueField: 'codeFlag', 
-				textField: 'codeName', 
-				panelHeight: 'auto',
-				required:true,
-				missingMessage:"请选择工作性质",
-				onLoadSuccess:function(data){
-					$("#jobProperty").combobox("setValue",'${staffT.jobProperty}');
-				}
-			});
-			$(document).ready(function(){
-				$("#sysName").textbox("setValue",'${staffT.sysName}');
-				if(!pageFlag)
-				{
-					$("#sysName").textbox("readonly", true);
-				}
-				$("#userName").textbox("setValue",'${staffT.userName}');
-				$("#staffName").textbox("setValue",'${staffT.staffName}');
-				$("#certNum").textbox("setValue",'${staffT.certNum}');
-				$("#birthday").datebox("setValue",'<fmt:formatDate value="${staffT.birthday}" pattern="yyyy-MM-dd" />');
-				$("#phone").textbox("setValue",'${staffT.phone}');
-				$("#familyAddr").textbox("setValue",'${staffT.familyAddr}');
-				$("#familyPhone").textbox("setValue",'${staffT.familyPhone}');
-				$("#qq").textbox("setValue",'${staffT.qq}');
-				$("#graduateSchool").textbox("setValue",'${staffT.graduateSchool}');
-				$("#educationDegree").textbox("setValue",'${staffT.educationDegree}');
-				$("#profession").textbox("setValue",'${staffT.profession}');
-				$("#joinDate").datebox("setValue",'<fmt:formatDate value="${staffT.joinDate}" pattern="yyyy-MM-dd" />');
-				$("#hireDate").datebox("setValue",'<fmt:formatDate value="${staffT.hireDate}" pattern="yyyy-MM-dd" />');
-				$("#agreementDate").datebox("setValue",'<fmt:formatDate value="${staffT.agreementDate}" pattern="yyyy-MM-dd" />');
-				$("#educationExperience").textbox("setValue",'${staffT.educationExperience}');
-				$("#workExperience").textbox("setValue",'${staffT.workExperience}');
-				$("#remark").textbox("setValue",'${staffT.remark}');
-				var postArr = [${staffT.post}];
-				for(var i = 0,n = postArr.length;i < n;i++)
-				{
-					$("#post"+postArr[i]).get(0).checked = true;
-				}
-				ajaxLoading("正在处理，请稍待。。。");
-				$.ajax({
-					url:"/sys/orgDept/getRootOrgDept.do",
-					type:"POST",
-					dataType:"json",
-					complete:function(){
-						ajaxLoadEnd();
-					},
-					success:function(data){
-						$("#deptId").combotree("loadData",data);
-						$("#deptId").combotree("setValue",'${staffT.deptId}');
-					}	
-				});
-			});
-			function choicePostFunc(obj)
-			{
-				$("input[name='post']").each(function(i,node){
-					node.checked = obj.checked;
-				});
-			}
-			function postClickFunc(obj)
-			{
-				if($(obj).attr("postType") == "T")
-				{
-					if(postTeaTypeObj != obj)
-					{
-						if(postTeaTypeObj != null)
-						{
-							postTeaTypeObj.checked = false;
-						}
-						postTeaTypeObj = obj;
-					}
-				}
-			}
-			function staffSubmit(){
-				$('#fm').form('submit',{
-					url: url,
-					onSubmit: function(){
-						return $(this).form('validate');
-					},
-					success: function(result){
-						if (result == "success"){
-							var pageStr = null;
-							if(pageFlag)
-							{
-								pageStr = "新增";
-							}
-							else
-							{
-								pageStr = "修改";
-							}
-							$.messager.alert('提示',pageStr+"人员成功","info",function(){
-								backFunc();
-							});
-						} else {
-							$.messager.alert('提示',result);
-						}
-					}
-				});
-			}
-			
-			function backFunc()
-			{
-				window.location.href = "/sys/manage/userMan.jsp?funcNodeId=${funcNodeId}";
-			}
-		</script>
  	</body>
 </html>

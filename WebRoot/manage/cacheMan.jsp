@@ -9,21 +9,6 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-	</head>
-	<body class="easyui-layout userRoleMan">
-		<table class="easyui-datagrid" title="查询结果" style="height:99%;" id="cacheList" url="/sys/cache/sysCacheList.do" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
-			<thead>
-				<tr>
-					<th field="cacheName" width="33%">缓存名称</th>
-					<th field="cacheDesc" width="33%">缓存描述</th>
-					<th field="cacheDate" width="33%">刷新时间</th>
-				</tr>
-			</thead>
-		</table>
-		<div id="toolbar">
-   			<a href="javascript:void(0)" id="flushAllCacheBtn" onclick="flushAllCache()" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px;">刷新全部缓存</a>
-   			<a href="javascript:void(0)" id="flushCacheBtn" onclick="flushCache()" class="easyui-linkbutton" iconCls="icon-edit" style="width: 120px;">刷新选定缓存</a>
-		</div>
 		<script type="text/javascript">
 			function flushAllCache(){
 				$.messager.confirm('提示','您确定要刷新全部缓存吗?',function(r){
@@ -68,5 +53,20 @@
 				}
 			}
 		</script>
+	</head>
+	<body class="easyui-layout userRoleMan">
+		<table class="easyui-datagrid" title="查询结果" style="height:99%;" id="cacheList" url="/sys/cache/sysCacheList.do" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+			<thead>
+				<tr>
+					<th field="cacheName" width="33%">缓存名称</th>
+					<th field="cacheDesc" width="33%">缓存描述</th>
+					<th field="cacheDate" width="33%">刷新时间</th>
+				</tr>
+			</thead>
+		</table>
+		<div id="toolbar">
+   			<a href="javascript:void(0)" id="flushAllCacheBtn" onclick="flushAllCache()" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px;">刷新全部缓存</a>
+   			<a href="javascript:void(0)" id="flushCacheBtn" onclick="flushCache()" class="easyui-linkbutton" iconCls="icon-edit" style="width: 120px;">刷新选定缓存</a>
+		</div>
 	</body>
 </html>

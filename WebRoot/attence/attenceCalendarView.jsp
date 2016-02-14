@@ -29,8 +29,83 @@
 				padding-right:4px;
 			}
 		</style>
+		<script type="text/javascript">
+			var gYearMonthInfo = '${yearMonthInfo}';
+			var gFirstFlag = false;
+			try{
+				gYearMonthInfo = eval("("+gYearMonthInfo+")");
+			}catch(e){
+			
+			}
+			$(document).ready(function(){
+				ajaxLoadEnd();
+				$("#yearList").combobox({
+					formatter:function(data){
+						return '<span>'+data.yearObj+'</span>';
+					}, 
+					valueField: 'yearObj', 
+					textField: 'yearObj',
+					panelHeight: 'auto',
+					data:gYearMonthInfo,
+					onLoadSuccess:function(data){
+						$("#yearList").combobox("setValue","${year}");
+					},
+					onChange:function (data) {
+						gFirstFlag = false;
+						for(var i = 0,n = gYearMonthInfo.length;i < n;i++)
+						{
+							if(data == gYearMonthInfo[i].yearObj)
+							{
+								$("#monthList").combobox({data:gYearMonthInfo[i].monthArr});								
+								return;
+							}
+						}
+					}
+				});
+				$("#monthList").combobox({
+					formatter:function(data){
+						return '<span>'+data.monthObj+'</span>';
+					}, 
+					valueField: 'monthObj', 
+					textField: 'monthObj',
+					panelHeight: 'auto',
+					onLoadSuccess:function(data){
+						$("#monthList").combobox("setValue","${month}");
+					},
+					onChange:function (data) {
+						if(gFirstFlag)
+						{
+							ajaxLoading("正在处理，请稍待。。。");
+							window.location.href = "/sys/attend/getAttenceCalendarView.do?classInstId=${classInstId}&year="+$("#yearList").combobox("getValue")+"&month="+$("#monthList").combobox("getValue")+"&funcNodeId=${funcNodeId}&flag=${flag}";
+						}
+						else
+						{
+							gFirstFlag = true;
+						}
+					}
+				});
+			});
+			function gotoAttendRecord(classInstId,dateValue,realClassTime,classAttendId)
+			{
+				if(realClassTime != "")
+				{
+					ajaxLoading("正在处理，请稍待。。。");
+					window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+classAttendId+"&funcNodeId=${funcNodeId}&selDateStr=&classInstId=${classInstId}&comeFlag=attenceCalendarView";
+				}
+			}
+			function backFunc()
+			{
+				if("${flag}" == "attend")
+				{
+					window.location.href = "/sys/attence/attenceMan.jsp?funcNodeId=${funcNodeId}";
+				}
+				else
+				{
+					window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId=${classInstId}&type=${flag}";
+				}
+			}
+		</script>
   	</head>
-  
   	<body class="easyui-layout manage">
   		<input type="hidden" id="classInstId" value="${classInstId}" />
   		<input type="hidden" id="funcNodeId" value="${funcNodeId}" />
@@ -192,81 +267,5 @@
 				</p>
 			</div>
 		</form>
-		<script type="text/javascript">
-			var gYearMonthInfo = '${yearMonthInfo}';
-			var gFirstFlag = false;
-			try{
-				gYearMonthInfo = eval("("+gYearMonthInfo+")");
-			}catch(e){
-			
-			}
-			$(document).ready(function(){
-				ajaxLoadEnd();
-				$("#yearList").combobox({
-					formatter:function(data){
-						return '<span>'+data.yearObj+'</span>';
-					}, 
-					valueField: 'yearObj', 
-					textField: 'yearObj',
-					panelHeight: 'auto',
-					data:gYearMonthInfo,
-					onLoadSuccess:function(data){
-						$("#yearList").combobox("setValue","${year}");
-					},
-					onChange:function (data) {
-						gFirstFlag = false;
-						for(var i = 0,n = gYearMonthInfo.length;i < n;i++)
-						{
-							if(data == gYearMonthInfo[i].yearObj)
-							{
-								$("#monthList").combobox({data:gYearMonthInfo[i].monthArr});								
-								return;
-							}
-						}
-					}
-				});
-				$("#monthList").combobox({
-					formatter:function(data){
-						return '<span>'+data.monthObj+'</span>';
-					}, 
-					valueField: 'monthObj', 
-					textField: 'monthObj',
-					panelHeight: 'auto',
-					onLoadSuccess:function(data){
-						$("#monthList").combobox("setValue","${month}");
-					},
-					onChange:function (data) {
-						if(gFirstFlag)
-						{
-							ajaxLoading("正在处理，请稍待。。。");
-							window.location.href = "/sys/attend/getAttenceCalendarView.do?classInstId=${classInstId}&year="+$("#yearList").combobox("getValue")+"&month="+$("#monthList").combobox("getValue")+"&funcNodeId=${funcNodeId}";
-						}
-						else
-						{
-							gFirstFlag = true;
-						}
-					}
-				});
-			});
-			function gotoAttendRecord(classInstId,dateValue,realClassTime,classAttendId)
-			{
-				if(realClassTime != "")
-				{
-					ajaxLoading("正在处理，请稍待。。。");
-					window.location.href = "/sys/attend/showAttenceRecord.do?classAttendId="+classAttendId+"&funcNodeId=${funcNodeId}&selDateStr=&classInstId=${classInstId}&comeFlag=attenceCalendarView";
-				}
-			}
-			function backFunc()
-			{
-				if("${flag}" == "attend")
-				{
-					window.location.href = "/sys/attence/attenceMan.jsp?funcNodeId=${funcNodeId}";
-				}
-				else
-				{
-					window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId=${classInstId}&type=${flag}";
-				}
-			}
-		</script>
  	</body>
 </html>

@@ -9,68 +9,23 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-  	</head>
-  
-  	<body class="easyui-layout manage">
-  		<form id="fm" method="post" novalidate>
-  			<input type="hidden" name="postId" value="${PostT.postId}" />
-			<div data-options="region:'north',title:'基础信息',collapsible:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;text-align:center;height:500px;padding-top:90px">
-				<div class="fitem">
-					<label style="text-align:right">职位名称:</label>
-					<input name="postName" id="postName" type="text" style="width:565px" class="easyui-textbox easyui-validatebox" required="true" />
-				</div>
-				<div class="fitem">
-					<label style="text-align:right">职位类型:</label>
-					<select id="postType" name="postType" style="width:565px" ></select>
-				</div>
-				<div class="fitem">
-					<label style="text-align:right">归属部门:</label>
-					<select class="easyui-combotree" animate="true" id="deptId" name="deptId" style="width:565px" ></select>
-				</div>
-				<div class="fitem">
-					<label style="text-align:right;vertical-align:top;">职位描述:</label>
-					<input name="postRemark" id="postRemark" type="text" style="width:565px;height:150px" class="easyui-textbox" data-options="multiline:true" />
-				</div>
-			</div>
-			<div style="display:none;">
-				<div data-options="region:'center',title:'数据范围',collapsible:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;height:50px;padding-top:20px;padding-left:40px">
-					<div class="fitem">
-						<input id="checkAll" type="checkbox" value="0" onclick="choiceSchoolFunc(this)" />
-						<label for="checkAll">全选</label>
-					</div>
-					<div class="fitem">
-						<c:forEach items="${SchoolList}" var="node" varStatus="i">
-							<input name="schoolIds" id="schoolIds${i.count}" type="checkbox" value="${node.schoolId}" />
-							<label for="schoolIds${i.count}">${node.schoolName}</label>
-							<c:if test="${i.count%10 == 0}">
-								<br />
-							</c:if>
-						</c:forEach>
-					</div>
-				</div>
-			</div>
-			<div data-options="region:'south',border:false,collapsible:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;height:100px;text-align:right;padding-top:0px;padding-right:30px;">
-				<a href="javascript:void(0)" id="enterBtn" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;" onclick="postSubmit()">提交</a>
-				<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
-			</div>
-		</form>
 		<script type="text/javascript">
-			$("#deptId").combotree({animate:true});
-			$("#postType").combobox({
-				url:"<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=postType",
-				formatter:function(row){
-					return '<span>'+row.codeName+'</span>';
-				},
-				editable:false, 
-				valueField: 'codeFlag', 
-				textField: 'codeName', 
-				panelHeight: 'auto',
-				onLoadSuccess:function(data){
-					if(data.length > 0)
-						$('#postType').combobox('setValue','${PostT.postType}');
-				}
-			});
 			$(document).ready(function(){
+				$("#deptId").combotree({animate:true});
+				$("#postType").combobox({
+					url:"<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=postType",
+					formatter:function(row){
+						return '<span>'+row.codeName+'</span>';
+					},
+					editable:false, 
+					valueField: 'codeFlag', 
+					textField: 'codeName', 
+					panelHeight: 'auto',
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+							$('#postType').combobox('setValue','${PostT.postType}');
+					}
+				});
 				$("#postName").textbox("setValue",'${PostT.postName}');
 				$("#postRemark").textbox("setValue",'${PostT.postRemark}');
 				var schoolArr = "${PostT.schoolIds}";
@@ -145,11 +100,54 @@
 					}
 				});
 			}
-			
 			function backFunc()
 			{
 				window.location.href = "/sys/manage/postMan.jsp?funcNodeId=${funcNodeId}";
 			}
 		</script>
+  	</head>
+  	<body class="easyui-layout manage">
+  		<form id="fm" method="post" novalidate>
+  			<input type="hidden" name="postId" value="${PostT.postId}" />
+			<div data-options="region:'north',title:'基础信息',collapsible:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;text-align:center;height:500px;padding-top:90px">
+				<div class="fitem">
+					<label style="text-align:right">职位名称:</label>
+					<input name="postName" id="postName" type="text" style="width:565px" class="easyui-textbox easyui-validatebox" required="true" />
+				</div>
+				<div class="fitem">
+					<label style="text-align:right">职位类型:</label>
+					<select id="postType" name="postType" style="width:565px" ></select>
+				</div>
+				<div class="fitem">
+					<label style="text-align:right">归属部门:</label>
+					<select class="easyui-combotree" animate="true" id="deptId" name="deptId" style="width:565px" ></select>
+				</div>
+				<div class="fitem">
+					<label style="text-align:right;vertical-align:top;">职位描述:</label>
+					<input name="postRemark" id="postRemark" type="text" style="width:565px;height:150px" class="easyui-textbox" data-options="multiline:true" />
+				</div>
+			</div>
+			<div style="display:none;">
+				<div data-options="region:'center',title:'数据范围',collapsible:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;height:50px;padding-top:20px;padding-left:40px">
+					<div class="fitem">
+						<input id="checkAll" type="checkbox" value="0" onclick="choiceSchoolFunc(this)" />
+						<label for="checkAll">全选</label>
+					</div>
+					<div class="fitem">
+						<c:forEach items="${SchoolList}" var="node" varStatus="i">
+							<input name="schoolIds" id="schoolIds${i.count}" type="checkbox" value="${node.schoolId}" />
+							<label for="schoolIds${i.count}">${node.schoolName}</label>
+							<c:if test="${i.count%10 == 0}">
+								<br />
+							</c:if>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+			<div data-options="region:'south',border:false,collapsible:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;height:100px;text-align:right;padding-top:0px;padding-right:30px;">
+				<a href="javascript:void(0)" id="enterBtn" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;" onclick="postSubmit()">提交</a>
+				<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
+			</div>
+		</form>
  	</body>
 </html>

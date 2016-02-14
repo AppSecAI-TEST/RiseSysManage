@@ -7,115 +7,6 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-	</head>
-	<body>
-		<table id="funcNodeData" title="功能模块列表" class="easyui-treegrid" style="width:99%;height:99%" data-options="url:'/sys/funcNode/getFuncNodeInfoList.do',method: 'post',rownumbers: true,idField: 'funcNodeId',treeField: 'funcNodeName',loadFilter: myLoadFilter,toolbar:'#toolbar',onBeforeExpand:function(row){var url = '/sys/funcNode/getFuncNodeInfoList.do?id='+row.funcNodeId;$('#funcNodeData').treegrid('options').url = url;return true;}">
-			<thead>
-				<tr>
-					<th field="funcNodeName" width="16%">功能名称</th>
-					<th field="funcNodeTypeName" width="16%">功能类型</th>
-					<th field="html" width="16%">功能链接</th>
-					<th field="resourceId" width="16%">资源标识符</th>
-					<th field="description" width="16%">功能状态</th>
-					<th field="stateDate" width="20%">创建时间</th>
-				</tr>
-			</thead>
-		</table>
-		<div id="toolbar">
-   			<a href="javascript:void(0)" id="addFuncNode" onclick="newFuncNode()" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">新增功能</a>
-   			<a href="javascript:void(0)" id="updateFuncNode" onclick="editFuncNode()" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">修改功能</a>
-   			<a href="javascript:void(0)" id="deleteFuncNode" onclick="removeFuncNode()" class="easyui-linkbutton" iconCls="icon-remove" style="width: 100px;">删除功能</a>
-		</div>
-		<div id="dlg" class="easyui-dialog" style="width:480px;height:380px;padding:0px 0px;" modal="true" closed="true" buttons="#dlg-buttons">
-			<form id="fm" method="post" novalidate>
-				<input id="funcNodeId" name="funcNodeId" type="hidden" value="" />
-				<div class="fitem">
-					<label style="text-align:right">功能名称:</label>
-					<input name="funcNodeName" id="funcNodeName" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" required="true" />
-				</div>
-				<div class="fitem">
-					<label style="text-align:right">功能类型:</label>
-					<select id="funcNodeType" name="funcNodeType" style="width:265px;height:25px;" required="true" >
-      				</select>
-				</div>
-				<div class="fitem">
-					<label style="text-align:right">上级功能:</label>
-					<select id="parentFuncNodeId" name="parentFuncNodeId" class="easyui-combotree" style="width:265px;height:25px;" required="true" >
-      				</select>
-				</div>
-				<div class="fitem" id="funcPropertyArea">
-					<label style="text-align:right">功能性质:</label>
-					<input type="radio" name="funcProperty" id="funcPropertyF" value="F" onclick="changeFuncProperty(this)" style="vertical-align:top;" checked="checked" /><label for="funcPropertyF">集合型</label>
-					<input type="radio" name="funcProperty" id="funcPropertyS" value="S" onclick="changeFuncProperty(this)" style="vertical-align:top;" /><label for="funcPropertyS">原始型</label>
-				</div>
-				<div class="fitem" id="setFuncIdArea">
-					<label style="text-align:right">集合功能:</label>
-					<select id="setFuncId" name="setFuncId" class="easyui-combotree" style="width:265px;height:25px;" >
-      				</select>
-				</div>
-				<div class="fitem" id="funcLinkArea">
-					<label style="text-align:right">功能链接:</label>
-					<input name="html" id="html" type="text" style="width:265px" class="easyui-textbox" />
-				</div>
-				<div class="fitem">
-					<label style="text-align:right;vertical-align:top;">功能描述:</label>
-					<input name="description" id="description" type="text" style="width:265px;height:100px" class="easyui-textbox" data-options="multiline:true" />
-				</div>
-				<div id="fieldArea" style="display:none;border-top:1px dotted #cccccc;padding-top:5px">
-					<input type="hidden" id="resourceId" name="resourceId" />
-					<input type="hidden" id="handlerId" name="handlerId" />
-					<div class="fitem">
-						<label style="text-align:right">控件属性:</label>
-						<input name="fieldId" id="fieldId" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
-					</div>
-					<div class="fitem">
-						<label style="text-align:right">控件名称:</label>
-						<input name="fieldName" id="fieldName" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
-					</div>
-					<div class="fitem">
-						<label style="text-align:right">控件类型:</label>
-						<select id="widgetType" name="widgetType" style="width:265px;height:25px;">
-	      				</select>
-	      				<input type="hidden" id="widgetName" name="widgetName" />
-					</div>
-					<div id="comboArea" style="display:none;">
-						<div class="fitem">
-							<label style="text-align:right">查询类型:</label>
-							<select id="dataType" name="dataType" style="width:265px;height:25px;">
-		      				</select>
-						</div>
-						<div class="fitem">
-							<label style="text-align:right">语句说明:</label>
-							<input name="dataSqlName" id="dataSqlName" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
-						</div>
-						<div class="fitem">
-							<label style="text-align:right">依赖字段:</label>
-							<input name="dataSourceField" id="dataSourceField" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
-						</div>
-						<div class="fitem">
-							<label style="text-align:right">字段名称:</label>
-							<input name="dataSourceName" id="dataSourceName" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
-						</div>
-						<div class="fitem" id="dataTableArea">
-							<label style="text-align:right">所依赖表:</label>
-							<input name="dataSourceTable" id="dataSourceTable" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
-						</div>
-						<div class="fitem" id="dataSqlArea">
-							<label style="text-align:right;vertical-align:top;">依赖语句:</label>
-							<input name="dataSourceSql" id="dataSourceSql" type="text" style="width:265px;height:100px" class="easyui-textbox easyui-validatebox" data-options="multiline:true" />
-						</div>
-						<div class="fitem" id="dataParamArea">
-							<label style="text-align:right">语句参数:</label>
-							<input name="dataSqlParam" id="dataSqlParam" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
-		<div id="dlg-buttons">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveFuncNode()">保存</a>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
-		</div>
 		<script type="text/javascript">
 			var gParentMenuData = null;
 			var gParentOperData = null;
@@ -513,5 +404,114 @@
 				}
 			}
 		</script>
+	</head>
+	<body>
+		<table id="funcNodeData" title="功能模块列表" class="easyui-treegrid" style="width:99%;height:99%" data-options="url:'/sys/funcNode/getFuncNodeInfoList.do',method: 'post',rownumbers: true,idField: 'funcNodeId',treeField: 'funcNodeName',loadFilter: myLoadFilter,toolbar:'#toolbar',onBeforeExpand:function(row){var url = '/sys/funcNode/getFuncNodeInfoList.do?id='+row.funcNodeId;$('#funcNodeData').treegrid('options').url = url;return true;}">
+			<thead>
+				<tr>
+					<th field="funcNodeName" width="16%">功能名称</th>
+					<th field="funcNodeTypeName" width="16%">功能类型</th>
+					<th field="html" width="16%">功能链接</th>
+					<th field="resourceId" width="16%">资源标识符</th>
+					<th field="description" width="16%">功能状态</th>
+					<th field="stateDate" width="20%">创建时间</th>
+				</tr>
+			</thead>
+		</table>
+		<div id="toolbar">
+   			<a href="javascript:void(0)" id="addFuncNode" onclick="newFuncNode()" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">新增功能</a>
+   			<a href="javascript:void(0)" id="updateFuncNode" onclick="editFuncNode()" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">修改功能</a>
+   			<a href="javascript:void(0)" id="deleteFuncNode" onclick="removeFuncNode()" class="easyui-linkbutton" iconCls="icon-remove" style="width: 100px;">删除功能</a>
+		</div>
+		<div id="dlg" class="easyui-dialog" style="width:480px;height:380px;padding:0px 0px;" modal="true" closed="true" buttons="#dlg-buttons">
+			<form id="fm" method="post" novalidate>
+				<input id="funcNodeId" name="funcNodeId" type="hidden" value="" />
+				<div class="fitem">
+					<label style="text-align:right">功能名称:</label>
+					<input name="funcNodeName" id="funcNodeName" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" required="true" />
+				</div>
+				<div class="fitem">
+					<label style="text-align:right">功能类型:</label>
+					<select id="funcNodeType" name="funcNodeType" style="width:265px;height:25px;" required="true" >
+      				</select>
+				</div>
+				<div class="fitem">
+					<label style="text-align:right">上级功能:</label>
+					<select id="parentFuncNodeId" name="parentFuncNodeId" class="easyui-combotree" style="width:265px;height:25px;" required="true" >
+      				</select>
+				</div>
+				<div class="fitem" id="funcPropertyArea">
+					<label style="text-align:right">功能性质:</label>
+					<input type="radio" name="funcProperty" id="funcPropertyF" value="F" onclick="changeFuncProperty(this)" style="vertical-align:top;" checked="checked" /><label for="funcPropertyF">集合型</label>
+					<input type="radio" name="funcProperty" id="funcPropertyS" value="S" onclick="changeFuncProperty(this)" style="vertical-align:top;" /><label for="funcPropertyS">原始型</label>
+				</div>
+				<div class="fitem" id="setFuncIdArea">
+					<label style="text-align:right">集合功能:</label>
+					<select id="setFuncId" name="setFuncId" class="easyui-combotree" style="width:265px;height:25px;" >
+      				</select>
+				</div>
+				<div class="fitem" id="funcLinkArea">
+					<label style="text-align:right">功能链接:</label>
+					<input name="html" id="html" type="text" style="width:265px" class="easyui-textbox" />
+				</div>
+				<div class="fitem">
+					<label style="text-align:right;vertical-align:top;">功能描述:</label>
+					<input name="description" id="description" type="text" style="width:265px;height:100px" class="easyui-textbox" data-options="multiline:true" />
+				</div>
+				<div id="fieldArea" style="display:none;border-top:1px dotted #cccccc;padding-top:5px">
+					<input type="hidden" id="resourceId" name="resourceId" />
+					<input type="hidden" id="handlerId" name="handlerId" />
+					<div class="fitem">
+						<label style="text-align:right">控件属性:</label>
+						<input name="fieldId" id="fieldId" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
+					</div>
+					<div class="fitem">
+						<label style="text-align:right">控件名称:</label>
+						<input name="fieldName" id="fieldName" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
+					</div>
+					<div class="fitem">
+						<label style="text-align:right">控件类型:</label>
+						<select id="widgetType" name="widgetType" style="width:265px;height:25px;">
+	      				</select>
+	      				<input type="hidden" id="widgetName" name="widgetName" />
+					</div>
+					<div id="comboArea" style="display:none;">
+						<div class="fitem">
+							<label style="text-align:right">查询类型:</label>
+							<select id="dataType" name="dataType" style="width:265px;height:25px;">
+		      				</select>
+						</div>
+						<div class="fitem">
+							<label style="text-align:right">语句说明:</label>
+							<input name="dataSqlName" id="dataSqlName" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
+						</div>
+						<div class="fitem">
+							<label style="text-align:right">依赖字段:</label>
+							<input name="dataSourceField" id="dataSourceField" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
+						</div>
+						<div class="fitem">
+							<label style="text-align:right">字段名称:</label>
+							<input name="dataSourceName" id="dataSourceName" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
+						</div>
+						<div class="fitem" id="dataTableArea">
+							<label style="text-align:right">所依赖表:</label>
+							<input name="dataSourceTable" id="dataSourceTable" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
+						</div>
+						<div class="fitem" id="dataSqlArea">
+							<label style="text-align:right;vertical-align:top;">依赖语句:</label>
+							<input name="dataSourceSql" id="dataSourceSql" type="text" style="width:265px;height:100px" class="easyui-textbox easyui-validatebox" data-options="multiline:true" />
+						</div>
+						<div class="fitem" id="dataParamArea">
+							<label style="text-align:right">语句参数:</label>
+							<input name="dataSqlParam" id="dataSqlParam" type="text" style="width:265px" class="easyui-textbox easyui-validatebox" />
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div id="dlg-buttons">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveFuncNode()">保存</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+		</div>
 	</body>
 </html>

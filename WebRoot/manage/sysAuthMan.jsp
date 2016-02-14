@@ -7,131 +7,6 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-	</head>
-	<body class="easyui-layout manage">
-		<div id="leftarea" data-options="iconCls:'icons-other-house',region:'west',title:'功能模块项',split:true,width:200">
-			<div style="width:96%;height:100%;padding-left:5px;">
-				<ul id="funcNodeTree" class="easyui-tree" data-options="url:'/sys/funcNode/getSubFuncNodeList.do',lines:true,animate:true,onClick:getTreeNode"></ul>
-			</div>
-		</div>
-		<div id="mainarea" data-options="region:'center'" style="padding:0px;background:#E0ECFF;min-width:300px">
-			<table class="easyui-datagrid" title="功能模块列表" style="height:100%;" id="funcNodeData" toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
-				<thead>
-					<tr>
-						<th field="funcNodeName" width="20%">功能名称</th>
-						<th field="funcNodeTypeName" width="20%">功能类型</th>
-						<th field="html" width="20%">功能链接</th>
-						<th field="parentFuncNode" width="20%">上级功能</th>
-						<th field="stateDate" width="20%">创建时间</th>
-					</tr>
-				</thead>
-			</table>
-			<div id="toolbar">
-	   			<a href="javascript:void(0)" id="addRoleNode" onclick="settingRoleFuncNode()" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px;">设置角色功能</a>
-	   			<a href="javascript:void(0)" id="addSettingNode" onclick="settingPrivFuncNode()" class="easyui-linkbutton" iconCls="icon-reload" style="width: 120px;">设置权限功能</a>
-			</div>
-		</div>
-		<div id="dlg" class="easyui-dialog easyui-layout" style="width:500px;height:350px;padding:0px 0px" modal="true" closed="true" buttons="#dlg-buttons">
-			<div data-options="region:'west'" style="width:50%;height:100%;margin:0 auto;padding:0 0;">
-				<table id="dgRoleList" title="系统角色" class="easyui-datagrid" data-options="onClickRow:roleListRowClick" style="width:100%;height:100%;margin:0 auto;padding:0 0;" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="true">
-					<thead>
-						<tr>
-							<th field="sysRoleId" checkbox="true"></th>
-							<th field="sysRoleName" width="88%">角色</th>
-						</tr>
-					</thead>
-				</table>
-			</div>
-			<div class="easyui-panel" data-options="region:'east',collapsible:false" title="所对应功能" style="width:50%;height:100%;margin:0 auto;padding:0 0;">
-				<ul id="nodeTree" class="easyui-tree" data-options="lines:true,animate:true,checkbox:true"></ul>
-			</div>
-		</div>
-		<div id="dlg-buttons">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveRoleNode()">保存</a>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
-		</div>
-		<div id="dlgPriv" class="easyui-dialog easyui-layout" style="width:800px;height:350px;padding:0px 0px" modal="true" closed="true" buttons="#dlgPriv-buttons">
-			<div data-options="region:'west'" style="width:33%;height:100%;margin:0 auto;padding:0 0;">
-				<table id="dgPrivRoleList" title="系统角色" class="easyui-datagrid" data-options="onClickRow:roleListRowPrivClick" style="width:100%;height:100%;margin:0 auto;padding:0 0;" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="true">
-					<thead>
-						<tr>
-							<th field="sysRoleId" checkbox="true"></th>
-							<th field="sysRoleName" width="88%">角色</th>
-						</tr>
-					</thead>
-				</table>
-			</div>
-			<div data-options="region:'center'" style="width:33%;height:100%;margin:0 auto;padding:0 0;">
-				<table id="dgOperFuncList" title="操作功能" class="easyui-datagrid" data-options="onClickRow:funcListRowPrivClick" style="width:100%;height:100%;margin:0 auto;padding:0 0;" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="true">
-					<thead>
-						<tr>
-							<th field="funcNodeId" checkbox="true"></th>
-							<th field="funcNodeName" width="88%">功能</th>
-						</tr>
-					</thead>
-				</table>
-			</div>
-			<div data-options="region:'east'" style="width:33%;height:100%;margin:0 auto;padding:0 0;">
-				<table id="dgPrivFuncList" title="权限功能" class="easyui-datagrid" style="width:100%;height:100%;margin:0 auto;padding:0 0;" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="true">
-					<thead>
-						<tr>
-							<th field="funcNodeId" checkbox="true"></th>
-							<th field="funcNodeName" width="88%">功能</th>
-						</tr>
-					</thead>
-				</table>
-			</div>
-		</div>
-		<div id="dlgPriv-buttons">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="adjustDataFunc()">调整权限</a>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlgPriv').dialog('close')">取消</a>
-		</div>
-		<div id="comboboxSettingDlg" class="easyui-dialog" style="width:350px;height:170px;padding:0px 0px;padding-top:25px" modal="true" closed="true" buttons="#comboboxSettingDlg-buttons">
-			<form id="comboboxSettingFm" class="fm" method="post" novalidate>
-				<div class="fitem">
-					<label style="text-align:right">权限类型:</label>
-					<select id="comboboxName" name="comboboxName" class="easyui-combobox" style="width:150px;height:25px;" data-options="formatter:function(row){return '<span>'+row.codeName+'</span>';},editable:false, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" url="<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=comboboxName">
-      				</select>
-				</div>
-			</form>
-		</div>
-		<div id="comboboxSettingDlg-buttons">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="comboboxSettingFunc()">保存</a>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#comboboxSettingDlg').dialog('close')">取消</a>
-		</div>
-		<div id="datagridSettingDlg" class="easyui-dialog" style="width:300px;height:420px;padding:0px 0px" modal="true" closed="true" buttons="#datagridSettingDlg-buttons">
-			<p style="text-align:left;width:95%;height:5%;margin:8px auto;padding:0 0;font-size:12px;font-family:'微软雅黑';font-weight:bold;">资源标识：<span id="ctrlResId" style="font-weight:normal;"></span></p>
-			<table class="easyui-datagrid" title="数据列表" style="width:99%;height:90%;margin:0 auto;padding:0 0;" id="datagridSettingData" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="false">
-				<thead>
-					<tr>
-						<th field="dataValue" checkbox="true"></th>
-						<th field="dataName" width="88%">数据名称</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
-		<div id="datagridSettingDlg-buttons">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="datagridSettingFunc()">保存</a>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#datagridSettingDlg').dialog('close')">取消</a>
-		</div>
-		<div id="tabsFilterDlg" class="easyui-dialog" style="width:300px;height:420px;padding:0px 0px" modal="true" closed="true" buttons="#tabsFilterDlg-buttons">
-			<p style="text-align:left;width:95%;height:8%;margin:8px auto;padding:0 0;font-size:12px;font-family:'微软雅黑';">标签：&nbsp;&nbsp;<input name="filterDataValue" id="filterDataValue" type="text" style="width:150px" class="easyui-textbox" />&nbsp;&nbsp;<a href="javascript:void(0)" id="filterDataBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:70px;" onclick="addFilterDataFunc()">添加</a></p>
-			<table class="easyui-datagrid" title="可使用标签列表" style="width:99%;height:85%;margin:0 auto;padding:0 0;" id="tabsFilterData" toolbar="#tabsFilterData-toolbar" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="false">
-				<thead>
-					<tr>
-						<th field="dataValue" checkbox="true"></th>
-						<th field="dataName" width="88%">标签名称</th>
-					</tr>
-				</thead>
-			</table>
-			<div id="tabsFilterData-toolbar">
-	   			<a href="javascript:void(0)" id="deleteTabs" onclick="removeFilterData()" class="easyui-linkbutton" iconCls="icon-remove" style="width:70px;">删除</a>
-			</div>
-		</div>
-		<div id="tabsFilterDlg-buttons">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="tabsFilterFunc()">保存</a>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#tabsFilterDlg').dialog('close')">取消</a>
-		</div>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$.post("/sys/sysRole/qryTotalRoleList.do",function(data){
@@ -403,5 +278,130 @@
 				}
 			}
 		</script>
+	</head>
+	<body class="easyui-layout manage">
+		<div id="leftarea" data-options="iconCls:'icons-other-house',region:'west',title:'功能模块项',split:true,width:200">
+			<div style="width:96%;height:100%;padding-left:5px;">
+				<ul id="funcNodeTree" class="easyui-tree" data-options="url:'/sys/funcNode/getSubFuncNodeList.do',lines:true,animate:true,onClick:getTreeNode"></ul>
+			</div>
+		</div>
+		<div id="mainarea" data-options="region:'center'" style="padding:0px;background:#E0ECFF;min-width:300px">
+			<table class="easyui-datagrid" title="功能模块列表" style="height:100%;" id="funcNodeData" toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
+				<thead>
+					<tr>
+						<th field="funcNodeName" width="20%">功能名称</th>
+						<th field="funcNodeTypeName" width="20%">功能类型</th>
+						<th field="html" width="20%">功能链接</th>
+						<th field="parentFuncNode" width="20%">上级功能</th>
+						<th field="stateDate" width="20%">创建时间</th>
+					</tr>
+				</thead>
+			</table>
+			<div id="toolbar">
+	   			<a href="javascript:void(0)" id="addRoleNode" onclick="settingRoleFuncNode()" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px;">设置角色功能</a>
+	   			<a href="javascript:void(0)" id="addSettingNode" onclick="settingPrivFuncNode()" class="easyui-linkbutton" iconCls="icon-reload" style="width: 120px;">设置权限功能</a>
+			</div>
+		</div>
+		<div id="dlg" class="easyui-dialog easyui-layout" style="width:500px;height:350px;padding:0px 0px" modal="true" closed="true" buttons="#dlg-buttons">
+			<div data-options="region:'west'" style="width:50%;height:100%;margin:0 auto;padding:0 0;">
+				<table id="dgRoleList" title="系统角色" class="easyui-datagrid" data-options="onClickRow:roleListRowClick" style="width:100%;height:100%;margin:0 auto;padding:0 0;" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="true">
+					<thead>
+						<tr>
+							<th field="sysRoleId" checkbox="true"></th>
+							<th field="sysRoleName" width="88%">角色</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div class="easyui-panel" data-options="region:'east',collapsible:false" title="所对应功能" style="width:50%;height:100%;margin:0 auto;padding:0 0;">
+				<ul id="nodeTree" class="easyui-tree" data-options="lines:true,animate:true,checkbox:true"></ul>
+			</div>
+		</div>
+		<div id="dlg-buttons">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveRoleNode()">保存</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+		</div>
+		<div id="dlgPriv" class="easyui-dialog easyui-layout" style="width:800px;height:350px;padding:0px 0px" modal="true" closed="true" buttons="#dlgPriv-buttons">
+			<div data-options="region:'west'" style="width:33%;height:100%;margin:0 auto;padding:0 0;">
+				<table id="dgPrivRoleList" title="系统角色" class="easyui-datagrid" data-options="onClickRow:roleListRowPrivClick" style="width:100%;height:100%;margin:0 auto;padding:0 0;" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="true">
+					<thead>
+						<tr>
+							<th field="sysRoleId" checkbox="true"></th>
+							<th field="sysRoleName" width="88%">角色</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div data-options="region:'center'" style="width:33%;height:100%;margin:0 auto;padding:0 0;">
+				<table id="dgOperFuncList" title="操作功能" class="easyui-datagrid" data-options="onClickRow:funcListRowPrivClick" style="width:100%;height:100%;margin:0 auto;padding:0 0;" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="true">
+					<thead>
+						<tr>
+							<th field="funcNodeId" checkbox="true"></th>
+							<th field="funcNodeName" width="88%">功能</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div data-options="region:'east'" style="width:33%;height:100%;margin:0 auto;padding:0 0;">
+				<table id="dgPrivFuncList" title="权限功能" class="easyui-datagrid" style="width:100%;height:100%;margin:0 auto;padding:0 0;" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="true">
+					<thead>
+						<tr>
+							<th field="funcNodeId" checkbox="true"></th>
+							<th field="funcNodeName" width="88%">功能</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+		<div id="dlgPriv-buttons">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="adjustDataFunc()">调整权限</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlgPriv').dialog('close')">取消</a>
+		</div>
+		<div id="comboboxSettingDlg" class="easyui-dialog" style="width:350px;height:170px;padding:0px 0px;padding-top:25px" modal="true" closed="true" buttons="#comboboxSettingDlg-buttons">
+			<form id="comboboxSettingFm" class="fm" method="post" novalidate>
+				<div class="fitem">
+					<label style="text-align:right">权限类型:</label>
+					<select id="comboboxName" name="comboboxName" class="easyui-combobox" style="width:150px;height:25px;" data-options="formatter:function(row){return '<span>'+row.codeName+'</span>';},editable:false, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" url="<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=comboboxName">
+      				</select>
+				</div>
+			</form>
+		</div>
+		<div id="comboboxSettingDlg-buttons">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="comboboxSettingFunc()">保存</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#comboboxSettingDlg').dialog('close')">取消</a>
+		</div>
+		<div id="datagridSettingDlg" class="easyui-dialog" style="width:300px;height:420px;padding:0px 0px" modal="true" closed="true" buttons="#datagridSettingDlg-buttons">
+			<p style="text-align:left;width:95%;height:5%;margin:8px auto;padding:0 0;font-size:12px;font-family:'微软雅黑';font-weight:bold;">资源标识：<span id="ctrlResId" style="font-weight:normal;"></span></p>
+			<table class="easyui-datagrid" title="数据列表" style="width:99%;height:90%;margin:0 auto;padding:0 0;" id="datagridSettingData" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="false">
+				<thead>
+					<tr>
+						<th field="dataValue" checkbox="true"></th>
+						<th field="dataName" width="88%">数据名称</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div id="datagridSettingDlg-buttons">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="datagridSettingFunc()">保存</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#datagridSettingDlg').dialog('close')">取消</a>
+		</div>
+		<div id="tabsFilterDlg" class="easyui-dialog" style="width:300px;height:420px;padding:0px 0px" modal="true" closed="true" buttons="#tabsFilterDlg-buttons">
+			<p style="text-align:left;width:95%;height:8%;margin:8px auto;padding:0 0;font-size:12px;font-family:'微软雅黑';">标签：&nbsp;&nbsp;<input name="filterDataValue" id="filterDataValue" type="text" style="width:150px" class="easyui-textbox" />&nbsp;&nbsp;<a href="javascript:void(0)" id="filterDataBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:70px;" onclick="addFilterDataFunc()">添加</a></p>
+			<table class="easyui-datagrid" title="可使用标签列表" style="width:99%;height:85%;margin:0 auto;padding:0 0;" id="tabsFilterData" toolbar="#tabsFilterData-toolbar" striped="true" pagination="false" rownumbers="true" fitColumns="false" singleSelect="false">
+				<thead>
+					<tr>
+						<th field="dataValue" checkbox="true"></th>
+						<th field="dataName" width="88%">标签名称</th>
+					</tr>
+				</thead>
+			</table>
+			<div id="tabsFilterData-toolbar">
+	   			<a href="javascript:void(0)" id="deleteTabs" onclick="removeFilterData()" class="easyui-linkbutton" iconCls="icon-remove" style="width:70px;">删除</a>
+			</div>
+		</div>
+		<div id="tabsFilterDlg-buttons">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="tabsFilterFunc()">保存</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#tabsFilterDlg').dialog('close')">取消</a>
+		</div>
 	</body>
 </html>
