@@ -122,7 +122,7 @@
 								<th data-options="field:'adviserName',width:200,align:'center'">当前课程业绩顾问</th>
 								<th data-options="field:'outClassName',width:200,align:'center'">转出校在读班</th>
 								<th data-options="field:'outClassTeacherName',width:150,align:'center'">转出班老师</th>
-								<th data-options="field:'outClassProgress',width:150,align:'center'">转出班课时</th>
+								<th data-options="field:'studentOutProgress',width:150,align:'center'">转出班课时</th>
 								<th data-options="field:'inClassName',width:100,align:'center'">转入班级</th>
 								<th data-options="field:'courseStateText',width:200,align:'center'">原在读课程状态</th>
 								<th data-options="field:'outDate',width:120,align:'center'">转出时间</th>
@@ -217,7 +217,7 @@
 								<th data-options="field:'approveDate',width:100,align:'center'">审批时间</th>
 								<th data-options="field:'outSchoolName',width:100,align:'center'">转出校区</th>
 								<th data-options="field:'outClassName',width:100,align:'center'">转出班级</th>
-								<th data-options="field:'outClassProgress',width:100,align:'center'">原班课时</th>
+								<th data-options="field:'studentOutProgress',width:100,align:'center'">原班课时</th>
 								<th data-options="field:'courseStateText',width:100,align:'center'">原课程状态</th>
 								<th data-options="field:'changeSchoolNum',width:100,align:'center'">转校次数</th>
 								<th data-options="field:'approveStateText',width:120,align:'center'">审批状态</th>
