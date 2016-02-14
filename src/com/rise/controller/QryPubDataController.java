@@ -31,7 +31,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryCodeNameList(tableName, codeType, codeFlag);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -57,7 +56,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qrySchoolList(schoolId);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -83,7 +81,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qrySchoolListWithTS(schoolId);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -109,7 +106,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryPostList(postId,postType);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -135,7 +131,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryStaffList(post, schoolId);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -161,7 +156,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryParaConfigList(paramType, paramValue);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -188,7 +182,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryClassInstList(schoolId, courseType, stageId, classType, classState, classInstId);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -215,7 +208,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryHourRangeList(weekTime);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -242,7 +234,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryRoomList(schoolId);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -268,7 +259,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryTeacherList(schoolId, classType);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -288,17 +278,12 @@ public class QryPubDataController
 	@RequestMapping(value = "/qryDataListByPage.do")
 	public void qryDataListByPage(String page, String rows, String param, String funcNodeId, HttpServletResponse response)
 	{
-		log.error(page);
-		log.error(rows);
-		log.error(param);
-		log.error(funcNodeId);
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryDataListByPage(page, rows, param, funcNodeId);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -324,7 +309,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryData(param);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -350,7 +334,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryAction(schoolId);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -379,7 +362,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.getStage();
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -410,7 +392,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.getClassPrice(schoolId, stageId);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -441,7 +422,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.getClassType(stageId);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -472,7 +452,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.getTeacherBySchoolId(schoolId);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -498,7 +477,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryShortClass();
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -523,7 +501,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryStudentListByClassInstId(classInstId);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -548,7 +525,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryQuarterList();
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -573,7 +549,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryMonthList(quarter);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -598,7 +573,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryRegionList();
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -623,7 +597,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryReportYearList(tableName);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -648,7 +621,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryReportMonthList(tableName, year);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -673,7 +645,6 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryReportWeekList(tableName, year, month);
-			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)
