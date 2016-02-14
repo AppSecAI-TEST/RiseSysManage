@@ -57,38 +57,40 @@
   			<input type="hidden" id="title" value="<%=title %>"/>
   			<input type="hidden" id="studentId" value="<%=studentId %>"/>
   			<div title="基础信息" style="padding:5px;display:block;">
-  				<iframe scrolling="yes" frameborder="0" src="/sys/student/viewStudent.jsp?studentId=<%=studentId %>" style="width:100%;height:100%;"></iframe>
+  				<iframe scrolling="yes" frameborder="0" src="/sys/student/viewStudent.jsp?studentId=<%=studentId %>" style="width:100%;height:80%;"></iframe>
   			</div>
   			<div title="课程信息" style="padding:5px;display:block;">
-  				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:100%;"></iframe>
+  				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:80%;"></iframe>
   			</div>
   			<div title="赠品赠课" style="padding:5px;display:block;">
-  				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:100%;"></iframe>
+  				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:80%;"></iframe>
   			</div>
   			<div title="异动维护" style="padding:5px;display:block;">
-  				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:100%;"></iframe>
+  				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:80%;"></iframe>
   			</div>
   			<div title="退费信息" style="padding:5px;display:block;">
-  				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:100%;"></iframe>
+  				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:80%;"></iframe>
   			</div>
   			<div title="转班信息" style="padding:5px;display:block;">
-  				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:100%;"></iframe>
+  				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:80%;"></iframe>
   			</div>
   			<div title="转校信息" style="padding:5px;display:block;">
-  				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:100%;"></iframe>
+  				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:80%;"></iframe>
   			</div>
   			<div title="休学信息" style="padding:5px;display:block;">
-  				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:100%;"></iframe>
+  				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:80%;"></iframe>
   			</div>
   			<div title="异常信息" style="padding:5px;display:block;">
-  				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:100%;"></iframe>
+  				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:80%;"></iframe>
   			</div>
   			<div title="VIP信息" sty le="padding:5px;display:block;">
-  				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:100%;"></iframe>
+  				<iframe scrolling="yes" frameborder="0" src="" style="width:100%;height:80%;"></iframe>
   			</div>
   		</div>
   		<div style="text-align:center;margin-top: 25px;min-width:1100px; width:99%;">
-	      	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 25px;" onclick="javascript:window.history.back()">返回</a>
+  			<div style="float: left;margin-left: 800px;">
+		      	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 25px;" onclick="javascript:window.history.back()">返回</a>
+  			</div>
 	   </div>
   	</body>
 </html>
