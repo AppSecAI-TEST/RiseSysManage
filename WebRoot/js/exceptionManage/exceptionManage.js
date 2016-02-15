@@ -109,12 +109,12 @@ function updateExp()
 		var row = $('#list_data').datagrid('getSelected');
 		var studentId = row.studentId;
 		var studentCourseId = row.studentCourseId;
-		var expType = row.expType;
+		var expType = row.exceptionType;
 		var expInfo = {};
-		expInfo.expTypeVal = row.exceptionTypeVal;
-		expInfo.expDate = row.expDate;
-		expInfo.followCount = row.followCount;
-		expInfo.expedTime = row.expedTime;
+		expInfo.expTypeVal = row.exceptionTypeText;
+		expInfo.expDate = row.exceptionBeginDate;
+		expInfo.followCount = row.careNum;
+		expInfo.expedTime = row.exceptionDays;
 		window.location.href = "/sys/expManage/viewExpStuInfo.do?studentId="+studentId+"&studentCourseId="+studentCourseId+"&expType="+expType+"&json="+JSON.stringify(expInfo);
 	}
 }
@@ -126,7 +126,7 @@ function viewExpInfo()
 		var row = $('#list_data').datagrid('getSelected');
 		var studentId = row.studentId;
 		var studentCourseId = row.studentCourseId;
-		var expType = row.expType;
+		var expType = row.exceptionType;
 		window.location.href = "/sys/expManage/qryExpStuDetailInfo.do?studentId="+studentId+"&studentCourseId="+studentCourseId+"&expType="+expType;
 	}
 }
