@@ -1,8 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <% 
-	String month=request.getParameter("month");
-	String weekSeq=request.getParameter("weekSeq");
-
+	String schoolId=request.getParameter("schoolId");
 %>
 <!DOCTYPE html>
 <html>
@@ -63,7 +61,7 @@
 	        </div>  
     	</div>  
     	
-    	<iframe id="frame0" name="frame0"  src="/sys/time/planTeacher.jsp"  marginwidth=0 marginheight=0 frameborder=0 style="width:100%"></iframe>
+    	<iframe id="frame0" name="frame0"  src="/sys/time/planTeacher.jsp?schoolId=<%=schoolId%>"  marginwidth=0 marginheight=0 frameborder=0 style="width:100%"></iframe>
   	
 	</body>
 </html>
@@ -95,7 +93,7 @@ function getWeekTime()
 	$.ajax(
 	{
 		type : "POST",
-		url: "/sys/time/roomPlan.do?schoolId="+schoolId,
+		url: "/sys/time/roomPlan.do?schoolId="+<%=schoolId%>,
 		async: false,
 		dataType:"json",
 		beforeSend: function()

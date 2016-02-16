@@ -1,8 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <% 
-	String month=request.getParameter("month");
-	String weekSeq=request.getParameter("weekSeq");
-
+	String schoolId=request.getParameter("schoolId");
 %>
 <!DOCTYPE html>
 <html>
@@ -100,7 +98,7 @@ function getWeekTime()
 	$.ajax(
 	{
 		type : "POST",
-		url: "/sys/time/teacherPlan.do?schoolId="+schoolId,
+		url: "/sys/time/teacherPlan.do?schoolId="+<%=schoolId%>,
 		async: false,
 		dataType:"json",
 		beforeSend: function()
