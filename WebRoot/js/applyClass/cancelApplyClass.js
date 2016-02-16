@@ -13,6 +13,7 @@ $(document).ready(function() {
 		success: function (data) {
     		$.messager.progress('close'); 
     		$("#stageId").html(data.createClassObj.stageId);
+    		$("#schoolId").val(data.createClassObj.schoolId);
     		$("#classType").html(data.createClassObj.classType);
     		$("#className").html(data.createClassObj.className);
     		$("#startDate").html(data.createClassObj.startDate);

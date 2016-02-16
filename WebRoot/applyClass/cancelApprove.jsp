@@ -15,6 +15,7 @@
   
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="取消放班申请信息">
+  			<input type="hidden" id="schoolId"/>
   			<input type="hidden" id="type" value="CANCEL"/>
   			<table width="100%" cellpadding="5px" class="maintable" id="cancelApplyClassTd">
   				<tr>
@@ -40,7 +41,7 @@
   			</table>
   		</div>
   		<div style='height: 10px;'></div>
-  		<div class='easyui-panel' style='min-width:1100px; width:99%;height:auto;' title='取消放班审批'>
+  		<div class='easyui-panel' style='min-width:1100px; width:99%;height:auto;' title='取消放班审批信息'>
   			<form id="cancelApplyClassFm">
   				<input type="hidden" id="applyId" name="applyId" value="<%=applyId %>"/>
   				<input type="hidden" id="classInstId" name="classInstId" value="<%=classInstId %>"/>

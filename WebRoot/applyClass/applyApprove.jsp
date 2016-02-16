@@ -14,7 +14,8 @@
   	</head>
   
   	<body>
-  		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="取消放班申请信息">
+  		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="放班申请信息">
+  			<input type="hidden" id="schoolId"/>
   			<input type="hidden" id="type" value="APPLY"/>
   			<table width="100%" cellpadding="5px" class="maintable" id="cancelApplyClassTd">
   				<tr>
@@ -73,7 +74,8 @@
   	</body>
 </html>
 <script type="text/javascript" >
-	$("#view").click(function(){
-		parent.openUrl(10000 , '/sys/time/planRoom.jsp' , '排期表');
+	$("#view").click(function() {
+		var schoolId = $("#schoolId").val();
+		parent.openUrl(10000 , '/sys/time/planRoom.jsp?schoolId='+schoolId , '排期表');
 	});
 </script>

@@ -175,7 +175,8 @@
   	</body>
 </html>
 <script type="text/javascript" >
-	$("#view").click(function(){
-		parent.openUrl(10000 , '/sys/time/planRoom.jsp' , '排期表');
+	$("#view").click(function() {
+		var schoolId = $("#schoolId").val();
+		parent.openUrl(10000 , '/sys/time/planRoom.jsp?schoolId='+schoolId , '排期表');
 	});
 </script>

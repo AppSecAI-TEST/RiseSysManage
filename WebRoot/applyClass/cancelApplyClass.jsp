@@ -82,6 +82,7 @@
   		<div style="height: 10px;"></div>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="取消放班申请">
   			<form id="cancelApplyClassFm">
+  				<input type="hidden" id="schoolId"/>
   				<input type="hidden" id="applyId" name="applyId" value="<%=applyId %>"/>
   				<input type="hidden" id="classInstId" name="classInstId" value="<%=classInstId %>"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
