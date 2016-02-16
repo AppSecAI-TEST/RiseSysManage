@@ -60,14 +60,15 @@
 							<th field="feeB" align="center" width="8%">材料费</th>
 							<th field="feeC" align="center" width="8%">保育费<br>和餐费</th>
 							<th field="feeD" align="center" width="8%">总部提成</th>
-							<th field="totalFee" align="center" width="8%">总费用</th>
+							<th field="feeE" align="center" width="8%">其他</th>
+							<th field="amount" align="center" width="8%">总费用</th>
 							<th field="hours" align="center" width="8%">总课时数</th>
-							<th field="monthRealHoursNum" align="center" width="8%">本月课时</th>
+							<th field="monthRealHours" align="center" width="8%">本月课时</th>
 							<th field="financialConfirmFee" align="center" width="8%">退费金额</th>
-							<th field="refundIncome" align="center" width="8%">由于退费<br>产生受益</th>
-							<th field="monthIncome" align="center" width="8%">本月确认收入</th>
-							<th field="allRealHoursNum" align="center" width="8%">累计课时</th>
-							<th field="totalIncome" align="center" width="8%">累计<br>确认收入</th>
+							<th field="refundIncome" align="center" width="8%">由于退费<br>产生收益</th>
+							<th field="allMonthIncome" align="center" width="8%">本月确认收入</th>
+							<th field="normalAllRealHours" align="center" width="8%">累计课时</th>
+							<th field="normalTotalIncome" align="center" width="8%">累计<br>确认收入</th>
 							<th field="remainIncome" align="center" width="8%">未确认<br>收入余额</th>
 						</tr>
 					</thead>
@@ -110,6 +111,8 @@
 		initReportButton("reset","qryFm","schoolId");
 	 	$("#qryBtn").click(function() {
 			var object = $("#qryFm").serializeObject();
+			attendMonth=object.attendMonth.replace("-","_");
+			object.tableName="income_"+attendMonth;
 	    	var obj = JSON.stringify(object);
 	    	obj = obj.substring(0, obj.length - 1);
 	    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
