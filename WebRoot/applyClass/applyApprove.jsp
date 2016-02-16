@@ -52,6 +52,7 @@
 	  					<td width="90%">
 	  						<input type="radio" value="Y" name="approveType"/><span>同意放班</span>
 	      					&nbsp;<input type="radio" value="N" name="approveType"/><span>不同意放班</span>
+	      					&nbsp;<a href="javascript:void(0)" id="view" class="easyui-linkbutton" iconCls="icon-redo" style="margin-left: 600px; width: 120px; height: 28px;">查看排期表</a>
 	  					</td>
 	  				</tr>
 	  				<tr>
@@ -71,3 +72,8 @@
 	    </div>
   	</body>
 </html>
+<script type="text/javascript" >
+	$("#view").click(function(){
+		parent.openUrl(10000 , '/sys/time/planRoom.jsp' , '排期表');
+	});
+</script>
