@@ -15,7 +15,7 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 form{width:340px;height:420px;margin:50px auto;}
 label{float:left;display:block;font-size:16px;color:#aba1a4;height:26px;margin:9px 0px 2px 25px;}
 .inputDiv{margin:0 auto 30px;background:#F8F5F8;height:37px;border:1px solid #e4e4e2;border-radius:4px;}
-#username,#password,#code{font-size:14px;cursor:pointer;height:31px;color:#4b4b5b;background:transparent;margin:2px;padding:0;border:none !important;-webkit-appearance:none;appearance:none;outline:none;-webkit-tap-highlight-color:transparent;border-radius:0;}
+#username,#password,#code{font-size:14px;cursor:pointer;height:31px;color:#4b4b5b;background:transparent;margin:2px;padding:0;border:none !important;-webkit-appearance:none;appearance:none;outline:none;-webkit-tap-highlight-color:transparent;border-radius:0;-webkit-box-shadow:none;box-shadow:none;}
 #username,#password{width:250px;}
 #code{width:108px;}
 .loginttitle{width:100%;background:#44C5F6;height:85px;background-image:url('<%=path%>/pub/images/logintitle1.png');background-position:center center;background-repeat:no-repeat;}

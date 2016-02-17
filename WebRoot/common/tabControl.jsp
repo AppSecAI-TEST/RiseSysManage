@@ -24,7 +24,6 @@
 			
 		}		
 	});
-	
 	function isContain(arr,val)
 	{
 		var flag =false;
