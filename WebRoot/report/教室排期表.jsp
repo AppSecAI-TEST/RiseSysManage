@@ -1,127 +1,272 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-	String path = request.getContextPath();
+<% 
+String path = request.getContextPath();
 %>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
-  	<head>
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/js/easyui/themes/default/easyui.css">
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/js/easyui/themes/icon.css">
-		<link rel="stylesheet" type="text/css" href="<%=path %>/pub/js/demo.css">
-		<script type="text/javascript" src="<%=path %>/pub/js/jquery.min.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/easyui/jquery.easyui.min.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json.js"></script>
-		<script type="text/javascript" src="<%=path %>/pub/js/json2.js"></script>
-  	</head>
-  
-  	<body>
-  		<div style="padding:5px 10px;">
-  			<form id="qryFm1">
-	  			<table>
-	  				<tr>
-	  					<td>校区：</td>
-	  					<td>
-	  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:150px;">
-	  							
-	  						</select>
-	  					</td>
-	  					<td>	
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:150px" id="qryBtn" onclick="qryData()">查询</a>
-	  					</td>
-	  					<td>
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" style="width:150px" id="qryBtn" onclick="exportData()">导出</a>
-	  					</td>
-	  				</tr>
-	  			</table>
-  			</form>
-			<div style="padding:5px 0;">
-				<table class="easyui-datagrid" title="班级情况和教室资源统计表" style="width:100%;height:250px" id="list_data">
-					<thead>
-						<tr>
-							<th field="schoolId" align="center" width="10%" rowspan="2">教室 </th>
-							<th field="mon" align="center" width="15%" colspan="3">星期一 </th>
-							<th field="tues" align="center" width="15%" colspan="3">星期二 </th>
-							<th field="wed" align="center" width="15%" colspan="3">星期三 </th>
-							<th field="thur" align="center" width="15%" colspan="3">星期四 </th>
-							<th field="fri" align="center" width="15%" colspan="3">星期五 </th>
-							<th field="sat" align="center" width="25%" colspan="5">星期六 </th>
-							<th field="sun" align="center" width="25%" colspan="5">星期日 </th>
-						</tr>
-						<tr>
-							<th field="monM" align="center" width="5%">上午 </th>
-							<th field="monA" align="center" width="5%">下午 </th>
-							<th field="monE" align="center" width="5%">晚上 </th>
-							<th field="tuesM" align="center" width="5%">上午 </th>
-							<th field="tuesA" align="center" width="5%">下午 </th>
-							<th field="tuesE" align="center" width="5%">晚上 </th>
-							<th field="wedM" align="center" width="5%">上午 </th>
-							<th field="wedA" align="center" width="5%">下午 </th>
-							<th field="wedE" align="center" width="5%">晚上 </th>
-							<th field="thurM" align="center" width="5%">上午 </th>
-							<th field="thurA" align="center" width="5%">下午 </th>
-							<th field="thurE" align="center" width="5%">晚上 </th>
-							<th field="friM" align="center" width="5%">上午 </th>
-							<th field="friA" align="center" width="5%">下午 </th>
-							<th field="firE" align="center" width="5%">晚上 </th>
-							<th field="satM1" align="center" width="5%">上午1 </th>
-							<th field="satM2" align="center" width="5%">上午2 </th>
-							<th field="satA1" align="center" width="5%">下午1 </th>
-							<th field="satA2" align="center" width="5%">下午2 </th>
-							<th field="satE" align="center" width="5%">晚上 </th>
-							<th field="sunM1" align="center" width="5%">上午1 </th>
-							<th field="sunM2" align="center" width="5%">上午2 </th>
-							<th field="sunA1" align="center" width="5%">下午1 </th>
-							<th field="sunA2" align="center" width="5%">下午2</th>
-							<th field="sunE" align="center" width="5%">晚上 </th>
-						</tr>
-					</thead>
-				</table>
-				<div style="height:10px;"></div>
-				<table class="easyui-datagrid" title="老师上课时间安排表" style="width:100%;height:250px" id="list_datas">
-					<thead>
-						<tr>
-							<th field="teacher" align="center" width="10%" rowspan="2">教师 </th>
-							<th field="lessonNum" align="center" width="5%" >班级课时数 </th>
-							<th field="mon_t" align="center" width="15%" colspan="3">星期一 </th>
-							<th field="tues_t" align="center" width="15%" colspan="3">星期二 </th>
-							<th field="wed_t" align="center" width="15%" colspan="3">星期三 </th>
-							<th field="thur_t" align="center" width="15%" colspan="3">星期四 </th>
-							<th field="fri_t" align="center" width="15%" colspan="3">星期五 </th>
-							<th field="sat_t" align="center" width="25%" colspan="5">星期六 </th>
-							<th field="sun_t" align="center" width="25%" colspan="5">星期日 </th>
-						</tr>
-						<tr>
-							<th field="mainT" align="center" width="5%">主T</th>
-							<th field="monM_t" align="center" width="5%">上午 </th>
-							<th field="monA_t" align="center" width="5%">下午 </th>
-							<th field="monE_t" align="center" width="5%">晚上 </th>
-							<th field="tuesM_t" align="center" width="5%">上午 </th>
-							<th field="tuesA_t" align="center" width="5%">下午 </th>
-							<th field="tuesE_t" align="center" width="5%">晚上 </th>
-							<th field="wedM_t" align="center" width="5%">上午 </th>
-							<th field="wedA_t" align="center" width="5%">下午 </th>
-							<th field="wedE_t" align="center" width="5%">晚上 </th>
-							<th field="thurM_t" align="center" width="5%">上午 </th>
-							<th field="thurA_t" align="center" width="5%">下午 </th>
-							<th field="thurE_t" align="center" width="5%">晚上 </th>
-							<th field="friM_t" align="center" width="5%">上午 </th>
-							<th field="friA_t" align="center" width="5%">下午 </th>
-							<th field="firE_t" align="center" width="5%">晚上 </th>
-							<th field="satM1_t" align="center" width="5%">上午1 </th>
-							<th field="satM2_t" align="center" width="5%">上午2 </th>
-							<th field="satA1_t" align="center" width="5%">下午1 </th>
-							<th field="satA2_t" align="center" width="5%">下午2 </th>
-							<th field="satE_t" align="center" width="5%">晚上 </th>
-							<th field="sunM1_t" align="center" width="5%">上午1 </th>
-							<th field="sunM2_t" align="center" width="5%">上午2 </th>
-							<th field="sunA1_t" align="center" width="5%">下午1 </th>
-							<th field="sunA2_t" align="center" width="5%">下午2</th>
-							<th field="sunE_t" align="center" width="5%">晚上 </th>
-						</tr>
-					</thead>
-				</table>
-			</div>
-  		</div>
-  	</body>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>RunJS</title>
+			<%@ include file="../common/head.jsp" %>
+		<%@ include file="../common/formvalidator.jsp" %>
+		<script class="resources library" src="/sys/pub/js/autoMergeCells.js" type="text/javascript"></script>
+	
+	<style type="text/css">
+.tree-node-hover {
+	text-decoration: none;
+	color: #555555;
+	background: #fae8bd;
+}
+.datagrid{
+	margin:0 auto;
+	min-width:50px;
+	margin-top:5px;
+	width:20%;
+}
+
+
+</style>
+	</head>
+	<body>
+		<table class="search_tab" >
+				<tr>
+				<td align="right"><span>校区：</span></td>
+  					<td width="100px">
+					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+		      			url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=505&fieldId=schoolId">
+	        		</select>
+					</td>
+					<td>
+						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="width:100px; height: 25px;" id="submit" onclick=qry() >查询</a>
+					</td>
+				</tr>
+			</table>
+	            <div id="content" style="margin-left:6px;">
+		            
+				    	<table width="700"  cellpadding="0" border="0" style="border-collapse:collapse;overflow:scroll;" >
+				    	<tr><td colspan="8" id="title" style="display:none;text-align:center;font-size:20px;color:##0E2D5F;font-weight:bold;">班级情况和教室资源统计表</td></tr>
+				    	<tr>
+				    		<td><table  id="t0"></table></td>
+					    	<td>
+					    	<table  id="t1"></table>
+					    	</td>
+					    	<td>
+					    	<table  id="t2"></table>
+					    	</td>
+					    	<td>
+					    	<table  id="t3"></table>
+					    	</td>
+					    	<td>
+					    	<table  id="t4"></table>
+					    	</td>
+					    	<td>
+					    	<table  id="t5"></table>
+					    	</td>
+					    	<td>
+					    	<table  id="t6"></table>
+					    	</td>
+					    	<td>
+					    	<table  id="t7"></table>
+					    	</td>
+				    	</tr>
+				    	</table>
+	        </div>  
+    	</div>  
+    	
+    	<iframe id="frame0" name="frame0"  src=""  marginwidth=0 marginheight=0 frameborder=0 style="width:100%"></iframe>
+  	
+	</body>
 </html>
+
+
+<script type="text/javascript">
+var json1;
+var json2;
+var json3;
+var json4;
+var json5;
+var json6;
+var josn7;
+function closeDlg()
+{
+	$('#dlg').dialog('close');
+}
+	
+function linkCourse()
+{
+	$('#dlg').dialog('open').dialog('setTitle', '排课');
+	$('#fm').form('clear');
+
+}
+
+function qry()
+{
+	var schoolId=$("#schoolId").combobox('getValue');
+	getWeekTime();
+	$("#frame0").attr('src',"/sys/time/planTeacher.jsp?schoolId="+schoolId);
+}
+
+function getWeekTime()
+{
+	var schoolId=$("#schoolId").combobox('getValue');
+	$.ajax(
+	{
+		type : "POST",
+		url: "/sys/time/roomPlan.do?schoolId="+schoolId,
+		async: false,
+		dataType:"json",
+		beforeSend: function()
+    	{
+    		$.messager.progress({title : '系统消息', msg : '正在提交数据，请稍等……'});
+    	},
+    	success: function(data) {
+    		$.messager.progress('close');
+    		 
+    		for(var i=0;i<data.length;i++)
+    		{
+    			if(i==0)
+    			{
+    				$("#title").css('display','table-cell');
+    				json1=data[i];
+    				initTable("t1",json1);
+    				initTeacher("t0",json1);
+    			}else if(i==1)
+    			{
+    				json2=data[i];
+    				initTable("t2",json2);
+    			}else if(i==2)
+    			{
+    				json3=data[i];
+    				initTable("t3",json3);
+    			}else if(i==3)
+    			{
+    				json4=data[i];
+    				initTable("t4",json4);
+    			}else if(i==4)
+    			{
+    				json5=data[i];
+    				initTable("t5",json5);
+    			}else if(i==5)
+    			{
+    				json6=data[i];
+    				initTable("t6",json6);
+    			}else if(i==6)
+    			{
+    				json7=data[i];
+    				initTable("t7",json7);
+    			} 
+    			
+    		}
+    		 
+        },
+        error:function(){
+        	$.messager.progress('close'); 
+        }
+    	
+	});
+	
+}
+
+function initTeacher(tabId,data)
+{
+	var rows=data.rows;
+	var time=rows[0].schooltime;
+	var weekTime=rows[0].weekTime;
+	$('#'+tabId).datagrid({
+	title:" ",	
+    width: 100,
+    height: 'auto',
+    fitColumns: true,
+    singleSelect:true,
+    rowStyler: function(index,row)
+    {
+		 return 'background-color:#FFFFFF;color:#00000;';
+    },
+     
+    columns:[[
+      {field:'roomName',title:'教室',width:100,align:'center'}
+      
+    ]] 
+  });
+  $('#'+tabId).datagrid("loadData",data);	
+}
+
+function initTable(tabId,data)
+{
+	var rows=data.rows;
+	var time=rows[0].schooltime;
+	var weekTime=rows[0].weekTime;
+	$('#'+tabId).datagrid({
+    title: "周"+weekTime,
+    width: 450,
+    height: 'auto',
+    fitColumns: true,
+    singleSelect:true,
+    rowStyler: function(index,row)
+    {
+		 return 'background-color:#FFFFFF;color:#00000;';
+    },
+    columns:[[
+      {field:'H001',title:'上午1', width:120,align:'center', editor:'text'},
+      {field:'H002',title:'上午2',width:120,align:'center', editor:'text'},
+      {field:'H003',title:'下午1',width:120,align:'center', editor:'text'},
+      {field:'H004',title:'下午2',width:120,align:'center', editor:'text'},
+      {field:'H005',title:'晚上',width:120,align:'center', editor:'text'} 
+    ]],
+    onLoadSuccess:function()
+    {
+      MergeCells(tabId);
+    } 
+  });
+  $('#'+tabId).datagrid("loadData",data);	
+}
+
+function MergeCells(tabId)
+{		 
+	var table;
+	if(tabId!='')
+	{
+		table= $('#'+tabId);
+	} 
+    var s = $(table).datagrid('getData');
+    var datas =s.rows;
+ 
+	for(var i=0; i<datas.length; i++)
+	{
+		var index=i;
+		var fieldT;
+		var colspanNum=0;
+		for(var key in datas[i])
+		{  
+			
+               if(key.indexOf("merge")>-1)
+               {
+               	var val=datas[i][key];
+               	fieldT="H"+key.substring(5,8);
+               	$(table).datagrid('mergeCells',
+				{
+					index: i,
+					field: fieldT,
+					colspan: val
+				});
+               }
+           }  
+	}
+	$("table tr td").each(function()
+	{
+	   var d=$(this).text();
+	  if('DPre-K03'==d)
+	  {
+		     $(this).css("background-color","#EDE1D8");
+	  }else if('DPre-K01'==d)
+	  {
+		  $(this).css("background-color","#ECB1D8");
+	  }else if('DPre-K02'==d)
+	  {
+		  $(this).css("background-color","#EFE1B8");
+	  }
+	
+	});
+}
+</script>
