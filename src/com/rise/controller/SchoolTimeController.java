@@ -342,4 +342,33 @@ public class SchoolTimeController
 			}
 		}
 	}
+	
+	/**
+	 * 查询老师排期表时间
+	 * @param param
+	 * @param response
+	 */
+	@RequestMapping(value="/getPlanTime.do")
+	public void getPlanTime(String schoolId,String month,HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = schoolTimeService.getPlanTime(schoolId,month);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{ 
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }
