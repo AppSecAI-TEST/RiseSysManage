@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -26,6 +27,7 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.http.HttpResponse;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -1146,6 +1148,169 @@ public class ExportService
 			json.put("rows", newArray);
 		}
 		return json.toString();
+	}
+	
+	public HSSFWorkbook exportTeacherCourse(String param) throws Exception
+	{
+		JSONObject objs=JSONObject.fromObject(param);
+		String schoolName =StringUtil.getJSONObjectKeyVal(objs, "schoolName");
+		String month =StringUtil.getJSONObjectKeyVal(objs, "month");
+		String weekName =StringUtil.getJSONObjectKeyVal(objs, "weekName");
+		objs.remove("schoolName");
+		objs.remove("weekName");
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS8002\",securityCode:\"0000000000\",params:{param:"+objs.toString()+"},rtnDataFormatType:\"user-defined\"}";
+		String result =ServiceEngine.invokeHttp(params);
+		JSONArray array =JSONArray.fromObject(result);
+		HSSFWorkbook wb = new HSSFWorkbook();
+		HSSFSheet sheet = wb.createSheet(schoolName+"-"+month+"-"+weekName);
+		if(array.size()>0)
+		{
+			List<CellRangeAddress> cellRangeList =new ArrayList<CellRangeAddress>();
+			HSSFCellStyle styleTitle = wb.createCellStyle();
+			styleTitle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+			styleTitle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+			HSSFFont fontTitle = wb.createFont();
+			fontTitle.setFontName("黑体");
+			fontTitle.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+			styleTitle.setFont(fontTitle);
+			HSSFCellStyle styleContent = wb.createCellStyle();
+			styleContent.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+			styleContent.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+			HSSFFont fontContent = wb.createFont();
+			fontContent.setFontName("微软雅黑");
+			styleContent.setFont(fontContent);
+			HSSFRow row1 = sheet.createRow(0);
+			HSSFRow row2 = sheet.createRow(1);
+			HSSFCell tea =row1.createCell(0);
+			tea.setCellValue("老师");
+			tea.setCellStyle(styleTitle);
+			HSSFCell time =row2.createCell(0);
+			time.setCellValue("");
+			time.setCellStyle(styleTitle);
+			for(int j =0;j<5*array.size();j++)
+			{
+				HSSFCell cell1=row1.createCell(j+1);
+				HSSFCell cell2=row2.createCell(j+1);
+				sheet.setColumnWidth(j+1,6000);
+				if(j%5==0)
+				{
+					JSONObject obj1 =array.getJSONObject(j/5).getJSONArray("rows").getJSONObject(0);
+					cell1.setCellValue(StringUtil.getJSONObjectKeyVal(obj1, "schooltime")+"周("+StringUtil.getJSONObjectKeyVal(obj1, "weekTime")+")");
+					cell1.setCellStyle(styleTitle);
+					cell2.setCellValue("8:30");
+					cell2.setCellStyle(styleTitle);
+				}
+				else if(j%5==1)
+				{
+					cell2.setCellValue("10:30");
+					cell2.setCellStyle(styleTitle);
+				}
+				else if(j%5==2)
+				{
+					cell2.setCellValue("14:00");
+					cell2.setCellStyle(styleTitle);
+				}
+				else if(j%5==3)
+				{
+					cell2.setCellValue("16:00");
+					cell2.setCellStyle(styleTitle);
+				}
+				else if(j%5==4)
+				{
+					cell2.setCellValue("18:30");
+					cell2.setCellStyle(styleTitle);
+				}
+			}	
+			for(int k=0;k<array.size();k++)
+			{
+				cellRangeList.add(new CellRangeAddress(0, 0, k*5+1, (k+1)*5));
+			}	
+			JSONArray teacher =array.getJSONObject(0).getJSONArray("rows");
+			for(int i=0;i<teacher.size();i++)
+			{
+				HSSFRow row = sheet.createRow(i+2);
+				HSSFCell cells = row.createCell(0);
+				cells.setCellValue(StringUtil.getJSONObjectKeyVal(teacher.getJSONObject(i), "teacherName"));
+				cells.setCellStyle(styleContent);
+				for(int e=1;e<=array.size()*5;e++)
+				{
+					row.createCell(e);
+				}	
+			}
+			for(int m=0;m<array.size();m++)
+			{
+				JSONArray array1 =array.getJSONObject(m).getJSONArray("rows");
+				for(int n=2;n<array1.size()+2;n++)
+				{
+					JSONObject content =array1.getJSONObject(n-2);
+					JSONArray indexArr =getTimeIndex(content);
+					for(int l=0;l<indexArr.size();l++)
+					{
+						JSONObject indexObj =indexArr.getJSONObject(l);
+						int index =Integer.valueOf(indexObj.getString("index"));
+						String value =indexObj.getString("value");
+						HSSFCell cell =sheet.getRow(n).getCell(m*5+index);
+						cell.setCellValue(value);
+						if(ObjectCensor.isStrRegular(StringUtil.getJSONObjectKeyVal(indexObj, "merge")))
+						{
+							int merge =Integer.valueOf(indexObj.getString("merge"));
+							if(merge>1)
+							{
+								merge-=1;
+								cellRangeList.add(new CellRangeAddress(n, n, m*5+index, m*5+index+merge));
+							}	
+						}	
+					}	
+				}	
+			}	
+			for(CellRangeAddress cellRange:cellRangeList)
+			{
+				sheet.addMergedRegion(cellRange);
+			}
+		}
+		return wb;
+	}
+	
+	private JSONArray getTimeIndex(JSONObject json) throws Exception
+	{
+		JSONArray array =new JSONArray();
+		JSONArray keyArr =new JSONArray();
+		Iterator it = json.keys();
+		while(it.hasNext())
+		{ 
+		   String key =it.next().toString();
+           String value =json.getString(key);
+           JSONObject obj =new JSONObject();
+           obj.put(key, value);
+           keyArr.add(obj);
+        } 
+		for(int i=0;i<keyArr.size();i++)
+		{
+			JSONObject keyObj1 =keyArr.getJSONObject(i);
+			Iterator it1 = keyObj1.keys();
+			String objKey1 =it1.next().toString();
+			for(int j=1;j<6;j++)
+			{
+				if(("H00"+j).equals(objKey1))
+				{
+					JSONObject indexObj =new JSONObject();
+					indexObj.put("index", j);
+					indexObj.put("value", keyObj1.getString("H00"+j));
+					for(int k=0;k<keyArr.size();k++)
+					{
+						JSONObject keyObj2 =keyArr.getJSONObject(k);
+						Iterator it2 = keyObj2.keys();
+						String objKey =it2.next().toString();
+						if(objKey.indexOf("merge00"+j)!=-1)
+						{
+							indexObj.put("merge",StringUtil.getJSONObjectKeyVal(keyObj2, objKey));
+						}	
+					}
+					array.add(indexObj);
+				}	
+			}	
+		}	
+		return  array;
 	}
 	
 }

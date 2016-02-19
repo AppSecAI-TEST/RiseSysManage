@@ -16,6 +16,7 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -403,6 +404,29 @@ public class ExportController
 			response.setHeader("Content-Disposition", "attachment;fileName="+URLEncoder.encode(displayFileName.toString(),"utf-8"));
 			out = response.getOutputStream();
 			es.exportClassHourDetail(fileName,param, out);
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+		}
+
+	}
+	
+	//教师排期表导出
+	@RequestMapping("/exportTeacherCourse.do")
+	public void exportTeacherCourse(String param, HttpServletResponse response , HttpServletRequest request)
+	{
+		try
+		{
+			String name = "教师排期表.xls";
+			String fileName = new String(name.getBytes("gbk"),"ISO-8859-1");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName="+response.encodeURL(fileName));
+			OutputStream out = response.getOutputStream();
+			HSSFWorkbook wb = es.exportTeacherCourse(param);
+			wb.write(out);
+			out.close();
 		}
 		catch(Exception err)
 		{

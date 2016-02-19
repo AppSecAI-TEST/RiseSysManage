@@ -92,7 +92,9 @@ datagrid-row-selected
 					</td>
 					<td align="left">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;"  onclick='getWeekTime()'>查询</a>
-						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>&nbsp;&nbsp;&nbsp;
+						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="export" onclick="exportExcel()">导出</a>
+						
 					</td>
 				</tr>
 			</table>
@@ -150,6 +152,7 @@ var json4;
 var json5;
 var json6;
 var josn7;
+var record ="";
 function closeDlg()
 {
 	$('#dlg').dialog('close');
@@ -193,8 +196,10 @@ function plan()
 function getWeekTime()
 {
 	var schoolId=$("#schoolId").combobox('getValue');
+	var schoolName =$("#schoolId").combobox('getText');
 	var month=$("#time").datebox('getValue');
 	var createWeekId=$("#week").combobox('getValue');
+	var weekName =$("#week").combobox('getText')
 	
 	if(schoolId=='')
 	{
@@ -220,12 +225,12 @@ function getWeekTime()
 			dateRange=datas[i].dateRange;	
 		}
 	}
-	
+	var param="{'month':'"+month+"','week':'"+weekSeq+"','dateRange':'"+dateRange+"','schoolId':'"+schoolId+"'}";
 	$.ajax(
 	{
 		type : "POST",
 		url: "/sys/time/getTimeByWeek.do?",
-		data: "param={'month':'"+month+"','week':'"+weekSeq+"','dateRange':'"+dateRange+"','schoolId':'"+schoolId+"'}",
+		data: "param="+param,
 		async: true,
 		dataType:"json",
 		beforeSend: function()
@@ -238,7 +243,6 @@ function getWeekTime()
     		{
     			if(i==0)
     			{
-    				//alert(JSON.stringify(data));
     				json1=data[i];
     				initTable("t1",json1);
     				initTeacher("t0",json1);
@@ -276,7 +280,7 @@ function getWeekTime()
         }
     	
 	});
-	
+	record =param.substring(0,param.length-1)+",'schoolName':'"+schoolName+"','weekName':'"+weekName+"'}";
 }
 
 function initTeacher(tabId,data)
@@ -428,32 +432,6 @@ $(document).ready(function()
 				});
 	    	}
 	 });
-	
-	$("#export").click(function(){
-		var param={
-			teacherId:$("#teacherId").combobox('getValue'),
-			schoolId:$("#schoolId").combobox('getValue'),
-			month:$("#time").datebox('getValue')
-		};
-		if($("#list_data").datagrid("getData").total>0)
-		{
-			var fileName =parent.$("li.tabs-selected").find("span.tabs-title").html();
-			try
-			{
-				window.location.href="/sys/export/exportTeacherAttend.do?fileName="+fileName+"&param="+JSON.stringify(param);
-			}
-			catch(e)
-			{
-				$.messager.alert('提示', "模版不存在！",function(){
-					window.history.back();
-				});
-			}
-		}
-		else
-		{
-			$.messager.alert('提示', "没有数据可以导出！");
-		}	
-	})
 });
 
 function myformatter(date){
@@ -871,4 +849,17 @@ function setCellValue(tabObj,rowIndex,field,value)
 	 
 }
 
+
+function exportExcel()
+{
+	var rows = $("#t0").datagrid("getData").total;
+	if(rows.length<1)
+	{
+		$.messager.alert('提示', "没有数据可以导出！");
+	}
+	else
+	{
+		window.location.href = "/sys/export/exportTeacherCourse.do?param="+record;
+	}
+}
 </script>
