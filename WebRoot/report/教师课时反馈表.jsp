@@ -195,7 +195,7 @@ function qryData()
 		dataType:"json",
 		beforeSend: function()
     	{
-    		showProgressLoader("正在查询,请稍后...",300)
+    		showProgressLoader("正在处理,请稍待...",300)
     	},
     	success: function(data) 
     	{
