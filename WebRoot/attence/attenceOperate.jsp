@@ -56,7 +56,7 @@
 				{
 					ajaxLoading("正在处理，请稍待。。。");
 					classAttendIds = classAttendIds.substring(0,classAttendIds.length -1);
-					window.location.href = "/sys/attend/getUpdateAttenceRecord.do?funcNodeId=${funcNodeId}&classAttendId="+classAttendIds.split("#")[0]+"&classAttendIds="+classAttendIds+"&selDateStr="+$("#selDateStr").html();
+					window.location.href = "/sys/attend/getUpdateAttenceRecord.do?funcNodeId=${funcNodeId}&selDateStr="+$("#selDateStr").html()+"&classAttendId="+classAttendIds.split("#")[0]+"&classAttendIds="+classAttendIds;
 				}
 				else if(classAttendIds == "" && schooltimeInstIds != "")
 				{
