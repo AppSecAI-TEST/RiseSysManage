@@ -93,7 +93,7 @@ datagrid-row-selected
 					<td align="left">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;"  onclick='getWeekTime()'>查询</a>
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>&nbsp;&nbsp;&nbsp;
-						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="export" onclick="exportExcel()">导出</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:100px; height: 25px;" id="export" onclick="exportExcel()">导出</a>
 						
 					</td>
 				</tr>

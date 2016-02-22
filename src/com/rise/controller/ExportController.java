@@ -434,4 +434,28 @@ public class ExportController
 		}
 
 	}
+	
+	
+	//教室排期表导出
+	@RequestMapping("/exportClassroomCourse.do")
+	public void exportClassroomCourse(String param, HttpServletResponse response , HttpServletRequest request)
+	{
+		try
+		{
+			String name = "教室排期表.xls";
+			String fileName = new String(name.getBytes("gbk"),"ISO-8859-1");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName="+response.encodeURL(fileName));
+			OutputStream out = response.getOutputStream();
+			HSSFWorkbook wb = es.exportClassroomCourse(param);
+			wb.write(out);
+			out.close();
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+		}
+
+	}
 }

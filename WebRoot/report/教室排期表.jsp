@@ -38,7 +38,8 @@ String path = request.getContextPath();
 	        		</select>
 					</td>
 					<td>
-						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="width:100px; height: 25px;" id="submit" onclick=qry() >查询</a>
+						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="width:100px; height: 25px;" id="submit" onclick=qry() >查询</a>&nbsp;&nbsp;&nbsp;
+						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:100px; height: 25px;" id="submit" onclick=exportExcel() >导出</a>
 					</td>
 				</tr>
 			</table>
@@ -88,6 +89,7 @@ var json4;
 var json5;
 var json6;
 var josn7;
+var param;
 function closeDlg()
 {
 	$('#dlg').dialog('close');
@@ -103,13 +105,13 @@ function linkCourse()
 function qry()
 {
 	var schoolId=$("#schoolId").combobox('getValue');
-	getWeekTime();
+	param ="{'schoolId':'"+schoolId+"','schoolName':'"+$("#schoolId").combobox('getText')+"'}";
+	getWeekTime(schoolId);
 	$("#frame0").attr('src',"/sys/time/planTeacher.jsp?schoolId="+schoolId);
 }
 
-function getWeekTime()
+function getWeekTime(schoolId)
 {
-	var schoolId=$("#schoolId").combobox('getValue');
 	$.ajax(
 	{
 		type : "POST",
@@ -268,5 +270,19 @@ function MergeCells(tabId)
 	  }
 	
 	});
+}
+
+
+function exportExcel()
+{
+	var rows = $("#t0").datagrid("getData").total;
+	if(rows.length<1)
+	{
+		$.messager.alert('提示', "没有数据可以导出！");
+	}
+	else
+	{
+		window.location.href = "/sys/export/exportClassroomCourse.do?param="+param;
+	}
 }
 </script>

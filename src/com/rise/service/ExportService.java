@@ -1313,4 +1313,224 @@ public class ExportService
 		return  array;
 	}
 	
+	public HSSFWorkbook exportClassroomCourse(String param) throws Exception
+	{
+		JSONObject objs=JSONObject.fromObject(param);
+		String schoolName =StringUtil.getJSONObjectKeyVal(objs, "schoolName");
+		String schoolId =StringUtil.getJSONObjectKeyVal(objs, "schoolId");
+		String param1 = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS8009\",securityCode:\"0000000000\",params:{schoolId:"+schoolId+"},rtnDataFormatType:\"user-defined\"}";
+		String result1 =ServiceEngine.invokeHttp(param1);
+		JSONArray array1 =JSONArray.fromObject(result1);
+		String param2 = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS80010\",securityCode:\"0000000000\",params:{schoolId:"+schoolId+"},rtnDataFormatType:\"user-defined\"}";
+		String result2 =ServiceEngine.invokeHttp(param2);
+		JSONArray array2 =JSONArray.fromObject(result2);
+		HSSFWorkbook wb = new HSSFWorkbook();
+		HSSFCellStyle styleTitle = wb.createCellStyle();
+		styleTitle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+		styleTitle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+		HSSFFont fontTitle = wb.createFont();
+		fontTitle.setFontName("黑体");
+		fontTitle.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+		styleTitle.setFont(fontTitle);
+		HSSFCellStyle styleContent = wb.createCellStyle();
+		styleContent.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+		styleContent.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+		HSSFFont fontContent = wb.createFont();
+		fontContent.setFontName("微软雅黑");
+		styleContent.setFont(fontContent);
+		HSSFSheet sheet1 = wb.createSheet(schoolName+"-班级情况和教室资源统计表");
+		HSSFSheet sheet2 = wb.createSheet(schoolName+"-教师资源统计表");
+		if(array1.size()>0)
+		{
+			sheet1.setColumnWidth(0,6000);
+			List<CellRangeAddress> cellRangeList1 =new ArrayList<CellRangeAddress>();
+			HSSFRow row1 = sheet1.createRow(0);
+			HSSFRow row2 = sheet1.createRow(1);
+			HSSFCell tea =row1.createCell(0);
+			tea.setCellValue("教室");
+			tea.setCellStyle(styleTitle);
+			HSSFCell time =row2.createCell(0);
+			time.setCellValue("");
+			time.setCellStyle(styleTitle);
+			for(int j =0;j<5*array1.size();j++)
+			{
+				sheet1.setColumnWidth(j+1,6000);
+				HSSFCell cell1=row1.createCell(j+1);
+				HSSFCell cell2=row2.createCell(j+1);
+				sheet1.setColumnWidth(j+1,6000);
+				if(j%5==0)
+				{
+					JSONObject obj1 =array1.getJSONObject(j/5).getJSONArray("rows").getJSONObject(0);
+					cell1.setCellValue("周"+StringUtil.getJSONObjectKeyVal(obj1, "weekTime"));
+					cell1.setCellStyle(styleTitle);
+					cell2.setCellValue("上午1");
+					cell2.setCellStyle(styleTitle);
+				}
+				else if(j%5==1)
+				{
+					cell2.setCellValue("上午2");
+					cell2.setCellStyle(styleTitle);
+				}
+				else if(j%5==2)
+				{
+					cell2.setCellValue("下午1");
+					cell2.setCellStyle(styleTitle);
+				}
+				else if(j%5==3)
+				{
+					cell2.setCellValue("下午2");
+					cell2.setCellStyle(styleTitle);
+				}
+				else if(j%5==4)
+				{
+					cell2.setCellValue("晚上");
+					cell2.setCellStyle(styleTitle);
+				}
+			}	
+			for(int k=0;k<array1.size();k++)
+			{
+				cellRangeList1.add(new CellRangeAddress(0, 0, k*5+1, (k+1)*5));
+			}	
+			JSONArray room =array1.getJSONObject(0).getJSONArray("rows");
+			for(int i=0;i<room.size();i++)
+			{
+				HSSFRow row = sheet1.createRow(i+2);
+				HSSFCell cells = row.createCell(0);
+				cells.setCellValue(StringUtil.getJSONObjectKeyVal(room.getJSONObject(i), "roomName"));
+				cells.setCellStyle(styleContent);
+				for(int e=1;e<=array1.size()*5;e++)
+				{
+					row.createCell(e);
+				}	
+			}
+			for(int m=0;m<array1.size();m++)
+			{
+				JSONArray arrays =array1.getJSONObject(m).getJSONArray("rows");
+				for(int n=2;n<arrays.size()+2;n++)
+				{
+					JSONObject content =arrays.getJSONObject(n-2);
+					JSONArray indexArr =getTimeIndex(content);
+					for(int l=0;l<indexArr.size();l++)
+					{
+						JSONObject indexObj =indexArr.getJSONObject(l);
+						int index =Integer.valueOf(indexObj.getString("index"));
+						String value =indexObj.getString("value");
+						HSSFCell cell =sheet1.getRow(n).getCell(m*5+index);
+						cell.setCellValue(value);
+						cell.setCellStyle(styleContent);
+						if(ObjectCensor.isStrRegular(StringUtil.getJSONObjectKeyVal(indexObj, "merge")))
+						{
+							int merge =Integer.valueOf(indexObj.getString("merge"));
+							if(merge>1)
+							{
+								merge-=1;
+								cellRangeList1.add(new CellRangeAddress(n, n, m*5+index, m*5+index+merge));
+							}	
+						}	
+					}	
+				}	
+			}	
+			for(CellRangeAddress cellRange:cellRangeList1)
+			{
+				sheet1.addMergedRegion(cellRange);
+			}
+		}
+		if(array2.size()>0)
+		{
+			sheet2.setColumnWidth(0,6000);
+			List<CellRangeAddress> cellRangeList2 =new ArrayList<CellRangeAddress>();
+			HSSFRow row11 = sheet2.createRow(0);
+			HSSFRow row22 = sheet2.createRow(1);
+			HSSFCell teaa =row11.createCell(0);
+			teaa.setCellValue("老师");
+			teaa.setCellStyle(styleTitle);
+			HSSFCell timee =row22.createCell(0);
+			timee.setCellValue("");
+			timee.setCellStyle(styleTitle);
+			for(int o =0;o<5*array2.size();o++)
+			{
+				HSSFCell cell11=row11.createCell(o+1);
+				HSSFCell cell22=row22.createCell(o+1);
+				sheet2.setColumnWidth(o+1,6000);
+				if(o%5==0)
+				{
+					JSONObject obj11 =array2.getJSONObject(o/5).getJSONArray("rows").getJSONObject(0);
+					cell11.setCellValue("周"+StringUtil.getJSONObjectKeyVal(obj11, "weekTime"));
+					cell11.setCellStyle(styleTitle);
+					cell22.setCellValue("上午1");
+					cell22.setCellStyle(styleTitle);
+				}
+				else if(o%5==1)
+				{
+					cell22.setCellValue("上午2");
+					cell22.setCellStyle(styleTitle);
+				}
+				else if(o%5==2)
+				{
+					cell22.setCellValue("下午1");
+					cell22.setCellStyle(styleTitle);
+				}
+				else if(o%5==3)
+				{
+					cell22.setCellValue("下午2");
+					cell22.setCellStyle(styleTitle);
+				}
+				else if(o%5==4)
+				{
+					cell22.setCellValue("晚上");
+					cell22.setCellStyle(styleTitle);
+				}
+			}	
+			for(int p=0;p<array2.size();p++)
+			{
+				sheet2.setColumnWidth(p+1,6000);
+				cellRangeList2.add(new CellRangeAddress(0, 0, p*5+1, (p+1)*5));
+			}	
+			JSONArray teachers =array2.getJSONObject(0).getJSONArray("rows");
+			for(int q=0;q<teachers.size();q++)
+			{
+				HSSFRow roww = sheet2.createRow(q+2);
+				HSSFCell cellss = roww.createCell(0);
+				cellss.setCellValue(StringUtil.getJSONObjectKeyVal(teachers.getJSONObject(q), "teacherName"));
+				cellss.setCellStyle(styleContent);
+				for(int r=1;r<=array2.size()*5;r++)
+				{
+					roww.createCell(r);
+				}	
+			}
+			for(int s=0;s<array2.size();s++)
+			{
+				JSONArray arrayss =array2.getJSONObject(s).getJSONArray("rows");
+				for(int x=2;x<arrayss.size()+2;x++)
+				{
+					JSONObject contentt =arrayss.getJSONObject(x-2);
+					JSONArray indexArrs =getTimeIndex(contentt);
+					for(int t=0;t<indexArrs.size();t++)
+					{
+						JSONObject indexObjs =indexArrs.getJSONObject(t);
+						int indexs =Integer.valueOf(indexObjs.getString("index"));
+						String value =indexObjs.getString("value");
+						HSSFCell cell =sheet2.getRow(x).getCell(s*5+indexs);
+						cell.setCellValue(value);
+						cell.setCellStyle(styleContent);
+						if(ObjectCensor.isStrRegular(StringUtil.getJSONObjectKeyVal(indexObjs, "merge")))
+						{
+							int merges =Integer.valueOf(indexObjs.getString("merge"));
+							if(merges>1)
+							{
+								merges-=1;
+								cellRangeList2.add(new CellRangeAddress(x, x, s*5+indexs, s*5+indexs+merges));
+							}	
+						}	
+					}	
+				}	
+			}	
+			for(CellRangeAddress cellRange:cellRangeList2)
+			{
+				sheet2.addMergedRegion(cellRange);
+			}
+		}
+		return wb;
+	}
+	
 }
