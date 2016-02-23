@@ -188,13 +188,27 @@ function coures(type)
 			var str=JSON.stringify(row);
 			if(row.courseType=='002')
 			{
-				window.location.href="updateShortCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&courses="+str;
+				if(type=="view")
+				{
+					window.location.href="updateShortCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&courses="+str+"&viewFlag=true";
+				}
+				else 
+				{
+					window.location.href="updateShortCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&courses="+str;
+				}	
 			}else
 			{
-				if(courseState=='001' || courseState=='002')
+				if(courseState=='001' || courseState=='002'||type=='view')
 				{
 					var studentCourseId=row.studentCourseId;
-					window.location.href="updateCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&courses="+str;
+					if(type=="view")
+					{
+						window.location.href="updateCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&courses="+str+"&viewFlag=true";
+					}
+					else
+					{
+						window.location.href="updateCourse.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&courses="+str;
+					}	
 				}else
 				{
 					showMessage("提示","该课程不可修改,请重新选择",null);

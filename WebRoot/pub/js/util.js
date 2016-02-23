@@ -371,12 +371,11 @@ function formatFinishBonus(value, row, index) {
 	if(row.isApplyBonus == "N") {
 		return "<a href='javascript:void(0)' onclick='getBonus(" + row.classInstId + ", \"APPLY\")' class='apply' style='width: 100px;'><span>申请奖金</span></a>";
 	} else {
-		return "";
-//		if(row.isGetBonus == "N") {
-//			return "<a href='javascript:void(0)' onclick='getBonus(" + row.classInstId + ", \"GET\")' class='get' style='width: 100px;'><span>领取奖金</span></a>";
-//		} else {
-//			
-//		}
+		if(row.isGetBonus == "N") {
+			return "<a href='javascript:void(0)' onclick='getBonus(" + row.classInstId + ", \"GET\")' class='get' style='width: 100px;'><span>领取奖金</span></a>";
+		} else {
+			return "";
+		}
 	}
 }
 
@@ -877,30 +876,35 @@ function initReportButton(resetName,formName,schoolId)
 {
 	var clearFlag =true;
 	$("#"+formName).find("#"+schoolId).combobox({
-		url:"/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",
+		loader:function(param,success,error){  
+		    $.ajax({  
+				url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
+				dataType: 'json',  
+				success: function(data){  
+				data.unshift({schoolName:'所有校区',schoolId:""});  
+				success(data);  
+				}
+			});  
+   		},
 		onLoadSuccess:function(){
 			var arr =$("#"+formName).find("#"+schoolId).combobox("getData");
 			if(arr.length==1)
 			{
 				$("#"+formName).find("#"+schoolId).combobox("select",arr[0].schoolId);
 				clearFlag =false;
-			}
-			else
-			{
-				$("#"+formName).find("#"+schoolId).combobox('setValue','').combobox('setText','所有校区');
 			}	
 		}
-	});	 
+	});
     $("#"+resetName+"").click(function() 
     {
     	$("#"+formName+"").form('clear');//清空窗体数据  
     	if(!clearFlag)
     	{
-    		$("#"+formName).find("#"+schoolId).combobox('setValue',$("#"+formName).find("#"+schoolId).combobox("getData")[0].schoolId);
+    		$("#"+formName).find("#"+schoolId).combobox('select',$("#"+formName).find("#"+schoolId).combobox("getData")[0].schoolId);
     	}
     	else
     	{
-    		$("#"+formName).find("#"+schoolId).combobox('setValue','').combobox('setText','所有校区');
+    		$("#"+formName).find("#"+schoolId).combobox('setValue',"");
     	}	
     });
 }
@@ -983,4 +987,57 @@ function getFormatStr(str)
 	{
 		return str;
 	}	
+}
+
+
+function disableForm(formId,isDisabled) {
+    
+    var attr="disable";
+	if(!isDisabled){
+	   attr="enable";
+	}
+	$("form[id='"+formId+"'] :text").attr("disabled",isDisabled);
+	$("form[id='"+formId+"'] textarea").attr("disabled",isDisabled);
+	$("form[id='"+formId+"'] select").attr("disabled",isDisabled);
+	$("form[id='"+formId+"'] :radio").attr("disabled",isDisabled);
+	$("form[id='"+formId+"'] :checkbox").attr("disabled",isDisabled);
+	$("form[id='"+formId+"'] a").attr("disabled",isDisabled);
+	//禁用使用input生成的combox
+
+	$("#" + formId + " input[class='combobox-f combo-f']").each(function () {
+		if (this.id) 
+		{
+			$("#" + this.id).combobox(attr);
+		}
+	});
+	
+	//禁用使用select生成的combox
+	$("#" + formId + " select[class='combobox-f combo-f']").each(function () {
+		if (this.id) 
+		{
+			$("#" + this.id).combobox(attr);
+		}
+	});
+	
+	//禁用dataBox
+	$("#" + formId + " input[class='datebox-f combo-f']").each(function () {
+		if (this.id) 
+		{
+			$("#" + this.id).datebox(attr);
+		}
+	});
+	//禁用linkbutton
+	$("#" + formId + " a[class='easyui-linkbutton']").each(function () {
+		if (this.id) 
+		{
+			try
+			{
+				$("#" + this.id).linkbutton(attr);				
+			}
+			catch(e)
+			{
+				$("#" + this.id).remove();
+			}
+		}
+	});
 }

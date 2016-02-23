@@ -46,8 +46,10 @@ $(document).ready(function(){
 		url : "/sys/pub/pageCategory.do?staffId="+$("#handlerId").val()+"&resourceId=700&fieldId=schoolId&headFlag=N",
 		onChange : function(sId) {
 			var urls = "/sys/pubData/qryTeacherList.do?schoolId=" + sId;
+			var urlss ="/sys/pubData/qryStaffList.do?post=16,17&schoolId=" + sId;
+
 			$("#adviser").combobox( {
-				url : urls
+				url : urlss
 			});
 			$("#adviserTeacher").combobox( {
 				url : urls
@@ -64,8 +66,9 @@ $(document).ready(function(){
 		url : "/sys/pub/pageCategory.do?staffId="+$("#handlerId").val()+"&resourceId=700&fieldId=schoolId&headFlag=N",
 		onChange : function(sId) {
 			var urls = "/sys/pubData/qryTeacherList.do?schoolId=" + sId;
+			var urlss ="/sys/pubData/qryStaffList.do?post=16,17&schoolId=" + sId;
 			$("#advisers").combobox( {
-				url : urls
+				url : urlss
 			});
 			$("#adviserTeachers").combobox( {
 				url : urls

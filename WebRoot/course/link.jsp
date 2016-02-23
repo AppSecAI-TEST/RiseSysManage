@@ -5,6 +5,7 @@
 	String schoolId=request.getParameter("schoolId");
 	String studentInfo =request.getParameter("studentInfo");
 	String linkCourses=request.getParameter("linkCourses");
+	String viewFlag = request.getParameter("viewFlag");
 %>
 <html>
 	<head>
@@ -242,6 +243,11 @@ function updateLinkCourses()
 	
 function toLinkCourse(num)
 {
+	var viewFlag ="<%=viewFlag %>";
+	if(viewFlag=="true")
+	{
+		$("#submit").remove();
+	}	
 	for(var n=0;n<5;n++)
 	{
 			var name="#frame"+n;
@@ -258,16 +264,40 @@ function toLinkCourse(num)
 		  			{
 		  				if(courseT.feeType=='001')
 		  				{
-		  					$(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
-		  				}else
+		  					if(viewFlag=="true")
+							{
+		  						$(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str+"&viewFlag=true");
+		  					}
+		  					else
+		  					{
+		  						$(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
+		  					}	
+		  				}
+		  				else
+		  				{
+		  					if(viewFlag=="true")
+		  					{
+		  						$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str+"&viewFlag=true");
+		  					}
+		  					else
+		  					{
+		  						$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
+		  					}	
+		  				}
+		  			}
+		  			else
+		  			{
+		  				if(viewFlag=="true")
+		  				{
+		  					$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str+"&viewFlag=true");
+		  				}
+		  				else
 		  				{
 		  					$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
-		  				}
-		  			}else
-		  			{
-		  				    $(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
+		  				}	
 		  			}
-		  		}else
+		  		}
+		  		else
 		  		{
 			  			if(n==0)
 			  			{

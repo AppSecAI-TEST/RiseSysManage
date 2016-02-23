@@ -7,6 +7,7 @@
 	String order=request.getParameter("order");
 	String courses=request.getParameter("courses");
 	String name=request.getParameter("name");
+	String viewFlag = request.getParameter("viewFlag");
 	JSONObject object=new JSONObject();
 	if(courses!=null && !"".equals(courses))
     {
@@ -270,6 +271,11 @@ initPayDate();
 		}
 	})
 	initOldCourse();
+	var viewFlag ="<%=viewFlag %>";
+	if(viewFlag=="true")
+	{
+		disableForm("courseFm",true)
+	}	
 	function initOldCourse()
 	{
 		if(setPriceId!='')

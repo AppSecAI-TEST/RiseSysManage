@@ -9,6 +9,7 @@
 	String order=request.getParameter("order");
 	String courses=request.getParameter("courses");
 	String name=request.getParameter("name");
+	String viewFlag = request.getParameter("viewFlag");
 	JSONObject object=new JSONObject();
 	if(courses!=null && !"".equals(courses))
     {
@@ -959,7 +960,12 @@ $("#classType").combobox(
 
 });
 
- initOldCourse();
+initOldCourse();
+var viewFlag ="<%=viewFlag %>";
+if(viewFlag=="true")
+{
+	disableForm("courseFm",true)
+}	
 function initOldCourse()
 {
 	var studentCourseId=$("#studentCourseId").val();

@@ -7,6 +7,7 @@
 	String studentId =request.getParameter("studentId");
 	String schoolId= request.getParameter("schoolId");
 	String courses=request.getParameter("courses");
+	String viewFlag = request.getParameter("viewFlag");
 	
 	JSONObject object=new JSONObject();
 	if(courses!=null && !"".equals(courses))
@@ -356,6 +357,16 @@ $("#s_schooldA").combobox({
 	});
 
 initOldCourse();
+var viewFlag ="<%=viewFlag %>";
+if(viewFlag=="true")
+{
+	initView();
+}	
+function initView()
+{
+	$("#submitBtn").remove();
+	disableForm("courseFm",true)
+}
 function initOldCourse()
 {
 	var studentCourseId=$("#studentCourseId").val();
@@ -425,13 +436,7 @@ function initOldCourse()
 					$("#s_teacherB").combobox('setValue',teachers[i].teacherId); 
 				}
 			}
-		
-			
 		}
-		
-		
-		
-	
 	}
 }
 

@@ -42,7 +42,7 @@
 	  					<td align="right"><span>业绩顾问：</span></td>
 	  					<td>
 	  						<select name="adviser" class="easyui-combobox" id="adviser" style="width: 100px;height:25px;" editable ="false"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
+								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'">
 							</select>
 	  					</td>
 	  					<td align="right"><span>业绩老师：</span></td>
@@ -75,7 +75,7 @@
 	  			</table>
 	 		</form>
 	 		
-	 		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:400" id="list_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true">
+	 		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:400" id="list_data" toolbar="#toolbar"  singleSelect="true" pagination="true" rownumbers="true" fitColumns="true">
 				<thead>
 					<tr>
 						<th data-options="field:'ck',checkbox:true"></th>
@@ -128,7 +128,7 @@
 	  					<td align="right"><span>业绩顾问：</span></td>
 	  					<td>
 	  						<select name="adviser" class="easyui-combobox" id="advisers" style="width: 100px;height:25px;" editable ="false"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
+								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'">
 							</select>
 	  					</td>
 	  					<td align="right"><span>业绩老师：</span></td>

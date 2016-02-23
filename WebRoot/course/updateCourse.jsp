@@ -7,7 +7,7 @@
 	String studentId =request.getParameter("studentId");
 	String schoolId= request.getParameter("schoolId");
 	String courses=request.getParameter("courses");
-	 
+	String viewFlag = request.getParameter("viewFlag");
 	JSONObject object=new JSONObject();
 	if(courses!=null && !"".equals(courses))
     {
@@ -766,6 +766,13 @@ var adviserTeacherBid="<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherB
 loadStuBaseInfo();
 initCousreGift();
 initOldCourse();
+var viewFlag ="<%=viewFlag %>";
+if(viewFlag=="true")
+{
+	$("#submitBtn").remove();
+	disableForm("courseFm",true)
+}	
+
 function initOldCourse()
 {
 	$("#payDate").datebox({ disabled: true});
