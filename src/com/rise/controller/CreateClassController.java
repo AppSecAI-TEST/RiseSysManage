@@ -137,7 +137,7 @@ public class CreateClassController
 	}
 	
 	@RequestMapping(value = "/qryCreateClass.do")
-	public ModelAndView qryCreateClass(String classInstId, String applyType, String type, String classState, String funcNodeId)
+	public ModelAndView qryCreateClass(String classInstId, String applyType, String type, String classState, String funcNodeId, String channel)
 	{
 		ModelAndView view = null;
 		if("update".equals(type)) {
@@ -151,6 +151,7 @@ public class CreateClassController
 			JSONObject obj = JSONObject.fromObject(retVal);
 			obj.element("classState", classState);
 			obj.element("funcNodeId", funcNodeId);
+			obj.element("channel", channel);
 			log.error(obj);
 			view.addObject("obj", obj);
 		} 

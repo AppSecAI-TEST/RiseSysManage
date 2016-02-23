@@ -6,8 +6,7 @@ $(document).ready(function() {
 		data: "param=" + param,
 		dataType: "json",
 		async: true,
-		beforeSend: function()
-		{
+		beforeSend: function() {
 			$.messager.progress({title : '浏览', msg : '正在查询浏览转班信息，请稍等……'});
 		},
 		success: function (data) {
@@ -64,5 +63,17 @@ $(document).ready(function() {
 				$("#finishTr").css("display", 'table-row');
 			}
 		}
+	});
+	
+	var channel = $("#channel").val();
+	if(channel != "" && channel != null && channel != "null" && channel != undefined && channel == "index") {
+		$("#backBtn").css("display", "none");
+		$("#closeBtn").css("display", "inline-block");
+	}
+	
+	//关闭按钮
+	$("#closeBtn").click(function() {
+		var title = "转班管理";
+		parent.closeUrl(title);
 	});
 });

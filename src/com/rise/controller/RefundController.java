@@ -76,7 +76,7 @@ public class RefundController
 	}
 	
 	@RequestMapping(value = "/qryApproveRefund.do")
-	public ModelAndView qryApproveRefund(String refundFeeId, String courseType, String type)
+	public ModelAndView qryApproveRefund(String refundFeeId, String courseType, String type, String channel)
 	{
 		ModelAndView view = null;
 		if("approve".equals(type)) {
@@ -111,6 +111,7 @@ public class RefundController
 			log.error(obj);
 			obj.element("courseType", courseType);
 			obj.element("refundFeeId", refundFeeId);
+			obj.element("channel", channel);
 			view.addObject("obj", obj);
 		} 
 		catch (Exception e) 

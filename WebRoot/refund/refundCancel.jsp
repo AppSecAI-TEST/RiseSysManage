@@ -638,17 +638,21 @@
 						<div id="headquartersFinancialViewDiv" style=" display: none;">
 		  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 		  						<tr>
-				  					<td colspan="2"><span>7、总部财务打款信息：</span></td>
+				  					<td colspan="4"><span>7、总部财务打款信息：</span></td>
 				  				</tr>
 				  				<tr>
 				  					<td align="right" width="8%"><span>已打款：</span></td>
-				  					<td width="92%">
+				  					<td width="2%">
 					  					<input type="checkbox" name="isTransfer" checked="checked" disabled="disabled"/>
+				  					</td>
+				  					<td align="right" width="12%"><span>退费归属日期：</span></td>
+				  					<td width="78%">
+				  						<input name="belongDate" id="belongDate" type="text" class="easyui-datebox" style="width: 100px; height: 25px;"/>
 				  					</td>
 				  				</tr>
 				  				<tr>
 				  					<td align="right" width="8%"><span>备注：</span></td>
-				  					<td width="92%">
+				  					<td width="92%" colspan="3">
 				  						<textarea rows="2" cols="122" id="headquartersFinancialRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
 				  					</td>
 				  				</tr>

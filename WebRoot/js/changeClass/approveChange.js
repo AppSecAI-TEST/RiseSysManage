@@ -36,6 +36,18 @@ $(document).ready(function() {
 		}
 	});
 	
+	var channel = $("#channel").val();
+	if(channel != "" && channel != null && channel != "null" && channel != undefined && channel == "index") {
+		$("#backBtn").css("display", "none");
+		$("#closeBtn").css("display", "inline-block");
+	}
+	
+	//关闭按钮
+	$("#closeBtn").click(function() {
+		var title = "转班管理";
+		parent.closeUrl(title);
+	});
+	
 	//查看转班历史
 	$("#viewChangeClassList").click(function() {
 		var studentId = $("#studentId").val();

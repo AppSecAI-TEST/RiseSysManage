@@ -13,6 +13,11 @@
 			$(document).ready(function() {
 				$("#leaveImgUrl").lightBox();
 			});
+			//关闭按钮
+			$("#closeBtn").click(function() {
+				var title = "休学管理";
+				parent.closeUrl(title);
+			});
 		</script>
   	</head>
   	<body>
@@ -118,7 +123,12 @@
  		<table style="margin-top: 20px;min-width:1100px; width:99%;">
 			<tr>
 				<td align="center">
-					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="javascript:window.history.back()"><span>返回</span></a>
+					<c:if test="${empty obj.channel }">
+			      		&nbsp;<a href="javascript:void(0)"class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	  				</c:if>
+	  				<c:if test="${not empty obj.channel }">
+			      		&nbsp;<a href="javascript:void(0)" id="closeBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;">关闭</a>
+	  				</c:if>
 				</td>
 			</tr>
 		</table>

@@ -304,6 +304,12 @@
 					});
 				}
 			}
+			
+			function closeUrl(title) {
+				if($("#pagetabs").tabs("exists", title)) {
+					$("#pagetabs").tabs("close", title);
+				}
+			}
 		</script>
 	</body>
 </html>

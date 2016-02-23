@@ -45,7 +45,8 @@
   		<div  id="remark" class="easyui-panel" title="备注" style="width:1100px;height:150px;">
   		</div>
   		<div style="width:1100px;text-align:center;margin-top:25px;">
-  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" >返回</a>	
+  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:80px; height: 28px;" id="backBtn">返回</a>
+  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px; display: none;" id="closeBtn">关闭</a>
   		</div>
   	</body>
 </html>

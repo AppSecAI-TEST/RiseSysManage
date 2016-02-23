@@ -1,14 +1,18 @@
 var td = 2;
 $(document).ready(function() {
+	var type = $("#type").val();
 	var classInstId = $("#classInstId").val();
 	$.ajax({
 		url: "/sys/applyClass/qryCreateClassById.do",
 		data: "classInstId=" + classInstId + "&applyType=001",
 		dataType: "json",
 		async: true,
-		beforeSend: function()
-		{
-			$.messager.progress({title : '取消放班申请', msg : '正在查询取消放班信息，请稍等……'});
+		beforeSend: function() {
+			if("" == type) {
+				$.messager.progress({title : '放班申请', msg : '正在查询放班信息，请稍等……'});
+			} else if("" == type) {
+				$.messager.progress({title : '取消放班申请', msg : '正在查询取消放班信息，请稍等……'});
+			}
 		},
 		success: function (data) {
     		$.messager.progress('close'); 
@@ -23,10 +27,17 @@ $(document).ready(function() {
     		$("#higherSchoolName").html(data.createClassObj.higherSchoolName);
     		$("#Applyremark").html(data.createClassObj.remark);
     		
+    		var channel = $("#channel").val();
+    		if(channel != "" && channel != null && channel != "null" && channel != undefined && channel == "index") {
+    			$("#backBtn").css("display", "none");
+    			$("#closeBtn").css("display", "inline-block");
+    		}
+    		
     		var type = $("#type").val();
     		if(type != "" && type != null && type != "null" && type != undefined) {
     			td = 1;
     		}
+    		
     		var schooltimeLength = data.schooltimeObj.total;
     		if(schooltimeLength > 0) {
     			var content = "";
@@ -69,8 +80,14 @@ $(document).ready(function() {
 		}
 	});
 	
+	//关闭按钮
+	$("#closeBtn").click(function() {
+		var title = "放班管理";
+		parent.closeUrl(title);
+	});
+	
 	//取消放班申请
-	$("#submit").click(function(){
+	$("#submit").click(function() {
 		if($("#cancelApplyClassFm").form('validate')) {
 			var obj = JSON.stringify($("#cancelApplyClassFm").serializeObject());
 			obj = encodeURI(obj);
@@ -80,13 +97,12 @@ $(document).ready(function() {
 				contentType: "charset=UTF-8",
     			dataType: "json",
     			async: true,
-    			beforeSend: function()
-    	    	{
+    			beforeSend: function() {
     	    		$.messager.progress({title : '申请取消放班', msg : '正在申请取消放班，请稍等……'});
     	    	},
     	    	success: function (data) {
     	    		$.messager.progress('close'); 
-    	    		var flag = data.flag
+    	    		var flag = data.flag;
     	            if(flag) {
     	            	$.messager.alert('提示', "申请取消放班成功！", "info", function() {window.history.back();});
     	            } else {

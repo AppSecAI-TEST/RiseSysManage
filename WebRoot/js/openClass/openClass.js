@@ -63,6 +63,18 @@ $(document).ready(function() {
 		}
 	});
 	
+	var channel = $("#channel").val();
+	if(channel != "" && channel != null && channel != "null" && channel != undefined && channel == "index") {
+		$("#backBtn").css("display", "none");
+		$("#closeBtn").css("display", "inline-block");
+	}
+	
+	//关闭按钮
+	$("#closeBtn").click(function() {
+		var title = "开班管理";
+		parent.closeUrl(title);
+	});
+	
 	//点击提交老师
 	$("#addTeacherSubmit").click(function() {
 		if($("#addTeacherFm").form('validate')) {

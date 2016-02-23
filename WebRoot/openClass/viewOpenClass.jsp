@@ -9,6 +9,13 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
+		<script type="text/javascript">
+			//关闭按钮
+			$("#closeBtn").click(function() {
+				var title = "开班管理";
+				parent.closeUrl(title);
+			});
+		</script>
   	</head>
   
   	<body>
@@ -101,7 +108,12 @@
   		
   		<div style="margin-top: 20px;min-width:1100px; width:99%;">
 	      	<div style="float: left;margin-left: 800px;">
-	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	      		<c:if test="${empty obj.channel }">
+		      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	      		</c:if>
+	      		<c:if test="${not empty obj.channel }">
+	      			<a href="javascript:void(0)" id="closeBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;">关闭</a>
+	      		</c:if>
 	      	</div>
 	    </div>
 	    

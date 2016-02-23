@@ -46,6 +46,12 @@ $(document).ready(function() {
 		}
 	}); 
 	
+	//关闭按钮
+	$("#closeBtn").click(function() {
+		var title = "退费管理";
+		parent.closeUrl(title);
+	});
+	
 	var refundFeeId = $("#refundFeeId").val();
 	$.ajax({
 		url: "/sys/pubData/qryData.do",
@@ -129,6 +135,7 @@ $(document).ready(function() {
 	//审批提交
 	$("#refundApproveSubmit").click(function() {
 		var flag = true;
+		var belongDate = "";
 		var isTransfer = "N";
 		var nextState = $("#nextState").val();
 		if("108" == nextState) {
@@ -139,6 +146,24 @@ $(document).ready(function() {
 			} else {
 				if(transfer) {
 					isTransfer = "Y";
+				}
+			}
+			belongDate = $("#belongDate").datebox("getValue");
+			if(belongDate == null || belongDate == "" || belongDate == undefined) {
+				$.messager.alert('提示', "请选择退费归属日期！");
+				flag = false;
+			} else {
+				var curr_time = new Date();
+				var curr_year = curr_time.getFullYear();
+				var curr_month = curr_time.getMonth() + 1;
+				var date = new Date(belongDate.replace(/-/g,"/"));
+				var year = date.getFullYear();
+				var month = date.getMonth() + 1;
+				if(parseInt(curr_year) != parseInt(year) 
+						|| parseInt(month) < (parseInt(curr_month) - 1) 
+						|| parseInt(month) > (parseInt(curr_month) + 1)) {
+					flag = false;
+					$.messager.alert('提示', "退费归属日期只能选择上月、当月、下月的日期！");
 				}
 			}
 		} else {
@@ -163,8 +188,9 @@ $(document).ready(function() {
 			});
 			approveObj.remark = approveRemark;
 			if("108" == nextState) {
-				approveObj.isTransfer = isTransfer;
 				approveObj.approveResult = "Y";
+				approveObj.isTransfer = isTransfer;
+				approveObj.belongDate = belongDate;
 			}
 			var param = JSON.stringify(approveObj);
 			param = encodeURI(param);
@@ -173,8 +199,7 @@ $(document).ready(function() {
 				data: "param=" + param,
 				dataType: "json",
 				async: true,
-				beforeSend: function()
-				{
+				beforeSend: function() {
 					$.messager.progress({title : '审批退费', msg : '正在审批退费，请稍等……'});
 				},
 				success: function (data) {

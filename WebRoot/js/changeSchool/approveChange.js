@@ -36,6 +36,12 @@ $(document).ready(function() {
 		}
 	});
 	
+	var channel = $("#channel").val();
+	if(channel != "" && channel != null && channel != "null" && channel != undefined && channel == "index") {
+		$("#backBtn").css("display", "none");
+		$("#closeBtn").css("display", "inline-block");
+	}
+	
 	var studentId = $("#studentId").val();
 	$("#course_list_data").datagrid({ 
 		url:"/sys/pubData/qryDataListByPage.do?param={funcNodeId:'1016',studentId:'"+studentId+"'}",
@@ -75,6 +81,12 @@ $(document).ready(function() {
 				$("#giftTr").css("display", "none");
 			}
 		}
+	});
+	
+	//关闭按钮
+	$("#closeBtn").click(function() {
+		var title = "转校管理";
+		parent.closeUrl(title);
 	});
 	
 	$("#approveChangeSubmit").click(function() {

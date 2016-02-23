@@ -82,9 +82,15 @@
   					</tr>
   					<tr>
   						<td colspan="6" align="right">
-  							<a href="javascript:void(0)" id="approveSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      					&nbsp;<a href="javascript:void(0)" id="activityBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
-	      					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  							<div style="float: left;margin-left: 800px;">
+	  							<a href="javascript:void(0)" id="approveSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
+	  							<c:if test="${empty obj.channel }">
+			      					&nbsp;<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	  							</c:if>
+	  							<c:if test="${not empty obj.channel }">
+			      					&nbsp;<a href="javascript:void(0)" id="closeBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;">关闭</a>
+	  							</c:if>
+  							</div>
   						</td>
   					</tr>
 	  			</table>

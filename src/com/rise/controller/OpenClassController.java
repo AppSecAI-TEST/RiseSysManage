@@ -33,7 +33,7 @@ public class OpenClassController
 	private OpenClassService openClassService;
 	
 	@RequestMapping(value = "/qryCreateClass.do")
-	public ModelAndView qryCreateClass(String classInstId, String applyType, String type)
+	public ModelAndView qryCreateClass(String classInstId, String applyType, String type, String channel)
 	{
 		log.error(classInstId);
 		ModelAndView view = null;
@@ -54,6 +54,7 @@ public class OpenClassController
 		{
 			String retVal = createClassService.qryCreateClassById(classInstId, applyType);
 			JSONObject obj = JSONObject.fromObject(retVal);
+			obj.element("channel", channel);
 			log.error(obj);
 			view.addObject("obj", obj);
 		} 

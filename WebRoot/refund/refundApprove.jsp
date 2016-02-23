@@ -771,17 +771,21 @@
 					<div id="headquartersFinancialApproveDiv" style=" display: none;">
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
-			  					<td colspan="2"><span>7、总部财务打款信息：</span></td>
+			  					<td colspan="4"><span>7、总部财务打款信息：</span></td>
 			  				</tr>
 			  				<tr>
 			  					<td align="right" width="8%"><span>已打款：</span></td>
-			  					<td width="92%">
+			  					<td width="2%">
 				  					<input type="checkbox" name="isTransfer"/>
+			  					</td>
+			  					<td align="right" width="12%"><span>退费归属日期：</span></td>
+			  					<td width="78%">
+			  						<input name="belongDate" id="belongDate" type="text" class="easyui-datebox" style="width: 100px; height: 25px;"/>
 			  					</td>
 			  				</tr>
 			  				<tr>
 			  					<td align="right" width="8%"><span>备注：</span></td>
-			  					<td width="92%">
+			  					<td width="92%" colspan="3">
 			  						<textarea rows="4" cols="122" name="approveRemark" class="easyui-validatebox textbox"></textarea>
 			  					</td>
 			  				</tr>
@@ -792,8 +796,13 @@
   		</div>
   		<div style="margin-top: 25px;min-width:1100px; width:98%;">
 	      	<div style="float: left;margin-left: 800px;">
-	      		 <a href="javascript:void(0)" id="refundApproveSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a> 
-	       		&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	      		 <a href="javascript:void(0)" id="refundApproveSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
+	      		 <c:if test="${empty obj.channel }">
+			     	&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	      		 </c:if>
+	      		 <c:if test="${not empty obj.channel }">
+	      		 	&nbsp;<a href="javascript:void(0)" id="closeBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;">关闭</a>
+	      		 </c:if>
 	      	</div>
 	   </div>
 	   <div id="dlg" class="easyui-dialog" closed="true" modal="true">

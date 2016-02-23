@@ -2,6 +2,7 @@
 <%
 	String path = request.getContextPath();
 	String applyId = request.getParameter("applyId");
+	String channel = request.getParameter("channel");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -15,6 +16,7 @@
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="浏览转班信息">
   			<input type="hidden" id="applyId" value="<%=applyId %>"/>
+  			<input type="hidden" id="channel" value="<%=channel %>"/>
   			<table width="100%" cellpadding="5px" class="maintable" id="updateChangeClassTd">
   				<tr>
   					<td align="right" width="10%"><span>转班状态：</span></td>
@@ -84,7 +86,8 @@
   		</div>
   		<div style="text-align:center;margin-top: 25px;min-width:1100px; width:99%;">
   			<div style="float: left;margin-left: 800px;">
-		      	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 25px;" onclick="javascript:window.history.back()">返回</a>
+		      	<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 25px;" onclick="javascript:window.history.back()">返回</a>
+  				<a href="javascript:void(0)" id="closeBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px; display: none;">关闭</a>
   			</div>
 	   </div>
   	</body>

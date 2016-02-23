@@ -44,53 +44,53 @@
 		var studentCourseId = row.studentCourseId;
 		if(msgType.indexOf("leave_course") > -1) { //休学
 			title = "休学管理";
-			url = "/sys/leaveManage/viewLeaveInfo.do?studentId=" + studentId + "&leaveId=" + applyId + "&funcNodeId=&type=view";
+			url = "/sys/leaveManage/viewLeaveInfo.do?studentId=" + studentId + "&leaveId=" + applyId + "&funcNodeId=&type=view&channel=index";
 		} else if(msgType.indexOf("exp_course") > -1) { //异常
 			title = "异常管理";
-			url = "/sys/exception/expDetail.jsp?expInfo=" + studentId + "," + studentCourseId + "," + applyId;
+			url = "/sys/exception/expDetail.jsp?expInfo=" + studentId + "," + studentCourseId + "," + applyId + ",index";
 		} else if(msgType.indexOf("apply_class") > -1 || msgType.indexOf("cancel_class") > -1) { //放班
 			title = "放班管理";
 			//通知 跳转到浏览页面
 			if("notice" == pushType) {
-				url = "/sys/applyClass/qryCreateClass.do?classInstId="+classInstId+"&type=view&applyType=" + applyType;
+				url = "/sys/applyClass/qryCreateClass.do?classInstId="+classInstId+"&type=view&applyType=" + applyType + "&channel=index";
 			} else {
 				if(msgType.indexOf("apply_class") > -1) {
 					//放班审批
-					url = "/sys/applyClass/applyApprove.jsp?applyId=" + applyId + "&classInstId=" + classInstId;
+					url = "/sys/applyClass/applyApprove.jsp?applyId=" + applyId + "&classInstId=" + classInstId + "&channel=index";
 				} else if(msgType.indexOf("cancel_class") > -1) {
 					//取消放班审批
-					url = "/sys/applyClass/cancelApprove.jsp?applyId=" + applyId + "&classInstId=" + classInstId;
+					url = "/sys/applyClass/cancelApprove.jsp?applyId=" + applyId + "&classInstId=" + classInstId + "&channel=index";
 				}
 			}
 		} else if(msgType.indexOf("exp_open_class") > -1 || msgType.indexOf("open_class") > -1) { //异常开班
 			title = "开班管理";
 			//通知 跳转到浏览页面
 			if("notice" == pushType) {
-				url = "/sys/openClass/qryCreateClass.do?classInstId=" + classInstId + "&type=view&applyType=" + applyType;
+				url = "/sys/openClass/qryCreateClass.do?classInstId=" + classInstId + "&type=view&applyType=" + applyType + "&channel=index";
 			} else {
-				url = "/sys/openClass/qryCreateClass.do?classInstId=" + classInstId + "&type=approve&applyType=" + applyType;
+				url = "/sys/openClass/qryCreateClass.do?classInstId=" + classInstId + "&type=approve&applyType=" + applyType + "&channel=index";
 			}
 		} else if(msgType.indexOf("change_school") > -1) { //转校
 			title = "转校管理";
 			//通知 跳转到浏览页面
 			if("notice" == pushType) {
-				url = "/sys/changeSchool/viewChangeSchool.jsp?applyId=" + applyId;
+				url = "/sys/changeSchool/viewChangeSchool.jsp?applyId=" + applyId + "&channel=index";
 			} else {
-				url = "/sys/changeSchool/approveChangeSchool.jsp?applyId=" + applyId + "&studentId=" + studentId;
+				url = "/sys/changeSchool/approveChangeSchool.jsp?applyId=" + applyId + "&studentId=" + studentId + "&channel=index";
 			}
 		} else if(msgType.indexOf("change_class") > -1) { //转班
 			title = "转班管理";
 			//通知 跳转到浏览页面
 			if("notice" == pushType) {
-				url = "/sys/changeClass/viewChangeClass.jsp?applyId=" + applyId;
+				url = "/sys/changeClass/viewChangeClass.jsp?applyId=" + applyId + "&channel=index";
 			} else {
-				url = "/sys/changeClass/approveChangeClass.jsp?applyId=" + applyId + "&studentId=" + studentId + "&studentCourseId=" + studentCourseId;
+				url = "/sys/changeClass/approveChangeClass.jsp?applyId=" + applyId + "&studentId=" + studentId + "&studentCourseId=" + studentCourseId + "&channel=index";
 			}
 		} else if(msgType.indexOf("refund_fee") > -1) { //退费
 			title = "退费管理";
 			//通知 跳转到浏览页面
 			if("notice" == pushType) {
-				url = "/sys/refund/qryApproveRefund.do?refundFeeId=" + applyId + "&courseType=" + courseType + "&type=view";
+				url = "/sys/refund/qryApproveRefund.do?refundFeeId=" + applyId + "&courseType=" + courseType + "&type=view&channel=index";
 			} else {
 				
 			}
