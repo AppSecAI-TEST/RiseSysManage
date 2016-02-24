@@ -57,10 +57,10 @@
 							<th field="short_class_X" align="center" width="6%" rowspan="2">国际班退费</th>
 						</tr>
 						<tr>
-							<th field="persionA" align="center" width="6%">个数</th>
+							<th field="personA" align="center" width="6%">个数</th>
 							<th field="yearA" align="center" width="6%">年数</th>
-							<th field="num2" align="center" width="6%">个数</th>
-							<th field="year2" align="center" width="6%">年数</th>
+							<th field="courseXPersonNum" align="center" width="6%">个数</th>
+							<th field="courseXYearNum" align="center" width="6%">年数</th>
 						</tr>
 					</thead>
 				</table>
