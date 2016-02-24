@@ -1,72 +1,86 @@
-$(document).ready(function(){
-	initDate();
+$(document).ready(function() {
+	var staffId = $("#staffId").val();
 	$("#schoolId").combobox({
-		onChange:function(){
-			var urls ="";
-			urls ="../pubData/qryClassInstList.do?schoolId="+$("#schoolId").combobox("getValue")+"&stageId="+$("#stageId").combobox("getValue");
-			$("#classInstId").combobox({
-				url:urls,
-				valueField : "classInstId",
-				textField : "className",
-				panelHeight : "auto"
-			});
-		}
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=506&fieldId=schoolId",
+		valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
+    	onLoadSuccess : function() {
+    		var data = $("#schoolId").combobox("getData");
+    		if(data.length == 1) {
+    			$("#schoolId").combobox("setValue", data[0].schoolId);
+    		}
+    	},
+    	onChange : function(n, o) {
+    		if(n != "" && n != null && n != undefined) {
+    			$("#teacherId").combobox({
+    				url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&classType=",//返回json数据的url
+    				valueField : "teacherId", 
+    				textField : "byname",
+    				panelHeight : "auto",
+    				formatter : function(data) {
+    					return "<span>" + data.byname + "</span>";
+    				}
+    			});
+    		} else {
+    			$("#teacherId").combobox('clear');
+    			$("#teacherId").combobox("loadData", new Array());
+    		}
+    	}
 	});
-	$("#stageId").combobox({
-		onChange:function(){
-			var urls ="";
-			urls ="../pubData/qryClassInstList.do?schoolId="+$("#schoolId").combobox("getValue")+"&stageId="+$("#stageId").combobox("getValue");
-			$("#classInstId").combobox({
-				url:urls,
-				valueField : "classInstId",
-				textField : "className",
-				panelHeight : "auto"
-			});
-		}
-	});
+	
 	$("#qryBtn").click(function() {
-    	var obj = JSON.stringify($("#qryFm").serializeObject());
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+		var object = $("#qryFm").serializeObject();
+		var funcNodeId = $("#qryBtn").attr("funcNodeId");
+		object.funcNodeId = funcNodeId;
+    	var obj = JSON.stringify(object);
     	$('#list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",
     		queryParams:{
     			param : obj
     		},
-    		onLoadSuccess:function(){
+    		onLoadSuccess:function() {
     			$('#list_data').datagrid('clearSelections');
     		}
     	});
     });
+	
 	$("#resetBtn").click(function() {
     	$('#qryFm').form('clear');//清空窗体数据  
-    	initDate();
-    });
-
-});
-
-
-function initDate()
-{
-	var curr_time = new Date();
-	$('#endTime').datebox('setValue', myformatter(curr_time));
-	curr_time.setMonth(curr_time.getMonth() - 1);
-	$('#startTime').datebox('setValue', myformatter(curr_time));
-}
-
-function validateSelect(object)
-{
-	var flag = false;
-	var obj = $("#"+object+"").datagrid('getSelections');
-	if(obj.length > 0) {
-		if(obj.length > 1) {
-			$.messager.alert('提示', "只能选择一条记录操作！");
-		} else {
-			flag = true;
+    	var data = $("#schoolId").combobox("getData");
+		if(data.length == 1) {
+			$("#schoolId").combobox("setValue", data[0].schoolId);
 		}
-	} else {
-		$.messager.alert('提示', "请先选择一条记录！");
-	}
-	return flag;
-}
+    });
+	
+	// 调整基数
+	$("#changeBase").click(function() {
+		var row = $('#list_data').datagrid('getSelected');
+		if (row) {
+//			var classState = row.classState;
+//			if (classState != '003') {
+//				$.messager.alert('提示', "该班级不能调整基数！");
+//				return;
+//			}
+			var classInstId = row.classInstId;
+			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId=" + classInstId + "&type=numChange";
+		} else {
+			$.messager.alert('提示', "请先选择您要调整的班级！");
+		}
+	});
+
+	// 调整历史
+	$("#viewChange").click(function() {
+		var row = $('#list_data').datagrid('getSelected');
+		if (row) {
+			var classState = row.classState;
+			var classInstId = row.classInstId;
+			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId=" + classInstId + "&type=changeHist";
+		} else {
+			$.messager.alert('提示', "请选择班级！");
+		}
+	});
+});

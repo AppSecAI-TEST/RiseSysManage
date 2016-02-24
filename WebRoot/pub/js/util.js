@@ -371,11 +371,20 @@ function formatFinishBonus(value, row, index) {
 	if(row.isApplyBonus == "N") {
 		return "<a href='javascript:void(0)' onclick='getBonus(" + row.classInstId + ", \"APPLY\")' class='apply' style='width: 100px;'><span>申请奖金</span></a>";
 	} else {
-		if(row.isGetBonus == "N") {
-			return "<a href='javascript:void(0)' onclick='getBonus(" + row.classInstId + ", \"GET\")' class='get' style='width: 100px;'><span>领取奖金</span></a>";
-		} else {
-			return "";
-		}
+//		if(row.isGetBonus == "N") {
+//			return "<a href='javascript:void(0)' onclick='getBonus(" + row.classInstId + ", \"GET\")' class='get' style='width: 100px;'><span>领取奖金</span></a>";
+//		} else {
+//			return "";
+//		}
+		return "";
+	}
+}
+
+function formatChangeBaseNum(value, row, index) {
+	if(row.studyingNum == "1") {
+		return "<a href='javascript:void(0)' onclick='changeStudentBaseNum("+row.baseNumStudentId+")' class='edit' style='width: 100px;'><span>修改基数</span></a>";
+	} else {
+		return "";
 	}
 }
 

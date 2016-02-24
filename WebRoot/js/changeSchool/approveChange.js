@@ -102,15 +102,14 @@ $(document).ready(function() {
 					data: "param=" + obj,
 					dataType: "json",
 					async: true,
-					beforeSend: function()
-					{
+					beforeSend: function() {
 						$.messager.progress({title : '转校审批', msg : '正在审批转校，请稍等……'});
 					},
 					success: function (data) {
 						$.messager.progress('close'); 
 						var flag = data.flag;
 						if(flag) {
-							$.messager.alert('提示', "转校审批成功！", "info", function() {window.history.back();});
+							$.messager.alert('提示', "转校审批成功！", "info", function() {close();});
 						} else {
 							$.messager.alert('提示', data.msg);
 						}
@@ -120,6 +119,16 @@ $(document).ready(function() {
 		}
 	});
 });
+
+function close() {
+	var channel = $("#channel").val();
+	if(channel != "" && channel != null && channel != "null" && channel != undefined && channel == "index") {
+		var title = "转校管理";
+		parent.closeUrl(title);
+	} else {
+		window.history.back();
+	}
+}
 
 //查看转校历史信息
 function viewChangeSchoolHist() {

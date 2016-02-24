@@ -256,15 +256,14 @@ $(document).ready(function() {
 					data: "param=" + obj,
 					dataType: "json",
 					async: true,
-					beforeSend: function()
-					{
+					beforeSend: function() {
 						$.messager.progress({title : '开班审批', msg : '正在审批开班，请稍等……'});
 					},
 					success: function (data) {
 						$.messager.progress('close'); 
 						var flag = data.flag;
 						if(flag) {
-							$.messager.alert('提示', "开班审批成功！", "info", function() {window.history.back();});
+							$.messager.alert('提示', "开班审批成功！", "info", function() {close();});
 						} else {
 							$.messager.alert('提示', data.msg);
 						}
@@ -274,6 +273,16 @@ $(document).ready(function() {
 		}
 	});
 });
+
+function close() {
+	var channel = $("#channel").val();
+	if(channel != "" && channel != null && channel != "null" && channel != undefined && channel == "index") {
+		var title = "开班管理";
+		parent.closeUrl(title);
+	} else {
+		window.history.back();
+	}
+}
 
 //修改开课时间或者是取消放班
 function updateOrCancel() {
@@ -285,8 +294,7 @@ function updateOrCancel() {
 		data: "param=" + obj,
 		dataType: "json",
 		async: true,
-		beforeSend: function()
-		{
+		beforeSend: function() {
 			if(optionType == "CANCEL_OPEN") {
 				$.messager.progress({title : '取消开班', msg : '正在取消开班，请稍等……'});
 			} else {

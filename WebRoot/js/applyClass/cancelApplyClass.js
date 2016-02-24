@@ -128,15 +128,14 @@ $(document).ready(function() {
 					contentType: "charset=UTF-8",
 					dataType: "json",
 					async: true,
-					beforeSend: function()
-					{
+					beforeSend: function() {
 						$.messager.progress({title : '审批申请', msg : '正在审批申请，请稍等……'});
 					},
 					success: function (data) {
 						$.messager.progress('close'); 
 						var flag = data.flag
 						if(flag) {
-							$.messager.alert('提示', "审批申请成功！", "info", function() {window.history.back();});
+							$.messager.alert('提示', "审批申请成功！", "info", function() {close();});
 						} else {
 							$.messager.alert('提示', data.msg);
 						}
@@ -146,3 +145,13 @@ $(document).ready(function() {
 		}
 	});
 });
+
+function close() {
+	var channel = $("#channel").val();
+	if(channel != "" && channel != null && channel != "null" && channel != undefined && channel == "index") {
+		var title = "放班管理";
+		parent.closeUrl(title);
+	} else {
+		window.history.back();
+	}
+}

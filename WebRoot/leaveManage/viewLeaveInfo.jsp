@@ -12,16 +12,17 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#leaveImgUrl").lightBox();
-			});
-			//关闭按钮
-			$("#closeBtn").click(function() {
-				var title = "休学管理";
-				parent.closeUrl(title);
+				//关闭按钮
+				$("#closeBtn").click(function() {
+					var title = "休学管理";
+					parent.closeUrl(title);
+				});
 			});
 		</script>
   	</head>
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="学员基础信息">
+  			<input type="hidden" id="channel" value="${obj.channel }"/>
   			<table width="100%" cellpadding="5px" class="maintable" id="studentTd">
   				<tr>
   					<td align="right"><span>学员姓名：</span></td>

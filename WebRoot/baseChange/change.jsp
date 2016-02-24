@@ -9,90 +9,75 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
+		<script type="text/javascript" src="<%=path %>/js/baseChange/change.js"></script>
   	</head>
   
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:98%;height:auto;" title="基数调整">
   			<form id="baseNumFm">
-  				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
-  				<input type="hidden" id="baseNumId" name="baseNumId" value="${obj.attendClassObj.baseNumId}"/>
+  				<input type="hidden" id="handlerId" value="${sessionScope.StaffT.staffId}"/>
+  				<input type="hidden" id="classInstId" value="${obj.attendClassObj.classInstId }"/>
   				<div class="easyui-panel" style="min-width:1100px; width:100%; height:auto;">
 	  				<table width="100%" cellpadding="5px" class="maintable">
 	  					<tr>
 		  					<td align="right" width="10%"><span>课程阶段：</span></td>
-		  					<td width="20%"><span id="stageIdText">${obj.attendClassObj.stageId }</span></td>
+		  					<td width="20%"><span>${obj.attendClassObj.stageId }</span></td>
 		  					<td align="right" width="10%"><span>班级类型：</span></td>
-		  					<td width="20%"><span id="classTypeText">${obj.attendClassObj.classType }</span></td>
+		  					<td width="20%"><span>${obj.attendClassObj.classType }</span></td>
 		  					<td align="right" width="10%"><span>班级名称：</span></td>
-		  					<td width="30%"><span id="classNameText">${obj.attendClassObj.className }</span></td>
+		  					<td width="30%"><span>${obj.attendClassObj.className }</span></td>
 		  				</tr>
 		  				<tr>
-		  					<td align="right" width="10%"><span>开课时间：</span></td>
+		  					<td align="right" width="10%"><span>开课日期：</span></td>
 		  					<td width="20%"><span>${obj.attendClassObj.startDate }</span></td>
 		  					<td align="right" width="10%"><span>学员来源类型：</span></td>
-		  					<td width="20%"><span id="studentChannelTypeVal">${obj.attendClassObj.studentChannelTypeText }</span></td>
+		  					<td width="20%"><span>${obj.attendClassObj.studentChannelTypeText }</span></td>
 		  					<td align="right" width="10%"><span>来源班级：</span></td>
-		  					<td width="30%"><span id="higherSchoolName">${obj.attendClassObj.higherSchoolName }</span></td>
+		  					<td width="30%"><span>${obj.attendClassObj.higherSchoolName }</span></td>
 		  				</tr>
 		  				<tr>
 		  					<td align="right" width="10%"><span>开班类型：</span></td>
 		  					<td width="20%"><span>${obj.attendClassObj.openClassTypeText }</span></td>
 		  					<td align="right" width="10%"><span>开班人数：</span></td>
-		  					<td width="20%"><span id="studentChannelTypeVal">${obj.attendClassObj.openClassNum }</span></td>
-		  					<td align="right" width="10%"><span>班级性质：</span></td>
-		  					<td width="30%">
-		  					<span id="higherSchoolName">${obj.attendClassObj.handTypeText }</span>
-		  					</td>
+		  					<td width="20%"><span>${obj.attendClassObj.openClassNum }</span></td>
+		  					<td align="right" width="10%"><span>在读人数：</span></td>
+		  					<td width="30%"><span>${obj.attendClassObj.classStudentNum }</span></td>
 		  				</tr>
 		  				<tr>
 		  					<td align="right" width="10%"><span>升学基数：</span></td>
-		  					<td width="20%"><span>${obj.attendClassObj.higherBaseNum }</span>&nbsp;&nbsp;
-		  					<span id="higherSchoolName">改为：</span>
-		  					<input id="higherBaseNum" name="higherBaseNum" type="text" class="easyui-textbox validatebox"  style="width: 50px; height: 23px;"/>
-		  					</td>
-		  					<td align="right" width="10%"><span>已升学人数：</span>
-		  					
-		  					</td>
-		  					<td width="20%"><span id="studentChannelTypeVal">${obj.attendClassObj.higherStudentNum }</span>&nbsp;&nbsp;
-		  					<span id="higherSchoolName">改为：</span>
-		  					<input id="higherNum" name="higherNum" type="text" class="easyui-textbox validatebox"  style="width: 50px; height: 23px;"/>
-		  					</td>
-		  					<td align="right" width="10%"><span>在读人数：</span></td>
-		  					<td width="30%"><span id="higherSchoolName">${obj.attendClassObj.classStudentNum }</span>&nbsp;&nbsp;
-		  					<span id="higherSchoolName">改为：</span>
-		  					<input id="studyingNum" name="studyingNum" type="text" class="easyui-textbox validatebox"  style="width: 50px; height: 23px;"/></td>
+		  					<td width="20%"><span>${obj.attendClassObj.higherBaseNum }</span></td>
+		  					<td align="right" width="10%"><span>已升学人数：</span></td>
+		  					<td width="20%"><span>${obj.attendClassObj.higherStudentNum }</span></td>
+		  					<td align="right" width="10%"><span>升学率：</span></td>
+		  					<td width="30%"><span>${obj.attendClassObj.higherRateText }</span></td>
 		  				</tr>
 		  				<tr>
 		  					<td align="right" width="10%"><span>课时进度：</span></td>
 		  					<td width="20%"><span>${obj.attendClassObj.classProgress }</span></td>
 		  					<td align="right" width="10%"><span>持证率：</span></td>
-		  					<td width="20%"><span id="studentChannelTypeVal">${obj.attendClassObj.licenseRateText }</span></td>
-		  					<td align="right" width="10%"><span>升学率： </span></td>
-		  					<td width="30%"><span id="higherSchoolName">${obj.attendClassObj.higherRateText }</span></td>
-		  				</tr>
-		  			
-		  				<tr>
-		  					<td colspan="6" align="right">
-		  						<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-			      				&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
-			      				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		  					</td>
+		  					<td width="20%"><span>${obj.attendClassObj.licenseRateText }</span></td>
+		  					<td align="right" width="10%"><span>班级性质： </span></td>
+		  					<td width="30%"><span>${obj.attendClassObj.handTypeText }</span></td>
 		  				</tr>
 	  				</table>
 			  		<div style="height: 5px;"></div>
 			  		<div style="padding:5px 0;min-width:1100px; width:100%;">
-			  			<table class="easyui-datagrid" title="调整历史" style="height:auto;" id="list_data" fitColumns="true" singleSelect="false"
-			  				url="<%=path %>/pubData/qryDataListByPage.do?param={'classInstId':'${obj.attendClassObj.classInstId }','funcNodeId':'50047'}">
+			  			<table class="easyui-datagrid" title="班级学员基数" style="height:auto;" id="list_data" fitColumns="true" singleSelect="false"
+			  				url="<%=path %>/pubData/qryDataListByPage.do?param={'classInstId':'${obj.attendClassObj.classInstId }','funcNodeId':'1085'}"
+			  				data-options="onLoadSuccess:function(data) {$('.edit').linkbutton({text:'修改基数', iconCls:'icon-edit'});}">
 					  		<thead>
 					  			<tr>
-					  				<th data-options="field:'staffName',width:100,align:'center'">修改人</th>
-					  				<th data-options="field:'createDate',width:80,align:'center'">修改时间</th>
-					  				<th data-options="field:'originStudyingNum',width:100,align:'center'">原在读人数</th>
-					  				<th data-options="field:'studyingNum',width:100,align:'center'">变更后在读人数</th>
-					  				<th data-options="field:'originHigherBaseNum',width:180,align:'center'">原升学基数</th>
-					  				<th data-options="field:'higherBaseNum',width:100,align:'center'">变更后升学基数</th>
-					  				<th data-options="field:'originHigherNum',width:100,align:'center'">原升已升学人数</th>
-					  				<th data-options="field:'higherNum',width:80,align:'center'">变更后升已升学人数</th>
+					  				<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
+					  				<th data-options="field:'byName',width:80,align:'center'">英文名</th>
+					  				<th data-options="field:'payDate',width:100,align:'center'">缴费日期</th>
+					  				<th data-options="field:'attendDate',width:100,align:'center'">进班上课日期</th>
+					  				<th data-options="field:'phone',width:180,align:'center'">联系方式</th>
+					  				<th data-options="field:'courseStateText',width:100,align:'center'">课程状态</th>
+					  				<th data-options="field:'higherStageId',width:100,align:'center'">已升学阶段</th>
+					  				<th data-options="field:'studyingNum',width:80,align:'center'">在读人数</th>
+					  				<th data-options="field:'higherBaseNum',width:80,align:'center'">升学基数</th>
+					  				<th data-options="field:'higherNum',width:80,align:'center'">已升学人数</th>
+					  				<th data-options="field:'option', width:100, align:'center', formatter:formatChangeBaseNum">操作</th>
 					  			</tr>
 					  		</thead>
 					  	</table>
@@ -100,36 +85,56 @@
   				</div>
   			</form>
   		</div>
+  		<div style="text-align:center;margin-top: 25px;min-width:1100px; width:99%;">
+  			<div style="float: left;margin-left: 800px;">
+  				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 25px;" onclick="javascript:window.history.back()">返回</a>
+  			</div>
+	   </div>
+  		
+  		<div id="dlg" class="easyui-dialog" style="width: 600px;height: 300px;" closed="true" data-options="modal:true" buttons="#dlgBtn">
+  			<form id="baseNumStudentFm" method="post">
+  				<input type="hidden" id="baseNumId" name="baseNumId"/>
+  				<input type="hidden" id="studentId" name="studentId"/>
+  				<input type="hidden" id="studentCourseId" name="studentCourseId"/>
+  				<input type="hidden" id="baseNumStudentId" name="baseNumStudentId"/>
+  				<input type="hidden" id="originStudentHigherNum" name="originStudentHigherNum"/>
+  				<input type="hidden" id="originStudentStudyingNum" name="originStudentStudyingNum"/>
+  				<input type="hidden" id="originStudentHigherBaseNum" name="originStudentHigherBaseNum"/>
+  				<table width="100%" cellpadding="5px" class="maintable">
+  					<tr>
+	  					<td align="right" width="15%"><span>学员姓名：</span></td>
+	  					<td width="20%"><span id="name"></span></td>
+	  					<td align="right" width="20%"><span>英文名：</span></td>
+	  					<td width="40%"><span id="byName"></span></td>
+  					</tr>
+  					<tr>
+	  					<td align="right" width="15%"><span>在读人数：</span></td>
+	  					<td width="20%"><span id="studyingNumText"></span></td>
+	  					<td align="right" width="25%"><span>在读人数调整为：</span></td>
+	  					<td width="40%">
+	  						<input id="studentStudyingNum" name="studentStudyingNum" type="text" class="easyui-numberbox validatebox" data-options="min:0,max:1,precision:0" required="true" style="width: 100px; height: 25px;"/>
+	  					</td>
+  					</tr>
+  					<tr>
+	  					<td align="right" width="15%"><span>升学基数：</span></td>
+	  					<td width="20%"><span id="higherBaseNumText"></span></td>
+	  					<td align="right" width="25%"><span>升学基数调整为：</span></td>
+	  					<td width="40%">
+	  						<input id="studentHigherBaseNum" name="studentHigherBaseNum" type="text" class="easyui-numberbox validatebox" data-options="min:0,max:1,precision:1" required="true" style="width: 100px; height: 25px;"/>
+	  					</td>
+  					</tr>
+  					<tr>
+	  					<td align="right" width="15%"><span>已升学人数：</span></td>
+	  					<td width="20%"><span id="higherNumText"></span></td>
+	  					<td align="right" width="25%"><span>已升学人数调整为：</span></td>
+	  					<td width="40%"><input id="studentHigherNum" name="studentHigherNum" type="text" class="easyui-numberbox validatebox" data-options="min:0,max:1,precision:1" required="true" style="width: 100px; height: 25px;"/></td>
+  					</tr>
+  				</table>
+  			</form>
+  		</div>
+  		<div id="dlgBtn">
+    		<a href="javascript:void(0)" id="changeStudentNumBtn" class="easyui-linkbutton" iconCls="icon-ok">提交</a> 
+    		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+  		</div>
   	</body>
 </html>
-<script type="text/javascript">
-
-$("#submit").click(function()
-{
-	 if($("baseNumFm").form('validate')) {
-			var obj = JSON.stringify($("#baseNumFm").serializeObject());
-			obj = encodeURI(obj);
-			$.ajax({
-				url: "/sys/baseNum/change.do",
-				data: "param=" + obj,
-				dataType: "json",
-				async: false,
-				beforeSend: function()
-				{
-					$.messager.progress({title : '调整基数', msg : '正在处理中，请稍等……'});
-				},
-				success: function (data) {
-					$.messager.progress('close'); 
-					if(data) {
-						$.messager.alert('提示', "调整基数成功！", "info", function() {window.history.back();});
-					} else {
-						$.messager.alert('提示', data.msg);
-					}
-				} 
-			});
-		}
-	});
- 
- 
-
-</script>

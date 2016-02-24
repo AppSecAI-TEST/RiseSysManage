@@ -15,6 +15,7 @@
   	<body>
   		<div class="easyui-panel" style="min-width:1101px; width:100%;height:auto;" title="开班信息">
   			<form id="approveOpenFm">
+  				<input type="hidden" id="channel" value="${obj.channel }"/>
   				<input type="hidden" id="applyId" name="applyId" value="${obj.createClassObj.applyId }"/>
   				<input type="hidden" id="classInstId" name="classInstId" value="${obj.createClassObj.classInstId }"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>

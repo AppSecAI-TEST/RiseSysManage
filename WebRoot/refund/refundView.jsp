@@ -15,6 +15,7 @@
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="常规课退费浏览">
   			<form id="refundApproveFm">
+  				<input type="hidden" id="channel" value="${obj.channel }"/>
   				<input type="hidden" id="refundFeeId" value="${obj.refundFeeId }"/>
   				<input type="hidden" id="studentId" value="${obj.refundFeeObj.studentId }"/>
   				<input type="hidden" id="nextState" value="${obj.refundFeeObj.nextState }"/>
