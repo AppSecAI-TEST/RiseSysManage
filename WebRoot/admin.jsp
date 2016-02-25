@@ -37,7 +37,8 @@
 				<img src="<%=path %>/pub/images/adm_logo.png" style="width:100%;height:79px;position:relative;border:none;">
 				<img onclick="updatePassword()" src="<%=path %>/pub/images/adm_menu1.png" style="right:230px;top:16px;position:absolute;cursor:pointer;">
 				<img src="<%=path %>/pub/images/adm_menu2.png" style="right:180px;top:16px;position:absolute;cursor:pointer;">
-				<img onclick="viewFile()" src="<%=path %>/pub/images/adm_menu3.png" style="right:100px;top:16px;position:absolute;cursor:pointer;">				<img onclick="logout()" src="<%=path %>/pub/images/adm_menu4.png" style="right:50px;top:16px;position:absolute;cursor:pointer;">
+				<img onclick="viewFile()" src="<%=path %>/pub/images/adm_menu3.png" style="right:100px;top:16px;position:absolute;cursor:pointer;">
+				<img onclick="logout()" src="<%=path %>/pub/images/adm_menu4.png" style="right:50px;top:16px;position:absolute;cursor:pointer;">
 			</div>
 			<div class="panel-header panel-header-noborder top-toolbar" style="position:absolute;bottom:0px;border-top-width:1px;border-bottom-width:0px;z-index:1;display:none;">
 				<div id="infobar">
@@ -47,6 +48,7 @@
 		        </div>
 			</div>
 		</div>
+		<iframe id="fileDlg" class="easyui-dialog" style="width:1150px;height:600px;" modal="true" closed="true"></iframe>
 		<div id="dlg" class="easyui-dialog" style="width:0px;height:0px;padding:0px 0px" modal="true" closed="true" buttons="#buttons">
 			<form id='form' method="post">
 				<input id="staffId" type="hidden" name="staffId" value="${sessionScope.StaffT.staffId}" />
