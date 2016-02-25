@@ -71,6 +71,10 @@ public class FileUploadServlet extends HttpServlet
 					schoolCode = StringUtil.getJSONObjectKeyVal(obj, "shcoolCode");
 				}
 			}
+			else
+			{
+				schoolCode ="zb";
+			}	
 			String handlerId = request.getParameter("handlerId");
 			if(ObjectCensor.isStrRegular(path, schoolCode, folderName, filePath))
 			{
@@ -126,7 +130,14 @@ public class FileUploadServlet extends HttpServlet
 				{
 					log.error(filePath);
 					JSONObject obj = new JSONObject();
-					obj.element("fileType", "IMG");
+					if("zb".equals(schoolCode))
+					{
+						obj.element("fileType", "FILE");
+					}
+					else
+					{
+						obj.element("fileType", "IMG");
+					}	
 					obj.element("filePath", filePath);
 					obj.element("ownerId", handlerId);
 					obj.element("handlerId", handlerId);

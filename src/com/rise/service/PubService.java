@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Service;
@@ -96,4 +97,29 @@ public class PubService
 		return ServiceEngine.invokeHttp(param);
 	}
 	
+	public String getFillePath(String fileId) throws Exception
+	{
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2014\",securityCode:\"0000000000\",params:{fileId:\""+fileId+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+	
+	public String getFolder() throws Exception
+	{
+		String result="";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1015\",securityCode:\"0000000000\",params:{paramType:\"DOWNLOAD_PATH\",paramValue:\"download\"},rtnDataFormatType:\"user-defined\"}";
+		String rstMsg = ServiceEngine.invokeHttp(param);
+		JSONArray array = JSONArray.fromObject(rstMsg);
+		if(ObjectCensor.checkListIsNull(array))
+		{
+			JSONObject obj = array.getJSONObject(0);
+			result = StringUtil.getJSONObjectKeyVal(obj, "param2");
+		}
+		return result;
+	}
+	
+	public String deleteFile(String fileId) throws Exception 
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0102\",securityCode:\"0000000000\",params:{fileId:"+fileId+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
 }

@@ -1,6 +1,17 @@
 package com.rise.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
+import com.rise.pub.util.ObjectCensor;
 import com.rise.service.PubService;
 
 @Controller
@@ -20,6 +33,8 @@ public class PubController
 	@Autowired
 	private PubService pubService;
 	
+	private static String separator = System.getProperty("file.separator");
+
 	@RequestMapping("/pageCategory.do")
 	public void pageCategory(HttpServletResponse response , HttpServletRequest request , String staffId , String funcNodeId , String fieldId , String resourceId)
 	{
@@ -88,6 +103,73 @@ public class PubController
 		}
 		finally
 		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
+	@RequestMapping("/downloadFile.do")
+	public HttpServletResponse download(String fileId, HttpServletResponse response) 
+	{
+		   try 
+		   {
+			    String path =pubService.getFillePath(fileId);
+			    String[] pathArr =path.split("/");
+			    String realPath =pubService.getFolder()+pathArr[pathArr.length-3]+separator+pathArr[pathArr.length-2]+separator+pathArr[pathArr.length-1];
+			    File file = new File(realPath);
+	            InputStream fis = new BufferedInputStream(new FileInputStream(file));
+	            byte[] buffer = new byte[fis.available()];
+	            fis.read(buffer);
+	            fis.close();
+	            // Çå¿Õresponse
+	            response.reset();
+	            // ÉèÖÃresponseµÄHeader
+	            response.addHeader("Content-Disposition", "attachment;filename=" + new String(file.getName().getBytes()));
+	            response.addHeader("Content-Length", "" + file.length());
+	            OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+	            response.setContentType("application/octet-stream");
+	            toClient.write(buffer);
+	            toClient.flush();
+	            toClient.close();
+	        } 
+		   	catch (Exception ex) 
+		   	{
+	            ex.printStackTrace();
+	        }
+	        return response;
+	    }
+	
+	
+	@RequestMapping("/deleteFile.do")
+	public void deleteFile(String fileId, HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		String retVal = "false";
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String path =pubService.getFillePath(fileId);
+			String[] pathArr =path.split("/");
+			String realPath =pubService.getFolder()+pathArr[pathArr.length-3]+separator+pathArr[pathArr.length-2]+separator+pathArr[pathArr.length-1];
+			File file = new File(realPath);
+			if(file.exists()&&file.isFile())
+			{
+				if(file.delete())
+				{
+					retVal =pubService.deleteFile(fileId);
+				}	
+			}	
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			out.write(retVal);
 			if(out != null)
 			{
 				out.close();
