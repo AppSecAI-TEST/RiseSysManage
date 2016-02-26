@@ -58,13 +58,10 @@
 	  					</td>
 	  					<td align="right"><span>课程类型：</span></td>
 	  					<td>
-	  						<select class="easyui-combobox" name="state" id="state" style="width:100px;height:25px;" editable ="false"
-	  							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'">
-	  						</select>
-	  						&nbsp;&nbsp;&nbsp;
-	  						<select class="easyui-combobox" name="classType" id="classType" style="width:100px;height:25px;" editable ="false"
-	  							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'">
-	  						</select>
+	  						<select id="courseType" name="courseType" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+				        	</select>
+				        	<select id="courseTypeDetail" name="courseTypeDetail" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+		        			</select>
 	  					</td>
 	  					<td align="left">
 		  					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" funcNodeId="3800"><span>查询</span></a>
@@ -75,7 +72,7 @@
 	  			</table>
 	 		</form>
 	 		
-	 		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:400" id="list_data" toolbar="#toolbar"  singleSelect="true" pagination="true" rownumbers="true" fitColumns="true">
+	 		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:350" id="list_data" toolbar="#toolbar"  singleSelect="true" pagination="true" rownumbers="true" fitColumns="true">
 				<thead>
 					<tr>
 						<th data-options="field:'ck',checkbox:true"></th>
@@ -144,13 +141,10 @@
 	  					</td>
 	  					<td align="right"><span>课程类型：</span></td>
 	  					<td>
-	  						<select class="easyui-combobox" name="states" id="states" style="width:100px;height:25px;" editable ="false"
-	  							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'">
-	  						</select>
-	  						&nbsp;&nbsp;&nbsp;
-	  						<select class="easyui-combobox" name="classTypes" id="classTypes" style="width:100px;height:25px;" editable ="false"
-	  							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'">
-	  						</select>
+	  						<select id="courseTypes" name="courseTypes" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+				        	</select>
+				        	<select id="courseTypeDetails" name="courseTypeDetails" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+		        			</select>
 	  					</td>
 	  					<td align="left">
 		  					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn1" funcNodeId="3801"><span>查询</span></a>
@@ -161,7 +155,7 @@
 	  			</table>
 	 		</form>
 	 		
-	 		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:400" id="list_data1" pagination="true" rownumbers="true" fitColumns="true">
+	 		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:350" id="list_data1" pagination="true" rownumbers="true" fitColumns="true">
 				<thead>
 					<tr>
 						<th field="schoolName" align="center" width="5%">校区</th>

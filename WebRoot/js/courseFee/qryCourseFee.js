@@ -1,46 +1,67 @@
 $(document).ready(function(){
-	$("#state").combobox({
-		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE",
-		onChange:function(newValue){
-			var urls ="";
-			if(newValue=="001")
-			{
-				urls ="/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=CLASS_TYPE";
-				$("#classType").combobox({
-				url:urls,
-				panelHeight : "auto"
-				});
-			}
-			else
-			{
-				$("#classType").combobox({
-				url:"/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=11111",
-				panelHeight : "auto"
-				});
-			}	
-			
-		}
+	$("#courseType").combobox({
+		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE",//返回json数据的url
+    	valueField : "codeFlag",
+    	textField : "codeName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.codeName + "</span>";
+    	},
+    	onChange : function(n, o) {
+    		if("001" == n) {
+    			$("#courseTypeDetail").combobox({
+    				url : "/sys/pubData/qryStage.do",//返回json数据的url
+    		    	valueField : "stageId",
+    		    	textField : "stageId",
+    		    	panelHeight : "auto",
+    		    	formatter : function(data) {
+    		    		return "<span>" + data.stageId + "</span>";
+    		    	}
+    			});
+    		} else {
+    			$("#courseTypeDetail").combobox({
+    				url : "/sys/pubData/qryShortClass.do",//返回json数据的url
+    		    	valueField : "shortClassId",
+    		    	textField : "className",
+    		    	panelHeight : "auto",
+    		    	formatter : function(data) {
+    		    		return "<span>" + data.className + "</span>";
+    		    	}
+    			});
+    		}
+    	}
 	});
-	$("#states").combobox({
-		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE",
-		onChange:function(newValue){
-			var urls ="";
-			if(newValue=="001")
-			{
-				urls ="/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=CLASS_TYPE";
-				$("#classTypes").combobox({
-				url:urls,
-				panelHeight : "auto"
-				});
-			}
-			else
-			{
-				$("#classTypes").combobox({
-				url:"/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=11111",
-				panelHeight : "auto"
-				});
-			}	
-		}
+	$("#courseTypes").combobox({
+		url : "/sys/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=COURSE_TYPE",//返回json数据的url
+    	valueField : "codeFlag",
+    	textField : "codeName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.codeName + "</span>";
+    	},
+    	onChange : function(n, o) {
+    		if("001" == n) {
+    			$("#courseTypeDetails").combobox({
+    				url : "/sys/pubData/qryStage.do",//返回json数据的url
+    		    	valueField : "stageId",
+    		    	textField : "stageId",
+    		    	panelHeight : "auto",
+    		    	formatter : function(data) {
+    		    		return "<span>" + data.stageId + "</span>";
+    		    	}
+    			});
+    		} else {
+    			$("#courseTypeDetails").combobox({
+    				url : "/sys/pubData/qryShortClass.do",//返回json数据的url
+    		    	valueField : "shortClassId",
+    		    	textField : "className",
+    		    	panelHeight : "auto",
+    		    	formatter : function(data) {
+    		    		return "<span>" + data.className + "</span>";
+    		    	}
+    			});
+    		}
+    	}
 	});
 	$("#schoolId").combobox( {
 		url : "/sys/pub/pageCategory.do?staffId="+$("#handlerId").val()+"&resourceId=700&fieldId=schoolId&headFlag=N",
