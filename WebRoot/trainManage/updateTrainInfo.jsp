@@ -27,20 +27,21 @@
   				</tr>
   				<tr>
   					<td align="right"><span>培训开始时间：</span></td>
-  					<td align="left"><input class="easyui-datebox" name="trainStartDate" id="trainStartDate" style="width:200px;" required="true"/></td>
+  					<td align="left"><input class="easyui-datebox" name="trainStartDate" id="trainStartDate" style="width:100px;" required="true"/></td>
   					<td align="right"><span>培训结束时间：</span></td>
-  					<td align="left"><input class="easyui-datebox" name="trainEndDate" id="trainEndDate" style="width:200px;" required="true"/></td>
+  					<td align="left"><input class="easyui-datebox" name="trainEndDate" id="trainEndDate" style="width:100px;" required="true"/></td>
   					<td align="right"><span>培训费用：</span></td>
-  					<td align="left"><input class="easyui-numberbox" name="trainAmount" id="trainAmount" style="width:200px;" precision = "2" required="true"/></td>
+  					<td align="left"><input class="easyui-numberbox" name="trainAmount" id="trainAmount" style="width:100px;" precision = "2" required="true"/></td>
   				</tr>
   				<tr>
   					<td align="right"><span>协议有效期：</span></td>
-  					<td align="left"><input class="easyui-numberbox" name="trainDeadline" id="trainDeadline" style="width:200px;" required="true"/>年</td>
+  					<td align="left"><input class="easyui-numberbox" name="trainDeadline" id="trainDeadline" style="width:100px;" required="true"/>年</td>
   					<td align="right"><span>培训地点：</span></td>
-  					<td align="left"><input class="easyui-textbox" name="trainPlace" id="trainPlace" style="width:200px;" required="true"/></td>
+  					<td align="left"><input class="easyui-textbox" name="trainPlace" id="trainPlace" style="width:100px;" required="true"/></td>
   					<td align="right"><span>培训类型：</span></td>
   					<td align="left">
-  						<select name="trainType" id="trainType" class="easyui-combobox" style="width:200px" required="true" editable='false'>
+  						<select name="trainType" id="trainType" class="easyui-combobox" style="width:100px" required="true" editable='false'
+						 >
 						</select>
   					</td>
   				</tr>
@@ -67,18 +68,20 @@
 	   			$("#trainDeadline").numberbox('setValue',"${obj.train.trainDeadline}");
 	   			$("#trainPlace").textbox('setValue',"${obj.train.trainPlace}");
 	   			$('#trainType').combobox({
-					url:"/sys/pubData/qryCodeNameList.do?tableName=TEACHER_TRAIN_T&codeType=TRAIN_TYPE",
-					formatter:formatItem, 
-					valueField: 'codeFlag', 
-					textField: 'codeName', 
+					url:"<%=path %>/pubData/qryStage.do",
+					valueField: 'stageId', 
+					textField: 'stageId', 
 					panelHeight: 'auto',
 					onLoadSuccess:function(){
 						var data = $('#trainType').combobox('getData');
 						if(data.length > 0)
 			            {
-				       		for(var i = 0;i < data.length;i++){
-				       			 if("${obj.train.trainType}" == data[i].codeFlag){
-				       				 $('#trainType').combobox('select',data[i].codeFlag);
+				       		for(var i = 0;i < data.length;i++)
+				       		{
+				       			
+				       			 if("${obj.train.trainType}" == data[i].stageId)
+				       			 {
+				       				 $('#trainType').combobox('select',data[i].stageId);
 				       			 }
 				       		}
 				       	}

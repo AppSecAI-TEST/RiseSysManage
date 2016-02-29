@@ -35,7 +35,7 @@
   					<td align="right"><span>培训地点：</span></td>
   					<td align="left">${obj.train.trainPlace}</td>
   					<td align="right"><span>培训类型：</span></td>
-  					<td align="left">${obj.train.trainTypeVal}</td>
+  					<td align="left">${obj.train.trainType}</td>
   				</tr>
   				<tr>
   					<td align="right"><span>备注：</span></td>
