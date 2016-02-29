@@ -319,32 +319,33 @@
 				if(courseState == '001' || courseState == '002' || courseState == '003' 
 					|| courseState == '004' || courseState == '005' || courseState == '006' || courseState == '007') {
 					if(feeType == '001') { //新招
-					if(courseState == '002' || courseState == '003' || courseState == '004' 
-						|| courseState == '005' || courseState == '006' || courseState == '007') {
-						showMessage("提示","该学员有未结束课程,当前所报阶段"+stageId+"不可选择新招业绩类型,请重新选择业绩类型",null);
-						return false;
-					}
-					if(courseState == '001') { //未定班
-						if(oldCourse.feeType == '001') { //已有新招
-							showMessage("提示","已存在新招阶段"+stageName+",请重新选择业绩类型",null);
+						if(courseState == '002' || courseState == '003' || courseState == '004' 
+							|| courseState == '005' || courseState == '006' || courseState == '007') {
+							showMessage("提示","该学员有未结束课程,当前所报阶段"+stageId+"不可选择新招业绩类型,请重新选择业绩类型",null);
 							return false;
 						}
-						if(Number(stageOrder) > Number(order)) {
-							showMessage("提示","当前所报新招阶段"+stageId+"不是最低阶段"+stageName+",请重新选择阶段",null);
-							return false;
+						if(courseState == '001') { //未定班
+							if(oldCourse.feeType == '001') { //已有新招
+								showMessage("提示","已存在新招阶段"+stageName+",请重新选择业绩类型",null);
+								return false;
+							}
+							if(Number(stageOrder) > Number(order)) {
+								showMessage("提示","当前所报新招阶段"+stageId+"不是最低阶段"+stageName+",请重新选择阶段",null);
+								return false;
+							}
 						}
-					}
-				} else if(feeType == '002'|| feeType == '003') {
-					if(courseState == '001' || courseState == '002') {
-						if(Number(stageOrder) == Number(order)) {
-							showMessage("提示","当前所报复读或升学阶段"+stageId+"低于或等于阶段"+stageName+",请重新选择阶段",null);
-							return false;
-						}
-					}else if(courseState == '003' || courseState == '004' 
-						|| courseState == '005' || courseState == '006' || courseState == '007') {
-						if(Number(stageOrder) < Number(order)) {
-							showMessage("提示","当前所报复读或升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段",null);
-							return false;
+					} else if(feeType == '002'|| feeType == '003') {
+						if(courseState == '001' || courseState == '002') {
+							if(Number(stageOrder) == Number(order)) {
+								showMessage("提示","当前所报复读或升学阶段"+stageId+"低于或等于阶段"+stageName+",请重新选择阶段",null);
+								return false;
+							}
+						} else if(courseState == '003' || courseState == '004' 
+							|| courseState == '005' || courseState == '006' || courseState == '007') {
+							if(Number(stageOrder) < Number(order)) {
+								showMessage("提示","当前所报复读或升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段",null);
+								return false;
+							}
 						}
 					}
 				}
