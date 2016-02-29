@@ -513,7 +513,7 @@
 											<span>学员姓名：</span>
 										</td>
 										<td align="center" style="border-right: 1px solid #ccc;">
-											<input type="text" class="easyui-textbox" editable="false"
+											<input type="text" class="easyui-textbox"
 												style="width: 100px;height: 25px">
 										</td>
 										<td align="right" width="100px"
@@ -539,7 +539,7 @@
 										</td>
 										<td align="center"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
-											<input type="text" class="easyui-textbox" editable="false"
+											<input type="text" class="easyui-textbox"
 												style="width: 100px;height: 25px">
 										</td>
 										<td align="right"
@@ -1735,7 +1735,7 @@ $("#addCourse").click(function()
 		{	
 			if($("#adviserA").combobox('getValue')==""&&$("#adviserA").combobox('getValue')=="null")
 			{
-				$.messager.alert('提示', "请选择常规课课程的业绩顾问A!");
+				showMessage('提示', "请选择常规课课程的业绩顾问A!",null);
 				return false;
 			}	
 			var womChannel=womType=="Y"?$("#praiseSourceY").combobox("getValue"):$("#praiseSourceN").combobox("getValue");
@@ -1777,7 +1777,8 @@ $("#addCourse").click(function()
 				{
 					if($("#activeId").combobox("getValue")=="")
 					{
-						$.messager.alert('提示', "请选择一个活动!");
+						showMessage('提示', "请选择一个活动!",null);
+						return false;
 					}
 					else
 					{
@@ -1789,7 +1790,7 @@ $("#addCourse").click(function()
 				{
 					if($("#c_adviserA").combobox("getValue")==""&&$("#c_adviserB").combobox("getValue")=="")
 					{
-						$.messager.alert('提示', "请至少选择一个顾问!");
+						showMessage('提示', "请至少选择一个顾问!",null);
 						return false;
 					}
 					else
@@ -1804,7 +1805,7 @@ $("#addCourse").click(function()
 				{
 					if($("#c_teacherA").combobox("getValue")==""&&$("#c_teacherB").combobox("getValue")=="")
 					{
-						$.messager.alert('提示', "请至少选择一个老师!");
+						showMessage('提示', "请至少选择一个老师!",null);
 						return false;
 					}
 					else
@@ -1844,16 +1845,15 @@ $("#addCourse").click(function()
 				else if(womChannel=="Stu")
 				{
 					var tr1=$("#praiseTab2").find("tr:eq(0)");
-					if(tr1.attr("studentId")==null)
+					var stuNames =tr1.find("td:eq(1)").find(".easyui-textbox").textbox("getValue");
+					if(stuNames=="")
 					{
-						$.messager.alert('提示', "请选择一个学员!");
+						showMessage('提示', "请填写学员姓名!",null);
 						return false;
 	 				}
 					else
 					{
-						womItem["studentId"]=tr1.attr("studentId");
-						womItem["studentIdSchool"]=tr1.attr("studentSchoolId");
-						womItem["studentName"]=tr1.find("td:eq(1)").find(".easyui-textbox").textbox("getValue");
+						womItem["studentName"]=stuNames;
 						womItem["identityType"]=tr1.find("td:eq(3)").find(".easyui-combobox").combobox("getValue");
 						womItem["identityId"]=tr1.find("td:eq(3)").find(".easyui-textbox").textbox("getValue");
 						var tr2 =$("#praiseTab2").find("tr:eq(1)");
@@ -1872,7 +1872,7 @@ $("#addCourse").click(function()
 					}
 					else
 					{
-						$.messager.alert('提示', "请填写员工姓名 !");
+						showMessage('提示', "请填写员工姓名!",null);
 						return false;
 					}	
 				}	

@@ -118,7 +118,7 @@ $(document).ready(function() {
 		}
 	});
 	$("#schoolId").combobox({
-		url:"<%=path%>/pub/pageCategory.do?staffId="+$("#staffId").val()+"&funcNodeId="+$("#funcNodeId").val()+"&fieldId=schoolId",
+		url:"<%=path%>/pub/pageCategory.do?fieldId=schoolId",
 		onLoadSuccess:function(data){if(data.length > 0)$('#schoolId').combobox('setValue',data[0].schoolId);}
 	});
 });
