@@ -151,7 +151,7 @@
 			}
 			else
 			{
-				addObj.per =(totalReal/planNum).toFixed(4)*100+"%";
+				addObj.per =(cl11/cl10).toFixed(4)*100+"%";
 			}
 			$('#list_data').datagrid('insertRow',{
 				row: addObj
