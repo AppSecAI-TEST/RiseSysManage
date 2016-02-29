@@ -126,7 +126,9 @@ public class PubController
 	            // Çå¿Õresponse
 	            response.reset();
 	            // ÉèÖÃresponseµÄHeader
-	            response.addHeader("Content-Disposition", "attachment;filename=" + new String(file.getName().getBytes()));
+	            System.out.println(new String(file.getName().getBytes(),"utf-8"));
+	            System.out.println(new String(file.getName().getBytes(),"gbk"));
+	            response.addHeader("Content-Disposition", "attachment;filename=" + new String(file.getName().getBytes(),"utf-8"));
 	            response.addHeader("Content-Length", "" + file.length());
 	            OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
 	            response.setContentType("application/octet-stream");
