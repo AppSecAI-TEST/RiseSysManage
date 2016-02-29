@@ -101,6 +101,24 @@ public class ExportService
 		}
 	}
 	
+	public void exportData(String fileName,String array,OutputStream out) throws Exception
+	{
+		List list = JacksonJsonMapper.getInstance().readValue(array, List.class);
+		String filePath =this.getFullFilePath(fileName);
+		HttpClient client = new HttpClient();   
+		GetMethod httpGet = new GetMethod(filePath);  
+		client.executeMethod(httpGet); 
+		InputStream inputStream =httpGet.getResponseBodyAsStream();
+		Map<String, List<Map>> beanParams = new HashMap<String, List<Map>>();
+		beanParams.put("reportList", list);  
+        XLSTransformer former = new XLSTransformer(); 
+        HSSFWorkbook workBook = (HSSFWorkbook)former.transformXLS(inputStream, beanParams);
+        workBook.write(out);
+		inputStream.close();
+		out.close();
+	}
+	
+	
 	public void exportClassHourDetail(String fileName,String param,OutputStream out) throws Exception
 	{
 		List list = JacksonJsonMapper.getInstance().readValue(param, List.class);

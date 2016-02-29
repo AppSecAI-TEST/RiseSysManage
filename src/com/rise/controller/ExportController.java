@@ -57,6 +57,29 @@ public class ExportController
 
 	}
 	
+	
+	@RequestMapping("/exportData.do")
+	public void exportData(String fileName,String array, HttpServletResponse response , HttpServletRequest request)
+	{
+		OutputStream out = null;
+		try
+		{
+			StringBuffer displayFileName = new StringBuffer(fileName);
+			displayFileName.append(new SimpleDateFormat("yyMMdd").format(new Date()));
+			displayFileName.append(".xls");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName="+URLEncoder.encode(displayFileName.toString(),"utf-8"));
+			out = response.getOutputStream();
+			es.exportData(fileName,array, out);
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+		}
+
+	}
+	
 	@RequestMapping("/normalMergeExport.do")
 	public void normalMergeExport(String fileName,String mergeName,String mergeIndex,String param, HttpServletResponse response , HttpServletRequest request)
 	{
