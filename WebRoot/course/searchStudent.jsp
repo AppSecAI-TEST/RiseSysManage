@@ -43,7 +43,7 @@
 						<span>学员姓名：</span>
 					</td>
 					<td width="114px">
-						<input id="name" name="name" class="easyui-textbobox"
+						<input id="name" name="name" class="easyui-textbox"
 							style="width: 114px; height: 25px;">
 					</td>
 				</tr>
@@ -72,7 +72,7 @@
 		</form>
 		<div style="padding: 5px 0;">
 			<table class="easyui-datagrid" title="查询结果" style="height:240px;" id="list_data"
-				 url="<%=path%>/pubData/qryDataListByPage.do?funcNodeId=3900"  pagination="true" rownumbers="false" fitColumns="true"  singleSelect="true">
+				  pagination="true" rownumbers="false" fitColumns="true"  singleSelect="true">
 				<thead>
 					<tr>
 						<th data-options="field:'ck',checkbox:true"></th>
@@ -125,6 +125,11 @@ $(document).ready(function() {
 
 function qry()
 {
+	if($("#name").textbox("getValue")==""&&$("#phone").textbox("getValue")==""&&$("#identityId").textbox("getValue")=="")
+	{
+		parent.showMessage("提示","请至少填写姓名,电话,证件号码中的一项查询条件",null)
+		return false;
+	}	
 	var obj = JSON.stringify($("#qryFm").serializeObject());
     	obj = obj.substring(0, obj.length - 1);
     	var funcNodeId = $("#qryBtn").attr("funcNodeId");
