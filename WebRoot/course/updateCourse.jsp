@@ -49,7 +49,7 @@
 	</head>
 
 	<body>
-	<form id="courseFm">
+	<form id="courseFm" method="post" enctype="multipart/form-data">
 		<div class="easyui-panel" style="width: 1200px" title="学员基础信息">
 			<input type="hidden" id="studentInfo" name="studentInfo" value="<%=studentInfo%>" />
 			<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId%>" />	
@@ -215,7 +215,12 @@
 						
 						<tr>
       					  <td align="right"><span>上传缴费单：</span></td>
-      					  <td  colspan="5"><input style="width: 300px; height: 25px;" class="easyui-filebox" name="file2" data-options="prompt:''" ><a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">查看缴费单</a></td>
+      					  <td  colspan="5">
+      					  	<input style="width: 300px; height: 25px;" class="easyui-filebox" id="fileName" name="fileName" data-options="prompt:''"/>
+      					  	<a href="javascript:void(0)" class="easyui-linkbutton" id="uploadBtn" iconCls="icon-save" iconCls="icon-save" style="width: 80px; height: 25px;">上传</a>
+	                        <a href="javascript:void(0)" class="easyui-linkbutton" id="cancelUploadBtn" iconCls="icon-cancel" iconCls="icon-cancel" style="width: 80px; height: 25px;">取消</a>
+      					  	<a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">查看缴费单</a>
+      					  </td>
    					  </tr>
       					<tr>
       					  <td align="right"><span>备注：</span></td>
@@ -685,7 +690,7 @@ var oldMinusAmount='<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>';
 
 var giftFlag=false;//赠品、赠课是否已消耗
 
-
+var courseImgUrl = "";
 
 
 var schools=getSchools();
@@ -1129,83 +1134,96 @@ $("#activeSchool").combobox(
 	}
 });
 
-//提交
-$("#submitBtn").click(function() 
-{
-	if(!checkParam())
-	{
-		return false;
-	}	
-	oldCourses =getOldCourse();
-	var stageId = $("#stageId").combobox("getValue");
-	var stageOrder =  $("#stageOrder").val();
-	var feeType = $("#feeType").combobox("getValue");
-	var studentCourseId=$("#studentCourseId").val();
-	var oldStageId = $("#oldStageId").val();
-	var oldFeeType = $("#oldFeeType").val();
-	var classType = $("#classType").combobox("getValue");
-	
-	if(oldStageId!=stageId || oldFeeType!=feeType || classType!=oldClassType)//阶段、业绩类型未修改不做校验
-	{
-		for(var i=0;i<oldCourses.length;i++)
+$("#submitBtn").click(function() {
+	var flag = true;
+	var fileName = $("#fileName").filebox("getValue");
+	if(fileName != "" && fileName != null && fileName != undefined) {
+		if(courseImgUrl == "" || courseImgUrl == null || courseImgUrl == undefined) {
+			flag = false;
+		}
+	}
+	if(flag) {
+		if(!checkParam())
 		{
-			var course = oldCourses[i];
-			var order = course.stageOrder;
-			var courseState=course.courseState;
-			var stageName =course.stageId;
-			var oldClassType=course.classType;
-			 
-			
-			if(studentCourseId==course.studentCourseId  && oldStageId==stageName && classType==oldClassType && oldFeeType==feeType)
+			return false;
+		}	
+		oldCourses =getOldCourse();
+		var stageId = $("#stageId").combobox("getValue");
+		var stageOrder =  $("#stageOrder").val();
+		var feeType = $("#feeType").combobox("getValue");
+		var studentCourseId=$("#studentCourseId").val();
+		var oldStageId = $("#oldStageId").val();
+		var oldFeeType = $("#oldFeeType").val();
+		var classType = $("#classType").combobox("getValue");
+		
+		if(oldStageId!=stageId || oldFeeType!=feeType || classType!=oldClassType)//阶段、业绩类型未修改不做校验
+		{
+			for(var i=0;i<oldCourses.length;i++)
 			{
-					continue;
-			}
-
-			if(courseState=='001' || courseState=='002' || courseState=='003' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
-			{
-				if(feeType=='001')//新招
+				var course = oldCourses[i];
+				var order = course.stageOrder;
+				var courseState=course.courseState;
+				var stageName =course.stageId;
+				var oldClassType=course.classType;
+				if((studentCourseId==course.studentCourseId)  &&(oldStageId!=stageName || classType!=oldClassType || oldFeeType!=feeType))
 				{
-					if(courseState=='002' || courseState=='003' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
+					if(courseState=='002')
 					{
-						showMessage("提示","该学员有未结束课程,当前所报阶段"+stageId+"不可选择新招业绩类型,请重新选择业绩类型",null);
+						showMessage("提示","当前课程为已定班,不能修改课程信息",null);
 						return;
-					}
-					if(courseState=='001')//未定班
+					}else
 					{
-						if(course.feeType=='001')
-						{
-							showMessage("提示","已存在新招阶段"+stageName+",请重新选择业绩类型",null);
-							return;
-						}
-						if(Number(stageOrder)>Number(order))
-						{
-							showMessage("提示","当前所报新招阶段"+stageId+"不是最低阶段"+stageName+",请重新选择阶段",null);
-							return;
-						}
+						continue;
 					}
-				}else if(feeType=='002'|| feeType=='003')
+				}
+				if(courseState=='001' || courseState=='002' || courseState=='003' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 				{
-					if(courseState=='001' || courseState=='002')
+					if(feeType=='001')//新招
 					{
-						if(Number(stageOrder)==Number(order))
+						if(courseState=='002' || courseState=='003' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 						{
-							showMessage("提示","当前所报复读或升学阶段"+stageId+"低于或等于阶段"+stageName+",请重新选择阶段",null);
+							showMessage("提示","该学员有未结束课程,当前所报阶段"+stageId+"不可选择新招业绩类型,请重新选择业绩类型",null);
 							return;
 						}
-					}else if(courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
-					{
-						if(Number(stageOrder)<Number(order))
+						if(courseState=='001')//未定班
 						{
-							showMessage("提示","当前所报复读或升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段",null);
-							return;
+							if(course.feeType=='001')
+							{
+								showMessage("提示","已存在新招阶段"+stageName+",请重新选择业绩类型",null);
+								return;
+							}
+							if(Number(stageOrder)>Number(order))
+							{
+								showMessage("提示","当前所报新招阶段"+stageId+"不是最低阶段"+stageName+",请重新选择阶段",null);
+								return;
+							}
+						}
+					}else if(feeType=='002'|| feeType=='003')
+					{
+						if(courseState=='001' || courseState=='002')
+						{
+							if(Number(stageOrder)==Number(order))
+							{
+								showMessage("提示","当前所报复读或升学阶段"+stageId+"低于或等于阶段"+stageName+",请重新选择阶段",null);
+								return;
+							}
+						}else if(courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
+						{
+							if(Number(stageOrder)<Number(order))
+							{
+								showMessage("提示","当前所报复读或升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段",null);
+								return;
+							}
 						}
 					}
 				}
 			}
-		}
-	} 
-	
-	addCourseInfo();
+		} 
+		addCourseInfo();
+	} else {
+		showMessage("提示", "请您先上传文件！", null);
+		return;
+	}
 });
 
 $("#backBtn").click(function()
@@ -1522,9 +1540,9 @@ $("#addCourse").click(function()
 		
 		studentCourse.gifts=gifts;
 		var obj = $("#courseFm").serializeObject();
-		obj.payDate=$("#payDate").datebox("getValue");
-		studentCourse.course=obj;
-		 
+		obj.payDate = $("#payDate").datebox("getValue");
+		obj.imgUrl = courseImgUrl;
+		studentCourse.course = obj;
 		studentCourse.coupon=JSON.stringify(coupons);
 		return studentCourse;
 	}
@@ -2231,5 +2249,35 @@ $(document).ready(function()
 			}
 			return true;
 		}
-	
-	</script>
+		
+	//常规课上传缴费单
+	$("#uploadBtn").click(function() {
+		var fileName = $("#fileName").filebox("getValue");
+		if(fileName != "" && fileName != null && fileName != undefined) {
+			var schoolId = $("#schoolId").val();
+			var handlerId = $("#handlerId").val();
+			$("#courseFm").form("submit", {
+				url: "/sys/fileUpload?type=course&schoolId="+schoolId+"&handlerId="+handlerId,
+				onSubmit: function () {
+				
+				},
+				success: function (result) {
+				var data = JSON.parse(result);
+					if(data.flag) {
+						courseImgUrl = data.fileId;
+						$.messager.alert('提示', "文件上传成功！", "info", function() {$("#cancelUploadBtn").linkbutton('disable');});
+					} else {
+						$.messager.alert('提示', data.msg);
+					}
+				}
+	    	});
+	    } else {
+	    	$.messager.alert('提示', "请您先选择一个文件！");
+	    }
+	});
+	    
+	//常规课取消上传缴费单
+	$("#cancelUploadBtn").click(function() {
+	    $("#fileName").filebox("setValue", "");
+	});
+</script>

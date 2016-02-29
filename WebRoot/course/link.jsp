@@ -22,7 +22,7 @@
       		</div>
       		 
 			<div class="easyui-panel" style="width:99%;min-width:1100px;" title="学员基础信息">
-	      		<form id="studentFm">
+	      		<form id="studentFm" method="post" enctype="multipart/form-data">
 	      			<input type="hidden" id="studentId" name="studentId" value="<%=studentId%>">
 	      			<input type="hidden" id="studentInfo" name="studentInfo" value="<%=studentInfo%>" />
 	      			<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
@@ -58,7 +58,6 @@
       					<tr>
       					  	<td align="right"><span>上传缴费单：</span></td>
       					 	<td  colspan="5">
-      					 		<input type="hidden" name="imgUrl" id="imgUrl"/>
       					  		<input style="width: 300px; height: 28px;" class="easyui-filebox" name="fileName" id="fileName" data-options="prompt:''"/>
       					  		<a href="javascript:void(0)" class="easyui-linkbutton" id="uploadBtn" iconCls="icon-save" iconCls="icon-save" style="width: 80px; height: 28px;">上传</a>
 	                        	<a href="javascript:void(0)" class="easyui-linkbutton" id="cancelUploadBtn" iconCls="icon-cancel" iconCls="icon-cancel" style="width: 80px; height: 28px;">取消</a>
@@ -136,498 +135,391 @@
 </html>
 <script type="text/javascript">
 	loadStuBaseInfo();
-	var minus=0;//抵扣金额
-	var favorAmount=0;//优惠金额
-	var totalAmount=0;//课程金额
-	var amount=0;//实缴金额
-	var oldAmount=0;//原已缴金额
-	var addAmount=0;//补缴金额
-	var allCoupons=[];//使用抵扣券
-	var allCourseInfos={};//提交课程所有信息
-	var studentCourses=[];//提交课程信息
-	var linkCourses=[];//选择关联已有连报课程
-	var orderCourses=["一","二","三","四","五","六","七","八","九","十"];//连报课程大写顺序
+	var minus = 0;//抵扣金额
+	var favorAmount = 0;//优惠金额
+	var totalAmount = 0;//课程金额
+	var amount = 0;//实缴金额
+	var oldAmount = 0;//原已缴金额
+	var addAmount = 0;//补缴金额
+	var allCoupons = [];//使用抵扣券
+	var allCourseInfos = {};//提交课程所有信息
+	var studentCourses = [];//提交课程信息
+	var linkCourses = [];//选择关联已有连报课程
+	var orderCourses = ["一","二","三","四","五","六","七","八","九","十"];//连报课程大写顺序
 	var num;//连报年数
 	var oldCourses;//学员已有课程
-	var linkCourseT={};//连报金额汇总表
-	var favorPrice=0;//连报总优惠金额
-	function closeDlg()
-	{
+	var linkCourseT = {};//连报金额汇总表
+	var favorPrice = 0;//连报总优惠金额
+	var courseImgUrl = ""; //课程缴费单
+	function closeDlg() {
 		$('#dlg').dialog('close');
 	}
 	
-	function linkCourse()
-	{
+	function linkCourse() {
 		$("#link").combobox('setValue',"");
    	    $("#link").combobox('setText',"");
 		$('#dlg').dialog('open').dialog('setTitle', '关联连报课程');
 		$('#fm').form('clear');
-	
 	}
 	
-	function checkLink()
-	{
-		if(linkCourses.length==0)
-   	    {
+	function checkLink() {
+		if(linkCourses.length == 0) {
    	    	$.messager.alert('提示',"请选择关联课程!");
    	    	$("#link").combobox('setValue',"");
    	    	$("#link").combobox('setText',"");
    	    	return;
    	    }
-    	    
 	}
 	
 	//连报课程选择
-    $('#link').combobox(
-    {    
-       onChange : function(n,o) 
-       {
-    	    if(n==''){return}
-    		num=$("#link").combobox('getText');
+    $('#link').combobox({    
+       onChange : function(n,o) {
+    	    if(n == ''){return}
+    		num = $("#link").combobox('getText');
     		$("#link").combobox('setText',num+"年连报");
-    		if(linkCourses.length>=num)
-    		{
-    			favorPrice=0;
+    		if(linkCourses.length >= num) {
+    			favorPrice = 0;
     			$("#link").combobox('setValue',"");
    	   		 	$("#link").combobox('setText',"");
     			showMessage('提示', "连报年数需大于关联连报课程数,请重新选择", null);
     			return;
-    		}else
-    		{
+    		} else {
     			var data = $(this).combobox('getData');
-				for(var i=0;i<data.length;i++)
-				{
-					 if(num==data[i].linkNum)
-					 {
-						 favorPrice=data[i].favorPrice; 
+				for(var i = 0; i < data.length; i++) {
+					 if(num == data[i].linkNum) {
+						 favorPrice = data[i].favorPrice; 
 					 }
 				}
     			toLinkCourse(num);
     		}
-    		
-       }  
+       	}  
     });  
 
-updateLinkCourses();	
-function updateLinkCourses()
-{
-	var links='<%=linkCourses%>';
-	links = eval("("+links+")");
-	if(links!=null)
-	{	 
-		$("#addArchives").linkbutton({ disabled: true});
-		$("#link").combobox({ disabled: true});
-		num=links.length;
-		linkCourses=links;
-		toLinkCourse(num);
-	} 
-	 
-		$("#link").combobox(
-		{
-			    url:"<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_Link_Favor','schoolId':'"+<%=schoolId%>+"'}",
-				onLoadSuccess : function() { //数据加载完毕事件
+	updateLinkCourses();	
+	function updateLinkCourses() {
+		var links = '<%=linkCourses%>';
+		links = eval("("+links+")");
+		if(links != null) {	 
+			$("#addArchives").linkbutton({ disabled: true});
+			$("#link").combobox({ disabled: true});
+			num = links.length;
+			linkCourses = links;
+			toLinkCourse(num);
+		} 
+		$("#link").combobox({
+			url : "<%=path %>/pubData/qryData.do?param={'queryCode':'Qry_Link_Favor','schoolId':'"+<%=schoolId%>+"'}",
+			onLoadSuccess : function() { //数据加载完毕事件
 				var data = $(this).combobox('getData');
-				 
-				if(data==null || data.length==0)
-				{
-					 showMessage("提示","该校区没有可用连报价格体系",null);
-					 return;
+				if(data == null || data.length == 0) {
+					showMessage("提示","该校区没有可用连报价格体系",null);
+					return;
 				} 
-				for(var i=0;i<data.length;i++)
-				{
-					 if(num==data[i].linkNum)
-					 {
-						 $("#link").combobox('setText',num+"年连报"); 
-					 }
+				for(var i = 0; i < data.length; i++) {
+					if(num == data[i].linkNum) {
+						$("#link").combobox('setText',num+"年连报"); 
+					}
 				}
 			}
 		});
-		
-	 
-}	
-	
-function toLinkCourse(num)
-{
-	var viewFlag ="<%=viewFlag %>";
-	if(viewFlag=="true")
-	{
-		$("#submit").remove();
 	}	
-	for(var n=0;n<5;n++)
-	{
-			var name="#frame"+n;
-		  	if(n<num)
-		  	{
+	
+	function toLinkCourse(num) {
+		var viewFlag = "<%=viewFlag %>";
+		if(viewFlag == "true") {
+			$("#submit").remove();
+		}	
+		for(var n = 0; n < 5; n++) {
+			var name = "#frame" + n;
+		  	if(n < num) {
 		  		var order = orderCourses[n];
-		  		if(n<linkCourses.length)
-		  		{
-		  			var courseT= linkCourses[n];
-		  			var str=JSON.stringify(linkCourses[n]);
-		  			var amountT=courseT.amount;
-		  			oldAmount=oldAmount+Number(amountT);
-		  			if(n==0)
-		  			{
-		  				if(courseT.feeType=='001')
-		  				{
-		  					if(viewFlag=="true")
-							{
+		  		if(n < linkCourses.length) {
+		  			var courseT = linkCourses[n];
+		  			var str = JSON.stringify(linkCourses[n]);
+		  			var amountT = courseT.amount;
+		  			oldAmount = oldAmount+Number(amountT);
+		  			if(n == 0) {
+		  				if(courseT.feeType == '001') {
+		  					if(viewFlag == "true") {
 		  						$(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str+"&viewFlag=true");
-		  					}
-		  					else
-		  					{
+		  					} else {
 		  						$(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
 		  					}	
-		  				}
-		  				else
-		  				{
-		  					if(viewFlag=="true")
-		  					{
+		  				} else {
+		  					if(viewFlag == "true") {
 		  						$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str+"&viewFlag=true");
-		  					}
-		  					else
-		  					{
+		  					} else {
 		  						$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
 		  					}	
 		  				}
-		  			}
-		  			else
-		  			{
-		  				if(viewFlag=="true")
-		  				{
+		  			} else {
+		  				if(viewFlag == "true") {
 		  					$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str+"&viewFlag=true");
-		  				}
-		  				else
-		  				{
+		  				} else {
 		  					$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order+"&courses="+str);
 		  				}	
 		  			}
+		  		} else {
+			  		if(n == 0) {
+			  			$(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
+			  		} else {
+			  			$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
+			  		}
 		  		}
-		  		else
-		  		{
-			  			if(n==0)
-			  			{
-			  			    $(name).attr('src',"/sys/course/newCourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
-			  			}else
-			  			{
-			  				$(name).attr('src',"/sys/course/linkcourse.jsp?studentId="+<%=studentId%>+"&schoolId="+<%=schoolId%>+"&name="+n+"&order="+order);
-			  			}
-		  		 }
-		  			
 		  		$(name).css("display","block");
-		  	}else
-		  	{
+		  	}else {
 		  	    $(name).css("display","none");
 		  	}
 		  	$("#oldAmount").html(oldAmount);
 		}
-}
+	}
 
-
-
-function validateCourses(studentCourses)
-{
-	var oldCourses=getOldCourse();
-	
-	for(var i=0;i<studentCourses.length;i++)
-	{
-		var course=studentCourses[i].course;
-		
-		var stageId =course.stageId;
-		var feeType =course.feeType;
-		var studentCourseId=course.studentCourseId;
-		var stageOrder = course.stageOrder;
-		var classType=course.classType;
-		
-		//校验本次购买课程是否有相同
-		for(var m=0;m<studentCourses.length;m++)
-		{
-			var courseT=studentCourses[m].course;
-			var stageIdT =courseT.stageId;
-			
-			if(stageId==stageIdT && i!=m)
-			{
-				showMessage("提示",stageId+"阶段只能购买一次",null);
-				return false;
-			}
-		}
-		
-		for(var n=0;n<oldCourses.length;n++)
-		{
-			var oldCourse = oldCourses[n];
-			var order = oldCourse.stageOrder;
-			var courseState=oldCourse.courseState;
-			var stageName =oldCourse.stageId;
-			var oldFeeType =oldCourse.oldFeeType;
-			var oldClassType=oldCourse.classType;
-			
-			if((studentCourseId==oldCourse.studentCourseId)  &&(stageId!=stageName || classType!=oldClassType || oldFeeType!=feeType))
-			{
-				if(courseState=='002')
-				{
-					showMessage("提示","当前课程"+orderCourses[m]+classType+"为已定班,不能修改课程信息",null);
-					return;
-				}else
-				{
-					continue;
+	function validateCourses(studentCourses) {
+		var oldCourses = getOldCourse();
+		for(var i = 0; i < studentCourses.length; i++) {
+			var course = studentCourses[i].course;
+			var stageId = course.stageId;
+			var feeType = course.feeType;
+			var studentCourseId = course.studentCourseId;
+			var stageOrder = course.stageOrder;
+			var classType = course.classType;
+			//校验本次购买课程是否有相同
+			for(var m = 0;m < studentCourses.length; m++) {
+				var courseT = studentCourses[m].course;
+				var stageIdT = courseT.stageId;
+				if(stageId == stageIdT && i != m) {
+					showMessage("提示",stageId+"阶段只能购买一次",null);
+					return false;
 				}
 			}
-			if(studentCourseId==oldCourse.studentCourseId  &&stageId==stageName && classType==oldClassType && oldFeeType==feeType)
-			{
-				if(courseState=='002')
-				{
-					showMessage("提示","当前课程"+orderCourses[m]+classType+"为已定班,不能修改课程信息",null);
-					return;
-				}else
-				{
-					continue;
+			for(var n = 0; n < oldCourses.length; n++) {
+				var oldCourse = oldCourses[n];
+				var order = oldCourse.stageOrder;
+				var courseState = oldCourse.courseState;
+				var stageName = oldCourse.stageId;
+				var oldFeeType = oldCourse.oldFeeType;
+				var oldClassType = oldCourse.classType;
+				if((studentCourseId == oldCourse.studentCourseId) 
+					&& (stageId != stageName || classType != oldClassType || oldFeeType != feeType)) {
+					if(courseState == '002') {
+						showMessage("提示","当前课程"+orderCourses[m]+classType+"为已定班,不能修改课程信息",null);
+						return;
+					} else {
+						continue;
+					}
 				}
-			}
-				
-			if(courseState=='001' || courseState=='002' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
-			{
-				if(feeType=='001')//新招
-				{ 
-					if(courseState=='002' || courseState=='003' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
-					{
+				if(studentCourseId == oldCourse.studentCourseId  
+					&& stageId == stageName && classType == oldClassType && oldFeeType == feeType) {
+					if(courseState == '002') {
+						showMessage("提示","当前课程"+orderCourses[m]+classType+"为已定班,不能修改课程信息",null);
+						return;
+					} else {
+						continue;
+					}
+				}
+				if(courseState == '001' || courseState == '002' || courseState == '003' 
+					|| courseState == '004' || courseState == '005' || courseState == '006' || courseState == '007') {
+					if(feeType == '001') { //新招
+					if(courseState == '002' || courseState == '003' || courseState == '004' 
+						|| courseState == '005' || courseState == '006' || courseState == '007') {
 						showMessage("提示","该学员有未结束课程,当前所报阶段"+stageId+"不可选择新招业绩类型,请重新选择业绩类型",null);
 						return false;
 					}
-					if(courseState=='001')//未定班
-					{
-						if(oldCourse.feeType=='001')//已有新招
-						{
+					if(courseState == '001') { //未定班
+						if(oldCourse.feeType == '001') { //已有新招
 							showMessage("提示","已存在新招阶段"+stageName+",请重新选择业绩类型",null);
 							return false;
 						}
-						if(Number(stageOrder)>Number(order))
-						{
+						if(Number(stageOrder) > Number(order)) {
 							showMessage("提示","当前所报新招阶段"+stageId+"不是最低阶段"+stageName+",请重新选择阶段",null);
 							return false;
 						}
 					}
-				}else if(feeType=='002'|| feeType=='003')
-				{
-					if(courseState=='001' || courseState=='002')
-					{
-						if(Number(stageOrder)==Number(order))
-						{
+				} else if(feeType == '002'|| feeType == '003') {
+					if(courseState == '001' || courseState == '002') {
+						if(Number(stageOrder) == Number(order)) {
 							showMessage("提示","当前所报复读或升学阶段"+stageId+"低于或等于阶段"+stageName+",请重新选择阶段",null);
 							return false;
 						}
-					}else if(courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
-					{
-						if(Number(stageOrder)<Number(order))
-						{
+					}else if(courseState == '003' || courseState == '004' 
+						|| courseState == '005' || courseState == '006' || courseState == '007') {
+						if(Number(stageOrder) < Number(order)) {
 							showMessage("提示","当前所报复读或升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段",null);
 							return false;
 						}
 					}
-					
 				}
 			}
 		}
-	}
-	return true;
-}
-
-/**
- * 判断新招是不是最低阶段
- */
-function checkNewCourse(courseT)
-{
-	var course=courseT.course;
-	if(course.feeType=='001')
-	{
-		newCourse=course;
 		return true;
 	}
-	if(newCourse!=null)
-	{
-		var stageOrder=newCourse.stageOrder;
-		var order =course.stageOrder;
-		if(Number(stageOrder)>Number(order))
-		{
-			 showMessage('提示', "本次报名新招阶段"+newCourse.stageId+"不是最低阶段", null);
-			 return false;
-		}
-	}
-	return true;
-}
 
-/**
- * 判断连报课程是否在同一价格体系
- */
-function checkCoursePrice(studentCourses)
-{
-	var id;
-	for(var i=0;i<studentCourses.length;i++)
-	{
-		var course=studentCourses[i].course;
-		var priceId=course.coursePriceId;
-		if(i==0)
-		{
-			id=priceId;
+	/**
+	 * 判断新招是不是最低阶段
+	 */
+	function checkNewCourse(courseT) {
+		var course = courseT.course;
+		if(course.feeType == '001') {
+			newCourse = course;
+			return true;
 		}
-		if(id!==priceId)
-		{
-			 showMessage('提示', "本次连报阶段不在同一价格体系中,请重试", null);
-			 return false;
+		if(newCourse != null) {
+			var stageOrder = newCourse.stageOrder;
+			var order = course.stageOrder;
+			if(Number(stageOrder) > Number(order)) {
+				 showMessage('提示', "本次报名新招阶段"+newCourse.stageId+"不是最低阶段", null);
+				 return false;
+			}
 		}
+		return true;
 	}
-	return true;
-}
-var newCourse;//新招课程阶段
-	
-	$("#submit").click(function()
-	{
-		 if(!checkParam())
-		 {
-			 return false;
-		 }	
-		countAmount();
-		 if(favorPrice<favorAmount)
-		 {
-			showMessage('提示', "实际优惠总金额:"+favorAmount+"元大于连报优惠总金额:"+favorPrice+"元,请核对金额", null);
-		 	return false;
-		 }
-		 studentCourses=[];
-		 for(var n=0;n<num;n++)
-		 {
-			var name="frame"+n;
-	   		var courseT = window.frames[name].window.build();
-	   		if(courseT==undefined)
-	   		{
-	   			showMessage('提示', "课程信息填写不完整", null);
-	   			return;
-	   		}
-	   		
-	   	
-	   		
-	   		if(!checkNewCourse(courseT))
-	   		{
-	   			return; 
-	   		}
-	   		 
-	   		studentCourses.push(courseT);
-		 }
-		 if(!checkCoursePrice(studentCourses))
-		 {
-			 return ;
-		 }
-		 
-		if(!validateCourses(studentCourses))
-		{
+
+	/**
+	 * 判断连报课程是否在同一价格体系
+	 */
+	function checkCoursePrice(studentCourses) {
+		var id;
+		for(var i = 0; i < studentCourses.length; i++) {
+			var course = studentCourses[i].course;
+			var priceId = course.coursePriceId;
+			if(i == 0) {
+				id=priceId;
+			}
+			if(id != priceId) {
+				 showMessage('提示', "本次连报阶段不在同一价格体系中,请重试", null);
+				 return false;
+			}
+		}
+		return true;
+	}
+	var newCourse;//新招课程阶段
+	$("#submit").click(function() {
+		var fileName = $("#fileName").filebox("getValue");
+		if(fileName != "" && fileName != null && fileName != undefined) {
+			if(courseImgUrl == "" || courseImgUrl == null || courseImgUrl == undefined) {
+				flag = false;
+			}
+		}
+		if(flag) {
+			if(!checkParam()) {
+				return false;
+			}
+			countAmount();
+			if(favorPrice<favorAmount) {
+				showMessage('提示', "实际优惠总金额:"+favorAmount+"元大于连报优惠总金额:"+favorPrice+"元,请核对金额", null);
+			 	return false;
+			}
+			studentCourses = [];
+			for(var n = 0; n < num; n++) {
+				var name = "frame" + n;
+		   		var courseT = window.frames[name].window.build();
+		   		if(courseT == undefined) {
+		   			showMessage('提示', "课程信息填写不完整", null);
+		   			return;
+		   		}
+		   		if(!checkNewCourse(courseT)) {
+		   			return; 
+		   		}
+		   		studentCourses.push(courseT);
+			}
+			if(!checkCoursePrice(studentCourses)) {
+				return ;
+			}
+			if(!validateCourses(studentCourses)) {
+				return;
+			}
+			allCourseInfos.studentCourses=studentCourses;
+			allCourseInfos.linkCourseT=linkCourseT;
+		    var str = JSON.stringify( allCourseInfos);
+		    $.ajax({
+	    		url: "/sys/course/addLinkCourses.do",
+	    		data: "param=" +str,
+	    		dataType: "json",
+	    		async: true,
+	    		beforeSend: function() {
+	    	    	showProgressLoader("正在添加课程信息，请稍等……",1000);
+	    	    },
+	    	    success: function (data) {
+	    	    	hideProgressLoader();
+	    	    	var flag = data.flag;
+	    	        if(flag) {
+	    	            showMessage('提示', "成功添加课程信息！", function() {window.history.back();});
+	    	        } else {
+	    	            showMessage('提示', "添加课程信息失败", null);
+	    	        }
+	    	    },
+			    error:function() {
+			        hideProgressLoader();
+			        showMessage('提示', "添加课程信息失败", null);
+			    }
+	  		});
+		} else {
+			showMessage("提示", "请您先上传文件！", null);
 			return;
 		}
-		
-		allCourseInfos.studentCourses=studentCourses;
-		allCourseInfos.linkCourseT=linkCourseT;
-	    var str = JSON.stringify( allCourseInfos);
-	    $.ajax({
-    			url: "/sys/course/addLinkCourses.do",
-    			data: "param=" +str,
-    			dataType: "json",
-    			async: true,
-    			beforeSend: function()
-    	    	{
-    	    		showProgressLoader("正在添加课程信息，请稍等……",1000);
-    	    	},
-    	    	success: function (data) {
-    	    		
-    	    		hideProgressLoader();
-    	    		var flag = data.flag
-    	    		
-    	            if(flag)
-    	            {
-    	            	showMessage('提示', "成功添加课程信息！", function() {window.history.back();});
-    	            }
-    	            else
-    	            {
-    	            	showMessage('提示', "添加课程信息失败", null);
-    	            }
-    	        },
-		        error:function(){
-		        	hideProgressLoader();
-		        	showMessage('提示', "添加课程信息失败", null);
-		        }
-    		});
-			
 	});
 	
-	function countAmount()
-	{
-		  minus=0;//抵扣金额
-		  favorAmount=0;//优惠金额
-		  totalAmount=0;//课程金额
-		  amount=0;//实缴金额
- 
-		  for(var n=0;n<num;n++)
-		  {
-				var name="frame"+n;
-		  			 
-		   		var minusT = window.frames[name].window.getMinus();
-		   		var favorAmountT = window.frames[name].window.getFavorAmount();
-		   		var totalAmountT = window.frames[name].window.getTotalAmount();
-		   		var amountT = window.frames[name].window.getAmount();
-		   		if(totalAmountT=='' || totalAmountT=='undefined')
-		   		{
-		   			continue;
-		   		}
-		   		 minus=minus+Number(minusT);
-		   		 favorAmount=favorAmount+Number(favorAmountT);//优惠金额
-				 totalAmount=totalAmount+Number(totalAmountT);//课程金额
-				 amount=amount+Number(amountT);//实缴金额
-				   
-		    }
-			$("#minus").html(minus);
-			$("#favorAmount").html(favorAmount);
-			$("#totalAmount").html(totalAmount);
-			$("#amount").html(amount);
-			$("#addAmount").html(amount-oldAmount);
+	function countAmount() {
+		minus = 0;//抵扣金额
+		favorAmount = 0;//优惠金额
+		totalAmount = 0;//课程金额
+		amount = 0;//实缴金额
+		for(var n = 0; n < num; n++) {
+			var name = "frame" + n;
+			var minusT = window.frames[name].window.getMinus();
+			var favorAmountT = window.frames[name].window.getFavorAmount();
+			var totalAmountT = window.frames[name].window.getTotalAmount();
+			var amountT = window.frames[name].window.getAmount();
+		   	if(totalAmountT == '' || totalAmountT == 'undefined') {
+		   		continue;
+		   	}
+		   	minus = minus + Number(minusT);
+		   	favorAmount = favorAmount+Number(favorAmountT);//优惠金额
+			totalAmount = totalAmount+Number(totalAmountT);//课程金额
+			amount = amount + Number(amountT);//实缴金额
+		}
+		$("#minus").html(minus);
+		$("#favorAmount").html(favorAmount);
+		$("#totalAmount").html(totalAmount);
+		$("#amount").html(amount);
+		$("#addAmount").html(amount-oldAmount);
 			
-			linkCourseT={};//清除
-			linkCourseT.minusAmount=minus;
-			linkCourseT.totalAmount=totalAmount;
-			linkCourseT.favorAmount=favorAmount;
-			linkCourseT.amount=amount;
-			linkCourseT.oldAmount=oldAmount;
-			linkCourseT.addAmount=amount-oldAmount;
-			linkCourseT.linkType=num;
-			linkCourseT.studentId='<%=studentId%>';
+		linkCourseT = {};//清除
+		linkCourseT.minusAmount = minus;
+		linkCourseT.totalAmount = totalAmount;
+		linkCourseT.favorAmount = favorAmount;
+		linkCourseT.amount = amount;
+		linkCourseT.oldAmount = oldAmount;
+		linkCourseT.addAmount = amount - oldAmount;
+		linkCourseT.linkType = num;
+		linkCourseT.imgUrl = courseImgUrl;
+		linkCourseT.studentId = '<%=studentId%>';
 	}
  
-	function checkFavorAmount()
-	{
-		countAmount()
-		if(favorPrice!=favorAmount)
-		{
+	function checkFavorAmount() {
+		countAmount();
+		if(favorPrice != favorAmount) {
 			 showMessage('提示', "连报优惠总金额为"+favorPrice+"元,实际优惠总金额为"+favorAmount+"元,请核对金额", null);
 			 return;
 		}
 	}
 	//获取所有连报课程已使用的抵扣券
-	function getAllCoupon()
-	{
-		 allCoupons=[];
-		 for(var n=0;n<num;n++)
-		 {
-			var name="frame"+n;
+	function getAllCoupon() {
+		allCoupons = [];
+		for(var n = 0; n < num; n++) {
+			var name = "frame" + n;
 	   		var couponsT = window.frames[name].window.coupons;
-	   		for(var m=0;m<couponsT.length;m++)
-	   		{
-	   			 allCoupons.push(couponsT[m]);
+	   		for(var m = 0; m < couponsT.length; m++) {
+				allCoupons.push(couponsT[m]);
 	   		}
-		 }
-		 return allCoupons;
+		}
+		return allCoupons;
 	}
 	
-	function loadStuBaseInfo()
-	{
-		var studentInfo =$("#studentInfo").val();
-		if(studentInfo.indexOf(";;")!=-1)
-		{
+	function loadStuBaseInfo() {
+		var studentInfo = $("#studentInfo").val();
+		if(studentInfo.indexOf(";;") != -1) {
 			studentInfo =studentInfo.split(";;");
-			var tr1 =$("#addStudentTd").find("tr:eq(0)");
+			var tr1 = $("#addStudentTd").find("tr:eq(0)");
 		    tr1.find("td:eq(1)").find("span").html(studentInfo[0]);
 		    tr1.find("td:eq(3)").find("span").html(studentInfo[2]);
 		    tr1.find("td:eq(5)").find("span").html(studentInfo[3]);
@@ -635,26 +527,52 @@ var newCourse;//新招课程阶段
 		}
 	}
 	
-	function showMsg(msg)
-	{
+	function showMsg(msg) {
 		showMessage('提示',msg, null);
 	}
 	
-	function  checkParam()
-	{
-		for(var n=0;n<num;n++)
-		{
-			var name="frame"+n;
-	   		if(!window.frames[name].window.checkParam(n))
-	   		{
+	function  checkParam() {
+		for(var n = 0; n < num; n++) {
+			var name = "frame" + n;
+	   		if(!window.frames[name].window.checkParam(n)) {
 	   			return false;
 	   		}	
 		}
 		return true;
 	}
 	
-	function scrolltoFrame(nums,top)
-	{
+	function scrolltoFrame(nums,top) {
 		$("html,body").animate({scrollTop: document.getElementById("frame"+nums).offsetTop+top-50}, 100);	
 	}
-	</script>
+	
+	//常规课上传缴费单
+	$("#uploadBtn").click(function() {
+		var fileName = $("#fileName").filebox("getValue");
+		if(fileName != "" && fileName != null && fileName != undefined) {
+			var schoolId = $("#schoolId").val();
+			var handlerId = $("#handlerId").val();
+			$("#studentFm").form("submit", {
+				url: "/sys/fileUpload?type=course&schoolId="+schoolId+"&handlerId="+handlerId,
+				onSubmit: function () {
+				
+				},
+				success: function (result) {
+				var data = JSON.parse(result);
+					if(data.flag) {
+						courseImgUrl = data.fileId;
+						$.messager.alert('提示', "文件上传成功！", "info", function() {$("#cancelUploadBtn").linkbutton('disable');});
+					} else {
+						$.messager.alert('提示', data.msg);
+					}
+				}
+	    	});
+	    } else {
+	    	$.messager.alert('提示', "请您先选择一个文件！");
+	    }
+	});
+	    
+	//常规课取消上传缴费单
+	$("#cancelUploadBtn").click(function() {
+	    $("#fileName").filebox("setValue", "");
+	});
+</script>

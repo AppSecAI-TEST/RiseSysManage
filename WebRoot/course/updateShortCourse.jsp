@@ -51,7 +51,7 @@
 	</head>
 
 	<body>
-	<form id="courseFm">
+	<form id="courseFm" method="post" enctype="multipart/form-data">
 		<div class="easyui-panel" style="width: 1200px" title="学员基础信息">
 			<input type="hidden" id="studentInfo" name="studentInfo" value="<%=studentInfo%>" />
 			<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId%>" />	
@@ -183,11 +183,10 @@
 								<span>上传缴费单：</span>
 							</td>
 							<td colspan="6">
-								<input style="width: 300px; height: 28px;"
-									class="easyui-filebox" name="file2" data-options="prompt:''">
-								<a href="javascript:void(0)" id="viewStudent"
-									class="easyui-linkbutton" iconCls="icon-redo"
-									style="width: 100px;">查看缴费单</a>
+								<input style="width: 300px; height: 25px;" class="easyui-filebox" id="fileName" name="fileName" data-options="prompt:''"/>
+      					  	<a href="javascript:void(0)" class="easyui-linkbutton" id="uploadBtn" iconCls="icon-save" iconCls="icon-save" style="width: 80px; height: 25px;">上传</a>
+	                        <a href="javascript:void(0)" class="easyui-linkbutton" id="cancelUploadBtn" iconCls="icon-cancel" iconCls="icon-cancel" style="width: 80px; height: 25px;">取消</a>
+								<a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">查看缴费单</a>
 							</td>
 						</tr>
 					</table>
@@ -286,6 +285,7 @@ var advisters=getAdvister();
 $("#s_schooldA").combobox({data:schools});
 $("#s_schooldB").combobox({data:schools});
 
+var courseImgUrl = "";
   
 var giftFlag=false;//赠品、赠课是否已消耗
 var favorIds="";//短期课其他优惠
@@ -444,14 +444,22 @@ function initOldCourse()
 
 
 //提交
-$("#submitBtn").click(function() 
-{
-	if($("#payDate").datebox("getValue")=="")
-	{
-		showMessage("提示","请选择缴费时间",null);
-		return false;
+$("#submitBtn").click(function() {
+	var flag = true;
+	var fileName = $("#fileName").filebox("getValue");
+	if(fileName != "" && fileName != null && fileName != undefined) {
+		if(courseImgUrl == "" || courseImgUrl == null || courseImgUrl == undefined) {
+			flag = false;
+		}
 	}
-	addCourseInfo();
+	if(flag) {
+		if($("#payDate").datebox("getValue")=="")
+		{
+			showMessage("提示","请选择缴费时间",null);
+			return false;
+		}
+		addCourseInfo();
+	}
 });
 
 function addCourseInfo()
@@ -501,14 +509,15 @@ $("#backBtn").click(function()
 	function build()
 	{
 	
-		studentCourse={};                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-		var gifts=[];
+		studentCourse = {};                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+		var gifts = [];
 		var obj = $("#courseFm").serializeObject();
-		obj.payDate=$("#payDate").datebox("getValue");
-		obj.favorType=favorIds;
-		studentCourse.course=obj;
-		studentCourse.gifts=gifts; 
-		studentCourse.coupon=JSON.stringify(coupons);
+		obj.payDate = $("#payDate").datebox("getValue");
+		obj.favorType = favorIds;
+		obj.imgUrl = courseImgUrl;
+		studentCourse.course = obj;
+		studentCourse.gifts = gifts; 
+		studentCourse.coupon = JSON.stringify(coupons);
 		return studentCourse;
 	}
 		
@@ -624,4 +633,35 @@ $("#backBtn").click(function()
 			}	
 			return true;
 		}
+		
+	//常规课上传缴费单
+	$("#uploadBtn").click(function() {
+		var fileName = $("#fileName").filebox("getValue");
+		if(fileName != "" && fileName != null && fileName != undefined) {
+			var schoolId = $("#schoolId").val();
+			var handlerId = $("#handlerId").val();
+			$("#courseFm").form("submit", {
+				url: "/sys/fileUpload?type=course&schoolId="+schoolId+"&handlerId="+handlerId,
+				onSubmit: function () {
+				
+				},
+				success: function (result) {
+				var data = JSON.parse(result);
+					if(data.flag) {
+						courseImgUrl = data.fileId;
+						$.messager.alert('提示', "文件上传成功！", "info", function() {$("#cancelUploadBtn").linkbutton('disable');});
+					} else {
+						$.messager.alert('提示', data.msg);
+					}
+				}
+	    	});
+	    } else {
+	    	$.messager.alert('提示', "请您先选择一个文件！");
+	    }
+	});
+	    
+	//常规课取消上传缴费单
+	$("#cancelUploadBtn").click(function() {
+	    $("#fileName").filebox("setValue", "");
+	});
 	</script>

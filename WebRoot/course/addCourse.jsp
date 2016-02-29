@@ -39,7 +39,7 @@
 	</head>
 
 	<body>
-		<form id="courseFm">
+		<form id="courseFm" method="post" enctype="multipart/form-data">
 		<div class="easyui-panel" style="width: 1200px" title="学员基础信息">
 			<input type="hidden" id="studentInfo" name="studentInfo" value="<%=studentInfo%>" />
 			<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId%>" />	
@@ -187,8 +187,7 @@
 						<tr>
       					  	<td align="right"><span>上传缴费单：</span></td>
       					  	<td colspan="5">
-      					  		<input type="hidden" name="imgUrl" id="imgUrl"/>
-      					  		<input style="width: 300px; height: 25px;" class="easyui-filebox" name="fileName" id="fileName" data-options="prompt:''"/>
+      					  		<input style="width: 300px; height: 25px;" class="easyui-filebox" id="fileName" name="fileName" data-options="prompt:''"/>
       					  		<a href="javascript:void(0)" class="easyui-linkbutton" id="uploadBtn" iconCls="icon-save" iconCls="icon-save" style="width: 80px; height: 25px;">上传</a>
 	                        	<a href="javascript:void(0)" class="easyui-linkbutton" id="cancelUploadBtn" iconCls="icon-cancel" iconCls="icon-cancel" style="width: 80px; height: 25px;">取消</a>
       					  		<a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">查看缴费单</a>
@@ -641,11 +640,10 @@
 								<span>上传缴费单：</span>
 							</td>
 							<td colspan="6">
-								<input style="width: 300px; height: 25px;"
-									class="easyui-filebox" name="file2" data-options="prompt:''">
-								<a href="javascript:void(0)" id="viewStudent"
-									class="easyui-linkbutton" iconCls="icon-redo"
-									style="width: 100px;">查看缴费单</a>
+      					  		<input style="width: 300px; height: 25px;" class="easyui-filebox" id="shortFileName" name="shortFileName" data-options="prompt:''"/>
+      					  		<a href="javascript:void(0)" class="easyui-linkbutton" id="shortUploadBtn" iconCls="icon-save" iconCls="icon-save" style="width: 80px; height: 25px;">上传</a>
+	                        	<a href="javascript:void(0)" class="easyui-linkbutton" id="shortCancelUploadBtn" iconCls="icon-cancel" iconCls="icon-cancel" style="width: 80px; height: 25px;">取消</a>
+								<a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">查看缴费单</a>
 							</td>
 						</tr>
 					</table>
@@ -734,22 +732,20 @@ var minus = 0;//抵扣金额
 var favorAmount = 0;//优惠金额
 var totalAmount = 0;//课程金额
 var amount = 0;//实缴金额
-var favorIds="";//短期课其他优惠
+var favorIds = "";//短期课其他优惠
 
 initPayDate();
-var schools=getSchools();
-var teachers=getTeachers();
-var giftFlag=false; 
+var schools = getSchools();
+var teachers = getTeachers();
+var giftFlag = false;
 
-
-
+var courseImgUrl = ""; //课程缴费单
 
 $("#adviserA_school").combobox({data:schools});
 $("#adviserB_school").combobox({data:schools});
 
 $("#adviserTeacherA_school").combobox({data:schools});
 $("#adviserTeacherB_school").combobox({data:schools});
-
 
 $("#activeSchool").combobox({data:schools});
 $("#c_schoolA").combobox({data:schools});
@@ -769,62 +765,56 @@ $("#s_schooldA").combobox({data:schools});
 $("#s_schooldB").combobox({data:schools});
 
 loadStuBaseInfo();
-
-	$("#adviserA_school").combobox({
-		onChange:function(){
-			var sId =$("#adviserA_school").combobox("getValue");
-			var url="<%=path %>/pubData/qryStaffList.do?post=16,17"+"&schoolId="+sId;
-			$("#adviserA").combobox({
-				valueField:'staffId', 
-				textField:'userName', 
-				url:url
-			});
-			 
-		}
-	})
+$("#adviserA_school").combobox({
+	onChange: function(){
+		var sId = $("#adviserA_school").combobox("getValue");
+		var url = "<%=path %>/pubData/qryStaffList.do?post=16,17"+"&schoolId="+sId;
+		$("#adviserA").combobox({
+			valueField:'staffId', 
+			textField:'userName', 
+			url:url
+		});
+	}
+});
 	
-	$("#adviserB_school").combobox({
-		onChange:function(){
-			var sId =$("#adviserB_school").combobox("getValue");
-			var url="<%=path %>/pubData/qryStaffList.do?post=16,17"+"&schoolId="+sId;
-			$("#adviserB").combobox({
-				valueField:'staffId', 
-				textField:'userName', 
-				url:url
-			});
-			 
-		}
-	})
-	
+$("#adviserB_school").combobox({
+	onChange:function(){
+		var sId =$("#adviserB_school").combobox("getValue");
+		var url="<%=path %>/pubData/qryStaffList.do?post=16,17"+"&schoolId="+sId;
+		$("#adviserB").combobox({
+			valueField:'staffId', 
+			textField:'userName', 
+			url:url
+		});
+		 
+	}
+});
 	
 $("#adviserTeacherA_school").combobox({
-		onChange:function(){
-			var sId =$("#adviserTeacherA_school").combobox("getValue");
-			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
-			$("#adviserTeacherA").combobox({
-				url:urls
-			});
-		}
-	})
+	onChange:function(){
+		var sId = $("#adviserTeacherA_school").combobox("getValue");
+		var urls = "<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+		$("#adviserTeacherA").combobox({
+			url:urls
+		});
+	}
+});
 	
-	$("#adviserTeacherB_school").combobox({
-		onChange:function(){
-			var sId =$("#adviserTeacherB_school").combobox("getValue");
-			var urls ="<%=path%>/pubData/qryTeacherList.do?schoolId="+sId;
-			$("#adviserTeacherB").combobox({
-				url:urls
-			});
-		}
-	})
+$("#adviserTeacherB_school").combobox({
+	onChange:function(){
+		var sId =$("#adviserTeacherB_school").combobox("getValue");
+		var urls ="<%=path%>/pubData/qryTeacherList.do?schoolId="+sId;
+		$("#adviserTeacherB").combobox({
+			url:urls
+		});
+	}
+});
 	
-	//业绩类型修改	
-$("#feeType").combobox(
-{
-	onChange : function(n, o)
-	{
-		var type=$("#feeType").combobox("getValue");
-		if(type=='001')
-		{
+//业绩类型修改	
+$("#feeType").combobox({
+	onChange : function(n, o) {
+		var type = $("#feeType").combobox("getValue");
+		if(type == '001') {
 			$("#womDiv").css("display","block");
 			$("#giftDiv").css("display","block");
 			$("#adviserDiv").css("display","table-row");
@@ -832,8 +822,7 @@ $("#feeType").combobox(
 			//$("#adviserTeacherA").combobox("setValue","");
 			//$("#adviserTeacherB").combobox("setValue","");
 			clearData("adviserTeacherDiv");
-		}else if(type=='002')
-		{
+		} else if(type == '002') {
 			$("#womDiv").css("display","none");
 			$("#giftDiv").css("display","block");
 			$("#adviserDiv").css("display","none");
@@ -841,10 +830,8 @@ $("#feeType").combobox(
 			//$("#adviserA").combobox("setValue","");
 			//$("#adviserB").combobox("setValue","");
 			clearData("adviserDiv");
-		}else if(type=='003')
-		{
-			if(giftFlag)
-			{
+		} else if(type == '003') {
+			if(giftFlag) {
 				showMessage('提示', "赠品或赠课已消耗,业绩类型不能修改为复读",null);
 				$("#feeType").combobox("setValue",o);
 				return;
@@ -858,109 +845,85 @@ $("#feeType").combobox(
 			clearData("adviserTeacherDiv");
 		}
 	}
-	 
 });
 	
 $('#parentType').combobox({
-	 onChange:function(n,o)
-		{
-		     $("#td0").css('display','none');
-		 	 $("#td1").css('display','none');
-             $("#td2").css('display','none');
-             $("#td3").css('display','none');
-             $("#granter").textbox({disabled:true});
-             var isGet = $("input[name='isGetY']:checked").val();
-       		if(n=='COUPON')//券类
-       		{
-			    var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift_Type\",parentType:\""+n+"\"}";
-	       		$("#giftType").combobox(
-	       		{
-	        		url : urls,//返回json数据的url
-	        		valueField : "giftType",
-	        		textField :  "typeName",
-	        		panelHeight : "auto",
-	        		onLoadSuccess : function ()
-	        		{ //数据加载完毕事件
-	                    var data = $('#giftType').combobox('getData');
-	                    if (data.length > 0)
-	                    {
+	onChange:function(n,o) {
+		$("#td0").css('display','none');
+		$("#td1").css('display','none');
+		$("#td2").css('display','none');
+		$("#td3").css('display','none');
+		$("#granter").textbox({disabled:true});
+		var isGet = $("input[name='isGetY']:checked").val();
+		if(n == 'COUPON') {//券类
+			var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift_Type\",parentType:\""+n+"\"}";
+			$("#giftType").combobox({
+				url : urls,//返回json数据的url
+				valueField : "giftType",
+				textField :  "typeName",
+				panelHeight : "auto",
+				onLoadSuccess : function () { //数据加载完毕事件
+					var data = $('#giftType').combobox('getData');
+					if (data.length > 0) {
 	                      //  $("#giftId").combobox('select', data[0].param2);
-	                    }
-	                    $("#td0").css('display','block');
-	                    $("#td1").css('display','block');
-	                  
-	                    if(isGet=='Y')
-	                    {
-	                    	 $("#td2").css('display','block');
-	                   		 $("#td3").css('display','block');
-	                    }
-	                  
 	                }
-	        	});
-       		}else if(n=='GOODS')//实物类
-       		{
-       			$("#td1").css('display','block');
-			    var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}";
-	       		$("#giftId").combobox(
-	       		{
-	        		url : urls,//返回json数据的url
-	        		valueField : "giftId",
-	        		textField :  "giftName",
-	        		panelHeight : "auto",
-	        		onLoadSuccess : function ()
-	        		{ //数据加载完毕事件
-	                    var data = $('#giftId').combobox('getData');
-	                    if (data.length > 0)
-	                    {
+					$("#td0").css('display','block');
+					$("#td1").css('display','block');
+					if(isGet == 'Y') {
+	                	$("#td2").css('display','block');
+						$("#td3").css('display','block');
+					}
+				}
+	        });
+       	} else if(n == 'GOODS') { //实物类
+			$("#td1").css('display','block');
+			var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}";
+			$("#giftId").combobox({
+				url : urls,//返回json数据的url
+				valueField : "giftId",
+				textField :  "giftName",
+				panelHeight : "auto",
+				onLoadSuccess : function () { //数据加载完毕事件
+					var data = $('#giftId').combobox('getData');
+					if (data.length > 0) {
 	                      //  $("#giftId").combobox('select', data[0].param2);
-	                    }
 	                }
-	        	});
-       		}else if(n=='TEXTBOOK')//实物类
-       		{
-       			$("#td1").css('display','block');
-			    var urls="/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}";
-	       		$("#giftId").combobox(
-	       		{
-	        		url : urls,//返回json数据的url
-	        		valueField : "giftId",
-	        		textField :  "giftName",
-	        		panelHeight : "auto",
-	        		onLoadSuccess : function ()
-	        		{ //数据加载完毕事件
-	                    var data = $('#giftId').combobox('getData');
-	                    if (data.length > 0)
-	                    {
-	                      //  $("#giftId").combobox('select', data[0].param2);
-	                    }
-	                }
-	        	});
-       		}
-       		 
-       		  if(isGet=='Y')
-              {
-             	  $("#granter").textbox({disabled:false});
-              }
-		},
-		url:"<%=path%>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE"
-	});
+	            }
+	        });
+       	} else if(n == 'TEXTBOOK') { //实物类
+			$("#td1").css('display','block');
+			var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}";
+			$("#giftId").combobox({
+				url : urls,//返回json数据的url
+				valueField : "giftId",
+				textField :  "giftName",
+				panelHeight : "auto",
+				onLoadSuccess : function () { //数据加载完毕事件
+					var data = $('#giftId').combobox('getData');
+					if (data.length > 0) {
+	                	//  $("#giftId").combobox('select', data[0].param2);
+					}
+				}
+			});
+		}
+		if(isGet == 'Y') {
+			$("#granter").textbox({disabled:false});
+		}
+	},
+	url:"<%=path%>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE"
+});
 
-$('#giftType').combobox(
-{
-	onChange : function(n, o) 
-	{
+$('#giftType').combobox({
+	onChange : function(n, o) {
 		var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+ n + "\"}";
-		$("#giftId").combobox(
-		{
+		$("#giftId").combobox({
 			url : urls,//返回json数据的url
 			valueField : "giftId",
 			textField : "giftName",
 			panelHeight : "auto",
-			onLoadSuccess : function() 
-			{ //数据加载完毕事件
+			onLoadSuccess : function() { //数据加载完毕事件
 				var data = $('#giftId').combobox('getData');
-				if (data.length > 0) 
-				{
+				if (data.length > 0) {
 					//  $("#giftId").combobox('select', data[0].param2);
 				}
 			}	
@@ -968,13 +931,10 @@ $('#giftType').combobox(
 	}
 });
 
-$('#giftCourseType').combobox(
-{
-	onChange : function(n, o)
-	{
+$('#giftCourseType').combobox({
+	onChange : function(n, o) {
 		var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+ n + "\"}";
-		$("#giftCourseId").combobox(
-		{
+		$("#giftCourseId").combobox({
 			url : urls,//返回json数据的url
 			valueField : "giftId",
 			textField : "giftName",
@@ -983,19 +943,14 @@ $('#giftCourseType').combobox(
 	}
 });
 
-$('#giftCourseId').combobox(
-{
-	onChange : function(n, o) 
-	{
+$('#giftCourseId').combobox({
+	onChange : function(n, o) {
 		var data = $('#giftCourseId').combobox('getData');
-		if (data.length > 0) 
-		{
-			for ( var i = 0; i < data.length; i++)
-			{
+		if (data.length > 0) {
+			for ( var i = 0; i < data.length; i++) {
 				var giftNum = data[0].giftNum;
 				var giftId = data[0].giftId;
-				if (n == giftId) 
-				{
+				if (n == giftId) {
 					$("#courseHours").html(giftNum);
 				}
 			}
@@ -1003,14 +958,11 @@ $('#giftCourseId').combobox(
 	}
 });
 //选择活动校区加载活动
-$("#activeSchool").combobox(
-{
-	onChange:function()
-	{
+$("#activeSchool").combobox({
+	onChange:function() {
 		var sId = $("#activeSchool").combobox('getValue');
 		var urls ="<%=path%>/pubData/qryAction.do?schoolId="+sId;
-		$("#activeId").combobox(
-		{
+		$("#activeId").combobox({
 			url:urls
 		});
 	}
@@ -1019,75 +971,58 @@ $("#activeSchool").combobox(
 
 //选择阶段价加载班级
 $('#stageId').combobox({
-	onChange : function(n, o)
-	{
-	 if(n=='')
-	 {
-		 return;
-	 }
-	var data = $("#stageId").combobox('getData');
-	var amount;
-
-	for ( var i = 0; i < data.length; i++)
-	{
-		if (n == data[i].stageId) 
-		{
-			$("#stageOrder").val(data[i].seqOrder);
-		}
-	}
-	
-	var stageType = $("#stageId").combobox('getText');
-	var payDate=$("#payDate").datebox('getValue');
-	if(payDate=='')
-	{
-		$("#stageId").combobox('setValue',"");
-		$("#classType").combobox('setValue',"");
-		$("#totalAmount").textbox('setValue', '');
-		showMessage('提示', "请选择缴费时间",null);	
-		return;
-	}
-	var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\",schoolId:\""+ <%=schoolId%> + "\"}";
-	$("#classType").combobox(
-	{
-		url : urls,//返回json数据的url
-		valueField : "classType",
-		textField : "classType",
-		panelHeight : "auto",
-		onLoadSuccess : function() { //数据加载完毕事件
-			var data = $('#classType').combobox('getData');
-			if(data==null || data.length==0)
-			{
-				$("#stageId").combobox('setText',"");
-				$("#classType").combobox('setText',"");
-				showMessage('提示', "没有适用的常规格价格体系,请重新选择缴费日期",null);	
-				return;
-			} 
-			if (data.length == 1)
-			{
-				$("#classType").combobox('select',data[0].classType);
-				$("#totalAmount").textbox('setValue', data[0].amount);
-				$("#amount").textbox('setValue', data[0].amount);
-				$("#coursePriceId").val(data[0].setPriceId); 
+	onChange : function(n, o) {
+	 	if(n == '') {
+		 	return;
+	 	}
+		var data = $("#stageId").combobox('getData');
+		var amount;
+		for (var i = 0; i < data.length; i++) {
+			if (n == data[i].stageId) {
+				$("#stageOrder").val(data[i].seqOrder);
 			}
 		}
-	});
-   }
+		var stageType = $("#stageId").combobox('getText');
+		var payDate = $("#payDate").datebox('getValue');
+		if(payDate == '') {
+			$("#stageId").combobox('setValue',"");
+			$("#classType").combobox('setValue',"");
+			$("#totalAmount").textbox('setValue', '');
+			showMessage('提示', "请选择缴费时间",null);	
+			return;
+		}
+		var urls = "/sys/pubData/qryData.do?param={queryCode:\"Qry_Stage_Class\",time:\""+ payDate + "\",stageId:\""+ stageType + "\",schoolId:\""+ <%=schoolId%> + "\"}";
+		$("#classType").combobox({
+			url : urls,//返回json数据的url
+			valueField : "classType",
+			textField : "classType",
+			panelHeight : "auto",
+			onLoadSuccess : function() { //数据加载完毕事件
+				var data = $('#classType').combobox('getData');
+				if(data == null || data.length == 0) {
+					$("#stageId").combobox('setText',"");
+					$("#classType").combobox('setText',"");
+					showMessage('提示', "没有适用的常规格价格体系,请重新选择缴费日期",null);	
+					return;
+				} 
+				if (data.length == 1) {
+					$("#classType").combobox('select',data[0].classType);
+					$("#totalAmount").textbox('setValue', data[0].amount);
+					$("#amount").textbox('setValue', data[0].amount);
+					$("#coursePriceId").val(data[0].setPriceId); 
+				}
+			}
+		});
+   	}
 });
 
-
-$("#classType").combobox(
-{
-	onChange:function(n,o)
-	{
+$("#classType").combobox({
+	onChange:function(n,o) {
 		var data = $('#classType').combobox('getData');
-		for(var i=0;i<data.length;i++)
-		{
-			if(n==data[i].classType)
-			{
+		for(var i = 0; i < data.length; i++) {
+			if(n == data[i].classType) {
 				$("#classType").combobox('select',data[i].classType);
-			
 				$("#totalAmount").textbox('setValue', data[i].amount);
-				 
 				minus = $("#minusAmount").textbox('getValue');
 				//favorAmount = $("#favorAmount").textbox('getValue');
 				totalAmount = $("#totalAmount").textbox('getValue');
@@ -1095,10 +1030,8 @@ $("#classType").combobox(
 				$("#amount").textbox('setValue', amount);
 				$("#coursePriceId").val(data[i].setPriceId); 
 			}
-			
 		}
 	}
-
 });
 
 
@@ -1114,1126 +1047,989 @@ $('#favorAmount').textbox( {
 
 
 //提交
-$("#submitBtn").click(function() 
-{
-	if(!checkParam())
-	{
-		return false;
-	}	
-	oldCourses =getOldCourse();
-	var stageId = $("#stageId").combobox("getValue");
-	var stageOrder =  $("#stageOrder").val();
-	var feeType = $("#feeType").combobox("getValue");
-	
-	var count=0;
-	for(var i=0;i<oldCourses.length;i++)
-	{
-		var course = oldCourses[i];
-		var order = course.stageOrder;
-		var courseState=course.courseState;
-		var stageName =course.stageId;
-		if(courseState=='001' || courseState=='002' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
-		{
-			if(feeType=='001')//新够买阶段业绩类型为新招，学员还有未结束课程再次购买业绩类型不能为新招。
-			{
-			 	showMessage("提示","该学员有未结束课程,当前所报阶段"+stageId+"不可选择新招业绩类型,请重新选择业绩类型",null);
-				return;
-				 
-			}else if(feeType=='002'|| feeType=='003')
-			{
-				if(courseState=='001' || courseState=='002')
-				{
-					if(Number(stageOrder)==Number(order))
-					{
-						showMessage("提示","当前所报复读或升学阶段"+stageId+"低于或等于阶段"+stageName+",请重新选择阶段",null);
-						return;
-					}
-				}else if(courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
-				{
-					if(Number(stageOrder)<Number(order))
-					{
-						showMessage("提示","当前所报复读或升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段",null);
-						return;
+$("#submitBtn").click(function() {
+	var flag = true;
+	var courseType = $("#courseType").combobox("getValue");
+	if("001" == courseType) {
+		var fileName = $("#fileName").filebox("getValue");
+		if(fileName != "" && fileName != null && fileName != undefined) {
+			if(courseImgUrl == "" || courseImgUrl == null || courseImgUrl == undefined) {
+				flag = false;
+			}
+		}
+	} else {
+		var fileName = $("#shortFileName").filebox("getValue");
+		if(fileName != "" && fileName != null && fileName != undefined) {
+			if(courseImgUrl == "" || courseImgUrl == null || courseImgUrl == undefined) {
+				flag = false;
+			}
+		}
+	}
+	if(flag) {
+		if(!checkParam()) {
+			return false;
+		}	
+		oldCourses = getOldCourse();
+		var stageId = $("#stageId").combobox("getValue");
+		var stageOrder =  $("#stageOrder").val();
+		var feeType = $("#feeType").combobox("getValue");
+		var count = 0;
+		for(var i = 0; i < oldCourses.length; i++) {
+			var course = oldCourses[i];
+			var order = course.stageOrder;
+			var courseState = course.courseState;
+			var stageName = course.stageId;
+			if(courseState == '001' || courseState == '002' || courseState == '003' 
+				|| courseState == '004' || courseState == '005' || courseState == '006' || courseState == '007') {
+				if(feeType == '001') { //新够买阶段业绩类型为新招，学员还有未结束课程再次购买业绩类型不能为新招。
+				 	showMessage("提示", "该学员有未结束课程,当前所报阶段"+stageId+"不可选择新招业绩类型,请重新选择业绩类型", null);
+					return;
+					 
+				} else if(feeType == '002'|| feeType == '003') {
+					if(courseState == '001' || courseState == '002') {
+						if(Number(stageOrder) == Number(order)) {
+							showMessage("提示", "当前所报复读或升学阶段"+stageId+"低于或等于阶段"+stageName+",请重新选择阶段", null);
+							return;
+						}
+					} else if(courseState == '003' || courseState == '004' 
+					|| courseState == '005' || courseState == '006' || courseState == '007') {
+						if(Number(stageOrder) < Number(order)) {
+							showMessage("提示", "当前所报复读或升学阶段"+stageId+"低于在读阶段"+stageName+",请重新选择阶段", null);
+							return;
+						}
 					}
 				}
 			}
 		}
-
+		addCourseInfo();
+	} else {
+		showMessage("提示", "请您先上传文件！", null);
+		return;
 	}
-	addCourseInfo();
 });
 
-$("#backBtn").click(function()
-{
+$("#backBtn").click(function() {
 	window.location.href = "addCourseList.jsp"
 });
 
 
-$(":radio[name='isGetY']").click(function()
-{
-	var isGet=$(this).val();
-	var type=$('#parentType').combobox('getValue');
- 	if('Y'==isGet)
- 	{
- 		if(type=='COUPON')
- 		{
- 			 $("#td2").css('display','block');
-        	 $("#td3").css('display','block');
+$(":radio[name='isGetY']").click(function() {
+	var isGet = $(this).val();
+	var type = $('#parentType').combobox('getValue');
+ 	if('Y' == isGet) {
+ 		if(type == 'COUPON') {
+ 			$("#td2").css('display','block');
+        	$("#td3").css('display','block');
  		}
         $("#granter").textbox({disabled:false});
- 	}else
- 	{
- 		  $("#td2").css('display','none');
-          $("#td3").css('display','none');
-          $("#granter").textbox({disabled:true});
+ 	} else {
+ 		$("#td2").css('display','none');
+        $("#td3").css('display','none');
+        $("#granter").textbox({disabled:true});
  	}
 });
 
 //增加赠品
-$("#addGiftBtn").click(function ()
-{
-		var giftModelTR=$("#giftModelTR").clone();
-		var flag=true;
-		var giftTR=$("#addGift").clone();
-		giftTR.css("display",'table-row');
-		giftTR.attr("val","gift");
-		giftTR.find("td").each(function(n,node)
-		{
-			var getFlag = $("input[name='isGetY']:checked").val(); //是否领取
-			var parentType=$("#parentType").combobox('getValue');
-			var giftEffDate=$("#giftEffDate").textbox('getValue');
-			
-			if('N'==getFlag)
-			{
-				$("#giftEffDate").textbox('setValue','');
-				$("#giftCode").textbox('setValue','');
-				$("#granter").textbox("setValue",'');
+$("#addGiftBtn").click(function (){
+	var flag = true;
+	var giftModelTR = $("#giftModelTR").clone();
+	var giftTR = $("#addGift").clone();
+	giftTR.css("display",'table-row');
+	giftTR.attr("val","gift");
+	giftTR.find("td").each(function(n, node) {
+		var getFlag = $("input[name='isGetY']:checked").val(); //是否领取
+		var parentType = $("#parentType").combobox('getValue');
+		var giftEffDate = $("#giftEffDate").textbox('getValue');
+		if('N' == getFlag) {
+			$("#giftEffDate").textbox('setValue','');
+			$("#giftCode").textbox('setValue','');
+			$("#granter").textbox("setValue",'');
+		}
+		if(n == 1) { //赠品类型;	
+			var name = $("#parentType").combobox('getText');
+			if(name == '') {
+				showMessage('提示', "请选择赠品类型", null);
+				flag = false;
+				return false;
 			}
-			
-			if(n==1)//赠品类型;	
-			{
-				var name=$("#parentType").combobox('getText');
-				if(name=='')
-				{
-					showMessage('提示', "请选择赠品类型", null);
-					flag=false;
-					return false;
+			$(node).html("<span>"+name+"</span>");	
+			$(node).attr("parentType",parentType);
+		} else if(n == 3) { //赠品名称;劵类ID
+			var giftId = $("#giftId").combobox('getValue');
+			var giftName = $("#giftId").combobox('getText');
+			var giftType = $("#giftType").combobox("getText");
+			var giftTypeVal = $("#giftType").combobox('getValue');
+			var code = $("#giftCode").textbox('getValue');
+			//判断是否是券类
+			if(giftId == '') {
+				showMessage('提示', "请选择赠品名称", null);
+				flag = false;
+				return false;
+			}
+			//判断是否是券类
+			if(parentType == 'COUPON' && code == '' && 'Y' == getFlag) {
+				showMessage('提示', "请输入券类编码",null);
+				flag = false;
+				return false;
+			}
+			if('' != giftName && code != '') {
+				$(node).html("<span>"+giftType+"  "+giftName+"   "+ code +"   "+giftEffDate+"</span>");	
+			} else if('' != giftName && code == '') {
+				$(node).html("<span>"+giftType+"  "+giftName+"</span>");	
+			} else {
+				$(node).html("<span>"+giftName+"</span>");	
+			}
+			var datas = $('#giftType').combobox('getData');
+			for(var m = 0; m < datas.length; m++) {
+				if(giftTypeVal == datas[m].giftType) {
+					 $(node).attr("effNum", datas[m].effNum);
+					 $(node).attr("unit", datas[m].unit);
 				}
-				$(node).html("<span>"+name+"</span>");	
-				$(node).attr("parentType",parentType);
-			}else if(n==3)//赠品名称;劵类ID
-			{
-				var giftId=$("#giftId").combobox('getValue');
-				var giftName=$("#giftId").combobox('getText');
-			 
-				var giftType=$("#giftType").combobox("getText");
-				var giftTypeVal=$("#giftType").combobox('getValue');
-				
-				var code=$("#giftCode").textbox('getValue');
-				
-				//判断是否是券类
-				if(giftId=='')
-				{
-					showMessage('提示', "请选择赠品名称",null);
-					flag=false;
-					return false;
-				}
-				
-				//判断是否是券类
-				if(parentType=='COUPON' && code=='' && 'Y'==getFlag)
-				{
-					showMessage('提示', "请输入券类编码",null);
-					flag=false;
-					return false;
-				}
-			
-				if(''!=giftName && code!='')
-				{
-					$(node).html("<span>"+giftType+"  "+giftName+"   "+ code +"   "+giftEffDate+"</span>");	
-				}else if(''!=giftName && code=='')
-				{
-					$(node).html("<span>"+giftType+"  "+giftName+"</span>");	
-				}else
-				{
-					$(node).html("<span>"+giftName+"</span>");	
-				}
-				
-				var datas = $('#giftType').combobox('getData');
-				 
-				for(var m=0;m<datas.length;m++)
-				{
-					if(giftTypeVal==datas[m].giftType)
-					{
-						 $(node).attr("effNum",datas[m].effNum);
-						 $(node).attr("unit",datas[m].unit);
+			}
+			var amount=""; 
+			var data = $('#giftId').combobox('getData');
+            if (data.length > 0) {
+            	for(var i = 0; i < data.length; i++) {
+					var giftIdT = data[i].giftId;
+					if(giftIdT == giftId) {
+						giftTypeVal = data[i].giftType;
+						amount = data[i].amount;
 					}
 				}
-				
-				var amount=""; 
-				var data = $('#giftId').combobox('getData');
-                if (data.length > 0)
-                {
-                    for(var i=0;i<data.length;i++)
-                    {
-                    	var giftIdT=data[i].giftId;
-                    	if(giftIdT==giftId)
-                    	{
-                    		giftTypeVal=data[i].giftType;
-                    		amount=data[i].amount;
-                    	}
-                    }
-                }
-				 
-				$(node).attr("giftName",giftName);
-				$(node).attr("amount",amount);
-				$(node).attr("giftId",giftId);
-				$(node).attr("giftType",giftTypeVal);
-				$(node).attr("giftCode",code);
-				$(node).attr("effDate",giftEffDate);
-				
-			}else if(n==5)
-			{
+			}
+			$(node).attr("giftName", giftName);
+			$(node).attr("amount", amount);
+			$(node).attr("giftId", giftId);
+			$(node).attr("giftType", giftTypeVal);
+			$(node).attr("giftCode", code);
+			$(node).attr("effDate", giftEffDate);
+		} else if(n == 5) {
+			$(node).attr("isGet","N");
+			if('Y' == getFlag) {
+				if(giftEffDate == '' &&　parentType == 'COUPON') {
+					flag = false;
+					showMessage('提示', "请填写有效期",null);
+					return false;
+				}
+				$(node).html("<span>已领取</span>");	
+				$(node).attr("isGet","Y");
+			}else if('N' == getFlag) {
+				$(node).html("<span>未领取</span>");	
 				$(node).attr("isGet","N");
-				if('Y'==getFlag)
-				{
-					if(giftEffDate=='' &&　parentType=='COUPON')
-					{
-						flag=false;
-						showMessage('提示', "请填写有效期",null);
-						return false;
-					}
-					$(node).html("<span>已领取</span>");	
-					$(node).attr("isGet","Y");
-				}else if('N'==getFlag)
-				{
-					$(node).html("<span>未领取</span>");	
-					$(node).attr("isGet","N");
-				}
-				else
-				{
-					 showMessage('提示', "请选择已领或者未领",null);
-					  flag=false;
-					  return false;
-				}
-			}else if(n==7)
-			{
-				var granter=$("#granter").textbox("getValue");
-				if(''==granter && 'Y'==getFlag)
-				{
-					  showMessage('提示', "发放人为空",null);
-					  flag=false;
-					  return false;
-				}
-				$(node).html("<span>"+granter+"</span>");	
-				$(node).attr("granter",granter);
-			} 
-			
-		});
-	
-		if(flag)
-		{
-			$("#giftFm").form('clear');
-			$("#addGift").after(giftTR);
-			var height = $(document).height();
-			var frameName=$("#frameName").val();
-			$(frameName,parent.document).css("height",height);
-			clearData("giftModelTR");
-			$("#giftModelTR").find("input[type='radio']:eq(1)").trigger("click");
-	    }
-		
-	
-	
+			} else {
+				showMessage('提示', "请选择已领或者未领",null);
+				flag = false;
+				return false;
+			}
+		} else if(n == 7) {
+			var granter = $("#granter").textbox("getValue");
+			if('' == granter && 'Y' == getFlag) {
+				  showMessage('提示', "发放人为空", null);
+				  flag = false;
+				  return false;
+			}
+			$(node).html("<span>"+granter+"</span>");	
+			$(node).attr("granter",granter);
+		} 
 	});
+	if(flag) {
+		$("#giftFm").form('clear');
+		$("#addGift").after(giftTR);
+		var height = $(document).height();
+		var frameName = $("#frameName").val();
+		$(frameName, parent.document).css("height",height);
+		clearData("giftModelTR");
+		$("#giftModelTR").find("input[type='radio']:eq(1)").trigger("click");
+	}
+});
 
-var giftCourseNum=1;
+var giftCourseNum = 1;
 //增加课程
-$("#addCourse").click(function()
-{
+$("#addCourse").click(function() {
 	var objectTr = $("#add").clone();//克隆模板
-		objectTr.css("display", 'table-row');
-		objectTr.attr("val", "course");
-		var flag=true;
-		objectTr.find("td").each(function(i, node) {
-			var effDate = "";
-			if (i == 1) {
-				var name = $("#giftCourseType").combobox('getText');
-				var val = $("#giftCourseType").combobox('getValue');
-
-				var datas = $('#giftCourseType').combobox('getData');
-
-				for ( var m = 0; m < datas.length; m++) 
-				{
-					if (val == datas[m].giftType) {
-						$(node).attr("effNum", datas[m].effNum);
-						$(node).attr("unit", datas[m].unit);
-					}
+	objectTr.css("display", 'table-row');
+	objectTr.attr("val", "course");
+	var flag = true;
+	objectTr.find("td").each(function(i, node) {
+		var effDate = "";
+		if (i == 1) {
+			var name = $("#giftCourseType").combobox('getText');
+			var val = $("#giftCourseType").combobox('getValue');
+			var datas = $('#giftCourseType').combobox('getData');
+			for ( var m = 0; m < datas.length; m++) {
+				if (val == datas[m].giftType) {
+					$(node).attr("effNum", datas[m].effNum);
+					$(node).attr("unit", datas[m].unit);
 				}
-				if(name=='')
-				{
-					showMessage('提示', "请选择赠课类型",null);
-					flag=false;
-					return false;
-				}
-				$(node).html("<span>" + name + "</span>");
-				$(node).attr("giftCourseType", val);//赠课类型	
-			} else if (i == 2) {
-				var name = $("#giftCourseId").combobox('getText');
-				var val = $("#giftCourseId").combobox('getValue');
-				$(node).html("<span>" + name + "</span>");
-				$(node).attr("giftId", val);//赠课细类	
-				if(name=='')
-				{
-					showMessage('提示', "请选择赠课名称",null);
-					flag=false;
-					return false;
-				}
-				
-			} else if (i == 3) {
-				var hours = $("#courseHours").html();
-				$(node).html("<span>" + hours + "</span>");
-				$(node).attr("hours", hours);//课时
-			} else if (i == 4) {
-				$(node).html("<span>" + sysDate() + "</span>");
-			} else if (i == 5) {
-				$(node).html("<span>未使用</span>");
-			} else if (i == 6) {
-				$(node).html("<span>" + afterDate(1) + "</span>");
-			} else if (i == 7) {
-				$(node).html("<span>" + afterYear(1) + "</span>");
 			}
-		});
-		if(flag==true)
-		{
-			$("#add").after(objectTr);
-			clearData("giftCourseTr");
-			$("#courseHours").html("");
-		}
-			
-		
-	});
-
-	//创建单报提交数据
-	function build()
-	{
-		gifts=[];
-		studentCourse={};                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-		$("#giftTab").find('tr').each(function(i,node)
-		{
-			var trName=$(this).attr("val");
-			var studentGiftId=$(this).attr("studentGiftId");
- 
-			if('gift'==trName)
-			{
-				 var  tds=$(this).children('td');
-			 
-				 var giftName=tds.eq(3).attr("giftName");
-				 var  amount=tds.eq(3).attr('amount');
-				 var  effNum=tds.eq(3).attr('effNum');
-				 var  unit=tds.eq(3).attr('unit');
-				 var  giftId=tds.eq(3).attr('giftId');
-				 var  giftType=tds.eq(3).attr('giftType');
-				 var  giftCode=tds.eq(3).attr('giftCode');
-				 var  effDate=tds.eq(3).attr('effDate');
-				 var  isGet=tds.eq(5).attr('isGet');
-				 var  granter=tds.eq(7).attr('granter');
-				 var  gift = {};
-				 
-				 gift.studentId=$("#studentId").val();
-				
-				 gift.giftName=giftName;
-				 gift.usableAmount=amount;
-				 gift.amount=amount;
-				 gift.studentGiftId=studentGiftId;
-				 gift.unit = unit; 
-				 gift.effNum = effNum; 
-				 gift.giftType = giftType;
-				 gift.giftId=giftId;
-				 gift.giftCode=giftCode;
-				 gift.effDate=effDate;
-				 gift.isGet=isGet;
-				 gift.granter=granter;
-				 gifts.push(gift);  
-			 }
-		});
-			  
-			 
-		$("#giftCourse").find('tr').each(function(i,node)
-		{
-			var trName=$(this).attr("val");
-			var studentGiftId=$(this).attr("studentGiftId");
-			if('course'==trName)
-			{
-				 var  tds=$(this).children('td');
-				 var  giftType=tds.eq(1).attr('giftCourseType');
-				 var  effNum=tds.eq(1).attr('effNum');
-				 var  unit=tds.eq(1).attr('unit');
-				 var  giftId=tds.eq(2).attr('giftId');
-				 var  hours=tds.eq(3).attr('hours');
-				
-				 var  gift = {};
-				 gift.studentId=$("#studentId").val();
-				 gift.giftType = giftType;
-				 gift.giftId=giftId;
-				 gift.giftNum=hours;
-				 gift.studentGiftId=studentGiftId;
-				 gift.unit = unit; 
-				 gift.effNum = effNum; 
-				 
-				 var datas = $('#giftType').combobox('getData');
-				 
-				for(var m=0;m<datas.length;m++)
-				{
-					if(giftType==datas[m].giftType)
-					{
-						gift.unit=datas[m].unit;
-						gift.effNum=datas[m].effNum;
-					}
-				}
-				
-				 gifts.push(gift);  
-			 }
-		});
-		
-		studentCourse.gifts=gifts;
-		var obj = $("#courseFm").serializeObject();
-		obj.payDate=$("#payDate").datebox("getValue");
-		obj.favorType=favorIds;
-		studentCourse.course=obj;
-		studentCourse.coupon=JSON.stringify(coupons);
-		return studentCourse;
-	}
-		
-	function closeDlg()
-	{
-		$('#dlg').dialog('close');
-		$('#useCoupon').html(useCoupon);
-		$("#minusAmount").textbox('setValue',minus);
-		totalAmount=$("#totalAmount").textbox('getValue');
-		amount=totalAmount-minus-favorAmount;
-		$("#amount").textbox('setValue',amount);
-	}
-	
-	function colDis(id)
-	{
-		var idT="#useCoupon"+id+"";
-		$(idT).css('display','none');
-		for(var i=coupons.length-1;i>=0;i--)
-		{
-			 var coupon=coupons[i];
-			
-			 if(coupon.studentGiftId==id)
-			 {
-				var usableAmountT=$("#minusAmount").textbox('getValue');
-				usableAmountT=usableAmountT-coupon.usableAmount;
-				$("#minusAmount").textbox('setValue',usableAmountT);
-				coupons.remove(i);
-			 }
-		}
-		minus=$("#minusAmount").textbox('getValue');
-		favorAmount=$("#favorAmount").textbox('getValue');
-		totalAmount=$("#totalAmount").textbox('getValue');
-		amount=totalAmount-minus-favorAmount;
-		$("#amount").textbox('setValue',amount);
-	}
-	
-	function addArchives()
-	{
-		$('#dlg').dialog({
-			title:"使用抵扣券",
-		});
-		$('#dlg').attr("src","/sys/course/useCoupon.jsp?studentId="+$("#studentId").val());
-		$('#dlg').dialog("open");
-	}
-	
-	function getMinus()
-	{
-		return $("#minusAmount").textbox('getValue');
-	}
-	
-	function getFavorAmount()
-	{
-		return $("#favorAmount").textbox('getValue');
-	}
-	
-	function getTotalAmount()
-	{
-		return $("#totalAmount").textbox('getValue');
-	}
-	
-	function getAmount()
-	{
-		return $("#amount").textbox('getValue');
-	}
-	
-	function changePraise(obj)
-	{
-		var flag=$(obj).attr("womType");
-		if(flag=="Y")
-		{
-			$("#praiseInfo").find("tr").each(function(index){
-				if(index==1)
-				{
-					$(this).css("display","table-row");
-				}
-				else if(index>1)
-				{
-					$(this).css("display","none");
-					
-				}	
-			})
-			clearData("praiseTab2");
-		}
-		else
-		{
-			$("#praiseInfo").find("tr").each(function(index){
-				if(index==1)
-				{
-					$(this).css("display","none");
-				
-				}
-				else if(index>1)
-				{
-					$(this).css("display","table-row");
-				}	
-			})
-			clearData("praiseTab1");
-		}
-		$("#praiseTab1").find("tr").css("display","none");
-		$("#praiseSourceY").combobox("setValue"," "); 
-		$("#praiseTab2").find("tr").css("display","none");
-		$("#praiseSourceN").combobox("setValue"," "); 
-	}
-	function changeName()
-	{
-		var tr =$("#short").find("table").find("tr:eq(0)");
-		var name =tr.find("td:eq(2)").find("select").combobox("getText");
-		tr.find("td:eq(3)").find("span").html(name+"A");
-		tr.find("td:eq(5)").find("span").html(name+"B");
-	}
-	
-	 
-	
-	function changeCourseType()
-	{
-		var type=$("#courseType").combobox("getValue");
-		if(type=="001")
-		{
-			$("#normal").css("display","block");
-			$("#short").css("display","none");
-			initFeeInfo();
-			$("#courseType").val("001")
-		}
-		else if(type=="002")
-		{
-			$("#normal").css("display","none");
-			$("#short").css("display","block");
-			initFeeInfo();
-		}	
-	}
-	
-	function initFeeInfo()
-	{
-	    minus = 0;
-		favorAmount = 0;
-		totalAmount = 0;
-		amount = 0;
-		$("#favorAmount").textbox("setValue","");
-		$("#totalAmount").textbox("setValue","");
-		$("#minusAmount").textbox("setValue","");
-		$("#amount").textbox("setValue","");
-		$('#useCoupon').html("");
-	}
-	
-	function changePraiseSourceY()
-	{
-		var source =$("#praiseSourceY").combobox("getValue");
-		if(source=="")
-		{
-			$("#praiseTab1").find("tr").css("display","none");
-		}
-		else
-		{
-			$("#praiseTab1").find("tr").each(function(){
-				if($(this).attr("id")!=source)
-				{
-					$(this).css("display","none");
-				}
-				else
-				{
-					$(this).css("display","table-row");
-				}	
-			})
-		}	
-	}
-	
-	
-	function changePraiseSourceN()
-	{
-		var type=$("#praiseSourceN").combobox("getValue");
-		if(type=="Stu")
-		{
-			$("#praiseTab2").find("tr").each(function(index){
-				if(index>1)
-				{
-					$(this).css("display","none");
-				}
-				else
-				{
-					$(this).css("display","table-row");
-				}	
-			});
-		}
-		else if(type=="Sta")
-		{
-			$("#praiseTab2").find("tr").each(function(index){
-				if(index>1)
-				{
-					$(this).css("display","table-row");
-				}
-				else
-				{
-					$(this).css("display","none");
-				}	
-			});
-		}
-		else
-		{
-			$("#praiseTab2").find("tr").css("display","none");
-		}	
-	}
-	
-	function loadStuBaseInfo()
-	{
-		var studentInfo =$("#studentInfo").val();
-		if(studentInfo.indexOf(";;")!=-1)
-		{
-			studentInfo =studentInfo.split(";;");
-			var tr1 =$("#stuBaseInfo").find("tr:eq(0)");
-		    tr1.find("td:eq(1)").find("span").html(studentInfo[0]);
-		    tr1.find("td:eq(3)").find("span").html(studentInfo[2]);
-		    tr1.find("td:eq(5)").find("span").html(studentInfo[3]);
-		    $("#stuBaseInfo").find("tr:eq(1)").find("td:eq(1)").find("span").html(studentInfo[4]);
-		}	
-	}
-	
-	function addCourseInfo()
-	{
-		//获取口碑信息-begin
-		var womType="";
-		$("input[name=praise]").each(function(){
-			if(this.checked){
-				womType =$(this).attr("womType");
+			if(name == '') {
+				showMessage('提示', "请选择赠课类型",null);
+				flag = false;
+				return false;
 			}
-		})
-		if($("#womDiv").css("display")=="block"&&womType!="")
-		{	
-			if($("#adviserA").combobox('getValue')==""&&$("#adviserA").combobox('getValue')=="null")
-			{
-				showMessage('提示', "请选择常规课课程的业绩顾问A!",null);
+			$(node).html("<span>" + name + "</span>");
+			$(node).attr("giftCourseType", val);//赠课类型	
+		} else if (i == 2) {
+			var name = $("#giftCourseId").combobox('getText');
+			var val = $("#giftCourseId").combobox('getValue');
+			$(node).html("<span>" + name + "</span>");
+			$(node).attr("giftId", val);//赠课细类	
+			if(name == '') {
+				showMessage('提示', "请选择赠课名称",null);
+				flag = false;
 				return false;
 			}	
-			var womChannel=womType=="Y"?$("#praiseSourceY").combobox("getValue"):$("#praiseSourceN").combobox("getValue");
-			if(trim(womChannel)!="")
-			{
-				var womInfo ={
-					womId:"",
-					womType:womType,
-					womChannel:womChannel,
-					studentCourseId:"",
-					handlerId:$("#handlerId").val()
-				};
-				var womItem ={
-					itemId:"",
-					womId:"",
-					activitySchool:"",
-					activityId:"",
-					adviserASchool:"",
-					adviserA:"",
-					adviserBSchool:"",
-					adviserB:"",
-					teacherASchool:"",
-					teacherA:"",
-					teacherBSchool:"",
-					teacherB:"",
-					studentIdSchool:"",
-					studentId:"",
-					studentName:"",
-					identityType:"",
-					identityId:"",
-					courseName:"",
-					teacherIdSchool:"",
-					teacherId:"",
-					staffName:"",
-					handlerId:$("#handlerId").val()
-				};
-				var womGiftArr=[];
-				if(womChannel=="A")
-				{
-					if($("#activeId").combobox("getValue")=="")
-					{
-						showMessage('提示', "请选择一个活动!",null);
-						return false;
-					}
-					else
-					{
-						womItem["activitySchool"]=$("#activeSchool").combobox("getValue");
-						womItem["activityId"]=$("#activeId").combobox("getValue");
-					}	
+		} else if (i == 3) {
+			var hours = $("#courseHours").html();
+			$(node).html("<span>" + hours + "</span>");
+			$(node).attr("hours", hours);//课时
+		} else if (i == 4) {
+			$(node).html("<span>" + sysDate() + "</span>");
+		} else if (i == 5) {
+			$(node).html("<span>未使用</span>");
+		} else if (i == 6) {
+			$(node).html("<span>" + afterDate(1) + "</span>");
+		} else if (i == 7) {
+			$(node).html("<span>" + afterYear(1) + "</span>");
+		}
+	});
+	if(flag == true) {
+		$("#add").after(objectTr);
+		clearData("giftCourseTr");
+		$("#courseHours").html("");
+	}
+});
+
+//创建单报提交数据
+function build() {
+	gifts = [];
+	studentCourse = {};                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+	$("#giftTab").find('tr').each(function(i, node) {
+		var trName=$(this).attr("val");
+		var studentGiftId=$(this).attr("studentGiftId");
+		if('gift' == trName) {
+			var tds = $(this).children('td');
+			var giftName = tds.eq(3).attr("giftName");
+			var amount = tds.eq(3).attr('amount');
+			var effNum = tds.eq(3).attr('effNum');
+			var unit = tds.eq(3).attr('unit');
+			var giftId = tds.eq(3).attr('giftId');
+			var giftType = tds.eq(3).attr('giftType');
+			var giftCode = tds.eq(3).attr('giftCode');
+			var effDate = tds.eq(3).attr('effDate');
+			var isGet = tds.eq(5).attr('isGet');
+			var granter = tds.eq(7).attr('granter');
+			var gift = {};
+			gift.studentId = $("#studentId").val();
+			gift.giftName = giftName;
+			gift.usableAmount = amount;
+			gift.amount = amount;
+			gift.studentGiftId = studentGiftId;
+			gift.unit = unit; 
+			gift.effNum = effNum; 
+			gift.giftType = giftType;
+			gift.giftId = giftId;
+			gift.giftCode = giftCode;
+			gift.effDate = effDate;
+			gift.isGet = isGet;
+			gift.granter = granter;
+			gifts.push(gift);  
+		}
+	});   
+	$("#giftCourse").find('tr').each(function(i, node) {
+		var trName = $(this).attr("val");
+		var studentGiftId = $(this).attr("studentGiftId");
+		if('course' == trName) {
+			var tds = $(this).children('td');
+			var giftType = tds.eq(1).attr('giftCourseType');
+			var effNum = tds.eq(1).attr('effNum');
+			var unit = tds.eq(1).attr('unit');
+			var giftId = tds.eq(2).attr('giftId');
+			var hours = tds.eq(3).attr('hours');
+			var gift = {};
+			gift.studentId = $("#studentId").val();
+			gift.giftType = giftType;
+			gift.giftId = giftId;
+			gift.giftNum = hours;
+			gift.studentGiftId = studentGiftId;
+			gift.unit = unit; 
+			gift.effNum = effNum; 
+			var datas = $('#giftType').combobox('getData');
+			for(var m = 0; m < datas.length; m++) {
+				if(giftType == datas[m].giftType) {
+					gift.unit = datas[m].unit;
+					gift.effNum = datas[m].effNum;
 				}
-				else if(womChannel=="C")
-				{
-					if($("#c_adviserA").combobox("getValue")==""&&$("#c_adviserB").combobox("getValue")=="")
-					{
-						showMessage('提示', "请至少选择一个顾问!",null);
-						return false;
-					}
-					else
-					{
-						womItem["adviserASchool"]=$("#c_schoolA").combobox("getValue");
-						womItem["adviserA"]=$("#c_adviserA").combobox("getValue");
-						womItem["adviserBSchool"]=$("#c_schoolB").combobox("getValue");
-						womItem["adviserB"]=$("#c_adviserB").combobox("getValue");
-					}	
-				}
-				else if(womChannel=="T")
-				{
-					if($("#c_teacherA").combobox("getValue")==""&&$("#c_teacherB").combobox("getValue")=="")
-					{
-						showMessage('提示', "请至少选择一个老师!",null);
-						return false;
-					}
-					else
-					{
-						womItem["teacherASchool"]=$("#c_schoolsA").combobox("getValue");
-						womItem["teacherA"]=$("#c_teacherA").combobox("getValue");
-						womItem["teacherBSchool"]=$("#c_schoolsB").combobox("getValue");
-						womItem["teacherB"]=$("#c_teacherB").combobox("getValue");
-						var tr =$("#praiseTab1").find("tr:eq(3)");
-						if(tr.attr("studentId")!=null)
-						{
-							womItem["studentId"]=tr.attr("studentId");
-							womItem["studentIdSchool"]=tr.attr("studentSchoolId");
-							womItem["studentName"]=tr.find("td:eq(1)").find("span").html();
-							womItem["identityType"]=tr.attr("identityType");
-							womItem["identityId"]=tr.find("td:eq(3)").find("span").html();
-							womItem["className"]=tr.find("td:eq(5)").find("span").html();
-							$(".womGiftSpan").each(function(){
-								var womGift={};
-								womGift.studentId=womItem["studentId"];
-								womGift.giftName=$(this).attr("giftName");
-								womGift.usableAmount=$(this).attr("usableAmount");
-								womGift.amount=$(this).attr("amount");
-								womGift.studentGiftId=$(this).attr("studentGiftId");
-								womGift.unit = $(this).attr("unit"); 
-								womGift.effNum =$(this).attr("effNum"); 
-								womGift.giftType = $(this).attr("giftType");
-								womGift.giftId=$(this).attr("giftId");
-								womGift.giftCode=$(this).attr("giftCode");
-								womGift.isGet=$(this).attr("isGet");
-								womGift.granter=$(this).attr("granter");
-								womGiftArr.push(womGift);
-							});
-						}	
-					}	
-				}
-				else if(womChannel=="Stu")
-				{
-					var tr1=$("#praiseTab2").find("tr:eq(0)");
-					var stuNames =tr1.find("td:eq(1)").find(".easyui-textbox").textbox("getValue");
-					if(stuNames=="")
-					{
-						showMessage('提示', "请填写学员姓名!",null);
-						return false;
-	 				}
-					else
-					{
-						womItem["studentName"]=stuNames;
-						womItem["identityType"]=tr1.find("td:eq(3)").find(".easyui-combobox").combobox("getValue");
-						womItem["identityId"]=tr1.find("td:eq(3)").find(".easyui-textbox").textbox("getValue");
-						var tr2 =$("#praiseTab2").find("tr:eq(1)");
-						womItem["className"]=tr2.find("td:eq(1)").find(".easyui-textbox").textbox("getValue");
-						womItem["teacherIdSchool"]=$("#t_teacher_school").combobox("getValue");
-						womItem["teacherId"]=$("#t_teacher_id").combobox("getValue");
-						
-					}	
-						
-				}
-				else if(womChannel=="Sta")
-				{
-					if($("#womStaffName").textbox("getValue")!="")
-					{
-						womItem["staffName"]=$("#womStaffName").textbox("getValue");
-					}
-					else
-					{
-						showMessage('提示', "请填写员工姓名!",null);
-						return false;
+			}
+			gifts.push(gift);  
+		}
+	});
+	
+	studentCourse.gifts = gifts;
+	var obj = $("#courseFm").serializeObject();
+	obj.payDate = $("#payDate").datebox("getValue");
+	obj.favorType = favorIds;
+	obj.imgUrl = courseImgUrl;
+	studentCourse.course = obj;
+	studentCourse.coupon = JSON.stringify(coupons);
+	return studentCourse;
+}
+		
+function closeDlg() {
+	$('#dlg').dialog('close');
+	$('#useCoupon').html(useCoupon);
+	$("#minusAmount").textbox('setValue',minus);
+	totalAmount = $("#totalAmount").textbox('getValue');
+	amount = totalAmount - minus - favorAmount;
+	$("#amount").textbox('setValue',amount);
+}
+
+function colDis(id) {
+	var idT = "#useCoupon"+id+"";
+	$(idT).css('display','none');
+	for(var i = coupons.length - 1; i >= 0; i--) {
+		var coupon = coupons[i];
+		if(coupon.studentGiftId == id) {
+			var usableAmountT = $("#minusAmount").textbox('getValue');
+			usableAmountT = usableAmountT-coupon.usableAmount;
+			$("#minusAmount").textbox('setValue',usableAmountT);
+			coupons.remove(i);
+		}
+	}
+	minus = $("#minusAmount").textbox('getValue');
+	favorAmount = $("#favorAmount").textbox('getValue');
+	totalAmount = $("#totalAmount").textbox('getValue');
+	amount = totalAmount - minus - favorAmount;
+	$("#amount").textbox('setValue',amount);
+}
+	
+function addArchives() {
+	$('#dlg').dialog({
+		title:"使用抵扣券",
+	});
+	$('#dlg').attr("src","/sys/course/useCoupon.jsp?studentId="+$("#studentId").val());
+	$('#dlg').dialog("open");
+}
+	
+function getMinus() {
+	return $("#minusAmount").textbox('getValue');
+}
+	
+function getFavorAmount() {
+	return $("#favorAmount").textbox('getValue');
+}
+	
+function getTotalAmount() {
+	return $("#totalAmount").textbox('getValue');
+}
+	
+function getAmount() {
+	return $("#amount").textbox('getValue');
+}
+	
+function changePraise(obj) {
+	var flag = $(obj).attr("womType");
+	if(flag == "Y") {
+		$("#praiseInfo").find("tr").each(function(index) {
+			if(index == 1) {
+				$(this).css("display","table-row");
+			} else if(index > 1) {
+				$(this).css("display","none");
+			}	
+		});
+		clearData("praiseTab2");
+	} else {
+		$("#praiseInfo").find("tr").each(function(index){
+			if(index == 1) {
+				$(this).css("display","none");
+			} else if(index > 1) {
+				$(this).css("display","table-row");
+			}	
+		});
+		clearData("praiseTab1");
+	}
+	$("#praiseTab1").find("tr").css("display","none");
+	$("#praiseSourceY").combobox("setValue"," "); 
+	$("#praiseTab2").find("tr").css("display","none");
+	$("#praiseSourceN").combobox("setValue"," "); 
+}
+function changeName() {
+	var tr =$("#short").find("table").find("tr:eq(0)");
+	var name = tr.find("td:eq(2)").find("select").combobox("getText");
+	tr.find("td:eq(3)").find("span").html(name+"A");
+	tr.find("td:eq(5)").find("span").html(name+"B");
+}
+function changeCourseType() {
+	var type = $("#courseType").combobox("getValue");
+	if(type == "001") {
+		$("#normal").css("display","block");
+		$("#short").css("display","none");
+		initFeeInfo();
+		$("#courseType").val("001")
+	} else if(type=="002") {
+		$("#normal").css("display","none");
+		$("#short").css("display","block");
+		initFeeInfo();
+	}	
+}
+	
+function initFeeInfo() {
+	minus = 0;
+	favorAmount = 0;
+	totalAmount = 0;
+	amount = 0;
+	$("#favorAmount").textbox("setValue","");
+	$("#totalAmount").textbox("setValue","");
+	$("#minusAmount").textbox("setValue","");
+	$("#amount").textbox("setValue","");
+	$('#useCoupon').html("");
+}
+	
+function changePraiseSourceY() {
+	var source =$("#praiseSourceY").combobox("getValue");
+	if(source == "") {
+		$("#praiseTab1").find("tr").css("display","none");
+	} else {
+		$("#praiseTab1").find("tr").each(function() {
+			if($(this).attr("id") != source){
+				$(this).css("display","none");
+			} else {
+				$(this).css("display","table-row");
+			}	
+		});
+	}	
+}
+	
+function changePraiseSourceN() {
+	var type = $("#praiseSourceN").combobox("getValue");
+	if(type == "Stu") {
+		$("#praiseTab2").find("tr").each(function(index) {
+			if(index > 1) {
+				$(this).css("display","none");
+			} else {
+				$(this).css("display","table-row");
+			}	
+		});
+	} else if(type == "Sta") {
+		$("#praiseTab2").find("tr").each(function(index) {
+			if(index > 1) {
+				$(this).css("display","table-row");
+			} else {
+				$(this).css("display","none");
+			}	
+		});
+	} else {
+		$("#praiseTab2").find("tr").css("display","none");
+	}	
+}
+	
+function loadStuBaseInfo() {
+	var studentInfo = $("#studentInfo").val();
+	if(studentInfo.indexOf(";;") != -1) {
+		studentInfo = studentInfo.split(";;");
+		var tr1 = $("#stuBaseInfo").find("tr:eq(0)");
+		tr1.find("td:eq(1)").find("span").html(studentInfo[0]);
+		tr1.find("td:eq(3)").find("span").html(studentInfo[2]);
+		tr1.find("td:eq(5)").find("span").html(studentInfo[3]);
+		$("#stuBaseInfo").find("tr:eq(1)").find("td:eq(1)").find("span").html(studentInfo[4]);
+	}	
+}
+	
+function addCourseInfo() {
+	//获取口碑信息-begin
+	var womType = "";
+	$("input[name=praise]").each(function() {
+		if(this.checked) {
+			womType =$(this).attr("womType");
+		}
+	})
+	if($("#womDiv").css("display") == "block" && womType != "") {	
+		if($("#adviserA").combobox('getValue') == "" && $("#adviserA").combobox('getValue') == "null") {
+			showMessage('提示', "请选择常规课课程的业绩顾问A!",null);
+			return false;
+		}	
+		var womChannel = womType == "Y" ? $("#praiseSourceY").combobox("getValue") : $("#praiseSourceN").combobox("getValue");
+		if(trim(womChannel) != "") {
+			var womInfo = {
+				womId : "",
+				womType  :womType,
+				womChannel : womChannel,
+				studentCourseId : "",
+				handlerId : $("#handlerId").val()
+			};
+			var womItem = {
+				itemId : "",
+				womId : "",
+				activitySchool : "",
+				activityId : "",
+				adviserASchool : "",
+				adviserA : "",
+				adviserBSchool : "",
+				adviserB : "",
+				teacherASchool : "",
+				teacherA : "",
+				teacherBSchool : "",
+				teacherB : "",
+				studentIdSchool : "",
+				studentId : "",
+				studentName : "",
+				identityType : "",
+				identityId : "",
+				courseName : "",
+				teacherIdSchool : "",
+				teacherId : "",
+				staffName : "",
+				handlerId:$("#handlerId").val()
+			};
+			var womGiftArr = [];
+			if(womChannel == "A") {
+				if($("#activeId").combobox("getValue") == "") {
+					showMessage('提示', "请选择一个活动!",null);
+					return false;
+				} else {
+					womItem["activitySchool"] = $("#activeSchool").combobox("getValue");
+					womItem["activityId"] = $("#activeId").combobox("getValue");
+				}	
+			} else if(womChannel == "C") {
+				if($("#c_adviserA").combobox("getValue") == "" && $("#c_adviserB").combobox("getValue") == "") {
+					showMessage('提示', "请至少选择一个顾问!",null);
+					return false;
+				} else {
+					womItem["adviserASchool"] = $("#c_schoolA").combobox("getValue");
+					womItem["adviserA"] = $("#c_adviserA").combobox("getValue");
+					womItem["adviserBSchool"] = $("#c_schoolB").combobox("getValue");
+					womItem["adviserB"] = $("#c_adviserB").combobox("getValue");
+				}	
+			} else if(womChannel == "T") {
+				if($("#c_teacherA").combobox("getValue") == "" && $("#c_teacherB").combobox("getValue") == "") {
+					showMessage('提示', "请至少选择一个老师!",null);
+					return false;
+				} else {
+					womItem["teacherASchool"] = $("#c_schoolsA").combobox("getValue");
+					womItem["teacherA"] = $("#c_teacherA").combobox("getValue");
+					womItem["teacherBSchool"] = $("#c_schoolsB").combobox("getValue");
+					womItem["teacherB"] = $("#c_teacherB").combobox("getValue");
+					var tr =$("#praiseTab1").find("tr:eq(3)");
+					if(tr.attr("studentId") != null) {
+						womItem["studentId"] = tr.attr("studentId");
+						womItem["studentIdSchool"] = tr.attr("studentSchoolId");
+						womItem["studentName"] = tr.find("td:eq(1)").find("span").html();
+						womItem["identityType"] = tr.attr("identityType");
+						womItem["identityId"] = tr.find("td:eq(3)").find("span").html();
+						womItem["className"] = tr.find("td:eq(5)").find("span").html();
+						$(".womGiftSpan").each(function(){
+							var womGift = {};
+							womGift.studentId = womItem["studentId"];
+							womGift.giftName = $(this).attr("giftName");
+							womGift.usableAmount = $(this).attr("usableAmount");
+							womGift.amount = $(this).attr("amount");
+							womGift.studentGiftId = $(this).attr("studentGiftId");
+							womGift.unit = $(this).attr("unit"); 
+							womGift.effNum = $(this).attr("effNum"); 
+							womGift.giftType = $(this).attr("giftType");
+							womGift.giftId = $(this).attr("giftId");
+							womGift.giftCode = $(this).attr("giftCode");
+							womGift.isGet = $(this).attr("isGet");
+							womGift.granter = $(this).attr("granter");
+							womGiftArr.push(womGift);
+						});
 					}	
 				}	
-				wom["info"]=womInfo;
-				wom["item"]=womItem;
-				wom["womGifts"]=womGiftArr;
+			} else if(womChannel == "Stu") {
+				var tr1 = $("#praiseTab2").find("tr:eq(0)");
+				var stuNames = tr1.find("td:eq(1)").find(".easyui-textbox").textbox("getValue");
+				if(stuNames == "") {
+					showMessage('提示', "请填写学员姓名!",null);
+					return false;
+	 			} else {
+					womItem["studentName"] = stuNames;
+					womItem["identityType"] = tr1.find("td:eq(3)").find(".easyui-combobox").combobox("getValue");
+					womItem["identityId"] = tr1.find("td:eq(3)").find(".easyui-textbox").textbox("getValue");
+					var tr2 = $("#praiseTab2").find("tr:eq(1)");
+					womItem["className"] = tr2.find("td:eq(1)").find(".easyui-textbox").textbox("getValue");
+					womItem["teacherIdSchool"] = $("#t_teacher_school").combobox("getValue");
+					womItem["teacherId"] = $("#t_teacher_id").combobox("getValue");
+				}	
+			} else if(womChannel == "Sta") {
+				if($("#womStaffName").textbox("getValue") != "") {
+					womItem["staffName"] = $("#womStaffName").textbox("getValue");
+				} else {
+					showMessage('提示', "请填写员工姓名!",null);
+					return false;
+				}	
 			}	
-		}
-		//获取口碑信息-end
-		var courseInfo =build();
-		var paramValue={
-			"womInfo":wom,
-			"courseInfo":courseInfo
-		};
-		paramValue =JSON.stringify(paramValue);
-		$.ajax({
-					type : "POST",
-					url: "/sys/course/addSingleCourse.do",
-					data: "param="+paramValue,
-					async: false,
-					beforeSend: function()
-			    	{
-			    		showProgressLoader("正在添加课程,请稍等...",400);
-			    	},
-			    	success: function(data) 
-			    	{
-			    		hideProgressLoader() 
-			    		if(data=="true")
-			    		{
-			    			showMessage('提示', "添加课程成功！",function(){window.location.href="addCourseList.jsp";});
-			    		}
-			    		else
-			    		{
-			    			showMessage('提示', "添加课程失败！",null);
-			    		}	
-			    		
-			    	},
-			        error:function(){
-			        	hideProgressLoader();
-			        	showMessage('提示', "调用添加课程服务失败！",null);
-			        }
-				});
+			wom["info"] = womInfo;
+			wom["item"] = womItem;
+			wom["womGifts"] = womGiftArr;
+		}	
 	}
-	
-	
-	function searchStudent()
-	{
-		$('#dlg').dialog({
-			title:"学员检索",
-		});
-		$('#dlg').attr("src","/sys/course/searchStudent.jsp?callBackFn=searchStudentInfo");
-		$('#dlg').dialog("open");
-	}
-	
-	function searchStudentInfo(obj)
-	{
-		obj =eval("("+obj+")");
-		var tr1 =$("#praiseTab2").find("tr:eq(0)");
-		tr1.find("td:eq(1)").find(".easyui-textbox").textbox("setValue",obj.name);
-		tr1.find("td:eq(3)").find(".easyui-combobox").combobox("setValue",obj.identityType);
-		tr1.find("td:eq(3)").find(".easyui-textbox").textbox("setValue",obj.identityId);
-		var tr2 =$("#praiseTab2").find("tr:eq(1)");
-		tr2.find("td:eq(1)").find(".easyui-textbox").textbox("setValue",obj.className);
-		tr1.attr("studentId",obj.studentId);
-		tr1.attr("studentSchoolId",obj.schoolId);
-		$('#dlg').attr("src","");
-		$('#dlg').dialog("close");
-	}
-	
-	function qryStudent()
-	{
-		$('#dlg').dialog({
-			title:"查询学生",
-		});
-		$('#dlg').attr("src","/sys/course/searchStudent.jsp?callBackFn=qryStudentInfo");
-		$('#dlg').dialog("open");
-	}
-	
-	function qryStudentInfo(obj)
-	{
-		obj =eval("("+obj+")");
-		var tr =$("#praiseTab1").find("tr:eq(3)");
-		tr.find("td:eq(1)").html("<span>"+obj.name+"</span>");
-		tr.find("td:eq(3)").html("<span>"+obj.identityId+"</span>");
-		tr.find("td:eq(5)").html("<span>"+obj.className+"</span>");
-		tr.attr("identityType",obj.identityType);
-		tr.attr("studentId",obj.studentId);
-		tr.attr("studentSchoolId",obj.schoolId);
-		$('#dlg').attr("src","");
-		$('#dlg').dialog("close");
-	}
-	
-	
-	
-	$("#c_schoolA").combobox({
-		onChange:function(){
-			var sId =$("#c_schoolA").combobox("getValue");
-				var url="<%=path %>/pubData/qryStaffList.do?post=16,17"+"&schoolId="+sId;
-				$("#c_adviserA").combobox({
-					valueField:'staffId', 
-					textField:'userName', 
-					url:url
-				});
-		}
-	})
-	
-	$("#c_schoolB").combobox({
-		onChange:function(){
-			var sId =$("#c_schoolB").combobox("getValue");
-				var url="<%=path %>/pubData/qryStaffList.do?post=16,17"+"&schoolId="+sId;
-				$("#c_adviserB").combobox({
-					valueField:'staffId', 
-					textField:'userName', 
-					url:url
-				});
-		}
-	})
-	
-	$("#c_schoolsA").combobox({
-		onChange:function(){
-			var sId =$("#c_schoolsA").combobox("getValue");
-			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
-			$("#c_teacherA").combobox({
-				url:urls
-			});
-		}
-	})
-	
-	$("#c_schoolsB").combobox({
-		onChange:function(){
-			var sId =$("#c_schoolsB").combobox("getValue");
-			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
-			$("#c_teacherB").combobox({
-				url:urls
-			});
-		}
-	})
-	
-	$("#t_teacher_school").combobox({
-		onChange:function(){
-			var sId =$("#t_teacher_school").combobox("getValue");
-			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
-			$("#t_teacher_id").combobox({
-				url:urls
-			});
-		}
-	})
-	
-	$("#adviserType").combobox({
-		onChange:function(n,o)
-		{
-	    	clearData("adviserTd1");
-	    	clearData("adviserTd2");
+	//获取口碑信息-end
+	var courseInfo = build();
+	var paramValue = {
+		"womInfo" : wom,
+		"courseInfo" : courseInfo
+	};
+	paramValue =JSON.stringify(paramValue);
+	$.ajax({
+		type : "POST",
+		url: "/sys/course/addSingleCourse.do",
+		data: "param="+paramValue,
+		async: false,
+		beforeSend: function() {
+		    showProgressLoader("正在添加课程,请稍等...",400);
+		},
+		success: function(data) {
+			hideProgressLoader() 
+			if(data == "true") {
+			   	showMessage('提示', "添加课程成功！",function(){window.location.href="addCourseList.jsp";});
+		    } else {
+		    	showMessage('提示', "添加课程失败！",null);
+		    }	
+		},
+		error:function() {
+		    hideProgressLoader();
+		    showMessage('提示', "调用添加课程服务失败！",null);			
 		}
 	});
+}
 	
-	$("#s_schooldA").combobox({
-		
-		onChange:function(){
-			var sId =$("#s_schooldA").combobox("getValue");
-			var type=$("#adviserType").combobox("getValue");
-			if("1"==type)
-			{
-				var url="<%=path %>/pubData/qryStaffList.do?post=16,17"+"&schoolId="+sId;
-				$("#s_teacherA").combobox({
-					valueField:'staffId', 
-					textField:'userName', 
-					url:url
-				});
-			}else
-			{
-				var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
-				$("#s_teacherA").combobox({
-					valueField:'teacherId', 
-					textField:'byname', 
-					url:urls
-				});
-			}
-			
-		}
-	})
-	
-	$("#s_schooldB").combobox({
-		onChange:function(){
-			var type=$("#adviserType").combobox("getValue");
-			var sId =$("#s_schooldB").combobox("getValue");
-			if("1"==type)
-			{
-				var url="<%=path %>/pubData/qryStaffList.do?post=16,17"+"&schoolId="+sId;
-				$("#s_teacherB").combobox({
-					valueField:'staffId', 
-					textField:'userName', 
-					url:url
-				});
-			}else
-			{
-				var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
-				$("#s_teacherB").combobox({
-					valueField:'teacherId', 
-					textField:'byname', 
-					url:urls
-				});
-			}
-		}
+function searchStudent() {
+	$('#dlg').dialog({
+		title:"学员检索",
 	});
+	$('#dlg').attr("src","/sys/course/searchStudent.jsp?callBackFn=searchStudentInfo");
+	$('#dlg').dialog("open");
+}
 	
-	function getWomGift()
-	{
-		if($("#praiseTab1").find("tr:eq(3)").attr("studentId")!=null)
-		{
-			$('#giftDlg').dialog({
+function searchStudentInfo(obj) {
+	obj = eval("("+obj+")");
+	var tr1 = $("#praiseTab2").find("tr:eq(0)");
+	tr1.find("td:eq(1)").find(".easyui-textbox").textbox("setValue",obj.name);
+	tr1.find("td:eq(3)").find(".easyui-combobox").combobox("setValue",obj.identityType);
+	tr1.find("td:eq(3)").find(".easyui-textbox").textbox("setValue",obj.identityId);
+	var tr2 = $("#praiseTab2").find("tr:eq(1)");
+	tr2.find("td:eq(1)").find(".easyui-textbox").textbox("setValue",obj.className);
+	tr1.attr("studentId",obj.studentId);
+	tr1.attr("studentSchoolId",obj.schoolId);
+	$('#dlg').attr("src","");
+	$('#dlg').dialog("close");
+}
+	
+function qryStudent() {
+	$('#dlg').dialog({
+		title:"查询学生",
+	});
+	$('#dlg').attr("src","/sys/course/searchStudent.jsp?callBackFn=qryStudentInfo");
+	$('#dlg').dialog("open");
+}
+	
+function qryStudentInfo(obj) {
+	obj =eval("("+obj+")");
+	var tr =$("#praiseTab1").find("tr:eq(3)");
+	tr.find("td:eq(1)").html("<span>"+obj.name+"</span>");
+	tr.find("td:eq(3)").html("<span>"+obj.identityId+"</span>");
+	tr.find("td:eq(5)").html("<span>"+obj.className+"</span>");
+	tr.attr("identityType",obj.identityType);
+	tr.attr("studentId",obj.studentId);
+	tr.attr("studentSchoolId",obj.schoolId);
+	$('#dlg').attr("src","");
+	$('#dlg').dialog("close");
+}
+
+$("#c_schoolA").combobox({
+	onChange:function(){
+		var sId = $("#c_schoolA").combobox("getValue");
+		var url = "<%=path %>/pubData/qryStaffList.do?post=16,17"+"&schoolId="+sId;
+		$("#c_adviserA").combobox({
+			valueField:'staffId', 
+			textField:'userName', 
+			url:url
+		});
+	}
+});
+	
+$("#c_schoolB").combobox({
+	onChange:function(){
+		var sId = $("#c_schoolB").combobox("getValue");
+		var url = "<%=path %>/pubData/qryStaffList.do?post=16,17"+"&schoolId="+sId;
+		$("#c_adviserB").combobox({
+			valueField:'staffId', 
+			textField:'userName', 
+			url:url
+		});
+	}
+});
+	
+$("#c_schoolsA").combobox({
+	onChange:function(){
+		var sId = $("#c_schoolsA").combobox("getValue");
+		var urls = "<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+		$("#c_teacherA").combobox({
+			url:urls
+		});
+	}
+});
+	
+$("#c_schoolsB").combobox({
+	onChange:function(){
+		var sId = $("#c_schoolsB").combobox("getValue");
+		var urls = "<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+		$("#c_teacherB").combobox({
+			url:urls
+		});
+	}
+});
+	
+$("#t_teacher_school").combobox({
+	onChange:function(){
+		var sId = $("#t_teacher_school").combobox("getValue");
+		var urls = "<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+		$("#t_teacher_id").combobox({
+			url:urls
+		});
+	}
+});
+	
+$("#adviserType").combobox({
+	onChange:function(n,o) {
+	    clearData("adviserTd1");
+	    clearData("adviserTd2");
+	}
+});
+	
+$("#s_schooldA").combobox({
+	onChange:function(){
+		var sId = $("#s_schooldA").combobox("getValue");
+		var type = $("#adviserType").combobox("getValue");
+		if("1" == type) {
+			var url = "<%=path %>/pubData/qryStaffList.do?post=16,17"+"&schoolId="+sId;
+			$("#s_teacherA").combobox({
+				valueField:'staffId', 
+				textField:'userName', 
+				url:url
+			});
+		} else {
+			var urls = "<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+			$("#s_teacherA").combobox({
+				valueField:'teacherId', 
+				textField:'byname', 
+				url:urls
+			});
+		}
+	}
+});
+	
+$("#s_schooldB").combobox({
+	onChange:function(){
+		var type = $("#adviserType").combobox("getValue");
+		var sId = $("#s_schooldB").combobox("getValue");
+		if("1" == type) {
+			var url = "<%=path %>/pubData/qryStaffList.do?post=16,17"+"&schoolId="+sId;
+			$("#s_teacherB").combobox({
+				valueField:'staffId', 
+				textField:'userName', 
+				url:url
+			});
+		} else {
+			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+			$("#s_teacherB").combobox({
+				valueField:'teacherId', 
+				textField:'byname', 
+				url:urls
+			});
+		}
+	}
+});
+	
+function getWomGift() {
+	if($("#praiseTab1").find("tr:eq(3)").attr("studentId") != null) {
+		$('#giftDlg').dialog({
 			title:"录入赠品",
 			left:50,
-				top:200
+			top:200
+		});
+		$('#giftDlg').attr("src","/sys/course/addGift.jsp");
+		$('#giftDlg').dialog("open");
+	} else {
+		showMessage("提示","请先选择一个学员",null);
+	}		
+}
+	
+function getWomGiftInfo(obj) {
+	$('#giftDlg').attr("src","");
+	$('#giftDlg').dialog("close");
+	if(obj.length > 0) {
+		for(var i = 0; i < obj.length; i++) {
+			var span = $("#modelSpan").clone();
+			span.css("display","block");
+			span.addClass("womGiftSpan");
+			span.html(obj[i].showName);
+			span.attr("giftName",obj[i].giftName);
+			span.attr("usableAmount",obj[i].amount);
+			span.attr("amount",obj[i].amount);
+			span.attr("studentGiftId",obj[i].studentGiftId);
+			span.attr("unit",obj[i].unit); 
+			span.attr("effNum",obj[i].effNum); 
+			span.attr("giftType", obj[i].giftType);
+			span.attr("giftId",obj[i].giftId);
+			span.attr("giftCode",obj[i].giftCode);
+			span.attr("isGet",obj[i].isGet);
+			span.attr("granter",obj[i].granter);
+			span.dblclick(function(){
+				span.remove();
 			});
-			$('#giftDlg').attr("src","/sys/course/addGift.jsp");
-			$('#giftDlg').dialog("open");
-		}
-		else
-		{
-			showMessage("提示","请先选择一个学员",null);
+			$("#womGiftTd").append(span);
 		}	
-		
+	}	
+}
+	
+function closeWomGift() {
+	$('#giftDlg').attr("src","");
+	$('#giftDlg').dialog("close");
+}
+	
+function checkParam() {
+	if($("#payDate").datebox("getValue") == "") {
+		showMessage("提示","请选择缴费时间", function() {
+			hideMessage();
+			scrolltoDom($("#payDate").parent());
+		});
+		return false;
 	}
-	
-	function getWomGiftInfo(obj)
-	{
-		$('#giftDlg').attr("src","");
-		$('#giftDlg').dialog("close");
-		if(obj.length>0)
-		{
-			for(var i=0;i<obj.length;i++)
-			{
-				var span =$("#modelSpan").clone();
-				span.css("display","block");
-				span.addClass("womGiftSpan");
-				span.html(obj[i].showName);
-				span.attr("giftName",obj[i].giftName);
-				span.attr("usableAmount",obj[i].amount);
-				span.attr("amount",obj[i].amount);
-				span.attr("studentGiftId",obj[i].studentGiftId);
-				span.attr("unit",obj[i].unit); 
-				span.attr("effNum",obj[i].effNum); 
-				span.attr("giftType", obj[i].giftType);
-				span.attr("giftId",obj[i].giftId);
-				span.attr("giftCode",obj[i].giftCode);
-				span.attr("isGet",obj[i].isGet);
-				span.attr("granter",obj[i].granter);
-				span.dblclick(function(){
-					span.remove();
-				});
-				$("#womGiftTd").append(span);
-			}	
-		}	
-	}
-	
-	function closeWomGift()
-	{
-		$('#giftDlg').attr("src","");
-		$('#giftDlg').dialog("close");
-	}
-	
-	
-	function checkParam()
-	{
-		if($("#payDate").datebox("getValue")=="")
-		{
-			showMessage("提示","请选择缴费时间",function(){
+	if($("#courseType").combobox("getValue") == "001") {
+		if($("#stageId").combobox("getValue") == "") {
+			showMessage("提示","请选择阶段", function() {
 				hideMessage();
-				scrolltoDom($("#payDate").parent());
+				scrolltoDom($("#stageId").parent());
 			});
 			return false;
 		}
-		if($("#courseType").combobox("getValue")=="001")
-		{
-			if($("#stageId").combobox("getValue")=="")
-			{
-				showMessage("提示","请选择阶段",function(){
-					hideMessage();
-					scrolltoDom($("#stageId").parent());
-				});
-				return false;
-			}
-			if($("#classType").combobox("getValue")=="")
-			{
-				showMessage("提示","请选择班级类型",function(){
-					hideMessage();
-					scrolltoDom($("#classType").parent());
-				});
-				return false;
-			}
-			if($("#feeType").combobox("getValue")=="")
-			{
-				showMessage("提示","请选择业绩类型",function(){
-					hideMessage();
-					scrolltoDom($("#feeType").parent());
-				});
-				return false;
-			}
-			else
-			{
-				if($("#feeType").combobox("getValue")=="001")
-				{
-					if($("#adviserA").combobox("getValue")=="")
-					{
-						showMessage("提示","请选择业绩顾问A",function(){
-							hideMessage();
-							scrolltoDom($("#adviserA").parent());
-						});
-						return false;
-					}
-					else if($("#adviserB").combobox("getValue")==$("#adviserA").combobox("getValue"))
-					{
-						showMessage("提示","业绩顾问A不能和业绩顾问B相同",function(){
+		if($("#classType").combobox("getValue") == "") {
+			showMessage("提示","请选择班级类型", function() {
+				hideMessage();
+				scrolltoDom($("#classType").parent());
+			});
+			return false;
+		}
+		if($("#feeType").combobox("getValue") == "") {
+			showMessage("提示","请选择业绩类型", function() {
+				hideMessage();
+				scrolltoDom($("#feeType").parent());
+			});
+			return false;
+		} else {
+			if($("#feeType").combobox("getValue") == "001") {
+				if($("#adviserA").combobox("getValue") == "") {
+					showMessage("提示","请选择业绩顾问A", function() {
+						hideMessage();
+						scrolltoDom($("#adviserA").parent());
+					});
+					return false;
+				} else if($("#adviserB").combobox("getValue") == $("#adviserA").combobox("getValue")) {
+						showMessage("提示","业绩顾问A不能和业绩顾问B相同", function() {
 							hideMessage();
 							scrolltoDom($("#adviserB").parent());
 						});
 						return false;
 					}	
+			} else {
+				if($("#adviserTeacherA").combobox("getValue") != '' 
+					&& ($("#adviserTeacherB").combobox("getValue") == $("#adviserTeacherA").combobox("getValue"))) {
+					showMessage("提示","业绩老师A不能和业绩老师B相同",function(){
+						hideMessage();
+						scrolltoDom($("#adviserTeacherB").parent());
+					});
+					return false;
 				}
-				else
-				{
-					if($("#adviserTeacherA").combobox("getValue")!='' && ($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue")))
-					{
-						showMessage("提示","业绩老师A不能和业绩老师B相同",function(){
-							hideMessage();
-							scrolltoDom($("#adviserTeacherB").parent());
-						});
-						return false;
-					}
-					
-				}	
-			}
-			
-		}
-		else
-		{
-			if($("#shortClassId").combobox("getValue")=="")
-			{
-				showMessage("提示","请选择短期课名称",function(){
-					hideMessage();
-				});
-				return false;
-			}
-			if($("#shortClassType").combobox("getValue")=="")
-			{
-				showMessage("提示","请选择班级类型",function(){
-					hideMessage();
-				});
-				return false;
-			}
-			if($("#s_teacherA").combobox("getValue")=="")
-			{
-				showMessage("提示","请选择"+$("#adviserType").combobox("getText")+"A",function(){
-					hideMessage();
-				});
-				return false;
-			}
-			else if($("#s_teacherB").combobox("getValue")==$("#s_teacherA").combobox("getValue"))
-			{
-				showMessage("提示",$("#adviserType").combobox("getText")+"A不能和"+$("#adviserType").combobox("getText")+"B相同",function(){
-					hideMessage();
-				});
-				return false;
 			}	
-			
 		}
-		return true;
+	} else {
+		if($("#shortClassId").combobox("getValue") == "") {
+			showMessage("提示","请选择短期课名称", function() {
+				hideMessage();
+			});
+			return false;
+		}
+		if($("#shortClassType").combobox("getValue") == "") {
+			showMessage("提示","请选择班级类型", function() {
+				hideMessage();
+			});
+			return false;
+		}
+		if($("#s_teacherA").combobox("getValue") == "") {
+			showMessage("提示","请选择"+$("#adviserType").combobox("getText") + "A", function() {
+				hideMessage();
+			});
+			return false;
+		} else if($("#s_teacherB").combobox("getValue") == $("#s_teacherA").combobox("getValue")) {
+			showMessage("提示",$("#adviserType").combobox("getText")+"A不能和"+$("#adviserType").combobox("getText")+"B相同", function() {
+				hideMessage();
+			});
+			return false;
+		}	
 	}
-	</script>
+	return true;
+}
+
+//常规课上传缴费单
+$("#uploadBtn").click(function() {
+	var fileName = $("#fileName").filebox("getValue");
+	if(fileName != "" && fileName != null && fileName != undefined) {
+		var schoolId = $("#schoolId").val();
+		var handlerId = $("#handlerId").val();
+		$("#courseFm").form("submit", {
+			url: "/sys/fileUpload?type=course&schoolId="+schoolId+"&handlerId="+handlerId,
+			onSubmit: function () {
+			
+			},
+			success: function (result) {
+			var data = JSON.parse(result);
+				if(data.flag) {
+					courseImgUrl = data.fileId;
+					$.messager.alert('提示', "文件上传成功！", "info", function() {$("#cancelUploadBtn").linkbutton('disable');});
+				} else {
+					$.messager.alert('提示', data.msg);
+				}
+			}
+    	});
+    } else {
+    	$.messager.alert('提示', "请您先选择一个文件！");
+    }
+});
+    
+//常规课取消上传缴费单
+$("#cancelUploadBtn").click(function() {
+    $("#fileName").filebox("setValue", "");
+});
+
+//短期课上传缴费单
+$("#shortUploadBtn").click(function() {
+	var fileName = $("#shortFileName").filebox("getValue");
+	if(fileName != "" && fileName != null && fileName != undefined) {
+		var schoolId = $("#schoolId").val();
+		var handlerId = $("#handlerId").val();
+		$("#courseFm").form("submit", {
+			url: "/sys/fileUpload?type=course&schoolId="+schoolId+"&handlerId="+handlerId,
+			onSubmit: function () {
+			
+			},
+			success: function (result) {
+			var data = JSON.parse(result);
+				if(data.flag) {
+					courseImgUrl = data.fileId;
+					$.messager.alert('提示', "文件上传成功！", "info", function() {$("#shortCancelUploadBtn").linkbutton('disable');});
+				} else {
+					$.messager.alert('提示', data.msg);
+				}
+			}
+    	});
+    } else {
+    	$.messager.alert('提示', "请您先选择一个文件！");
+    }
+});
+    
+//短期课取消上传缴费单
+$("#shortCancelUploadBtn").click(function() {
+    $("#shortFileName").filebox("setValue", "");
+});
+</script>
