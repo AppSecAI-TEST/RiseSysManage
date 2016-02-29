@@ -153,7 +153,6 @@
 			{
 				addObj.per =(totalReal/planNum).toFixed(4)*100+"%";
 			}
-			alert(1111)
 			$('#list_data').datagrid('insertRow',{
 				row: addObj
 			});

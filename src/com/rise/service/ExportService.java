@@ -1,5 +1,6 @@
 package com.rise.service;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -1550,5 +1551,41 @@ public class ExportService
 		}
 		return wb;
 	}
+	
+	
+	public void exportServiceRate(String fileName,String array,OutputStream out) throws Exception
+	{
+		JSONArray jarray =JSONArray.fromObject(array);
+		List list = JacksonJsonMapper.getInstance().readValue(array, List.class);
+		String filePath =this.getFullFilePath(fileName);
+		HttpClient client = new HttpClient();   
+		GetMethod httpGet = new GetMethod(filePath);  
+		client.executeMethod(httpGet); 
+		InputStream inputStream =httpGet.getResponseBodyAsStream();
+		Map<String, List<Map>> beanParams = new HashMap<String, List<Map>>();
+		beanParams.put("reportList", list);  
+        XLSTransformer former = new XLSTransformer(); 
+        HSSFWorkbook workBook = (HSSFWorkbook)former.transformXLS(inputStream, beanParams);
+        HSSFSheet sheet =workBook.getSheetAt(0);
+        int rowNum =jarray.size();
+        HSSFCellStyle styleRed = workBook.createCellStyle();
+		HSSFFont fontContent = workBook.createFont();
+		fontContent.setColor(HSSFFont.COLOR_RED);
+		styleRed.setFont(fontContent);
+        for(int i=1;i<=rowNum;i++)
+        {
+        	HSSFCell cell=sheet.getRow(i).getCell(19);
+        	double value =Double.valueOf(cell.getStringCellValue());
+        	if(value<0)
+        	{
+        		cell.setCellStyle(styleRed);
+        		cell.setCellValue("£¨"+(-value)+"£©");
+        	}	
+        }	
+        workBook.write(out);
+		inputStream.close();
+		out.close();
+	}
+	
 	
 }

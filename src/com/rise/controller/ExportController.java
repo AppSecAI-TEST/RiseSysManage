@@ -481,4 +481,27 @@ public class ExportController
 		}
 
 	}
+	
+	//教师服务率导出
+	@RequestMapping("/exportServiceRate.do")
+	public void exportServiceRate(String fileName,String array, HttpServletResponse response , HttpServletRequest request)
+	{
+		OutputStream out = null;
+		try
+		{
+			StringBuffer displayFileName = new StringBuffer(fileName);
+			displayFileName.append(new SimpleDateFormat("yyMMdd").format(new Date()));
+			displayFileName.append(".xls");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName="+URLEncoder.encode(displayFileName.toString(),"utf-8"));
+			out = response.getOutputStream();
+			es.exportServiceRate(fileName,array, out);
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+		}
+
+	}
 }

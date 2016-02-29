@@ -15,7 +15,7 @@
   		<div style="margin-right:5px;">
   			<form id="qryFm">
   				<input type="hidden" id="tableName" value="report_teacher_service_rate"/>
-  				<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
+  				<table class="search_tab">
   					<tr>
   						<td align="right" width="50px"><span>校区：</span></td>
 	  					<td width="115px">
@@ -40,7 +40,6 @@
   					</tr>
   				</table>
   			</form>
-  			<div style="padding:5px 0;min-width:1100px; width:100%;">
   				<table class="easyui-datagrid" style="height:470px;" id="list_data"
 					title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
@@ -69,7 +68,33 @@
 						</tr>
 					</thead>
 				</table>
-  			</div>
+				<div id="toolbar" style="padding: 2px; height: auto">
+	   				<a href="javascript:void(0)" id="export" class="easyui-linkbutton" onclick="exportData()" iconCls="icon-add" style="width: 100px;">导出全部</a>
+				</div>
   		</div>
   	</body>
 </html>
+<script type="text/javascript">
+	function exportData()
+	{
+		if($("#list_data").datagrid("getData").total>0)
+		{
+			var fileName =parent.$("li.tabs-selected").find("span.tabs-title").html();
+			var array =JSON.stringify($("#list_data").datagrid("getData").rows);
+			try
+			{
+				window.location.href="/sys/export/exportServiceRate.do?fileName="+fileName+"&array="+array;
+			}
+			catch(e)
+			{
+				$.messager.alert('提示', "模版不存在！",function(){
+					window.history.back();
+				});
+			}
+		}
+		else
+		{
+			$.messager.alert('提示', "没有数据可以导出！");
+		}	
+	}
+</script>
