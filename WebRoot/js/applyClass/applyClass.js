@@ -114,7 +114,13 @@ $(document).ready(function() {
 	
 	//放班申请
 	$("#applyClass").click(function() {
-    	window.location.href = "/sys/applyClass/addApplyClass.jsp";
+		var curr_time = new Date();
+		var date = curr_time.getDate();
+		if(date <= 15) {
+			window.location.href = "/sys/applyClass/addApplyClass.jsp";
+		} else {
+			$.messager.alert('提示', "每月15号前可以申请放班，超过15号不允许申请放班！");
+		}
     });
 	
 	//取消放班申请
