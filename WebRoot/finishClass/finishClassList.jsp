@@ -30,7 +30,7 @@
 					</td>
 					<td align="right" style="min-width: 70px;"><span>班级：</span></td>
 					<td style="min-width: 130px;">
-						<input id="classInstId" name="classInstId" type="text" class="easyui-textbox" style="width: 127px; height: 25px;"/>
+						<input id="classInstId" name="className" type="text" class="easyui-textbox" style="width: 127px; height: 25px;"/>
 					</td>
 					<td align="right" style="min-width: 70px;"><span>班级性质：</span></td>
 					<td style="min-width: 117px;">
