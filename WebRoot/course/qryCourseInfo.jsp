@@ -198,7 +198,7 @@ function coures(type)
 				}	
 			}else
 			{
-				if(courseState=='001' || courseState=='002'||type=='view')
+				if(courseState=='001' || type=='view')
 				{
 					var studentCourseId=row.studentCourseId;
 					if(type=="view")
