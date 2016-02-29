@@ -39,7 +39,7 @@ public class GiftManageController {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = giftManageService.qryDataListByPage(page, rows, param, funcNodeId);
-			log.error(retVal);
+			
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -66,7 +66,7 @@ public class GiftManageController {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = giftManageService.addGiftInfo(json,type);
-			log.error(retVal);
+			
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -117,7 +117,7 @@ public class GiftManageController {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = giftManageService.updateGiftInfo(json,type);
-			log.error(retVal);
+			
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -196,7 +196,7 @@ public class GiftManageController {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = giftManageService.updateCouponGiftInfo(json,type);
-			log.error(retVal);
+			
 			out.write(retVal);
 		}
 		catch(Exception e)
@@ -248,7 +248,7 @@ public class GiftManageController {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = giftManageService.updateCourseGiftInfo(json);
-			log.error(retVal);
+			
 			out.write(retVal);
 		}
 		catch(Exception e)

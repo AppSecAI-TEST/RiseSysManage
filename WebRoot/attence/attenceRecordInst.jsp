@@ -33,6 +33,14 @@
 						if("${selHourRange}" != "")
 						{
 							$("#classTime").combobox("setValue","${selHourRange}");
+							for(var i = 0,n = data.length;i < n;i++)
+							{
+								if(data[i].paramValue == "${selHourRange}")
+								{
+									$("#classLessonHour").textbox("setValue",data[i].param4);
+									break;
+								}
+							}
 						}
 					},
 					onSelect:function(data){
