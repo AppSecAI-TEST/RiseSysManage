@@ -366,6 +366,17 @@ function validateCourses(studentCourses)
 					continue;
 				}
 			}
+			if(studentCourseId==oldCourse.studentCourseId  &&stageId==stageName && classType==oldClassType && oldFeeType==feeType)
+			{
+				if(courseState=='002')
+				{
+					showMessage("提示","当前课程"+orderCourses[m]+classType+"为已定班,不能修改课程信息",null);
+					return;
+				}else
+				{
+					continue;
+				}
+			}
 				
 			if(courseState=='001' || courseState=='002' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 			{
