@@ -366,7 +366,7 @@ function validateCourses(studentCourses)
 					continue;
 				}
 			}
-			if((studentCourseId==oldCourse.studentCourseId)  &&stageId==stageName && classType==oldClassType && oldFeeType==feeType)
+			if(studentCourseId==oldCourse.studentCourseId  &&stageId==stageName && classType==oldClassType && oldFeeType==feeType)
 			{
 				if(courseState=='002')
 				{
