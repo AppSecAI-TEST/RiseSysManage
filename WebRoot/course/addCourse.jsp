@@ -513,7 +513,7 @@
 											<span>学员姓名：</span>
 										</td>
 										<td align="center" style="border-right: 1px solid #ccc;">
-											<input type="text" class="easyui-textbox"
+											<input type="text" class="easyui-textbox" editable="false"
 												style="width: 100px;height: 25px">
 										</td>
 										<td align="right" width="100px"
@@ -539,7 +539,7 @@
 										</td>
 										<td align="center"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
-											<input type="text" class="easyui-textbox"
+											<input type="text" class="easyui-textbox" editable="false"
 												style="width: 100px;height: 25px">
 										</td>
 										<td align="right"
@@ -1137,6 +1137,7 @@ $("#submitBtn").click(function()
 		var order = course.stageOrder;
 		var courseState=course.courseState;
 		var stageName =course.stageId;
+		/*
 		if(courseState=='001' || courseState=='002' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 		{
 			if(feeType=='001')//新够买阶段业绩类型为新招，学员还有未结束课程再次购买业绩类型不能为新招。
@@ -1163,6 +1164,7 @@ $("#submitBtn").click(function()
 				}
 			}
 		}
+		*/
 	}
 	addCourseInfo();
 });
