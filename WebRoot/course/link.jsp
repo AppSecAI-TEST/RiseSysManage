@@ -56,24 +56,29 @@
 	      					<td></td>
       					</tr>
       					<tr>
-      					  <td align="right"><span>上传缴费单：</span></td>
-      					  <td  colspan="5"><input style="width: 300px; height: 28px;" class="easyui-filebox" name="file2" data-options="prompt:''" ><a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">查看缴费单</a></td>
-   					  </tr>
+      					  	<td align="right"><span>上传缴费单：</span></td>
+      					 	<td  colspan="5">
+      					 		<input type="hidden" name="imgUrl" id="imgUrl"/>
+      					  		<input style="width: 300px; height: 28px;" class="easyui-filebox" name="fileName" id="fileName" data-options="prompt:''"/>
+      					  		<a href="javascript:void(0)" class="easyui-linkbutton" id="uploadBtn" iconCls="icon-save" iconCls="icon-save" style="width: 80px; height: 28px;">上传</a>
+	                        	<a href="javascript:void(0)" class="easyui-linkbutton" id="cancelUploadBtn" iconCls="icon-cancel" iconCls="icon-cancel" style="width: 80px; height: 28px;">取消</a>
+      					 		<a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">查看缴费单</a>
+      					 	</td>
+   					  	</tr>
       					<tr>
-      					  <td align="right"><span>备注：</span></td>
-      					  <td colspan="5"><input type="text" id="remark" name="remark" class="easyui-textbox validatebox"  style="width: 820px; height: 25px;"></textarea></td>
-   					  </tr>
-      				  <tr>
-      					  <td align="right"><span>关联已报课程：</span></td>
-      					  <td><href="javascript:void(0)" id="addArchives" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="linkCourse()">打开学员之前的课程列表关联连报</a></td>
-      					  <td align="right"><span>连报类型：</span></td>
-      					  <td colspan="3">
-      					  <select  id="link"   style="width: 150px; height: 28px;"
-	      						data-options="formatter:formatLinkNum, valueField: 'favorPrice', textField: 'linkNum', panelHeight: 'auto'"
-	      						>
-      					    
-    					    </select></td>
-   					  </tr>
+      					  	<td align="right"><span>备注：</span></td>
+      					  	<td colspan="5"><input type="text" id="remark" name="remark" class="easyui-textbox validatebox"  style="width: 820px; height: 25px;"></textarea></td>
+   					  	</tr>
+      				  	<tr>
+      					  	<td align="right"><span>关联已报课程：</span></td>
+      					  	<td><href="javascript:void(0)" id="addArchives" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="linkCourse()">打开学员之前的课程列表关联连报</a></td>
+      					  	<td align="right"><span>连报类型：</span></td>
+      					  	<td colspan="3">
+      					  		<select  id="link"   style="width: 150px; height: 28px;"
+	      							data-options="formatter:formatLinkNum, valueField: 'favorPrice', textField: 'linkNum', panelHeight: 'auto'">
+    					    	</select>
+    					    </td>
+   					  	</tr>
 	      			</table>
                 </form>
 	      	</div>

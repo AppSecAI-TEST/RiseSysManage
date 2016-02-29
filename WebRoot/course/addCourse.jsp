@@ -162,47 +162,42 @@
 							<td align="right"></td>
 							<td></td>
 						</tr>
-						
 						<tr id="adviserTeacherDiv" style="display: none;">
-						<td align="right">
-							<span>业绩老师A：</span>
-						</td>
-						<td>
-						<select class="easyui-combobox" id="adviserTeacherA_school" style="width: 100px; height: 25px;" editable='false' 
-								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-								  >
-							</select>
-							<select name="adviserTeacherA" editable='false' class="easyui-combobox vaildatebox" id="adviserTeacherA"
-								style="width: 100px; height: 25px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'" 
-	      						 >
-							</select>
-						</td>
-						<td align="right">
-							<span>业绩老师B：</span>
-						</td>
-						<td> 
-						<select class="easyui-combobox" id="adviserTeacherB_school" style="width: 100px; height: 25px;" editable='false'
-								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-				         >
-						</select>
-						<select name="adviserTeacherB" editable='false' class="easyui-combobox vaildatebox" id="adviserTeacherB" 
-							style="width: 100px; height: 25px;"
-							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
-      						 >
-						</select>
-						</td>
-						<td align="right"></td>
-						<td></td>
-					</tr>
+							<td align="right"><span>业绩老师A：</span></td>
+							<td>
+								<select class="easyui-combobox" id="adviserTeacherA_school" style="width: 100px; height: 25px;" editable='false' 
+									data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+								</select>
+								<select name="adviserTeacherA" editable='false' class="easyui-combobox vaildatebox" id="adviserTeacherA"style="width: 100px; height: 25px;"
+									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
+								</select>
+							</td>
+							<td align="right"><span>业绩老师B：</span></td>
+							<td> 
+								<select class="easyui-combobox" id="adviserTeacherB_school" style="width: 100px; height: 25px;" editable='false'
+									data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+								</select>
+								<select name="adviserTeacherB" editable='false' class="easyui-combobox vaildatebox" id="adviserTeacherB" style="width: 100px; height: 25px;"
+									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
+								</select>
+							</td>
+							<td align="right"></td>
+							<td></td>
+						</tr>
 						<tr>
-      					  <td align="right"><span>上传缴费单：</span></td>
-      					  <td  colspan="5"><input style="width: 300px; height: 25px;" class="easyui-filebox" name="file2" data-options="prompt:''" ><a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">查看缴费单</a></td>
-   					  </tr>
+      					  	<td align="right"><span>上传缴费单：</span></td>
+      					  	<td colspan="5">
+      					  		<input type="hidden" name="imgUrl" id="imgUrl"/>
+      					  		<input style="width: 300px; height: 25px;" class="easyui-filebox" name="fileName" id="fileName" data-options="prompt:''"/>
+      					  		<a href="javascript:void(0)" class="easyui-linkbutton" id="uploadBtn" iconCls="icon-save" iconCls="icon-save" style="width: 80px; height: 25px;">上传</a>
+	                        	<a href="javascript:void(0)" class="easyui-linkbutton" id="cancelUploadBtn" iconCls="icon-cancel" iconCls="icon-cancel" style="width: 80px; height: 25px;">取消</a>
+      					  		<a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">查看缴费单</a>
+      					  	</td>
+   					  	</tr>
       					<tr>
-      					  <td align="right"><span>备注：</span></td>
-      					  <td colspan="5"><input type="text" id="remark" name="remark" class="easyui-textbox validatebox"  style="width: 820px; height: 25px;"></td>
-   					  </tr>
+      					  	<td align="right"><span>备注：</span></td>
+      					  	<td colspan="5"><input type="text" id="remark" name="remark" class="easyui-textbox validatebox"  style="width: 820px; height: 25px;"></td>
+   					  	</tr>
 					</table>
 				</div>
 				<div id="giftDiv">
