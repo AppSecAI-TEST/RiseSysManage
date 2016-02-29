@@ -87,14 +87,14 @@
 			}
 			catch(e)
 			{
-				$.messager.alert('提示', "模版不存在！",function(){
+				$.messager.alert('提示', "模版不存在",function(){
 					window.history.back();
 				});
 			}
 		}
 		else
 		{
-			$.messager.alert('提示', "没有数据可以导出！");
+			$.messager.alert('提示', "没有数据可以导出");
 		}	
 	}
 </script>
