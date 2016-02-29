@@ -42,6 +42,7 @@
 					<thead>
 						<tr>
 							<th field="schoolName" align="center" width="5%">校区</th>
+							<th field="courseState" align="center" width="5%">课程状态</th>
 							<th field="payDate" align="center" width="8%">缴费日期</th>
 							<th field="stageId" align="center" width="8%">缴费阶段</th>
 							<th field="studentName" align="center" width="8%">学员姓名</th>
