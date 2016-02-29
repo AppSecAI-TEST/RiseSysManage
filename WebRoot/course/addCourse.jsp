@@ -1137,7 +1137,6 @@ $("#submitBtn").click(function()
 		var order = course.stageOrder;
 		var courseState=course.courseState;
 		var stageName =course.stageId;
-		/*
 		if(courseState=='001' || courseState=='002' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 		{
 			if(feeType=='001')//新够买阶段业绩类型为新招，学员还有未结束课程再次购买业绩类型不能为新招。
@@ -1164,7 +1163,7 @@ $("#submitBtn").click(function()
 				}
 			}
 		}
-		*/
+
 	}
 	addCourseInfo();
 });
