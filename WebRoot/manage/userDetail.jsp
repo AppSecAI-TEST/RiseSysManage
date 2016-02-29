@@ -231,11 +231,11 @@
 						<td align="right">*入职时间:</td>
 						<td><input name="joinDate" id="joinDate" type="text" style="width:246px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" missingMessage="请填写入职时间" required="true" /></td>
 						<td align="right">聘用时间:</td>
-						<td><input name="hireDate" id="hireDate" type="text" style="width:246px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" required="true" /></td>
+						<td><input name="hireDate" id="hireDate" type="text" style="width:246px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /></td>
 					</tr>
 					<tr>
 						<td align="right">合同到期时间:</td>
-						<td><input name="agreementDate" id="agreementDate" type="text" style="width:246px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" required="true" /></td>
+						<td><input name="agreementDate" id="agreementDate" type="text" style="width:246px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /></td>
 						<td align="right">*部门:</td>
 						<td><select id="deptId" name="deptId" style="width:244px" ></select></td>
 						<td align="right">国籍:</td>
