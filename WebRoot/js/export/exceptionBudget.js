@@ -12,6 +12,9 @@ $(document).ready(function() {
     	onLoadSuccess:function(data) {
     		if(data.length > 0) {
 				$('#year').combobox('setValue', data[0].year);
+			} else {
+				$("#month").combobox('clear');
+				$("#month").combobox("loadData", new Array());
 			}
     	},
     	onChange : function(n, o) {
@@ -26,7 +29,6 @@ $(document).ready(function() {
     	    	onLoadSuccess:function(data) {
     	    		if(data.length > 0) {
     					$('#month').combobox('setValue', data[0].month);
-    					$("#qryBtn").click();
     				}
     	    	}
     		});
@@ -35,20 +37,20 @@ $(document).ready(function() {
 	
 	$("#qryBtn").click(function() {
 		var object = $("#qryFm").serializeObject();
-    	var obj = JSON.stringify(object);
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-    	$('#list_data').datagrid({
-    		url : "/sys/pubData/qryDataListByPage.do",
-    		queryParams:{
-    			param : obj
-    		},
-    		onLoadSuccess:function() {
-    			// 一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
-    			mergeCellsByField("list_data", "schoolName");
-    		}
-    	});
+		var obj = JSON.stringify(object);
+		obj = obj.substring(0, obj.length - 1);
+		var funcNodeId = $("#qryBtn").attr("funcNodeId");
+		obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+		$('#list_data').datagrid({
+			url : "/sys/pubData/qryDataListByPage.do",
+			queryParams:{
+				param : obj
+			},
+			onLoadSuccess:function() {
+				// 一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+				mergeCellsByField("list_data", "schoolName");
+			}
+		});
     });
 	
 	$("#reset").click(function() {

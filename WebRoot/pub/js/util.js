@@ -245,17 +245,58 @@ function myparser(s) {
 }
 
 function yearFormatter(date) {
+	var year = date.getFullYear();
+	if($("#tableName").length > 0) {
+		var tableName = $("#tableName").val();
+		$("#month").combobox({
+			url : "/sys/pubData/qryReportMonthList.do?tableName=" + tableName + "&year=" + year,//返回json数据的url
+	    	valueField : "month",
+	    	textField : "monthText",
+	    	panelHeight : "auto",
+	    	formatter : function(data) {
+	    		return "<span>" + data.monthText + "</span>";
+	    	},
+	    	onLoadSuccess:function(data) {
+	    		if(data.length > 0) {
+					$('#month').combobox('setValue', data[0].month);
+				} else {
+					$("#week").combobox('clear');
+					$("#week").combobox("loadData", new Array());
+				}
+	    	},
+	    	onChange : function(n, o) {
+	    		$("#week").combobox({
+	    			url : "/sys/pubData/qryReportWeekList.do?tableName=" + tableName + "&year=" + year + "&month=" + n,//返回json数据的url
+	    			valueField : "weekName",
+	    	    	textField : "weekNameText",
+	    	    	panelHeight : "auto",
+	    	    	formatter : function(data) {
+	    	    		return "<span>" + data.weekNameText + "</span>";
+	    	    	},
+	    	    	onLoadSuccess:function(data) {
+	    	    		if(data.length > 0) {
+	    					$('#week').combobox('setValue', data[0].weekName);
+	    				}
+	    	    	}
+	    		});
+	    	}
+		});
+	}
 	return date.getFullYear();
 }
 
 function yearParser(s) {
+	var year = "";
+	var yearDate = null;
 	if(s) {
-		$("#yearDiv").html(String(s).substring(0, 4));
-		return new Date(String(s).substring(0, 4));
+		year = String(s).substring(0, 4);
+		yearDate = new Date(year);
 	} else {
-		$("#yearDiv").html(new Date().getFullYear());
-		return new Date();
+		year = new Date().getFullYear();
+		yearDate = new Date();
 	}
+	$("#yearDiv").html(year);
+	return yearDate;
 }
 
 function monthFormatter(date) {
@@ -724,6 +765,24 @@ function checkMobile(mobile) {
 	}
 }
 
+function validateIsQry() {
+	var year = $("#year").datebox("getValue");
+	if(year == null || year == "" || year == undefined) {
+		$.messager.alert('提示', "请选择您要查询的年份！");
+		return false;
+	}
+	var month = $("#month").combobox("getValue");
+	if(month == null || month == "" || month == undefined) {
+		$.messager.alert('提示', "请选择您要查询的月份！");
+		return false;
+	}
+	var week = $("#week").combobox("getValue");
+	if(week == null || week == "" || week == undefined) {
+		$.messager.alert('提示', "请选择您要查询的周！");
+		return false;
+	}
+	return true;
+}
 
 //绑定查询页面的查询重置按钮事件
 function initQryButton(qryName,resetName,formName,tableName)

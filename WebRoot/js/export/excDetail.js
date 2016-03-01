@@ -1,55 +1,59 @@
 $(document).ready(function() {
 	var curr_time = new Date();
 	$('#year').datebox('setValue', yearFormatter(curr_time));
-	var year = $('#year').datebox('getValue');
-	var tableName = $("#tableName").val();
-	$("#month").combobox({
-		url : "/sys/pubData/qryReportMonthList.do?tableName=" + tableName + "&year=" + year,//返回json数据的url
-    	valueField : "month",
-    	textField : "monthText",
-    	panelHeight : "auto",
-    	formatter : function(data) {
-    		return "<span>" + data.monthText + "</span>";
-    	},
-    	onLoadSuccess:function(data) {
-    		if(data.length > 0) {
-				$('#month').combobox('setValue', data[0].month);
-			}
-    	},
-    	onChange : function(n, o) {
-    		$("#week").combobox({
-    			url : "/sys/pubData/qryReportWeekList.do?tableName=" + tableName + "&year=" + year + "&month=" + n,//返回json数据的url
-    			valueField : "weekName",
-    	    	textField : "weekNameText",
-    	    	panelHeight : "auto",
-    	    	formatter : function(data) {
-    	    		return "<span>" + data.weekNameText + "</span>";
-    	    	},
-    	    	onLoadSuccess:function(data) {
-    	    		if(data.length > 0) {
-    					$('#week').combobox('setValue', data[0].weekName);
-    					$("#qryBtn").click();
-    				}
-    	    	}
-    		});
-    	}
-	});
+//	var year = $('#year').datebox('getValue');
+//	var tableName = $("#tableName").val();
+//	$("#month").combobox({
+//		url : "/sys/pubData/qryReportMonthList.do?tableName=" + tableName + "&year=" + year,//返回json数据的url
+//    	valueField : "month",
+//    	textField : "monthText",
+//    	panelHeight : "auto",
+//    	formatter : function(data) {
+//    		return "<span>" + data.monthText + "</span>";
+//    	},
+//    	onLoadSuccess:function(data) {
+//    		if(data.length > 0) {
+//				$('#month').combobox('setValue', data[0].month);
+//			}
+//    	},
+//    	onChange : function(n, o) {
+//    		$("#week").combobox({
+//    			url : "/sys/pubData/qryReportWeekList.do?tableName=" + tableName + "&year=" + year + "&month=" + n,//返回json数据的url
+//    			valueField : "weekName",
+//    	    	textField : "weekNameText",
+//    	    	panelHeight : "auto",
+//    	    	formatter : function(data) {
+//    	    		return "<span>" + data.weekNameText + "</span>";
+//    	    	},
+//    	    	onLoadSuccess:function(data) {
+//    	    		if(data.length > 0) {
+//    					$('#week').combobox('setValue', data[0].weekName);
+//    					$("#qryBtn").click();
+//    				}
+//    	    	}
+//    		});
+//    	}
+//	});
 	
 	$("#qryBtn").click(function() {
-		var object = $("#qryFm").serializeObject();
-    	var obj = JSON.stringify(object);
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-    	$('#list_data').datagrid({
-    		url : "/sys/pubData/qryDataListByPage.do",
-    		queryParams:{
-    			param : obj
-    		},
-    		onLoadSuccess:function(){
-    			onLoadSuccess();
-    		}
-    	});
+		if(!validateIsQry()) {
+			return;
+		} else {
+			var object = $("#qryFm").serializeObject();
+			var obj = JSON.stringify(object);
+			obj = obj.substring(0, obj.length - 1);
+			var funcNodeId = $("#qryBtn").attr("funcNodeId");
+			obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+			$('#list_data').datagrid({
+				url : "/sys/pubData/qryDataListByPage.do",
+				queryParams:{
+					param : obj
+				},
+				onLoadSuccess:function(){
+					onLoadSuccess();
+				}
+			});
+		}
     });
 	
 	$("#reset").click(function() {
