@@ -85,6 +85,13 @@
 							<th field="classInfo" align="center" width="5%" colspan="6">教师带班情况（只统计教师所带在读班级明细）</th>
 							<th field="licenseInfo" align="center" width="5%" colspan="11">教师持证明细（实时的持证情况）</th>
 							<th field="rateInfo" align="center" width="15%">带班持证率</th>
+							<th field="rateInfo" align="center" width="600" colspan="5">周一</th>
+							<th field="rateInfo" align="center" width="600" colspan="5">周二</th>
+							<th field="rateInfo" align="center" width="600" colspan="5">周三</th>
+							<th field="rateInfo" align="center" width="600" colspan="5">周四</th>
+							<th field="rateInfo" align="center" width="600" colspan="5">周五</th>
+							<th field="rateInfo" align="center" width="600" colspan="5">周六</th>
+							<th field="rateInfo" align="center" width="600" colspan="5">周日</th>
 						</tr>
 						<tr>
 							<th field="schoolName" align="center" width="5%" >校区</th>
@@ -116,6 +123,41 @@
 							<th field="RiseUp" align="center" width="8%" >RiseUp</th>
 							<th field="licenseNum" align="center" width="8%" >持证数量</th>
 							<th field="licenseRate" align="center" width="15%" >所带班级中持证数量/带班数量</th>
+							<th field="H001" align="center" width="120">上午1</th>
+							<th field="H002" align="center" width="120">上午2</th>
+							<th field="H003" align="center" width="120">下午1</th>
+							<th field="H004" align="center" width="120">下午2</th>
+							<th field="H005" align="center" width="120">晚上</th>
+							<th field="H001" align="center" width="120">上午1</th>
+							<th field="H002" align="center" width="120">上午2</th>
+							<th field="H003" align="center" width="120">下午1</th>
+							<th field="H004" align="center" width="120">下午2</th>
+							<th field="H005" align="center" width="120">晚上</th>
+							<th field="H001" align="center" width="120">上午1</th>
+							<th field="H002" align="center" width="120">上午2</th>
+							<th field="H003" align="center" width="120">下午1</th>
+							<th field="H004" align="center" width="120">下午2</th>
+							<th field="H005" align="center" width="120">晚上</th>
+							<th field="H001" align="center" width="120">上午1</th>
+							<th field="H002" align="center" width="120">上午2</th>
+							<th field="H003" align="center" width="120">下午1</th>
+							<th field="H004" align="center" width="120">下午2</th>
+							<th field="H005" align="center" width="120">晚上</th>
+							<th field="H001" align="center" width="120">上午1</th>
+							<th field="H002" align="center" width="120">上午2</th>
+							<th field="H003" align="center" width="120">下午1</th>
+							<th field="H004" align="center" width="120">下午2</th>
+							<th field="H005" align="center" width="120">晚上</th>
+							<th field="H001" align="center" width="120">上午1</th>
+							<th field="H002" align="center" width="120">上午2</th>
+							<th field="H003" align="center" width="120">下午1</th>
+							<th field="H004" align="center" width="120">下午2</th>
+							<th field="H005" align="center" width="120">晚上</th>
+							<th field="H001" align="center" width="120">上午1</th>
+							<th field="H002" align="center" width="120">上午2</th>
+							<th field="H003" align="center" width="120">下午1</th>
+							<th field="H004" align="center" width="120">下午2</th>
+							<th field="H005" align="center" width="120">晚上</th>
 						</tr>
 					</thead>
 				</table>

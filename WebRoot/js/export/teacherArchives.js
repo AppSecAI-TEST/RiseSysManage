@@ -165,9 +165,29 @@ function onLoadSuccess(data) {
 		    pagination	: false,
 		    columns		: columns,
 		    fitColumns : false,
-			data: data.rows
+			data: data.rows,
+			onLoadSuccess: function() {
+				mergeCells(data.rows);
+			}
 		})
 	} else {
 		$("#list_data").datagrid("loadData", new Array());
+	}
+}
+
+function mergeCells(rows) {
+	for(var i = 0, len = rows.length; i < len; i++) {
+		var data = rows[i].schooltimeArray;
+		if(data != null && data != "" && data != undefined) {
+			$.each(data, function(j, obj) {
+				var field = obj.field;
+				var colspan = obj.colspan;
+				$("#list_data").datagrid("mergeCells", {
+					index: i,
+					field: field,　　// 合并字段
+					colspan: colspan
+				});
+			});
+		}
 	}
 }
