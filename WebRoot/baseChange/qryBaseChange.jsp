@@ -11,9 +11,10 @@
 		<script type="text/javascript" src="<%=path %>/js/baseChange/qryBaseChange.js"></script>
   	</head>
   
-  	<body style="padding-top:5px">
+  	<body>
   		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
-  		<form id="qryFm" style="margin:0 auto;">
+  		<div style="magrin-right:5px;">
+  		<form id="qryFm">
   			<table class="search_tab">
   				<tr>
   					<td align="right" style="min-width: 80px"><span>校区：</span></td>
@@ -62,7 +63,6 @@
   				</tr>
   			</table>
   		</form>
-  		<div style="padding:5px 0;min-width:1100px; width:100%;">
   			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" 
 		  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 		  		<thead>
@@ -84,10 +84,10 @@
 		  			</tr>
 		  		</thead>
 		  	</table>
-  		</div>
   		<div id="toolbar">
    			<a href="javascript:void(0)" id="changeBase" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">基数调整</a>
    			<a href="javascript:void(0)" id="viewChange" class="easyui-linkbutton" iconCls="icon-redo" style="width: 120px;">查看调整历史</a>
  		</div>
+ 	</div>	
   	</body>
 </html>

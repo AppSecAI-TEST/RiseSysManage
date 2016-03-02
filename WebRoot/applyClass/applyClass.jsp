@@ -11,13 +11,13 @@
 		<script type="text/javascript" src="<%=path %>/js/applyClass/applyClass.js"></script>
   	</head>
   
-  	<body style="padding-top:5px;">
+  	<body>
   		<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
 		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
   		<div id="tt" class="easyui-tabs" style="min-width:1110px; width:100%; height:auto;">
   			<div title="放班班级管理" style="padding:5px;display:block;">
-  				<form id="qryFm" style="margin:0 auto;">
-			  		<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
+  				<form id="qryFm">
+			  		<table class="search_tab">
 			  			<tr>
 			  				<td align="right" style="min-width: 80px;"><span>校区：</span></td>
 			  				<td style="min-width: 100px;">
@@ -112,8 +112,8 @@
   			</div>
   			
   			<div title="放班审批管理" style="padding:5px;display:block;">
-  				<form id="qryApproveFm" style="margin:0 auto;">
-  					<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
+  				<form id="qryApproveFm">
+  					<table class="search_tab">
 		  				<tr>
 		  					<td align="right" style="min-width: 120px;"><span>校区：</span></td>
 			  				<td style="min-width: 100px;">

@@ -17,57 +17,57 @@
     	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
     		<div title="退费审批管理" style="padding:5px;display:block;">
     			<form id="qryRefundApproveFm" style="margin:0 auto;">
-    				<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
+    				<table align="center" class="search_tab">
     					<tr>
-    						<td align="right"><span>校区：</span></td>
-			  				<td width="100px">
+    						<td width="70px" align="right"><span>校区：</span></td>
+			  				<td width="110px">
 								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 									url = "<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=252&fieldId=schoolId";
 									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 					      			onLoadSuccess:function(data){if(data.length > 0)$('approveSchoolId').combobox('setValue',data[0].schoolId);}">
 				        		</select>
 							</td>
-							<td align="right"><span>联系电话：</span></td>
-							<td width="100px">
-								<input name="approvePhone" id="approvePhone" type="text" class="easyui-textbox" style="width: 210px; height: 25px;"/>
+							<td width="70px" align="right"><span>联系电话：</span></td>
+							<td width="160px">
+								<input name="approvePhone" id="approvePhone" type="text" class="easyui-textbox" style="width: 150px; height: 25px;"/>
 							</td>
-							<td align="right"><span>申请日期：</span></td>
-			  				<td width="100px">
+							<td width="70px" align="right"><span>申请日期：</span></td>
+			  				<td width="240px">
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeApprove" name="startTimeApprove" data-options="formatter:myformatter, parser:myparser"/>
-							</td>
-							<td align="center"><span>至</span></td>
-							<td width="100px">
+								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApprove" name="endTimeApprove" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
-							<td align="right"><span>本人待审批：</span></td>
+							<td width="70px" align="right"><span>课程类型：</span></td>
 							<td>
-								<input type="checkbox" />
-							</td>
-							<td align="center">
-								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryApproveBtn" funcNodeId="1025">查询</a>
-								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="resetApprove">重置</a>
-							</td>
-						</tr>
-						<tr>
-							<td align="right"><span>学员姓名：</span></td>
-							<td width="100px">
-								<input name="approveStudentId" id="approveStudentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
-							</td>
-							<td align="right"><span>课程类型：</span></td>
-							<td width="100px">
 								<select id="approveCourseType" name="approveCourseType" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 				        		<select id="approveStageId" name="approveStageId" class="easyui-combobox" style="width: 100px; height: 25px;">
 		        				</select>
 		        			</td>
+						</tr>
+						<tr>
+							<td align="right"><span>学员姓名：</span></td>
+							<td>
+								<input name="approveStudentId" id="approveStudentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
+							</td>
 		        			<td align="right"><span>退费状态：</span></td>
-							<td colspan="6">
+							<td colspan="3">
 								<input type="checkbox" name="approveRefundState" value="'001'"/><span>已申请</span>
 								<input type="checkbox" name="approveRefundState" value="'002'"/><span>审批中</span>
 								<input type="checkbox" name="approveRefundState" value="'003'"/><span>打款中</span>
 								<input type="checkbox" name="approveRefundState" value="'004'"/><span>审批未通过</span>
 								<input type="checkbox" name="approveRefundState" value="'005'"/><span>成功退费</span>
 								<input type="checkbox" name="approveRefundState" value="'006'"/><span>取消</span>
+							</td>
+							<td align="right"><span>本人待审批：</span></td>
+							<td>
+								<input type="checkbox" />
+							</td>
+						</tr>
+						<tr>
+							<td colspan="8" align="center">
+								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryApproveBtn" funcNodeId="1025">查询</a>
+								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="resetApprove">重置</a>
 							</td>
 						</tr>
     				</table>
@@ -105,111 +105,99 @@
     		</div>
     			<div title="退费课程查询" style="padding:5px;display:block;">
     			<form id="qryRefundCourseFm" style="margin:0 auto;">
-    				<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
+    				<table class="search_tab">
     					<tr>
-    						<td align="right"><span>校区：</span></td>
-			  				<td width="100px">
+    						<td width="70px" align="right"><span>校区：</span></td>
+			  				<td width="110px">
 								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 				        		</select>
 							</td>
-							<td align="right"><span>学员姓名：</span></td>
-							<td width="100px">
+							<td width="65px" align="right"><span>学员姓名：</span></td>
+							<td width="110px">
 								<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
-							<td align="right"><span>联系电话：</span></td>
-							<td width="210px">
-								<input name="phone" id="phone" type="text" class="easyui-textbox" style="width: 210px; height: 25px;"/>
+							<td width="65px" align="right"><span>联系电话：</span></td>
+							<td width="220px">
+								<input name="phone" id="phone" type="text" class="easyui-textbox" style="width: 205px; height: 25px;"/>
 							</td>
-							<td align="right"><span>缴费日期：</span></td>
-			  				<td width="100px">
+							<td width="65px" align="right"><span>缴费日期：</span></td>
+			  				<td width="230px">
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimePay" name="startTimePay" data-options="formatter:myformatter, parser:myparser"/>
-							</td>
-							<td align="center">
-								<span>至</span>
-							</td>
-							<td width="100px">
+								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimePay" name="endTimePay" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
     					</tr>
     					<tr>
     						<td align="right"><span>业绩顾问：</span></td>
-			  				<td width="100px">
+			  				<td>
 								<select id="adviserId" name="adviserId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 				        		</select>
 							</td>
 							<td align="right"><span>业绩类型：</span></td>
-			  				<td width="100px">
+			  				<td>
 								<select id="feeType" name="feeType" class="easyui-combobox" style="width: 100px; height: 25px;"
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
 				        		</select>
 							</td>
 							<td align="right"><span>课程类型：</span></td>
-							<td width="100px">
+							<td>
 								<select id="courseType" name="courseType" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 				        		<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;">
 		        				</select>
 		        			</td>
 		        			<td align="right"><span>退费申请日期：</span></td>
-			  				<td width="100px">
+			  				<td>
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeApply" name="startTimeApply" data-options="formatter:myformatter, parser:myparser"/>
-							</td>
-							<td align="center">
-								<span>至</span>
-							</td>
-							<td width="100px">
+								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApply" name="endTimeApply" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
     					</tr>
     					<tr>
     						<td align="right"><span>班级老师：</span></td>
-			  				<td width="100px">
+			  				<td>
 								<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 				        		</select>
 							</td>
 							<td align="right"><span>退费类型：</span></td>
-			  				<td width="100px">
+			  				<td>
 								<select id="refundType" name="refundType" class="easyui-combobox" style="width: 100px; height: 25px;"
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_TYPE">
 				        		</select>
 							</td>
 							<td align="right"><span>口碑类型：</span></td>
-							<td width="100px">
+							<td>
 								<select id="womType" name="womType" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 				        		<select id="womChannel" name="womChannel" class="easyui-combobox" style="width: 100px; height: 25px;">
 		        				</select>
 		        			</td>
 		        			<td align="right"><span>成功退费日期：</span></td>
-			  				<td width="100px">
+			  				<td>
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeFinish" name="startTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
-							</td>
-							<td align="center">
-								<span>至</span>
-							</td>
-							<td width="100px">
+								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeFinish" name="endTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
     					</tr>
     					<tr>
     						<td align="right"><span>渠道来源：</span></td>
-			  				<td width="100px">
+			  				<td>
 								<select id="refundChannel" name="refundChannel" class="easyui-combobox" style="width: 100px; height: 25px;"
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_CHANNEL">
 				        		</select>
 							</td>
 							<td align="right"><span>退费规则：</span></td>
-			  				<td width="100px">
+			  				<td>
 								<select id="refundRule" name="refundRule" class="easyui-combobox" style="width: 100px; height: 25px;"
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=REFUND_RULE">
 				        		</select>
 							</td>
 							<td align="right"><span>退费状态：</span></td>
-							<td colspan="4">
+							<td colspan="2">
 								<input type="checkbox" name="refundState" value="'001'"/><span>已申请</span>
 								<input type="checkbox" name="refundState" value="'002'"/><span>审批中</span>
 								<input type="checkbox" name="refundState" value="'003'"/><span>打款中</span>
@@ -217,7 +205,7 @@
 								<input type="checkbox" name="refundState" value="'005'"/><span>成功退费</span>
 								<input type="checkbox" name="refundState" value="'006'"/><span>取消</span>
 							</td>
-							<td align="center">
+							<td align="left">
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1023">查询</a>
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 							</td>

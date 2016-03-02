@@ -11,11 +11,12 @@
 		<script type="text/javascript" src="<%=path %>/js/attendClass/attendClassList.js"></script>
   	</head>
   
-  	<body style="padding-top:5px">
-  		<form id="qryFm" style="margin:0 auto;">
+  	<body>
+  		<div style="margin-right:5px;">
+  		<form id="qryFm">
   			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
   			<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
-  			<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
+  			<table class="search_tab">
   				<tr>
   					<td align="right" style="min-width: 70px;"><span>校区：</span></td>
 	  				<td style="min-width: 100px;">
@@ -102,7 +103,6 @@
   				</tr>
   			</table>
   		</form>
-  		<div style="padding:5px 0;min-width:1100px; width:100%;">
   			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data"
 		  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 				<thead>
@@ -124,11 +124,11 @@
 					</tr>
 				</thead>
 			</table>
-  		</div>
   		<div id="toolbar" style="padding: 2px; height: auto">
    			<a href="javascript:void(0)" id="maintenanceBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">班级维护</a>
    			<a href="javascript:void(0)" id="disbandBtn" class="easyui-linkbutton" iconCls="icon-cancel" style="width: 120px;">班级解散</a>
    			<a href="javascript:void(0)" id="view" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>
 		</div>
+	</div>
   	</body>
 </html>
