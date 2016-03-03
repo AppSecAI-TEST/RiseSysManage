@@ -22,31 +22,32 @@
   					<table class="search_tab">
   						<tr>
 							<td width="70px" align="right"><span>学员姓名：</span></td>
-							<td width="110px">
-								<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
+							<td width="80px">
+								<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 80px; height: 25px;"/>
 							</td>
 							<td width="70px" align="right"><span>联系电话：</span></td>
-							<td width="110px">
+							<td width="100px">
 								<input name="phone" id="phone" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
-							<td width="70px" align="right"><span>业绩顾问：</span></td>
-		  					<td width="110px">
-								<select id="adviser" name="adviser" class="easyui-combobox" style="width: 100px; height: 25px;"
+							<td width="75px" align="right"><span>业绩顾问：</span></td>
+		  					<td width="95px">
+								<select id="adviser" name="adviser" class="easyui-combobox" style="width: 95px; height: 25px;"
 									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
      								url="<%=path %>/pubData/qryStaffList.do?post=16,17&schoolId=">
 				        		</select>
 							</td>
-							<td width="70px" align="right"><span>转出日期：</span></td>
-			  				<td>
+							<td width="60px" align="right"><span>转出日期：</span></td>
+			  				<td width="225px">
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeOut" name="startTimeOut" data-options="formatter:myformatter, parser:myparser"/>
 								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeOut" name="endTimeOut" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
+							<td></td>
   						</tr>
   						<tr>
   							<td align="right"><span>业绩类型：</span></td>
 		  					<td>
-								<select id="feeType" name="feeType" class="easyui-combobox" style="width: 100px; height: 25px;"
+								<select id="feeType" name="feeType" class="easyui-combobox" style="width: 80px; height: 25px;"
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
 				        		</select>
@@ -60,7 +61,7 @@
 							</td>
 							<td align="right"><span>转出班老师：</span></td>
 							<td>
-								<select id="outTeacherId" name="outTeacherId" class="easyui-combobox" style="width: 100px; height: 25px;">
+								<select id="outTeacherId" name="outTeacherId" class="easyui-combobox" style="width: 95px; height: 25px;">
 				        		</select>
 							</td>
 							<td align="right"><span>转入日期：</span></td>
@@ -69,11 +70,12 @@
 								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeIn" name="endTimeIn" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
+							<td></td>
   						</tr>
   						<tr>
   							<td align="right"><span>转出校区：</span></td>
 			  				<td>
-								<select id="outSchoolId" name="outSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
+								<select id="outSchoolId" name="outSchoolId" class="easyui-combobox" style="width: 80px; height: 25px;">
 				        		</select>
 							</td>
 							<td align="right"><span>转入校区：</span></td>
@@ -81,9 +83,9 @@
 								<select id="inSchoolId" name="inSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 							</td>
-							<td align="right"><span>转出校在读班级：</span></td>
+							<td align="right"><span>转出在读班级：</span></td>
 							<td>
-								<input name="outSchoolClassInstId" id="outSchoolClassInstId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
+								<input name="outSchoolClassInstId" id="outSchoolClassInstId" type="text" class="easyui-textbox" style="width: 95px; height: 25px;"/>
 							</td>
 							<td align="right"><span>完成日期：</span></td>
 			  				<td>
@@ -91,16 +93,13 @@
 								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeFinish" name="endTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
-		  				</tr>
-		  				<tr>
-		  					<td colspan="8" align="center">
-								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryApplyBtn" funcNodeId="1019">查询</a>
-								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
+							<td align="left">
+								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:90px; height: 25px;" id="qryApplyBtn" funcNodeId="1019">查询</a>
+								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:90px; height: 25px;" id="reset">重置</a>
 							</td>
 		  				</tr>
   					</table>
   				</form>
-  				<div style="padding:5px 0;min-width:1100px; width:100%;">
 				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="apply_list_data" 
 				  		toolbar="#toolbarApply" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
@@ -125,7 +124,6 @@
 							</tr>
 						</thead>
 					</table>
-			  	</div>
 			  	
 			  	<div id="toolbarApply" style="padding: 2px; height: auto">
 		   			<a href="javascript:void(0)" id="changeSchoolBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">转校申请</a>
@@ -137,68 +135,58 @@
 				</div>
   			</div>
   			<div title="转校审批管理" style="padding:5px;display:block;">
-  				<form id="qryApproveFm" style="margin:0 auto;">
-  					<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
+  				<form id="qryApproveFm">
+  					<table class="search_tab">
   						<tr>
-  							<td align="right"><span>学员姓名：</span></td>
+  							<td width="70px" align="right"><span>学员姓名：</span></td>
 							<td width="100px">
 								<input name="approveStudentId" id="approveStudentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
-							<td align="right"><span>联系电话：</span></td>
+							<td width="70px" align="right"><span>联系电话：</span></td>
 							<td width="100px">
 								<input name="approvePhone" id="approvePhone" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
-							<td align="right"><span>申请日期：</span></td>
-			  				<td width="100px">
+							<td width="70px" align="right"><span>申请日期：</span></td>
+			  				<td width="225px">
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeApply" name="startTimeApply" data-options="formatter:myformatter, parser:myparser"/>
-							</td>
-							<td align="center">
-								<span>至</span>
-							</td>
-							<td width="100px">
+								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApply" name="endTimeApply" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
-							<td align="right">
-								<input type="checkbox" name=""/>
+							<td align="left" colspan="3">
+								<input type="checkbox" name=""/><span>查看我的审批</span>
 							</td>
-							<td><span>查看我的审批</span></td>
   						</tr>
   						<tr>
   							<td align="right"><span>转出校区：</span></td>
-			  				<td width="100px">
+			  				<td>
 								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 							</td>
 		  					<td align="right"><span>转入校区：</span></td>
-							<td width="100px">
+							<td>
 								<select id="approveInschoolId" name="approveInschoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 							</td>
 							<td align="right"><span>审批日期：</span></td>
-			  				<td width="100px">
+			  				<td>
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeApprove" name="startTimeApprove" data-options="formatter:myformatter, parser:myparser"/>
-							</td>
-							<td align="center">
-								<span>至</span>
-							</td>
-							<td width="100px">
+								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApprove" name="endTimeApprove" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 							<td align="right"><span>审批状态：</span></td>
-							<td width="100px">
-								<select id="approveState" name="approveState" class="easyui-combobox" style="width: 100px; height: 25px;"
+							<td>
+								<select id="approveState" name="approveState" class="easyui-combobox" style="width: 80px; height: 25px;"
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=CHANGE_T&codeType=APPROVE_CHANGE_STATE">
 				        		</select>
 							</td>
-							<td colspan="2" align="center">
-								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryApproveBtn" funcNodeId="1017">查询</a>
-								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="resetApprove">重置</a>
+							<td align="left">
+								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:90px; height: 25px;" id="qryApproveBtn" funcNodeId="1017">查询</a>
+								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:90px; height: 25px;" id="resetApprove">重置</a>
 							</td>
   						</tr>
   					</table>
   				</form>
-  				<div style="padding:5px 0;min-width:1100px; width:100%;">
 				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="approve_list_data" 
 				  		toolbar="#toolbarApprove" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
@@ -221,8 +209,7 @@
 							</tr>
 						</thead>
 					</table>
-			  	</div>
-			  	
+								  	
 			  	<div id="toolbarApprove" style="padding: 2px; height: auto">
 		   			<a href="javascript:void(0)" id="approveBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px;">审批</a>
 		   			<a href="javascript:void(0)" id="viewApprove" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>

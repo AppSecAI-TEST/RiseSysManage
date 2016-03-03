@@ -35,7 +35,6 @@
 					</td>
 				</tr>
 			</table>
-		<div style="padding:5px 0;min-width:1100px; width:100%;">
 			<table class="easyui-datagrid" title="排课" style="height:250px;" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false" id="weekDg" url="">
 				<thead>
 					<tr>
@@ -81,7 +80,6 @@
 				 </tr>
 			  <thead>
 		</table>
-		</div>
 		</div>
  	</body>
 </html>

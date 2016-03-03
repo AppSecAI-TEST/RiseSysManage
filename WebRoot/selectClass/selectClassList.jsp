@@ -12,7 +12,7 @@
 		<script type="text/javascript" src="<%=path %>/js/selectClass/selectClassList.js"></script>
   	</head>
   
-  	<body style="padding-top:5px">
+  	<body>
   		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
 		<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
 		<div style="margin-right:5px;">
@@ -102,8 +102,6 @@
   				</tr>
   			</table>
   		</form>
-  		
-  		<div style="padding:5px 0;min-width:1100px; width:100%;">
 		  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" 
 		  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 				<thead>
@@ -127,7 +125,6 @@
 				</thead>
 			</table>
 	  	</div>
-	  	
 	  	<div id="toolbar" style="padding: 2px; height: auto">
    			<a href="javascript:void(0)" id="selectClassBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px;">选班</a>
    			<a href="javascript:void(0)" id="view" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>

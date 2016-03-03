@@ -16,7 +16,7 @@
   		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
     	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
     		<div title="退费审批管理" style="padding:5px;display:block;">
-    			<form id="qryRefundApproveFm" style="margin:0 auto;">
+    			<form id="qryRefundApproveFm">
     				<table align="center" class="search_tab">
     					<tr>
     						<td width="70px" align="right"><span>校区：</span></td>
@@ -72,7 +72,6 @@
 						</tr>
     				</table>
     			</form>
-    			<div style="padding:5px 0;min-width:1100px; width:100%;">
 				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="approve_list_data"
 				  		toolbar="#toolbarApprove" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
@@ -94,7 +93,6 @@
 							</tr>
 						</thead>
 					</table>
-			  	</div>
 			  	<div id="toolbarApprove" style="padding: 2px; height: auto">
 			  		<a href="javascript:void(0)" id="refundApply" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">退费申请</a>
 			  		<a href="javascript:void(0)" id="refundApprove" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;">退费审批</a>
@@ -104,7 +102,7 @@
 				</div>
     		</div>
     			<div title="退费课程查询" style="padding:5px;display:block;">
-    			<form id="qryRefundCourseFm" style="margin:0 auto;">
+    			<form id="qryRefundCourseFm">
     				<table class="search_tab">
     					<tr>
     						<td width="70px" align="right"><span>校区：</span></td>
@@ -212,7 +210,6 @@
     					</tr>
     				</table>
     			</form>
-    			<div style="padding:5px 0;min-width:1100px; width:100%;">
 				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="apply_list_data"
 				  		toolbar="#toolbarApply" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
@@ -237,7 +234,6 @@
 							</tr>
 						</thead>
 					</table>
-			  	</div>
 			  	<div id="toolbarApply" style="padding: 2px; height: auto">
 		   			<a href="javascript:void(0)" id="view" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>
 				</div>

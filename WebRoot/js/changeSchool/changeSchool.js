@@ -1,14 +1,14 @@
 $(document).ready(function() {
-	$("#tt").tabs({
-		onSelect: function (title) {
-			var src = "";
-			if(title == "转校学员管理") {
-				$("#qryApplyBtn").click();
-			} else if(title == "转校审批管理") {
-				$("#qryApproveBtn").click();
-			} 
-		}
-	});
+//	$("#tt").tabs({
+//		onSelect: function (title) {
+//			var src = "";
+//			if(title == "转校学员管理") {
+//				$("#qryApplyBtn").click();
+//			} else if(title == "转校审批管理") {
+//				$("#qryApproveBtn").click();
+//			} 
+//		}
+//	});
 	
 	$("#qryApplyBtn").click(function() {
 		var object = $("#qryApplyFm").serializeObject();

@@ -62,7 +62,6 @@
 		  				</tr>
 		  			</table>
 		  		</form>
-		  		<div style="padding:5px 0;min-width:1100px; width:100%;">
 				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" 
 				  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
@@ -83,7 +82,6 @@
 							</tr>
 						</thead>
 					</table>
-			  	</div>
 				<div id="toolbar" style="padding: 2px; height: auto">
 		   			<a href="javascript:void(0)" id="normalOpenClass" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px;">正常开班申请</a>
 		   			<a href="javascript:void(0)" id="exceptionOpenClass" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px;">异常开班申请</a>
@@ -144,7 +142,6 @@
 		  				</tr>
 		  			</table>
   				</form>
-  				<div style="padding:5px 0;min-width:1100px; width:100%;">
 				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="approve_list_data"
 				  		toolbar="#toolbarApprove" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
@@ -163,7 +160,6 @@
 							</tr>
 						</thead>
 					</table>
-			  	</div>
 				<div id="toolbarApprove" style="padding: 2px; height: auto">
 		   			<a href="javascript:void(0)" id="approve" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px;">审批</a>
 		   			<a href="javascript:void(0)" id="viewApprove" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>

@@ -41,7 +41,6 @@
 				</tr>
 			</table>
 		</form>
-		<div style="padding:5px 0;min-width:1100px; width:100%;">
 			<table class="easyui-datagrid" title="排课列表" style="height:435px;" id="list_data"   
 				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 				 <thead>
@@ -54,7 +53,6 @@
 					</tr>
 				</thead>
 			</table>
-		</div>
 		<div id="toolbar" style="padding: 2px; height: auto">
    			<a href="javascript:void(0)" id="createPlan" href="" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;" funcNodeId="50014">创建排课</a>
    			<a href="javascript:void(0)" id="updatePlan" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;" >维护排课</a>

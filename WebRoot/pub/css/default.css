@@ -150,12 +150,11 @@ span {font-family: Arial,微软雅黑,宋体; font-size: 13px;}
 	border:1px solid #95B8E7;
     font-family:'微软雅黑';
     margin:auto;
-    margin-top:5px;
     width:100%;
 }
 
 .search_tab td
 {
-	padding:5px;
+	padding:1px 5px;
 	font-size:13px;
 }

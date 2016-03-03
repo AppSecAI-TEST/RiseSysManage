@@ -143,11 +143,12 @@
 				        		</select>
 		  					</td>
 		  					<td width="110px;" align="right">计划审批时间：</td>
-		  					<td width="250x;">
+		  					<td width="230x;">
 		  						<input class="easyui-datebox" name="startPlanTime" id="startPlanTime"  style="width:100px;height:25px;" editable="false"/>
 		  						至
 		  						<input class="easyui-datebox" name="endPlanTime" id="endPlanTime"  style="width:100px;height:25px;" editable="false"/>
 		  					</td>
+		  					<td></td>
 		  				</tr>
 		  				<tr>
 		  					<td align="right">定班率：</td>
@@ -169,10 +170,10 @@
 		  						至
 		  						<input class="easyui-datebox" name="endMergeTime" id="endMergeTime" style="width:100px;" editable="false"/>
 		  					</td>
-		  					<td align="left" width="450px;">	
-		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:80px" id="qryBtns" funcNodeId="3111">查询</a>
+		  					<td align="left">	
+		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtns" funcNodeId="3111">查询</a>
 		  						&nbsp;&nbsp;
-		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:80px" id="resetBtns" >重置</a>
+		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="resetBtns" >重置</a>
 		  					</td>
 		  				</tr>
 		  			</table>		 		

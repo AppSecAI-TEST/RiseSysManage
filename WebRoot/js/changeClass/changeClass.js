@@ -1,14 +1,14 @@
 $(document).ready(function() {
-	$("#tt").tabs({
-		onSelect: function (title) {
-			var src = "";
-			if(title == "转班学员管理") {
-				$("#qryApplyBtn").click();
-			} else if(title == "转班审批管理") {
-				$("#qryApproveBtn").click();
-			} 
-		}
-	});
+//	$("#tt").tabs({
+//		onSelect: function (title) {
+//			var src = "";
+//			if(title == "转班学员管理") {
+//				$("#qryApplyBtn").click();
+//			} else if(title == "转班审批管理") {
+//				$("#qryApproveBtn").click();
+//			} 
+//		}
+//	});
 	
 	$("#qryApplyBtn").click(function() {
 		var object = $("#qryApplyFm").serializeObject();
@@ -73,7 +73,6 @@ $(document).ready(function() {
 			if(data.length > 0) {
 				$("#schoolId").combobox("setValue", data[0].schoolId);
 			}
-			$("#qryApplyBtn").click();
 		},
     	onChange : function(n, o) {
     		if(n != "" && n != null && n != undefined) {

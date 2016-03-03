@@ -20,7 +20,6 @@ $(document).ready(function() {
 		}
 	});
 	
-	$("#qryBtn").unbind();
 	$("#qryBtn").click(function() {
 		var schoolId = $("#schoolId").combobox("getValue");
     	if(schoolId == "" || schoolId == null || schoolId == undefined) {
@@ -80,7 +79,6 @@ $(document).ready(function() {
     		if(data.length > 0) {
     			$("#schoolId").combobox("setValue", data[0].schoolId);
     		}
-    		$("#qryBtn").click();
     	},
     	onChange : function(n, o) {
     		$("#dutyAdvister").combobox({

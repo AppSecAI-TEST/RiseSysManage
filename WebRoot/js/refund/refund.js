@@ -1,14 +1,14 @@
 $(document).ready(function() {
-	$("#tt").tabs({
-		onSelect: function (title) {
-			var src = "";
-			if(title == "退费课程查询") {
-				$("#qryBtn").click();
-			} else if(title == "退费课程管理") {
-				$("#qryApproveBtn").click();
-			} 
-		}
-	});
+//	$("#tt").tabs({
+//		onSelect: function (title) {
+//			var src = "";
+//			if(title == "退费课程查询") {
+//				$("#qryBtn").click();
+//			} else if(title == "退费课程管理") {
+//				$("#qryApproveBtn").click();
+//			} 
+//		}
+//	});
 	
 	$("#qryBtn").click(function() {
 		var s = "";

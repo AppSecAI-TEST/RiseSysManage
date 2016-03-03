@@ -212,9 +212,9 @@
   	</head>
   	<body>
   		<div id="tab" class="easyui-tabs" style="min-width:1100px;width:99%;height:530px;font-family:'微软雅黑';margin:0 auto;padding:0 0">
-		    <div title="考勤管理">
-				<form id="manFm" style="margin:0 auto;">
-					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+		    <div title="考勤管理" style="padding:5px;display:block;">
+				<form id="manFm">
+					<table class="search_tab">
 						<tr>
 							<td align="right" width="8%">
 								所属校区：
@@ -267,7 +267,6 @@
 						</tr>
 					</table>
 				</form>
-				<div style="padding:5px 0;min-width:1100px; width:100%">
 					<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
@@ -282,16 +281,15 @@
 							</tr>
 						</thead>
 					</table>
-				</div>
 				<div id="toolManbar" style="padding: 2px; height: auto">
 					<a href="javascript:void(0)" id="manOperBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="manOperFunc()">考勤管理</a>
 		   			<a href="javascript:void(0)" id="manViewBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="manViewFunc()">浏览考勤</a>
 		   			<a href="javascript:void(0)" id="manLeaveBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="manLeaveFunc()">请假补课</a>
 				</div>
 		    </div>
-		    <div title="历史考勤">
-				<form id="hisFm" style="margin:0 auto;">
-					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+		    <div style="padding:5px;display:block;" title="历史考勤">
+				<form id="hisFm">
+					<table class="search_tab">
 						<tr>
 							<td align="right" width="8%">
 								所属校区：
@@ -305,7 +303,7 @@
 							<td width="22%">
 								<select id="classHisPharse" name="classHisPharse" style="width:100px;height:25px;" ></select>
 							</td>
-							<td align="right" width="8%">
+							<td align="right" width="9%">
 								上课日期：
 							</td>
 							<td width="22%">
@@ -338,13 +336,12 @@
 								<input name="schoolWearStartRate" id="schoolWearStartRate" type="text" style="width:88px" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />% 至 <input name="schoolWearEndRate" id="schoolWearEndRate" type="text" style="width:88px" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />%								
 							</td>
 							<td colspan="2" align="center">
-								<a href="javascript:void(0)" id="queryHisBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryHisFunc()">查询</a>
-								<a href="javascript:void(0)" id="resetHisBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetHisFunc()">重置</a>
+								<a href="javascript:void(0)" id="queryHisBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 90px;" onclick="queryHisFunc()">查询</a>
+								<a href="javascript:void(0)" id="resetHisBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 90px;" onclick="resetHisFunc()">重置</a>
 							</td>
 						</tr>
 					</table>
 				</form>
-				<div style="padding:5px 0;min-width:1100px; width:100%;">
 					<table class="easyui-datagrid" title="历史考勤列表" style="height:390px;" id="hisList" url="" toolbar="#toolHisbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
@@ -366,7 +363,6 @@
 							</tr>
 						</thead>
 					</table>
-				</div>
 				<div id="toolHisbar" style="padding: 2px; height: auto">
 		   			<a href="javascript:void(0)" id="hisViewBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="hisViewFunc()">浏览</a>
 				</div>
