@@ -1165,17 +1165,12 @@ $("#submitBtn").click(function() {
 				var courseState=course.courseState;
 				var stageName =course.stageId;
 				var oldClassType=course.classType;
-				if((studentCourseId==course.studentCourseId)  &&(oldStageId!=stageName || classType!=oldClassType || oldFeeType!=feeType))
+				
+				if(studentCourseId==course.studentCourseId  && oldStageId==stageName && classType==oldClassType && oldFeeType==feeType)
 				{
-					if(courseState=='002')
-					{
-						showMessage("提示","当前课程为已定班,不能修改课程信息",null);
-						return;
-					}else
-					{
-						continue;
-					}
+					continue;
 				}
+				
 				if(courseState=='001' || courseState=='002' || courseState=='003' || courseState=='003' || courseState=='004' || courseState=='005' || courseState=='006' || courseState=='007')
 				{
 					if(feeType=='001')//新招
