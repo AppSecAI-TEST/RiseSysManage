@@ -16,72 +16,69 @@
 	 		<form id="qryFm">
 	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right" style="min-width: 80px"><span>校区：</span></td>
-	  					<td align="left" style="min-width: 100px">
+	  					<td align="right" style="width: 70px"><span>校区：</span></td>
+	  					<td align="left" style="width: 100px">
 	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
 	        				</select>
 	  					</td>
-	  					<td align="right" style="min-width: 80px"><span>课程阶段：</span></td>
-	  					<td align="left" style="min-width: 100px">
+	  					<td align="right" style="width: 80px"><span>课程阶段：</span></td>
+	  					<td align="left" style="width: 100px">
 	  						<select id="stageId" name="stageId" class="easyui-combobox"  style="width:100px; height: 25px;"
 								data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
 		      					url="<%=path %>/pubData/qryStage.do">
 		      				</select>
 	  					</td>
-	  					<td align="right" style="min-width: 80px"><span>学员姓名：</span></td>
-	  					<td align="left" style="min-width: 100px">
-	  						<input id="studentName" name="studentName" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
+	  					<td align="right" style="width: 80px"><span>老师：</span></td>
+	  					<td align="left" style="width: 120px">
+	  						<select name="teacherId" id="teacherId" class="easyui-combobox" style="width: 120px; height: 25px;">
+							</select>
 	  					</td>
-	  					<td align="right" style="min-width: 80px"><span>联系电话：</span></td>
-	  					<td align="left" style="min-width: 120px">
-	  						<input class="easyui-numberbox" name="phone" id="phone" style="width:120px; height: 25px;" />
-	  					</td>
-	  					<td align="right" style="min-width: 100px"><span>缴费日期：</span></td>
-	  					<td align="left" style="min-width: 100px">
+	  					<td align="right" style="width: 80px"><span>缴费日期：</span></td>
+	  					<td align="left">
 	  						<input class="easyui-datebox" name="startTimePay" id="startTimePay" style="width:100px; height: 25px;" />
-	  					</td>
-	  					<td align="center"><span>至</span></td>
-	  					<td align="left" style="min-width: 100px">
+	  						至
 	  						<input class="easyui-datebox" name="endTimePay" id="endTimePay" style="width:100px; height: 25px;" />
 	  					</td>
 	  				</tr>
 	  				<tr>
-	  					<td align="right" style="min-width: 80px"><span>责任顾问：</span></td>
-	  					<td align="left" style="min-width: 100px">
+	  					<td align="right"><span>责任顾问：</span></td>
+	  					<td align="left">
 	  						<select id="dutyAdvister" name="dutyAdvister" class="easyui-combobox" style="width: 100px; height: 25px;">
 	      					</select>
 	  					</td>
-	  					<td align="right" style="min-width: 80px"><span>客户关怀：</span></td>
-	  					<td align="left" style="min-width: 100px">
+	  					<td align="right"><span>客户关怀：</span></td>
+	  					<td align="left">
 	  						<select id="carer" name="carer" class="easyui-combobox" style="width: 100px; height: 25px;">
 	     					</select>
 	  					</td>
-	  					<td align="right" style="min-width: 80px"><span>老师：</span></td>
-	  					<td align="left" style="min-width: 100px">
-	  						<select name="teacherId" id="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;">
-							</select>
-	  					</td>
-	  					<td align="right" style="min-width: 80px"><span>异动类型：</span></td>
-	  					<td align="left" style="min-width: 120px">
+	  					<td align="right"><span>异动类型：</span></td>
+	  					<td align="left">
 	     					<select id="expType" name="expType" class="easyui-combobox"  style="width:120px; height: 25px;" editable="false"
 		  						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
 		  						onLoadSuccess:function(data){$('#expType').combobox('setValue',data[0].codeFlag);}"
 		      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_CARE_T&codeType=EXCEPTION_TYPE">
 	        				</select>
 	  					</td>
-	  					<td align="right" style="min-width: 80px"><span>异动日期：</span></td>
-	  					<td align="left" style="min-width: 100px">
+	  					<td align="right"><span>异动日期：</span></td>
+	  					<td align="left">
 	  						<input class="easyui-datebox" name="startTimeExp" id="startTimeExp" style="width:100px; height: 25px;" />
-	  					</td>
-	  					<td align="center"><span>至</span></td>
-	  					<td align="left" style="min-width: 100px">
+	  						至
 	  						<input class="easyui-datebox" name="endTimeExp" id="endTimeExp" style="width:100px; height: 25px;" />
 	  					</td>
 	  				</tr>
 	  				<tr>
-	  					<td colspan="12" align="center">
+	  					<td align="right"><span>学员姓名：</span></td>
+	  					<td align="left">
+	  						<input id="studentName" name="studentName" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
+	  					</td>
+	  					<td align="right"><span>联系电话：</span></td>
+	  					<td align="left">
+	  						<input class="easyui-numberbox" name="phone" id="phone" style="width:100px; height: 25px;" />
+	  					</td>
+	  					<td colspan="3">
+	  					<td align="left">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="4200">查询</a>
-							&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset" >重置</a>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset" >重置</a>
 						</td>
 	  				</tr>
 	  			</table>

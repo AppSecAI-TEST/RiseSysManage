@@ -11,31 +11,31 @@
 		<script type="text/javascript" src="<%=path %>/js/export/teacherArchives.js"></script>
   	</head>
   	<body>
-  		<div style="padding:5px 0;">
-  			<form id="qryFm" style="margin:0 auto;">
+  		<div style="margin-right:5px;">
+  			<form id="qryFm">
   				<input type="hidden" id="tableName" value="report_teacher_archives"/>
-	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
+	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right" width="100px"><span>校区：</span></td>
-	  					<td width="130px">
-							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 115px; height: 25px;">
+	  					<td align="right" width="70px"><span>校区：</span></td>
+	  					<td width="110px">
+							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 110px; height: 25px;">
 				        	</select>
 						</td>
-	  					<td align="right" width="80px"><span>英文名：</span></td>
-	  					<td width="130px">
-	  						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 115px; height: 25px;">
+	  					<td align="right" width="60px"><span>英文名：</span></td>
+	  					<td width="110px">
+	  						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 110px; height: 25px;">
 	  						</select>
 	  					</td>
 	  					<td align="right" width="25px"><span>周：</span></td>
-						<td width="310px">
+						<td width="280px">
 							<input class="easyui-datebox" type="text" style="width:80px; height: 25px;" id="year" name="year" data-options="formatter:yearFormatter, parser:yearParser"/>
 							<select id="month" name="month" class="easyui-combobox" style="width: 80px; height: 25px;">
 	  						</select>
 	  						<select id="week" name="week" class="easyui-combobox" style="width: 80px; height: 25px;">
 	  						</select>
 						</td>
-						<td align="right" width="150px"><span>在读带班持证率：</span></td>
-						<td width="200px">
+						<td align="right" width="110px"><span>在读带班持证率：</span></td>
+						<td>
 							<input name="minLicenseRate" id="minLicenseRate" type="text" class="easyui-numberbox" style="width: 45px; height: 25px;"/>
 							<span style="display: inline-block; text-align: center; width: 32px;">%&nbsp;至&nbsp;</span>
 							<input name="maxLicenseRate" id="maxLicenseRate" type="text" class="easyui-numberbox" style="width: 45px; height: 25px;"/>
@@ -43,40 +43,39 @@
 						</td>
 	  				</tr>
 	  				<tr>
-	  					<td align="right" width="100px"><span>持证数量：</span></td>
-						<td width="130px">
+	  					<td align="right"><span>持证数量：</span></td>
+						<td>
 							<input name="minLicenseNum" id="minLicenseNum" type="text" class="easyui-numberbox" style="width: 45px; height: 25px;"/>
 							<span style="display: inline-block; text-align: center; width: 14px;">至</span>
 							<input name="maxLicenseNum" id="maxLicenseNum" type="text" class="easyui-numberbox" style="width: 45px; height: 25px;"/>
 						</td>
-	  					<td align="right" width="80px"><span>带班量：</span></td>
-						<td width="130px">
+	  					<td align="right"><span>带班量：</span></td>
+						<td>
 							<input name="minClassNum" id="minClassNum" type="text" class="easyui-numberbox" style="width: 45px; height: 25px;"/>
 							<span style="display: inline-block; text-align: center; width: 14px;">至</span>
 							<input name="maxClassNum" id="maxClassNum" type="text" class="easyui-numberbox" style="width: 45px; height: 25px;"/>
 						</td>
-						<td align="right" width="100px"><span>入职日期：</span></td>
-	  					<td width="330px" colspan="3">
+						<td align="right"><span>入职日期：</span></td>
+	  					<td>
 							<input class="easyui-datebox" type="text" style="width:115px; height: 25px;" id="startTimeHireDate" name="startTimeHireDate" data-options="formatter:myformatter, parser:myparser"/>
-							<span style="display: inline-block; text-align: center; width: 14px;">至</span>
+							至
 							<input class="easyui-datebox" type="text" style="width:115px; height: 25px;" id="endTimeHireDate" name="endTimeHireDate" data-options="formatter:myformatter, parser:myparser"/>
+						</td>
+						<td colspan="2">
+							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1071">查询</a>
+							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 						</td>
 	  				</tr>
 	  				<tr>	
-	  					<td align="right" width="100px"><span>持证阶段：</span></td>
-	  					<td colspan="7" width="520px" id="licenseStageTd"></td>
+	  					<td align="right"><span>持证阶段：</span></td>
+	  					<td colspan="7" id="licenseStageTd"></td>
 	  				</tr>
 	  				<tr>	
-	  					<td align="right" width="150px"><span>带班阶段：</span></td>
-	  					<td colspan="5" width="520px" id="stageTd"></td>
-	  					<td width="430px" colspan="2" align="center">
-	  						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1071">查询</a>
-							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
-	  					</td>
+	  					<td align="right"><span>带班阶段：</span></td>
+	  					<td colspan="7" id="stageTd"></td>
 	  				</tr>
 	  			</table>
   			</form>
-			<div style="padding:5px 0;">
 				<table class="easyui-datagrid" title="查询结果" style="height: 435px" id="list_data" 
 				  		toolbar="#toolbar" pagination="false" rownumbers="false" fitColumns="true">
 					<thead>
@@ -161,7 +160,6 @@
 						</tr>
 					</thead>
 				</table>
-			</div>
 			<div id="toolbar" style="padding: 2px; height: auto">
 	   			<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
 			</div>

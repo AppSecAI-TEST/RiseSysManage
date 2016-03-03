@@ -12,11 +12,11 @@
   	</head>
   
   	<body>
-  		<div style="padding:5px 0;">
-  			<form id="qryFm" style="margin:0 auto;">
+  		<div style="margin-right:5px;">
+  			<form id="qryFm">
 	  			<input type="hidden" id="higherType" value="gapRate"/>
 	  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
-	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
+	  			<table class="search_tab">
 	  				<tr>
 	  					<td align="right" width="50px"><span>校区：</span></td>
 	  					<td width="114px">
@@ -30,7 +30,6 @@
 	  				</tr>
 	  			</table>
   			</form>
-			<div style="padding:5px 0;min-width:1100px; width:100%;">
 				<table class="easyui-datagrid" style="height:auto;" id="list_data"
 					title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
@@ -45,7 +44,6 @@
 						</tr>
 					</thead>
 				</table>
-			</div>
 			<div id="toolbar" style="padding: 2px; height: auto">
 	   			<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
 			</div>

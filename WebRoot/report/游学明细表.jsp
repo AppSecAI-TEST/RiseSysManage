@@ -16,8 +16,9 @@
 		</style>
   	</head>
   	<body>
-		<form id="manFm" style="margin:0 auto;">
-			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:60px;" cellspacing="2">
+  		<div style="margin-right:5px;">
+		<form id="manFm">
+			<table class="search_tab">
 				<tr>
 					<td align="right" width="7%">
 						校区：
@@ -50,7 +51,6 @@
 				</tr>
 			</table>
 		</form>
-		<div style="padding:5px 0;min-width:1100px; width:100%">
 			<table class="easyui-datagrid" title="学员列表" style="height:420px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
