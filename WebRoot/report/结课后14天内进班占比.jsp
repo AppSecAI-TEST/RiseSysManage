@@ -8,6 +8,7 @@
   	<head>
 		<%@ include file="/common/head.jsp" %>
 		<%@ include file="/common/formvalidator.jsp" %>
+		<script type="text/javascript" src="<%=path %>/js/export/finishInClass.js"></script>
   	</head>
   
   	<body>
@@ -17,19 +18,18 @@
 	  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
 	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right" style="width: 70px"><span>校区：</span></td>
-	  					<td style="width: 100px">
-							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+	  					<td align="right" style="min-width: 50px"><span>校区：</span></td>
+	  					<td style="min-width: 100px">
+							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false">
 				        	</select>
 						</td>
 	  					<td align="right" style="width:80px"><span>结课日期：</span></td>
-	  					<td style="width: 225px">
+	  					<td style="min-width: 210px">
 							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeFinish" name="startTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
-							至
+							<span style="display: inline-block; text-align: center; width: 14px;">至</span>
 							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeFinish" name="endTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
-						<td align="left">
+						<td align="center" style="min-width: 210px">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1049">查询</a>
 							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 						</td>
@@ -53,31 +53,3 @@
   		</div>
   	</body>
 </html>
-<script>
-	$(document).ready(function(){
-		var curr_time = new Date();
-		$('#endTimeFinish').datebox('setValue', myformatter(curr_time));
-		curr_time.setMonth(curr_time.getMonth() - 1);
-		$('#startTimeFinish').datebox('setValue', myformatter(curr_time));
-		$("#qryBtn").click(function() {
-			if($('#endTimeFinish').datebox('getValue')==""||$('#startTimeFinish').datebox('getValue')=="")
-			{
-				showMessage("提示","结课日期起止时间不能为空",null);
-				return false;
-			}	
-			var obj = JSON.stringify($("#qryFm").serializeObject());
-		    obj = obj.substring(0, obj.length - 1);
-		    var funcNodeId = $("#qryBtn").attr("funcNodeId");
-		    obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-		    $("#list_data").datagrid({
-		    	url : "/sys/pubData/qryDataListByPage.do",
-		    	queryParams:{
-		    		param : obj
-		    	}
-		    }); 
-		
-	    });
-		initReportButton("reset","qryFm","schoolId")
-		exportLink("export","list_data");
-	})
-</script>

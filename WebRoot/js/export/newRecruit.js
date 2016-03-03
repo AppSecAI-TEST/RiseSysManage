@@ -1,28 +1,32 @@
 $(document).ready(function() {
 	$("#qryBtn").click(function() {
-		var object = $("#qryFm").serializeObject();
-		if($("[name='isAttend']").length > 0) {
-			var s = "";
-			$('input[name="isAttend"]:checked').each(function() {
-				s += $(this).val() + ",";
+		if(!validateQryDate()) {
+			return;
+		} else {
+			var object = $("#qryFm").serializeObject();
+			if($("[name='isAttend']").length > 0) {
+				var s = "";
+				$('input[name="isAttend"]:checked').each(function() {
+					s += $(this).val() + ",";
+				});
+				s = s.substring(0, s.length - 1);
+				object.isAttend = s;
+			}
+			var obj = JSON.stringify(object);
+			obj = obj.substring(0, obj.length - 1);
+			var funcNodeId = $("#qryBtn").attr("funcNodeId");
+			obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+			$('#list_data').datagrid({
+				url : "/sys/pubData/qryDataListByPage.do",
+				queryParams:{
+					param : obj
+				},
+				onLoadSuccess:function(){
+					//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+					$('#list_data').datagrid('clearSelections');
+				}
 			});
-			s = s.substring(0, s.length - 1);
-			object.courseState = s;
 		}
-    	var obj = JSON.stringify(object);
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-    	$('#list_data').datagrid({
-    		url : "/sys/pubData/qryDataListByPage.do",
-    		queryParams:{
-    			param : obj
-    		},
-    		onLoadSuccess:function(){
-    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
-    			$('#list_data').datagrid('clearSelections');
-    		}
-    	});
     });
 	
 	//重置
@@ -58,7 +62,6 @@ $(document).ready(function() {
 		    		if(data.length > 0) {
 		    			$("#schoolId").combobox("setValue", data[0].schoolId);
 		    		}
-		    		$("#qryBtn").click();
 		    	},
 				onChange : function(n, o) {
 					if($("#carer").length > 0) {
@@ -92,4 +95,76 @@ function initDate() {
 	$('#startTimeAttend').datebox('setValue', myformatter(curr_time));
 	$('#startTimeFinish').datebox('setValue', myformatter(curr_time));
 	$('#startTimeOpenClass').datebox('setValue', myformatter(curr_time));
+}
+
+function validateQryDate() {
+	if($("#startTimePay").length > 0) {
+		var startTimePay = $("#startTimePay").datebox("getValue");
+		var endTimePay = $("#endTimePay").datebox("getValue");
+		if(endTimePay != "" && endTimePay != null && endTimePay != undefined
+				&& startTimePay != "" && startTimePay != null && startTimePay != undefined) {
+			endTimePay = endTimePay.replace(/-/g,"/");
+			var endTime = new Date(endTimePay);
+			startTimePay = startTimePay.replace(/-/g,"/");
+			var startTime = new Date(startTimePay);
+			if(startTime.getTime() > endTime.getTime()) {
+				showMessage("提示", "缴费日期的起始日期不能大于终止日期！", null);
+				return false;
+			}
+		}
+	}
+	if($("#startTimeAttend").length > 0) {
+		var type = $("#type").val();
+		var endTimeAttend = $("#endTimeAttend").datebox("getValue");
+		var startTimeAttend = $("#startTimeAttend").datebox("getValue");
+		if("inClass30Rate" == type || "inClassAvgDays" == type || "inClassOneRate" == type) {
+			if(endTimeAttend == "" || endTimeAttend == null || endTimeAttend == undefined
+					|| startTimeAttend == "" || startTimeAttend == null || startTimeAttend == undefined) {
+				showMessage("提示", "进班日期的起止时间不能为空！", null);
+				return false;
+			}
+		}
+		if(endTimeAttend != "" && endTimeAttend != null && endTimeAttend != undefined
+				&& startTimeAttend != "" && startTimeAttend != null && startTimeAttend != undefined) {
+			endTimeAttend = endTimeAttend.replace(/-/g,"/");
+			var endTime = new Date(endTimeAttend);
+			startTimeAttend = startTimeAttend.replace(/-/g,"/");
+			var startTime = new Date(startTimeAttend);
+			if(startTime.getTime() > endTime.getTime()) {
+				showMessage("提示", "进班日期的起始日期不能大于终止日期！", null);
+				return false;
+			}
+		}
+	}
+	if($("#startTimeOpenClass").length > 0) {
+		var startTimeOpenClass = $("#startTimeOpenClass").datebox("getValue");
+		var endTimeOpenClass = $("#endTimeOpenClass").datebox("getValue");
+		if(endTimeOpenClass != "" && endTimeOpenClass != null && endTimeOpenClass != undefined
+				&& startTimeOpenClass != "" && startTimeOpenClass != null && startTimeOpenClass != undefined) {
+			endTimeOpenClass = endTimeOpenClass.replace(/-/g,"/");
+			var endTime = new Date(endTimeOpenClass);
+			startTimeOpenClass = startTimeOpenClass.replace(/-/g,"/");
+			var startTime = new Date(startTimeOpenClass);
+			if(startTime.getTime() > endTime.getTime()) {
+				showMessage("提示", "开课日期的起始日期不能大于终止日期！", null);
+				return false;
+			}
+		}
+	}
+	if($("#startTimeFinish").length > 0) {
+		var startTimeFinish = $("#startTimeFinish").datebox("getValue");
+		var endTimeFinish = $("#endTimeFinish").datebox("getValue");
+		if(endTimeFinish != "" && endTimeFinish != null && endTimeFinish != undefined
+				&& startTimeFinish != "" && startTimeFinish != null && startTimeFinish != undefined) {
+			endTimeFinish = endTimeFinish.replace(/-/g,"/");
+			var endTime = new Date(endTimeFinish);
+			startTimeFinish = startTimeFinish.replace(/-/g,"/");
+			var startTime = new Date(startTimeFinish);
+			if(startTime.getTime() > endTime.getTime()) {
+				showMessage("提示", "结课日期的起始日期不能大于终止日期！", null);
+				return false;
+			}
+		}
+	}
+	return true;
 }

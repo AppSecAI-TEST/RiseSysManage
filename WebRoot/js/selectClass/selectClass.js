@@ -43,11 +43,14 @@ $(document).ready(function() {
 			$("#courseType").val(data.courseType);
 			$("#stageId").val(data.stageId);
 			$("#classType").val(data.classType);
-			$("#oldClassInstId").val(data.oldClassInstId);
+			$("#oldClassInstId").val(data.currentClassInstId);
 			$("#studentId").val(data.studentId);
 			$("#oldClassName").val(data.oldClassName);
+			$("#feeType").val(data.feeType);
+			$("#outSchoolName").val(data.outSchoolName);
+			$("#oldCourseState").val(data.oldCourseState);
 			
-			var oldClassInstId = data.oldClassInstId;
+			var oldClassInstId = data.currentClassInstId;
 			if(oldClassInstId != null && oldClassInstId != "" && oldClassInstId != undefined) {
 				var classIsBegin = data.classIsBegin;
 				$("input[name='isBegin'][value='"+classIsBegin+"']").attr("checked", "checked"); 
@@ -75,33 +78,49 @@ $(document).ready(function() {
     			className = $('#notBeginClassInstId').combobox('getText');
     		}
     		if(classInstId != "" && classInstId != null && classInstId != undefined) {
-    			var handlerId = $("#handlerId").val();
-    			var studentId = $("#studentId").val();
-    			var studentChannelType = $("#oldClassName").val() + $("#feeTypeText").html();
-    			var studentCourseId = $("#studentCourseId").val();
-    			var oldClassInstId = $("#oldClassInstId").val();
-    			var schoolId = $("#schoolId").val();
-    			var param = "[{classInstId:\""+classInstId+"\",className:\""+className+"\",studentId:\""+studentId+"\",studentCourseId:\""+studentCourseId+"\",studentChannelType:\""+studentChannelType+"\",handlerId:\""+handlerId+"\",oldClassInstId:\""+oldClassInstId+"\",schoolId:\""+schoolId+"\"}]";
-    			param = encodeURI(param);
-    			$.ajax({
-    				url: "/sys/applyClass/addClassStudent.do",
-    				data: "param=" + param,
-    				dataType: "json",
-    				async: true,
-    				beforeSend: function()
-    				{
-    					$.messager.progress({title : '选班', msg : '正在选班，请稍等……'});
-    				},
-    				success: function (data) {
-    					$.messager.progress('close'); 
-    					var flag = data.flag
-    					if(flag) {
-    						$.messager.alert('提示', "选班成功！", "info", function() {window.history.back();});
-    					} else {
-    						$.messager.alert('提示', data.msg);
-    					}
-    				}
-    			});
+    			var oldCourseState = $("#oldCourseState").val();
+        		if("009" != oldCourseState && "Y" == isBegin) {
+        			$.messager.alert('提示', "您选择的学员有在读课程，不能选择已开课班级！");
+        		} else {
+        			var handlerId = $("#handlerId").val();
+        			var studentId = $("#studentId").val();
+        			var feeType = $("#feeType").val();
+        			var studentChannelType = "";
+        			if("001" == feeType) {
+        				var outSchoolName = $("#outSchoolName").val();
+        				if(outSchoolName != "" && outSchoolName != null && outSchoolName != undefined) {
+        					studentChannelType = outSchoolName + "校区转入";
+        				} else {
+        					studentChannelType = $("#feeTypeText").html();
+        				}
+        			} else {
+        				studentChannelType = $("#oldClassName").val() + $("#feeTypeText").html();
+        			}
+        			var studentCourseId = $("#studentCourseId").val();
+        			var oldClassInstId = $("#oldClassInstId").val();
+        			var schoolId = $("#schoolId").val();
+        			var param = "[{classInstId:\""+classInstId+"\",className:\""+className+"\",studentId:\""+studentId+"\",studentCourseId:\""+studentCourseId+"\",studentChannelType:\""+studentChannelType+"\",handlerId:\""+handlerId+"\",oldClassInstId:\""+oldClassInstId+"\",schoolId:\""+schoolId+"\"}]";
+        			param = encodeURI(param);
+        			$.ajax({
+        				url: "/sys/applyClass/addClassStudent.do",
+        				data: "param=" + param,
+        				dataType: "json",
+        				async: true,
+        				beforeSend: function()
+        				{
+        					$.messager.progress({title : '选班', msg : '正在选班，请稍等……'});
+        				},
+        				success: function (data) {
+        					$.messager.progress('close'); 
+        					var flag = data.flag
+        					if(flag) {
+        						$.messager.alert('提示', "选班成功！", "info", function() {window.history.back();});
+        					} else {
+        						$.messager.alert('提示', data.msg);
+        					}
+        				}
+        			});
+        		}
     		} else {
     			$.messager.alert('提示', "请选择一个班级！");
     		}

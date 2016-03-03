@@ -22,6 +22,9 @@
   				<input type="hidden" id="studentId"/>
   				<input type="hidden" id="oldClassName"/>
   				<input type="hidden" id="oldClassInstId"/>
+  				<input type="hidden" id="outSchoolName"/>
+  				<input type="hidden" id="feeType"/>
+  				<input type="hidden" id="oldCourseState"/>
   				<input type="hidden" id="studentCourseId" name="studentCourseId" value="<%=studentCourseId %>"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   				<table width="100%" cellpadding="5px" class="maintable" id="selectClassTd">
