@@ -10,7 +10,7 @@ $(document).ready(function() {
     	},
     	onLoadSuccess : function() {
     		var data = $("#schoolId").combobox("getData");
-    		if(data.length == 1) {
+    		if(data.length >= 1) {
     			$("#schoolId").combobox("setValue", data[0].schoolId);
     		}
     	},
@@ -47,15 +47,7 @@ $(document).ready(function() {
     		}
     	});
     });
-	
-	$("#resetBtn").click(function() {
-    	$('#qryFm').form('clear');//清空窗体数据  
-    	var data = $("#schoolId").combobox("getData");
-		if(data.length == 1) {
-			$("#schoolId").combobox("setValue", data[0].schoolId);
-		}
-    });
-	
+	initResetButton("reset","qryFm");
 	// 调整基数
 	$("#changeBase").click(function() {
 		var row = $('#list_data').datagrid('getSelected');
