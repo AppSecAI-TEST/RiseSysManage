@@ -127,7 +127,33 @@ var gPropertyObject = {
 					+ "&fieldId=" + this.fieldId,
 			dataType : "json",
 			success : function(data) {
+				var beforeFieldId = null;
+				var beforeValArr = [];
 				for ( var i = 0, n = data.length; i < n; i++) {
+					var contFlag = false;
+					if(beforeFieldId == data[i].fieldId)
+					{
+						if(data[i].val != "NORMAL")
+						{
+							for(var j = 0,m = beforeValArr.length;j < m;j++)
+							{
+								if(beforeValArr[j] == "NORMAL")
+								{
+									contFlag = true;
+								}
+							}
+						}
+					}
+					else
+					{
+						beforeValArr = [];
+					}
+					beforeValArr.push(data[i].val);
+					beforeFieldId = data[i].fieldId;
+					if(contFlag)
+					{
+						continue;
+					}
 					if (data[i].widgetType == "textbox") {
 						if (data[i].val == "READONLY") {
 							$("#" + data[i].fieldId).textbox("readonly", true);
@@ -139,6 +165,8 @@ var gPropertyObject = {
 							var obj = $("#" + data[i].fieldId);
 							obj.hide();
 							obj.next().css("display", "none");
+						} else if(data[i].val == "NORMAL") {
+							$("#" + data[i].fieldId).textbox("readonly", false);
 						}
 					} else if (data[i].widgetType == "linkbutton") {
 						if (data[i].val == "READONLY") {
@@ -147,6 +175,8 @@ var gPropertyObject = {
 							$("#" + data[i].fieldId).linkbutton('disable');
 						} else if (data[i].val == "HIDDEN") {
 							$("#" + data[i].fieldId).hide();
+						} else if(data[i].val == "NORMAL") {
+							$("#" + data[i].fieldId).linkbutton('enable');
 						}
 					} else if (data[i].widgetType == "datebox") {
 						if (data[i].val == "READONLY") {
@@ -161,6 +191,10 @@ var gPropertyObject = {
 							var obj = $("#" + data[i].fieldId);
 							obj.hide();
 							obj.next().css("display", "none");
+						} else if(data[i].val == "NORMAL") {
+							$("#" + data[i].fieldId).datebox( {
+								"editable" : true
+							});
 						}
 					} else if (data[i].widgetType == "datetimebox") {
 						if (data[i].val == "READONLY") {
@@ -173,6 +207,9 @@ var gPropertyObject = {
 									});
 						} else if (data[i].val == "HIDDEN") {
 							$("#" + data[i].fieldId).hide();
+						} else if(data[i].val == "NORMAL") {
+							$("#" + data[i].fieldId).attr("readonly",
+									false);
 						}
 					}
 				}
