@@ -1857,26 +1857,20 @@ $("#praiseSourceN").combobox({
 				}
 				else if(womChannel=="Stu")
 				{
-					var tr1=$("#praiseTab2").find("tr:eq(0)");
-					if(tr1.attr("studentId")==null)
-					{
-						$.messager.alert('提示', "请选择一个学员!");
+					var tr1 = $("#praiseTab2").find("tr:eq(0)");
+					var stuNames = tr1.find("td:eq(1)").find(".easyui-textbox").textbox("getValue");
+					if(stuNames == "") {
+						showMessage('提示', "请填写学员姓名!",null);
 						return false;
-					}
-					else
-					{
-						womItem["studentId"]=tr1.attr("studentId");
-						womItem["studentIdSchool"]=tr1.attr("studentSchoolId");
-						womItem["studentName"]=tr1.find("td:eq(1)").find(".easyui-textbox").textbox("getValue");
-						womItem["identityType"]=tr1.find("td:eq(3)").find(".easyui-combobox").combobox("getValue");
-						womItem["identityId"]=tr1.find("td:eq(3)").find(".easyui-textbox").textbox("getValue");
-						var tr2 =$("#praiseTab2").find("tr:eq(1)");
-						womItem["className"]=tr2.find("td:eq(1)").find(".easyui-textbox").textbox("getValue");
-						womItem["teacherIdSchool"]=$("#t_teacher_school").combobox("getValue");
-						womItem["teacherId"]=$("#t_teacher_id").combobox("getValue");
-						
+		 			} else {
+						womItem["studentName"] = stuNames;
+						womItem["identityType"] = tr1.find("td:eq(3)").find(".easyui-combobox").combobox("getValue");
+						womItem["identityId"] = tr1.find("td:eq(3)").find(".easyui-textbox").textbox("getValue");
+						var tr2 = $("#praiseTab2").find("tr:eq(1)");
+						womItem["className"] = tr2.find("td:eq(1)").find(".easyui-textbox").textbox("getValue");
+						womItem["teacherIdSchool"] = $("#t_teacher_school").combobox("getValue");
+						womItem["teacherId"] = $("#t_teacher_id").combobox("getValue");
 					}	
-						
 				}
 				else if(womChannel=="Sta")
 				{
