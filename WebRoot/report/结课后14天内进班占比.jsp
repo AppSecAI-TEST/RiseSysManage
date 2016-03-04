@@ -23,7 +23,7 @@
 							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false">
 				        	</select>
 						</td>
-	  					<td align="right" style="width:80px"><span>结课日期：</span></td>
+	  					<td align="right" style="min-width: 80px"><span>结课日期：</span></td>
 	  					<td style="min-width: 210px">
 							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeFinish" name="startTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
 							<span style="display: inline-block; text-align: center; width: 14px;">至</span>
