@@ -17,52 +17,53 @@
   	</head>
   
   	<body>
-		<form id="attFm" style="margin:0 auto;">
-			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+  		<div style="margin-right:5px;">
+		<form id="attFm">
+			<table class="search_tab">
 				<tr>
-					<td align="right" width="8%">
-						校区：
+					<td align="right" width="70px">
+						<span>校区：</span>
 					</td>
-					<td width="12%">
-						<select id="schoolId" name="schoolId" style="width:100px" ></select>
+					<td width="100px">
+						<select id="schoolId" name="schoolId" style="width:100px;height:25px;" ></select>
 					</td>
-					<td align="right" width="8%">
-						课程阶段：
+					<td align="right" width="70px">
+						<span>课程阶段：</span>
 					</td>
-					<td width="22%">
-						<select id="classPharse" name="classPharse" style="width:100px" ></select>
+					<td width="100px">
+						<select id="classPharse" name="classPharse" style="width:100px;height:25px;" ></select>
 					</td>
-					<td align="right" width="8%">
-						上课日期：
+					<td align="right" width="70px">
+						<span>上课日期：</span>
 					</td>
-					<td width="22%">
-						<input name="classStart" id="classStart" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="classEnd" id="classEnd" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
+					<td width="100px">
+						<input name="classStart" id="classStart" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="classEnd" id="classEnd" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
 					</td>
-					<td align="right" width="8%">
-						班级：
+					<td align="right" width="50px">
+						<span>班级：</span>
 					</td>
-					<td width="12%">
-						<select id="classInfo" name="classInfo" style="width:110px" ></select>
+					<td>
+						<select id="classInfo" name="classInfo" style="width:110px;height:25px;" ></select>
 					</td>
 				</tr>
 				<tr>
 					<td align="right">
-						老师：
+						<span>老师：</span>
 					</td>
 					<td>
-						<input name="teacher" id="teacher" type="text" style="width:100px" class="easyui-textbox" />								
+						<input name="teacher" id="teacher" type="text" style="width:100px;height:25px;" class="easyui-textbox" />								
 					</td>
 					<td align="right">
-						出勤率：
+						<span>出勤率：</span>
 					</td>
 					<td>
-						<input name="attendStartRate" id="attendStartRate" type="text" style="width:88px" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />% 至 <input name="attendEndRate" id="attendEndRate" type="text" style="width:88px" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />%							
+						<input name="attendStartRate" id="attendStartRate" type="text" style="width:88px;height:25px;" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />% 至 <input name="attendEndRate" id="attendEndRate" type="text" style="width:88px;height:25px;" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />%							
 					</td>
 					<td align="right">
-						校服穿着率：
+						<span>校服穿着率：</span>
 					</td>
 					<td>
-						<input name="schoolWearStartRate" id="schoolWearStartRate" type="text" style="width:88px" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />% 至 <input name="schoolWearEndRate" id="schoolWearEndRate" type="text" style="width:88px" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />%								
+						<input name="schoolWearStartRate" id="schoolWearStartRate" type="text" style="width:88px;height:25px;" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />% 至 <input name="schoolWearEndRate" id="schoolWearEndRate" type="text" style="width:88px;height:25px;" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />%								
 					</td>
 					<td colspan="2" align="center">
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
@@ -71,7 +72,6 @@
 				</tr>
 			</table>
 		</form>
-		<div style="padding:5px 0;min-width:1100px; width:100%;">
 			<table class="easyui-datagrid" title="出勤率明细表 " style="height:390px;" id="attList" url="" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
@@ -90,7 +90,6 @@
 					</tr>
 				</thead>
 			</table>
-		</div>
 		<div id="toolbar" style="padding: 2px; height: auto">
    			<a href="javascript:void(0)" id="hisViewBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;">导出</a>
 		</div>

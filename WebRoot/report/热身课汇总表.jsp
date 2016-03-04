@@ -16,36 +16,36 @@
 		</style>
   	</head>
   	<body>
-		<form id="manFm" style="margin:0 auto;">
+  	<div style="margin-right:5px;">
+		<form id="manFm">
 			<input type="hidden" id="warmupCnt" name="warmupCnt" />
-			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+			<table class="search_tab">
 				<tr>
 					<td align="right" width="8%">
 						校区：
 					</td>
 					<td width="11%">
-						<select id="schoolManId" name="schoolManId" style="width:100px" ></select>
+						<select id="schoolManId" name="schoolManId" style="width:100px;height:25px;" ></select>
 					</td>
 					<td align="right">
 						热身课次数：
 					</td>
 					<td>
-						<input name="warmupStart" id="warmupStart" type="text" class="easyui-textbox" style="width:100px; height: 25px;" />&nbsp;至&nbsp;<input name="warmupEnd" id="warmupEnd" type="text" class="easyui-textbox" style="width:100px; height: 25px;" />								
+						<input name="warmupStart" id="warmupStart" type="text" class="easyui-textbox" style="width:60px; height: 25px;" />&nbsp;至&nbsp;<input name="warmupEnd" id="warmupEnd" type="text" class="easyui-textbox" style="width:60px; height: 25px;" />								
 					</td>
 					<td align="right">
 						计划课时：
 					</td>
 					<td>
-						<input name="planTimesStart" id="planTimesStart" type="text" class="easyui-textbox" style="width:100px; height: 25px;" />&nbsp;至&nbsp;<input name="planTimesEnd" id="planTimesEnd" type="text" class="easyui-textbox" style="width:100px; height: 25px;" />								
+						<input name="planTimesStart" id="planTimesStart" type="text" class="easyui-textbox" style="width:60px; height: 25px;" />&nbsp;至&nbsp;<input name="planTimesEnd" id="planTimesEnd" type="text" class="easyui-textbox" style="width:60px; height: 25px;" />								
 					</td>
-					<td align="center">
+					<td align="left">
 						<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
 						<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
 					</td>
 				</tr>
 			</table>
 		</form>
-		<div style="padding:5px 0;min-width:1100px; width:100%">
 			<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true" showFooter="true">
 				<thead>
 					<tr>
@@ -55,10 +55,10 @@
 					</tr>
 				</thead>
 			</table>
-		</div>
 		<div id="toolManbar" style="padding: 2px; height: auto">
 			<a href="javascript:void(0)" id="exportBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="exportFunc()">导出</a>
 		</div>
+	</div>	
 		<script type="text/javascript">
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=851&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);

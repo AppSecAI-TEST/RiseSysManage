@@ -12,54 +12,51 @@
   	</head>
   
   	<body>
-  		<div style="padding:5px 0;">
-  			<form id="qryFm" style="margin:0 auto;">
+  		<div style="margin-right:5px;">
+  			<form id="qryFm">
   				<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
-	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
+	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right" style="min-width: 120px; max-width: 120px"><span>校区：</span></td>
+	  					<td align="right" style="width:100px"><span>校区：</span></td>
 	  					<td width="130px">
 							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;">
 				        	</select>
 						</td>
-						<td align="right" style="min-width: 120px; max-width: 120px"><span>带班老师：</span></td>
+						<td align="right" style="width: 120px"><span>带班老师：</span></td>
 	  					<td width="135px">
 	  						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 114px; height: 25px;">
 	  						</select>
 	  					</td>
-	  					<td align="left" style="min-width: 40px; max-width: 100px"><span>课时进度比：</span></td>
-	  					<td width="130px">
+	  					<td align="left" style="width: 90px"><span>课时进度比：</span></td>
+	  					<td align="left">
 	  						<input name="minAttendRate" id="minAttendRate" type="text" class="easyui-numberbox" style="width: 39px; height: 25px;"/>
 							<span style="display: inline-block; text-align: center; width: 32px;">%&nbsp;至&nbsp;</span>
 							<input name="maxAttendRate" id="maxAttendRate" type="text" class="easyui-numberbox" style="width: 39px; height: 25px;"/>
 	  						<span style="display: inline-block; text-align: center; width: 3px;">%</span>
 	  					</td>
-	  					<td style="min-width: 350px">&nbsp;</td>
 	  				</tr>	
 	  				<tr>
-	  					<td align="right" style="min-width: 120px; max-width: 120px"><span>未结课升学率：</span></td>
-	  					<td width="130px">
+	  					<td align="right"><span>未结课升学率：</span></td>
+	  					<td>
 	  						<input name="minAttendHigherRate" id="minAttendHigherRate" type="text" class="easyui-numberbox" style="width: 39px; height: 25px;"/>
 							<span style="display: inline-block; text-align: center; width: 32px;">%&nbsp;至&nbsp;</span>
 							<input name="maxAttendHigherRate" id="maxAttendHigherRate" type="text" class="easyui-numberbox" style="width: 39px; height: 25px;"/>
 							<span style="display: inline-block; text-align: center; width: 3px;">%</span>
 	  					</td>
-	  					<td align="right" style="min-width: 120px; max-width: 120px"><span>已结课升学率：</span></td>
+	  					<td align="right"><span>已结课升学率：</span></td>
 	  					<td width="135px">
 	  						<input name="minFinishHigherRate" id="minFinishHigherRate" type="text" class="easyui-numberbox" style="width: 39px; height: 25px;"/>
 							<span style="display: inline-block; text-align: center; width: 32px;">%&nbsp;至&nbsp;</span>
 							<input name="maxFinishHigherRate" id="maxFinishHigherRate" type="text" class="easyui-numberbox" style="width: 39px; height: 25px;"/>
 							<span style="display: inline-block; text-align: center; width: 3px;">%</span>
 						</td>
-						<td align="left" colspan="2" width="240px">
+						<td align="left" colspan="2">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1052">查询</a>
 							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 						</td>
-						<td style="min-width: 350px">&nbsp;</td>
 	  				</tr>
 	  			</table>
   			</form>
-  			<div style="padding:5px 0;min-width:1100px; width:100%;">
   				<table class="easyui-datagrid" style="height:435px;" id="list_data"
 					title="查询结果" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
@@ -80,7 +77,6 @@
 						</tr>
 					</thead>
 				</table>
-  			</div>
   			<div id="toolbar" style="padding: 2px; height: auto">
 	   			<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
 			</div>

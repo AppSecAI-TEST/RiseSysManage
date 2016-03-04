@@ -16,36 +16,36 @@
   			<form id="qryFm">
 	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right" width="80px"><span>校区：</span></td>
-	  					<td align="left"  width="110px">
+	  					<td align="right" width="50px"><span>校区：</span></td>
+	  					<td align="left"  width="100px">
 	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 				        	</select>
 	  					</td>
 	  					<td align="right" width="50px"><span>班级：</span></td>
-	  					<td align="left"  width="110px">
+	  					<td align="left"  width="100px">
 	  						<input id="className" name="className" class="easyui-textbox" style="width: 100px; height: 25px;">
 	  					</td>
 	  					<td align="right" width="50px"><span>教师：</span></td>
-	  					<td align="left"  width="110px">
+	  					<td align="left"  width="100px">
 	  						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 				        	</select>
 	  					</td>
 	  					<td align="right" width="50px"><span>阶段：</span></td>
-	  					<td align="left"  width="110px">
+	  					<td align="left"  width="100px">
 	  						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 								data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'"
 					      		url="<%=path %>/pubData/qryStage.do?">
 				        	</select>
 	  					</td>
 	  					<td width="50px" align="right" ><span>日期：</span></td>
-						<td width="114px">
-	  						<input class="easyui-datebox" type="text" style="width:150px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myYearMonthformatter, parser:myparser,onShowPanel:settingYearMonthPanel" editable="false"/>
+						<td width="100px">
+	  						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myYearMonthformatter, parser:myparser,onShowPanel:settingYearMonthPanel" editable="false"/>
 						</td>
-						<td align="center">
-							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="5007">查询</a>
-							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
+						<td align="left">
+							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:80px; height: 25px;" id="qryBtn" funcNodeId="5007">查询</a>
+							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px; height: 25px;" id="reset">重置</a>
 						</td>
 	  				</tr>	
 	  			</table>

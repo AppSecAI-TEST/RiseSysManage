@@ -17,29 +17,29 @@
   	</head>
   
   	<body>
-		<form id="attFm" style="margin:0 auto;">
-			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+  		<div style="margin-right:5px;">
+		<form id="attFm">
+			<table class="search_tab">
 				<tr>
-					<td align="right" width="10%">
-						校区：
+					<td align="right" width="70px;">
+						<span>校区：</span>
 					</td>
-					<td width="10%">
-						<select id="schoolId" name="schoolId" style="width:100px" ></select>
+					<td width="100px;">
+						<select id="schoolId" name="schoolId" style="width:100px;height:25px;" ></select>
 					</td>
-					<td align="right" width="10%">
-						月份：
+					<td align="right" width="40px;">
+						<span>月份：</span>
 					</td>
-					<td width="10%">
-						<input name="monthDate" id="monthDate" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myYearMonthformatter, parser:myparser" />
+					<td width="100px">
+						<input name="monthDate" id="monthDate" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myYearMonthformatter, parser:myparser" />
 					</td>
-					<td colspan="2" style="padding-left:60px">
+					<td colspan="2" align="left">
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
 						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
 					</td>
 				</tr>
 			</table>
 		</form>
-		<div style="padding:5px 0;min-width:1100px; width:100%;">
 			<table class="easyui-datagrid" title="出勤率汇总表 " style="height:390px;text-align:center;" id="attList" url="" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
@@ -52,7 +52,6 @@
 					</tr>
 				</thead>
 			</table>
-		</div>
 		<div id="toolbar" style="padding: 2px; height: auto">
    			<a href="javascript:void(0)" id="hisViewBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;">导出</a>
 		</div>

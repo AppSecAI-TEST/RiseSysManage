@@ -83,7 +83,6 @@
 	  				</tr>
 	  			</table>
   			</form>
-			<div style="padding:5px 0;min-width:1100px; width:100%;">
 				<table class="easyui-datagrid" style="height:435;" id="list_data"
 					title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
@@ -113,7 +112,6 @@
 						</tr>
 					</thead>
 				</table>
-			</div>
 			<div id="toolbar" style="padding: 2px; height: auto">
 	   			<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
 			</div>

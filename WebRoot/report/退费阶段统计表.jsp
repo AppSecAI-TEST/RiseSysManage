@@ -43,7 +43,6 @@
 	  				</tr>	
 	  			</table>
   			</form>
-			<div style="padding:5px 0;min-width:1100px; width:100%;">
 				<table class="easyui-datagrid" style="height:435px;" id="list_data"
 					title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
