@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.xml.namespace.QName;
 
 import net.sf.json.JSONObject;
+import net.sf.json.util.JSONUtils;
 
 import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
@@ -16,7 +18,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.rise.model.StaffT;
 import com.rise.pub.pubData.QryPropertiesConfig;
+import com.rise.pub.util.JsonUtils;
 import com.rise.pub.util.ObjectCensor;
 import com.rise.pub.util.StringUtil;
 
@@ -37,6 +41,17 @@ public class ServiceEngine
 
 	public static String invokeHttp(String param) throws Exception
 	{
+		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();  
+		HttpSession s= request.getSession();
+		StaffT staffT =(StaffT) s.getAttribute("StaffT");
+		if(staffT!=null)
+		{
+			String staffId=staffT.getStaffId()+"";
+			JSONObject args=JSONObject.fromObject(param);
+			args.put("staffId", staffId);
+			param=args.toString();
+		}
+		
 		if (ObjectCensor.checkObjectIsNull(address)) 
 		{
 			address = QryPropertiesConfig.getPropertyById("SYS_SERVICE_URL");
