@@ -87,25 +87,26 @@
   	</head>
   	<body>
   		<div>
-			<form id="manFm" style="margin:0 auto;">
-				<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+  			<div style="margin-right:5px;">
+			<form id="manFm">
+				<table class="search_tab">
 					<tr>
-						<td align="right" width="8%">	
+						<td align="right" width="70px;">	
 							班级：
 						</td>
-						<td width="22%">
+						<td width="100px;">
 							<input name="classInfo" id="classInfo" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 						</td>
-						<td align="right" width="8%">
+						<td align="left" width="70px;">
 							放班日期：
 						</td>
-						<td width="22%">
+						<td width="225px;">
 							<input name="openStartManTime" id="openStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="openEndManTime" id="openEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
 						</td>
-						<td align="right" width="8%">
+						<td align="right" width="70px;">
 							班级状态：
 						</td>
-						<td width="12%">
+						<td align="left" style="min-width: 350px;">
 							<select id="classManState" name="classManState" style="width:100px;height:25px;" ></select>
 						</td>
 					</tr>
@@ -116,20 +117,19 @@
 						<td>
 							<input name="classStartManTime" id="classStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="classEndManTime" id="classEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 						</td>
-						<td align="right">
+						<td align="left">
 							结课日期：
 						</td>
 						<td>
 							<input name="overClassStartManTime" id="overClassStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="overClassEndManTime" id="overClassEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 						</td>
-						<td colspan="2" align="center">
+						<td colspan="2" align="left">
 							<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryManFunc()">查询</a>
 							<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetManFunc()">重置</a>
 						</td>
 					</tr>
 				</table>
 			</form>
-			<div style="padding:5px 0;min-width:1100px; width:100%">
 				<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 					<thead>
 						<tr>

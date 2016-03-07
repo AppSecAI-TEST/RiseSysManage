@@ -239,52 +239,52 @@
 			}
 		</script>
   	</head>
-  	<body>
-  		<div id="tab" class="easyui-tabs" style="min-width:1150px;width:99%;height:528px;font-family:'微软雅黑';margin:0 auto;padding:0 0">
-		    <div title="班级管理">
-				<form id="manFm" style="margin:0 auto;">
-					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+  	<body style="padding-top:5px">
+  		<div id="tab" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
+		    <div title="班级管理" style="padding:5px;display:block;">
+				<form id="manFm">
+					<table class="search_tab">
 						<tr>
-							<td align="right" width="9%">
+							<td align="right" width="80px;">
 								所属校区：
 							</td>
-							<td width="22%">
+							<td align="left" width="100px">
 								<select id="schoolManId" name="schoolManId" style="width:100px;height:25px;" ></select>
 							</td>
-							<td align="right" width="9%">	
+							<td align="right" width="100px">
+								放班申请日期：
+							</td>
+							<td width="225px">
+								<input name="openStartManTime" id="openStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="openEndManTime" id="openEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
+							</td>
+							<td align="right" width="100px">
+								放班审批日期：
+							</td>
+							<td align="left">
+								<input name="verifyStartManTime" id="verifyStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="verifyEndManTime" id="verifyEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
+							</td>
+							
+						</tr>
+						<tr>
+							<td align="right">	
 								赠送课类型：
 							</td>
-							<td width="22%">
+							<td align="left">
 								<select id="classType" name="classType" style="width:100px;height:25px;" ></select>
 							</td>
-							<td align="right" width="9%">
+							<td align="right">
 								班级状态：
 							</td>
 							<td>
 								<select id="classManState" name="classManState" style="width:100px;height:25px;" ></select>
 							</td>
-						</tr>
-						<tr>
-							<td align="right">
-								放班申请日期：
-							</td>
-							<td>
-								<input name="openStartManTime" id="openStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="openEndManTime" id="openEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
-							</td>
-							<td align="right">
-								放班审批日期：
-							</td>
-							<td>
-								<input name="verifyStartManTime" id="verifyStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="verifyEndManTime" id="verifyEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
-							</td>
-							<td align="center" colspan="2">
+							<td align="left" colspan="2">
 								<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
 								<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
 							</td>
 						</tr>
 					</table>
 				</form>
-				<div style="padding:5px 0;min-width:1100px; width:100%">
 					<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
@@ -305,34 +305,33 @@
 							</tr>
 						</thead>
 					</table>
-				</div>
 				<div id="toolManbar" style="padding: 2px; height: auto">
 					<a href="javascript:void(0)" id="classArrangementBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="classArrangementFunc()">放班申请</a>
 					<a href="javascript:void(0)" id="cancelClassBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="manClassFunc()">班级维护</a>
 		   			<a href="javascript:void(0)" id="viewClassBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="viewClassFunc()">浏览</a>
 				</div>
 			</div>
-		    <div title="审批管理">
-				<form id="hisFm" style="margin:0 auto;">
-					<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+		    <div title="审批管理" style="padding:5px;display:block;">
+				<form id="hisFm">
+					<table class="search_tab">
 						<tr>
-							<td align="right" width="8%">
+							<td align="right" width="80px;">
 								所属校区：
 							</td>
-							<td width="11%">
+							<td width="100px">
 								<select id="schoolVerId" name="schoolVerId" style="width:100px;height:25px;" ></select>
 							</td>
-							<td align="right" width="9%">
+							<td align="right" width="70px">
 								班级：
 							</td>
-							<td width="22%">
+							<td width="100px">
 								<input name="classVerInfo" id="classVerInfo" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 							</td>
-							<td align="right" width="9%">
-								审批状态：
+							<td align="right" width="100px">
+								放班申请时间：
 							</td>
-							<td width="22%">
-								<select id="verifyState" name="verifyState" style="width:100px;height:25px;" ></select>
+							<td  width="225px">
+								<input name="openApplyStartManTime" id="openApplyStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="openApplyEndManTime" id="openApplyEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />							
 							</td>
 							<td>
 								<input name="myVerify" id="myVerify" type="checkbox" value="${sessionScope.StaffT.staffId}" /><label for="feeReturnYes">查看我的审批</label>
@@ -346,10 +345,10 @@
 								<select id="classManVerState" name="classManVerState" style="width:100px;height:25px;" ></select>
 							</td>
 							<td align="right">
-								放班申请时间：
+								审批状态：
 							</td>
 							<td>
-								<input name="openApplyStartManTime" id="openApplyStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="openApplyEndManTime" id="openApplyEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />							
+								<select id="verifyState" name="verifyState" style="width:100px;height:25px;" ></select>
 							</td>
 							<td align="right">
 								放班审批时间：
@@ -364,7 +363,6 @@
 						</tr>
 					</table>
 				</form>
-				<div style="padding:5px 0;min-width:1100px; width:100%;">
 					<table class="easyui-datagrid" title="班级申请列表" style="height:390px;" id="hisList" url="" toolbar="#toolHisbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
@@ -382,7 +380,6 @@
 							</tr>
 						</thead>
 					</table>
-				</div>
 				<div id="toolHisbar" style="padding: 2px; height: auto">
 		   			<a href="javascript:void(0)" id="veriftyManBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="verifyManFunc()">审批</a>
 		   			<a href="javascript:void(0)" id="viewManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="viewManFunc()">浏览</a>

@@ -88,32 +88,40 @@
 		</script>
   	</head>
   	<body>
-		<form id="manFm" style="margin:0 auto;">
-			<table align="center" style="min-width:1200px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+  		<div style="margin-right:5px;">
+		<form id="manFm">
+			<table class="search_tab">
 				<tr>
-					<td align="right" width="7%">
+					<td align="right" width="80px;">
 						所属校区：
 					</td>
-					<td width="10%">
+					<td width="100px;">
 						<select id="schoolId" name="schoolId" style="width:100px;height:25px;" ></select>
 					</td>
-					<td align="right" width="7%">	
+					<td align="right" width="70px;">	
 						学员姓名：
 					</td>
-					<td width="10%">
+					<td width="100px;">
       					<input name="staffName" id="staffName" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 					</td>
-					<td align="right" width="7%">
+					<td align="right" width="80px">
 						缴费日期：
 					</td>
-					<td width="20%">
+					<td width="225px;">
 						<input name="feeStartTime" id="feeStartTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="feeEndTime" id="feeEndTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
 					</td>
-					<td align="right" width="9%">
+					<td align="right" width="80px;">
 						联系电话：
 					</td>
-					<td colspan="3">
+					<td width="100px;">
 						<input name="contactPhone" id="contactPhone" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
+					</td>
+					<td align="left">
+						是否过期：
+					</td>
+					<td align="left">
+						<input name="isExpire" id="isExpireYes" type="radio" value="是" /><label for="isExpireYes">是</label>&nbsp;
+						<input name="isExpire" id="isExpireNo" type="radio" value="否" /><label for="isExpireNo">否</label>								
 					</td>
 				</tr>
 				<tr>
@@ -130,19 +138,12 @@
 						<select id="classState" name="classState" style="width:100px;height:25px;" ></select>				
 					</td>
 					<td align="right">
-						是否过期：
-					</td>
-					<td>
-						<input name="isExpire" id="isExpireYes" type="radio" value="是" /><label for="isExpireYes">是</label>&nbsp;
-						<input name="isExpire" id="isExpireNo" type="radio" value="否" /><label for="isExpireNo">否</label>								
-					</td>
-					<td align="right">
 						几天内过期：
 					</td>
 					<td>
 						<input name="expireDate" id="expireDate" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 					</td>
-					<td colspan="2">
+					<td colspan="4">
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
 						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
 					</td>
