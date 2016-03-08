@@ -11,7 +11,6 @@ $(document).ready(function() {
     	onLoadSuccess:function(data) {
     		if(data.length > 0) {
 				$('#schoolId').combobox('setValue', data[0].schoolId);
-				$("#qryBtn").click();
 			}
     	},
 		onChange : function(n, o) {
@@ -87,81 +86,79 @@ $(document).ready(function() {
 	$('#year').datebox('setValue', yearFormatter(curr_time));
 	
 	$("#qryBtn").click(function() {
-		var object = $("#qryFm").serializeObject();
-		if($("[name='isAttend']").length > 0) {
-			var s = "";
-			$('input[name="isAttend"]:checked').each(function() {
-				s += $(this).val() + ",";
+		var flag = validateQryDate();
+		if(flag) {
+			var object = $("#qryFm").serializeObject();
+			if($("[name='isAttend']").length > 0) {
+				var s = "";
+				$('input[name="isAttend"]:checked').each(function() {
+					s += $(this).val() + ",";
+				});
+				s = s.substring(0, s.length - 1);
+				object.courseState = s;
+			}
+			var obj = JSON.stringify(object);
+			obj = obj.substring(0, obj.length - 1);
+			var funcNodeId = $("#qryBtn").attr("funcNodeId");
+			obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+			$('#list_data').datagrid({
+				url : "/sys/pubData/qryDataListByPage.do",
+				queryParams:{
+					param : obj
+				},
+				onLoadSuccess:function(){
+					onLoadSuccess();
+				}
 			});
-			s = s.substring(0, s.length - 1);
-			object.courseState = s;
-		}
-    	var obj = JSON.stringify(object);
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-    	$('#list_data').datagrid({
-    		url : "/sys/pubData/qryDataListByPage.do",
-    		queryParams:{
-    			param : obj
-    		},
-    		onLoadSuccess:function(){
-    			onLoadSuccess();
-    		}
-    	});
-    	
-    	var higherType = $("#higherType").val();
-    	if("quarter" == higherType||"allQuarter"==higherType) {
-    		var year = $('#year').datebox('getValue');
-    		$("#yearDiv").html(year);
-    	} else if("gap" == higherType) {
-			var quarterText = $("#quarter").combobox("getText");
-			$("#goal").html(quarterText + "距目标缺口");
-			$("#rate").html(quarterText + "升学率");
-			var quarter = $("#quarter").combobox("getValue");
-			if("1" == quarter) {
-				$("#1_month").html("1月升学率");
-				$("#2_month").html("2月升学率");
-				$("#3_month").html("3月升学率");
-			} else if("2" == quarter) {
-				$("#1_month").html("4月升学率");
-				$("#2_month").html("5月升学率");
-				$("#3_month").html("6月升学率");
-			} else if("3" == quarter) {
-				$("#1_month").html("7月升学率");
-				$("#2_month").html("8月升学率");
-				$("#3_month").html("9月升学率");
-			} else if("4" == quarter) {
-				$("#1_month").html("10月升学率");
-				$("#2_month").html("11月升学率");
-				$("#3_month").html("12月升学率");
+			
+			var higherType = $("#higherType").val();
+			if("quarter" == higherType||"allQuarter"==higherType) {
+				var year = $('#year').datebox('getValue');
+				$("#yearDiv").html(year);
+			} else if("gap" == higherType) {
+				var quarterText = $("#quarter").combobox("getText");
+				$("#goal").html(quarterText + "距目标缺口");
+				$("#rate").html(quarterText + "升学率");
+				var quarter = $("#quarter").combobox("getValue");
+				if("1" == quarter) {
+					$("#1_month").html("1月升学率");
+					$("#2_month").html("2月升学率");
+					$("#3_month").html("3月升学率");
+				} else if("2" == quarter) {
+					$("#1_month").html("4月升学率");
+					$("#2_month").html("5月升学率");
+					$("#3_month").html("6月升学率");
+				} else if("3" == quarter) {
+					$("#1_month").html("7月升学率");
+					$("#2_month").html("8月升学率");
+					$("#3_month").html("9月升学率");
+				} else if("4" == quarter) {
+					$("#1_month").html("10月升学率");
+					$("#2_month").html("11月升学率");
+					$("#3_month").html("12月升学率");
+				}
+			}
+			if($("#classProgress").length > 0) {
+				var content = "";
+				var minAttendRate = $("#minAttendRate").textbox("getValue");
+				var maxAttendRate = $("#maxAttendRate").textbox("getValue");
+				if(minAttendRate != null && minAttendRate != "" && minAttendRate != undefined) {
+					if(maxAttendRate != null && maxAttendRate != "" && maxAttendRate != undefined) {
+						content += minAttendRate + "% <= 课时进度 <= " + maxAttendRate + "%";
+					} else {
+						content += minAttendRate + "% <= 课时进度";
+					}
+				} else {
+					if(maxAttendRate != null && maxAttendRate != "" && maxAttendRate != undefined) {
+						content += "课时进度 <= " + maxAttendRate + "%";
+					} else {
+						content += "未结课";
+					}
+				}
+				$("#classProgress").html(content);
 			}
 		}
-    	if($("#classProgress").length > 0) {
-    		var content = "";
-    		var minAttendRate = $("#minAttendRate").textbox("getValue");
-    		var maxAttendRate = $("#maxAttendRate").textbox("getValue");
-    		if(minAttendRate != null && minAttendRate != "" && minAttendRate != undefined) {
-    			if(maxAttendRate != null && maxAttendRate != "" && maxAttendRate != undefined) {
-    				content += minAttendRate + "% <= 课时进度 <= " + maxAttendRate + "%";
-    			} else {
-    				content += minAttendRate + "% <= 课时进度";
-    			}
-    		} else {
-    			if(maxAttendRate != null && maxAttendRate != "" && maxAttendRate != undefined) {
-    				content += "课时进度 <= " + maxAttendRate + "%";
-    			} else {
-    				content += "未结课";
-    			}
-    		}
-    		$("#classProgress").html(content);
-    	}
     });
-	
-	var higherType = $("#higherType").val();
-	if("allStage" == higherType || "allQuarter" == higherType || "allRegion" == higherType) {
-		$("#qryBtn").click();
-	}
 });
 
 function onLoadSuccess() {
@@ -199,7 +196,21 @@ function mergeCellsByField(tableId, colList) {
             	after = "";
             } else {
             	if("quarterHigherRate" == field) {
-            		after = target.datagrid("getRows")[i].quarter;
+            		var higherType = $("#higherType").val();
+            		if("quarter" == higherType) {
+            			after = target.datagrid("getRows")[i].quarter;
+            		} else {
+            			var quarter = $("#quarter").combobox("getValue");
+            			if(quarter == "" || quarter == null || quarter == undefined) {
+            				after = target.datagrid("getRows")[i].quarter;
+            			} else {
+            				if("allRegion" == higherType) {
+            					after = target.datagrid("getRows")[i].regionName;
+            				} else {
+            					after = target.datagrid("getRows")[i].schoolName;
+            				}
+            			}
+            		}
             	} else {
             		after = target.datagrid("getRows")[i][field];
             	}
@@ -217,4 +228,20 @@ function mergeCellsByField(tableId, colList) {
             before = after;
         }
     }
+}
+
+function validateQryDate() {
+	if($("#year").length > 0) {
+		var higherType = $("#higherType").val();
+		var year = $("#year").datebox("getValue");
+		if("quarter" == higherType || "allRegion" == higherType 
+				|| "allQuarter" == higherType || "allStage" == higherType
+				|| "stage" == higherType) {
+			if(year == null || year == "" || year == undefined) {
+				$.messager.alert('提示', "请选择您要查询的年度！");
+				return false;
+			}
+		}
+	}
+	return true;
 }

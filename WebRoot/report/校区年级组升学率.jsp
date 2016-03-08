@@ -13,6 +13,7 @@
   	<body>
   		<div style="margin-right:5px;">
   			<form id="qryFm">
+  				<input type="hidden" id="higherType" value="stage"/>
   				<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
   				<table class="search_tab">
   					<tr>

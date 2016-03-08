@@ -17,22 +17,22 @@
   				<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
 	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right" width="70px"><span>校区：</span></td>
-	  					<td width="100px">
+	  					<td align="right" style="min-width: 80px"><span>校区：</span></td>
+	  					<td style="min-width: 100px">
 							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        	</select>
 						</td>
-						<td align="right" width="80px"><span>课程阶段：</span></td>
-	  					<td width="100px">
+						<td align="right" style="min-width: 80px"><span>课程阶段：</span></td>
+	  					<td style="min-width: 110px">
 							<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        	</select>
 						</td>
-						<td align="right" width="60px"><span>班级：</span></td>
-	  					<td width="100px">
-	  						<input name="classInstId" id="classInstId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
+						<td align="right" style="min-width: 60px"><span>班级：</span></td>
+	  					<td style="min-width: 110px">
+	  						<input name="classInstId" id="classInstId" type="text" class="easyui-textbox" style="width: 110px; height: 25px;"/>
 						</td>
-						<td align="right" width="80px"><span>班级状态：</span></td>
-						<td width="100px">
+						<td align="right" style="min-width: 80px"><span>班级状态：</span></td>
+						<td style="min-width: 130px">
 							<select id="classState" name="classState" class="easyui-combobox" style="width: 100px; height: 25px;"
 								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 			      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE&codeFlag=003,004">
@@ -41,42 +41,42 @@
 						<td width="220px;"></td>
 	  				</tr>
 	  				<tr>
-	  					<td align="right"><span>带班老师：</span></td>
-	  					<td >
+	  					<td align="right" style="min-width: 80px"><span>带班老师：</span></td>
+	  					<td style="min-width: 100px">
 	  						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;">
 	  						</select>
 	  					</td>
-	  					<td align="right"><span>班级性质：</span></td>
-	  					<td >
+	  					<td align="right" style="min-width: 80px"><span>班级性质：</span></td>
+	  					<td style="min-width: 110px">
 	  						<input type="checkbox" name="handType" value="'1'"/>&nbsp;<span>一手班</span>
 							&nbsp;&nbsp;<input type="checkbox" name="handType" value="'2'"/>&nbsp;<span>二手班</span>
 	  					</td>
-	  					<td align="right"><span>年度：</span></td>
-						<td colspan="4">
-							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="year" name="year" data-options="formatter:yearFormatter, parser:yearParser"/>
+	  					<td align="right" style="min-width: 60px"><span>年度：</span></td>
+						<td colspan="4" style="min-width: 100px">
+							<input class="easyui-datebox" type="text" style="width:110px; height: 25px;" id="year" name="year" data-options="formatter:yearFormatter, parser:yearParser"/>
 						</td>
 	  				</tr>
 	  				<tr>
-	  					<td align="right"><span>开班人数：</span></td>
-	  					<td>
+	  					<td align="right" style="min-width: 80px"><span>开班人数：</span></td>
+	  					<td style="min-width: 100px">
 							<input name="minOpenNum" id="minOpenNum" type="text" class="easyui-numberbox" style="width: 42px; height: 25px;"/>
-							-							
+							<span style="display: inline-block; text-align: center; width: 6px;">-</span>						
 							<input name="maxOpenNum" id="maxOpenNum" type="text" class="easyui-numberbox" style="width: 42px; height: 25px;"/>
 						</td>
-						<td align="right"><span>在读人数：</span></td>
-	  					<td>
+						<td align="right" style="min-width: 80px"><span>在读人数：</span></td>
+	  					<td style="min-width: 110px">
 							<input name="minStudyNum" id="minStudyNum" type="text" class="easyui-numberbox" style="width: 42px; height: 25px;"/>
-							-
+							<span style="display: inline-block; text-align: center; width: 6px;">-</span>
 							<input name="maxStudyNum" id="maxStudyNum" type="text" class="easyui-numberbox" style="width: 42px; height: 25px;"/>
 						</td>
-						<td align="right"><span>升学率：</span></td>
-						<td>
+						<td align="right" style="min-width: 60px"><span>升学率：</span></td>
+						<td style="min-width: 110px">
 							<input name="minHigherRate" id="minHigherRate" type="text" class="easyui-numberbox" style="width: 39px; height: 25px;" data-options="min:0, max:100, precision:0"/>
-							%-
+							<span style="display: inline-block; text-align: center; width: 14px;">%-</span>
 							<input name="maxHigherRate" id="maxHigherRate" type="text" class="easyui-numberbox" style="width: 39px; height: 25px;" data-options="min:0, max:100, precision:0"/>
-							%
+							<span style="display: inline-block; text-align: center; width: 4px;">%</span>
 						</td>
-						<td colspan="3" align="left">
+						<td colspan="3" align="left" style="min-width: 210px">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1064">查询</a>
 							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 						</td>

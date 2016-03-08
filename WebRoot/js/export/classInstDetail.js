@@ -11,7 +11,6 @@ $(document).ready(function() {
     	onLoadSuccess:function(data) {
     		if(data.length > 0) {
 				$('#schoolId').combobox('setValue', data[0].schoolId);
-				$("#qryBtn").click();
 			}
     	},
     	onChange : function(n, o) {
@@ -43,30 +42,35 @@ $(document).ready(function() {
 	initYear();
 	
 	$("#qryBtn").click(function() {
-		var object = $("#qryFm").serializeObject();
-		if($("[name='handType']").length > 0) {
-			var s = "";
-			$('input[name="handType"]:checked').each(function() {
-				s += $(this).val() + ",";
-			});
-			s = s.substring(0, s.length - 1);
-			object.handType = s;
+		var year = $("#year").datebox("getValue");
+		if(year == null || year == "" || year == undefined) {
+			$.messager.alert('提示', "请选择您要查询的年度！");
 		} else {
-			object.handType = "";
+			var object = $("#qryFm").serializeObject();
+			if($("[name='handType']").length > 0) {
+				var s = "";
+				$('input[name="handType"]:checked').each(function() {
+					s += $(this).val() + ",";
+				});
+				s = s.substring(0, s.length - 1);
+				object.handType = s;
+			} else {
+				object.handType = "";
+			}
+			var obj = JSON.stringify(object);
+			obj = obj.substring(0, obj.length - 1);
+			var funcNodeId = $("#qryBtn").attr("funcNodeId");
+			obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+			$('#list_data').datagrid({
+				url : "/sys/applyClass/qryClassInstDetail.do",
+				queryParams:{
+					param : obj
+				},
+				onLoadSuccess:function(){
+					onLoadSuccess();
+				}
+			});
 		}
-    	var obj = JSON.stringify(object);
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-    	$('#list_data').datagrid({
-    		url : "/sys/applyClass/qryClassInstDetail.do",
-    		queryParams:{
-    			param : obj
-    		},
-    		onLoadSuccess:function(){
-    			onLoadSuccess();
-    		}
-    	});
     });
 	
 	//重置

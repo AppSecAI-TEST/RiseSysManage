@@ -5,6 +5,7 @@ import java.net.URLDecoder;
 
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.logging.Log;
@@ -13,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.rise.pub.util.ObjectCensor;
 import com.rise.service.ActionService;
 import com.rise.service.MergeClassService;
 
@@ -199,6 +202,41 @@ public class MergeClassController
 		}
 	}
 	
+	@RequestMapping(value = "/adjustSchooltime.do")
+	public ModelAndView adjustSchooltime(String applyId) {
+		ModelAndView view = null;
+		if(ObjectCensor.isStrRegular(applyId)) {
+			log.error(applyId);
+			view = new ModelAndView("mergeClass/adjustSchooltime");
+			try {
+				String rstVal = msc.qryMergeClassInstList(applyId);
+				log.error(rstVal);
+				if(ObjectCensor.isStrRegular(rstVal)) {
+					JSONArray array = JSONArray.fromObject(rstVal);
+					view.addObject("list", array);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return view;
+	}
 	
-	
+	@RequestMapping(value = "/adjust.do")
+	public void adjust(String param, HttpServletResponse response) {
+		PrintWriter out = null;
+		try {
+			log.error(param);
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = msc.adjust(param);
+			out.write(retVal);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally { 
+			if(out != null) {
+				out.close();
+			}
+		}
+	}
 }

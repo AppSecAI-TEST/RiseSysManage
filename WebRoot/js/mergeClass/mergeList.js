@@ -1,25 +1,29 @@
 $(document).ready(function(){
 	$("#applyMerge").click(function(){
 		window.location.href="selectClass.jsp?isHead=N";
-	})
+	});
 	$("#HeadMerge").click(function(){
 		window.location.href="selectClass.jsp?isHead=Y";
-	})
+	});
 	$("#cancelMerge").click(function(){
 		cancelMerge();
-	})
+	});
 	$("#viewMerge").click(function(){
 		viewInfo("list_data");
-	})
+	});
 	$("#viewApprove").click(function(){
 		viewInfo("list_datas");
-	})
+	});
 	$("#approve").click(function(){
 		approveApply();
-	})
+	});
 	$("#orderClass").click(function(){
 		orderClass();
-	})
+	});
+	//调整上课时段
+	$("#adjustSchooltime").click(function() {
+		adjustSchooltime();
+	});
 	initQryButton("qryBtn","resetBtn","merFm","list_data");
 	initQryButton("qryBtns","resetBtns","appFm","list_datas");
 });
@@ -35,6 +39,13 @@ function viewInfo(tableName)
 	}	
 }
 
+function adjustSchooltime() {
+	if(validateSelect("list_data")) {
+		var row = $("#list_data").datagrid('getSelected');
+		var applyId = row.applyId;
+		window.location.href = "/sys/mergeClass/adjustSchooltime.do?applyId=" + applyId;
+	}
+}
 
 function validateSelect(tableName)
 {

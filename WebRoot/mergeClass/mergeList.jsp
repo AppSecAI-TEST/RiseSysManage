@@ -38,15 +38,14 @@
 		  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px;height:25px;" editable="false"
 		  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 									onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
-  									url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=704&fieldId=schoolId&headFlag=N">
+  									url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=704&fieldId=schoolId">
 				        		</select>
 		  					</td>
 		  					<td width="90px;" align="right">课程阶段：</td>
 		  					<td width="140px;">
 		  						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 120px;height:25px;" editable="false"
-									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
-				      				onLoadSuccess:function(data){if(data.length > 0) $('#stageId').combobox('setValue',data[0].stageId);}"
-  									url="<%=path%>/pubData/qryStage.do?">
+									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'"
+  									url="<%=path%>/pubData/qryStage.do">
 				        		</select>
 		  					</td>
 		  					<td width="110px;" align="right">计划审批时间：</td>
@@ -116,8 +115,9 @@
 				</table>
 				<div id="toolbar" style="padding: 2px;height:auto;">
 		   			<a href="javascript:void(0)" id="applyMerge" class="easyui-linkbutton" style="width: 100px;" iconCls="icon-add">合并申请</a>
-		   			<a href="javascript:void(0)" id="cancelMerge" class="easyui-linkbutton" style="width: 150px;" iconCls="icon-edit">取消合并申请</a>
+		   			<a href="javascript:void(0)" id="cancelMerge" class="easyui-linkbutton" style="width: 120px;" iconCls="icon-edit">取消合并申请</a>
 		   			<a href="javascript:void(0)" id="HeadMerge" class="easyui-linkbutton" style="width: 100px;" iconCls="icon-add">总部合并</a>
+		   			<a href="javascript:void(0)" id="adjustSchooltime" class="easyui-linkbutton" style="width: 120px;" iconCls="icon-edit">调整上课时段</a>
 		   			<a href="javascript:void(0)" id="orderClass" class="easyui-linkbutton" style="width: 100px;" iconCls="icon-edit">定班处理</a>
 		   			<a href="javascript:void(0)" id="viewMerge" class="easyui-linkbutton" style="width: 100px;" iconCls="icon-redo">浏览</a>
 		 		</div>

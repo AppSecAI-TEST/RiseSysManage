@@ -577,9 +577,14 @@ function addTeacher(obj) {
 }
 
 function deleteTeacher(obj, teacherId) {
+	var weekTime = "";
+	var hourRange = "";
 	var delTr = $(obj).parent().parent().parent();
 	delTr.find("td").each(function(i, node) {
-		if(i == 4) {
+		if(i == 0) {
+			weekTime = $(node).attr("weekTime");
+			hourRange = $(node).attr("hourRange");
+		} else if(i == 4) {
 			$(node).html("");
 			$(node).attr("lessions", 0);
 		}
