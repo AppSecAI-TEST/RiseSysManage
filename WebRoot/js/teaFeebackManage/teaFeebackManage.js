@@ -133,7 +133,6 @@ $(document).ready(function(){
 	  	   }
 	   }
    });
-    
 });
 
 //跳转新增教质反馈页面

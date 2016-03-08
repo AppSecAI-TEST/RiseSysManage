@@ -21,6 +21,17 @@
   			<input id="fSchoolId" type="hidden" value="${schoolId}"/>
   			<input id="month" type="hidden" value="${month}"/>
 	 		<table id="feedbackTab" width="98%" align="center" style="margin:5px auto;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
+	 			<tr id="modelTr" style="display:none;">
+			   			<td></td><td></td><td></td><td align="center"><span>全选:</span></td>
+			   			<td align="center">
+			   				<input type="radio" name="all1" onclick="selectAll(4,'0')" checked="ckecked"><span>0</span>
+			   				<input type="radio" name="all1" onclick="selectAll(4,'1')"><span>1</span>
+			   				<input type="radio" name="all1" onclick="selectAll(4,'2')"><span>2</span>
+			   			</td>
+			   			<td align="center"></td>
+			   			<td align="center"></td>
+			   			<td align="center"></td>
+				</tr>
 	 			<tr>
   					<td width="3%" align="center"><span>序号</span></td>
   					<td width="7%" align="center"><span>姓名</span></td>
@@ -84,3 +95,51 @@
 	   </div>
   	</body>
 </html>
+<script type="text/javascript">
+$(document).ready(function(){
+	var flag =0;
+	$("#feedbackTab").find("tr").each(function(index){
+		if(index>0&&$(this).find("td:eq(5)").html()!="")
+		{
+			flag =5;
+			return false;
+		}
+		else if(index>0&&$(this).find("td:eq(6)").html()!="")
+		{
+			flag =6;
+			return false;
+		}
+		else if(index>0&&$(this).find("td:eq(7)").html()!="")
+		{
+			flag =7;
+			return false;
+		}
+	});
+	if(flag>0)
+	{
+		$("#feedbackTab").find("tr:eq(1)").after("<tr>"+$("#modelTr").html()+"</tr>");
+		$("#feedbackTab").find("tr:eq(2)").find("td:eq("+flag+")").html("&nbsp;<input type='radio' onclick='selectAll("+flag+",\"Y\")' name='all2' checked='checked'><span>已到</span>&nbsp;<input type='radio' onclick='selectAll("+flag+",\"N\")' name='all2'><span>未到</span>");
+		
+	}	
+})
+
+		function selectAll(val1,val2)
+		{
+			$("#feedbackTab").find("tr").each(function(index){
+				if(index>2)
+				{
+					if(val1==4)
+					{
+						if($(this).find("td:eq("+val1+")").find("span").css("visibility")!="hidden")
+						{
+							$(this).find("td:eq("+val1+")").find("span").find("input[type='radio'][value='"+val2+"']").trigger("click");
+						}
+					}
+					else
+					{
+						$(this).find("td:eq("+val1+")").find("input[type='radio'][value='"+val2+"']").trigger("click");
+					}	
+				}	
+			})
+		}
+</script>
