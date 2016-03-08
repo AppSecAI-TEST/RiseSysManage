@@ -151,10 +151,21 @@ span {font-family: Arial,微软雅黑,宋体; font-size: 13px;}
     font-family:'微软雅黑';
     margin:auto;
     width:100%;
+    font-size:12px;
 }
 
 .search_tab td
 {
 	padding:1px 5px;
-	font-size:13px;
+	font-size:12px;
+}
+
+.search_tab span
+{
+	font-size:12px;
+}
+
+.search_tab>.textbox-text .validatebox-text 
+{
+	font-size:12px;
 }
