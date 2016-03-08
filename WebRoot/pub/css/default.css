@@ -165,7 +165,7 @@ span {font-family: Arial,微软雅黑,宋体; font-size: 13px;}
 	font-size:12px;
 }
 
-.search_tab>.textbox-text .validatebox-text 
+.search_tab>textbox-text .validatebox-text 
 {
-	font-size:12px;
+	font-size:11px;
 }
