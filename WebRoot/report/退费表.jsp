@@ -43,6 +43,7 @@
 							<th align="center" colspan="4"><span>退费申请</span></th>
 							<th align="center" width="150px;">&nbsp;</th>
 							<th align="center" align="center" rowspan="2" field="approveDate"><span>审批通过日期</span></th>
+							<th align="center" align="center" rowspan="2" field="belongDate"><span>退费归属日期</span></th>
 						</tr>
 						<tr>
 							<th field="schoolName" align="center" width="5%">校区</th>
