@@ -19,6 +19,7 @@ $(document).ready(function(){
 	        {field:'getRemark',title:'领用时效',width:'9%',align:'center'},  
 	        {field:'effRemark',title:'有效期说明',width:'10%',align:'center'},  
 	        {field:'isMinusVal',title:'是否抵扣学费',width:'8%',align:'center'},  
+	         {field:'courseNames',title:'抵扣课程类型',width:'8%',align:'center'},  
 	        {field:'effNum',title:'有效期（月）',width:'7%',align:'center'},
 	        {field:'giftName',title:'赠券名称',width:'9%',align:'center'},  
 	        {field:'amount',title:'价值金额',width:'7%',align:'center'},  
@@ -31,7 +32,7 @@ $(document).ready(function(){
 	        			var btn = '<a class="update" disabled="disabled" style="width:60px; height:25px;"  href="javascript:void(0)"><span>修改</span></a>&nbsp;<a class="delete" disabled="disabled" style="width:60px; height:25px;" href="javascript:void(0)"><span>删除</span></a>';  
 		                return btn;  
 	        		}else if(row.typeFlag == "false"){
-		                var btn = '<a class="update" onclick="updateCouponName(\''+row.giftId+'\',\''+row.giftType+'\',\''+row.giftName+'\',\''+row.amount+'\',\''+row.isEff+'\')" style="width:60px; height:25px;"  href="javascript:void(0)"><span>修改</span></a>&nbsp;<a class="delete" onclick="removeCouponName(\''+row.giftId+'\')" style="width:60px; height:25px;" href="javascript:void(0)"><span>删除</span></a>';  
+		                var btn = '<a class="update" onclick="updateCouponName(\''+row.giftId+'\',\''+row.giftType+'\',\''+row.giftName+'\',\''+row.amount+'\',\''+row.isEff+'\',\''+row.getRemark+'\',\''+row.courseTypes+'\')" style="width:60px; height:25px;"  href="javascript:void(0)"><span>修改</span></a>&nbsp;<a class="delete" onclick="removeCouponName(\''+row.giftId+'\')" style="width:60px; height:25px;" href="javascript:void(0)"><span>删除</span></a>';  
 		                return btn;  
 	        		}
 	            }  
@@ -113,10 +114,18 @@ function addCouponName()
             		 $("#couponUseType").textbox('setValue',data[i].useType);
             		 $("#couponEffNum").numberbox('setValue',data[i].effNum);
             		 $("#couponEffRemark").textbox('setValue',data[i].effRemark);
-            		 if("Y" == data[i].isMinus){
+            		 if("Y" == data[i].isMinus)
+            		 {
+            			 $("#minusCourses").css('display','table-row');
             			 $("#couponMinus").textbox('setValue','是');
-            		 }else if("N" == data[i].isMinus){
-            			 $("#couponMinus").textbox('setValue','否');
+            		 }else if("N" == data[i].isMinus)
+            		 {
+            			  $("#minusCourses").css('display','none');
+            			  $("#couponMinus").textbox('setValue','否');
+            			  $("input[name='courseTypes']").each(function(i,node)
+            		      {
+									$(this).prop("checked","");
+							});
             		 }
             		 $("#couponGiftCode").val(data[i].giftCode);
             	  }
@@ -127,7 +136,7 @@ function addCouponName()
 }
 
 //打开修改赠券名称信息
-function updateCouponName(giftId,giftType,giftName,amount,isEff)
+function updateCouponName(giftId,giftType,giftName,amount,isEff,getRemark,courseTypes)
 {
 	$('#couponNameDlg').dialog('open').dialog('setTitle','修改赠券名称');
 	$('#couponNameFm').form('clear');
@@ -137,10 +146,18 @@ function updateCouponName(giftId,giftType,giftName,amount,isEff)
 		giftId : giftId,
 		giftName : giftName,
 		amount : amount,
-		isEff : isEff
+		isEff : isEff,
+		getRemark:getRemark
 	});
 	$("input[name='isEff']").each(function(i,node){
 		if(node.value == isEff)
+		{
+			$(this).prop("checked","checked");
+		}
+	});
+	$("input[name='courseTypes']").each(function(i,node){
+		 
+		if(courseTypes.indexOf(node.value)>-1)
 		{
 			$(this).prop("checked","checked");
 		}
@@ -202,10 +219,22 @@ function updateCouponName(giftId,giftType,giftName,amount,isEff)
 function saveCouponName()
 {
 	if($("#couponNameFm").form('validate')){
-		var obj = JSON.stringify($("#couponNameFm").serializeObject());
+		var form = $("#couponNameFm").serializeObject();
+		 
+		var courseTypes="";
+		 $('input[name="courseTypes"]:checked').each(function()
+		  {    
+			courseTypes=courseTypes+$(this).val()+",";
+		  });
+		 
+		if(courseTypes!=='')
+		{
+			form.courseTypes=courseTypes.substring(0, courseTypes.length - 1);
+		}  
 		var handlerId = $("#handlerId").val();
 		var effRemark = $("#couponEffRemark").val();
 		var useType = $("#couponUseType").val();
+		var obj = JSON.stringify(form);
 		obj = obj.substring(0, obj.length - 1);
 		obj += ",\"useType\":\""+useType+"\",\"effRemark\":\""+effRemark+"\",\"handlerId\":\""+handlerId+"\"}";
 		$.ajax({

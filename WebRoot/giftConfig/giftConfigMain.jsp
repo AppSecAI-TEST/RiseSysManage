@@ -183,7 +183,7 @@
 			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;" onclick="saveCouponType()"><span>提交</span></a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" style="width:100px;" onclick="javascript:$('#couponTypeDlg').dialog('close')"><span>取消</span></a>
 		</div>
- 		<div id="couponNameDlg" class="easyui-dialog" style="width:550px;height:340px;padding:0px 0px" modal="true" closed="true" buttons="#couponName-buttons">
+ 		<div id="couponNameDlg" class="easyui-dialog" style="width:550px;height:390px;padding:0px 0px" modal="true" closed="true" buttons="#couponName-buttons">
 			<form id="couponNameFm" method="post">
 			<input name="giftId" type="hidden" />
 			<input id="couponGiftCode" name="giftCode" type="hidden" />
@@ -207,6 +207,14 @@
 				<tr>
 					<td align="right"><span>是否抵扣学费：</span></td>
 					<td align="left"><input id="couponMinus" name="couponMinus" style="width:265px" class="easyui-textbox" disabled="disabled"/></td>
+				</tr>
+				<tr id="minusCourses" style="display:none">
+					<td align="right"><span>抵扣课程类型：</span></td>
+					<td align="left"><input type="checkbox"   name="courseTypes" value="001"><span>常规课</span>&nbsp;&nbsp;<input type="checkbox"   name="courseTypes" value="002"><span>短期课</span></td>
+				</tr>
+				<tr>
+						<td align="right"><span>领取时效说明：</span></td>
+						<td align="left"><input name="getRemark" id="getRemark" style="width:265px" class="easyui-textbox" /></td>
 				</tr>
 				<tr>
 					<td align="right"><span>赠券名称：</span></td>
