@@ -1407,7 +1407,8 @@ function addArchives() {
 	$('#dlg').dialog({
 		title:"使用抵扣券",
 	});
-	$('#dlg').attr("src","/sys/course/useCoupon.jsp?studentId="+$("#studentId").val());
+	var courseType=$("#courseType").combobox("getValue");
+	$('#dlg').attr("src","/sys/course/useCoupon.jsp?studentId="+$("#studentId").val()+"&courseType="+courseType);
 	$('#dlg').dialog("open");
 }
 	

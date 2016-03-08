@@ -2,6 +2,7 @@
 <%
 	String path = request.getContextPath();
 	String studentId=request.getParameter("studentId");
+	String courseType=request.getParameter("courseType");
 %>
 <html>
 	<head>
@@ -56,6 +57,7 @@
 			var giftName = obj[i].giftName;
 			var giftCode = obj[i].giftCode;
 			var isGet = obj[i].isGet;
+			
 			if("Y" == isGet) {
 				var usableAmount = obj[i].usableAmount;
 				if (parseInt(usableAmount) > 0) {
@@ -128,6 +130,19 @@
 				$("#couponList").datagrid("getPanel").find(".datagrid-view2 .datagrid-body table input[type='checkbox']:eq(" + index + ") ").attr("checked", false);
 			} else {
 				var isGet = row.isGet;
+				
+				var courseTypes=row.courseTypes;
+				if(courseTypes.indexOf('<%=courseType%>')<0)
+				{
+					var courseName="常规课";
+					if('<%=courseType%>'=='002')
+					{
+						courseName='短期课';
+					}
+					showMessage("提示", "您选择的" + giftName + "，编号：" + giftCode + "的券不能抵扣"+courseName+""！", callback(index));
+					return;
+				}
+				
 				if ("Y" == isGet) {
 					var usableAmount = row.usableAmount;
 					if (parseInt(usableAmount) > 0) {
