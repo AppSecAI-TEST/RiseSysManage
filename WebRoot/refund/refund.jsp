@@ -173,7 +173,7 @@
 		        				</select>
 		        			</td>
 		        			<td align="right"><span>退费成功日期：</span></td>
-			  				<td width="100px">
+			  				<td width="230px">
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeFinish" name="startTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
 								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeFinish" name="endTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
@@ -195,19 +195,15 @@
 				        		</select>
 							</td>
 							<td align="right"><span>退费归属日期：</span></td>
-							<td width="100px">
+							<td width="230px">
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeBelong" name="startTimeBelong" data-options="formatter:myformatter, parser:myparser"/>
-							</td>
-							<td align="center">
-								<span>至</span>
-							</td>
-							<td width="100px">
+								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeBelong" name="endTimeBelong" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
     					</tr>
     					<tr>
     						<td align="right"><span>退费状态：</span></td>
-    						<td colspan="8">
+    						<td colspan="6">
 								<input type="checkbox" name="refundState" value="'001'"/><span>已申请</span>
 								<input type="checkbox" name="refundState" value="'002'"/><span>审批中</span>
 								<input type="checkbox" name="refundState" value="'003'"/><span>打款中</span>
@@ -215,7 +211,7 @@
 								<input type="checkbox" name="refundState" value="'005'"/><span>成功退费</span>
 								<input type="checkbox" name="refundState" value="'006'"/><span>取消</span>
 							</td>
-							<td align="left">
+							<td align="center">
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1023">查询</a>
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 							</td>

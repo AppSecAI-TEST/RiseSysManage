@@ -107,6 +107,14 @@
 	  					</td>
 	  				</tr>
 	  				<tr>
+	  					<td align="right" width="8%"><span>申请日期：</span></td>
+	  					<td colspan="4" width="34%"><span>${obj.refundFeeObj.applyDate }</span></td>
+	  					<td align="right" width="10%"><span>退费归属日期：</span></td>
+	  					<td colspan="2" width="23%"><span>${obj.refundFeeObj.belongDate }</span></td>
+	  					<td align="right" width="10%"><span>退费成功日期：</span></td>
+	  					<td width="15%"><span>${obj.refundFeeObj.finishDate }</span></td>
+	  				</tr>
+	  				<tr>
 	  					<td align="right" width="8%"><span>退费原因：</span></td>
 	  					<td colspan="9" width="92%">
 	  						<c:if test="${not empty obj.refundFeeObj.schoolReasonType && not empty obj.refundFeeObj.schoolReason }">
@@ -121,11 +129,11 @@
 				      				onLoadSuccess:function(data){if(data.length > 0) $('#schoolReason').combobox('setValue', '${obj.refundFeeObj.schoolReason }');}" 
 				      				url="<%=path %>/pubData/qryParaConfigList.do?paramType=SCHOOL_REASON&paramValue=${obj.refundFeeObj.schoolReasonType }">
 			        			</select>
-		  						&nbsp;&nbsp;<input type="radio" name="refundReason" value="customer" disabled="disabled"/><span>客户原因</span>
+		  						&nbsp;<input type="radio" name="refundReason" value="customer" disabled="disabled"/><span>客户原因</span>
 		  						<select id="customerReason" name="customerReason" class="easyui-combobox" style="width: 120px; height: 25px;" disabled="disabled">
 			        			</select>
-		  						&nbsp;&nbsp;<input type="radio" name="refundReason" value="other" disabled="disabled"/><span>其他原因</span>
-		  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" style="width: 420px; height: 25px;" readonly="readonly" disabled="disabled"/>
+		  						&nbsp;<input type="radio" name="refundReason" value="other" disabled="disabled"/><span>其他原因</span>
+		  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" style="width: 380px; height: 25px;" readonly="readonly" disabled="disabled"/>
 	  						</c:if>
 	  						<c:if test="${not empty obj.refundFeeObj.customerReason }">
 	  							<input type="radio" name="refundReason" value="school" disabled="disabled"/><span>校方原因</span>
@@ -133,14 +141,14 @@
 	  							</select>
 	  							<select id="schoolReason" name="schoolReason" class="easyui-combobox" style="width: 150px; height: 25px;" disabled="disabled">
 	  							</select>
-	  							&nbsp;&nbsp;<input type="radio" name="refundReason" value="customer" checked="checked" disabled="disabled"/><span>客户原因</span>
+	  							&nbsp;<input type="radio" name="refundReason" value="customer" checked="checked" disabled="disabled"/><span>客户原因</span>
 		  						<select id="customerReason" name="customerReason" class="easyui-combobox" style="width: 120px; height: 25px;" disabled="disabled"
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
 				      				onLoadSuccess:function(data){if(data.length > 0) $('#customerReason').combobox('setValue', '${obj.refundFeeObj.customerReason }');}" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=CUSTOMER_REASON">
 			        			</select>
-			        			&nbsp;&nbsp;<input type="radio" name="refundReason" value="other" disabled="disabled"/><span>其他原因</span>
-		  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" style="width: 420px; height: 25px;" readonly="readonly" disabled="disabled"/>
+			        			&nbsp;<input type="radio" name="refundReason" value="other" disabled="disabled"/><span>其他原因</span>
+		  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" style="width: 380px; height: 25px;" readonly="readonly" disabled="disabled"/>
 	  						</c:if>
 	  						<c:if test="${not empty obj.refundFeeObj.otherReason }">
 	  							<input type="radio" name="refundReason" value="school" disabled="disabled"/><span>校方原因</span>
@@ -148,11 +156,11 @@
 	  							</select>
 	  							<select id="schoolReason" name="schoolReason" class="easyui-combobox" style="width: 150px; height: 25px;" disabled="disabled">
 	  							</select>
-	  							&nbsp;&nbsp;<input type="radio" name="refundReason" value="customer" checked="checked" disabled="disabled"/><span>客户原因</span>
+	  							&nbsp;<input type="radio" name="refundReason" value="customer" checked="checked" disabled="disabled"/><span>客户原因</span>
 		  						<select id="customerReason" name="customerReason" class="easyui-combobox" style="width: 120px; height: 25px;" disabled="disabled">
 			        			</select>
-			        			&nbsp;&nbsp;<input type="radio" name="refundReason" value="other" disabled="disabled"/><span>其他原因</span>
-		  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" style="width: 420px; height: 25px;" value="${obj.refundFeeObj.otherReason }" readonly="readonly" disabled="disabled"/>
+			        			&nbsp;<input type="radio" name="refundReason" value="other" disabled="disabled"/><span>其他原因</span>
+		  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" style="width: 380px; height: 25px;" value="${obj.refundFeeObj.otherReason }" readonly="readonly" disabled="disabled"/>
 	  						</c:if>
 	  					</td>
 	  				</tr>
