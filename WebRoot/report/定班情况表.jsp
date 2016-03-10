@@ -30,12 +30,14 @@
   			<form id="qryFm">
   				<input type="hidden" id="type" value="classDetail"/>
   				<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
+  				<input type="hidden" id="resourceId" value="736">
 	  			<table class="search_tab">
 	  				<tr>
 	  					<td align="right"><span>校区：</span></td>
 	  					<td width="100px">
-							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
-				        	</select>
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false" 
+									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+					        </select>
 						</td>
 	  					<td align="right"><span>课程阶段：</span></td>
 						<td width="100px">

@@ -1,18 +1,6 @@
 $(document).ready(function() {
 	var staffId = $("#staffId").val();
 	$("#schoolId").combobox({
-		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=711&fieldId=schoolId",//返回json数据的url
-    	valueField : "schoolId",
-    	textField : "schoolName",
-    	panelHeight : "auto",
-    	formatter : function(data) {
-    		return "<span>" + data.schoolName + "</span>";
-    	},
-    	onLoadSuccess:function(data) {
-    		if(data.length > 0) {
-				$('#schoolId').combobox('setValue', data[0].schoolId);
-			}
-    	},
 		onChange : function(n, o) {
 			if($("#teacherId").length > 0) {
 				//学校的教师
@@ -86,6 +74,14 @@ $(document).ready(function() {
 	$('#year').datebox('setValue', yearFormatter(curr_time));
 	
 	$("#qryBtn").click(function() {
+		if($("#sFlag").length>0&&$("#sFlag").val()=="1")
+		{
+			if($("#schoolId").combobox("getValue")=="")
+			{
+				showMessage("提示","请选择一个具体的校区",null);
+				return false
+			}	
+		}	
 		var flag = validateQryDate();
 		if(flag) {
 			var object = $("#qryFm").serializeObject();
@@ -159,6 +155,7 @@ $(document).ready(function() {
 			}
 		}
     });
+	initReportButton("reset","qryFm","schoolId");
 });
 
 function onLoadSuccess() {

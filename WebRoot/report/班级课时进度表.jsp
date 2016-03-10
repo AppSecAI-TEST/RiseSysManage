@@ -12,6 +12,7 @@
   	</head>
   	<body>
   		<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+  		<input type="hidden" id="resourceId" value="748">
   		<div style="margin-right:5px;">
   			<form id="qryFm">
 	  			<table class="search_tab">
@@ -103,13 +104,6 @@
 	$(document).ready(function(){
 		$('#startTime').datebox("setValue",new Date().getFullYear()+"-"+(new Date().getMonth()+1));
 		$("#schoolId").combobox({
-			url : "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId=714&fieldId=schoolId&headFlag=N",
-    		onLoadSuccess : function() {
-    			if($("#schoolId").combobox("getData").length>0)
-    			{
-    				$("#schoolId").combobox("setValue",$("#schoolId").combobox("getData")[0].schoolId);
-    			}	
-    		},
     		onChange : function(n, o) {
     			$("#teacherId").combobox({
 		    		url:"/sys/pubData/qryTeacherList.do?schoolId="+n

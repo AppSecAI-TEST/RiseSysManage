@@ -14,22 +14,24 @@
   	<body>
   		<div style="margin-right:5px;">
   			<input type="hidden" id="tableName" value="report_teacher_student_rate"/>
+  			<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+  			<input type="hidden" id="resourceId" value="806">	
   			<form id="qryFm">
   				<table class="search_tab">
   					<tr>
   						<td align="right" width="50px"><span>校区：</span></td>
-	  					<td width="80px">
-							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 80px; height: 25px;"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
-				        	</select>
+	  					<td width="100px">
+		  					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+						      		
+					        </select>					
 						</td>
 						<td align="right" width="25px"><span>周：</span></td>
-						<td width="260px">
+						<td width="250px">
 							<input class="easyui-datebox" type="text" style="width:80px; height: 25px;" id="year" name="year" data-options="formatter:yearFormatter, parser:yearParser"/>
-							<select id="month" name="month" class="easyui-combobox" style="width: 80px; height: 25px;">
+							<select id="month" name="month" class="easyui-combobox" style="width: 60px; height: 25px;">
 	  						</select>
-	  						<select id="week" name="week" class="easyui-combobox" style="width: 80px; height: 25px;">
+	  						<select id="week" name="week" class="easyui-combobox" style="width:70px; height: 25px;">
 	  						</select>
 						</td>
 						<td align="right" width="80px"><span>教师学员比：</span></td>

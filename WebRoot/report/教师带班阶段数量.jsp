@@ -15,14 +15,16 @@
   		<div style="margin-right:5px;">
   			<input type="hidden" id="tableName" value="report_teacher_stage_num"/>
   			<form id="qryFm">
+  				<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+  				<input type="hidden" id="resourceId" value="734">	
   				<table class="search_tab">
   					<tr>
   						<td align="right" width="50px"><span>校区：</span></td>
 	  					<td width="115px">
-							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
-				        	</select>
+		  					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+						      		
+					        </select>					
 						</td>
 						<td align="right" width="25px"><span>周：</span></td>
 						<td width="270px">

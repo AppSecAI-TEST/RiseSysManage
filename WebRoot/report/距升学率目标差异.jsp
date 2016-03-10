@@ -15,15 +15,18 @@
   		<div style="margin-right:5px;">
   			<form id="qryFm">
 	  			<input type="hidden" id="higherType" value="gapRate"/>
+	  			<input type="hidden" id="resourceId" value="711"/>
 	  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
 	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right" width="50px"><span>校区：</span></td>
-	  					<td width="114px">
-							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;">
+	  					<td align="right" width="70px"><span>校区：</span></td>
+	  					<td width="100px">
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+					      		
 				        	</select>
 						</td>
-	  					<td align="left" colspan="2" width="650px">
+	  					<td align="left">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1063">查询</a>
 							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 						</td>

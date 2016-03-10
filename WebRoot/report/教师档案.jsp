@@ -12,14 +12,17 @@
   	</head>
   	<body>
   		<div style="margin-right:5px;">
+  			<input type="hidden" id="tableName" value="report_teacher_archives"/>
   			<form id="qryFm">
-  				<input type="hidden" id="tableName" value="report_teacher_archives"/>
+  				<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+  				<input type="hidden" id="resourceId" value="735">	
 	  			<table class="search_tab">
 	  				<tr>
 	  					<td align="right" width="70px"><span>校区：</span></td>
 	  					<td width="110px">
-							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 110px; height: 25px;">
-				        	</select>
+		  					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+					        </select>					
 						</td>
 	  					<td align="right" width="60px"><span>英文名：</span></td>
 	  					<td width="110px">

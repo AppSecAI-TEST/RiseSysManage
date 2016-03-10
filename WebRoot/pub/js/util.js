@@ -1,5 +1,6 @@
 var to =null;
 var countProgress =null;
+var schoolData =getSchools();
 //禁用非输入框回退键
 window.onload=function(){   
     document.getElementsByTagName("body")[0].onkeydown =function(){  
@@ -1009,15 +1010,18 @@ function initReportButton(resetName,formName,schoolId)
 		    $.ajax({  
 				url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
 				dataType: 'json',  
-				success: function(data){  
-				data.unshift({schoolName:'所有校区',schoolId:""});  
+				success: function(data){
+		    	if(data.length==schoolData.length)
+		    	{
+		    		data.unshift({schoolName:'所有校区',schoolId:""});  
+		    	}	
 				success(data);  
 				}
 			});  
    		},
 		onLoadSuccess:function(){
 			var arr =$("#"+formName).find("#"+schoolId).combobox("getData");
-			if(arr.length==1)
+			if(arr.length<schoolData.length)
 			{
 				$("#"+formName).find("#"+schoolId).combobox("select",arr[0].schoolId);
 				clearFlag =false;

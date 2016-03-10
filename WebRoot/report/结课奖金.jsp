@@ -15,25 +15,27 @@
   		<div style="margin-right:5px;">
   			<form id="qryFm">
 	  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
+	  			<input type="hidden" id="resourceId" value="746">
   				<table class="search_tab">
   					<tr>
   						<td align="right" style="width: 70px"><span>校区：</span></td>
 	  					<td width="100px">
-							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
-				        	</select>
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false" 
+									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+					        </select>
 						</td>
-						<td align="right" width="80px"><span>课程阶段：</span></td>
+						<td align="right" width="70px"><span>课程阶段：</span></td>
 	  					<td width="100px">
 							<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;"
 								data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
 			      				url="<%=path %>/pubData/qryStage.do">
 				        	</select>
 						</td>
-						<td align="right" width="100px"><span>已结课班级：</span></td>
+						<td align="right" width="90px"><span>已结课班级：</span></td>
 	  					<td width="100px">
 	  						<input id="classInstId" name="classInstId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 						</td>
-						<td align="right" width="100px"><span>结课日期：</span></td>
+						<td align="right" width="90px"><span>结课日期：</span></td>
 	  					<td align="left">
 							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeFinish" name="startTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
 							至

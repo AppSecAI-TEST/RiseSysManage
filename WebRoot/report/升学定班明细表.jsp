@@ -16,14 +16,14 @@
   			<form id="qryFm">
   				<input type="hidden" id="type" value="higherInClassDetail"/>
   				<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
+  				<input type="hidden" id="resourceId" value="737">
 	  			<table class="search_tab">
 	  				<tr>
 	  					<td align="right" width="75px;"><span>校区：</span></td>
 	  					<td width="100px">
-							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
-				        	</select>
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false" 
+									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+					        </select>
 						</td>
 						<td align="right" width="75px;"><span>学员姓名：</span></td>
 	  					<td width="100px;">

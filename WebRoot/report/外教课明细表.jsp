@@ -18,13 +18,18 @@
   	<body>
   		<div style="margin-right:5px;">
 		<form id="manFm">
+			<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+  			<input type="hidden" id="resourceId" value="853">
 			<table class="search_tab">
 				<tr>
 					<td align="right" width="12%">
 						校区：
 					</td>
 					<td width="12%">
-						<select id="schoolId" name="schoolId" style="width:100px;height:25px;" ></select>
+	  					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+					      		
+				        </select>					
 					</td>
 					<td align="right" width="8%">	
 						学员姓名：
@@ -88,14 +93,12 @@
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("正在处理，请稍待。。。");
-			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=853&fieldId=schoolId",function(data){
-				$("#schoolId").combobox("loadData",data);
-			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_GIFT_T&codeType=COURSE_STATE",function(data){
 				$("#giftType").combobox("loadData",data);
 				ajaxLoadEnd();
 			},"json");
 			$(document).ready(function(){
+				initReportButton("resetBtn","manFm","schoolId");
 				$("#giftType").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 

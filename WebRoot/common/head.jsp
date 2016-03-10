@@ -25,8 +25,8 @@
 <script type="text/javascript" src="<%=headPath %>/pub/js/bpopup.js"></script>
  -->
 <script type="text/javascript" src="<%=headPath %>/pub/js/core.min.js"></script> 
-<script type="text/javascript" src="<%=headPath %>/pub/js/util.js"></script>
 <script type="text/javascript" src="<%=headPath %>/pub/js/data.js"></script>
+<script type="text/javascript" src="<%=headPath %>/pub/js/util.js"></script>
 <script type="text/javascript" src="<%=headPath %>/pub/js/validateForm.js"></script>
 <%@ include file="pub.jsp" %>
 <%@ include file="tabControl.jsp" %>

@@ -1,18 +1,28 @@
 $(document).ready(function() {
-	var staffId = $("#staffId").val();
+	var clearFlag =true;
+	var schoolData =getSchools();
 	$("#schoolId").combobox({
-		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=711&fieldId=schoolId",
-    	valueField : "schoolId",
-    	textField : "schoolName",
-    	panelHeight : "auto",
-    	formatter : function(data) {
-    		return "<span>" + data.schoolName + "</span>";
-    	},
-    	onLoadSuccess:function(data) {
-    		if(data.length > 0) {
-				$('#schoolId').combobox('setValue', data[0].schoolId);
-			}
-    	},
+		loader:function(param,success,error){  
+		    $.ajax({  
+				url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
+				dataType: 'json',  
+				success: function(data){
+		    	if(data.length==schoolData.length)
+		    	{
+		    		data.unshift({schoolName:'所有校区',schoolId:""});  
+		    	}	
+				success(data);  
+				}
+			});  
+   		},
+		onLoadSuccess:function(){
+			var arr =$("#schoolId").combobox("getData");
+			if(arr.length<schoolData.length)
+			{
+				$("#schoolId").combobox("select",arr[0].schoolId);
+				clearFlag =false;
+			}	
+		},
     	onChange : function(n, o) {
     		if($("#teacherId").length > 0) {
 				//学校的教师
@@ -28,7 +38,6 @@ $(document).ready(function() {
 			}
     	}
 	});
-	
 	$("#stageId").combobox({
 		url : "/sys/pubData/qryStage.do",//返回json数据的url
     	valueField : "stageId",
@@ -77,10 +86,14 @@ $(document).ready(function() {
 	$("#reset").click(function() {
 		$("#qryFm").form('clear');//清空窗体数据 
 		if($("#schoolId").length > 0) {
-			var data = $("#schoolId").combobox("getData");
-			if(data.length > 0) {
-				$("#schoolId").combobox("setValue", data[0].schoolId);
-			}
+			if(!clearFlag)
+	    	{
+	    		$("#schoolId").combobox('select',$("#schoolId").combobox("getData")[0].schoolId);
+	    	}
+	    	else
+	    	{
+	    		$("#schoolId").combobox('setValue',"");
+	    	}	
 		}
 		if($('#year').length > 0) {
 			initYear();

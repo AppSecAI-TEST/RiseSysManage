@@ -1,4 +1,29 @@
 $(document).ready(function() {
+	var clearFlag =true;
+	var schoolData =getSchools();
+	$("#schoolId").combobox({
+		loader:function(param,success,error){  
+		    $.ajax({  
+				url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
+				dataType: 'json',  
+				success: function(data){
+		    	if(data.length==schoolData.length)
+		    	{
+		    		data.unshift({schoolName:'所有校区',schoolId:""});  
+		    	}	
+				success(data);  
+				}
+			});  
+   		},
+		onLoadSuccess:function(){
+			var arr =$("#schoolId").combobox("getData");
+			if(arr.length<schoolData.length)
+			{
+				$("#schoolId").combobox("select",arr[0].schoolId);
+				clearFlag =false;
+			}	
+		}
+	});
 	var curr_time = new Date();
 	$('#year').datebox('setValue', yearFormatter(curr_time));
 //	var year = $('#year').datebox('getValue');
@@ -67,6 +92,14 @@ $(document).ready(function() {
 		if(data.length > 0) {
 			$('#week').combobox('setValue', data[0].weekName);
 		}
+		if(!clearFlag)
+    	{
+    		$("#schoolId").combobox('select',$("#schoolId").combobox("getData")[0].schoolId);
+    	}
+    	else
+    	{
+    		$("#schoolId").combobox('setValue',"");
+    	}	
 	});
 });
 

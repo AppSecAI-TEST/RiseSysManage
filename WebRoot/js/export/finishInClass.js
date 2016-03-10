@@ -1,22 +1,30 @@
 $(document).ready(function() {
+	var clearFlag =true;
+	var schoolData =getSchools();
 	if($("#schoolId").length > 0) {
-		var staffId = $("#staffId").val();
-		var resourceId = $("#resourceId").val();
 		$("#schoolId").combobox({
-			url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=" + resourceId + "&fieldId=schoolId",
-			valueField : "schoolId",
-			textField : "schoolName",
-			panelHeight : "auto",
-			formatter : function(data) {
-				return "<span>" + data.schoolName + "</span>";
-			},
-			onLoadSuccess : function() {
-	    		var data = $("#schoolId").combobox("getData");
-	    		if(data.length > 0) {
-	    			$("#schoolId").combobox("setValue", data[0].schoolId);
-	    		}
-	    	}
-		});
+		loader:function(param,success,error){  
+		    $.ajax({  
+				url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
+				dataType: 'json',  
+				success: function(data){
+		    	if(data.length==schoolData.length)
+		    	{
+		    		data.unshift({schoolName:'所有校区',schoolId:""});  
+		    	}	
+				success(data);  
+				}
+			});  
+   		},
+		onLoadSuccess:function(){
+			var arr =$("#schoolId").combobox("getData");
+			if(arr.length<schoolData.length)
+			{
+				$("#schoolId").combobox("select",arr[0].schoolId);
+				clearFlag =false;
+			}	
+		}
+	});
 	}
 	if($("#startTimeFinish").length > 0) {
 		initDate();
@@ -41,13 +49,20 @@ $(document).ready(function() {
 	});
 	$("#reset").click(function() {
 		$("#qryFm").form('clear');//清空窗体数据  
-		var data = $("#schoolId").combobox("getData");
-		if(data.length > 0) {
-			$("#schoolId").combobox("setValue", data[0].schoolId);
-	    }
 		if($("#startTimeFinish").length > 0) {
 			initDate();
 		}
+		if($("#schoolId").length > 0) {
+			if(!clearFlag)
+	    	{
+	    		$("#schoolId").combobox('select',$("#schoolId").combobox("getData")[0].schoolId);
+	    	}
+	    	else
+	    	{
+	    		$("#schoolId").combobox('setValue',"");
+	    	}
+		}
+		
 	});
 	exportLink("export","list_data");
 });

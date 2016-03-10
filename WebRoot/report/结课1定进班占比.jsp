@@ -18,22 +18,22 @@
 	  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
 	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right" style="min-width: 50px"><span>校区：</span></td>
-	  					<td style="min-width: 100px">
-							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
-				        	</select>
+	  					<td align="right" style="width: 70px"><span>校区：</span></td>
+	  					<td style="width: 100px">
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false" 
+									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+					        </select>
 						</td>
-	  					<td align="right" style="min-width: 80px"><span>结课日期：</span></td>
-	  					<td style="min-width: 210px">
+	  					<td align="right" style="width:70px"><span>结课日期：</span></td>
+	  					<td style="width: 225px">
 							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeFinish" name="startTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
-							<span style="display: inline-block; text-align: center; width: 14px;">至</span>
+							至
 							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeFinish" name="endTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
-						<td align="center" style="min-width: 210px">
+						<td align="left">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1048">查询</a>
 							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 						</td>
-						<td width="380px">&nbsp;</td>
 	  				</tr>
 	  			</table>
   			</form>

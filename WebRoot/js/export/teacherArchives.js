@@ -34,21 +34,30 @@ $(document).ready(function() {
 //    		});
 //    	}
 //	});
-	
+	var clearFlag =true;
+	var schoolData =getSchools();
 	$("#schoolId").combobox({
-		url : "/sys/pubData/qrySchoolList.do?schoolId=",//返回json数据的url
-    	valueField : "schoolId",
-    	textField : "schoolName",
-    	panelHeight : "auto",
-    	formatter : function(data) {
-    		return "<span>" + data.schoolName + "</span>";
-    	},
-    	onLoadSuccess:function(data) {
-    		if(data.length > 0) {
-    			$("#schoolId").combobox("setValue", "");
-    			$("#schoolId").combobox("setText", "全部校区");
-			}
-    	},
+		loader:function(param,success,error){  
+		    $.ajax({  
+				url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
+				dataType: 'json',  
+				success: function(data){
+		    	if(data.length==schoolData.length)
+		    	{
+		    		data.unshift({schoolName:'所有校区',schoolId:""});  
+		    	}	
+				success(data);  
+				}
+			});  
+   		},
+		onLoadSuccess:function(){
+			var arr =$("#schoolId").combobox("getData");
+			if(arr.length<schoolData.length)
+			{
+				$("#schoolId").combobox("select",arr[0].schoolId);
+				clearFlag =false;
+			}	
+		},
     	onChange : function(n, o) {
     		//学校的教师
 			$("#teacherId").combobox({
@@ -61,8 +70,7 @@ $(document).ready(function() {
 				}
 			});
     	}
-	});
-	
+	});	
 	$("#qryBtn").click(function() {
 		if(!validateIsQry()) {
 			return;
@@ -78,6 +86,14 @@ $(document).ready(function() {
 		if(data.length > 0) {
 			$('#month').combobox('setValue', data[0].month);
 		}
+		if(!clearFlag)
+    	{
+    		$("#schoolId").combobox('select',$("#schoolId").combobox("getData")[0].schoolId);
+    	}
+    	else
+    	{
+    		$("#schoolId").combobox('setValue',"");
+    	}	
 	});
 	
 	$.ajax({

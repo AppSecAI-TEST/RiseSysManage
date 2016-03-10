@@ -1,4 +1,30 @@
 $(document).ready(function() {
+	var clearFlag =true;
+	var schoolData =getSchools();
+	$("#schoolId").combobox({
+		loader:function(param,success,error){  
+		    $.ajax({  
+				url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
+				dataType: 'json',  
+				success: function(data){
+		    	if(data.length==schoolData.length)
+		    	{
+		    		data.unshift({schoolName:'所有校区',schoolId:""});  
+		    	}	
+				success(data);  
+				}
+			});  
+   		},
+		onLoadSuccess:function(){
+			var arr =$("#schoolId").combobox("getData");
+			if(arr.length<schoolData.length)
+			{
+				$("#schoolId").combobox("select",arr[0].schoolId);
+				clearFlag =false;
+			}	
+		}
+	});
+
 	$("#qryBtn").click(function() {
 		if(!validateQryDate()) {
 			return;
@@ -32,12 +58,14 @@ $(document).ready(function() {
 	//重置
 	$("#reset").click(function() {
 		$("#qryFm").form('clear');//清空窗体数据 
-		if($("#schoolId").length > 0) {
-			var data = $("#schoolId").combobox("getData");
-			if(data.length > 0) {
-				$("#schoolId").combobox("setValue", data[0].schoolId);
-			}
-		}
+		if(!clearFlag)
+    	{
+    		$("#schoolId").combobox('select',$("#schoolId").combobox("getData")[0].schoolId);
+    	}
+    	else
+    	{
+    		$("#schoolId").combobox('setValue',"");
+    	}
 		var type = $("#type").val();
 		if("inClass30Rate" == type || "inClassOneRate" == type || "inClassAvgDays" == type) {
 			initDate();
