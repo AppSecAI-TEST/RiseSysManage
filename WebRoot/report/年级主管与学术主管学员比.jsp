@@ -13,8 +13,8 @@
   
   	<body>
   		<div style="margin-right:5px;">
+  			<input type="hidden" id="tableName" value="report_academic_grade_director"/>
   			<form id="qryFm">
-  				<input type="hidden" id="tableName" value="report_academic_grade_director"/>
   				<table align="center" class="search_tab">
   					<tr>
   						<td align="right" width="50px"><span>校区：</span></td>
