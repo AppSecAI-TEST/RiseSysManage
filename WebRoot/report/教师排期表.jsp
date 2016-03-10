@@ -212,7 +212,8 @@ function getWeekTime()
 			$.messager.alert('提示', "请选择周");
 			return;
 	}
-	
+	$("#content").css('display','none');
+	$("#left_side").css('display','none');
 	var datas=$("#week").combobox('getData');
 	var weekSeq="";
 	var dateRange="";
@@ -243,6 +244,8 @@ function getWeekTime()
     		{
     			if(i==0)
     			{
+    				$("#content").css('display','block');
+    				$("#left_side").css('display','block');
     				json1=data[i];
     				initTable("t1",json1);
     				initTeacher("t0",json1);
@@ -396,7 +399,28 @@ $(document).ready(function()
 			        	$.messager.progress('close');
 			        }
 				});
-            	
+            	 
+            	$("#week").combobox({data:null});
+            	$.ajax(
+				{
+					type : "POST",
+					url: "/sys/time/getPlanTime.do?schoolId="+schoolId+"&month="+$("#time").datebox('getValue'),
+					async: true,
+					dataType:"json",
+					beforeSend: function()
+			    	{
+			    		//$.messager.progress({text:'排课中，请稍候...'});
+			    	},
+			    	success: function(data) 
+			    	{
+			    		$.messager.progress('close');
+			    		$("#week").combobox({data:data});
+			         },
+			        error:function()
+			        {
+			        	$.messager.progress('close');
+			        }
+				});
             }
             });
    	var now =new Date();
@@ -410,6 +434,7 @@ $(document).ready(function()
 		
 	 		onChange:function(n,o)
 	 		{
+				$("#week").combobox({data:null});
             	$.ajax(
 				{
 					type : "POST",

@@ -48,7 +48,7 @@ String path = request.getContextPath();
 				    	<table width="700"  cellpadding="0" border="0" style="border-collapse:collapse;overflow:scroll;" >
 				    	<tr><td colspan="8" id="title" style="display:none;text-align:center;font-size:20px;color:##0E2D5F;font-weight:bold;">班级情况和教室资源统计表</td></tr>
 				    	<tr>
-				    		<td><table  id="t0"></table></td>
+				    		<td><table id="t0"></table></td>
 					    	<td>
 					    	<table  id="t1"></table>
 					    	</td>
@@ -104,10 +104,11 @@ function linkCourse()
 
 function qry()
 {
+	$("#content").css('display','none');
 	var schoolId=$("#schoolId").combobox('getValue');
 	param ="{'schoolId':'"+schoolId+"','schoolName':'"+$("#schoolId").combobox('getText')+"'}";
 	getWeekTime(schoolId);
-	$("#frame0").attr('src',"/sys/time/planTeacher.jsp?schoolId="+schoolId);
+	//$("#frame0").attr('src',"/sys/time/planTeacher.jsp?schoolId="+schoolId);
 }
 
 function getWeekTime(schoolId)
@@ -127,8 +128,10 @@ function getWeekTime(schoolId)
     		 
     		for(var i=0;i<data.length;i++)
     		{
+    			
     			if(i==0)
     			{
+    				$("#content").css('display','block');
     				$("#title").css('display','table-cell');
     				json1=data[i];
     				initTable("t1",json1);
