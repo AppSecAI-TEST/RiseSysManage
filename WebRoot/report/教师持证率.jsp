@@ -12,7 +12,7 @@
   	</head>
   	<body>
   		<div style="margin-right:5px">
-  		<form id="qryFm" style="margin:0 auto;">
+  		<form id="qryFm">
   			<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
  			<table class="search_tab">
   				<tr>

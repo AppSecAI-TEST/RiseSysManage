@@ -19,13 +19,17 @@
   	<body>
   		<div style="margin-right:5px;">
 		<form id="attFm">
+			<input type="hidden" id="resourceId" value="753">
+  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId}"/>
 			<table class="search_tab">
 				<tr>
 					<td align="right">
 						校区：
 					</td>
 					<td width="100px;">
-						<select id="schoolId" name="schoolId" style="width:100px" ></select>
+	  					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+				        </select>
 					</td>
 					<td align="right">
 						课程阶段：
@@ -53,7 +57,7 @@
 					</td>
 					<td align="left">
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
-						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
+						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;">重置</a>
 					</td>
 				</tr>
 			</table>
@@ -77,25 +81,13 @@
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("正在处理，请稍待。。。");
-			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=911&fieldId=schoolId",function(data){
-				$("#schoolId").combobox("loadData",data);
-			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID",function(data){
 				$("#classPharse").combobox("loadData",data);
 				ajaxLoadEnd();
 			},"json");
 			$(document).ready(function(){
+				initReportButton("resetBtn","attFm","schoolId")
 				$("#schoolId").combobox({
-					formatter:formatSchool, 
-					valueField: 'schoolId', 
-					textField: 'schoolName', 
-					panelHeight: 'auto',
-					onLoadSuccess:function(data){
-						if(data.length > 0)
-						{
-							$("#schoolId").combobox("setValue",data[0].schoolId);
-						}
-					},
 			    	onChange:function(n, o) {
 						$("#teacher").combobox({url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&classType="});
 			    	}
@@ -137,18 +129,6 @@
 						param : obj
 					}
 				});
-			}
-			function resetFunc()
-			{
-				$("#schoolId").combobox("setValue","");
-				$("#classPharse").combobox("setValue","");
-				$("#monthDate").datebox("setValue","");
-				$("#classInfo").combobox("setValue","");
-				$("#teacher").textbox("setValue","");
-			}
-			function exportFunc()
-			{
-				
 			}
 		</script>
  	</body>

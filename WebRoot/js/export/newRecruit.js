@@ -76,21 +76,7 @@ $(document).ready(function() {
 		var type = $("#type").val();
 		if("inClassDetail" == type || "inClass30Rate" == type || "higherInClassDetail" == type || "classDetail" == type
 				|| "inClassOneRate" == type || "inClassAvgDays" == type || "notInClassAvgDays" == type) {
-			var staffId = $("#staffId").val();
 			$("#schoolId").combobox({
-				url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=711&fieldId=schoolId",
-				valueField : "schoolId",
-				textField : "schoolName",
-				panelHeight : "auto",
-				formatter : function(data) {
-					return "<span>" + data.schoolName + "</span>";
-				},
-				onLoadSuccess : function() {
-		    		var data = $("#schoolId").combobox("getData");
-		    		if(data.length > 0) {
-		    			$("#schoolId").combobox("setValue", data[0].schoolId);
-		    		}
-		    	},
 				onChange : function(n, o) {
 					if($("#carer").length > 0) {
 						$("#carer").combobox({

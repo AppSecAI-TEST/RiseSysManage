@@ -1,5 +1,6 @@
 var editIndex = undefined;
 $(document).ready(function() {
+	initReportButton("reset","qryFm","schoolId")
 	var tableName = $("#tableName").val();
 	$("#year").combobox({
 		url : "/sys/pubData/qryReportYearList.do?tableName=" + tableName,// 返回json数据的url
@@ -54,10 +55,6 @@ $(document).ready(function() {
     });
 	
 	$("#reset").click(function() {
-		var data = $("#schoolId").combobox("getData");
-		if(data.length > 0) {
-			$('#schoolId').combobox('setValue', data[0].schoolId);
-		}
 		data = $("#year").combobox("getData");
 		if(data.length > 0) {
 			$('#year').combobox('setValue', data[0].year);

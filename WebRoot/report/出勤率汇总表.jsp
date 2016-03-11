@@ -19,13 +19,17 @@
   	<body>
   		<div style="margin-right:5px;">
 		<form id="attFm">
+			<input type="hidden" id="resourceId" value="752">
+  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId}"/>
 			<table class="search_tab">
 				<tr>
 					<td align="right" width="70px;">
 						<span>校区：</span>
 					</td>
 					<td width="100px;">
-						<select id="schoolId" name="schoolId" style="width:100px;height:25px;" ></select>
+	  					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+				        </select>
 					</td>
 					<td align="right" width="40px;">
 						<span>月份：</span>
@@ -56,27 +60,11 @@
    			<a href="javascript:void(0)" id="hisViewBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;">导出</a>
 		</div>
 		<script type="text/javascript">
-			ajaxLoading("正在处理，请稍待。。。");
-			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=901&fieldId=schoolId",function(data){
-				$("#schoolId").combobox("loadData",data);
-				ajaxLoadEnd();
-			},"json");
 			$(document).ready(function(){
-				$("#schoolId").combobox({
-					formatter:formatSchool, 
-					valueField: 'schoolId', 
-					textField: 'schoolName', 
-					panelHeight: 'auto',
-					onLoadSuccess:function(data){
-						if(data.length > 0)
-						{
-							$("#schoolId").combobox("setValue",data[0].schoolId);
-						}
-					}
-				});
 				$("#monthDate").datebox({
 					onShowPanel:settingYearMonthPanel
 				})
+				initReportButton("resetBtn","attFm","schoolId")
 				exportLink("hisViewBtn","attList");
 			});
 			function queryFunc()
@@ -91,11 +79,6 @@
 						param : obj
 					}
 				});
-			}
-			function resetFunc()
-			{
-				$("#schoolId").combobox("setValue","");
-				$("#monthDate").datebox("setValue","");
 			}
 		</script>
  	</body>

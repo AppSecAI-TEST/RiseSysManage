@@ -22,32 +22,29 @@
   			<input type="hidden" id="resourceId" value="852">
 			<table class="search_tab">
 				<tr>
-					<td align="right" width="12%">
+					<td align="right" width="70px">
 						校区：
 					</td>
-					<td width="12%">
+					<td  width="100px">
 	  					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 					      		
 				        </select>					
 				    </td>
-					<td align="right" width="8%">	
+					<td align="right" width="70px">	
 						学员姓名：
 					</td>
-					<td width="12%">
+					<td width="100px">
       					<input name="staffName" id="staffName" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 					</td>
-					<td align="right" width="8%">
+					<td align="right" width="70px">
 						缴费日期：
 					</td>
-					<td width="22%">
+					<td width="225px">
 						<input name="feeStartTime" id="feeStartTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="feeEndTime" id="feeEndTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
 					</td>
-					<td align="right" width="8%">
-						联系电话：
-					</td>
-					<td>
-						<input name="contactPhone" id="contactPhone" type="text" class="easyui-textbox" style="width:100px; height: 25px;"/>
+					<td align="left">
+						联系电话：<input name="contactPhone" id="contactPhone" type="text" class="easyui-textbox" style="width:150px; height: 25px;"/>
 					</td>
 				</tr>
 				<tr>
@@ -71,9 +68,9 @@
 						<input name="selectClass" id="selectClassYes" type="radio" value="已选" /><label for="selectClassYes">已选</label>&nbsp;
 						<input name="selectClass" id="selectClassNo" type="radio" value="未选" /><label for="selectClassNo">未选</label>								
 					</td>
-					<td colspan="2">
+					<td align="left">
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
-						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
+						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;">重置</a>
 					</td>
 				</tr>
 			</table>
@@ -117,18 +114,6 @@
 					textField: 'classType',
 					panelHeight: 'auto'
 				});
-				$("#schoolId").combobox({
-					formatter:formatSchool, 
-					valueField: 'schoolId', 
-					textField: 'schoolName', 
-					panelHeight: 'auto',
-					onLoadSuccess:function(data){
-						if(data.length > 0)
-						{
-							$("#schoolId").combobox("setValue",data[0].schoolId);
-						}
-					}
-				});
 			});
 			function queryFunc()
 			{
@@ -141,20 +126,6 @@
 					queryParams:{
 						param : obj
 					}
-				});
-			}
-			function resetFunc()
-			{
-				$("#schoolId").combobox("setValue","");
-				$("#staffName").textbox("setValue","");
-				$("#contactPhone").textbox("setValue","");
-				$("#interClassType").combobox("setValue","");
-				$("#feeStartTime").datebox("setValue","");
-				$("input[name='feeReturn']").each(function(i,node){
-					node.checked = false; 
-				});
-				$("input[name='selectClass']").each(function(i,node){
-					node.checked = false; 
 				});
 			}
 			function exportFunc()

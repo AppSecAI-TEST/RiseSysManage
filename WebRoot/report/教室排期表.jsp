@@ -28,16 +28,16 @@ String path = request.getContextPath();
 </style>
 	</head>
 	<body>
+		<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
 		<table class="search_tab" >
 				<tr>
-				<td align="right"><span>校区：</span></td>
+				<td width="70px" align="right"><span>校区：</span></td>
   					<td width="100px">
-					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-		      			url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=505&fieldId=schoolId">
-	        		</select>
+						<select id="schoolId" name="schoolId" style="width: 100px; height: 25px;" editable="false"
+							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+		        		</select>
 					</td>
-					<td>
+					<td align="left">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="width:100px; height: 25px;" id="submit" onclick=qry() >查询</a>&nbsp;&nbsp;&nbsp;
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="width:100px; height: 25px;" id="submit" onclick=exportExcel() >导出</a>
 					</td>
@@ -90,6 +90,20 @@ var json5;
 var json6;
 var josn7;
 var param;
+$(document).ready(function(){
+	var staffId=$("#staffId").val();
+	$("#schoolId").combobox({
+	   url:"<%=path %>/pub/pageCategory.do?staffId="+staffId+"&resourceId=505&fieldId=schoolId",
+	   onLoadSuccess:function(){
+			var arr =$("#schoolId").combobox("getData");
+			if(arr.length>0)
+			{
+				$("#schoolId").combobox("select",arr[0].schoolId);
+			}	
+		}                                   
+	});
+	
+});
 function closeDlg()
 {
 	$('#dlg').dialog('close');

@@ -1,7 +1,29 @@
 $(document).ready(function() {
-	var staffId = $("#staffId").val();
+	var clearFlag =true;
+	var schoolData =getSchools();
 	$("#schoolId").combobox({
-		onChange : function(n, o) {
+		loader:function(param,success,error){  
+		    $.ajax({  
+				url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
+				dataType: 'json',  
+				success: function(data){
+		    	if(data.length==schoolData.length&&!($("#sFlag").length>0&&$("#sFlag").val()=="1"))
+		    	{
+		    		data.unshift({schoolName:'所有校区',schoolId:""});  
+		    	}	
+				success(data);  
+				}
+			});  
+   		},
+		onLoadSuccess:function(){
+			var arr =$("#schoolId").combobox("getData");
+			if(arr.length<schoolData.length||($("#sFlag").length>0&&$("#sFlag").val()=="1"))
+			{
+				$("#schoolId").combobox("select",arr[0].schoolId);
+				clearFlag =false;
+			}	
+		},
+   		onChange : function(n, o) {
 			if($("#teacherId").length > 0) {
 				//学校的教师
 				$("#teacherId").combobox({
@@ -30,7 +52,6 @@ $(document).ready(function() {
 	    		var higherType = $("#higherType").val();
 	    		if("gap" == higherType) {
 	    			$('#quarter').combobox('setValue', data[0].quarter);
-	    			$("#qryBtn").click();
 	    			var quarterText = $("#quarter").combobox("getText");
 	    			$("#goal").html(quarterText + "距目标缺口");
 	    			$("#rate").html(quarterText + "升学率");
@@ -155,7 +176,18 @@ $(document).ready(function() {
 			}
 		}
     });
-	initReportButton("reset","qryFm","schoolId");
+	 $("#reset").click(function() 
+    {
+    	$("#qryFm").form('clear');//清空窗体数据  
+    	if(!clearFlag||($("#sFlag").length>0&&$("#sFlag").val()=="1"))
+    	{
+    		$("#schoolId").combobox('select',$("#schoolId").combobox("getData")[0].schoolId);
+    	}
+    	else
+    	{
+    		$("#schoolId").combobox('setValue',"");
+    	}	
+    });
 });
 
 function onLoadSuccess() {

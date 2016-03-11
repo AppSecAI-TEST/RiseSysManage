@@ -15,11 +15,14 @@
   			<form id="qryFm">
   				<input type="hidden" id="higherType" value="stage"/>
   				<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
+  				<input type="hidden" id="sFlag" value="1"/>
+   				<input type="hidden" id="resourceId" value="750">	
   				<table class="search_tab">
   					<tr>
   						<td align="right" width="50px"><span>校区：</span></td>
 	  					<td width="100px">
-							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 				        	</select>
 						</td>
 						<td align="right" width="50px"><span>阶段：</span></td>

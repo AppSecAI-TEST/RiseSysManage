@@ -73,6 +73,7 @@ datagrid-row-selected
 </style>
 	</head>
 	<body>
+	<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
 	<table class="search_tab">
 				<tr>
 					<td width="80px" align="right"><span>校区：</span></td>
@@ -347,7 +348,14 @@ $(document).ready(function()
 	//getWeekTime();
 		var staffId=$("#staffId").val();
 	    $("#schoolId").combobox({
-	    	url:"<%=path %>/pub/pageCategory.do?staffId="+staffId+"&resourceId=504&fieldId=schoolId"
+	    	url:"<%=path %>/pub/pageCategory.do?staffId="+staffId+"&resourceId=504&fieldId=schoolId",
+	    	onLoadSuccess:function(){
+				var arr =$("#schoolId").combobox("getData");
+				if(arr.length>0)
+				{
+					$("#schoolId").combobox("select",arr[0].schoolId);
+				}	
+			}                                   
 	    });
 	
 		$('#time').datebox({
@@ -425,8 +433,7 @@ $(document).ready(function()
             });
    	var now =new Date();
 	$('#time').datebox("setValue",now.getFullYear()+"-"+(now.getMonth()+1));
-	initReportButton("resetBtn","qryFm","schoolId");
-	$("#resetBtn").click(function(){
+	$("#reset").click(function(){
 		resetData();
 	})
 	
@@ -483,6 +490,12 @@ function resetData()
 {
 	var now =new Date();
 	$('#time').datebox("setValue",now.getFullYear()+"-"+(now.getMonth()+1));
+	var arr =$("#schoolId").combobox("getData");
+	if(arr.length>0)
+	{
+		$("#schoolId").combobox("select",arr[0].schoolId);
+	}	
+
 }
 
 function MergeCells(tabId)

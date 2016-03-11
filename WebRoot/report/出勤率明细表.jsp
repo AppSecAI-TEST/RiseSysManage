@@ -19,13 +19,17 @@
   	<body>
   		<div style="margin-right:5px;">
 		<form id="attFm">
+			<input type="hidden" id="resourceId" value="751">
+  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId}"/>
 			<table class="search_tab">
 				<tr>
 					<td align="right" width="70px">
 						<span>校区：</span>
 					</td>
 					<td width="100px">
-						<select id="schoolId" name="schoolId" style="width:100px;height:25px;" ></select>
+	  					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+				        </select>
 					</td>
 					<td align="right" width="70px">
 						<span>课程阶段：</span>
@@ -95,9 +99,6 @@
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("正在处理，请稍待。。。");
-			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=840&fieldId=schoolId",function(data){
-				$("#schoolId").combobox("loadData",data);
-			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID",function(data){
 				$("#classPharse").combobox("loadData",data);
 			},"json");
@@ -106,18 +107,6 @@
 				ajaxLoadEnd();
 			},"json");
 			$(document).ready(function(){
-				$("#schoolId").combobox({
-					formatter:formatSchool, 
-					valueField: 'schoolId', 
-					textField: 'schoolName', 
-					panelHeight: 'auto',
-					onLoadSuccess:function(data){
-						if(data.length > 0)
-						{
-							$("#schoolId").combobox("setValue",data[0].schoolId);
-						}
-					}
-				});
 				$("#classPharse").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
@@ -133,6 +122,7 @@
 					//panelHeight: 'auto'
 					listHeight:200
 				});
+				initReportButton("resetBtn","attFm","schoolId")
 				exportLink("hisViewBtn","attList");
 			});
 			function queryFunc()
@@ -160,10 +150,6 @@
 				$("#attendEndRate").numberbox("setValue","");
 				$("#schoolWearStartRate").numberbox("setValue","");
 				$("#schoolWearEndRate").numberbox("setValue","");
-			}
-			function exportFunc()
-			{
-				
 			}
 		</script>
  	</body>

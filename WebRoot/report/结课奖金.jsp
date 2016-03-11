@@ -36,11 +36,12 @@
 	  						<input id="classInstId" name="classInstId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 						</td>
 						<td align="right" width="90px"><span>结课日期：</span></td>
-	  					<td align="left">
+	  					<td width="225px">
 							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeFinish" name="startTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
 							至
 							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeFinish" name="endTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
+						<td style="min-width:100px;"></td>
   					</tr>
   					<tr>
   						<td align="right"><span>升学率：</span></td>

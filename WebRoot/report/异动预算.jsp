@@ -13,16 +13,16 @@
   
   	<body>
   		<div style="margin-right:5px;">
+  			<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+  			<input type="hidden" id="resourceId" value="755">
+  			<input type="hidden" id="tableName" value="report_exception_budget"/>
   			<form id="qryFm">
-  				<input type="hidden" id="tableName" value="report_exception_budget"/>
 	  			<table class="search_tab">
 	  				<tr>
 	  					<td align="right" width="50px"><span>校区：</span></td>
 	  					<td width="115px">
-							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-								onLoadSuccess:function(data){if(data.length > 0) {$('#schoolId').combobox('setValue', data[0].schoolId);}}"
-					      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 				        	</select>
 						</td>
 	  					<td align="right" width="50px"><span>月份：</span></td>

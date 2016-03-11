@@ -65,7 +65,7 @@
 					</td>
 					<td colspan="2">
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
-						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
+						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;">重置</a>
 					</td>
 				</tr>
 			</table>
@@ -105,18 +105,6 @@
 					textField: 'codeName', 
 					panelHeight: 'auto'
 				});
-				$("#schoolId").combobox({
-					formatter:formatSchool, 
-					valueField: 'schoolId', 
-					textField: 'schoolName', 
-					panelHeight: 'auto',
-					onLoadSuccess:function(data){
-						if(data.length > 0)
-						{
-							$("#schoolId").combobox("setValue",data[0].schoolId);
-						}
-					}
-				});
 			});
 			function queryFunc()
 			{
@@ -130,17 +118,6 @@
 						param : obj
 					}
 				});
-			}
-			function resetFunc()
-			{
-				$("#schoolId").combobox("setValue","");
-				$("#staffName").textbox("setValue","");
-				$("#contactPhone").textbox("setValue","");
-				$("#giftType").combobox("setValue","");
-				$("#feeStartTime").datebox("setValue","");
-				$("#feeEndTime").datebox("setValue","");
-				$("#consTimesStart").textbox("setValue","");
-				$("#consTimesEnd").textbox("setValue","");
 			}
 			function exportFunc()
 			{
