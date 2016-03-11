@@ -20,6 +20,24 @@ public class SysLogController {
 	@Autowired
 	private SysLogService sysLogService;
 	
+	@RequestMapping(value = "/qrySysLogListByPage.do")
+	public void qrySysLogListByPage(String page, String rows, String param, 
+			String funcNodeId, HttpServletResponse response) {
+		PrintWriter out = null;
+		try {
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = sysLogService.qrySysLogListByPage(page, rows, param, funcNodeId);
+			out.write(retVal);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(out != null) {
+				out.close();
+			}
+		}
+	}
+	
 	@RequestMapping(value = "/deleteLog.do")
 	public void deleteLog(String logIds, HttpServletResponse response)
 	{

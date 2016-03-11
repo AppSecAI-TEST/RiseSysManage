@@ -1,10 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
-	String classInstIds =request.getParameter("classInstIds");
-	String isHead =request.getParameter("isHead");
-	String schoolId =request.getParameter("schoolId");
-	System.err.println("isHead:"+isHead+"schoolId:"+schoolId);
+	String classInstIds = request.getParameter("classInstIds");
+	String isHead = request.getParameter("isHead");
+	String schoolId = request.getParameter("schoolId");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

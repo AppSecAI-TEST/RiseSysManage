@@ -129,7 +129,8 @@
 		  				<th data-options="field:'ck',checkbox:true"></th>
 		  				<th data-options="field:'schoolName',width:80,align:'center'">校区</th>
 		  				<th data-options="field:'className',width:100,align:'center'">班级名称</th>
-		  				<th data-options="field:'openDate',width:100,align:'center'">开班时间</th>
+		  				<th data-options="field:'openDate',width:100,align:'center'">开班日期</th>
+		  				<th data-options="field:'finishDate',width:100,align:'center'">结课日期</th>
 		  				<th data-options="field:'classProgress',width:100,align:'center'">课时进度</th>
 		  				<th data-options="field:'teacherName',width:150,align:'center'">带班老师</th>
 		  				<th data-options="field:'handTypeText',width:100,align:'center'">班级性质</th>
