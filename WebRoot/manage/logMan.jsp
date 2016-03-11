@@ -45,7 +45,7 @@
 		  				<th data-options="field:'createDate',width:150,align:'center'">操作时间</th>
 		  				<th data-options="field:'staffName',width:100,align:'center'">操作人</th>
 		  				<th data-options="field:'busDesc',width:200,align:'center'">操作功能</th>
-		  				<th data-options="field:'args',width:700,align:'center'">描述</th>
+		  				<th data-options="field:'logDesc',width:700,align:'center'">描述</th>
 		  			</tr>
 		  		</thead>
 		  	</table>

@@ -5,7 +5,7 @@ $(document).ready(function() {
 		object.funcNodeId = funcNodeId;
     	var obj = JSON.stringify(object);
     	$('#list_data').datagrid({
-    		url : "/sys/pubData/qryDataListByPage.do",
+    		url : "/sys/log/qrySysLogListByPage.do",
     		queryParams:{
     			param : obj
     		},

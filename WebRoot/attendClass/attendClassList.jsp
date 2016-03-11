@@ -111,6 +111,7 @@
 						<th data-options="field:'schoolName',width:80,align:'center'">校区</th>
 						<th data-options="field:'className',width:100,align:'center'">班级名称</th>
 						<th data-options="field:'openDate',width:100,align:'center'">开班日期</th>
+						<th data-options="field:'finishDate',width:100,align:'center'">结课日期</th>
 						<th data-options="field:'schooltimeName',width:200,align:'center'">上课时段与教室</th>
 						<th data-options="field:'teacherName',width:150,align:'center'">带班老师</th>
 						<th data-options="field:'licenseRateText',width:100,align:'center'">持证率</th>
