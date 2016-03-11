@@ -139,7 +139,7 @@
 					{
 						courseName='短期课';
 					}
-					showMessage("提示", "您选择的" + giftName + "，编号：" + giftCode + "的券不能抵扣"+courseName+""！", callback(index));
+					showMessage("提示", "您选择的" + giftName + "，编号：" + giftCode + "的券不能抵扣"+courseName+"！", callback(index));
 					return;
 				}
 				

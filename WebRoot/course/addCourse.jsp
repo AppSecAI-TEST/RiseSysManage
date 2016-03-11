@@ -832,8 +832,10 @@ $("#feeType").combobox({
 			//$("#adviserA").combobox("setValue","");
 			//$("#adviserB").combobox("setValue","");
 			clearData("adviserDiv");
-		} else if(type == '003') {
-			if(giftFlag) {
+		} else if(type == '003') 
+		{
+			if(giftFlag) 
+			{
 				showMessage('提示', "赠品或赠课已消耗,业绩类型不能修改为复读",null);
 				$("#feeType").combobox("setValue",o);
 				return;
@@ -844,6 +846,23 @@ $("#feeType").combobox({
 			$("#adviserTeacherDiv").css("display","table-row");
 			//$("#adviserTeacherA").combobox("setValue","");
 			//$("#adviserTeacherB").combobox("setValue","");
+			var payDate = $("#payDate").datebox('getValue');
+			if(payDate == '') {
+				$("#stageId").combobox('setValue',"");
+				$("#classType").combobox('setValue',"");
+				$("#totalAmount").textbox('setValue', '');
+				showMessage('提示', "请选择缴费时间",null);	
+				return;
+			}
+			var rate=getCountRate('<%=schoolId%>',payDate);
+			var amonut=getTotalAmount();
+			if(rate!=null && rate.length>0)
+			{
+				amonut=Number(amount)*Number(rate[0].countRate);
+			} 
+			
+			 
+			$("#amount").textbox('setValue', amonut);
 			clearData("adviserTeacherDiv");
 		}
 	}

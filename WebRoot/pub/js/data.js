@@ -4,6 +4,12 @@ $(document).ready(function()
 	 
 });
 
+function getCountRate(schoolId,time)
+{
+	var url="/sys/pubData/qryData.do?param={queryCode:\"Qry_Count_Rate\",schoolId:\""+ schoolId + "\",time:\""+ time + "\"}";
+	return loadData(url);
+}
+
 function getSchools()
 {
 	var url="/sys/pubData/qrySchoolList.do";
