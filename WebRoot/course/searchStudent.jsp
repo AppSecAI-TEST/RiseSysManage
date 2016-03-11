@@ -42,9 +42,9 @@
 					<td align="right">
 						<span>学员姓名：</span>
 					</td>
-					<td width="114px">
+					<td width="160px">
 						<input id="name" name="name" class="easyui-textbox"
-							style="width: 114px; height: 25px;">
+							style="width: 160px; height: 25px;">
 					</td>
 				</tr>
 				<tr>
@@ -58,9 +58,9 @@
 					<td align="right">
 						<span>证件号码：</span>
 					</td>
-					<td width="200px">
+					<td width="160px">
 						<input name="identityId" id="identityId" type="text"
-							class="easyui-textbox" style="width: 180px; height: 25px;" />
+							class="easyui-textbox" style="width: 160px; height: 25px;" />
 					</td>
 					<td align="left">
 						<a href="javascript:void(0)" class="easyui-linkbutton"

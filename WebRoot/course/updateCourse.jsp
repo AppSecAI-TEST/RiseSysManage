@@ -398,7 +398,8 @@
 								<input type="radio"  name="praise"  womType="Y" onclick="changePraise(this)">
 								<span>可控口碑</span>&nbsp;&nbsp;&nbsp;
 								<input type="radio"  name="praise"  womType="N" onclick="changePraise(this)">
-								<span>不可控口碑</span>
+								<span>不可控口碑</span>&nbsp;&nbsp;&nbsp;
+								<a href="javascript:void(0)" id="resetWom" onclick="clearWom()" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;">清空口碑</a>
 							</td>
 						</tr>
 						<tr style="display: none;">
@@ -2270,4 +2271,19 @@ $(document).ready(function()
 	$("#cancelUploadBtn").click(function() {
 	    $("#fileName").filebox("setValue", "");
 	});
+	
+	function clearWom()
+	{
+		$("input[name=praise]").each(function() {
+			$(this).attr("checked",false);
+		})
+		$("#praiseInfo").find("tr").each(function(index){
+			if(index>0)
+			{
+				$(this).css("display","none");
+			}	
+		})
+		clearData("praiseTab1");
+		clearData("praiseTab2");
+	}
 </script>
