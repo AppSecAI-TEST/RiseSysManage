@@ -848,6 +848,23 @@ $("#feeType").combobox(
 			$("#adviserTeacherDiv").css("display","table-row");
 			$("#adviserTeacherA").combobox("setValue","");
 			$("#adviserTeacherB").combobox("setValue","");
+			var payDate = $("#payDate").datebox('getValue');
+			if(payDate == '') {
+				$("#stageId").combobox('setValue',"");
+				$("#classType").combobox('setValue',"");
+				$("#totalAmount").textbox('setValue', '');
+				showMessage('提示', "请选择缴费时间",null);	
+				return;
+			}
+			var rate=getCountRate('<%=schoolId%>',payDate);
+			var amonut=getTotalAmount();
+			if(rate!=null && rate.length>0)
+			{
+				amonut=Number(amount)*Number(rate[0].countRate);
+			} 
+			
+			 
+			$("#amount").textbox('setValue', amonut);
 		}
 	}
 	 
