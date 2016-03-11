@@ -84,6 +84,7 @@
   	</body>
 </html>
 <script>
+	$(document).ready(function(){
 		initReportButton("reset","qryFm","schoolId");
 	 	$("#qryBtn").click(function() {
 			var object = $("#qryFm").serializeObject();
@@ -99,4 +100,6 @@
 	    	});
     	});
 		exportLink("export","list_data");
+	})
+	
 </script>
