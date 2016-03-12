@@ -7,7 +7,6 @@
 <html>
 	<head>
 		<%@ include file="../common/head.jsp" %>
-		<%@ include file="../common/pub.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript" src="<%=path %>/js/refund/refund.js"></script>
   	</head>
