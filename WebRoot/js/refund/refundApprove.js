@@ -144,7 +144,7 @@ $(document).ready(function() {
 					$.messager.progress('close'); 
 					var flag = data.flag;
 					if(flag) {
-						$.messager.alert('提示', "退费审批成功！", "info", function() {window.location.href = "/sys/refund/refund.jsp";});
+						$.messager.alert('提示', "退费审批成功！", "info", function() {window.location.href = "/sys/refund/refund.jsp?funcNodeId=53";});
 					} else {
 						$.messager.alert('提示', data.msg);
 					}
