@@ -31,10 +31,6 @@
 					return false;
 				});
 				$("#classManState").combobox("loadData",data);
-			},"json");
-			$.post("<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=classMan",function(data){
-				$("#classMan").combobox("loadData",data);
-				$("#classHis").combobox("loadData",data);
 				ajaxLoadEnd();
 			},"json");
 			$(document).ready(function(){
@@ -62,15 +58,6 @@
 					textField: 'codeName', 
 					panelHeight: 'auto'
 				});
-				$("#classMan").combobox({
-					formatter:function(row){
-						return '<span>'+row.className+'</span>';
-					},
-					valueField: 'classInstId',
-					textField: 'className',
-					//panelHeight: 'auto',
-					listHeight:200
-				});
 				$("#schoolHisId").combobox({
 					formatter:formatSchool, 
 					valueField: 'schoolId', 
@@ -88,15 +75,6 @@
 					valueField: 'stageId', 
 					textField: 'stageId', 
 					panelHeight: 'auto'
-				});
-				$("#classHis").combobox({
-					formatter:function(row){
-						return '<span>'+row.className+'</span>';
-					},
-					valueField: 'classInstId',
-					textField: 'className',
-					//panelHeight: 'auto'
-					listHeight:200
 				});
 				$('#tab').tabs({
 				    border:true,
@@ -127,7 +105,7 @@
 				}
 				$("#classManPharse").combobox("setValue","");
 				$("#classManState").combobox("setValue","");
-				$("#classMan").combobox("setValue","");
+				$("#classMan").textbox("setValue","");
 				$("#teacherMan").textbox("setValue","");
 				$("#classStartManTime").datebox("setValue","");
 				$("#classEndManTime").datebox("setValue","");
@@ -188,7 +166,7 @@
 				$("#classHisPharse").combobox("setValue","");
 				$("#classHisStart").datebox("setValue","");
 				$("#classHisEnd").datebox("setValue","");
-				$("#classHis").combobox("setValue","");
+				$("#classHis").textbox("setValue","");
 				$("#teacherHis").textbox("setValue","");
 				$("#attendStartRate").numberbox("setValue","");
 				$("#attendEndRate").numberbox("setValue","");
@@ -238,7 +216,7 @@
 								班级：
 							</td>
 							<td width="12%">
-								<select id="classMan" name="classMan" style="width:100px;height:25px;" ></select>
+								<input name="classMan" id="classMan" type="text" style="width:100px;height:25px;" class="easyui-textbox" />
 							</td>
 						</tr>
 						<tr>
@@ -313,7 +291,7 @@
 								班级：
 							</td>
 							<td width="12%">
-								<select id="classHis" name="classHis" style="width:100px;height:25px;" ></select>
+								<input name="classHis" id="classHis" type="text" style="width:100px;height:25px;" class="easyui-textbox" />
 							</td>
 						</tr>
 						<tr>
