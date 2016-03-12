@@ -28,7 +28,6 @@
 </style>
 	</head>
 	<body>
-		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px" onclick="javascript:window.history.back()">返回</a>	
 		<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
 	            <div id="content" style="margin-left:6px;">
 		            
