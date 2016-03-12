@@ -43,7 +43,7 @@
 					<td style="min-width: 100px;">
 						<select id="adviserId" name="adviserId" class="easyui-combobox" style="width: 100px; height: 25px;"
 							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
-      						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+      						url="<%=path %>/pubData/qryStaffList.do?post=16,17&schoolId=${sessionScope.StaffT.schoolId}">
       					</select>
 					</td>
 					<td align="right" style="min-width: 80px;"><span>责任顾问：</span></td>

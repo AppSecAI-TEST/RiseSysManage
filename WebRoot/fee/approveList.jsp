@@ -52,7 +52,7 @@
 						<select id="advisterId" name="advisterId" class="easyui-combobox" style="width: 100px; height: 25px;"
 							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
       						 onLoadSuccess:function(data){$('#advisterId').combobox('setValue',data[0].staffId);}"
-      						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+      						url="<%=path %>/pubData/qryStaffList.do?post=16,17&schoolId=${sessionScope.StaffT.schoolId}">
      						</select>
 						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width: 100px; height: 25px;">
 					  </select>
@@ -60,7 +60,7 @@
 					<td><select id="dutyAdvister" name="dutyAdvister" class="easyui-combobox" style="width: 100px; height: 25px;"
 							data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
       						 onLoadSuccess:function(data){$('#dutyAdvister').combobox('setValue',data[0].staffId);}"
-      						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+      						url="<%=path %>/pubData/qryStaffList.do?post=16,17&schoolId=${sessionScope.StaffT.schoolId}">
 					  </select></td>
 					<td align="right">&nbsp;</td>
 					<td width="119"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1000">查询</a> <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a></td>

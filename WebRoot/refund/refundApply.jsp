@@ -394,9 +394,8 @@
   							<td align="right" width="10%"><span>回访人员：</span></td>
   							<td width="8%">
   								<select id="headmasterId" name="headmasterId" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-      						 		onLoadSuccess:function(data){$('#headmasterId').combobox('setValue',data[0].staffId);}"
-      								url="<%=path %>/pubData/qryStaffList.do?schoolId=${obj.refundObj.schoolId }">
+									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
+      								url="<%=path %>/pubData/qryStaffList.do?post=23&schoolId=${obj.refundObj.schoolId }">
 		        				</select>
   							</td>
   							<td align="right" width="8%"><span>回访时间：</span></td>

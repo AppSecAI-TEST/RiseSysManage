@@ -79,7 +79,8 @@ $(document).ready(function() {
     		}
     		if(classInstId != "" && classInstId != null && classInstId != undefined) {
     			var oldCourseState = $("#oldCourseState").val();
-        		if("009" != oldCourseState && "Y" == isBegin) {
+        		if("009" != oldCourseState && "Y" == isBegin 
+        				&& oldCourseState != "" && oldCourseState != null && oldCourseState != undefined) {
         			$.messager.alert('提示', "您选择的学员有在读课程，不能选择已开课班级！");
         		} else {
         			var handlerId = $("#handlerId").val();

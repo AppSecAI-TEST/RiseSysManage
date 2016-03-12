@@ -129,7 +129,7 @@ $(document).ready(function() {
 		var schoolId = $("#schoolId").val();
 		if("teacher" == visitPersonOne) {
 			$("#teacherId").combobox({
-				url : "/sys/pubData/qryStaffList.do?schoolId="+schoolId,//返回json数据的url
+				url : "/sys/pubData/qryStaffList.do?post=4,5&schoolId="+schoolId,//返回json数据的url
 		    	valueField : "staffId",
 		    	textField : "userName",
 		    	panelHeight : "auto",
@@ -147,7 +147,7 @@ $(document).ready(function() {
 			$("#careAdviserId").combobox("loadData", new Array());
 		} else {
 			$("#careAdviserId").combobox({
-				url : "/sys/pubData/qryStaffList.do?schoolId="+schoolId,//返回json数据的url
+				url : "/sys/pubData/qryStaffList.do?post=16,17&schoolId="+schoolId,//返回json数据的url
 		    	valueField : "staffId",
 		    	textField : "userName",
 		    	panelHeight : "auto",
@@ -179,7 +179,7 @@ $(document).ready(function() {
 		var visitPersonTwo = $("input:radio[name='visitPersonTwo']:checked").val();
 		var schoolId = $("#schoolId").val();
 		$("#academicOrSalesId").combobox({
-			url : "/sys/pubData/qryStaffList.do?schoolId="+schoolId,//返回json数据的url
+			url : "/sys/pubData/qryStaffList.do?post=7,8,17&schoolId="+schoolId,//返回json数据的url
 	    	valueField : "staffId",
 	    	textField : "userName",
 	    	panelHeight : "auto",

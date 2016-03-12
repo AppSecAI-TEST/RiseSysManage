@@ -53,7 +53,7 @@
 	  					<td width="100px">
 							<select id="carer" name="carer" class="easyui-combobox" style="width: 100px; height: 25px;"
 								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
-	     						url="<%=path %>/pubData/qryStaffList.do?schoolId=${sessionScope.StaffT.schoolId}">
+	     						url="<%=path %>/pubData/qryStaffList.do?post=31,32,33&schoolId=${sessionScope.StaffT.schoolId}">
 	     					</select>
 						</td>
 	  					<td align="right"><span>是否进班：</span></td>
