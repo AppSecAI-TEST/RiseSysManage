@@ -17,7 +17,7 @@ public class FuncNodeT implements java.io.Serializable,Cloneable {
 	private String subSysTypeCd;
 	private String funcNodeType;
 	private String funcProperty;
-	private Integer setFuncId;
+	private String setFuncId;
 	private String subFuncNodeType;
 	private Integer funcNodeSeq;
 	private String html;
@@ -32,7 +32,7 @@ public class FuncNodeT implements java.io.Serializable,Cloneable {
 	}
 	
 	/** minimal constructor */
-	public FuncNodeT(Integer parentFuncNodeId, String funcNodeCode, String funcProperty, Integer setFuncId,
+	public FuncNodeT(Integer parentFuncNodeId, String funcNodeCode, String funcProperty, String setFuncId,
 			String funcNodeName, String subSysTypeCd, String funcNodeType,
 			String subFuncNodeType, Integer funcNodeSeq, String html,
 			String description) {
@@ -52,7 +52,7 @@ public class FuncNodeT implements java.io.Serializable,Cloneable {
 	}
 
 	/** full constructor */
-	public FuncNodeT(Integer parentFuncNodeId, String funcNodeCode, String funcProperty, Integer setFuncId,
+	public FuncNodeT(Integer parentFuncNodeId, String funcNodeCode, String funcProperty, String setFuncId,
 			String funcNodeName, String subSysTypeCd, String funcNodeType,
 			String subFuncNodeType, Integer funcNodeSeq, String html,
 			String description, String state, Timestamp stateDate) {
@@ -104,11 +104,11 @@ public class FuncNodeT implements java.io.Serializable,Cloneable {
 		this.funcProperty = funcProperty;
 	}
 
-	public Integer getSetFuncId() {
+	public String getSetFuncId() {
 		return setFuncId;
 	}
 
-	public void setSetFuncId(Integer setFuncId) {
+	public void setSetFuncId(String setFuncId) {
 		this.setFuncId = setFuncId;
 	}
 
