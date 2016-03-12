@@ -8,10 +8,7 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<%@ include file="../common/pub.jsp" %>
-		 
   	</head>
-  
   	<body>
 		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
 		<div style="margin-right:5px;">

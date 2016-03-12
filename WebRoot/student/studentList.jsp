@@ -144,6 +144,5 @@
     		<a href="javascript:void(0)" id="batchUpdateSubmit" class="easyui-linkbutton" iconCls="icon-ok">提交</a> 
     		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
   		</div>
-  		<%@ include file="../common/pub.jsp" %>
  	</body>
 </html>

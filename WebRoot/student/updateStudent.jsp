@@ -18,7 +18,6 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
-		<%@ include file="../common/pub.jsp" %>
 		<script type="text/javascript" src="<%=path %>/js/student/updateStudent.js"></script>
   	</head>
   

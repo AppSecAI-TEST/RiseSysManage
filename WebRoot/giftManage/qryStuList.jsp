@@ -98,6 +98,5 @@
     		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="javascript:window.history.back()"><span>返回</span></a>
     	</div>
 		</div>	
-  		<%@ include file="../common/pub.jsp" %>
  	</body>
 </html>
