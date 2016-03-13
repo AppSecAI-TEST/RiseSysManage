@@ -1,6 +1,7 @@
 package com.rise.controller;
 
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -67,7 +68,7 @@ public class IncomeFinishController
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = incomeFinishService.addIncomeFinishRecord(json);
+			String retVal = incomeFinishService.addIncomeFinishRecord(URLDecoder.decode(json,"UTF-8"));
 			out.write(retVal);
 		}
 		catch(Exception e)
