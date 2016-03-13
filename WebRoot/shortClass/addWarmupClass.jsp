@@ -13,7 +13,7 @@
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript">
 			ajaxLoadEnd();
-			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=806&fieldId=schoolId",function(data){
+			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryStage.do",function(data){
@@ -32,13 +32,7 @@
 					valueField: 'schoolId', 
 					textField: 'schoolName', 
 					panelHeight: 'auto',
-					editable:false,
-					onLoadSuccess:function(data){
-						if(data.length > 0)
-						{
-							$("#schoolManId").combobox("setValue",data[0].schoolId);
-						}
-					}
+					editable:false
 				});
 				var schoolManId = sessionStorage.getItem("schoolManId");
 				var classType = sessionStorage.getItem("classType");

@@ -13,7 +13,7 @@
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript">
 			ajaxLoadEnd();
-			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=802&fieldId=schoolId",function(data){
+			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("国际班"),function(data){
@@ -34,13 +34,7 @@
 					valueField: 'schoolId', 
 					textField: 'schoolName',
 					editable:false,
-					panelHeight: 'auto',
-					onLoadSuccess:function(data){
-						if(data.length > 0)
-						{
-							$("#schoolManId").combobox("setValue",data[0].schoolId);
-						}
-					}
+					panelHeight: 'auto'
 				});
 				var interClassType = sessionStorage.getItem("interClassType");
 				var className = sessionStorage.getItem("className");

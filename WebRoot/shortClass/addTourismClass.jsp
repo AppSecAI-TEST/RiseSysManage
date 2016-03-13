@@ -13,7 +13,7 @@
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript">
 			ajaxLoadEnd();
-			$.post("<%=path %>/pubData/qrySchoolListWithTS.do",function(data){
+			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("游学"),function(data){
@@ -32,12 +32,6 @@
 						$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:data.schoolId},function(data){
 							$("#teacherId").combobox("loadData",data);
 						},"json");
-					},
-					onLoadSuccess:function(data){
-						if(data.length > 0)
-						{
-							$("#schoolId").combobox("setValue",data[0].schoolId);
-						}
 					}
 				});
 				$("#tourismClassType").combobox({
