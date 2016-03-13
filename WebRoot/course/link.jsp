@@ -393,7 +393,9 @@
 		return true;
 	}
 	var newCourse;//新招课程阶段
+	
 	$("#submit").click(function() {
+		var flag=true;
 		var fileName = $("#fileName").filebox("getValue");
 		if(fileName != "" && fileName != null && fileName != undefined) {
 			if(courseImgUrl == "" || courseImgUrl == null || courseImgUrl == undefined) {
