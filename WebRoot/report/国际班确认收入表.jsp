@@ -40,8 +40,8 @@
 						<tr>
 							<th field="schoolName" align="center" width="8%">校区</th>
 							<th field="name" align="center" width="8%">姓名</th>
-							<th field="classType" align="center" width="8%">课程类型</th>
-							<th field="className" align="center" width="8%">证件号码</th>
+							<th field="classType" align="center" width="8%">国际班类型</th>
+							<th field="className" align="center" width="8%">班级</th>
 							<th field="adviserTeacherName" align="center" width="8%">业绩老师</th>
 							<th field="adviserName" align="center" width="8%">业绩顾问</th>
 							<th field="shortClassName" align="center" width="8%">国际班班级</th>

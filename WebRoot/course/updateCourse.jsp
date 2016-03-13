@@ -1241,7 +1241,7 @@ $("#submitBtn").click(function() {
 
 $("#backBtn").click(function()
 {
-	window.location.href = "addCourseList.jsp"
+	window.location.href = "qryCourseInfo.jsp"
 });
 
 //增加赠品
