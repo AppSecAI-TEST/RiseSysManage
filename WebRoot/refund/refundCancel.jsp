@@ -486,7 +486,7 @@
 			  								<select id="headmasterId" name="headmasterId" class="easyui-combobox" style="width: 100px; height: 25px;"
 												data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
 			      						 		onLoadSuccess:function(data){$('#headmasterId').combobox('setValue', ${refundVisit.visitUserId });}"
-			      								url="<%=path %>/pubData/qryStaffList.do?post=23&schoolId=${obj.refundFeeObj.schoolId }">
+			      								url="<%=path %>/pubData/qryStaffList.do?post=22,23&schoolId=${obj.refundFeeObj.schoolId }">
 					        				</select>
 			  							</td>
 			  							<td align="right" width="8%"><span>回访时间：</span></td>

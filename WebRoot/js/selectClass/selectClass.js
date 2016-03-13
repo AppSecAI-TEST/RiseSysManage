@@ -6,8 +6,7 @@ $(document).ready(function() {
 		data: "param=" + param,
 		dataType: "json",
 		async: true,
-		beforeSend: function()
-		{
+		beforeSend: function() {
 			$.messager.progress({title : '班级维护', msg : '正在查询班级信息，请稍等……'});
 		},
 		success: function (data) {
@@ -78,50 +77,60 @@ $(document).ready(function() {
     			className = $('#notBeginClassInstId').combobox('getText');
     		}
     		if(classInstId != "" && classInstId != null && classInstId != undefined) {
-    			var oldCourseState = $("#oldCourseState").val();
-        		if("009" != oldCourseState && "Y" == isBegin 
-        				&& oldCourseState != "" && oldCourseState != null && oldCourseState != undefined) {
-        			$.messager.alert('提示', "您选择的学员有在读课程，不能选择已开课班级！");
-        		} else {
-        			var handlerId = $("#handlerId").val();
-        			var studentId = $("#studentId").val();
-        			var feeType = $("#feeType").val();
-        			var studentChannelType = "";
-        			if("001" == feeType) {
-        				var outSchoolName = $("#outSchoolName").val();
-        				if(outSchoolName != "" && outSchoolName != null && outSchoolName != undefined) {
-        					studentChannelType = outSchoolName + "校区转入";
-        				} else {
-        					studentChannelType = $("#feeTypeText").html();
-        				}
-        			} else {
-        				studentChannelType = $("#oldClassName").val() + $("#feeTypeText").html();
-        			}
-        			var studentCourseId = $("#studentCourseId").val();
-        			var oldClassInstId = $("#oldClassInstId").val();
-        			var schoolId = $("#schoolId").val();
-        			var param = "[{classInstId:\""+classInstId+"\",className:\""+className+"\",studentId:\""+studentId+"\",studentCourseId:\""+studentCourseId+"\",studentChannelType:\""+studentChannelType+"\",handlerId:\""+handlerId+"\",oldClassInstId:\""+oldClassInstId+"\",schoolId:\""+schoolId+"\"}]";
-        			param = encodeURI(param);
-        			$.ajax({
-        				url: "/sys/applyClass/addClassStudent.do",
-        				data: "param=" + param,
-        				dataType: "json",
-        				async: true,
-        				beforeSend: function()
-        				{
-        					$.messager.progress({title : '选班', msg : '正在选班，请稍等……'});
-        				},
-        				success: function (data) {
-        					$.messager.progress('close'); 
-        					var flag = data.flag
-        					if(flag) {
-        						$.messager.alert('提示', "选班成功！", "info", function() {window.history.back();});
-        					} else {
-        						$.messager.alert('提示', data.msg);
-        					}
-        				}
-        			});
-        		}
+    			var flag = true;
+    			var oldClassInstId = $("#oldClassInstId").val();
+    			if(oldClassInstId != null && oldClassInstId != "" 
+    				&& oldClassInstId != undefined && classInstId == oldClassInstId) {
+    				flag = false;
+    			}
+    			if(flag) {
+    				var oldCourseState = $("#oldCourseState").val();
+    				if("009" != oldCourseState && "Y" == isBegin 
+    						&& oldCourseState != "" && oldCourseState != null && oldCourseState != undefined) {
+    					$.messager.alert('提示', "您选择的学员有在读课程，不能选择已开课班级！");
+    				} else {
+    					var handlerId = $("#handlerId").val();
+    					var studentId = $("#studentId").val();
+    					var feeType = $("#feeType").val();
+    					var studentChannelType = "";
+    					if("001" == feeType) {
+    						var outSchoolName = $("#outSchoolName").val();
+    						if(outSchoolName != "" && outSchoolName != null && outSchoolName != undefined) {
+    							studentChannelType = outSchoolName + "校区转入";
+    						} else {
+    							studentChannelType = $("#feeTypeText").html();
+    						}
+    					} else {
+    						studentChannelType = $("#oldClassName").val() + $("#feeTypeText").html();
+    					}
+    					var studentCourseId = $("#studentCourseId").val();
+    					var oldClassInstId = $("#oldClassInstId").val();
+    					var schoolId = $("#schoolId").val();
+    					var param = "[{classInstId:\""+classInstId+"\",className:\""+className+"\",studentId:\""+studentId+"\",studentCourseId:\""+studentCourseId+"\",studentChannelType:\""+studentChannelType+"\",handlerId:\""+handlerId+"\",oldClassInstId:\""+oldClassInstId+"\",schoolId:\""+schoolId+"\"}]";
+    					param = encodeURI(param);
+    					$.ajax({
+    						url: "/sys/applyClass/addClassStudent.do",
+    						data: "param=" + param,
+    						dataType: "json",
+    						async: true,
+    						beforeSend: function()
+    						{
+    							$.messager.progress({title : '选班', msg : '正在选班，请稍等……'});
+    						},
+    						success: function (data) {
+    							$.messager.progress('close'); 
+    							var flag = data.flag
+    							if(flag) {
+    								$.messager.alert('提示', "选班成功！", "info", function() {window.history.back();});
+    							} else {
+    								$.messager.alert('提示', data.msg);
+    							}
+    						}
+    					});
+    				}
+    			} else {
+    				$.messager.alert('提示', "该学员已在该班级，请选择另外一个班！");
+    			}
     		} else {
     			$.messager.alert('提示', "请选择一个班级！");
     		}
