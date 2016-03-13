@@ -133,7 +133,6 @@
 				<td>上课日期</td>
 				<td>创建人</td>
 				<td>创建时间</td>
-				<td>是否已扎帐</td>
 				<td>应到人数</td>
 				<td>实到人数</td>
 				<td>请假人数</td>
@@ -154,7 +153,6 @@
 							<td align="center"><fmt:formatDate value="${node.schooltime}" pattern="yyyy-MM-dd" /></td>
 							<td align="center">${node.handlerObj.staffName}</td>
 							<td align="center"><fmt:formatDate value="${node.createDate}" pattern="yyyy-MM-dd" timeZone="GMT"/></td>
-							<td align="center"><c:choose><c:when test="${node.isTieOff == 0}">否</c:when><c:otherwise>是</c:otherwise></c:choose></td>
 							<td align="center">${node.attendNum}</td>
 							<td align="center">${node.realNum}</td>
 							<td align="center">${node.leaveNum}</td>
