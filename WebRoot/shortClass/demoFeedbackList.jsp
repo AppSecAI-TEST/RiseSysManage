@@ -60,7 +60,7 @@
   						<input class="easyui-numberbox" name="max" id="max"  style="width:92px;height:25px;" data-options="min:1,max:100,precision:0"/>%
   					</td>
   					<td>
-  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;height:25px;" id="qryBtn" funcNodeId ="50050" ><span>查询</span></a>
+  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;height:25px;" id="qryBtn" funcNodeId ="3500" ><span>查询</span></a>
   						&nbsp;&nbsp;
   						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px;height:25px;" id="resetBtn" ><span>重置</span></a>
   					</td>
