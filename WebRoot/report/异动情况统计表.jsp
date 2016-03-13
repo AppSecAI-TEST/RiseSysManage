@@ -46,6 +46,7 @@
 						<tr>
 							<th field="schoolName" align="center" width="6%" rowspan="2">校区</th>
 							<th field="studentInSchoolNum" align="center" width="7%" rowspan="2">在校生人数</th>
+							<th field="studyingNum" align="center" width="5%" rowspan="2">在读人数</th>
 							<th field="waitReturn" align="center" width="11%" colspan="2">待退费</th>
 							<th field="changeClassNum" align="center" width="5%" rowspan="2">转班</th>
 							<th field="changeSchoolNum" align="center" width="5%" rowspan="2">转校</th>
