@@ -34,7 +34,7 @@ $(document).ready(function() {
     		if(n != null && n != "" && n != undefined) {
     			$("#teacherId").combobox({disabled: false});
     			$("#teacherId").combobox({
-    				url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&classType=",
+    				url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&stageId=",
     				valueField : "teacherId",
     		    	textField : "byname",
     		    	panelHeight : "auto",

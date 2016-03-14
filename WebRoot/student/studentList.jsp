@@ -97,7 +97,7 @@
 			<a href="javascript:void(0)" id="batchUpdate" class="easyui-linkbutton" iconCls="icon-edit" style="width: 150px;">批量修改责任人</a>
 		</div>
 		</div>	
-		<div id="dlg" class="easyui-dialog" style="width:900px;" closed="true" data-options="modal:true" buttons="#dlgBtn">
+		<div id="dlg" class="easyui-dialog" style="width:900px; height: 500px;" closed="true" data-options="modal:true" buttons="#dlgBtn">
   			<form id="batchUpdateFm" method="post">
   				<input type="hidden" id="updateStudentId" name="updateStudentId"/>
   				<input type="hidden" id="handlerId" name="handlerId"/>

@@ -132,9 +132,9 @@ $(document).ready(function() {
     	},
 		onChange : function(n, o) {
 			var classInstId = $("#selClassInstId").val();
-			var classType = $("#classType" + classInstId).val();
+			var stageId = $("#stageId" + classInstId).val();
 			$("#teacherId").combobox({
-				url : "/sys/pubData/qryTeacherList.do?schoolId=" + n + "&classType=" + classType,
+				url : "/sys/pubData/qryTeacherList.do?schoolId=" + n + "&stageId=" + stageId,
 				valueField : "teacherId",
         		textField : "byname",
         		panelHeight : "auto",

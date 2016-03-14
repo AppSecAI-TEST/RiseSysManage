@@ -21,6 +21,7 @@
   				<input type="hidden" id="addSchoolNum${obj.classInstId }" name="addSchoolNum" value="${obj.schooltimeObj.total }"/> 
   				<input type="hidden" id="classInstId${obj.classInstId }" name="classInstId" value="${obj.classInstId }"/>
   				<input type="hidden" id="classType${obj.classInstId }" name="classType" value="${obj.classType }"/>
+  				<input type="hidden" id="stageId${obj.classInstId }" name="stageId" value="${obj.stageId }"/>
   				<input type="hidden" id="className${obj.classInstId }" name="className" value="${obj.className }"/>
 	  			<table width="99.9%" cellpadding="5px" class="maintables" style="margin-top: 10px;">
 	  				<tr>

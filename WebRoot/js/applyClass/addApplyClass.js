@@ -300,9 +300,9 @@ $(document).ready(function() {
     		return "<span>" + data.schoolName + "</span>";
     	},
 		onChange : function(n, o) {
-			var classType = $("#classType").combobox("getValue");
+			var stageId = $("#stageId").combobox("getValue");
 			$("#teacherId").combobox({
-				url : "/sys/pubData/qryTeacherList.do?schoolId=" + n + "&classType=" + classType,
+				url : "/sys/pubData/qryTeacherList.do?schoolId=" + n + "&stageId=" + stageId,
 				valueField : "teacherId",
         		textField : "byname",
         		panelHeight : "auto",

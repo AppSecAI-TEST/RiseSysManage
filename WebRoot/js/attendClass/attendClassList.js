@@ -43,7 +43,7 @@ $(document).ready(function() {
 			if(n != "" && n != null && n != undefined) {
 				$("#teacherId").combobox({disabled: false});
 				$("#teacherId").combobox({
-					url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&classType=",//返回json数据的url
+					url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&stageId=",//返回json数据的url
 					valueField : "teacherId",
 					textField : "byname",
 					panelHeight : "auto",

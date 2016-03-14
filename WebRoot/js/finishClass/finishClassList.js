@@ -33,7 +33,7 @@ $(document).ready(function() {
     	},
     	onChange : function(n, o) {
     		$("#teacherId").combobox({
-				url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&classType=",//返回json数据的url
+				url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&stageId=",//返回json数据的url
 				valueField : "teacherId", 
 				textField : "byname",
 				panelHeight : "auto",

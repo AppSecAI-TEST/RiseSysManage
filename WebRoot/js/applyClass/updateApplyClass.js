@@ -100,9 +100,9 @@ $(document).ready(function() {
             }
         },
 		onChange : function(n, o) {
-			var classType = $("#classType").html();
+			var stageId = $("#stageId").html();
 			$("#teacherId").combobox({
-				url : "/sys/pubData/qryTeacherList.do?schoolId=" + n + "&classType=" + classType,
+				url : "/sys/pubData/qryTeacherList.do?schoolId=" + n + "&stageId=" + stageId,
 				valueField : "teacherId",
         		textField : "byname",
         		panelHeight : "auto",

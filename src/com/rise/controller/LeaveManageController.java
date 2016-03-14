@@ -133,7 +133,7 @@ public class LeaveManageController {
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = leaveManageService.addLeaveInfo(URLEncoder.encode(json,"utf-8"));
+			String retVal = leaveManageService.addLeaveInfo(json);
 			log.error(retVal);
 			out.write(retVal);
 		}

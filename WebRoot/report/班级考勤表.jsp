@@ -89,7 +89,7 @@
 				initReportButton("resetBtn","attFm","schoolId")
 				$("#schoolId").combobox({
 			    	onChange:function(n, o) {
-						$("#teacher").combobox({url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&classType="});
+						$("#teacher").combobox({url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&stageId="});
 			    	}
 				});
 				$("#classPharse").combobox({

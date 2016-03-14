@@ -101,7 +101,7 @@ $(document).ready(function() {
     	    	}
     		});
     		$("#teacherId").combobox({
-    			url : "/sys/pubData/qryTeacherList.do?schoolId=" + n + "&classType=",
+    			url : "/sys/pubData/qryTeacherList.do?schoolId=" + n + "&stageId=",
     			valueField : "teacherId",
     	    	textField : "byname",
     	    	panelHeight : "auto",

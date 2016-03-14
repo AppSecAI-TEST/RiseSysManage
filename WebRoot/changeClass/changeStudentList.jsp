@@ -30,7 +30,7 @@
 					<td width="100px">
 						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;"
 							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'" 
-	      					url="<%=path %>/pubData/qryTeacherList.do?schoolId=<%=schoolId %>&classType=">
+	      					url="<%=path %>/pubData/qryTeacherList.do?schoolId=<%=schoolId %>&stageId=">
 				        </select>
 					</td>
   				</tr>

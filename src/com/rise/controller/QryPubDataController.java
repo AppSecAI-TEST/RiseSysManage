@@ -251,14 +251,14 @@ public class QryPubDataController
 	
 	//查询老师列表
 	@RequestMapping(value = "/qryTeacherList.do")
-	public void qryTeacherList(String schoolId, String classType, HttpServletResponse response)
+	public void qryTeacherList(String schoolId, String stageId, HttpServletResponse response)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = qryPubDataService.qryTeacherList(schoolId, classType);
+			String retVal = qryPubDataService.qryTeacherList(schoolId, stageId);
 			out.write(retVal);
 		}
 		catch(Exception e)
