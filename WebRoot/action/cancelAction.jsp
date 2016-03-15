@@ -48,7 +48,7 @@
   				<tr>
   					<td align="right"><span>取消备注：</span></td>
   					<td align="left">
-  						<textarea id="cancelRemark" style="border:0;width:98%;height:80px;resize:none;overflow-y:hidden"></textarea>
+  						<textarea rows="8" cols="100" id="cancelRemark" name="cancelRemark" class="easyui-validatebox textbox"></textarea>
   					</td>
   				</tr>
   			</table>

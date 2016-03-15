@@ -64,7 +64,7 @@
   				<tr>
   					<td align="right"><span>反馈备注：</span></td>
   					<td align="left" colspan="2">
-  						<textarea id="replyRemark" style="border:0;width:98%;height:80px;resize:none;overflow-y:hidden"></textarea>
+  						<textarea rows="8" cols="100" id="replyRemark" name="replyRemark" class="easyui-validatebox textbox"></textarea>
   					</td>
   				</tr>
   			</table>

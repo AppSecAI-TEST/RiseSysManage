@@ -13,8 +13,9 @@
 		<script type="text/javascript" src="<%=path %>/js/teacherManage.js"></script>
   	</head>
   	<body>
+  		<div style="margin-right:5px;">
  		<form id="qryFm">
-  			<table  align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:5px;font-family:'微软雅黑'" cellspacing="15">
+  			<table class="search_tab">
   				<tr>
   					<td align="right">校　　区：</td>
   					<td>
@@ -44,13 +45,9 @@
   						<td align="right">
 						<span>日期：</span>
 					</td>
-					<td width="8px">
+					<td>
 						<input class="easyui-datebox" type="text" required="true" style="width:100px; height: 25px;" id="startTime" name="startTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
-					</td>
-					<td align="center" width="14px;">
-						<span>至</span>
-					</td>
-					<td width="90px">
+						至
 						<input class="easyui-datebox" required="true" type="text" style="width:100px; height: 25px;" id="endTime" name="endTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
 					

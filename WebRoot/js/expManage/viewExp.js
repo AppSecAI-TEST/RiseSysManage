@@ -46,7 +46,7 @@ function initPage()
 					$("#createDate").html(data.excInfo.createDate);
 					$("#excState").html(data.excInfo.state);
 					$("#excDays").html(data.excInfo.excDays + "天");
-					$("#excHandler").html(data.excInfo.handler);
+					$("#refundHandler").html(data.excInfo.handler);
 					$("#remark").html(data.excInfo.remark);
 					$("#finishDate").html(data.excInfo.finishDate);
 					$("#resumeDate").html(data.excInfo.resumeDate);

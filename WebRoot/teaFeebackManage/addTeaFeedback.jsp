@@ -88,17 +88,17 @@
 $(document).ready(function(){
 	var flag =0;
 	$("#feedbackTab").find("tr").each(function(index){
-		if(index>0&&$(this).find("td:eq(5)").html()!="")
+		if(index>0&&$(this).find("td:eq(5)").find("input[type='radio']").length>0)
 		{
 			flag =5;
 			return false;
 		}
-		else if(index>0&&$(this).find("td:eq(6)").html()!="")
+		else if(index>0&&$(this).find("td:eq(6)").find("input[type='radio']").length>0)
 		{
 			flag =6;
 			return false;
 		}
-		else if(index>0&&$(this).find("td:eq(7)").html()!="")
+		else if(index>0&&$(this).find("td:eq(7)").find("input[type='radio']").length>0)
 		{
 			flag =7;
 			return false;

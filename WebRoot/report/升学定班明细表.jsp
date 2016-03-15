@@ -68,8 +68,8 @@
 							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeAttend" name="endTimeAttend" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
 						<td align="left">
-							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:90px; height: 25px;" id="qryBtn" funcNodeId="1047">查询</a>
-							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:90px; height: 25px;" id="reset">重置</a>
+							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:80px; height: 25px;" id="qryBtn" funcNodeId="1047">查询</a>
+							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px; height: 25px;" id="reset">重置</a>
 						</td>
 	  				</tr>
 	  			</table>

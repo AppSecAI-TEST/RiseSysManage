@@ -34,7 +34,7 @@
   				<tr>
   					<td align="right" ><span>活动名称：</span></td>
   					<td align="left" colspan="2">
-  						<textarea id="title" style="border:0;width:99%;height:100%;resize:none;overflow-y:hidden"></textarea>
+  						<textarea rows="4" cols="100" id="title" name="title" class="easyui-validatebox textbox"></textarea>
   					</td>
   				</tr>
   				<tr>
@@ -68,7 +68,7 @@
   				<tr>
   					<td align="right"><span>创建备注：</span></td>
   					<td align="left" colspan="2">
-  						<textarea id="createRemark" style="border:0;width:99%;height:80px;resize:none;overflow-y:hidden"></textarea>
+  						<textarea rows="8" cols="100" id="createRemark" name="createRemark" class="easyui-validatebox textbox"></textarea>
   					</td>
   				</tr>
   			</table>

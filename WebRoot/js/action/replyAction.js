@@ -79,7 +79,7 @@ function addTrInfo() {
 		tr
 				.find("td:eq(2)")
 				.html(
-						"<a href='javascript:void(0)'class='easyui-linkbutton' iconCls='icon-remove' onclick='deleteTr(this)' plain='true'><span>删除</span></a>")
+						"<a href='javascript:void(0)'class='easyui-linkbutton' iconCls='icon-remove' onclick='deleteTr(this)'><span>删除</span></a>")
 		$("#addInfo").after(tr);
 		$.parser.parse(tr);
 		clearData("addInfo");
@@ -271,7 +271,7 @@ function initUpdatePage()
 								+ tr.attr("teacherName") + "</span><span style='margin-right:20px'>"
 								+ tr.attr("teacherType") + "</span>"+"<span>"+tr.attr("hours")+"</span>"
 						tr.find("td:eq(1)").html(tdStr)
-						tr.find("td:eq(2)").html("<a href='javascript:void(0)'class='easyui-linkbutton' iconCls='icon-remove' onclick='deleteTr(this)' plain='true'><span>删除</span></a>")
+						tr.find("td:eq(2)").html("<a href='javascript:void(0)'class='easyui-linkbutton' iconCls='icon-remove' onclick='deleteTr(this)'><span>删除</span></a>")
 						$("#addInfo").after(tr);
 						$.parser.parse(tr);
 					}	
