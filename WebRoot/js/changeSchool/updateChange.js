@@ -19,7 +19,7 @@ $(document).ready(function() {
 				isSelect = "Y";
 				if(inClassIsBegin != null && inClassIsBegin != "" && inClassIsBegin != undefined) {
 					$("input[name='isBegin'][value='"+inClassIsBegin+"']").attr("checked", "checked");
-					initClassInst(inClassIsBegin);
+					initClassInst();
 				}
 			}
 			$("input[name='isSelect'][value='"+isSelect+"']").attr("checked", "checked");
@@ -53,7 +53,7 @@ $(document).ready(function() {
 	
 	$("input:radio[name='isBegin']").change(function() {
 		var isBegin = $("input:radio[name='isBegin']:checked").val();
-		initClassInst(isBegin);
+		initClassInst();
 	});
 	
 	//查看转校历史信息
@@ -130,7 +130,7 @@ $(document).ready(function() {
 	});
 });
 
-function initClassInst(isBegin) {
+function initClassInst() {
 	var stageId = $("#stageId").val();
 	var inSchoolId = $("#schoolId").val();
 	var classType = $("#classType").val();
@@ -149,18 +149,29 @@ function initClassInst(isBegin) {
     		onLoadSuccess : function () { //数据加载完毕事件
                 var data = $('#beginClassInstId').combobox('getData');
                 if (data.length > 0) {
-                	if(isBegin == inClassIsBegin) {
-                		$("#beginClassInstId").combobox('select', inClassId);
-                	} else {
-                		$("#beginClassInstId").combobox('select', data[0].classInstId);
+                	var flag = true;
+                	if(inClassId != null && inClassId != "" && inClassId != undefined) {
+                		for(var i = 0, len = data.length; i < len; i++) {
+                			if(data[i].classInstId == inClassId) {
+                				flag = false;
+                				break;
+                			}
+                		}
                 	}
-                }
-                var classInstId = $("#beginClassInstId").combobox("getValue");
-                if(classInstId != "" && classInstId != null && classInstId != undefined) {
-                	qryClassDetail(classInstId);
+                	if(flag) {
+                		$("#beginClassInstId").combobox('select', data[0].classInstId);
+                	} else {
+                		$("#beginClassInstId").combobox('select', inClassId);
+                	}
+                	var classInstId = $("#beginClassInstId").combobox("getValue");
+                	if(classInstId != "" && classInstId != null && classInstId != undefined) {
+                		qryClassDetail(classInstId);
+                	} else {
+                		$("#changeDiv").css("display", "none");
+                	}
                 } else {
-            		$("#changeDiv").css("display", "none");
-            	}
+                	$("#changeDiv").css("display", "none");
+                }
             },
             onChange : function(n, o) {
             	if(n != "" && n != null && n != undefined) {
@@ -184,18 +195,29 @@ function initClassInst(isBegin) {
     		onLoadSuccess : function () { //数据加载完毕事件
                 var data = $('#notBeginClassInstId').combobox('getData');
                 if (data.length > 0) {
-                	if(isBegin == inClassIsBegin) {
-                		$("#notBeginClassInstId").combobox('select', inClassId);
-                	} else {
-                		$("#notBeginClassInstId").combobox('select', data[0].classInstId);
+                	var flag = true;
+                	if(inClassId != null && inClassId != "" && inClassId != undefined) {
+                		for(var i = 0, len = data.length; i < len; i++) {
+                			if(data[i].classInstId == inClassId) {
+                				flag = false;
+                				break;
+                			}
+                		}
                 	}
-                }
-                var classInstId = $("#notBeginClassInstId").combobox("getValue");
-                if(classInstId != "" && classInstId != null && classInstId != undefined) {
-                	qryClassDetail(classInstId);
+                	if(flag) {
+                		$("#notBeginClassInstId").combobox('select', data[0].classInstId);
+                	} else {
+                		$("#notBeginClassInstId").combobox('select', inClassId);
+                	}
+                	var classInstId = $("#notBeginClassInstId").combobox("getValue");
+                	if(classInstId != "" && classInstId != null && classInstId != undefined) {
+                		qryClassDetail(classInstId);
+                	} else {
+                		$("#changeDiv").css("display", "none");
+                	}
                 } else {
-            		$("#changeDiv").css("display", "none");
-            	}
+                	$("#changeDiv").css("display", "none");
+                }
             },
             onChange : function(n, o) {
             	if(n != "" && n != null && n != undefined) {

@@ -113,8 +113,7 @@ $(document).ready(function() {
     						data: "param=" + param,
     						dataType: "json",
     						async: true,
-    						beforeSend: function()
-    						{
+    						beforeSend: function() {
     							$.messager.progress({title : '选班', msg : '正在选班，请稍等……'});
     						},
     						success: function (data) {
@@ -173,6 +172,8 @@ function initClassInst(isBegin) {
                 	} else {
                 		$("#beginClassInstId").combobox('select', oldClassInstId);
                 	}
+                } else {
+                	$("#changeDiv").css("display", "none");
                 }
                 var classInstId = $("#notBeginClassInstId").combobox("getValue");
                 if(classInstId != "" && classInstId != null && classInstId != undefined) {
@@ -213,8 +214,9 @@ function initClassInst(isBegin) {
                 	} else {
                 		$("#notBeginClassInstId").combobox('select', oldClassInstId);
                 	}
+                } else {
+                	$("#changeDiv").css("display", "none");
                 }
-                
                 var classInstId = $("#notBeginClassInstId").combobox("getValue");
                 if(classInstId != "" && classInstId != null && classInstId != undefined) {
                 	qryClassDetail(classInstId);

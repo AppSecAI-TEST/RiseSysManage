@@ -58,8 +58,8 @@
 						</td>
 	  					<td align="right"><span>是否进班：</span></td>
 	  					<td>
-	  						<input type="checkbox" name="isAttend" value="'003','005','006','007','009'"/><span>&nbsp;是</span>
-							&nbsp;&nbsp;<input type="checkbox" name="isAttend" value="'001','002'"/><span>&nbsp;否</span>
+	  						<input type="checkbox" name="isAttend" value="Y"/><span>&nbsp;是</span>
+							&nbsp;&nbsp;<input type="checkbox" name="isAttend" value="N"/><span>&nbsp;否</span>
 	  					</td>
 	  					<td align="right"><span>进班日期：</span></td>
 	  					<td width="100px">

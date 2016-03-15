@@ -125,6 +125,8 @@ function initClassInst(isBegin, classInstId) {
                     } else {
                 		$("#changeDiv").css("display", "none");
                 	}
+                } else {
+                	$("#changeDiv").css("display", "none");
                 }
             },
             onChange : function(n, o) {
@@ -163,13 +165,15 @@ function initClassInst(isBegin, classInstId) {
                 	} else {
                 		$("#notBeginClassInstId").combobox('select', classInstId);
                 	}
-                }
-                var classInstId = $("#notBeginClassInstId").combobox("getValue");
-                if(classInstId != "" && classInstId != null && classInstId != undefined) {
-                	qryClassDetail(classInstId);
+                	var classInstId = $("#notBeginClassInstId").combobox("getValue");
+                	if(classInstId != "" && classInstId != null && classInstId != undefined) {
+                		qryClassDetail(classInstId);
+                	} else {
+                		$("#changeDiv").css("display", "none");
+                	}
                 } else {
-            		$("#changeDiv").css("display", "none");
-            	}
+                	$("#changeDiv").css("display", "none");
+                }
             },
             onChange : function(n, o) {
 	        	if(n != "" && n != null && n != undefined) {
