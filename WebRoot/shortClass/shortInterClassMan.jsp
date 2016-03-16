@@ -23,6 +23,7 @@
 				var classStartTime = $("#classStartTime").datebox("getValue");
 				var planHours = $("#planHours").textbox("getValue");
 				var classEndTime = $("#classEndTime").datebox("getValue");
+				var nowDate = new Date();
 				var classStartDate = new Date(classStartTime);
 				var classEndDate = new Date(classEndTime);
 				if(classStartTime == "")
@@ -44,6 +45,10 @@
 				else if($(".shortSchooltimeId").length == 0)
 				{
 					$.messager.alert('提示',"上课计划不能为空,请核实后重新尝试","info");
+				}
+				else if(classStartDate.getTime() < nowDate.getTime())
+				{
+					$.messager.alert('提示',"开课时间必须大于当前时间,请核实后重新尝试","info");
 				}
 				else if(classEndDate.getTime() <= classStartDate.getTime())
 				{

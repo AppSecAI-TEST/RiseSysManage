@@ -14,92 +14,6 @@
   	<body style="padding-top:5px">
   		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
     	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
-    		<div title="退费审批管理" style="padding:5px;display:block;">
-    			<form id="qryRefundApproveFm">
-    				<table align="center" class="search_tab">
-    					<tr>
-    						<td width="70px" align="right"><span>校区：</span></td>
-			  				<td width="110px">
-								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-									url = "<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=252&fieldId=schoolId";
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-					      			onLoadSuccess:function(data){if(data.length > 0)$('approveSchoolId').combobox('setValue',data[0].schoolId);}">
-				        		</select>
-							</td>
-							<td width="70px" align="right"><span>联系电话：</span></td>
-							<td width="160px">
-								<input name="approvePhone" id="approvePhone" type="text" class="easyui-textbox" style="width: 150px; height: 25px;"/>
-							</td>
-							<td width="70px" align="right"><span>申请日期：</span></td>
-			  				<td width="240px">
-								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeApprove" name="startTimeApprove" data-options="formatter:myformatter, parser:myparser"/>
-								至
-								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApprove" name="endTimeApprove" data-options="formatter:myformatter, parser:myparser"/>
-							</td>
-							<td width="70px" align="right"><span>课程类型：</span></td>
-							<td>
-								<select id="approveCourseType" name="approveCourseType" class="easyui-combobox" style="width: 100px; height: 25px;">
-				        		</select>
-				        		<select id="approveStageId" name="approveStageId" class="easyui-combobox" style="width: 100px; height: 25px;">
-		        				</select>
-		        			</td>
-						</tr>
-						<tr>
-							<td align="right"><span>学员姓名：</span></td>
-							<td>
-								<input name="approveStudentId" id="approveStudentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
-							</td>
-		        			<td align="right"><span>退费状态：</span></td>
-							<td colspan="3">
-								<input type="checkbox" name="approveRefundState" value="'001'"/><span>已申请</span>
-								<input type="checkbox" name="approveRefundState" value="'002'"/><span>审批中</span>
-								<input type="checkbox" name="approveRefundState" value="'003'"/><span>打款中</span>
-								<input type="checkbox" name="approveRefundState" value="'004'"/><span>审批未通过</span>
-								<input type="checkbox" name="approveRefundState" value="'005'"/><span>成功退费</span>
-								<input type="checkbox" name="approveRefundState" value="'006'"/><span>取消</span>
-							</td>
-							<td align="right"><span>本人待审批：</span></td>
-							<td>
-								<input type="checkbox" />
-							</td>
-						</tr>
-						<tr>
-							<td colspan="8" align="center">
-								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryApproveBtn" funcNodeId="1025">查询</a>
-								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="resetApprove">重置</a>
-							</td>
-						</tr>
-    				</table>
-    			</form>
-				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="approve_list_data"
-				  		toolbar="#toolbarApprove" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
-						<thead>
-							<tr>
-								<th field="ck" align="center" checkbox="true" width="1%"></th>
-								<th field="refundFeeId" align="center" width="6%">申请编号</th>
-								<th field="schoolName" align="center" width="6%">校区</th>
-								<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
-								<th data-options="field:'byName',width:80,align:'center'">英文名</th>
-								<th data-options="field:'refundClassType',width:200,align:'center'">退费课程（班级类型）</th>
-								<th data-options="field:'applyName',width:80,align:'center'">申请人</th>
-								<th data-options="field:'approveName',width:120,align:'center'">当前节点审批人</th>
-								<th data-options="field:'refundState',width:100,align:'center'">退费状态</th>
-								<th data-options="field:'tacheName',width:120,align:'center'">当前环节</th>
-								<th data-options="field:'nextTacheName',width:120,align:'center'">下一环节</th>
-								<th data-options="field:'applyDate',width:100,align:'center'">申请日期</th>
-								<th data-options="field:'approveDate',width:120,align:'center'">审批通过日期</th>
-								<th data-options="field:'finishDate',width:100,align:'center'">成功时间</th>
-							</tr>
-						</thead>
-					</table>
-			  	<div id="toolbarApprove" style="padding: 2px; height: auto">
-			  		<a href="javascript:void(0)" id="refundApply" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">退费申请</a>
-			  		<a href="javascript:void(0)" id="refundApprove" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;">退费审批</a>
-		   			<a href="javascript:void(0)" id="refundView" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>
-		   			<a href="javascript:void(0)" id="refundCancel" class="easyui-linkbutton" iconCls="icon-cancel" style="width: 80px;">取消</a>
-		   			<a href="javascript:void(0)" id="refundApplyAgain" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">重新申请</a>
-				</div>
-    		</div>
     			<div title="退费课程查询" style="padding:5px;display:block;">
     			<form id="qryRefundCourseFm">
     				<table class="search_tab">
@@ -210,7 +124,7 @@
 								<input type="checkbox" name="refundState" value="'005'"/><span>成功退费</span>
 								<input type="checkbox" name="refundState" value="'006'"/><span>取消</span>
 							</td>
-							<td align="center">
+							<td align="right">
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1023">查询</a>
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 							</td>
@@ -244,6 +158,92 @@
 					</table>
 			  	<div id="toolbarApply" style="padding: 2px; height: auto">
 		   			<a href="javascript:void(0)" id="view" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>
+				</div>
+    		</div>
+    		<div title="退费审批管理" style="padding:5px;display:block;">
+    			<form id="qryRefundApproveFm">
+    				<table align="center" class="search_tab">
+    					<tr>
+    						<td width="70px" align="right"><span>校区：</span></td>
+			  				<td width="110px">
+								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+									url = "<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=252&fieldId=schoolId";
+									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
+					      			onLoadSuccess:function(data){if(data.length > 0)$('approveSchoolId').combobox('setValue',data[0].schoolId);}">
+				        		</select>
+							</td>
+							<td width="70px" align="right"><span>联系电话：</span></td>
+							<td width="160px">
+								<input name="approvePhone" id="approvePhone" type="text" class="easyui-textbox" style="width: 150px; height: 25px;"/>
+							</td>
+							<td width="70px" align="right"><span>申请日期：</span></td>
+			  				<td width="240px">
+								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeApprove" name="startTimeApprove" data-options="formatter:myformatter, parser:myparser"/>
+								至
+								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApprove" name="endTimeApprove" data-options="formatter:myformatter, parser:myparser"/>
+							</td>
+							<td width="70px" align="right"><span>课程类型：</span></td>
+							<td>
+								<select id="approveCourseType" name="approveCourseType" class="easyui-combobox" style="width: 100px; height: 25px;">
+				        		</select>
+				        		<select id="approveStageId" name="approveStageId" class="easyui-combobox" style="width: 100px; height: 25px;">
+		        				</select>
+		        			</td>
+						</tr>
+						<tr>
+							<td align="right"><span>学员姓名：</span></td>
+							<td>
+								<input name="approveStudentId" id="approveStudentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
+							</td>
+		        			<td align="right"><span>退费状态：</span></td>
+							<td colspan="3">
+								<input type="checkbox" name="approveRefundState" value="'001'"/><span>已申请</span>
+								<input type="checkbox" name="approveRefundState" value="'002'"/><span>审批中</span>
+								<input type="checkbox" name="approveRefundState" value="'003'"/><span>打款中</span>
+								<input type="checkbox" name="approveRefundState" value="'004'"/><span>审批未通过</span>
+								<input type="checkbox" name="approveRefundState" value="'005'"/><span>成功退费</span>
+								<input type="checkbox" name="approveRefundState" value="'006'"/><span>取消</span>
+							</td>
+							<td align="right"><span>本人待审批：</span></td>
+							<td>
+								<input type="checkbox" />
+							</td>
+						</tr>
+						<tr>
+							<td colspan="8" align="right">
+								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryApproveBtn" funcNodeId="1025">查询</a>
+								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="resetApprove">重置</a>
+							</td>
+						</tr>
+    				</table>
+    			</form>
+				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="approve_list_data"
+				  		toolbar="#toolbarApprove" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
+						<thead>
+							<tr>
+								<th field="ck" align="center" checkbox="true" width="1%"></th>
+								<th field="refundFeeId" align="center" width="6%">申请编号</th>
+								<th field="schoolName" align="center" width="6%">校区</th>
+								<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
+								<th data-options="field:'byName',width:80,align:'center'">英文名</th>
+								<th data-options="field:'refundClassType',width:200,align:'center'">退费课程（班级类型）</th>
+								<th data-options="field:'applyName',width:80,align:'center'">申请人</th>
+								<th data-options="field:'approveName',width:120,align:'center'">当前节点审批人</th>
+								<th data-options="field:'refundState',width:100,align:'center'">退费状态</th>
+								<th data-options="field:'tacheName',width:120,align:'center'">当前环节</th>
+								<th data-options="field:'nextTacheName',width:120,align:'center'">下一环节</th>
+								<th data-options="field:'applyDate',width:100,align:'center'">申请日期</th>
+								<th data-options="field:'approveDate',width:120,align:'center'">审批通过日期</th>
+								<th data-options="field:'finishDate',width:100,align:'center'">成功时间</th>
+							</tr>
+						</thead>
+					</table>
+			  	<div id="toolbarApprove" style="padding: 2px; height: auto">
+			  		<a href="javascript:void(0)" id="refundApply" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">退费申请</a>
+			  		<a href="javascript:void(0)" id="refundApprove" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;">退费审批</a>
+		   			<a href="javascript:void(0)" id="refundView" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>
+		   			<a href="javascript:void(0)" id="refundCancel" class="easyui-linkbutton" iconCls="icon-cancel" style="width: 80px;">取消</a>
+		   			<a href="javascript:void(0)" id="refundApplyAgain" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">重新申请</a>
 				</div>
     		</div>
     	</div>
