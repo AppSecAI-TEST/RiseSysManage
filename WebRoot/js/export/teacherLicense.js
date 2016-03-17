@@ -12,9 +12,8 @@ $(document).ready(function() {
 	    		queryParams:{
 	    			param : obj
 	    		},
-	    		onLoadSuccess:function(){
-	    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
-	    			$('#list_data').datagrid('clearSelections');
+	    		onLoadSuccess:function() {
+	    			mergeCellsByField("list_data", "schoolName");
 	    		}
 	    	});
     	}else{
@@ -23,13 +22,45 @@ $(document).ready(function() {
     });
 	
 	//页面重置
-     $("#resetBtn").click(function() 
-    {
+    $("#resetBtn").click(function() {
     	$("#qryFm").form('clear');//清空窗体数据  
     	//校区赋默认值
-    	if($("#schoolId").combobox("getData").length>0){
+    	if($("#schoolId").combobox("getData").length > 0) {
     		$("#schoolId").combobox("select",$("#schoolId").combobox("getData")[0].schoolId);
     	}
     });
-	
 });
+
+function mergeCellsByField(tableId, colList) {
+    var rowspan;
+    var megerIndex;
+    var before = "";
+    var after = "";
+    var target = $("#" + tableId);
+    var colunms = colList.split(",");
+    var rows = target.datagrid("getRows").length;
+    for (var j = colunms.length - 1; j >= 0; j--) {
+    	var field = colunms[j];
+    	before = "";
+        rowspan = 1;
+        megerIndex = 0;
+        for (var i = 0; i <= rows; i++) {
+            if (i == rows) {
+            	after = "";
+            } else {
+            	after = target.datagrid("getRows")[i][field];
+            }
+            if (before == after) {
+            	rowspan += 1;
+            } else {
+            	target.datagrid("mergeCells", {
+        			index: i - rowspan,
+        			field: field,　　// 合并字段
+        			rowspan: rowspan
+        		});
+            	rowspan = 1;
+            }
+            before = after;
+        }
+    }
+}
