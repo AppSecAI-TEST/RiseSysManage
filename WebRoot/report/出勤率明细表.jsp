@@ -47,7 +47,7 @@
 						<span>班级：</span>
 					</td>
 					<td>
-						<select id="classInfo" name="classInfo" style="width:110px;height:25px;" ></select>
+						<input name="classInfo" id="classInfo" type="text" style="width:100px;height:25px;" class="easyui-textbox" />	
 					</td>
 				</tr>
 				<tr>
@@ -101,9 +101,6 @@
 			ajaxLoading("正在处理，请稍待。。。");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID",function(data){
 				$("#classPharse").combobox("loadData",data);
-			},"json");
-			$.post("<%=path %>/pub/pageComboxList.do?funcNodeId=381&fieldId=classMan",function(data){
-				$("#classInfo").combobox("loadData",data);
 				ajaxLoadEnd();
 			},"json");
 			$(document).ready(function(){
@@ -112,15 +109,6 @@
 					valueField: 'codeFlag', 
 					textField: 'codeName', 
 					panelHeight: 'auto'
-				});
-				$("#classInfo").combobox({
-					formatter:function(row){
-						return '<span>'+row.className+'</span>';
-					},
-					valueField: 'classInstId',
-					textField: 'className',
-					//panelHeight: 'auto'
-					listHeight:200
 				});
 				initReportButton("resetBtn","attFm","schoolId")
 				exportLink("hisViewBtn","attList");
@@ -144,7 +132,7 @@
 				$("#classPharse").combobox("setValue","");
 				$("#classStart").datebox("setValue","");
 				$("#classEnd").datebox("setValue","");
-				$("#classInfo").combobox("setValue","");
+				$("#classInfo").textbox("setValue","");
 				$("#teacher").textbox("setValue","");
 				$("#attendStartRate").numberbox("setValue","");
 				$("#attendEndRate").numberbox("setValue","");

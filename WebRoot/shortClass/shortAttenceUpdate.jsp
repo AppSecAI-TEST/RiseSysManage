@@ -145,7 +145,7 @@
 							{
 								$.messager.alert('提示',"当前添加的老师课时已经超过了排课课时,请核实后重新尝试");
 							}
-							else if(teacherTaTime+parseInt(attRecordLessonHour) > teacherTime && attRecordClassType == "TA")
+							else if(teacherTaTime+parseInt(attRecordLessonHour) > teacherNum && attRecordClassType == "TA")
 							{
 								$.messager.alert('提示',"添加TA老师课时量已超过T老师总课时量,不能再添加老师");
 							}
