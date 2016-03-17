@@ -436,7 +436,7 @@ function submitMergeInfo()
 	}
 	var flag = true;
 	$("input[type='hidden']").each(function(){
-		if($(this).val()=="")
+		if($(this).val()==""&&$(this).attr("id")!="tabsInfo")
 		{
 			flag =false;
 			return false;
