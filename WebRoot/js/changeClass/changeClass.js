@@ -146,8 +146,7 @@ $(document).ready(function() {
 							data: "param=" + param,
 							dataType: "json",
 							async: true,
-							beforeSend: function()
-							{
+							beforeSend: function() {
 								$.messager.progress({title : '转出班级', msg : '正在转出班级，请稍等……'});
 							},
 							success: function (data) {
@@ -216,7 +215,7 @@ $(document).ready(function() {
 		var row = $('#apply_list_data').datagrid('getSelected');
 		if(row) {
 			var changeClassState = row.changeClassState;
-			if("007" != changeClassState && "006" != changeClassState) {
+			if("004" == changeClassState) {
 				var applyId = row.applyId;
 				var schoolId = row.schoolId;
 				var studentId = row.studentId;
@@ -224,7 +223,7 @@ $(document).ready(function() {
 				window.location.href = "/sys/changeClass/updateChangeClass.jsp?studentId="+studentId+"&studentCourseId="+studentCourseId+"&applyId="+applyId+"&schoolId="+schoolId;
 			} else {
 				var changeStateText = row.changeStateText;
-				$.messager.alert('提示', "您选择的转班申请已"+changeStateText+"，不能更改转班！");
+				$.messager.alert('提示', "您选择的转班申请"+changeStateText+"，不能更改转班！");
 			}
 		} else {
 			$.messager.alert('提示', "请先选择您要更改转班的转班申请！");
