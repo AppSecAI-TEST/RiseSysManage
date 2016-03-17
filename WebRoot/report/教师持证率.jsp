@@ -49,7 +49,8 @@
   				</tr>
   			</table>
   		</form>
-		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:550" id="list_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
+		<table class="easyui-datagrid" align="center" title="查询结果" style="height: 435px" id="list_data" 
+			toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
 			<thead>
 				<tr>
 					<th field="schoolName" align="center" width="8%" ><span>校区</span></th>
@@ -57,7 +58,7 @@
 					<th field="classNum" align="center" width="7%" ><span>班级数</span></th>
 					<th field="teacherNum" align="center" width="7%" ><span>教师数</span></th>
 					<th field="licenseNum" align="center" width="7%" ><span>持证数</span></th>
-					<th field="rate" align="center" width="7%" ><span>持证率</span></th>
+					<th field="rateText" align="center" width="7%" ><span>持证率</span></th>
 					<th field="teacherNum" align="center" width="9%" ><span>目标持证数</span></th>
 					<th field="lackLicense" align="center" width="9%" ><span>缺口持证数</span></th>
 					<th field="noLicenseTeachers" align="center" width="20%" ><span>带班未持证教师名单</span></th>

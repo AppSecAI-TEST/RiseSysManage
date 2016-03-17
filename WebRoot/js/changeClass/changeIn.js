@@ -150,11 +150,12 @@ function initClassInst(isBegin) {
                 	} else {
                 		$("#beginClassInstId").combobox('select', inClassId);
                 	}
-                	
                 	var classInstId = $("#beginClassInstId").combobox("getValue");
                     if(classInstId != "" && classInstId != null && classInstId != undefined) {
                     	qryClassDetail(classInstId);
                     }
+                } else {
+                	$("#changeDiv").css("display", "none");
                 }
             },
             onChange : function(n, o) {
@@ -193,11 +194,12 @@ function initClassInst(isBegin) {
                 	} else {
                 		$("#notBeginClassInstId").combobox('select', inClassId);
                 	}
-                	
                 	var classInstId = $("#notBeginClassInstId").combobox("getValue");
                     if(classInstId != "" && classInstId != null && classInstId != undefined) {
                     	qryClassDetail(classInstId);
                     }
+                } else {
+                	$("#changeDiv").css("display", "none");
                 }
             },
             onChange : function(n, o) {

@@ -107,6 +107,8 @@ function initClassInst(isBegin) {
                 var data = $('#beginClassInstId').combobox('getData');
                 if (data.length > 0) {
                 	$("#beginClassInstId").combobox('select', data[0].classInstId);
+                } else {
+                	$("#changeDiv").css("display", "none");
                 }
             },
             onChange : function(n, o) {
@@ -117,8 +119,7 @@ function initClassInst(isBegin) {
             		data: "param=" + param,
             		dataType: "json",
             		async: true,
-            		beforeSend: function()
-            		{
+            		beforeSend: function() {
             			$.messager.progress({title : '班级维护', msg : '正在查询班级信息，请稍等……'});
             		},
             		success: function (data) {
@@ -150,6 +151,8 @@ function initClassInst(isBegin) {
                 var data = $('#notBeginClassInstId').combobox('getData');
                 if (data.length > 0) {
                 	$("#notBeginClassInstId").combobox('select', data[0].classInstId);
+                } else {
+                	$("#changeDiv").css("display", "none");
                 }
             },
             onChange : function(n, o) {
@@ -160,8 +163,7 @@ function initClassInst(isBegin) {
             		data: "param=" + param,
             		dataType: "json",
             		async: true,
-            		beforeSend: function()
-            		{
+            		beforeSend: function() {
             			$.messager.progress({title : '班级维护', msg : '正在查询班级信息，请稍等……'});
             		},
             		success: function (data) {

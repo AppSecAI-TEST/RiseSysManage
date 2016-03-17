@@ -1,26 +1,24 @@
 $(document).ready(function() {
-	var clearFlag =true;
-	var schoolData =getSchools();
+	var clearFlag = true;
+	var schoolData = getSchools();
 	$("#schoolId").combobox({
 		loader:function(param,success,error){  
 		    $.ajax({  
 				url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
 				dataType: 'json',  
 				success: function(data){
-		    	if(data.length==schoolData.length)
-		    	{
+		    	if(data.length == schoolData.length) {
 		    		data.unshift({schoolName:'所有校区',schoolId:""});  
-		    	}	
+		    	}
 				success(data);  
 				}
 			});  
    		},
-		onLoadSuccess:function(){
-			var arr =$("#schoolId").combobox("getData");
-			if(arr.length<schoolData.length)
-			{
+		onLoadSuccess: function() {
+			var arr = $("#schoolId").combobox("getData");
+			if(arr.length < schoolData.length) {
 				$("#schoolId").combobox("select",arr[0].schoolId);
-				clearFlag =false;
+				clearFlag = false;
 			}	
 		}
 	});
@@ -30,18 +28,9 @@ $(document).ready(function() {
 			return;
 		} else {
 			var object = $("#qryFm").serializeObject();
-			if($("[name='isAttend']").length > 0) {
-				var s = "";
-				$('input[name="isAttend"]:checked').each(function() {
-					s += $(this).val() + ",";
-				});
-				s = s.substring(0, s.length - 1);
-				object.isAttend = s;
-			}
-			var obj = JSON.stringify(object);
-			obj = obj.substring(0, obj.length - 1);
 			var funcNodeId = $("#qryBtn").attr("funcNodeId");
-			obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+			object.funcNodeId = funcNodeId;
+			var obj = JSON.stringify(object);
 			$('#list_data').datagrid({
 				url : "/sys/pubData/qryDataListByPage.do",
 				queryParams:{
