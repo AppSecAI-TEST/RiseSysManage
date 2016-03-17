@@ -169,7 +169,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="8" align="center">
+					<td colspan="8" align="right" style="padding-right:85px">
 						<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
 						<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
 					</td>

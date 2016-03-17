@@ -81,7 +81,7 @@
 				$('#tab').tabs({
 				    border:true,
 				    onSelect:function(title){
-						console.log(title+' is selected');
+						
 				    }
 				});
 			});

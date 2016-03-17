@@ -44,7 +44,7 @@
 			var classHoursData = '${classHours}';
 			classTimeData = eval("("+classTimeData+")");
 			classHoursData = eval("("+classHoursData+")");
-			$.post("/sys/pubData/qryClassInstList.do",{schoolId:${sessionScope.StaffT.schoolId},courseType:'${classAttendT.studentAttendList[0].studentCourseT.courseType}',stageId:'${classAttendT.studentAttendList[0].stageId}',classType:'${classAttendT.studentAttendList[0].classType}',classState:"'001','002','003','004','005'",classInstId:""},function(data){
+			$.post("/sys/pubData/qryClassInstList.do",{schoolId:${classAttendT.schoolId},courseType:'${classAttendT.studentAttendList[0].studentCourseT.courseType}',stageId:'${classAttendT.studentAttendList[0].stageId}',classType:'${classAttendT.studentAttendList[0].classType}',classState:"'001','002','003','004','005'",classInstId:""},function(data){
 				gClassList = data;
 				$("#makeupValue").combobox({
    					valueField : "classInstId",
@@ -58,7 +58,7 @@
    				$("#makeupValue").combobox("setValue","");
 				$("#makeupValue").combobox("setText","请选择补课班级");
 			},"json");
-			$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:${sessionScope.StaffT.schoolId}},function(data){
+			$.post("/sys/pubData/getTeacherBySchoolId.do",{schoolId:${classAttendT.schoolId}},function(data){
 				gTeacherList = data;
 			},"json");
 			$(document).ready(function(){
@@ -108,9 +108,9 @@
 			{
 				$("#makeupValue").combobox("loadData",new Array());
 				$("#makeupValue").combobox({
-					formatter:formatTeacherName,
+					formatter:formatTeacher,
 					valueField: 'teacherId', 
-					textField: 'teacherName',
+					textField: 'byName',
 					data:gTeacherList,
 				});
 				$("#makeupValue").combobox("setValue","");

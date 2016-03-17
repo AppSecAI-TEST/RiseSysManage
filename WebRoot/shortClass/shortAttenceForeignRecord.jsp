@@ -26,26 +26,6 @@
 					$("#endTime").timespinner("setValue","${shortSchooltimeT.endTime}");
 					$("#classLessonHour").textbox("setValue","${shortSchooltimeT.lessionHours}");
 				});
-				$("#startTime").timespinner({
-					onChange:function(row){
-						if($("#endTime").timespinner("getValue") != "")
-						{
-							var endTime = parseInt($("#endTime").timespinner("getHours"))+(parseInt($("#endTime").timespinner("getMinutes"))>0?1:0);
-							var startTime = parseInt($("#startTime").timespinner("getHours"))+(parseInt($("#startTime").timespinner("getMinutes"))>0?1:0);
-							$("#classLessonHour").textbox("setValue",(endTime-startTime));
-						}
-					}
-				});
-				$("#endTime").timespinner({
-					onChange:function(row){
-						if($("#startTime").timespinner("getValue") != "")
-						{
-							var endTime = parseInt($("#endTime").timespinner("getHours"))+(parseInt($("#endTime").timespinner("getMinutes"))>0?1:0);
-							var startTime = parseInt($("#startTime").timespinner("getHours"))+(parseInt($("#startTime").timespinner("getMinutes"))>0?1:0);
-							$("#classLessonHour").textbox("setValue",(endTime-startTime));
-						}
-					}
-				});
 				$("#classRoomId").combobox({
 					formatter:formatRoom, 
 					valueField: 'roomId', 
@@ -302,7 +282,7 @@
 			</tr>
 			<tr>
 				<td align="right">课时：</td>
-				<td><input name="classLessonHour" id="classLessonHour" type="text" style="width:200px" class="easyui-textbox" data-options="readonly:true" /></td>
+				<td><input name="classLessonHour" id="classLessonHour" type="text" style="width:200px" class="easyui-textbox" /></td>
 			</tr>
 		</table>
 		<table class="tab" id="teacherTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">

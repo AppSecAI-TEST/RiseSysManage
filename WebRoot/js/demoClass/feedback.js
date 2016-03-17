@@ -20,32 +20,6 @@ $(document).ready(function() {
 			});
 		}
 	});
-	$("#startTime").timespinner({
-		onChange:function(row){
-			if($("#endTime").timespinner("getValue") != "")
-			{
-				var endTime = parseInt($("#endTime").timespinner("getHours"))+(parseInt($("#endTime").timespinner("getMinutes"))>0?1:0);
-				var startTime = parseInt($("#startTime").timespinner("getHours"))+(parseInt($("#startTime").timespinner("getMinutes"))>0?1:0);
-				$("#infoTab").find("tr:eq(2)").find("td:eq(1)").html(
-							"&nbsp;&nbsp;<span>" + (endTime-startTime)
-									+ "</span>");
-				$("#hours").val(endTime-startTime);
-			}
-		}
-	});
-	$("#endTime").timespinner({
-		onChange:function(row){
-			if($("#startTime").timespinner("getValue") != "")
-			{
-				var endTime = parseInt($("#endTime").timespinner("getHours"))+(parseInt($("#endTime").timespinner("getMinutes"))>0?1:0);
-				var startTime = parseInt($("#startTime").timespinner("getHours"))+(parseInt($("#startTime").timespinner("getMinutes"))>0?1:0);
-				$("#infoTab").find("tr:eq(2)").find("td:eq(1)").html(
-							"&nbsp;&nbsp;<span>" + (endTime-startTime)
-									+ "</span>");
-				$("#hours").val(endTime-startTime);
-			}
-		}
-	});
 	initInfo();
 });
 

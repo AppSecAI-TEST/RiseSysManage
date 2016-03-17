@@ -80,7 +80,7 @@
 				$("#classState").combobox("setValue","");
 				$("#feeStartTime").datebox("setValue","");
 				$("#feeEndTime").datebox("setValue","");
-				$("#expireDate").datebox("setValue","");
+				$("#expireDate").textbox("setValue","");
 				$("input[name='isExpire']").each(function(i,node){
 					node.checked = false; 
 				});
@@ -116,7 +116,7 @@
 					<td width="100px;">
 						<input name="contactPhone" id="contactPhone" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 					</td>
-					<td align="left">
+					<td align="right">
 						是否过期：
 					</td>
 					<td align="left">
@@ -143,7 +143,7 @@
 					<td>
 						<input name="expireDate" id="expireDate" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 					</td>
-					<td colspan="4">
+					<td colspan="4" align="right" style="padding-right:70px;">
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
 						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
 					</td>

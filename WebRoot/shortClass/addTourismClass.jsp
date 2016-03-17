@@ -222,7 +222,7 @@
 		</table>
 		<table region="center" class="tab" id="teacherList" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
-				<td colspan="3"><select id="schoolId" name="schoolId" style="width:120px" ></select>&nbsp;&nbsp;<select id="teacherId" name="teacherId" style="width:120px" ></select>&nbsp;&nbsp;<a href="javascript:void(0)" id="addTeacherBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;" onclick="addTeacherFunc()">添加</a></td>
+				<td colspan="3">&nbsp;校区:<select id="schoolId" name="schoolId" style="width:120px" ></select>&nbsp;&nbsp;老师:<select id="teacherId" name="teacherId" style="width:120px" ></select>&nbsp;&nbsp;<a href="javascript:void(0)" id="addTeacherBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;" onclick="addTeacherFunc()">添加</a></td>
 			</tr>
 			<tr id="emptyTeacher">
 				<td colspan="3" align="center">暂未安排老师</td>
