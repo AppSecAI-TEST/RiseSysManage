@@ -17,22 +17,22 @@
  		<form id="qryFm">
   			<table class="search_tab">
   				<tr>
-  					<td align="right">校　　区：</td>
-  					<td>
+  					<td align="right" width="70px;">校区：</td>
+  					<td width="100px;">
   					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 			      		onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
 			      		url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=5041&fieldId=schoolId">
 		        		</select>
   					</td>
-  					<td align="right">教师：</td>
-  					<td>
+  					<td align="right" width="50px;">教师：</td>
+  					<td width="100px;">
   						<input name="teacherId"  class="easyui-combobox vaildatebox" id="teacherId"
 								style="width: 100px; height: 25px;"
 								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"   />
   					</td>
-  					<td align="right">职务：</td>
-  					<td>
+  					<td align="right" width="50px;">职务：</td>
+  					<td width="100px;">
   						<select name='postId' class="easyui-combobox" style="width:100px;height: 25px"
   						data-options="valueField: 'postId', textField: 'postName', panelHeight: 'auto',
 			      		onLoadSuccess:function(data){$('#postId').combobox('setValue',data[0].postId);}"
@@ -42,18 +42,17 @@
   					<td>
   						教师状态：<input name="P" id="P" value="P" type="checkbox">在职 &nbsp;<input name="R_L" id="R_L" value="R_L" type="checkbox">待离职 &nbsp;<input value="L" name="L" id="L" type="checkbox">离职 &nbsp;
   					</td>
-  						<td align="right">
-						<span>日期：</span>
-					</td>
-					<td>
-						<input class="easyui-datebox" type="text" required="true" style="width:100px; height: 25px;" id="startTime" name="startTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
-						至
-						<input class="easyui-datebox" required="true" type="text" style="width:100px; height: 25px;" id="endTime" name="endTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
-					</td>
-					
   				</tr>
   				<tr>
-  				<td align="center" colspan="10">
+  				<td align="right">
+						<span>日期：</span>
+					</td>
+				<td colspan="3">
+						<input class="easyui-datebox" type="text" required="true" style="width:100px; height: 25px;" id="startTime" name="startTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input class="easyui-datebox" required="true" type="text" style="width:100px; height: 25px;" id="endTime" name="endTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
+				</td>
+  				<td align="left" colspan="6">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1000">查询</a>
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 					</td>
