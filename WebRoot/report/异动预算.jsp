@@ -40,30 +40,30 @@
 	  				</tr>
 	  			</table>
   			</form>
-			<table class="easyui-datagrid" style="height:auto;" id="list_data" data-options="onClickCell: onClickCell"
-					title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
-					<thead>
-						<tr>
-							<th field="schoolName" align="center" width="6%" rowspan="2">校区</th>
-							<th field="endDate" align="center" width="8%" rowspan="2">日期</th>
-							<th field="studentInSchoolNum" align="center" width="6%" rowspan="2">在校人数</th>
-							<th field="studyingNum" align="center" width="6%" rowspan="2">在读人数</th>
-							<th field="exceptionNum" align="center" width="7%" rowspan="2">异动总人数</th>
-							<th field="exceptionRate" align="center" width="7%" rowspan="2">异动总占比</th>
-							<th data-options="field:'exceptionInClassNum', width:'8%', align:'center', rowspan:2, editor:{type:'numberbox',options:{precision:0, min:0, max:100}}">异动进班人数</th>
-							<th field="endClass" align="center" width="10%" colspan="2">本周结课</th>
-							<th data-options="field:'newPlanNum', width:'6%', align:'center', rowspan:2, editor:{type:'numberbox',options:{precision:0, min:0, max:100}}">新招计划</th>
-							<th data-options="field:'changeOutClassNum', width:'6%', align:'center', rowspan:2, editor:{type:'numberbox',options:{precision:0, min:0, max:100}}">转出进班</th>
-							<th data-options="field:'changeInClassNum', width:'6%', align:'center', rowspan:2, editor:{type:'numberbox',options:{precision:0, min:0, max:100}}">转入进班</th>
-							<th data-options="field:'exceptionRefundNum', width:'6%', align:'center', rowspan:2, editor:{type:'numberbox',options:{precision:0, min:0, max:100}}">异动退费</th>
-							<th data-options="field:'studyingRefundNum', width:'6%', align:'center', rowspan:2, editor:{type:'numberbox',options:{precision:0, min:0, max:100}}">在读退费</th>
-						</tr>
-						<tr>
-							<th data-options="field:'finishStudyingNum', width:'5%', align:'center', editor:{type:'numberbox',options:{precision:0, min:0, max:100}}">在读</th>
-							<th data-options="field:'finishHigherNum', width:'5%', align:'center', editor:{type:'numberbox',options:{precision:0, min:0, max:100}}">已升</th>
-						</tr>
-					</thead>
-				</table>
+			<table class="easyui-datagrid" style="height:auto;" id="list_data" title="查询结果" 
+				toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
+				<thead>
+					<tr>
+						<th field="schoolName" align="center" width="6%" rowspan="2">校区</th>
+						<th field="endDate" align="center" width="8%" rowspan="2">日期</th>
+						<th field="studentInSchoolNum" align="center" width="6%" rowspan="2">在校人数</th>
+						<th field="studyingNum" align="center" width="6%" rowspan="2">在读人数</th>
+						<th field="exceptionNum" align="center" width="7%" rowspan="2">异动总人数</th>
+						<th field="exceptionRate" align="center" width="7%" rowspan="2">异动总占比</th>
+						<th data-options="field:'exceptionInClassNum', width:'8%', align:'center', rowspan:2, formatter:formatExceptionIn">异动进班人数</th>
+						<th field="endClass" align="center" width="10%" colspan="2">本周结课</th>
+						<th data-options="field:'newPlanNum', width:'6%', align:'center', rowspan:2, formatter:formatNewPlan">新招计划</th>
+						<th data-options="field:'changeOutClassNum', width:'6%', align:'center', rowspan:2, formatter:formatChangeOut">转出进班</th>
+						<th data-options="field:'changeInClassNum', width:'6%', align:'center', rowspan:2, formatter:formatChangeIn">转入进班</th>
+						<th data-options="field:'exceptionRefundNum', width:'6%', align:'center', rowspan:2, formatter:formatExceptionRefund">异动退费</th>
+						<th data-options="field:'studyingRefundNum', width:'6%', align:'center', rowspan:2, formatter:formatStudyingRefund">在读退费</th>
+					</tr>
+					<tr>
+						<th data-options="field:'finishStudyingNum', width:'5%', align:'center', formatter:formatFinishStudying">在读</th>
+						<th data-options="field:'finishHigherNum', width:'5%', align:'center', formatter:formatFinishHigher">已升</th>
+					</tr>
+				</thead>
+			</table>
 			<div id="toolbar" style="padding: 2px; height: auto">
 	   			<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px;">导出</a>
 	   			<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 120px;">提交异动预算</a>

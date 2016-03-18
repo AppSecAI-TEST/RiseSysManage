@@ -459,6 +459,87 @@ function formatFinishBonus(value, row, index) {
 	}
 }
 
+function formatExceptionIn(value, row, index) {
+	var date = new Date;
+	var month = date.getMonth() + 2;
+	month = (month < 10 ? "0" + month : month);
+	if(month == row.month) {
+		return '<input class="number" id="exceptionIn' + index + '" data-options="min:0,max:100,precision:0" style="width:100%; height: 23px;" value="' + value + '"/>';
+	} else {
+		return value;
+	}
+}
+function formatNewPlan(value, row, index) {
+	var date = new Date;
+	var month = date.getMonth() + 2;
+	month = (month < 10 ? "0" + month : month);
+	if(month == row.month) {
+		return '<input class="number" id="newPlan' + index + '" data-options="min:0,max:100,precision:0" style="width:100%; height: 23px;" value="' + value + '"/>';
+	} else {
+		return value;
+	}
+}
+function formatChangeOut(value, row, index) {
+	var date = new Date;
+	var month = date.getMonth() + 2;
+	month = (month < 10 ? "0" + month : month);
+	if(month == row.month) {
+		return '<input class="number" id="changeOut' + index + '" data-options="min:0,max:100,precision:0" style="width:100%; height: 23px;" value="' + value + '"/>';
+	} else {
+		return value;
+	}
+}
+function formatChangeIn(value, row, index) {
+	var date = new Date;
+	var month = date.getMonth() + 2;
+	month = (month < 10 ? "0" + month : month);
+	if(month == row.month) {
+		return '<input class="number" id="changeIn' + index + '" data-options="min:0,max:100,precision:0" style="width:100%; height: 23px;" value="' + value + '"/>';
+	} else {
+		return value;
+	}
+}
+function formatExceptionRefund(value, row, index) {
+	var date = new Date;
+	var month = date.getMonth() + 2;
+	month = (month < 10 ? "0" + month : month);
+	if(month == row.month) {
+		return '<input class="number" id="exceptionRefund' + index + '" data-options="min:0,max:100,precision:0" style="width:100%; height: 23px;" value="' + value + '"/>';
+	} else {
+		return value;
+	}
+}
+function formatStudyingRefund(value, row, index) {
+	var date = new Date;
+	var month = date.getMonth() + 2;
+	month = (month < 10 ? "0" + month : month);
+	if(month == row.month) {
+		return '<input class="number" id="studyingRefund' + index + '" data-options="min:0,max:100,precision:0" style="width:100%; height: 23px;" value="' + value + '"/>';
+	} else {
+		return value;
+	}
+}
+function formatFinishStudying(value, row, index) {
+	var date = new Date;
+	var month = date.getMonth() + 2;
+	month = (month < 10 ? "0" + month : month);
+	if(month == row.month) {
+		return '<input class="number" id="finishStudying' + index + '" data-options="min:0,max:100,precision:0" style="width:100%; height: 23px;" value="' + value + '"/>';
+	} else {
+		return value;
+	}
+}
+function formatFinishHigher(value, row, index) {
+	var date = new Date;
+	var month = date.getMonth() + 2;
+	month = (month < 10 ? "0" + month : month);
+	if(month == row.month) {
+		return '<input class="number" id="finishHigher' + index + '" data-options="min:0,max:100,precision:0" style="width:100%; height: 23px;" value="' + value + '"/>';
+	} else {
+		return value;
+	}
+}
+
 function formatChangeBaseNum(value, row, index) {
 	if(row.studyingNum == "1") {
 		return "<a href='javascript:void(0)' onclick='changeStudentBaseNum("+row.baseNumStudentId+")' class='edit' style='width: 100px;'><span>修改基数</span></a>";
