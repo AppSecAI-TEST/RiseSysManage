@@ -158,7 +158,7 @@
 						planClassNum:planClassNum,
 						openDate:classStartTime,
 						finishDate:classEndTime,
-						remark:remark,
+						remark:string2Json(remark),
 						createId:${sessionScope.StaffT.staffId},
 						handlerId:${sessionScope.StaffT.staffId},
 						teacherList:null

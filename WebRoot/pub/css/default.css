@@ -1,5 +1,5 @@
 @CHARSET "UTF-8";
-body{margin:0; padding:0;background:none;font-size:13px;font-family:sans-serif,'微软雅黑';padding-top:5px; padding-left: 5px;}
+body{margin:0; padding:0;background:none;font-size:13px;font-family:'微软雅黑',sans-serif;padding-top:5px; padding-left: 5px;}
 a{color:#08c;text-decoration:none}
 a:hover,a:focus{color:#005580;text-decoration:underline}
 a:focus,a:hover,a:active {outline: 0;}
@@ -78,7 +78,7 @@ input[type="file"],input[type="image"],input[type="submit"],input[type="reset"],
 .maintable1 tr {height: 30px;}
 .maintable1 td {border: 1px solid #ccc; padding: 5px;} 
 
-span {font-family: Arial,微软雅黑,宋体; font-size: 13px;}
+span {font-family:'微软雅黑','Arial','宋体'; font-size: 13px;}
 .linkmore{color : #0099FF; text-decoration : none; cursor:pointer;}
 .linkmore:hover{color : ED0000 !important;}
 .linkmore1{color : #000000;text-decoration : none;}

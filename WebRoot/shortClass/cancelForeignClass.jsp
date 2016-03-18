@@ -18,7 +18,7 @@
 				$.messager.confirm("提示", "您确定要取消该课程吗？", function (data) {
 		            if(data){
 		            	ajaxLoading("正在处理，请稍待。。。");
-		                $.post("/sys/shortBus/cancelGiftClassFunc.do",{shortClassInstId:${shortClassInstId},remark:$("#remark").textbox("getValue"),classType:encodeURI("外教课"),handleId:${sessionScope.StaffT.staffId}},function(data){
+		                $.post("/sys/shortBus/cancelGiftClassFunc.do",{shortClassInstId:${shortClassInstId},remark:string2Json($("#remark").textbox("getValue")),classType:encodeURI("外教课"),handleId:${sessionScope.StaffT.staffId}},function(data){
 		                	ajaxLoadEnd();
 		                	if(data == "success")
 		                	{
@@ -71,7 +71,7 @@
 			<tr>
 				<td align="right">创建人：</td>
 				<td>
-					${shortClassInstT.creatorObj.staffName}
+					${shortClassInstT.creatorObj.sysName}
 				</td>
 				<td align="right">创建时间：</td>
 				<td>

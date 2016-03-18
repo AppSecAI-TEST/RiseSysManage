@@ -40,20 +40,7 @@
 			    	panelHeight : "auto",
 			    	formatter : function(data) {
 			    		return "<span>" + data.stageId + "</span>";
-			    	},
-					onChange : function(n, o) {
-						if(n != "" && n != null && n != undefined) {
-							$("#classInstId").combobox({
-								url : "/sys/pubData/qryClassInstList.do?courseType=&stageId="+n+"&classType=&classState='001','002','003','004','005'&classInstId=",
-								valueField : "classInstId",
-								textField : "className",
-								panelHeight : "auto",
-								formatter : function(data) {
-									return "<span>" + data.className + "</span>";
-								}
-							});
-						}
-					}
+			    	}
 				});
 			});
 			function queryFunc()
@@ -72,7 +59,7 @@
 			function resetFunc()
 			{
 				$("#stageId").combobox("setValue","");
-				$("#classInstId").combobox("setValue","");
+				$("#classInstId").textbox("setValue","");
 				$("#classState").combobox("setValue","");
 				$("#payStartManTime").datebox("setValue","");
 				$("#payEndManTime").datebox("setValue","");
@@ -163,7 +150,7 @@
 						班级：
 					</td>
 					<td>
-						<select id="classInstId" name="classInstId" class="easyui-combobox" style="width:150px"></select>
+						<input name="classInstId" id="classInstId" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" />
 					</td>
 					<td align="right">
 						课程状态：

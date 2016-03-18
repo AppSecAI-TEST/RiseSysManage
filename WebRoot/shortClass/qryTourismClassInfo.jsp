@@ -26,10 +26,10 @@
 			$(document).ready(function(){
 				$("#staffName").combobox({
 					formatter:function(data){
-						return '<span>'+data.staffName+'</span>';
+						return '<span>'+data.sysName+'</span>';
 					},
 					valueField: 'staffId', 
-					textField: 'staffName', 
+					textField: 'sysName', 
 					panelHeight: 'auto'
 				});
 				$("#schoolId").combobox({

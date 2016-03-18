@@ -111,7 +111,7 @@
 					</c:choose>
 				</td>
 				<td align="right">放班人：</td>
-				<td>${shortClassInstT.creatorObj.staffName}</td>
+				<td>${shortClassInstT.creatorObj.sysName}</td>
 				<td align="right">放班日期：</td>
 				<td><fmt:formatDate value="${shortClassInstT.putClassDate}" pattern="yyyy-MM-dd" /></td>
 			</tr>
@@ -178,7 +178,7 @@
 							<td align="center"><input type="checkbox" name="shortClassAttendId" value="${node.shortClassAttendId}" onclick="classAttendCheckbox(this)" /></td>
 							<td align="center">${i.count}</td>
 							<td align="center"><fmt:formatDate value="${node.schooltime}" pattern="yyyy-MM-dd" /></td>
-							<td align="center">${node.handlerObj.staffName}</td>
+							<td align="center">${node.handlerObj.sysName}</td>
 							<td align="center"><fmt:formatDate value="${node.createDate}" pattern="yyyy-MM-dd" timeZone="GMT"/></td>
 							<td align="center"><c:choose><c:when test="${node.isTieOff == 0}">否</c:when><c:otherwise>是</c:otherwise></c:choose></td>
 							<td align="center">${node.attendNum}</td>

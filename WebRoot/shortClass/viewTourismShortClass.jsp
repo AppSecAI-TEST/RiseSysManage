@@ -84,8 +84,8 @@
 							<td align="center">${node.studentT.identityId}</td>
 							<td align="center"><c:forEach items="${node.studentT.contactList}" var="item" varStatus="j"><c:choose><c:when test="${j.last}">${item.phone}</c:when><c:otherwise>${item.phone},</c:otherwise></c:choose></c:forEach></td>
 							<td align="center">${shortClassInstT.className}</td>
-							<td align="center">${node.studentCourseT.adviserAObj.staffName} ${node.studentCourseT.adviserBObj.staffName}</td>
-							<td align="center">${node.studentCourseT.adviserTeacherAObj.staffName} ${node.studentCourseT.adviserTeacherBObj.staffName}</td>
+							<td align="center">${node.studentCourseT.adviserAObj.sysName}<c:if test="${!empty node.studentCourseT.adviserBObj.sysName}">/${node.studentCourseT.adviserBObj.sysName}</c:if></td>
+							<td align="center">${node.studentCourseT.adviserTeacherAObj.sysName}<c:if test="${!empty node.studentCourseT.adviserTeacherBObj.sysName}">/${node.studentCourseT.adviserTeacherBObj.sysName}</c:if></td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>

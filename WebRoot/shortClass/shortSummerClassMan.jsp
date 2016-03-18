@@ -43,6 +43,10 @@
 				var nowDate = new Date();
 				var classStartTimeDate = new Date(classStartTime);
 				var classEndTimeDate = new Date(classEndTime);
+				var schooltimeCnt = 0;
+				$(".shortSchooltimeId").each(function(i,node){
+					schooltimeCnt += parseInt($(node).attr("lessionHours"));
+				});
 				if(classStartTime == "")
 				{
 					$.messager.alert('提示',"开课日期不能为空,请核实后重新尝试","info");
@@ -54,6 +58,14 @@
 				else if(isNaN(planHours))
 				{
 					$.messager.alert('提示',"计划总课时量不合法,请核实后重新尝试","info");
+				}
+				else if(parseInt(planHours) > schooltimeCnt)
+				{
+					$.messager.alert('提示',"上课计划未达到计划课时量,请核实后重新尝试","info");
+				}
+				else if(parseInt(planHours) < schooltimeCnt)
+				{
+					$.messager.alert('提示',"上课计划已超过计划课时量,请核实后重新尝试","info");
 				}
 				else if(classEndTime == "")
 				{
@@ -218,7 +230,7 @@
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${shortClassInstT.classSchooltimeList}" var="node" varStatus="i">
-						<tr class="shortSchooltimeId" id="shortSchooltimeId${node.shortSchooltimeId}">
+						<tr class="shortSchooltimeId" id="shortSchooltimeId${node.shortSchooltimeId}" lessionHours="${node.lessionHours}">
 							<td align="right">上课计划：</td>
 							<td><fmt:formatDate value="${node.schooltime}" pattern="yyyy-MM-dd" /> ${node.startTime}~${node.endTime}</td>
 							<td align="right">教室：</td>
@@ -277,8 +289,8 @@
 								<td align="center">${node.studentT.identityId}</td>
 								<td align="center"><c:forEach items="${node.studentT.contactList}" var="item" varStatus="j"><c:choose><c:when test="${j.last}">${item.phone}</c:when><c:otherwise>${item.phone},</c:otherwise></c:choose></c:forEach></td>
 								<td align="center">${shortClassInstT.className}</td>
-								<td align="center">${node.studentCourseT.adviserAObj.staffName} ${node.studentCourseT.adviserBObj.staffName}</td>
-								<td align="center">${node.studentCourseT.adviserTeacherAObj.sysName}/${node.studentCourseT.adviserTeacherBObj.sysName}</td>
+								<td align="center">${node.studentCourseT.adviserAObj.sysName}<c:if test="${!empty node.studentCourseT.adviserBObj.sysName}">/${node.studentCourseT.adviserBObj.sysName}</c:if></td>
+								<td align="center">${node.studentCourseT.adviserTeacherAObj.sysName}<c:if test="${!empty node.studentCourseT.adviserTeacherBObj.sysName}">/${node.studentCourseT.adviserTeacherBObj.sysName}</c:if></td>
 							</tr>
 						</c:forEach>
 					</c:otherwise>

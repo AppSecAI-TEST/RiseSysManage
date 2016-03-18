@@ -29,26 +29,6 @@
 					panelHeight: 'auto',
 					editable:false
 				});
-				$("#startTime").timespinner({
-					onChange:function(row){
-						if($("#endTime").timespinner("getValue") != "")
-						{
-							var endTime = parseInt($("#endTime").timespinner("getHours"))+(parseInt($("#endTime").timespinner("getMinutes"))>0?1:0);
-							var startTime = parseInt($("#startTime").timespinner("getHours"))+(parseInt($("#startTime").timespinner("getMinutes"))>0?1:0);
-							$("#lessonHour").textbox("setValue",(endTime-startTime));
-						}
-					}
-				});
-				$("#endTime").timespinner({
-					onChange:function(row){
-						if($("#startTime").timespinner("getValue") != "")
-						{
-							var endTime = parseInt($("#endTime").timespinner("getHours"))+(parseInt($("#endTime").timespinner("getMinutes"))>0?1:0);
-							var startTime = parseInt($("#startTime").timespinner("getHours"))+(parseInt($("#startTime").timespinner("getMinutes"))>0?1:0);
-							$("#lessonHour").textbox("setValue",(endTime-startTime));
-						}
-					}
-				});
 				$("#teacherType").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
@@ -244,7 +224,7 @@
 			</tr>
 			<tr>
 				<td align="right">课时：</td>
-				<td colspan="4"><input name="lessonHour" id="lessonHour" type="text" style="width:150px" class="easyui-textbox" data-options="readonly:true" /></td>
+				<td colspan="4"><input name="lessonHour" id="lessonHour" type="text" style="width:150px" class="easyui-textbox" /></td>
 			</tr>
 			<tr>
 				<td align="right">老师：</td>

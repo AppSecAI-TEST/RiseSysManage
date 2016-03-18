@@ -63,6 +63,10 @@
 				var remark = $("#remark").textbox("getValue");
 				var classStartDate = new Date(classStartTime);
 				var classEndDate = new Date(classEndTime);
+				var schooltimeCnt = 0;
+				$(".shortSchooltimeId").each(function(i,node){
+					schooltimeCnt += parseInt($(node).attr("lessionHours"));
+				});
 				if(interClassType == "")
 				{
 					$.messager.alert('提示',"请先选择国际班类型","info");
@@ -70,10 +74,6 @@
 				else if(className == "")
 				{
 					$.messager.alert('提示',"班级名称不能为空,请核实后重新尝试","info");
-				}
-				else if(classStartTime == "")
-				{
-					$.messager.alert('提示',"开课日期不能为空,请核实后重新尝试","info");
 				}
 				else if(schoolManId == "")
 				{
@@ -86,6 +86,18 @@
 				else if(isNaN(planHours))
 				{
 					$.messager.alert('提示',"计划总课时量不合法,请核实后重新尝试","info");
+				}
+				else if(parseInt(planHours) > schooltimeCnt)
+				{
+					$.messager.alert('提示',"上课计划未达到计划总课时量,请核实后重新尝试","info");
+				}
+				else if(parseInt(planHours) < schooltimeCnt)
+				{
+					$.messager.alert('提示',"上课计划已超过计划总课时量,请核实后重新尝试","info");
+				}
+				else if(classStartTime == "")
+				{
+					$.messager.alert('提示',"开课日期不能为空,请核实后重新尝试","info");
 				}
 				else if(classEndTime == "")
 				{
@@ -109,7 +121,7 @@
 						planHours:planHours,
 						openDate:classStartTime,
 						finishDate:classEndTime,
-						remark:remark,
+						remark:string2Json(remark),
 						createId:${sessionScope.StaffT.staffId},
 						handlerId:${sessionScope.StaffT.staffId}
 					};
@@ -218,7 +230,7 @@
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${shortClassList}" var="node" varStatus="i">
-						<tr class="shortSchooltimeId" id="shortSchooltimeId${node.shortSchooltimeId}">
+						<tr class="shortSchooltimeId" id="shortSchooltimeId${node.shortSchooltimeId}" lessionHours="${node.lessionHours}">
 							<td align="right">上课计划：</td>
 							<td><fmt:formatDate value="${node.schooltime}" pattern="yyyy-MM-dd" /> ${node.startTime}~${node.endTime}</td>
 							<td align="right">教室：</td>

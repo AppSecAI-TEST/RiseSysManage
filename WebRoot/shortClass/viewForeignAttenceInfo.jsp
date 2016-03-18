@@ -52,7 +52,7 @@
 			<tr>
 				<td align="right">创建人：</td>
 				<td>
-					${shortClassInstT.creatorObj.staffName}
+					${shortClassInstT.creatorObj.sysName}
 				</td>
 				<td align="right">创建时间：</td>
 				<td>
@@ -91,7 +91,7 @@
 			</tr>
 			<tr>
 				<td align="right">反馈人：</td>
-				<td>${shortClassAttendTList[0].handlerObj.staffName}</td>
+				<td>${shortClassAttendTList[0].handlerObj.sysName}</td>
 				<td align="right">反馈记录录入时间：</td>
 				<td><fmt:formatDate value="${shortClassAttendTList[0].createDate}" pattern="yyyy-MM-dd HH:mm:ss" timeZone="GMT"/></td>				
 				<td align="right">&nbsp;</td>

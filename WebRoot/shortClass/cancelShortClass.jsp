@@ -18,7 +18,7 @@
 				$.messager.confirm("提示", "您确定要取消该课程吗？", function (data) {
 		            if(data){
 		            	ajaxLoading("正在处理，请稍待。。。");
-		                $.post("/sys/shortBus/cancelShortClassFunc.do",{shortClassInstId:${shortClassInstT.shortClassInstId},remark:$("#remark").textbox("getValue"),handleId:${sessionScope.StaffT.staffId}},function(data){
+		                $.post("/sys/shortBus/cancelShortClassFunc.do",{shortClassInstId:${shortClassInstT.shortClassInstId},remark:string2Json($("#remark").textbox("getValue")),handleId:${sessionScope.StaffT.staffId}},function(data){
 		                	ajaxLoadEnd();
 		                	if(data == "success")
 		                	{
@@ -58,7 +58,7 @@
 			</tr>
 			<tr>
 				<td align="right">放班人：</td>
-				<td>${shortClassInstT.creatorObj.staffName}</td>
+				<td>${shortClassInstT.creatorObj.sysName}</td>
 				<td align="right">放班日期：</td>
 				<td><fmt:formatDate value="${shortClassInstT.putClassDate}" pattern="yyyy-MM-dd" /></td>
 				<td align="right">&nbsp;</td>

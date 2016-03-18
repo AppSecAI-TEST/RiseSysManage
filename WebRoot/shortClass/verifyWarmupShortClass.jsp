@@ -18,7 +18,7 @@
 				$.messager.confirm('提示','您确定审批当前热身课吗?',function(r){
 					if (r){
 						ajaxLoading("正在处理，请稍待。。。");
-						$.post('/sys/shortBus/verifyShortClassFunc.do',{shortClassInstId:${shortClassInstT.shortClassInstId},handlerId:${sessionScope.StaffT.staffId},isPutClass:$("input[name='isPutClass']:checked").val(),verifyCont:$("#verifyCont").textbox("getValue")},function(result){
+						$.post('/sys/shortBus/verifyShortClassFunc.do',{shortClassInstId:${shortClassInstT.shortClassInstId},handlerId:${sessionScope.StaffT.staffId},isPutClass:$("input[name='isPutClass']:checked").val(),verifyCont:string2Json($("#verifyCont").textbox("getValue"))},function(result){
 							ajaxLoadEnd();
 							if(result == "success")
 							{

@@ -210,7 +210,7 @@
 				</tr>
 				<tr>
 					<td align="right" width="8%">
-						所属校区：
+						上课校区：
 					</td>
 					<td width="12%">
 						<select id="schoolManId" name="schoolManId" style="width:100px;height:25px;" ></select>
