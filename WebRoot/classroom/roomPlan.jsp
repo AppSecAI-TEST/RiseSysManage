@@ -44,7 +44,7 @@
   			</table>
  		</form>
  		 
-		<table   align="center" title="查询结果" data-options="height:500" id="list_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+		<table   align="center" title="查询结果"   data-options="height:600" id="list_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 			 
 		</table>
   		</div>
@@ -79,14 +79,14 @@ $("#qryBtn").click(function(){
 	    url: "/sys/time/getRoomPlan.do?param="+obj,
 	    columns:[[  
 	        {field:'schoolName',title:'校区',align:'center',width:40},
-	        {field:'roomName',title:'教室',align:'center',width:40},
+	        {field:'roomName',title:'教室',align:'center',width:60},
 	        {field:'day0',title:startDate,align:'center',width:80},  
-	        {field:'day1',title:AddDays(startDate,1),align:'center',width:80},  
-	        {field:'day2',title:AddDays(startDate,2),align:'center',width:80},  
-	        {field:'day3',title:AddDays(startDate,3),align:'center',width:80},  
-	        {field:'day4',title:AddDays(startDate,4),align:'center',width:80},  
-	        {field:'day5',title:AddDays(startDate,5),align:'center',width:80},
-	        {field:'day6',title:AddDays(startDate,6),align:'center',width:80} 
+	        {field:'day1',title:AddDays(startDate,1),align:'left',width:140},  
+	        {field:'day2',title:AddDays(startDate,2),align:'left',width:140},  
+	        {field:'day3',title:AddDays(startDate,3),align:'left',width:140},  
+	        {field:'day4',title:AddDays(startDate,4),align:'left',width:140},  
+	        {field:'day5',title:AddDays(startDate,5),align:'left',width:140},
+	        {field:'day6',title:AddDays(startDate,6),align:'left',width:140} 
 	    ]],  
 	    onLoadSuccess:function(data)
 	    {  
