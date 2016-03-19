@@ -63,7 +63,20 @@ function mergeCellsByField(tableId, colList) {
     var after = "";
     var target = $("#" + tableId);
     var colunms = colList.split(",");
+    var stageId = "";
+    var stageNum = 0;
     var rows = target.datagrid("getRows").length;
+    for (var i = 0; i <= rows; i++) {
+    	if(i = 0) {
+    		stageId = target.datagrid("getRows")[i].stageId;
+    	}
+    	if(i != rows) {
+    		var after = target.datagrid("getRows")[i].stageId;
+    		if(stageId != after) {
+    			stageNum++;
+    		}
+    	}
+    }
     for (var j = colunms.length - 1; j >= 0; j--) {
     	var field = colunms[j];
     	before = "";
@@ -74,8 +87,7 @@ function mergeCellsByField(tableId, colList) {
             	after = "";
             } else {
             	if("stageId" == field) {
-            		var stageId = $("#stageId").combobox("getValue");
-            		if(stageId != null && stageId != "" && stageId != undefined) {
+            		if(stageNum == 1) {
             			after = target.datagrid("getRows")[i].schoolName;
             		} else {
             			after = target.datagrid("getRows")[i][field];
