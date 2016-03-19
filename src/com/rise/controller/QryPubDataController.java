@@ -284,6 +284,7 @@ public class QryPubDataController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryDataListByPage(page, rows, param, funcNodeId);
+			log.error(retVal);
 			out.write(retVal);
 		}
 		catch(Exception e)

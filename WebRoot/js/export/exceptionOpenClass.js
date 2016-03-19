@@ -65,15 +65,22 @@ function mergeCellsByField(tableId, colList) {
     var colunms = colList.split(",");
     var stageId = "";
     var stageNum = 0;
+    var schoolName = "";
     var rows = target.datagrid("getRows").length;
     for (var i = 0; i <= rows; i++) {
     	if(i = 0) {
     		stageId = target.datagrid("getRows")[i].stageId;
+    		schoolName = target.datagrid("getRows")[i].schoolName;
     	}
     	if(i != rows) {
     		var after = target.datagrid("getRows")[i].stageId;
     		if(stageId != after) {
     			stageNum++;
+    		}
+    		var before = target.datagrid("getRows")[i].schoolName;
+    		if(schoolName != before) {
+    			stageId = "";
+    			stageNum = 0;
     		}
     	}
     }
