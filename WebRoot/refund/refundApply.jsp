@@ -16,6 +16,8 @@
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="常规课退费申请">
   			<form id="refundApplyFm" method="post" enctype="multipart/form-data">
   				<input type="hidden" id="optionType" value="apply"/>
+  				<input type="hidden" id="className" value="${obj.refundObj.className }"/>
+  				<input type="hidden" id="classInstId" value="${obj.refundObj.classInstId }"/>
   				<input type="hidden" id="studentId" name="studentId" value="${obj.refundObj.studentId }"/>
   				<input type="hidden" id="schoolId" name="schoolId" value="${obj.refundObj.schoolId }"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId }"/>

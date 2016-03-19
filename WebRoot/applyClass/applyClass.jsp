@@ -171,7 +171,7 @@
 							<tr>
 								<th field="ck" align="center" checkbox="true" width="1%"></th>
 								<th field="schoolName" align="center" width="6%">校区</th>
-								<th data-options="field:'remark',width:220,align:'center'">申请内容</th>
+								<th data-options="field:'applyContent',width:220,align:'center'">申请内容</th>
 								<th data-options="field:'stageId',width:80,align:'center'">课程类型</th>
 								<th data-options="field:'className',width:80,align:'center'">班级名称</th>
 								<th data-options="field:'startDate',width:100,align:'center'">申请开课时间</th>

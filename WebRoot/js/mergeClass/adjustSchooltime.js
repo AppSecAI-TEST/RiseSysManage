@@ -225,13 +225,14 @@ $(document).ready(function() {
 					flag = false;
 				}
 				if(flag) {
-					var subLessions = parseInt(lessionHours) - parseInt(addLessions);
 					var lessions = $("#lessions").numberbox("getValue");
-					if(parseInt(lessions) > subLessions) {
+					var subLessions = parseInt(lessionHours) - parseInt(addLessions);
+					if(parseInt(lessions) != subLessions) {
 						flag = false;
 					}
 					if(flag) {
 						var schooltimeId = $("#selSchooltimeId").val();
+						var teacherSchoolId = $("#teacherSchoolId").combobox("getValue");
 						var teacherSchoolName = $("#teacherSchoolId").combobox("getText");
 						var teacherName = $("#teacherId").combobox("getText");
 						var licenseFlagText = $("#licenseFlagText").html();
@@ -243,12 +244,12 @@ $(document).ready(function() {
 									content += "<span id=teacher"+ teacherId + weekTime + hourRange +">";
 									var teacherText = teacherSchoolName + " " + teacherName + " " + lessions + " " + licenseFlagText;
 									content += teacherText + "&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='deleteTeacher(this, "+teacherId+")'><span>删除</span></a>";
-									content += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"' classInstId='"+classInstId+"' addFlag='Y' schooltimeId='"+schooltimeId+"'/>&nbsp;</span>";
+									content += "<input type='hidden' name='teachers' schoolId='"+teacherSchoolId+"' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"' classInstId='"+classInstId+"' addFlag='Y' schooltimeId='"+schooltimeId+"'/>&nbsp;</span>";
 									$(node).html(content);
 								} else {
 									var teacherText = teacherSchoolName + " " + teacherName + " " + lessions + " " + licenseFlagText;
 									var html = teacherText + "&nbsp;<a href='javascript:void(0)' class='linkmore' onclick='deleteTeacher(this, "+teacherId+")'><span>删除</span></a>";
-									html += "<input type='hidden' name='teachers' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"' classInstId='"+classInstId+"' addFlag='Y' schooltimeId='"+schooltimeId+"'/>&nbsp;";
+									html += "<input type='hidden' name='teachers' schoolId='"+teacherSchoolId+"' teacherId='"+teacherId+"' weekTime='"+weekTime+"' hourRange='"+hourRange+"' lessions='"+lessions+"' classInstId='"+classInstId+"' addFlag='Y' schooltimeId='"+schooltimeId+"'/>&nbsp;";
 									$("#teacher" + teacherId + weekTime + hourRange).html(html);
 								}
 								$(node).attr("lessions", parseInt(lessions) + parseInt(addLessions));
@@ -256,7 +257,7 @@ $(document).ready(function() {
 						});
 						$('#dlg').dialog('close');
 					} else {
-						$.messager.alert('提示', "该上课时段可用的课时为"+subLessions+"个课时，请填写的课时小于或者等于"+subLessions+"！");
+						$.messager.alert('提示', "该上课时段可用的课时为"+subLessions+"个课时，请填写的课时为"+subLessions+"！");
 					}
 				} else
 				{
@@ -327,7 +328,8 @@ $(document).ready(function() {
 									if($("input[name='teachers'][addFlag='Y'][classInstId="+classInstId+"][weekTime="+weekTime+"][hourRange="+hourRange+"]").length > 0) {
 										$("input[name='teachers'][addFlag='Y'][classInstId="+classInstId+"][weekTime="+weekTime+"][hourRange="+hourRange+"]").each(function() {
 											var teacherObj = new Object();
-											teacherObj.schoolId = schoolId;
+											var teacherSchoolId = $(this).attr("schoolId");
+											teacherObj.schoolId = teacherSchoolId;
 											teacherObj.classInstId = classInstId;
 											teacherObj.teacherId = $(this).attr("teacherId");
 											teacherObj.teacherType = "T";

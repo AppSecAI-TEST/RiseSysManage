@@ -286,6 +286,8 @@ $(document).ready(function() {
 					var obj = $("#refundApplyFm").serializeObject();
 					var refundFeeObj = new Object();
 					refundFeeObj.schoolId = obj.schoolId;
+					refundFeeObj.className = $("#className").val();
+					refundFeeObj.classInstId = $("#classInstId").val();
 					refundFeeObj.studentId = obj.studentId;
 					refundFeeObj.refundWay = obj.refundWay;
 					refundFeeObj.refundRule = obj.refundRule;

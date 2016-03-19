@@ -30,7 +30,7 @@ public class LeaveManageService {
 	}
 
 	//Ìí¼ÓÐÝÑ§
-	public String addLeaveInfo(String json) throws Exception{
+	public String addLeaveInfo(String json) throws Exception {
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1202\",securityCode:\"0000000000\",params:{json:"+json+"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
