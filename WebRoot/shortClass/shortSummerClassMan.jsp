@@ -40,7 +40,7 @@
 				var planHours = $("#planHours").textbox("getValue");
 				var classStartTime = $("#classStartTime").datebox("getValue");
 				var classEndTime = $("#classEndTime").datebox("getValue");
-				var nowDate = new Date();
+				var nowDate = new Date(new Date().format("yyyy-MM-dd"));
 				var classStartTimeDate = new Date(classStartTime);
 				var classEndTimeDate = new Date(classEndTime);
 				var schooltimeCnt = 0;
@@ -251,52 +251,6 @@
 				</c:otherwise>
 			</c:choose>
 		</table>
-		<c:if test="${!empty shortClassInstT.approveDate}">
-			<div style="margin:0 auto;padding:0 0;text-align:left;padding-right:2px;width:99%;margin-top:5px">
-				<a href="javascript:void(0)" id="selectClassBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;" onclick="selectClassFunc()">选班</a>
-				<a href="javascript:void(0)" id="removeClassBtn" class="easyui-linkbutton" iconCls="icon-remove" style="width: 100px;" onclick="removeClassFunc()">移除</a>
-				<a href="javascript:void(0)" id="viewClassBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="viewClassFunc()">浏览</a>
-			</div>
-			<table region="center" class="tab" id="studentList" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-				<tr class="headTr">
-					<td><input type="checkbox" id="studentAllBox" onclick="studentBoxFunc(this)" /></td>
-					<td>序号</td>
-					<td>学员姓名</td>
-					<td>英文名</td>
-					<td>校区</td>
-					<td>缴费日期</td>
-					<td>本人证件号码</td>
-					<td>联系方式</td>
-					<td>班级</td>
-					<td>业绩顾问</td>
-					<td>业绩老师</td>
-				</tr>
-				<c:choose>	
-					<c:when test="${fn:length(shortClassInstT.classStudentList) == 0}">
-						<tr>
-							<td colspan="11" align="center">暂无学生报名</td>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${shortClassInstT.classStudentList}" var="node" varStatus="i">
-							<tr class="studentId" id="studentId${node.studentId}">
-								<td align="center"><input type="checkbox" name="studentId" value="${node.studentId}" /></td>
-								<td align="center">${i.count}</td>
-								<td align="center">${node.studentT.name}</td>
-								<td align="center">${node.studentT.byName}</td>
-								<td align="center">${node.studentT.schoolT.schoolName}</td>
-								<td align="center"><fmt:formatDate value="${node.studentCourseT.payDate}" pattern="yyyy-MM-dd" /></td>
-								<td align="center">${node.studentT.identityId}</td>
-								<td align="center"><c:forEach items="${node.studentT.contactList}" var="item" varStatus="j"><c:choose><c:when test="${j.last}">${item.phone}</c:when><c:otherwise>${item.phone},</c:otherwise></c:choose></c:forEach></td>
-								<td align="center">${shortClassInstT.className}</td>
-								<td align="center">${node.studentCourseT.adviserAObj.sysName}<c:if test="${!empty node.studentCourseT.adviserBObj.sysName}">/${node.studentCourseT.adviserBObj.sysName}</c:if></td>
-								<td align="center">${node.studentCourseT.adviserTeacherAObj.sysName}<c:if test="${!empty node.studentCourseT.adviserTeacherBObj.sysName}">/${node.studentCourseT.adviserTeacherBObj.sysName}</c:if></td>
-							</tr>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-			</table>
-		</c:if>
 		<div style="margin:0 auto;padding:0 0;text-align:right;padding-right:2px;width:99%;margin-top:10px">
 			<a href="javascript:void(0)" id="addSubmitBtn" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;" onclick="addSubmitFunc()">提交</a>
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>

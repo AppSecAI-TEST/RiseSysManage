@@ -18,7 +18,7 @@
 			ajaxLoadEnd();
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
 				data = $.grep(data , function(node){
-					if(node.codeFlag != '004' && node.codeFlag != '005')
+					if(node.codeFlag != '002' && node.codeFlag != '004' && node.codeFlag != '005')
 					{
 						return true;
 					}

@@ -72,7 +72,7 @@
 				var classStartTime = $("#classStartTime").datebox("getValue");
 				var planClassNum = $("#planClassNum").textbox("getValue");
 				var classEndTime = $("#classEndTime").combobox("getValue");
-				var nowDate = new Date();
+				var nowDate = new Date(new Date().format("yyyy-MM-dd"));
 				var classStartTimeDate = new Date(classStartTime);
 				var classEndTimeDate = new Date(classEndTime);
 				if(classStartTime == "")

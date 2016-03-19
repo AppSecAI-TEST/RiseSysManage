@@ -106,7 +106,7 @@
 							结课
 						</c:when>
 						<c:when test="${shortClassInstT.classState == '005'}">
-							解散
+							取消
 						</c:when>
 					</c:choose>
 				</td>

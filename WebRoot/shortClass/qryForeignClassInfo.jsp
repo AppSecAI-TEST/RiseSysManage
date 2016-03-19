@@ -19,12 +19,12 @@
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=819&fieldId=schoolId",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
-				$("#classManState").combobox("loadData",data);
+			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_GIFT_T&codeType=COURSE_STATE",function(data){
+				$("#giftType").combobox("loadData",data);
 				ajaxLoadEnd();
 			},"json");
 			$(document).ready(function(){
-				$("#classManState").combobox({
+				$("#giftType").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
 					textField: 'codeName', 
@@ -65,7 +65,7 @@
 				}
 				$("#staffName").textbox("setValue","");
 				$("#contactPhone").textbox("setValue","");
-				$("#classManState").combobox("setValue","");
+				$("#giftType").combobox("setValue","");
 				$("#feeStartTime").datebox("setValue","");
 				$("#feeEndTime").datebox("setValue","");
 				$("input[name='isExpire']").each(function(i,node){
@@ -110,7 +110,7 @@
 						外教课状态：
 					</td>
 					<td>
-						<select id="classManState" name="classManState" style="width:100px;height:25px;" ></select>								
+						<select id="giftType" name="giftType" style="width:100px;height:25px;" ></select>								
 					</td>
 					<td align="right">
 						是否过期：

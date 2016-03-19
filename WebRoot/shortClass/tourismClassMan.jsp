@@ -16,7 +16,19 @@
 		</style>
 		<script type="text/javascript">
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
-				$("#classManState").combobox("loadData",data);
+				var classManStateArr = [];
+				for(var i = 0,n = data.length;i < n;i++)
+				{
+					if(data[i].codeFlag != '002')
+					{
+						if(data[i].codeFlag == '005')
+						{
+							data[i].codeName = "取消";
+						}
+						classManStateArr.push(data[i]);
+					}
+				}
+				$("#classManState").combobox("loadData",classManStateArr);
 			},"json");
 			$(document).ready(function(){
 				$("#classManState").combobox({
@@ -73,7 +85,7 @@
 					{
 						$.messager.alert('提示',"该课程已经结课");		
 					}
-					else if(row.classStateName == "解散")
+					else if(row.classStateName == "取消")
 					{
 						$.messager.alert('提示',"该课程已被取消");		
 					}
@@ -101,7 +113,7 @@
 					{
 						$.messager.alert('提示',"该课程已经结课");		
 					}
-					else if(row.classStateName == "解散")
+					else if(row.classStateName == "取消")
 					{
 						$.messager.alert('提示',"该课程已被取消");		
 					}

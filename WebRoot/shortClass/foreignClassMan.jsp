@@ -18,7 +18,26 @@
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
-				$("#classManState").combobox("loadData",data);
+				var classManStateArr = [];
+				for(var i = 0,n = data.length;i < n;i++)
+				{
+					if(data[i].codeFlag == '001')
+					{
+						data[i].codeName = "未上课";
+						classManStateArr.push(data[i]);
+					}
+					else if(data[i].codeFlag == '004')
+					{
+						data[i].codeName = "已上课";
+						classManStateArr.push(data[i]);
+					}
+					else if(data[i].codeFlag == '005')
+					{
+						data[i].codeName = "取消";
+						classManStateArr.push(data[i]);
+					}
+				}
+				$("#classManState").combobox("loadData",classManStateArr);
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=STAGE_ID",function(data){
 				$("#classManPharse").combobox("loadData",data);
@@ -84,20 +103,16 @@
 				var row = $("#manList").datagrid("getSelected");
 				if(row)
 				{
-					if(row.classStateName == "未开课" || row.classStateName == "未开课")
+					if(row.classStateName == "未上课")
 					{
 						ajaxLoading("正在处理，请稍待。。。");
 						window.location.href = "/sys/shortBus/accessShortClassPage.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&classType=外教课&pageName=cancelForeignClass";
 					}
-					else if(row.classStateName == "开课在读")
+					else if(row.classStateName == "已上课")
 					{
 						$.messager.alert('提示',"该课程已经开课不能再被修改");		
 					}
-					else if(row.classStateName == "结课")
-					{
-						$.messager.alert('提示',"该课程已经结课");		
-					}
-					else if(row.classStateName == "解散")
+					else if(row.classStateName == "取消")
 					{
 						$.messager.alert('提示',"该课程已被取消");		
 					}

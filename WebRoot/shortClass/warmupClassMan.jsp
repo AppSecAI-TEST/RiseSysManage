@@ -28,7 +28,7 @@
 					}
 				}
 				$("#classManState").combobox("loadData",classManStateData);
-				$("#classManVerState").combobox("loadData",data);
+				$("#classManVerState").combobox("loadData",classManStateData);
 			},"json");
 			$.post("<%=path %>/pubData/qryStage.do",function(data){
 				$("#classType").combobox("loadData",data);
@@ -136,16 +136,21 @@
 				var row = $("#manList").datagrid("getSelected");
 				if(row)
 				{
-					if(row.classStateName == "未开课" || row.classStateName == "待开课" || row.classStateName == "开课在读")
+					if(row.classStateName == "未开课")
 					{
 						ajaxLoading("正在处理，请稍待。。。");
 						window.location.href = "/sys/shortBus/shortClassManInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=shortWarmupClassMan";
+					}
+					else if(row.classStateName == "待开课" || row.classStateName == "开课在读")
+					{
+						ajaxLoading("正在处理，请稍待。。。");
+						window.location.href = "/sys/shortBus/shortClassManInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=shortHasVerWarmup";
 					}
 					else if(row.classStateName == "结课")
 					{
 						$.messager.alert('提示',"该课程已经结课");		
 					}
-					else if(row.classStateName == "解散")
+					else if(row.classStateName == "取消")
 					{
 						$.messager.alert('提示',"该课程已被取消");		
 					}
@@ -160,7 +165,7 @@
 				var row = $("#manList").datagrid("getSelected");
 				if(row)
 				{
-					if(row.classStateName != "解散")
+					if(row.classStateName != "取消")
 					{
 						ajaxLoading("正在处理，请稍待。。。");
 						window.location.href = "/sys/shortBus/viewShortClassPage.do?funcNodeId=${param.funcNodeId}&pageName=viewWarmupShortClass&shortClassInstId="+row.shortClassInstId;
