@@ -2,7 +2,6 @@
 <%
 	String path = request.getContextPath();
 %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   	<head>
@@ -20,7 +19,15 @@
 				$("#schoolVerId").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
-				$("#classManState").combobox("loadData",data);
+				var classManStateData = [];
+				for(var i = 0,n = data.length;i < n;i++)
+				{
+					if(data[i].codeFlag != '005')
+					{
+						classManStateData.push(data[i]);
+					}
+				}
+				$("#classManState").combobox("loadData",classManStateData);
 				$("#classManVerState").combobox("loadData",data);
 			},"json");
 			$.post("<%=path %>/pubData/qryStage.do",function(data){
@@ -86,6 +93,10 @@
 					textField: 'codeName', 
 					panelHeight: 'auto'
 				});
+				if("${param.pageFlag}" == "audit")
+				{
+					$("#tab").tabs("select",1);	
+				}
 			});
 			function queryFunc()
 			{
@@ -125,14 +136,10 @@
 				var row = $("#manList").datagrid("getSelected");
 				if(row)
 				{
-					if(row.classStateName == "未开课" || row.classStateName == "待开课")
+					if(row.classStateName == "未开课" || row.classStateName == "待开课" || row.classStateName == "开课在读")
 					{
 						ajaxLoading("正在处理，请稍待。。。");
 						window.location.href = "/sys/shortBus/shortClassManInfo.do?funcNodeId=${param.funcNodeId}&shortClassInstId="+row.shortClassInstId+"&pageName=shortWarmupClassMan";
-					}
-					else if(row.classStateName == "开课在读")
-					{
-						$.messager.alert('提示',"该课程已经开课不能再被修改");		
 					}
 					else if(row.classStateName == "结课")
 					{
@@ -284,31 +291,31 @@
 						</tr>
 					</table>
 				</form>
-					<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
-						<thead>
-							<tr>
-								<th data-options="field:'shortClassInstId',checkbox:true"></th>
-								<th width="9%" field="schoolName">校区</th>
-								<th width="9%" field="className">热身课班级名称</th>
-								<th width="9%" field="classStateName">班级状态</th>
-								<th width="9%" field="planHours">计划课时量</th>
-								<th width="9%" field="classProgress">实际反馈课时量</th>
-								<th width="9%" field="planClassNum">计划上课人数</th>
-								<th width="9%" field="realClassNum">实际上课人数</th>
-								<th width="9%" field="putClassDate">申请时间</th>
-								<th width="9%" field="approveDate">审批时间</th>
-								<th width="9%" field="openDate">开课日期</th>
-								<th width="9%" field="finishDate">结课日期</th>
-							</tr>
-						</thead>
-					</table>
+				<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+					<thead>
+						<tr>
+							<th data-options="field:'shortClassInstId',checkbox:true"></th>
+							<th width="9%" field="schoolName">校区</th>
+							<th width="9%" field="className">热身课班级名称</th>
+							<th width="9%" field="classStateName">班级状态</th>
+							<th width="9%" field="planHours">计划课时量</th>
+							<th width="9%" field="classProgress">实际反馈课时量</th>
+							<th width="9%" field="planClassNum">计划上课人数</th>
+							<th width="9%" field="realClassNum">实际上课人数</th>
+							<th width="9%" field="putClassDate">申请时间</th>
+							<th width="9%" field="approveDate">审批时间</th>
+							<th width="9%" field="openDate">开课日期</th>
+							<th width="9%" field="finishDate">结课日期</th>
+						</tr>
+					</thead>
+				</table>
 				<div id="toolManbar" style="padding: 2px; height: auto">
 					<a href="javascript:void(0)" id="classArrangementBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="classArrangementFunc()">放班申请</a>
 					<a href="javascript:void(0)" id="cancelClassBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="manClassFunc()">班级维护</a>
 		   			<a href="javascript:void(0)" id="viewClassBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="viewClassFunc()">浏览</a>
 				</div>
 			</div>
-		    <div title="审批管理" style="padding:5px;display:block;>
+		    <div title="审批管理" style="padding:5px;display:block;">
 				<form id="hisFm">
 					<table class="search_tab">
 						<tr>

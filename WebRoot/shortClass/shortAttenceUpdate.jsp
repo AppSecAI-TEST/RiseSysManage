@@ -409,12 +409,26 @@
 					</td>
 					<td align="center">
 						<c:choose>
-							<c:when test="${node.dress == 'N'}">
-								<span id="dressArea${node.studentId}"><input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" /><label for="dress${node.studentId}2">已穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" checked="checked" /><label for="dress${node.studentId}1">未穿校服</label></span>
+							<c:when test="${node.attendType == 'N' || node.attendType=='B'}">
+								<c:choose>
+									<c:when test="${node.dress == 'N'}">
+										<span id="dressArea${node.studentId}"><input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" /><label for="dress${node.studentId}2">已穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" checked="checked" /><label for="dress${node.studentId}1">未穿校服</label></span>
+									</c:when>
+									<c:when test="${node.dress == 'Y'}">
+										<span id="dressArea${node.studentId}"><input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" checked="checked" /><label for="dress${node.studentId}2">已穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" /><label for="dress${node.studentId}1">未穿校服</label></span>
+									</c:when>
+								</c:choose>
 							</c:when>
-							<c:when test="${node.dress == 'Y'}">
-								<span id="dressArea${node.studentId}"><input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" checked="checked" /><label for="dress${node.studentId}2">已穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" /><label for="dress${node.studentId}1">未穿校服</label></span>
-							</c:when>
+							<c:otherwise>
+								<c:choose>
+									<c:when test="${node.dress == 'N'}">
+										<span id="dressArea${node.studentId}" style="visibility:hidden;"><input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" /><label for="dress${node.studentId}2">已穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" checked="checked" /><label for="dress${node.studentId}1">未穿校服</label></span>
+									</c:when>
+									<c:when test="${node.dress == 'Y'}">
+										<span id="dressArea${node.studentId}" style="visibility:hidden;"><input type="radio" name="dress${node.studentId}" id="dress${node.studentId}2" value="Y" checked="checked" /><label for="dress${node.studentId}2">已穿校服</label>&nbsp;&nbsp;<input type="radio" name="dress${node.studentId}" id="dress${node.studentId}1" value="N" /><label for="dress${node.studentId}1">未穿校服</label></span>
+									</c:when>
+								</c:choose>
+							</c:otherwise>
 						</c:choose>
 					</td>
 				</tr>

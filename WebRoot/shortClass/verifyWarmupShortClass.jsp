@@ -34,7 +34,7 @@
 			}
 			function backFunc()
 			{
-				window.history.back();
+				window.location.href = "/sys/shortClass/warmupClassMan.jsp?funcNodeId=${funcNodeId}&pageFlag=audit";
 			}
 		</script>
   	</head>
