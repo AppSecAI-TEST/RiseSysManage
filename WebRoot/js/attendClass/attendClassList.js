@@ -40,6 +40,8 @@ $(document).ready(function() {
 			$("#qryBtn").click();
 		},
 		onChange : function(n, o) {
+			$("#teacherId").combobox('clear');
+			$("#teacherId").combobox("loadData", new Array());
 			if(n != "" && n != null && n != undefined) {
 				$("#teacherId").combobox({disabled: false});
 				$("#teacherId").combobox({
@@ -56,8 +58,6 @@ $(document).ready(function() {
 				if(data.length > 0) {
 					$("#schoolId").combobox("setValue", data[0].schoolId);
 				}
- 				$("#teacherId").combobox('clear');
- 				$("#teacherId").combobox("loadData", new Array());
  				$("#teacherId").combobox({disabled: true});
  			}
 		}

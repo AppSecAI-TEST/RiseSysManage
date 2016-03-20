@@ -46,12 +46,17 @@ $(document).ready(function() {
 	$("#applyChangeSubmit").click(function() {
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) {
-			var changeFlag = row.changeFlag;
-			if("Y" == changeFlag) {
-				var studentCourseId = row.studentCourseId;
-				window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&changeSource=change";
+			var changeSchoolFlag = row.changeSchoolFlag;
+			if("N" == changeSchoolFlag) {
+				var changeClassFlag = row.changeClassFlag;
+				if("N" == changeClassFlag) {
+					var studentCourseId = row.studentCourseId;
+					window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&changeSource=change";
+				} else {
+					$.messager.alert('提示', "您选择的学员课程已申请转班，不能再次申请转班！");
+				}
 			} else {
-				$.messager.alert('提示', "您选择的学员课程已申请转班，不能再次申请转班！");
+				$.messager.alert('提示', "您选择的学员课程已申请转校，不能申请转班！");
 			}
 		} else {
 			$.messager.alert('提示', "请先选择您要转班的学员课程！");
