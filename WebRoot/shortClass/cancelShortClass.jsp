@@ -58,7 +58,7 @@
 			</tr>
 			<tr>
 				<td align="right">放班人：</td>
-				<td>${shortClassInstT.creatorObj.sysName}</td>
+				<td>${shortClassInstT.creatorObj.userName}</td>
 				<td align="right">放班日期：</td>
 				<td><fmt:formatDate value="${shortClassInstT.putClassDate}" pattern="yyyy-MM-dd" /></td>
 				<td align="right">&nbsp;</td>

@@ -62,7 +62,7 @@ $(document).ready(function() {
 				var changeSchoolFlagText = row.changeSchoolFlagText;
 				if("N" == changeSchoolFlagText) {
 					var studentId = row.studentId;
-					window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentId="+studentId+"&changeSource=change";
+					window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentId="+studentId+"&changeSource=change&funcNodeId="+$("#funcNodeId").val();
 				} else {
 					$.messager.alert('提示', "您选择的学员课程已经申请转校，不能再次申请转校！");
 				}

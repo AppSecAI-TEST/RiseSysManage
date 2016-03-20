@@ -131,7 +131,7 @@
 						<div class="panel-title">我的个人信息</div>
 					</div>
 					<div class="panel-body" style="padding:8px;line-height:1.8">
-						您好，${sessionScope.StaffT.staffName}<br />
+						您好，${sessionScope.StaffT.userName}<br />
 						最后登录时间：<fmt:formatDate value="${sessionScope.StaffT.lastDate}" pattern="yyyy-MM-dd HH:mm:ss" /><br />
 						最后登录IP： ${sessionScope.StaffT.remoteIp}<br />
 					</div>

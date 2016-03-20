@@ -2,7 +2,6 @@
 <%
 	String path = request.getContextPath();
 %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   	<head>
@@ -19,9 +18,6 @@
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=812&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/shortBus/getShortClassTypeList.do?typeName="+encodeURI("${param.classType}"),function(data){
-				$("#shortClassType").combobox("loadData",data);
-			},"json");
 			$(document).ready(function(){
 				$("#schoolManId").combobox({
 					formatter:formatSchool, 
@@ -34,14 +30,6 @@
 							$("#schoolManId").combobox("setValue",data[0].schoolId);
 						}
 					}
-				});
-				$("#shortClassType").combobox({
-					formatter:function(data){
-						return '<span>'+data.classType+'</span>';
-					}, 
-					valueField: 'classType', 
-					textField: 'classType',
-					panelHeight: 'auto'
 				});
 			});
 			function queryFunc()
@@ -64,7 +52,6 @@
 				{
 					$("#schoolManId").combobox("setValue",schoolData[0].schoolId);
 				}
-				$("#shortClassType").combobox("setValue","");
 				$("#payStartManTime").datebox("setValue","");
 				$("#payEndManTime").datebox("setValue","");
 				$("#studentName").textbox("setValue","");
@@ -122,6 +109,7 @@
   	<body>
 		<form id="manFm" style="margin:0 auto;">
 			<input type="hidden" name="classType" id="classType" value="Y" />
+			<input type="hidden" name="shortClassType" id="shortClassType" value="${param.shortClassType}" />
 			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 				<tr>
 					<td align="right">
@@ -150,13 +138,7 @@
 					<td width="12%">
 						<select id="schoolManId" name="schoolManId" style="width:150px" ></select>
 					</td>
-					<td align="right">
-						班级类型：
-					</td>
-					<td>
-						<select id="shortClassType" name="shortClassType" style="width:150px" ></select>										
-					</td>
-					<td colspan="2" align="center">
+					<td colspan="4" align="right" style="padding-right:85px">
 						<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
 						<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
 					</td>

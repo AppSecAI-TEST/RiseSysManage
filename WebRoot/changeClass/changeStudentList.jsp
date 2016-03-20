@@ -16,6 +16,7 @@
   	<body style="padding-top:5px">
   		<form id="qryFm" style="margin:0 auto;">
   			<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId %>"/>
+  			<input type="hidden" id="funcNodeId" name="funcNodeId" value="<%=funcNodeId %>"/>
   			<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
   				<tr>
   					<td align="right"><span>学员姓名：</span></td>

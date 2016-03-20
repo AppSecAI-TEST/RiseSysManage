@@ -151,7 +151,7 @@
 							<td align="center"><input type="checkbox" name="shortClassAttendId" value="${node.shortClassAttendId}" onclick="classAttendCheckbox(this)" /></td>
 							<td align="center">${i.count}</td>
 							<td align="center"><fmt:formatDate value="${node.schooltime}" pattern="yyyy-MM-dd" /></td>
-							<td align="center">${node.handlerObj.sysName}</td>
+							<td align="center">${node.handlerObj.userName}</td>
 							<td align="center"><fmt:formatDate value="${node.createDate}" pattern="yyyy-MM-dd" timeZone="GMT"/></td>
 							<td align="center">${node.attendNum}</td>
 							<td align="center">${node.realNum}</td>

@@ -43,7 +43,7 @@
 			<div class="panel-header panel-header-noborder top-toolbar" style="position:absolute;bottom:0px;border-top-width:1px;border-bottom-width:0px;z-index:1;display:none;">
 				<div id="infobar">
 		            <span style="background-position: left; padding-left: 25px;background-image:url(<%=path %>/pub/images/user_business_boss.png);background-repeat:no-repeat;">
-		            	您好 <b id="curname">${sessionScope.StaffT.staffName}</b>
+		            	您好 <b id="curname">${sessionScope.StaffT.userName}</b>
 		            </span>
 		        </div>
 			</div>
@@ -114,7 +114,7 @@
 				getLeft(${sessionScope.funcNodeInfo[0].funcNodeList[0].funcNodeId}, '导航菜单');
 				$.messager.show({			
 					title:'登录提示',
-					msg:'您好！${sessionScope.StaffT.staffName} 欢迎回来！<br/>最后登录时间：<fmt:formatDate value="${sessionScope.StaffT.lastDate}" pattern="yyyy-MM-dd HH:mm:ss" /><br/>最后登录IP：${sessionScope.StaffT.remoteIp}',
+					msg:'您好！${sessionScope.StaffT.userName} 欢迎回来！<br/>最后登录时间：<fmt:formatDate value="${sessionScope.StaffT.lastDate}" pattern="yyyy-MM-dd HH:mm:ss" /><br/>最后登录IP：${sessionScope.StaffT.remoteIp}',
 					timeout:5000,
 					showType:'slide'
 				});

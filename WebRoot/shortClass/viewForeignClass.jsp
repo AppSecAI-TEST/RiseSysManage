@@ -52,7 +52,7 @@
 			<tr>
 				<td align="right">创建人：</td>
 				<td>
-					${shortClassInstT.creatorObj.sysName}
+					${shortClassInstT.creatorObj.userName}
 				</td>
 				<td align="right">创建时间：</td>
 				<td>

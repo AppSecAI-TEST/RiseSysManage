@@ -51,7 +51,7 @@ $(document).ready(function() {
 				var changeClassFlag = row.changeClassFlag;
 				if("N" == changeClassFlag) {
 					var studentCourseId = row.studentCourseId;
-					window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&changeSource=change";
+					window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&changeSource=change&funcNodeId="+$("#funcNodeId").val();
 				} else {
 					$.messager.alert('提示', "您选择的学员课程已申请转班，不能再次申请转班！");
 				}
