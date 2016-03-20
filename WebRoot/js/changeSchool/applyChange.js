@@ -155,7 +155,7 @@ function back() {
 			var classInstId = $("#attendClassInstId").val();
 			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=maintenance&funcNodeId="+funcNodeId;
 		} else {
-			window.location.href = "/sys/changeSchool/changeSchool.jsp";
+			window.location.href = "/sys/changeSchool/changeSchool.jsp?funcNodeId="+$("#funcNodeId").val();
 		}
 	} else if("leave" == changeSource) {
 		window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";

@@ -6,6 +6,7 @@
 	String studentCourseId = request.getParameter("studentCourseId");
 	String attendFuncNodeId = request.getParameter("attendFuncNodeId");
 	String attendClassInstId = request.getParameter("attendClassInstId");
+	String funcNodeId = request.getParameter("funcNodeId");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -28,6 +29,7 @@
   				<input type="hidden" id="applyType" name="applyType" value="001"/>
   				<input type="hidden" id="channel" value="<%=channel %>"/>
   				<input type="hidden" id="attendFuncNodeId" value="<%=attendFuncNodeId %>"/>
+  				<input type="hidden" id="funcNodeId" value="<%=funcNodeId %>"/>
   				<input type="hidden" id="attendClassInstId" value="<%=attendClassInstId %>"/>
   				<input type="hidden" id="changeSource" name="changeSource" value="<%=changeSource %>"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>

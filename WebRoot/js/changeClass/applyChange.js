@@ -120,7 +120,7 @@ function back() {
 			var classInstId = $("#attendClassInstId").val();
 			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=maintenance&funcNodeId="+funcNodeId;
 		} else {
-			window.location.href = "/sys/changeClass/changeClass.jsp";
+			window.location.href = "/sys/changeClass/changeClass.jsp?funcNodeId="+$("#funcNodeId").val();
 		}
 	} else if("leave" == changeSource) {
 		window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";

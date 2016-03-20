@@ -20,15 +20,20 @@
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
 				var classManStateData = [];
+				var classManVerData = [];
 				for(var i = 0,n = data.length;i < n;i++)
 				{
 					if(data[i].codeFlag != '005')
 					{
-						classManStateData.push(data[i]);
+						if(data[i].codeFlag != '001')
+						{
+							classManStateData.push(data[i]);
+						}
+						classManVerData.push(data[i]);
 					}
 				}
 				$("#classManState").combobox("loadData",classManStateData);
-				$("#classManVerState").combobox("loadData",classManStateData);
+				$("#classManVerState").combobox("loadData",classManVerData);
 			},"json");
 			$.post("<%=path %>/pubData/qryStage.do",function(data){
 				$("#classType").combobox("loadData",data);
