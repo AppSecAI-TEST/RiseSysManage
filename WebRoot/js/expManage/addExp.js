@@ -1,55 +1,69 @@
-var studentId =null;
-var studentCourseId =null;
-var courseState ="";
-var teacherName="";
-var stageLevel ="";
-var className ="";
-var classProgress ="";
-var classInstId ="";
+var studentId = null;
+var studentCourseId = null;
+var courseState = "";
+var teacherName = "";
+var stageLevel = "";
+var className = "";
+var classProgress = "";
+var classInstId = "";
+var funcNodeId = "";
+var channel = "";
 $(document).ready(function(){
 	initPage();
-	$("#submitBtn").on("click",function(){
-		if(trim($("#remark").val())=="")
-		{
+	$("#submitBtn").on("click", function() {
+		if (trim($("#remark").val()) == "") {
 			$.messager.alert('提示', "请填写异常原因备注！");
 			return false;
-		}   
-		var paramValue ='{"stageLevel":"'+stageLevel+'","orignClassId":"'+classInstId+'","orignClassName":"'+className+'","studentCourseId":"'+studentCourseId+'","studentId":"'+studentId+'","excId":"","orignCourseState":"'+courseState+'","teacherName":"'+teacherName+'","hours":"'+classProgress+'","excState":"001","remark":"'+trim($("#remark").val())+'","handlerId":"'+$("#handlerId").val()+'"}';
-		$.messager.confirm('提示','您确定要添加该异常？',function(r) {
-    			if(r) 
-    			{
-    				$.post('/sys/exception/addInfo.do', {param:paramValue}, function(result) 
-    				{
-	    				if(result=="true") 
-	    				{
-	    					showMessage('提示', "添加异常成功",function() {
-								window.location.href = "expList.jsp"});
-	    				}
-	    				else 
-	    				{
-	    					$.messager.alert('提示', "添加异常失败");
-	    				}
-    				});
-    			}
-    	});
+		}
+		var paramValue = '{"stageLevel":"' + stageLevel
+			+ '","orignClassId":"' + classInstId
+			+ '","orignClassName":"' + className
+			+ '","studentCourseId":"' + studentCourseId
+			+ '","studentId":"' + studentId
+			+ '","excId":"","orignCourseState":"'
+			+ courseState + '","teacherName":"'
+			+ teacherName + '","hours":"' + classProgress
+			+ '","excState":"001","remark":"'
+			+ trim($("#remark").val()) + '","handlerId":"'
+			+ $("#handlerId").val() + '"}';
+		$.messager.confirm('提示', '您确定要添加该异常？', function(r) {
+			if (r) {
+				$.post('/sys/exception/addInfo.do', {param : paramValue}, function(result) {
+					if (result == "true") {
+						showMessage('提示', "添加异常成功", function() {back();});
+					} else {
+						$.messager.alert('提示', "添加异常失败");
+					}
+				});
+			}
+		});
 	});
 	$("#backBtn").on("click",function(){
 		 window.history.back();
 	});
 });
 
+function back() {
+	if("attend" == channel) {
+		window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=maintenance&funcNodeId="+funcNodeId;
+	} else {
+		window.location.href = "expList.jsp"
+	}
+}
 
 function initPage()
 {
-	var info =document.URL.split("=")[1];
-	studentId =info.split(",")[0];
-	studentCourseId =info.split(",")[1];
-	courseState =info.split(",")[2];
-	classProgress =getFormatStr(replaceAdd(info.split(",")[3]));
-	stageLevel =getFormatStr(info.split(",")[4]);
-	className =getFormatStr(info.split(",")[5]);
-	teacherName =getFormatStr(info.split(",")[6]);
-	classInstId =getFormatStr(info.split(",")[7]);
+	var info = document.URL.split("=")[1];
+	studentId = info.split(",")[0];
+	studentCourseId = info.split(",")[1];
+	courseState = info.split(",")[2];
+	classProgress = getFormatStr(replaceAdd(info.split(",")[3]));
+	stageLevel = getFormatStr(info.split(",")[4]);
+	className = getFormatStr(info.split(",")[5]);
+	teacherName = getFormatStr(info.split(",")[6]);
+	classInstId = getFormatStr(info.split(",")[7]);
+	funcNodeId = getFormatStr(info.split(",")[8]);
+	channel = getFormatStr(info.split(",")[9]);
 	var param = '{"excFlag":"N","studentId":"'+studentId+'"}';
 	$.ajax({
 			type : "POST",

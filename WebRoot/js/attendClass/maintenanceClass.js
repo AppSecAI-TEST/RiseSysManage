@@ -286,7 +286,9 @@ $(document).ready(function() {
 						var changeSchoolFlag = row.changeSchoolFlag;
 						if("N" == changeSchoolFlag) {
 							var studentCourseId = row.studentCourseId;
-							window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&changeSource=change";
+							var funcNodeId = $("#funcNodeId").val();
+							var classInstId = $("#classInstId").val();
+							window.location.href = "/sys/changeClass/applyChangeClass.jsp?studentCourseId="+studentCourseId+"&changeSource=change&channel=attend&attendClassInstId="+classInstId+"&attendFuncNodeId="+funcNodeId;
 						} else {
 							$.messager.alert('提示', "您选择的学员课程已申请转校，不能申请转班！");
 						}
@@ -315,7 +317,9 @@ $(document).ready(function() {
 						var changeSchoolFlag = row.changeSchoolFlag;
 						if("N" == changeSchoolFlag) {
 							var studentId = row.studentId;
-							window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentId="+studentId+"&changeSource=change";
+							var funcNodeId = $("#funcNodeId").val();
+							var classInstId = $("#classInstId").val();
+							window.location.href = "/sys/changeSchool/applyChangeSchool.jsp?studentId="+studentId+"&changeSource=change&channel=attend&attendClassInstId="+classInstId+"&attendFuncNodeId="+funcNodeId;
 						} else {
 							$.messager.alert('提示', "您选择的学员课程已申请转校，不能再次申请转校！");
 						}
@@ -342,13 +346,15 @@ $(document).ready(function() {
 					var studentId = row.studentId;
 					var studentCourseId = row.studentCourseId;
 					var classProgress = row.classProgress;
-					var classInstId=row.classInstId;
-					var stageLevel=row.stageId;
-					var className=row.className;
-					var teacherName=row.teacherName;
-					var schoolId=row.schoolId;
-					var funcNodeId="";
-					window.location.href ="/sys/leaveManage/viewLeaveInfo.do?studentId="+studentId+"&schoolId="+schoolId+"&courseState="+courseState+"&studentCourseId="+studentCourseId+"&funcNodeId="+funcNodeId+"&type=add&currentHours="+classProgress+"&stageLevel="+stageLevel+"&classInstId="+classInstId+"&className="+className+"&teacherName="+teacherName; 
+					var classInstId = row.classInstId;
+					var stageLevel = row.stageId;
+					var className = row.className;
+					var teacherName = row.teacherName;
+					var schoolId = row.schoolId;
+					var funcNodeId = $("#funcNodeId").val();
+					window.location.href ="/sys/leaveManage/viewLeaveInfo.do?studentId=" + studentId + "&schoolId=" + schoolId + "&courseState="
+					+ courseState + "&studentCourseId=" + studentCourseId + "&funcNodeId=" + funcNodeId + "&type=add&currentHours=" + classProgress
+					+ "&stageLevel=" + stageLevel + "&classInstId=" + classInstId+"&className=" + className + "&teacherName=" + teacherName + "&channelSourse=attend"; 
 				} else {
 					$.messager.alert('提示', "您选择的学员课程已休学，不能再次申请休学！");
 				}
@@ -370,13 +376,14 @@ $(document).ready(function() {
 					var studentId = row.studentId;
 					var studentCourseId = row.studentCourseId;
 					var classProgress = row.classProgress;
-					var classInstId=row.classInstId;
-					var stageLevel=row.stageId;
-					var className=row.className;
-					var teacherName=row.teacherName;
-					var schoolId=row.schoolId;
-					var funcNodeId="";
-					window.location.href = "/sys/exception/addExp.jsp?addInfo="+studentId+","+studentCourseId+","+courseState+","+classProgress+","+stageLevel+","+className+","+teacherName+","+classInstId;
+					var classInstId = row.classInstId;
+					var stageLevel = row.stageId;
+					var className = row.className;
+					var teacherName = row.teacherName;
+					var schoolId = row.schoolId;
+					var funcNodeId = $("#funcNodeId").val();
+					window.location.href = "/sys/exception/addExp.jsp?addInfo=" + studentId + "," + studentCourseId + "," 
+					+ courseState + "," + classProgress + "," + stageLevel + "," + className + "," + teacherName + "," + classInstId + "," + funcNodeId + ",attend";
 				} else {
 					$.messager.alert('提示', "您选择的学员课程状态为异常，不能再次修改课程状态为异常！");
 				}
@@ -399,8 +406,13 @@ $(document).ready(function() {
 				var identityType = row.identityType;
 				var advisterASchoolId = row.advisterASchoolId;
 				var advisterBSchoolId = row.advisterBSchoolId;
-				var funcNodeId = $("#updateStudent").attr("funcNodeId");
-				window.location.href = "/sys/student/updateStudent.jsp?studentId="+studentId+"&funcNodeId="+funcNodeId+"&dutyAdvister="+dutyAdvister+"&carer="+carer+"&advisterIdA="+advisterIdA+"&advisterIdB="+advisterIdB+"&identityType="+identityType+"&advisterASchoolId="+advisterASchoolId+"&advisterBSchoolId="+advisterBSchoolId;
+				var funcNodeId = $("#funcNodeId").val();
+				var attendClassInstId = $("#classInstId").val();
+				var attendFuncNodeId = $("#updateStudent").attr("funcNodeId");
+				window.location.href = "/sys/student/updateStudent.jsp?studentId=" + studentId + "&funcNodeId=" + funcNodeId
+					+"&dutyAdvister=" + dutyAdvister + "&carer="+carer+"&advisterIdA=" + advisterIdA + "&advisterIdB=" + advisterIdB
+					+"&identityType=" + identityType + "&advisterASchoolId=" + advisterASchoolId + "&advisterBSchoolId=" + advisterBSchoolId
+					+ "&channel=attend&attendClassInstId="+ attendClassInstId + "&attendFuncNodeId=" + attendFuncNodeId;
 			} else {
 				$.messager.alert('提示', "请先选择您要修改档案的学员课程！");
 			}

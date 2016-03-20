@@ -12,6 +12,8 @@
 		<script type="text/javascript" src="<%=path %>/js/leaveManage/leaveManage.js"></script>
   	</head>
   	<body>
+  		<input type="hidden" id="channel" value="${obj.studentInfo.channelSourse }"/>
+  		<input type="hidden" id="funcNodeId" value="${obj.studentInfo.funcNodeId }"/>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="学员基础信息">
   			<table width="100%" cellpadding="5px" class="maintable" id="studentTd">
   				<tr>

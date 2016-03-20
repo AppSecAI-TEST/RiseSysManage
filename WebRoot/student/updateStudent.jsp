@@ -2,6 +2,7 @@
 <%
 	String path = request.getContextPath();
 	String carer = request.getParameter("carer");
+	String channel = request.getParameter("channel");
 	String schoolId = request.getParameter("schoolId");
 	String studentId = request.getParameter("studentId");
 	String funcNodeId = request.getParameter("funcNodeId");
@@ -9,6 +10,8 @@
 	String advisterIdA = request.getParameter("advisterIdA");
 	String advisterIdB = request.getParameter("advisterIdB");
 	String identityType = request.getParameter("identityType");
+	String attendFuncNodeId = request.getParameter("attendFuncNodeId");
+	String attendClassInstId = request.getParameter("attendClassInstId");
 	String advisterASchoolId = request.getParameter("advisterASchoolId");
 	String advisterBSchoolId = request.getParameter("advisterBSchoolId");
 %>
@@ -30,6 +33,9 @@
 	      	<input type="hidden" id="updateIdentityType" value="<%=identityType %>"/>
 	      	<input type="hidden" id="updateDutyAdvister" value="<%=dutyAdvister %>"/>
 	      	<input type="hidden" id="updateCarer" value="<%=carer %>"/>
+	      	<input type="hidden" id="channel" value="<%=channel %>"/>
+	      	<input type="hidden" id="attendFuncNodeId" value="<%=attendFuncNodeId %>"/>
+	      	<input type="hidden" id="attendClassInstId" value="<%=attendClassInstId %>"/>
       		<form id="studentFm">
 	      		<input type="hidden" id="schoolId" value="<%=schoolId %>"/>
 	      		<input type="hidden" id="funcNodeId" name="funcNodeId" value="<%=funcNodeId %>"/>

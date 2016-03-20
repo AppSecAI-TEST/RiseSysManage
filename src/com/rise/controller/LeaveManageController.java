@@ -30,7 +30,7 @@ public class LeaveManageController {
 	public ModelAndView viewLeaveInfo(String studentId, String schoolId,
 			String leaveId, String funcNodeId, String type, String courseState,
 			String studentCourseId, String currentHours, String stageLevel,
-			String classInstId, String className, String teacherName, String channel)
+			String classInstId, String className, String teacherName, String channel, String channelSourse)
 	{
 		log.error(studentId);
 		log.error(funcNodeId);
@@ -57,6 +57,8 @@ public class LeaveManageController {
 			String ret = leaveManageService.viewLeaveInfo(studentId, leaveId, funcNodeId, type);
 			JSONObject obj = JSONObject.fromObject(ret);
 			obj.element("channel", channel);
+			obj.element("funcNodeId", funcNodeId);
+			obj.element("channelSourse", channelSourse);
 			view.addObject("obj",obj);
 		}catch(Exception e)
 		{

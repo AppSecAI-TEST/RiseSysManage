@@ -114,7 +114,14 @@ $(document).ready(function() {
 function back() {
 	var changeSource = $("#changeSource").val();
 	if("change" == changeSource) {
-		window.location.href = "/sys/changeClass/changeClass.jsp";
+		var channel = $("#channel").val();
+		if("attend" == channel) {
+			var funcNodeId = $("#attendFuncNodeId").val();
+			var classInstId = $("#attendClassInstId").val();
+			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=maintenance&funcNodeId="+funcNodeId;
+		} else {
+			window.location.href = "/sys/changeClass/changeClass.jsp";
+		}
 	} else if("leave" == changeSource) {
 		window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";
 	} else if("exception" == changeSource) {

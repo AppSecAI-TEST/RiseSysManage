@@ -84,13 +84,10 @@ $(document).ready(function() {
     			},
     			success: function (result) {
     				var data = JSON.parse(result);
-    				if(data.flag)
-    				{
+    				if(data.flag) {
     					$("#imgUrl").val(data.fileId);
     					$.messager.alert('提示', "文件上传成功！", "info", function() {$("#cancelUploadBtn").linkbutton('disable');});
-    				}
-    				else
-    				{
+    				} else {
     					$.messager.alert('提示', data.msg);
     				}
     			}
@@ -126,8 +123,7 @@ $(document).ready(function() {
 						data: "param=" + obj,
 						dataType: "json",
 						async: true,
-						beforeSend: function()
-						{
+						beforeSend: function() {
 							$.messager.progress({title : '申请转校', msg : '正在申请转校，请稍等……'});
 						},
 						success: function (data) {
@@ -153,7 +149,14 @@ $(document).ready(function() {
 function back() {
 	var changeSource = $("#changeSource").val();
 	if("change" == changeSource) {
-		window.location.href = "/sys/changeSchool/changeSchool.jsp";
+		var channel = $("#channel").val();
+		if("attend" == channel) {
+			var funcNodeId = $("#attendFuncNodeId").val();
+			var classInstId = $("#attendClassInstId").val();
+			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=maintenance&funcNodeId="+funcNodeId;
+		} else {
+			window.location.href = "/sys/changeSchool/changeSchool.jsp";
+		}
 	} else if("leave" == changeSource) {
 		window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";
 	} else if("exception" == changeSource) {

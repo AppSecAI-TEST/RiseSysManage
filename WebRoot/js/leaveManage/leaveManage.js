@@ -315,11 +315,9 @@ function addLeaveSubmit()
 		    	},
 		    	success: function(flag) {
 		    		$.messager.progress('close'); 
-		    		if(flag == "true"){
-		    			$.messager.alert('提示', "休学成功！","info",function(){
-		    			window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";
-					});
-		    		}else if(flag == "false"){
+		    		if(flag == "true") {
+		    			$.messager.alert('提示', "休学成功！", "info", function() {back();});
+		    		} else if(flag == "false") {
 		    			$.messager.alert('提示', "休学失败！");
 		    		}
 		        } 
@@ -327,6 +325,17 @@ function addLeaveSubmit()
 		}else {
 			$.messager.alert('提示', "请您先上传文件！");
 		}
+	}
+}
+
+function back() {
+	var channel = $("#channel").val();
+	if("attend" == channel) {
+		var funcNodeId = $("#funcNodeId").val();
+		var classInstId = $("#classInstId").val();
+		window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=maintenance&funcNodeId="+funcNodeId;
+	} else {
+		window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp"
 	}
 }
 

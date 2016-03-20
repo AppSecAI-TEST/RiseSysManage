@@ -481,7 +481,7 @@ $(document).ready(function() {
 										$.messager.progress('close'); 
 										var flag = data.flag
 										if(flag) {
-											$.messager.alert('提示', "修改学员档案成功！", "info", function() {window.history.back();});
+											$.messager.alert('提示', "修改学员档案成功！", "info", function() {back();});
 										} else {
 											$.messager.alert('提示', "修改学员档案失败！");
 										}
@@ -660,16 +660,26 @@ $(document).ready(function() {
     });
 });
 
-function deleteRealSchool(obj, realId)
-{
+function back() {
+	var channel = $("#channel").val();
+	if("attend" == channel) {
+		var funcNodeId = $("#attendFuncNodeId").val();
+		var classInstId = $("#attendClassInstId").val();
+		window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=maintenance&funcNodeId="+funcNodeId;
+	} else {
+		var funcNodeId = $("#funcNodeId").val();
+		window.location.href = "/sys/student/studentList.jsp?funcNodeId="+funcNodeId;
+	}
+}
+
+function deleteRealSchool(obj, realId) {
 	updateFlag = true;
 	$(obj).parent().parent().remove(); 
 	td = td - 1;
 	realIds += realId + ",";
 }
 
-function deleteContact(obj, contactId)
-{
+function deleteContact(obj, contactId) {
 	updateFlag = true;
 	$(obj).parent().parent().remove(); 
 	contactTd = contactTd - 1;
@@ -677,34 +687,29 @@ function deleteContact(obj, contactId)
 	contactLength = contactLength - 1;
 }
 
-function deleteActivity(obj, activityId)
-{
+function deleteActivity(obj, activityId) {
 	updateFlag = true;
 	$(obj).parent().parent().remove(); 
 	activityTd = activityTd - 1;
 	activityIds += activityId + ",";
 }
 
-function delRealSchool(obj)
-{
+function delRealSchool(obj) {
 	$(obj).parent().parent().remove(); 
 	td = td - 1;
 }
 
-function delContact(obj)
-{
+function delContact(obj) {
 	$(obj).parent().parent().remove(); 
 	contactTd = contactTd - 1;
 }
 
-function delActivity(obj)
-{
+function delActivity(obj) {
 	$(obj).parent().parent().remove(); 
 	activityTd = activityTd - 1;
 }
 
-function validateStudent()
-{
+function validateStudent() {
 	var flag = false;
 	var obj = $("#studentFm").serializeArray();
 	for(var i = 0, len = obj.length; i < len; i++) {

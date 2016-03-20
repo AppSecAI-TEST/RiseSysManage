@@ -1,8 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
+	String channel = request.getParameter("channel");
 	String changeSource = request.getParameter("changeSource");
 	String studentCourseId = request.getParameter("studentCourseId");
+	String attendFuncNodeId = request.getParameter("attendFuncNodeId");
+	String attendClassInstId = request.getParameter("attendClassInstId");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -23,6 +26,9 @@
   				<input type="hidden" id="outClassId" name="outClassId"/>
   				<input type="hidden" id="courseState" name="courseState"/>
   				<input type="hidden" id="applyType" name="applyType" value="001"/>
+  				<input type="hidden" id="channel" value="<%=channel %>"/>
+  				<input type="hidden" id="attendFuncNodeId" value="<%=attendFuncNodeId %>"/>
+  				<input type="hidden" id="attendClassInstId" value="<%=attendClassInstId %>"/>
   				<input type="hidden" id="changeSource" name="changeSource" value="<%=changeSource %>"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   				<input type="hidden" id="studentCourseId" name="studentCourseId" value="<%=studentCourseId %>"/>
