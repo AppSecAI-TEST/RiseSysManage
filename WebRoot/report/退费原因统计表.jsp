@@ -30,7 +30,7 @@
 			      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=REASON_TYPE">
 				        	</select>
 	  					</td>
-	  					<td width="80px" align="right"><span>退费日期：</span></td>
+	  					<td width="100px" align="right"><span>退费归属日期：</span></td>
 						<td width="260px">
 							<input class="easyui-datebox" type="text"  editable="false" style="width:110px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myformatter, parser:myparser"/>
 							至

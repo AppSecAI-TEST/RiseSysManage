@@ -1,6 +1,15 @@
 $(document).ready(function() {
 	$("#qryBtn").click(function() {
 		var object = $("#qryFm").serializeObject();
+		if(object.startTime=='')
+		{
+				$.messager.alert('提示', "请选择退费归属日期");
+			return;
+		}
+		if(object.endTime=='')
+		{
+			object.endTime=new Date();
+		}
     	var obj = JSON.stringify(object);
     	obj = obj.substring(0, obj.length - 1);
     	var funcNodeId = $("#qryBtn").attr("funcNodeId");
