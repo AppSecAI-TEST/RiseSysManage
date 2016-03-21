@@ -11,7 +11,7 @@
 		<script type="text/javascript" src="<%=path %>/js/teaPlanManage/teaPlanManage.js"></script>
   	</head>
   	<body>
-  		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="教质计划创建">
+  		<div class="easyui-panel" style="min-width:1100px; width:98%;height:auto;" title="教质计划创建">
   		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   			<table width="98%" style="border:1px solid #ccc;font-family:'微软雅黑';margin-top:5px;height:30px;" align="center" cellspacing="2">
   				<tr>
@@ -40,8 +40,8 @@
      	       </tr>
       	    </table>
   		</div>
- 		<div style="margin-top: 20px;min-width:1100px; width:99%;">
-	      	<div style="text-align:center">
+ 		<div style="margin-top: 20px;min-width:1100px; width:98%;">
+	      	<div style="text-align:right">
 	      		<a href="javascript:void(0)" id="addPlanSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;" onclick="addPlanSubmit()"><span>提交</span></a>
 	      		&nbsp;
 	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="javascript:window.history.back()"><span>返回</span></a>

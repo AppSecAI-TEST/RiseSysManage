@@ -112,7 +112,9 @@ function createPlan(schoolId,month)
 						max:maxDays
 					}); 
 					$(".remark").textbox({});
-					
+					$("input[type=text]").each(function(i,node){
+						$(node).attr("maxlength",50);
+					});
 					$(".teachingIsOpen").change(function() {
 					   var val = $(this).val();
 					   if(val == "Y"){
