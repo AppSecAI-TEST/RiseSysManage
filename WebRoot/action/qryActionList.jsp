@@ -45,7 +45,7 @@
   					<td align="right"><span>实际参与老师：</span></td>
   					<td><input class="easyui-textbox" name="teacherName" id="teacherName" style="width:100px;height:25px" /></td>
   					<td align="left" colspan="2">
-  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" funcNodeId="3030"><span>查询</span></a>
+  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;margin-left:98px;" id="qryBtn" funcNodeId="3030"><span>查询</span></a>
   						&nbsp;&nbsp;
   						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="resetBtn" ><span>重置</span></a>
   					</td>

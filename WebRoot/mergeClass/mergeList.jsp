@@ -28,28 +28,28 @@
   	</head>
   	<body>
   		<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
-  		<div id="tt" class="easyui-tabs" style="min-width:1110px;width:100%;overflow:auto;height:auto;">
-  			<div title="合并班管理" style="padding:5px;">
+  		<div id="tt" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
+  			<div title="合并班管理" style="padding:5px;display:block;">
 		 		<form id="merFm">
 		  			<table class="search_tab">
 		  				<tr>
-		  					<td width="90px;" align="right">校区：</td>
-		  					<td width="120px;">
+		  					<td width="70px;" align="right">校区：</td>
+		  					<td width="100px;">
 		  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px;height:25px;" editable="false"
 		  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 									onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
   									url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=704&fieldId=schoolId">
 				        		</select>
 		  					</td>
-		  					<td width="90px;" align="right">课程阶段：</td>
-		  					<td width="140px;">
+		  					<td width="80px;" align="right">课程阶段：</td>
+		  					<td width="120px;">
 		  						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 120px;height:25px;" editable="false"
 									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'"
   									url="<%=path%>/pubData/qryStage.do">
 				        		</select>
 		  					</td>
-		  					<td width="110px;" align="right">计划审批时间：</td>
-		  					<td width="250x;">
+		  					<td width="105px;" align="right">计划审批时间：</td>
+		  					<td width="225x;">
 		  						<input class="easyui-datebox" name="startPlanTime" id="startPlanTime"  style="width:100px;height:25px;" editable="false"/>
 		  						至
 		  						<input class="easyui-datebox" name="endPlanTime" id="endPlanTime"  style="width:100px;height:25px;" editable="false"/>
@@ -58,9 +58,9 @@
 		  				<tr>
 		  					<td align="right">定班率：</td>
 		  					<td>
-		  						<input class="easyui-textbox" id="lowLimit" name="lowLimit" data-options="min:0,max:999,precision:0" style="width:35px;height:25px;">%
+		  						<input class="easyui-textbox" id="lowLimit" name="lowLimit" data-options="min:0,max:999,precision:0" style="width:30px;height:25px;">%
 		  						-
-			  					<input class="easyui-textbox" id="limit" name="limit" data-options="min:1,max:1000,precision:0" style="width:35px;height:25px;">%
+			  					<input class="easyui-textbox" id="limit" name="limit" data-options="min:1,max:1000,precision:0" style="width:30px;height:25px;">%
 		  					</td>
 		  					<td align="right">合并状态：</td>
 		  					<td>
@@ -126,16 +126,16 @@
 		 		<form id="appFm">
 					<table class="search_tab">
 		  				<tr>
-		  					<td width="90px;" align="right">校区：</td>
-		  					<td width="120px;">
+		  					<td width="70px;" align="right">校区：</td>
+		  					<td width="100px;">
 		  						<select id="schoolIds" name="schoolId" class="easyui-combobox" style="width: 100px;height:25px;" editable="false"
 									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
 						      		onLoadSuccess:function(data){if(data.length > 0) $('#schoolIds').combobox('setValue',data[0].schoolId);}"
   									url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=705&fieldId=schoolId&headFlag=N">
 				        		</select>
 		  					</td>
-		  					<td width="90px;" align="right">课程阶段：</td>
-		  					<td width="140px;">
+		  					<td width="80px;" align="right">课程阶段：</td>
+		  					<td width="120px;">
 		  						<select id="stageIds" name="stageId" class="easyui-combobox" style="width: 120px;height:25px;" editable="false"
 									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto', 
 				      				onLoadSuccess:function(data){if(data.length > 0) $('#stageIds').combobox('setValue',data[0].stageId);}"
@@ -143,7 +143,7 @@
 				        		</select>
 		  					</td>
 		  					<td width="110px;" align="right">计划审批时间：</td>
-		  					<td width="230x;">
+		  					<td width="225x;">
 		  						<input class="easyui-datebox" name="startPlanTime" id="startPlanTime"  style="width:100px;height:25px;" editable="false"/>
 		  						至
 		  						<input class="easyui-datebox" name="endPlanTime" id="endPlanTime"  style="width:100px;height:25px;" editable="false"/>
@@ -153,9 +153,9 @@
 		  				<tr>
 		  					<td align="right">定班率：</td>
 		  					<td>
-		  						<input class="easyui-textbox" id="lowLimit" name="lowLimit" style="width:35px;height:25px;">%
+		  						<input class="easyui-textbox" id="lowLimit" name="lowLimit" style="width:30px;height:25px;">%
 		  						-
-			  					<input class="easyui-textbox" id="limit" name="limit" style="width:35px;height:25px;">%
+			  					<input class="easyui-textbox" id="limit" name="limit" style="width:30px;height:25px;">%
 		  					</td>
 		  					<td align="right">合并状态：</td>
 		  					<td>

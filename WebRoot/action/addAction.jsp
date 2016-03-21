@@ -17,10 +17,12 @@
   				<tr>
   					<td width="15%" align="right"><span>校区：</span></td>
   					<td align="left" colspan="2">
-  						<select class="easyui-combobox" name="actionSchoolId" id="actionSchoolId" style="width:150px;height: 25px;" editable="false"
-  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-  							url="<%=path%>/pubData/qrySchoolList.do?schoolId=">
+  						<select class="easyui-combobox" name="actionSchoolId" id=actionSchoolId style="width:100px;height: 25px;" editable="false"
+  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
+  							onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
+  							url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=732&fieldId=schoolId&headFlag=N">
   						</select>
+  						
   					</td>
   				</tr>
   				<tr>
@@ -34,7 +36,7 @@
   				<tr>
   					<td align="right" ><span>活动名称：</span></td>
   					<td align="left" colspan="2">
-  						<textarea rows="4" cols="100" id="title" name="title" class="easyui-validatebox textbox"></textarea>
+  						 <input name="title" id="title" type="text" style="width:60%;height:100px" class="easyui-textbox" data-options="multiline:true" /> 						
   					</td>
   				</tr>
   				<tr>
@@ -68,7 +70,7 @@
   				<tr>
   					<td align="right"><span>创建备注：</span></td>
   					<td align="left" colspan="2">
-  						<textarea rows="8" cols="100" id="createRemark" name="createRemark" class="easyui-validatebox textbox"></textarea>
+  						<input name="createRemark" id="createRemark" type="text" style="width:60%;height:100px" class="easyui-textbox" data-options="multiline:true,maxLength:100" />
   					</td>
   				</tr>
   			</table>

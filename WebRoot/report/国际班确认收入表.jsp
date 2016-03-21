@@ -49,10 +49,10 @@
 							<th field="amount" align="center" width="8%">实收金额</th>
 							<th field="favorName" align="center" width="8%">优惠方式</th>
 							<th field="attendDate" align="center" width="8%">确认收入月份</th>
-							<th field="totalRealHours" align="center" width="8%">总课时数</th>
+							<th field="planHours" align="center" width="8%">总课时数</th>
 							<th field="monthRealHours" align="center" width="8%">本月课时</th>
 							<th field="monthIncome" align="center" width="8%">本月确认收入</th>
-							<th field="hours" align="center" width="8%">累计课时</th>
+							<th field="totalRealHours" align="center" width="8%">累计课时</th>
 							<th field="totalIncome" align="center" width="8%">累计确认收入</th>
 							<th field="remainIncome" align="center" width="8%">未确认收入余额</th>
 						</tr>

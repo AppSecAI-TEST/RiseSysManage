@@ -54,11 +54,11 @@
   					<td align="center" width="4%">合并时长(周)</td>
   					<td align="center" width="8%">合并形式</td>
   					<td align="center" width="8%">合并后结课日期</td>
-  					<td align="center" width="5%">合并后班级</td>
+  					<td align="center" width="9%">合并后班级</td>
   					<td align="center" width="4%">定班人数</td>
   					<td align="center" width="4%">定班率</td>
-  					<td align="center" width="18%">合并后上课时段</td>
-  					<td align="center" width="14%">带班老师</td>
+  					<td align="center" width="16%">合并后上课时段</td>
+  					<td align="center" width="13%">带班老师</td>
   					<td align="center" width="9%">开课日期</td>
   				</tr>
   				<tr id="modelTr1" style="display:none">
@@ -71,28 +71,28 @@
   						<select style="width:100px;" data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName',required:true">
   						</select>
   					</td>
-  					<td align="center"><input style="width:108px" data-options="required:true"/></td>
-  					<td align="center" rowspan="1"><input style="width:50px" data-options="required:true"/></td>
+  					<td align="center"><input style="width:100px" data-options="required:true"/></td>
+  					<td align="center" rowspan="1"><input style="width:90px" data-options="required:true"/></td>
   					<td align="center"><input style="width:42px"/></td>
   					<td align="center" rowspan="1"></td>
   					<td align="center" rowspan="1">
   						<select style="width:64px;" data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName',required:true">
   						</select>
-  						<select style="width:135px;" data-options="required:true">
+  						<select style="width:130px;" data-options="required:true">
   						</select>
   						<p>
   						<select style="width:64px;" data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName',required:true">
   						</select>
-  						<select style="width:135px;" data-options="required:true">
+  						<select style="width:130px;" data-options="required:true">
   						</select>
   					</td>
   					<td align="center" rowspan="1">
-  						<select style="width:90px;" data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName',required:true">
+  						<select style="width:80px;" data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName',required:true">
   						</select>
   						<select style="width:80px;" data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname',required:true">
   						</select>
   						<p>
-  						<select style="width:90px;" data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName',required:true">
+  						<select style="width:80px;" data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName',required:true">
   						</select>
   						<select style="width:80px;" data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname',required:true">
   						</select>

@@ -46,7 +46,7 @@
 					<c:if test="${teachingPlan.teachingIsOpen == 'N'}">
 						<td align="center">否</td>
 					</c:if>
-					<td align="center">${teachingPlan.remark}</td>
+					<td align="left">${teachingPlan.remark}</td>
 				</tr>
 			</c:forEach>
       	    </table>

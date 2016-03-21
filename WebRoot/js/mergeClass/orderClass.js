@@ -57,7 +57,7 @@ function createClassDiv(obj,num)
 	if(obj.studentList!=undefined&&obj.studentList.length>0)
 	{
 		str +="<div style='width:1292px;margin-bottom:40px'>";
-		str +="<div class='easyui-panel' title='班级："+obj.className+"' style='width:1292px;min-height:60px;'>";
+		str +="<div class='easyui-panel' title='班级："+obj.className+"("+obj.schoolName+")' style='width:1292px;min-height:60px;'>";
 		str +=createStudentTable(obj.studentList,num);	
 		str +="</div>";
 		str +="<div class='easyui-panel' title='定班历史情况' style='width:1292px;min-height:60px;'>";

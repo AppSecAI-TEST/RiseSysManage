@@ -287,6 +287,10 @@ function addLeaveSubmit()
 		}
 		if(flag) {
 			var planLeaveTime = $("#planLeaveTime").val();
+			if(parseInt(planLeaveTime) > 24){
+				$.messager.alert('提示', "休学时长不能超过24个月！");
+				return;
+			}
 			var addRemark = $("#addRemark").val();
 			addRemark = string2Json(addRemark);
 			addRemark = encodeURI(addRemark);

@@ -74,7 +74,7 @@
  			</tr>
  			<tr>
  				<td align="right"><span>休学时长：</span></td>
- 				<td colspan="2"><input class="easyui-numberbox" name="planLeaveTime" id="planLeaveTime" style="width:120px;height: 25px;" data-options="min:1,max:24" required="true"/></td>
+ 				<td colspan="2"><input class="easyui-numberbox" name="planLeaveTime" id="planLeaveTime" style="width:120px;height: 25px;" data-options="min:1" required="true"/></td>
  				<td colspan="11"><span>休学申请单与缴费凭证：</span>
  					<input type="hidden" name="imgUrl" id="imgUrl"/>
                     <input style="width: 500px; height: 28px;" class="easyui-filebox" name="fileName" id="fileName" data-options="prompt:''"/>

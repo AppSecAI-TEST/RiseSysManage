@@ -7,6 +7,9 @@ $(document).ready(function(){
 		window.location.href = "qryActionList.jsp";
 	});
 	initPage();
+	$("textarea").each(function(i,node){
+		$(node).attr("maxlength",200);
+	});
 });
 
 
@@ -15,7 +18,7 @@ function cancelAction()
 	var param={};
 	param.actionId =actionId;
 	param.handlerId =$("#handlerId").val();
-	param.cancelRemark =trim($("#cancelRemark").val());
+	param.cancelRemark =$("#cancelRemark").textbox("getValue");
 	$.ajax( {
 		type : "POST",
 		url : "/sys/actionInfo/cancelAction.do",

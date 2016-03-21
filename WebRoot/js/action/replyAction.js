@@ -42,6 +42,9 @@ $(document).ready(function() {
 			});
 		}
 	});
+	$("textarea").each(function(i,node){
+		$(node).attr("maxlength",200);
+	});
 });
 
 function addTrInfo() {
@@ -173,8 +176,9 @@ function replyAction() {
 	action.actionId=actionId;
 	action.realHours =$("#realHours").numberbox("getValue");
 	action.handlerId = handlerId;
-	action.replyRemark =trim($("#replyRemark").val());
+	action.replyRemark =$("#replyRemark").textbox("getValue");
 	var teacheArr = [];
+	var countHour =0;
 	$(".addTr").each(function() {
 		var teacher = {};
 		teacher.schoolId = $(this).attr("schoolId");
@@ -185,10 +189,19 @@ function replyAction() {
 		teacher.hours = $(this).attr("hours");
 		teacher.handlerId = handlerId;
 		teacheArr.push(teacher);
+		if($(this).attr("teacherType")=="T")
+		{
+			countHour +=parseInt($(this).attr("hours"));
+		}
 	});	
 	if(teacheArr.length<1)
 	{
 		$.messager.alert("提示", "请至少添加一条老师记录");
+		return false;
+	}
+	if(countHour>parseInt(action.realHours))
+	{
+		$.messager.alert("提示", "主T老师课时数之和"+countHour+"大于活动课时数"+action.realHours+"，请修改");
 		return false;
 	}
 	reply.actionInfo =action;
@@ -296,8 +309,9 @@ function updateReply()
 	var action={};
 	action.actionId =actionId;
 	action.handlerId =handlerId;
-	action.replyRemark =trim($("#replyRemark").val());
+	action.replyRemark =$("#replyRemark").textbox("getValue");
 	action.realHours =$("#realHours").numberbox("getValue");
+	var countHour =0;
 	var newArr=[];
 	$(".addTr").each(function() {
 		var teacher = {};
@@ -308,11 +322,20 @@ function updateReply()
 		teacher.teacherType = $(this).attr("teacherType");
 		teacher.hours = $(this).attr("hours");
 		teacher.handlerId = handlerId;
+		if($(this).attr("teacherType")=="T")
+		{
+			countHour +=parseInt($(this).attr("hours"));
+		}
 		newArr.push(teacher);
 	});	
 	if(newArr.length<1)
 	{
 		$.messager.alert("提示", "请至少添加一条老师记录");
+		return false;
+	}
+	if(countHour>parseInt(action.realHours))
+	{
+		$.messager.alert("提示", "主T老师课时数之和"+countHour+"大于活动课时数"+action.realHours+"，请修改");
 		return false;
 	}
 	param.actionInfo =action;

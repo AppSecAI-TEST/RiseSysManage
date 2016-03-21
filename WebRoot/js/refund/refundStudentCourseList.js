@@ -93,37 +93,41 @@ $(document).ready(function() {
 	});
 	
 	$("#refundSubmit").click(function() {
-		var studentId = "";
-		var courseType = "";
-		var studentCourseId = "";
-		var studentFlag = false;
-		var courseTypeFlag = false;
 		var obj = $('#list_data').datagrid('getSelections');
-		for(var i = 0, n = obj.length; i < n; i++) {
-			if(i == 0) {
-				studentId = obj[i].studentId;
-				courseType = obj[i].courseType;
-			} else {
-				if(studentId != obj[i].studentId) {
-					studentFlag = true;
-					break;
+		if(obj != null && obj != undefined && obj.length > 0) {
+			var studentId = "";
+			var courseType = "";
+			var studentCourseId = "";
+			var studentFlag = false;
+			var courseTypeFlag = false;
+			for(var i = 0, n = obj.length; i < n; i++) {
+				if(i == 0) {
+					studentId = obj[i].studentId;
+					courseType = obj[i].courseType;
+				} else {
+					if(studentId != obj[i].studentId) {
+						studentFlag = true;
+						break;
+					}
+					if(courseType != obj[i].courseType) {
+						courseTypeFlag = true;
+						break;
+					}
 				}
-				if(courseType != obj[i].courseType) {
-					courseTypeFlag = true;
-					break;
-				}
+				studentCourseId += obj[i].studentCourseId + ",";
 			}
-			studentCourseId += obj[i].studentCourseId + ",";
-		}
-		if(!studentFlag) {
-			if(!courseTypeFlag) {
-				studentCourseId = studentCourseId.substring(0, studentCourseId.length - 1);
-				window.location.href = "/sys/refund/qryApplyRefund.do?studentCourseId="+studentCourseId+"&studentId="+studentId+"&courseType="+courseType;
+			if(!studentFlag) {
+				if(!courseTypeFlag) {
+					studentCourseId = studentCourseId.substring(0, studentCourseId.length - 1);
+					window.location.href = "/sys/refund/qryApplyRefund.do?studentCourseId="+studentCourseId+"&studentId="+studentId+"&courseType="+courseType;
+				} else {
+					$.messager.alert('提示', "只能多选同一个人的同类型的课程进行退费！");
+				}
 			} else {
-				$.messager.alert('提示', "只能多选同一个人的同类型的课程进行退费！");
+				$.messager.alert('提示', "只能多选同一个人的课程进行退费！");
 			}
 		} else {
-			$.messager.alert('提示', "只能多选同一个人的课程进行退费！");
+			$.messager.alert('提示', "请选择您要退费的课程！");
 		}
 	});
 });

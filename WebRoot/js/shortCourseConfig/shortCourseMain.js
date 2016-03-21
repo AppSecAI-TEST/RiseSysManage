@@ -26,10 +26,10 @@ $(document).ready(function(){
 	        {field:'opt',title:'操作',width:'15%',align:'center',
 	            formatter: function(Confirmation, row)
 	            {  
-        			if(row.classFlag == "false"){
+        			if(row.classFlag == "false" || row.courseFlag == "false"){
 		                var btn = '<a class="update" onclick="updateShortClassType(\''+row.classTypeId+'\',\''+row.className+'\',\''+row.isTeaching+'\',\''+row.classType+'\',\''+row.maxNum+'\',\''+row.minNum+'\',\''+row.isOpen+'\')" style="width:60px; height:25px;" href="javascript:void(0)"><span>修改</span></a>&nbsp;<a class="delete" onclick="removeShortClassType(\''+row.classTypeId+'\')" style="width:60px; height:25px;" href="javascript:void(0)"><span>删除</span></a>';  
 		                return btn;  
-        			}else if(row.classFlag == "true"){
+        			}else{
         				var btn = '<a class="update" disabled="disabled" style="width:60px; height:25px;" href="javascript:void(0)"><span>修改</span></a>&nbsp;<a class="delete" disabled="disabled" style="width:60px; height:25px;" href="javascript:void(0)"><span>删除</span></a>';  
 		                return btn;  
         			}
@@ -153,6 +153,8 @@ function saveCourseSubmit()
 					});
 	    		}else if(flag == "false"){
 	    			$.messager.alert('提示', action+actionType+"失败！");
+	    		}else{
+	    			$.messager.alert('提示', flag);
 	    		}
 	        } 
 		});

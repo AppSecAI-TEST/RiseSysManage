@@ -153,18 +153,12 @@
   							<td width="8%"><span>${refundStudentCourse.classType }</span></td>
   							<td align="right" width="8%"><span>退费类型：</span></td>
   							<td width="7%">
-  								<select id="refundType${refundStudentCourse.studentCourseId }" name="refundType" class="easyui-combobox" style="width: 100px; height: 25px;" required="true"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      							onLoadSuccess:function(data){if(data.length > 0) $('#refundType${refundStudentCourse.studentCourseId }').combobox('setValue',data[0].codeFlag);}" 
-	      							url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_TYPE">
+  								<select id="refundType${refundStudentCourse.studentCourseId }" name="refundType" class="easyui-combobox" style="width: 100px; height: 25px;" required="true">
 		        				</select>
   							</td>
   							<td align="right" width="8%"><span>渠道来源：</span></td>
   							<td width="41%" colspan="3">
-  								<select id="refundChannel${refundStudentCourse.studentCourseId }" name="refundChannel" class="easyui-combobox" style="width: 100px; height: 25px;" required="true"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      							onLoadSuccess:function(data){if(data.length > 0) $('#refundChannel${refundStudentCourse.studentCourseId }').combobox('setValue',data[0].codeFlag);}" 
-	      							url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_CHANNEL">
+  								<select id="refundChannel${refundStudentCourse.studentCourseId }" name="refundChannel" class="easyui-combobox" style="width: 100px; height: 25px;">
 		        				</select>
   							</td>
   						</tr>
@@ -189,25 +183,25 @@
   								<span id="refundStageFee${refundStudentCourse.studentCourseId }" name="refundStageFee">${refundStudentCourse.amount }</span>
   							</td>
   							<td width="8%" align="center">
-  								<input id="minusGiftFee${refundStudentCourse.studentCourseId }" name="minusGiftFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundStudentCourse.amount }, precision:2" style="width: 80px; height: 25px;" required="true" value="0"/>
+  								<input id="minusGiftFee${refundStudentCourse.studentCourseId }" name="minusGiftFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundStudentCourse.amount }, precision:2" style="width: 80px; height: 25px;" required="true"/>
   							</td>
   							<td width="8%" align="center">
-  								<input id="minusTextbookFee${refundStudentCourse.studentCourseId }" name="minusTextbookFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundStudentCourse.amount }, precision:2" style="width: 100px; height: 25px;" required="true" value="0"/>
+  								<input id="minusTextbookFee${refundStudentCourse.studentCourseId }" name="minusTextbookFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundStudentCourse.amount }, precision:2" style="width: 100px; height: 25px;" required="true"/>
   							</td>
   							<td width="8%" align="center">
-  								<input id="minusCourseFee${refundStudentCourse.studentCourseId }" name="minusCourseFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundStudentCourse.amount }, precision:2" style="width: 100px; height: 25px;" required="true" value="0"/>
+  								<input id="minusCourseFee${refundStudentCourse.studentCourseId }" name="minusCourseFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundStudentCourse.amount }, precision:2" style="width: 100px; height: 25px;" required="true"/>
 							</td>
   							<td width="7%" align="center">
-  								<input id="handlingChange${refundStudentCourse.studentCourseId }" name="handlingChange" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundStudentCourse.amount }, precision:2" style="width: 100px; height: 25px;" required="true" value="0"/>
+  								<input id="handlingChange${refundStudentCourse.studentCourseId }" name="handlingChange" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundStudentCourse.amount }, precision:2" style="width: 100px; height: 25px;" required="true"/>
   							</td>
   							<td width="8%" align="center">
-  								<input id="minusOtherFee${refundStudentCourse.studentCourseId }" name="minusOtherFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundStudentCourse.amount }, precision:2" style="width: 100px; height: 25px;" required="true" value="0"/>
+  								<input id="minusOtherFee${refundStudentCourse.studentCourseId }" name="minusOtherFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundStudentCourse.amount }, precision:2" style="width: 100px; height: 25px;" required="true"/>
   							</td>
   							<td width="11%" align="center">
   								<span id="confirmRefundFee${refundStudentCourse.studentCourseId }" name="confirmRefundFee">${refundStudentCourse.amount }</span>
   							</td>
   							<td width="15%" align="center">
-  								<input id="financialConfirmRefundFee${refundStudentCourse.studentCourseId }" name="financialConfirmRefundFee" type="text" class="easyui-textbox numberbox" style="width: 100px; height: 25px;" required="true"/>
+  								<input id="financialConfirmRefundFee${refundStudentCourse.studentCourseId }" name="financialConfirmRefundFee" type="text" class="easyui-textbox numberbox" style="width: 100px; height: 25px; display: none;" required="true"/>
   							</td>
   							<td width="13%" align="center"><a href='javascript:void(0)' class='linkmore' onclick="viewCourseDetail(${refundStudentCourse.studentCourseId })" id="studentCourseDetail${refundStudentCourse.studentCourseId }"><span>展开课程</span></a></td>
   						</tr>

@@ -147,7 +147,15 @@ function addTeaFeedBack(){
 		var month = row.month;
 		if(reflect == "是"){
 			 $.messager.alert('提示', "该教质已经反馈！");
-			   return;
+			 return;
+		}
+		var teachingDate = row.teachingDate;
+		var meetingDate = row.meetingDate;
+		var openClassDate = row.openClassDate;
+		var gradDate = row.gradDate;
+		if(teachingDate == "" && meetingDate == "" && openClassDate == "" && gradDate == ""){
+			$.messager.alert('提示', "该班级不需要教质反馈！");
+			return;
 		}
 		window.location.href = "/sys/teaFeebackManage/qryClassStuByInstId.do?classInstId="+classInstId+"&qualityId="+qualityId+"&schoolId="+schoolId+"&className="+className+"&month="+month;
 	}
