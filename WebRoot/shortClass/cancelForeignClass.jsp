@@ -36,6 +36,11 @@
 			{
 				window.history.back();
 			}
+			$(document).ready(function(){
+				$("textarea").each(function(i,node){
+					$(node).attr("maxlength",500);
+				});
+			});
 		</script>
   	</head>
   	<body class="manage">

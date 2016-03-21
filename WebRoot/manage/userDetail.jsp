@@ -108,6 +108,9 @@
 						$("#deptId").combotree("setValue",'${staffT.deptId}');
 					}	
 				});
+				$("textarea").each(function(i,node){
+					$(node).attr("maxlength",500);
+				});
 			});
 			function choicePostFunc(obj)
 			{

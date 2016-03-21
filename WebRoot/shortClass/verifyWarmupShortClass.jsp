@@ -36,6 +36,11 @@
 			{
 				window.location.href = "/sys/shortClass/warmupClassMan.jsp?funcNodeId=${funcNodeId}&pageFlag=audit";
 			}
+			$(document).ready(function(){
+				$("textarea").each(function(i,node){
+					$(node).attr("maxlength",500);
+				});
+			});
 		</script>
   	</head>
   	<body class="manage">

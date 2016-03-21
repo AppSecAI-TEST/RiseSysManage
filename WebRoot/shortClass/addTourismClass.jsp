@@ -53,6 +53,9 @@
 					listHeight:150,
 					editable:false
 				});
+				$("textarea").each(function(i,node){
+					$(node).attr("maxlength",500);
+				});
 			});
 			function addTeacherFunc()
 			{

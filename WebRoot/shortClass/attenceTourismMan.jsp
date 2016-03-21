@@ -148,9 +148,9 @@
 							<th data-options="field:'shortClassInstId',checkbox:true"></th>
 							<th width="12%" field="className">班级名称</th>
 							<th width="12%" field="classStateName">班级状态</th>
-							<th width="12%" field="personNum">定班人数</th>
+							<th width="12%" field="realClassNum">定班人数</th>
 							<th width="12%" field="maxNum">班级人数上限</th>
-							<th width="12%" field="realClassNum">实际游学人数</th>
+							<th width="12%" field="personNum">实际游学人数</th>
 							<th width="12%" field="putClassDate">放班日期</th>
 							<th width="12%" field="openDate">游学开始日期</th>
 							<th width="12%" field="finishDate">游学结束日期</th>

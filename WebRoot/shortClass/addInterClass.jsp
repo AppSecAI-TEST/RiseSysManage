@@ -50,6 +50,9 @@
 				$("#planHours").textbox("setValue",planHours);
 				$("#classEndTime").datebox("setValue",classEndTime);
 				$("#remark").textbox("setValue",remark);
+				$("textarea").each(function(i,node){
+					$(node).attr("maxlength",500);
+				});
 			});
 			function addSubmitFunc()
 			{
@@ -64,8 +67,14 @@
 				var classStartDate = new Date(classStartTime);
 				var classEndDate = new Date(classEndTime);
 				var schooltimeCnt = 0;
+				var schooltimeFlag = false;
 				$(".shortSchooltimeId").each(function(i,node){
 					schooltimeCnt += parseInt($(node).attr("lessionHours"));
+					var schooltime = new Date($(node).attr("schooltime"));
+					if(!(classStartDate.getTime() <= schooltime.getTime() && schooltime.getTime() <= classEndDate.getTime()))
+					{
+						schooltimeFlag = true;
+					}
 				});
 				if(interClassType == "")
 				{
@@ -110,6 +119,10 @@
 				else if(classEndDate.getTime() <= classStartDate.getTime())
 				{
 					$.messager.alert('提示',"结课时间必须大于开课时间,请核实后重新尝试","info");
+				}
+				else if(schooltimeFlag)
+				{
+					$.messager.alert('提示',"计划课时必须在开课与结课日期之间,请核实后重新尝试","info");
 				}
 				else
 				{
@@ -230,7 +243,7 @@
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${shortClassList}" var="node" varStatus="i">
-						<tr class="shortSchooltimeId" id="shortSchooltimeId${node.shortSchooltimeId}" lessionHours="${node.lessionHours}">
+						<tr class="shortSchooltimeId" id="shortSchooltimeId${node.shortSchooltimeId}" lessionHours="${node.lessionHours}" schooltime="<fmt:formatDate value='${node.schooltime}' pattern='yyyy-MM-dd' />">
 							<td align="right">上课计划：</td>
 							<td><fmt:formatDate value="${node.schooltime}" pattern="yyyy-MM-dd" /> ${node.startTime}~${node.endTime}</td>
 							<td align="right">教室：</td>

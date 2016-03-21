@@ -74,7 +74,6 @@
 				}
 				$("#shortClassType").combobox("setValue","");
 				$("#shortClassState").combobox("setValue","");
-				$("#schoolManId").combobox("setValue","");
 				$("#payStartManTime").datebox("setValue","");
 				$("#payEndManTime").datebox("setValue","");
 				$("#studentName").textbox("setValue","");

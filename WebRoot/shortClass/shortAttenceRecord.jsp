@@ -23,6 +23,14 @@
 				$(document).ready(function(){
 					$("#classRoomId").combobox("setValue","${shortSchooltimeT.roomId}");
 					$("#classLessonHour").textbox("setValue","${shortSchooltimeT.lessionHours}");
+					if($("#classRoomId").combobox("getValue") == "-1")
+					{
+						$("#classRoomId").combobox("setValue","");
+					}
+					if($("#classLessonHour").textbox("getValue") == "0")
+					{
+						$("#classLessonHour").textbox("setValue","");
+					}
 				});
 				$("#classRoomId").combobox({
 					formatter:formatRoom, 
@@ -30,10 +38,7 @@
 					textField: 'roomName', 
 					panelHeight: 'auto',
 					editable:false,
-					data:classRoomIdData,
-					onLoadSuccess:function(data){
-						$("#classRoomId").combobox("setValue","${schooltimeInstT.roomId}");
-					}
+					data:classRoomIdData
 				});
 				$("#attRecordTeacherId").combobox({
 					formatter:function(row){
@@ -70,7 +75,6 @@
 				});
 				$("#startTime").timespinner("setValue","${shortSchooltimeT.startTime}");
 				$("#endTime").timespinner("setValue","${shortSchooltimeT.endTime}");
-				$("#classLessonHour").textbox("setValue","${schooltimeInstT.lessionHours}");
 			});
 			function addAttendTeacher()
 			{
@@ -177,7 +181,7 @@
 				var classLessonHour = $("#classLessonHour").textbox("getValue");
 				var classRoomId = $("#classRoomId").combobox("getValue");
 				var obj = {
-					shortClassInstId:"${shortSchooltimeT.shortClassInstId}",
+					shortClassInstId:"${shortClassInstT.shortClassInstId}",
 					shortSchooltimeId:"${shortSchooltimeT.shortSchooltimeId}",
 					schoolId:"${shortClassInstT.schoolId}",
 					startTime:$("#startTime").timespinner("getValue"),
@@ -185,8 +189,16 @@
 					hours:classLessonHour,
 					roomId:classRoomId,
 					handerId:"${sessionScope.StaffT.staffId}",
-					schooltime:'<fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" timeZone="GMT" />',
-					attendDate:'<fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" timeZone="GMT" />',
+					<c:choose>
+						<c:when test="${!empty shortSchooltimeT.schooltime}">
+							schooltime:'<fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" timeZone="GMT" />',
+							attendDate:'<fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" timeZone="GMT" />',
+						</c:when>
+						<c:otherwise>
+							schooltime:$("#schooltime").datebox("getValue"),
+							attendDate:$("#schooltime").datebox("getValue"),
+						</c:otherwise>
+					</c:choose>
 					teacherAttendList:null,
 					studentAttendList:null
 				};
@@ -195,11 +207,18 @@
 				var teacherTaTime = 0;
 				$("#teacherTab tr:gt(1) td:nth-child(1)").each(function(i,node){
 					var teacherObj = {
-						shortClassInstId:"${shortSchooltimeT.shortClassInstId}",
+						shortClassInstId:"${shortClassInstT.shortClassInstId}",
 						teacherId:$(node).attr("teacherId"),
 						schoolId:$(node).attr("schoolId"),
 						teacherType:$(node).attr("teacherType"),
-						attendDate:'<fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" timeZone="GMT" />',
+						<c:choose>
+							<c:when test="${!empty shortSchooltimeT.schooltime}">
+								attendDate:'<fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" timeZone="GMT" />',
+							</c:when>
+							<c:otherwise>
+								attendDate:$("#schooltime").datebox("getValue"),
+							</c:otherwise>
+						</c:choose>
 						lessionHours:$(node).attr("hours"),
 						handerId:"${sessionScope.StaffT.staffId}"
 					};
@@ -220,11 +239,18 @@
 					var attendTypeObj = $(node).find("input[name='attendType"+firstTr.attr("studentId")+"']:checked").val();
 					var dressObj = $(node).find("input[name='dress"+firstTr.attr("studentId")+"']:checked").val();
 					var studentObj = {
-						shortClassInstId:"${shortSchooltimeT.shortClassInstId}",
+						shortClassInstId:"${shortClassInstT.shortClassInstId}",
 						schoolId:firstTr.attr("schoolId"),
 						studentId:firstTr.attr("studentId"),
 						studentCourseId:firstTr.attr("studentCourseId"),
-						attendDate:'<fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" timeZone="GMT" />',
+						<c:choose>
+							<c:when test="${!empty shortSchooltimeT.schooltime}">
+								attendDate:'<fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" timeZone="GMT" />',
+							</c:when>
+							<c:otherwise>
+								attendDate:$("#schooltime").datebox("getValue"),
+							</c:otherwise>
+						</c:choose>
 						hours:$("#classLessonHour").textbox("getValue"),
 						attendType:attendTypeObj,
 						dress:dressObj,
@@ -321,7 +347,15 @@
 		<table class="tab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="right" width="10%">上课时间：</td>
-				<td>周${shortSchooltimeT.weekTime} <fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" /> <input class="easyui-timespinner" id="startTime" name="startTime" style="width:70px;height: 25px;"  data-options="showSeconds:false">&nbsp;&nbsp;<input class="easyui-timespinner" id="endTime" name="endTime" style="width:70px;height: 25px;"  data-options="showSeconds:false"></td>
+				<c:choose>
+					<c:when test="${empty shortSchooltimeT.schooltime}">
+						<td><input name="schooltime" id="schooltime" type="text" style="width:150px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
+					</c:when>
+					<c:otherwise>
+						<td>周${shortSchooltimeT.weekTime} <fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" /> 
+					</c:otherwise>
+				</c:choose>
+				<input class="easyui-timespinner" id="startTime" name="startTime" style="width:70px;height: 25px;"  data-options="showSeconds:false">&nbsp;&nbsp;<input class="easyui-timespinner" id="endTime" name="endTime" style="width:70px;height: 25px;"  data-options="showSeconds:false"></td>
 			</tr>
 			<tr>
 				<td align="right">教室：</td>

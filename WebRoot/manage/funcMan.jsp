@@ -201,6 +201,9 @@
 							$('#dataType').combobox('setValue',data[0].codeFlag);
 					}
 				});
+				$("textarea").each(function(i,node){
+					$(node).attr("maxlength",500);
+				});
 			});
 			function newFuncNode(){
 				gEditRow = null;

@@ -52,6 +52,9 @@
 						$("#deptId").combotree("setValue",'${PostT.deptId}');
 					}	
 				});
+				$("textarea").each(function(i,node){
+					$(node).attr("maxlength",500);
+				});
 			});
 			function choiceSchoolFunc(obj)
 			{

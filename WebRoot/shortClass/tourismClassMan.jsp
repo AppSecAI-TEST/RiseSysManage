@@ -189,9 +189,9 @@
 						<th width="11%" field="className">班级名称</th>
 						<th width="11%" field="classType">班级类型</th>
 						<th width="11%" field="classStateName">班级状态</th>
-						<th width="11%" field="personNum">定班人数</th>
+						<th width="11%" field="realClassNum">定班人数</th>
 						<th width="11%" field="maxNum">班级人数上限</th>
-						<th width="11%" field="realClassNum">实际游学人数</th>
+						<th width="11%" field="personNum">实际游学人数</th>
 						<th width="11%" field="putClassDate">放班日期</th>
 						<th width="11%" field="openDate">游学开始日期</th>
 						<th width="11%" field="finishDate">游学结束日期</th>

@@ -53,7 +53,7 @@
 						带班老师：
 					</td>
 					<td width="100px;">
-						<select id="teacher" name="teacher" style="width:100px" ></select>							
+						<input name="teacher" id="teacher" type="text" style="width:100px" class="easyui-textbox" />	
 					</td>
 					<td align="left">
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
@@ -87,11 +87,6 @@
 			},"json");
 			$(document).ready(function(){
 				initReportButton("resetBtn","attFm","schoolId")
-				$("#schoolId").combobox({
-			    	onChange:function(n, o) {
-						$("#teacher").combobox({url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&stageId="});
-			    	}
-				});
 				$("#classPharse").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
@@ -101,14 +96,6 @@
 				$("#monthDate").datebox({
 					onShowPanel:settingYearMonthPanel
 				})
-				$("#teacher").combobox({
-					valueField : "teacherId",
-					textField : "byname",
-					panelHeight : "auto",
-					formatter : function(data) {
-						return "<span>" + data.byname + "</span>";
-					}
-				});
 				$("#attList").datagrid({
 					onClickRow:function(i,node){
 						ajaxLoading("正在处理，请稍待。。。");
