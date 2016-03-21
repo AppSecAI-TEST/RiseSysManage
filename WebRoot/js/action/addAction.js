@@ -19,7 +19,9 @@ $(document).ready(function() {
 			});
 		}
 	});
-
+	$("textarea").each(function(i,node){
+		$(node).attr("maxlength",200);
+	});
 });
 
 function addTrInfo() {
@@ -96,7 +98,7 @@ function addAction() {
 		$.messager.alert("提示", "请填写活动课时");
 		return false;
 	}
-	if (trim($("#title").val()) == "") {
+	if ($("#title").textbox("getValue") == "") {
 		$.messager.alert("提示", "请填写活动名称");
 		return false;
 	}
@@ -124,8 +126,8 @@ function addAction() {
 	}	
 	action.schoolId = $("#actionSchoolId").combobox("getValue");
 	action.actionDate = $("#actionDate").datebox("getValue");
-	action.title = trim($("#title").val());
-	action.createRemark = trim($("#createRemark").val());
+	action.title = $("#title").textbox("getValue");
+	action.createRemark = $("#createRemark").textbox("getValue");
 	action.timeStart = $("#timeStart").timespinner("getValue");
 	action.timeEnd = $("#timeEnd").timespinner("getValue");
 	action.planHours = $("#planHours").numberbox("getValue");

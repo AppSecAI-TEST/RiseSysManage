@@ -461,14 +461,15 @@ function submitMergeInfo()
 		if(comboClass.isHead=="Y")
 		{
 			comboClass.schoolId =$("#schoolId").combobox("getValue");
+			comboClass.comboState="002";
 		}
 		else
 		{
 			comboClass.schoolId =$("#comSchoolId").val();
+			comboClass.comboState="001";
 		}	
 		comboClass.times=$("#weekTime1").combobox("getText")+" "+$("#hourRange1").combobox("getText")+"<br/>"+$("#weekTime2").combobox("getText")+" "+$("#hourRange2").combobox("getText");
 		comboClass.teachers =$("#school1").combobox("getText")+" "+$("#teacher1").combobox("getText")+"<br/>"+$("#school2").combobox("getText")+" "+$("#teacher2").combobox("getText");
-		comboClass.comboState="001";
 		comboClass.remark=trim($("#remark").val());
 		comboClass.handlerId =$("#handlerId").val();
 		comboClass.state="00A";

@@ -558,7 +558,23 @@ public class ExportService
 		    for(CellRangeAddress cellRange:cellRangeList)
 		    {
 		    	sheet.addMergedRegion(cellRange);
-		    }	
+		    }
+		    for (int i = 1; i < sheet.getPhysicalNumberOfRows(); i++) 
+	        {
+	        	HSSFRow row = sheet.getRow(i);
+	        	if (row != null) 
+	        	{
+	        		int cells = row.getPhysicalNumberOfCells();
+	        		for (int j = 0; j < cells; j++) 
+	        		{
+	        			HSSFCell cell = row.getCell(j);
+	        			if (cell != null&&(HSSFCell.CELL_TYPE_STRING==cell.getCellType())) 
+	        			{
+	        				cell.setCellValue(new HSSFRichTextString(cell.getStringCellValue().replaceAll("<(/)?br(/)?>", "/")));
+	        			}
+	        		}
+	        	}	
+	        }
 	        workBook.write(out);
 			inputStream.close();
 			out.close();
