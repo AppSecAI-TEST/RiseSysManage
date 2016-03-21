@@ -41,6 +41,7 @@
 							<th data-options="field:'schoolName',width:100,align:'center'">校区</th>
 							<th data-options="field:'payDate',width:100,align:'center'">全费日期</th>
 							<th data-options="field:'stageId',width:100,align:'center'">缴费阶段</th>
+							<th data-options="field:'courseStateText',width:100,align:'center'">课程阶段</th>
 							<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
 							<th data-options="field:'amount',width:150,align:'center'">缴费金额</th>
 							<th data-options="field:'className',width:100,align:'center'">班级</th>

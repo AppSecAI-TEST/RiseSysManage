@@ -53,8 +53,11 @@ $(document).ready(function() {
 		}
 	});
 	
+	
+	
 	$("input:radio[name='refundReason']").change(function() {
 		var refundReason = $("input:radio[name='refundReason']:checked").val();
+		$("input:radio[name='refundReason']").attr("disabled", "disabled");
 		if("school" == refundReason) {
 			$("#schoolReasonType").combobox({
 				url : "/sys/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=SCHOOL_REASON_TYPE",//返回json数据的url
@@ -65,10 +68,7 @@ $(document).ready(function() {
 		    		return "<span>" + data.codeName + "</span>";
 		    	},
 		    	onLoadSuccess : function () { //数据加载完毕事件
-		            var data = $('#schoolReasonType').combobox('getData');
-		            if (data.length > 0) {
-		                $("#schoolReasonType").combobox('select', data[0].codeFlag);
-		            }
+		    		$("input:radio[name='refundReason']").removeAttr("disabled");
 		        },
 		        onChange : function(n, o) {
 		        	if(n != "" && n != null && n != undefined) {
@@ -79,13 +79,7 @@ $(document).ready(function() {
 		        			panelHeight : "auto",
 		        			formatter : function(data) {
 		    		    		return "<span>" + data.param2 + "</span>";
-		    		    	},
-		        			onLoadSuccess : function () { //数据加载完毕事件
-		        				var data = $('#schoolReason').combobox('getData');
-		        				if (data.length > 0) {
-		        					$("#schoolReason").combobox('select', data[0].param1);
-		        				}
-		        			}
+		    		    	}
 		        		});
 		        	}
 		        }
@@ -103,10 +97,7 @@ $(document).ready(function() {
 		    		return "<span>" + data.codeName + "</span>";
 		    	},
 		    	onLoadSuccess : function () { //数据加载完毕事件
-		            var data = $('#customerReason').combobox('getData');
-		            if (data.length > 0) {
-		                $("#customerReason").combobox('select', data[0].codeFlag);
-		            }
+		    		$("input:radio[name='refundReason']").removeAttr("disabled");
 		        }
 			});
 			$("#otherReason").textbox("setValue", "");
@@ -121,6 +112,7 @@ $(document).ready(function() {
 			$("#schoolReasonType").combobox("loadData", new Array());
 			$("#customerReason").combobox('clear');
 			$("#customerReason").combobox("loadData", new Array());
+			$("input:radio[name='refundReason']").removeAttr("disabled");
 		}
 	});
 	
@@ -135,13 +127,7 @@ $(document).ready(function() {
 		    	panelHeight : "auto",
 		    	formatter : function(data) {
 		    		return "<span>" + data.userName + "</span>";
-		    	},
-		    	onLoadSuccess : function () { //数据加载完毕事件
-		            var data = $('#teacherId').combobox('getData');
-		            if (data.length > 0) {
-		                $("#teacherId").combobox('select', data[0].staffId);
-		            }
-		        }
+		    	}
 			});
 			$("#careAdviserId").combobox('clear');
 			$("#careAdviserId").combobox("loadData", new Array());
@@ -153,13 +139,7 @@ $(document).ready(function() {
 		    	panelHeight : "auto",
 		    	formatter : function(data) {
 		    		return "<span>" + data.userName + "</span>";
-		    	},
-		    	onLoadSuccess : function () { //数据加载完毕事件
-		            var data = $('#careAdviserId').combobox('getData');
-		            if (data.length > 0) {
-		                $("#careAdviserId").combobox('select', data[0].staffId);
-		            }
-		        }
+		    	}
 			});
 			$("#teacherId").combobox('clear');
 			$("#teacherId").combobox("loadData", new Array());
@@ -177,21 +157,19 @@ $(document).ready(function() {
 	
 	$("input:radio[name='visitPersonTwo']").change(function() {
 		var visitPersonTwo = $("input:radio[name='visitPersonTwo']:checked").val();
+		var post = "17";
 		var schoolId = $("#schoolId").val();
+		if("academic" == visitPersonTwo) {
+			post = "7,8";
+		}
 		$("#academicOrSalesId").combobox({
-			url : "/sys/pubData/qryStaffList.do?post=7,8,17&schoolId="+schoolId,//返回json数据的url
+			url : "/sys/pubData/qryStaffList.do?post=" + post + "&schoolId=" + schoolId,//返回json数据的url
 	    	valueField : "staffId",
 	    	textField : "userName",
 	    	panelHeight : "auto",
 	    	formatter : function(data) {
 	    		return "<span>" + data.userName + "</span>";
-	    	},
-	    	onLoadSuccess : function () { //数据加载完毕事件
-	            var data = $('#academicOrSalesId').combobox('getData');
-	            if (data.length > 0) {
-	                $("#academicOrSalesId").combobox('select', data[0].staffId);
-	            }
-	        }
+	    	}
 		});
 	});
 
@@ -219,6 +197,32 @@ $(document).ready(function() {
 		
 		$("input", $("#financialConfirmRefundFee" + studentCourseId).next("span")).blur(function() {
 			calculateConfirmRefundAmount(studentCourseId);
+		});
+		
+		$("#refundType" + studentCourseId).combobox({
+			url : "/sys/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_TYPE",//返回json数据的url
+	    	valueField : "codeFlag",
+	    	textField : "codeName",
+	    	panelHeight : "auto",
+	    	formatter : function(data) {
+	    		return "<span>" + data.codeName + "</span>";
+	    	},
+	    	onChange : function(n, o) {
+	    		if("RTN_NEW" == n || "RTN_READING" == n) {
+	    			$("#refundChannel" + studentCourseId).combobox({
+	    				url : "/sys/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_CHANNEL",//返回json数据的url
+	    				valueField : "codeFlag",
+	    		    	textField : "codeName",
+	    		    	panelHeight : "auto",
+	    		    	formatter : function(data) {
+	    		    		return "<span>" + data.codeName + "</span>";
+	    		    	}
+	    			});
+	    		} else {
+	    			$("#refundChannel" + studentCourseId).combobox('clear');
+	    			$("#refundChannel" + studentCourseId).combobox("loadData", new Array());
+	    		}
+	    	}
 		});
 	});
 	
@@ -467,23 +471,23 @@ function calculateConfirmRefundAmount(studentCourseId) {
 function checkParam() {
 	var refundWay = $("#refundWay").combobox('getValue');
 	if(refundWay == null || refundWay == "" || refundWay == undefined || refundWay == "null") {
-		$.messager.alert('提示', "请选择退费形式！");
+		showMessage('提示', "请选择退费形式！");
 		return false;
 	} else {
 		if("BANK_CARD" == refundWay) {
 			var bankName = $("#bankName").textbox("getValue");
 			if(bankName == null || bankName == "" || bankName == undefined || bankName == "null") {
-				$.messager.alert('提示', "请输入退费银行！");
+				showMessage('提示', "请输入退费银行！");
 				return false;
 			} else {
 				var account = $("#account").textbox("getValue");
 				if(account == null || account == "" || account == undefined || account == "null") {
-					$.messager.alert('提示', "请输入银行账户名！");
+					showMessage('提示', "请输入银行账户名！");
 					return false;
 				} else {
 					var bankCard = $("#bankCard").textbox("getValue");
 					if(account == null || account == "" || account == undefined || account == "null") {
-						$.messager.alert('提示', "请输入银行账号！");
+						showMessage('提示', "请输入银行账号！");
 						return false;
 					}
 				}
@@ -492,78 +496,100 @@ function checkParam() {
 	}
 	var refundRule = $("input:radio[name='refundRule']:checked").val();
 	if(refundRule == null || refundRule == "" || refundRule == undefined || refundRule == "null") {
-		$.messager.alert('提示', "请选择退费规则！");
+		showMessage('提示', "请选择退费规则！");
 		return false;
 	}
 	var isAcademic = $("input:radio[name='isAcademic']:checked").val();
 	if(isAcademic == null || isAcademic == "" || isAcademic == undefined || isAcademic == "null") {
-		$.messager.alert('提示', "请选择是否学术退费！");
+		showMessage('提示', "请选择是否学术退费！");
 		return false;
 	}
 	var refundReason = $("input:radio[name='refundReason']:checked").val();
 	if(refundReason == null || refundReason == "" || refundReason == undefined || refundReason == "null") {
-		$.messager.alert('提示', "请选择退费原因！");
+		showMessage('提示', "请选择退费原因！");
 		return false;
 	} else {
 		if("school" == refundReason) {
 			var schoolReasonType = $("#schoolReasonType").combobox('getValue');
 			if(schoolReasonType == null || schoolReasonType == "" || schoolReasonType == undefined || schoolReasonType == "null") {
-				$.messager.alert('提示', "请选择申请退费的校方原因类型！");
+				showMessage('提示', "请选择申请退费的校方原因类型！");
 				return false;
 			} else {
 				var schoolReason = $("#schoolReason").combobox('getValue');
 				if(schoolReason == null || schoolReason == "" || schoolReason == undefined || schoolReason == "null") {
-					$.messager.alert('提示', "请选择申请退费的校方原因！");
+					showMessage('提示', "请选择申请退费的校方原因！");
 					return false;
 				}
 			}
 		} else if("customer" == refundReason) {
 			var customerReason = $("#customerReason").combobox('getValue');
 			if(customerReason == null || customerReason == "" || customerReason == undefined || customerReason == "null") {
-				$.messager.alert('提示', "请选择申请退费的客户原因！");
+				showMessage('提示', "请选择申请退费的客户原因！");
 				return false;
 			}
 		} else {
 			var otherReason = $("#otherReason").textbox("getValue");
 			if(otherReason == null || otherReason == "" || otherReason == undefined || otherReason == "null") {
-				$.messager.alert('提示', "请输入申请退费的其他原因！");
+				showMessage('提示', "请输入申请退费的其他原因！");
 				return false;
 			}
 		}
 	}
-	var visitPersonOne = $("input:radio[name='visitPersonOne']:checked").val();
-	if(visitPersonOne == null || visitPersonOne == "" || visitPersonOne == undefined || visitPersonOne == "null") {
-		$.messager.alert('提示', "请选择老师或CC回访的回访人员类型！");
-		return false;
-	} else {
-		if("teacher" == visitPersonOne) {
-			var teacherId = $("#teacherId").combobox('getValue');
-			if(teacherId == null || teacherId == "" || teacherId == undefined || teacherId == "null") {
-				$.messager.alert('提示', "请选择老师的回访人员！");
-				return false;
-			}
-		} else {
-			var careAdviserId = $("#careAdviserId").combobox('getValue');
-			if(careAdviserId == null || careAdviserId == "" || careAdviserId == undefined || careAdviserId == "null") {
-				$.messager.alert('提示', "请选择课程顾问的回访人员！");
-				return false;
+	var index = 0;
+	var flag = true;
+	var array = document.getElementsByName("studentCourseId");
+	if(array.length > 0) {
+		for(var i = 0, len = array.length; i < len; i++) {
+			var studentCourseId = array[i].value;
+			var refundType = $("#refundType" + studentCourseId).combobox("getValue");
+			if(refundType == "RTN_NEW" || "RTN_READING" == refundType) {
+				var refundChannel = $("#refundChannel" + studentCourseId).combobox("getValue");
+				if(refundChannel == null || refundChannel == "" || refundChannel == undefined) {
+					flag = false;
+					index = i + 1;
+					break;
+				}
 			}
 		}
 	}
-	var visitPersonTwo = $("input:radio[name='visitPersonTwo']:checked").val();
-	if(visitPersonTwo == null || visitPersonTwo == "" || visitPersonTwo == undefined || visitPersonTwo == "null") {
-		$.messager.alert('提示', "请选择学术或销售主管的回访人员类型！");
-		return false;
-	} else {
-		var visitPersonType = "学术主管";
-		if("sales" == visitPersonTwo) {
-			visitPersonType = "销售主管";
-		}
-		var academicOrSalesId = $("#academicOrSalesId").combobox('getValue');
-		if(academicOrSalesId == null || academicOrSalesId == "" || academicOrSalesId == undefined || academicOrSalesId == "null") {
-			$.messager.alert('提示', "请选择"+visitPersonType+"的回访人员！");
+	if(flag) {
+		var visitPersonOne = $("input:radio[name='visitPersonOne']:checked").val();
+		if(visitPersonOne == null || visitPersonOne == "" || visitPersonOne == undefined || visitPersonOne == "null") {
+			showMessage('提示', "请选择老师或CC回访的回访人员类型！");
 			return false;
+		} else {
+			if("teacher" == visitPersonOne) {
+				var teacherId = $("#teacherId").combobox('getValue');
+				if(teacherId == null || teacherId == "" || teacherId == undefined || teacherId == "null") {
+					showMessage('提示', "请选择老师的回访人员！");
+					return false;
+				}
+			} else {
+				var careAdviserId = $("#careAdviserId").combobox('getValue');
+				if(careAdviserId == null || careAdviserId == "" || careAdviserId == undefined || careAdviserId == "null") {
+					showMessage('提示', "请选择课程顾问的回访人员！");
+					return false;
+				}
+			}
 		}
+		var visitPersonTwo = $("input:radio[name='visitPersonTwo']:checked").val();
+		if(visitPersonTwo == null || visitPersonTwo == "" || visitPersonTwo == undefined || visitPersonTwo == "null") {
+			showMessage('提示', "请选择学术或销售主管的回访人员类型！");
+			return false;
+		} else {
+			var visitPersonType = "学术主管";
+			if("sales" == visitPersonTwo) {
+				visitPersonType = "销售主管";
+			}
+			var academicOrSalesId = $("#academicOrSalesId").combobox('getValue');
+			if(academicOrSalesId == null || academicOrSalesId == "" || academicOrSalesId == undefined || academicOrSalesId == "null") {
+				showMessage('提示', "请选择"+visitPersonType+"的回访人员！");
+				return false;
+			}
+		}
+	} else {
+		showMessage('提示', "请选择课程" + index + "的渠道来源！");
+		return false;
 	}
 	return true;
 }
