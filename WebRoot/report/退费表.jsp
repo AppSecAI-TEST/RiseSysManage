@@ -34,7 +34,7 @@
 	  				</tr>	
 	  			</table>
   			</form>
-				<table class="easyui-datagrid" style="height:435px;" id="list_data"
+				<table class="easyui-datagrid" style="height:550px;" id="list_data"
 					title="查询结果" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
 						<tr>
