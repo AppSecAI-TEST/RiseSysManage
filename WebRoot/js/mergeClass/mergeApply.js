@@ -41,6 +41,9 @@ $(document).ready(function(){
 			hideProgressLoader();
 		}
 	});
+	$("textarea").each(function(i,node){
+		$(node).attr("maxlength",200);
+	});
 });
 
 function initApplyClassTable(classes)
@@ -470,7 +473,7 @@ function submitMergeInfo()
 		}	
 		comboClass.times=$("#weekTime1").combobox("getText")+" "+$("#hourRange1").combobox("getText")+"<br/>"+$("#weekTime2").combobox("getText")+" "+$("#hourRange2").combobox("getText");
 		comboClass.teachers =$("#school1").combobox("getText")+" "+$("#teacher1").combobox("getText")+"<br/>"+$("#school2").combobox("getText")+" "+$("#teacher2").combobox("getText");
-		comboClass.remark=trim($("#remark").val());
+		comboClass.remark=$("#remark").textbox("getValue");
 		comboClass.handlerId =$("#handlerId").val();
 		comboClass.state="00A";
 		combo.info =comboClass;

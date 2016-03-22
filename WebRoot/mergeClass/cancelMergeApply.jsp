@@ -63,12 +63,12 @@
   		<div class="easyui-panel" id="applyRemark" title="合并说明" style="width:1293px;padding:20px">
   		</div>
   		<div class="easyui-panel" title="取消合并班说明" style="width:1293px;">
-  			<textarea id="remark" style="border:0;width:99.5%;height:90px;resize:none;overflow-y:hidden"></textarea>
+  			<input name="remark" id="remark" type="text" style="width:80%;height:120px" class="easyui-textbox" data-options="multiline:true" /> 						
   		</div>
-  		<div style="width:1293px;text-align:center;margin-top:50px;">
-  			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:150px" id="submitBtn"><span>提交</span></a>
+  		<div style="width:1293px;text-align:right;margin:50px 0;">
+  			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px" id="submitBtn"><span>提交</span></a>
   				&nbsp;&nbsp;&nbsp;&nbsp;
-  			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" ><span>返回</span></a>		
+  			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px" id="backBtn" ><span>返回</span></a>		
   		</div>		
   	</body>
 </html>
@@ -258,7 +258,7 @@
             	var param={};
             	param.applyId =$("#applyId").val();
             	param.handlerId =$("#handlerId").val();
-            	param.remark =trim($("#remark").val());
+            	param.remark =$("#remark").textbox("getValue");
                 $.ajax( {
 					type : "POST",
 					url : "/sys/mergeClass/cancelApply.do",

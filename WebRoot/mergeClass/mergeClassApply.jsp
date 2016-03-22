@@ -103,13 +103,13 @@
   		</div>
   		<div id="courseChangePlan"  class="easyui-panel" title="课程调整计划" style="width:1293px;">  			
   		</div>
-  		<div class="easyui-panel" title="合并说明" style="width:1293px;height:100px;">
-  			<textarea id="remark" style="border:0;width:100%;height:100%;resize:none;overflow-y:hidden"></textarea>
+  		<div class="easyui-panel" title="合并说明" style="width:1293px;height:140px;">
+  			<input name="remark" id="remark" type="text" style="width:80%;height:110px" class="easyui-textbox" data-options="multiline:true" /> 						
   		</div>
-  		<div style="width:1293px;text-align:center;margin:50px 0;">
-  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:150px" id="submitBtn"><span>提交</span></a>
+  		<div style="width:1293px;text-align:right;margin:50px 0;">
+  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px" id="submitBtn"><span>提交</span></a>
   				&nbsp;&nbsp;&nbsp;&nbsp;
-  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" ><span>返回</span></a>	
+  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px" id="backBtn" ><span>返回</span></a>	
   		</div>	
   	</body>
 </html>

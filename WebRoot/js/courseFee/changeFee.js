@@ -6,6 +6,10 @@ $(document).ready(function(){
 	$("#backBtn").click(function(){
 		window.location.href = "qryCourseFee.jsp";
 	});
+	$("textarea").each(function(i,node){
+		$(node).attr("maxlength",200);
+	});
+
 });
 
 function initPage()
@@ -105,7 +109,7 @@ function changeFee()
 	param.beforeAmount=$("#beforeAmount").val();
 	param.afterAmount =$("#afterAmount").html();
 	param.studentCourseId =$("#studentCourseId").val();
-	param.remark =trim($("#remark").val());
+	param.remark =$("#remark").textbox("getValue");
 	param.state ="00A";
 	param.adjustAmount =$("#adjustAmount").numberbox("getValue");
 	$.ajax( {
