@@ -17,22 +17,22 @@
 	 		<form id="qryFm">
 	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right"><span>所属校区：</span></td>
-	  					<td>
+	  					<td align="right" width="80px"><span>所属校区：</span></td>
+	  					<td width="100px">
 	  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height:25px;" editable ="false"
 	  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 	  						</select>
 	  					</td>
-	  					<td align="right"><span>学员姓名：</span></td>
-	  					<td>
+	  					<td align="right" width="80px"><span>学员姓名：</span></td>
+	  					<td width="100px">
 	  						<input class="easyui-textbox" name="name" id="name" style="width:100px;height:25px;" />
 	  					</td>
-	  					<td align="right"><span>联系电话：</span></td>
-	  					<td>
-	  						<input class="easyui-textbox" name="phone" id="phone" style="width:120px;height:25px;" />
+	  					<td align="right" width="80px"><span>联系电话：</span></td>
+	  					<td width="100px">
+	  						<input class="easyui-textbox" name="phone" id="phone" style="width:100px;height:25px;" />
 	  					</td>
-	  					<td align="right"><span>缴费日期：</span></td>
-	  					<td>
+	  					<td align="right" width="80px"><span>缴费日期：</span></td>
+	  					<td align="left">
 	  						<input class="easyui-datebox" name="startTime" id="startTime"  style="width:100px;height:25px;" editable ="false"/>
 		  					至
 	  						<input class="easyui-datebox" name="endTime" id="endTime"  style="width:100px;height:25px;" editable ="false"/>
@@ -57,14 +57,18 @@
 	  						<input type="radio" name="vip" value="N"><span>否</span>
 	  					</td>
 	  					<td align="right"><span>课程类型：</span></td>
-	  					<td>
+	  					<td align="left">
 	  						<select id="courseType" name="courseType" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 				        	</select>
+				        	&nbsp;&nbsp;&nbsp;
 				        	<select id="courseTypeDetail" name="courseTypeDetail" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 		        			</select>
 	  					</td>
-	  					<td align="left">
-		  					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" funcNodeId="3800"><span>查询</span></a>
+	  				</tr>
+	  				<tr>
+	  					<td colspan="7"></td>
+	  					<td>
+	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" funcNodeId="3800"><span>查询</span></a>
 		  					&nbsp;&nbsp;&nbsp;
 		  					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="resetBtn" ><span>重置</span></a>
 	  					</td>
@@ -100,21 +104,21 @@
 	 		<form id="qryFm1">
 	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right"><span>所属校区：</span></td>
-	  					<td>
+	  					<td align="right" width="80px"><span>所属校区：</span></td>
+	  					<td width="100px">
 	  						<select class="easyui-combobox" name="schoolId" id="schoolIds" style="width:100px;height:25px;" editable ="false"
 	  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 	  						</select>
 	  					</td>
-	  					<td align="right"><span>学员姓名：</span></td>
-	  					<td>
+	  					<td align="right" width="80px"><span>学员姓名：</span></td>
+	  					<td width="100px">
 	  						<input class="easyui-textbox" name="name" id="name" style="width:100px;height:25px;" />
 	  					</td>
-	  					<td align="right"><span>联系电话：</span></td>
-	  					<td>
-	  						<input class="easyui-textbox" name="phone" id="phone" style="width:120px;height:25px;" />
+	  					<td align="right" width="80px"><span>联系电话：</span></td>
+	  					<td width="100px">
+	  						<input class="easyui-textbox" name="phone" id="phone" style="width:100px;height:25px;" />
 	  					</td>
-	  					<td align="right"><span>缴费日期：</span></td>
+	  					<td align="right" width="80px"><span>缴费日期：</span></td>
 	  					<td>
 	  						<input class="easyui-datebox" name="startTime" id="startTime"  style="width:100px;height:25px;" editable ="false" />
 		  					至
@@ -143,9 +147,13 @@
 	  					<td>
 	  						<select id="courseTypes" name="courseTypes" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 				        	</select>
+				        	&nbsp;&nbsp;&nbsp;
 				        	<select id="courseTypeDetails" name="courseTypeDetails" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 		        			</select>
 	  					</td>
+	  				</tr>
+	  				<tr>	
+	  					<td colspan="7"></td>
 	  					<td align="left">
 		  					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn1" funcNodeId="3801"><span>查询</span></a>
 		  					&nbsp;&nbsp;&nbsp;
