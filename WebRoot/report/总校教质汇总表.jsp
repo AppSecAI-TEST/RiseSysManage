@@ -36,7 +36,7 @@
 	  				</tr>
 	  			</table>
   			</form>
-				<table class="easyui-datagrid" style="height:435px;" id="list_data"
+				<table class="easyui-datagrid" style="height:550px;" id="list_data"
 					title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true">
 					<thead>
 						<tr>
@@ -52,7 +52,7 @@
 						</tr>
 						<tr>
 							<th field="teachingNum" align="center" width="5%">参与人数</th>
-							<th field="oneNum" align="center" width="7%">1次电教人数</th>
+							<th field="oneNum" align="center" width="7%">2次电教人数</th>
 							<th field="teachingPer" align="center" width="6%">电教完成率</th>
 							<th field="planMeetingNum" align="center" width="6%">计划家长会<br>次数</th>
 							<th field="meetingNum" align="center" width="6%">实际家长会<br>次数</th>

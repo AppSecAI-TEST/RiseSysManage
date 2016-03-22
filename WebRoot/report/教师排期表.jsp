@@ -101,7 +101,7 @@ datagrid-row-selected
 			</table>
 		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}" />
   	
-	<div id="wrap">  
+	<div id="wrap" style="display:none">  
         <!--  <div id="header">header</div> --> 
         <div id="container">  
             <div id="left_side"> 
@@ -245,6 +245,7 @@ function getWeekTime()
     		{
     			if(i==0)
     			{
+    				$('#wrap').css('display','block');
     				$("#content").css('display','block');
     				$("#left_side").css('display','block');
     				json1=data[i];

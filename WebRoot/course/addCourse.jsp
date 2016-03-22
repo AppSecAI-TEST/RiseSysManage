@@ -633,8 +633,7 @@
 								<span>备注：</span>
 							</td>
 							<td colspan="6">
-								<textarea rows="2" cols="120" id="shortRemark" name="shortRemark"
-									class="easyui-validatebox textbox"></textarea>
+							<input type="text" id="shortRemark" name="shortRemark" class="easyui-textbox validatebox"  style="width: 820px; height: 25px;">
 							</td>
 						</tr>
 						<tr>
@@ -705,7 +704,7 @@
 				</table>
 			</div>
 		</form>
-		<div style="width: 1200px;margin-top:25px; text-align: center">
+		<div style="width: 1200px;margin-top:25px; text-align: right">
 			<a href="javascript:void(0)" class="easyui-linkbutton"
 				iconCls="icon-ok" style="width: 100px" id="submitBtn"><span>提交</span>
 			</a> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -742,6 +741,8 @@ var teachers = getTeachers();
 var giftFlag = false;
 
 var courseImgUrl = ""; //课程缴费单
+
+
 
 $("#adviserA_school").combobox({data:schools});
 $("#adviserB_school").combobox({data:schools});
@@ -811,26 +812,37 @@ $("#adviserTeacherB_school").combobox({
 		});
 	}
 });
-	
+	$('#payDate').datebox({
+		
+		 onChange:function(newValue)
+		 {
+			$("#stageId").combobox('setValue',"");
+			$("#classType").combobox('setValue',"");
+			$("#totalAmount").textbox('setValue', '');
+			$("#minusAmount").textbox('setValue', '');
+			$("#amount").textbox('setValue', '');
+		 }
+	});
+
+			
+			
 //业绩类型修改	
 $("#feeType").combobox({
-	onChange : function(n, o) {
+	onChange : function(n, o)
+	{
 		var type = $("#feeType").combobox("getValue");
 		if(type == '001') {
 			$("#womDiv").css("display","block");
 			$("#giftDiv").css("display","block");
 			$("#adviserDiv").css("display","table-row");
 			$("#adviserTeacherDiv").css("display","none");
-			//$("#adviserTeacherA").combobox("setValue","");
-			//$("#adviserTeacherB").combobox("setValue","");
 			clearData("adviserTeacherDiv");
-		} else if(type == '002') {
+		} else if(type == '002')
+		{
 			$("#womDiv").css("display","none");
 			$("#giftDiv").css("display","block");
 			$("#adviserDiv").css("display","none");
 			$("#adviserTeacherDiv").css("display","table-row");
-			//$("#adviserA").combobox("setValue","");
-			//$("#adviserB").combobox("setValue","");
 			clearData("adviserDiv");
 		} else if(type == '003') 
 		{
@@ -844,8 +856,6 @@ $("#feeType").combobox({
 			$("#giftDiv").css("display","none");
 			$("#adviserDiv").css("display","none");
 			$("#adviserTeacherDiv").css("display","table-row");
-			//$("#adviserTeacherA").combobox("setValue","");
-			//$("#adviserTeacherB").combobox("setValue","");
 			var payDate = $("#payDate").datebox('getValue');
 			if(payDate == '') {
 				$("#stageId").combobox('setValue',"");
@@ -860,8 +870,6 @@ $("#feeType").combobox({
 			{
 				amonut=Number(amount)*Number(rate[0].countRate);
 			} 
-			
-			 
 			$("#amount").textbox('setValue', amonut);
 			clearData("adviserTeacherDiv");
 		}
@@ -1071,6 +1079,18 @@ $('#favorAmount').textbox( {
 $("#submitBtn").click(function() {
 	var flag = true;
 	var courseType = $("#courseType").combobox("getValue");
+	var remark=$("#remark").textbox('getValue');
+	var shortRemark=$("#shortRemark").textbox('getValue');
+	if(courseType=='001' && remark.length>50)
+	{
+			showMessage("提示", "备注信息请填写50个字以内", null);
+			return;
+	}
+	if(courseType=='002' && shortRemark.length>50)
+	{
+			showMessage("提示", "备注信息请填写50个字以内", null);
+			return;
+	}
 	if("001" == courseType) {
 		var fileName = $("#fileName").filebox("getValue");
 		if(fileName != "" && fileName != null && fileName != undefined) {

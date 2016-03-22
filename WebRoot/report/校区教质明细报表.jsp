@@ -31,9 +31,7 @@
 	  					</td>
 	  					<td width="120px;" align="right"><span>班级：</span></td>
 	  					<td align="left" width="130px;">
-	  						<select class="easyui-combobox" name="classInstId" id="classInstId" style="width:100px;height:25px;" editable="false"
-	  							data-options="formatter:formatClassInst, valueField: 'classInstId', textField: 'className', panelHeight: 'auto'">
-	  						</select>
+	  						<input class="easyui-textbox" name="className" id="className"  style="width:100px;height:25px;"  />
 	  					</td>
 	  					<td align="right" width="120px;"><span>时间：</span></td>
 	  					<td align="left">
@@ -82,7 +80,7 @@
 	  				</tr>
 	  			</table>
   			</form>
-				<table class="easyui-datagrid" style="height:390px;" id="list_data"
+				<table class="easyui-datagrid" style="height:450px;" id="list_data"
 					title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true">
 					<thead>
 						<tr>
@@ -148,6 +146,12 @@ $(document).ready(function(){
 	 	initReportButton("resetBtn","qryFm","schoolId")
 	 	$("#qryBtn").click(function() {
 		var object = $("#qryFm").serializeObject();
+		 
+		if(object.month=='')
+		{
+			$.messager.alert('提示', "请选择时间");
+			return;
+		}
     	var obj = JSON.stringify(object);
     	obj = obj.substring(0, obj.length - 1);
     	var funcNodeId = $("#qryBtn").attr("funcNodeId");
@@ -161,9 +165,7 @@ $(document).ready(function(){
     });
 	 	$("#schoolId").combobox({
 	 		onChange:function(){
-	 			$("#classInstId").combobox({
-					url:"/sys/pubData/qryClassInstList.do?schoolId="+$("#schoolId").combobox('getValue')+"&stageId="+$("#stageId").combobox('getValue')
-				});
+	 		 
 	 			$("#teacherId").combobox({
 					url : "/sys/pubData/getTeacherBySchoolId.do?schoolId="+$("#schoolId").combobox('getValue')
 				});
