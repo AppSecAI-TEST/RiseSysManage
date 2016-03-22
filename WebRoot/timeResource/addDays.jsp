@@ -34,10 +34,10 @@
 		<input id="schoolTimeId" type="hidden" value="<%=schoolTimeId%>"/>
 		<div id="showDiv" class="easyui-calendar">
 		</div>
-  		<div style="text-align:center;margin-top:20px;">
-  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:150px" id="submitBtn">提交</a>
+  		<div style="text-align:right;margin:20px 0;">
+  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px" id="submitBtn">提交</a>
   				&nbsp;&nbsp;&nbsp;&nbsp;
-  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" >返回</a>	
+  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px" id="backBtn" >返回</a>	
   		</div>	
 	</body>
 </html>		

@@ -77,8 +77,8 @@
 	  			</tr>
 	  		</table>	  						
   		</div>
-  		<div style="width:1293px;text-align:center;margin:25px 0;">
-  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" ><span>返回</span></a>	
+  		<div style="width:1293px;text-align:right;margin:25px 0;">
+  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px" id="backBtn" ><span>返回</span></a>	
   		</div>		
   	</body>
 </html>

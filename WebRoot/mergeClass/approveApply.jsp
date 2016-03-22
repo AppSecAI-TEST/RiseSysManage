@@ -80,10 +80,10 @@
   				</tr>
   			</table>
   		</div>
-  		<div style="width:1293px;text-align:center;margin-top:50px;">
-  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:150px" id="submitBtn"><span>提交</span></a>
+  		<div style="width:1293px;text-align:right;margin:50px 0;">
+  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px" id="submitBtn"><span>提交</span></a>
   				&nbsp;&nbsp;&nbsp;&nbsp;
-  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" ><span>返回</span></a>	
+  			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px" id="backBtn" ><span>返回</span></a>	
   		</div>		
   	</body>
 </html>
