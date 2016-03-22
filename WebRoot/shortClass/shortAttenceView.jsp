@@ -48,7 +48,7 @@
 				<tr>
 					<td align="right">老师：</td>
 					<td align="center">${node.teacherT.schoolT.schoolName}</td>
-					<td align="center">${node.teacherT.teacherName}</td>
+					<td align="center">${node.teacherT.byName}</td>
 					<td align="center">${node.teacherType}</td>
 					<td align="center">${node.lessionHours}</td>
 					<td align="center">

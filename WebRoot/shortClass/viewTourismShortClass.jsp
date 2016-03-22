@@ -83,7 +83,7 @@
 							<td align="center"><fmt:formatDate value="${node.studentCourseT.payDate}" pattern="yyyy-MM-dd" /></td>
 							<td align="center">${node.studentT.identityId}</td>
 							<td align="center"><c:forEach items="${node.studentT.contactList}" var="item" varStatus="j"><c:choose><c:when test="${j.last}">${item.phone}</c:when><c:otherwise>${item.phone},</c:otherwise></c:choose></c:forEach></td>
-							<td align="center">${shortClassInstT.className}</td>
+							<td align="center">${node.normalClassName}</td>
 							<td align="center">${node.studentCourseT.adviserAObj.userName}<c:if test="${!empty node.studentCourseT.adviserBObj.userName}">/${node.studentCourseT.adviserBObj.userName}</c:if></td>
 							<td align="center">${node.studentCourseT.adviserTeacherAObj.userName}<c:if test="${!empty node.studentCourseT.adviserTeacherBObj.userName}">/${node.studentCourseT.adviserTeacherBObj.userName}</c:if></td>
 						</tr>

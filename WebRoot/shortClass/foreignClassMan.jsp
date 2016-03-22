@@ -71,6 +71,16 @@
 			function queryFunc()
 			{
 				var obj = $("#manFm").serializeObject();
+				var planStartManTime = $("#planStartManTime").datebox("getValue");
+				var planEndManTime = $("#planEndManTime").datebox("getValue");
+				if(planStartManTime != "" && planEndManTime == "")
+				{
+					obj["planEndManTime"] = "3000-12-31";
+				}
+				else if(planStartManTime == "" && planEndManTime != "")
+				{
+					obj["planStartManTime"] = "1900-01-01";
+				}
 				obj["queryCode"] = "qryForeignManList";
 				obj["funcNodeId"] = "38138";
 				obj = JSON.stringify(obj);

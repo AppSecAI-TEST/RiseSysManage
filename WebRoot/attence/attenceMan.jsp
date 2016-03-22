@@ -86,6 +86,26 @@
 			function queryManFunc()
 			{
 				var obj = $("#manFm").serializeObject();
+				var classStartManTime = $("#classStartManTime").datebox("getValue");
+				var classEndManTime = $("#classEndManTime").datebox("getValue");
+				var overClassStartManTime = $("#overClassStartManTime").datebox("getValue");
+				var overClassEndManTime = $("#overClassEndManTime").datebox("getValue");
+				if(classStartManTime != "" && classEndManTime == "")
+				{
+					obj["classEndManTime"] = "3000-12-31";
+				}
+				else if(classStartManTime == "" && classEndManTime != "")
+				{
+					obj["classStartManTime"] = "1900-01-01";
+				}
+				if(overClassStartManTime != "" && overClassEndManTime == "")
+				{
+					obj["overClassEndManTime"] = "3000-12-31";
+				}
+				else if(overClassStartManTime == "" && overClassEndManTime != "")
+				{
+					obj["overClassStartManTime"] = "1900-01-01";
+				}
 				obj["queryCode"] = "qryAttendManList";
 				obj["funcNodeId"] = "38101";
 				obj = JSON.stringify(obj);
@@ -146,6 +166,16 @@
 			function queryHisFunc()
 			{
 				var obj = $("#hisFm").serializeObject();
+				var classHisStart = $("#classHisStart").datebox("getValue");
+				var classHisEnd = $("#classHisEnd").datebox("getValue");
+				if(classHisStart != "" && classHisEnd == "")
+				{
+					obj["classHisEnd"] = "3000-12-31";
+				}
+				else if(classHisStart == "" && classHisEnd != "")
+				{
+					obj["classHisStart"] = "1900-01-01";
+				}
 				obj["queryCode"] = "qryAttenceHisList";
 				obj["funcNodeId"] = "38120";
 				obj = JSON.stringify(obj);

@@ -64,6 +64,16 @@
   			function queryFunc()
 			{
 				var obj = $("#qryFm").serializeObject();
+				var startTime = $("#startTime").datebox("getValue");
+				var endTime = $("#endTime").datebox("getValue");
+				if(startTime != "" && endTime == "")
+				{
+					obj["endTime"] = "3000-12-31";
+				}
+				else if(startTime == "" && endTime != "")
+				{
+					obj["startTime"] = "1900-01-01";
+				}
 				obj["queryCode"] = "qryRegularTieOffList";
 				obj["funcNodeId"] = "38145";
 				obj = JSON.stringify(obj);

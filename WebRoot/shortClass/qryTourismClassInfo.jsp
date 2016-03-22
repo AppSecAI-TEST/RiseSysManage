@@ -37,6 +37,16 @@
 			function queryFunc()
 			{
 				var obj = $("#manFm").serializeObject();
+				var feeStartTime = $("#feeStartTime").datebox("getValue");
+				var feeEndTime = $("#feeEndTime").datebox("getValue");
+				if(feeStartTime != "" && feeEndTime == "")
+				{
+					obj["feeEndTime"] = "3000-12-31";
+				}
+				else if(feeStartTime == "" && feeEndTime != "")
+				{
+					obj["feeStartTime"] = "1900-01-01";
+				}
 				obj["queryCode"] = "qryTourismInfoList";
 				obj["funcNodeId"] = "38114";
 				obj = JSON.stringify(obj);

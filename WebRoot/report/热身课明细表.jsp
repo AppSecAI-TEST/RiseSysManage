@@ -68,6 +68,16 @@
 			function queryFunc()
 			{
 				var obj = $("#manFm").serializeObject();
+				var openStartDate = $("#openStartDate").datebox("getValue");
+				var openEndDate = $("#openEndDate").datebox("getValue");
+				if(openStartDate != "" && openEndDate == "")
+				{
+					obj["openEndDate"] = "3000-12-31";
+				}
+				else if(openStartDate == "" && openEndDate != "")
+				{
+					obj["openStartDate"] = "1900-01-01";
+				}
 				obj["queryCode"] = "qryWarmupClassInfo";
 				obj["funcNodeId"] = "38122";
 				obj = JSON.stringify(obj);

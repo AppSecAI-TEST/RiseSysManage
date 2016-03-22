@@ -24,6 +24,8 @@ public class ShortClassStudentT {
     private StudentT studentT;
     
 	private StudentCourseT studentCourseT;
+	
+	private String normalClassName;
 
     public Integer getShortClassStudentId() {
         return shortClassStudentId;
@@ -112,5 +114,13 @@ public class ShortClassStudentT {
 	public void setStudentCourseT(StudentCourseT studentCourseT) {
 		this.studentCourseT = studentCourseT;
 	}
-    
+
+	public String getNormalClassName() {
+		return normalClassName;
+	}
+
+	public void setNormalClassName(String normalClassName) {
+		this.normalClassName = normalClassName;
+	}
+	
 }

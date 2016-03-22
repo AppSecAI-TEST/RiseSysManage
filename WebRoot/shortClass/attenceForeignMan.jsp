@@ -72,6 +72,16 @@
 			function queryFunc()
 			{
 				var obj = $("#manFm").serializeObject();
+				var openStartManTime = $("#openStartManTime").datebox("getValue");
+				var openEndManTime = $("#openEndManTime").datebox("getValue");
+				if(openStartManTime != "" && openEndManTime == "")
+				{
+					obj["openEndManTime"] = "3000-12-31";
+				}
+				else if(openStartManTime == "" && openEndManTime != "")
+				{
+					obj["openStartManTime"] = "1900-01-01";
+				}
 				obj["queryCode"] = "qryAttenceForeignClass";
 				obj["funcNodeId"] = "38139";
 				obj = JSON.stringify(obj);

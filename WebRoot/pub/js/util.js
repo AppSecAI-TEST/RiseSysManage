@@ -1,6 +1,6 @@
 var to =null;
 var countProgress =null;
-var schoolData =getSchools();
+var schoolData = [1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013];
 //禁用非输入框回退键
 window.onload=function(){   
     document.getElementsByTagName("body")[0].onkeydown =function(){  

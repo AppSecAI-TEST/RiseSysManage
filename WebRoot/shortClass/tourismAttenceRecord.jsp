@@ -216,7 +216,7 @@
 				<tr id="teacherId${node.teacherId}">
 					<td align="right" teacherId="${node.teacherId}" schoolId="${node.schoolId}" >老师：</td>
 					<td align="center">${node.schoolT.schoolName}</td>
-					<td align="center">${node.teacherT.teacherName}</td>
+					<td align="center">${node.teacherT.byName}</td>
 					<td align="center"><a href="javascript:void(0)" onclick="delTeacherFunc(${node.teacherId})">删除</a></td>
 				</tr>
 			</c:forEach>

@@ -45,6 +45,16 @@
 			function queryFunc()
 			{
 				var obj = $("#manFm").serializeObject();
+				var payStartManTime = $("#payStartManTime").datebox("getValue");
+				var payEndManTime = $("#payEndManTime").datebox("getValue");
+				if(payStartManTime != "" && payEndManTime == "")
+				{
+					obj["payEndManTime"] = "3000-12-31";
+				}
+				else if(payStartManTime == "" && payEndManTime != "")
+				{
+					obj["payStartManTime"] = "1900-01-01";
+				}
 				obj["queryCode"] = "qryForeignChoiceClassList";
 				obj["funcNodeId"] = "38140";
 				obj = JSON.stringify(obj);

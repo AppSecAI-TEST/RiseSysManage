@@ -106,6 +106,26 @@
 			function queryFunc()
 			{
 				var obj = $("#manFm").serializeObject();
+				var openStartManTime = $("#openStartManTime").datebox("getValue");
+				var openEndManTime = $("#openEndManTime").datebox("getValue");
+				var verifyStartManTime = $("#verifyStartManTime").datebox("getValue");
+				var verifyEndManTime = $("#verifyEndManTime").datebox("getValue");				
+				if(openStartManTime != "" && openEndManTime == "")
+				{
+					obj["openEndManTime"] = "3000-12-31";
+				}
+				else if(openStartManTime == "" && openEndManTime != "")
+				{
+					obj["openStartManTime"] = "1900-01-01";
+				}
+				if(verifyStartManTime != "" && verifyEndManTime == "")
+				{
+					obj["verifyEndManTime"] = "3000-12-31";
+				}
+				else if(verifyStartManTime == "" && verifyEndManTime != "")
+				{
+					obj["verifyStartManTime"] = "1900-01-01";
+				}
 				obj["queryCode"] = "qryWarmupClassInfo";
 				obj["funcNodeId"] = "38122";
 				obj = JSON.stringify(obj);
@@ -188,6 +208,26 @@
 			function queryVerFunc()
 			{
 				var obj = $("#hisFm").serializeObject();
+				var openApplyStartManTime = $("#openApplyStartManTime").datebox("getValue");
+				var openApplyEndManTime = $("#openApplyEndManTime").datebox("getValue");
+				var openVerStartManTime = $("#openVerStartManTime").datebox("getValue");
+				var openVerEndManTime = $("#openVerEndManTime").datebox("getValue");
+				if(openApplyStartManTime != "" && openApplyEndManTime == "")
+				{
+					obj["openApplyEndManTime"] = "3000-12-31";
+				}
+				else if(openApplyStartManTime == "" && openApplyEndManTime != "")
+				{
+					obj["openApplyStartManTime"] = "1900-01-01";
+				}
+				if(openVerStartManTime != "" && openVerEndManTime == "")
+				{
+					obj["openVerEndManTime"] = "3000-12-31";
+				}
+				else if(openVerStartManTime == "" && openVerEndManTime != "")
+				{
+					obj["openVerStartManTime"] = "1900-01-01";
+				}
 				obj["queryCode"] = "qryWarmupAuditInfo";
 				obj["funcNodeId"] = "38123";
 				obj = JSON.stringify(obj);

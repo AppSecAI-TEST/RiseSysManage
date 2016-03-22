@@ -68,6 +68,36 @@
 			function queryFunc()
 			{
 				var obj = $("#manFm").serializeObject();
+				var openStartManTime = $("#openStartManTime").datebox("getValue");
+				var openEndManTime = $("#openEndManTime").datebox("getValue");
+				var classStartManTime = $("#classStartManTime").datebox("getValue");
+				var classEndManTime = $("#classEndManTime").datebox("getValue");
+				var overClassStartManTime = $("#overClassStartManTime").datebox("getValue");
+				var overClassEndManTime = $("#overClassEndManTime").datebox("getValue");
+				if(openStartManTime != "" && openEndManTime == "")
+				{
+					obj["openEndManTime"] = "3000-12-31";
+				}
+				else if(openStartManTime == "" && openEndManTime != "")
+				{
+					obj["openStartManTime"] = "1900-01-01";
+				}
+				if(classStartManTime != "" && classEndManTime == "")
+				{
+					obj["classEndManTime"] = "3000-12-31";
+				}
+				else if(classStartManTime == "" && classEndManTime != "")
+				{
+					obj["classStartManTime"] = "1900-01-01";
+				}
+				if(overClassStartManTime != "" && overClassEndManTime == "")
+				{
+					obj["overClassEndManTime"] = "3000-12-31";
+				}
+				else if(overClassStartManTime == "" && overClassEndManTime != "")
+				{
+					obj["overClassStartManTime"] = "1900-01-01";
+				}
 				obj["queryCode"] = "qryInterClassList";
 				obj["funcNodeId"] = "38110";
 				obj = JSON.stringify(obj);

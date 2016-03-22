@@ -88,6 +88,26 @@
 			function queryManFunc()
 			{
 				var obj = $("#manFm").serializeObject();
+				var classStartManTime = $("#classStartManTime").datebox("getValue");
+				var classEndManTime = $("#classEndManTime").datebox("getValue");
+				var overClassStartManTime = $("#overClassStartManTime").datebox("getValue");
+				var overClassEndManTime = $("#overClassEndManTime").datebox("getValue");
+				if(classStartManTime != "" && classEndManTime == "")
+				{
+					obj["classEndManTime"] = "3000-12-31";
+				}
+				else if(classStartManTime == "" && classEndManTime != "")
+				{
+					obj["classStartManTime"] = "1900-01-01";
+				}
+				if(overClassStartManTime != "" && overClassEndManTime == "")
+				{
+					obj["overClassEndManTime"] = "3000-12-31";
+				}
+				else if(overClassStartManTime == "" && overClassEndManTime != "")
+				{
+					obj["overClassStartManTime"] = "1900-01-01";
+				}
 				obj["queryCode"] = "qrySummerAttenceList";
 				obj["funcNodeId"] = "38132";
 				obj = JSON.stringify(obj);
@@ -142,6 +162,26 @@
 			function queryHisFunc()
 			{
 				var obj = $("#hisFm").serializeObject();
+				var openApplyStartManTime = $("#openApplyStartManTime").datebox("getValue");
+				var openApplyEndManTime = $("#openApplyEndManTime").datebox("getValue");
+				var openAuditStartManTime = $("#openAuditStartManTime").datebox("getValue");
+				var openAuditEndManTime = $("#openAuditEndManTime").datebox("getValue");
+				if(openApplyStartManTime != "" && openApplyEndManTime == "")
+				{
+					obj["openApplyEndManTime"] = "3000-12-31";
+				}
+				else if(openApplyStartManTime == "" && openApplyEndManTime != "")
+				{
+					obj["openApplyStartManTime"] = "1900-01-01";
+				}
+				if(openAuditStartManTime != "" && openAuditEndManTime == "")
+				{
+					obj["openAuditEndManTime"] = "3000-12-31";
+				}
+				else if(openAuditStartManTime == "" && openAuditEndManTime != "")
+				{
+					obj["openAuditStartManTime"] = "1900-01-01";
+				}
 				obj["queryCode"] = "qryAttenceSummerHisInfo";
 				obj["funcNodeId"] = "38133";
 				obj = JSON.stringify(obj);

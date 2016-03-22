@@ -44,8 +44,14 @@
 				var classStartTimeDate = new Date(classStartTime);
 				var classEndTimeDate = new Date(classEndTime);
 				var schooltimeCnt = 0;
+				var schooltimeFlag = false;
 				$(".shortSchooltimeId").each(function(i,node){
 					schooltimeCnt += parseInt($(node).attr("lessionHours"));
+					var schooltime = new Date($(node).attr("schooltime"));
+					if(!(classStartTimeDate.getTime() <= schooltime.getTime() && schooltime.getTime() <= classEndTimeDate.getTime()))
+					{
+						schooltimeFlag = true;
+					}
 				});
 				if(classStartTime == "")
 				{
@@ -82,6 +88,10 @@
 				else if(classStartTimeDate.getTime() >= classEndTimeDate.getTime())
 				{
 					$.messager.alert('提示',"结课时间必须大于开课时间,请核实后重新尝试","info");
+				}
+				else if(schooltimeFlag)
+				{
+					$.messager.alert('提示',"计划课时必须在开课与结课日期之间,请核实后重新尝试","info");
 				}
 				else
 				{
@@ -160,7 +170,7 @@
 				});
 				if(stuArr.length == 0)
 				{
-					$.messager.alert('提示',"移除所勾选的学员失败:");
+					$.messager.alert('提示',"请先选择要移除的学员");
 				}
 				else
 				{
@@ -191,7 +201,25 @@
 			}
 			function viewClassFunc()
 			{
-				
+				var stuArr = [];
+				$("input[name='studentId']").each(function(i,node){
+					if(node.checked)
+					{
+						stuArr.push(node.value);
+					}
+				});
+				if(stuArr.length == 0)
+				{
+					$.messager.alert('提示',"请先选择要浏览的学员");
+				}
+				else if(stuArr.length == 0)
+				{
+					$.messager.alert('提示',"不能选择多名要浏览的学员");
+				}
+				else
+				{
+					window.location.href = "/sys/view.jsp?studentId="+stuArr[0]+"&title=学员基础信息";
+				}
 			}
 			function backFunc()
 			{
@@ -230,7 +258,7 @@
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${shortClassInstT.classSchooltimeList}" var="node" varStatus="i">
-						<tr class="shortSchooltimeId" id="shortSchooltimeId${node.shortSchooltimeId}" lessionHours="${node.lessionHours}">
+						<tr class="shortSchooltimeId" id="shortSchooltimeId${node.shortSchooltimeId}" lessionHours="${node.lessionHours}" schooltime="<fmt:formatDate value='${node.schooltime}' pattern='yyyy-MM-dd' />">
 							<td align="right">上课计划：</td>
 							<td><fmt:formatDate value="${node.schooltime}" pattern="yyyy-MM-dd" /> ${node.startTime}~${node.endTime}</td>
 							<td align="right">教室：</td>

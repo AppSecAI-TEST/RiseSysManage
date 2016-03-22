@@ -18,9 +18,6 @@
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=813&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
-			$.post("<%=path %>/shortBus/getGiftTypeList.do",function(data){
-				$("#shortClassType").combobox("loadData",data);
-			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_GIFT_T&codeType=COURSE_STATE",function(data){
 				$("#shortClassState").combobox("loadData",data);
 			},"json");
@@ -37,14 +34,6 @@
 						}
 					}
 				});
-				$("#shortClassType").combobox({
-					formatter:function(data){
-						return '<span>'+data.typeName+'</span>';
-					}, 
-					valueField: 'giftType', 
-					textField: 'typeName',
-					panelHeight: 'auto'
-				});
 				$("#shortClassState").combobox({
 					formatter:formatItem, 
 					valueField: 'codeFlag', 
@@ -55,6 +44,16 @@
 			function queryFunc()
 			{
 				var obj = $("#manFm").serializeObject();
+				var payStartManTime = $("#payStartManTime").datebox("getValue");
+				var payEndManTime = $("#payEndManTime").datebox("getValue");
+				if(payStartManTime != "" && payEndManTime == "")
+				{
+					obj["payEndManTime"] = "3000-12-31";
+				}
+				else if(payStartManTime == "" && payEndManTime != "")
+				{
+					obj["payStartManTime"] = "1900-01-01";
+				}
 				obj["queryCode"] = "qrySummerChoiceClassList";
 				obj["funcNodeId"] = "38135";
 				obj = JSON.stringify(obj);
@@ -72,7 +71,6 @@
 				{
 					$("#schoolManId").combobox("setValue",schoolData[0].schoolId);
 				}
-				$("#shortClassType").combobox("setValue","");
 				$("#shortClassState").combobox("setValue","");
 				$("#payStartManTime").datebox("setValue","");
 				$("#payEndManTime").datebox("setValue","");
@@ -130,6 +128,7 @@
   	<body>
 		<form id="manFm" style="margin:0 auto;">
 			<input type="hidden" name="classType" id="classType" value="${param.classType}" />
+			<input type="hidden" name="shortClassType" id="shortClassType" value="${param.shortClassType}" />
 			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 				<tr>
 					<td align="right" width="8%">
@@ -153,12 +152,6 @@
 				</tr>
 				<tr>
 					<td align="right">
-						赠课类型：
-					</td>
-					<td>
-						<select id="shortClassType" name="shortClassType" style="width:150px" ></select>										
-					</td>
-					<td align="right">
 						赠课状态：
 					</td>
 					<td>
@@ -170,7 +163,7 @@
 					<td width="22%">
 						<input name="payStartManTime" id="payStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="payEndManTime" id="payEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
 					</td>
-					<td align="center">
+					<td align="right" colspan="3" style="padding-right:255px">
 						<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
 						<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
 					</td>

@@ -168,7 +168,7 @@
 				});
 				if(stuArr.length == 0)
 				{
-					$.messager.alert('提示',"移除所勾选的学员失败:");
+					$.messager.alert('提示',"请先选择要移除的学员");
 				}
 				else
 				{
@@ -248,7 +248,25 @@
 			}
 			function viewClassFunc()
 			{
-				
+				var stuArr = [];
+				$("input[name='studentId']").each(function(i,node){
+					if(node.checked)
+					{
+						stuArr.push(node.value);
+					}
+				});
+				if(stuArr.length == 0)
+				{
+					$.messager.alert('提示',"请先选择要浏览的学员");
+				}
+				else if(stuArr.length == 0)
+				{
+					$.messager.alert('提示',"不能选择多名要浏览的学员");
+				}
+				else
+				{
+					window.location.href = "/sys/view.jsp?studentId="+stuArr[0]+"&title=学员基础信息";
+				}
 			}
 			function backFunc()
 			{
@@ -328,7 +346,7 @@
 							<td align="center"><fmt:formatDate value="${node.studentCourseT.payDate}" pattern="yyyy-MM-dd" /></td>
 							<td align="center">${node.studentT.identityId}</td>
 							<td align="center"><c:forEach items="${node.studentT.contactList}" var="item" varStatus="j"><c:choose><c:when test="${j.last}">${item.phone}</c:when><c:otherwise>${item.phone},</c:otherwise></c:choose></c:forEach></td>
-							<td align="center">${shortClassInstT.className}</td>
+							<td align="center">${node.normalClassName}</td>
 							<td align="center">${node.studentCourseT.adviserAObj.userName}<c:if test="${!empty node.studentCourseT.adviserBObj.userName}">/${node.studentCourseT.adviserBObj.userName}</c:if></td>
 							<td align="center">${node.studentCourseT.adviserTeacherAObj.userName}<c:if test="${!empty node.studentCourseT.adviserTeacherBObj.userName}">/${node.studentCourseT.adviserTeacherBObj.userName}</c:if></td>
 						</tr>

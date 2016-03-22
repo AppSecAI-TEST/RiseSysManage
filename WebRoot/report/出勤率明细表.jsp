@@ -116,6 +116,16 @@
 			function queryFunc()
 			{
 				var obj = $("#attFm").serializeObject();
+				var classStart = $("#classStart").datebox("getValue");
+				var classEnd = $("#classEnd").datebox("getValue");
+				if(classStart != "" && classEnd == "")
+				{
+					obj["classEnd"] = "3000-12-31";
+				}
+				else if(classStart == "" && classEnd != "")
+				{
+					obj["classStart"] = "1900-01-01";
+				}
 				obj["queryCode"] = "qryAttenceDetailReport";
 				obj["funcNodeId"] = "38126";
 				obj = JSON.stringify(obj);

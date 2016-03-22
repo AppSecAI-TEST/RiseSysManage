@@ -33,19 +33,20 @@
 					textField: 'codeName', 
 					panelHeight: 'auto'
 				});
-				$("#stageId").combobox({
-					url : "/sys/pubData/qryStage.do",
-			    	valueField : "stageId",
-			    	textField : "stageId",
-			    	panelHeight : "auto",
-			    	formatter : function(data) {
-			    		return "<span>" + data.stageId + "</span>";
-			    	}
-				});
 			});
 			function queryFunc()
 			{
 				var obj = $("#manFm").serializeObject();
+				var payStartManTime = $("#payStartManTime").datebox("getValue");
+				var payEndManTime = $("#payEndManTime").datebox("getValue");
+				if(payStartManTime != "" && payEndManTime == "")
+				{
+					obj["payEndManTime"] = "3000-12-31";
+				}
+				else if(payStartManTime == "" && payEndManTime != "")
+				{
+					obj["payStartManTime"] = "1900-01-01";
+				}
 				obj["queryCode"] = "qryWarmupChoiceClassList";
 				obj["funcNodeId"] = "38134";
 				obj = JSON.stringify(obj);
@@ -58,7 +59,6 @@
 			}
 			function resetFunc()
 			{
-				$("#stageId").combobox("setValue","");
 				$("#classInstId").textbox("setValue","");
 				$("#classState").combobox("setValue","");
 				$("#payStartManTime").datebox("setValue","");
@@ -118,6 +118,7 @@
   	<body>
 		<form id="manFm" style="margin:0 auto;">
 			<input type="hidden" name="classType" id="classType" value="${param.classType}" />
+			<input type="hidden" name="stageId" id="stageId" value="${param.stageId}" />
 			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 				<tr>
 					<td align="right">
@@ -140,12 +141,6 @@
 					</td>
 				</tr>
 				<tr>
-					<td align="right">	
-						课程阶段：
-					</td>
-					<td>
-						<select id="stageId" name="stageId" style="width:150px"></select>
-					</td>
 					<td align="right">
 						班级：
 					</td>
@@ -158,7 +153,7 @@
 					<td>
 						<select id="classState" name="classState" style="width:100px;height:25px;" ></select>										
 					</td>
-					<td colspan="2" align="center">
+					<td colspan="2" align="right" style="padding-right:40px">
 						<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
 						<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
 					</td>
