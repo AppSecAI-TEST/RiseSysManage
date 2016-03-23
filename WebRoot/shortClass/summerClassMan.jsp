@@ -336,7 +336,7 @@
 							<td>
 								<select id="classManState" name="classManState" style="width:100px;height:25px;" ></select>
 							</td>
-							<td align="left" colspan="2">
+							<td align="left" colspan="2" style="padding-left:132px">
 								<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
 								<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
 							</td>

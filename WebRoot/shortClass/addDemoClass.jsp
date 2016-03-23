@@ -246,7 +246,7 @@
 				<td><a href="javascript:void(0)" id="addTeacherBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;" onclick="addTeacherFunc()">添加</a></td>
 			</tr>
 		</table>
-		<div style="margin:0 auto;padding:0 0;text-align:center;padding-right:2px;width:99%;margin-top:10px">
+		<div style="margin:0 auto;padding:0 0;text-align:right;padding-right:2px;width:99%;margin-top:10px">
 			<a href="javascript:void(0)" id="addSubmitBtn" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;" onclick="addSubmitFunc()"><span>提交</span></a>
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()"><span>返回</span></a>
 		</div>

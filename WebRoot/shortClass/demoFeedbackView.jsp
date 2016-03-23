@@ -14,7 +14,7 @@
   	<body>
  		<input id="shortClassInstId" type="hidden" value="<%=shortClassInstId %>"/>
  		<input id="classState" type="hidden" value="<%=classState %>"/>
- 		<div  class="easyui-panel" title="反馈信息" style="width:1100px;">
+ 		<div  class="easyui-panel" title="反馈信息" style="min-width:1100px;width:99%">
  			<table id="infoTab" width="100%;" class="maintable">
  				<tr>
  					<td width="110px;" align="right"><span>上课日期：</span></td><td align="left"><span></span></td>
@@ -32,7 +32,7 @@
  			</table>
  		</div>
  		<div style="height:5px;"></div>
- 		<div id="stuDiv" class="easyui-panel" title="学生反馈信息" style="width:1100px;">
+ 		<div id="stuDiv" class="easyui-panel" title="学生反馈信息" style="min-width:1100px;width:99%">
  			<table id="stuTab" width="100%;" class="maintable">
 				<tr>
 					<td align="center"><span>姓名</span></td><td align="center"><span>缴费情况</span></td><td align="center"><span>缴费日期</span></td><td align="center"><span>是否定金转全费</span></td>
@@ -44,7 +44,7 @@
 				</tr>
  			</table>
  		</div>
- 		<div style="width:1100px;text-align:center;margin-top:25px;">
+ 		<div style="min-width:1100px;width:99%;text-align:right;margin-top:25px;">
   			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" onclick="window.history.back();" >返回</a>	
   		</div>	
   	</body>

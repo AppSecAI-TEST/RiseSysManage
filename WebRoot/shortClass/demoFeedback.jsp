@@ -21,7 +21,7 @@
  		<input id="hours" type="hidden"/>
  		<input id="shortSchooltimeId" type="hidden"/>
  		<input id="shortClassAttendId" type="hidden" value=""/>
- 		<div  class="easyui-panel" title="反馈信息" style="width:1100px;">
+ 		<div  class="easyui-panel" title="反馈信息" style="min-width:1100px;width:99%">
  			<table id="infoTab" width="100%;" class="maintable">
  				<tr>
 	 				<td width="150px" align="right"><span>上课时间：</span></td>
@@ -81,7 +81,7 @@
 	 			</tr>		
  			</table>
  		</div>
- 		<div style="width:1100px;text-align:center;margin-top:30px;">
+ 		<div style="min-width:1100px;width:99%;text-align:right;margin-top:30px;">
   			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:150px" id="submitBtn">提交</a>
   				&nbsp;&nbsp;&nbsp;&nbsp;
   			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" >返回</a>	

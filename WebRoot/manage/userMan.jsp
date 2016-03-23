@@ -40,7 +40,7 @@
 					editable:false,
 					valueField: 'postId',
 					textField: 'postName',
-					panelHeight: 'auto'
+					listHeight:150
 				});
 				$("#staffState").combobox({
 					url:"<%=path %>/pub/pageComboxList.do?funcNodeId=${param.funcNodeId}&fieldId=staffState",

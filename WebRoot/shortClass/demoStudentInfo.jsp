@@ -14,7 +14,7 @@
  		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
  		<input id="shortClassInstId" type="hidden" value="<%=shortClassInstId %>"/>
  		<input id="studentLinkId" type="hidden" value=""/>
- 		<div  class="easyui-panel" title="学生反馈信息" style="width:1100px;">
+ 		<div  class="easyui-panel" title="学生反馈信息" style="min-width:1100px;width:99%;">
  			<table id="infoTab" width="100%;" class="maintable">
  				<tr>
  					<td align="left" colspan="8">  			
@@ -35,7 +35,7 @@
 				</tr>
  			</table>	
  		</div>
- 		<div style="width:1100px;text-align:center;margin-top:25px;">
+ 		<div style="min-width:1100px;width:99%;text-align:right;margin-top:25px;">
   			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:150px" id="backBtn" ><span>返回</span></a>	
   		</div>
   		<div id="dlg" class="easyui-dialog" style="width: 580px; height: 350px; padding: 10px 20px" closed="true" data-options="modal:true" buttons="#dlgBtn">
