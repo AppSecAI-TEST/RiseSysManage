@@ -246,7 +246,7 @@
 				</table>
 			</div>
 		</form>
-		<div style="width: 1200px; text-align: center;margin-top:25px">
+		<div style="width: 1200px; text-align: right;margin-top:25px">
 			<a href="javascript:void(0)" class="easyui-linkbutton"
 				iconCls="icon-ok" style="width: 100px" id="submitBtn"><span>提交</span>
 			</a> &nbsp;&nbsp;&nbsp;&nbsp;

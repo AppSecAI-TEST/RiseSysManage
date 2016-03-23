@@ -145,6 +145,21 @@
 <script type="text/javascript">
 var linkCourses = [];
 
+$.ajaxSetup({
+    contentType:"application/x-www-form-urlencoded;charset=utf-8",
+    complete:function(XMLHttpRequest,textStatus)
+    {
+        //通过XMLHttpRequest取得响应头，sessionstatus  
+        //alert("1");
+        var sessionstatus=XMLHttpRequest.getResponseHeader("sessionstatus"); 
+        if(sessionstatus=="timeout")
+        {
+             //这里怎么处理在你，这里跳转的登录页面
+             window.location.replace(PlanEap.getActionURI("login"));
+        }
+    }
+});
+
 $("#updateCourse").click(function()
 {
 	coures("update");
@@ -181,7 +196,14 @@ function coures(type)
 		if(linkCourses.length>1)
 		{
 			var str=JSON.stringify(linkCourses);
-			window.location.href="link.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&linkCourses="+str;
+			if(type=="view")
+			{
+				window.location.href="link.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&linkCourses="+str+"&viewFlag=true";
+			}else
+			{
+				window.location.href="link.jsp?schoolId="+schoolId+"&studentId="+studentId+"&studentInfo="+studentInfo+"&linkCourses="+str;
+			}
+			
 		}else 
 		{
 			var str=JSON.stringify(row);

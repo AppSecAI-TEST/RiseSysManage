@@ -655,7 +655,7 @@
 				</table>
 			</div>
 		</form>
-		<div style="width: 1200px;margin-top:25px;text-align: center">
+		<div style="width: 1200px;margin-top:25px;text-align: right">
 			<a href="javascript:void(0)" class="easyui-linkbutton"
 				iconCls="icon-ok" style="width: 100px" id="submitBtn"><span>提交</span>
 			</a> &nbsp;&nbsp;&nbsp;&nbsp;

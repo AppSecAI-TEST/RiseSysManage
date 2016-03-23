@@ -613,7 +613,7 @@
 											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 												style="width: 100px; height: 25px;">
 												</select>
-								<select class="easyui-combobox"  editable='false' id="s_teacherA" name="staffIdA" style="width: 100px; height: 25px;"  required="true">
+								<select class="easyui-combobox"  editable='false' id="s_teacherA" name="staffIdA" style="width: 100px; height: 25px;">
 								<select>
 							</td>
 							<td align="right">
@@ -766,6 +766,8 @@ $("#s_schoolA").combobox({data:schools});
 
 $("#s_schooldA").combobox({data:schools});
 $("#s_schooldB").combobox({data:schools});
+
+
 
 loadStuBaseInfo();
 $("#adviserA_school").combobox({
@@ -1083,12 +1085,12 @@ $("#submitBtn").click(function() {
 	var shortRemark=$("#shortRemark").textbox('getValue');
 	if(courseType=='001' && remark.length>50)
 	{
-			showMessage("提示", "备注信息请填写50个字以内", null);
+			showMessage("提示", "备注信息不能多于50个字", null);
 			return;
 	}
 	if(courseType=='002' && shortRemark.length>50)
 	{
-			showMessage("提示", "备注信息请填写50个字以内", null);
+			showMessage("提示", "备注信息不能多于50个字", null);
 			return;
 	}
 	if("001" == courseType) {
@@ -1998,12 +2000,8 @@ function checkParam() {
 			});
 			return false;
 		}
-		if($("#s_teacherA").combobox("getValue") == "") {
-			showMessage("提示","请选择"+$("#adviserType").combobox("getText") + "A", function() {
-				hideMessage();
-			});
-			return false;
-		} else if($("#s_teacherB").combobox("getValue") == $("#s_teacherA").combobox("getValue")) {
+		if($("#s_teacherB").combobox("getValue") == $("#s_teacherA").combobox("getValue") && $("#s_teacherA").combobox("getValue")!='')
+		{
 			showMessage("提示",$("#adviserType").combobox("getText")+"A不能和"+$("#adviserType").combobox("getText")+"B相同", function() {
 				hideMessage();
 			});

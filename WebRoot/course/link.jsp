@@ -122,7 +122,7 @@
  				<iframe id="frame2" name="frame2"   src="/sys/course/oldCourse.jsp?studentId=<%=studentId%>"  marginwidth=0 marginheight=0 frameborder=0 scrolling="auto" height="445px" width="100%"></iframe>
   	    </div>
 	 
-		<div style="margin-top: 25px;text-align:center;">
+		<div style="width: 99%;margin-top:25px; text-align: right">
 	      		<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
 	      		&nbsp;&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onClick="javascript:window.history.back()">返回</a>
 	     </div>
@@ -151,6 +151,8 @@
 	var linkCourseT = {};//连报金额汇总表
 	var favorPrice = 0;//连报总优惠金额
 	var courseImgUrl = ""; //课程缴费单
+	
+	
 	function closeDlg() {
 		$('#dlg').dialog('close');
 	}
