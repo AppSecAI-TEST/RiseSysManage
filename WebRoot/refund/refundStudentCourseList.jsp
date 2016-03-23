@@ -54,7 +54,7 @@
 				        <select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;">
 		        		</select>
 		        	</td>
-		        	<td colspan="2" align="right">
+		        	<td colspan="2" align="center">
   						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1024">查询</a>
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
   					</td>
@@ -93,6 +93,7 @@
 						<th data-options="field:'classType',width:100,align:'center'">班级类型</th>
 						<th data-options="field:'payDate',width:100,align:'center'">缴费日期</th>
 						<th data-options="field:'adviserName',width:100,align:'center'">业绩顾问</th>
+						<th data-options="field:'adviserTeacherName',width:100,align:'center'">业绩老师</th>
 						<th data-options="field:'teacherName',width:100,align:'center'">带班老师</th>
 						<th data-options="field:'dutyAdvisterName',width:100,align:'center'">责任顾问</th>
 						<th data-options="field:'courseStateText',width:100,align:'center'">课程状态</th>
