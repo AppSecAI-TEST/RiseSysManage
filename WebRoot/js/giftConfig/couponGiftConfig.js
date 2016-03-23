@@ -181,8 +181,10 @@ function updateCouponName(giftId,giftType,giftName,amount,isEff,getRemark,course
             		 		 $("#couponEffRemark").textbox('setValue',data[i].effRemark);
 		            		 if("Y" == data[i].isMinus){
 		            			 $("#couponMinus").textbox('setValue','是');
+		            			 $("#minusCourses").css('display','table-row');
 		            		 }else if("N" == data[i].isMinus){
 		            			 $("#couponMinus").textbox('setValue','否');
+		            			 ("#minusCourses").css('display','none');
 		            		 }
 		       			 }
 		       		}
