@@ -195,9 +195,9 @@ $(document).ready(function() {
 			calculateRefundAmount(studentCourseId);
 		});
 		
-		$("input", $("#financialConfirmRefundFee" + studentCourseId).next("span")).blur(function() {
-			calculateConfirmRefundAmount(studentCourseId);
-		});
+//		$("input", $("#financialConfirmRefundFee" + studentCourseId).next("span")).blur(function() {
+//			calculateConfirmRefundAmount(studentCourseId);
+//		});
 		
 		$("#refundType" + studentCourseId).combobox({
 			url : "/sys/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_TYPE",//返回json数据的url
@@ -249,19 +249,16 @@ $(document).ready(function() {
     			},
     			success: function (result) {
     				var data = JSON.parse(result);
-    				if(data.flag)
-    				{
+    				if(data.flag) {
     					$("#imgUrl").val(data.fileId);
-    					$.messager.alert('提示', "文件上传成功！", "info", function() {$("#cancelUploadBtn").linkbutton('disable');});
-    				}
-    				else
-    				{
-    					$.messager.alert('提示', data.msg);
+    					showMessage('提示', "文件上传成功！", "info", function() {$("#cancelUploadBtn").linkbutton('disable');});
+    				} else {
+    					showMessage('提示', data.msg);
     				}
     			}
     		});
     	} else {
-    		$.messager.alert('提示', "请您先选择一个文件！");
+    		showMessage('提示', "请您先选择一个文件！");
     	}
     });
     
@@ -272,10 +269,10 @@ $(document).ready(function() {
 	
 	//提交申请
 	$("#refundApplySubmit").click(function() {
-		if(!checkParam()) {
-			return;
-		} else {
-			if($("#refundApplyFm").form('validate')) {
+		if($("#refundApplyFm").form('validate')) {
+			if(!checkParam()) {
+				return;
+			} else {
 				var flag = true;
 				if($("#fileName").length > 0) {
 					var fileName = $("#fileName").filebox("getValue");
@@ -290,8 +287,10 @@ $(document).ready(function() {
 					var obj = $("#refundApplyFm").serializeObject();
 					var refundFeeObj = new Object();
 					refundFeeObj.schoolId = obj.schoolId;
-					refundFeeObj.className = $("#className").val();
-					refundFeeObj.classInstId = $("#classInstId").val();
+					refundFeeObj.className = $("#classNameText").html();
+					refundFeeObj.classProgress = $("#classProgressText").html();
+					refundFeeObj.teacherName = $("#teacherNameText").html();
+					refundFeeObj.classInstId = $("#studyClassInstId").val();
 					refundFeeObj.studentId = obj.studentId;
 					refundFeeObj.refundWay = obj.refundWay;
 					refundFeeObj.refundRule = obj.refundRule;
@@ -339,7 +338,7 @@ $(document).ready(function() {
 						refundFeeDetailObj.minusOtherFee = $("#minusOtherFee" + studentCourseId).textbox("getValue");
 						refundFeeDetailObj.handlingChange = $("#handlingChange" + studentCourseId).textbox("getValue");
 						refundFeeDetailObj.confirmRefundFee = $("#confirmRefundFee" + studentCourseId).html();
-						refundFeeDetailObj.financialConfirmFee = $("#financialConfirmRefundFee" + studentCourseId).textbox("getValue");
+						refundFeeDetailObj.financialConfirmFee = "";
 						refundFeeDetailObj.isRtnTextbook = isRtnTextbook;
 						refundFeeDetailObj.isRtnGift = isRtnGift;
 						refundFeeDetailObj.handlerId = obj.handlerId;
@@ -399,14 +398,14 @@ $(document).ready(function() {
 							$.messager.progress('close'); 
 							var flag = data.flag
 							if(flag) {
-								$.messager.alert('提示', "申请退费成功！", "info", function() {window.location.href = "/sys/refund/refund.jsp";});
+								showMessage('提示', "申请退费成功！", function() {window.location.href = "/sys/refund/refund.jsp";});
 							} else {
-								$.messager.alert('提示', data.msg);
+								showMessage('提示', data.msg);
 							}
 						} 
 					});
 				} else {
-					$.messager.alert('提示', "请您先上传文件！");
+					showMessage('提示', "请您先上传文件！");
 				}
 			}
 		}

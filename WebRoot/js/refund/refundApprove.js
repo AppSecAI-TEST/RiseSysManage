@@ -21,30 +21,9 @@ $(document).ready(function() {
 	
 	$("[name='studentCourseId']").each(function() {
 		var studentCourseId = $(this).val();
-		$("input", $("#minusGiftFee" + studentCourseId).next("span")).blur(function() {
-			calculateRefundAmount(studentCourseId);
-		});
-		
-		$("input", $("#minusTextbookFee" + studentCourseId).next("span")).blur(function() {
-			calculateRefundAmount(studentCourseId);
-		});
-		
-		$("input", $("#minusCourseFee" + studentCourseId).next("span")).blur(function() {
-			calculateRefundAmount(studentCourseId);
-		});
-		
-		$("input", $("#handlingChange" + studentCourseId).next("span")).blur(function() {
-			calculateRefundAmount(studentCourseId);
-		});
-		
-		$("input", $("#minusOtherFee" + studentCourseId).next("span")).blur(function() {
-			calculateRefundAmount(studentCourseId);
-		});
-		
 		$("input", $("#financialConfirmRefundFee" + studentCourseId).next("span")).blur(function() {
 			calculateConfirmRefundAmount(studentCourseId);
 		});
-		
 		$("#refundFeeImgUrl" + studentCourseId).lightBox();
 	});
 	
@@ -64,48 +43,53 @@ $(document).ready(function() {
 		if("108" == nextState) {
 			var transfer = $("input:checkbox[name='isTransfer']:checked").val();
 			if(transfer == null || transfer == "" || transfer == undefined) {
-				$.messager.alert('提示', "请选择是否已打款！");
+				showMessage('提示', "请选择是否已打款！");
 				flag = false;
 			} else {
 				if(transfer) {
 					isTransfer = "Y";
 				}
-			}
-			belongDate = $("#belongDate").datebox("getValue");
-			if(belongDate == null || belongDate == "" || belongDate == undefined) {
-				$.messager.alert('提示', "请选择退费归属日期！");
-				flag = false;
-			} else {
-				var curr_time = new Date();
-				var curr_year = curr_time.getFullYear();
-				var curr_month = curr_time.getMonth() + 1;
-				var date = new Date(belongDate.replace(/-/g,"/"));
-				var year = date.getFullYear();
-				var month = date.getMonth() + 1;
-				if(parseInt(curr_year) != parseInt(year) 
-						|| parseInt(month) < (parseInt(curr_month) - 1) 
-						|| parseInt(month) > (parseInt(curr_month) + 1)) {
+				belongDate = $("#belongDate").datebox("getValue");
+				if(belongDate == null || belongDate == "" || belongDate == undefined) {
+					showMessage('提示', "请选择退费归属日期！");
 					flag = false;
-					$.messager.alert('提示', "退费归属日期只能选择上月、当月、下月的日期！");
+				} else {
+					var curr_time = new Date();
+					var curr_year = curr_time.getFullYear();
+					var curr_month = curr_time.getMonth() + 1;
+					var date = new Date(belongDate.replace(/-/g,"/"));
+					var year = date.getFullYear();
+					var month = date.getMonth() + 1;
+					if(parseInt(curr_year) != parseInt(year) 
+							|| parseInt(month) < (parseInt(curr_month) - 1) 
+							|| parseInt(month) > (parseInt(curr_month) + 1)) {
+						flag = false;
+						showMessage('提示', "退费归属日期只能选择上月、当月、下月的日期！");
+					}
 				}
 			}
 		} else {
-			var approveType = $('input:radio[name="approveType"]:checked').val();
-			if(approveType == "" || approveType == null || approveType == undefined || approveType == "null") {
-				$.messager.alert('提示', "请选择是否审批通过！");
-				flag = false;
-			} else {
-				if("Y" == approveType) {
-					if("104" == nextState || "105" == nextState) {
-						masterType = $("#masterType").combobox("getValue");
-						if(masterType == null || masterType == "" || masterType == undefined) {
-							$.messager.alert('提示', "请选择后续审批人类型！");
-							flag = false;
-						}
-					}
+			if("102" == nextState) {
+				flag = $("#refundApproveFm").form('validate');
+			}
+			if(flag) {
+				var approveType = $('input:radio[name="approveType"]:checked').val();
+				if(approveType == "" || approveType == null || approveType == undefined || approveType == "null") {
+					showMessage('提示', "请选择是否审批通过！");
+					flag = false;
 				} else {
-					$("#masterType").combobox('clear');
-					$("#masterType").combobox("loadData", new Array());
+					if("Y" == approveType) {
+						if("104" == nextState || "105" == nextState) {
+							masterType = $("#masterType").combobox("getValue");
+							if(masterType == null || masterType == "" || masterType == undefined) {
+								showMessage('提示', "请选择后续审批人类型！");
+								flag = false;
+							}
+						}
+					} else {
+						$("#masterType").combobox('clear');
+						$("#masterType").combobox("loadData", new Array());
+					}
 				}
 			}
 		}
@@ -123,7 +107,27 @@ $(document).ready(function() {
 				}
 			});
 			approveObj.remark = approveRemark;
-			if("104" == nextState || "105" == nextState) {
+			var refundFeeObj = new Object();
+			var refundFeeDetailArray = "[";
+			if("102" == nextState) {
+				var refundFeeId = $("#refundFeeId").val();
+				refundFeeObj.refundFeeId = refundFeeId;
+				var realAmount = $("#realAmount").val();
+				refundFeeObj.realAmount = realAmount;
+				$("[name='studentCourseId']").each(function() {
+					var studentCourseId = $(this).val();
+					var refundFeeDetailObj = new Object();
+					var refundFeeDetailId = $("#refundFeeDetailId" + studentCourseId).val();
+					refundFeeDetailObj.refundFeeDetailId = refundFeeDetailId;
+					var financialConfirmRefundFee = $("#financialConfirmRefundFee" + studentCourseId).val();
+					refundFeeDetailObj.financialConfirmRefundFee = financialConfirmRefundFee;
+					refundFeeDetailArray += JSON.stringify(refundFeeDetailObj) + ",";
+				});
+				if(refundFeeDetailArray.length > 1) {
+					refundFeeDetailArray = refundFeeDetailArray.substring(0, refundFeeDetailArray.length - 1);
+				}
+				refundFeeDetailArray += "]";
+			} if("104" == nextState || "105" == nextState) {
 				approveObj.masterType = masterType;
 			} else if("108" == nextState) {
 				approveObj.approveResult = "Y";
@@ -131,6 +135,10 @@ $(document).ready(function() {
 				approveObj.belongDate = belongDate;
 			}
 			var param = JSON.stringify(approveObj);
+			if("102" == nextState) {
+				param = param.substring(0, param.length - 1);
+				param += ",\"refundFeeObj\":" + JSON.stringify(refundFeeObj) + ",\"refundFeeDetailArray\":" + refundFeeDetailArray + "}";
+			}
 			param = encodeURI(param);
 			$.ajax({
 				url: "/sys/refund/approveRefund.do",
@@ -144,9 +152,9 @@ $(document).ready(function() {
 					$.messager.progress('close'); 
 					var flag = data.flag;
 					if(flag) {
-						$.messager.alert('提示', "退费审批成功！", "info", function() {window.location.href = "/sys/refund/refund.jsp?funcNodeId=53";});
+						showMessage('提示', "退费审批成功！", function() {window.location.href = "/sys/refund/refund.jsp?funcNodeId=53";});
 					} else {
-						$.messager.alert('提示', data.msg);
+						showMessage('提示', data.msg);
 					}
 				} 
 			});
@@ -214,8 +222,16 @@ $(document).ready(function() {
 	var optionType = $("#optionType").val();
 	if("approve" == optionType) {
 		if("100" == nextState || "101" == nextState) {
+			$("[name='studentCourseId']").each(function() {
+				var studentCourseId = $(this).val();
+				$("#financialDiv" + studentCourseId).css("display", "none");
+			});
 			$("#headmasterApproveDiv").css("display", "block");
 		} else if("102" == nextState) {
+			$("[name='studentCourseId']").each(function() {
+				var studentCourseId = $(this).val();
+				$("#financialConfirmRefundFee" + studentCourseId).textbox({disabled: false});
+			});
 			$("#headmasterViewDiv").css("display", "block");
 			$("#financialApproveDiv").css("display", "block");
 		} else if("103" == nextState) {
@@ -374,64 +390,21 @@ $(document).ready(function() {
 			data: "param=" + param,
 			dataType: "json",
 			async: true,
-			beforeSend: function()
-			{
+			beforeSend: function() {
 				$.messager.progress({title : '取消退费', msg : '正在取消退费，请稍等……'});
 			},
 			success: function (data) {
 				$.messager.progress('close'); 
 				var flag = data.flag;
 				if(flag) {
-					$.messager.alert('提示', "取消退费成功！", "info", function() {window.location.href = "/sys/refund/refund.jsp";});
+					showMessage('提示', "取消退费成功！", function() {window.location.href = "/sys/refund/refund.jsp";});
 				} else {
-					$.messager.alert('提示', data.msg);
+					showMessage('提示', data.msg);
 				}
 			} 
 		});
 	});
 });
-
-function calculateRefundAmount(studentCourseId) {
-	var refundStageFee = parseFloat($("#refundStageFee" + studentCourseId).html());
-	var minusGiftFee = parseFloat($("#minusGiftFee" + studentCourseId).numberbox("getValue"));
-	var total = 0;
-	if(minusGiftFee >= refundStageFee) {
-		$("#minusGiftFee" + studentCourseId).numberbox("setValue", 0);
-	} else {
-		var minusTextbookFee = parseFloat($("#minusTextbookFee" + studentCourseId).numberbox("getValue"));
-		total = parseFloat(minusGiftFee + minusTextbookFee);
-		if(total >= refundStageFee) {
-			$("#minusTextbookFee" + studentCourseId).numberbox("setValue", 0);
-		} else {
-			var minusCourseFee = parseFloat($("#minusCourseFee" + studentCourseId).numberbox("getValue"));
-			total = parseFloat(minusGiftFee + minusTextbookFee + minusCourseFee);
-			if(total >= refundStageFee) {
-				$("#minusCourseFee" + studentCourseId).numberbox("setValue", 0);
-			} else {
-				var handlingChange = parseFloat($("#handlingChange" + studentCourseId).numberbox("getValue"));
-				total = parseFloat(minusGiftFee + minusTextbookFee + minusCourseFee + handlingChange);
-				if(total >= refundStageFee) {
-					$("#handlingChange" + studentCourseId).numberbox("setValue", 0);
-				} else {
-					var minusOtherFee = parseFloat($("#minusOtherFee" + studentCourseId).numberbox("getValue"));
-					total = parseFloat(minusGiftFee + minusTextbookFee + minusCourseFee + handlingChange + minusOtherFee);
-					if(total >= refundStageFee) {
-						$("#minusOtherFee" + studentCourseId).numberbox("setValue", 0);
-					} else {
-						var confirmRefundFee = refundStageFee - total;
-						$("#confirmRefundFee" + studentCourseId).html(confirmRefundFee);
-						var totalAmount = 0;
-						$("[name='confirmRefundFee']").each(function() {
-							totalAmount += parseFloat($(this).html());
-						});
-						$("#totalAmount").val(totalAmount);
-						$("#totalAmountText").html(totalAmount);
-					}
-				}
-			}
-		}
-	}
-}
 
 function calculateConfirmRefundAmount(studentCourseId) {
 	var realAmount = 0;

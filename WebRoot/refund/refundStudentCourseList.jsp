@@ -28,7 +28,7 @@
 					</td>
 					<td align="right" width="70px"><span>证件号码：</span></td>
 					<td width="210px">
-						<input name="identityId" id="identityId" type="text" class="easyui-textbox" style="width: 210px; height: 25px;"/>
+						<input name="identityId" id="identityId" type="text" class="easyui-textbox" style="width: 208px; height: 25px;"/>
 					</td>
 					<td align="right" width="70px"><span>缴费日期：</span></td>
 			  		<td width="225px">
@@ -54,15 +54,20 @@
 				        <select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;">
 		        		</select>
 		        	</td>
-		        	<td colspan="2" align="left">
+		        	<td colspan="2" align="right">
   						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1024">查询</a>
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
   					</td>
 		        	
   				</tr>
   				<tr>
+  					<td align="right"><span>业绩老师：</span></td>
+			  		<td>
+						<select id="adviserTeacherId" name="adviserTeacherId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+				       	</select>
+					</td>
   					<td align="right"><span>课程状态：</span></td>
-  					<td colspan="7">
+  					<td colspan="5">
   						<input type="checkbox" name="courseState" value="'001'"/><span>未定班</span>&nbsp;
 						<input type="checkbox" name="courseState" value="'002'"/><span>已定班</span>&nbsp;
 						<input type="checkbox" name="courseState" value="'003'"/><span>在读</span>&nbsp;

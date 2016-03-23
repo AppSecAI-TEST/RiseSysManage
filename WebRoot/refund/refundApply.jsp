@@ -16,8 +16,7 @@
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="常规课退费申请">
   			<form id="refundApplyFm" method="post" enctype="multipart/form-data">
   				<input type="hidden" id="optionType" value="apply"/>
-  				<input type="hidden" id="className" value="${obj.refundObj.className }"/>
-  				<input type="hidden" id="classInstId" value="${obj.refundObj.classInstId }"/>
+  				<input type="hidden" id="studyClassInstId" value="${obj.refundObj.classInstId }"/>
   				<input type="hidden" id="studentId" name="studentId" value="${obj.refundObj.studentId }"/>
   				<input type="hidden" id="schoolId" name="schoolId" value="${obj.refundObj.schoolId }"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId }"/>
@@ -27,11 +26,11 @@
 	  					<td align="right" width="8%"><span>学员姓名：</span></td>
 	  					<td width="8%"><span>${obj.refundObj.name }</span></td>
 	  					<td align="right" width="8%"><span>在读班级：</span></td>
-	  					<td width="10%"><span>${obj.refundObj.className }</span></td>
+	  					<td width="10%"><span id="classNameText">${obj.refundObj.className }</span></td>
 	  					<td align="right" width="8%"><span>课时进度：</span></td>
-	  					<td width="10%"><span>${obj.refundObj.classProgress }</span></td>
+	  					<td width="10%"><span id="classProgressText">${obj.refundObj.classProgress }</span></td>
 	  					<td align="right" width="8%"><span>带班老师：</span></td>
-	  					<td width="40%" colspan="3"><span>${obj.refundObj.teacherName }</span></td>
+	  					<td width="40%" colspan="3"><span id="teacherNameText">${obj.refundObj.teacherName }</span></td>
 	  				</tr>
 	  				<tr id="refundWayTr">
 	  					<td align="right" width="8%"><span>退费形式：</span></td>
@@ -201,7 +200,6 @@
   								<span id="confirmRefundFee${refundStudentCourse.studentCourseId }" name="confirmRefundFee">${refundStudentCourse.amount }</span>
   							</td>
   							<td width="15%" align="center">
-  								<input id="financialConfirmRefundFee${refundStudentCourse.studentCourseId }" name="financialConfirmRefundFee" type="text" class="easyui-textbox numberbox" style="width: 100px; height: 25px; display: none;" required="true"/>
   							</td>
   							<td width="13%" align="center"><a href='javascript:void(0)' class='linkmore' onclick="viewCourseDetail(${refundStudentCourse.studentCourseId })" id="studentCourseDetail${refundStudentCourse.studentCourseId }"><span>展开课程</span></a></td>
   						</tr>

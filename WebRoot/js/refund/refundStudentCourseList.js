@@ -56,6 +56,15 @@ $(document).ready(function() {
     	    		return "<span>" + data.userName + "</span>";
     	    	}
     		});
+    		$("#adviserTeacherId").combobox({
+    			url : "/sys/pubData/qryStaffList.do?post=4,5&schoolId=" + n,
+    			valueField : "staffId",
+    	    	textField : "userName",
+    	    	panelHeight : "auto",
+    	    	formatter : function(data) {
+    	    		return "<span>" + data.userName + "</span>";
+    	    	}
+    		});
     	}
 	});
 	

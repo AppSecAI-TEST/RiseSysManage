@@ -193,6 +193,7 @@
   				
   				<c:forEach items="${obj.refundFeeDetailList }" var="refundFeeDetail" varStatus="status">
   					<input type="hidden" id="studentCourseId${refundFeeDetail.studentCourseId }" name="studentCourseId" value="${refundFeeDetail.studentCourseId }"/>
+  					<input type="hidden" id="refundFeeDetailId${refundFeeDetail.studentCourseId }" name="refundFeeDetailId" value="${refundFeeDetail.refundFeeDetailId }"/>
   					<table width="100%" cellpadding="5px" class="maintables" style="margin-top: 10px;">
   						<tr>
   							<td width="12%" style="border-right: 0">
@@ -245,25 +246,27 @@
   								<span id="refundStageFee${refundFeeDetail.studentCourseId }" name="refundStageFee">${refundFeeDetail.refundStageFee }</span>
   							</td>
   							<td width="8%" align="center">
-  								<input id="minusGiftFee${refundFeeDetail.studentCourseId }" name="minusGiftFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundFeeDetail.refundStageFee }, precision:2" style="width: 80px; height: 25px;" required="true" value="${refundFeeDetail.minusGiftFee }"/>
+  								<input id="minusGiftFee${refundFeeDetail.studentCourseId }" name="minusGiftFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundFeeDetail.refundStageFee }, precision:2" style="width: 80px; height: 25px;" required="true" value="${refundFeeDetail.minusGiftFee }" disabled="disabled"/>
   							</td>
   							<td width="8%" align="center">
-  								<input id="minusTextbookFee${refundFeeDetail.studentCourseId }" name="minusTextbookFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundFeeDetail.refundStageFee }, precision:2" style="width: 100px; height: 25px;" required="true" value="${refundFeeDetail.minusTextbookFee }"/>
+  								<input id="minusTextbookFee${refundFeeDetail.studentCourseId }" name="minusTextbookFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundFeeDetail.refundStageFee }, precision:2" style="width: 100px; height: 25px;" required="true" value="${refundFeeDetail.minusTextbookFee }" disabled="disabled"/>
   							</td>
   							<td width="8%" align="center">
-  								<input id="minusCourseFee${refundFeeDetail.studentCourseId }" name="minusCourseFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundFeeDetail.refundStageFee }, precision:2" style="width: 100px; height: 25px;" required="true" value="${refundFeeDetail.minusCourseFee }"/>
+  								<input id="minusCourseFee${refundFeeDetail.studentCourseId }" name="minusCourseFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundFeeDetail.refundStageFee }, precision:2" style="width: 100px; height: 25px;" required="true" value="${refundFeeDetail.minusCourseFee }" disabled="disabled"/>
 							</td>
   							<td width="7%" align="center">
-  								<input id="handlingChange${refundFeeDetail.studentCourseId }" name="handlingChange" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundFeeDetail.refundStageFee }, precision:2" style="width: 100px; height: 25px;" required="true" value="${refundFeeDetail.handlingChange }"/>
+  								<input id="handlingChange${refundFeeDetail.studentCourseId }" name="handlingChange" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundFeeDetail.refundStageFee }, precision:2" style="width: 100px; height: 25px;" required="true" value="${refundFeeDetail.handlingChange }" disabled="disabled"/>
   							</td>
   							<td width="8%" align="center">
-  								<input id="minusOtherFee${refundFeeDetail.studentCourseId }" name="minusOtherFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundFeeDetail.refundStageFee }, precision:2" style="width: 100px; height: 25px;" required="true" value="${refundFeeDetail.minusOtherFee }"/>
+  								<input id="minusOtherFee${refundFeeDetail.studentCourseId }" name="minusOtherFee" type="text" class="easyui-textbox numberbox" data-options="min:0, max:${refundFeeDetail.refundStageFee }, precision:2" style="width: 100px; height: 25px;" required="true" value="${refundFeeDetail.minusOtherFee }" disabled="disabled"/>
   							</td>
   							<td width="11%" align="center">
   								<span id="confirmRefundFee${refundFeeDetail.studentCourseId }" name="confirmRefundFee">${refundFeeDetail.confirmRefundFee }</span>
   							</td>
   							<td width="15%" align="center">
-  								<input id="financialConfirmRefundFee${refundFeeDetail.studentCourseId }" name="financialConfirmRefundFee" type="text" class="easyui-textbox numberbox" style="width: 100px; height: 25px;" required="true" value="${refundFeeDetail.financialConfirmFee }"/>
+  								<div id="financialDiv${refundFeeDetail.studentCourseId }">
+	  								<input id="financialConfirmRefundFee${refundFeeDetail.studentCourseId }" name="financialConfirmRefundFee" type="text" class="easyui-textbox numberbox" style="width: 100px; height: 25px;" required="true" value="${refundFeeDetail.financialConfirmFee }" disabled="disabled"/>
+  								</div>
   							</td>
   							<td width="13%" align="center"><a href='javascript:void(0)' class='linkmore' onclick="viewCourseDetail(${refundFeeDetail.studentCourseId })" id="studentCourseDetail${refundFeeDetail.studentCourseId }"><span>展开课程</span></a></td>
   						</tr>
@@ -487,7 +490,7 @@
 			  						<tr>
 			  							<td align="right" width="10%"><span>回访人员：</span></td>
 			  							<td width="8%">
-			  								<select id="headmasterId" name="headmasterId" class="easyui-combobox" style="width: 100px; height: 25px;"
+			  								<select id="headmasterId" name="headmasterId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled"
 												data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
 			      						 		onLoadSuccess:function(data){$('#headmasterId').combobox('setValue', ${refundVisit.visitUserId });}"
 			      								url="<%=path %>/pubData/qryStaffList.do?post=22,23&schoolId=${obj.refundFeeObj.schoolId }">

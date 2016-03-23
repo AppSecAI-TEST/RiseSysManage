@@ -405,7 +405,7 @@
 				  								<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled"
 				  									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
 		      										onLoadSuccess:function(data){if(data.length > 0) $('#teacherId').combobox('setValue', ${refundVisit.visitUserId });}" 
-		      										url="<%=path %>/pubData/qryStaffList.do?post=16,17&schoolId=${obj.refundFeeObj.schoolId }">
+		      										url="<%=path %>/pubData/qryStaffList.do?post=4,5&schoolId=${obj.refundFeeObj.schoolId }">
 						        				</select>
 				  								<input type="radio" name="visitPersonOne" value="adviser" disabled="disabled"/><span>课程顾问</span>
 				  								<select id="careAdviserId" name="careAdviserId" class="easyui-combobox" style="width: 100px; height: 25px;">
@@ -483,7 +483,7 @@
 			  						<tr>
 			  							<td align="right" width="10%"><span>回访人员：</span></td>
 			  							<td width="8%">
-			  								<select id="headmasterId" name="headmasterId" class="easyui-combobox" style="width: 100px; height: 25px;"
+			  								<select id="headmasterId" name="headmasterId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled"
 												data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
 			      						 		onLoadSuccess:function(data){$('#headmasterId').combobox('setValue', ${refundVisit.visitUserId });}"
 			      								url="<%=path %>/pubData/qryStaffList.do?post=22,23&schoolId=${obj.refundFeeObj.schoolId }">
