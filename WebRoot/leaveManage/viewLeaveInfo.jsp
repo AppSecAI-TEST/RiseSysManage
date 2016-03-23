@@ -123,7 +123,7 @@
  		</div>
  		<table style="margin-top: 20px;min-width:1100px; width:99%;">
 			<tr>
-				<td align="center">
+				<td align="right">
 					<c:if test="${empty obj.channel }">
 			      		&nbsp;<a href="javascript:void(0)"class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
 	  				</c:if>

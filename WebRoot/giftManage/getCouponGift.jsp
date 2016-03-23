@@ -55,7 +55,7 @@
 	 		</form>
  		</div>
  		<div style="margin-top: 20px;min-width:1100px; width:99%;">
-	      	<div style="text-align:center">
+	      	<div style="text-align:right">
 	      		<a href="javascript:void(0)" id="getCouponGiftSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;" onclick="getCouponGiftSubmit()"><span>提交</span></a>
 	      		&nbsp;
 	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="javascript:window.history.back()"><span>返回</span></a>

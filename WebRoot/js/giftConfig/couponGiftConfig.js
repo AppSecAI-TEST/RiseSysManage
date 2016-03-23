@@ -155,13 +155,7 @@ function updateCouponName(giftId,giftType,giftName,amount,isEff,getRemark,course
 			$(this).prop("checked","checked");
 		}
 	});
-	$("input[name='courseTypes']").each(function(i,node){
-		 
-		if(courseTypes.indexOf(node.value)>-1)
-		{
-			$(this).prop("checked","checked");
-		}
-	});
+
 	$('#giftCouponType').combobox({
 		url:"/sys/pubData/qryData.do?param={'queryCode':'Qry_Gift_Type','parentType':'COUPON'}",
 		formatter:formatTypeName, 
@@ -184,8 +178,15 @@ function updateCouponName(giftId,giftType,giftName,amount,isEff,getRemark,course
 		            			 $("#minusCourses").css('display','table-row');
 		            		 }else if("N" == data[i].isMinus){
 		            			 $("#couponMinus").textbox('setValue','否');
-		            			 ("#minusCourses").css('display','none');
+		            			 $("#minusCourses").css('display','none');
 		            		 }
+		            		 $("input[name='courseTypes']").each(function(i,node)
+		            		 {
+								if(courseTypes.indexOf(node.value)>-1)
+								{
+									$(this).prop("checked","checked");
+								}
+							});
 		       			 }
 		       		}
 		       	}
@@ -207,9 +208,24 @@ function updateCouponName(giftId,giftType,giftName,amount,isEff,getRemark,course
             		 $("#couponEffRemark").textbox('setValue',data[i].effRemark);
             		 if("Y" == data[i].isMinus){
             			 $("#couponMinus").textbox('setValue','是');
+            			 $("#minusCourses").css('display','table-row');
+            			 $("input[name='courseTypes']").each(function(i,node)
+	            		 {
+							$(this).prop("checked","");
+						 });
             		 }else if("N" == data[i].isMinus){
             			 $("#couponMinus").textbox('setValue','否');
+            			 $("#minusCourses").css('display','none');
             		 }
+            	  }
+            	  if(n == giftType){
+            		 $("input[name='courseTypes']").each(function(i,node)
+            		 {
+						if(courseTypes.indexOf(node.value)>-1)
+						{
+							$(this).prop("checked","checked");
+						}
+					});
             	  }
               }
             }

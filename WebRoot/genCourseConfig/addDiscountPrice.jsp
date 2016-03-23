@@ -35,7 +35,7 @@
 	 		</table>
  		</div>
  		<div style="margin-top: 20px;min-width:1100px; width:99%;">
-	      	<div style="text-align:center">
+	      	<div style="text-align:right">
 	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;" onclick="addDiscountPriceSubmit()">提交</a>
 	      		&nbsp;
 	      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="javascript:window.history.back()">返回</a>

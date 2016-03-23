@@ -128,7 +128,7 @@
  		<input id="stageId" type="hidden" value="${obj.classInfo.stageId}" />
  		<table style="margin-top: 20px;min-width:1100px; width:99%;">
 			<tr>
-				<td align="center">
+				<td align="right">
 					<a href="javascript:void(0)" id="restartClassSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;" onclick="restartSubmit()"><span>提交</span></a>
 		      		&nbsp;
 		      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="javascript:window.history.back()"><span>返回</span></a>
