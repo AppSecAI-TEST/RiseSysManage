@@ -83,7 +83,7 @@
   					</tr>
   					<tr>
   						<td colspan="6" align="right">
-  							<div style="float: left;margin-left: 800px;">
+  							<div style="text-align: right;">
 	  							<a href="javascript:void(0)" id="approveSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
 	  							<c:if test="${empty obj.channel }">
 			      					&nbsp;<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>

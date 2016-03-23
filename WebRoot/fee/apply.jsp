@@ -45,14 +45,12 @@
 	    </div>
       	<div style="height: 10px;"></div>
       		
-      	<div style="margin-top: 20px;min-width:1100px; width:99%;">
-	      	<div style="float: left;margin-left: 800px;">
-	      		<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      		<a href="javascript:void(0)" id="agree" onclick="approveRefundFee('Y')" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">同意</a>
-	      		<a href="javascript:void(0)" id="agree" onclick="approveRefundFee('C')" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">不同意</a>
-	      		<a href="javascript:void(0)" id="disagree"  onclick="approveRefundFee('B')" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">驳回</a>
-	      		&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onClick="javascript:window.history.back()">返回</a>
-	      	</div>
+      	<div style="margin-top: 25px;min-width:1100px; width:99%;text-align: right;">
+	      	<a href="javascript:void(0)" id="submit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
+	      	<a href="javascript:void(0)" id="agree" onclick="approveRefundFee('Y')" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">同意</a>
+	      	<a href="javascript:void(0)" id="agree" onclick="approveRefundFee('C')" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">不同意</a>
+	      	<a href="javascript:void(0)" id="disagree"  onclick="approveRefundFee('B')" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">驳回</a>
+	      	&nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onClick="javascript:window.history.back()">返回</a>
 	   </div>
   	</body>
 </html>

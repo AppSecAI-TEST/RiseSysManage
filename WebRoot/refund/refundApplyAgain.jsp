@@ -507,13 +507,11 @@
   				</div>
   			</form>
   		</div>
-  		<div style="margin-top: 25px;min-width:1100px; width:99%;">
-	      	<div style="float: left;margin-left: 800px;">
-	      		<a href="javascript:void(0)" id="refundApplySubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      		&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
-	      	</div>
-	   </div>
-	   <div id="dlg" class="easyui-dialog" closed="true" modal="true">
+  		<div style="margin-top: 25px;min-width:1100px; width:99%;text-align: right">
+	      	<a href="javascript:void(0)" id="refundApplySubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
+	      	&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	   	</div>
+	   	<div id="dlg" class="easyui-dialog" closed="true" modal="true">
   			<div style="height: 10px"></div>
   			<div id="courseDiv">
 	  			<table class="easyui-datagrid" title="常规课信息" style="height: auto; width: 1100px;" id="course_list_data"

@@ -798,16 +798,14 @@
   				</div>
   			</form>
   		</div>
-  		<div style="margin-top: 25px;min-width:1100px; width:98%;">
-	      	<div style="float: left;margin-left: 800px;">
-	      		 <a href="javascript:void(0)" id="refundApproveSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
-	      		 <c:if test="${empty obj.channel }">
-			     	&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
-	      		 </c:if>
-	      		 <c:if test="${not empty obj.channel }">
-	      		 	&nbsp;<a href="javascript:void(0)" id="closeBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;">关闭</a>
-	      		 </c:if>
-	      	</div>
+  		<div style="margin-top: 25px;min-width:1100px; width:98%;text-align: right;">
+	    	<a href="javascript:void(0)" id="refundApproveSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 28px;">提交</a>
+	    	<c:if test="${empty obj.channel }">
+			     &nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+	      	</c:if>
+	      	<c:if test="${not empty obj.channel }">
+	      		 &nbsp;<a href="javascript:void(0)" id="closeBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;">关闭</a>
+	      	</c:if>
 	   </div>
 	   <div id="dlg" class="easyui-dialog" closed="true" modal="true">
   			<div style="height: 10px"></div>
