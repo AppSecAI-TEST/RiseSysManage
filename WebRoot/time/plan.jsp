@@ -43,10 +43,10 @@
 				 <thead>
 					<tr>
 						<th data-options="field:'ck',checkbox:true"></th>
-						<th data-options="field:'schoolName',width:20,align:'center'">校区</th>
-						<th data-options="field:'month',width:30,align:'center'">排课月份</th>
-						<th data-options="field:'staffName',width:30,align:'center'">创建人</th>
-						<th data-options="field:'createDate',width:30,align:'center'">创建时间</th>
+						<th field="schoolName" align="center" width="10%">校区</th>
+						<th field="month" align="center" width="10%">排课月份</th>
+						<th field="staffName" align="center" width="10%">创建人</th>
+						<th field="createDate" align="center" width="15%">创建时间</th>
 					</tr>
 				</thead>
 			</table>
@@ -150,7 +150,12 @@
     		}
     	});
      });
- 
+ 	
+    $("#reset").click(function(){
+    	 $('#startTime').datebox('setValue',"")
+    	 $('#endTime').datebox('setValue',"")
+    });
+    
     $("#createPlan").click(function()
     	{
     	 
