@@ -123,7 +123,8 @@
 				var studentAttendId = $("#classProgress").combobox("getValue");
 				var makeupType = $("input[name='makeupType']:checked").val();
 				var makeupValue = $("#makeupValue").combobox("getValue");
-				if(hourRange == "")
+				var attendDate = $("#attendDate").datebox("getValue");
+				if(attendDate == "")
 				{
 					$.messager.alert('提示',"请先选择补课时间后重新尝试");
 				}
@@ -138,6 +139,10 @@
 				else if(makeupValue == "")
 				{
 					$.messager.alert('提示',"请先选择对应的"+("F" == makeupType?"班级":"老师")+"后重新尝试");
+				}
+				else if(hourRange == "")
+				{
+					$.messager.alert('提示',"请先选择补课时间后重新尝试");
 				}
 				else
 				{
@@ -157,7 +162,7 @@
 					var obj = {
 						studentAttendId:studentAttendId,
 						makeupType:makeupType,
-						schooltime:"<fmt:formatDate value="${classAttendT.attendDate}" pattern="yyyy-MM-dd" />",
+						schooltime:attendDate,
 						hourRange:hourRange,
 						baseHour:(parseInt(timeArr[0])-1),
 						hours:(parseInt(timeArr[1])-parseInt(timeArr[0])+1),
@@ -202,8 +207,12 @@
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
+				<td align="right" width="10%">缺课日期：</td>
+				<td><fmt:formatDate value="${classAttendT.attendDate}" pattern="yyyy-MM-dd" /></td>
+			</tr>
+			<tr>
 				<td align="right" width="10%">补课时间：</td>
-				<td><fmt:formatDate value="${classAttendT.attendDate}" pattern="yyyy-MM-dd" /> <select id="classTime" name="classTime" style="width:200px" ></select></td>
+				<td><input name="attendDate" id="attendDate" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> <select id="classTime" name="classTime" style="width:200px" ></select></td>
 			</tr>
 			<tr>
 				<td align="right">课时进度：</td>

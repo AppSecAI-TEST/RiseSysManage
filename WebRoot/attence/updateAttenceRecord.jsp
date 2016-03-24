@@ -64,40 +64,40 @@
 						var schooltimeInstIds = "${schooltimeInstIdArr}";
 						if(classAttendIds != "")
 						{
-							var classAttendIdArr = classAttendIds.split("#");
+							var classAttendIdArr = classAttendIds.split("~");
 							var attendArr = [];
 							var schooltimeArr = [];
 							if(schooltimeInstIds != "")
 							{
-								var schooltimeInstIdArr = schooltimeInstIds.split("#");
+								var schooltimeInstIdArr = schooltimeInstIds.split("~");
 								for(var i = 0,n = schooltimeInstIdArr.length;i < n;i++)
 								{
-									var objArr = schooltimeInstIdArr[i].split("~");
+									var objArr = schooltimeInstIdArr[i].split(";");
 									schooltimeArr.push(objArr[0]);
 								}
 							}
 							for(var i = 0,n = classAttendIdArr.length;i < n;i++)
 							{
-								var objArr = classAttendIdArr[i].split("~");
+								var objArr = classAttendIdArr[i].split(";");
 								attendArr.push(objArr[0]);
 							}
 							for(var i = 0,n = classAttendIdArr.length;i < n;i++)
 							{
-								var objArr = classAttendIdArr[i].split("~");
+								var objArr = classAttendIdArr[i].split(";");
 								if(objArr.length > 1 && objArr[1]==data.paramValue)
 								{
 									ajaxLoading("正在处理，请稍待。。。");
-									window.location.href = "/sys/attend/getUpdateAttenceRecord.do?funcNodeId=${funcNodeId}&classAttendId="+objArr[0]+"&classAttendIds="+attendArr.join("#")+"&schooltimeInstIds="+schooltimeArr.join("#")+"&selDateStr=<fmt:formatDate value='${classAttendT.attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${classAttendT.attendDate}' pattern='dd' />";
+									window.location.href = "/sys/attend/getUpdateAttenceRecord.do?funcNodeId=${funcNodeId}&classAttendId="+objArr[0]+"&classAttendIds="+attendArr.join("~")+"&schooltimeInstIds="+schooltimeArr.join("~")+"&selDateStr=<fmt:formatDate value='${classAttendT.attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${classAttendT.attendDate}' pattern='dd' />";
 									return ;
 								}
 							}
 						}
 						if(schooltimeInstIds != "")
 						{
-							var schooltimeInstIdArr = schooltimeInstIds.split("#");
+							var schooltimeInstIdArr = schooltimeInstIds.split("~");
 							for(var i = 0,n = schooltimeInstIdArr.length;i < n;i++)
 							{
-								var objArr = schooltimeInstIdArr[i].split("~");
+								var objArr = schooltimeInstIdArr[i].split(";");
 								if(objArr.length > 1 && objArr[1]==data.paramValue)
 								{
 									ajaxLoading("正在处理，请稍待。。。");
@@ -452,7 +452,7 @@
 				<td width="20%">校服着装情况</td>
 			</tr>
 			<c:forEach items="${classAttendT.studentAttendList}" var="node" varStatus="i">
-				<c:if test="${node.attendType != 'K'}">
+				<c:if test="${node.attendType != 'K' && node.attendType != 'M'}">
 					<tr>
 						<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" studentName="${node.studentT.name}" studentCourseId="${node.studentCourseId}" stageId="${classInstT.stageId}"><input type="checkbox" name="studentId" /></td>
 						<td align="center">${i.count}</td>

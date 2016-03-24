@@ -72,7 +72,7 @@
 			</tr>
 			<tr>
 				<td align="right" width="10%">上课时间：</td>
-				<td>周${classAttendT.attendDateWeek} <fmt:formatDate value="${classAttendT.schooltime}" pattern="yyyy-MM-dd" /> ${classAttendT.hourRangeObj.paramDesc}</td>
+				<td>周${classAttendT.attendDateWeek} <fmt:formatDate value="${classAttendT.attendDate}" pattern="yyyy-MM-dd" /> ${classAttendT.hourRangeObj.paramDesc}</td>
 			</tr>
 			<tr>
 				<td align="right">教室：</td>
@@ -122,7 +122,7 @@
 				<td width="20%">校服着装情况</td>
 			</tr>
 			<c:forEach items="${classAttendT.studentAttendList}" var="node" varStatus="i">
-				<c:if test="${node.attendType != 'K'}">
+				<c:if test="${node.attendType != 'K' && node.attendType != 'M'}">
 					<tr>
 						<td align="center">${i.count}</td>
 						<td align="center">${node.studentName}</td>

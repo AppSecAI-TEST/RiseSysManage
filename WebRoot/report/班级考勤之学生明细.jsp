@@ -57,28 +57,13 @@
 								<td align="center">${node.byName}</td>
 								<c:forEach begin="1" end="${maxDay}" varStatus="j">
 									<fmt:parseDate value="${monthDateStr}-${j.count}" var="weekDay" pattern="yyyy-MM-dd" />
-									<c:set var="attendInfo" value="" />
+									<c:set var="attendTotalHour" value="" />
 									<c:forEach items="${node.attendDates}" var="item">
 										<c:if test="${item.attendDate.time-weekDay.time == 8*60*60*1000}">
-											<c:set var="attendInfo" value="${item.attendType}" />
+											<c:set var="attendTotalHour" value="${item.attendTotalHour}" />
 										</c:if>
 									</c:forEach>
-									<td align="center">
-										<c:choose>
-											<c:when test="${attendInfo == 'N'}">
-												√
-											</c:when>
-											<c:when test="${attendInfo == 'B'}">
-												○
-											</c:when>
-											<c:when test="${attendInfo == 'L'}">
-												△
-											</c:when>
-											<c:when test="${attendInfo == 'T'}">
-												×
-											</c:when>
-										</c:choose>
-									</td>
+									<td align="center">${attendTotalHour}</td>
 								</c:forEach>
 								<td align="center">${node.attendCount}</td>
 							</tr>
