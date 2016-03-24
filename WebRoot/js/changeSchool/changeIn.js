@@ -79,8 +79,8 @@ $(document).ready(function() {
 					} 
 				});
 			} else {
-				var className = $("#className").html();
-				$.messager.alert('提示', "您选择的"+className+"学员已经满员，不能再向该班级转入学员！");
+				var classNameText = $("#classNameText").html();
+				$.messager.alert('提示', "您选择的"+classNameText+"学员已经满员，不能再向该班级转入学员！");
 			}
 		} else {
 			$.messager.alert('提示', "请先选择您要转入的班级！");

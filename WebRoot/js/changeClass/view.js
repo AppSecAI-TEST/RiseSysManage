@@ -14,7 +14,13 @@ $(document).ready(function() {
 			$("#changeStateText").html(data.changeStateText);
 			$("#outClass").html(data.outClass);
 			$("#inClass").html(data.inClass);
-			$("#adviserName").html(data.adviserName);
+			var feeType = data.feeType;
+			if("001" == feeType) {
+				$("#adviserName").html(data.adviserName);
+			} else {
+				$("#adviserNameText").html("业绩老师");
+				$("#adviserName").html(data.adviserTeacherName);
+			}
 			$("#outClassTeacherName").html(data.outClassTeacherName);
 			$("#oldCourseStateText").html(data.oldCourseStateText);
 			var applyDate = data.applyDate;
