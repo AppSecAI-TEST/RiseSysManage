@@ -75,7 +75,7 @@ datagrid-row-selected
 	<body>
 		<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId%>"/>
   		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px" onclick="javascript:window.history.back()">返回</a>	
-	<div id="wrap">  
+	<div id="wrap" style="display: none">  
         <!--  <div id="header">header</div> --> 
         <div id="container">  
             <div id="left_side"> 
@@ -155,11 +155,15 @@ function getWeekTime()
     	},
     	success: function(data) {
     		$.messager.progress('close');
+    		if(data==null || data.length==0)
+    		{
+    			$.messager.alert('提示',"本周没有排课计划");
+    		}
     		for(var i=0;i<data.length;i++)
     		{
     			if(i==0)
     			{
-    				//alert(JSON.stringify(data));
+    				$("#wrap").css('display','block');
     				json1=data[i];
     				initTable("t1",json1);
     				initTeacher("t0",json1);

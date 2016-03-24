@@ -34,6 +34,14 @@
 			      				 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE" >
 							</select>
 						</td>
+						<td width="50px" align="right"><span>班级：</span></td>
+						<td width="110px">
+							 <input class="easyui-textbox" id="className" name="className" style="width:100px;"></td>
+						</td>
+						<td width="70px" align="right"><span>学员姓名：</span></td>
+						<td width="110px">
+							 <input class="easyui-textbox" id="name" name="name" style="width:100px;"></td>
+						</td>
 						<td align="left">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="5006">查询</a>
 							&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
