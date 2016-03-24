@@ -26,7 +26,7 @@
 	  			<table width="100%" cellpadding="5px" class="maintables" style="margin-top: 10px;">
 	  				<tr>
 	  					<td style="border-right: 0" colspan="6">
-	  						<span style="font-size: 16px; font-weight: bold;"><span>转班状态：${changeClass.changeState }</span></span>
+	  						<span style="font-size: 16px; font-weight: bold;"><span>转班状态：${changeClass.changeStateText }</span></span>
 	  					</td>
 	  					<td align="right" colspan="2">
 	  						<c:if test="${!empty changeClass.imgUrl }">
@@ -43,12 +43,26 @@
 	  					<td colspan="3" width="460px"><span>${changeClass.inClass }</span></td>
 	  				</tr>
 	  				<tr>
-	  					<td align="right" width="100px"><span>业绩顾问：</span></td>
-	  					<td width="150px"><span>${changeClass.dutyAdvisterName }</span></td>
+	  					<td align="right" width="100px">
+	  						<c:if test="${changeClass.feeType == '001' }">
+		  						<span>业绩顾问：</span>
+	  						</c:if>
+	  						<c:if test="${changeClass.feeType != '001' }">
+	  							<span>业绩老师：</span>
+	  						</c:if>
+	  					</td>
+	  					<td width="150px">
+	  						<c:if test="${changeClass.feeType == '001' }">
+		  						<span>${changeClass.adviserName }</span>
+	  						</c:if>
+	  						<c:if test="${changeClass.feeType != '001' }">
+	  							<span>${changeClass.adviserTeacherName }</span>
+	  						</c:if>
+	  					</td>
 	  					<td align="right" width="120px"><span>原带班老师：</span></td>
-	  					<td width="150px"><span>${changeClass.teacherName }</span></td>
+	  					<td width="150px"><span>${changeClass.outClassTeacherName }</span></td>
 	  					<td align="right" width="120px"><span>原课程状态：</span></td>
-	  					<td colspan="3" width="460px"><span>${changeClass.changeState }</span></td>
+	  					<td colspan="3" width="460px"><span>${changeClass.courseStateText }</span></td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="100px"><span>申请人：</span></td>
@@ -93,6 +107,22 @@
 		  					<td align="right" width="120px"><span>完成时间：</span></td>
 		  					<td colspan="5" width="730px"><span>${changeClass.finishDate }</span></td>
 		  				</tr>
+	  				</c:if>
+	  				<c:if test="${!empty changeSchool.cancelDate }">
+	  					<tr>
+	  						<td align="right" width="100px"><span>取消人：</span></td>
+	  						<td width="150px"><span>${changeSchool.cancelName }</span></td>
+		  					<td align="right" width="120px"><span>取消时间：</span></td>
+		  					<td colspan="5" width="730px"><span>${changeSchool.cancelDate }</span></td>
+	  					</tr>
+	  				</c:if>
+	  				<c:if test="${!empty changeSchool.stopDate }">
+	  					<tr>
+	  						<td align="right" width="100px"><span>终止人：</span></td>
+	  						<td width="150px"><span>${changeSchool.stopName }</span></td>
+		  					<td align="right" width="120px"><span>终止时间：</span></td>
+		  					<td colspan="5" width="730px"><span>${changeSchool.stopDate }</span></td>
+	  					</tr>
 	  				</c:if>
 	  			</table>
   			</c:forEach>

@@ -13,18 +13,18 @@
   
   	<body>
   		<div style="margin-right:5px;">
+  			<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+  			<input type="hidden" id="resourceId" value="731">
   			<form id="qryFm">
   				<table align="center" class="search_tab">
   					<tr>
-  						<td align="right" width="50px"><span>校区：</span></td>
-	  					<td width="114px">
-							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
-					      		url="<%=path %>/pubData/qrySchoolList.do?schoolId=">
+  						<td align="right" style="min-width: 50px"><span>校区：</span></td>
+	  					<td style="min-width: 100px">
+							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        	</select>
 						</td>
-						<td align="right" width="50px"><span>月份：</span></td>
-						<td width="114px">
+						<td align="right" style="min-width: 50px"><span>月份：</span></td>
+						<td style="min-width: 100px">
 							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="year" name="year" data-options="formatter:monthFormatter, parser:monthParser"/>
 						</td>
 						<td align="left" colspan="2" width="400px">
@@ -41,7 +41,7 @@
 							<th data-options="field:'schoolName',width:100,align:'center'">校区</th>
 							<th data-options="field:'payDate',width:100,align:'center'">全费日期</th>
 							<th data-options="field:'stageId',width:100,align:'center'">缴费阶段</th>
-							<th data-options="field:'courseStateText',width:100,align:'center'">课程阶段</th>
+							<th data-options="field:'courseStateText',width:100,align:'center'">课程状态</th>
 							<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
 							<th data-options="field:'amount',width:150,align:'center'">缴费金额</th>
 							<th data-options="field:'className',width:100,align:'center'">班级</th>
@@ -58,4 +58,20 @@
 </html>
 <script>
 	exportLink("export","list_data");
+	var staffId = $("#staffId").val();
+	var resourceId = $("#resourceId").val();
+	$("#schoolId").combobox({
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=" + resourceId + "&fieldId=schoolId",//返回json数据的url
+    	valueField : "schoolId",
+    	textField : "schoolName",
+    	panelHeight : "auto",
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
+    	onLoadSuccess:function(data) {
+    		if(data.length == 1) {
+				$('#schoolId').combobox('setValue', data[0].schoolId);
+			}
+    	}
+	});
 </script>

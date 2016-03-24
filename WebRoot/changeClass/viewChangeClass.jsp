@@ -27,7 +27,7 @@
   					<td width="44%" colspan="3"><span id="inClass"></span></td>
   				</tr>
   				<tr>
-  					<td align="right" width="10%"><span>业绩顾问：</span></td>
+  					<td align="right" width="10%"><span id="adviserNameText">业绩顾问：</span></td>
   					<td width="12%"><span id="adviserName"></span></td>
   					<td align="right" width="10%"><span>原带班老师：</span></td>
   					<td width="12%"><span id="outClassTeacherName"></span></td>

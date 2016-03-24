@@ -104,6 +104,22 @@
 		  					<td colspan="5" width="730px"><span>${changeSchool.finishDate }</span></td>
 		  				</tr>
 	  				</c:if>
+	  				<c:if test="${!empty changeSchool.cancelDate }">
+	  					<tr>
+	  						<td align="right" width="100px"><span>取消人：</span></td>
+	  						<td width="150px"><span>${changeSchool.cancelName }</span></td>
+		  					<td align="right" width="120px"><span>取消时间：</span></td>
+		  					<td colspan="5" width="730px"><span>${changeSchool.cancelDate }</span></td>
+	  					</tr>
+	  				</c:if>
+	  				<c:if test="${!empty changeSchool.stopDate }">
+	  					<tr>
+	  						<td align="right" width="100px"><span>终止人：</span></td>
+	  						<td width="150px"><span>${changeSchool.stopName }</span></td>
+		  					<td align="right" width="120px"><span>终止时间：</span></td>
+		  					<td colspan="5" width="730px"><span>${changeSchool.stopDate }</span></td>
+	  					</tr>
+	  				</c:if>
   				</table>
   			</c:forEach>
   		</div>
