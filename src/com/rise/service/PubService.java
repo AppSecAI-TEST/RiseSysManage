@@ -22,7 +22,7 @@ public class PubService
 		if("schoolId".equals(fieldId))
 		{
 			String result = (String)session.getAttribute("privSchoolInfo");
-			if(ObjectCensor.isStrRegular(result))
+			if(ObjectCensor.isStrRegular(result) && !"[]".equals(result))
 			{
 				return result;
 			}

@@ -44,7 +44,7 @@
 			var classHoursData = '${classHours}';
 			classTimeData = eval("("+classTimeData+")");
 			classHoursData = eval("("+classHoursData+")");
-			$.post("/sys/pubData/qryClassInstList.do",{schoolId:${classAttendT.schoolId},courseType:'${classAttendT.studentAttendList[0].studentCourseT.courseType}',stageId:'${classAttendT.studentAttendList[0].stageId}',classType:'${classAttendT.studentAttendList[0].classType}',classState:"'001','002','003','004','005'",classInstId:""},function(data){
+			$.post("/sys/pubData/qryClassInstList.do",{schoolId:${classAttendT.schoolId},courseType:'${classAttendT.studentAttendList[0].studentCourseT.courseType}',stageId:'${classAttendT.studentAttendList[0].stageId}',classType:'${classAttendT.studentAttendList[0].classType}',classState:"'001','002','003'",classInstId:""},function(data){
 				gClassList = data;
 				$("#makeupValue").combobox({
    					valueField : "classInstId",
