@@ -27,10 +27,10 @@
   
   	<body>
   		<div style="margin-right:5px;;">
+  			<input type="hidden" id="type" value="classDetail"/>
+  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
+  			<input type="hidden" id="resourceId" value="736">
   			<form id="qryFm">
-  				<input type="hidden" id="type" value="classDetail"/>
-  				<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
-  				<input type="hidden" id="resourceId" value="736">
 	  			<table class="search_tab">
 	  				<tr>
 	  					<td align="right"><span>校区：</span></td>

@@ -1,26 +1,24 @@
 $(document).ready(function() {
-	var clearFlag =true;
+	var clearFlag = true;
 	var schoolData = [1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013];	
 	$("#schoolId").combobox({
 		loader:function(param,success,error){  
 		    $.ajax({  
 				url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
 				dataType: 'json',  
-				success: function(data){
-		    	if(data.length==schoolData.length&&!($("#sFlag").length>0&&$("#sFlag").val()=="1"))
-		    	{
-		    		data.unshift({schoolName:'所有校区',schoolId:""});  
-		    	}	
-				success(data);  
+				success: function(data) {
+			    	if(data.length == schoolData.length && !($("#sFlag").length > 0 && $("#sFlag").val() == "1")) {
+			    		data.unshift({schoolName:'所有校区',schoolId:""});  
+			    	}	
+					success(data);  
 				}
 			});  
    		},
 		onLoadSuccess:function(){
 			var arr =$("#schoolId").combobox("getData");
-			if(arr.length<schoolData.length||($("#sFlag").length>0&&$("#sFlag").val()=="1"))
-			{
-				$("#schoolId").combobox("select",arr[0].schoolId);
-				clearFlag =false;
+			if(arr.length < schoolData.length || ($("#sFlag").length > 0 && $("#sFlag").val() == "1")) {
+				$("#schoolId").combobox("select", arr[0].schoolId);
+				clearFlag = false;
 			}	
 		},
    		onChange : function(n, o) {
@@ -176,17 +174,18 @@ $(document).ready(function() {
 			}
 		}
     });
-	 $("#reset").click(function() 
-    {
+	 $("#reset").click(function() {
     	$("#qryFm").form('clear');//清空窗体数据  
-    	if(!clearFlag||($("#sFlag").length>0&&$("#sFlag").val()=="1"))
-    	{
+    	if(!clearFlag||($("#sFlag").length>0&&$("#sFlag").val()=="1")) {
     		$("#schoolId").combobox('select',$("#schoolId").combobox("getData")[0].schoolId);
-    	}
-    	else
-    	{
+    	} else {
     		$("#schoolId").combobox('setValue',"");
-    	}	
+    	}
+    	var higherType = $("#higherType").val();
+    	if("allRegion" == higherType) {
+    		var curr_time = new Date();
+    		$('#year').datebox('setValue', yearFormatter(curr_time));
+    	}
     });
 });
 

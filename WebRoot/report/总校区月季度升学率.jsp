@@ -12,9 +12,9 @@
   	</head> 
   	<body>
   		<div style="magin-right:5px;">
+	  		<input type="hidden" id="higherType" value="allQuarter"/>
+  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
   			<form id="qryFm">
-	  			<input type="hidden" id="higherType" value="allQuarter"/>
-  				<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
   				<table class="search_tab">
   					<tr>
 						<td align="right" width="50px"><span>年度：</span></td>

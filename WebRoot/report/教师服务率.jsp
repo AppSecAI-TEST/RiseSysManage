@@ -13,10 +13,10 @@
   
   	<body>
   		<div style="margin-right:5px;">
+  			<input type="hidden" id="resourceId" value="805">	
+  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId}"/>
   			<input type="hidden" id="tableName" value="report_teacher_service_rate"/>
   			<form id="qryFm">
-  				<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
-  				<input type="hidden" id="resourceId" value="805">	
   				<table class="search_tab">
   					<tr>
   						<td align="right" width="50px"><span>校区：</span></td>

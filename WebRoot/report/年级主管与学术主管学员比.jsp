@@ -13,9 +13,9 @@
   
   	<body>
   		<div style="margin-right:5px;">
-  			<input type="hidden" id="tableName" value="report_academic_grade_director"/>
-  			<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   			<input type="hidden" id="resourceId" value="807">	
+  			<input type="hidden" id="tableName" value="report_academic_grade_director"/>
+  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId}"/>
   			<form id="qryFm">
   				<table align="center" class="search_tab">
   					<tr>

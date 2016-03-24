@@ -12,11 +12,11 @@
   	</head>  
   	<body>
   		<div style="margin-right:5px;">
+	  		<input type="hidden" id="higherType" value="quarter"/>
+  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
+   			<input type="hidden" id="resourceId" value="751">	
+  			<input type="hidden" id="sFlag" value="1"/>   				
   			<form id="qryFm">
-	  			<input type="hidden" id="higherType" value="quarter"/>
-  				<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
-   				<input type="hidden" id="resourceId" value="751">	
-  				<input type="hidden" id="sFlag" value="1"/>   				
   				<table class="search_tab">
   					<tr>
   						<td align="right" width="50px"><span>校区：</span></td>

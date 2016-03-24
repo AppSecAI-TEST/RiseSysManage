@@ -12,8 +12,8 @@
   	</head>
   	<body>
   		<div style="margin-right:5px">
+  		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
   		<form id="qryFm">
-  			<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
  			<table class="search_tab">
   				<tr>
   					<td width="8%" align="right"><span>校区：</span></td>
