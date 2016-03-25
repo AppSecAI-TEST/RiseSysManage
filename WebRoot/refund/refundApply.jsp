@@ -142,7 +142,7 @@
   								<span style="font-size: 16px; font-weight: bold;">课程${status.index + 1 }</span>
   							</td>
   							<td colspan="9" align="center">
-  								<span style="color: red; font-weight: bold;">退费提示：本课程${refundStudentCourse.courseTypeText }${refundStudentCourse.courseStateText }（${refundStudentCourse.classProgress }），赠送课外教课有使用（2/20）</span>
+  								<span style="color: red; font-weight: bold;">退费提示：本课程${refundStudentCourse.courseTypeText }${refundStudentCourse.courseStateText }（${refundStudentCourse.classProgress }）<c:if test="${not empty refundStudentCourse.giftName }">，${refundStudentCourse.giftName }</c:if></span>
   							</td>
   						</tr>
   						<tr>
