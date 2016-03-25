@@ -163,7 +163,7 @@
 				<td width="20%">校服着装情况</td>
 			</tr>
 			<c:forEach items="${classAttendT.studentAttendList}" var="node" varStatus="i">
-				<c:if test="${node.studentId == studentId}">
+				<c:if test="${node.studentCourseId == studentCourseId}">
 					<tr>
 						<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" studentName="${node.studentT.name}">${i.count}</td>
 						<td align="center">${node.studentName}</td>

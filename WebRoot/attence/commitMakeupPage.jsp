@@ -89,7 +89,7 @@
 			function commitMakeupFunc(classAttId,stuAttId,attType,interVal)
 			{
 				ajaxLoading("正在处理，请稍待。。。");
-				window.location.href = "/sys/attend/commitMakeupDetailPage.do?studentId=${studentId}&classAttendId="+classAttId+"&funcNodeId=${funcNodeId}&studentAttendId="+stuAttId+"&attendType="+attType+"&interval="+interVal;
+				window.location.href = "/sys/attend/commitMakeupDetailPage.do?studentCourseId=${studentCourseId}&classAttendId="+classAttId+"&funcNodeId=${funcNodeId}&studentAttendId="+stuAttId+"&attendType="+attType+"&interval="+interVal;
 			}
 			function backFunc()
 			{

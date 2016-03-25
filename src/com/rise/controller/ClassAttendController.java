@@ -52,7 +52,7 @@ public class ClassAttendController
 	}
 	
 	@RequestMapping("/getAttenceRecord.do")
-	public ModelAndView getAttenceRecord(HttpServletRequest request , String schooltimeInstId , String funcNodeId , String selDateStr , String dateValue)
+	public ModelAndView getAttenceRecord(HttpServletRequest request , String schooltimeInstId , String funcNodeId , String selDateStr , String dateValue , String classAttendIds , String schooltimeInstIds)
 	{
 		ModelAndView model = new ModelAndView("attence/attenceRecord");
 		try
@@ -61,7 +61,7 @@ public class ClassAttendController
 			StaffT staffT = (StaffT)session.getAttribute("StaffT");
 			if(!ObjectCensor.checkObjectIsNull(staffT))
 			{
-				classAttendService.getAttenceRecord(model, schooltimeInstId, funcNodeId, selDateStr, dateValue, staffT.getStaffId());
+				classAttendService.getAttenceRecord(model, schooltimeInstId, funcNodeId, selDateStr, dateValue, staffT.getStaffId(), classAttendIds, schooltimeInstIds);
 			}
 			else
 			{
@@ -77,7 +77,7 @@ public class ClassAttendController
 	}
 	
 	@RequestMapping("/getAttenceRecordInst.do")
-	public ModelAndView getAttenceRecordInst(HttpServletRequest request , String classInstId , String funcNodeId , String selDateStr , String dateValue , String hourRange)
+	public ModelAndView getAttenceRecordInst(HttpServletRequest request , String classInstId , String funcNodeId , String selDateStr , String dateValue , String hourRange , String classAttendIds , String schooltimeInstIds)
 	{
 		ModelAndView model = new ModelAndView("attence/attenceRecordInst");
 		try
@@ -86,7 +86,7 @@ public class ClassAttendController
 			StaffT staffT = (StaffT)session.getAttribute("StaffT");
 			if(!ObjectCensor.checkObjectIsNull(staffT))
 			{
-				classAttendService.getAttenceRecordInst(model, classInstId, funcNodeId, selDateStr, dateValue, staffT.getStaffId(), hourRange);
+				classAttendService.getAttenceRecordInst(model, classInstId, funcNodeId, selDateStr, dateValue, staffT.getStaffId(), hourRange, classAttendIds, schooltimeInstIds);
 			}
 			else
 			{
@@ -268,12 +268,12 @@ public class ClassAttendController
 	}
 	
 	@RequestMapping("/uploadLeavePage.do")
-	public ModelAndView uploadLeavePage(String studentId , String funcNodeId)
+	public ModelAndView uploadLeavePage(String studentCourseId , String funcNodeId)
 	{
 		ModelAndView model = new ModelAndView("attence/uploadLeavePage");
 		try 
 		{
-			classAttendService.uploadLeavePage(model, studentId, funcNodeId);
+			classAttendService.uploadLeavePage(model, studentCourseId, funcNodeId);
 		}
 		catch (Exception e) 
 		{
@@ -284,12 +284,12 @@ public class ClassAttendController
 	}
 	
 	@RequestMapping("/uploadLeaveDetailPage.do")
-	public ModelAndView uploadLeaveDetailPage(String classAttendId , String studentId , String funcNodeId)
+	public ModelAndView uploadLeaveDetailPage(String classAttendId , String studentCourseId , String funcNodeId)
 	{
 		ModelAndView model = new ModelAndView("attence/uploadLeaveDetail");
 		try 
 		{
-			classAttendService.uploadLeaveDetailPage(model, classAttendId, studentId , funcNodeId);
+			classAttendService.uploadLeaveDetailPage(model, classAttendId, studentCourseId , funcNodeId);
 		}
 		catch (Exception e) 
 		{
@@ -324,12 +324,12 @@ public class ClassAttendController
 	}
 	
 	@RequestMapping("/commitMakeupPage.do")
-	public ModelAndView commitMakeupPage(String studentId , String funcNodeId)
+	public ModelAndView commitMakeupPage(String studentCourseId , String funcNodeId)
 	{
 		ModelAndView model = new ModelAndView("attence/commitMakeupPage");
 		try 
 		{
-			classAttendService.uploadLeavePage(model, studentId, funcNodeId);
+			classAttendService.uploadLeavePage(model, studentCourseId, funcNodeId);
 		}
 		catch (Exception e) 
 		{
@@ -340,12 +340,12 @@ public class ClassAttendController
 	}
 	
 	@RequestMapping("/commitMakeupDetailPage.do")
-	public ModelAndView commitMakeupDetailPage(String classAttendId , String studentAttendId , String studentId , String attendType , String interval , String funcNodeId)
+	public ModelAndView commitMakeupDetailPage(String classAttendId , String studentAttendId , String studentCourseId , String attendType , String interval , String funcNodeId)
 	{
 		ModelAndView model = new ModelAndView("attence/commitMakeupDetail");
 		try 
 		{
-			classAttendService.commitMakeupDetailPage(model, classAttendId , studentAttendId , studentId , attendType , interval , funcNodeId);
+			classAttendService.commitMakeupDetailPage(model, classAttendId , studentAttendId , studentCourseId , attendType , interval , funcNodeId);
 		}
 		catch (Exception e) 
 		{
