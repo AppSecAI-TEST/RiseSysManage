@@ -218,11 +218,17 @@
   							</td>
   							<td align="right" width="8%"><span>渠道来源：</span></td>
   							<td width="41%" colspan="3">
-  								<select id="refundChannel${refundFeeDetail.studentCourseId }" name="refundChannel" class="easyui-combobox" style="width: 100px; height: 25px;" required="true"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-	      							onLoadSuccess:function(data){if(data.length > 0) $('#refundChannel${refundFeeDetail.studentCourseId }').combobox('setValue', '${refundFeeDetail.refundChannel }');}" 
-	      							url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_CHANNEL">
-		        				</select>
+  								<c:if test="${refundFeeDetail.refundType == 'RTN_NEW' || refundFeeDetail.refundType == 'RTN_READING' }">
+	  								<select id="refundChannel${refundFeeDetail.studentCourseId }" name="refundChannel" class="easyui-combobox" style="width: 100px; height: 25px;"
+										data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+		      							onLoadSuccess:function(data){if(data.length > 0) $('#refundChannel${refundFeeDetail.studentCourseId }').combobox('setValue', '${refundFeeDetail.refundChannel }');}" 
+		      							url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_CHANNEL">
+			        				</select>
+  								</c:if>
+  								<c:if test="${refundFeeDetail.refundType != 'RTN_NEW' || refundFeeDetail.refundType != 'RTN_READING' }">
+  									<select id="refundChannel${refundFeeDetail.studentCourseId }" name="refundChannel" class="easyui-combobox" style="width: 100px; height: 25px;">
+  									</select>
+  								</c:if>
   							</td>
   						</tr>
   						<tr>
