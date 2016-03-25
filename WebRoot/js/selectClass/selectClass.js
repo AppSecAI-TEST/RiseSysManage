@@ -7,7 +7,7 @@ $(document).ready(function() {
 		dataType: "json",
 		async: true,
 		beforeSend: function() {
-			$.messager.progress({title : '班级维护', msg : '正在查询班级信息，请稍等……'});
+			$.messager.progress({title : '选班', msg : '正在查询学员信息，请稍等……'});
 		},
 		success: function (data) {
 			$.messager.progress('close'); 
@@ -118,7 +118,7 @@ $(document).ready(function() {
     						},
     						success: function (data) {
     							$.messager.progress('close'); 
-    							var flag = data.flag
+    							var flag = data.flag;
     							if(flag) {
     								$.messager.alert('提示', "选班成功！", "info", function() {window.history.back();});
     							} else {

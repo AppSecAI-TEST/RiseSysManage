@@ -48,7 +48,7 @@
 		  				</td>
 		  				<td align="right" width="8%"><span>账号：</span></td>
 		  				<td width="15%">
-		  					<input id="account" name="bankCard" type="text" class="easyui-textbox numberbox" validType="length[0,19]" style="width: 200px; height: 25px;"/>
+		  					<input id="bankCard" name="bankCard" type="text" class="easyui-textbox numberbox" validType="length[0,19]" style="width: 200px; height: 25px;"/>
 		  				</td>
 		  				<td align="right" width="10%"><span>退费总金额：</span></td>
 		  				<td width="15%">
