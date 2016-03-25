@@ -451,7 +451,7 @@
 			  								<input type="radio" name="visitPersonTwo" value="academic" checked="checked"/><span>学术主管</span>
 			  								<select id="academicId" name="academicId" class="easyui-combobox" style="width: 100px; height: 25px;"
 				  								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-		      									onLoadSuccess:function(data){if(data.length > 0) $('#academicOrSalesId').combobox('setValue', ${refundVisit.visitUserId });}" 
+		      									onLoadSuccess:function(data){if(data.length > 0) $('#academicId').combobox('setValue', ${refundVisit.visitUserId });}" 
 		      									url="<%=path %>/pubData/qryStaffList.do?post=7,8&schoolId=${obj.refundFeeObj.schoolId }">
 					        				</select>
 			  								<input type="radio" name="visitPersonTwo" value="sales"/><span>销售主管</span>
@@ -465,7 +465,7 @@
 			  								<input type="radio" name="visitPersonTwo" value="sales" checked="checked"/><span>销售主管</span>
 			  								<select id="salesId" name="salesId" class="easyui-combobox" style="width: 100px; height: 25px;"
 				  								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
-		      									onLoadSuccess:function(data){if(data.length > 0) $('#academicOrSalesId').combobox('setValue', ${refundVisit.visitUserId });}" 
+		      									onLoadSuccess:function(data){if(data.length > 0) $('#salesId').combobox('setValue', ${refundVisit.visitUserId });}" 
 		      									url="<%=path %>/pubData/qryStaffList.do?post=17&schoolId=${obj.refundFeeObj.schoolId }">
 					        				</select>
 		  								</c:if>
