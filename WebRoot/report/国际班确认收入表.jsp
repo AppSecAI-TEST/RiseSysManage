@@ -23,9 +23,17 @@
 					      		
 				        	</select>
 	  					</td>
-	  					<td width="60px" align="right"><span>日期：</span></td>
+	  					<td width="60px" align="right"><span>月份：</span></td>
 						<td width="110px">
 							<input class="easyui-datebox"  type="text" style="width:100px; height: 25px;" id="month" name="month" editable="false" data-options="formatter:myformatter, parser:myparser"/>
+						</td>
+						<td width="50px" align="right"><span>班级：</span></td>
+						<td width="100px">
+							 <input class="easyui-textbox" id="className" name="className" style="width:100px;"></td>
+						</td>
+						<td width="70px" align="right"><span>学员姓名：</span></td>
+						<td width="100px">
+							 <input class="easyui-textbox" id="name" name="name" style="width:100px;"></td>
 						</td>
 						<td align="left">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId ="3706">查询</a>
