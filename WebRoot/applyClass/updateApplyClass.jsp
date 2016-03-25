@@ -145,7 +145,7 @@
 						<th data-options="field:'byName',width:100,align:'center'">英文名</th>
 						<th data-options="field:'payDate',width:100,align:'center'">缴费时间</th>
 						<th data-options="field:'studentChannelType',width:100,align:'center'">学员来源</th>
-						<th data-options="field:'identityId',width:200,align:'center'">身份证号</th>
+						<th data-options="field:'identityId',width:200,align:'center'">证件号码</th>
 						<th data-options="field:'phone',width:100,align:'center'">联系方式</th>
 						<th data-options="field:'selectClassNum',width:100,align:'center'">定班次数</th>
 						<th data-options="field:'waitClassDays',width:100,align:'center'">等班时长</th>
