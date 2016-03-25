@@ -30,26 +30,18 @@ public class CreateClassController
 	
 	//申请放班
 	@RequestMapping(value = "/applyCreateClass.do")
-	public void applyCreateClass(String param, HttpServletResponse response)
-	{
+	public void applyCreateClass(String param, HttpServletResponse response) {
 		log.error(param);
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.applyCreateClass(param);
-			log.error(retVal);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e) {
 			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null)
-			{
+		} finally {
+			if(out != null) {
 				out.close();
 			}
 		}
@@ -57,26 +49,19 @@ public class CreateClassController
 	
 	//根据班级实例ID查询申请放班内容
 	@RequestMapping(value = "/qryCreateClassById.do")
-	public void qryCreateClassById(String classInstId, String applyType, HttpServletResponse response)
-	{
+	public void qryCreateClassById(String classInstId, String applyType, HttpServletResponse response) {
 		log.error(classInstId);
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.qryCreateClassById(classInstId, applyType);
 			log.error(retVal);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e) {
 			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null)
-			{
+		} finally {
+			if(out != null) {
 				out.close();
 			}
 		}
@@ -84,24 +69,18 @@ public class CreateClassController
 	
 	//审批放班申请和审批取消放班申请
 	@RequestMapping(value = "/approveApplyClass.do")
-	public void approveApplyClass(String param, HttpServletResponse response)
-	{
+	public void approveApplyClass(String param, HttpServletResponse response) {
 		log.error(param);
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.approveApplyClass(param);
 			log.error(retVal);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e) {
 			e.printStackTrace();
-		}
-		finally
-		{
+		} finally {
 			if(out != null)
 			{
 				out.close();
@@ -111,24 +90,17 @@ public class CreateClassController
 	
 	//取消放班申请
 	@RequestMapping(value = "/cancelApplyClass.do")
-	public void cancelApplyClass(String param, HttpServletResponse response)
-	{
+	public void cancelApplyClass(String param, HttpServletResponse response) {
 		log.error(param);
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.cancelApplyClass(param);
-			log.error(retVal);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e) {
 			e.printStackTrace();
-		}
-		finally
-		{
+		} finally {
 			if(out != null)
 			{
 				out.close();
@@ -145,8 +117,7 @@ public class CreateClassController
 		} else {
 			view = new ModelAndView("applyClass/viewApplyClass");
 		}
-		try 
-		{
+		try {
 			String retVal = createClassService.qryCreateClassById(classInstId, applyType);
 			JSONObject obj = JSONObject.fromObject(retVal);
 			obj.element("classState", classState);
@@ -154,9 +125,7 @@ public class CreateClassController
 			obj.element("channel", channel);
 			log.error(obj);
 			view.addObject("obj", obj);
-		} 
-		catch (Exception e) 
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return view;
@@ -164,26 +133,17 @@ public class CreateClassController
 	
 	//班级维护
 	@RequestMapping(value = "/updateCreateClass.do")
-	public void updateCreateClass(String param, HttpServletResponse response)
-	{
-		log.error(param);
+	public void updateCreateClass(String param, HttpServletResponse response) {
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.updateCreateClass(param);
-			log.error(retVal);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e) {
 			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null)
-			{
+		} finally {
+			if(out != null) {
 				out.close();
 			}
 		}
@@ -191,26 +151,17 @@ public class CreateClassController
 	
 	//批量移除学员
 	@RequestMapping(value = "/batchRemoveStudent.do")
-	public void batchRemoveStudent(String param, HttpServletResponse response)
-	{
-		log.error(param);
+	public void batchRemoveStudent(String param, HttpServletResponse response) {
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.batchRemoveStudent(param);
-			log.error(retVal);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e) {
 			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null)
-			{
+		} finally {
+			if(out != null) {
 				out.close();
 			}
 		}
@@ -218,26 +169,36 @@ public class CreateClassController
 	
 	//向班级添加学员
 	@RequestMapping(value = "/addClassStudent.do")
-	public void addClassStudent(String param, HttpServletResponse response)
-	{
-		log.error(param);
+	public void addClassStudent(String param, HttpServletResponse response) {
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.addClassStudent(param);
-			log.error(retVal);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			if(out != null) {
+				out.close();
+			}
 		}
-		finally
-		{
-			if(out != null)
-			{
+	}
+	
+	//向班级添加学员
+	@RequestMapping(value = "/addShortClassStudent.do")
+	public void addShortClassStudent(String param, HttpServletResponse response) {
+		log.error(param);
+		PrintWriter out = null;
+		try {
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = createClassService.addShortClassStudent(param);
+			out.write(retVal);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(out != null) {
 				out.close();
 			}
 		}
@@ -245,131 +206,92 @@ public class CreateClassController
 	
 	//查询更换班级的学员信息
 	@RequestMapping(value = "/qryDataByQueryCode.do")
-	public void qryDataByQueryCode(String param, HttpServletResponse response)
-	{
+	public void qryDataByQueryCode(String param, HttpServletResponse response) {
 		log.error(param);
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.qryDataByQueryCode(param);
 			log.error(retVal);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e) {
 			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null)
-			{
+		} finally {
+			if(out != null) {
 				out.close();
 			}
 		}
 	}
 	
 	@RequestMapping(value = "/qryClassName.do")
-	public void qryClassName(String courseType, String classType, String stageId, String schoolId, HttpServletResponse response)
-	{
-		log.error(courseType);
-		log.error(classType);
-		log.error(stageId);
-		log.error(schoolId);
+	public void qryClassName(String courseType, String classType, 
+			String stageId, String schoolId, HttpServletResponse response) {
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.qryClassName(courseType, classType, stageId, schoolId);
 			log.error(retVal);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e) {
 			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null)
-			{
+		} finally {
+			if(out != null) {
 				out.close();
 			}
 		}
 	}
 	
 	@RequestMapping(value = "/validateRoom.do")
-	public void validateRoom(String param, HttpServletResponse response)
-	{
-		log.error(param);
+	public void validateRoom(String param, HttpServletResponse response) {
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.validateRoom(param);
 			log.error(retVal);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e) {
 			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null)
-			{
+		} finally {
+			if(out != null) {
 				out.close();
 			}
 		}
 	}
 	
 	@RequestMapping(value = "/qryClassInstDetail.do")
-	public void qryClassInstDetail(String param, HttpServletResponse response)
-	{
+	public void qryClassInstDetail(String param, HttpServletResponse response) {
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.qryClassInstDetail(param);
 			log.error(retVal);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e) {
 			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null)
-			{
+		} finally {
+			if(out != null) {
 				out.close();
 			}
 		}
 	}
 	
 	@RequestMapping(value = "/getBonus.do")
-	public void getBonus(String classInstId, String type, HttpServletResponse response)
-	{
+	public void getBonus(String classInstId, String type, HttpServletResponse response) {
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.getBonus(classInstId, type);
 			log.error(retVal);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e) {
 			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null)
-			{
+		} finally {
+			if(out != null) {
 				out.close();
 			}
 		}

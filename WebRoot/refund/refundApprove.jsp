@@ -455,8 +455,8 @@
 			  							<td width="35%">
 			  								<c:if test="${refundVisit.userType == 'academic' }">
 				  								<input type="radio" name="visitPersonTwo" value="academic" checked="checked" disabled="disabled"/><span>学术主管</span>
-				  								<select id="academicId" name="academicId" class="easyui-combobox" style="width: 100px; height: 25px;"
-				  									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto', disabled="disabled"
+				  								<select id="academicId" name="academicId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled"
+				  									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto', 
 		      										onLoadSuccess:function(data){if(data.length > 0) $('#academicId').combobox('setValue', ${refundVisit.visitUserId });}" 
 		      										url="<%=path %>/pubData/qryStaffList.do?post=7,8&schoolId=${obj.refundFeeObj.schoolId }">
 					        					</select>
