@@ -16,35 +16,35 @@
   			<form id="qryFm">
 	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right" width="80px"><span>校区：</span></td>
-	  					<td align="left"  width="110px">
-	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+	  					<td align="right" width="50px"><span>校区：</span></td>
+	  					<td align="left"  width="90px">
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 90px; height: 25px;" editable="false"
 								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 					      		
 				        	</select>
 	  					</td>
 	  					<td align="right" width="50px"><span>月份：</span></td>
-	  					<td align="left"  width="130px">
-	  						<input class="easyui-datebox"  type="text" style="width:120px; height: 25px;" id="attendMonth" name="attendMonth" editable="false" data-options="formatter:myformatter, parser:myparser"/>
+	  					<td align="left"  width="90px">
+	  						<input class="easyui-datebox"  type="text" style="width:90px; height: 25px;" id="attendMonth" name="attendMonth" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 	  					</td>
 	  					<td width="70px" align="right"><span>业绩类型：</span></td>
-						<td width="110px">
-							<select name="feeType" editable='false' class="easyui-combobox" id="feeType" style="width: 100px; height: 25px;"
+						<td width="60px">
+							<select name="feeType" editable='false' class="easyui-combobox" id="feeType" style="width: 60px; height: 25px;"
 								 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 			      				 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE" >
 							</select>
 						</td>
 						<td width="50px" align="right"><span>班级：</span></td>
-						<td width="110px">
+						<td width="100px">
 							 <input class="easyui-textbox" id="className" name="className" style="width:100px;"></td>
 						</td>
 						<td width="70px" align="right"><span>学员姓名：</span></td>
-						<td width="110px">
+						<td width="100px">
 							 <input class="easyui-textbox" id="name" name="name" style="width:100px;"></td>
 						</td>
 						<td align="left">
-							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="5006">查询</a>
-							&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
+							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:90px; height: 25px;" id="qryBtn" funcNodeId="5006">查询</a>
+							&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:90px; height: 25px;" id="reset">重置</a>
 						</td>
 	  				</tr>	
 	  			</table>
