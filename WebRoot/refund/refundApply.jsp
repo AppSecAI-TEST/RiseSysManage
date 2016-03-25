@@ -336,7 +336,7 @@
   						</tr>
   						<tr>
   							<td align="right" width="10%"><span>回访人员：</span></td>
-  							<td width="32%">
+  							<td width="35%">
   								<input type="radio" name="visitPersonOne" value="teacher"/><span>老师</span>
   								<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;">
 		        				</select>
@@ -344,8 +344,8 @@
   								<select id="careAdviserId" name="careAdviserId" class="easyui-combobox" style="width: 100px; height: 25px;">
 		        				</select>
   							</td>
-  							<td align="right" width="8%"><span>回访时间：</span></td>
-  							<td width="50%">
+  							<td align="right" width="10%"><span>回访时间：</span></td>
+  							<td width="45%">
   								<input name="teacherOrAdviserVisitDate" id="teacherOrAdviserVisitDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 25px;"/>
   							</td>
   						</tr>
@@ -362,14 +362,16 @@
   						</tr>
   						<tr>
   							<td align="right" width="10%"><span>回访人员：</span></td>
-  							<td width="25%">
+  							<td width="35%">
   								<input type="radio" name="visitPersonTwo" value="academic"/><span>学术主管</span>
+  								<select id="academicId" name="academicId" class="easyui-combobox" style="width: 100px; height: 25px;">
+		        				</select>
   								<input type="radio" name="visitPersonTwo" value="sales"/><span>销售主管</span>
-  								<select id="academicOrSalesId" name="academicOrSalesId" class="easyui-combobox" style="width: 100px; height: 25px;">
+  								<select id="salesId" name="salesId" class="easyui-combobox" style="width: 100px; height: 25px;">
 		        				</select>
   							</td>
-  							<td align="right" width="8%"><span>回访时间：</span></td>
-  							<td width="57%">
+  							<td align="right" width="10%"><span>回访时间：</span></td>
+  							<td width="45%">
   								<input name="academicOrSalesVisitDate" id="academicOrSalesVisitDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;"/>
   							</td>
   						</tr>

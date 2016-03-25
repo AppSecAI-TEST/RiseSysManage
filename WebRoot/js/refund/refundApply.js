@@ -157,20 +157,28 @@ $(document).ready(function() {
 	
 	$("input:radio[name='visitPersonTwo']").change(function() {
 		var visitPersonTwo = $("input:radio[name='visitPersonTwo']:checked").val();
-		var post = "17";
 		var schoolId = $("#schoolId").val();
 		if("academic" == visitPersonTwo) {
-			post = "7,8";
+			$("#academicId").combobox({
+				url : "/sys/pubData/qryStaffList.do?post=7,8&schoolId=" + schoolId,//返回json数据的url
+				valueField : "staffId",
+				textField : "userName",
+				panelHeight : "auto",
+				formatter : function(data) {
+					return "<span>" + data.userName + "</span>";
+				}
+			});
+		} else {
+			$("#salesId").combobox({
+				url : "/sys/pubData/qryStaffList.do?post=17&schoolId=" + schoolId,//返回json数据的url
+				valueField : "staffId",
+				textField : "userName",
+				panelHeight : "auto",
+				formatter : function(data) {
+					return "<span>" + data.userName + "</span>";
+				}
+			});
 		}
-		$("#academicOrSalesId").combobox({
-			url : "/sys/pubData/qryStaffList.do?post=" + post + "&schoolId=" + schoolId,//返回json数据的url
-	    	valueField : "staffId",
-	    	textField : "userName",
-	    	panelHeight : "auto",
-	    	formatter : function(data) {
-	    		return "<span>" + data.userName + "</span>";
-	    	}
-		});
 	});
 
 	$("[name='studentCourseId']").each(function() {
@@ -366,7 +374,11 @@ $(document).ready(function() {
 						} else if(i == 1) {
 							var visitPersonTwo = $("input:radio[name='visitPersonTwo']:checked").val();
 							refundVisitObj.userType = visitPersonTwo;
-							refundVisitObj.visitUserId = obj.academicOrSalesId;
+							if("academic" == visitPersonTwo) {
+								refundVisitObj.visitUserId = obj.academicId;
+							} else {
+								refundVisitObj.visitUserId = obj.salesId;
+							}
 							refundVisitObj.visitDate = obj.academicOrSalesVisitDate;
 							refundVisitObj.remark = obj.academicOrSalesVisitRemark;
 							refundVisitObj.handlerId = obj.handlerId;
@@ -576,14 +588,18 @@ function checkParam() {
 			showMessage('提示', "请选择学术或销售主管的回访人员类型！");
 			return false;
 		} else {
-			var visitPersonType = "学术主管";
 			if("sales" == visitPersonTwo) {
-				visitPersonType = "销售主管";
-			}
-			var academicOrSalesId = $("#academicOrSalesId").combobox('getValue');
-			if(academicOrSalesId == null || academicOrSalesId == "" || academicOrSalesId == undefined || academicOrSalesId == "null") {
-				showMessage('提示', "请选择"+visitPersonType+"的回访人员！");
-				return false;
+				var salesId = $("#salesId").combobox('getValue');
+				if(salesId == null || salesId == "" || salesId == undefined || salesId == "null") {
+					showMessage('提示', "请选择销售主管的回访人员！");
+					return false;
+				}
+			} else {
+				var academicId = $("#academicId").combobox('getValue');
+				if(academicId == null || academicId == "" || academicId == undefined || academicId == "null") {
+					showMessage('提示', "请选择销售主管的回访人员！");
+					return false;
+				}
 			}
 		}
 	} else {
