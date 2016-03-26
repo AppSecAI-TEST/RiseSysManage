@@ -46,7 +46,7 @@
 	      				<td align="right" width="114px"><span style="color: red;">*</span><span>学员姓名：</span></td>
 	      				<td>
 	      					<div id="nameDiv">
-		      					<input name="name" id="name" type="text" class="easyui-textbox validatebox" validType="length[0,15]" required="true" style="width: 100px; height: 25px;"/>
+		      					<input name="name" id="name" type="text" class="easyui-textbox validatebox" validType="stuName" required="true" style="width: 100px; height: 25px;"/>
 	      					</div>
 	      					<span id="nameText" style="display: none;"></span>
 	      				</td>

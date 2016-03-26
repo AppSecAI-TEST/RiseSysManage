@@ -3,14 +3,19 @@ $(document).ready(function() {
 		// 学生姓名校验
 		stuName : {
 			validator : function(value, param) {
-				if (!/^[A-Za-z\u4e00-\u9fa5]+$/.test(value)) {
-					$.fn.validatebox.defaults.rules.stuName.message = "输入的姓名只能为中文和英文";
+				if (value.length > 15) {
+					$.fn.validatebox.defaults.rules.stuName.message = "输入的姓名长度不能超过15";
 					return false;
-				} else if (value.length > 12) {
-					$.fn.validatebox.defaults.rules.stuName.message = "输入的姓名不能超过十二个字";
-					return false;
+				} else {
+					if (!/^[A-Za-z\u4e00-\u9fa5]+$/.test(value)) {
+						$.fn.validatebox.defaults.rules.stuName.message = "输入的姓名只能为中文和英文";
+						return false;
+					} else if (value.length > 12) {
+						$.fn.validatebox.defaults.rules.stuName.message = "输入的姓名不能超过十二个字";
+						return false;
+					}
+					return true;
 				}
-				return true;
 			}
 		},
 		// 英文名校验
