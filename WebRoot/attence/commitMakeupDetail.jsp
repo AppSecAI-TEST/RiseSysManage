@@ -40,9 +40,7 @@
 		<script type="text/javascript">
 			var gTeacherList = null;
 			var gClassList = null;
-			var classTimeData = '${hourRangeArr}';
 			var classHoursData = '${classHours}';
-			classTimeData = eval("("+classTimeData+")");
 			classHoursData = eval("("+classHoursData+")");
 			$.post("/sys/pubData/qryClassInstList.do",{schoolId:${classAttendT.schoolId},courseType:'${classAttendT.studentAttendList[0].studentCourseT.courseType}',stageId:'${classAttendT.studentAttendList[0].stageId}',classType:'${classAttendT.studentAttendList[0].classType}',classState:"'001','002','003'",classInstId:""},function(data){
 				gClassList = data;
@@ -63,16 +61,6 @@
 			},"json");
 			$(document).ready(function(){
 				ajaxLoadEnd();
-				$("#classTime").combobox({
-					formatter:formatParaConfig, 
-					valueField: 'paramValue', 
-					textField: 'paramDesc', 
-					panelHeight: 'auto',
-					data:classTimeData,
-					onLoadSuccess:function(data){
-						$("#classTime").combobox("setValue","${classAttendT.hourRange}");
-					}
-				});
 				$("#classProgress").combobox({
 					panelHeight: 'auto',
 					formatter : function(data) {
@@ -118,7 +106,8 @@
 			}
 			function makeupFunc()
 			{
-				var hourRange = $("#classTime").combobox("getValue");
+				var startTime = $("#startTime").timespinner("getValue");
+				var endTime = $("#endTime").timespinner("getValue");
 				var classProgress = $("#classProgress").combobox("getText");
 				var studentAttendId = $("#classProgress").combobox("getValue");
 				var makeupType = $("input[name='makeupType']:checked").val();
@@ -127,6 +116,14 @@
 				if(attendDate == "")
 				{
 					$.messager.alert('提示',"请先选择补课时间后重新尝试");
+				}
+				else if(startTime == "")
+				{
+					$.messager.alert('提示',"请先选择补课起始时段后重新尝试");
+				}
+				else if(endTime == "")
+				{
+					$.messager.alert('提示',"请先选择补课结束时段后重新尝试");
 				}
 				else if(classProgress == "")
 				{
@@ -139,10 +136,6 @@
 				else if(makeupValue == "")
 				{
 					$.messager.alert('提示',"请先选择对应的"+("F" == makeupType?"班级":"老师")+"后重新尝试");
-				}
-				else if(hourRange == "")
-				{
-					$.messager.alert('提示',"请先选择补课时间后重新尝试");
 				}
 				else
 				{
@@ -163,7 +156,7 @@
 						studentAttendId:studentAttendId,
 						makeupType:makeupType,
 						schooltime:attendDate,
-						hourRange:hourRange,
+						hourRange:startTime+"~"+endTime,
 						baseHour:(parseInt(timeArr[0])-1),
 						hours:(parseInt(timeArr[1])-parseInt(timeArr[0])+1),
 						classInstId:classInstId,
@@ -212,7 +205,7 @@
 			</tr>
 			<tr>
 				<td align="right" width="10%">补课时间：</td>
-				<td><input name="attendDate" id="attendDate" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> <select id="classTime" name="classTime" style="width:200px" ></select></td>
+				<td><input name="attendDate" id="attendDate" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> <input class="easyui-timespinner" id="startTime" name="startTime" style="width:70px;height: 25px;"  data-options="showSeconds:false">&nbsp;&nbsp;<input class="easyui-timespinner" id="endTime" name="endTime" style="width:70px;height: 25px;"  data-options="showSeconds:false"></td>
 			</tr>
 			<tr>
 				<td align="right">课时进度：</td>

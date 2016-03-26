@@ -310,9 +310,7 @@ public class ClassAttendService
 		try{
 			JSONObject json = JSONObject.fromObject(result);
 			model.addObject("classHours", json.getJSONArray("classHours"));
-			model.addObject("hourRangeArr", json.getJSONArray("hourRangeArr"));
 			json.remove("classHours");
-			json.remove("hourRangeArr");
 			ClassAttendT classAttendT = JacksonJsonMapper.getInstance().readValue(json.toString(), ClassAttendT.class);
 			model.addObject("classAttendT", classAttendT);
 			model.addObject("studentAttendId", studentAttendId);

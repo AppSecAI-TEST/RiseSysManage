@@ -92,8 +92,11 @@
 								}
 							}
 						}
-						ajaxLoading("正在处理，请稍待。。。");
-						window.location.href = "/sys/attend/getAttenceRecordInst.do?funcNodeId=${funcNodeId}&classInstId=${classInstT.classInstId}&classAttendIds="+classAttendIds+"&schooltimeInstIds="+schooltimeInstIds+"&hourRange="+data.paramValue+"&selDateStr=<fmt:formatDate value='${attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${attendDate}' pattern='dd' />";
+						if(!(classAttendIds == "" && schooltimeInstIds == ""))
+						{
+							ajaxLoading("正在处理，请稍待。。。");
+							window.location.href = "/sys/attend/getAttenceRecordInst.do?funcNodeId=${funcNodeId}&classInstId=${classInstT.classInstId}&classAttendIds="+classAttendIds+"&schooltimeInstIds="+schooltimeInstIds+"&hourRange="+data.paramValue+"&selDateStr=<fmt:formatDate value='${attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${attendDate}' pattern='dd' />";
+						}
 					}
 				});
 				$("#classRoomId").combobox({
