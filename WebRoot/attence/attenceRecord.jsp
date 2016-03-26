@@ -31,6 +31,54 @@
 					data:classTimeData,
 					onSelect:function(data){
 						$("#classLessonHour").textbox("setValue",data.param4);
+						var classAttendIds = "${classAttendIdArr}";
+						var schooltimeInstIds = "${schooltimeInstIdArr}";
+						var classAttendIdArr = classAttendIds.split("~");
+						var attendArr = [];
+						var schooltimeArr = [];
+						if(schooltimeInstIds != "")
+						{
+							var schooltimeInstIdArr = schooltimeInstIds.split("~");
+							for(var i = 0,n = schooltimeInstIdArr.length;i < n;i++)
+							{
+								var objArr = schooltimeInstIdArr[i].split(";");
+								schooltimeArr.push(objArr[0]);
+							}
+						}
+						for(var i = 0,n = classAttendIdArr.length;i < n;i++)
+						{
+							var objArr = classAttendIdArr[i].split(";");
+							attendArr.push(objArr[0]);
+						}
+						if(classAttendIds != "")
+						{
+							for(var i = 0,n = classAttendIdArr.length;i < n;i++)
+							{
+								var objArr = classAttendIdArr[i].split(";");
+								if(objArr.length > 1 && objArr[1]==data.paramValue)
+								{
+									ajaxLoading("正在处理，请稍待。。。");
+									window.location.href = "/sys/attend/getUpdateAttenceRecord.do?funcNodeId=${funcNodeId}&classAttendId="+objArr[0]+"&classAttendIds="+attendArr.join("~")+"&schooltimeInstIds="+schooltimeArr.join("~")+"&selDateStr=${selDateStr}&dateValue=${dateValue}";
+									return ;
+								}
+							}
+						}
+						if(schooltimeInstIds != "")
+						{
+							var schooltimeInstIdArr = schooltimeInstIds.split("~");
+							for(var i = 0,n = schooltimeInstIdArr.length;i < n;i++)
+							{
+								var objArr = schooltimeInstIdArr[i].split(";");
+								if(objArr.length > 1 && objArr[1]==data.paramValue)
+								{
+									ajaxLoading("正在处理，请稍待。。。");
+									window.location.href = "/sys/attend/getAttenceRecord.do?funcNodeId=${funcNodeId}&schooltimeInstId="+objArr[0]+"&classAttendIds="+classAttendIds+"&schooltimeInstIds="+schooltimeInstIds+"&selDateStr=${selDateStr}&dateValue=${dateValue}";
+									return ;
+								}
+							}
+						}
+						ajaxLoading("正在处理，请稍待。。。");
+						window.location.href = "/sys/attend/getAttenceRecordInst.do?funcNodeId=${funcNodeId}&classInstId=${schooltimeInstT.classInstId}&classAttendIds="+classAttendIds+"&schooltimeInstIds="+schooltimeInstIds+"&hourRange="+data.paramValue+"&selDateStr=${selDateStr}&dateValue=${dateValue}";
 					},
 					onLoadSuccess:function(data){
 						$("#classTime").combobox("setValue","${schooltimeInstT.hourRange}");

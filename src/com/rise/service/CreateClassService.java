@@ -48,6 +48,11 @@ public class CreateClassService
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0053\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
+	
+	public String addShortClassStudent(String param) throws Exception {
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0054\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
 
 	public String qryDataByQueryCode(String param) throws Exception 
 	{

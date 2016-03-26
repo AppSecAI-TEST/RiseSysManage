@@ -195,7 +195,7 @@
 			}
 			function backFunc()
 			{
-				window.location.href = "/sys/attend/commitMakeupPage.do?studentId=${studentId}&funcNodeId=${funcNodeId}"
+				window.location.href = "/sys/attend/commitMakeupPage.do?studentCourseId=${studentCourseId}&funcNodeId=${funcNodeId}"
 			}
 		</script>
   	</head>

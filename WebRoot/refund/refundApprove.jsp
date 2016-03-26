@@ -200,7 +200,7 @@
   								<span style="font-size: 16px; font-weight: bold;">课程${status.index + 1 }</span>
   							</td>
   							<td colspan="9" align="center">
-  								<span style="color: red; font-weight: bold;">退费提示：本课程${refundFeeDetail.courseTypeText }${refundFeeDetail.courseStateText }（${refundFeeDetail.classProgress }），赠送课外教课有使用（2/20）</span>
+  								<span style="color: red; font-weight: bold;">退费提示：本课程${refundStudentCourse.courseTypeText }${refundStudentCourse.courseStateText }（${refundStudentCourse.classProgress }）<c:if test="${not empty refundStudentCourse.giftName }">，${refundStudentCourse.giftName }</c:if></span>
   							</td>
   						</tr>
   						<tr>
@@ -455,8 +455,8 @@
 			  							<td width="35%">
 			  								<c:if test="${refundVisit.userType == 'academic' }">
 				  								<input type="radio" name="visitPersonTwo" value="academic" checked="checked" disabled="disabled"/><span>学术主管</span>
-				  								<select id="academicId" name="academicId" class="easyui-combobox" style="width: 100px; height: 25px;"
-				  									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto', disabled="disabled"
+				  								<select id="academicId" name="academicId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled"
+				  									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto', 
 		      										onLoadSuccess:function(data){if(data.length > 0) $('#academicId').combobox('setValue', ${refundVisit.visitUserId });}" 
 		      										url="<%=path %>/pubData/qryStaffList.do?post=7,8&schoolId=${obj.refundFeeObj.schoolId }">
 					        					</select>

@@ -48,7 +48,7 @@
 		  				</td>
 		  				<td align="right" width="8%"><span>账号：</span></td>
 		  				<td width="15%">
-		  					<input id="account" name="bankCard" type="text" class="easyui-textbox numberbox" validType="length[0,19]" style="width: 200px; height: 25px;"/>
+		  					<input id="bankCard" name="bankCard" type="text" class="easyui-textbox numberbox" validType="length[0,19]" style="width: 200px; height: 25px;"/>
 		  				</td>
 		  				<td align="right" width="10%"><span>退费总金额：</span></td>
 		  				<td width="15%">
@@ -142,7 +142,7 @@
   								<span style="font-size: 16px; font-weight: bold;">课程${status.index + 1 }</span>
   							</td>
   							<td colspan="9" align="center">
-  								<span style="color: red; font-weight: bold;">退费提示：本课程${refundStudentCourse.courseTypeText }${refundStudentCourse.courseStateText }（${refundStudentCourse.classProgress }），赠送课外教课有使用（2/20）</span>
+  								<span style="color: red; font-weight: bold;">退费提示：本课程${refundStudentCourse.courseTypeText }${refundStudentCourse.courseStateText }（${refundStudentCourse.classProgress }）<c:if test="${not empty refundStudentCourse.giftName }">，${refundStudentCourse.giftName }</c:if></span>
   							</td>
   						</tr>
   						<tr>

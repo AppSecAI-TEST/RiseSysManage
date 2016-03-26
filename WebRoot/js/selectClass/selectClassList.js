@@ -145,17 +145,22 @@ $(document).ready(function() {
 	$("#selectClassBtn").click(function() {
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) {
-			var isNeedSelect = row.isNeedSelect;
-			if("Y" == isNeedSelect) {
-				var changeFlag = row.changeFlag;
-				if("N" == changeFlag) {
-					var studentCourseId = row.studentCourseId;
-					window.location.href = "/sys/selectClass/selectClass.jsp?studentCourseId="+studentCourseId;
+			var courseType = row.courseType;
+			var studentCourseId = row.studentCourseId;
+			if("001" == courseType) {
+				var isNeedSelect = row.isNeedSelect;
+				if("Y" == isNeedSelect) {
+					var changeFlag = row.changeFlag;
+					if("N" == changeFlag) {
+						window.location.href = "/sys/selectClass/selectClass.jsp?studentCourseId="+studentCourseId;
+					} else {
+						$.messager.alert('提示', "您选择的学员已申请转校，不能进行选班！");
+					}
 				} else {
-					$.messager.alert('提示', "您选择的学员已申请转校，不能进行选班！");
+					$.messager.alert('提示', "您选择的学员暂时还不需要选班！");
 				}
 			} else {
-				$.messager.alert('提示', "您选择的学员暂时还不需要选班！");
+				window.location.href = "/sys/selectClass/selectShortClass.jsp?studentCourseId="+studentCourseId;
 			}
 		} else {
 			$.messager.alert('提示', "请先选择您要选班的学员！");

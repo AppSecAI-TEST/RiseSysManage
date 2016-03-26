@@ -70,7 +70,7 @@
 							<th data-options="field:'payDate',width:100,align:'center'">缴费日期</th>
 							<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
 							<th data-options="field:'studentChannelType',width:100,align:'center'">学员来源</th>
-							<th data-options="field:'identityId',width:150,align:'center'">本人身份证号</th>
+							<th data-options="field:'identityId',width:150,align:'center'">本人证件号码</th>
 							<th data-options="field:'phone',width:150,align:'center'">联系方式</th>
 							<th data-options="field:'adviserName',width:150,align:'center'">业绩顾问</th>
 							<th data-options="field:'adviserTeacherName',width:150,align:'center'">业绩老师</th>

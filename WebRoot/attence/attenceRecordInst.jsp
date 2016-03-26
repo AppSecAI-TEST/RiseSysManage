@@ -11,6 +11,7 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
+		<fmt:parseDate value="${classSchooltime}" var="attendDate" pattern="yyyy-MM-dd" />
 		<script type="text/javascript">
 			$(document).ready(function(){
 				ajaxLoadEnd();
@@ -45,6 +46,54 @@
 					},
 					onSelect:function(data){
 						$("#classLessonHour").textbox("setValue",data.param4);
+						var classAttendIds = "${classAttendIdArr}";
+						var schooltimeInstIds = "${schooltimeInstIdArr}";
+						var classAttendIdArr = classAttendIds.split("~");
+						var attendArr = [];
+						var schooltimeArr = [];
+						if(schooltimeInstIds != "")
+						{
+							var schooltimeInstIdArr = schooltimeInstIds.split("~");
+							for(var i = 0,n = schooltimeInstIdArr.length;i < n;i++)
+							{
+								var objArr = schooltimeInstIdArr[i].split(";");
+								schooltimeArr.push(objArr[0]);
+							}
+						}
+						for(var i = 0,n = classAttendIdArr.length;i < n;i++)
+						{
+							var objArr = classAttendIdArr[i].split(";");
+							attendArr.push(objArr[0]);
+						}
+						if(classAttendIds != "")
+						{
+							for(var i = 0,n = classAttendIdArr.length;i < n;i++)
+							{
+								var objArr = classAttendIdArr[i].split(";");
+								if(objArr.length > 1 && objArr[1]==data.paramValue)
+								{
+									ajaxLoading("正在处理，请稍待。。。");
+									window.location.href = "/sys/attend/getUpdateAttenceRecord.do?funcNodeId=${funcNodeId}&classAttendId="+objArr[0]+"&classAttendIds="+attendArr.join("~")+"&schooltimeInstIds="+schooltimeArr.join("~")+"&selDateStr=<fmt:formatDate value='${attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${attendDate}' pattern='dd' />";
+									return ;
+								}
+							}
+						}
+						if(schooltimeInstIds != "")
+						{
+							var schooltimeInstIdArr = schooltimeInstIds.split("~");
+							for(var i = 0,n = schooltimeInstIdArr.length;i < n;i++)
+							{
+								var objArr = schooltimeInstIdArr[i].split(";");
+								if(objArr.length > 1 && objArr[1]==data.paramValue)
+								{
+									ajaxLoading("正在处理，请稍待。。。");
+									window.location.href = "/sys/attend/getAttenceRecord.do?funcNodeId=${funcNodeId}&schooltimeInstId="+objArr[0]+"&classAttendIds="+classAttendIds+"&schooltimeInstIds="+schooltimeInstIds+"&selDateStr=<fmt:formatDate value='${attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${attendDate}' pattern='dd' />";
+									return ;
+								}
+							}
+						}
+						ajaxLoading("正在处理，请稍待。。。");
+						window.location.href = "/sys/attend/getAttenceRecordInst.do?funcNodeId=${funcNodeId}&classInstId=${classInstT.classInstId}&classAttendIds="+classAttendIds+"&schooltimeInstIds="+schooltimeInstIds+"&hourRange="+data.paramValue+"&selDateStr=<fmt:formatDate value='${attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${attendDate}' pattern='dd' />";
 					}
 				});
 				$("#classRoomId").combobox({
