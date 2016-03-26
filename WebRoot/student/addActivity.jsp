@@ -23,7 +23,7 @@
       				<tr>
       					<td align="right" width="8%"><span style="color: red;">*</span><span>活动标题：</span></td>
 	      				<td width="92%" colspan="9">
-	      					<input name="title" id="title" type="text" class="easyui-textbox validatebox" required="true" style="width: 400px; height: 25px;"/>
+	      					<input name="title" id="title" type="text" class="easyui-textbox validatebox" required="true" validType="length[0,120]" style="width: 400px; height: 25px;"/>
 	      				</td>
       				</tr>
       				<tr>
@@ -35,7 +35,7 @@
       				<tr>
       					<td align="right" width="8%"><span>获奖情况：</span></td>
 	      				<td width="92%" colspan="9">
-	      					<input name="award" id="award" type="text" class="easyui-textbox validatebox" required="true" style="width: 400px; height: 25px;"/>
+	      					<input name="award" id="award" type="text" class="easyui-textbox validatebox" required="true" validType="length[0,40]" style="width: 400px; height: 25px;"/>
 	      				</td>
       				</tr>
       				<tr id="giftModelTR">
@@ -53,7 +53,7 @@
       						<select id="amount" class="easyui-combobox" style="width: 100px; height: 25px;"></select>
       					</td>
       					<td width="210px" align="left" id="getCouponTd" style="display: none;">
-	      					<input id="giftCode" type="text" class="easyui-numberbox" style="width: 100px; height: 25px;"/>
+	      					<input id="giftCode" type="text" class="easyui-numberbox" style="width: 100px; height: 25px;" validType="length[0,25]"/>
 		        			<input id="effDate" type="text" class="easyui-datebox" style="width: 100px; height: 25px;"/>
       					</td>
       					<td align="right" width="80px"><span>是否领取：</span></td>
@@ -63,7 +63,7 @@
      	           		</td>
      	           		<td align="right" width="60px"><span>发放人：</span></td>
       	        		<td width="90px">
-      	        			<input id="granter" type="text" class="easyui-textbox validatebox" style="width: 100px; height: 25px;" disabled="disabled"/>
+      	        			<input id="granter" type="text" class="easyui-textbox validatebox" validType="length[0,25]" style="width: 100px; height: 25px;" disabled="disabled"/>
       	        		</td>
       	        		<td width="90px" align="center">
       	        			<a href="javascript:void(0)" id="addGoodsGiftBtn" class="easyui-linkbutton" id="addGiftBtn" iconCls="icon-add" style="width: 80px;" onclick="addRow()">添加</a>
@@ -83,7 +83,7 @@
       				<tr>
       					<td align="right" width="8%"><span>活动详细：</span></td>
 	      				<td width="92%" colspan="9">
-	      					<textarea rows="4" cols="122" id="remark" name="remark" class="easyui-validatebox textbox"></textarea>
+	      					<textarea rows="4" cols="122" id="remark" name="remark" class="textarea easyui-validatebox" validType="length[0,120]"></textarea>
 	      				</td>
       				</tr>
       			</table>

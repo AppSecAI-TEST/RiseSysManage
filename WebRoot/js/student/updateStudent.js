@@ -31,13 +31,13 @@ $(document).ready(function() {
     		$("#birthdayText").html(studentObj.birthday);
     		$("#birthday").datebox('setValue', studentObj.birthday);
     		$("#sexText").html(studentObj.sexVal);
-    		$("input[name='sex'][value="+studentObj.sex+"]").attr("checked", true); 
+    		$("input[name='sex'][value='"+studentObj.sex+"']").attr("checked", "checked"); 
     		$("#advisterAText").html(studentObj.advisterNameA);
     		$("#advisterBText").html(studentObj.advisterNameB);
     		$("#identityId").textbox('setValue', studentObj.identityId);
     		$("#byName").textbox('setValue', studentObj.byName);
     		$("#address").textbox('setValue', studentObj.address);
-    		$("#remark").textbox('setValue', studentObj.remark);
+    		$("#remark").val(studentObj.remark); 
     		$("#entranceDateText").html(studentObj.entranceDate);
     		$("#entranceDate").datebox('setValue', studentObj.entranceDate);
     		$("#createDateText").html(studentObj.createDate);
@@ -84,9 +84,9 @@ $(document).ready(function() {
     				content += "<td align='center'>";
     				var used = contactArray[i].used;
     				if("Y" == used) {
-    					content += "<input type='checkbox' checked='checked'/>";
+    					content += "<input type='checkbox' checked='checked' disabled='disabled'/>";
     				} else {
-    					content += "<input type='checkbox'/>";
+    					content += "<input type='checkbox' disabled='disabled'/>";
     				}
     				content += "</td>";
     				content += "<td align='center'><span>"+contactArray[i].identity+"</span></td>";
@@ -112,7 +112,7 @@ $(document).ready(function() {
     				activityTd += 1;
     			}
     		}
-        } 
+        }
 	});
 	
 	//招生顾问A的学校发生变化时执行的操作
@@ -434,59 +434,69 @@ $(document).ready(function() {
 								}
 							}
 							if(flag) {
-								var contactArray = "[";
-								if($("[name='contacts']").length > 0) {
-									$("[name='contacts']").each(function() {
-										if("add" == $(this).attr("add")) {
-											contactArray += "{identityId:\""+$(this).attr("identityId")+"\",identityType:\""+$(this).attr("identityType")+"\",name:\""+$(this).attr("contactName")+"\",phone:\""+$(this).attr("phone")+"\",relationType:\""+$(this).attr("relationType")+"\",job:\""+$(this).attr("job")+"\",used:\""+$(this).attr("used")+"\"},";
-										}
-									});
-									if(contactArray.length > 1) {
-										contactArray = contactArray.substring(0, contactArray.length - 1);
+								var contactsNo = true;
+								$("[name='contacts']").each(function() {
+									if($(this).attr("identityId") != '') {
+										contactsNo = false;
 									}
-								}
-								contactArray += "]";
-								var realSchoolArray = "[";
-								if($("[name='realSchools']").length > 0) {
-									$("[name='realSchools']").each(function() {
-										realSchoolArray += "{schoolType:\""+$(this).attr("schoolType")+"\",realSchoolName:\""+$(this).attr("realSchoolName")+"\"},";
-									});
-									realSchoolArray = realSchoolArray.substring(0, realSchoolArray.length - 1);
-								}
-								realSchoolArray += "]";
-								if(contactIds != "" && contactIds != null && contactIds != undefined && contactIds != "null") {
-									contactIds = contactIds.substring(0, contactIds.length - 1);
-								}
-								if(activityIds != "" && activityIds != null && activityIds != undefined && activityIds != "null") {
-									activityIds = activityIds.substring(0, activityIds.length - 1);
-								}
-								if(realIds != "" && realIds != null && realIds != undefined && realIds != "null") {
-									realIds = realIds.substring(0, realIds.length - 1);
-								}
-								
-								var obj = getParam();
-								obj = obj.substring(0, obj.length - 1);
-								obj += ",\"contactId\":\""+contactIds+"\",\"activityId\":\""+activityIds+"\",\"realId\":\""+realIds+"\",\"contactArray\":"+contactArray+",\"realSchoolArray\":"+realSchoolArray+",\"activityArray\":[]}";
-								obj = encodeURI(obj);
-								$.ajax({
-									url: "/sys/student/updateStudent.do",
-									data: "param=" + obj,
-									dataType: "json",
-									async: true,
-									beforeSend: function()
-									{
-										$.messager.progress({title : '修改档案', msg : '正在修改学员档案，请稍等……'});
-									},
-									success: function (data) {
-										$.messager.progress('close'); 
-										var flag = data.flag
-										if(flag) {
-											$.messager.alert('提示', "修改学员档案成功！", "info", function() {back();});
-										} else {
-											$.messager.alert('提示', "修改学员档案失败！");
-										}
-									} 
 								});
+								if((identityId == null || identityId == "" || identityId == undefined) && contactsNo) {
+									$.messager.alert({title : '学员注册', msg : '学员证件号码和联系人证件号码不能同时为空，至少填写一项'});
+									return false;
+								} else {
+									var contactArray = "[";
+									if($("[name='contacts']").length > 0) {
+										$("[name='contacts']").each(function() {
+											if("add" == $(this).attr("add")) {
+												contactArray += "{identityId:\""+$(this).attr("identityId")+"\",identityType:\""+$(this).attr("identityType")+"\",name:\""+$(this).attr("contactName")+"\",phone:\""+$(this).attr("phone")+"\",relationType:\""+$(this).attr("relationType")+"\",job:\""+$(this).attr("job")+"\",used:\""+$(this).attr("used")+"\"},";
+											}
+										});
+										if(contactArray.length > 1) {
+											contactArray = contactArray.substring(0, contactArray.length - 1);
+										}
+									}
+									contactArray += "]";
+									var realSchoolArray = "[";
+									if($("[name='realSchools']").length > 0) {
+										$("[name='realSchools']").each(function() {
+											realSchoolArray += "{schoolType:\""+$(this).attr("schoolType")+"\",realSchoolName:\""+$(this).attr("realSchoolName")+"\"},";
+										});
+										realSchoolArray = realSchoolArray.substring(0, realSchoolArray.length - 1);
+									}
+									realSchoolArray += "]";
+									if(contactIds != "" && contactIds != null && contactIds != undefined && contactIds != "null") {
+										contactIds = contactIds.substring(0, contactIds.length - 1);
+									}
+									if(activityIds != "" && activityIds != null && activityIds != undefined && activityIds != "null") {
+										activityIds = activityIds.substring(0, activityIds.length - 1);
+									}
+									if(realIds != "" && realIds != null && realIds != undefined && realIds != "null") {
+										realIds = realIds.substring(0, realIds.length - 1);
+									}
+									var obj = getParam();
+									obj = obj.substring(0, obj.length - 1);
+									obj += ",\"contactId\":\""+contactIds+"\",\"activityId\":\""+activityIds+"\",\"realId\":\""+realIds+"\",\"contactArray\":"+contactArray+",\"realSchoolArray\":"+realSchoolArray+",\"activityArray\":[]}";
+									obj = encodeURI(obj);
+									$.ajax({
+										url: "/sys/student/updateStudent.do",
+										data: "param=" + obj,
+										dataType: "json",
+										async: true,
+										beforeSend: function()
+										{
+											$.messager.progress({title : '修改档案', msg : '正在修改学员档案，请稍等……'});
+										},
+										success: function (data) {
+											$.messager.progress('close'); 
+											var flag = data.flag
+											if(flag) {
+												$.messager.alert('提示', "修改学员档案成功！", "info", function() {back();});
+											} else {
+												$.messager.alert('提示', "修改学员档案失败！");
+											}
+										} 
+									});
+								}
 							} else {
 								$.messager.alert('提示', "出生日期需要与本人身份证号码中的出生日期一致！");
 							}
@@ -548,6 +558,8 @@ $(document).ready(function() {
     	    					flag = false;
     	    				}
     	    			});
+    	    		} else {
+    	    			flag = false;
     	    		}
     			}
     			if(flag) {
@@ -591,10 +603,10 @@ $(document).ready(function() {
     								content += "<td align='center'>";
     								var contactUsed = "N";
     								if(used) {
-    									content += "<input type='checkbox' checked='checked'/>";
+    									content += "<input type='checkbox' checked='checked' disabled='disabled'/>";
     									contactUsed = "Y";
     								} else {
-    									content += "<input type='checkbox'/>";
+    									content += "<input type='checkbox' disabled='disabled'/>";
     								}
     								content += "</td>";
     								if(contactIdentityId != "" && contactIdentityId != null && contactIdentityId != undefined) {

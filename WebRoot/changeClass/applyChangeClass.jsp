@@ -78,7 +78,7 @@
   					<tr>
   						<td align="right"><span>转班情况说明：</span></td>
   						<td colspan="5">
-  							<textarea rows="6" cols="122" id="remark" name="remark" class="easyui-validatebox textbox"></textarea>
+  							<textarea rows="6" cols="122" id="remark" name="remark" class="textarea easyui-validatebox" validType="length[0,120]"></textarea>
   						</td>
   					</tr>
   				</table>

@@ -40,18 +40,18 @@
 	  					</td>
 	  					<td align="right" width="8%"><span>退费银行：</span></td>
 		  				<td width="10%">
-		  					<input id="bankName" name="bankName" type="text" class="easyui-textbox" style="width: 120px; height: 25px;"/>
+		  					<input id="bankName" name="bankName" type="text" class="easyui-textbox" validType="length[0,10]" style="width: 120px; height: 25px;"/>
 		  				</td>
 		  				<td align="right" width="8%"><span>账户名：</span></td>
 		  				<td width="10%">
-		  					<input id="account" name="account" type="text" class="easyui-textbox" style="width: 120px; height: 25px;"/>
+		  					<input id="account" name="account" type="text" class="easyui-textbox" validType="length[0,10]" style="width: 120px; height: 25px;"/>
 		  				</td>
 		  				<td align="right" width="8%"><span>账号：</span></td>
-		  				<td width="15%">
+		  				<td width="20%">
 		  					<input id="bankCard" name="bankCard" type="text" class="easyui-textbox numberbox" validType="length[0,19]" style="width: 200px; height: 25px;"/>
 		  				</td>
 		  				<td align="right" width="10%"><span>退费总金额：</span></td>
-		  				<td width="15%">
+		  				<td width="10%">
 		  					<span id="totalAmountText"></span>
 		  					<input type="hidden" id="totalAmount" name="totalAmount"/>
 		  				</td>
@@ -64,12 +64,12 @@
 	  						&nbsp;&nbsp;<input type="radio" name="refundRule" value="SPECIAL_ADJUST"/><span>特殊调整</span>
 	  					</td>
 	  					<td align="right" width="10%"><span>是否学术退费：</span></td>
-	  					<td colspan="2" width="23%">
+	  					<td colspan="2" width="28%">
 	  						<input type="radio" name="isAcademic" value="Y"/><span>学术退费</span>
 	  						&nbsp;&nbsp;<input type="radio" name="isAcademic" value="N"/><span>非学术退费</span>
 	  					</td>
 	  					<td align="right" width="10%"><span>财务确认金额：</span></td>
-	  					<td width="15%">
+	  					<td width="10%">
 	  						<span id="realAmountText"></span>
 	  						<input type="hidden" id="realAmount" name="realAmount"/>
 	  					</td>
@@ -78,15 +78,15 @@
 	  					<td align="right" width="8%"><span>退费原因：</span></td>
 	  					<td colspan="9" width="92%">
 	  						<input type="radio" name="refundReason" value="school"/><span>校方原因</span>
-	  						<select id="schoolReasonType" name="schoolReasonType" class="easyui-combobox" style="width: 100px; height: 25px;">
+	  						<select id="schoolReasonType" name="schoolReasonType" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled" editable="false">
 		        			</select>
-		        			<select id="schoolReason" name="schoolReason" class="easyui-combobox" style="width: 150px; height: 25px;">
+		        			<select id="schoolReason" name="schoolReason" class="easyui-combobox" style="width: 150px; height: 25px;" disabled="disabled" editable="false">
 		        			</select>
 	  						&nbsp;&nbsp;<input type="radio" name="refundReason" value="customer"/><span>客户原因</span>
-	  						<select id="customerReason" name="customerReason" class="easyui-combobox" style="width: 120px; height: 25px;">
+	  						<select id="customerReason" name="customerReason" class="easyui-combobox" style="width: 120px; height: 25px;" disabled="disabled" editable="false">
 		        			</select>
 	  						&nbsp;&nbsp;<input type="radio" name="refundReason" value="other"/><span>其他原因</span>
-	  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" style="width: 420px; height: 25px;" />
+	  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" validType="length[0,50]" style="width: 380px; height: 25px;" disabled="disabled"/>
 	  					</td>
 	  				</tr>
 	  				<tr>
@@ -101,7 +101,7 @@
 	  				<tr>
 	  					<td align="right" width="8%"><span>退费备注：</span></td>
   						<td colspan="9" width="92%">
-  							<textarea rows="6" cols="122" id="remark" name="remark" class="easyui-validatebox textbox"></textarea>
+  							<textarea rows="6" cols="122" id="remark" name="remark" class="textarea easyui-validatebox" validType="length[0,120]"></textarea>
   						</td>
 	  				</tr>
   				</table>
@@ -152,12 +152,12 @@
   							<td width="8%"><span>${refundStudentCourse.classType }</span></td>
   							<td align="right" width="8%"><span>退费类型：</span></td>
   							<td width="7%">
-  								<select id="refundType${refundStudentCourse.studentCourseId }" name="refundType" class="easyui-combobox" style="width: 100px; height: 25px;" required="true">
+  								<select id="refundType${refundStudentCourse.studentCourseId }" name="refundType" class="easyui-combobox" style="width: 100px; height: 25px;" required="true" editable="false">
 		        				</select>
   							</td>
   							<td align="right" width="8%"><span>渠道来源：</span></td>
   							<td width="41%" colspan="3">
-  								<select id="refundChannel${refundStudentCourse.studentCourseId }" name="refundChannel" class="easyui-combobox" style="width: 100px; height: 25px;">
+  								<select id="refundChannel${refundStudentCourse.studentCourseId }" name="refundChannel" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 		        				</select>
   							</td>
   						</tr>
@@ -338,10 +338,10 @@
   							<td align="right" width="10%"><span>回访人员：</span></td>
   							<td width="35%">
   								<input type="radio" name="visitPersonOne" value="teacher"/><span>老师</span>
-  								<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;">
+  								<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 		        				</select>
   								<input type="radio" name="visitPersonOne" value="adviser"/><span>课程顾问</span>
-  								<select id="careAdviserId" name="careAdviserId" class="easyui-combobox" style="width: 100px; height: 25px;">
+  								<select id="careAdviserId" name="careAdviserId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 		        				</select>
   							</td>
   							<td align="right" width="10%"><span>回访时间：</span></td>
@@ -352,7 +352,7 @@
   						<tr>
   							<td align="right" width="10%"><span>回访记录：</span></td>
   							<td colspan="3" width="90%">
-  								<textarea rows="6" cols="122" id="teacherOrAdviserVisitRemark" name="teacherOrAdviserVisitRemark" class="easyui-validatebox textbox"></textarea>
+  								<textarea rows="6" cols="122" id="teacherOrAdviserVisitRemark" name="teacherOrAdviserVisitRemark" class="textarea easyui-validatebox" validType="length[0,120]"></textarea>
   							</td>
   						</tr>
   					</table>
@@ -364,10 +364,10 @@
   							<td align="right" width="10%"><span>回访人员：</span></td>
   							<td width="35%">
   								<input type="radio" name="visitPersonTwo" value="academic"/><span>学术主管</span>
-  								<select id="academicId" name="academicId" class="easyui-combobox" style="width: 100px; height: 25px;">
+  								<select id="academicId" name="academicId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 		        				</select>
   								<input type="radio" name="visitPersonTwo" value="sales"/><span>销售主管</span>
-  								<select id="salesId" name="salesId" class="easyui-combobox" style="width: 100px; height: 25px;">
+  								<select id="salesId" name="salesId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 		        				</select>
   							</td>
   							<td align="right" width="10%"><span>回访时间：</span></td>
@@ -378,7 +378,7 @@
   						<tr>
   							<td align="right" width="10%"><span>回访记录：</span></td>
   							<td colspan="3" width="90%">
-  								<textarea rows="6" cols="122" id="academicOrSalesVisitRemark" name="academicOrSalesVisitRemark" class="easyui-validatebox textbox"></textarea>
+  								<textarea rows="6" cols="122" id="academicOrSalesVisitRemark" name="academicOrSalesVisitRemark" class="textarea easyui-validatebox" validType="length[0,120]"></textarea>
   							</td>
   						</tr>
   					</table>
@@ -389,7 +389,7 @@
   						<tr>
   							<td align="right" width="10%"><span>回访人员：</span></td>
   							<td width="8%">
-  								<select id="headmasterId" name="headmasterId" class="easyui-combobox" style="width: 100px; height: 25px;"
+  								<select id="headmasterId" name="headmasterId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
       								url="<%=path %>/pubData/qryStaffList.do?post=22,23&schoolId=${obj.refundObj.schoolId }">
 		        				</select>
@@ -402,7 +402,7 @@
   						<tr>
   							<td align="right" width="10%"><span>回访记录：</span></td>
   							<td colspan="3" width="90%">
-  								<textarea rows="6" cols="122" id="headmasterVisitRemark" name="headmasterVisitRemark" class="easyui-validatebox textbox"></textarea>
+  								<textarea rows="6" cols="122" id="headmasterVisitRemark" name="headmasterVisitRemark" class="textarea easyui-validatebox" validType="length[0,120]"></textarea>
   							</td>
   						</tr>
   					</table>

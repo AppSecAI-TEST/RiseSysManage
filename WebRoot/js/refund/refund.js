@@ -219,13 +219,19 @@ $(document).ready(function() {
 	$("#refundApprove").click(function() {
 		var row = $('#approve_list_data').datagrid('getSelected');
 		if (row) {
-			var courseType = row.courseType;
-			var refundFeeId = row.refundFeeId;
-			var processInstId = row.processInstanceId;
-			if (!isApprove(processInstId)) {
-				return false;
+			var tacheState = row.tacheState;
+			if("001" == tacheState || "002" == tacheState) {
+				var courseType = row.courseType;
+				var refundFeeId = row.refundFeeId;
+				var processInstId = row.processInstanceId;
+				if (!isApprove(processInstId)) {
+					return false;
+				}
+				window.location.href = "/sys/refund/qryApproveRefund.do?refundFeeId=" + refundFeeId + "&courseType=" + courseType + "&type=approve";
+			} else {
+				var refundState = row.refundState;
+				$.messager.alert('提示', "该退费申请单" + refundState + "，不能审批！");
 			}
-			window.location.href = "/sys/refund/qryApproveRefund.do?refundFeeId=" + refundFeeId + "&courseType=" + courseType + "&type=approve";
 		} else {
 			$.messager.alert('提示', "请先选择您要审批的退费申请！");
 		}

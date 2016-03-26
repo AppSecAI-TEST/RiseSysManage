@@ -61,15 +61,15 @@
 	  					</td>
 	  					<td align="right" width="8%"><span>退费银行：</span></td>
 		  				<td width="10%">
-		  					<input id="bankName" type="text" class="easyui-textbox" style="width: 120px; height: 25px;" value="${obj.refundFeeObj.bankName }"/>
+		  					<input id="bankName" type="text" class="easyui-textbox" style="width: 120px; height: 25px;" value="${obj.refundFeeObj.bankName }" disabled="disabled"/>
 		  				</td>
 		  				<td align="right" width="8%"><span>账户名：</span></td>
 		  				<td width="10%">
-		  					<input id="account" type="text" class="easyui-textbox" style="width: 120px; height: 25px;" value="${obj.refundFeeObj.account }"/>
+		  					<input id="account" type="text" class="easyui-textbox" style="width: 120px; height: 25px;" value="${obj.refundFeeObj.account }" disabled="disabled"/>
 		  				</td>
 		  				<td align="right" width="8%"><span>账号：</span></td>
 		  				<td width="15%">
-		  					<input id="bankCard" type="text" class="easyui-textbox" style="width: 180px; height: 25px;" value="${obj.refundFeeObj.bankCard }"/>
+		  					<input id="bankCard" type="text" class="easyui-textbox" style="width: 180px; height: 25px;" value="${obj.refundFeeObj.bankCard }" disabled="disabled"/>
 		  				</td>
 		  				<td align="right" width="10%"><span>退费总金额：</span></td>
 		  				<td width="15%">
@@ -118,7 +118,7 @@
 		  						<select id="customerReason" name="customerReason" class="easyui-combobox" style="width: 120px; height: 25px;" disabled="disabled">
 			        			</select>
 		  						&nbsp;&nbsp;<input type="radio" name="refundReason" value="other" disabled="disabled"/><span>其他原因</span>
-		  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" style="width: 420px; height: 25px;" readonly="readonly" disabled="disabled"/>
+		  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" style="width: 380px; height: 25px;" readonly="readonly" disabled="disabled"/>
 	  						</c:if>
 	  						<c:if test="${not empty obj.refundFeeObj.customerReason }">
 	  							<input type="radio" name="refundReason" value="school" disabled="disabled"/><span>校方原因</span>
@@ -133,7 +133,7 @@
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=CUSTOMER_REASON">
 			        			</select>
 			        			&nbsp;&nbsp;<input type="radio" name="refundReason" value="other" disabled="disabled"/><span>其他原因</span>
-		  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" style="width: 420px; height: 25px;" readonly="readonly" disabled="disabled"/>
+		  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" style="width: 380px; height: 25px;" readonly="readonly" disabled="disabled"/>
 	  						</c:if>
 	  						<c:if test="${not empty obj.refundFeeObj.otherReason }">
 	  							<input type="radio" name="refundReason" value="school" disabled="disabled"/><span>校方原因</span>
@@ -145,7 +145,7 @@
 		  						<select id="customerReason" name="customerReason" class="easyui-combobox" style="width: 120px; height: 25px;" disabled="disabled">
 			        			</select>
 			        			&nbsp;&nbsp;<input type="radio" name="refundReason" value="other" disabled="disabled"/><span>其他原因</span>
-		  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" style="width: 420px; height: 25px;" value="${obj.refundFeeObj.otherReason }" readonly="readonly" disabled="disabled"/>
+		  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" style="width: 380px; height: 25px;" value="${obj.refundFeeObj.otherReason }" readonly="readonly" disabled="disabled"/>
 	  						</c:if>
 	  					</td>
 	  				</tr>
@@ -162,7 +162,7 @@
 	  				<tr>
 	  					<td align="right" width="8%"> <span>退费备注：</span></td>
   						<td colspan="9" width="92%">
-  							<textarea rows="2" cols="122" id="remark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled">${obj.refundFeeObj.remark }</textarea>
+  							<textarea rows="2" cols="122" id="remark" class="textarea easyui-validatebox" validType="length[0,120]" readonly="readonly" disabled="disabled">${obj.refundFeeObj.remark }</textarea>
   						</td>
 	  				</tr>
 	  				<tr>
@@ -230,7 +230,7 @@
 				  				<tr>
 				  					<td align="right" width="8%"><span>审批备注：</span></td>
 				  					<td width="92%" colspan="5">
-				  						<textarea rows="2" cols="122" id="financialRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+				  						<textarea rows="2" cols="122" id="financialRemark" class="textarea easyui-validatebox" validType="length[0,120]" readonly="readonly" disabled="disabled"></textarea>
 				  					</td>
 				  				</tr>
 		  					</table>
@@ -251,7 +251,7 @@
 				  				<tr>
 				  					<td align="right" width="8%"><span>审批备注：</span></td>
 				  					<td width="92%" colspan="5">
-				  						<textarea rows="2" cols="122" id="chiefFinancialOfficerRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+				  						<textarea rows="2" cols="122" id="chiefFinancialOfficerRemark" class="textarea easyui-validatebox" validType="length[0,120]" readonly="readonly" disabled="disabled"></textarea>
 				  					</td>
 				  				</tr>
 		  					</table>
@@ -275,7 +275,7 @@
 				  				<tr>
 				  					<td align="right" width="8%"><span>备注：</span></td>
 				  					<td width="92%" colspan="3">
-				  						<textarea rows="2" cols="122" id="headquartersFinancialRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+				  						<textarea rows="2" cols="122" id="headquartersFinancialRemark" class="textarea easyui-validatebox" validType="length[0,120]" readonly="readonly" disabled="disabled"></textarea>
 				  					</td>
 				  				</tr>
 		  					</table>
@@ -289,7 +289,7 @@
 			  			<tr>
 			  				<td align="right" width="10%"><span>退费取消备注：</span></td>
 			  				<td width="90%">
-			  					<textarea rows="4" cols="120" id="cancelRemark" name="cancelRemark" class="easyui-validatebox textbox"></textarea>
+			  					<textarea rows="4" cols="120" id="cancelRemark" name="cancelRemark" class="textarea easyui-validatebox" validType="length[0,120]"></textarea>
 			  				</td>
 			  			</tr>
 	  				</table>
