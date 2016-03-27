@@ -1184,7 +1184,7 @@ $("#submitBtn").click(function() {
 				var stageName =course.stageId;
 				var oldClassType=course.classType;
 				
-				if(studentCourseId==course.studentCourseId  && oldStageId==stageName && classType==oldClassType && oldFeeType==feeType)
+				if(studentCourseId==course.studentCourseId  && oldStageId==stageName && oldFeeType==feeType)
 				{
 					continue;
 				}

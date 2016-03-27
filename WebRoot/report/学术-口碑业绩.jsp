@@ -77,7 +77,7 @@
 							
 								var d1 = new Date(start.getFullYear(), start.getMonth(),start.getDate());
 								var d2 = new Date(start.getFullYear(), start.getMonth(),new Date(start.getFullYear(), start.getMonth()+1,0).getDate());
-								return d1<date && date<=d2;
+								return d1<=date && date<=d2;
 							
 						},
 						year:start.getFullYear(),
