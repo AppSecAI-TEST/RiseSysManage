@@ -23,7 +23,7 @@
       				<tr>
       					<td align="right" width="8%"><span style="color: red;">*</span><span>活动标题：</span></td>
 	      				<td width="92%" colspan="9">
-	      					<input name="title" id="title" type="text" class="easyui-textbox validatebox" required="true" validType="length[0,120]" style="width: 400px; height: 25px;"/>
+	      					<input name="title" id="title" type="text" class="easyui-textbox validatebox" required="true" validType="length[0,30]" style="width: 400px; height: 25px;"/>
 	      				</td>
       				</tr>
       				<tr>
@@ -35,7 +35,7 @@
       				<tr>
       					<td align="right" width="8%"><span>获奖情况：</span></td>
 	      				<td width="92%" colspan="9">
-	      					<input name="award" id="award" type="text" class="easyui-textbox validatebox" required="true" validType="length[0,40]" style="width: 400px; height: 25px;"/>
+	      					<input name="award" id="award" type="text" class="easyui-textbox validatebox" required="true" validType="length[0,50]" style="width: 400px; height: 25px;"/>
 	      				</td>
       				</tr>
       				<tr id="giftModelTR">
