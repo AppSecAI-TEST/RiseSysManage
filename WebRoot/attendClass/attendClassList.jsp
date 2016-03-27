@@ -51,9 +51,9 @@
 					</td>
 					<td align="right" style="min-width: 70px;"><span>课时进度 ：</span></td>
 					<td style="min-width: 117px;">
-						<input name="minClassProgress" id="minClassProgress" type="text" class="easyui-textbox" style="width: 43px; height: 25px;"/>
+						<input name="minClassProgress" id="minClassProgress" type="text" class="easyui-textbox numberbox" style="width: 47px; height: 25px;"/>
 						<span style="display: inline-block; text-align: center; width: 14px;">至</span>
-						<input name="maxClassProgress" id="maxClassProgress" type="text" class="easyui-textbox" style="width: 43px; height: 25px;"/>
+						<input name="maxClassProgress" id="maxClassProgress" type="text" class="easyui-textbox numberbox" style="width: 47px; height: 25px;"/>
 					</td>
 					<td align="right" style="min-width: 70px;"><span>升学率 ：</span></td>
 					<td style="min-width: 130px;">
@@ -64,9 +64,9 @@
 					</td>
 					<td align="right" style="min-width: 70px;"><span>在读人数 ：</span></td>
 					<td style="min-width: 117px;">
-						<input name="minClassStudentNum" id="minClassStudentNum" type="text" class="easyui-textbox" style="width: 43px; height: 25px;"/>
+						<input name="minClassStudentNum" id="minClassStudentNum" type="text" class="easyui-textbox numberbox" style="width: 47px; height: 25px;"/>
 						<span style="display: inline-block; text-align: center; width: 14px;">至</span>
-						<input name="maxClassStudentNum" id="maxClassStudentNum" type="text" class="easyui-textbox" style="width: 43px; height: 25px;"/>
+						<input name="maxClassStudentNum" id="maxClassStudentNum" type="text" class="easyui-textbox numberbox" style="width: 47px; height: 25px;"/>
 					</td>
 					<td colspan="2">&nbsp;</td>
   				</tr>
@@ -92,9 +92,9 @@
 					</td>
 					<td align="right" style="min-width: 70px;"><span>开班人数：</span></td>
 					<td style="min-width: 117px;">
-						<input name="minOpenClassNum" id="minOpenClassNum" type="text" class="easyui-textbox" style="width: 43px; height: 25px;"/>
+						<input name="minOpenClassNum" id="minOpenClassNum" type="text" class="easyui-textbox numberbox" style="width: 47px; height: 25px;"/>
 						<span style="display: inline-block; text-align: center; width: 14px;">至</span>
-						<input name="maxOpenClassNum" id="maxOpenClassNum" type="text" class="easyui-textbox" style="width: 43px; height: 25px;"/>
+						<input name="maxOpenClassNum" id="maxOpenClassNum" type="text" class="easyui-textbox numberbox" style="width: 47px; height: 25px;"/>
 					</td>
 					<td align="center" colspan="2">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1020">查询</a>

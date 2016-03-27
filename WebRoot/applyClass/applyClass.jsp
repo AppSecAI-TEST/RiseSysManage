@@ -70,8 +70,8 @@
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApprove" name="endTimeApprove" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 							<td align="left">
-								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:80px; height: 25px;" id="qryBtn" funcNodeId="1006">查询</a>
-								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px; height: 25px;" id="reset">重置</a>
+								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1006">查询</a>
+								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 							</td>
 			  			</tr>
 			  		</table>
@@ -110,31 +110,41 @@
   				<form id="qryApproveFm">
   					<table class="search_tab">
 		  				<tr>
-		  					<td align="right" style="width: 80px;"><span>校区：</span></td>
+		  					<td align="right" style="min-width: 60px"><span>校区：</span></td>
 			  				<td style="width: 100px;">
 								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 				        		</select>
 							</td>
-							<td align="right" style="width: 80px;"><span>放班申请时间：</span></td>
-			  				<td style="width: 225px;">
+							<td align="right" style="min-width: 80px"><span>放班审批状态：</span></td>
+							<td>
+								<select id="approveState" name="approveState" class="easyui-combobox" style="width: 100px; height: 25px;"
+									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
+			      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=CREATE_CLASS_T&codeType=CREATE_CLASS_APPROVE_STATE">
+				        		</select>
+							</td>
+							<td align="right" style="min-width: 80px;"><span>放班申请时间：</span></td>
+			  				<td style="width: 210px;">
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeApproveApply" name="startTimeApproveApply" data-options="formatter:myformatter, parser:myparser"/>
 								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApproveApply" name="endTimeApproveApply" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
-							<td align="right" style="width: 100px;"><span>放班审批时间：</span></td>
-			  				<td>
+							<td align="right" style="min-width: 80px;"><span>放班审批时间：</span></td>
+			  				<td width="210px">
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeApplyApprove" name="startTimeApplyApprove" data-options="formatter:myformatter, parser:myparser"/>
 								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApplyApprove" name="endTimeApplyApprove" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 		  				</tr>
 		  				<tr>
-		  					<td align="right"><span>放班审批状态：</span></td>
-							<td>
-								<select id="approveState" name="approveState" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
-			      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=CREATE_CLASS_T&codeType=CREATE_CLASS_APPROVE_STATE">
+		  					<td align="right"><span>课程阶段：</span></td>
+							<td style="width: 100px;">
+								<select id="approveStageId" name="approveStageId" class="easyui-combobox" style="width: 100px; height: 25px;"
+									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
+				      				url="<%=path %>/pubData/qryStage.do">
 				        		</select>
+							</td>
+							<td colspan="2">
+								&nbsp;&nbsp;<span>查看我的审批：</span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name=""/>
 							</td>
 							<td align="right"><span>取消申请时间：</span></td>
 		  					<td>
@@ -150,17 +160,10 @@
 							</td>
 		  				</tr>
 		  				<tr>
-		  					<td align="right"><span>课程阶段：</span></td>
-							<td>
-								<select id="approveStageId" name="approveStageId" class="easyui-combobox" style="width: 100px; height: 25px;"
-									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
-				      				url="<%=path %>/pubData/qryStage.do">
-				        		</select>
-							</td>
-							<td align="right"><input type="checkbox" name=""/><span>查看我的审批</span></td>
-		  					<td align="left">
+		  					<td align="right" colspan="8">
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryApproveBtn" funcNodeId="1007">查询</a>
-								&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="resetApprove">重置</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="resetApprove">重置</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							</td>
 		  				</tr>
 		  			</table>

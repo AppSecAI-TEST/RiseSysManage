@@ -29,7 +29,6 @@ $(document).ready(function() {
     		if(data.length > 0) {
     			$("#schoolId").combobox("setValue", data[0].schoolId);
     		}
-    		$("#qryBtn").click();
     	},
     	onChange : function(n, o) {
     		$("#teacherId").combobox({

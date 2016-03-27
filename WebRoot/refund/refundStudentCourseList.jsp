@@ -48,17 +48,12 @@
 						<input name="phone" id="phone" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 					</td>
 					<td align="right"><span>课程类型：</span></td>
-					<td>
+					<td colspan="3">
 						<select id="courseType" name="courseType" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        </select>
 				        <select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;">
 		        		</select>
 		        	</td>
-		        	<td colspan="2" align="center">
-  						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1024">查询</a>
-						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
-  					</td>
-		        	
   				</tr>
   				<tr>
   					<td align="right"><span>业绩老师：</span></td>
@@ -67,7 +62,7 @@
 				       	</select>
 					</td>
   					<td align="right"><span>课程状态：</span></td>
-  					<td colspan="5">
+  					<td colspan="3">
   						<input type="checkbox" name="courseState" value="'001'"/><span>未定班</span>&nbsp;
 						<input type="checkbox" name="courseState" value="'002'"/><span>已定班</span>&nbsp;
 						<input type="checkbox" name="courseState" value="'003'"/><span>在读</span>&nbsp;
@@ -76,11 +71,15 @@
 						<input type="checkbox" name="courseState" value="'006'"/><span>转班</span>&nbsp;
 						<input type="checkbox" name="courseState" value="'007'"/><span>转校</span>&nbsp;
   					</td>
+  					<td colspan="2" align="right">
+  						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1024">查询</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  					</td>
   				</tr>
   			</table>
   		</form>
 		  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" 
-		  		url="<%=path %>/pubData/qryDataListByPage.do?funcNodeId=1024" 
 		  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 				<thead>
 					<tr>

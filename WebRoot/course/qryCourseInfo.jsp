@@ -36,11 +36,9 @@
 	  						<input class="easyui-textbox" name="phone" id="phone" style="width:120px; height: 25px;" />
 	  					</td>
 	  					<td align="right" style="min-width: 70px;"><span>缴费日期：</span></td>
-			  			<td style="min-width: 100px;">
+			  			<td style="min-width: 210px;">
 							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimePay" name="startTimePay" editable="false" data-options="formatter:myformatter, parser:myparser"/>
-						</td>
-						<td align="center"><span>至</span></td>
-						<td style="min-width: 100px;">
+							至
 							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimePay" name="endTimePay" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
 	  				</tr>
@@ -65,13 +63,11 @@
 		        			</select>
 	  					</td>
 	  					<td align="right" style="min-width: 70px;"><span>退费时间：</span></td>
-	  					<td style="min-width: 100px;">
+	  					<td style="min-width: 210px;">
 	  						<input class="easyui-datebox" name="startTimeRefund" id="startTimeRefund" style="width:100px; height: 25px;" editable="false"/>
-	  					</td>
-	  					<td align="center"><span>至</span></td>
-						<td style="min-width: 100px;">
+	  						至
 							<input class="easyui-datebox" name="endTimeRefund" id="endTimeRefund" style="width:100px; height: 25px;" editable="false"/>
-						</td>
+	  					</td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" style="min-width: 70px;"><span>课程状态：</span></td>
@@ -94,18 +90,16 @@
 	  						</select>
 	  					</td>
 	  					<td align="right" style="min-width: 70px;"><span>结课时间：</span></td>
-	  					<td style="min-width: 100px;">
+	  					<td style="min-width: 210px;">
 	  						<input class="easyui-datebox" name="startTimeFinish" id="startTimeFinish" style="width:100px; height: 25px;" editable="false"/>
+	  						至
+	  						<input class="easyui-datebox" name="endTimeFinish" id="endTimeFinish" style="width:100px; height: 25px;" editable="false"/>
 	  					</td>
-	  					<td align="center" width="10px"><span>至</span></td>
-						<td style="min-width: 100px;">
-							<input class="easyui-datebox" name="endTimeFinish" id="endTimeFinish" style="width:100px; height: 25px;" editable="false"/>
-						</td>
 	  				</tr>
 	  				<tr>
-	  					<td colspan="12" align="center">
+	  					<td colspan="12" align="right">
 	  						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="5002">查询</a>
-							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
+							&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>&nbsp;&nbsp;
 	  					</td>
 	  				</tr>
 	  			</table>

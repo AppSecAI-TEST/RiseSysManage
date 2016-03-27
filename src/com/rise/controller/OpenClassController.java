@@ -172,4 +172,22 @@ public class OpenClassController
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/isExcOpen.do")
+	public void isExcOpen(String classInstId, String staffId, HttpServletResponse response) {
+		PrintWriter out = null;
+		try {
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = openClassService.isExcOpen(classInstId, staffId);
+			log.error(retVal);
+			out.write(retVal);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(out != null) {
+				out.close();
+			}
+		}
+	}
 }

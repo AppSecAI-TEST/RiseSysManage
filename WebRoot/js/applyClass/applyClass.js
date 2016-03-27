@@ -1,14 +1,14 @@
 $(document).ready(function() {
-	$("#tt").tabs({
-		onSelect: function (title) {
-			var src = "";
-			if(title == "放班班级管理") {
-				$("#qryBtn").click();
-			} else if(title == "放班审批管理") {
-				$("#qryApproveBtn").click();
-			} 
-		}
-	});
+//	$("#tt").tabs({
+//		onSelect: function (title) {
+//			var src = "";
+//			if(title == "放班班级管理") {
+//				$("#qryBtn").click();
+//			} else if(title == "放班审批管理") {
+//				$("#qryApproveBtn").click();
+//			} 
+//		}
+//	});
 	
 	$("#qryBtn").click(function() {
 		var object = $("#qryFm").serializeObject();
@@ -75,7 +75,6 @@ $(document).ready(function() {
 			if(data.length > 0) {
 				$("#schoolId").combobox("setValue", data[0].schoolId);
 			}
-			$("#qryBtn").click();
 		},
 		onChange : function(n, o) {
 			if(n != "" && n != null && n != undefined) {

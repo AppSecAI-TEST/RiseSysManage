@@ -18,25 +18,26 @@
     			<form id="qryRefundCourseFm">
     				<table class="search_tab">
     					<tr>
-    						<td width="70px" align="right"><span>校区：</span></td>
-			  				<td width="110px">
+    						<td align="right" style="min-width: 60px;"><span>校区：</span></td>
+			  				<td style="min-width: 100px;">
 								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 				        		</select>
 							</td>
-							<td width="65px" align="right"><span>学员姓名：</span></td>
-							<td width="110px">
+							<td align="right" style="min-width: 60px;"><span>学员姓名：</span></td>
+							<td style="min-width: 100px;">
 								<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
-							<td width="65px" align="right"><span>联系电话：</span></td>
-							<td width="220px">
+							<td align="right" style="min-width: 60px;"><span>联系电话：</span></td>
+							<td style="min-width: 205px;">
 								<input name="phone" id="phone" type="text" class="easyui-textbox" style="width: 205px; height: 25px;"/>
 							</td>
-							<td width="65px" align="right"><span>缴费日期：</span></td>
-			  				<td width="230px">
+							<td align="right" style="min-width: 60px;"><span>缴费日期：</span></td>
+			  				<td style="min-width: 210px;">
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimePay" name="startTimePay" data-options="formatter:myformatter, parser:myparser"/>
 								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimePay" name="endTimePay" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
+							<td style="min-width: 20px;"></td>
     					</tr>
     					<tr>
     						<td align="right"><span>业绩顾问：</span></td>
@@ -64,6 +65,7 @@
 								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApply" name="endTimeApply" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
+							<td style="min-width: 20px;"></td>
     					</tr>
     					<tr>
     						<td align="right"><span>班级老师：</span></td>
@@ -91,6 +93,7 @@
 								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeFinish" name="endTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
+							<td style="min-width: 20px;"></td>
     					</tr>
     					<tr>
     						<td align="right"><span>渠道来源：</span></td>
@@ -113,6 +116,7 @@
 								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeBelong" name="endTimeBelong" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
+							<td style="min-width: 20px;"></td>
     					</tr>
     					<tr>
     						<td align="right"><span>退费状态：</span></td>
@@ -126,8 +130,9 @@
 							</td>
 							<td align="right">
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1023">查询</a>
-								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>&nbsp;&nbsp;&nbsp;
 							</td>
+							<td style="min-width: 20px;"></td>
     					</tr>
     				</table>
     			</form>
@@ -203,16 +208,11 @@
 								<input type="checkbox" name="approveRefundState" value="'004'"/><span>审批未通过</span>
 								<input type="checkbox" name="approveRefundState" value="'005'"/><span>成功退费</span>
 								<input type="checkbox" name="approveRefundState" value="'006'"/><span>取消</span>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>本人待审批：</span>&nbsp;&nbsp;<input type="checkbox" />
 							</td>
-							<td align="right"><span>本人待审批：</span></td>
-							<td>
-								<input type="checkbox" />
-							</td>
-						</tr>
-						<tr>
-							<td colspan="8" align="right">
+							<td colspan="2" align="right">
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryApproveBtn" funcNodeId="1025">查询</a>
-								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="resetApprove">重置</a>
+								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="resetApprove">重置</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							</td>
 						</tr>
     				</table>

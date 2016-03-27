@@ -1,14 +1,14 @@
 $(document).ready(function() {
-	$("#tt").tabs({
-		onSelect: function (title) {
-			var src = "";
-			if(title == "开班班级管理") {
-				$("#qryBtn").click();
-			} else if(title == "开班审批管理") {
-				$("#qryApproveBtn").click();
-			} 
-		}
-	});
+//	$("#tt").tabs({
+//		onSelect: function (title) {
+//			var src = "";
+//			if(title == "开班班级管理") {
+//				$("#qryBtn").click();
+//			} else if(title == "开班审批管理") {
+//				$("#qryApproveBtn").click();
+//			} 
+//		}
+//	});
 	
 	$("#qryBtn").click(function() {
     	var obj = JSON.stringify($("#qryFm").serializeObject());
@@ -75,7 +75,6 @@ $(document).ready(function() {
 			if(data.length > 0) {
 				$("#schoolId").combobox("setValue", data[0].schoolId);
 			}
-			$("#qryBtn").click();
 		}
 	});
 	
@@ -145,26 +144,36 @@ $(document).ready(function() {
 			var openClassState = row.openClassState;
 			if(openClassType == "" || openClassType == null || openClassType == undefined
 					|| (openClassState == "003" || openClassState == "004")) {
-				var classStudentNum = row.classStudentNum;
-				if(classStudentNum > 0) {
-					var minNum = row.minNum;
-					if(classStudentNum < minNum) {
-						var isOpenFlag = row.isOpenFlag;
-						if("Y" == isOpenFlag) {
-							var applyType = "001";
-							var classInstId = row.classInstId;
-							if(openClassState == "003" || openClassState == "004") {
-								applyType = "002";
+				var expNum = row.expNum;
+				if(expNum > 0) {
+					var classStudentNum = row.classStudentNum;
+					if(classStudentNum > 0) {
+						var minNum = row.minNum;
+						if(classStudentNum < minNum) {
+							var isOpenFlag = row.isOpenFlag;
+							if("Y" == isOpenFlag) {
+								var classInstId = row.classInstId;
+								var flag = isExcOpen(classInstId);
+								if(!flag) {
+									return;
+								} else {
+									var applyType = "001";
+									if(openClassState == "003" || openClassState == "004") {
+										applyType = "002";
+									}
+									window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=exception&applyType=" + applyType;
+								}
+							} else {
+								$.messager.alert('提示', "您选择的班级中还有在读学员，暂不能申请开班！");
 							}
-							window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=exception&applyType=" + applyType;
 						} else {
-							$.messager.alert('提示', "您选择的班级中还有在读学员，暂不能申请开班！");
+							$.messager.alert('提示', "您选择的班级定班人数已达到正常开班最少人数，不能异常开班！");
 						}
 					} else {
-						$.messager.alert('提示', "您选择的班级定班人数已达到正常开班最少人数，不能异常开班！");
+						$.messager.alert('提示', "您选择的班级中还没有学员，暂不能申请开班！");
 					}
 				} else {
-					$.messager.alert('提示', "您选择的班级中还没有学员，暂不能申请开班！");
+					$.messager.alert('提示', "您选择的班级不能异常开班！");
 				}
 			} else {
 				if(openClassState == '001') {
@@ -267,3 +276,21 @@ $(document).ready(function() {
 		}
 	});
 });
+
+function isExcOpen(classInstId) {
+	var staffId = $("#staffId").val();
+	var flag = false;
+	$.ajax({
+		url : "/sys/openClass/isExcOpen.do",
+		data : "classInstId=" + classInstId + "&staffId=" + staffId,
+		dataType : "json",
+		async : false,
+		success : function(data) {
+			flag = data.flag;
+			if(!flag) {
+				$.messager.alert('提示', data.msg);
+			}
+		}
+	});
+	return flag;
+}

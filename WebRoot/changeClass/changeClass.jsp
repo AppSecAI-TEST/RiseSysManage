@@ -146,7 +146,7 @@
 								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApply" name="endTimeApply" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
-							<td align="left" colspan="3"><input type="checkbox" name=""/><span>查看我的审批</span></td>
+							<td align="left" colspan="3"><span>查看我的审批：</span>&nbsp;&nbsp;<input type="checkbox" name=""/></td>
 		  				</tr>
 		  				<tr>
 		  					<td align="right"><span>课程阶段：</span></td>

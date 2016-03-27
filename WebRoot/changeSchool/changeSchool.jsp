@@ -22,7 +22,7 @@
   						<tr>
 							<td width="70px" align="right"><span>学员姓名：</span></td>
 							<td width="80px">
-								<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 80px; height: 25px;"/>
+								<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
 							<td width="70px" align="right"><span>联系电话：</span></td>
 							<td width="100px">
@@ -30,7 +30,7 @@
 							</td>
 							<td width="75px" align="right"><span>业绩顾问：</span></td>
 		  					<td width="95px">
-								<select id="adviser" name="adviser" class="easyui-combobox" style="width: 95px; height: 25px;"
+								<select id="adviser" name="adviser" class="easyui-combobox" style="width: 100px; height: 25px;"
 									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
      								url="<%=path %>/pubData/qryStaffList.do?post=16,17&schoolId=">
 				        		</select>
@@ -46,7 +46,7 @@
   						<tr>
   							<td align="right"><span>业绩类型：</span></td>
 		  					<td>
-								<select id="feeType" name="feeType" class="easyui-combobox" style="width: 80px; height: 25px;"
+								<select id="feeType" name="feeType" class="easyui-combobox" style="width: 100px; height: 25px;"
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
 				        		</select>
@@ -60,7 +60,7 @@
 							</td>
 							<td align="right"><span>转出班老师：</span></td>
 							<td>
-								<select id="outTeacherId" name="outTeacherId" class="easyui-combobox" style="width: 95px; height: 25px;">
+								<select id="outTeacherId" name="outTeacherId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 							</td>
 							<td align="right"><span>转入日期：</span></td>
@@ -74,7 +74,7 @@
   						<tr>
   							<td align="right"><span>转出校区：</span></td>
 			  				<td>
-								<select id="outSchoolId" name="outSchoolId" class="easyui-combobox" style="width: 80px; height: 25px;">
+								<select id="outSchoolId" name="outSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 							</td>
 							<td align="right"><span>转入校区：</span></td>
@@ -84,7 +84,7 @@
 							</td>
 							<td align="right"><span>转出在读班级：</span></td>
 							<td>
-								<input name="outSchoolClassInstId" id="outSchoolClassInstId" type="text" class="easyui-textbox" style="width: 95px; height: 25px;"/>
+								<input name="outSchoolClassInstId" id="outSchoolClassInstId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
 							<td align="right"><span>完成日期：</span></td>
 			  				<td>
@@ -152,7 +152,7 @@
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApply" name="endTimeApply" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
 							<td align="left" colspan="3">
-								<input type="checkbox" name=""/><span>查看我的审批</span>
+								<span>查看我的审批：</span>&nbsp;&nbsp;<input type="checkbox" name=""/>
 							</td>
   						</tr>
   						<tr>
@@ -174,7 +174,7 @@
 							</td>
 							<td align="right"><span>审批状态：</span></td>
 							<td>
-								<select id="approveState" name="approveState" class="easyui-combobox" style="width: 80px; height: 25px;"
+								<select id="approveState" name="approveState" class="easyui-combobox" style="width: 100px; height: 25px;"
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=CHANGE_T&codeType=APPROVE_CHANGE_STATE">
 				        		</select>

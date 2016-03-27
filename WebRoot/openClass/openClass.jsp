@@ -131,10 +131,8 @@
 							<td>
 								<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="endTimeOpenApprove" name="endTimeOpenApprove" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
-							<td align="right">
-								<input type="checkbox" name=""/>
-							</td>
-							<td><span>查看我的审批</span></td>
+							<td align="right"><span>查看我的审批：</span></td>
+							<td><input type="checkbox" name=""/></td>
 							<td align="center">
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryApproveBtn" funcNodeId="1010">查询</a>
 								&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="resetApprove">重置</a>
