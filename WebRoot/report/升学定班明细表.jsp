@@ -91,7 +91,7 @@
 							<th data-options="field:'carerName',width:100,align:'center'">客户关怀</th>
 							<th data-options="field:'higherStageId',width:100,align:'center'">升学阶段</th>
 							<th data-options="field:'selectClassNum',width:100,align:'center'">定班次数</th>
-							<th data-options="field:'currentClassNum',width:100,align:'center'">当前定班班级</th>
+							<th data-options="field:'currentClassName',width:100,align:'center'">当前定班班级</th>
 							<th data-options="field:'attendDate',width:100,align:'center'">上课日期</th>
 							<th data-options="field:'waitDays',width:100,align:'center'">等班时长（天）</th>
 						</tr>
