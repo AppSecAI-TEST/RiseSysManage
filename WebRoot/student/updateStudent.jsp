@@ -46,7 +46,7 @@
 	      				<td align="right" width="114px"><span style="color: red;">*</span><span>学员姓名：</span></td>
 	      				<td>
 	      					<div id="nameDiv">
-		      					<input name="name" id="name" type="text" class="easyui-textbox validatebox" validType="length[0,15]" required="true" style="width: 100px; height: 25px;"/>
+		      					<input name="name" id="name" type="text" class="easyui-textbox validatebox" validType="stuName" required="true" style="width: 100px; height: 25px;"/>
 	      					</div>
 	      					<span id="nameText" style="display: none;"></span>
 	      				</td>
@@ -71,18 +71,18 @@
 	      				<td colspan="4">
 		      				<select name="identityType" id="identityType" class="easyui-combobox" style="width: 100px; height: 25px;">
 	        				</select>
-	        				<input name="identityId" id="identityId" type="text" class="easyui-textbox" style="width: 200px; height: 25px;"/>
+	        				<input name="identityId" id="identityId" type="text" class="easyui-textbox" validType="certNo['identityType']" style="width: 200px; height: 25px;"/>
 		      				<a href="javascript:void(0)" id="validate" class="easyui-linkbutton" style="width: 80px; height: 25px;" funcNodeId="1001">验重</a>
 	      				</td>
 	      			</tr>
 	      			<tr>
 	      				<td align="right" width="114px"><span style="color: red;">*</span><span>英文名：</span></td>
 	      				<td>
-	      					<input name="byName" id="byName" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
+	      					<input name="byName" id="byName" type="text" class="easyui-textbox" validType="length[0,15]" required="true" style="width: 100px; height: 25px;"/>
 	      				</td>
 	      				<td align="right" width="114px"><span>家庭地址：</span></td>
 	      				<td colspan="4">
-	      					<input name="address" id="address" type="text" class="easyui-textbox" style="width: 396px; height: 25px;"/>
+	      					<input name="address" id="address" type="text" class="easyui-textbox" validType="length[0,120]" style="width: 396px; height: 25px;"/>
 	      				</td>
 	      			</tr>
 	      			<tr>
@@ -92,7 +92,7 @@
         					</select>
         					&nbsp;
         					<span style="width: 114px">学校名称：</span>
-        					<input id="realSchoolId" type="text" class="easyui-combobox" style="width: 300px; height: 25px;"/>
+        					<input id="realSchoolId" type="text" class="easyui-combobox" style="width: 300px; height: 25px;" validType="length[0,30]"/>
         					&nbsp;<a href="javascript:void(0)" id="addRealSchool" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px; height: 25px;">添加学校记录</a>
 	      				</td>
 	      			</tr>
@@ -146,7 +146,7 @@
 	      			<tr>
 	      				<td align="right" width="114px"><span>学员备注：</span></td>
 	      				<td colspan="6">
-	      					<input id="remark" name="remark" type="text" class="easyui-textbox" style="width: 969px; height: 25px;"/>
+	      					<textarea rows="4" cols="122" id="remark" name="remark" class="textarea easyui-validatebox" validType="length[0,120]"></textarea>
 	      				</td>
 	      			</tr>
 	      		</table>
@@ -174,10 +174,10 @@
 	        				</select>
 						</td>
 						<td align="center" width="120px">
-							<input id="contactName" type="text" class="easyui-textbox validatebox" required="true" style="width: 120px; height: 25px;"/>
+							<input id="contactName" type="text" class="easyui-textbox validatebox" validType="stuName" required="true" style="width: 120px; height: 25px;"/>
 						</td>
 						<td align="center" width="120px">
-							<input id="job" type="text" class="easyui-textbox validatebox" style="width: 120px; height: 25px;"/>
+							<input id="job" type="text" class="easyui-textbox validatebox" validType="length[0,30]" style="width: 120px; height: 25px;"/>
 						</td>
 						<td width="80px" align="center">
 							<input name="used" type="checkbox"/>
@@ -185,10 +185,10 @@
 						<td align="center" width="310px">
 							<select id="contactIdentityType" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 	        				</select>
-	        				<input id="contactIdentityId" type="text" class="easyui-textbox numberbox" style="width: 200px; height: 25px;" validType="length[0,18]" />
+	        				<input id="contactIdentityId" type="text" class="easyui-textbox validatebox" validType="certNo['contactIdentityType']" style="width: 200px; height: 25px;"/>
 						</td>
 						<td align="center" width="150px">
-							<input id="phone" type="text" class="easyui-textbox numberbox" style="width: 150px; height: 25px;" validType="length[0,11]" invalidMessage="不能超过11个字符！"/>
+							<input id="phone" type="text" class="easyui-textbox numberbox" style="width: 150px; height: 25px;" validType="phone"/>
 						</td>
 						<td align="center" width="80px">
 							<a href="javascript:void(0)" id="addContact" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 25px;">添加</a>
@@ -197,40 +197,7 @@
 				</table>
 	      	</form>
       	</div>
-      		
-      	<div style="height: 5px;"></div>
-      	<div class="easyui-panel" style="min-width:1100px; width:98%;height:auto;" title="活动信息">
-      		<form id="activityFm">
-      			<table width="100%" cellpadding="5px" class="maintable" id="activityTd">
-					<tr>
-						<td align="center" width="150px"><span>活动标题</span></td>
-						<td align="center" width="100px"><span>活动时间</span></td>
-						<td align="center" width="150px"><span>获奖情况</span></td>
-						<td align="center" width="200px"><span>奖品赠品</span></td>
-						<td align="center" width="463px"><span>活动详细</span></td>
-						<td align="center" width="80px"><span>操作</span></td>
-					</tr>
-					<tr style="display: none;">
-						<td align="center" width="150px">
-							<input id="title" type="text" class="easyui-textbox" style="width: 150px; height: 25px;" required="true"/>
-						</td>
-						<td align="center" width="100px">
-							<input id="activityDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 25px;" editable="false"/>
-						</td>
-						<td align="center" width="150px">
-							<input id="award" type="text" class="easyui-textbox" style="width: 150px; height: 25px;" required="true"/>
-						</td>
-						<td align="center" width="563px">
-							<input id="activityRemark" type="text" class="easyui-textbox" style="width: 563px; height: 25px;"/>
-						</td>
-						<td align="center" width="80px">
-							<a href="javascript:void(0)" id="addActivity" class="easyui-linkbutton" iconCls="icon-add" style="width: 80px; height: 25px;">添加</a>
-						</td>
-					</tr>
-				</table>
-      		</form>
-      	</div>
-      	<div style="margin-top: 25px;min-width:1100px; width:99%;">
+      	<div style="margin-top: 25px;min-width:1100px; width:99%;" align="right">
 			<a href="javascript:void(0)" id="updateSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 80px; height: 25px;">提交</a>
 		    &nbsp;<a href="javascript:void(0)" id="studentBack" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 25px;" onclick="javascript:window.history.back()">返回</a>
       	</div>

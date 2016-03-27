@@ -63,11 +63,11 @@
 	  					</td>
 	  					<td align="right" width="8%"><span>退费银行：</span></td>
 		  				<td width="10%">
-		  					<input id="bankName" name="bankName" type="text" class="easyui-textbox" style="width: 120px; height: 25px;"/>
+		  					<input id="bankName" name="bankName" type="text" class="easyui-textbox" validType="length[0,10]" style="width: 120px; height: 25px;"/>
 		  				</td>
 		  				<td align="right" width="8%"><span>账户名：</span></td>
 		  				<td width="10%">
-		  					<input id="account" name="account" type="text" class="easyui-textbox" style="width: 120px; height: 25px;"/>
+		  					<input id="account" name="account" type="text" class="easyui-textbox" validType="length[0,10]" style="width: 120px; height: 25px;"/>
 		  				</td>
 		  				<td align="right" width="8%"><span>账号：</span></td>
 		  				<td width="15%">
@@ -105,15 +105,15 @@
 	  					<td align="right" width="8%"><span>退费原因：</span></td>
 	  					<td colspan="9" width="92%">
 	  						<input type="radio" name="refundReason" value="school"/><span>校方原因</span>
-	  						<select id="schoolReasonType" name="schoolReasonType" class="easyui-combobox" style="width: 100px; height: 25px;">
+	  						<select id="schoolReasonType" name="schoolReasonType" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 		        			</select>
-		        			<select id="schoolReason" name="schoolReason" class="easyui-combobox" style="width: 150px; height: 25px;">
+		        			<select id="schoolReason" name="schoolReason" class="easyui-combobox" style="width: 150px; height: 25px;" editable="false">
 		        			</select>
 	  						&nbsp;&nbsp;<input type="radio" name="refundReason" value="customer"/><span>客户原因</span>
-	  						<select id="customerReason" name="customerReason" class="easyui-combobox" style="width: 120px; height: 25px;">
+	  						<select id="customerReason" name="customerReason" class="easyui-combobox" style="width: 120px; height: 25px;" editable="false">
 		        			</select>
 	  						&nbsp;&nbsp;<input type="radio" name="refundReason" value="other"/><span>其他原因</span>
-	  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" style="width: 420px; height: 25px;" />
+	  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" validType="length[0,50]" style="width: 380px; height: 25px;" />
 	  					</td>
 	  				</tr>
 	  				<tr>
@@ -128,7 +128,7 @@
 	  				<tr>
 	  					<td align="right" width="8%"><span>退费备注：</span></td>
   						<td colspan="9" width="92%">
-  							<textarea rows="6" cols="122" id="remark" name="remark" class="easyui-validatebox textbox"></textarea>
+  							<textarea rows="6" cols="122" id="remark" name="remark" class="textarea easyui-validatebox" validType="length[0,120]"></textarea>
   						</td>
 	  				</tr>
 	  				<tr>

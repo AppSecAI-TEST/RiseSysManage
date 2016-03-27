@@ -21,9 +21,6 @@ $(document).ready(function() {
 	
 	$("[name='studentCourseId']").each(function() {
 		var studentCourseId = $(this).val();
-		$("input", $("#financialConfirmRefundFee" + studentCourseId).next("span")).blur(function() {
-			calculateConfirmRefundAmount(studentCourseId);
-		});
 		$("#refundFeeImgUrl" + studentCourseId).lightBox();
 	});
 	
@@ -231,6 +228,9 @@ $(document).ready(function() {
 			$("[name='studentCourseId']").each(function() {
 				var studentCourseId = $(this).val();
 				$("#financialConfirmRefundFee" + studentCourseId).textbox({disabled: false});
+				$("input", $("#financialConfirmRefundFee" + studentCourseId).next("span")).blur(function() {
+					calculateConfirmRefundAmount(studentCourseId);
+				});
 			});
 			$("#headmasterViewDiv").css("display", "block");
 			$("#financialApproveDiv").css("display", "block");
@@ -410,8 +410,9 @@ function calculateConfirmRefundAmount(studentCourseId) {
 	var realAmount = 0;
 	$("[name='studentCourseId']").each(function() {
 		var studentCourseId = $(this).val();
-		var financialConfirmRefundFee = $("#financialConfirmRefundFee" + studentCourseId).numberbox("getValue");
-		if(financialConfirmRefundFee != null && financialConfirmRefundFee != "" && financialConfirmRefundFee != "null" && financialConfirmRefundFee != undefined) {
+		var financialConfirmRefundFee = $("#financialConfirmRefundFee" + studentCourseId).textbox("getValue");
+		if(financialConfirmRefundFee != null && financialConfirmRefundFee != "" 
+			&& financialConfirmRefundFee != "null" && financialConfirmRefundFee != undefined) {
 			realAmount += parseFloat(financialConfirmRefundFee);
 		}
 	});

@@ -57,6 +57,8 @@ $(document).ready(function() {
 		var refundReason = $("input:radio[name='refundReason']:checked").val();
 		$("input:radio[name='refundReason']").attr("disabled", "disabled");
 		if("school" == refundReason) {
+			$("#schoolReasonType").combobox({disabled: false});
+			$("#schoolReason").combobox({disabled: false});
 			$("#schoolReasonType").combobox({
 				url : "/sys/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=SCHOOL_REASON_TYPE",//返回json数据的url
 		    	valueField : "codeFlag",
@@ -82,10 +84,13 @@ $(document).ready(function() {
 		        	}
 		        }
 			});
+			$("#otherReason").textbox({disabled: true});
 			$("#otherReason").textbox("setValue", "");
 			$("#customerReason").combobox('clear');
 			$("#customerReason").combobox("loadData", new Array());
+			$("#customerReason").combobox({disabled: true});
 		} else if("customer" == refundReason) {
+			$("#customerReason").combobox({disabled: false});
 			$("#customerReason").combobox({
 				url : "/sys/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=CUSTOMER_REASON",//返回json数据的url
 		    	valueField : "codeFlag",
@@ -98,18 +103,25 @@ $(document).ready(function() {
 		    		$("input:radio[name='refundReason']").removeAttr("disabled");
 		        }
 			});
+			$("#otherReason").textbox({disabled: true});
 			$("#otherReason").textbox("setValue", "");
 			$("#schoolReason").combobox('clear');
 			$("#schoolReason").combobox("loadData", new Array());
+			$("#schoolReason").textbox({disabled: true});
 			$("#schoolReasonType").combobox('clear');
 			$("#schoolReasonType").combobox("loadData", new Array());
+			$("#schoolReasonType").combobox({disabled: true});
 		} else {
+			$("#otherReason").textbox({disabled: false});
 			$("#schoolReason").combobox('clear');
 			$("#schoolReason").combobox("loadData", new Array());
+			$("#schoolReason").textbox({disabled: true});
 			$("#schoolReasonType").combobox('clear');
 			$("#schoolReasonType").combobox("loadData", new Array());
+			$("#schoolReasonType").textbox({disabled: true});
 			$("#customerReason").combobox('clear');
 			$("#customerReason").combobox("loadData", new Array());
+			$("#customerReason").textbox({disabled: true});
 			$("input:radio[name='refundReason']").removeAttr("disabled");
 		}
 	});

@@ -78,7 +78,7 @@
   					<tr>
   						<td style="text-align: right;width: 20%">角色描述：</td>
   						<td>
-  							<textarea rows="9" cols="43" id="roleMemo" name="roleMemo" class="easyui-validatebox textbox"></textarea>
+  							<textarea rows="9" cols="43" id="roleMemo" name="roleMemo" class="textarea easyui-validatebox" validType="length[0,120]"></textarea>
   						</td>
   					</tr>
   				</table>

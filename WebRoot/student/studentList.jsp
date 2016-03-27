@@ -18,22 +18,28 @@
 			<form id="qryFm">
 				<table class="search_tab">
 					<tr>
-						<td align="right" style="width:70px;"><span>校区：</span></td>
-						<td width="100px">
+						<td align="right" style="min-width:60px;"><span>校区：</span></td>
+						<td style="min-width:100px;">
 							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 	     					</select>
 						</td>
-						<td align="right" style="width:60px;"><span>班级：</span></td>
-						<td width="100px">
+						<td align="right" style="min-width:60px;"><span>班级：</span></td>
+						<td style="min-width:100px;">
 							<input name="classInstId" id="classInstId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 						</td>
-						<td align="right" style="width: 70px;"><span>学员姓名：</span></td>
-						<td width="100px">
+						<td align="right" style="min-width:60px;"><span>学员姓名：</span></td>
+						<td style="min-width:100px;">
 							<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 						</td>
-						<td align="right" style="width: 70px;"><span>联系电话：</span></td>
-						<td width="100px">
+						<td align="right" style="min-width:60px;"><span>联系电话：</span></td>
+						<td style="min-width:100px;">
 							<input name="phone" id="phone" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
+						</td>
+						<td align="right" style="min-width:60px;"><span>建档时间：</span></td>
+						<td align="left" style="min-width: 210px;">
+							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myformatter, parser:myparser"/>
+							至
+							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTime" name="endTime" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
 					</tr>
 					<tr>
@@ -53,20 +59,12 @@
 	     					</select>
 						</td>
 						<td align="right"><span>证件号码：</span></td>
-						<td align="left">
+						<td align="left" colspan="2">
 							<input name="identityId" id="identityId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 						</td>
-					</tr>
-					<tr>
-						<td align="right" style="width: 60px;"><span>建档时间：</span></td>
-						<td colspan="5" align="left">
-							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myformatter, parser:myparser"/>
-							至
-							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTime" name="endTime" data-options="formatter:myformatter, parser:myparser"/>
-						</td>
-						<td align="left" colspan="2">
-							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:80px; height: 25px;" id="qryBtn" funcNodeId="1000">查询</a>
-							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px; height: 25px;" id="reset">重置</a>
+						<td align="center">
+							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1000">查询</a>
+							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 						</td>
 					</tr>
 				</table>

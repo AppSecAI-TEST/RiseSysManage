@@ -45,37 +45,37 @@
 	  				<tr>
 	  					<td align="right" width="10%"><span>关系：</span></td>
 	  					<td width="90%" colspan="5">
-	  						<input name="relation" id="relation" type="text" class="easyui-textbox" style="width: 900px; height: 28px;" value="${obj.studentVipObj.relation }"/>
+	  						<input name="relation" id="relation" type="text" class="easyui-textbox validatebox" style="width: 900px; height: 28px;" required="true" validType="length[0,25]" value="${obj.studentVipObj.relation }"/>
 	  					</td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="10%"><span>折扣：</span></td>
 	  					<td width="90%" colspan="5">
-	  						<input name="discount" id="discount" type="text" class="easyui-textbox" style="width: 900px; height: 28px;" value="${obj.studentVipObj.discount }"/>
+	  						<input name="discount" id="discount" type="text" class="easyui-textbox validatebox" style="width: 900px; height: 28px;" required="true" validType="length[0,25]" value="${obj.studentVipObj.discount }"/>
 	  					</td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="10%"><span>职务：</span></td>
 	  					<td width="90%" colspan="5">
-	  						<input name="post" id="post" type="text" class="easyui-textbox" style="width: 900px; height: 28px;" value="${obj.studentVipObj.post }"/>
+	  						<input name="post" id="post" type="text" class="easyui-textbox validatebox" style="width: 900px; height: 28px;" required="true" validType="length[0,25]" value="${obj.studentVipObj.post }"/>
 	  					</td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="10%"><span>相关事项：</span></td>
 	  					<td width="90%" colspan="5">
-	  						<input name="notice" id="notice" type="text" class="easyui-textbox" style="width: 900px; height: 28px;" value="${obj.studentVipObj.notice }"/>
+	  						<input name="notice" id="notice" type="text" class="easyui-textbox validatebox" style="width: 900px; height: 28px;" required="true" validType="length[0,120]" value="${obj.studentVipObj.notice }"/>
 	  					</td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="10%"><span>联系方式：</span></td>
 	  					<td width="90%" colspan="5">
-	  						<input name="contactWay" id="contactWay" type="text" class="easyui-textbox" style="width: 900px; height: 28px;" value="${obj.studentVipObj.contactWay }"/>
+	  						<input name="contactWay" id="contactWay" type="text" class="easyui-textbox numberbox" style="width: 900px; height: 28px;" value="${obj.studentVipObj.contactWay }" required="true" validType="phone"/>
 	  					</td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="10%"><span>维护记录：</span></td>
 	  					<td width="90%" colspan="5">
-	  						<textarea rows="3" cols="126" id="vipRemark" name="vipRemark" class="easyui-validatebox textbox">${obj.studentVipObj.vipRemark }</textarea>
+	  						<textarea rows="3" cols="126" id="vipRemark" name="vipRemark" class="textarea easyui-validatebox" validType="length[0,120]">${obj.studentVipObj.vipRemark }</textarea>
 	  					</td>
 	  				</tr>
 	  				<tr>

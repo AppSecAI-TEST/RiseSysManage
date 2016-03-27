@@ -127,7 +127,7 @@
 	  					<tr>
 		  					<td align="right" width="10%"><span>老师变更备注：</span></td>
 		  					<td colspan="5">
-		  						<textarea rows="6" cols="122" id="changeRemark" name="changeRemark" class="easyui-validatebox textbox"></textarea>
+		  						<textarea rows="6" cols="122" id="changeRemark" name="changeRemark" class="textarea easyui-validatebox" validType="length[0,120]"></textarea>
 		  					</td>
 		  				</tr>
 		  				<tr>

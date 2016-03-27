@@ -44,37 +44,37 @@
 	  				<tr>
 	  					<td align="right" width="10%"><span>关系：</span></td>
 	  					<td width="90%" colspan="5">
-	  						<input name="relation" id="relation" type="text" class="easyui-textbox" style="width: 900px; height: 28px;" required="true"/>
+	  						<input name="relation" id="relation" type="text" class="easyui-textbox validatebox" style="width: 900px; height: 28px;" required="true" validType="length[0,25]"/>
 	  					</td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="10%"><span>折扣：</span></td>
 	  					<td width="90%" colspan="5">
-	  						<input name="discount" id="discount" type="text" class="easyui-textbox" style="width: 900px; height: 28px;" required="true"/>
+	  						<input name="discount" id="discount" type="text" class="easyui-textbox validatebox" style="width: 900px; height: 28px;" required="true" validType="length[0,25]"/>
 	  					</td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="10%"><span>职务：</span></td>
 	  					<td width="90%" colspan="5">
-	  						<input name="post" id="post" type="text" class="easyui-textbox" style="width: 900px; height: 28px;" required="true"/>
+	  						<input name="post" id="post" type="text" class="easyui-textbox validatebox" style="width: 900px; height: 28px;" required="true" validType="length[0,25]"/>
 	  					</td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="10%"><span>相关事项：</span></td>
 	  					<td width="90%" colspan="5">
-	  						<input name="notice" id="notice" type="text" class="easyui-textbox" style="width: 900px; height: 28px;" required="true"/>
+	  						<input name="notice" id="notice" type="text" class="easyui-textbox validatebox" style="width: 900px; height: 28px;" required="true" validType="length[0,120]"/>
 	  					</td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="10%"><span>联系方式：</span></td>
 	  					<td width="90%" colspan="5">
-	  						<input name="contactWay" id="contactWay" type="text" class="easyui-textbox" style="width: 900px; height: 28px;" required="true"/>
+	  						<input name="contactWay" id="contactWay" type="text" class="easyui-textbox numberbox" style="width: 900px; height: 28px;" required="true" validType="phone"/>
 	  					</td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="10%"><span>备注：</span></td>
 	  					<td width="90%" colspan="5">
-	  						<textarea rows="3" cols="126" id="vipRemark" name="vipRemark" class="easyui-validatebox textbox"></textarea>
+	  						<textarea rows="3" cols="126" id="vipRemark" name="vipRemark" class="textarea easyui-validatebox" validType="length[0,120]"></textarea>
 	  					</td>
 	  				</tr>
 	  				<tr>
