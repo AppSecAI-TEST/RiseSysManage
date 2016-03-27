@@ -296,7 +296,7 @@ function yearFormatter(date) {
 	    	},
 	    	onLoadSuccess:function(data) {
 	    		if(data.length > 0) {
-					$('#month').combobox('setValue', data[0].month);
+					$('#month').combobox('setValue', data[data.length - 1].month);
 				} else {
 					$("#week").combobox('clear');
 					$("#week").combobox("loadData", new Array());
@@ -313,7 +313,7 @@ function yearFormatter(date) {
 	    	    	},
 	    	    	onLoadSuccess:function(data) {
 	    	    		if(data.length > 0) {
-	    					$('#week').combobox('setValue', data[0].weekName);
+	    					$('#week').combobox('setValue', data[data.length - 1].weekName);
 	    				}
 	    	    	}
 	    		});
