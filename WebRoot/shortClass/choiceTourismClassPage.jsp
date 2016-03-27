@@ -35,14 +35,6 @@
 						}
 					}
 				});
-				$("#shortClassType").combobox({
-					formatter:function(data){
-						return '<span>'+data.classType+'</span>';
-					}, 
-					valueField: 'classTypeId', 
-					textField: 'classType',
-					panelHeight: 'auto'
-				});
 			});
 			function queryFunc()
 			{
@@ -132,6 +124,7 @@
   	<body>
 		<form id="manFm" style="margin:0 auto;">
 			<input type="hidden" name="classType" id="classType" value="N" />
+			<input type="hidden" name="shortClassType" id="shortClassType" value="${param.shortClassType}" />
 			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 				<tr>
 					<td align="right">
@@ -160,13 +153,7 @@
 					<td width="12%">
 						<select id="schoolManId" name="schoolManId" style="width:150px" ></select>
 					</td>
-					<td align="right">
-						班级类型：
-					</td>
-					<td>
-						<select id="shortClassType" name="shortClassType" style="width:150px" ></select>										
-					</td>
-					<td colspan="2" align="center">
+					<td colspan="4" align="right">
 						<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
 						<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
 					</td>

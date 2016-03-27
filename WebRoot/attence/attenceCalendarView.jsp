@@ -110,7 +110,7 @@
   		<input type="hidden" id="classInstId" value="${classInstId}" />
   		<input type="hidden" id="funcNodeId" value="${funcNodeId}" />
   		<form id="fm" method="post">
-			<div data-options="region:'north',title:'考勤信息',collapsible:false,height:550,maxHeight:550,border:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;">
+			<div data-options="region:'north',title:'考勤信息',collapsible:false,height:530,maxHeight:530,border:false" style="min-width:1100px;width:99%;font-family:'微软雅黑';margin:0 auto;">
 				<table align="center" class="tab" style="height:85%;width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc" border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td align="left" colspan="14">考勤月份：<select id="yearList" name="yearList" style="width:100px;height:25px;" ></select>&nbsp;&nbsp;<select id="monthList" name="monthList" style="width:100px;height:25px;" ></select></td>
@@ -135,9 +135,19 @@
 											<td align="left" width="11%" style="background-color:#fafafa">&nbsp;</td>
 										</c:when>
 										<c:otherwise>
-											<td align="center" width="3%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.calendarShow.realClassTime}',<c:choose><c:when test='${fn:length(node.calendarHiddenList) != 0}'>'${node.calendarHiddenList[0].classAttendId}'</c:when><c:otherwise>''</c:otherwise></c:choose>)">${node.dateValue}</a></td>
+											<td align="center" width="3%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.calendarShow.realClassTime}',<c:choose><c:when test='${fn:length(node.calendarHiddenRealList) != 0}'>'${node.calendarHiddenList[0].classAttendId}'</c:when><c:otherwise>''</c:otherwise></c:choose>)">${node.dateValue}</a></td>
 											<td align="left" width="11%" style="font-size:12px">
-												<c:if test="${fn:length(node.calendarHiddenList) != 0}">
+												<c:if test="${fn:length(node.calendarHiddenPlanList) != 0}">
+													计划:<br />
+													<c:forEach items="${node.calendarHiddenList}" var="nodeObj">
+														${nodeObj.hourRange}/${nodeObj.roomName}<br />
+														<c:forEach items="${nodeObj.teacherList}" var="item">
+															${item.schoolName} ${item.teacherName} ${item.teacherType}<br />
+														</c:forEach>
+													</c:forEach>
+												</c:if>
+												<c:if test="${fn:length(node.calendarHiddenRealList) != 0}">
+													实际:<br />
 													<c:forEach items="${node.calendarHiddenList}" var="nodeObj">
 														${nodeObj.hourRange}/${nodeObj.roomName}<br />
 														<c:forEach items="${nodeObj.teacherList}" var="item">
@@ -167,10 +177,20 @@
 											<td align="left" width="11%" style="background-color:#fafafa">&nbsp;</td>
 										</c:when>
 										<c:otherwise>
-											<td align="center" width="3%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.calendarShow.realClassTime}',<c:choose><c:when test='${fn:length(node.calendarHiddenList) != 0}'>'${node.calendarHiddenList[0].classAttendId}'</c:when><c:otherwise>''</c:otherwise></c:choose>)">${node.dateValue}</a></td>
+											<td align="center" width="3%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.calendarShow.realClassTime}',<c:choose><c:when test='${fn:length(node.calendarHiddenRealList) != 0}'>'${node.calendarHiddenRealList[0].classAttendId}'</c:when><c:otherwise>''</c:otherwise></c:choose>)">${node.dateValue}</a></td>
 											<td align="left" width="11%" style="font-size:12px">
-												<c:if test="${fn:length(node.calendarHiddenList) != 0}">
-													<c:forEach items="${node.calendarHiddenList}" var="nodeObj">
+												<c:if test="${fn:length(node.calendarHiddenPlanList) != 0}">
+													计划:<br />
+													<c:forEach items="${node.calendarHiddenPlanList}" var="nodeObj">
+														${nodeObj.hourRange}/${nodeObj.roomName}<br />
+														<c:forEach items="${nodeObj.teacherList}" var="item">
+															${item.schoolName} ${item.teacherName} ${item.teacherType}<br />
+														</c:forEach>
+													</c:forEach>
+												</c:if>
+												<c:if test="${fn:length(node.calendarHiddenRealList) != 0}">
+													实际:<br />
+													<c:forEach items="${node.calendarHiddenRealList}" var="nodeObj">
 														${nodeObj.hourRange}/${nodeObj.roomName}<br />
 														<c:forEach items="${nodeObj.teacherList}" var="item">
 															${item.schoolName} ${item.teacherName} ${item.teacherType}<br />
@@ -200,10 +220,20 @@
 											<td align="left" width="11%" style="background-color:#fafafa">&nbsp;</td>
 										</c:when>
 										<c:otherwise>
-											<td align="center" width="3%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.calendarShow.realClassTime}',<c:choose><c:when test='${fn:length(node.calendarHiddenList) != 0}'>'${node.calendarHiddenList[0].classAttendId}'</c:when><c:otherwise>''</c:otherwise></c:choose>)">${node.dateValue}</a></td>
+											<td align="center" width="3%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.calendarShow.realClassTime}',<c:choose><c:when test='${fn:length(node.calendarHiddenRealList) != 0}'>'${node.calendarHiddenRealList[0].classAttendId}'</c:when><c:otherwise>''</c:otherwise></c:choose>)">${node.dateValue}</a></td>
 											<td align="left" width="11%" style="font-size:12px">
-												<c:if test="${fn:length(node.calendarHiddenList) != 0}">
-													<c:forEach items="${node.calendarHiddenList}" var="nodeObj">
+												<c:if test="${fn:length(node.calendarHiddenPlanList) != 0}">
+													计划:<br />
+													<c:forEach items="${node.calendarHiddenPlanList}" var="nodeObj">
+														${nodeObj.hourRange}/${nodeObj.roomName}<br />
+														<c:forEach items="${nodeObj.teacherList}" var="item">
+															${item.schoolName} ${item.teacherName} ${item.teacherType}<br />
+														</c:forEach>
+													</c:forEach>
+												</c:if>
+												<c:if test="${fn:length(node.calendarHiddenRealList) != 0}">
+													实际:<br />
+													<c:forEach items="${node.calendarHiddenRealList}" var="nodeObj">
 														${nodeObj.hourRange}/${nodeObj.roomName}<br />
 														<c:forEach items="${nodeObj.teacherList}" var="item">
 															${item.schoolName} ${item.teacherName} ${item.teacherType}<br />
@@ -234,16 +264,26 @@
 										<td align="left" width="11%" style="background-color:#fafafa">&nbsp;</td>
 									</c:when>
 									<c:otherwise>
-										<td align="center" width="3%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.calendarShow.realClassTime}',<c:choose><c:when test='${fn:length(node.calendarHiddenList) != 0}'>'${node.calendarHiddenList[0].classAttendId}'</c:when><c:otherwise>''</c:otherwise></c:choose>)">${node.dateValue}</a></td>
+										<td align="center" width="3%"><a href="javascript:void(0)" onclick="gotoAttendRecord('${node.classInstId}','${node.dateValue}','${node.calendarShow.realClassTime}',<c:choose><c:when test='${fn:length(node.calendarHiddenRealList) != 0}'>'${node.calendarHiddenRealList[0].classAttendId}'</c:when><c:otherwise>''</c:otherwise></c:choose>)">${node.dateValue}</a></td>
 										<td align="left" width="11%" style="font-size:12px">
-											<c:if test="${fn:length(node.calendarHiddenList) != 0}">
-												<c:forEach items="${node.calendarHiddenList}" var="nodeObj">
-													${nodeObj.hourRange}/${nodeObj.roomName}<br />
-													<c:forEach items="${nodeObj.teacherList}" var="item">
-														${item.schoolName} ${item.teacherName} ${item.teacherType}<br />
+											<c:if test="${fn:length(node.calendarHiddenPlanList) != 0}">
+													计划:<br />
+													<c:forEach items="${node.calendarHiddenPlanList}" var="nodeObj">
+														${nodeObj.hourRange}/${nodeObj.roomName}<br />
+														<c:forEach items="${nodeObj.teacherList}" var="item">
+															${item.schoolName} ${item.teacherName} ${item.teacherType}<br />
+														</c:forEach>
 													</c:forEach>
-												</c:forEach>
-											</c:if>
+												</c:if>
+												<c:if test="${fn:length(node.calendarHiddenRealList) != 0}">
+													实际:<br />
+													<c:forEach items="${node.calendarHiddenRealList}" var="nodeObj">
+														${nodeObj.hourRange}/${nodeObj.roomName}<br />
+														<c:forEach items="${nodeObj.teacherList}" var="item">
+															${item.schoolName} ${item.teacherName} ${item.teacherType}<br />
+														</c:forEach>
+													</c:forEach>
+												</c:if>
 											<c:if test="${node.calendarShow.realClassTime != ''}">
 												<c:choose>
 													<c:when test="${node.calendarShow.planClassTime != ''}">

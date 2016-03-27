@@ -10,7 +10,9 @@ public class CalendarItem {
 	
 	private CalendarShow calendarShow;
 	
-	private List<CalendarHidden> calendarHiddenList;
+	private List<CalendarHidden> calendarHiddenPlanList;
+	
+	private List<CalendarHidden> calendarHiddenRealList;
 	
 	public String getClassInstId() {
 		return classInstId;
@@ -36,12 +38,22 @@ public class CalendarItem {
 		this.calendarShow = calendarShow;
 	}
 
-	public List<CalendarHidden> getCalendarHiddenList() {
-		return calendarHiddenList;
+	public List<CalendarHidden> getCalendarHiddenPlanList() {
+		return calendarHiddenPlanList;
 	}
 
-	public void setCalendarHiddenList(List<CalendarHidden> calendarHiddenList) {
-		this.calendarHiddenList = calendarHiddenList;
+	public void setCalendarHiddenPlanList(
+			List<CalendarHidden> calendarHiddenPlanList) {
+		this.calendarHiddenPlanList = calendarHiddenPlanList;
+	}
+
+	public List<CalendarHidden> getCalendarHiddenRealList() {
+		return calendarHiddenRealList;
+	}
+
+	public void setCalendarHiddenRealList(
+			List<CalendarHidden> calendarHiddenRealList) {
+		this.calendarHiddenRealList = calendarHiddenRealList;
 	}
 
 }

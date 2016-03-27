@@ -30,8 +30,15 @@
 			var gClassAttend = null;
 			function addAttenceFunc()
 			{
-				ajaxLoading("正在处理，请稍待。。。");
-				window.location.href = "/sys/shortBus/getShortClassAttendTInfo.do?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortAttenceInterDetail";
+				if($(".classSchooltimeList").length != 0)
+				{
+					ajaxLoading("正在处理，请稍待。。。");
+					window.location.href = "/sys/shortBus/getShortClassAttendTInfo.do?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortAttenceInterDetail";
+				}
+				else
+				{
+					$.messager.alert('提示',"请先添加上课计划后,再进行尝试");
+				}
 			}
 			function updateAttenceFunc()
 			{
@@ -125,7 +132,7 @@
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${shortClassInstT.classSchooltimeList}" var="node" varStatus="i">
-						<tr>
+						<tr class="classSchooltimeList">
 							<td align="right">上课计划：</td>
 							<td><fmt:formatDate value="${node.schooltime}" pattern="yyyy-MM-dd" /> ${node.startTime}~${node.endTime}</td>
 							<td align="right">教室：</td>
