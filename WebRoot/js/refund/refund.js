@@ -220,7 +220,7 @@ $(document).ready(function() {
 		var row = $('#approve_list_data').datagrid('getSelected');
 		if (row) {
 			var tacheState = row.tacheState;
-			if("001" == tacheState || "002" == tacheState) {
+			if("001" == tacheState || "002" == tacheState || "003" == tacheState) {
 				var courseType = row.courseType;
 				var refundFeeId = row.refundFeeId;
 				var processInstId = row.processInstanceId;
