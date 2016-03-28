@@ -195,7 +195,7 @@
    					  	</tr>
       					<tr>
       					  	<td align="right"><span>备注：</span></td>
-      					  	<td colspan="5"><input type="text" id="remark" name="remark" class="easyui-textbox validatebox"  style="width: 820px; height: 25px;"></td>
+      					  	<td colspan="5"><input type="text" id="remark" name="remark"  class="easyui-textbox validatebox"  validType="length[0,50]" style="width: 820px; height: 25px;"/></td>
    					  	</tr>
 					</table>
 				</div>
@@ -647,7 +647,7 @@
 								<span>备注：</span>
 							</td>
 							<td colspan="6">
-							<input type="text" id="shortRemark" name="shortRemark" class="easyui-textbox validatebox"  style="width: 820px; height: 25px;">
+							<input type="text" id="shortRemark" name="shortRemark" class="easyui-textbox validatebox"  validType="length[0,50]" style="width: 820px; height: 25px;">
 							</td>
 						</tr>
 						<tr>
