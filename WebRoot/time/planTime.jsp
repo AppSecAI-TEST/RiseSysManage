@@ -159,6 +159,10 @@ function getWeekTime()
     		{
     			$.messager.alert('提示',"本周没有排课计划");
     		}
+    		if(data.length==1)
+    		{
+    			$("#content").css("marginLeft",0);
+    		}
     		for(var i=0;i<data.length;i++)
     		{
     			if(i==0)
