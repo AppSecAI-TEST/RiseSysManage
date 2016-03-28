@@ -224,7 +224,7 @@
    					  </tr>
       					<tr>
       					  <td align="right"><span>备注：</span></td>
-      					  <td colspan="5"><input type="text" id="remark" name="remark" class="easyui-textbox validatebox" value='<%=StringUtil.getJSONObjectKeyVal(object,"remark")%>' style="width: 820px; height: 25px;"></td>
+      					  <td colspan="5"><input type="text" id="remark" name="remark" class="easyui-textbox validatebox"  validType="length[0,50]" value='<%=StringUtil.getJSONObjectKeyVal(object,"remark")%>' style="width: 820px; height: 25px;"></td>
    					  </tr>
 					</table>
 				</div>
@@ -1176,6 +1176,7 @@ $("#submitBtn").click(function() {
 			flag = false;
 		}
 	}
+	
 	if(flag) {
 		if(!checkParam())
 		{
