@@ -1710,6 +1710,11 @@ function addCourseInfo() {
 					womItem["teacherA"] = $("#ta_teacher_id").combobox("getValue");
 					womItem["teacherBSchool"] = $("#tb_teacher_school").combobox("getValue");
 					womItem["teacherB"] = $("#tb_teacher_id").combobox("getValue");
+					if(womItem["teacherA"]==womItem["teacherB"]&&womItem["teacherA"]!="")
+					{
+						showMessage('提示', "转介绍老师A,B不能相同!",null);
+						return false;
+					}	
 				}	
 			} else if(womChannel == "Sta") {
 				if($("#womStaffName").textbox("getValue") != "") {
