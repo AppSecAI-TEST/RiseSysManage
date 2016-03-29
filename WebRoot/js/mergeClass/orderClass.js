@@ -41,6 +41,13 @@ function initPage()
 				$.parser.parse("#detail");
 			}
 			hideProgressLoader();
+			if($("#detail").html()=="")
+			{
+				showMessage('提示', "合并班没有已升学学员！", function(){
+					hideMessage();
+					window.history.back();
+				});
+			}	
 		},
 		error : function() 
 		{
