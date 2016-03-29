@@ -137,8 +137,7 @@
 		  					<td width="80px;" align="right">课程阶段：</td>
 		  					<td width="120px;">
 		  						<select id="stageIds" name="stageId" class="easyui-combobox" style="width: 120px;height:25px;" editable="false"
-									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto', 
-				      				onLoadSuccess:function(data){if(data.length > 0) $('#stageIds').combobox('setValue',data[0].stageId);}"
+									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'"
   									url="<%=path%>/pubData/qryStage.do?">
 				        		</select>
 		  					</td>
