@@ -14,6 +14,7 @@
 	String attendClassInstId = request.getParameter("attendClassInstId");
 	String advisterASchoolId = request.getParameter("advisterASchoolId");
 	String advisterBSchoolId = request.getParameter("advisterBSchoolId");
+	 
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -40,6 +41,7 @@
 	      		<input type="hidden" id="schoolId" value="<%=schoolId %>"/>
 	      		<input type="hidden" id="funcNodeId" name="funcNodeId" value="<%=funcNodeId %>"/>
       			<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId }"/>
+      			<input type="hidden" id="postIds" name="postIds" value="${sessionScope.StaffT.post}"/>
       			<input type="hidden" id="studentId" name="studentId" value="<%=studentId %>"/>
       			<table width="100%" cellpadding="5px" class="maintable" id="studentTd">
 	      			<tr>

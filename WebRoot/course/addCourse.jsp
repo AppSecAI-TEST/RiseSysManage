@@ -783,6 +783,31 @@ $("#s_schoolA").combobox({data:schools});
 $("#s_schooldA").combobox({data:schools});
 $("#s_schooldB").combobox({data:schools});
 
+$(document).ready(function() {
+$.ajaxSetup({
+    contentType:"application/x-www-form-urlencoded;charset=utf-8",
+    complete:function(XMLHttpRequest,textStatus)
+    {
+        //通过XMLHttpRequest取得响应头，sessionstatus  
+       //alert("1");
+        var sessionstatus=XMLHttpRequest.getResponseHeader("sessionstatus"); 
+        if(sessionstatus=="timeout")
+        {
+        	  //alert("2");
+             //这里怎么处理在你，这里跳转的登录页面
+             window.location.replace(PlanEap.getActionURI("login"));
+        }
+    }
+});
+});
+
+$(document).bind("ajaxSend", function()
+{
+      //showProgressLoader("正在添加课程,请稍等...",400);
+ }).bind("ajaxComplete", function()
+ {
+     //hideProgressLoader();
+ });
 
 
 loadStuBaseInfo();
