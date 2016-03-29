@@ -439,7 +439,7 @@ function submitMergeInfo()
 	}
 	var flag = true;
 	$("input[type='hidden']").each(function(){
-		if($(this).val()==""&&$(this).attr("id")!="tabsInfo")
+		if($(this).val()==""&&$(this).attr("id")!="tabsInfo"&&$(this).attr("name")!="remark")
 		{
 			flag =false;
 			return false;

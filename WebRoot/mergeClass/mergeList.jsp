@@ -71,9 +71,9 @@
 		  					</td>
 		  					<td align="right">合并开始时间：</td>
 		  					<td>
-		  						<input class="easyui-datebox" name="startMergeTime" id="startMergeTime" style="width:100px;" editable="false"/>
+		  						<input class="easyui-datebox" name="startMergeTime" id="startMergeTime" style="width:100px;height:25px;" editable="false"/>
 		  						至
-		  						<input class="easyui-datebox" name="endMergeTime" id="endMergeTime" style="width:100px;" editable="false"/>
+		  						<input class="easyui-datebox" name="endMergeTime" id="endMergeTime" style="width:100px;height:25px;" editable="false"/>
 		  					</td>
 		  					<td align="left">	
 		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:80px" id="qryBtn" funcNodeId="3111">查询</a>
@@ -166,9 +166,9 @@
 		  					</td>
 		  					<td align="right">合并开始时间：</td>
 		  					<td>
-		  						<input class="easyui-datebox" name="startMergeTime" id="startMergeTime" style="width:100px;" editable="false"/>
+		  						<input class="easyui-datebox" name="startMergeTime" id="startMergeTime" style="width:100px;height:25px;" editable="false"/>
 		  						至
-		  						<input class="easyui-datebox" name="endMergeTime" id="endMergeTime" style="width:100px;" editable="false"/>
+		  						<input class="easyui-datebox" name="endMergeTime" id="endMergeTime" style="width:100px;height:25px;" editable="false"/>
 		  					</td>
 		  					<td align="left">	
 		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtns" funcNodeId="3111">查询</a>
