@@ -103,8 +103,8 @@
   		</div>
   		<div id="courseChangePlan"  class="easyui-panel" title="课程调整计划" style="width:1293px;">  			
   		</div>
-  		<div class="easyui-panel" title="合并说明" style="width:1293px;height:140px;">
-  			<input name="remark" id="remark" type="text" style="width:80%;height:110px" class="easyui-textbox" data-options="multiline:true" /> 						
+  		<div class="easyui-panel" title="合并说明" style="width:1293px;height:130px;">
+  			<input name="remark" id="remark" type="text" style="width:600px;height:100px" class="easyui-textbox" data-options="multiline:true" /> 						
   		</div>
   		<div style="width:1293px;text-align:right;margin:50px 0;">
   			 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px" id="submitBtn"><span>提交</span></a>
