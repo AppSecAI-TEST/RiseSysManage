@@ -99,7 +99,7 @@ function initApplyClassTable(classes)
 			});
 			tr1.find("td:eq(12)").find("input").attr("id","openClassDate");
 		}
-		var max=parseFloat(obj.readNum);
+		var max=parseFloat(obj.readNum)>parseFloat(obj.higherNum)?parseFloat(obj.higherNum):parseFloat(obj.readNum);
 		tr1.find("td:eq(8)").find("input").attr("data-options","min:0,max:"+max+",precision:1,required:true");
 		tr1.css("display","table-row");
 		$("#mergeTab").append(tr1);
@@ -439,7 +439,7 @@ function submitMergeInfo()
 	}
 	var flag = true;
 	$("input[type='hidden']").each(function(){
-		if($(this).val()==""&&$(this).attr("id")!="tabsInfo")
+		if($(this).val()==""&&$(this).attr("id")!="tabsInfo"&&$(this).attr("name")!="remark")
 		{
 			flag =false;
 			return false;

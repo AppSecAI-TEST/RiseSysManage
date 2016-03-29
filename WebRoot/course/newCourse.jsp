@@ -480,34 +480,48 @@
 											<input type="text" class="easyui-textbox"
 												style="width: 100px;height: 25px;">
 										</td>
+										<td align="right" style="border-left: 1px solid #ccc; border-right: 1px solid #ccc;">
+											<span>班级：</span>
+										</td>
+										<td align="center">
+											<input type="text" class="easyui-textbox"
+												style="width: 100px;height: 25px">
+										</td>
 									</tr>
 									<tr style="display: none;">
 										<td align="right"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
-											<span>班级：</span>
+											<span>转介绍老师A：</span>
 										</td>
 										<td align="center"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
-											<input type="text" class="easyui-textbox"
-												style="width: 100px;height: 25px;">
+											<select class="easyui-combobox" editable='false' id="ta_teacher_school"
+												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+												  
+												style="width: 100px; height: 25px;">
+											</select>
+											<select class="easyui-combobox" editable='false' id="ta_teacher_id"
+												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+												style="width: 100px; height: 25px;">
+											<select>
 										</td>
 										<td align="right"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
-											<span>转介绍老师:</span>
+											<span>转介绍老师B：</span>
 										</td>
 										<td align="center"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
-											<select class="easyui-combobox" editable='false' id="t_teacher_school"
+											<select class="easyui-combobox" editable='false' id="tb_teacher_school"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 												  
-												style="width: 100px;height: 25px;">
+												style="width: 100px; height: 25px;">
 											</select>
-											<select class="easyui-combobox" editable='false' id="t_teacher_id"
+											<select class="easyui-combobox" editable='false' id="tb_teacher_id"
 												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
-												style="width: 100px;height: 25px;">
+												style="width: 100px; height: 25px;">
 											<select>
 										</td>
-										<td align="left" style="border-top: 1px solid #ccc;">
+										<td colspan="2" align="center" style="border-top: 1px solid #ccc;">
 											<a href="javascript:void(0)" id="searchStudent"
 												style="width: 100px" class="easyui-linkbutton"
 												iconCls="icon-add" plain="true" onclick="searchStudent()"><span>学员检索</span>
@@ -582,7 +596,9 @@ var advisterBid="<%=StringUtil.getJSONObjectKeyVal(object,"adviserB")%>";
 $("#activeSchool").combobox({data:schools});
 $("#c_schoolA").combobox({data:schools});
 $("#c_schoolB").combobox({data:schools});
-$("#t_teacher_school").combobox({data:schools});
+$("#ta_teacher_school").combobox({data:schools});
+$("#tb_teacher_school").combobox({data:schools});
+
 $("#c_schoolsB").combobox({data:schools});
 $("#c_schoolsA").combobox({data:schools});
 
@@ -1705,10 +1721,16 @@ $("#praiseSourceN").combobox({
 						womItem["studentName"] = stuNames;
 						womItem["identityType"] = tr1.find("td:eq(3)").find(".easyui-combobox").combobox("getValue");
 						womItem["identityId"] = tr1.find("td:eq(3)").find(".easyui-textbox").textbox("getValue");
-						var tr2 = $("#praiseTab2").find("tr:eq(1)");
-						womItem["className"] = tr2.find("td:eq(1)").find(".easyui-textbox").textbox("getValue");
-						womItem["teacherIdSchool"] = $("#t_teacher_school").combobox("getValue");
-						womItem["teacherId"] = $("#t_teacher_id").combobox("getValue");
+						womItem["className"] = tr1.find("td:eq(5)").find(".easyui-textbox").textbox("getValue");
+						womItem["teacherASchool"] = $("#ta_teacher_school").combobox("getValue");
+						womItem["teacherA"] = $("#ta_teacher_id").combobox("getValue");
+						womItem["teacherBSchool"] = $("#tb_teacher_school").combobox("getValue");
+						womItem["teacherB"] = $("#tb_teacher_id").combobox("getValue");
+						if(womItem["teacherA"]==womItem["teacherB"]&&womItem["teacherA"]!="")
+						{
+							showMessage('提示', "转介绍老师A,B不能相同!",null);
+							return false;
+						}	
 					}		
 				}
 				else if(womChannel=="Sta")
@@ -1748,8 +1770,7 @@ $("#praiseSourceN").combobox({
 		tr1.find("td:eq(1)").find(".easyui-textbox").textbox("setValue",obj.name);
 		tr1.find("td:eq(3)").find(".easyui-combobox").combobox("setValue",obj.identityType);
 		tr1.find("td:eq(3)").find(".easyui-textbox").textbox("setValue",obj.identityId);
-		var tr2 =$("#praiseTab2").find("tr:eq(1)");
-		tr2.find("td:eq(1)").find(".easyui-textbox").textbox("setValue",obj.className);
+		tr1.find("td:eq(5)").find(".easyui-textbox").textbox("setValue",obj.className);
 		tr1.attr("studentId",obj.studentId);
 		tr1.attr("studentSchoolId",obj.schoolId);
 		$('#dlg').attr("src","");
@@ -1832,15 +1853,28 @@ $("#praiseSourceN").combobox({
 		}
 	})
 	
-	$("#t_teacher_school").combobox({
+	$("#ta_teacher_school").combobox({
 		onChange:function(){
-			var sId =$("#t_teacher_school").combobox("getValue");
+			var sId =$("#ta_teacher_school").combobox("getValue");
 			if(sId=='')
 			{
 				return;
 			}
 			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
-			$("#t_teacher_id").combobox({
+			$("#ta_teacher_id").combobox({
+				url:urls
+			});
+		}
+	})
+	$("#tb_teacher_school").combobox({
+		onChange:function(){
+			var sId =$("#ta_teacher_school").combobox("getValue");
+			if(sId=='')
+			{
+				return;
+			}
+			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+			$("#tb_teacher_id").combobox({
 				url:urls
 			});
 		}
@@ -1928,8 +1962,10 @@ $("#praiseSourceN").combobox({
 					 if('Stu'==womChannel)
 					 {
 						  searchStudentInfo(obj);
-						  $("#t_teacher_school").combobox("setValue",wom.teacherIdSchool); 
-						  $("#t_teacher_id").combobox("setValue",wom.teacherId); 
+						  $("#ta_teacher_school").combobox("setValue",wom.teacherASchool); 
+						  $("#ta_teacher_id").combobox("setValue",wom.teacherA); 
+						  $("#tb_teacher_school").combobox("setValue",wom.teacherBSchool); 
+						  $("#tb_teacher_id").combobox("setValue",wom.teacherB);
 					 }
 					$("#womStaffName").textbox("setValue",wom.staffName);
 				 }

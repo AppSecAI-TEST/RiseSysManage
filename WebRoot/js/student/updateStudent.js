@@ -10,7 +10,62 @@ var validateFlag = false;
 var contactLength = 0;
 var studentObj = null;
 var array = new Array();
+
+function disY()
+{
+	$("form[id='studentFm'] :text").attr("disabled",false);
+	$("#identityType").combobox({disabled: false});
+	$("#schoolType").combobox({disabled: false});
+	$("#advisterIdA").combobox({disabled: false});
+	$("#advisterIdB").combobox({disabled: false});
+	$("#advisterASchoolId").combobox({disabled: false});
+	$("#advisterBSchoolId").combobox({disabled: false});
+	$("#dutyAdvister").combobox({disabled: false});
+	$("#carer").combobox({disabled: false});
+	
+	
+	$("#entranceDate").datebox({disabled:false});
+	$("#birthday").datebox({disabled: false});
+	$("#entranceDate").datebox('setValue', studentObj.entranceDate);
+	$("#birthday").datebox('setValue', studentObj.birthday);
+	$("form[id='studentFm'] :radio").attr("disabled",false);
+}
+
+function disN()
+{
+	var postIds=$("#postIds").val();
+	{
+		$("form[id='studentFm'] :text").attr("disabled",true);
+		$("#identityType").combobox({disabled: true});
+		$("#schoolType").combobox({disabled: true});
+		$("#advisterIdA").combobox({disabled: true});
+		$("#advisterIdB").combobox({disabled: true});
+		$("#advisterASchoolId").combobox({disabled: true});
+		$("#advisterBSchoolId").combobox({disabled: true});
+		$("#dutyAdvister").combobox({disabled: true});
+		$("#carer").combobox({disabled: true});
+		$("#entranceDate").datebox({disabled: true});
+		$("#birthday").datebox({disabled: true});
+		$("form[id='studentFm'] :radio").attr("disabled",true);
+	}
+	
+	if(postIds.indexOf('33')>-1 || postIds.indexOf('2')>-1 || postIds.indexOf('3')>-1 || postIds.indexOf('4')>-1 || postIds.indexOf('1')>-1 ||  postIds.indexOf('29')>-1 )
+	{
+		$("#byName").textbox({disabled: false});
+		$("#address").textbox({disabled: false});
+		$("#dutyAdvister").combobox({disabled: false});
+		$("#realSchoolId").combobox({disabled: false});
+	}
+	if(studentObj!=null)
+	{
+		$("#entranceDate").datebox('setValue', studentObj.entranceDate);
+		$("#birthday").datebox('setValue', studentObj.birthday);
+	}
+	
+}
+
 $(document).ready(function() {
+	disN();
 	var studentId = $("#studentId").val();
 	var funcNodeId = 1002;
 	$.ajax({
@@ -386,6 +441,7 @@ $(document).ready(function() {
 	
 	//学员修改提交
 	$("#updateSubmit").click(function() {
+		 disY();
 		contactLength += $("[name='contacts']").length;
 		if(contactLength > 0) {
 			var usedFlag = false;
@@ -485,16 +541,23 @@ $(document).ready(function() {
 								});
 							}
 						} else {
+							 disN();
 							$.messager.alert('提示', "出生日期需要与本人身份证号码中的出生日期一致！");
 						}
+					}else
+					{
+						disN();
 					}
 				} else {
+					disN();
 					$.messager.alert('提示', "请先对该学员做一些修改之后，再进行提交！");
 				}
 			} else {
+				disN();
 				$.messager.alert('提示', "请至少设置一位联系人为常用联系人！");
 			}
 		} else {
+			disN();
 			$.messager.alert('提示', "请至少添加一个联系人信息！");
 		}
 	});
@@ -656,6 +719,7 @@ $(document).ready(function() {
 			$("#remark").textbox("setValue", "");
     	}
     });
+     
 });
 
 function back() {

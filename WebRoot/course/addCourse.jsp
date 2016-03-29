@@ -195,7 +195,7 @@
    					  	</tr>
       					<tr>
       					  	<td align="right"><span>备注：</span></td>
-      					  	<td colspan="5"><input type="text" id="remark" name="remark" class="easyui-textbox validatebox"  style="width: 820px; height: 25px;"></td>
+      					  	<td colspan="5"><input type="text" id="remark" name="remark"  class="easyui-textbox validatebox"  validType="length[0,50]" style="width: 820px; height: 25px;"/></td>
    					  	</tr>
 					</table>
 				</div>
@@ -527,34 +527,48 @@
 											<input type="text" class="easyui-textbox"
 												style="width: 100px;height: 25px">
 										</td>
+										<td align="right" style="border-left: 1px solid #ccc; border-right: 1px solid #ccc;">
+											<span>班级：</span>
+										</td>
+										<td align="center">
+											<input type="text" class="easyui-textbox"
+												style="width: 100px;height: 25px">
+										</td>
 									</tr>
 									<tr style="display: none;">
 										<td align="right"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
-											<span>班级：</span>
+											<span>转介绍老师A：</span>
 										</td>
 										<td align="center"
 											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
-											<input type="text" class="easyui-textbox"
-												style="width: 100px;height: 25px">
-										</td>
-										<td align="right"
-											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
-											<span>转介绍老师：</span>
-										</td>
-										<td align="center"
-											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
-											<select class="easyui-combobox" editable='false' id="t_teacher_school"
+											<select class="easyui-combobox" editable='false' id="ta_teacher_school"
 												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 												  
 												style="width: 100px; height: 25px;">
 											</select>
-											<select class="easyui-combobox" editable='false' id="t_teacher_id"
+											<select class="easyui-combobox" editable='false' id="ta_teacher_id"
 												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
 												style="width: 100px; height: 25px;">
 											<select>
 										</td>
-										<td align="left" style="border-top: 1px solid #ccc;">
+										<td align="right"
+											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
+											<span>转介绍老师B：</span>
+										</td>
+										<td align="center"
+											style="border-top: 1px solid #ccc; border-right: 1px solid #ccc;">
+											<select class="easyui-combobox" editable='false' id="tb_teacher_school"
+												data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+												  
+												style="width: 100px; height: 25px;">
+											</select>
+											<select class="easyui-combobox" editable='false' id="tb_teacher_id"
+												data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
+												style="width: 100px; height: 25px;">
+											<select>
+										</td>
+										<td colspan="2" align="center" style="border-top: 1px solid #ccc;">
 											<a href="javascript:void(0)" id="searchStudent"
 												style="width: 100px" class="easyui-linkbutton"
 												iconCls="icon-add"  onclick="searchStudent()"><span>学员检索</span>
@@ -633,7 +647,7 @@
 								<span>备注：</span>
 							</td>
 							<td colspan="6">
-							<input type="text" id="shortRemark" name="shortRemark" class="easyui-textbox validatebox"  style="width: 820px; height: 25px;">
+							<input type="text" id="shortRemark" name="shortRemark" class="easyui-textbox validatebox"  validType="length[0,50]" style="width: 820px; height: 25px;">
 							</td>
 						</tr>
 						<tr>
@@ -753,7 +767,9 @@ $("#adviserTeacherB_school").combobox({data:schools});
 $("#activeSchool").combobox({data:schools});
 $("#c_schoolA").combobox({data:schools});
 $("#c_schoolB").combobox({data:schools});
-$("#t_teacher_school").combobox({data:schools});
+$("#ta_teacher_school").combobox({data:schools});
+$("#tb_teacher_school").combobox({data:schools});
+
 $("#c_schoolsB").combobox({data:schools});
 $("#c_schoolsA").combobox({data:schools});
 
@@ -767,6 +783,31 @@ $("#s_schoolA").combobox({data:schools});
 $("#s_schooldA").combobox({data:schools});
 $("#s_schooldB").combobox({data:schools});
 
+$(document).ready(function() {
+$.ajaxSetup({
+    contentType:"application/x-www-form-urlencoded;charset=utf-8",
+    complete:function(XMLHttpRequest,textStatus)
+    {
+        //通过XMLHttpRequest取得响应头，sessionstatus  
+       //alert("1");
+        var sessionstatus=XMLHttpRequest.getResponseHeader("sessionstatus"); 
+        if(sessionstatus=="timeout")
+        {
+        	  //alert("2");
+             //这里怎么处理在你，这里跳转的登录页面
+             window.location.replace(PlanEap.getActionURI("login"));
+        }
+    }
+});
+});
+
+$(document).bind("ajaxSend", function()
+{
+      //showProgressLoader("正在添加课程,请稍等...",400);
+ }).bind("ajaxComplete", function()
+ {
+     //hideProgressLoader();
+ });
 
 
 loadStuBaseInfo();
@@ -1689,10 +1730,16 @@ function addCourseInfo() {
 					womItem["studentName"] = stuNames;
 					womItem["identityType"] = tr1.find("td:eq(3)").find(".easyui-combobox").combobox("getValue");
 					womItem["identityId"] = tr1.find("td:eq(3)").find(".easyui-textbox").textbox("getValue");
-					var tr2 = $("#praiseTab2").find("tr:eq(1)");
-					womItem["className"] = tr2.find("td:eq(1)").find(".easyui-textbox").textbox("getValue");
-					womItem["teacherIdSchool"] = $("#t_teacher_school").combobox("getValue");
-					womItem["teacherId"] = $("#t_teacher_id").combobox("getValue");
+					womItem["className"] = tr1.find("td:eq(5)").find(".easyui-textbox").textbox("getValue");
+					womItem["teacherASchool"] = $("#ta_teacher_school").combobox("getValue");
+					womItem["teacherA"] = $("#ta_teacher_id").combobox("getValue");
+					womItem["teacherBSchool"] = $("#tb_teacher_school").combobox("getValue");
+					womItem["teacherB"] = $("#tb_teacher_id").combobox("getValue");
+					if(womItem["teacherA"]==womItem["teacherB"]&&womItem["teacherA"]!="")
+					{
+						showMessage('提示', "转介绍老师A,B不能相同!",null);
+						return false;
+					}	
 				}	
 			} else if(womChannel == "Sta") {
 				if($("#womStaffName").textbox("getValue") != "") {
@@ -1824,11 +1871,21 @@ $("#c_schoolsB").combobox({
 	}
 });
 	
-$("#t_teacher_school").combobox({
+$("#ta_teacher_school").combobox({
 	onChange:function(){
-		var sId = $("#t_teacher_school").combobox("getValue");
+		var sId = $("#ta_teacher_school").combobox("getValue");
 		var urls = "<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
-		$("#t_teacher_id").combobox({
+		$("#ta_teacher_id").combobox({
+			url:urls
+		});
+	}
+});
+
+$("#tb_teacher_school").combobox({
+	onChange:function(){
+		var sId = $("#tb_teacher_school").combobox("getValue");
+		var urls = "<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
+		$("#tb_teacher_id").combobox({
 			url:urls
 		});
 	}

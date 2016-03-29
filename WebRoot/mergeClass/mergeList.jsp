@@ -71,9 +71,9 @@
 		  					</td>
 		  					<td align="right">合并开始时间：</td>
 		  					<td>
-		  						<input class="easyui-datebox" name="startMergeTime" id="startMergeTime" style="width:100px;" editable="false"/>
+		  						<input class="easyui-datebox" name="startMergeTime" id="startMergeTime" style="width:100px;height:25px;" editable="false"/>
 		  						至
-		  						<input class="easyui-datebox" name="endMergeTime" id="endMergeTime" style="width:100px;" editable="false"/>
+		  						<input class="easyui-datebox" name="endMergeTime" id="endMergeTime" style="width:100px;height:25px;" editable="false"/>
 		  					</td>
 		  					<td align="left">	
 		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:80px" id="qryBtn" funcNodeId="3111">查询</a>
@@ -137,8 +137,7 @@
 		  					<td width="80px;" align="right">课程阶段：</td>
 		  					<td width="120px;">
 		  						<select id="stageIds" name="stageId" class="easyui-combobox" style="width: 120px;height:25px;" editable="false"
-									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto', 
-				      				onLoadSuccess:function(data){if(data.length > 0) $('#stageIds').combobox('setValue',data[0].stageId);}"
+									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'"
   									url="<%=path%>/pubData/qryStage.do?">
 				        		</select>
 		  					</td>
@@ -166,9 +165,9 @@
 		  					</td>
 		  					<td align="right">合并开始时间：</td>
 		  					<td>
-		  						<input class="easyui-datebox" name="startMergeTime" id="startMergeTime" style="width:100px;" editable="false"/>
+		  						<input class="easyui-datebox" name="startMergeTime" id="startMergeTime" style="width:100px;height:25px;" editable="false"/>
 		  						至
-		  						<input class="easyui-datebox" name="endMergeTime" id="endMergeTime" style="width:100px;" editable="false"/>
+		  						<input class="easyui-datebox" name="endMergeTime" id="endMergeTime" style="width:100px;height:25px;" editable="false"/>
 		  					</td>
 		  					<td align="left">	
 		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtns" funcNodeId="3111">查询</a>

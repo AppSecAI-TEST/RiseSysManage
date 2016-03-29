@@ -43,7 +43,14 @@ function adjustSchooltime() {
 	if(validateSelect("list_data")) {
 		var row = $("#list_data").datagrid('getSelected');
 		var applyId = row.applyId;
-		window.location.href = "/sys/mergeClass/adjustSchooltime.do?applyId=" + applyId;
+		if(row.stateValue=="002")
+		{
+			window.location.href = "/sys/mergeClass/adjustSchooltime.do?applyId=" + applyId;
+		}
+		else
+		{
+			$.messager.alert('提示', "只有审批通过的记录可以调整上课时段！");
+		}	
 	}
 }
 
@@ -101,13 +108,13 @@ function orderClass()
 	if(validateSelect("list_data"))
 	{
 		var row = $("#list_data").datagrid('getSelected');
-		//if(row.stateValue=="001")
-		//{
+		if(row.stateValue=="002")
+		{
 			window.location.href ="orderClass.jsp?applyId="+row.applyId;
-		//}
-		//else
-		//{
-			//$.messager.alert('提示', "！");
-		//}	
+		}
+		else
+		{
+			$.messager.alert('提示', "只有审批通过的记录可以进行定班处理！");
+		}	
 	}
 }
