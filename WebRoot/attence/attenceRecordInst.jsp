@@ -446,13 +446,16 @@
   	</head>
   
   	<body class="manage">
-		<table class="tab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
+		    <div class="panel-title">新增考勤信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
+		<table class="tab" style="width:99%;margin:5px auto;margin:0px auto;margin-bottom:5px;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr style="display:none;">
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td colspan="2">新增考勤信息</td>
 			</tr>
 			<tr>
 				<td align="right" width="10%">上课时间：</td>
@@ -467,8 +470,14 @@
 				<td><input name="classLessonHour" id="classLessonHour" type="text" style="width:200px" class="easyui-textbox" data-options="readonly:true" /></td>
 			</tr>
 		</table>
-		<table class="tab" id="teacherTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<tr class="headTr">
+		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
+		    <div class="panel-title">上课老师信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
+		<table class="tab" id="teacherTab" style="width:99%;margin:0px auto;margin-bottom:5px;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+			<tr class="headTr datagrid-header">
 				<td>&nbsp;</td>
 				<td>校区</td>
 				<td>姓名</td>
@@ -487,14 +496,24 @@
 				<td align="center" width="15%"><a href="javascript:void(0)" id="addTeacherBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="addAttendTeacher()">添加</a></td>
 			</tr>
 		</table>
-		<c:if test="${isFirstFlag == 'Y'}">
-			<div id="toolbar" style="width:99%;margin:5px auto;padding:0 0;">
-				<a href="javascript:void(0)" id="removeStaffBtn" class="easyui-linkbutton" iconCls="icon-remove" style="width: 150px;" onclick="removeClassStudent()">移除学员</a>
-	   			<a href="javascript:void(0)" id="convertExceptionBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 150px;" onclick="convertExceptionClass()">正常转异常开班</a>
-			</div>
-		</c:if>
-		<table class="tab" id="studentTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<tr class="headTr">
+		<c:choose>
+			<c:when test="${isFirstFlag == 'Y'}">
+				<div id="toolbar" style="width:99%;margin:5px auto;padding:0 0;">
+					<a href="javascript:void(0)" id="removeStaffBtn" class="easyui-linkbutton" iconCls="icon-remove" style="width: 150px;" onclick="removeClassStudent()">移除学员</a>
+		   			<a href="javascript:void(0)" id="convertExceptionBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 150px;" onclick="convertExceptionClass()">正常转异常开班</a>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="panel datagrid easyui-fluid" style="width:99%">
+				  <div class="panel-header">
+				    <div class="panel-title">课程学员信息</div>
+				    <div class="panel-tool"></div>
+				  </div>
+				</div>
+			</c:otherwise>
+		</c:choose>
+		<table class="tab" id="studentTab" style="width:99%;margin:0px auto;margin-bottom:5px;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+			<tr class="headTr datagrid-header">
 				<td width="3%"><input type="checkbox" name="studentId" id="studentAllId" value="" onclick="checkAllStudentFunc(this)" /></td>
 				<td width="3%">序号</td>
 				<td width="10%">学员姓名</td>

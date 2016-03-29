@@ -118,6 +118,10 @@
 				var obj = $("#attFm").serializeObject();
 				var classStart = $("#classStart").datebox("getValue");
 				var classEnd = $("#classEnd").datebox("getValue");
+				var attendStartRate = $("#attendStartRate").textbox("getValue");
+				var attendEndRate = $("#attendEndRate").textbox("getValue");
+				var schoolWearStartRate = $("#schoolWearStartRate").textbox("getValue");
+				var schoolWearEndRate = $("#schoolWearEndRate").textbox("getValue");
 				if(classStart != "" && classEnd == "")
 				{
 					obj["classEnd"] = "3000-12-31";
@@ -125,6 +129,22 @@
 				else if(classStart == "" && classEnd != "")
 				{
 					obj["classStart"] = "1900-01-01";
+				}
+				if(attendStartRate != "" && attendEndRate == "")
+				{
+					obj["attendEndRate"] = "100";
+				}
+				else if(attendStartRate == "" && attendEndRate != "")
+				{
+					obj["attendStartRate"] = "0";
+				}
+				if(schoolWearStartRate != "" && schoolWearEndRate == "")
+				{
+					obj["schoolWearEndRate"] = "100";
+				}
+				else if(schoolWearStartRate == "" && schoolWearEndRate != "")
+				{
+					obj["schoolWearStartRate"] = "0";
 				}
 				obj["queryCode"] = "qryAttenceDetailReport";
 				obj["funcNodeId"] = "38126";

@@ -322,7 +322,13 @@
 		</script>
   	</head>
   	<body class="manage">
-		<table class="tab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
+		    <div class="panel-title">课程信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
+		<table class="tab" style="width:99%;margin:0px auto;margin-bottom:5px;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="right" width="10%">上课时间：</td>
 				<td><fmt:formatDate value="${shortClassAttendT.schooltime}" pattern="yyyy-MM-dd" /> <input class="easyui-timespinner" id="startTime" name="startTime" style="width:70px;height: 25px;"  data-options="showSeconds:false">&nbsp;&nbsp;<input class="easyui-timespinner" id="endTime" name="endTime" style="width:70px;height: 25px;"  data-options="showSeconds:false"></td>
@@ -336,8 +342,14 @@
 				<td><input name="classLessonHour" id="classLessonHour" type="text" style="width:200px" class="easyui-textbox" /></td>
 			</tr>
 		</table>
-		<table class="tab" id="teacherTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<tr class="headTr">
+		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
+		    <div class="panel-title">上课老师信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
+		<table class="tab" id="teacherTab" style="width:99%;margin:0px auto;margin-bottom:5px;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+			<tr class="headTr datagrid-header">
 				<td>&nbsp;</td>
 				<td>校区</td>
 				<td>姓名</td>
@@ -376,8 +388,14 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<table class="tab" id="studentTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<tr class="headTr">
+		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
+		    <div class="panel-title">课程学员信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
+		<table class="tab" id="studentTab" style="width:99%;margin:0px auto;margin-bottom:5px;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+			<tr class="headTr datagrid-header">
 				<td width="3%"><input type="checkbox" name="studentId" id="studentAllId" value="" onclick="checkAllStudentFunc(this)" /></td>
 				<td width="3%">序号</td>
 				<td width="10%">学员姓名</td>

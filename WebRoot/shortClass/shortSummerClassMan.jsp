@@ -228,6 +228,12 @@
 		</script>
   	</head>
   	<body class="manage">
+		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
+		    <div class="panel-title">课程信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
 		<table align="center" class="tab" style="height:90px;width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="right" width="15%">赠课类型：</td>

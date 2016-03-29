@@ -13,7 +13,6 @@
 		<%@ include file="../common/formvalidator.jsp" %>
 		<style type="text/css">
 			.tab td{
-				font-size:14px;
 				height:30px;
 				border-right:1px solid #ccc;
 				border-bottom:1px solid #ccc;
@@ -72,7 +71,13 @@
 		</script>
   	</head>
   	<body class="manage">
- 		<table align="center" class="tab" style="height:90px;width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+  		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
+		    <div class="panel-title">班级基本信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
+ 		<table align="center" class="tab" style="height:90px;width:99%;margin:0 auto;margin-bottom:5px;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="right" width="15%">赠课类型：</td>
 				<td width="18%">${shortClassInstT.giftTypeT.typeName}</td>
@@ -90,7 +95,13 @@
 				<td><fmt:formatDate value="${shortClassInstT.finishDate}" pattern="yyyy-MM-dd" /></td>
 			</tr>
 		</table>
-		<table region="center" class="tab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
+		    <div class="panel-title">课程计划信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
+		<table region="center" class="tab" style="width:99%;margin:0px auto;margin-bottom:5px;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<c:choose>
 				<c:when test="${fn:length(shortClassInstT.classSchooltimeList) == 0}">
 					<tr>
@@ -127,7 +138,7 @@
    			<a href="javascript:void(0)" id="viewAttenceBtn" class="easyui-linkbutton" iconCls="icon-search" onclick="viewAttenceFunc()" style="width: 100px;">浏览</a>
 		</div>
 		<table region="center" class="tab" id="attendList" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<tr class="headTr">
+			<tr class="headTr datagrid-header">
 				<td>&nbsp;</td>
 				<td>序号</td>
 				<td>上课日期</td>

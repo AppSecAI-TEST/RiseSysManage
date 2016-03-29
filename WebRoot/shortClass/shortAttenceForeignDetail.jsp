@@ -74,6 +74,12 @@
 		</script>
   	</head>
   	<body class="manage">
+		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
+		    <div class="panel-title">课程信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
 		<table align="center" class="tab" style="height:90px;width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="right" width="15%">班级名称：</td>
@@ -121,7 +127,7 @@
    			<a href="javascript:void(0)" id="cancelAttenceBtn" class="easyui-linkbutton" iconCls="icon-cancel" onclick="cancelAttenceFunc()" style="width: 100px;">取消预约</a>
 		</div>
 		<table region="center" class="tab" id="teacherList" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<tr class="headTr">
+			<tr class="headTr datagrid-header">
 				<td>&nbsp;</td>
 				<td>序号</td>
 				<td>学员姓名</td>

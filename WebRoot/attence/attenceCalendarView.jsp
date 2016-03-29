@@ -13,7 +13,6 @@
 		<%@ include file="../common/formvalidator.jsp" %>
 		<style type="text/css">
 			.tab td{
-				font-size:14px;
 				height:30px;
 				border-right:1px solid #ccc;
 				border-bottom:1px solid #ccc;

@@ -52,21 +52,19 @@
 						是否退费：
 					</td>
 					<td>
-						<input name="feeReturn" id="feeReturnYes" type="radio" value="是" /><label for="feeReturnYes">是</label>&nbsp;
-						<input name="feeReturn" id="feeReturnNo" type="radio" value="否" /><label for="feeReturnNo">否</label>										
+						<select id="feeReturn" name="feeReturn" style="width:100px" ></select>
 					</td>
 					<td align="right">
 						国际班类型：
 					</td>
 					<td>
-						<select id="interClassType" name="interClassType" style="width:100px" ></select>								
+						<select id="interClassType" name="interClassType" style="width:100px" ></select>							
 					</td>
 					<td align="right">
 						是否选班：
 					</td>
 					<td>
-						<input name="selectClass" id="selectClassYes" type="radio" value="已选" /><label for="selectClassYes">已选</label>&nbsp;
-						<input name="selectClass" id="selectClassNo" type="radio" value="未选" /><label for="selectClassNo">未选</label>								
+						<select id="selectClass" name="selectClass" style="width:100px" ></select>			
 					</td>
 					<td align="left">
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
@@ -112,6 +110,32 @@
 					}, 
 					valueField: 'classType', 
 					textField: 'classType',
+					panelHeight: 'auto'
+				});
+				$("#feeReturn").combobox({
+					formatter:function(data){
+						return '<span>'+data.text+'</span>';
+					}, 
+					data:[{
+						text:"是",
+						value:"是"
+					},{
+						text:"否",
+						value:"否"
+					}],
+					panelHeight: 'auto'
+				});
+				$("#selectClass").combobox({
+					formatter:function(data){
+						return '<span>'+data.text+'</span>';
+					}, 
+					data:[{
+						text:"已选",
+						value:"已选"
+					},{
+						text:"未选",
+						value:"未选"
+					}],
 					panelHeight: 'auto'
 				});
 			});

@@ -55,8 +55,7 @@
 						是否退费：
 					</td>
 					<td>
-						<input name="feeReturn" id="feeReturnYes" type="radio" value="是" /><label for="feeReturnYes">是</label>&nbsp;
-						<input name="feeReturn" id="feeReturnNo" type="radio" value="否" /><label for="feeReturnNo">否</label>										
+						<select id="feeReturn" name="feeReturn" style="width:100px" ></select>										
 					</td>
 					<td align="right">	
 						业绩老师：
@@ -105,6 +104,19 @@
 		<script type="text/javascript">
 			$(document).ready(function(){
 				initReportButton("resetBtn","manFm","schoolId");
+				$("#feeReturn").combobox({
+					formatter:function(data){
+						return '<span>'+data.text+'</span>';
+					}, 
+					data:[{
+						text:"是",
+						value:"是"
+					},{
+						text:"否",
+						value:"否"
+					}],
+					panelHeight: 'auto'
+				});
 			});
 			function queryFunc()
 			{

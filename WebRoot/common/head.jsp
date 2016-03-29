@@ -2,6 +2,7 @@
 <%
 	String headPath = request.getContextPath();
 %>
+<link rel="shortcut icon" href="<%=headPath %>/pub/images/favicon.ico" />
 <link href="<%=headPath %>/pub/js/easyui/themes/icon-min.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" type="text/css" href="<%=headPath %>/pub/css/jquery.lightbox-0.5-min.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="<%=headPath %>/pub/css/icons-min.css" />

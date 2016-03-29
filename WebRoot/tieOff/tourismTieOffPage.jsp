@@ -12,9 +12,9 @@
   	<body>
   		<div style="padding:5px 0;">
   			<form id="qryFm" style="margin:0 auto;">
-	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
+	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto">
 	  				<tr>
-	  					<td width="100px" align="right"><span>日期：</span></td>
+	  					<td width="80px" align="right"><span>日期：</span></td>
 						<td width="114px">
 							<input class="easyui-datebox" type="text" style="width:100px;height:25px;" id="startTime" name="startTime" data-options="formatter:myYearMonthformatter, parser:myparser" />
 						</td>
@@ -29,7 +29,7 @@
 	  				</tr>	
 	  			</table>
   			</form>
-			<div style="padding:5px 0;min-width:1100px; width:100%;">
+			<div style="padding:5px 0;min-width:1100px;width:99%;margin:0 auto">
 				<table class="easyui-datagrid" style="height:435px;" id="list_data" title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
 						<tr>

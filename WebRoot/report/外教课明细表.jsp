@@ -111,6 +111,8 @@
 				var obj = $("#manFm").serializeObject();
 				var feeStartTime = $("#feeStartTime").datebox("getValue");
 				var feeEndTime = $("#feeEndTime").datebox("getValue");
+				var consTimesStart = $("#consTimesStart").textbox("getValue");
+				var consTimesEnd = $("#consTimesEnd").textbox("getValue");
 				if(feeStartTime != "" && feeEndTime == "")
 				{
 					obj["feeEndTime"] = "3000-12-31";
@@ -118,6 +120,14 @@
 				else if(feeStartTime == "" && feeEndTime != "")
 				{
 					obj["feeStartTime"] = "1900-01-01";
+				}
+				if(consTimesStart != "" && consTimesEnd == "")
+				{
+					obj["consTimesEnd"] = "99999999";
+				}
+				else if(consTimesStart == "" && consTimesEnd != "")
+				{
+					obj["consTimesStart"] = "0";
 				}
 				obj["queryCode"] = "qryForeignInfoList";
 				obj["funcNodeId"] = "38141";

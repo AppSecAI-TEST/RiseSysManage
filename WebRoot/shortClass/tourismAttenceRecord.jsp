@@ -191,7 +191,13 @@
 		</script>
   	</head>
   	<body class="manage">
-		<table class="tab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
+		    <div class="panel-title">课程信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
+		<table class="tab" style="width:99%;margin:0px auto;margin-bottom:5px;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="right" width="15%">游学开始日期：</td>
 				<td width="15%"><input name="openDate" id="openDate" type="text" style="width:150px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /></td>
@@ -199,8 +205,14 @@
 				<td><input name="finishDate" id="finishDate" type="text" style="width:150px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /></td>
 			</tr>
 		</table>
-		<table class="tab" id="teacherTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<tr class="headTr">
+		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
+		    <div class="panel-title">上课老师信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
+		<table class="tab" id="teacherTab" style="width:99%;margin:0px auto;margin-bottom:5px;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+			<tr class="headTr datagrid-header">
 				<td width="15%">&nbsp;</td>
 				<td width="15%">校区</td>
 				<td width="15%">姓名</td>
@@ -221,8 +233,15 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<table class="tab" id="studentTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<tr class="headTr">
+		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
+		    <div class="panel-title">课程学员信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
+		<table class="tab" id="studentTab" style="width:99%;margin:0px auto;margin-bottom:5px;
+padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+			<tr class="headTr datagrid-header">
 				<td width="5%">序号</td>
 				<td width="15%">校区</td>
 				<td width="15%">姓名</td>

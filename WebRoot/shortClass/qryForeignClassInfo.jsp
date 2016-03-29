@@ -42,6 +42,19 @@
 						}
 					}
 				});
+				$("#isExpire").combobox({
+					formatter:function(data){
+						return '<span>'+data.text+'</span>';
+					}, 
+					data:[{
+						text:"是",
+						value:"是"
+					},{
+						text:"否",
+						value:"否"
+					}],
+					panelHeight: 'auto'
+				});
 			});
 			function queryFunc()
 			{
@@ -78,9 +91,7 @@
 				$("#giftType").combobox("setValue","");
 				$("#feeStartTime").datebox("setValue","");
 				$("#feeEndTime").datebox("setValue","");
-				$("input[name='isExpire']").each(function(i,node){
-					node.checked = false; 
-				});
+				$("#isExpire").combobox("setValue","");
 				$("#expireDate").textbox("setValue","");
 			}
 		</script>
@@ -120,14 +131,13 @@
 						外教课状态：
 					</td>
 					<td>
-						<select id="giftType" name="giftType" style="width:100px;height:25px;" ></select>								
+						<select id="giftType" name="giftType" style="width:100px;height:25px;" ></select>						
 					</td>
 					<td align="right">
 						是否过期：
 					</td>
 					<td>
-						<input name="isExpire" id="isExpireYes" type="radio" value="是" /><label for="isExpireYes">是</label>&nbsp;
-						<input name="isExpire" id="isExpireNo" type="radio" value="否" /><label for="isExpireNo">否</label>										
+						<select id="isExpire" name="isExpire" style="width:100px;height:25px;" ></select>									
 					</td>
 					<td align="right">
 						几天内过期：

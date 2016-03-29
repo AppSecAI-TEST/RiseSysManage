@@ -18,10 +18,9 @@
  		<input id="classState" type="hidden" value="<%=classState %>"/>
  		<input id="schoolIds" type="hidden"/>
  		<input id="roomIds" type="hidden"/>
- 		<input id="hours" type="hidden"/>
  		<input id="shortSchooltimeId" type="hidden"/>
  		<input id="shortClassAttendId" type="hidden" value=""/>
- 		<div  class="easyui-panel" title="反馈信息" style="min-width:1100px;width:99%">
+ 		<div class="easyui-panel" title="反馈信息" style="min-width:1100px;width:99%">
  			<table id="infoTab" width="100%;" class="maintable">
  				<tr>
 	 				<td width="150px" align="right"><span>上课时间：</span></td>
@@ -36,7 +35,9 @@
 	 			</tr>
 	 			<tr>
 	 				<td align="right"><span>课时：</span></td>
-	 				<td align="left" colspan="5"></td>
+	 				<td align="left" colspan="5">
+	 					&nbsp;&nbsp;<input type="text" class="easyui-numberbox" id="hours" name="hours" data-options="min:1,precision:0"  style="width:150px;height: 25px;">
+	 				</td>
 	 			</tr>
 	 			<tr>
 	 				<td align="right"><span>老师：</span></td>

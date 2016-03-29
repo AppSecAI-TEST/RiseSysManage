@@ -69,20 +69,40 @@
 			});
 			function queryFunc()
 			{
+				var obj = $("#manFm").serializeObject();
 				var warmupStart = $("#warmupStart").textbox("getValue");
 				var warmupEnd = $("#warmupEnd").textbox("getValue");
 				var planTimesStart = $("#planTimesStart").textbox("getValue");
 				var planTimesEnd = $("#planTimesEnd").textbox("getValue");
 				$("#warmupCnt").val("");
-				if(warmupStart != "" && warmupEnd != "")
+				if(warmupStart != "" && warmupEnd == "")
+				{
+					obj["warmupEnd"] = "99999999";
+					$("#warmupCnt").val("1");
+				}
+				else if(warmupStart == "" && warmupEnd != "")
+				{
+					obj["warmupStart"] = "0";
+					$("#warmupCnt").val("1");
+				}
+				else if(warmupStart != "" && warmupEnd != "")
 				{
 					$("#warmupCnt").val("1");
 				}
-				if(planTimesStart != "" && planTimesEnd != "")
+				if(planTimesStart != "" && planTimesEnd == "")
+				{
+					obj["planTimesEnd"] = "99999999";
+					$("#warmupCnt").val("1");
+				}
+				else if(planTimesStart == "" && planTimesEnd != "")
+				{
+					obj["planTimesStart"] = "0";
+					$("#warmupCnt").val("1");
+				}
+				else if(planTimesStart != "" && planTimesEnd != "")
 				{
 					$("#warmupCnt").val("1");
 				}
-				var obj = $("#manFm").serializeObject();
 				obj["queryCode"] = "qryWarmupSummary";
 				obj["funcNodeId"] = "38142";
 				obj = JSON.stringify(obj);

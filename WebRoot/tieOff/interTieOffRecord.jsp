@@ -15,9 +15,9 @@
   	<body>
   		<div style="padding:5px 0;">
   			<form id="qryFm" style="margin:0 auto;">
-	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:80px;" cellspacing="2">
+	  			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto" cellspacing="2">
 	  				<tr>
-	  					<td width="100px" align="right"><span>扎帐月份：</span></td>
+	  					<td width="80px" align="right"><span>扎帐月份：</span></td>
 						<td width="114px">
 							<input class="easyui-datebox" type="text" style="width:100px;height:25px;" id="tieOffTime" name="tieOffTime" data-options="formatter:myYearMonthformatter, parser:myparser" />
 						</td>
@@ -28,7 +28,7 @@
 	  			</table>
   			</form>
 			<table class="tab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-				<tr class="headTr">
+				<tr class="headTr datagrid-header">
 					<td width="10%"><input type="checkbox" id="allRecord" onclick="checkAllFunc(this)" /></td>
 					<td width="22%">校区</td>
 					<td width="22%">国际班级名称</td>

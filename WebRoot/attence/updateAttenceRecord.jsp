@@ -13,7 +13,6 @@
 		<%@ include file="../common/formvalidator.jsp" %>
 		<style type="text/css">
 			.tab td{
-				font-size:14px;
 				height:30px;
 				border-right:1px solid #ccc;
 				border-bottom:1px solid #ccc;
@@ -27,7 +26,6 @@
 				padding-right:4px;
 			}
 			.tab tr:first-child td{
-				font-weight:bold;
 				text-align:center;
 			}
 			.tab tr td input{
@@ -249,7 +247,7 @@
 			
 			function delTeacherFunc(val)
 			{
-				 $.messager.confirm("提示", "您确定要删除该老师吗？", function (data) {
+				$.messager.confirm("提示", "您确定要删除该老师吗？", function (data) {
 		            if (data) {
 		                $("#teacherId"+val).remove();
 		            }
@@ -371,7 +369,6 @@
 					});
 				}
 			}
-			
 			function backFunc()
 			{
 				ajaxLoading("返回中...");
@@ -380,13 +377,16 @@
 		</script>
   	</head>
   	<body class="manage">
-		<table class="tab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
+		    <div class="panel-title">修改考勤信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
+		<table class="tab" style="width:99%;margin:0px auto;margin-bottom:5px;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr style="display:none;">
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td colspan="2">修改考勤信息</td>
 			</tr>
 			<tr>
 				<td align="right" width="10%">上课时间：</td>
@@ -401,8 +401,14 @@
 				<td><input name="classLessonHour" id="classLessonHour" type="text" style="width:200px" class="easyui-textbox" data-options="readonly:true" /></td>
 			</tr>
 		</table>
-		<table class="tab" id="teacherTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<tr>
+		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
+		    <div class="panel-title">上课老师信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
+		<table class="tab" id="teacherTab" style="width:99%;margin:0px auto;margin-bottom:5px;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+			<tr class="headTr datagrid-header">
 				<td>&nbsp;</td>
 				<td>校区</td>
 				<td>姓名</td>
@@ -441,8 +447,14 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<table class="tab" id="studentTab" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<tr>
+		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
+		    <div class="panel-title">课程学员信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
+		<table class="tab" id="studentTab" style="width:99%;margin:0px auto;margin-bottom:5px;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+			<tr class="headTr datagrid-header">
 				<td width="5%">&nbsp;</td>
 				<td width="5%">序号</td>
 				<td width="10%">学员姓名</td>

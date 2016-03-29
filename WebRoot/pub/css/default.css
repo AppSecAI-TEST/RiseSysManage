@@ -136,11 +136,10 @@ span {font-family:'微软雅黑','Arial','宋体'; font-size: 13px;}
 .info_table td{border:solid #ccc; border-width:0px 1px 1px 0px; padding:2px;font-size:12px;}
 .info_table{border:solid #ccc; border-width:1px 0px 0px 1px;}
 
-.tab td{font-size:14px;height:30px;border-right:1px solid #ccc;border-bottom:1px solid #ccc;font-family:"微软雅黑";padding:2px;}
-.tab .headTr{text-align:center;font-weight:bold;}
+.tab td{font-size:12px;height:30px;border-right:1px solid #ccc;border-bottom:1px solid #ccc;font-family:"微软雅黑";padding:2px;}
+.tab .headTr{text-align:center;}
 .tab tr td input{vertical-align:middle;}
 .tab tr td label{vertical-align:middle;}
-
 
 
 /*查询页面公用样式*/

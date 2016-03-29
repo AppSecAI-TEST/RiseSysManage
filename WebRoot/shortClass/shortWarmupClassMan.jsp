@@ -241,7 +241,13 @@
 		</script>
   	</head>
   	<body class="manage">
-		<table align="center" class="tab" style="height:90px;width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
+		    <div class="panel-title">课程信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
+		<table align="center" class="tab" style="height:90px;width:99%;margin:0px auto;margin-bottom:5px;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="right" width="15%">课程类型：</td>
 				<td width="18%"><select id="classType" name="classType" style="width:100px;height:25px;" ></select></td>

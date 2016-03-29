@@ -53,6 +53,19 @@
 						}
 					}
 				});
+				$("#isExpire").combobox({
+					formatter:function(data){
+						return "<span>"+data.text+"</span>";
+					},
+					data:[{
+						value:"是",
+						text:"是"
+					},{
+						value:"否",
+						text:"否"
+					}],
+					panelHeight: 'auto'
+				});
 			});
 			function queryFunc()
 			{
@@ -91,9 +104,7 @@
 				$("#feeStartTime").datebox("setValue","");
 				$("#feeEndTime").datebox("setValue","");
 				$("#expireDate").textbox("setValue","");
-				$("input[name='isExpire']").each(function(i,node){
-					node.checked = false; 
-				});
+				$("#isExpire").combobox("setValue","");
 			}
 		</script>
   	</head>
@@ -130,8 +141,7 @@
 						是否过期：
 					</td>
 					<td align="left">
-						<input name="isExpire" id="isExpireYes" type="radio" value="是" /><label for="isExpireYes">是</label>&nbsp;
-						<input name="isExpire" id="isExpireNo" type="radio" value="否" /><label for="isExpireNo">否</label>								
+						<select id="isExpire" name="isExpire" style="width:100px;height:25px;" ></select>				
 					</td>
 				</tr>
 				<tr>

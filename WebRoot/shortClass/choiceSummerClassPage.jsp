@@ -10,7 +10,7 @@
 		<%@ include file="../common/formvalidator.jsp" %>
 		<style type="text/css">
 			td{
-				font-size:14px;
+				font-size:12px;
 				font-family:"微软雅黑";
 			}
 		</style>
@@ -170,7 +170,7 @@
 				</tr>
 			</table>
 		</form>
-		<div style="padding:5px 0;min-width:1100px; width:100%">
+		<div style="padding:0 0;min-width:1100px;width:99%;margin:5px auto">
 			<table class="easyui-datagrid" title="学员列表" style="height:390px" id="studentList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
 				<thead>
 					<tr>

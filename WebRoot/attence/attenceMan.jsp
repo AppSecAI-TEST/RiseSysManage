@@ -168,6 +168,10 @@
 				var obj = $("#hisFm").serializeObject();
 				var classHisStart = $("#classHisStart").datebox("getValue");
 				var classHisEnd = $("#classHisEnd").datebox("getValue");
+				var attendStartRate = $("#attendStartRate").textbox("getValue");
+				var attendEndRate = $("#attendEndRate").textbox("getValue");
+				var schoolWearStartRate = $("#schoolWearStartRate").textbox("getValue");
+				var schoolWearEndRate = $("#schoolWearEndRate").textbox("getValue");
 				if(classHisStart != "" && classHisEnd == "")
 				{
 					obj["classHisEnd"] = "3000-12-31";
@@ -175,6 +179,22 @@
 				else if(classHisStart == "" && classHisEnd != "")
 				{
 					obj["classHisStart"] = "1900-01-01";
+				}
+				if(attendStartRate != "" && attendEndRate == "")
+				{
+					obj["attendEndRate"] = "100";
+				}
+				else if(attendStartRate == "" && attendEndRate != "")
+				{
+					obj["attendStartRate"] = "0";
+				}
+				if(schoolWearStartRate != "" && schoolWearEndRate == "")
+				{
+					obj["schoolWearEndRate"] = "100";
+				}
+				else if(schoolWearStartRate == "" && schoolWearEndRate != "")
+				{
+					obj["schoolWearStartRate"] = "0";
 				}
 				obj["queryCode"] = "qryAttenceHisList";
 				obj["funcNodeId"] = "38120";
@@ -219,7 +239,7 @@
 		</script>
   	</head>
   	<body>
-  		<div id="tab" class="easyui-tabs" style="min-width:1100px;width:99%;height:530px;font-family:'微软雅黑';margin:0 auto;padding:0 0">
+  		<div id="tab" class="easyui-tabs" style="min-width:1100px;width:99%;height:99%;font-family:'微软雅黑';margin:0 auto;padding:0 0">
 		    <div title="考勤管理" style="padding:5px;display:block;">
 				<form id="manFm">
 					<table class="search_tab">

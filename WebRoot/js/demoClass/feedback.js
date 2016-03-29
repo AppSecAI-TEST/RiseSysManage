@@ -41,15 +41,9 @@ function initInfo() {
 					$("#infoTab").find("tr:eq(1)").find("td:eq(1)").html(
 							"&nbsp;&nbsp;<span>" + data.baseInfo.roomName
 									+ "</span>");
-					$("#infoTab").find("tr:eq(2)").find("td:eq(1)").html(
-							"&nbsp;&nbsp;<span>" + data.baseInfo.lessionHours
-									+ "</span>");
-					$("#lessionHours").numberbox( {
-						max : data.baseInfo.lessionHours
-					});
 					$("#schoolIds").val(data.baseInfo.schoolId);
 					$("#roomIds").val(data.baseInfo.roomId);
-					$("#hours").val(data.baseInfo.lessionHours);
+					$("#hours").textbox("setValue",data.baseInfo.lessionHours);
 					$("#shortSchooltimeId").val(data.baseInfo.shortSchooltimeId);
 					if(classState!="001")
 					{
@@ -89,6 +83,7 @@ function initInfo() {
 }
 
 function addTeacher() {
+	var hours = $("#hours").textbox("getValue");
 	if ($("#schoolId").combobox("getValue") == "") {
 		$.messager.alert("提示", "请选择组织");
 		return false;
@@ -106,26 +101,34 @@ function addTeacher() {
 		return false;
 	}
 	if (checkTheSame($("#teacherId").combobox("getValue"))) {
-		var tr = $("#modelTr").clone();
-		tr.addClass("tea");
-		tr.attr("schoolId", $("#schoolId").combobox("getValue"));
-		tr.attr("teacherId", $("#teacherId").combobox("getValue"));
-		tr.attr("teacherType", $("#teacherType").combobox("getValue"));
-		tr.attr("lessionHours", $("#lessionHours").numberbox("getValue"));
-		tr.find("td:eq(1)").find("span").html(
-				$("#schoolId").combobox("getText"));
-		tr.find("td:eq(2)").find("span").html(
-				$("#teacherId").combobox("getText"));
-		tr.find("td:eq(3)").find("span").html(
-				$("#teacherType").combobox("getText"));
-		tr.find("td:eq(4)").find("span").html(
-				$("#lessionHours").numberbox("getValue"));
-		tr.css("display", "table-row");
-		$("#infoTab").append(tr);
-		$("#schoolId").combobox("setValue", "")
-		$("#teacherId").combobox("setValue", "")
-		$("#teacherType").combobox("setValue", "")
-		$("#lessionHours").numberbox("setValue", "");
+		var lessionHours = $("#lessionHours").numberbox("getValue");
+		if(parseInt(hours) < parseInt(lessionHours))
+		{
+			$.messager.alert("提示", "添加老师的课时量不能超过当前课时,请核实后重新尝试");
+		}
+		else
+		{
+			var tr = $("#modelTr").clone();
+			tr.addClass("tea");
+			tr.attr("schoolId", $("#schoolId").combobox("getValue"));
+			tr.attr("teacherId", $("#teacherId").combobox("getValue"));
+			tr.attr("teacherType", $("#teacherType").combobox("getValue"));
+			tr.attr("lessionHours", $("#lessionHours").numberbox("getValue"));
+			tr.find("td:eq(1)").find("span").html(
+					$("#schoolId").combobox("getText"));
+			tr.find("td:eq(2)").find("span").html(
+					$("#teacherId").combobox("getText"));
+			tr.find("td:eq(3)").find("span").html(
+					$("#teacherType").combobox("getText"));
+			tr.find("td:eq(4)").find("span").html(
+					$("#lessionHours").numberbox("getValue"));
+			tr.css("display", "table-row");
+			$("#infoTab").append(tr);
+			$("#schoolId").combobox("setValue", "")
+			$("#teacherId").combobox("setValue", "")
+			$("#teacherType").combobox("setValue", "")
+			$("#lessionHours").numberbox("setValue", "");
+		}
 	} else {
 		$.messager.alert("提示", "您选择的老师已添加");
 	}
@@ -147,6 +150,7 @@ function delRow(obj) {
 }
 
 function submitInfo() {
+	var hours = parseInt($("#hours").textbox("getValue"));
 	if (classState == "001") 
 	{
 		if($("#openDate").datebox("getValue")=="")
@@ -164,7 +168,7 @@ function submitInfo() {
 			$.messager.alert('提示',"上课结束时间不能为空,请核实后重新尝试");
 			return false;
 		}
-		if(parseInt($("#hours").val()) <= 0)
+		if(hours <= 0)
 		{
 			$.messager.alert('提示',"上课起始时间必须大于上课结束时间,请核实后重新尝试");
 			return false;
@@ -187,7 +191,7 @@ function submitInfo() {
 	classAttend.handerId =handlerId;
 	classAttend.attendNum="0";
 	classAttend.attendRate="0";
-	classAttend.hours =$("#hours").val();
+	classAttend.hours =$("#hours").textbox("getValue");
 	classAttend.lateNum="0";
 	classAttend.truantNum="0";
 	classAttend.leaveNum="0";
@@ -195,8 +199,8 @@ function submitInfo() {
 	classAttend.schooltime=$("#openDate").datebox("getValue");
 	classAttend.teacherIds="0";
 	
-
 	param.classAttend =classAttend;
+	var result = null;
 	$(".tea").each(function() {
 		var attobj ={};
 		attobj.schoolId =$(this).attr("schoolId");
@@ -207,8 +211,17 @@ function submitInfo() {
 		attobj.handerId =handlerId;
 		attobj.attendDate =$("#openDate").datebox("getValue");
 		teacherAttend.push(attobj);
+		if(hours < attobj.lessionHours)
+		{
+			result = "老师课时量不能超过当前课程的课时,请核实后重新尝试";
+		}
 	});
-	if(teacherAttend.length<1)
+	if(result != null)
+	{
+		$.messager.alert("提示", result);
+		return false;
+	}
+	else if(teacherAttend.length<1)
 	{
 		$.messager.alert("提示", "请至少添加一个教师反馈");
 		return false;

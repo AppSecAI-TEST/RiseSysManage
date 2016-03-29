@@ -13,7 +13,6 @@
 		<%@ include file="../common/formvalidator.jsp" %>
 		<style type="text/css">
 			.tab td{
-				font-size:14px;
 				height:30px;
 				border-right:1px solid #ccc;
 				border-bottom:1px solid #ccc;
@@ -74,7 +73,13 @@
   	</head>
   	<body class="manage">
  		<input type="hidden" name="classInstId" value="${classInstT.classInstId}" />
-		<table align="center" class="tab" style="height:auto;width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
+		    <div class="panel-title">课程信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
+		<table align="center" class="tab" style="height:auto;width:99%;margin:0px auto;margin-bottom:5px;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="right" width="10%">课程阶段：</td>
 				<td width="23%">${classInstT.stageId}</td>
@@ -116,7 +121,13 @@
 				<td>${classInstT.baseNumT.higherRate}</td>
 			</tr>
 		</table>
-		<table align="center" class="tab" style="height:auto;width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
+		    <div class="panel-title">课程计划信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
+		<table align="center" class="tab" style="height:auto;width:99%;margin:0px auto;margin-bottom:5px;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<c:forEach items="${classInstT.schooltimeList}" var="node">
 				<tr>
 					<td align="right" width="10%">上课时段：</td>
@@ -134,7 +145,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<table region="center" id="attendList" class="easyui-datagrid" title="" style="height:auto;margin:5px auto" toolbar="#toolbar" pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
+		<table region="center" id="attendList" class="easyui-datagrid" title="" style="height:auto;margin:5px auto;width:99%" toolbar="#toolbar" pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
 			<thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
