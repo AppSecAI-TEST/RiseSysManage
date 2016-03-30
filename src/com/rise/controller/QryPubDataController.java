@@ -251,24 +251,34 @@ public class QryPubDataController
 	
 	//查询老师列表
 	@RequestMapping(value = "/qryTeacherList.do")
-	public void qryTeacherList(String schoolId, String stageId, HttpServletResponse response)
-	{
+	public void qryTeacherList(String schoolId, String stageId, HttpServletResponse response) {
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = qryPubDataService.qryTeacherList(schoolId, stageId);
+			String retVal = qryPubDataService.qryTeacherList(schoolId, stageId, null);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			if(out != null) {
+				out.close();
+			}
 		}
-		finally
-		{
-			if(out != null)
-			{
+	}
+	
+	@RequestMapping(value = "/qryOnJobTeacherList.do")
+	public void qryOnJobTeacherList(String schoolId, String stageId, HttpServletResponse response) {
+		PrintWriter out = null;
+		try {
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = qryPubDataService.qryTeacherList(schoolId, stageId, "P");
+			out.write(retVal);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(out != null) {
 				out.close();
 			}
 		}

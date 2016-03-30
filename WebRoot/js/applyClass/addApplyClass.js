@@ -302,7 +302,7 @@ $(document).ready(function() {
 		onChange : function(n, o) {
 			var stageId = $("#stageId").combobox("getValue");
 			$("#teacherId").combobox({
-				url : "/sys/pubData/qryTeacherList.do?schoolId=" + n + "&stageId=" + stageId,
+				url : "/sys/pubData/qryOnJobTeacherList.do?schoolId=" + n + "&stageId=" + stageId,
 				valueField : "teacherId",
         		textField : "byname",
         		panelHeight : "auto",

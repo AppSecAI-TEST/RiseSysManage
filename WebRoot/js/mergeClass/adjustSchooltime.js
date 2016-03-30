@@ -134,7 +134,7 @@ $(document).ready(function() {
 			var classInstId = $("#selClassInstId").val();
 			var stageId = $("#stageId" + classInstId).val();
 			$("#teacherId").combobox({
-				url : "/sys/pubData/qryTeacherList.do?schoolId=" + n + "&stageId=" + stageId,
+				url : "/sys/pubData/qryOnJobTeacherList.do?schoolId=" + n + "&stageId=" + stageId,
 				valueField : "teacherId",
         		textField : "byname",
         		panelHeight : "auto",
