@@ -13,55 +13,50 @@ var array = new Array();
 
 function disY()
 {
-	$("form[id='studentFm'] :text").attr("disabled",false);
+	$("form[id='studentFm'] :text").attr("disabled", false);
 	$("#identityType").combobox({disabled: false});
-	$("#schoolType").combobox({disabled: false});
 	$("#advisterIdA").combobox({disabled: false});
 	$("#advisterIdB").combobox({disabled: false});
 	$("#advisterASchoolId").combobox({disabled: false});
 	$("#advisterBSchoolId").combobox({disabled: false});
 	$("#dutyAdvister").combobox({disabled: false});
 	$("#carer").combobox({disabled: false});
-	
-	
-	$("#entranceDate").datebox({disabled:false});
+	$("#entranceDate").datebox({disabled: false});
 	$("#birthday").datebox({disabled: false});
-	$("#entranceDate").datebox('setValue', studentObj.entranceDate);
-	$("#birthday").datebox('setValue', studentObj.birthday);
-	$("form[id='studentFm'] :radio").attr("disabled",false);
-}
-
-function disN()
-{
-	var postIds=$("#postIds").val();
-	{
-		$("form[id='studentFm'] :text").attr("disabled",true);
-		$("#identityType").combobox({disabled: true});
-		$("#schoolType").combobox({disabled: true});
-		$("#advisterIdA").combobox({disabled: true});
-		$("#advisterIdB").combobox({disabled: true});
-		$("#advisterASchoolId").combobox({disabled: true});
-		$("#advisterBSchoolId").combobox({disabled: true});
-		$("#dutyAdvister").combobox({disabled: true});
-		$("#carer").combobox({disabled: true});
-		$("#entranceDate").datebox({disabled: true});
-		$("#birthday").datebox({disabled: true});
-		$("form[id='studentFm'] :radio").attr("disabled",true);
-	}
-	
-	if(postIds.indexOf('33')>-1 || postIds.indexOf('2')>-1 || postIds.indexOf('3')>-1 || postIds.indexOf('4')>-1 || postIds.indexOf('1')>-1 ||  postIds.indexOf('29')>-1 )
-	{
-		$("#byName").textbox({disabled: false});
-		$("#address").textbox({disabled: false});
-		$("#dutyAdvister").combobox({disabled: false});
-		$("#realSchoolId").combobox({disabled: false});
-	}
-	if(studentObj!=null)
-	{
+	if(studentObj != null) {
 		$("#entranceDate").datebox('setValue', studentObj.entranceDate);
 		$("#birthday").datebox('setValue', studentObj.birthday);
 	}
-	
+	$("form[id='studentFm'] :radio").attr("disabled", false);
+}
+
+function disN() {
+	$("form[id='studentFm'] :text").attr("disabled",true);
+	$("#identityType").combobox({disabled: true});
+	$("#advisterIdA").combobox({disabled: true});
+	$("#advisterIdB").combobox({disabled: true});
+	$("#advisterASchoolId").combobox({disabled: true});
+	$("#advisterBSchoolId").combobox({disabled: true});
+	$("#dutyAdvister").combobox({disabled: true});
+	$("#carer").combobox({disabled: true});
+	$("#entranceDate").datebox({disabled: true});
+	$("#birthday").datebox({disabled: true});
+	$("form[id='studentFm'] :radio").attr("disabled", true);
+
+	var postIds = "," + $("#postIds").val() + ",";
+	if(postIds.indexOf(',33,') > -1 || postIds.indexOf(',2,') > -1 
+			|| postIds.indexOf(',3,') > -1 || postIds.indexOf(',4,') > -1 
+			|| postIds.indexOf(',1,') > -1 ||  postIds.indexOf(',29,') > -1) {
+		$("#byName").textbox({disabled: false});
+		$("#address").textbox({disabled: false});
+		$("#dutyAdvister").combobox({disabled: false});
+	} else if(postIds.indexOf(',14,') > -1) {
+		disY();
+	}
+	if(studentObj != null) {
+		$("#entranceDate").datebox('setValue', studentObj.entranceDate);
+		$("#birthday").datebox('setValue', studentObj.birthday);
+	}
 }
 
 $(document).ready(function() {
@@ -97,6 +92,9 @@ $(document).ready(function() {
     		$("#entranceDate").datebox('setValue', studentObj.entranceDate);
     		$("#createDateText").html(studentObj.createDate);
     		
+    		var handlerId = $("#handlerId").val();
+    		array.push({"key": "studentId", "value": studentId});
+    		array.push({"key": "handlerId", "value": handlerId});
     		array.push({"key": "address", "value": studentObj.address});
     		array.push({"key": "advisterIdA", "value": studentObj.advisterIdA});
     		array.push({"key": "advisterIdB", "value": studentObj.advisterIdB});
@@ -109,6 +107,7 @@ $(document).ready(function() {
     		array.push({"key": "name", "value": studentObj.name});
     		array.push({"key": "remark", "value": studentObj.remark});
     		array.push({"key": "sex", "value": studentObj.sex});
+    		array.push({"key": "entranceDate", "value": studentObj.entranceDate});
     		
     		var len1 = data.realSchoolObj.total;
     		if(len1 > 0) {
@@ -441,7 +440,7 @@ $(document).ready(function() {
 	
 	//学员修改提交
 	$("#updateSubmit").click(function() {
-		 disY();
+		//disY();
 		contactLength += $("[name='contacts']").length;
 		if(contactLength > 0) {
 			var usedFlag = false;
@@ -516,17 +515,26 @@ $(document).ready(function() {
 								if(realIds != "" && realIds != null && realIds != undefined && realIds != "null") {
 									realIds = realIds.substring(0, realIds.length - 1);
 								}
-								var obj = getParam();
-								obj = obj.substring(0, obj.length - 1);
-								obj += ",\"contactId\":\""+contactIds+"\",\"activityId\":\""+activityIds+"\",\"realId\":\""+realIds+"\",\"contactArray\":"+contactArray+",\"realSchoolArray\":"+realSchoolArray+",\"activityArray\":[]}";
+								var obj = "{";
+								var studentArray = $("#studentFm").serializeArray();
+								for(var j = 0, l = array.length; j < l; j++) {
+									var key = array[j].key;
+									var value = array[j].value;
+									for(var i = 0, len = studentArray.length; i < len; i++) {
+										if(key == studentArray[i].name) {
+											value = studentArray[i].value;
+										}
+									}
+									obj += "\"" + key + "\":\"" + value + "\",";
+								}
+								obj += "\"contactId\":\""+contactIds+"\",\"activityId\":\""+activityIds+"\",\"realId\":\""+realIds+"\",\"contactArray\":"+contactArray+",\"realSchoolArray\":"+realSchoolArray+",\"activityArray\":[]}";
 								obj = encodeURI(obj);
 								$.ajax({
 									url: "/sys/student/updateStudent.do",
 									data: "param=" + obj,
 									dataType: "json",
 									async: true,
-									beforeSend: function()
-									{
+									beforeSend: function() {
 										$.messager.progress({title : '修改档案', msg : '正在修改学员档案，请稍等……'});
 									},
 									success: function (data) {
@@ -541,23 +549,22 @@ $(document).ready(function() {
 								});
 							}
 						} else {
-							 disN();
+							//disN();
 							$.messager.alert('提示', "出生日期需要与本人身份证号码中的出生日期一致！");
 						}
-					}else
-					{
-						disN();
+					} else {
+						//disN();
 					}
 				} else {
-					disN();
+					//disN();
 					$.messager.alert('提示', "请先对该学员做一些修改之后，再进行提交！");
 				}
 			} else {
-				disN();
+				//disN();
 				$.messager.alert('提示', "请至少设置一位联系人为常用联系人！");
 			}
 		} else {
-			disN();
+			//disN();
 			$.messager.alert('提示', "请至少添加一个联系人信息！");
 		}
 	});

@@ -62,9 +62,9 @@
 						<td align="left" colspan="2">
 							<input name="identityId" id="identityId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 						</td>
-						<td align="center">
+						<td>
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1000">查询</a>
-							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
+							&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 						</td>
 					</tr>
 				</table>

@@ -71,6 +71,42 @@
 	  					<td align="right" width="10%"><span>班级性质：</span></td>
 	  					<td width="30%"><span id="higherSchoolName">${obj.attendClassObj.handTypeText }</span></td>
 	  				</tr>
+	  				<tr>
+	  					<td colspan="6">
+	  						<table width="100%" cellpadding="5px" id="schooltimeTb" class="maintable">
+	  							<tr>
+	  								<td align="center" width='4%'><span>序号</span></td>
+	  								<td align="center" width='14%'><span>上课时段</span></td>
+	  								<td align="center" width='4%'><span>教室</span></td>
+	  								<td align="center" width='4%'><span>课时</span></td>
+	  								<td align="center" width='74%'><span>带班老师</span></td>
+	  							</tr>
+	  							<c:forEach items="${obj.schooltimeObj.rows }" var="schooltime" varStatus="status">
+		  							<tr>
+						        		<input type='hidden' name='schooltimes' roomId='${schooltime.roomId }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }' lessionHours='${schooltime.lessionHours }' addNum='${status.index + 1 }' schooltimeId='${schooltime.schooltimeId }'/>
+		  								<td align="center" width='4%' lessionHours='${schooltime.lessionHours }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }'><span>${status.index + 1 }</span></td>
+		  								<td align="center" width='14%'><span>${schooltime.schooltimeName }</span></td>
+		  								<td align="center" width='4%'><span>${schooltime.roomName }</span></td>
+		  								<td align="center" width='4%'><span>${schooltime.lessionHours }</span></td>
+		  								<c:choose>
+			  								<c:when test="${not empty schooltime.classTeacherList }">
+			  									<td width='74%' lessions='${schooltime.lessionHours }'>
+				  									<c:forEach items="${schooltime.classTeacherList }" var="classTeacher">
+				  										<span id="teacher${classTeacher.teacherId }${schooltime.weekTime }${schooltime.hourRange }">
+				  											${classTeacher.schoolName }&nbsp;${classTeacher.byname }&nbsp;${classTeacher.hours }&nbsp;${classTeacher.isLicense }&nbsp;
+				  										</span>
+				  									</c:forEach>
+				  								</td>
+			  								</c:when>
+		  									<c:otherwise>
+		  										<td width='64%' lessions='0'></td>
+		  									</c:otherwise>
+		  								</c:choose>
+		  							</tr>
+	  							</c:forEach>
+	  						</table>
+	  					</td>
+	  				</tr>
 	  			</table>
   			</form>
   		</div>

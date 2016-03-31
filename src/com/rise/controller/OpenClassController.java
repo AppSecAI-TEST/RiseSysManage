@@ -190,4 +190,22 @@ public class OpenClassController
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/isApprove.do")
+	public void isApprove(String applyId, String staffId, HttpServletResponse response) {
+		PrintWriter out = null;
+		try {
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = openClassService.isApprove(applyId, staffId);
+			log.error(retVal);
+			out.write(retVal);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(out != null) {
+				out.close();
+			}
+		}
+	}
 }
