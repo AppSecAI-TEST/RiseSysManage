@@ -15,6 +15,8 @@ public class ShortStudentAttendT {
     
     private Integer studentCourseId;
     
+    private Integer studentGiftId;
+    
 	private Integer hours;
 
     private String attendType;
@@ -75,6 +77,14 @@ public class ShortStudentAttendT {
 
 	public void setStudentCourseId(Integer studentCourseId) {
 		this.studentCourseId = studentCourseId;
+	}
+	
+	public Integer getStudentGiftId() {
+		return studentGiftId;
+	}
+
+	public void setStudentGiftId(Integer studentGiftId) {
+		this.studentGiftId = studentGiftId;
 	}
 
 	public Integer getHours() {

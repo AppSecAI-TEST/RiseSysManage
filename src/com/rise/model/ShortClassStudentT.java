@@ -12,6 +12,8 @@ public class ShortClassStudentT {
     private Integer studentId;
 
     private Integer studentCourseId;
+    
+	private Integer studentGiftId;
 
     private String state;
 
@@ -66,8 +68,16 @@ public class ShortClassStudentT {
     public void setStudentCourseId(Integer studentCourseId) {
         this.studentCourseId = studentCourseId;
     }
+    
+    public Integer getStudentGiftId() {
+		return studentGiftId;
+	}
 
-    public String getState() {
+	public void setStudentGiftId(Integer studentGiftId) {
+		this.studentGiftId = studentGiftId;
+	}
+
+	public String getState() {
         return state;
     }
 

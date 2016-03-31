@@ -116,6 +116,7 @@
 				var classStartTime = $("#classStartTime").datebox("getValue");
 				var classEndTime = $("#classEndTime").combobox("getValue");
 				var remark = $("#remark").textbox("getValue");
+				var nowDate = new Date(new Date().format("yyyy-MM-dd"));
 				var classStartTimeDate = new Date(classStartTime);
 				var classEndTimeDate = new Date(classEndTime);
 				if(tourismClassType == "")
@@ -141,6 +142,10 @@
 				else if(classEndTime == "")
 				{
 					$.messager.alert('提示',"结课日期不能为空,请核实后重新尝试","info");
+				}
+				else if(classStartTimeDate.getTime() < nowDate.getTime())
+				{
+					$.messager.alert('提示',"游学开始日期必须大于当前时间,请核实后重新尝试","info");
 				}
 				else if(classStartTimeDate.getTime() >= classEndTimeDate.getTime())
 				{

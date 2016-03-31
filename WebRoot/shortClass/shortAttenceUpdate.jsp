@@ -229,6 +229,7 @@
 						studentId:firstTr.attr("studentId"),
 						attendDate:'<fmt:formatDate value="${shortClassAttendT.attendDate}" pattern="yyyy-MM-dd" timeZone="GMT" />',
 						studentCourseId:firstTr.attr("studentCourseId"),
+						studentGiftId:firstTr.attr("studentGiftId"),
 						hours:$("#classLessonHour").textbox("getValue"),
 						attendType:attendTypeObj,
 						dress:dressObj,
@@ -405,7 +406,7 @@
 			</tr>
 			<c:forEach items="${shortClassAttendT.studentAttendList}" var="node" varStatus="i">
 				<tr id="studentId${node.studentId}">
-					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" shortStudentAttendId="${node.shortStudentAttendId}" studentCourseId="${node.studentCourseId}"><input type="checkbox" name="studentId" value="${node.studentId}" onclick="studentCheckboxClick(this)" /></td>
+					<td align="center" studentId="${node.studentId}" schoolId="${node.schoolId}" shortStudentAttendId="${node.shortStudentAttendId}" studentCourseId="${node.studentCourseId}" studentGiftId="${node.studentGiftId}"><input type="checkbox" name="studentId" value="${node.studentId}" onclick="studentCheckboxClick(this)" /></td>
 					<td align="center">${i.count}</td>
 					<td align="center">${node.studentT.name}</td>
 					<td align="center">${node.studentT.byName}</td>

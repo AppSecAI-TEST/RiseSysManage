@@ -84,6 +84,7 @@
 							shortClassInstId:"${param.shortClassInstId}",
 							studentId:rows[i].studentId,
 							studentCourseId:rows[i].studentCourseId,
+							studentGiftId:"",
 							schoolId:rows[i].schoolId,
 							handlerId:${sessionScope.StaffT.staffId}
 						}

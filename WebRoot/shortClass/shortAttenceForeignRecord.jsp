@@ -197,6 +197,7 @@
 						studentId:$(node).attr("studentId"),
 						attendDate:'<fmt:formatDate value="${shortSchooltimeT.schooltime}" pattern="yyyy-MM-dd" />',
 						studentCourseId:$(node).attr("studentCourseId"),
+						studentGiftId:$(node).attr("studentGiftId"),
 						hours:$("#classLessonHour").textbox("getValue"),
 						attendType:attendTypeObj,
 						handlerId:"${sessionScope.StaffT.staffId}"
@@ -329,8 +330,7 @@ padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" ce
 		    <div class="panel-tool"></div>
 		  </div>
 		</div>
-		<table class="tab" id="studentTab" style="width:99%;margin:0px auto;margin-bottom:5px;
-padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+		<table class="tab" id="studentTab" style="width:99%;margin:0px auto;margin-bottom:5px;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
 			<tr class="headTr datagrid-header">
 				<td width="5%">序号</td>
 				<td width="15%">校区</td>
@@ -339,7 +339,7 @@ padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" ce
 				<td width="50%">考勤操作</td>
 			</tr>
 			<c:forEach items="${shortClassInstT.classStudentList}" var="node" varStatus="i">
-				<tr id="studentId${node.studentId}" studentId="${node.studentId}" studentCourseId="${node.studentCourseId}" schoolId="${node.schoolId}">
+				<tr id="studentId${node.studentId}" studentId="${node.studentId}" studentCourseId="${node.studentCourseId}" schoolId="${node.schoolId}" studentGiftId="${node.studentGiftId}">
 					<td align="center">${i.count}</td>
 					<td align="center">${node.studentT.schoolT.schoolName}</td>
 					<td align="center">${node.studentT.name}</td>

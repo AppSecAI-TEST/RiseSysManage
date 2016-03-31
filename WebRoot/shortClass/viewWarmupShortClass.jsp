@@ -105,7 +105,7 @@
 					<td align="center">放班审批</td>
 					<td align="center"><fmt:formatDate value="${shortClassInstT.approveDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 					<td align="center">${shortClassInstT.approvePersonObj.userName}</td>
-					<td align="center"><c:choose><c:when test="${shortClassInstT.classState == '003'}">同意放班</c:when><c:otherwise>不同意放班</c:otherwise></c:choose></td>
+					<td align="center"><c:choose><c:when test="${shortClassInstT.classState != '005'}">同意放班</c:when><c:otherwise>不同意放班</c:otherwise></c:choose></td>
 					<td>${shortClassInstT.verifyRemark}</td>
 				</tr>
 			</c:if>

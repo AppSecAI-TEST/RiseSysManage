@@ -67,6 +67,7 @@
 				var classStartTime = $("#classStartTime").datebox("getValue");
 				var classEndTime = $("#classEndTime").combobox("getValue");
 				var remark = $("#remark").textbox("getValue");
+				var nowDate = new Date(new Date().format("yyyy-MM-dd"));
 				var classStartTimeDate = new Date(classStartTime);
 				var classEndTimeDate = new Date(classEndTime);
 				var schooltimeCnt = 0;
@@ -122,6 +123,10 @@
 				else if(isNaN(planClassNum))
 				{
 					$.messager.alert('提示',"计划上课人数不合法,请核实后重新尝试","info");
+				}
+				else if(classStartTimeDate.getTime() < nowDate.getTime())
+				{
+					$.messager.alert('提示',"开课时间必须大于当前时间,请核实后重新尝试","info");
 				}
 				else if(classStartTimeDate.getTime() >= classEndTimeDate.getTime())
 				{
