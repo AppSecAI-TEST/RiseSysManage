@@ -52,9 +52,9 @@ public class QryPubDataService
 		return ServiceEngine.invokeHttp(param);
 	}
 
-	public String qryTeacherList(String schoolId, String stageId) throws Exception 
+	public String qryTeacherList(String schoolId, String stageId, String state) throws Exception 
 	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1018\",securityCode:\"0000000000\",params:{schoolId:\""+schoolId+"\",stageId:\""+stageId+"\"},rtnDataFormatType:\"user-defined\"}";
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1018\",securityCode:\"0000000000\",params:{schoolId:\""+schoolId+"\",stageId:\""+stageId+"\",state:\""+state+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
 

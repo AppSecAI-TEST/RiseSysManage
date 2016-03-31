@@ -62,17 +62,18 @@
 	  				</table>
 			  		<div style="height: 5px;"></div>
 			  		<div style="padding:5px 0;min-width:1100px; width:100%;">
-			  			<table class="easyui-datagrid" title="班级学员基数" style="height:auto;" id="list_data" fitColumns="true" singleSelect="false"
+			  			<table class="easyui-datagrid" title="班级学员基数" style="height:auto;" id="list_data" fitColumns="true" singleSelect="false" 
 			  				url="<%=path %>/pubData/qryDataListByPage.do?param={'classInstId':'${obj.attendClassObj.classInstId }','funcNodeId':'1085'}"
-			  				data-options="onLoadSuccess:function(data) {$('.edit').linkbutton({text:'修改基数', iconCls:'icon-edit'});}">
+			  				autoRowHeight="true" data-options="onLoadSuccess:function(data) {$('.edit').linkbutton({text:'修改基数', iconCls:'icon-edit'});}">
 					  		<thead>
 					  			<tr>
-					  				<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
+					  				<th data-options="field:'name',width:80,align:'center'">学员姓名</th>
 					  				<th data-options="field:'byName',width:80,align:'center'">英文名</th>
 					  				<th data-options="field:'payDate',width:100,align:'center'">缴费日期</th>
 					  				<th data-options="field:'attendDate',width:100,align:'center'">进班上课日期</th>
 					  				<th data-options="field:'phone',width:180,align:'center'">联系方式</th>
-					  				<th data-options="field:'courseStateText',width:100,align:'center'">课程状态</th>
+					  				<th data-options="field:'courseStateText',width:80,align:'center'">课程状态</th>
+					  				<th data-options="field:'className',width:100,align:'center'">在读班级</th>
 					  				<th data-options="field:'higherStageId',width:100,align:'center'">已升学阶段</th>
 					  				<th data-options="field:'studyingNum',width:80,align:'center'">在读人数</th>
 					  				<th data-options="field:'higherBaseNum',width:80,align:'center'">升学基数</th>
