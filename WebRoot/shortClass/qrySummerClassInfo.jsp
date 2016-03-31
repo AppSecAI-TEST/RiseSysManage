@@ -58,6 +58,9 @@
 						return "<span>"+data.text+"</span>";
 					},
 					data:[{
+						text:"全部",
+						value:""
+					},{
 						value:"是",
 						text:"是"
 					},{

@@ -138,7 +138,7 @@
 			function selectClassFunc()
 			{
 				ajaxLoading("正在处理，请稍待。。。");
-				window.location.href = "/sys/shortClass/choiceInterClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortInterClassMan&classType="+encodeURI("国际班")+"&shortClassType=${shortClassInstT.shortClassTypeT.classType}";
+				window.location.href = "/sys/shortClass/choiceInterClassPage.jsp?funcNodeId=${funcNodeId}&shortClassInstId=${shortClassInstT.shortClassInstId}&pageName=shortInterClassMan&classType="+encodeURI("国际班")+"&shortClassType=${shortClassInstT.shortClassTypeT.classTypeId}";
 			}
 			function removeClassFunc()
 			{

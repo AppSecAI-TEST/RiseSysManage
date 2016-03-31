@@ -81,6 +81,37 @@
 		</table>
 		<div class="panel datagrid easyui-fluid" style="width:99%">
 		  <div class="panel-header">
+		    <div class="panel-title">操作信息</div>
+		    <div class="panel-tool"></div>
+		  </div>
+		</div>
+		<table region="center" class="tab" id="studentList" style="width:99%;margin:0px auto;margin-bottom:5px;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+			<tr class="headTr datagrid-header">
+				<td width="10%">操作类型</td>
+				<td width="20%">操作时间</td>
+				<td width="10%">操作人</td>
+				<td width="10%">审批意见</td>
+				<td>情况说明</td>
+			</tr>
+			<tr>
+				<td align="center">放班申请</td>
+				<td align="center"><fmt:formatDate value="${shortClassInstT.createDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+				<td align="center">${shortClassInstT.creatorObj.userName}</td>
+				<td align="center">&nbsp;</td>
+				<td>${shortClassInstT.remark}</td>
+			</tr>
+			<c:if test="${!empty shortClassInstT.approveDate}">
+				<tr>
+					<td align="center">放班审批</td>
+					<td align="center"><fmt:formatDate value="${shortClassInstT.approveDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+					<td align="center">${shortClassInstT.approvePersonObj.userName}</td>
+					<td align="center"><c:choose><c:when test="${shortClassInstT.classState == '003'}">同意放班</c:when><c:otherwise>不同意放班</c:otherwise></c:choose></td>
+					<td>${shortClassInstT.verifyRemark}</td>
+				</tr>
+			</c:if>
+		</table>
+		<div class="panel datagrid easyui-fluid" style="width:99%">
+		  <div class="panel-header">
 		    <div class="panel-title">课程学员信息</div>
 		    <div class="panel-tool"></div>
 		  </div>

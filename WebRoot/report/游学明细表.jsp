@@ -109,6 +109,9 @@
 						return '<span>'+data.text+'</span>';
 					}, 
 					data:[{
+						text:"全部",
+						value:""
+					},{
 						text:"是",
 						value:"是"
 					},{

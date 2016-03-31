@@ -11,21 +11,6 @@
 		<title>瑞思教务管理系统</title>
 		<%@ include file="/common/head.jsp" %>
 		<%@ include file="/common/formvalidator.jsp" %>
-		<style type="text/css">
-			.txtNode{
-				color:#000000;
-				text-decoration:none !important;
-				display:block;
-				width:250px;
-			}
-			.txtNode:HOVER{
-				text-decoration: none;
-			}
-			.tree-node-selected{
-				background-color:#cccccc !important;
-				color:#0081c2 !important;
-			}
-		</style>
 	</head>
 	<body class="easyui-layout">
 		<c:if test="${empty sessionScope.StaffT}">
@@ -49,7 +34,7 @@
 			</div>
 		</div>
 		<iframe id="fileDlg" class="easyui-dialog" style="width:1150px;height:600px;" modal="true" closed="true"></iframe>
-		<div id="dlg" class="easyui-dialog" style="width:0px;height:0px;padding:0px 0px" modal="true" closed="true" buttons="#buttons">
+		<div id="dlg" class="easyui-dialog dlgCls" style="width:0px;height:0px;padding:0px 0px" modal="true" closed="true" buttons="#buttons">
 			<form id='form' method="post">
 				<input id="staffId" type="hidden" name="staffId" value="${sessionScope.StaffT.staffId}" />
 				<table width="98%" style="margin:5px 5px;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
@@ -68,16 +53,16 @@
 				</table>
 			</form>
 		</div>
-		<div id="buttons">
+		<div id="buttons" class="buttonsCls">
 			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="updatePasswordSubmit()">提交</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="cancelUpdatePassword()">取消</a>
 		</div>
 		<!-- 左侧菜单 -->
-		<div id="leftarea" data-options="iconCls:'icons-other-house',region:'west',title:'加载中...',split:true,width:200">
+		<div id="leftarea" class="leftareaCls" data-options="iconCls:'icons-other-house',region:'west',title:'加载中...',split:true,width:200">
 			<div id="leftmenu" class="easyui-accordion" data-options="fit:true,border:false"></div>
 		</div>
 		<!-- 内容 -->
-		<div id="mainarea" data-options="region:'center'" style="padding: 0px;background:#E0ECFF;min-width:800px">
+		<div id="mainarea" class="mainareaCls" data-options="region:'center'" style="padding: 0px;background:#E0ECFF;min-width:800px">
 			<div class="easyui-layout" data-options="fit:true,border:false,plain:false">
 				<div data-options="region:'north',height:28" style="min-width:800px;background:#E0ECFF">
 					<c:forEach items="${sessionScope.funcNodeInfo}" var="funcNodeTree" varStatus="i">
@@ -112,6 +97,10 @@
 			};
 			$(function(){
 				getLeft(${sessionScope.funcNodeInfo[0].funcNodeList[0].funcNodeId}, '导航菜单');
+				$("#dlg").removeClass("dlgCls");
+				$("#buttons").removeClass("buttonsCls");
+				$("#leftarea").removeClass("leftareaCls");
+				$("#mainarea").removeClass("mainareaCls");
 				$.messager.show({			
 					title:'登录提示',
 					msg:'您好！${sessionScope.StaffT.userName} 欢迎回来！<br/>最后登录时间：<fmt:formatDate value="${sessionScope.StaffT.lastDate}" pattern="yyyy-MM-dd HH:mm:ss" /><br/>最后登录IP：${sessionScope.StaffT.remoteIp}',

@@ -13,7 +13,7 @@
 body{margin:0;padding:0;background:#F1ECF4;}
 input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus{box-shadow:0 0 0 60px #F8F5F8 inset;-webkit-text-fill-color: #4b4b5b;}
 form{width:340px;height:420px;margin:50px auto;}
-label{float:left;display:block;font-size:16px;color:#aba1a4;height:26px;margin:9px 0px 2px 25px;}
+label{float:left;display:block;font-size:16px;color:#aba1a4;height:26px;margin:6px 0px 2px 25px;}
 .inputDiv{margin:0 auto 30px;background:#F8F5F8;height:37px;border:1px solid #e4e4e2;border-radius:4px;}
 #username,#password,#code{font-size:14px;cursor:pointer;height:31px;color:#4b4b5b;background:transparent;margin:2px;padding:0;border:none !important;-webkit-appearance:none;appearance:none;outline:none;-webkit-tap-highlight-color:transparent;border-radius:0;-webkit-box-shadow:none;box-shadow:none;}
 #username,#password{width:250px;}

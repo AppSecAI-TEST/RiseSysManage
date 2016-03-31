@@ -49,6 +49,9 @@
 						return '<span>'+data.text+'</span>';
 					}, 
 					data:[{
+						text:"全部",
+						value:""
+					},{
 						text:"是",
 						value:"是"
 					},{
@@ -62,6 +65,9 @@
 						return '<span>'+data.text+'</span>';
 					}, 
 					data:[{
+						text:"全部",
+						value:""
+					},{
 						text:"已选",
 						value:"已选"
 					},{

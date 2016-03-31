@@ -1,6 +1,5 @@
 package com.rise.model;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -71,7 +70,11 @@ public class ShortClassInstT {
 	
 	private StageT stageT;
 	
+	private StaffT approvePersonObj;
+	
 	private StaffT creatorObj;
+	
+	private StaffT cancelHandlerObj;
 
 	private List<ShortSchooltimeT> classSchooltimeList;
 	
@@ -341,12 +344,28 @@ public class ShortClassInstT {
 		this.stageT = stageT;
 	}
 
+	public StaffT getApprovePersonObj() {
+		return approvePersonObj;
+	}
+
+	public void setApprovePersonObj(StaffT approvePersonObj) {
+		this.approvePersonObj = approvePersonObj;
+	}
+
 	public StaffT getCreatorObj() {
 		return creatorObj;
 	}
 
 	public void setCreatorObj(StaffT creatorObj) {
 		this.creatorObj = creatorObj;
+	}
+	
+	public StaffT getCancelHandlerObj() {
+		return cancelHandlerObj;
+	}
+
+	public void setCancelHandlerObj(StaffT cancelHandlerObj) {
+		this.cancelHandlerObj = cancelHandlerObj;
 	}
 
 	public List<ShortSchooltimeT> getClassSchooltimeList() {
