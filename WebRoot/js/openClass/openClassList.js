@@ -249,15 +249,20 @@ $(document).ready(function() {
 	$("#approve").click(function() {
 		var row = $('#approve_list_data').datagrid('getSelected');
 		if(row) {
-			var openClassState = row.openClassState;
-			if(openClassState == '001') {
-				var classInstId = row.classInstId;
-				window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=approve&applyType=002";
+			var applyId = row.applyId;
+			if(!isApprove(applyId)) {
+				return;
 			} else {
-				if(openClassState == "002") {
-					$.messager.alert('提示', "您选择的班级已经审批通过，无需再次审批！");
-				} else if(openClassState == "003") {
-					$.messager.alert('提示', "您选择的班级审批未通过，不能再次审批！");
+				var openClassState = row.openClassState;
+				if(openClassState == '001') {
+					var classInstId = row.classInstId;
+					window.location.href = "/sys/openClass/qryCreateClass.do?classInstId="+classInstId+"&type=approve&applyType=002";
+				} else {
+					if(openClassState == "002") {
+						$.messager.alert('提示', "您选择的班级已经审批通过，无需再次审批！");
+					} else if(openClassState == "003") {
+						$.messager.alert('提示', "您选择的班级审批未通过，不能再次审批！");
+					}
 				}
 			}
 		} else {
@@ -278,11 +283,29 @@ $(document).ready(function() {
 });
 
 function isExcOpen(classInstId) {
-	var staffId = $("#staffId").val();
 	var flag = false;
+	var staffId = $("#staffId").val();
 	$.ajax({
 		url : "/sys/openClass/isExcOpen.do",
 		data : "classInstId=" + classInstId + "&staffId=" + staffId,
+		dataType : "json",
+		async : false,
+		success : function(data) {
+			flag = data.flag;
+			if(!flag) {
+				$.messager.alert('提示', data.msg);
+			}
+		}
+	});
+	return flag;
+}
+
+function isApprove(applyId) {
+	var flag = false;
+	var staffId = $("#staffId").val();
+	$.ajax({
+		url : "/sys/openClass/isApprove.do",
+		data : "applyId=" + applyId + "&staffId=" + staffId,
 		dataType : "json",
 		async : false,
 		success : function(data) {

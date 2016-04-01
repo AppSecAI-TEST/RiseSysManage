@@ -160,10 +160,10 @@
 							</td>
 		  				</tr>
 		  				<tr>
-		  					<td align="right" colspan="8">
+		  					<td colspan="7">&nbsp;</td>
+		  					<td>
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryApproveBtn" funcNodeId="1007">查询</a>
 								&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="resetApprove">重置</a>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							</td>
 		  				</tr>
 		  			</table>

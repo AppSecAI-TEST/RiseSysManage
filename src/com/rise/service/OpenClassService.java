@@ -31,4 +31,9 @@ public class OpenClassService
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0085\",securityCode:\"0000000000\",params:{classInstId:\""+classInstId+"\",staffId:\""+staffId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
+
+	public String isApprove(String applyId, String staffId) throws Exception {
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0086\",securityCode:\"0000000000\",params:{applyId:\""+applyId+"\",staffId:\""+staffId+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
 }
