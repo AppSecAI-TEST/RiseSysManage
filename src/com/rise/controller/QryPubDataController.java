@@ -256,7 +256,7 @@ public class QryPubDataController
 		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = qryPubDataService.qryTeacherList(schoolId, stageId, null);
+			String retVal = qryPubDataService.qryTeacherList(schoolId, stageId, "");
 			out.write(retVal);
 		} catch(Exception e) {
 			e.printStackTrace();

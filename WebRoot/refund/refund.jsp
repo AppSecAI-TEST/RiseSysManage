@@ -128,7 +128,7 @@
 								<input type="checkbox" name="refundState" value="'005'"/><span>成功退费</span>
 								<input type="checkbox" name="refundState" value="'006'"/><span>取消</span>
 							</td>
-							<td align="right">
+							<td>
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1023">查询</a>
 								&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>&nbsp;&nbsp;&nbsp;
 							</td>
@@ -169,7 +169,7 @@
     			<form id="qryRefundApproveFm">
     				<table align="center" class="search_tab">
     					<tr>
-    						<td width="70px" align="right"><span>校区：</span></td>
+    						<td align="right" style="min-width: 60px"><span>校区：</span></td>
 			  				<td width="110px">
 								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 									url = "<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=252&fieldId=schoolId";
@@ -177,18 +177,18 @@
 					      			onLoadSuccess:function(data){if(data.length > 0)$('approveSchoolId').combobox('setValue',data[0].schoolId);}">
 				        		</select>
 							</td>
-							<td width="70px" align="right"><span>联系电话：</span></td>
+							<td align="right" style="min-width: 60px"><span>联系电话：</span></td>
 							<td width="160px">
 								<input name="approvePhone" id="approvePhone" type="text" class="easyui-textbox" style="width: 150px; height: 25px;"/>
 							</td>
-							<td width="70px" align="right"><span>申请日期：</span></td>
-			  				<td width="240px">
+							<td align="right" style="min-width: 60px"><span>申请日期：</span></td>
+			  				<td style="min-width: 210px">
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeApprove" name="startTimeApprove" data-options="formatter:myformatter, parser:myparser"/>
 								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApprove" name="endTimeApprove" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
-							<td width="70px" align="right"><span>课程类型：</span></td>
-							<td>
+							<td align="right" style="min-width: 60px"><span>课程类型：</span></td>
+							<td style="min-width: 210px">
 								<select id="approveCourseType" name="approveCourseType" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 				        		<select id="approveStageId" name="approveStageId" class="easyui-combobox" style="width: 100px; height: 25px;">
@@ -196,12 +196,12 @@
 		        			</td>
 						</tr>
 						<tr>
-							<td align="right"><span>学员姓名：</span></td>
+							<td align="right" style="min-width: 60px"><span>学员姓名：</span></td>
 							<td>
 								<input name="approveStudentId" id="approveStudentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
-		        			<td align="right"><span>退费状态：</span></td>
-							<td colspan="3">
+		        			<td align="right" style="min-width: 60px"><span>退费状态：</span></td>
+							<td colspan="4">
 								<input type="checkbox" name="approveRefundState" value="'001'"/><span>已申请</span>
 								<input type="checkbox" name="approveRefundState" value="'002'"/><span>审批中</span>
 								<input type="checkbox" name="approveRefundState" value="'003'"/><span>打款中</span>
@@ -210,7 +210,7 @@
 								<input type="checkbox" name="approveRefundState" value="'006'"/><span>取消</span>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>本人待审批：</span>&nbsp;&nbsp;<input type="checkbox" />
 							</td>
-							<td colspan="2" align="right">
+							<td style="min-width: 210px">
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryApproveBtn" funcNodeId="1025">查询</a>
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="resetApprove">重置</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							</td>

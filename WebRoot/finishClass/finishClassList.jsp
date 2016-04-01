@@ -109,17 +109,15 @@
 						%
 					</td>
 					<td align="right"><span>持证率 ：</span></td>
-					<td>
+					<td colspan="2">
 						<input name="minLicenseRate" id="minLicenseRate" type="text" class="easyui-textbox numberbox" style="width: 35px; height: 25px;" data-options="min:0, max:100, precision:0"/>
 						%-
 						<input name="maxLicenseRate" id="maxLicenseRate" type="text" class="easyui-textbox numberbox" style="width: 35px; height: 25px;" data-options="min:0, max:100, precision:0"/>
 						%
 					</td>
-					<td align="right" colspan="2">
+					<td>
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1022">查询</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</td>
   				</tr>
   			</table>

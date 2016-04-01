@@ -17,25 +17,27 @@
 	 		<form id="qryFm">
 	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right" width="80px"><span>所属校区：</span></td>
-	  					<td width="100px">
+	  					<td align="right" style="min-width: 60px;"><span>所属校区：</span></td>
+	  					<td style="min-width: 100px;">
 	  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height:25px;" editable ="false"
 	  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 	  						</select>
 	  					</td>
-	  					<td align="right" width="80px"><span>学员姓名：</span></td>
-	  					<td width="100px">
+	  					<td align="right" style="min-width: 60px;"><span>学员姓名：</span></td>
+	  					<td style="min-width: 100px;">
 	  						<input class="easyui-textbox" name="name" id="name" style="width:100px;height:25px;" />
 	  					</td>
-	  					<td align="right" width="80px"><span>联系电话：</span></td>
-	  					<td width="100px">
+	  					<td align="right" style="min-width: 60px;"><span>联系电话：</span></td>
+	  					<td style="min-width: 100px;">
 	  						<input class="easyui-textbox" name="phone" id="phone" style="width:100px;height:25px;" />
 	  					</td>
-	  					<td align="right" width="80px"><span>缴费日期：</span></td>
-	  					<td align="left">
-	  						<input class="easyui-datebox" name="startTime" id="startTime"  style="width:100px;height:25px;" editable ="false"/>
-		  					至
-	  						<input class="easyui-datebox" name="endTime" id="endTime"  style="width:100px;height:25px;" editable ="false"/>
+	  					<td align="right" style="min-width: 60px;"><span>课程类型：</span></td>
+	  					<td align="left" style="min-width: 220px;" colspan="2">
+	  						<select id="courseType" name="courseType" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+				        	</select>
+				        	&nbsp;&nbsp;&nbsp;
+				        	<select id="courseTypeDetail" name="courseTypeDetail" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+		        			</select>
 	  					</td>
 	  				</tr>
 	  				<tr>
@@ -56,26 +58,19 @@
 	  						<input type="radio" name="vip" value="Y"><span>是</span>
 	  						<input type="radio" name="vip" value="N"><span>否</span>
 	  					</td>
-	  					<td align="right"><span>课程类型：</span></td>
+	  					<td align="right" style="min-width: 60px;"><span>缴费日期：</span></td>
 	  					<td align="left">
-	  						<select id="courseType" name="courseType" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
-				        	</select>
-				        	&nbsp;&nbsp;&nbsp;
-				        	<select id="courseTypeDetail" name="courseTypeDetail" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
-		        			</select>
+	  						<input class="easyui-datebox" name="startTime" id="startTime"  style="width:100px;height:25px;" editable ="false"/>
+		  					至
+	  						<input class="easyui-datebox" name="endTime" id="endTime"  style="width:100px;height:25px;" editable ="false"/>
 	  					</td>
-	  				</tr>
-	  				<tr>
-	  					<td colspan="7"></td>
 	  					<td>
 	  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" funcNodeId="3800"><span>查询</span></a>
-		  					&nbsp;&nbsp;&nbsp;
-		  					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="resetBtn" ><span>重置</span></a>
+		  					&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="resetBtn" ><span>重置</span></a>
 	  					</td>
 	  				</tr>
 	  			</table>
 	 		</form>
-	 		
 	 		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:350" id="list_data" toolbar="#toolbar"  singleSelect="true" pagination="true" rownumbers="true" fitColumns="true">
 				<thead>
 					<tr>
@@ -104,26 +99,29 @@
 	 		<form id="qryFm1">
 	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right" width="80px"><span>所属校区：</span></td>
+	  					<td align="right" style="min-width: 60px;"><span>所属校区：</span></td>
 	  					<td width="100px">
 	  						<select class="easyui-combobox" name="schoolId" id="schoolIds" style="width:100px;height:25px;" editable ="false"
 	  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 	  						</select>
 	  					</td>
-	  					<td align="right" width="80px"><span>学员姓名：</span></td>
+	  					<td align="right" style="min-width: 60px;"><span>学员姓名：</span></td>
 	  					<td width="100px">
 	  						<input class="easyui-textbox" name="name" id="name" style="width:100px;height:25px;" />
 	  					</td>
-	  					<td align="right" width="80px"><span>联系电话：</span></td>
+	  					<td align="right" style="min-width: 60px;"><span>联系电话：</span></td>
 	  					<td width="100px">
 	  						<input class="easyui-textbox" name="phone" id="phone" style="width:100px;height:25px;" />
 	  					</td>
-	  					<td align="right" width="80px"><span>缴费日期：</span></td>
-	  					<td>
-	  						<input class="easyui-datebox" name="startTime" id="startTime"  style="width:100px;height:25px;" editable ="false" />
-		  					至
-	  						<input class="easyui-datebox" name="endTime" id="endTime"  style="width:100px;height:25px;"  editable ="false"/>
+	  					<td align="right" style="min-width: 60px;"><span>课程类型：</span></td>
+	  					<td style="min-width: 220px;" colspan="2">
+	  						<select id="courseTypes" name="courseTypes" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+				        	</select>
+				        	&nbsp;&nbsp;&nbsp;
+				        	<select id="courseTypeDetails" name="courseTypeDetails" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+		        			</select>
 	  					</td>
+	  					
 	  				</tr>
 	  				<tr>
 	  					<td align="right"><span>业绩顾问：</span></td>
@@ -143,21 +141,15 @@
 	  						<input type="radio" name="vip" value="Y"><span>是</span>
 	  						<input type="radio" name="vip" value="N"><span>否</span>
 	  					</td>
-	  					<td align="right"><span>课程类型：</span></td>
+	  					<td align="right" style="min-width: 60px;"><span>缴费日期：</span></td>
 	  					<td>
-	  						<select id="courseTypes" name="courseTypes" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
-				        	</select>
-				        	&nbsp;&nbsp;&nbsp;
-				        	<select id="courseTypeDetails" name="courseTypeDetails" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
-		        			</select>
+	  						<input class="easyui-datebox" name="startTime" id="startTime"  style="width:100px;height:25px;" editable ="false" />
+		  					至
+	  						<input class="easyui-datebox" name="endTime" id="endTime"  style="width:100px;height:25px;"  editable ="false"/>
 	  					</td>
-	  				</tr>
-	  				<tr>	
-	  					<td colspan="7"></td>
 	  					<td align="left">
 		  					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn1" funcNodeId="3801"><span>查询</span></a>
-		  					&nbsp;&nbsp;&nbsp;
-		  					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="resetBtn1" ><span>重置</span></a>
+		  					&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="resetBtn1" ><span>重置</span></a>
 	  					</td>
 	  				</tr>
 	  			</table>

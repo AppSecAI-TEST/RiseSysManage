@@ -48,14 +48,12 @@
 		        		</select>
 					</td>
 					<td align="right" style="min-width: 80px"><span>开课日期：</span></td>
-					<td style="min-width: 100px">
+					<td style="min-width: 220px">
 						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeOpenClass" name="startTimeOpenClass" data-options="formatter:myformatter, parser:myparser"/>
-					</td>
-					<td align="center"><span>至</span></td>
-					<td style="min-width: 100px">
+						至
 						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeOpenClass" name="endTimeOpenClass" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
-  					<td align="center"  style="min-width: 210px">
+  					<td align="center" style="min-width: 210px">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1084">查询</a>
 						&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 					</td>
