@@ -9,19 +9,21 @@ $(document).ready(function() {
 			s = s.substring(0, s.length - 1);
 			object.isApplyBonus = s;
 		}
+		var funcNodeId = $("#qryBtn").attr("funcNodeId");
+		object.funcNodeId = funcNodeId;
     	var obj = JSON.stringify(object);
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
     	$('#list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",
     		queryParams:{
     			param : obj
     		},
-    		onLoadSuccess:function(){
+    		onLoadSuccess:function() {
     			onLoadSuccess();
-    			$('.apply').linkbutton({text:'申请奖金', iconCls:'icon-add'});
-    	        $('#list_data').datagrid('clearSelections');
+    			$('#list_data').datagrid('clearSelections');
+    			var resourceId = $("#resourceId").val();
+    			if(resourceId != null && resourceId != "" && resourceId != undefined && "746" == resourceId) {
+    				$('.apply').linkbutton({text:'申请奖金', iconCls:'icon-add'});
+    			}
     		}
     	});
     });
@@ -64,46 +66,26 @@ function mergeCellsByField(tableId, colList) {
     var target = $("#" + tableId);
     var colunms = colList.split(",");
     var stageId = "";
-    var stageNum = 0;
     var schoolName = "";
     var rows = target.datagrid("getRows").length;
-    for (var i = 0; i <= rows; i++) {
-    	if(i = 0) {
-    		stageId = target.datagrid("getRows")[i].stageId;
-    		schoolName = target.datagrid("getRows")[i].schoolName;
-    	}
-    	if(i != rows) {
-    		var after = target.datagrid("getRows")[i].stageId;
-    		if(stageId != after) {
-    			stageNum++;
-    		}
-    		var before = target.datagrid("getRows")[i].schoolName;
-    		if(schoolName != before) {
-    			stageId = "";
-    			stageNum = 0;
-    		}
-    	}
-    }
     for (var j = colunms.length - 1; j >= 0; j--) {
     	var field = colunms[j];
     	before = "";
         rowspan = 1;
+        stageId = "";
         megerIndex = 0;
         for (var i = 0; i <= rows; i++) {
+        	var columnSchoolName = "";
+        	if(i == 0) {
+        		schoolName = target.datagrid("getRows")[i].schoolName;
+        	}
             if (i == rows) {
             	after = "";
             } else {
-            	if("stageId" == field) {
-            		if(stageNum == 1) {
-            			after = target.datagrid("getRows")[i].schoolName;
-            		} else {
-            			after = target.datagrid("getRows")[i][field];
-            		}
-            	} else {
-            		after = target.datagrid("getRows")[i][field];
-            	}
+            	after = target.datagrid("getRows")[i][field];
+            	columnSchoolName = target.datagrid("getRows")[i].schoolName;
             }
-            if (before == after) {
+            if (before == after && schoolName == columnSchoolName) {
             	rowspan += 1;
             } else {
             	if(field == "stageId") {
@@ -137,6 +119,7 @@ function mergeCellsByField(tableId, colList) {
             	rowspan = 1;
             }
             before = after;
+            schoolName = columnSchoolName;
         }
     }
 }
