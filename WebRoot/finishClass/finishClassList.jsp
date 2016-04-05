@@ -109,18 +109,19 @@
 						%
 					</td>
 					<td align="right"><span>持证率 ：</span></td>
-					<td colspan="2">
+					<td>
 						<input name="minLicenseRate" id="minLicenseRate" type="text" class="easyui-textbox numberbox" style="width: 35px; height: 25px;" data-options="min:0, max:100, precision:0"/>
 						%-
 						<input name="maxLicenseRate" id="maxLicenseRate" type="text" class="easyui-textbox numberbox" style="width: 35px; height: 25px;" data-options="min:0, max:100, precision:0"/>
 						%
 					</td>
-<<<<<<< OURS
-					<td>
-=======
-					<td>&nbsp;</td>
-					<td align="left" colspan="2">
->>>>>>> THEIRS
+					<td align="right"><span>结课日期：</span></td>
+					<td align="left">
+						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeFinish" name="startTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
+						至
+						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeFinish" name="endTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
+					</td>
+					<td align="left">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1022">查询</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 					</td>

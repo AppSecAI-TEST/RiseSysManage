@@ -43,16 +43,16 @@
 						</td>
 	  				</tr>
 	  				<tr>
-	  					<td align="right" style="min-width: 70px;"><span>业绩顾问：</span></td>
-			  			<td style="min-width: 100px;">
-							<select id="adviserId" name="adviserId" class="easyui-combobox" style="width: 100px; height: 25px;">
-				        	</select>
-						</td>
 						<td align="right" style="min-width: 70px;"><span>业绩类型：</span></td>
 			  			<td style="min-width: 100px;">
 							<select id="feeType" name="feeType" class="easyui-combobox" style="width: 100px; height: 25px;"
 								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" editable="false"
 				      			url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
+				        	</select>
+						</td>
+	  					<td align="right" style="min-width: 70px;"><span>业绩顾问：</span></td>
+			  			<td style="min-width: 100px;">
+							<select id="adviserId" name="adviserId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        	</select>
 						</td>
 	  					<td align="right" style="min-width: 70px;"><span>课程类型：</span></td>
@@ -97,7 +97,10 @@
 	  					</td>
 	  				</tr>
 	  				<tr>
-	  					<td colspan="9">&nbsp;</td>
+	  					<td align="right" style="min-width: 70px;"><span>当前班级：</span></td>
+			  			<td style="min-width: 100px;" colspan="8">
+							<input id="className" name="className" class="easyui-textbox" style="width: 100px; height: 25px;">
+						</td>
 	  					<td align="left">
 	  						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="5002">查询</a>
 							&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>

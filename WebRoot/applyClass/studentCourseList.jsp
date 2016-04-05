@@ -36,11 +36,24 @@
   						<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
   					</td>
   					<td align="right" style="min-width: 60px;"><span>联系电话：</span></td>
-  					<td width="100px" colspan="2">
+  					<td width="100px">
   						<input name="phone" id="phone" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
   					</td>
+  					<td align="right" style="min-width: 60px;"><span>缴费日期：</span></td>
+	  				<td style="min-width: 220px;">
+						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myformatter, parser:myparser"/>
+						至
+						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTime" name="endTime" data-options="formatter:myformatter, parser:myparser"/>
+					</td>
   				</tr>
   				<tr>
+  					<td align="right" style="min-width: 60px;"><span>业绩类型：</span></td>
+			  			<td style="min-width: 100px;">
+							<select id="feeType" name="feeType" class="easyui-combobox" style="width: 100px; height: 25px;"
+								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" editable="false"
+				      			url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_COURSE_T&codeType=FEE_TYPE">
+				        	</select>
+						</td>
   					<td align="right" style="min-width: 60px;"><span>业绩顾问：</span></td>
   					<td width="100px">
   						<select id="adviser" name="adviser" class="easyui-combobox" style="width: 100px; height: 25px;"
@@ -49,18 +62,12 @@
 		        		</select>
   					</td>
   					<td align="right" style="min-width: 60px;"><span>业绩老师：</span></td>
-  					<td width="100px">
+  					<td width="100px" colspan="2">
   						<select id="adviserTeacher" name="adviserTeacher" class="easyui-combobox" style="width: 100px; height: 25px;"
   							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'"
       						url="<%=path %>/pubData/qryTeacherList.do?schoolId=${sessionScope.StaffT.schoolId}&stageId=">
 		        		</select>
   					</td>
-  					<td align="right" style="min-width: 60px;"><span>缴费日期：</span></td>
-	  				<td style="min-width: 210px;">
-						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myformatter, parser:myparser"/>
-						至
-						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTime" name="endTime" data-options="formatter:myformatter, parser:myparser"/>
-					</td>
   					<td align="left">
   						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1004">查询</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
