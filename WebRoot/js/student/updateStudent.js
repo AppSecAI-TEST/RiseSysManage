@@ -28,6 +28,7 @@ function disY()
 		$("#birthday").datebox('setValue', studentObj.birthday);
 	}
 	$("form[id='studentFm'] :radio").attr("disabled", false);
+	$('#validate').linkbutton({disabled: false});
 }
 
 function disN() {
@@ -42,6 +43,7 @@ function disN() {
 	$("#entranceDate").datebox({disabled: true});
 	$("#birthday").datebox({disabled: true});
 	$("form[id='studentFm'] :radio").attr("disabled", true);
+	$('#validate').linkbutton({disabled: true});
 
 	var postIds = "," + $("#postIds").val() + ",";
 	if(postIds.indexOf(',33,') > -1 || postIds.indexOf(',2,') > -1 
@@ -391,51 +393,53 @@ $(document).ready(function() {
 	
 	//学员验重
 	$("#validate").click(function() {
-    	var identityId = $("#identityId").textbox("getValue");
-    	if(studentObj.identityId != identityId) {
-    		var flags = true;
-    		var identityType = $('#identityType').combobox('getValue');
-    		if("2BA" == identityType) {
-        		var identityId = $("#identityId").textbox("getValue");
-        		if(identityId != "" && identityId != null && identityId != undefined) {
-        			if(!validateIdCard(identityId)) {
-        				flags = false;
-        			}
-    			}
-        	}
-    		if(flags) {
-    			updateFlag = true;
-    			var obj = JSON.stringify($("#studentFm").serializeObject());
-    			obj = obj.substring(0, obj.length - 1);
-    			var funcNodeId = $("#validate").attr("funcNodeId");
-    			obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-    			obj = encodeURI(obj);
-    			$.ajax({
-    				url: "/sys/student/validate.do",
-    				data: "param=" + obj,
-    				dataType: "json",
-    				async: true,
-    				beforeSend: function() {
-    					$.messager.progress({title : '验重', msg : '正在验重，请稍等……'});
-    				},
-    				success: function (data) {
-    					var flag = data.flag
-    					if(flag) {
-    						$.messager.alert('提示', "该证件号码还暂未注册，资料有效！");
-    						identityValidateFlag = true;
-    					} else {
-    						$.messager.alert('提示', "该证件号码已注册，请输入其他未注册的证件号码！");
-    					}
-    					$.messager.progress('close'); 
-    					validateFlag = true;
-    				} 
-    			});
-    		} else {
-    			$.messager.alert('提示', "请输入有效的身份证号码！");
-    		}
-    	} else {
-    		$.messager.alert('提示', "请先修改该学员的证件号码再进行验重！");
-    	}
+		if (!$(this).linkbutton('options').disabled) {
+			var identityId = $("#identityId").textbox("getValue");
+			if(studentObj.identityId != identityId) {
+				var flags = true;
+				var identityType = $('#identityType').combobox('getValue');
+				if("2BA" == identityType) {
+					var identityId = $("#identityId").textbox("getValue");
+					if(identityId != "" && identityId != null && identityId != undefined) {
+						if(!validateIdCard(identityId)) {
+							flags = false;
+						}
+					}
+				}
+				if(flags) {
+					updateFlag = true;
+					var obj = JSON.stringify($("#studentFm").serializeObject());
+					obj = obj.substring(0, obj.length - 1);
+					var funcNodeId = $("#validate").attr("funcNodeId");
+					obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+					obj = encodeURI(obj);
+					$.ajax({
+						url: "/sys/student/validate.do",
+						data: "param=" + obj,
+						dataType: "json",
+						async: true,
+						beforeSend: function() {
+							$.messager.progress({title : '验重', msg : '正在验重，请稍等……'});
+						},
+						success: function (data) {
+							var flag = data.flag
+							if(flag) {
+								$.messager.alert('提示', "该证件号码还暂未注册，资料有效！");
+								identityValidateFlag = true;
+							} else {
+								$.messager.alert('提示', "该证件号码已注册，请输入其他未注册的证件号码！");
+							}
+							$.messager.progress('close'); 
+							validateFlag = true;
+						} 
+					});
+				} else {
+					$.messager.alert('提示', "请输入有效的身份证号码！");
+				}
+			} else {
+				$.messager.alert('提示', "请先修改该学员的证件号码再进行验重！");
+			}
+		}
 	});
 	
 	//学员修改提交
