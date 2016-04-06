@@ -13,9 +13,10 @@
   	<body>
   		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
 		<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
-  		<div style="margin-right:5px">
+		
+  		<div style="margin-right:5px;margin-left:5px">
   			<form id="qryFm">
-	  			<table class="search_tab">
+	  			<table id="search_tab" class="search_tab">
 	  				<tr>
 	  					<td align="right" style="min-width: 70px;"><span>所属校区：</span></td>
 	  					<td style="min-width: 100px;">
@@ -113,9 +114,9 @@
     			<a href="javascript:void(0)" id="updateCourse" class="easyui-linkbutton" style="width:100px;" iconCls="icon-edit">修改课程</a>
     			<a href="javascript:void(0)" id="courseDetail" class="easyui-linkbutton" style="width:100px;" iconCls="icon-redo">浏览</a>
   			</div>
-			 
-				<table class="easyui-datagrid" title="查询结果" style="height:400px" id="list_data" toolbar="#toolbar" 
-					pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+		 
+				<table class="easyui-datagrid" title="查询结果"   id="list_data" toolbar="#toolbar" 
+					pagination="true" rownumbers="true" fitColumns="true" pageSize="20" singleSelect="true">
 					<thead>
 						<tr>
 							<th field="ck" checkbox="true" width="2%"></th>
@@ -136,11 +137,13 @@
 						</tr>
 					</thead>
 				</table>
-			 
   		</div>
   	</body>
 </html>
 <script type="text/javascript">
+
+	
+
 var linkCourses = [];
 
 $("#updateCourse").click(function()

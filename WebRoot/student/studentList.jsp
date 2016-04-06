@@ -69,7 +69,7 @@
 					</tr>
 				</table>
 			</form>
-			<table class="easyui-datagrid" title="学员列表" style="height:435px;" id="list_data" 
+			<table class="easyui-datagrid" title="学员列表" pageSize='20' id="list_data" 
 				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false">
 				<thead>
 					<tr>
