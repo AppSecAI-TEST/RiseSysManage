@@ -210,14 +210,14 @@ $(document).ready(function() {
 				});
 			}
 			if(flag) {
-				var s = "";
 				var teacherNum = 1;
+				var s = "," + teacherId + ",";
 				if($("input[name='teachers'][classInstId="+classInstId+"]").length > 0) {
 					$("input[name='teachers'][classInstId="+classInstId+"]").each(function() {
 						var selTeacherId = $(this).attr("teacherId");
-						if(teacherId != selTeacherId && s.indexOf(selTeacherId) < 1) {
-							s = s + "," + selTeacherId + ",";
+						if(teacherId != selTeacherId && s.indexOf("," + selTeacherId + ",") < 0) {
 							teacherNum++;
+							s += selTeacherId + ",";
 						}
 					});
 				}

@@ -375,14 +375,14 @@ $(document).ready(function() {
 				});
 			}
 			if(flag) {
-				var s = "";
 				var teacherNum = 1;
+				var s = "," + teacherId + ",";
 				if($("[name='teachers']").length > 0) {
 					$("[name='teachers']").each(function() {
 						var selTeacherId = $(this).attr("teacherId");
-						if(teacherId != selTeacherId && s.indexOf(selTeacherId) < 1) {
-							s = s + "," + selTeacherId + ",";
+						if(teacherId != selTeacherId && s.indexOf("," + selTeacherId + ",") < 0) {
 							teacherNum++;
+							s += selTeacherId + ",";
 						}
 					});
 				}

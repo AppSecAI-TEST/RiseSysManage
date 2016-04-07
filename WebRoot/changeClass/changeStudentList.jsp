@@ -14,10 +14,10 @@
   	</head>
   
   	<body style="padding-top:5px">
-  		<form id="qryFm" style="margin:0 auto;">
-  			<input type="hidden" id="menuFuncNodeId" value="<%=funcNodeId %>"/>
-  			<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId %>"/>
-  			<table align="center" style="min-width:1100px;width:100%;border:1px solid #95B8E7;margin:0 auto;height:80px;">
+  		<input type="hidden" id="menuFuncNodeId" value="<%=funcNodeId %>"/>
+  		<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId %>"/>
+  		<form id="qryFm">
+  			<table class="search_tab">
   				<tr>
   					<td align="right"><span>学员姓名：</span></td>
 					<td width="100px">
@@ -54,7 +54,7 @@
 					</td>
 					<td align="center">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1013">查询</a>
-						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 					</td>
   				</tr>
   			</table>

@@ -173,8 +173,8 @@ $(document).ready(function() {
 					}
 				}
 			});
-			var teacherId = $("#teacherId").combobox("getValue");
 			var flag = true;
+			var teacherId = $("#teacherId").combobox("getValue");
 			if($("[name='teachers']").length > 0) {
 				$("[name='teachers']").each(function() {
 					var selTeacherId = $(this).attr("teacherId");
@@ -187,11 +187,13 @@ $(document).ready(function() {
 			}
 			if(flag) {
 				var teacherNum = 1;
+				var s = "," + teacherId + ",";
 				if($("[name='teachers']").length > 0) {
 					$("[name='teachers']").each(function() {
 						var selTeacherId = $(this).attr("teacherId");
-						if(teacherId != selTeacherId) {
+						if(teacherId != selTeacherId && s.indexOf("," + selTeacherId + ",") < 0) {
 							teacherNum++;
+							s += selTeacherId + ",";
 						}
 					});
 				}

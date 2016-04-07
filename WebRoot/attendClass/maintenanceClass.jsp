@@ -145,6 +145,7 @@
 					  		<thead>
 					  			<tr>
 					  				<th data-options="field:'ck',checkbox:true"></th>
+					  				<th data-options="field:'rowNo',width:50,align:'center'">序号</th>
 					  				<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
 					  				<th data-options="field:'byName',width:80,align:'center'">英文名</th>
 					  				<th data-options="field:'payDate',width:100,align:'center'">缴费时间</th>
