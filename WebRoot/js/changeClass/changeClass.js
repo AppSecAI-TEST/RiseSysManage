@@ -1,14 +1,16 @@
 $(document).ready(function() {
-//	$("#tt").tabs({
-//		onSelect: function (title) {
-//			var src = "";
-//			if(title == "转班学员管理") {
-//				$("#qryApplyBtn").click();
-//			} else if(title == "转班审批管理") {
-//				$("#qryApproveBtn").click();
-//			} 
-//		}
-//	});
+	$("#tt").tabs({
+		onSelect: function (title) {
+			if(title == "转班审批管理") {
+				var height = $(document).height();
+				var header = $(".panel-header").height();
+				var search = $("#approve_search_tab").height();
+				$('#approve_list_data').datagrid('resize', {// 适配高度
+					height: height - search - header - 60
+				});
+			} 
+		}
+	});
 	
 	$("#qryApplyBtn").click(function() {
 		var object = $("#qryApplyFm").serializeObject();
@@ -70,7 +72,7 @@ $(document).ready(function() {
     		return "<span>" + data.schoolName + "</span>";
     	},
     	onLoadSuccess : function(data) {
-			if(data.length > 0) {
+			if(data.length == 1) {
 				$("#schoolId").combobox("setValue", data[0].schoolId);
 			}
 		},
@@ -105,7 +107,7 @@ $(document).ready(function() {
     		return "<span>" + data.schoolName + "</span>";
     	},
     	onLoadSuccess : function(data) {
-			if(data.length > 0) {
+			if(data.length == 1) {
 				$("#approveSchoolId").combobox("setValue", data[0].schoolId);
 			}
 		}

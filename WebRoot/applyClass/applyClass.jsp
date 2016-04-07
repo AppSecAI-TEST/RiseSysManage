@@ -17,26 +17,26 @@
   		<div id="tt" class="easyui-tabs" style="min-width:1110px; width:98%; height:auto;">
   			<div title="放班班级管理" style="padding:5px;display:block;">
   				<form id="qryFm">
-			  		<table class="search_tab">
+			  		<table class="search_tab" id="apply_search_tab">
 			  			<tr>
-			  				<td align="right" style="width: 60px;"><span>校区：</span></td>
-			  				<td style="width: 100px;">
+			  				<td align="right" style="min-width: 60px;"><span>校区：</span></td>
+			  				<td style="min-width: 100px;">
 								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 							</td>
-							<td align="right" style="width: 70px;"><span>课程阶段：</span></td>
-							<td style="width: 100px;">
+							<td align="right" style="min-width: 60px;"><span>课程阶段：</span></td>
+							<td style="min-width: 100px;">
 								<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;"
 									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryStage.do">
 				        		</select>
 							</td>
-							<td align="right" style="width:70px;"><span>班级：</span></td>
-							<td style="width: 100px;">
+							<td align="right" style="min-width:60px;"><span>班级：</span></td>
+							<td style="min-width: 100px;">
 								<input id="classInstId" name="classInstId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
-							<td align="right" style="width: 80px;"><span>放班申请时间：</span></td>
-			  				<td style="width: 225px;">
+							<td align="right" style="min-width: 90px;"><span>放班申请时间：</span></td>
+			  				<td style="min-width: 225px;">
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeApply" name="startTimeApply" data-options="formatter:myformatter, parser:myparser"/>
 								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApply" name="endTimeApply" data-options="formatter:myformatter, parser:myparser"/>
@@ -69,14 +69,14 @@
 								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeApprove" name="endTimeApprove" data-options="formatter:myformatter, parser:myparser"/>
 							</td>
-							<td align="left">
+							<td align="left" style="min-width: 220px;">
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1006">查询</a>
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 							</td>
 			  			</tr>
 			  		</table>
 			  	</form>
-				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" 
+				  	<table class="easyui-datagrid" title="查询结果" id="list_data" 
 				  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
@@ -108,7 +108,7 @@
   			
   			<div title="放班审批管理" style="padding:5px;display:block;">
   				<form id="qryApproveFm">
-  					<table class="search_tab">
+  					<table class="search_tab" id="approve_search_tab">
 		  				<tr>
 		  					<td align="right" style="min-width: 60px"><span>校区：</span></td>
 			  				<td style="width: 100px;">
@@ -168,7 +168,7 @@
 		  				</tr>
 		  			</table>
   				</form>
-				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="approve_list_data" 
+				  	<table class="easyui-datagrid" title="查询结果" id="approve_list_data" 
 				  		toolbar="#toolbarApprove" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>

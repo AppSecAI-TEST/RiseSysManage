@@ -18,25 +18,25 @@
   		<div id="tt" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
   			<div title="转校学员管理" style="padding:5px;display:block;">
   				<form id="qryApplyFm">
-  					<table class="search_tab">
+  					<table class="search_tab" id="apply_search_tab">
   						<tr>
-							<td width="70px" align="right"><span>学员姓名：</span></td>
-							<td width="80px">
+							<td align="right" style="min-width: 60px;"><span>学员姓名：</span></td>
+							<td style="min-width: 100px;">
 								<input name="studentId" id="studentId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
-							<td width="70px" align="right"><span>联系电话：</span></td>
-							<td width="100px">
+							<td align="right" style="min-width: 60px;"><span>联系电话：</span></td>
+							<td style="min-width: 100px;">
 								<input name="phone" id="phone" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 							</td>
-							<td width="75px" align="right"><span>业绩顾问：</span></td>
-		  					<td width="95px">
+							<td align="right" style="min-width: 90px;"><span>业绩顾问：</span></td>
+		  					<td style="min-width: 100px;">
 								<select id="adviser" name="adviser" class="easyui-combobox" style="width: 100px; height: 25px;"
 									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto'"
      								url="<%=path %>/pubData/qryStaffList.do?post=16,17&schoolId=">
 				        		</select>
 							</td>
-							<td width="60px" align="right"><span>转出日期：</span></td>
-			  				<td width="225px">
+							<td align="right" style="min-width: 60px;"><span>转出日期：</span></td>
+			  				<td style="min-width: 220px;">
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeOut" name="startTimeOut" data-options="formatter:myformatter, parser:myparser"/>
 								至
 								<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeOut" name="endTimeOut" data-options="formatter:myformatter, parser:myparser"/>
@@ -99,7 +99,7 @@
 		  				</tr>
   					</table>
   				</form>
-				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="apply_list_data" 
+				  	<table class="easyui-datagrid" title="查询结果" id="apply_list_data" 
 				  		toolbar="#toolbarApply" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
@@ -135,7 +135,7 @@
   			</div>
   			<div title="转校审批管理" style="padding:5px;display:block;">
   				<form id="qryApproveFm">
-  					<table class="search_tab">
+  					<table class="search_tab" id="approve_search_tab">
   						<tr>
   							<td width="70px" align="right"><span>学员姓名：</span></td>
 							<td width="100px">
@@ -186,7 +186,7 @@
   						</tr>
   					</table>
   				</form>
-				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="approve_list_data" 
+				  	<table class="easyui-datagrid" title="查询结果" id="approve_list_data" 
 				  		toolbar="#toolbarApprove" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>

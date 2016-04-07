@@ -9,15 +9,10 @@ $(document).ready(function(){
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
     	},
-    	onLoadSuccess : function() {
-    		if($("#schoolId").combobox("getData").length>0)
-    		{
-    			$("#schoolId").combobox("setValue",$("#schoolId").combobox("getData")[0].schoolId);
+    	onLoadSuccess : function(data) {
+    		if(data.length == 1) {
+    			$("#schoolId").combobox("setValue", data[0].schoolId);
     		}	
-    	},
-    	onChange : function(n, o) {
-    		if(n != "" && n != null && n != undefined) {
-    		} 
     	}
 	});
 	

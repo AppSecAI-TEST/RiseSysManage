@@ -1,14 +1,16 @@
 $(document).ready(function() {
-//	$("#tt").tabs({
-//		onSelect: function (title) {
-//			var src = "";
-//			if(title == "退费课程查询") {
-//				$("#qryBtn").click();
-//			} else if(title == "退费课程管理") {
-//				$("#qryApproveBtn").click();
-//			} 
-//		}
-//	});
+	$("#tt").tabs({
+		onSelect: function (title) {
+			if(title == "退费审批管理") {
+				var height = $(document).height();
+				var header = $(".panel-header").height();
+				var search = $("#approve_search_tab").height();
+				$('#approve_list_data').datagrid('resize', {// 适配高度
+					height: height - search - header - 60
+				});
+			} 
+		}
+	});
 	
 	$("#qryBtn").click(function() {
 		var s = "";

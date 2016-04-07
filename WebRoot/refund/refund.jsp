@@ -16,7 +16,7 @@
     	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
     			<div title="退费课程查询" style="padding:5px;display:block;">
     			<form id="qryRefundCourseFm">
-    				<table class="search_tab">
+    				<table class="search_tab" id="apply_search_tab">
     					<tr>
     						<td align="right" style="min-width: 60px;"><span>校区：</span></td>
 			  				<td style="min-width: 100px;">
@@ -136,7 +136,7 @@
     					</tr>
     				</table>
     			</form>
-				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="apply_list_data"
+				  	<table class="easyui-datagrid" title="查询结果" id="apply_list_data"
 				  		toolbar="#toolbarApply" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
@@ -167,7 +167,7 @@
     		</div>
     		<div title="退费审批管理" style="padding:5px;display:block;">
     			<form id="qryRefundApproveFm">
-    				<table align="center" class="search_tab">
+    				<table class="search_tab" id="approve_search_tab">
     					<tr>
     						<td align="right" style="min-width: 60px"><span>校区：</span></td>
 			  				<td width="110px">
@@ -217,7 +217,7 @@
 						</tr>
     				</table>
     			</form>
-				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="approve_list_data"
+				  	<table class="easyui-datagrid" title="查询结果" id="approve_list_data"
 				  		toolbar="#toolbarApprove" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>

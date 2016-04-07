@@ -65,10 +65,9 @@ $(document).ready(function(){
     	},
     	onLoadSuccess : function() {
     		var data = $("#schoolId").combobox("getData");
-    		if(data.length > 0) {
+    		if(data.length == 1) {
     			$("#schoolId").combobox("setValue", data[0].schoolId);
     		}
-    		$("#qryBtn").click();
     	},
     	onChange : function(n, o) {
     		$("#dutyAdvister").combobox({

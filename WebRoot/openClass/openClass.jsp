@@ -16,7 +16,7 @@
   			<div title="开班班级管理" style="padding:5px;display:block;">
   				<form id="qryFm">
   					<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
-		  			<table class="search_tab">
+		  			<table class="search_tab" id="apply_search_tab">
 		  				<tr>
 		  					<td align="right" style="min-width: 60px"><span>校区：</span></td>
 			  				<td style="min-width: 100px">
@@ -58,7 +58,7 @@
 		  				</tr>
 		  			</table>
 		  		</form>
-				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" 
+				  	<table class="easyui-datagrid" title="查询结果" id="list_data" 
 				  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
@@ -88,7 +88,7 @@
   			</div>
   			<div title="开班审批管理" style="padding:5px;display:block;">
   				<form id="qryApproveFm">
-  					<table class="search_tab">
+  					<table class="search_tab" id="approve_search_tab">
 		  				<tr>
 		  					<td align="right" style="min-width: 60px"><span>校区：</span></td>
 			  				<td style="min-width: 100px">
@@ -132,7 +132,7 @@
 		  				</tr>
 		  			</table>
   				</form>
-				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="approve_list_data"
+				  	<table class="easyui-datagrid" title="查询结果" id="approve_list_data"
 				  		toolbar="#toolbarApprove" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>

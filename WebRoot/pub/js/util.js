@@ -1,60 +1,58 @@
-var to =null;
-var countProgress =null;
+var to = null;
+var countProgress = null;
 var schoolData = [1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013];
-
-	$(document).ready(function()
-		{
-			var height = $(document).height();
-			var tabs=$(".tabs").height();
-			var search=$(".search_tab").height();
-			var header=$(".panel-header").height();
-			
-			 
-			 $('#list_data').datagrid('resize',{//适配高度
-		      height:height-search-header-tabs
-	  		 });
-			 $("#list_data").datagrid({
-		　		　pageList : [20, 30, 40],        
-				  pageSize : 20                      
-　			　});
-			 
-			 $('#goodsGift_data').datagrid('resize',{//适配高度
-		      height:height-search-header-tabs
-	  		 });
-			 
-			 $("#goodsGift_data").datagrid({
-		　		　pageList : [20, 30, 40],           
-				  pageSize : 20                    
-　			　});
-			 
-			  $('#couponGift_data').datagrid('resize',{//适配高度
-		      height:height-search-header-tabs
-	  		 });
-			 
-			 $("#couponGift_data").datagrid({
-		　		　pageList : [20, 30, 40],           
-				  pageSize : 20                    
-　			　});
-			 
-			  $('#courseGift_data').datagrid('resize',{//适配高度
-		      height:height-search-header-tabs
-	  		 });
-			 
-			 $("#courseGift_data").datagrid({
-		　		　pageList : [20, 30, 40],           
-				  pageSize : 20                    
-　			　});
- 			 
-			 $('#manList').datagrid('resize',{//适配高度
-		      height:height-search-header-tabs
-	  		 });
-			 
-			 $("#manList").datagrid({
-		　		　pageList : [20, 30, 40],           
-				  pageSize : 20                    
-　			　});
-			 
-		});
+$(document).ready(function() {
+	var tabs = $(".tabs").height();
+	var height = $(document).height();
+	var search = $(".search_tab").height();
+	var header = $(".panel-header").height();
+	$('#list_data').datagrid('resize', {// 适配高度
+		height: height - search - header - tabs
+	});
+	$("#list_data").datagrid({
+		pageList : [20, 30, 40],          // 可以设置每页记录条数的列表
+		pageSize : 20                       // 每页显示的记录条数
+	});
+	$('#apply_list_data').datagrid('resize', {// 适配高度
+		height: height - search - header - tabs
+	});
+	$("#apply_list_data").datagrid({
+		pageList : [20, 30, 40],          // 可以设置每页记录条数的列表
+		pageSize : 20                       // 每页显示的记录条数
+	});
+	$("#approve_list_data").datagrid({
+		pageList : [20, 30, 40],          // 可以设置每页记录条数的列表
+		pageSize : 20                       // 每页显示的记录条数
+	});
+	$('#goodsGift_data').datagrid('resize', {//适配高度
+		height: height - search - header - tabs
+	});
+	$("#goodsGift_data").datagrid({
+		pageList : [20, 30, 40],           
+		pageSize : 20                    
+	});
+	$('#couponGift_data').datagrid('resize', {//适配高度
+		height: height - search - header - tabs
+	});
+	$("#couponGift_data").datagrid({
+	　	pageList : [20, 30, 40],           
+		pageSize : 20                    
+	});
+	$('#courseGift_data').datagrid('resize', {//适配高度
+		height: height - search - header - tabs
+	});
+	$("#courseGift_data").datagrid({
+	　	pageList : [20, 30, 40],           
+		pageSize : 20                    
+	});
+	$('#manList').datagrid('resize', {//适配高度
+		height:height-search-header-tabs
+	});
+	$("#manList").datagrid({
+	　	pageList : [20, 30, 40],           
+		pageSize : 20                    
+	});
+});
 	
 //禁用非输入框回退键
 window.onload=function(){   

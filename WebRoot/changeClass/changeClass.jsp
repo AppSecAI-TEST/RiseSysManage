@@ -11,13 +11,13 @@
 		<script type="text/javascript" src="<%=path %>/js/changeClass/changeClass.js"></script>
   	</head>
   
-  	<body>
+  	<body style="padding-top:5px">
   		<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
   		<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   		<div id="tt" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
   			<div title="转班学员管理" style="padding:5px;display:block;">
   				<form id="qryApplyFm">
-		  			<table class="search_tab">
+		  			<table class="search_tab" id="apply_search_tab">
 		  				<tr>
 		  					<td width="70px" align="right"><span>校区：</span></td>
 			  				<td width="100px">
@@ -95,7 +95,7 @@
 		  				</tr>
 		  			</table>
 		  		</form>
-				  	<table class="easyui-datagrid" title="查询结果"  id="apply_list_data" 
+				  	<table class="easyui-datagrid" title="查询结果" id="apply_list_data" 
 				  		toolbar="#toolbarApply" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
@@ -129,7 +129,7 @@
   			
   			<div title="转班审批管理" style="padding:5px;display:block;">
   				<form id="qryApproveFm">
-		  			<table align="center" class="search_tab">
+		  			<table class="search_tab" id="approve_search_tab">
 		  				<tr>
 		  					<td width="70px" align="right"><span>校区：</span></td>
 			  				<td width="100px">
@@ -180,7 +180,7 @@
 		  				</tr>
 		  			</table>
 		  		</form>
-				  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="approve_list_data" 
+				  	<table class="easyui-datagrid" title="查询结果" id="approve_list_data" 
 				  		toolbar="#toolbarApprove" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
