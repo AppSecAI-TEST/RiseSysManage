@@ -1,3 +1,4 @@
+ 
 var to = null;
 var countProgress = null;
 var schoolData = [1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013];
@@ -52,7 +53,17 @@ $(document).ready(function() {
 	　	pageList : [20, 30, 40],           
 		pageSize : 20                    
 	});
+	  $('#hisList').datagrid('resize',{//适配高度
+		      height:height-search-header-tabs
+	  		 });
+			 
+			 $("#hisList").datagrid({
+		　		　pageList : [20, 30, 40],           
+				  pageSize : 20                    
+　			　});
+			 
 });
+ 
 	
 //禁用非输入框回退键
 window.onload=function(){   
