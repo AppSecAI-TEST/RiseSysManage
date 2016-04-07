@@ -239,8 +239,8 @@
 		</script>
   	</head>
   	<body>
-  		<div id="tab" class="easyui-tabs" style="min-width:1100px;width:99%;height:99%;font-family:'微软雅黑';margin:0 auto;padding:0 0">
-		    <div title="考勤管理" style="padding:5px;display:block;">
+  		<div id="tab" class="easyui-tabs">
+		    <div title="考勤管理" style="padding:5px;">
 				<form id="manFm">
 					<table class="search_tab">
 						<tr>
@@ -295,27 +295,27 @@
 						</tr>
 					</table>
 				</form>
-					<table class="easyui-datagrid" title="班级列表"   id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
-						<thead>
-							<tr>
-								<th data-options="field:'classInstId',checkbox:true"></th>
-								<th width="14%" field="schoolName">校区</th>
-								<th width="14%" field="className">班级名称</th>
-								<th width="14%" field="openDate">开课日期</th>
-								<th width="14%" field="teacherNames">带班老师</th>
-								<th width="14%" field="finishDate">结课日期</th>
-								<th width="14%" field="classStateName">班级状态</th>
-								<th width="14%" field="classSchedule">课时进度</th>
-							</tr>
-						</thead>
-					</table>
+				<table class="easyui-datagrid" title="班级列表" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+					<thead>
+						<tr>
+							<th data-options="field:'classInstId',checkbox:true"></th>
+							<th width="14%" field="schoolName">校区</th>
+							<th width="14%" field="className">班级名称</th>
+							<th width="14%" field="openDate">开课日期</th>
+							<th width="14%" field="teacherNames">带班老师</th>
+							<th width="14%" field="finishDate">结课日期</th>
+							<th width="14%" field="classStateName">班级状态</th>
+							<th width="14%" field="classSchedule">课时进度</th>
+						</tr>
+					</thead>
+				</table>
 				<div id="toolManbar" style="padding: 2px; height: auto">
 					<a href="javascript:void(0)" id="manOperBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="manOperFunc()">考勤管理</a>
 		   			<a href="javascript:void(0)" id="manViewBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="manViewFunc()">浏览考勤</a>
 		   			<a href="javascript:void(0)" id="manLeaveBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="manLeaveFunc()">请假补课</a>
 				</div>
 		    </div>
-		    <div style="padding:5px;display:block;" title="历史考勤">
+		    <div style="padding:5px;" title="历史考勤">
 				<form id="hisFm">
 					<table class="search_tab">
 						<tr>
