@@ -70,7 +70,7 @@
     		<a href="javascript:void(0)" id="addVipRematk" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">VIP维护</a>
     		<a href="javascript:void(0)" id="viewVip" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">浏览</a>
   		</div>
-			<table class="easyui-datagrid" title="学员列表" style="height:435px;" id="list_data"
+			<table class="easyui-datagrid" title="学员列表"  id="list_data"
 				toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>

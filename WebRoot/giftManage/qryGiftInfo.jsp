@@ -13,7 +13,7 @@
 		<script type="text/javascript" src="<%=path %>/js/giftManage/courseGiftManage.js"></script>
   	</head>
   	<body>
-  	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:100%;overflow:auto;height:auto;">
+  	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:100%;height:auto;">
   	<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
   	<div title="实物&教材赠品" style="padding:5px;display:block;">
  		<form id="qryGoodsFm">
@@ -82,7 +82,7 @@
   				</tr>
   			</table>
  		</form>
-		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:460" id="goodsGift_data" toolbar="#goodsToolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="fasle">
+		<table class="easyui-datagrid" align="center" title="查询结果"  id="goodsGift_data" toolbar="#goodsToolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="fasle">
 			<thead>
 				<tr>
 					<th field="ck" align="center" checkbox="true" width="1%"></th>
@@ -186,7 +186,7 @@
 				</tr>
   			</table>
  		</form>
-		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:430" id="couponGift_data" toolbar="#couponToolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
+		<table class="easyui-datagrid" align="center" title="查询结果"  id="couponGift_data" toolbar="#couponToolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
 			<thead>
 				<tr>
 					<th field="ck" align="center" checkbox="true" width="1%"></th>
@@ -283,7 +283,7 @@
   				</tr>
   			</table>
  		</form>
-		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:460" id="courseGift_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+		<table class="easyui-datagrid" align="center" title="查询结果"   id="courseGift_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 			<thead>
 				<tr>
 					<th field="ck" align="center" checkbox="true" width="1%"></th>

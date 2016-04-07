@@ -98,7 +98,7 @@
   				</tr>
   			</table>
   		</form>
-		  	<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" 
+		  	<table class="easyui-datagrid" title="查询结果"  id="list_data" 
 		  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>

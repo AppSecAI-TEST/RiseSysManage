@@ -295,7 +295,7 @@
 						</tr>
 					</table>
 				</form>
-					<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+					<table class="easyui-datagrid" title="班级列表"   id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
 								<th data-options="field:'classInstId',checkbox:true"></th>
