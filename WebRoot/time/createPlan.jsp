@@ -39,7 +39,7 @@
 					</td>
 				</tr>
 			</table>
-			<table class="easyui-datagrid" title="排课" style="height:500px;" toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false" id="weekDg" url="">
+			<table class="easyui-datagrid" title="排课" style="height:500px;" toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="false" id="list_data" url="">
 				 <thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
@@ -50,40 +50,7 @@
 				</tr>
 				</thead>
 			</table>
-			<table id="hoursPlanTab" class="easyui-datagrid" title="排课信息" style="height:auto;min-max:1100px;" pagination="false" rownumbers="true" fitColumns="true" >
-			 <thead>
-			 	<tr align="center">
-				    <th data-options="field:'className',width:78,align:'center'" rowspan="2"><span>班级</span></td>
-				    <th data-options="field:'byname',width:90,align:'center'" rowspan="2"><span>带班老师</span></td>
-				    <th data-options="field:'dateRange',width:240,align:'center'" rowspan="2"><span>上课时段</span></td>
-				    <th data-options="field:'startDate',width:86,align:'center'" rowspan="2"><span>开课日期</span></td>
-				    <th data-options="field:'finishDate',width:86,align:'center'" rowspan="2"><span>结课日期</span></td>
-				    <th data-options="field:'realHour',width:60,align:'center'" rowspan="2"><span>上月已上<br>课时</span></td>
-				    <th data-options="field:'diffNum',width:60,align:'center'" rowspan="2"><span>上月剩余<br>课时数</span></td>
-				    <th data-options="field:'monthDiffNum',width:60,align:'center'" rowspan="2"><span>上月课时<br>差异</span></td>
-				    <th data-options="field:'week1',width:62,align:'center'" colspan="2"><span>第一周</span></td>
-				    <th data-options="field:'week2',width:62,align:'center'" colspan="2"><span>第二周</span></td>
-				    <th data-options="field:'week3',width:62,align:'center'" colspan="2"><span>第三周</span></td>
-				    <th data-options="field:'week4',width:62,align:'center'" colspan="2"><span>第四周</span></td>
-				    <th data-options="field:'week5',width:62,align:'center'" colspan="2"><span>第五周</span></td>
-				    <th data-options="field:'monthPlanHours',width:48,align:'center'" rowspan="2"><span>本月计<br>划课时</span></td>
-				    <th data-options="field:'monthHandNum',width:48,align:'center'" rowspan="2"><span>本月已<br>排课时</span></td>
-				    <th data-options="field:'mDiffNum',width:48,align:'center'" rowspan="2"><span>课时<br>差异</span></td>
-				 </tr>
-				 <tr align="center">
-				    <th data-options="field:'weekPlan1',width:35,align:'center'"><span>计划<br>课时</span></td>
-				    <th data-options="field:'weekHand1',width:35,align:'center'"><span>已排<br>课时</span></td>
-				    <th data-options="field:'weekPlan2',width:35,align:'center'"><span>计划<br>课时</span></td>
-				    <th data-options="field:'weekHand2',width:35,align:'center'"><span>已排<br>课时</span></td>
-				    <th data-options="field:'weekPlan3',width:35,align:'center'"><span>计划<br>课时</span></td>
-				    <th data-options="field:'weekHand3',width:35,align:'center'"><span>已排<br>课时</span></td>
-				    <th data-options="field:'weekPlan4',width:35,align:'center'"><span>计划<br>课时</span></td>
-				    <th data-options="field:'weekHand4',width:35,align:'center'"><span>已排<br>课时</span></td>
-				    <th data-options="field:'weekPlan5',width:35,align:'center'"><span>计划<br>课时</span></td>
-				    <th data-options="field:'weekHand5',width:35,align:'center'"><span>已排<br>课时</span></td>
-				 </tr>
-			  <thead>
-		</table>
+		
 	</div>	
  	</body>
 </html>
@@ -111,34 +78,6 @@ $(function () {
                 	var val =year + '-' + month+"-00";
                     $('#time').datebox('setValue',val).datebox('hidePanel'); //设置日期的值
              	});
-            },
-            onChange:function(newValue){
-            	var schoolId=+$("#schoolId").combobox('getValue');
-            	$.ajax(
-				{
-					type : "POST",
-					url: "/sys/time/hoursPlan.do?schoolId="+schoolId+"&month="+newValue,
-					async: true,
-					dataType:"json",
-					beforeSend: function()
-			    	{
-			    		$.messager.progress({text:'排课中，请稍候...'});
-			    	},
-			    	success: function(data) 
-			    	{
-			    		$.messager.progress('close');
-			    		var dataobj ={
-			    			rows:data,
-			    			total:data.length
-			    		}
-			    		$("#hoursPlanTab").datagrid("loadData",dataobj);
-			         },
-			        error:function()
-			        {
-			        	$.messager.progress('close');
-			        }
-				});
-            	
             }
             //formatter: function (d) { return d.getFullYear() + '-' + d.getMonth(); }//配置formatter，只返回年月
     	});
@@ -183,6 +122,19 @@ $("#submit").click(function()
 		return;
 	}
 	
+	var palnMonth=AddMonths(new Date(),2);
+	
+	var times=time.split("-");
+	var palnMonths=palnMonth.format("yyyy-MM-dd");
+	var plans=palnMonths.split("-");
+	
+	if(new Date(times[0], times[1],1)>=new Date(plans[0], plans[1],1))
+	{
+		 var nextMonth=AddMonths(new Date(),1);
+		 var nextMonth=nextMonth.format("yyyy-MM");
+		 $.messager.alert('提示', "当前最多能创建"+nextMonth+'份排课,请重新选择月份!');
+		 return;
+	}
 	var param={};
 	param.handlerId=$("#handlerId").val();
 	param.schoolId=$("#schoolId").combobox('getValue');
@@ -220,7 +172,7 @@ $("#submit").click(function()
 function init(data)
 {
 	
-$('#weekDg').datagrid({  
+$('#list_data').datagrid({  
 	border:false,  
     fitColumns:true,  
     singleSelect: true,  
@@ -240,7 +192,7 @@ $('#weekDg').datagrid({
         $('.editcls').linkbutton({text:'排课',plain:true,iconCls:'icon-edit'});  
     }  
 });  
- $('#weekDg').datagrid("loadData",data);	
+ $('#list_data').datagrid("loadData",data);	
 }
  
   

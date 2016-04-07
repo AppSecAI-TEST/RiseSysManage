@@ -9,7 +9,7 @@ var schoolData = [1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,10
 			var header=$(".panel-header").height();
 			 
 			 $('#list_data').datagrid('resize',{//适配高度
-		      height:height-search-header
+		      height:height-search-header-25
 	  		 });
 			$("#list_data").datagrid({
 		　		　pageList : [20, 30, 40],          // 可以设置每页记录条数的列表
