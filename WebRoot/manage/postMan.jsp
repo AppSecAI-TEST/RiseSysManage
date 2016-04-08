@@ -13,7 +13,7 @@
 				window.location.href = "/sys/post/getPostInfo.do?funcNodeId=${param.funcNodeId}";
 			}
 			function editPost(){
-				var row = $('#postList').datagrid('getSelected');
+				var row = $('#manList').datagrid('getSelected');
 				if (row){
 					window.location.href = "/sys/post/getPostInfo.do?funcNodeId=${param.funcNodeId}&postId="+row.postId;
 				}
@@ -23,14 +23,14 @@
 				}
 			}
 			function removePost(){
-				var row = $('#postList').datagrid('getSelected');
+				var row = $('#manList').datagrid('getSelected');
 				if (row){
 					$.messager.confirm('提示','您确定要删除当前职务吗?',function(r){
 						if (r){
 							$.post('/sys/post/deletePost.do',{postId:row.postId},function(result){
 								if(result == "success")
 								{
-									$("#postList").datagrid("reload");
+									$("#manList").datagrid("reload");
 								}
 								else
 								{
@@ -54,7 +54,7 @@
 				}
 				else
 				{
-					$("#postList").datagrid({url:"/sys/post/queryPostList.do?postName="+postName});
+					$("#manList").datagrid({url:"/sys/post/queryPostList.do?postName="+postName});
 				}
 			}
 			function resetFunc()
@@ -64,8 +64,8 @@
 		</script>
   	</head>
   	<body>
-		<form id="qryFm" style="margin:0 auto;">
-			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:0 auto;height:50px;" cellspacing="2">
+  		<form id="manFm">
+			<table class="search_tab">
 				<tr>
 					<td align="right" width="8%">
 						<span>职务名称：</span>
@@ -80,20 +80,17 @@
 				</tr>
 			</table>
 		</form>
-		<div style="padding:5px 0;min-width:1100px;width:99%;margin:0 auto">
-			<table class="easyui-datagrid" title="职务列表" style="height:460px;" id="postList" url="/sys/post/queryPostList.do" 
-				toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
-				<thead>
-					<tr>
-						<th data-options="field:'postId',checkbox:true"></th>
-						<th width="25%" field="postName">职位名称</th>
-						<th width="25%" field="postTypeName">职位类型</th>
-						<th width="25%" field="deptName">归属部门</th>
-						<th width="25%" field="createDate">创建时间</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
+		<table class="easyui-datagrid" title="职务列表" id="manList" url="/sys/post/queryPostList.do" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+			<thead>
+				<tr>
+					<th data-options="field:'postId',checkbox:true"></th>
+					<th width="25%" field="postName">职位名称</th>
+					<th width="25%" field="postTypeName">职位类型</th>
+					<th width="25%" field="deptName">归属部门</th>
+					<th width="25%" field="createDate">创建时间</th>
+				</tr>
+			</thead>
+		</table>
 		<div id="toolbar" style="padding: 2px; height: auto">
    			<a href="javascript:void(0)" id="addPost" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="newPost()">添加职务</a>
 			<a href="javascript:void(0)" id="updatePost" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="editPost()">修改职务</a>

@@ -99,8 +99,8 @@
 		</script>
   	</head>
   	<body>
-		<form id="manFm" style="margin:0 auto;">
-			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+		<form id="manFm">
+			<table class="search_tab">
 				<tr>
 					<td align="right" width="8%">
 						所属校区：
@@ -147,23 +147,21 @@
 				</tr>
 			</table>
 		</form>
-		<div style="padding:5px 0;min-width:1100px; width:100%">
-			<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
-				<thead>
-					<tr>
-						<th data-options="field:'studentAttendId',checkbox:true"></th>
-						<th width="12%" field="schoolName">校区</th>
-						<th width="12%" field="name">学员姓名</th>
-						<th width="12%" field="byName">英文名</th>
-						<th width="13%" field="phoneNums">联系电话</th>
-						<th width="12%" field="className">班级名称</th>
-						<th width="13%" field="teacherNames">带班老师</th>
-						<th width="13%" field="payDate">缴费日期</th>
-						<th width="12%" field="courseStateName">课程状态</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
+		<table class="easyui-datagrid" title="班级列表" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+			<thead>
+				<tr>
+					<th data-options="field:'studentAttendId',checkbox:true"></th>
+					<th width="12%" field="schoolName">校区</th>
+					<th width="12%" field="name">学员姓名</th>
+					<th width="12%" field="byName">英文名</th>
+					<th width="13%" field="phoneNums">联系电话</th>
+					<th width="12%" field="className">班级名称</th>
+					<th width="13%" field="teacherNames">带班老师</th>
+					<th width="13%" field="payDate">缴费日期</th>
+					<th width="12%" field="courseStateName">课程状态</th>
+				</tr>
+			</thead>
+		</table>
 		<div id="toolManbar" style="padding: 2px; height: auto">
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 120px;" onclick="backFunc()">返回</a>
 			<a href="javascript:void(0)" id="uploadLevelBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:120px;" onclick="uploadLevelFunc()">上传请假单</a>

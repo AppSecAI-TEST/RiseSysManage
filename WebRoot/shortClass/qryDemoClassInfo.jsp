@@ -10,7 +10,6 @@
 		<%@ include file="../common/formvalidator.jsp" %>
   	</head>
   	<body>
-  		<div style="margin-right:5px">
   		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
 		<form id="manFm" >
 			<table class="search_tab">
@@ -61,7 +60,7 @@
 				</tr>
 			</table>
 		</form>
-		<table class="easyui-datagrid" title="排课列表" style="height:550px" id="manList" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+		<table class="easyui-datagrid" title="排课列表" id="manList" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 			<thead>
 				<tr>
 					<th width="1%" align="center" data-options="field:'shortClassInstId',checkbox:true"></th>
@@ -78,7 +77,6 @@
 		<div id="toolbar" style="padding: 2px;height:auto;">
    			<a href="javascript:void(0)" id="manage" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="addClassManage()"><span>排课管理</span></a>
  			<a href="javascript:void(0)" id="cancel"class="easyui-linkbutton" iconCls="icon-remove" style="width:100px;" onclick="cancleDemoClass()"><span>取消排课</span></a>
-			</div>
 		</div>
 		<script type="text/javascript">
 			ajaxLoading("正在处理，请稍待。。。");

@@ -221,10 +221,9 @@
 			}
 		</script>
   	</head>
-  
-  	<body style="padding-top:5px">
-  		<div id="tab" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
-		    <div title="考勤管理" style="padding:5px;display:block;">
+  	<body>
+  		<div id="tab" class="easyui-tabs">
+		    <div title="考勤管理" style="padding:5px;">
 				<form id="manFm">
 					<table class="search_tab">
 						<tr>
@@ -267,7 +266,7 @@
 						</tr>
 					</table>
 				</form>
-					<table class="easyui-datagrid" title="班级列表" style="height:370px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+					<table class="easyui-datagrid" title="班级列表" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
 								<th data-options="field:'shortClassInstId',checkbox:true"></th>
@@ -292,7 +291,7 @@
 		   			<a href="javascript:void(0)" id="manViewBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="manViewFunc()">浏览</a>
 				</div>
 		    </div>
-		    <div title="历史考勤"  style="padding:5px;display:block;">
+		    <div title="历史考勤"  style="padding:5px">
 				<form id="hisFm">
 					<table class="search_tab">
 						<tr>
@@ -335,22 +334,22 @@
 						</tr>
 					</table>
 				</form>
-					<table class="easyui-datagrid" title="历史考勤列表" style="height:390px;" id="hisList" url="" toolbar="#toolHisbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
-						<thead>
-							<tr>
-								<th data-options="field:'shortClassInstId',checkbox:true"></th>
-								<th width="11%" field="schoolName">校区</th>
-								<th width="11%" field="className">热身课班级</th>
-								<th width="11%" field="typeName">班级类型</th>
-								<th width="11%" field="schoolDate">上课时间</th>
-								<th width="11%" field="attendNum">应到人数</th>
-								<th width="11%" field="realNum">实到人数</th>
-								<th width="11%" field="leaveNum">请假人数</th>
-								<th width="11%" field="lateNum">迟到人数</th>
-								<th width="11%" field="truantNum">旷课人数</th>
-							</tr>
-						</thead>
-					</table>
+				<table class="easyui-datagrid" title="历史考勤列表" id="hisList" url="" toolbar="#toolHisbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+					<thead>
+						<tr>
+							<th data-options="field:'shortClassInstId',checkbox:true"></th>
+							<th width="11%" field="schoolName">校区</th>
+							<th width="11%" field="className">热身课班级</th>
+							<th width="11%" field="typeName">班级类型</th>
+							<th width="11%" field="schoolDate">上课时间</th>
+							<th width="11%" field="attendNum">应到人数</th>
+							<th width="11%" field="realNum">实到人数</th>
+							<th width="11%" field="leaveNum">请假人数</th>
+							<th width="11%" field="lateNum">迟到人数</th>
+							<th width="11%" field="truantNum">旷课人数</th>
+						</tr>
+					</thead>
+				</table>
 				<div id="toolHisbar" style="padding: 2px; height: auto">
 		   			<a href="javascript:void(0)" id="hisViewBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="hisViewFunc()">浏览</a>
 				</div>

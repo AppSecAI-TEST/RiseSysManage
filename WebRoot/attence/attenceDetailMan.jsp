@@ -145,7 +145,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<table region="center" id="attendList" class="easyui-datagrid" title="" style="height:auto;margin:5px auto;width:99%" toolbar="#toolbar" pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
+		<table region="center" id="attendList" class="easyui-datagrid" title="" style="margin:5px auto;width:99%" toolbar="#toolbar" pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
 			<thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>

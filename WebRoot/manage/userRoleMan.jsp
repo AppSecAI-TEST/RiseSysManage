@@ -20,7 +20,7 @@
 				url = '/sys/sysRole/addRole.do';
 			}
 			function editRole(){
-				var row = $('#roleList').datagrid('getSelected');
+				var row = $('#manList').datagrid('getSelected');
 				if (row){
 					$('#dlg').dialog('open').dialog('setTitle','修改角色');
 					$('#fm').form('clear');
@@ -78,7 +78,7 @@
 					success: function(result){
 						if (result == "success"){
 							$('#dlg').dialog('close');		
-							$("#roleList").datagrid("reload");
+							$("#manList").datagrid("reload");
 						} else {
 							$.messager.alert('提示',result);
 						}
@@ -86,7 +86,7 @@
 				});
 			}
 			function removeRole(){
-				var row = $('#roleList').datagrid('getSelected');
+				var row = $('#manList').datagrid('getSelected');
 				if (row)
 				{
 					$.messager.confirm('提示','您确定要删除当前角色吗?',function(r){
@@ -94,7 +94,7 @@
 							$.post('/sys/sysRole/deleteRole.do',{sysRoleId:row.sysRoleId},function(result){
 								if(result == "success")
 								{
-									$("#roleList").datagrid("reload");
+									$("#manList").datagrid("reload");
 								}
 								else
 								{
@@ -135,7 +135,7 @@
 			}
 			function allocateUserRole()
 			{
-				var row = $('#roleList').datagrid('getSelected');
+				var row = $('#manList').datagrid('getSelected');
 				if (row)
 				{
 					$("#userRoleDlg").css("height","350px");
@@ -152,7 +152,7 @@
 			function saveUserRole()
 			{
 				var obj = $('#dgHasUsers').datagrid('getData');
-				var role = $('#roleList').datagrid('getSelected');
+				var role = $('#manList').datagrid('getSelected');
 				var arr = [];
 				for(var i = 0,n = obj.total;i < n;i++)
 				{
@@ -162,7 +162,7 @@
 					if(result == "success")
 					{
 						$('#userRoleDlg').dialog('close');
-						$('#roleList').datagrid('reload');
+						$('#manList').datagrid('reload');
 					}
 					else
 					{
@@ -206,7 +206,7 @@
 		</script>
 	</head>
 	<body class="easyui-layout userRoleMan">
-		<table class="easyui-datagrid" title="查询结果" style="height:99%;" id="roleList" url="/sys/sysRole/roleList.do" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+		<table class="easyui-datagrid" title="查询结果" id="manList" url="/sys/sysRole/roleList.do" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 			<thead>
 				<tr>
 					<th field="sysRoleName" width="20%">角色名称</th>

@@ -89,7 +89,6 @@
 		</script>
   	</head>
   	<body>
-  		<div style="margin-right:5px">
 		<form id="manFm">
 			<table class="search_tab">
 				<tr>
@@ -97,7 +96,7 @@
 						<span>片区名称：</span>
 					</td>
 					<td width="10%">
-						<input class="easyui-textbox" name="regionName" id="regionName" style="width:120px;height:25px;" />
+						<input class="easyui-textbox" name="regionName" id="regionName" style="width:400px;height:25px;" />
 					</td>
 					<td align="right" width="75%">
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()"><span>查询</span></a>
@@ -107,7 +106,7 @@
 				</tr>
 			</table>
 		</form>
-		<table class="easyui-datagrid" align="center" title="片区列表" data-options="height:550" id="manList" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+		<table class="easyui-datagrid" align="center" title="片区列表" id="manList" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 			<thead>
 				<tr>
 					<th width="1%" align="center" data-options="field:'regionId',checkbox:true"></th>
@@ -123,7 +122,6 @@
   			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="addRegion()"><span>新增片区</span></a>
 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="updateRegion()"><span>修改片区</span></a>
 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" style="width:100px;" onclick="deleteRegion()"><span>删除片区</span></a>
-		</div>
 		</div>
  	</body>
 </html>

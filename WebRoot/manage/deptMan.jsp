@@ -24,7 +24,7 @@
 				operFlag = "new";
 			}
 			function editDeptMan(){
-				var row = $('#deptList').datagrid('getSelected');
+				var row = $('#manList').datagrid('getSelected');
 				if (row){
 					$('#dlg').dialog('open').dialog('setTitle','修改组织机构');
 					$('#fm').form('clear');
@@ -59,7 +59,7 @@
 					success: function(result){
 						if (result == "success"){
 							$('#dlg').dialog('close');		
-							$("#deptList").treegrid("reload");
+							$("#manList").treegrid("reload");
 						} else {
 							if(operFlag == "new")
 							{
@@ -74,7 +74,7 @@
 				});
 			}
 			function removeDeptMan(){
-				var row = $('#deptList').datagrid('getSelected');
+				var row = $('#manList').datagrid('getSelected');
 				if (row)
 				{
 					$.messager.confirm('提示','您确定要删除当前机构吗?',function(r){
@@ -82,7 +82,7 @@
 							$.post('/sys/orgDept/deleteOrgDept.do',{deptId:row.deptId},function(result){
 								if(result == "success")
 								{
-									$("#deptList").treegrid("reload");
+									$("#manList").treegrid("reload");
 								}
 								else
 								{
@@ -121,8 +121,7 @@
 		</script>
 	</head>
 	<body>
-		<table id="deptList" title="组织机构列表" class="easyui-treegrid" style="width:99%;height:99%"
-				data-options="url: '/sys/orgDept/getOrgList.do',method: 'get',rownumbers: true,idField: 'deptId',treeField: 'deptName',loadFilter: myLoadFilter,toolbar:'#toolbar',onBeforeExpand:function(row){var url = '/sys/orgDept/getOrgList.do?id='+row.deptId;$('#deptList').treegrid('options').url = url;return true;}">
+		<table id="manList" title="组织机构列表" class="easyui-treegrid" style="height:99%" data-options="url: '/sys/orgDept/getOrgList.do',method: 'get',rownumbers: true,idField: 'deptId',treeField: 'deptName',loadFilter: myLoadFilter,toolbar:'#toolbar',onBeforeExpand:function(row){var url = '/sys/orgDept/getOrgList.do?id='+row.deptId;$('#manList').treegrid('options').url = url;return true;}">
 			<thead>
 				<tr>
 					<th field="deptName" width="40%">机构名称</th>
@@ -137,7 +136,7 @@
    			<a href="javascript:void(0)" id="updateStudent" class="easyui-linkbutton" iconCls="icon-edit" onclick="editDeptMan()" style="width: 120px;">修改组织机构</a>
    			<a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-remove" onclick="removeDeptMan()" style="width: 120px;">删除组织机构</a>
 		</div>
-		<div id="dlg" class="easyui-dialog" style="width:730px;height:450px;padding:0px 0px" modal="true" closed="true" buttons="#dlg-buttons">
+		<div id="dlg" class="easyui-dialog" style="height:450px;padding:0px 0px" modal="true" closed="true" buttons="#dlg-buttons">
 			<form id="fm" method="post" novalidate>
 				<input id="deptId" name="deptId" type="hidden" value="" />
 				<input id="handlerId" name="handlerId" type="hidden" value="" />

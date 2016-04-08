@@ -19,6 +19,10 @@
 		<script type="text/javascript">
 			ajaxLoading("正在处理，请稍待。。。");
 			$(document).ready(function(){
+				$("#userList").datagrid({
+					pageList : [20, 30, 40],
+					pageSize : 20
+				});
 				$("#deptTree").tree({
 					url:'/sys/orgDept/getSubOrgDeptList.do',
 					lines:true,
@@ -168,7 +172,7 @@
 					</td>
 				</tr>
 			</table>
-			<table region="center" id="userList" class="easyui-datagrid" title="用户列表" style="height:95%;" toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
+			<table region="center" id="userList" class="easyui-datagrid" title="用户列表" style="height:96%;" toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
 						<th field="staffName" width="11%">中文名</th>

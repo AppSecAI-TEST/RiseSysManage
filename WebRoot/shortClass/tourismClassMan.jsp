@@ -169,7 +169,6 @@
 		</script>
   	</head>
   	<body>
-  		<div style="margin-right:5px;">
 		<form id="manFm">
 			<table class="search_tab">
 				<tr>
@@ -212,23 +211,22 @@
 				</tr>
 			</table>
 		</form>
-			<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
-				<thead>
-					<tr>
-						<th data-options="field:'shortClassInstId',checkbox:true"></th>
-						<th width="11%" field="className">班级名称</th>
-						<th width="11%" field="classType">班级类型</th>
-						<th width="11%" field="classStateName">班级状态</th>
-						<th width="11%" field="realClassNum">定班人数</th>
-						<th width="11%" field="maxNum">班级人数上限</th>
-						<th width="11%" field="personNum">实际游学人数</th>
-						<th width="11%" field="putClassDate">放班日期</th>
-						<th width="11%" field="openDate">游学开始日期</th>
-						<th width="11%" field="finishDate">游学结束日期</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
+		<table class="easyui-datagrid" title="班级列表" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+			<thead>
+				<tr>
+					<th data-options="field:'shortClassInstId',checkbox:true"></th>
+					<th width="11%" field="className">班级名称</th>
+					<th width="11%" field="classType">班级类型</th>
+					<th width="11%" field="classStateName">班级状态</th>
+					<th width="11%" field="realClassNum">定班人数</th>
+					<th width="11%" field="maxNum">班级人数上限</th>
+					<th width="11%" field="personNum">实际游学人数</th>
+					<th width="11%" field="putClassDate">放班日期</th>
+					<th width="11%" field="openDate">游学开始日期</th>
+					<th width="11%" field="finishDate">游学结束日期</th>
+				</tr>
+			</thead>
+		</table>
 		<div id="toolManbar" style="padding: 2px; height: auto">
 			<a href="javascript:void(0)" id="classArrangementBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="classArrangementFunc()">放班排课</a>
 			<a href="javascript:void(0)" id="cancelClassBtn" class="easyui-linkbutton" iconCls="icon-remove" style="width:100px;" onclick="cancelClassFunc()">取消放班</a>

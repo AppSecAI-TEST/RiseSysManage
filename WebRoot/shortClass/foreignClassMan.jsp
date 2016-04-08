@@ -148,7 +148,6 @@
 		</script>
   	</head>
   	<body>
-  		<div style="margin-right:5px;">
 		<form id="manFm">
 			<table class="search_tab">
 				<tr>
@@ -185,22 +184,21 @@
 				</tr>
 			</table>
 		</form>
-			<table class="easyui-datagrid" title="班级列表" style="height:430px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
-				<thead>
-					<tr>
-						<th data-options="field:'shortClassInstId',checkbox:true"></th>
-						<th width="12%" field="schoolName">校区</th>
-						<th width="12%" field="stageId">外教课阶段</th>
-						<th width="12%" field="schoolDate">计划上课时间</th>
-						<th width="13%" field="teahcerT">计划T老师</th>
-						<th width="13%" field="teahcerTa">计划Ta老师</th>
-						<th width="12%" field="classStateName">外教课班级状态</th>
-						<th width="12%" field="staffName">创建人</th>
-						<th width="12%" field="createDate">创建时间</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
+		<table class="easyui-datagrid" title="班级列表" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+			<thead>
+				<tr>
+					<th data-options="field:'shortClassInstId',checkbox:true"></th>
+					<th width="12%" field="schoolName">校区</th>
+					<th width="12%" field="stageId">外教课阶段</th>
+					<th width="12%" field="schoolDate">计划上课时间</th>
+					<th width="13%" field="teahcerT">计划T老师</th>
+					<th width="13%" field="teahcerTa">计划Ta老师</th>
+					<th width="12%" field="classStateName">外教课班级状态</th>
+					<th width="12%" field="staffName">创建人</th>
+					<th width="12%" field="createDate">创建时间</th>
+				</tr>
+			</thead>
+		</table>
 		<div id="toolManbar" style="padding: 2px; height: auto">
 			<a href="javascript:void(0)" id="classArrangementBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="classArrangementFunc()">排课管理</a>
 			<a href="javascript:void(0)" id="cancelClassBtn" class="easyui-linkbutton" iconCls="icon-remove" style="width:100px;" onclick="cancelClassFunc()">取消课程</a>

@@ -48,7 +48,7 @@
 				obj["queryCode"] = "qryInterChoiceClassList";
 				obj["funcNodeId"] = "38111";
 				obj = JSON.stringify(obj);
-				$("#studentList").datagrid({
+				$("#manList").datagrid({
 					url:"/sys/pubData/qryDataListByPage.do",
 					queryParams:{
 						param : obj
@@ -69,7 +69,7 @@
 			}
 			function manFunc()
 			{
-				var rows = $("#studentList").datagrid('getChecked');
+				var rows = $("#manList").datagrid('getChecked');
 				if (rows && rows.length >0)
 				{
 					var arr = [];
@@ -157,7 +157,7 @@
 			</table>
 		</form>
 		<div style="padding:0 0;min-width:1100px;width:99%;margin:5px auto">
-			<table class="easyui-datagrid" title="学员列表" style="height:390px" id="studentList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
+			<table class="easyui-datagrid" title="学员列表" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
 				<thead>
 					<tr>
 						<th data-options="field:'studentId',checkbox:true"></th>

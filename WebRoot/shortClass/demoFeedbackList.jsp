@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
@@ -12,7 +10,6 @@
 		<%@ include file="../common/formvalidator.jsp" %>
   	</head>
   	<body>
-  		<div style="margin-right:5px;">
  		<form id="qryFm">
   			<table class="search_tab">
   				<tr>
@@ -67,8 +64,7 @@
   				</tr>
   			</table>
  		</form>
- 		
- 		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:450" id="list_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true">
+ 		<table class="easyui-datagrid" align="center" title="查询结果" id="manList" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true">
 			<thead>
 				<tr>
 					<th data-options="field:'ck',checkbox:true"></th>
@@ -91,13 +87,12 @@
    			<a href="javascript:void(0)" id="insertData" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;"><span>录入数据</span></a>
    			<a href="javascript:void(0)" id="viewInfo" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;"><span>浏览</span></a>
  		</div>
- 	</div>	
   	</body>
 </html>
 <script>
 	$(document).ready(function(){
 		
-		initQryButton("qryBtn","resetBtn","qryFm","list_data");
+		initQryButton("qryBtn","resetBtn","qryFm","manList");
 		$("#feedbackManage").click(function(){
 			manageFeedBack();
 		});
@@ -108,7 +103,7 @@
 			if(validateSelect())
 			{
 				ajaxLoading("正在处理，请稍待。。。");
-				var row = $('#list_data').datagrid('getSelected');
+				var row = $('#manList').datagrid('getSelected');
 				window.location.href="demoFeedbackView.jsp?shortClassInstId="+row.shortClassInstId+"&classState="+row.classState;
 			}
 		});
@@ -118,7 +113,7 @@
 	{
 		if(validateSelect())
 		{
-			var row = $('#list_data').datagrid('getSelected');
+			var row = $('#manList').datagrid('getSelected');
 			if(row.classState!="005")
 			{
 				ajaxLoading("正在处理，请稍待。。。");
@@ -135,7 +130,7 @@
 	{
 		if(validateSelect())
 		{
-			var row = $('#list_data').datagrid('getSelected');
+			var row = $('#manList').datagrid('getSelected');
 			if(row.classState!="001"&&row.classState!="005")
 			{
 				ajaxLoading("正在处理，请稍待。。。");
@@ -151,7 +146,7 @@
 	function validateSelect()
 	{
 		var flag = false;
-		var obj = $("#list_data").datagrid('getSelections');
+		var obj = $("#manList").datagrid('getSelections');
 		if(obj.length > 0) {
 			if(obj.length > 1) {
 				$.messager.alert('提示', "只能选择一条记录操作！");

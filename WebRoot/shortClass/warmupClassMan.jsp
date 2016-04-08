@@ -290,8 +290,8 @@
 		</script>
   	</head>
   	<body>
-  		<div id="tab" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
-		    <div title="班级管理" style="padding:5px;display:block;">
+  		<div id="tab" class="easyui-tabs">
+		    <div title="班级管理" style="padding:5px">
 				<form id="manFm">
 					<table class="search_tab">
 						<tr>
@@ -341,7 +341,7 @@
 						</tr>
 					</table>
 				</form>
-				<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+				<table class="easyui-datagrid" title="班级列表" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 					<thead>
 						<tr>
 							<th data-options="field:'shortClassInstId',checkbox:true"></th>
@@ -365,7 +365,7 @@
 		   			<a href="javascript:void(0)" id="viewClassBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="viewClassFunc()">浏览</a>
 				</div>
 			</div>
-		    <div title="审批管理" style="padding:5px;display:block;">
+		    <div title="审批管理" style="padding:5px">
 				<form id="hisFm">
 					<table class="search_tab">
 						<tr>
@@ -417,8 +417,8 @@
 						</tr>
 					</table>
 				</form>
-				<div style="padding:5px 0;min-width:1100px; width:100%;">
-					<table class="easyui-datagrid" title="班级申请列表" style="height:390px;" id="hisList" url="" toolbar="#toolHisbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+				<div style="min-width:1100px; width:100%;">
+					<table class="easyui-datagrid" title="班级申请列表" id="hisList" url="" toolbar="#toolHisbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
 								<th data-options="field:'shortClassInstId',checkbox:true"></th>

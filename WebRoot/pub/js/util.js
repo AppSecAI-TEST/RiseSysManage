@@ -53,15 +53,13 @@ $(document).ready(function() {
 	　	pageList : [20, 30, 40],           
 		pageSize : 20                    
 	});
-	  $('#hisList').datagrid('resize',{//适配高度
-		      height:height-search-header-tabs
-	  		 });
-			 
-			 $("#hisList").datagrid({
-		　		　pageList : [20, 30, 40],           
-				  pageSize : 20                    
-　			　});
-			 
+	$('#hisList').datagrid('resize',{//适配高度
+		height:height-search-header-tabs
+	});
+	$("#hisList").datagrid({
+		pageList : [20, 30, 40],           
+		pageSize : 20                    
+	});
 });
  
 	

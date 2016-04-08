@@ -164,7 +164,6 @@
 		</script>
   	</head>
   	<body>
-  		<div style="margin-right:5px;">
 		<form id="manFm">
 			<table class="search_tab">
 				<tr>
@@ -201,29 +200,28 @@
 				</tr>
 			</table>
 		</form>
-			<table class="easyui-datagrid" title="班级列表" style="height:430px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
-				<thead>
-					<tr>
-						<th data-options="field:'shortClassInstId',checkbox:true"></th>
-						<th width="6%" field="schoolName">校区</th>
-						<th width="6%" field="stageId">外教课阶段</th>
-						<th width="7%" field="planSchoolDate">计划上课时间</th>
-						<th width="7%" field="schoolDate">实际上课时间</th>
-						<th width="6%" field="realClassNum">已预约人数</th>
-						<th width="6%" field="personNum">实际上课人数</th>
-						<th width="6%" field="planTeahcerT">计划T老师</th>
-						<th width="7%" field="teacherT">实际T老师</th>
-						<th width="6%" field="planTeahcerTa">计划Ta老师</th>
-						<th width="7%" field="teacherTa">实际Ta老师</th>
-						<th width="6%" field="classStateName">外教课班级状态</th>
-						<th width="6%" field="createName">创建人</th>
-						<th width="7%" field="createDate">创建时间</th>
-						<th width="6%" field="handerName">反馈人</th>
-						<th width="7%" field="attendDate">反馈时间</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
+		<table class="easyui-datagrid" title="班级列表" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+			<thead>
+				<tr>
+					<th data-options="field:'shortClassInstId',checkbox:true"></th>
+					<th width="6%" field="schoolName">校区</th>
+					<th width="6%" field="stageId">外教课阶段</th>
+					<th width="7%" field="planSchoolDate">计划上课时间</th>
+					<th width="7%" field="schoolDate">实际上课时间</th>
+					<th width="6%" field="realClassNum">已预约人数</th>
+					<th width="6%" field="personNum">实际上课人数</th>
+					<th width="6%" field="planTeahcerT">计划T老师</th>
+					<th width="7%" field="teacherT">实际T老师</th>
+					<th width="6%" field="planTeahcerTa">计划Ta老师</th>
+					<th width="7%" field="teacherTa">实际Ta老师</th>
+					<th width="6%" field="classStateName">外教课班级状态</th>
+					<th width="6%" field="createName">创建人</th>
+					<th width="7%" field="createDate">创建时间</th>
+					<th width="6%" field="handerName">反馈人</th>
+					<th width="7%" field="attendDate">反馈时间</th>
+				</tr>
+			</thead>
+		</table>
 		<div id="toolManbar" style="padding: 2px; height: auto">
 			<a href="javascript:void(0)" id="classArrangementBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="classArrangementFunc()">预约管理</a>
 			<a href="javascript:void(0)" id="cancelClassBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="forwardClassFunc()">反馈管理</a>

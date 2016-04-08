@@ -250,9 +250,9 @@
 			}
 		</script>
   	</head>
-  	<body style="padding-top:5px">
-  		<div id="tab" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
-		    <div title="考勤管理" style="padding:5px;display:block;">
+  	<body>
+  		<div id="tab" class="easyui-tabs">
+		    <div title="考勤管理" style="padding:5px">
 				<form id="manFm">
 					<table class="search_tab">
 						<tr>
@@ -307,7 +307,7 @@
 						</tr>
 					</table>
 				</form>
-					<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+					<table class="easyui-datagrid" title="班级列表" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
 								<th data-options="field:'shortClassInstId',checkbox:true"></th>
@@ -331,7 +331,7 @@
 		   			<a href="javascript:void(0)" id="manViewBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:90px;" onclick="manViewFunc()">浏览</a>
 				</div>
 		    </div>
-		    <div title="历史考勤" style="padding:5px;display:block;">
+		    <div title="历史考勤" style="padding:5px">
 				<form id="hisFm">
 					<table class="search_tab">
 						<tr>
@@ -369,7 +369,7 @@
 						</tr>
 					</table>
 				</form>
-					<table class="easyui-datagrid" title="历史考勤列表" style="height:390px;" id="hisList" url="" toolbar="#toolHisbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+					<table class="easyui-datagrid" title="历史考勤列表" id="hisList" url="" toolbar="#toolHisbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 						<thead>
 							<tr>
 								<th data-options="field:'shortClassInstId',checkbox:true"></th>

@@ -72,7 +72,6 @@
 		</script>
   	</head>
   	<body>
-  		<div style="margin-right:5px;">
 		<form id="manFm">
 			<table class="search_tab">
 				<tr>
@@ -107,27 +106,26 @@
 				</tr>
 			</table>
 		</form>
-			<table class="easyui-datagrid" title="学员列表" style="height:420px" id="manList" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
-				<thead>
-					<tr>
-						<th data-options="field:'classInstId',checkbox:true"></th>
-						<th width="6%" field="schoolName">校区</th>
-						<th width="7%" field="name">学员姓名</th>
-						<th width="7%" field="classType">游学课程类型</th>
-						<th width="10%" field="studentIdentity">本人证件号码</th>
-						<th width="10%" field="studentPhone">联系电话</th>
-						<th width="7%" field="className">班级</th>
-						<th width="7%" field="adviserTeacher">业绩老师</th>
-						<th width="7%" field="adviser">业绩顾问</th>
-						<th width="7%" field="payDate">缴费日期</th>
-						<th width="7%" field="totalAmount">实际缴费金额</th>
-						<th width="6%" field="favorType">优惠方式</th>
-						<th width="6%" field="feeStateName">是否退费</th>
-						<th width="6%" field="isChoiceClass">是否选班</th>
-						<th width="7%" field="shortClassName">游学班级</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
+		<table class="easyui-datagrid" title="学员列表" id="manList" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+			<thead>
+				<tr>
+					<th data-options="field:'classInstId',checkbox:true"></th>
+					<th width="6%" field="schoolName">校区</th>
+					<th width="7%" field="name">学员姓名</th>
+					<th width="7%" field="classType">游学课程类型</th>
+					<th width="10%" field="studentIdentity">本人证件号码</th>
+					<th width="10%" field="studentPhone">联系电话</th>
+					<th width="7%" field="className">班级</th>
+					<th width="7%" field="adviserTeacher">业绩老师</th>
+					<th width="7%" field="adviser">业绩顾问</th>
+					<th width="7%" field="payDate">缴费日期</th>
+					<th width="7%" field="totalAmount">实际缴费金额</th>
+					<th width="6%" field="favorType">优惠方式</th>
+					<th width="6%" field="feeStateName">是否退费</th>
+					<th width="6%" field="isChoiceClass">是否选班</th>
+					<th width="7%" field="shortClassName">游学班级</th>
+				</tr>
+			</thead>
+		</table>
  	</body>
 </html>

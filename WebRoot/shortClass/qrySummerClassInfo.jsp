@@ -112,7 +112,6 @@
 		</script>
   	</head>
   	<body>
-  		<div style="margin-right:5px;">
 		<form id="manFm">
 			<table class="search_tab">
 				<tr>
@@ -174,7 +173,7 @@
 			</table>
 		</form>
 		<div style="padding:5px 0;min-width:1100px; width:100%">
-			<table class="easyui-datagrid" title="学员列表" style="height:390px" id="manList" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+			<table class="easyui-datagrid" title="学员列表" id="manList" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
 						<th width="6%" field="schoolName">校区</th>

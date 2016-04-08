@@ -16,7 +16,7 @@
 						$.post('/sys/cache/flushAllCache.do',{},function(result){
 							if(result == "success")
 							{
-								$("#cacheList").datagrid("reload");
+								$("#manList").datagrid("reload");
 								$.messager.alert('提示',"刷新成功");
 							}
 							else
@@ -28,7 +28,7 @@
 				});
 			}
 			function flushCache(){
-				var row = $('#cacheList').datagrid('getSelected');
+				var row = $('#manList').datagrid('getSelected');
 				if (row)
 				{
 					$.messager.confirm('提示','您确定要刷新选定缓存吗?',function(r){
@@ -36,7 +36,7 @@
 							$.post('/sys/cache/flushCache.do',{cacheName:row.cacheName},function(result){
 								if(result == "success")
 								{
-									$("#cacheList").datagrid("reload");
+									$("#manList").datagrid("reload");
 									$.messager.alert('提示',"刷新成功");
 								}
 								else
@@ -55,7 +55,7 @@
 		</script>
 	</head>
 	<body class="easyui-layout userRoleMan">
-		<table class="easyui-datagrid" title="查询结果" style="height:99%;" id="cacheList" url="/sys/cache/sysCacheList.do" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+		<table class="easyui-datagrid" title="查询结果" id="manList" url="/sys/cache/sysCacheList.do" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 			<thead>
 				<tr>
 					<th field="cacheName" width="33%">缓存名称</th>

@@ -22,7 +22,7 @@
 				
 			}
 			$(document).ready(function(){
-				$('#manList').datagrid({
+				$('#markupList').datagrid({
 					title:"提交补课记录",
 					pagination:true,
 					rownumbers:true,
@@ -98,8 +98,8 @@
 		</script>
   	</head>
   	<body>
-		<div style="padding:5px 0;min-width:1100px; width:100%">
-			<table id="manList">
+		<div style="padding:0 0;min-width:1100px; width:100%">
+			<table id="markupList">
 				
 			</table>
 			<p style="text-align:right;margin-right:5px">

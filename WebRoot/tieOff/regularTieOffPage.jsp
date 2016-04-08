@@ -35,7 +35,7 @@
 	  			</table>
   			</form>
 			<div style="padding:5px 0;min-width:1100px;width:99%;margin:0 auto">
-				<table class="easyui-datagrid" style="height:435px;" id="list_data" title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
+				<table class="easyui-datagrid" id="manList" title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
 						<tr>
 							<th field="schoolName" align="center" width="25%">校区</th>
@@ -77,7 +77,7 @@
 				obj["queryCode"] = "qryRegularTieOffList";
 				obj["funcNodeId"] = "38145";
 				obj = JSON.stringify(obj);
-				$("#list_data").datagrid({
+				$("#manList").datagrid({
 					url:"/sys/pubData/qryDataListByPage.do",
 					queryParams:{
 						param : obj

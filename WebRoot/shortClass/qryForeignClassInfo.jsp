@@ -100,7 +100,6 @@
 		</script>
   	</head>
   	<body>
-  		<div style="margin-right:5px;">
 		<form id="manFm">
 			<table class="search_tab">
 				<tr>
@@ -155,25 +154,24 @@
 				</tr>
 			</table>
 		</form>
-			<table class="easyui-datagrid" title="学员列表" style="height:390px" id="manList" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
-				<thead>
-					<tr>
-						<th width="7%" field="schoolName">校区</th>
-						<th width="8%" field="name">学员姓名</th>
-						<th width="8%" field="byName">英文名</th>
-						<th width="8%" field="studentPhone">联系电话</th>
-						<th width="7%" field="giftChannelDesc">赠课来源</th>
-						<th width="9%" field="payDate">赠课来源开始日期</th>
-						<th width="7%" field="courseStateName">关联课状态</th>
-						<th width="7%" field="giftStateName">外教课状态</th>
-						<th width="7%" field="giftNum">赠送课时</th>
-						<th width="8%" field="giftJoinNum">已消耗课时</th>
-						<th width="8%" field="effDate">有效期开始日期</th>
-						<th width="8%" field="expDate">有效期结束日期</th>
-						<th width="7%" field="disExpDate">距过期天数</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
+		<table class="easyui-datagrid" title="学员列表" id="manList" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+			<thead>
+				<tr>
+					<th width="7%" field="schoolName">校区</th>
+					<th width="8%" field="name">学员姓名</th>
+					<th width="8%" field="byName">英文名</th>
+					<th width="8%" field="studentPhone">联系电话</th>
+					<th width="7%" field="giftChannelDesc">赠课来源</th>
+					<th width="9%" field="payDate">赠课来源开始日期</th>
+					<th width="7%" field="courseStateName">关联课状态</th>
+					<th width="7%" field="giftStateName">外教课状态</th>
+					<th width="7%" field="giftNum">赠送课时</th>
+					<th width="8%" field="giftJoinNum">已消耗课时</th>
+					<th width="8%" field="effDate">有效期开始日期</th>
+					<th width="8%" field="expDate">有效期结束日期</th>
+					<th width="7%" field="disExpDate">距过期天数</th>
+				</tr>
+			</thead>
+		</table>
  	</body>
 </html>
