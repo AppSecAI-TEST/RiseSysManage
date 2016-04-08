@@ -71,7 +71,7 @@
 	  				</tr>
 	  			</table>
 	 		</form>
-	 		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:350" id="list_data" toolbar="#toolbar"  singleSelect="true" pagination="true" rownumbers="true" fitColumns="true">
+	 		<table class="easyui-datagrid" align="center" title="查询结果"  id="list_data" toolbar="#toolbar"  singleSelect="true" pagination="true" rownumbers="true" fitColumns="true">
 				<thead>
 					<tr>
 						<th data-options="field:'ck',checkbox:true"></th>
@@ -155,7 +155,7 @@
 	  			</table>
 	 		</form>
 	 		
-	 		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:350" id="list_data1" pagination="true" rownumbers="true" fitColumns="true">
+	 		<table class="easyui-datagrid" align="center" title="查询结果"  id="list_data1" pagination="true" rownumbers="true" fitColumns="true">
 				<thead>
 					<tr>
 						<th field="schoolName" align="center" width="5%">校区</th>
