@@ -13,99 +13,99 @@
   
   	<body>
   		<div style="margin-right:5px;">
-  		<form id="qryFm">
-  			<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
-  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
-  			<table class="search_tab">
-  				<tr>
-  					<td align="right" style="min-width: 70px;"><span>校区：</span></td>
-	  				<td style="min-width: 100px;">
-						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
-		        		</select>
-					</td>
-					<td align="right" style="min-width: 70px;"><span>课程阶段：</span></td>
-					<td style="min-width: 117px;">
-						<select id="stageId" name="stageId" class="easyui-combobox" style="width: 117px; height: 25px;">
-		        		</select>
-					</td>
-					<td align="right" style="min-width: 70px;"><span>班级：</span></td>
-					<td style="min-width: 130px;">
-						<input id="classInstId" name="classInstId" type="text" class="easyui-textbox" style="width: 127px; height: 25px;"/>
-					</td>
-					<td align="right" style="min-width: 70px;"><span>班级性质：</span></td>
-					<td style="min-width: 117px;">
-						<select id="handType" name="handType" class="easyui-combobox" style="width: 117px; height: 25px;"
-							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
-	      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=HAND_TYPE">
-		        		</select>
-					</td>
-					<td align="right" style="min-width: 70px;"><span>开课日期：</span></td>
-					<td style="min-width: 220px;">
-						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeOpenClass" name="startTimeOpenClass" data-options="formatter:myformatter, parser:myparser"/>
-						至
-						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeOpenClass" name="endTimeOpenClass" data-options="formatter:myformatter, parser:myparser"/>
-					</td>
-  				</tr>
-  				<tr>
-  					<td align="right" style="min-width: 70px;"><span>开班类型 ：</span></td>
-	  				<td style="min-width: 100px;">
-						<select id="openClassType" name="openClassType" class="easyui-combobox" style="width: 100px; height: 25px;"
-							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
-	      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=OPEN_CLASS_TYPE">
-		        		</select>
-					</td>
-					<td align="right" style="min-width: 70px;"><span>课时进度 ：</span></td>
-					<td style="min-width: 117px;">
-						<input name="minClassProgress" id="minClassProgress" type="text" class="easyui-textbox numberbox" style="width: 47px; height: 25px;"/>
-						<span style="display: inline-block; text-align: center; width: 14px;">至</span>
-						<input name="maxClassProgress" id="maxClassProgress" type="text" class="easyui-textbox numberbox" style="width: 47px; height: 25px;"/>
-					</td>
-					<td align="right" style="min-width: 70px;"><span>升学率 ：</span></td>
-					<td style="min-width: 130px;">
-						<input name="minHigherRate" id="minHigherRate" type="text" class="easyui-textbox numberbox" style="width: 39px; height: 25px;" data-options="min:0, max:100, precision:0"/>
-						<span style="display: inline-block; text-align: center; width: 32px;">%&nbsp;至&nbsp;</span>
-						<input name="maxHigherRate" id="maxHigherRate" type="text" class="easyui-textbox numberbox" style="width: 39px; height: 25px;" data-options="min:0, max:100, precision:0"/>
-						<span style="display: inline-block; text-align: center; width: 3px;">%</span>
-					</td>
-					<td align="right" style="min-width: 70px;"><span>在读人数 ：</span></td>
-					<td style="min-width: 117px;">
-						<input name="minClassStudentNum" id="minClassStudentNum" type="text" class="easyui-textbox numberbox" style="width: 47px; height: 25px;"/>
-						<span style="display: inline-block; text-align: center; width: 14px;">至</span>
-						<input name="maxClassStudentNum" id="maxClassStudentNum" type="text" class="easyui-textbox numberbox" style="width: 47px; height: 25px;"/>
-					</td>
-					<td align="right" style="min-width: 70px;"><span>结课日期：</span></td>
-					<td style="min-width: 220px;">
-						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeFinish" name="startTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
-						至
-						<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeFinish" name="endTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
-					</td>
-  				</tr>
-  				<tr>
-  					<td align="right" style="min-width: 70px;"><span>带班老师：</span></td>
-					<td style="min-width: 100px;">
-						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled">
-		        		</select>
-					</td>
-					<td align="right" style="min-width: 70px;"><span>开班人数：</span></td>
-					<td style="min-width: 117px;">
-						<input name="minOpenClassNum" id="minOpenClassNum" type="text" class="easyui-textbox numberbox" style="width: 47px; height: 25px;"/>
-						<span style="display: inline-block; text-align: center; width: 14px;">至</span>
-						<input name="maxOpenClassNum" id="maxOpenClassNum" type="text" class="easyui-textbox numberbox" style="width: 47px; height: 25px;"/>
-					</td>
-					<td align="right" style="min-width: 70px;"><span>持证率 ：</span></td>
-					<td style="min-width: 130px;" colspan="4">
-						<input name="minLicenseRate" id="minLicenseRate" type="text" class="easyui-textbox numberbox" style="width: 39px; height: 25px;" data-options="min:0, max:100, precision:0"/>
-						<span style="display: inline-block; text-align: center; width: 32px;">%&nbsp;至&nbsp;</span>
-						<input name="maxLicenseRate" id="maxLicenseRate" type="text" class="easyui-textbox numberbox" style="width: 39px; height: 25px;" data-options="min:0, max:100, precision:0"/>
-						<span style="display: inline-block; text-align: center; width: 3px;">%</span>
-					</td>
-					<td style="min-width: 220px;">
-						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1020">查询</a>
-						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
-					</td>
-  				</tr>
-  			</table>
-  		</form>
+  			<form id="qryFm">
+  				<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
+  				<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
+  				<table class="search_tab">
+  					<tr>
+  						<td align="right" style="min-width: 60px;"><span>校区：</span></td>
+	  					<td style="min-width: 100px;">
+							<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
+		        			</select>
+						</td>
+						<td align="right" style="min-width: 60px;"><span>课程阶段：</span></td>
+						<td style="min-width: 117px;">
+							<select id="stageId" name="stageId" class="easyui-combobox" style="width: 117px; height: 25px;">
+			        		</select>
+						</td>
+						<td align="right" style="min-width: 60px;"><span>班级：</span></td>
+						<td style="min-width: 130px;">
+							<input id="classInstId" name="classInstId" type="text" class="easyui-textbox" style="width: 127px; height: 25px;"/>
+						</td>
+						<td align="right" style="min-width: 60px;"><span>班级性质：</span></td>
+						<td style="min-width: 117px;">
+							<select id="handType" name="handType" class="easyui-combobox" style="width: 117px; height: 25px;"
+								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
+		      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=HAND_TYPE">
+			        		</select>
+						</td>
+						<td align="right" style="min-width: 60px;"><span>开课日期：</span></td>
+						<td style="min-width: 220px;">
+							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeOpenClass" name="startTimeOpenClass" data-options="formatter:myformatter, parser:myparser"/>
+							至
+							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeOpenClass" name="endTimeOpenClass" data-options="formatter:myformatter, parser:myparser"/>
+						</td>
+  					</tr>
+  					<tr>
+	  					<td align="right" style="min-width: 60px;"><span>开班类型 ：</span></td>
+		  				<td style="min-width: 100px;">
+							<select id="openClassType" name="openClassType" class="easyui-combobox" style="width: 100px; height: 25px;"
+								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
+		      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=OPEN_CLASS_TYPE">
+			        		</select>
+						</td>
+						<td align="right" style="min-width: 60px;"><span>课时进度 ：</span></td>
+						<td style="min-width: 117px;">
+							<input name="minClassProgress" id="minClassProgress" type="text" class="easyui-textbox numberbox" style="width: 47px; height: 25px;"/>
+							<span style="display: inline-block; text-align: center; width: 14px;">至</span>
+							<input name="maxClassProgress" id="maxClassProgress" type="text" class="easyui-textbox numberbox" style="width: 47px; height: 25px;"/>
+						</td>
+						<td align="right" style="min-width: 60px;"><span>升学率 ：</span></td>
+						<td style="min-width: 130px;">
+							<input name="minHigherRate" id="minHigherRate" type="text" class="easyui-textbox numberbox" style="width: 39px; height: 25px;" data-options="min:0, max:100, precision:0"/>
+							<span style="display: inline-block; text-align: center; width: 32px;">%&nbsp;至&nbsp;</span>
+							<input name="maxHigherRate" id="maxHigherRate" type="text" class="easyui-textbox numberbox" style="width: 39px; height: 25px;" data-options="min:0, max:100, precision:0"/>
+							<span style="display: inline-block; text-align: center; width: 3px;">%</span>
+						</td>
+						<td align="right" style="min-width: 60px;"><span>在读人数 ：</span></td>
+						<td style="min-width: 117px;">
+							<input name="minClassStudentNum" id="minClassStudentNum" type="text" class="easyui-textbox numberbox" style="width: 47px; height: 25px;"/>
+							<span style="display: inline-block; text-align: center; width: 14px;">至</span>
+							<input name="maxClassStudentNum" id="maxClassStudentNum" type="text" class="easyui-textbox numberbox" style="width: 47px; height: 25px;"/>
+						</td>
+						<td align="right" style="min-width: 60px;"><span>结课日期：</span></td>
+						<td style="min-width: 220px;">
+							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="startTimeFinish" name="startTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
+							至
+							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="endTimeFinish" name="endTimeFinish" data-options="formatter:myformatter, parser:myparser"/>
+						</td>
+	  				</tr>
+	  				<tr>
+	  					<td align="right" style="min-width: 60px;"><span>带班老师：</span></td>
+						<td style="min-width: 100px;">
+							<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled">
+			        		</select>
+						</td>
+						<td align="right" style="min-width: 60px;"><span>开班人数：</span></td>
+						<td style="min-width: 117px;">
+							<input name="minOpenClassNum" id="minOpenClassNum" type="text" class="easyui-textbox numberbox" style="width: 47px; height: 25px;"/>
+							<span style="display: inline-block; text-align: center; width: 14px;">至</span>
+							<input name="maxOpenClassNum" id="maxOpenClassNum" type="text" class="easyui-textbox numberbox" style="width: 47px; height: 25px;"/>
+						</td>
+						<td align="right" style="min-width: 60px;"><span>持证率 ：</span></td>
+						<td style="min-width: 130px;" colspan="4">
+							<input name="minLicenseRate" id="minLicenseRate" type="text" class="easyui-textbox numberbox" style="width: 39px; height: 25px;" data-options="min:0, max:100, precision:0"/>
+							<span style="display: inline-block; text-align: center; width: 32px;">%&nbsp;至&nbsp;</span>
+							<input name="maxLicenseRate" id="maxLicenseRate" type="text" class="easyui-textbox numberbox" style="width: 39px; height: 25px;" data-options="min:0, max:100, precision:0"/>
+							<span style="display: inline-block; text-align: center; width: 3px;">%</span>
+						</td>
+						<td style="min-width: 220px;">
+							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1020">查询</a>
+							&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
+						</td>
+  					</tr>
+  				</table>
+  			</form>
   			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data"
 		  		toolbar="#toolbar" pagination="true" rownumbers="false" fitColumns="true" singleSelect="true">
 				<thead>
@@ -128,11 +128,11 @@
 					</tr>
 				</thead>
 			</table>
-  		<div id="toolbar" style="padding: 2px; height: auto">
-   			<a href="javascript:void(0)" id="maintenanceBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">班级维护</a>
-   			<a href="javascript:void(0)" id="disbandBtn" class="easyui-linkbutton" iconCls="icon-cancel" style="width: 120px;">班级解散</a>
-   			<a href="javascript:void(0)" id="view" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>
+	  		<div id="toolbar" style="padding: 2px; height: auto">
+	   			<a href="javascript:void(0)" id="maintenanceBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">班级维护</a>
+	   			<a href="javascript:void(0)" id="disbandBtn" class="easyui-linkbutton" iconCls="icon-cancel" style="width: 120px;">班级解散</a>
+	   			<a href="javascript:void(0)" id="view" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>
+			</div>
 		</div>
-	</div>
   	</body>
 </html>

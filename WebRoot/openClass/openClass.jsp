@@ -12,7 +12,7 @@
   	</head>
   
   	<body>
-  		<div id="tt" class="easyui-tabs" style="min-width:1110px; width:98%; height:auto;">
+  		<div id="tt" class="easyui-tabs">
   			<div title="开班班级管理" style="padding:5px;display:block;">
   				<form id="qryFm">
   					<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>

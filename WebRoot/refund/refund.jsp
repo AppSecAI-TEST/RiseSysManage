@@ -13,7 +13,7 @@
   
   	<body>
   		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
-    	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
+    	<div id="tt" class="easyui-tabs">
     			<div title="退费课程查询" style="padding:5px;display:block;">
     			<form id="qryRefundCourseFm">
     				<table class="search_tab" id="apply_search_tab">

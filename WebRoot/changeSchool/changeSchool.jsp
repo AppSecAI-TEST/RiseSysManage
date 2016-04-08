@@ -15,7 +15,7 @@
   		<input type="hidden" id="funcNodeId" value="${param.funcNodeId }"/>
   		<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId }"/>
   		<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId }"/>
-  		<div id="tt" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">
+  		<div id="tt" class="easyui-tabs">
   			<div title="转校学员管理" style="padding:5px;display:block;">
   				<form id="qryApplyFm">
   					<table class="search_tab" id="apply_search_tab">
