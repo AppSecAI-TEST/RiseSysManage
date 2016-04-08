@@ -11,7 +11,7 @@
 		<script type="text/javascript" src="<%=path %>/js/changeClass/changeClass.js"></script>
   	</head>
   
-  	<body style="padding-top:5px">
+  	<body>
   		<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
   		<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   		<div id="tt" class="easyui-tabs" style="min-width:1110px;width:98%;height:auto;">

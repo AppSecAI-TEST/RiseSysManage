@@ -1,16 +1,16 @@
 $(document).ready(function() {
-	$("#tt").tabs({
-		onSelect: function (title) {
-			if(title == "放班审批管理") {
-				var height = $(document).height();
-				var header = $(".panel-header").height();
-				var search = $("#approve_search_tab").height();
-				$('#approve_list_data').datagrid('resize', {// 适配高度
-					height: height - search - header - 60
-				});
-			} 
-		}
-	});
+//	$("#tt").tabs({
+//		onSelect: function (title) {
+//			if(title == "放班审批管理") {
+//				var height = $(document).height();
+//				var header = $(".panel-header").height();
+//				var search = $("#approve_search_tab").height();
+//				$('#approve_list_data').datagrid('resize', {// 适配高度
+//					height: height - search - header - 60
+//				});
+//			} 
+//		}
+//	});
 	
 	$("#qryBtn").click(function() {
 		var object = $("#qryFm").serializeObject();

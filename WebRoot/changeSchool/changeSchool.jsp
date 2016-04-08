@@ -11,7 +11,7 @@
 		<script type="text/javascript" src="<%=path %>/js/changeSchool/changeSchool.js"></script>
   	</head>
   
-  	<body style="padding-top:5px">
+  	<body>
   		<input type="hidden" id="funcNodeId" value="${param.funcNodeId }"/>
   		<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId }"/>
   		<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId }"/>

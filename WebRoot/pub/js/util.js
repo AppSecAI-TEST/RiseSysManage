@@ -1,10 +1,9 @@
- 
 var to = null;
 var countProgress = null;
 var schoolData = [1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013];
 $(document).ready(function() {
-	var height = $(document).height();
 	var tabs = $(".tabs").height();
+	var height = $(document).height();
 	var search = $(".search_tab").height();
 	var header = $(".panel-header").height();
 	$('.easyui-datagrid').datagrid('resize', {// 适配高度
@@ -13,6 +12,17 @@ $(document).ready(function() {
 	$(".easyui-datagrid").datagrid({
 		pageList : [20, 30, 40],          // 可以设置每页记录条数的列表
 		pageSize : 20                       // 每页显示的记录条数
+	});
+	$("#tt").tabs({
+		onSelect: function (title) {
+			if(title == "放班审批管理" || title == "转班审批管理" || title == "转校审批管理"
+				|| title == "开班审批管理" || title == "退费审批管理") {
+				var search = $("#approve_search_tab").height();
+				$('#approve_list_data').datagrid('resize', {// 适配高度
+					height: height - search - header - tabs
+				});
+			}
+		}
 	});
 });
  

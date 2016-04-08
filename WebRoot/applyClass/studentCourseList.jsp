@@ -17,7 +17,7 @@
 		<script type="text/javascript" src="<%=path %>/js/applyClass/studentCourseList.js"></script>
   	</head>
   
-  	<body style="padding-top:5px">
+  	<body>
   		<form id="qryFm" style="margin:0 auto;">
   			<input type="hidden" id="stageId" name="stageId" value="<%=stageId %>"/>
   			<input type="hidden" id="classType" name="classType" value="<%=classType %>"/>

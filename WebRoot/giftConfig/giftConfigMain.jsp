@@ -16,7 +16,7 @@
   	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:100%;overflow:auto;height:auto;">
   		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   		<div title="实物赠品" style="padding:5px;display:block;">
-			<table align="center" title="查询结果" data-options="height:600" id="goodsGift_data">
+			<table align="center" title="查询结果" id="goodsGift_data" class="easyui-datagrid" >
 				
 			</table>
 			<div id="goodsToolbar">
@@ -63,7 +63,7 @@
 			</div>
   		</div>
   		<div title="课程赠品" style="padding:5px;display:block;">
-			<table align="center" title="查询结果" data-options="height:600" id="courseGift_data">
+			<table align="center" title="查询结果" id="courseGift_data" class="easyui-datagrid">
 				
 			</table>
 			<div id="courseToolbar">
@@ -144,7 +144,7 @@
 			</div>
   		</div>
   		<div title="券类赠品" style="padding:5px;display:block;">
-		<table align="center" title="查询结果" data-options="height:600" id="couponGift_data">
+		<table align="center" title="查询结果" id="couponGift_data" class="easyui-datagrid">
 			
 		</table>
 		<div id="couponToolbar">

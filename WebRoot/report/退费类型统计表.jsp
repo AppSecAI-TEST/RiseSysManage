@@ -17,20 +17,20 @@
   			<form id="qryFm">
 	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right" width="80px"><span>校区：</span></td>
+	  					<td align="right" style="min-width: 40px;"><span>校区：</span></td>
 	  					<td align="left"  width="110px">
 	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 				        	</select>
 	  					</td>
-	  					<td align="right" width="80px"><span>退费类型：</span></td>
+	  					<td align="right" style="min-width: 60px;"><span>退费类型：</span></td>
 	  					<td align="left"  width="110px">
 	  						<select id="refundType" name="refundType" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
 	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_TYPE">
 				        	</select>
 	  					</td>
-	  					<td width="80px" align="right"><span>退费归属日期：</span></td>
+	  					<td align="right" style="min-width: 90px;"><span>退费归属日期：</span></td>
 						<td width="260px">
 							<input class="easyui-datebox" type="text"  editable="false" style="width:110px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myformatter, parser:myparser"/>
 								至

@@ -13,7 +13,7 @@
 		<script type="text/javascript" src="<%=path %>/js/changeClass/changeStudent.js"></script>
   	</head>
   
-  	<body style="padding-top:5px">
+  	<body>
   		<input type="hidden" id="menuFuncNodeId" value="<%=funcNodeId %>"/>
   		<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId %>"/>
   		<form id="qryFm">

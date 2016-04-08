@@ -12,7 +12,7 @@
 		<script type="text/javascript" src="<%=path %>/js/changeSchool/changeStudent.js"></script>
   	</head>
   
-  	<body style="padding-top:5px">
+  	<body>
   		<input type="hidden" id="menuFuncNodeId" value="<%=funcNodeId %>" />
   		<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   		<form id="qryFm">
