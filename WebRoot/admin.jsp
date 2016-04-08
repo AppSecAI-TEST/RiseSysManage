@@ -295,6 +295,7 @@
 						closable: true,
 						cache: false,
 						content : '<iframe name="'+title+' "src="'+url+'" width="100%" height="99%" frameborder="0" scrolling="overflow-y:auto;"></iframe>'
+
 					});
 				}
 			}
