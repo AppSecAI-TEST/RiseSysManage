@@ -285,7 +285,7 @@
 					$('#pagetabs').tabs('update', {
 						tab:current_tab,
 						options : {
-							content : '<iframe name="'+title+' "src="'+url+'" width="100%" height="99%" frameborder="0" scrolling="overflow-y:auto;"></iframe>'
+							content : '<iframe name="'+title+' "src="'+url+'" width="100%" height="99%" frameborder="0" scrolling="auto"></iframe>'
 						}
 					});
 				}else{
@@ -294,7 +294,7 @@
 						//href: url,
 						closable: true,
 						cache: false,
-						content : '<iframe name="'+title+' "src="'+url+'" width="100%" height="99%" frameborder="0" scrolling="overflow-y:auto;"></iframe>'
+						content : '<iframe name="'+title+' "src="'+url+'" width="100%" height="99%" frameborder="0" scrolling="auto"></iframe>'
 
 					});
 				}
