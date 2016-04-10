@@ -100,7 +100,7 @@ $("#refreshPlan").click(function()
 		dataType:"json",
 		beforeSend: function()
     	{
-    		$.messager.progress({text:'排课中，请稍候...'});
+    		$.messager.progress({text:'排课中，请稍待...'});
     	},
     	success: function(data) 
     	{
@@ -157,7 +157,7 @@ function plan()
 		dataType:"json",
 		beforeSend: function()
     	{
-    		//$.messager.progress({text:'排课中，请稍候...'});
+    		$.messager.progress({text:'正在处理，请稍待...'});
     	},
     	success: function(data) 
     	{

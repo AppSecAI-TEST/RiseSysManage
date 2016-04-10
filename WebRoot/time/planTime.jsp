@@ -513,7 +513,7 @@ function addPlanTime(planT,tab)
 		type : "POST",
 		url: "/sys/time/add.do",
 		data: "param="+JSON.stringify(planT),
-		async: false,
+		async: true,
 		dataType:"json",
 		beforeSend: function()
     	{
@@ -575,7 +575,7 @@ $.ajax(
 		type : "POST",
 		url: "/sys/pubData/qryParaConfigList.do?",
 		data: "paramType=HOUR_RANGE",
-		async: false,
+		async: true,
 		dataType:"json",
 		beforeSend: function()
     	{
