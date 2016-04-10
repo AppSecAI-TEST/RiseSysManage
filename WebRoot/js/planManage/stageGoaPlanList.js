@@ -20,31 +20,17 @@ $(document).ready(function() {
     	});
 	});
 	$("#resetBtn").click(function() {
-		$("#qryFm").form('clear');//清空窗体数据  
-		//校区赋默认值
-		var schoolArr =['schoolId', 'schoolIds'];
-		for(var i = 0; i < schoolArr.length; i++) {
-			var schoolObj = $("#qryFm").find("#"+schoolArr[i]);
-		    if(schoolObj.length > 0) {
-		    	if(schoolObj.combobox("getData").length > 0) {
-		    		schoolObj.combobox("select",schoolObj.combobox("getData")[0].schoolId);
-		    	}	
-		    }	
-		}
+		$("#qryFm").form('clear');//清空窗体数据 
+		initYearAndMonth("year", null);
+		initYearAndMonth("planYear", null);
 	});
 	$("#addPlan").click(function(){
 		showAdd();
 	});
-	$("#updatePlan").click(function(){
-		showUpdate();
-	});
-	$("#deletePlan").click(function(){
-		del();
-	});
 });
 
 function onLoadSuccess() {
-	mergeCellsByField("list_data", "schoolName,planYear");
+	mergeCellsByField("list_data", "planYear");
 }
 
 function mergeCellsByField(tableId, colList) {
@@ -94,16 +80,17 @@ function showAdd() {
 function add() {
 	if(checkParam()) {
 		var array = new Array();
-		var schoolId = $("#schoolIds").combobox("getValue");
 		var planYear = $("#planYear").combobox("getValue");
 		var handlerId = $("#handlerId").val();
 		$("[name='value']").each(function(i, obj) {
+			var text = $("#text_" + i).html();
+			var stageId = text.substring(0, text.length - 5);
 			var param = {
-				schoolId: schoolId,
+				schoolId: "10",
 				planYear: planYear,
-				firstValue: i + 1,
-				secondValue: obj.value,
-				planType: "goa",
+				firstValue: obj.value,
+				stageId: stageId,
+				planType: "stage_goa",
 				state: "00A",
 				handlerId: handlerId
 			}
@@ -139,16 +126,14 @@ function add() {
 }
 
 function showUpdate(schoolId, planYear) {
-	$("#schoolIds").combobox({disabled: true});
 	$("#planYear").combobox({disabled: true});
-	$("#schoolIds").combobox("setValue", schoolId);
 	$("#planYear").combobox("setValue", planYear);
 	$("#updateSchoolId").val(schoolId);
 	$("#updatePlanYear").val(planYear);
 	$.ajax({
 		type : "POST",
 		url : "/sys/planManage/qryPlan.do",
-		data :"schoolId=" + schoolId + "&planYear=" + planYear + "&planType=goa",
+		data :"schoolId=" + schoolId + "&planYear=" + planYear + "&planType=stage_goa",
 		async : true,
 		dataType: "json",
 		beforeSend : function() {
@@ -157,8 +142,9 @@ function showUpdate(schoolId, planYear) {
 		success : function(data) {
 			hideProgressLoader();
 			$.each(data, function(i, obj) {
-				$("#planId_" + (i + 1)).val(obj.planId);
-				$("#value_" + (i + 1)).numberbox("setValue", obj.secondValue);
+				var stageId = obj.stageId;
+				$("#planId_" + stageId).val(obj.planId);
+				$("#value_" + stageId).numberbox("setValue", obj.firstValue);
 			});
 			$("#dlg").dialog('open').dialog('setTitle', '修改计划');
 			$('#fm').form('clear');
@@ -178,13 +164,15 @@ function update() {
 		var planYear = $("#updatePlanYear").val();
 		var handlerId = $("#handlerId").val();
 		$("[name='value']").each(function(i, obj) {
+			var text = $("#text_" + i).html();
+			var stageId = text.substring(0, text.length - 5);
 			var param = {
-				planId: $("#planId_" + (i + 1)).val(),
+				planId: $("#planId_" + stageId).val(),
 				schoolId: schoolId,
 				planYear: planYear,
-				firstValue: i + 1,
-				secondValue: obj.value,
-				planType: "goa",
+				firstValue: obj.value,
+				stageId: stageId,
+				planType: "stage_goa",
 				state: "00A",
 				handlerId: handlerId
 			}
@@ -225,7 +213,7 @@ function del(schoolId, planYear) {
 			$.ajax({
 				type : "POST",
 				url : "/sys/planManage/delPlan.do",
-				data :"schoolId=" + schoolId + "&planYear=" + planYear + "&planType=goa",
+				data :"schoolId=" + schoolId + "&planYear=" + planYear + "&planType=stage_goa",
 				async : true,
 				dataType: "json",
 				beforeSend : function() {
@@ -251,54 +239,24 @@ function del(schoolId, planYear) {
 	});
 }
 
-function validateSelect() {
-	var flag = false;
-	var obj = $("#list_data").datagrid('getSelections');
-	if(obj.length > 0) {
-		if(obj.length > 1) {
-			$.messager.alert('提示', "只能选择一条记录操作！");
-		} else {
-			flag = true;
-		}
-	} else {
-		$.messager.alert('提示', "请先选择一条记录！");
-	}
-	return flag;
-}
-
 function checkParam() {
 	var type = $("#type").val();
 	if("ADD" == type) {
-		var schoolIds = $("#schoolIds").combobox("getValue");
-		if(schoolIds == "" || schoolIds == null || schoolIds == undefined) {
-			$.messager.alert('提示', "请先选择校区");
-			return false;
-		}
 		var planYear = $("#planYear").combobox("getValue");
 		if(planYear == "" || planYear == null || planYear == undefined) {
 			$.messager.alert('提示', "请先选择年份");
 			return false;
 		}
 	}
-	var firstValue = $("#value_1").numberbox("getValue");
-	if(firstValue == "" || firstValue == null || firstValue == undefined) {
-		$.messager.alert('提示', "请先填写一季度升学目标");
-		return false;
-	}
-	var secondValue = $("#value_2").numberbox("getValue");
-	if(secondValue == "" || secondValue == null || secondValue == undefined) {
-		$.messager.alert('提示', "请先填写二季度升学目标");
-		return false;
-	}
-	var thirdValue = $("#value_3").numberbox("getValue");
-	if(thirdValue == "" || thirdValue == null || thirdValue == undefined) {
-		$.messager.alert('提示', "请先填写三季度升学目标");
-		return false;
-	}
-	var fourthValue = $("#value_4").numberbox("getValue");
-	if(fourthValue == "" || fourthValue == null || fourthValue == undefined) {
-		$.messager.alert('提示', "请先填写四季度升学目标");
-		return false;
+	for(var i = 0, len = $("[name='value']").length; i < len; i++) {
+		var text = $("#text_" + i).html();
+		var stageId = text.substring(0, text.length - 5);
+		var value = $("#value_" + stageId).numberbox("getValue");
+		if(value == "" || value == null || value == undefined) {
+			text = text.substring(0, text.length - 1);
+			$.messager.alert('提示', "请先填写" + text);
+			return false;
+		}
 	}
 	return true;
 }

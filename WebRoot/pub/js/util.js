@@ -621,6 +621,14 @@ function formatChangeBaseNum(value, row, index) {
 	}
 }
 
+function formatGoalPlan(value, row, index) {
+	var schoolId = row.schoolId;
+	var planYear = row.planYear;
+	var content = "<a href='javascript:void(0)' onclick='showUpdate("+schoolId+", "+planYear+")' class='edit' style='width: 100px;'><span>修改计划</span></a>";
+	content += "&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:void(0)' onclick='del("+schoolId+", "+planYear+")' class='remove' style='width: 100px;'><span>删除计划</span></a>";
+	return content;
+}
+
 function myLoadFilter(data,parentId){
 	function setData(){
 		var todo = [];
