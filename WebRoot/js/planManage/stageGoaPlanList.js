@@ -14,8 +14,6 @@ $(document).ready(function() {
     		onLoadSuccess:function() {
     			onLoadSuccess();
     			$('#list_data').datagrid('clearSelections');
-    			$('.edit').linkbutton({text:'修改计划', iconCls:'icon-edit'});
-    			$('.remove').linkbutton({text:'删除计划', iconCls:'icon-remove'});
     		}
     	});
 	});
@@ -26,6 +24,12 @@ $(document).ready(function() {
 	});
 	$("#addPlan").click(function(){
 		showAdd();
+	});
+	$("#updatePlan").click(function(){
+		showUpdate();
+	});
+	$("#deletePlan").click(function(){
+		del();
 	});
 });
 
@@ -60,6 +64,11 @@ function mergeCellsByField(tableId, colList) {
         			field: field,　　// 合并字段
         			rowspan: rowspan
         		});
+            	target.datagrid("mergeCells", {
+        			index: i - rowspan,
+        			field: "ck",　　// 合并字段
+        			rowspan: rowspan
+        		});
             	rowspan = 1;
             }
             before = after;
@@ -68,9 +77,10 @@ function mergeCellsByField(tableId, colList) {
 }
 
 function showAdd() {
-	$("#dlg").dialog('open').dialog('setTitle', '添加计划');
+	$("#dlg").dialog('open').dialog('setTitle', '添加阶段升学目标计划');
     $('#fm').form('clear');
     $("#type").val("ADD");
+    $("#planYear").combobox({disabled: false});
     $("#submitBtn").unbind();
     $("#submitBtn").click(function(){
     	add();
@@ -103,58 +113,65 @@ function add() {
 			async : true,
 			dataType: "json",
 			beforeSend : function() {
-				showProgressLoader("正在添加计划,请稍等...", 400);
+				showProgressLoader("正在添加阶段升学目标计划,请稍等...", 400);
 			},
 			success : function(data) {
 				hideProgressLoader();
 				if (data.flag) {
-					showMessage('提示', "添加计划成功！", function() {
+					showMessage('提示', "添加阶段升学目标计划成功！", function() {
 						hideMessage();
 						$("#dlg").dialog('close');
 						$("#qryBtn").trigger("click");
 					});
 				} else {
-					showMessage('提示', "添加计划失败！", null);
+					showMessage('提示', "添加阶段升学目标计划失败！", null);
 				}
 			},
 			error : function() {
 				hideProgressLoader();
-				showMessage('提示', "调用添加计划服务失败！", null);
+				showMessage('提示', "调用添加阶段升学目标计划服务失败！", null);
 			}
 		});
 	}
 }
 
-function showUpdate(schoolId, planYear) {
-	$("#planYear").combobox({disabled: true});
-	$("#planYear").combobox("setValue", planYear);
-	$("#updateSchoolId").val(schoolId);
-	$("#updatePlanYear").val(planYear);
-	$.ajax({
-		type : "POST",
-		url : "/sys/planManage/qryPlan.do",
-		data :"schoolId=" + schoolId + "&planYear=" + planYear + "&planType=stage_goa",
-		async : true,
-		dataType: "json",
-		beforeSend : function() {
-			showProgressLoader("正在查询计划,请稍等...", 400);
-		},
-		success : function(data) {
-			hideProgressLoader();
-			$.each(data, function(i, obj) {
-				var stageId = obj.stageId;
-				$("#planId_" + stageId).val(obj.planId);
-				$("#value_" + stageId).numberbox("setValue", obj.firstValue);
-			});
-			$("#dlg").dialog('open').dialog('setTitle', '修改计划');
-			$('#fm').form('clear');
-			$("#type").val("UPDATE");
-			$("#submitBtn").unbind();
-			$("#submitBtn").click(function(){
-				update();
-			});
-		}
-	});
+function showUpdate() {
+	var row = $('#list_data').datagrid('getSelected');
+	if(row) {
+		var schoolId = row.schoolId;
+		var planYear = row.planYear;
+		$("#dlg").dialog('open').dialog('setTitle', '修改阶段升学目标计划');
+		$('#fm').form('clear');
+		$("#type").val("UPDATE");
+		$("#submitBtn").unbind();
+		$("#submitBtn").click(function(){
+			update();
+		});
+		$("#planYear").combobox({disabled: true});
+		$("#planYear").combobox("setValue", planYear);
+		$("#updateSchoolId").val(schoolId);
+		$("#updatePlanYear").val(planYear);
+		$.ajax({
+			type : "POST",
+			url : "/sys/planManage/qryPlan.do",
+			data :"schoolId=" + schoolId + "&planYear=" + planYear + "&planType=stage_goa",
+			async : true,
+			dataType: "json",
+			beforeSend : function() {
+				showProgressLoader("正在查询阶段升学目标计划,请稍等...", 400);
+			},
+			success : function(data) {
+				hideProgressLoader();
+				$.each(data, function(i, obj) {
+					var stageId = obj.stageId;
+					$("#planId_" + stageId).val(obj.planId);
+					$("#value_" + stageId).numberbox("setValue", obj.firstValue);
+				});
+			}
+		});
+	} else {
+		$.messager.alert('提示', "请先选择您要修改的阶段升学目标计划！");
+	}
 }
 
 function update() {
@@ -185,58 +202,65 @@ function update() {
 			async : true,
 			dataType: "json",
 			beforeSend : function() {
-				showProgressLoader("正在修改计划,请稍等...", 400);
+				showProgressLoader("正在修改阶段升学目标计划,请稍等...", 400);
 			},
 			success : function(data) {
 				hideProgressLoader()
 				if (data.flag) {
-					showMessage('提示', "修改计划成功！", function() {
+					showMessage('提示', "修改阶段升学目标计划成功！", function() {
 						hideMessage();
 						$("#dlg").dialog('close');
 						$("#qryBtn").trigger("click");
 					});
 				} else {
-					showMessage('提示', "修改计划失败！", null);
+					showMessage('提示', "修改阶段升学目标计划失败！", null);
 				}
 			},
 			error : function() {
 				hideProgressLoader();
-				showMessage('提示', "调用添加计划服务失败！", null);
+				showMessage('提示', "调用修改阶段升学目标计划服务失败！", null);
 			}
 		});
 	}
 }
 
-function del(schoolId, planYear) {
-	$.messager.confirm('提示', '您确定要删除当前选中的计划吗？', function(r) {
-		if(r) {
-			$.ajax({
-				type : "POST",
-				url : "/sys/planManage/delPlan.do",
-				data :"schoolId=" + schoolId + "&planYear=" + planYear + "&planType=stage_goa",
-				async : true,
-				dataType: "json",
-				beforeSend : function() {
-					showProgressLoader("正在删除计划,请稍等...", 400);
-				},
-				success : function(data) {
-					hideProgressLoader()
-					if (data.flag) {
-						showMessage('提示', "删除计划成功！", function() {
-							hideMessage();
-							$("#qryBtn").trigger("click");
-						});
-					} else {
-						showMessage('提示', "删除计划失败！", null);
+function del() {
+	var row = $('#list_data').datagrid('getSelected');
+	if(row) {
+		var schoolId = row.schoolId;
+		var planYear = row.planYear;
+		$.messager.confirm('提示', '您确定要删除当前选中的计划吗？', function(r) {
+			if(r) {
+				$.ajax({
+					type : "POST",
+					url : "/sys/planManage/delPlan.do",
+					data :"schoolId=" + schoolId + "&planYear=" + planYear + "&planType=stage_goa",
+					async : true,
+					dataType: "json",
+					beforeSend : function() {
+						showProgressLoader("正在删除阶段升学目标计划,请稍等...", 400);
+					},
+					success : function(data) {
+						hideProgressLoader()
+						if (data.flag) {
+							showMessage('提示', "删除阶段升学目标计划成功！", function() {
+								hideMessage();
+								$("#qryBtn").trigger("click");
+							});
+						} else {
+							showMessage('提示', "删除阶段升学目标计划失败！", null);
+						}
+					},
+					error : function() {
+						hideProgressLoader();
+						showMessage('提示', "调用删除阶段升学目标计划服务失败！", null);
 					}
-				},
-				error : function() {
-					hideProgressLoader();
-					showMessage('提示', "调用删除计划服务失败！", null);
-				}
-			});
-		}
-	});
+				});
+			}
+		});
+	} else {
+		$.messager.alert('提示', "请先选择您要删除的阶段升学目标计划！");
+	}
 }
 
 function checkParam() {
