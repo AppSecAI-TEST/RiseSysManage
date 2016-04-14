@@ -1,6 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%
 	String path = request.getContextPath();
 %>
@@ -13,7 +11,6 @@
 		<script type="text/javascript" src="<%=path %>/js/planManage/goaPlanList.js"></script>
   	</head>
   	<body>
-  		<input type="hidden" id="postIds" value="${sessionScope.StaffT.post}"/>
   		<input type="hidden" id="handlerId" value="${sessionScope.StaffT.staffId}"/>
   		<input id="planId" type="hidden" value=""/>
   		<div style="margin-right:5px">
@@ -57,8 +54,8 @@
 			</table>
 			<div id="toolbar" style="padding: 2px;height:auto;">
 	   			<a href="javascript:void(0)" id="addPlan" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;"><span>添加计划</span></a>
-	   			<a href="javascript:void(0)" id="updatePlan" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;"><span>修改目标</span></a>
-	   			<a href="javascript:void(0)" id="deletePlan" class="easyui-linkbutton" iconCls="icon-remove" style="width: 100px;"><span>删除目标</span></a>
+	   			<a href="javascript:void(0)" id="updatePlan" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;"><span>修改计划</span></a>
+	   			<a href="javascript:void(0)" id="deletePlan" class="easyui-linkbutton" iconCls="icon-remove" style="width: 100px;"><span>删除计划</span></a>
 	 		</div>
 	 		<div id="dlg" class="easyui-dialog" style="width: 580px; height: 350px; padding: 10px 20px" closed="true" data-options="modal:true" buttons="#dlgBtn">
 	  			<form id="fm">

@@ -15,7 +15,7 @@ $(document).ready(function() {
 	}
 	//带班老师的学校
 	$("#teacherSchoolId").combobox({
-		url : "/sys/pubData/qrySchoolList.do",//返回json数据的url
+		url : "/sys/pubData/qrySchoolListWithTS.do",//返回json数据的url
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
