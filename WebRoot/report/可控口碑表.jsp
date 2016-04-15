@@ -23,6 +23,13 @@
 					      		
 				        	</select>
 	  					</td>
+	  					<td align="right" width="80px"><span>来源渠道：</span></td>
+	  					<td align="left"  width="110px">
+	  						<select class="easyui-combobox" name="womChannel" id="womChannel" style="width:100px;height: 25px;" editable="false"
+  							 data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
+	      				 url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_WOM_T&codeType=WOM_CHANNEL_Y">
+  						</select>
+	  					</td>
 	  					<td width="60px" align="right"><span>日期：</span></td>
 						<td width="260px">
 							<input class="easyui-datebox" type="text" style="width:114px; height: 25px;" id="startTime" name="startTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
