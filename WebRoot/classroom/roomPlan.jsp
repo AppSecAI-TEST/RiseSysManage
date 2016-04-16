@@ -44,7 +44,7 @@
   			</table>
  		</form>
  		 
-		<table   align="center" title="查询结果"   data-options="height:600" id="list_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+		<table   align="center" title="查询结果"   data-options="height:600" id="list_data" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="true">
 			 
 		</table>
   		</div>
