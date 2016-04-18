@@ -111,6 +111,9 @@ $(document).ready(function() {
 			$("#licenseStageTd").html(licenseContent);
 		}
 	});
+	$("#export").click(function(){
+		exportTeacher();
+	});
 });
 
 function getData() {
@@ -206,4 +209,53 @@ function mergeCells(rows) {
 			});
 		}
 	}
+}
+
+function exportTeacher()
+{
+	if($("#list_data").datagrid("getData").total>0)
+	{
+		var exportInfo =new Array();
+		$(".datagrid-header-row").each(function(){
+			var headInfo =new Array();
+			$(this).find("td").each(function(){
+				var headObj ={};
+				headObj.text =$(this).text();
+				if($(this).attr("colspan")!=null)
+				{
+					headObj.colspan=$(this).attr("colspan");
+				}
+				else
+				{
+					headObj.colspan="";
+				}	
+				headInfo.push(headObj);
+			})
+			exportInfo.push(headInfo);
+		})
+		$(".datagrid-body").find(".datagrid-btable").find(".datagrid-row").each(function(){
+			var bodyInfo =new Array();
+			$(this).find("td").each(function(){
+				var bodyObj={};
+				bodyObj.text=$(this).text();
+				if($(this).attr("colspan")!=null)
+				{
+					bodyObj.colspan=$(this).attr("colspan");
+				}
+				else
+				{
+					bodyObj.colspan="";
+				}	
+				bodyInfo.push(bodyObj);
+			})
+			exportInfo.push(bodyInfo);
+		})
+		window.location.href="/sys/export/exportTeacherInfo.do?param="+JSON.stringify(exportInfo);
+
+	}
+	else
+	{
+		showMessage("提示","暂无数据进行导出");
+		return false;
+	}	
 }

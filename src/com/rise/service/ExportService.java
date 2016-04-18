@@ -33,7 +33,9 @@ import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.Region;
@@ -1568,6 +1570,88 @@ public class ExportService
 		return wb;
 	}
 	
+	
+	public HSSFWorkbook exportTeacherInfo(String param) throws Exception
+	{
+		HSSFWorkbook wb = new HSSFWorkbook();
+		HSSFCellStyle styleTitle = wb.createCellStyle();
+		styleTitle.setFillBackgroundColor(HSSFColor.GOLD.index);
+		styleTitle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+		styleTitle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+		HSSFFont fontTitle = wb.createFont();
+		fontTitle.setColor(HSSFFont.COLOR_RED);
+		fontTitle.setFontName("黑体");
+		fontTitle.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+		styleTitle.setFont(fontTitle);
+		HSSFCellStyle styleContent = wb.createCellStyle();
+		styleContent.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+		styleContent.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+		HSSFFont fontContent = wb.createFont();
+		fontContent.setFontName("微软雅黑");
+		styleContent.setFont(fontContent);
+		HSSFSheet sheet = wb.createSheet("教师档案");
+		JSONArray array =JSONArray.fromObject(param);
+		if(array.size()>2)
+		{
+			List<CellRangeAddress> cellRangeList =new ArrayList<CellRangeAddress>();
+			JSONArray column0 =array.getJSONArray(0);
+			JSONArray column1 =array.getJSONArray(1);
+			HSSFRow row0 = sheet.createRow(0);
+			HSSFRow row1 = sheet.createRow(1);
+			int headIndex =0;
+			for(int i=0;i<column1.size();i++)
+			{
+				JSONObject colObj1 =column1.getJSONObject(i);
+				HSSFCell cell0=row0.createCell(i);
+				HSSFCell cell1=row1.createCell(i);
+				cell0.setCellStyle(styleTitle);
+				cell1.setCellStyle(styleTitle);
+				cell1.setCellValue(StringUtil.getJSONObjectKeyVal(colObj1,"text"));
+				sheet.setColumnWidth(i, 6000);
+			}	
+			for(int j=0;j<column0.size();j++)
+			{
+				JSONObject colObj0 =column0.getJSONObject(j);
+				row0.getCell(headIndex).setCellValue(StringUtil.getJSONObjectKeyVal(colObj0,"text"));
+				String colspan=StringUtil.getJSONObjectKeyVal(colObj0,"colspan");
+				if(ObjectCensor.isStrRegular(colspan))
+				{
+					cellRangeList.add(new CellRangeAddress(0, 0, headIndex, headIndex+Integer.valueOf(colspan)-1));
+					headIndex+=Integer.valueOf(colspan);
+				}
+				else
+				{
+					headIndex++;
+				}	
+				
+			}
+			for(int k=2;k<array.size();k++)
+			{
+				HSSFRow row = sheet.createRow(k);
+				JSONArray arr =array.getJSONArray(k);
+				for(int l =0;l<column1.size();l++)
+				{
+					JSONObject cellObj =arr.getJSONObject(l);
+					HSSFCell cell =row.createCell(l);
+					cell.setCellStyle(styleContent);
+					cell.setCellValue(StringUtil.getJSONObjectKeyVal(cellObj,"text"));
+					String colspan=StringUtil.getJSONObjectKeyVal(cellObj, "colspan");
+					if(ObjectCensor.isStrRegular(colspan))
+					{
+						cellRangeList.add(new CellRangeAddress(k, k, l, l+Integer.valueOf(colspan)-1));
+					}	
+				}	
+			}	
+			
+			for(CellRangeAddress cellRange:cellRangeList)
+			{
+				sheet.addMergedRegion(cellRange);
+			}
+
+		}	
+		return wb;
+
+	}
 	
 	public void exportServiceRate(String fileName,String array,OutputStream out) throws Exception
 	{

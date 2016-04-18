@@ -504,4 +504,28 @@ public class ExportController
 		}
 
 	}
+	
+	//教师档案导出
+	@RequestMapping("/exportTeacherInfo.do")
+	public void exportTeacherInfo(String param, HttpServletResponse response , HttpServletRequest request)
+	{
+		try
+		{
+			String name = "教师档案表.xls";
+			String fileName = new String(name.getBytes("gbk"),"ISO-8859-1");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName="+response.encodeURL(fileName));
+			OutputStream out = response.getOutputStream();
+			HSSFWorkbook wb = es.exportTeacherInfo(param);
+			wb.write(out);
+			out.close();
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+		}
+
+	}
+
 }
