@@ -17,7 +17,7 @@
   				<table width="100%" cellpadding="5px" class="maintables" style="margin-top: 10px;">
   					<tr>
 	  					<td colspan="8">
-	  						<span style="font-size: 16px; font-weight: bold;"><span>休学状态：${exc.excStateText }</span></span>
+	  						<span style="font-size: 16px; font-weight: bold;"><span>异常状态：${exc.excStateText }</span></span>
 	  					</td>
 	  				</tr>
 	  				<tr>
@@ -26,7 +26,7 @@
 	  					<td align="right" width="120px"><span>校区：</span></td>
 	  					<td width="150px"><span>${exc.schoolName }</span></td>
 	  					<td align="right" width="120px"><span>在读班级：</span></td>
-	  					<td colspan="3" width="440px"><span>${exc.className }</span></td>
+	  					<td colspan="3" width="440px"><span>${exc.orignClassName }</span></td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="120px"><span>带班老师：</span></td>
@@ -40,7 +40,7 @@
 	  					<td align="right" width="120px"><span>已结课阶段：</span></td>
 	  					<td width="150px"><span>${exc.lowerStageId }</span></td>
 	  					<td align="right" width="120px"><span>已升学阶段：</span></td>
-	  					<td width="710px" colspan="5"><span>${exc.higherStageId }</span></td>
+	  					<td width="710px" colspan="5"><span>${exc.stageLevel }</span></td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="120px"><span>异常开始日期：</span></td>
@@ -52,23 +52,23 @@
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="120px"><span>复课日期：</span></td>
-	  					<td width="150px"><span>${exc.createDate }</span></td>
+	  					<td width="150px"><span>${exc.resumeDate }</span></td>
 	  					<td align="right" width="120px"><span>复课方式：</span></td>
-	  					<td width="150px"><span>${exc.excDays }</span></td>
+	  					<td width="150px"><span>${exc.resumeTypeText }</span></td>
 	  					<td align="right" width="120px"><span>操作人：</span></td>
-	  					<td colspan="3" width="440px"><span>${exc.handlerName }</span></td>
+	  					<td colspan="3" width="440px"><span>${exc.resumeHandlerName }</span></td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="120px"><span>终止日期：</span></td>
-		  				<td width="980px" colspan="7"><span>${exc.createDate }</span></td>
+		  				<td width="980px" colspan="7"><span>${exc.finishDate }</span></td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="120px"><span>异常备注：</span></td>
-		  				<td width="980px" colspan="7"><span>${exc.reason }</span></td>
+		  				<td width="980px" colspan="7"><span>${exc.remark }</span></td>
 	  				</tr>
 	  				<tr>
 	  					<td align="right" width="120px"><span>复课备注：</span></td>
-		  				<td width="980px" colspan="7"><span>${exc.reason }</span></td>
+		  				<td width="980px" colspan="7"><span></span></td>
 	  				</tr>
   				</table>
   			</c:forEach>

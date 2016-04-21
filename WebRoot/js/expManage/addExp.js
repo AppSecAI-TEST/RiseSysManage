@@ -11,10 +11,10 @@ var channel = "";
 $(document).ready(function(){
 	initPage();
 	$("#submitBtn").on("click", function() {
-		if (trim($("#remark").val()) == "") {
-			$.messager.alert('提示', "请填写异常原因备注！");
-			return false;
-		}
+//		if (trim($("#remark").val()) == "") {
+//			$.messager.alert('提示', "请填写异常原因备注！");
+//			return false;
+//		}
 		var paramValue = '{"stageLevel":"' + stageLevel
 			+ '","orignClassId":"' + classInstId
 			+ '","orignClassName":"' + className
@@ -28,13 +28,29 @@ $(document).ready(function(){
 			+ $("#handlerId").val() + '"}';
 		$.messager.confirm('提示', '您确定要添加该异常？', function(r) {
 			if (r) {
-				$.post('/sys/exception/addInfo.do', {param : paramValue}, function(result) {
-					if (result == "true") {
-						showMessage('提示', "添加异常成功", function() {back();});
-					} else {
-						$.messager.alert('提示', "添加异常失败");
-					}
+				$.ajax({
+					url: "/sys/exception/addInfo.do",
+					data: "param=" + paramValue,
+					async: true,
+					beforeSend: function() {
+						$.messager.progress({title : '添加异常', msg : '正在添加，请稍等……'});
+					},
+					success: function (result) {
+						$.messager.progress('close'); 
+						if (result == "true") {
+							showMessage('提示', "添加异常成功", function() {back();});
+						} else {
+							$.messager.alert('提示', "添加异常失败！");
+						}
+					} 
 				});
+//				$.post('/sys/exception/addInfo.do', {param : paramValue}, function(result) {
+//					if (result == "true") {
+//						showMessage('提示', "添加异常成功", function() {back();});
+//					} else {
+//						$.messager.alert('提示', "添加异常失败");
+//					}
+//				});
 			}
 		});
 	});
