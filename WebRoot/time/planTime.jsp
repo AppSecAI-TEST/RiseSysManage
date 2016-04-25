@@ -432,7 +432,11 @@ function endEditing(tab)
 			else
 			{
 				var hoursNum=vals[3];//课时数量
-			
+				var colNum="1";//合并的列
+				if(vals.length>4)
+				{
+					colNum=vals[5];
+				}
 				var schoolId=$("#schoolId").val();
 				planT.schoolId=schoolId;
 				planT.teacherName=rowVal.teacherName;
@@ -443,7 +447,7 @@ function endEditing(tab)
 			   
 			    planT.schooltimeInstId=schooltimeInstId;
 			    
-			    planT=getHours(planT,hoursNum);
+			    planT=getHours(planT,hoursNum,colNum);
 			    if(planT.hourRange!=undefined && planT.hourRange!='')
 			    {
 					addPlanTime(planT,tab);
@@ -596,7 +600,7 @@ var hourRanges=[];
  * @param {Object} mergeNum
  * @return {TypeName} 
  */
-function getHours(planT,hoursNum)
+function getHours(planT,hoursNum,colNum)
 {
 	var mark=editField.substring(1,editField.length);
 	
@@ -604,10 +608,11 @@ function getHours(planT,hoursNum)
 	{
 		var paramVal=hourRange[i].paramValue;
 		var hours=hourRange[i].param4;
-		 
+		var param1=hourRange[i].param1; 
+		
 		if(hoursNum==''|| hoursNum==undefined)
 		{
-			if(paramVal.indexOf(mark)>-1 && hours==2)//不填默认两个课时
+			if(paramVal.indexOf(mark)>-1 && hours==2    && colNum==param1)//不填默认两个课时
 			{
 				planT.hourRange=paramVal;
 				planT.lessionHours=hourRange[i].param4;
@@ -615,7 +620,7 @@ function getHours(planT,hoursNum)
 			}
 		}else
 		{
-			if(paramVal.indexOf(mark)>-1 && hours==hoursNum)
+			if(paramVal.indexOf(mark)>-1 && hours==hoursNum  && colNum==param1)
 			{
 				planT.hourRange=paramVal;
 				planT.lessionHours=hourRange[i].param4;
