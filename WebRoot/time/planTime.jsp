@@ -435,7 +435,7 @@ function endEditing(tab)
 				var colNum="1";//合并的列
 				if(vals.length>4)
 				{
-					colNum=vals[5];
+					colNum=vals[4];
 				}
 				var schoolId=$("#schoolId").val();
 				planT.schoolId=schoolId;
