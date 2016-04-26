@@ -1,6 +1,26 @@
 var selTr = null;
 var classTeacherId = "";
 $(document).ready(function() {
+	$("[name='schooltimes']").each(function() {
+		var roomId = $(this).attr("roomId");
+		var weekTime = $(this).attr("weekTime");
+		var hourRange = $(this).attr("hourRange");
+		var schooltimeId = $(this).attr("schooltimeId");
+		$("#roomId" + schooltimeId).combobox({
+			onChange : function(n, o) {
+				if(o != null && o != "" && o != undefined && roomId != n) {
+					var subHourRange = hourRange.substring(0, 3);
+					var flag = validateRoom(weekTime, hourRange, n, schooltimeId);
+					if(!flag) {
+						$("#roomId" + schooltimeId).combobox("setValue", o);
+						$.messager.alert('提示', "您选择的上课时段和教室已被其他班级占用，请选择其他上课时段或教室！");
+						return false;
+					}
+				}
+			}
+		});
+	});
+	
 	//带班老师的学校
 	$("#teacherSchoolId").combobox({
 		url : "/sys/pubData/qrySchoolListWithTS.do",//返回json数据的url
@@ -321,9 +341,15 @@ function updateOrCancel() {
 }
 
 function openClass() {
+	var schooltimeArray = "[";
 	var classTeacherArray = "[";
 	$("[name='schooltimes']").each(function() {
 		var schooltimeId = $(this).attr("schooltimeId");
+		var oldRoomId = $(this).attr("roomId");
+		var roomId = $("#roomId" + schooltimeId).combobox("getValue");
+		if(oldRoomId != roomId) {
+			schooltimeArray += "{schooltimeId:\""+schooltimeId+"\",roomId:\""+roomId+"\"},";
+		}
 		var weekTime = $(this).attr("weekTime");
 		var hourRange = $(this).attr("hourRange");
 		var flag = false;
@@ -344,12 +370,16 @@ function openClass() {
 		classTeacherArray = classTeacherArray.substring(0, classTeacherArray.length - 1);
 	}
 	classTeacherArray += "]";
+	if(schooltimeArray != "[" && schooltimeArray.endWith(",")) {
+		schooltimeArray = schooltimeArray.substring(0, schooltimeArray.length - 1);
+	}
+	schooltimeArray += "]";
 	if(classTeacherId != "" && classTeacherId != null && classTeacherId != undefined) {
 		classTeacherId = classTeacherId.substring(0, classTeacherId.length - 1);
 		$("#classTeacherId").val(classTeacherId);
 	}
 	var obj = JSON.stringify($("#openClassFm").serializeObject());
-	obj = obj.substring(0, obj.length - 1) + ",classTeacherArray:"+classTeacherArray+"}";
+	obj = obj.substring(0, obj.length - 1) + ",classTeacherArray:"+classTeacherArray+",schooltimeArray:"+schooltimeArray+"}";
 	obj = encodeURI(obj);
 	$.ajax({
 		url: "/sys/openClass/applyOpenClass.do",

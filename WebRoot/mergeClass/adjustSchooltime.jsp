@@ -79,7 +79,13 @@
 		  								<td align="center" width='4%' lessionHours='${schooltime.lessionHours }' index='${status.index + 1 }' addFlag='N' classInstId='${obj.classInstId }'
 		  									schooltimeId='${schooltime.schooltimeId }' weekTime='${schooltime.weekTime }' hourRange='${schooltime.hourRange }'><span>${status.index + 1 }</span></td>
 		  								<td align="center" width='14%'><span>${schooltime.schooltimeName }</span></td>
-		  								<td align="center" width='8%'><span>${schooltime.roomName }</span></td>
+		  								<td align="center" width='8%'>
+		  									<select id="roomId${schooltime.schooltimeId }" name="roomId" class="easyui-combobox" style="width: 80px; height: 28px;" editable="false" 
+		      									data-options="formatter:formatRoom, valueField: 'roomId', textField: 'roomName', panelHeight: 'auto',
+		      									onLoadSuccess: function (data){if(data.length > 0) $('#roomId${schooltime.schooltimeId }').combobox('select', ${schooltime.roomId });}" 
+		      									url="<%=path %>/pubData/qryRoomList.do?schoolId=${obj.schoolId}">
+	        								</select>
+		  								</td>
 		  								<td align="center" width='4%'><span>${schooltime.lessionHours }</span></td>
 		  								<c:choose>
 			  								<c:when test="${fn:length(schooltime.classTeacherList) > 0 }">

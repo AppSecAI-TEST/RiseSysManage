@@ -2,6 +2,26 @@ var td = 1;
 var selTr = null;
 var classTeacherId = "";
 $(document).ready(function() {	
+	$("[name='schooltimes']").each(function() {
+		var roomId = $(this).attr("roomId");
+		var weekTime = $(this).attr("weekTime");
+		var hourRange = $(this).attr("hourRange");
+		var schooltimeId = $(this).attr("schooltimeId");
+		$("#roomId" + schooltimeId).combobox({
+			onChange : function(n, o) {
+				if(o != null && o != "" && o != undefined && roomId != n) {
+					var subHourRange = hourRange.substring(0, 3);
+					var flag = validateRoom(weekTime, hourRange, n, schooltimeId);
+					if(!flag) {
+						$("#roomId" + schooltimeId).combobox("setValue", o);
+						$.messager.alert('提示', "您选择的上课时段和教室已被其他班级占用，请选择其他上课时段或教室！");
+						return false;
+					}
+				}
+			}
+		});
+	});
+	
 	if($("[name='teachers']").length > 0) {
 		var oldTeacherName = "";
 		$("[name='teachers']").each(function() {
@@ -207,7 +227,30 @@ $(document).ready(function() {
 						}
 					});
 					if(flag) {
-						maintenanceClass();
+						var changeRoomFlag = false;
+						var changeTeacherFlag = false;
+						$("[name='schooltimes']").each(function() {
+							var oldRoomId = $(this).attr("roomId");
+							var schooltimeId = $(this).attr("schooltimeId");
+							var roomId = $("#roomId" + schooltimeId).combobox("getValue");
+							if(oldRoomId != roomId) {
+								changeRoomFlag = true;
+							}
+						});
+						if($("input[name='teachers'][addFlag='Y']").length > 0) {
+							changeTeacherFlag = true;
+						}
+						if(changeRoomFlag && changeTeacherFlag) {
+							$.messager.confirm('提示', "您更换的教室和带班老师只对未排课的月份生效，确定要更换教室和带班老师吗？", function(r) {maintenanceClass(changeRoomFlag);});
+						} else {
+							if(changeRoomFlag) {
+								$.messager.confirm('提示', "您更换的教室只对未排课的月份生效，确定要更换教室吗？", function(r) {maintenanceClass(changeRoomFlag);});
+							} else if(changeTeacherFlag) {
+								$.messager.confirm('提示', "您更换的带班老师只对未排课的月份生效，确定要更换带班老师吗？", function(r) {maintenanceClass(changeRoomFlag);});
+							} else {
+								maintenanceClass(changeRoomFlag);
+							}
+						}
 					} else {
 						$.messager.alert('提示', "上课时段"+addNum+"的总课时量为"+hours+"，您选择的所有带班老师的总课时量为"+teacherHours+"，请保持课时量相等！");
 					}
@@ -436,12 +479,18 @@ $(document).ready(function() {
 });
 
 //变更班级教师
-function maintenanceClass() {
+function maintenanceClass(changeRoomFlag) {
 	var flag = false;
-	var classTeacherArray = "[";
 	var newTeacherName = "";
+	var schooltimeArray = "[";
+	var classTeacherArray = "[";
 	$("[name='schooltimes']").each(function() {
 		var schooltimeId = $(this).attr("schooltimeId");
+		var oldRoomId = $(this).attr("roomId");
+		var roomId = $("#roomId" + schooltimeId).combobox("getValue");
+		if(oldRoomId != roomId) {
+			schooltimeArray += "{schooltimeId:\""+schooltimeId+"\",roomId:\""+roomId+"\"},";
+		}
 		var weekTime = $(this).attr("weekTime");
 		var hourRange = $(this).attr("hourRange");
 		$("[name='teachers']").each(function() {
@@ -470,42 +519,45 @@ function maintenanceClass() {
 			flag = true;
 		}
 	}
-	if(flag) {
+	if(flag || changeRoomFlag) {
 		newTeacherName = newTeacherName.substring(0, newTeacherName.length - 5);
 		$("#newTeacherName").val(newTeacherName);
 		if(classTeacherArray != "[" && classTeacherArray.endWith(",")) {
 			classTeacherArray = classTeacherArray.substring(0, classTeacherArray.length - 1);
 		}
 		classTeacherArray += "]";
+		if(schooltimeArray != "[" && schooltimeArray.endWith(",")) {
+			schooltimeArray = schooltimeArray.substring(0, schooltimeArray.length - 1);
+		}
+		schooltimeArray += "]";
 		if(classTeacherId != "" && classTeacherId != null && classTeacherId != undefined) {
 			classTeacherId = classTeacherId.substring(0, classTeacherId.length - 1);
 			$("#classTeacherId").val(classTeacherId);
 		}
 		var object = $("#maintenanceClassFm").serializeObject();
 		var obj = JSON.stringify(object);
-		var param = "{teacherChangeHist:"+obj+",classTeacherArray:"+classTeacherArray+"}";
+		var param = "{teacherChangeHist:"+obj+",classTeacherArray:"+classTeacherArray+",schooltimeArray:"+schooltimeArray+"}";
 		param = encodeURI(param);
 		$.ajax({
 			url: "/sys/attendClass/changeTeacher.do",
 			data: "param=" + param,
 			dataType: "json",
 			async: true,
-			beforeSend: function()
-			{
-				$.messager.progress({title : '变更老师', msg : '正在变更老师，请稍等……'});
+			beforeSend: function() {
+				$.messager.progress({title : '班级维护', msg : '正在维护班级，请稍等……'});
 			},
 			success: function (data) {
 				$.messager.progress('close'); 
 				var flag = data.flag;
 				if(flag) {
-					$.messager.alert('提示', "变更老师成功！", "info", function() {window.history.back();});
+					$.messager.alert('提示', "班级维护成功！", "info", function() {window.history.back();});
 				} else {
 					$.messager.alert('提示', data.msg);
 				}
-			} 
+			}
 		});
 	} else {
-		$.messager.alert('提示', "请先变更老师或者更改班级性质！");
+		$.messager.alert('提示', "请先变更教室或者带班老师或者更改班级性质！");
 	}
 }
 

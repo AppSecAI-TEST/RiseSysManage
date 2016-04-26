@@ -219,7 +219,7 @@ $(document).ready(function() {
 			}
 			if(flag) {
 				var subHourRange = hourRange.substring(0, 3);
-				flag = validateRoom(weekTime, hourRange, roomId);
+				flag = validateRoom(weekTime, hourRange, roomId, "");
 				if(flag) {
 					$("[name='schooltimes']").each(function() {
 						var selWeekTime = $(this).attr("weekTime");

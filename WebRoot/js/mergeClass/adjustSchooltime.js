@@ -2,6 +2,26 @@ var selTr = null;
 var delSchooltimeId = "";
 var delClassTeacherId = "";
 $(document).ready(function() {
+	$("[name='schooltimes']").each(function() {
+		var roomId = $(this).attr("roomId");
+		var weekTime = $(this).attr("weekTime");
+		var hourRange = $(this).attr("hourRange");
+		var schooltimeId = $(this).attr("schooltimeId");
+		$("#roomId" + schooltimeId).combobox({
+			onChange : function(n, o) {
+				if(o != null && o != "" && o != undefined && roomId != n) {
+					var subHourRange = hourRange.substring(0, 3);
+					var flag = validateRoom(weekTime, hourRange, n, schooltimeId);
+					if(!flag) {
+						$("#roomId" + schooltimeId).combobox("setValue", o);
+						$.messager.alert('提示', "您选择的上课时段和教室已被其他班级占用，请选择其他上课时段或教室！");
+						return false;
+					}
+				}
+			}
+		});
+	});
+	
 	//批量加载上课的周
 	$("[name='classInstId']").each(function() {
 		var classInstId = $(this).val();
@@ -60,7 +80,7 @@ $(document).ready(function() {
 				}
 				if(flag) {
 					var subHourRange = hourRange.substring(0, 3);
-					flag = validateRoom(weekTime, hourRange, roomId);
+					flag = validateRoom(weekTime, hourRange, roomId, "");
 					if(flag) {
 						$("[name='schooltimes']").each(function() {
 							var selWeekTime = $(this).attr("weekTime");
@@ -302,106 +322,43 @@ $(document).ready(function() {
 					});
 				});
 				if(flag) {
+					var changeRoomFlag = false;
+					$("input[name='schooltimes']").each(function() {
+						var schooltimeId = $(this).attr("schooltimeId");
+						if(schooltimeId != null && schooltimeId != "" && schooltimeId != undefined) {
+							var oldRoomId = $(this).attr("roomId");
+							var roomId = $("#roomId" + schooltimeId).combobox("getValue");
+							if(oldRoomId != roomId) {
+								changeRoomFlag = true;
+							}
+						}
+					});
+					var changeTeacherFlag = false;
+					if($("input[name='teachers'][addFlag='Y']").length > 0) {
+						$("input[name='teachers'][addFlag='Y']").each(function() {
+							var schooltimeId = $(this).attr("schooltimeId");
+							if(schooltimeId != null && schooltimeId != "" && schooltimeId != undefined) {
+								changeTeacherFlag = true;
+							}
+						});
+					}
 					if((delClassTeacherId == "" || delClassTeacherId == null || delClassTeacherId == undefined)
 							&& (delSchooltimeId == "" || delSchooltimeId == null || delSchooltimeId == undefined)
-							&& ($("input[name='schooltimes'][addFlag='Y']").length == 0) && ($("input[name='teachers'][addFlag='Y']").length == 0)) {
-						$.messager.alert('提示', "请先调整合并班级的上课时段或者是带班老师！");
+							&& ($("input[name='schooltimes'][addFlag='Y']").length == 0) && !changeTeacherFlag && !changeRoomFlag
+							&& ($("input[name='teachers'][addFlag='Y']").length == 0)) {
+						$.messager.alert('提示', "请先调整合并班级的上课时段或者调整合并班级的教室或带班老师！");
 					} else {
-						var schooltimeArray = "[";
-						var handlerId = $("#handlerId").val();
-						$("input[name='classInstId']").each(function() {
-							var classInstId = $(this).val();
-							var schoolId = $("#schoolId" + classInstId).val();
-							if($("input[name='schooltimes'][addFlag='Y'][classInstId="+classInstId+"]").length > 0) {
-								$("input[name='schooltimes'][addFlag='Y'][classInstId="+classInstId+"]").each(function() {
-									var weekTime = $(this).attr("weekTime");
-									var hourRange = $(this).attr("hourRange");
-									var schooltimeObj = new Object();
-									schooltimeObj.schoolId = schoolId;
-									schooltimeObj.classInstId = classInstId;
-									schooltimeObj.roomId = $(this).attr("roomId");
-									schooltimeObj.weekTime = weekTime;
-									schooltimeObj.hourRange = hourRange;
-									schooltimeObj.lessionHours = $(this).attr("lessionHours");
-									schooltimeObj.handlerId = handlerId;
-									var classTeacherArray = "[";
-									if($("input[name='teachers'][addFlag='Y'][classInstId="+classInstId+"][weekTime="+weekTime+"][hourRange="+hourRange+"]").length > 0) {
-										$("input[name='teachers'][addFlag='Y'][classInstId="+classInstId+"][weekTime="+weekTime+"][hourRange="+hourRange+"]").each(function() {
-											var teacherObj = new Object();
-											var teacherSchoolId = $(this).attr("schoolId");
-											teacherObj.schoolId = teacherSchoolId;
-											teacherObj.classInstId = classInstId;
-											teacherObj.teacherId = $(this).attr("teacherId");
-											teacherObj.teacherType = "T";
-											teacherObj.handlerId = handlerId;
-											teacherObj.hours = $(this).attr("lessions");
-											classTeacherArray += JSON.stringify(teacherObj) + ","; 
-										});
-										classTeacherArray = classTeacherArray.substring(0, classTeacherArray.length - 1);
-									}
-									classTeacherArray += "]";
-									var object = JSON.stringify(schooltimeObj);
-									object = object.substring(0, object.length - 1);
-									object += ",\"classTeacherArray\":" + classTeacherArray + "},"
-									schooltimeArray += object;
-								});
+						if(changeRoomFlag && changeTeacherFlag) {
+							$.messager.confirm('提示', "您更换的教室和带班老师只对未排课的月份生效，确定要更换教室和带班老师吗？", function(r) {adjust();});
+						} else {
+							if(changeRoomFlag) {
+								$.messager.confirm('提示', "您更换的教室只对未排课的月份生效，确定要更换教室吗？", function(r) {adjust();});
+							} else if(changeTeacherFlag) {
+								$.messager.confirm('提示', "您更换的带班老师只对未排课的月份生效，确定要更换带班老师吗？", function(r) {adjust();});
+							} else {
+								adjust();
 							}
-						});
-						if(schooltimeArray.length > 1) {
-							schooltimeArray = schooltimeArray.substring(0, schooltimeArray.length - 1);
 						}
-						schooltimeArray += "]";
-						var classTeacherArray = "[";
-						$("input[name='classInstId']").each(function() {
-							var classInstId = $(this).val();
-							var schoolId = $("#schoolId" + classInstId).val();
-							if($("input[name='teachers'][addFlag='Y'][classInstId="+classInstId+"]").length > 0) {
-								$("input[name='teachers'][addFlag='Y'][classInstId="+classInstId+"]").each(function() {
-									var schooltimeId = $(this).attr("schooltimeId");
-									if(schooltimeId != null && schooltimeId != "" && schooltimeId != undefined) {
-										var teacherObj = new Object();
-										teacherObj.schoolId = schoolId;
-										teacherObj.classInstId = classInstId;
-										teacherObj.teacherId = $(this).attr("teacherId");
-										teacherObj.teacherType = "T";
-										teacherObj.handlerId = handlerId;
-										teacherObj.hours = $(this).attr("lessions");
-										teacherObj.schooltimeId = $(this).attr("schooltimeId");
-										classTeacherArray += JSON.stringify(teacherObj) + ","; 
-									}
-								});
-							}
-						});
-						if(classTeacherArray.length > 1) {
-							classTeacherArray = classTeacherArray.substring(0, classTeacherArray.length - 1);
-						}
-						classTeacherArray += "]";
-						if(delSchooltimeId != "" && delSchooltimeId != null && delSchooltimeId != undefined) {
-							delSchooltimeId = delSchooltimeId.substring(0, delSchooltimeId.length - 1);
-						}
-						if(delClassTeacherId != "" && delClassTeacherId != null && delClassTeacherId != undefined) {
-							delClassTeacherId = delClassTeacherId.substring(0, delClassTeacherId.length - 1);
-						}
-						var param = "{\"schooltimeArray\":"+schooltimeArray+",\"updateClassTeacherArray\":"+classTeacherArray+",\"delClassTeacherId\":\""+delClassTeacherId+"\",\"delSchooltimeId\":\""+delSchooltimeId+"\"}";
-						param = encodeURI(param);
-						$.ajax({
-							url: "/sys/mergeClass/adjust.do",
-							data: "param=" + param,
-							dataType: "json",
-							async: true,
-							beforeSend: function() {
-								$.messager.progress({title : '调整上课时段', msg : '调整上课时段，请稍等……'});
-							},
-							success: function (data) {
-								$.messager.progress('close'); 
-								var flag = data.flag
-								if(flag) {
-									$.messager.alert('提示', "调整上课时段成功！", "info", function() {window.history.back();});
-								} else {
-									$.messager.alert('提示', data.msg);
-								}
-							} 
-						});
 					}
 				} else {
 					var className = $("#className" + checkClassInstId).val();
@@ -416,6 +373,122 @@ $(document).ready(function() {
 		}
 	});
 });
+
+function adjust() {
+	var updateRoomArray = "[";
+	$("input[name='schooltimes']").each(function() {
+		var schooltimeId = $(this).attr("schooltimeId");
+		if(schooltimeId != null && schooltimeId != "" && schooltimeId != undefined) {
+			var oldRoomId = $(this).attr("roomId");
+			var roomId = $("#roomId" + schooltimeId).combobox("getValue");
+			if(oldRoomId != roomId) {
+				var classInstId = $(this).attr("classInstId");
+				updateRoomArray += "{schooltimeId:\""+schooltimeId+"\",\"classInstId\":\""+classInstId+"\",roomId:\""+roomId+"\"},";
+			}
+		}
+	});
+	if(updateRoomArray != "[" && updateRoomArray.endWith(",")) {
+		updateRoomArray = updateRoomArray.substring(0, updateRoomArray.length - 1);
+	}
+	updateRoomArray += "]";
+	var schooltimeArray = "[";
+	var handlerId = $("#handlerId").val();
+	$("input[name='classInstId']").each(function() {
+		var classInstId = $(this).val();
+		var schoolId = $("#schoolId" + classInstId).val();
+		if($("input[name='schooltimes'][addFlag='Y'][classInstId="+classInstId+"]").length > 0) {
+			$("input[name='schooltimes'][addFlag='Y'][classInstId="+classInstId+"]").each(function() {
+				var weekTime = $(this).attr("weekTime");
+				var hourRange = $(this).attr("hourRange");
+				var schooltimeObj = new Object();
+				schooltimeObj.schoolId = schoolId;
+				schooltimeObj.classInstId = classInstId;
+				schooltimeObj.roomId = $(this).attr("roomId");
+				schooltimeObj.weekTime = weekTime;
+				schooltimeObj.hourRange = hourRange;
+				schooltimeObj.lessionHours = $(this).attr("lessionHours");
+				schooltimeObj.handlerId = handlerId;
+				var classTeacherArray = "[";
+				if($("input[name='teachers'][addFlag='Y'][classInstId="+classInstId+"][weekTime="+weekTime+"][hourRange="+hourRange+"]").length > 0) {
+					$("input[name='teachers'][addFlag='Y'][classInstId="+classInstId+"][weekTime="+weekTime+"][hourRange="+hourRange+"]").each(function() {
+						var teacherObj = new Object();
+						var teacherSchoolId = $(this).attr("schoolId");
+						teacherObj.schoolId = teacherSchoolId;
+						teacherObj.classInstId = classInstId;
+						teacherObj.teacherId = $(this).attr("teacherId");
+						teacherObj.teacherType = "T";
+						teacherObj.handlerId = handlerId;
+						teacherObj.hours = $(this).attr("lessions");
+						classTeacherArray += JSON.stringify(teacherObj) + ","; 
+					});
+					if(classTeacherArray != "[" && classTeacherArray.endWith(",")) {
+						classTeacherArray = classTeacherArray.substring(0, classTeacherArray.length - 1);
+					}
+				}
+				classTeacherArray += "]";
+				var object = JSON.stringify(schooltimeObj);
+				object = object.substring(0, object.length - 1);
+				object += ",\"classTeacherArray\":" + classTeacherArray + "},";
+				schooltimeArray += object;
+			});
+		}
+	});
+	if(schooltimeArray != "[" && schooltimeArray.endWith(",")) {
+		schooltimeArray = schooltimeArray.substring(0, schooltimeArray.length - 1);
+	}
+	schooltimeArray += "]";
+	var classTeacherArray = "[";
+	$("input[name='classInstId']").each(function() {
+		var classInstId = $(this).val();
+		var schoolId = $("#schoolId" + classInstId).val();
+		if($("input[name='teachers'][addFlag='Y'][classInstId="+classInstId+"]").length > 0) {
+			$("input[name='teachers'][addFlag='Y'][classInstId="+classInstId+"]").each(function() {
+				var schooltimeId = $(this).attr("schooltimeId");
+				if(schooltimeId != null && schooltimeId != "" && schooltimeId != undefined) {
+					var teacherObj = new Object();
+					teacherObj.schoolId = schoolId;
+					teacherObj.classInstId = classInstId;
+					teacherObj.teacherId = $(this).attr("teacherId");
+					teacherObj.teacherType = "T";
+					teacherObj.handlerId = handlerId;
+					teacherObj.hours = $(this).attr("lessions");
+					teacherObj.schooltimeId = $(this).attr("schooltimeId");
+					classTeacherArray += JSON.stringify(teacherObj) + ","; 
+				}
+			});
+		}
+	});
+	if(classTeacherArray != "[" && classTeacherArray.endWith(",")) {
+		classTeacherArray = classTeacherArray.substring(0, classTeacherArray.length - 1);
+	}
+	classTeacherArray += "]";
+	if(delSchooltimeId != "" && delSchooltimeId != null && delSchooltimeId != undefined) {
+		delSchooltimeId = delSchooltimeId.substring(0, delSchooltimeId.length - 1);
+	}
+	if(delClassTeacherId != "" && delClassTeacherId != null && delClassTeacherId != undefined) {
+		delClassTeacherId = delClassTeacherId.substring(0, delClassTeacherId.length - 1);
+	}
+	var param = "{\"updateRoomArray\":"+updateRoomArray+",\"schooltimeArray\":"+schooltimeArray+",\"updateClassTeacherArray\":"+classTeacherArray+",\"delClassTeacherId\":\""+delClassTeacherId+"\",\"delSchooltimeId\":\""+delSchooltimeId+"\",\"handlerId\":\""+handlerId+"\"}";
+	param = encodeURI(param);
+	$.ajax({
+		url: "/sys/mergeClass/adjust.do",
+		data: "param=" + param,
+		dataType: "json",
+		async: true,
+		beforeSend: function() {
+			$.messager.progress({title : '调整上课时段', msg : '调整上课时段，请稍等……'});
+		},
+		success: function (data) {
+			$.messager.progress('close'); 
+			var flag = data.flag
+			if(flag) {
+				$.messager.alert('提示', "调整上课时段成功！", "info", function() {window.history.back();});
+			} else {
+				$.messager.alert('提示', data.msg);
+			}
+		} 
+	});
+}
 
 //在添加上课时间之前验证值
 function checkHourRange(classInstId) {

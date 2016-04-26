@@ -1,20 +1,37 @@
 var td = 1;
 var selTr = null;
 var classTeacherId = "";
-$(document).ready(function() {	
+$(document).ready(function() {
+	$("[name='schooltimes']").each(function() {
+		var roomId = $(this).attr("roomId");
+		var weekTime = $(this).attr("weekTime");
+		var hourRange = $(this).attr("hourRange");
+		var schooltimeId = $(this).attr("schooltimeId");
+		$("#roomId" + schooltimeId).combobox({
+			onChange : function(n, o) {
+				if(o != null && o != "" && o != undefined && n != roomId) {
+					var subHourRange = hourRange.substring(0, 3);
+					var flag = validateRoom(weekTime, hourRange, n, schooltimeId);
+					if(!flag) {
+						$("#roomId" + schooltimeId).combobox("setValue", o);
+						$.messager.alert('提示', "您选择的上课时段和教室已被其他班级占用，请选择其他上课时段或教室！");
+						return false;
+					}
+				}
+			}
+		});
+	});
 	$("#selectClass").click(function() {
 		var maxNum = $("#maxNum").val();
 		var rows = $('#list_data').datagrid("getRows"); 
 		var className = $("#className").html();
-		var rowNum=0;
-		if(rows==undefined || rows==null)
-		{
-			rowNum=0;
-		}else
-	    {
-			rowNum=rows.length;
-	    }
-		if(parseInt(rowNum)<parseInt(maxNum)) {
+		var rowNum = 0;
+		if (rows == undefined || rows == null) {
+			rowNum = 0;
+		} else {
+			rowNum = rows.length;
+		}
+		if(parseInt(rowNum) < parseInt(maxNum)) {
 			var sub = parseInt(maxNum) - parseInt(rowNum);
 			$.messager.confirm('提示', className + "已有" + rowNum + "名学员，您还可以为该班级添加" + sub + "名学员", function(r) {
 				var stageId = $("#stageId").html();
@@ -243,35 +260,35 @@ $(document).ready(function() {
 		}
 	});
 	
-	if($("[name='roomId']").length > 0) {
-		$("[name='roomId']").each(function(i, obj) {
-			var id = "#roomId" + (i + 1);
-			$(id).combobox({
-				url : "/sys/pubData/qryRoomList.do?schoolId="+$("#schoolId").val(),//返回json数据的url
-		    	valueField : "roomId",
-		    	textField : "roomName",
-		    	panelHeight : "auto",
-		    	formatter : function(data) {
-		    		return "<span>" + data.roomName + "</span>";
-		    	},
-		    	onLoadSuccess : function () { //数据加载完毕事件
-		            var data = $(id).combobox('getData');
-		            if (data.length > 0) {
-		                $(id).combobox('select', data[0].roomId);
-		            }
-		        },
-				onChange : function(n, o) {
-					var changeWeekTime = $(id).attr("weekTime");
-					var changeHourRange = $(id).attr("hourRange");
-					$("[name='schooltimes']").each(function() {
-						if ($(this).attr("weekTime") == changeWeekTime && $(this).attr("hourRange") == changeHourRange) {
-							$(this).attr("roomId", n);
-						}
-					});
-				}
-			});
-		});
-	}
+//	if($("[name='roomId']").length > 0) {
+//		$("[name='roomId']").each(function(i, obj) {
+//			var id = "#roomId" + (i + 1);
+//			$(id).combobox({
+//				url : "/sys/pubData/qryRoomList.do?schoolId="+$("#schoolId").val(),//返回json数据的url
+//		    	valueField : "roomId",
+//		    	textField : "roomName",
+//		    	panelHeight : "auto",
+//		    	formatter : function(data) {
+//		    		return "<span>" + data.roomName + "</span>";
+//		    	},
+//		    	onLoadSuccess : function () { //数据加载完毕事件
+//		            var data = $(id).combobox('getData');
+//		            if (data.length > 0) {
+//		                $(id).combobox('select', data[0].roomId);
+//		            }
+//		        },
+//				onChange : function(n, o) {
+//					var changeWeekTime = $(id).attr("weekTime");
+//					var changeHourRange = $(id).attr("hourRange");
+//					$("[name='schooltimes']").each(function() {
+//						if ($(this).attr("weekTime") == changeWeekTime && $(this).attr("hourRange") == changeHourRange) {
+//							$(this).attr("roomId", n);
+//						}
+//					});
+//				}
+//			});
+//		});
+//	}
 	
 	//班级维护
 	$("#updateApplyClassSubmit").click(function() {
@@ -306,27 +323,29 @@ $(document).ready(function() {
 				}
 				if(flags) {
 					if(flag) {
-						var hours = 0;
-						var teacherHours = 0;
-						$("[name='schooltimes']").each(function() {
-							var weekTime = $(this).attr("weekTime");
-							var hourRange = $(this).attr("hourRange");
-							var lessionHours = parseInt($(this).attr("lessionHours"));
-							var totalLessions = 0;
-							$("[name='teachers']").each(function() {
-								var teacherWeekTime = $(this).attr("weekTime");
-								var teacherHourRange = $(this).attr("hourRange");
-								if(weekTime == teacherWeekTime && hourRange == teacherHourRange) {
-									totalLessions += parseInt($(this).attr("lessions"));
+						if($("[name='teachers']").length > 0) {
+							var hours = 0;
+							var teacherHours = 0;
+							$("[name='schooltimes']").each(function() {
+								var weekTime = $(this).attr("weekTime");
+								var hourRange = $(this).attr("hourRange");
+								var lessionHours = parseInt($(this).attr("lessionHours"));
+								var totalLessions = 0;
+								$("[name='teachers']").each(function() {
+									var teacherWeekTime = $(this).attr("weekTime");
+									var teacherHourRange = $(this).attr("hourRange");
+									if(weekTime == teacherWeekTime && hourRange == teacherHourRange) {
+										totalLessions += parseInt($(this).attr("lessions"));
+									}
+								});
+								if(totalLessions < lessionHours) {
+									flag = false;
+									addNum = $(this).attr("addNum");
+									hours = lessionHours;
+									teacherHours = totalLessions;
 								}
 							});
-							if(totalLessions < lessionHours) {
-								flag = false;
-								addNum = $(this).attr("addNum");
-								hours = lessionHours;
-								teacherHours = totalLessions;
-							}
-						});
+						}
 						if(flag) {
 							updateApplyClass();
 						} else {
@@ -348,9 +367,9 @@ $(document).ready(function() {
 function updateApplyClass() {
 	var schooltimeArray = "[";
 	$("[name='schooltimes']").each(function() {
-		var roomId = $(this).attr("roomId");
-		var lessionHours = $(this).attr("lessionHours");
 		var schooltimeId = $(this).attr("schooltimeId");
+		var roomId = $("#roomId" + schooltimeId).combobox("getValue");
+		var lessionHours = $(this).attr("lessionHours");
 		var weekTime = $(this).attr("weekTime");
 		var hourRange = $(this).attr("hourRange");
 		schooltimeArray += "{schooltimeId:\""+schooltimeId+"\",roomId:\""+roomId+"\",lessionHours:\""+lessionHours+"\",";
