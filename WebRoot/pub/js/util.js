@@ -999,6 +999,7 @@ function initQryButton(qryName,resetName,formName,tableName)
     	}
 		if(qryFlag)
 		{
+			initPageNumber(tableName)
 			var obj = JSON.stringify($("#"+formName+"").serializeObject());
 	    	obj = obj.substring(0, obj.length - 1);
 	    	var funcNodeId = $("#"+qryName+"").attr("funcNodeId");
@@ -1326,5 +1327,18 @@ function disableForm(formId,isDisabled) {
 				$("#" + this.id).remove();
 			}
 		}
+	});
+}
+
+//初始化查询页码
+function initPageNumber(name)
+{
+	var opts = $("#"+name+"").datagrid('options');
+	var pager = $("#"+name+"").datagrid('getPager');
+	opts.pageNumber = 1;
+	opts.pageSize = opts.pageSize;
+	pager.pagination('refresh',{
+		pageNumber:1,
+		pageSize:opts.pageSize
 	});
 }
