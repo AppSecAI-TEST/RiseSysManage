@@ -84,13 +84,15 @@ $(document).ready(function() {
 					flag = validateRoom(weekTime, hourRange, roomId, "");
 					if(flag) {
 						var hourRanges = "";
-						$("[name='schooltimes']").each(function() {
-							var selWeekTime = $(this).attr("weekTime");
-							var selClassInstId = $(this).attr("classInstId");
-							if(selWeekTime == weekTime && selClassInstId == classInstId) {
-								hourRanges += "'" + $(this).attr("hourRange") + "',";
-							}
-						});
+						if($("[name='schooltimes']").length > 0) {
+							$("[name='schooltimes']").each(function() {
+								var selWeekTime = $(this).attr("weekTime");
+								var selClassInstId = $(this).attr("classInstId");
+								if(selWeekTime == weekTime && selClassInstId == classInstId) {
+									hourRanges += "'" + $(this).attr("hourRange") + "',";
+								}
+							});
+						}
 						if(hourRanges != null && hourRanges != "" && hourRanges != undefined) {
 							hourRanges = hourRanges.substring(0, hourRanges.length - 1);
 							flag = validateHourRange(hourRangeText, hourRanges);
