@@ -131,6 +131,9 @@ datagrid-row-selected
 	    	<td>
 	    	<table  id="t7"></table>
 	    	</td>
+	    	<td>
+	    	<table  id="t8"></table>
+	    	</td>
     	</tr>
     	</table>
     	</div></div>  
@@ -275,7 +278,11 @@ function getWeekTime()
     			{
     				json7=data[i];
     				initTable("t7",json7);
-    			} 
+    			}else if(i==7)
+    			{
+    				json7=data[i];
+    				initTable("t7",json7);
+    			}
     			
     		}
     		 
