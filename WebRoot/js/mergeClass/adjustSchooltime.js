@@ -36,16 +36,18 @@ $(document).ready(function() {
 	    		return "<span>" + data.codeName + "</span>";
 	    	},
 			onChange : function(n, o) {
-				$("#hourRange" + classInstId).combobox({
-	        		url : "/sys/pubData/qryHourRangeList.do?weekTime=" + n,//返回json数据的url
-	        		valueField : "hourRange",
-	        		textField : "timeName",
-	        		panelHeight : "auto",
-	        		editable : false,
-	        		formatter : function(data) {
-	        			return "<span>" + data.timeName + "</span>";
-	        		}
-	        	});
+				if(n != null && n != "" && n != undefined) {
+					$("#hourRange" + classInstId).combobox({
+						url : "/sys/pubData/qryHourRangeList.do?weekTime=" + n,//返回json数据的url
+						valueField : "hourRange",
+						textField : "timeName",
+						panelHeight : "auto",
+						editable : false,
+						formatter : function(data) {
+							return "<span>" + data.timeName + "</span>";
+						}
+					});
+				}
 			}
 		});
 		
@@ -79,18 +81,20 @@ $(document).ready(function() {
 					});
 				}
 				if(flag) {
-					var subHourRange = hourRange.substring(0, 3);
 					flag = validateRoom(weekTime, hourRange, roomId, "");
 					if(flag) {
+						var hourRanges = "";
 						$("[name='schooltimes']").each(function() {
 							var selWeekTime = $(this).attr("weekTime");
-							var selHourRange = $(this).attr("hourRange");
 							var selClassInstId = $(this).attr("classInstId");
-							var subSelHourRange = selHourRange.substring(0, 3);
-							if(subHourRange == subSelHourRange && selWeekTime == weekTime && selClassInstId == classInstId) {
-								flag = false;
+							if(selWeekTime == weekTime && selClassInstId == classInstId) {
+								hourRanges += "'" + $(this).attr("hourRange") + "',";
 							}
 						});
+						if(hourRanges != null && hourRanges != "" && hourRanges != undefined) {
+							hourRanges = hourRanges.substring(0, hourRanges.length - 1);
+							flag = validateHourRange(hourRangeText, hourRanges);
+						}
 						if(flag) {
 							var addSchoolNum = $("#addSchoolNum" + classInstId).val();
 							addSchoolNum++;
@@ -120,7 +124,8 @@ $(document).ready(function() {
 							$("#schooltimeTb" + classInstId).append(addSchootimeTd);
 							$("#roomId" + classInstId).combobox("setValue", "");
 							$("#weekTime" + classInstId).combobox("setValue", "");
-							$("#hourRange" + classInstId).combobox("setValue", "");
+							$("#hourRange" + classInstId).combobox('clear');
+							$("#hourRange" + classInstId).combobox("loadData", new Array());
 						} else {
 							$.messager.alert('提示', "您选择的上课时段有重叠时间，请选择其他上课时段！");
 						}

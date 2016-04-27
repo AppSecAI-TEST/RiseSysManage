@@ -261,6 +261,24 @@ public class CreateClassController
 		}
 	}
 	
+	@RequestMapping(value = "/validateHourRange.do")
+	public void validateHourRange(String param, HttpServletResponse response) {
+		PrintWriter out = null;
+		try {
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = createClassService.validateHourRange(param);
+			log.error(retVal);
+			out.write(retVal);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(out != null) {
+				out.close();
+			}
+		}
+	}
+	
 	@RequestMapping(value = "/qryClassInstDetail.do")
 	public void qryClassInstDetail(String param, HttpServletResponse response) {
 		PrintWriter out = null;

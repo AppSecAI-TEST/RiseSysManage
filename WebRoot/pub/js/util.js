@@ -782,11 +782,10 @@ function validateTeacher(teacherId, weekTime, hourRange, classInstId) {
 	var flag = false;
 	$.ajax({
 		url: "/sys/openClass/validateTeacher.do",
-		data: "param={teacherId:\""+teacherId+"\",weekTime:\""+weekTime+"\",hourRange:\""+hourRange+"\",classInstId:\""+classInstId+"\",queryCode:\"validateTeacher\"}",
+		data: "param={\"teacherId\":\""+teacherId+"\",\"weekTime\":\""+weekTime+"\",\"hourRange\":\""+hourRange+"\",\"classInstId\":\""+classInstId+"\",\"queryCode\":\"validateTeacher\"}",
 		dataType: "json",
 		async: false,
-		beforeSend: function()
-		{
+		beforeSend: function() {
 			$.messager.progress({title : '校验老师', msg : '正在校验老师，请稍等……'});
 		},
 		success: function (data) {
@@ -799,16 +798,35 @@ function validateTeacher(teacherId, weekTime, hourRange, classInstId) {
 
 function validateRoom(weekTime, hourRange, roomId, schooltimeId) {
 	var flag = false;
-	var param = "{'queryCode':'validateRoom','weekTime':'"+weekTime+"','hourRange':'"+hourRange+"','roomId':'"+roomId+"','schooltimeId':'"+schooltimeId+"'}";
+	var param = "{\"queryCode\":\"validateRoom\",\"weekTime\":\""+weekTime+"\",\"hourRange\":\""+hourRange+"\",\"roomId\":\""+roomId+"\",\"schooltimeId\":\""+schooltimeId+"\"}";
 	$.ajax({
 		url: "/sys/applyClass/validateRoom.do",
 		data: "param=" + param,
 		dataType: "json",
 		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
 		async: false,
-		beforeSend: function()
-		{
-			$.messager.progress({title : '校验上课时段和教室资源', msg : '正在校验上课时段和教室资源，请稍等……'});
+		beforeSend: function() {
+			$.messager.progress({title : '校验教室资源', msg : '正在校验教室资源，请稍等……'});
+		},
+		success: function (data) {
+			$.messager.progress('close'); 
+			flag = data;
+		}
+	});
+	return flag;
+}
+
+function validateHourRange(hourRangeText, hourRanges) {
+	var flag = false;
+	var param = "{\"hourRangeText\":\""+hourRangeText+"\",hourRanges:\""+hourRanges+"\"}";
+	$.ajax({
+		url: "/sys/applyClass/validateHourRange.do",
+		data: "param=" + param,
+		dataType: "json",
+		contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+		async: false,
+		beforeSend: function() {
+			$.messager.progress({title : '校验上课时段', msg : '正在校验上课时段，请稍等……'});
 		},
 		success: function (data) {
 			$.messager.progress('close'); 
