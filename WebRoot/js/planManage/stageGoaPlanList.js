@@ -2,7 +2,6 @@ $(document).ready(function() {
 	initYearAndMonth("year", null);
 	initYearAndMonth("planYear", null);
 	$("#qryBtn").click(function() {
-		initPageNumber("list_data");
 		var object = $("#qryFm").serializeObject();
 		var funcNodeId = $("#qryBtn").attr("funcNodeId");
 		object.funcNodeId = funcNodeId;
