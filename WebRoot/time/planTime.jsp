@@ -491,6 +491,10 @@ function deletePlanTime(schooltimeId,classInstId)
 	    	},
 	    	success: function(data) {
 	    		$.messager.progress('close');
+	    		if(!data.flag)
+	    		{
+	    			$.messager.alert('提示',data.msg);
+	    		}
 	    		getWeekTime(); 
 	        },
 	        error:function(){
