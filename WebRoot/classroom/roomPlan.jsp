@@ -17,7 +17,7 @@
   			<table  align="center"   style="min-width:1100px;width:99%;border:1px solid #95B8E7;margin-top:5px;font-family:'微软雅黑'" cellspacing="15">
   				<tr>
   					<td align="right" width="75px">校　　区：</td>
-  					<td>
+  					<td width="100px">
   						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:120px;height:25px"
 							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
 				      		url="<%=path %>/pubData/qrySchoolList.do">
@@ -26,7 +26,7 @@
   						<td align="right">
 						<span>日期：</span>
 					</td>
-					<td align="right" >
+					<td width="100px" align="right" >
 						<input class="easyui-datebox" type="text" required="true" style="width:100px; height: 25px;" id="startTime" name="startTime" editable="false" data-options="formatter:myformatter, parser:myparser"/>
 					</td>
 					<td align="center">
