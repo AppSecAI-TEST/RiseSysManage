@@ -69,6 +69,7 @@
 			});
 			function queryFunc()
 			{
+				initPageNumber("manList");
 				var obj = $("#manFm").serializeObject();
 				var warmupStart = $("#warmupStart").textbox("getValue");
 				var warmupEnd = $("#warmupEnd").textbox("getValue");

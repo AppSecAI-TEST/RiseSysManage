@@ -106,6 +106,7 @@
 			});
 			function queryFunc()
 			{
+				initPageNumber("attList");
 				var obj = $("#attFm").serializeObject();
 				obj["queryCode"] = "qryAttenceClassReport";
 				obj["funcNodeId"] = "38127";

@@ -2,6 +2,7 @@ var url="";
 
 function qryData()
 {
+	initPageNumber("list_data");
 	var obj = JSON.stringify($("#qryFm").serializeObject());
 	$('#list_data').datagrid({
 		url : "qryArchivesInfo.do",

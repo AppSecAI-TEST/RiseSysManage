@@ -69,6 +69,7 @@
 			});
 			function queryFunc()
 			{
+				initPageNumber("attList");
 				var obj = $("#attFm").serializeObject();
 				obj["queryCode"] = "qryAttenceSummaryReport";
 				obj["funcNodeId"] = "38128";

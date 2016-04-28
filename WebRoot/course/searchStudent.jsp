@@ -129,7 +129,8 @@ function qry()
 	{
 		parent.showMessage("提示","请至少填写姓名,电话,证件号码中的一项查询条件",null)
 		return false;
-	}	
+	}
+	initPageNumber("list_data");
 	var obj = JSON.stringify($("#qryFm").serializeObject());
     	obj = obj.substring(0, obj.length - 1);
     	var funcNodeId = $("#qryBtn").attr("funcNodeId");

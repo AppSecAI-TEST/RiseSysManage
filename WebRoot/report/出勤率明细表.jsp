@@ -115,6 +115,7 @@
 			});
 			function queryFunc()
 			{
+				initPageNumber("attList");
 				var obj = $("#attFm").serializeObject();
 				var classStart = $("#classStart").datebox("getValue");
 				var classEnd = $("#classEnd").datebox("getValue");

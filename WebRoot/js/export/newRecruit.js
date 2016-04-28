@@ -26,6 +26,7 @@ $(document).ready(function() {
 		if(!validateQryDate()) {
 			return;
 		} else {
+			initPageNumber("list_data");
 			var object = $("#qryFm").serializeObject();
 			var funcNodeId = $("#qryBtn").attr("funcNodeId");
 			object.funcNodeId = funcNodeId;

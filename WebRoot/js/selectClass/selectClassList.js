@@ -25,6 +25,7 @@ $(document).ready(function() {
     	if(schoolId == "" || schoolId == null || schoolId == undefined) {
     		showMessage("提示", "没有有效的校区可供查询", null);
     	} else {
+    		initPageNumber("list_data");
     		var object = $("#qryFm").serializeObject();
 	    	var isNeed = $("input:radio[name='isNeed']:checked").val();
 	    	if(isNeed != null && isNeed != null && isNeed != undefined) {

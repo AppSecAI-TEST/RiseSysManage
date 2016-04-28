@@ -3,6 +3,7 @@ $(document).ready(function(){
     $("#qryBtn").click(function() {
     	var schoolId = $("#schoolId").combobox("getValue");
 	    if(schoolId != ""){
+	    	initPageNumber("list_data");
 	    	var json = $("#qryFm").serializeObject();
 			var feedback = json.feedback;
 	    	if(feedback == "Y"){

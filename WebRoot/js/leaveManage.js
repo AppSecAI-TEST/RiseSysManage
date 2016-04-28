@@ -2,6 +2,7 @@ $(document).ready(function(){
 	initDate();
 	//首页面查询
     $("#qryBtn").click(function() {
+    	initPageNumber("list_data");
 		var obj = JSON.stringify($("#qryFm").serializeObject());
 		obj = obj.substring(0, obj.length - 1);
 		var funcNodeId = $("#qryBtn").attr("funcNodeId");
@@ -20,6 +21,7 @@ $(document).ready(function(){
     
     //查询可以休学的学员
      $("#qryStuBtn").click(function() {
+    	initPageNumber("stuList_data"); 
 		var obj = JSON.stringify($("#qryStuFm").serializeObject());
 		obj = obj.substring(0, obj.length - 1);
 		var funcNodeId = $("#qryStuBtn").attr("funcNodeId");

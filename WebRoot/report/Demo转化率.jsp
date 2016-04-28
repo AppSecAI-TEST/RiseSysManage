@@ -86,6 +86,7 @@
 	$(document).ready(function(){
 		initReportButton("resetBtn","qryFm","schoolId");
 		$("#qryBtn").click(function() {
+			initPageNumber("list_data");
 			var object = $("#qryFm").serializeObject();
 	    	var obj = JSON.stringify(object);
 	    	obj = obj.substring(0, obj.length - 1);

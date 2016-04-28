@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$("#qryBtn").click(function() {
+		initPageNumber("list_data");
 		var object = $("#qryFm").serializeObject();
 		if($("[name='isApplyBonus']").length > 0) {
 			var s = "";

@@ -3,6 +3,7 @@ $(document).ready(function(){
     $("#qryBtn").click(function() {
     	var schoolId = $("#schoolId").combobox("getValue");
 	    if(schoolId != ""){
+	    	initPageNumber("list_data");
 	    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
 		    var startTime= $("#startTime").datebox('getValue');
 		    var endTime= $("#endTime").datebox('getValue');;

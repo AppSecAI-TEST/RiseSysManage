@@ -103,6 +103,7 @@ $(document).ready(function() {
 		}	
 		var flag = validateQryDate();
 		if(flag) {
+			initPageNumber("list_data");
 			var object = $("#qryFm").serializeObject();
 			if($("[name='isAttend']").length > 0) {
 				var s = "";

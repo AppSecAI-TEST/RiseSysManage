@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$("#qryBtn").click(function() {
+		initPageNumber("list_data");
 		var json = $("#qryFm").serializeObject();
 		var meetingIsAttend = json.meetingIsAttend;
 		var openIsAttend = json.openIsAttend;

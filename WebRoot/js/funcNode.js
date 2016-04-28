@@ -18,6 +18,7 @@ $(document).ready(function() {
     }); 
     
     $("#qryBtn").click(function() {
+    	initPageNumber("list_data");
     	var obj = JSON.stringify($("#qryFm").serializeObject());
     	$('#list_data').datagrid({
     		url : "/sys/funcNode/qryFuncNodeList.do",
