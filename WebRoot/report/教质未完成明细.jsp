@@ -64,7 +64,8 @@
   			</table>
  		</form>
  		
- 		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:450" id="list_data" toolbar="#toolbar" rownumbers="true" fitColumns="true">
+ 		<table class="easyui-datagrid" align="center" title="查询结果" data-options="height:450" id="list_data" 
+ 			toolbar="#toolbar" rownumbers="true" fitColumns="true">
 			<thead>
 				<tr>
 					<th field="schoolName" align="center" width="10%">校区</th>

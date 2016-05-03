@@ -41,7 +41,16 @@
 						缴费日期：
 					</td>
 					<td width="22%">
-						<input name="feeStartTime" id="feeStartTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="feeEndTime" id="feeEndTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
+						<input name="feeStartTime" id="feeStartTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="feeEndTime" id="feeEndTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td align="right">
+						赠课状态：
+					</td>
+					<td>
+						<select id="giftType" name="giftType" style="width:100px;height:25px;" ></select>								
 					</td>
 					<td align="right" width="8%">
 						联系电话：
@@ -49,18 +58,10 @@
 					<td>
 						<input name="contactPhone" id="contactPhone" type="text" class="easyui-textbox" style="width:100px; height: 25px;"/>
 					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						赠课状态：
-					</td>
-					<td>
-						<select id="giftType" name="giftType" style="width:100px" ></select>								
-					</td>
 					<td align="right">
 						消耗次数：
 					</td>
-					<td colspan="3">
+					<td>
 						<input name="consTimesStart" id="consTimesStart" type="text" class="easyui-textbox" style="width:100px; height: 25px;" />&nbsp;至&nbsp;<input name="consTimesEnd" id="consTimesEnd" type="text" class="easyui-textbox" style="width:100px; height: 25px;" />									
 					</td>
 					<td colspan="2">
@@ -70,7 +71,8 @@
 				</tr>
 			</table>
 		</form>
-			<table class="easyui-datagrid" title="学员列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+			<table class="easyui-datagrid" title="学员列表" style="height:390px" id="manList" 
+				toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
 						<th width="9%" field="schoolName">校区</th>

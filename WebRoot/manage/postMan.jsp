@@ -48,14 +48,15 @@
 			function queryFunc()
 			{
 				var postName = $.trim($("#postName").textbox("getValue"));
-				if(postName == "")
-				{
-					$.messager.alert('提示',"请先输入要查询的职务");
-				}
-				else
-				{
-					$("#manList").datagrid({url:"/sys/post/queryPostList.do?postName="+postName});
-				}
+				//if(postName == "")
+				//{
+				//	$.messager.alert('提示',"请先输入要查询的职务");
+				//}
+				//else
+				//{
+				//}
+				initPageNumber("manList");
+				$("#manList").datagrid({url:"/sys/post/queryPostList.do?postName="+postName});
 			}
 			function resetFunc()
 			{

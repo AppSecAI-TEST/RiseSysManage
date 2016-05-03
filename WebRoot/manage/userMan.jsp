@@ -74,7 +74,8 @@
 					});
 				}
 			}
-			function queryFunc(){
+			function queryFunc() {
+				initPageNumber("userList");
 				var deptId = $("#deptId").combotree("getValue");
 				var userName = $("#userName").textbox("getValue");
 				var post = $("#post").combobox("getValue");

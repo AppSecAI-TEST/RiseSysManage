@@ -56,13 +56,13 @@
 				        	</select>
 						</td>
 						<td align="right"><span>是否已申请奖金：</span></td>
-						<td>
+						<td colspan="2">
 							<input type="checkbox" name="isApplyBonus" value="'Y'"/><span>是</span>
 							&nbsp;&nbsp;<input type="checkbox" name="isApplyBonus" value="'N'"/><span>否</span>
 						</td>
-						<td align="left" colspan="2">
+						<td>
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1060">查询</a>
-							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
+							&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 						</td>
   					</tr>
   				</table>

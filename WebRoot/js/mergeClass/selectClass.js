@@ -1,10 +1,10 @@
-var max=5;
+var max = 5;
 $(document).ready(function(){
 	$("#backBtn").click(function(){
 		history.back();
 	});
 	$("#qryBtn").click(function() {
-		initPageNumber("#list_data");
+		initPageNumber("list_data");
     	var obj = JSON.stringify($("#qryFm").serializeObject());
     	obj = obj.substring(0, obj.length - 1);
     	var funcNodeId = $("#qryBtn").attr("funcNodeId");
@@ -19,7 +19,6 @@ $(document).ready(function(){
     		}
     	});
     });
-	 
     $("#resetBtn").click(function() {
     	$('#qryFm').form('clear');//清空窗体数据  
     });
@@ -29,7 +28,6 @@ $(document).ready(function(){
     $("#subClass").click(function(){
     	subClass();
     });
-    
 });
 
 

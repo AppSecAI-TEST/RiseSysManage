@@ -1,14 +1,13 @@
 $(document).ready(function() {
 	$("#qryBtn").click(function() {
+		initPageNumber("list_data");
 		var object = $("#qryFm").serializeObject();
-		if(object.startTime=='')
-		{
+		if(object.startTime == '') {
 				$.messager.alert('提示', "请选择退费归属日期");
 			return;
 		}
-		if(object.endTime=='')
-		{
-			object.endTime=new Date();
+		if(object.endTime == '') {
+			object.endTime = new Date();
 		}
     	var obj = JSON.stringify(object);
     	obj = obj.substring(0, obj.length - 1);

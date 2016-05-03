@@ -2,31 +2,27 @@ $(document).ready(function(){
 	//首页面查询
     $("#qryBtn").click(function() {
     	var schoolId = $("#schoolId").combobox("getValue");
-	    if(schoolId != ""){
+	    if(schoolId != "") {
 	    	initPageNumber("list_data");
 	    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-		    var startTime= $("#startTime").datebox('getValue');
-		    var endTime= $("#endTime").datebox('getValue');;
-		    if(startTime=='')
-		    {
-		    	startTime='2014-01-01';
-		    }else
-		    {
-		    	startTime=startTime+"-01";
+		    var startTime = $("#startTime").datebox('getValue');
+		    var endTime = $("#endTime").datebox('getValue');;
+		    if(startTime == '') {
+		    	startTime = '2014-01-01';
+		    } else {
+		    	startTime = startTime + "-01";
 		    }
-		    if(endTime=='')
-		    {
-		    	endTime='2036-01-01';
-		    }else
-		    {
-		    	endTime=endTime+"-01";
+		    if(endTime == '') {
+		    	endTime = '2036-01-01';
+		    } else {
+		    	endTime = endTime + "-01";
 		    }
-		    var obj={};
-		    obj.funcNodeId=funcNodeId;
-		    obj.startTime=startTime;
-		    obj.endTime=endTime;
-		    obj.schoolId=$("#schoolId").combobox('getValue');
-		    var json=JSON.stringify(obj);
+		    var obj = {};
+		    obj.funcNodeId = funcNodeId;
+		    obj.startTime = startTime;
+		    obj.endTime = endTime;
+		    obj.schoolId = $("#schoolId").combobox('getValue');
+		    var json = JSON.stringify(obj);
 			$('#list_data').datagrid({
 				url : "/sys/pubData/qryDataListByPage.do",
 				queryParams:{
@@ -37,14 +33,13 @@ $(document).ready(function(){
 					$('#list_data').datagrid('clearSelections');
 				}
 			});
-	    }else{
-			showMessage("提示","没有有效的校区可供查询",null);
+	    } else {
+			showMessage("提示","没有有效的校区可供查询", null);
 		}
     });
 	
     //首页面重置
-    $("#resetBtn").click(function() 
-    {
+    $("#resetBtn").click(function() {
     	$("#qryFm").form('clear');//清空窗体数据  
     	//校区赋默认值
     	if($("#schoolId").combobox("getData").length>0){

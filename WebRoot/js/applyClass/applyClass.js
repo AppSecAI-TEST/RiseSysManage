@@ -13,6 +13,7 @@ $(document).ready(function() {
 //	});
 	
 	$("#qryBtn").click(function() {
+		initPageNumber("list_data");
 		var object = $("#qryFm").serializeObject();
 		var funcNodeId = $("#qryBtn").attr("funcNodeId");
 		object.funcNodeId = funcNodeId;
@@ -39,6 +40,7 @@ $(document).ready(function() {
 	});
 	
 	$("#qryApproveBtn").click(function() {
+		initPageNumber("approve_list_data");
 		var object = $("#qryApproveFm").serializeObject();
 		var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");
 		object.funcNodeId = funcNodeId;

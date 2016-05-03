@@ -50,7 +50,8 @@
 				</tr>
 			</table>
 		</form>
-			<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true" showFooter="true">
+			<table class="easyui-datagrid" title="班级列表" style="height:390px" id="manList" toolbar="#toolManbar" 
+				pagination="true" rownumbers="true" fitColumns="true" singleSelect="true" showFooter="true">
 				<thead>
 					<tr>
 						<th width="33%" field="schoolName">校区</th>

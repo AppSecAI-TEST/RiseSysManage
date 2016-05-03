@@ -1,6 +1,6 @@
 $(document).ready(function() {
-	$("#qryBtn").click();
 	$("#qryBtn").click(function() {
+		initPageNumber("list_data");
     	var obj = JSON.stringify($("#qryFm").serializeObject());
     	obj = obj.substring(0, obj.length - 1);
     	var funcNodeId = $("#qryBtn").attr("funcNodeId");

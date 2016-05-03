@@ -13,6 +13,7 @@ $(document).ready(function() {
 //	});
 	
 	$("#qryBtn").click(function() {
+		initPageNumber("list_data");
     	var obj = JSON.stringify($("#qryFm").serializeObject());
     	obj = obj.substring(0, obj.length - 1);
     	var funcNodeId = $("#qryBtn").attr("funcNodeId");
@@ -39,6 +40,7 @@ $(document).ready(function() {
 	});
 	
 	$("#qryApproveBtn").click(function() {
+		initPageNumber("approve_list_data");
     	var obj = JSON.stringify($("#qryApproveFm").serializeObject());
     	obj = obj.substring(0, obj.length - 1);
     	var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");

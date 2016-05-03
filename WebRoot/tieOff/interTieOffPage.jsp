@@ -61,6 +61,7 @@
 			});
 			function queryFunc()
 			{
+				initPageNumber("manList");
 				var obj = $("#qryFm").serializeObject();
 				var startTime = $("#startTime").datebox("getValue");
 				var endTime = $("#endTime").datebox("getValue");

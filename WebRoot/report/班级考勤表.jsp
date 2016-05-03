@@ -62,7 +62,9 @@
 				</tr>
 			</table>
 		</form>
-			<table class="easyui-datagrid" title="班级考勤表 " style="height:390px;" id="attList" url="" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+			<table class="easyui-datagrid" title="班级考勤表 " style="height:390px;" 
+				id="attList" url="" toolbar="#toolbar" pagination="true" 
+				rownumbers="true" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
 						<th width="12.5%" field="schoolName">校区</th>

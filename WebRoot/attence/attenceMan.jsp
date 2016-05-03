@@ -83,8 +83,8 @@
 				    }
 				});
 			});
-			function queryManFunc()
-			{
+			function queryManFunc() {
+				initPageNumber("manList");
 				var obj = $("#manFm").serializeObject();
 				var classStartManTime = $("#classStartManTime").datebox("getValue");
 				var classEndManTime = $("#classEndManTime").datebox("getValue");

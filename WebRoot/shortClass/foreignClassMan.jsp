@@ -70,6 +70,7 @@
 			});
 			function queryFunc()
 			{
+				initPageNumber("manList");
 				var obj = $("#manFm").serializeObject();
 				var planStartManTime = $("#planStartManTime").datebox("getValue");
 				var planEndManTime = $("#planEndManTime").datebox("getValue");
@@ -173,13 +174,16 @@
 						计划上课日期：
 					</td>
 					<td width="22%">
-						<input name="planStartManTime" id="planStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="planEndManTime" id="planEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
+						<input name="planStartManTime" id="planStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 
+						至 
+						<input name="planEndManTime" id="planEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 					</td>
 				</tr>
 				<tr>
-					<td colspan="8" align="right" style="padding-right:85px">
+					<td colspan="7">&nbsp;</td>
+					<td>
 						<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
-						<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
 					</td>
 				</tr>
 			</table>

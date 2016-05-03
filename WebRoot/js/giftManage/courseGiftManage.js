@@ -2,7 +2,8 @@ $(document).ready(function(){
 	//首页面查询
     $("#qryCourseGift").click(function() {
     	var schoolId = $("#courseSchoolId").combobox("getValue");
-	    if(schoolId != ""){
+	    if(schoolId != "") {
+	    	initPageNumber("courseGift_data");
 			var obj = JSON.stringify($("#qryCourseFm").serializeObject());
 			obj = obj.substring(0, obj.length - 1);
 			var funcNodeId = $("#qryCourseGift").attr("funcNodeId");
@@ -17,14 +18,13 @@ $(document).ready(function(){
 					$('#courseGift_data').datagrid('clearSelections');
 				}
 			});
-	    }else{
+	    } else {
 			showMessage("提示","没有有效的校区可供查询",null);
 		}
     });
     
          //首页面重置
-    $("#resetCourse").click(function() 
-    {
+    $("#resetCourse").click(function() {
     	$("#qryCourseFm").form('clear');//清空窗体数据  
     	//校区赋默认值
     	if($("#courseSchoolId").combobox("getData").length>0){

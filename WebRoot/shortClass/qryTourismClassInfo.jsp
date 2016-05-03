@@ -36,6 +36,7 @@
 			});
 			function queryFunc()
 			{
+				initPageNumber("manList");
 				var obj = $("#manFm").serializeObject();
 				var feeStartTime = $("#feeStartTime").datebox("getValue");
 				var feeEndTime = $("#feeEndTime").datebox("getValue");

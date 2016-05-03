@@ -93,7 +93,8 @@
 	   			//定位教师页面查询
 			    $("#qryTeaBtn").click(function() {
 			    	var schoolId = $("#schoolId").combobox("getValue");
-		   			if(schoolId != ""){
+		   			if(schoolId != "") {
+		   				initPageNumber("teacher_list");
 				    	var json = $("#qryTeaFm").serializeObject();
 				    	json.byName = $("#byName").combobox('getText');
 						var obj = JSON.stringify(json);

@@ -10,6 +10,16 @@
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript">
+			$(document).ready(function(){
+				var height = $(document).height();
+				$('#manList').datagrid('resize', {//适配高度
+					height: height
+				});
+				$("#manList").datagrid({
+					pageList : [20, 30, 40],           
+					pageSize : 20                    
+				});
+			});
 			function flushAllCache(){
 				$.messager.confirm('提示','您确定要刷新全部缓存吗?',function(r){
 					if (r){

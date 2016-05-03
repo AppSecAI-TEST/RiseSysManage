@@ -43,6 +43,7 @@
 			});
 			function queryFunc()
 			{
+				initPageNumber("manList");
 				var obj = $("#manFm").serializeObject();
 				var payStartManTime = $("#payStartManTime").datebox("getValue");
 				var payEndManTime = $("#payEndManTime").datebox("getValue");

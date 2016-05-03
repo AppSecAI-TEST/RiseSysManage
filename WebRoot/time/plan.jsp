@@ -112,110 +112,90 @@
             //formatter: function (d) { return d.getFullYear() + '-' + d.getMonth(); }//配置formatter，只返回年月
     	});
     
-    $("#qryBtn").click(function()
-    {
+    $("#qryBtn").click(function() {
+    	initPageNumber("list_data");
     	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-	    var startTime= $("#startTime").datebox('getValue');
-	    var endTime= $("#endTime").datebox('getValue');;
-	    if(startTime=='')
-	    {
-	    	startTime='2014-01-01';
-	    }else
-	    {
-	    	startTime=startTime+"-01";
+	    var startTime = $("#startTime").datebox('getValue');
+	    var endTime = $("#endTime").datebox('getValue');;
+	    if(startTime == '') {
+	    	startTime = '2014-01-01';
+	    } else {
+	    	startTime = startTime + "-01";
 	    }
-	    if(endTime=='')
-	    {
-	    	endTime='2036-01-01';
-	    }else
-	    {
-	    	endTime=endTime+"-01";
+	    if(endTime == '') {
+	    	endTime = '2036-01-01';
+	    } else {
+	    	endTime = endTime + "-01";
 	    }
-	    var obj={};
-	    obj.funcNodeId=funcNodeId;
-	    obj.startTime=startTime;
-	    obj.endTime=endTime;
-	    obj.schoolId=$("#schoolId").combobox('getValue');
-	    params=JSON.stringify(obj);
-    		$('#list_data').datagrid(
-    		{
+	    var obj = {};
+	    obj.funcNodeId = funcNodeId;
+	    obj.startTime = startTime;
+	    obj.endTime = endTime;
+	    obj.schoolId = $("#schoolId").combobox('getValue');
+	    params = JSON.stringify(obj);
+    	$('#list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",
-    		queryParams:
-    		{
+    		queryParams: {
     			param : params
     		},
-    		onLoadSuccess:function(){
+    		onLoadSuccess:function() {
     			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
     			$('#list_data').datagrid('clearSelections');
     		}
     	});
      });
  	
-    $("#reset").click(function(){
+    $("#reset").click(function() {
     	 $('#startTime').datebox('setValue',"")
     	 $('#endTime').datebox('setValue',"")
     });
     
-    $("#createPlan").click(function()
-    	{
-    	 
-    		window.location.href = "/sys/time/createPlan.jsp";
-    	}
-    );
+    $("#createPlan").click(function() {
+    	window.location.href = "/sys/time/createPlan.jsp";
+    });
     
-      $("#updatePlan").click(function()
-      {
-    	 	var row = $('#list_data').datagrid('getSelected');
-    	 	
-    	 	if(row)
-    	 	{
-				flag = true;
-			} else {
-				$.messager.alert('提示', "请先选择排课月份！");
-			}
-    	 	
-    	 	var createMonthId=row.createMonthId;
-    	 	var month=row.month;
-    	 	var schoolId=row.schoolId;
-    		window.location.href = "/sys/time/updatePlan.jsp?flag=update&time="+month+"&createMonthId="+createMonthId+"&schoolId="+schoolId;
-      }
-    );
+	$("#updatePlan").click(function() {
+    	var row = $('#list_data').datagrid('getSelected');
+    	if(row) {
+			flag = true;
+		} else {
+			$.messager.alert('提示', "请先选择排课月份！");
+		}
+    	var createMonthId = row.createMonthId;
+    	var month = row.month;
+    	var schoolId = row.schoolId;
+    	window.location.href = "/sys/time/updatePlan.jsp?flag=update&time="+month+"&createMonthId="+createMonthId+"&schoolId="+schoolId;
+    });
     
-       $("#viewPlan").click(function()
-      {
-    	 	var row = $('#list_data').datagrid('getSelected');
-    	 	
-    	 	if(row)
-    	 	{
-				flag = true;
-			} else {
-				$.messager.alert('提示', "请先选择排课月份！");
-			}
-    	 	
-    	 	var createMonthId=row.createMonthId;
-    	 	var month=row.month;
-    	 	var schoolId=row.schoolId;
-    		window.location.href = "/sys/time/updatePlan.jsp?flag=view&time="+month+"&createMonthId="+createMonthId+"&schoolId="+schoolId;
-      }
-    );
-      function myformatter(date){
-            var y = date.getFullYear();
-            var m = date.getMonth()+1;
-            var d = date.getDate();
-            return y+'-'+(m<10?('0'+m):m);
-        }
+	$("#viewPlan").click(function() {
+   		var row = $('#list_data').datagrid('getSelected');
+    	if(row) {
+			flag = true;
+		} else {
+			$.messager.alert('提示', "请先选择排课月份！");
+		}
+    	var createMonthId = row.createMonthId;
+		var month = row.month;
+		var schoolId = row.schoolId;
+		window.location.href = "/sys/time/updatePlan.jsp?flag=view&time="+month+"&createMonthId="+createMonthId+"&schoolId="+schoolId;
+	});
+	function myformatter(date){
+		var y = date.getFullYear();
+		var m = date.getMonth()+1;
+		var d = date.getDate();
+		return y+'-'+(m<10?('0'+m):m);
+	}
 
   	function myparser(s){
-            if (!s) return new Date();
-            var ss = (s.split('-'));
-            var y = parseInt(ss[0],10);
-            var m = parseInt(ss[1],10);
-            var d = parseInt(ss[2],10);
-            if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
-                return new Date(y,m-1,d);
-            } else {
-                return new Date();
-            }
-        }
-
+		if (!s) return new Date();
+		var ss = (s.split('-'));
+	    var y = parseInt(ss[0],10);
+		var m = parseInt(ss[1],10);
+		var d = parseInt(ss[2],10);
+		if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+			return new Date(y,m-1,d);
+		} else {
+			return new Date();
+		}
+	}
 </script>
