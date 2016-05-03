@@ -36,7 +36,7 @@
 			}
 		</style>
 		<script type="text/javascript">
-			var gTimeType = "change";
+			var gTimeType = "mod";
 			$(document).ready(function(){
 				ajaxLoadEnd();
 				var classTimeData = '${hourRangeList}';
@@ -398,14 +398,7 @@
 			</tr>
 			<tr>
 				<td align="right" width="10%">上课时间：</td>
-				<td>周${classAttendT.attendDateWeek} <fmt:formatDate value="${classAttendT.attendDate}" pattern="yyyy-MM-dd" /> <select id="classTime" name="classTime" style="width:200px" ></select></td>
-			</tr>
-			<tr>
-				<td align="right" width="10%">时段切换类型：</td>
-				<td>
-					<input type="radio" name="classTimeType" id="classTimeTypeChange" value="change" checked="checked" onclick="classTimeTypeFunc(this)" /><label for="classTimeTypeChange">选择其他时段</label>&nbsp;&nbsp;
-					<input type="radio" name="classTimeType" id="classTimeTypeModified" value="mod" onclick="classTimeTypeFunc(this)" /><label for="classTimeTypeModified">修改当前时段</label>
-				</td>
+				<td>周${classAttendT.attendDateWeek} <fmt:formatDate value="${classAttendT.attendDate}" pattern="yyyy-MM-dd" /> <select id="classTime" name="classTime" style="width:200px" ></select>&nbsp;&nbsp;<input type="radio" name="classTimeType" id="classTimeTypeModified" value="mod" checked="checked" onclick="classTimeTypeFunc(this)" /><label for="classTimeTypeModified">修改考勤</label>&nbsp;&nbsp;<input type="radio" name="classTimeType" id="classTimeTypeChange" value="change" onclick="classTimeTypeFunc(this)" /><label for="classTimeTypeChange">新增考勤</label></td>
 			</tr>
 			<tr>
 				<td align="right">教室：</td>
