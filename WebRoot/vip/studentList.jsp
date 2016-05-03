@@ -54,7 +54,7 @@
         				</select>
 					</td>
 					<td align="right" style="min-width: 80px"><span>VIP学员：</span></td>
-					<td style="min-width: 100px">
+					<td style="min-width: 88px">
 						<input type="radio" value="Y" name="vip"/><span>是</span>
 	      				&nbsp;<input type="radio" value="N" name="vip"/><span>否</span>
 					</td>

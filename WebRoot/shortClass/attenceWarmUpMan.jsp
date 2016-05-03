@@ -85,6 +85,7 @@
 			});
 			function queryManFunc()
 			{
+				initPageNumber("manList");
 				var obj = $("#manFm").serializeObject();
 				var classStartManTime = $("#classStartManTime").datebox("getValue");
 				var classEndManTime = $("#classEndManTime").datebox("getValue");
@@ -159,6 +160,7 @@
 			}
 			function queryHisFunc()
 			{
+				initPageNumber("hisList");
 				var obj = $("#hisFm").serializeObject();
 				var openApplyStartManTime = $("#openApplyStartManTime").datebox("getValue");
 				var openApplyEndManTime = $("#openApplyEndManTime").datebox("getValue");
@@ -241,7 +243,9 @@
 								放班申请日期：
 							</td>
 							<td width="225px">
-								<input name="classStartManTime" id="classStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="classEndManTime" id="classEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
+								<input name="classStartManTime" id="classStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
+								至 
+								<input name="classEndManTime" id="classEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 							</td>
 							<td></td>
 						</tr>
@@ -298,39 +302,41 @@
 				<form id="hisFm">
 					<table class="search_tab">
 						<tr>
-							<td align="right" width="12%">
+							<td align="right" width="8%">
 								所属校区：
 							</td>
-							<td width="22%">
+							<td width="12%">
 								<select id="schoolHisId" name="schoolHisId" style="width:100px;height:25px;" ></select>
 							</td>
-							<td align="right" width="12%">
+							<td align="right" width="8%">
 								班级状态：
 							</td>
-							<td width="22%">
+							<td width="12%">
 								<select id="classHisState" name="classHisState" style="width:100px;height:25px;" ></select>
 							</td>
 							<td align="right" width="12%">
-								班级：
+								放班申请日期：
 							</td>
-							<td>
-								<input name="classHis" id="classHis" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
+							<td width="22%">
+								<input name="openApplyStartManTime" id="openApplyStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
+								至
+								<input name="openApplyEndManTime" id="openApplyEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 							</td>
 						</tr>
 						<tr>
-							<td align="right">
-								放班申请日期：
+							<td align="right" width="8%">
+								班级：
 							</td>
-							<td>
-								<input name="openApplyStartManTime" id="openApplyStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="openApplyEndManTime" id="openApplyEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
+							<td colspan="3">
+								<input name="classHis" id="classHis" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 							</td>
-							<td align="right">
+							<td align="right" width="12%">
 								放班审批日期：
 							</td>
-							<td>
+							<td width="22%">
 								<input name="openAuditStartManTime" id="openAuditStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="openAuditEndManTime" id="openAuditEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 							</td>
-							<td colspan="2" align="center">
+							<td>
 								<a href="javascript:void(0)" id="queryHisBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryHisFunc()">查询</a>
 								<a href="javascript:void(0)" id="resetHisBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetHisFunc()">重置</a>
 							</td>

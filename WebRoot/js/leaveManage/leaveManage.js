@@ -3,7 +3,7 @@ $(document).ready(function(){
 	//首页面查询
     $("#qryBtn").click(function() {
     	var schoolId = $("#schoolId").combobox("getValue");
-    	if(schoolId != ""){
+    	if(schoolId != "") {
     		initPageNumber("list_data");
 			var obj = JSON.stringify($("#qryFm").serializeObject());
 			obj = obj.substring(0, obj.length - 1);
@@ -19,25 +19,25 @@ $(document).ready(function(){
 					$('#list_data').datagrid('clearSelections');
 				}
 			});
-    	}else{
-			showMessage("提示","没有有效的校区可供查询",null);
+    	} else {
+			showMessage("提示","没有有效的校区可供查询", null);
 		}
     });
     
     //首页面重置
-     $("#resetBtn").click(function() 
-    {
+    $("#resetBtn").click(function() {
     	$("#qryFm").form('clear');//清空窗体数据  
     	//校区赋默认值
-    	if($("#schoolId").combobox("getData").length>0){
-    		$("#schoolId").combobox("select",$("#schoolId").combobox("getData")[0].schoolId);
+    	if($("#schoolId").combobox("getData").length > 0) {
+    		$("#schoolId").combobox("select", $("#schoolId").combobox("getData")[0].schoolId);
     	}
     });
     
     //查询可以休学的学员
      $("#qryStuBtn").click(function() {
     	var schoolId = $("#stuSchoolId").combobox("getValue");
-    	if(schoolId != ""){
+    	if(schoolId != "") {
+    		initPageNumber("stuList_data");
 			var obj = JSON.stringify($("#qryStuFm").serializeObject());
 			obj = obj.substring(0, obj.length - 1);
 			var funcNodeId = $("#qryStuBtn").attr("funcNodeId");
@@ -52,7 +52,7 @@ $(document).ready(function(){
 					$('#stuList_data').datagrid('clearSelections');
 				}
 			});
-    	}else{
+    	} else {
 			showMessage("提示","没有有效的校区可供查询",null);
 		}
     });

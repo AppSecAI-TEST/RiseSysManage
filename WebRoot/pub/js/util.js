@@ -3,7 +3,7 @@ var countProgress = null;
 var schoolData = [1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013];
 $(document).ready(function() {
 	var search = $(".search_tab").height();
-	if(search > 0) {
+	if(search > 0 && search != null && search != undefined && search != "") {
 		var tabs = $(".tabs").height();
 		var height = $(document).height();
 		var header = $(".panel-header").height();
@@ -47,16 +47,23 @@ $(document).ready(function() {
 			pageSize : 20                    
 		});
 		$('#manList').datagrid('resize', {//适配高度
-			height:height-search-header-tabs
+			height:height - search - header - tabs
 		});
 		$("#manList").datagrid({
 			pageList : [20, 30, 40],           
 			pageSize : 20                    
 		});
 		$('#hisList').datagrid('resize',{//适配高度
-			height:height-search-header-tabs
+			height:height - search - header - tabs
 		});
 		$("#hisList").datagrid({
+			pageList : [20, 30, 40],           
+			pageSize : 20                    
+		});
+		$('#attList').datagrid('resize', {// 适配高度
+			height: height - search - header - tabs
+		});
+		$("#attList").datagrid({
 			pageList : [20, 30, 40],           
 			pageSize : 20                    
 		});

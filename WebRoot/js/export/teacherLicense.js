@@ -1,7 +1,8 @@
 $(document).ready(function() {
 	$("#qryBtn").click(function() {
 		var schoolId = $("#schoolId").combobox("getValue");
-    	if(schoolId != ""){
+    	if(schoolId != "") {
+    		initPageNumber("list_data");
 			var object = $("#qryFm").serializeObject();
 	    	var obj = JSON.stringify(object);
 	    	obj = obj.substring(0, obj.length - 1);
@@ -16,7 +17,7 @@ $(document).ready(function() {
 	    			mergeCellsByField("list_data", "schoolName");
 	    		}
 	    	});
-    	}else{
+    	} else {
 			showMessage("提示","没有有效的校区可供查询",null);
 		}
     });

@@ -2,7 +2,8 @@ $(document).ready(function(){
 	//首页面查询
     $("#qryCouponGift").click(function() {
     	var schoolId = $("#couponSchoolId").combobox("getValue");
-	    if(schoolId != ""){
+	    if(schoolId != "") {
+	    	initPageNumber("couponGift_data");
 			var obj = JSON.stringify($("#qryCouponFm").serializeObject());
 			obj = obj.substring(0, obj.length - 1);
 			var funcNodeId = $("#qryCouponGift").attr("funcNodeId");
@@ -17,28 +18,27 @@ $(document).ready(function(){
 					$('#couponGift_data').datagrid('clearSelections');
 				}
 			});
-	    }else{
-			showMessage("提示","没有有效的校区可供查询",null);
+	    } else {
+			showMessage("提示","没有有效的校区可供查询", null);
 		}
     });
     
      //首页面重置
-    $("#resetCoupon").click(function() 
-    {
+    $("#resetCoupon").click(function() {
     	$("#qryCouponFm").form('clear');//清空窗体数据  
     	//校区赋默认值
-    	if($("#couponSchoolId").combobox("getData").length>0){
+    	if($("#couponSchoolId").combobox("getData").length > 0) {
     		$("#couponSchoolId").combobox("select",$("#couponSchoolId").combobox("getData")[0].schoolId);
     	}
     });
     
-	 $("input[name=goodsGiftChannel]").click(function(){
+	 $("input[name=goodsGiftChannel]").click(function() {
 		    var goodsGiftChannel = $("input[name='goodsGiftChannel']:checked").val();
-		    if(goodsGiftChannel == "ACTIVITY"){
-		    	$(".activity").each(function(){
+		    if(goodsGiftChannel == "ACTIVITY") {
+		    	$(".activity").each(function() {
 		    		$(this).css("display","table-cell");
 		    	})
-		    	$(".course").each(function(){
+		    	$(".course").each(function() {
 		    		$(this).css("display","none");
 		    	})
 		    	$("#activity").css("display","block");
@@ -166,16 +166,13 @@ $(document).ready(function(){
 		 valueField: 'giftType', 
 		 textField: 'typeName', 
 		 panelHeight: 'auto',
-	 	 onChange:function(n,o)
-		 {
-       		$("#couponGiftId").combobox(
-       		{
+	 	 onChange:function(n, o) {
+       		$("#couponGiftId").combobox({
         		url : "/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+n+"\"}",//返回json数据的url
         		valueField : "giftId",
         		textField :  "giftName",
         		panelHeight : "auto",
-        		onLoadSuccess : function ()
-        		{ //数据加载完毕事件
+        		onLoadSuccess : function () { //数据加载完毕事件
                     var data = $('#couponGiftId').combobox('getData');
                     if (data.length > 0)
                     {
@@ -212,8 +209,7 @@ function addRow()
 	var giftTR=$("#addGift").clone();
 	giftTR.css("display",'table-row');
 	giftTR.attr("val","gift");
-	giftTR.find("td").each(function(n,node)
-	{
+	giftTR.find("td").each(function(n, node) {
 		var giftType=$("#giftType").combobox('getValue');
 		var effDate = $("#effDate").datebox('getValue');
 		var giftCode = $("#giftCode").textbox('getValue');

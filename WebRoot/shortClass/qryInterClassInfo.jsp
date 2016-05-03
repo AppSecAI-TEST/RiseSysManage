@@ -79,6 +79,7 @@
 			});
 			function queryFunc()
 			{
+				initPageNumber("manList");
 				var obj = $("#manFm").serializeObject();
 				var feeStartTime = $("#feeStartTime").datebox("getValue");
 				var feeEndTime = $("#feeEndTime").datebox("getValue");
@@ -134,16 +135,16 @@
       					<input name="staffName" id="staffName" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 					</td>
 					<td align="right" width="8%">
-						缴费日期：
-					</td>
-					<td width="22%">
-						<input name="feeStartTime" id="feeStartTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="feeEndTime" id="feeEndTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
-					</td>
-					<td align="right" width="8%">
 						联系电话：
 					</td>
 					<td>
 						<input name="contactPhone" id="contactPhone" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
+					</td>
+					<td align="right" width="8%">
+						缴费日期：
+					</td>
+					<td width="22%">
+						<input name="feeStartTime" id="feeStartTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="feeEndTime" id="feeEndTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
 					</td>
 				</tr>
 				<tr>
@@ -162,12 +163,12 @@
 					<td align="right">
 						是否选班：
 					</td>
-					<td>
+					<td colspan="2">
 						<select id="selectClass" name="selectClass" style="width:100px;height:25px;" ></select>							
 					</td>
-					<td colspan="2">
+					<td>
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
-						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
 					</td>
 				</tr>
 			</table>

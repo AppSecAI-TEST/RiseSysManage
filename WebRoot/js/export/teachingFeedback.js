@@ -5,13 +5,13 @@ $(document).ready(function() {
 		var meetingIsAttend = json.meetingIsAttend;
 		var openIsAttend = json.openIsAttend;
 		var gradIsAttend = json.gradIsAttend;
-		if(meetingIsAttend == "Y,N"){
+		if(meetingIsAttend == "Y,N") {
 			json.meetingIsAttend = "";
 		}
-		if(openIsAttend == "Y,N"){
+		if(openIsAttend == "Y,N") {
 			json.openIsAttend = "";
 		}
-		if(gradIsAttend == "Y,N"){
+		if(gradIsAttend == "Y,N") {
 			json.gradIsAttend = "";
 		}
 		var time= $("#time").datebox('getValue');
@@ -21,10 +21,10 @@ $(document).ready(function() {
     	obj += ",\"month\":\""+time+"\",\"funcNodeId\":\""+funcNodeId+"\"}";
     	$('#list_data').datagrid({
     		url : "/sys/teaFeebackManage/qryDataListByPage.do",
-    		queryParams:{
+    		queryParams: {
     			param : obj
     		},
-    		onLoadSuccess:function(){
+    		onLoadSuccess:function() {
 				//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
 				$('#list_data').datagrid('clearSelections');
     		}

@@ -21,7 +21,7 @@ $(document).ready(function(){
     
     //查询可以休学的学员
      $("#qryStuBtn").click(function() {
-    	initPageNumber("stuList_data"); 
+    	initPageNumber("stuList_data");
 		var obj = JSON.stringify($("#qryStuFm").serializeObject());
 		obj = obj.substring(0, obj.length - 1);
 		var funcNodeId = $("#qryStuBtn").attr("funcNodeId");

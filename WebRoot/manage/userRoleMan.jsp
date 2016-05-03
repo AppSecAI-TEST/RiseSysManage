@@ -202,11 +202,20 @@
 				$("textarea").each(function(i,node){
 					$(node).attr("maxlength",500);
 				});
+				var height = $(document).height();
+				$('#manList').datagrid('resize', {//适配高度
+					height: height
+				});
+				$("#manList").datagrid({
+					pageList : [20, 30, 40],           
+					pageSize : 20                    
+				});
 			});
 		</script>
 	</head>
 	<body class="easyui-layout userRoleMan">
-		<table class="easyui-datagrid" title="查询结果" id="manList" url="/sys/sysRole/roleList.do" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+		<table class="easyui-datagrid" title="查询结果" id="manList" url="/sys/sysRole/roleList.do" 
+			toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 			<thead>
 				<tr>
 					<th field="sysRoleName" width="20%">角色名称</th>

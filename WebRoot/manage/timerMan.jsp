@@ -8,11 +8,23 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var height = $(document).height();
+				$('#list_data').datagrid('resize', {//适配高度
+					height: height - 5
+				});
+				$("#list_data").datagrid({
+					pageList : [20, 30, 40],           
+					pageSize : 20                    
+				});
+			});
+		</script>
   	</head>
   
   	<body>
   		<div style ="margin-right:5px;">
-  			<table class="easyui-datagrid" title="查询结果" style="height:435px;" id="list_data" 
+  			<table class="easyui-datagrid" title="查询结果" id="list_data" 
 		  		pagination="false" rownumbers="false" fitColumns="true" singleSelect="true"
 		  		url="<%=path %>/pubData/qryDataListByPage.do?param={'funcNodeId':'1087'}">
 		  		<thead>

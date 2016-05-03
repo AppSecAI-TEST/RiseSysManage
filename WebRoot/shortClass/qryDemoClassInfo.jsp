@@ -30,12 +30,10 @@
 					<td align="right" width="8%">
 						<span>上课日期：</span>
 					</td>
-					<td width="8%">
+					<td width="22%">
 						<input name="schoolStartTime" id="schoolStartTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
-					</td>
-					<td width="2%"><span>至</span></td>
-					<td width="8%">
-						<input name="schoolendTime" id="schoolendTime" type="text" style="width:120px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
+						至
+						<input name="schoolendTime" id="schoolendTime" type="text" style="width:100px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
 					</td>
 					<td></td>
 				</tr>
@@ -49,12 +47,12 @@
 					<td align="right">
 						<span>DEMO Ta：</span>
 					</td>
-					<td align="left">
+					<td align="left" colspan="2">
 						<select id="demoTa" name="demoTa" class="easyui-combobox" style="width:100px;height:25px;" ></select>				
 					</td>
-					<td align="right" colspan="4">
+					<td>
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width:100px;" onclick="queryFunc()"><span>查询</span></a>
-						&nbsp;<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px;" id="resetBtn"><span>重置</span></a>
+						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px;" id="resetBtn"><span>重置</span></a>
 					</td>
 					<td></td>
 				</tr>
@@ -148,6 +146,7 @@
 			});
 			function queryFunc()
 			{
+				initPageNumber("manList");
 				var schoolId = $("#schoolId").combobox("getValue");
 	   			if(schoolId != ""){
 					var obj = $("#manFm").serializeObject();

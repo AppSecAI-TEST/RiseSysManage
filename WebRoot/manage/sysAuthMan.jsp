@@ -8,11 +8,15 @@
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript">
-			$(document).ready(function(){
+			$(document).ready(function() {
 				$.post("/sys/sysRole/qryTotalRoleList.do",function(data){
 					$("#dgRoleList").datagrid("loadData",data);
 					$("#dgPrivRoleList").datagrid("loadData",data);
 				},"json");
+				$("#funcNodeData").datagrid({
+					pageList : [20, 30, 40],           
+					pageSize : 20                    
+				});
 			});
 			function getTreeNode()
 			{

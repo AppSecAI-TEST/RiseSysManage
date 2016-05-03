@@ -3,14 +3,15 @@ $(document).ready(function(){
 	//首页面查询
     $("#qryBtn").click(function() {
     	var schoolId = $("#schoolId").combobox("getValue");
-	    if(schoolId != ""){
+	    if(schoolId != "") {
+	    	initPageNumber("list_data");
 	    	var json = $("#qryFm").serializeObject();
 	    	json.byName = $("#byName").combobox('getText');
 	    	var pay = json.pay;
-	    	if(pay == "Y"){
+	    	if(pay == "Y") {
 	    		json.reparation = "1";
 	    	}
-	    	if(pay == "N"){
+	    	if(pay == "N") {
 	    		json.noreparation = "1";
 	    	}
 			var obj = JSON.stringify(json);
@@ -27,8 +28,8 @@ $(document).ready(function(){
 					$('#list_data').datagrid('clearSelections');
 				}
 			});
-	    }else{
-			showMessage("提示","没有有效的校区可供查询",null);
+	    } else {
+			showMessage("提示", "没有有效的校区可供查询", null);
 		}
     });
 	

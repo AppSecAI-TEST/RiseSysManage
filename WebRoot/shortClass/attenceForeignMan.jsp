@@ -71,6 +71,7 @@
 			});
 			function queryFunc()
 			{
+				initPageNumber("manList");
 				var obj = $("#manFm").serializeObject();
 				var openStartManTime = $("#openStartManTime").datebox("getValue");
 				var openEndManTime = $("#openEndManTime").datebox("getValue");
@@ -193,9 +194,10 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="8" align="right" style="padding-right:85px">
+					<td colspan="7">&nbsp;</td>
+					<td>
 						<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
-						<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
 					</td>
 				</tr>
 			</table>

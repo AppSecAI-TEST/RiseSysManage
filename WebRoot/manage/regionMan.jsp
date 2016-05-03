@@ -11,6 +11,7 @@
 		<script type="text/javascript">
 			function queryFunc()
 			{
+				initPageNumber("manList");
 				var obj = $("#manFm").serializeObject();
 				obj["queryCode"] = "qryRegionInfo";
 				obj["funcNodeId"] = "4630";

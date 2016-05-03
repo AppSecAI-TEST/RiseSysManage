@@ -2,7 +2,7 @@ $(document).ready(function(){
 	//首页面查询
     $("#qryBtn").click(function() {
     	var schoolId = $("#schoolId").combobox("getValue");
-	    if(schoolId != ""){
+	    if(schoolId != "") {
 	    	initPageNumber("list_data");
 	    	var json = $("#qryFm").serializeObject();
 			var feedback = json.feedback;

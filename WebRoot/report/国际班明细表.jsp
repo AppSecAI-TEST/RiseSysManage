@@ -22,58 +22,63 @@
   			<input type="hidden" id="resourceId" value="852">
 			<table class="search_tab">
 				<tr>
-					<td align="right" width="70px">
+					<td align="right" style="min-width: 70px">
 						校区：
 					</td>
-					<td  width="100px">
+					<td style="min-width: 100px">
 	  					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
-					      		
+							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 				        </select>					
 				    </td>
-					<td align="right" width="70px">	
+					<td align="right" style="min-width: 70px">	
 						学员姓名：
 					</td>
-					<td width="100px">
+					<td style="min-width: 100px">
       					<input name="staffName" id="staffName" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 					</td>
-					<td align="right" width="70px">
+					<td align="right" style="min-width: 70px">	
+						联系电话：
+					</td>
+					<td style="min-width: 100px">
+      					<input name="contactPhone" id="contactPhone" type="text" class="easyui-textbox" style="width:100px; height: 25px;"/>
+					</td>
+					<td align="right" style="min-width: 70px">
 						缴费日期：
 					</td>
-					<td width="225px">
-						<input name="feeStartTime" id="feeStartTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="feeEndTime" id="feeEndTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
-					</td>
-					<td align="left">
-						联系电话：<input name="contactPhone" id="contactPhone" type="text" class="easyui-textbox" style="width:150px; height: 25px;"/>
+					<td style="min-width: 220px">
+						<input name="feeStartTime" id="feeStartTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 
+						至
+						<input name="feeEndTime" id="feeEndTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
 					</td>
 				</tr>
 				<tr>
-					<td align="right">
+					<td align="right" style="min-width: 70px">
 						是否退费：
 					</td>
-					<td>
-						<select id="feeReturn" name="feeReturn" style="width:100px" ></select>
+					<td style="min-width: 100px">
+						<select id="feeReturn" name="feeReturn" style="width:100px;height:25px;"></select>
 					</td>
-					<td align="right">
+					<td align="right" style="min-width: 70px">
 						国际班类型：
 					</td>
-					<td>
-						<select id="interClassType" name="interClassType" style="width:100px" ></select>							
+					<td style="min-width: 100px">
+						<select id="interClassType" name="interClassType" style="width:100px;height:25px;"></select>							
 					</td>
-					<td align="right">
+					<td align="right" style="min-width: 70px">
 						是否选班：
 					</td>
-					<td>
-						<select id="selectClass" name="selectClass" style="width:100px" ></select>			
+					<td colspan="2" style="min-width: 100px">
+						<select id="selectClass" name="selectClass" style="width:100px;height:25px;"></select>			
 					</td>
-					<td align="left">
+					<td style="min-width: 220px">
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
-						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;">重置</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;">重置</a>
 					</td>
 				</tr>
 			</table>
 		</form>
-			<table class="easyui-datagrid" title="学员列表" style="height:390px" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+			<table class="easyui-datagrid" title="学员列表" style="height:390px" id="manList" toolbar="#toolManbar" 
+				pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
 						<th width="7%" field="schoolName">校区</th>

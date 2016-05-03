@@ -105,6 +105,7 @@
 			});
 			function queryFunc()
 			{
+				initPageNumber("manList");
 				var obj = $("#manFm").serializeObject();
 				var openStartManTime = $("#openStartManTime").datebox("getValue");
 				var openEndManTime = $("#openEndManTime").datebox("getValue");
@@ -207,6 +208,7 @@
 			}
 			function queryVerFunc()
 			{
+				initPageNumber("hisList");
 				var obj = $("#hisFm").serializeObject();
 				var openApplyStartManTime = $("#openApplyStartManTime").datebox("getValue");
 				var openApplyEndManTime = $("#openApplyEndManTime").datebox("getValue");

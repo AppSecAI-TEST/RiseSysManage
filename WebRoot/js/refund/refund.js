@@ -13,13 +13,16 @@ $(document).ready(function() {
 //	});
 	
 	$("#qryBtn").click(function() {
+		initPageNumber("apply_list_data");
 		var s = "";
-		$('input[name="refundState"]:checked').each(function() {
-		    s += $(this).val() + ",";
-		});
-		s = s.substring(0, s.length - 1);
 		var funcNodeId = $("#qryBtn").attr("funcNodeId");
 		var object = $("#qryRefundCourseFm").serializeObject();
+		if($('input[name="refundState"]:checked').length > 0) {
+			$('input[name="refundState"]:checked').each(function() {
+				s += $(this).val() + ",";
+			});
+			s = s.substring(0, s.length - 1);
+		}
 		object.refundState = s;
 		object.funcNodeId = funcNodeId;
     	var obj = JSON.stringify(object);
@@ -45,13 +48,16 @@ $(document).ready(function() {
 	});
 	
 	$("#qryApproveBtn").click(function() {
+		initPageNumber("approve_list_data");
 		var s = "";
-		$('input[name="approveRefundState"]:checked').each(function() {
-		    s += $(this).val() + ",";
-		});
-		s = s.substring(0, s.length - 1);
 		var object = $("#qryRefundApproveFm").serializeObject();
 		var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");
+		if($('input[name="approveRefundState"]:checked').length > 0) {
+			$('input[name="approveRefundState"]:checked').each(function() {
+				s += $(this).val() + ",";
+			});
+			s = s.substring(0, s.length - 1);
+		}
 		object.approveRefundState = s;
 		object.funcNodeId = funcNodeId;
     	var obj = JSON.stringify(object);

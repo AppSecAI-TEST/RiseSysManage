@@ -30,6 +30,7 @@ $(document).ready(function() {
 			flag = true;
 		}
 		if(flag) {
+			initPageNumber("list_data");
 			var object = $("#qryFm").serializeObject();
 			var schoolId = $('#schoolId').combobox('getValue');
 			if(schoolId != null && schoolId != "" && schoolId != undefined) {

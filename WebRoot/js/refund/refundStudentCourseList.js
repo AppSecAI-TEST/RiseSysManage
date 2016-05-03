@@ -1,14 +1,16 @@
 $(document).ready(function() {
 	$("#qryBtn").click(function() {
 		var s = "";
-		$('input[name="courseState"]:checked').each(function() {
-		    s += $(this).val() + ",";
-		});
-		s = s.substring(0, s.length - 1);
-		var funcNodeId = $("#qryBtn").attr("funcNodeId");
 		var object = $("#qryFm").serializeObject();
-		object.courseState = s;
+		var funcNodeId = $("#qryBtn").attr("funcNodeId");
+		if($('input[name="courseState"]:checked').length > 0) {
+			$('input[name="courseState"]:checked').each(function() {
+				s += $(this).val() + ",";
+			});
+			s = s.substring(0, s.length - 1);
+		}
 		object.funcNodeId = funcNodeId;
+		object.courseState = s;
     	var obj = JSON.stringify(object);
     	$('#list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",

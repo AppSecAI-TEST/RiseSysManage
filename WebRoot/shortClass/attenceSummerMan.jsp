@@ -87,6 +87,7 @@
 			});
 			function queryManFunc()
 			{
+				initPageNumber("manList");
 				var obj = $("#manFm").serializeObject();
 				var classStartManTime = $("#classStartManTime").datebox("getValue");
 				var classEndManTime = $("#classEndManTime").datebox("getValue");
@@ -161,6 +162,7 @@
 			}
 			function queryHisFunc()
 			{
+				initPageNumber("hisList");
 				var obj = $("#hisFm").serializeObject();
 				var openApplyStartManTime = $("#openApplyStartManTime").datebox("getValue");
 				var openApplyEndManTime = $("#openApplyEndManTime").datebox("getValue");
@@ -227,31 +229,33 @@
 				<form id="manFm">
 					<table class="search_tab">
 						<tr>
-							<td align="right" width="12%">
+							<td align="right" width="8%">
 								所属校区：
 							</td>
-							<td width="22%">
+							<td>
 								<select id="schoolManId" name="schoolManId" style="width:100px;height:25px;" ></select>
 							</td>
-							<td align="right" width="12%">	
+							<td align="right" width="8%">	
 								赠课类型：
 							</td>
-							<td width="22%">
+							<td>
 								<select id="classType" name="classType" style="width:100px;height:25px;" ></select>
 							</td>
-							<td align="right" width="12%">
-								班级状态：
+							<td align="right" width="10%">
+								放班申请日期：
 							</td>
-							<td>
-								<select id="classManState" name="classManState" style="width:100px;height:25px;" ></select>
+							<td width="22%">
+								<input name="classStartManTime" id="classStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 
+								至 
+								<input name="classEndManTime" id="classEndManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 							</td>
 						</tr>
 						<tr>
 							<td align="right">
-								放班申请日期：
+								班级状态：
 							</td>
-							<td>
-								<input name="classStartManTime" id="classStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="classEndManTime" id="classEndManTime" type="text" style="width:100px" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
+							<td colspan="3">
+								<select id="classManState" name="classManState" style="width:100px;height:25px;" ></select>
 							</td>
 							<td align="right">
 								放班审批日期：
@@ -259,7 +263,7 @@
 							<td>
 								<input name="overClassStartManTime" id="overClassStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="overClassEndManTime" id="overClassEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 							</td>
-							<td colspan="2" align="center">
+							<td align="center">
 								<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryManFunc()">查询</a>
 								<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetManFunc()">重置</a>
 							</td>

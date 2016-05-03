@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	//首页面查询
     $("#qryBtn").click(function() {
+    	initPageNumber("list_data");
     	var object = $("#qryFm").serializeObject();
     	var funcNodeId = "";
     	var expType = $("#expType").combobox("getValue");

@@ -93,7 +93,8 @@
 	   			//定位教师页面查询
 			    $("#qryTeaBtn").click(function() {
 				    var schoolId = $("#schoolId").combobox("getValue");
-		   			if(schoolId != ""){
+		   			if(schoolId != "") {
+		   				initPageNumber("teacher_list");
 				    	var json = $("#qryTeaFm").serializeObject();
 				    	json.byName = $("#byName").combobox('getText');
 						var obj = JSON.stringify(json);
@@ -110,8 +111,8 @@
 								$('#teacher_list').datagrid('clearSelections');
 							}
 						});
-		   			}else{
-						showMessage("提示","没有有效的校区可供查询",null);
+		   			} else {
+						showMessage("提示","没有有效的校区可供查询", null);
 					}
 			    });
 			    

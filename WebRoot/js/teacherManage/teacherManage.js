@@ -4,6 +4,7 @@ $(document).ready(function(){
     $("#qryBtn").click(function() {
 		var schoolId = $("#schoolId").combobox("getValue");
 	    if(schoolId != ""){
+	    	initPageNumber("list_data");
 	    	var json = $("#qryFm").serializeObject();
 	    	json.byName = $("#byName").combobox('getText');
 			var obj = JSON.stringify(json);
