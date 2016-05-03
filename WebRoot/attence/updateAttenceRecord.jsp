@@ -272,105 +272,112 @@
 			
 			function attendUpdate()
 			{
-				var classTime = $("#classTime").combobox("getValue");
-				var classLessonHour = $("#classLessonHour").textbox("getValue");
-				var classRoomId = $("#classRoomId").combobox("getValue");
-				var obj = {
-					classAttendId:"${classAttendT.classAttendId}",
-					classInstId:"${classAttendT.classInstId}",
-					classSchoolId:"${classAttendT.schoolId}",
-					hourRange:classTime,
-					hours:classLessonHour,
-					roomId:classRoomId,
-					classType:"${schooltimeInstT.classInstT.classType}",
-					handlerId:"${sessionScope.StaffT.staffId}",
-					teacherList:null,
-					studentList:null
-				};
-				var teacherArr = [];
-				var teacherTime = 0;
-				var teacherTaTime = 0;
-				$("#teacherTab tr:gt(1) td:nth-child(1)").each(function(i,node){
-					var teacherObj = {
-						teacherId:$(node).attr("teacherId"),
-						teacherName:$(node).attr("teacherName"),
-						teacherType:$(node).attr("teacherType"),
-						attendDate:'<fmt:formatDate value="${classAttendT.schooltime}" pattern="yyyy-MM-dd" />',
-						hours:$(node).attr("hours")
+				if(gTimeType == "mod")
+				{
+					var classTime = $("#classTime").combobox("getValue");
+					var classLessonHour = $("#classLessonHour").textbox("getValue");
+					var classRoomId = $("#classRoomId").combobox("getValue");
+					var obj = {
+						classAttendId:"${classAttendT.classAttendId}",
+						classInstId:"${classAttendT.classInstId}",
+						classSchoolId:"${classAttendT.schoolId}",
+						hourRange:classTime,
+						hours:classLessonHour,
+						roomId:classRoomId,
+						classType:"${schooltimeInstT.classInstT.classType}",
+						handlerId:"${sessionScope.StaffT.staffId}",
+						teacherList:null,
+						studentList:null
 					};
-					teacherArr.push(teacherObj);
-					if($(node).attr("teacherType") == 'T')
+					var teacherArr = [];
+					var teacherTime = 0;
+					var teacherTaTime = 0;
+					$("#teacherTab tr:gt(1) td:nth-child(1)").each(function(i,node){
+						var teacherObj = {
+							teacherId:$(node).attr("teacherId"),
+							teacherName:$(node).attr("teacherName"),
+							teacherType:$(node).attr("teacherType"),
+							attendDate:'<fmt:formatDate value="${classAttendT.schooltime}" pattern="yyyy-MM-dd" />',
+							hours:$(node).attr("hours")
+						};
+						teacherArr.push(teacherObj);
+						if($(node).attr("teacherType") == 'T')
+						{
+							teacherTime += parseInt($(node).attr("hours"));
+						}
+						if($(node).attr("teacherType") == 'TA')
+						{
+							teacherTaTime += parseInt($(node).attr("hours"));
+						}
+					});
+					obj.teacherList = teacherArr;
+					var studentArr = [];
+					$("#studentTab tr:gt(0)").each(function(i,node){
+						var firstTr = $(node).find("td:nth-child(1)");
+						var attendTypeObj = $(node).find("input[name='attendType"+firstTr.attr("studentId")+"']:checked").val();
+						var dressObj = $(node).find("input[name='dress"+firstTr.attr("studentId")+"']:checked").val();
+						var studentObj = {
+							studentId:firstTr.attr("studentId"),
+							studentName:firstTr.attr("studentName"),
+							schoolId:firstTr.attr("schoolId"),
+							attendDate:'<fmt:formatDate value="${classAttendT.schooltime}" pattern="yyyy-MM-dd" />',
+							dress:dressObj,
+							attendType:attendTypeObj
+						};
+						studentArr.push(studentObj);
+					});
+					obj.studentList = studentArr;
+					if(classTime == "")
 					{
-						teacherTime += parseInt($(node).attr("hours"));
+						$.messager.alert("提示", "上课时段不能为空,请添加老师后重新尝试","warning");
 					}
-					if($(node).attr("teacherType") == 'TA')
+					else if(classRoomId == "")
 					{
-						teacherTaTime += parseInt($(node).attr("hours"));
+						$.messager.alert("提示", "教室不能为空,请添加老师后重新尝试","warning");
 					}
-				});
-				obj.teacherList = teacherArr;
-				var studentArr = [];
-				$("#studentTab tr:gt(0)").each(function(i,node){
-					var firstTr = $(node).find("td:nth-child(1)");
-					var attendTypeObj = $(node).find("input[name='attendType"+firstTr.attr("studentId")+"']:checked").val();
-					var dressObj = $(node).find("input[name='dress"+firstTr.attr("studentId")+"']:checked").val();
-					var studentObj = {
-						studentId:firstTr.attr("studentId"),
-						studentName:firstTr.attr("studentName"),
-						schoolId:firstTr.attr("schoolId"),
-						attendDate:'<fmt:formatDate value="${classAttendT.schooltime}" pattern="yyyy-MM-dd" />',
-						dress:dressObj,
-						attendType:attendTypeObj
-					};
-					studentArr.push(studentObj);
-				});
-				obj.studentList = studentArr;
-				if(classTime == "")
-				{
-					$.messager.alert("提示", "上课时段不能为空,请添加老师后重新尝试","warning");
-				}
-				else if(classRoomId == "")
-				{
-					$.messager.alert("提示", "教室不能为空,请添加老师后重新尝试","warning");
-				}
-				else if(classLessonHour == "")
-				{
-					$.messager.alert("提示", "课时不能为空,请添加老师后重新尝试","warning");
-				}
-				else if(isNaN(classLessonHour))
-				{
-					$.messager.alert("提示", "请检查课时是否合法后重新尝试","warning");
-				}
-				else if(teacherTime > classLessonHour)
-				{
-					$.messager.alert("提示", "老师课时量已超过课程总课时量,请核实后重新尝试","warning");
-				}
-				else if(teacherTaTime > teacherTime)
-				{
-					$.messager.alert('提示',"添加TA老师课时量已超过T老师总课时量,不能再添加老师","warning");
+					else if(classLessonHour == "")
+					{
+						$.messager.alert("提示", "课时不能为空,请添加老师后重新尝试","warning");
+					}
+					else if(isNaN(classLessonHour))
+					{
+						$.messager.alert("提示", "请检查课时是否合法后重新尝试","warning");
+					}
+					else if(teacherTime > classLessonHour)
+					{
+						$.messager.alert("提示", "老师课时量已超过课程总课时量,请核实后重新尝试","warning");
+					}
+					else if(teacherTaTime > teacherTime)
+					{
+						$.messager.alert('提示',"添加TA老师课时量已超过T老师总课时量,不能再添加老师","warning");
+					}
+					else
+					{
+						var json = JSON.stringify(obj);
+						ajaxLoading("正在处理，请稍待。。。");
+						$.post("/sys/attend/updateAttend.do",{json:json},function(data){
+							ajaxLoadEnd();
+							if(data == "success")
+							{
+								$.messager.alert("提示", "修改考勤成功","info",function(){
+									backFunc();
+								});
+							}
+							else
+							{
+								try{
+									var dataObj = eval("("+data+")");
+									$.messager.alert("提示", dataObj.msg,"error");
+								}catch(e){
+									$.messager.alert("提示", data,"error");
+								}
+							}
+						});
+					}
 				}
 				else
 				{
-					var json = JSON.stringify(obj);
-					ajaxLoading("正在处理，请稍待。。。");
-					$.post("/sys/attend/updateAttend.do",{json:json},function(data){
-						ajaxLoadEnd();
-						if(data == "success")
-						{
-							$.messager.alert("提示", "修改考勤成功","info",function(){
-								backFunc();
-							});
-						}
-						else
-						{
-							try{
-								var dataObj = eval("("+data+")");
-								$.messager.alert("提示", dataObj.msg,"error");
-							}catch(e){
-								$.messager.alert("提示", data,"error");
-							}
-						}
-					});
+					$.messager.alert('提示',"新增考勤下不能对当前考勤进行修改","warning");
 				}
 			}
 			function classTimeTypeFunc(obj)
