@@ -36,6 +36,7 @@
 			}
 		</style>
 		<script type="text/javascript">
+			var gTimeType = "change";
 			$(document).ready(function(){
 				ajaxLoadEnd();
 				var classTimeData = '${hourRangeList}';
@@ -58,54 +59,57 @@
 					},
 					onSelect:function(data){
 						$("#classLessonHour").textbox("setValue",data.param4);
-						var classAttendIds = "${classAttendIdArr}";
-						var schooltimeInstIds = "${schooltimeInstIdArr}";
-						var classAttendIdArr = classAttendIds.split("~");
-						var attendArr = [];
-						var schooltimeArr = [];
-						if(schooltimeInstIds != "")
+						if(gTimeType == "change")
 						{
-							var schooltimeInstIdArr = schooltimeInstIds.split("~");
-							for(var i = 0,n = schooltimeInstIdArr.length;i < n;i++)
+							var classAttendIds = "${classAttendIdArr}";
+							var schooltimeInstIds = "${schooltimeInstIdArr}";
+							var classAttendIdArr = classAttendIds.split("~");
+							var attendArr = [];
+							var schooltimeArr = [];
+							if(schooltimeInstIds != "")
 							{
-								var objArr = schooltimeInstIdArr[i].split(";");
-								schooltimeArr.push(objArr[0]);
+								var schooltimeInstIdArr = schooltimeInstIds.split("~");
+								for(var i = 0,n = schooltimeInstIdArr.length;i < n;i++)
+								{
+									var objArr = schooltimeInstIdArr[i].split(";");
+									schooltimeArr.push(objArr[0]);
+								}
 							}
-						}
-						for(var i = 0,n = classAttendIdArr.length;i < n;i++)
-						{
-							var objArr = classAttendIdArr[i].split(";");
-							attendArr.push(objArr[0]);
-						}
-						if(classAttendIds != "")
-						{
 							for(var i = 0,n = classAttendIdArr.length;i < n;i++)
 							{
 								var objArr = classAttendIdArr[i].split(";");
-								if(objArr.length > 1 && objArr[1]==data.paramValue)
-								{
-									ajaxLoading("正在处理，请稍待。。。");
-									window.location.href = "/sys/attend/getUpdateAttenceRecord.do?funcNodeId=${funcNodeId}&classAttendId="+objArr[0]+"&classAttendIds="+attendArr.join("~")+"&schooltimeInstIds="+schooltimeArr.join("~")+"&selDateStr=<fmt:formatDate value='${classAttendT.attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${classAttendT.attendDate}' pattern='dd' />";
-									return ;
-								}
+								attendArr.push(objArr[0]);
 							}
-						}
-						if(schooltimeInstIds != "")
-						{
-							var schooltimeInstIdArr = schooltimeInstIds.split("~");
-							for(var i = 0,n = schooltimeInstIdArr.length;i < n;i++)
+							if(classAttendIds != "")
 							{
-								var objArr = schooltimeInstIdArr[i].split(";");
-								if(objArr.length > 1 && objArr[1]==data.paramValue)
+								for(var i = 0,n = classAttendIdArr.length;i < n;i++)
 								{
-									ajaxLoading("正在处理，请稍待。。。");
-									window.location.href = "/sys/attend/getAttenceRecord.do?funcNodeId=${funcNodeId}&schooltimeInstId="+objArr[0]+"&classAttendIds="+classAttendIds+"&schooltimeInstIds="+schooltimeInstIds+"&selDateStr=<fmt:formatDate value='${classAttendT.attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${classAttendT.attendDate}' pattern='dd' />";
-									return ;
+									var objArr = classAttendIdArr[i].split(";");
+									if(objArr.length > 1 && objArr[1]==data.paramValue)
+									{
+										ajaxLoading("正在处理，请稍待。。。");
+										window.location.href = "/sys/attend/getUpdateAttenceRecord.do?funcNodeId=${funcNodeId}&classAttendId="+objArr[0]+"&classAttendIds="+attendArr.join("~")+"&schooltimeInstIds="+schooltimeArr.join("~")+"&selDateStr=<fmt:formatDate value='${classAttendT.attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${classAttendT.attendDate}' pattern='dd' />";
+										return ;
+									}
 								}
 							}
+							if(schooltimeInstIds != "")
+							{
+								var schooltimeInstIdArr = schooltimeInstIds.split("~");
+								for(var i = 0,n = schooltimeInstIdArr.length;i < n;i++)
+								{
+									var objArr = schooltimeInstIdArr[i].split(";");
+									if(objArr.length > 1 && objArr[1]==data.paramValue)
+									{
+										ajaxLoading("正在处理，请稍待。。。");
+										window.location.href = "/sys/attend/getAttenceRecord.do?funcNodeId=${funcNodeId}&schooltimeInstId="+objArr[0]+"&classAttendIds="+classAttendIds+"&schooltimeInstIds="+schooltimeInstIds+"&selDateStr=<fmt:formatDate value='${classAttendT.attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${classAttendT.attendDate}' pattern='dd' />";
+										return ;
+									}
+								}
+							}
+							ajaxLoading("正在处理，请稍待。。。");
+							window.location.href = "/sys/attend/getAttenceRecordInst.do?funcNodeId=${funcNodeId}&classInstId=${classAttendT.classInstId}&classAttendIds="+classAttendIds+"&schooltimeInstIds="+schooltimeInstIds+"&hourRange="+data.paramValue+"&selDateStr=<fmt:formatDate value='${classAttendT.attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${classAttendT.attendDate}' pattern='dd' />";
 						}
-						ajaxLoading("正在处理，请稍待。。。");
-						window.location.href = "/sys/attend/getAttenceRecordInst.do?funcNodeId=${funcNodeId}&classInstId=${classAttendT.classInstId}&classAttendIds="+classAttendIds+"&schooltimeInstIds="+schooltimeInstIds+"&hourRange="+data.paramValue+"&selDateStr=<fmt:formatDate value='${classAttendT.attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${classAttendT.attendDate}' pattern='dd' />";
 					}
 				});
 				$("#classRoomId").combobox({
@@ -369,6 +373,10 @@
 					});
 				}
 			}
+			function classTimeTypeFunc(obj)
+			{
+				gTimeType = obj.value;
+			}
 			function backFunc()
 			{
 				ajaxLoading("返回中...");
@@ -391,6 +399,13 @@
 			<tr>
 				<td align="right" width="10%">上课时间：</td>
 				<td>周${classAttendT.attendDateWeek} <fmt:formatDate value="${classAttendT.attendDate}" pattern="yyyy-MM-dd" /> <select id="classTime" name="classTime" style="width:200px" ></select></td>
+			</tr>
+			<tr>
+				<td align="right" width="10%">时段切换类型：</td>
+				<td>
+					<input type="radio" name="classTimeType" id="classTimeTypeChange" value="change" checked="checked" onclick="classTimeTypeFunc(this)" /><label for="classTimeTypeChange">选择其他时段</label>&nbsp;&nbsp;
+					<input type="radio" name="classTimeType" id="classTimeTypeModified" value="mod" onclick="classTimeTypeFunc(this)" /><label for="classTimeTypeModified">修改当前时段</label>
+				</td>
 			</tr>
 			<tr>
 				<td align="right">教室：</td>
