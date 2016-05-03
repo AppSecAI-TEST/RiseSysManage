@@ -37,13 +37,31 @@
 		</style>
 		<script type="text/javascript">
 			var gTimeType = "mod";
+			var attendTimeDate = [];
+			var classTimeData = '${hourRangeList}';
+			var classRoomIdData = '${roomList}';
+			var attRecordSchoolIdData = '${schoolList}';
+			var attRecordClassType = '${teacherTypeList}';
 			$(document).ready(function(){
 				ajaxLoadEnd();
-				var classTimeData = '${hourRangeList}';
-				var classRoomIdData = '${roomList}';
-				var attRecordSchoolIdData = '${schoolList}';
-				var attRecordClassType = '${teacherTypeList}';
 				classTimeData = eval("("+classTimeData+")");
+				if(classTimeData != null)
+				{
+					var gClassAttendIds = "${classAttendIdArr}";
+					var gClassAttendIdsArr = gClassAttendIds.split("~");
+					for(var i = classTimeData.length-1;i >= 0;i--)
+					{
+						for(var j = gClassAttendIdsArr.length-1;j >= 0;j--)
+						{
+							var objArr = gClassAttendIdsArr[j].split(";");
+							if(classTimeData[i].paramValue == objArr[1])
+							{
+								attendTimeDate.push(classTimeData[i]);
+								classTimeData.splice(i,1);
+							}
+						}
+					}
+				}
 				classRoomIdData = eval("("+classRoomIdData+")");
 				attRecordSchoolIdData = eval("("+attRecordSchoolIdData+")");
 				attRecordClassType = eval("("+attRecordClassType+")");
@@ -53,7 +71,7 @@
 					textField: 'paramDesc', 
 					panelHeight: 'auto',
 					editable:false,
-					data:classTimeData,
+					data:attendTimeDate,
 					onLoadSuccess:function(data){
 						$("#classTime").combobox("setValue","${classAttendT.hourRange}");
 					},
@@ -109,6 +127,20 @@
 							}
 							ajaxLoading("正在处理，请稍待。。。");
 							window.location.href = "/sys/attend/getAttenceRecordInst.do?funcNodeId=${funcNodeId}&classInstId=${classAttendT.classInstId}&classAttendIds="+classAttendIds+"&schooltimeInstIds="+schooltimeInstIds+"&hourRange="+data.paramValue+"&selDateStr=<fmt:formatDate value='${classAttendT.attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${classAttendT.attendDate}' pattern='dd' />";
+						}
+					}
+				});
+				$("#modifyClassTime").combobox({
+					formatter:formatParaConfig, 
+					valueField: 'paramValue', 
+					textField: 'paramDesc', 
+					panelHeight: 'auto',
+					editable:false,
+					data:classTimeData,
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+						{
+							$("#modifyClassTime").combobox("setValue",data[0].paramValue);
 						}
 					}
 				});
@@ -274,7 +306,7 @@
 			{
 				if(gTimeType == "mod")
 				{
-					var classTime = $("#classTime").combobox("getValue");
+					var classTime = $("#modifyClassTime").combobox("getValue");
 					var classLessonHour = $("#classLessonHour").textbox("getValue");
 					var classRoomId = $("#classRoomId").combobox("getValue");
 					var obj = {
@@ -329,7 +361,7 @@
 					obj.studentList = studentArr;
 					if(classTime == "")
 					{
-						$.messager.alert("提示", "上课时段不能为空,请添加老师后重新尝试","warning");
+						$.messager.alert("提示", "修改时段不能为空,请添加老师后重新尝试","warning");
 					}
 					else if(classRoomId == "")
 					{
@@ -383,6 +415,32 @@
 			function classTimeTypeFunc(obj)
 			{
 				gTimeType = obj.value;
+				if(gTimeType == "mod")
+				{
+					$("#modifyTimeArea").css("display","inline");
+					$("#classTime").combobox({
+						data:attendTimeDate,
+						onLoadSuccess:function(data){
+							if(data.length > 0)
+							{
+								$("#classTime").combobox("setValue",data[0].paramValue);
+							}
+						}
+					});
+				}
+				else
+				{
+					$("#modifyTimeArea").css("display","none");
+					$("#classTime").combobox({
+						data:classTimeData,
+						onLoadSuccess:function(data){
+							if(data.length > 0)
+							{
+								$("#classTime").combobox("setValue",data[0].paramValue);
+							}
+						}
+					});
+				}
 			}
 			function backFunc()
 			{
@@ -404,8 +462,12 @@
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
-				<td align="right" width="10%">上课时间：</td>
-				<td>周${classAttendT.attendDateWeek} <fmt:formatDate value="${classAttendT.attendDate}" pattern="yyyy-MM-dd" /> <select id="classTime" name="classTime" style="width:200px" ></select>&nbsp;&nbsp;<input type="radio" name="classTimeType" id="classTimeTypeModified" value="mod" checked="checked" onclick="classTimeTypeFunc(this)" /><label for="classTimeTypeModified">修改考勤</label>&nbsp;&nbsp;<input type="radio" name="classTimeType" id="classTimeTypeChange" value="change" onclick="classTimeTypeFunc(this)" /><label for="classTimeTypeChange">新增考勤</label></td>
+				<td align="right" width="10%">操作类型：</td>
+				<td><input type="radio" name="classTimeType" id="classTimeTypeModified" value="mod" checked="checked" onclick="classTimeTypeFunc(this)" /><label for="classTimeTypeModified">修改考勤</label>&nbsp;&nbsp;<input type="radio" name="classTimeType" id="classTimeTypeChange" value="change" onclick="classTimeTypeFunc(this)" /><label for="classTimeTypeChange">新增考勤</label></td>
+			</tr>
+			<tr>
+				<td align="right">上课时间：</td>
+				<td>周${classAttendT.attendDateWeek} <fmt:formatDate value="${classAttendT.attendDate}" pattern="yyyy-MM-dd" /> <select id="classTime" name="classTime" style="width:200px" ></select><span id="modifyTimeArea">&nbsp;&nbsp;修改为&nbsp;&nbsp;<select id="modifyClassTime" name="modifyClassTime" style="width:200px" ></select></span></td>
 			</tr>
 			<tr>
 				<td align="right">教室：</td>
