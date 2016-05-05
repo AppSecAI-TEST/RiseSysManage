@@ -501,6 +501,11 @@ function formatParaConfig(row) {
 	return s;
 }
 
+function formatTimer(row) {
+	var s = "<span>" + row.timeName + "</span>";
+	return s;
+}
+
 function formatEfficiency(value, row, index) {
 	if(value >= 0) {
 		return value;

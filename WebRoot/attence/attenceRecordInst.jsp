@@ -15,7 +15,7 @@
 		<script type="text/javascript">
 			$(document).ready(function(){
 				ajaxLoadEnd();
-				var classTimeData = '${hourRangeList}';
+				var classTimeData = '${timeTList}';
 				var classRoomIdData = '${roomList}';
 				var attRecordSchoolIdData = '${schoolList}';
 				var attRecordClassType = '${teacherTypeList}';
@@ -24,9 +24,9 @@
 				attRecordSchoolIdData = eval("("+attRecordSchoolIdData+")");
 				attRecordClassType = eval("("+attRecordClassType+")");
 				$("#classTime").combobox({
-					formatter:formatParaConfig, 
-					valueField: 'paramValue', 
-					textField: 'paramDesc', 
+					formatter:formatTimer, 
+					valueField: 'hourRange', 
+					textField: 'timeName', 
 					panelHeight: 'auto',
 					editable:false,
 					data:classTimeData,
@@ -36,16 +36,16 @@
 							$("#classTime").combobox("setValue","${selHourRange}");
 							for(var i = 0,n = data.length;i < n;i++)
 							{
-								if(data[i].paramValue == "${selHourRange}")
+								if(data[i].hourRange == "${selHourRange}")
 								{
-									$("#classLessonHour").textbox("setValue",data[i].param4);
+									$("#classLessonHour").textbox("setValue",data[i].lessionHours);
 									break;
 								}
 							}
 						}
 					},
 					onSelect:function(data){
-						$("#classLessonHour").textbox("setValue",data.param4);
+						$("#classLessonHour").textbox("setValue",data.lessionHours);
 						var classAttendIds = "${classAttendIdArr}";
 						var schooltimeInstIds = "${schooltimeInstIdArr}";
 						var classAttendIdArr = classAttendIds.split("~");
@@ -70,7 +70,7 @@
 							for(var i = 0,n = classAttendIdArr.length;i < n;i++)
 							{
 								var objArr = classAttendIdArr[i].split(";");
-								if(objArr.length > 1 && objArr[1]==data.paramValue)
+								if(objArr.length > 1 && objArr[1]==data.lessionHours)
 								{
 									ajaxLoading("正在处理，请稍待。。。");
 									window.location.href = "/sys/attend/getUpdateAttenceRecord.do?funcNodeId=${funcNodeId}&classAttendId="+objArr[0]+"&classAttendIds="+attendArr.join("~")+"&schooltimeInstIds="+schooltimeArr.join("~")+"&selDateStr=<fmt:formatDate value='${attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${attendDate}' pattern='dd' />";
@@ -84,7 +84,7 @@
 							for(var i = 0,n = schooltimeInstIdArr.length;i < n;i++)
 							{
 								var objArr = schooltimeInstIdArr[i].split(";");
-								if(objArr.length > 1 && objArr[1]==data.paramValue)
+								if(objArr.length > 1 && objArr[1]==data.lessionHours)
 								{
 									ajaxLoading("正在处理，请稍待。。。");
 									window.location.href = "/sys/attend/getAttenceRecord.do?funcNodeId=${funcNodeId}&schooltimeInstId="+objArr[0]+"&classAttendIds="+classAttendIds+"&schooltimeInstIds="+schooltimeInstIds+"&selDateStr=<fmt:formatDate value='${attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${attendDate}' pattern='dd' />";
@@ -95,7 +95,7 @@
 						if(!(classAttendIds == "" && schooltimeInstIds == ""))
 						{
 							ajaxLoading("正在处理，请稍待。。。");
-							window.location.href = "/sys/attend/getAttenceRecordInst.do?funcNodeId=${funcNodeId}&classInstId=${classInstT.classInstId}&classAttendIds="+classAttendIds+"&schooltimeInstIds="+schooltimeInstIds+"&hourRange="+data.paramValue+"&selDateStr=<fmt:formatDate value='${attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${attendDate}' pattern='dd' />";
+							window.location.href = "/sys/attend/getAttenceRecordInst.do?funcNodeId=${funcNodeId}&classInstId=${classInstT.classInstId}&classAttendIds="+classAttendIds+"&schooltimeInstIds="+schooltimeInstIds+"&hourRange="+data.hourRange+"&selDateStr=<fmt:formatDate value='${attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${attendDate}' pattern='dd' />";
 						}
 					}
 				});

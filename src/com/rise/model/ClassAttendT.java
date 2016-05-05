@@ -44,7 +44,7 @@ public class ClassAttendT {
     
 	private RoomT roomT;
 	
-	private ParaConfig hourRangeObj;
+	private TimeT timeTObj;
 	
 	private String teacherNames;
 	
@@ -216,12 +216,12 @@ public class ClassAttendT {
 		this.roomT = roomT;
 	}
 
-	public ParaConfig getHourRangeObj() {
-		return hourRangeObj;
+	public TimeT getTimeTObj() {
+		return timeTObj;
 	}
 
-	public void setHourRangeObj(ParaConfig hourRangeObj) {
-		this.hourRangeObj = hourRangeObj;
+	public void setTimeTObj(TimeT timeTObj) {
+		this.timeTObj = timeTObj;
 	}
 
 	public String getTeacherNames() {

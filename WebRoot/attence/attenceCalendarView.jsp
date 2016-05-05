@@ -94,7 +94,7 @@
 			}
 			function backFunc()
 			{
-				if("${flag}" == "attend")
+				if("${flag}" == "attend" || "${flag}" == "")
 				{
 					window.location.href = "/sys/attence/attenceMan.jsp?funcNodeId=${funcNodeId}";
 				}

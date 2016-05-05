@@ -78,7 +78,7 @@ public class ClassAttendService
 			model.addObject("schooltimeInstT", schooltimeInstT);
 			model.addObject("schooltimeInstTList", schooltimeInstTList);
 			model.addObject("classInstT", classInstT);
-			model.addObject("hourRangeList", json.getJSONArray("hourRangeList"));
+			model.addObject("timeTList", json.getJSONArray("timeTList"));
 			model.addObject("roomList", json.getJSONArray("roomList"));
 			model.addObject("schoolList", json.getJSONArray("schoolList"));
 			model.addObject("teacherTypeList", json.getJSONArray("teacherTypeList"));
@@ -126,7 +126,7 @@ public class ClassAttendService
 			model.addObject("classSchooltime", StringUtil.getJSONObjectKeyVal(json, "classSchooltime"));
 			model.addObject("classWeekTime", StringUtil.getJSONObjectKeyVal(json, "classWeekTime"));
 			model.addObject("classInstT", classInstT);
-			model.addObject("hourRangeList", json.getJSONArray("hourRangeList"));
+			model.addObject("timeTList", json.getJSONArray("timeTList"));
 			model.addObject("roomList", json.getJSONArray("roomList"));
 			model.addObject("schoolList", json.getJSONArray("schoolList"));
 			model.addObject("teacherTypeList", json.getJSONArray("teacherTypeList"));
@@ -185,14 +185,14 @@ public class ClassAttendService
 		String result = ServiceEngine.invokeHttp(param);
 		try{
 			JSONObject json = JSONObject.fromObject(result);
-			model.addObject("hourRangeList", json.getJSONArray("hourRangeList"));
+			model.addObject("timeTList", json.getJSONArray("timeTList"));
 			model.addObject("roomList", json.getJSONArray("roomList"));
 			model.addObject("schoolList", json.getJSONArray("schoolList"));
 			model.addObject("teacherTypeList", json.getJSONArray("teacherTypeList"));
 			model.addObject("stageId", StringUtil.getJSONObjectKeyVal(json, "stageId"));
 			model.addObject("classAttendIdArr", StringUtil.getJSONObjectKeyVal(json, "classAttendIdArr"));
 			model.addObject("schooltimeInstIdArr", StringUtil.getJSONObjectKeyVal(json, "schooltimeInstIdArr"));
-			json.remove("hourRangeList");
+			json.remove("timeTList");
 			json.remove("roomList");
 			json.remove("schoolList");
 			json.remove("teacherTypeList");
