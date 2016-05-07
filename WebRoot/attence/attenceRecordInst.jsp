@@ -352,6 +352,10 @@
 					{
 						$.messager.alert("提示", "老师课时量已超过课程总课时量,请核实后重新尝试","warning");
 					}
+					else if(teacherTime < classLessonHour)
+					{
+						$.messager.alert("提示", "老师课时量未达到课程总课时量,请核实后重新尝试","warning");
+					}
 					else if(teacherTaTime > teacherTime)
 					{
 						$.messager.alert('提示',"添加TA老师课时量已超过T老师总课时量,不能再添加老师","warning");
