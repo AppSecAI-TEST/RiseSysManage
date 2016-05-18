@@ -74,6 +74,7 @@
 					  				<th data-options="field:'phone',width:180,align:'center'">联系方式</th>
 					  				<th data-options="field:'courseStateText',width:80,align:'center'">课程状态</th>
 					  				<th data-options="field:'className',width:100,align:'center'">在读班级</th>
+					  				<th data-options="field:'isChange',width:100,align:'center'">是否当前班级</th>
 					  				<th data-options="field:'higherStageId',width:100,align:'center'">已升学阶段</th>
 					  				<th data-options="field:'studyingNum',width:80,align:'center'">在读人数</th>
 					  				<th data-options="field:'higherBaseNum',width:80,align:'center'">升学基数</th>
