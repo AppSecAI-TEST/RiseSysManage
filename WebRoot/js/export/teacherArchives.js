@@ -255,7 +255,7 @@ function exportTeacher()
 	}
 	else
 	{
-		showMessage("提示","暂无数据进行导出");
+		showMessage("提示","暂无数据进行导出",null);
 		return false;
 	}	
 }

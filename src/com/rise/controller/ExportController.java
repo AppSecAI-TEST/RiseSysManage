@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.rise.pub.util.StringUtil;
 import com.rise.service.ExportService;
 
 @Controller
@@ -512,6 +513,30 @@ public class ExportController
 			response.setHeader("Content-Disposition", "attachment;fileName="+response.encodeURL(fileName));
 			OutputStream out = response.getOutputStream();
 			HSSFWorkbook wb = es.exportTeacherInfo(param);
+			wb.write(out);
+			out.close();
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+		}
+
+	}
+	
+	//页面信息导出
+	@RequestMapping("/exportPageInfo.do")
+	public void exportPageInfo(String param, HttpServletResponse response , HttpServletRequest request)
+	{
+		try
+		{
+			JSONObject json =JSONObject.fromObject(param);
+			String name = StringUtil.getJSONObjectKeyVal(json, "name")+".xls";
+			String fileName = new String(name.getBytes("gbk"),"ISO-8859-1");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName="+response.encodeURL(fileName));
+			OutputStream out = response.getOutputStream();
+			HSSFWorkbook wb = es.exportPageInfo(json);
 			wb.write(out);
 			out.close();
 		}

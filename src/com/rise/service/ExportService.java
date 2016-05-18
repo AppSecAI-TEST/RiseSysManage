@@ -1653,6 +1653,60 @@ public class ExportService
 
 	}
 	
+	
+	public HSSFWorkbook exportPageInfo(JSONObject json) throws Exception
+	{
+		HSSFWorkbook wb = new HSSFWorkbook();
+		HSSFCellStyle styleTitle = wb.createCellStyle();
+		styleTitle.setFillBackgroundColor(HSSFColor.GOLD.index);
+		styleTitle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+		styleTitle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+		HSSFFont fontTitle = wb.createFont();
+		fontTitle.setColor(HSSFFont.COLOR_RED);
+		fontTitle.setFontName("ºÚÌå");
+		fontTitle.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+		styleTitle.setFont(fontTitle);
+		HSSFCellStyle styleContent = wb.createCellStyle();
+		styleContent.setWrapText(true);
+		styleContent.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+		styleContent.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+		HSSFFont fontContent = wb.createFont();
+		fontContent.setFontName("Î¢ÈíÑÅºÚ");
+		styleContent.setFont(fontContent);
+		HSSFSheet sheet = wb.createSheet(StringUtil.getJSONObjectKeyVal(json, "name"));
+		JSONArray columnArr =json.getJSONArray("cloumn");
+		JSONArray dataArr =json.getJSONArray("data");
+		if(columnArr.size()>0&&dataArr.size()>0)
+		{
+			HSSFRow row0 = sheet.createRow(0);
+			int headIndex =0;
+			for(int i=0;i<columnArr.size();i++)
+			{
+				JSONObject columnObj =columnArr.getJSONObject(i);
+				HSSFCell cell0=row0.createCell(i);
+				cell0.setCellStyle(styleTitle);
+				cell0.setCellValue(StringUtil.getJSONObjectKeyVal(columnObj,(i+1+"")));
+				sheet.setColumnWidth(i, 6000);
+			}	
+			for(int k=1;k<dataArr.size();k++)
+			{
+				HSSFRow row = sheet.createRow(k);
+				JSONObject dataObj =dataArr.getJSONObject(k-1);
+				for(int l =0;l<columnArr.size();l++)
+				{
+					HSSFCell cell =row.createCell(l);
+					cell.setCellStyle(styleContent);
+					String value =StringUtil.getJSONObjectKeyVal(dataObj,(l+1+""));
+					value =value.replaceAll("<(/)?br(/)?>", "\r\n ");
+					cell.setCellValue(new HSSFRichTextString(value));
+				}	
+			}	
+		}	
+		return wb;
+
+	}
+	
+	
 	public void exportServiceRate(String fileName,String array,OutputStream out) throws Exception
 	{
 		JSONArray jarray =JSONArray.fromObject(array);
