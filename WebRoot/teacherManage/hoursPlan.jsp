@@ -60,7 +60,7 @@
   			</table>
  		</form>
  		 
-		<table   align="center" title="查询结果" data-options="height:500" id="list_data" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+		<table   align="center" class="easyui-datagrid" title="查询结果"   id="list_data" toolbar="#toolbar" pagination="false" rownumbers="false" fitColumns="true" singleSelect="true">
 			 
 		</table>
   		</div>
@@ -108,7 +108,7 @@ $("#qryBtn").click(function(){
 	    url: "/sys/time/getTeacherPlan.do?param="+obj,
 	    columns:[[  
 	        {field:'schoolName',title:'校区',align:'center',width:40},
-	         {field:'teacherName',title:'教师英文名',align:'center',width:40},
+	        {field:'teacherName',title:'教师英文名',align:'center',width:40},
 	        {field:'tHours',title:'T课时量',align:'center',width:30},  
 	        {field:'taHours',title:'Ta课时量',align:'center',width:30},  
 	        {field:'day0',title:startDate,align:'center',width:80},  
