@@ -446,6 +446,7 @@
 							if(data.length > 0)
 							{
 								$("#classTime").combobox("setValue",data[0].hourRange);
+								$.data(this,"combobox").options.onSelect.call(this,data[0]);
 							}
 						}
 					});
