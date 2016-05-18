@@ -40,6 +40,7 @@
 		var pushType = row.pushType;
 		var applyType = row.applyType;
 		var studentId = row.studentId;
+		var courseType = row.courseType;
 		var classInstId = row.classInstId;
 		var studentCourseId = row.studentCourseId;
 		if(msgType.indexOf("leave_course") > -1) { //休学
