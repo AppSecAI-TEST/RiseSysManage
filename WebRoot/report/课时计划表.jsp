@@ -128,10 +128,12 @@ $("#qryBtn").click(function(){
 	         
 	    }  
 	});
+});
+
 	$("#export").click(function(){
 		exportPage();
 	});
-});
+
 
 
 function exportPage()
