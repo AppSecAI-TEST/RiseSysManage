@@ -135,7 +135,7 @@
 	  										<td align="center" width="10%"><span>申请人</span></td>
 	  										<td align="center" width="14%"><span>申请时间</span></td>
 	  										<td width="74%" colspan="6">
-	  											<span style="display: inline-block; width: 100px;">转班情况说明</span>
+	  											<span style="display: inline-block; width: 100px;">转校情况说明</span>
 	  											<span style="display: none; width: 100px; margin-left: 450px;" id="imgUrl">
 	  												<a href="#" id="url" class="linkmore">查看转校申请单</a>
 	  											</span>
