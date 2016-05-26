@@ -70,7 +70,7 @@
 							for(var i = 0,n = classAttendIdArr.length;i < n;i++)
 							{
 								var objArr = classAttendIdArr[i].split(";");
-								if(objArr.length > 1 && objArr[1]==data.lessionHours)
+								if(objArr.length > 1 && objArr[1]==data.hourRange)
 								{
 									ajaxLoading("正在处理，请稍待。。。");
 									window.location.href = "/sys/attend/getUpdateAttenceRecord.do?funcNodeId=${funcNodeId}&classAttendId="+objArr[0]+"&classAttendIds="+attendArr.join("~")+"&schooltimeInstIds="+schooltimeArr.join("~")+"&selDateStr=<fmt:formatDate value='${attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${attendDate}' pattern='dd' />";
@@ -84,7 +84,7 @@
 							for(var i = 0,n = schooltimeInstIdArr.length;i < n;i++)
 							{
 								var objArr = schooltimeInstIdArr[i].split(";");
-								if(objArr.length > 1 && objArr[1]==data.lessionHours)
+								if(objArr.length > 1 && objArr[1]==data.hourRange)
 								{
 									ajaxLoading("正在处理，请稍待。。。");
 									window.location.href = "/sys/attend/getAttenceRecord.do?funcNodeId=${funcNodeId}&schooltimeInstId="+objArr[0]+"&classAttendIds="+classAttendIds+"&schooltimeInstIds="+schooltimeInstIds+"&selDateStr=<fmt:formatDate value='${attendDate}' pattern='yyyy-MM' />&dateValue=<fmt:formatDate value='${attendDate}' pattern='dd' />";
