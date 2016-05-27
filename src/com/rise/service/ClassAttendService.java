@@ -82,6 +82,7 @@ public class ClassAttendService
 			model.addObject("roomList", json.getJSONArray("roomList"));
 			model.addObject("schoolList", json.getJSONArray("schoolList"));
 			model.addObject("teacherTypeList", json.getJSONArray("teacherTypeList"));
+			schooltimeInstIds = StringUtil.getJSONObjectKeyVal(json, "schooltimeInstIdArr");
 			if(ObjectCensor.isStrRegular(classAttendIds))
 			{
 				model.addObject("classAttendIdArr", classAttendIds);
