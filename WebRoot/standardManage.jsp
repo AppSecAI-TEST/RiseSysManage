@@ -67,7 +67,7 @@ $(document).ready(function(){
     });
 	//上传
     $("#uploadBtn").click(function() {
-    	var fileName = $("#fileNames").filebox("getValue");
+    	var fileName = $("#fileNames").filebox("getText");
     	if(fileName != "" && fileName != null && fileName != undefined) 
     	{
     		var handlerId = $("#handlerId").val();
@@ -97,7 +97,7 @@ $(document).ready(function(){
     
     //取消上传
     $("#cancelUploadBtn").click(function() {
-    	var fileName = $("#fileNames").filebox("setValue", "");
+    	$("#fileNames").filebox({prompt: ""});
     });
 })
 

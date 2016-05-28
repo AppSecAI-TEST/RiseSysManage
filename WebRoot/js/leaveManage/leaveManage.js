@@ -69,7 +69,7 @@ $(document).ready(function(){
      
     //上传
     $("#uploadBtn").click(function() {
-    	var fileName = $("#fileName").filebox("getValue");
+    	var fileName = $("#fileName").filebox("getText");
     	if(fileName != "" && fileName != null && fileName != undefined) {
     		var schoolId = $("#schoolId").val();
     		var handlerId = $("#handlerId").val();
@@ -98,7 +98,7 @@ $(document).ready(function(){
     
     //取消上传
     $("#cancelUploadBtn").click(function() {
-    	var fileName = $("#fileName").filebox("setValue", "");
+    	$("#fileName").filebox({prompt: ""});
     });
      
 });
@@ -279,7 +279,7 @@ function addLeaveSubmit()
 {
 	if($("#addLeaveForm").form('validate')){
 		var flag = true;
-		var fileName = $("#fileName").filebox("getValue");
+		var fileName = $("#fileName").filebox("getText");
 		if(fileName != "" && fileName != null && fileName != undefined) {
 			var imgUrl = $("#imgUrl").val();
 			if(imgUrl == "" || imgUrl == null || imgUrl == undefined) {

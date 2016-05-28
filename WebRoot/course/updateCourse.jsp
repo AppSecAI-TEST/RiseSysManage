@@ -1170,7 +1170,7 @@ $("#activeSchool").combobox(
 
 $("#submitBtn").click(function() {
 	var flag = true;
-	var fileName = $("#fileName").filebox("getValue");
+	var fileName = $("#fileName").filebox("getText");
 	if(fileName != "" && fileName != null && fileName != undefined) {
 		if(courseImgUrl == "" || courseImgUrl == null || courseImgUrl == undefined) {
 			flag = false;
@@ -2293,7 +2293,7 @@ $(document).ready(function()
 		
 	//常规课上传缴费单
 	$("#uploadBtn").click(function() {
-		var fileName = $("#fileName").filebox("getValue");
+		var fileName = $("#fileName").filebox("getText");
 		if(fileName != "" && fileName != null && fileName != undefined) {
 			var schoolId = $("#schoolId").val();
 			var handlerId = $("#handlerId").val();
@@ -2319,7 +2319,7 @@ $(document).ready(function()
 	    
 	//常规课取消上传缴费单
 	$("#cancelUploadBtn").click(function() {
-	    $("#fileName").filebox("setValue", "");
+	    $("#fileName").filebox({prompt: ""});
 	});
 	
 	function clearWom()

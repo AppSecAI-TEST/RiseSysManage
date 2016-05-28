@@ -446,7 +446,7 @@ function initOldCourse()
 //提交
 $("#submitBtn").click(function() {
 	var flag = true;
-	var fileName = $("#fileName").filebox("getValue");
+	var fileName = $("#fileName").filebox("getText");
 	if(fileName != "" && fileName != null && fileName != undefined) {
 		if(courseImgUrl == "" || courseImgUrl == null || courseImgUrl == undefined) {
 			flag = false;
@@ -637,7 +637,7 @@ $("#backBtn").click(function()
 		
 	//常规课上传缴费单
 	$("#uploadBtn").click(function() {
-		var fileName = $("#fileName").filebox("getValue");
+		var fileName = $("#fileName").filebox("getText");
 		if(fileName != "" && fileName != null && fileName != undefined) {
 			var schoolId = $("#schoolId").val();
 			var handlerId = $("#handlerId").val();
@@ -663,6 +663,6 @@ $("#backBtn").click(function()
 	    
 	//常规课取消上传缴费单
 	$("#cancelUploadBtn").click(function() {
-	    $("#fileName").filebox("setValue", "");
+	    $("#fileName").filebox({prompt: ""});
 	});
 	</script>

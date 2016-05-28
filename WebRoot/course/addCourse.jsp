@@ -1135,14 +1135,14 @@ $("#submitBtn").click(function() {
 			return;
 	}
 	if("001" == courseType) {
-		var fileName = $("#fileName").filebox("getValue");
+		var fileName = $("#fileName").filebox("getText");
 		if(fileName != "" && fileName != null && fileName != undefined) {
 			if(courseImgUrl == "" || courseImgUrl == null || courseImgUrl == undefined) {
 				flag = false;
 			}
 		}
 	} else {
-		var fileName = $("#shortFileName").filebox("getValue");
+		var fileName = $("#shortFileName").filebox("getText");
 		if(fileName != "" && fileName != null && fileName != undefined) {
 			if(courseImgUrl == "" || courseImgUrl == null || courseImgUrl == undefined) {
 				flag = false;
@@ -2070,7 +2070,7 @@ function checkParam() {
 
 //常规课上传缴费单
 $("#uploadBtn").click(function() {
-	var fileName = $("#fileName").filebox("getValue");
+	var fileName = $("#fileName").filebox("getText");
 	if(fileName != "" && fileName != null && fileName != undefined) {
 		var schoolId = $("#schoolId").val();
 		var handlerId = $("#handlerId").val();
@@ -2096,12 +2096,12 @@ $("#uploadBtn").click(function() {
     
 //常规课取消上传缴费单
 $("#cancelUploadBtn").click(function() {
-    $("#fileName").filebox("setValue", "");
+	$("#fileName").filebox({prompt: ""});
 });
 
 //短期课上传缴费单
 $("#shortUploadBtn").click(function() {
-	var fileName = $("#shortFileName").filebox("getValue");
+	var fileName = $("#shortFileName").filebox("getText");
 	if(fileName != "" && fileName != null && fileName != undefined) {
 		var schoolId = $("#schoolId").val();
 		var handlerId = $("#handlerId").val();
@@ -2127,7 +2127,7 @@ $("#shortUploadBtn").click(function() {
     
 //短期课取消上传缴费单
 $("#shortCancelUploadBtn").click(function() {
-    $("#shortFileName").filebox("setValue", "");
+	$("#shortFileName").filebox({prompt: ""});
 });
 
 //取消口碑信息

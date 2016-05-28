@@ -73,7 +73,7 @@ $(document).ready(function() {
 	
     //上传
     $("#uploadBtn").click(function() {
-    	var fileName = $("#fileName").filebox("getValue");
+    	var fileName = $("#fileName").filebox("getText");
     	if(fileName != "" && fileName != null && fileName != undefined) {
     		var schoolId = $("#schoolId").val();
     		var handlerId = $("#handlerId").val();
@@ -99,7 +99,7 @@ $(document).ready(function() {
     
     //取消上传
     $("#cancelUploadBtn").click(function() {
-    	var fileName = $("#fileName").filebox("setValue", "");
+    	$("#fileName").filebox({prompt: ""});
     });
 	
 	$("#applyChangeSubmit").click(function() {
@@ -108,7 +108,7 @@ $(document).ready(function() {
 			var inSchoolId = $("#inSchoolId").combobox("getValue");
 			if(inSchoolId != outSchoolId) {
 				var flag = true;
-				var fileName = $("#fileName").filebox("getValue");
+				var fileName = $("#fileName").filebox("getText");
 				if(fileName != "" && fileName != null && fileName != undefined) {
 					var imgUrl = $("#imgUrl").val();
 					if(imgUrl == "" || imgUrl == null || imgUrl == undefined) {
