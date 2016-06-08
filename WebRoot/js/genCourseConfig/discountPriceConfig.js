@@ -7,6 +7,8 @@ $(document).ready(function(){
 	    singleSelect: true,  
 	    rownumbers : true,
 	    pagination :true,
+	    pageList : [20, 30, 40],          // 可以设置每页记录条数的列表
+		pageSize : 20,
 	  	url: "/sys/genCourseConfig/qryDataListByPage.do",
 	  	queryParams:{
 			param : obj
@@ -43,7 +45,13 @@ $(document).ready(function(){
 	    },
 	    toolbar:"#discountToolbar"
 	});  
-
+	 var tabs = $(".tabs").height();
+	var height = $(document).height();
+	var header = $(".panel-header").height();
+	
+	$('#discount_data').datagrid('resize', {// 适配高度
+		height: height - header - tabs*3
+	});
 });
 
 //function closeDiscountPrice(setPriceId,operType,priceType)

@@ -19,7 +19,7 @@
   	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:100%;overflow:auto;height:auto;">
   		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   		<div title="课程阶段配置" style="padding:5px;display:block;">
-			<table align="center" title="查询结果" data-options="height:600" id="stage_data">
+			<table align="center" title="查询结果" id="stage_data">
 				
 			</table>
 			<div id="stageToolbar" style="padding: 2px;height:auto;">
@@ -31,7 +31,7 @@
 	 		<div id="stageDlg" class="easyui-dialog" style="width:550px;height:300px;padding:0px 0px" modal="true" closed="true" buttons="#stage-buttons">
 				<form id="stageFm" method="post">
 					<input name="classId" type="hidden" />
-					<table width="98%" style="margin:5px 5px;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
+					<table  width="98%" style="margin:5px 5px;border: 1px solid #ccc;" cellpadding="5px" class="maintable">
 						<tr>
 							<td align="right"><span>阶段名称：</span></td>
 							<td align="left"><input id="stageId" name="stageId" style="width:265px" class="easyui-textbox" required="true"/></td>
@@ -88,7 +88,7 @@
 			</div>
   		</div>
   		<div title="开班人数配置" style="padding:5px;display:block;">
-			<table align="center" title="查询结果" data-options="height:600" id="class_data">
+			<table align="center" title="查询结果"  id="class_data">
 				
 			</table>
 	 		<div id="classDlg" class="easyui-dialog" style="width:550px;height:220px;padding:0px 0px" modal="true" closed="true" buttons="#class-buttons">
@@ -128,7 +128,7 @@
 			</div>
   		</div>
   		<div title="教质时间轴配置" style="padding:5px;display:block;">
-			<table align="center" title="查询结果" data-options="height:600" id="open_data">
+			<table align="center" title="查询结果"  id="open_data">
 				
 			</table>
 	 		<div id="openDlg" class="easyui-dialog" style="width:550px;height:280px;padding:0px 0px" modal="true" closed="true" buttons="#open-buttons">
@@ -182,7 +182,7 @@
   		<div title="课程价格配置" style="padding:5px;display:block;">
   			<div id="ttab" class="easyui-tabs" style="min-width:1110px;width:100%;height:auto;">
   				<div title="课程价格配置" style="padding:5px;display:block;">
-					<table align="center" title="查询结果" data-options="height:550" id="common_data">
+					<table align="center" title="查询结果"   id="common_data">
 						
 					</table>
 					<div id="commonToolbar" style="padding: 2px;height:auto;">
