@@ -16,7 +16,7 @@
   	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:100%;overflow:auto;height:auto;">
   		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   		<div title="短期课课程配置" style="padding:5px;display:block;">
-			<table align="center" title="查询结果" data-options="height:600" id="course_data">
+			<table align="center" title="查询结果"  id="course_data">
 				
 			</table>
 			<div id="courseToolbar">
@@ -64,7 +64,7 @@
   		<div title="短期课价格配置" style="padding:5px;display:block;">
   			<div id="ttab" class="easyui-tabs" style="min-width:1110px;width:100%;height:auto;">
   				<div title="短期课价格配置" style="padding:5px;display:block;">
-					<table align="center" title="查询结果" data-options="height:550" id="price_data">
+					<table align="center" title="查询结果"  id="price_data">
 						
 					</table>
 					<div id="priceToolbar">
@@ -72,7 +72,7 @@
 		 			</div>
 				</div>
 				<div title="短期课优惠配置" style="padding:5px;display:block;">
-					<table align="center" title="查询结果" data-options="height:550" id="favor_data">
+					<table align="center" title="查询结果"  id="favor_data">
 						
 					</table>
 					<div id="favorToolbar">

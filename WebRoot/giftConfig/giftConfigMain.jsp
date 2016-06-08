@@ -16,7 +16,7 @@
   	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:100%;overflow:auto;height:auto;">
   		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   		<div title="实物赠品" style="padding:5px;display:block;">
-			<table align="center" title="查询结果" id="goodsGift_data" class="easyui-datagrid" >
+			<table align="center" title="查询结果" id="goodsGift_data">
 				
 			</table>
 			<div id="goodsToolbar">

@@ -8,6 +8,8 @@ $(document).ready(function(){
 	    fitColumns:true,  
 	    singleSelect: true,  
 	    pagination :true,
+	    pageList : [20, 30, 40],          // 可以设置每页记录条数的列表
+		pageSize : 20, 
 	  	url: "/sys/pubData/qryDataListByPage.do",
 	  	queryParams:{
 			param : obj
@@ -20,7 +22,7 @@ $(document).ready(function(){
 	        {field:'effRemark',title:'有效期',width:'15%',align:'center'},  
 	        {field:'isEffVal',title:'是否有效',width:'8%',align:'center'},  
 	        {field:'createDate',title:'创建时间',width:'12%',align:'center'},
-	        {field:'handerName',title:'创建人',width:'7%',align:'center'},  
+	        {field:'handerName',title:'创建人',width:'5%',align:'center'},  
 	        {field:'opt',title:'操作',width:'13%',align:'center',
 	            formatter: function(Confirmation, row)
 	            {  
@@ -41,7 +43,14 @@ $(document).ready(function(){
 	    },
 	    toolbar:"#goodsToolbar"
 	});  
-    
+     var tabs = $(".tabs").height();
+    var bars=$(".toolbar").height(); 
+	var height = $(document).height();
+	var header = $(".panel-header").height();
+	
+	$('#goodsGift_data').datagrid('resize', {// 适配高度
+		height: height - header - tabs*2
+	});
 });
 
 //打开实物增加页面

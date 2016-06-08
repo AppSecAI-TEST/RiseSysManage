@@ -13,7 +13,7 @@
   	<body>
   		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   		<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;padding:5px;display:block;" title="教材配置">
-			<table align="center" title="查询结果" data-options="height:600" id="textbook_data">
+			<table align="center" title="查询结果"  id="textbook_data">
 				
 			</table>
 			<div id="textbookToolbar">

@@ -12,6 +12,8 @@ $(document).ready(function(){
 				    singleSelect: true,  
 				    rownumbers : true,
 				    pagination :true,
+				     pageList : [20, 30, 40],          // 可以设置每页记录条数的列表
+					pageSize : 20,
 				  	url: "/sys/shortCourseConfig/qryDataListByPage.do",
 				  	queryParams:{
 						param : obj
@@ -49,10 +51,17 @@ $(document).ready(function(){
 				    toolbar:"#priceToolbar"
 				});  
 			    qryPriceFlag = false;
+    var tabs = $(".tabs").height();
+	var height = $(document).height();
+	var header = $(".panel-header").height();
+	
+	$('#price_data').datagrid('resize', {// 适配高度
+		height: height - tabs*4
+	});
 	       }
 	    }
 	});
-    
+   
 });
 
 //定位短期课

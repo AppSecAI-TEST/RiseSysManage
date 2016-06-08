@@ -9,6 +9,8 @@ $(document).ready(function(){
 	    fitColumns:true,  
 	    singleSelect: true,  
 	    pagination :true,
+	    pageList : [20, 30, 40],          // 可以设置每页记录条数的列表
+		pageSize : 20,
 	  	url: "/sys/pubData/qryDataListByPage.do",
 	  	queryParams:{
 			param : obj
@@ -43,7 +45,13 @@ $(document).ready(function(){
 	    },
 	    toolbar:"#courseToolbar"
 	});  
-    
+      var tabs = $(".tabs").height();
+	var height = $(document).height();
+	var header = $(".panel-header").height();
+	
+	$('#course_data').datagrid('resize', {// 适配高度
+		height: height -tabs- header*2
+	});
 });
 
 //打开新增短期课页面
