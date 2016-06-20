@@ -10,6 +10,8 @@ public class ChangeT {
     private Integer studentId;
 
     private Integer studentCourseId;
+    
+	private String courseState;
 
     private String applyType;
 
@@ -77,7 +79,15 @@ public class ChangeT {
         this.studentCourseId = studentCourseId;
     }
 
-    public String getApplyType() {
+    public String getCourseState() {
+		return courseState;
+	}
+
+	public void setCourseState(String courseState) {
+		this.courseState = courseState;
+	}
+
+	public String getApplyType() {
         return applyType;
     }
 

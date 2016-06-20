@@ -28,6 +28,8 @@ public class ClassStudentT {
     private StudentT studentT;
     
 	private StudentCourseT studentCourseT;
+	
+	private ChangeT hadChangeT;
 
     public Integer getClassStudentId() {
         return classStudentId;
@@ -131,6 +133,14 @@ public class ClassStudentT {
 
 	public void setStudentCourseT(StudentCourseT studentCourseT) {
 		this.studentCourseT = studentCourseT;
+	}
+
+	public ChangeT getHadChangeT() {
+		return hadChangeT;
+	}
+
+	public void setHadChangeT(ChangeT hadChangeT) {
+		this.hadChangeT = hadChangeT;
 	}
 	
 }
