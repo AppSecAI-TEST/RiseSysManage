@@ -562,7 +562,7 @@
 								<td align="center">${node.studentT.byName}</td>
 								<td align="center">${node.studentCourseT.courseStateName}</td>
 								<c:choose>
-									<c:when test="${!empty node.hadChangeT && node.hadChangeT.inDate.time>currentDate.time}">
+									<c:when test="${!empty node.hadChangeT && (node.hadChangeT.inDate.time-node.hadChangeT.inDate.hours*60*60*1000-node.hadChangeT.inDate.minutes*60*1000-node.hadChangeT.inDate.seconds*1000-currentDate.time == 0||node.hadChangeT.inDate.time-node.hadChangeT.inDate.hours*60*60*1000-node.hadChangeT.inDate.minutes*60*1000-node.hadChangeT.inDate.seconds*1000-currentDate.time == 86400000)}">
 										<td align="center" colspan="2">该学生当前课时不能考勤</td>
 									</c:when>
 									<c:otherwise>
