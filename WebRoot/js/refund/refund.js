@@ -42,7 +42,7 @@ $(document).ready(function() {
 	$("#reset").click(function() {
 		$("#qryRefundCourseFm").form('clear');//清空窗体数据  
 		var data = $("#schoolId").combobox("getData");
-		if(data.length > 0) {
+		if(data.length == 1) {
 			$("#schoolId").combobox("setValue", data[0].schoolId);
 		}
 	});
@@ -77,7 +77,7 @@ $(document).ready(function() {
 	$("#resetApprove").click(function() {
 		$("#qryRefundApproveFm").form('clear');//清空窗体数据  
 		var data = $("#approveSchoolId").combobox("getData");
-		if(data.length > 0) {
+		if(data.length == 1) {
 			$("#approveSchoolId").combobox("setValue", data[0].schoolId);
 		}
 	});
@@ -93,7 +93,7 @@ $(document).ready(function() {
     	},
     	onLoadSuccess : function() {
     		var data = $("#schoolId").combobox("getData");
-    		if(data.length > 0) {
+    		if(data.length == 1) {
     			$("#schoolId").combobox("setValue", data[0].schoolId);
     		}
     	},
