@@ -225,7 +225,7 @@
 				for(var i = 0,n = data.length;i < n;i++)
 				{
 					var arr = [];
-					arr.push('<ul class="easyui-tree" data-options=\'animate:true,lines:true,state:closed\'>');
+					arr.push('<ul class="easyui-tree" data-options="animate:true,lines:true,state:\'closed\'">');
 					for(var j = 0,m = data[i].son.length;j < m;j++)
 					{
 						if(data[i].son[j].url != "#")
