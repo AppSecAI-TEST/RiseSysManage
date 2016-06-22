@@ -165,6 +165,7 @@
 					$("#leftmenu").accordion("add", {content: loading});
 					removeLeft();
 					menuFunc(menuObj);
+					firstMenuClick();
 				}
 				else
 				{
@@ -198,6 +199,7 @@
 							var dataObj = new MenuInfo(menuId , data); 
 							gMenuArr.push(dataObj);
 							menuFunc(data)
+							firstMenuClick();
 						}
 					});
 				}
@@ -206,6 +208,13 @@
 						$(this).children().removeClass('focus');
 					})
 					$(that).addClass('focus');
+				}
+			}
+			function firstMenuClick()
+			{
+				if($("#tree0 li:first a").length > 0 && $("#tree0 li:first").find("ul").length>0)
+				{
+					$($("#tree0 li:first div:first span:last a").get(0)).click().dblclick();
 				}
 			}
 			function getMenuArr(valId)
@@ -225,7 +234,7 @@
 				for(var i = 0,n = data.length;i < n;i++)
 				{
 					var arr = [];
-					arr.push('<ul class="easyui-tree" data-options="animate:true,lines:true,state:\'closed\'">');
+					arr.push('<ul id="tree'+i+'" class="easyui-tree" data-options="animate:true,lines:true,state:\'closed\'">');
 					for(var j = 0,m = data[i].son.length;j < m;j++)
 					{
 						if(data[i].son[j].url != "#")
