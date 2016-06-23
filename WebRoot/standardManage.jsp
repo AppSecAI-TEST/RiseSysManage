@@ -14,6 +14,7 @@
   	</head>
   	<body>
   		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+  		<input id="handlerSchool" type="hidden" value="${sessionScope.StaffT.schoolId}"/>
   		<div style="margin-right:5px">
  		<form id="qryFm">
   			<table class="search_tab">
@@ -111,27 +112,37 @@ function downloadFile(val)
 
 function deleteFile(val)
 {
-	$.ajax({
-		type : "POST",
-		url: "/sys/pub/deleteFile.do",
-		data: "fileId="+val,
-		async: false,
-		success: function(data) 
-		{
-			if(data == "true")
+	if($("#handlerSchool").val()!="10")
+	{
+		parent.showMessage("提示","非总部员工无法删除文件",function(){
+			parent.hideMessage();
+		});
+	}
+	else
+	{
+		$.ajax({
+			type : "POST",
+			url: "/sys/pub/deleteFile.do",
+			data: "fileId="+val,
+			async: false,
+			success: function(data) 
 			{
-				parent.showMessage("提示","删除文件成功",function(){
-					parent.hideMessage();
-					$("#qryBtn").trigger("click");
-				});
-			}
-			else 
-			{
-				parent.showMessage("提示","删除文件失败",function(){
-					parent.hideMessage();
-				});   
-			}
-		} 
-	});
+				if(data == "true")
+				{
+					parent.showMessage("提示","删除文件成功",function(){
+						parent.hideMessage();
+						$("#qryBtn").trigger("click");
+					});
+				}
+				else 
+				{
+					parent.showMessage("提示","删除文件失败",function(){
+						parent.hideMessage();
+					});   
+				}
+			} 
+		});
+			
+	}
 }
 </script>
