@@ -1,10 +1,12 @@
 $(document).ready(function() {
 	$("#qryBtn").click(function() {
 		initPageNumber("list_data");
-    	var obj = JSON.stringify($("#qryFm").serializeObject());
-    	obj = obj.substring(0, obj.length - 1);
-    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+		var object = $("#qryFm").serializeObject()
+		var schoolId = $("#schoolId").val();
+		object.schoolId = schoolId;
+		var funcNodeId = $("#qryBtn").attr("funcNodeId");
+		object.funcNodeId = funcNodeId;
+    	var obj = JSON.stringify(object);
     	$('#list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",
     		queryParams:{

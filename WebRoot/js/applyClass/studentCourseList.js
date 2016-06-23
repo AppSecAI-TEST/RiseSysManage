@@ -2,6 +2,16 @@ $(document).ready(function() {
 	$("#qryBtn").click(function() {
 		initPageNumber("list_data");
 		var object = $("#qryFm").serializeObject();
+		var stageId = $("#stageId").val();
+		object.stageId = stageId;
+		var classType = $("#classType").val();
+		object.classType = classType;
+		var schoolId = $("#schoolId").val();
+		object.schoolId = schoolId;
+		var className = $("#className").val();
+		object.className = className;
+		var classInstId = $("#classInstId").val();
+		object.classInstId = classInstId;
 		var funcNodeId = $("#qryBtn").attr("funcNodeId");
 		object.funcNodeId = funcNodeId;
     	var obj = JSON.stringify(object);

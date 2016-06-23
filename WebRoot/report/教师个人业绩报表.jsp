@@ -10,9 +10,9 @@
 		<%@ include file="../common/formvalidator.jsp" %>
   	</head>
   	<body>
-  		<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
-  		<input type="hidden" id="resourceId" value="723">
   		<div style="margin-right:5px;">
+  			<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+  			<input type="hidden" id="resourceId" value="723">
   			<form id="qryFm">
 	  			<table class="search_tab">
 	  				<tr>

@@ -17,8 +17,8 @@
   	</head>
   	<body>
   		<div style="margin-right:5px;">
-  			<input type="hidden" id="resourceId" value="756">
-  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId}"/>
+  		<input type="hidden" id="resourceId" value="756">
+  		<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId}"/>
 		<form id="manFm">
 			<table class="search_tab">
 				<tr>

@@ -17,7 +17,6 @@
   				<input type="hidden" id="courseType" name="courseType" value="001"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   				<input type="hidden" id="schoolId" name="schoolId" value="${sessionScope.StaffT.schoolId}"/>
-  				<input type="hidden" id="classOrder" name="classOrder"/>
   				<input type="hidden" id="higherSchoolId" name="higherSchoolId"/>
   				<input type="hidden" id="higherSchoolName" name="higherSchoolName"/>
   				<table width="100%" cellpadding="5px" class="maintable" id="applyClassTd">
@@ -34,13 +33,14 @@
   						</td>
   						<td align="right" width="8%"><span>班级名称：</span></td>
   						<td colspan="3" width="48%">
-  							<span id="classNameText"></span>
+  							<span id="classTypeText"></span>
+  							<input id="classOrder" name="classOrder" class="easyui-textbox" required="true" style="width: 50px; height: 25px;">
   							<input type="hidden" id="className" name="className"/>
   						</td>
   					</tr>
   					<tr>
   						<td align="right" width="12%"><span>开课时间：</span></td>
-  						<td width="10%">
+  						<td width="10%">  
 	  						<input name="startDate" id="startDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;" editable="false"/>
   						</td>
   						<td align="right" width="12%"><span>学员来源类型：</span></td>

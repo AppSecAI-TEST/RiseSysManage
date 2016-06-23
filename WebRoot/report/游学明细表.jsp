@@ -17,9 +17,9 @@
   	</head>
   	<body>
   		<div style="margin-right:5px;">
+		<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
+  		<input type="hidden" id="resourceId" value="854">
 		<form id="manFm">
-			<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
-  			<input type="hidden" id="resourceId" value="854">
 			<table class="search_tab">
 				<tr>
 					<td align="right" width="7%">
@@ -73,7 +73,7 @@
 					</td>
 					<td>
 						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
-						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;">重置</a>
 					</td>
 				</tr>
 			</table>

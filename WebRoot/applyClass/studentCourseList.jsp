@@ -18,13 +18,13 @@
   	</head>
   
   	<body>
+  		<input type="hidden" id="stageId" name="stageId" value="<%=stageId %>"/>
+  		<input type="hidden" id="classType" name="classType" value="<%=classType %>"/>
+  		<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId %>"/>
+  		<input type="hidden" id="className" name="className" value="<%=className %>"/>
+  		<input type="hidden" id="classInstId" name="classInstId" value="<%=classInstId %>"/>
+  		<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   		<form id="qryFm" style="margin:0 auto;">
-  			<input type="hidden" id="stageId" name="stageId" value="<%=stageId %>"/>
-  			<input type="hidden" id="classType" name="classType" value="<%=classType %>"/>
-  			<input type="hidden" id="schoolId" name="schoolId" value="<%=schoolId %>"/>
-  			<input type="hidden" id="className" name="className" value="<%=className %>"/>
-  			<input type="hidden" id="classInstId" name="classInstId" value="<%=classInstId %>"/>
-  			<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
   			<table class="search_tab">
   				<tr>
   					<td align="right" style="min-width: 60px;"><span>班级：</span></td>

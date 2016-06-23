@@ -13,9 +13,9 @@
   
   	<body>
   		<div style="margin-right:5px;">
+  			<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
+  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
   			<form id="qryFm">
-  				<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
-  				<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
   				<table class="search_tab">
   					<tr>
   						<td align="right" style="min-width: 60px;"><span>校区：</span></td>

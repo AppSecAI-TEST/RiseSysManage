@@ -12,10 +12,10 @@
   	</head>
   
   	<body>
+  		<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
   		<div id="tt" class="easyui-tabs">
   			<div title="开班班级管理" style="padding:5px;display:block;">
   				<form id="qryFm">
-  					<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
 		  			<table class="search_tab" id="apply_search_tab">
 		  				<tr>
 		  					<td align="right" style="min-width: 60px"><span>校区：</span></td>
