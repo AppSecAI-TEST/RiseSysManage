@@ -185,7 +185,7 @@ function submitInfo() {
 	classAttend.schoolId =$("#schoolIds").val();
 	classAttend.roomId =$("#roomIds").val();
 	classAttend.shortSchooltimeId =$("#shortSchooltimeId").val();
-	classAttend.attendDate =$("#openDate").datebox("getValue");
+	classAttend.attendDate =$("#openDate").datebox("getValue")+" 00:00:00";
 	classAttend.startTime = $("#startTime").timespinner("getValue");
 	classAttend.endTime = $("#endTime").timespinner("getValue");
 	classAttend.handerId =handlerId;
@@ -209,7 +209,7 @@ function submitInfo() {
 		attobj.lessionHours =$(this).attr("lessionHours");
 		attobj.state ="00A";
 		attobj.handerId =handlerId;
-		attobj.attendDate =$("#openDate").datebox("getValue");
+		attobj.attendDate =$("#openDate").datebox("getValue")+" 00:00:00";;
 		teacherAttend.push(attobj);
 		if(hours < attobj.lessionHours)
 		{
