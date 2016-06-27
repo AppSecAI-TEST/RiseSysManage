@@ -11,7 +11,7 @@ $(document).ready(function() {
 			onChange : function(n, o) {
 				if(o != null && o != "" && o != undefined && roomId != n) {
 					var subHourRange = hourRange.substring(0, 3);
-					var flag = validateRoom(weekTime, hourRange, n, schooltimeId);
+					var flag = validateRoom(weekTime, hourRange, n, schooltimeId, "Y");
 					if(!flag) {
 						$("#roomId" + schooltimeId).combobox("setValue", o);
 						$.messager.alert('提示', "您选择的上课时段和教室已被其他班级占用，请选择其他上课时段或教室！");
@@ -81,7 +81,7 @@ $(document).ready(function() {
 					});
 				}
 				if(flag) {
-					flag = validateRoom(weekTime, hourRange, roomId, "");
+					flag = validateRoom(weekTime, hourRange, roomId, "", "Y");
 					if(flag) {
 						var hourRanges = "";
 						if($("[name='schooltimes']").length > 0) {

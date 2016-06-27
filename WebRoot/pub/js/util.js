@@ -809,9 +809,9 @@ function validateTeacher(teacherId, weekTime, hourRange, classInstId) {
 	return flag;
 }
 
-function validateRoom(weekTime, hourRange, roomId, schooltimeId) {
+function validateRoom(weekTime, hourRange, roomId, schooltimeId, attendFlag) {
 	var flag = false;
-	var param = "{\"queryCode\":\"validateRoom\",\"weekTime\":\""+weekTime+"\",\"hourRange\":\""+hourRange+"\",\"roomId\":\""+roomId+"\",\"schooltimeId\":\""+schooltimeId+"\"}";
+	var param = "{\"queryCode\":\"validateRoom\",\"weekTime\":\""+weekTime+"\",\"hourRange\":\""+hourRange+"\",\"roomId\":\""+roomId+"\",\"schooltimeId\":\""+schooltimeId+"\",\"attendFlag\":\""+attendFlag+"\"}";
 	$.ajax({
 		url: "/sys/applyClass/validateRoom.do",
 		data: "param=" + param,

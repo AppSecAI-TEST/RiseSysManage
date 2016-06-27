@@ -222,7 +222,7 @@ $(document).ready(function() {
 				});
 			}
 			if(flag) {
-				flag = validateRoom(weekTime, hourRange, roomId, "");
+				flag = validateRoom(weekTime, hourRange, roomId, "", "N");
 				if(flag) {
 					var hourRanges = "";
 					if($("[name='schooltimes']").length > 0) {
