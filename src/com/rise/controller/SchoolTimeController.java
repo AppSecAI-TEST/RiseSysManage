@@ -53,6 +53,30 @@ public class SchoolTimeController
 		}
 	}
 	
+	@RequestMapping(value = "/getAllTimeByWeek.do")
+	public void getAllTimeByWeek(String param, HttpServletResponse response) throws Exception
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = schoolTimeService.getAllSchoolTimeByWeek(param);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{ 
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 	/**
 	 * Ôö¼ÓÅÅ¿Î
 	 * @param param
