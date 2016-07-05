@@ -92,6 +92,7 @@
 			<div id="toolbar" style="padding: 2px; height: auto">
 	   			<a href="javascript:void(0)" id="addStudent" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">学员注册</a>
 	   			<a href="javascript:void(0)" id="updateStudent" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;" funcNodeId="${param.funcNodeId}">修改档案</a>
+	   			<a href="javascript:void(0)" id="delStudent" class="easyui-linkbutton" iconCls="icon-remove" style="width: 100px;" funcNodeId="${param.funcNodeId}">删除档案</a>
 	   			<a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>
 	   			<a href="javascript:void(0)" id="addActivity" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">活动奖项</a>
 				<a href="javascript:void(0)" id="batchUpdate" class="easyui-linkbutton" iconCls="icon-edit" style="width: 150px;">批量修改责任人</a>

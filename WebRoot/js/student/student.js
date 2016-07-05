@@ -94,6 +94,42 @@ $(document).ready(function() {
     	}
     });
     
+    $("#delStudent").click(function() {
+    	var obj = $('#list_data').datagrid('getSelections');
+    	if(obj.length > 0) {
+    		$.messager.confirm('提示','您确定要删除当前选中学员的档案吗?',function(r) {
+    			if(r) {
+    				var studentIds = "";
+    				for(var i = 0, n = obj.length; i < n; i++) {
+    					studentIds += obj[i].studentId + ",";
+    				}
+    				studentIds = studentIds.substring(0, studentIds.length - 1);
+    				var handlerId = $("#staffId").val();
+    				$.ajax({
+    					url: "/sys/student/delStudent.do",
+    					data: "studentId=" + studentIds + "&handlerId=" + handlerId,
+    					dataType: "json",
+    					async: true,
+    					beforeSend: function() {
+    						$.messager.progress({title : '删除档案', msg : '正在删除档案，请稍等……'});
+    					},
+    					success: function (data) {
+    						$.messager.progress('close'); 
+    						var flag = data.flag
+    						if(flag) {
+    							$.messager.alert('提示', "成功删除档案！", "info", function() {$("#qryBtn").click();});
+    						} else {
+    							$.messager.alert('提示', data.msg);
+    						}
+    					} 
+    				});
+    			}
+    		});
+    	} else {
+    		$.messager.alert('提示', "请先选择您要操作的学员！");
+    	}
+    });
+    
     $("#viewStudent").click(function() {
     	if(validateSelect()) {
     		var row = $('#list_data').datagrid('getSelected');
