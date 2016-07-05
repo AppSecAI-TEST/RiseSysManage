@@ -12,7 +12,8 @@
   	</head>
   
   	<body>
-  		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
+  		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId }"/>
+  		<input type="hidden" id="post" name="post" value="${sessionScope.StaffT.post }">
     	<div id="tt" class="easyui-tabs">
     			<div title="退费课程查询" style="padding:5px;display:block;">
     			<form id="qryRefundCourseFm">
@@ -208,7 +209,7 @@
 								<input type="checkbox" name="approveRefundState" value="'004'"/><span>审批未通过</span>
 								<input type="checkbox" name="approveRefundState" value="'005'"/><span>成功退费</span>
 								<input type="checkbox" name="approveRefundState" value="'006'"/><span>取消</span>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>本人待审批：</span>&nbsp;&nbsp;<input type="checkbox" />
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>本人待审批：</span>&nbsp;&nbsp;<input type="checkbox" id="pending"/>
 							</td>
 							<td style="min-width: 210px">
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryApproveBtn" funcNodeId="1025">查询</a>
