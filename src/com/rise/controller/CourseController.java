@@ -107,4 +107,28 @@ public class CourseController
 			}
 		}
 	}
+	
+	@RequestMapping(value = "/delCourse.do")
+	public void delCourse(String param, HttpServletResponse response) throws Exception
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = courseSerivce.delCourse(param);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
 }
