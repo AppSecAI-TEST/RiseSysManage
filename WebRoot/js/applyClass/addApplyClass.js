@@ -507,7 +507,47 @@ $(document).ready(function() {
 								});
 							}
 							if(flag) {
-								addApplyClass();
+								var object = new Object();
+								var schoolId = $("#schoolId").val();
+								object.schoolId = schoolId;
+								var stageId = $("#stageId").combobox("getValue");
+								object.stageId = stageId;
+								var classOrder = $("#classOrder").textbox("getValue");
+								var className = $("#classTypeText").html() + classOrder;
+								object.className = className;
+								if(classOrder.startWith("0")) {
+									classOrder = classOrder.substring(1);
+								}
+								object.classOrder = classOrder;
+								var param = JSON.stringify(object);
+								param = encodeURI(param);
+								$.ajax({
+									url: "/sys/applyClass/validateClass.do",
+									data: "param=" + param,
+									dataType: "json",
+									contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+									async: true,
+									beforeSend: function() {
+										$.messager.progress({title : '校验班级名称', msg : '正在校验班级名称，请稍等……'});
+									},
+									success: function (data) {
+										$.messager.progress('close'); 
+										var flag = data.flag;
+										if("false" == flag) {
+											$.messager.alert('提示', data.msg);
+										} else if("exist" == flag) {
+											var msg = data.msg;
+											var classOrder = $("#classOrder").textbox("getValue");
+											$.messager.confirm('提示','班号为'+classOrder+'已存在'+msg+'，确认要使用'+className+'作为班级名称吗？',function(r) {
+												if(r) {
+													addApplyClass();
+												}
+											});
+										} else {
+											addApplyClass();
+										}
+									} 
+								});
 							} else {
 								$.messager.alert('提示', "上课时段"+addNum+"的总课时量为"+hours+"，您选择的所有带班老师的总课时量为"+teacherHours+"，请保持课时量相等！");
 							}
