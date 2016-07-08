@@ -18,11 +18,15 @@
 			ajaxLoading("正在处理，请稍待。。。");
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=505&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
+				$("#schoolManId").combobox({editable:false});
 				$("#schoolHisId").combobox("loadData",data);
+				$("#schoolHisId").combobox({editable:false});
 			},"json");
 			$.post("<%=path %>/pubData/qryStage.do",function(data){
 				$("#classManPharse").combobox("loadData",data);
 				$("#classHisPharse").combobox("loadData",data);
+				$("#classManPharse").combobox("loadData",data);
+				$("#classHisPharse").combobox({editable:false});
 			},"json");
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
 				data = $.grep(data,function(obj){
@@ -39,11 +43,26 @@
 					valueField: 'schoolId', 
 					textField: 'schoolName', 
 					panelHeight: 'auto',
-					onLoadSuccess:function(data){
-						if(data.length > 0)
+					loader:function(param,success,error){  
+					    $.ajax({  
+							url: "<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=505&fieldId=schoolId",  
+							dataType: 'json',  
+							success: function(data){
+					    	if(data.length==schoolData.length)
+					    	{
+					    		data.unshift({schoolName:'所有校区',schoolId:""});  
+					    	}	
+							success(data);  
+							}
+						});  
+			   		},
+					onLoadSuccess:function(){
+						var arr =$("#schoolManId").combobox("getData");
+						if(arr.length<schoolData.length)
 						{
-							$("#schoolManId").combobox("setValue",data[0].schoolId);
-						}
+							$("#schoolManId").combobox("select",arr[0].schoolId);
+							clearFlag =false;
+						}	
 					}
 				});
 				$("#classManPharse").combobox({
@@ -63,11 +82,26 @@
 					valueField: 'schoolId', 
 					textField: 'schoolName', 
 					panelHeight: 'auto',
-					onLoadSuccess:function(data){
-						if(data.length > 0)
+					loader:function(param,success,error){  
+					    $.ajax({  
+							url: "<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=505&fieldId=schoolId",  
+							dataType: 'json',  
+							success: function(data){
+					    	if(data.length==schoolData.length)
+					    	{
+					    		data.unshift({schoolName:'所有校区',schoolId:""});  
+					    	}	
+							success(data);  
+							}
+						});  
+			   		},
+					onLoadSuccess:function(){
+						var arr =$("#schoolHisId").combobox("getData");
+						if(arr.length<schoolData.length)
 						{
-							$("#schoolHisId").combobox("setValue",data[0].schoolId);
-						}
+							$("#schoolHisId").combobox("select",arr[0].schoolId);
+							clearFlag =false;
+						}	
 					}
 				});
 				$("#classHisPharse").combobox({
@@ -118,11 +152,15 @@
 			}
 			function resetManFunc()
 			{
-				var schoolData = $("#schoolManId").combobox("getData");
-				if(schoolData != null && schoolData.length > 0)
+				var schoolDatas = $("#schoolManId").combobox("getData");
+				if(schoolDatas != null && schoolDatas.length==schoolData.length)
 				{
-					$("#schoolManId").combobox("setValue",schoolData[0].schoolId);
+					$("#schoolManId").combobox('setValue',"");
 				}
+				else
+				{
+					$("#schoolManId").combobox("setValue",schoolDatas[0].schoolId);
+				}	
 				$("#classManPharse").combobox("setValue","");
 				$("#classManState").combobox("setValue","");
 				$("#classMan").textbox("setValue","");
@@ -208,11 +246,15 @@
 			}
 			function resetHisFunc()
 			{
-				var schoolData = $("#schoolHisId").combobox("getData");
-				if(schoolData != null && schoolData.length > 0)
+				var schoolDatas = $("#schoolHisId").combobox("getData");
+				if(schoolDatas != null && schoolDatas.length==schoolData.length)
 				{
-					$("#schoolHisId").combobox("setValue",schoolData[0].schoolId);
+					$("#schoolHisId").combobox('setValue',"");
 				}
+				else
+				{
+					$("#schoolHisId").combobox("setValue",schoolDatas[0].schoolId);
+				}	
 				$("#classHisPharse").combobox("setValue","");
 				$("#classHisStart").datebox("setValue","");
 				$("#classHisEnd").datebox("setValue","");
