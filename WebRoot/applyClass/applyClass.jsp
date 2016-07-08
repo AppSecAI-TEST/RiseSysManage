@@ -21,19 +21,19 @@
 			  			<tr>
 			  				<td align="right" style="min-width: 60px;"><span>校区：</span></td>
 			  				<td style="min-width: 100px;">
-								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
+								<select id="schoolId" name="schoolId" class="easyui-combobox" editable="false" style="width: 100px; height: 25px;">
 				        		</select>
 							</td>
 							<td align="right" style="min-width: 60px;"><span>课程阶段：</span></td>
 							<td style="min-width: 100px;">
-								<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;"
+								<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 									data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryStage.do">
 				        		</select>
 							</td>
 							<td align="right" style="min-width:60px;"><span>班级：</span></td>
 							<td style="min-width: 100px;">
-								<input id="classInstId" name="classInstId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
+								<input id="classInstId" name="classInstId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;" />
 							</td>
 							<td align="right" style="min-width: 90px;"><span>放班申请时间：</span></td>
 			  				<td style="min-width: 225px;">
@@ -46,21 +46,21 @@
 			  			<tr>
 			  				<td align="right"><span>班级状态：</span></td>
 							<td>
-								<select id="classState" name="classState" class="easyui-combobox" style="width: 100px; height: 25px;"
+								<select id="classState" name="classState" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 			      			 		url="<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE">
 				        		</select>
 							</td>
 			  				<td align="right"><span>放班状态：</span></td>
 			  				<td>
-			  					<select id="tacheState" name="tacheState" class="easyui-combobox" style="width: 100px; height: 25px;"
+			  					<select id="tacheState" name="tacheState" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=CREATE_CLASS_T&codeType=CREATE_CLASS_STATE">
 				        		</select>
 			  				</td>
 			  				<td align="right"><span>带班老师：</span></td>
 			  				<td>
-			  					<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;">
+			  					<select id="teacherId" name="teacherId" class="easyui-combobox" editable="false" style="width: 100px; height: 25px;">
 				        		</select>
 			  				</td>
 							<td align="right"><span>放班审批时间：</span></td>
@@ -117,7 +117,7 @@
 							</td>
 							<td align="right" style="min-width: 80px"><span>放班审批状态：</span></td>
 							<td>
-								<select id="approveState" name="approveState" class="easyui-combobox" style="width: 100px; height: 25px;"
+								<select id="approveState" name="approveState" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'" 
 			      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=CREATE_CLASS_T&codeType=CREATE_CLASS_APPROVE_STATE">
 				        		</select>
