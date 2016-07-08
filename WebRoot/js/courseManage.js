@@ -136,6 +136,9 @@ $(document).ready(function() {
 	$("#addCourse").click(function() {
 		addCourse();
 	});
+	$("#deleteCourse").click(function() {
+		delCourse();
+	});
 });
 function qryData()
 {
@@ -152,6 +155,7 @@ function qryData()
 	});
 	
 }
+
 
 function addCourse()
 {

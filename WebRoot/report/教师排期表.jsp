@@ -234,7 +234,7 @@ function getWeekTime()
 	$.ajax(
 	{
 		type : "POST",
-		url: "/sys/time/getTimeByWeek.do?",
+		url: "/sys/time/getAllTimeByWeek.do?",
 		data: "param="+param,
 		async: true,
 		dataType:"json",

@@ -76,4 +76,9 @@ public class CreateClassService
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00711\",securityCode:\"0000000000\",params:{classInstId:"+classInstId+",type:\""+type+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
+
+	public String validateClass(String param) throws Exception {
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS00713\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
 }

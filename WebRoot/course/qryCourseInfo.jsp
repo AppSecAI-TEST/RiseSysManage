@@ -112,6 +112,7 @@
   			<div id="toolbar">
     			<a href="javascript:void(0)" id="addCourse" class="easyui-linkbutton" style="width:100px;" iconCls="icon-add">添加课程</a>
     			<a href="javascript:void(0)" id="updateCourse" class="easyui-linkbutton" style="width:100px;" iconCls="icon-edit">修改课程</a>
+    			<a href="javascript:void(0)" id="deleteCourse" class="easyui-linkbutton" style="width:100px;" iconCls="icon-remove">删除课程</a>
     			<a href="javascript:void(0)" id="courseDetail" class="easyui-linkbutton" style="width:100px;" iconCls="icon-redo">浏览</a>
   			</div>
 		 
@@ -155,6 +156,45 @@ $("#courseDetail").click(function()
 {
 	coures("view");
 });
+
+function delCourse()
+{
+	if(validateSelect("list_data"))
+	{
+		var row = $('#list_data').datagrid('getSelected');
+		var courseState=row.courseState;
+		if(!row.courseState=='001')
+		{
+			showMessage("提示","该课程不可删除,请重新选择",null);
+		}else
+		{
+				$.messager.confirm('提示','您确定要删除当前选中课程吗?',function(r) {
+    			if(r)
+    			{
+    				var obj ={};
+				obj.studentCourseId=row.studentCourseId;
+				obj.staffId=$("#staffId").val();
+				var str=JSON.stringify(obj);
+				$.ajax( {
+					url : "/sys/course/delCourse.do?",
+					data : "param=" + str,
+					dataType : "json",
+					async : true,
+					success : function(data)
+					{
+					 if(data.flag=='true');//学员已有课程
+					 {
+						 showMessage("提示","删除课程成功",null);
+					 }
+					} 
+				});
+    			}
+    		});
+				
+			
+		}
+	}
+}
 
 function coures(type)
 {

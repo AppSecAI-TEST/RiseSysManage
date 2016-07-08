@@ -93,10 +93,10 @@
 	  						<c:if test="${not empty obj.refundFeeObj.isAcademic }">
 	  							<c:if test="${obj.refundFeeObj.isAcademic == 'Y' }">
 			  						<input type="radio" name="isAcademic" value="Y" checked="checked" disabled="disabled"/><span>学术退费</span>
-			  						&nbsp;&nbsp;<input type="radio" name="isAcademic" value="N"/><span>非学术退费</span>
+			  						&nbsp;&nbsp;<input type="radio" name="isAcademic" value="N" disabled="disabled"/><span>非学术退费</span>
 	  							</c:if>
 	  							<c:if test="${obj.refundFeeObj.isAcademic == 'N' }">
-	  								<input type="radio" name="isAcademic" value="Y"/><span>学术退费</span>
+	  								<input type="radio" name="isAcademic" value="Y" disabled="disabled"/><span>学术退费</span>
 			  						&nbsp;&nbsp;<input type="radio" name="isAcademic" value="N" checked="checked" disabled="disabled"/><span>非学术退费</span>
 	  							</c:if>
 	  						</c:if>

@@ -24,6 +24,12 @@ public class SchoolTimeService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
+	public String getAllSchoolTimeByWeek(String param) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS80017\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
 	/**
 	 * Ôö¼ÓÅÅ¿Î
 	 * @param param

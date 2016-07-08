@@ -28,10 +28,27 @@ public class CreateClassController
 	@Autowired
 	private CreateClassService createClassService;
 	
+	//校验班级名称和班号
+	@RequestMapping(value = "/validateClass.do")
+	public void validateClass(String param, HttpServletResponse response) {
+		PrintWriter out = null;
+		try {
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = createClassService.validateClass(param);
+			out.write(retVal);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(out != null) {
+				out.close();
+			}
+		}
+	}
+	
 	//申请放班
 	@RequestMapping(value = "/applyCreateClass.do")
 	public void applyCreateClass(String param, HttpServletResponse response) {
-		log.error(param);
 		PrintWriter out = null;
 		try {
 			response.setCharacterEncoding("UTF-8");
@@ -50,13 +67,11 @@ public class CreateClassController
 	//根据班级实例ID查询申请放班内容
 	@RequestMapping(value = "/qryCreateClassById.do")
 	public void qryCreateClassById(String classInstId, String applyType, HttpServletResponse response) {
-		log.error(classInstId);
 		PrintWriter out = null;
 		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.qryCreateClassById(classInstId, applyType);
-			log.error(retVal);
 			out.write(retVal);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -70,13 +85,11 @@ public class CreateClassController
 	//审批放班申请和审批取消放班申请
 	@RequestMapping(value = "/approveApplyClass.do")
 	public void approveApplyClass(String param, HttpServletResponse response) {
-		log.error(param);
 		PrintWriter out = null;
 		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.approveApplyClass(param);
-			log.error(retVal);
 			out.write(retVal);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -91,7 +104,6 @@ public class CreateClassController
 	//取消放班申请
 	@RequestMapping(value = "/cancelApplyClass.do")
 	public void cancelApplyClass(String param, HttpServletResponse response) {
-		log.error(param);
 		PrintWriter out = null;
 		try {
 			response.setCharacterEncoding("UTF-8");
@@ -123,7 +135,6 @@ public class CreateClassController
 			obj.element("classState", classState);
 			obj.element("funcNodeId", funcNodeId);
 			obj.element("channel", channel);
-			log.error(obj);
 			view.addObject("obj", obj);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -207,13 +218,11 @@ public class CreateClassController
 	//查询更换班级的学员信息
 	@RequestMapping(value = "/qryDataByQueryCode.do")
 	public void qryDataByQueryCode(String param, HttpServletResponse response) {
-		log.error(param);
 		PrintWriter out = null;
 		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.qryDataByQueryCode(param);
-			log.error(retVal);
 			out.write(retVal);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -232,7 +241,6 @@ public class CreateClassController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.qryClassName(courseType, classType, stageId, schoolId);
-			log.error(retVal);
 			out.write(retVal);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -250,7 +258,6 @@ public class CreateClassController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.validateRoom(param);
-			log.error(retVal);
 			out.write(retVal);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -268,7 +275,6 @@ public class CreateClassController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.validateHourRange(param);
-			log.error(retVal);
 			out.write(retVal);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -286,7 +292,6 @@ public class CreateClassController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.qryClassInstDetail(param);
-			log.error(retVal);
 			out.write(retVal);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -304,7 +309,6 @@ public class CreateClassController
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = createClassService.getBonus(classInstId, type);
-			log.error(retVal);
 			out.write(retVal);
 		} catch(Exception e) {
 			e.printStackTrace();

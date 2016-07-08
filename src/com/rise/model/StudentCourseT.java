@@ -82,6 +82,8 @@ public class StudentCourseT {
 	private StaffT adviserTeacherAObj;
 	
 	private StaffT adviserTeacherBObj;
+	
+    private Integer handerId;
 
     public Integer getStudentCourseId() {
         return studentCourseId;
@@ -402,5 +404,13 @@ public class StudentCourseT {
 	public void setAdviserTeacherBObj(StaffT adviserTeacherBObj) {
 		this.adviserTeacherBObj = adviserTeacherBObj;
 	}
-    
+
+	public Integer getHanderId() {
+		return handerId;
+	}
+
+	public void setHanderId(Integer handerId) {
+		this.handerId = handerId;
+	}
+	
 }

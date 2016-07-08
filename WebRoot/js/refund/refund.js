@@ -58,6 +58,11 @@ $(document).ready(function() {
 			});
 			s = s.substring(0, s.length - 1);
 		}
+		var pending = $("#pending").prop("checked");
+		if(pending) {
+			var post = $("#post").val();
+			object.post = post;
+		}
 		object.approveRefundState = s;
 		object.funcNodeId = funcNodeId;
     	var obj = JSON.stringify(object);
