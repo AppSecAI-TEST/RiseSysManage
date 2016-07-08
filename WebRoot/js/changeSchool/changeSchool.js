@@ -19,6 +19,11 @@ $(document).ready(function() {
 		object.schoolId = schoolId;
 		var funcNodeId = $("#qryApplyBtn").attr("funcNodeId");
 		object.funcNodeId = funcNodeId;
+		if(schools!=schoolData.length && object.outSchoolId=='' && object.inSchoolId=='')
+		{
+				$.messager.alert('提示', "请选择转出校区或转入校区");
+			return;
+		}
 		var obj = JSON.stringify(object);
     	$('#apply_list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",
@@ -43,6 +48,11 @@ $(document).ready(function() {
 		object.schoolId = schoolId;
 		var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");
 		object.funcNodeId = funcNodeId;
+		if(schools!=schoolData.length && object.approveSchoolId=='' && object.approveInschoolId=='')
+		{
+				$.messager.alert('提示', "请选择转出校区或转入校区");
+			return;
+		}
 		var obj = JSON.stringify(object);
     	$('#approve_list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",
@@ -60,14 +70,22 @@ $(document).ready(function() {
 		$("#qryApproveFm").form('clear');//清空窗体数据  
 	});
 	
+	var staffId = $("#handlerId").val();
+	var schools ;
 	$("#outSchoolId").combobox({
-		url : "/sys/pubData/qrySchoolList.do",
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=503&fieldId=schoolId",
 		valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
     	},
+    	onLoadSuccess : function(data) {
+    		schools=data.length;
+			if(data.length == 1) {
+				$("#outSchoolId").combobox("setValue", data[0].schoolId);
+			}
+		},
     	onChange : function(n, o) {
     		if(n != "" && n != null && n != undefined) {
     			$("#outTeacherId").combobox({
@@ -89,7 +107,7 @@ $(document).ready(function() {
 	});
 	
 	$("#inSchoolId").combobox({
-		url : "/sys/pubData/qrySchoolList.do",
+			url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=503&fieldId=schoolId",
 		valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
@@ -99,17 +117,23 @@ $(document).ready(function() {
 	});
 	
 	$("#approveSchoolId").combobox({
-		url : "/sys/pubData/qrySchoolList.do",
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=503&fieldId=schoolId",
 		valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
-    	}
+    	},
+    	onLoadSuccess : function(data) {
+    		schools=data.length;
+			if(data.length == 1) {
+				$("#approveSchoolId").combobox("setValue", data[0].schoolId);
+			}
+		}
 	});
 	
 	$("#approveInschoolId").combobox({
-		url : "/sys/pubData/qrySchoolList.do",
+		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=503&fieldId=schoolId",
 		valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",

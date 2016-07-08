@@ -21,7 +21,7 @@
 		  				<tr>
 		  					<td width="70px" align="right"><span>校区：</span></td>
 			  				<td width="100px">
-								<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
+								<select id="schoolId" name="schoolId" class="easyui-combobox"  editable="false" style="width: 100px; height: 25px;">
 				        		</select>
 							</td>
 							<td width="60px" align="right"><span>学员姓名：</span></td>
@@ -133,7 +133,7 @@
 		  				<tr>
 		  					<td width="70px" align="right"><span>校区：</span></td>
 			  				<td width="100px">
-								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;">
+								<select id="approveSchoolId" name="approveSchoolId"  editable="false" class="easyui-combobox" style="width: 100px; height: 25px;">
 				        		</select>
 							</td>
 							<td width="70px" align="right"><span>学员姓名：</span></td>
