@@ -16,14 +16,11 @@ $(document).ready(function() {
 		initPageNumber("apply_list_data");
 		var object = $("#qryApplyFm").serializeObject();
 		var schoolId = $("#schoolId").val();
-		object.schoolId = schoolId;
+		if("10" != schoolId && schoolId != null && schoolId != "" && schoolId != undefined) {
+			object.schoolId = schoolId;
+		}
 		var funcNodeId = $("#qryApplyBtn").attr("funcNodeId");
 		object.funcNodeId = funcNodeId;
-		if(schools!=schoolData.length && object.outSchoolId=='' && object.inSchoolId=='')
-		{
-				$.messager.alert('提示', "请选择转出校区或转入校区");
-			return;
-		}
 		var obj = JSON.stringify(object);
     	$('#apply_list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",
@@ -45,14 +42,12 @@ $(document).ready(function() {
 		initPageNumber("approve_list_data");
 		var object = $("#qryApproveFm").serializeObject();
 		var schoolId = $("#schoolId").val();
-		object.schoolId = schoolId;
+		var schoolId = $("#schoolId").val();
+		if("10" != schoolId && schoolId != null && schoolId != "" && schoolId != undefined) {
+			object.schoolId = schoolId;
+		}
 		var funcNodeId = $("#qryApproveBtn").attr("funcNodeId");
 		object.funcNodeId = funcNodeId;
-		if(schools!=schoolData.length && object.approveSchoolId=='' && object.approveInschoolId=='')
-		{
-				$.messager.alert('提示', "请选择转出校区或转入校区");
-			return;
-		}
 		var obj = JSON.stringify(object);
     	$('#approve_list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",
@@ -71,21 +66,14 @@ $(document).ready(function() {
 	});
 	
 	var staffId = $("#handlerId").val();
-	var schools ;
 	$("#outSchoolId").combobox({
-		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=503&fieldId=schoolId",
+		url : "/sys/pubData/qrySchoolList.do",
 		valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
     	},
-    	onLoadSuccess : function(data) {
-    		schools=data.length;
-			if(data.length == 1) {
-				$("#outSchoolId").combobox("setValue", data[0].schoolId);
-			}
-		},
     	onChange : function(n, o) {
     		if(n != "" && n != null && n != undefined) {
     			$("#outTeacherId").combobox({
@@ -107,7 +95,7 @@ $(document).ready(function() {
 	});
 	
 	$("#inSchoolId").combobox({
-			url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=503&fieldId=schoolId",
+		url : "/sys/pubData/qrySchoolList.do",
 		valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
@@ -117,23 +105,17 @@ $(document).ready(function() {
 	});
 	
 	$("#approveSchoolId").combobox({
-		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=503&fieldId=schoolId",
+		url : "/sys/pubData/qrySchoolList.do",
 		valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
-    	},
-    	onLoadSuccess : function(data) {
-    		schools=data.length;
-			if(data.length == 1) {
-				$("#approveSchoolId").combobox("setValue", data[0].schoolId);
-			}
-		}
+    	}
 	});
 	
 	$("#approveInschoolId").combobox({
-		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=503&fieldId=schoolId",
+		url : "/sys/pubData/qrySchoolList.do",
 		valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
