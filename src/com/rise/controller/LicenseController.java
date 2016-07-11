@@ -78,6 +78,33 @@ public class LicenseController {
 		}
 	}
 	
+	//新增持证
+	@RequestMapping(value="/delLicense.do")
+	public void delLicense(HttpServletResponse response,String param)
+	{
+		log.error(param);
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = licenseService.delLicense(param);
+			log.error(retVal);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 	//浏览教师持证信息
 	@RequestMapping(value="/viewLicenseInfo.do")
 	public ModelAndView viewLicenseInfo(String teacherId,String funcNodeId)

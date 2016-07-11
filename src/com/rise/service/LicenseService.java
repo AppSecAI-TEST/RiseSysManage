@@ -21,6 +21,13 @@ public class LicenseService {
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1902\",securityCode:\"0000000000\",params:{json:'"+json+"'},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(param);
 	}
+	
+
+	//新增持证
+	public String delLicense(String json)throws Exception {
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1905\",securityCode:\"0000000000\",params:{param:'"+json+"'},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
 
 	//浏览教师持证信息
 	public String viewLicenseInfo(String teacherId)throws Exception {

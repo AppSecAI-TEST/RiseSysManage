@@ -35,6 +35,13 @@ $(document).ready(function(){
     	}
     });
     
+    $("#deleteLicense").click(function()
+	{
+	deleteLicense();
+    	
+	});
+    
+    
 //	initDate();
 //	//定位教师页面查询
 //    $("#qryTeaBtn").click(function() {
@@ -89,6 +96,10 @@ $(document).ready(function(){
     
 });
 
+function deleteLicense()
+{
+	window.location.href = "/sys/licenseManage/teacherLicense.jsp";
+}
 //跳转到定位老师页面
 function locateTeacher()
 {
