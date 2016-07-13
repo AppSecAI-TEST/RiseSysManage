@@ -57,7 +57,7 @@ $(document).ready(function() {
 function reload() {
 	$('#dlg').dialog('close');
 	var classInstId = $("#classInstId").val();
-	window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId=" + classInstId + "&type=numChange";
+	window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId=" + classInstId + "&type=numChange&funcNodeId=${funcNodeId}";
 }
 
 function changeStudentBaseNum(baseNumStudentId) {

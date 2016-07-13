@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	ajaxLoading("正在处理，请稍待。。。");
 	$("#qryBtn").click(function() {
 		initPageNumber("list_data");
 		var object = $("#qryFm").serializeObject();
@@ -32,6 +33,9 @@ $(document).ready(function() {
 	if($("#schoolId").length > 0) {
 		var staffId = $("#staffId").val();
 		$("#schoolId").combobox({
+			onLoadSuccess : function(data) {
+				ajaxLoadEnd();
+			},
 	    	onChange : function(n, o) {
 	    		if($("#teacherId").length > 0) {
 					//学校的教师

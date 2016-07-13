@@ -27,8 +27,7 @@ $(document).ready(function() {
 	initReportButton("reset","qryFm","schoolId")
 });
 
-function initDate()
-{
+function initDate() {
 	var curr_time = new Date();
 	$('#endTime').datebox('setValue', myformatter(curr_time));
 	curr_time.setMonth(curr_time.getMonth() - 1);

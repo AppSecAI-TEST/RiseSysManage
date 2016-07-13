@@ -552,7 +552,7 @@ function maintenanceClass(changeRoomFlag) {
 				$.messager.progress('close'); 
 				var flag = data.flag;
 				if(flag) {
-					$.messager.alert('提示', "班级维护成功！", "info", function() {window.history.back();});
+					$.messager.alert('提示', "班级维护成功！", "info", function() {window.location.href='/sys/attendClass/attendClassList.jsp?funcNodeId=${funcNodeId}';});
 				} else {
 					$.messager.alert('提示', data.msg);
 				}

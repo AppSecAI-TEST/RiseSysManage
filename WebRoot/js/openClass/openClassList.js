@@ -12,6 +12,7 @@ $(document).ready(function() {
 //		}
 //	});
 	
+	ajaxLoading("正在处理，请稍待。。。");
 	$("#qryBtn").click(function() {
 		initPageNumber("list_data");
     	var obj = JSON.stringify($("#qryFm").serializeObject());
@@ -34,7 +35,7 @@ $(document).ready(function() {
 	$("#reset").click(function() {
 		$("#qryFm").form('clear');//清空窗体数据  
 		var data = $("#schoolId").combobox("getData");
-		if(data.length > 0) {
+		if(data.length == 1) {
 			$("#schoolId").combobox("setValue", data[0].schoolId);
 		}
 	});
@@ -61,7 +62,7 @@ $(document).ready(function() {
 	$("#resetApprove").click(function() {
 		$("#qryApproveFm").form('clear');//清空窗体数据  
 		var data = $("#schoolId").combobox("getData");
-		if(data.length > 0) {
+		if(data.length == 1) {
 			$("#approveSchoolId").combobox("setValue", data[0].schoolId);
 		}
 	});
@@ -76,7 +77,8 @@ $(document).ready(function() {
 			return "<span>" + data.schoolName + "</span>";
 		},
 		onLoadSuccess : function(data) {
-			if(data.length > 0) {
+			ajaxLoadEnd();
+			if(data.length == 1) {
 				$("#schoolId").combobox("setValue", data[0].schoolId);
 			}
 		}
@@ -91,7 +93,7 @@ $(document).ready(function() {
 			return "<span>" + data.schoolName + "</span>";
 		},
 		onLoadSuccess : function(data) {
-			if(data.length > 0) {
+			if(data.length == 1) {
 				$("#approveSchoolId").combobox("setValue", data[0].schoolId);
 			}
 		}

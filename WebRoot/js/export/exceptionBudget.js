@@ -1,5 +1,6 @@
 var editIndex = undefined;
 $(document).ready(function() {
+	ajaxLoading("正在处理，请稍待。。。");
 	initReportButton("reset","qryFm","schoolId")
 	var tableName = $("#tableName").val();
 	$("#year").combobox({
@@ -11,6 +12,7 @@ $(document).ready(function() {
     		return "<span>" + data.year + "</span>";
     	},
     	onLoadSuccess:function(data) {
+    		ajaxLoadEnd();
     		if(data.length > 0) {
     			var date = new Date;
     			var current_year = date.getFullYear();

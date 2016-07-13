@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	ajaxLoading("正在处理，请稍待。。。");
 	$("#qryBtn").click(function() {
 		var schoolId = $("#schoolId").combobox("getValue");
     	if(schoolId != "") {

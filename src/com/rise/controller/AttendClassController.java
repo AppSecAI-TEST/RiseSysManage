@@ -21,16 +21,14 @@ import com.rise.service.AttendClassService;
  */
 @Controller
 @RequestMapping("/attendClass")
-public class AttendClassController 
-{
+public class AttendClassController {
 	private static Log log = LogFactory.getLog(AttendClassController.class);
 	
 	@Autowired
 	private AttendClassService attendClassService;
 	
 	@RequestMapping(value = "/qryAttendClass.do")
-	public ModelAndView qryAttendClass(String classInstId, String type, String funcNodeId)
-	{
+	public ModelAndView qryAttendClass(String classInstId, String type, String funcNodeId) {
 		log.error(classInstId);
 		ModelAndView view = null;
 		if("maintenance".equals(type)) {
@@ -47,43 +45,35 @@ public class AttendClassController
 			view = new ModelAndView("baseChange/change");
 		} else if("changeHist".equals(type)) {
 			view = new ModelAndView("baseChange/changeHist");
-		} 
-		try 
-		{
+		} else if("updateFinishDate".equals(type)) {
+			view = new ModelAndView("attendClass/updateFinishDate");
+		}
+		try {
 			String retVal = attendClassService.qryAttendClassById(classInstId);
 			JSONObject obj = JSONObject.fromObject(retVal);
 			log.error(obj);
 			view.addObject("obj", obj);
 			view.addObject("funcNodeId", funcNodeId);
-		} 
-		catch (Exception e) 
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return view;
 	}
 	
 	@RequestMapping(value = "/disbandClass.do")
-	public void disbandClass(String param, HttpServletResponse response)
-	{
+	public void disbandClass(String param, HttpServletResponse response) {
 		log.error(param);
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = attendClassService.disbandClass(param);
 			log.error(retVal);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e) {
 			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null)
-			{
+		} finally {
+			if(out != null) {
 				out.close();
 			}
 		}
@@ -91,26 +81,19 @@ public class AttendClassController
 	
 	//在读班变更老师
 	@RequestMapping(value = "/changeTeacher.do")
-	public void changeTeacher(String param, HttpServletResponse response)
-	{
+	public void changeTeacher(String param, HttpServletResponse response) {
 		log.error(param);
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = attendClassService.changeTeacher(param);
 			log.error(retVal);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e) {
 			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null)
-			{
+		} finally {
+			if(out != null) {
 				out.close();
 			}
 		}
@@ -118,26 +101,39 @@ public class AttendClassController
 	
 	//在读班结课
 	@RequestMapping(value = "/finishClass.do")
-	public void finishClass(String param, HttpServletResponse response)
-	{
+	public void finishClass(String param, HttpServletResponse response) {
 		log.error(param);
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = attendClassService.finishClass(param);
 			log.error(retVal);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			if(out != null) {
+				out.close();
+			}
 		}
-		finally
-		{
-			if(out != null)
-			{
+	}
+	
+	//修改结课时间
+	@RequestMapping(value = "/updateFinishDate.do")
+	public void updateFinishDate(String param, HttpServletResponse response) {
+		log.error(param);
+		PrintWriter out = null;
+		try {
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = attendClassService.updateFinishDate(param);
+			log.error(retVal);
+			out.write(retVal);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(out != null) {
 				out.close();
 			}
 		}

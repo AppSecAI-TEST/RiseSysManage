@@ -1,19 +1,22 @@
 $(document).ready(function() {
 	var clearFlag = true;
-	var schoolData = [1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013];	$("#schoolId").combobox({
+	ajaxLoading("正在处理，请稍待。。。");
+	var schoolData = [1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013];	
+	$("#schoolId").combobox({
 		loader:function(param,success,error){  
 		    $.ajax({  
 				url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
 				dataType: 'json',  
-				success: function(data){
-		    	if(data.length == schoolData.length) {
-		    		data.unshift({schoolName:'所有校区',schoolId:""});  
-		    	}
-				success(data);  
+				success: function(data) {
+			    	if(data.length == schoolData.length) {
+			    		data.unshift({schoolName:'所有校区',schoolId:""});  
+			    	}
+					success(data);  
 				}
 			});  
    		},
 		onLoadSuccess: function() {
+			ajaxLoadEnd();
 			var arr = $("#schoolId").combobox("getData");
 			if(arr.length < schoolData.length) {
 				$("#schoolId").combobox("select",arr[0].schoolId);
@@ -47,12 +50,9 @@ $(document).ready(function() {
 	//重置
 	$("#reset").click(function() {
 		$("#qryFm").form('clear');//清空窗体数据 
-		if(!clearFlag)
-    	{
+		if(!clearFlag) {
     		$("#schoolId").combobox('select',$("#schoolId").combobox("getData")[0].schoolId);
-    	}
-    	else
-    	{
+    	} else {
     		$("#schoolId").combobox('setValue',"");
     	}
 		var type = $("#type").val();

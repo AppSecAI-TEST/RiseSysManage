@@ -1,4 +1,5 @@
-$(document).ready(function(){
+$(document).ready(function() {
+	ajaxLoading("正在处理，请稍待。。。");
 	//首页面查询
     $("#qryBtn").click(function() {
     	initPageNumber("list_data");
@@ -57,16 +58,27 @@ $(document).ready(function(){
 	//校区
 	var staffId = $("#staffId").val();
 	$("#schoolId").combobox({
-    	url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=711&fieldId=schoolId",
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
+    	loader: function(param,success,error) {
+    		$.ajax({  
+    			url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=711&fieldId=schoolId",
+				dataType: 'json',  
+				success: function(data) {
+			    	if(data.length > 1) {
+			    		data.unshift({schoolName:"全部校区", schoolId:""});  
+			    	}
+					success(data);  
+				}
+			});  
+    	},
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
     	},
-    	onLoadSuccess : function() {
-    		var data = $("#schoolId").combobox("getData");
-    		if(data.length == 1) {
+    	onLoadSuccess : function(data) {
+    		ajaxLoadEnd();
+    		if(data.length > 0) {
     			$("#schoolId").combobox("setValue", data[0].schoolId);
     		}
     	},
@@ -103,8 +115,7 @@ $(document).ready(function(){
 });
 
 //跳转客户维护页面
-function updateExp()
-{
+function updateExp() {
 	if(validateSelect("list_data")) {
 		var row = $('#list_data').datagrid('getSelected');
 		var studentId = row.studentId;
@@ -142,51 +153,49 @@ function viewFollowHis(studentId,expType,studentCourseId)
 }
 
 //新增异动跟进信息
-function addStuExpFollowInfo()
-{
-	var studentId = $("#studentId").val();
-	var studentCourseId = $("#studentCourseId").val();
-	var exceptionType = $("#expType").val();
-	var handlerId = $("#handlerId").val();
+function addStuExpFollowInfo(){
 	var createDate = $("#createDate").datebox('getValue');
-	if(createDate == "" || createDate == undefined){
+	if(createDate == "" || createDate == undefined || createDate == null) {
 		$.messager.alert('提示', "请选择跟进时间！");
 		return;
+	} else {
+		var studentId = $("#studentId").val();
+		var studentCourseId = $("#studentCourseId").val();
+		var exceptionType = $("#expType").val();
+		var handlerId = $("#handlerId").val();
+		var remark = $("#remark").val();
+		remark = string2Json(remark);
+		remark = encodeURI(remark);
+		var care = {};
+		care.studentId = studentId;
+		care.studentCourseId = studentCourseId;
+		care.exceptionType = exceptionType;
+		care.handlerId = handlerId;
+		care.createDate = createDate;
+		care.remark = remark;
+		$.ajax({
+			type : "POST",
+			url: "/sys/expManage/addStuExpFollowInfo.do",
+			data: "json="+JSON.stringify(care),
+			async: false,
+			beforeSend: function() {
+				$.messager.progress({title : '新增异动跟进记录', msg : '新增异动跟进记录中，请稍等……'});
+			},
+			success: function(flag) {
+				$.messager.progress('close'); 
+				if(flag == "true"){
+					$.messager.alert('提示', "新增异动跟进记录成功！","info",function(){
+						window.location.href = "/sys/exceptionManage/exceptionManage.jsp";
+					});
+				}else if(flag == "false"){
+					$.messager.alert('提示', "新增异动跟进记录失败！");
+				}
+			} 
+		});
 	}
-	var remark = $("#remark").val();
-	remark = string2Json(remark);
-	remark = encodeURI(remark);
-	var care = {};
-	care.studentId = studentId;
-	care.studentCourseId = studentCourseId;
-	care.exceptionType = exceptionType;
-	care.handlerId = handlerId;
-	care.createDate = createDate;
-	care.remark = remark;
-	$.ajax({
-		type : "POST",
-		url: "/sys/expManage/addStuExpFollowInfo.do",
-		data: "json="+JSON.stringify(care),
-		async: false,
-		beforeSend: function()
-    	{
-    		$.messager.progress({title : '新增异动跟进记录', msg : '新增异动跟进记录中，请稍等……'});
-    	},
-    	success: function(flag) {
-    		$.messager.progress('close'); 
-    		if(flag == "true"){
-    			$.messager.alert('提示', "新增异动跟进记录成功！","info",function(){
-    				window.location.href = "/sys/exceptionManage/exceptionManage.jsp";
-				});
-    		}else if(flag == "false"){
-    			$.messager.alert('提示', "新增异动跟进记录失败！");
-    		}
-        } 
-	});
 }
 
-function validateSelect(object)
-{
+function validateSelect(object) {
 	var flag = false;
 	var obj = $("#"+object+"").datagrid('getSelections');
 	if(obj.length > 0) {

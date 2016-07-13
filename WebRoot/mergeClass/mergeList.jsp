@@ -37,7 +37,7 @@
 		  					<td width="100px;">
 		  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px;height:25px;" editable="false"
 		  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-									onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
+									onLoadSuccess:function(data){if(data.length == 1) $('#schoolId').combobox('setValue',data[0].schoolId);}"
   									url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=704&fieldId=schoolId">
 				        		</select>
 		  					</td>
@@ -76,9 +76,9 @@
 		  						<input class="easyui-datebox" name="endMergeTime" id="endMergeTime" style="width:100px;height:25px;" editable="false"/>
 		  					</td>
 		  					<td align="left">	
-		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:80px" id="qryBtn" funcNodeId="3111">查询</a>
+		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" funcNodeId="3111">查询</a>
 		  						&nbsp;&nbsp;
-		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:80px" id="resetBtn" >重置</a>
+		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="resetBtn" >重置</a>
 		  					</td>
 		  				</tr>
 		  			</table>
@@ -130,7 +130,7 @@
 		  					<td width="100px;">
 		  						<select id="schoolIds" name="schoolId" class="easyui-combobox" style="width: 100px;height:25px;" editable="false"
 									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-						      		onLoadSuccess:function(data){if(data.length > 0) $('#schoolIds').combobox('setValue',data[0].schoolId);}"
+						      		onLoadSuccess:function(data){ajaxLoadEnd(); if(data.length == 1) $('#schoolIds').combobox('setValue',data[0].schoolId);}"
   									url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=705&fieldId=schoolId&headFlag=N">
 				        		</select>
 		  					</td>

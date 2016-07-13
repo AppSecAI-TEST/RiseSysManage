@@ -1,8 +1,9 @@
 $(document).ready(function() {
 	var clearFlag = true;
+	ajaxLoading("正在处理，请稍待。。。");
 	var schoolData = [1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013];	
 	$("#schoolId").combobox({
-		loader:function(param,success,error){  
+		loader: function(param, success, error) {  
 		    $.ajax({  
 				url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
 				dataType: 'json',  
@@ -14,8 +15,9 @@ $(document).ready(function() {
 				}
 			});  
    		},
-		onLoadSuccess:function(){
-			var arr =$("#schoolId").combobox("getData");
+		onLoadSuccess: function() {
+			ajaxLoadEnd();
+			var arr = $("#schoolId").combobox("getData");
 			if(arr.length < schoolData.length || ($("#sFlag").length > 0 && $("#sFlag").val() == "1")) {
 				$("#schoolId").combobox("select", arr[0].schoolId);
 				clearFlag = false;
@@ -93,10 +95,8 @@ $(document).ready(function() {
 	$('#year').datebox('setValue', yearFormatter(curr_time));
 	
 	$("#qryBtn").click(function() {
-		if($("#sFlag").length>0&&$("#sFlag").val()=="1")
-		{
-			if($("#schoolId").combobox("getValue")=="")
-			{
+		if($("#sFlag").length>0&&$("#sFlag").val() == "1") {
+			if($("#schoolId").combobox("getValue") == "") {
 				showMessage("提示","请选择一个具体的校区",null);
 				return false
 			}	

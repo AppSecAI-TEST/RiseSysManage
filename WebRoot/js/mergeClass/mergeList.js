@@ -1,4 +1,5 @@
-$(document).ready(function(){
+$(document).ready(function() {
+	ajaxLoading("正在处理，请稍待。。。");
 	$("#applyMerge").click(function(){
 		window.location.href="selectClass.jsp?isHead=N";
 	});

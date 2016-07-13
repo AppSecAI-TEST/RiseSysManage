@@ -1,17 +1,29 @@
 $(document).ready(function() {
+	ajaxLoading("正在处理，请稍待。。。");
 	initQryButton("qryBtn", "reset", "qryFm", "list_data");
-	
 	var staffId = $("#staffId").val();
 	$("#schoolId").combobox({
-		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=712&fieldId=schoolId&headFlag=N",
     	valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
+    	loader: function(param,success,error) {
+    		$.ajax({  
+    			url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=712&fieldId=schoolId&headFlag=N",
+				dataType: 'json',  
+				success: function(data) {
+			    	if(data.length > 1) {
+			    		data.unshift({schoolName:"全部校区", schoolId:""});  
+			    	}
+					success(data);  
+				}
+			});  
+    	},
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
     	},
     	onLoadSuccess : function(data) {
-    		if(data.length == 1) {
+    		ajaxLoadEnd();
+    		if(data.length > 0) {
     			$("#schoolId").combobox("setValue", data[0].schoolId);
     		}	
     	},

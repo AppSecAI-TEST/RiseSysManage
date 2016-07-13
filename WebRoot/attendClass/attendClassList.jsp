@@ -130,7 +130,8 @@
 			</table>
 	  		<div id="toolbar" style="padding: 2px; height: auto">
 	   			<a href="javascript:void(0)" id="maintenanceBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">班级维护</a>
-	   			<a href="javascript:void(0)" id="disbandBtn" class="easyui-linkbutton" iconCls="icon-cancel" style="width: 120px;">班级解散</a>
+	   			<a href="javascript:void(0)" id="disbandBtn" class="easyui-linkbutton" iconCls="icon-cancel" style="width: 100px;">班级解散</a>
+	   			<a href="javascript:void(0)" id="finishDateBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width: 120px;">修改结课时间</a>
 	   			<a href="javascript:void(0)" id="view" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px;">浏览</a>
 			</div>
 		</div>

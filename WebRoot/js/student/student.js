@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	ajaxLoading("正在处理，请稍待。。。");
 	$("#qryBtn").click(function() {
 		initPageNumber("list_data");
 		var object = $("#qryFm").serializeObject();
@@ -29,16 +30,27 @@ $(document).ready(function() {
     //校区
     var staffId = $("#staffId").val();
     $("#schoolId").combobox({
-    	url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=711&fieldId=schoolId&headFlag=N",
-    	valueField : "schoolId",
-    	textField : "schoolName",
-    	panelHeight : "auto",
+    	valueField: "schoolId",
+    	textField: "schoolName",
+    	panelHeight: "auto",
+    	loader: function(param,success,error) {
+    		$.ajax({  
+    			url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=711&fieldId=schoolId&headFlag=N",
+				dataType: 'json',  
+				success: function(data) {
+			    	if(data.length > 1) {
+			    		data.unshift({schoolName:"全部校区", schoolId:""});  
+			    	}
+					success(data);  
+				}
+			});  
+    	},
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
     	},
-    	onLoadSuccess : function() {
-    		var data = $("#schoolId").combobox("getData");
-    		if(data.length == 1) {
+    	onLoadSuccess : function(data) {
+    		ajaxLoadEnd();
+    		if(data.length > 0) {
     			$("#schoolId").combobox("setValue", data[0].schoolId);
     		}
     	},

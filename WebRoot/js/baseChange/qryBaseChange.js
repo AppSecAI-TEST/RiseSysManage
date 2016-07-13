@@ -1,16 +1,29 @@
 $(document).ready(function() {
+	ajaxLoading("正在处理，请稍待。。。");
 	var staffId = $("#staffId").val();
 	$("#schoolId").combobox({
-		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=506&fieldId=schoolId",
 		valueField : "schoolId",
     	textField : "schoolName",
     	panelHeight : "auto",
+    	loader: function(param, success, error) {
+    		$.ajax({  
+    			url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=506&fieldId=schoolId",
+				dataType: 'json',  
+				success: function(data) {
+			    	if(data.length > 1) {
+			    		data.unshift({schoolName:"全部校区", schoolId:""});  
+			    	}
+					success(data);  
+				}
+			});  
+    	},
     	formatter : function(data) {
     		return "<span>" + data.schoolName + "</span>";
     	},
     	onLoadSuccess : function() {
+    		ajaxLoadEnd();
     		var data = $("#schoolId").combobox("getData");
-    		if(data.length >= 1) {
+    		if(data.length > 0) {
     			$("#schoolId").combobox("setValue", data[0].schoolId);
     		}
     	},
@@ -59,7 +72,7 @@ $(document).ready(function() {
 //				return;
 //			}
 			var classInstId = row.classInstId;
-			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId=" + classInstId + "&type=numChange";
+			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId=" + classInstId + "&type=numChange&funcNodeId="+$("#funcNodeId").val();
 		} else {
 			$.messager.alert('提示', "请先选择您要调整的班级！");
 		}
@@ -71,7 +84,7 @@ $(document).ready(function() {
 		if (row) {
 			var classState = row.classState;
 			var classInstId = row.classInstId;
-			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId=" + classInstId + "&type=changeHist";
+			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId=" + classInstId + "&type=changeHist&funcNodeId="+$("#funcNodeId").val();
 		} else {
 			$.messager.alert('提示', "请选择班级！");
 		}

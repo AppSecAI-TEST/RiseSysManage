@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	ajaxLoading("正在处理，请稍待。。。");
 	$("#qryBtn").click(function() {
 		initPageNumber("list_data");
 		var object = $("#qryFm").serializeObject();
@@ -25,13 +26,33 @@ $(document).ready(function() {
 		}
 	});
 	
+	var staffId = $("#staffId").val();
 	$("#schoolId").combobox({
-    	onLoadSuccess:function(data) {
+		valueField: "schoolId",
+    	textField: "schoolName",
+    	panelHeight: "auto",
+    	loader: function(param,success,error) {
+    		$.ajax({  
+    			url : "/sys/pub/pageCategory.do?staffId="+staffId+"&resourceId=5061&fieldId=schoolId",
+				dataType: 'json',  
+				success: function(data) {
+			    	if(data.length > 1) {
+			    		data.unshift({schoolName:"全部校区", schoolId:""});  
+			    	}
+					success(data);  
+				}
+			});  
+    	},
+    	formatter : function(data) {
+    		return "<span>" + data.schoolName + "</span>";
+    	},
+    	onLoadSuccess: function(data) {
+    		ajaxLoadEnd();
     		if(data.length > 0) {
     			$("#schoolId").combobox("setValue", data[0].schoolId);
     		}
     	},
-    	onChange : function(n, o) {
+    	onChange: function(n, o) {
     		$("#teacherId").combobox({
 				url : "/sys/pubData/qryTeacherList.do?schoolId="+n+"&stageId=",//返回json数据的url
 				valueField : "teacherId", 
@@ -73,21 +94,17 @@ $(document).ready(function() {
 		if(row) {
 			var classState = row.classState;
 			var isGrad=row.isGrad;
-			if("004" == classState)
-			{
-				if(isGrad=='Y')
-				{
+			if("004" == classState) {
+				if(isGrad=='Y') {
 					$.messager.alert('提示', "该班级毕业典礼已取消");
 					return;
 				}
 				var classInstId = row.classInstId;
 				window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=finish";
-			} else 
-			{
+			} else  {
 				$.messager.alert('提示', "请选择已结课班级");
 			}
-		} else
-		{
+		} else {
 			$.messager.alert('提示', "请选择班级");
 		}
 	});
@@ -113,8 +130,7 @@ $(document).ready(function() {
 				data: "param=" + obj,
 				dataType: "json",
 				async: true,
-				beforeSend: function()
-				{
+				beforeSend: function() {
 					$.messager.progress({title : '班级结课', msg : '处理中，请稍等……'});
 				},
 				success: function (data) {

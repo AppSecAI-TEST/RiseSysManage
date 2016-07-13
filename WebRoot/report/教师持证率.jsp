@@ -20,7 +20,7 @@
   					<td width="10%" align="left">
 						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:100px;height: 25px;" editable="false"
 							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-							onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
+							onLoadSuccess:function(data){ajaxLoadEnd(); if(data.length > 1) {data.unshift({schoolName:'所有校区',schoolId:''});} $('#schoolId').combobox('setValue',data[0].schoolId);}"
 				      		url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=515&fieldId=schoolId&headFlag=N">
 			        	</select>
 					</td>

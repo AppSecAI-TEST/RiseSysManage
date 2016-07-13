@@ -12,6 +12,7 @@
   	</head>
   
   	<body>
+  		<input type="hidden" id="funcNodeId" value="${param.funcNodeId}"/>
   		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId}"/>
   		<div style="magrin-right:5px;">
   		<form id="qryFm">

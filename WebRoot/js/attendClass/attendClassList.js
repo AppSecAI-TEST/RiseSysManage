@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	ajaxLoading("正在处理，请稍待。。。");
 	$("#qryBtn").click(function() {
 		initPageNumber("list_data");
 		var object = $("#qryFm").serializeObject();
@@ -27,14 +28,26 @@ $(document).ready(function() {
 	
 	var staffId = $("#staffId").val();
 	$("#schoolId").combobox({
-		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=503&fieldId=schoolId",
 		valueField : "schoolId",
 		textField : "schoolName",
 		panelHeight : "auto",
+		loader: function(param,success,error) {
+    		$.ajax({  
+    			url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=503&fieldId=schoolId",
+				dataType: 'json',  
+				success: function(data) {
+			    	if(data.length > 1) {
+			    		data.unshift({schoolName:"全部校区", schoolId:""});  
+			    	}
+					success(data);  
+				}
+			});  
+    	},
 		formatter : function(data) {
 			return "<span>" + data.schoolName + "</span>";
 		},
 		onLoadSuccess : function(data) {
+			ajaxLoadEnd();
 			if(data.length > 0) {
 				$("#schoolId").combobox("setValue", data[0].schoolId);
 			}
@@ -89,9 +102,20 @@ $(document).ready(function() {
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) {
 			var classInstId = row.classInstId;
-			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=disband";
+			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=disband&funcNodeId="+$("#funcNodeId").val();
 		} else {
 			$.messager.alert('提示', "请先选择您要解散的班级！");
+		}
+	});
+	
+	//修改结课时间
+	$("#finishDateBtn").click(function() {
+		var row = $('#list_data').datagrid('getSelected');
+		if(row) {
+			var classInstId = row.classInstId;
+			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=updateFinishDate&funcNodeId="+$("#funcNodeId").val();
+		} else {
+			$.messager.alert('提示', "请先选择您要修改结课时间的班级！");
 		}
 	});
 	
@@ -100,7 +124,7 @@ $(document).ready(function() {
 		var row = $('#list_data').datagrid('getSelected');
 		if(row) {
 			var classInstId = row.classInstId;
-			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=view";
+			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=view&funcNodeId="+$("#funcNodeId").val();
 		} else {
 			$.messager.alert('提示', "请先选择您要浏览的班级！");
 		}

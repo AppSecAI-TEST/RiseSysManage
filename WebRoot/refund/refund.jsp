@@ -172,10 +172,7 @@
     					<tr>
     						<td align="right" style="min-width: 60px"><span>校区：</span></td>
 			  				<td width="110px">
-								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-									url = "<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=252&fieldId=schoolId";
-									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-					      			onLoadSuccess:function(data){if(data.length == 1)$('#approveSchoolId').combobox('setValue',data[0].schoolId);}">
+								<select id="approveSchoolId" name="approveSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 				        		</select>
 							</td>
 							<td align="right" style="min-width: 60px"><span>联系电话：</span></td>

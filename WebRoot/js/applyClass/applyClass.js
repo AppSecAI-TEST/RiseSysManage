@@ -12,6 +12,7 @@ $(document).ready(function() {
 //		}
 //	});
 	
+	ajaxLoading("正在处理，请稍待。。。");
 	$("#qryBtn").click(function() {
 		initPageNumber("list_data");
 		var object = $("#qryFm").serializeObject();
@@ -61,21 +62,33 @@ $(document).ready(function() {
 	$("#resetApprove").click(function() {
 		$("#qryApproveFm").form('clear');//清空窗体数据  
 		var data = $("#schoolId").combobox("getData");
-		if(data.length > 0) {
+		if(data.length > 1) {
 			$("#approveSchoolId").combobox("setValue", data[0].schoolId);
 		}
 	});
 	
 	var staffId = $("#staffId").val();
 	$("#schoolId").combobox({
-		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=501&fieldId=schoolId",
 		valueField : "schoolId",
 		textField : "schoolName",
 		panelHeight : "auto",
+		loader: function(param,success,error) {
+    		$.ajax({  
+    			url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=501&fieldId=schoolId",
+				dataType: 'json',  
+				success: function(data) {
+			    	if(data.length > 1) {
+			    		data.unshift({schoolName:"全部校区", schoolId:""});  
+			    	}
+					success(data);  
+				}
+			});  
+    	},
 		formatter : function(data) {
 			return "<span>" + data.schoolName + "</span>";
 		},
 		onLoadSuccess : function(data) {
+			ajaxLoadEnd();
 			if(data.length > 0) {
 				$("#schoolId").combobox("setValue", data[0].schoolId);
 			}
@@ -101,10 +114,21 @@ $(document).ready(function() {
 	});
 	
 	$("#approveSchoolId").combobox({
-		url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=501&fieldId=schoolId",
 		valueField : "schoolId",
 		textField : "schoolName",
 		panelHeight : "auto",
+		loader: function(param,success,error) {
+    		$.ajax({  
+    			url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=501&fieldId=schoolId",
+				dataType: 'json',  
+				success: function(data) {
+			    	if(data.length > 1) {
+			    		data.unshift({schoolName:"全部校区", schoolId:""});  
+			    	}
+					success(data);  
+				}
+			});  
+    	},
 		formatter : function(data) {
 			return "<span>" + data.schoolName + "</span>";
 		},
