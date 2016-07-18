@@ -305,6 +305,7 @@
 			</thead>
 		</table>
 		<div id="toolbar" style="padding: 2px;height:auto;">
+			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" style="width:100px;" onclick="locateStu('course')"><span>赠送</span></a>
    			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" style="width:100px;" onclick="courseFinish()"><span>终止</span></a>
  			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-redo" style="width:100px;" onclick="viewCourseGiftInfo()"><span>浏览</span></a>
  		</div>

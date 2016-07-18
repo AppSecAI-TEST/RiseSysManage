@@ -289,6 +289,9 @@ function addGift(type)
 		if(type == "coupon"){
 			window.location.href = "/sys/giftManage/addCouponGift.jsp?studentId="+studentId+"&studentName="+studentName;
 		}
+		if(type == "course"){
+			window.location.href = "/sys/giftManage/addCourse.jsp?studentId="+studentId+"&studentName="+studentName;
+		}
 	}
 }
 

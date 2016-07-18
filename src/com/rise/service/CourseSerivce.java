@@ -36,6 +36,12 @@ public class CourseSerivce {
 		return ServiceEngine.invokeHttp(params);
 	}
 	
+	public String addGifts(String param) throws Exception 
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1108\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
 	public String delCourse(String param) throws Exception 
 	{
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1107\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
