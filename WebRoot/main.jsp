@@ -90,10 +90,12 @@
 		} else if(msgType.indexOf("refund_fee") > -1) { //退费
 			title = "退费管理";
 			//通知 跳转到浏览页面
-			if("notice" == pushType) {
+			if("notice" == pushType) 
+			{
 				url = "/sys/refund/qryApproveRefund.do?refundFeeId=" + applyId + "&courseType=" + courseType + "&type=view&channel=index";
-			} else {
-				
+			} else 
+			{
+				url= "/sys/refund/qryApproveRefund.do?refundFeeId=" + applyId + "&courseType=" + courseType + "&type=approve&channel=index";
 			}
 		}
 		$("#pagetabs").tabs("add", {
