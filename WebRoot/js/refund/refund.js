@@ -11,7 +11,6 @@ $(document).ready(function() {
 //			} 
 //		}
 //	});
-	
 	ajaxLoading("正在处理，请稍待。。。");
 	$("#qryBtn").click(function() {
 		initPageNumber("apply_list_data");
@@ -48,7 +47,9 @@ $(document).ready(function() {
 		}
 	});
 	
-	$("#qryApproveBtn").click(function() {
+	$("#qryApproveBtn").click(function() 
+	{
+		
 		initPageNumber("approve_list_data");
 		var s = "";
 		var object = $("#qryRefundApproveFm").serializeObject();
@@ -74,6 +75,8 @@ $(document).ready(function() {
     		},
     		onLoadSuccess:function(){
     			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+    			$.cookie("refund-title","退费审批管理",{path: '/sys'});
+    			$.cookie("refund-qry-params",obj,{path: '/sys'});
     			$('#approve_list_data').datagrid('clearSelections');
     		}
     	});
@@ -147,6 +150,7 @@ $(document).ready(function() {
 				success: function(data) {
 			    	if(data.length > 1) {
 			    		data.unshift({schoolName:"全部校区", schoolId:""});  
+			    		init();
 			    	}
 					success(data);  
 				}
@@ -156,8 +160,10 @@ $(document).ready(function() {
     		return "<span>" + data.schoolName + "</span>";
     	},
     	onLoadSuccess : function(data) {
-    		if(data.length > 0) {
+    		if(data.length > 0)
+    		{
     			$("#approveSchoolId").combobox("setValue", data[0].schoolId);
+    			init();
     		}
     	}
 	});

@@ -206,7 +206,7 @@
 								<input type="checkbox" name="approveRefundState" value="'004'"/><span>审批未通过</span>
 								<input type="checkbox" name="approveRefundState" value="'005'"/><span>成功退费</span>
 								<input type="checkbox" name="approveRefundState" value="'006'"/><span>取消</span>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>本人待审批：</span>&nbsp;&nbsp;<input type="checkbox" id="pending"/>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>本人待审批：</span>&nbsp;&nbsp;<input type="checkbox" id="pending" name="pending"/>
 							</td>
 							<td style="min-width: 210px">
 								<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryApproveBtn" funcNodeId="1025">查询</a>
@@ -247,3 +247,60 @@
     	</div>
   	</body>
 </html>
+<script type="text/javascript">
+
+//恢复查询条件
+function init()
+{
+	if($("ul.tabs").find("li").length>0)
+	{
+		var titleLab=$.cookie("refund-title");
+		$("ul.tabs").find("li").each(function()
+		{
+			if($(this).find("span.tabs-title").text()==titleLab)
+			{
+				$(this).trigger("click");
+			}	
+		});
+		if(titleLab=='退费审批管理')
+		{
+			var params=$.cookie("refund-qry-params");
+			var param=JSON.parse(params);
+			$("#approveSchoolId").combobox('setValue',param.approveSchoolId);
+			$("#approveCourseType").combobox('setValue',param.approveCourseType); 
+			$("#approveStageId").combobox('setValue',param.approveStageId); 
+			$("#startTimeApprove").datebox('setValue',param.startTimeApprove);
+			$("#endTimeApprove").datebox('setValue',param.endTimeApprove);
+			$("#approvePhone").textbox('setValue',param.approvePhone);
+			$("#approveStudentId").textbox('setValue',param.approveStudentId);
+			if(param.post!=undefined)
+			{
+				$('#pending').attr('checked','checked');
+			}
+			if(param.approveRefundState!=undefined)
+			{
+				 $("input[name='approveRefundState']").each(function()
+				{
+				   if (param.approveRefundState == $(this).attr("value"))
+				   {
+					    $(this).attr("checked","checked"); 
+				   }
+				});
+			}
+			
+			$('#approve_list_data').datagrid({
+    		url : "/sys/pubData/qryDataListByPage.do",
+    		queryParams:{
+    			param : params
+    		},
+    		onLoadSuccess:function(){
+    			//一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题。
+    			$.cookie("refund-title","退费审批管理",{path: '/sys'});
+    			$.cookie("refund-qry-params",obj,{path: '/sys'});
+    			$('#approve_list_data').datagrid('clearSelections');
+    		}
+    	});
+		}
+	}
+}
+</script>

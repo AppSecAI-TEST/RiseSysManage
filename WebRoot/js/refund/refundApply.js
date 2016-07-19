@@ -416,9 +416,11 @@ $(document).ready(function() {
 							success: function (data) {
 								$.messager.progress('close'); 
 								var flag = data.flag
-								if(flag) {
+								if(flag)
+								{
 									showMessage('提示', "申请退费成功！", function() {window.location.href = "/sys/refund/refund.jsp";});
-								} else {
+								} else
+								{
 									showMessage('提示', data.msg);
 								}
 							} 

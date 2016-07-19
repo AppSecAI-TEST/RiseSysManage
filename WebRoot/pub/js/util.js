@@ -70,8 +70,8 @@ $(document).ready(function() {
 		});
 		$("#tt").tabs({
 			onSelect: function (title) {
-				if(title == "放班审批管理" || title == "转班审批管理" || title == "转校审批管理"
-					|| title == "开班审批管理" || title == "退费审批管理") {
+				if(title == "放班审批管理" || title == "转班审批管理" || title == "转校审批管理" || title == "开班审批管理" || title == "退费审批管理")
+				{
 					var search = $("#approve_search_tab").height();
 					$('#approve_list_data').datagrid('resize', {// 适配高度
 						height: height - search - header - tabs - 7

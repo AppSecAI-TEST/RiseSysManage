@@ -280,6 +280,10 @@
 			}
 			function openUrl(id , url , title)
 			{
+				if(title=='退费管理')
+				{
+					$.cookie("refund-title","退费课程查询",{path: '/sys'});
+				}
 				if(url.lastIndexOf("&") != -1 || url.lastIndexOf("?") != -1)
 				{
 					url += "&funcNodeId="+id;
