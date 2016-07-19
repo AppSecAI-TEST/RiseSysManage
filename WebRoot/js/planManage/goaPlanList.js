@@ -96,8 +96,8 @@ function showAdd() {
 	$("#dlg").dialog('open').dialog('setTitle', '添加年度升学目标计划');
     $('#fm').form('clear');
     $("#type").val("ADD");
-    $("#schoolIds").combobox({disabled: false});
-    $("#planYear").combobox({disabled: false});
+    $("#schoolIds").combobox("enable");
+    $("#planYear").combobox("enable");
     $("#submitBtn").unbind();
     $("#submitBtn").click(function(){
     	add();
@@ -163,8 +163,8 @@ function showUpdate() {
 		$("#submitBtn").click(function(){
 			update();
 		});
-		$("#schoolIds").combobox({disabled: true});
-		$("#planYear").combobox({disabled: true});
+		$("#schoolIds").combobox("disable");
+		$("#planYear").combobox("disable");
 		$("#schoolIds").combobox("setValue", schoolId);
 		$("#planYear").combobox("setValue", planYear);
 		$("#updateSchoolId").val(schoolId);
