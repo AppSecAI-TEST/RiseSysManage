@@ -419,31 +419,47 @@ function endEditing(tab)
 			{
 				$.messager.alert('提示',"请输入班级名称");
 				setCellValue($(tab),editIndex,editField,editValue);//恢复初始值
+				return;
 			}else
 			
 			if(roomName==undefined)
 			{
 				$.messager.alert('提示',"请输入教室名称");
 				setCellValue($(tab),editIndex,editField,editValue);//恢复初始值
+				return;
 			}else
 			
 			if(teacherType==undefined)
 			{
 				$.messager.alert('提示',"请输入教师类型");
 				setCellValue($(tab),editIndex,editField,editValue);//恢复初始值
+				return;
 			}else if( teacherType!='T' && teacherType!='TA')
 			{
 				$.messager.alert('提示',"教师类型格式只能是T或TA");
 				setCellValue($(tab),editIndex,editField,editValue);//恢复初始值
+				return;
 			}
 			else
 			{
 				var hoursNum=vals[3];//课时数量
 				var colNum="1";//合并的列
+				var hoursSeq="";
 				if(vals.length>4)
 				{
 					colNum=vals[4];
 				}
+				if(vals.length>5)
+				{
+					hoursSeq=vals[5];
+					if(hoursSeq !='1' || hoursSeq !='2')
+					{
+						$.messager.alert('提示',"课时时段选择只能填写1或者2.例:S147/R2/T/2/1/2");
+						setCellValue($(tab),editIndex,editField,editValue);//恢复初始值
+						return;
+					}
+				}
+				 
 				var schoolId=$("#schoolId").val();
 				planT.schoolId=schoolId;
 				planT.teacherName=rowVal.teacherName;
@@ -454,7 +470,8 @@ function endEditing(tab)
 			   
 			    planT.schooltimeInstId=schooltimeInstId;
 			    
-			    planT=getHours(planT,hoursNum,colNum);
+			    planT=getHours(planT,hoursNum,colNum,hoursSeq);
+			    
 			    if(planT.hourRange!=undefined && planT.hourRange!='')
 			    {
 					addPlanTime(planT,tab);
@@ -611,10 +628,10 @@ var hourRanges=[];
  * @param {Object} mergeNum
  * @return {TypeName} 
  */
-function getHours(planT,hoursNum,colNum)
+function getHours(planT,hoursNum,colNum,hoursSeq)
 {
 	var mark=editField.substring(1,editField.length);
-	
+	var num=0;
 	for(var i=0;i<hourRange.length;i++)
 	{
 		var paramVal=hourRange[i].paramValue;
@@ -633,13 +650,23 @@ function getHours(planT,hoursNum,colNum)
 		{
 			if(paramVal.indexOf(mark)>-1 && hours==hoursNum  && colNum==param1)
 			{
-				planT.hourRange=paramVal;
-				planT.lessionHours=hourRange[i].param4;
-				break;
+				num++;
+				if(hoursSeq=='' || hoursSeq==undefined)
+				{
+					planT.hourRange=paramVal;
+					planT.lessionHours=hourRange[i].param4;
+					break;
+				}else
+				{
+					if(num==hoursSeq)
+					{
+						planT.hourRange=paramVal;
+						planT.lessionHours=hourRange[i].param4;
+						break;
+					}
+				}
 			}
 		}
-		
-		
 	}
 	return planT;
 }
