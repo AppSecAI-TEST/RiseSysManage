@@ -16,6 +16,7 @@
   			<form id="setVipFm">
   				<input type="hidden" id="studentId" name="studentId" value="${obj.studentObj.studentId }"/>
   				<input type="hidden" id="handlerId" name="handlerId" value="${sessionScope.StaffT.staffId}"/>
+  				<input type="hidden" id="vip" name="vip" value="vip"/>
 	  			<table width="100%" cellpadding="5px" class="maintable" id="setVipTd">
 	  				<tr>
 	  					<td align="right" width="10%"><span>学员姓名：</span></td>

@@ -1,5 +1,9 @@
 $(document).ready(function() {
-	ajaxLoading("正在处理，请稍待。。。");
+	var vip=$("#vip").val();
+	if(vip!='vip')
+	{
+		ajaxLoading("正在处理，请稍待。。。");
+	}
 	$("#qryBtn").click(function() {
 		initPageNumber("list_data");
 		var object = $("#qryFm").serializeObject();
