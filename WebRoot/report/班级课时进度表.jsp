@@ -8,7 +8,6 @@
   	<head>
 		<%@ include file="/common/head.jsp" %>
 		<%@ include file="/common/formvalidator.jsp" %>
-		<script type="text/javascript" src="<%=path %>/js/export/newRecruit.js"></script>
   	</head>
   	<body>
   		<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
@@ -102,13 +101,35 @@
 </html>
 <script type="text/javascript">
 	$(document).ready(function(){
+		var clearFlag = true;
+		var schoolData = [1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013,1014];
 		$('#startTime').datebox("setValue",new Date().getFullYear()+"-"+(new Date().getMonth()+1));
 		$("#schoolId").combobox({
+			loader:function(param,success,error){  
+			    $.ajax({  
+					url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
+					dataType: 'json',  
+					success: function(data) {
+				    	if(data.length == schoolData.length) {
+				    		data.unshift({schoolName:'所有校区',schoolId:""});  
+				    	}
+						success(data);  
+					}
+				});  
+	   		},
     		onChange : function(n, o) {
     			$("#teacherId").combobox({
 		    		url:"/sys/pubData/qryTeacherList.do?schoolId="+n
 		    	});
-    		}
+    		},
+    		onLoadSuccess: function() {
+				var arr = $("#schoolId").combobox("getData");
+				if(arr.length < schoolData.length) {
+					$("#schoolId").combobox("select",arr[0].schoolId);
+					clearFlag = false;
+				}	
+			}
+    		
     	});	
 		
 		$("#qryBtn").click(function() {
@@ -183,6 +204,17 @@
 				        }
 				   });
 	    });
+		
+	$("#reset").click(function() {
+		$("#qryFm").form('clear');//清空窗体数据 
+		if(!clearFlag) {
+    		$("#schoolId").combobox('select',$("#schoolId").combobox("getData")[0].schoolId);
+    	} else {
+    		$("#schoolId").combobox('setValue',"");
+    	}
+		$('#startTime').datebox("setValue",new Date().getFullYear()+"-"+(new Date().getMonth()+1));
+	});
+		
 		
 		
 		$("#diffBtn").click(function(){
