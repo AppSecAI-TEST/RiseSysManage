@@ -327,8 +327,10 @@ $(document).ready(function() {
 	$("#refundApplyAgain").click(function() {
 		var row = $('#approve_list_data').datagrid('getSelected');
 		if(row) {
+			var nextState = row.nextState;
 			var tacheState = row.tacheState;
-			if("006" == tacheState || "004" == tacheState) {
+			if("006" == tacheState || "004" == tacheState || 
+					(nextState == "109" && (tacheState == null || tacheState == "" || tacheState == undefined))) {
 				var handlerId = row.handlerId;
 				var staffId = $("#staffId").val();
 				if(staffId == handlerId) {
