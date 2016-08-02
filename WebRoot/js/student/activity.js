@@ -45,6 +45,8 @@ $(document).ready(function() {
 			    		return "<span>" + data.typeName + "</span>";
 			    	},
 					onChange : function(newValue, oldValue) {
+						$("#amount").combobox('clear');
+						$("#amount").combobox("loadData", new Array());
 						$("#amount").combobox({
 							url : "/sys/pubData/qryData.do?param={queryCode:\"Qry_Gift\",giftType:\""+newValue+"\"}",//返回json数据的url
 					        valueField : "giftId",

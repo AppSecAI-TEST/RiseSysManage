@@ -20,7 +20,8 @@
 						<td align="right" width="50px"><span>阶段：</span></td>
 	  					<td width="114px">
 							<select id="stageId" name="stageId" class="easyui-combobox" style="width: 114px; height: 25px;"
-								data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto'" 
+								data-options="formatter:formatStageId, valueField: 'stageId', textField: 'stageId', panelHeight: 'auto',
+								onLoadSuccess:function(data) {ajaxLoadEnd();}" 
 			      				url="<%=path %>/pubData/qryStage.do">
 				        	</select>
 						</td>

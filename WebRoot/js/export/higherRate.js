@@ -73,6 +73,8 @@ $(document).ready(function() {
 	    				$("#2_month").html("11月升学率");
 	    				$("#3_month").html("12月升学率");
 	    			}
+	    		} else if("allQuarter" == higherType || "allRegion" == higherType) {
+	    			ajaxLoadEnd();
 	    		}
 	    	},
 	    	onChange : function(n, o) {

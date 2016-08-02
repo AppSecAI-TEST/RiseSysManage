@@ -49,8 +49,8 @@
       						<select id="giftName" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"></select>
       					</td>
       					<td width="410px" align="left" id="couponTd" style="display: none;">
-      						<select id="couponType" class="easyui-combobox" style="width: 100px; height: 25px;"></select>
-      						<select id="amount" class="easyui-combobox" style="width: 100px; height: 25px;"></select>
+      						<select id="couponType" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"></select>
+      						<select id="amount" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"></select>
       					</td>
       					<td width="210px" align="left" id="getCouponTd" style="display: none;">
 	      					<input id="giftCode" type="text" class="easyui-numberbox" style="width: 100px; height: 25px;" validType="length[0,25]"/>
