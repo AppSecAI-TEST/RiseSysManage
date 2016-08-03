@@ -8,9 +8,10 @@ $(document).ready(function() {
 				url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
 				dataType: 'json',  
 				success: function(data) {
-			    	if(data.length == schoolData.length) {
-			    		data.unshift({schoolName:'所有校区',schoolId:""});  
-			    	}	
+//			    	if(data.length == schoolData.length) {
+//						data.unshift({schoolName:'所有校区',schoolId:""}); 
+//			    	}	
+			    	data.unshift({schoolName:'所有校区',schoolId:""});  
 					success(data);  
 				}
 			});  
