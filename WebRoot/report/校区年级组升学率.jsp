@@ -53,7 +53,7 @@
 					title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
 						<tr>
-							<th data-options="field:'stageId',width:120,align:'center',rowspan:2">阶段</th>
+							<th data-options="field:'stageId',width:120,align:'center',rowspan:2">年级组</th>
 							<th data-options="field:'finish',width:400,align:'center',colspan:4">已结课</th>
 							<th data-options="field:'attend',width:500,align:'center',colspan:5"><div id="classProgress">未结课</div></th>
 						</tr>

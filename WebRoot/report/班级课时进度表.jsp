@@ -102,7 +102,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		var clearFlag = true;
-		var schoolData = [1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013,1014];
 		$('#startTime').datebox("setValue",new Date().getFullYear()+"-"+(new Date().getMonth()+1));
 		$("#schoolId").combobox({
 			loader:function(param,success,error){  
@@ -110,8 +109,8 @@
 					url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
 					dataType: 'json',  
 					success: function(data) {
-				    	if(data.length == schoolData.length) {
-				    		data.unshift({schoolName:'所有校区',schoolId:""});  
+				    	if(data.length > 1) {
+				    		data.unshift({schoolName:'全部校区',schoolId:""});  
 				    	}
 						success(data);  
 					}
@@ -122,10 +121,10 @@
 		    		url:"/sys/pubData/qryTeacherList.do?schoolId="+n
 		    	});
     		},
-    		onLoadSuccess: function() {
-				var arr = $("#schoolId").combobox("getData");
-				if(arr.length < schoolData.length) {
-					$("#schoolId").combobox("select",arr[0].schoolId);
+    		onLoadSuccess : function(data) {
+				ajaxLoadEnd();
+				if(data.length > 0) {
+					$("#schoolId").combobox("setValue", data[0].schoolId);
 					clearFlag = false;
 				}	
 			}

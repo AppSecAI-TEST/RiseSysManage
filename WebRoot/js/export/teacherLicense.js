@@ -1,5 +1,34 @@
 $(document).ready(function() {
 	ajaxLoading("正在处理，请稍待。。。");
+	if($("#schoolId").length > 0) {
+		$("#schoolId").combobox({
+			valueField : "schoolId",
+			textField : "schoolName",
+			panelHeight : "auto",
+			loader: function(param, success, error) {
+			    $.ajax({
+					url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId=515&fieldId=schoolId",  
+					dataType: 'json',  
+					success: function(data) {
+						if(data.length > 1) {
+							data.unshift({schoolName:'全部校区',schoolId:""});  
+						}
+						success(data);  
+					}
+				});  
+	   		},
+	   		formatter : function(data) {
+				return "<span>" + data.schoolName + "</span>";
+			},
+			onLoadSuccess : function(data) {
+				ajaxLoadEnd();
+				if(data.length > 0) {
+					$("#schoolId").combobox("setValue", data[0].schoolId);
+				}
+			}
+		});
+	}
+	
 	$("#qryBtn").click(function() {
 		var schoolId = $("#schoolId").combobox("getValue");
     	if(schoolId != "") {

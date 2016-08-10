@@ -19,10 +19,7 @@
 	  				<tr>
 	  					<td align="right" style="min-width: 60px"><span>所属校区：</span></td>
 	  					<td style="min-width: 100px">
-	  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height: 25px;"
-	  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-	  							onLoadSuccess:function(data){if(data.length > 0) $('#schoolId').combobox('setValue',data[0].schoolId);}"
-	  							url="<%=path%>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=710&fieldId=schoolId&headFlag=N">
+	  						<select class="easyui-combobox" name="schoolId" id="schoolId" style="width:100px;height: 25px;">
 	  						</select>
 	  					</td>
 	  					<td align="right" style="min-width: 40px"><span>年度：</span></td>

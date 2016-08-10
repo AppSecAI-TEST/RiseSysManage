@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function() {
 	initYearAndMonth("year","month");
 	initNewYearAndMonth("planYear","planMonth");
 	initQryButton("qryBtn","resetBtn","qryFm","list_data");
