@@ -104,22 +104,22 @@
 						<thead>
 							<tr>
 								<th field="ck" align="center" checkbox="true" width="1%"></th>
-								<th field="name" align="center" width="5%">学员姓名</th>
-								<th field="byName" align="center" width="4%">英文名</th>
-								<th data-options="field:'phone',width:200,align:'center'">联系电话</th>
-								<th data-options="field:'outSchoolName',width:100,align:'center'">转出校区</th>
-								<th data-options="field:'inSchoolName',width:100,align:'center'">转入校区</th>
-								<th data-options="field:'changeStateText',width:100,align:'center'">转校状态</th>
-								<th data-options="field:'higherStageId',width:120,align:'center'">已升学阶段</th>
-								<th data-options="field:'stageIdText',width:120,align:'center'">当前课程</th>
-								<th data-options="field:'feeTypeText',width:200,align:'center'">当前课程业绩类型</th>
-								<th data-options="field:'adviserName',width:200,align:'center'">当前课程业绩顾问</th>
-								<th data-options="field:'outClassName',width:200,align:'center'">转出校在读班</th>
-								<th data-options="field:'outClassTeacherName',width:150,align:'center'">转出班老师</th>
-								<th data-options="field:'studentOutProgress',width:150,align:'center'">转出班课时</th>
-								<th data-options="field:'inClassName',width:100,align:'center'">转入班级</th>
-								<th data-options="field:'courseStateText',width:200,align:'center'">原在读课程状态</th>
-								<th data-options="field:'outDate',width:120,align:'center'">转出时间</th>
+								<th field="name" align="center" width="6%">学员姓名</th>
+								<th field="byName" align="center" width="6%">英文名</th>
+								<th field="phone" align="center" width="15%">联系电话</th>
+								<th field="outSchoolName" align="center" width="6%">转出校区</th>
+								<th field="inSchoolName" align="center" width="6%">转入校区</th>
+								<th field="changeStateText" align="center" width="6%">转校状态</th>
+								<th field="higherStageId" align="center" width="15%">已升学阶段</th>
+								<th field="stageIdText" align="center" width="8%">当前课程</th>
+								<th field="feeTypeText" align="center" width="10%">当前课程业绩类型</th>
+								<th field="adviserName" align="center" width="10%">当前课程业绩顾问</th>
+								<th field="outClassName" align="center" width="8%">转出校在读班</th>
+								<th field="outClassTeacherName" align="center" width="8%">转出班老师</th>
+								<th field="studentOutProgress" align="center" width="8%">转出班课时</th>
+								<th field="inClassName" align="center" width="8%">转入班级</th>
+								<th field="courseStateText" align="center" width="8%">原在读课程状态</th>
+								<th field="outDate" align="center" width="12%">转出时间</th>
 							</tr>
 						</thead>
 					</table>
@@ -192,19 +192,19 @@
 							<tr>
 								<th field="ck" align="center" checkbox="true" width="1%"></th>
 								<th field="name" align="center" width="6%">学员姓名</th>
-								<th data-options="field:'byName',width:100,align:'center'">英文名</th>
-								<th data-options="field:'phone',width:200,align:'center'">联系电话</th>
-								<th data-options="field:'applyName',width:100,align:'center'">申请人</th>
-								<th data-options="field:'applyDate',width:100,align:'center'">申请时间</th>
-								<th data-options="field:'approveName',width:100,align:'center'">审批人</th>
-								<th data-options="field:'approveDate',width:100,align:'center'">审批时间</th>
-								<th data-options="field:'outSchoolName',width:100,align:'center'">转出校区</th>
-								<th data-options="field:'outClassName',width:100,align:'center'">转出班级</th>
-								<th data-options="field:'studentOutProgress',width:100,align:'center'">原班课时</th>
-								<th data-options="field:'courseStateText',width:100,align:'center'">原课程状态</th>
-								<th data-options="field:'changeSchoolNum',width:100,align:'center'">转校次数</th>
-								<th data-options="field:'approveStateText',width:120,align:'center'">审批状态</th>
-								<th data-options="field:'inSchoolName',width:100,align:'center'">转入校区</th>
+								<th field="byName" align="center" width="6%">英文名</th>
+								<th field="phone" align="center" width="15%">联系电话</th>
+								<th field="applyName" align="center" width="6%">申请人</th>
+								<th field="applyDate" align="center" width="12%">申请时间</th>
+								<th field="approveName" align="center" width="6%">审批人</th>
+								<th field="approveDate" align="center" width="12%">审批时间</th>
+								<th field="outSchoolName" align="center" width="6%">转出校区</th>
+								<th field="outClassName" align="center" width="8%">转出班级</th>
+								<th field="studentOutProgress" align="center" width="8%">原班课时</th>
+								<th field="courseStateText" align="center" width="6%">原课程状态</th>
+								<th field="changeSchoolNum" align="center" width="6%">转校次数</th>
+								<th field="approveStateText" align="center" width="8%">审批状态</th>
+								<th field="inSchoolName" align="center" width="6%">转入校区</th>
 							</tr>
 						</thead>
 					</table>

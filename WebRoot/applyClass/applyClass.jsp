@@ -82,19 +82,19 @@
 							<tr>
 								<th field="ck" align="center" checkbox="true" width="1%"></th>
 								<th field="schoolName" align="center" width="6%">校区</th>
-								<th data-options="field:'className',width:100,align:'center'">班级名称</th>
-								<th data-options="field:'applyDate',width:150,align:'center'">放班审批时间</th>
-								<th data-options="field:'latestApplyClassState',width:100,align:'center'">最新放班状态</th>
-								<th data-options="field:'cancelApplyClassStateText',width:120,align:'center'">取消放班审批状态</th>
-								<th data-options="field:'openClassStateText',width:100,align:'center'">开班状态</th>
-								<th data-options="field:'classStateText',width:100,align:'center'">班级状态</th>
-								<th data-options="field:'startDate',width:100,align:'center'">开课时间</th>
-								<th data-options="field:'schooltimeName',width:180,align:'center'">上课时段与教室</th>
-								<th data-options="field:'classStudentNum',width:80,align:'center'">定班人数</th>
-								<th data-options="field:'minSubNum',width:80,align:'center'">距最低人数</th>
-								<th data-options="field:'teacherName',width:120,align:'center'">带班老师</th>
-								<th data-options="field:'studentChannelTypeText',width:100,align:'center'">学员来源</th>
-								<th data-options="field:'higherSchoolName',width:100,align:'center'">来源班级</th>
+								<th field="className" align="center" width="8%">班级名称</th>
+								<th field="applyDate" align="center" width="12%">放班审批时间</th>
+								<th field="latestApplyClassState" align="center" width="10%">最新放班状态</th>
+								<th field="cancelApplyClassStateText" align="center" width="10%">取消放班审批状态</th>
+								<th field="openClassStateText" align="center" width="8%">开班状态</th>
+								<th field="classStateText" align="center" width="8%">班级状态</th>
+								<th field="startDate" align="center" width="8%">开课时间</th>
+								<th field="schooltimeName" align="center" width="15%">上课时段与教室</th>
+								<th field="classStudentNum" align="center" width="5%">定班人数</th>
+								<th field="minSubNum" align="center" width="8%">距最低人数</th>
+								<th field="teacherName" align="center" width="10%">带班老师</th>
+								<th field="studentChannelTypeText" align="center" width="8%">学员来源</th>
+								<th field="higherSchoolName" align="center" width="15%">来源班级</th>
 							</tr>
 						</thead>
 					</table>

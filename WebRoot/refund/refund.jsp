@@ -143,22 +143,22 @@
 							<tr>
 								<th field="ck" align="center" checkbox="true" width="1%"></th>
 								<th field="schoolName" align="center" width="6%">校区</th>
-								<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
-								<th data-options="field:'byName',width:80,align:'center'">英文名</th>
-								<th data-options="field:'feeTypeText',width:80,align:'center'">业绩类型</th>
-								<th data-options="field:'classType',width:80,align:'center'">班级类型</th>
-								<th data-options="field:'payDate',width:100,align:'center'">缴费日期</th>
-								<th data-options="field:'adviserName',width:100,align:'center'">业绩顾问</th>
-								<th data-options="field:'adviserTeacherName',width:100,align:'center'">业绩老师</th>
-								<th data-options="field:'courseStateText',width:120,align:'center'">原课程状态</th>
-								<th data-options="field:'className',width:100,align:'center'">班级</th>
-								<th data-options="field:'teacherName',width:100,align:'center'">带班老师</th>
-								<th data-options="field:'classProgress',width:100,align:'center'">课时进度</th>
-								<th data-options="field:'refundTypeText',width:100,align:'center'">退费类型</th>
-								<th data-options="field:'refundState',width:100,align:'center'">退费状态</th>
-								<th data-options="field:'applyDate',width:100,align:'center'">申请时间</th>
-								<th data-options="field:'belongDate',width:100,align:'center'">归属时间</th>
-								<th data-options="field:'finishDate',width:100,align:'center'">成功时间</th>
+								<th field="name" align="center" width="6%">学员姓名</th>
+								<th field="byName" align="center" width="6%">英文名</th>
+								<th field="feeTypeText" align="center" width="5%">业绩类型</th>
+								<th field="classType" align="center" width="7%">班级类型</th>
+								<th field="payDate" align="center" width="8%">缴费日期</th>
+								<th field="adviserName" align="center" width="8%">业绩顾问</th>
+								<th field="adviserTeacherName" align="center" width="8%">业绩老师</th>
+								<th field="courseStateText" align="center" width="6%">原课程状态</th>
+								<th field="className" align="center" width="6%">班级</th>
+								<th field="teacherName" align="center" width="8%">带班老师</th>
+								<th field="classProgress" align="center" width="7%">课时进度</th>
+								<th field="refundTypeText" align="center" width="6%">退费类型</th>
+								<th field="refundState" align="center" width="8%">退费状态</th>
+								<th field="applyDate" align="center" width="8%">申请时间</th>
+								<th field="belongDate" align="center" width="8%">归属时间</th>
+								<th field="finishDate" align="center" width="8%">成功时间</th>
 							</tr>
 						</thead>
 					</table>
@@ -222,17 +222,17 @@
 								<th field="ck" align="center" checkbox="true" width="1%"></th>
 								<th field="refundFeeId" align="center" width="6%">申请编号</th>
 								<th field="schoolName" align="center" width="6%">校区</th>
-								<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
-								<th data-options="field:'byName',width:80,align:'center'">英文名</th>
-								<th data-options="field:'refundClassType',width:200,align:'center'">退费课程（班级类型）</th>
-								<th data-options="field:'applyName',width:80,align:'center'">申请人</th>
-								<th data-options="field:'approveName',width:120,align:'center'">当前节点审批人</th>
-								<th data-options="field:'refundState',width:100,align:'center'">退费状态</th>
-								<th data-options="field:'tacheName',width:120,align:'center'">当前环节</th>
-								<th data-options="field:'nextTacheName',width:120,align:'center'">下一环节</th>
-								<th data-options="field:'applyDate',width:100,align:'center'">申请日期</th>
-								<th data-options="field:'approveDate',width:120,align:'center'">审批通过日期</th>
-								<th data-options="field:'finishDate',width:100,align:'center'">成功时间</th>
+								<th field="name" align="center" width="6%">学员姓名</th>
+								<th field="byName" align="center" width="6%">英文名</th>
+								<th field="refundClassType" align="center" width="12%">退费课程（班级类型）</th>
+								<th field="applyName" align="center" width="6%">申请人</th>
+								<th field="approveName" align="center" width="8%">当前节点审批人</th>
+								<th field="refundState" align="center" width="8%">退费状态</th>
+								<th field="tacheName" align="center" width="8%">当前环节</th>
+								<th field="nextTacheName" align="center" width="8%">下一环节</th>
+								<th field="applyDate" align="center" width="8%">申请日期</th>
+								<th field="approveDate" align="center" width="10%">审批通过日期</th>
+								<th field="finishDate" align="center" width="8%">成功时间</th>
 							</tr>
 						</thead>
 					</table>
