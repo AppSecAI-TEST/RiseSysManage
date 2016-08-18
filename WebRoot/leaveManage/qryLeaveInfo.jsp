@@ -12,15 +12,13 @@
   	</head>
   	<body>
   		<div style="margin-right:5px">
+  		<input type="hidden" id="staffId" name="staffId" value="${sessionScope.StaffT.staffId }"/>
  		<form id="qryFm">
   			<table class="search_tab">
   				<tr>
   					<td align="right" width="10%"><span>所属校区：</span></td>
   					<td align="left" width="5%">
-  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:100px;height: 25px;" editable="false"
-							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
-      						 onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}"
-      						url="<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=500&fieldId=schoolId&headFlag=N">
+  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:100px;height: 25px;" editable="false">
         				</select>
   					</td>
   					<td align="right" width="12%"><span>学员姓名：</span></td>

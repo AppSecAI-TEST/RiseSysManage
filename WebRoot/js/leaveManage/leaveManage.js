@@ -1,5 +1,33 @@
-$(document).ready(function(){
-//	initDate();
+$(document).ready(function() {
+	
+	var staffId = $("#staffId").val();
+	$("#schoolId").combobox({
+		valueField : "schoolId",
+		textField : "schoolName",
+		panelHeight : "auto",
+		loader: function(param,success,error) {
+    		$.ajax({  
+    			url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=500&fieldId=schoolId&headFlag=N",
+				dataType: 'json',  
+				success: function(data) {
+			    	if(data.length > 1) {
+			    		data.unshift({schoolName:"全部校区", schoolId:""});  
+			    	}
+					success(data);  
+				}
+			});  
+    	},
+		formatter : function(data) {
+			return "<span>" + data.schoolName + "</span>";
+		},
+		onLoadSuccess : function(data) {
+			ajaxLoadEnd();
+			if(data.length > 0) {
+				$("#schoolId").combobox("setValue", data[0].schoolId);
+			}
+		}
+	});
+	
 	//首页面查询
     $("#qryBtn").click(function() {
     	var schoolId = $("#schoolId").combobox("getValue");
@@ -117,8 +145,9 @@ function restartClass()
 		var studentId = row.studentId;
 		var leaveState = row.leaveState;
 		var resumeType = row.resumeType;
-		if(leaveState != "001" || (leaveState == '001' && resumeType != "")){
-			$.messager.alert('提示', "该学员不能复课！");
+		if(leaveState != "001" || (leaveState == '001' && resumeType != "")) {
+			var resumeTypeText = row.resumeTypeText;
+			$.messager.alert('提示', "该学员已" + resumeTypeText + "！");
 			return;
 		}
 		var funcNodeId = "";
