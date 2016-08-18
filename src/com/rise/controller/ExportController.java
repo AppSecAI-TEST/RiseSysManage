@@ -546,5 +546,27 @@ public class ExportController
 		}
 
 	}
+	
+	@RequestMapping("/exportDataInModel.do")
+	public void exportDataInModel(String fileName,String mergeName,String mergeIndex,String param,HttpServletResponse response , HttpServletRequest request)
+	{
+		OutputStream out = null;
+		try
+		{
+			StringBuffer displayFileName = new StringBuffer(fileName);
+			displayFileName.append(new SimpleDateFormat("yyMMdd").format(new Date()));
+			displayFileName.append(".xls");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName="+URLEncoder.encode(displayFileName.toString(),"utf-8"));
+			out = response.getOutputStream();
+			es.exportDataInModel(fileName, mergeName, mergeIndex, param, out);
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+		}
+
+	}
 
 }

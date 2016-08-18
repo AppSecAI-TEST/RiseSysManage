@@ -1742,4 +1742,66 @@ public class ExportService
 	}
 	
 	
+	public void exportDataInModel(String fileName,String mergeName,String mergeIndex,String param,OutputStream out) throws Exception
+	{
+		JSONArray array =JSONArray.fromObject(param);
+		if(array.size()>0)
+		{
+			List list = JacksonJsonMapper.getInstance().readValue(param, List.class);
+			String filePath =this.getFullFilePath(fileName);
+			HttpClient client = new HttpClient();   
+			GetMethod httpGet = new GetMethod(filePath);  
+			client.executeMethod(httpGet); 
+			InputStream inputStream =httpGet.getResponseBodyAsStream();
+			Map<String, List<Map>> beanParams = new HashMap<String, List<Map>>();
+			beanParams.put("reportList", list);  
+	        XLSTransformer former = new XLSTransformer(); 
+	        List<CellRangeAddress> cellRangeList =new ArrayList<CellRangeAddress>();
+	        HSSFWorkbook workBook = (HSSFWorkbook)former.transformXLS(inputStream, beanParams);
+		    HSSFSheet sheet = workBook.getSheetAt(0);
+		    if(array.size()>0)
+		    {
+		        int mindex =Integer.valueOf(mergeIndex);
+		    	boolean flag =false;
+		    	int fr=2,tr=2;
+		    	String value =StringUtil.getJSONObjectKeyVal(array.getJSONObject(0), mergeName);
+		    	for(int j=1;j<array.size();j++)
+				{
+					JSONObject item =array.getJSONObject(j);
+					if(value.equals(StringUtil.getJSONObjectKeyVal(item,mergeName)))
+					{
+						flag =true;	
+						tr =j+2;
+						if(j==(array.size()-1)&&flag)
+						{
+							CellRangeAddress range1 =new CellRangeAddress(fr, tr, mindex,mindex);
+							cellRangeList.add(range1);
+							
+						}	
+					}
+					else
+					{
+						if(flag)
+						{
+							CellRangeAddress range2 =new CellRangeAddress(fr, tr, mindex,mindex);
+							cellRangeList.add(range2);
+							flag =false;
+						}
+						fr =j+2;
+						value =StringUtil.getJSONObjectKeyVal(item,mergeName);
+					}
+				}	
+		    }	
+		    for(CellRangeAddress cellRange:cellRangeList)
+		    {
+		    	sheet.addMergedRegion(cellRange);
+		    }	
+	        workBook.write(out);
+			inputStream.close();
+			out.close();
+		}
+	}
+
+	
+	
 }
