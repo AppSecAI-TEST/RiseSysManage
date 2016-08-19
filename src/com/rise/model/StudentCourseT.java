@@ -84,6 +84,8 @@ public class StudentCourseT {
 	private StaffT adviserTeacherBObj;
 	
     private Integer handerId;
+    
+    private Date firstDate;
 
     public Integer getStudentCourseId() {
         return studentCourseId;
@@ -411,6 +413,14 @@ public class StudentCourseT {
 
 	public void setHanderId(Integer handerId) {
 		this.handerId = handerId;
+	}
+
+	public Date getFirstDate() {
+		return firstDate;
+	}
+
+	public void setFirstDate(Date firstDate) {
+		this.firstDate = firstDate;
 	}
 	
 }

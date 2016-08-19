@@ -116,8 +116,15 @@
 			var row = $('#manList').datagrid('getSelected');
 			if(row.classState!="005")
 			{
-				ajaxLoading("正在处理，请稍待。。。");
-				window.location.href="demoFeedback.jsp?shortClassInstId="+row.shortClassInstId+"&classState="+row.classState;
+				if(row.stuNum > 0)
+				{
+					ajaxLoading("正在处理，请稍待。。。");
+					window.location.href="demoFeedback.jsp?shortClassInstId="+row.shortClassInstId+"&classState="+row.classState;
+				}
+				else
+				{
+					$.messager.alert('提示', "参与当前课程人数为零不能进行反馈");
+				}
 			}
 			else
 			{
@@ -133,6 +140,7 @@
 			var row = $('#manList').datagrid('getSelected');
 			if(row.classState!="001"&&row.classState!="005")
 			{
+				
 				ajaxLoading("正在处理，请稍待。。。");
 				window.location.href="demoStudentInfo.jsp?shortClassInstId="+row.shortClassInstId;
 			}
