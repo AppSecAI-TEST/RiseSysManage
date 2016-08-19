@@ -183,6 +183,7 @@
 	  </div>
 	   <script type="text/javascript">
 	   		$(document).ready(function(){
+				ajaxLoadEnd();
 	   			//初始化页面值
 	   			var content = "";
 	   			var expType = "${expType}";
