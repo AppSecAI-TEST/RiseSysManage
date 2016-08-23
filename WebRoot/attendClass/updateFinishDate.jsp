@@ -137,7 +137,7 @@
   		</div>
   		<div style="height: 5px;"></div>
   		<div style="padding:5px 0;min-width:1101px; width:100%;">
-  			<table class="easyui-datagrid" style="height: auto; width: 100%" id="list_data" title="放班班操作历史信息" fitColumns="true" singleSelect="false"
+  			<table class="easyui-datagrid" style="height: auto; width: 100%" id="list_data" title="放班操作历史信息" fitColumns="true" singleSelect="false"
   				url="<%=path %>/pubData/qryData.do?param={'classInstId':'${obj.attendClassObj.classInstId }','funcNodeId':'1008'}">
 				<thead>
 					<tr>
