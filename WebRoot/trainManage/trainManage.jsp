@@ -16,25 +16,23 @@
  		<form id="qryFm">
   			<table class="search_tab">
   				<tr>
-  					<td align="right" width="8%"><span>组织：</span></td>
-  					<td align="left" width="8%">
+  					<td align="right" style="min-width: 70px;">组织：</td>
+  					<td align="left" style="min-width: 100px;">
   						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:100px;height:25px;" editable="false">
         				</select>
   					</td>
-  					<td align="right" width="12%"><span>教师英文名：</span></td>
-  					<td align="left" width="8%">
+  					<td align="right" style="min-width: 90px;">教师英文名：</td>
+  					<td align="left" style="min-width: 100px;">
   						<select name="byName" id="byName" class="easyui-combobox" style="width:100px;height:25px;">
 						</select>
   					</td>
-  					<td align="right" width="8%"><span>培训时间：</span></td>
-  					<td align="left" width="8%">
+  					<td align="right" style="min-width: 70px;"><span>培训时间：</span></td>
+  					<td align="left"  style="min-width: 230px;">
   						<input class="easyui-datebox" name="trainstartTime" id="trainstartTime" style="width:100px;height:25px;" />
-  					</td>
-  					<td align="center" width="2%"><span>至</span></td>
-  					<td align="left" width="8%">
+  						至
   						<input class="easyui-datebox" name="trainendTime" id="trainendTime" style="width:100px;height:25px;" />
   					</td>
-  					<td></td>
+  					<td style="min-width: 350px;">&nbsp;</td>
   				</tr>
   				<tr>
   					<td align="right"><span>教师状态：</span></td>
@@ -45,14 +43,14 @@
         				</select>
   					</td>
   					<td align="right"><span>若离职是否赔偿：</span></td>
-  					<td align="center">
+  					<td colspan="2">
   						<input name="pay" type="checkbox" value="Y" style="margin:0 auto;vertical-align:middle;" /><span>是</span>
   						&nbsp;&nbsp;&nbsp;<input name="pay" type="checkbox" value="N" style="margin:0 auto;vertical-align:middle;" /><span>否</span>
-  					<td colspan="4" align="right">
+  					<td>
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px;" id="qryBtn" funcNodeId="4300"><span>查询</span></a>
-						&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px;" id="resetBtn" ><span>重置</span></a>
+						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px;" id="resetBtn" ><span>重置</span></a>
 					</td>
-					<td></td>
+					<td style="min-width: 350px;">&nbsp;</td>
   				</tr>
   			</table>
  		</form>

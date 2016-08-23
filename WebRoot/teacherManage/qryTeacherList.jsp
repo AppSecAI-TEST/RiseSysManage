@@ -16,32 +16,30 @@
  		<form id="qryFm">
   			<table class="search_tab">
   				<tr>
-  					<td align="right" width="8%"><span>组织：</span></td>
+  					<td align="right" style="min-width: 70px;"><span>组织：</span></td>
   					<td align="left" width="8%">
   						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:100px;height:25px;" editable="false">
         				</select>
   					</td>
-  					<td align="right" width="10%"><span>教师英文名：</span></td>
-  					<td align="left" width="8%">
+  					<td align="right" style="min-width: 80px;"><span>教师英文名：</span></td>
+  					<td align="left" style="min-width: 100px;">
   						<select name="byName" id="byName" class="easyui-combobox" style="width:100px;height:25px;">
 						</select>
   					</td>
-  					<td align="right" width="10%"><span>入职时间：</span></td>
-  					<td align="left" width="8%">
-  						<input class="easyui-datebox" name="joinStartDate" id="joinStartDate" style="width:100px;height:25px;" />
-  					</td>
-  					<td align="center" width="2%"><span>至</span></td>
-  					<td align="left" width="8%">
-  						<input class="easyui-datebox" name="joinEndDate" id="joinEndDate" style="width:100px;height:25px;" />
-  					</td>
-  					<td align="right" width="10%"><span>工作性质：</span></td>
-  					<td align="left" width="15%">
+  					<td align="right" style="min-width: 70px;"><span>工作性质：</span></td>
+  					<td align="left" style="min-width: 100px;">
   						<select id="jobProperty" name="jobProperty" class="easyui-combobox" style="width:100px;height:25px;"
 	  						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
 	      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=STAFF_T&codeType=JOB_PROPERTY">
         				</select>
   					</td>
-  					<td></td>
+  					<td align="right" style="min-width: 70px;"><span>入职时间：</span></td>
+  					<td align="left" style="min-width: 230px;">
+  						<input class="easyui-datebox" name="joinStartDate" id="joinStartDate" style="width:100px;height:25px;" />
+  						至
+  						<input class="easyui-datebox" name="joinEndDate" id="joinEndDate" style="width:100px;height:25px;" />
+  					</td>
+  					<td style="min-width: 200px;">&nbsp;</td>
   				</tr>
   				<tr>
   					<td align="right"><span>职务：</span></td>
@@ -59,18 +57,16 @@
         				</select>
   					</td>
   					<td align="right"><span>入职时长：</span></td>
-  					<td align="left">
-  						<input class="easyui-numberbox" name="joinStartTime" id="joinStartTime" style="width:100px;height:25px;" />
+  					<td align="left" colspan="2">
+  						<input class="easyui-numberbox" name="joinStartTime" id="joinStartTime" style="width:40px;height:25px;" />
+  						至
+  						<input class="easyui-numberbox" name="joinEndTime" id="joinEndTime" style="width:40px;height:25px;" />
   					</td>
-  					<td align="center"><span>至</span></td>
-  					<td align="left">
-  						<input class="easyui-numberbox" name="joinEndTime" id="joinEndTime" style="width:100px;height:25px;" />
-  					</td>
-  					<td colspan="2" align="center">
+  					<td>
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px;" id="qryBtn" funcNodeId="4100"><span>查询</span></a>
-						&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px;" id="resetBtn" ><span>重置</span></a>
+						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px;" id="resetBtn" ><span>重置</span></a>
 					</td>
-					<td></td>
+					<td style="min-width: 200px;">&nbsp;</td>
   				</tr>
   			</table>
  		</form>
