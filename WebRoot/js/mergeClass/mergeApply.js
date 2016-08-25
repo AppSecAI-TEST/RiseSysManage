@@ -121,7 +121,7 @@ function initApplyClassTable(classes)
 		{
 			min =parseFloat(tr2.find("td:eq(5)").html());
 		}	
-		tr2.find("td:eq(7)").find("input").addClass("easyui-numberbox").attr("data-options","min:"+min+",max:"+max+",precision:1,required:true");
+		tr2.find("td:eq(7)").find("input").addClass("easyui-numberbox").attr("data-options","min:"+min+",max:"+obj.readNum+",precision:1,required:true");
 		tr2.find("td:eq(8)").html();//升学缺口
 		tr2.addClass("classTr");
 		tr2.attr("classInstId",obj.classInstId);
