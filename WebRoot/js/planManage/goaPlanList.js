@@ -75,52 +75,58 @@ $(document).ready(function() {
 });
 
 function onLoadSuccess() {
-	mergeCellsByField("list_data", "planYear");
+	MergeCellWidthSchool("list_data", "schoolName,planYear");
 }
 
-function mergeCellsByField(tableId, colList) {
-    var rowspan;
-    var megerIndex;
-    var before = "";
-    var after = "";
-    var target = $("#" + tableId);
-    var colunms = colList.split(",");
-    var rows = target.datagrid("getRows").length;
-    for (var j = colunms.length - 1; j >= 0; j--) {
-    	var field = colunms[j];
-    	before = "";
-        rowspan = 1;
-        megerIndex = 0;
-        for (var i = 0; i <= rows; i++) {
-            if (i == rows) {
-            	after = "";
-            } else {
-            	after = target.datagrid("getRows")[i][field];
+ function MergeCellWidthSchool(tableID, fldList) {
+            var Arr = fldList.split(",");
+            var dg = $('#' + tableID);
+            var fldName;
+            var RowCount = dg.datagrid("getRows").length;
+            var span;
+            var PerValue = "";
+            var PreSchool ="";
+            var CurValue = "";
+            var CurSchool ="";
+            var length = Arr.length - 1;
+            for (i = length; i >= 0; i--) {
+                fldName = Arr[i];
+                PerValue = "";
+                PreSchool="";
+                span = 1;
+                for (row = 0; row <= RowCount; row++) {
+                    if (row == RowCount) {
+                        CurValue = "";
+                        CurSchool="";
+                    }
+                    else {
+                        CurValue = dg.datagrid("getRows")[row][fldName];
+                        CurSchool =  dg.datagrid("getRows")[row]["schoolId"]
+                    }
+                    if (PerValue == CurValue&&PreSchool==CurSchool) {
+                        span += 1;
+                    }
+                    else {
+                        var index = row - span;
+                        dg.datagrid('mergeCells', {
+                            index: index,
+                            field: fldName,
+                            rowspan: span,
+                            colspan: null
+                        });
+                        dg.datagrid('mergeCells', {
+                            index: index,
+                            field: "ck",
+                            rowspan: span,
+                            colspan: null
+                        });
+                        span = 1;
+                        PerValue = CurValue;
+                        PreSchool = CurSchool;
+                    }
+                }
             }
-            if (before == after) {
-            	rowspan += 1;
-            } else {
-            	target.datagrid("mergeCells", {
-        			index: i - rowspan,
-        			field: field,　　// 合并字段
-        			rowspan: rowspan
-        		});
-            	target.datagrid("mergeCells", {
-            		index: i - rowspan,
-            		field: "ck",　　// 合并字段
-            		rowspan: rowspan
-            	});
-        		target.datagrid("mergeCells", {
-            		index: i - rowspan,
-            		field: "schoolName",　　// 合并字段
-            		rowspan: rowspan
-            	});
-            	rowspan = 1;
-            }
-            before = after;
         }
-    }
-}
 
 function showAdd() {
 	$("#dlg").dialog('open').dialog('setTitle', '添加年度升学目标计划');
