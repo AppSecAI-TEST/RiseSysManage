@@ -1195,7 +1195,7 @@ public class ExportService
 		String weekName =StringUtil.getJSONObjectKeyVal(objs, "weekName");
 		objs.remove("schoolName");
 		objs.remove("weekName");
-		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS8002\",securityCode:\"0000000000\",params:{param:"+objs.toString()+"},rtnDataFormatType:\"user-defined\"}";
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS80017\",securityCode:\"0000000000\",params:{param:"+objs.toString()+"},rtnDataFormatType:\"user-defined\"}";
 		String result =ServiceEngine.invokeHttp(params);
 		JSONArray array =JSONArray.fromObject(result);
 		HSSFWorkbook wb = new HSSFWorkbook();
