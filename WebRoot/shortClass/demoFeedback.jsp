@@ -3,6 +3,7 @@
 	String path = request.getContextPath();
 	String shortClassInstId =request.getParameter("shortClassInstId");
 	String classState =request.getParameter("classState");
+	String stuNum = request.getParameter("stuNum");
 %>
 
 <!doctype html>
@@ -16,6 +17,7 @@
  		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
  		<input id="shortClassInstId" type="hidden" value="<%=shortClassInstId %>"/>
  		<input id="classState" type="hidden" value="<%=classState %>"/>
+ 		<input id="stuNum" type="hidden" value="<%=stuNum %>"/>
  		<input id="schoolIds" type="hidden"/>
  		<input id="roomIds" type="hidden"/>
  		<input id="shortSchooltimeId" type="hidden"/>

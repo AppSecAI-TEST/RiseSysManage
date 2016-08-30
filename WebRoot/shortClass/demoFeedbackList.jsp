@@ -116,15 +116,8 @@
 			var row = $('#manList').datagrid('getSelected');
 			if(row.classState!="005")
 			{
-				if(row.stuNum > 0)
-				{
-					ajaxLoading("正在处理，请稍待。。。");
-					window.location.href="demoFeedback.jsp?shortClassInstId="+row.shortClassInstId+"&classState="+row.classState;
-				}
-				else
-				{
-					$.messager.alert('提示', "参与当前课程人数为零不能进行反馈");
-				}
+				ajaxLoading("正在处理，请稍待。。。");
+				window.location.href="demoFeedback.jsp?shortClassInstId="+row.shortClassInstId+"&classState="+row.classState+"&stuNum="+row.stuNum;
 			}
 			else
 			{

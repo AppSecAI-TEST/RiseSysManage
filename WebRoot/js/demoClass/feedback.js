@@ -174,6 +174,12 @@ function submitInfo() {
 			return false;
 		}
 	}
+	var stuNum = $("#stuNum").val();
+	if(stuNum == 0)
+	{
+		$.messager.alert('提示', "参与当前课程人数为零不能进行反馈");
+		return false;
+	}
 	var param={};
 	var classAttend={};
 	var teacherAttend=[];
