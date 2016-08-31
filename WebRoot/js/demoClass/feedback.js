@@ -174,12 +174,12 @@ function submitInfo() {
 			return false;
 		}
 	}
-	var stuNum = $("#stuNum").val();
-	if(stuNum == 0)
-	{
-		$.messager.alert('提示', "参与当前课程人数为零不能进行反馈");
-		return false;
-	}
+//	var stuNum = $("#stuNum").val();
+//	if(stuNum == 0)
+//	{
+//		$.messager.alert('提示', "参与当前课程人数为零不能进行反馈");
+//		return false;
+//	}
 	var param={};
 	var classAttend={};
 	var teacherAttend=[];
@@ -227,11 +227,11 @@ function submitInfo() {
 		$.messager.alert("提示", result);
 		return false;
 	}
-	else if(teacherAttend.length<1)
-	{
-		$.messager.alert("提示", "请至少添加一个教师反馈");
-		return false;
-	}
+//	else if(teacherAttend.length<1)
+//	{
+//		$.messager.alert("提示", "请至少添加一个教师反馈");
+//		return false;
+//	}
 	else
 	{
 		param.teacherAttend =teacherAttend;
