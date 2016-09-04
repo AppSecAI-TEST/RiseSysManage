@@ -58,6 +58,7 @@
 							{
 								attendTimeDate.push(classTimeData[i]);
 								classTimeData.splice(i,1);
+								break;
 							}
 						}
 					}
