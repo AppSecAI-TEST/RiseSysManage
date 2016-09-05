@@ -67,7 +67,17 @@ $(document).ready(function() {
 			}
 		} else {
 			if("102" == nextState) {
-				flag = $("#refundApproveFm").form('validate');
+				var array = document.getElementsByName("studentCourseId");
+				for(var i = 0, len = array.length; i < len; i++) {
+					var studentCourseId = array[i].value;
+					var financialConfirmRefundFee = $("#financialConfirmRefundFee" + studentCourseId).textbox("getValue");
+					if(financialConfirmRefundFee == "" || financialConfirmRefundFee == null || financialConfirmRefundFee == undefined) {
+						flag = false;
+						var stageId = $("#stageId" + studentCourseId).html();
+						showMessage('提示', "请输入" + stageId + "课程的总部财务核定金额！");
+						break;
+					}
+				}
 			}
 			if(flag) {
 				var approveType = $('input:radio[name="approveType"]:checked').val();

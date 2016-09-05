@@ -205,7 +205,7 @@
   						</tr>
   						<tr>
   							<td align="right" width="12%"><span>课程阶段：</span></td>
-  							<td width="10%"><span>${refundFeeDetail.stageId }</span></td>
+  							<td width="10%"><span id="stageId${refundFeeDetail.studentCourseId }">${refundFeeDetail.stageId }</span></td>
   							<td align="right" width="8%"><span>班级类型：</span></td>
   							<td width="8%"><span>${refundFeeDetail.classType }</span></td>
   							<td align="right" width="8%"><span>退费类型：</span></td>
@@ -265,7 +265,7 @@
   							</td>
   							<td width="15%" align="center">
   								<div id="financialDiv${refundFeeDetail.studentCourseId }">
-	  								<input id="financialConfirmRefundFee${refundFeeDetail.studentCourseId }" name="financialConfirmRefundFee" type="text" class="easyui-textbox numberbox" style="width: 100px; height: 25px;" required="true" value="${refundFeeDetail.financialConfirmFee }" disabled="disabled"/>
+	  								<input id="financialConfirmRefundFee${refundFeeDetail.studentCourseId }" name="financialConfirmRefundFee" type="text" class="easyui-textbox numberbox" style="width: 100px; height: 25px;" value="${refundFeeDetail.financialConfirmFee }" disabled="disabled"/>
   								</div>
   							</td>
   							<td width="13%" align="center"><a href='javascript:void(0)' class='linkmore' onclick="viewCourseDetail(${refundFeeDetail.studentCourseId })" id="studentCourseDetail${refundFeeDetail.studentCourseId }"><span>展开课程</span></a></td>
