@@ -654,10 +654,8 @@
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<tr>
 			  					<td width="20%" colspan="2"><span>4、学术总监/销售经理审批信息：</span></td>
-			  					<td align="right" width="8%"><span>后续审批人：</span></td>
+			  					<td align="right" width="8%"><span></span></td>
 			  					<td width="72%">
-			  						<select id="masterType" name="masterType" class="easyui-combobox" style="width: 100px; height: 25px;">
-	  								</select>
 			  					</td>
 			  				</tr>
 			  				<tr>

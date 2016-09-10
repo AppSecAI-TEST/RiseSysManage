@@ -84,9 +84,10 @@ $(document).ready(function() {
 				if(approveType == "" || approveType == null || approveType == undefined || approveType == "null") {
 					showMessage('提示', "请选择是否审批通过！");
 					flag = false;
-				} else {
+				}/** else {
 					if("Y" == approveType) {
 						if("104" == nextState || "105" == nextState) {
+							
 							masterType = $("#masterType").combobox("getValue");
 							if(masterType == null || masterType == "" || masterType == undefined) {
 								showMessage('提示', "请选择后续审批人类型！");
@@ -97,7 +98,7 @@ $(document).ready(function() {
 						$("#masterType").combobox('clear');
 						$("#masterType").combobox("loadData", new Array());
 					}
-				}
+				}*/
 			}
 		}
 		if(flag) {
@@ -135,7 +136,7 @@ $(document).ready(function() {
 				}
 				refundFeeDetailArray += "]";
 			} if("104" == nextState || "105" == nextState) {
-				approveObj.masterType = masterType;
+				//approveObj.masterType = masterType;
 			} else if("108" == nextState) {
 				approveObj.approveResult = "Y";
 				approveObj.isTransfer = isTransfer;
@@ -363,7 +364,9 @@ $(document).ready(function() {
 	if("104" == nextState || "105" == nextState) {
 		$("input:radio[name='approveType']").change(function() {
 			var approveType = $("input:radio[name='approveType']:checked").val();
-			if("Y" == approveType) {
+			/**if("Y" == approveType) 
+			{
+				
 				$("#masterType").combobox({
 					url : "/sys/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=MASTER_TYPE",//返回json数据的url
 					valueField : "codeFlag",
@@ -373,10 +376,12 @@ $(document).ready(function() {
 						return "<span>" + data.codeName + "</span>";
 					}
 				});
-			} else {
+			} else 
+			{
 				$("#masterType").combobox('clear');
 				$("#masterType").combobox("loadData", new Array());
 			}
+			*/
 		});
 	}
 	

@@ -61,7 +61,7 @@
 	  					<td colspan="4" width="34%">
 	  						<input type="radio" name="refundRule" value="REFUND_COMMON"/><span>常规退费</span>
 	  						&nbsp;&nbsp;<input type="radio" name="refundRule" value="REFUND_PERIOD"/><span>按课时退费</span>
-	  						&nbsp;&nbsp;<input type="radio" name="refundRule" value="SPECIAL_ADJUST"/><span>特殊调整</span>
+	  						&nbsp;&nbsp;
 	  					</td>
 	  					<td align="right" width="10%"><span>是否学术退费：</span></td>
 	  					<td colspan="2" width="28%">
