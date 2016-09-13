@@ -187,6 +187,7 @@
     			return;
     		} else {
     			var data = $(this).combobox('getData');
+    			
 				for(var i = 0; i < data.length; i++) {
 					 if(num == data[i].linkNum) {
 						 favorPrice = data[i].favorPrice; 
@@ -219,6 +220,7 @@
 				for(var i = 0; i < data.length; i++) {
 					if(num == data[i].linkNum) {
 						$("#link").combobox('setText',num+"年连报"); 
+						 favorPrice = data[i].favorPrice; 
 					}
 				}
 			}
