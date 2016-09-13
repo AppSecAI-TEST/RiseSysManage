@@ -9,6 +9,32 @@
 		<%@ include file="/common/head.jsp" %>
 		<%@ include file="/common/formvalidator.jsp" %>
 		<script type="text/javascript" src="<%=path %>/js/export/exceptionOpenClass.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#year").datebox({
+					onShowPanel: settingYearMonthPanel
+				});
+			});
+			function myformatter(date){
+            	var y = date.getFullYear();
+            	var m = date.getMonth()+1;
+            	var d = date.getDate();
+            	return y+'-'+(m<10?('0'+m):m);
+        	}
+
+  			function myparser(s){
+	            if (!s) return new Date();
+	            var ss = (s.split('-'));
+	            var y = parseInt(ss[0],10);
+	            var m = parseInt(ss[1],10);
+	            var d = parseInt(ss[2],10);
+	            if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+	                return new Date(y,m-1,d);
+	            } else {
+	                return new Date();
+	            }
+        	}
+		</script>
   	</head>
   
   	<body>
@@ -25,7 +51,7 @@
 						</td>
 						<td align="right" style="min-width: 50px"><span>月份：</span></td>
 						<td style="min-width: 100px">
-							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="year" name="year" data-options="formatter:monthFormatter, parser:monthParser"/>
+							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="year" name="year" data-options="formatter:myformatter, parser:myparser"/>
 						</td>
 						<td align="left" colspan="2" width="400px">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1061">查询</a>
