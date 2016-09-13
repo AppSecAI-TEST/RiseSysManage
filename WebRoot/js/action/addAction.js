@@ -156,11 +156,11 @@ function addAction() {
 		$.messager.alert("提示", "请至少添加一条老师记录");
 		return false;
 	}
-	if(countHour>parseInt(action.planHours))
-	{
-		$.messager.alert("提示", "主T老师课时数之和"+countHour+"大于活动课时数"+action.planHours+"，请修改");
-		return false;
-	}
+	//if(countHour>parseInt(action.planHours))
+	//{
+		//$.messager.alert("提示", "主T老师课时数之和"+countHour+"大于活动课时数"+action.planHours+"，请修改");
+		//return false;
+	//}
 	action.state = "P";
 	addInfo.actionInfo =action;
 	addInfo.teacherInfo =teacheArr;
