@@ -544,7 +544,7 @@
 								<td align="center">${node.studentCourseT.courseStateName}</td>
 								<c:choose>
 									<c:when test="${!empty node.hadChangeT && (node.hadChangeT.inDate.time-node.hadChangeT.inDate.hours*60*60*1000-node.hadChangeT.inDate.minutes*60*1000-node.hadChangeT.inDate.seconds*1000-currentDate.time > 86400000)}">
-										<td align="center" colspan="2">该学生当前课时不能考勤</td>
+										<td align="center" colspan="2">该学生当前课时暂不能考勤(进班时间为<fmt:formatDate value="${node.hadChangeT.inDate}" pattern="yyyy-MM-dd" timeZone="GMT"/>)</td>
 									</c:when>
 									<c:otherwise>
 										<td align="center"><input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}1" value="N" checked="checked" onclick="attendTypeClickFunc(this,'${node.studentId}')" /><label for="attendType${node.studentId}1">正常上课</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}2" value="B" onclick="attendTypeClickFunc(this,'${node.studentId}')" /><label for="attendType${node.studentId}2">迟到</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}3" value="L" onclick="attendTypeClickFunc(this,'${node.studentId}')" /><label for="attendType${node.studentId}3">请假</label>&nbsp;<input type="radio" name="attendType${node.studentId}" id="attendType${node.studentId}4" value="T" onclick="attendTypeClickFunc(this,'${node.studentId}')" /><label for="attendType${node.studentId}4">旷课</label>&nbsp;&nbsp;&nbsp;&nbsp;<input class="easyui-filebox" name="uploadAttenceLeave${node.studentId}" data-options="prompt:'',buttonText:'上传请假单'" style="width:200px"></td>
