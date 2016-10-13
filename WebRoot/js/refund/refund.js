@@ -1,3 +1,4 @@
+var schoolData = [1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013,1014,1015,1016,1017,1018,1019,1020];
 $(document).ready(function() {
 //	$("#tt").tabs({
 //		onSelect: function (title) {
@@ -101,7 +102,7 @@ $(document).ready(function() {
     			url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=252&fieldId=schoolId",
 				dataType: 'json',  
 				success: function(data) {
-			    	if(data.length > 1) {
+			    	if(data.length == schoolData.length) {
 			    		data.unshift({schoolName:"全部校区", schoolId:""});  
 			    	}
 					success(data);  
@@ -148,7 +149,7 @@ $(document).ready(function() {
     			url : "/sys/pub/pageCategory.do?staffId=" + staffId + "&resourceId=252&fieldId=schoolId",
 				dataType: 'json',  
 				success: function(data) {
-			    	if(data.length > 1) {
+			    	if(data.length == schoolData.length) {
 			    		data.unshift({schoolName:"全部校区", schoolId:""});  
 			    		init();
 			    	}
