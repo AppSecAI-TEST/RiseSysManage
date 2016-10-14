@@ -208,7 +208,30 @@
 				});
 				$("#manList").datagrid({
 					pageList : [20, 30, 40],           
-					pageSize : 20                    
+					pageSize : 20
+				});
+				$("#privType").combobox({
+					formatter:function(row){
+						return '<span>'+row.value+'</span>';
+					},
+					data:[{
+						id:"own",
+						value:"本人校区"
+					},{
+						id:"own-class",
+						value:"所带班级校区"
+					},{
+						id:"own-adviser",
+						value:"所带学生校区"
+					},{
+						id:"own-school",
+						value:"指定校区"
+					}],
+					editable:false, 
+					valueField: 'id', 
+					textField: 'value', 
+					panelHeight: 'auto',
+					required:true
 				});
 			});
 		</script>
@@ -269,7 +292,7 @@
 			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUserRole()">保存</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#userRoleDlg').dialog('close')">取消</a>
 		</div>
-		<div id="dlg" class="easyui-dialog" style="width:480px;height:440px;padding:0px 0px" modal="true" closed="true" buttons="#dlg-buttons">
+		<div id="dlg" class="easyui-dialog" style="width:480px;height:465px;padding:0px 0px" modal="true" closed="true" buttons="#dlg-buttons">
 			<form id="fm" method="post" novalidate>
 				<input id="sysRoleId" name="sysRoleId" type="hidden" value="" />
 				<input id="staffId" name="staffId" type="hidden" value="" />
@@ -280,6 +303,10 @@
 				<div class="fitem">
 					<label style="text-align:right;vertical-align:top;">角色描述:</label>
 					<input name="roleMemo" id="roleMemo" type="text" style="width:265px;height:100px" class="easyui-textbox easyui-validatebox" data-options="multiline:true" required="true" />
+				</div>
+				<div class="fitem">
+					<label style="text-align:right;vertical-align:top;">角色权限:</label>
+					<input name="privType" id="privType" type="text" style="width:265px" />
 				</div>
 				<div class="fitem">
 					<label style="text-align:right;vertical-align:top">数据范围:</label>

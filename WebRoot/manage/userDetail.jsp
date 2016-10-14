@@ -36,7 +36,17 @@
 				</c:otherwise>
 			</c:choose>
 			$(document).ready(function(){
-				$("#deptId").combotree({animate:true,required:true,missingMessage:"请选择部门"});
+				$("#deptId").combotree({
+					animate:true,
+					required:true,
+					missingMessage:"请选择部门",
+					onClick:function(data){
+						if(data.rootFlag == "Y"){
+							$("#deptId").combotree("clear");
+							$.messager.alert('提示',"不能选择瑞思教育作为部门,请选择具体的校区");
+						}
+					}
+				});
 				$("#certType").combobox({
 					url:"<%=path %>/pub/pageComboxList.do?funcNodeId=${funcNodeId}&fieldId=certType",
 					formatter:function(row){
