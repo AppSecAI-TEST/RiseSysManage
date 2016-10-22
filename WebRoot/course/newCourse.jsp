@@ -1380,7 +1380,7 @@ $("#addCourse").click(function()
 		$('#dlg').dialog({
 			title:"使用抵扣券",
 		});
-		var courseType=$("#courseType").combobox("getValue");
+		var courseType=$("#courseType").val();
 		$('#dlg').attr("src","/sys/course/useCoupon.jsp?studentId="+$("#studentId").val()+"&courseType="+courseType);
 		$('#dlg').dialog("open");
 	}
@@ -1492,7 +1492,7 @@ $("#feeType").combobox(
 	
 	function changeCourseType()
 	{
-		var type=$("#courseType").combobox("getValue");
+		var type=$("#courseType").val();
 		if(type=="001")
 		{
 			$("#normal").css("display","block");
