@@ -1,6 +1,6 @@
 var to = null;
 var countProgress = null;
-var schoolData = [1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013,1014,1015,1016,1017,1018,1019,1020];
+var schoolData = [1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013,1014,1015];
 $(document).ready(function() {
 	var search = $(".search_tab").height();
 	if(search > 0 && search != null && search != undefined && search != "") {
