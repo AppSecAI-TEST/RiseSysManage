@@ -295,8 +295,8 @@
 						<td colspan="5" style="padding:0 0;">
 							<c:forEach items="${postList}" var="node" varStatus="i">
 								<p style="float:left;width:150px;height:20px;margin:0 auto;padding:0 5px">
-									<input name="post" id="post${i.count}" type="checkbox" value="${node.postId}" postType="${node.postType}" style="margin:0 auto;vertical-align:middle;" onclick="postClickFunc(this)" />
-									<label for="post${i.count}" style="margin:0 0;vertical-align:middle;">${node.postName}</label>
+									<input name="post" id="post${node.postId}" type="checkbox" value="${node.postId}" postType="${node.postType}" style="margin:0 auto;vertical-align:middle;" onclick="postClickFunc(this)" />
+									<label for="post${node.postId}" style="margin:0 0;vertical-align:middle;">${node.postName}</label>
 								</p>
 							</c:forEach>
 						</td>
