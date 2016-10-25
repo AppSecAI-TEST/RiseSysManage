@@ -925,7 +925,7 @@ $("#addCourse").click(function()
 		$('#dlg').dialog({
 			title:"使用抵扣券",
 		});
-		var courseType=$("#courseType").combobox("getValue");
+		var courseType=$("#courseType").val();
 		$('#dlg').attr("src","/sys/course/useCoupon.jsp?studentId="+$("#studentId").val()+"&courseType="+courseType);
 		$('#dlg').dialog("open");
 	}
