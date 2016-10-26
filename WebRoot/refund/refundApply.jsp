@@ -30,7 +30,9 @@
 	  					<td align="right" width="8%"><span>课时进度：</span></td>
 	  					<td width="10%"><span id="classProgressText">${obj.refundObj.classProgress }</span></td>
 	  					<td align="right" width="8%"><span>带班老师：</span></td>
-	  					<td width="40%" colspan="3"><span id="teacherNameText">${obj.refundObj.teacherName }</span></td>
+	  					<td width="20%"><span id="teacherNameText">${obj.refundObj.teacherName }</span></td>
+	  					<td align="right" width="8%"><span>联系电话：</span></td>
+	  					<td width="20%" colspan="3"><span id="phoneText">${obj.refundObj.phone }</span></td>
 	  				</tr>
 	  				<tr id="refundWayTr">
 	  					<td align="right" width="8%"><span>退费形式：</span></td>

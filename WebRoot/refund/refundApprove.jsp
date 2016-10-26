@@ -35,15 +35,17 @@
 	  					<td align="right" width="8%"><span>带班老师：</span></td>
 	  					<c:if test="${not empty obj.refundFeeObj.imgUrl }">
 	  						<td width="20%"><span>${obj.refundFeeObj.teacherName }</span></td>
-	  						<td width="20%" colspan="2" align="center">
+	  						<td width="20%"   align="center">
 	  							<span id="imgUrl">
 	  								<a href="${obj.refundFeeObj.imgUrl }" id="refundImg" class="linkmore">查看退费申请单</a>
 	  							</span>
 	  						</td>
 	  					</c:if>
 	  					<c:if test="${empty obj.refundFeeObj.imgUrl }">
-	  						<td width="40%" colspan="3"><span>${obj.refundFeeObj.teacherName }</span></td>
+	  						<td width="20%"  ><span>${obj.refundFeeObj.teacherName }</span></td>
 	  					</c:if>
+	  					<td align="right" width="8%"><span>联系电话：</span></td>
+	  					<td width="20%" colspan="3"><span id="phoneText">${obj.refundFeeObj.phone }</span></td>
 	  				</tr>
 	  				<tr id="refundWayTr">
 	  					<td align="right" width="8%"><span>退费形式：</span></td>
