@@ -236,7 +236,7 @@
   							<td width="7%" align="center"><span>手续费</span></td>
   							<td width="8%" align="center"><span>其他扣除</span></td>
   							<td width="11%" align="center"><span>核定退费金额</span></td>
-  							<td width="15%" align="center"><span>总部财务核定金额</span></td>
+  							<td width="15%" align="center"><span>总部财务核定金额${refundFeeDetail.oldMoney}</span></td>
   							<td width="13%" align="center">
   								<c:if test="${not empty refundFeeDetail.imgUrl }">
 	  								<a href="${refundFeeDetail.imgUrl }" class="linkmore" id="courseImgUrl"><span>查看缴费单据</span></a>
