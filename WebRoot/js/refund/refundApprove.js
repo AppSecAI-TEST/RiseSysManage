@@ -271,10 +271,7 @@ $(document).ready(function() {
 				$("#chiefFinancialOfficerViewDiv").css("display", "block");
 			}
 			$("#academicOrSalesViewDiv").css("display", "block");
-			var regionalPresidentResult = $("#regionalPresidentResult").html();
-			if(regionalPresidentResult != null && regionalPresidentResult != "" && regionalPresidentResult != undefined) {
-				$("#regionalPresidentViewDiv").css("display", "block");
-			}
+			$("#regionalPresidentViewDiv").css("display", "block");
 			$("#principalApproveDiv").css("display", "block");
 		} else if("108" == nextState) {
 			$("#headmasterViewDiv").css("display", "block");
@@ -283,14 +280,8 @@ $(document).ready(function() {
 				$("#chiefFinancialOfficerViewDiv").css("display", "block");
 			}
 			$("#academicOrSalesViewDiv").css("display", "block");
-			var regionalPresidentResult = $("#regionalPresidentResult").html();
-			if(regionalPresidentResult != null && regionalPresidentResult != "" && regionalPresidentResult != undefined) {
-				$("#regionalPresidentViewDiv").css("display", "block");
-			}
-			var principalResult = $("#principalResult").html();
-			if(principalResult != null && principalResult != "" && principalResult != undefined) {
-				$("#principalViewDiv").css("display", "block");
-			}
+			$("#regionalPresidentViewDiv").css("display", "block");
+			$("#principalViewDiv").css("display", "block");
 			$("#headquartersFinancialApproveDiv").css("display", "block");
 		}
 	} else if("cancel" == optionType) {
@@ -302,14 +293,8 @@ $(document).ready(function() {
 				$("#chiefFinancialOfficerViewDiv").css("display", "block");
 			}
 			$("#academicOrSalesViewDiv").css("display", "block");
-			var regionalPresidentResult = $("#regionalPresidentResult").html();
-			if(regionalPresidentResult != null && regionalPresidentResult != "" && regionalPresidentResult != undefined) {
-				$("#regionalPresidentViewDiv").css("display", "block");
-			}
-			var principalResult = $("#principalResult").html();
-			if(principalResult != null && principalResult != "" && principalResult != undefined) {
-				$("#principalViewDiv").css("display", "block");
-			}
+			$("#regionalPresidentViewDiv").css("display", "block");
+			$("#principalViewDiv").css("display", "block");
 			$("#headquartersFinancialViewDiv").css("display", "block");
 		} else {
 			if("100" == nextState || "101" == nextState) {
@@ -339,10 +324,7 @@ $(document).ready(function() {
 					$("#chiefFinancialOfficerViewDiv").css("display", "block");
 				}
 				$("#academicOrSalesViewDiv").css("display", "block");
-				var regionalPresidentResult = $("#regionalPresidentResult").html();
-				if(regionalPresidentResult != null && regionalPresidentResult != "" && regionalPresidentResult != undefined) {
-					$("#regionalPresidentViewDiv").css("display", "block");
-				}
+				$("#regionalPresidentViewDiv").css("display", "block");
 			} else if("108" == nextState) {
 				$("#headmasterViewDiv").css("display", "block");
 				$("#financialViewDiv").css("display", "block");
@@ -350,14 +332,8 @@ $(document).ready(function() {
 					$("#chiefFinancialOfficerViewDiv").css("display", "block");
 				}
 				$("#academicOrSalesViewDiv").css("display", "block");
-				var regionalPresidentResult = $("#regionalPresidentResult").html();
-				if(regionalPresidentResult != null && regionalPresidentResult != "" && regionalPresidentResult != undefined) {
-					$("#regionalPresidentViewDiv").css("display", "block");
-				}
-				var principalResult = $("#principalResult").html();
-				if(principalResult != null && principalResult != "" && principalResult != undefined) {
-					$("#principalViewDiv").css("display", "block");
-				}
+				$("#regionalPresidentViewDiv").css("display", "block");
+				$("#principalViewDiv").css("display", "block");
 			}
 		}
 	}

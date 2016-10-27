@@ -775,7 +775,7 @@
 			  				<tr>
 			  					<td align="right" width="8%"><span>审批备注：</span></td>
 			  					<td width="92%" colspan="5">
-			  						<textarea rows="2" cols="122" id="principalRemark" class="easyui-validatebox textbox" readonly="readonly" disabled="disabled"></textarea>
+			  						<textarea rows="2" cols="122" id="principalRemark" class="textarea easyui-validatebox" readonly="readonly" disabled="disabled"></textarea>
 			  					</td>
 			  				</tr>
 	  					</table>
