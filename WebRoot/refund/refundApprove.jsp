@@ -792,7 +792,7 @@
 				  					<input type="checkbox" name="isTransfer"/>
 			  					</td>
 			  					<td align="right" width="12%"><span>退费归属日期：</span></td>
-			  					<td width="78%">
+			  					<td width="80%">
 			  						<input name="belongDate" id="belongDate" type="text" class="easyui-datebox" style="width: 100px; height: 25px;"/>
 			  					</td>
 			  				</tr>
