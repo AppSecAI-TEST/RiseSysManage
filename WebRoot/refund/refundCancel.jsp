@@ -483,6 +483,7 @@
 		  						</c:if>
 		  					</c:forEach>
 	  					</table>
+	  					<!--  
 	  					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
 	  						<c:forEach items="${obj.refundVisitList }" var="refundVisit">
 		  						<c:if test="${refundVisit.visitType == '003' }">
@@ -512,6 +513,7 @@
 		  						</c:if>
 		  					</c:forEach>
 	  					</table>
+	  					-->
 	  				</div>
   				</c:if>
   				

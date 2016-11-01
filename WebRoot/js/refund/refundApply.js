@@ -364,7 +364,7 @@ $(document).ready(function() {
 						}
 						refundFeeDetailArray += "]";
 						var refundVisitArray = "[";
-						for(var i = 0; i < 3; i++) {
+						for(var i = 0; i < 2; i++) {
 							var refundVisitObj = new Object();
 							refundVisitObj.visitType = "00" + (i + 1);
 							if(i == 0) {
@@ -389,13 +389,13 @@ $(document).ready(function() {
 								refundVisitObj.visitDate = obj.academicOrSalesVisitDate;
 								refundVisitObj.remark = obj.academicOrSalesVisitRemark;
 								refundVisitObj.handlerId = obj.handlerId;
-							} else if(i == 2) {
+							} /*else if(i == 2) {
 								refundVisitObj.userType = "headmaster";
 								refundVisitObj.visitUserId = obj.headmasterId;
 								refundVisitObj.visitDate = obj.headmasterVisitDate;
 								refundVisitObj.remark = obj.headmasterVisitRemark;
 								refundVisitObj.handlerId = obj.handlerId;
-							}
+							} */
 							refundVisitArray += JSON.stringify(refundVisitObj) + ",";
 						}
 						if(refundVisitArray.length > 1) {

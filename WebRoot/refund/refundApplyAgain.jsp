@@ -438,7 +438,7 @@
 		  						<tr>
 		  							<td align="right" width="10%"><span>回访记录：</span></td>
 		  							<td colspan="3" width="90%">
-		  								<textarea rows="4" cols="122" id="teacherOrAdviserVisitRemark" name="teacherOrAdviserVisitRemark" class="textarea easyui-validatebox" validType="length[0,120]">${refundVisit.remark }</textarea>
+		  								<textarea rows="4" cols="122" id="teacherOrAdviserVisitRemark" name="teacherOrAdviserVisitRemark" class="textarea easyui-validatebox" required="true" validType="length[0,120]">${refundVisit.remark }</textarea>
 		  							</td>
 		  						</tr>
 	  						</c:if>
@@ -484,12 +484,13 @@
 		  						<tr>
 		  							<td align="right" width="10%"><span>回访记录：</span></td>
 		  							<td colspan="3" width="90%">
-		  								<textarea rows="4" cols="122" id="academicOrSalesVisitRemark" name="academicOrSalesVisitRemark" class="textarea easyui-validatebox" validType="length[0,120]">${refundVisit.remark }</textarea>
+		  								<textarea rows="4" cols="122" id="academicOrSalesVisitRemark" name="academicOrSalesVisitRemark" class="textarea easyui-validatebox" required="true" validType="length[0,120]">${refundVisit.remark }</textarea>
 		  							</td>
 		  						</tr>
 	  						</c:if>
 	  					</c:forEach>
   					</table>
+  					<!--  
   					<table width="100%" cellpadding="5px" style="border-collapse: collapse; border-spacing:0; border: 1px solid #ccc; height:auto;">
   						<c:forEach items="${obj.refundVisitList }" var="refundVisit">
 	  						<c:if test="${refundVisit.visitType == '003' }">
@@ -519,6 +520,7 @@
 	  						</c:if>
 	  					</c:forEach>
   					</table>
+  					-->
   				</div>
   			</form>
   		</div>
