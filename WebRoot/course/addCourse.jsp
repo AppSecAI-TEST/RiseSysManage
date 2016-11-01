@@ -166,19 +166,19 @@
 							<td align="right"><span>业绩老师A：</span></td>
 							<td>
 								<select class="easyui-combobox" id="adviserTeacherA_school" style="width: 100px; height: 25px;" editable='false' 
-									data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+									data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: '280px'">
 								</select>
 								<select name="adviserTeacherA" editable='false' class="easyui-combobox vaildatebox" id="adviserTeacherA"style="width: 100px; height: 25px;"
-									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
+									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: '280px'">
 								</select>
 							</td>
 							<td align="right"><span>业绩老师B：</span></td>
 							<td> 
 								<select class="easyui-combobox" id="adviserTeacherB_school" style="width: 100px; height: 25px;" editable='false'
-									data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
+									data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: '280px'">
 								</select>
 								<select name="adviserTeacherB" editable='false' class="easyui-combobox vaildatebox" id="adviserTeacherB" style="width: 100px; height: 25px;"
-									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
+									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: '280px'">
 								</select>
 							</td>
 							<td align="right"></td>

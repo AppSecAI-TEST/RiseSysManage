@@ -83,12 +83,12 @@
 						</td>
 						<td>
 							<select   editable='false' id="adviserTeacherA_school" style="width: 100px; height: 25px;"
-								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'"
+								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: '280px'"
 								  ></select>
 								  
 							<select name="adviserTeacherA"  id="adviserTeacherA" editable='false'  
 								style="width: 100px; height: 25px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: '280px'">
 							</select>
 						</td>
 						<td align="right">
@@ -721,11 +721,10 @@ $("#addGiftBtn").click(function ()
 		{
 			$("#giftFm").form('clear');
 			$("#addGift").after(giftTR);
-			var height = $(document).height();
-			var frameName=$("#frameName").val();
-			$(frameName,parent.document).css("height",height);
 			clearData("giftModelTR");
 			$("input[name='isGetY'][value='Y']").attr("checked", "checked");
+			var height = $(document).height();
+				$('#frame<%=name%>',parent.document).css("height",height+20);
 	    }
 		
 	
@@ -796,6 +795,8 @@ $("#addCourse").click(function()
 			$("#add").after(objectTr);
 			clearData("giftCourseTr");
 			$("#courseHours").html("");
+			var height = $(document).height();
+				$('#frame<%=name%>',parent.document).css("height",height+20);
 		}
 			
 		
@@ -925,7 +926,7 @@ $("#addCourse").click(function()
 		$('#dlg').dialog({
 			title:"使用抵扣券",
 		});
-		var courseType=$("#courseType").val();
+		var courseType=$("#courseType").combobox("getValue");
 		$('#dlg').attr("src","/sys/course/useCoupon.jsp?studentId="+$("#studentId").val()+"&courseType="+courseType);
 		$('#dlg').dialog("open");
 	}
