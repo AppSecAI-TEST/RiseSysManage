@@ -169,7 +169,7 @@
 									data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: '280px'">
 								</select>
 								<select name="adviserTeacherA" editable='false' class="easyui-combobox vaildatebox" id="adviserTeacherA"style="width: 100px; height: 25px;"
-									data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: '280px'">
+									data-options="formatter:formatTeacher, valueField: 'teacherid', textField: 'byname', panelHeight: '280px'">
 								</select>
 							</td>
 							<td align="right"><span>业绩老师B：</span></td>

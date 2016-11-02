@@ -74,7 +74,7 @@
       					  	<td align="right"><span>连报类型：</span></td>
       					  	<td colspan="3">
       					  		<select  id="link"   style="width: 150px; height: 28px;"
-	      							data-options="formatter:formatLinkNum, valueField: 'favorPrice', textField: 'linkNum', panelHeight: 'auto'">
+	      							data-options=" valueField: 'linkFavorId', textField: 'linkName', panelHeight: 'auto'">
     					    	</select>
     					    </td>
    					  	</tr>
@@ -84,7 +84,7 @@
 	     <div id='frms' style="margin-left:-5px;"> 		 
 			
 			<iframe id="frame0" name="frame0"  style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
-			
+		
 			<iframe id="frame1" name="frame1"  style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
 			
 			<iframe id="frame2" name="frame2"  style="display:none"   src=""  marginwidth=0 marginheight=0 frameborder=0 scrolling="no" width="100%"></iframe>
@@ -177,20 +177,34 @@
     $('#link').combobox({    
        onChange : function(n,o) {
     	    if(n == ''){return}
-    		num = $("#link").combobox('getText');
-    		$("#link").combobox('setText',num+"年连报");
-    		if(linkCourses.length >= num) {
+    	    
+    	    var data = $(this).combobox('getData');
+    			
+			for(var i = 0; i < data.length; i++)
+			 {
+				 if(n == data[i].linkFavorId) 
+				 {
+					 num  = data[i].linkNum; 
+					 break;
+				 }
+			}
+    		if(linkCourses.length >= num)
+    		 {
     			favorPrice = 0;
     			$("#link").combobox('setValue',"");
    	   		 	$("#link").combobox('setText',"");
     			showMessage('提示', "连报年数需大于关联连报课程数,请重新选择", null);
     			return;
-    		} else {
+    		} else 
+    		{
     			var data = $(this).combobox('getData');
     			
-				for(var i = 0; i < data.length; i++) {
-					 if(num == data[i].linkNum) {
+				for(var i = 0; i < data.length; i++)
+				 {
+					 if(n  == data[i].linkFavorId) 
+					 {
 						 favorPrice = data[i].favorPrice; 
+						 break;
 					 }
 				}
     			toLinkCourse(num);
@@ -219,7 +233,7 @@
 				} 
 				for(var i = 0; i < data.length; i++) {
 					if(num == data[i].linkNum) {
-						$("#link").combobox('setText',num+"年连报"); 
+						$("#link").combobox('setText',data[i].linkName); 
 						 favorPrice = data[i].favorPrice; 
 					}
 				}

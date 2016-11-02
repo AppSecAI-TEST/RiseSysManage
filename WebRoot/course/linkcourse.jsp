@@ -83,12 +83,12 @@
 						</td>
 						<td>
 							<select   editable='false' id="adviserTeacherA_school" style="width: 100px; height: 25px;"
-								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: '280px'"
+								data-options="formatter:formatSchool,valueField: 'schoolId', textField: 'schoolName', panelHeight: '150px'"
 								  ></select>
 								  
 							<select name="adviserTeacherA"  id="adviserTeacherA" editable='false'  
 								style="width: 100px; height: 25px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: '280px'">
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: '150px'">
 							</select>
 						</td>
 						<td align="right">
@@ -99,7 +99,7 @@
 						</select>
 							<select name="adviserTeacherB" id="adviserTeacherB"
 								style="width: 100px; height: 25px;"
-								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
+								data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: '150px'">
 							</select>
 						</td>
       	        	</tr>
@@ -113,7 +113,7 @@
 	      	        <td width="8%" align="right"><span>赠品类型：</span></td>
 	      	        <td width="8%">
 	      	        <select   id="parentType" style="width: 100px; height: 25px;"
-	      				     data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
+	      				     data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: '150px'"
 	      					 url="<%=path %>/pubData/qryCodeNameList.do?tableName=GIFT_TYPE_T&codeType=PARENT_TYPE"  >
       	            </select>
       	            </td>
@@ -162,7 +162,7 @@
 	      	        <td width="22%" align="right">
 		      	        <div align="left">
 		      	          <select   id="giftCourseType" style="width: 100px; height: 25px;"
-		      	           data-options="formatter:formatTypeName,  valueField: 'giftType', textField: 'typeName', panelHeight: 'auto'"
+		      	           data-options="formatter:formatTypeName,  valueField: 'giftType', textField: 'typeName', panelHeight: '150px'"
 		      	          url="/sys/pubData/qryData.do?param={queryCode:'Qry_Gift_Type',parentType:'COURSE'}" ></select>
       	            </div></td>
 	      	        <td width="10%" align="right"><span>赠课名称：</span></td>
@@ -335,7 +335,7 @@ initPayDate();
 	        		url : urls,//返回json数据的url
 	        		valueField : "giftType",
 	        		textField :  "typeName",
-	        		panelHeight : "auto",
+	        		panelHeight : "150px",
 	        		onLoadSuccess : function ()
 	        		{ //数据加载完毕事件
 	                    var data = $('#giftType').combobox('getData');
@@ -362,7 +362,7 @@ initPayDate();
 	        		url : urls,//返回json数据的url
 	        		valueField : "giftId",
 	        		textField :  "giftName",
-	        		panelHeight : "auto",
+	        		panelHeight : "150px",
 	        		onLoadSuccess : function ()
 	        		{ //数据加载完毕事件
 	                    var data = $('#giftId').combobox('getData');
@@ -381,7 +381,7 @@ initPayDate();
 	        		url : urls,//返回json数据的url
 	        		valueField : "giftId",
 	        		textField :  "giftName",
-	        		panelHeight : "auto",
+	        		panelHeight : "150px",
 	        		onLoadSuccess : function ()
 	        		{ //数据加载完毕事件
 	                    var data = $('#giftId').combobox('getData');
@@ -410,7 +410,7 @@ initPayDate();
 			url : urls,//返回json数据的url
 			valueField : "giftId",
 			textField : "giftName",
-			panelHeight : "auto"
+			panelHeight : "150px"
 		});
 	}
 });
@@ -424,7 +424,7 @@ $('#giftType').combobox(
 			url : urls,//返回json数据的url
 			valueField : "giftId",
 			textField : "giftName",
-			panelHeight : "auto",
+			panelHeight : "150px",
 			onLoadSuccess : function() 
 			{ //数据加载完毕事件
 				var data = $('#giftId').combobox('getData');
@@ -500,7 +500,7 @@ $('#stageId').combobox({
 		url : url,//返回json数据的url
 		valueField : "classType",
 		textField : "classType",
-		panelHeight : "auto",
+		panelHeight : "150px",
 		onLoadSuccess : function() //数据加载完毕事件
 		{ 
 			var data = $('#classType').combobox('getData');
@@ -926,7 +926,7 @@ $("#addCourse").click(function()
 		$('#dlg').dialog({
 			title:"使用抵扣券",
 		});
-		var courseType=$("#courseType").combobox("getValue");
+		var courseType=$("#courseType").val();
 		$('#dlg').attr("src","/sys/course/useCoupon.jsp?studentId="+$("#studentId").val()+"&courseType="+courseType);
 		$('#dlg').dialog("open");
 	}
