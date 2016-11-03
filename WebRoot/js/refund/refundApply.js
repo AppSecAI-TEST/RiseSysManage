@@ -614,11 +614,7 @@ function checkParam() {
 				}
 			}
 		}
-		var headmasterId = $("#headmasterId").combobox('getValue');
-		if(headmasterId == null || headmasterId == "" || headmasterId == undefined || headmasterId == "null") {
-			showMessage('提示', "请选择校区校长的回访人员！");
-			return false;
-		}
+		 
 	} else {
 		showMessage('提示', "请选择课程" + index + "的渠道来源！");
 		return false;
