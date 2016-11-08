@@ -152,7 +152,7 @@ $(document).ready(function() {
 			if(belongDate == null || belongDate == "" || belongDate == undefined) {
 				$.messager.alert('提示', "请选择退费归属日期！");
 				flag = false;
-			} else {
+			} /*else {
 				var curr_time = new Date();
 				var curr_year = curr_time.getFullYear();
 				var curr_month = curr_time.getMonth() + 1;
@@ -165,7 +165,7 @@ $(document).ready(function() {
 					flag = false;
 					$.messager.alert('提示', "退费归属日期只能选择上月、当月、下月的日期！");
 				}
-			}
+			}*/
 		} else {
 			var approveType = $('input:radio[name="approveType"]:checked').val();
 			if(approveType == "" || approveType == null || approveType == undefined || approveType == "null") {

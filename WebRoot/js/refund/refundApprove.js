@@ -50,7 +50,7 @@ $(document).ready(function() {
 				if(belongDate == null || belongDate == "" || belongDate == undefined) {
 					showMessage('提示', "请选择退费归属日期！");
 					flag = false;
-				} else {
+				} /*else {
 					var curr_time = new Date();
 					var curr_year = curr_time.getFullYear();
 					var curr_month = curr_time.getMonth() + 1;
@@ -63,7 +63,7 @@ $(document).ready(function() {
 						flag = false;
 						showMessage('提示', "退费归属日期只能选择上月、当月、下月的日期！");
 					}
-				}
+				}*/
 			}
 		} else {
 			if("102" == nextState) {
