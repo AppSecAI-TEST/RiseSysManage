@@ -323,6 +323,7 @@ $(document).ready(function() {
 						refundFeeObj.remark = obj.remark;
 						refundFeeObj.handlerId = obj.handlerId;
 						refundFeeObj.approveId = obj.handlerId;
+						refundFeeObj.imgUrl = $("#imgUrl").val();
 						var refundFeeDetailArray = "[";
 						$("[name='studentCourseId']").each(function() {
 							var studentCourseId = $(this).val();
