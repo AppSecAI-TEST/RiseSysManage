@@ -20,7 +20,7 @@ $(document).ready(function() {
     	var funcNodeId = $("#qryBtn").attr("funcNodeId");
     	obj += ",\"month\":\""+time+"\",\"funcNodeId\":\""+funcNodeId+"\"}";
     	$('#list_data').datagrid({
-    		url : "/sys/teaFeebackManage/qryDataListByPage.do",
+    		url : "/sys/pubData/qryDataListByPage.do",
     		queryParams: {
     			param : obj
     		},
