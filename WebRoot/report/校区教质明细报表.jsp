@@ -105,8 +105,8 @@
 							<th field="attendGradVal" align="center" width="5%">出勤率</th>
 							<th field="gradCsiVal" align="center" width="5%">满意度</th>
 							<th field="studentOpenNum" align="center" width="5%">参与人数</th>
-							<th field="openCsiVal" align="center" width="5%">出勤率</th>
-							<th field="attendOpenVal" align="center" width="6%">满意度</th>
+							<th field="attendOpenVal" align="center" width="5%">出勤率</th>
+							<th field="openCsiVal" align="center" width="6%">满意度</th>
 						</tr>
 					</thead>
 				</table>
