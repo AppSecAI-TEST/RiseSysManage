@@ -254,25 +254,33 @@ $(document).ready(function() {
     $("#uploadBtn").click(function() {
     	var fileName = $("#fileName").filebox("getText");
     	if(fileName != "" && fileName != null && fileName != undefined) {
-    		var schoolId = $("#schoolId").val();
-    		var handlerId = $("#handlerId").val();
-    		$("#refundApplyFm").form("submit", {
-    			url: "/sys/fileUpload?type=refund&schoolId="+schoolId+"&handlerId="+handlerId,
-    			onSubmit: function () {
-    				
-    			},
-    			success: function (result) {
-    				var data = JSON.parse(result);
-    				if(data.flag) {
-    					$("#imgUrl").val(data.fileId);
-    					showMessage('提示', "文件上传成功！", "info", function() {$("#cancelUploadBtn").linkbutton('disable');});
-    				} else {
-    					showMessage('提示', data.msg);
-    				}
-    			}
-    		});
+			var index = fileName.lastIndexOf(".");
+			var suffix = fileName.substring(index + 1);
+			if("BMP" == suffix || "bmp" == suffix || "gif" == suffix || "GIF" == suffix
+					|| "jpeg" == suffix || "JPEG" == suffix || "jpg" == suffix || "JPG" == suffix
+					|| "png" == suffix || "PNG" == suffix) {
+				var schoolId = $("#schoolId").val();
+				var handlerId = $("#handlerId").val();
+				$("#refundApplyFm").form("submit", {
+					url: "/sys/fileUpload?type=refund&schoolId="+schoolId+"&handlerId="+handlerId,
+					onSubmit: function () {
+						
+					},
+					success: function (result) {
+						var data = JSON.parse(result);
+						if(data.flag) {
+							$("#imgUrl").val(data.fileId);
+							$.messager.alert('提示', "退费申请单上传成功！", "info", function() {$("#cancelUploadBtn").linkbutton('disable');});
+						} else {
+							showMessage('提示', data.msg);
+						}
+					}
+				});
+			} else {
+				showMessage('提示', "退费申请单请上传图片！");
+			}
     	} else {
-    		showMessage('提示', "请您先选择一个文件！");
+    		showMessage('提示', "请您先选择一个上传文件！");
     	}
     });
     
@@ -289,7 +297,11 @@ $(document).ready(function() {
 					return;
 				} else {
 					var flag = true;
-					if($("#fileName").length > 0) {
+					var imgUrl = $("#imgUrl").val();
+					if(imgUrl == "" || imgUrl == null || imgUrl == undefined) {
+						flag = false;
+					}
+					/* if($("#fileName").length > 0) {
 						var fileName = $("#fileName").filebox("getText");
 						if(fileName != "" && fileName != null && fileName != undefined) {
 							var imgUrl = $("#imgUrl").val();
@@ -297,7 +309,7 @@ $(document).ready(function() {
 								flag = false;
 							}
 						}
-					}
+					} */
 					if(flag) {
 						var obj = $("#refundApplyFm").serializeObject();
 						var refundFeeObj = new Object();
@@ -323,7 +335,7 @@ $(document).ready(function() {
 						refundFeeObj.remark = obj.remark;
 						refundFeeObj.handlerId = obj.handlerId;
 						refundFeeObj.approveId = obj.handlerId;
-						refundFeeObj.imgUrl = $("#imgUrl").val();
+						refundFeeObj.imgUrl = imgUrl;
 						var refundFeeDetailArray = "[";
 						$("[name='studentCourseId']").each(function() {
 							var studentCourseId = $(this).val();
@@ -405,29 +417,30 @@ $(document).ready(function() {
 						refundVisitArray += "]";
 						var param = "{\"refundFeeObj\":"+JSON.stringify(refundFeeObj)+",\"refundFeeDetailArray\":"+refundFeeDetailArray+",\"refundVisitArray\":"+refundVisitArray+"}";
 						param = encodeURI(param);
-						$.ajax({
-							url: "/sys/refund/applyRefund.do",
-							data: "param=" + param,
-							dataType: "json",
-							async: true,
-							beforeSend: function()
-							{
-								$.messager.progress({title : '申请退费', msg : '正在申请退费，请稍等……'});
-							},
-							success: function (data) {
-								$.messager.progress('close'); 
-								var flag = data.flag
-								if(flag)
-								{
-									showMessage('提示', "申请退费成功！", function() {window.location.href = "/sys/refund/refund.jsp";});
-								} else
-								{
-									showMessage('提示', data.msg);
-								}
-							} 
-						});
+						alert(param)
+//						$.ajax({
+//							url: "/sys/refund/applyRefund.do",
+//							data: "param=" + param,
+//							dataType: "json",
+//							async: true,
+//							beforeSend: function()
+//							{
+//								$.messager.progress({title : '申请退费', msg : '正在申请退费，请稍等……'});
+//							},
+//							success: function (data) {
+//								$.messager.progress('close'); 
+//								var flag = data.flag
+//								if(flag)
+//								{
+//									showMessage('提示', "申请退费成功！", function() {window.location.href = "/sys/refund/refund.jsp";});
+//								} else
+//								{
+//									showMessage('提示', data.msg);
+//								}
+//							} 
+//						});
 					} else {
-						showMessage('提示', "请您先上传文件！");
+						showMessage('提示', "请您先上传退费申请单！");
 					}
 				}
 			}
@@ -615,7 +628,6 @@ function checkParam() {
 				}
 			}
 		}
-		 
 	} else {
 		showMessage('提示', "请选择课程" + index + "的渠道来源！");
 		return false;

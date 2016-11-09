@@ -109,28 +109,33 @@ $(document).ready(function() {
     $("#uploadBtn").click(function() {
     	var fileName = $("#fileName").filebox("getText");
     	if(fileName != "" && fileName != null && fileName != undefined) {
-    		var schoolId = $("#schoolId").val();
-    		var handlerId = $("#handlerId").val();
-    		$("#refundApplyFm").form("submit", {
-    			url: "/sys/fileUpload?type=refund&schoolId="+schoolId+"&handlerId="+handlerId,
-    			onSubmit: function () {
-    				
-    			},
-    			success: function (result) {
-    				var data = JSON.parse(result);
-    				if(data.flag)
-    				{
-    					$("#imgUrl").val(data.fileId);
-    					$.messager.alert('提示', "文件上传成功！", "info", function() {$("#cancelUploadBtn").linkbutton('disable');});
-    				}
-    				else
-    				{
-    					$.messager.alert('提示', data.msg);
-    				}
-    			}
-    		});
+    		var index = fileName.lastIndexOf(".");
+			var suffix = fileName.substring(index + 1);
+			if("BMP" == suffix || "bmp" == suffix || "gif" == suffix || "GIF" == suffix
+					|| "jpeg" == suffix || "JPEG" == suffix || "jpg" == suffix || "JPG" == suffix
+					|| "png" == suffix || "PNG" == suffix) {
+				var schoolId = $("#schoolId").val();
+				var handlerId = $("#handlerId").val();
+				$("#refundApplyFm").form("submit", {
+					url: "/sys/fileUpload?type=refund&schoolId="+schoolId+"&handlerId="+handlerId,
+					onSubmit: function () {
+						
+					},
+					success: function (result) {
+						var data = JSON.parse(result);
+						if(data.flag) {
+							$("#imgUrl").val(data.fileId);
+							$.messager.alert('提示', "退费申请单上传成功！", "info", function() {$("#cancelUploadBtn").linkbutton('disable');});
+						} else {
+							$.messager.alert('提示', data.msg);
+						}
+					}
+				});
+			} else {
+				showMessage('提示', "退费申请单请上传图片！");
+			}
     	} else {
-    		$.messager.alert('提示', "请您先选择一个文件！");
+    		$.messager.alert('提示', "请您先选择一个上传文件！");
     	}
     });
     
@@ -196,7 +201,11 @@ $(document).ready(function() {
     	} else {
     		if($("#refundApplyFm").form('validate')) {
     			var flag = true;
-    			if($("#fileName").length > 0) {
+				var imgUrl = $("#imgUrl").val();
+				if(imgUrl == "" || imgUrl == null || imgUrl == undefined) {
+					flag = false;
+				}
+    			/*if($("#fileName").length > 0) {
     				var fileName = $("#fileName").filebox("getText");
     				if(fileName != "" && fileName != null && fileName != undefined) {
     					var imgUrl = $("#imgUrl").val();
@@ -204,7 +213,7 @@ $(document).ready(function() {
     						flag = false;  
     					}
     				} 
-    			}
+    			}*/
 				if(flag) {
 					var obj = $("#refundApplyFm").serializeObject();
 					var refundFeeObj = new Object();
@@ -226,6 +235,7 @@ $(document).ready(function() {
 					refundFeeObj.remark = obj.remark;
 					refundFeeObj.handlerId = obj.handlerId;
 					refundFeeObj.approveId = obj.handlerId;
+					refundFeeObj.imgUrl = imgUrl;
 					var refundFeeDetailArray = "[";
 					var refundFeeDetailObj = new Object();
 					var studentCourseId = $("#studentCourseId").val();
