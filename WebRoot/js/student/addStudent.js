@@ -349,10 +349,14 @@ $(document).ready(function() {
     					}
     				}
     				if(flag) {
+    					var usedFlag = false;
     					var contactsNo = true;
     					$("[name='contacts']").each(function() {
-    						if($(this).attr("identityId") != '') {
+    						if($(this).attr("identityId") != '' && contactsNo) {
     							contactsNo = false;
+    						}
+    						if(!usedFlag && $(this).attr("used") == "Y") {
+    							usedFlag = true;
     						}
     					});
     					if((identityId == null || identityId == "" || identityId == undefined) && contactsNo) {
@@ -362,58 +366,62 @@ $(document).ready(function() {
     						var advisterIdA = $("#advisterIdA").combobox("getValue");
     						var advisterIdB = $("#advisterIdB").combobox("getValue");
     						if(advisterIdA != advisterIdB) {
-    							var obj = JSON.stringify($("#studentFm").serializeObject());
-    							var contactArray = "[";
-    							$("[name='contacts']").each(function() {
-    								contactArray += "{identityId:\""+$(this).attr("identityId")+"\",identityType:\""+$(this).attr("identityType")+"\",name:\""+$(this).attr("contactName")+"\",phone:\""+$(this).attr("phone")+"\",relationType:\""+$(this).attr("relationType")+"\",job:\""+$(this).attr("job")+"\",used:\""+$(this).attr("used")+"\"},";
-    							});
-    							contactArray = contactArray.substring(0, contactArray.length - 1) + "]";
-    							var realSchoolArray = "[";
-    							if($("[name='realSchools']").length > 0) {
-    								$("[name='realSchools']").each(function() {
-    									realSchoolArray += "{schoolType:\""+$(this).attr("schoolType")+"\",realSchoolName:\""+$(this).attr("realSchoolName")+"\"},";
+    							if(usedFlag) {
+    								var obj = JSON.stringify($("#studentFm").serializeObject());
+    								var contactArray = "[";
+    								$("[name='contacts']").each(function() {
+    									contactArray += "{identityId:\""+$(this).attr("identityId")+"\",identityType:\""+$(this).attr("identityType")+"\",name:\""+$(this).attr("contactName")+"\",phone:\""+$(this).attr("phone")+"\",relationType:\""+$(this).attr("relationType")+"\",job:\""+$(this).attr("job")+"\",used:\""+$(this).attr("used")+"\"},";
     								});
-    								realSchoolArray = realSchoolArray.substring(0, realSchoolArray.length - 1);
-    							}
-    							realSchoolArray += "]";
-    							var param = "{studentInfo:"+obj+",contactArray:"+contactArray+",realSchoolArray:"+realSchoolArray+"}";
-    							param = encodeURI(param);
-    							$.ajax({
-    								url: "/sys/student/addStudent.do",
-    								data: "param=" + param,
-    								dataType: "json",
-    								async: true,
-    								beforeSend: function() {
-    									$.messager.progress({title : '学员注册', msg : '学员正在注册，请稍等……'});
-    								},
-    								success: function (data) {
-    									$.messager.progress('close'); 
-    									var flag = data.flag
-    									if(flag) {
-    										$.messager.confirm('提示', '学员注册成功，是否为该学员购买课程?', function(r) {
-    											if(r) {
-    												var sexText = "男";
-    												var sex = $("input:radio[name='sex']:checked").val();
-    												if("0" == sex) {
-    													sexText = "女";
+    								contactArray = contactArray.substring(0, contactArray.length - 1) + "]";
+    								var realSchoolArray = "[";
+    								if($("[name='realSchools']").length > 0) {
+    									$("[name='realSchools']").each(function() {
+    										realSchoolArray += "{schoolType:\""+$(this).attr("schoolType")+"\",realSchoolName:\""+$(this).attr("realSchoolName")+"\"},";
+    									});
+    									realSchoolArray = realSchoolArray.substring(0, realSchoolArray.length - 1);
+    								}
+    								realSchoolArray += "]";
+    								var param = "{studentInfo:"+obj+",contactArray:"+contactArray+",realSchoolArray:"+realSchoolArray+"}";
+    								param = encodeURI(param);
+    								$.ajax({
+    									url: "/sys/student/addStudent.do",
+    									data: "param=" + param,
+    									dataType: "json",
+    									async: true,
+    									beforeSend: function() {
+    										$.messager.progress({title : '学员注册', msg : '学员正在注册，请稍等……'});
+    									},
+    									success: function (data) {
+    										$.messager.progress('close'); 
+    										var flag = data.flag
+    										if(flag) {
+    											$.messager.confirm('提示', '学员注册成功，是否为该学员购买课程?', function(r) {
+    												if(r) {
+    													var sexText = "男";
+    													var sex = $("input:radio[name='sex']:checked").val();
+    													if("0" == sex) {
+    														sexText = "女";
+    													}
+    													var studentId = data.studentId;
+    													var schoolId = $("#schoolId").val();
+    													var name = $("#name").textbox("getValue");
+    													var byName = $("#byName").textbox("getValue");
+    													var birthday = $("#birthday").datebox("getValue");
+    													var identityId = $("#identityId").textbox("getValue");
+    													var studentInfo = name + ";;" + byName + ";;" + birthday + ";;" + identityId + ";;" + sexText;
+    													window.location.href = "/sys/course/addCourse.jsp?schoolId=" + schoolId + "&studentId=" + studentId + "&studentInfo=" + studentInfo;
+    												} else {
+    													window.history.back();
     												}
-    												var studentId = data.studentId;
-    												var schoolId = $("#schoolId").val();
-    												var name = $("#name").textbox("getValue");
-    												var byName = $("#byName").textbox("getValue");
-    												var birthday = $("#birthday").datebox("getValue");
-    												var identityId = $("#identityId").textbox("getValue");
-    												var studentInfo = name + ";;" + byName + ";;" + birthday + ";;" + identityId + ";;" + sexText;
-    												window.location.href = "/sys/course/addCourse.jsp?schoolId=" + schoolId + "&studentId=" + studentId + "&studentInfo=" + studentInfo;
-    											} else {
-    												window.history.back();
-    											}
-    										});
-    									} else {
-    										$.messager.alert('提示', data.msg);
-    									}
-    								} 
-    							});
+    											});
+    										} else {
+    											$.messager.alert('提示', data.msg);
+    										}
+    									} 
+    								});
+    							} else {
+    								$.messager.alert('提示', "请至少设置一个常用联系人！");
+    							}
     						} else {
     							$.messager.alert('提示', "招生顾问A和招生顾问B不能选择同一人！");
     						}

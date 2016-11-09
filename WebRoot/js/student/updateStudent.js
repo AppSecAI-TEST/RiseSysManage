@@ -480,77 +480,91 @@ $(document).ready(function() {
 							}
 						}
 						if(flag) {
+							var usedFlag = false;
 							var contactsNo = true;
 							$("[name='contacts']").each(function() {
-								if($(this).attr("identityId") != '') {
+								if($(this).attr("identityId") != '' && contactsNo) {
 									contactsNo = false;
 								}
+								if(!usedFlag && $(this).attr("used") == "Y") {
+	    							usedFlag = true;
+	    						}
 							});
 							if((identityId == null || identityId == "" || identityId == undefined) && contactsNo) {
 								$.messager.alert({title : '学员注册', msg : '学员证件号码和联系人证件号码不能同时为空，至少填写一项'});
 								return false;
 							} else {
-								var contactArray = "[";
-								if($("[name='contacts']").length > 0) {
-									$("[name='contacts']").each(function() {
-										if("add" == $(this).attr("add")) {
-											contactArray += "{identityId:\""+$(this).attr("identityId")+"\",identityType:\""+$(this).attr("identityType")+"\",name:\""+$(this).attr("contactName")+"\",phone:\""+$(this).attr("phone")+"\",relationType:\""+$(this).attr("relationType")+"\",job:\""+$(this).attr("job")+"\",used:\""+$(this).attr("used")+"\"},";
-										}
-									});
-									if(contactArray.length > 1) {
-										contactArray = contactArray.substring(0, contactArray.length - 1);
-									}
-								}
-								contactArray += "]";
-								var realSchoolArray = "[";
-								if($("[name='realSchools']").length > 0) {
-									$("[name='realSchools']").each(function() {
-										realSchoolArray += "{schoolType:\""+$(this).attr("schoolType")+"\",realSchoolName:\""+$(this).attr("realSchoolName")+"\"},";
-									});
-									realSchoolArray = realSchoolArray.substring(0, realSchoolArray.length - 1);
-								}
-								realSchoolArray += "]";
-								if(contactIds != "" && contactIds != null && contactIds != undefined && contactIds != "null") {
-									contactIds = contactIds.substring(0, contactIds.length - 1);
-								}
-								if(activityIds != "" && activityIds != null && activityIds != undefined && activityIds != "null") {
-									activityIds = activityIds.substring(0, activityIds.length - 1);
-								}
-								if(realIds != "" && realIds != null && realIds != undefined && realIds != "null") {
-									realIds = realIds.substring(0, realIds.length - 1);
-								}
-								var obj = "{";
-								var studentArray = $("#studentFm").serializeArray();
-								for(var j = 0, l = array.length; j < l; j++) {
-									var key = array[j].key;
-									var value = array[j].value;
-									for(var i = 0, len = studentArray.length; i < len; i++) {
-										if(key == studentArray[i].name) {
-											value = studentArray[i].value;
-										}
-									}
-									obj += "\"" + key + "\":\"" + value + "\",";
-								}
-								obj += "\"contactId\":\""+contactIds+"\",\"activityId\":\""+activityIds+"\",\"realId\":\""+realIds+"\",\"contactArray\":"+contactArray+",\"realSchoolArray\":"+realSchoolArray+",\"activityArray\":[]}";
-								obj = encodeURI(obj);
-								$.ajax({
-									url: "/sys/student/updateStudent.do",
-									data: "param=" + obj,
-									dataType: "json",
-									async: true,
-									beforeSend: function() {
-										$.messager.progress({title : '修改档案', msg : '正在修改学员档案，请稍等……'});
-									},
-									success: function (data) {
-										$.messager.progress('close'); 
-										var flag = data.flag
-										if(flag) {
-											$.messager.alert('提示', "修改学员档案成功！", "info", function() {back();});
-										} else {
-											$.messager.alert('提示', "修改学员档案失败！");
-										}
-									} 
-								});
+								var advisterIdA = $("#advisterIdA").combobox("getValue");
+	    						var advisterIdB = $("#advisterIdB").combobox("getValue");
+	    						if(advisterIdA != advisterIdB) {
+	    							if(usedFlag) {
+	    								var contactArray = "[";
+	    								if($("[name='contacts']").length > 0) {
+	    									$("[name='contacts']").each(function() {
+	    										if("add" == $(this).attr("add")) {
+	    											contactArray += "{identityId:\""+$(this).attr("identityId")+"\",identityType:\""+$(this).attr("identityType")+"\",name:\""+$(this).attr("contactName")+"\",phone:\""+$(this).attr("phone")+"\",relationType:\""+$(this).attr("relationType")+"\",job:\""+$(this).attr("job")+"\",used:\""+$(this).attr("used")+"\"},";
+	    										}
+	    									});
+	    									if(contactArray.length > 1) {
+	    										contactArray = contactArray.substring(0, contactArray.length - 1);
+	    									}
+	    								}
+	    								contactArray += "]";
+	    								var realSchoolArray = "[";
+	    								if($("[name='realSchools']").length > 0) {
+	    									$("[name='realSchools']").each(function() {
+	    										realSchoolArray += "{schoolType:\""+$(this).attr("schoolType")+"\",realSchoolName:\""+$(this).attr("realSchoolName")+"\"},";
+	    									});
+	    									realSchoolArray = realSchoolArray.substring(0, realSchoolArray.length - 1);
+	    								}
+	    								realSchoolArray += "]";
+	    								if(contactIds != "" && contactIds != null && contactIds != undefined && contactIds != "null") {
+	    									contactIds = contactIds.substring(0, contactIds.length - 1);
+	    								}
+	    								if(activityIds != "" && activityIds != null && activityIds != undefined && activityIds != "null") {
+	    									activityIds = activityIds.substring(0, activityIds.length - 1);
+	    								}
+	    								if(realIds != "" && realIds != null && realIds != undefined && realIds != "null") {
+	    									realIds = realIds.substring(0, realIds.length - 1);
+	    								}
+	    								var obj = "{";
+	    								var studentArray = $("#studentFm").serializeArray();
+	    								for(var j = 0, l = array.length; j < l; j++) {
+	    									var key = array[j].key;
+	    									var value = array[j].value;
+	    									for(var i = 0, len = studentArray.length; i < len; i++) {
+	    										if(key == studentArray[i].name) {
+	    											value = studentArray[i].value;
+	    										}
+	    									}
+	    									obj += "\"" + key + "\":\"" + value + "\",";
+	    								}
+	    								obj += "\"contactId\":\""+contactIds+"\",\"activityId\":\""+activityIds+"\",\"realId\":\""+realIds+"\",\"contactArray\":"+contactArray+",\"realSchoolArray\":"+realSchoolArray+",\"activityArray\":[]}";
+	    								obj = encodeURI(obj);
+	    								$.ajax({
+	    									url: "/sys/student/updateStudent.do",
+	    									data: "param=" + obj,
+	    									dataType: "json",
+	    									async: true,
+	    									beforeSend: function() {
+	    										$.messager.progress({title : '修改档案', msg : '正在修改学员档案，请稍等……'});
+	    									},
+	    									success: function (data) {
+	    										$.messager.progress('close'); 
+	    										var flag = data.flag
+	    										if(flag) {
+	    											$.messager.alert('提示', "修改学员档案成功！", "info", function() {back();});
+	    										} else {
+	    											$.messager.alert('提示', "修改学员档案失败！");
+	    										}
+	    									} 
+	    								});
+	    							} else {
+	    								$.messager.alert('提示', "请至少设置一个常用联系人！");
+	    							}
+	    						} else {
+	    							$.messager.alert('提示', "招生顾问A和招生顾问B不能选择同一人！");
+	    						}
 							}
 						} else {
 							//disN();
