@@ -30,7 +30,7 @@
 						<span>带班老师：</span>
 					</td>
 					<td width="10%" align="left">
-						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width:100px;height: 25px;">
+						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width:100px;height: 25px;" editable="false">
 				        </select>
 					</td>
 					<td width="10%" align="right"><span>教质月份：</span></td>
@@ -50,7 +50,7 @@
 					</td>
 					<td width="10%" align="right"><span>电教次数：</span></td>
 					<td  align="left" width="10%">
-						<select id="teachingNum" name="teachingNum" class="easyui-combobox" style="width:100px;height: 25px;"
+						<select id="teachingNum" name="teachingNum" class="easyui-combobox" style="width:100px;height: 25px;" editable="false"
 							data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
 	      					url="<%=path %>/pubData/qryCodeNameList.do?tableName=TEACHING_FEEDBACK_DETAIL_T&codeType=TEACHING_NUM">
 				        </select>
