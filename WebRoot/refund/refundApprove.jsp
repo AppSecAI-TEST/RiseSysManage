@@ -33,19 +33,9 @@
 	  					<td align="right" width="8%"><span>课时进度：</span></td>
 	  					<td width="10%"><span>${obj.refundFeeObj.classProgress }</span></td>
 	  					<td align="right" width="8%"><span>带班老师：</span></td>
-	  					<c:if test="${not empty obj.refundFeeObj.imgUrl }">
-	  						<td width="20%"><span>${obj.refundFeeObj.teacherName }</span></td>
-	  						<td width="20%"   align="center">
-	  							<span id="imgUrl">
-	  								<a href="${obj.refundFeeObj.imgUrl }" id="refundImg" class="linkmore">查看退费申请单</a>
-	  							</span>
-	  						</td>
-	  					</c:if>
-	  					<c:if test="${empty obj.refundFeeObj.imgUrl }">
-	  						<td width="20%"  ><span>${obj.refundFeeObj.teacherName }</span></td>
-	  					</c:if>
+	  					<td width="20%"><span>${obj.refundFeeObj.teacherName }</span></td>
 	  					<td align="right" width="8%"><span>联系电话：</span></td>
-	  					<td width="20%" colspan="3"><span id="phoneText">${obj.refundFeeObj.phone }</span></td>
+	  					<td width="10%"><span id="phoneText">${obj.refundFeeObj.phone }</span></td>
 	  				</tr>
 	  				<tr id="refundWayTr">
 	  					<td align="right" width="8%"><span>退费形式：</span></td>
@@ -171,6 +161,11 @@
   				<div style="height: 20px; vertical-align: middle; line-height:20px; margin-top: 10px;">
   					&nbsp;&nbsp;<a href='javascript:void(0)' class='linkmore' onclick="viewGiftHist()" id="gift"><span>展开非缴费赠送历史记录</span></a>
   					&nbsp;&nbsp;<a href='javascript:void(0)' class='linkmore' onclick="viewStudentCourseList()"><span>查看所有的课程信息</span></a>
+  					<c:if test="${not empty obj.refundFeeObj.imgUrl }">
+	  					<span id="imgUrl">
+	  						&nbsp;&nbsp;<a href="${obj.refundFeeObj.imgUrl }" id="refundImg" class="linkmore">查看退费申请单</a>
+	  					</span>
+	  				</c:if>
   				</div>
   				
   				<div id="giftDiv">
@@ -411,21 +406,21 @@
 			  							<td width="35%">
 	  										<c:if test="${refundVisit.userType == 'teacher' }">
 				  								<input type="radio" name="visitPersonOne" value="teacher" checked="checked" disabled="disabled"/><span>老师</span>
-				  								<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled"
+				  								<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 110px; height: 25px;" disabled="disabled"
 				  									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
 		      										onLoadSuccess:function(data){if(data.length > 0) $('#teacherId').combobox('setValue', ${refundVisit.visitUserId });}" 
 		      										url="<%=path %>/pubData/qryStaffList.do?post=4,5&schoolId=${obj.refundFeeObj.schoolId }">
 						        				</select>
 				  								<input type="radio" name="visitPersonOne" value="adviser" disabled="disabled"/><span>课程顾问</span>
-				  								<select id="careAdviserId" name="careAdviserId" class="easyui-combobox" style="width: 100px; height: 25px;">
+				  								<select id="careAdviserId" name="careAdviserId" class="easyui-combobox" style="width: 110px; height: 25px;">
 						        				</select>
 	  										</c:if>
 	  										<c:if test="${refundVisit.userType == 'adviser' }">
 	  											<input type="radio" name="visitPersonOne" value="teacher" disabled="disabled"/><span>老师</span>
-				  								<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;">
+				  								<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 110px; height: 25px;">
 						        				</select>
 				  								<input type="radio" name="visitPersonOne" value="adviser" checked="checked" disabled="disabled"/><span>课程顾问</span>
-				  								<select id="careAdviserId" name="careAdviserId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled"
+				  								<select id="careAdviserId" name="careAdviserId" class="easyui-combobox" style="width: 110px; height: 25px;" disabled="disabled"
 				  									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
 		      										onLoadSuccess:function(data){if(data.length > 0) $('#careAdviserId').combobox('setValue', ${refundVisit.visitUserId });}" 
 		      										url="<%=path %>/pubData/qryStaffList.do?post=16,17&schoolId=${obj.refundFeeObj.schoolId }">
@@ -434,7 +429,7 @@
 			  							</td>
 			  							<td align="right" width="10%"><span>回访时间：</span></td>
 			  							<td width="45%">
-			  								<input name="teacherOrAdviserVisitDate" id="teacherOrAdviserVisitDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 25px;" value="${refundVisit.visitDate }" disabled="disabled"/>
+			  								<input name="teacherOrAdviserVisitDate" id="teacherOrAdviserVisitDate" type="text" class="easyui-datebox" required="true" style="width: 110px; height: 25px;" value="${refundVisit.visitDate }" disabled="disabled"/>
 			  							</td>
 			  						</tr>
 			  						<tr>
@@ -457,21 +452,21 @@
 			  							<td width="35%">
 			  								<c:if test="${refundVisit.userType == 'academic' }">
 				  								<input type="radio" name="visitPersonTwo" value="academic" checked="checked" disabled="disabled"/><span>学术主管</span>
-				  								<select id="academicId" name="academicId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled"
+				  								<select id="academicId" name="academicId" class="easyui-combobox" style="width: 110px; height: 25px;" disabled="disabled"
 				  									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto', 
 		      										onLoadSuccess:function(data){if(data.length > 0) $('#academicId').combobox('setValue', ${refundVisit.visitUserId });}" 
 		      										url="<%=path %>/pubData/qryStaffList.do?post=7,8&schoolId=${obj.refundFeeObj.schoolId }">
 					        					</select>
 				  								<input type="radio" name="visitPersonTwo" value="sales" disabled="disabled"/><span>销售主管</span>
-			  									<select id="salesId" name="salesId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled">
+			  									<select id="salesId" name="salesId" class="easyui-combobox" style="width: 110px; height: 25px;" disabled="disabled">
 					        					</select>
 			  								</c:if>
 			  								<c:if test="${refundVisit.userType == 'sales' }">
 			  									<input type="radio" name="visitPersonTwo" value="academic" disabled="disabled"/><span>学术主管</span>
-				  								<select id="academicId" name="academicId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled">
+				  								<select id="academicId" name="academicId" class="easyui-combobox" style="width: 110px; height: 25px;" disabled="disabled">
 					        					</select>
 				  								<input type="radio" name="visitPersonTwo" value="sales" checked="checked" disabled="disabled"/><span>销售主管</span>
-			  									<select id="salesId" name="salesId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled"
+			  									<select id="salesId" name="salesId" class="easyui-combobox" style="width: 110px; height: 25px;" disabled="disabled"
 				  									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
 		      										onLoadSuccess:function(data){if(data.length > 0) $('#salesId').combobox('setValue', ${refundVisit.visitUserId });}" 
 		      										url="<%=path %>/pubData/qryStaffList.do?post=17&schoolId=${obj.refundFeeObj.schoolId }">
@@ -480,7 +475,7 @@
 			  							</td>
 			  							<td align="right" width="10%"><span>回访时间：</span></td>
 			  							<td width="45%">
-			  								<input name="academicOrSalesVisitDate" id="academicOrSalesVisitDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;" disabled="disabled" value="${refundVisit.visitDate }"/>
+			  								<input name="academicOrSalesVisitDate" id="academicOrSalesVisitDate" type="text" class="easyui-datebox" required="true" style="width: 110px; height: 25px;" disabled="disabled" value="${refundVisit.visitDate }"/>
 			  							</td>
 			  						</tr>
 			  						<tr>
@@ -510,7 +505,7 @@
 			  							</td>
 			  							<td align="right" width="8%"><span>回访时间：</span></td>
 			  							<td width="74%">
-			  								<input name="headmasterVisitDate" id="headmasterVisitDate" type="text" class="easyui-datebox" style="width: 100px; height: 28px;" disabled="disabled" value="${refundVisit.visitDate }"/>
+			  								<input name="headmasterVisitDate" id="headmasterVisitDate" type="text" class="easyui-datebox" style="width: 100px; height: 25px;" disabled="disabled" value="${refundVisit.visitDate }"/>
 			  							</td>
 			  						</tr>
 			  						<tr>
@@ -795,7 +790,7 @@
 			  					</td>
 			  					<td align="right" width="12%"><span>退费归属日期：</span></td>
 			  					<td width="80%">
-			  						<input name="belongDate" id="belongDate" type="text" class="easyui-datebox" style="width: 100px; height: 25px;"/>
+			  						<input name="belongDate" id="belongDate" type="text" class="easyui-datebox" style="width: 110px; height: 25px;"/>
 			  					</td>
 			  				</tr>
 			  				<tr>
