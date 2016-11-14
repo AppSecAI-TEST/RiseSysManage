@@ -417,28 +417,25 @@ $(document).ready(function() {
 						refundVisitArray += "]";
 						var param = "{\"refundFeeObj\":"+JSON.stringify(refundFeeObj)+",\"refundFeeDetailArray\":"+refundFeeDetailArray+",\"refundVisitArray\":"+refundVisitArray+"}";
 						param = encodeURI(param);
-						alert(param)
-//						$.ajax({
-//							url: "/sys/refund/applyRefund.do",
-//							data: "param=" + param,
-//							dataType: "json",
-//							async: true,
-//							beforeSend: function()
-//							{
-//								$.messager.progress({title : '申请退费', msg : '正在申请退费，请稍等……'});
-//							},
-//							success: function (data) {
-//								$.messager.progress('close'); 
-//								var flag = data.flag
-//								if(flag)
-//								{
-//									showMessage('提示', "申请退费成功！", function() {window.location.href = "/sys/refund/refund.jsp";});
-//								} else
-//								{
-//									showMessage('提示', data.msg);
-//								}
-//							} 
-//						});
+						$.ajax({
+							url: "/sys/refund/applyRefund.do",
+							data: "param=" + param,
+							dataType: "json",
+							async: true,
+							beforeSend: function()
+							{
+								$.messager.progress({title : '申请退费', msg : '正在申请退费，请稍等……'});
+							},
+							success: function (data) {
+								$.messager.progress('close'); 
+								var flag = data.flag
+								if(flag) {
+									showMessage('提示', "申请退费成功！", function() {window.location.href = "/sys/refund/refund.jsp";});
+								} else {
+									showMessage('提示', data.msg);
+								}
+							} 
+						});
 					} else {
 						showMessage('提示', "请您先上传退费申请单！");
 					}
