@@ -18,7 +18,7 @@ $(document).ready(function() {
 			if("001" == feeType) {
 				$("#adviserName").html(data.adviserName);
 			} else {
-				$("#adviserNameText").html("业绩老师");
+				$("#adviserNameText").html("业绩老师：");
 				$("#adviserName").html(data.adviserTeacherName);
 			}
 			$("#outClassTeacherName").html(data.outClassTeacherName);
