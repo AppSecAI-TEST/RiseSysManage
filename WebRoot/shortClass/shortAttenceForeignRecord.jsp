@@ -225,9 +225,9 @@
 				{
 					$.messager.alert('提示',"上课结束时间必须大于上课起始时间,请核实后重新尝试","warning");
 				}
-				else if(teacherTime+teacherTaTime > classLessonHour)
+				else if(teacherTime<teacherTaTime)
 				{
-					$.messager.alert("提示", "老师课时量已超过课程总课时量,请核实后重新尝试","warning");
+					$.messager.alert("提示", "老师TA课时量已超过T课时量,请核实后重新尝试","warning");
 				}
 				else if(teacherArr.length == 0)
 				{

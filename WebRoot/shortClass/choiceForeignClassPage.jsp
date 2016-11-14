@@ -46,16 +46,7 @@
 			{
 				initPageNumber("manList");
 				var obj = $("#manFm").serializeObject();
-				var payStartManTime = $("#payStartManTime").datebox("getValue");
-				var payEndManTime = $("#payEndManTime").datebox("getValue");
-				if(payStartManTime != "" && payEndManTime == "")
-				{
-					obj["payEndManTime"] = "3000-12-31";
-				}
-				else if(payStartManTime == "" && payEndManTime != "")
-				{
-					obj["payStartManTime"] = "1900-01-01";
-				}
+				 
 				obj["queryCode"] = "qryForeignChoiceClassList";
 				obj["funcNodeId"] = "38140";
 				obj = JSON.stringify(obj);
@@ -74,8 +65,7 @@
 					$("#schoolManId").combobox("setValue",schoolData[0].schoolId);
 				}
 				$("#shortClassState").combobox("setValue","");
-				$("#payStartManTime").datebox("setValue","");
-				$("#payEndManTime").datebox("setValue","");
+			 
 				$("#studentName").textbox("setValue","");
 				$("#phoneNum").textbox("setValue","");
 			}
@@ -123,9 +113,9 @@
 		</script>
   	</head>
   	<body>
-		<form id="manFm" style="margin:0 auto;">
+		<form id="manFm" style="margin-right:5px;margin-left:5px">
 			<input type="hidden" name="classType" id="classType" value="${param.classType}" />
-			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+			<table id="search_tab"    class="search_tab" >
 				<tr>
 					<td align="right" width="10%">
 						所属校区：
@@ -153,12 +143,7 @@
 					<td>
 						<select id="shortClassState" name="shortClassState" style="width:150px" ></select>										
 					</td>
-					<td align="right" width="8%">
-						关联课缴费日期：
-					</td>
-					<td width="22%">
-						<input name="payStartManTime" id="payStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="payEndManTime" id="payEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
-					</td>
+					 
 					<td align="center" colspan="2">
 						<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
 						<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
@@ -167,7 +152,7 @@
 			</table>
 		</form>
 		<div style="padding:0 0;min-width:1100px;width:99%;margin:5px auto">
-			<table class="easyui-datagrid" title="学员列表" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
+			<table class="easyui-datagrid" title="学员列表" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true"  pageSize="20"  singleSelect="false">
 				<thead>
 					<tr>
 						<th data-options="field:'studentId',checkbox:true"></th>
