@@ -157,41 +157,33 @@ $("#courseDetail").click(function()
 	coures("view");
 });
 
-function delCourse()
-{
-	if(validateSelect("list_data"))
-	{
+function delCourse(){
+	if(validateSelect("list_data")) {
 		var row = $('#list_data').datagrid('getSelected');
-		var courseState=row.courseState;
-		if(!row.courseState=='001')
-		{
-			showMessage("提示","该课程不可删除,请重新选择",null);
-		}else
-		{
+		var courseState = row.courseState;
+		if(courseState != '001') {
+			showMessage("提示","您选择的课程状态为" + row.courseStateText + "，不能删除，请重新选择！" ,null);
+		} else {
 				$.messager.confirm('提示','您确定要删除当前选中课程吗?',function(r) {
-    			if(r)
-    			{
+    			if(r) {
     				var obj ={};
-				obj.studentCourseId=row.studentCourseId;
-				obj.staffId=$("#staffId").val();
-				var str=JSON.stringify(obj);
-				$.ajax( {
-					url : "/sys/course/delCourse.do?",
-					data : "param=" + str,
-					dataType : "json",
-					async : true,
-					success : function(data)
-					{
-					 if(data.flag=='true');//学员已有课程
-					 {
-						 showMessage("提示","删除课程成功",null);
-					 }
-					} 
-				});
+					obj.studentCourseId = row.studentCourseId;
+					obj.staffId = $("#staffId").val();
+					var str = JSON.stringify(obj);
+					$.ajax({
+						url : "/sys/course/delCourse.do?",
+						data : "param=" + str,
+						dataType : "json",
+						async : true,
+						success : function(data) {
+							//学员已有课程
+						 	if(data.flag=='true') {
+							 	showMessage("提示","删除课程成功",null);
+						 	}
+						} 
+					});
     			}
     		});
-				
-			
 		}
 	}
 }

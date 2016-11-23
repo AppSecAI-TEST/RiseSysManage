@@ -46,6 +46,7 @@ $(document).ready(function() {
     	}
 	});
 	
+	initYearAndMonth("year", null);
 	initYear();
 	
 	$("#qryBtn").click(function() {
@@ -158,5 +159,5 @@ function mergeCellsByField(tableId, colList) {
 
 function initYear() {
 	var curr_time = new Date();
-	$('#year').datebox('setValue', yearFormatter(curr_time));
+	$('#year').combobox('setValue', yearFormatter(curr_time));
 }

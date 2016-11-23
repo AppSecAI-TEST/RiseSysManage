@@ -90,9 +90,10 @@ $(document).ready(function() {
 	    	}
 		});
 	}
-
+	
+	initYearAndMonth("year", null);
 	var curr_time = new Date();
-	$('#year').datebox('setValue', yearFormatter(curr_time));
+	$('#year').combobox('setValue', yearFormatter(curr_time));
 	
 	$("#qryBtn").click(function() {
 		if($("#sFlag").length>0&&$("#sFlag").val() == "1") {

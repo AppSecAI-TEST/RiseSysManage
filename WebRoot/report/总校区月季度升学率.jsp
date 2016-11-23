@@ -19,7 +19,9 @@
   					<tr>
 						<td align="right" width="50px"><span>年度：</span></td>
 						<td width="100px">
-							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="year" name="year" data-options="formatter:yearFormatter, parser:yearParser"/>
+							<select class="easyui-combobox" name="year" id="year" style="width:100px;height: 25px;" 
+								editable="false" data-options="valueField:'val',textField:'text'">
+							</select>
 						</td>
 						<td align="right" width="50px"><span>季度：</span></td>
 						<td width="114px">

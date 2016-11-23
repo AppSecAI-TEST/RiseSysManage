@@ -27,7 +27,9 @@
 						</td>
 						<td align="right" width="50px"><span>年度：</span></td>
 						<td width="114px">
-							<input class="easyui-datebox" type="text" style="width:100px; height: 25px;" id="year" name="year" data-options="formatter:yearFormatter, parser:yearParser"/>
+							<select class="easyui-combobox" name="year" id="year" style="width:100px;height: 25px;" 
+								editable="false" data-options="valueField:'val',textField:'text'">
+							</select>
 						</td>
 						<td align="left" colspan="2" width="400px">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1053">查询</a>
