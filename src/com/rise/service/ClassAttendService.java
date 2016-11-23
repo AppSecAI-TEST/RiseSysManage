@@ -191,6 +191,7 @@ public class ClassAttendService
 			model.addObject("schoolList", json.getJSONArray("schoolList"));
 			model.addObject("teacherTypeList", json.getJSONArray("teacherTypeList"));
 			model.addObject("stageId", StringUtil.getJSONObjectKeyVal(json, "stageId"));
+			model.addObject("classType", StringUtil.getJSONObjectKeyVal(json, "classType"));
 			model.addObject("classAttendIdArr", StringUtil.getJSONObjectKeyVal(json, "classAttendIdArr"));
 			model.addObject("schooltimeInstIdArr", StringUtil.getJSONObjectKeyVal(json, "schooltimeInstIdArr"));
 			json.remove("timeTList");
@@ -198,6 +199,7 @@ public class ClassAttendService
 			json.remove("schoolList");
 			json.remove("teacherTypeList");
 			json.remove("stageId");
+			json.remove("classType");
 			json.remove("classAttendIdArr");
 			json.remove("schooltimeInstIdArr");
 			ClassAttendT classAttendT = JacksonJsonMapper.getInstance().readValue(json.toString(), ClassAttendT.class);

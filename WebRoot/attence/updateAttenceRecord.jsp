@@ -312,7 +312,7 @@
 						hourRange:classTime,
 						hours:classLessonHour,
 						roomId:classRoomId,
-						classType:"${schooltimeInstT.classInstT.classType}",
+						classType:"${classType}",
 						handlerId:"${sessionScope.StaffT.staffId}",
 						teacherList:null,
 						studentList:null
