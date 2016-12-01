@@ -126,7 +126,7 @@
 		  				<th data-options="field:'normalAttend',width:80,align:'center'">正常课时</th>
 		  				<th data-options="field:'leaveAttend',width:80,align:'center'">请假课时</th>
 		  				<th data-options="field:'truancyAttend',width:80,align:'center'">旷课课时</th>
-		  				<th data-options="field:'behindhandAttend',width:80,align:'center'">迟到次数</th>
+		  				<th data-options="field:'behindhandAttend',width:80,align:'center'">迟到课时</th>
 		  				<th data-options="field:'makeupAttend',width:80,align:'center'">已补课时</th>
 		  				<th data-options="field:'exceptionDate',width:120,align:'center'">异动开始日期</th>
 		  				<th data-options="field:'exceptionDays',width:120,align:'center'">异动时长（天）</th>
