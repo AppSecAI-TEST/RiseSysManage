@@ -324,7 +324,7 @@
 							teacherId:$(node).attr("teacherId"),
 							teacherName:$(node).attr("teacherName"),
 							teacherType:$(node).attr("teacherType"),
-							attendDate:'<fmt:formatDate value="${classAttendT.schooltime}" pattern="yyyy-MM-dd" />',
+							attendDate:'<fmt:formatDate value="${classAttendT.attendDate}" pattern="yyyy-MM-dd" />',
 							hours:$(node).attr("hours")
 						};
 						teacherArr.push(teacherObj);
@@ -343,7 +343,7 @@
 							studentId:firstTr.attr("studentId"),
 							studentName:firstTr.attr("studentName"),
 							schoolId:firstTr.attr("schoolId"),
-							attendDate:'<fmt:formatDate value="${classAttendT.schooltime}" pattern="yyyy-MM-dd" />',
+							attendDate:'<fmt:formatDate value="${classAttendT.attendDate}" pattern="yyyy-MM-dd" />',
 							dress:dressObj,
 							attendType:attendTypeObj
 						};
