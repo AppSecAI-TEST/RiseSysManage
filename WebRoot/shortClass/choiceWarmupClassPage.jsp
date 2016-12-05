@@ -121,7 +121,7 @@
 		<form id="manFm" style="margin:0 auto;">
 			<input type="hidden" name="classType" id="classType" value="${param.classType}" />
 			<input type="hidden" name="stageId" id="stageId" value="${param.stageId}" />
-			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+			<table class="search_tab" align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 				<tr>
 					<td align="right">
 						学员姓名：
@@ -143,12 +143,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td align="right">
-						班级：
-					</td>
-					<td>
-						<input name="classInstId" id="classInstId" type="text" style="width:150px" class="easyui-textbox easyui-validatebox" />
-					</td>
+					
 					<td align="right">
 						课程状态：
 					</td>
@@ -163,7 +158,7 @@
 			</table>
 		</form>
 		<div style="padding:0 0;min-width:1100px;width:99%;margin:5px auto">
-			<table class="easyui-datagrid" title="学员列表" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
+			<table class="easyui-datagrid" title="学员列表" id="manList" toolbar="#toolManbar"  pageSize="20" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
 				<thead>
 					<tr>
 						<th data-options="field:'studentId',checkbox:true"></th>
