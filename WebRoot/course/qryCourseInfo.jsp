@@ -166,7 +166,7 @@ function delCourse(){
 		} else {
 				$.messager.confirm('提示','您确定要删除当前选中课程吗?',function(r) {
     			if(r) {
-    				var obj ={};
+    				var obj = {};
 					obj.studentCourseId = row.studentCourseId;
 					obj.staffId = $("#staffId").val();
 					var str = JSON.stringify(obj);
@@ -175,10 +175,14 @@ function delCourse(){
 						data : "param=" + str,
 						dataType : "json",
 						async : true,
+						beforeSend: function() {
+    						$.messager.progress({title: "删除课程", msg: "正在删除课程，请稍等……"});
+    					},
 						success : function(data) {
 							//学员已有课程
-						 	if(data.flag=='true') {
-							 	showMessage("提示","删除课程成功",null);
+							$.messager.progress('close');
+						 	if(data.flag == 'true') {
+						 		$.messager.alert("提示", "删除课程成功！", "info", function() {$("#qryBtn").click();});
 						 	}
 						} 
 					});
