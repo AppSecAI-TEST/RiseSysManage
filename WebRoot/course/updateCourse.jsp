@@ -1230,6 +1230,15 @@ $("#submitBtn").click(function() {
 						}
 					}else if(feeType=='002'|| feeType=='003')
 					{
+						if($("#adviserTeacherA").combobox("getValue") == "") 
+						{
+							showMessage("提示","请选择业绩老师A", function() 
+							{
+								hideMessage();
+								scrolltoDom($("#adviserTeacherA").parent());
+							});
+							return false;
+						}
 						if(courseState=='001' || courseState=='002')
 						{
 							if(Number(stageOrder)==Number(order))

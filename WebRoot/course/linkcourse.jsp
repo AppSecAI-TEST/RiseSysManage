@@ -961,6 +961,15 @@ $("#addCourse").click(function()
 				});
 				return false;
 			}
+			if($("#adviserTeacherA").combobox("getValue") == "") 
+			{
+					showMessage("提示","请选择业绩老师A", function() 
+					{
+						hideMessage();
+						scrolltoDom($("#adviserTeacherA").parent());
+					});
+					return false;
+			}
 			
 			if($("#adviserTeacherA").combobox("getValue")!='' && ($("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue")))
 			{

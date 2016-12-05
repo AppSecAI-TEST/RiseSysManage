@@ -2019,7 +2019,8 @@ function checkParam() {
 			});
 			return false;
 		} else {
-			if($("#feeType").combobox("getValue") == "001") {
+			if($("#feeType").combobox("getValue") == "001")
+			{
 				if($("#adviserA").combobox("getValue") == "") {
 					showMessage("提示","请选择业绩顾问A", function() {
 						hideMessage();
@@ -2033,7 +2034,18 @@ function checkParam() {
 						});
 						return false;
 					}	
-			} else {
+			}else 
+			{
+				if($("#adviserTeacherA").combobox("getValue") == "") 
+				{
+					showMessage("提示","请选择业绩老师A", function() 
+					{
+						hideMessage();
+						scrolltoDom($("#adviserTeacherA").parent());
+					});
+					return false;
+				}
+				
 				if($("#adviserTeacherA").combobox("getValue") != '' 
 					&& ($("#adviserTeacherB").combobox("getValue") == $("#adviserTeacherA").combobox("getValue"))) {
 					showMessage("提示","业绩老师A不能和业绩老师B相同",function(){
@@ -2042,7 +2054,7 @@ function checkParam() {
 					});
 					return false;
 				}
-			}	
+			}
 		}
 	} else {
 		if($("#shortClassId").combobox("getValue") == "") {

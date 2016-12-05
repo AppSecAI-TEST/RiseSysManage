@@ -2034,6 +2034,16 @@ $("#praiseSourceN").combobox({
 				}
 				else
 				{
+					if($("#adviserTeacherA").combobox("getValue") == "") 
+					{
+						showMessage("提示","请选择业绩老师A", function() 
+						{
+							hideMessage();
+							scrolltoDom($("#adviserTeacherA").parent());
+						});
+						return false;
+					}
+					
 					if($("#adviserTeacherA").combobox("getValue")!='' &&( $("#adviserTeacherB").combobox("getValue")==$("#adviserTeacherA").combobox("getValue")))
 					{
 						parent.showMessage("提示",arr[n]+"业绩老师A不能和业绩老师B相同",function(){
@@ -2044,6 +2054,7 @@ $("#praiseSourceN").combobox({
 					}
 					
 				}	
+				
 			}
 			return true;
 		}
