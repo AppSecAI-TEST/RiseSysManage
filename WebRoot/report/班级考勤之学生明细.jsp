@@ -25,6 +25,9 @@
 					</script>
 				</c:when>
 				<c:otherwise>
+					<p style="border:none !important;padding-right:5px;padding-top:5px;margin-bottom:5px">
+						<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
+					</p>
 					<table align="center" class="tab" style="min-width:2000px;margin:0 auto;padding:0 0;border-top:1px solid #ccc;height:auto" cellpadding="0" cellspacing="0">
 						<tr class="headTr datagrid-header">
 							<td rowspan="2" style="border-left:1px solid #ccc;">序号</td>
@@ -58,14 +61,9 @@
 									</c:forEach>
 									<td align="center">${attendTotalHour}</td>
 								</c:forEach>
-								<td align="center">${node.attendCount}</td>
+								<td align="center"><c:choose><c:when test="${empty node.attendCount}">0</c:when><c:otherwise>${node.attendCount}</c:otherwise></c:choose></td>
 							</tr>
 						</c:forEach>
-						<tr>
-							<td colspan="${maxDay+4}" align="right" style="border:none !important;padding-right:5px;padding-top:5px">
-								<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
-							</td>
-						</tr>
 					</table>
 				</c:otherwise>
 			</c:choose>
