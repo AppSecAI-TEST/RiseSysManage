@@ -455,6 +455,15 @@ $('#giftCourseId').combobox(
 		}
 	}
 });
+
+$("#payDate").datebox({
+	onChange : function(n, o)
+	{
+		$("#stageId").combobox('setValue',"");
+		$("#classType").combobox('setValue',"");
+	}
+})
+
 	//选择阶段价加载班级
 $('#stageId').combobox({
 	onChange : function(n, o)

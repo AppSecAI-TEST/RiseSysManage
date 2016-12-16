@@ -255,6 +255,7 @@ $(document).ready(
 							base.find("td:eq(4)").html("<span></span>")//提示 不知如何取 暂时取备注字段
 							var checkboxes = base.find("td:eq(5)").find("input[type=checkbox]");
 							checkboxes.attr('studentCousreId', node.studentCourseId);
+							checkboxes.attr('courseState', node.courseState);
 							checkboxes.attr('linkId', node.linkId);
 							checkboxes.click(function() {
 								relatedLink(checkboxes)
@@ -310,8 +311,15 @@ function showImage(url) {
 	parent.$("#showImg").dialog('open');
 }
 
-function relatedLink(obj) {
+function relatedLink(obj) 
+{
 	var lId = $(obj).attr("linkId");
+	var checkFlag=true;
+	if($(obj).attr("courseState")=='003')
+	{
+		 checkFlag=false;
+		 showMessage('提示', "在读课程不能关联连报,请重新选择", null);
+	}
 	if(lId=="")
 	{
 		return false;
@@ -320,6 +328,7 @@ function relatedLink(obj) {
 	$("input[type=checkbox]").each(function(index) {
 		if (index > 0) {
 			if (lId == $(this).attr("linkId")) {
+				
 				if(flag)
 				{
 					this.checked =true;
@@ -327,7 +336,11 @@ function relatedLink(obj) {
 				else
 				{
 					this.checked =false;
-				}	
+				}
+				if(!checkFlag)
+				{
+					this.checked =false;
+				}
 			}
 		}
 
