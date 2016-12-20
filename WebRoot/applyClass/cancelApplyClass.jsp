@@ -15,6 +15,7 @@
   
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="取消放班申请信息">
+	  		<input type="hidden" id="type" value="APPLY"/>
   			<table width="100%" cellpadding="5px" class="maintable" id="cancelApplyClassTd">
   				<tr>
   					<td align="right" width="10%"><span>课程阶段：</span></td>

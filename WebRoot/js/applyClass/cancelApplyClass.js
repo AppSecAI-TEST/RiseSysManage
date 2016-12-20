@@ -1,6 +1,5 @@
 var td = 2;
 $(document).ready(function() {
-	var type = $("#type").val();
 	var classInstId = $("#classInstId").val();
 	$.ajax({
 		url: "/sys/applyClass/qryCreateClassById.do",
@@ -8,9 +7,10 @@ $(document).ready(function() {
 		dataType: "json",
 		async: true,
 		beforeSend: function() {
-			if("" == type) {
+			var type = $("#type").val();
+			if("APPLY" == type) {
 				$.messager.progress({title : '放班申请', msg : '正在查询放班信息，请稍等……'});
-			} else if("" == type) {
+			} else if("CANCEL" == type) {
 				$.messager.progress({title : '取消放班申请', msg : '正在查询取消放班信息，请稍等……'});
 			}
 		},
