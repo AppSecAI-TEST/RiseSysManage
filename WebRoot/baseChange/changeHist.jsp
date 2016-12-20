@@ -29,24 +29,24 @@
 		  					<td width="30%"><span>${obj.attendClassObj.className }</span></td>
 		  				</tr>
 		  				<tr>
-		  					<td align="right" width="10%"><span>开课日期：</span></td>
-		  					<td width="20%"><span>${obj.attendClassObj.startDate }</span></td>
+		  					<td align="right" width="10%"><span>结课日期：</span></td>
+		  					<td width="20%"><span>${obj.attendClassObj.finishDate }</span></td>
 		  					<td align="right" width="10%"><span>学员来源类型：</span></td>
 		  					<td width="20%"><span>${obj.attendClassObj.studentChannelTypeText }</span></td>
 		  					<td align="right" width="10%"><span>来源班级：</span></td>
 		  					<td width="30%"><span>${obj.attendClassObj.higherSchoolName }</span></td>
 		  				</tr>
 		  				<tr>
+		  					<td align="right" width="10%"><span>开课日期：</span></td>
+		  					<td width="20%"><span>${obj.attendClassObj.startDate }</span></td>
 		  					<td align="right" width="10%"><span>开班类型：</span></td>
 		  					<td width="20%"><span>${obj.attendClassObj.openClassTypeText }</span></td>
 		  					<td align="right" width="10%"><span>开班人数：</span></td>
-		  					<td width="20%"><span>${obj.attendClassObj.openClassNum }</span></td>
-		  					<td align="right" width="10%"><span>在读人数：</span></td>
-		  					<td width="30%"><span>${obj.attendClassObj.classStudentNum }</span></td>
+		  					<td width="30%"><span>${obj.attendClassObj.openClassNum }</span></td>
 		  				</tr>
 		  				<tr>
-		  					<td align="right" width="10%"><span>升学基数：</span></td>
-		  					<td width="20%"><span>${obj.attendClassObj.higherBaseNum }</span></td>
+		  					<td align="right" width="10%"><span>在读人数：</span></td>
+		  					<td width="20%"><span>${obj.attendClassObj.classStudentNum }</span></td>
 		  					<td align="right" width="10%"><span>已升学人数：</span></td>
 		  					<td width="20%"><span>${obj.attendClassObj.higherStudentNum }</span></td>
 		  					<td align="right" width="10%"><span>升学率：</span></td>
@@ -88,6 +88,12 @@
 	  							</table>
 	  						</td>
 	  					</tr>
+	  					<tr>
+	  						<td colspan="6" align="right">
+		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+			      				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  						</td>
+	  					</tr>
 	  				</table>
 			  		<div style="height: 5px;"></div>
 			  		<div style="padding:5px 0;min-width:1100px; width:100%;">
@@ -103,7 +109,7 @@
 					  				<th data-options="field:'courseStateText',width:100,align:'center'">课程状态</th>
 					  				<th data-options="field:'higherStageId',width:100,align:'center'">已升学阶段</th>
 					  				<th data-options="field:'studyingNum',width:80,align:'center'">在读人数</th>
-					  				<th data-options="field:'higherBaseNum',width:80,align:'center'">升学基数</th>
+					  				<th data-options="field:'higherBaseNum',width:80,align:'center',hidden:'true'">升学基数</th>
 					  				<th data-options="field:'higherNum',width:80,align:'center'">已升学人数</th>
 					  			</tr>
 					  		</thead>
@@ -119,15 +125,15 @@
 					  				<th data-options="field:'createDate',width:130,align:'center'">操作时间</th>
 					  				<th data-options="field:'originClassStudyingNum',width:80,align:'center'">原在读</br>人数</th>
 					  				<th data-options="field:'classStudyingNum',width:80,align:'center'">变更后在</br>读人数</th>
-					  				<th data-options="field:'originClassHigherBaseNum',width:80,align:'center'">原升学</br>基数</th>
-					  				<th data-options="field:'classHigherBaseNum',width:80,align:'center'">变更后升</br>学基数</th>
+					  				<th data-options="field:'originClassHigherBaseNum',width:80,align:'center',hidden:'true'">原升学</br>基数</th>
+					  				<th data-options="field:'classHigherBaseNum',width:80,align:'center',hidden:'true'">变更后升</br>学基数</th>
 					  				<th data-options="field:'originClassHigherNum',width:80,align:'center'">原已升</br>学人数</th>
 					  				<th data-options="field:'classHigherNum',width:80,align:'center'">变更后已</br>升学人数</th>
 					  				<th data-options="field:'name',width:80,align:'center'">学员姓名</th>
 					  				<th data-options="field:'originStudentStudyingNum',width:80,align:'center'">原在读</br>人数</th>
 					  				<th data-options="field:'studentStudyingNum',width:80,align:'center'">变更后在</br>读人数</th>
-					  				<th data-options="field:'originStudentHigherBaseNum',width:80,align:'center'">原升学</br>基数</th>
-					  				<th data-options="field:'studentHigherBaseNum',width:80,align:'center'">变更后升</br>学基数</th>
+					  				<th data-options="field:'originStudentHigherBaseNum',width:80,align:'center',hidden:'true'">原升学</br>基数</th>
+					  				<th data-options="field:'studentHigherBaseNum',width:80,align:'center',hidden:'true'">变更后升</br>学基数</th>
 					  				<th data-options="field:'originStudentHigherNum',width:80,align:'center'">原已升</br>学人数</th>
 					  				<th data-options="field:'studentHigherNum',width:80,align:'center'">变更后已</br>升学人数</th>
 					  			</tr>

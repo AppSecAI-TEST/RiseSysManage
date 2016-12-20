@@ -53,7 +53,7 @@
 							<th data-options="field:'monthHigherRate1',width:100,align:'center'"><div id="1_month"></div></th>
 							<th data-options="field:'monthHigherRate2',width:100,align:'center'"><div id="2_month"></div></th>
 							<th data-options="field:'monthHigherRate3',width:100,align:'center'"><div id="3_month"></div></th>
-							<th data-options="field:'quarterHigherBaseNum',width:100,align:'center'">基数</th>
+							<th data-options="field:'quarterHigherBaseNum',width:100,align:'center'">在读人数</th>
 							<th data-options="field:'quarterHigherRate',width:100,align:'center'"><div id="rate"></div></th>
 						</tr>
 					</thead>

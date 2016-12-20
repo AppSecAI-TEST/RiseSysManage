@@ -107,8 +107,8 @@
 							<th field="lower12Refund" align="center" width="8%">12课时内退学</th>
 							<th field="above12Refund" align="center" width="8%">12课时后退学</th>
 							<th field="studyingNum" align="center" width="6%">在读人数</th>
-							<th field="higherBaseNum" align="center" width="7%">升学率基数</th>
-							<th field="higherNum" align="center" width="7%">已升学基数</th>
+							<th field="higherBaseNum" align="center" width="7%" hidden="true">升学率基数</th>
+							<th field="higherNum" align="center" width="7%">已升学人数</th>
 							<th field="higherRate" align="center" width="7%">当前升学率</th>
 							<th field="higherRateGoal" align="center" width="7%">升学率目标</th>
 							<th field="rateNum90" align="center" width="7%">升学缺口</th>

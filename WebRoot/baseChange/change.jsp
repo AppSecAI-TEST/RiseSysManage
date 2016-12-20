@@ -28,24 +28,24 @@
 		  					<td width="30%"><span>${obj.attendClassObj.className }</span></td>
 		  				</tr>
 		  				<tr>
-		  					<td align="right" width="10%"><span>开课日期：</span></td>
-		  					<td width="20%"><span>${obj.attendClassObj.startDate }</span></td>
+		  					<td align="right" width="10%"><span>结课日期：</span></td>
+		  					<td width="20%"><span>${obj.attendClassObj.finishDate }</span></td>
 		  					<td align="right" width="10%"><span>学员来源类型：</span></td>
 		  					<td width="20%"><span>${obj.attendClassObj.studentChannelTypeText }</span></td>
 		  					<td align="right" width="10%"><span>来源班级：</span></td>
 		  					<td width="30%"><span>${obj.attendClassObj.higherSchoolName }</span></td>
 		  				</tr>
 		  				<tr>
+		  					<td align="right" width="10%"><span>开课日期：</span></td>
+		  					<td width="20%"><span>${obj.attendClassObj.startDate }</span></td>
 		  					<td align="right" width="10%"><span>开班类型：</span></td>
 		  					<td width="20%"><span>${obj.attendClassObj.openClassTypeText }</span></td>
 		  					<td align="right" width="10%"><span>开班人数：</span></td>
-		  					<td width="20%"><span>${obj.attendClassObj.openClassNum }</span></td>
-		  					<td align="right" width="10%"><span>在读人数：</span></td>
-		  					<td width="30%"><span>${obj.attendClassObj.classStudentNum }</span></td>
+		  					<td width="30%"><span>${obj.attendClassObj.openClassNum }</span></td>
 		  				</tr>
 		  				<tr>
-		  					<td align="right" width="10%"><span>升学基数：</span></td>
-		  					<td width="20%"><span>${obj.attendClassObj.higherBaseNum }</span></td>
+		  					<td align="right" width="10%"><span>在读人数：</span></td>
+		  					<td width="20%"><span>${obj.attendClassObj.classStudentNum }</span></td>
 		  					<td align="right" width="10%"><span>已升学人数：</span></td>
 		  					<td width="20%"><span>${obj.attendClassObj.higherStudentNum }</span></td>
 		  					<td align="right" width="10%"><span>升学率：</span></td>
@@ -59,6 +59,12 @@
 		  					<td align="right" width="10%"><span>班级性质： </span></td>
 		  					<td width="30%"><span>${obj.attendClassObj.handTypeText }</span></td>
 		  				</tr>
+		  				<tr>
+	  						<td colspan="6" align="right">
+		  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 28px;" onclick="javascript:window.history.back()">返回</a>
+			      				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  						</td>
+	  					</tr>
 	  				</table>
 			  		<div style="height: 5px;"></div>
 			  		<div style="padding:5px 0;min-width:1100px; width:100%;">
@@ -77,7 +83,7 @@
 					  				<th data-options="field:'isChange',width:100,align:'center'">是否当前班级</th>
 					  				<th data-options="field:'higherStageId',width:100,align:'center'">已升学阶段</th>
 					  				<th data-options="field:'studyingNum',width:80,align:'center'">在读人数</th>
-					  				<th data-options="field:'higherBaseNum',width:80,align:'center'">升学基数</th>
+					  				<th data-options="field:'higherBaseNum',width:80,align:'center',hidden:'true'">升学基数</th>
 					  				<th data-options="field:'higherNum',width:80,align:'center'">已升学人数</th>
 					  				<th data-options="field:'option', width:100, align:'center', formatter:formatChangeBaseNum">操作</th>
 					  			</tr>
@@ -87,9 +93,6 @@
   				</div>
   			</form>
   		</div>
-  		<div style="text-align:right;margin-top: 25px;min-width:1100px; width:99%;">
-  			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width: 80px; height: 25px;" onclick="javascript:window.history.back()">返回</a>
-	   </div>
   		
   		<div id="dlg" class="easyui-dialog" style="width: 600px;height: 300px;" closed="true" data-options="modal:true" buttons="#dlgBtn">
   			<form id="baseNumStudentFm" method="post">
@@ -115,7 +118,7 @@
 	  						<input id="studentStudyingNum" name="studentStudyingNum" type="text" class="easyui-numberbox validatebox" data-options="min:0,max:1,precision:0" required="true" style="width: 100px; height: 25px;"/>
 	  					</td>
   					</tr>
-  					<tr>
+  					<tr style="display: none;">
 	  					<td align="right" width="15%"><span>升学基数：</span></td>
 	  					<td width="20%"><span id="higherBaseNumText"></span></td>
 	  					<td align="right" width="25%"><span>升学基数调整为：</span></td>
