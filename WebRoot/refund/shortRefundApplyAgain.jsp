@@ -14,8 +14,9 @@
   
   	<body>
   		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="短期课退费重新申请">
-  			<form id="refundApplyFm">
+  			<form id="refundApplyFm" method="post" enctype="multipart/form-data">
   				<input type="hidden" id="optionType" value="applyAgain"/>
+  				<input type="hidden" id="refundImgUrl" value="${obj.refundFeeObj.url }"/>
 	  			<input type="hidden" id="oldRefundWay" value="${obj.refundFeeObj.refundWay }"/>
   				<input type="hidden" id="schoolId" name="schoolId" value="${obj.refundFeeObj.schoolId }"/>
   				<input type="hidden" id="studentId" name="studentId" value="${obj.refundFeeObj.studentId }"/>
@@ -108,12 +109,12 @@
 	  					<td colspan="9" width="92%">
 	  						<c:if test="${not empty obj.refundFeeObj.schoolReasonType && not empty obj.refundFeeObj.schoolReason }">
 	  							<input type="radio" name="refundReason" value="school" checked="checked"/><span>校方原因</span>
-		  						<select id="schoolReasonType" name="schoolReasonType" class="easyui-combobox" style="width: 100px; height: 25px;"
+		  						<select id="schoolReasonType" name="schoolReasonType" class="easyui-combobox" style="width: 120px; height: 25px;"
 									data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
 				      				onLoadSuccess:function(data){if(data.length > 0) $('#schoolReasonType').combobox('setValue', '${obj.refundFeeObj.schoolReasonType }');}" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=SCHOOL_REASON_TYPE">
 			        			</select>
-			        			<select id="schoolReason" name="schoolReason" class="easyui-combobox" style="width: 150px; height: 25px;"
+			        			<select id="schoolReason" name="schoolReason" class="easyui-combobox" style="width: 200px; height: 25px;"
 									data-options="formatter:function(row){return '<span>' + row.param2 + '</span>';}, valueField: 'param1', textField: 'param2', panelHeight: 'auto',
 				      				onLoadSuccess:function(data){if(data.length > 0) $('#schoolReason').combobox('setValue', '${obj.refundFeeObj.schoolReason }');}" 
 				      				url="<%=path %>/pubData/qryParaConfigList.do?paramType=SCHOOL_REASON&paramValue=${obj.refundFeeObj.schoolReasonType }">
@@ -121,14 +122,16 @@
 		  						&nbsp;&nbsp;<input type="radio" name="refundReason" value="customer"/><span>客户原因</span>
 		  						<select id="customerReason" name="customerReason" class="easyui-combobox" style="width: 120px; height: 25px;">
 			        			</select>
+			        			<!--  
 		  						&nbsp;&nbsp;<input type="radio" name="refundReason" value="other"/><span>其他原因</span>
 		  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" validType="length[0,50]" style="width: 380px; height: 25px;"/>
+	  							-->
 	  						</c:if>
 	  						<c:if test="${not empty obj.refundFeeObj.customerReason }">
 	  							<input type="radio" name="refundReason" value="school"/><span>校方原因</span>
-	  							<select id="schoolReasonType" name="schoolReasonType" class="easyui-combobox" style="width: 100px; height: 25px;">
+	  							<select id="schoolReasonType" name="schoolReasonType" class="easyui-combobox" style="width: 120px; height: 25px;">
 	  							</select>
-	  							<select id="schoolReason" name="schoolReason" class="easyui-combobox" style="width: 150px; height: 25px;">
+	  							<select id="schoolReason" name="schoolReason" class="easyui-combobox" style="width: 200px; height: 25px;">
 	  							</select>
 	  							&nbsp;&nbsp;<input type="radio" name="refundReason" value="customer" checked="checked"/><span>客户原因</span>
 		  						<select id="customerReason" name="customerReason" class="easyui-combobox" style="width: 120px; height: 25px;"
@@ -136,33 +139,41 @@
 				      				onLoadSuccess:function(data){if(data.length > 0) $('#customerReason').combobox('setValue', '${obj.refundFeeObj.customerReason }');}" 
 				      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=CUSTOMER_REASON">
 			        			</select>
+			        			<!--  
 			        			&nbsp;&nbsp;<input type="radio" name="refundReason" value="other"/><span>其他原因</span>
 		  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" validType="length[0,50]" style="width: 380px; height: 25px;"/>
+	  							-->
 	  						</c:if>
 	  						<c:if test="${not empty obj.refundFeeObj.otherReason }">
 	  							<input type="radio" name="refundReason" value="school"/><span>校方原因</span>
-	  							<select id="schoolReasonType" name="schoolReasonType" class="easyui-combobox" style="width: 100px; height: 25px;">
+	  							<select id="schoolReasonType" name="schoolReasonType" class="easyui-combobox" style="width: 120px; height: 25px;">
 	  							</select>
-	  							<select id="schoolReason" name="schoolReason" class="easyui-combobox" style="width: 150px; height: 25px;">
+	  							<select id="schoolReason" name="schoolReason" class="easyui-combobox" style="width: 200px; height: 25px;">
 	  							</select>
 	  							&nbsp;&nbsp;<input type="radio" name="refundReason" value="customer" checked="checked"/><span>客户原因</span>
 		  						<select id="customerReason" name="customerReason" class="easyui-combobox" style="width: 120px; height: 25px;">
 			        			</select>
+			        			<!--  
 			        			&nbsp;&nbsp;<input type="radio" name="refundReason" value="other"/><span>其他原因</span>
 		  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" validType="length[0,50]" style="width: 380px; height: 25px;" value="${obj.refundFeeObj.otherReason }"/>
+	  							-->
 	  						</c:if>
 	  					</td>
 	  				</tr>
-	  				<c:if test="${not empty obj.refundFeeObj.imgUrl }">
-		  				<tr>
-		  					<td colspan="10">
-		  						<span style="display: inline-block; width: 150px;margin-left: 50px;">查看退费申请单：</span>
-		  						<span style="width: 100px; margin-left: 700px;" id="imgUrl">
-	  								<a href="#" id="url" class="linkmore">查看退费申请单</a>
-	  							</span>
-		  					</td>
-		  				</tr>
-	  				</c:if>
+		  			<tr>
+		  				<td colspan="10">
+		  					<span>上传退费申请单：</span>
+	  						<input type="hidden" name="imgUrl" id="imgUrl" value="${obj.refundFeeObj.imgUrl }"/>
+	                        <input style="width: 500px; height: 28px;" class="easyui-filebox" name="fileName" id="fileName" data-options="prompt:'', buttonText: '文件选择', accept: 'image/*'"/>
+	                        <a href="javascript:void(0)" class="easyui-linkbutton" id="uploadBtn" iconCls="icon-save" iconCls="icon-save" style="width: 80px; height: 28px;">上传</a>
+	                        <a href="javascript:void(0)" class="easyui-linkbutton" id="cancelUploadBtn" iconCls="icon-cancel" iconCls="icon-cancel" style="width: 80px; height: 28px;">取消</a>
+			  				<c:if test="${not empty obj.refundFeeObj.url }">
+			  					<span style="width: 100px; margin-left: 700px;" id="imgUrl">
+		  							<a href="#" id="url" class="linkmore">查看退费申请单</a>
+		  						</span>
+			  				</c:if>
+		  				</td>
+		  			</tr>
 	  				<tr>
 	  					<td align="right" width="8%"> <span>退费备注：</span></td>
   						<td colspan="9" width="92%">

@@ -69,8 +69,7 @@ $(document).ready(function(){
 	//上传
     $("#uploadBtn").click(function() {
     	var fileName = $("#fileNames").filebox("getText");
-    	if(fileName != "" && fileName != null && fileName != undefined) 
-    	{
+    	if(fileName != "" && fileName != null && fileName != undefined) {
     		var handlerId = $("#handlerId").val();
     		$("#uploadFm").form("submit", {
     			url: "/sys/fileUpload?type=upload&schoolId=&handlerId="+handlerId,
@@ -79,19 +78,14 @@ $(document).ready(function(){
     			},
     			success: function (result) {
     				var data = JSON.parse(result);
-    				if(data.flag)
-    				{
+    				if(data.flag) {
     					$.messager.alert('提示', "文件上传成功！", "info", function() {$("#qryBtn").trigger("click");});
-    				}
-    				else
-    				{
+    				} else {
     					$.messager.alert('提示', data.msg);
     				}
     			}
     		});
-    	} 
-    	else 
-    	{
+    	} else {
     		$.messager.alert('提示', "请您先选择一个文件！");
     	}
     });

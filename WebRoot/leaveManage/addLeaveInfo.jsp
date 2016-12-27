@@ -77,7 +77,7 @@
  				<td colspan="2"><input class="easyui-numberbox" name="planLeaveTime" id="planLeaveTime" style="width:120px;height: 25px;" data-options="min:1" required="true"/></td>
  				<td colspan="11"><span>休学申请单与缴费凭证：</span>
  					<input type="hidden" name="imgUrl" id="imgUrl"/>
-                    <input style="width: 500px; height: 28px;" class="easyui-filebox" name="fileName" id="fileName" data-options="prompt:''"/>
+                    <input style="width: 500px; height: 28px;" class="easyui-filebox" name="fileName" id="fileName" data-options="prompt:'', buttonText: '文件选择', accept: 'image/*'"/>
                     <a href="javascript:void(0)" class="easyui-linkbutton" id="uploadBtn" iconCls="icon-save" iconCls="icon-save" style="width: 100px; height: 25px;"><span>上传</span></a>
                     <a href="javascript:void(0)" class="easyui-linkbutton" id="cancelUploadBtn" iconCls="icon-cancel" iconCls="icon-cancel" style="width: 100px; height: 25px;"><span>取消</span></a>
 				</td>

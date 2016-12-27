@@ -85,9 +85,10 @@ $(document).ready(function() {
     			$("#applyChangeSchoolFm").form("submit", {
     				url: "/sys/fileUpload?type=change_school&schoolId="+schoolId+"&handlerId="+handlerId,
     				onSubmit: function () {
-    					
+    					$.messager.progress({title : '上传图片', msg : '正在上传转校申请单，请稍等……'});
     				},
     				success: function (result) {
+    					$.messager.progress('close');
     					var data = JSON.parse(result);
     					if(data.flag) {
     						$("#imgUrl").val(data.fileId);

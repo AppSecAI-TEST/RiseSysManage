@@ -216,7 +216,7 @@
 						<tr>
       					  <td align="right"><span>上传缴费单：</span></td>
       					  <td  colspan="5">
-      					  	<input style="width: 300px; height: 25px;" class="easyui-filebox" id="fileName" name="fileName" data-options="prompt:''"/>
+      					  	<input style="width: 300px; height: 25px;" class="easyui-filebox" id="fileName" name="fileName" data-options="prompt:'', buttonText: '文件选择', accept: 'image/*'"/>
       					  	<a href="javascript:void(0)" class="easyui-linkbutton" id="uploadBtn" iconCls="icon-save" iconCls="icon-save" style="width: 80px; height: 25px;">上传</a>
 	                        <a href="javascript:void(0)" class="easyui-linkbutton" id="cancelUploadBtn" iconCls="icon-cancel" iconCls="icon-cancel" style="width: 80px; height: 25px;">取消</a>
       					  	<a href="javascript:void(0)" id="viewStudent" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;">查看缴费单</a>
@@ -2314,10 +2314,11 @@ $(document).ready(function()
 				$("#courseFm").form("submit", {
 					url: "/sys/fileUpload?type=course&schoolId="+schoolId+"&handlerId="+handlerId,
 					onSubmit: function () {
-					
+						$.messager.progress({title : "上传图片", msg : "正在上传课程缴费单，请稍等……"});
 					},
 					success: function (result) {
-					var data = JSON.parse(result);
+						$.messager.progress("close");
+						var data = JSON.parse(result);
 						if(data.flag) {
 							courseImgUrl = data.fileId;
 							$.messager.alert('提示', "课程缴费单上传成功！", "info", function() {$("#cancelUploadBtn").linkbutton('disable');});

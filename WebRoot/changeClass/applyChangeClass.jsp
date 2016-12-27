@@ -70,7 +70,7 @@
   						<td align="right"><span>上传转班单据：</span></td>
   						<td colspan="5">
 							<input type="hidden" name="imgUrl" id="imgUrl"/>
-	                        <input style="width: 500px; height: 28px;" class="easyui-filebox" name="fileName" id="fileName" data-options="prompt:''"/>
+	                        <input style="width: 500px; height: 28px;" class="easyui-filebox" name="fileName" id="fileName" data-options="prompt:'', buttonText: '文件选择', accept: 'image/*'"/>
 	                        <a href="javascript:void(0)" class="easyui-linkbutton" id="uploadBtn" iconCls="icon-save" iconCls="icon-save" style="width: 80px; height: 28px;">上传</a>
 	                        <a href="javascript:void(0)" class="easyui-linkbutton" id="cancelUploadBtn" iconCls="icon-cancel" iconCls="icon-cancel" style="width: 80px; height: 28px;">取消</a>
   						</td>
@@ -80,7 +80,7 @@
   						<td colspan="5">
   							<textarea rows="6" cols="122" id="remark" name="remark" class="textarea easyui-validatebox" validType="length[0,120]"></textarea>
   						</td>
-  					</tr>
+  					</tr> 
   				</table>
   			</form>
   		</div>

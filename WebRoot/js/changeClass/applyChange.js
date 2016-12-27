@@ -55,9 +55,10 @@ $(document).ready(function() {
     			$("#applyChangeClassFm").form("submit", {
     				url: "/sys/fileUpload?type=change_class&schoolId="+schoolId+"&handlerId="+handlerId,
     				onSubmit: function () {
-    					
+    					$.messager.progress({title : '上传图片', msg : '正在上传转班申请单，请稍等……'});
     				},
     				success: function (result) {
+    					$.messager.progress('close');
     					var data = JSON.parse(result);
     					if(data.flag) {
     						$("#imgUrl").val(data.fileId);

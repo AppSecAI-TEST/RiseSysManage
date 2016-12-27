@@ -105,22 +105,24 @@
 	  					<td align="right" width="8%"><span>退费原因：</span></td>
 	  					<td colspan="9" width="92%">
 	  						<input type="radio" name="refundReason" value="school"/><span>校方原因</span>
-	  						<select id="schoolReasonType" name="schoolReasonType" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+	  						<select id="schoolReasonType" name="schoolReasonType" class="easyui-combobox" style="width: 120px; height: 25px;" editable="false">
 		        			</select>
-		        			<select id="schoolReason" name="schoolReason" class="easyui-combobox" style="width: 150px; height: 25px;" editable="false">
+		        			<select id="schoolReason" name="schoolReason" class="easyui-combobox" style="width: 200px; height: 25px;" editable="false">
 		        			</select>
 	  						&nbsp;&nbsp;<input type="radio" name="refundReason" value="customer"/><span>客户原因</span>
 	  						<select id="customerReason" name="customerReason" class="easyui-combobox" style="width: 120px; height: 25px;" editable="false">
 		        			</select>
+		        			<!--  
 	  						&nbsp;&nbsp;<input type="radio" name="refundReason" value="other"/><span>其他原因</span>
 	  						<input id="otherReason" name="otherReason" type="text" class="easyui-textbox" validType="length[0,50]" style="width: 380px; height: 25px;" />
+	  						-->
 	  					</td>
 	  				</tr>
 	  				<tr>
 	  					<td colspan="10">
 	  						<span>上传退费申请单：</span>
 	  						<input type="hidden" name="imgUrl" id="imgUrl"/>
-	                        <input style="width: 500px; height: 28px;" class="easyui-filebox" name="fileName" id="fileName" data-options="prompt:''"/>
+	                        <input style="width: 500px; height: 28px;" class="easyui-filebox" name="fileName" id="fileName" data-options="prompt:'', buttonText: '文件选择', accept: 'image/*'"/>
 	                        <a href="javascript:void(0)" class="easyui-linkbutton" id="uploadBtn" iconCls="icon-save" iconCls="icon-save" style="width: 80px; height: 28px;">上传</a>
 	                        <a href="javascript:void(0)" class="easyui-linkbutton" id="cancelUploadBtn" iconCls="icon-cancel" iconCls="icon-cancel" style="width: 80px; height: 28px;">取消</a>
 	  					</td>

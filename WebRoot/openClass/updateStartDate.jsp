@@ -98,7 +98,7 @@
 						<th data-options="field:'phone',width:100,align:'center'">联系方式</th>
 						<th data-options="field:'selectClassNum',width:100,align:'center'">定班次数</th>
 						<th data-options="field:'waitClassDays',width:100,align:'center'">等班时长</th>
-						<th data-options="field:'dutyAdvisterName',width:100,align:'center'">责任顾问</th>
+						<th data-options="field:'advisterName',width:100,align:'center'">招生顾问</th>
 						<th data-options="field:'adviserTeacherName',width:100,align:'center'">业绩老师</th>
 					</tr>
 				</thead>

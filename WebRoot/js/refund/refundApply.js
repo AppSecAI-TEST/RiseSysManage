@@ -264,9 +264,10 @@ $(document).ready(function() {
 				$("#refundApplyFm").form("submit", {
 					url: "/sys/fileUpload?type=refund&schoolId="+schoolId+"&handlerId="+handlerId,
 					onSubmit: function () {
-						
+						$.messager.progress({title : '上传图片', msg : '正在上传退费申请单，请稍等……'});
 					},
 					success: function (result) {
+						$.messager.progress('close');
 						var data = JSON.parse(result);
 						if(data.flag) {
 							$("#imgUrl").val(data.fileId);
@@ -342,8 +343,13 @@ $(document).ready(function() {
 							var refundFeeDetailObj = new Object();
 							refundFeeDetailObj.studentCourseId = studentCourseId;
 							refundFeeDetailObj.refundType = $("#refundType" + studentCourseId).combobox("getValue");
-							refundFeeDetailObj.refundChannel = $("#refundChannel" + studentCourseId).combobox("getValue");
-							refundFeeDetailObj.courseState = $("#courseState" + studentCourseId).val();
+							var refundChannel = "";
+							var courseState = $("#courseState" + studentCourseId).val();
+							if("001" == courseState || "002" == courseState) {
+								refundChannel = $("#refundChannel" + studentCourseId).combobox("getValue");
+							}
+							refundFeeDetailObj.courseState = courseState;
+							refundFeeDetailObj.refundChannel = refundChannel; 
 							refundFeeDetailObj.classInstId = $("#classInstId" + studentCourseId).val();
 							refundFeeDetailObj.className = $("#className" + studentCourseId).val();
 							refundFeeDetailObj.classType = $("#classType" + studentCourseId).val();
@@ -422,12 +428,11 @@ $(document).ready(function() {
 							data: "param=" + param,
 							dataType: "json",
 							async: true,
-							beforeSend: function()
-							{
+							beforeSend: function() {
 								$.messager.progress({title : '申请退费', msg : '正在申请退费，请稍等……'});
 							},
 							success: function (data) {
-								$.messager.progress('close'); 
+								$.messager.progress('close');
 								var flag = data.flag
 								if(flag) {
 									showMessage('提示', "申请退费成功！", function() {window.location.href = "/sys/refund/refund.jsp";});
@@ -575,13 +580,16 @@ function checkParam() {
 	if(array.length > 0) {
 		for(var i = 0, len = array.length; i < len; i++) {
 			var studentCourseId = array[i].value;
-			var refundType = $("#refundType" + studentCourseId).combobox("getValue");
-			if(refundType == "RTN_NEW" || "RTN_READING" == refundType) {
-				var refundChannel = $("#refundChannel" + studentCourseId).combobox("getValue");
-				if(refundChannel == null || refundChannel == "" || refundChannel == undefined) {
-					flag = false;
-					index = i + 1;
-					break;
+			var courseState = $("#courseState" + studentCourseId).val();
+			if("001" == courseState || "002" == courseState) {
+				var refundType = $("#refundType" + studentCourseId).combobox("getValue");
+				if(refundType == "RTN_NEW" || "RTN_READING" == refundType) {
+					var refundChannel = $("#refundChannel" + studentCourseId).combobox("getValue");
+					if(refundChannel == null || refundChannel == "" || refundChannel == undefined) {
+						flag = false;
+						index = i + 1;
+						break;
+					}
 				}
 			}
 		}
