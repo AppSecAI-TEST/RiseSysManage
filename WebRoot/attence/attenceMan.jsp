@@ -282,34 +282,35 @@
   	</head>
   	<body>
   		<div id="tab" class="easyui-tabs">
-		    <div title="考勤管理" style="padding:5px;">
+		    <div title="考勤管理" style="padding:5px;min-width: 1137px">
 				<form id="manFm">
 					<table class="search_tab">
 						<tr>
-							<td align="right" width="8%">
+							<td align="right" width="7%">
 								所属校区：
 							</td>
-							<td width="12%">
+							<td width="6%">
 								<select id="schoolManId" name="schoolManId" style="width:100px;height:25px;" ></select>
 							</td>
-							<td align="right" width="8%">	
+							<td align="right" width="7%">	
 								课程阶段：
 							</td>
-							<td width="22%">
+							<td width="6%">
 								<select id="classManPharse" name="classManPharse" style="width:100px;height:25px;" ></select>
 							</td>
-							<td align="right" width="8%">
+							<td align="right" width="6%">
 								班级状态：
 							</td>
-							<td width="22%">
+							<td width="6%">
 								<select id="classManState" name="classManState" style="width:100px;height:25px;" ></select>
 							</td>
-							<td align="right" width="8%">
-								班级：
+							<td  width="6%" align="right">
+								开课日期：
 							</td>
-							<td width="12%">
-								<input name="classMan" id="classMan" type="text" style="width:100px;height:25px;" class="easyui-textbox" />
+							<td width="20%">
+								<input name="classStartManTime" id="classStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="classEndManTime" id="classEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 							</td>
+							
 						</tr>
 						<tr>
 							<td align="right">
@@ -318,19 +319,37 @@
 							<td>
 								<input name="teacherMan" id="teacherMan" type="text" style="width:100px;height:25px;" class="easyui-textbox" />								
 							</td>
-							<td align="right">
-								开课日期：
+							<td align="right" width="8%">
+								周：
 							</td>
-							<td>
-								<input name="classStartManTime" id="classStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="classEndManTime" id="classEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
+							<td width="5%">
+								<select id="weekTime" name="weekTime" class="easyui-combobox" style="width:100px;height:25px;" >
+								<option value=""></option>
+								<option value="一">周一</option>
+								<option value="二">周二</option>
+								<option value="三">周三</option>
+								<option value="四">周四</option>
+								<option value="五">周五</option>
+								<option value="六">周六</option>
+								<option value="日">周日</option>
+								</select>
 							</td>
+							<td align="right"  >
+								班级：
+							</td>
+							<td  >
+								<input name="classMan" id="classMan" type="text" style="width:100px;height:25px;" class="easyui-textbox" />
+							</td>
+							
+							
 							<td align="right">
 								结课日期：
 							</td>
 							<td>
 								<input name="overClassStartManTime" id="overClassStartManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="overClassEndManTime" id="overClassEndManTime" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />								
 							</td>
-							<td colspan="2" align="center">
+							
+							<td width="20%"  align="center">
 								<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryManFunc()">查询</a>
 								<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetManFunc()">重置</a>
 							</td>

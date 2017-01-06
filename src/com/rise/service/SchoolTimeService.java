@@ -126,6 +126,12 @@ public class SchoolTimeService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
+	public String reFreshClassDate() throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS80018\",securityCode:\"0000000000\",params:{},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
 	public String getHoursPlan(String schoolId,String month) throws Exception
 	{
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS80012\",securityCode:\"0000000000\",params:{schoolId:"+schoolId+",month:\""+month+"\"},rtnDataFormatType:\"user-defined\"}";

@@ -42,9 +42,36 @@
 	   		<a href="javascript:void(0)" id="addBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;"><span>创建</span></a>
 	   		<a href="javascript:void(0)" id="updateBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;"><span>修改</span></a>
 	   		<a href="javascript:void(0)" id="timeConfig" class="easyui-linkbutton" iconCls="icon-edit" style="width: 150px;"><span>上课时段配置</span></a>
+	   		<a href="javascript:void(0)" id="classDate" class="easyui-linkbutton" iconCls="icon-edit" style="width: 150px;"><span>刷新班级结课时间</span></a>
  		</div>
  		</div>
  		<iframe id="dlg" class="easyui-dialog" style="width:800px; height: 450px; padding: 10px 20px" closed="true" modal="true">
 		</iframe>
   	</body>
 </html>
+<<script type="text/javascript">
+ $("#classDate").click(function(){
+	 
+	 	$.ajax( {
+		type : "POST",
+		url : "/sys/time/refreshClassDate.do",
+		async : false,
+		beforeSend : function() {
+			showProgressLoader("正在刷新班级结课时间,请稍等...", 400);
+		},
+		success : function(data) {
+			hideProgressLoader()
+			if (data == "true") {
+					showMessage('提示', "处理成功！", null);
+				} else {
+					showMessage('提示', "处理失败！", null);
+				}
+	
+			},
+			error : function() {
+				hideProgressLoader();
+				showMessage('提示', "处理失败", null);
+			}
+		});
+ });
+</script>

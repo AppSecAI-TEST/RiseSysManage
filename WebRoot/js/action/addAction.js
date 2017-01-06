@@ -111,7 +111,7 @@ function addAction() {
 			$.messager.alert("提示", "开始时段不能大于结束时段");
 			return false;
 		} else if ($("#timeStart").timespinner('getHours') == $("#timeEnd").timespinner('getHours')) {
-			alert($("#timeStart").timespinner('getMinutes'));
+			 
 			if ($("#timeStart").timespinner('getMinutes') >= $("#timeEnd") .timespinner('getMinutes')) {
 				$.messager.alert("提示", "开始时段不能大于等于结束时段");
 				return false
