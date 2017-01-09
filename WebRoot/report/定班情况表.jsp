@@ -9,20 +9,7 @@
 		<%@ include file="/common/head.jsp" %>
 		<%@ include file="/common/formvalidator.jsp" %>
 		<script type="text/javascript" src="<%=path %>/js/export/newRecruit.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#list_data").datagrid({
-					onClickRow : function(index, row) {
-						var classInstId = row.classInstId;
-						$("#class_list_data").datagrid({
-							url : "/sys/pubData/qryDataListByPage.do?param={'funcNodeId':'1046', 'classInstId':'"+classInstId+"'}"
-						});
-						$("#dlg").dialog("open").dialog("setTitle", "班级学员列表");//设定表头  
-	    				$("#studentFm").form("clear");//清空窗体数据  
-					}
-				});
-			});
-		</script>
+		
   	</head>
   
   	<body>
@@ -82,7 +69,10 @@
 	   			<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
 			</div>
   		</div>
-  		<div id="dlg" class="easyui-dialog" style="width: 900px; height: 300px;" closed="true" data-options="modal:true">
+  		<div id="dlg" class="easyui-dialog" style="width: 1010px; height: 500px;" closed="true" data-options="modal:true">
+  			<div id="toolbar" style="padding: 2px; height: auto">
+	   			<a href="javascript:void(0)" id="exportSub" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
+			</div>
   			<form id="studentFm">
 				<table class="easyui-datagrid" style="width: 100%;height: auto; overflow: auto;" id="class_list_data"  
 					pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
@@ -102,6 +92,37 @@
 		</div>
   	</body>
 </html>
-<script>
+<script type="text/javascript">
 	exportLink("export","list_data");
-</script>
+
+		var id="";
+		$("#exportSub").click(function()
+		{ 
+				var fileName ="定班班级学员表";
+				try
+				{
+					window.location.href="/sys/export/normalExport.do?fileName="+fileName+"&param={'funcNodeId':'1046', 'classInstId':'"+id+"'}";
+				}
+				catch(e)
+				{
+					$.messager.alert('提示', "模版不存在！",function(){
+						window.history.back();
+					});
+				}
+			 	
+		});
+		
+			$(document).ready(function() {
+				$("#list_data").datagrid({
+					onClickRow : function(index, row) {
+						var classInstId = row.classInstId;
+						id=classInstId;
+						$("#class_list_data").datagrid({
+							url : "/sys/pubData/qryDataListByPage.do?param={'funcNodeId':'1046', 'classInstId':'"+classInstId+"'}"
+						});
+						$("#dlg").dialog("open").dialog("setTitle", "班级学员列表");//设定表头  
+	    				$("#studentFm").form("clear");//清空窗体数据  
+					}
+				});
+			});
+		</script>

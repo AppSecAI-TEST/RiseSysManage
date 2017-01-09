@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.rise.model.AttStudentObj;
+import com.rise.pub.util.JsonUtils;
 import com.rise.pub.util.StringUtil;
 import com.rise.service.ExportService;
 
@@ -52,6 +55,27 @@ public class ExportController
 
 	}
 	
+	@RequestMapping("/attendDetalExport.do")
+	public void attendDetalExport(String classInstId,String monthDate, HttpServletResponse response , HttpServletRequest request)
+	{
+		OutputStream out = null;
+		try
+		{
+			StringBuffer displayFileName = new StringBuffer("班级考勤学生明细表");
+			displayFileName.append(new SimpleDateFormat("yyMMdd").format(new Date()));
+			displayFileName.append(".xls");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName="+URLEncoder.encode(displayFileName.toString(),"utf-8"));
+			out = response.getOutputStream();
+			es.attendDetailNormalExport("班级考勤学生明细表",classInstId,monthDate , out);
+		}
+		catch(Exception err)
+		{
+			err.printStackTrace();
+		}
+
+	}
 	
 	@RequestMapping("/exportData.do")
 	public void exportData(String fileName,String array, HttpServletResponse response , HttpServletRequest request)

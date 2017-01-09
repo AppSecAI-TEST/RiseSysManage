@@ -27,6 +27,7 @@
 				<c:otherwise>
 					<p style="border:none !important;padding-right:5px;padding-top:5px;margin-bottom:5px">
 						<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;" onclick="backFunc()">返回</a>
+						<a href="javascript:void(0)" id="exportSub" class="easyui-linkbutton" iconCls="icon-back" style="width: 100px;">导出</a>
 					</p>
 					<table align="center" class="tab" style="min-width:2000px;margin:0 auto;padding:0 0;border-top:1px solid #ccc;height:auto" cellpadding="0" cellspacing="0">
 						<tr class="headTr datagrid-header">
@@ -76,6 +77,22 @@
 			{
 				window.location.href = "/sys/report/班级考勤表.jsp";
 			}
+			
+			$("#exportSub").click(function()
+			{ 
+				var fileName ="定班班级学员表";
+				try
+				{
+					window.location.href="/sys/export/attendDetalExport.do?fileName=班级考勤学生明细表&classInstId=${classInstId}&monthDate=${monthDateStr}";
+				}
+				catch(e)
+				{
+					$.messager.alert('提示', "模版不存在！",function(){
+						window.history.back();
+					});
+				}
+			 	
+			});
 		</script>
  	</body>
 </html>

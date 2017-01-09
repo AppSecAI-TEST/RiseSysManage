@@ -1,31 +1,23 @@
 package com.rise.service;
 
-import java.awt.Color;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.jxls.transformer.Sheet;
 import net.sf.jxls.transformer.XLSTransformer;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.http.HttpResponse;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
@@ -35,22 +27,19 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.ss.util.Region;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.support.ServletContextResource;
-
-
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rise.model.FuncNodeTree;
-import com.rise.model.StaffT;
+import com.rise.model.AttStuItem;
+import com.rise.model.AttStudentObj;
 import com.rise.pub.base.JacksonJsonMapper;
+import com.rise.pub.base.SysDate;
 import com.rise.pub.invoke.ServiceEngine;
+import com.rise.pub.util.DateUtils;
 import com.rise.pub.util.ObjectCensor;
 import com.rise.pub.util.StringUtil;
 
@@ -102,6 +91,78 @@ public class ExportService
 			inputStream.close();
 			out.close();
 		}
+	}
+	
+	public void attendDetailNormalExport(String fileName,String classInstId,String monthDate,OutputStream out) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS20411\",securityCode:\"0000000000\",params:{classInstId:\""+classInstId+"\",monthDate:\""+monthDate+"\"},rtnDataFormatType:\"user-defined\"}";
+		String result= ServiceEngine.invokeHttp(params);
+		ObjectMapper mapper = JacksonJsonMapper.getInstance();
+		JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, AttStudentObj.class);
+		List<AttStudentObj> attStudentList = (List)mapper.readValue(result, javaType);
+		List<Map> lsts= new ArrayList<Map>();
+		for(AttStudentObj map:attStudentList)
+		{
+			Map mapT=new HashMap();
+			String name=map.getName();
+			String byName=map.getByName();
+			mapT.put("name", name);
+			mapT.put("byName", byName);
+			mapT.put("count", map.getAttendCount());
+			List<AttStuItem> items=map.getAttendDates();
+			for(int i=1;i<=31;i++)
+			{
+				String dateStr=monthDate+"-"+i;
+				Date d = DateUtils.CHN_DATE_FORMAT.parse(dateStr);
+				for(AttStuItem itemT:items)
+				{
+					Date date=itemT.getAttendDate();
+					String hour=itemT.getAttendTotalHour();
+					if(d.getDate()==date.getDate())
+					{
+						mapT.put("date"+i, hour);
+					}
+				}
+			}
+			lsts.add(mapT);
+		}
+		 
+			String filePath =this.getFullFilePath(fileName);
+			HttpClient client = new HttpClient();   
+			GetMethod httpGet = new GetMethod(filePath);  
+			client.executeMethod(httpGet); 
+			InputStream inputStream =httpGet.getResponseBodyAsStream();
+			Map<String, List<Map>> beanParams = new HashMap<String, List<Map>>();
+			beanParams.put("reportList", lsts);  
+	        XLSTransformer former = new XLSTransformer(); 
+	        HSSFWorkbook workBook = (HSSFWorkbook)former.transformXLS(inputStream, beanParams);
+	        HSSFSheet sheet= workBook.getSheetAt(0);
+	        int rows = sheet.getPhysicalNumberOfRows();
+	        HSSFCellStyle cellStyle=workBook.createCellStyle();  
+	        cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);// 左右居中   
+	        cellStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);// 上下居中 
+	        cellStyle.setWrapText(true); 
+	        for (int i = 1; i < rows; i++) 
+	        {
+	        	HSSFRow row = sheet.getRow(i);
+	        	if (row != null) 
+	        	{
+	        		int cells = row.getPhysicalNumberOfCells();
+	        		for (int j = 0; j < cells; j++) 
+	        		{
+	        			HSSFCell cell = row.getCell(j);
+	        			if (cell != null&&(HSSFCell.CELL_TYPE_STRING==cell.getCellType())) 
+	        			{
+	        				cell.setCellStyle(cellStyle);
+	        				cell.setCellValue(new HSSFRichTextString(cell.getStringCellValue().replaceAll("<(/)?br(/)?>", "/")));
+	        			}
+	        		}
+	        	}	
+	        }
+	        workBook.write(out);
+			inputStream.close();
+			out.close();
+		
 	}
 	
 	public void exportData(String fileName,String array,OutputStream out) throws Exception
