@@ -40,6 +40,27 @@ $(document).ready(function() {
     	}
 	});
 	
+	$("#schoolId").combobox({
+		onChange : function(n, o) {
+			var tableName = $("#tableName").val();
+			var year = $("#year").combobox("getValue");
+			$("#month").combobox({
+    			url : "/sys/pubData/qryReportMonthList.do?tableName=" + tableName + "&year=" + year + "&schoolId=" + n,// 返回json数据的url
+    	    	valueField : "month",
+    	    	textField : "monthText",
+    	    	panelHeight : "auto",
+    	    	formatter : function(data) {
+    	    		return "<span>" + data.monthText + "</span>";
+    	    	},
+    	    	onLoadSuccess:function(data) {
+    	    		if(data.length > 0) {
+    					$('#month').combobox('setValue', data[0].month);
+    				}
+    	    	}
+    		});
+		}
+	});
+	
 	$("#qryBtn").click(function() {
 		initPageNumber("list_data");
 		var object = $("#qryFm").serializeObject();
@@ -100,7 +121,26 @@ $(document).ready(function() {
 				success: function (data) {
 					$.messager.progress('close'); 
 					if(data.flag) {
-						$.messager.alert('提示', "创建下月异动预算成功！", "info", function() {$("#qryBtn").click();});
+						$.messager.alert('提示', "创建下月异动预算成功！", "info", function() {
+							var tableName = $("#tableName").val();
+							var year = $("#year").combobox("getValue");
+							var schoolId = $("#schoolId").combobox("getValue");
+							$("#month").combobox({
+								url : "/sys/pubData/qryReportMonthList.do?tableName=" + tableName + "&year=" + year + "&schoolId=" + schoolId,
+								valueField : "month",
+				    	    	textField : "monthText",
+				    	    	panelHeight : "auto",
+				    	    	formatter : function(data) {
+				    	    		return "<span>" + data.monthText + "</span>";
+				    	    	},
+						    	onLoadSuccess:function(data) {
+						    		if(data.length > 0) {
+				    					$('#month').combobox('setValue', data[0].month);
+				    					$("#qryBtn").click();
+				    				}
+						    	}
+							});
+						});
 					} else {
 						$.messager.alert('提示', data.msg);
 					}

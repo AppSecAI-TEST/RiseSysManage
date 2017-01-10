@@ -186,9 +186,9 @@ public class QryPubDataService
 		return ServiceEngine.invokeHttp(params);
 	}
 
-	public String qryReportMonthList(String tableName, String year) throws Exception  
+	public String qryReportMonthList(String tableName, String year, String schoolId) throws Exception  
 	{
-		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10122\",securityCode:\"0000000000\",params:{tableName:\""+tableName+"\",year:\""+year+"\"},rtnDataFormatType:\"user-defined\"}";
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10122\",securityCode:\"0000000000\",params:{tableName:\""+tableName+"\",year:\""+year+"\",schoolId:\""+schoolId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
 	

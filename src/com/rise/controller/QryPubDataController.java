@@ -623,48 +623,35 @@ public class QryPubDataController
 	}
 	
 	@RequestMapping(value = "/qryReportMonthList.do")
-	public void qryReportMonthList(String tableName, String year, HttpServletResponse response)
-	{
+	public void qryReportMonthList(String tableName, String year, String schoolId, HttpServletResponse response) {
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = qryPubDataService.qryReportMonthList(tableName, year);
+			String retVal = qryPubDataService.qryReportMonthList(tableName, year, schoolId);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null)
-			{
+		} finally {
+			if (out != null) {
 				out.close();
 			}
 		}
 	}
 	
 	@RequestMapping(value = "/qryReportWeekList.do")
-	public void qryReportWeekList(String tableName, String year, String month, HttpServletResponse response)
-	{
+	public void qryReportWeekList(String tableName, String year, String month, HttpServletResponse response) {
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = qryPubDataService.qryReportWeekList(tableName, year, month);
+			String retVal = qryPubDataService.qryReportWeekList(tableName,
+					year, month);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null)
-			{
+		} finally {
+			if (out != null) {
 				out.close();
 			}
 		}
