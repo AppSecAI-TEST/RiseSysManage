@@ -43,6 +43,7 @@ $(document).ready(function() {
 				dataType: 'json',  
 				success: function(data){
 					if(data.length == schoolData.length) {
+						data.unshift({schoolName:'总部', schoolId:""});  
 						data.unshift({schoolName:'全部校区', schoolId:""});  
 					}
 					success(data);  

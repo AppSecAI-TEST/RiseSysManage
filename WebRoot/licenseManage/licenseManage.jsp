@@ -18,7 +18,9 @@
   				<tr>
   					<td align="right" style="min-width: 70px;">组织：</td>
   					<td align="left" style="min-width: 100px;">
-  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:100px;height:25px;" editable="false">
+  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:100px;height:25px;" editable="false" 
+  							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
+			      			onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}">
         				</select>
   					</td>
   					<td align="right" style="min-width: 80px;">教师英文名：</td>

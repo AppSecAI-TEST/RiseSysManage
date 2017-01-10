@@ -16,9 +16,11 @@
  		<form id="qryFm">
   			<table class="search_tab">
   				<tr>
-  					<td align="right" style="min-width: 70px;"><span>组织：</span></td>
+  					<td align="right" style="min-width: 70px;"><span>学校：</span></td>
   					<td align="left" width="8%">
-  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:100px;height:25px;" editable="false">
+  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:100px;height:25px;" editable="false"
+  						data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto',
+			      			onLoadSuccess:function(data){$('#schoolId').combobox('setValue',data[0].schoolId);}">
         				</select>
   					</td>
   					<td align="right" style="min-width: 80px;"><span>教师英文名：</span></td>

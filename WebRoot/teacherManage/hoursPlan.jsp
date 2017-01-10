@@ -72,18 +72,38 @@
 
  
 initResetButton("reset","qryFm");
- 
-$("#schoolId").combobox({
-		onChange:function(){
-			var sId =$("#schoolId").combobox("getValue");
-			var urls ="<%=path %>/pubData/qryTeacherList.do?schoolId="+sId;
-			$("#teacherId").combobox({
-				url:urls
-			});
-		}
-	})
 
- 
+$("doucument").ready(function(){
+		$("#schoolId").combobox({
+		loader:function(param,success,error){  
+		    $.ajax({  
+				url: "/sys/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=5041&fieldId=schoolId",  
+				dataType: 'json',  
+				success: function(data){
+					if(data.length == schoolData.length)
+					{
+						data.unshift({schoolName:'总部', schoolId:"10"});  
+					}
+					success(data);  
+				}
+			});  
+   		},
+    	onChange : function(n, o) {
+    		//学校的教师
+			$("#teacherId").combobox({
+				url : "/sys/pubData/qryTeacherList.do?schoolId=",//返回json数据的url
+				valueField : "teacherId",
+				textField : "byname",
+				panelHeight : "auto",
+				formatter : function(data) {
+					return "<span>" + data.byname + "</span>";
+				}
+			});
+    	}
+	});	
+	
+});
+
 $("#qryBtn").click(function(){
 	
 	var startDate=$("#startTime").datebox("getValue");
