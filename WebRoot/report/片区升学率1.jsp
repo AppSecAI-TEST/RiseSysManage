@@ -57,7 +57,7 @@
 						<tr>
 							<th data-options="field:'regionName',width:100,align:'center'">片区</th>
 							<th data-options="field:'month',width:100,align:'center'">月份</th>
-							<th data-options="field:'monthHigherBaseNum',width:100,align:'center'">在读人数</th>
+							<th data-options="field:'monthHigherBaseNum',width:100,align:'center'">升学基数</th>
 							<th data-options="field:'monthHigherNum',width:100,align:'center'">已升人数</th>
 							<th data-options="field:'monthHigherRate',width:100,align:'center'">月度升学率</th>
 							<th data-options="field:'quarterHigherRate',width:100,align:'center'">季度升学率</th>

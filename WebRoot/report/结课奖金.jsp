@@ -68,7 +68,7 @@
   				</table>
   			</form>
   			<div style="padding:5px 0;min-width:1100px; width:100%;">
-  				<table class="easyui-datagrid" style="height:435px;" id="list_data"
+  				<table class="easyui-datagrid" id="list_data"
 					title="查询结果" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
 						<tr>
@@ -79,7 +79,8 @@
 							<th data-options="field:'isTwoHand',width:'7%',align:'center'">是否二手班</th>
 							<th data-options="field:'byname',width:'10%',align:'center'">带班老师</th>
 							<th data-options="field:'openClassNum',width:'7%',align:'center'">开班人数</th>
-							<th data-options="field:'higherBaseNum',width:'7%',align:'center'">在读人数</th>
+							<th data-options="field:'classStudentNum',width:'7%',align:'center'">在读人数</th>
+							<th data-options="field:'higherBaseNum',width:'7%',align:'center'">升学基数</th>
 							<th data-options="field:'higherNum',width:'7%',align:'center'">已升学人数</th>
 							<th data-options="field:'higherRate',width:'7%',align:'center'">升学率</th>
 							<th data-options="field:'changeTeacherRemark',width:'20%',align:'center'">中途更换老师情况</th>

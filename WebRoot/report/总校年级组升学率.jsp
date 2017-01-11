@@ -55,12 +55,12 @@
 						<tr>
 							<th data-options="field:'stageId',width:100,align:'center'">阶段</th>
 							<th data-options="field:'finishClassNum',width:100,align:'center'">班级数</th>
-							<th data-options="field:'finishClassHigherBaseNum',width:100,align:'center'">年级组总人数</th>
+							<th data-options="field:'finishClassHigherBaseNum',width:100,align:'center'">年级组总基数</th>
 							<th data-options="field:'finishClassHigherNum',width:100,align:'center'">年级组总升学</th>
 							<th data-options="field:'finishClassAvgRate',width:100,align:'center'">平均升学率</th>
 							<th data-options="field:'attendClassNum',width:100,align:'center'">班级数</th>
 							<th data-options="field:'attendClassStudentNum',width:100,align:'center'">在读人数</th>
-							<th data-options="field:'attendClassHigherBaseNum',width:100,align:'center',hidden:'true'">年级组总基数</th>
+							<th data-options="field:'attendClassHigherBaseNum',width:100,align:'center'">年级组总基数</th>
 							<th data-options="field:'attendClassHigherNum',width:100,align:'center'">年级组总升学</th>
 							<th data-options="field:'attendClassAvgRate',width:100,align:'center'">平均升学率</th>
 						</tr>

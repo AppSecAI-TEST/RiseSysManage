@@ -89,24 +89,24 @@
 				<td width="23%">${classInstT.className}</td>
 			</tr>
 			<tr>
-				<td align="right">结课时间：</td>
-	  			<td><fmt:formatDate value="${classInstT.finishDate}" pattern="yyyy-MM-dd" /></td>
+				<td align="right">开课日期：</td>
+				<td><fmt:formatDate value="${classInstT.openDate}" pattern="yyyy-MM-dd" /></td>
 				<td align="right">学员来源类型：</td>
 				<td>${classInstT.studentChannelTypeName}</td>
 				<td align="right">来源班级：</td>
 				<td>${classInstT.higherSchoolName}</td>
 			</tr>
 			<tr>
-				<td align="right">开课日期：</td>
-				<td><fmt:formatDate value="${classInstT.openDate}" pattern="yyyy-MM-dd" /></td>
 				<td align="right">开班类型：</td>
 				<td>${classInstT.openClassTypeName}</td>
 				<td align="right">开班人数：</td>
 				<td><c:if test="${classInstT.classState == '003' || classInstT.classState == '004'}">${classInstT.openClassNum}</c:if></td>
-			</tr>
-			<tr>
 				<td align="right">在读人数：</td>
 				<td><c:if test="${classInstT.classState == '003' || classInstT.classState == '004'}">${classInstT.baseNumT.studyingNum}</c:if></td>
+			</tr>
+			<tr>
+				<td align="right">升学基数：</td>
+				<td><c:if test="${classInstT.classState == '003' || classInstT.classState == '004'}">${classInstT.baseNumT.higherBaseNum}</c:if></td>
 				<td align="right">已升学人数：</td>
 				<td>${classInstT.baseNumT.higherNum}</td>
 				<td align="right">升学率：</td>

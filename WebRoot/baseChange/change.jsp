@@ -68,9 +68,9 @@
 	  				</table>
 			  		<div style="height: 5px;"></div>
 			  		<div style="padding:5px 0;min-width:1100px; width:100%;">
-			  			<table class="easyui-datagrid" title="班级学员基数" style="height:auto;" id="list_data" fitColumns="true" singleSelect="false" 
+			  			<table class="easyui-datagrid" title="班级学员基数" style="height:auto;" id="list_data" fitColumns="true" singleSelect="false"
 			  				url="<%=path %>/pubData/qryDataListByPage.do?param={'classInstId':'${obj.attendClassObj.classInstId }','funcNodeId':'1085'}"
-			  				autoRowHeight="true" data-options="onLoadSuccess:function(data) {$('.edit').linkbutton({text:'修改基数', iconCls:'icon-edit'});}">
+			  				autoRowHeight="true" data-options="onLoadSuccess:function(data) {$('.edit').linkbutton({text:'修改基数', iconCls:'icon-edit'});},rowStyler:function(){return 'height: 32px';}">
 					  		<thead>
 					  			<tr>
 					  				<th data-options="field:'name',width:80,align:'center'">学员姓名</th>
@@ -83,9 +83,9 @@
 					  				<th data-options="field:'isChange',width:100,align:'center'">是否当前班级</th>
 					  				<th data-options="field:'higherStageId',width:100,align:'center'">已升学阶段</th>
 					  				<th data-options="field:'studyingNum',width:80,align:'center'">在读人数</th>
-					  				<th data-options="field:'higherBaseNum',width:80,align:'center',hidden:'true'">升学基数</th>
+					  				<th data-options="field:'higherBaseNum',width:80,align:'center'">升学基数</th>
 					  				<th data-options="field:'higherNum',width:80,align:'center'">已升学人数</th>
-					  				<th data-options="field:'option', width:100, align:'center', formatter:formatChangeBaseNum">操作</th>
+					  				<th data-options="field:'option', width:140, align:'center', formatter:formatChangeBaseNum">操作</th>
 					  			</tr>
 					  		</thead>
 					  	</table>
@@ -118,19 +118,19 @@
 	  						<input id="studentStudyingNum" name="studentStudyingNum" type="text" class="easyui-numberbox validatebox" data-options="min:0,max:1,precision:0" required="true" style="width: 100px; height: 25px;"/>
 	  					</td>
   					</tr>
-  					<tr style="display: none;">
+  					<tr>
 	  					<td align="right" width="15%"><span>升学基数：</span></td>
 	  					<td width="20%"><span id="higherBaseNumText"></span></td>
 	  					<td align="right" width="25%"><span>升学基数调整为：</span></td>
 	  					<td width="40%">
-	  						<input id="studentHigherBaseNum" name="studentHigherBaseNum" type="text" class="easyui-numberbox validatebox" data-options="min:0,max:1,precision:1" required="true" style="width: 100px; height: 25px;"/>
+	  						<input id="studentHigherBaseNum" name="studentHigherBaseNum" type="text" class="easyui-numberbox validatebox" data-options="min:0,max:1,precision:0" required="true" style="width: 100px; height: 25px;"/>
 	  					</td>
   					</tr>
   					<tr>
 	  					<td align="right" width="15%"><span>已升学人数：</span></td>
 	  					<td width="20%"><span id="higherNumText"></span></td>
 	  					<td align="right" width="25%"><span>已升学人数调整为：</span></td>
-	  					<td width="40%"><input id="studentHigherNum" name="studentHigherNum" type="text" class="easyui-numberbox validatebox" data-options="min:0,max:1,precision:1" required="true" style="width: 100px; height: 25px;"/></td>
+	  					<td width="40%"><input id="studentHigherNum" name="studentHigherNum" type="text" class="easyui-numberbox validatebox" data-options="min:0,max:1,precision:0" required="true" style="width: 100px; height: 25px;"/></td>
   					</tr>
   				</table>
   			</form>

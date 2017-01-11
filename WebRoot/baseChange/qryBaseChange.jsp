@@ -77,7 +77,7 @@
 		  				<th data-options="field:'openClassNum',width:80,align:'center'">开班人数</th>
 		  				<th data-options="field:'studyingNum',width:80,align:'center'">在读人数</th>
 		  				<th data-options="field:'classProgress',width:80,align:'center'">课时进度</th>
-		  				<th data-options="field:'higherBaseNum',width:80,align:'center',hidden:'true'">升学基数</th>
+		  				<th data-options="field:'higherBaseNum',width:80,align:'center'">升学基数</th>
 		  				<th data-options="field:'higherNum',width:80,align:'center'">已升学人数</th>
 		  				<th data-options="field:'higherRate',width:80,align:'center'">升学率</th>
 		  			</tr>

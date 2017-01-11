@@ -40,24 +40,24 @@
 		  					<td width="30%"><span id="classNameText">${obj.attendClassObj.className }</span></td>
 		  				</tr>
 		  				<tr>
-		  					<td align="right" width="10%"><span>结课时间：</span></td>
-	  						<td width="20%"><span>${obj.attendClassObj.finishDate }</span></td>
+		  					<td align="right" width="10%"><span>开课时间：</span></td>
+	  						<td width="20%"><span>${obj.attendClassObj.startDate }</span></td>
 		  					<td align="right" width="10%"><span>学员来源类型：</span></td>
 		  					<td width="20%"><span id="studentChannelTypeVal">${obj.attendClassObj.studentChannelTypeText }</span></td>
 		  					<td align="right" width="10%"><span>来源班级：</span></td>
 		  					<td width="30%"><span id="higherSchoolName">${obj.attendClassObj.higherSchoolName }</span></td>
 		  				</tr>
 		  				<tr>
-		  					<td align="right" width="10%"><span>开课时间：</span></td>
-	  						<td width="20%"><span>${obj.attendClassObj.startDate }</span></td>
 		  					<td align="right" width="10%"><span>开班类型：</span></td>
 		  					<td width="20%"><span>${obj.attendClassObj.openClassTypeText }</span></td>
 		  					<td align="right" width="10%"><span>开班人数：</span></td>
-		  					<td width="30%"><span id="studentChannelTypeVal">${obj.attendClassObj.openClassNum }</span></td>
+		  					<td width="20%"><span id="studentChannelTypeVal">${obj.attendClassObj.openClassNum }</span></td>
+		  					<td align="right" width="10%"><span>在读人数：</span></td>
+		  					<td width="30%"><span id="higherSchoolName">${obj.attendClassObj.classStudentNum }</span></td>
 		  				</tr>
 		  				<tr>
-		  					<td align="right" width="10%"><span>在读人数：</span></td>
-		  					<td width="20%"><span id="higherSchoolName">${obj.attendClassObj.classStudentNum }</span></td>
+		  					<td align="right" width="10%"><span>升学基数：</span></td>
+		  					<td width="20%"><span id="higherSchoolName">${obj.attendClassObj.higherBaseNum }</span></td>
 		  					<td align="right" width="10%"><span>已升学人数：</span></td>
 		  					<td width="20%"><span id="studentChannelTypeVal">${obj.attendClassObj.higherStudentNum }</span></td>
 		  					<td align="right" width="10%"><span>升学率：</span></td>
