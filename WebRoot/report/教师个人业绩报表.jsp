@@ -94,7 +94,7 @@ $(document).ready(function(){
                     $('#time').datebox('setValue',val).datebox('hidePanel'); //设置日期的值
              	});
             }});
- 	initReportButton("resetBtn","qryFm","schoolId");	
+ 	initReportButtonAll("resetBtn","qryFm","schoolId");	
 	$("#export").click(function(){
 		var param={
 			teacherId:$("#teacherId").textbox('getValue'),

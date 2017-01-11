@@ -66,14 +66,23 @@ $(document).ready(function(){
     
     var staffId = $("#staffId").val();
 	$("#schoolId").combobox({
-		url : "/sys/pub/pageCategory.do?staffId="+staffId+"&resourceId=508&fieldId=schoolId&headFlag=N",//返回json数据的url 
 		valueField : "schoolId",
 		textField : "schoolName",
 		panelHeight : "auto",
 		formatter : formatSchool,
-		onLoadSuccess : function(data) {
-			$("#schoolId").combobox('setValue',data[0].schoolId);
-		},
+		loader:function(param,success,error){  
+		    $.ajax({  
+				url : "/sys/pub/pageCategory.do?staffId="+staffId+"&resourceId=508&fieldId=schoolId&headFlag=N",//返回json数据的url 
+				dataType: 'json',  
+				success: function(data){
+					if(data.length == schoolData.length)
+					{
+						data.unshift({schoolName:'总部', schoolId:"10"});  
+					}
+					success(data);  
+				}
+			});  
+   		},
 		onChange : function(n, o) {
 			if(n != "" && n != null && n != undefined) {
 //				$("#byName").combobox({disabled: false});

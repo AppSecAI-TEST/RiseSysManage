@@ -117,7 +117,7 @@ $(document).ready(function(){
             }});
    	var now =new Date();
 	$('#time').datebox("setValue",now.getFullYear()+"-"+(now.getMonth()+1));
-	initReportButton("resetBtn","qryFm","schoolId");
+	initReportButtonAll("resetBtn","qryFm","schoolId");
 	$("#resetBtn").click(function(){
 		resetData();
 	})

@@ -1228,6 +1228,48 @@ function initReportButton(resetName,formName,schoolId)
     });
 }
 
+//绑定报表重置按钮事件
+function initReportButtonAll(resetName,formName,schoolId)
+{
+	var clearFlag =true;
+	$("#"+formName).find("#"+schoolId).combobox({
+		loader:function(param,success,error){  
+		    $.ajax({  
+				url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
+				dataType: 'json',  
+				success: function(data){
+		    	if(data.length==schoolData.length)
+		    	{
+		    		data.unshift({schoolName:'总部',schoolId:"10"});  
+		    		data.unshift({schoolName:'所有校区',schoolId:""});  
+		    		
+		    	}	
+				success(data);  
+				}
+			});  
+   		},
+		onLoadSuccess:function(){
+			var arr =$("#"+formName).find("#"+schoolId).combobox("getData");
+			if(arr.length<schoolData.length)
+			{
+				$("#"+formName).find("#"+schoolId).combobox("select",arr[0].schoolId);
+				clearFlag =false;
+			}	
+		}
+	});
+    $("#"+resetName+"").click(function() 
+    {
+    	$("#"+formName+"").form('clear');//清空窗体数据  
+    	if(!clearFlag)
+    	{
+    		$("#"+formName).find("#"+schoolId).combobox('select',$("#"+formName).find("#"+schoolId).combobox("getData")[0].schoolId);
+    	}
+    	else
+    	{
+    		$("#"+formName).find("#"+schoolId).combobox('setValue',"");
+    	}	
+    });
+}
 
 function scrolltoDom(obj)
 {
