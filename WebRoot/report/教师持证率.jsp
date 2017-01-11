@@ -70,5 +70,20 @@
   	</body>
 </html>
 <script>
-exportLink("export","list_data");
+$("#export").click(function() {
+	if($("#list_data").datagrid("getData").total > 0) {
+		try {
+			var fileName = "教师持证率";
+			var param = JSON.stringify($("#list_data").datagrid("options").queryParams.param);
+			window.location.href = "/sys/export/normalExport.do?fileName=" + fileName + "&param=" + param;
+		}
+		catch(e) {
+			$.messager.alert('提示', "模版不存在！",function(){
+				window.history.back();
+			});
+		}
+	} else {
+		$.messager.alert('提示', "没有数据可以导出！");
+	}	
+});
 </script>
