@@ -53,9 +53,9 @@
   					</td>
   					<td align="right"><span>休学开始时间：</span></td>
   					<td colspan="2">
-  						<input class="easyui-datebox"  name="createStartTime" id="createStartTime" style="width:100px;height: 25px;" />
+  						<input class="easyui-datebox"  name="startTimeCreate" id="startTimeCreate" style="width:100px;height: 25px;" />
   						<span>至</span>
-  						<input class="easyui-datebox"  name="createEndTime" id="createEndTime" style="width:100px;height: 25px;" />
+  						<input class="easyui-datebox"  name="endTimeCreate" id="endTimeCreate" style="width:100px;height: 25px;" />
   					</td>
   					<td colspan="2" align="left">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px" id="qryBtn" funcNodeId="4000"><span>查询</span></a>
