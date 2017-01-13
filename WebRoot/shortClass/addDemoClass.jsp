@@ -14,13 +14,17 @@
 			ajaxLoadEnd();
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=801&fieldId=schoolId",function(data){
 				$("#schoolRoomId").combobox("loadData",data);
+				$("#openSchoolId").combobox("loadData",data);
 			},"json");
+			
 			$.post("<%=path %>/pubData/qrySchoolListWithTS.do",function(data){
 				$("#schoolId").combobox("loadData",data);
 			},"json");
+			
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=ACTION_T&codeType=TEACHER_TYPE",function(data){
 				$("#teacherType").combobox("loadData",data);
 			},"json");
+			
 			$(document).ready(function(){
 				$("#roomList").combobox({
 					formatter:formatRoom, 
@@ -86,6 +90,20 @@
 						}
 					}
 				});
+					$("#openSchoolId").combobox({
+					formatter:formatSchool, 
+					valueField: 'schoolId', 
+					textField: 'schoolName', 
+					panelHeight: 'auto',
+					//listHeight:150,
+					editable:false,
+					onLoadSuccess:function(data){
+						if(data.length > 0)
+						{
+							$("#openSchoolId").combobox("setValue",data[0].schoolId);
+						}
+					}
+				});
 			});
 			function addTeacherFunc()
 			{
@@ -140,7 +158,8 @@
 				var arr = [];
 				$(".teacherId").each(function(i,node){
 					var teacherObj = $(node).find("td:eq(0)");
-					var obj = {
+					var obj =
+					{
 						teacherId:teacherObj.attr("teacherId"),
 						teacherType:teacherObj.attr("teacherType"),
 						lessionHours:lessonHour,
@@ -193,7 +212,7 @@
 						classTeacherList:arr
 					};
 					ajaxLoading("正在处理，请稍待。。。");
-					$.post("/sys/shortBus/addDirectShortClassInstInfo.do",{json:JSON.stringify(json),classType:encodeURI("DEMO"),schoolId:$("#schoolRoomId").combobox("getValue"),stageId:""},function(data){
+					$.post("/sys/shortBus/addDirectShortClassInstInfo.do",{json:JSON.stringify(json),classType:encodeURI("DEMO"),schoolId:$("#openSchoolId").combobox("getValue"),stageId:""},function(data){
 						ajaxLoadEnd();
 						if(data == "success")
 						{
@@ -226,6 +245,12 @@
 		  </div>
 		</div>
 		<table align="center" class="tab" style="width:99%;margin:0 auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td align="right" width="10%"><span>校区：</span></td>
+				<td width="35%" colspan="4">
+					<select id="openSchoolId" name="openSchoolId" style="width:150px" ></select>
+				</td>
+			</tr>
 			<tr>
 				<td align="right" width="10%"><span>日期：</span></td>
 				<td width="35%" colspan="4">
