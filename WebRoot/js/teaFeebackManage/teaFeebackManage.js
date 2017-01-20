@@ -245,7 +245,7 @@ function addTeaFeedbackSubmit()
 			type : "POST",
 			url: "/sys/teaFeebackManage/addTeachingFeedback.do",
 			data: "feedbackJson="+JSON.stringify(feedback)+"&feedbackDetailJson="+JSON.stringify(feedbackDetailArray),
-			async: false,
+			async: true,
 			beforeSend: function()
 	    	{
 	    		$.messager.progress({title : '添加反馈维护', msg : '添加反馈维护中，请稍等……'});
@@ -342,7 +342,7 @@ function updateTeaFeedbackSubmit(){
 			type : "POST",
 			url: "/sys/teaFeebackManage/updateTeachingFeedback.do",
 			data: "json="+JSON.stringify(feedbackDetailArray),
-			async: false,
+			async: true,
 			beforeSend: function()
 	    	{
 	    		$.messager.progress({title : '修改反馈维护', msg : '修改反馈维护中，请稍等……'});

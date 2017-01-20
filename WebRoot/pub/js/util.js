@@ -627,11 +627,8 @@ function formatFinishHigher(value, row, index) {
 }
 
 function formatChangeBaseNum(value, row, index) {
-	if(row.studyingNum == "1") {
+	 
 		return "<a href='javascript:void(0)' onclick='changeStudentBaseNum("+row.baseNumStudentId+")' class='edit' style='width: 100px;'><span>修改基数</span></a>";
-	} else {
-		return "";
-	}
 }
 
 function myLoadFilter(data,parentId){
