@@ -239,7 +239,7 @@ function submitInfo() {
 			type : "POST",
 			url : "/sys/demoClass/feedBack.do",
 			data :"classState="+classState+"&param="+JSON.stringify(param),
-			async : false,
+			async : true,
 			beforeSend : function() {
 				showProgressLoader("正在录入反馈,请稍等...", 400);
 			},
