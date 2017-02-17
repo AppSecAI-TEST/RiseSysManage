@@ -302,7 +302,7 @@ function addLeaveInfo()
 		var classInstId = row.classInstId;
 		var className = row.className;
 		var teacherName = row.teacherName;
-		var classProgress = encodeURIComponent(row.classProgress);
+		var classProgress = encodeURIComponent(row.studentClassProgress);
 		var funcNodeId = "";
 		window.location.href = "/sys/leaveManage/viewLeaveInfo.do?studentId="+studentId+"&schoolId="+schoolId+"&courseState="+courseState+"&studentCourseId="+studentCourseId+"&funcNodeId="+funcNodeId+"&type=add&currentHours="+classProgress+"&stageLevel="+stageLevel+"&classInstId="+classInstId+"&className="+className+"&teacherName="+teacherName;
 	}
@@ -346,10 +346,9 @@ function addLeaveSubmit()
 			$.ajax({
 				type : "POST",
 				url: "/sys/leaveManage/addLeaveInfo.do",
-				data: "json="+json,
-				async: false,
-				beforeSend: function()
-		    	{
+				data: "json=" + json,
+				async: true,
+				beforeSend: function() {
 		    		$.messager.progress({title : '提交休学', msg : '正在提交休学，请稍等……'});
 		    	},
 		    	success: function(flag) {

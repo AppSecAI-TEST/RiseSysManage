@@ -191,7 +191,7 @@ function addLeaveInfo()
 		var studentId = row.studentId;
 		var courseState = row.courseState;
 		var studentCourseId = row.studentCourseId;
-		var classProgress = row.classProgress;
+		var classProgress = row.studentClassProgress;
 		var funcNodeId = "";
 		window.location.href = "/sys/leaveManage/viewLeaveInfo.do?studentId="+studentId+"&courseState="+courseState+"&studentCourseId="+studentCourseId+"&funcNodeId="+funcNodeId+"&type=add&currentHours="+classProgress;
 	}
@@ -219,16 +219,15 @@ function addLeaveSubmit()
 			url: "/sys/leaveManage/addLeaveInfo.do",
 			data: "json="+json,
 			async: true,
-			beforeSend: function()
-	    	{
+			beforeSend: function() {
 	    		$.messager.progress({title : '提交休学', msg : '正在提交休学，请稍等……'});
 	    	},
 	    	success: function(flag) {
 	    		$.messager.progress('close'); 
-	    		if(flag == "true"){
+	    		if(flag == "true") {
 	    			$.messager.alert('提示', "休学成功！");
 	    			window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";
-	    		}else if(flag == "false"){
+	    		} else if(flag == "false") {
 	    			$.messager.alert('提示', "休学失败！");
 	    		}
 	        } 
