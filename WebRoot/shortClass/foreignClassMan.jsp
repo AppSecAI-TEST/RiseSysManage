@@ -14,6 +14,7 @@
 			}
 		</style>
 		<script type="text/javascript">
+			sessionStorage.clear();
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=816&fieldId=schoolId",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");

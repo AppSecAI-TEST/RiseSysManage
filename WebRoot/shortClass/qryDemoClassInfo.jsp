@@ -77,6 +77,7 @@
  			<a href="javascript:void(0)" id="cancel"class="easyui-linkbutton" iconCls="icon-remove" style="width:100px;" onclick="cancleDemoClass()"><span>取消排课</span></a>
 		</div>
 		<script type="text/javascript">
+			sessionStorage.clear();
 			ajaxLoading("正在处理，请稍待。。。");
 			$.post("<%=path %>/pub/pageCategory.do?staffId=${sessionScope.StaffT.staffId}&resourceId=513&fieldId=schoolId&headFlag=N",function(data){
 				$("#schoolId").combobox("loadData",data);

@@ -102,7 +102,7 @@ function addTeacher() {
 	}
 	if (checkTheSame($("#teacherId").combobox("getValue"))) {
 		var lessionHours = $("#lessionHours").numberbox("getValue");
-		if(parseInt(hours) < parseInt(lessionHours))
+		if(parseInt(hours) < parseInt(lessionHours) && $("#teacherType").combobox("getValue") != 'TA')
 		{
 			$.messager.alert("提示", "添加老师的课时量不能超过当前课时,请核实后重新尝试");
 		}
@@ -217,7 +217,7 @@ function submitInfo() {
 		attobj.handerId =handlerId;
 		attobj.attendDate =$("#openDate").datebox("getValue")+" 00:00:00";;
 		teacherAttend.push(attobj);
-		if(hours < attobj.lessionHours)
+		if(hours < attobj.lessionHours && attobj.teacherType == "T")
 		{
 			result = "老师课时量不能超过当前课程的课时,请核实后重新尝试";
 		}

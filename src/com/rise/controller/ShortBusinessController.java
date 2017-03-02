@@ -223,14 +223,14 @@ public class ShortBusinessController
 	}
 	
 	@RequestMapping("/addShortClassInstTInfo.do")
-	public void addShortClassInstTInfo(String json , String className , HttpServletResponse response)
+	public void addShortClassInstTInfo(String jsonClass , String jsonSchooltimeGroup , String className , HttpServletResponse response)
 	{
 		PrintWriter out = null;
 		try
 		{
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
-			String retVal = shortBusinessService.addShortClassInstTInfo(json , className);
+			String retVal = shortBusinessService.addShortClassInstTInfo(jsonClass , jsonSchooltimeGroup , className);
 			out.write(retVal);
 		}
 		catch(Exception e)

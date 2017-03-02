@@ -115,8 +115,10 @@
 				var startTime = $("#startTime").timespinner("getValue");
 				var endTime = $("#endTime").timespinner("getValue");
 				var roomList = $("#roomList").combobox("getValue");
+				var roomName = $("#roomList").combobox("getText");
 				var lessonHour = $("#lessonHour").textbox("getValue");
 				var arr = [];
+				var arrShow = [];
 				$(".teacherId").each(function(i,node){
 					var teacherObj = $(node).find("td:eq(0)");
 					var obj = {
@@ -128,6 +130,16 @@
 						handlerId:${sessionScope.StaffT.staffId},
 					};
 					arr.push(obj);
+					var objShow = {
+						shortClassInstId:shortClassInstId,
+						teacherId:teacherObj.attr("teacherId"),
+						teacherName:teacherObj.attr("teacherName"),
+						teacherType:teacherObj.attr("teacherType"),
+						lessionHours:lessonHour,
+						schoolId:teacherObj.attr("schoolId"),
+						handlerId:${sessionScope.StaffT.staffId},
+					}
+					arrShow.push(objShow);
 				});
 				if(schooltimeDate == "")
 				{
@@ -173,14 +185,45 @@
 						handlerId:${sessionScope.StaffT.staffId},
 						classTeacherList:arr
 					};
+					var jsonShow = {
+						shortClassInstId:shortClassInstId,
+						roomId:roomList,
+						roomName:roomName,
+						schooltime:schooltimeDate,
+						startTime:startTime,
+						endTime:endTime,
+						lessionHours:lessonHour,
+						handlerId:${sessionScope.StaffT.staffId},
+						classTeacherList:arrShow
+					};
 					ajaxLoading("正在处理，请稍待。。。");
 					$.post("/sys/shortBus/addShortSchooltimeTInfo.do",{json:JSON.stringify(json)},function(data){
 						ajaxLoadEnd();
 						if(data == "success")
 						{
-							$.messager.alert('提示',"完成当前排课","",function(){
-								backFunc();
-							});
+							try{
+								var shortSchooltimeTArr = sessionStorage.getItem("shortSchooltimeTArr");
+								if(shortSchooltimeTArr != null){
+									shortSchooltimeTArr = eval("("+shortSchooltimeTArr+")");
+									shortSchooltimeTArr.push(json);
+									sessionStorage.setItem("shortSchooltimeTArr",JSON.stringify(shortSchooltimeTArr));
+									var shortSchooltimeTShowArr = eval("("+sessionStorage.getItem("shortSchooltimeTShowArr")+")");
+									shortSchooltimeTShowArr.push(jsonShow);
+									sessionStorage.setItem("shortSchooltimeTShowArr",JSON.stringify(shortSchooltimeTShowArr));
+								}else{
+									var contentArr = [];
+									contentArr.push(json);
+									sessionStorage.setItem("shortSchooltimeTArr",JSON.stringify(contentArr));
+									var contentShowArr = [];
+									contentShowArr.push(jsonShow);
+									sessionStorage.setItem("shortSchooltimeTShowArr",JSON.stringify(contentShowArr));
+								}
+								$.messager.alert('提示',"完成当前排课","",function(){
+									backFunc();
+								});
+							}catch(e){
+								$.messager.alert('提示',"排课失败:已超过当前班级最大排课数","error");
+							}
 						}
 						else
 						{

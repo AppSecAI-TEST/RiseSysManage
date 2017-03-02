@@ -15,6 +15,7 @@
 			}
 		</style>
 		<script type="text/javascript">
+			sessionStorage.clear();
 			$.post("<%=path %>/pubData/qryCodeNameList.do?tableName=CLASS_INST_T&codeType=CLASS_STATE",function(data){
 				var classManStateArr = [];
 				for(var i = 0,n = data.length;i < n;i++)

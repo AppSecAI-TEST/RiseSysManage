@@ -85,9 +85,9 @@ public class ShortBusinessService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
-	public String addShortClassInstTInfo(String json , String className) throws Exception
+	public String addShortClassInstTInfo(String jsonClass , String jsonSchooltimeGroup , String className) throws Exception
 	{
-		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2056\",securityCode:\"0000000000\",params:{json:'"+json+"',className:\""+className+"\"},rtnDataFormatType:\"user-defined\"}";
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2056\",securityCode:\"0000000000\",params:{jsonClass:'"+jsonClass+"',jsonSchooltimeGroup:'"+jsonSchooltimeGroup+"',className:\""+className+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
 	

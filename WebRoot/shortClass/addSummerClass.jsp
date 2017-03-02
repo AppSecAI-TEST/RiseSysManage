@@ -13,6 +13,7 @@
 		<%@ include file="../common/formvalidator.jsp" %>
 		<script type="text/javascript">
 			ajaxLoadEnd();
+			var gSchooltimeInd = [];
 			$.post("<%=path %>/pubData/qrySchoolList.do",function(data){
 				$("#schoolManId").combobox("loadData",data);
 			},"json");
@@ -20,6 +21,22 @@
 				$("#classType").combobox("loadData",data);
 			},"json");
 			$(document).ready(function(){
+				var shortSchooltimeTShowArr = sessionStorage.getItem("shortSchooltimeTShowArr");
+				if(shortSchooltimeTShowArr != null){
+					shortSchooltimeTShowArr = eval("("+shortSchooltimeTShowArr+")");
+					for(var i = 0,n = shortSchooltimeTShowArr.length;i < n;i++){
+						var schooltimeAreaArr = [];
+						gSchooltimeInd.push(i);
+						schooltimeAreaArr.push("<tr class='shortSchooltimeId' id='shortSchooltimeId"+i+"' lessionHours='"+shortSchooltimeTShowArr[i].lessionHours+"' schooltime='"+shortSchooltimeTShowArr[i].schooltime+"'><td align='right'>上课计划：</td><td>"+shortSchooltimeTShowArr[i].schooltime+" "+shortSchooltimeTShowArr[i].startTime+"~"+shortSchooltimeTShowArr[i].endTime+"</td><td align='right'>教室：</td><td>"+shortSchooltimeTShowArr[i].roomName+"</td><td align='right'>课时：</td><td>"+shortSchooltimeTShowArr[i].lessionHours+"</td><td align='right'>老师：</td><td><ul>");
+						for(var j = 0,m = shortSchooltimeTShowArr[i].classTeacherList.length;j < m;j++){
+							schooltimeAreaArr.push("<li><span>"+shortSchooltimeTShowArr[i].classTeacherList[j].teacherName+"</span><span style='padding-left:15px'>"+shortSchooltimeTShowArr[i].classTeacherList[j].teacherType+"</span></li>");
+						}
+						schooltimeAreaArr.push("</ul></td><td><a href='javascript:void(0)' onclick='delShortSchooltime("+i+")'>删除</a></td></tr>");
+						$("#schooltimeArea").before(schooltimeAreaArr.join(""));
+					}
+				}else{
+					$("#schooltimeArea").before("<tr><td colspan='9' align='center'>暂无上课计划</td></tr>");
+				}
 				$("#classType").combobox({
 					formatter:function(data){
 						return '<span>'+data.typeName+'</span>';
@@ -156,7 +173,7 @@
 						handlerId:${sessionScope.StaffT.staffId}
 					};
 					ajaxLoading("正在处理，请稍待。。。");
-					$.post("/sys/shortBus/addShortClassInstTInfo.do",{json:JSON.stringify(json),className:encodeURI("小拼暑类班")},function(data){
+					$.post("/sys/shortBus/addShortClassInstTInfo.do",{jsonClass:JSON.stringify(json),jsonSchooltimeGroup:sessionStorage.getItem("shortSchooltimeTArr"),className:encodeURI("小拼暑类班")},function(data){
 						ajaxLoadEnd();
 						if(data == "success")
 						{
@@ -203,22 +220,22 @@
 			{
 				$.messager.confirm("提示", "您确定要删除该上课计划吗？", function (data) {
 		            if(data){
-		            	ajaxLoading("正在处理，请稍待。。。");
-		                $.post("/sys/shortBus/delShortSchooltimeTInfo.do",{shortSchooltimeId:val},function(data){
-		                	ajaxLoadEnd();
-		                	if(data == "success")
-		                	{
-		                		$("#shortSchooltimeId"+val).remove();
-		                		if($("#schooltimeList").find("tr").length == 1)
-		                		{
-		                			$("#schooltimeList").prepend("<tr><td colspan='9' align='center'>暂无上课计划</td></tr>");
-		                		}
-		                	}
-		                	else
-		                	{
-		                		$.messager.alert('提示',"删除上课计划失败:"+data,"error");
-		                	}
-		                });
+		            	$("#shortSchooltimeId"+val).remove();
+                		var pos = gSchooltimeInd.indexOf(val);
+                		var shortSchooltimeTShowArr = sessionStorage.getItem("shortSchooltimeTShowArr");
+                		var shortSchooltimeTArr = sessionStorage.getItem("shortSchooltimeTArr");
+                		if(shortSchooltimeTShowArr != null){
+                			shortSchooltimeTShowArr = eval("("+shortSchooltimeTShowArr+")");
+                			shortSchooltimeTArr = eval("("+shortSchooltimeTArr+")");
+                			gSchooltimeInd.splice(pos,1);
+	                		shortSchooltimeTShowArr.splice(pos,1);
+	                		shortSchooltimeTArr.splice(pos,1);
+                		}
+                		sessionStorage.setItem("shortSchooltimeTShowArr" , JSON.stringify(shortSchooltimeTShowArr));
+                		sessionStorage.setItem("shortSchooltimeTArr" , JSON.stringify(shortSchooltimeTArr));
+                		if($("#schooltimeList").find("tr").length == 1){
+                			$("#schooltimeList").prepend("<tr><td colspan='9' align='center'>暂无上课计划</td></tr>");
+                		}
 		            }
 		        });
 			}
@@ -267,35 +284,7 @@
 			<a href="javascript:void(0)" id="addPlanBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px;" onclick="addPlanFunc()">添加上课计划</a>
 		</div>
 		<table region="center" class="tab" id="schooltimeList" style="width:99%;margin:5px auto;padding:0 0;border-top:1px solid #ccc;border-left:1px solid #ccc;" border="0" cellpadding="0" cellspacing="0">
-			<c:choose>
-				<c:when test="${fn:length(shortClassList) == 0}">
-					<tr>
-						<td colspan="9" align="center">暂无上课计划</td>
-					</tr>
-				</c:when>
-				<c:otherwise>
-					<c:forEach items="${shortClassList}" var="node" varStatus="i">
-						<tr class="shortSchooltimeId" id="shortSchooltimeId${node.shortSchooltimeId}" lessionHours="${node.lessionHours}" schooltime="<fmt:formatDate value='${node.schooltime}' pattern='yyyy-MM-dd' />">
-							<td align="right">上课计划：</td>
-							<td><fmt:formatDate value="${node.schooltime}" pattern="yyyy-MM-dd" /> ${node.startTime}~${node.endTime}</td>
-							<td align="right">教室：</td>
-							<td>${node.roomT.roomName}</td>
-							<td align="right">课时：</td>
-							<td>${node.lessionHours}</td>
-							<td align="right">老师：</td>
-							<td>
-								<ul>
-									<c:forEach items="${node.classTeacherList}" var="item" varStatus="i">
-										<li><span>${item.teacherT.byName}</span><span style="padding-left:15px">${item.teacherType}</span></li>
-									</c:forEach>
-								</ul>
-							</td>
-							<td><a href="javascript:void(0)" onclick="delShortSchooltime(${node.shortSchooltimeId})">删除</a></td>
-						</tr>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-			<tr>
+			<tr id="schooltimeArea">
 				<td width="10%" align="right">备注：</td>
 				<td colspan="8">
 					<input name="remark" id="remark" type="text" style="width:95%;height:100px" class="easyui-textbox" data-options="multiline:true" />
