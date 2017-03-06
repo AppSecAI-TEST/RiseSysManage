@@ -181,7 +181,7 @@ function updateLeaveTime()
 		var studentId = row.studentId;
 		var leaveState = row.leaveState;
 		var resumeType = row.resumeType;
-		if(leaveState == "003" || leaveState == "004" || resumeType != ""){
+		if(leaveState == "003" || leaveState == "004" || resumeType == "003"){
 			$.messager.alert('提示', "该学员不能修改休学时长！");
 			return;
 		}
