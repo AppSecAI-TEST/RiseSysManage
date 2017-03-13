@@ -246,6 +246,7 @@
 				else
 				{
 					var classTime = $("#classTime").combobox("getValue");
+					var classTimeName = $("#classTime").combobox("getText");
 					var classRoomId = $("#classRoomId").combobox("getValue");
 					var classLessonHour = $("#classLessonHour").textbox("getValue");
 					if(classTime == "")
@@ -270,8 +271,10 @@
 							classInstId:"${schooltimeInstT.classInstId}",
 							classSchoolId:"${schooltimeInstT.schoolId}",
 							hourRange:classTime,
+							classTime:classTimeName,
 							hours:classLessonHour,
 							roomId:classRoomId,
+							weekTime:"${schooltimeInstT.weekTime}",
 							classType:"${classInstT.classType}",
 							handlerId:"${sessionScope.StaffT.staffId}",
 							attendDate:"${selDateStr}-${dateValue}",

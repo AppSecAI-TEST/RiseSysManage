@@ -254,14 +254,17 @@
 				else
 				{
 					var classTime = $("#classTime").combobox("getValue");
+					var classTimeName = $("#classTime").combobox("getText");
 					var classLessonHour = $("#classLessonHour").textbox("getValue");
 					var classRoomId = $("#classRoomId").combobox("getValue");
 					var obj = {
 						classInstId:"${classInstT.classInstId}",
 						classSchoolId:"${classInstT.schoolId}",
 						hourRange:classTime,
+						classTime:classTimeName,
 						hours:classLessonHour,
 						roomId:classRoomId,
+						weekTime:"${classWeekTime}",
 						classType:"${classInstT.classType}",
 						handlerId:"${sessionScope.StaffT.staffId}",
 						schooltime:'',

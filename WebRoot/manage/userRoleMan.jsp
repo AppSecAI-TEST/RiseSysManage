@@ -142,7 +142,15 @@
 					$("#userRoleDlg").dialog('open').dialog('setTitle','分配用户角色');
 					$("#dgCanUsers").datagrid('loadData',{total:0, rows:[]});
 					gSelRoleId = row.sysRoleId;
-					$("#dgHasUsers").datagrid({url:"/sys/staff/getStaffListByRoleId.do?sysRoleId="+gSelRoleId});
+					$("#dgHasUsers").datagrid({
+						url:"/sys/staff/getStaffListByRoleId.do?sysRoleId="+gSelRoleId,
+						onBeforeLoad:function(){
+							$("#saveUserRoleBtn").linkbutton("disable");
+						},
+						onLoadSuccess:function(){
+							$("#saveUserRoleBtn").linkbutton("enable");
+						}
+					});
 				}
 				else
 				{
@@ -289,7 +297,7 @@
 			</div>
 		</div>
 		<div id="userRoleDlg-buttons">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUserRole()">保存</a>
+			<a href="#" class="easyui-linkbutton" id="saveUserRoleBtn" iconCls="icon-ok" onclick="saveUserRole()">保存</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#userRoleDlg').dialog('close')">取消</a>
 		</div>
 		<div id="dlg" class="easyui-dialog" style="width:480px;height:465px;padding:0px 0px" modal="true" closed="true" buttons="#dlg-buttons">
