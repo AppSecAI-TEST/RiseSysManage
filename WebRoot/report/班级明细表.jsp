@@ -9,6 +9,16 @@
 		<%@ include file="/common/head.jsp" %>
 		<%@ include file="/common/formvalidator.jsp" %>
 		<script type="text/javascript" src="<%=path %>/js/export/classInstDetail.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#xAdd5").datebox({
+					onShowPanel: settingYearMonthPanel
+				});
+				$("#xAdd7").datebox({
+					onShowPanel: settingYearMonthPanel
+				});
+			});
+		</script>
   	</head>
   
   	<body>
@@ -20,7 +30,7 @@
 	  				<tr>
 	  					<td align="right" style="min-width: 80px"><span>校区：</span></td>
 	  					<td style="min-width: 100px">
-	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false" 
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 110px; height: 25px;" editable="false" 
 									data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 					        </select>
 						</td>
@@ -31,7 +41,7 @@
 						</td>
 						<td align="right" style="min-width: 60px"><span>班级：</span></td>
 	  					<td style="min-width: 110px">
-	  						<input name="classInstId" id="classInstId" type="text" class="easyui-textbox" style="width: 110px; height: 25px;"/>
+	  						<input name="classInstId" id="classInstId" type="text" class="easyui-textbox" style="width: 100px; height: 25px;"/>
 						</td>
 						<td align="right" style="min-width: 80px"><span>班级状态：</span></td>
 						<td style="min-width: 130px">
@@ -45,22 +55,31 @@
 	  				<tr>
 	  					<td align="right" style="min-width: 80px"><span>带班老师：</span></td>
 	  					<td style="min-width: 100px">
-	  						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;">
+	  						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 110px; height: 25px;">
 	  						</select>
 	  					</td>
-	  					<td align="right" style="min-width: 80px"><span>班级性质：</span></td>
-	  					<td style="min-width: 110px">
-	  						<input type="checkbox" name="handType" value="'1'"/>&nbsp;<span>一手班</span>
-							&nbsp;&nbsp;<input type="checkbox" name="handType" value="'2'"/>&nbsp;<span>二手班</span>
-	  					</td>
 	  					<td align="right" style="min-width: 60px"><span>年度：</span></td>
-						<td colspan="4" style="min-width: 100px">
-							<select class="easyui-combobox" name="year" id="year" style="width:110px;height: 25px;" 
+						<td style="min-width: 100px">
+							<select class="easyui-combobox" name="year" id="year" style="width:100px;height: 25px;" 
 								editable="false" data-options="valueField:'val',textField:'text'">
 							</select>
 						</td>
+						<td align="right" style="min-width: 60px"><span>X+5：</span></td>
+						<td style="min-width: 100px">
+							<input name="xAdd5" id="xAdd5" type="text" style="width:100px;height: 25px;" class="easyui-datebox" editable="false" data-options="formatter:myYearMonthformatter, parser:myparser"/>
+						</td>
+						<td align="right" style="min-width: 60px"><span>X+7：</span></td>
+						<td style="min-width: 100px">
+							<input name="xAdd7" id="xAdd7" type="text" style="width:100px;height: 25px;" class="easyui-datebox" editable="false" data-options="formatter:myYearMonthformatter, parser:myparser"/>
+						</td>
+						<td width="220px;"></td>
 	  				</tr>
 	  				<tr>
+	  					<td align="right" style="min-width: 80px"><span>班级性质：</span></td>
+	  					<td style="min-width: 110px">
+	  						<input type="checkbox" name="handType" value="'1'"/>&nbsp;<span>一手班</span>
+							&nbsp;<input type="checkbox" name="handType" value="'2'"/>&nbsp;<span>二手班</span>
+	  					</td>
 	  					<td align="right" style="min-width: 80px"><span>开班人数：</span></td>
 	  					<td style="min-width: 100px">
 							<input name="minOpenNum" id="minOpenNum" type="text" class="easyui-numberbox" style="width: 42px; height: 25px;"/>
@@ -68,7 +87,7 @@
 							<input name="maxOpenNum" id="maxOpenNum" type="text" class="easyui-numberbox" style="width: 42px; height: 25px;"/>
 						</td>
 						<td align="right" style="min-width: 80px"><span>在读人数：</span></td>
-	  					<td style="min-width: 110px">
+	  					<td style="min-width: 100px">
 							<input name="minStudyNum" id="minStudyNum" type="text" class="easyui-numberbox" style="width: 42px; height: 25px;"/>
 							<span style="display: inline-block; text-align: center; width: 6px;">-</span>
 							<input name="maxStudyNum" id="maxStudyNum" type="text" class="easyui-numberbox" style="width: 42px; height: 25px;"/>
@@ -80,9 +99,9 @@
 							<input name="maxHigherRate" id="maxHigherRate" type="text" class="easyui-numberbox" style="width: 39px; height: 25px;" data-options="min:0, max:100, precision:0"/>
 							<span style="display: inline-block; text-align: center; width: 4px;">%</span>
 						</td>
-						<td colspan="3" align="left" style="min-width: 210px">
+						<td align="left" style="min-width: 210px">
 							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1064">查询</a>
-							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
+							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 						</td>
 	  				</tr>
 	  			</table>
@@ -93,9 +112,10 @@
 						<tr>
 							<th field="quarterText" align="center" width="5%">季度</th>
 							<th field="seq" align="center" width="5%">序号</th>
+							<th field="schoolName" align="center" width="6%">校区</th>
 							<th field="className" align="center" width="7%">结课班级</th> 
 							<th field="licenseRateText" align="center" width="6%">班级持证率</th>
-							<th field="teacherName" align="center" width="10%">带班老师</th>
+							<th field="teacherName" align="center" width="12%">带班老师</th>
 							<th field="finishMonth" align="center" width="5%">结课月</th>
 							<th field="openClassNum" align="center" width="6%">开班人数</th>
 							<th field="inSchoolNum" align="center" width="6%">转校转入</th>
@@ -111,6 +131,7 @@
 							<th field="higherNum" align="center" width="7%">已升学人数</th>
 							<th field="higherRate" align="center" width="7%">当前升学率</th>
 							<th field="higherRateGoal" align="center" width="7%">升学率目标</th>
+							<th field="rateNum50" align="center" width="10%">距50%升学率缺口</th>
 							<th field="rateNum90" align="center" width="7%">升学缺口</th>
 							<th field="handTypeText" align="center" width="6%">班级性质</th>
 							<th field="changeRemark" align="center" width="15%">更换老师情况</th>
