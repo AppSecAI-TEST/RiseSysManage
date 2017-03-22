@@ -64,14 +64,19 @@ $(document).ready(function() {
 		} else {
 			initPageNumber("list_data");
 			var object = $("#qryFm").serializeObject();
-			var obj = JSON.stringify(object);
-			obj = obj.substring(0, obj.length - 1);
+			var tableName = $("#tableName").val();
 			var funcNodeId = $("#qryBtn").attr("funcNodeId");
-			obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
+			if("report_teacher_service_rate" == tableName) {
+				object.staffId = $("#staffId").val();
+				object.staffSchoolId = $("#staffSchoolId").val();
+				object.staffPost = "," + $("#staffPost").val() + ",";
+			}
+			var obj = JSON.stringify(object);
 			$('#list_data').datagrid({
 				url : "/sys/pubData/qryDataListByPage.do",
 				queryParams:{
-					param : obj
+					param: obj,
+					funcNodeId: funcNodeId
 				},
 				onLoadSuccess:function(){
 					onLoadSuccess();

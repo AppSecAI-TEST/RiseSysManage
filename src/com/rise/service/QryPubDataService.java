@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.rise.pub.invoke.ServiceEngine;
 import com.rise.pub.util.ObjectCensor;
+import com.rise.pub.util.StringUtil;
 
 @Service
 public class QryPubDataService 
@@ -58,26 +59,40 @@ public class QryPubDataService
 		return ServiceEngine.invokeHttp(param);
 	}
 
-	public String qryDataListByPage(String page, String rows, String param, String funcNodeId) throws Exception 
-	{
+	public String qryDataListByPage(String page, String rows, String param, String funcNodeId) throws Exception {
 		JSONObject obj = new JSONObject();
-		if(ObjectCensor.isStrRegular(param))
-		{
+		if (ObjectCensor.isStrRegular(param)) {
 			obj = JSONObject.fromObject(param);
 		}
-		if(ObjectCensor.isStrRegular(page,rows))
-		{
+		if (ObjectCensor.isStrRegular(page, rows)) {
 			Integer pageNum = Integer.parseInt(page) - 1;
 			Integer pageSize = Integer.parseInt(rows);
 			pageNum = pageNum * pageSize;
 			obj.element("start", pageNum);
 			obj.element("rownum", pageSize);
 		}
-		if(ObjectCensor.isStrRegular(funcNodeId))
-		{
+		if (ObjectCensor.isStrRegular(funcNodeId)) {
+			if("1072".equals(funcNodeId)) {
+				String schoolId = StringUtil.getJSONObjectKeyVal(obj, "schoolId");
+				String staffSchoolId = StringUtil.getJSONObjectKeyVal(obj, "staffSchoolId");
+				if(!ObjectCensor.isStrRegular(schoolId)) {
+					//总部员工  且 没有选择校区
+					if("10".equals(staffSchoolId)) {
+						funcNodeId = "1089";
+					} else {
+						//角色为区域校长或者区域教务长 且没有选校区 则查询片区的数据
+						String staffPost = StringUtil.getJSONObjectKeyVal(obj, "staffPost");
+						if(staffPost.indexOf(",24,") > -1 || staffPost.indexOf(",3,") > -1) {
+							funcNodeId = "1090";
+							String staffId = StringUtil.getJSONObjectKeyVal(obj, "staffId");
+							obj.element("staffId", staffId);
+						}
+					}
+				}
+			}
 			obj.element("funcNodeId", funcNodeId);
 		}
-		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1019\",securityCode:\"0000000000\",params:{param:"+obj+"},rtnDataFormatType:\"user-defined\"}";
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1019\",securityCode:\"0000000000\",params:{param:" + obj + "},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
 	

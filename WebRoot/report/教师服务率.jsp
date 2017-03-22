@@ -14,7 +14,9 @@
   	<body>
   		<div style="margin-right:5px;">
   			<input type="hidden" id="resourceId" value="805">	
-  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId}"/>
+  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
+  			<input type="hidden" id="staffSchoolId" value="${sessionScope.StaffT.schoolId }"/>
+  			<input type="hidden" id="staffPost" value="${sessionScope.StaffT.post }"/>
   			<input type="hidden" id="tableName" value="report_teacher_service_rate"/>
   			<form id="qryFm">
   				<table class="search_tab">
@@ -46,21 +48,22 @@
 					title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
 						<tr>
-							<th field="schoolName" align="center" width="5%" >校区</th>
+							<th field="schoolName" align="center" width="7%" >校区</th>
 							<th field="studentInSchoolNum" align="center" width="4%" >在校</br>生人数</th>
-							<th field="studyingNum" align="center" width="3%" >在读</br>人数</th>
+							<th field="studyingNum" align="center" width="4%" >在读</br>人数</th>
 							<th field="studyingClassNum" align="center" width="5%" >在读班</br>级总数</th>
 							<th field="avgClassStudyingNum" align="center" width="4%" >平均班</br>级人数</th>
 							<th field="avgClassNum" align="center" width="4%" >平均带</br>班量</th>
 							<th field="teacherNum" align="center" width="4%" >在职教</br>师总数</th>
 							<th field="nativeTeacherNum" align="center" width="5%" >在职教</br>师-中教</th>
+							<th field="studyPlanTeacherNum" align="center" width="5%" >学习规划</br>师总数</th>
 							<th field="lower3TeacherNum" align="center" width="5%" >入职3个</br>月内教</br>师人数</th>
 							<th field="lower3ServiceNum" align="center" width="6%" >入职3个月</br>内教师</br>服务人数</th>
 							<th field="avgLower3ServiceRate" align="center" width="8%" >入职3个月内</br>教师在读平</br>均服务效率</th>
 							<th field="above3TeacherNum" align="center" width="6%" >入职3个月</br>以上普通</br>教师人数</th>
 							<th field="above3ServiceNum" align="center" width="7%" >入职3个月</br>以上普通教</br>师服务人数</th>
 							<th field="avgAbove3ServiceRate" align="center" width="8%" >入职3个月</br>以上在读平</br>均服务效率</th>
-							<th field="avgSchoolServiceRate" align="center" width="8%" >普通教师在</br>校服务效率</th>
+							<th field="avgSchoolServiceRate" align="center" width="8%" >教师在</br>校服务效率</br>（含规划师）</th>
 							<th field="teacherCompilation" align="center" width="5%" >教师编制</th>
 							<th field="preLeaveNum" align="center" width="6%" >1个月内</br>待离职人数</th>
 							<th field="avgLeaveServiceRate" align="center" width="6%" >离职后在读</br>服务效率</th>

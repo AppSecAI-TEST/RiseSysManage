@@ -52,41 +52,28 @@ public class AuthController
 	
 	//验证登录信息
 	@RequestMapping(params = "method=authStaff")
-	public void authStaff(HttpServletResponse response , HttpServletRequest request , String username , String password , String code)
-	{
+	public void authStaff(HttpServletResponse response, HttpServletRequest request, String username, String password, String code) {
 		PrintWriter out = null;
 		String retVal = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			HttpSession session = request.getSession();
-			String srccode = (String)session.getAttribute("code");
-			if(ObjectCensor.isStrRegular(srccode))
-			{
-				if(srccode.equals(code))
-				{
+			String srccode = (String) session.getAttribute("code");
+			if (ObjectCensor.isStrRegular(srccode)) {
+				if (srccode.equals(code)) {
 					retVal = authService.userCenter(session, username, password);
-				}
-				else
-				{
+				} else {
 					retVal = "验证码错误,请核实后重新尝试";
 				}
-			}
-			else
-			{
+			} else {
 				retVal = "验证码错误,请核实后重新尝试";
 			}
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null)
-			{
+		} finally {
+			if (out != null) {
 				out.close();
 			}
 		}

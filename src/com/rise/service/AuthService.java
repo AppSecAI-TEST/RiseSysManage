@@ -35,32 +35,25 @@ public class AuthService
 		return String.valueOf(randNum%10000);
 	}
 	
-	public String userCenter(HttpSession session , String username , String password) throws Exception
-	{
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2001\",securityCode:\"0000000000\",params:{userName:\""+username+"\",password:\""+password+"\"},rtnDataFormatType:\"user-defined\"}";
+	public String userCenter(HttpSession session, String username, String password) throws Exception {
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS2001\",securityCode:\"0000000000\",params:{userName:\"" + username + "\",password:\"" + password + "\"},rtnDataFormatType:\"user-defined\"}";
 		String result = ServiceEngine.invokeHttp(param);
 		String retVal = null;
-		try
-		{
+		try {
 			JSONObject json = JSONObject.fromObject(result);
 			String flag = StringUtil.getJSONObjectKeyVal(json, "flag");
-			if(!ObjectCensor.isStrRegular(flag))
-			{
+			if (!ObjectCensor.isStrRegular(flag)) {
 				ObjectMapper mapper = JacksonJsonMapper.getInstance();
 				JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class, FuncNodeTree.class);
-				List funcNodeInfo = (List)mapper.readValue(json.getJSONArray("funcNodeInfo").toString(), javaType);
-				StaffT staffT = (StaffT)JSONObject.toBean(json.getJSONObject("staff"), StaffT.class);
+				List funcNodeInfo = (List) mapper.readValue(json.getJSONArray("funcNodeInfo").toString(), javaType);
+				StaffT staffT = (StaffT) JSONObject.toBean(json.getJSONObject("staff"), StaffT.class);
 				session.setAttribute("StaffT", staffT);
 				session.setAttribute("funcNodeInfo", funcNodeInfo);
 				retVal = "success";
-			}
-			else
-			{
+			} else {
 				retVal = StringUtil.getJSONObjectKeyVal(json, "msg");
 			}
-		}
-		catch(Exception err)
-		{
+		} catch (Exception err) {
 			err.printStackTrace();
 			retVal = result;
 		}

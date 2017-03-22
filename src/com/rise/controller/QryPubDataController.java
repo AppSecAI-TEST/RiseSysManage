@@ -286,24 +286,17 @@ public class QryPubDataController
 	
 	//查询学员资料列表
 	@RequestMapping(value = "/qryDataListByPage.do")
-	public void qryDataListByPage(String page, String rows, String param, String funcNodeId, HttpServletResponse response)
-	{
+	public void qryDataListByPage(String page, String rows, String param, String funcNodeId, HttpServletResponse response) {
 		PrintWriter out = null;
-		try
-		{
+		try {
 			response.setCharacterEncoding("UTF-8");
 			out = response.getWriter();
 			String retVal = qryPubDataService.qryDataListByPage(page, rows, param, funcNodeId);
 			out.write(retVal);
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally
-		{
-			if(out != null)
-			{
+		} finally {
+			if (out != null) {
 				out.close();
 			}
 		}
