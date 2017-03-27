@@ -16,6 +16,8 @@
   			<input type="hidden" id="resourceId" value="754">
   			<input type="hidden" id="tableName" value="report_school_exception"/>
   			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId}"/>
+  			<input type="hidden" id="staffSchoolId" value="${sessionScope.StaffT.schoolId }"/>
+  			<input type="hidden" id="staffPost" value="${sessionScope.StaffT.post }"/>
   			<form id="qryFm">
 	  			<table class="search_tab">
 	  				<tr>

@@ -72,19 +72,30 @@ public class QryPubDataService
 			obj.element("rownum", pageSize);
 		}
 		if (ObjectCensor.isStrRegular(funcNodeId)) {
-			if("1072".equals(funcNodeId)) {
+			if("1072".equals(funcNodeId) || "1065".equals(funcNodeId)) {
 				String schoolId = StringUtil.getJSONObjectKeyVal(obj, "schoolId");
 				String staffSchoolId = StringUtil.getJSONObjectKeyVal(obj, "staffSchoolId");
 				if(!ObjectCensor.isStrRegular(schoolId)) {
 					//总部员工  且 没有选择校区
 					if("10".equals(staffSchoolId)) {
-						funcNodeId = "1089";
+						if("1072".equals(funcNodeId)) {
+							funcNodeId = "1089";
+						} else if("1065".equals(funcNodeId)) {
+							funcNodeId = "1092";
+						}
 					} else {
 						//角色为区域校长或者区域教务长 且没有选校区 则查询片区的数据
-						String staffPost = StringUtil.getJSONObjectKeyVal(obj, "staffPost");
-						if(staffPost.indexOf(",24,") > -1 || staffPost.indexOf(",3,") > -1) {
-							funcNodeId = "1090";
-							String staffId = StringUtil.getJSONObjectKeyVal(obj, "staffId");
+						String staffId = StringUtil.getJSONObjectKeyVal(obj, "staffId");
+						//String staffPost = StringUtil.getJSONObjectKeyVal(obj, "staffPost");
+						String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1019\",securityCode:\"0000000000\",params:{param:{staffId:\"" + staffId + "\",funcNodeId:\"1091\"}},rtnDataFormatType:\"user-defined\"}";
+						JSONObject rstObj = JSONObject.fromObject(ServiceEngine.invokeHttp(params));
+						String total = StringUtil.getJSONObjectKeyVal(rstObj, "total");
+						if(ObjectCensor.isStrRegular(total) && Integer.parseInt(total) > 0) {
+							if("1072".equals(funcNodeId)) {
+								funcNodeId = "1090";
+							} else if("1065".equals(funcNodeId)) {
+								funcNodeId = "1093";
+							}
 							obj.element("staffId", staffId);
 						}
 					}

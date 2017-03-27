@@ -66,7 +66,7 @@ $(document).ready(function() {
 			var object = $("#qryFm").serializeObject();
 			var tableName = $("#tableName").val();
 			var funcNodeId = $("#qryBtn").attr("funcNodeId");
-			if("report_teacher_service_rate" == tableName) {
+			if("report_teacher_service_rate" == tableName || "report_school_exception" == tableName) {
 				object.staffId = $("#staffId").val();
 				object.staffSchoolId = $("#staffSchoolId").val();
 				object.staffPost = "," + $("#staffPost").val() + ",";
@@ -74,12 +74,22 @@ $(document).ready(function() {
 			var obj = JSON.stringify(object);
 			$('#list_data').datagrid({
 				url : "/sys/pubData/qryDataListByPage.do",
-				queryParams:{
+				queryParams: {
 					param: obj,
 					funcNodeId: funcNodeId
 				},
-				onLoadSuccess:function(){
+				onLoadSuccess: function() {
 					onLoadSuccess();
+				},
+				rowStyler: function(index, row) {
+					var schoolName = row.schoolName; 
+					if(schoolName != '' && schoolName != null && schoolName != undefined) {
+						if (schoolName.indexOf('片区') > -1) {
+							return 'background-color:yellow;font-weight:bold;';
+						} else if(schoolName.indexOf('总校') > -1) {
+							return 'background-color:orange;font-weight:bold;';
+						}
+					}
 				}
 			});
 		}
