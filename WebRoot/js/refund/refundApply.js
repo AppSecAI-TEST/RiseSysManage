@@ -397,10 +397,12 @@ $(document).ready(function() {
 								refundVisitObj.visitDate = obj.teacherOrAdviserVisitDate;
 								refundVisitObj.remark = obj.teacherOrAdviserVisitRemark;
 								refundVisitObj.handlerId = obj.handlerId;
-							} else if(i == 1) {
+							} else if(i == 1)
+							{
 								var visitPersonTwo = $("input:radio[name='visitPersonTwo']:checked").val();
 								refundVisitObj.userType = visitPersonTwo;
-								if("academic" == visitPersonTwo) {
+								if("academic" == visitPersonTwo) 
+								{
 									refundVisitObj.visitUserId = obj.academicId;
 								} else {
 									refundVisitObj.visitUserId = obj.salesId;
@@ -415,6 +417,10 @@ $(document).ready(function() {
 								refundVisitObj.remark = obj.headmasterVisitRemark;
 								refundVisitObj.handlerId = obj.handlerId;
 							} */
+							if(refundVisitObj.visitUserId=='')
+							{
+								continue;
+							}
 							refundVisitArray += JSON.stringify(refundVisitObj) + ",";
 						}
 						if(refundVisitArray.length > 1) {
@@ -614,12 +620,16 @@ function checkParam() {
 				}
 			}
 		}
+		/* 
 		var visitPersonTwo = $("input:radio[name='visitPersonTwo']:checked").val();
-		if(visitPersonTwo == null || visitPersonTwo == "" || visitPersonTwo == undefined || visitPersonTwo == "null") {
+		if(visitPersonTwo == null || visitPersonTwo == "" || visitPersonTwo == undefined || visitPersonTwo == "null")
+		{
 			showMessage('提示', "请选择学术或销售主管的回访人员类型！");
 			return false;
-		} else {
-			if("sales" == visitPersonTwo) {
+		} else
+		{
+			if("sales" == visitPersonTwo) 
+			{
 				var salesId = $("#salesId").combobox('getValue');
 				if(salesId == null || salesId == "" || salesId == undefined || salesId == "null") {
 					showMessage('提示', "请选择销售主管的回访人员！");
@@ -632,7 +642,7 @@ function checkParam() {
 					return false;
 				}
 			}
-		}
+		}*/
 	} else {
 		showMessage('提示', "请选择课程" + index + "的渠道来源！");
 		return false;
