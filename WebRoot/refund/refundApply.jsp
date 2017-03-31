@@ -386,13 +386,13 @@
   							</td>
   							<td align="right" width="10%"><span>回访时间：</span></td>
   							<td width="45%">
-  								<input name="academicOrSalesVisitDate" id="academicOrSalesVisitDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;"/>
+  								<input name="academicOrSalesVisitDate" id="academicOrSalesVisitDate" type="text" class="easyui-datebox"  style="width: 100px; height: 28px;"/>
   							</td>
   						</tr>
   						<tr>
   							<td align="right" width="10%"><span>回访记录：</span></td>
   							<td colspan="3" width="90%">
-  								<textarea rows="6" cols="122" id="academicOrSalesVisitRemark" name="academicOrSalesVisitRemark" class="textarea easyui-validatebox" required="true" validType="length[0,120]"></textarea>
+  								<textarea rows="6" cols="122" id="academicOrSalesVisitRemark" name="academicOrSalesVisitRemark" class="textarea easyui-validatebox"  validType="length[0,120]"></textarea>
   							</td>
   						</tr>
   					</table>
