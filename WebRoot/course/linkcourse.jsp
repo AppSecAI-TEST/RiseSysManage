@@ -245,7 +245,7 @@ initPayDate();
 	var adviserTeacherAid="<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherA")%>";
 	var adviserTeacherBid="<%=StringUtil.getJSONObjectKeyVal(object,"adviserTeacherB")%>";
 	
-	var schools=getSchools();
+	var schools=getSchoolAll();
 	var teachers=getTeachers();
 	$("#adviserTeacherA_school").combobox({data:schools});
 	$("#adviserTeacherB_school").combobox({data:schools});

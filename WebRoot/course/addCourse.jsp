@@ -750,7 +750,7 @@ var amount = 0;//实缴金额
 var favorIds = "";//短期课其他优惠
 
 initPayDate();
-var schools = getSchools();
+var schools = getSchoolAll();
 var teachers = getTeachers();
 var giftFlag = false;
 

@@ -16,11 +16,19 @@ function getSchools()
 	return loadData(url);
 }
 
+function getSchoolAll()
+{
+	var url="/sys/pubData/qrySchoolListWithTS.do";
+	return loadData(url);
+}
+
 function getTeachers()
 {
 	var url="/sys/pubData/qryTeacherList.do";
 	return loadData(url);
 }
+
+
 
 function getAdvister()
 {

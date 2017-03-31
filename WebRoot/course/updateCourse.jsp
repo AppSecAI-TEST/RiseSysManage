@@ -708,7 +708,7 @@ var giftFlag=false;//赠品、赠课是否已消耗
 var courseImgUrl = "";
 
 
-var schools=getSchools();
+var schools=getSchoolAll();
 var teachers=getTeachers();
 var advisters=getAdvister();
 

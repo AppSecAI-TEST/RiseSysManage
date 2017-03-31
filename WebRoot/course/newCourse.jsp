@@ -584,7 +584,7 @@ var minus = 0;//抵扣金额
 var favorAmount = 0;//优惠金额
 var totalAmount = 0;//课程金额
 var amount = 0;//实缴金额
-var schools=getSchools();
+var schools=getSchoolAll();
 var teachers=getTeachers();
 var advisters=getAdvister();
 
