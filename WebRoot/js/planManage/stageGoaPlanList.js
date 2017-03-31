@@ -176,6 +176,8 @@ function showUpdate() {
 
 function update() {
 	if(checkParam()) {
+		var planIds = "";
+		var obj = new Object();
 		var array = new Array();
 		var schoolId = $("#updateSchoolId").val();
 		var planYear = $("#updatePlanYear").val();
@@ -183,8 +185,11 @@ function update() {
 		$("[name='value']").each(function(i, obj) {
 			var text = $("#text_" + i).html();
 			var stageId = text.substring(0, text.length - 5);
+			var planId = $("#planId_" + stageId).val();
+			if(planId != null && planId != "" && planId != undefined) {
+				planIds += planId + ",";
+			}
 			var param = {
-				planId: $("#planId_" + stageId).val(),
 				schoolId: schoolId,
 				planYear: planYear,
 				firstValue: obj.value,
@@ -195,10 +200,15 @@ function update() {
 			}
 			array.push(param);
 		});
+		if(planIds != "" && planIds != null && planIds != undefined) {
+			planIds = planIds.substring(0, planIds.length - 1);
+		}
+		obj.planId = planIds;
+		obj.array = JSON.stringify(array);
 		$.ajax({
 			type : "POST",
 			url : "/sys/planManage/update.do",
-			data :"param=" + JSON.stringify(array),
+			data :"param=" + JSON.stringify(obj),
 			async : true,
 			dataType: "json",
 			beforeSend : function() {

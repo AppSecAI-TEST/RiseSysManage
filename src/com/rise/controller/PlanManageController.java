@@ -145,4 +145,21 @@ public class PlanManageController
 			}
 		}
 	}
+	
+	@RequestMapping("/qryDataListByPage.do")
+	public void qryDataListByPage(String param, HttpServletResponse response) {
+		PrintWriter out = null;
+		try {
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = pms.qryDataListByPage(param);
+			out.write(retVal);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (out != null) {
+				out.close();
+			}
+		}
+	}
 }

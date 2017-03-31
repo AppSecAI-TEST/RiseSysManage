@@ -38,7 +38,7 @@ $(document).ready(function() {
 		object.funcNodeId = funcNodeId;
     	var obj = JSON.stringify(object);
     	$('#list_data').datagrid({
-    		url : "/sys/pubData/qryDataListByPage.do",
+    		url : "/sys/planManage/qryDataListByPage.do",
     		queryParams:{
     			param : obj
     		},
@@ -75,58 +75,65 @@ $(document).ready(function() {
 });
 
 function onLoadSuccess() {
-	MergeCellWidthSchool("list_data", "schoolName,planYear");
+	MergeCellWidthSchool("list_data", "schoolName,planYear,planQuarter");
 }
 
- function MergeCellWidthSchool(tableID, fldList) {
-            var Arr = fldList.split(",");
-            var dg = $('#' + tableID);
-            var fldName;
-            var RowCount = dg.datagrid("getRows").length;
-            var span;
-            var PerValue = "";
-            var PreSchool ="";
-            var CurValue = "";
-            var CurSchool ="";
-            var length = Arr.length - 1;
-            for (i = length; i >= 0; i--) {
-                fldName = Arr[i];
-                PerValue = "";
-                PreSchool="";
-                span = 1;
-                for (row = 0; row <= RowCount; row++) {
-                    if (row == RowCount) {
-                        CurValue = "";
-                        CurSchool="";
-                    }
-                    else {
-                        CurValue = dg.datagrid("getRows")[row][fldName];
-                        CurSchool =  dg.datagrid("getRows")[row]["schoolId"]
-                    }
-                    if (PerValue == CurValue&&PreSchool==CurSchool) {
-                        span += 1;
-                    }
-                    else {
-                        var index = row - span;
-                        dg.datagrid('mergeCells', {
-                            index: index,
-                            field: fldName,
-                            rowspan: span,
-                            colspan: null
-                        });
-                        dg.datagrid('mergeCells', {
-                            index: index,
-                            field: "ck",
-                            rowspan: span,
-                            colspan: null
-                        });
-                        span = 1;
-                        PerValue = CurValue;
-                        PreSchool = CurSchool;
-                    }
+function MergeCellWidthSchool(tableID, fldList) {
+	var Arr = fldList.split(",");
+	var dg = $('#' + tableID);
+	var fldName;
+	var RowCount = dg.datagrid("getRows").length;
+	var span;
+	var PerValue = "";
+	var PreSchool ="";
+	var CurValue = "";
+	var CurSchool ="";
+	var length = Arr.length - 1;
+	for (i = length; i >= 0; i--) {
+		fldName = Arr[i];
+		PerValue = "";
+		PreSchool="";
+		span = 1;
+		for (row = 0; row <= RowCount; row++) {
+			if (row == RowCount) {
+				CurValue = "";
+				CurSchool="";
+			} else {
+				CurValue = dg.datagrid("getRows")[row][fldName];
+				CurSchool =  dg.datagrid("getRows")[row]["schoolId"]
+			}
+			if (PerValue == CurValue && PreSchool == CurSchool) {
+				span += 1;
+			} else {
+				var index = row - span;
+                dg.datagrid('mergeCells', {
+                	index: index,
+                	field: fldName,
+                	rowspan: span,
+                	colspan: null
+                });
+                if("planYear" == fldName) {
+                	dg.datagrid('mergeCells', {
+                		index: index,
+                		field: "ck",
+                		rowspan: span,
+                		colspan: null
+                	});
+                } else if("planQuarter" == fldName) {
+                	dg.datagrid('mergeCells', {
+                		index: index,
+                		field: "valueVal",
+                		rowspan: span,
+                		colspan: null
+                	});
                 }
-            }
-        }
+                span = 1;
+                PerValue = CurValue;
+                PreSchool = CurSchool;
+			}
+		}
+	}
+}
 
 function showAdd() {
 	$("#dlg").dialog('open').dialog('setTitle', '添加年度升学目标计划');
@@ -157,6 +164,24 @@ function add() {
 				handlerId: handlerId
 			}
 			array.push(param);
+		});
+		var planMonth = 0;
+		$("[name='value']").each(function(i, obj) {
+			var firstValue = i + 1;
+			$("[name='month_" + firstValue + "']").each(function(j, object) {
+				planMonth++;
+				var param = {
+					schoolId: schoolId,
+					planYear: planYear,
+					planMonth: planMonth,
+					firstValue: firstValue,
+					secondValue: object.value,
+					planType: "goa",
+					state: "00A",
+					handlerId: handlerId
+				}
+				array.push(param);
+			});
 		});
 		$.ajax({
 			type : "POST",
@@ -217,8 +242,17 @@ function showUpdate() {
 			success : function(data) {
 				hideProgressLoader();
 				$.each(data, function(i, obj) {
-					$("#planId_" + (i + 1)).val(obj.planId);
-					$("#value_" + (i + 1)).numberbox("setValue", obj.secondValue);
+					var planId = obj.planId;
+					var planMonth = obj.planMonth;
+					var secondValue = obj.secondValue;
+					if(planMonth == "0") {
+						var firstValue = obj.firstValue;
+						$("#planId_quarter_" + firstValue).val(planId);
+						$("#value_" + firstValue).numberbox("setValue", secondValue);
+					} else {
+						$("#planId_month_" + planMonth).val(planId);
+						$("#planMonth_" + planMonth).numberbox("setValue", secondValue);
+					}
 				});
 			}
 		});
@@ -229,13 +263,18 @@ function showUpdate() {
 
 function update() {
 	if(checkParam()) {
+		var planIds = "";
+		var obj = new Object();
 		var array = new Array();
 		var schoolId = $("#updateSchoolId").val();
 		var planYear = $("#updatePlanYear").val();
 		var handlerId = $("#handlerId").val();
 		$("[name='value']").each(function(i, obj) {
+			var planId = $("#planId_quarter_" + (i + 1)).val();
+			if(planId != null && planId != "" && planId != undefined) {
+				planIds += planId + ",";
+			}
 			var param = {
-				planId: $("#planId_" + (i + 1)).val(),
 				schoolId: schoolId,
 				planYear: planYear,
 				firstValue: i + 1,
@@ -246,10 +285,37 @@ function update() {
 			}
 			array.push(param);
 		});
+		var planMonth = 0;
+		$("[name='value']").each(function(i, obj) {
+			var firstValue = i + 1;
+			$("[name='month_" + firstValue + "']").each(function(j, object) {
+				planMonth++;
+				var planId = $("#planId_month_" + planMonth).val();
+				if(planId != null && planId != "" && planId != undefined) {
+					planIds += planId + ",";
+				}
+				var param = {
+					schoolId: schoolId,
+					planYear: planYear,
+					planMonth: planMonth,
+					firstValue: firstValue,
+					secondValue: object.value,
+					planType: "goa",
+					state: "00A",
+					handlerId: handlerId
+				}
+				array.push(param);
+			});
+		});
+		if(planIds != "" && planIds != null && planIds != undefined) {
+			planIds = planIds.substring(0, planIds.length - 1);
+		}
+		obj.planId = planIds;
+		obj.array = JSON.stringify(array);
 		$.ajax({
 			type : "POST",
 			url : "/sys/planManage/update.do",
-			data :"param=" + JSON.stringify(array),
+			data :"param=" + JSON.stringify(obj),
 			async : true,
 			dataType: "json",
 			beforeSend : function() {
@@ -362,6 +428,14 @@ function checkParam() {
 	if(fourthValue == "" || fourthValue == null || fourthValue == undefined) {
 		$.messager.alert('提示', "请先填写四季度升学目标");
 		return false;
+	}
+	for(var i = 0; i < 12; i++) {
+		var month = i + 1;
+		var planMonth = $("#planMonth_" + month).numberbox("getValue");
+		if(planMonth == "" || planMonth == null || planMonth == undefined) {
+			$.messager.alert('提示', "请先填写" + month + "月升学目标");
+			return false;
+		}
 	}
 	return true;
 }

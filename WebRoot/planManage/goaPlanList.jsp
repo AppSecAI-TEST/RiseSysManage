@@ -41,11 +41,13 @@
 	 			toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
-						<th data-options="field:'ck',checkbox:true" width="10%"></th>
-						<th data-options="field:'schoolName', width:'20%', align:'center'"><span>校区</span></th>
-						<th data-options="field:'planYear', width:'20%', align:'center'"><span>年度</span></th>
-						<th data-options="field:'planQuarter', width:'20%', align:'center'"><span>季度</span></th>
-						<th data-options="field:'valueVal', width:'30%', align:'center'"><span>升学目标</span></th>            
+						<th data-options="field:'ck',checkbox:true" width="6%"></th>
+						<th data-options="field:'schoolName', width:'10%', align:'center'"><span>校区</span></th>
+						<th data-options="field:'planYear', width:'10%', align:'center'"><span>年度</span></th>
+						<th data-options="field:'planMonth', width:'10%', align:'center'"><span>月度</span></th>
+						<th data-options="field:'planMonthValueVal', width:'27%', align:'center'"><span>月度升学目标</span></th>      
+						<th data-options="field:'planQuarter', width:'10%', align:'center'"><span>季度</span></th>
+						<th data-options="field:'valueVal', width:'27%', align:'center'"><span>季度升学目标</span></th>     
 					</tr>
 				</thead>
 			</table>
@@ -57,10 +59,6 @@
 	 		<div id="dlg" class="easyui-dialog" style="width: 580px; height: 350px; padding: 10px 20px" closed="true" data-options="modal:true" buttons="#dlgBtn">
 	  			<form id="fm">
 	  				<input id="type" type="hidden"/>
-	  				<input id="planId_1" type="hidden" value=""/>
-	  				<input id="planId_2" type="hidden" value=""/>
-	  				<input id="planId_3" type="hidden" value=""/>
-	  				<input id="planId_4" type="hidden" value=""/>
 	  				<input id="updateSchoolId" type="hidden" value=""/>
 	  				<input id="updatePlanYear" type="hidden" value=""/>
 	  				<table style="width: 100%;" cellSpacing='0' cellPadding='5'>
@@ -84,25 +82,113 @@
 	  					<tr>
 	  						<td style="text-align: right;"><span>一季度升学目标：</span></td>
 	  						<td>
+	  							<input id="planId_quarter_1" type="hidden" value=""/>
 		  						<input type="text" class="easyui-numberbox" id="value_1" name="value" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+	  						</td>
+	  					</tr>
+	  					<tr>
+	  						<td style="text-align: right;"><span>1月升学目标：</span></td>
+	  						<td>
+	  							<input id="planId_month_1" type="hidden" value=""/>
+		  						<input type="text" class="easyui-numberbox" id="planMonth_1" name="month_1" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+	  						</td>
+	  					</tr>
+	  					<tr>
+	  						<td style="text-align: right;"><span>2月升学目标：</span></td>
+	  						<td>
+	  							<input id="planId_month_2" type="hidden" value=""/>
+		  						<input type="text" class="easyui-numberbox" id="planMonth_2" name="month_1" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+	  						</td>
+	  					</tr>
+	  					<tr>
+	  						<td style="text-align: right;"><span>3月升学目标：</span></td>
+	  						<td>
+	  							<input id="planId_month_3" type="hidden" value=""/>
+		  						<input type="text" class="easyui-numberbox" id="planMonth_3" name="month_1" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
 	  						</td>
 	  					</tr>
 	  					<tr>
 	  						<td style="text-align: right;"><span>二季度升学目标：</span></td>
 	  						<td>
+	  							<input id="planId_quarter_2" type="hidden" value=""/>
 		  						<input type="text" class="easyui-numberbox" id="value_2" name="value" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+	  						</td>
+	  					</tr>
+	  					<tr>
+	  						<td style="text-align: right;"><span>4月升学目标：</span></td>
+	  						<td>
+	  							<input id="planId_month_4" type="hidden" value=""/>
+		  						<input type="text" class="easyui-numberbox" id="planMonth_4" name="month_2" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+	  						</td>
+	  					</tr>
+	  					<tr>
+	  						<td style="text-align: right;"><span>5月升学目标：</span></td>
+	  						<td>
+	  							<input id="planId_month_5" type="hidden" value=""/>
+		  						<input type="text" class="easyui-numberbox" id="planMonth_5" name="month_2" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+	  						</td>
+	  					</tr>
+	  					<tr>
+	  						<td style="text-align: right;"><span>6月升学目标：</span></td>
+	  						<td>
+	  							<input id="planId_month_6" type="hidden" value=""/>
+		  						<input type="text" class="easyui-numberbox" id="planMonth_6" name="month_2" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
 	  						</td>
 	  					</tr>
 	  					<tr>
 	  						<td style="text-align: right;"><span>三季度升学目标：</span></td>
 	  						<td>
+	  							<input id="planId_quarter_3" type="hidden" value=""/>
 		  						<input type="text" class="easyui-numberbox" id="value_3" name="value" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+	  						</td>
+	  					</tr>
+	  					<tr>
+	  						<td style="text-align: right;"><span>7月升学目标：</span></td>
+	  						<td>
+	  							<input id="planId_month_7" type="hidden" value=""/>
+		  						<input type="text" class="easyui-numberbox" id="planMonth_7" name="month_3" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+	  						</td>
+	  					</tr>
+	  					<tr>
+	  						<td style="text-align: right;"><span>8月升学目标：</span></td>
+	  						<td>
+	  							<input id="planId_month_8" type="hidden" value=""/>
+		  						<input type="text" class="easyui-numberbox" id="planMonth_8" name="month_3" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+	  						</td>
+	  					</tr>
+	  					<tr>
+	  						<td style="text-align: right;"><span>9月升学目标：</span></td>
+	  						<td>
+	  							<input id="planId_month_9" type="hidden" value=""/>
+		  						<input type="text" class="easyui-numberbox" id="planMonth_9" name="month_3" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
 	  						</td>
 	  					</tr>
 	  					<tr>
 	  						<td style="text-align: right;"><span>四季度升学目标：</span></td>
 	  						<td>
+	  							<input id="planId_quarter_4" type="hidden" value=""/>
 		  						<input type="text" class="easyui-numberbox" id="value_4" name="value" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+	  						</td>
+	  					</tr>
+	  					<tr>
+	  						<td style="text-align: right;"><span>10月升学目标：</span></td>
+	  						<td>
+	  							<input id="planId_month_10" type="hidden" value=""/>
+		  						<input type="text" class="easyui-numberbox" id="planMonth_10" name="month_4" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+	  						</td>
+	  					</tr>
+	  					<tr>
+	  						<td style="text-align: right;"><span>11月升学目标：</span></td>
+	  						<td>
+	  							<input id="planId_month_11" type="hidden" value=""/>
+		  						<input type="text" class="easyui-numberbox" id="planMonth_11" name="month_4" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+	  						</td>
+	  					</tr>
+	  					<tr>
+	  						<td style="text-align: right;"><span>12月升学目标：</span></td>
+	  						<td>
+	  							<input id="planId_month_12" type="hidden" value=""/>
+		  						<input type="text" class="easyui-numberbox" id="planMonth_12" name="month_4" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
 	  						</td>
 	  					</tr>
 	  				</table>
