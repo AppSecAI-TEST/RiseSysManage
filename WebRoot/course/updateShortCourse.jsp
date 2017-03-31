@@ -278,7 +278,7 @@ var amount = 0;//实缴金额
 
 var oldMinusAmount='<%=StringUtil.getJSONObjectKeyVal(object,"minusAmount")%>';
 
-var schools=getSchools();
+var schools=getSchoolAll();
 var teachers=getTeachers();
 var advisters=getAdvister();
 
