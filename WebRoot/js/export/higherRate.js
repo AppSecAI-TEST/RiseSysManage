@@ -58,18 +58,34 @@ $(document).ready(function() {
 	    				$("#1_month").html("1月升学率");
 	    				$("#2_month").html("2月升学率");
 	    				$("#3_month").html("3月升学率");
+	    				
+	    				$("#1_month_goal").html("1月距目标缺口");
+	    				$("#2_month_goal").html("2月距目标缺口");
+	    				$("#3_month_goal").html("3月距目标缺口");
 	    			} else if("2" == quarter) {
 	    				$("#1_month").html("4月升学率");
 	    				$("#2_month").html("5月升学率");
 	    				$("#3_month").html("6月升学率");
+	    				
+	    				$("#1_month_goal").html("4月距目标缺口");
+	    				$("#2_month_goal").html("5月距目标缺口");
+	    				$("#3_month_goal").html("6月距目标缺口");
 	    			} else if("3" == quarter) {
 	    				$("#1_month").html("7月升学率");
 	    				$("#2_month").html("8月升学率");
 	    				$("#3_month").html("9月升学率");
+	    				
+	    				$("#1_month_goal").html("7月距目标缺口");
+	    				$("#2_month_goal").html("8月距目标缺口");
+	    				$("#3_month_goal").html("9月距目标缺口");
 	    			} else if("4" == quarter) {
 	    				$("#1_month").html("10月升学率");
 	    				$("#2_month").html("11月升学率");
 	    				$("#3_month").html("12月升学率");
+	    				
+	    				$("#1_month_goal").html("10月距目标缺口");
+	    				$("#2_month_goal").html("11月距目标缺口");
+	    				$("#3_month_goal").html("12月距目标缺口");
 	    			}
 	    		} else if("allQuarter" == higherType || "allRegion" == higherType) {
 	    			ajaxLoadEnd();
@@ -114,17 +130,33 @@ $(document).ready(function() {
 				s = s.substring(0, s.length - 1);
 				object.courseState = s;
 			}
+			var higherType = $("#higherType").val();
+			if("gap" == higherType || "gapRate" == higherType) {
+				object.staffId = $("#staffId").val();
+				object.staffSchoolId = $("#staffSchoolId").val();
+				object.staffPost = "," + $("#staffPost").val() + ",";
+			}
 			var obj = JSON.stringify(object);
-			obj = obj.substring(0, obj.length - 1);
 			var funcNodeId = $("#qryBtn").attr("funcNodeId");
-			obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
 			$('#list_data').datagrid({
 				url : "/sys/pubData/qryDataListByPage.do",
 				queryParams:{
-					param : obj
+					param: obj,
+					funcNodeId: funcNodeId
 				},
 				onLoadSuccess:function(){
 					onLoadSuccess();
+				},
+				rowStyler: function(index, row) {
+					var schoolName = row.schoolName; 
+					if(schoolName != '' && schoolName != null && schoolName != undefined
+							&& ("gap" == higherType || "gapRate" == higherType)) {
+						if (schoolName.indexOf('片区') > -1) {
+							return 'background-color:yellow;font-weight:bold;';
+						} else if(schoolName.indexOf('总校') > -1) {
+							return 'background-color:orange;font-weight:bold;';
+						}
+					}
 				}
 			});
 			
@@ -141,18 +173,34 @@ $(document).ready(function() {
 					$("#1_month").html("1月升学率");
 					$("#2_month").html("2月升学率");
 					$("#3_month").html("3月升学率");
+					
+					$("#1_month_goal").html("1月距目标缺口");
+    				$("#2_month_goal").html("2月距目标缺口");
+    				$("#3_month_goal").html("3月距目标缺口");
 				} else if("2" == quarter) {
 					$("#1_month").html("4月升学率");
 					$("#2_month").html("5月升学率");
 					$("#3_month").html("6月升学率");
+					
+					$("#1_month_goal").html("4月距目标缺口");
+    				$("#2_month_goal").html("5月距目标缺口");
+    				$("#3_month_goal").html("6月距目标缺口");
 				} else if("3" == quarter) {
 					$("#1_month").html("7月升学率");
 					$("#2_month").html("8月升学率");
 					$("#3_month").html("9月升学率");
+					
+					$("#1_month_goal").html("7月距目标缺口");
+    				$("#2_month_goal").html("8月距目标缺口");
+    				$("#3_month_goal").html("9月距目标缺口");
 				} else if("4" == quarter) {
 					$("#1_month").html("10月升学率");
 					$("#2_month").html("11月升学率");
 					$("#3_month").html("12月升学率");
+					
+					$("#1_month_goal").html("10月距目标缺口");
+    				$("#2_month_goal").html("11月距目标缺口");
+    				$("#3_month_goal").html("12月距目标缺口");
 				}
 			}
 			if($("#classProgress").length > 0) {

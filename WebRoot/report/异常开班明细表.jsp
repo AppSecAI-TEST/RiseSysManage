@@ -55,16 +55,19 @@
 					title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
 						<tr>
-							<th data-options="field:'schoolName',width:100,align:'center',rowspan:2">校区</th>
-							<th data-options="field:'stageId',width:100,align:'center',rowspan:2">阶段</th>
+							<th data-options="field:'schoolName',width:80,align:'center',rowspan:2">校区</th>
+							<th data-options="field:'stageId',width:80,align:'center',rowspan:2">阶段</th>
 							<th data-options="field:'exceptionOpenNum',width:100,align:'center',rowspan:2">异常开班数量</th>
-							<th data-options="field:'finish',width:200,align:'center',colspan:2">异常开班明细</th>
-							<th data-options="field:'exceptionAvgOpenNum',width:300,align:'center',rowspan:2">异常开班平均班级人数</th>
-							<th data-options="field:'exceptionOpenRate',width:300,align:'center',rowspan:2">该阶段异常开班占比</th>
+							<th data-options="field:'finish',width:600,align:'center',colspan:5">异常开班明细</th>
+							<th data-options="field:'exceptionAvgOpenNum',width:120,align:'center',rowspan:2">异常开班平均班级人数</th>
+							<th data-options="field:'exceptionOpenRate',width:120,align:'center',rowspan:2">该阶段异常开班占比</th>
 						</tr>
 						<tr>
 							<th data-options="field:'className',width:100,align:'center'">班级</th>
 							<th data-options="field:'openClassNum',width:100,align:'center'">异常开班人数</th>
+							<th data-options="field:'subNum',width:150,align:'center'">距最低开班人数差异</th>
+							<th data-options="field:'studyingNum',width:100,align:'center'">目前在读人数</th>
+							<th data-options="field:'isExcep',width:150,align:'center'">目前是否为异常班级</th>
 						</tr>
 					</thead>
 				</table>

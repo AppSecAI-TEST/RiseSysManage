@@ -15,7 +15,9 @@
   		<div style="margin-right:5px;">
   			<input type="hidden" id="resourceId" value="711"/>
 	  		<input type="hidden" id="higherType" value="gap"/>
-	  		<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
+	  		<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId}"/>
+  			<input type="hidden" id="staffSchoolId" value="${sessionScope.StaffT.schoolId }"/>
+  			<input type="hidden" id="staffPost" value="${sessionScope.StaffT.post }"/>
   			<form id="qryFm">
 	  			<table class="search_tab">
 	  				<tr>
@@ -37,7 +39,7 @@
 	  						</select>
 						</td>
 	  					<td align="left" colspan="2" width="400px">
-							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1062">查询</a>
+							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1094">查询</a>
 							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 						</td>
 	  				</tr>
@@ -48,11 +50,13 @@
 					<thead>
 						<tr>
 							<th data-options="field:'schoolName',width:100,align:'center'">校区</th>
-							<th data-options="field:'goalHigherNum',width:100,align:'center'"><div id="goal"></div></th>
-							<th data-options="field:'higherNum90',width:100,align:'center'">距90%缺口</th>
-							<th data-options="field:'monthHigherRate1',width:100,align:'center'"><div id="1_month"></div></th>
-							<th data-options="field:'monthHigherRate2',width:100,align:'center'"><div id="2_month"></div></th>
-							<th data-options="field:'monthHigherRate3',width:100,align:'center'"><div id="3_month"></div></th>
+							<th data-options="field:'quarterGoalHigherBaseNum',width:100,align:'center'"><div id="goal"></div></th>
+							<th data-options="field:'1MonthHigherRate',width:100,align:'center'"><div id="1_month"></div></th>
+							<th data-options="field:'1MonthGoalHigherBaseNum',width:100,align:'center'"><div id="1_month_goal"></div></th>
+							<th data-options="field:'2MonthHigherRate',width:100,align:'center'"><div id="2_month"></div></th>
+							<th data-options="field:'2MonthGoalHigherBaseNum',width:100,align:'center'"><div id="2_month_goal"></div></th>
+							<th data-options="field:'3MonthHigherRate',width:100,align:'center'"><div id="3_month"></div></th>
+							<th data-options="field:'3MonthGoalHigherBaseNum',width:100,align:'center'"><div id="3_month_goal"></div></th>
 							<th data-options="field:'quarterHigherBaseNum',width:100,align:'center'">升学基数</th>
 							<th data-options="field:'quarterHigherRate',width:100,align:'center'"><div id="rate"></div></th>
 						</tr>

@@ -72,7 +72,7 @@ public class QryPubDataService
 			obj.element("rownum", pageSize);
 		}
 		if (ObjectCensor.isStrRegular(funcNodeId)) {
-			if("1072".equals(funcNodeId) || "1065".equals(funcNodeId)) {
+			if("1072".equals(funcNodeId) || "1065".equals(funcNodeId) || "1094".equals(funcNodeId) || "1097".equals(funcNodeId)) {
 				String schoolId = StringUtil.getJSONObjectKeyVal(obj, "schoolId");
 				String staffSchoolId = StringUtil.getJSONObjectKeyVal(obj, "staffSchoolId");
 				if(!ObjectCensor.isStrRegular(schoolId)) {
@@ -82,6 +82,10 @@ public class QryPubDataService
 							funcNodeId = "1089";
 						} else if("1065".equals(funcNodeId)) {
 							funcNodeId = "1092";
+						} else if("1094".equals(funcNodeId)) {
+							funcNodeId = "1095";
+						} else if("1097".equals(funcNodeId)) {
+							funcNodeId = "1098";
 						}
 					} else {
 						//角色为区域校长或者区域教务长 且没有选校区 则查询片区的数据
@@ -95,10 +99,20 @@ public class QryPubDataService
 								funcNodeId = "1090";
 							} else if("1065".equals(funcNodeId)) {
 								funcNodeId = "1093";
+							} else if("1094".equals(funcNodeId)) {
+								funcNodeId = "1096";
+							} else if("1097".equals(funcNodeId)) {
+								funcNodeId = "1099";
 							}
 							obj.element("staffId", staffId);
 						}
 					}
+				}
+			} else if("1056".equals(funcNodeId)) {
+				String month = StringUtil.getJSONObjectKeyVal(obj, "month");
+				String quarter = StringUtil.getJSONObjectKeyVal(obj, "quarter");
+				if(!ObjectCensor.isStrRegular(month, quarter)) {
+					funcNodeId = "1100";
 				}
 			}
 			obj.element("funcNodeId", funcNodeId);
