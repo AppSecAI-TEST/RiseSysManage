@@ -56,12 +56,16 @@
 					title="查询结果" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
 						<tr>
-							<th data-options="field:'schoolName',width:100,align:'center'">校区</th>
-							<th data-options="field:'className',width:100,align:'center'">班级</th>
-							<th data-options="field:'schooltimeName',width:250,align:'center'">上课时间</th>
-							<th data-options="field:'classStudentNum',width:100,align:'center'">班级人数</th>
-							<th data-options="field:'minSubNum',width:120,align:'center'">距最低开班人数</th>
-							<th data-options="field:'startDate',width:100,align:'center'">开课日期</th>
+							<th data-options="field:'schoolName',width:100,align:'center',rowspan:2">校区</th>
+							<th data-options="field:'className',width:100,align:'center',rowspan:2">班级</th>
+							<th data-options="field:'schooltimeName',width:250,align:'center',rowspan:2">上课时间</th>
+							<th data-options="field:'num',width:200,align:'center',colspan:2">班级人数</th>
+							<th data-options="field:'minSubNum',width:120,align:'center',rowspan:2">距最低开班人数</th>
+							<th data-options="field:'startDate',width:100,align:'center',rowspan:2">开课日期</th>
+						</tr>
+						<tr>
+							<th data-options="field:'newNum',width:100,align:'center'">新招定班人数</th>
+							<th data-options="field:'higherNum',width:100,align:'center'">升学定班人数</th>
 						</tr>
 					</thead>
 				</table>
