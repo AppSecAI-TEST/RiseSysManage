@@ -40,7 +40,7 @@
 						<tr>
 							<th align="center" colspan="3"><span>学员信息</span></th>
 							<th align="center" colspan="6"><span>报名缴费情况</span></th>
-							<th align="center" colspan="4"><span>退费申请</span></th>
+							<th align="center" colspan="5"><span>退费申请</span></th>
 							<th align="center" width="150px;">&nbsp;</th>
 							<th align="center" align="center" rowspan="2" field="approveDate"><span>审批通过日期</span></th>
 							<th align="center" align="center" rowspan="2" field="belongDate"><span>退费归属日期</span></th>
@@ -60,6 +60,7 @@
 							<th field="refundReason" align="center" width="20%">退费原因</th>
 							<th field="applyDate" align="center" width="8%">退费申请日期</th>
 							<th field="financialConfirmFee" align="center" width="8%">核定退费金额</th>
+							<th field="refundChannel" align="center" width="8%">渠道</th>
 						</tr>
 					</thead>
 				</table>
