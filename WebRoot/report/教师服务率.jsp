@@ -80,25 +80,18 @@
   	</body>
 </html>
 <script type="text/javascript">
-	function exportData()
-	{
-		if($("#list_data").datagrid("getData").total>0)
-		{
-			var fileName =parent.$("li.tabs-selected").find("span.tabs-title").html();
-			var array =JSON.stringify($("#list_data").datagrid("getData").rows);
-			try
-			{
-				window.location.href="/sys/export/exportServiceRate.do?fileName="+fileName+"&array="+array;
-			}
-			catch(e)
-			{
+	function exportData() {
+		if($("#list_data").datagrid("getData").total > 0) {
+			var array = JSON.stringify($("#list_data").datagrid("getData").rows);
+			var fileName = parent.$("li.tabs-selected").find("span.tabs-title").html();
+			try {
+				window.location.href="/sys/export/exportServiceRate.do?fileName=" + fileName + "&array=" + array;
+			} catch(e) {
 				$.messager.alert('提示', "模版不存在",function(){
 					window.history.back();
 				});
 			}
-		}
-		else
-		{
+		} else {
 			$.messager.alert('提示', "没有数据可以导出");
 		}	
 	}

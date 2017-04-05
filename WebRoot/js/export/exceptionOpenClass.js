@@ -11,13 +11,19 @@ $(document).ready(function() {
 			s = s.substring(0, s.length - 1);
 			object.isApplyBonus = s;
 		}
-		var funcNodeId = $("#qryBtn").attr("funcNodeId");
-		object.funcNodeId = funcNodeId;
+		var type = $("#type").val();
+		if("summary" == type) {
+			object.staffId = $("#staffId").val();
+			object.staffPost = $("#staffPost").val();
+			object.staffSchoolId = $("#staffSchoolId").val();
+		}
     	var obj = JSON.stringify(object);
+    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
     	$('#list_data').datagrid({
     		url : "/sys/pubData/qryDataListByPage.do",
     		queryParams:{
-    			param : obj
+    			param: obj,
+    			funcNodeId: funcNodeId
     		},
     		onLoadSuccess:function() {
     			onLoadSuccess();
@@ -26,7 +32,19 @@ $(document).ready(function() {
     			if(resourceId != null && resourceId != "" && resourceId != undefined && "746" == resourceId) {
     				$('.apply').linkbutton({text:'申请奖金', iconCls:'icon-add'});
     			}
-    		}
+    		},
+    		rowStyler: function(index, row) {
+    			if("summary" == type) {
+    				var schoolName = row.schoolName; 
+    				if(schoolName != '' && schoolName != null && schoolName != undefined) {
+    					if (schoolName.indexOf('片区') > -1) {
+    						return 'background-color:yellow;font-weight:bold;';
+    					} else if(schoolName.indexOf('总校') > -1) {
+    						return 'background-color:orange;font-weight:bold;';
+    					}
+    				}
+    			}
+			}
     	});
     });
 	initReportButton("reset","qryFm","schoolId");

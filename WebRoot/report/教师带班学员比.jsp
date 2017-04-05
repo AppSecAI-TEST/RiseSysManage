@@ -74,5 +74,5 @@
   	</body>
 </html>
 <script>
-exportMergeLink("export","list_data","schoolId","0");
+	exportMergeLink("export", "list_data", "schoolId", "0");
 </script>

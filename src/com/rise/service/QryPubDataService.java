@@ -91,9 +91,7 @@ public class QryPubDataService
 						//角色为区域校长或者区域教务长 且没有选校区 则查询片区的数据
 						String staffId = StringUtil.getJSONObjectKeyVal(obj, "staffId");
 						//String staffPost = StringUtil.getJSONObjectKeyVal(obj, "staffPost");
-						String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1019\",securityCode:\"0000000000\",params:{param:{staffId:\"" + staffId + "\",funcNodeId:\"1091\"}},rtnDataFormatType:\"user-defined\"}";
-						JSONObject rstObj = JSONObject.fromObject(ServiceEngine.invokeHttp(params));
-						String total = StringUtil.getJSONObjectKeyVal(rstObj, "total");
+						String total = this.checkStaffIsArea(staffId);
 						if(ObjectCensor.isStrRegular(total) && Integer.parseInt(total) > 0) {
 							if("1072".equals(funcNodeId)) {
 								funcNodeId = "1090";
@@ -111,8 +109,30 @@ public class QryPubDataService
 			} else if("1056".equals(funcNodeId)) {
 				String month = StringUtil.getJSONObjectKeyVal(obj, "month");
 				String quarter = StringUtil.getJSONObjectKeyVal(obj, "quarter");
-				if(!ObjectCensor.isStrRegular(month, quarter)) {
+				if(!ObjectCensor.isStrRegular(month) && !ObjectCensor.isStrRegular(quarter)) {
 					funcNodeId = "1100";
+				}
+			} else if("1058".equals(funcNodeId)) {
+				String schoolId = StringUtil.getJSONObjectKeyVal(obj, "schoolId");
+				schoolId = "";
+				String minOpenNum = StringUtil.getJSONObjectKeyVal(obj, "minOpenNum");
+				String maxOpenNum = StringUtil.getJSONObjectKeyVal(obj, "maxOpenNum");
+				String minOpenRate = StringUtil.getJSONObjectKeyVal(obj, "minOpenRate");
+				String maxOpenRate = StringUtil.getJSONObjectKeyVal(obj, "maxOpenRate");
+				String endTimeOpen = StringUtil.getJSONObjectKeyVal(obj, "endTimeOpen");
+				String startTimeOpen = StringUtil.getJSONObjectKeyVal(obj, "startTimeOpen");
+				if(!ObjectCensor.isStrRegular(minOpenNum) && !ObjectCensor.isStrRegular(maxOpenNum) && !ObjectCensor.isStrRegular(schoolId) && !ObjectCensor.isStrRegular(minOpenRate) 
+						&& !ObjectCensor.isStrRegular(maxOpenRate) && !ObjectCensor.isStrRegular(startTimeOpen) && !ObjectCensor.isStrRegular(endTimeOpen)) {
+					String staffSchoolId = StringUtil.getJSONObjectKeyVal(obj, "staffSchoolId");
+					if("10".equals(staffSchoolId)) {
+						funcNodeId = "1101";
+					} else {
+						String staffId = StringUtil.getJSONObjectKeyVal(obj, "staffId");
+						String total = this.checkStaffIsArea(staffId);
+						if(ObjectCensor.isStrRegular(total) && Integer.parseInt(total) > 0) {
+							funcNodeId = "1102";
+						}
+					}
 				}
 			}
 			obj.element("funcNodeId", funcNodeId);
@@ -121,18 +141,21 @@ public class QryPubDataService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
-	public String qryData(String param) throws Exception 
-	{
+	private String checkStaffIsArea(String staffId) throws Exception {
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1019\",securityCode:\"0000000000\",params:{param:{staffId:\"" + staffId + "\",funcNodeId:\"1091\"}},rtnDataFormatType:\"user-defined\"}";
+		JSONObject rstObj = JSONObject.fromObject(ServiceEngine.invokeHttp(params));
+		return StringUtil.getJSONObjectKeyVal(rstObj, "total");
+	}
+	
+	public String qryData(String param) throws Exception {
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10110\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
 	
-	public String qryAction(String schoolId) throws Exception 
-	{
+	public String qryAction(String schoolId) throws Exception {
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10111\",securityCode:\"0000000000\",params:{schoolId:"+schoolId+"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
-	
 	
 	/**
 	 * 查询阶段
@@ -140,8 +163,7 @@ public class QryPubDataService
 	 * @return
 	 * @throws Exception
 	 */
-	public String getStage() throws Exception 
-	{
+	public String getStage() throws Exception {
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10112\",securityCode:\"0000000000\",params:{},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}

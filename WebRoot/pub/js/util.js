@@ -1109,174 +1109,137 @@ function initYearAndMonth(yearName,monthName) {
 }
 
 
-function exportLink(btName,tableName)
-{
-	$("#"+btName).click(function(){
-		if($("#"+tableName).datagrid("getData").total>0)
-		{
-			var fileName =parent.$("li.tabs-selected").find("span.tabs-title").html();
-			try
-			{
-				window.location.href="/sys/export/normalExport.do?fileName="+fileName+"&param="+JSON.stringify($("#"+tableName).datagrid("options").queryParams.param);
+function exportLink(btName, tableName) {
+	$("#" + btName).click(function() {
+		if($("#" + tableName).datagrid("getData").total > 0) {
+			var funcNodeId = $("#qryBtn").attr("funcNodeId");
+			var param = $("#" + tableName).datagrid("options").queryParams.param;
+			var fileName = parent.$("li.tabs-selected").find("span.tabs-title").html();
+			try {
+				window.location.href = "/sys/export/normalExport.do?fileName=" + fileName + "&param=" + param + "&funcNodeId=" + funcNodeId;
+			} catch(e) {
+				$.messager.alert('提示', "模版不存在！",function() {
+					window.history.back();
+				});
 			}
-			catch(e)
-			{
+		} else {
+			$.messager.alert('提示', "没有数据可以导出！");
+		}	
+	});
+}
+
+function exportMergeLink(btName, tableName, mergeName, mergeIndex) {
+	$("#" + btName).click(function() {
+		if($("#" + tableName).datagrid("getData").total > 0) {
+			var funcNodeId = $("#qryBtn").attr("funcNodeId");
+			var param = $("#" + tableName).datagrid("options").queryParams.param;
+			var fileName = parent.$("li.tabs-selected").find("span.tabs-title").html();
+			try {
+				window.location.href = "/sys/export/normalMergeExport.do?fileName=" + fileName + "&mergeName=" + mergeName + "&mergeIndex=" + mergeIndex + "&param=" + param + "&funcNodeId=" + funcNodeId;
+			} catch(e) {
 				$.messager.alert('提示', "模版不存在！",function(){
 					window.history.back();
 				});
 			}
-		}
-		else
-		{
+		} else {
 			$.messager.alert('提示', "没有数据可以导出！");
 		}	
-	})
+	});
 }
 
-
-
-function exportMergeLink(btName,tableName,mergeName,mergeIndex)
-{
-	$("#"+btName).click(function(){
-		if($("#"+tableName).datagrid("getData").total>0)
-		{
+function exportMergeLinks(btName,tableName,mergeName,mergeIndex) {
+	$("#" + btName).click(function() {
+		if($("#"+tableName).datagrid("getData").total > 0) {
 			var fileName =parent.$("li.tabs-selected").find("span.tabs-title").html();
-			try
-			{
-				window.location.href="/sys/export/normalMergeExport.do?fileName="+fileName+"&mergeName="+mergeName+"&mergeIndex="+mergeIndex+"&param="+JSON.stringify($("#"+tableName).datagrid("options").queryParams.param);
-			}
-			catch(e)
-			{
-				$.messager.alert('提示', "模版不存在！",function(){
-					window.history.back();
-				});
-			}
-		}
-		else
-		{
-			$.messager.alert('提示', "没有数据可以导出！");
-		}	
-	})
-}
-
-function exportMergeLinks(btName,tableName,mergeName,mergeIndex)
-{
-	$("#"+btName).click(function(){
-		if($("#"+tableName).datagrid("getData").total>0)
-		{
-			var fileName =parent.$("li.tabs-selected").find("span.tabs-title").html();
-			try
-			{
+			try {
 				window.location.href="/sys/export/normalMergeExports.do?fileName="+fileName+"&mergeName="+mergeName+"&mergeIndex="+mergeIndex+"&param="+JSON.stringify($("#"+tableName).datagrid("options").queryParams.param);
-			}
-			catch(e)
-			{
+			} catch(e) {
 				$.messager.alert('提示', "模版不存在！",function(){
 					window.history.back();
 				});
 			}
-		}
-		else
-		{
+		} else {
 			$.messager.alert('提示', "没有数据可以导出！");
 		}	
 	})
 }
 
-
 //绑定报表重置按钮事件
-function initReportButton(resetName,formName,schoolId)
-{
-	var clearFlag =true;
-	$("#"+formName).find("#"+schoolId).combobox({
-		loader:function(param,success,error){  
+function initReportButton(resetName, formName, schoolId) {
+	var clearFlag = true;
+	$("#" + formName).find("#" + schoolId).combobox({
+		loader: function(param, success, error) {  
 		    $.ajax({  
 				url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
 				dataType: 'json',  
-				success: function(data){
-		    	if(data.length==schoolData.length)
-		    	{
-		    		data.unshift({schoolName:'所有校区',schoolId:""});  
-		    	}	
-				success(data);  
+				success: function(data) {
+					if(data.length == schoolData.length) {
+						data.unshift({schoolName: '所有校区', schoolId: ""});  
+					}	
+					success(data);  
 				}
 			});  
    		},
-		onLoadSuccess:function(){
-			var arr =$("#"+formName).find("#"+schoolId).combobox("getData");
-			if(arr.length<schoolData.length)
-			{
-				$("#"+formName).find("#"+schoolId).combobox("select",arr[0].schoolId);
-				clearFlag =false;
+		onLoadSuccess: function() {
+			var arr = $("#" + formName).find("#" + schoolId).combobox("getData");
+			if(arr.length < schoolData.length) {
+				$("#" + formName).find("#" + schoolId).combobox("select", arr[0].schoolId);
+				clearFlag = false;
 			}	
 		}
 	});
-    $("#"+resetName+"").click(function() 
-    {
-    	$("#"+formName+"").form('clear');//清空窗体数据  
-    	if(!clearFlag)
-    	{
-    		$("#"+formName).find("#"+schoolId).combobox('select',$("#"+formName).find("#"+schoolId).combobox("getData")[0].schoolId);
-    	}
-    	else
-    	{
+    $("#"+resetName+"").click(function() {
+    	$("#" + formName).form('clear');//清空窗体数据  
+    	if(!clearFlag) {
+    		$("#" + formName).find("#" + schoolId).combobox('select',$("#" + formName).find("#" + schoolId).combobox("getData")[0].schoolId);
+    	} else {
     		$("#"+formName).find("#"+schoolId).combobox('setValue',"");
     	}	
     });
 }
 
 //绑定报表重置按钮事件
-function initReportButtonAll(resetName,formName,schoolId)
-{
-	var clearFlag =true;
-	$("#"+formName).find("#"+schoolId).combobox({
-		loader:function(param,success,error){  
+function initReportButtonAll(resetName, formName, schoolId) {
+	var clearFlag = true;
+	$("#" + formName).find("#"+schoolId).combobox({
+		loader:function(param, success, error) {  
 		    $.ajax({  
-				url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
+				url: "/sys/pub/pageCategory.do?staffId=" + $("#staffId").val() + "&resourceId=" + $("#resourceId").val() + "&fieldId=schoolId",  
 				dataType: 'json',  
-				success: function(data){
-		    	if(data.length==schoolData.length)
-		    	{
-		    		data.unshift({schoolName:'总部',schoolId:"10"});  
-		    		data.unshift({schoolName:'所有校区',schoolId:""});  
-		    		
-		    	}	
-				success(data);  
+				success: function(data) {
+			    	if(data.length == schoolData.length) {
+			    		data.unshift({schoolName:'总部',schoolId:"10"});  
+			    		data.unshift({schoolName:'所有校区',schoolId:""});  
+			    	}	
+					success(data);  
 				}
 			});  
    		},
-		onLoadSuccess:function(){
-			var arr =$("#"+formName).find("#"+schoolId).combobox("getData");
-			if(arr.length<schoolData.length)
-			{
-				$("#"+formName).find("#"+schoolId).combobox("select",arr[0].schoolId);
-				clearFlag =false;
-			}	
+		onLoadSuccess: function(){
+			var arr = $("#" + formName).find("#" + schoolId).combobox("getData");
+			if(arr.length < schoolData.length) {
+				$("#" + formName).find("#" + schoolId).combobox("select", arr[0].schoolId);
+				clearFlag = false;
+			}
 		}
 	});
-    $("#"+resetName+"").click(function() 
-    {
-    	$("#"+formName+"").form('clear');//清空窗体数据  
-    	if(!clearFlag)
-    	{
-    		$("#"+formName).find("#"+schoolId).combobox('select',$("#"+formName).find("#"+schoolId).combobox("getData")[0].schoolId);
-    	}
-    	else
-    	{
-    		$("#"+formName).find("#"+schoolId).combobox('setValue',"");
+    $("#" + resetName).click(function() {
+    	$("#" + formName).form('clear');//清空窗体数据  
+    	if(!clearFlag) {
+    		$("#" + formName).find("#" + schoolId).combobox('select', $("#" + formName).find("#" + schoolId).combobox("getData")[0].schoolId);
+    	} else {
+    		$("#" + formName).find("#" + schoolId).combobox('setValue', "");
     	}	
     });
 }
 
-function scrolltoDom(obj)
-{
+function scrolltoDom(obj) {
 	$("html,body").animate({scrollTop: obj.offset().top-50}, 100);
 }
 
 
 //绑定查询页面的查询重置按钮事件
-function initRPQryButton(qryName,resetName,formName,tableName)
-{
+function initRPQryButton(qryName, resetName, formName, tableName) {
 	$("#"+qryName+"").click(function() {
 		var obj = JSON.stringify($("#"+formName+"").serializeObject());
 	    obj = obj.substring(0, obj.length - 1);
@@ -1293,8 +1256,7 @@ function initRPQryButton(qryName,resetName,formName,tableName)
 	    }); 
     });
 	 
-    $("#"+resetName+"").click(function() 
-    {
+    $("#"+resetName+"").click(function() {
     	$("#"+formName+"").form('clear');//清空窗体数据  
     });
 }

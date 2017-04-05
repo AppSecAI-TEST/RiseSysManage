@@ -90,21 +90,21 @@
 	  						<td style="text-align: right;"><span>1月升学目标：</span></td>
 	  						<td>
 	  							<input id="planId_month_1" type="hidden" value=""/>
-		  						<input type="text" class="easyui-numberbox" id="planMonth_1" name="month_1" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+		  						<input type="text" class="easyui-numberbox" id="planMonth_1" name="month_1" style="width:200px;height: 25px;" data-options="min:0,precision:0,max:100">（%）
 	  						</td>
 	  					</tr>
 	  					<tr>
 	  						<td style="text-align: right;"><span>2月升学目标：</span></td>
 	  						<td>
 	  							<input id="planId_month_2" type="hidden" value=""/>
-		  						<input type="text" class="easyui-numberbox" id="planMonth_2" name="month_1" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+		  						<input type="text" class="easyui-numberbox" id="planMonth_2" name="month_1" style="width:200px;height: 25px;" data-options="min:0,precision:0,max:100">（%）
 	  						</td>
 	  					</tr>
 	  					<tr>
 	  						<td style="text-align: right;"><span>3月升学目标：</span></td>
 	  						<td>
 	  							<input id="planId_month_3" type="hidden" value=""/>
-		  						<input type="text" class="easyui-numberbox" id="planMonth_3" name="month_1" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+		  						<input type="text" class="easyui-numberbox" id="planMonth_3" name="month_1" style="width:200px;height: 25px;" data-options="min:0,precision:0,max:100">（%）
 	  						</td>
 	  					</tr>
 	  					<tr>
@@ -118,21 +118,21 @@
 	  						<td style="text-align: right;"><span>4月升学目标：</span></td>
 	  						<td>
 	  							<input id="planId_month_4" type="hidden" value=""/>
-		  						<input type="text" class="easyui-numberbox" id="planMonth_4" name="month_2" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+		  						<input type="text" class="easyui-numberbox" id="planMonth_4" name="month_2" style="width:200px;height: 25px;" data-options="min:0,precision:0,max:100">（%）
 	  						</td>
 	  					</tr>
 	  					<tr>
 	  						<td style="text-align: right;"><span>5月升学目标：</span></td>
 	  						<td>
 	  							<input id="planId_month_5" type="hidden" value=""/>
-		  						<input type="text" class="easyui-numberbox" id="planMonth_5" name="month_2" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+		  						<input type="text" class="easyui-numberbox" id="planMonth_5" name="month_2" style="width:200px;height: 25px;" data-options="min:0,precision:0,max:100">（%）
 	  						</td>
 	  					</tr>
 	  					<tr>
 	  						<td style="text-align: right;"><span>6月升学目标：</span></td>
 	  						<td>
 	  							<input id="planId_month_6" type="hidden" value=""/>
-		  						<input type="text" class="easyui-numberbox" id="planMonth_6" name="month_2" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+		  						<input type="text" class="easyui-numberbox" id="planMonth_6" name="month_2" style="width:200px;height: 25px;" data-options="min:0,precision:0,max:100">（%）
 	  						</td>
 	  					</tr>
 	  					<tr>
@@ -146,21 +146,21 @@
 	  						<td style="text-align: right;"><span>7月升学目标：</span></td>
 	  						<td>
 	  							<input id="planId_month_7" type="hidden" value=""/>
-		  						<input type="text" class="easyui-numberbox" id="planMonth_7" name="month_3" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+		  						<input type="text" class="easyui-numberbox" id="planMonth_7" name="month_3" style="width:200px;height: 25px;" data-options="min:0,precision:0,max:100">（%）
 	  						</td>
 	  					</tr>
 	  					<tr>
 	  						<td style="text-align: right;"><span>8月升学目标：</span></td>
 	  						<td>
 	  							<input id="planId_month_8" type="hidden" value=""/>
-		  						<input type="text" class="easyui-numberbox" id="planMonth_8" name="month_3" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+		  						<input type="text" class="easyui-numberbox" id="planMonth_8" name="month_3" style="width:200px;height: 25px;" data-options="min:0,precision:0,max:100">（%）
 	  						</td>
 	  					</tr>
 	  					<tr>
 	  						<td style="text-align: right;"><span>9月升学目标：</span></td>
 	  						<td>
 	  							<input id="planId_month_9" type="hidden" value=""/>
-		  						<input type="text" class="easyui-numberbox" id="planMonth_9" name="month_3" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+		  						<input type="text" class="easyui-numberbox" id="planMonth_9" name="month_3" style="width:200px;height: 25px;" data-options="min:0,precision:0,max:100">（%）
 	  						</td>
 	  					</tr>
 	  					<tr>
@@ -174,21 +174,21 @@
 	  						<td style="text-align: right;"><span>10月升学目标：</span></td>
 	  						<td>
 	  							<input id="planId_month_10" type="hidden" value=""/>
-		  						<input type="text" class="easyui-numberbox" id="planMonth_10" name="month_4" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+		  						<input type="text" class="easyui-numberbox" id="planMonth_10" name="month_4" style="width:200px;height: 25px;" data-options="min:0,precision:0,max:100">（%）
 	  						</td>
 	  					</tr>
 	  					<tr>
 	  						<td style="text-align: right;"><span>11月升学目标：</span></td>
 	  						<td>
 	  							<input id="planId_month_11" type="hidden" value=""/>
-		  						<input type="text" class="easyui-numberbox" id="planMonth_11" name="month_4" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+		  						<input type="text" class="easyui-numberbox" id="planMonth_11" name="month_4" style="width:200px;height: 25px;" data-options="min:0,precision:0,max:100">（%）
 	  						</td>
 	  					</tr>
 	  					<tr>
 	  						<td style="text-align: right;"><span>12月升学目标：</span></td>
 	  						<td>
 	  							<input id="planId_month_12" type="hidden" value=""/>
-		  						<input type="text" class="easyui-numberbox" id="planMonth_12" name="month_4" style="width:200px;height: 25px;" data-options="min:1,precision:0,max:100">（%）
+		  						<input type="text" class="easyui-numberbox" id="planMonth_12" name="month_4" style="width:200px;height: 25px;" data-options="min:0,precision:0,max:100">（%）
 	  						</td>
 	  					</tr>
 	  				</table>

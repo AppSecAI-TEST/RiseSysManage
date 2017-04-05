@@ -13,8 +13,11 @@
   
   	<body>
   		<div style="margin-right:5px;">
+  			<input type="hidden" id="type" value="summary"/>
   			<input type="hidden" id="resourceId" value="503">
   			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId}"/>
+  			<input type="hidden" id="staffSchoolId" value="${sessionScope.StaffT.schoolId }"/>
+  			<input type="hidden" id="staffPost" value="${sessionScope.StaffT.post }"/>
   			<form id="qryFm">
   				<table class="search_tab">
   					<tr>
@@ -67,6 +70,6 @@
   	</body>
 </html>
 <script>
-initReportButton("resetBtn","qryFm","schoolId");
-exportLink("export","list_data");
+	initReportButton("resetBtn","qryFm","schoolId");
+	exportLink("export", "list_data");
 </script>

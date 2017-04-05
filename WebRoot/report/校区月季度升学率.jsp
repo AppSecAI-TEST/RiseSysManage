@@ -61,23 +61,20 @@
 </html>
 <script>
 	$("#export").click(function(){
-		if($("#list_data").datagrid("getData").total>0&&$("#yearDiv").html()!="")
-		{
-			var fileName =parent.$("li.tabs-selected").find("span.tabs-title").html();
-			try
-			{
-				window.location.href="/sys/export/exportSchoolMSGradRate.do?fileName="+fileName+"&year="+$("#yearDiv").html()+"&param="+JSON.stringify($("#list_data").datagrid("options").queryParams.param);
-			}
-			catch(e)
-			{
+		if($("#list_data").datagrid("getData").total > 0 && $("#yearDiv").html() != "") {
+			var year = $("#yearDiv").html();
+			var funcNodeId = $("#qryBtn").attr("funcNodeId");
+			var param = $("#list_data").datagrid("options").queryParams.param;
+			var fileName = parent.$("li.tabs-selected").find("span.tabs-title").html();
+			try {
+				window.location.href = "/sys/export/exportSchoolMSGradRate.do?fileName=" + fileName + "&year=" + year + "&param=" + param + "&funcNodeId=" + funcNodeId;
+			} catch(e) {
 				$.messager.alert('提示', "模版不存在！",function(){
 					window.history.back();
 				});
 			}
-		}
-		else
-		{
+		} else {
 			$.messager.alert('提示', "没有数据可以导出！");
 		}	
-	})
+	});
 </script>

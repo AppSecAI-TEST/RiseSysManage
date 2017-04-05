@@ -39,8 +39,8 @@
   
   	<body>
   		<div style="margin-right:5px;">
-  			<input id="staffId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
   			<input type="hidden" id="resourceId" value="731">
+  			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId}"/>
   			<form id="qryFm">
   				<table align="center" class="search_tab">
   					<tr>
@@ -83,7 +83,7 @@
   	</body>
 </html>
 <script>
-	exportLink("export","list_data");
+	exportLink("export", "list_data");
 	var staffId = $("#staffId").val();
 	var resourceId = $("#resourceId").val();
 	$("#schoolId").combobox({

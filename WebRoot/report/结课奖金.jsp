@@ -114,7 +114,7 @@
   	</body>
 </html>
 <script>
-exportLink("export","list_data");
+exportLink("export", "list_data");
 
 $("#list_data").datagrid({
 	onClickRow : function(index, row) {

@@ -132,7 +132,7 @@
 							<th field="higherRate" align="center" width="7%">当前升学率</th>
 							<th field="higherRateGoal" align="center" width="7%">升学率目标</th>
 							<th field="rateNum50" align="center" width="10%">距50%升学率缺口</th>
-							<th field="rateNum90" align="center" width="7%">升学缺口</th>
+							<th field="rateNum90" align="center" width="8%">升学率目标缺口</th>
 							<th field="handTypeText" align="center" width="6%">班级性质</th>
 							<th field="changeRemark" align="center" width="15%">更换老师情况</th>
 							<th field="xAdd5" align="center" width="7%">X+5</th>
