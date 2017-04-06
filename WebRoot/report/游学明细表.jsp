@@ -72,7 +72,7 @@
       					<input name="adviserName" id=""adviserName"" type="text" class="easyui-textbox" style="width:100px;height:25px;"/>
 					</td>
 					<td>
-						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
+						<a href="javascript:void(0)" id="qryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()" funcNodeId="38114">查询</a>
 						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;">重置</a>
 					</td>
 				</tr>

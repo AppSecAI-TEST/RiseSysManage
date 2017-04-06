@@ -44,7 +44,7 @@
 						<input name="planTimesStart" id="planTimesStart" type="text" class="easyui-textbox" style="width:60px; height: 25px;" />&nbsp;至&nbsp;<input name="planTimesEnd" id="planTimesEnd" type="text" class="easyui-textbox" style="width:60px; height: 25px;" />								
 					</td>
 					<td align="left">
-						<a href="javascript:void(0)" id="queryManBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
+						<a href="javascript:void(0)" id="qryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()" funcNodeId="38142">查询</a>
 						<a href="javascript:void(0)" id="resetManBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;">重置</a>
 					</td>
 				</tr>

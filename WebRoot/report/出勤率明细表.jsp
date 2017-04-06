@@ -23,55 +23,47 @@
 		<form id="attFm">
 			<table class="search_tab">
 				<tr>
-					<td align="right" width="70px">
-						<span>校区：</span>
-					</td>
-					<td width="100px">
+					<td align="right" style="min-width: 40px;"><span>校区：</span></td>
+					<td style="min-width: 100px;">
 	  					<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 							data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 				        </select>
 					</td>
-					<td align="right" width="70px">
-						<span>课程阶段：</span>
+					<td align="right" style="min-width: 80px;"><span>课程阶段：</span></td>
+					<td style="min-width: 100px;">
+						<select id="classPharse" name="classPharse" style="width:100px;height:25px;"></select>
 					</td>
-					<td width="100px">
-						<select id="classPharse" name="classPharse" style="width:100px;height:25px;" ></select>
+					<td align="right" style="min-width: 100px;"><span>出勤率：</span></td>
+					<td style="min-width: 200px;">
+						<input name="attendStartRate" id="attendStartRate" type="text" style="width:88px;height:25px;" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />%
+						至 
+						<input name="attendEndRate" id="attendEndRate" type="text" style="width:88px;height:25px;" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />%							
 					</td>
-					<td align="right" width="70px">
-						<span>上课日期：</span>
-					</td>
-					<td width="100px">
-						<input name="classStart" id="classStart" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" /> 至 <input name="classEnd" id="classEnd" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
-					</td>
-					<td align="right" width="50px">
-						<span>班级：</span>
-					</td>
-					<td>
-						<input name="classInfo" id="classInfo" type="text" style="width:100px;height:25px;" class="easyui-textbox" />	
+					<td align="right" style="min-width: 80px;"><span>上课日期：</span></td>
+					<td style="min-width: 230px;">
+						<input name="classStart" id="classStart" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
+						至 
+						<input name="classEnd" id="classEnd" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myformatter, parser:myparser" />
 					</td>
 				</tr>
 				<tr>
-					<td align="right">
-						<span>老师：</span>
+					<td align="right" style="min-width: 40px;"><span>班级：</span></td>
+					<td style="min-width: 100px;">
+						<input name="classInfo" id="classInfo" type="text" style="width:100px;height:25px;" class="easyui-textbox" />	
 					</td>
-					<td>
+					<td align="right" style="min-width: 80px;"><span>老师：</span></td>
+					<td style="min-width: 100px;">
 						<input name="teacher" id="teacher" type="text" style="width:100px;height:25px;" class="easyui-textbox" />								
 					</td>
-					<td align="right">
-						<span>出勤率：</span>
+					<td align="right" style="min-width: 100px;"><span>校服穿着率：</span></td>
+					<td style="min-width: 200px;" colspan="2">
+						<input name="schoolWearStartRate" id="schoolWearStartRate" type="text" style="width:88px;height:25px;" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />%
+						至
+						<input name="schoolWearEndRate" id="schoolWearEndRate" type="text" style="width:88px;height:25px;" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />%								
 					</td>
-					<td>
-						<input name="attendStartRate" id="attendStartRate" type="text" style="width:88px;height:25px;" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />% 至 <input name="attendEndRate" id="attendEndRate" type="text" style="width:88px;height:25px;" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />%							
-					</td>
-					<td align="right">
-						<span>校服穿着率：</span>
-					</td>
-					<td>
-						<input name="schoolWearStartRate" id="schoolWearStartRate" type="text" style="width:88px;height:25px;" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />% 至 <input name="schoolWearEndRate" id="schoolWearEndRate" type="text" style="width:88px;height:25px;" class="easyui-numberbox" data-options="precision:1,min:0,max:100" />%								
-					</td>
-					<td colspan="2" align="center">
-						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
-						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
+					<td  style="min-width: 230px;">
+						<a href="javascript:void(0)" id="qryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()" funcNodeId="38126">查询</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
 					</td>
 				</tr>
 			</table>
@@ -80,18 +72,18 @@
 				toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
-						<th width="8.333%" field="schoolName">校区</th>
-						<th width="8.333%" field="attendDate">上课日期</th>
-						<th width="4%" field="weekday">星期</th>
-						<th width="8.333%" field="className">班级</th>
-						<th width="12%" field="teacherNames">上课教师</th>
-						<th width="10%" field="schoolDate">上课时间</th>
-						<th width="8.333%" field="realHours">实际课时</th>
-						<th width="8.333%" field="attendNum">在读人数</th>
-						<th width="8.333%" field="realNum">出勤人数</th>
-						<th width="10%" field="dressNum">学员校服穿着人数</th>
-						<th width="8.333%" field="attendRate">出勤率</th>
-						<th width="8.333%" field="dressRate">校服穿着率</th>
+						<th data-options="field:'schoolName',width:'8.333%',align:'center'">校区</th>
+						<th data-options="field:'attendDate',width:'8.333%',align:'center'">上课日期</th>
+						<th data-options="field:'weekday',width:'4%',align:'center'">星期</th>
+						<th data-options="field:'className',width:'8.333%',align:'center'">班级</th>
+						<th data-options="field:'teacherNames',width:'8.333%',align:'center'">上课教师</th>
+						<th data-options="field:'schoolDate',width:'12%',align:'center'">上课时间</th>
+						<th data-options="field:'realHours',width:'8.333%',align:'center'">实际课时</th>
+						<th data-options="field:'attendNum',width:'8.333%',align:'center'">在读人数</th>
+						<th data-options="field:'realNum',width:'8.333%',align:'center'">出勤人数</th>
+						<th data-options="field:'dressNum',width:'10%',align:'center'">学员校服穿着人数</th>
+						<th data-options="field:'attendRate',width:'8.333%',align:'center'">出勤率</th>
+						<th data-options="field:'dressRate',width:'8.333%',align:'center'">校服穿着率</th>
 					</tr>
 				</thead>
 			</table>
@@ -111,8 +103,8 @@
 					textField: 'codeName', 
 					panelHeight: 'auto'
 				});
-				initReportButton("resetBtn","attFm","schoolId")
-				exportLink("hisViewBtn","attList");
+				initReportButton("resetBtn", "attFm", "schoolId")
+				exportLink("hisViewBtn", "attList");
 			});
 			function queryFunc()
 			{

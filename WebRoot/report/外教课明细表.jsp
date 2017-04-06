@@ -65,7 +65,7 @@
 						<input name="consTimesStart" id="consTimesStart" type="text" class="easyui-textbox" style="width:100px; height: 25px;" />&nbsp;至&nbsp;<input name="consTimesEnd" id="consTimesEnd" type="text" class="easyui-textbox" style="width:100px; height: 25px;" />									
 					</td>
 					<td colspan="2">
-						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
+						<a href="javascript:void(0)" id="qryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()" funcNodeId="38141">查询</a>
 						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;">重置</a>
 					</td>
 				</tr>

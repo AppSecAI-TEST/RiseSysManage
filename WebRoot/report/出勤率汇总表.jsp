@@ -38,7 +38,7 @@
 						<input name="monthDate" id="monthDate" type="text" style="width:100px;height:25px;" class="easyui-datebox" editable="false" data-options="formatter:myYearMonthformatter, parser:myparser" />
 					</td>
 					<td colspan="2" align="left">
-						<a href="javascript:void(0)" id="queryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()">查询</a>
+						<a href="javascript:void(0)" id="qryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;" onclick="queryFunc()" funcNodeId="38128">查询</a>
 						<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;" onclick="resetFunc()">重置</a>
 					</td>
 				</tr>

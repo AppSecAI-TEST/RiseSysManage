@@ -106,12 +106,9 @@ $(document).ready(function() {
 		if(data.length > 0) {
 			$('#week').combobox('setValue', data[0].weekName);
 		}
-		if(!clearFlag)
-    	{
+		if(!clearFlag) {
     		$("#schoolId").combobox('select',$("#schoolId").combobox("getData")[0].schoolId);
-    	}
-    	else
-    	{
+    	} else {
     		$("#schoolId").combobox('setValue',"");
     	}	
 	});
@@ -165,7 +162,7 @@ function viewNotInClassDetail(index, type) {
 		object.queryCode = "qryHigherNotInClassDetail";
 	}
 	var obj = JSON.stringify(object);
-	$('#'+type+'_list_data').datagrid({
+	$('#' + type + '_list_data').datagrid({
 		url : "/sys/pubData/qryDataListByPage.do",
 		queryParams:{
 			param : obj

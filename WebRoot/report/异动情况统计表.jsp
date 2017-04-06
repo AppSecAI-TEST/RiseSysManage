@@ -76,9 +76,11 @@
 					<table class="easyui-datagrid" style="width:900px;height:400px" id="higher_list_data" fitColumns="true">
 						<thead>
 							<tr>
-								<th field="stageId" align="center" width="100px">阶段</th>
+								<th field="stageId" align="center" width="150px">阶段</th>
 								<th field="above14Num" align="center" width="200px">2周内结课人数</th>
+								<th field="above14InClassNum" align="center" width="100px">已定班人数</th>
 								<th field="lower14Num" align="center" width="200px">2周以上结课人数</th>
+								<th field="lower14InClassNum" align="center" width="100px">已定班人数</th>
 								<th field="total" align="center" width="150px">阶段人数总计</th>
 							</tr>
 						</thead>
@@ -88,9 +90,11 @@
 					<table class="easyui-datagrid" style="width:900px;height:400px" id="new_list_data" fitColumns="true">
 						<thead>
 							<tr>
-								<th field="stageId" align="center" width="100px">阶段</th>
+								<th field="stageId" align="center" width="150px">阶段</th>
 								<th field="above1Num" align="center" width="200px">1个月以内新招未进</th>
+								<th field="above1InClassNum" align="center" width="100px">已定班人数</th>
 								<th field="lower1Num" align="center" width="200px">1个月以上新招未进班</th>
+								<th field="lower1InClassNum" align="center" width="100px">已定班人数</th>
 								<th field="total" align="center" width="150px">阶段人数总计</th>
 							</tr>
 						</thead>

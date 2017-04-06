@@ -13,12 +13,13 @@
   	<body>
   	<div style="margin-right:5px;">
   			<input type="hidden" id="resourceId" value="720">
+  			<input type="hidden" id="type" value="refundReason">
   			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId}"/>
   			<form id="qryFm">
 	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right" width="80px"><span>校区：</span></td>
-	  					<td align="left"  width="120px">
+	  					<td align="right" width="60px"><span>校区：</span></td>
+	  					<td align="left"  width="110px">
 	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 				        	</select>
@@ -30,7 +31,14 @@
 			      				url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_T&codeType=REASON_TYPE">
 				        	</select>
 	  					</td>
-	  					<td width="100px" align="right"><span>退费归属日期：</span></td>
+	  					<td align="right" width="80px"><span>退费类型：</span></td>
+	  					<td align="left"  width="110px">
+	  						<select id="refundType" name="refundType" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+								data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
+	      						url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_TYPE">
+				        	</select>
+	  					</td>
+	  					<td align="right" width="80px"><span>退费日期：</span></td>
 						<td width="260px">
 							<input class="easyui-datebox" type="text"  editable="false" style="width:110px; height: 25px;" id="startTime" name="startTime" data-options="formatter:myformatter, parser:myparser"/>
 							至
@@ -47,12 +55,15 @@
 					title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
 						<tr>
-							<th field="schoolName" align="center" width="8%">校区</th>
-							<th field="totalNum" align="center" width="8%">退费总数</th>
-							<th field="typeVal" align="center" width="8%">大类</th>
-							<th field="reasonVal" align="center" width="8%">细分</th>
-							<th field="num" align="center" width="8%">退费个数</th>
-							<th field="per" align="center" width="8%">退费占比</th>
+							<th data-options="field:'schoolName',width:80,align:'center'">校区</th>
+							<th data-options="field:'totalNum',width:80,align:'center'">退费总数</th>
+							<th data-options="field:'typeVal',width:80,align:'center'">大类</th>
+							<th data-options="field:'reasonVal',width:300,align:'center'">细分</th>
+							<th data-options="field:'num',width:80,align:'center'">退费个数</th>
+							<th data-options="field:'newNum',width:100,align:'center'">新招退费个数</th>
+							<th data-options="field:'higherNum',width:100,align:'center'">升学退费个数</th>
+							<th data-options="field:'studyNum',width:100,align:'center'">在读退费个数</th>
+							<th data-options="field:'per',width:80,align:'center'">退费占比</th>
 						</tr>
 					</thead>
 				</table>
@@ -63,5 +74,5 @@
   	</body>
 </html>
 <script>
-exportMergeLink("export","list_data","schoolId","0,1");
+	exportMergeLink("export", "list_data", "schoolId", "0,1");
 </script>

@@ -85,12 +85,9 @@ $(document).ready(function() {
 		if(data.length > 0) {
 			$('#month').combobox('setValue', data[0].month);
 		}
-		if(!clearFlag)
-    	{
+		if(!clearFlag) {
     		$("#schoolId").combobox('select',$("#schoolId").combobox("getData")[0].schoolId);
-    	}
-    	else
-    	{
+    	} else {
     		$("#schoolId").combobox('setValue',"");
     	}	
 	});
@@ -210,50 +207,39 @@ function mergeCells(rows) {
 	}
 }
 
-function exportTeacher()
-{
-	if($("#list_data").datagrid("getData").total>0)
-	{
-		var exportInfo =new Array();
+function exportTeacher() {
+	if($("#list_data").datagrid("getData").total > 0) {
+		var exportInfo = new Array();
 		$(".datagrid-header-row").each(function(){
-			var headInfo =new Array();
+			var headInfo = new Array();
 			$(this).find("td").each(function(){
-				var headObj ={};
-				headObj.text =$(this).text();
-				if($(this).attr("colspan")!=null)
-				{
-					headObj.colspan=$(this).attr("colspan");
-				}
-				else
-				{
-					headObj.colspan="";
+				var headObj = {};
+				headObj.text = $(this).text();
+				if($(this).attr("colspan") != null) {
+					headObj.colspan = $(this).attr("colspan");
+				} else {
+					headObj.colspan = "";
 				}	
 				headInfo.push(headObj);
-			})
+			});
 			exportInfo.push(headInfo);
 		})
 		$(".datagrid-body").find(".datagrid-btable").find(".datagrid-row").each(function(){
-			var bodyInfo =new Array();
+			var bodyInfo = new Array();
 			$(this).find("td").each(function(){
-				var bodyObj={};
-				bodyObj.text=$(this).text();
-				if($(this).attr("colspan")!=null)
-				{
-					bodyObj.colspan=$(this).attr("colspan");
-				}
-				else
-				{
-					bodyObj.colspan="";
+				var bodyObj = {};
+				bodyObj.text = $(this).text();
+				if($(this).attr("colspan") != null) {
+					bodyObj.colspan = $(this).attr("colspan");
+				} else {
+					bodyObj.colspan = "";
 				}	
 				bodyInfo.push(bodyObj);
 			})
 			exportInfo.push(bodyInfo);
 		})
-		window.location.href="/sys/export/exportTeacherInfo.do?param="+JSON.stringify(exportInfo);
-
-	}
-	else
-	{
+		window.location.href = "/sys/export/exportTeacherInfo.do?param=" + JSON.stringify(exportInfo);
+	} else {
 		showMessage("提示","暂无数据进行导出",null);
 		return false;
 	}	

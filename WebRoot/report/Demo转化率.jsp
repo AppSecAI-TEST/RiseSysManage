@@ -53,7 +53,7 @@
   						<input class="easyui-datebox" name="endTime" id="endTime"  style="width:100px;height:25px;"  editable="false" />
   					</td>
   					<td align="left">
-  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" funcNodeId ="3500" ><span>查询</span></a>
+  						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" style="width:100px" id="qryBtn" funcNodeId="3500"><span>查询</span></a>
   						&nbsp;&nbsp;
   						<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-reload" style="width:100px" id="resetBtn" ><span>重置</span></a>
   					</td>
