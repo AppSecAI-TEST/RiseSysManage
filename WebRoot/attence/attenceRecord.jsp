@@ -307,18 +307,20 @@
 							{
 								var attendTypeObj = $(node).find("input[name='attendType"+firstTr.attr("studentId")+"']:checked").val();
 								var dressObj = $(node).find("input[name='dress"+firstTr.attr("studentId")+"']:checked").val();
-								var studentObj = {
-									studentId:firstTr.attr("studentId"),
-									studentCourseId:firstTr.attr("studentCourseId"),
-									stageId:firstTr.attr("stageId"),
-									studentName:firstTr.attr("studentName"),
-									schoolId:firstTr.attr("schoolId"),
-									attendDate:"${selDateStr}-${dateValue}",
-									hours:$("#classLessonHour").textbox("getValue"),
-									dress:dressObj,
-									attendType:attendTypeObj
-								};
-								studentArr.push(studentObj);
+								if(attendTypeObj != null && attendTypeObj != "" && dressObj != null && dressObj != ""){
+									var studentObj = {
+										studentId:firstTr.attr("studentId"),
+										studentCourseId:firstTr.attr("studentCourseId"),
+										stageId:firstTr.attr("stageId"),
+										studentName:firstTr.attr("studentName"),
+										schoolId:firstTr.attr("schoolId"),
+										attendDate:"${selDateStr}-${dateValue}",
+										hours:$("#classLessonHour").textbox("getValue"),
+										dress:dressObj,
+										attendType:attendTypeObj
+									};
+									studentArr.push(studentObj);
+								}
 							}
 						});
 						obj.studentList = studentArr;
@@ -535,7 +537,7 @@
 								<td align="center">${node.studentT.name}</td>
 								<td align="center">${node.studentT.byName}</td>
 								<td align="center">${node.studentCourseT.courseStateName}</td>
-								<td align="center" colspan="2">该学生课时与班级进度不匹配暂不能考勤</td>
+								<td align="center" colspan="2">该学生课时与班级进度不匹配暂不能考勤(当前学生课时为${node.realStudentNum})</td>
 							</tr>
 						</c:when>
 						<c:otherwise>

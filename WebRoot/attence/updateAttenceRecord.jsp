@@ -339,15 +339,17 @@
 						var firstTr = $(node).find("td:nth-child(1)");
 						var attendTypeObj = $(node).find("input[name='attendType"+firstTr.attr("studentId")+"']:checked").val();
 						var dressObj = $(node).find("input[name='dress"+firstTr.attr("studentId")+"']:checked").val();
-						var studentObj = {
-							studentId:firstTr.attr("studentId"),
-							studentName:firstTr.attr("studentName"),
-							schoolId:firstTr.attr("schoolId"),
-							attendDate:'<fmt:formatDate value="${classAttendT.attendDate}" pattern="yyyy-MM-dd" />',
-							dress:dressObj,
-							attendType:attendTypeObj
-						};
-						studentArr.push(studentObj);
+						if(attendTypeObj != null && attendTypeObj != "" && dressObj != null && dressObj != ""){
+							var studentObj = {
+								studentId:firstTr.attr("studentId"),
+								studentName:firstTr.attr("studentName"),
+								schoolId:firstTr.attr("schoolId"),
+								attendDate:'<fmt:formatDate value="${classAttendT.attendDate}" pattern="yyyy-MM-dd" />',
+								dress:dressObj,
+								attendType:attendTypeObj
+							};
+							studentArr.push(studentObj);
+						}
 					});
 					obj.studentList = studentArr;
 					if(classTime == "")
