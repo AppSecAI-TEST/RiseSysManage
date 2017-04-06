@@ -74,5 +74,27 @@
   	</body>
 </html>
 <script>
-	exportMergeLink("export", "list_data", "schoolId", "0,1");
+	$("#export").click(function() {
+		if($("#list_data").datagrid("getData").total > 0) {
+			var mergeHorizontalCell = 1;
+			var mergeVerticalIndex = "0,1";
+			var mergeHorizontalIndex = "3";
+			var mergeVerticalName = "schoolId";
+			var mergeHorizontalName = "reasonVal";
+			var funcNodeId = $("#qryBtn").attr("funcNodeId");
+			var param = $("#list_data").datagrid("options").queryParams.param;
+			var fileName = parent.$("li.tabs-selected").find("span.tabs-title").html();
+			try {
+				window.location.href = "/sys/export/refundStageOrReasonExport.do?fileName=" + fileName
+				 + "&mergeVerticalName=" + mergeVerticalName + "&mergeVerticalIndex=" + mergeVerticalIndex + "&param=" + param
+				 + "&funcNodeId=" + funcNodeId + "&mergeHorizontalIndex=" + mergeHorizontalIndex + "&mergeHorizontalName=" + mergeHorizontalName + "&mergeHorizontalCell=" + mergeHorizontalCell;
+			} catch(e) {
+				$.messager.alert('提示', "模版不存在！",function(){
+					window.history.back();
+				});
+			}
+		} else {
+			$.messager.alert('提示', "没有数据可以导出！");
+		}
+	});
 </script>

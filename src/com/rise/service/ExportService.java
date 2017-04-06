@@ -316,6 +316,70 @@ public class ExportService {
 		}
 	}
 	
+	public void refundStageOrReasonExport(String fileName, String mergeVerticalName, String mergeVerticalIndex, String param, 
+			String funcNodeId, String mergeHorizontalIndex, String mergeHorizontalName, String mergeHorizontalCell, OutputStream out) throws Exception {
+		String result = qryPubDataService.qryDataListByPage(null, null, param, funcNodeId);
+		JSONObject obj = JSONObject.fromObject(result);
+		if (ObjectCensor.isStrRegular(StringUtil.getJSONObjectKeyVal(obj, "rows"))) {
+			List list = JacksonJsonMapper.getInstance().readValue(obj.getString("rows"), List.class);
+			String filePath = this.getFullFilePath(fileName);
+			HttpClient client = new HttpClient();
+			GetMethod httpGet = new GetMethod(filePath);
+			client.executeMethod(httpGet);
+			InputStream inputStream = httpGet.getResponseBodyAsStream();
+			Map<String, List<Map>> beanParams = new HashMap<String, List<Map>>();
+			beanParams.put("reportList", list);
+			XLSTransformer former = new XLSTransformer();
+			List<CellRangeAddress> cellRangeList = new ArrayList<CellRangeAddress>();
+			HSSFWorkbook workBook = (HSSFWorkbook) former.transformXLS(inputStream, beanParams);
+			HSSFSheet sheet = workBook.getSheetAt(0);
+			JSONArray array = obj.getJSONArray("rows");
+			if (ObjectCensor.checkListIsNull(array)) {
+				boolean flag = false;
+				int fr = 1, tr = 1, index = 1;
+				String value = StringUtil.getJSONObjectKeyVal(array.getJSONObject(0), mergeVerticalName);
+				String[] indexArr = mergeVerticalIndex.split(",");
+				for (int j = 1; j < array.size(); j++) {
+					JSONObject item = array.getJSONObject(j);
+					if (value.equals(StringUtil.getJSONObjectKeyVal(item, mergeVerticalName))) {
+						flag = true;
+						tr = j + 1;
+						if (j == (array.size() - 1) && flag) {
+							for (int m = 0; m < indexArr.length; m++) {
+								int cIndex = Integer.valueOf(indexArr[m]);
+								CellRangeAddress range1 = new CellRangeAddress(fr, tr, cIndex, cIndex);
+								cellRangeList.add(range1);
+							}
+						}
+					} else {
+						if (flag) {
+							for (int m = 0; m < indexArr.length; m++) {
+								int cIndex = Integer.valueOf(indexArr[m]);
+								CellRangeAddress range2 = new CellRangeAddress(fr, tr, cIndex, cIndex);
+								cellRangeList.add(range2);
+							}
+							flag = false;
+						}
+						fr = j + 1;
+						value = StringUtil.getJSONObjectKeyVal(item, mergeVerticalName);
+					}
+					if ("退费类型占比".equals(StringUtil.getJSONObjectKeyVal(item, mergeHorizontalName))) {
+						index = j + 1;
+						CellRangeAddress range2 = new CellRangeAddress(index, index, Integer.parseInt(mergeHorizontalIndex), Integer.parseInt(mergeHorizontalIndex) + Integer.parseInt(mergeHorizontalCell));
+						cellRangeList.add(range2);
+					}
+					
+				}
+			}
+			for (CellRangeAddress cellRange : cellRangeList) {
+				sheet.addMergedRegion(cellRange);
+			}
+			workBook.write(out);
+			inputStream.close();
+			out.close();
+		}
+	}
+	
 	private String getFullFilePath(String fileName) throws Exception {
 		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1015\",securityCode:\"0000000000\",params:{paramType:\"UPLOAD_PATH\",paramValue:\"excel_model\"},rtnDataFormatType:\"user-defined\"}";
 		String rstMsg = ServiceEngine.invokeHttp(param);

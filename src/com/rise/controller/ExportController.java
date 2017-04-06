@@ -97,6 +97,24 @@ public class ExportController {
 		}
 	}
 	
+	//退费阶段和原因表导出
+	@RequestMapping("/refundStageOrReasonExport.do")
+	public void refundStageOrReasonExport(String fileName, String mergeVerticalName, String mergeVerticalIndex, String param, 
+			String funcNodeId, String mergeHorizontalIndex, String mergeHorizontalName, String mergeHorizontalCell, HttpServletResponse response, HttpServletRequest request) {
+		OutputStream out = null;
+		try {
+			StringBuffer displayFileName = new StringBuffer(fileName);
+			displayFileName.append(new SimpleDateFormat("yyMMdd").format(new Date()));
+			displayFileName.append(".xls");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName=" + URLEncoder.encode(displayFileName.toString(), "utf-8"));
+			out = response.getOutputStream();
+			es.refundStageOrReasonExport(fileName, mergeVerticalName, mergeVerticalIndex, param, funcNodeId, mergeHorizontalIndex, mergeHorizontalName, mergeHorizontalCell, out);
+		} catch (Exception err) {
+			err.printStackTrace();
+		}
+	}
 	
 	//导出总校教质汇总
 	@RequestMapping("/exportCenterTeaFeedback.do")
