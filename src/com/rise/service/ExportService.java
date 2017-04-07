@@ -317,7 +317,7 @@ public class ExportService {
 	}
 	
 	public void refundStageOrReasonExport(String fileName, String mergeVerticalName, String mergeVerticalIndex, String param, 
-			String funcNodeId, String mergeHorizontalIndex, String mergeHorizontalName, String mergeHorizontalCell, OutputStream out) throws Exception {
+			String funcNodeId, String mergeHorizontalIndex, String mergeHorizontalName, String mergeHorizontalCell, String mergeHorizontalVal, OutputStream out) throws Exception {
 		String result = qryPubDataService.qryDataListByPage(null, null, param, funcNodeId);
 		JSONObject obj = JSONObject.fromObject(result);
 		if (ObjectCensor.isStrRegular(StringUtil.getJSONObjectKeyVal(obj, "rows"))) {
@@ -336,7 +336,7 @@ public class ExportService {
 			JSONArray array = obj.getJSONArray("rows");
 			if (ObjectCensor.checkListIsNull(array)) {
 				boolean flag = false;
-				int fr = 1, tr = 1, index = 1;
+				int fr = 1, tr = 1;
 				String value = StringUtil.getJSONObjectKeyVal(array.getJSONObject(0), mergeVerticalName);
 				String[] indexArr = mergeVerticalIndex.split(",");
 				for (int j = 1; j < array.size(); j++) {
@@ -363,12 +363,12 @@ public class ExportService {
 						fr = j + 1;
 						value = StringUtil.getJSONObjectKeyVal(item, mergeVerticalName);
 					}
-					if ("退费类型占比".equals(StringUtil.getJSONObjectKeyVal(item, mergeHorizontalName))) {
-						index = j + 1;
-						CellRangeAddress range2 = new CellRangeAddress(index, index, Integer.parseInt(mergeHorizontalIndex), Integer.parseInt(mergeHorizontalIndex) + Integer.parseInt(mergeHorizontalCell));
+					if (mergeHorizontalVal.equals(StringUtil.getJSONObjectKeyVal(item, mergeHorizontalName))) {
+						int begion = Integer.parseInt(mergeHorizontalIndex);
+						int end = begion + Integer.parseInt(mergeHorizontalCell);
+						CellRangeAddress range2 = new CellRangeAddress(j + 1, j + 1, begion, end);
 						cellRangeList.add(range2);
 					}
-					
 				}
 			}
 			for (CellRangeAddress cellRange : cellRangeList) {

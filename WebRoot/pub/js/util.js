@@ -1080,34 +1080,29 @@ function initQryButton(qryName,resetName,formName,tableName)
 
 
 //初始化年月控件
-function initYearAndMonth(yearName,monthName) {
+function initYearAndMonth(yearName, monthName) {
 	var data1 = [];
-	var data2 =[];
+	var data2 = [];
 	var year = new Date().getFullYear();
-	for ( var i = 0; i < 20; i++) {
+	for (var i = 0; i < 20; i++) {
 		var soption = {};
-		soption.val = (year -5+ i);
-		soption.text = soption.val+"年";
+		soption.val = (year - 5 + i);
+		soption.text = soption.val + "年";
 		data1.push(soption);
-		if(i<12)
-		{
-			var moption={};
-			moption.val=i+1;
-			moption.text = moption.val+"月";
+		if(i < 12) {
+			var moption = {};
+			moption.val = i + 1;
+			moption.text = moption.val + "月";
 			data2.push(moption);
 		}	
 	}
-	if($("#"+yearName).length>0)
-	{
-		$("#"+yearName).combobox("loadData", data1);
+	if($("#" + yearName).length > 0) {
+		$("#" + yearName).combobox("loadData", data1);
 	}
-	if($("#"+monthName).length>0)
-	{
-		$("#"+monthName).combobox("loadData", data2);
+	if($("#" + monthName).length > 0) {
+		$("#" + monthName).combobox("loadData", data2);
 	}
-	
 }
-
 
 function exportLink(btName, tableName) {
 	$("#" + btName).click(function() {

@@ -102,7 +102,6 @@ public class QryPubDataService
 							} else if("1097".equals(funcNodeId)) {
 								funcNodeId = "1099";
 							}
-							obj.element("staffId", staffId);
 						}
 					}
 				}
@@ -114,7 +113,6 @@ public class QryPubDataService
 				}
 			} else if("1058".equals(funcNodeId)) {
 				String schoolId = StringUtil.getJSONObjectKeyVal(obj, "schoolId");
-				schoolId = "";
 				String minOpenNum = StringUtil.getJSONObjectKeyVal(obj, "minOpenNum");
 				String maxOpenNum = StringUtil.getJSONObjectKeyVal(obj, "maxOpenNum");
 				String minOpenRate = StringUtil.getJSONObjectKeyVal(obj, "minOpenRate");
@@ -131,6 +129,25 @@ public class QryPubDataService
 						String total = this.checkStaffIsArea(staffId);
 						if(ObjectCensor.isStrRegular(total) && Integer.parseInt(total) > 0) {
 							funcNodeId = "1102";
+						}
+					}
+				}
+			} else if("1104".equals(funcNodeId)) {
+				String month = StringUtil.getJSONObjectKeyVal(obj, "month");
+				String stageId = StringUtil.getJSONObjectKeyVal(obj, "stageId");
+				String schoolId = StringUtil.getJSONObjectKeyVal(obj, "schoolId");
+				String minAttendRate = StringUtil.getJSONObjectKeyVal(obj, "minAttendRate");
+				String maxAttendRate = StringUtil.getJSONObjectKeyVal(obj, "maxAttendRate");
+				if(!ObjectCensor.isStrRegular(month) && !ObjectCensor.isStrRegular(stageId) && !ObjectCensor.isStrRegular(schoolId) && ObjectCensor.isStrRegular(minAttendRate, maxAttendRate) 
+						&& (("0".equals(minAttendRate) || "0.0".equals(minAttendRate)) && ("100".equals(maxAttendRate) || "100.0".equals(maxAttendRate)))) {
+					String staffSchoolId = StringUtil.getJSONObjectKeyVal(obj, "staffSchoolId");
+					if("10".equals(staffSchoolId)) {
+						funcNodeId = "1105";
+					} else {
+						String staffId = StringUtil.getJSONObjectKeyVal(obj, "staffId");
+						String total = this.checkStaffIsArea(staffId);
+						if(ObjectCensor.isStrRegular(total) && Integer.parseInt(total) > 0) {
+							funcNodeId = "1106";
 						}
 					}
 				}

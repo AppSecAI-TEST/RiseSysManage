@@ -80,6 +80,7 @@
 			var mergeVerticalIndex = "0,1";
 			var mergeHorizontalIndex = "3";
 			var mergeVerticalName = "schoolId";
+			var mergeHorizontalVal = "退费类型占比";
 			var mergeHorizontalName = "reasonVal";
 			var funcNodeId = $("#qryBtn").attr("funcNodeId");
 			var param = $("#list_data").datagrid("options").queryParams.param;
@@ -87,7 +88,8 @@
 			try {
 				window.location.href = "/sys/export/refundStageOrReasonExport.do?fileName=" + fileName
 				 + "&mergeVerticalName=" + mergeVerticalName + "&mergeVerticalIndex=" + mergeVerticalIndex + "&param=" + param
-				 + "&funcNodeId=" + funcNodeId + "&mergeHorizontalIndex=" + mergeHorizontalIndex + "&mergeHorizontalName=" + mergeHorizontalName + "&mergeHorizontalCell=" + mergeHorizontalCell;
+				 + "&funcNodeId=" + funcNodeId + "&mergeHorizontalIndex=" + mergeHorizontalIndex + "&mergeHorizontalName=" 
+				 + mergeHorizontalName + "&mergeHorizontalCell=" + mergeHorizontalCell + "&mergeHorizontalVal=" + mergeHorizontalVal;
 			} catch(e) {
 				$.messager.alert('提示', "模版不存在！",function(){
 					window.history.back();

@@ -11,7 +11,7 @@
 		<script type="text/javascript" src="<%=path %>/js/export/refund.js"></script>
   	</head>
   	<body>
-  	<div style="margin-right:5px;">
+  		<div style="margin-right:5px;">
   			<input type="hidden" id="resourceId" value="719">
   			<input type="hidden" id="type" value="refundStage">
   			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId}"/>
@@ -80,13 +80,15 @@
 			var mergeHorizontalIndex = "2";
 			var mergeVerticalName = "schoolId";
 			var mergeHorizontalName = "stageId";
+			var mergeHorizontalVal = "退费类型占比";
 			var funcNodeId = $("#qryBtn").attr("funcNodeId");
 			var param = $("#list_data").datagrid("options").queryParams.param;
 			var fileName = parent.$("li.tabs-selected").find("span.tabs-title").html();
 			try {
 				window.location.href = "/sys/export/refundStageOrReasonExport.do?fileName=" + fileName
 				 + "&mergeVerticalName=" + mergeVerticalName + "&mergeVerticalIndex=" + mergeVerticalIndex + "&param=" + param
-				 + "&funcNodeId=" + funcNodeId + "&mergeHorizontalIndex=" + mergeHorizontalIndex + "&mergeHorizontalName=" + mergeHorizontalName + "&mergeHorizontalCell=" + mergeHorizontalCell;
+				 + "&funcNodeId=" + funcNodeId + "&mergeHorizontalIndex=" + mergeHorizontalIndex + "&mergeHorizontalName=" 
+				 + mergeHorizontalName + "&mergeHorizontalCell=" + mergeHorizontalCell + "&mergeHorizontalVal=" + mergeHorizontalVal;
 			} catch(e) {
 				$.messager.alert('提示', "模版不存在！",function(){
 					window.history.back();
