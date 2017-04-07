@@ -297,18 +297,20 @@
 						{
 							var attendTypeObj = $(node).find("input[name='attendType"+firstTr.attr("studentId")+"']:checked").val();
 							var dressObj = $(node).find("input[name='dress"+firstTr.attr("studentId")+"']:checked").val();
-							var studentObj = {
-								studentId:firstTr.attr("studentId"),
-								studentCourseId:firstTr.attr("studentCourseId"),
-								stageId:firstTr.attr("stageId"),
-								studentName:firstTr.attr("studentName"),
-								schoolId:firstTr.attr("schoolId"),
-								attendDate:'${classSchooltime}',
-								hours:classLessonHour,
-								dress:dressObj,
-								attendType:attendTypeObj
-							};
-							studentArr.push(studentObj);
+							if(attendTypeObj != null && attendTypeObj != "" && dressObj != null && dressObj != ""){
+								var studentObj = {
+									studentId:firstTr.attr("studentId"),
+									studentCourseId:firstTr.attr("studentCourseId"),
+									stageId:firstTr.attr("stageId"),
+									studentName:firstTr.attr("studentName"),
+									schoolId:firstTr.attr("schoolId"),
+									attendDate:'${classSchooltime}',
+									hours:classLessonHour,
+									dress:dressObj,
+									attendType:attendTypeObj
+								};
+								studentArr.push(studentObj);
+							}
 						}
 					});
 					obj.studentList = studentArr;

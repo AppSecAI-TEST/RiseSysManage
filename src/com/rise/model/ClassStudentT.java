@@ -25,6 +25,8 @@ public class ClassStudentT {
     
     private Integer isStudentOverNum;
     
+    private Integer realStudentNum;
+    
     private StudentT studentT;
     
 	private StudentCourseT studentCourseT;
@@ -142,5 +144,14 @@ public class ClassStudentT {
 	public void setHadChangeT(ChangeT hadChangeT) {
 		this.hadChangeT = hadChangeT;
 	}
+
+	public Integer getRealStudentNum() {
+		return realStudentNum;
+	}
+
+	public void setRealStudentNum(Integer realStudentNum) {
+		this.realStudentNum = realStudentNum;
+	}
+	
 	
 }
