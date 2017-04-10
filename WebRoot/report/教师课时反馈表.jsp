@@ -25,7 +25,7 @@
 	  					<td width="60px" align="right"><span>老师：</span></td>
 	  					<td width="110px" align="left">
 	  						<select class="easyui-combobox" name="teacherId" id="teacherId" style="width:100px;height: 25px;" editable="false"
-	  							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: 'auto'">
+	  							data-options="formatter:formatTeacher, valueField: 'teacherId', textField: 'byname', panelHeight: '250px'">
 	  						</select>
 	  					</td>
 	  					<td width="60px" align="right"><span>月份：</span></td>
@@ -123,8 +123,9 @@ $(document).ready(function(){
 	})
 	$("#schoolId").combobox({
 	 		onChange:function(){
+				var month=$("#time").datebox('getValue');	
 	 			$("#teacherId").combobox({
-					url : "/sys/pubData/getTeacherBySchoolId.do?schoolId="+$("#schoolId").combobox('getValue')
+					url : "/sys/pubData/qryTeacherHourList.do?schoolId="+$("#schoolId").combobox('getValue')+"&month="+month
 				});
 	 		}
 	 });
