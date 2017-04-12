@@ -208,7 +208,6 @@ public class ExportController {
 		}
 	}
 	
-	
 	// 导出教师个人业绩
 	@RequestMapping(value = "/exportTeacherNum.do")
 	public void exportTeacherNum(String fileName, String param, HttpServletResponse response, HttpServletRequest request) {
@@ -349,6 +348,24 @@ public class ExportController {
 			response.setHeader("Content-Disposition", "attachment;fileName=" + URLEncoder.encode(displayFileName.toString(), "utf-8"));
 			out = response.getOutputStream();
 			es.exportExpClassDetai(fileName, param, funcNodeId, out);
+		} catch (Exception err) {
+			err.printStackTrace();
+		}
+	}
+	
+	//校区教师升学率
+	@RequestMapping("/exportTeacherHigherRate.do")
+	public void exportTeacherHigherRate(String fileName, String param, String funcNodeId, HttpServletResponse response, HttpServletRequest request) {
+		OutputStream out = null;
+		try {
+			StringBuffer displayFileName = new StringBuffer(fileName);
+			displayFileName.append(new SimpleDateFormat("yyMMdd").format(new Date()));
+			displayFileName.append(".xls");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "attachment;fileName=" + URLEncoder.encode(displayFileName.toString(), "utf-8"));
+			out = response.getOutputStream();
+			es.exportTeacherHigherRate(fileName, param, funcNodeId, out);
 		} catch (Exception err) {
 			err.printStackTrace();
 		}

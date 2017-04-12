@@ -280,9 +280,11 @@ public class ExportService {
 				boolean flag = false;
 				int fr = 1, tr = 1;
 				String value = StringUtil.getJSONObjectKeyVal(array.getJSONObject(0), mergeName);
+				System.err.println(value);
 				String[] indexArr = mergeIndex.split(",");
 				for (int j = 1; j < array.size(); j++) {
 					JSONObject item = array.getJSONObject(j);
+					System.err.println(StringUtil.getJSONObjectKeyVal(item, mergeName));
 					if (value.equals(StringUtil.getJSONObjectKeyVal(item, mergeName))) {
 						flag = true;
 						tr = j + 1;
@@ -297,6 +299,8 @@ public class ExportService {
 						if (flag) {
 							for (int m = 0; m < indexArr.length; m++) {
 								int cIndex = Integer.valueOf(indexArr[m]);
+								System.err.println(fr);
+								System.err.println(tr);
 								CellRangeAddress range2 = new CellRangeAddress(fr, tr, cIndex, cIndex);
 								cellRangeList.add(range2);
 							}
@@ -941,6 +945,56 @@ public class ExportService {
 						}
 						fr2 = j + 2;
 						value2 = StringUtil.getJSONObjectKeyVal(item, "stageId");
+					}
+				}
+			}
+			for (CellRangeAddress cellRange : cellRangeList) {
+				sheet.addMergedRegion(cellRange);
+			}
+			workBook.write(out);
+			inputStream.close();
+			out.close();
+		}
+	}
+	
+	public void exportTeacherHigherRate(String fileName, String param, String funcNodeId, OutputStream out) throws Exception {
+		String result = qryPubDataService.qryDataListByPage(null, null, param, funcNodeId);
+		JSONObject obj = JSONObject.fromObject(result);
+		if (ObjectCensor.isStrRegular(StringUtil.getJSONObjectKeyVal(obj, "rows"))) {
+			List list = JacksonJsonMapper.getInstance().readValue(obj.getString("rows"), List.class);
+			String filePath = this.getFullFilePath(fileName);
+			HttpClient client = new HttpClient();
+			GetMethod httpGet = new GetMethod(filePath);
+			client.executeMethod(httpGet);
+			InputStream inputStream = httpGet.getResponseBodyAsStream();
+			Map<String, List<Map>> beanParams = new HashMap<String, List<Map>>();
+			beanParams.put("reportList", list);
+			XLSTransformer former = new XLSTransformer();
+			List<CellRangeAddress> cellRangeList = new ArrayList<CellRangeAddress>();
+			HSSFWorkbook workBook = (HSSFWorkbook) former.transformXLS(inputStream, beanParams);
+			HSSFSheet sheet = workBook.getSheetAt(0);
+			JSONArray array = obj.getJSONArray("rows");
+			if (ObjectCensor.checkListIsNull(array)) {
+				boolean flag1 = false;
+				int fr1 = 2, tr1 = 2;
+				String value1 = StringUtil.getJSONObjectKeyVal(array.getJSONObject(0), "teacherId");
+				for (int j = 1; j < array.size(); j++) {
+					JSONObject item = array.getJSONObject(j);
+					if (value1.equals(StringUtil.getJSONObjectKeyVal(item, "teacherId"))) {
+						flag1 = true;
+						tr1 = j + 2;
+						if (j == (array.size() - 1) && flag1) {
+							CellRangeAddress range1 = new CellRangeAddress(fr1, tr1, 0, 0);
+							cellRangeList.add(range1);
+						}
+					} else {
+						if (flag1) {
+							CellRangeAddress range2 = new CellRangeAddress(fr1, tr1, 0, 0);
+							cellRangeList.add(range2);
+							flag1 = false;
+						}
+						fr1 = j + 2;
+						value1 = StringUtil.getJSONObjectKeyVal(item, "teacherId");
 					}
 				}
 			}

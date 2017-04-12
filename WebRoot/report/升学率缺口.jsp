@@ -51,12 +51,12 @@
 						<tr>
 							<th data-options="field:'schoolName',width:100,align:'center'">校区</th>
 							<th data-options="field:'quarterGoalHigherBaseNum',width:100,align:'center'"><div id="goal"></div></th>
-							<th data-options="field:'1MonthHigherRate',width:100,align:'center'"><div id="1_month"></div></th>
-							<th data-options="field:'1MonthGoalHigherBaseNum',width:100,align:'center'"><div id="1_month_goal"></div></th>
-							<th data-options="field:'2MonthHigherRate',width:100,align:'center'"><div id="2_month"></div></th>
-							<th data-options="field:'2MonthGoalHigherBaseNum',width:100,align:'center'"><div id="2_month_goal"></div></th>
-							<th data-options="field:'3MonthHigherRate',width:100,align:'center'"><div id="3_month"></div></th>
-							<th data-options="field:'3MonthGoalHigherBaseNum',width:100,align:'center'"><div id="3_month_goal"></div></th>
+							<th data-options="field:'monthHigherRate1',width:100,align:'center'"><div id="1_month"></div></th>
+							<th data-options="field:'monthGoalHigherBaseNum1',width:100,align:'center'"><div id="1_month_goal"></div></th>
+							<th data-options="field:'monthHigherRate2',width:100,align:'center'"><div id="2_month"></div></th>
+							<th data-options="field:'monthGoalHigherBaseNum2',width:100,align:'center'"><div id="2_month_goal"></div></th>
+							<th data-options="field:'monthHigherRate3',width:100,align:'center'"><div id="3_month"></div></th>
+							<th data-options="field:'monthGoalHigherBaseNum3',width:100,align:'center'"><div id="3_month_goal"></div></th>
 							<th data-options="field:'quarterHigherBaseNum',width:100,align:'center'">升学基数</th>
 							<th data-options="field:'quarterHigherRate',width:100,align:'center'"><div id="rate"></div></th>
 						</tr>

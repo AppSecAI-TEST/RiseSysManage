@@ -253,7 +253,10 @@ function onLoadSuccess() {
 	} else if("allRegion" == higherType) {
 		//片区升学率
 		mergeCellsByField("list_data", "regionName,quarterHigherRate");
-	} 
+	} else if("teacherHigherRate" == higherType) {
+		//校区教师升学率
+		mergeCellsByField("list_data", "byname");
+	}
 }
 
 function mergeCellsByField(tableId, colList) {

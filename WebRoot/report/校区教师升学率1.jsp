@@ -14,57 +14,62 @@
   	<body>
   		<div style="margin-right:5px;">
   			<input type="hidden" id="sFlag" value="1"/>
-  			<input type="hidden" id="resourceId" value="749">	
+  			<input type="hidden" id="resourceId" value="749"/>	
+  			<input type="hidden" id="higherType" value="teacherHigherRate"/>
   			<input type="hidden" id="staffId" value="${sessionScope.StaffT.staffId }"/>
   			<form id="qryFm">
 	  			<table class="search_tab">
 	  				<tr>
 	  					<td align="right" style="width:100px"><span>校区：</span></td>
-	  					<td width="130px">
-	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+	  					<td style="min-width: 114px">
+	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 114px; height: 25px;" editable="false"
 								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 				        	</select>
 						</td>
 						<td align="right" style="width: 120px"><span>带班老师：</span></td>
-	  					<td width="135px">
+	  					<td style="min-width: 114px">
 	  						<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 114px; height: 25px;">
 	  						</select>
 	  					</td>
-	  					<td align="left" style="width: 90px"><span>课时进度比：</span></td>
-	  					<td align="left">
-	  						<input name="minAttendRate" id="minAttendRate" type="text" class="easyui-numberbox" style="width: 39px; height: 25px;"/>
-							<span style="display: inline-block; text-align: center; width: 32px;">%&nbsp;至&nbsp;</span>
-							<input name="maxAttendRate" id="maxAttendRate" type="text" class="easyui-numberbox" style="width: 39px; height: 25px;"/>
-	  						<span style="display: inline-block; text-align: center; width: 3px;">%</span>
-	  					</td>
+	  					<td align="right" style="width: 90px"><span>年度：</span></td>
+						<td style="min-width: 114px">
+							<select class="easyui-combobox" name="year" id="year" style="width:114px;height: 25px;" editable="false" data-options="valueField:'val',textField:'text'">
+							</select>
+						</td>
+						<td>&nbsp;</td>
 	  				</tr>	
 	  				<tr>
 	  					<td align="right"><span>未结课升学率：</span></td>
-	  					<td>
-	  						<input name="minAttendHigherRate" id="minAttendHigherRate" type="text" class="easyui-numberbox" style="width: 39px; height: 25px;"/>
-							<span style="display: inline-block; text-align: center; width: 32px;">%&nbsp;至&nbsp;</span>
-							<input name="maxAttendHigherRate" id="maxAttendHigherRate" type="text" class="easyui-numberbox" style="width: 39px; height: 25px;"/>
-							<span style="display: inline-block; text-align: center; width: 3px;">%</span>
+	  					<td align="left">
+	  						<input name="minAttendHigherRate" id="minAttendHigherRate" type="text" style="width:39px;height:25px;" class="easyui-numberbox" data-options="precision:1,min:0,max:100"/>%
+	  						至
+	  						<input name="maxAttendHigherRate" id="maxAttendHigherRate" type="text" style="width:39px;height:25px;" class="easyui-numberbox" data-options="precision:1,min:0,max:100"/>%
 	  					</td>
 	  					<td align="right"><span>已结课升学率：</span></td>
-	  					<td width="135px">
-	  						<input name="minFinishHigherRate" id="minFinishHigherRate" type="text" class="easyui-numberbox" style="width: 39px; height: 25px;"/>
-							<span style="display: inline-block; text-align: center; width: 32px;">%&nbsp;至&nbsp;</span>
-							<input name="maxFinishHigherRate" id="maxFinishHigherRate" type="text" class="easyui-numberbox" style="width: 39px; height: 25px;"/>
-							<span style="display: inline-block; text-align: center; width: 3px;">%</span>
+	  					<td align="left">
+	  						<input name="minFinishHigherRate" id="minFinishHigherRate" type="text" style="width:39px;height:25px;" class="easyui-numberbox" data-options="precision:1,min:0,max:100"/>%
+	  						至
+	  						<input name="maxFinishHigherRate" id="maxFinishHigherRate" type="text" style="width:39px;height:25px;" class="easyui-numberbox" data-options="precision:1,min:0,max:100"/>%
 						</td>
-						<td align="left" colspan="2">
-							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1052">查询</a>
-							&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
+						<td align="right" style="width: 90px"><span>课时进度比：</span></td>
+	  					<td align="left">
+	  						<input name="minAttendRate" id="minAttendRate" type="text" style="width:39px;height:25px;" class="easyui-numberbox" data-options="precision:0,min:0,max:100"/>%
+	  						至
+	  						<input name="maxAttendRate" id="maxAttendRate" type="text" style="width:39px;height:25px;" class="easyui-numberbox" data-options="precision:0,min:0,max:100"/>%
+	  					</td>
+						<td align="left">
+							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px; height: 25px;" id="qryBtn" funcNodeId="1107">查询</a>
+							<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:100px; height: 25px;" id="reset">重置</a>
 						</td>
 	  				</tr>
 	  			</table>
   			</form>
   				<table class="easyui-datagrid" style="height:435px;" id="list_data"
-					title="查询结果" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
+					title="查询结果" toolbar="#toolbar" pagination="false" rownumbers="true" fitColumns="true" singleSelect="false">
 					<thead>
 						<tr>
 							<th data-options="field:'byname',width:120,align:'center',rowspan:2">带班老师</th>
+							<th data-options="field:'stageTeam',width:120,align:'center',rowspan:2">阶段</th>
 							<th data-options="field:'finish',width:400,align:'center',colspan:4">已结课</th>
 							<th data-options="field:'attend',width:400,align:'center',colspan:4"><div id="classProgress">未结课</div></th>
 						</tr>
@@ -87,5 +92,20 @@
   	</body>
 </html>
 <script>
-	exportLink("export", "list_data");
+	$("#export").click(function(){
+		if($("#list_data").datagrid("getData").total > 0) {
+			var funcNodeId = $("#qryBtn").attr("funcNodeId");
+			var param = $("#list_data").datagrid("options").queryParams.param;
+			var fileName = parent.$("li.tabs-selected").find("span.tabs-title").html();
+			try {
+				window.location.href = "/sys/export/exportTeacherHigherRate.do?fileName=" + fileName + "&param=" + param + "&funcNodeId=" + funcNodeId;
+			} catch(e) {
+				$.messager.alert('提示', "模版不存在！",function(){ 
+					window.history.back();
+				});
+			}
+		} else {
+			$.messager.alert('提示', "没有数据可以导出！");
+		}	
+	});
 </script>
