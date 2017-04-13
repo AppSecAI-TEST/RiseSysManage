@@ -60,8 +60,8 @@ $(document).ready(function(){
 });
 
 function back() {
-	if("attend" == channel) {
-		window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=maintenance&funcNodeId="+funcNodeId;
+	if ("attend" == channel) {
+		window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId=" + classInstId + "&type=maintenance&funcNodeId=" + funcNodeId;
 	} else {
 		window.location.href = "expList.jsp"
 	}
@@ -82,71 +82,61 @@ function initPage()
 	channel = getFormatStr(info.split(",")[9]);
 	var param = '{"excFlag":"N","studentId":"'+studentId+'"}';
 	$.ajax({
-			type : "POST",
-			url: "/sys/exception/qryInfo.do",
-			data: "param="+param,
-			async: false,
-			dataType:"json",
-			beforeSend: function()
-	    	{
-	    		$.messager.progress({title : '系统消息', msg : '正在加载数据，请稍等……'});
-	    	},
-	    	success: function(data) {
-	    		$.messager.progress('close'); 
-	    		if(data.studentInfo!=undefined)
-	    		{
-	    			$("#name").html(data.studentInfo.name);
-	    			$("#birthday").html(data.studentInfo.birthday);
-	    			$("#sexVal").html(data.studentInfo.sexVal);
-	    			$("#identityId").html(data.studentInfo.identityId);
-	    			$("#byName").html(data.studentInfo.byName);
-	    			$("#phone").html(data.studentInfo.phone);
-	    			$("#schoolName").html(data.studentInfo.schoolName);
-	    		}
-	    		if(data.courseInfo!=undefined&&data.courseInfo.length>0)
-	    		{
-	    			var contentStr ="";
-	    			$.each(data.courseInfo,function(i,obj){
-	    				contentStr +="<tr><td>"+obj.stageId+"</td>";
-	    				contentStr +="<td>"+obj.courseStateText+"</td>";
-	    				contentStr +="<td>"+obj.paySchoolName+"</td>";
-	    				contentStr +="<td>"+obj.payDate+"</td>";
-	    				contentStr +="<td>"+obj.feeTypeText+"</td>";
-	    				contentStr +="<td>"+obj.className+"</td>";
-	    				contentStr +="<td>"+obj.startDate+"</td>";
-	    				contentStr +="<td>"+obj.finishDate+"</td>";
-	    				contentStr +="<td>"+obj.classProgress+"</td>";
-	    				contentStr +="<td>"+obj.adviserName+"</td>";
-	    				contentStr +="<td>"+obj.dutyAdvisterName+"</td>";
-	    				contentStr +="<td>"+obj.carerName+"</td></tr>";
-	    			});
-	    			$("#classInfo").append(contentStr);
-	    		}
-	        },
-	        error:function(){
-	        	$.messager.progress('close'); 
-	        }
-	    	
+		type : "POST",
+		url: "/sys/exception/qryInfo.do",
+		data: "param="+param,
+		async: false,
+		dataType:"json",
+		beforeSend: function() {
+	    	$.messager.progress({title : '系统消息', msg : '正在加载数据，请稍等……'});
+	    },
+	    success: function(data) {
+	    	$.messager.progress('close'); 
+	    	if (data.studentInfo != undefined) {
+	    		$("#name").html(data.studentInfo.name);
+	    		$("#birthday").html(data.studentInfo.birthday);
+	    		$("#sexVal").html(data.studentInfo.sexVal);
+	   			$("#identityId").html(data.studentInfo.identityId);
+	   			$("#byName").html(data.studentInfo.byName);
+	   			$("#phone").html(data.studentInfo.phone);
+	   			$("#schoolName").html(data.studentInfo.schoolName);
+	   		}
+	   		if (data.courseInfo != undefined && data.courseInfo.length > 0) {
+				var contentStr = "";
+				$.each(data.courseInfo, function(i, obj) {
+					contentStr += "<tr><td>" + obj.stageId + "</td>";
+					contentStr += "<td>" + obj.courseStateText + "</td>";
+					contentStr += "<td>" + obj.paySchoolName + "</td>";
+					contentStr += "<td>" + obj.payDate + "</td>";
+					contentStr += "<td>" + obj.feeTypeText + "</td>";
+					contentStr += "<td>" + obj.className + "</td>";
+					contentStr += "<td>" + obj.startDate + "</td>";
+					contentStr += "<td>" + obj.finishDate + "</td>";
+					contentStr += "<td>" + obj.classProgress + "</td>";
+					contentStr += "<td>" + obj.adviserName + "</td>";
+					contentStr += "<td>" + obj.dutyAdvisterName + "</td>";
+					contentStr += "<td>" + obj.carerName + "</td></tr>";
+				});
+				$("#classInfo").append(contentStr);
+			}
+	    },
+	    error:function(){
+	    	$.messager.progress('close'); 
+	    }
 	});
 }
 
-function replaceAdd(s)
-{
+function replaceAdd(s) {
 	var newstr = "";
-	if(s.length > 0)
-	{
-		for (var i=0; i<s.length; i++) 
-		{
-			c = s.charAt(i); 
-			if(c=="+")
-			{
-				newstr+="%2B";
+	if (s.length > 0) {
+		for ( var i = 0; i < s.length; i++) {
+			c = s.charAt(i);
+			if (c == "+") {
+				newstr += "%2B";
+			} else {
+				newstr += c;
 			}
-			else
-			{
-				newstr+=c;
-			}	
 		}
 	}
-   return newstr; 
+	return newstr;
 }

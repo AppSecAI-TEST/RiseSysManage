@@ -177,7 +177,7 @@ function addStuExpFollowInfo(){
 			type : "POST",
 			url: "/sys/expManage/addStuExpFollowInfo.do",
 			data: "json="+JSON.stringify(care),
-			async: false,
+			async: true,
 			beforeSend: function() {
 				$.messager.progress({title : '新增异动跟进记录', msg : '新增异动跟进记录中，请稍等……'});
 			},

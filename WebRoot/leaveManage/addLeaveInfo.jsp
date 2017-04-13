@@ -84,7 +84,7 @@
  			</tr>
  			<tr>
  				<td align="right"><span>备注：</span></td>
- 				<td colspan="13"><textarea rows="7" cols="100" id="addRemark" name="addRemark" class="easyui-validatebox textbox"></textarea></td>
+ 				<td colspan="13"><textarea rows="7" cols="100" id="addRemark" name="addRemark" class="textarea easyui-validatebox" validType="length[0,120]"></textarea></td>
  			</tr>
  		</table>
  		</form>

@@ -61,7 +61,7 @@ $(document).ready(function() {
     });
     
     //查询可以休学的学员
-     $("#qryStuBtn").click(function() {
+    $("#qryStuBtn").click(function() {
     	var schoolId = $("#stuSchoolId").combobox("getValue");
     	if(schoolId != "") {
     		initPageNumber("stuList_data");
@@ -84,9 +84,8 @@ $(document).ready(function() {
 		}
     });
     
-    //定位学员页面重置
-     $("#stuResetBtn").click(function() 
-    {
+     //定位学员页面重置
+     $("#stuResetBtn").click(function() {
     	$("#qryStuFm").form('clear');//清空窗体数据  
     	//校区赋默认值
     	if($("#stuSchoolId").combobox("getData").length>0){
@@ -133,18 +132,66 @@ $(document).ready(function() {
     $("#cancelUploadBtn").click(function() {
     	$("#fileName").filebox({prompt: ""});
     });
-     
+    
+    //休学延长
+    $("#leaveProlongBtn").click(function() {
+    	if(validateSelect("list_data")) {
+    		var row = $('#list_data').datagrid('getSelected');
+    		var exceedFlag = row.exceedFlag;
+    		if("Y" == exceedFlag) {
+    			var leaveId = row.leaveId;
+    			var studentId = row.studentId;
+    			window.location.href = "/sys/leaveManage/viewLeaveInfo.do?studentId=" + studentId + "&leaveId=" + leaveId + "&funcNodeId=&type=prolong";
+    		} else {
+    			$.messager.alert('提示', "该学员还没有超期，不能休学延长！");
+    		}
+    	}
+    });
+    
+    //延长休学提交
+    $("#prolongSubmit").click(function() {
+    	if($("#prolongForm").form('validate')) {
+    		var leaveId = $("#leaveId").val();
+    		var handlerId = $("#handlerId").val();
+    		var obj = $("#prolongForm").serializeObject();
+    		var prolongTime = $("#prolongTime").numberbox("getValue");
+    		var prolongRemark = obj.prolongRemark;
+    		if(prolongRemark != null && prolongRemark != "" && prolongRemark != undefined) {
+    			prolongRemark = string2Json(prolongRemark);
+    			prolongRemark = encodeURI(prolongRemark);
+    		}
+    		$.ajax({
+    			type : "POST",
+    			url: "/sys/leaveManage/prolong.do",
+    			data: "leaveId=" + leaveId + "&prolongTime=" + prolongTime + "&prolongRemark=" + prolongRemark + "&handlerId=" + handlerId,
+    			dataType: "json",
+    			async: true,
+    			beforeSend: function() {
+    	    		$.messager.progress({title : '延长休学', msg : '正在延长休学，请稍等……'});
+    	    	},
+    	    	success: function(data) {
+    	    		$.messager.progress('close'); 
+    	    		var flag = data.flag;
+    	    		if(flag) {
+    	    			$.messager.alert('提示', "修改休学时长成功！","info",function(){
+    		    			window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";
+    					});
+    	    		} else {
+    	    			$.messager.alert('提示', data.msg);
+    	    		}
+    	        } 
+    		});
+    	}
+    });
 });
 
 //跳转到查询可以休学学员页面
-function addLeave()
-{
+function addLeave() {
 	window.location.href = "/sys/leaveManage/qryCanLeaveStu.jsp";
 }
 
 //跳转复课页面，有限制条件，超期、已经复课和终止不能复课
-function restartClass()
-{
+function restartClass() {
 	if(validateSelect("list_data")) {
 		var row = $('#list_data').datagrid('getSelected');
 		var studentId = row.studentId;
@@ -162,8 +209,7 @@ function restartClass()
 }
 
 //跳转浏览页面
-function viewLeaveInfo()
-{
+function viewLeaveInfo() {
 	if(validateSelect("list_data")) {
 		var row = $('#list_data').datagrid('getSelected');
 		var studentId = row.studentId;
@@ -174,8 +220,7 @@ function viewLeaveInfo()
 }
 
 //跳转修改休学时长页面
-function updateLeaveTime()
-{
+function updateLeaveTime() {
 	if(validateSelect("list_data")) {
 		var row = $('#list_data').datagrid('getSelected');
 		var studentId = row.studentId;
@@ -192,12 +237,11 @@ function updateLeaveTime()
 }
 
 //复课提交 001原班复课 002转班复课 003转校复课
-function restartSubmit()
-{
+function restartSubmit() {
 	var resumeType = $("input[name='resumeType']:checked").val();
-	if(resumeType == undefined || resumeType == ""){
+	if(resumeType == undefined || resumeType == "") {
 		$.messager.alert('提示', "请先选择复课方式后再提交！");
-	}else{
+	} else {
 		var handlerId = $("#handlerId").val();
 		var studentId = $("#studentId").val();
 		var leaveId = $("#leaveId").val();
@@ -206,9 +250,8 @@ function restartSubmit()
 			type : "POST",
 			url: "/sys/leaveManage/restartClass.do",
 			data: "studentId="+studentId+"&leaveId="+leaveId+"&resumeType="+resumeType+"&studentCourseId="+studentCourseId+"&handlerId="+handlerId,
-			async: false,
-			beforeSend: function()
-	    	{
+			async: true,
+			beforeSend: function() {
 	    		$.messager.progress({title : '复课', msg : '正在复课，请稍等……'});
 	    	},
 	    	success: function(flag) {
@@ -239,8 +282,7 @@ function restartSubmit()
 }
 
 //修改休学时长
-function updateSubmit()
-{
+function updateSubmit() {
 	var delayDate = $("#delayDate").datebox("getValue");
 	var leaveDate = $("#leaveDate").val();
 	var leaveStartDate = $("#leaveStartDate").html();
@@ -271,18 +313,17 @@ function updateSubmit()
 		type : "POST",
 		url: "/sys/leaveManage/updateLeaveTime.do",
 		data: "leaveId="+leaveId+"&delayDate="+delayDate+"&updateRemark="+updateRemark+"&handlerId="+handlerId,
-		async: false,
-		beforeSend: function()
-    	{
+		async: true,
+		beforeSend: function() {
     		$.messager.progress({title : '修改休学时长', msg : '正在修改休学时长，请稍等……'});
     	},
     	success: function(flag) {
     		$.messager.progress('close'); 
-    		if(flag == "true"){
+    		if(flag == "true") {
     			$.messager.alert('提示', "修改休学时长成功！","info",function(){
 	    			window.location.href = "/sys/leaveManage/qryLeaveInfo.jsp";
 				});
-    		}else if(flag == "false"){
+    		} else if(flag == "false") {
     			$.messager.alert('提示', "修改休学时长失败！");
     		}
         } 
@@ -290,8 +331,7 @@ function updateSubmit()
 }
 
 //跳转新增休学页面
-function addLeaveInfo()
-{
+function addLeaveInfo() {
 	if(validateSelect("stuList_data")) {
 		var row = $('#stuList_data').datagrid('getSelected');
 		var studentId = row.studentId;
@@ -309,9 +349,8 @@ function addLeaveInfo()
 }
 
 //新增休学提交
-function addLeaveSubmit()
-{
-	if($("#addLeaveForm").form('validate')){
+function addLeaveSubmit() {
+	if($("#addLeaveForm").form('validate')) {
 		var flag = true;
 		var fileName = $("#fileName").filebox("getText");
 		if(fileName != "" && fileName != null && fileName != undefined) {
@@ -377,8 +416,7 @@ function back() {
 	}
 }
 
-function validateSelect(object)
-{
+function validateSelect(object) {
 	var flag = false;
 	var obj = $("#"+object+"").datagrid('getSelections');
 	if(obj.length > 0) {
@@ -393,8 +431,7 @@ function validateSelect(object)
 	return flag;
 }
 
-function initDate()
-{
+function initDate() {
 	var curr_time = new Date();
 	$('#createEndTime').datebox('setValue', myformatter(curr_time));
 	curr_time.setMonth(curr_time.getMonth() - 1);

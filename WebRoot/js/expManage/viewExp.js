@@ -11,8 +11,7 @@ $(document).ready(function(){
 });
 
 
-function initPage()
-{
+function initPage() {
 	var info = document.URL.split("=")[1];
 	var studentId = info.split(",")[0];
 	var studentCourseId = info.split(",")[1];
@@ -51,9 +50,7 @@ function initPage()
 					$("#finishDate").html(data.excInfo.finishDate);
 					$("#resumeDate").html(data.excInfo.resumeDate);
 					$("#resumeType").html(data.excInfo.resumeType);
-					if (data.excInfo.state == '异常中'
-							&& data.excInfo.excDays != ""
-								&& parseInt(data.excInfo.excDays) > 730) {
+					if (data.excInfo.state == '异常中' && data.excInfo.excDays != "" && parseInt(data.excInfo.excDays) > 730) {
 						$("#excState").html("已超期");
 					}
 				}

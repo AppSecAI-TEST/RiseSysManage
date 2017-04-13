@@ -16,50 +16,49 @@
  		<form id="qryFm">
   			<table class="search_tab">
   				<tr>
-  					<td align="right" width="10%"><span>所属校区：</span></td>
-  					<td align="left" width="5%">
+  					<td align="right" style="min-width: 100px"><span>所属校区：</span></td>
+  					<td align="left" style="min-width: 100px">
   						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width:100px;height: 25px;" editable="false">
         				</select>
   					</td>
-  					<td align="right" width="12%"><span>学员姓名：</span></td>
-  					<td align="left" width="5%">
+  					<td align="right" style="min-width: 120px"><span>学员姓名：</span></td>
+  					<td align="left" style="min-width: 100px">
   						<input class="easyui-textbox" name="studentName" id="studentName" style="width:100px;height:25px;" />
   					</td>
-  					<td align="right" width="12%"><span>联系电话：</span></td>
-  					<td align="left" width="5%">
+  					<td align="right" style="min-width: 100px"><span>联系电话：</span></td>
+  					<td align="left" style="min-width: 100px">
   						<input class="easyui-numberbox" name="phone" id="phone" style="width:100px;height:25px;" />
   					</td>
-  					<td align="right" width="15%"><span>休学状态：</span></td>
-  					<td align="left" width="10%">
+  					<td align="right" style="min-width: 120px"><span>休学开始时间：</span></td>
+  					<td style="min-width: 230px">
+  						<input class="easyui-datebox"  name="startTimeCreate" id="startTimeCreate" style="width:100px;height: 25px;" />
+  						至
+  						<input class="easyui-datebox"  name="endTimeCreate" id="endTimeCreate" style="width:100px;height: 25px;" />
+  					</td>
+  				</tr>
+  				<tr>
+  					<td align="right" style="min-width: 100px"><span>已休时长：</span></td>
+  					<td align="left" style="min-width: 100px">
+  						<input class="easyui-numberbox"  name="leavedStartTime" id="leavedStartTime" style="width:39px;height: 25px;" />
+  						至
+  						<input class="easyui-numberbox"  name="leavedEndTime" id="leavedEndTime" style="width:39px;height: 25px;" />
+  					</td>
+  					<td align="right" style="min-width: 120px"><span>申请休学时长：</span></td>
+  					<td align="left" style="min-width: 100px">
+  						<input class="easyui-numberbox"  name="leaveStartTime" id="leaveStartTime" style="width:39px;height: 25px;" />
+  						至
+  						<input class="easyui-numberbox"  name="leaveEndTime" id="leaveEndTime" style="width:39px;height: 25px;" />
+  					</td>
+  					<td align="right" style="min-width: 100px"><span>休学状态：</span></td>
+  					<td align="left" style="min-width: 100px" colspan="2">
   						<select class="easyui-combobox" name="leaveState" id="leaveState" style="width:100px;height: 25px;"
   						data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto'"
       					url="<%=path %>/pubData/qryCodeNameList.do?tableName=STUDENT_LEAVE_T&codeType=LEAVE_STATE">
   						</select>
   					</td>
-  					<td width="26%"></td>
-  				</tr>
-  				<tr>
-  					<td align="right"><span>已休时长：</span></td>
   					<td>
-  						<input class="easyui-numberbox"  name="leavedStartTime" id="leavedStartTime" style="width:37px;height: 25px;" />
-  						<span>至</span>
-  						<input class="easyui-numberbox"  name="leavedEndTime" id="leavedEndTime" style="width:37px;height: 25px;" />
-  					</td>
-  					<td align="right"><span>申请休学时长：</span></td>
-  					<td>
-  						<input class="easyui-numberbox"  name="leaveStartTime" id="leaveStartTime" style="width:37px;height: 25px;" />
-  						<span>至</span>
-  						<input class="easyui-numberbox"  name="leaveEndTime" id="leaveEndTime" style="width:37px;height: 25px;" />
-  					</td>
-  					<td align="right"><span>休学开始时间：</span></td>
-  					<td colspan="2">
-  						<input class="easyui-datebox"  name="startTimeCreate" id="startTimeCreate" style="width:100px;height: 25px;" />
-  						<span>至</span>
-  						<input class="easyui-datebox"  name="endTimeCreate" id="endTimeCreate" style="width:100px;height: 25px;" />
-  					</td>
-  					<td colspan="2" align="left">
 						<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:100px" id="qryBtn" funcNodeId="4000"><span>查询</span></a>
-						&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" id="resetBtn" style="width:100px" id="reset" ><span>重置</span></a>
+						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" id="resetBtn" style="width:100px" id="reset" ><span>重置</span></a>
 					</td>
   				</tr>
   			</table>
@@ -86,10 +85,11 @@
 			</thead>
 		</table>
 		<div id="toolbar" style="padding: 2px;height:auto;">
-   			<a href="javascript:void(0)" id="addLeaveInfo" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;" onclick="addLeave()"><span>新增休学</span></a>
-   			<a href="javascript:void(0)" id="restartClass" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;" onclick="restartClass()"><span>复课</span></a>
-   			<a href="javascript:void(0)" id="viewLeaveInfo" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;" onclick="viewLeaveInfo()"><span>浏览</span></a>
- 			<a href="javascript:void(0)" id="updateLeaveTime" class="easyui-linkbutton" iconCls="icon-edit" style="width: 120px;" onclick="updateLeaveTime()"><span>修改休学时长</span></a>
+   			<a href="javascript:void(0)" id="addLeaveInfo" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;" onclick="addLeave()">新增休学</a>
+   			<a href="javascript:void(0)" id="restartClass" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;" onclick="restartClass()">复课</a>
+   			<a href="javascript:void(0)" id="viewLeaveInfo" class="easyui-linkbutton" iconCls="icon-redo" style="width: 100px;" onclick="viewLeaveInfo()">浏览</a>
+ 			<a href="javascript:void(0)" id="updateLeaveTime" class="easyui-linkbutton" iconCls="icon-edit" style="width: 120px;" onclick="updateLeaveTime()">修改休学时长</a>
+ 			<a href="javascript:void(0)" id="leaveProlongBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px;">休学延长</a>
  		</div>
  		</div>
   	</body>

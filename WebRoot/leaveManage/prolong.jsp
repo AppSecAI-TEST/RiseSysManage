@@ -73,50 +73,52 @@
   		</div>
 		<div style="height: 5px;"></div>
    		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="学员课程信息">
- 		<table width="100%" cellpadding="5px" class="maintable" id="courseTd">
- 			<tr>
- 				<td align="center"><span>课程阶段</span></td>
- 				<td align="center"><span>课程状态</span></td>
- 				<td align="center"><span>校区</span></td>
- 				<td align="center"><span>缴费时间</span></td>
- 				<td align="center"><span>业绩类型</span></td>
- 				<td align="center"><span>班级</span></td>
- 				<td align="center"><span>开课日期</span></td>
- 				<td align="center"><span>结课日期</span></td>
- 				<td align="center"><span>课程进度</span></td>
- 				<td align="center"><span>带班老师</span></td>
- 				<td align="center"><span>业绩顾问</span></td>
- 				<td align="center"><span>业绩老师</span></td>
- 				<td align="center"><span>责任顾问</span></td>
- 				<td align="center"><span>客户关怀</span></td>
- 				<c:forEach items="${obj.courseInfo}" var="courseInfo">
- 					<tr>
- 						<td align="center"><span>${courseInfo.stageId}</span></td>
- 						<td align="center"><span>${courseInfo.courseStateText}</span></td>
- 						<td align="center"><span>${courseInfo.paySchoolName}</span></td>
- 						<td align="center"><span>${courseInfo.payDate}</span></td>
- 						<td align="center"><span>${courseInfo.feeTypeText}</span></td>
- 						<td align="center"><span>${courseInfo.className}</span></td>
- 						<td align="center"><span>${courseInfo.startDate}</span></td>
- 						<td align="center"><span>${courseInfo.finishDate}</span></td>
- 						<td align="center"><span>${courseInfo.classProgress}</span></td>
- 						<td align="center"><span>${courseInfo.classTeacherName}</span></td>
- 						<td align="center"><span>${courseInfo.adviserName}</span></td>
- 						<td align="center"><span>${courseInfo.adviserTeacherName}</span></td>
- 						<td align="center"><span>${courseInfo.dutyAdvisterName}</span></td>
- 						<td align="center"><span>${courseInfo.carerName}</span></td>
- 					</tr>
- 				</c:forEach>
- 			</tr>
- 			<tr>
- 				<td colspan="2" align="right"><span>延长至：</span></td>
- 				<td colspan="12"><input class="easyui-datebox" name="delayDate" id="delayDate" style="width:100px;height:25px;" editable="false"/></td>
- 			</tr>
- 			<tr>
- 				<td colspan="2" align="right"><span>备注：</span></td>
- 				<td colspan="12"><textarea rows="7" cols="100" id="updateRemark" name="updateRemark" class="textarea easyui-validatebox"></textarea></td>
- 			</tr>
- 		</table>
+   			<form id="prolongForm" method="post" enctype="multipart/form-data">
+	 			<table width="100%" cellpadding="5px" class="maintable" id="courseTd">
+		 			<tr>
+		 				<td align="center"><span>课程阶段</span></td>
+		 				<td align="center"><span>课程状态</span></td>
+		 				<td align="center"><span>校区</span></td>
+		 				<td align="center"><span>缴费时间</span></td>
+		 				<td align="center"><span>业绩类型</span></td>
+		 				<td align="center"><span>班级</span></td>
+		 				<td align="center"><span>开课日期</span></td>
+		 				<td align="center"><span>结课日期</span></td>
+		 				<td align="center"><span>课程进度</span></td>
+		 				<td align="center"><span>带班老师</span></td>
+		 				<td align="center"><span>业绩顾问</span></td>
+		 				<td align="center"><span>业绩老师</span></td>
+		 				<td align="center"><span>责任顾问</span></td>
+		 				<td align="center"><span>客户关怀</span></td>
+		 				<c:forEach items="${obj.courseInfo}" var="courseInfo">
+		 					<tr>
+		 						<td align="center"><span>${courseInfo.stageId}</span></td>
+		 						<td align="center"><span>${courseInfo.courseStateText}</span></td>
+		 						<td align="center"><span>${courseInfo.paySchoolName}</span></td>
+		 						<td align="center"><span>${courseInfo.payDate}</span></td>
+		 						<td align="center"><span>${courseInfo.feeTypeText}</span></td>
+		 						<td align="center"><span>${courseInfo.className}</span></td>
+		 						<td align="center"><span>${courseInfo.startDate}</span></td>
+		 						<td align="center"><span>${courseInfo.finishDate}</span></td>
+		 						<td align="center"><span>${courseInfo.classProgress}</span></td>
+		 						<td align="center"><span>${courseInfo.classTeacherName}</span></td>
+		 						<td align="center"><span>${courseInfo.adviserName}</span></td>
+		 						<td align="center"><span>${courseInfo.adviserTeacherName}</span></td>
+		 						<td align="center"><span>${courseInfo.dutyAdvisterName}</span></td>
+		 						<td align="center"><span>${courseInfo.carerName}</span></td>
+		 					</tr>
+		 				</c:forEach>
+		 			</tr>
+		 			<tr>
+		 				<td colspan="2" align="right">休学延长时长：</td>
+		 				<td colspan="12"><input class="easyui-numberbox" name="prolongTime" id="prolongTime" style="width:120px;height: 25px;" data-options="precision:0,min:1,max:24" required="true"/></td>
+		 			</tr>
+		 			<tr>
+		 				<td colspan="2" align="right">备注：</td>
+		 				<td colspan="12"><textarea rows="7" cols="100" id="prolongRemark" name="prolongRemark" class="textarea easyui-validatebox" validType="length[0,120]"></textarea></td>
+		 			</tr>
+	 			</table>
+   			</form>
  		</div>
  		<input id="handlerId" type="hidden" value="${sessionScope.StaffT.staffId}"/>
  		<input id="studentId" type="hidden" value="${obj.studentInfo.studentId}" />
@@ -126,9 +128,9 @@
  		<table style="margin-top: 20px;min-width:1100px; width:99%;">
 			<tr>
 				<td align="right">
-					<a href="javascript:void(0)" id="updateSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;" onclick="updateSubmit()"><span>提交</span></a>
+					<a href="javascript:void(0)" id="prolongSubmit" class="easyui-linkbutton" iconCls="icon-ok" style="width: 100px;">提交</a>
 		      		&nbsp;
-		      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="javascript:window.history.back()"><span>返回</span></a>
+		      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="javascript:window.history.back()">返回</a>
 				</td>
 			</tr>
 		</table>
