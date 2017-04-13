@@ -23,9 +23,10 @@
   			</table>
   			<table width="98%" cellpadding="2px" style="margin-top: 5px;margin-bottom: 5px;border:1px solid #ccc;" align="center" class="maintable">
 	      	   <tr>
-	      	     <td align="center" width="3%"><span>序号</span></td>
+	      	    <td align="center" width="3%"><span>序号</span></td>
 	      	   	 <td align="center" width="9%"><span>班级</span></td>
 	      	   	 <td align="center" width="12%"><span>电教</span></td>
+	      	   	 <td align="center" width="12%"><span>开班典礼</span></td>
 	      	   	 <td align="center" width="12%"><span>家长会</span></td>
 	      	   	 <td align="center" width="12%"><span>公开课</span></td>
 	      	   	 <td align="center" width="12%"><span>毕业典礼</span></td>
@@ -37,6 +38,7 @@
 					<td align="center">${status.count}</td>
 					<td align="center">${teachingPlan.className}</td>
 					<td align="center">${teachingPlan.teachingDate}</td>
+					<td align="center">${teachingPlan.startDate}</td>
 					<td align="center">${teachingPlan.meetingDate}</td>
 					<td align="center">${teachingPlan.openClassDate}</td>
 					<td align="center">${teachingPlan.gradDate}</td>

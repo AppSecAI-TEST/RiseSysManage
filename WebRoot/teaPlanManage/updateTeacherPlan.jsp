@@ -26,9 +26,10 @@
   			</table>
   			<table width="98%" cellpadding="2px" style="margin-top:5px;margin-bottom:5px;border:1px solid #ccc;" align="center" class="maintable">
 	      	   <tr id="planTr">
-	      	   	 <td align="center" width="3%"><span>序号</span></td>
+	      	    <td align="center" width="3%"><span>序号</span></td>
 	      	   	 <td align="center" width="9%"><span>班级</span></td>
 	      	   	 <td align="center" width="12%"><span>电教</span></td>
+	      	   	 <td align="center" width="12%"><span>开班典礼</span></td>
 	      	   	 <td align="center" width="12%"><span>家长会</span></td>
 	      	   	 <td align="center" width="12%"><span>公开课</span></td>
 	      	   	 <td align="center" width="12%"><span>毕业典礼</span></td>
@@ -42,9 +43,12 @@
 					<td align="center">${status.count}</td>
 					<td align="center">${teachingPlan.className}</td>
 					<td align="center"><div id="teaDiv${status.index}"><input id="teachingDate${status.index}" dateVal="${teachingPlan.teachingDate}" class="easyui-numberbox" status="${status.index}" style='width:100px;' /></div></td>
-					<td align="center"><div id="meetDiv${status.index}"><input id="meetingDate${status.index}" dateVal="${teachingPlan.meetingDate}" class="easyui-numberbox" dateNum="" status="${status.index}" data-options="events:{blur: function(){clearOthers(${status.index},'meetingDate','openClassDate','gradDate')},focus: function(){saveCurrentNum(${status.index},'meetingDate')}}" style='width:100px;' /></div></td>
-					<td align="center"><div id="openDiv${status.index}"><input id="openClassDate${status.index}" dateVal="${teachingPlan.openClassDate}" class="easyui-numberbox" dateNum="" status="${status.index}" data-options="events:{blur: function(){clearOthers(${status.index},'openClassDate','meetingDate','gradDate')},focus: function(){saveCurrentNum(${status.index},'openClassDate')}}" style='width:100px;' /></div></td>
-					<td align="center"><div id="gradDiv${status.index}"><input id="gradDate${status.index}" dateVal="${teachingPlan.gradDate}" class="easyui-numberbox" dateNum="" status="${status.index}" data-options="events:{blur: function(){clearOthers(${status.index},'gradDate','meetingDate','openClassDate')},focus: function(){saveCurrentNum(${status.index},'gradDate')}}" style='width:100px;' /></div></td>
+					
+					<td align="center"><div id="startDiv${status.index}"><input id="startDate${status.index}" dateVal="${teachingPlan.startDate}" class="easyui-numberbox" dateNum="" status="${status.index}" data-options="events:{blur: function(){clearOthers(${status.index},'startDate','meetingDate','openClassDate','gradDate')},focus: function(){saveCurrentNum(${status.index},'startDate')}}" style='width:100px;' /></div></td>
+					
+					<td align="center"><div id="meetDiv${status.index}"><input id="meetingDate${status.index}" dateVal="${teachingPlan.meetingDate}" class="easyui-numberbox" dateNum="" status="${status.index}" data-options="events:{blur: function(){clearOthers(${status.index},'meetingDate','startDate','openClassDate','gradDate')},focus: function(){saveCurrentNum(${status.index},'meetingDate')}}" style='width:100px;' /></div></td>
+					<td align="center"><div id="openDiv${status.index}"><input id="openClassDate${status.index}" dateVal="${teachingPlan.openClassDate}" class="easyui-numberbox" dateNum="" status="${status.index}" data-options="events:{blur: function(){clearOthers(${status.index},'openClassDate','startDate','meetingDate','gradDate')},focus: function(){saveCurrentNum(${status.index},'openClassDate')}}" style='width:100px;' /></div></td>
+					<td align="center"><div id="gradDiv${status.index}"><input id="gradDate${status.index}" dateVal="${teachingPlan.gradDate}" class="easyui-numberbox" dateNum="" status="${status.index}" data-options="events:{blur: function(){clearOthers(${status.index},'gradDate','startDate','meetingDate','openClassDate')},focus: function(){saveCurrentNum(${status.index},'gradDate')}}" style='width:100px;' /></div></td>
 					<td align="center"><input name="teachingIsOpen${status.index}" type="radio" status="${status.index}" class="teachingIsOpen" value="Y"/><span>是</span>&nbsp;<input name="teachingIsOpen${status.index}" type="radio" status="${status.index}" class="teachingIsOpen" value="N"/><span>否</span></td>
 					<td align="center"><input id="remark${status.index}" remarkVal="${teachingPlan.remark}" class="easyui-textbox" style="width:250px;" /></td>
 				</tr>
@@ -64,17 +68,27 @@
 			var month = $("#teachingMonth").html();
    			var str = month.split("-");
     		var maxDays = DayNumOfMonth(str[0],str[1]);
-   			for(var i = 0;i < ${fn:length(obj.teachingPlan)};i++){
+   			for(var i = 0;i < ${fn:length(obj.teachingPlan)};i++)
+   			{
    				var teachingDate = $("#teachingDate"+i+"").attr('dateVal');
    				if(teachingDate != "/"){
    					teachingDate = teachingDate.substring(8);
 	   				$("#teachingDate"+i+"").numberbox('setValue',teachingDate);
    				}
+   			
+   				var startDate = $("#startDate"+i+"").attr('dateVal');
+   				if(startDate != "/")
+   				{
+   					startDate = startDate.substring(8);
+	   				$("#startDate"+i+"").numberbox('setValue',startDate);
+   				}
+   				
    				var meetingDate = $("#meetingDate"+i+"").attr('dateVal');
    				if(meetingDate != "/"){
    					meetingDate = meetingDate.substring(8);
 	   				$("#meetingDate"+i+"").numberbox('setValue',meetingDate);
    				}
+   				
    				var openClassDate = $("#openClassDate"+i+"").attr('dateVal');
    				if(openClassDate != "/"){
    					openClassDate = openClassDate.substring(8);
@@ -153,13 +167,15 @@
 				$(node).attr("maxlength",50);
 			});
    		});
-   		function clearOthers(index,saveObj,clearObj1,clearObj2)
+   		function clearOthers(index,saveObj,clearObj1,clearObj2,clearObj3)
 		{
 			var currentNum = $("#"+saveObj+index).numberbox("getValue");
 			var dateNum = $("#"+saveObj+index).attr("dateNum");
-			if(currentNum != dateNum){
+			if(currentNum != dateNum)
+			{
 				$("#"+clearObj1+index).numberbox('clear');
 				$("#"+clearObj2+index).numberbox('clear');
+				$("#"+clearObj3+index).numberbox('clear');
 			}
 		}
 		function saveCurrentNum(index,saveObj)

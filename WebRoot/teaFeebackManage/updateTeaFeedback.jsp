@@ -20,17 +20,20 @@
 	 			<tr>
   					<td width="3%" align="center"><span>序号</span></td>
   					<td width="7%" align="center"><span>姓名</span></td>
-  					<td width="7%" align="center"><span>英文名</span></td>
+  					<td width="6%" align="center"><span>英文名</span></td>
   					<td width="8%" align="center"><span>课程状态</span></td>
-  					<td width="15%" align="center"><span>电教次数</span></td>
-  					<td width="20%" align="center"><span>家长会</span></td>
-  					<td width="20%" align="center"><span>公开课</span></td>
-  					<td width="20%" align="center"><span>毕业典礼</span></td>
+  					<td width="10%" align="center"><span>电教次数</span></td>
+  					<td width="15%" align="center"><span>开班典礼</span></td>
+  					<td width="15%" align="center"><span>家长会</span></td>
+  					<td width="15%" align="center"><span>公开课</span></td>
+  					<td width="15%" align="center"><span>毕业典礼</span></td>
+  					<td width="8%" align="center"><span>行政满意度</span></td>
   				</tr>
   				<c:forEach items="${obj.feedback}" var="feedback" varStatus="status">
 					<tr>
 						<input type="hidden" name="feedbackDetailId" value="${feedback.feedbackDetailId}" />
 						<input type="hidden" id="teachingNum${status.index}" value="${feedback.teachingNum}" />
+						<input type="hidden" id="startIsAttend${status.index}" value="${feedback.startIsAttend}" />
 						<input type="hidden" id="meetingIsAttend${status.index}" value="${feedback.meetingIsAttend}" />
 						<input type="hidden" id="openIsAttend${status.index}" value="${feedback.openIsAttend}" />
 						<input type="hidden" id="gradIsAttend${status.index}" value="${feedback.gradIsAttend}" />
@@ -40,6 +43,12 @@
 						<td align="center"><span>${feedback.courseStateVal}</span></td>
 						<td align="center"><span class="teaching${status.index}"><input type="radio" value="0" name="teachingNum${status.index}" /><span>0</span>&nbsp;<input type="radio" value="1" name="teachingNum${status.index}"/><span>1</span>
 						&nbsp;<input type="radio" value="2" name="teachingNum${status.index}" /><span>2</span></span></td>
+						<td align="center">
+							<c:if test="${feedback.startIsAttend != ''}">
+								<input type="radio" class="meeting" value="Y" status="${status.index}" name="startIsAttend${status.index}"/><span>已到</span>&nbsp;<input type="radio" class="start" value="N" status="${status.index}" name="startIsAttend${status.index}"/><span>未到</span>
+								&nbsp;<span class="startCsi">满意度：<input id="startCsi${status.index}" csiVal="${feedback.startCsi}" class="easyui-numberbox" min="0" max="100" style='width:40px;' />%</span>
+							</c:if>
+						</td>
 						<td align="center">
 							<c:if test="${feedback.meetingIsAttend != ''}">
 								<input type="radio" class="meeting" value="Y" status="${status.index}" name="meetingIsAttend${status.index}"/><span>已到</span>&nbsp;<input type="radio" class="meeting" value="N" status="${status.index}" name="meetingIsAttend${status.index}"/><span>未到</span>
@@ -58,6 +67,9 @@
 								&nbsp;<span class="gradCsi">满意度：<input id="gradCsi${status.index}" csiVal="${feedback.gradCsi}" class="easyui-numberbox" min="0" max="100" style='width:40px;' />%</span>
 							</c:if>
 						</td>
+						<td align="center">
+								<span class="strativeCsi"><input id="strativeCsi${status.index}" value="${feedback.strativeCsi}" class="easyui-numberbox" min="0" max="100" style='width:40px;' />%</span>
+							</td>
 					</tr>
 			   </c:forEach>
 	 		</table>
@@ -84,6 +96,24 @@
 						$("input[name='teachingNum"+i+"']").eq(0).attr("checked",true);
 					}
 				});
+   				
+   				var startIsAttend = $("#startIsAttend"+i).val();
+				if(startIsAttend != ''){
+					$("input[name='startIsAttend"+i+"']").each(function(index,node){
+						if(node.value == startIsAttend)
+						{
+							$(this).prop("checked","checked");
+							if(node.value == "N"){
+							   $(".teaching"+i).css("visibility","hidden");
+							   $(this).siblings(".startCsi").css("visibility","hidden");
+							}
+							if(node.value == "Y"){
+								$("#startCsi"+i).numberbox("setValue",$("#startCsi"+i).attr("csiVal"));
+							}
+						}
+					});
+				}
+   				
 				var meetingIsAttend = $("#meetingIsAttend"+i).val();
 				if(meetingIsAttend != ''){
 					$("input[name='meetingIsAttend"+i+"']").each(function(index,node){
@@ -133,6 +163,7 @@
 					});
 				}
    			}
+   				
    			$(".meeting").change(function() {
 			   var val = $(this).val();
 			   if(val == "Y"){

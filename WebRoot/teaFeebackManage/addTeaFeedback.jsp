@@ -25,11 +25,13 @@
   					<td width="3%" align="center"><span>序号</span></td>
   					<td width="7%" align="center"><span>姓名</span></td>
   					<td width="7%" align="center"><span>英文名</span></td>
-  					<td width="8%" align="center"><span>课程状态</span></td>
-  					<td width="15%" align="center"><span>电教次数</span></td>
-  					<td width="20%" align="center"><span>家长会</span></td>
-  					<td width="20%" align="center"><span>公开课</span></td>
-  					<td width="20%" align="center"><span>毕业典礼</span></td>
+  					<td width="6%" align="center"><span>课程状态</span></td>
+  					<td width="10%" align="center"><span>电教次数</span></td>
+  					<td width="15%" align="center"><span>开班典礼</span></td>
+  					<td width="15%" align="center"><span>家长会</span></td>
+  					<td width="15%" align="center"><span>公开课</span></td>
+  					<td width="15%" align="center"><span>毕业典礼</span></td>
+  					<td width="7%" align="center"><span>行政满意度</span></td>
   				</tr>
   				<c:forEach items="${obj.studentInfo}" var="studentInfo" varStatus="status">
      	        <input type="hidden" name="studentId" id="studentId${status.index}" value="${studentInfo.studentId}"/>
@@ -41,6 +43,17 @@
 						<td align="center">${studentInfo.courseStateVal}</td>
 						<td align="center"><span class="teaching${status.index}"><input type="radio" value="0" name="teachingNum${status.index}" checked="checked"/><span>0</span>&nbsp;<input type="radio" value="1" name="teachingNum${status.index}"/><span>1</span>
 						&nbsp;<input type="radio" value="2" name="teachingNum${status.index}" /><span>2</span></span></td>
+							
+						<c:if test="${obj.qualityInfo.startFlag == '0'}">
+							<td align="center">
+								<input type="radio" class="start" value="Y" status="${status.index}" name="startIsAttend${status.index}" checked="checked"/><span>已到</span>&nbsp;<input type="radio" class="start" value="N" status="${status.index}" name="startIsAttend${status.index}"/><span>未到</span>
+								&nbsp;<span class="startCsi">满意度：<input id="startCsi${status.index}" class="easyui-numberbox" min="0" max="100" style='width:40px;' />%</span>
+							</td>
+						</c:if>
+						<c:if test="${obj.qualityInfo.startFlag == '1'}">
+							<td align="center">
+							</td>
+						</c:if>
 						<c:if test="${obj.qualityInfo.meetingFlag == '0'}">
 							<td align="center">
 								<input type="radio" class="meeting" value="Y" status="${status.index}" name="meetingIsAttend${status.index}" checked="checked"/><span>已到</span>&nbsp;<input type="radio" class="meeting" value="N" status="${status.index}" name="meetingIsAttend${status.index}"/><span>未到</span>
@@ -71,6 +84,9 @@
 							<td align="center">
 							</td>
 						</c:if>
+						<td align="center">
+								<span class="strativeCsi"><input id="strativeCsi${status.index}" class="easyui-numberbox" min="0" max="100" style='width:40px;' />%</span>
+							</td>
 					</tr>
 			   </c:forEach>
 	 		</table>

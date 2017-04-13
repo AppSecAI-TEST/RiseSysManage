@@ -234,6 +234,12 @@ public class QryPubDataService
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10116\",securityCode:\"0000000000\",params:{schoolId:\""+schoolId+"\"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
+	
+	public String qryTeacherHourList(String schoolId,String month) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS10126\",securityCode:\"0000000000\",params:{schoolId:\""+schoolId+"\",month:\""+month+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
 
 	public String qryShortClass() throws Exception  
 	{
