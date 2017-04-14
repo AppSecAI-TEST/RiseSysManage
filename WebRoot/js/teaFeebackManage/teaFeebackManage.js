@@ -184,6 +184,7 @@ function addTeaFeedbackSubmit()
 	   var courseState = $("#courseState"+i+"").val();
 	   var studentName = $("#studentName"+i+"").html();
 	   var byname = $("#byname"+i+"").html();
+	   var startIsAttend = $("input[name='startIsAttend"+i+"']:checked").val();
 	   var meetingIsAttend = $("input[name='meetingIsAttend"+i+"']:checked").val();
 	   var openIsAttend = $("input[name='openIsAttend"+i+"']:checked").val();
 	   var gradIsAttend = $("input[name='gradIsAttend"+i+"']:checked").val();
@@ -195,10 +196,30 @@ function addTeaFeedbackSubmit()
 	   feedbackDetail.studentName = studentName;
 	   feedbackDetail.byname = byname;
 	   feedbackDetail.courseType = courseState;
+
+	   feedbackDetail.startIsAttend = startIsAttend;
+	   if(startIsAttend == "Y")
+	   {
+		   var startCsi = $("#startCsi"+i+"").numberbox('getValue');
+		   if(startCsi == "" || startCsi == undefined)
+		   {
+			   $.messager.alert('提示', "已到请填写开班典礼满意度！");
+			   flag = false;
+			   return false;
+		   }
+		   startCsi = string2Json(startCsi);
+		   startCsi = encodeURI(startCsi);
+		   feedbackDetail.startCsi = startCsi;
+		   var teachingNum = $("input[name='teachingNum"+i+"']:checked").val();
+		   feedbackDetail.teachingNum = teachingNum;
+	   }
+	   
 	   feedbackDetail.meetingIsAttend = meetingIsAttend;
-	   if(meetingIsAttend == "Y"){
+	   if(meetingIsAttend == "Y")
+	   {
 		   var meetingCsi = $("#meetingCsi"+i+"").numberbox('getValue');
-		   if(meetingCsi == "" || meetingCsi == undefined){
+		   if(meetingCsi == "" || meetingCsi == undefined)
+		   {
 			   $.messager.alert('提示', "已到请填写家长会满意度！");
 			   flag = false;
 			   return false;
@@ -237,6 +258,18 @@ function addTeaFeedbackSubmit()
 		   var teachingNum = $("input[name='teachingNum"+i+"']:checked").val();
 		   feedbackDetail.teachingNum = teachingNum;
 	   }
+	    var strativeCsi = $("#strativeCsi"+i+"").numberbox('getValue');
+	    if(strativeCsi == "" || gradCsi == strativeCsi)
+	    {
+			   $.messager.alert('提示', "请填写行政满意度！");
+			   flag = false;
+			   return false;
+		 }else
+		{
+			 feedbackDetail.strativeCsi = strativeCsi;
+		}
+	    
+	    
 	   feedbackDetail.handlerId = handlerId;
 	   feedbackDetailArray.push(feedbackDetail);
 	});
@@ -288,11 +321,29 @@ function updateTeaFeedbackSubmit(){
 	var flag = true;
 	$("input[name='feedbackDetailId']").each(function(i,node){
 	   var feedbackDetailId = $(node).val();
+	   var startIsAttend = $("input[name='startIsAttend"+i+"']:checked").val();
 	   var meetingIsAttend = $("input[name='meetingIsAttend"+i+"']:checked").val();
 	   var openIsAttend = $("input[name='openIsAttend"+i+"']:checked").val();
 	   var gradIsAttend = $("input[name='gradIsAttend"+i+"']:checked").val();
 	   var feedbackDetail = {};
 	   feedbackDetail.feedbackDetailId = feedbackDetailId;
+	   
+	   
+	   feedbackDetail.startIsAttend = startIsAttend;
+	   if(startIsAttend == "Y"){
+		   var startCsi = $("#startCsi"+i+"").numberbox('getValue');
+		   if(startCsi == "" || startCsi == undefined){
+			   $.messager.alert('提示', "已到请填写开班典礼满意度！");
+			   flag = false;
+			   return false;
+		   }
+		   startCsi = string2Json(startCsi);
+		   startCsi = encodeURI(startCsi);
+		   feedbackDetail.startCsi = startCsi;
+		   var teachingNum = $("input[name='teachingNum"+i+"']:checked").val();
+		   feedbackDetail.teachingNum = teachingNum;
+	   }
+	   
 	   feedbackDetail.meetingIsAttend = meetingIsAttend;
 	   if(meetingIsAttend == "Y"){
 		   var meetingCsi = $("#meetingCsi"+i+"").numberbox('getValue');
@@ -335,6 +386,18 @@ function updateTeaFeedbackSubmit(){
 		   var teachingNum = $("input[name='teachingNum"+i+"']:checked").val();
 		   feedbackDetail.teachingNum = teachingNum;
 	   }
+	   
+	    var strativeCsi = $("#strativeCsi"+i+"").numberbox('getValue');
+	    if(strativeCsi == "" || gradCsi == strativeCsi)
+	    {
+			   $.messager.alert('提示', "请填写行政满意度！");
+			   flag = false;
+			   return false;
+		 }else
+		{
+			 feedbackDetail.strativeCsi = strativeCsi;
+		}
+	    
 	   feedbackDetailArray.push(feedbackDetail);
 	});
 	if(flag){

@@ -470,6 +470,36 @@ public class QryPubDataController
 		}
 	}
 	
+	/**
+	 * 查询指定校区所拥有的老师
+	 * @param schoolId
+	 * @param response
+	 */
+	@RequestMapping(value = "/qryTeacherHourList")
+	public void qryTeacherHourList(String schoolId,String month,HttpServletResponse response)
+	{
+	 
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = qryPubDataService.qryTeacherHourList(schoolId,month);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 	//查询短期课
 	@RequestMapping(value = "/qryShortClass.do") 
 	public void qryShortClass(HttpServletResponse response)

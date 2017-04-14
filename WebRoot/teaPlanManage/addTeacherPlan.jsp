@@ -32,6 +32,7 @@
 	      	   	 <td align="center" width="3%"><span>序号</span></td>
 	      	   	 <td align="center" width="9%"><span>班级</span></td>
 	      	   	 <td align="center" width="12%"><span>电教</span></td>
+	      	   	 <td align="center" width="12%"><span>开班典礼</span></td>
 	      	   	 <td align="center" width="12%"><span>家长会</span></td>
 	      	   	 <td align="center" width="12%"><span>公开课</span></td>
 	      	   	 <td align="center" width="12%"><span>毕业典礼</span></td>

@@ -82,22 +82,44 @@ function createPlan(schoolId,month)
     				var str = month.split("-");
     				var maxDays = DayNumOfMonth(str[0],str[1]);
     				var content = "";
-    				for(var i = 0; i < length; i++) {
-    					content += "<tr><td align='center'>"+(i+1)+"</td><td id='classInstId"+i+"' openFlag='"+classList[i].openFlag+"' gradFlag='"+classList[i].gradFlag+"' class='classInfo' instId='"+classList[i].classInstId+"' align='center'>"+classList[i].className+"</td><td align='center'><div id='teaDiv"+i+"'><input id='teachingDate"+i+"' class='view' style='width:100px;' /></div></td>";
-    					if(classList[i].openFlag == 'false' && classList[i].gradFlag == 'false'){
-	    					content += "<td align='center'><div id='meetDiv"+i+"'><input id='meetingDate"+i+"' class='view' style='width:100px;' /></div></td>";
-	    					content += "<td align='center'></td>";
-	    					content += "<td align='center'></td>";
-    					}else{
+    				for(var i = 0; i < length; i++)
+    				{
+    					content += "<tr><td align='center'>"+(i+1)+"</td>";
+    					content += "<td id='classInstId"+i+"' startFlag='"+classList[i].startFlag+"' openFlag='"+classList[i].openFlag+"' gradFlag='"+classList[i].gradFlag+"' class='classInfo' instId='"+classList[i].classInstId+"' align='center'>"+classList[i].className+"</td>";
+    					
+    					
+    					content += "<td align='center'><div id='teaDiv"+i+"'><input id='teachingDate"+i+"' class='view' style='width:100px;' /></div></td>";
+    					
+    					if(classList[i].startFlag == 'true')
+    					{
+    						content += "<td align='center'><div id='startDiv"+i+"'><input id='startDate"+i+"' class='view' style='width:100px;' /></div></td>";
     						content += "<td align='center'></td>";
-    						if(classList[i].openFlag == 'true' && classList[i].gradFlag == 'false'){
-    							content += "<td align='center'><div id='openDiv"+i+"'><input id='openClassDate"+i+"' class='view' style='width:100px;' /></div></td>";
+    						content += "<td align='center'></td>";
+    						content += "<td align='center'></td>";
+    					}else
+    					{
+    						content += "<td align='center'></td>";
+    						
+    					}
+    					if(classList[i].startFlag == 'false')
+    					{
+	    					if( classList[i].openFlag == 'false' && classList[i].gradFlag == 'false')
+	    					{
+		    					content += "<td align='center'><div id='meetDiv"+i+"'><input id='meetingDate"+i+"' class='view' style='width:100px;' /></div></td>";
 		    					content += "<td align='center'></td>";
-    						}
-    						if(classList[i].openFlag == 'false' && classList[i].gradFlag == 'true'){
-    							content += "<td align='center'></td>";
-		    					content += "<td align='center'><div id='gradDiv"+i+"'><input id='gradDate"+i+"' class='view' style='width:100px;' /></div></td>";
-    						}
+		    					content += "<td align='center'></td>";
+	    					}else
+	    					{
+	    						content += "<td align='center'></td>";
+	    						if( classList[i].openFlag == 'true' && classList[i].gradFlag == 'false'){
+	    							content += "<td align='center'><div id='openDiv"+i+"'><input id='openClassDate"+i+"' class='view' style='width:100px;' /></div></td>";
+			    					content += "<td align='center'></td>";
+	    						}
+	    						if( classList[i].openFlag == 'false' && classList[i].gradFlag == 'true'){
+	    							content += "<td align='center'></td>";
+			    					content += "<td align='center'><div id='gradDiv"+i+"'><input id='gradDate"+i+"' class='view' style='width:100px;' /></div></td>";
+	    						}
+	    					}
     					}
     					content += "<td align='center'><input name='teachingIsOpen"+i+"' type='radio' status='"+i+"' class='teachingIsOpen' checked='checked' value='Y'/><span>是</span>&nbsp;<input name='teachingIsOpen"+i+"' type='radio' status='"+i+"' class='teachingIsOpen' value='N'/><span>否</span></td>";
     					content += "<td align='center'><input id='remark"+i+"' class='remark' style='width:250px;' /></td></tr>";
@@ -158,6 +180,7 @@ function addPlanSubmit()
 	var flag = true;
 	$(".classInfo").each(function(i,node){
 	   var classInstId = $(node).attr("instId");
+	   var startFlag = $(node).attr("startFlag");
 	   var openFlag = $(node).attr("openFlag");
 	   var gradFlag = $(node).attr("gradFlag");
 	   var className = $(node).html();
@@ -170,7 +193,10 @@ function addPlanSubmit()
 	   teachingQuality.className = className;
 	   teachingQuality.teachingIsOpen = teachingIsOpen;
 	   teachingQuality.remark = remark;
-	   if(teachingIsOpen == "Y"){
+	  
+	   if(teachingIsOpen == "Y")
+	   {
+		 
 		   var teachingDate = $("#teachingDate"+i+"").numberbox('getValue');
 		   if(teachingDate == "" || teachingDate == undefined){
 			   $.messager.alert('提示', "第"+(i+1)+"行请填写电教日期！");
@@ -179,6 +205,21 @@ function addPlanSubmit()
 		   }
 		   teachingDate = time + "-" + teachingDate;
 		   teachingQuality.teachingDate = teachingDate;
+		   
+		   if(startFlag == 'true')
+		   {
+			   var startDate = $("#startDate"+i+"").numberbox('getValue');
+			   if(startDate == "" || startDate == undefined){
+				   $.messager.alert('提示', "第"+(i+1)+"行请填写开班典礼日期！");
+				   flag = false;
+				   return false;
+			   }
+			   startDate = time + "-" + startDate;
+			   teachingQuality.startDate = startDate;
+		   }
+		   
+		   if(startFlag == 'false')
+		   {
 		   if(openFlag == 'false' && gradFlag == 'false'){
 			   var meetingDate = $("#meetingDate"+i+"").numberbox('getValue');
 			   if(meetingDate == "" || meetingDate == undefined){
@@ -208,6 +249,7 @@ function addPlanSubmit()
 			   }
 			   gradDate = time + "-" + gradDate;
 		   	   teachingQuality.gradDate = gradDate;
+		   }
 		   }
 	   }
 	   teachingQuality.handlerId = handlerId;
@@ -282,6 +324,13 @@ function updatePlanSubmit()
 		   }
 		   teachingDate = month + "-" + teachingDate;
 		   teachingQuality.teachingDate = teachingDate;
+		   
+		    var startDate = $("#startDate"+i+"").numberbox('getValue');
+		   if(startDate != "" && startDate != undefined){
+			   startDate = month + "-" + startDate;
+			   teachingQuality.startDate = startDate;
+		   }
+		   
 		   var meetingDate = $("#meetingDate"+i+"").numberbox('getValue');
 		   if(meetingDate != "" && meetingDate != undefined){
 			   meetingDate = month + "-" + meetingDate;
@@ -306,7 +355,7 @@ function updatePlanSubmit()
 			type : "POST",
 			url: "/sys/teaPlanManage/updateTeachingPlan.do",
 			data: "json="+JSON.stringify(teachingQualityArray),
-			async: false,
+			async: true,
 			beforeSend: function()
 	    	{
 	    		$.messager.progress({title : '修改教质计划', msg : '修改教质计划中，请稍等……'});
