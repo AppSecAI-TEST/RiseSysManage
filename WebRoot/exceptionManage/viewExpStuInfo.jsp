@@ -12,8 +12,7 @@
 		<script type="text/javascript" src="<%=path %>/js/exceptionManage/exceptionManage.js"></script>
   	</head>
   	<body>
-  	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:99%;overflow:auto;height:auto;">
-  		<div title="基础信息" style="padding:5px;display:block;">
+  		<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="基础信息">
   			<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="学员基础信息">
   				<table width="100%" cellpadding="5px" class="maintable">
 	      			<tr>
@@ -70,7 +69,7 @@
 	      			</tr>
 	      		</table>
 	      	</div>
-	      	<div style="height: 10px;"></div>
+	      	<div style="height: 5px;"></div>
 	      	<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="联系人信息">
 			   <table width="100%" cellpadding="5px" class="maintable">
 					<tr>
@@ -98,8 +97,32 @@
 					</c:forEach>
 				</table>
 	      	</div>
-  		</div>
-  	  	<div title="当前异动维护" style="padding:5px;display:block;">
+	      	<div style="height: 10px;"></div>
+	</div>
+	<div style="height: 10px;"></div>
+	 <div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="异动历史">
+  			<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="历史异动信息">
+			   <table width="100%" cellpadding="5px" class="maintable">
+					<tr>
+						<td align="center"><span>维护人</span></td>
+						<td align="center"><span>跟进时间</span></td>
+						<td align="center"><span>异动类型</span></td>
+						<td align="center"><span>跟进记录</span></td>
+					</tr>
+					<c:forEach items="${obj.expAllInfo}" var="expAllInfo">
+						<tr>
+							<td align="center"><span>${expAllInfo.handlerName}</span></td>
+							<td align="center"><span>${expAllInfo.createDate}</span></td>
+							<td align="center"><span>${expAllInfo.exceptionTypeVal}</span></td>
+							<td align="center"><span>${expAllInfo.remark}</span></td>
+						</tr>
+					</c:forEach>
+				</table>
+	      	</div>
+	      	<div style="height: 10px;"></div>
+	</div>
+	<div style="height: 10px;"></div>
+	<div class="easyui-panel" style="min-width:1100px; width:99%;height:auto;" title="当前异动维护">
   			<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="常规课">
   				<input type="hidden" id="studentId" value="${obj.courseInfo.studentId}" />
   				<input type="hidden" id="studentCourseId" value="${obj.courseInfo.studentCourseId}" />
@@ -126,7 +149,7 @@
 	      			</tr>
 	      		</table>
 	      	</div>
-	      	<div style="height: 10px;"></div>
+	      	<div style="height: 5px;"></div>
 	      	<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="异动信息">
 			   <table width="100%" cellpadding="5px" class="maintable">
 			   		<tr id="expTr">
@@ -137,12 +160,12 @@
 	      			</tr>
 				</table>
 	      	</div>
-	      	<div style="height: 10px;"></div>
+	      	<div style="height: 5px;"></div>
 	      	<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="跟进记录">
 			   <table width="100%" cellpadding="5px" class="maintable">
 			   		<tr>
 	      				<td width="20%" align="right"><span>跟进时间：</span></td>
-	      				<td width="30%" align="left"><input class="easyui-datebox" name="createDate" id="createDate" style="width:120px;" /></td>
+	      				<td width="30%" align="left"><input class="easyui-datebox" name="createDate" id="createDate" style="width:120px;height: 25px;" /></td>
 	      				<td width="50%" align="center"><a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-redo'" style="width:150px; height: 25px;" onclick="viewFollowHis('${obj.courseInfo.studentId}','${expType}','${obj.courseInfo.studentCourseId}')" >查看跟进历史</a></td>
 	      			</tr>
 	      			<tr>
@@ -151,36 +174,29 @@
 	      			</tr>
 				</table>
 	      	</div>
-	      	<iframe id="dlg" class="easyui-dialog" style="width:750px; height: 400px;" closed="true" modal="true"></iframe>
-  			<div style="margin-top: 5px;min-width:1100px; width:100%;">
+  			<div style="margin-top: 10px;min-width:1100px; width:99%;">
 		      	<div style="text-align:right">
-		      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;" onclick="addStuExpFollowInfo()"><span>提交</span></a>
+		      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" style="width:100px;height: 25px;" onclick="addStuExpFollowInfo()"><span>提交</span></a>
 		      		&nbsp;
-		      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="javascript:window.history.back()"><span>返回</span></a>
+		      		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;height: 25px;" onclick="javascript:window.history.back()"><span>返回</span></a>
 		      	</div>
 	 		</div>
+	 		<div style="height: 10px;"></div>
+	 </div>
+	 <iframe id="dlg" class="easyui-dialog" style="width:850px; height: 500px;" closed="true" modal="true" buttons="#dlgBtn"></iframe>
+	 <div id="dlgBtn">
+	    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">关闭</a>
+	 </div>
+	<!--  
+  	<div id="tt" class="easyui-tabs" style="min-width:1110px;width:99%;overflow:auto;height:auto;">
+  		<div title="基础信息" style="padding:5px;display:block;">
+  		</div>
+  	  	<div title="当前异动维护" style="padding:5px;display:block;">
   		</div>
   	  	<div title="异动历史" style="padding:5px;display:block;">
-  			<div class="easyui-panel" style="min-width:1100px; width:100%;height:auto;" title="历史异动信息">
-			   <table width="100%" cellpadding="5px" class="maintable">
-					<tr>
-						<td align="center"><span>维护人</span></td>
-						<td align="center"><span>跟进时间</span></td>
-						<td align="center"><span>异动类型</span></td>
-						<td align="center"><span>跟进记录</span></td>
-					</tr>
-					<c:forEach items="${obj.expAllInfo}" var="expAllInfo">
-						<tr>
-							<td align="center"><span>${expAllInfo.handlerName}</span></td>
-							<td align="center"><span>${expAllInfo.createDate}</span></td>
-							<td align="center"><span>${expAllInfo.exceptionTypeVal}</span></td>
-							<td align="center"><span>${expAllInfo.remark}</span></td>
-						</tr>
-					</c:forEach>
-				</table>
-	      	</div>
 	  	</div>
-	  </div>
+	</div>
+	-->
 	   <script type="text/javascript">
 	   		$(document).ready(function(){
 				ajaxLoadEnd();

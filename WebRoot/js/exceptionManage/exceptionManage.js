@@ -143,12 +143,11 @@ function viewExpInfo()
 }
 
 //打开异动跟进历史页面
-function viewFollowHis(studentId,expType,studentCourseId)
-{
+function viewFollowHis(studentId, expType, studentCourseId) {
 	$('#dlg').dialog({
-		title:"查看跟进历史",
+		title: "查看跟进历史",
 	});
-	$('#dlg').attr("src","/sys/exceptionManage/followHistory.jsp?studentId="+studentId+"&expType="+expType+"&studentCourseId="+studentCourseId);
+	$('#dlg').attr("src", "/sys/exceptionManage/followHistory.jsp?studentId=" + studentId + "&expType=" + expType + "&studentCourseId=" + studentCourseId);
 	$('#dlg').dialog("open");
 }
 

@@ -107,8 +107,8 @@
 				</thead>
 			</table>
 			<div id="toolbar" style="padding: 2px; height: auto">
-	   			<a href="javascript:void(0)" id="updateBtn" class="easyui-linkbutton" iconCls="icon-edit" onclick="updateExp()">客户维护</a>
-	 			<a href="javascript:void(0)" id="viewBtn" class="easyui-linkbutton" iconCls="icon-redo" onclick="viewExpInfo()">浏览</a>
+	   			<a href="javascript:void(0)" id="updateBtn" class="easyui-linkbutton" iconCls="icon-edit" style="width: 100px; height: 25px;" onclick="updateExp()">客户维护</a>
+	 			<a href="javascript:void(0)" id="viewBtn" class="easyui-linkbutton" iconCls="icon-redo" style="width: 80px; height: 25px;" onclick="viewExpInfo()">浏览</a>
 	 		</div>
   		</div>
   	</body>
