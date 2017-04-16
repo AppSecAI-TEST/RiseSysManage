@@ -84,19 +84,45 @@ $(document).ready(function(){
 		}
 	});
     
+	 $(".start").change(function() {
+	   var val = $(this).val();
+	   if(val == "Y"){
+		   $(this).siblings(".startCsi").css("visibility","visible");
+		   var status = $(this).attr("status");
+		   $(".teaching"+status).css("visibility","visible");
+		   $(".strativeCsi"+status).css("visibility","visible");
+		   
+	   }else if(val == "N"){
+		   $(this).siblings(".startCsi").css("visibility","hidden");
+		   var status = $(this).attr("status");
+		   var openIsAttend = $("input[name='openIsAttend"+status+"']:checked").val();
+	  	   var gradIsAttend = $("input[name='gradIsAttend"+status+"']:checked").val();
+	  	   var meetingIsAttend = $("input[name='meetingIsAttend"+status+"']:checked").val();
+	  	   if(openIsAttend != "Y" && gradIsAttend != "Y" && meetingIsAttend != "Y"){
+	  		   $(".teaching"+status).css("visibility","hidden");
+	  		    $(".strativeCsi"+status).css("visibility","hidden");
+	  	   }
+	   }
+   });
+   
+	
    $(".meeting").change(function() {
 	   var val = $(this).val();
 	   if(val == "Y"){
 		   $(this).siblings(".meetingCsi").css("visibility","visible");
 		   var status = $(this).attr("status");
 		   $(".teaching"+status).css("visibility","visible");
+		   $(".strativeCsi"+status).css("visibility","visible");
+		   
 	   }else if(val == "N"){
 		   $(this).siblings(".meetingCsi").css("visibility","hidden");
 		   var status = $(this).attr("status");
 		   var openIsAttend = $("input[name='openIsAttend"+status+"']:checked").val();
 	  	   var gradIsAttend = $("input[name='gradIsAttend"+status+"']:checked").val();
-	  	   if(openIsAttend != "Y" && gradIsAttend != "Y"){
+	  	   var startIsAttend = $("input[name='startIsAttend"+status+"']:checked").val();
+	  	   if(openIsAttend != "Y" && gradIsAttend != "Y" && startIsAttend != "Y"){
 	  		   $(".teaching"+status).css("visibility","hidden");
+	  		    $(".strativeCsi"+status).css("visibility","hidden");
 	  	   }
 	   }
    });
@@ -107,13 +133,16 @@ $(document).ready(function(){
 		   $(this).siblings(".openCsi").css("visibility","visible");
 		   var status = $(this).attr("status");
 		   $(".teaching"+status).css("visibility","visible");
+		   $(".strativeCsi"+status).css("visibility","visible");
 	   }else if(val == "N"){
 		   $(this).siblings(".openCsi").css("visibility","hidden");
 		   var status = $(this).attr("status");
 		   var meetingIsAttend = $("input[name='meetingIsAttend"+status+"']:checked").val();
 	  	   var gradIsAttend = $("input[name='gradIsAttend"+status+"']:checked").val();
-	  	   if(meetingIsAttend != "Y" && gradIsAttend != "Y"){
+	  	   var startIsAttend = $("input[name='startIsAttend"+status+"']:checked").val();
+	  	   if(meetingIsAttend != "Y" && gradIsAttend != "Y" && startIsAttend != "Y"){
 	  		   $(".teaching"+status).css("visibility","hidden");
+	  		   $(".strativeCsi"+status).css("visibility","hidden");
 	  	   }
 	   }
    });
@@ -124,13 +153,16 @@ $(document).ready(function(){
 		   $(this).siblings(".gradCsi").css("visibility","visible");
 		   var status = $(this).attr("status");
 		   $(".teaching"+status).css("visibility","visible");
+		   $(".strativeCsi"+status).css("visibility","visible");
 	   }else if(val == "N"){
 		   $(this).siblings(".gradCsi").css("visibility","hidden");
 		   var status = $(this).attr("status");
 		   var meetingIsAttend = $("input[name='meetingIsAttend"+status+"']:checked").val();
 		   var openIsAttend = $("input[name='openIsAttend"+status+"']:checked").val();
-	  	   if(meetingIsAttend != "Y" && openIsAttend != "Y"){
+		   var startIsAttend = $("input[name='startIsAttend"+status+"']:checked").val();
+	  	   if(meetingIsAttend != "Y" && openIsAttend != "Y" && startIsAttend != "Y"){
 	  		   $(".teaching"+status).css("visibility","hidden");
+	  		   $(".strativeCsi"+status).css("visibility","hidden");
 	  	   }
 	   }
    });
@@ -258,17 +290,19 @@ function addTeaFeedbackSubmit()
 		   var teachingNum = $("input[name='teachingNum"+i+"']:checked").val();
 		   feedbackDetail.teachingNum = teachingNum;
 	   }
-	    var strativeCsi = $("#strativeCsi"+i+"").numberbox('getValue');
-	    if(strativeCsi == "" || gradCsi == strativeCsi)
-	    {
-			   $.messager.alert('提示', "请填写行政满意度！");
-			   flag = false;
-			   return false;
-		 }else
-		{
-			 feedbackDetail.strativeCsi = strativeCsi;
-		}
-	    
+	   if(startIsAttend=='Y' || openIsAttend=='Y' || meetingIsAttend=='Y' || gradIsAttend=='Y' )
+	   {
+		    var strativeCsi = $("#strativeCsi"+i+"").numberbox('getValue');
+		    if(strativeCsi == "" || gradCsi == strativeCsi)
+		    {
+				   $.messager.alert('提示', "请填写行政满意度！");
+				   flag = false;
+				   return false;
+			 }else
+			{
+				 feedbackDetail.strativeCsi = strativeCsi;
+			}
+	    }
 	    
 	   feedbackDetail.handlerId = handlerId;
 	   feedbackDetailArray.push(feedbackDetail);
@@ -329,6 +363,7 @@ function updateTeaFeedbackSubmit(){
 	   feedbackDetail.feedbackDetailId = feedbackDetailId;
 	   
 	   
+	   
 	   feedbackDetail.startIsAttend = startIsAttend;
 	   if(startIsAttend == "Y"){
 		   var startCsi = $("#startCsi"+i+"").numberbox('getValue');
@@ -387,17 +422,19 @@ function updateTeaFeedbackSubmit(){
 		   feedbackDetail.teachingNum = teachingNum;
 	   }
 	   
-	    var strativeCsi = $("#strativeCsi"+i+"").numberbox('getValue');
-	    if(strativeCsi == "" || gradCsi == strativeCsi)
+	    if(startIsAttend=='Y' || openIsAttend=='Y' || meetingIsAttend=='Y' || gradIsAttend=='Y' )
 	    {
-			   $.messager.alert('提示', "请填写行政满意度！");
-			   flag = false;
-			   return false;
-		 }else
-		{
-			 feedbackDetail.strativeCsi = strativeCsi;
-		}
-	    
+		    var strativeCsi = $("#strativeCsi"+i+"").numberbox('getValue');
+		    if(strativeCsi == "" || gradCsi == strativeCsi)
+		    {
+				   $.messager.alert('提示', "请填写行政满意度！");
+				   flag = false;
+				   return false;
+			 }else
+			{
+				 feedbackDetail.strativeCsi = strativeCsi;
+			}
+	    }
 	   feedbackDetailArray.push(feedbackDetail);
 	});
 	if(flag){

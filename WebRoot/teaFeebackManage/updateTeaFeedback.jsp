@@ -68,7 +68,7 @@
 							</c:if>
 						</td>
 						<td align="center">
-								<span class="strativeCsi"><input id="strativeCsi${status.index}" value="${feedback.strativeCsi}" class="easyui-numberbox" min="0" max="100" style='width:40px;' />%</span>
+								<span class="strativeCsi${status.index}"><input id="strativeCsi${status.index}" value="${feedback.strativeCsi}" class="easyui-numberbox" min="0" max="100" style='width:40px;' />%</span>
 							</td>
 					</tr>
 			   </c:forEach>
