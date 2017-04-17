@@ -293,7 +293,7 @@ function addTeaFeedbackSubmit()
 	   if(startIsAttend=='Y' || openIsAttend=='Y' || meetingIsAttend=='Y' || gradIsAttend=='Y' )
 	   {
 		    var strativeCsi = $("#strativeCsi"+i+"").numberbox('getValue');
-		    if(strativeCsi == "" || gradCsi == strativeCsi)
+		    if(strativeCsi == "" || strativeCsi == undefined)
 		    {
 				   $.messager.alert('提示', "请填写行政满意度！");
 				   flag = false;
@@ -425,7 +425,7 @@ function updateTeaFeedbackSubmit(){
 	    if(startIsAttend=='Y' || openIsAttend=='Y' || meetingIsAttend=='Y' || gradIsAttend=='Y' )
 	    {
 		    var strativeCsi = $("#strativeCsi"+i+"").numberbox('getValue');
-		    if(strativeCsi == "" || gradCsi == strativeCsi)
+		    if(strativeCsi == "" || strativeCsi == undefined)
 		    {
 				   $.messager.alert('提示', "请填写行政满意度！");
 				   flag = false;
