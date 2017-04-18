@@ -30,26 +30,19 @@ $(document).ready(function() {
 	}
 	
 	$("#qryBtn").click(function() {
-		var schoolId = $("#schoolId").combobox("getValue");
-    	if(schoolId != "") {
-    		initPageNumber("list_data");
-			var object = $("#qryFm").serializeObject();
-	    	var obj = JSON.stringify(object);
-	    	obj = obj.substring(0, obj.length - 1);
-	    	var funcNodeId = $("#qryBtn").attr("funcNodeId");
-	    	obj += ",\"funcNodeId\":\""+funcNodeId+"\"}";
-	    	$('#list_data').datagrid({
-	    		url : "/sys/pubData/qryDataListByPage.do",
-	    		queryParams:{
-	    			param : obj
-	    		},
-	    		onLoadSuccess:function() {
-	    			mergeCellsByField("list_data", "schoolName");
-	    		}
-	    	});
-    	} else {
-			showMessage("提示","没有有效的校区可供查询",null);
-		}
+		var object = $("#qryFm").serializeObject();
+		var funcNodeId = $("#qryBtn").attr("funcNodeId");
+		object.funcNodeId = funcNodeId;
+    	var obj = JSON.stringify(object);
+    	$('#list_data').datagrid({
+    		url : "/sys/pubData/qryDataListByPage.do",
+    		queryParams:{
+    			param : obj
+    		},
+    		onLoadSuccess:function() {
+    			mergeCellsByField("list_data", "schoolName");
+    		}
+    	});
     });
 	
 	//页面重置

@@ -95,8 +95,8 @@
 	   			<a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;">导出全部</a>
 			</div>
   		</div>
-  		<div id="dlg" class="easyui-dialog" closed="true" modal="true">
-			<table class="easyui-datagrid" style="width:900px;height:500px" id="detail_list_data" fitColumns="true">
+  		<div id="dlg" class="easyui-dialog" closed="true" modal="true" buttons="#dlgBtn">
+			<table class="easyui-datagrid" style="width:900px;height:400px" id="detail_list_data" fitColumns="true">
 				<thead>
 					<tr>
 						<th field="rownum" align="center" width="100px">序号</th>
@@ -111,6 +111,9 @@
 				</thead>
 			</table>
 		</div>
+		<div id="dlgBtn">
+    		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">关闭</a>
+  		</div>
   	</body>
 </html>
 <script>

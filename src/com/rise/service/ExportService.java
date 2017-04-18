@@ -280,11 +280,9 @@ public class ExportService {
 				boolean flag = false;
 				int fr = 1, tr = 1;
 				String value = StringUtil.getJSONObjectKeyVal(array.getJSONObject(0), mergeName);
-				System.err.println(value);
 				String[] indexArr = mergeIndex.split(",");
 				for (int j = 1; j < array.size(); j++) {
 					JSONObject item = array.getJSONObject(j);
-					System.err.println(StringUtil.getJSONObjectKeyVal(item, mergeName));
 					if (value.equals(StringUtil.getJSONObjectKeyVal(item, mergeName))) {
 						flag = true;
 						tr = j + 1;
@@ -299,8 +297,6 @@ public class ExportService {
 						if (flag) {
 							for (int m = 0; m < indexArr.length; m++) {
 								int cIndex = Integer.valueOf(indexArr[m]);
-								System.err.println(fr);
-								System.err.println(tr);
 								CellRangeAddress range2 = new CellRangeAddress(fr, tr, cIndex, cIndex);
 								cellRangeList.add(range2);
 							}

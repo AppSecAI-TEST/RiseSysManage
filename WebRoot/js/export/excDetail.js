@@ -153,10 +153,19 @@ function mergeCellsByField(tableId, colList) {
 }
 
 function viewNotInClassDetail(index, type) {
-	var rows = $('#list_data').datagrid('getRows');
-	var schoolId = rows[index].schoolId;
 	var object = $("#qryFm").serializeObject();
-	object.schoolId = schoolId;
+	var rows = $('#list_data').datagrid('getRows');
+	var resultType = rows[index].resultType;
+	if("school" == resultType) {
+		var schoolId = rows[index].schoolId;
+		object.schoolId = schoolId;
+	} else if("region" == resultType) {
+		var regionId = rows[index].regionId;
+		object.regionId = regionId;
+	} else if("city" == resultType) {
+		var city = rows[index].city;
+		object.city = city;
+	}
 	object.queryCode = "qryNewNotInClassDetail";
 	if("higher" == type) {
 		object.queryCode = "qryHigherNotInClassDetail";
