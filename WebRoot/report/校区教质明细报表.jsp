@@ -89,15 +89,22 @@
 							<th field="studyingNum" align="center" width="5%" rowspan="2">在读人数</th>
 							<th field="byname" align="center" width="10%" rowspan="2">带班老师</th>
 							<th align="center" width="18%" colspan="3">课后复习(上月)</th>
-							<th align="center" width="15%" colspan="3">家长会</th>
-							<th align="center" width="15%" colspan="3">毕业典礼</th>
-							<th align="center" width="15%" colspan="3">公开课</th>
+							<th align="center" width="10%" colspan="3">开班典礼</th>
+							<th align="center" width="10%" colspan="3">家长会</th>
+							<th align="center" width="10%" colspan="3">毕业典礼</th>
+							<th align="center" width="10%" colspan="3">公开课</th>
+							<th field="strativeCsiVal" align="center" width="6%" rowspan="2">行政满意度</th>
 							<th field="isFinish" align="center" width="6%" rowspan="2">是否完成</th>
 						</tr>
 						<tr>
 							<th field="teachingNum" align="center" width="5%">参与人数</th>
 							<th field="oneNum" align="center" width="10%">2次课后复习人数</th>
 							<th field="teaRateVal" align="center" width="6%">电教完成率</th>
+							
+							<th field="studentStartNum" align="center" width="5%">参与人数</th>
+							<th field="attendStartVal" align="center" width="5%">出勤率</th>
+							<th field="startCsiVal" align="center" width="6%">满意度</th>
+							
 							<th field="studentMeetingNum" align="center" width="5%">参与人数</th>
 							<th field="attendMeetingVal" align="center" width="5%">出勤率</th>
 							<th field="meetingCsiVal" align="center" width="6%">满意度</th>
