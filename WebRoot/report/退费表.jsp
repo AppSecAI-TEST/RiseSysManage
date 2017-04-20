@@ -72,7 +72,7 @@
 </html>
 <script>
 $(document).ready(function(){
- $('#month').datebox({
+	$('#month').datebox({
             onShowPanel: function () {//显示日趋选择对象后再触发弹出月份层的事件，初始化时没有生成月份层
         		var p = $('#month').datebox('panel'), //日期选择对象
             	span = p.find('span.calendar-text'); //显示月份层的触发控件
