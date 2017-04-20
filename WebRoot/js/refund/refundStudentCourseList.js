@@ -58,7 +58,7 @@ $(document).ready(function() {
     	    	}
     		});
     		$("#adviserTeacherId").combobox({
-    			url : "/sys/pubData/qryStaffList.do?post=4,5&schoolId=" + n,
+    			url : "/sys/pubData/qryStaffList.do?post=4,5,6,7,8&schoolId=" + n,
     			valueField : "staffId",
     	    	textField : "userName",
     	    	panelHeight : "auto",

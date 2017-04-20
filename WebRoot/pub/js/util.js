@@ -976,8 +976,8 @@ function validateIdCard(obj) {
 }
 
 function checkMobile(mobile) { 
+	var isMob = /^1(3|4|5|7|8)\d{9}$/;
 	var isPhone = /^([0-9]{3,4}-)?[0-9]{7,8}$/;
-	var isMob = /^(13[0-9]|14[0-9]|15[0-9]|18[0-9]|177)\d{8}$/;
 	if(isMob.test(mobile) || isPhone.test(mobile)) {
 		return true;
 	} else{
