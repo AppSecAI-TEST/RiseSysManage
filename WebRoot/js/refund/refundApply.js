@@ -333,7 +333,9 @@ $(document).ready(function() {
 						refundFeeObj.bankName = obj.bankName;
 						refundFeeObj.account = obj.account;
 						refundFeeObj.bankCard = obj.bankCard;
-						refundFeeObj.remark = obj.remark;
+						var remark = obj.remark;
+						remark = string2Json(remark);
+						refundFeeObj.remark = remark;
 						refundFeeObj.handlerId = obj.handlerId;
 						refundFeeObj.approveId = obj.handlerId;
 						refundFeeObj.imgUrl = imgUrl;
@@ -395,20 +397,22 @@ $(document).ready(function() {
 									refundVisitObj.visitUserId = obj.careAdviserId;
 								}
 								refundVisitObj.visitDate = obj.teacherOrAdviserVisitDate;
-								refundVisitObj.remark = obj.teacherOrAdviserVisitRemark;
+								var teacherOrAdviserVisitRemark = obj.teacherOrAdviserVisitRemark;
+								teacherOrAdviserVisitRemark = string2Json(teacherOrAdviserVisitRemark);
+								refundVisitObj.remark = teacherOrAdviserVisitRemark;
 								refundVisitObj.handlerId = obj.handlerId;
-							} else if(i == 1)
-							{
+							} else if(i == 1) {
 								var visitPersonTwo = $("input:radio[name='visitPersonTwo']:checked").val();
 								refundVisitObj.userType = visitPersonTwo;
-								if("academic" == visitPersonTwo) 
-								{
+								if("academic" == visitPersonTwo) {
 									refundVisitObj.visitUserId = obj.academicId;
 								} else {
 									refundVisitObj.visitUserId = obj.salesId;
 								}
 								refundVisitObj.visitDate = obj.academicOrSalesVisitDate;
-								refundVisitObj.remark = obj.academicOrSalesVisitRemark;
+								var academicOrSalesVisitRemark = obj.academicOrSalesVisitRemark;
+								academicOrSalesVisitRemark = string2Json(academicOrSalesVisitRemark);
+								refundVisitObj.remark = academicOrSalesVisitRemark;
 								refundVisitObj.handlerId = obj.handlerId;
 							} /*else if(i == 2) {
 								refundVisitObj.userType = "headmaster";
@@ -417,8 +421,7 @@ $(document).ready(function() {
 								refundVisitObj.remark = obj.headmasterVisitRemark;
 								refundVisitObj.handlerId = obj.handlerId;
 							} */
-							if(refundVisitObj.visitUserId=='')
-							{
+							if(refundVisitObj.visitUserId == '') {
 								continue;
 							}
 							refundVisitArray += JSON.stringify(refundVisitObj) + ",";

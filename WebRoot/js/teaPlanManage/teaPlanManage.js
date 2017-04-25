@@ -186,6 +186,8 @@ function addPlanSubmit()
 	   var className = $(node).html();
 	   var teachingIsOpen = $("input[name='teachingIsOpen"+i+"']:checked").val();
 	   var remark = $("#remark"+i+"").textbox('getValue');
+	   remark = string2Json(remark);
+	   remark = encodeURI(remark);
 	   var teachingQuality = {};
 	   teachingQuality.schoolId = schoolId;
 	   teachingQuality.month = time;
@@ -311,6 +313,8 @@ function updatePlanSubmit()
 	   var qualityId = $("#qualityId"+i+"").val();
 	   var teachingIsOpen = $("input[name='teachingIsOpen"+i+"']:checked").val();
 	   var remark = $("#remark"+i+"").textbox('getValue');
+	   remark = string2Json(remark);
+	   remark = encodeURI(remark);
 	   var teachingQuality = {};
 	   teachingQuality.qualityId = qualityId;
 	   teachingQuality.teachingIsOpen = teachingIsOpen;

@@ -367,7 +367,11 @@ $(document).ready(function() {
     						var advisterIdB = $("#advisterIdB").combobox("getValue");
     						if(advisterIdA != advisterIdB) {
     							if(usedFlag) {
-    								var obj = JSON.stringify($("#studentFm").serializeObject());
+    								var object = $("#studentFm").serializeObject();
+    								var remark = object.remark;
+    								remark = string2Json(remark);
+    								object.remark = remark;
+    								var obj = JSON.stringify(object);
     								var contactArray = "[";
     								$("[name='contacts']").each(function() {
     									contactArray += "{identityId:\""+$(this).attr("identityId")+"\",identityType:\""+$(this).attr("identityType")+"\",name:\""+$(this).attr("contactName")+"\",phone:\""+$(this).attr("phone")+"\",relationType:\""+$(this).attr("relationType")+"\",job:\""+$(this).attr("job")+"\",used:\""+$(this).attr("used")+"\"},";

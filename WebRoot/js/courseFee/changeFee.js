@@ -109,7 +109,10 @@ function changeFee()
 	param.beforeAmount=$("#beforeAmount").val();
 	param.afterAmount =$("#afterAmount").html();
 	param.studentCourseId =$("#studentCourseId").val();
-	param.remark =$("#remark").textbox("getValue");
+	var remark = $("#remark").textbox("getValue");
+	remark = string2Json(remark);
+	remark = encodeURI(remark);
+	param.remark = remark;
 	param.state ="00A";
 	param.adjustAmount =$("#adjustAmount").numberbox("getValue");
 	$.ajax( {

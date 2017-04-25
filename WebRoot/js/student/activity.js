@@ -139,7 +139,9 @@ $(document).ready(function() {
 						gift.getUser = paramObj.name;
 					}
 					gift.giftChannelDesc = paramObj.title + "赠送";
-					gift.giveRemark = paramObj.remark;
+					var remark = paramObj.remark;
+					remark = string2Json(remark);
+					gift.giveRemark = remark;
 					gift.handlerId = paramObj.handlerId;
 					if(gift.effDate==null||gift.effDate=='')
 					{

@@ -79,7 +79,7 @@ $(document).ready(function() {
     		//分校区
     		studentObj = data.studentObj;
     		$("#nameText").html(studentObj.name);
-    		$("#name").textbox('setValue', studentObj.name);
+    		$("#stuName").textbox('setValue', studentObj.name);
     		$("#birthdayText").html(studentObj.birthday);
     		$("#birthday").datebox('setValue', studentObj.birthday);
     		$("#sexText").html(studentObj.sexVal);
@@ -106,7 +106,7 @@ $(document).ready(function() {
     		array.push({"key": "dutyAdvister", "value": studentObj.dutyAdvister});
     		array.push({"key": "identityId", "value": studentObj.identityId});
     		array.push({"key": "identityType", "value": studentObj.identityType});
-    		array.push({"key": "name", "value": studentObj.name});
+    		array.push({"key": "stuName", "value": studentObj.name});
     		array.push({"key": "remark", "value": studentObj.remark});
     		array.push({"key": "sex", "value": studentObj.sex});
     		array.push({"key": "entranceDate", "value": studentObj.entranceDate});
@@ -444,7 +444,6 @@ $(document).ready(function() {
 	
 	//学员修改提交
 	$("#updateSubmit").click(function() {
-		//disY();
 		contactLength += $("[name='contacts']").length;
 		if(contactLength > 0) {
 			var usedFlag = false;
@@ -537,6 +536,11 @@ $(document).ready(function() {
 	    											value = studentArray[i].value;
 	    										}
 	    									}
+	    									if("stuName" == key) {
+	    										key = "name";
+	    									} else if("remark" == key) {
+	    										value = string2Json(value);
+	    									}
 	    									obj += "\"" + key + "\":\"" + value + "\",";
 	    								}
 	    								obj += "\"contactId\":\""+contactIds+"\",\"activityId\":\""+activityIds+"\",\"realId\":\""+realIds+"\",\"contactArray\":"+contactArray+",\"realSchoolArray\":"+realSchoolArray+",\"activityArray\":[]}";
@@ -567,22 +571,16 @@ $(document).ready(function() {
 	    						}
 							}
 						} else {
-							//disN();
 							$.messager.alert('提示', "出生日期需要与本人身份证号码中的出生日期一致！");
 						}
-					} else {
-						//disN();
 					}
 				} else {
-					//disN();
 					$.messager.alert('提示', "请先对该学员做一些修改之后，再进行提交！");
 				}
 			} else {
-				//disN();
 				$.messager.alert('提示', "请至少设置一位联系人为常用联系人！");
 			}
 		} else {
-			//disN();
 			$.messager.alert('提示', "请至少添加一个联系人信息！");
 		}
 	});

@@ -233,7 +233,9 @@ $(document).ready(function() {
 					refundFeeObj.bankName = obj.bankName;
 					refundFeeObj.account = obj.account;
 					refundFeeObj.bankCard = obj.bankCard;
-					refundFeeObj.remark = obj.remark;
+					var remark = obj.remark;
+					remark = string2Json(remark);
+					refundFeeObj.remark = remark;
 					refundFeeObj.handlerId = obj.handlerId;
 					refundFeeObj.approveId = obj.handlerId;
 					refundFeeObj.imgUrl = imgUrl;

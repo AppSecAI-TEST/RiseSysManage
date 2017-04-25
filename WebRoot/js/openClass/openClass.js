@@ -274,7 +274,11 @@ $(document).ready(function() {
 			$.messager.alert('提示', "请选择是否审批通过！");
 		} else {
 			if($("#approveOpenFm").form('validate')) {
-				var obj = JSON.stringify($("#approveOpenFm").serializeObject());
+				var object = $("#approveOpenFm").serializeObject();
+				var remark = object.remark;
+				remark = string2Json(remark);
+				object.remark = remark;
+				var obj = JSON.stringify(object);
 				obj = encodeURI(obj);
 				$.ajax({
 					url: "/sys/openClass/approveOpenClass.do",
@@ -311,7 +315,11 @@ function close() {
 
 //修改开课时间或者是取消放班
 function updateOrCancel() {
-	var obj = JSON.stringify($("#openFm").serializeObject());
+	var object = $("#openFm").serializeObject();
+	var remark = object.remark;
+	remark = string2Json(remark);
+	object.remark = remark;
+	var obj = JSON.stringify(object);
 	obj = encodeURI(obj);
 	var optionType = $("#optionType").val();
 	$.ajax({
@@ -380,7 +388,11 @@ function openClass() {
 		classTeacherId = classTeacherId.substring(0, classTeacherId.length - 1);
 		$("#classTeacherId").val(classTeacherId);
 	}
-	var obj = JSON.stringify($("#openClassFm").serializeObject());
+	var object = $("#openClassFm").serializeObject();
+	var remark = object.remark;
+	remark = string2Json(remark);
+	object.remark = remark;
+	var obj = JSON.stringify(object);
 	obj = obj.substring(0, obj.length - 1) + ",classTeacherArray:"+classTeacherArray+",schooltimeArray:"+schooltimeArray+"}";
 	obj = encodeURI(obj);
 	$.ajax({

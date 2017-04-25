@@ -473,7 +473,10 @@ function submitMergeInfo()
 		}	
 		comboClass.times=$("#weekTime1").combobox("getText")+" "+$("#hourRange1").combobox("getText")+"<br/>"+$("#weekTime2").combobox("getText")+" "+$("#hourRange2").combobox("getText");
 		comboClass.teachers =$("#school1").combobox("getText")+" "+$("#teacher1").combobox("getText")+"<br/>"+$("#school2").combobox("getText")+" "+$("#teacher2").combobox("getText");
-		comboClass.remark=$("#remark").textbox("getValue");
+		var remark = $("#remark").textbox("getValue");
+		remark = string2Json(remark);
+		remark = encodeURI(remark);
+		comboClass.remark = remark;
 		comboClass.handlerId =$("#handlerId").val();
 		comboClass.state="00A";
 		combo.info =comboClass;

@@ -114,6 +114,7 @@ $(document).ready(function() {
 					approveRemark = remark;
 				}
 			});
+			approveRemark = string2Json(approveRemark);
 			approveObj.remark = approveRemark;
 			var refundFeeObj = new Object();
 			var refundFeeDetailArray = "[";

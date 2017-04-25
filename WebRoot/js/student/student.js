@@ -231,7 +231,10 @@ $(document).ready(function() {
     //VIP维护信息添加
     $("#setVipSubmit").click(function() {
     	if($("#setVipFm").form('validate')) {
-    		var obj = JSON.stringify($("#setVipFm").serializeObject());
+    		var object = $("#setVipFm").serializeObject();
+    		var vipRemark = object.vipRemark;
+    		vipRemark = string2Json(vipRemark);
+    		var obj = JSON.stringify(object);
     		obj = encodeURI(obj);
     		$.ajax({
     			url: "/sys/student/setVip.do",

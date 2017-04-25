@@ -125,7 +125,11 @@ $(document).ready(function() {
 					}
 				}
 				if(flag) {
-					var obj = JSON.stringify($("#applyChangeSchoolFm").serializeObject());
+					var object = $("#applyChangeSchoolFm").serializeObject();
+					var remark = object.remark;
+					remark = string2Json(remark);
+					object.remark = remark;
+					var obj = JSON.stringify(object);
 					obj = encodeURI(obj);
 					$.ajax({
 						url: "/sys/change/applyChangeClass.do",

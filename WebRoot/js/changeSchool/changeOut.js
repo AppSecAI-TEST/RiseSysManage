@@ -32,7 +32,11 @@ $(document).ready(function() {
 	
 	//提交转出
 	$("#changeOutSubmit").click(function() {
-		var obj = JSON.stringify($("#changeOutSchoolFm").serializeObject());
+		var object = $("#changeOutSchoolFm").serializeObject();
+		var remark = object.remark;
+		remark = string2Json(remark);
+		object.remark = remark;
+		var obj = JSON.stringify(object);
 		obj = encodeURI(obj);
 		$.ajax({
 			url : "/sys/change/changeOutSchool.do",

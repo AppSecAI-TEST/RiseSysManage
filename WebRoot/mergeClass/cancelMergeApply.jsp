@@ -257,8 +257,11 @@
             {
             	var param={};
             	param.applyId =$("#applyId").val();
-            	param.handlerId =$("#handlerId").val();
-            	param.remark =$("#remark").textbox("getValue");
+            	param.handlerId = $("#handlerId").val();
+            	var remark = $("#remark").textbox("getValue");
+            	remark = string2Json(remark);
+				remark = encodeURI(remark);
+            	param.remark = remark;
                 $.ajax( {
 					type : "POST",
 					url : "/sys/mergeClass/cancelApply.do",

@@ -594,6 +594,9 @@ function addApplyClass() {
 	});
 	schooltimeArray = schooltimeArray.substring(0, schooltimeArray.length - 1) + "]";
 	var object = $("#applyClassFm").serializeObject();
+	var remark = object.remark;
+	remark = string2Json(remark);
+	object.remark = remark;
 	var classOrder = $("#classOrder").textbox("getValue");
 	var className = $("#classTypeText").html() + classOrder;
 	object.className = className;

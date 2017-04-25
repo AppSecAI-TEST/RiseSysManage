@@ -86,7 +86,7 @@ textarea:disabled,input:not([type]):disabled,input[type="color"]:disabled,input[
 .maintable1 tr {height: 30px;}
 .maintable1 td {border: 1px solid #ccc; padding: 5px;} 
 
-span {font-family:'微软雅黑','Arial','宋体'; font-size: 13px;}
+span {font-family:'微软雅黑','Arial','宋体'; font-size: 13px;word-break:break-all;word-wrap:break-word;}
 .linkmore{color : #0099FF; text-decoration : none; cursor:pointer;}
 .linkmore:hover{color : ED0000 !important;}
 .linkmore1{color : #000000;text-decoration : none;}

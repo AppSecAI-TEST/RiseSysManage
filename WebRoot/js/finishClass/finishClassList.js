@@ -123,7 +123,11 @@ $(document).ready(function() {
 	//结课
 	$("#finishClassSubmit").click(function() {
 		if($("#finishClassFm").form('validate')) {
-			var obj = JSON.stringify($("#finishClassFm").serializeObject());
+			var object = $("#finishClassFm").serializeObject();
+			var remark = object.remark;
+			remark = string2Json(remark);
+			object.remark = remark;
+			var obj = JSON.stringify(object);
 			obj = encodeURI(obj);
 			$.ajax({
 				url: "/sys/attendClass/finishClass.do",

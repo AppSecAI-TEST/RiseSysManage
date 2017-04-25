@@ -65,7 +65,7 @@
 							<th field="avgAbove3ServiceRate" align="center" width="8%" >入职3个月</br>以上在读平</br>均服务效率</th>
 							<th field="avgSchoolServiceRate" align="center" width="8%" >教师在</br>校服务效率</br>（含规划师）</th>
 							<th field="teacherCompilation" align="center" width="5%" >教师编制</th>
-							<th field="preLeaveNum" align="center" width="6%" >1个月内</br>待离职人数</th>
+							<th field="preLeaveNum" align="center" width="6%" >待离职人数</th>
 							<th field="avgLeaveServiceRate" align="center" width="6%" >离职后在读</br>服务效率</th>
 							<th field="avgLeaveSchoolServiceRate" align="center" width="6%" >离职后在校</br>服务效率</th>
 							<th field="efficiencyVariance" align="center" width="6%" data-options="formatter:formatEfficiency">效率差异</br>需补给</th>

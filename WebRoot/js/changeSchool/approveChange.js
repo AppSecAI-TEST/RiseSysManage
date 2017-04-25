@@ -95,7 +95,11 @@ $(document).ready(function() {
 			$.messager.alert('提示', "请选择是否审批通过！");
 		} else {
 			if($("#approveChangeSchoolFm").form('validate')) {
-				var obj = JSON.stringify($("#approveChangeSchoolFm").serializeObject());
+				var object = $("#approveChangeSchoolFm").serializeObject();
+				var remark = object.remark;
+				remark = string2Json(remark);
+				object.remark = remark;
+				var obj = JSON.stringify(object);
 				obj = encodeURI(obj);
 				$.ajax({
 					url: "/sys/change/approveChangeClass.do",

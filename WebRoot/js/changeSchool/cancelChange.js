@@ -96,7 +96,11 @@ $(document).ready(function() {
 	
 	$("#cancelChangeSubmit").click(function() {
 		if($("#calcenChangeSchoolFm").form('validate')) {
-			var obj = JSON.stringify($("#calcenChangeSchoolFm").serializeObject());
+			var object = $("#calcenChangeSchoolFm").serializeObject();
+			var remark = object.remark;
+			remark = string2Json(remark);
+			object.remark = remark;
+			var obj = JSON.stringify(object);
 			obj = encodeURI(obj);
 			$.ajax({
 				url: "/sys/change/cancelChangeSchool.do",

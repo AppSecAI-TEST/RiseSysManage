@@ -37,7 +37,10 @@
 					region.schoolIds = row.schoolIds;	
 					region.managerName = row.managerName;	
 					region.phone = row.phone;	
-					region.remark = row.remark;	
+					var remark = row.remark;	
+					remark = string2Json(remark);
+					remark = encodeURI(remark);
+					region.remark = remark;
 					window.location.href = "/sys/regionManage/jumpToRegion.do?json="+JSON.stringify(region)+"&type=UPDATE";
 				}
 			}

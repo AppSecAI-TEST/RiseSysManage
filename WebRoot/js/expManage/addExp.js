@@ -15,6 +15,9 @@ $(document).ready(function(){
 //			$.messager.alert('提示', "请填写异常原因备注！");
 //			return false;
 //		}
+		var remark = trim($("#remark").val());
+		remark = string2Json(remark);
+		remark = encodeURI(remark);
 		var paramValue = '{"stageLevel":"' + stageLevel
 			+ '","orignClassId":"' + classInstId
 			+ '","orignClassName":"' + className
@@ -24,7 +27,7 @@ $(document).ready(function(){
 			+ courseState + '","teacherName":"'
 			+ teacherName + '","hours":"' + classProgress
 			+ '","excState":"001","remark":"'
-			+ trim($("#remark").val()) + '","handlerId":"'
+			+ remark + '","handlerId":"'
 			+ $("#handlerId").val() + '"}';
 		$.messager.confirm('提示', '您确定要添加该异常？', function(r) {
 			if (r) {

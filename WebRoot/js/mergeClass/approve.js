@@ -222,12 +222,15 @@ function approve()
 	}
 	else
 	{
-		var param ={};
-		param.approveType =approveType;
-		param.handlerId =$("#handlerId").val();
-		param.comboState =$("#comboState").val();
-		param.remark =trim($("#remark").val());
-		param.applyId =$("#applyId").val();
+		var param = {};
+		param.approveType = approveType;
+		param.handlerId = $("#handlerId").val();
+		param.comboState = $("#comboState").val();
+		var remark = trim($("#remark").val());
+		remark = string2Json(remark);
+		remark = encodeURI(remark);
+		param.remark = remark;
+		param.applyId = $("#applyId").val();
 		$.ajax( {
 			type : "POST",
 			url : "/sys/mergeClass/approveApply.do",

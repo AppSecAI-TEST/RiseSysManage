@@ -3,7 +3,10 @@ $(document).ready(function() {
 		if($("#disbandClassFm").form('validate')) {
 			var classStudentNum = parseInt($("#classStudentNum").val());
 			if(classStudentNum == 0) {
-				var obj = JSON.stringify($("#disbandClassFm").serializeObject());
+				var object = $("#disbandClassFm").serializeObject();
+				remark = string2Json(remark);
+				object.remark = remark;
+				var obj = JSON.stringify(object);
 				obj = encodeURI(obj);
 				$.ajax({
 					url: "/sys/attendClass/disbandClass.do",

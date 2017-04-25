@@ -186,6 +186,7 @@ $(document).ready(function() {
 					approveRemark = remark;
 				}
 			});
+			approveRemark = string2Json(approveRemark);
 			approveObj.remark = approveRemark;
 			if("108" == nextState) {
 				approveObj.approveResult = "Y";

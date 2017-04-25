@@ -120,7 +120,11 @@ $(document).ready(function() {
 			$.messager.alert('提示', "请选择是否审批通过！");
 		} else {
 			if($("#cancelApplyClassFm").form('validate')) {
-				var obj = JSON.stringify($("#cancelApplyClassFm").serializeObject());
+				var object = $("#cancelApplyClassFm").serializeObject();
+				var remark = object.remark;
+				remark = string2Json(remark);
+				object.remark = remark;
+				var obj = JSON.stringify(object);
 				obj = encodeURI(obj);
 				$.ajax({
 					url: "/sys/applyClass/approveApplyClass.do",
