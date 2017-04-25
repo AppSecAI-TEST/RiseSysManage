@@ -34,7 +34,7 @@
 	  				<tr>
 	  					<td align="right" width="10%"><span>延长课时：</span></td>
 	  					<td width="20%">
-	  					<input type="text" id="extendHours" class="easyui-numberbox" style="width: 40px; height: 25px;" name="extendHours" value=""/>
+	  					<input type="text" id="extendHours" class="easyui-numberbox" style="width: 40px; height: 25px;" name="extendHours" value=" ${obj.attendClassObj.extendHours}"/>
 	  						<span  id="finishDate">结课时间： ${obj.attendClassObj.finishDate }</span>  
 	  					</td>
 	  					<td align="right" width="10%"><span>学员来源类型：</span></td>
