@@ -32,9 +32,10 @@
 	  					<td width="30%"><span id="className">${obj.attendClassObj.className }</span></td>
 	  				</tr>
 	  				<tr>
-	  					<td align="right" width="10%"><span>结课时间：</span></td>
+	  					<td align="right" width="10%"><span>延长课时：</span></td>
 	  					<td width="20%">
-	  						<input name="finishDate" id="finishDate" type="text" class="easyui-datebox" required="true" style="width: 100px; height: 28px;" editable="false" value="${obj.attendClassObj.finishDate }"/>
+	  					<input type="text" id="extendHours" class="easyui-numberbox" style="width: 40px; height: 25px;" name="extendHours" value=""/>
+	  						<span  id="finishDate">结课时间： ${obj.attendClassObj.finishDate }</span>  
 	  					</td>
 	  					<td align="right" width="10%"><span>学员来源类型：</span></td>
 	  					<td width="20%"><span id="studentChannelTypeVal">${obj.attendClassObj.studentChannelTypeText }</span></td>

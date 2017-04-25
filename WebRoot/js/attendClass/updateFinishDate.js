@@ -2,9 +2,9 @@ $(document).ready(function() {
 	//修改结课时间
 	$("#updateFinishDateSubmit").click(function() {
 		if($("#updateFinishDateFm").form('validate')) {
-			var oldFinishDate = $("#oldFinishDate").val();
-			var finishDate = $("#finishDate").datebox("getValue");
-			if(oldFinishDate != finishDate) {
+			var extendHours = $("#extendHours").val();
+			if(extendHours != '')
+			{
 				var object = $("#updateFinishDateFm").serializeObject();
 				object.finishDate = finishDate;
 				var obj = JSON.stringify(object);
@@ -28,7 +28,7 @@ $(document).ready(function() {
 					}
 				});
 			} else {
-				$.messager.alert('提示', "请先修改结课时间！");
+				$.messager.alert('提示', "请先修改延长课时！");
 			}
 		}
 	});
