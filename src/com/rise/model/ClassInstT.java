@@ -3,6 +3,8 @@ package com.rise.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+
 public class ClassInstT {
     private Integer classInstId;
 
@@ -92,6 +94,8 @@ public class ClassInstT {
     
 	private List<ClassStudentT> classStudentList;
 
+	private Integer extendHours;
+	
     public Integer getClassInstId() {
         return classInstId;
     }
@@ -442,6 +446,17 @@ public class ClassInstT {
 
 	public void setClassStudentList(List<ClassStudentT> classStudentList) {
 		this.classStudentList = classStudentList;
+	}
+	
+	
+	public Integer getExtendHours()
+	{
+		return this.extendHours;
+	}
+
+	public void setExtendHours(Integer extendHours)
+	{
+		this.extendHours = extendHours;
 	}
 	
 }
