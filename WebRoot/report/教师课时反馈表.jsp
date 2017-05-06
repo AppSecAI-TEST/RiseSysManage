@@ -114,7 +114,14 @@ $(document).ready(function(){
                 	var val =year + '-' + month+"-00";
                     $('#time').datebox('setValue',val).datebox('hidePanel'); //设置日期的值
              	});
-            }});
+            },
+            onChange:function(){
+				var month=$("#time").datebox('getValue');	
+	 			$("#teacherId").combobox({
+					url : "/sys/pubData/qryTeacherHourList.do?schoolId="+$("#schoolId").combobox('getValue')+"&month="+month
+				});
+	 		}
+	});
    	var now =new Date();
 	$('#time').datebox("setValue",now.getFullYear()+"-"+(now.getMonth()+1));
 	initReportButtonAll("resetBtn","qryFm","schoolId");
