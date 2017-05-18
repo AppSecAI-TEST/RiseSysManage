@@ -52,13 +52,13 @@
   			</form>
   		<div style="min-width:1100px;width:100%;margin:2px auto;"><a href="javascript:void(0)" id="export" class="easyui-linkbutton" iconCls="icon-add" style="width: 100px;margin: 2px ">导出全部</a>
   		<a href="javascript:void(0)" id="diffBtn" class="easyui-linkbutton" iconCls="icon-add" style="width: 120px;margin: 2px ">提交差异说明</a></div>	
-		<div class="easyui-panel" title="排课信息" style="width:1505px;overflow:auto;min-height:400px">
-		<table class="maintable" id="hoursPlanTab" style="width:1500px;margin-right: 10px;" cellspacing="0" cellpadding="0">
+		<div class="easyui-panel" title="排课信息" style="width:1605px;overflow:auto;min-height:400px">
+		<table class="maintable" id="hoursPlanTab" style="width:1600px;margin-right: 10px;" cellspacing="0" cellpadding="0">
 		  <tr align="center">
 		     <td align="center" width="78px;" rowspan="2"><span>学校</span></td>
-		    <td align="center" width="78px;" rowspan="2"><span>班级</span></td>
-		    <td align="center" width="96px;" rowspan="2"><span>带班老师</span></td>
-		    <td align="center" width="240px;"rowspan="2"><span>上课时段</span></td>
+		    <td align="center" width="110px;" rowspan="2"><span>班级</span></td>
+		    <td align="center" width="130px;" rowspan="2"><span>带班老师</span></td>
+		    <td align="center" width="180px;"rowspan="2"><span>上课时段</span></td>
 		    <td align="center" width="86px;" rowspan="2"><span>开课日期</span></td>
 		    <td align="center" width="86px;" rowspan="2"><span>结课日期</span></td>
 		    <td align="center" width="42px;" rowspan="2"><span>上月已上课时</span></td>
