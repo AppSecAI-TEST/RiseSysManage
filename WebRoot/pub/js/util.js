@@ -462,6 +462,11 @@ function formatSchool(row) {
 	return s;
 }
 
+function formatRegion(row) {
+	var s = '<span>' + row.regionName + '</span>';
+	return s;
+}
+
 function formatPost(row) {
 	var s = '<span>' + row.postName + '</span>';
 	return s;

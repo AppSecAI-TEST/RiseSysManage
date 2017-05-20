@@ -1,13 +1,60 @@
 $(document).ready(function() {
+	var isRegion = true;
 	var clearFlag = true;
 	ajaxLoading("正在处理，请稍待。。。");
+	var staffSchoolId = $("#staffSchoolId").val();
+	if("10" == staffSchoolId) {
+		$("#regionId").combobox({
+			loader:function(param,success,error){  
+			    $.ajax({  
+					url: "/sys/pubData/qryRegionList.do",
+					dataType: 'json',
+					success: function(data) {
+						data.unshift({regionName:'全部片区', regionId:""});
+						success(data);  
+					}
+				});  
+	   		},
+	   		onLoadSuccess : function(data) {
+				if(data.length > 0) {
+					$("#regionId").combobox("setValue", data[0].regionId);
+				}
+			}
+		});
+	} else {
+		var staffId = $("#staffId").val();
+		$.ajax({
+			url: "/sys/pubData/checkStaffIsArea.do",
+			type: "POST",
+			dataType: 'json',
+			data: "staffId=" + staffId,
+			success: function(data) {
+				if(parseInt(data) > 0) {
+					$("#regionId").combobox({
+						url : "/sys/pubData/qryRegionListByStaffId.do?staffId=" + staffId,
+						dataType: 'json',
+				    	onLoadSuccess:function(data) {
+				    		if(data.length > 0) {
+				    			$("#regionId").combobox("setValue", data[0].regionId);
+							}
+				    	}
+					});
+				} else {
+					isRegion = false;
+					$("#regionTd").css("display", "none");
+					$("#regionTitleTd").css("display", "none");
+				}
+			}
+		});
+	}
+	
 	$("#schoolId").combobox({
 		loader:function(param,success,error){  
 		    $.ajax({  
 				url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
 				dataType: 'json',  
 				success: function(data) {
-					if(data.length == schoolData.length) {
+					if(isRegion) {
 						data.unshift({schoolName:'全部校区', schoolId:""});  
 					}
 					success(data);  
@@ -24,39 +71,6 @@ $(document).ready(function() {
 	});
 	var curr_time = new Date();
 	$('#year').datebox('setValue', yearFormatter(curr_time));
-//	var year = $('#year').datebox('getValue');
-//	var tableName = $("#tableName").val();
-//	$("#month").combobox({
-//		url : "/sys/pubData/qryReportMonthList.do?tableName=" + tableName + "&year=" + year,//返回json数据的url
-//    	valueField : "month",
-//    	textField : "monthText",
-//    	panelHeight : "auto",
-//    	formatter : function(data) {
-//    		return "<span>" + data.monthText + "</span>";
-//    	},
-//    	onLoadSuccess:function(data) {
-//    		if(data.length > 0) {
-//				$('#month').combobox('setValue', data[0].month);
-//			}
-//    	},
-//    	onChange : function(n, o) {
-//    		$("#week").combobox({
-//    			url : "/sys/pubData/qryReportWeekList.do?tableName=" + tableName + "&year=" + year + "&month=" + n,//返回json数据的url
-//    			valueField : "weekName",
-//    	    	textField : "weekNameText",
-//    	    	panelHeight : "auto",
-//    	    	formatter : function(data) {
-//    	    		return "<span>" + data.weekNameText + "</span>";
-//    	    	},
-//    	    	onLoadSuccess:function(data) {
-//    	    		if(data.length > 0) {
-//    					$('#week').combobox('setValue', data[0].weekName);
-//    					$("#qryBtn").click();
-//    				}
-//    	    	}
-//    		});
-//    	}
-//	});
 	
 	$("#qryBtn").click(function() {
 		if(!validateIsQry()) {

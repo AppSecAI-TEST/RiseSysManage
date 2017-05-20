@@ -158,10 +158,15 @@ public class QryPubDataService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
-	private String checkStaffIsArea(String staffId) throws Exception {
+	public String checkStaffIsArea(String staffId) throws Exception {
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1019\",securityCode:\"0000000000\",params:{param:{staffId:\"" + staffId + "\",funcNodeId:\"1091\"}},rtnDataFormatType:\"user-defined\"}";
 		JSONObject rstObj = JSONObject.fromObject(ServiceEngine.invokeHttp(params));
 		return StringUtil.getJSONObjectKeyVal(rstObj, "total");
+	}
+	
+	public String qryRegionListByStaffId(String staffId) throws Exception {
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS1019\",securityCode:\"0000000000\",params:{param:{staffId:\"" + staffId + "\",funcNodeId:\"1108\"}},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
 	}
 	
 	public String qryData(String param) throws Exception {

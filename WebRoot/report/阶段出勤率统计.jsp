@@ -23,23 +23,20 @@
   				<table class="search_tab">
   					<tr>
   						<td align="right" style="min-width: 40px;"><span>校区：</span></td>
-	  					<td align="left" style="min-width: 10px;">
+	  					<td align="left" style="min-width: 100px;">
 	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 				        	</select>
 	  					</td>
+	  					<td align="right" style="min-width: 40px;" id="regionTitleTd"><span>片区：</span></td>
+						<td style="min-width: 100px;" id="regionTd">
+		  					<select id="regionId" name="regionId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+									data-options="formatter:formatRegion, valueField: 'regionId', textField: 'regionName', panelHeight: 'auto'">
+					        </select>					
+						</td>
 	  					<td align="right" style="min-width: 40px;"><span>阶段：</span></td>
 						<td style="min-width: 100px;">
 							<select id="stageId" name="stageId" class="easyui-combobox" style="width: 100px; height: 25px;"></select>					
-						</td>
-  						<td align="right" style="min-width: 40px"><span>年度：</span></td>
-						<td style="min-width: 100px">
-							<select class="easyui-combobox" name="year" id="year" style="width:100px;height: 25px;" editable="false" data-options="valueField:'val',textField:'text'">
-							</select>
-						</td>
-  						<td align="right" style="min-width: 40px;"><span>月份：</span></td>
-						<td style="min-width: 100px">
-							<select id="month" name="month" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false" data-options="valueField:'val',textField:'text'"></select>
 						</td>
 						<td align="right" style="min-width: 60px;"><span>出勤率：</span></td>
 						<td style="min-width: 220px;">
@@ -50,6 +47,17 @@
 						<td style="min-width: 210px;">
 							<a href="javascript:void(0)" id="qryBtn" class="easyui-linkbutton" iconCls="icon-search" style="width: 100px;height:25px;" onclick="queryFunc()" funcNodeId="1104">查询</a>
 							<a href="javascript:void(0)" id="resetBtn" class="easyui-linkbutton" iconCls="icon-reload" style="width: 100px;height:25px;" onclick="resetFunc()">重置</a>
+						</td>
+  					</tr>
+  					<tr>
+  						<td align="right" style="min-width: 40px"><span>年度：</span></td>
+						<td style="min-width: 100px">
+							<select class="easyui-combobox" name="year" id="year" style="width:100px;height: 25px;" editable="false" data-options="valueField:'val',textField:'text'">
+							</select>
+						</td>
+  						<td align="right" style="min-width: 40px;"><span>月份：</span></td>
+						<td style="min-width: 100px">
+							<select id="month" name="month" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false" data-options="valueField:'val',textField:'text'"></select>
 						</td>
   					</tr>
   				</table>

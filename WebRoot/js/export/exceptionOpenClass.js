@@ -1,5 +1,50 @@
 $(document).ready(function() {
 	ajaxLoading("正在处理，请稍待。。。");
+	var staffSchoolId = $("#staffSchoolId").val();
+	if("10" == staffSchoolId) {
+		$("#regionId").combobox({
+			loader:function(param,success,error){  
+			    $.ajax({  
+					url: "/sys/pubData/qryRegionList.do",
+					dataType: 'json',
+					success: function(data) {
+						data.unshift({regionName:'全部片区', regionId:""});
+						success(data);  
+					}
+				});  
+	   		},
+	   		onLoadSuccess : function(data) {
+				if(data.length > 0) {
+					$("#regionId").combobox("setValue", data[0].regionId);
+				}
+			}
+		});
+	} else {
+		var staffId = $("#staffId").val();
+		$.ajax({
+			url: "/sys/pubData/checkStaffIsArea.do",
+			type: "POST",
+			dataType: 'json',
+			data: "staffId=" + staffId,
+			success: function(data) {
+				if(parseInt(data) > 0) {
+					$("#regionId").combobox({
+						url : "/sys/pubData/qryRegionListByStaffId.do?staffId=" + staffId,
+						dataType: 'json',
+				    	onLoadSuccess:function(data) {
+				    		if(data.length > 0) {
+				    			$("#regionId").combobox("setValue", data[0].regionId);
+							}
+				    	}
+					});
+				} else {
+					$("#regionTd").css("display", "none");
+					$("#regionTitleTd").css("display", "none");
+				}
+			}
+		});
+	}
+	
 	$("#qryBtn").click(function() {
 		initPageNumber("list_data");
 		var object = $("#qryFm").serializeObject();

@@ -21,14 +21,20 @@
   			<form id="qryFm">
 	  			<table class="search_tab">
 	  				<tr>
-	  					<td align="right" width="50px"><span>校区：</span></td>
-	  					<td width="100px">
+	  					<td align="right" style="min-width: 40px;"><span>校区：</span></td>
+	  					<td style="min-width: 100px;">
 	  						<select id="schoolId" name="schoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
 								data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', panelHeight: 'auto'">
 				        	</select>
 						</td>
-						<td align="right" width="50px"><span>年度：</span></td>
-						<td width="100px">
+						<td align="right" style="min-width: 40px;" id="regionTitleTd"><span>片区：</span></td>
+						<td style="min-width: 100px;" id="regionTd">
+		  					<select id="regionId" name="regionId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+									data-options="formatter:formatRegion, valueField: 'regionId', textField: 'regionName', panelHeight: 'auto'">
+					        </select>					
+						</td>
+						<td align="right" style="min-width: 40px;"><span>年度：</span></td>
+						<td style="min-width: 100px;">
 							<select class="easyui-combobox" name="year" id="year" style="width:100px;height: 25px;" 
 								editable="false" data-options="valueField:'val',textField:'text'">
 							</select>
