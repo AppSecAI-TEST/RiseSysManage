@@ -85,6 +85,7 @@
 					<th field="reflect" align="center" width="9%"><span>是否反馈</span></th>
 					<th field="createDate" align="center" width="10%"><span>反馈时间</span></th>
 					<th field="teachingDate" align="center" width="10%"><span>电教时间</span></th>
+					<th field="startDate" align="center" width="10%"><span>开班时间</span></th>
 					<th field="meetingDate" align="center" width="10%"><span>家长会时间</span></th>
 					<th field="openClassDate" align="center" width="10%"><span>公开课时间</span></th>
 					<th field="gradDate" align="center" width="10%"><span>毕业典礼时间</span></th>

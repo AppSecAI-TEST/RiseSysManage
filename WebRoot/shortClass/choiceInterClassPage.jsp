@@ -122,7 +122,7 @@
 		<form id="manFm" style="margin:0 auto;">
 			<input type="hidden" name="classType" id="classType" value="Y" />
 			<input type="hidden" name="shortClassType" id="shortClassType" value="${param.shortClassType}" />
-			<table align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
+			<table id="search_tab" class="search_tab" align="center" style="min-width:1100px;width:99%;border:1px solid #95B8E7;font-family:'微软雅黑';margin:5px auto;height:80px;" cellspacing="2">
 				<tr>
 					<td align="right">
 						学员姓名：
@@ -157,7 +157,7 @@
 				</tr>
 			</table>
 		</form>
-		<div style="padding:0 0;min-width:1100px;width:99%;margin:5px auto">
+	 
 			<table class="easyui-datagrid" title="学员列表" id="manList" toolbar="#toolManbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="false">
 				<thead>
 					<tr>
@@ -172,7 +172,7 @@
 					</tr>
 				</thead>
 			</table>
-		</div>
+		 
 		<div id="toolManbar" style="padding: 2px; height: auto">
 			<a href="javascript:void(0)" id="manBtn" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="manFunc()">确定</a>
 			<a href="javascript:void(0)" id="backBtn" class="easyui-linkbutton" iconCls="icon-back" style="width:100px;" onclick="backFunc()">返回</a>

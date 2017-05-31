@@ -119,6 +119,11 @@ $(document).ready(function(){
 			flag =7;
 			return false;
 		}
+		else if(index>0&&$(this).find("td:eq(8)").find("input[type='radio']").length>0)
+		{
+			flag =8;
+			return false;
+		}
 	});
 	if(flag>0)
 	{
