@@ -90,6 +90,12 @@ public class SchoolTimeService
 		return ServiceEngine.invokeHttp(params);
 	}
 	
+	public String getTeacherTimePlan(String param) throws Exception
+	{
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS80019\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
 	/**
 	 *时间段教室课时计划
 	 * @param param

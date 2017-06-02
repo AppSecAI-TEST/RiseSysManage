@@ -221,6 +221,30 @@ public class SchoolTimeController
 		}
 	}
 	
+	@RequestMapping(value="/getTeacherTimePlan.do")
+	public void getTeacherTimePlan(String param,HttpServletResponse response)
+	{
+		PrintWriter out = null;
+		try
+		{
+			response.setCharacterEncoding("UTF-8");
+			out = response.getWriter();
+			String retVal = schoolTimeService.getTeacherTimePlan(param);
+			out.write(retVal);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{ 
+			if(out != null)
+			{
+				out.close();
+			}
+		}
+	}
+	
 	/**
 	 * 查询校区教室排课
 	 * @param param

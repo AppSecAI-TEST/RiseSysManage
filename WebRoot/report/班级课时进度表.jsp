@@ -57,7 +57,7 @@
 		  <tr align="center">
 		     <td align="center" width="78px;" rowspan="2"><span>学校</span></td>
 		    <td align="center" width="110px;" rowspan="2"><span>班级</span></td>
-		    <td align="center" width="130px;" rowspan="2"><span>带班老师</span></td>
+		    <td align="center" width="150px;" rowspan="2"><span>带班老师</span></td>
 		    <td align="center" width="180px;"rowspan="2"><span>上课时段</span></td>
 		    <td align="center" width="86px;" rowspan="2"><span>开课日期</span></td>
 		    <td align="center" width="86px;" rowspan="2"><span>结课日期</span></td>
@@ -70,26 +70,26 @@
 		    <td align="center" width="62px;" colspan="3"><span>第四周</span></td>
 		    <td align="center" width="62px;" colspan="3"><span>第五周</span></td>
 		    <td align="center" width="48px;" rowspan="2"><span>本月计划课时</span></td>
-		    <td align="center" width="48px;" rowspan="2"><span>本月实际课时</span></td>
+		    <td align="center" width="48px;" rowspan="2"><span>本月实际考勤课时</span></td>
 		    <td align="center" width="48px;" rowspan="2"><span>课时差异</span></td>
 		    <td align="center" width="48px;" rowspan="2"><span>差异说明</span></td>
 		  </tr>
 		  <tr align="center">
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>实际课时</span></td>
+		    <td align="center" width="40px;"><span>实际排课课时</span></td>
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>实际课时</span></td>
+		    <td align="center" width="40px;"><span>实际排课课时</span></td>
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>实际课时</span></td>
+		    <td align="center" width="40px;"><span>实际排课课时</span></td>
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>实际课时</span></td>
+		    <td align="center" width="40px;"><span>实际排课课时</span></td>
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
-		    <td align="center" width="40px;"><span>实际课时</span></td>
+		    <td align="center" width="40px;"><span>实际排课课时</span></td>
 		  </tr>
 		</table>
 		</div>
