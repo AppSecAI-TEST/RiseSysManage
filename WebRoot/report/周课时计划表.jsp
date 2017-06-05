@@ -139,17 +139,18 @@ $("#qryBtn").click(function(){
 	    {  
 	       	$("table tr td").each(function()
 			{
-			   var d=$(this).text();
-			   if(d.indexOf('TA')>-1)
-			   {
-				     $(this).css("background-color","#00ff99");
-			   }else if(d.indexOf('T')>-1)
-			   {
-				  $(this).css("background-color","#ff6699");
-			   }else if(d!='' && d.indexOf('TA')<0 && d.indexOf('T')<0 )
-			   {
-				    $(this).css("background-color","#cc6699");
-			   }
+	       	   var attr=$(this).attr('field');
+	       	   if(attr!='teacherName')
+	       	   {
+				   var d=$(this).text();
+				   if(d.indexOf('TA')>-1)
+				   {
+					     $(this).css("background-color","#00ff99");
+				   }else if(d.indexOf('T')>-1)
+				   {
+					  $(this).css("background-color","#ff6699");
+				   } 
+			    }
 			});
 	    }  
 	});
