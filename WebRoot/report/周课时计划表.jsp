@@ -143,12 +143,15 @@ $("#qryBtn").click(function(){
 	       	   if(attr!='teacherName')
 	       	   {
 				   var d=$(this).text();
-				   if(d.indexOf('TA')>-1)
+				   if(d.indexOf('/TA')>-1)
 				   {
 					     $(this).css("background-color","#00ff99");
-				   }else if(d.indexOf('T')>-1)
+				   }else if(d.indexOf('/T')>-1)
 				   {
 					  $(this).css("background-color","#ff6699");
+				   }else if(d.indexOf('-TA')>-1 ||d.indexOf('-T')>-1 )
+				   {
+					     $(this).css("background-color","#aaff99");
 				   } 
 			    }
 			});
