@@ -137,6 +137,7 @@ $("#qryBtn").click(function(){
 	    ]],  
 	    onLoadSuccess:function(data)
 	    {  
+	    	mergeCellsByField("list_data", "teacherName");
 	       	$("table tr td").each(function()
 			{
 	       	   var attr=$(this).attr('field');
@@ -344,4 +345,38 @@ function myformatter(date){
                 return new Date();
             }
         }
+        
+function mergeCellsByField(tableId, colList) {
+    var rowspan;
+    var megerIndex;
+    var before = "";
+    var after = "";
+    var target = $("#" + tableId);
+    var colunms = colList.split(",");
+    var rows = target.datagrid("getRows").length;
+    for (var j = colunms.length - 1; j >= 0; j--) {
+    	var field = colunms[j];
+    	before = "";
+        rowspan = 1;
+        megerIndex = 0;
+        for (var i = 0; i <= rows; i++) {
+            if (i == rows) {
+            	after = "";
+            } else {
+            	after = target.datagrid("getRows")[i][field];
+            }
+            if (before == after) {
+            	rowspan += 1;
+            } else {
+            	target.datagrid("mergeCells", {
+        			index: i - rowspan,
+        			field: field,　　// 合并字段
+        			rowspan: rowspan
+        		});
+            	rowspan = 1;
+            }
+            before = after;
+        }
+    }
+}
 </script>

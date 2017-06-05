@@ -1579,15 +1579,40 @@ public class ExportService {
 				cell0.setCellValue(StringUtil.getJSONObjectKeyVal(columnObj, (i + 1 + "")));
 				sheet.setColumnWidth(i, 6000);
 			}
-			for (int k = 1; k < dataArr.size(); k++) {
+			int fr = 1, tr = 1;
+			boolean flag = false;
+			List<CellRangeAddress> cellRangeList = new ArrayList<CellRangeAddress>();
+			String teacherName = StringUtil.getJSONObjectKeyVal(dataArr.getJSONObject(0), "1");
+			for (int k = 1; k <= dataArr.size(); k++) {
 				HSSFRow row = sheet.createRow(k);
 				JSONObject dataObj = dataArr.getJSONObject(k - 1);
+				if (teacherName.equals(StringUtil.getJSONObjectKeyVal(dataObj, "1"))) {
+					flag = true;
+					tr = k;
+					if (k == dataArr.size() && flag) {
+						CellRangeAddress range1 = new CellRangeAddress(fr, tr, 0, 0);
+						cellRangeList.add(range1);
+					}
+				} else {
+					if (flag) {
+						CellRangeAddress range2 = new CellRangeAddress(fr, tr, 0, 0);
+						cellRangeList.add(range2);
+						flag = false;
+					}
+					fr = k;
+					teacherName = StringUtil.getJSONObjectKeyVal(dataObj, "1");
+				}
 				for (int l = 0; l < columnArr.size(); l++) {
 					HSSFCell cell = row.createCell(l);
 					cell.setCellStyle(styleContent);
 					String value = StringUtil.getJSONObjectKeyVal(dataObj, (l + 1 + ""));
 					value = value.replaceAll("<(/)?br(/)?>", "\r\n ");
 					cell.setCellValue(new HSSFRichTextString(value));
+				}
+			}
+			if(ObjectCensor.checkListIsNull(cellRangeList)) {
+				for (CellRangeAddress cellRange : cellRangeList) {
+					sheet.addMergedRegion(cellRange);
 				}
 			}
 		}
