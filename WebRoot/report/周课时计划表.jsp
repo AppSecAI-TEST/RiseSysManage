@@ -146,10 +146,10 @@ $("#qryBtn").click(function(){
 				   var d=$(this).text();
 				   if(d.indexOf('/TA')>-1)
 				   {
-					     $(this).css("background-color","#00ff99");
+					     $(this).css("background-color","#ff9900");
 				   }else if(d.indexOf('/T')>-1)
 				   {
-					  $(this).css("background-color","#ff6699");
+					  $(this).css("background-color","#33ccff");
 				   }else if(d.indexOf('-TA')>-1 ||d.indexOf('-T')>-1 )
 				   {
 					     $(this).css("background-color","#aaff99");
