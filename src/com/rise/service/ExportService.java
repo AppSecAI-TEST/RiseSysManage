@@ -27,6 +27,8 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -1560,6 +1562,7 @@ public class ExportService {
 		fontTitle.setFontName("ºÚÌå");
 		fontTitle.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
 		styleTitle.setFont(fontTitle);
+		
 		HSSFCellStyle styleContent = wb.createCellStyle();
 		styleContent.setWrapText(true);
 		styleContent.setAlignment(HSSFCellStyle.ALIGN_CENTER);
@@ -1567,6 +1570,9 @@ public class ExportService {
 		HSSFFont fontContent = wb.createFont();
 		fontContent.setFontName("Î¢ÈíÑÅºÚ");
 		styleContent.setFont(fontContent);
+		
+		
+		
 		HSSFSheet sheet = wb.createSheet(StringUtil.getJSONObjectKeyVal(json, "name"));
 		JSONArray columnArr = json.getJSONArray("cloumn");
 		JSONArray dataArr = json.getJSONArray("data");
@@ -1583,18 +1589,23 @@ public class ExportService {
 			boolean flag = false;
 			List<CellRangeAddress> cellRangeList = new ArrayList<CellRangeAddress>();
 			String teacherName = StringUtil.getJSONObjectKeyVal(dataArr.getJSONObject(0), "1");
-			for (int k = 1; k <= dataArr.size(); k++) {
+			for (int k = 1; k <= dataArr.size(); k++) 
+			{
 				HSSFRow row = sheet.createRow(k);
 				JSONObject dataObj = dataArr.getJSONObject(k - 1);
-				if (teacherName.equals(StringUtil.getJSONObjectKeyVal(dataObj, "1"))) {
+				if (teacherName.equals(StringUtil.getJSONObjectKeyVal(dataObj, "1"))) 
+				{
 					flag = true;
 					tr = k;
-					if (k == dataArr.size() && flag) {
+					if (k == dataArr.size() && flag)
+					{
 						CellRangeAddress range1 = new CellRangeAddress(fr, tr, 0, 0);
 						cellRangeList.add(range1);
 					}
-				} else {
-					if (flag) {
+				} else
+				{
+					if (flag)
+					{
 						CellRangeAddress range2 = new CellRangeAddress(fr, tr, 0, 0);
 						cellRangeList.add(range2);
 						flag = false;
@@ -1602,16 +1613,60 @@ public class ExportService {
 					fr = k;
 					teacherName = StringUtil.getJSONObjectKeyVal(dataObj, "1");
 				}
-				for (int l = 0; l < columnArr.size(); l++) {
+				for (int l = 0; l < columnArr.size(); l++)
+				{
 					HSSFCell cell = row.createCell(l);
-					cell.setCellStyle(styleContent);
+					
+					cell.setCellStyle(styleContent);  
+					
 					String value = StringUtil.getJSONObjectKeyVal(dataObj, (l + 1 + ""));
 					value = value.replaceAll("<(/)?br(/)?>", "\r\n ");
+					
+				   if(value.indexOf("/TA")>-1)
+				   {
+					    HSSFCellStyle cellStyle = wb.createCellStyle();
+						cellStyle.setWrapText(true);
+						cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+						cellStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+						HSSFFont fontContentCell = wb.createFont();
+						fontContent.setFontName("Î¢ÈíÑÅºÚ");
+						cellStyle.setFont(fontContentCell);
+						cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+					    cellStyle.setFillForegroundColor(IndexedColors.LIGHT_ORANGE.getIndex());
+					    cell.setCellStyle(cellStyle);
+				   }else if(value.indexOf("/T")>-1)
+				   {
+					    HSSFCellStyle cellStyle = wb.createCellStyle();
+						cellStyle.setWrapText(true);
+						cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+						cellStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+						HSSFFont fontContentCell = wb.createFont();
+						fontContent.setFontName("Î¢ÈíÑÅºÚ");
+						cellStyle.setFont(fontContentCell);
+						cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+					    cellStyle.setFillForegroundColor(IndexedColors.SKY_BLUE.getIndex());
+					    cell.setCellStyle(cellStyle);
+				   }else if(value.indexOf("-TA")>-1 ||value.indexOf("-T")>-1 )
+				   {
+					   HSSFCellStyle cellStyle = wb.createCellStyle();
+						cellStyle.setWrapText(true);
+						cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+						cellStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+						HSSFFont fontContentCell = wb.createFont();
+						fontContent.setFontName("Î¢ÈíÑÅºÚ");
+						cellStyle.setFont(fontContentCell);
+						cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+					    cellStyle.setFillForegroundColor(IndexedColors.LIGHT_GREEN.getIndex());
+					    cell.setCellStyle(cellStyle);
+				   } 
+					
 					cell.setCellValue(new HSSFRichTextString(value));
 				}
 			}
-			if(ObjectCensor.checkListIsNull(cellRangeList)) {
-				for (CellRangeAddress cellRange : cellRangeList) {
+			if(ObjectCensor.checkListIsNull(cellRangeList)) 
+			{
+				for (CellRangeAddress cellRange : cellRangeList) 
+				{
 					sheet.addMergedRegion(cellRange);
 				}
 			}
