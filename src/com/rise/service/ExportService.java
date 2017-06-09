@@ -1286,15 +1286,25 @@ public class ExportService {
 			Iterator it1 = keyObj1.keys();
 			String objKey1 = it1.next().toString();
 			for (int j = 1; j < 6; j++) {
-				if (("H00" + j).equals(objKey1)) {
+				if (("H00" + j).equals(objKey1))
+				{
 					JSONObject indexObj = new JSONObject();
 					indexObj.put("index", j);
 					indexObj.put("value", keyObj1.getString("H00" + j));
-					for (int k = 0; k < keyArr.size(); k++) {
+				
+					for (int k = 0; k < keyArr.size(); k++) 
+					{
 						JSONObject keyObj2 = keyArr.getJSONObject(k);
 						Iterator it2 = keyObj2.keys();
 						String objKey = it2.next().toString();
-						if (objKey.indexOf("merge00" + j) != -1) {
+						if(objKey.equals("HH00"+j))
+						{
+							String states =StringUtil.getJSONObjectKeyVal(keyObj2, objKey);
+							String[] stateTs=states.split("~");
+							indexObj.put("classState",stateTs[1]);
+						}
+						if (objKey.indexOf("merge00" + j) != -1)
+						{
 							indexObj.put("merge", StringUtil.getJSONObjectKeyVal(keyObj2, objKey));
 						}
 					}
@@ -1331,7 +1341,8 @@ public class ExportService {
 		styleContent.setFont(fontContent);
 		HSSFSheet sheet1 = wb.createSheet(schoolName + "-班级情况和教室资源统计表");
 		HSSFSheet sheet2 = wb.createSheet(schoolName + "-教师资源统计表");
-		if (ObjectCensor.checkListIsNull(array1)) {
+		if (ObjectCensor.checkListIsNull(array1)) 
+		{
 			sheet1.setColumnWidth(0, 6000);
 			List<CellRangeAddress> cellRangeList1 = new ArrayList<CellRangeAddress>();
 			HSSFRow row1 = sheet1.createRow(0);
@@ -1342,7 +1353,8 @@ public class ExportService {
 			HSSFCell time = row2.createCell(0);
 			time.setCellValue("");
 			time.setCellStyle(styleTitle);
-			for (int j = 0; j < 5 * array1.size(); j++) {
+			for (int j = 0; j < 5 * array1.size(); j++) 
+			{
 				sheet1.setColumnWidth(j + 1, 6000);
 				HSSFCell cell1 = row1.createCell(j + 1);
 				HSSFCell cell2 = row2.createCell(j + 1);
@@ -1367,11 +1379,13 @@ public class ExportService {
 					cell2.setCellStyle(styleTitle);
 				}
 			}
-			for (int k = 0; k < array1.size(); k++) {
+			for (int k = 0; k < array1.size(); k++) 
+			{
 				cellRangeList1.add(new CellRangeAddress(0, 0, k * 5 + 1, (k + 1) * 5));
 			}
 			JSONArray room = array1.getJSONObject(0).getJSONArray("rows");
-			for (int i = 0; i < room.size(); i++) {
+			for (int i = 0; i < room.size(); i++) 
+			{
 				HSSFRow row = sheet1.createRow(i + 2);
 				HSSFCell cells = row.createCell(0);
 				cells.setCellValue(StringUtil.getJSONObjectKeyVal(room.getJSONObject(i), "roomName"));
@@ -1380,21 +1394,56 @@ public class ExportService {
 					row.createCell(e);
 				}
 			}
-			for (int m = 0; m < array1.size(); m++) {
+			for (int m = 0; m < array1.size(); m++)
+			{
 				JSONArray arrays = array1.getJSONObject(m).getJSONArray("rows");
-				for (int n = 2; n < arrays.size() + 2; n++) {
+				for (int n = 2; n < arrays.size() + 2; n++)
+				{
 					JSONObject content = arrays.getJSONObject(n - 2);
 					JSONArray indexArr = getTimeIndex(content);
-					for (int l = 0; l < indexArr.size(); l++) {
+					for (int l = 0; l < indexArr.size(); l++) 
+					{
 						JSONObject indexObj = indexArr.getJSONObject(l);
 						int index = Integer.valueOf(indexObj.getString("index"));
 						String value = indexObj.getString("value");
+						String classSate = indexObj.getString("classState");
 						HSSFCell cell = sheet1.getRow(n).getCell(m * 5 + index);
-						cell.setCellValue(value);
 						cell.setCellStyle(styleContent);
-						if (ObjectCensor.isStrRegular(StringUtil.getJSONObjectKeyVal(indexObj, "merge"))) {
+						if("003".equals(classSate))
+						{
+							HSSFCellStyle cellStyle = wb.createCellStyle();
+							cellStyle.setWrapText(true);
+							cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+							cellStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+							HSSFFont fontContentCell = wb.createFont();
+							fontContent.setFontName("微软雅黑");
+							cellStyle.setFont(fontContentCell);
+							cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+						    cellStyle.setFillForegroundColor(IndexedColors.SKY_BLUE.getIndex());
+						    cell.setCellStyle(cellStyle);
+							
+						}else if("001".equals(classSate) || "002".equals(classSate))
+						{
+								HSSFCellStyle cellStyle = wb.createCellStyle();
+								cellStyle.setWrapText(true);
+								cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+								cellStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+								HSSFFont fontContentCell = wb.createFont();
+								fontContent.setFontName("微软雅黑");
+								cellStyle.setFont(fontContentCell);
+								cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+							    cellStyle.setFillForegroundColor(IndexedColors.YELLOW.getIndex());
+							    cell.setCellStyle(cellStyle);
+						}
+						
+						cell.setCellValue(value);
+						
+						
+						if (ObjectCensor.isStrRegular(StringUtil.getJSONObjectKeyVal(indexObj, "merge"))) 
+						{
 							int merge = Integer.valueOf(indexObj.getString("merge"));
-							if (merge > 1) {
+							if (merge > 1)
+							{
 								merge -= 1;
 								cellRangeList1.add(new CellRangeAddress(n, n, m * 5 + index, m * 5 + index + merge));
 							}
@@ -1402,7 +1451,8 @@ public class ExportService {
 					}
 				}
 			}
-			for (CellRangeAddress cellRange : cellRangeList1) {
+			for (CellRangeAddress cellRange : cellRangeList1) 
+			{
 				sheet1.addMergedRegion(cellRange);
 			}
 		}

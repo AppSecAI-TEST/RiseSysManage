@@ -227,11 +227,11 @@ function initTable(tabId,data)
 		 return 'background-color:#FFFFFF;color:#00000;';
     },
     columns:[[
-      {field:'H001',title:'上午1', width:120,align:'center', editor:'text'},
-      {field:'H002',title:'上午2',width:120,align:'center', editor:'text'},
-      {field:'H003',title:'下午1',width:120,align:'center', editor:'text'},
-      {field:'H004',title:'下午2',width:120,align:'center', editor:'text'},
-      {field:'H005',title:'晚上',width:120,align:'center', editor:'text'} 
+      {field:'HH001',formatter:colformatter,title:'上午1', width:120,align:'center', editor:'text',	styler: colStyle},
+      {field:'HH002',formatter:colformatter,title:'上午2',width:120,align:'center', editor:'text',	styler: colStyle},
+      {field:'HH003',formatter:colformatter,title:'下午1',width:120,align:'center', editor:'text',	styler: colStyle },
+      {field:'HH004',formatter:colformatter,title:'下午2',width:120,align:'center', editor:'text',	styler: colStyle },
+      {field:'HH005',formatter:colformatter,title:'晚上',width:120,align:'center', editor:'text',	styler: colStyle } 
     ]],
     onLoadSuccess:function()
     {
@@ -239,6 +239,36 @@ function initTable(tabId,data)
     } 
   });
   $('#'+tabId).datagrid("loadData",data);	
+}
+
+function colformatter(value, row, index)
+{
+	if(value!='' && value!=undefined)
+	{
+		var str=value+"";
+	    var vals=str.split("~");
+	    return vals[0];
+	}else
+	{
+		return "";
+	}
+		
+}
+
+function colStyle(value,row,index)
+{
+	
+	var str = value+"";
+	console.log(str);
+ 	if (str.indexOf('003')>-1)
+	{
+		return 'background-color:#87cefa;';
+	}else if (str.indexOf('002')>-1 || str.indexOf('001')>-1)
+	{
+		return 'background-color:#ffee00;';
+	}
+ 	
+	 
 }
 
 function MergeCells(tabId)
@@ -256,13 +286,14 @@ function MergeCells(tabId)
 		var index=i;
 		var fieldT;
 		var colspanNum=0;
+	
 		for(var key in datas[i])
 		{  
-			
+			//	console.log(key);
                if(key.indexOf("merge")>-1)
                {
                	var val=datas[i][key];
-               	fieldT="H"+key.substring(5,8);
+               	fieldT="HH"+key.substring(5,8);
                	$(table).datagrid('mergeCells',
 				{
 					index: i,
@@ -274,16 +305,14 @@ function MergeCells(tabId)
 	}
 	$("table tr td").each(function()
 	{
-	   var d=$(this).text();
-	  if('DPre-K03'==d)
+	   var d=$(this).attr("state");
+	  
+	  if('003'==d)
 	  {
 		     $(this).css("background-color","#EDE1D8");
-	  }else if('DPre-K01'==d)
+	  }else if('002'==d)
 	  {
 		  $(this).css("background-color","#ECB1D8");
-	  }else if('DPre-K02'==d)
-	  {
-		  $(this).css("background-color","#EFE1B8");
 	  }
 	
 	});
