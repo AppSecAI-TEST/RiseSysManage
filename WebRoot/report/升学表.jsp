@@ -71,7 +71,9 @@
 							<th data-options="field:'name',width:100,align:'center'">学员姓名</th>
 							<th data-options="field:'amount',width:150,align:'center'">缴费金额</th>
 							<th data-options="field:'className',width:100,align:'center'">班级</th>
-							<th data-options="field:'adviserTeacherName',width:150,align:'center'">业绩老师</th>
+							<th data-options="field:'adviserTeacherNameZh',width:150,align:'center'">业绩老师</th>
+							<th data-options="field:'adviserTeacherName',width:150,align:'center'">业绩老师姓名</th>
+							<th data-options="field:'remark',width:150,align:'center'">备注</th>
 							<th data-options="field:'giftName',width:300,align:'center'">赠品</th>
 						</tr>
 					</thead>
