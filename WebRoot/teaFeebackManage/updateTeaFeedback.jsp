@@ -45,7 +45,7 @@
 						&nbsp;<input type="radio" value="2" name="teachingNum${status.index}" /><span>2</span></span></td>
 						<td align="center">
 							<c:if test="${feedback.startIsAttend != ''}">
-								<input type="radio" class="meeting" value="Y" status="${status.index}" name="startIsAttend${status.index}"/><span>已到</span>&nbsp;<input type="radio" class="start" value="N" status="${status.index}" name="startIsAttend${status.index}"/><span>未到</span>
+								<input type="radio" class="start" value="Y" status="${status.index}" name="startIsAttend${status.index}"/><span>已到</span>&nbsp;<input type="radio" class="start" value="N" status="${status.index}" name="startIsAttend${status.index}"/><span>未到</span>
 								&nbsp;<span class="startCsi">满意度：<input id="startCsi${status.index}" csiVal="${feedback.startCsi}" class="easyui-numberbox" min="0" max="100" style='width:40px;' />%</span>
 							</c:if>
 						</td>
