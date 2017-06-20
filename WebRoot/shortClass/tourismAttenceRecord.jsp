@@ -70,6 +70,8 @@
 							ajaxLoadEnd();
 							var trData = "<tr id='teacherId"+data.teacherId+"'><td align='right' teacherId='"+data.teacherId+"' schoolId='"+data.schoolId+"'>老师：</td><td align='center'>"+$("#attRecordSchoolId").combobox("getText")+"</td><td align='center'>"+$("#attRecordTeacherId").combobox("getText")+"</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
 							$("#teacherTab tr:last").after(trData);
+							$("#attRecordSchoolId").combobox("clear");
+							$("#attRecordTeacherId").combobox("clear");
 						},"json");
 					}
 					else

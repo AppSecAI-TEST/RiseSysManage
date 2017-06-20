@@ -34,7 +34,6 @@ function initInfo() {
 				showProgressLoader("正在加载数据,请稍等...", 400);
 			},
 			success : function(data) {
-				console.log(data)
 				hideProgressLoader()
 				if (data.baseInfo != null) {
 					$("#openDate").datebox("setValue", data.baseInfo.openDate);

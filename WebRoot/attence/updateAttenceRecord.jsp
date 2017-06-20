@@ -268,6 +268,10 @@
 							}
 							trData+="</td><td align='center'><a href='javascript:void(0)' onclick='delTeacherFunc("+data.teacherId+")'>删除</a></td></tr>";
 							$("#teacherTab tr:last").after(trData);
+							$("#attRecordSchoolId").combobox("clear");
+							$("#attRecordTeacherId").combobox("clear");
+							$("#attRecordClassType").combobox("clear");
+							$("#attRecordLessonHour").textbox("setValue","");
 						},"json");
 					}
 					else
