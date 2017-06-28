@@ -26,6 +26,8 @@ $(document).ready(function() {
     		funcNodeId = "1080";
     	} else if("leave" == expType) { //休学
     		funcNodeId = "1081";
+    	} else if("refund" == expType) {
+    		funcNodeId = "1109";
     	}
     	object.expType = expType;
     	object.funcNodeId = funcNodeId;
