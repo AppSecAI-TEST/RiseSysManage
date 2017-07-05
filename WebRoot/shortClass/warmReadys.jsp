@@ -224,11 +224,13 @@
 							<th width="9%" field="schoolName">校区</th>
 							<th width="9%" field="planHours">学员姓名</th>
 							<th width="9%" field="phone">联系电话</th>
-							<th width="10%" field="putClassDate">申请时间</th>
-							<th width="9%" field="className">热身课班级名称</th>
+														<th width="9%" field="className">热身课班级名称</th>
 							<th width="9%" field="classStateName">班级状态</th>
-							<th width="9%" field="openDate">开课日期</th>
-							<th width="9%" field="stateName">状态</th>
+							<th width="15%" field="schooltime">上课日期</th>
+							
+							<th width="9%" field="stateName">预约状态</th>
+							<th width="15%" field="putClassDate">申请时间</th>
+							
 						</tr>
 					</thead>
 				</table>
