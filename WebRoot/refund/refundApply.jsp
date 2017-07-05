@@ -162,14 +162,24 @@
 				        				</select>
 		  							</td>
 		  							<td align="right" width="8%"><span>渠道来源：</span></td>
-		  							<td width="41%" colspan="3">
+		  							<td width="11%">
 		  								<select id="refundChannel${refundStudentCourse.studentCourseId }" name="refundChannel" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+				        				</select>
+		  							</td>
+		  							<td align="right" width="15%" id="belongSchoolText${refundStudentCourse.studentCourseId }" style="display: none;"><span>归属校区：</span></td>
+		  							<td width="13%" id="belongSchoolVal${refundStudentCourse.studentCourseId }" style="display: none;">
+		  								<select id="belongSchoolId${refundStudentCourse.studentCourseId }" name="belongSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 				        				</select>
 		  							</td>
   								</c:when>
   								<c:otherwise>
-  									<td width="56%" colspan="5">
+  									<td width="7%">
 		  								<select id="refundType${refundStudentCourse.studentCourseId }" name="refundType" class="easyui-combobox" style="width: 100px; height: 25px;" required="true" editable="false">
+				        				</select>
+		  							</td>
+		  							<td align="right" width="8%" id="belongSchoolText${refundStudentCourse.studentCourseId }" style="display: none;"><span>归属校区：</span></td>		  							
+		  							<td width="39%" colspan="3" id="belongSchoolVal${refundStudentCourse.studentCourseId }" style="display: none;">
+		  								<select id="belongSchoolId${refundStudentCourse.studentCourseId }" name="belongSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
 				        				</select>
 		  							</td>
   								</c:otherwise>
@@ -352,10 +362,10 @@
   							<td align="right" width="10%"><span>回访人员：</span></td>
   							<td width="35%">
   								<input type="radio" name="visitPersonOne" value="teacher"/><span>老师</span>
-  								<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+  								<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled" editable="false">
 		        				</select>
   								<input type="radio" name="visitPersonOne" value="adviser"/><span>课程顾问</span>
-  								<select id="careAdviserId" name="careAdviserId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+  								<select id="careAdviserId" name="careAdviserId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled" editable="false">
 		        				</select>
   							</td>
   							<td align="right" width="10%"><span>回访时间：</span></td>
@@ -378,10 +388,10 @@
   							<td align="right" width="10%"><span>回访人员：</span></td>
   							<td width="35%">
   								<input type="radio" name="visitPersonTwo" value="academic"/><span>学术主管</span>
-  								<select id="academicId" name="academicId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+  								<select id="academicId" name="academicId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled" editable="false">
 		        				</select>
   								<input type="radio" name="visitPersonTwo" value="sales"/><span>销售主管</span>
-  								<select id="salesId" name="salesId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+  								<select id="salesId" name="salesId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled" editable="false">
 		        				</select>
   							</td>
   							<td align="right" width="10%"><span>回访时间：</span></td>

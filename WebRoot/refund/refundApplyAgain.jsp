@@ -231,28 +231,74 @@
 				        				</select>
 		  							</td>
 		  							<td align="right" width="8%"><span>渠道来源：</span></td>
-		  							<td width="41%" colspan="3">
-		  								<c:if test="${refundFeeDetail.refundType == 'RTN_NEW' || refundFeeDetail.refundType == 'RTN_READING' }">
-			  								<select id="refundChannel${refundFeeDetail.studentCourseId }" name="refundChannel" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-												data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-				      							onLoadSuccess:function(data){if(data.length > 0) $('#refundChannel${refundFeeDetail.studentCourseId }').combobox('setValue', '${refundFeeDetail.refundChannel }');}" 
-				      							url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_CHANNEL">
-					        				</select>
-		  								</c:if>
-		  								<c:if test="${refundFeeDetail.refundType != 'RTN_NEW' || refundFeeDetail.refundType != 'RTN_READING' }">
-		  									<select id="refundChannel${refundFeeDetail.studentCourseId }" name="refundChannel" class="easyui-combobox" style="width: 100px; height: 25px;">
-		  									</select>
-		  								</c:if>
-		  							</td>
+		  							<c:choose>
+		  								<c:when test="${refundFeeDetail.refundType == 'RTN_NEW' || refundFeeDetail.refundType == 'RTN_READING' }">
+		  									<c:choose>
+		  										<c:when test="${refundFeeDetail.refundType == 'RTN_NEW' && not empty obj.refundFeeObj.belongSchoolId }">
+		  											<td width="11%">
+		  												<select id="refundChannel${refundFeeDetail.studentCourseId }" name="refundChannel" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+															data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+					      									onLoadSuccess:function(data){if(data.length > 0) $('#refundChannel${refundFeeDetail.studentCourseId }').combobox('setValue', '${refundFeeDetail.refundChannel }');}" 
+					      									url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_CHANNEL">
+					        							</select>
+		  											</td>
+		  											<td align="right" width="15%"><span>归属校区：</span></td>
+		  											<td width="13%">
+				  										<select id="belongSchoolId${refundFeeDetail.studentCourseId }" name="belongSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;"
+				  											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', 
+				  											onLoadSuccess:function(data){if(data.length > 0) $('#belongSchoolId${refundFeeDetail.studentCourseId }').combobox('setValue', '${obj.refundFeeObj.belongSchoolId }');}" 
+				  											url="<%=path %>/pubData/qrySchoolList.do">
+						        						</select>
+		  											</td>
+		  										</c:when>
+		  										<c:otherwise>
+		  											<td width="41%" colspan="3">
+		  												<select id="refundChannel${refundFeeDetail.studentCourseId }" name="refundChannel" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
+															data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+					      									onLoadSuccess:function(data){if(data.length > 0) $('#refundChannel${refundFeeDetail.studentCourseId }').combobox('setValue', '${refundFeeDetail.refundChannel }');}" 
+					      									url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_CHANNEL">
+					        							</select>
+		  											</td>
+		  										</c:otherwise>
+		  									</c:choose>
+		  								</c:when>
+		  								<c:otherwise>
+		  									<td width="41%" colspan="3">
+			  									<select id="refundChannel${refundFeeDetail.studentCourseId }" name="refundChannel" class="easyui-combobox" style="width: 100px; height: 25px;">
+			  									</select>
+		  									</td>
+		  								</c:otherwise>
+		  							</c:choose>
   								</c:when>
   								<c:otherwise>
-  									<td width="56%" colspan="5">
-  										<select id="refundType${refundFeeDetail.studentCourseId }" name="refundType" class="easyui-combobox" style="width: 100px; height: 25px;" required="true" editable="false"
-											data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
-			      							onLoadSuccess:function(data){if(data.length > 0) $('#refundType${refundFeeDetail.studentCourseId }').combobox('setValue', '${refundFeeDetail.refundType }');}" 
-			      							url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_TYPE">
-				        				</select>
-  									</td>
+  									<c:choose>
+  										<c:when test="${refundFeeDetail.refundType == 'RTN_NEW' && not empty obj.refundFeeObj.belongSchoolId }">
+  											<td width="7%">
+  												<select id="refundType${refundFeeDetail.studentCourseId }" name="refundType" class="easyui-combobox" style="width: 100px; height: 25px;" required="true" editable="false"
+													data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+					      							onLoadSuccess:function(data){if(data.length > 0) $('#refundType${refundFeeDetail.studentCourseId }').combobox('setValue', '${refundFeeDetail.refundType }');}" 
+					      							url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_TYPE">
+						        				</select>
+  											</td>
+  											<td align="right" width="8%"><span>归属校区：</span></td>
+  											<td width="39%" colspan="3">
+  												<select id="belongSchoolId${refundFeeDetail.studentCourseId }" name="belongSchoolId" class="easyui-combobox" style="width: 100px; height: 25px;"
+		  											data-options="formatter:formatSchool, valueField: 'schoolId', textField: 'schoolName', 
+		  											onLoadSuccess:function(data){if(data.length > 0) $('#belongSchoolId${refundFeeDetail.studentCourseId }').combobox('setValue', '${obj.refundFeeObj.belongSchoolId }');}" 
+		  											url="<%=path %>/pubData/qrySchoolList.do">
+				        						</select>
+  											</td>
+  										</c:when>
+  										<c:otherwise>
+		  									<td width="56%" colspan="5">
+		  										<select id="refundType${refundFeeDetail.studentCourseId }" name="refundType" class="easyui-combobox" style="width: 100px; height: 25px;" required="true" editable="false"
+													data-options="formatter:formatItem, valueField: 'codeFlag', textField: 'codeName', panelHeight: 'auto',
+					      							onLoadSuccess:function(data){if(data.length > 0) $('#refundType${refundFeeDetail.studentCourseId }').combobox('setValue', '${refundFeeDetail.refundType }');}" 
+					      							url="<%=path %>/pubData/qryCodeNameList.do?tableName=REFUND_FEE_DETAIL_T&codeType=REFUND_TYPE">
+						        				</select>
+		  									</td>
+  										</c:otherwise>
+  									</c:choose>
   								</c:otherwise>
   							</c:choose>
   						</tr>
@@ -435,21 +481,21 @@
   										<c:if test="${refundVisit.userType == 'teacher' }">
 			  								<input type="radio" name="visitPersonOne" value="teacher" checked="checked"/><span>老师</span>
 			  								<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-			  									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
+			  									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', 
 	      										onLoadSuccess:function(data){if(data.length > 0) $('#teacherId').combobox('setValue', ${refundVisit.visitUserId });}" 
 	      										url="<%=path %>/pubData/qryStaffList.do?post=4,5,6,7,8&schoolId=${obj.refundFeeObj.schoolId }">
 					        				</select>
 			  								<input type="radio" name="visitPersonOne" value="adviser"/><span>课程顾问</span>
-			  								<select id="careAdviserId" name="careAdviserId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+			  								<select id="careAdviserId" name="careAdviserId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled" editable="false">
 					        				</select>
   										</c:if>
   										<c:if test="${refundVisit.userType == 'adviser' }">
   											<input type="radio" name="visitPersonOne" value="teacher"/><span>老师</span>
-			  								<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+			  								<select id="teacherId" name="teacherId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled" editable="false">
 					        				</select>
 			  								<input type="radio" name="visitPersonOne" value="adviser" checked="checked"/><span>课程顾问</span>
 			  								<select id="careAdviserId" name="careAdviserId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-			  									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
+			  									data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', 
 	      										onLoadSuccess:function(data){if(data.length > 0) $('#careAdviserId').combobox('setValue', ${refundVisit.visitUserId });}" 
 	      										url="<%=path %>/pubData/qryStaffList.do?post=16,17&schoolId=${obj.refundFeeObj.schoolId }">
 					        				</select>
@@ -481,21 +527,21 @@
 		  								<c:if test="${refundVisit.userType == 'academic' }">
 			  								<input type="radio" name="visitPersonTwo" value="academic" checked="checked"/><span>学术主管</span>
 			  								<select id="academicId" name="academicId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-				  								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
+				  								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', 
 		      									onLoadSuccess:function(data){if(data.length > 0) $('#academicId').combobox('setValue', ${refundVisit.visitUserId });}" 
 		      									url="<%=path %>/pubData/qryStaffList.do?post=7,8&schoolId=${obj.refundFeeObj.schoolId }">
 					        				</select>
 			  								<input type="radio" name="visitPersonTwo" value="sales"/><span>销售主管</span>
-			  								<select id="salesId" name="salesId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+			  								<select id="salesId" name="salesId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled" editable="false">
 		        							</select>
 		  								</c:if>
 		  								<c:if test="${refundVisit.userType == 'sales' }">
 		  									<input type="radio" name="visitPersonTwo" value="academic"/><span>学术主管</span>
-		  									<select id="academicId" name="academicId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false">
+		  									<select id="academicId" name="academicId" class="easyui-combobox" style="width: 100px; height: 25px;" disabled="disabled" editable="false">
 		        							</select>
 			  								<input type="radio" name="visitPersonTwo" value="sales" checked="checked"/><span>销售主管</span>
 			  								<select id="salesId" name="salesId" class="easyui-combobox" style="width: 100px; height: 25px;" editable="false"
-				  								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', panelHeight: 'auto',
+				  								data-options="formatter:formatStaff, valueField: 'staffId', textField: 'userName', 
 		      									onLoadSuccess:function(data){if(data.length > 0) $('#salesId').combobox('setValue', ${refundVisit.visitUserId });}" 
 		      									url="<%=path %>/pubData/qryStaffList.do?post=17&schoolId=${obj.refundFeeObj.schoolId }">
 					        				</select>

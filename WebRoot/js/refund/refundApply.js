@@ -130,29 +130,31 @@ $(document).ready(function() {
 		var visitPersonOne = $("input:radio[name='visitPersonOne']:checked").val();
 		var schoolId = $("#schoolId").val();
 		if("teacher" == visitPersonOne) {
+			$("#teacherId").combobox({disabled: false});
 			$("#teacherId").combobox({
 				url : "/sys/pubData/qryStaffList.do?post=4,5,6,7,8&schoolId="+schoolId,//返回json数据的url
 		    	valueField : "staffId",
 		    	textField : "userName",
-		    	panelHeight : "auto",
 		    	formatter : function(data) {
 		    		return "<span>" + data.userName + "</span>";
 		    	}
 			});
 			$("#careAdviserId").combobox('clear');
 			$("#careAdviserId").combobox("loadData", new Array());
+			$("#careAdviserId").combobox({disabled: true});
 		} else {
+			$("#careAdviserId").combobox({disabled: false});
 			$("#careAdviserId").combobox({
 				url : "/sys/pubData/qryStaffList.do?post=16,17&schoolId="+schoolId,//返回json数据的url
 		    	valueField : "staffId",
 		    	textField : "userName",
-		    	panelHeight : "auto",
 		    	formatter : function(data) {
 		    		return "<span>" + data.userName + "</span>";
 		    	}
 			});
 			$("#teacherId").combobox('clear');
 			$("#teacherId").combobox("loadData", new Array());
+			$("#teacherId").combobox({disabled: true});
 		}
 	});
 	
@@ -169,25 +171,31 @@ $(document).ready(function() {
 		var visitPersonTwo = $("input:radio[name='visitPersonTwo']:checked").val();
 		var schoolId = $("#schoolId").val();
 		if("academic" == visitPersonTwo) {
+			$("#academicId").combobox({disabled: false});
 			$("#academicId").combobox({
 				url : "/sys/pubData/qryStaffList.do?post=7,8&schoolId=" + schoolId,//返回json数据的url
 				valueField : "staffId",
 				textField : "userName",
-				panelHeight : "auto",
 				formatter : function(data) {
 					return "<span>" + data.userName + "</span>";
 				}
 			});
+			$("#salesId").combobox('clear');
+			$("#salesId").combobox("loadData", new Array());
+			$("#salesId").combobox({disabled: true});
 		} else {
+			$("#salesId").combobox({disabled: false});
 			$("#salesId").combobox({
 				url : "/sys/pubData/qryStaffList.do?post=17&schoolId=" + schoolId,//返回json数据的url
 				valueField : "staffId",
 				textField : "userName",
-				panelHeight : "auto",
 				formatter : function(data) {
 					return "<span>" + data.userName + "</span>";
 				}
 			});
+			$("#academicId").combobox('clear');
+			$("#academicId").combobox("loadData", new Array());
+			$("#academicId").combobox({disabled: true});
 		}
 	});
 
@@ -236,6 +244,23 @@ $(document).ready(function() {
 	    			$("#refundChannel" + studentCourseId).combobox('clear');
 	    			$("#refundChannel" + studentCourseId).combobox("loadData", new Array());
 	    		}
+	    		if("RTN_NEW" == n) {
+    				$("#belongSchoolId" + studentCourseId).combobox({
+    					url: "/sys/pubData/qrySchoolList.do",
+    					valueField : "schoolId",
+    					textField : "schoolName",
+    					formatter : function(data) {
+    						return "<span>" + data.schoolName + "</span>";
+    					}
+    				});
+    				$("#belongSchoolVal" + studentCourseId).css("display", "table-cell");
+    				$("#belongSchoolText" + studentCourseId).css("display", "table-cell");
+    			} else {
+    				$("#belongSchoolVal" + studentCourseId).css("display", "none");
+    				$("#belongSchoolText" + studentCourseId).css("display", "none");
+    				$("#belongSchoolId" + studentCourseId).combobox('clear');
+	    			$("#belongSchoolId" + studentCourseId).combobox("loadData", new Array());
+    			}
 	    	}
 		});
 	});
@@ -339,12 +364,17 @@ $(document).ready(function() {
 						refundFeeObj.handlerId = obj.handlerId;
 						refundFeeObj.approveId = obj.handlerId;
 						refundFeeObj.imgUrl = imgUrl;
+						var belongSchoolId = "";
 						var refundFeeDetailArray = "[";
 						$("[name='studentCourseId']").each(function() {
 							var studentCourseId = $(this).val();
 							var refundFeeDetailObj = new Object();
 							refundFeeDetailObj.studentCourseId = studentCourseId;
-							refundFeeDetailObj.refundType = $("#refundType" + studentCourseId).combobox("getValue");
+							var refundType = $("#refundType" + studentCourseId).combobox("getValue");
+							if(refundType == "RTN_NEW") {
+								belongSchoolId = $("#belongSchoolId" + studentCourseId).combobox("getValue");
+							}
+							refundFeeDetailObj.refundType = refundType;
 							var refundChannel = "";
 							var courseState = $("#courseState" + studentCourseId).val();
 							if("001" == courseState || "002" == courseState) {
@@ -380,6 +410,7 @@ $(document).ready(function() {
 							refundFeeDetailObj.handlerId = obj.handlerId;
 							refundFeeDetailArray += JSON.stringify(refundFeeDetailObj) + ",";
 						});
+						refundFeeObj.belongSchoolId = belongSchoolId;
 						if(refundFeeDetailArray.length > 1) {
 							refundFeeDetailArray = refundFeeDetailArray.substring(0, refundFeeDetailArray.length - 1);
 						}
@@ -421,11 +452,11 @@ $(document).ready(function() {
 								refundVisitObj.remark = obj.headmasterVisitRemark;
 								refundVisitObj.handlerId = obj.handlerId;
 							} */
-							if(refundVisitObj.visitUserId == '') {
-								continue;
+							if(refundVisitObj.visitUserId != '' && refundVisitObj.visitUserId != null && refundVisitObj.visitUserId != undefined) {
+								refundVisitArray += JSON.stringify(refundVisitObj) + ",";
 							}
-							refundVisitArray += JSON.stringify(refundVisitObj) + ",";
 						}
+						
 						if(refundVisitArray.length > 1) {
 							refundVisitArray = refundVisitArray.substring(0, refundVisitArray.length - 1);
 						}
@@ -583,15 +614,18 @@ function checkParam() {
 			}
 		}
 	}
+	var num = 0;
 	var index = 0;
+	var indexs = 0;
 	var flag = true;
+	var flags = true;
 	var array = document.getElementsByName("studentCourseId");
 	if(array.length > 0) {
 		for(var i = 0, len = array.length; i < len; i++) {
 			var studentCourseId = array[i].value;
 			var courseState = $("#courseState" + studentCourseId).val();
+			var refundType = $("#refundType" + studentCourseId).combobox("getValue");
 			if("001" == courseState || "002" == courseState) {
-				var refundType = $("#refundType" + studentCourseId).combobox("getValue");
 				if(refundType == "RTN_NEW" || "RTN_READING" == refundType) {
 					var refundChannel = $("#refundChannel" + studentCourseId).combobox("getValue");
 					if(refundChannel == null || refundChannel == "" || refundChannel == undefined) {
@@ -601,51 +635,67 @@ function checkParam() {
 					}
 				}
 			}
+			if(refundType == "RTN_NEW") {
+				num++;
+				if(flags) {
+					var belongSchoolId = $("#belongSchoolId" + studentCourseId).combobox("getValue");
+					if(belongSchoolId == null || belongSchoolId == "" || belongSchoolId == undefined) {
+						flags = false;
+						indexs = i + 1;
+					}
+				}
+			}
 		}
 	}
 	if(flag) {
-		var visitPersonOne = $("input:radio[name='visitPersonOne']:checked").val();
-		if(visitPersonOne == null || visitPersonOne == "" || visitPersonOne == undefined || visitPersonOne == "null") {
-			showMessage('提示', "请选择老师或CC回访的回访人员类型！");
-			return false;
+		if(num <= 1) {
+			if(flags) {
+				var visitPersonOne = $("input:radio[name='visitPersonOne']:checked").val();
+				if(visitPersonOne == null || visitPersonOne == "" || visitPersonOne == undefined || visitPersonOne == "null") {
+					showMessage('提示', "请选择老师或CC回访的回访人员类型！");
+					return false;
+				} else {
+					if("teacher" == visitPersonOne) {
+						var teacherId = $("#teacherId").combobox('getValue');
+						if(teacherId == null || teacherId == "" || teacherId == undefined || teacherId == "null") {
+							showMessage('提示', "请选择老师的回访人员！");
+							return false;
+						}
+					} else {
+						var careAdviserId = $("#careAdviserId").combobox('getValue');
+						if(careAdviserId == null || careAdviserId == "" || careAdviserId == undefined || careAdviserId == "null") {
+							showMessage('提示', "请选择课程顾问的回访人员！");
+							return false;
+						}
+					}
+					/*var visitPersonTwo = $("input:radio[name='visitPersonTwo']:checked").val();
+					if(visitPersonTwo == null || visitPersonTwo == "" || visitPersonTwo == undefined || visitPersonTwo == "null") {
+						showMessage('提示', "请选择学术或销售主管的回访人员类型！");
+						return false;
+					} else {
+						if("sales" == visitPersonTwo) {
+							var salesId = $("#salesId").combobox('getValue');
+							if(salesId == null || salesId == "" || salesId == undefined || salesId == "null") {
+								showMessage('提示', "请选择销售主管的回访人员！");
+								return false;
+							}
+						} else {
+							var academicId = $("#academicId").combobox('getValue');
+							if(academicId == null || academicId == "" || academicId == undefined || academicId == "null") {
+								showMessage('提示', "请选择销售主管的回访人员！");
+								return false;
+							}
+						}
+					}*/
+				}
+			} else {
+				showMessage('提示', "请选择课程" + indexs + "的归属校区！");
+				return false;
+			}
 		} else {
-			if("teacher" == visitPersonOne) {
-				var teacherId = $("#teacherId").combobox('getValue');
-				if(teacherId == null || teacherId == "" || teacherId == undefined || teacherId == "null") {
-					showMessage('提示', "请选择老师的回访人员！");
-					return false;
-				}
-			} else {
-				var careAdviserId = $("#careAdviserId").combobox('getValue');
-				if(careAdviserId == null || careAdviserId == "" || careAdviserId == undefined || careAdviserId == "null") {
-					showMessage('提示', "请选择课程顾问的回访人员！");
-					return false;
-				}
-			}
-		}
-		/* 
-		var visitPersonTwo = $("input:radio[name='visitPersonTwo']:checked").val();
-		if(visitPersonTwo == null || visitPersonTwo == "" || visitPersonTwo == undefined || visitPersonTwo == "null")
-		{
-			showMessage('提示', "请选择学术或销售主管的回访人员类型！");
+			showMessage('提示', "一个学员最多只能有一个退新招的退费类型！");
 			return false;
-		} else
-		{
-			if("sales" == visitPersonTwo) 
-			{
-				var salesId = $("#salesId").combobox('getValue');
-				if(salesId == null || salesId == "" || salesId == undefined || salesId == "null") {
-					showMessage('提示', "请选择销售主管的回访人员！");
-					return false;
-				}
-			} else {
-				var academicId = $("#academicId").combobox('getValue');
-				if(academicId == null || academicId == "" || academicId == undefined || academicId == "null") {
-					showMessage('提示', "请选择销售主管的回访人员！");
-					return false;
-				}
-			}
-		}*/
+		}
 	} else {
 		showMessage('提示', "请选择课程" + index + "的渠道来源！");
 		return false;

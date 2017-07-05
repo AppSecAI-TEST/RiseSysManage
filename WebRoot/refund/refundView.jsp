@@ -215,10 +215,28 @@
   								<c:when test="${refundFeeDetail.courseState == '001' || refundFeeDetail.courseState == '002' }">
 		  							<td width="7%"><span>${refundFeeDetail.refundTypeText }</span></td>
 		  							<td align="right" width="8%"><span>渠道来源：</span></td>
-		  							<td width="41%" colspan="3"><span>${refundFeeDetail.refundChannelText }</span></td>
+		  							<c:choose>
+		  								<c:when test="${refundFeeDetail.refundType == 'RTN_NEW' && not empty obj.refundFeeObj.belongSchoolId }">
+		  									<td width="11%"><span>${refundFeeDetail.refundChannelText }</span></td>
+		  									<td align="right" width="15%"><span>归属校区：</span></td>
+		  									<td width="13%"><span>${obj.refundFeeObj.belongSchoolName }</span></td>
+		  								</c:when>
+		  								<c:otherwise>
+				  							<td width="41%" colspan="3"><span>${refundFeeDetail.refundChannelText }</span></td>
+		  								</c:otherwise>
+		  							</c:choose>
   								</c:when>
   								<c:otherwise>
-  									<td width="56%" colspan="5"><span>${refundFeeDetail.refundTypeText }</span></td>
+  									<c:choose>
+  										<c:when test="${refundFeeDetail.refundType == 'RTN_NEW' && not empty obj.refundFeeObj.belongSchoolId }">
+  											<td width="7%"><span>${refundFeeDetail.refundTypeText }</span></td>
+  											<td align="right" width="8%"><span>归属校区：</span></td>
+  											<td width="39%" colspan="3"><span>${obj.refundFeeObj.belongSchoolName }</span></td>
+  										</c:when>
+  										<c:otherwise>
+  											<td width="56%" colspan="5"><span>${refundFeeDetail.refundTypeText }</span></td>
+  										</c:otherwise>
+  									</c:choose>
   								</c:otherwise>
   							</c:choose>
   						</tr>
