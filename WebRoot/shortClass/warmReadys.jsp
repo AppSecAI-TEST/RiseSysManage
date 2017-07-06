@@ -222,7 +222,7 @@
 						<tr>
 							<th data-options="field:'shortClassInstId',checkbox:true"></th>
 							<th width="9%" field="schoolName">校区</th>
-							<th width="9%" field="planHours">学员姓名</th>
+							<th width="9%" field="studentName">学员姓名</th>
 							<th width="9%" field="phone">联系电话</th>
 														<th width="9%" field="className">热身课班级名称</th>
 							<th width="9%" field="classStateName">班级状态</th>
