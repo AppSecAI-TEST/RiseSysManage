@@ -236,6 +236,16 @@
 	   				content += "<tr><td width='20%' align='right'><span>休学时长：</span></td><td width='30%' align='left'><span>${obj.expInfo.leaveTime}个月</span></td><td width='20%' align='right'><span>课程进度：</span></td><td width='30%' align='left'><span>${obj.expInfo.hours}</span></td></tr>";
 	   				content += "<tr><td width='20%' align='right'><span>带班老师：</span></td><td width='30%' align='left'><span>${obj.expInfo.teacherNames}</span></td><td width='20%' align='right'><span>休学原因：</span></td><td width='30%' align='left'><span>${obj.expInfo.leaveReason}</span></td></tr>";
 	   			}
+	   			if(expType == "refund") {
+	   				content += "<tr><td width='20%' align='right'><span>申请日期：</span></td><td width='30%' align='left'><span>${obj.expInfo.applyDate}</span></td><td width='20%' align='right'><span>退费原因：</span></td><td width='30%' align='left'><span>${obj.expInfo.reason}</span></td></tr>";
+	   				content += "<tr><td width='20%' align='right'><span>退费备注：</span></td><td width='80%' align='left' colspan='3'><span>${obj.expInfo.remark}</span></td></tr>";
+	   				content += "<tr><td colspan='4'><table width='100%' cellpadding='5px' class='maintable'><tr><td width='10%' align='center'><span>退费课程阶段</span></td><td width='10%' align='center'><span>顾问</span></td><td width='10%' align='center'><span>老师</span></td><td width='10%' align='center'><span>退费课程进度</span></td>";
+	   				content += "<td width='30%' align='center'><span>退费课程赠品</span></td><td width='10%' align='center'><span>退费类型</span></td><td width='10%' align='center'><span>渠道来源</span></td><td width='10%' align='center'><span>核定退费金额</span></td></tr>";
+	   				content += "<c:forEach items='${obj.expInfo.refundCourseList}' var='course'><tr><td align='center'><span>${course.stage_id }</span></td><td align='center'><span>${course.adviser_name }</span></td><td align='center'><span>${course.adviser_teacher_name }</span></td><td align='center'><span>${course.class_progress }</span></td><td align='center'><span>${course.gift_name }</span></td>";
+	   				content += "<td align='center'><span>${course.refund_type }</span></td><td align='center'><span>${course.refund_channel }</span></td><td align='center'><span>${course.confirm_refund_fee }</span></td></tr></c:forEach></table></td></tr>";
+	   				content += "<tr><td colspan='4'><table width='100%' cellpadding='5px' class='maintable'><tr><td align='center' width='10%'><span>回访人</span></td><td align='center' width='10%'><span>职务</span></td><td align='center' width='10%'><span>回访日期</span></td><td align='center' width='70%'><span>回访记录</span></td></tr>";
+	   				content += "<c:forEach items='${obj.expInfo.refundVisitList }' var='refundVisit'><tr><td align='center'><span>${refundVisit.staff_name }</span></td><td align='center'><span>${refundVisit.user_type }</span></td><td align='center'><span>${refundVisit.visit_date }</span></td><td align='center'><span>${refundVisit.remark }</span></td></tr></c:forEach></table></td></tr>";
+	   			}
    				content += "<tr><td width='20%' align='right'><span>跟进次数：</span></td><td width='30%' align='left'><span>${expInfo.followCount}</span></td><td width='20%' align='right'><span>异动时长：</span></td><td width='30%' align='left'><span>${expInfo.expedTime}</span></td></tr>";
 	   			$("#expTr").after(content);
 	   		});
