@@ -42,9 +42,10 @@
 						<tr>
 							<th align="center" colspan="3"><span>学员信息</span></th>
 							<th align="center" colspan="6"><span>报名缴费情况</span></th>
-							<th align="center" colspan="7"><span>退费申请</span></th>
-							<th align="center" align="center" rowspan="2" field="approveDate"><span>审批通过日期</span></th>
-							<th align="center" align="center" rowspan="2" field="belongDate"><span>退费归属日期</span></th>
+							<th align="center" colspan="6"><span>退费申请</span></th>
+							<th align="center" rowspan="2" field="approveDate" width="8%"><span>审批通过日期</span></th>
+							<th align="center" rowspan="2" field="belongDate" width="8%"><span>退费归属日期</span></th>
+							<th align="center" rowspan="2" field="belongSchoolName" width="10%"><span>渠道资源归属校区</span></th>
 						</tr>
 						<tr>
 							<th field="schoolName" align="center" width="5%">校区</th>
@@ -62,7 +63,6 @@
 							<th field="applyDate" align="center" width="8%">退费申请日期</th>
 							<th field="financialConfirmFee" align="center" width="8%">核定退费金额</th>
 							<th field="refundChannel" align="center" width="8%">渠道</th>
-							<th field="belongSchoolName" align="center" align="center" width="10%"><span>渠道资源归属校区</span></th>
 						</tr>
 					</thead>
 				</table>
