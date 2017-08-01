@@ -62,6 +62,7 @@
 				    <th data-options="field:'week3',width:62,align:'center'" colspan="2"><span>第三周</span></td>
 				    <th data-options="field:'week4',width:62,align:'center'" colspan="2"><span>第四周</span></td>
 				    <th data-options="field:'week5',width:62,align:'center'" colspan="2"><span>第五周</span></td>
+				    <th data-options="field:'week5',width:62,align:'center'" colspan="2"><span>第六周</span></td>
 				    <th data-options="field:'monthPlanHours',width:48,align:'center'" rowspan="2"><span>本月计<br>划课时</span></td>
 				    <th data-options="field:'monthHandNum',width:48,align:'center'" rowspan="2"><span>本月已<br>排课时</span></td>
 				    <th data-options="field:'mDiffNum',width:48,align:'center'" rowspan="2"><span>课时<br>差异</span></td>
@@ -77,6 +78,8 @@
 				    <th data-options="field:'weekHand4',width:35,align:'center'"><span>已排<br>课时</span></td>
 				    <th data-options="field:'weekPlan5',width:35,align:'center'"><span>计划<br>课时</span></td>
 				    <th data-options="field:'weekHand5',width:35,align:'center'"><span>已排<br>课时</span></td>
+				    <th data-options="field:'weekPlan6',width:35,align:'center'"><span>计划<br>课时</span></td>
+				    <th data-options="field:'weekHand6',width:35,align:'center'"><span>已排<br>课时</span></td>
 				 </tr>
 			  <thead>
 		</table>
