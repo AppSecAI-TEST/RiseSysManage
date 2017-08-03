@@ -1,60 +1,66 @@
 $(document).ready(function() {
-	var isRegion = true;
+	var isRegion = false;
 	var clearFlag = true;
 	ajaxLoading("正在处理，请稍待。。。");
 	var staffSchoolId = $("#staffSchoolId").val();
-	if("10" == staffSchoolId) {
-		$("#regionId").combobox({
-			loader:function(param,success,error){  
-			    $.ajax({  
-					url: "/sys/pubData/qryRegionList.do",
-					dataType: 'json',
-					success: function(data) {
-						data.unshift({regionName:'全部片区', regionId:""});
-						success(data);  
-					}
-				});  
-	   		},
-	   		onLoadSuccess : function(data) {
-				if(data.length > 0) {
-					$("#regionId").combobox("setValue", data[0].regionId);
-				}
-			}
-		});
-	} else {
-		var staffId = $("#staffId").val();
-		$.ajax({
-			url: "/sys/pubData/checkStaffIsArea.do",
-			type: "POST",
-			dataType: 'json',
-			data: "staffId=" + staffId,
-			success: function(data) {
-				if(parseInt(data) > 0) {
-					$("#regionId").combobox({
-						url : "/sys/pubData/qryRegionListByStaffId.do?staffId=" + staffId,
+	if(staffSchoolId != null && staffSchoolId != "" && staffSchoolId != undefined) {
+		if("10" == staffSchoolId) {
+			isRegion = true;
+			$("#regionId").combobox({
+				loader:function(param,success,error){  
+					$.ajax({  
+						url: "/sys/pubData/qryRegionList.do",
 						dataType: 'json',
-				    	onLoadSuccess:function(data) {
-				    		if(data.length > 0) {
-				    			$("#regionId").combobox("setValue", data[0].regionId);
-							}
-				    	}
-					});
-				} else {
-					isRegion = false;
-					$("#regionTd").css("display", "none");
-					$("#regionTitleTd").css("display", "none");
+						async: false,
+						success: function(data) {
+							data.unshift({regionName:'全部片区', regionId:""});
+							success(data);  
+						}
+					});  
+				},
+				onLoadSuccess : function(data) {
+					if(data.length > 0) {
+						$("#regionId").combobox("setValue", data[0].regionId);
+					}
 				}
-			}
-		});
+			});
+		} else {
+			var staffId = $("#staffId").val();
+			$.ajax({
+				url: "/sys/pubData/checkStaffIsArea.do",
+				type: "POST",
+				dataType: 'json',
+				async: false,
+				data: "staffId=" + staffId,
+				success: function(data) {
+					if(parseInt(data) > 0) {
+						isRegion = true;
+						$("#regionId").combobox({
+							url : "/sys/pubData/qryRegionListByStaffId.do?staffId=" + staffId,
+							dataType: 'json',
+							onLoadSuccess:function(data) {
+								if(data.length > 0) {
+									$("#regionId").combobox("setValue", data[0].regionId);
+								}
+							}
+						});
+					} else {
+						$("#regionTd").css("display", "none");
+						$("#regionTitleTd").css("display", "none");
+					}
+				}
+			});
+		}
 	}
 	
 	$("#schoolId").combobox({
 		loader:function(param,success,error){  
 		    $.ajax({  
 				url: "/sys/pub/pageCategory.do?staffId="+$("#staffId").val()+"&resourceId="+$("#resourceId").val()+"&fieldId=schoolId",  
-				dataType: 'json',  
+				dataType: 'json',
+				async: false,
 				success: function(data) {
-					if(isRegion) {
+					if(isRegion || data.length == schoolData.length) {
 						data.unshift({schoolName:'全部校区', schoolId:""});  
 					}
 					success(data);  
