@@ -60,7 +60,8 @@
 					<th field="schoolName" align="center" width="5%"><span>创建校区</span></th>
 					<th field="stateVal" align="center" width="5%"><span>活动状态</span></th>
 					<th field="title" align="center" width="20%"><span>活动名称</span></th>
-					<th field="actionTime" align="center" width="12%"><span>活动日期</span></th>
+					<th field="createDate" align="center" width="12%"><span>创建日期</span></th>
+					<th field="actionTime" align="center" width="12%"><span>活动反馈日期</span></th>
 					<th field="timeRange" align="center" width="15%"><span>活动时间</span></th>
 					<th field="planTeacher" align="center" width="15%"><span>计划参与老师</span></th>
 					<th field="planHours" align="center" width="10%"><span>计划课时量</span></th>
