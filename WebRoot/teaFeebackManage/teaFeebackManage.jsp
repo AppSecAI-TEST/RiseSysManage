@@ -96,7 +96,7 @@
 		</table>
 		<div id="toolbar" style="padding: 2px;height:auto;">
    			<a href="javascript:void(0)" id="toolBtn1" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="addTeaFeedBack()"><span>添加反馈</span></a>
-   			<a href="javascript:void(0)" id="toolBtn1" class="easyui-linkbutton" iconCls="icon-add" style="width:150px;" onclick="importTea()"><span>导入反馈（excel）</span></a>
+   			<a href="javascript:void(0)" id="toolBtn4" class="easyui-linkbutton" iconCls="icon-add" style="width:150px;" onclick="importTea()"><span>导入反馈（excel）</span></a>
    			<a href="javascript:void(0)" id="toolBtn2" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="updateTeaFeedBack()"><span>修改反馈</span></a>
  			<a href="javascript:void(0)" id="toolBtn3" class="easyui-linkbutton" iconCls="icon-redo" style="width:100px;" onclick="viewTeaFeedBack()"><span>浏览</span></a>
  		</div>
@@ -109,14 +109,14 @@
  		<table width="100%" cellpadding="5px" class="maintable">
  		<tr>
 			<td width="15%" align="right">班级名称：</td>
-			<td width="15%">
-		  	N.Pre-K01
+			<td width="15%"  id="classNameText">
+		  	 
 			</td>
 			<td width="15%"  align="right">
 			 反馈月份： 
 			</td>
-			<td width="15%">
-			 7月
+			<td width="15%" id="monthText">
+		 
 			</td>
 		</tr>
 		<tr>
@@ -135,9 +135,14 @@
  		
 	    var qualityId;//教质计划ID
  		var classInstId;
-	    
+	    			 
  		$(document).ready(function(){
- 				        
+ 		 
+ 		if($("#staffId").val()!='1003')
+ 		{
+ 			$("#toolBtn4").css('display','none');
+ 		}	
+ 			
 	    $("#export1").uploadify({
 		"swf" : "/sys/pub/js/uploadify/uploadify.swf",
 		"uploader" : "/sys/teaFeebackManage/uploadFile.do",
@@ -153,10 +158,11 @@
 		"fileObjName" : "excelFile" ,
 		"cancelImg" : "/sys/pub/js/uploadify/uploadify-cancel.png",
 		"wmode" : "transparent",
-		"onUploadSuccess" : function(file, data, response)
+		"onUploadSuccess" : function(file,data, response)
 		{
 			ajaxLoadEnd();
-			if(data.flag=='true')
+			 
+			if(data=='0')
 			{ 
 				showMessage("提示","教质导入成功",null);
 				$('#dlg').dialog('close');
@@ -242,7 +248,11 @@
 	    		qualityId=row.qualityId;
 	    		classInstId=row.classInstId;
 	    		var className=row.className;
+	    		var month=row.month;
 	    		var reflect=row.reflect;
+			
+	    		$("#classNameText").html(className);
+	    		$("#monthText").html(month);
 	    		if("否"==reflect)
 	    		{
 	    			$("#dlg").dialog('open').dialog('setTitle', '导入教质反馈文件');//设定表头  

@@ -91,6 +91,7 @@ public class TeaFeebackManageService {
 		JSONObject obj = new JSONObject();
 		obj.put("staffId", staffId);
 		obj.put("qualityId", qualityId);
+		boolean  flag=false;
 		for(Map.Entry<String, MultipartFile>  entity : map.entrySet())
 		{
 			MultipartFile file = entity.getValue();
@@ -113,7 +114,10 @@ public class TeaFeebackManageService {
 						JSONObject item = new JSONObject();
 						if(row != null)
 						{
-							
+							if(row.getLastCellNum()==8)
+							{
+								flag=true;
+							}
 							for(int j = 0,m = row.getLastCellNum();j<m;j++)
 							{
 								HSSFCell cell = row.getCell((short)j);
@@ -182,6 +186,10 @@ public class TeaFeebackManageService {
 					{
 						JSONObject item = new JSONObject();
 						XSSFRow row = sheet.getRow(i);
+						if(row.getLastCellNum()==8)
+						{
+							flag=true;
+						}
 						for(int j = 0,m = row.getLastCellNum();j<m;j++)
 						{
 							XSSFCell cell = row.getCell((short)j);
@@ -234,13 +242,15 @@ public class TeaFeebackManageService {
 				throw new ServiceException(e);
 			}
 		}
-	 
-		String ss=jsonTotal.toString().replace("\"", "'");
-		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS4206\",securityCode:\"0000000000\",params:{staffId:\""+staffId+"\",qualityId:\""+qualityId+"\",classInstId:\""+classInstId+"\",data:\""+ss+"\"},rtnDataFormatType:\"json\"}";
-		String rst = ServiceEngine.invokeHttp(param);
-		return rst;
+		if(flag==true)
+		{
+			String ss=jsonTotal.toString().replace("\"", "'");
+			String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS4206\",securityCode:\"0000000000\",params:{staffId:\""+staffId+"\",qualityId:\""+qualityId+"\",classInstId:\""+classInstId+"\",data:\""+ss+"\"},rtnDataFormatType:\"json\"}";
+			String rst = ServiceEngine.invokeHttp(param);
+			return rst;
+		}else
+		{
+			return "1";
+		}
 	}
-	
-	
-	
 }
