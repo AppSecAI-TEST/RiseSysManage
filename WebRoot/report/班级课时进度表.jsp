@@ -69,12 +69,16 @@
 		    <td align="center" width="62px;" colspan="3"><span>第三周</span></td>
 		    <td align="center" width="62px;" colspan="3"><span>第四周</span></td>
 		    <td align="center" width="62px;" colspan="3"><span>第五周</span></td>
+		    <td align="center" width="70px;" colspan="3"><span>第六周</span></td>
 		    <td align="center" width="48px;" rowspan="2"><span>本月计划课时</span></td>
 		    <td align="center" width="48px;" rowspan="2"><span>本月实际考勤课时</span></td>
 		    <td align="center" width="48px;" rowspan="2"><span>课时差异</span></td>
 		    <td align="center" width="48px;" rowspan="2"><span>差异说明</span></td>
 		  </tr>
 		  <tr align="center">
+		    <td align="center" width="40px;"><span>剩余课时</span></td>
+		    <td align="center" width="40px;"><span>计划课时</span></td>
+		    <td align="center" width="40px;"><span>实际排课课时</span></td>
 		    <td align="center" width="40px;"><span>剩余课时</span></td>
 		    <td align="center" width="40px;"><span>计划课时</span></td>
 		    <td align="center" width="40px;"><span>实际排课课时</span></td>
@@ -178,6 +182,9 @@
 				    			html+="<td align='center'><span>"+obj.weekDiff5+"</span></td>";
 				    			html+="<td align='center'><span>"+obj.weekPlan5+"</span></td>";
 				    			html+="<td align='center'><span>"+obj.weekHand5+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekDiff6+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekPlan6+"</span></td>";
+				    			html+="<td align='center'><span>"+obj.weekHand6+"</span></td>";
 				    			html+="<td align='center'><span>"+obj.monthPlanHours+"</span></td>";
 				    			html+="<td align='center'><span>"+obj.monthRealNum+"</span></td>";
 				    			html+="<td align='center'><span>"+obj.mDiffNum+"</span></td>";
@@ -293,16 +300,19 @@
 			obj.weekDiff5 =$(this).find("td:eq(21)").find("span").html();
 			obj.weekPlan5 =$(this).find("td:eq(22)").find("span").html();
 			obj.weekHand5 =$(this).find("td:eq(23)").find("span").html();
-			obj.monthPlanHours =$(this).find("td:eq(24)").find("span").html();
-			obj.monthRealNum =$(this).find("td:eq(25)").find("span").html();
-			obj.mDiffNum =$(this).find("td:eq(26)").find("span").html();
-			if($(this).find("td:eq(27)").find(".textbox-value").length>0)
+			obj.weekDiff6 =$(this).find("td:eq(24)").find("span").html();
+			obj.weekPlan6 =$(this).find("td:eq(25)").find("span").html();
+			obj.weekHand6 =$(this).find("td:eq(26)").find("span").html();
+			obj.monthPlanHours =$(this).find("td:eq(27)").find("span").html();
+			obj.monthRealNum =$(this).find("td:eq(28)").find("span").html();
+			obj.mDiffNum =$(this).find("td:eq(29)").find("span").html();
+			if($(this).find("td:eq(30)").find(".textbox-value").length>0)
 			{
 				obj.remark ="";
 			}
 			else
 			{
-				obj.remark =$(this).find("td:eq(27)").find("span").html();
+				obj.remark =$(this).find("td:eq(30)").find("span").html();
 			}
 			arr.push(obj);
 		});

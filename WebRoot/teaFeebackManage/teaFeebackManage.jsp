@@ -8,6 +8,8 @@
   	<head>
 		<%@ include file="../common/head.jsp" %>
 		<%@ include file="../common/formvalidator.jsp" %>
+		<link href="<%=path %>/pub/js/uploadify/uploadify.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="<%=path %>/pub/js/uploadify/jquery.uploadify.js"></script>
 		<script type="text/javascript" src="<%=path %>/js/teaFeebackManage/teaFeebackManage.js"></script>
   	</head>
   	<body>
@@ -94,11 +96,92 @@
 		</table>
 		<div id="toolbar" style="padding: 2px;height:auto;">
    			<a href="javascript:void(0)" id="toolBtn1" class="easyui-linkbutton" iconCls="icon-add" style="width:100px;" onclick="addTeaFeedBack()"><span>添加反馈</span></a>
+   			<a href="javascript:void(0)" id="toolBtn1" class="easyui-linkbutton" iconCls="icon-add" style="width:150px;" onclick="importTea()"><span>导入反馈（excel）</span></a>
    			<a href="javascript:void(0)" id="toolBtn2" class="easyui-linkbutton" iconCls="icon-edit" style="width:100px;" onclick="updateTeaFeedBack()"><span>修改反馈</span></a>
  			<a href="javascript:void(0)" id="toolBtn3" class="easyui-linkbutton" iconCls="icon-redo" style="width:100px;" onclick="viewTeaFeedBack()"><span>浏览</span></a>
  		</div>
  		</div>
+ 		
+ 		<div id="dlg" class="easyui-dialog" style="width: 600px;height: 300px;" closed="true" data-options="modal:true" buttons="#dlgBtn">
+ 		
+ 		
+ 		
+ 		<table width="100%" cellpadding="5px" class="maintable">
+ 		<tr>
+			<td width="15%" align="right">班级名称：</td>
+			<td width="15%">
+		  	N.Pre-K01
+			</td>
+			<td width="15%"  align="right">
+			 反馈月份： 
+			</td>
+			<td width="15%">
+			 7月
+			</td>
+		</tr>
+		<tr>
+			<td width="15%"  align="right">
+			 选择文件（excel）：
+			</td> 
+			<td colspan="3" style="position:relative" > 
+			<input type="file" id="export1" name="export1" funcNodeId="111" class="button" value="导入" /></td>
+		</tr>
+		<div id="dlgBtn">
+    		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
+  		</div>
+		 </table>
+ 		</div>
  		<script type="text/javascript">
+ 		
+	    var qualityId;//教质计划ID
+ 		var classInstId;
+	    
+ 		$(document).ready(function(){
+ 				        
+	    $("#export1").uploadify({
+		"swf" : "/sys/pub/js/uploadify/uploadify.swf",
+		"uploader" : "/sys/teaFeebackManage/uploadFile.do",
+		"buttonText" : "",
+		"buttonClass" : "btnbUpload",
+		"queueID" : "upLoadProgress",
+		"buttonImage" : "/sys/pub/images/btn_im_light.png",
+		"fileTypeDesc" : "请上传一个指定格式的excel文件",
+		"fileTypeExts" : "*.xls;*.xlsx",
+		"height" : 28,
+		"width" : 82,
+		"multi" : false,
+		"fileObjName" : "excelFile" ,
+		"cancelImg" : "/sys/pub/js/uploadify/uploadify-cancel.png",
+		"wmode" : "transparent",
+		"onUploadSuccess" : function(file, data, response)
+		{
+			ajaxLoadEnd();
+			if(data.flag=='true')
+			{ 
+				showMessage("提示","教质导入成功",null);
+				$('#dlg').dialog('close');
+				$("#qryBtn").click();
+			}else
+			{
+				showMessage("提示","教质导入失败",null);
+			}
+		},
+		"onUploadStart" : function(file)
+		{
+			 ajaxLoading("正在处理，请稍待。。。");
+			$("#fileNameShow").val(file.name);
+			 
+		},
+		"onUploadComplete" : function(file)
+		{
+			  ajaxLoadEnd();
+		},
+		"onSelect" : function(file){
+			$("#export1").uploadify("settings" , "formData" ,{"qualityId" : qualityId,"classInstId":classInstId, "staffId" :$("#staffId").val()});
+		}
+	});
+ 			
+ 		});
 		$(function () {
 	        $('#time').datebox({
 	            onShowPanel: function () {//显示日趋选择对象后再触发弹出月份层的事件，初始化时没有生成月份层
@@ -126,6 +209,7 @@
 	            
 	            //formatter: function (d) { return d.getFullYear() + '-' + d.getMonth(); }//配置formatter，只返回年月
 	    	});
+
 	     });   
 	
 		function myformatter(date){
@@ -147,6 +231,28 @@
                 return new Date();
             }
         }
+
+	    
+	    
+	    function importTea()
+	    {
+	    	if(validateSelect("list_data"))
+			{
+	    		var row = $('#list_data').datagrid('getSelected');
+	    		qualityId=row.qualityId;
+	    		classInstId=row.classInstId;
+	    		var className=row.className;
+	    		var reflect=row.reflect;
+	    		if("否"==reflect)
+	    		{
+	    			$("#dlg").dialog('open').dialog('setTitle', '导入教质反馈文件');//设定表头  
+	    		}else
+	    		{
+	    			showMessage("提示","该教质已经反馈!",null);
+	    			return;
+	    		}
+			}
+		}	
 	</script>
   	</body>
 </html>

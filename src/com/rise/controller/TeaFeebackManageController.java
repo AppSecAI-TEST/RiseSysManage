@@ -2,6 +2,7 @@ package com.rise.controller;
 
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
@@ -11,8 +12,12 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rise.pub.exception.ControllerException;
+import com.rise.pub.util.ObjectCensor;
+import com.rise.pub.util.StringUtil;
 import com.rise.service.TeaFeebackManageService;
 
 @Controller
@@ -152,4 +157,37 @@ private static Log log = LogFactory.getLog(TeaFeebackManageController.class);
 		}
 	}
 	
+	/**
+	 * @param response
+	 * @param request
+	 * 上传事件响应
+	 */
+	@RequestMapping(value="/uploadFile.do")
+	public void uploadFile(HttpServletResponse response , HttpServletRequest request)
+	{
+		String staffId = (String)request.getParameter("staffId");
+		String qualityId = (String)request.getParameter("qualityId");
+		String classInstId = (String)request.getParameter("classInstId");
+		if(ObjectCensor.isStrRegular(staffId))
+		{
+			MultipartHttpServletRequest mulRequest = (MultipartHttpServletRequest)request;
+			try
+			{
+				String result =teaFeebackManageService.uploadFile(qualityId,classInstId,staffId , mulRequest);
+				response.setCharacterEncoding("UTF-8");
+				PrintWriter out = response.getWriter();
+				out.print(result);
+				out.close();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+				throw new ControllerException(e);
+			}
+		}
+		else
+		{
+			throw new ControllerException("入参为空");
+		}
+	}
 }
