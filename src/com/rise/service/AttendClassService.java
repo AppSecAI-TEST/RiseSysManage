@@ -30,4 +30,19 @@ public class AttendClassService {
 		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0095\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
 		return ServiceEngine.invokeHttp(params);
 	}
+	
+	public String viewFeedStuInfo(String studentId,String studentCourseId,String classInstId) throws Exception {
+		String param = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0096\",securityCode:\"0000000000\",params:{studentId:\""+studentId+"\",studentCourseId:\""+studentCourseId+"\",classInstId:\""+classInstId+"\"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(param);
+	}
+ 
+	public String addStuFollow(String param) throws Exception {
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0097\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
+	
+	public String addStuReview(String param) throws Exception {
+		String params = "{channel:\"Q\",channelType:\"PC\",serviceType:\"BUS0098\",securityCode:\"0000000000\",params:{param:"+param+"},rtnDataFormatType:\"user-defined\"}";
+		return ServiceEngine.invokeHttp(params);
+	}
 }

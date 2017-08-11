@@ -112,7 +112,8 @@
 					$.messager.alert('提示',"请先选择要修改的用户");
 				}
 			}
-			function removeStaff(){
+			function removeStaff()
+			{
 				var row = $('#userList').datagrid('getSelected');
 				if (row)
 				{
@@ -193,7 +194,50 @@
 	   			<a href="javascript:void(0)" id="addStaff" class="easyui-linkbutton" iconCls="icon-add" onclick="newStaff()" style="width: 100px;">新增用户</a>
 	   			<a href="javascript:void(0)" id="updateStaff" class="easyui-linkbutton" iconCls="icon-edit" onclick="editStaff()" style="width: 100px;">修改用户</a>
 	   			<a href="javascript:void(0)" id="deleteStaff" class="easyui-linkbutton" iconCls="icon-remove" onclick="removeStaff()" style="width: 100px;">删除用户</a>
+	   			<a href="javascript:void(0)" id="deleteStaff" class="easyui-linkbutton" iconCls="icon-remove" onclick="updatePassword()" style="width: 100px;">重置密码</a>
 			</div>
 		</div>
 	</body>
 </html>
+<script>
+ 
+function updatePassword()
+{
+	 	var row = $('#userList').datagrid('getSelected');
+		if (row)
+		{
+			$.messager.confirm('提示','您确定要重置当前用户密码吗?',function(r)
+			{
+				
+				if($("#form").form('validate'))
+				{
+					var staffId =row.staffId;
+					$.ajax({
+						type : "POST",
+						url: "/sys/staff/updatePassword.do",
+						data: "staffId="+staffId+"&oldPassword=auto&newPassword=123456",
+						async: false,
+						beforeSend: function()
+				    	{
+				    		$.messager.progress({title : '重置密码', msg : '重置密码中，请稍等……'});
+				    	},
+				    	success: function(data)
+				    	{
+				    		$.messager.progress('close'); 
+				    		if(data == "success")
+				    		{
+				    			$.messager.alert('提示', "重置密码成功！","info",function(){
+								});
+				    		}else {
+				    			$.messager.alert('提示', data);
+				    		}
+				        } 
+					});
+				}
+			});
+		}else
+		{
+			$.messager.alert('提示',"请先选择要重置密码的用户");
+		}
+}
+</script>

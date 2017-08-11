@@ -97,6 +97,28 @@ $(document).ready(function() {
 		}
 	});
 	
+	//跟进反馈
+	$("#stuFeedbackBtn").click(function() {
+		var row = $('#list_data').datagrid('getSelected');
+		if(row) {
+			var classInstId = row.classInstId;
+			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=feedback&funcNodeId="+$("#funcNodeId").val();
+		} else {
+			$.messager.alert('提示', "请先选择您要维护的学员！");
+		}
+	});
+	
+	//复习反馈
+	$("#stuReviewBtn").click(function() {
+		var row = $('#list_data').datagrid('getSelected');
+		if(row) {
+			var classInstId = row.classInstId;
+			window.location.href = "/sys/attendClass/qryAttendClass.do?classInstId="+classInstId+"&type=stuReview&funcNodeId="+$("#funcNodeId").val();
+		} else {
+			$.messager.alert('提示', "请先选择您要维护的学员！");
+		}
+	});
+	
 	//班级解散
 	$("#disbandBtn").click(function() {
 		var row = $('#list_data').datagrid('getSelected');
